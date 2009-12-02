@@ -20,45 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.workflow;
+package com.liferay.portlet.documentlibrary.workflow;
 
-import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
-import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-
-import javax.portlet.PortletURL;
+import com.liferay.portal.workflow.BaseWokflowHandler;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 
 /**
- * <a href="WorkflowHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFileEntryWorkflowHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
- * @author Macerllus Tavares
  */
-public interface WorkflowHandler {
+public class DLFileEntryWorkflowHandler extends BaseWokflowHandler {
 
-	public static final String TYPE_CONTENT = "content";
+	public static final String CLASS_NAME = DLFileEntry.class.getName();
 
-	public static final String TYPE_DOCUMENT = "document";
+	public String getClassName() {
+		return CLASS_NAME;
+	}
 
-	public static final String TYPE_UNKNOWN = "unknown";
+	public String getType() {
+		return TYPE_DOCUMENT;
+	}
 
-	public String getClassName();
-
-	public String getTitle(long classPK) throws Exception;
-
-	public String getType();
-
-	public PortletURL getURLEdit(
-			long classPK, LiferayPortletRequest liferayPortletRequest,
-			LiferayPortletResponse liferayPortletResponse)
-		throws Exception;
-
-	public void startWorkflowInstance(
-			long companyId, long groupId, long userId, long classPK,
-			Object model)
-		throws Exception;
-
-	public Object updateStatus(
+	public DLFileEntry updateStatus(
 			long companyId, long groupId, long userId, long classPK, int status)
-		throws Exception;
+		throws Exception {
+
+		return DLFileEntryLocalServiceUtil.updateStatus(
+			userId, classPK, status);
+	}
 
 }

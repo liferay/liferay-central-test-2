@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -265,6 +266,19 @@ public class DLFileEntryLocalServiceImpl
 			dlFolderPersistence.update(folder, false);
 		}
 
+		// Workflow
+
+		if (serviceContext.isStartWorkflow()) {
+			try {
+				WorkflowHandlerRegistryUtil.startWorkflowInstance(
+					user.getCompanyId(), groupId, userId,
+					DLFileEntry.class.getName(), fileEntryId, fileEntry);
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+		}
+
 		return fileEntry;
 	}
 
@@ -385,6 +399,12 @@ public class DLFileEntryLocalServiceImpl
 		for (DLFileVersion fileVersion : fileVersions) {
 			dlFileVersionPersistence.remove(fileVersion);
 		}
+
+		// Workflow
+
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+			fileEntry.getCompanyId(), fileEntry.getGroupId(),
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		// Social
 
@@ -998,7 +1018,7 @@ public class DLFileEntryLocalServiceImpl
 			return fileEntry;
 		}
 
-		addFileVersion(user, fileEntry, newVersion, StatusConstants.APPROVED);
+		addFileVersion(user, fileEntry, newVersion, serviceContext.getStatus());
 
 		// File entry
 
@@ -1039,7 +1059,7 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry updateStatus(
 			long userId, DLFileVersion fileVersion, boolean reIndex,
-			ServiceContext serviceContext)
+			int status)
 		throws PortalException, SystemException {
 
 		// File version
@@ -1047,7 +1067,7 @@ public class DLFileEntryLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		fileVersion.setStatus(serviceContext.getStatus());
+		fileVersion.setStatus(status);
 		fileVersion.setStatusByUserId(user.getUserId());
 		fileVersion.setStatusByUserName(user.getFullName());
 		fileVersion.setStatusDate(now);
@@ -1060,14 +1080,14 @@ public class DLFileEntryLocalServiceImpl
 			fileVersion.getGroupId(), fileVersion.getFolderId(),
 			fileVersion.getName());
 
-		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
+		if ((status == StatusConstants.APPROVED) &&
 			(fileEntry.getVersion() < fileVersion.getVersion())) {
 
 			fileEntry.setVersion(fileVersion.getVersion());
 
 			dlFileEntryPersistence.update(fileEntry, false);
 		}
-		else if ((serviceContext.getStatus() != StatusConstants.APPROVED) &&
+		else if ((status != StatusConstants.APPROVED) &&
 				 (fileEntry.getVersion() == fileVersion.getVersion())) {
 
 			double newVersion = 0;
@@ -1091,7 +1111,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// Asset
 
-		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
+		if ((status == StatusConstants.APPROVED) &&
 			(fileEntry.getVersion() == fileVersion.getVersion())) {
 
 			assetEntryLocalService.updateVisible(
@@ -1112,15 +1132,28 @@ public class DLFileEntryLocalServiceImpl
 		return fileEntry;
 	}
 
+	public DLFileEntry updateStatus(long userId, long fileEntryId, int status)
+		throws PortalException, SystemException {
+
+		DLFileEntry fileEntry = getFileEntry(fileEntryId);
+
+		DLFileVersion fileVersion =
+			dlFileVersionLocalService.getLatestFileVersion(
+				fileEntry.getGroupId(), fileEntry.getFolderId(),
+				fileEntry.getName());
+
+		return updateStatus(userId, fileVersion, false, status);
+	}
+
 	public DLFileEntry updateStatus(
 			long userId, long groupId, long folderId, String name,
-			double version, ServiceContext serviceContext)
+			double version, int status)
 		throws PortalException, SystemException {
 
 		DLFileVersion fileVersion = dlFileVersionPersistence.findByG_F_N_V(
 			groupId, folderId, name, version);
 
-		return updateStatus(userId, fileVersion, true, serviceContext);
+		return updateStatus(userId, fileVersion, true, status);
 	}
 
 	protected void addFileVersion(

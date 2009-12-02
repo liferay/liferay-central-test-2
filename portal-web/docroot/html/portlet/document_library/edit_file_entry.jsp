@@ -80,6 +80,17 @@ if (fileEntry != null) {
 	}
 }
 
+int status = StatusConstants.APPROVED;
+
+if (fileEntry == null) {
+	if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(company.getCompanyId(), scopeGroupId, DLFileEntry.class.getName())) {
+		status = StatusConstants.PENDING;
+	}
+}
+else if (WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), fileEntry.getGroupId(), DLFileEntry.class.getName(), fileEntry.getFileEntryId())) {
+	status = StatusConstants.PENDING;
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -187,6 +198,7 @@ portletURL.setParameter("name", name);
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="newFolderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="name" type="hidden" value="<%= name %>" />
+	<aui:input name="status" type="hidden" value="<%= status %>" />
 
 	<c:if test="<%= fileEntry != null %>">
 		<h3 class="file-entry-title"><%= fileEntry.getTitle() %></h3>

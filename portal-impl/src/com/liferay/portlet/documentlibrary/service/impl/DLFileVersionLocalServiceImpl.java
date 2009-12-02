@@ -25,8 +25,10 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.base.DLFileVersionLocalServiceBaseImpl;
+import com.liferay.portlet.documentlibrary.util.comparator.FileVersionComparator;
 
 import java.util.List;
 
@@ -35,6 +37,7 @@ import java.util.List;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  */
 public class DLFileVersionLocalServiceImpl
 	extends DLFileVersionLocalServiceBaseImpl {
@@ -59,6 +62,20 @@ public class DLFileVersionLocalServiceImpl
 			return dlFileVersionPersistence.findByG_F_N_S(
 				groupId, folderId, name, status);
 		}
+	}
+
+	public DLFileVersion getLatestFileVersion(
+			long groupId, long folderId, String name)
+		throws PortalException, SystemException {
+
+		List<DLFileVersion> fileVersions = dlFileVersionPersistence.findByG_F_N(
+			groupId, folderId, name, 0, 1, new FileVersionComparator());
+
+		if (fileVersions.size() == 0) {
+			throw new NoSuchFileVersionException();
+		}
+
+		return fileVersions.get(0);
 	}
 
 }

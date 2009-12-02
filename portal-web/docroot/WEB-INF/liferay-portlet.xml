@@ -196,6 +196,7 @@
 		<asset-renderer-factory>com.liferay.portlet.documentlibrary.asset.DLFileEntryAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.documentlibrary.DLFileEntryCustomAttributesDisplay</custom-attributes-display>
 		<custom-attributes-display>com.liferay.portlet.documentlibrary.DLFolderCustomAttributesDisplay</custom-attributes-display>
+		<workflow-handler>com.liferay.portlet.documentlibrary.workflow.DLFileEntryWorkflowHandler</workflow-handler>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
@@ -1463,6 +1464,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<ajaxable>false</ajaxable>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/workflow_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-workflow-admin</css-class-wrapper>
 	</portlet>

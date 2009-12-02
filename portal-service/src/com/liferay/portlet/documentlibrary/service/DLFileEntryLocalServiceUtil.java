@@ -432,22 +432,27 @@ public class DLFileEntryLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
 		long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
-		boolean reIndex,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean reIndex, int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-				   .updateStatus(userId, fileVersion, reIndex, serviceContext);
+		return getService().updateStatus(userId, fileVersion, reIndex, status);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
+		long userId, long fileEntryId, int status)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateStatus(userId, fileEntryId, status);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
 		long userId, long groupId, long folderId, java.lang.String name,
-		double version, com.liferay.portal.service.ServiceContext serviceContext)
+		double version, int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateStatus(userId, groupId, folderId, name, version,
-			serviceContext);
+			status);
 	}
 
 	public static DLFileEntryLocalService getService() {

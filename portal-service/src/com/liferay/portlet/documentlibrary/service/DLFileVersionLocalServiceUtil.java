@@ -122,6 +122,13 @@ public class DLFileVersionLocalServiceUtil {
 		return getService().getFileVersions(groupId, folderId, name, status);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getLatestFileVersion(groupId, folderId, name);
+	}
+
 	public static DLFileVersionLocalService getService() {
 		if (_service == null) {
 			_service = (DLFileVersionLocalService)PortalBeanLocatorUtil.locate(DLFileVersionLocalService.class.getName());

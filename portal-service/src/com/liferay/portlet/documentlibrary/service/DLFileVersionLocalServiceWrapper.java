@@ -126,6 +126,14 @@ public class DLFileVersionLocalServiceWrapper
 			name, status);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _dlFileVersionLocalService.getLatestFileVersion(groupId,
+			folderId, name);
+	}
+
 	public DLFileVersionLocalService getWrappedDLFileVersionLocalService() {
 		return _dlFileVersionLocalService;
 	}

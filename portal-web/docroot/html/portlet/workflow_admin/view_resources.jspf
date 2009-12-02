@@ -78,7 +78,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 					>
 
 						<%
-						buffer.append("<div class=\"");
+						buffer.append("<div class=\"icon ");
 						buffer.append(workflowHandler.getType());
 						buffer.append("\">");
 						buffer.append(LanguageUtil.get(pageContext, "model.resource." + workflowHandler.getClassName()));

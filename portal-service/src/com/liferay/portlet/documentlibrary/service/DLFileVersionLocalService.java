@@ -110,4 +110,10 @@ public interface DLFileVersionLocalService {
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
 		long groupId, long folderId, java.lang.String name, int status)
 		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

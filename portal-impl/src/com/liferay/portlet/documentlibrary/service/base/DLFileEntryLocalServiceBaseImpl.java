@@ -40,12 +40,14 @@ import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.WebDAVPropsLocalService;
+import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.service.persistence.LockPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
+import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
 import com.liferay.portlet.asset.service.AssetCategoryLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryService;
@@ -424,6 +426,24 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
+	public WorkflowInstanceLinkLocalService getWorkflowInstanceLinkLocalService() {
+		return workflowInstanceLinkLocalService;
+	}
+
+	public void setWorkflowInstanceLinkLocalService(
+		WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService) {
+		this.workflowInstanceLinkLocalService = workflowInstanceLinkLocalService;
+	}
+
+	public WorkflowInstanceLinkPersistence getWorkflowInstanceLinkPersistence() {
+		return workflowInstanceLinkPersistence;
+	}
+
+	public void setWorkflowInstanceLinkPersistence(
+		WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence) {
+		this.workflowInstanceLinkPersistence = workflowInstanceLinkPersistence;
+	}
+
 	public AssetCategoryLocalService getAssetCategoryLocalService() {
 		return assetCategoryLocalService;
 	}
@@ -748,6 +768,10 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	protected WebDAVPropsLocalService webDAVPropsLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence")
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(name = "com.liferay.portal.service.WorkflowInstanceLinkLocalService")
+	protected WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
+	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.AssetCategoryLocalService")
 	protected AssetCategoryLocalService assetCategoryLocalService;
 	@BeanReference(name = "com.liferay.portlet.asset.service.AssetCategoryService")

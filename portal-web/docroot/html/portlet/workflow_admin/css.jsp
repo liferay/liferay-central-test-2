@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-workflow-admin .unknown, .portlet-workflow-admin .content {
+.portlet-workflow-admin .icon {
 	padding-left: 25px;
 }
 
@@ -35,4 +35,8 @@
 
 .portlet-workflow-admin .content  {
 	background: url(<%= themeImagesPath %>/common/history.png) no-repeat;
+}
+
+.portlet-workflow-admin .document  {
+	background: url(<%= themeImagesPath %>/common/page.png) no-repeat;
 }
