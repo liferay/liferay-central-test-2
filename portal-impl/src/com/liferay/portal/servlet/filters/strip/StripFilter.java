@@ -220,6 +220,8 @@ public class StripFilter extends BasePortalFilter {
 				}
 
 				if (!ETagUtil.processETag(request, response, newByteArray)) {
+					response.setContentType(contentType);
+
 					ServletResponseUtil.write(response, newByteArray);
 				}
 			}
