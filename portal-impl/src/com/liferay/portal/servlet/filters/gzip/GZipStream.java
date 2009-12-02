@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import java.util.zip.GZIPOutputStream;
 
@@ -39,7 +40,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jayson Falkner
  * @author Brian Wing Shun Chan
- * @author Shuyang Zhou
  */
 public class GZipStream extends ServletOutputStream {
 
@@ -47,10 +47,8 @@ public class GZipStream extends ServletOutputStream {
 		super();
 
 		_response = response;
-		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
 		_output = response.getOutputStream();
 		_bufferedOutput = new ByteArrayOutputStream();
-		_gzipOutputStream = new GZIPOutputStream(_bufferedOutput);
 		_closed = false;
 	}
 
@@ -58,10 +56,31 @@ public class GZipStream extends ServletOutputStream {
 		if (_closed) {
 			throw new IOException();
 		}
-		_gzipOutputStream.finish();
-		byte[] compressedBytes = _bufferedOutput.toByteArray();
-		_response.setContentLength(compressedBytes.length);
-		_output.write(compressedBytes);
+
+		ByteArrayOutputStream baos = (ByteArrayOutputStream)_bufferedOutput;
+
+		if (baos.size() > 20) {
+			ByteArrayOutputStream compressedContent =
+				new ByteArrayOutputStream();
+
+			GZIPOutputStream gzipOutput = new GZIPOutputStream(
+				compressedContent);
+
+			gzipOutput.write(baos.toByteArray());
+			gzipOutput.finish();
+
+			byte[] compressedBytes = compressedContent.toByteArray();
+
+			_response.setContentLength(compressedBytes.length);
+			_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
+
+			_output.write(compressedBytes);
+		}
+		else {
+			_response.setContentLength(baos.size());
+
+			_output.write(baos.toByteArray());
+		}
 
 		_output.flush();
 		_output.close();
@@ -74,7 +93,7 @@ public class GZipStream extends ServletOutputStream {
 			throw new IOException();
 		}
 
-		_gzipOutputStream.flush();
+		_bufferedOutput.flush();
 	}
 
 	public void write(int b) throws IOException {
@@ -86,7 +105,7 @@ public class GZipStream extends ServletOutputStream {
 
 		//_checkBufferSize(1);
 
-		_gzipOutputStream.write((byte)b);
+		_bufferedOutput.write((byte)b);
 	}
 
 	public void write(byte b[]) throws IOException {
@@ -103,7 +122,7 @@ public class GZipStream extends ServletOutputStream {
 		//_checkBufferSize(len);
 
 		try {
-			_gzipOutputStream.write(b, off, len);
+			_bufferedOutput.write(b, off, len);
 		}
 		catch (IOException ioe) {
 			_log.warn(ioe.getMessage());
@@ -123,8 +142,7 @@ public class GZipStream extends ServletOutputStream {
 
 	private HttpServletResponse _response = null;
 	private ServletOutputStream _output = null;
-	private ByteArrayOutputStream _bufferedOutput = null;
-	private GZIPOutputStream _gzipOutputStream = null;
+	private OutputStream _bufferedOutput = null;
 	private boolean _closed = false;
 
 }
