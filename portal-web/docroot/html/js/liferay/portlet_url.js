@@ -147,7 +147,7 @@ AUI().add(
 				instance._forceStringValues(instance.params);
 				instance._forceStringValues(instance.options);
 
-				A.merge(
+				instance._parameterMap.map = A.merge(
 					instance._parameterMap.map,
 					instance.params
 				);
