@@ -2532,7 +2532,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ${entity.name} exists with the primary key ";
 
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ${entity.name} exists with the key {";
+	<#if entity.getFinderList()?size != 0>
+		private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ${entity.name} exists with the key {";
+	</#if>
 
 	private static Log _log = LogFactoryUtil.getLog(${entity.name}PersistenceImpl.class);
 
