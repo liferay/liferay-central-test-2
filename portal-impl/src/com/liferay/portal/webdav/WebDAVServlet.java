@@ -114,7 +114,7 @@ public class WebDAVServlet extends HttpServlet {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					request.getMethod() + " " + request.getRequestURI() + " " + 
+					request.getMethod() + " " + request.getRequestURI() + " " +
 						status);
 			}
 		}

@@ -289,7 +289,7 @@ public abstract class BasePropMethodImpl implements Method {
 
 			response.setContentType(ContentTypes.TEXT_XML_UTF8);
 			response.setStatus(status);
-			
+
 			try {
 				ServletResponseUtil.write(response, xml);
 			}
