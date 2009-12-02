@@ -79,6 +79,10 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 			<%= GetterUtil.getString(workflowTask.getDescription()) %>
 		</aui:field-wrapper>
 
+		<aui:field-wrapper inlineLabel="left" label="assignee">
+			<%= PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK) %>
+		</aui:field-wrapper>
+
 		<%
 		WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
@@ -115,8 +119,8 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 		long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(workflowTask.getWorkflowTaskId());
 		%>
 
-		<c:if test="<%= pooledActorsIds != null %>">
-			<aui:select inlineLabel="left" label="owner" name="assigneeUserId">
+		<c:if test="<%= (pooledActorsIds != null) && !(workflowTask.isCompleted()) %>">
+			<aui:select inlineLabel="left" label="assigned-to" name="assigneeUserId">
 
 				<%
 				for (long pooledActorId : pooledActorsIds) {
@@ -136,25 +140,26 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 
 		<aui:button-row>
 
-			<%
-			List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
+			<c:if test="<%= !workflowTask.isCompleted() && (workflowTask.getAssigneeUserId() == user.getUserId()) %>">
+				<%
+				List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
 
-			for (String transitionName : transitionNames) {
-				String message = "proceed";
+				for (String transitionName : transitionNames) {
+					String message = "proceed";
 
-				if (Validator.isNotNull(transitionName)) {
-					message = transitionName;
+					if (Validator.isNotNull(transitionName)) {
+						message = transitionName;
+					}
+
+					String taglibOnClick = renderResponse.getNamespace() + "saveTask('" + message + "');";
+				%>
+
+					<aui:button name='<%= message + "Button" %>' onClick="<%= taglibOnClick %>" type="button" value="<%= message %>" />
+
+				<%
 				}
-
-				String taglibOnClick = renderResponse.getNamespace() + "saveTask('" + message + "');";
-			%>
-
-				<aui:button name='<%= message + "Button" %>' onClick="<%= taglibOnClick %>" type="button" value="<%= message %>" />
-
-			<%
-			}
-			%>
-
+				%>
+			</c:if>
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>

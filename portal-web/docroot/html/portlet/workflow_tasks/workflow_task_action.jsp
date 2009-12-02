@@ -28,43 +28,55 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 WorkflowTask workflowTask = (WorkflowTask)row.getParameter("workflowTask");
-
-List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-		<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
-	</portlet:renderURL>
+	<c:if test="<%= !(workflowTask.isCompleted()) && (workflowTask.getAssigneeUserId() == user.getUserId()) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
-	<%
-	for (String transitionName : transitionNames) {
-		String message = "proceed";
+		<%
+		List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
 
-		if (Validator.isNotNull(transitionName)) {
-			message = transitionName;
+		for (String transitionName : transitionNames) {
+			String message = "proceed";
+
+			if (Validator.isNotNull(transitionName)) {
+				message = transitionName;
+			}
+		%>
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+				<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="workflowTaskId" value="<%= StringUtil.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+				<portlet:param name="assigneeUserId" value="<%= StringUtil.valueOf(workflowTask.getAssigneeUserId()) %>" />
+
+				<c:if test="<%= transitionName != null %>">
+					<portlet:param name="transitionName" value="<%= transitionName %>" />
+				</c:if>
+			</portlet:actionURL>
+
+			<liferay-ui:icon image="edit" message="<%= message %>" url="<%= editURL %>" />
+
+		<%
 		}
-	%>
+		%>
+	</c:if>
+	<c:if test="<%= !(workflowTask.isCompleted()) && (workflowTask.getAssigneeUserId() != user.getUserId()) %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ASSIGN %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="workflowTaskId" value="<%= StringUtil.valueOf(workflowTask.getWorkflowTaskId()) %>" />
-			<portlet:param name="assigneeUserId" value="<%= StringUtil.valueOf(workflowTask.getAssigneeUserId()) %>" />
-
-			<c:if test="<%= transitionName != null %>">
-				<portlet:param name="transitionName" value="<%= transitionName %>" />
-			</c:if>
+			<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+			<portlet:param name="assigneeUserId" value="<%= String.valueOf(user.getUserId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon image="edit" message="<%= message %>" url="<%= editURL %>" />
-
-	<%
-	}
-	%>
-
+		<liferay-ui:icon image="assign" message="assign-to-me" url="<%= editURL %>" />
+	</c:if>
 </liferay-ui:icon-menu>

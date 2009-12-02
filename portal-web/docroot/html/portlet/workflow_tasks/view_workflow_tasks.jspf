@@ -26,9 +26,14 @@
 String tabs1 = ParamUtil.getString(request, "tabs1", "my-pending-tasks");
 
 boolean completed = false;
+boolean pooledTasks = false;
 
 if (tabs1.equals("my-completed-tasks")) {
 	completed = true;
+}
+
+if (tabs1.equals("pooled-pending-tasks")) {
+	pooledTasks = true;
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -37,7 +42,7 @@ portletURL.setParameter("tabs1", tabs1);
 %>
 
 <liferay-ui:tabs
-	names="my-pending-tasks,my-completed-tasks"
+	names="my-pending-tasks,my-completed-tasks,pooled-pending-tasks"
 	url="<%= portletURL.toString() %>"
 />
 
@@ -51,8 +56,8 @@ try {
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
-			results="<%= WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
-			total="<%= WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId(), completed) %>"
+			results="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) : WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
+			total="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(user.getUserId(), completed) : WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId(), completed) %>"
 		/>
 
 		<liferay-ui:search-container-row
@@ -137,16 +142,16 @@ try {
 
 			</liferay-ui:search-container-column-text>
 
-			<c:if test="<%= !completed %>">
-				<liferay-ui:search-container-column-jsp
-					align="right"
-					path="/html/portlet/workflow_tasks/workflow_task_action.jsp"
-				/>
-			</c:if>
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/portlet/workflow_tasks/workflow_task_action.jsp"
+			/>
 		</liferay-ui:search-container-row>
 
 		<liferay-ui:search-iterator paginate="<%= false %>" />
 	</liferay-ui:search-container>
+
+	<br />
 
 <%
 }
