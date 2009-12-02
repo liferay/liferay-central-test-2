@@ -66,14 +66,14 @@ if (curTagsParam != null) {
 				{
 					allowSuggestions: true,
 					contentBox: '#<%= namespace + randomNamespace %>assetTagsSelector',
-					instanceVar: '<%= namespace + randomNamespace %>',
-					hiddenInput: '#<%= namespace + hiddenInput %>',
-					input: '#<%= randomNamespace %>assetTagNames',
-					curEntries: '<%= HtmlUtil.escapeJS(curTags) %>',
-					focused: <%= focus %>,
 					contentCallback: function() {
 						return <%= contentCallback %>();
-					}
+					},
+					curEntries: '<%= HtmlUtil.escapeJS(curTags) %>',
+					focused: <%= focus %>,
+					hiddenInput: '#<%= namespace + hiddenInput %>',
+					input: '#<%= randomNamespace %>assetTagNames',
+					instanceVar: '<%= namespace + randomNamespace %>'
 				}
 			).render();
 		}
