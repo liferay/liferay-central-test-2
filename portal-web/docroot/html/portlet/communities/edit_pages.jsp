@@ -299,13 +299,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm, '<%= currentURL %>');
 	}
 
-	function <portlet:namespace />copyFromLive() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-copy-from-live-and-overwrite-the-existing-staging-configuration") %>')) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "copy_from_live";
-			submitForm(document.<portlet:namespace />fm);
-		}
-	}
-
 	function <portlet:namespace />deletePage() {
 		<c:choose>
 			<c:when test="<%= (selPlid == themeDisplay.getPlid()) || (selPlid == refererPlid) %>">
