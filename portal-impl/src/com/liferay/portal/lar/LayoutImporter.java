@@ -620,9 +620,7 @@ public class LayoutImporter {
 			long scopeLayoutId = GetterUtil.getLong(
 				portletEl.attributeValue("scope-layout-id"));
 
-			if (scopeLayoutId > 0) {
-				context.setScopeLayoutId(scopeLayoutId);
-			}
+			context.setScopeLayoutId(scopeLayoutId);
 
 			// Portlet data
 
