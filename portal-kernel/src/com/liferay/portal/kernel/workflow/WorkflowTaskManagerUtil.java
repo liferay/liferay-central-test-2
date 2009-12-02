@@ -22,12 +22,8 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.model.Role;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -103,16 +99,10 @@ public class WorkflowTaskManagerUtil {
 
 	public static int getWorkflowTaskCountByUserRoles(
 			long userId, Boolean completed)
-		throws SystemException, WorkflowException {
+		throws WorkflowException {
 
-		List<Role> userRoles = RoleLocalServiceUtil.getUserRoles(userId);
-		int total = 0;
-
-		for (Role role : userRoles) {
-			total += getWorkflowTaskCountByRole(role.getRoleId(), completed);
-		}
-
-		return total;
+		return _workflowTaskManager.getWorkflowTaskCountByUserRoles(
+			userId, completed);
 	}
 
 	public static int getWorkflowTaskCountByWorkflowInstance(
@@ -148,19 +138,10 @@ public class WorkflowTaskManagerUtil {
 	public static List<WorkflowTask> getWorkflowTasksByUserRoles(
 			long userId, Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
-		throws SystemException, WorkflowException {
+		throws WorkflowException {
 
-		List<Role> userRoles = RoleLocalServiceUtil.getUserRoles(userId);
-		List<WorkflowTask> workflowTasks = new ArrayList<WorkflowTask>();
-
-		 for (Role role : userRoles) {
-			workflowTasks.addAll(
-				getWorkflowTasksByRole(
-					role.getRoleId(), completed, start, end,
-					orderByComparator));
-		 }
-
-		 return workflowTasks;
+		return _workflowTaskManager.getWorkflowTasksByUserRoles(
+			userId, completed, start, end, orderByComparator);
 	}
 
 	public static List<WorkflowTask> getWorkflowTasksByWorkflowInstance(

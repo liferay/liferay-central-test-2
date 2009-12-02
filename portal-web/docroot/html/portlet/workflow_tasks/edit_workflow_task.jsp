@@ -119,7 +119,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 		long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(workflowTask.getWorkflowTaskId());
 		%>
 
-		<c:if test="<%= (pooledActorsIds != null) && !(workflowTask.isCompleted()) %>">
+		<c:if test="<%= (pooledActorsIds != null) && !workflowTask.isCompleted() %>">
 			<aui:select inlineLabel="left" label="assigned-to" name="assigneeUserId">
 
 				<%
@@ -139,8 +139,8 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 		<br />
 
 		<aui:button-row>
-
 			<c:if test="<%= !workflowTask.isCompleted() && (workflowTask.getAssigneeUserId() == user.getUserId()) %>">
+
 				<%
 				List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
 
@@ -159,7 +159,9 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 				<%
 				}
 				%>
+
 			</c:if>
+
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>

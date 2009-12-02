@@ -25,12 +25,13 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "my-pending-tasks");
 
-boolean completed = false;
-boolean pooledTasks = false;
+boolean completedTasks = false;
 
 if (tabs1.equals("my-completed-tasks")) {
-	completed = true;
+	completedTasks = true;
 }
+
+boolean pooledTasks = false;
 
 if (tabs1.equals("pooled-pending-tasks")) {
 	pooledTasks = true;
@@ -51,13 +52,13 @@ try {
 %>
 
 	<liferay-ui:search-container
-		emptyResultsMessage='<%= LanguageUtil.get(pageContext, completed ? "there-are-no-completed-tasks" : "there-are-no-pending-tasks-assigned-to-you") %>'
+		emptyResultsMessage='<%= LanguageUtil.get(pageContext, completedTasks ? "there-are-no-completed-tasks" : "there-are-no-pending-tasks-assigned-to-you") %>'
 		headerNames="name,asset-title,due-date,state"
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
-			results="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) : WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
-			total="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(user.getUserId(), completed) : WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId(), completed) %>"
+			results="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(user.getUserId(), completedTasks, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) : WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completedTasks, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
+			total="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(user.getUserId(), completedTasks) : WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId(), completedTasks) %>"
 		/>
 
 		<liferay-ui:search-container-row

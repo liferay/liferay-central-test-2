@@ -31,7 +31,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getParameter("workflowTask");
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= !(workflowTask.isCompleted()) && (workflowTask.getAssigneeUserId() == user.getUserId()) %>">
+	<c:if test="<%= !workflowTask.isCompleted() && (workflowTask.getAssigneeUserId() == user.getUserId()) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -67,8 +67,10 @@ WorkflowTask workflowTask = (WorkflowTask)row.getParameter("workflowTask");
 		<%
 		}
 		%>
+
 	</c:if>
-	<c:if test="<%= !(workflowTask.isCompleted()) && (workflowTask.getAssigneeUserId() != user.getUserId()) %>">
+
+	<c:if test="<%= !workflowTask.isCompleted() && (workflowTask.getAssigneeUserId() != user.getUserId()) %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ASSIGN %>" />
