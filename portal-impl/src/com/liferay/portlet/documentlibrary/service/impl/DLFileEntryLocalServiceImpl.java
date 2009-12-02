@@ -162,7 +162,6 @@ public class DLFileEntryLocalServiceImpl
 			title = name;
 		}
 
-		title = getTitle(name, title);
 		name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
 
@@ -810,8 +809,6 @@ public class DLFileEntryLocalServiceImpl
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByG_F_N(
 			groupId, folderId, name);
 
-		title = getTitle(fileEntry.getTitle(), title);
-
 		validate(
 			groupId, folderId, newFolderId, name, title, sourceFileName, is);
 
@@ -1211,18 +1208,6 @@ public class DLFileEntryLocalServiceImpl
 		else {
 			return folderId;
 		}
-	}
-
-	protected String getTitle(String name, String title) {
-		String extension = FileUtil.getExtension(name);
-
-		if (Validator.isNotNull(extension) &&
-			!title.toLowerCase().endsWith(StringPool.PERIOD + extension)) {
-
-			title += StringPool.PERIOD + extension;
-		}
-
-		return title;
 	}
 
 	protected void validate(
