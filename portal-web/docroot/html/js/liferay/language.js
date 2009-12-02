@@ -19,15 +19,18 @@ Liferay.Language = {
 			return value;
 		}
 
-		var xHR = jQuery.ajax(
+		AUI().use('io').io(
+			url,
 			{
 				async: false,
-				type: 'GET',
-				url: url
+				on: {
+					complete: function(i, o) {
+						value = o.responseText;
+					}
+				},
+				type: 'GET'
 			}
 		);
-
-		value = xHR.responseText;
 
 		instance._cache[url] = value;
 
