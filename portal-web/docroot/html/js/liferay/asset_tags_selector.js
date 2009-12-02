@@ -31,7 +31,7 @@ AUI().add(
 		 * OPTIONS
 		 *
 		 * Required
-		 * curTags (string): The current tags.
+		 * curEntries (string): The current tags.
 		 * instanceVar {string}: The instance variable for this class.
 		 * hiddenInput {string}: The hidden input used to pass in the current tags.
 		 * textInput {string}: The text input for users to add tags.
@@ -60,7 +60,7 @@ AUI().add(
 			contentCallback: {
 				value: null
 			},
-			curTags: {
+			curEntries: {
 				value: '',
 				setter: function(value) {
 					var instance = this;
@@ -76,7 +76,7 @@ AUI().add(
 				valueFn: function() {
 					var instance = this;
 
-					return instance._searchTags;
+					return instance._searchEntries;
 				}
 			},
 			guid: {
@@ -130,9 +130,9 @@ AUI().add(
 
 					AssetTagsSelector.superclass.syncUI.apply(instance, arguments);
 
-					var curTags = instance.get('curTags');
+					var curEntries = instance.get('curEntries');
 
-					A.each(curTags, instance.add, instance);
+					A.each(curEntries, instance.add, instance);
 				},
 
 				_formatEntry: function(item) {
@@ -172,12 +172,12 @@ AUI().add(
 							}
 						).render(bodyNode);
 
-						var tagsNode = A.Node.create(TPL_TAGS_CONTAINER);
+						var entriesNode = A.Node.create(TPL_TAGS_CONTAINER);
 
-						bodyNode.appendChild(tagsNode);
+						bodyNode.appendChild(entriesNode);
 
 						popup.searchField = searchField;
-						popup.tagsNode = tagsNode;
+						popup.entriesNode = entriesNode;
 
 						instance._popup = popup;
 
@@ -185,7 +185,7 @@ AUI().add(
 
 						var onCheckboxClick = A.bind(instance._onCheckboxClick, instance);
 
-						tagsNode.delegate('click', onCheckboxClick, 'input[type=checkbox]');
+						entriesNode.delegate('click', onCheckboxClick, 'input[type=checkbox]');
 					}
 
 					return instance._popup;
@@ -218,7 +218,7 @@ AUI().add(
 					return proxyData;
 				},
 
-				_getTags: function(callback) {
+				_getEntries: function(callback) {
 					var instance = this;
 
 					Liferay.Service.Asset.AssetTag.getGroupTags(
@@ -238,15 +238,15 @@ AUI().add(
 						{
 							after: {
 								search: function() {
-									var fieldsets = popup.tagsNode.all('fieldset');
+									var fieldsets = popup.entriesNode.all('fieldset');
 
 									fieldsets.each(
 										function(item, index, collection) {
-											var visibleTags = item.one('label:not(.aui-helper-hidden)');
+											var visibleEntries = item.one('label:not(.aui-helper-hidden)');
 
 											var action = 'addClass';
 
-											if (visibleTags) {
+											if (visibleEntries) {
 												action = 'removeClass';
 											}
 
@@ -321,7 +321,7 @@ AUI().add(
 					instance.entryHolder.placeAfter(toolsetBoundingBox);
 				},
 
-				_searchTags: function(term) {
+				_searchEntries: function(term) {
 					var instance = this;
 
 					var beginning = 0;
@@ -347,7 +347,7 @@ AUI().add(
 
 					var popup = instance._getPopup();
 
-					popup.tagsNode.html(TPL_LOADING);
+					popup.entriesNode.html(TPL_LOADING);
 
 					popup.show();
 				},
@@ -359,9 +359,9 @@ AUI().add(
 
 					instance._popup.set('title', Liferay.Language.get('tags'));
 
-					instance._getTags(
-						function(tags) {
-							instance._updateSelectList(tags, instance._tagsIterator);
+					instance._getEntries(
+						function(entries) {
+							instance._updateSelectList(entries, instance._entriesIterator);
 						}
 					);
 				},
@@ -402,7 +402,7 @@ AUI().add(
 					instance._formatEntry(tag);
 				},
 
-				_tagsIterator: function(item, index, collection) {
+				_entriesIterator: function(item, index, collection) {
 					var instance = this;
 
 					item.checked = instance.entries.indexOfKey(item.name) > -1 ? TPL_CHECKED : '';
@@ -452,7 +452,7 @@ AUI().add(
 					buffer.push(message);
 					buffer.push('</fieldset>');
 
-					popup.tagsNode.html(buffer.join(''));
+					popup.entriesNode.html(buffer.join(''));
 
 					popup.liveSearch.get('nodes').refresh();
 					popup.liveSearch.refreshIndex();

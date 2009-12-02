@@ -69,7 +69,7 @@ if (curTagsParam != null) {
 					instanceVar: '<%= namespace + randomNamespace %>',
 					hiddenInput: '#<%= namespace + hiddenInput %>',
 					input: '#<%= randomNamespace %>assetTagNames',
-					curTags: '<%= HtmlUtil.escapeJS(curTags) %>',
+					curEntries: '<%= HtmlUtil.escapeJS(curTags) %>',
 					focused: <%= focus %>,
 					contentCallback: function() {
 						return <%= contentCallback %>();

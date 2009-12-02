@@ -978,6 +978,7 @@
 	border: solid #999;
 	border-width: 1px 0;
 	padding: 10px 5px 5px;
+	width: 100%;
 }
 
 .lfr-tag-selector-input {
@@ -1007,6 +1008,15 @@
 	cursor: pointer;
 	display: block;
 	padding: 2px;
+}
+
+.lfr-tag-selector-popup ul {
+	margin: 0;
+}
+
+.lfr-tag-selector-popup li li {
+	list-style: none;
+	margin-left: 1em;
 }
 
 .lfr-tag-selector-popup label input {

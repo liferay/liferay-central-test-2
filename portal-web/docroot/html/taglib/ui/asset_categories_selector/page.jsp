@@ -64,11 +64,9 @@ if (Validator.isNotNull(curCategoryIds)) {
 }
 %>
 
-<aui:input name="<%= hiddenInput %>" type="hidden" />
-
-<span class="ui-asset-categories empty" id="<%= randomNamespace %>assetCategoriesSummary"></span>
-
-<aui:button name='<%= randomNamespace + "selectAssetCategories" %>' value="select-categories" />
+<div class="lfr-tags-selector-content" id="<%= namespace + randomNamespace %>assetCategoriesSelector">
+	<aui:input name="<%= hiddenInput %>" type="hidden" />
+</div>
 
 <script type="text/javascript">
 	AUI().ready(
@@ -76,13 +74,13 @@ if (Validator.isNotNull(curCategoryIds)) {
 		function() {
 			new Liferay.AssetCategoriesSelector(
 				{
-					instanceVar: '<%= namespace + randomNamespace %>',
-					hiddenInput: '<%= namespace + hiddenInput %>',
-					summarySpan: '<%= randomNamespace %>assetCategoriesSummary',
-					curCategoryIds: '<%= curCategoryIds %>',
-					curCategoryNames: '<%= curCategoryNames %>'
+					contentBox: '#<%= namespace + randomNamespace %>assetCategoriesSelector',
+					curEntries: '<%= curCategoryNames %>',
+					curEntryIds: '<%= curCategoryIds %>',
+					hiddenInput: '#<%= namespace + hiddenInput %>',
+					instanceVar: '<%= namespace + randomNamespace %>'
 				}
-			);
+			).render();
 		}
 	);
 </script>

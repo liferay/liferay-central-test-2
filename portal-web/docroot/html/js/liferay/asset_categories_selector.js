@@ -1,414 +1,302 @@
 AUI().add(
 	'liferay-categories-selector',
 	function(A) {
+		var Lang = A.Lang;
+
+		var	getClassName = A.ClassNameManager.getClassName;
+
+		var NAME = 'categoriesselector';
+
+		var CSS_HELPER_RESET = getClassName('helper', 'reset');
+
+		var TPL_CHECKED = ' checked="checked" ';
+
+		var TPL_INPUT = '<label title="{name}"><input {checked} data-title="{name}" type="checkbox" value="{categoryId}" />{name}</label>';
+
+		var TPL_LIST_CLOSE = '</ul>';
+
+		var TPL_LIST_OPEN = '<ul>';
+
+		var TPL_LIST_ITEM_CLOSE = '</li>';
+
+		var TPL_LIST_ITEM_OPEN = '<li>';
+
+		var TPL_MESSAGE = '<div class="lfr-tag-message">{0}</div>';
 
 		/**
 		 * OPTIONS
 		 *
 		 * Required
-		 * curCategoryIds (string): The ids of the current categories.
-		 * curCategoryNames (string): The names of the current categories.
+		 * curEntryIds (string): The ids of the current categories.
+		 * curEntries (string): The names of the current categories.
 		 * instanceVar {string}: The instance variable for this class.
 		 * hiddenInput {string}: The hidden input used to pass in the current categories.
-		 * summarySpan {string}: The summary span to show the current categories.
 		 */
 
-		var AssetCategoriesSelector = function(options) {
-			var instance = this;
-
-			instance._curCategoryIds = [];
-
-			instance.options = options;
-			instance._seed = instance.options.seed || '';
-			instance._ns = instance.options.instanceVar || '';
-			instance._mainContainer = jQuery('<div class="lfr-asset-category-select-container"></div>');
-			instance._container = jQuery('<div class="lfr-asset-category-container"></div>');
-			instance._searchContainer = jQuery('<div class="lfr-asset-category-search-container"><input class="lfr-asset-category-search-input" type="text"/></div>');
-			instance._summarySpan = jQuery('#' + options.summarySpan + instance._seed);
-
-			instance._summarySpan.html('');
-
-			var hiddenInput = jQuery('#' + options.hiddenInput + instance._seed);
-
-			hiddenInput.attr('name', hiddenInput.attr('id'));
-
-			instance._popupVisible = false;
-
-			instance._setupSelectAssetCategories();
-
-			if (options.curCategoryIds) {
-				instance._curCategoryIds = options.curCategoryIds.split(',');
-				instance._curCategoryNames = options.curCategoryNames.split(',');
-
-				instance._update();
-			}
-			else {
-				instance._curCategoryIds = [];
-				instance._curCategoryNames = [];
-			}
-
-			instance._summarySpan.unbind('click');
-
-			instance._summarySpan.click(
-				function(event) {
-					var target = jQuery(event.target);
-
-					if (!target.hasClass('ui-asset-category-delete')) {
-						target = target.parent();
-					}
-
-					if (target.hasClass('ui-asset-category-delete')) {
-						var id = target.attr('data-tagIndex');
-
-						instance.deleteCategory(id);
-					}
-				}
-			);
+		var AssetCategoriesSelector = function() {
+			AssetCategoriesSelector.superclass.constructor.apply(this, arguments);
 		};
 
-		AssetCategoriesSelector.prototype = {
-			deleteCategory: function(id) {
-				var instance = this;
+		AssetCategoriesSelector.NAME = NAME;
 
-				var options = instance.options;
-				var curCategoryIds = instance._curCategoryIds;
-				var curCategoryNames = instance._curCategoryNames;
+		AssetCategoriesSelector.ATTRS = {
+			curEntryIds: {
+				value: '',
+				setter: function(value) {
+					var instance = this;
 
-				jQuery('#' + instance._namespace('CurCategoryIds' + id + '_')).remove();
-
-				var value = curCategoryIds.splice(id, 1);
-
-				curCategoryNames.splice(id, 1);
-
-				if (instance._popupVisible) {
-					var contentBox = instance.selectCategoryPopup.get('contentBox');
-					var contextNode = contentBox._node;
-
-					jQuery('input[type=checkbox][value$=' + value + ']', contextNode).attr('checked', false);
-				}
-
-				instance._update();
-			},
-
-			_categoryIterator: function(categories, buffer, counter) {
-				var instance = this;
-
-				buffer.push('<ul>');
-
-				jQuery.each(
-					categories,
-					function(i) {
-						var category = this;
-						var categoryName = category.name;
-						var categoryId = category.categoryId;
-						var checked = (instance._curCategoryIds.indexOf(categoryId.toString()) > -1) ? ' checked="checked" ' : '';
-
-						buffer.push('<li><label title="');
-						buffer.push(categoryName);
-						buffer.push('"><input type="checkbox" value="');
-						buffer.push(categoryId);
-						buffer.push('" ');
-						buffer.push(checked);
-						buffer.push(' data-title="');
-						buffer.push(categoryName);
-						buffer.push('"> ');
-						buffer.push(categoryName);
-						buffer.push('</label>');
-
-						var childCategories = Liferay.Service.Asset.AssetCategory.getChildCategories(
-							{
-								vocabularyId: categoryId
-							},
-							false
-						);
-
-						if (childCategories.length > 0) {
-							instance._categoryIterator(childCategories, buffer, counter + 1);
-						}
-
-						buffer.push('</li>');
+					if (Lang.isString(value)) {
+						value = value.split(',');
 					}
-				);
 
-				buffer.push('</ul>');
+					return value;
+				}
+			}
+		};
 
-				counter = counter - 1;
-			},
+		A.extend(
+			AssetCategoriesSelector,
+			Liferay.AssetTagsSelector,
+			{
+				renderUI: function() {
+					var instance = this;
 
-			_createPopup: function() {
-				var instance = this;
+					AssetCategoriesSelector.superclass.constructor.superclass.renderUI.apply(instance, arguments);
 
-				var container = instance._container;
-				var mainContainer = instance._mainContainer;
-				var searchContainer = instance._searchContainer;
+					instance._renderToolset();
 
-				mainContainer.append(searchContainer).append(container);
+					instance.inputContainer.hide('aui-helper-hidden-accessible');
+				},
 
-				if (!instance.selectCategoryPopup) {
-					var titleLabel = Liferay.Language.get('categories');
-					var saveLabel = Liferay.Language.get('save');
-					var bodyContent = new A.Node(mainContainer[0]);
+				syncUI: function() {
+					var instance = this;
 
-					var saveFn = function() {
-						instance._curCategoryIds = instance._curCategoryIds.length ? instance._curCategoryIds : [];
+					AssetCategoriesSelector.superclass.constructor.superclass.syncUI.apply(instance, arguments);
 
-						container.find('input[type=checkbox]').each(
-							function() {
-								var currentIndex = instance._curCategoryIds.indexOf(this.value);
-								if (this.checked) {
-									if (currentIndex == -1) {
-										instance._curCategoryIds.push(this.value);
-										instance._curCategoryNames.push(jQuery(this).attr('data-title'));
-									}
-								}
-								else {
-									if (currentIndex > -1) {
-										instance._curCategoryIds.splice(currentIndex, 1);
-										instance._curCategoryNames.splice(currentIndex, 1);
-									}
-								}
-							}
-						);
+					var matchKey = instance.get('matchKey')
 
-						instance._update();
-						instance.selectCategoryPopup.hide();
+					instance.entries.getKey = function(obj) {
+						return obj.categoryId;
 					};
 
-					var popup = new A.Dialog(
-						{
-							bodyContent: bodyContent,
-							centered: true,
-							draggable: true,
-							height: 400,
-							stack: true,
-							title: titleLabel,
-							width: 320,
-							zIndex: 1000,
-							after: {
-								render: function() {
-									var inputSearch = jQuery('.lfr-asset-category-search-input');
+					var curEntries = instance.get('curEntries');
+					var curEntryIds = instance.get('curEntryIds');
 
-									instance._initializeSearch(instance._container);
-								},
-								close: function() {
-									instance._popupVisible = false;
-								}
-							},
-							buttons: [
+					A.each(
+						curEntryIds,
+						function(item, index, collection) {
+							var entry = {
+								categoryId: item
+							};
+
+							entry[matchKey] = curEntries[index];
+
+							instance.entries.add(entry);
+						}
+					);
+				},
+
+				_afterTBLFocusedChange: function() {
+				},
+
+				_entriesIterator: function(item, index, collection) {
+					var instance = this;
+
+					var buffer = instance._buffer;
+
+					if (index == 0) {
+						buffer.push(TPL_LIST_OPEN);
+					}
+
+					item.checked = instance.entries.findIndexBy('categoryId', item.categoryId) > -1 ? TPL_CHECKED : '';
+
+					buffer.push(TPL_LIST_ITEM_OPEN);
+
+					instance._formatEntry(item);
+
+					var childCategories = Liferay.Service.Asset.AssetCategory.getChildCategories(
+						{
+							vocabularyId: item.categoryId
+						},
+						false
+					);
+
+					A.each(childCategories, instance._entriesIterator, instance);
+
+					buffer.push(TPL_LIST_ITEM_CLOSE);
+
+					if (index == collection.length - 1) {
+						buffer.push(TPL_LIST_CLOSE);
+					}
+				},
+
+				_formatEntry: function(item) {
+					var instance = this;
+
+					var input = A.substitute(TPL_INPUT, item);
+
+					instance._buffer.push(input);
+				},
+
+				_getEntries: function(callback) {
+					var instance = this;
+
+					Liferay.Service.Asset.AssetVocabulary.getGroupsVocabularies(
+						{
+							groupIds: [themeDisplay.getScopeGroupId(), themeDisplay.getCompanyGroupId()]
+						},
+						callback
+					);
+				},
+
+				_onCheckboxClick: function(event) {
+					var instance = this;
+
+					var checkbox = event.currentTarget;
+					var checked = checkbox.get('checked');
+					var value = checkbox.val();
+					var entryName = checkbox.attr('data-title');
+
+					if (checked) {
+						var matchKey = instance.get('matchKey');
+
+						var entry = {
+							categoryId: value
+						};
+
+						entry[matchKey] = entryName;
+
+						instance.entries.add(entry);
+					}
+					else {
+						instance.entries.removeKey(value);
+					}
+				},
+
+				_renderToolset: function() {
+					var instance = this;
+
+					var contentBox = instance.get('contentBox');
+
+					instance.toolset = new A.ToolSet(
+						{
+							tools: [
 								{
-									text: saveLabel,
-									handler: saveFn
+									icon: 'search',
+									id: 'select',
+									handler: {
+										fn: instance._showSelectPopup,
+										context: instance
+									}
 								}
 							]
 						}
-					)
-					.render();
+					).render(contentBox);
 
-					popup.get('boundingBox').addClass('lfr-asset-category-selector');
+					var toolsetBoundingBox = instance.toolset.get('boundingBox');
 
-					instance.selectCategoryPopup = popup;
+					instance.entryHolder.placeAfter(toolsetBoundingBox);
+				},
 
-					if (Liferay.Browser.isIe()) {
-						jQuery('.lfr-label-text', popup).click(
-							function() {
-								var input = jQuery(this.previousSibling);
-								var checkedState = !input.is(':checked');
-								input.attr('checked', checkedState);
-							}
-						);
-					}
-				}
-				else {
-					instance.selectCategoryPopup.show();
-				}
+				_showSelectPopup: function() {
+					var instance = this;
 
-				instance._popupVisible = true;
-			},
+					instance._showPopup();
 
-			_initializeSearch: function(container) {
-				var instance = this;
+					var popup = instance._popup;
 
-				var data = function(node) {
-					var value = node.attr('title');
+					popup.set('title', Liferay.Language.get('categories'));
 
-					return value.toLowerCase();
-				};
+					instance._getEntries(
+						function(entries) {
+							instance._buffer = [];
 
-				var inputSearch = jQuery('.lfr-asset-category-search-input').val('');
+							A.each(entries, instance._vocabulariesIterator, instance);
 
-				Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
+							popup.entriesNode.html(instance._buffer.join(''));
 
-				var options = {
-					after: {
-						search: function() {
-							jQuery('fieldset', container).each(
-								function() {
-									var fieldset = jQuery(this);
-
-									var visibleCategories = fieldset.find('label:visible');
-
-									if (visibleCategories.length == 0) {
-										fieldset.addClass('no-matches');
-									}
-									else {
-										fieldset.removeClass('no-matches');
-									}
-								}
-							);
+							popup.liveSearch.get('nodes').refresh();
+							popup.liveSearch.refreshIndex();
 						}
-					},
-					data: data,
-					input: '.lfr-asset-category-search-input',
-					nodes: '.lfr-asset-category-container label'
-				};
+					);
+				},
 
-				new A.LiveSearch(options);
-			},
+				_updateHiddenInput: function(event) {
+					var instance = this;
 
-			_namespace: function(name) {
-				var instance = this;
+					var hiddenInput = instance.get('hiddenInput');
 
-				return instance._ns + name + instance._seed;
-			},
+					hiddenInput.val(instance.entries.keys.join());
 
-			_setupSelectAssetCategories: function() {
-				var instance = this;
+					var popup = instance._popup;
 
-				var options = instance.options;
+					if (popup && popup.get('visible')) {
+						var checkbox = popup.bodyNode.one('input[value=' + event.attrName + ']');
 
-				var input = jQuery('#' + instance._namespace('selectAssetCategories'));
+						if (checkbox) {
+							var checked = false;
 
-				input.unbind('click');
-
-				input.click(
-					function() {
-						instance._showSelectPopup();
-					}
-				);
-			},
-
-			_showSelectPopup: function() {
-				var instance = this;
-
-				var options = instance.options;
-				var mainContainer = instance._mainContainer;
-				var container = instance._container;
-				var globalMessage = Liferay.Language.get('global');
-				var searchMessage = Liferay.Language.get('no-categories-found');
-
-				mainContainer.empty();
-
-				container.empty().html('<div class="loading-animation" />');
-
-				instance._createPopup();
-
-				Liferay.Service.Asset.AssetVocabulary.getGroupsVocabularies(
-					{
-						groupIds: [themeDisplay.getScopeGroupId(), themeDisplay.getCompanyGroupId()]
-					},
-					function(vocabularies) {
-						var buffer = [];
-
-						jQuery.each(
-							vocabularies,
-							function(i) {
-								var vocabulary = this;
-								var vocabularyName = vocabulary.name;
-								var vocabularyId = vocabulary.vocabularyId;
-
-								var categories = Liferay.Service.Asset.AssetCategory.getVocabularyRootCategories(
-									{
-										assetVocabularyId: vocabularyId
-									}
-								);
-
-								var noMatchesClass = '';
-
-								if (categories.length == 0) {
-									if (vocabulary.groupId == themeDisplay.getCompanyGroupId()) {
-										return;
-									}
-
-									noMatchesClass = 'no-matches';
-								}
-
-								buffer.push('<fieldset class="lfr-asset-vocabulary-container ' + noMatchesClass + '">');
-								buffer.push('<legend class="lfr-asset-category-set-title">');
-								buffer.push(vocabularyName);
-
-								if (vocabulary.groupId == themeDisplay.getCompanyGroupId()) {
-									buffer.push(' (' + globalMessage + ')');
-								}
-
-								buffer.push('</legend><div class="lfr-asset-category-list">');
-
-								instance._categoryIterator(categories, buffer, 0);
-
-								buffer.push('</div><div class="lfr-asset-category-message">' + searchMessage + '</div>');
-								buffer.push('</fieldset>');
-
-								container.html(buffer.join(''));
-
-								instance._initializeSearch(container);
+							if (event.type == 'dataset:add') {
+								checked = true;
 							}
-						);
+
+							checkbox.set('checked', checked);
+						}
 					}
-				);
-			},
+				},
 
-			_update: function() {
-				var instance = this;
+				_updateSelectList: function(data, iterator, name) {
+					var instance = this;
 
-				instance._updateHiddenInput();
-				instance._updateSummarySpan();
-			},
+					var popup = instance._popup;
 
-			_updateHiddenInput: function() {
-				var instance = this;
+					popup.searchField.resetValue();
 
-				var options = instance.options;
-				var curCategoryIds = instance._curCategoryIds;
+					var buffer = instance._buffer;
 
-				var hiddenInput = jQuery('#' + options.hiddenInput + instance._seed);
+					instance._buffer.push('<fieldset>');
 
-				hiddenInput.val(curCategoryIds.join(','));
-			},
-
-			_updateSummarySpan: function() {
-				var instance = this;
-
-				var options = instance.options;
-				var curCategoryIds = instance._curCategoryIds;
-				var curCategoryNames = instance._curCategoryNames;
-
-				var html = '';
-
-				jQuery(curCategoryIds).each(
-					function(i, curCategoryId) {
-						html += '<span class="ui-asset-category" id="' + instance._namespace('CurCategoryIds' + i + '_') + '">';
-						html += curCategoryNames[i];
-						html += '<a class="ui-asset-category-delete" href="javascript:;" data-tagIndex="' + i + '"><span>x</span></a>';
-						html += '</span>';
+					if (name) {
+						buffer.push('<legend>');
+						buffer.push(name);
+						buffer.push('</legend>');
 					}
-				);
 
-				var assetCategoriesSummary = instance._summarySpan;
+					A.each(data, iterator, instance);
 
-				if (curCategoryIds.length) {
-					assetCategoriesSummary.removeClass('empty');
-				}
-				else {
-					assetCategoriesSummary.addClass('empty');
-				}
+					var message = A.substitute(TPL_MESSAGE, [Liferay.Language.get('no-tags-found')]);
 
-				assetCategoriesSummary.html(html);
+					buffer.push(message);
+					buffer.push('</fieldset>');
+				},
+
+				_vocabulariesIterator: function(item, index, collection) {
+					var instance = this;
+
+					var vocabularyName = item.name;
+					var vocabularyId = item.vocabularyId;
+
+					if (item.groupId == themeDisplay.getCompanyGroupId()) {
+						vocabularyName += ' (' + Liferay.Language.get('global') + ')';
+					}
+
+					var categories = Liferay.Service.Asset.AssetCategory.getVocabularyRootCategories(
+						{
+							assetVocabularyId: vocabularyId
+						}
+					);
+
+					instance._updateSelectList(categories, instance._entriesIterator, vocabularyName);
+				},
+
+				_buffer: []
 			}
-		};
+		);
 
 		Liferay.AssetCategoriesSelector = AssetCategoriesSelector;
 	},
 	'',
 	{
-		requires: ['dialog', 'live-search']
+		requires: ['liferay-tags-selector']
 	}
 );
