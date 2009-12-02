@@ -289,11 +289,7 @@ public abstract class BasePropMethodImpl implements Method {
 
 			response.setContentType(ContentTypes.TEXT_XML_UTF8);
 			response.setStatus(status);
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Status code " + status);
-			}
-
+			
 			try {
 				ServletResponseUtil.write(response, xml);
 			}
@@ -303,7 +299,7 @@ public abstract class BasePropMethodImpl implements Method {
 				}
 			}
 
-			return -1;
+			return status;
 		}
 		else {
 			if (_log.isDebugEnabled()) {

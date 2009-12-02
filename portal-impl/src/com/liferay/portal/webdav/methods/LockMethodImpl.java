@@ -171,9 +171,8 @@ public class LockMethodImpl implements Method {
 		response.setHeader("Lock-Token", lockToken);
 		response.setStatus(status.getCode());
 
-		if (_log.isInfoEnabled()) {
-			_log.info("Returning lock token " + lockToken);
-			_log.info("Status code " + status.getCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Returning lock token " + lockToken);
 		}
 
 		try {
@@ -185,7 +184,7 @@ public class LockMethodImpl implements Method {
 			}
 		}
 
-		return -1;
+		return status.getCode();
 	}
 
 	protected String getResponseXML(Lock lock, long depth) throws Exception {

@@ -54,10 +54,6 @@ public class WebDAVServlet extends HttpServlet {
 
 		int status = HttpServletResponse.SC_PRECONDITION_FAILED;
 
-		if (_log.isInfoEnabled()) {
-			_log.info(request.getMethod() + " " + request.getRequestURI());
-		}
-
 		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (_log.isDebugEnabled()) {
@@ -114,12 +110,12 @@ public class WebDAVServlet extends HttpServlet {
 			_log.error(e, e);
 		}
 		finally {
-			if (status > 0) {
-				response.setStatus(status);
+			response.setStatus(status);
 
-				if (_log.isInfoEnabled()) {
-					_log.info("Status code " + status);
-				}
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					request.getMethod() + " " + request.getRequestURI() + " " + 
+						status);
 			}
 		}
 	}

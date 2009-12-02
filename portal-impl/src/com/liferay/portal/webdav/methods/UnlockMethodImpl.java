@@ -63,8 +63,8 @@ public class UnlockMethodImpl implements Method {
 
 		String value = GetterUtil.getString(request.getHeader("Lock-Token"));
 
-		if (_log.isInfoEnabled()) {
-			_log.info("\"Lock-Token\" header is " + value);
+		if (_log.isDebugEnabled()) {
+			_log.debug("\"Lock-Token\" header is " + value);
 		}
 
 		if (value.startsWith("<") && value.endsWith(">")) {
