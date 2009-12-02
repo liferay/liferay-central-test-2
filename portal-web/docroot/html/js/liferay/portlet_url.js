@@ -147,21 +147,28 @@ AUI().add(
 				instance._forceStringValues(instance.params);
 				instance._forceStringValues(instance.options);
 
-				jQuery.extend(
+				A.merge(
 					instance._parameterMap.map,
 					instance.params
 				);
 
-				var xHR = jQuery.ajax(
+				var responseText = null;
+
+				A.io(
+					themeDisplay.getPathContext() + '/c/portal/portlet_url',
 					{
 						async: false,
 						data: instance._buildRequestData(),
-						type: 'GET',
-						url: themeDisplay.getPathContext() + '/c/portal/portlet_url'
+						on: {
+							complete: function(i, o) {
+								responseText = o.responseText;
+							}
+						},
+						type: 'GET'
 					}
 				);
 
-				return xHR.responseText;
+				return responseText;
 			},
 
 			_buildRequestData: function() {
@@ -169,24 +176,24 @@ AUI().add(
 
 				var data = {};
 
-				jQuery.each(
+				A.each(
 					instance.options,
-					function (key, value) {
+					function (value, key) {
 						if (value !== null) {
 							data[key] = [value].join('');
 						}
 					}
 				);
 
-				data.parameterMap = jQuery.toJSON(instance._parameterMap);
+				data.parameterMap = A.JSON.stringify(instance._parameterMap);
 
-				return data;
+				return A.toQueryString(data);
 			},
 
 			_forceStringValues: function(obj) {
-				jQuery.each(
+				A.each(
 					obj,
-					function (key, value) {
+					function (value, key) {
 						if (value !== null) {
 							obj[key] = [value].join('');
 						}
@@ -197,7 +204,7 @@ AUI().add(
 			}
 		};
 
-		jQuery.extend(
+		A.mix(
 			PortletURL,
 			{
 				createActionURL: function() {
@@ -242,6 +249,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: []
+		requires: ['json']
 	}
 );
