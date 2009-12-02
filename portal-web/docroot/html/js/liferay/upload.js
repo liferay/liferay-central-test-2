@@ -16,7 +16,7 @@ AUI().add(
 		 * buttonText {string}: The text to be displayed on the upload button.
 		 * buttonUrl {string}: A relative (to the flash) file that will be used as the background image of the button.
 		 * buttonWidth {number}: The buttons width.
-		 * fallbackContainer {string|object}: A CSS selector or DOM element of the container holding a fallback (in case flash is not supported).
+		 * fallbackContainer {string|object}: A selector or DOM element of the container holding a fallback (in case flash is not supported).
 		 * fileDescription {string}: A string describing what files can be uploaded.
 		 * namespace {string}: A unique string so that the global callback methods don't collide.
 		 * overlayButton {boolean}: Whether the button is overlayed upon the HTML link.
@@ -250,7 +250,7 @@ AUI().add(
 				var listingFiles = instance._fileList;
 				var listingUl = listingFiles.all('ul');
 
-				if (listingUl && !listingUl.size()) {
+				if (!listingUl.size()) {
 					instance._listInfo.append('<h4>' + instance._fileListText + '</h4>');
 
 					listingUl = A.Node.create('<ul class="lfr-component"></ul>');
@@ -540,11 +540,11 @@ AUI().add(
 						instance._useFallbackButton.on(
 							'click',
 							function(event) {
-								var fallback = event.target;
+								var fallback = event.currentTarget;
 								var newUploaderClass = 'using-new-uploader';
 								var fallbackClass = 'using-classic-uploader';
 
-								if (fallback && fallback.test('.' + newUploaderClass)) {
+								if (fallback && fallback.hasClass(newUploaderClass)) {
 									instance._container.hide();
 									instance._fallbackContainer.show();
 
@@ -583,7 +583,7 @@ AUI().add(
 				if (!instance._fallbackIframe) {
 					instance._fallbackIframe = instance._fallbackContainer.all('iframe[id$=-iframe]');
 
-					if (instance._fallbackIframe && instance._fallbackIframe.size()) {
+					if (instance._fallbackIframe.size()) {
 						var contentWrapper = instance._fallbackIframe.one('#content-wrapper');
 
 						if (contentWrapper) {
@@ -665,7 +665,7 @@ AUI().add(
 			_updateList: function(listLength, message) {
 				var instance = this;
 
-				var infoTitle = instance._listInfo.all('h4');
+				var infoTitle = instance._listInfo.one('h4');
 				var listText = '';
 
 				if (!message) {
