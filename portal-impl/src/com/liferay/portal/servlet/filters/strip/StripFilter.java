@@ -373,28 +373,27 @@ public class StripFilter extends BasePortalFilter {
 			else if (c == CharPool.GREATER_THAN) {
 				newBytes.write(c);
 
-				i = i + countContinuousWhiteSpace(oldByteArray, i + 1);
+				int spaceCount = countContinuousWhiteSpace(oldByteArray, i + 1);
+
+				if (spaceCount > 0) {
+					i = i + spaceCount;
+
+					newBytes.write(CharPool.SPACE);
+				}
 
 				continue;
 			}
 
-			if ((i + 1) < oldByteArray.length) {
-				if ((c == CharPool.NEW_LINE) || (c == CharPool.RETURN) ||
-					(c == CharPool.TAB)) {
+			int spaceCount = countContinuousWhiteSpace(oldByteArray, i);
 
-					char nextChar = (char)oldByteArray[i + 1];
+			if (spaceCount > 0) {
+				newBytes.write(CharPool.SPACE);
 
-					if ((nextChar == CharPool.NEW_LINE) ||
-						(nextChar == CharPool.RETURN) ||
-						(nextChar == CharPool.TAB) ||
-						(nextChar == CharPool.LESS_THAN)) {
-
-						continue;
-					}
-				}
+				i = i + spaceCount - 1;
 			}
-
-			newBytes.write(b);
+			else {
+				newBytes.write(b);
+			}
 		}
 
 		return newBytes.toByteArray();
