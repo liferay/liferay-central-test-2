@@ -26,11 +26,11 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 
 /**
- * <a href="FileVersionComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="FileVersionVersionComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  */
-public class FileVersionComparator extends OrderByComparator {
+public class FileVersionVersionComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "version ASC";
 
@@ -38,11 +38,11 @@ public class FileVersionComparator extends OrderByComparator {
 
 	public static String[] ORDER_BY_FIELDS = {"version"};
 
-	public FileVersionComparator() {
+	public FileVersionVersionComparator() {
 		this(false);
 	}
 
-	public FileVersionComparator(boolean asc) {
+	public FileVersionVersionComparator(boolean asc) {
 		_asc = asc;
 	}
 
