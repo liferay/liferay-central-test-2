@@ -26,7 +26,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 
 /**
- * <a href="FileVersionVersionComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="FileVersionVersionComparator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Bruno Farache
  */
