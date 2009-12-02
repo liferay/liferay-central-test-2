@@ -84,6 +84,7 @@ if (stagingGroup != null) {
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLID);
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
+boolean selPrivateLayout = false;
 
 UnicodeProperties groupTypeSettings = null;
 
@@ -118,6 +119,7 @@ catch (NoSuchLayoutException nsle) {
 
 if (selLayout != null) {
 	layoutId = selLayout.getLayoutId();
+	selPrivateLayout = selLayout.getPrivateLayout();
 }
 
 if (Validator.isNull(tabs2) && !tabs1.equals("settings")) {
@@ -421,6 +423,15 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		}
 
 		if (ok) {
+			var livePlid = <%= LayoutLocalServiceUtil.getDefaultPlid(liveGroupId, selPrivateLayout) %>
+			var pagesRedirect = document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value;
+
+			pagesRedirect = pagesRedirect.replace("GroupId=" + <%= stagingGroupId %>, "GroupId=" + <%= liveGroupId %>);
+			pagesRedirect = pagesRedirect.replace("doAsGroupId%3D" + <%= stagingGroupId %>, "doAsGroupId%3D" + <%= liveGroupId %>);
+			pagesRedirect = pagesRedirect.replace("refererPlid=" + <%= refererPlid %>, "refererPlid=" + livePlid);
+			pagesRedirect = pagesRedirect.replace("refererPlid%3D" + <%= refererPlid %>, "refererPlid%3D" + livePlid);
+
+			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = pagesRedirect;
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "staging";
 			submitForm(document.<portlet:namespace />fm);
 		}
