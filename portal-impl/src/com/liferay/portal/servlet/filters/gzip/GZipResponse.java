@@ -99,8 +99,8 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		return new GZipStream(_response);
 	}
 
-	private HttpServletResponse _response = null;
-	private ServletOutputStream _stream = null;
-	private PrintWriter _writer = null;
+	private HttpServletResponse _response;
+	private ServletOutputStream _stream;
+	private PrintWriter _writer;
 
 }
