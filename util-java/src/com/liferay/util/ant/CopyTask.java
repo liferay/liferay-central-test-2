@@ -40,17 +40,6 @@ import org.apache.tools.ant.types.FilterSet;
  */
 public class CopyTask {
 
-	public static void copyDirectory(String source, String destination) {
-		copyDirectory(source, destination, null, null);
-	}
-
-	public static void copyDirectory(
-		String source, String destination, String includes, String excludes) {
-
-		copyDirectory(
-			new File(source), new File(destination), includes, excludes);
-	}
-
 	public static void copyDirectory(File source, File destination) {
 		copyDirectory(source, destination, null, null);
 	}
@@ -86,6 +75,26 @@ public class CopyTask {
 		copy.setPreserveLastModified(preserveLastModified);
 
 		copy.execute();
+	}
+
+	public static void copyDirectory(String source, String destination) {
+		copyDirectory(source, destination, null, null);
+	}
+
+	public static void copyDirectory(
+		String source, String destination, String includes, String excludes) {
+
+		copyDirectory(
+			new File(source), new File(destination), includes, excludes);
+	}
+
+	public static void copyDirectory(
+		String source, String destination, String includes, String excludes,
+		boolean overwrite, boolean preserveLastModified) {
+
+		copyDirectory(
+			new File(source), new File(destination), includes, excludes,
+			overwrite, preserveLastModified);
 	}
 
 	public static void copyFile(
