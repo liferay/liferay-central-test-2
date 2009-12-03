@@ -22,7 +22,7 @@ Liferay.Language = {
 		AUI().use('io').io(
 			url,
 			{
-				async: false,
+				sync: true,
 				on: {
 					complete: function(i, o) {
 						value = o.responseText;

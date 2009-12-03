@@ -157,7 +157,7 @@ AUI().add(
 				A.io(
 					themeDisplay.getPathContext() + '/c/portal/portlet_url',
 					{
-						async: false,
+						sync: true,
 						data: instance._buildRequestData(),
 						on: {
 							complete: function(i, o) {
