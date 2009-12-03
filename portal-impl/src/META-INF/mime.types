@@ -1,19 +1,19 @@
 #
 # See http://java.sun.com/j2ee/1.4/docs/api/javax/activation/MimetypesFileTypeMap.html
 #
-image/x-photoshop psd
-image/svg+xml svg svgz
-audio/mpeg mp1 mp2 mp3 mpg
+application/pdf pdf
+application/vnd.rn-realmedia rm
+application/x-shockwave-flash swf
 audio/aac aac
 audio/flac fla flac
+audio/mpeg mp1 mp2 mp3 mpg
 audio/ogg ogg oga spx
 audio/x-ms-wma wma
-video/mpeg mpeg
 ideo/mp4 mp4
+image/svg+xml svg svgz
+image/x-photoshop psd
+video/3gpp 3gp
+video/mpeg mpeg
 video/ogg ogv
 video/x-matroska mkv
-video/3gpp 3gp
 video/x-ms-wmv wmv
-application/vnd.rn-realmedia rm
-application/pdf pdf
-application/x-shockwave-flash swf
