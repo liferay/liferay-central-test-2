@@ -34,12 +34,6 @@ import org.apache.tools.ant.taskdefs.ManifestException;
  */
 public class ManifestTask {
 
-	public static void manifest(String file, Manifest.Attribute[] attributes)
-		throws ManifestException {
-
-		manifest(new File(file), attributes);
-	}
-
 	public static void manifest(File file, Manifest.Attribute[] attributes)
 		throws ManifestException {
 
@@ -60,6 +54,12 @@ public class ManifestTask {
 		}
 
 		manifest.execute();
+	}
+
+	public static void manifest(String file, Manifest.Attribute[] attributes)
+		throws ManifestException {
+
+		manifest(new File(file), attributes);
 	}
 
 }

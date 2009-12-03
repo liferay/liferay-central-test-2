@@ -33,10 +33,6 @@ import org.apache.tools.ant.taskdefs.Mkdir;
  */
 public class MkdirTask {
 
-	public static void mkdir(String dir) {
-		mkdir(new File(dir));
-	}
-
 	public static void mkdir(File dir) {
 		Mkdir mkdir = new Mkdir();
 
@@ -44,6 +40,10 @@ public class MkdirTask {
 		mkdir.setDir(dir);
 
 		mkdir.execute();
+	}
+
+	public static void mkdir(String dir) {
+		mkdir(new File(dir));
 	}
 
 }

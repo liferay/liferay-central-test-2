@@ -35,14 +35,6 @@ import org.apache.tools.ant.taskdefs.War;
 public class WarTask {
 
 	public static void war(
-		String baseDir, String destination, String excludes, String webxml) {
-
-		war(
-			new File(baseDir), new File(destination), excludes,
-			new File(webxml));
-	}
-
-	public static void war(
 		File baseDir, File destination, String excludes, File webxml) {
 
 		Project project = AntUtil.getProject();
@@ -56,6 +48,14 @@ public class WarTask {
 		war.setWebxml(webxml);
 
 		war.execute();
+	}
+
+	public static void war(
+		String baseDir, String destination, String excludes, String webxml) {
+
+		war(
+			new File(baseDir), new File(destination), excludes,
+			new File(webxml));
 	}
 
 }

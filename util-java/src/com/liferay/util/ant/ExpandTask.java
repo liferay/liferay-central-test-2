@@ -33,10 +33,6 @@ import org.apache.tools.ant.taskdefs.Expand;
  */
 public class ExpandTask {
 
-	public static void expand(String source, String destination) {
-		expand(new File(source), new File(destination));
-	}
-
 	public static void expand(File source, File destination) {
 		Expand expand = new Expand();
 
@@ -45,6 +41,10 @@ public class ExpandTask {
 		expand.setDest(destination);
 
 		expand.execute();
+	}
+
+	public static void expand(String source, String destination) {
+		expand(new File(source), new File(destination));
 	}
 
 }

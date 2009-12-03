@@ -34,10 +34,6 @@ import org.apache.tools.ant.taskdefs.UpToDate;
  */
 public class UpToDateTask {
 
-	public static boolean isUpToDate(String source, String target) {
-		return isUpToDate(new File(source), new File(target));
-	}
-
 	public static boolean isUpToDate(File source, File target) {
 		if (!source.exists() || !target.exists()) {
 			return false;
@@ -60,6 +56,10 @@ public class UpToDateTask {
 		else {
 			return false;
 		}
+	}
+
+	public static boolean isUpToDate(String source, String target) {
+		return isUpToDate(new File(source), new File(target));
 	}
 
 }

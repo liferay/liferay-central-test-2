@@ -34,10 +34,6 @@ import org.apache.tools.ant.types.FileSet;
  */
 public class DeleteTask {
 
-	public static void deleteDirectory(String dir) {
-		deleteDirectory(new File(dir));
-	}
-
 	public static void deleteDirectory(File dir) {
 		Delete delete = new Delete();
 
@@ -48,8 +44,8 @@ public class DeleteTask {
 		delete.execute();
 	}
 
-	public static void deleteFile(String file) {
-		deleteFile(new File(file));
+	public static void deleteDirectory(String dir) {
+		deleteDirectory(new File(dir));
 	}
 
 	public static void deleteFile(File file) {
@@ -62,10 +58,8 @@ public class DeleteTask {
 		delete.execute();
 	}
 
-	public static void deleteFiles(
-		String dir, String includes, String excludes) {
-
-		deleteFiles(new File(dir), includes, excludes);
+	public static void deleteFile(String file) {
+		deleteFile(new File(file));
 	}
 
 	public static void deleteFiles(File dir, String includes, String excludes) {
@@ -83,6 +77,12 @@ public class DeleteTask {
 		delete.addFileset(fileSet);
 
 		delete.execute();
+	}
+
+	public static void deleteFiles(
+		String dir, String includes, String excludes) {
+
+		deleteFiles(new File(dir), includes, excludes);
 	}
 
 }
