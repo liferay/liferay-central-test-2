@@ -1456,8 +1456,18 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					continue;
 				}
 
-				DLFileEntry fileEntry =
-					(DLFileEntry)context.getZipEntryAsObject(path);
+				DLFileEntry fileEntry = null;
+
+				try {
+					fileEntry = (DLFileEntry)context.getZipEntryAsObject(path);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("No file entry found for path " + path);
+					}
+
+					continue;
+				}
 
 				String binPath = fileEntryEl.attributeValue("bin-path");
 

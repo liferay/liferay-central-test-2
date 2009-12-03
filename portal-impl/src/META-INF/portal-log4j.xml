@@ -236,6 +236,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.lar">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.lucene">
 		<priority value="INFO" />
 	</category>
@@ -620,6 +624,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portlet.documentlibrary.lar">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portlet.documentlibrary.webdav">
 		<priority value="WARN" />
 	</category>
@@ -632,7 +640,7 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl">
+	<category name="com.liferay.portlet.journal.lar">
 		<priority value="WARN" />
 	</category>
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.lar;
 
+import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -116,10 +117,25 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					DLFileEntry.class, fileEntry.getFileEntryId());
 			}
 
-			InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
-				fileEntry.getCompanyId(), fileEntry.getUserId(),
-				fileEntry.getGroupId(), fileEntry.getFolderId(),
-				fileEntry.getName());
+			InputStream is = null;
+
+			try {
+				is = DLFileEntryLocalServiceUtil.getFileAsStream(
+					fileEntry.getCompanyId(), fileEntry.getUserId(),
+					fileEntry.getGroupId(), fileEntry.getFolderId(),
+					fileEntry.getName());
+			}
+			catch (NoSuchFileException nsfe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No file found for file entry " +
+							fileEntry.getFileEntryId());
+				}
+
+				fileEntryEl.detach();
+
+				return;
+			}
 
 			context.addZipEntry(getFileEntryBinPath(context, fileEntry), is);
 			context.addZipEntry(path, fileEntry);
