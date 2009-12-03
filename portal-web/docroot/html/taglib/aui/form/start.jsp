@@ -38,7 +38,7 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 <c:if test="<%= Validator.isNull(onSubmit) %>">
 	<script type="text/javascript">
 		function <%= randomNamespace %>saveForm() {
-			submitForm(document.<%= namespace %>fm);
+			submitForm(document.<%= name %>);
 		}
 	</script>
 </c:if>
