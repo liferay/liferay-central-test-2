@@ -78,7 +78,7 @@ public class CopyTask {
 	}
 
 	public static void copyDirectory(String source, String destination) {
-		copyDirectory(new File(source), new File(destination));
+		copyDirectory(source, destination, null, null);
 	}
 
 	public static void copyDirectory(
@@ -98,10 +98,11 @@ public class CopyTask {
 	}
 
 	public static void copyFile(
-		File source, File destination, boolean overwrite,
+		File sourceFile, File destinationDir, boolean overwrite,
 		boolean preserveLastModified) {
 
-		copyFile(source, destination, null, overwrite, preserveLastModified);
+		copyFile(
+			sourceFile, destinationDir, null, overwrite, preserveLastModified);
 	}
 
 	public static void copyFile(
@@ -136,24 +137,6 @@ public class CopyTask {
 		}
 
 		copy.execute();
-	}
-
-	public static void copyFile(
-		String source, String destination, boolean overwrite,
-		boolean preserveLastModified) {
-
-		copyFile(
-			new File(source), new File(destination), overwrite,
-			preserveLastModified);
-	}
-
-	public static void copyFile(
-		String source, String destination, Map<String, String> filterMap,
-		boolean overwrite, boolean preserveLastModified) {
-
-		copyFile(
-			new File(source), new File(destination), null, overwrite,
-			preserveLastModified);
 	}
 
 }
