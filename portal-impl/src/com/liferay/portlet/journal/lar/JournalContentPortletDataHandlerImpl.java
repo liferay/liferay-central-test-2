@@ -148,7 +148,9 @@ public class JournalContentPortletDataHandlerImpl
 			}
 			catch (NoSuchArticleException nsae) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(nsae);
+					_log.warn(
+						"No approved article found with group id " +
+							articleGroupId + " and article id " + articleId);
 				}
 			}
 
