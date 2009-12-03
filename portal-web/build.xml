@@ -510,7 +510,7 @@
 					<replacevalue><![CDATA[base: '<%= themeDisplay.getPathJavaScript() %>/aui/lib/yui/',]]></replacevalue>
 				</replace>
 
-				<replaceregexp match="[\t\n]+'(?:\w+|-)+-css': \{[^}]+\},|(, +)?'(?:\w+|-)+-css'(, +)?" replace="" flags="g" byline="false">
+				<replaceregexp match="[\t\n]+'(?:\w+|-)+-css': \{[^}]+\},|(, +)?'(?:\w+|-)+-css'" replace="" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"
