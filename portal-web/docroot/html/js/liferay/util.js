@@ -192,7 +192,13 @@ Liferay.Util = {
 	checkTab: function(box) {
 		if ((document.all) && (event.keyCode == 9)) {
 			box.selection = document.selection.createRange();
-			setTimeout('Liferay.Util.processTab("' + box.id + '")', 0);
+
+			setTimeout(
+				function() {
+					Liferay.Util.processTab(box.id);
+				},
+				0
+			);
 		}
 	},
 
@@ -880,7 +886,12 @@ Liferay.Util = {
 		if (Liferay.Util.submitCountdown > 0) {
 			Liferay.Util.submitCountdown--;
 
-			setTimeout('Liferay.Util.resubmitCountdown("' + formName + '")', 1000);
+			setTimeout(
+				function() {
+					Liferay.Util.resubmitCountdown(formName);
+				},
+				1000
+			);
 		}
 		else {
 			Liferay.Util.submitCountdown = 0;
@@ -1254,7 +1265,14 @@ function submitForm(form, action, singleSubmit) {
 	if (Liferay.Util.submitCountdown == 0) {
 		Liferay.Util.submitCountdown = 10;
 
-		setTimeout('Liferay.Util.resubmitCountdown("' + form.name + '")', 1000);
+		setTimeout(
+			function() {
+				if (form) {
+					Liferay.Util.resubmitCountdown(form.name);
+				}
+			},
+			1000
+		);
 
 		if ((singleSubmit == null) || singleSubmit) {
 			Liferay.Util.submitCountdown++;
