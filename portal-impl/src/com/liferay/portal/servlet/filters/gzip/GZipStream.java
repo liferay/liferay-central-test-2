@@ -47,26 +47,33 @@ public class GZipStream extends ServletOutputStream {
 		super();
 
 		_response = response;
-		_output = response.getOutputStream();
-		_bufferedOutput = new ByteArrayOutputStream();
-		_gzipOutputStream = new GZIPOutputStream(_bufferedOutput);
-		_closed = false;
+		_outputStream = response.getOutputStream();
+		_byteArrayOutputStream = new ByteArrayOutputStream();
+		_gzipOutputStream = new GZIPOutputStream(_byteArrayOutputStream);
 	}
 
 	public void close() throws IOException {
 		if (_closed) {
 			throw new IOException();
 		}
-		_gzipOutputStream.finish();
-		byte[] compressedBytes = _bufferedOutput.toByteArray();
-		_response.setContentLength(compressedBytes.length);
-		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
-		_output.write(compressedBytes);
 
-		_output.flush();
-		_output.close();
+		_gzipOutputStream.finish();
+
+		byte[] bytes = _byteArrayOutputStream.toByteArray();
+
+		_response.setContentLength(bytes.length);
+		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
+
+		_outputStream.write(bytes);
+
+		_outputStream.flush();
+		_outputStream.close();
 
 		_closed = true;
+	}
+
+	public boolean closed() {
+		return _closed;
 	}
 
 	public void flush() throws IOException {
@@ -77,16 +84,7 @@ public class GZipStream extends ServletOutputStream {
 		_gzipOutputStream.flush();
 	}
 
-	public void write(int b) throws IOException {
-		if (_closed) {
-			throw new IOException();
-		}
-
-		// LEP-649
-
-		//_checkBufferSize(1);
-
-		_gzipOutputStream.write((byte)b);
+	public void reset() {
 	}
 
 	public void write(byte b[]) throws IOException {
@@ -110,21 +108,26 @@ public class GZipStream extends ServletOutputStream {
 		}
 	}
 
-	public boolean closed() {
-		return _closed;
-	}
+	public void write(int b) throws IOException {
+		if (_closed) {
+			throw new IOException();
+		}
 
-	public void reset() {
+		// LEP-649
+
+		//_checkBufferSize(1);
+
+		_gzipOutputStream.write((byte)b);
 	}
 
 	private static final String _GZIP = "gzip";
 
 	private static Log _log = LogFactoryUtil.getLog(GZipStream.class);
 
-	private HttpServletResponse _response = null;
-	private ServletOutputStream _output = null;
-	private ByteArrayOutputStream _bufferedOutput = null;
-	private GZIPOutputStream _gzipOutputStream = null;
-	private boolean _closed = false;
+	private ByteArrayOutputStream _byteArrayOutputStream;
+	private boolean _closed;
+	private GZIPOutputStream _gzipOutputStream;
+	private ServletOutputStream _outputStream;
+	private HttpServletResponse _response;
 
 }
