@@ -82,7 +82,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 	}
 	%>
 
-	<div class="lfr-floating-container lfr-language-selector" id="<%= randomNamespace %>languageSelector">
+	<div class="lfr-floating-container lfr-language-selector aui-helper-hidden" id="<%= randomNamespace %>languageSelector">
 		<div class="lfr-panel aui-form">
 			<div class="lfr-panel-titlebar">
 				<h3 class="lfr-panel-title"><span><liferay-ui:message key="other-languages" /></span></h3>
@@ -238,7 +238,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 							var container = instance.get('container');
 							var positionHelper = instance._positionHelper;
 
-							if (container.parent() != positionHelper) {
+							if (container.get('parentNode') != positionHelper) {
 								positionHelper.append(container);
 							}
 						}

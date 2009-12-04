@@ -275,7 +275,6 @@
 }
 
 .js .lfr-floating-container {
-	display: none;
 	position: absolute;
 }
 
@@ -312,36 +311,14 @@
 
 /* ---------- Panel pagination ---------- */
 
-.js .lfr-panel-paging .lfr-panel-content ul {
-	display: none;
-}
-
-.lfr-paging-container {
+.lfr-panel-content .aui-paginator-container {
 	background: #cfd2d5;
 	border-bottom: 1px solid #dcdee0;
 	border-top: 1px solid #dcdee0;
 	text-align: center;
 }
 
-.lfr-panel-content .lfr-paging-container li {
-	display: inline;
-}
-
-.ie .lfr-panel-content .lfr-paging-container li {
-	zoom: 1;
-}
-
-.js .lfr-panel-paging .lfr-panel-content .current-set, .js .lfr-panel-paging .lfr-paging-container ul {
-	display: block;
-	position: relative;
-	visibility: visible;
-}
-
-.js .lfr-panel-paging .lfr-paging-container ul {
-	padding-top: 1px;
-}
-
-.lfr-panel-content .lfr-paging-container li a {
+.lfr-panel-content .aui-paginator-page-container .aui-paginator-page-link {
 	background: none;
 	border: 1px solid #CFD2D5;
 	display: inline-block;
@@ -351,26 +328,22 @@
 	width: auto;
 }
 
-.lfr-panel-content .lfr-paging-container li a:hover {
+.lfr-panel-content .aui-paginator-page-container .aui-paginator-page-link.aui-paginator-current-page:hover {
 	background: #5094d7 url(<%= themeImagesPath %>/application/current_page_bg.png) repeat-x 0 0;
 	border-color: #31659c #396ea8 #4c8ccb;
 	color: #fff;
 	font-weight: bold;
 }
 
-.lfr-panel-content .lfr-paging-container li.lfr-page-current a {
+.lfr-panel-content .aui-paginator-page-container .aui-paginator-page-link.aui-paginator-current-page {
 	background: #99a7b3 url(<%= themeImagesPath %>/application/current_page_hover_bg.png) repeat-x 0 0;
 	border-color: #6b7785 #7c8994 #919fa9;
 	color: #fff;
 	font-weight: bold;
 }
 
-.lfr-panel-content .lfr-paging-container {
+.lfr-panel-content .aui-paginator-container {
 	overflow: hidden;
-}
-
-.ie6 .lfr-panel-content .lfr-paging-container {
-	height: 1%;
 }
 
 /* ---------- Position helper ---------- */
