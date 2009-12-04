@@ -124,9 +124,9 @@ public class EditWorkflowTaskAction extends PortletAction {
 
 		long workflowTaskId = ParamUtil.getLong(
 			actionRequest, "workflowTaskId");
-		String comment = ParamUtil.getString(actionRequest, "comment");
 		String transitionName = ParamUtil.getString(
 			actionRequest, "transitionName");
+		String comment = ParamUtil.getString(actionRequest, "comment");
 
 		WorkflowTaskManagerUtil.completeWorkflowTask(
 			themeDisplay.getUserId(), workflowTaskId, transitionName, comment,

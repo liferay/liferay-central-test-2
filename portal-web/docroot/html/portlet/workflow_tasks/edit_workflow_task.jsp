@@ -40,36 +40,38 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />commit(cmd, transitionName) {
-		AUI().ready('dialog', function(A) {
-
-		    var dialog = new A.Dialog({
-		        bodyContent: '<textarea id="<%= renderResponse.getNamespace() + "comment" %>" rows="10" cols="55"></textarea>',
-		        centered: true,
-		        modal: true,
-		        title: '<liferay-ui:message key="comments" />',
-		        width: 400,
-		        buttons: [
-		            {
-		                text: 'OK',
-		                handler: function() {
-		            		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-		            		document.<portlet:namespace />fm.<portlet:namespace />comment.value = A.one('#<%= renderResponse.getNamespace() + "comment" %>').val();
-		            		document.<portlet:namespace />fm.<portlet:namespace />transitionName.value = transitionName;
-		            		submitForm(document.<portlet:namespace />fm);
-		                }
-		            },
-		            {
-		                text: 'Cancel',
-		                handler: function() {
-		                    this.close();
-		                }
-		            }
-		        ]
-		    })
-		    .render();
-
-		});
+	function <portlet:namespace />updateWorkflowTask(cmd, transitionName) {
+		AUI().ready(
+			'dialog',
+			function(A) {
+				var dialog = new A.Dialog(
+					{
+						bodyContent: '<textarea id="<%= renderResponse.getNamespace() + "comment" %>" rows="10" cols="55"></textarea>',
+						buttons: [
+							{
+								handler: function() {
+									document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+									document.<portlet:namespace />fm.<portlet:namespace />transitionName.value = transitionName;
+									document.<portlet:namespace />fm.<portlet:namespace />comment.value = A.one('#<%= renderResponse.getNamespace() + "comment" %>').val();
+									submitForm(document.<portlet:namespace />fm);
+								},
+								text: '<liferay-ui:message key="ok" />'
+							},
+							{
+								handler: function() {
+									this.close();
+								},
+								text: '<liferay-ui:message key="cancel" />'
+							}
+						],
+						centered: true,
+						modal: true,
+						title: '<liferay-ui:message key="comments" />',
+						width: 400
+					}
+				).render();
+			}
+		);
 	}
 </script>
 
@@ -85,8 +87,8 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="workflowTaskId" type="hidden" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
-	<aui:input name="comment" type="hidden" />
 	<aui:input name="transitionName" type="hidden" />
+	<aui:input name="comment" type="hidden" />
 
 	<aui:fieldset>
 		<aui:field-wrapper inlineLabel="left" label="name">
@@ -149,7 +151,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 				<%
 				}
 
-				String taglibOnClick = renderResponse.getNamespace() + "commit('"+ Constants.ASSIGN +"');";
+				String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.ASSIGN +"');";
 				%>
 
 				<aui:button name="assignButton" onClick="<%= taglibOnClick %>" type="button" value="assign" />
@@ -171,7 +173,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 						message = transitionName;
 					}
 
-					String taglibOnClick = renderResponse.getNamespace() + "commit('"+ Constants.SAVE +"', '" + message + "');";
+					String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.SAVE +"', '" + UnicodeFormatter.toString(message) + "');";
 				%>
 
 					<aui:button name='<%= message + "Button" %>' onClick="<%= taglibOnClick %>" type="button" value="<%= message %>" />
