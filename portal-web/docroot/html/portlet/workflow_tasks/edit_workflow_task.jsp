@@ -183,5 +183,5 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	userId="<%= user.getUserId() %>"
 	subject="<%= workflowTask.getName() %>"
 	redirect="<%= currentURL %>"
-	ratingsEnabled="true"
+	ratingsEnabled="<%= true %>"
 />
