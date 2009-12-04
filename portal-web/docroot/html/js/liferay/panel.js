@@ -6,12 +6,12 @@ AUI().add(
 		 * OPTIONS
 		 *
 		 * Optional
-		 * container {string|object}: A jQuery selector of the panel container if there are multiple panels handled by this one.
-		 * panel {string|object}: A jQuery selector of the panel.
-		 * panelContent {string|object}: A jQuery selector of the content section of the panel.
-		 * header {string|object}: A jQuery selector of the panel's header area.
-		 * titles {string|object}: A jQuery selector of the titles in the panel.
-		 * footer {string|object}: A jQuery selector of the panel's footer area.
+		 * container {string|object}: A selector of the panel container if there are multiple panels handled by this one.
+		 * panel {string|object}: A selector of the panel.
+		 * panelContent {string|object}: A selector of the content section of the panel.
+		 * header {string|object}: A selector of the panel's header area.
+		 * titles {string|object}: A selector of the titles in the panel.
+		 * footer {string|object}: A selector of the panel's footer area.
 		 * accordion {boolean}: Whether or not the panels have accordion behavior (meaning only one panel can be open at a time).
 		 * collapsible {boolean}: Whether or not the panel can be collapsed by clicking the title.
 		 *
@@ -40,22 +40,22 @@ AUI().add(
 						persistState: false
 					};
 
-					config = jQuery.extend(defaults, config);
+					config = A.merge(defaults, config);
 
 					instance._inContainer = false;
-					instance._container = jQuery(document.body);
+					instance._container = A.getBody();
 
 					if (config.container) {
-						instance._container = jQuery(config.container);
+						instance._container = A.one(config.container);
 						instance._inContainer = true;
 					}
 
-					instance._panel = instance._container.find(config.panel);
+					instance._panel = instance._container.all(config.panel);
 
-					instance._panelContent = instance._panel.find(config.panelContent);
-					instance._header = instance._panel.find(config.header);
-					instance._footer = instance._panel.find(config.footer);
-					instance._panelTitles = instance._panel.find(config.titles);
+					instance._panelContent = instance._panel.all(config.panelContent);
+					instance._header = instance._panel.all(config.header);
+					instance._footer = instance._panel.all(config.footer);
+					instance._panelTitles = instance._panel.all(config.titles);
 					instance._accordion = config.accordion;
 
 					instance._collapsible = config.collapsible;
@@ -66,16 +66,16 @@ AUI().add(
 
 						Liferay.Util.disableSelection(instance._panelTitles);
 
-						instance._panelTitles.css(
+						instance._panelTitles.setStyle(
 							{
 								cursor: 'pointer'
 							}
 						);
 
-						var collapsedPanels = instance._panel.filter('.lfr-collapsed');
+						var collapsedPanels = instance._panel.all('.lfr-collapsed');
 
-						if (instance._accordion && !collapsedPanels.length) {
-							instance._panel.slice(1).addClass('lfr-collapsed');
+						if (instance._accordion && !collapsedPanels.size()) {
+							instance._panel.item(0).addClass('lfr-collapsed');
 						}
 					}
 
@@ -89,23 +89,23 @@ AUI().add(
 					var instance = this;
 
 					instance._panelTitles.each(
-						function(i, n) {
-							var title = jQuery(this);
-							var panel = title.parents('.lfr-panel:first');
+						function(node, i) {
+							var panel = node.ancestor('.lfr-panel');
 
 							if (panel.hasClass('lfr-extended')) {
-								var toggler = title.find('.lfr-panel-button');
+								var toggler = node.all('.lfr-panel-button');
 
-								if (!toggler.length) {
-									title.append('<a class="lfr-panel-button" href="javascript:;"></a>');
+								if (!toggler.size()) {
+									node.append('<a class="lfr-panel-button" href="javascript:;"></a>');
 								}
 							}
 						}
 					);
 
-					instance._panelTitles.mousedown(
+					instance._panelTitles.on(
+						'mousedown',
 						function(event) {
-							instance.onTitleClick(this);
+							instance.onTitleClick(event.target);
 						}
 					);
 				},
@@ -113,7 +113,7 @@ AUI().add(
 				onTitleClick: function(el) {
 					var instance = this;
 
-					var currentContainer = jQuery(el).parents('.lfr-panel');
+					var currentContainer = A.one(el).ancestor('.lfr-panel');
 
 					currentContainer.toggleClass('lfr-collapsed');
 
@@ -121,12 +121,14 @@ AUI().add(
 						var siblings = currentContainer.siblings('.lfr-panel');
 
 						siblings.each(
-							function (i, n) {
-								if (this.id) {
-									instance._saveState(this.id, 'closed');
+							function (node, i) {
+								var id = node.attr('id');
+
+								if (id) {
+									instance._saveState(id, 'closed');
 								}
 
-								jQuery(this).addClass('lfr-collapsed');
+								node.addClass('lfr-collapsed');
 							}
 						);
 					}
@@ -151,10 +153,10 @@ AUI().add(
 
 						data[id] = state;
 
-						jQuery.ajax(
+						A.io(
+							themeDisplay.getPathMain() + '/portal/session_click',
 							{
-								url: themeDisplay.getPathMain() + '/portal/session_click',
-								data: data
+								data: A.toQueryString(data)
 							}
 						);
 					}
@@ -162,7 +164,7 @@ AUI().add(
 			}
 		);
 
-		jQuery.extend(
+		A.mix(
 			Panel,
 			{
 				get: function(id) {
