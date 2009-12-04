@@ -38,10 +38,10 @@ long[] userGroupIdsArray = StringUtil.split(userGroupIds, 0L);
 int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 %>
 
-<input name="<portlet:namespace />userGroupIds" type="hidden" value="<%= HtmlUtil.escape(userGroupIds) %>" />
-<input name="<portlet:namespace />userGroupIdsPos" type="hidden" value="<%= userGroupIdsPos %>" />
-<input name="<portlet:namespace />userGroupIdsPosValue" type="hidden" value="" />
-<input name="<portlet:namespace />userGroupIdActionIds" type="hidden" value="" />
+<aui:input name="userGroupIds" type="hidden" value="<%= userGroupIds %>" />
+<aui:input name="userGroupIdsPos" type="hidden" value="<%= userGroupIdsPos %>" />
+<aui:input name="userGroupIdsPosValue" type="hidden" />
+<aui:input name="userGroupIdActionIds" type="hidden" />
 
 <c:choose>
 	<c:when test="<%= userGroupIdsArray.length == 0 %>">
@@ -111,7 +111,7 @@ int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 
 			<div class="separator"><!-- --></div>
 
-			<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserGroupPermissions();" />
+			<aui:button onClick='<%= renderResponse.getNamespace() + "updateUserGroupPermissions();" %>' value="update-permissions" />
 
 			<br /><br />
 
@@ -170,15 +170,20 @@ int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 				rightList="<%= rightList %>"
 			/>
 
-			<br />
+			<aui:button-row>
 
-			<div class="aui-button-holder">
-				<input class="previous" <%= userGroupIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos - 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+				<%
+				String previousOnClick = renderResponse.getNamespace() + "saveUserGroupPermissions(" + (userGroupIdsPos - 1) + ", '" + userGroupIdsArray[userGroupIdsPos] + "');";
+				String nextOnClick = renderResponse.getNamespace() + "saveUserGroupPermissions(" + (userGroupIdsPos + 1) + ", '" + userGroupIdsArray[userGroupIdsPos] + "');";
+				String finishedOnClick = renderResponse.getNamespace() + "saveUserGroupPermissions(-1, '"+ userGroupIdsArray[userGroupIdsPos] + "');";
+				%>
 
-				<input class="next" <%= userGroupIdsPos + 1 < userGroupIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos + 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+				<aui:button cssClass="previous" disabled="<%= userGroupIdsPos <= 0 %>" onClick='<%= previousOnClick %>' value="previous" />
 
-				<input class="finished" type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');" />
-			</div>
+				<aui:button cssClass="next" disabled="<%= userGroupIdsPos + 1 >= userGroupIdsArray.length %>" onClick='<%= nextOnClick %>' value="next" />
+
+				<aui:button cssClass="finished" onClick="<%= finishedOnClick %>" value="finished"  />
+			</aui:button-row>
 		</div>
 	</c:otherwise>
 </c:choose>

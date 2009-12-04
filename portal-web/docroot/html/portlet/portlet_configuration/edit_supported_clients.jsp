@@ -41,62 +41,42 @@ Set allPortletModes = portlet.getAllPortletModes();
 	<liferay-util:param name="tabs1" value="supported-clients" />
 </liferay-util:include>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_supported_clients" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-<input name="<portlet:namespace />returnToFullPageURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(returnToFullPageURL) %>" />
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletResource) %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editSupportedClientsURL">
+	<portlet:param name="struts_action" value="/portlet_configuration/edit_supported_clients" />
+</portlet:actionURL>
 
-<%
-Iterator itr = allPortletModes.iterator();
+<aui:form action="<%= editSupportedClientsURL %>" method="post" name=">fm">
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="returnToFullPageURL" type="hidden" value="<%= returnToFullPageURL %>" />
+	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 
-while (itr.hasNext()) {
-	String curPortletMode = (String)itr.next();
+	<%
+	Iterator itr = allPortletModes.iterator();
 
-	String mobileDevicesParam = "portlet-setup-supported-clients-mobile-devices-" + curPortletMode;
-	boolean mobileDevicesDefault = portlet.hasPortletMode(ContentTypes.XHTML_MP, PortletModeFactory.getPortletMode(curPortletMode));
+	while (itr.hasNext()) {
+		String curPortletMode = (String)itr.next();
 
-	boolean mobileDevices = GetterUtil.getBoolean(portletSetup.getValue(mobileDevicesParam, String.valueOf(mobileDevicesDefault)));
-%>
+		String mobileDevicesParam = "portlet-setup-supported-clients-mobile-devices-" + curPortletMode;
+		boolean mobileDevicesDefault = portlet.hasPortletMode(ContentTypes.XHTML_MP, PortletModeFactory.getPortletMode(curPortletMode));
 
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="portlet-mode" />
-		</td>
-		<td>
-			<strong><liferay-ui:message key="<%= curPortletMode %>" /></strong>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="regular-browsers" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param='<%= "regularBrowsersEnabled" + curPortletMode %>' defaultValue="<%= true %>" disabled="<%= true %>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="mobile-devices" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="<%= mobileDevicesParam %>" defaultValue="<%= mobileDevices %>" />
-		</td>
-	</tr>
-	</table>
+		boolean mobileDevices = GetterUtil.getBoolean(portletSetup.getValue(mobileDevicesParam, String.valueOf(mobileDevicesDefault)));
+	%>
 
-	<c:if test="<%= itr.hasNext() %>">
-		<br />
-	</c:if>
+		<aui:fieldset>
+			<aui:legend label='<%= LanguageUtil.get(pageContext, "portlet-mode") + ": " + LanguageUtil.get(pageContext, curPortletMode) %>' />
 
-<%
-}
-%>
+			<aui:input inlineLabel="left" label="regular-browsers" name='<%= "regularBrowsersEnabled" + curPortletMode %>' type="checkbox" value="<%= true %>" disabled="<%= true %>" />
 
-<br />
+			<aui:input inlineLabel="left" label="mobile-devices" name="<%= mobileDevicesParam %>" type="checkbox" value="<%= mobileDevices %>" />
+		</aui:fieldset>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+	<%
+	}
+	%>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-</form>
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>

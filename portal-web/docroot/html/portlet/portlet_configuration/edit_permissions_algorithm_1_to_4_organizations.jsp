@@ -39,10 +39,10 @@ long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
 int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 %>
 
-<input name="<portlet:namespace />organizationIds" type="hidden" value="<%= HtmlUtil.escape(organizationIds) %>" />
-<input name="<portlet:namespace />organizationIdsPos" type="hidden" value="<%= organizationIdsPos %>" />
-<input name="<portlet:namespace />organizationIdsPosValue" type="hidden" value="" />
-<input name="<portlet:namespace />organizationIdActionIds" type="hidden" value="" />
+<aui:input name="organizationIds" type="hidden" value="<%= organizationIds %>" />
+<aui:input name="organizationIdsPos" type="hidden" value="<%= organizationIdsPos %>" />
+<aui:input name="organizationIdsPosValue" type="hidden" />
+<aui:input name="organizationIdActionIds" type="hidden" />
 
 <c:choose>
 	<c:when test="<%= organizationIdsArray.length == 0 %>">
@@ -156,7 +156,7 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 
 			<div class="separator"><!-- --></div>
 
-			<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateOrganizationPermissions();" />
+			<aui:button onClick='<%= renderResponse.getNamespace() + "updateOrganizationPermissions();" %>' value="update-permissions" />
 
 			<br /><br />
 
@@ -215,15 +215,20 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 				rightList="<%= rightList %>"
 			/>
 
-			<br />
+			<aui:button-row>
 
-			<div class="aui-button-holder">
-				<input class="previous" <%= organizationIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos - 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
+				<%
+				String previousOnClick = renderResponse.getNamespace() + "saveOrganizationPermissions(" + (organizationIdsPos - 1) + ", '" + organizationIdsArray[organizationIdsPos] + "');";
+				String nextOnClick = renderResponse.getNamespace() + "saveOrganizationPermissions(" + (organizationIdsPos + 1) + ", '" + organizationIdsArray[organizationIdsPos] + "');";
+				String finishedOnClick = renderResponse.getNamespace() + "saveOrganizationPermissions(-1, '"+ organizationIdsArray[organizationIdsPos] + "');";
+				%>
 
-				<input class="next" <%= organizationIdsPos + 1 < organizationIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos + 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
+				<aui:button cssClass="previous" disabled="<%= organizationIdsPos <= 0 %>" onClick='<%= previousOnClick %>' value="previous" />
 
-				<input class="finished" type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveOrganizationPermissions(-1, '<%= organizationIdsArray[organizationIdsPos] %>');" />
-			</div>
+				<aui:button cssClass="next" disabled="<%= organizationIdsPos + 1 >= organizationIdsArray.length %>" onClick='<%= nextOnClick %>' value="next" />
+
+				<aui:button cssClass="finished" onClick="<%= finishedOnClick %>" value="finished"  />
+			</aui:button-row>
 		</div>
 
 		<%--<table class="lfr-table">

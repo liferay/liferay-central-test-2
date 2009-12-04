@@ -41,20 +41,20 @@ Group group = layout.getGroup();
 	<liferay-util:param name="tabs1" value="scope" />
 </liferay-util:include>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_scope" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-<input name="<portlet:namespace />returnToFullPageURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(returnToFullPageURL) %>" />
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletResource) %>">
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editScopeURL">
+	<portlet:param name="struts_action" value="/portlet_configuration/edit_scope" />
+	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
+</portlet:actionURL>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="scope" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />scopeLayoutId">
-			<option <%= (scopeLayoutId == 0) ? "selected" : "" %> value="0"> <liferay-ui:message key="default" /></option>
-			<option <%= (scopeLayoutId == layout.getLayoutId()) ? "selected" : "" %> value="<%= layout.getLayoutId() %>"><liferay-ui:message key="current-page" /> (<%= HtmlUtil.escape(layout.getName(locale)) %>)</option>
+<aui:form action="<%= editScopeURL %>" method="post" name="fm">
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="returnToFullPageURL" type="hidden" value="<%= returnToFullPageURL %>" />
+	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
+
+	<aui:fieldset>
+		<aui:select label="scope" name="scopeLayoutId">
+			<aui:option label="default" selected="<%= scopeLayoutId == 0 %>" value="0" />
+			<aui:option label='<%= LanguageUtil.get(pageContext,"current-page") + " (" + HtmlUtil.escape(layout.getName(locale)) + ")" %>' selected="<%= scopeLayoutId == layout.getLayoutId() %>" value="<%= layout.getLayoutId() %>" />
 
 			<%
 			for (Layout curLayout : LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
@@ -65,22 +65,19 @@ Group group = layout.getGroup();
 				if (curLayout.hasScopeGroup()) {
 			%>
 
-					<option <%= (scopeLayoutId == curLayout.getLayoutId()) ? "selected" : "" %> value="<%= curLayout.getLayoutId() %>"><%= HtmlUtil.escape(curLayout.getName(locale)) %></option>
+					<aui:option label="<%= HtmlUtil.escape(curLayout.getName(locale)) %>" selected="<%= scopeLayoutId == curLayout.getLayoutId() %>" value="<%= curLayout.getLayoutId() %>" />
 
 			<%
 				}
 			}
 			%>
 
-		</select>
-	</td>
-</tr>
-</table>
+		</aui:select>
+	</aui:fieldset>
 
-<br />
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
-
-</form>
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>

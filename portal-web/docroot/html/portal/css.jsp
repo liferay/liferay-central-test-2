@@ -1207,7 +1207,7 @@
 	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;
 }
 
-.lfr-input-text.flexible {
+.lfr-input-text.flexible, .lfr-input-text-container.flexible input{
 	width: auto;
 }
 

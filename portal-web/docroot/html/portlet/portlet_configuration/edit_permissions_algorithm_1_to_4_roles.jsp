@@ -50,10 +50,10 @@ else if (tabs2.equals("organization-roles")) {
 }
 %>
 
-<input name="<portlet:namespace />roleIds" type="hidden" value="<%= HtmlUtil.escape(roleIds) %>" />
-<input name="<portlet:namespace />roleIdsPos" type="hidden" value="<%= roleIdsPos %>" />
-<input name="<portlet:namespace />roleIdsPosValue" type="hidden" value="" />
-<input name="<portlet:namespace />roleIdActionIds" type="hidden" value="" />
+<aui:input name="roleIds" type="hidden" value="<%= roleIds %>" />
+<aui:input name="roleIdsPos" type="hidden" value="<%= roleIdsPos %>" />
+<aui:input name="roleIdsPosValue" type="hidden" />
+<aui:input name="roleIdActionIds" type="hidden" />
 
 <c:choose>
 	<c:when test="<%= roleIdsArray.length == 0 %>">
@@ -94,7 +94,7 @@ else if (tabs2.equals("organization-roles")) {
 
 		<div class="separator"><!-- --></div>
 
-		<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateRolePermissions();" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "updateRolePermissions();" %>' value="update-permissions" />
 
 		<br /><br />
 
@@ -211,15 +211,20 @@ else if (tabs2.equals("organization-roles")) {
 				rightList="<%= rightList %>"
 			/>
 
-			<br />
+			<aui:button-row>
 
-			<div class="aui-button-holder">
-				<input class="previous"<%= roleIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos - 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
+				<%
+				String previousOnClick = renderResponse.getNamespace() + "saveRolePermissions(" + (roleIdsPos - 1) + ", '" + roleIdsArray[roleIdsPos] + "');";
+				String nextOnClick = renderResponse.getNamespace() + "saveRolePermissions(" + (roleIdsPos + 1) + ", '" + roleIdsArray[roleIdsPos] + "');";
+				String finishedOnClick = renderResponse.getNamespace() + "saveRolePermissions(-1, '"+ roleIdsArray[roleIdsPos] + "');";
+				%>
 
-				<input class="next" <%= roleIdsPos + 1 < roleIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos + 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
+				<aui:button cssClass="previous" disabled="<%= roleIdsPos <= 0 %>" onClick='<%= previousOnClick %>' value="previous" />
 
-				<input class="finished" type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveRolePermissions(-1, '<%= roleIdsArray[roleIdsPos] %>');" />
-			</div>
+				<aui:button cssClass="next" disabled="<%= roleIdsPos + 1 >= roleIdsArray.length %>" onClick='<%= nextOnClick %>' value="next" />
+
+				<aui:button cssClass="finished" onClick="<%= finishedOnClick %>" value="finished"  />
+			</aui:button-row>
 		</div>
 	</c:otherwise>
 </c:choose>

@@ -245,214 +245,209 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 </script>
 
 <div class="edit-permissions">
-	<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-	<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="" />
-	<input name="<portlet:namespace />cur" type="hidden" value="<%= HtmlUtil.escapeAttribute(cur) %>" />
-	<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>" />
+	<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" />
+		<aui:input name="permissionsRedirect" type="hidden" />
+		<aui:input name="cur" type="hidden" value="<%= cur %>" />
+		<aui:input name="resourceId" type="hidden" value="<%= resource.getResourceId() %>" />
 
-	<c:choose>
-		<c:when test="<%= Validator.isNull(modelResource) %>">
-			<liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
-				<liferay-util:param name="tabs1" value="permissions" />
-			</liferay-util:include>
-		</c:when>
-		<c:otherwise>
-			<div>
-				<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= selResourceDescription %></a>
-			</div>
-
-			<br />
-		</c:otherwise>
-	</c:choose>
-
-	<%
-	String tabs2Names = "users,organizations,user-groups,regular-roles,community-roles,community,guest";
-
-	if (ResourceActionsUtil.isPortalModelResource(modelResource)) {
-		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
-		tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
-		tabs2Names = StringUtil.replace(tabs2Names, ",guest", StringPool.BLANK);
-	}
-	else if (modelResource.equals(Layout.class.getName())) {
-		// User layouts should not have community assignments
-
-		if (group.isUser()) {
-			tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
-			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
-		}
-		else if (group.isOrganization()) {
-			tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
-			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
-		}
-
-		// Private layouts should not have guest assignments
-
-		if (selLayout.isPrivateLayout()) {
-			tabs2Names = StringUtil.replace(tabs2Names, ",guest", StringPool.BLANK);
-		}
-	}
-	else {
-		if (group.isUser()) {
-			tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
-			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
-		}
-		else if (group.isOrganization()) {
-			tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
-			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
-		}
-	}
-	%>
-
-	<c:choose>
-		<c:when test="<%= Validator.isNull(modelResource) %>">
-			<liferay-ui:tabs
-				names="<%= tabs2Names %>"
-				param="tabs2"
-				url="<%= portletURL.toString() %>"
-			/>
-		</c:when>
-		<c:otherwise>
-			<liferay-ui:tabs
-				names="<%= tabs2Names %>"
-				param="tabs2"
-				url="<%= portletURL.toString() %>"
-				backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-			/>
-		</c:otherwise>
-	</c:choose>
-
-	<c:choose>
-		<c:when test='<%= tabs2.equals("users") %>'>
-			<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4_users.jsp" />
-		</c:when>
-		<c:when test='<%= tabs2.equals("organizations") %>'>
-			<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4_organizations.jsp" />
-		</c:when>
-		<c:when test='<%= tabs2.equals("user-groups") %>'>
-			<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4_user_groups.jsp" />
-		</c:when>
-		<c:when test='<%= tabs2.equals("regular-roles") || tabs2.equals("community-roles") || tabs2.equals("organization-roles") %>'>
-			<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4_roles.jsp" />
-		</c:when>
-		<c:when test='<%= tabs2.equals("community") || tabs2.equals("organization") %>'>
-			<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-			<input name="<portlet:namespace />groupIdActionIds" type="hidden" value="" />
-
-			<%
-			List permissions = PermissionLocalServiceUtil.getGroupPermissions(groupId, resource.getResourceId());
-
-			List actions1 = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
-			List actions2 = ResourceActionsUtil.getActions(permissions);
-
-			// Left list
-
-			List leftList = new ArrayList();
-
-			for (int i = 0; i < actions2.size(); i++) {
-				String actionId = (String)actions2.get(i);
-
-				leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
-			}
-
-			leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
-
-			// Right list
-
-			List rightList = new ArrayList();
-
-			for (int i = 0; i < actions1.size(); i++) {
-				String actionId = (String)actions1.get(i);
-
-				if (!actions2.contains(actionId)) {
-					rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
-				}
-			}
-
-			rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
-			%>
-
-			<div class="assign-permissions">
-				<liferay-ui:input-move-boxes
-					formName="fm"
-					leftTitle="what-they-can-do"
-					rightTitle="what-they-cant-do"
-					leftBoxName="current_actions"
-					rightBoxName="available_actions"
-					leftList="<%= leftList %>"
-					rightList="<%= rightList %>"
-				/>
+		<c:choose>
+			<c:when test="<%= Validator.isNull(modelResource) %>">
+				<liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
+					<liferay-util:param name="tabs1" value="permissions" />
+				</liferay-util:include>
+			</c:when>
+			<c:otherwise>
+				<div>
+					<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= selResourceDescription %></a>
+				</div>
 
 				<br />
+			</c:otherwise>
+		</c:choose>
 
-				<div class="aui-button-holder">
-					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGroupPermissions();" />
-				</div>
-			</div>
-		</c:when>
-		<c:when test='<%= tabs2.equals("guest") %>'>
-			<input name="<portlet:namespace />guestActionIds" type="hidden" value="" />
+		<%
+		String tabs2Names = "users,organizations,user-groups,regular-roles,community-roles,community,guest";
 
-			<%
-			User guestUser = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
+		if (ResourceActionsUtil.isPortalModelResource(modelResource)) {
+			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, ",guest", StringPool.BLANK);
+		}
+		else if (modelResource.equals(Layout.class.getName())) {
+			// User layouts should not have community assignments
 
-			List permissions = PermissionLocalServiceUtil.getUserPermissions(guestUser.getUserId(), resource.getResourceId());
-
-			List actions1 = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
-			List actions2 = ResourceActionsUtil.getActions(permissions);
-
-			List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
-
-			// Left list
-
-			List leftList = new ArrayList();
-
-			for (int i = 0; i < actions2.size(); i++) {
-				String actionId = (String)actions2.get(i);
-
-				if (!guestUnsupportedActions.contains(actionId)) {
-					leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
-				}
+			if (group.isUser()) {
+				tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
+			}
+			else if (group.isOrganization()) {
+				tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
+				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
 			}
 
-			leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
+			// Private layouts should not have guest assignments
 
-			// Right list
+			if (selLayout.isPrivateLayout()) {
+				tabs2Names = StringUtil.replace(tabs2Names, ",guest", StringPool.BLANK);
+			}
+		}
+		else {
+			if (group.isUser()) {
+				tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
+			}
+			else if (group.isOrganization()) {
+				tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
+				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
+			}
+		}
+		%>
 
-			List rightList = new ArrayList();
+		<c:choose>
+			<c:when test="<%= Validator.isNull(modelResource) %>">
+				<liferay-ui:tabs
+					names="<%= tabs2Names %>"
+					param="tabs2"
+					url="<%= portletURL.toString() %>"
+				/>
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:tabs
+					names="<%= tabs2Names %>"
+					param="tabs2"
+					url="<%= portletURL.toString() %>"
+					backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+				/>
+			</c:otherwise>
+		</c:choose>
 
-			for (int i = 0; i < actions1.size(); i++) {
-				String actionId = (String)actions1.get(i);
+		<c:choose>
+			<c:when test='<%= tabs2.equals("users") %>'>
+				<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4_users.jsp" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("organizations") %>'>
+				<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4_organizations.jsp" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("user-groups") %>'>
+				<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4_user_groups.jsp" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("regular-roles") || tabs2.equals("community-roles") || tabs2.equals("organization-roles") %>'>
+				<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4_roles.jsp" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("community") || tabs2.equals("organization") %>'>
+				<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+				<aui:input name="groupIdActionIds" type="hidden" />
 
-				if (!guestUnsupportedActions.contains(actionId)) {
+				<%
+				List permissions = PermissionLocalServiceUtil.getGroupPermissions(groupId, resource.getResourceId());
+
+				List actions1 = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
+				List actions2 = ResourceActionsUtil.getActions(permissions);
+
+				// Left list
+
+				List leftList = new ArrayList();
+
+				for (int i = 0; i < actions2.size(); i++) {
+					String actionId = (String)actions2.get(i);
+
+					leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+				}
+
+				leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
+
+				// Right list
+
+				List rightList = new ArrayList();
+
+				for (int i = 0; i < actions1.size(); i++) {
+					String actionId = (String)actions1.get(i);
+
 					if (!actions2.contains(actionId)) {
 						rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 					}
 				}
-			}
 
-			rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
-			%>
+				rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+				%>
 
-			<div class="assign-permissions">
-				<liferay-ui:input-move-boxes
-					formName="fm"
-					leftTitle="what-they-can-do"
-					rightTitle="what-they-cant-do"
-					leftBoxName="current_actions"
-					rightBoxName="available_actions"
-					leftList="<%= leftList %>"
-					rightList="<%= rightList %>"
-				/>
+				<div class="assign-permissions">
+					<liferay-ui:input-move-boxes
+						formName="fm"
+						leftTitle="what-they-can-do"
+						rightTitle="what-they-cant-do"
+						leftBoxName="current_actions"
+						rightBoxName="available_actions"
+						leftList="<%= leftList %>"
+						rightList="<%= rightList %>"
+					/>
 
-				<br />
-
-				<div class="aui-button-holder">
-					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGuestPermissions();" />
+					<aui:button-row>
+						<aui:button onClick='<%= renderResponse.getNamespace() + "saveGroupPermissions();" %>' value="save" />
+					</aui:button-row>
 				</div>
-			</div>
-		</c:when>
-	</c:choose>
+			</c:when>
+			<c:when test='<%= tabs2.equals("guest") %>'>
+				<input name="<portlet:namespace />guestActionIds" type="hidden" value="" />
 
-	</form>
+				<%
+				User guestUser = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
+
+				List permissions = PermissionLocalServiceUtil.getUserPermissions(guestUser.getUserId(), resource.getResourceId());
+
+				List actions1 = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
+				List actions2 = ResourceActionsUtil.getActions(permissions);
+
+				List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
+
+				// Left list
+
+				List leftList = new ArrayList();
+
+				for (int i = 0; i < actions2.size(); i++) {
+					String actionId = (String)actions2.get(i);
+
+					if (!guestUnsupportedActions.contains(actionId)) {
+						leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+					}
+				}
+
+				leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
+
+				// Right list
+
+				List rightList = new ArrayList();
+
+				for (int i = 0; i < actions1.size(); i++) {
+					String actionId = (String)actions1.get(i);
+
+					if (!guestUnsupportedActions.contains(actionId)) {
+						if (!actions2.contains(actionId)) {
+							rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+						}
+					}
+				}
+
+				rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+				%>
+
+				<div class="assign-permissions">
+					<liferay-ui:input-move-boxes
+						formName="fm"
+						leftTitle="what-they-can-do"
+						rightTitle="what-they-cant-do"
+						leftBoxName="current_actions"
+						rightBoxName="available_actions"
+						leftList="<%= leftList %>"
+						rightList="<%= rightList %>"
+					/>
+
+					<aui:button-row>
+						<aui:button onClick='<%= renderResponse.getNamespace() + "saveGuestPermissions();" %>' value="save" />
+					</aui:button-row>
+				</div>
+			</c:when>
+		</c:choose>
+	</aui:form>
 </div>

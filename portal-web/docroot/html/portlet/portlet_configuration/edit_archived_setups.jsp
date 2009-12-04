@@ -53,72 +53,76 @@ portletURL.setParameter("portletResource", portletResource);
 <liferay-ui:error exception="<%= NoSuchPortletItemException.class %>" message="the-setup-could-not-be-found" />
 <liferay-ui:error exception="<%= PortletItemNameException.class %>" message="please-enter-a-valid-setup-name" />
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-<input name="<portlet:namespace />returnToFullPageURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(returnToFullPageURL) %>" />
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletResource) %>">
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editArchivedSetupsURL">
+	<portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" />
+	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
+</portlet:actionURL>
 
-<%
-List<String> headerNames = new ArrayList<String>();
+<aui:form action="<%= editArchivedSetupsURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="returnToFullPageURL" type="hidden" value="<%= returnToFullPageURL %>" />
+	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 
-headerNames.add("name");
-headerNames.add("user");
-headerNames.add("modified-date");
-headerNames.add(StringPool.BLANK);
+	<%
+	List<String> headerNames = new ArrayList<String>();
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-archived-setups");
+	headerNames.add("name");
+	headerNames.add("user");
+	headerNames.add("modified-date");
+	headerNames.add(StringPool.BLANK);
 
-List archivedSetups = PortletItemLocalServiceUtil.getPortletItems(layout.getGroupId(), selPortlet.getRootPortletId(), com.liferay.portal.model.PortletPreferences.class.getName());
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-archived-setups");
 
-int total = archivedSetups.size();
+	List archivedSetups = PortletItemLocalServiceUtil.getPortletItems(layout.getGroupId(), selPortlet.getRootPortletId(), com.liferay.portal.model.PortletPreferences.class.getName());
 
-searchContainer.setTotal(total);
+	int total = archivedSetups.size();
 
-List results = ListUtil.subList(archivedSetups, searchContainer.getStart(), searchContainer.getEnd());
+	searchContainer.setTotal(total);
 
-searchContainer.setResults(results);
+	List results = ListUtil.subList(archivedSetups, searchContainer.getStart(), searchContainer.getEnd());
 
-List resultRows = searchContainer.getResultRows();
+	searchContainer.setResults(results);
 
-for (int i = 0; i < results.size(); i++) {
-	PortletItem portletItem = (PortletItem)results.get(i);
+	List resultRows = searchContainer.getResultRows();
 
-	ResultRow row = new ResultRow(new Object[] {portletItem, portletResource}, portletItem.getName(), i);
+	for (int i = 0; i < results.size(); i++) {
+		PortletItem portletItem = (PortletItem)results.get(i);
 
-	// Name
+		ResultRow row = new ResultRow(new Object[] {portletItem, portletResource}, portletItem.getName(), i);
 
-	row.addText(portletItem.getName());
+		// Name
 
-	// User
+		row.addText(portletItem.getName());
 
-	row.addText(PortalUtil.getUserName(portletItem.getUserId(), portletItem.getUserName()));
+		// User
 
-	// Date
+		row.addText(PortalUtil.getUserName(portletItem.getUserId(), portletItem.getUserName()));
 
-	row.addText(dateFormatDateTime.format(portletItem.getModifiedDate()));
+		// Date
 
-	// Action
+		row.addText(dateFormatDateTime.format(portletItem.getModifiedDate()));
 
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/portlet_configuration/archived_setup_action.jsp");
+		// Action
 
-	// Add result row
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/portlet_configuration/archived_setup_action.jsp");
 
-	resultRows.add(row);
-}
-%>
+		// Add result row
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		resultRows.add(row);
+	}
+	%>
 
-<div class="separator"><!-- --></div>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<liferay-ui:message key="archive-name-for-current-setup" />
+	<div class="separator"><!-- --></div>
 
-<input name="<portlet:namespace />name" size="20" type="text">
+	<liferay-ui:message key="archive-name-for-current-setup" />
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+	<aui:input name="name" size="20" type="text" />
 
-</form>
+	<aui:button type="submit" value="save" />
+</aui:form>
 
 <%
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "archived"), currentURL);

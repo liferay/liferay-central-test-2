@@ -49,65 +49,71 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 
 <liferay-ui:error key="duplicateMapping" message="several-shared-parameters-are-mapped-to-the-same-parameter" />
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_public_render_parameters" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(editPublicRenderParameterURL.toString()) %>" />
-<input name="<portlet:namespace />returnToFullPageURL" type="hidden" value="<%= HtmlUtil.escape(returnToFullPageURL) %>" />
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>">
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPRPURL">
+	<portlet:param name="struts_action" value="/portlet_configuration/edit_public_render_parameters" />
+	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
+</portlet:actionURL>
 
-<liferay-ui:search-container>
-	<liferay-ui:search-container-results
-		results="<%= ListUtil.subList(publicRenderParameterConfigurations, searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= publicRenderParameterConfigurations.size() %>"
-	/>
+<aui:form action="<%= editPRPURL %>" method="post" name="fm">
+	<aui:input name="redirect" type="hidden" value="<%= editPublicRenderParameterURL.toString() %>" />
+	<aui:input name="returnToFullPageURL" type="hidden" value="<%= returnToFullPageURL %>" />
+	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 
-	<liferay-ui:search-container-row
-		className="PublicRenderParameterConfiguration"
-		modelVar="publicRenderParameterConfiguration"
-	>
-		<liferay-ui:search-container-column-text
-			name="shared-parameter"
-			value="<%= publicRenderParameterConfiguration.getPublicRenderParameter().getIdentifier() %>"
+	<liferay-ui:search-container>
+		<liferay-ui:search-container-results
+			results="<%= ListUtil.subList(publicRenderParameterConfigurations, searchContainer.getStart(), searchContainer.getEnd()) %>"
+			total="<%= publicRenderParameterConfigurations.size() %>"
 		/>
 
-		<liferay-ui:search-container-column-text
-			name="ignore"
+		<liferay-ui:search-container-row
+			className="PublicRenderParameterConfiguration"
+			modelVar="publicRenderParameterConfiguration"
 		>
-			<input <%= publicRenderParameterConfiguration.isIgnore() ? "checked=\"true\"" : "" %> id="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" name="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" type="checkbox" />
-		</liferay-ui:search-container-column-text>
+			<liferay-ui:search-container-column-text
+				name="shared-parameter"
+				value="<%= publicRenderParameterConfiguration.getPublicRenderParameter().getIdentifier() %>"
+			/>
 
-		<liferay-ui:search-container-column-text
-			name="mapping"
-		>
-			<select <%= publicRenderParameterConfiguration.isIgnore() ? "disabled=\"disabled\"" : "" %> id="<%= publicRenderParameterConfiguration.getMappingKey() %>" name="<%= publicRenderParameterConfiguration.getMappingKey() %>">
-				<option value=""><liferay-ui:message key="no-mapping" /></option>
+			<liferay-ui:search-container-column-text
+				name="ignore"
+			>
+				<input <%= publicRenderParameterConfiguration.isIgnore() ? "checked=\"true\"" : "" %> id="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" name="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" type="checkbox" />
+			</liferay-ui:search-container-column-text>
 
-				<%
-				for (PublicRenderParameter publicRenderParameter : publicRenderParameters) {
-					String identifier = publicRenderParameter.getIdentifier();
+			<liferay-ui:search-container-column-text
+				name="mapping"
+			>
+				<select <%= publicRenderParameterConfiguration.isIgnore() ? "disabled=\"disabled\"" : "" %> id="<%= publicRenderParameterConfiguration.getMappingKey() %>" name="<%= publicRenderParameterConfiguration.getMappingKey() %>">
+					<option value=""><liferay-ui:message key="no-mapping" /></option>
 
-					if (identifier.equals(publicRenderParameterConfiguration.getPublicRenderParameter().getIdentifier())) {
-						continue;
+					<%
+					for (PublicRenderParameter publicRenderParameter : publicRenderParameters) {
+						String identifier = publicRenderParameter.getIdentifier();
+
+						if (identifier.equals(publicRenderParameterConfiguration.getPublicRenderParameter().getIdentifier())) {
+							continue;
+						}
+					%>
+
+						<option <%= identifier.equals(publicRenderParameterConfiguration.getMapping()) ? "selected" : "" %> value="<%= identifier %>"><%= identifier %></option>
+
+					<%
 					}
-				%>
+					%>
 
-					<option <%= identifier.equals(publicRenderParameterConfiguration.getMapping()) ? "selected" : "" %> value="<%= identifier %>"><%= identifier %></option>
+				</select>
+			</liferay-ui:search-container-column-text>
+		</liferay-ui:search-container-row>
 
-				<%
-				}
-				%>
+		<liferay-ui:search-iterator paginate="<%= false %>" />
+	</liferay-ui:search-container>
 
-			</select>
-		</liferay-ui:search-container-column-text>
-	</liferay-ui:search-container-row>
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-	<liferay-ui:search-iterator paginate="<%= false %>" />
-</liferay-ui:search-container>
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
-
-</form>
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <script type="text/javascript">
 	AUI().ready(
