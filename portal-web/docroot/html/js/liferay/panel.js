@@ -89,14 +89,14 @@ AUI().add(
 					var instance = this;
 
 					instance._panelTitles.each(
-						function(node, i) {
-							var panel = node.ancestor('.lfr-panel');
+						function(item, index, collection) {
+							var panel = item.ancestor('.lfr-panel');
 
 							if (panel.hasClass('lfr-extended')) {
-								var toggler = node.all('.lfr-panel-button');
+								var toggler = item.all('.lfr-panel-button');
 
 								if (!toggler.size()) {
-									node.append('<a class="lfr-panel-button" href="javascript:;"></a>');
+									item.append('<a class="lfr-panel-button" href="javascript:;"></a>');
 								}
 							}
 						}
@@ -105,7 +105,7 @@ AUI().add(
 					instance._panelTitles.on(
 						'mousedown',
 						function(event) {
-							instance.onTitleClick(event.target);
+							instance.onTitleClick(event.currentTarget);
 						}
 					);
 				},
@@ -121,14 +121,14 @@ AUI().add(
 						var siblings = currentContainer.siblings('.lfr-panel');
 
 						siblings.each(
-							function (node, i) {
-								var id = node.attr('id');
+							function(item, index, collection) {
+								var id = item.attr('id');
 
 								if (id) {
 									instance._saveState(id, 'closed');
 								}
 
-								node.addClass('lfr-collapsed');
+								item.addClass('lfr-collapsed');
 							}
 						);
 					}
@@ -187,6 +187,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['base']
+		requires: ['aui-base']
 	}
 );
