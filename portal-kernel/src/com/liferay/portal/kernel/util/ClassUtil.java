@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -119,29 +122,37 @@ public class ClassUtil {
 	public static String getParentPath(
 		ClassLoader classLoader, String className) {
 
-		if (!className.endsWith(".class")) {
-			className += ".class";
+		if (_log.isDebugEnabled()) {
+			_log.debug("Class name " + className);
+		}
+
+		if (!className.endsWith(_CLASS_EXTENSION)) {
+			className += _CLASS_EXTENSION;
 		}
 
 		className = StringUtil.replace(
 			className, StringPool.PERIOD, StringPool.SLASH);
 
-		className = StringUtil.replace(className, "/class", ".class");
+		className = StringUtil.replace(className, "/class", _CLASS_EXTENSION);
 
 		URL url = classLoader.getResource(className);
 
-		String file = null;
+		String path = null;
 
 		try {
-			file = new URI(url.getPath()).getPath();
+			path = new URI(url.getPath()).getPath();
 		}
 		catch (URISyntaxException urise) {
-			file = url.getFile();
+			path = url.getFile();
 		}
 
-		int pos = file.indexOf(className);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Path " + path);
+		}
 
-		String parentPath = file.substring(0, pos);
+		int pos = path.indexOf(className);
+
+		String parentPath = path.substring(0, pos);
 
 		if (parentPath.startsWith("jar:")) {
 			parentPath = parentPath.substring(4, parentPath.length());
@@ -149,6 +160,10 @@ public class ClassUtil {
 
 		if (parentPath.startsWith("file:/")) {
 			parentPath = parentPath.substring(6, parentPath.length());
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Parent path " + parentPath);
 		}
 
 		return parentPath;
@@ -318,5 +333,9 @@ public class ClassUtil {
 
 	private static final Pattern _ANNOTATION_PARAMETERS_REGEXP =
 		Pattern.compile("@(\\w+)\\({0,1}\\{{0,1}([^)}]+)\\}{0,1}\\){0,1}");
+
+	private static final String _CLASS_EXTENSION = ".class";
+
+	private static Log _log = LogFactoryUtil.getLog(ClassUtil.class);
 
 }

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ClassUtil;
 
 /**
@@ -64,7 +62,5 @@ public class WebDirDetector {
 
 		return rootDir;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(WebDirDetector.class);
 
 }
