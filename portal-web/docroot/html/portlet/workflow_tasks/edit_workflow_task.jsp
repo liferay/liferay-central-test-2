@@ -40,19 +40,36 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />assignTask() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.ASSIGN %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
+	function <portlet:namespace />commit(cmd, transitionName) {
+		AUI().ready('dialog', function(A) {
 
-	function <portlet:namespace />saveTask(transitionName) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.SAVE %>";
+		    var dialog = new A.Dialog({
+		        bodyContent: '<textarea id="<%= renderResponse.getNamespace() + "comment" %>" rows="10" cols="55"></textarea>',
+		        centered: true,
+		        modal: true,
+		        title: '<liferay-ui:message key="comments" />',
+		        width: 400,
+		        buttons: [
+		            {
+		                text: 'OK',
+		                handler: function() {
+		            		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+		            		document.<portlet:namespace />fm.<portlet:namespace />comment.value = A.one('#<%= renderResponse.getNamespace() + "comment" %>').val();
+		            		document.<portlet:namespace />fm.<portlet:namespace />transitionName.value = transitionName;
+		            		submitForm(document.<portlet:namespace />fm);
+		                }
+		            },
+		            {
+		                text: 'Cancel',
+		                handler: function() {
+		                    this.close();
+		                }
+		            }
+		        ]
+		    })
+		    .render();
 
-		if (transitionName) {
-			document.<portlet:namespace />fm.<portlet:namespace />transitionName.value = transitionName;
-		}
-
-		submitForm(document.<portlet:namespace />fm);
+		});
 	}
 </script>
 
@@ -68,6 +85,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="workflowTaskId" type="hidden" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+	<aui:input name="comment" type="hidden" />
 	<aui:input name="transitionName" type="hidden" />
 
 	<aui:fieldset>
@@ -130,9 +148,11 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 
 				<%
 				}
+
+				String taglibOnClick = renderResponse.getNamespace() + "commit('"+ Constants.ASSIGN +"');";
 				%>
 
-				<aui:button name="assignButton" onClick='<%= renderResponse.getNamespace() + "assignTask();" %>' type="button" value="assign" />
+				<aui:button name="assignButton" onClick="<%= taglibOnClick %>" type="button" value="assign" />
 			</aui:select>
 		</c:if>
 
@@ -151,7 +171,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 						message = transitionName;
 					}
 
-					String taglibOnClick = renderResponse.getNamespace() + "saveTask('" + message + "');";
+					String taglibOnClick = renderResponse.getNamespace() + "commit('"+ Constants.SAVE +"', '" + message + "');";
 				%>
 
 					<aui:button name='<%= message + "Button" %>' onClick="<%= taglibOnClick %>" type="button" value="<%= message %>" />

@@ -111,9 +111,10 @@ public class EditWorkflowTaskAction extends PortletAction {
 			actionRequest, "workflowTaskId");
 		long assigneeUserId = ParamUtil.getLong(
 			actionRequest, "assigneeUserId");
+		String comment = ParamUtil.getString(actionRequest, "comment");
 
 		WorkflowTaskManagerUtil.assignWorkflowTaskToUser(
-			themeDisplay.getUserId(), workflowTaskId, assigneeUserId, null,
+			themeDisplay.getUserId(), workflowTaskId, assigneeUserId, comment,
 			null);
 	}
 
@@ -123,11 +124,12 @@ public class EditWorkflowTaskAction extends PortletAction {
 
 		long workflowTaskId = ParamUtil.getLong(
 			actionRequest, "workflowTaskId");
+		String comment = ParamUtil.getString(actionRequest, "comment");
 		String transitionName = ParamUtil.getString(
 			actionRequest, "transitionName");
 
 		WorkflowTaskManagerUtil.completeWorkflowTask(
-			themeDisplay.getUserId(), workflowTaskId, transitionName, null,
+			themeDisplay.getUserId(), workflowTaskId, transitionName, comment,
 			null);
 	}
 
