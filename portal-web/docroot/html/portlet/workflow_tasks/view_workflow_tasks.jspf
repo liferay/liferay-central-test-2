@@ -57,7 +57,7 @@ try {
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
-			results="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(user.getUserId(), completedTasks, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) : WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completedTasks, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
+			results="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(user.getUserId(), completedTasks, searchContainer.getStart(), searchContainer.getEnd(), null) : WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completedTasks, searchContainer.getStart(), searchContainer.getEnd(), null) %>"
 			total="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(user.getUserId(), completedTasks) : WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId(), completedTasks) %>"
 		/>
 
@@ -149,7 +149,7 @@ try {
 			/>
 		</liferay-ui:search-container-row>
 
-		<liferay-ui:search-iterator paginate="<%= false %>" />
+		<liferay-ui:search-iterator />
 	</liferay-ui:search-container>
 
 	<br />
