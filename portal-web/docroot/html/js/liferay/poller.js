@@ -144,7 +144,7 @@ AUI().add(
 						),
 						method: 'POST',
 						on: {
-							success: _processResponse,
+							success: _processResponse
 						}
 					}
 				);
