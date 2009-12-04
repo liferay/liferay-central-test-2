@@ -54,6 +54,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -64,6 +65,7 @@ import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -244,6 +246,21 @@ public class PortalImpl implements Portal {
 			}
 			catch (UnknownHostException uhe) {
 			}
+		}
+
+		// Global lib directory
+
+		_globalLibDir = ClassUtil.getParentPath(
+			ReleaseInfo.class.getClassLoader(), ReleaseInfo.class.getName());
+
+		int pos = _globalLibDir.lastIndexOf(".jar!");
+
+		pos = _globalLibDir.lastIndexOf(StringPool.SLASH, pos);
+
+		_globalLibDir = _globalLibDir.substring(0, pos + 1);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Global lib directory " + _globalLibDir);
 		}
 
 		// Portal lib directory
@@ -1151,6 +1168,10 @@ public class PortalImpl implements Portal {
 		}
 
 		return sb.substring(0, sb.length() - 2);
+	}
+
+	public String getGlobalLibDir() {
+		return _globalLibDir;
 	}
 
 	public String getGoogleGadgetURL(
@@ -4102,6 +4123,7 @@ public class PortalImpl implements Portal {
 	private String _computerName;
 	private String[] _customSqlClassNameIds;
 	private String[] _customSqlClassNames;
+	private String _globalLibDir;
 	private String _pathContext;
 	private String _pathFriendlyURLPrivateGroup;
 	private String _pathFriendlyURLPrivateUser;

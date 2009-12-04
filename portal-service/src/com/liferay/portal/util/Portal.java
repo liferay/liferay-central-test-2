@@ -225,6 +225,8 @@ public interface Portal {
 
 	public String getFirstPageLayoutTypes(PageContext pageContext);
 
+	public String getGlobalLibDir();
+
 	public String getGoogleGadgetURL(
 		Portlet portlet, ThemeDisplay themeDisplay);
 

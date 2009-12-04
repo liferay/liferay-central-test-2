@@ -30,6 +30,10 @@ import java.io.Reader;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -110,6 +114,44 @@ public class ClassUtil {
 		classes.remove(className);
 
 		return classes;
+	}
+
+	public static String getParentPath(
+		ClassLoader classLoader, String className) {
+
+		if (!className.endsWith(".class")) {
+			className += ".class";
+		}
+
+		className = StringUtil.replace(
+			className, StringPool.PERIOD, StringPool.SLASH);
+
+		className = StringUtil.replace(className, "/class", ".class");
+
+		URL url = classLoader.getResource(className);
+
+		String file = null;
+
+		try {
+			file = new URI(url.getPath()).getPath();
+		}
+		catch (URISyntaxException urise) {
+			file = url.getFile();
+		}
+
+		int pos = file.indexOf(className);
+
+		String parentPath = file.substring(0, pos);
+
+		if (parentPath.startsWith("jar:")) {
+			parentPath = parentPath.substring(4, parentPath.length());
+		}
+
+		if (parentPath.startsWith("file:/")) {
+			parentPath = parentPath.substring(6, parentPath.length());
+		}
+
+		return parentPath;
 	}
 
 	public static boolean isSubclass(Class<?> a, Class<?> b) {

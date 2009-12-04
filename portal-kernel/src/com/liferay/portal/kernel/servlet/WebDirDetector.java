@@ -24,10 +24,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import com.liferay.portal.kernel.util.ClassUtil;
 
 /**
  * <a href="WebDirDetector.java.html"><b><i>View Source</i></b></a>
@@ -37,39 +34,18 @@ import java.net.URL;
 public class WebDirDetector {
 
 	public static String getLibDir(ClassLoader classLoader) {
-		URL url = classLoader.getResource(
-			"com/liferay/util/bean/PortletBeanLocatorUtil.class");
-
-		String file = null;
-
-		try {
-			file = new URI(url.getPath()).getPath();
-		}
-		catch (URISyntaxException urise) {
-			file = url.getFile();
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Lib url " + file);
-		}
-
-		int pos = file.indexOf("/com/liferay/util/bean/");
-
-		String libDir = file.substring(0, pos + 1);
+		String libDir = ClassUtil.getParentPath(
+			classLoader, "com.liferay.util.bean.PortletBeanLocatorUtil");
 
 		if (libDir.endsWith("/WEB-INF/classes/")) {
 			libDir = libDir.substring(0, libDir.length() - 8) + "lib/";
 		}
 		else {
-			pos = libDir.indexOf("/WEB-INF/lib/");
+			int pos = libDir.indexOf("/WEB-INF/lib/");
 
 			if (pos != -1) {
 				libDir = libDir.substring(0, pos) + "/WEB-INF/lib/";
 			}
-		}
-
-		if (libDir.startsWith("file:/")) {
-			libDir = libDir.substring(5, libDir.length());
 		}
 
 		return libDir;

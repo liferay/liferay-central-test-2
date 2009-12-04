@@ -348,6 +348,10 @@ public class PortalUtil {
 		return getPortal().getFirstPageLayoutTypes(pageContext);
 	}
 
+	public static String getGlobalLibDir() {
+		return getPortal().getGlobalLibDir();
+	}
+
 	public static String getGoogleGadgetURL(
 		Portlet portlet, ThemeDisplay themeDisplay) {
 
