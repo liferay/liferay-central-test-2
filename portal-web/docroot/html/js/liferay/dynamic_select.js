@@ -98,6 +98,7 @@ AUI().add(
 					function(item, index, collection) {
 						var key = item[selectId];
 						var value = item[selectDesc];
+
 						var selected = '';
 
 						if (selectVal == key) {
