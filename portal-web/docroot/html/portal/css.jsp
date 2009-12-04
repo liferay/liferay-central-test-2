@@ -311,6 +311,17 @@
 
 /* ---------- Panel pagination ---------- */
 
+.lfr-panel-content .aui-paginator-container .aui-paginator-page-container,
+.lfr-panel-content .aui-paginator-container .lfr-paginator-next,
+.lfr-panel-content .aui-paginator-container .lfr-paginator-prev {
+	display: inline-block;
+}
+
+.lfr-panel-content .aui-paginator-container .lfr-paginator-next,
+.lfr-panel-content .aui-paginator-container .lfr-paginator-prev {
+	padding: 8px;
+}
+
 .lfr-panel-content .aui-paginator-container {
 	background: #cfd2d5;
 	border-bottom: 1px solid #dcdee0;

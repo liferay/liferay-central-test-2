@@ -113,7 +113,7 @@ AUI().add(
 				onTitleClick: function(el) {
 					var instance = this;
 
-					var currentContainer = A.one(el).ancestor('.lfr-panel');
+					var currentContainer = el.ancestor('.lfr-panel');
 
 					currentContainer.toggleClass('lfr-collapsed');
 

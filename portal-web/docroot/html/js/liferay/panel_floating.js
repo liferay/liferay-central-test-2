@@ -160,7 +160,8 @@ AUI().add(
 													this.setState(newState);
 												}
 											},
-											template: '{PrevPageLink} {PageLinks} {NextPageLink}',
+											pageContainerTemplate: '<span></span>',
+											template: '<span class="lfr-paginator-prev">{PrevPageLink}</span>{PageLinks}<span class="lfr-paginator-next">{NextPageLink}</span>',
 											total: totalPages
 										}
 									)
