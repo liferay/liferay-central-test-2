@@ -61,22 +61,23 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 					});
 
 					A.on('click', function() {
-						var popup = new A.Dialog({
-							centered: true,
-							destroyOnClose: true,
-							draggable: true,
-							title: '<liferay-ui:message key="report-inappropriate-content" />',
-							modal: true,
-							width: 435,
-							stack: true,
-							io:	{
-								uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>',
-								cfg: {
-									data: params
-								}
+						var popup = new A.Dialog(
+							{
+								centered: true,
+								destroyOnClose: true,
+								draggable: true,
+								io:	{
+									cfg: {
+										data: params
+									},
+									uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
+								},
+								modal: true,
+								stack: true,
+								title: '<liferay-ui:message key="report-inappropriate-content" />',
+								width: 435
 							}
-						})
-						.render();
+						).render();
 					},
 					'.<%= randomNamespace %>');
 				}
@@ -89,24 +90,30 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 		</div>
 
 		<script type="text/javascript">
-				AUI().use('dialog', function(A) {
-					A.on('click', function(event) {
-						var popup = new A.Dialog(
-							{
-								bodyContent: A.get('#<portlet:namespace />signIn').html(),
-								centered: true,
-								destroyOnClose: true,
-								title: '<liferay-ui:message key="report-inappropriate-content" />',
-								modal: true,
-								width: 500
-							}
-						)
-						.render();
+				AUI().use(
+					'dialog',
+					function(A) {
+						A.on(
+							'click',
+							function(event) {
+								var popup = new A.Dialog(
+									{
+										bodyContent: A.get('#<portlet:namespace />signIn').html(),
+										centered: true,
+										destroyOnClose: true,
+										title: '<liferay-ui:message key="report-inappropriate-content" />',
+										modal: true,
+										width: 500
+									}
+								)
+								.render();
 
-						event.preventDefault();
-					},
-					'.<%= randomNamespace %>');
-				});
+								event.preventDefault();
+							},
+							'.<%= randomNamespace %>'
+						);
+					}
+				);
 		</script>
 	</c:otherwise>
 </c:choose>
