@@ -1832,6 +1832,10 @@
 			<forward name="portlet.workflow_tasks.error" path="portlet.workflow_tasks.error" />
 		</action>
 
+		<action path="/workflow_tasks/edit_workflow_task_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.workflow_tasks.error" />
+		</action>
+
 		<action path="/workflow_tasks/view" forward="portlet.workflow_tasks.view" />
 
 		<!-- XSL Content -->

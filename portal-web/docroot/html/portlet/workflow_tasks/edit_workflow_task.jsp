@@ -166,3 +166,22 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
+
+<br />
+
+<liferay-ui:tabs names="comments" />
+
+<portlet:actionURL var="discussionURL">
+	<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task_discussion" />
+</portlet:actionURL>
+
+<liferay-ui:discussion
+	formName="fm1"
+	formAction="<%= discussionURL %>"
+	className="<%= WorkflowTask.class.getName() %>"
+	classPK="<%= workflowTask.getWorkflowTaskId() %>"
+	userId="<%= user.getUserId() %>"
+	subject="<%= workflowTask.getName() %>"
+	redirect="<%= currentURL %>"
+	ratingsEnabled="true"
+/>
