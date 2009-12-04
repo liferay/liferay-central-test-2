@@ -25,9 +25,10 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String name = GetterUtil.getString((String)request.getAttribute("aui:form:name"), "fm");
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
-name = portletResponse.getNamespace() + name;
+String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:form:name"));
+String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:onSubmit"));
 %>
 
 </form>
@@ -35,7 +36,25 @@ name = portletResponse.getNamespace() + name;
 <script type="text/javascript">
 	AUI().ready(
 		function(A) {
+			<c:if test="<%= Validator.isNull(onSubmit) %>">
+				function <%= randomNamespace %>saveForm() {
+					submitForm(document.<%= name %>);
+				}
+			</c:if>
+
 			var form = A.one('#<%= name %>');
+
+			form.on('submit', function(){
+				<c:choose>
+					<c:when test="<%= Validator.isNull(onSubmit) %>">
+					    <%= randomNamespace %>saveForm();
+						return false;
+					</c:when>
+					<c:otherwise>
+						<%= onSubmit %>
+					</c:otherwise>
+				</c:choose>
+			});
 
 			if (form) {
 				var inputs = form.all('button,input,select,textarea');
