@@ -98,8 +98,13 @@ AUI().add(
 					function(item, index, collection) {
 						var key = item[selectId];
 						var value = item[selectDesc];
+						var selected = '';
 
-						selectOptions.push('<option value="' + key + '">' + value + '</option>');
+						if (selectVal == key) {
+							selected = 'selected="selected"';
+						}
+
+						selectOptions.push('<option ' + selected + ' value="' + key + '">' + value + '</option>');
 					}
 				);
 
@@ -107,12 +112,6 @@ AUI().add(
 
 				if (select) {
 					select.empty().append(selectOptions);
-
-					var currentOption = select.one('option[value="' + selectVal + '"]');
-
-					if (currentOption) {
-						currentOption.set('selected', 'selected');
-					}
 
 					if (Liferay.Browser.isIe()) {
 						select.setStyle('width', 'auto');
