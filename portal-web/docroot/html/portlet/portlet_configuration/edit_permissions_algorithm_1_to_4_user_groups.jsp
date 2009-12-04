@@ -173,16 +173,16 @@ int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 			<aui:button-row>
 
 				<%
-				String previousOnClick = renderResponse.getNamespace() + "saveUserGroupPermissions(" + (userGroupIdsPos - 1) + ", '" + userGroupIdsArray[userGroupIdsPos] + "');";
-				String nextOnClick = renderResponse.getNamespace() + "saveUserGroupPermissions(" + (userGroupIdsPos + 1) + ", '" + userGroupIdsArray[userGroupIdsPos] + "');";
-				String finishedOnClick = renderResponse.getNamespace() + "saveUserGroupPermissions(-1, '"+ userGroupIdsArray[userGroupIdsPos] + "');";
+				String taglibPreviousOnClick = renderResponse.getNamespace() + "saveUserGroupPermissions(" + (userGroupIdsPos - 1) + ", '" + userGroupIdsArray[userGroupIdsPos] + "');";
+				String taglibNextOnClick = renderResponse.getNamespace() + "saveUserGroupPermissions(" + (userGroupIdsPos + 1) + ", '" + userGroupIdsArray[userGroupIdsPos] + "');";
+				String taglibFinishedOnClick = renderResponse.getNamespace() + "saveUserGroupPermissions(-1, '"+ userGroupIdsArray[userGroupIdsPos] + "');";
 				%>
 
-				<aui:button cssClass="previous" disabled="<%= userGroupIdsPos <= 0 %>" onClick='<%= previousOnClick %>' value="previous" />
+				<aui:button cssClass="previous" disabled="<%= userGroupIdsPos <= 0 %>" onClick='<%= taglibPreviousOnClick %>' value="previous" />
 
-				<aui:button cssClass="next" disabled="<%= userGroupIdsPos + 1 >= userGroupIdsArray.length %>" onClick='<%= nextOnClick %>' value="next" />
+				<aui:button cssClass="next" disabled="<%= userGroupIdsPos + 1 >= userGroupIdsArray.length %>" onClick='<%= taglibNextOnClick %>' value="next" />
 
-				<aui:button cssClass="finished" onClick="<%= finishedOnClick %>" value="finished"  />
+				<aui:button cssClass="finished" onClick="<%= taglibFinishedOnClick %>" value="finished"  />
 			</aui:button-row>
 		</div>
 	</c:otherwise>

@@ -214,16 +214,16 @@ else if (tabs2.equals("organization-roles")) {
 			<aui:button-row>
 
 				<%
-				String previousOnClick = renderResponse.getNamespace() + "saveRolePermissions(" + (roleIdsPos - 1) + ", '" + roleIdsArray[roleIdsPos] + "');";
-				String nextOnClick = renderResponse.getNamespace() + "saveRolePermissions(" + (roleIdsPos + 1) + ", '" + roleIdsArray[roleIdsPos] + "');";
-				String finishedOnClick = renderResponse.getNamespace() + "saveRolePermissions(-1, '"+ roleIdsArray[roleIdsPos] + "');";
+				String taglibPreviousOnClick = renderResponse.getNamespace() + "saveRolePermissions(" + (roleIdsPos - 1) + ", '" + roleIdsArray[roleIdsPos] + "');";
+				String taglibNextOnClick = renderResponse.getNamespace() + "saveRolePermissions(" + (roleIdsPos + 1) + ", '" + roleIdsArray[roleIdsPos] + "');";
+				String taglibFinishedOnClick = renderResponse.getNamespace() + "saveRolePermissions(-1, '"+ roleIdsArray[roleIdsPos] + "');";
 				%>
 
-				<aui:button cssClass="previous" disabled="<%= roleIdsPos <= 0 %>" onClick='<%= previousOnClick %>' value="previous" />
+				<aui:button cssClass="previous" disabled="<%= roleIdsPos <= 0 %>" onClick='<%= taglibPreviousOnClick %>' value="previous" />
 
-				<aui:button cssClass="next" disabled="<%= roleIdsPos + 1 >= roleIdsArray.length %>" onClick='<%= nextOnClick %>' value="next" />
+				<aui:button cssClass="next" disabled="<%= roleIdsPos + 1 >= roleIdsArray.length %>" onClick='<%= taglibNextOnClick %>' value="next" />
 
-				<aui:button cssClass="finished" onClick="<%= finishedOnClick %>" value="finished"  />
+				<aui:button cssClass="finished" onClick="<%= taglibFinishedOnClick %>" value="finished"  />
 			</aui:button-row>
 		</div>
 	</c:otherwise>

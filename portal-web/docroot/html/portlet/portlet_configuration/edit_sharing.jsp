@@ -137,6 +137,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 					</div>
 
 					<label><liferay-ui:message key="callback-url" /></label>
+
 					<liferay-ui:input-resource url="<%= callbackURL %>" />
 
 					<aui:input inlineLabel="left" label='<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-facebook", portletDisplay.getTitle()) %>' name="facebookShowAddAppLink" type="checkbox" value="<%= facebookShowAddAppLink %>" />
@@ -153,6 +154,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 				</div>
 
 				<label><liferay-ui:message key="google-gadget-url" /></label>
+
 				<liferay-ui:input-resource url="<%= PortalUtil.getGoogleGadgetURL(portlet, themeDisplay) %>" />
 
 				<aui:input inlineLabel="left" label='<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-igoogle", portletDisplay.getTitle()) %>' name="iGoogleShowAddAppLink" type="checkbox" value="<%= iGoogleShowAddAppLink %>" />
@@ -168,6 +170,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 				</div>
 
 				<label><liferay-ui:message key="netvibes-widget-url" /></label>
+
 				<liferay-ui:input-resource url="<%= PortalUtil.getNetvibesURL(portlet, themeDisplay) %>" />
 
 				<aui:input inlineLabel="left" label='<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-netvibes-pages", portletDisplay.getTitle()) %>' name="netvibesShowAddAppLink" type="checkbox" value="<%= netvibesShowAddAppLink %>" />

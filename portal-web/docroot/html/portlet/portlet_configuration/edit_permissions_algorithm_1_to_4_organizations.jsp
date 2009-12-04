@@ -218,16 +218,16 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 			<aui:button-row>
 
 				<%
-				String previousOnClick = renderResponse.getNamespace() + "saveOrganizationPermissions(" + (organizationIdsPos - 1) + ", '" + organizationIdsArray[organizationIdsPos] + "');";
-				String nextOnClick = renderResponse.getNamespace() + "saveOrganizationPermissions(" + (organizationIdsPos + 1) + ", '" + organizationIdsArray[organizationIdsPos] + "');";
-				String finishedOnClick = renderResponse.getNamespace() + "saveOrganizationPermissions(-1, '"+ organizationIdsArray[organizationIdsPos] + "');";
+				String taglibPreviousOnClick = renderResponse.getNamespace() + "saveOrganizationPermissions(" + (organizationIdsPos - 1) + ", '" + organizationIdsArray[organizationIdsPos] + "');";
+				String taglibNextOnClick = renderResponse.getNamespace() + "saveOrganizationPermissions(" + (organizationIdsPos + 1) + ", '" + organizationIdsArray[organizationIdsPos] + "');";
+				String taglibFinishedOnClick = renderResponse.getNamespace() + "saveOrganizationPermissions(-1, '"+ organizationIdsArray[organizationIdsPos] + "');";
 				%>
 
-				<aui:button cssClass="previous" disabled="<%= organizationIdsPos <= 0 %>" onClick='<%= previousOnClick %>' value="previous" />
+				<aui:button cssClass="previous" disabled="<%= organizationIdsPos <= 0 %>" onClick='<%= taglibPreviousOnClick %>' value="previous" />
 
-				<aui:button cssClass="next" disabled="<%= organizationIdsPos + 1 >= organizationIdsArray.length %>" onClick='<%= nextOnClick %>' value="next" />
+				<aui:button cssClass="next" disabled="<%= organizationIdsPos + 1 >= organizationIdsArray.length %>" onClick='<%= taglibNextOnClick %>' value="next" />
 
-				<aui:button cssClass="finished" onClick="<%= finishedOnClick %>" value="finished"  />
+				<aui:button cssClass="finished" onClick="<%= taglibFinishedOnClick %>" value="finished"  />
 			</aui:button-row>
 		</div>
 
