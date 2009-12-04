@@ -137,14 +137,14 @@ AUI().add(
 
 					if (instance._paging) {
 						currentPanelContent.each(
-							function(node, i) {
-								var pages = node.all('ul');
+							function(item, index, collection) {
+								var pages = item.all('ul');
 								var totalPages = pages.size();
 
 								if (totalPages > 1) {
 									var paginatorContainer = A.Node.create('<div class="paginator-container"></div>');
 
-									node.append(paginatorContainer);
+									item.append(paginatorContainer);
 
 									var paginatorInstance = new A.Paginator(
 										{
@@ -164,8 +164,7 @@ AUI().add(
 											template: '<span class="lfr-paginator-prev">{PrevPageLink}</span>{PageLinks}<span class="lfr-paginator-next">{NextPageLink}</span>',
 											total: totalPages
 										}
-									)
-									.render();
+									).render();
 
 									instance._container.addClass('lfr-panel-paging');
 								}
@@ -232,8 +231,8 @@ AUI().add(
 					var pages = panelContent.all('>' + instance._pagingElements);
 
 					pages.each(
-						function(node, i) {
-							var setHeight = node.get('offsetHeight');
+						function(item, index, collection) {
+							var setHeight = item.get('offsetHeight');
 
 							if (setHeight > maxHeight) {
 								maxHeight = setHeight;
@@ -250,6 +249,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['liferay-panel', 'paginator']
+		requires: ['liferay-panel', 'paginator', 'selector-css3']
 	}
 );
