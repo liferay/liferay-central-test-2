@@ -40,6 +40,7 @@ import com.liferay.util.ant.DeleteTask;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * <a href="DeployUtil.java.html"><b><i>View Source</i></b></a>
@@ -141,22 +142,27 @@ public class DeployUtil {
 	}
 
 	private String _getResourcePath(String resource) throws IOException {
+		InputStream is = getClass().getResourceAsStream(
+			"dependencies/" + resource);
+
+		if (is == null) {
+			return null;
+		}
+
 		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
 
 		File file = new File(
 			tmpDir + "/liferay/com/liferay/portal/deploy/dependencies/" +
 				resource);
 
-		if (!file.exists()) {
+		if (!file.exists() || resource.startsWith("ext-")) {
 			File parentFile = file.getParentFile();
 
 			if (parentFile != null) {
 				parentFile.mkdirs();
 			}
 
-			StreamUtil.transfer(
-				getClass().getResourceAsStream("dependencies/" + resource),
-				new FileOutputStream(file));
+			StreamUtil.transfer(is, new FileOutputStream(file));
 		}
 
 		return FileUtil.getAbsolutePath(file);

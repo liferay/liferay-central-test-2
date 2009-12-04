@@ -66,8 +66,10 @@ public class ThemeAutoDeployer extends ThemeDeployer implements AutoDeployer {
 
 			List<String> jars = new ArrayList<String>();
 
-			jars.add(DeployUtil.getResourcePath("util-java.jar"));
-			jars.add(DeployUtil.getResourcePath("util-taglib.jar"));
+			addOptionalJar(jars, "ext-util-java.jar");
+			addOptionalJar(jars, "ext-util-taglib.jar");
+			addRequiredJar(jars, "util-java.jar");
+			addRequiredJar(jars, "util-taglib.jar");
 
 			this.jars = jars;
 

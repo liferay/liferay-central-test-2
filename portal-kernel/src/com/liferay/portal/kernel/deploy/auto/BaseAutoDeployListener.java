@@ -38,11 +38,19 @@ import java.util.zip.ZipFile;
  */
 public abstract class BaseAutoDeployListener implements AutoDeployListener {
 
+	public boolean isExtPlugin(File file) {
+		if (file.getName().contains("-ext")) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isHookPlugin(File file) throws AutoDeployException {
 		if ((isMatchingFile(
 				file, "WEB-INF/liferay-plugin-package.properties")) &&
-			(file.getName().indexOf("-hook") != -1) &&
-			(file.getName().indexOf("-portlet") == -1)) {
+			(file.getName().contains("-hook")) &&
+			(!file.getName().contains("-portlet"))) {
 
 			return true;
 		}
@@ -115,7 +123,7 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 
 		if ((isMatchingFile(
 				file, "WEB-INF/liferay-plugin-package.properties")) &&
-			(file.getName().indexOf("-theme") != -1)) {
+			(file.getName().contains("-theme"))) {
 
 			return true;
 		}
@@ -126,7 +134,7 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 	public boolean isWebPlugin(File file) throws AutoDeployException {
 		if ((isMatchingFile(
 				file, "WEB-INF/liferay-plugin-package.properties")) &&
-			(file.getName().indexOf("-web") != -1)) {
+			(file.getName().contains("-web"))) {
 
 			return true;
 		}

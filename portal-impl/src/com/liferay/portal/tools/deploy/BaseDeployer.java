@@ -134,6 +134,42 @@ public class BaseDeployer {
 		}
 	}
 
+	protected void addOptionalJar(List<String> jars, String resource)
+		throws Exception {
+
+		String path = DeployUtil.getResourcePath(resource);
+
+		if (_log.isDebugEnabled()) {
+			if (path == null) {
+				_log.debug("Resource " + resource + " is not available");
+			}
+			else {
+				_log.debug("Resource " + resource + " is available at " + path);
+			}
+		}
+
+		if (path != null) {
+			jars.add(path);
+		}
+	}
+
+	protected void addRequiredJar(List<String> jars, String resource)
+		throws Exception {
+
+		String path = DeployUtil.getResourcePath(resource);
+
+		if (path == null) {
+			throw new RuntimeException(
+				"Resource " + resource + " does not exist");
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Resource " + resource + " is available at " + path);
+		}
+
+		jars.add(path);
+	}
+
 	protected void checkArguments() {
 		if (Validator.isNull(baseDir)) {
 			throw new IllegalArgumentException(
@@ -210,6 +246,7 @@ public class BaseDeployer {
 
 		for (int i = 0; i < jars.size(); i++) {
 			String jarFullName = jars.get(i);
+
 			String jarName = jarFullName.substring(
 				jarFullName.lastIndexOf("/") + 1, jarFullName.length());
 

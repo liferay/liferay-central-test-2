@@ -22,7 +22,6 @@
 
 package com.liferay.portal.deploy.auto;
 
-import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 
@@ -50,7 +49,7 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 				jars.add(downloadJar(phpJar));
 			}
 
-			jars.add(DeployUtil.getResourcePath("portals-bridges.jar"));
+			addRequiredJar(jars, "portals-bridges.jar");
 		}
 		catch (Exception e) {
 			throw new AutoDeployException(e);

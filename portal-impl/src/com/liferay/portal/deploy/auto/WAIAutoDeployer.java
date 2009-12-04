@@ -22,7 +22,6 @@
 
 package com.liferay.portal.deploy.auto;
 
-import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.Validator;
@@ -42,7 +41,7 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 
 	protected WAIAutoDeployer() throws AutoDeployException {
 		try {
-			jars.add(DeployUtil.getResourcePath("portals-bridges.jar"));
+			addRequiredJar(jars, "portals-bridges.jar");
 		}
 		catch (Exception e) {
 			throw new AutoDeployException(e);

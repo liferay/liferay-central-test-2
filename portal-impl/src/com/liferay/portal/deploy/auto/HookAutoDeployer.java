@@ -63,7 +63,8 @@ public class HookAutoDeployer extends HookDeployer implements AutoDeployer {
 
 			List<String> jars = new ArrayList<String>();
 
-			jars.add(DeployUtil.getResourcePath("util-java.jar"));
+			addOptionalJar(jars, "ext-util-java.jar");
+			addRequiredJar(jars, "util-java.jar");
 
 			this.jars = jars;
 

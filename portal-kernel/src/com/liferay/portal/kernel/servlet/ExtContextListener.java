@@ -20,41 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
+import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
 /**
- * <a href="Plugin.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExtContextListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  */
-public interface Plugin {
+public class ExtContextListener implements ServletContextListener {
 
-	public static final String TYPE_EXT = "ext";
+	public void contextInitialized(ServletContextEvent event) {
+		ServletContext servletContext = event.getServletContext();
 
-	public static final String TYPE_HOOK = "hook";
+		Thread currentThread = Thread.currentThread();
 
-	public static final String TYPE_LAYOUT_TEMPLATE = "layout-template";
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-	public static final String TYPE_PORTLET = "portlet";
+		HotDeployUtil.fireDeployEvent(
+			new HotDeployEvent(servletContext, contextClassLoader));
+	}
 
-	public static final String TYPE_THEME = "theme";
+	public void contextDestroyed(ServletContextEvent event) {
+		ServletContext servletContext = event.getServletContext();
 
-	public static final String TYPE_WEB = "web";
+		Thread currentThread = Thread.currentThread();
 
-	public PluginPackage getPluginPackage();
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-	public void setPluginPackage(PluginPackage pluginPackage);
-
-	public String getPluginId();
-
-	public String getPluginType();
-
-	public PluginSetting getDefaultPluginSetting();
-
-	public PluginSetting getDefaultPluginSetting(long companyId);
-
-	public void setDefaultPluginSetting(PluginSetting pluginSetting);
+		HotDeployUtil.fireUndeployEvent(
+			new HotDeployEvent(servletContext, contextClassLoader));
+	}
 
 }

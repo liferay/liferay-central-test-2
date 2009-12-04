@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.tools.deploy.WebDeployer;
+import com.liferay.portal.tools.deploy.ExtDeployer;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -37,13 +37,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="WebAutoDeployer.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExtAutoDeployer.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  */
-public class WebAutoDeployer extends WebDeployer implements AutoDeployer {
+public class ExtAutoDeployer extends ExtDeployer implements AutoDeployer {
 
-	public WebAutoDeployer() {
+	public ExtAutoDeployer() {
 		try {
 			baseDir = PrefsPropsUtil.getString(
 				PropsKeys.AUTO_DEPLOY_DEPLOY_DIR,
@@ -63,7 +63,6 @@ public class WebAutoDeployer extends WebDeployer implements AutoDeployer {
 
 			List<String> jars = new ArrayList<String>();
 
-			addOptionalJar(jars, "ext-util-java.jar");
 			addRequiredJar(jars, "util-java.jar");
 
 			this.jars = jars;
@@ -90,6 +89,6 @@ public class WebAutoDeployer extends WebDeployer implements AutoDeployer {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(WebAutoDeployer.class);
+	private static Log _log = LogFactoryUtil.getLog(ExtAutoDeployer.class);
 
 }

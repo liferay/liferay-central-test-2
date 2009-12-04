@@ -20,41 +20,51 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.deploy.auto;
 
-import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.deploy.auto.BaseAutoDeployListener;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.io.File;
 
 /**
- * <a href="Plugin.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExtAutoDeployListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  */
-public interface Plugin {
+public class ExtAutoDeployListener extends BaseAutoDeployListener {
 
-	public static final String TYPE_EXT = "ext";
+	public ExtAutoDeployListener() {
+		_deployer = new ExtAutoDeployer();
+	}
 
-	public static final String TYPE_HOOK = "hook";
+	public void deploy(File file) throws AutoDeployException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + file.getPath());
+		}
 
-	public static final String TYPE_LAYOUT_TEMPLATE = "layout-template";
+		if (!isExtPlugin(file)) {
+			return;
+		}
 
-	public static final String TYPE_PORTLET = "portlet";
+		if (_log.isInfoEnabled()) {
+			_log.info("Copying web plugin for " + file.getPath());
+		}
 
-	public static final String TYPE_THEME = "theme";
+		_deployer.autoDeploy(file.getName());
 
-	public static final String TYPE_WEB = "web";
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Web plugin for " +  file.getPath() + " copied successfully. " +
+					"Deployment will start in a few seconds.");
+		}
+	}
 
-	public PluginPackage getPluginPackage();
+	private static Log _log =
+		LogFactoryUtil.getLog(ExtAutoDeployListener.class);
 
-	public void setPluginPackage(PluginPackage pluginPackage);
-
-	public String getPluginId();
-
-	public String getPluginType();
-
-	public PluginSetting getDefaultPluginSetting();
-
-	public PluginSetting getDefaultPluginSetting(long companyId);
-
-	public void setDefaultPluginSetting(PluginSetting pluginSetting);
+	private AutoDeployer _deployer;
 
 }
