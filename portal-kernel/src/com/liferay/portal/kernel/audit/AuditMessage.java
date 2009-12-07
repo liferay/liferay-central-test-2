@@ -128,7 +128,7 @@ public class AuditMessage implements Serializable {
 		JSONObject additionalInfo) {
 
 		this(
-			eventType, companyId, userId, userName, classPK, className, message,
+			eventType, companyId, userId, userName, className, classPK, message,
 			new Date(), additionalInfo);
 	}
 
