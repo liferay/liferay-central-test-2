@@ -1400,6 +1400,10 @@ public class PropsValues {
 		GetterUtil.getIntegerValues(
 			PropsUtil.getArray(PropsKeys.SEARCH_CONTAINER_PAGE_DELTA_VALUES));
 
+	public static final int SEARCH_CONTAINER_PAGES_ITERATOR_MAX =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGES_ITERATOR_MAX));
+
 	public static final String[] SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES =
 		PropsUtil.getArray(
 			PropsKeys.SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES);

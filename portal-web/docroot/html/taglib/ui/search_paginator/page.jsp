@@ -44,7 +44,7 @@ if (iteratorURL != null) {
 	delta="<%= searchContainer.getDelta() %>"
 	deltaConfigurable="<%= searchContainer.isDeltaConfigurable() %>"
 	deltaParam="<%= searchContainer.getDeltaParam() %>"
-	maxPages="<%= searchContainer.getMaxPages() %>"
+	maxPages="<%= PropsValues.SEARCH_CONTAINER_PAGES_ITERATOR_MAX %>"
 	total="<%= searchContainer.getTotal() %>"
 	type="<%= type %>"
 	url="<%= url %>"
