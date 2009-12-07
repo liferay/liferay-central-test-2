@@ -54,6 +54,8 @@ public class SearchContainer<R> {
 
 	public static final String DEFAULT_DELTA_PARAM = "delta";
 
+	public static final int DEFAULT_MAX_PAGES = 25;
+
 	public static final String DEFAULT_ORDER_BY_COL_PARAM = "orderByCol";
 
 	public static final String DEFAULT_ORDER_BY_TYPE_PARAM = "orderByType";
@@ -166,6 +168,10 @@ public class SearchContainer<R> {
 		return _iteratorURL;
 	}
 
+	public int getMaxPages() {
+		return _maxPages;
+	}
+
 	public Map<String, String> getOrderableHeaders() {
 		return _orderableHeaders;
 	}
@@ -272,6 +278,10 @@ public class SearchContainer<R> {
 		_iteratorURL = iteratorURL;
 	}
 
+	public void setMaxPages(int maxPages) {
+		_maxPages = maxPages;
+	}
+
 	public void setOrderableHeaders(Map<String, String> orderableHeaders) {
 		_orderableHeaders = orderableHeaders;
 	}
@@ -341,6 +351,7 @@ public class SearchContainer<R> {
 	private boolean _hover = true;
 	private String _id;
 	private PortletURL _iteratorURL;
+	private int _maxPages = DEFAULT_MAX_PAGES;
 	private Map<String, String> _orderableHeaders;
 	private String _orderByCol;
 	private String _orderByColParam = DEFAULT_ORDER_BY_COL_PARAM;
