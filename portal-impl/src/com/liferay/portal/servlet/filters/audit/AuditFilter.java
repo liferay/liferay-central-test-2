@@ -54,14 +54,14 @@ public class AuditFilter extends BasePortalFilter {
 		auditRequestThreadLocal.setServerName(request.getServerName());
 		auditRequestThreadLocal.setServerPort(request.getServerPort());
 		auditRequestThreadLocal.setSessionID(request.getSession().getId());
+		
+		Long realUserId = (Long)request.getSession().getAttribute(
+			WebKeys.USER_ID);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		if (themeDisplay != null) {
-			auditRequestThreadLocal.setRealUserId(themeDisplay.getRealUserId());
+		if (realUserId != null) {
+			auditRequestThreadLocal.setRealUserId(realUserId.longValue());
 		}
-
+		
 		try {
 			processFilter(AuditFilter.class, request, response, filterChain);
 		}

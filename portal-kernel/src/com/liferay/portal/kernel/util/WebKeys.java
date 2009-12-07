@@ -73,6 +73,8 @@ public interface WebKeys {
 
 	public static final String THEME_DISPLAY = "THEME_DISPLAY";
 
+	public static final String USER_ID = "USER_ID";
+
 	public static final String VELOCITY_TAGLIB = "VELOCITY_TAGLIB";
 
 	public static final String VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
