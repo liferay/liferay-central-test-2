@@ -433,7 +433,7 @@
 	float: right;
 }
 
-.lfr-queue-empty .lfr-action-clear, .lfr-queue-single .lfr-action-clear {
+.aui-undomanager .lfr-queue-empty, .lfr-queue-single .lfr-action-clear {
 	display: none;
 }
 
