@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.imagegallery.webdav;
 
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -66,7 +66,7 @@ public class IGImageResourceImpl extends BaseResourceImpl {
 		catch (Exception e) {
 		}
 
-		return ContentTypeUtil.getContentType(type);
+		return MimeTypesUtil.getContentType(type);
 	}
 
 	public InputStream getContentAsStream() throws WebDAVException {

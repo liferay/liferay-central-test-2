@@ -22,44 +22,18 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.configuration.Configuration;
-import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 
 /**
  * <a href="ContentTypeUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @deprecated Use {@link com.liferay.portal.kernel.util.MimeTypesUtil}.
  */
 public class ContentTypeUtil {
 
 	public static String getContentType(String fileName) {
-		return _instance._getContentType(fileName);
+		return MimeTypesUtil.getContentType(fileName);
 	}
-
-	private ContentTypeUtil() {
-		_configuration = ConfigurationFactoryUtil.getConfiguration(
-			ContentTypeUtil.class.getClassLoader(), PropsFiles.CONTENT_TYPES);
-	}
-
-	private String _getContentType(String fileName) {
-		String[] array = StringUtil.split(fileName, StringPool.PERIOD);
-
-		String ext = array[array.length-1];
-
-		String type = _configuration.get(ext);
-
-		if (Validator.isNull(type)) {
-			type = "application/octet-stream";
-		}
-
-		return type;
-	}
-
-	private static ContentTypeUtil _instance = new ContentTypeUtil();
-
-	private Configuration _configuration;
 
 }

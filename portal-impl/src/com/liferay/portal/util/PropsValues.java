@@ -1068,9 +1068,6 @@ public class PropsValues {
 	public static final String MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT =
 		PropsUtil.get(PropsKeys.MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT);
 
-	public static final String[] MIME_TYPES =
-		PropsUtil.getArray(PropsKeys.MIME_TYPES);
-
 	public static final String[] MIME_TYPES_CONTENT_DISPOSITION_INLINE =
 		PropsUtil.getArray(PropsKeys.MIME_TYPES_CONTENT_DISPOSITION_INLINE);
 

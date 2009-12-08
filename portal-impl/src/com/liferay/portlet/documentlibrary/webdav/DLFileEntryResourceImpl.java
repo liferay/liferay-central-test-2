@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.webdav;
 
-import com.liferay.portal.util.ContentTypeUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
@@ -72,7 +72,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 	}
 
 	public String getContentType() {
-		return ContentTypeUtil.getContentType(_fileEntry.getTitle());
+		return MimeTypesUtil.getContentType(_fileEntry.getTitle());
 	}
 
 	public InputStream getContentAsStream() throws WebDAVException {

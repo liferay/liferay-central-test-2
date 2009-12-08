@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -34,7 +35,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.AssetTagException;
@@ -150,7 +150,7 @@ public class EditImageAction extends PortletAction {
 				FileUtil.getExtension(file.getName())).toLowerCase();
 
 			if (Validator.isNotNull(ext)) {
-				contentType = ContentTypeUtil.getContentType(ext);
+				contentType = MimeTypesUtil.getContentType(ext);
 			}
 		}
 
@@ -181,7 +181,7 @@ public class EditImageAction extends PortletAction {
 				FileUtil.getExtension(file.getName())).toLowerCase();
 
 			if (Validator.isNotNull(ext)) {
-				contentType = ContentTypeUtil.getContentType(ext);
+				contentType = MimeTypesUtil.getContentType(ext);
 			}
 		}
 

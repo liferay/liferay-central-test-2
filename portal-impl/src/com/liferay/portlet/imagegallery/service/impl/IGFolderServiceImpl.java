@@ -28,10 +28,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGFolderServiceBaseImpl;
@@ -181,7 +181,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 				continue;
 			}
 
-			String contentType = ContentTypeUtil.getContentType(
+			String contentType = MimeTypesUtil.getContentType(
 				srcImage.getImageType());
 
 			igImageService.addImage(

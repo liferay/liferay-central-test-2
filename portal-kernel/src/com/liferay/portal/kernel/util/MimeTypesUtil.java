@@ -27,8 +27,13 @@ import java.io.File;
 /**
  * <a href="MimeTypesUtil.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * Additional MIME types should be added to the file META-INF/mime.types.
+ * </p>
+ *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
 public class MimeTypesUtil {
 

@@ -38,14 +38,6 @@ import javax.activation.MimetypesFileTypeMap;
  */
 public class MimeTypesImpl implements MimeTypes {
 
-	public MimeTypesImpl() {
-		_mimeTypes = new MimetypesFileTypeMap();
-
-		for (String mimeType : PropsValues.MIME_TYPES) {
-			_mimeTypes.addMimeTypes(mimeType);
-		}
-	}
-
 	public String getContentType(File file) {
 		String contentType = _mimeTypes.getContentType(file);
 
@@ -72,6 +64,6 @@ public class MimeTypesImpl implements MimeTypes {
 
 	private static Log _log = LogFactoryUtil.getLog(MimeTypesImpl.class);
 
-	private MimetypesFileTypeMap _mimeTypes;
+	private MimetypesFileTypeMap _mimeTypes = new MimetypesFileTypeMap();
 
 }

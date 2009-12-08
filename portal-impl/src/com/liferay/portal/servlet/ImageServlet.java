@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
@@ -37,7 +38,6 @@ import com.liferay.portal.model.ImageConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -278,7 +278,7 @@ public class ImageServlet extends HttpServlet {
 			String contentType = null;
 
 			if (!image.getType().equals(ImageConstants.TYPE_NOT_AVAILABLE)) {
-				contentType = ContentTypeUtil.getContentType(image.getType());
+				contentType = MimeTypesUtil.getContentType(image.getType());
 
 				response.setContentType(contentType);
 			}

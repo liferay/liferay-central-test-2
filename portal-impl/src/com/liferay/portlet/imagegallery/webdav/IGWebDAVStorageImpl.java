@@ -28,12 +28,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
 import com.liferay.portal.webdav.Resource;
@@ -154,7 +154,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long groupId = WebDAVUtil.getGroupId(destination);
 			String name = WebDAVUtil.getResourceName(destinationArray);
 			String description = image.getDescription();
-			String contentType = ContentTypeUtil.getContentType(
+			String contentType = MimeTypesUtil.getContentType(
 				image.getNameWithExtension());
 
 			file = FileUtil.createTempFile(image.getImageType());
@@ -461,7 +461,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			FileUtil.write(file, request.getInputStream());
 
-			String contentType = ContentTypeUtil.getContentType(name);
+			String contentType = MimeTypesUtil.getContentType(name);
 
 			ServiceContext serviceContext = new ServiceContext();
 
