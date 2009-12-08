@@ -25,6 +25,7 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MimeTypes;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.File;
 
@@ -51,6 +52,10 @@ public class MimeTypesImpl implements MimeTypes {
 	}
 
 	public String getContentType(String fileName) {
+		if (!fileName.contains(StringPool.PERIOD)) {
+			fileName = StringPool.PERIOD + fileName;
+		}
+
 		String contentType = _mimeTypes.getContentType(fileName);
 
 		if (_log.isDebugEnabled()) {
