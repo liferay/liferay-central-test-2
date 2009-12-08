@@ -5,7 +5,11 @@ AUI().add(
 
 		var CSS_AUTOROW_CONTROLS = 'lfr-autorow-controls';
 
+		var CSS_ICON_LOADING = 'aui-icon-loading';
+
 		var TPL_INPUT_HIDDEN = '<input name="{name}" type="hidden" />';
+
+		var TPL_LOADING = '<div class="' + CSS_ICON_LOADING + '"></div>';
 
 		/**
 		 * OPTIONS
@@ -51,6 +55,9 @@ AUI().add(
 				value: false
 			},
 			sortableHandle: {
+				value: null
+			},
+			url: {
 				value: null
 			}
 		};
@@ -271,6 +278,9 @@ AUI().add(
 			},
 			reset: {
 				value: true
+			},
+			url: {
+				value: null
 			}
 		};
 
@@ -343,6 +353,7 @@ AUI().add(
 					var parentNode = boundingBox.get('parentNode');
 
 					var clonedNode = instance._createClone();
+
 					var guid = instance.get('guid') + 1;
 
 					var config = {
@@ -359,6 +370,33 @@ AUI().add(
 					clone.render(parentNode);
 
 					boundingBox.placeAfter(cloneBoundingBox);
+
+					var url = instance.get('url');
+
+					if (url) {
+						var contentBox = clone.get('contentBox');
+
+						contentBox.html(TPL_LOADING);
+
+						A.io(
+							url,
+							{
+								data: A.toQueryString(
+									{
+										index: guid
+									}
+								),
+								method: 'POST',
+								on: {
+									success: function(id, obj) {
+										var instance = this;
+
+										contentBox.html(obj.responseText);
+									}
+								}
+							}
+						);
+					}
 
 					instance.fire(
 						'clone',
@@ -444,6 +482,37 @@ AUI().add(
 
 					var clone = instance.get('contentBox').cloneNode(true);
 
+					if (!instance.get('url')) {
+						instance._resetMarkup(clone);
+					}
+					else {
+						clone.html(TPL_LOADING);
+					}
+
+					return clone;
+				},
+
+				_createEvents: function() {
+					var instance = this;
+
+					var bubbles = instance.get('bubbles');
+
+					if (bubbles) {
+						instance.addTarget(bubbles);
+					}
+
+					var eventConfig = {
+						emitsFacade: true,
+						bubbles: true
+					};
+
+					instance.publish('clone', eventConfig);
+					instance.publish('delete', eventConfig);
+				},
+
+				_resetMarkup: function(clone) {
+					var instance = this;
+
 					var guid = instance.get('guid') + 1;
 
 					clone.queryAll('input, select, textarea, span').each(
@@ -495,26 +564,6 @@ AUI().add(
 					if (firstTextField) {
 						Liferay.Util.focusFormField(firstTextField.getDOM());
 					}
-
-					return clone;
-				},
-
-				_createEvents: function() {
-					var instance = this;
-
-					var bubbles = instance.get('bubbles');
-
-					if (bubbles) {
-						instance.addTarget(bubbles);
-					}
-
-					var eventConfig = {
-						emitsFacade: true,
-						bubbles: true
-					};
-
-					instance.publish('clone', eventConfig);
-					instance.publish('delete', eventConfig);
 				}
 			}
 		);
