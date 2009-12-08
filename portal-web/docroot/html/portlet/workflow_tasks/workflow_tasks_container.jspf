@@ -1,0 +1,183 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+
+<liferay-ui:search-container
+	headerNames="name,asset-title,due-date,state"
+	iteratorURL="<%= portletURL %>"
+>
+
+	<%
+	boolean allTasks = false;
+
+	List<WorkflowTask> resultsTasks = null;
+
+	int totalTasks = 0;
+
+	if (tabs1.equals("all-tasks")) {
+		allTasks = true;
+
+		searchContainer.setEmptyResultsMessage("there-are-no-tasks");
+
+		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasks(null, searchContainer.getStart(), searchContainer.getEnd(), null);
+		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCount(null);
+	}
+	else if (tabs1.equals("pooled-pending-tasks")) {
+		searchContainer.setEmptyResultsMessage("there-are-no-pooled-tasks");
+
+		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(user.getUserId(), false, searchContainer.getStart(), searchContainer.getEnd(), null);
+		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(user.getUserId(), false);
+	}
+	else {
+		boolean completedTasks = false;
+
+		if (tabs1.equals("my-completed-tasks")) {
+			completedTasks = true;
+
+			searchContainer.setEmptyResultsMessage("there-are-no-completed-tasks");
+		}
+		else {
+			searchContainer.setEmptyResultsMessage("there-are-no-pending-tasks-assigned-to-you");
+		}
+
+		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completedTasks, searchContainer.getStart(), searchContainer.getEnd(), null);
+		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId(), completedTasks);
+	}
+	%>
+
+	<liferay-ui:search-container-results
+		results="<%= resultsTasks %>"
+		total="<%= totalTasks %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.kernel.workflow.WorkflowTask"
+		modelVar="workflowTask"
+		stringKey="<%= true %>"
+	>
+		<liferay-ui:search-container-row-parameter
+			name="workflowTask"
+			value="<%= workflowTask %>"
+		/>
+
+		<portlet:renderURL var="rowURL">
+			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:search-container-column-text
+			name="name"
+			href="<%= rowURL %>"
+			property="name"
+		/>
+
+		<c:if test="<%= allTasks %>">
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				name="assignee"
+				href="<%= rowURL %>"
+			>
+				<%
+				if (workflowTask.getAssigneeUserId() != 0 ){
+					buffer.append(PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK));
+				}
+				else {
+					buffer.append(LanguageUtil.get(pageContext, "not-assigned"));
+				}
+				%>
+
+			</liferay-ui:search-container-column-text>
+		</c:if>
+
+		<liferay-ui:search-container-column-text
+			buffer="buffer"
+			name="asset-title"
+			href="<%= rowURL %>"
+		>
+
+			<%
+			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
+
+			Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
+
+			String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
+			long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
+
+			WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
+			buffer.append(workflowHandler.getTitle(classPK));
+			%>
+
+		</liferay-ui:search-container-column-text>
+
+		<liferay-ui:search-container-column-text
+			buffer="buffer"
+			name="due-date"
+			href="<%= rowURL %>"
+		>
+			<%
+			if (workflowTask.getDueDate() == null) {
+				buffer.append(LanguageUtil.get(pageContext, "never"));
+			}
+			else {
+				buffer.append(dateFormatDateTime.format(workflowTask.getDueDate()));
+			}
+			%>
+
+		</liferay-ui:search-container-column-text>
+
+		<liferay-ui:search-container-column-text
+			buffer="buffer"
+			href="<%= rowURL %>"
+			name="state"
+		>
+
+			<%
+			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
+
+			Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
+
+			long companyId = (Long)workflowInstanceContext.get(ContextConstants.COMPANY_ID);
+			long groupId = (Long)workflowInstanceContext.get(ContextConstants.GROUP_ID);
+			String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
+			long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
+
+			String state = WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK);
+
+			buffer.append(state);
+			%>
+
+		</liferay-ui:search-container-column-text>
+
+		<c:if test="<%= !allTasks %>">
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/portlet/workflow_tasks/workflow_task_action.jsp"
+			/>
+		</c:if>
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>

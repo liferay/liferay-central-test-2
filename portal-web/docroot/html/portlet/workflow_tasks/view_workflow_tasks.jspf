@@ -25,25 +25,13 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "my-pending-tasks");
 
-boolean completedTasks = false;
-
-if (tabs1.equals("my-completed-tasks")) {
-	completedTasks = true;
-}
-
-boolean pooledTasks = false;
-
-if (tabs1.equals("pooled-pending-tasks")) {
-	pooledTasks = true;
-}
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("tabs1", tabs1);
 %>
 
 <liferay-ui:tabs
-	names="my-pending-tasks,my-completed-tasks,pooled-pending-tasks"
+	names="my-pending-tasks,my-completed-tasks,pooled-pending-tasks,all-tasks"
 	url="<%= portletURL.toString() %>"
 />
 
@@ -51,114 +39,15 @@ portletURL.setParameter("tabs1", tabs1);
 try {
 %>
 
-	<liferay-ui:search-container
-		emptyResultsMessage='<%= LanguageUtil.get(pageContext, completedTasks ? "there-are-no-completed-tasks" : "there-are-no-pending-tasks-assigned-to-you") %>'
-		headerNames="name,asset-title,due-date,state"
-		iteratorURL="<%= portletURL %>"
-	>
-		<liferay-ui:search-container-results
-			results="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(user.getUserId(), completedTasks, searchContainer.getStart(), searchContainer.getEnd(), null) : WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completedTasks, searchContainer.getStart(), searchContainer.getEnd(), null) %>"
-			total="<%= pooledTasks ?  WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(user.getUserId(), completedTasks) : WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId(), completedTasks) %>"
-		/>
-
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.kernel.workflow.WorkflowTask"
-			modelVar="workflowTask"
-			stringKey="<%= true %>"
-		>
-			<liferay-ui:search-container-row-parameter
-				name="workflowTask"
-				value="<%= workflowTask %>"
-			/>
-
-			<portlet:renderURL var="rowURL">
-				<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
-			</portlet:renderURL>
-
-			<liferay-ui:search-container-column-text
-				name="name"
-				href="<%= rowURL %>"
-				property="name"
-			/>
-
-			<liferay-ui:search-container-column-text
-				buffer="buffer"
-				name="asset-title"
-				href="<%= rowURL %>"
-			>
-
-				<%
-				WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
-
-				Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
-
-				String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
-				long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
-
-				WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
-
-				buffer.append(workflowHandler.getTitle(classPK));
-				%>
-
-			</liferay-ui:search-container-column-text>
-
-			<liferay-ui:search-container-column-text
-				buffer="buffer"
-				name="due-date"
-				href="<%= rowURL %>"
-			>
-				<%
-				if (workflowTask.getDueDate() == null) {
-					buffer.append(LanguageUtil.get(pageContext, "never"));
-				}
-				else {
-					buffer.append(dateFormatDateTime.format(workflowTask.getDueDate()));
-				}
-				%>
-
-			</liferay-ui:search-container-column-text>
-
-			<liferay-ui:search-container-column-text
-				buffer="buffer"
-				href="<%= rowURL %>"
-				name="state"
-			>
-
-				<%
-				WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
-
-				Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
-
-				long companyId = (Long)workflowInstanceContext.get(ContextConstants.COMPANY_ID);
-				long groupId = (Long)workflowInstanceContext.get(ContextConstants.GROUP_ID);
-				String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
-				long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
-
-				String state = WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK);
-
-				buffer.append(state);
-				%>
-
-			</liferay-ui:search-container-column-text>
-
-			<liferay-ui:search-container-column-jsp
-				align="right"
-				path="/html/portlet/workflow_tasks/workflow_task_action.jsp"
-			/>
-		</liferay-ui:search-container-row>
-
-		<liferay-ui:search-iterator />
-	</liferay-ui:search-container>
+	<%@ include file="/html/portlet/workflow_tasks/workflow_tasks_container.jspf" %>
 
 	<br />
 
 <%
 }
-catch (WorkflowException we) {
+catch (Exception e) {
 	if (_log.isWarnEnabled()) {
-		_log.warn("Error retrieving the tasks of user " + user.getUserId(), we);
+		_log.warn("Error retrieving the tasks of user " + user.getUserId(), e);
 	}
 %>
 

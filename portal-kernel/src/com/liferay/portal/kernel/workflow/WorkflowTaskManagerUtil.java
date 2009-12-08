@@ -83,6 +83,12 @@ public class WorkflowTaskManagerUtil {
 		return _workflowTaskManager.getWorkflowTask(workflowTaskId);
 	}
 
+	public static int getWorkflowTaskCount(Boolean completed)
+		throws WorkflowException {
+
+		return _workflowTaskManager.getWorkflowTaskCount(completed);
+	}
+
 	public static int getWorkflowTaskCountByRole(long roleId, Boolean completed)
 		throws WorkflowException {
 
@@ -115,6 +121,15 @@ public class WorkflowTaskManagerUtil {
 
 	public static WorkflowTaskManager getWorkflowTaskManager() {
 		return _workflowTaskManager;
+	}
+
+	public static List<WorkflowTask> getWorkflowTasks(
+			Boolean completed, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowTaskManager.getWorkflowTasks(
+			completed, start, end, orderByComparator);
 	}
 
 	public static List<WorkflowTask> getWorkflowTasksByRole(
