@@ -54,6 +54,9 @@ public class SearchContainer<R> {
 
 	public static final String DEFAULT_DELTA_PARAM = "delta";
 
+	/**
+	 * @deprecated LPE-1735
+	 */
 	public static final int DEFAULT_MAX_PAGES = 25;
 
 	public static final String DEFAULT_ORDER_BY_COL_PARAM = "orderByCol";
@@ -168,6 +171,9 @@ public class SearchContainer<R> {
 		return _iteratorURL;
 	}
 
+	/**
+	 * @deprecated LPE-1735
+	 */
 	public int getMaxPages() {
 		return _maxPages;
 	}
@@ -278,6 +284,9 @@ public class SearchContainer<R> {
 		_iteratorURL = iteratorURL;
 	}
 
+	/**
+	 * @deprecated LPE-1735
+	 */
 	public void setMaxPages(int maxPages) {
 		_maxPages = maxPages;
 	}
