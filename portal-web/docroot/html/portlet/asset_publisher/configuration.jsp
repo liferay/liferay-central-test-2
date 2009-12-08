@@ -150,9 +150,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 	<c:choose>
 		<c:when test="<%= typeSelection.equals(StringPool.BLANK) %>">
-			<aui:select label="asset-selection" name="selectionStyle" onchange='<%= renderResponse.getNamespace() + "chooseSelectionStyle();" %>'>
+			<aui:select label="asset-selection" name="selectionStyle" onChange='<%= renderResponse.getNamespace() + "chooseSelectionStyle();" %>'>
 				<aui:option label="dynamic" selected='<%= selectionStyle.equals("dynamic") %>'/>
-				<aui:option  label="manual" selected='<%= selectionStyle.equals("manual") %>'/>
+				<aui:option label="manual" selected='<%= selectionStyle.equals("manual") %>'/>
 			</aui:select>
 
 			<c:choose>
@@ -167,7 +167,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 								<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
-								<aui:select name="assetEntryType" onchange='<%= renderResponse.getNamespace() + "selectionForType(this.options[this.selectedIndex].value);" %>'>
+								<aui:select name="assetEntryType" onChange='<%= renderResponse.getNamespace() + "selectionForType(this.options[this.selectedIndex].value);" %>'>
 									<aui:option label="select-existing" value="" />
 
 									<%
@@ -305,9 +305,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					</liferay-ui:panel-container>
 
 					<aui:button-row>
-						<aui:button value="save" onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' value="save" />
 
-						<aui:button value="cancel" onClick="<%= redirect %>" />
+						<aui:button onClick="<%= redirect %>" value="cancel" />
 					</aui:button-row>
 				</c:when>
 				<c:when test='<%= selectionStyle.equals("dynamic") %>'>
@@ -429,7 +429,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							</aui:fieldset>
 						</liferay-ui:panel>
 
-						<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "filter[action]") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherQueryLogic' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter[action]") %>'>
 							<liferay-ui:asset-tags-error />
 
 							<div id="<portlet:namespace />queryRules">
@@ -482,7 +482,6 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 											<div class="lfr-form-row">
 												<div class="row-fields">
-
 													<aui:select inlineField="<%= true %>" label="" name='<%= "queryContains" + index %>'>
 														<aui:option label="contains" selected="<%= queryContains %>" value="true" />
 														<aui:option label="does-not-contain" selected="<%= !queryContains %>" value="false" />
@@ -626,9 +625,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								);
 							</script>
 
-							<aui:input inlineLabel="left" label="include-tags-specified-in-the-url" name="mergeUrlTags" type="checkbox"  value="<%= mergeUrlTags %>" />
+							<aui:input inlineLabel="left" label="include-tags-specified-in-the-url" name="mergeUrlTags" type="checkbox" value="<%= mergeUrlTags %>" />
 					</liferay-ui:panel>
-					<liferay-ui:panel id='assetPublisherGroupBy' title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherGroupBy' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>'>
 						<aui:fieldset>
 							<aui:select inlineField="<%= true %>" inlineLabel="left" label="order-by" name="orderByColumn1">
 								<aui:option label="title" selected='<%= orderByColumn2.equals("title") %>' />
@@ -691,15 +690,15 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							</aui:select>
 						</aui:fieldset>
 					</liferay-ui:panel>
-					<liferay-ui:panel id='assetPublisherDisplaySettings' title='<%= LanguageUtil.get(pageContext, "display-settings") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherDisplaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
 						<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
 					</liferay-ui:panel>
 				</liferay-ui:panel-container>
 
 					<aui:button-row>
-						<aui:button value="save" onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' value="save" />
 
-						<aui:button value="cancel" onClick="<%= redirect %>" />
+						<aui:button onClick="<%= redirect %>" value="cancel" />
 					</aui:button-row>
 				</c:when>
 			</c:choose>

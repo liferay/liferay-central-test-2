@@ -28,7 +28,7 @@
 	for (String curDisplayStyle : PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES) {
 	%>
 
-		<aui:option selected="<%= displayStyle.equals(curDisplayStyle) %>" label="<%= curDisplayStyle %>" />
+		<aui:option label="<%= curDisplayStyle %>" selected="<%= displayStyle.equals(curDisplayStyle) %>" />
 
 	<%
 	}
@@ -37,16 +37,16 @@
 </aui:select>
 
 <aui:select cssClass="hidden-field" helpMessage="abstract-length-key-help" name="abstractLength">
-	<aui:option selected="<%= abstractLength == 100 %>" label="100" />
-	<aui:option selected="<%= abstractLength == 200 %>" label="200" />
-	<aui:option selected="<%= abstractLength == 300 %>" label="300" />
-	<aui:option selected="<%= abstractLength == 400 %>" label="400" />
-	<aui:option selected="<%= abstractLength == 500 %>" label="500" />
+	<aui:option label="100" selected="<%= abstractLength == 100 %>" />
+	<aui:option label="200" selected="<%= abstractLength == 200 %>" />
+	<aui:option label="300" selected="<%= abstractLength == 300 %>" />
+	<aui:option label="400" selected="<%= abstractLength == 400 %>" />
+	<aui:option label="500" selected="<%= abstractLength == 500 %>" />
 </aui:select>
 
 <aui:input cssClass="hidden-field" inlineLabel="left" name="showAssetTitle" type="checkbox" value="<%= showAssetTitle %>" />
 
-<aui:input cssClass="hidden-field" inlineLabel="left" name="showContextLink" type="checkbox"  value="<%= showContextLink %>" />
+<aui:input cssClass="hidden-field" inlineLabel="left" name="showContextLink" type="checkbox" value="<%= showContextLink %>" />
 
 <aui:select cssClass="hidden-field" name="assetLinkBehaviour">
 	<aui:option label="show-full-content" selected='<%= assetLinkBehaviour.equals("showFullContent") %>' value="showFullContent" />
@@ -57,12 +57,12 @@
 	<aui:select label="maximum-items-to-display" name="delta">
 
 		<%
-		int[] deltas = {1,2,3,4,5,10,15,20,25,30,40,50,60,70,80,90,100};
+		int[] deltas = {1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100};
 
 		for (int currentDelta: deltas) {
 		%>
 
-			<aui:option selected="<%= (delta == currentDelta) %>" label="<%= currentDelta %>" />
+			<aui:option label="<%= currentDelta %>" selected="<%= (delta == currentDelta) %>" />
 
 		<%
 		}
@@ -71,9 +71,9 @@
 	</aui:select>
 
 	<aui:select name="paginationType">
-		<aui:option selected='<%= paginationType.equals("none") %>' label="none" />
-		<aui:option selected='<%= paginationType.equals("simple") %>' label="simple" />
-		<aui:option selected='<%= paginationType.equals("regular") %>' label="regular" />
+		<aui:option label="none" selected='<%= paginationType.equals("none") %>' />
+		<aui:option label="simple" selected='<%= paginationType.equals("simple") %>' />
+		<aui:option label="regular" selected='<%= paginationType.equals("regular") %>' />
 	</aui:select>
 
 	<aui:input inlineLabel="left" label="exclude-assets-with-0-views" name="excludeZeroViewCount" type="checkbox" value="<%= excludeZeroViewCount %>" />
