@@ -216,9 +216,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			// Asset
 
 			updateAsset(
-				userId, image, contentType,
-				serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
+				userId, image, serviceContext.getAssetCategoryIds(),
+				serviceContext.getAssetTagNames(), contentType);
 
 			// Expando
 
@@ -544,8 +543,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public void updateAsset(
-			long userId, IGImage image, String contentType,
-			long[] assetCategoryIds, String[] assetTagNames)
+			long userId, IGImage image, long[] assetCategoryIds,
+			String[] assetTagNames, String contentType)
 		throws PortalException, SystemException {
 
 		Image largeImage = imageLocalService.getImage(image.getLargeImageId());
@@ -621,7 +620,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			String[] assetTagNames = serviceContext.getAssetTagNames();
 
 			updateAsset(
-				userId, image, contentType, assetCategoryIds, assetTagNames);
+				userId, image, assetCategoryIds, assetTagNames, contentType);
 
 			// Expando
 

@@ -345,12 +345,12 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 
 	public void updateAsset(long userId,
 		com.liferay.portlet.imagegallery.model.IGImage image,
-		java.lang.String contentType, long[] assetCategoryIds,
-		java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		java.lang.String contentType)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_igImageLocalService.updateAsset(userId, image, contentType,
-			assetCategoryIds, assetTagNames);
+		_igImageLocalService.updateAsset(userId, image, assetCategoryIds,
+			assetTagNames, contentType);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
