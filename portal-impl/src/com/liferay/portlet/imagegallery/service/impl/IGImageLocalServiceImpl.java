@@ -544,23 +544,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public void updateAsset(
-			long userId, IGImage image, long[] assetCategoryIds,
-			String[] assetTagNames)
-		throws PortalException, SystemException {
-
-		Image largeImage = imageLocalService.getImage(image.getLargeImageId());
-
-		if (largeImage == null) {
-			return;
-		}
-
-		String contentType = MimeTypesUtil.getContentType(largeImage.getType());
-
-		updateAsset(
-			userId, image, contentType, assetCategoryIds, assetTagNames);
-	}
-
-	public void updateAsset(
 			long userId, IGImage image, String contentType,
 			long[] assetCategoryIds, String[] assetTagNames)
 		throws PortalException, SystemException {
@@ -569,6 +552,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		if (largeImage == null) {
 			return;
+		}
+
+		if (contentType == null) {
+			contentType = MimeTypesUtil.getContentType(largeImage.getType());
 		}
 
 		assetEntryLocalService.updateEntry(
