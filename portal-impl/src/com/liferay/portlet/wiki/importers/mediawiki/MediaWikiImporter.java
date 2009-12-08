@@ -384,11 +384,11 @@ public class MediaWikiImporter implements WikiImporter {
 				node.getNodeId(), SHARED_IMAGES_TITLE, attachments);
 		}
 
+		zipReader.close();
+
 		if (_log.isInfoEnabled()) {
 			_log.info("Imported " + count + " images into " + node.getName());
 		}
-
-		zipReader.close();
 	}
 
 	protected void processRegularPages(
