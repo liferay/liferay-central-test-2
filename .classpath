@@ -221,6 +221,7 @@
 	<classpathentry kind="lib" path="lib/portal/stax.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts-el.jar"/>
+	<classpathentry kind="lib" path="lib/portal/truezip.jar"/>
 	<classpathentry kind="lib" path="lib/portal/unoil.jar"/>
 	<classpathentry kind="lib" path="lib/portal/urlrewrite.jar"/>
 	<classpathentry kind="lib" path="lib/portal/vaadin.jar"/>
