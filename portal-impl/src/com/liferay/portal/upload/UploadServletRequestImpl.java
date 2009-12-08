@@ -57,7 +57,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public class UploadServletRequestImpl
 	extends HttpServletRequestWrapper implements UploadServletRequest {
 
-	public static final int DEFAULT_SIZE_MAX = GetterUtil.getInteger(
+	public static final long DEFAULT_SIZE_MAX = GetterUtil.getLong(
 		PropsUtil.get(UploadServletRequestImpl.class.getName() + ".max.size"));
 
 	public static final File DEFAULT_TEMP_DIR = new File(
