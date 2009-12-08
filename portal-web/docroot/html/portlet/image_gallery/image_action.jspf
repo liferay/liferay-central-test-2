@@ -42,7 +42,7 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view" message="view" url="<%= viewURL %>" />
+	<liferay-ui:icon image="view" url="<%= viewURL %>" />
 </c:if>
 
 <c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.UPDATE) %>">
@@ -52,7 +52,7 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" message="edit" url="<%= editURL %>" />
+	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 </c:if>
 
 <c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.PERMISSIONS) %>">
@@ -63,7 +63,7 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 		var="permissionsURL"
 	/>
 
-	<liferay-ui:icon image="permissions" message="permissions" url="<%= permissionsURL %>" />
+	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 </c:if>
 
 <c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.DELETE) %>">
