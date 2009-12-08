@@ -172,7 +172,14 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					String taglibPostReplyURL = "javascript:" + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
 					%>
 
-					<liferay-ui:icon image="reply" message="add-comment" url="<%= taglibPostReplyURL %>" label="<%= true %>" />
+					<c:choose>
+						<c:when test="<%= messagesCount == 1 %>">
+							<liferay-ui:message key="no-comments-yet" /> <a href="<%= taglibPostReplyURL %>"><liferay-ui:message key="be-the-first" /></a>
+						</c:when>
+						<c:otherwise>
+							<liferay-ui:icon image="reply" message="add-comment" url="<%= taglibPostReplyURL %>" label="<%= true %>" />
+						</c:otherwise>
+					</c:choose>
 				</td>
 			</tr>
 			<tr id="<%= namespace %>postReplyForm<%= i %>" style="display: none;">
