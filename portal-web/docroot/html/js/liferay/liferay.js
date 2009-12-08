@@ -49,10 +49,9 @@ Liferay.Service = {
 			serviceUrl = instance.tunnelUrl;
 		}
 
+		options.doAsUserId = themeDisplay.getDoAsUserIdEncoded();
 		options.serviceParameters = Liferay.Service.getParameters(options);
 
-		options.doAsUserId = themeDisplay.getDoAsUserIdEncoded();
-		
 		if (callback) {
 			jQuery.ajax(
 				{
