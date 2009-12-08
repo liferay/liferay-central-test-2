@@ -27,38 +27,37 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 %>
 
 <c:if test="<%= !addPortletURLs.isEmpty() %>">
-	<form name="<portlet:namespace/>fm">
+	<aui:form name="fm">
 
-	<script type="text/javascript">
-		function <portlet:namespace/>addNewAsset() {
-			var url = document.<portlet:namespace />fm.<portlet:namespace />assetURL.value;
+		<script type="text/javascript">
+			function <portlet:namespace/>addNewAsset() {
+				var url = document.<portlet:namespace />fm.<portlet:namespace />assetURL.value;
 
-			if (url != '') {
-				location.href = url;
+				if (url != '') {
+					location.href = url;
+				}
 			}
-		}
-	</script>
+		</script>
 
-	<div class="lfr-meta-actions edit-controls">
-		<select name="<portlet:namespace/>assetURL" onchange="<portlet:namespace/>addNewAsset();">
-			<option value=""><liferay-ui:message key="add-new" />...</option>
+		<div class="lfr-meta-actions edit-controls">
+			<aui:select label="" name="assetURL" onchange='<%= renderResponse.getNamespace() + "addNewAsset();" %>'>
+				<aui:option label='<%= LanguageUtil.get(pageContext, "add-new") + "..." %>' value="" />
 
-			<%
-			for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
-				String className = entry.getKey();
-				PortletURL addPortletURL = entry.getValue();
-			%>
+				<%
+				for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
+					String className = entry.getKey();
+					PortletURL addPortletURL = entry.getValue();
+				%>
 
-				<option value="<%= addPortletURL.toString() %>"><liferay-ui:message key='<%= "model.resource." + className %>' /></option>
+					<aui:option label='<%= "model.resource." + className %>' value="<%= addPortletURL.toString() %>" />
 
-			<%
-			}
-			%>
+				<%
+				}
+				%>
 
-		</select>
-	</div>
-
-	</form>
+			</aui:select>
+		</div>
+	</aui:form>
 </c:if>
 
 <%!

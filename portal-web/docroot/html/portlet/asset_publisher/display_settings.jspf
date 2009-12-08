@@ -22,255 +22,141 @@
  */
 %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="display-style" />
-	</td>
-	<td>
-		<select id="<portlet:namespace />displayStyle" name="<portlet:namespace />displayStyle">
+<aui:select name="displayStyle">
 
-			<%
-			for (String curDisplayStyle : PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES) {
-			%>
+	<%
+	for (String curDisplayStyle : PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES) {
+	%>
 
-				<option <%= displayStyle.equals(curDisplayStyle) ? "selected" : "" %> value="<%= curDisplayStyle %>"><liferay-ui:message key="<%= curDisplayStyle %>" /></option>
+		<aui:option selected="<%= displayStyle.equals(curDisplayStyle) %>" label="<%= curDisplayStyle %>" />
 
-			<%
-			}
-			%>
+	<%
+	}
+	%>
 
-		</select>
-	</td>
-</tr>
-<tr class="hidden-field" id="abstractLength">
-	<td>
-		<liferay-ui:message key="abstract-length" /> <liferay-ui:icon-help message="abstract-length-key-help" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />abstractLength">
-			<option <%= abstractLength == 100 ? "selected" : "" %> value="100">100</option>
-			<option <%= abstractLength == 200 ? "selected" : "" %> value="200">200</option>
-			<option <%= abstractLength == 300 ? "selected" : "" %> value="300">300</option>
-			<option <%= abstractLength == 400 ? "selected" : "" %> value="400">400</option>
-			<option <%= abstractLength == 500 ? "selected" : "" %> value="500">500</option>
-		</select>
-	</td>
-</tr>
-<tr class="hidden-field" id="showAssetTitle">
-	<td>
-		<liferay-ui:message key="show-asset-title" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showAssetTitle" defaultValue="<%= showAssetTitle %>" />
-	</td>
-</tr>
-<tr class="hidden-field" id="showContextLink">
-	<td>
-		<liferay-ui:message key="show-context-link" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showContextLink" defaultValue="<%= showContextLink %>" />
-	</td>
-</tr>
-<tr class="hidden-field" id="assetLinkBehaviour">
-	<td>
-		<liferay-ui:message key="asset-link-behaviour" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />assetLinkBehaviour">
-			<option <%= assetLinkBehaviour.equals("showFullContent") ? "selected" : "" %> value="showFullContent"><liferay-ui:message key="show-full-content" /></option>
-			<option <%= assetLinkBehaviour.equals("viewInPortlet") ? "selected" : "" %> value="viewInPortlet"><liferay-ui:message key="view-in-a-specific-portlet" /></option>
-		</select>
-	</td>
-</tr>
+</aui:select>
+
+<aui:select cssClass="hidden-field" helpMessage="abstract-length-key-help" name="abstractLength">
+	<aui:option selected="<%= abstractLength == 100 %>" label="100" />
+	<aui:option selected="<%= abstractLength == 200 %>" label="200" />
+	<aui:option selected="<%= abstractLength == 300 %>" label="300" />
+	<aui:option selected="<%= abstractLength == 400 %>" label="400" />
+	<aui:option selected="<%= abstractLength == 500 %>" label="500" />
+</aui:select>
+
+<aui:input cssClass="hidden-field" inlineLabel="left" name="showAssetTitle" type="checkbox" value="<%= showAssetTitle %>" />
+
+<aui:input cssClass="hidden-field" inlineLabel="left" name="showContextLink" type="checkbox"  value="<%= showContextLink %>" />
+
+<aui:select cssClass="hidden-field" name="assetLinkBehaviour">
+	<aui:option label="show-full-content" selected='<%= assetLinkBehaviour.equals("showFullContent") %>' value="showFullContent" />
+	<aui:option label="view-in-a-specific-portlet" selected='<%= assetLinkBehaviour.equals("viewInPortlet") %>' value="viewInPortlet" />
+</aui:select>
 
 <c:if test='<%= selectionStyle.equals("dynamic") %>'>
-	<tr>
-		<td>
-			<liferay-ui:message key="maximum-items-to-display" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />delta">
-				<option <%= (delta == 1) ? "selected" : "" %> value="1">1</option>
-				<option <%= (delta == 2) ? "selected" : "" %> value="2">2</option>
-				<option <%= (delta == 3) ? "selected" : "" %> value="3">3</option>
-				<option <%= (delta == 4) ? "selected" : "" %> value="4">4</option>
-				<option <%= (delta == 5) ? "selected" : "" %> value="5">5</option>
-				<option <%= (delta == 10) ? "selected" : "" %> value="10">10</option>
-				<option <%= (delta == 15) ? "selected" : "" %> value="15">15</option>
-				<option <%= (delta == 20) ? "selected" : "" %> value="20">20</option>
-				<option <%= (delta == 25) ? "selected" : "" %> value="25">25</option>
-				<option <%= (delta == 30) ? "selected" : "" %> value="30">30</option>
-				<option <%= (delta == 40) ? "selected" : "" %> value="40">40</option>
-				<option <%= (delta == 50) ? "selected" : "" %> value="50">50</option>
-				<option <%= (delta == 60) ? "selected" : "" %> value="60">60</option>
-				<option <%= (delta == 70) ? "selected" : "" %> value="70">70</option>
-				<option <%= (delta == 80) ? "selected" : "" %> value="80">80</option>
-				<option <%= (delta == 90) ? "selected" : "" %> value="90">90</option>
-				<option <%= (delta == 100) ? "selected" : "" %> value="100">100</option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="pagination-type" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />paginationType">
-				<option <%= paginationType.equals("none") ? "selected" : "" %> value="none"><liferay-ui:message key="none" /></option>
-				<option <%= paginationType.equals("simple") ? "selected" : "" %> value="simple"><liferay-ui:message key="simple" /></option>
-				<option <%= paginationType.equals("regular") ? "selected" : "" %> value="regular"><liferay-ui:message key="regular" /></option>
-			</select>
-		</td>
-	</tr>
-</c:if>
-
-<c:if test='<%= selectionStyle.equals("dynamic") %>'>
-	<tr>
-		<td>
-			<liferay-ui:message key="exclude-assets-with-0-views" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="excludeZeroViewCount" defaultValue="<%= excludeZeroViewCount %>" />
-		</td>
-	</tr>
-</c:if>
-
-<tr>
-	<td>
-		<liferay-ui:message key="show-available-locales" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showAvailableLocales" defaultValue="<%= showAvailableLocales %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="convert-to" />
-
-		<c:if test="<%= !openOfficeServerEnabled %>">
-			<liferay-ui:icon-help message="enabling-openoffice-integration-provides-document-conversion-functionality" />
-		</c:if>
-	</td>
-	<td>
-		<table class="lfr-table">
-		<tr valign="middle">
-
-			<%
-			for (String conversion : conversions) {
-			%>
-
-				<td>
-					<input <%= ArrayUtil.contains(extensions, conversion) ? "checked": "" %> <%= !openOfficeServerEnabled ? "disabled" : "" %> name="<portlet:namespace />extensions" type="checkbox" value="<%= conversion %>" />
-				</td>
-				<td>
-					<%= conversion.toUpperCase() %>
-				</td>
-
-			<%
-			}
-			%>
-
-		</tr>
-		</table>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="enable-print" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="enablePrint" defaultValue="<%= enablePrint %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="enable-ratings" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="enable-comments" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="enable-comment-ratings" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
-	</td>
-</tr>
-<c:if test='<%= selectionStyle.equals("manual") %>'>
-	<tr>
-		<td>
-			<liferay-ui:message key="enable-tag-based-navigation" /> <liferay-ui:icon-help message="enable-tag-based-navigation-help" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="enableTagBasedNavigation" defaultValue="<%= enableTagBasedNavigation %>" />
-		</td>
-	</tr>
-</c:if>
-
-<tr>
-	<td>
-		<liferay-ui:message key="show-metadata" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />metadataFields" type="hidden" value="" />
+	<aui:select label="maximum-items-to-display" name="delta">
 
 		<%
-		Set availableMetadataFields = SetUtil.fromArray(StringUtil.split(allMetadataFields));
+		int[] deltas = {1,2,3,4,5,10,15,20,25,30,40,50,60,70,80,90,100};
 
-		// Left list
-
-		List leftList = new ArrayList();
-
-		for (int i = 0; i < metadataFields.length; i++) {
-			String folderColumn = metadataFields[i];
-
-			leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
-		}
-
-		// Right list
-
-		List rightList = new ArrayList();
-
-		Arrays.sort(metadataFields);
-
-		Iterator itr = availableMetadataFields.iterator();
-
-		while (itr.hasNext()) {
-			String folderColumn = (String)itr.next();
-
-			if (Arrays.binarySearch(metadataFields, folderColumn) < 0) {
-				rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
-			}
-		}
-
-		rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+		for (int currentDelta: deltas) {
 		%>
 
-		<liferay-ui:input-move-boxes
-			formName="fm"
-			leftTitle="current"
-			rightTitle="available"
-			leftBoxName="currentMetadataFields"
-			rightBoxName="availableMetadataFields"
-			leftReorder="true"
-			leftList="<%= leftList %>"
-			rightList="<%= rightList %>"
-		/>
-	</td>
-</tr>
-</table>
+			<aui:option selected="<%= (delta == currentDelta) %>" label="<%= currentDelta %>" />
+
+		<%
+		}
+		%>
+
+	</aui:select>
+
+	<aui:select name="paginationType">
+		<aui:option selected='<%= paginationType.equals("none") %>' label="none" />
+		<aui:option selected='<%= paginationType.equals("simple") %>' label="simple" />
+		<aui:option selected='<%= paginationType.equals("regular") %>' label="regular" />
+	</aui:select>
+
+	<aui:input inlineLabel="left" label="exclude-assets-with-0-views" name="excludeZeroViewCount" type="checkbox" value="<%= excludeZeroViewCount %>" />
+</c:if>
+
+<aui:input inlineLabel="left" label="show-available-locales" name="showAvailableLocales" type="checkbox" value="<%= showAvailableLocales %>" />
+
+<aui:field-wrapper helpMessage='<%= !openOfficeServerEnabled ? "enabling-openoffice-integration-provides-document-conversion-functionality" : StringPool.BLANK %>' label="convert-to">
+
+	<%
+	for (String conversion : conversions) {
+	%>
+
+		<aui:field-wrapper inlineField="<%= true %>" inlineLabel="left" label="<%= conversion.toUpperCase() %>">
+			<input <%= ArrayUtil.contains(extensions, conversion) ? "checked": "" %> <%= !openOfficeServerEnabled ? "disabled" : "" %> name="<portlet:namespace />extensions" type="checkbox" value="<%= conversion %>" />
+	 	</aui:field-wrapper>
+
+	<%
+	}
+	%>
+
+</aui:field-wrapper>
+
+<aui:input inlineLabel="left" name="enablePrint" type="checkbox" value="<%= enablePrint %>" />
+
+<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
+
+<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
+
+<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
+
+<c:if test='<%= selectionStyle.equals("manual") %>'>
+	<aui:input helpMessage="enable-tag-based-navigation-help" inlineLabel="left" label="enable-tag-based-navigation" name="enableTagBasedNavigation" type="checkbox" value="<%= enableTagBasedNavigation %>" />
+</c:if>
+
+<aui:fieldset>
+	<aui:legend label="show-metadata" />
+
+	<aui:input name="metadataFields" type="hidden" />
+
+	<%
+	Set availableMetadataFields = SetUtil.fromArray(StringUtil.split(allMetadataFields));
+
+	// Left list
+
+	List leftList = new ArrayList();
+
+	for (int i = 0; i < metadataFields.length; i++) {
+		String folderColumn = metadataFields[i];
+
+		leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+	}
+
+	// Right list
+
+	List rightList = new ArrayList();
+
+	Arrays.sort(metadataFields);
+
+	Iterator itr = availableMetadataFields.iterator();
+
+	while (itr.hasNext()) {
+		String folderColumn = (String)itr.next();
+
+		if (Arrays.binarySearch(metadataFields, folderColumn) < 0) {
+			rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+		}
+	}
+
+	rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+	%>
+
+	<liferay-ui:input-move-boxes
+		formName="fm"
+		leftTitle="current"
+		rightTitle="available"
+		leftBoxName="currentMetadataFields"
+		rightBoxName="availableMetadataFields"
+		leftReorder="true"
+		leftList="<%= leftList %>"
+		rightList="<%= rightList %>"
+	/>
+</aui:fieldset>
 
 <script type="text/javascript">
 	AUI().ready(
@@ -321,8 +207,6 @@
 
 			if (selectDisplayStyle) {
 				selectDisplayStyle.on('change', showHiddenFields);
-
-				Liferay.Util.focusFormField(selectDisplayStyle);
 			}
 		}
 	);
