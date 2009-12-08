@@ -100,11 +100,9 @@
 
 				int topMargin = PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageHeight;
 				int sideMargin = (PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageWidth) / 2;
-
-				String largeImageURL = themeDisplay.getPathImage() + "/image_gallery?img_id=" + largeImage.getImageId() + "&t=" + ImageServletTokenUtil.getToken(largeImage.getImageId());
 				%>
 
-				<a class="image-thumbnail" href="<%= largeImageURL %>" largeImageId="<%= largeImage.getImageId() %>" title="<%= image.getName() + " - " + image.getDescription() %>">
+				<a class="image-thumbnail" href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= largeImage.getImageId() %>&t=<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>" largeImageId="<%= largeImage.getImageId() %>" title="<%= image.getName() + " - " + image.getDescription() %>">
 					<img alt="<%= image.getName() + " - " + image.getDescription() %>" border="no" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImageId %>&igImageId=<%= image.getImageId() %>&igSmallImage=1&t=<%= ImageServletTokenUtil.getToken(smallImageId) %>" style="height: <%= smallImageHeight %>; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px; width: <%= smallImageWidth %>;" />
 
 					<span class="image-title"><%= image.getName() %></span>
