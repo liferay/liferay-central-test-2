@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -324,8 +324,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setStatusByUserId(user.getUserId());
 			thread.setStatusByUserName(userName);
 			thread.setStatusDate(now);
-
-			//TODO
 
 			MBCategory systemCategory = mbCategoryLocalService.getSystemCategory();
 			boolean isSystemCategory =
@@ -1620,7 +1618,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		// Category
-		//Todo
 		MBCategory systemCategory = mbCategoryLocalService.getSystemCategory();
 		boolean isSystemCategory =
 			(systemCategory.getCategoryId() == message.getCategoryId());
