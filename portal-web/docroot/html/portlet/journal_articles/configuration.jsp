@@ -128,13 +128,13 @@ if (Validator.isNotNull(structureId)) {
 
 		</aui:select>
 
-		<aui:select label="display-url" name="pageURL" onChange='<%= renderResponse.getNamespace()+"saveConfiguration();" %>'>
+		<aui:select label="display-url" name="pageURL" onChange='<%= renderResponse.getNamespace() + "saveConfiguration();" %>'>
 			<aui:option label="maximized" selected='<%= pageURL.equals("maximized") %>' />
 			<aui:option label="normal" selected='<%= pageURL.equals("normal") %>' />
 			<aui:option label="pop-up" selected='<%= pageURL.equals("popUp") %>' />
 		</aui:select>
 
-		<aui:select label="display-per-page" name="pageDelta" onChange='<%= renderResponse.getNamespace()+"saveConfiguration();" %>'>
+		<aui:select label="display-per-page" name="pageDelta" onChange='<%= renderResponse.getNamespace() + "saveConfiguration();" %>'>
 
 			<%
 			String[] pageDeltaValues = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLES_PAGE_DELTA_VALUES);
@@ -150,7 +150,7 @@ if (Validator.isNotNull(structureId)) {
 
 		</aui:select>
 
-		<aui:select label="order-by-column" name="orderByCol" onChange='<%= renderResponse.getNamespace()+"saveConfiguration();" %>'>
+		<aui:select label="order-by-column" name="orderByCol" onChange='<%= renderResponse.getNamespace() + "saveConfiguration();" %>'>
 			<aui:option label="display-date" selected='<%= orderByCol.equals("display-date") %>' />
 			<aui:option label="create-date" selected='<%= orderByCol.equals("create-date") %>' />
 			<aui:option label="modified-date" selected='<%= orderByCol.equals("modified-date") %>' />
@@ -158,7 +158,7 @@ if (Validator.isNotNull(structureId)) {
 			<aui:option label="id" selected='<%= orderByCol.equals("id") %>' />
 		</aui:select>
 
-		<aui:select label="order-by-type" name="orderByType" onChange='<%= renderResponse.getNamespace()+"saveConfiguration();" %>'>
+		<aui:select label="order-by-type" name="orderByType" onChange='<%= renderResponse.getNamespace() + "saveConfiguration();" %>'>
 			<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' />
 			<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' />
 		</aui:select>
