@@ -108,22 +108,9 @@ public class DLFileEntryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.WEBDAV_LITMUS) {
-			if (file == null) {
-				throw new FileSizeException();
-			}
-		}
-
-		try {
-			InputStream is = new BufferedInputStream(new FileInputStream(file));
-
-			return addFileEntry(
-				null, userId, groupId, folderId, name, title, description,
-				extraSettings, is, file.length(), serviceContext);
-		}
-		catch (FileNotFoundException fnfe) {
-			throw new FileSizeException();
-		}
+		return addFileEntry(
+			null, userId, groupId, folderId, name, title, description,
+			extraSettings, file, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
@@ -131,12 +118,6 @@ public class DLFileEntryLocalServiceImpl
 			String description, String extraSettings, InputStream is, long size,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
-
-		if (!PropsValues.WEBDAV_LITMUS) {
-			if (is == null) {
-				throw new FileSizeException();
-			}
-		}
 
 		return addFileEntry(
 			null, userId, groupId, folderId, name, title, description,
@@ -160,6 +141,30 @@ public class DLFileEntryLocalServiceImpl
 		return addFileEntry(
 			uuid, userId, groupId, folderId, name, title, description,
 			extraSettings, is, bytes.length, serviceContext);
+	}
+
+	public DLFileEntry addFileEntry(
+			String uuid, long userId, long groupId, long folderId, String name,
+			String title, String description, String extraSettings, File file,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.WEBDAV_LITMUS) {
+			if (file == null) {
+				throw new FileSizeException();
+			}
+		}
+
+		try {
+			InputStream is = new BufferedInputStream(new FileInputStream(file));
+
+			return addFileEntry(
+				uuid, userId, groupId, folderId, name, title, description,
+				extraSettings, is, file.length(), serviceContext);
+		}
+		catch (FileNotFoundException fnfe) {
+			throw new FileSizeException();
+		}
 	}
 
 	public DLFileEntry addFileEntry(
