@@ -25,11 +25,11 @@ package com.liferay.portal.servlet.filters.audit;
 import com.liferay.portal.kernel.audit.AuditRequestThreadLocal;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * <a href="AuditFilter.java.html"><b><i>View Source</i></b></a>
@@ -49,19 +49,21 @@ public class AuditFilter extends BasePortalFilter {
 		auditRequestThreadLocal.setClientHost(request.getRemoteHost());
 		auditRequestThreadLocal.setClientIP(request.getRemoteAddr());
 		auditRequestThreadLocal.setQueryString(request.getQueryString());
+
+		HttpSession session = request.getSession();
+
+		Long userId = (Long)session.getAttribute(WebKeys.USER_ID);
+
+		if (userId != null) {
+			auditRequestThreadLocal.setRealUserId(userId.longValue());
+		}
+
 		auditRequestThreadLocal.setRequestURL(
 			request.getRequestURL().toString());
 		auditRequestThreadLocal.setServerName(request.getServerName());
 		auditRequestThreadLocal.setServerPort(request.getServerPort());
 		auditRequestThreadLocal.setSessionID(request.getSession().getId());
-		
-		Long realUserId = (Long)request.getSession().getAttribute(
-			WebKeys.USER_ID);
 
-		if (realUserId != null) {
-			auditRequestThreadLocal.setRealUserId(realUserId.longValue());
-		}
-		
 		try {
 			processFilter(AuditFilter.class, request, response, filterChain);
 		}

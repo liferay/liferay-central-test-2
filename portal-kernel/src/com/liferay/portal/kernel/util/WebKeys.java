@@ -73,7 +73,11 @@ public interface WebKeys {
 
 	public static final String THEME_DISPLAY = "THEME_DISPLAY";
 
+	public static final String USER = "USER";
+
 	public static final String USER_ID = "USER_ID";
+
+	public static final String USER_PASSWORD = "USER_PASSWORD";
 
 	public static final String VELOCITY_TAGLIB = "VELOCITY_TAGLIB";
 

@@ -396,13 +396,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String TREE_SELECTED_NODES = "TREE_SELECTED_NODES";
 
-	public static final String USER = "USER";
-
 	public static final String USER_GROUP = "USER_GROUP";
-
-	public static final String USER_ID = "USER_ID";
-
-	public static final String USER_PASSWORD = "USER_PASSWORD";
 
 	public static final String USERS_NOTIFIED = "USERS_NOTIFIED";
 
