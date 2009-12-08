@@ -39,7 +39,7 @@ portletURL.setParameter("tabs1", tabs1);
 try {
 %>
 
-	<%@ include file="/html/portlet/workflow_tasks/workflow_tasks_container.jspf" %>
+	<%@ include file="/html/portlet/workflow_tasks/workflow_tasks.jspf" %>
 
 	<br />
 

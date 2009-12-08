@@ -99,6 +99,7 @@
 				name="assignee"
 				href="<%= rowURL %>"
 			>
+
 				<%
 				if (workflowTask.getAssigneeUserId() != 0 ){
 					buffer.append(PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK));
@@ -137,6 +138,7 @@
 			name="due-date"
 			href="<%= rowURL %>"
 		>
+
 			<%
 			if (workflowTask.getDueDate() == null) {
 				buffer.append(LanguageUtil.get(pageContext, "never"));
