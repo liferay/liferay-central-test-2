@@ -32,8 +32,7 @@ import java.util.Map;
  */
 public enum ReportDataSourceType {
 
-	JASPER_CSV("jasper_csv"), JASPER_EMPTY("jasper_empty"),
-	JASPER_XLS("jasper_xls"), JASPER_XML("jasper_xml"), JDBC("jdbc"),
+	CSV("csv"), EMPTY("empty"), XLS("xls"), XML("xml"), JDBC("jdbc"),
 	PORTAL("portal");
 
 	public static ReportDataSourceType parse(String value) {
@@ -44,17 +43,17 @@ public enum ReportDataSourceType {
 			return reportDataSourceType;
 		}
 
-		if (JASPER_CSV.toString().equalsIgnoreCase(value)) {
-			return JASPER_CSV;
+		if (CSV.toString().equalsIgnoreCase(value)) {
+			return CSV;
 		}
-		else if (JASPER_EMPTY.toString().equalsIgnoreCase(value)) {
-			return JASPER_EMPTY;
+		else if (EMPTY.toString().equalsIgnoreCase(value)) {
+			return EMPTY;
 		}
-		else if (JASPER_XLS.toString().equalsIgnoreCase(value)) {
-			return JASPER_XLS;
+		else if (XLS.toString().equalsIgnoreCase(value)) {
+			return XLS;
 		}
-		else if (JASPER_XML.toString().equalsIgnoreCase(value)) {
-			return JASPER_XML;
+		else if (XML.toString().equalsIgnoreCase(value)) {
+			return XML;
 		}
 		else if (JDBC.toString().equalsIgnoreCase(value)) {
 			return JDBC;
@@ -80,10 +79,10 @@ public enum ReportDataSourceType {
 		_reportDataSourceTypes = new HashMap<String, ReportDataSourceType>();
 
 	static {
-		_reportDataSourceTypes.put(JASPER_CSV.toString(), JASPER_CSV);
-		_reportDataSourceTypes.put(JASPER_EMPTY.toString(), JASPER_EMPTY);
-		_reportDataSourceTypes.put(JASPER_XLS.toString(), JASPER_XLS);
-		_reportDataSourceTypes.put(JASPER_XML.toString(), JASPER_XML);
+		_reportDataSourceTypes.put(CSV.toString(), CSV);
+		_reportDataSourceTypes.put(EMPTY.toString(), EMPTY);
+		_reportDataSourceTypes.put(XLS.toString(), XLS);
+		_reportDataSourceTypes.put(XML.toString(), XML);
 		_reportDataSourceTypes.put(JDBC.toString(), JDBC);
 		_reportDataSourceTypes.put(PORTAL.toString(), PORTAL);
 	}

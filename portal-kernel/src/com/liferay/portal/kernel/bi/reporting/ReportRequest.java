@@ -32,12 +32,56 @@ import java.util.Map;
  * @author Michael C. Han
  * @author Gavin Wan
  */
-public interface ReportRequest extends Serializable {
+public class ReportRequest implements Serializable {
 
-	public ReportDesignRetriever getReportDesignRetriever();
+	public ReportRequest(
+		ReportRequestContext reportRequestContext,
+		ReportDesignRetriever reportDesignRetriever,
+		Map<String, String> reportParameters, String reportFormat) {
 
-	public ReportFormat getReportFormat();
+		_reportDesignRetriever = reportDesignRetriever;
+		_reportFormat = ReportFormat.parse(reportFormat);
+		_reportParameters = reportParameters;
+		_reportRequestContext = reportRequestContext;
+	}
 
-	public Map<String, String> getReportParameters();
+	public ReportDesignRetriever getReportDesignRetriever() {
+		return _reportDesignRetriever;
+	}
 
+	public ReportFormat getReportFormat() {
+		return _reportFormat;
+	}
+
+	public Map<String, String> getReportParameters() {
+		return _reportParameters;
+	}
+
+	public ReportRequestContext getReportRequestContext() {
+		return _reportRequestContext;
+	}
+
+	public void setReportDesignRetriever(
+		ReportDesignRetriever reportDesignRetriever) {
+
+		_reportDesignRetriever = reportDesignRetriever;
+	}
+
+	public void setReportFormat(ReportFormat reportFormat) {
+		_reportFormat = reportFormat;
+	}
+
+	public void setReportParameters(Map<String, String> reportParameters) {
+		_reportParameters.putAll(reportParameters);
+	}
+
+	public void setReportRequestContext(
+		ReportRequestContext reportRequestContext) {
+		_reportRequestContext = reportRequestContext;
+	}
+
+	private ReportDesignRetriever _reportDesignRetriever;
+	private ReportFormat _reportFormat;
+	private Map<String, String> _reportParameters;
+	private ReportRequestContext _reportRequestContext;
 }

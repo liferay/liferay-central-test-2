@@ -49,16 +49,9 @@ public interface ReportEngine {
 
 	public void init(ServletContext servletContext);
 
-	public void registerDataSource(
-		String dataSourceName, DataSource dataSource);
-
-	public void setDefaultDataSouce(DataSource dataSource);
-
 	public void setEngineParameters(Map<String, String> engineParameters);
 
 	public void setReportFormatExporterRepository(
 		ReportFormatExporterRegistry reportFormatExporterRegistry);
-
-	public void unregisterDataSource(String dataSourceName);
 
 }
