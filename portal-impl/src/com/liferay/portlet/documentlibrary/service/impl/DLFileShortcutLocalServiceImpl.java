@@ -237,7 +237,7 @@ public class DLFileShortcutLocalServiceImpl
 			fileShortcut.getGroupId(), fileShortcut.getToFolderId(),
 			fileShortcut.getToName());
 
-		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
+		String mimeType = MimeTypesUtil.getContentType(fileEntry.getTitle());
 
 		assetEntryLocalService.updateEntry(
 			userId, fileShortcut.getGroupId(), DLFileShortcut.class.getName(),

@@ -716,7 +716,7 @@ public class DLFileEntryLocalServiceImpl
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
+		String mimeType = MimeTypesUtil.getContentType(fileEntry.getTitle());
 
 		assetEntryLocalService.updateEntry(
 			userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),

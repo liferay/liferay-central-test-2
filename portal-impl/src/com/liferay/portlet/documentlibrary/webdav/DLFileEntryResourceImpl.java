@@ -72,7 +72,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 	}
 
 	public String getContentType() {
-		return ContentTypeUtil.getContentType(_fileEntry.getName());
+		return ContentTypeUtil.getContentType(_fileEntry.getTitle());
 	}
 
 	public InputStream getContentAsStream() throws WebDAVException {
