@@ -91,217 +91,176 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 	}
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<liferay-ui:tabs
-	names="email-from,web-content-approval-denied-email,web-content-approval-granted-email,web-content-approval-requested-email,web-content-review-email"
-	param="tabs2"
-	url="<%= portletURL %>"
-/>
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
-<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
-<liferay-ui:error key="emailArticleApprovalDeniedBody" message="please-enter-a-valid-body" />
-<liferay-ui:error key="emailArticleApprovalDeniedSubject" message="please-enter-a-valid-subject" />
-<liferay-ui:error key="emailArticleApprovalGrantedBody" message="please-enter-a-valid-body" />
-<liferay-ui:error key="emailArticleApprovalGrantedSubject" message="please-enter-a-valid-subject" />
-<liferay-ui:error key="emailArticleApprovalRequestedBody" message="please-enter-a-valid-body" />
-<liferay-ui:error key="emailArticleApprovalRequestedSubject" message="please-enter-a-valid-subject" />
-<liferay-ui:error key="emailArticleReviewBody" message="please-enter-a-valid-body" />
-<liferay-ui:error key="emailArticleReviewSubject" message="please-enter-a-valid-subject" />
+	<liferay-ui:tabs
+		names="email-from,web-content-approval-denied-email,web-content-approval-granted-email,web-content-approval-requested-email,web-content-review-email"
+		param="tabs2"
+		url="<%= portletURL %>"
+	/>
 
-<c:choose>
-	<c:when test='<%= tabs2.equals("email-from") %>'>
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="name" />
-			</td>
-			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="address" />
-			</td>
-			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
-			</td>
-		</tr>
-		</table>
-	</c:when>
-	<c:when test='<%= tabs2.startsWith("article-approval-") || tabs2.startsWith("article-review-") %>'>
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="enabled" />
-			</td>
-			<td>
+	<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
+	<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
+	<liferay-ui:error key="emailArticleApprovalDeniedBody" message="please-enter-a-valid-body" />
+	<liferay-ui:error key="emailArticleApprovalDeniedSubject" message="please-enter-a-valid-subject" />
+	<liferay-ui:error key="emailArticleApprovalGrantedBody" message="please-enter-a-valid-body" />
+	<liferay-ui:error key="emailArticleApprovalGrantedSubject" message="please-enter-a-valid-subject" />
+	<liferay-ui:error key="emailArticleApprovalRequestedBody" message="please-enter-a-valid-body" />
+	<liferay-ui:error key="emailArticleApprovalRequestedSubject" message="please-enter-a-valid-subject" />
+	<liferay-ui:error key="emailArticleReviewBody" message="please-enter-a-valid-body" />
+	<liferay-ui:error key="emailArticleReviewSubject" message="please-enter-a-valid-subject" />
+
+	<c:choose>
+		<c:when test='<%= tabs2.equals("email-from") %>'>
+			<aui:fieldset>
+				<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" type="text" value="<%= emailFromName %>" />
+
+				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+			</aui:fieldset>
+		</c:when>
+		<c:when test='<%= tabs2.startsWith("web-content-approval-") || tabs2.startsWith("web-content-review-") %>'>
+			<aui:fieldset>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("web-content-approval-denied-email") %>'>
-						<liferay-ui:input-checkbox param="emailArticleApprovalDeniedEnabled" defaultValue="<%= JournalUtil.getEmailArticleApprovalDeniedEnabled(portletSetup) %>" />
+						<aui:input inlineLabel="left" label="enabled" name="emailArticleApprovalDeniedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleApprovalDeniedEnabled(portletSetup) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-granted-email") %>'>
-						<liferay-ui:input-checkbox param="emailArticleApprovalGrantedEnabled" defaultValue="<%= JournalUtil.getEmailArticleApprovalGrantedEnabled(portletSetup) %>" />
+						<aui:input inlineLabel="left" label="enabled" name="emailArticleApprovalGrantedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleApprovalGrantedEnabled(portletSetup) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-requested-email") %>'>
-						<liferay-ui:input-checkbox param="emailArticleApprovalRequestedEnabled" defaultValue="<%= JournalUtil.getEmailArticleApprovalRequestedEnabled(portletSetup) %>" />
+						<aui:input inlineLabel="left" label="enabled" name="emailArticleApprovalRequestedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleApprovalRequestedEnabled(portletSetup) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-review-email") %>'>
-						<liferay-ui:input-checkbox param="emailArticleReviewEnabled" defaultValue="<%= JournalUtil.getEmailArticleReviewEnabled(portletSetup) %>" />
+						<aui:input inlineLabel="left" label="enabled" name="emailArticleReviewEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleReviewEnabled(portletSetup) %>" />
 					</c:when>
 				</c:choose>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="subject" />
-			</td>
-			<td>
+
 				<c:choose>
 					<c:when test='<%= tabs2.equals("web-content-approval-denied-email") %>'>
-						<input class="lfr-input-text" name="<portlet:namespace />emailArticleApprovalDeniedSubject" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleApprovalDeniedSubject" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-granted-email") %>'>
-						<input class="lfr-input-text" name="<portlet:namespace />emailArticleApprovalGrantedSubject" type="text" value="<%= emailArticleApprovalGrantedSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleApprovalGrantedSubject" type="text" value="<%= emailArticleApprovalGrantedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-requested-email") %>'>
-						<input class="lfr-input-text" name="<portlet:namespace />emailArticleApprovalRequestedSubject" type="text" value="<%= emailArticleApprovalRequestedSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleApprovalRequestedSubject" type="text" value="<%= emailArticleApprovalRequestedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-review-email") %>'>
-						<input class="lfr-input-text" name="<portlet:namespace />emailArticleReviewSubject" type="text" value="<%= emailArticleReviewSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleReviewSubject" type="text" value="<%= emailArticleReviewSubject %>" />
 					</c:when>
 				</c:choose>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="body" />
-			</td>
-			<td>
-				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-				<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
-			</td>
-		</tr>
-		</table>
+				<aui:field-wrapper label="body">
+					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-		<br />
+					<aui:input name="<%= editorParam %>" type="hidden" />
+				</aui:field-wrapper>
+			</aui:fieldset>
 
-		<strong><liferay-ui:message key="definition-of-terms" /></strong>
+			<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
-		<br /><br />
+			<br /><br />
 
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<strong>[$ARTICLE_ID$]</strong>
-			</td>
-			<td>
-				<liferay-ui:message key="the-web-content-id" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$ARTICLE_TITLE$]</strong>
-			</td>
-			<td>
-				<liferay-ui:message key="the-web-content-title" />
-			</td>
-		</tr>
-
-		<c:if test='<%= tabs2.startsWith("web-content-approval-") %>'>
+			<table class="lfr-table">
 			<tr>
 				<td>
-					<strong>[$ARTICLE_URL$]</strong>
+					<strong>[$ARTICLE_ID$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-web-content-url" />
+					<liferay-ui:message key="the-web-content-id" />
 				</td>
 			</tr>
-		</c:if>
+			<tr>
+				<td>
+					<strong>[$ARTICLE_TITLE$]</strong>
+				</td>
+				<td>
+					<liferay-ui:message key="the-web-content-title" />
+				</td>
+			</tr>
 
-		<tr>
-			<td>
-				<strong>[$ARTICLE_VERSION$]</strong>
-			</td>
-			<td>
-				<liferay-ui:message key="the-web-content-version" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$FROM_ADDRESS$]</strong>
-			</td>
-			<td>
-				<%= emailFromAddress %>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$FROM_NAME$]</strong>
-			</td>
-			<td>
-				<%= emailFromName %>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$PORTAL_URL$]</strong>
-			</td>
-			<td>
-				<%= company.getVirtualHost() %>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$PORTLET_NAME$]</strong>
-			</td>
-			<td>
-				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$TO_ADDRESS$]</strong>
-			</td>
-			<td>
-				<liferay-ui:message key="the-address-of-the-email-recipient" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$TO_NAME$]</strong>
-			</td>
-			<td>
-				<liferay-ui:message key="the-name-of-the-email-recipient" />
-			</td>
-		</tr>
-		</table>
-	</c:when>
-</c:choose>
+			<c:if test='<%= tabs2.startsWith("web-content-approval-") %>'>
+				<tr>
+					<td>
+						<strong>[$ARTICLE_URL$]</strong>
+					</td>
+					<td>
+						<liferay-ui:message key="the-web-content-url" />
+					</td>
+				</tr>
+			</c:if>
 
-<br />
+			<tr>
+				<td>
+					<strong>[$ARTICLE_VERSION$]</strong>
+				</td>
+				<td>
+					<liferay-ui:message key="the-web-content-version" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$FROM_ADDRESS$]</strong>
+				</td>
+				<td>
+					<%= emailFromAddress %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$FROM_NAME$]</strong>
+				</td>
+				<td>
+					<%= emailFromName %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$PORTAL_URL$]</strong>
+				</td>
+				<td>
+					<%= company.getVirtualHost() %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$PORTLET_NAME$]</strong>
+				</td>
+				<td>
+					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$TO_ADDRESS$]</strong>
+				</td>
+				<td>
+					<liferay-ui:message key="the-address-of-the-email-recipient" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$TO_NAME$]</strong>
+				</td>
+				<td>
+					<liferay-ui:message key="the-name-of-the-email-recipient" />
+				</td>
+			</tr>
+			</table>
+		</c:when>
+	</c:choose>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+	<aui:button-row>
+		<aui:button name="saveButton" type="submit" value="save" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
-
-</form>
+		<aui:button name="cancelButton" onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_configuration.jsp";
