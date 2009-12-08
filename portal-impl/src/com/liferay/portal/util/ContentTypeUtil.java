@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 /**
  * <a href="ContentTypeUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
- * @deprecated Use {@link com.liferay.portal.kernel.util.MimeTypesUtil}.
+ * @author	   Alexander Chow
+ * @deprecated {@link MimeTypesUtil}
  */
 public class ContentTypeUtil {
 
