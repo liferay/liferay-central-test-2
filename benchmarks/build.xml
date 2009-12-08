@@ -18,6 +18,7 @@
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dsample.sql.output.dir=${sample.sql.output.dir}" />
+			<jvmarg value="-Dsample.sql.db.type=${sample.sql.db.type}" />
 			<jvmarg value="-Dsample.sql.blogs.entry.comment.count=${sample.sql.blogs.entry.comment.count}" />
 			<jvmarg value="-Dsample.sql.blogs.entry.count=${sample.sql.blogs.entry.count}" />
 			<jvmarg value="-Dsample.sql.group.count=${sample.sql.group.count}" />

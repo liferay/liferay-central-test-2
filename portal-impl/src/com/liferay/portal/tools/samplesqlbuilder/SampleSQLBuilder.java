@@ -71,6 +71,7 @@ public class SampleSQLBuilder {
 		InitUtil.initWithSpring();
 
 		String outputDir = System.getProperty("sample.sql.output.dir");
+		String dbType = System.getProperty("sample.sql.db.type");
 		int maxBlogsEntryCommentCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.blogs.entry.comment.count"));
 		int maxBlogsEntryCount = GetterUtil.getInteger(
@@ -97,7 +98,7 @@ public class SampleSQLBuilder {
 			System.getProperty("sample.sql.security.enabled"));
 
 		new SampleSQLBuilder(
-			outputDir, maxBlogsEntryCommentCount, maxBlogsEntryCount,
+			outputDir, dbType, maxBlogsEntryCommentCount, maxBlogsEntryCount,
 			maxGroupCount, maxMBCategoryCount, maxMBMessageCount,
 			maxMBThreadCount, maxUserCount, maxUserToGroupCount,
 			maxWikiNodeCount, maxWikiPageCommentCount, maxWikiPageCount,
@@ -105,14 +106,16 @@ public class SampleSQLBuilder {
 	}
 
 	public SampleSQLBuilder(
-		String outputDir, int maxBlogsEntryCommentCount, int maxBlogsEntryCount,
-		int maxGroupCount, int maxMBCategoryCount, int maxMBMessageCount,
-		int maxMBThreadCount, int maxUserCount, int maxUserToGroupCount,
-		int maxWikiNodeCount, int maxWikiPageCommentCount, int maxWikiPageCount,
+		String outputDir, String dbType, int maxBlogsEntryCommentCount,
+		int maxBlogsEntryCount, int maxGroupCount, int maxMBCategoryCount,
+		int maxMBMessageCount, int maxMBThreadCount, int maxUserCount,
+		int maxUserToGroupCount, int maxWikiNodeCount,
+		int maxWikiPageCommentCount, int maxWikiPageCount,
 		boolean securityEnabled) {
 
 		try {
 			_outputDir = outputDir;
+			_dbType = dbType;
 			_maxBlogsEntryCommentCount = maxBlogsEntryCommentCount;
 			_maxBlogsEntryCount = maxBlogsEntryCount;
 			_maxGroupCount = maxGroupCount;
@@ -155,11 +158,12 @@ public class SampleSQLBuilder {
 
 			_writerGeneric.flush();
 
-			// MySQL
+			// Specific
 
-			_writerMySQL = new FileWriter(_outputDir +  "/sample-mysql.sql");
+			_writerSpecific = new FileWriter(
+				_outputDir +  "/sample-" + dbType + ".sql");
 
-			DB mysqlDB = DBFactoryUtil.getDB(DB.TYPE_MYSQL);
+			DB specificDB = DBFactoryUtil.getDB(_dbType);
 
 			boolean previousBlankLine = false;
 
@@ -169,14 +173,14 @@ public class SampleSQLBuilder {
 			String s = null;
 
 			while ((s = br.readLine()) != null) {
-				s = mysqlDB.buildSQL(s).trim();
+				s = specificDB.buildSQL(s).trim();
 
-				_writerMySQL.write(s);
+				_writerSpecific.write(s);
 
 				if (previousBlankLine && Validator.isNull(s)) {
 				}
 				else {
-					_writerMySQL.write(StringPool.NEW_LINE);
+					_writerSpecific.write(StringPool.NEW_LINE);
 				}
 
 				if (Validator.isNull(s)) {
@@ -186,7 +190,7 @@ public class SampleSQLBuilder {
 
 			br.close();
 
-			_writerMySQL.flush();
+			_writerSpecific.flush();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -399,6 +403,7 @@ public class SampleSQLBuilder {
 
 	private SimpleCounter _counter;
 	private DataFactory _dataFactory;
+	private String _dbType;
 	private int _maxBlogsEntryCommentCount;
 	private int _maxBlogsEntryCount;
 	private int _maxGroupCount;
@@ -431,6 +436,6 @@ public class SampleSQLBuilder {
 	private String _tplWikiPage = _TPL_ROOT + "wiki_page.ftl";
 	private SimpleCounter _userScreenNameIncrementer;
 	private Writer _writerGeneric;
-	private Writer _writerMySQL;
+	private Writer _writerSpecific;
 
 }
