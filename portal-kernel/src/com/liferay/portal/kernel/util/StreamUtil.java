@@ -123,6 +123,13 @@ public class StreamUtil {
 	}
 
 	public static void transfer(
+			InputStream inputStream, OutputStream outputStream, boolean cleanUp)
+		throws IOException {
+
+		transfer(inputStream, outputStream, BUFFER_SIZE, cleanUp);
+	}
+
+	public static void transfer(
 			InputStream inputStream, OutputStream outputStream, int bufferSize)
 		throws IOException {
 
@@ -130,15 +137,8 @@ public class StreamUtil {
 	}
 
 	public static void transfer(
-			InputStream inputStream, OutputStream outputStream, boolean cleanup)
-		throws IOException {
-
-		transfer(inputStream, outputStream, BUFFER_SIZE, cleanup);
-	}
-
-	public static void transfer(
 			InputStream inputStream, OutputStream outputStream, int bufferSize,
-			boolean cleanup)
+			boolean cleanUp)
 		throws IOException {
 
 		if (inputStream == null) {
@@ -160,7 +160,7 @@ public class StreamUtil {
 				outputStream);
 
 			transfer(
-				readableByteChannel, writableByteChannel, bufferSize, cleanup);
+				readableByteChannel, writableByteChannel, bufferSize, cleanUp);
 		}
 		else {
 			try {
@@ -173,7 +173,7 @@ public class StreamUtil {
 				}
 			}
 			finally {
-				if (cleanup) {
+				if (cleanUp) {
 					cleanUp(inputStream, outputStream);
 				}
 			}
@@ -190,6 +190,15 @@ public class StreamUtil {
 
 	public static void transfer(
 			ReadableByteChannel readableByteChannel,
+			WritableByteChannel writableByteChannel, boolean cleanUp)
+		throws IOException {
+
+		transfer(
+			readableByteChannel, writableByteChannel, BUFFER_SIZE, cleanUp);
+	}
+
+	public static void transfer(
+			ReadableByteChannel readableByteChannel,
 			WritableByteChannel writableByteChannel, int bufferSize)
 		throws IOException {
 
@@ -198,17 +207,8 @@ public class StreamUtil {
 
 	public static void transfer(
 			ReadableByteChannel readableByteChannel,
-			WritableByteChannel writableByteChannel, boolean cleanup)
-		throws IOException {
-
-		transfer(
-			readableByteChannel, writableByteChannel, BUFFER_SIZE, cleanup);
-	}
-
-	public static void transfer(
-			ReadableByteChannel readableByteChannel,
 			WritableByteChannel writableByteChannel, int bufferSize,
-			boolean cleanup)
+			boolean cleanUp)
 		throws IOException {
 
 		if (readableByteChannel == null) {
@@ -239,7 +239,7 @@ public class StreamUtil {
 			}
 		}
 		finally {
-			if (cleanup) {
+			if (cleanUp) {
 				cleanUp(readableByteChannel, writableByteChannel);
 			}
 		}
