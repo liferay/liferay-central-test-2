@@ -31,7 +31,7 @@ public interface ContentTypes {
 
 	public static final String APPLICATION_ATOM_XML = "application/atom+xml";
 
-	public static final String APPLICATION_OCTET_STREAM = 
+	public static final String APPLICATION_OCTET_STREAM =
 		"application/octet-stream";
 
 	public static final String APPLICATION_TEXT = "application/text";
