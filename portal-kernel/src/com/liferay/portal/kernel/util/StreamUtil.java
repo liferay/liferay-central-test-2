@@ -39,6 +39,7 @@ import java.nio.channels.WritableByteChannel;
  * <a href="StreamUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  */
 public class StreamUtil {
 
@@ -118,11 +119,26 @@ public class StreamUtil {
 			InputStream inputStream, OutputStream outputStream)
 		throws IOException {
 
-		transfer(inputStream, outputStream, BUFFER_SIZE);
+		transfer(inputStream, outputStream, BUFFER_SIZE, true);
 	}
 
 	public static void transfer(
 			InputStream inputStream, OutputStream outputStream, int bufferSize)
+		throws IOException {
+
+		transfer(inputStream, outputStream, bufferSize, true);
+	}
+
+	public static void transfer(
+			InputStream inputStream, OutputStream outputStream, boolean cleanup)
+		throws IOException {
+
+		transfer(inputStream, outputStream, BUFFER_SIZE, cleanup);
+	}
+
+	public static void transfer(
+			InputStream inputStream, OutputStream outputStream, int bufferSize,
+			boolean cleanup)
 		throws IOException {
 
 		if (inputStream == null) {
@@ -143,12 +159,8 @@ public class StreamUtil {
 			WritableByteChannel writableByteChannel = Channels.newChannel(
 				outputStream);
 
-			try {
-				transfer(readableByteChannel, writableByteChannel, bufferSize);
-			}
-			finally {
-				cleanUp(readableByteChannel, writableByteChannel);
-			}
+			transfer(
+				readableByteChannel, writableByteChannel, bufferSize, cleanup);
 		}
 		else {
 			try {
@@ -161,7 +173,9 @@ public class StreamUtil {
 				}
 			}
 			finally {
-				cleanUp(inputStream, outputStream);
+				if (cleanup) {
+					cleanUp(inputStream, outputStream);
+				}
 			}
 		}
 	}
@@ -179,20 +193,55 @@ public class StreamUtil {
 			WritableByteChannel writableByteChannel, int bufferSize)
 		throws IOException {
 
-		ByteBuffer byteBuffer = ByteBuffer.allocateDirect(bufferSize);
+		transfer(readableByteChannel, writableByteChannel, bufferSize, true);
+	}
 
-		while (readableByteChannel.read(byteBuffer) != -1) {
-			byteBuffer.flip();
+	public static void transfer(
+			ReadableByteChannel readableByteChannel,
+			WritableByteChannel writableByteChannel, boolean cleanup)
+		throws IOException {
 
-			writableByteChannel.write(byteBuffer);
+		transfer(
+			readableByteChannel, writableByteChannel, BUFFER_SIZE, cleanup);
+	}
 
-			byteBuffer.compact();
+	public static void transfer(
+			ReadableByteChannel readableByteChannel,
+			WritableByteChannel writableByteChannel, int bufferSize,
+			boolean cleanup)
+		throws IOException {
+
+		if (readableByteChannel == null) {
+			throw new IllegalArgumentException(
+				"Readable byte channel cannot be null");
 		}
 
-		byteBuffer.flip();
+		if (writableByteChannel == null) {
+			throw new IllegalArgumentException(
+				"Writable byte channel cannot be null");
+		}
 
-		while (byteBuffer.hasRemaining()) {
-			writableByteChannel.write(byteBuffer);
+		try {
+			ByteBuffer byteBuffer = ByteBuffer.allocateDirect(bufferSize);
+
+			while (readableByteChannel.read(byteBuffer) != -1) {
+				byteBuffer.flip();
+
+				writableByteChannel.write(byteBuffer);
+
+				byteBuffer.compact();
+			}
+
+			byteBuffer.flip();
+
+			while (byteBuffer.hasRemaining()) {
+				writableByteChannel.write(byteBuffer);
+			}
+		}
+		finally {
+			if (cleanup) {
+				cleanUp(readableByteChannel, writableByteChannel);
+			}
 		}
 	}
 
