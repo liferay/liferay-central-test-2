@@ -203,14 +203,14 @@ public class LayoutLocalServiceUtil {
 			parameterMap, startDate, endDate);
 	}
 
-	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportLayoutsAsStream(
-		long groupId, boolean privateLayout, long[] layoutIds,
+	public static java.io.File exportLayoutsAsFile(long groupId,
+		boolean privateLayout, long[] layoutIds,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .exportLayoutsAsStream(groupId, privateLayout, layoutIds,
+				   .exportLayoutsAsFile(groupId, privateLayout, layoutIds,
 			parameterMap, startDate, endDate);
 	}
 
@@ -225,14 +225,14 @@ public class LayoutLocalServiceUtil {
 			startDate, endDate);
 	}
 
-	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoAsStream(
-		long plid, long groupId, java.lang.String portletId,
+	public static java.io.File exportPortletInfoAsFile(long plid, long groupId,
+		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .exportPortletInfoAsStream(plid, groupId, portletId,
+				   .exportPortletInfoAsFile(plid, groupId, portletId,
 			parameterMap, startDate, endDate);
 	}
 

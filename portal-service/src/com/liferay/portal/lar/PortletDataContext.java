@@ -24,7 +24,6 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -160,19 +159,19 @@ public interface PortletDataContext extends Serializable {
 
 	public UserIdStrategy getUserIdStrategy() throws SystemException;
 
-	public Map<String, byte[]> getZipEntries();
+	public List<String> getZipEntries();
 
 	public byte[] getZipEntryAsByteArray(String path);
+
+	public InputStream getZipEntryAsInputStream(String path);
 
 	public Object getZipEntryAsObject(String path);
 
 	public String getZipEntryAsString(String path);
 
-	public Map<String, List<ObjectValuePair<String, byte[]>>>
-		getZipFolderEntries();
+	public List<String> getZipFolderEntries();
 
-	public List<ObjectValuePair<String, byte[]>> getZipFolderEntries(
-		String path);
+	public List<String> getZipFolderEntries(String path);
 
 	public ZipReader getZipReader();
 

@@ -28,7 +28,6 @@ import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.PortletIdException;
-import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -48,6 +47,7 @@ import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -212,8 +212,8 @@ public class ExportImportAction extends EditConfigurationAction {
 					new PortalException());
 			}
 
-			FileCacheOutputStream fcos =
-				LayoutServiceUtil.exportPortletInfoAsStream(
+			File file =
+				LayoutServiceUtil.exportPortletInfoAsFile(
 					plid, groupId, portlet.getPortletId(),
 					actionRequest.getParameterMap(), startDate, endDate);
 
@@ -221,8 +221,8 @@ public class ExportImportAction extends EditConfigurationAction {
 				actionResponse);
 
 			ServletResponseUtil.sendFile(
-				response, fileName, fcos.getFileInputStream(),
-				(int)fcos.getSize(), ContentTypes.APPLICATION_ZIP);
+				response, fileName, new FileInputStream(file),
+				ContentTypes.APPLICATION_ZIP);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}

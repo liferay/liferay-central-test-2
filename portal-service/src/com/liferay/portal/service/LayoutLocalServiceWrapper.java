@@ -194,14 +194,14 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 			layoutIds, parameterMap, startDate, endDate);
 	}
 
-	public com.liferay.portal.kernel.io.FileCacheOutputStream exportLayoutsAsStream(
-		long groupId, boolean privateLayout, long[] layoutIds,
+	public java.io.File exportLayoutsAsFile(long groupId,
+		boolean privateLayout, long[] layoutIds,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _layoutLocalService.exportLayoutsAsStream(groupId,
-			privateLayout, layoutIds, parameterMap, startDate, endDate);
+		return _layoutLocalService.exportLayoutsAsFile(groupId, privateLayout,
+			layoutIds, parameterMap, startDate, endDate);
 	}
 
 	public byte[] exportPortletInfo(long plid, long groupId,
@@ -214,13 +214,13 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 			parameterMap, startDate, endDate);
 	}
 
-	public com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoAsStream(
-		long plid, long groupId, java.lang.String portletId,
+	public java.io.File exportPortletInfoAsFile(long plid, long groupId,
+		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _layoutLocalService.exportPortletInfoAsStream(plid, groupId,
+		return _layoutLocalService.exportPortletInfoAsFile(plid, groupId,
 			portletId, parameterMap, startDate, endDate);
 	}
 

@@ -47,6 +47,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
+import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -97,19 +98,14 @@ public class CommunitiesUtil {
 
 		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters();
 
-		FileCacheOutputStream fcos =
-			LayoutLocalServiceUtil.exportLayoutsAsStream(
+		File file =
+			LayoutLocalServiceUtil.exportLayoutsAsFile(
 				sourceLayoutSet.getGroupId(), sourceLayoutSet.isPrivateLayout(),
 				null, parameterMap, null, null);
 
-		try {
-			LayoutServiceUtil.importLayouts(
-				targetLayoutSet.getGroupId(), targetLayoutSet.isPrivateLayout(),
-				parameterMap, fcos.getFileInputStream());
-		}
-		finally {
-			fcos.cleanUp();
-		}
+		LayoutServiceUtil.importLayouts(
+			targetLayoutSet.getGroupId(), targetLayoutSet.isPrivateLayout(),
+			parameterMap, file);
 	}
 
 	public static void deleteLayout(

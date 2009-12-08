@@ -543,7 +543,7 @@ public class LayoutServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportLayoutsAsStream(
+	public static java.io.File exportLayoutsAsFile(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
 		long[] layoutIds, java.util.Map<String, String[]> parameterMap,
 		java.util.Date startDate, java.util.Date endDate)
@@ -579,7 +579,7 @@ public class LayoutServiceHttp {
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportLayoutsAsStream",
+					"exportLayoutsAsFile",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
@@ -602,7 +602,7 @@ public class LayoutServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.portal.kernel.io.FileCacheOutputStream)returnObj;
+			return (java.io.File)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -679,7 +679,7 @@ public class LayoutServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoAsStream(
+	public static java.io.File exportPortletInfoAsFile(
 		HttpPrincipal httpPrincipal, long plid, long groupId,
 		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
@@ -716,7 +716,7 @@ public class LayoutServiceHttp {
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportPortletInfoAsStream",
+					"exportPortletInfoAsFile",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
@@ -739,7 +739,7 @@ public class LayoutServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.portal.kernel.io.FileCacheOutputStream)returnObj;
+			return (java.io.File)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

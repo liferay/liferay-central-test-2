@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.lar;
 
-import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -57,6 +57,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.List;
@@ -117,27 +118,31 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					DLFileEntry.class, fileEntry.getFileEntryId());
 			}
 
-			InputStream is = null;
+			long repositoryId = getRepositoryId(
+				fileEntry.getGroupId(), fileEntry.getFolderId());
 
-			try {
-				is = DLFileEntryLocalServiceUtil.getFileAsStream(
-					fileEntry.getCompanyId(), fileEntry.getUserId(),
-					fileEntry.getGroupId(), fileEntry.getFolderId(),
-					fileEntry.getName());
-			}
-			catch (NoSuchFileException nsfe) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No file found for file entry " +
-							fileEntry.getFileEntryId());
-				}
+			InputStream is =
+				DLLocalServiceUtil.getFileAsStream(
+					fileEntry.getCompanyId(), repositoryId, fileEntry.getName(),
+					fileEntry.getVersion());
 
+			if (is == null) {
 				fileEntryEl.detach();
 
 				return;
 			}
+				
+			try {
+				context.addZipEntry(getFileEntryBinPath(context, fileEntry), is);
+			}
+			finally {
+				try {
+					is.close();
+				} catch (IOException e) {
+					_log.error(e);
+				}
+			}
 
-			context.addZipEntry(getFileEntryBinPath(context, fileEntry), is);
 			context.addZipEntry(path, fileEntry);
 
 			if (context.getBooleanParameter(_NAMESPACE, "ranks")) {
@@ -199,6 +204,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(fileEntry.getUserUuid());
+		long groupId = context.getGroupId();
 		long folderId = MapUtil.getLong(
 			folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
 
@@ -221,9 +227,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
-		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setScopeGroupId(groupId);
 
-		byte[] bytes = context.getZipEntryAsByteArray(binPath);
+		InputStream input = context.getZipEntryAsInputStream(binPath);
 
 		if ((folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == fileEntry.getFolderId())) {
@@ -241,40 +247,44 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		DLFileEntry existingFileEntry = null;
 
 		try {
-			DLFolderUtil.findByPrimaryKey(folderId);
+			if ((folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
+				(folderId > 0)) {
+
+				DLFolderUtil.findByPrimaryKey(folderId);
+			}
 
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				try {
 					existingFileEntry = DLFileEntryUtil.findByUUID_G(
-						fileEntry.getUuid(), context.getGroupId());
+						fileEntry.getUuid(), groupId);
 
 					existingFileEntry =
 						DLFileEntryLocalServiceUtil.updateFileEntry(
-							userId, existingFileEntry.getGroupId(),
-							existingFileEntry.getFolderId(), folderId,
-							existingFileEntry.getName(), fileEntry.getName(),
-							fileEntry.getTitle(), fileEntry.getDescription(),
-							fileEntry.getExtraSettings(), bytes,
-							serviceContext);
+							userId, groupId, existingFileEntry.getFolderId(),
+							folderId, existingFileEntry.getName(),
+							fileEntry.getTitle(), fileEntry.getTitle(),
+							fileEntry.getDescription(),
+							fileEntry.getExtraSettings(), input,
+							fileEntry.getSize(), serviceContext);
 				}
 				catch (NoSuchFileEntryException nsfee) {
 					existingFileEntry =
 						DLFileEntryLocalServiceUtil.addFileEntry(
-							fileEntry.getUuid(), userId, fileEntry.getGroupId(),
-							folderId, fileEntry.getName(), fileEntry.getTitle(),
+							fileEntry.getUuid(), userId, groupId, folderId,
+							fileEntry.getName(), fileEntry.getTitle(),
 							fileEntry.getDescription(),
-							fileEntry.getExtraSettings(), bytes,
-							serviceContext);
+							fileEntry.getExtraSettings(), input,
+							fileEntry.getSize(), serviceContext);
 				}
 			}
 			else {
 				existingFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-					userId, fileEntry.getGroupId(), folderId,
-					fileEntry.getName(), fileEntry.getTitle(),
-					fileEntry.getDescription(), fileEntry.getExtraSettings(),
-					bytes, serviceContext);
+					userId, groupId, folderId, fileEntry.getName(),
+					fileEntry.getTitle(), fileEntry.getDescription(),
+					fileEntry.getExtraSettings(), input, fileEntry.getSize(),
+					serviceContext);
 			}
 
 			fileEntryNames.put(
@@ -283,7 +293,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 				context.importComments(
 					DLFileEntry.class, fileEntry.getFileEntryId(),
-					existingFileEntry.getFileEntryId(), context.getGroupId());
+					existingFileEntry.getFileEntryId(), groupId);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
@@ -380,12 +390,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				existingFolder = DLFolderUtil.fetchByUUID_G(
-					folder.getUuid(), context.getGroupId());
+					folder.getUuid(), groupId);
 
 				if (existingFolder == null) {
 					String name = getFolderName(
-						context.getCompanyId(), context.getGroupId(),
-						parentFolderId, folder.getName(), 2);
+						context.getCompanyId(), groupId, parentFolderId,
+						folder.getName(), 2);
 
 					existingFolder = DLFolderLocalServiceUtil.addFolder(
 						folder.getUuid(), userId, groupId, parentFolderId,
@@ -400,8 +410,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				String name = getFolderName(
-					context.getCompanyId(), context.getGroupId(),
-					parentFolderId, folder.getName(), 2);
+					context.getCompanyId(), groupId, parentFolderId,
+					folder.getName(), 2);
 
 				existingFolder = DLFolderLocalServiceUtil.addFolder(
 					userId, groupId, parentFolderId, name,
@@ -452,6 +462,15 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element fileEntriesEl = root.addElement("file-entries");
 			Element fileShortcutsEl = root.addElement("file-shortcuts");
 			Element fileRanksEl = root.addElement("file-ranks");
+
+			List<DLFileEntry> rootFilesEntries = DLFileEntryUtil.findByG_F(
+				context.getGroupId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+			for (DLFileEntry fileEntry : rootFilesEntries) {
+				exportFileEntry(
+					context, foldersEl, fileEntriesEl, fileRanksEl, fileEntry);
+			}
 
 			List<DLFolder> folders = DLFolderUtil.findByGroupId(
 				context.getGroupId());
@@ -757,6 +776,15 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		sb.append(".xml");
 
 		return sb.toString();
+	}
+
+	protected static long getRepositoryId(long groupId, long folderId) {
+		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return groupId;
+		}
+		else {
+			return folderId;
+		}
 	}
 
 	protected static void importFileShortcut(

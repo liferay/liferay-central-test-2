@@ -729,25 +729,27 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (context.getBooleanParameter(_NAMESPACE, "images")) {
 			String imagePath = articleEl.attributeValue("image-path");
 
-			List<ObjectValuePair<String, byte[]>> imageFiles =
-				context.getZipFolderEntries(imagePath);
+			List<String> imageFiles = context.getZipFolderEntries(imagePath);
 
-			if (imageFiles != null) {
-				for (ObjectValuePair<String, byte[]> imageFile : imageFiles) {
-					String fileName = imageFile.getKey();
+			for (String imageFile : imageFiles) {
+				String fileName = imageFile;
 
-					if (fileName.endsWith(".xml")) {
-						continue;
-					}
-
-					int pos = fileName.lastIndexOf(StringPool.PERIOD);
-
-					if (pos != -1) {
-						fileName = fileName.substring(0, pos);
-					}
-
-					images.put(fileName, imageFile.getValue());
+				if (fileName.contains(StringPool.SLASH)) {
+					fileName = fileName.substring(
+						fileName.lastIndexOf(StringPool.SLASH));
 				}
+
+				if (fileName.endsWith(".xml")) {
+					continue;
+				}
+
+				int pos = fileName.lastIndexOf(StringPool.PERIOD);
+
+				if (pos != -1) {
+					fileName = fileName.substring(0, pos);
+				}
+
+				images.put(fileName, context.getZipEntryAsByteArray(imageFile));
 			}
 		}
 

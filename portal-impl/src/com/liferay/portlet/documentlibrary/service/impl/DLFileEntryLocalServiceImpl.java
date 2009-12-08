@@ -127,6 +127,23 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry addFileEntry(
+			long userId, long groupId, long folderId, String name, String title,
+			String description, String extraSettings, InputStream is, long size,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.WEBDAV_LITMUS) {
+			if (is == null) {
+				throw new FileSizeException();
+			}
+		}
+
+		return addFileEntry(
+			null, userId, groupId, folderId, name, title, description,
+			extraSettings, is, size, serviceContext);
+	}
+
+	public DLFileEntry addFileEntry(
 			String uuid, long userId, long groupId, long folderId, String name,
 			String title, String description, String extraSettings,
 			byte[] bytes, ServiceContext serviceContext)

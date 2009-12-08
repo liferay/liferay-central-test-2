@@ -26,10 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
@@ -452,12 +450,16 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _userIdStrategy;
 	}
 
-	public Map<String, byte[]> getZipEntries() {
+	public List<String> getZipEntries() {
 		return getZipReader().getEntries();
 	}
 
 	public byte[] getZipEntryAsByteArray(String path) {
 		return getZipReader().getEntryAsByteArray(path);
+	}
+
+	public InputStream getZipEntryAsInputStream(String path) {
+		return getZipReader().getEntryAsInputStream(path);
 	}
 
 	public Object getZipEntryAsObject(String path) {
@@ -468,27 +470,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return getZipReader().getEntryAsString(path);
 	}
 
-	public Map<String, List<ObjectValuePair<String, byte[]>>>
-		getZipFolderEntries() {
-
-		return getZipReader().getFolderEntries();
+	public List<String> getZipFolderEntries() {
+		return getZipFolderEntries(StringPool.SLASH);
 	}
 
-	public List<ObjectValuePair<String, byte[]>> getZipFolderEntries(
-		String path) {
-
-		if (Validator.isNull(path)) {
-			return null;
-		}
-
-		List<ObjectValuePair<String, byte[]>> folderEntries =
-			getZipReader().getFolderEntries(path);
-
-		if ((folderEntries == null) && path.startsWith(StringPool.SLASH)) {
-			folderEntries = getZipReader().getFolderEntries(path.substring(1));
-		}
-
-		return folderEntries;
+	public List<String> getZipFolderEntries(String path) {
+		return getZipReader().getFolderEntries(path);
 	}
 
 	public ZipReader getZipReader() {
@@ -511,9 +498,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public boolean hasNotUniquePerLayout(String dataKey) {
 		return _notUniquePerLayout.contains(dataKey);
 	}
+
 	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
 	}
+
 	public void importComments(
 			Class<?> classObj, long classPK, long newClassPK, long groupId)
 		throws PortalException, SystemException {
@@ -579,6 +568,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 				messagePKs.get(message.getPrimaryKey()));
 		}
 	}
+
 	public void importRatingsEntries(
 			Class<?> classObj, long classPK, long newClassPK)
 		throws PortalException, SystemException {
@@ -598,12 +588,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 				ratingsEntry.getScore());
 		}
 	}
+
 	public boolean isPathNotProcessed(String path) {
 		return !addPrimaryKey(String.class, path);
 	}
+
 	public boolean isPrivateLayout() {
 		return _privateLayout;
 	}
+
 	public boolean isWithinDateRange(Date modifiedDate) {
 		if (!hasDateRange()) {
 			return true;
@@ -617,45 +610,59 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return false;
 		}
 	}
+
 	public void putNotUniquePerLayout(String dataKey) {
 		_notUniquePerLayout.add(dataKey);
 	}
+
 	public void setClassLoader(ClassLoader classLoader) {
 		_xStream.setClassLoader(classLoader);
 	}
+
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
+
 	public void setOldPlid(long oldPlid) {
 		_oldPlid = oldPlid;
 	}
+
 	public void setPlid(long plid) {
 		_plid = plid;
 	}
+
 	public void setPrivateLayout(boolean privateLayout) {
 		_privateLayout = privateLayout;
 	}
+
 	public void setScopeGroupId(long scopeGroupId) {
 		_scopeGroupId = scopeGroupId;
 	}
+
 	public void setScopeLayoutId(long scopeLayoutId) {
 		_scopeLayoutId = scopeLayoutId;
 	}
+
 	public void setSourceGroupId(long sourceGroupId) {
 		_sourceGroupId = sourceGroupId;
 	}
+
 	public String toXML(Object object) {
 		return _xStream.toXML(object);
 	}
+
 	protected String getPrimaryKeyString(Class<?> classObj, long classPK) {
 		return getPrimaryKeyString(classObj.getName(), String.valueOf(classPK));
 	}
+
 	protected String getPrimaryKeyString(Class<?> classObj, String primaryKey) {
 		return getPrimaryKeyString(classObj.getName(), primaryKey);
 	}
+
 	protected String getPrimaryKeyString(String className, long classPK) {
 		return getPrimaryKeyString(className, String.valueOf(classPK));
 	}
+
 	protected String getPrimaryKeyString(String className, String primaryKey) {
 		StringBuilder sb = new StringBuilder();
 
@@ -665,6 +672,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		return sb.toString();
 	}
+
 	protected void initXStream() {
 		_xStream = new XStream();
 
@@ -693,6 +701,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_xStream.alias("WikiNode", WikiNodeImpl.class);
 		_xStream.alias("WikiPage", WikiPageImpl.class);
 	}
+
 	protected void validateDateRange(Date startDate, Date endDate)
 		throws PortletDataException {
 

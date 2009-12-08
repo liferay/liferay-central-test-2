@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -41,6 +40,7 @@ import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
+import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -67,7 +67,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.social.util.SocialActivityThreadLocal;
 
-import java.io.InputStream;
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -90,7 +90,7 @@ public class PortletImporter {
 
 	public void importPortletInfo(
 			long userId, long plid, long groupId, String portletId,
-			Map<String, String[]> parameterMap, InputStream is)
+			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
 		boolean deletePortletData = MapUtil.getBoolean(
@@ -122,7 +122,14 @@ public class PortletImporter {
 
 		UserIdStrategy strategy = getUserIdStrategy(user, userIdStrategy);
 
-		ZipReader zipReader = new ZipReader(is);
+		ZipReader zipReader = null;
+
+		try {
+			zipReader = ZipReaderFactoryUtil.create(file);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 
 		PortletDataContext context = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, new HashSet<String>(),
@@ -254,6 +261,8 @@ public class PortletImporter {
 			_log.info(
 				"Importing portlet data takes " + stopWatch.getTime() + " ms");
 		}
+
+		zipReader.close();
 	}
 
 	protected void deletePortletData(
@@ -638,16 +647,15 @@ public class PortletImporter {
 				long classPK = GetterUtil.getLong(
 					asset.attributeValue("class-pk"));
 
-				List<ObjectValuePair<String, byte[]>> entries =
-					context.getZipFolderEntries(path);
+				List<String> entries = context.getZipFolderEntries(path);
 
 				List<MBMessage> messages = new ArrayList<MBMessage>();
 
-				for (ObjectValuePair<String, byte[]> entry : entries) {
-					if (entry.getValue().length > 0) {
-						MBMessage message = (MBMessage)context.fromXML(
-							entry.getValue());
+				for (String entry : entries) {
+					MBMessage message = (MBMessage)context.getZipEntryAsObject(
+						entry);
 
+					if (message != null) {
 						messages.add(message);
 					}
 				}
@@ -683,17 +691,16 @@ public class PortletImporter {
 				long classPK = GetterUtil.getLong(
 					asset.attributeValue("class-pk"));
 
-				List<ObjectValuePair<String, byte[]>> entries =
-					context.getZipFolderEntries(path);
+				List<String> entries = context.getZipFolderEntries(path);
 
 				List<RatingsEntry> ratingsEntries =
 					new ArrayList<RatingsEntry>();
 
-				for (ObjectValuePair<String, byte[]> entry : entries) {
-					if (entry.getValue().length > 0) {
-						RatingsEntry rating = (RatingsEntry)context.fromXML(
-							entry.getValue());
+				for (String entry : entries) {
+					RatingsEntry rating =
+						(RatingsEntry)context.getZipEntryAsObject(entry);
 
+					if (rating != null) {
 						ratingsEntries.add(rating);
 					}
 				}

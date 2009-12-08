@@ -24,7 +24,6 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -39,6 +38,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Image;
@@ -134,22 +134,22 @@ public class LayoutExporter {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		FileCacheOutputStream fcos = exportLayoutsAsStream(
+		File file = exportLayoutsAsFile(
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 
 		try {
-			return fcos.getBytes();
+			return FileUtil.getBytes(file);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
 		finally {
-			fcos.cleanUp();
+			file.delete();
 		}
 	}
 
-	public FileCacheOutputStream exportLayoutsAsStream(
+	public File exportLayoutsAsFile(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
@@ -199,7 +199,7 @@ public class LayoutExporter {
 		ZipWriter zipWriter = null;
 
 		try {
-			zipWriter = new ZipWriter();
+			zipWriter = ZipWriterFactoryUtil.create();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -490,11 +490,9 @@ public class LayoutExporter {
 
 		// Look and feel
 
-		FileCacheOutputStream fcos = null;
-
 		try {
 			if (exportTheme) {
-				fcos = exportTheme(layoutSet);
+				exportTheme(layoutSet, zipWriter);
 			}
 
 			// Log
@@ -508,19 +506,10 @@ public class LayoutExporter {
 
 			context.addZipEntry("/manifest.xml", doc.formattedString());
 
-			if (fcos != null) {
-				context.addZipEntry("/theme.zip", fcos.getFileInputStream());
-			}
-
-			return zipWriter.finishWithStream();
+			return zipWriter.getZipFile();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
-		}
-		finally {
-			if (fcos != null) {
-				fcos.cleanUp();
-			}
 		}
 	}
 
@@ -650,12 +639,10 @@ public class LayoutExporter {
 			rolesEl);
 	}
 
-	protected FileCacheOutputStream exportTheme(LayoutSet layoutSet)
+	protected void exportTheme(LayoutSet layoutSet, ZipWriter zipWriter)
 		throws IOException, SystemException {
 
 		Theme theme = layoutSet.getTheme();
-
-		ZipWriter zipWriter = new ZipWriter();
 
 		String lookAndFeelXML = ContentUtil.get(
 			"com/liferay/portal/dependencies/liferay-look-and-feel.xml.tmpl");
@@ -670,8 +657,6 @@ public class LayoutExporter {
 			}
 		);
 
-		zipWriter.addEntry("liferay-look-and-feel.xml", lookAndFeelXML);
-
 		String servletContextName = theme.getServletContextName();
 
 		ServletContext servletContext = VelocityContextPool.get(
@@ -684,8 +669,14 @@ public class LayoutExporter {
 						theme.getThemeId());
 			}
 
-			return null;
+			return;
 		}
+
+		File themeZip = new File(zipWriter.getPath() + "/theme.zip");
+
+		ZipWriter themeZipWriter = ZipWriterFactoryUtil.create(themeZip);
+
+		themeZipWriter.addEntry("liferay-look-and-feel.xml", lookAndFeelXML);
 
 		File cssPath = null;
 		File imagesPath = null;
@@ -721,12 +712,10 @@ public class LayoutExporter {
 				servletContext.getRealPath(theme.getTemplatesPath()));
 		}
 
-		exportThemeFiles("css", cssPath, zipWriter);
-		exportThemeFiles("images", imagesPath, zipWriter);
-		exportThemeFiles("javascript", javaScriptPath, zipWriter);
-		exportThemeFiles("templates", templatesPath, zipWriter);
-
-		return zipWriter.finishWithStream();
+		exportThemeFiles("css", cssPath, themeZipWriter);
+		exportThemeFiles("images", imagesPath, themeZipWriter);
+		exportThemeFiles("javascript", javaScriptPath, themeZipWriter);
+		exportThemeFiles("templates", templatesPath, themeZipWriter);
 	}
 
 	protected void exportThemeFiles(String path, File dir, ZipWriter zipWriter)
@@ -738,9 +727,7 @@ public class LayoutExporter {
 
 		File[] files = dir.listFiles();
 
-		for (int i = 0; i < files.length; i++) {
-			File file = files[i];
-
+		for (File file : files) {
 			if (file.isDirectory()) {
 				exportThemeFiles(path + "/" + file.getName(), file, zipWriter);
 			}

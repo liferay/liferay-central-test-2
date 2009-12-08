@@ -22,32 +22,32 @@
 
 package com.liferay.portal.kernel.zip;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-
 
 /**
- * <a href="ZipWriter.java.html"><b><i>View Source</i></b></a>
+ * <a href="ZipWriterFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */
-public interface ZipWriter {
+public class ZipWriterFactoryUtil {
 
-	public void addEntry(String name, byte[] bytes) throws IOException;
+	public static ZipWriter create() throws IOException {
+		return getZipWriterFactory().create();
+	}
 
-	public void addEntry(String name, InputStream inpuStream)
-		throws IOException;
+	public static ZipWriter create(File file) throws IOException {
+		return getZipWriterFactory().create(file);
+	}
 
-	public void addEntry(String name, String s) throws IOException;
+	public static ZipWriterFactory getZipWriterFactory() {
+		return _zipWriterFactory;
+	}
 
-	public void addEntry(String name, StringBuilder sb)
-		throws IOException;
+	public void setZipWriterFactory(ZipWriterFactory zipWriterFactory) {
+		_zipWriterFactory = zipWriterFactory;
+	}
 
-	public byte[] finish() throws IOException;
-
-	public java.io.File getZipFile();
-
-	public String getPath();
+	private static ZipWriterFactory _zipWriterFactory;
 
 }

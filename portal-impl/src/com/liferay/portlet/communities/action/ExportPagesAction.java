@@ -24,7 +24,6 @@ package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
-import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -38,6 +37,9 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.ServletResponseUtil;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -66,6 +68,9 @@ public class ExportPagesAction extends PortletAction {
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
+
+		String pagesRedirect = ParamUtil.getString(
+			actionRequest, "pagesRedirect");
 
 		try {
 			ThemeDisplay themeDisplay =
@@ -127,27 +132,25 @@ public class ExportPagesAction extends PortletAction {
 					new PortalException());
 			}
 
-			FileCacheOutputStream fcos =
-				LayoutServiceUtil.exportLayoutsAsStream(
-					groupId, privateLayout, null,
-					actionRequest.getParameterMap(), startDate, endDate);
+			File file = LayoutServiceUtil.exportLayoutsAsFile(
+				groupId, privateLayout, null, actionRequest.getParameterMap(),
+				startDate, endDate);
 
-			try {
-				HttpServletResponse response =
-					PortalUtil.getHttpServletResponse(actionResponse);
+			HttpServletResponse response =
+				PortalUtil.getHttpServletResponse(actionResponse);
 
-				ServletResponseUtil.sendFile(
-					response, fileName, fcos.getFileInputStream(),
-					(int)fcos.getSize(), ContentTypes.APPLICATION_ZIP);
-			}
-			finally {
-				fcos.cleanUp();
-			}
+			ServletResponseUtil.sendFile(
+				response, fileName, new FileInputStream(file),
+				ContentTypes.APPLICATION_ZIP);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
+			SessionErrors.add(actionRequest, e.getClass().getName());
+
+			sendRedirect(actionRequest, actionResponse, pagesRedirect);
 		}
 	}
 

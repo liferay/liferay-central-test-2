@@ -115,13 +115,13 @@ public class LayoutServiceWrapper implements LayoutService {
 			parameterMap, startDate, endDate);
 	}
 
-	public com.liferay.portal.kernel.io.FileCacheOutputStream exportLayoutsAsStream(
-		long groupId, boolean privateLayout, long[] layoutIds,
+	public java.io.File exportLayoutsAsFile(long groupId,
+		boolean privateLayout, long[] layoutIds,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _layoutService.exportLayoutsAsStream(groupId, privateLayout,
+		return _layoutService.exportLayoutsAsFile(groupId, privateLayout,
 			layoutIds, parameterMap, startDate, endDate);
 	}
 
@@ -135,14 +135,14 @@ public class LayoutServiceWrapper implements LayoutService {
 			parameterMap, startDate, endDate);
 	}
 
-	public com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoAsStream(
-		long plid, long groupId, java.lang.String portletId,
+	public java.io.File exportPortletInfoAsFile(long plid, long groupId,
+		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _layoutService.exportPortletInfoAsStream(plid, groupId,
-			portletId, parameterMap, startDate, endDate);
+		return _layoutService.exportPortletInfoAsFile(plid, groupId, portletId,
+			parameterMap, startDate, endDate);
 	}
 
 	public void importLayouts(long groupId, boolean privateLayout,

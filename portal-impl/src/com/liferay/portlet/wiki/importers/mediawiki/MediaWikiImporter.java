@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
+import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -315,9 +316,9 @@ public class MediaWikiImporter implements WikiImporter {
 
 		int count = 0;
 
-		ZipReader zipReader = new ZipReader(imagesFile);
+		ZipReader zipReader = ZipReaderFactoryUtil.create(imagesFile);
 
-		Map<String, byte[]> entries = zipReader.getEntries();
+		List<String> entries = zipReader.getEntries();
 
 		int total = entries.size();
 
@@ -341,23 +342,12 @@ public class MediaWikiImporter implements WikiImporter {
 		List<ObjectValuePair<String, byte[]>> attachments =
 			new ArrayList<ObjectValuePair<String, byte[]>>();
 
-		Iterator<Map.Entry<String, byte[]>> itr = entries.entrySet().iterator();
-
 		int percentage = 50;
+		int i = 0;
 
-		for (int i = 0; itr.hasNext(); i++) {
-			Map.Entry<String, byte[]> entry = itr.next();
-
-			String key = entry.getKey();
-			byte[] value = entry.getValue();
-
-			if (key.endsWith(StringPool.SLASH)) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Ignoring " + key);
-				}
-
-				continue;
-			}
+		for (String entry : entries) {
+			String key = entry;
+			byte[] value = zipReader.getEntryAsByteArray(entry);
 
 			String[] paths = StringUtil.split(key, StringPool.SLASH);
 
@@ -386,6 +376,8 @@ public class MediaWikiImporter implements WikiImporter {
 
 				progressTracker.updateProgress(percentage);
 			}
+
+			i++;
 		}
 
 		if (!attachments.isEmpty()) {
@@ -396,6 +388,8 @@ public class MediaWikiImporter implements WikiImporter {
 		if (_log.isInfoEnabled()) {
 			_log.info("Imported " + count + " images into " + node.getName());
 		}
+
+		zipReader.close();
 	}
 
 	protected void processRegularPages(

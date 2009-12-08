@@ -70,6 +70,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -137,18 +138,12 @@ public class StagingUtil {
 		Map<String, String[]> parameterMap = getStagingParameters(
 			actionRequest);
 
-		FileCacheOutputStream fcos =
-			LayoutLocalServiceUtil.exportPortletInfoAsStream(
+		File file =
+			LayoutLocalServiceUtil.exportPortletInfoAsFile(
 				sourcePlid, sourceGroupId, portletId, parameterMap, null, null);
 
-		try {
-			LayoutServiceUtil.importPortletInfo(
-				targetPlid, targetGroupId, portletId, parameterMap,
-				fcos.getFileInputStream());
-		}
-		finally {
-			fcos.cleanUp();
-		}
+		LayoutServiceUtil.importPortletInfo(
+			targetPlid, targetGroupId, portletId, parameterMap, file);
 	}
 
 	public static void copyRemoteLayouts(
@@ -503,19 +498,13 @@ public class StagingUtil {
 			Date startDate, Date endDate)
 		throws Exception {
 
-		FileCacheOutputStream fcos =
-			LayoutLocalServiceUtil.exportLayoutsAsStream(
+		File file =
+			LayoutLocalServiceUtil.exportLayoutsAsFile(
 				sourceGroupId, privateLayout, layoutIds, parameterMap,
 				startDate, endDate);
 
-		try {
-			LayoutServiceUtil.importLayouts(
-				targetGroupId, privateLayout, parameterMap,
-				fcos.getFileInputStream());
-		}
-		finally {
-			fcos.cleanUp();
-		}
+		LayoutServiceUtil.importLayouts(
+			targetGroupId, privateLayout, parameterMap, file);
 	}
 
 	public static void publishLayouts(

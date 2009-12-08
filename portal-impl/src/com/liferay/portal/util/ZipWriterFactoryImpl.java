@@ -20,34 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.zip;
+package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.kernel.zip.ZipWriterFactory;
+
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-
 
 /**
- * <a href="ZipWriter.java.html"><b><i>View Source</i></b></a>
+ * <a href="ZipWriterFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */
-public interface ZipWriter {
+public class ZipWriterFactoryImpl implements ZipWriterFactory {
 
-	public void addEntry(String name, byte[] bytes) throws IOException;
+	public ZipWriter create() throws IOException {
+		return ZipWriterImpl.create();
+	}
 
-	public void addEntry(String name, InputStream inpuStream)
-		throws IOException;
-
-	public void addEntry(String name, String s) throws IOException;
-
-	public void addEntry(String name, StringBuilder sb)
-		throws IOException;
-
-	public byte[] finish() throws IOException;
-
-	public java.io.File getZipFile();
-
-	public String getPath();
+	public ZipWriter create(File file) throws IOException {
+		return ZipWriterImpl.create(file);
+	}
 
 }

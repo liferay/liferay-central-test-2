@@ -51,6 +51,7 @@ import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
+import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -96,7 +97,7 @@ import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.util.LocalizationUtil;
 
-import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -125,7 +126,7 @@ public class LayoutImporter {
 
 	public void importLayouts(
 			long userId, long groupId, boolean privateLayout,
-			Map<String, String[]> parameterMap, InputStream is)
+			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
 		boolean deleteMissingLayouts = MapUtil.getBoolean(
@@ -194,7 +195,14 @@ public class LayoutImporter {
 		UserIdStrategy strategy = _portletImporter.getUserIdStrategy(
 			user, userIdStrategy);
 
-		ZipReader zipReader = new ZipReader(is);
+		ZipReader zipReader = null;
+
+		try {
+			zipReader = ZipReaderFactoryUtil.create(file);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 
 		PortletDataContext context = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, new HashSet<String>(), strategy,
@@ -208,7 +216,7 @@ public class LayoutImporter {
 		// Zip
 
 		Element root = null;
-		byte[] themeZip = null;
+		InputStream themeZip = null;
 
 		// Manifest
 
@@ -261,7 +269,7 @@ public class LayoutImporter {
 		// Look and feel
 
 		if (importTheme) {
-			themeZip = context.getZipEntryAsByteArray("theme.zip");
+			themeZip = context.getZipEntryAsInputStream("theme.zip");
 		}
 
 		// Look and feel
@@ -735,6 +743,8 @@ public class LayoutImporter {
 				LayoutUtil.update(layout, false);
 			}
 		}
+
+		zipReader.close();
 	}
 
 	protected void deleteMissingLayouts(
@@ -1423,7 +1433,7 @@ public class LayoutImporter {
 		}
 	}
 
-	protected String importTheme(LayoutSet layoutSet, byte[] themeZip)
+	protected String importTheme(LayoutSet layoutSet, InputStream themeZip)
 		throws IOException {
 
 		ThemeLoader themeLoader = ThemeLoaderFactory.getDefaultThemeLoader();
@@ -1434,12 +1444,10 @@ public class LayoutImporter {
 			return null;
 		}
 
-		ZipReader zipReader = new ZipReader(new ByteArrayInputStream(themeZip));
+		ZipReader zipReader = ZipReaderFactoryUtil.create(themeZip);
 
-		Map<String, byte[]> entries = zipReader.getEntries();
-
-		String lookAndFeelXML = new String(
-			entries.get("liferay-look-and-feel.xml"));
+		String lookAndFeelXML = zipReader.getEntryAsString(
+			"liferay-look-and-feel.xml");
 
 		String themeId = String.valueOf(layoutSet.getGroupId());
 
@@ -1468,23 +1476,30 @@ public class LayoutImporter {
 			}
 		);
 
-		FileUtil.deltree(themeLoader.getFileStorage() + "/" + themeId);
+		FileUtil.deltree(
+			themeLoader.getFileStorage() + File.separator + themeId);
 
-		Iterator<Map.Entry<String, byte[]>> itr = entries.entrySet().iterator();
+		List<String> entries = zipReader.getEntries();
 
-		while (itr.hasNext()) {
-			Map.Entry<String, byte[]> entry = itr.next();
+		for (String entry : entries) {
+			String key = entry;
 
-			String key = entry.getKey();
-			byte[] value = entry.getValue();
-
-			if (key.equals("liferay-look-and-feel.xml")) {
-				value = lookAndFeelXML.getBytes();
+			if (key.contains(StringPool.SLASH)) {
+				key = key.substring(key.lastIndexOf(StringPool.SLASH));
 			}
 
-			FileUtil.write(
-				themeLoader.getFileStorage() + "/" + themeId + "/" + key,
-				value);
+			if (key.equals("liferay-look-and-feel.xml")) {
+				FileUtil.write(
+					themeLoader.getFileStorage() + File.separator + themeId +
+						File.separator + key, lookAndFeelXML.getBytes());
+			}
+			else {
+				InputStream is = zipReader.getEntryAsInputStream(entry);
+
+				FileUtil.write(
+					themeLoader.getFileStorage() + File.separator + themeId +
+						File.separator + key, is);
+			}
 		}
 
 		themeLoader.loadThemes();

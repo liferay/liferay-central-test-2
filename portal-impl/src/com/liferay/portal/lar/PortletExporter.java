@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
@@ -41,6 +42,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -74,6 +76,7 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.util.Date;
@@ -101,21 +104,21 @@ public class PortletExporter {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		FileCacheOutputStream fcos = exportPortletInfoAsStream(
+		File file = exportPortletInfoAsFile(
 			plid, groupId, portletId, parameterMap, startDate, endDate);
 
 		try {
-			return fcos.getBytes();
+			return FileUtil.getBytes(file);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
 		finally {
-			fcos.cleanUp();
+			file.delete();
 		}
 	}
 
-	public FileCacheOutputStream exportPortletInfoAsStream(
+	public File exportPortletInfoAsFile(
 			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
@@ -182,7 +185,7 @@ public class PortletExporter {
 		ZipWriter zipWriter = null;
 
 		try {
-			zipWriter = new ZipWriter();
+			zipWriter = ZipWriterFactoryUtil.create();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -274,7 +277,7 @@ public class PortletExporter {
 		try {
 			context.addZipEntry("/manifest.xml", doc.formattedString());
 
-			return zipWriter.finishWithStream();
+			return zipWriter.getZipFile();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
