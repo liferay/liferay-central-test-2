@@ -25,6 +25,7 @@ package com.liferay.portlet.imagegallery.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
@@ -145,7 +146,7 @@ public class EditImageAction extends PortletAction {
 		String contentType = GetterUtil.getString(
 			uploadRequest.getContentType("file"));
 
-		if (contentType.equals("application/octet-stream")) {
+		if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
 			String ext = GetterUtil.getString(
 				FileUtil.getExtension(file.getName())).toLowerCase();
 
@@ -176,7 +177,7 @@ public class EditImageAction extends PortletAction {
 		File file = uploadRequest.getFile("file");
 		String contentType = getContentType(uploadRequest, file);
 
-		if (contentType.equals("application/octet-stream")) {
+		if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
 			String ext = GetterUtil.getString(
 				FileUtil.getExtension(file.getName())).toLowerCase();
 
