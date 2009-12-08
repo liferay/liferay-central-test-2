@@ -195,14 +195,7 @@ public class LayoutImporter {
 		UserIdStrategy strategy = _portletImporter.getUserIdStrategy(
 			user, userIdStrategy);
 
-		ZipReader zipReader = null;
-
-		try {
-			zipReader = ZipReaderFactoryUtil.create(file);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
 		PortletDataContext context = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, new HashSet<String>(), strategy,
@@ -1444,7 +1437,7 @@ public class LayoutImporter {
 			return null;
 		}
 
-		ZipReader zipReader = ZipReaderFactoryUtil.create(themeZip);
+		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(themeZip);
 
 		String lookAndFeelXML = zipReader.getEntryAsString(
 			"liferay-look-and-feel.xml");
@@ -1477,12 +1470,12 @@ public class LayoutImporter {
 		);
 
 		FileUtil.deltree(
-			themeLoader.getFileStorage() + File.separator + themeId);
+			themeLoader.getFileStorage() + StringPool.SLASH + themeId);
 
-		List<String> entries = zipReader.getEntries();
+		List<String> zipEntries = zipReader.getEntries();
 
-		for (String entry : entries) {
-			String key = entry;
+		for (String zipEntry : zipEntries) {
+			String key = zipEntry;
 
 			if (key.contains(StringPool.SLASH)) {
 				key = key.substring(key.lastIndexOf(StringPool.SLASH));
@@ -1490,15 +1483,17 @@ public class LayoutImporter {
 
 			if (key.equals("liferay-look-and-feel.xml")) {
 				FileUtil.write(
-					themeLoader.getFileStorage() + File.separator + themeId +
-						File.separator + key, lookAndFeelXML.getBytes());
+					themeLoader.getFileStorage() + StringPool.SLASH + themeId +
+						StringPool.SLASH + key,
+					lookAndFeelXML.getBytes());
 			}
 			else {
-				InputStream is = zipReader.getEntryAsInputStream(entry);
+				InputStream is = zipReader.getEntryAsInputStream(zipEntry);
 
 				FileUtil.write(
-					themeLoader.getFileStorage() + File.separator + themeId +
-						File.separator + key, is);
+					themeLoader.getFileStorage() + StringPool.SLASH + themeId +
+						StringPool.SLASH + key,
+					is);
 			}
 		}
 

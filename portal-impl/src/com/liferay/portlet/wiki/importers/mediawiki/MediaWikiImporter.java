@@ -304,7 +304,7 @@ public class MediaWikiImporter implements WikiImporter {
 		return StringUtil.shorten(title, 75);
 	}
 
-	private void processImages(long userId, WikiNode node, File imagesFile)
+	protected void processImages(long userId, WikiNode node, File imagesFile)
 		throws Exception {
 
 		if ((imagesFile == null) || (!imagesFile.exists())) {
@@ -316,7 +316,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 		int count = 0;
 
-		ZipReader zipReader = ZipReaderFactoryUtil.create(imagesFile);
+		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(imagesFile);
 
 		List<String> entries = zipReader.getEntries();
 
@@ -343,9 +343,10 @@ public class MediaWikiImporter implements WikiImporter {
 			new ArrayList<ObjectValuePair<String, byte[]>>();
 
 		int percentage = 50;
-		int i = 0;
 
-		for (String entry : entries) {
+		for (int i = 0; i < entries.size(); i++) {
+			String entry = entries.get(i);
+
 			String key = entry;
 			byte[] value = zipReader.getEntryAsByteArray(entry);
 
@@ -376,8 +377,6 @@ public class MediaWikiImporter implements WikiImporter {
 
 				progressTracker.updateProgress(percentage);
 			}
-
-			i++;
 		}
 
 		if (!attachments.isEmpty()) {
@@ -603,7 +602,6 @@ public class MediaWikiImporter implements WikiImporter {
 
 		return redirectTitle;
 	}
-
 	protected String readRedirectTitle(String content) {
 		Matcher matcher = _redirectPattern.matcher(content);
 
@@ -617,7 +615,6 @@ public class MediaWikiImporter implements WikiImporter {
 
 		return redirectTitle;
 	}
-
 	protected List<String> readSpecialNamespaces(Element root)
 		throws ImportFilesException {
 

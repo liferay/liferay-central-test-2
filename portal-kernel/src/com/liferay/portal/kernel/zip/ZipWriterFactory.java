@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.zip;
 
-import java.io.IOException;
+import java.io.File;
 
 /**
  * <a href="ZipWriterFactory.java.html"><b><i>View Source</i></b></a>
@@ -31,8 +31,8 @@ import java.io.IOException;
  */
 public interface ZipWriterFactory {
 
-	public ZipWriter create() throws IOException;
+	public ZipWriter getZipWriter();
 
-	public ZipWriter create(java.io.File file) throws IOException;
+	public ZipWriter getZipWriter(File file);
 
 }

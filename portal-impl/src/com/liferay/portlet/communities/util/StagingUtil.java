@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.RecurrenceSerializer;
-import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageStatus;
@@ -71,6 +70,7 @@ import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
 
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -138,9 +138,8 @@ public class StagingUtil {
 		Map<String, String[]> parameterMap = getStagingParameters(
 			actionRequest);
 
-		File file =
-			LayoutLocalServiceUtil.exportPortletInfoAsFile(
-				sourcePlid, sourceGroupId, portletId, parameterMap, null, null);
+		File file = LayoutLocalServiceUtil.exportPortletInfoAsFile(
+			sourcePlid, sourceGroupId, portletId, parameterMap, null, null);
 
 		LayoutServiceUtil.importPortletInfo(
 			targetPlid, targetGroupId, portletId, parameterMap, file);
@@ -484,24 +483,13 @@ public class StagingUtil {
 
 	public static void publishLayouts(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
-			Map<String, String[]> parameterMap, Date startDate, Date endDate)
-		throws Exception {
-
-		publishLayouts(
-			sourceGroupId, targetGroupId, privateLayout, (long[])null,
-			parameterMap, startDate, endDate);
-	}
-
-	public static void publishLayouts(
-			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			long[] layoutIds, Map<String, String[]> parameterMap,
 			Date startDate, Date endDate)
 		throws Exception {
 
-		File file =
-			LayoutLocalServiceUtil.exportLayoutsAsFile(
-				sourceGroupId, privateLayout, layoutIds, parameterMap,
-				startDate, endDate);
+		File file = LayoutLocalServiceUtil.exportLayoutsAsFile(
+			sourceGroupId, privateLayout, layoutIds, parameterMap, startDate,
+			endDate);
 
 		LayoutServiceUtil.importLayouts(
 			targetGroupId, privateLayout, parameterMap, file);
@@ -568,6 +556,16 @@ public class StagingUtil {
 
 		publishLayouts(
 			sourceGroupId, targetGroupId, privateLayout, layoutIds,
+			parameterMap, startDate, endDate);
+	}
+
+	public static void publishLayouts(
+			long sourceGroupId, long targetGroupId, boolean privateLayout,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
+		throws Exception {
+
+		publishLayouts(
+			sourceGroupId, targetGroupId, privateLayout, (long[])null,
 			parameterMap, startDate, endDate);
 	}
 

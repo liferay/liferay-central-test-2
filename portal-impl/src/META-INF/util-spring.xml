@@ -203,11 +203,11 @@
 	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
 		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.zip.ZipReaderFactory" class="com.liferay.portal.util.ZipReaderFactoryImpl" />
+	<bean id="com.liferay.portal.kernel.zip.ZipReaderFactory" class="com.liferay.portal.zip.ZipReaderFactoryImpl" />
 	<bean id="com.liferay.portal.kernel.zip.ZipReaderFactoryUtil" class="com.liferay.portal.kernel.zip.ZipReaderFactoryUtil">
 		<property name="zipReaderFactory" ref="com.liferay.portal.kernel.zip.ZipReaderFactory" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.zip.ZipWriterFactory" class="com.liferay.portal.util.ZipWriterFactoryImpl" />
+	<bean id="com.liferay.portal.kernel.zip.ZipWriterFactory" class="com.liferay.portal.zip.ZipWriterFactoryImpl" />
 	<bean id="com.liferay.portal.kernel.zip.ZipWriterFactoryUtil" class="com.liferay.portal.kernel.zip.ZipWriterFactoryUtil">
 		<property name="zipWriterFactory" ref="com.liferay.portal.kernel.zip.ZipWriterFactory" />
 	</bean>

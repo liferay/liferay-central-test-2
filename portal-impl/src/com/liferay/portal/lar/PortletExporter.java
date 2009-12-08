@@ -26,7 +26,6 @@ import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -182,14 +181,7 @@ public class PortletExporter {
 		long companyId = layout.getCompanyId();
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
-		ZipWriter zipWriter = null;
-
-		try {
-			zipWriter = ZipWriterFactoryUtil.create();
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		ZipWriter zipWriter = ZipWriterFactoryUtil.getZipWriter();
 
 		long scopeGroupId = groupId;
 
@@ -276,12 +268,12 @@ public class PortletExporter {
 
 		try {
 			context.addZipEntry("/manifest.xml", doc.formattedString());
-
-			return zipWriter.getZipFile();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+
+		return zipWriter.getFile();
 	}
 
 	protected void exportCategories(

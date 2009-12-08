@@ -33,12 +33,14 @@ import java.io.InputStream;
  */
 public class ZipReaderFactoryUtil {
 
-	public static ZipReader create(File file) throws IOException {
-		return getZipReaderFactory().create(file);
+	public static ZipReader getZipReader(File file) {
+		return getZipReaderFactory().getZipReader(file);
 	}
 
-	public static ZipReader create(InputStream inputStream) throws IOException {
-		return getZipReaderFactory().create(inputStream);
+	public static ZipReader getZipReader(InputStream inputStream)
+		throws IOException {
+
+		return getZipReaderFactory().getZipReader(inputStream);
 	}
 
 	public static ZipReaderFactory getZipReaderFactory() {

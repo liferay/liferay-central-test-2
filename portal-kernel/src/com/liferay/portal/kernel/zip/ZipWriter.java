@@ -22,9 +22,9 @@
 
 package com.liferay.portal.kernel.zip;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-
 
 /**
  * <a href="ZipWriter.java.html"><b><i>View Source</i></b></a>
@@ -46,7 +46,7 @@ public interface ZipWriter {
 
 	public byte[] finish() throws IOException;
 
-	public java.io.File getZipFile();
+	public File getFile();
 
 	public String getPath();
 

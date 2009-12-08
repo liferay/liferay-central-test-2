@@ -69,9 +69,6 @@ public class ExportPagesAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String pagesRedirect = ParamUtil.getString(
-			actionRequest, "pagesRedirect");
-
 		try {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
@@ -136,8 +133,8 @@ public class ExportPagesAction extends PortletAction {
 				groupId, privateLayout, null, actionRequest.getParameterMap(),
 				startDate, endDate);
 
-			HttpServletResponse response =
-				PortalUtil.getHttpServletResponse(actionResponse);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
 			ServletResponseUtil.sendFile(
 				response, fileName, new FileInputStream(file),
@@ -149,6 +146,9 @@ public class ExportPagesAction extends PortletAction {
 			_log.error(e, e);
 
 			SessionErrors.add(actionRequest, e.getClass().getName());
+
+			String pagesRedirect = ParamUtil.getString(
+				actionRequest, "pagesRedirect");
 
 			sendRedirect(actionRequest, actionResponse, pagesRedirect);
 		}

@@ -33,8 +33,8 @@ import java.io.InputStream;
  */
 public interface ZipReaderFactory {
 
-	public ZipReader create(File file) throws IOException;
+	public ZipReader getZipReader(File file);
 
-	public ZipReader create(InputStream inputStream) throws IOException;
+	public ZipReader getZipReader(InputStream inputStream) throws IOException;
 
 }

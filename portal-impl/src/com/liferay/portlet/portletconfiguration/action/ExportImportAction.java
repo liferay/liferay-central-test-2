@@ -212,10 +212,9 @@ public class ExportImportAction extends EditConfigurationAction {
 					new PortalException());
 			}
 
-			File file =
-				LayoutServiceUtil.exportPortletInfoAsFile(
-					plid, groupId, portlet.getPortletId(),
-					actionRequest.getParameterMap(), startDate, endDate);
+			File file = LayoutServiceUtil.exportPortletInfoAsFile(
+				plid, groupId, portlet.getPortletId(),
+				actionRequest.getParameterMap(), startDate, endDate);
 
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);

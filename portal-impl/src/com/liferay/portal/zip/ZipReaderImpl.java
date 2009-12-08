@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.zip;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -52,14 +52,11 @@ public class ZipReaderImpl implements ZipReader {
 	static {
 		File.setDefaultArchiveDetector(
 			new DefaultArchiveDetector(
-				DefaultArchiveDetector.DEFAULT, "lar|war|zip", new ZipDriver()));
+				DefaultArchiveDetector.DEFAULT, "lar|war|zip",
+				new ZipDriver()));
 	}
 
-	private ZipReaderImpl(java.io.File file) throws IOException {
-		_zipFile = new File(file);
-	}
-
-	private ZipReaderImpl(InputStream inputStream) throws IOException {
+	public ZipReaderImpl(InputStream inputStream) throws IOException {
 		_zipFile = new File(FileUtil.createTempFile("zip"));
 
 		OutputStream outputStream = new FileOutputStream(_zipFile);
@@ -68,21 +65,34 @@ public class ZipReaderImpl implements ZipReader {
 			File.cat(inputStream, outputStream);
 		}
 		finally {
-			inputStream.close();
 			outputStream.close();
+			inputStream.close();
 		}
 	}
 
-	public static ZipReader create(java.io.File file) throws IOException {
-		return new ZipReaderImpl(file);
-	}
-
-	public static ZipReader create(InputStream inputStream) throws IOException {
-		return new ZipReaderImpl(inputStream);
+	public ZipReaderImpl(java.io.File file) {
+		_zipFile = new File(file);
 	}
 
 	public void close() {
 		_zipFile.delete();
+	}
+
+	public List<String> getEntries() {
+		List<String> folderEntries = new ArrayList<String>();
+
+		File[] files = (File[])_zipFile.listFiles();
+
+		for (File file : files) {
+			if (!file.isDirectory()) {
+				folderEntries.add(file.getEnclEntryName());
+			}
+			else {
+				processDirectory(file, folderEntries);
+			}
+		}
+
+		return folderEntries;
 	}
 
 	public byte[] getEntryAsByteArray(String name) {
@@ -100,7 +110,7 @@ public class ZipReaderImpl implements ZipReader {
 			}
 		}
 		catch (IOException e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return bytes;
@@ -111,7 +121,6 @@ public class ZipReaderImpl implements ZipReader {
 			return null;
 		}
 
-	
 		if (name.startsWith(StringPool.SLASH)) {
 			name = name.substring(1);
 		}
@@ -125,8 +134,9 @@ public class ZipReaderImpl implements ZipReader {
 				}
 
 				return new FileInputStream(file);
-			} catch (IOException e) {
-				_log.error(e);
+			}
+			catch (IOException ioe) {
+				_log.error(ioe, ioe);
 			}
 		}
 
@@ -147,23 +157,6 @@ public class ZipReaderImpl implements ZipReader {
 		return null;
 	}
 
-	public List<String> getEntries() {
-		List<String> folderEntries = new ArrayList<String>();
-
-		File[] entries = (File[])_zipFile.listFiles();
-
-		for (File entry : entries) {
-			if (!entry.isDirectory()) {
-				folderEntries.add(entry.getEnclEntryName());
-			}
-			else {
-				processDirectory(entry, folderEntries);
-			}
-		}
-
-		return folderEntries;
-	}
-
 	public List<String> getFolderEntries(String path) {
 		if (Validator.isNull(path)) {
 			return null;
@@ -171,29 +164,30 @@ public class ZipReaderImpl implements ZipReader {
 
 		List<String> folderEntries = new ArrayList<String>();
 
-		File pathEntry = new File(
-			_zipFile.getPath() + File.separator + path);
+		File directory = new File(_zipFile.getPath() + StringPool.SLASH + path);
 
-		File[] entries = (File[])pathEntry.listFiles();
+		File[] files = (File[])directory.listFiles();
 
-		for (File entry : entries) {
-			if (!entry.isDirectory()) {
-				folderEntries.add(entry.getEnclEntryName());
+		for (File file : files) {
+			if (!file.isDirectory()) {
+				folderEntries.add(file.getEnclEntryName());
 			}
 		}
 
 		return folderEntries;
 	}
 
-	protected void processDirectory(File directory, List<String> folderEntries) {
-		File[] entries = (File[])directory.listFiles();
+	protected void processDirectory(
+		File directory, List<String> folderEntries) {
 
-		for (File entry : entries) {
-			if (!entry.isDirectory()) {
-				folderEntries.add(entry.getEnclEntryName());
+		File[] files = (File[])directory.listFiles();
+
+		for (File file : files) {
+			if (!file.isDirectory()) {
+				folderEntries.add(file.getEnclEntryName());
 			}
 			else {
-				processDirectory(entry, folderEntries);
+				processDirectory(file, folderEntries);
 			}
 		}
 	}

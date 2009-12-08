@@ -797,6 +797,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/tomcat-coyote.jar</file-name>
+		<version>6.0.18</version>
+		<project-name>Tomcat</project-name>
+		<project-url>http://tomcat.apache.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>global/annotations.jar</file-name>
 		<version>1.0</version>
 		<project-name>Common Annotations</project-name>
@@ -1893,7 +1904,7 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/jruby.jar</file-name>
+		<file-name>portal/jruby.jar</file-name>
 		<version>1.3.1</version>
 		<project-name>JRuby</project-name>
 		<project-url>http://jruby.codehaus.org</project-url>
@@ -1986,7 +1997,7 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/jython.jar</file-name>
+		<file-name>portal/jython.jar</file-name>
 		<version>2.5.0</version>
 		<project-name>Jython</project-name>
 		<project-url>http://www.jython.org</project-url>
@@ -2477,21 +2488,10 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/tomcat-coyote.jar</file-name>
-		<version>6.0.18</version>
-		<project-name>Tomcat</project-name>
-		<project-url>http://tomcat.apache.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/truezip.jar</file-name>
-		<version>6.7</version>
+		<version>6.7 RC1</version>
 		<project-name>TrueZIP</project-name>
-		<project-url>https://truezip.dev.java.net</project-url>
+		<project-url>http://truezip.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>

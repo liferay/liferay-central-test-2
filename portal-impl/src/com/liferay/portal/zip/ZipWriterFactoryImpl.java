@@ -20,28 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.zip;
 
-import com.liferay.portal.kernel.zip.ZipReader;
-import com.liferay.portal.kernel.zip.ZipReaderFactory;
+import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.kernel.zip.ZipWriterFactory;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
- * <a href="ZipReaderFactoryImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ZipWriterFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  */
-public class ZipReaderFactoryImpl implements ZipReaderFactory {
+public class ZipWriterFactoryImpl implements ZipWriterFactory {
 
-	public ZipReader create(File file) throws IOException {
-		return ZipReaderImpl.create(file);
+	public ZipWriter getZipWriter() {
+		return new ZipWriterImpl();
 	}
 
-	public ZipReader create(InputStream inputStream) throws IOException {
-		return ZipReaderImpl.create(inputStream);
+	public ZipWriter getZipWriter(File file) {
+		return new ZipWriterImpl(file);
 	}
 
 }

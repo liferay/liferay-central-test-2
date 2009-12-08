@@ -196,14 +196,7 @@ public class LayoutExporter {
 		long companyId = layoutSet.getCompanyId();
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
-		ZipWriter zipWriter = null;
-
-		try {
-			zipWriter = ZipWriterFactoryUtil.create();
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		ZipWriter zipWriter = ZipWriterFactoryUtil.getZipWriter();
 
 		PortletDataContext context = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, new HashSet<String>(), startDate,
@@ -505,12 +498,12 @@ public class LayoutExporter {
 			// Zip
 
 			context.addZipEntry("/manifest.xml", doc.formattedString());
-
-			return zipWriter.getZipFile();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+
+		return zipWriter.getFile();
 	}
 
 	protected void exportCategories(PortletDataContext context)
@@ -674,7 +667,7 @@ public class LayoutExporter {
 
 		File themeZip = new File(zipWriter.getPath() + "/theme.zip");
 
-		ZipWriter themeZipWriter = ZipWriterFactoryUtil.create(themeZip);
+		ZipWriter themeZipWriter = ZipWriterFactoryUtil.getZipWriter(themeZip);
 
 		themeZipWriter.addEntry("liferay-look-and-feel.xml", lookAndFeelXML);
 
@@ -693,7 +686,7 @@ public class LayoutExporter {
 			}
 			else {
 				String realPath =
-					themeLoader.getFileStorage().getPath() + "/" +
+					themeLoader.getFileStorage().getPath() + StringPool.SLASH +
 						theme.getName();
 
 				cssPath = new File(realPath + "/css");
@@ -729,11 +722,13 @@ public class LayoutExporter {
 
 		for (File file : files) {
 			if (file.isDirectory()) {
-				exportThemeFiles(path + "/" + file.getName(), file, zipWriter);
+				exportThemeFiles(
+					path + StringPool.SLASH + file.getName(), file, zipWriter);
 			}
 			else {
 				zipWriter.addEntry(
-					path + "/" + file.getName(), FileUtil.getBytes(file));
+					path + StringPool.SLASH + file.getName(),
+					FileUtil.getBytes(file));
 			}
 		}
 	}

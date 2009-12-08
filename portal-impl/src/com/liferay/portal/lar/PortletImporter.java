@@ -122,14 +122,7 @@ public class PortletImporter {
 
 		UserIdStrategy strategy = getUserIdStrategy(user, userIdStrategy);
 
-		ZipReader zipReader = null;
-
-		try {
-			zipReader = ZipReaderFactoryUtil.create(file);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
 		PortletDataContext context = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, new HashSet<String>(),
@@ -647,13 +640,14 @@ public class PortletImporter {
 				long classPK = GetterUtil.getLong(
 					asset.attributeValue("class-pk"));
 
-				List<String> entries = context.getZipFolderEntries(path);
+				List<String> zipFolderEntries = context.getZipFolderEntries(
+					path);
 
 				List<MBMessage> messages = new ArrayList<MBMessage>();
 
-				for (String entry : entries) {
+				for (String zipFolderEntry : zipFolderEntries) {
 					MBMessage message = (MBMessage)context.getZipEntryAsObject(
-						entry);
+						zipFolderEntry);
 
 					if (message != null) {
 						messages.add(message);
@@ -691,17 +685,19 @@ public class PortletImporter {
 				long classPK = GetterUtil.getLong(
 					asset.attributeValue("class-pk"));
 
-				List<String> entries = context.getZipFolderEntries(path);
+				List<String> zipFolderEntries = context.getZipFolderEntries(
+					path);
 
 				List<RatingsEntry> ratingsEntries =
 					new ArrayList<RatingsEntry>();
 
-				for (String entry : entries) {
-					RatingsEntry rating =
-						(RatingsEntry)context.getZipEntryAsObject(entry);
+				for (String zipFolderEntry : zipFolderEntries) {
+					RatingsEntry ratingsEntry =
+						(RatingsEntry)context.getZipEntryAsObject(
+							zipFolderEntry);
 
-					if (rating != null) {
-						ratingsEntries.add(rating);
+					if (ratingsEntry != null) {
+						ratingsEntries.add(ratingsEntry);
 					}
 				}
 

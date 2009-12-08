@@ -24,7 +24,6 @@ package com.liferay.portlet.communities.util;
 
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.configuration.Filter;
-import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -48,6 +47,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.File;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -98,10 +98,9 @@ public class CommunitiesUtil {
 
 		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters();
 
-		File file =
-			LayoutLocalServiceUtil.exportLayoutsAsFile(
-				sourceLayoutSet.getGroupId(), sourceLayoutSet.isPrivateLayout(),
-				null, parameterMap, null, null);
+		File file = LayoutLocalServiceUtil.exportLayoutsAsFile(
+			sourceLayoutSet.getGroupId(), sourceLayoutSet.isPrivateLayout(),
+			null, parameterMap, null, null);
 
 		LayoutServiceUtil.importLayouts(
 			targetLayoutSet.getGroupId(), targetLayoutSet.isPrivateLayout(),
@@ -116,18 +115,6 @@ public class CommunitiesUtil {
 			actionRequest);
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			actionResponse);
-
-		deleteLayout(request, response);
-	}
-
-	public static void deleteLayout(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-		HttpServletResponse response = PortalUtil.getHttpServletResponse(
-			renderResponse);
 
 		deleteLayout(request, response);
 	}
@@ -188,6 +175,18 @@ public class CommunitiesUtil {
 		}
 
 		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
+	}
+
+	public static void deleteLayout(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			renderResponse);
+
+		deleteLayout(request, response);
 	}
 
 	public static Map<String, String[]> getLayoutSetPrototypeParameters() {
