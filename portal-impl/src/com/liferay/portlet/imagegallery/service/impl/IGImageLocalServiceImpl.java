@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -215,7 +216,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			// Asset
 
 			updateAsset(
-				userId, image, serviceContext.getAssetCategoryIds(),
+				userId, image, contentType,
+				serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
 
 			// Expando
@@ -552,10 +554,27 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			return;
 		}
 
+		String contentType = MimeTypesUtil.getContentType(largeImage.getType());
+
+		updateAsset(
+			userId, image, contentType, assetCategoryIds, assetTagNames);
+	}
+
+	public void updateAsset(
+			long userId, IGImage image, String contentType,
+			long[] assetCategoryIds, String[] assetTagNames)
+		throws PortalException, SystemException {
+
+		Image largeImage = imageLocalService.getImage(image.getLargeImageId());
+
+		if (largeImage == null) {
+			return;
+		}
+
 		assetEntryLocalService.updateEntry(
 			userId, image.getGroupId(), IGImage.class.getName(),
 			image.getImageId(), assetCategoryIds, assetTagNames, true, null,
-			null, null, null, largeImage.getType(), image.getName(),
+			null, null, null, contentType, image.getName(),
 			image.getDescription(), null, null, largeImage.getHeight(),
 			largeImage.getWidth(), null, false);
 	}
@@ -614,7 +633,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
 			String[] assetTagNames = serviceContext.getAssetTagNames();
 
-			updateAsset(userId, image, assetCategoryIds, assetTagNames);
+			updateAsset(
+				userId, image, contentType, assetCategoryIds, assetTagNames);
 
 			// Expando
 

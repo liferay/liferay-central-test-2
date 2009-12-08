@@ -365,6 +365,17 @@ public class IGImageLocalServiceUtil {
 		getService().updateAsset(userId, image, assetCategoryIds, assetTagNames);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portlet.imagegallery.model.IGImage image,
+		java.lang.String contentType, long[] assetCategoryIds,
+		java.lang.String[] assetTagNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateAsset(userId, image, contentType, assetCategoryIds,
+			assetTagNames);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long userId, long imageId, long groupId, long folderId,
 		java.lang.String name, java.lang.String description, byte[] bytes,

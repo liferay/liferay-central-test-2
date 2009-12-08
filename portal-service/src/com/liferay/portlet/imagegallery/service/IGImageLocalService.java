@@ -285,6 +285,13 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void updateAsset(long userId,
+		com.liferay.portlet.imagegallery.model.IGImage image,
+		java.lang.String contentType, long[] assetCategoryIds,
+		java.lang.String[] assetTagNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long userId, long imageId, long groupId, long folderId,
 		java.lang.String name, java.lang.String description, byte[] bytes,
