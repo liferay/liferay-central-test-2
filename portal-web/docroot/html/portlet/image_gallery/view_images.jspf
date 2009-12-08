@@ -23,76 +23,49 @@
 %>
 
 <script type="text/javascript">
-	var maxDimension = <%= PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>;
+	AUI().ready(
+		'image-gallery',
+		function(A) {
+			var imageGallery = new A.ImageGallery(
+				{
+					after: {
+						render: function(event) {
+							var instance = this;
+							var footerNode = instance.footerNode;
 
-	function <portlet:namespace />viewImage(id, token, name, description, width, height) {
-		var page = Liferay.Util.viewport.page();
+							instance._actions = A.Node.create('<div class="lfr-image-gallery-actions"></div>');
 
-		var maxWidth = Math.max(page.x - 150, maxDimension);
-		var maxHeight = Math.max(page.y - 150, maxDimension);
+							if (footerNode) {
+								footerNode.append(
+									instance._actions
+								);
+							}
+						},
+						request: function(event) {
+							var instance = this;
 
-		var imgWidth = width;
-		var imgHeight = height;
+							var currentLink = instance.getCurrentLink();
+							var largeImageId = currentLink.attr('largeImageId');
+							var actions = instance._actions;
 
-		if (imgWidth > maxWidth || imgHeight > maxHeight) {
-			if (imgWidth > maxWidth) {
-				var x = maxWidth / imgWidth;
+							if (actions) {
+								var action = A.one('#<portlet:namespace />buttonsContainer_' + largeImageId);
 
-				imgWidth = maxWidth;
-				imgHeight = x * imgHeight;
-			}
+								actions.empty();
 
-			if (imgHeight > maxHeight) {
-				var y = maxHeight / imgHeight;
-
-				imgHeight = maxHeight;
-				imgWidth = y * imgWidth;
-			}
+								actions.append(
+									action.cloneNode(true).show()
+								);
+							}
+						}
+					},
+					delay: 5000,
+					links: '#imageGalleryPanels .image-thumbnail',
+					playingLabel: '(<liferay-ui:message key="playing" />)'
+				}
+			).render();
 		}
-
-		var winWidth = imgWidth + 36;
-
-		if (winWidth < maxDimension) {
-			winWidth = maxDimension;
-		}
-
-		var messageId = "<portlet:namespace />popup_" + id;
-		var buttonsId = "<portlet:namespace />buttons_" + id;
-		var categorizationId = "<portlet:namespace />categorizacionContainer_" + id;
-
-		var categorization = AUI().one("#" + categorizationId);
-
-		var html = "<div class='image-content'>";
-		html += "<img alt='" + name + ". " + description + "' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "&t=" + token + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' />"
-		html += "<div class='image-name'>" + name + "</div>";
-		html += "<div class='image-description'>" + description + "</div>";
-		html += "<div class='image-categorization'>" + categorization.html() + "</div>";
-		html += "</div>"
-
-		AUI().use(
-			'dialog',
-			function(A) {
-				var buttons = A.get("#" + buttonsId).cloneNode(true);
-
-				var popup = new A.Dialog(
-					{
-						bodyContent: html,
-						draggable: false,
-						destroyOnClose: true,
-						footerContent: buttons,
-						centered: true,
-						title: false,
-						modal: true,
-						width: winWidth
-					}
-				)
-				.render();
-
-				popup.get('boundingBox').addClass('portlet-image-gallery');
-				popup.get('contentBox').addClass('image-popup');
-			}
-		);
-	}
+	);
 </script>
 
 <c:if test="<%= !results.isEmpty() %>">
@@ -127,10 +100,12 @@
 
 				int topMargin = PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageHeight;
 				int sideMargin = (PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageWidth) / 2;
+
+				String largeImageURL = themeDisplay.getPathImage() + "/image_gallery?img_id=" + largeImage.getImageId() + "&t=" + ImageServletTokenUtil.getToken(largeImage.getImageId());
 				%>
 
-				<a class="image-thumbnail" href="javascript:;" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>', '<%= UnicodeFormatter.toString(image.getName()) %>', '<%= UnicodeFormatter.toString(image.getDescription()) %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
-					<img alt="<%= image.getName() + ". " + image.getDescription() %>" border="no" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImageId %>&igImageId=<%= image.getImageId() %>&igSmallImage=1&t=<%= ImageServletTokenUtil.getToken(smallImageId) %>" style="height: <%= smallImageHeight %>; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px; width: <%= smallImageWidth %>;" />
+				<a class="image-thumbnail" href="<%= largeImageURL %>" largeImageId="<%= largeImage.getImageId() %>" title="<%= image.getName() + " - " + image.getDescription() %>">
+					<img alt="<%= image.getName() + " - " + image.getDescription() %>" border="no" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImageId %>&igImageId=<%= image.getImageId() %>&igSmallImage=1&t=<%= ImageServletTokenUtil.getToken(smallImageId) %>" style="height: <%= smallImageHeight %>; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px; width: <%= smallImageWidth %>;" />
 
 					<span class="image-title"><%= image.getName() %></span>
 
@@ -148,11 +123,9 @@
 					</c:if>
 				</a>
 
-				<div id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>" style="display: none;">
+				<div class="aui-helper-hidden" id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>">
 					<div class="buttons-container float-container" id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
-						<liferay-ui:icon-list>
-							<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
-						</liferay-ui:icon-list>
+						<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
 					</div>
 				</div>
 

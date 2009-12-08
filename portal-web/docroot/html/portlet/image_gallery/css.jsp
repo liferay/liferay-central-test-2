@@ -40,41 +40,15 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-image-galle
 
 <%= html %>
 
-.portlet-image-gallery .image-popup .image-content {
-	margin-top: 16px;
-	text-align: center;
-}
-
-.portlet-image-gallery .image-popup .image-content .image-categorization {
-	margin-bottom: 20px;
-}
-
-.portlet-image-gallery .image-popup .image-content .image-categorization .has-tags .taglib-asset-categories-summary {
-	border-right: 1px solid #ccc;
-	margin-right: 20px;
-	padding-right: 10px;
-}
-
-.portlet-image-gallery .image-popup .image-content .image-name {
-	font-weight: bold;
-}
-
-.portlet-image-gallery .image-popup .image-content .image-description {
-	font-style: italic;
-}
-
-.portlet-image-gallery .image-popup .taglib-icon-list {
-	float: right;
-}
-
-.portlet-image-gallery .image-popup .taglib-icon-list li {
-	margin-left: 1em;
-	margin-right: 0;
+.lfr-image-gallery-actions {
+	font-size: 11px;
+	text-align: right;
 }
 
 .portlet-image-gallery .image-score {
 	display: block;
 	margin: 0 0 5px 35px;
+	padding-top: 3px;
 }
 
 .portlet-image-gallery .image-thumbnail {
