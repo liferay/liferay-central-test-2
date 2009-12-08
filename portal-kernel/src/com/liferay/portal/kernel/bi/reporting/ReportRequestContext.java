@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,8 +23,9 @@
 package com.liferay.portal.kernel.bi.reporting;
 
 import java.io.Serializable;
-import java.util.Map;
+
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <a href="ReportRequestContext.java.html"><b><i>View Source</i></b></a>
@@ -33,32 +34,39 @@ import java.util.HashMap;
  */
 public class ReportRequestContext implements Serializable {
 
-	public static final String JDBC_DRIVER_CLASS = "jdbc.driverClassName";
-	public static final String JDBC_URL = "jdbc.url";
-	public static final String JDBC_USER_NAME = "jdbc.userName";
-	public static final String JDBC_PASSWORD = "jdbc.password";
-	public static final String DATA_SOURCE_FILE = "dataSource.file";
 	public static final String DATA_SOURCE_CHARSET = "dataSource.charset";
+
 	public static final String DATA_SOURCE_COLUMN_NAMES =
 		"dataSource.columnNames";
 
+	public static final String DATA_SOURCE_FILE = "dataSource.file";
+
+	public static final String JDBC_DRIVER_CLASS = "jdbc.driverClassName";
+
+	public static final String JDBC_PASSWORD = "jdbc.password";
+
+	public static final String JDBC_URL = "jdbc.url";
+
+	public static final String JDBC_USER_NAME = "jdbc.userName";
+
 	public ReportRequestContext(ReportDataSourceType reportDataSourceType) {
 		_reportDataSourceType = reportDataSourceType;
-		_attributes = new HashMap<String, Serializable>();
-	}
-	
-	public Serializable getAttribute(String key) {
-		return _attributes.get(key);
 	}
 
-	public void setAttribute(String key, Serializable value) {
-		_attributes.put(key, value);
+	public Serializable getAttribute(String key) {
+		return _attributes.get(key);
 	}
 
 	public ReportDataSourceType getReportDataSourceType() {
 		return _reportDataSourceType;
 	}
 
+	public void setAttribute(String key, Serializable value) {
+		_attributes.put(key, value);
+	}
+
+	private Map<String, Serializable> _attributes =
+		new HashMap<String, Serializable>();
 	private ReportDataSourceType _reportDataSourceType;
-	private Map<String, Serializable> _attributes;
+
 }

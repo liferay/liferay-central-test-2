@@ -32,8 +32,8 @@ import java.util.Map;
  */
 public enum ReportDataSourceType {
 
-	CSV("csv"), EMPTY("empty"), XLS("xls"), XML("xml"), JDBC("jdbc"),
-	PORTAL("portal");
+	CSV("csv"), EMPTY("empty"), JDBC("jdbc"), PORTAL("portal"), XLS("xls"),
+	XML("xml");
 
 	public static ReportDataSourceType parse(String value) {
 		ReportDataSourceType reportDataSourceType = _reportDataSourceTypes.get(
@@ -49,17 +49,17 @@ public enum ReportDataSourceType {
 		else if (EMPTY.toString().equalsIgnoreCase(value)) {
 			return EMPTY;
 		}
-		else if (XLS.toString().equalsIgnoreCase(value)) {
-			return XLS;
-		}
-		else if (XML.toString().equalsIgnoreCase(value)) {
-			return XML;
-		}
 		else if (JDBC.toString().equalsIgnoreCase(value)) {
 			return JDBC;
 		}
 		else if (PORTAL.toString().equalsIgnoreCase(value)) {
 			return PORTAL;
+		}
+		else if (XLS.toString().equalsIgnoreCase(value)) {
+			return XLS;
+		}
+		else if (XML.toString().equalsIgnoreCase(value)) {
+			return XML;
 		}
 		else {
 			throw new IllegalArgumentException(
@@ -81,10 +81,10 @@ public enum ReportDataSourceType {
 	static {
 		_reportDataSourceTypes.put(CSV.toString(), CSV);
 		_reportDataSourceTypes.put(EMPTY.toString(), EMPTY);
-		_reportDataSourceTypes.put(XLS.toString(), XLS);
-		_reportDataSourceTypes.put(XML.toString(), XML);
 		_reportDataSourceTypes.put(JDBC.toString(), JDBC);
 		_reportDataSourceTypes.put(PORTAL.toString(), PORTAL);
+		_reportDataSourceTypes.put(XLS.toString(), XLS);
+		_reportDataSourceTypes.put(XML.toString(), XML);
 	}
 
 	private String _value;

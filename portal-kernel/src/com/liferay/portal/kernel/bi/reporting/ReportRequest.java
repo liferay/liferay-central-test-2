@@ -39,10 +39,10 @@ public class ReportRequest implements Serializable {
 		ReportDesignRetriever reportDesignRetriever,
 		Map<String, String> reportParameters, String reportFormat) {
 
-		_reportDesignRetriever = reportDesignRetriever;
-		_reportFormat = ReportFormat.parse(reportFormat);
-		_reportParameters = reportParameters;
 		_reportRequestContext = reportRequestContext;
+		_reportDesignRetriever = reportDesignRetriever;
+		_reportParameters = reportParameters;
+		_reportFormat = ReportFormat.parse(reportFormat);
 	}
 
 	public ReportDesignRetriever getReportDesignRetriever() {
@@ -84,4 +84,5 @@ public class ReportRequest implements Serializable {
 	private ReportFormat _reportFormat;
 	private Map<String, String> _reportParameters;
 	private ReportRequestContext _reportRequestContext;
+
 }
