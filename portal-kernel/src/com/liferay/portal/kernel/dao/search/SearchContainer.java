@@ -360,7 +360,12 @@ public class SearchContainer<R> {
 	private boolean _hover = true;
 	private String _id;
 	private PortletURL _iteratorURL;
+
+	/**
+	 * @deprecated LPS-6312
+	 */
 	private int _maxPages = DEFAULT_MAX_PAGES;
+
 	private Map<String, String> _orderableHeaders;
 	private String _orderByCol;
 	private String _orderByColParam = DEFAULT_ORDER_BY_COL_PARAM;

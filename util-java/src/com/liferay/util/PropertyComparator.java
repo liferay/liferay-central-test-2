@@ -93,7 +93,7 @@ public class PropertyComparator implements Comparator<Object> {
 					}
 				}
 
-				if (property1 instanceof Comparable) {
+				if (property1 instanceof Comparable<?>) {
 					int result = ((Comparable<Object>)property1).compareTo(
 						property2);
 
