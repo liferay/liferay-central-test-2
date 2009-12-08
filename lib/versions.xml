@@ -1854,7 +1854,7 @@
 	</library>
 	<library>
 		<file-name>portal/jgroups.jar</file-name>
-		<version>2.6.11</version>
+		<version>2.6.13</version>
 		<project-name>JGroups</project-name>
 		<project-url>http://www.jgroups.org/javagroupsnew/docs</project-url>
 		<licenses>
