@@ -465,54 +465,18 @@ configurationActionURL.setParameter("portletResource", portletResource);
 									int index = 0;
 
 									for (int queryLogicIndex : queryLogicIndexes) {
-										boolean queryContains = PrefsParamUtil.getBoolean(preferences, request, "queryContains" + queryLogicIndex, true);
-										boolean queryAndOperator = PrefsParamUtil.getBoolean(preferences, request, "queryAndOperator" + queryLogicIndex);
-										String queryName = PrefsParamUtil.getString(preferences, request, "queryName" + queryLogicIndex, "assetTags");
-										String queryValues = StringUtil.merge(preferences.getValues("queryValues" + queryLogicIndex , new String[0]));
+										String tagNames = ParamUtil.getString(request, "queryTagNames" + queryLogicIndex);
+										String categoryIds = ParamUtil.getString(request, "queryCategoryIds" + queryLogicIndex);
 
-										if (Validator.equals(queryName, "assetTags")) {
-											queryValues = ParamUtil.getString(request, "queryTagNames" + queryLogicIndex, queryValues);
-										}
-										else {
-											queryValues = ParamUtil.getString(request, "queryCategoryIds" + queryLogicIndex, queryValues);
-										}
+										if (Validator.isNotNull(tagNames) || Validator.isNotNull(categoryIds) || queryLogicIndexes.length == 1) {
 
-										if (Validator.isNotNull(queryValues) || queryLogicIndexes.length == 1) {
+											request.setAttribute("configuration.jsp-index", String.valueOf(index));
+											request.setAttribute("configuration.jsp-queryLogicIndex", String.valueOf(queryLogicIndex));
 									%>
 
 											<div class="lfr-form-row">
 												<div class="row-fields">
-													<aui:select inlineField="<%= true %>" label="" name='<%= "queryContains" + index %>'>
-														<aui:option label="contains" selected="<%= queryContains %>" value="true" />
-														<aui:option label="does-not-contain" selected="<%= !queryContains %>" value="false" />
-													</aui:select>
-
-													<aui:select inlineField="<%= true %>" label="" name='<%= "queryAndOperator" + index %>'>
-														<aui:option label="all" selected="<%= queryAndOperator %>" value="true" />
-														<aui:option label="any" selected="<%= !queryAndOperator %>" value="false" />
-													</aui:select>
-
-													<aui:select cssClass="asset-query-name" inlineLabel="left" label="of-the-following" name='<%= "queryName" + index %>'>
-														<aui:option label="tags" selected='<%= Validator.equals(queryName, "assetTags") %>' value="assetTags" />
-														<aui:option label="categories" selected='<%= Validator.equals(queryName, "assetCategories") %>' value="assetCategories" />
-													</aui:select>
-
-													<div class="aui-ctrl-holder tags-selector" style="display:<%= Validator.equals(queryName, "assetTags") ? "block;" : "none;" %>">
-														<liferay-ui:asset-tags-selector
-															hiddenInput='<%= "queryTagNames" + index %>'
-															curTags='<%= Validator.equals(queryName, "assetTags") ? queryValues : null %>'
-															focus="<%= false %>"
-														/>
-													</div>
-
-													<div class="aui-ctrl-holder categories-selector" style="display:<%= Validator.equals(queryName, "assetCategories") ? "block;" : "none;" %>">
-														<liferay-ui:asset-categories-selector
-															hiddenInput='<%= "queryCategoryIds" + index %>'
-															curCategoryIds='<%= Validator.equals(queryName, "assetCategories") ? queryValues : null %>'
-															focus="<%= false %>"
-														/>
-													</div>
-
+													<liferay-util:include page="/html/portlet/asset_publisher/edit_query_rule.jsp" />
 												</div>
 											</div>
 
@@ -529,7 +493,6 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<script type="text/javascript">
 								AUI().ready(
 									'liferay-auto-fields',
-									'liferay-categories-selector',
 									function (A) {
 										Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
 										Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
@@ -537,90 +500,10 @@ configurationActionURL.setParameter("portletResource", portletResource);
 										var autoFields = new Liferay.AutoFields(
 											{
 												contentBox: '#<portlet:namespace />queryRules > fieldset',
-												fieldIndexes: '<portlet:namespace />queryLogicIndexes'
+												fieldIndexes: '<portlet:namespace />queryLogicIndexes',
+												url: '<portlet:renderURL><portlet:param name="struts_action" value="/portlet_configuration/edit_query_rule" /></portlet:renderURL>'
 											}
 										).render();
-
-										var initQueryNameFields = function(selectFields) {
-											selectFields = selectFields || A.all('.asset-query-name');
-
-											if (selectFields) {
-												selectFields.each(
-													function(select) {
-														var row = select.get('parentNode.parentNode');
-
-														select.on(
-															'change',
-															function(event) {
-																var tagsSelector = row.all('.tags-selector');
-																var categoriesSelector = row.all('.categories-selector');
-
-																if (select.val() == 'assetTags') {
-																	if (tagsSelector) {
-																		tagsSelector.show();
-																	}
-
-																	if (categoriesSelector) {
-																		categoriesSelector.hide();
-																	}
-																}
-																else {
-																	if (tagsSelector) {
-																		tagsSelector.hide();
-																	}
-
-																	if (categoriesSelector) {
-																		categoriesSelector.show();
-																	}
-																}
-															}
-														);
-													}
-												);
-											}
-										};
-
-										autoFields.on(
-											'autorow:clone',
-											function(event) {
-												var row = event.row.get('contentBox');
-												var guid = event.guid;
-
-												initQueryNameFields(row.all('.asset-query-name'));
-
-												var firstCategoriesInput = row.one('.categories-selector > input');
-
-												var categoriesRandomNamespace = (firstCategoriesInput.attr('name') || firstCategoriesInput.attr('id') || '').substring(0,5);
-
-												new Liferay.AssetCategoriesSelector(
-													{
-														instanceVar: categoriesRandomNamespace,
-														seed: guid,
-														hiddenInput: '<portlet:namespace/>queryCategoryIds',
-														summarySpan: categoriesRandomNamespace + 'assetCategoriesSummary'
-													}
-												);
-
-												var firstTagsInput = row.one('.tags-selector > input');
-
-												if (firstTagsInput) {
-													var tagsRandomNamespace = (firstTagsInput.attr('name') || firstTagsInput.attr('id') || '').substring(0, 5);
-
-													new Liferay.AssetTagsSelector(
-														{
-															instanceVar: tagsRandomNamespace,
-															seed: guid,
-															hiddenInput: '<portlet:namespace/>queryTagNames',
-															summarySpan: tagsRandomNamespace + 'assetTagsSummary',
-															textInput: tagsRandomNamespace + 'assetTagNames',
-															focus: false
-														}
-													);
-												}
-											}
-										);
-
-										initQueryNameFields();
 									}
 								);
 							</script>

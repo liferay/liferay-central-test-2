@@ -234,6 +234,8 @@
 			<forward name="portlet.message_boards.error" path="portlet.page_comments.error" />
 		</action>
 
+		<action path="/asset_publisher/edit_query_rule" forward="portlet.asset_publisher.edit_query_rule" />
+
 		<action path="/asset_publisher/export_journal_article" type="com.liferay.portlet.journalcontent.action.ExportArticleAction" />
 
 		<action path="/asset_publisher/export_wiki_page" type="com.liferay.portlet.wiki.action.ExportPageAction" />
@@ -1456,6 +1458,8 @@
 		<action path="/portlet_configuration/update_look_and_feel" type="com.liferay.portlet.portletconfiguration.action.UpdateLookAndFeelAction" />
 
 		<action path="/portlet_configuration/update_title" type="com.liferay.portlet.portletconfiguration.action.UpdateTitleAction" />
+
+		<action path="/portlet_configuration/edit_query_rule" forward="portlet.asset_publisher.edit_query_rule" />
 
 		<!-- Portlet CSS -->
 

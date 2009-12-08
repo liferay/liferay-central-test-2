@@ -156,7 +156,8 @@ AUI().add(
 							contentBox: item,
 							guid: (++instance._guid),
 							reset: false,
-							sortable: instance._sortable
+							sortable: instance._sortable,
+							url: instance.get('url')
 						}
 					).render();
 
@@ -378,6 +379,8 @@ AUI().add(
 
 						contentBox.html(TPL_LOADING);
 
+						contentBox.plug(A.Plugin.ParseContent);
+
 						A.io(
 							url,
 							{
@@ -391,7 +394,7 @@ AUI().add(
 									success: function(id, obj) {
 										var instance = this;
 
-										contentBox.html(obj.responseText);
+										contentBox.setContent(obj.responseText);
 									}
 								}
 							}
@@ -574,6 +577,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['base', 'data-set', 'liferay-undo-manager', 'sortable']
+		requires: ['base', 'data-set', 'liferay-undo-manager', 'parse-content', 'sortable']
 	}
 );
