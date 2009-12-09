@@ -516,13 +516,13 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 
 					<tr>
 						<td>
-							<input name="<portlet:namespace />priorityName<%= i %>_<%= defaultLanguageId %>" size="15" type="text" value="<%= name %>" />
+							<input id="<portlet:namespace />priorityName<%= i %>_<%= defaultLanguageId %>" name="<portlet:namespace />priorityName<%= i %>_<%= defaultLanguageId %>" size="15" type="text" value="<%= name %>" />
 						</td>
 						<td>
-							<input name="<portlet:namespace />priorityImage<%= i %>_<%= defaultLanguageId %>" size="40" type="text" value="<%= image %>" />
+							<input id="<portlet:namespace />priorityImage<%= i %>_<%= defaultLanguageId %>" name="<portlet:namespace />priorityImage<%= i %>_<%= defaultLanguageId %>" size="40" type="text" value="<%= image %>" />
 						</td>
 						<td>
-							<input name="<portlet:namespace />priorityValue<%= i %>_<%= defaultLanguageId %>" size="4" type="text" value="<%= value %>" />
+							<input id="<portlet:namespace />priorityValue<%= i %>_<%= defaultLanguageId %>" name="<portlet:namespace />priorityValue<%= i %>_<%= defaultLanguageId %>" size="4" type="text" value="<%= value %>" />
 						</td>
 					</tr>
 
