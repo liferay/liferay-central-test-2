@@ -288,10 +288,9 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getOrganizationEntriesCount(organizationId, status);
 	}
 
-	public static void reIndex(
-		com.liferay.portlet.blogs.model.BlogsEntry entry, boolean update)
+	public static void reIndex(com.liferay.portlet.blogs.model.BlogsEntry entry)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(entry, update);
+		getService().reIndex(entry);
 	}
 
 	public static void reIndex(long entryId)

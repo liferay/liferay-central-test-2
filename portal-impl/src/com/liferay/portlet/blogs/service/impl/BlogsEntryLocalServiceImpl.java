@@ -193,7 +193,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Indexer
 
-		reIndex(entry, false);
+		reIndex(entry);
 
 		// Ping
 
@@ -484,9 +484,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			organizationId, new Date(), status);
 	}
 
-	public void reIndex(BlogsEntry entry, boolean update)
-		throws SystemException {
-
+	public void reIndex(BlogsEntry entry) throws SystemException {
 		if (entry.getStatus() != StatusConstants.APPROVED) {
 			return;
 		}
@@ -506,16 +504,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
 		try {
-			if (update) {
-				Indexer.updateEntry(
-					companyId, groupId, userId, userName, entryId, title,
-					content, displayDate, assetTagNames, expandoBridge);
-			}
-			else {
-				Indexer.addEntry(
-					companyId, groupId, userId, userName, entryId, title,
-					content, displayDate, assetTagNames, expandoBridge);
-			}
+			Indexer.updateEntry(
+				companyId, groupId, userId, userName, entryId, title, content,
+				displayDate, assetTagNames, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + entryId, se);
@@ -533,7 +524,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return;
 		}
 
-		reIndex(entry, true);
+		reIndex(entry);
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
@@ -702,7 +693,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Indexer
 
-		reIndex(entry, true);
+		reIndex(entry);
 
 		return entry;
 	}
@@ -744,7 +735,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				BlogsEntry.class.getName(), entry.getEntryId(), true);
 
 			if (reIndex) {
-				reIndex(entry, true);
+				reIndex(entry);
 			}
 		}
 
@@ -1006,13 +997,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	protected void reIndexEntries(long companyId) throws SystemException {
-		try {
-			Indexer.deleteEntries(companyId);
-		}
-		catch (SearchException se) {
-			_log.error("Deleting indexes " + companyId, se);
-		}
-
 		int count = blogsEntryPersistence.countByCompanyId(companyId);
 
 		int pages = count / Indexer.DEFAULT_INTERVAL;
@@ -1032,7 +1016,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			companyId, start, end);
 
 		for (BlogsEntry entry : entries) {
-			reIndex(entry, false);
+			reIndex(entry);
 		}
 	}
 
