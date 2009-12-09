@@ -1016,6 +1016,7 @@ AUI().add(
 								portletId: instance._portletId
 							}
 						),
+						method: 'POST',
 						on: {
 							complete: function(i, o) {
 								try {
@@ -1029,8 +1030,7 @@ AUI().add(
 
 								onLookAndFeelComplete();
 							}
-						},
-						method: 'POST'
+						}
 					}
 				);
 			},
