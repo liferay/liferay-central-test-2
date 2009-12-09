@@ -870,158 +870,167 @@ AUI().add(
 					}
 				};
 
-				var objectData = jQuery.ajax(
-					{
-						url: themeDisplay.getPathMain() + '/portlet_configuration/get_look_and_feel',
-						data: {
-							p_l_id: themeDisplay.getPlid(),
-							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-							portletId: instance._portletId
-						},
-						async: false,
-						dataType: 'json',
-						type: "POST"
-					}
-				);
+				var onLookAndFeelComplete = function() {
+					instance._portletBoundaryIdVar.val(instance._curPortletWrapperId);
 
-				if (objectData.responseText.length) {
-					objectData = jQuery.parseJSON(objectData.responseText);
+					instance._setDefaults();
 
-					instance._objData = objectData;
-				}
-				else {
-					instance._objData = defaultData;
-				}
+					instance._portletConfig();
+					instance._textStyles();
+					instance._backgroundStyles();
+					instance._borderStyles();
+					instance._spacingStyles();
+					instance._cssStyles();
 
-				instance._portletBoundaryIdVar.val(instance._curPortletWrapperId);
+					var useForAll = newPanel.all('.lfr-use-for-all');
 
-				instance._setDefaults();
+					var handleForms = function(item, index, collection) {
+						var checkBox = item;
 
-				instance._portletConfig();
-				instance._textStyles();
-				instance._backgroundStyles();
-				instance._borderStyles();
-				instance._spacingStyles();
-				instance._cssStyles();
+						var otherHolders = checkBox.ancestor('fieldset').all('.aui-ctrl-holder');
 
-				var useForAll = newPanel.all('.lfr-use-for-all');
+						var checked = item.get('checked');
 
-				var handleForms = function(item, index, collection) {
-					var checkBox = item;
+						otherHolders.each(
+							function(holderItem, holderIndex, holderCollection) {
+								if (holderIndex > 1) {
+									var fields = holderItem.all('input, select');
+									var colorPickerImages = holderItem.all('.lfr-colorpicker-img');
 
-					var otherHolders = checkBox.ancestor('fieldset').all('.aui-ctrl-holder');
+									var action = 'show';
+									var disabled = false;
+									var opacity = 1;
 
-					var checked = item.get('checked');
+									if (checked) {
+										action = 'hide';
+										disabled = true;
+										opacity = 0.3;
+									}
 
-					otherHolders.each(
-						function(holderItem, holderIndex, holderCollection) {
-							if (holderIndex > 1) {
-								var fields = holderItem.all('input, select');
-								var colorPickerImages = holderItem.all('.lfr-colorpicker-img');
-
-								var action = 'show';
-								var disabled = false;
-								var opacity = 1;
-
-								if (checked) {
-									action = 'hide';
-									disabled = true;
-									opacity = 0.3;
+									holderItem.setStyle('opacity', opacity);
+									fields.set('disabled', disabled);
+									colorPickerImages[action]();
 								}
-
-								holderItem.setStyle('opacity', opacity);
-								fields.set('disabled', disabled);
-								colorPickerImages[action]();
 							}
+						);
+					};
+
+					useForAll.detach('click');
+
+					useForAll.on(
+						'click',
+						function(event) {
+							handleForms(event.currentTarget);
+						}
+					);
+
+					useForAll.each(handleForms);
+
+					var saveHandler = function(xHR, type) {
+						var ajaxResponseMsg = instance._portletMsgResponse;
+						var ajaxResponseHTML = '<div id="lfr-portlet-css-response"></div>';
+						var message = '';
+						var messageClass = '';
+
+						if (type == 'success') {
+							message = Liferay.Language.get('your-request-processed-successfully');
+							messageClass = 'portlet-msg-success';
+						}
+						else {
+							message = Liferay.Language.get('your-settings-could-not-be-saved');
+							messageClass = 'portlet-msg-error';
+						}
+
+						if (!ajaxResponseMsg) {
+							ajaxResponse = A.Node.create(ajaxResponseHTML);
+							newPanel.one('form').prepend(ajaxResponse);
+
+							instance._portletMsgResponse = ajaxResponse;
+						}
+
+						ajaxResponse.hide();
+						ajaxResponse.attr('class', messageClass);
+						ajaxResponse.empty();
+						ajaxResponse.html(message);
+						ajaxResponse.fadeIn('normal');
+					};
+
+					instance._saveButton.detach('click');
+
+					instance._saveButton.on(
+						'click',
+						function() {
+							instance._objData.advancedData.customCSS = instance._customCSS.val();
+
+							instance._objData.wapData.title = instance._wapTitleInput.val();
+							instance._objData.wapData.initialWindowState = instance._wapInitialWindowStateSelect.val();
+
+							A.io(
+								themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
+								{
+									data: A.toQueryString(
+										{
+											p_l_id: themeDisplay.getPlid(),
+											doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+											portletId: instance._portletId,
+											css: A.JSON.stringify(instance._objData)
+										}
+									),
+									method: 'POST',
+									on: {
+										complete: saveHandler
+									}
+								}
+							);
+						}
+					);
+
+					instance._resetButton.detach('click');
+
+					instance._resetButton.on(
+						'click',
+						function() {
+							instance._curPortlet.attr('style', '');
+
+							var customStyle = A.one('#lfr-custom-css-block-' + instance._curPortletWrapperId)
+
+							if (customStyle) {
+								customStyle.remove();
+							}
+
+							instance._objData = defaultData;
+							instance._setDefaults();
 						}
 					);
 				};
 
-				useForAll.detach('click');
+				instance._objData = defaultData;
 
-				useForAll.on(
-					'click',
-					function(event) {
-						handleForms(event.currentTarget);
-					}
-				);
-
-				useForAll.each(handleForms);
-
-				var saveHandler = function(xHR, type) {
-					var ajaxResponseMsg = instance._portletMsgResponse;
-					var ajaxResponseHTML = '<div id="lfr-portlet-css-response"></div>';
-					var message = '';
-					var messageClass = '';
-
-					if (type == 'success') {
-						message = Liferay.Language.get('your-request-processed-successfully');
-						messageClass = 'portlet-msg-success';
-					}
-					else {
-						message = Liferay.Language.get('your-settings-could-not-be-saved');
-						messageClass = 'portlet-msg-error';
-					}
-
-					if (!ajaxResponseMsg) {
-						ajaxResponse = A.Node.create(ajaxResponseHTML);
-						newPanel.one('form').prepend(ajaxResponse);
-
-						instance._portletMsgResponse = ajaxResponse;
-					}
-
-					ajaxResponse.hide();
-					ajaxResponse.attr('class', messageClass);
-					ajaxResponse.empty();
-					ajaxResponse.html(message);
-					ajaxResponse.fadeIn('normal');
-				};
-
-				instance._saveButton.detach('click');
-
-				instance._saveButton.on(
-					'click',
-					function() {
-						instance._objData.advancedData.customCSS = instance._customCSS.val();
-
-						instance._objData.wapData.title = instance._wapTitleInput.val();
-						instance._objData.wapData.initialWindowState = instance._wapInitialWindowStateSelect.val();
-
-						A.io(
-							themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
+				A.io(
+					themeDisplay.getPathMain() + '/portlet_configuration/get_look_and_feel',
+					{
+						data: A.toQueryString(
 							{
-								data: A.toQueryString(
-									{
-										p_l_id: themeDisplay.getPlid(),
-										doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-										portletId: instance._portletId,
-										css: jQuery.toJSON(instance._objData)
-									}
-								),
-								method: 'POST',
-								on: {
-									complete: saveHandler
-								}
+								p_l_id: themeDisplay.getPlid(),
+								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+								portletId: instance._portletId
 							}
-						);
-					}
-				);
+						),
+						on: {
+							complete: function(i, o) {
+								try {
+									var objectData = A.JSON.parse(o.responseText);
+								}
+								catch(e) {}
 
-				instance._resetButton.detach('click');
+								if (objectData && objectData.responseText.length) {
+									instance._objData = objectData;
+								}
 
-				instance._resetButton.on(
-					'click',
-					function() {
-						instance._curPortlet.attr('style', '');
-
-						var customStyle = A.one('#lfr-custom-css-block-' + instance._curPortletWrapperId)
-
-						if (customStyle) {
-							customStyle.remove();
-						}
-
-						instance._objData = defaultData;
-						instance._setDefaults();
+								onLookAndFeelComplete();
+							}
+						},
+						method: 'POST'
 					}
 				);
 			},
