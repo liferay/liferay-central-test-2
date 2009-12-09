@@ -458,15 +458,16 @@ configurationActionURL.setParameter("portletResource", portletResource);
 										}
 
 										if (queryLogicIndexes.length == 0) {
-											queryLogicIndexes = ArrayUtil.append(queryLogicIndexes, 0);
+											queryLogicIndexes = ArrayUtil.append(queryLogicIndexes, -1);
 										}
 									}
 
 									int index = 0;
 
 									for (int queryLogicIndex : queryLogicIndexes) {
-										String tagNames = ParamUtil.getString(request, "queryTagNames" + queryLogicIndex);
-										String categoryIds = ParamUtil.getString(request, "queryCategoryIds" + queryLogicIndex);
+										String queryValues = StringUtil.merge(preferences.getValues("queryValues" + queryLogicIndex , new String[0]));
+										String tagNames = ParamUtil.getString(request, "queryTagNames" + queryLogicIndex, queryValues);
+										String categoryIds = ParamUtil.getString(request, "queryCategoryIds" + queryLogicIndex, queryValues);
 
 										if (Validator.isNotNull(tagNames) || Validator.isNotNull(categoryIds) || (queryLogicIndexes.length == 1)) {
 											request.setAttribute("configuration.jsp-index", String.valueOf(index));
