@@ -468,8 +468,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 										String tagNames = ParamUtil.getString(request, "queryTagNames" + queryLogicIndex);
 										String categoryIds = ParamUtil.getString(request, "queryCategoryIds" + queryLogicIndex);
 
-										if (Validator.isNotNull(tagNames) || Validator.isNotNull(categoryIds) || queryLogicIndexes.length == 1) {
-
+										if (Validator.isNotNull(tagNames) || Validator.isNotNull(categoryIds) || (queryLogicIndexes.length == 1)) {
 											request.setAttribute("configuration.jsp-index", String.valueOf(index));
 											request.setAttribute("configuration.jsp-queryLogicIndex", String.valueOf(queryLogicIndex));
 									%>
@@ -481,9 +480,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 											</div>
 
 									<%
-											}
+										}
 
-											index++;
+										index++;
 									}
 									%>
 
