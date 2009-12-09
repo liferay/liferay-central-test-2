@@ -1922,6 +1922,7 @@
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
+	<entity name="WorkflowTaskLink" local-service="false" remote-service="true" />
 	<exceptions>
 		<exception>AccountName</exception>
 		<exception>AddressCity</exception>

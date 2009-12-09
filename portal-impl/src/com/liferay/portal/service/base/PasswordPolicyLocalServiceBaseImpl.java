@@ -115,6 +115,7 @@ import com.liferay.portal.service.WebsiteLocalService;
 import com.liferay.portal.service.WebsiteService;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
+import com.liferay.portal.service.WorkflowTaskLinkService;
 import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AddressPersistence;
 import com.liferay.portal.service.persistence.BrowserTrackerPersistence;
@@ -1492,6 +1493,15 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		this.workflowInstanceLinkPersistence = workflowInstanceLinkPersistence;
 	}
 
+	public WorkflowTaskLinkService getWorkflowTaskLinkService() {
+		return workflowTaskLinkService;
+	}
+
+	public void setWorkflowTaskLinkService(
+		WorkflowTaskLinkService workflowTaskLinkService) {
+		this.workflowTaskLinkService = workflowTaskLinkService;
+	}
+
 	public CounterLocalService getCounterLocalService() {
 		return counterLocalService;
 	}
@@ -1811,6 +1821,8 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	protected WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	@BeanReference(name = "com.liferay.portal.service.WorkflowTaskLinkService")
+	protected WorkflowTaskLinkService workflowTaskLinkService;
 	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService")

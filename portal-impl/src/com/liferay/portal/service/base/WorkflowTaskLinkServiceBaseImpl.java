@@ -25,13 +25,10 @@ package com.liferay.portal.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
@@ -180,77 +177,14 @@ import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
-import java.util.List;
-
 /**
- * <a href="UserTrackerPathLocalServiceBaseImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="WorkflowTaskLinkServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public abstract class UserTrackerPathLocalServiceBaseImpl
-	implements UserTrackerPathLocalService {
-	public UserTrackerPath addUserTrackerPath(UserTrackerPath userTrackerPath)
-		throws SystemException {
-		userTrackerPath.setNew(true);
-
-		return userTrackerPathPersistence.update(userTrackerPath, false);
-	}
-
-	public UserTrackerPath createUserTrackerPath(long userTrackerPathId) {
-		return userTrackerPathPersistence.create(userTrackerPathId);
-	}
-
-	public void deleteUserTrackerPath(long userTrackerPathId)
-		throws PortalException, SystemException {
-		userTrackerPathPersistence.remove(userTrackerPathId);
-	}
-
-	public void deleteUserTrackerPath(UserTrackerPath userTrackerPath)
-		throws SystemException {
-		userTrackerPathPersistence.remove(userTrackerPath);
-	}
-
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		return userTrackerPathPersistence.findWithDynamicQuery(dynamicQuery);
-	}
-
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
-		return userTrackerPathPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
-	}
-
-	public UserTrackerPath getUserTrackerPath(long userTrackerPathId)
-		throws PortalException, SystemException {
-		return userTrackerPathPersistence.findByPrimaryKey(userTrackerPathId);
-	}
-
-	public List<UserTrackerPath> getUserTrackerPaths(int start, int end)
-		throws SystemException {
-		return userTrackerPathPersistence.findAll(start, end);
-	}
-
-	public int getUserTrackerPathsCount() throws SystemException {
-		return userTrackerPathPersistence.countAll();
-	}
-
-	public UserTrackerPath updateUserTrackerPath(
-		UserTrackerPath userTrackerPath) throws SystemException {
-		userTrackerPath.setNew(false);
-
-		return userTrackerPathPersistence.update(userTrackerPath, true);
-	}
-
-	public UserTrackerPath updateUserTrackerPath(
-		UserTrackerPath userTrackerPath, boolean merge)
-		throws SystemException {
-		userTrackerPath.setNew(false);
-
-		return userTrackerPathPersistence.update(userTrackerPath, merge);
-	}
-
+public abstract class WorkflowTaskLinkServiceBaseImpl extends PrincipalBean
+	implements WorkflowTaskLinkService {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

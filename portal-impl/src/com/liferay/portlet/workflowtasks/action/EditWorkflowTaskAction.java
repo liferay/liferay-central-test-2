@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.WorkflowTaskLinkServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -67,7 +69,8 @@ public class EditWorkflowTaskAction extends PortletAction {
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof WorkflowException) {
+			if (e instanceof PrincipalException ||
+				e instanceof WorkflowException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
@@ -104,18 +107,14 @@ public class EditWorkflowTaskAction extends PortletAction {
 	}
 
 	protected void assignTask(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		long workflowTaskId = ParamUtil.getLong(
 			actionRequest, "workflowTaskId");
 		long assigneeUserId = ParamUtil.getLong(
 			actionRequest, "assigneeUserId");
 		String comment = ParamUtil.getString(actionRequest, "comment");
 
-		WorkflowTaskManagerUtil.assignWorkflowTaskToUser(
-			themeDisplay.getUserId(), workflowTaskId, assigneeUserId, comment,
-			null);
+		WorkflowTaskLinkServiceUtil.assignWorkflowTaskToUser(
+			workflowTaskId, assigneeUserId, comment, null);
 	}
 
 	protected void updateTask(ActionRequest actionRequest) throws Exception {

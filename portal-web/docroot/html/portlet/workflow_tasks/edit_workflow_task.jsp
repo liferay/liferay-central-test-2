@@ -135,27 +135,30 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 			<%= (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate()) %>
 		</aui:field-wrapper>
 
-		<%
-		long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(workflowTask.getWorkflowTaskId());
-		%>
+		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) %>">
 
-		<c:if test="<%= (pooledActorsIds != null) && !workflowTask.isCompleted() %>">
-			<aui:select inlineLabel="left" label="assigned-to" name="assigneeUserId">
+			<%
+			long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(workflowTask.getWorkflowTaskId());
+			%>
 
-				<%
-				for (long pooledActorId : pooledActorsIds) {
-				%>
+			<c:if test="<%= (pooledActorsIds != null) && (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
+				<aui:select inlineLabel="left" label="assigned-to" name="assigneeUserId" showEmptyOption="true">
 
-					<aui:option label="<%= PortalUtil.getUserName(pooledActorId, StringPool.BLANK) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
+					<%
+					for (long pooledActorId : pooledActorsIds) {
+					%>
 
-				<%
-				}
+						<aui:option label="<%= PortalUtil.getUserName(pooledActorId, StringPool.BLANK) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
 
-				String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.ASSIGN +"');";
-				%>
+					<%
+					}
 
-				<aui:button name="assignButton" onClick="<%= taglibOnClick %>" type="button" value="assign" />
-			</aui:select>
+					String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.ASSIGN +"');";
+					%>
+
+					<aui:button name="assignButton" onClick="<%= taglibOnClick %>" type="button" value="assign" />
+				</aui:select>
+			</c:if>
 		</c:if>
 
 		<br />
