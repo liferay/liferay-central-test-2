@@ -53,115 +53,105 @@ public class ServerDetector {
 	public static final String WEBSPHERE_ID = "websphere";
 
 	public static String getServerId() {
-		ServerDetector sd = _instance;
-
-		if (sd._serverId == null) {
+		if (_serverId == null) {
 			if (isGeronimo()) {
-				sd._serverId = GERONIMO_ID;
+				_serverId = GERONIMO_ID;
 			}
 			else if (isGlassfish()) {
-				sd._serverId = GLASSFISH_ID;
+				_serverId = GLASSFISH_ID;
 			}
 			else if (isJBoss()) {
-				sd._serverId = JBOSS_ID;
+				_serverId = JBOSS_ID;
 			}
 			else if (isJOnAS()) {
-				sd._serverId = JONAS_ID;
+				_serverId = JONAS_ID;
 			}
 			else if (isOC4J()) {
-				sd._serverId = OC4J_ID;
+				_serverId = OC4J_ID;
 			}
 			else if (isResin()) {
-				sd._serverId = RESIN_ID;
+				_serverId = RESIN_ID;
 			}
 			else if (isWebLogic()) {
-				sd._serverId = WEBLOGIC_ID;
+				_serverId = WEBLOGIC_ID;
 			}
 			else if (isWebSphere()) {
-				sd._serverId = WEBSPHERE_ID;
+				_serverId = WEBSPHERE_ID;
 			}
 
 			if (isJetty()) {
-				if (sd._serverId == null) {
-					sd._serverId = JETTY_ID;
+				if (_serverId == null) {
+					_serverId = JETTY_ID;
 				}
 				else {
-					sd._serverId += "-" + JETTY_ID;
+					_serverId += "-" + JETTY_ID;
 				}
 			}
 			else if (isTomcat()) {
-				if (sd._serverId == null) {
-					sd._serverId = TOMCAT_ID;
+				if (_serverId == null) {
+					_serverId = TOMCAT_ID;
 				}
 				else {
-					sd._serverId += "-" + TOMCAT_ID;
+					_serverId += "-" + TOMCAT_ID;
 				}
 			}
 
 			if (_log.isInfoEnabled()) {
-				if (sd._serverId != null) {
-					_log.info("Detected server " + sd._serverId);
+				if (_serverId != null) {
+					_log.info("Detected server " + _serverId);
 				}
 				else {
 					_log.info("No server detected");
 				}
 			}
 
-			if (sd._serverId == null) {
+			if (_serverId == null) {
 				throw new RuntimeException("Server is not supported");
 			}
 		}
 
-		return sd._serverId;
+		return _serverId;
 	}
 
 	public static boolean isGeronimo() {
-		ServerDetector sd = _instance;
-
-		if (sd._geronimo == null) {
-			sd._geronimo = _detect(
+		if (_geronimo == null) {
+			_geronimo = _detect(
 				"/org/apache/geronimo/system/main/Daemon.class");
 		}
 
-		return sd._geronimo.booleanValue();
+		return _geronimo.booleanValue();
 	}
 
 	public static boolean isGlassfish() {
-		ServerDetector sd = _instance;
-
-		if (sd._glassfish == null) {
+		if (_glassfish == null) {
 			String value = System.getProperty("com.sun.aas.instanceRoot");
 
 			if (value != null) {
-				sd._glassfish = Boolean.TRUE;
+				_glassfish = Boolean.TRUE;
 			}
 			else {
-				sd._glassfish = Boolean.FALSE;
+				_glassfish = Boolean.FALSE;
 			}
 		}
 
-		return sd._glassfish.booleanValue();
+		return _glassfish.booleanValue();
 	}
 
 	public static boolean isGlassfish2() {
-		ServerDetector sd = _instance;
-
-		if (sd._glassfish2 == null) {
+		if (_glassfish2 == null) {
 			if (isGlassfish() && !isGlassfish3()) {
-				sd._glassfish2 = Boolean.TRUE;
+				_glassfish2 = Boolean.TRUE;
 			}
 			else {
-				sd._glassfish2 = Boolean.FALSE;
+				_glassfish2 = Boolean.FALSE;
 			}
 		}
 
-		return sd._glassfish2.booleanValue();
+		return _glassfish2.booleanValue();
 	}
 
 	public static boolean isGlassfish3() {
-		ServerDetector sd = _instance;
-
-		if (sd._glassfish3 == null) {
+		if (_glassfish3 == null) {
 			String value = StringPool.BLANK;
 
 			if (isGlassfish()) {
@@ -170,64 +160,54 @@ public class ServerDetector {
 			}
 
 			if (value.equals("GlassFish/v3")) {
-				sd._glassfish3 = Boolean.TRUE;
+				_glassfish3 = Boolean.TRUE;
 			}
 			else {
-				sd._glassfish3 = Boolean.FALSE;
+				_glassfish3 = Boolean.FALSE;
 			}
 		}
 
-		return sd._glassfish3.booleanValue();
+		return _glassfish3.booleanValue();
 	}
 
 	public static boolean isJBoss() {
-		ServerDetector sd = _instance;
-
-		if (sd._jBoss == null) {
-			sd._jBoss = _detect("/org/jboss/Main.class");
+		if (_jBoss == null) {
+			_jBoss = _detect("/org/jboss/Main.class");
 		}
 
-		return sd._jBoss.booleanValue();
+		return _jBoss.booleanValue();
 	}
 
 	public static boolean isJetty() {
-		ServerDetector sd = _instance;
-
-		if (sd._jetty == null) {
-			sd._jetty = _detect("/org/mortbay/jetty/Server.class");
+		if (_jetty == null) {
+			_jetty = _detect("/org/mortbay/jetty/Server.class");
 		}
 
-		return sd._jetty.booleanValue();
+		return _jetty.booleanValue();
 	}
 
 	public static boolean isJOnAS() {
-		ServerDetector sd = _instance;
-
-		if (sd._jonas == null) {
-			sd._jonas = _detect("/org/objectweb/jonas/server/Server.class");
+		if (_jonas == null) {
+			_jonas = _detect("/org/objectweb/jonas/server/Server.class");
 		}
 
-		return sd._jonas.booleanValue();
+		return _jonas.booleanValue();
 	}
 
 	public static boolean isOC4J() {
-		ServerDetector sd = _instance;
-
-		if (sd._oc4j == null) {
-			sd._oc4j = _detect("oracle.oc4j.util.ClassUtils");
+		if (_oc4j == null) {
+			_oc4j = _detect("oracle.oc4j.util.ClassUtils");
 		}
 
-		return sd._oc4j.booleanValue();
+		return _oc4j.booleanValue();
 	}
 
 	public static boolean isResin() {
-		ServerDetector sd = _instance;
-
-		if (sd._resin == null) {
-			sd._resin = _detect("/com/caucho/server/resin/Resin.class");
+		if (_resin == null) {
+			_resin = _detect("/com/caucho/server/resin/Resin.class");
 		}
 
-		return sd._resin.booleanValue();
+		return _resin.booleanValue();
 	}
 
 	public static boolean isSupportsComet() {
@@ -235,39 +215,32 @@ public class ServerDetector {
 	}
 
 	public static boolean isTomcat() {
-		ServerDetector sd = _instance;
-
-		if (sd._tomcat == null) {
-			sd._tomcat = _detect(
-				"/org/apache/catalina/startup/Bootstrap.class");
+		if (_tomcat == null) {
+			_tomcat = _detect("/org/apache/catalina/startup/Bootstrap.class");
 		}
 
-		if (sd._tomcat == null) {
-			sd._tomcat = _detect("/org/apache/catalina/startup/Embedded.class");
+		if (_tomcat == null) {
+			_tomcat = _detect("/org/apache/catalina/startup/Embedded.class");
 		}
 
-		return sd._tomcat.booleanValue();
+		return _tomcat.booleanValue();
 	}
 
 	public static boolean isWebLogic() {
-		ServerDetector sd = _instance;
-
-		if (sd._webLogic == null) {
-			sd._webLogic = _detect("/weblogic/Server.class");
+		if (_webLogic == null) {
+			_webLogic = _detect("/weblogic/Server.class");
 		}
 
-		return sd._webLogic.booleanValue();
+		return _webLogic.booleanValue();
 	}
 
 	public static boolean isWebSphere() {
-		ServerDetector sd = _instance;
-
-		if (sd._webSphere == null) {
-			sd._webSphere = _detect(
+		if (_webSphere == null) {
+			_webSphere = _detect(
 				"/com/ibm/websphere/product/VersionInfo.class");
 		}
 
-		return sd._webSphere.booleanValue();
+		return _webSphere.booleanValue();
 	}
 
 	private static Boolean _detect(String className) {
@@ -277,11 +250,9 @@ public class ServerDetector {
 			return Boolean.TRUE;
 		}
 		catch (ClassNotFoundException cnfe) {
-			ServerDetector sd = _instance;
+			Class<?> classObj = _instance.getClass();
 
-			Class<?> c = sd.getClass();
-
-			if (c.getResource(className) != null) {
+			if (classObj.getResource(className) != null) {
 				return Boolean.TRUE;
 			}
 			else {
@@ -297,18 +268,18 @@ public class ServerDetector {
 
 	private static ServerDetector _instance = new ServerDetector();
 
-	private String _serverId;
-	private Boolean _geronimo;
-	private Boolean _glassfish;
-	private Boolean _glassfish2;
-	private Boolean _glassfish3;
-	private Boolean _jBoss;
-	private Boolean _jetty;
-	private Boolean _jonas;
-	private Boolean _oc4j;
-	private Boolean _resin;
-	private Boolean _tomcat;
-	private Boolean _webLogic;
-	private Boolean _webSphere;
+	private static String _serverId;
+	private static Boolean _geronimo;
+	private static Boolean _glassfish;
+	private static Boolean _glassfish2;
+	private static Boolean _glassfish3;
+	private static Boolean _jBoss;
+	private static Boolean _jetty;
+	private static Boolean _jonas;
+	private static Boolean _oc4j;
+	private static Boolean _resin;
+	private static Boolean _tomcat;
+	private static Boolean _webLogic;
+	private static Boolean _webSphere;
 
 }

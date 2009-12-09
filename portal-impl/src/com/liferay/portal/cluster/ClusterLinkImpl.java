@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.IPProtocolDetector;
+import com.liferay.portal.kernel.util.IPDetector;
 import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SocketUtil;
@@ -64,15 +64,17 @@ public class ClusterLinkImpl implements ClusterLink {
 			return;
 		}
 
-		if (OSDetector.isUnix() && IPProtocolDetector.supportIPv6() &&
-			!IPProtocolDetector.isPreferIPv4()) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("You are on an Unix/Linux machine with IPv6 " +
-					"enabled, JGroups may not work well, if you see any " +
-					"IP multicast error, try to add " +
-					"java.net.preferIPv4Stack=true to your JVM startup " +
-					"parameters.");
-			}
+		if (OSDetector.isUnix() && IPDetector.isSupportsV6() &&
+			!IPDetector.isPrefersV4() && _log.isWarnEnabled()) {
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("You are on an Unix server with IPv6 enabled. JGroups ");
+			sb.append("may not work with IPv6. If you see a multicast ");
+			sb.append("error, try adding java.net.preferIPv4Stack=true ");
+			sb.append("as a JVM startup parameter.");
+
+			_log.warn(sb.toString());
 		}
 
 		initSystemProperties();

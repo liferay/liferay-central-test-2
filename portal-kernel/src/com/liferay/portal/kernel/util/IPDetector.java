@@ -22,38 +22,65 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * <a href="IPProtocolDetector.java.html"><b><i>View Source</i></b></a>
+ * <a href="IPDetector.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class IPProtocolDetector {
+public class IPDetector {
 
-	public static boolean isPreferIPv4() {
-		return "true".equalsIgnoreCase(
-			System.getProperty("java.net.preferIPv4Stack"));
+	public static boolean isPrefersV4() {
+		if (_prefersV4 == null) {
+			_prefersV4 = Boolean.valueOf(
+				System.getProperty("java.net.preferIPv4Stack"));
+		}
+
+		return _prefersV4.booleanValue();
 	}
 
-	public static boolean isPreferIPv6() {
-		return "true".equalsIgnoreCase(
-			System.getProperty("java.net.preferIPv6Addresses"));
+	public static boolean isPrefersV6() {
+		if (_prefersV6 == null) {
+			_prefersV6 = Boolean.valueOf(
+				System.getProperty("java.net.preferIPv6Stack"));
+		}
+
+		return _prefersV6.booleanValue();
 	}
 
-	public static boolean supportIPv6() {
-		try {
-			InetAddress[] addresses = InetAddress.getAllByName("localhost");
-			for(InetAddress address : addresses) {
-				if (address.getHostAddress().contains(":")) {
-					return true;
+	public static boolean isSupportsV6() {
+		if (_suppportsV6 == null) {
+			_suppportsV6 = Boolean.FALSE;
+
+			try {
+				InetAddress[] inetAddresses = InetAddress.getAllByName(
+					"localhost");
+
+				for (InetAddress inetAddress : inetAddresses) {
+					if (inetAddress.getHostAddress().contains(":")) {
+						_suppportsV6 = Boolean.TRUE;
+
+						break;
+					}
 				}
 			}
+			catch (UnknownHostException uhe) {
+				_log.error(uhe, uhe);
+			}
 		}
-		catch (UnknownHostException ex) {
-		}
-		return false;
+
+		return _suppportsV6.booleanValue();
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(IPDetector.class);
+
+	private static Boolean _prefersV4;
+	private static Boolean _prefersV6;
+	private static Boolean _suppportsV6;
 
 }

@@ -32,21 +32,32 @@ import java.io.File;
 public class OSDetector {
 
 	public static boolean isUnix() {
-		if (File.pathSeparator.equals(StringPool.COLON)) {
-			return true;
+		if (_unix == null) {
+			if (File.pathSeparator.equals(StringPool.COLON)) {
+				_unix = Boolean.TRUE;
+			}
+			else {
+				_unix = Boolean.FALSE;
+			}
 		}
-		else {
-			return false;
-		}
+
+		return _unix.booleanValue();
 	}
 
 	public static boolean isWindows() {
-		if (File.pathSeparator.equals(StringPool.SEMICOLON)) {
-			return true;
+		if (_windows == null) {
+			if (File.pathSeparator.equals(StringPool.SEMICOLON)) {
+				_windows = Boolean.TRUE;
+			}
+			else {
+				_windows = Boolean.FALSE;
+			}
 		}
-		else {
-			return false;
-		}
+
+		return _windows.booleanValue();
 	}
+
+	private static Boolean _unix;
+	private static Boolean _windows;
 
 }
