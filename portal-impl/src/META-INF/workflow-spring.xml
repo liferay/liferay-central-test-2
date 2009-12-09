@@ -11,11 +11,15 @@
 	<!-- Advice -->
 
 	<bean id="com.liferay.portal.workflow.WorkflowLockingAdvice" class="com.liferay.portal.workflow.WorkflowLockingAdvice" />
+	<bean id="com.liferay.portal.workflow.WorkflowPermissionAdvice" class="com.liferay.portal.workflow.WorkflowPermissionAdvice" />
 	<aop:config>
 		<aop:aspect ref="com.liferay.portal.workflow.WorkflowLockingAdvice" order="1">
 			<aop:around pointcut="execution (public void com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean.undeployWorkflowDefinition(..)) || execution (public com.liferay.portal.kernel.workflow.WorkflowInstance com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean.startWorkflowInstance(..))" method="invoke" />
 		</aop:aspect>
-		<aop:aspect ref="messagingProxyAdvice" order="2">
+		<aop:aspect ref="com.liferay.portal.workflow.WorkflowPermissionAdvice" order="2">
+			<aop:around pointcut="bean(com.liferay.portal.workflow.WorkflowTaskManagerProxyBean)" method="invoke" />
+		</aop:aspect>
+		<aop:aspect ref="messagingProxyAdvice" order="3">
 			<aop:around pointcut="bean(com.liferay.portal.workflow.*ProxyBean)" method="invoke" />
 		</aop:aspect>
 	</aop:config>

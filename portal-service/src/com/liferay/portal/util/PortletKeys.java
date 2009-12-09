@@ -181,4 +181,6 @@ public class PortletKeys {
 
 	public static final String WORKFLOW = "93";
 
+	public static final String WORKFLOW_TASKS = "150";
+
 }
