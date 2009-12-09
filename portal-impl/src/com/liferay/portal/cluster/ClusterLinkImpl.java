@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.IPProtocolDetector;
+import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SocketUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -60,6 +62,17 @@ public class ClusterLinkImpl implements ClusterLink {
 	public void afterPropertiesSet() {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
 			return;
+		}
+
+		if (OSDetector.isUnix() && IPProtocolDetector.supportIPv6() &&
+			!IPProtocolDetector.isPreferIPv4()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("You are on an Unix/Linux machine with IPv6 " +
+					"enabled, JGroups may not work well, if you see any " +
+					"IP multicast error, try to add " +
+					"java.net.preferIPv4Stack=true to your JVM startup " +
+					"parameters.");
+			}
 		}
 
 		initSystemProperties();
@@ -147,8 +160,8 @@ public class ClusterLinkImpl implements ClusterLink {
 		try {
 			channel.send(jGroupsAddress, null, message);
 		}
-		catch (ChannelException ex) {
-			_log.error("Unable to send multicast message:" + message, ex);
+		catch (ChannelException ce) {
+			_log.error("Unable to send unicast message:" + message, ce);
 		}
 	}
 
