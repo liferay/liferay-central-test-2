@@ -392,9 +392,6 @@ public class PropsValues {
 	public static final String[] COMPANY_SETTINGS_FORM_MISCELLANEOUS =
 		PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_MISCELLANEOUS);
 
-	public static final String CONTROL_PANEL_DEFAULT_ENTRY_CLASS =
-		PropsUtil.get(PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS);
-
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
 
