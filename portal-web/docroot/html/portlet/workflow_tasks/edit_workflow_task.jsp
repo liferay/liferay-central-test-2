@@ -135,30 +135,27 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 			<%= (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate()) %>
 		</aui:field-wrapper>
 
-		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) %>">
+		<%
+		long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(workflowTask.getWorkflowTaskId());
+		%>
 
-			<%
-			long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(workflowTask.getWorkflowTaskId());
-			%>
+		<c:if test="<%= (pooledActorsIds != null) && !workflowTask.isCompleted() %>">
+			<aui:select inlineLabel="left" label="assigned-to" name="assigneeUserId">
 
-			<c:if test="<%= (pooledActorsIds != null) && (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
-				<aui:select inlineLabel="left" label="assigned-to" name="assigneeUserId" showEmptyOption="true">
+				<%
+				for (long pooledActorId : pooledActorsIds) {
+				%>
 
-					<%
-					for (long pooledActorId : pooledActorsIds) {
-					%>
+					<aui:option label="<%= PortalUtil.getUserName(pooledActorId, StringPool.BLANK) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
 
-						<aui:option label="<%= PortalUtil.getUserName(pooledActorId, StringPool.BLANK) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
+				<%
+				}
 
-					<%
-					}
+				String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.ASSIGN +"');";
+				%>
 
-					String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.ASSIGN +"');";
-					%>
-
-					<aui:button name="assignButton" onClick="<%= taglibOnClick %>" type="button" value="assign" />
-				</aui:select>
-			</c:if>
+				<aui:button name="assignButton" onClick="<%= taglibOnClick %>" type="button" value="assign" />
+			</aui:select>
 		</c:if>
 
 		<br />

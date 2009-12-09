@@ -147,7 +147,6 @@
 	<bean id="com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence" class="com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.WorkflowInstanceLinkLocalService" class="com.liferay.portal.service.impl.WorkflowInstanceLinkLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence" class="com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portal.service.WorkflowTaskLinkService" class="com.liferay.portal.service.impl.WorkflowTaskLinkServiceImpl" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService" class="com.liferay.portlet.announcements.service.impl.AnnouncementsDeliveryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService" class="com.liferay.portlet.announcements.service.impl.AnnouncementsDeliveryServiceImpl" />
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistenceImpl" parent="basePersistence" />

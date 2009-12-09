@@ -386,13 +386,6 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.registerClass(
-	Liferay.Service.Portal, "WorkflowTaskLink",
-	{
-		assignWorkflowTaskToUser: true
-	}
-);
-
 Liferay.Service.register("Liferay.Service.Announcements", "com.liferay.portlet.announcements.service");
 
 Liferay.Service.registerClass(

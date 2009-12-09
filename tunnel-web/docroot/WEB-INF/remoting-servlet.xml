@@ -397,18 +397,6 @@
 		<property name="service" ref="com.liferay.portal.service.WebsiteService" />
 		<property name="serviceInterface" value="com.liferay.portal.service.WebsiteService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_WorkflowTaskLinkService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.WorkflowTaskLinkService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.WorkflowTaskLinkService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_WorkflowTaskLinkService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.WorkflowTaskLinkService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.WorkflowTaskLinkService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_WorkflowTaskLinkService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.WorkflowTaskLinkService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.WorkflowTaskLinkService" />
-	</bean>
 	<bean name="/com_liferay_portlet_announcements_service_spring_AnnouncementsDeliveryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService" />
 		<property name="serviceInterface" value="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService" />

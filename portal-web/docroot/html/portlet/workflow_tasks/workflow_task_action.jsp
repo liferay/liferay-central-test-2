@@ -70,7 +70,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getParameter("workflowTask");
 
 	</c:if>
 
-	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) && !workflowTask.isCompleted()  && (workflowTask.getAssigneeUserId() != user.getUserId()) %>">
+	<c:if test="<%= !workflowTask.isCompleted() && (workflowTask.getAssigneeUserId() != user.getUserId()) %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ASSIGN %>" />

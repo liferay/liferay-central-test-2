@@ -133,8 +133,6 @@ public class ActionKeys {
 
 	public static final String ASSIGN_USER_ROLES = "ASSIGN_USER_ROLES";
 
-	public static final String ASSIGN_USER_TASKS = "ASSIGN_USER_TASKS";
-
 	public static final String BAN_USER = "BAN_USER";
 
 	public static final String CONFIGURATION = "CONFIGURATION";
