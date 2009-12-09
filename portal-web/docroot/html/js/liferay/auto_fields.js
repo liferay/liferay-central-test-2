@@ -439,12 +439,6 @@ AUI().add(
 					instance[action]();
 				},
 
-				_afterDestroyRow: function(event) {
-					var instance = this;
-
-					instance.get('boundingBox').remove();
-				},
-
 				_afterRowVisibleChange: function(event) {
 					var instance = this;
 
