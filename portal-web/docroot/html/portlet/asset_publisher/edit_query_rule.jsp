@@ -87,34 +87,36 @@ if (queryLogicIndex > 0) {
 			var select = A.one('#<portlet:namespace /><%= randomNamespace %>selector');
 
 			if (select) {
-				var row = select.ancestor('.lfr-form-row');
+				var row = select.ancestor('.aui-autorow');
 
-				select.on(
-					'change',
-					function(event) {
-						var tagsSelector = row.one('.tags-selector');
-						var categoriesSelector = row.one('.categories-selector');
+				if (row) {
+					select.on(
+						'change',
+						function(event) {
+							var tagsSelector = row.one('.tags-selector');
+							var categoriesSelector = row.one('.categories-selector');
 
-						if (select.val() == 'assetTags') {
-							if (tagsSelector) {
-								tagsSelector.show();
+							if (select.val() == 'assetTags') {
+								if (tagsSelector) {
+									tagsSelector.show();
+								}
+
+								if (categoriesSelector) {
+									categoriesSelector.hide();
+								}
 							}
+							else {
+								if (tagsSelector) {
+									tagsSelector.hide();
+								}
 
-							if (categoriesSelector) {
-								categoriesSelector.hide();
+								if (categoriesSelector) {
+									categoriesSelector.show();
+								}
 							}
 						}
-						else {
-							if (tagsSelector) {
-								tagsSelector.hide();
-							}
-
-							if (categoriesSelector) {
-								categoriesSelector.show();
-							}
-						}
-					}
-				);
+					);
+				}
 			}
 		}
 	);

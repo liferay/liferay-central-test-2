@@ -500,7 +500,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 											{
 												contentBox: '#<portlet:namespace />queryRules > fieldset',
 												fieldIndexes: '<portlet:namespace />queryLogicIndexes',
-												url: '<portlet:renderURL><portlet:param name="struts_action" value="/portlet_configuration/edit_query_rule" /></portlet:renderURL>'
+												url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_query_rule" /></portlet:renderURL>'
 											}
 										).render();
 									}
