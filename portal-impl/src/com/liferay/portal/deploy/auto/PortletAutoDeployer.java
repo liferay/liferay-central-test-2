@@ -78,7 +78,7 @@ public class PortletAutoDeployer
 			addOptionalJar(jars, "ext-util-bridges.jar");
 			addOptionalJar(jars, "ext-util-java.jar");
 			addOptionalJar(jars, "ext-util-taglib.jar");
-			addRequiredJar(jars, "util-taglib.jar");
+			addRequiredJar(jars, "util-bridges.jar");
 			addRequiredJar(jars, "util-java.jar");
 			addRequiredJar(jars, "util-taglib.jar");
 
