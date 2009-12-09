@@ -254,8 +254,7 @@ http://docs.liferay.com/portal/5.3/javadocs/portal-impl/com/liferay/portlet/docu
 <!--
 Set the control-panel-entry-category value to "my", "content", "portal" or
 "server" to make this portlet available in the Control Panel under that
-category. Note that the portlet will only be visible to the Adminisitrator
-unless a control-panel-entry-class is specified.
+category.
 -->
 <!ELEMENT control-panel-entry-category (#PCDATA)>
 
@@ -268,7 +267,9 @@ that the entry will appear lower in the Control Panel menu.
 
 <!--
 The control-panel-entry-class value must be a class that implements
-com.liferay.portlet.ControlPanelEntry and is called by the Control Panel.
+com.liferay.portlet.ControlPanelEntry and is called by the Control Panel to
+decide whether the portlet should be shown to a specific user in a specific
+context. The default value is set in portal.properties.
 
 See:
 

@@ -120,6 +120,7 @@ import com.liferay.portal.util.comparator.PortletControlPanelWeightComparator;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.ControlPanelEntry;
+import com.liferay.portlet.DefaultControlPanelEntryFactory;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -3773,18 +3774,11 @@ public class PortalImpl implements Portal {
 	protected List<Portlet> filterControlPanelPortlets(
 		Set<Portlet> portlets, String category, ThemeDisplay themeDisplay) {
 
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		Group scopeGroup = themeDisplay.getScopeGroup();
-
-		Group group = scopeGroup;
+		Group group = themeDisplay.getScopeGroup();
 
 		List<Portlet> filteredPortlets = new ArrayList<Portlet>();
 
-		boolean contentCategory = category.equals(PortletCategoryKeys.CONTENT);
-
-		if (contentCategory && group.isLayout()) {
+		if (category.equals(PortletCategoryKeys.CONTENT) && group.isLayout()) {
 			for (Portlet portlet : portlets) {
 				if (portlet.isScopeable()) {
 					filteredPortlets.add(portlet);
@@ -3795,45 +3789,22 @@ public class PortalImpl implements Portal {
 			filteredPortlets.addAll(portlets);
 		}
 
-		if (permissionChecker.isCompanyAdmin()) {
-			return filteredPortlets;
-		}
-
-		if (category.equals(PortletCategoryKeys.CONTENT) &&
-			permissionChecker.isCommunityAdmin(group.getGroupId())) {
-
-			return filteredPortlets;
-		}
-
 		Iterator<Portlet> itr = filteredPortlets.iterator();
 
 		while (itr.hasNext()) {
 			Portlet portlet = itr.next();
 
 			try {
-				long plid = LayoutConstants.DEFAULT_PLID;
-
-				if (contentCategory) {
-					plid = scopeGroup.getDefaultPublicPlid();
-
-					if (plid == LayoutConstants.DEFAULT_PLID) {
-						plid = scopeGroup.getDefaultPrivatePlid();
-					}
-				}
-
-				if (PortletPermissionUtil.contains(
-						permissionChecker, plid, portlet.getPortletId(),
-						ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
-
-					continue;
-				}
-
 				ControlPanelEntry controlPanelEntry =
 					portlet.getControlPanelEntryInstance();
 
-				if ((controlPanelEntry == null) ||
-					(!controlPanelEntry.isVisible(
-						permissionChecker, portlet))) {
+				if (controlPanelEntry == null) {
+					controlPanelEntry =
+						DefaultControlPanelEntryFactory.getInstance();
+				}
+
+				if (!controlPanelEntry.isVisible(
+						portlet, category, themeDisplay)) {
 
 					itr.remove();
 				}

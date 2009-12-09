@@ -24,21 +24,19 @@ package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.theme.ThemeDisplay;
 
 /**
- * <a href="ControlPanelEntry.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultControlPanelEntry.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  */
-public interface ControlPanelEntry {
+public class DefaultControlPanelEntry extends BaseControlPanelEntry {
 
 	public boolean isVisible(
 			PermissionChecker permissionChecker, Portlet portlet)
-		throws Exception;
+		throws Exception {
 
-	public boolean isVisible(
-			Portlet portlet, String category, ThemeDisplay themeDisplay)
-		throws Exception;
+		return false;
+	}
 
 }

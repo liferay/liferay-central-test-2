@@ -22,10 +22,59 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortletCategoryKeys;
+
 /**
  * <a href="BaseControlPanelEntry.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
 public abstract class BaseControlPanelEntry implements ControlPanelEntry {
+
+	public boolean isVisible(
+			Portlet portlet, String category, ThemeDisplay themeDisplay)
+		throws Exception {
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return true;
+		}
+
+		Group group = themeDisplay.getScopeGroup();
+
+		long plid = LayoutConstants.DEFAULT_PLID;
+
+		if (category.equals(PortletCategoryKeys.CONTENT)) {
+			plid = group.getDefaultPublicPlid();
+
+			if (plid == LayoutConstants.DEFAULT_PLID) {
+				plid = group.getDefaultPrivatePlid();
+			}
+		}
+
+		if (category.equals(PortletCategoryKeys.CONTENT) &&
+			permissionChecker.isCommunityAdmin(group.getGroupId())) {
+
+			return true;
+		}
+
+		if (PortletPermissionUtil.contains(
+				permissionChecker, plid, portlet.getPortletId(),
+				ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
+
+			return true;
+		}
+
+		return isVisible(themeDisplay.getPermissionChecker(), portlet);
+	}
+
 }

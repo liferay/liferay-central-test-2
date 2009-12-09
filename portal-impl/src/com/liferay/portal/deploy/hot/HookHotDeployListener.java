@@ -86,6 +86,8 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.ControlPanelEntry;
+import com.liferay.portlet.DefaultControlPanelEntryFactory;
 import com.liferay.util.UniqueList;
 
 import java.io.File;
@@ -194,6 +196,12 @@ public class HookHotDeployListener
 		}
 
 		resetPortalProperties(servletContextName, portalProperties, false);
+
+		if (portalProperties.containsKey(
+				PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS)) {
+
+			DefaultControlPanelEntryFactory.setInstance(null);
+		}
 
 		if (portalProperties.containsKey(PropsKeys.DL_HOOK_IMPL)) {
 			com.liferay.documentlibrary.util.HookFactory.setInstance(null);
@@ -1020,6 +1028,24 @@ public class HookHotDeployListener
 		}
 
 		resetPortalProperties(servletContextName, portalProperties, true);
+
+		if (portalProperties.containsKey(
+				PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS)) {
+
+			String controlPanelEntryClassName = portalProperties.getProperty(
+				PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS);
+
+			ControlPanelEntry controlPanelEntry =
+				(ControlPanelEntry)portletClassLoader.loadClass(
+					controlPanelEntryClassName).newInstance();
+
+			controlPanelEntry = (ControlPanelEntry)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {ControlPanelEntry.class},
+				new ContextClassLoaderBeanHandler(
+					controlPanelEntry, portletClassLoader));
+
+			DefaultControlPanelEntryFactory.setInstance(controlPanelEntry);
+		}
 
 		if (portalProperties.containsKey(PropsKeys.DL_HOOK_IMPL)) {
 			String dlHookClassName = portalProperties.getProperty(

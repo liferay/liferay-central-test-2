@@ -22,6 +22,7 @@ auth.pipeline.post
 auth.pipeline.pre
 auto.login.hooks
 captcha.check.portal.create_account
+control.panel.entry.class.default
 default.landing.page.path
 dl.hook.impl
 field.enable.com.liferay.portal.model.Contact.birthday
