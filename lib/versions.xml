@@ -808,6 +808,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/xmltask.jar</file-name>
+		<version>1.16</version>
+		<project-name>XMLTask</project-name>
+		<project-url>http://www.oopsconsultancy.com/software/xmltask</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>global/annotations.jar</file-name>
 		<version>1.0</version>
 		<project-name>Common Annotations</project-name>

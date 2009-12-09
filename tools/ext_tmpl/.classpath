@@ -71,6 +71,7 @@
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
 	<classpathentry kind="lib" path="lib/development/spring-tomcat-weaver.jar"/>
 	<classpathentry kind="lib" path="lib/development/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="lib/development/xmltask.jar"/>
 	<classpathentry kind="lib" path="lib/global/annotations.jar"/>
 	<classpathentry kind="lib" path="lib/global/portal-kernel.jar"/>
 	<classpathentry kind="lib" path="lib/global/portal-service.jar"/>
