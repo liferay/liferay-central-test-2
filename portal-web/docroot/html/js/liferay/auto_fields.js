@@ -343,8 +343,6 @@ AUI().add(
 
 					instance.after('activeChange', instance._afterActiveChange);
 					instance.after('visibleChange', instance._afterRowVisibleChange);
-
-					instance.after('destroy', instance._afterDestroyRow);
 				},
 
 				clone: function() {
