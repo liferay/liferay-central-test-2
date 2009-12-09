@@ -22,7 +22,9 @@
 
 package com.liferay.portlet.journal.lar;
 
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.PropsValues;
 
 /**
@@ -34,8 +36,46 @@ import com.liferay.portal.util.PropsValues;
 public class JournalCreationStrategyFactory {
 
 	public static JournalCreationStrategy getInstance() {
-		return (JournalCreationStrategy)InstancePool.get(
-			PropsValues.JOURNAL_LAR_CREATION_STRATEGY);
+		if (_journalCreationStrategy == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Instantiate " + PropsValues.JOURNAL_LAR_CREATION_STRATEGY);
+			}
+
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+			try {
+				_journalCreationStrategy =
+					(JournalCreationStrategy)classLoader.loadClass(
+						PropsValues.JOURNAL_LAR_CREATION_STRATEGY).
+							newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Return " + _journalCreationStrategy.getClass().getName());
+		}
+
+		return _journalCreationStrategy;
 	}
+
+	public static void setInstance(
+		JournalCreationStrategy journalCreationStrategy) {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Set " + journalCreationStrategy.getClass().getName());
+		}
+
+		_journalCreationStrategy = journalCreationStrategy;
+	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(JournalCreationStrategyFactory.class);
+
+	private static JournalCreationStrategy _journalCreationStrategy;
 
 }

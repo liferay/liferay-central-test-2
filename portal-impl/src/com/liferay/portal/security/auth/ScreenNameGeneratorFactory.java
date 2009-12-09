@@ -24,7 +24,7 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.PropsValues;
 
 /**
@@ -41,8 +41,16 @@ public class ScreenNameGeneratorFactory {
 					"Instantiate " + PropsValues.USERS_SCREEN_NAME_GENERATOR);
 			}
 
-			_screenNameGenerator = (ScreenNameGenerator)InstancePool.get(
-				PropsValues.USERS_SCREEN_NAME_GENERATOR);
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+			try {
+				_screenNameGenerator =
+					(ScreenNameGenerator)classLoader.loadClass(
+						PropsValues.USERS_SCREEN_NAME_GENERATOR).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 
 		if (_log.isDebugEnabled()) {

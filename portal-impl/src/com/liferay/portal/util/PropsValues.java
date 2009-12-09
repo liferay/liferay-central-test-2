@@ -392,6 +392,9 @@ public class PropsValues {
 	public static final String[] COMPANY_SETTINGS_FORM_MISCELLANEOUS =
 		PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_MISCELLANEOUS);
 
+	public static final String CONTROL_PANEL_DEFAULT_ENTRY_CLASS =
+		PropsUtil.get(PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS);
+
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
 
@@ -1241,6 +1244,9 @@ public class PropsValues {
 
 	public static final String PERMISSIONS_CHECKER =
 		PropsUtil.get(PropsKeys.PERMISSIONS_CHECKER);
+
+	public static final String PERMISSIONS_LIST_FILTER =
+		PropsUtil.get(PropsKeys.PERMISSIONS_LIST_FILTER);
 
 	public static final boolean PERMISSIONS_OBJECT_BLOCKING_CACHE =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.

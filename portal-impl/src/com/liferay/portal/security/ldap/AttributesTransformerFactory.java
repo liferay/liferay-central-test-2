@@ -22,7 +22,9 @@
 
 package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.PropsValues;
 
 /**
@@ -35,8 +37,25 @@ public class AttributesTransformerFactory {
 
 	public static AttributesTransformer getInstance() {
 		if (_attributesTransformer == null) {
-			_attributesTransformer = (AttributesTransformer)InstancePool.get(
-				PropsValues.LDAP_ATTRS_TRANSFORMER_IMPL);
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Instantiate " + PropsValues.LDAP_ATTRS_TRANSFORMER_IMPL);
+			}
+
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+			try {
+				_attributesTransformer =
+					(AttributesTransformer)classLoader.loadClass(
+						PropsValues.LDAP_ATTRS_TRANSFORMER_IMPL).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Return " + _attributesTransformer.getClass().getName());
 		}
 
 		return _attributesTransformer;
@@ -45,8 +64,15 @@ public class AttributesTransformerFactory {
 	public static void setInstance(
 		AttributesTransformer attributesTransformer) {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Set " + attributesTransformer.getClass().getName());
+		}
+
 		_attributesTransformer = attributesTransformer;
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(AttributesTransformerFactory.class);
 
 	private static AttributesTransformer _attributesTransformer;
 

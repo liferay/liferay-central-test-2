@@ -22,7 +22,9 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -35,13 +37,32 @@ public class LayoutCloneFactory {
 	public static LayoutClone getInstance() {
 		if (_layoutClone == null) {
 			if (Validator.isNotNull(PropsValues.LAYOUT_CLONE_IMPL)) {
-				_layoutClone = (LayoutClone)InstancePool.get(
-					PropsValues.LAYOUT_CLONE_IMPL);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Instantiate " + PropsValues.LAYOUT_CLONE_IMPL);
+				}
+
+				ClassLoader classLoader =
+					PortalClassLoaderUtil.getClassLoader();
+
+				try {
+					_layoutClone = (LayoutClone)classLoader.loadClass(
+						PropsValues.LAYOUT_CLONE_IMPL).newInstance();
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Return " + _layoutClone.getClass().getName());
 			}
 		}
 
 		return _layoutClone;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(LayoutCloneFactory.class);
 
 	private static LayoutClone _layoutClone;
 
