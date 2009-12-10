@@ -75,7 +75,7 @@ public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 			return null;
 		}
 		catch (SystemException se) {
-			throw new IOException(se);
+			throw new IOException("", se);
 		}
 
 		return null;
