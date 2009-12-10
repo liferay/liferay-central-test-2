@@ -657,7 +657,7 @@ public class SourceFormatter {
 		ds.setBasedir(basedir);
 		ds.setExcludes(
 			new String[] {
-				"**\\aui\\css.jspf", "**\\null.jsp", "**\\tmp\\**",
+				"**\\aui\\**", "**\\bin\\**", "**\\null.jsp", "**\\tmp\\**",
 				"**\\tools\\tck\\**"
 			});
 		ds.setIncludes(new String[] {"**\\*.jsp", "**\\*.jspf", "**\\*.vm"});
@@ -863,7 +863,7 @@ public class SourceFormatter {
 		ds.setBasedir(basedir);
 		ds.setExcludes(
 			new String[] {
-				"**\\model\\*Clp.java", "**\\model\\*Model.java",
+				"**\\bin\\**", "**\\model\\*Clp.java", "**\\model\\*Model.java",
 				"**\\model\\*Soap.java", "**\\model\\*Wrapper.java",
 				"**\\model\\impl\\*ModelImpl.java",
 				"**\\service\\*Service.java", "**\\service\\*ServiceClp.java",
@@ -901,7 +901,7 @@ public class SourceFormatter {
 		ds.setBasedir(basedir);
 		ds.setExcludes(
 			new String[] {
-				"**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
+				"**\\bin\\**", "**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
 				"**\\EARXMLBuilder.java", "**\\EJBXMLBuilder.java",
 				"**\\PropsKeys.java", "**\\InstanceWrapperBuilder.java",
 				"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
@@ -928,8 +928,9 @@ public class SourceFormatter {
 		ds.setBasedir(basedir);
 		ds.setExcludes(
 			new String[] {
-				 "**\\portal-client\\**", "**\\tools\\ext_tmpl\\**",
-				"**\\*_IW.java", "**\\test\\**\\*PersistenceTest.java"
+				"**\\bin\\**", "**\\portal-client\\**",
+				"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
+				"**\\test\\**\\*PersistenceTest.java"
 			});
 		ds.setIncludes(
 			new String[] {
