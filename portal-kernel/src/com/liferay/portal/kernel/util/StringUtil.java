@@ -311,7 +311,7 @@ public class StringUtil {
 		}
 
 		int flags =
-			Pattern.CANON_EQ | Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE;
+			Pattern.CANON_EQ | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
 
 		Pattern pattern = Pattern.compile(sb.toString(), flags);
 
