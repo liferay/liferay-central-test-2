@@ -507,33 +507,14 @@ body.lfr-has-sidebar {
 	float: none;
 }
 
-.add-content-menu li a {
+.add-content-menu .add-page a {
 	background: url(../images/navigation/add_page.png) no-repeat 3px 50%;
 	padding-left: 25px;
 }
 
-.add-content-menu .add-page a {
-	background-image: url(../images/navigation/add_page.png);
-}
-
-.add-content-menu .web-content a {
-	background-image: url(../images/common/journal_article.png);
-}
-
-.add-content-menu .asset-publisher a {
-	background-image: url(../images/common/copy.png);
-}
-
-.add-content-menu .search a {
-	background-image: url(../images/common/search.png);
-}
-
-.add-content-menu .navigation a {
-	background-image: url(../images/journal/multiselection_list.png);
-}
-
 .add-content-menu .add-application a {
-	background-image: url(../images/common/portlet.png);
+	background: url(../images/common/portlet.png) no-repeat 3px 50%;
+	padding-left: 25px;
 }
 
 .manage-content-menu li a {

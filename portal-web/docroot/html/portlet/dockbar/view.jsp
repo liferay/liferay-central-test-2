@@ -30,6 +30,18 @@ Group group = null;
 if (layout != null) {
 	group = layout.getGroup();
 }
+
+List<Portlet> portlets = new ArrayList<Portlet>();
+
+String[] portletsArray = PropsValues.DOCKBAR_ADD_PORTLETS;
+
+for (String portletId : portletsArray) {
+	Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
+
+	if (portlet.isInclude() && portlet.isActive() && portlet.hasAddPortletPermission()) {
+		portlets.add(portlet);
+	}
+}
 %>
 
 <div class="dockbar" id="dockbar" rel="<portlet:namespace />">
@@ -64,26 +76,26 @@ if (layout != null) {
 											<h4><liferay-ui:message key="applications" /></h4>
 
 											<ul>
-												<li class="first web-content">
-													<a href="javascript:;" class="app-shortcut" rel="56">
-														<%= PortalUtil.getPortletTitle("56", locale) %>
-													</a>
-												</li>
-												<li class="asset-publisher">
-													<a href="javascript:;" class="app-shortcut" rel="101">
-														<%= PortalUtil.getPortletTitle("101", locale) %>
-													</a>
-												</li>
-												<li class="search">
-													<a href="javascript:;" class="app-shortcut" rel="3">
-														<%= PortalUtil.getPortletTitle("3", locale) %>
-													</a>
-												</li>
-												<li class="navigation">
-													<a href="javascript:;" class="app-shortcut" rel="71">
-														<%= PortalUtil.getPortletTitle("71", locale) %>
-													</a>
-												</li>
+
+												<%
+												Iterator<Portlet> itr = portlets.iterator();
+
+												for (int i = 0; itr.hasNext(); i++) {
+													Portlet portlet = itr.next();
+												%>
+
+													<li class="<%= (i == 0) ? "first" : "" %>">
+														<a href="javascript:;" class="app-shortcut" rel="56">
+															<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
+
+															<%= PortalUtil.getPortletTitle(portlet.getPortletId(), locale) %>
+														</a>
+													</li>
+
+												<%
+												}
+												%>
+
 												<li class="add-application last more-applications">
 													<a href="javascript:;" id="<portlet:namespace />addApplication">
 														<liferay-ui:message key="more" />&hellip;

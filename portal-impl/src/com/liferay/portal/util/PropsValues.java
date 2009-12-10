@@ -585,6 +585,9 @@ public class PropsValues {
 	public static final boolean DL_LAYOUTS_SYNC_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_ENABLED));
 
+	public static final String[] DOCKBAR_ADD_PORTLETS =
+		PropsUtil.getArray(PropsKeys.DOCKBAR_ADD_PORTLETS);
+
 	public static final String EDITOR_WYSIWYG_DEFAULT =
 		PropsUtil.get(PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 

@@ -24,8 +24,8 @@ package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PluginSettingServiceUtil;

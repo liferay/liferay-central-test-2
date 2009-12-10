@@ -451,6 +451,8 @@ public interface PropsKeys {
 
 	public static final String DL_LAYOUTS_SYNC_PUBLIC_FOLDER = "dl.layouts.sync.public.folder";
 
+	public static final String DOCKBAR_ADD_PORTLETS = "dockbar.add.portlets";
+
 	public static final String EDITOR_WYSIWYG_DEFAULT = "editor.wysiwyg.default";
 
 	public static final String EHCACHE_BLOCKING_CACHE_ALLOWED = "ehcache.blocking.cache.allowed";
