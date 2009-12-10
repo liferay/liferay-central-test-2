@@ -310,8 +310,10 @@ public class StringUtil {
 			}
 		}
 
-		Pattern pattern = Pattern.compile(
-			sb.toString(), Pattern.CANON_EQ | Pattern.UNICODE_CASE);
+		int flags =
+			Pattern.CANON_EQ | Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE;
+
+		Pattern pattern = Pattern.compile(sb.toString(), flags);
 
 		return _highlight(s, pattern, highlight1, highlight2);
 	}
