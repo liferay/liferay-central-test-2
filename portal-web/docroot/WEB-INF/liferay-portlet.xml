@@ -490,7 +490,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>56</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/journal_content.png</icon>
 		<struts-path>journal_content</struts-path>
 		<configuration-action-class>com.liferay.portlet.journalcontent.action.ConfigurationActionImpl</configuration-action-class>
 		<friendly-url-mapper-class>com.liferay.portlet.journalcontent.JournalContentFriendlyURLMapper</friendly-url-mapper-class>
@@ -607,7 +607,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>71</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/navigation.png</icon>
 		<struts-path>navigation</struts-path>
 		<configuration-action-class>com.liferay.portlet.navigation.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -834,7 +834,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>101</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/asset_publisher.png</icon>
 		<struts-path>asset_publisher</struts-path>
 		<configuration-action-class>com.liferay.portlet.assetpublisher.action.ConfigurationActionImpl</configuration-action-class>
 		<friendly-url-mapper-class>com.liferay.portlet.assetpublisher.AssetPublisherFriendlyURLMapper</friendly-url-mapper-class>
