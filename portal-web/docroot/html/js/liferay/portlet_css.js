@@ -49,15 +49,6 @@ AUI().add(
 							instance._currentPopup.plug(
 								A.Plugin.IO,
 								{
-									autoLoad: false,
-									cfg: {
-										data: {
-											p_l_id: themeDisplay.getPlid(),
-											p_p_id: 113,
-											p_p_state: 'exclusive',
-											doAsUserId: themeDisplay.getDoAsUserIdEncoded()
-										}
-									},
 									after: {
 										success: function(event) {
 											var host = this.get('host');
@@ -69,6 +60,15 @@ AUI().add(
 												instance._newPanel = properties;
 												instance._loadContent();
 											}
+										}
+									},
+									autoLoad: false,
+									cfg: {
+										data: {
+											p_l_id: themeDisplay.getPlid(),
+											p_p_id: 113,
+											p_p_state: 'exclusive',
+											doAsUserId: themeDisplay.getDoAsUserIdEncoded()
 										}
 									},
 									uri: themeDisplay.getPathMain() + '/portal/render_portlet'
