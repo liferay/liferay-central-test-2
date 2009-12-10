@@ -96,6 +96,14 @@ public interface PortletLocalService {
 		com.liferay.portal.model.Portlet portlet, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public void checkPortlet(com.liferay.portal.model.Portlet portlet)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void checkPortlets(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException;

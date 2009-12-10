@@ -104,6 +104,18 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		return _portletLocalService.updatePortlet(portlet, merge);
 	}
 
+	public void checkPortlet(com.liferay.portal.model.Portlet portlet)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_portletLocalService.checkPortlet(portlet);
+	}
+
+	public void checkPortlets(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_portletLocalService.checkPortlets(companyId);
+	}
+
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {

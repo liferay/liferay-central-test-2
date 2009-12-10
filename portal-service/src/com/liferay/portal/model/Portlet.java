@@ -413,7 +413,7 @@ public interface Portlet extends PortletModel {
 
 	public boolean hasRoleWithName(java.lang.String roleName);
 
-	public boolean hasAddPortletPermission();
+	public boolean hasAddPortletPermission(long userId);
 
 	public boolean getSystem();
 

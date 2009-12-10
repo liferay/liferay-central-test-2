@@ -316,7 +316,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		processPortletProperties(servletContextName, portletClassLoader);
 
-		// Resource actions and codes
+		// Resource actions, resource codes, and check
 
 		itr = portlets.iterator();
 
@@ -350,6 +350,13 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 				ResourceActionLocalServiceUtil.checkResourceActions(
 					modelName, modelActions);
+			}
+
+			for (long companyId : companyIds) {
+				Portlet curPortlet = PortletLocalServiceUtil.getPortletById(
+					companyId, portlet.getPortletId());
+
+				PortletLocalServiceUtil.checkPortlet(curPortlet);
 			}
 		}
 

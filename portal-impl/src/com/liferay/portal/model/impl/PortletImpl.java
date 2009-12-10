@@ -52,9 +52,12 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PublicRenderParameter;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -2291,11 +2294,20 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return true if the user has the permission to add the portlet to a
 	 *		   layout
 	 */
-	public boolean hasAddPortletPermission() {
+	public boolean hasAddPortletPermission(long userId) {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
 		try {
+			if ((permissionChecker == null) ||
+				(permissionChecker.getUserId() != userId)) {
+
+				User user = UserLocalServiceUtil.getUser(userId);
+
+				permissionChecker = PermissionCheckerFactoryUtil.create(
+					user, true);
+			}
+
 			if (PortletPermissionUtil.contains(
 					permissionChecker, getPortletId(),
 					ActionKeys.ADD_TO_PAGE)) {
@@ -2304,7 +2316,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return false;

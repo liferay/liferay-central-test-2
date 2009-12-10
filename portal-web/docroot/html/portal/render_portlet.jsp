@@ -114,7 +114,7 @@ catch (NoSuchResourceException nsre) {
 		}
 	}
 
-	if (!layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL) && !portlet.hasAddPortletPermission()) {
+	if (!layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL) && !portlet.hasAddPortletPermission(user.getUserId())) {
 		addDefaultResource = false;
 	}
 

@@ -159,7 +159,7 @@ public class LayoutTypePortletImpl
 				return null;
 			}
 
-			if (checkPermission && !portlet.hasAddPortletPermission()) {
+			if (checkPermission && !portlet.hasAddPortletPermission(userId)) {
 				return null;
 			}
 		}
@@ -743,7 +743,7 @@ public class LayoutTypePortletImpl
 				return;
 			}
 
-			if (!portlet.hasAddPortletPermission()) {
+			if (!portlet.hasAddPortletPermission(userId)) {
 				return;
 			}
 		}

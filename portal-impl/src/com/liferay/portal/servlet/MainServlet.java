@@ -611,14 +611,6 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
-		// Companies
-
-		String[] webIds = PortalInstances.getWebIds();
-
-		for (int i = 0; i < webIds.length; i++) {
-			PortalInstances.initCompany(servletContext, webIds[i]);
-		}
-
 		// Resource codes
 
 		if (_log.isDebugEnabled()) {
@@ -650,6 +642,14 @@ public class MainServlet extends ActionServlet {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+		}
+
+		// Companies
+
+		String[] webIds = PortalInstances.getWebIds();
+
+		for (int i = 0; i < webIds.length; i++) {
+			PortalInstances.initCompany(servletContext, webIds[i]);
 		}
 
 		// Message resources

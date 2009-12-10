@@ -38,7 +38,7 @@ String[] portletsArray = PropsValues.DOCKBAR_ADD_PORTLETS;
 for (String portletId : portletsArray) {
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
 
-	if (portlet.isInclude() && portlet.isActive() && portlet.hasAddPortletPermission()) {
+	if (portlet.isInclude() && portlet.isActive() && portlet.hasAddPortletPermission(user.getUserId())) {
 		portlets.add(portlet);
 	}
 }

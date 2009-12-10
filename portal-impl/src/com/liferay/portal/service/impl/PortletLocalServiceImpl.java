@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.SpriteProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -40,7 +41,6 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.Portlet;
@@ -51,12 +51,15 @@ import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.PublicRenderParameter;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.EventDefinitionImpl;
 import com.liferay.portal.model.impl.PortletAppImpl;
 import com.liferay.portal.model.impl.PortletFilterImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
@@ -99,6 +102,55 @@ import javax.servlet.ServletContext;
  * @author Eduardo Lundgren
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
+
+	public void checkPortlet(Portlet portlet)
+		throws PortalException, SystemException {
+
+		if (portlet.isSystem()) {
+			return;
+		}
+
+		String[] roleNames = portlet.getRolesArray();
+
+		if (roleNames.length == 0) {
+			return;
+		}
+
+		long companyId = portlet.getCompanyId();
+		String name = portlet.getPortletId();
+		int scope = ResourceConstants.SCOPE_COMPANY;
+		String primKey = String.valueOf(companyId);
+		String actionId = ActionKeys.ADD_TO_PAGE;
+
+		for (String roleName : roleNames) {
+			Role role = roleLocalService.getRole(companyId, roleName);
+
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				resourcePermissionLocalService.addResourcePermission(
+					companyId, name, scope, primKey, role.getRoleId(),
+					actionId);
+			}
+			else {
+				permissionLocalService.setRolePermission(
+					role.getRoleId(), companyId, name, scope, primKey,
+					actionId);
+			}
+		}
+
+		updatePortlet(
+			companyId, portlet.getPortletId(), StringPool.BLANK,
+			portlet.isActive());
+	}
+
+	public void checkPortlets(long companyId)
+		throws PortalException, SystemException {
+
+		List<Portlet> portlets = getPortlets(companyId);
+
+		for (Portlet portlet : portlets) {
+			checkPortlet(portlet);
+		}
+	}
 
 	public Portlet deployRemotePortlet(Portlet portlet)
 		throws SystemException {
@@ -1347,16 +1399,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				portletModel.getRoleMappers().putAll(roleMappers);
 				portletModel.linkRoles();
-
-				if (portletApp.isWARFile()) {
-					List<Company> companies =
-						companyLocalService.getCompanies();
-
-					for (Company company : companies) {
-						companyLocalService.checkRolesPermissions(
-							company.getCompanyId(), portletModel);
-					}
-				}
 			}
 		}
 

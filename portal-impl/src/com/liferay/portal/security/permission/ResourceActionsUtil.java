@@ -465,18 +465,18 @@ public class ResourceActionsUtil {
 	}
 
 	private void _checkPortletActions(List<String> actions) {
+		if (!actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL) &&
+			!actions.contains(ActionKeys.ADD_TO_PAGE)) {
+
+			actions.add(ActionKeys.ADD_TO_PAGE);
+		}
+
 		if (!actions.contains(ActionKeys.CONFIGURATION)) {
 			actions.add(ActionKeys.CONFIGURATION);
 		}
 
 		if (!actions.contains(ActionKeys.VIEW)) {
 			actions.add(ActionKeys.VIEW);
-		}
-
-		if (!actions.contains("ADD_TO_PAGE") &&
-			!actions.contains("ACCESS_IN_CONTROL_PANEL")) {
-
-			actions.add("ADD_TO_PAGE");
 		}
 	}
 

@@ -51,12 +51,9 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -355,9 +352,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				serviceContext);
 		}
 
-		// Roles Permissions
+		// Portlets
 
-		checkRolesPermissions(companyId);
+		portletLocalService.checkPortlets(companyId);
 
 		return company;
 	}
@@ -378,49 +375,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 
 			companyPersistence.update(company, false);
-		}
-	}
-
-	public void checkRolesPermissions(long companyId)
-		throws PortalException, SystemException {
-		List<Portlet> portlets = portletLocalService.getPortlets(companyId);
-
-		for (Portlet portlet : portlets) {
-			checkRolesPermissions(companyId, portlet);
-		}
-	}
-
-	public void checkRolesPermissions(long companyId, Portlet portlet)
-		throws PortalException, SystemException {
-
-		if (portlet.isSystem()) {
-			return;
-		}
-
-		String[] roleNames = portlet.getRolesArray();
-
-		if (roleNames.length > 0) {
-			String selResource = portlet.getPortletId();
-			int scope = ResourceConstants.SCOPE_COMPANY;
-			String actionId = ActionKeys.ADD_TO_PAGE;
-
-			for (String roleName : roleNames) {
-				Role role = roleLocalService.getRole(companyId, roleName);
-
-				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-					resourcePermissionLocalService.addResourcePermission(
-						companyId, selResource, scope,
-						String.valueOf(companyId), role.getRoleId(), actionId);
-				}
-				else {
-					permissionLocalService.setRolePermission(
-						role.getRoleId(), companyId, selResource, scope,
-						String.valueOf(companyId), actionId);
-				}
-			}
-
-			portletLocalService.updatePortlet(
-				companyId, portlet.getPortletId(), StringPool.BLANK, true);
 		}
 	}
 

@@ -132,19 +132,6 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 		_companyLocalService.checkCompanyKey(companyId);
 	}
 
-	public void checkRolesPermissions(long companyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_companyLocalService.checkRolesPermissions(companyId);
-	}
-
-	public void checkRolesPermissions(long companyId,
-		com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_companyLocalService.checkRolesPermissions(companyId, portlet);
-	}
-
 	public void deleteLogo(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

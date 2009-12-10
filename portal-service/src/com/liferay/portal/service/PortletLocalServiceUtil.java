@@ -106,6 +106,18 @@ public class PortletLocalServiceUtil {
 		return getService().updatePortlet(portlet, merge);
 	}
 
+	public static void checkPortlet(com.liferay.portal.model.Portlet portlet)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().checkPortlet(portlet);
+	}
+
+	public static void checkPortlets(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().checkPortlets(companyId);
+	}
+
 	public static com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {

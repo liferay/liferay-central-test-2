@@ -864,8 +864,8 @@ public class PortletWrapper implements Portlet {
 		return _portlet.hasRoleWithName(roleName);
 	}
 
-	public boolean hasAddPortletPermission() {
-		return _portlet.hasAddPortletPermission();
+	public boolean hasAddPortletPermission(long userId) {
+		return _portlet.hasAddPortletPermission(userId);
 	}
 
 	public boolean getSystem() {

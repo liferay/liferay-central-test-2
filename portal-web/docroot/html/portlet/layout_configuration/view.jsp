@@ -136,7 +136,7 @@ private static PortletCategory _getRelevantPortletCategory(PortletCategory portl
 				}
 				else if (layout.getType().equals(LayoutConstants.TYPE_PANEL) && !panelSelectedPortlets.contains(portlet.getRootPortletId())) {
 				}
-				else if (!portlet.hasAddPortletPermission()) {
+				else if (!portlet.hasAddPortletPermission(user.getUserId())) {
 				}
 				else if (!portlet.isInstanceable() && layoutTypePortlet.hasPortletId(portlet.getPortletId())) {
 					portletIds.add(portlet.getPortletId());

@@ -27,6 +27,7 @@
 		<portlet-name>84</portlet-name>
 		<supports>
 			<action-key>ADD_ENTRY</action-key>
+			<action-key>ADD_TO_PAGE</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
