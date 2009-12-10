@@ -42,36 +42,41 @@ AUI().add(
 												window.location.reload(true);
 											}
 										}
-									},
-									io: {
-										autoRefresh: false,
-										url: themeDisplay.getPathMain() + '/portal/render_portlet',
-										cfg: {
-											data: {
-												p_l_id: themeDisplay.getPlid(),
-												p_p_id: 113,
-												p_p_state: 'exclusive',
-												doAsUserId: themeDisplay.getDoAsUserIdEncoded()
-											},
-											on: {
-												success: function() {
-													var host = this.get('host');
-													var boundingBox = host.get('boundingBox');
-
-													this._defSuccessHandler.apply(this, arguments);
-
-													var properties = boundingBox.one('#portlet-set-properties');
-
-													if (properties) {
-														instance._newPanel = properties;
-														instance._loadContent();
-													}
-												}
-											}
-										}
 									}
 								}
 							).render();
+
+							instance._currentPopup.plug(
+								A.Plugin.IO,
+								{
+									autoLoad: false,
+									cfg: {
+										data: {
+											p_l_id: themeDisplay.getPlid(),
+											p_p_id: 113,
+											p_p_state: 'exclusive',
+											doAsUserId: themeDisplay.getDoAsUserIdEncoded()
+										}
+									},
+									on: {
+										success: function(event) {
+											var io = event.io;
+											var host = this.get('host');
+											var boundingBox = host.get('boundingBox');
+
+											this._defSuccessHandler.apply(this, [io.id, io.xhr]);
+
+											var properties = boundingBox.one('#portlet-set-properties');
+
+											if (properties) {
+												instance._newPanel = properties;
+												instance._loadContent();
+											}
+										}
+									},
+									uri: themeDisplay.getPathMain() + '/portal/render_portlet'
+								}
+							);
 						}
 
 						instance._currentPopup.show();

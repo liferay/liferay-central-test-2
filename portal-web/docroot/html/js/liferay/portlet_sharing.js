@@ -16,13 +16,17 @@ Liferay.PortletSharing = {
 						destroyOnClose: true,
 						modal: true,
 						title: Liferay.Language.get('add-to-netvibes'),
-						width: 550,
-						io: {
-							url: portletURL.toString()
-						}
+						width: 550
 					}
 				)
 				.render();
+
+				dialog.plug(
+					A.Plugin.IO,
+					{
+						uri: portletURL.toString()
+					}
+				);
 			}
 		);
 	},
@@ -43,13 +47,17 @@ Liferay.PortletSharing = {
 						destroyOnClose: true,
 						modal: true,
 						title: Liferay.Language.get('add-to-any-website'),
-						width: 550,
-						io: {
-							url: portletURL.toString()
-						}
+						width: 550
 					}
 				)
 				.render();
+
+				dialog.plug(
+					A.Plugin.IO,
+					{
+						uri: portletURL.toString()
+					}
+				);
 			}
 		);
 	}

@@ -1,6 +1,6 @@
 AUI().use(
 	'context-overlay',
-	'io-stdmod',
+	'io-plugin',
 	'overlay-manager',
 	'tool-item',
 	function(A) {
@@ -132,31 +132,33 @@ AUI().use(
 											name: 'addApplication',
 											className: 'add-application',
 											io: {
-												uri: themeDisplay.getPathMain() + '/portal/render_portlet',
 												cfg: {
 													data: {
 														p_l_id: themeDisplay.getPlid(),
 														p_p_id: 87,
 														p_p_state: 'exclusive',
 														doAsUserId: themeDisplay.getDoAsUserIdEncoded()
-													},
-													on: {
-														success: function(id, response) {
-															AUI().use(
-																'liferay-layout-configuration',
-																function(A) {
-																	var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
-
-																	Liferay.Dockbar.addApplication.set('bodyContent', response.responseText);
-
-																	Liferay.LayoutConfiguration._dialogBody = contentBox;
-
-																	Liferay.LayoutConfiguration._loadContent();
-																}
-															);
-														}
 													}
-												}
+												},
+												on: {
+													success: function(event) {
+														var response = event.io.xhr;
+
+														AUI().use(
+															'liferay-layout-configuration',
+															function(A) {
+																var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
+
+																Liferay.Dockbar.addApplication.set('bodyContent', response.responseText);
+
+																Liferay.LayoutConfiguration._dialogBody = contentBox;
+
+																Liferay.LayoutConfiguration._loadContent();
+															}
+														);
+													}
+												},
+												uri: themeDisplay.getPathMain() + '/portal/render_portlet'
 											},
 											on: {
 												visibleChange: function(event) {
@@ -394,6 +396,10 @@ AUI().use(
 
 						underlay.render('#dockbar');
 
+						if (options.io) {
+							underlay.plug(A.Plugin.IO, options.io);
+						}
+
 						instance[name] = underlay;
 					}
 
@@ -467,16 +473,6 @@ AUI().use(
 
 					instance.get('boundingBox').addClass(value);
 				}
-			},
-
-			io: {
-				value: null,
-				lazyAdd: false,
-				setter: function(value) {
-					var instance = this;
-
-					return instance._setIO(value);
-				}
 			}
 		};
 
@@ -508,42 +504,6 @@ AUI().use(
 					var instance = this;
 
 					instance.closeTool.on('click', instance.hide, instance);
-				},
-
-				_setIO: function(value) {
-					var instance = this;
-
-					if (value && !instance.get('bodyContent')) {
-						instance.set('bodyContent', '<div class="loading-animation"></div>');
-					}
-
-					if (value) {
-						instance.unplug(A.Plugin.StdModIOPlugin);
-
-						value.cfg = A.merge(
-							{
-								method: 'POST'
-							},
-							value.cfg
-						);
-
-						var data = value.cfg.data;
-
-						if (A.Lang.isObject(data)) {
-							value.cfg.data = A.toQueryString(data);
-						}
-
-						instance.plug(A.Plugin.StdModIOPlugin, value);
-
-						if (instance.io) {
-							instance.io.refresh();
-						}
-					}
-					else {
-						instance.unplug(A.Plugin.StdModIOPlugin);
-					}
-
-					return value;
 				}
 			}
 		);

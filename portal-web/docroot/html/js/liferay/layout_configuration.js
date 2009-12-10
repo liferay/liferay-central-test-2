@@ -12,20 +12,24 @@ Liferay.LayoutConfiguration = {
 						title: Liferay.Language.get('layout'),
 						modal: true,
 						width: 700,
-						centered: true,
-						io: {
-							url: url,
-							cfg: {
-								data: {
-									p_l_id: themeDisplay.getPlid(),
-									doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-									redirect: Liferay.currentURL
-								}
-							}
-						}
+						centered: true
 					}
 				)
 				.render();
+
+				dialog.plug(
+					A.Plugin.IO,
+					{
+						cfg: {
+							data: {
+								p_l_id: themeDisplay.getPlid(),
+								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+								redirect: Liferay.currentURL
+							}
+						},
+						uri: url
+					}
+				);
 			}
 		);
 	},

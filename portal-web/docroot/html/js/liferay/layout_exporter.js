@@ -131,16 +131,13 @@ Liferay.LayoutExporter = {
 				var url = options.url;
 				var title = options.title;
 
-				new A.Dialog(
+				var dialog = new A.Dialog(
 					{
 						centered: true,
 						destroyOnClose: true,
 						modal: true,
 						title: title,
 						width: 600,
-						io: {
-							url: url
-						},
 						buttons: [
 							{
 								text: Liferay.Language.get('close'),
@@ -152,6 +149,13 @@ Liferay.LayoutExporter = {
 					}
 				)
 				.render();
+
+				dialog.plug(
+					A.Plugin.IO,
+					{
+						uri: url
+					}
+				);
 			}
 		);
 	},
