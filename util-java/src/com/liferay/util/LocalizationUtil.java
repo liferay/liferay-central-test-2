@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
@@ -148,7 +149,17 @@ public class LocalizationUtil {
 
 		XMLStreamReader reader = null;
 
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
 		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 
 			reader = factory.createXMLStreamReader(new StringReader(xml));
@@ -227,6 +238,10 @@ public class LocalizationUtil {
 			}
 		}
 		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+
 			if (reader != null) {
 				try {
 					reader.close();
@@ -347,7 +362,17 @@ public class LocalizationUtil {
 		XMLStreamReader reader = null;
 		XMLStreamWriter writer = null;
 
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
 		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
 			reader = inputFactory.createXMLStreamReader(new StringReader(xml));
@@ -406,6 +431,10 @@ public class LocalizationUtil {
 			}
 		}
 		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+
 			if (reader != null) {
 				try {
 					reader.close();
@@ -497,7 +526,17 @@ public class LocalizationUtil {
 		XMLStreamReader reader = null;
 		XMLStreamWriter writer = null;
 
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
 		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
 			reader = inputFactory.createXMLStreamReader(new StringReader(xml));
@@ -565,6 +604,10 @@ public class LocalizationUtil {
 			}
 		}
 		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+
 			if (reader != null) {
 				try {
 					reader.close();
@@ -670,7 +713,17 @@ public class LocalizationUtil {
 
 		XMLStreamReader reader = null;
 
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
 		try {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(portalClassLoader);
+			}
+
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 
 			reader = factory.createXMLStreamReader(new StringReader(xml));
@@ -687,6 +740,10 @@ public class LocalizationUtil {
 			}
 		}
 		finally {
+			if (contextClassLoader != portalClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+
 			if (reader != null) {
 				try {
 					reader.close();
