@@ -36,8 +36,6 @@ public interface VelocityEngine {
 
 	public void flushTemplate(String resource);
 
-	public void init();
-
 	public VelocityContext getEmptyContext();
 
 	public VelocityContext getRestrictedToolsContext();
@@ -48,14 +46,16 @@ public interface VelocityEngine {
 
 	public VelocityContext getWrappedStandardToolsContext();
 
-	public boolean mergeTemplate(
-			String velocityTemplateId, VelocityContext velocityContext,
-			Writer writer)
-		throws SystemException, IOException;
+	public void init();
 
 	public boolean mergeTemplate(
 			String velocityTemplateId, String velocityTemplateContent,
 			VelocityContext velocityContext, Writer writer)
+		throws SystemException, IOException;
+
+	public boolean mergeTemplate(
+			String velocityTemplateId, VelocityContext velocityContext,
+			Writer writer)
 		throws SystemException, IOException;
 
 	public boolean resourceExists(String resource);

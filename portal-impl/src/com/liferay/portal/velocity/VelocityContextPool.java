@@ -53,6 +53,8 @@ public class VelocityContextPool {
 		return _instance._remove(name);
 	}
 
+	private Map<String, ServletContext> _pool;
+
 	private VelocityContextPool() {
 		_pool = new ConcurrentHashMap<String, ServletContext>();
 	}
@@ -98,7 +100,5 @@ public class VelocityContextPool {
 	private static Log _log = LogFactoryUtil.getLog(VelocityContextPool.class);
 
 	private static VelocityContextPool _instance = new VelocityContextPool();
-
-	private Map<String, ServletContext> _pool;
 
 }

@@ -38,14 +38,6 @@ public class VelocityEngineUtil {
 		getVelocityEngine().flushTemplate(resource);
 	}
 
-	public static VelocityEngine getVelocityEngine() {
-		return _velocityEngine;
-	}
-
-	public static void init() {
-		getVelocityEngine().init();
-	}
-
 	public static VelocityContext getEmptyContext() {
 		return getVelocityEngine().getEmptyContext();
 	}
@@ -58,6 +50,10 @@ public class VelocityEngineUtil {
 		return getVelocityEngine().getStandardToolsContext();
 	}
 
+	public static VelocityEngine getVelocityEngine() {
+		return _velocityEngine;
+	}
+
 	public static VelocityContext getWrappedRestrictedToolsContext() {
 		return getVelocityEngine().getWrappedRestrictedToolsContext();
 	}
@@ -66,13 +62,8 @@ public class VelocityEngineUtil {
 		return getVelocityEngine().getWrappedStandardToolsContext();
 	}
 
-	public static boolean mergeTemplate(
-			String velocityTemplateId, VelocityContext velocityContext,
-			Writer writer)
-		throws SystemException, IOException {
-
-		return getVelocityEngine().mergeTemplate(
-			velocityTemplateId, velocityContext, writer);
+	public static void init() {
+		getVelocityEngine().init();
 	}
 
 	public static boolean mergeTemplate(
@@ -83,6 +74,15 @@ public class VelocityEngineUtil {
 		return getVelocityEngine().mergeTemplate(
 			velocityTemplateId, velocityTemplateContent, velocityContext,
 			writer);
+	}
+
+	public static boolean mergeTemplate(
+			String velocityTemplateId, VelocityContext velocityContext,
+			Writer writer)
+		throws SystemException, IOException {
+
+		return getVelocityEngine().mergeTemplate(
+			velocityTemplateId, velocityContext, writer);
 	}
 
 	public static boolean resourceExists(String resource) {

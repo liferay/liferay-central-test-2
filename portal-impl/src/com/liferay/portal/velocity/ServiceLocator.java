@@ -39,6 +39,9 @@ public class ServiceLocator {
 		return _instance;
 	}
 
+	private ServiceLocator() {
+	}
+
 	public Object findService(String serviceName) {
 		Object bean = null;
 
@@ -66,9 +69,6 @@ public class ServiceLocator {
 		return bean;
 	}
 
-	private ServiceLocator() {
-	}
-
 	private String _getServiceName(String serviceName) {
 		if (!serviceName.endsWith(BeanLocatorImpl.VELOCITY_SUFFIX)) {
 			serviceName += BeanLocatorImpl.VELOCITY_SUFFIX;
@@ -77,8 +77,8 @@ public class ServiceLocator {
 		return serviceName;
 	}
 
-	private static ServiceLocator _instance = new ServiceLocator();
-
 	private static Log _log = LogFactoryUtil.getLog(ServiceLocator.class);
+
+	private static ServiceLocator _instance = new ServiceLocator();
 
 }

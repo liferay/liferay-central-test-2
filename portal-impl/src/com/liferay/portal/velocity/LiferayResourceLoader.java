@@ -42,9 +42,6 @@ import org.apache.velocity.runtime.resource.loader.ResourceLoader;
  */
 public class LiferayResourceLoader extends ResourceLoader {
 
-	private static VelocityResourceListener[] _listeners =
-		new VelocityResourceListener[0];
-
 	public static void setListeners(String[] listeners) {
 		_listeners = new VelocityResourceListener[listeners.length];
 
@@ -61,15 +58,12 @@ public class LiferayResourceLoader extends ResourceLoader {
 		}
 	}
 
-	public void init(ExtendedProperties props) {
-		boolean cachingOn = GetterUtil.getBoolean(PropsUtil.get(
-			PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
-		int modificationCheckInterval = GetterUtil.getInteger(PropsUtil.get(
-			PropsKeys.
-				VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATION_CHECK_INTERVAL));
+	public long getLastModified(Resource resource) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Get last modified for " + resource.getName());
+		}
 
-		setCachingOn(cachingOn);
-		setModificationCheckInterval(modificationCheckInterval);
+		return 0;
 	}
 
 	public InputStream getResourceStream(String source)
@@ -104,12 +98,15 @@ public class LiferayResourceLoader extends ResourceLoader {
 		return is;
 	}
 
-	public long getLastModified(Resource resource) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Get last modified for " + resource.getName());
-		}
+	public void init(ExtendedProperties props) {
+		boolean cachingOn = GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
+		int modificationCheckInterval = GetterUtil.getInteger(PropsUtil.get(
+			PropsKeys.
+				VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATION_CHECK_INTERVAL));
 
-		return 0;
+		setCachingOn(cachingOn);
+		setModificationCheckInterval(modificationCheckInterval);
 	}
 
 	public boolean isSourceModified(Resource resource) {
@@ -122,5 +119,8 @@ public class LiferayResourceLoader extends ResourceLoader {
 
 	private static Log _log =
 		LogFactoryUtil.getLog(LiferayResourceLoader.class);
+
+	private static VelocityResourceListener[] _listeners =
+		new VelocityResourceListener[0];
 
 }

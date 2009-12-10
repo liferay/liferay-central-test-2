@@ -41,6 +41,10 @@ public class VelocityPortletPreferences {
 		_preferencesImpl = new PortletPreferencesImpl();
 	}
 
+	public void reset() {
+		_preferencesImpl.reset();
+	}
+
 	public void setValue(String key, String value) throws ReadOnlyException {
 		_preferencesImpl.setValue(key, value);
 	}
@@ -49,10 +53,6 @@ public class VelocityPortletPreferences {
 		throws ReadOnlyException {
 
 		_preferencesImpl.setValues(key, values);
-	}
-
-	public void reset() {
-		_preferencesImpl.reset();
 	}
 
 	public String toString() {

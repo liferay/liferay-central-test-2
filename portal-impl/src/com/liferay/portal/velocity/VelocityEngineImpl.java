@@ -142,14 +142,6 @@ public class VelocityEngineImpl implements VelocityEngine {
 	}
 
 	public boolean mergeTemplate(
-			String velocityTemplateId, VelocityContext velocityContext,
-			Writer writer)
-		throws SystemException, IOException {
-
-		return mergeTemplate(velocityTemplateId, null, velocityContext, writer);
-	}
-
-	public boolean mergeTemplate(
 			String velocityTemplateId, String velocityTemplateContent,
 			VelocityContext velocityContext, Writer writer)
 		throws SystemException, IOException {
@@ -185,6 +177,14 @@ public class VelocityEngineImpl implements VelocityEngine {
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+	}
+
+	public boolean mergeTemplate(
+			String velocityTemplateId, VelocityContext velocityContext,
+			Writer writer)
+		throws SystemException, IOException {
+
+		return mergeTemplate(velocityTemplateId, null, velocityContext, writer);
 	}
 
 	public boolean resourceExists(String resource) {

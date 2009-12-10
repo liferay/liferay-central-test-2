@@ -35,11 +35,15 @@ import org.apache.velocity.runtime.resource.ResourceCache;
  */
 public class LiferayResourceCache implements ResourceCache {
 
-	public void initialize(RuntimeServices rs) {
+	public Iterator<Object> enumerateKeys() {
+ 		throw new RuntimeException("enumerateKeys is not implemented");
 	}
 
 	public Resource get(Object key) {
 		return LiferayResourceCacheUtil.get(key.toString());
+	}
+
+	public void initialize(RuntimeServices rs) {
 	}
 
 	public Resource put(Object key, Resource resource) {
@@ -56,10 +60,6 @@ public class LiferayResourceCache implements ResourceCache {
 		}
 
 		return resource;
-	}
-
-	public Iterator<Object> enumerateKeys() {
- 		throw new RuntimeException("enumerateKeys is not implemented");
 	}
 
 }

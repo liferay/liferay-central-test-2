@@ -39,6 +39,9 @@ public class UtilLocator {
 		return _instance;
 	}
 
+	private UtilLocator() {
+	}
+
 	public Object findUtil(String utilName) {
 		Object bean = null;
 
@@ -68,9 +71,6 @@ public class UtilLocator {
 		return bean;
 	}
 
-	private UtilLocator() {
-	}
-
 	private String _getUtilName(String utilName) {
 		if (!utilName.endsWith(BeanLocatorImpl.VELOCITY_SUFFIX)) {
 			utilName += BeanLocatorImpl.VELOCITY_SUFFIX;
@@ -79,8 +79,8 @@ public class UtilLocator {
 		return utilName;
 	}
 
-	private static UtilLocator _instance = new UtilLocator();
-
 	private static Log _log = LogFactoryUtil.getLog(UtilLocator.class);
+
+	private static UtilLocator _instance = new UtilLocator();
 
 }

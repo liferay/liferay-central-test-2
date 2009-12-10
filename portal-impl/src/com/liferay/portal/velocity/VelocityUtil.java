@@ -48,7 +48,7 @@ public class VelocityUtil {
 
 		Velocity.init();
 
-		VelocityContext vc = new VelocityContext();
+		VelocityContext velocityContext = new VelocityContext();
 
 		if (variables != null) {
 			Iterator<Map.Entry<String, Object>> itr =
@@ -61,16 +61,17 @@ public class VelocityUtil {
 				Object value = entry.getValue();
 
 				if (Validator.isNotNull(key)) {
-					vc.put(key, value);
+					velocityContext.put(key, value);
 				}
 			}
 		}
 
-		StringWriter output = new StringWriter();
+		StringWriter stringWriter = new StringWriter();
 
-		Velocity.evaluate(vc, output, VelocityUtil.class.getName(), input);
+		Velocity.evaluate(
+			velocityContext, stringWriter, VelocityUtil.class.getName(), input);
 
-		return output.toString();
+		return stringWriter.toString();
 	}
 
 }
