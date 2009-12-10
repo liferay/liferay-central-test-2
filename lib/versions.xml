@@ -817,6 +817,9 @@
 				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
+		<comments>
+			This was repackaged for compatibility with JDK 5.
+		</comments>
 	</library>
 	<library>
 		<file-name>global/annotations.jar</file-name>
