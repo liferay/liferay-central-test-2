@@ -465,12 +465,12 @@ public class ResourceActionsUtil {
 	}
 
 	private void _checkPortletActions(List<String> actions) {
-		if (!actions.contains("CONFIGURATION")) {
-			actions.add("CONFIGURATION");
+		if (!actions.contains(ActionKeys.CONFIGURATION)) {
+			actions.add(ActionKeys.CONFIGURATION);
 		}
 
-		if (!actions.contains("VIEW")) {
-			actions.add("VIEW");
+		if (!actions.contains(ActionKeys.VIEW)) {
+			actions.add(ActionKeys.VIEW);
 		}
 
 		if (!actions.contains("ADD_TO_PAGE") &&
@@ -482,27 +482,27 @@ public class ResourceActionsUtil {
 
 	private void _checkPortletCommunityDefaultActions(List<String> actions) {
 		if (actions.size() == 0) {
-			actions.add("VIEW");
+			actions.add(ActionKeys.VIEW);
 		}
 	}
 
 	private void _checkPortletGuestDefaultActions(List<String> actions) {
 		if (actions.size() == 0) {
-			actions.add("VIEW");
+			actions.add(ActionKeys.VIEW);
 		}
 	}
 
 	private void _checkPortletLayoutManagerActions(List<String> actions) {
-		if (!actions.contains("CONFIGURATION")) {
-			actions.add("CONFIGURATION");
+		if (!actions.contains(ActionKeys.CONFIGURATION)) {
+			actions.add(ActionKeys.CONFIGURATION);
 		}
 
-		if (!actions.contains("PREFERENCES")) {
-			actions.add("PREFERENCES");
+		if (!actions.contains(ActionKeys.PREFERENCES)) {
+			actions.add(ActionKeys.PREFERENCES);
 		}
 
-		if (!actions.contains("VIEW")) {
-			actions.add("VIEW");
+		if (!actions.contains(ActionKeys.VIEW)) {
+			actions.add(ActionKeys.VIEW);
 		}
 	}
 
@@ -697,9 +697,9 @@ public class ResourceActionsUtil {
 		// defaults of CONFIGURATION, PREFERENCES, and VIEW.
 
 		if (actions.size() < 1) {
-			actions.add("CONFIGURATION");
-			actions.add("PREFERENCES");
-			actions.add("VIEW");
+			actions.add(ActionKeys.CONFIGURATION);
+			actions.add(ActionKeys.PREFERENCES);
+			actions.add(ActionKeys.VIEW);
 		}
 
 		return actions;
