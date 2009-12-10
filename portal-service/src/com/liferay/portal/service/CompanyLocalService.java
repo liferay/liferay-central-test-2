@@ -115,6 +115,15 @@ public interface CompanyLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void checkRolesPermissions(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void checkRolesPermissions(long companyId,
+		com.liferay.portal.model.Portlet portlet)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteLogo(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
