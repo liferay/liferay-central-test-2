@@ -33,9 +33,7 @@ if (layout != null) {
 
 List<Portlet> portlets = new ArrayList<Portlet>();
 
-String[] portletsArray = PropsValues.DOCKBAR_ADD_PORTLETS;
-
-for (String portletId : portletsArray) {
+for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
 
 	if (portlet.isInclude() && portlet.isActive() && portlet.hasAddPortletPermission(user.getUserId())) {
@@ -78,14 +76,12 @@ for (String portletId : portletsArray) {
 											<ul>
 
 												<%
-												Iterator<Portlet> itr = portlets.iterator();
-
-												for (int i = 0; itr.hasNext(); i++) {
-													Portlet portlet = itr.next();
+												for (int i = 0; i < portlets.size(); i++) {
+													Portlet portlet = portlets.get(i);
 												%>
 
 													<li class="<%= (i == 0) ? "first" : "" %>">
-														<a href="javascript:;" class="app-shortcut" rel="56">
+														<a class="app-shortcut" href="javascript:;" rel="<%= portlet.getPortletId() %>">
 															<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
 
 															<%= PortalUtil.getPortletTitle(portlet.getPortletId(), locale) %>
