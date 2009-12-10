@@ -173,7 +173,7 @@ public class PortletLister {
 
 					portlets.add(portlet);
 				}
-				else if (!portlet.hasAddPortletPermission(_user.getUserId())) {
+				else if (!portlet.hasAddPortletPermission()) {
 				}
 				else {
 					portlets.add(portlet);

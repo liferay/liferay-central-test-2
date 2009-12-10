@@ -2291,7 +2291,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return true if the user has the permission to add the portlet to a
 	 *		   layout
 	 */
-	public boolean hasAddPortletPermission(long userId) {
+	public boolean hasAddPortletPermission() {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 

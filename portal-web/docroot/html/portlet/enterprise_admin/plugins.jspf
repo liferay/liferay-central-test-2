@@ -23,7 +23,7 @@
 %>
 
 <liferay-ui:tabs
-	names="portlet-plugins,theme-plugins,layout-template-plugins,hook-plugins,web-plugins"
+	names="portlet-plugins,theme-plugins,layout-template-plugins"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />

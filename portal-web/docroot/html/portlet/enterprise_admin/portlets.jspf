@@ -47,7 +47,6 @@ List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("portlet");
 headerNames.add("active");
-headerNames.add("roles");
 
 if (showReindexButton) {
 	headerNames.add("search-index");
@@ -139,10 +138,6 @@ for (int i = 0; i < results.size(); i++) {
 	// Active
 
 	row.addText(LanguageUtil.get(pageContext, (portlet.isActive() ? "yes" : "no")));
-
-	// Roles
-
-	row.addText(StringUtil.merge(portlet.getRolesArray(), ", "));
 
 	// Search index
 
