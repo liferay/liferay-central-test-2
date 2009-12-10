@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -365,29 +364,12 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 					return;
 				}
 
-				ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+				Locale[] locales = LanguageUtil.getAvailableLocales();
 
-				Thread currentThread = Thread.currentThread();
+				for (Locale locale : locales) {
+					String ${column.name} = ${column.name}Map.get(locale);
 
-				ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-				try {
-					if (contextClassLoader != portalClassLoader) {
-						currentThread.setContextClassLoader(portalClassLoader);
-					}
-
-					Locale[] locales = LanguageUtil.getAvailableLocales();
-
-					for (Locale locale : locales) {
-						String ${column.name} = ${column.name}Map.get(locale);
-
-						set${column.methodName}(locale, ${column.name});
-					}
-				}
-				finally {
-					if (contextClassLoader != portalClassLoader) {
-						currentThread.setContextClassLoader(contextClassLoader);
-					}
+					set${column.methodName}(locale, ${column.name});
 				}
 			}
 		</#if>

@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -306,29 +305,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 			return;
 		}
 
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+		Locale[] locales = LanguageUtil.getAvailableLocales();
 
-		Thread currentThread = Thread.currentThread();
+		for (Locale locale : locales) {
+			String title = titleMap.get(locale);
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(portalClassLoader);
-			}
-
-			Locale[] locales = LanguageUtil.getAvailableLocales();
-
-			for (Locale locale : locales) {
-				String title = titleMap.get(locale);
-
-				setTitle(locale, title);
-			}
-		}
-		finally {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(contextClassLoader);
-			}
+			setTitle(locale, title);
 		}
 	}
 
@@ -398,29 +380,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 			return;
 		}
 
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+		Locale[] locales = LanguageUtil.getAvailableLocales();
 
-		Thread currentThread = Thread.currentThread();
+		for (Locale locale : locales) {
+			String description = descriptionMap.get(locale);
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(portalClassLoader);
-			}
-
-			Locale[] locales = LanguageUtil.getAvailableLocales();
-
-			for (Locale locale : locales) {
-				String description = descriptionMap.get(locale);
-
-				setDescription(locale, description);
-			}
-		}
-		finally {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(contextClassLoader);
-			}
+			setDescription(locale, description);
 		}
 	}
 
