@@ -4,6 +4,7 @@
 	<portlet-resource>
 		<portlet-name>71</portlet-name>
 		<supports>
+			<action-key>ADD_TO_PAGE</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
@@ -20,6 +21,7 @@
 	<portlet-resource>
 		<portlet-name>73</portlet-name>
 		<supports>
+			<action-key>ADD_TO_PAGE</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
@@ -36,6 +38,7 @@
 	<portlet-resource>
 		<portlet-name>85</portlet-name>
 		<supports>
+			<action-key>ADD_TO_PAGE</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>

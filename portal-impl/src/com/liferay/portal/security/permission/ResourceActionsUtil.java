@@ -472,6 +472,12 @@ public class ResourceActionsUtil {
 		if (!actions.contains("VIEW")) {
 			actions.add("VIEW");
 		}
+
+		if (!actions.contains("ADD_TO_PAGE") &&
+			!actions.contains("ACCESS_IN_CONTROL_PANEL")) {
+
+			actions.add("ADD_TO_PAGE");
+		}
 	}
 
 	private void _checkPortletCommunityDefaultActions(List<String> actions) {

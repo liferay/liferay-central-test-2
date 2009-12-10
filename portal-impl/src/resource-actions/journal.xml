@@ -22,6 +22,7 @@
 	<portlet-resource>
 		<portlet-name>56</portlet-name>
 		<supports>
+			<action-key>ADD_TO_PAGE</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>

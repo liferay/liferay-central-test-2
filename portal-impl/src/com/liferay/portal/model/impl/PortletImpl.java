@@ -52,10 +52,10 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PublicRenderParameter;
-import com.liferay.portal.model.RoleConstants;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.webdav.WebDAVStorage;
@@ -2292,29 +2292,15 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *		   layout
 	 */
 	public boolean hasAddPortletPermission(long userId) {
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
 		try {
-			if ((_rolesArray == null) || (_rolesArray.length == 0)) {
-				return true;
-			}
-			else if (RoleLocalServiceUtil.hasUserRoles(
-						userId, getCompanyId(), _rolesArray, true)) {
+			if (PortletPermissionUtil.contains(
+					permissionChecker, getPortletId(),
+					ActionKeys.ADD_TO_PAGE)) {
 
 				return true;
-			}
-			else if (RoleLocalServiceUtil.hasUserRole(
-						userId, getCompanyId(), RoleConstants.ADMINISTRATOR,
-						true)) {
-
-				return true;
-			}
-			else {
-				User user = UserLocalServiceUtil.getUserById(userId);
-
-				if (user.isDefaultUser() &&
-					hasRoleWithName(RoleConstants.GUEST)) {
-
-					return true;
-				}
 			}
 		}
 		catch (Exception e) {

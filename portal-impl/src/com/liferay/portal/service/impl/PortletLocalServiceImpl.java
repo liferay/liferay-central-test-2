@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.Portlet;
@@ -1346,6 +1347,16 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				portletModel.getRoleMappers().putAll(roleMappers);
 				portletModel.linkRoles();
+
+				if (portletApp.isWARFile()) {
+					List<Company> companies =
+						companyLocalService.getCompanies();
+
+					for (Company company : companies) {
+						companyLocalService.checkRolesPermissions(
+							company.getCompanyId(), portletModel);
+					}
+				}
 			}
 		}
 
