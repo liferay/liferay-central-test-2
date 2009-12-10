@@ -25,6 +25,7 @@ package com.liferay.portal.events;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
@@ -94,6 +95,10 @@ public class StartupAction extends SimpleAction {
 		// Velocity
 
 		VelocityEngineUtil.init();
+
+		// FreeMarker
+
+		FreeMarkerEngineUtil.init();
 
 		// Upgrade
 

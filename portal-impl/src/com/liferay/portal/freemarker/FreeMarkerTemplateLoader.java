@@ -20,25 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model;
+package com.liferay.portal.freemarker;
+
+import java.io.IOException;
+import java.io.Reader;
 
 /**
- * <a href="JournalTemplateConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="FreeMarkerTemplateLoader.java.html"><i>View Source</i></a>
  *
- * @author Alexander Chow
+ * @author Mika Koivisto
  */
-public class JournalTemplateConstants {
+public abstract class FreeMarkerTemplateLoader {
 
-	public static final String LANG_TYPE_CSS = "css";
+	public static final String JOURNAL_SEPARATOR = "_JOURNAL_CONTEXT_";
 
-	public static final String LANG_TYPE_FTL = "ftl";
+	public void closeTemplateSource(Object source)
+		throws IOException {
 
-	public static final String LANG_TYPE_VM = "vm";
+	}
 
-	public static final String LANG_TYPE_XSL = "xsl";
+	public abstract Object findTemplateSource(String name)
+		throws IOException;
 
-	public static final String[] LANG_TYPES = new String[] {
-		LANG_TYPE_VM, LANG_TYPE_FTL, LANG_TYPE_XSL, LANG_TYPE_CSS
-	};
+	public long getLastModified(Object source) {
+		return 0;
+	}
+
+	public abstract Reader getReader(Object source, String encoding)
+		throws IOException;
 
 }

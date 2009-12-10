@@ -20,25 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model;
+package com.liferay.portal.freemarker;
+
+import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+
+import freemarker.cache.CacheStorage;
 
 /**
- * <a href="JournalTemplateConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayCacheStorage.java.html"><i>View Source</i></a>
  *
- * @author Alexander Chow
+ * @author Mika Koivisto
  */
-public class JournalTemplateConstants {
+public class LiferayCacheStorage implements CacheStorage {
 
-	public static final String LANG_TYPE_CSS = "css";
+	public static final String CACHE_NAME = LiferayCacheStorage.class.getName();
 
-	public static final String LANG_TYPE_FTL = "ftl";
+	public void clear() {
 
-	public static final String LANG_TYPE_VM = "vm";
+		_cache.removeAll();
+	}
 
-	public static final String LANG_TYPE_XSL = "xsl";
+	public Object get(Object key) {
 
-	public static final String[] LANG_TYPES = new String[] {
-		LANG_TYPE_VM, LANG_TYPE_FTL, LANG_TYPE_XSL, LANG_TYPE_CSS
-	};
+		return _cache.get(key.toString());
+	}
+
+	public void put(Object key, Object value) {
+
+		_cache.put(key.toString(), value);
+	}
+
+	public void remove(Object key) {
+
+		_cache.remove(key.toString());
+	}
+
+	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
 
 }

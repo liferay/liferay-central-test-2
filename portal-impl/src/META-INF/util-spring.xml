@@ -77,6 +77,10 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.freemarker.FreeMarkerEngine" class="com.liferay.portal.freemarker.FreeMarkerEngineImpl" />
+	<bean id="com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil" class="com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil">
+		<property name="freeMarkerEngine" ref="com.liferay.portal.kernel.freemarker.FreeMarkerEngine" />
+	</bean>
 	<bean id="com.liferay.portal.kernel.image.ImageProcessorUtil" class="com.liferay.portal.kernel.image.ImageProcessorUtil">
 		<property name="imageProcessor">
 			<bean class="com.liferay.portal.image.ImageProcessorImpl" />

@@ -1,0 +1,288 @@
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.freemarker;
+
+import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ArrayUtil_IW;
+import com.liferay.portal.kernel.util.DateUtil_IW;
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil_IW;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.ParamUtil_IW;
+import com.liferay.portal.kernel.util.Randomizer_IW;
+import com.liferay.portal.kernel.util.StaticFieldGetter;
+import com.liferay.portal.kernel.util.StringUtil_IW;
+import com.liferay.portal.kernel.util.TimeZoneUtil_IW;
+import com.liferay.portal.kernel.util.UnicodeFormatter_IW;
+import com.liferay.portal.kernel.util.Validator_IW;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.service.permission.AccountPermissionUtil;
+import com.liferay.portal.service.permission.CommonPermissionUtil;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
+import com.liferay.portal.service.permission.OrganizationPermissionUtil;
+import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.service.permission.RolePermissionUtil;
+import com.liferay.portal.service.permission.UserGroupPermissionUtil;
+import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil_IW;
+import com.liferay.portal.util.PropsUtil_IW;
+import com.liferay.portal.util.SessionClicks_IW;
+import com.liferay.portal.velocity.ServiceLocator;
+import com.liferay.portal.velocity.UtilLocator;
+import com.liferay.portal.velocity.VelocityPortletPreferences;
+import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
+import com.liferay.portlet.expando.service.ExpandoRowLocalService;
+import com.liferay.portlet.expando.service.ExpandoTableLocalService;
+import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+
+/**
+ * <a href="FreeMarkerVariables.java.html"><i>View Source</i></a>
+ *
+ * @author Mika Koivisto
+ */
+public class FreeMarkerVariables {
+
+	public static void insertHelperUtilities(
+		FreeMarkerContext freeMarkerContext, String[] restrictedVariables) {
+
+		// Array util
+
+		freeMarkerContext.put("arrayUtil", ArrayUtil_IW.getInstance());
+
+		// Browser sniffer
+
+		freeMarkerContext.put(
+			"browserSniffer", BrowserSnifferUtil.getBrowserSniffer());
+
+		// Date format
+
+		freeMarkerContext.put(
+			"dateFormatFactory",
+			FastDateFormatFactoryUtil.getFastDateFormatFactory());
+
+		// Date util
+
+		freeMarkerContext.put("dateUtil", DateUtil_IW.getInstance());
+
+		// Expando column service
+
+		ServiceLocator serviceLocator = ServiceLocator.getInstance();
+
+		freeMarkerContext.put(
+			"expandoColumnLocalService",
+			serviceLocator.findService(
+				ExpandoColumnLocalService.class.getName()));
+
+		// Expando row service
+
+		freeMarkerContext.put(
+			"expandoRowLocalService",
+			serviceLocator.findService(ExpandoRowLocalService.class.getName()));
+
+		// Expando table service
+
+		freeMarkerContext.put(
+			"expandoTableLocalService",
+			serviceLocator.findService(
+				ExpandoTableLocalService.class.getName()));
+
+		// Expando value service
+
+		freeMarkerContext.put(
+			"expandoValueLocalService",
+			serviceLocator.findService(
+				ExpandoValueLocalService.class.getName()));
+
+		// Getter util
+
+		freeMarkerContext.put("getterUtil", GetterUtil_IW.getInstance());
+
+		// Html util
+
+		freeMarkerContext.put("htmlUtil", HtmlUtil.getHtml());
+
+		// Http util
+
+		freeMarkerContext.put("httpUtil", HttpUtil.getHttp());
+
+		// Image servlet token
+
+		freeMarkerContext.put(
+			"imageToken", ImageServletTokenUtil.getImageServletToken());
+
+		// Journal content util
+
+		freeMarkerContext.put(
+			"journalContentUtil", JournalContentUtil.getJournalContent());
+
+		// Language util
+
+		freeMarkerContext.put("languageUtil", LanguageUtil.getLanguage());
+		freeMarkerContext.put(
+			"unicodeLanguageUtil", UnicodeLanguageUtil.getUnicodeLanguage());
+
+		// Locale util
+
+		freeMarkerContext.put("localeUtil", LocaleUtil.getInstance());
+
+		// Param util
+
+		freeMarkerContext.put("paramUtil", ParamUtil_IW.getInstance());
+
+		// Portal util
+
+		_insertHelperUtility(
+			freeMarkerContext, restrictedVariables, "portalUtil",
+			PortalUtil.getPortal());
+		_insertHelperUtility(
+			freeMarkerContext, restrictedVariables, "portal",
+			PortalUtil.getPortal());
+
+		// Prefs props util
+
+		_insertHelperUtility(
+			freeMarkerContext, restrictedVariables, "prefsPropsUtil",
+			PrefsPropsUtil_IW.getInstance());
+
+		// Props util
+
+		_insertHelperUtility(
+			freeMarkerContext, restrictedVariables, "propsUtil",
+			PropsUtil_IW.getInstance());
+
+		// Portlet URL factory
+
+		freeMarkerContext.put(
+			"portletURLFactory", PortletURLFactoryUtil.getPortletURLFactory());
+
+		// Portlet preferences
+
+		_insertHelperUtility(
+			freeMarkerContext, restrictedVariables,
+			"velocityPortletPreferences", new VelocityPortletPreferences());
+
+		// Randomizer
+
+		freeMarkerContext.put(
+			"randomizer", Randomizer_IW.getInstance().getWrappedInstance());
+
+		// SAX reader util
+
+		UtilLocator utilLocator = UtilLocator.getInstance();
+
+		freeMarkerContext.put(
+			"saxReaderUtil",
+			utilLocator.findUtil(SAXReaderUtil.class.getName()));
+
+		// Service locator
+
+		_insertHelperUtility(
+			freeMarkerContext, restrictedVariables, "serviceLocator",
+			serviceLocator);
+
+		// Session clicks
+
+		_insertHelperUtility(
+			freeMarkerContext, restrictedVariables, "sessionClicks",
+			SessionClicks_IW.getInstance());
+
+		// Static field getter
+
+		freeMarkerContext.put(
+			"staticFieldGetter", StaticFieldGetter.getInstance());
+
+		// String util
+
+		freeMarkerContext.put("stringUtil", StringUtil_IW.getInstance());
+
+		// Time zone util
+
+		freeMarkerContext.put("timeZoneUtil", TimeZoneUtil_IW.getInstance());
+
+		// Util locator
+
+		_insertHelperUtility(
+			freeMarkerContext, restrictedVariables, "utilLocator", utilLocator);
+
+		// Unicode formatter
+
+		freeMarkerContext.put(
+			"unicodeFormatter", UnicodeFormatter_IW.getInstance());
+
+		// Validator
+
+		freeMarkerContext.put("validator", Validator_IW.getInstance());
+
+		// Permissions
+
+		freeMarkerContext.put(
+			"accountPermission", AccountPermissionUtil.getAccountPermission());
+		freeMarkerContext.put(
+			"commonPermission", CommonPermissionUtil.getCommonPermission());
+		freeMarkerContext.put(
+			"groupPermission", GroupPermissionUtil.getGroupPermission());
+		freeMarkerContext.put(
+			"layoutPermission", LayoutPermissionUtil.getLayoutPermission());
+		freeMarkerContext.put(
+			"organizationPermission",
+			OrganizationPermissionUtil.getOrganizationPermission());
+		freeMarkerContext.put(
+			"passwordPolicyPermission",
+			PasswordPolicyPermissionUtil.getPasswordPolicyPermission());
+		freeMarkerContext.put(
+			"portalPermission", PortalPermissionUtil.getPortalPermission());
+		freeMarkerContext.put(
+			"portletPermission", PortletPermissionUtil.getPortletPermission());
+		freeMarkerContext.put(
+			"rolePermission", RolePermissionUtil.getRolePermission());
+		freeMarkerContext.put(
+			"userGroupPermission",
+			UserGroupPermissionUtil.getUserGroupPermission());
+		freeMarkerContext.put(
+			"userPermission", UserPermissionUtil.getUserPermission());
+
+	}
+
+	private static void _insertHelperUtility(
+		FreeMarkerContext freeMarkerContext, String[] restrictedVariables,
+		String key, Object value) {
+
+		if (!ArrayUtil.contains(restrictedVariables, key)) {
+			freeMarkerContext.put(key, value);
+		}
+	}
+
+}

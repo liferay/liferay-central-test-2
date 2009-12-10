@@ -962,6 +962,10 @@ public class JournalUtil {
 			output = JournalXslUtil.transform(
 				tokens, viewMode, languageId, xml, script);
 		}
+		else if (langType.equals(JournalTemplateConstants.LANG_TYPE_FTL)) {
+			output = JournalFreeMarkerUtil.transform(
+				tokens, viewMode, languageId, xml, script);
+		}
 
 		// Postprocess output
 

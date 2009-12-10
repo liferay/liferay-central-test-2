@@ -46,6 +46,9 @@ if (langType.equals(JournalTemplateConstants.LANG_TYPE_XSL)) {
 else if (langType.equals(JournalTemplateConstants.LANG_TYPE_CSS)) {
 	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.css");
 }
+else if (langType.equals(JournalTemplateConstants.LANG_TYPE_FTL)) {
+	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.ftl");
+}
 else {
 	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.vm");
 }

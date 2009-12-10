@@ -640,6 +640,32 @@ public class PropsValues {
 	public static final String[] FLAGS_REASONS =
 		PropsUtil.getArray(PropsKeys.FLAGS_REASONS);
 
+	public static final String FREEMARKER_ENGINE_CONFIGURATION_CACHE_STORAGE =
+		PropsUtil.get(PropsKeys.FREEMARKER_ENGINE_CONFIGURATION_CACHE_STORAGE);
+
+	public static final boolean
+		FREEMARKER_ENGINE_CONFIGURATION_LOCALIZED_LOOKUP =
+			GetterUtil.getBoolean(PropsUtil.get(
+				PropsKeys.FREEMARKER_ENGINE_CONFIGURATION_LOCALIZED_LOOKUP));
+
+	public static final int
+		FREEMARKER_ENGINE_CONFIGURATION_MODIFICATION_CHECK_INTERVAL =
+			GetterUtil.getInteger(PropsUtil.get(PropsKeys.
+				FREEMARKER_ENGINE_CONFIGURATION_MODIFICATION_CHECK_INTERVAL));
+
+	public static final String
+		FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_EXCEPTION_HANDLER =
+			PropsUtil.get(PropsKeys.
+				FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_EXCEPTION_HANDLER);
+
+	public static final String[]
+		FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_LOADERS =
+			PropsUtil.getArray(
+				PropsKeys.FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_LOADERS);
+
+	public static final String FREEMARKER_ENGINE_MACRO_LIBRARY = PropsUtil.get(
+		PropsKeys.FREEMARKER_ENGINE_MACRO_LIBRARY);
+
 	public static final String[] GLOBAL_SHUTDOWN_EVENTS =
 		PropsUtil.getArray(PropsKeys.GLOBAL_SHUTDOWN_EVENTS);
 
@@ -744,6 +770,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_CONTENT_SEARCH_SHOW_LISTED));
 
+	public static final String JOURNAL_ERROR_TEMPLATE_FREEMARKER =
+		PropsUtil.get(PropsKeys.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
+
 	public static final String JOURNAL_ERROR_TEMPLATE_VELOCITY =
 		PropsUtil.get(PropsKeys.JOURNAL_ERROR_TEMPLATE_VELOCITY);
 
@@ -768,6 +797,10 @@ public class PropsValues {
 	public static final boolean JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID));
+
+	public static final String[]
+		JOURNAL_TEMPLATE_FREEMARKER_RESTRICTED_VARIABLES = PropsUtil.getArray(
+			PropsKeys.JOURNAL_TEMPLATE_FREEMARKER_RESTRICTED_VARIABLES);
 
 	public static final String[]
 		JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES = PropsUtil.getArray(

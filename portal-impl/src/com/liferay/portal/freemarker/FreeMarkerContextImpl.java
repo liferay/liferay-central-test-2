@@ -20,25 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model;
+package com.liferay.portal.freemarker;
+
+import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="JournalTemplateConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="FreeMarkerContextImpl.java.html"><i>View Source</i></a>
  *
- * @author Alexander Chow
+ * @author Mika Koivisto
  */
-public class JournalTemplateConstants {
+public class FreeMarkerContextImpl implements FreeMarkerContext {
 
-	public static final String LANG_TYPE_CSS = "css";
+	public FreeMarkerContextImpl() {
+		_context = new ConcurrentHashMap<String, Object>();
+	}
 
-	public static final String LANG_TYPE_FTL = "ftl";
+	public FreeMarkerContextImpl(Map<String, Object> context) {
+		_context = new ConcurrentHashMap<String, Object>();
+		_context.putAll(context);
+	}
 
-	public static final String LANG_TYPE_VM = "vm";
+	public Object get(String key) {
 
-	public static final String LANG_TYPE_XSL = "xsl";
+		return _context.get(key);
+	}
 
-	public static final String[] LANG_TYPES = new String[] {
-		LANG_TYPE_VM, LANG_TYPE_FTL, LANG_TYPE_XSL, LANG_TYPE_CSS
-	};
+	public Map<String, Object> getWrappedContext() {
+
+		return _context;
+	}
+
+	public void put(String key, Object value) {
+
+		_context.put(key, value);
+	}
+
+	private Map<String, Object> _context;
 
 }

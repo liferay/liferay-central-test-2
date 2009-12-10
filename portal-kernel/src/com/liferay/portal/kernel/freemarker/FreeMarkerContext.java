@@ -20,25 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model;
+package com.liferay.portal.kernel.freemarker;
 
 /**
- * <a href="JournalTemplateConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="FreeMarkerContext.java.html"><i>View Source</i></a>
  *
- * @author Alexander Chow
+ * @author Mika Koivisto
  */
-public class JournalTemplateConstants {
+public interface FreeMarkerContext {
 
-	public static final String LANG_TYPE_CSS = "css";
+	public Object get(String key);
 
-	public static final String LANG_TYPE_FTL = "ftl";
-
-	public static final String LANG_TYPE_VM = "vm";
-
-	public static final String LANG_TYPE_XSL = "xsl";
-
-	public static final String[] LANG_TYPES = new String[] {
-		LANG_TYPE_VM, LANG_TYPE_FTL, LANG_TYPE_XSL, LANG_TYPE_CSS
-	};
+	public void put(String key, Object value);
 
 }

@@ -20,25 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model;
+package com.liferay.portal.kernel.freemarker;
+
+import com.liferay.portal.SystemException;
+
+import java.io.IOException;
+import java.io.StringWriter;
 
 /**
- * <a href="JournalTemplateConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="FreeMarkerEngineUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Mika Koivisto
  */
-public class JournalTemplateConstants {
+public class FreeMarkerEngineUtil {
 
-	public static final String LANG_TYPE_CSS = "css";
+	public static FreeMarkerEngine getFreeMarkerEngine() {
+		return _freeMarkerEngine;
+	}
 
-	public static final String LANG_TYPE_FTL = "ftl";
+	public static void init() {
+		getFreeMarkerEngine().init();
+	}
 
-	public static final String LANG_TYPE_VM = "vm";
+	public static FreeMarkerContext getWrappedRestrictedToolsContext() {
 
-	public static final String LANG_TYPE_XSL = "xsl";
+		return getFreeMarkerEngine().getWrappedRestrictedToolsContext();
+	}
 
-	public static final String[] LANG_TYPES = new String[] {
-		LANG_TYPE_VM, LANG_TYPE_FTL, LANG_TYPE_XSL, LANG_TYPE_CSS
-	};
+	public static boolean mergeTemplate(String freeMarkerTemplateId,
+			String script, FreeMarkerContext freeMarkerContext,
+			StringWriter output) throws SystemException, IOException {
+
+		return getFreeMarkerEngine().mergeTemplate(
+			freeMarkerTemplateId, script, freeMarkerContext, output);
+	}
+
+	public void setFreeMarkerEngine(FreeMarkerEngine freeMarkerEngine) {
+		_freeMarkerEngine = freeMarkerEngine;
+	}
+
+	private static FreeMarkerEngine _freeMarkerEngine;
 
 }
