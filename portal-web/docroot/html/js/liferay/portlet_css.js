@@ -58,13 +58,10 @@ AUI().add(
 											doAsUserId: themeDisplay.getDoAsUserIdEncoded()
 										}
 									},
-									on: {
+									after: {
 										success: function(event) {
-											var io = event.io;
 											var host = this.get('host');
 											var boundingBox = host.get('boundingBox');
-
-											this._defSuccessHandler.apply(this, [io.id, io.xhr]);
 
 											var properties = boundingBox.one('#portlet-set-properties');
 
@@ -80,7 +77,7 @@ AUI().add(
 						}
 
 						instance._currentPopup.show();
-						instance._currentPopup.io.refresh();
+						instance._currentPopup.io.start();
 					}
 				}
 
