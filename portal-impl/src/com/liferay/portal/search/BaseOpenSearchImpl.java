@@ -39,6 +39,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 
@@ -62,7 +63,7 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 	public boolean isEnabled() {
-		return true;
+		return _enabled;
 	}
 
 	public String search(HttpServletRequest request, String url)
@@ -485,5 +486,8 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		return portletURL;
 	}
+
+	private boolean _enabled = GetterUtil.getBoolean(
+		PropsUtil.get(getClass().getName()), true);
 
 }
