@@ -167,6 +167,22 @@ public interface PropsKeys {
 
 	public static final String BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT = "blogs.email.comments.added.subject";
 
+	public static final String BLOGS_EMAIL_ENTRY_ADDED_BODY = "blogs.email.entry.added.body";
+
+	public static final String BLOGS_EMAIL_ENTRY_ADDED_ENABLED = "blogs.email.entry.added.enabled";
+
+	public static final String BLOGS_EMAIL_ENTRY_ADDED_SUBJECT = "blogs.email.entry.added.subject";
+
+	public static final String BLOGS_EMAIL_ENTRY_UPDATED_BODY = "blogs.email.entry.updated.body";
+
+	public static final String BLOGS_EMAIL_ENTRY_UPDATED_ENABLED = "blogs.email.entry.updated.enabled";
+
+	public static final String BLOGS_EMAIL_ENTRY_UPDATED_SUBJECT = "blogs.email.entry.updated.subject";
+
+	public static final String BLOGS_EMAIL_FROM_ADDRESS = "blogs.email.from.address";
+
+	public static final String BLOGS_EMAIL_FROM_NAME = "blogs.email.from.name";
+
 	public static final String BLOGS_ENTRY_COMMENTS_ENABLED = "blogs.entry.comments.enabled";
 
 	public static final String BLOGS_PAGE_ABSTRACT_LENGTH = "blogs.page.abstract.length";
