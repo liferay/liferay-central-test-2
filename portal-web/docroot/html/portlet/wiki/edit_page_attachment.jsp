@@ -83,13 +83,13 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 		</aui:fieldset>
 
 		<aui:button-row>
-			<aui:button type="submit" value="save" />
+			<aui:button type="submit" />
 
 			<%
 			String taglibOnClick = "parent.location = '" + HtmlUtil.escape(redirect) + "';";
 			%>
 
-			<aui:button onClick="<%= taglibOnClick %>" value="cancel" />
+			<aui:button onClick="<%= taglibOnClick %>" type="cancel" />
 		</aui:button-row>
 	</div>
 </aui:form>

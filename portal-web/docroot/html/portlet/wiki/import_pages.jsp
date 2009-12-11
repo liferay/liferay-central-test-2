@@ -86,9 +86,9 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 	<liferay-util:include page="<%= PropsUtil.get(PropsKeys.WIKI_IMPORTERS_PAGE, new Filter(tabs2)) %>" />
 
 	<aui:button-row>
-		<aui:button name="saveButton" type="submit" value="import" />
+		<aui:button type="submit" value="import" />
 
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

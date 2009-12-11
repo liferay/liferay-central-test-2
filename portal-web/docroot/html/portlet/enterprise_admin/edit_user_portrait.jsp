@@ -54,9 +54,9 @@ User selUser = PortalUtil.getSelectedUser(request);
 				<aui:input label='<%= LanguageUtil.format(pageContext, "upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide", new Object[] {"120", "100"}, false) %>' name="fileName" size="50" type="file" />
 
 				<aui:button-row>
-					<aui:button type="submit" value="save" />
+					<aui:button type="submit" />
 
-					<aui:button onClick="window.close();" value="close" />
+					<aui:button onClick="window.close();" type="cancel" value="close" />
 				</aui:button-row>
 			</aui:fieldset>
 		</aui:form>

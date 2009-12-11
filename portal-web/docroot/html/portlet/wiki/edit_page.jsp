@@ -374,13 +374,13 @@ if (Validator.isNull(redirect)) {
 			</c:if>
 
 			<aui:button-row>
-				<aui:button name="saveButton" type="submit" value="save" />
+				<aui:button type="submit" />
 
 				<aui:button name="saveAndContinueButton" onClick='<%= renderResponse.getNamespace() + "saveAndContinuePage();" %>' type="button" value="save-and-continue" />
 
 				<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />
 
-				<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+				<aui:button onClick="<%= redirect %>" type="cancel" />
 			</aui:button-row>
 		</aui:fieldset>
 	</c:if>

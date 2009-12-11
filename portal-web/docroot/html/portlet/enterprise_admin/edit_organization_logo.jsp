@@ -66,9 +66,9 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 				<aui:input label="upload-a-logo-for-the-organization-pages-that-will-be-used-instead-of-the-default-enterprise-logo-in-both-public-and-private-pages" name="fileName" size="50" type="file" />
 
 				<aui:button-row>
-					<aui:button type="submit" value="save" />
+					<aui:button type="submit" />
 
-					<aui:button onClick="window.close();" value="close" />
+					<aui:button onClick="window.close();" type="cancel" value="close" />
 				</aui:button-row>
 			</aui:fieldset>
 		</aui:form>

@@ -77,7 +77,7 @@
 		</attribute>
 		<attribute>
 			<name>value</name>
-			<required>true</required>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>

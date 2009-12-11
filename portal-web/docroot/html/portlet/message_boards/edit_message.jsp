@@ -324,7 +324,7 @@ if ((message != null) && message.isAttachments()) {
 	</c:if>
 
 	<aui:button-row>
-		<aui:button type="submit" value="save" />
+		<aui:button type="submit" />
 
 		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_FILE) %>">
 
@@ -341,7 +341,7 @@ if ((message != null) && message.isAttachments()) {
 
 		<aui:button onClick="<%= taglibOnClick %>" value="preview" />
 
-		<aui:button onClick="<%= redirect %>" value="cancel" />
+		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 
 	<c:if test="<%= curParentMessage != null %>">

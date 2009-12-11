@@ -68,8 +68,8 @@ List<PollsQuestion> questions = PollsQuestionLocalServiceUtil.getQuestions(scope
 	</c:choose>
 
 	<aui:button-row>
-		<aui:button disabled="<%= questions.isEmpty() %>" name="saveButton" type="submit" value="save" />
+		<aui:button disabled="<%= questions.isEmpty() %>" type="submit" />
 
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>

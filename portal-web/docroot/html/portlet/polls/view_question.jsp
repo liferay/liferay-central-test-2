@@ -105,7 +105,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 				<aui:button-row>
 					<aui:button type="submit" value="vote" />
 
-					<aui:button onClick="<%= redirect %>" value="cancel" />
+					<aui:button onClick="<%= redirect %>" type="cancel" />
 				</aui:button-row>
 
 				<%

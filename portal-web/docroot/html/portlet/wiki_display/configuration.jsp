@@ -94,8 +94,8 @@ List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button disabled="<%= nodes.isEmpty() %>" name="saveButton" type="submit" value="save" />
+		<aui:button disabled="<%= nodes.isEmpty() %>" type="submit" />
 
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>

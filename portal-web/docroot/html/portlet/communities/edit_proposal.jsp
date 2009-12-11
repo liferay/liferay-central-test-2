@@ -284,7 +284,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	<br />
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) || TasksProposalPermission.contains(permissionChecker, proposalId, ActionKeys.UPDATE) %>">
-		<aui:button type="submit" value="save" />
+		<aui:button type="submit" />
 	</c:if>
 
 	<%
@@ -360,7 +360,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 		</c:when>
 	</c:choose>
 
-	<aui:button onClick="<%= redirect %>" value="cancel" />
+	<aui:button onClick="<%= redirect %>" type="cancel" />
 </aui:form>
 
 <br />

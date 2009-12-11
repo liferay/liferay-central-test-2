@@ -256,9 +256,9 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 	</c:choose>
 
 	<aui:button-row>
-		<aui:button name="saveButton" type="submit" value="save" />
+		<aui:button type="submit" />
 
-		<aui:button name="cancelButton" onClick="<%= redirect %>" value="cancel" />
+		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

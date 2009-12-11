@@ -146,7 +146,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button type="submit" value="save" />
+		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
 

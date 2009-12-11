@@ -199,7 +199,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		<c:if test="<%= portletName.equals(PortletKeys.ADMIN_SERVER) %>">
 			<br />
 
-			<aui:button onClick="<%= redirect %>" value="cancel" />
+			<aui:button onClick="<%= redirect %>" type="cancel" />
 		</c:if>
 	</c:when>
 	<c:otherwise>
@@ -259,7 +259,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 			<aui:button-row>
 				<aui:button onClick='<%= renderResponse.getNamespace() + "updateActions();" %>' value="save" />
 
-				<aui:button onClick="<%= redirect %>" value="cancel" />
+				<aui:button onClick="<%= redirect %>" type="cancel" />
 			</aui:button-row>
 		</aui:form>
 	</c:otherwise>

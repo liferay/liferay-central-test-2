@@ -91,7 +91,7 @@ String curSection = configurationSections[0];
 					portletURL.setWindowState(WindowState.MAXIMIZED);
 					%>
 
-					<aui:button onClick="<%= portletURL.toString() %>" value="cancel" />
+					<aui:button onClick="<%= portletURL.toString() %>" type="cancel" />
 				</div>
 			</div>
 		</td>

@@ -187,7 +187,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 
 			</c:if>
 
-			<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+			<aui:button onClick="<%= redirect %>" type="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

@@ -307,7 +307,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					<aui:button-row>
 						<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' value="save" />
 
-						<aui:button onClick="<%= redirect %>" value="cancel" />
+						<aui:button onClick="<%= redirect %>" type="cancel" />
 					</aui:button-row>
 				</c:when>
 				<c:when test='<%= selectionStyle.equals("dynamic") %>'>
@@ -581,7 +581,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					<aui:button-row>
 						<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' value="save" />
 
-						<aui:button onClick="<%= redirect %>" value="cancel" />
+						<aui:button onClick="<%= redirect %>" type="cancel" />
 					</aui:button-row>
 				</c:when>
 			</c:choose>

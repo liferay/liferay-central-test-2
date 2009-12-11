@@ -783,7 +783,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<aui:button name="downloadArticleContentBtn" value="download" />
 				</c:if>
 
-				<aui:button onClick="<%= redirect %>" value="cancel" />
+				<aui:button onClick="<%= redirect %>" type="cancel" />
 			</aui:button-row>
 		</td>
 

@@ -56,7 +56,7 @@ userTracker = userTracker.toEscapedModel();
 
 			<br /><br />
 
-			<aui:button onClick="<%= redirect %>" value="cancel" />
+			<aui:button onClick="<%= redirect %>" type="cancel" />
 		</c:when>
 		<c:otherwise>
 
@@ -201,7 +201,7 @@ userTracker = userTracker.toEscapedModel();
 					<aui:button type="submit" value="kill-session" />
 				</c:if>
 
-				<aui:button onClick="<%= redirect %>" value="cancel" />
+				<aui:button onClick="<%= redirect %>" type="cancel" />
 			</aui:button-row>
 		</c:otherwise>
 	</c:choose>

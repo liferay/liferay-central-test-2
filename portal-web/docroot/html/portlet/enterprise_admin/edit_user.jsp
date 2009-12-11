@@ -267,9 +267,9 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 					<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
 
 					<aui:button-row>
-						<aui:button type="submit" value="save" />
+						<aui:button type="submit" />
 
-						<aui:button onClick="<%= backURL %>" value="cancel" />
+						<aui:button onClick="<%= backURL %>" type="cancel" />
 					</aui:button-row>
 
 					<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">

@@ -121,7 +121,7 @@ portletURL.setParameter("portletResource", portletResource);
 
 	<aui:input name="name" size="20" type="text" />
 
-	<aui:button type="submit" value="save" />
+	<aui:button type="submit" />
 </aui:form>
 
 <%

@@ -75,8 +75,8 @@ Set allPortletModes = portlet.getAllPortletModes();
 	%>
 
 	<aui:button-row>
-		<aui:button type="submit" value="save" />
+		<aui:button type="submit" />
 
-		<aui:button onClick="<%= redirect %>" value="cancel" />
+		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>

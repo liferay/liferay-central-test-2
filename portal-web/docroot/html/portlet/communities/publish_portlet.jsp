@@ -84,7 +84,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<aui:button-row>
 		<aui:button name="publishBtn" type="submit" value="publish" />
 
-		<aui:button onClick="AUI().DialogManager.closeByChild(this);" value="cancel" />
+		<aui:button onClick="AUI().DialogManager.closeByChild(this);" type="cancel" />
 	</aui:button-row>
 </aui:form>
 
