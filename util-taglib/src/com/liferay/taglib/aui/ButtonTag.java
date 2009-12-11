@@ -43,6 +43,18 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		if (_value == null) {
+			if (_type.equals("submit")) {
+				_value = "save";
+			}
+			else if (_type.equals("cancel")) {
+				_value = "cancel";
+			}
+			else if (_type.equals("reset")) {
+				_value = "reset";
+			}
+		}
+
 		request.setAttribute("aui:button:cssClass", _cssClass);
 		request.setAttribute("aui:button:disabled", String.valueOf(_disabled));
 		request.setAttribute(
