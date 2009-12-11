@@ -75,10 +75,11 @@ public class BeanLocatorImpl implements BeanLocator {
 
 				bean = _applicationContext.getBean(originalName);
 
-				List<Class<?>> interfaces = ListUtil.fromArray(
-					bean.getClass().getInterfaces());
+				Class<?>[] interfaces = bean.getClass().getInterfaces();
 
-				Iterator<Class<?>> itr = interfaces.iterator();
+				List<Class<?>> interfacesList = ListUtil.fromArray(interfaces);
+
+				Iterator<Class<?>> itr = interfacesList.iterator();
 
 				while (itr.hasNext()) {
 					Class<?> classObj = itr.next();
@@ -93,7 +94,7 @@ public class BeanLocatorImpl implements BeanLocator {
 
 				bean = Proxy.newProxyInstance(
 					_classLoader,
-					interfaces.toArray(new Class<?>[interfaces.size()]),
+					interfacesList.toArray(new Class<?>[interfacesList.size()]),
 					new VelocityBeanHandler(bean, _classLoader));
 
 				_velocityBeans.put(name, bean);
