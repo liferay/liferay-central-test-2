@@ -30,6 +30,9 @@ import freemarker.cache.TemplateLoader;
 import java.io.IOException;
 import java.io.Reader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <a href="LiferayTemplateLoader.java.html"><i>View Source</i></a>
  *
@@ -37,69 +40,45 @@ import java.io.Reader;
  */
 public class LiferayTemplateLoader implements TemplateLoader {
 
-	public void setTemplateLoaders(String[] loaders) {
+	public void closeTemplateSource(Object templateSource) {
+		for (FreeMarkerTemplateLoader freeMarkerTemplateLoader :
+				_freeMarkerTemplateLoaders) {
 
-		_templateLoaders = new FreeMarkerTemplateLoader[loaders.length];
-
-		for (int i = 0; i < loaders.length; i++) {
-			try {
-				_templateLoaders[i] =
-					(FreeMarkerTemplateLoader) Class.forName(
-						loaders[i]).newInstance();
-			}
-			catch (Exception ex) {
-				_log.error(ex);
-
-				_templateLoaders[i] = null;
-			}
+			freeMarkerTemplateLoader.closeTemplateSource(templateSource);
 		}
 	}
 
-	public void closeTemplateSource(Object templateSource)
-		throws IOException {
+	public Object findTemplateSource(String name) throws IOException {
+		Object templateSource = null;
 
-		for (int i = 0; i < _templateLoaders.length; i++) {
+		for (FreeMarkerTemplateLoader freeMarkerTemplateLoader :
+				_freeMarkerTemplateLoaders) {
 
-			if (_templateLoaders[i] != null) {
-				_templateLoaders[i].closeTemplateSource(templateSource);
+			templateSource = freeMarkerTemplateLoader.findTemplateSource(name);
+
+			if (templateSource != null) {
+				break;
 			}
 		}
-	}
 
-	public Object findTemplateSource(String name)
-		throws IOException {
-
-		Object source = null;
-
-		for (int i = 0; (source == null) &&
-			(i < _templateLoaders.length); i++) {
-
-			if (_templateLoaders[i] != null) {
-				source = _templateLoaders[i].findTemplateSource(name);
-			}
-		}
-		return source;
+		return templateSource;
 	}
 
 	public long getLastModified(Object templateSource) {
+		long lastModified = 0;
 
-		long lastModified = -1;
+		for (FreeMarkerTemplateLoader freeMarkerTemplateLoader :
+				_freeMarkerTemplateLoaders) {
 
-		for (int i = 0; (lastModified == -1) &&
-			(i < _templateLoaders.length); i++) {
+			long curLastModified = freeMarkerTemplateLoader.getLastModified(
+				templateSource);
 
-			if (_templateLoaders[i] != null) {
-				lastModified =
-					_templateLoaders[i].getLastModified(templateSource);
+			if (curLastModified > lastModified) {
+				lastModified = curLastModified;
 			}
 		}
 
-		if (lastModified == -1) {
-			return 0;
-		}
-		else {
-			return lastModified;
-		}
+		return lastModified;
 	}
 
 	public Reader getReader(Object templateSource, String encoding)
@@ -107,20 +86,45 @@ public class LiferayTemplateLoader implements TemplateLoader {
 
 		Reader reader = null;
 
-		for (int i = 0; (reader == null) &&
-			(i < _templateLoaders.length); i++) {
+		for (FreeMarkerTemplateLoader freeMarkerTemplateLoader :
+				_freeMarkerTemplateLoaders) {
 
-			if (_templateLoaders[i] != null) {
-				reader =
-					_templateLoaders[i].getReader(templateSource, encoding);
+			reader = freeMarkerTemplateLoader.getReader(
+				templateSource, encoding);
+		}
+
+		return reader;
+	}
+
+	public void setTemplateLoaders(
+		String[] freeMarkerTemplateLoaderClassNames) {
+
+		List<FreeMarkerTemplateLoader> freeMarkerTemplateLoaders =
+			new ArrayList<FreeMarkerTemplateLoader>(
+				freeMarkerTemplateLoaderClassNames.length);
+
+		for (String freeMarkerTemplateLoaderClassName :
+				freeMarkerTemplateLoaderClassNames) {
+
+			try {
+				FreeMarkerTemplateLoader freeMarkerTemplateLoader =
+					(FreeMarkerTemplateLoader)Class.forName(
+						freeMarkerTemplateLoaderClassName).newInstance();
+
+				freeMarkerTemplateLoaders.add(freeMarkerTemplateLoader);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
-		return reader;
+
+		_freeMarkerTemplateLoaders = freeMarkerTemplateLoaders.toArray(
+			new FreeMarkerTemplateLoader[freeMarkerTemplateLoaders.size()]);
 	}
 
 	private static Log _log =
 		LogFactoryUtil.getLog(LiferayTemplateLoader.class);
 
-	private FreeMarkerTemplateLoader[] _templateLoaders;
+	private FreeMarkerTemplateLoader[] _freeMarkerTemplateLoaders;
 
 }

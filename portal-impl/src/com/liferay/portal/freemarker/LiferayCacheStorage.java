@@ -37,22 +37,18 @@ public class LiferayCacheStorage implements CacheStorage {
 	public static final String CACHE_NAME = LiferayCacheStorage.class.getName();
 
 	public void clear() {
-
 		_cache.removeAll();
 	}
 
 	public Object get(Object key) {
-
 		return _cache.get(key.toString());
 	}
 
 	public void put(Object key, Object value) {
-
 		_cache.put(key.toString(), value);
 	}
 
 	public void remove(Object key) {
-
 		_cache.remove(key.toString());
 	}
 
