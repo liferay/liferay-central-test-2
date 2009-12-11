@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.velocity;
 
-import com.liferay.portal.SystemException;
-
-import java.io.IOException;
 import java.io.Writer;
 
 /**
@@ -62,14 +59,14 @@ public class VelocityEngineUtil {
 		return getVelocityEngine().getWrappedStandardToolsContext();
 	}
 
-	public static void init() {
+	public static void init() throws Exception {
 		getVelocityEngine().init();
 	}
 
 	public static boolean mergeTemplate(
 			String velocityTemplateId, String velocityTemplateContent,
 			VelocityContext velocityContext, Writer writer)
-		throws SystemException, IOException {
+		throws Exception {
 
 		return getVelocityEngine().mergeTemplate(
 			velocityTemplateId, velocityTemplateContent, velocityContext,
@@ -79,7 +76,7 @@ public class VelocityEngineUtil {
 	public static boolean mergeTemplate(
 			String velocityTemplateId, VelocityContext velocityContext,
 			Writer writer)
-		throws SystemException, IOException {
+		throws Exception {
 
 		return getVelocityEngine().mergeTemplate(
 			velocityTemplateId, velocityContext, writer);

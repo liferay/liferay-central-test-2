@@ -22,7 +22,6 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -33,7 +32,6 @@ import com.liferay.portal.kernel.velocity.VelocityEngine;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.IOException;
 import java.io.Writer;
 
 import org.apache.commons.collections.ExtendedProperties;
@@ -81,7 +79,7 @@ public class VelocityEngineImpl implements VelocityEngine {
 			_standardToolsContext.getWrappedVelocityContext());
 	}
 
-	public void init() {
+	public void init() throws Exception {
 		_velocityEngine = new org.apache.velocity.app.VelocityEngine();
 
 		LiferayResourceLoader.setListeners(
@@ -122,67 +120,53 @@ public class VelocityEngineImpl implements VelocityEngine {
 
 		_velocityEngine.setExtendedProperties(extendedProperties);
 
-		try {
-			_velocityEngine.init();
+		_velocityEngine.init();
 
-			_restrictedToolsContext = new VelocityContextImpl();
+		_restrictedToolsContext = new VelocityContextImpl();
 
-			VelocityVariables.insertHelperUtilities(
-				_restrictedToolsContext,
-				PropsValues.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
+		VelocityVariables.insertHelperUtilities(
+			_restrictedToolsContext,
+			PropsValues.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 
-			_standardToolsContext = new VelocityContextImpl();
+		_standardToolsContext = new VelocityContextImpl();
 
-			VelocityVariables.insertHelperUtilities(
-				_standardToolsContext, null);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		VelocityVariables.insertHelperUtilities(_standardToolsContext, null);
 	}
 
 	public boolean mergeTemplate(
 			String velocityTemplateId, String velocityTemplateContent,
 			VelocityContext velocityContext, Writer writer)
-		throws SystemException, IOException {
+		throws Exception {
 
-		try {
-			if ((Validator.isNotNull(velocityTemplateContent)) &&
-				(!PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED ||
-				 !resourceExists(velocityTemplateId))) {
+		if ((Validator.isNotNull(velocityTemplateContent)) &&
+			(!PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED ||
+			 !resourceExists(velocityTemplateId))) {
 
-				StringResourceRepository stringResourceRepository =
-					StringResourceLoader.getRepository();
+			StringResourceRepository stringResourceRepository =
+				StringResourceLoader.getRepository();
 
-				stringResourceRepository.putStringResource(
-					velocityTemplateId, velocityTemplateContent);
+			stringResourceRepository.putStringResource(
+				velocityTemplateId, velocityTemplateContent);
 
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Added " + velocityTemplateId +
-							" to the Velocity template repository");
-				}
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Added " + velocityTemplateId +
+						" to the Velocity template repository");
 			}
+		}
 
-			VelocityContextImpl velocityContextImpl =
-				(VelocityContextImpl)velocityContext;
+		VelocityContextImpl velocityContextImpl =
+			(VelocityContextImpl)velocityContext;
 
-			return _velocityEngine.mergeTemplate(
-				velocityTemplateId, StringPool.UTF8,
-				velocityContextImpl.getWrappedVelocityContext(), writer);
-		}
-		catch (IOException ioe) {
-			throw ioe;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return _velocityEngine.mergeTemplate(
+			velocityTemplateId, StringPool.UTF8,
+			velocityContextImpl.getWrappedVelocityContext(), writer);
 	}
 
 	public boolean mergeTemplate(
 			String velocityTemplateId, VelocityContext velocityContext,
 			Writer writer)
-		throws SystemException, IOException {
+		throws Exception {
 
 		return mergeTemplate(velocityTemplateId, null, velocityContext, writer);
 	}
