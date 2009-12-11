@@ -31,6 +31,8 @@ public interface DestinationNames {
 
 	public static final String AUDIT = "liferay/audit";
 
+	public static final String BLOGS = "liferay/blogs";
+
 	public static final String CONVERT_PROCESS = "liferay/convert_process";
 
 	public static final String DOCUMENT_LIBRARY_HOOK =

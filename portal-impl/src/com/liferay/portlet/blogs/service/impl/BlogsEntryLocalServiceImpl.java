@@ -22,10 +22,14 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -38,16 +42,20 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -73,6 +81,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.portlet.PortletPreferences;
+
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
@@ -82,6 +92,7 @@ import javax.xml.stream.XMLStreamReader;
  * @author Brian Wing Shun Chan
  * @author Wilson S. Man
  * @author Raymond Augé
+ * @author Thiago Moreira
  */
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
@@ -204,6 +215,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				pingTrackbacks(entry, trackbacks, false, serviceContext);
 			}
 		}
+
+		// Subscriptions
+
+		notifySubscribers(entry, serviceContext, false);
 
 		return entry;
 	}
@@ -695,6 +710,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		reIndex(entry);
 
+		// Subscriptions
+
+		notifySubscribers(entry, serviceContext, true);
+
 		return entry;
 	}
 
@@ -802,6 +821,201 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 
 		return newUrlTitle;
+	}
+
+	protected void notifySubscribers(
+			BlogsEntry entry, ServiceContext serviceContext, boolean update)
+		throws PortalException, SystemException {
+
+		if (entry.getStatus() != StatusConstants.APPROVED) {
+			return;
+		}
+
+		String layoutFullURL = PortalUtil.getLayoutFullURL(
+			serviceContext.getScopeGroupId(), PortletKeys.BLOGS);
+
+		if (Validator.isNull(layoutFullURL)) {
+			return;
+		}
+
+		PortletPreferences preferences =
+			ServiceContextUtil.getPortletPreferences(serviceContext);
+
+		if (preferences == null) {
+			long ownerId = entry.getGroupId();
+			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+			long plid = PortletKeys.PREFS_PLID_SHARED;
+			String portletId = PortletKeys.BLOGS;
+			String defaultPreferences = null;
+
+			preferences = PortletPreferencesLocalServiceUtil.getPreferences(
+				entry.getCompanyId(), ownerId, ownerType, plid, portletId,
+				defaultPreferences);
+		}
+
+		if (!update && BlogsUtil.getEmailBlogsAddedEnabled(preferences)) {
+		}
+		else if (update && BlogsUtil.getEmailBlogsUpdatedEnabled(preferences)) {
+		}
+		else {
+			return;
+		}
+
+		Company company = companyPersistence.findByPrimaryKey(
+			entry.getCompanyId());
+
+		Group group = groupPersistence.findByPrimaryKey(
+			serviceContext.getScopeGroupId());
+
+		String emailAddress = StringPool.BLANK;
+		String fullName = entry.getUserName();
+
+		try {
+			User user = userPersistence.findByPrimaryKey(entry.getUserId());
+
+			emailAddress = user.getEmailAddress();
+			fullName = user.getFullName();
+		}
+		catch (NoSuchUserException nsue) {
+		}
+
+		String portletName = PortalUtil.getPortletTitle(
+			PortletKeys.BLOGS, LocaleUtil.getDefault());
+
+		String fromName = BlogsUtil.getEmailFromName(preferences);
+		String fromAddress = BlogsUtil.getEmailFromAddress(preferences);
+
+		fromName = StringUtil.replace(
+			fromName,
+			new String[] {
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$BLOGS_ENTRY_USER_ADDRESS$]",
+				"[$BLOGS_ENTRY_USER_NAME$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
+				emailAddress,
+				fullName,
+				portletName
+			});
+
+		fromAddress = StringUtil.replace(
+			fromAddress,
+			new String[] {
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$BLOGS_ENTRY_USER_ADDRESS$]",
+				"[$BLOGS_ENTRY_USER_NAME$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
+				emailAddress,
+				fullName,
+				portletName
+			});
+
+		String url = layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs" +
+			StringPool.SLASH + entry.getEntryId();
+
+		String subject = null;
+		String body = null;
+
+		if (update) {
+			subject = BlogsUtil.getEmailBlogsUpdatedSubject(preferences);
+			body = BlogsUtil.getEmailBlogsUpdatedBody(preferences);
+		}
+		else {
+			subject = BlogsUtil.getEmailBlogsAddedSubject(preferences);
+			body = BlogsUtil.getEmailBlogsAddedBody(preferences);
+		}
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$BLOGS_ENTRY_USER_ADDRESS$]",
+				"[$BLOGS_ENTRY_USER_NAME$]",
+				"[$BLOGS_ENTRY_URL$]",
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				emailAddress,
+				fullName,
+				url,
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				portletName
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$BLOGS_ENTRY_USER_ADDRESS$]",
+				"[$BLOGS_ENTRY_USER_NAME$]",
+				"[$BLOGS_ENTRY_URL$]",
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				emailAddress,
+				fullName,
+				url,
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				portletName
+			});
+
+		Message messagingObj = new Message();
+
+		messagingObj.put("companyId", entry.getCompanyId());
+		messagingObj.put("userId", entry.getUserId());
+		messagingObj.put("groupId", entry.getGroupId());
+		messagingObj.put("entryId", entry.getEntryId());
+		messagingObj.put("fromName", fromName);
+		messagingObj.put("fromAddress", fromAddress);
+		messagingObj.put("subject", subject);
+		messagingObj.put("body", body);
+		messagingObj.put("replyToAddress", fromAddress);
+		messagingObj.put(
+			"mailId", BlogsUtil.getMailId(company.getMx(), entry.getEntryId()));
+		messagingObj.put("htmlFormat", Boolean.TRUE);
+
+		MessageBusUtil.sendMessage(DestinationNames.BLOGS, messagingObj);
 	}
 
 	protected void pingGoogle(BlogsEntry entry, ServiceContext serviceContext)

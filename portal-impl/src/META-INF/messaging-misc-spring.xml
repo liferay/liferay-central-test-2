@@ -9,6 +9,9 @@
 
 	<!-- Destinations -->
 
+	<bean id="destination.blogs" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/blogs" />
+	</bean>
 	<bean id="destination.convert_process" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/convert_process" />
 	</bean>
@@ -36,6 +39,7 @@
 
 	<!-- Listeners -->
 
+	<bean id="messageListener.blogs" class="com.liferay.portlet.blogs.messaging.BlogsMessageListener" />
 	<bean id="messageListener.convert_process" class="com.liferay.portal.convert.messaging.ConvertProcessMessageListener" />
 	<bean id="messageListener.layouts_local_publisher" class="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener">
 		<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
@@ -55,6 +59,7 @@
 	<bean id="messagingConfigurator.misc" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">
 			<list>
+				<ref bean="destination.blogs" />
 				<ref bean="destination.convert_process" />
 				<ref bean="destination.hot_deploy" />
 				<ref bean="destination.layouts_local_publisher" />
@@ -70,6 +75,11 @@
 		</property>
 		<property name="messageListeners">
 			<map key-type="java.lang.String" value-type="java.util.List">
+				<entry key="liferay/blogs">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.blogs" />
+					</list>
+				</entry>
 				<entry key="liferay/convert_process">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.convert_process" />
