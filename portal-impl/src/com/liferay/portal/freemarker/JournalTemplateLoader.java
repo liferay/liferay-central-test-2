@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 
@@ -44,12 +45,10 @@ import java.io.Reader;
  */
 public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 
-	public Object findTemplateSource(String name)
-		throws IOException {
-
-		int pos = name.indexOf(JOURNAL_SEPARATOR + StringPool.SLASH);
-
+	public Object findTemplateSource(String name) throws IOException {
 		try {
+			int pos = name.indexOf(JOURNAL_SEPARATOR + StringPool.SLASH);
+
 			if (pos != -1) {
 				int x = name.indexOf(StringPool.SLASH, pos);
 				int y = name.indexOf(StringPool.SLASH, x + 1);
@@ -60,8 +59,9 @@ public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 				String templateId = name.substring(z + 1);
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Loading {companyId=" + companyId + ",groupId=" +
-						groupId + ",templateId=" + templateId + "}");
+					_log.debug(
+						"Loading {companyId=" + companyId + ",groupId=" +
+							groupId + ",templateId=" + templateId + "}");
 				}
 
 				JournalTemplate template =
@@ -71,37 +71,38 @@ public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 				return template;
 			}
 		}
-		catch (PortalException pe) {
+		catch (NoSuchTemplateException nste) {
 			return null;
 		}
+		catch (PortalException pe) {
+			throw new IOException("Template {" + name + "} not found");
+		}
 		catch (SystemException se) {
-			throw new IOException("", se);
+			throw new IOException("Template {" + name + "} not found");
 		}
 
 		return null;
 	}
 
 	public long getLastModified(Object source) {
-
 		if (source instanceof JournalTemplate) {
-			JournalTemplate template = (JournalTemplate) source;
+			JournalTemplate template = (JournalTemplate)source;
 
 			return template.getModifiedDate().getTime();
-
 		}
+
 		return -1;
 	}
 
-	public Reader getReader(Object source, String encoding)
-		throws IOException {
-
+	public Reader getReader(Object source, String encoding) throws IOException {
 		if (source instanceof JournalTemplate) {
-			JournalTemplate template = (JournalTemplate) source;
+			JournalTemplate template = (JournalTemplate)source;
 
-			String buffer = template.getXsl();
+			String xsl = template.getXsl();
 
-			return new BufferedReader(new InputStreamReader(
-				new ByteArrayInputStream(buffer.getBytes()), encoding));
+			return new BufferedReader(
+				new InputStreamReader(
+					new ByteArrayInputStream(xsl.getBytes()), encoding));
 		}
 
 		return null;

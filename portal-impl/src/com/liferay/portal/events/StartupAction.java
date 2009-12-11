@@ -92,13 +92,13 @@ public class StartupAction extends SimpleAction {
 			System.setSecurityManager(new PortalSecurityManager());
 		}
 
-		// Velocity
-
-		VelocityEngineUtil.init();
-
 		// FreeMarker
 
 		FreeMarkerEngineUtil.init();
+
+		// Velocity
+
+		VelocityEngineUtil.init();
 
 		// Upgrade
 

@@ -40,14 +40,14 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 String defaultContent = null;
 
-if (langType.equals(JournalTemplateConstants.LANG_TYPE_XSL)) {
-	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.xsl");
-}
-else if (langType.equals(JournalTemplateConstants.LANG_TYPE_CSS)) {
+if (langType.equals(JournalTemplateConstants.LANG_TYPE_CSS)) {
 	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.css");
 }
 else if (langType.equals(JournalTemplateConstants.LANG_TYPE_FTL)) {
 	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.ftl");
+}
+else if (langType.equals(JournalTemplateConstants.LANG_TYPE_XSL)) {
+	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.xsl");
 }
 else {
 	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.vm");

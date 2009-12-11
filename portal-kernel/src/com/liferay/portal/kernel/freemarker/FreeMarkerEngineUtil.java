@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.freemarker;
 
-import com.liferay.portal.SystemException;
-
-import java.io.IOException;
 import java.io.StringWriter;
 
 /**
@@ -38,21 +35,22 @@ public class FreeMarkerEngineUtil {
 		return _freeMarkerEngine;
 	}
 
-	public static void init() {
-		getFreeMarkerEngine().init();
-	}
-
 	public static FreeMarkerContext getWrappedRestrictedToolsContext() {
-
 		return getFreeMarkerEngine().getWrappedRestrictedToolsContext();
 	}
 
-	public static boolean mergeTemplate(String freeMarkerTemplateId,
-			String script, FreeMarkerContext freeMarkerContext,
-			StringWriter output) throws SystemException, IOException {
+	public static void init() throws Exception {
+		getFreeMarkerEngine().init();
+	}
+
+	public static boolean mergeTemplate(
+			String freeMarkerTemplateId, String freemarkerTemplateContent,
+			FreeMarkerContext freeMarkerContext, StringWriter stringWriter)
+		throws Exception {
 
 		return getFreeMarkerEngine().mergeTemplate(
-			freeMarkerTemplateId, script, freeMarkerContext, output);
+			freeMarkerTemplateId, freemarkerTemplateContent, freeMarkerContext,
+			stringWriter);
 	}
 
 	public void setFreeMarkerEngine(FreeMarkerEngine freeMarkerEngine) {

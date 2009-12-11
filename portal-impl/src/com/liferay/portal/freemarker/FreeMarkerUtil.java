@@ -22,6 +22,8 @@
 
 package com.liferay.portal.freemarker;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import freemarker.cache.ClassTemplateLoader;
 
 import freemarker.template.Configuration;
@@ -42,11 +44,11 @@ public class FreeMarkerUtil {
 	public static String process(String name, Object context)
 		throws Exception {
 
-		StringWriter writer = new StringWriter();
+		StringWriter stringWriter = new StringWriter();
 
-		process(name, context, writer);
+		process(name, context, stringWriter);
 
-		return writer.toString();
+		return stringWriter.toString();
 	}
 
 	public static void process(String name, Object context, Writer writer)
@@ -58,13 +60,15 @@ public class FreeMarkerUtil {
 	}
 
 	private static Configuration _getConfiguration() {
-		if (_configuration == null) {
-			_configuration = new Configuration();
-
-			_configuration.setObjectWrapper(new DefaultObjectWrapper());
-			_configuration.setTemplateLoader(
-				new ClassTemplateLoader(FreeMarkerUtil.class, "/"));
+		if (_configuration != null) {
+			return _configuration;
 		}
+
+		_configuration = new Configuration();
+
+		_configuration.setObjectWrapper(new DefaultObjectWrapper());
+		_configuration.setTemplateLoader(
+			new ClassTemplateLoader(FreeMarkerUtil.class, StringPool.SLASH));
 
 		return _configuration;
 	}

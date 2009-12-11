@@ -40,21 +40,19 @@ public class FreeMarkerContextImpl implements FreeMarkerContext {
 
 	public FreeMarkerContextImpl(Map<String, Object> context) {
 		_context = new ConcurrentHashMap<String, Object>();
+
 		_context.putAll(context);
 	}
 
 	public Object get(String key) {
-
 		return _context.get(key);
 	}
 
 	public Map<String, Object> getWrappedContext() {
-
 		return _context;
 	}
 
 	public void put(String key, Object value) {
-
 		_context.put(key, value);
 	}
 

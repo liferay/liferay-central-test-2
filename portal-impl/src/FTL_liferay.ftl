@@ -1,4 +1,5 @@
 <#ftl strip_whitespace=true>
+
 <#macro css file_name>
 	<#assign $file_id = "">
 
@@ -20,12 +21,10 @@
 </#macro>
 
 <#macro language lang_key>
-${languageUtil.get(locale, lang_key)}
-</#macro>
+${languageUtil.get(locale, lang_key)}</#macro>
 
 <#macro date date_format>
-${dateUtil.getCurrentDate(date_format, locale)}
-</#macro>
+${dateUtil.getCurrentDate(date_format, locale)}</#macro>
 
 <#macro ie6_png_fix>
 <#if browserSniffer.isIe(request) && browserSniffer.getMajorVersion(request) < 7>

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.freemarker;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngine;
 import com.liferay.portal.kernel.log.Log;
@@ -50,46 +49,43 @@ import java.io.StringWriter;
  */
 public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 
-	public void init() {
+	public FreeMarkerContext getWrappedRestrictedToolsContext() {
+		return new FreeMarkerContextImpl(
+			_restrictedToolsContext.getWrappedContext());
+	}
 
-		String[] loaders =
-			PropsValues.FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_LOADERS;
-
+	public void init() throws Exception {
 		LiferayTemplateLoader liferayTemplateLoader =
 			new LiferayTemplateLoader();
-		liferayTemplateLoader.setTemplateLoaders(loaders);
+
+		liferayTemplateLoader.setTemplateLoaders(
+			PropsValues.FREEMARKER_ENGINE_TEMPLATE_LOADERS);
+
 		_stringTemplateLoader = new StringTemplateLoader();
 
 		MultiTemplateLoader multiTemplateLoader =
-			new MultiTemplateLoader(new TemplateLoader[] {
-				new ClassTemplateLoader(getClass(), "/"),
-				_stringTemplateLoader, liferayTemplateLoader
-			});
+			new MultiTemplateLoader(
+				new TemplateLoader[] {
+					new ClassTemplateLoader(getClass(), StringPool.SLASH),
+					_stringTemplateLoader, liferayTemplateLoader
+				});
 
 		_configuration = new Configuration();
+
 		_configuration.setDefaultEncoding(StringPool.UTF8);
 		_configuration.setLocalizedLookup(
-			PropsValues.FREEMARKER_ENGINE_CONFIGURATION_LOCALIZED_LOOKUP);
+			PropsValues.FREEMARKER_ENGINE_LOCALIZED_LOOKUP);
 		_configuration.setObjectWrapper(new DefaultObjectWrapper());
-		_configuration.setTemplateUpdateDelay(
-			PropsValues.
-				FREEMARKER_ENGINE_CONFIGURATION_MODIFICATION_CHECK_INTERVAL);
+		_configuration.setSetting(
+			"auto_import", PropsValues.FREEMARKER_ENGINE_MACRO_LIBRARY);
+		_configuration.setSetting(
+			"cache_storage", PropsValues.FREEMARKER_ENGINE_CACHE_STORAGE);
+		_configuration.setSetting(
+			"template_exception_handler",
+			PropsValues.FREEMARKER_ENGINE_TEMPLATE_EXCEPTION_HANDLER);
 		_configuration.setTemplateLoader(multiTemplateLoader);
-
-		try {
-			_configuration.setSetting(
-				"template_exception_handler",
-				PropsValues.
-					FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_EXCEPTION_HANDLER);
-			_configuration.setSetting(
-				"auto_import", PropsValues.FREEMARKER_ENGINE_MACRO_LIBRARY);
-			_configuration.setSetting(
-				"cache_storage",
-				PropsValues.FREEMARKER_ENGINE_CONFIGURATION_CACHE_STORAGE);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		_configuration.setTemplateUpdateDelay(
+			PropsValues.FREEMARKER_ENGINE_MODIFICATION_CHECK_INTERVAL);
 
 		_restrictedToolsContext = new FreeMarkerContextImpl();
 
@@ -102,66 +98,62 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		FreeMarkerVariables.insertHelperUtilities(_standardToolsContext, null);
 	}
 
-	public FreeMarkerContext getWrappedRestrictedToolsContext() {
-
-		return new FreeMarkerContextImpl(
-			_restrictedToolsContext.getWrappedContext());
-	}
-
 	public boolean mergeTemplate(
-		String freeMarkerTemplateId, String script,
-		FreeMarkerContext freeMarkerContext, StringWriter output)
-		throws SystemException, IOException {
+			String freeMarkerTemplateId, String freemarkerTemplateContent,
+			FreeMarkerContext freeMarkerContext, StringWriter stringWriter)
+		throws Exception {
 
-		try {
-			if ((Validator.isNotNull(freeMarkerTemplateId)) &&
-				(!PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED ||
-				!resourceExists(freeMarkerTemplateId))) {
+		if ((Validator.isNotNull(freeMarkerTemplateId)) &&
+			(!PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED ||
+			 !resourceExists(freeMarkerTemplateId))) {
 
-				_stringTemplateLoader.putTemplate(freeMarkerTemplateId, script);
+			_stringTemplateLoader.putTemplate(
+				freeMarkerTemplateId, freemarkerTemplateContent);
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Added " + freeMarkerTemplateId +
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Added " + freeMarkerTemplateId +
 						" to the FreeMarker template repository");
-				}
 			}
-
-			FreeMarkerContextImpl freeMarkerContextImpl =
-				(FreeMarkerContextImpl) freeMarkerContext;
-
-			Template template =
-				_configuration.getTemplate(
-					freeMarkerTemplateId, StringPool.UTF8);
-
-			template.process(freeMarkerContextImpl.getWrappedContext(), output);
-
-			return true;
 		}
-		catch (IOException ioe) {
-			throw ioe;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+
+		FreeMarkerContextImpl freeMarkerContextImpl =
+			(FreeMarkerContextImpl)freeMarkerContext;
+
+		Template template = _configuration.getTemplate(
+			freeMarkerTemplateId, StringPool.UTF8);
+
+		template.process(
+			freeMarkerContextImpl.getWrappedContext(), stringWriter);
+
+		return true;
 	}
 
 	public boolean resourceExists(String resource) {
-
 		try {
 			Template template = _configuration.getTemplate(resource);
 
-			return (template != null);
+			if (template != null) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		catch (IOException ioe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ioe, ioe);
+			}
+
 			return false;
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(FreeMarkerEngineImpl.class);
+
 	private Configuration _configuration;
-	private StringTemplateLoader _stringTemplateLoader;
 	private FreeMarkerContextImpl _restrictedToolsContext;
 	private FreeMarkerContextImpl _standardToolsContext;
-
-	private static Log _log = LogFactoryUtil.getLog(FreeMarkerEngineImpl.class);
+	private StringTemplateLoader _stringTemplateLoader;
 
 }

@@ -954,16 +954,16 @@ public class JournalUtil {
 		if (Validator.isNull(langType)) {
 			output = LocalizationUtil.getLocalization(xml, languageId);
 		}
+		else if (langType.equals(JournalTemplateConstants.LANG_TYPE_FTL)) {
+			output = JournalFtlUtil.transform(
+				tokens, viewMode, languageId, xml, script);
+		}
 		else if (langType.equals(JournalTemplateConstants.LANG_TYPE_VM)) {
 			output = JournalVmUtil.transform(
 				tokens, viewMode, languageId, xml, script);
 		}
 		else if (langType.equals(JournalTemplateConstants.LANG_TYPE_XSL)) {
 			output = JournalXslUtil.transform(
-				tokens, viewMode, languageId, xml, script);
-		}
-		else if (langType.equals(JournalTemplateConstants.LANG_TYPE_FTL)) {
-			output = JournalFreeMarkerUtil.transform(
 				tokens, viewMode, languageId, xml, script);
 		}
 

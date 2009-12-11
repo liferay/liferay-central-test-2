@@ -273,7 +273,6 @@ public class FreeMarkerVariables {
 			UserGroupPermissionUtil.getUserGroupPermission());
 		freeMarkerContext.put(
 			"userPermission", UserPermissionUtil.getUserPermission());
-
 	}
 
 	private static void _insertHelperUtility(

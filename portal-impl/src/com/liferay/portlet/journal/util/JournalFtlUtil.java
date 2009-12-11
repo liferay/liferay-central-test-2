@@ -52,18 +52,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="JournalFreeMarkerUtil.java.html"><i>View Source</i></a>
+ * <a href="JournalFtlUtil.java.html"><i>View Source</i></a>
  *
  * @author Mika Koivisto
  */
-public class JournalFreeMarkerUtil extends JournalVmUtil {
+public class JournalFtlUtil extends JournalVmUtil {
 
 	public static String transform(
-		Map<String, String> tokens, String viewMode, String languageId,
-		String xml, String script)
+			Map<String, String> tokens, String viewMode, String languageId,
+			String xml, String script)
 		throws TransformException {
 
-		StringWriter output = new StringWriter();
+		StringWriter stringWriter = new StringWriter();
 
 		boolean load = false;
 
@@ -114,10 +114,9 @@ public class JournalFreeMarkerUtil extends JournalVmUtil {
 			try {
 				String freeMarkerTemplateId = companyId + groupId + templateId;
 
-				load =
-					FreeMarkerEngineUtil.mergeTemplate(
-						freeMarkerTemplateId, script,
-						freeMarkerContext, output);
+				load = FreeMarkerEngineUtil.mergeTemplate(
+					freeMarkerTemplateId, script, freeMarkerContext,
+					stringWriter);
 			}
 			catch (SystemException se) {
 				if (se.getCause() instanceof TemplateException) {
@@ -128,17 +127,15 @@ public class JournalFreeMarkerUtil extends JournalVmUtil {
 
 					String freeMarkerTemplateId =
 						PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER;
-					String velocityTemplateContent =
+					String freemarkerTemplateContent =
 						ContentUtil.get(
 							PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
 
-					output = new StringWriter();
+					stringWriter = new StringWriter();
 
-					load =
-						FreeMarkerEngineUtil.mergeTemplate(
-							freeMarkerTemplateId, velocityTemplateContent,
-							freeMarkerContext, output);
-
+					load = FreeMarkerEngineUtil.mergeTemplate(
+						freeMarkerTemplateId, freemarkerTemplateContent,
+						freeMarkerContext, stringWriter);
 				}
 				else {
 					throw se;
@@ -155,16 +152,15 @@ public class JournalFreeMarkerUtil extends JournalVmUtil {
 
 				String freeMarkerTemplateId =
 					PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER;
-				String velocityTemplateContent =
+				String freemarkerTemplateContent =
 					ContentUtil.get(
 						PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
 
-				output = new StringWriter();
+				stringWriter = new StringWriter();
 
-				load =
-					FreeMarkerEngineUtil.mergeTemplate(
-						freeMarkerTemplateId, velocityTemplateContent,
-						freeMarkerContext, output);
+				load = FreeMarkerEngineUtil.mergeTemplate(
+					freeMarkerTemplateId, freemarkerTemplateContent,
+					freeMarkerContext, stringWriter);
 			}
 		}
 		catch (Exception e) {
@@ -188,7 +184,7 @@ public class JournalFreeMarkerUtil extends JournalVmUtil {
 				"Unable to dynamically load freemarker transform script");
 		}
 
-		return output.toString();
+		return stringWriter.toString();
 	}
 
 }

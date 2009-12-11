@@ -34,13 +34,10 @@ public abstract class FreeMarkerTemplateLoader {
 
 	public static final String JOURNAL_SEPARATOR = "_JOURNAL_CONTEXT_";
 
-	public void closeTemplateSource(Object source)
-		throws IOException {
-
+	public void closeTemplateSource(Object source) {
 	}
 
-	public abstract Object findTemplateSource(String name)
-		throws IOException;
+	public abstract Object findTemplateSource(String name) throws IOException;
 
 	public long getLastModified(Object source) {
 		return 0;

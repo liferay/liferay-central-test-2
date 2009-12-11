@@ -485,19 +485,19 @@ public interface PropsKeys {
 
 	public static final String FLAGS_REASONS = "flags.reasons";
 
-	public static final String FREEMARKER_ENGINE_CONFIGURATION_CACHE_STORAGE = "freemarker.engine.configuration.cache.storage";
+	public static final String FREEMARKER_ENGINE_CACHE_ENABLED = "freemarker.engine.cache.enabled";
 
-	public static final String FREEMARKER_ENGINE_CONFIGURATION_CACHE_ENABLED = "freemarker.engine.configuration.cache.enabled";
+	public static final String FREEMARKER_ENGINE_CACHE_STORAGE = "freemarker.engine.cache.storage";
 
-	public static final String FREEMARKER_ENGINE_CONFIGURATION_LOCALIZED_LOOKUP = "freemarker.engine.configuration.localized.lookup";
-
-	public static final String FREEMARKER_ENGINE_CONFIGURATION_MODIFICATION_CHECK_INTERVAL = "freemarker.engine.configuration.modification.check.interval";
-
-	public static final String FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_EXCEPTION_HANDLER = "freemarker.engine.configuration.template.exception.handler";
-
-	public static final String FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_LOADERS = "freemarker.engine.configuration.template.loaders";
+	public static final String FREEMARKER_ENGINE_LOCALIZED_LOOKUP = "freemarker.engine.localized.lookup";
 
 	public static final String FREEMARKER_ENGINE_MACRO_LIBRARY = "freemarker.engine.macro.library";
+
+	public static final String FREEMARKER_ENGINE_MODIFICATION_CHECK_INTERVAL = "freemarker.engine.modification.check.interval";
+
+	public static final String FREEMARKER_ENGINE_TEMPLATE_EXCEPTION_HANDLER = "freemarker.engine.template.exception.handler";
+
+	public static final String FREEMARKER_ENGINE_TEMPLATE_LOADERS = "freemarker.engine.template.loaders";
 
 	public static final String GLOBAL_SHUTDOWN_EVENTS = "global.shutdown.events";
 
@@ -669,9 +669,9 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP = "journal.sync.content.search.on.startup";
 
-	public static final String JOURNAL_TEMPLATE_FREEMARKER_RESTRICTED_VARIABLES = "journal.template.freemarker.restricted.variables";
-
 	public static final String JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID = "journal.template.force.autogenerate.id";
+
+	public static final String JOURNAL_TEMPLATE_FREEMARKER_RESTRICTED_VARIABLES = "journal.template.freemarker.restricted.variables";
 
 	public static final String JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES = "journal.template.velocity.restricted.variables";
 

@@ -634,37 +634,31 @@ public class PropsValues {
 				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS));
 
 	public static final boolean FLAGS_GUEST_USERS_ENABLED =
-		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
-			FLAGS_GUEST_USERS_ENABLED));
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.FLAGS_GUEST_USERS_ENABLED));
 
 	public static final String[] FLAGS_REASONS =
 		PropsUtil.getArray(PropsKeys.FLAGS_REASONS);
 
-	public static final String FREEMARKER_ENGINE_CONFIGURATION_CACHE_STORAGE =
-		PropsUtil.get(PropsKeys.FREEMARKER_ENGINE_CONFIGURATION_CACHE_STORAGE);
+	public static final String FREEMARKER_ENGINE_CACHE_STORAGE =
+		PropsUtil.get(PropsKeys.FREEMARKER_ENGINE_CACHE_STORAGE);
 
-	public static final boolean
-		FREEMARKER_ENGINE_CONFIGURATION_LOCALIZED_LOOKUP =
-			GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.FREEMARKER_ENGINE_CONFIGURATION_LOCALIZED_LOOKUP));
-
-	public static final int
-		FREEMARKER_ENGINE_CONFIGURATION_MODIFICATION_CHECK_INTERVAL =
-			GetterUtil.getInteger(PropsUtil.get(PropsKeys.
-				FREEMARKER_ENGINE_CONFIGURATION_MODIFICATION_CHECK_INTERVAL));
-
-	public static final String
-		FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_EXCEPTION_HANDLER =
-			PropsUtil.get(PropsKeys.
-				FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_EXCEPTION_HANDLER);
-
-	public static final String[]
-		FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_LOADERS =
-			PropsUtil.getArray(
-				PropsKeys.FREEMARKER_ENGINE_CONFIGURATION_TEMPLATE_LOADERS);
+	public static final boolean FREEMARKER_ENGINE_LOCALIZED_LOOKUP =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.FREEMARKER_ENGINE_LOCALIZED_LOOKUP));
 
 	public static final String FREEMARKER_ENGINE_MACRO_LIBRARY = PropsUtil.get(
 		PropsKeys.FREEMARKER_ENGINE_MACRO_LIBRARY);
+
+	public static final int FREEMARKER_ENGINE_MODIFICATION_CHECK_INTERVAL =
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
+			FREEMARKER_ENGINE_MODIFICATION_CHECK_INTERVAL));
+
+	public static final String FREEMARKER_ENGINE_TEMPLATE_EXCEPTION_HANDLER =
+		PropsUtil.get(PropsKeys.FREEMARKER_ENGINE_TEMPLATE_EXCEPTION_HANDLER);
+
+	public static final String[] FREEMARKER_ENGINE_TEMPLATE_LOADERS =
+		PropsUtil.getArray(PropsKeys.FREEMARKER_ENGINE_TEMPLATE_LOADERS);
 
 	public static final String[] GLOBAL_SHUTDOWN_EVENTS =
 		PropsUtil.getArray(PropsKeys.GLOBAL_SHUTDOWN_EVENTS);
