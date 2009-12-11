@@ -24,11 +24,13 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -55,11 +57,11 @@ import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
+import com.liferay.portlet.journal.TransformException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleCreateDateComparator;
@@ -954,17 +956,29 @@ public class JournalUtil {
 		if (Validator.isNull(langType)) {
 			output = LocalizationUtil.getLocalization(xml, languageId);
 		}
-		else if (langType.equals(JournalTemplateConstants.LANG_TYPE_FTL)) {
-			output = JournalFtlUtil.transform(
-				tokens, viewMode, languageId, xml, script);
-		}
-		else if (langType.equals(JournalTemplateConstants.LANG_TYPE_VM)) {
-			output = JournalVmUtil.transform(
-				tokens, viewMode, languageId, xml, script);
-		}
-		else if (langType.equals(JournalTemplateConstants.LANG_TYPE_XSL)) {
-			output = JournalXslUtil.transform(
-				tokens, viewMode, languageId, xml, script);
+		else {
+			String templateParserClassName = PropsUtil.get(
+				PropsKeys.JOURNAL_TEMPLATE_LANGUAGE_PARSER,
+				new Filter(langType));
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Template parser class name " + templateParserClassName);
+			}
+
+			if (Validator.isNotNull(templateParserClassName)) {
+				TemplateParser templateParser =
+					(TemplateParser)InstancePool.get(templateParserClassName);
+
+				if (templateParser == null) {
+					throw new TransformException(
+						"No template parser found for " +
+							templateParserClassName);
+				}
+
+				output = templateParser.transform(
+					tokens, viewMode, languageId, xml, script);
+			}
 		}
 
 		// Postprocess output

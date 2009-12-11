@@ -22,43 +22,39 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portlet.journal.TransformException;
 
-import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="JournalVmUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseTemplateParser.java.html"><b><i>View Source</i></b></a>
  *
- * @author	   Alexander Chow
- * @author	   Brian Wing Shun Chan
- * @author	   Raymond Augé
- * @deprecated
+ * @author Brian Wing Shun Chan
  */
-public class JournalVmUtil {
+public abstract class BaseTemplateParser implements TemplateParser {
 
-	public static List<TemplateNode> extractDynamicContents(Element parent)
-		throws TransformException {
-
-		return _instance._velocityTemplateParser.extractDynamicContents(parent);
-	}
-
-	public static String transform(
+	public String transform(
 			Map<String, String> tokens, String viewMode, String languageId,
 			String xml, String script)
 		throws TransformException {
 
-		return _instance._velocityTemplateParser.transform(
-			tokens, viewMode, languageId, xml, script);
+		try {
+			return doTransform(tokens, viewMode, languageId, xml, script);
+		}
+		catch (TransformException te) {
+			throw te;
+		}
+		catch (Exception e) {
+			throw new TransformException(e);
+		}
 	}
 
-	private JournalVmUtil() {
-		_velocityTemplateParser = new VelocityTemplateParser();
+	protected String doTransform(
+			Map<String, String> tokens, String viewMode, String languageId,
+			String xml, String script)
+		throws Exception {
+
+		return null;
 	}
-
-	private static JournalVmUtil _instance = new JournalVmUtil();
-
-	private VelocityTemplateParser _velocityTemplateParser;
 
 }

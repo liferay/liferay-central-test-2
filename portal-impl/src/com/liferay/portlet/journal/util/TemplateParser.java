@@ -22,43 +22,20 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portlet.journal.TransformException;
 
-import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="JournalVmUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="TemplateParser.java.html"><b><i>View Source</i></b></a>
  *
- * @author	   Alexander Chow
- * @author	   Brian Wing Shun Chan
- * @author	   Raymond Augé
- * @deprecated
+ * @author Brian Wing Shun Chan
  */
-public class JournalVmUtil {
+public interface TemplateParser {
 
-	public static List<TemplateNode> extractDynamicContents(Element parent)
-		throws TransformException {
-
-		return _instance._velocityTemplateParser.extractDynamicContents(parent);
-	}
-
-	public static String transform(
+	public String transform(
 			Map<String, String> tokens, String viewMode, String languageId,
 			String xml, String script)
-		throws TransformException {
-
-		return _instance._velocityTemplateParser.transform(
-			tokens, viewMode, languageId, xml, script);
-	}
-
-	private JournalVmUtil() {
-		_velocityTemplateParser = new VelocityTemplateParser();
-	}
-
-	private static JournalVmUtil _instance = new JournalVmUtil();
-
-	private VelocityTemplateParser _velocityTemplateParser;
+		throws TransformException;
 
 }

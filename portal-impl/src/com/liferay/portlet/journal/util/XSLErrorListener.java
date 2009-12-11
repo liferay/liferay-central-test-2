@@ -38,13 +38,13 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
- * <a href="JournalXslErrorListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="XSLErrorListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  */
-public class JournalXslErrorListener implements ErrorListener {
+public class XSLErrorListener implements ErrorListener {
 
-	public JournalXslErrorListener(Locale locale) {
+	public XSLErrorListener(Locale locale) {
 		_locale = locale;
 	}
 

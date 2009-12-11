@@ -22,6 +22,9 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
+
 /**
  * <a href="JournalTemplateConstants.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,8 +40,7 @@ public class JournalTemplateConstants {
 
 	public static final String LANG_TYPE_XSL = "xsl";
 
-	public static final String[] LANG_TYPES = new String[] {
-		LANG_TYPE_VM, LANG_TYPE_FTL, LANG_TYPE_XSL, LANG_TYPE_CSS
-	};
+	public static final String[] LANG_TYPES = PropsUtil.getArray(
+		PropsKeys.JOURNAL_TEMPLATE_LANGUAGE_TYPES);
 
 }

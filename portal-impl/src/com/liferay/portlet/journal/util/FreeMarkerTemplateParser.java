@@ -52,16 +52,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="JournalFtlUtil.java.html"><i>View Source</i></a>
+ * <a href="FreeMarkerTemplateParser.java.html"><i>View Source</i></a>
  *
  * @author Mika Koivisto
  */
-public class JournalFtlUtil extends JournalVmUtil {
+public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 
-	public static String transform(
+	public String doTransform(
 			Map<String, String> tokens, String viewMode, String languageId,
 			String xml, String script)
-		throws TransformException {
+		throws Exception {
 
 		StringWriter stringWriter = new StringWriter();
 
