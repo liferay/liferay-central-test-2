@@ -26,9 +26,12 @@ import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import java.lang.reflect.Proxy;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -72,8 +75,25 @@ public class BeanLocatorImpl implements BeanLocator {
 
 				bean = _applicationContext.getBean(originalName);
 
+				List<Class<?>> interfaces = ListUtil.fromArray(
+					bean.getClass().getInterfaces());
+
+				Iterator<Class<?>> itr = interfaces.iterator();
+
+				while (itr.hasNext()) {
+					Class<?> classObj = itr.next();
+
+					try {
+						_classLoader.loadClass(classObj.getName());
+					}
+					catch (Exception e) {
+						itr.remove();
+					}
+				}
+
 				bean = Proxy.newProxyInstance(
-					_classLoader, bean.getClass().getInterfaces(),
+					_classLoader,
+					interfaces.toArray(new Class<?>[interfaces.size()]),
 					new VelocityBeanHandler(bean, _classLoader));
 
 				_velocityBeans.put(name, bean);
