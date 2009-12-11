@@ -41,5 +41,5 @@ if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WI
 <span class="aui-button <%= !type.equals("button") ? "aui-button-" + type : StringPool.BLANK %> <%= cssClass %> <%= disabled ? "aui-input-disabled" : StringPool.BLANK %>">
 	<span class="aui-button-content">
 		<input class="aui-button-input <%= !type.equals("button") ? "aui-button-input-" + type : StringPool.BLANK %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= name %>" <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type='<%= type.equals("cancel") ? "button" : type %>' value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
-	</span>	
+	</span>
 </span>
