@@ -122,7 +122,7 @@ public class JournalVmUtil {
 			String xml, String script)
 		throws TransformException {
 
-		StringWriter output = new StringWriter();
+		StringWriter stringWriter = new StringWriter();
 
 		boolean load = false;
 
@@ -173,7 +173,7 @@ public class JournalVmUtil {
 				String velocityTemplateId = companyId + groupId + templateId;
 
 				load = VelocityEngineUtil.mergeTemplate(
-					velocityTemplateId, script, velocityContext, output);
+					velocityTemplateId, script, velocityContext, stringWriter);
 			}
 			catch (VelocityException ve) {
 				velocityContext.put("exception", ve.getMessage());
@@ -195,7 +195,7 @@ public class JournalVmUtil {
 
 				load = VelocityEngineUtil.mergeTemplate(
 					velocityTemplateId, velocityTemplateContent,
-					velocityContext, output);
+					velocityContext, stringWriter);
 			}
 		}
 		catch (Exception e) {
@@ -227,7 +227,7 @@ public class JournalVmUtil {
 				"Unable to dynamically load velocity transform script");
 		}
 
-		return output.toString();
+		return stringWriter.toString();
 	}
 
 	protected static String injectEditInPlace(String xml, String script)
