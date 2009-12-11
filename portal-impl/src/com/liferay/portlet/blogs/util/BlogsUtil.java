@@ -43,17 +43,19 @@ public class BlogsUtil {
 
 	public static final String POP_PORTLET_PREFIX = "blogs.";
 
-	public static String getEmailFromAddress(PortletPreferences preferences) {
-		String emailFromAddress = PropsUtil.get(
-			PropsKeys.BLOGS_EMAIL_FROM_ADDRESS);
+	public static String getEmailBlogsAddedBody(
+		PortletPreferences preferences) {
 
-		return preferences.getValue("email-from-address", emailFromAddress);
-	}
+		String emailBlogsAddedBody = preferences.getValue(
+			"email-blogs-added-body", StringPool.BLANK);
 
-	public static String getEmailFromName(PortletPreferences preferences) {
-		String emailFromName = PropsUtil.get(PropsKeys.BLOGS_EMAIL_FROM_NAME);
-
-		return preferences.getValue("email-from-name", emailFromName);
+		if (Validator.isNotNull(emailBlogsAddedBody)) {
+			return emailBlogsAddedBody;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_BODY));
+		}
 	}
 
 	public static boolean getEmailBlogsAddedEnabled(
@@ -68,21 +70,6 @@ public class BlogsUtil {
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_ENABLED));
-		}
-	}
-
-	public static String getEmailBlogsAddedBody(
-		PortletPreferences preferences) {
-
-		String emailBlogsAddedBody = preferences.getValue(
-			"email-blogs-added-body", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailBlogsAddedBody)) {
-			return emailBlogsAddedBody;
-		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_BODY));
 		}
 	}
 
@@ -101,21 +88,6 @@ public class BlogsUtil {
 		}
 	}
 
-	public static boolean getEmailBlogsUpdatedEnabled(
-		PortletPreferences preferences) {
-
-		String emailBlogsUpdatedEnabled = preferences.getValue(
-			"email-blogs-updated-enabled", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailBlogsUpdatedEnabled)) {
-			return GetterUtil.getBoolean(emailBlogsUpdatedEnabled);
-		}
-		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_ENABLED));
-		}
-	}
-
 	public static String getEmailBlogsUpdatedBody(
 		PortletPreferences preferences) {
 
@@ -128,6 +100,21 @@ public class BlogsUtil {
 		else {
 			return ContentUtil.get(PropsUtil.get(
 				PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_BODY));
+		}
+	}
+
+	public static boolean getEmailBlogsUpdatedEnabled(
+		PortletPreferences preferences) {
+
+		String emailBlogsUpdatedEnabled = preferences.getValue(
+			"email-blogs-updated-enabled", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailBlogsUpdatedEnabled)) {
+			return GetterUtil.getBoolean(emailBlogsUpdatedEnabled);
+		}
+		else {
+			return GetterUtil.getBoolean(PropsUtil.get(
+				PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_ENABLED));
 		}
 	}
 
@@ -144,6 +131,19 @@ public class BlogsUtil {
 			return ContentUtil.get(PropsUtil.get(
 				PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_SUBJECT));
 		}
+	}
+
+	public static String getEmailFromAddress(PortletPreferences preferences) {
+		String emailFromAddress = PropsUtil.get(
+			PropsKeys.BLOGS_EMAIL_FROM_ADDRESS);
+
+		return preferences.getValue("email-from-address", emailFromAddress);
+	}
+
+	public static String getEmailFromName(PortletPreferences preferences) {
+		String emailFromName = PropsUtil.get(PropsKeys.BLOGS_EMAIL_FROM_NAME);
+
+		return preferences.getValue("email-from-name", emailFromName);
 	}
 
 	public static String getMailId(String mx, long entryId) {
