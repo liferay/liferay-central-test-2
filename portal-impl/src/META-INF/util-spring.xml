@@ -128,6 +128,11 @@
 			<bean class="com.liferay.portal.upgrade.util.DefaultUpgradeTableFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil" class="com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil">
+		<property name="valueMapperFactory">
+			<bean class="com.liferay.portal.upgrade.util.MemoryValueMapperFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil">
 		<property name="calendarFactory">
 			<bean class="com.liferay.portal.util.CalendarFactoryImpl" />
