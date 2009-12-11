@@ -122,18 +122,23 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		String primKey = String.valueOf(companyId);
 		String actionId = ActionKeys.ADD_TO_PAGE;
 
-		for (String roleName : roleNames) {
-			Role role = roleLocalService.getRole(companyId, roleName);
+		List<String> actionIds = ResourceActionsUtil.getPortletResourceActions(
+			name);
 
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-				resourcePermissionLocalService.addResourcePermission(
-					companyId, name, scope, primKey, role.getRoleId(),
-					actionId);
-			}
-			else {
-				permissionLocalService.setRolePermission(
-					role.getRoleId(), companyId, name, scope, primKey,
-					actionId);
+		if (actionIds.contains(actionId)) {
+			for (String roleName : roleNames) {
+				Role role = roleLocalService.getRole(companyId, roleName);
+
+				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+					resourcePermissionLocalService.addResourcePermission(
+						companyId, name, scope, primKey, role.getRoleId(),
+						actionId);
+				}
+				else {
+					permissionLocalService.setRolePermission(
+						role.getRoleId(), companyId, name, scope, primKey,
+						actionId);
+				}
 			}
 		}
 
