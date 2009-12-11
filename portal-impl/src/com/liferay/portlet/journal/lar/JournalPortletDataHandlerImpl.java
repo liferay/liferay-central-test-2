@@ -296,7 +296,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				oldParameters = oldParameters.substring(
 					oldParameters.indexOf(StringPool.QUESTION) + 1);
 
+				boolean encodeAmpersands = false;
+
 				while (oldParameters.contains(StringPool.AMPERSAND_ENCODED)) {
+					encodeAmpersands = true;
+
 					oldParameters = oldParameters.replace(
 						StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 				}
@@ -342,7 +346,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				String newParameters =
 					"/get_file?uuid=" + fileEntry.getUuid() +
-						"&amp;groupId=@data_handler_group_id@";
+						"&groupId=@data_handler_group_id@";
+
+				if (encodeAmpersands) {
+					newParameters = newParameters.replace(
+						StringPool.AMPERSAND, StringPool.AMPERSAND_ENCODED);
+				}
 
 				sb.replace(beginPos, endPos, newParameters);
 			}
@@ -407,7 +416,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				oldParameters = oldParameters.substring(
 					oldParameters.indexOf(StringPool.QUESTION) + 1);
 
+				boolean encodeAmpersands = false;
+
 				while (oldParameters.contains(StringPool.AMPERSAND_ENCODED)) {
+					encodeAmpersands = true;
+
 					oldParameters = oldParameters.replace(
 						StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 				}
@@ -473,8 +486,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				String newParameters =
 					"/image_gallery?uuid=" + image.getUuid() +
-						"&amp;groupId=@data_handler_group_id@&amp;t=" +
-						timestamp;
+						"&groupId=@data_handler_group_id@&t=" + timestamp;
+
+				if (encodeAmpersands) {
+					newParameters = newParameters.replace(
+						StringPool.AMPERSAND, StringPool.AMPERSAND_ENCODED);
+				}
 
 				sb.replace(beginPos, endPos, newParameters);
 			}
