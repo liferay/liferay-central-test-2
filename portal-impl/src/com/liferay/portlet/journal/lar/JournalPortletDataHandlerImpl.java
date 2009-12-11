@@ -264,9 +264,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			int endPos1 = content.indexOf(StringPool.APOSTROPHE, beginPos);
 			int endPos2 = content.indexOf(StringPool.CLOSE_BRACKET, beginPos);
-			int endPos3 = content.indexOf(StringPool.LESS_THAN, beginPos);
-			int endPos4 = content.indexOf(StringPool.QUOTE, beginPos);
-			int endPos5 = content.indexOf(StringPool.SPACE, beginPos);
+			int endPos3 = content.indexOf(
+				StringPool.CLOSE_PARENTHESIS, beginPos);
+			int endPos4 = content.indexOf(StringPool.LESS_THAN, beginPos);
+			int endPos5 = content.indexOf(StringPool.QUOTE, beginPos);
+			int endPos6 = content.indexOf(StringPool.SPACE, beginPos);
 
 			int endPos = endPos1;
 
@@ -284,6 +286,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if ((endPos == -1) || ((endPos5 != -1) && (endPos5 < endPos))) {
 				endPos = endPos5;
+			}
+
+			if ((endPos == -1) || ((endPos6 != -1) && (endPos6 < endPos))) {
+				endPos = endPos6;
 			}
 
 			if ((beginPos == -1) || (endPos == -1)) {
@@ -384,9 +390,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			int endPos1 = content.indexOf(StringPool.APOSTROPHE, beginPos);
 			int endPos2 = content.indexOf(StringPool.CLOSE_BRACKET, beginPos);
-			int endPos3 = content.indexOf(StringPool.LESS_THAN, beginPos);
-			int endPos4 = content.indexOf(StringPool.QUOTE, beginPos);
-			int endPos5 = content.indexOf(StringPool.SPACE, beginPos);
+			int endPos3 = content.indexOf(
+				StringPool.CLOSE_PARENTHESIS, beginPos);
+			int endPos4 = content.indexOf(StringPool.LESS_THAN, beginPos);
+			int endPos5 = content.indexOf(StringPool.QUOTE, beginPos);
+			int endPos6 = content.indexOf(StringPool.SPACE, beginPos);
 
 			int endPos = endPos1;
 
@@ -404,6 +412,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if ((endPos == -1) || ((endPos5 != -1) && (endPos5 < endPos))) {
 				endPos = endPos5;
+			}
+
+			if ((endPos == -1) || ((endPos6 != -1) && (endPos6 < endPos))) {
+				endPos = endPos6;
 			}
 
 			if ((beginPos == -1) || (endPos == -1)) {
@@ -1355,11 +1367,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					JournalArticleUtil.findByGroupId(context.getGroupId());
 
 				for (JournalArticle article : articles) {
-					if (context.isWithinDateRange(article.getModifiedDate())) {
-						exportArticle(
-							context, articlesEl, dlFoldersEl, dlFilesEl,
-							dlFileRanksEl, igFoldersEl, igImagesEl, article);
-					}
+					exportArticle(
+						context, articlesEl, dlFoldersEl, dlFilesEl,
+						dlFileRanksEl, igFoldersEl, igImagesEl, article);
 				}
 			}
 
