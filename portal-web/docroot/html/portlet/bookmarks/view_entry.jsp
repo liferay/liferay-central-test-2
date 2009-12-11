@@ -32,6 +32,14 @@ entry = entry.toEscapedModel();
 long entryId = entry.getEntryId();
 
 request.setAttribute("view_entry.jsp-entry", entry);
+
+StringBuilder sb = new StringBuilder();
+
+sb.append(themeDisplay.getPathMain());
+sb.append("/bookmarks/open_entry?entryId=");
+sb.append(entry.getEntryId());
+
+String entryHREF = sb.toString();
 %>
 
 <liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
@@ -56,7 +64,7 @@ request.setAttribute("view_entry.jsp-entry", entry);
 		</div>
 
 		<div class="entry-url">
-			<a href="<%= entry.getUrl() %>"><%= entry.getUrl() %></a>
+			<a href="<%= entryHREF %>"><%= entry.getUrl() %></a>
 		</div>
 
 		<div class="entry-description">
