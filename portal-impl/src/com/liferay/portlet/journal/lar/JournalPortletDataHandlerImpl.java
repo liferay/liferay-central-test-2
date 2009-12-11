@@ -752,7 +752,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				if (fileName.contains(StringPool.SLASH)) {
 					fileName = fileName.substring(
-						fileName.lastIndexOf(StringPool.SLASH));
+						fileName.lastIndexOf(StringPool.SLASH) + 1);
 				}
 
 				if (fileName.endsWith(".xml")) {
