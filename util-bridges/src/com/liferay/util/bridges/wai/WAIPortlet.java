@@ -76,7 +76,9 @@ public class WAIPortlet extends GenericPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
+		if (_connector.equals(CONNECTOR_IFRAME) ||
+			renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
+
 			invokeApplication(renderRequest, renderResponse);
 		}
 		else {
