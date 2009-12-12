@@ -52,54 +52,36 @@ type = ParamUtil.getString(request, "type", type);
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
 <script type="text/javascript">
-	function <portlet:namespace />saveConfiguration() {
-		AUI().use(
-			'io',
-			function(A) {
-				var form = A.get('#<portlet:namespace />fm1');
-
-				var uri = form.getAttribute('action');
-
-				A.io(
-					uri,
-					{
-						form: {
-							id: form
-						},
-						method: 'POST'
-					}
-				);
-			}
-		);
-	}
-
 	function <portlet:namespace />selectArticle(articleId) {
-		document.<portlet:namespace />fm1.<portlet:namespace />articleId.value = articleId;
-		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
-		submitForm(document.<portlet:namespace />fm1);
+		document.<portlet:namespace />fm.<portlet:namespace />articleId.value = articleId;
+		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
+
+		AUI().one('.displaying-article-id-holder').show();
+		
+		var displayArticleId = AUI().one('.displaying-article-id');
+
+		displayArticleId.set('innerHTML', articleId + ' (<%= LanguageUtil.get(pageContext, "modified")%>)');
+		displayArticleId.addClass('modified');
 	}
 </script>
 
+<style type="text/css">
+	.displaying-article-id.modified {
+		color: #4DCF0C;
+	}
+</style>
+
 <aui:form action="<%= configurationURL %>" method="post" name="fm1">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur" + cur %>' />
-	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
-	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
-	<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
 
-	<aui:fieldset>
-		<aui:field-wrapper label="portlet-id">
-			<%= portletResource %>
-		</aui:field-wrapper>
-	</aui:fieldset>
+	<liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
 
-	<br />
+	<div class='portlet-msg-info displaying-article-id-holder <%= article == null ? "aui-helper-hidden" : StringPool.BLANK %>'>
+		<liferay-ui:message key="displaying-content" />: <span class="displaying-article-id"><%= article != null ? articleId : StringPool.BLANK %></span>
+	</div>
 
 	<c:if test="<%= article != null %>">
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="displaying-content" />: <%= articleId %>
-		</div>
-
 		<aui:fieldset>
 			<%
 			String structureId = article.getStructureId();
@@ -157,57 +139,7 @@ type = ParamUtil.getString(request, "type", type);
 			}
 			%>
 		</aui:fieldset>
-
-		<aui:fieldset>
-			<aui:input inlineLabel="left" name="showAvailableLocales" type="checkbox" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
-
-			<liferay-ui:message key="convert-to" />
-
-			<c:if test="<%= !openOfficeServerEnabled %>">
-				<liferay-ui:icon-help message="enabling-openoffice-integration-provides-document-conversion-functionality" />
-			</c:if>
-		</aui:fieldset>
-
-		<aui:fieldset>
-
-			<%
-			for (String conversion : conversions) {
-			%>
-
-			<aui:input disabled="<%= !openOfficeServerEnabled %>" name="extensions" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' type="checkbox" value="<%= conversion %>" />
-
-			<%= conversion.toUpperCase() %>
-
-			<%
-			}
-			%>
-
-		</aui:fieldset>
-
-		<aui:fieldset>
-			<aui:input inlineLabel="left" name="enablePrint" type="checkbox" value="<%= enablePrint %>" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
-
-			<aui:input inlineLable="left" name="enableRatings" value="<%= enableRatings %>" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
-
-			<c:if test="<%= PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED %>">
-
-				<aui:input inlineLabel="left" name="enableComments" value="<%= enableComments %>" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
-
-				<aui:input inlineLabel="left" name="enableCommentRatings" value="<%= enableCommentRatings %>" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
-			</c:if>
-		</aui:fieldset>
 	</c:if>
-</aui:form>
-
-<c:if test="<%= Validator.isNotNull(articleId) %>">
-	<div class="separator"><!-- --></div>
-</c:if>
-
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
-	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur" + cur %>' />
-
-	<liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
 
 	<%
 	DynamicRenderRequest dynamicRenderRequest = new DynamicRenderRequest(renderRequest);
@@ -287,6 +219,52 @@ type = ParamUtil.getString(request, "type", type);
 	%>
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>
+
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur" + cur %>' />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
+	<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
+
+	<aui:fieldset cssClass="aui-helper-hidden">
+		<aui:field-wrapper label="portlet-id">
+			<%= portletResource %>
+		</aui:field-wrapper>
+	</aui:fieldset>
+
+	<br />
+
+	<aui:fieldset>
+		<aui:input inlineLabel="left" name="showAvailableLocales" type="checkbox" value="<%= showAvailableLocales %>" />
+
+		<aui:field-wrapper helpMessage='<%= !openOfficeServerEnabled ? "enabling-openoffice-integration-provides-document-conversion-functionality" : StringPool.BLANK %>' label="convert-to">
+
+			<%
+			for (String conversion : conversions) {
+			%>
+
+				<aui:field-wrapper inlineField="<%= true %>" inlineLabel="left" label="<%= conversion.toUpperCase() %>">
+					<input <%= ArrayUtil.contains(extensions, conversion) ? "checked": "" %> <%= !openOfficeServerEnabled ? "disabled" : "" %> name="<portlet:namespace />extensions" type="checkbox" value="<%= conversion %>" />
+				</aui:field-wrapper>
+
+			<%
+			}
+			%>
+
+		</aui:field-wrapper>
+
+		<aui:input inlineLabel="left" name="enablePrint" type="checkbox" value="<%= enablePrint %>" />
+
+		<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
+
+		<c:if test="<%= PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED %>">
+			<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
+
+			<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
+		</c:if>
+	</aui:fieldset>
 
 	<aui:button-row>
 		<aui:button type="submit" />

@@ -79,7 +79,7 @@
 	<aui:input inlineLabel="left" label="exclude-assets-with-0-views" name="excludeZeroViewCount" type="checkbox" value="<%= excludeZeroViewCount %>" />
 </c:if>
 
-<aui:input inlineLabel="left" label="show-available-locales" name="showAvailableLocales" type="checkbox" value="<%= showAvailableLocales %>" />
+<aui:input inlineLabel="left" name="showAvailableLocales" type="checkbox" value="<%= showAvailableLocales %>" />
 
 <aui:field-wrapper helpMessage='<%= !openOfficeServerEnabled ? "enabling-openoffice-integration-provides-document-conversion-functionality" : StringPool.BLANK %>' label="convert-to">
 
