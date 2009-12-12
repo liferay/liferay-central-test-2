@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="portal-maven" default="deploy-artifacts">
+	<property name="project.dir" value="." />
+
+	<import file="build-common.xml" />
+
+	<taskdef classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpathref="lib.classpath" name="xmltask" />
+
+	<condition property="maven.extension" value=".bat" else="">
+		<contains string="${os.name}" substring="Windows" casesensitive="false" />
+	</condition>
+
+	<property name="maven.executable" value="mvn${maven.extension}" />
+
+	<target name="deploy-artifact">
+		<copy file="tools/maven/${artifact.id}.xml" tofile="tools/maven/${artifact.id}.pom">
+			<filterset>
+				<filter token="version" value="${maven.version}" />
+			</filterset>
+		</copy>
+
+		<exec dir="." executable="${maven.executable}">
+			<arg value="deploy:deploy-file" />
+			<arg value="-DartifactId=${artifact.id}" />
+			<arg value="-Dfile=${artifact.id}/${artifact.id}.${packaging}" />
+			<arg value="-DgroupId=com.liferay.portal" />
+			<arg value="-Dpackaging=${packaging}" />
+			<arg value="-DpomFile=tools/maven/${artifact.id}.pom" />
+			<arg value="-DrepositoryId=${maven.repository.id}" />
+			<arg value="-Durl=${maven.url}" />
+			<arg value="-Dversion=${maven.version}" />
+		</exec>
+
+		<delete file="tools/maven/${artifact.id}.pom" />
+	</target>
+
+	<target name="deploy-artifacts">
+		<antcall target="deploy-artifact">
+			<param name="artifact.id" value="portal-client" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="deploy-artifact">
+			<param name="artifact.id" value="portal-impl" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="deploy-artifact">
+			<param name="artifact.id" value="portal-kernel" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="deploy-artifact">
+			<param name="artifact.id" value="portal-service" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="deploy-artifact">
+			<param name="artifact.id" value="portal-web" />
+			<param name="packaging" value="war" />
+		</antcall>
+
+		<antcall target="deploy-artifact">
+			<param name="artifact.id" value="util-bridges" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="deploy-artifact">
+			<param name="artifact.id" value="util-java" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="deploy-artifact">
+			<param name="artifact.id" value="util-taglib" />
+			<param name="packaging" value="jar" />
+		</antcall>
+	</target>
+
+	<!--<target name="deploy-dependencies">
+		<xmltask source="lib/versions.xml">
+			<call buffer="maven" path="//library/maven" target="deploy-dependency">
+				<param name="artifactId" path="artifactId/text()" />
+				<param name="file" path="../file-name/text()" />
+				<param name="groupId" path="groupId/text()" />
+				<param name="pom" path="pom-file/text()" />
+				<param name="version" path="version/text()" />
+			</call>
+		</xmltask>
+	</target>
+
+	<target name="deploy-dependency">
+		<exec dir="." executable="${maven.executable}">
+			<arg value="deploy:deploy-file" />
+			<arg value="-DartifactId=${artifact.id}" />
+			<arg value="-Dfile=lib/${file}" />
+			<arg value="-DgeneratePom=true" />
+			<arg value="-DgroupId=${groupId}" />
+			<arg value="-Dpackaging=jar" />
+			<arg value="-DrepositoryId=${maven.repository.id}" />
+			<arg value="-Durl=${maven.url}" />
+			<arg value="-Dversion=${maven.version}" />
+		</exec>
+	</target>-->
+
+	<target name="install-artifact">
+		<copy file="tools/maven/${artifact.id}.xml" tofile="tools/maven/${artifact.id}.pom">
+			<filterset>
+				<filter token="version" value="${maven.version}" />
+			</filterset>
+		</copy>
+
+		<exec dir="." executable="${maven.executable}">
+			<arg value="install:install-file" />
+			<arg value="-DartifactId=${artifact.id}" />
+			<arg value="-Dfile=${artifact.id}/${artifact.id}.${packaging}" />
+			<arg value="-DgroupId=com.liferay.portal" />
+			<arg value="-Dpackaging=${packaging}" />
+			<arg value="-DpomFile=tools/maven/${artifact.id}.pom" />
+			<arg value="-Dversion=${maven.version}" />
+		</exec>
+
+		<delete file="tools/maven/${artifact.id}.pom" />
+	</target>
+
+	<target name="install-artifacts">
+		<antcall target="install-artifact">
+			<param name="artifact.id" value="portal-client" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="install-artifact">
+			<param name="artifact.id" value="portal-impl" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="install-artifact">
+			<param name="artifact.id" value="portal-kernel" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="install-artifact">
+			<param name="artifact.id" value="portal-service" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="install-artifact">
+			<param name="artifact.id" value="portal-web" />
+			<param name="packaging" value="war" />
+		</antcall>
+
+		<antcall target="install-artifact">
+			<param name="artifact.id" value="util-bridges" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="install-artifact">
+			<param name="artifact.id" value="util-java" />
+			<param name="packaging" value="jar" />
+		</antcall>
+
+		<antcall target="install-artifact">
+			<param name="artifact.id" value="util-taglib" />
+			<param name="packaging" value="jar" />
+		</antcall>
+	</target>
+
+	<!--<target name="install-dependencies">
+		<xmltask source="lib/versions.xml">
+			<call buffer="maven" path="//library/maven" target="install-dependency">
+				<param name="artifactId" path="artifactId/text()" />
+				<param name="file" path="../file-name/text()" />
+				<param name="groupId" path="groupId/text()" />
+				<param name="pom" path="pom-file/text()" />
+				<param name="version" path="version/text()" />
+			</call>
+		</xmltask>
+	</target>
+
+	<target name="install-dependency">
+		<exec dir="." executable="${maven.executable}">
+			<arg value="install:install-file" />
+			<arg value="-DartifactId=${artifact.id}" />
+			<arg value="-Dfile=lib/${file}" />
+			<arg value="-DgeneratePom=true" />
+			<arg value="-DgroupId=${groupId}" />
+			<arg value="-Dpackaging=jar" />
+			<arg value="-Dversion=${maven.version}" />
+		</exec>
+	</target>-->
+</project>
