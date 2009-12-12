@@ -24,15 +24,11 @@ package com.liferay.portlet.admin;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.BaseControlPanelEntry;
 
-import java.util.LinkedHashMap;
-
 /**
- * <a href="CommunitiesControlPanelEntry.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="OmniadminControlPanelEntry.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
