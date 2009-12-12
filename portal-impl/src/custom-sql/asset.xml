@@ -141,8 +141,7 @@
 				AssetEntries_AssetCategories
 			INNER JOIN
 				AssetCategory ON
-				(AssetCategory.categoryId =
-				AssetEntries_AssetCategories.categoryId)
+					(AssetCategory.categoryId = AssetEntries_AssetCategories.categoryId)
 			WHERE
 				(AssetCategory.leftCategoryId BETWEEN ? AND ?)
 		]]>

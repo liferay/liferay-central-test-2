@@ -126,12 +126,12 @@ public class AssetEntryQuery {
 		return _allTagIds;
 	}
 
-	public long[] getAnyLeftAndRightCategoryIds() {
-		return _getLeftAndRightCategoryIds(_anyCategoryIds);
-	}
-
 	public long[] getAnyCategoryIds() {
 		return _anyCategoryIds;
+	}
+
+	public long[] getAnyLeftAndRightCategoryIds() {
+		return _getLeftAndRightCategoryIds(_anyCategoryIds);
 	}
 
 	public long[] getAnyTagIds() {
@@ -166,12 +166,12 @@ public class AssetEntryQuery {
 		return _notAllTagIds;
 	}
 
-	public long[] getNotAnyLeftAndRightCategoryIds() {
-		return _getLeftAndRightCategoryIds(_notAnyCategoryIds);
-	}
-
 	public long[] getNotAnyCategoryIds() {
 		return _notAnyCategoryIds;
+	}
+
+	public long[] getNotAnyLeftAndRightCategoryIds() {
+		return _getLeftAndRightCategoryIds(_notAnyCategoryIds);
 	}
 
 	public long[] getNotAnyTagIds() {
@@ -317,6 +317,8 @@ public class AssetEntryQuery {
 		return leftRightIds;
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(AssetEntryQuery.class);
+
 	private long[] _allCategoryIds = new long[0];
 	private long[] _allTagIds = new long[0];
 	private long[] _anyCategoryIds = new long[0];
@@ -337,7 +339,5 @@ public class AssetEntryQuery {
 	private Date _publishDate;
 	private int _start = QueryUtil.ALL_POS;
 	private Boolean _visible = Boolean.TRUE;
-
-	private static Log _log = LogFactoryUtil.getLog(AssetEntryQuery.class);
 
 }
