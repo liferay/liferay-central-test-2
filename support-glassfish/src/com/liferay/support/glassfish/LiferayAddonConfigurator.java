@@ -63,43 +63,52 @@ import java.util.Properties;
  */
 public class LiferayAddonConfigurator implements Configurator {
 
-	public void configure(ConfigurationContext cc) throws AddonException {
-		try {
-			doConfigure(cc);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-
-			throw new AddonException(e);
-		}
-	}
-
-	public void disable(ConfigurationContext cc) throws AddonException {
-	}
-
-	public void enable(ConfigurationContext cc) throws AddonException {
-	}
-
-	public void unconfigure(ConfigurationContext cc) throws AddonException {
-		try {
-			doUnconfigure(cc);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-
-			throw new AddonException(e);
-		}
-	}
-
-	public void upgrade(ConfigurationContext cc, AddonVersion av)
+	public void configure(ConfigurationContext configurationContext)
 		throws AddonException {
+
+		try {
+			doConfigure(configurationContext);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+
+			throw new AddonException(e);
+		}
 	}
 
-	protected void doConfigure(ConfigurationContext cc) throws Exception {
-		InstallationContext ic = cc.getInstallationContext();
+	public void disable(ConfigurationContext configurationContext) {
+	}
 
-		String rootDir = ic.getInstallationDirectory().getAbsolutePath();
-		String domainDir = cc.getDomainDirectory().getAbsolutePath();
+	public void enable(ConfigurationContext configurationContext) {
+	}
+
+	public void unconfigure(ConfigurationContext configurationContext)
+		throws AddonException {
+
+		try {
+			doUnconfigure(configurationContext);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+
+			throw new AddonException(e);
+		}
+	}
+
+	public void upgrade(
+		ConfigurationContext configurationContext, AddonVersion addonVersion) {
+	}
+
+	protected void doConfigure(ConfigurationContext configurationContext)
+		throws Exception {
+
+		InstallationContext installationContext =
+			configurationContext.getInstallationContext();
+
+		String rootDir =
+			installationContext.getInstallationDirectory().getAbsolutePath();
+		String domainDir =
+			configurationContext.getDomainDirectory().getAbsolutePath();
 
 		File tmpDir = LiferayAddonUtil.getTmpDir();
 
@@ -124,7 +133,7 @@ public class LiferayAddonConfigurator implements Configurator {
 		File[] files = tmpDir.listFiles();
 
 		for (int i = 0; i < files.length; i++) {
-			File file = (File)files[i];
+			File file = files[i];
 
 			String name = file.getName().toLowerCase();
 
@@ -159,8 +168,11 @@ public class LiferayAddonConfigurator implements Configurator {
 		fos.close();
 	}
 
-	protected void doUnconfigure(ConfigurationContext cc) throws Exception {
-		String domainDir = cc.getDomainDirectory().getAbsolutePath();
+	protected void doUnconfigure(ConfigurationContext configurationContext)
+		throws Exception {
+
+		String domainDir =
+			configurationContext.getDomainDirectory().getAbsolutePath();
 
 		Properties props = new Properties();
 
@@ -194,7 +206,7 @@ public class LiferayAddonConfigurator implements Configurator {
 
 		propsFile.delete();
 
-		ConfigurationType ct = cc.getConfigurationType();
+		ConfigurationType ct = configurationContext.getConfigurationType();
 
 		if (ct == ConfigurationType.DAS) {
 		}

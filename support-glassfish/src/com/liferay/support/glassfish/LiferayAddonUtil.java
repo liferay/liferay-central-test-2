@@ -60,12 +60,6 @@ import java.util.Date;
  */
 public class LiferayAddonUtil {
 
-	public static void copyFile(String sourceFile, String destFile)
-		throws IOException {
-
-		copyFile(new File(sourceFile), new File(destFile));
-	}
-
 	public static void copyFile(File sourceFile, File destFile)
 		throws IOException {
 
@@ -100,6 +94,12 @@ public class LiferayAddonUtil {
 			is.close();
 			os.close();
 		}
+	}
+
+	public static void copyFile(String sourceFile, String destFile)
+		throws IOException {
+
+		copyFile(new File(sourceFile), new File(destFile));
 	}
 
 	public static String getTimestamp() {
