@@ -1124,8 +1124,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread thread = mbThreadPersistence.findByPrimaryKey(
 			message.getThreadId());
 
-		mbThreadLocalService.updateThread(
-			thread.getThreadId(), thread.getViewCount() + 1);
+		if (!message.isDiscussion()) {
+			mbThreadLocalService.updateThread(
+				thread.getThreadId(), thread.getViewCount() + 1);
+		}
 
 		ThreadLastPostDateComparator comparator =
 			new ThreadLastPostDateComparator(false);
