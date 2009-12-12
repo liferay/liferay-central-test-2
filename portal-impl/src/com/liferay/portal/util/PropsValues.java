@@ -93,6 +93,10 @@ public class PropsValues {
 	public static final String[] ASSET_CATEGORIES_PROPERTIES_DEFAULT =
 		PropsUtil.getArray(PropsKeys.ASSET_CATEGORIES_PROPERTIES_DEFAULT);
 
+	public static final boolean ASSET_CATEGORIES_SEARCH_HIERARCHICAL =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.ASSET_CATEGORIES_SEARCH_HIERARCHICAL));
+
 	public static final String ASSET_ENTRY_VALIDATOR = PropsUtil.get(
 		PropsKeys.ASSET_ENTRY_VALIDATOR);
 

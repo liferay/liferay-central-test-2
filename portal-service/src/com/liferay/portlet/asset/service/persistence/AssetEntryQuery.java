@@ -26,11 +26,15 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 
 import java.util.Date;
@@ -114,8 +118,16 @@ public class AssetEntryQuery {
 		return _allCategoryIds;
 	}
 
+	public long[] getAllLeftAndRightCategoryIds() {
+		return _getLeftAndRightCategoryIds(_allCategoryIds);
+	}
+
 	public long[] getAllTagIds() {
 		return _allTagIds;
+	}
+
+	public long[] getAnyLeftAndRightCategoryIds() {
+		return _getLeftAndRightCategoryIds(_anyCategoryIds);
 	}
 
 	public long[] getAnyCategoryIds() {
@@ -146,8 +158,16 @@ public class AssetEntryQuery {
 		return _notAllCategoryIds;
 	}
 
+	public long[] getNotAllLeftAndRightCategoryIds() {
+		return _getLeftAndRightCategoryIds(_notAllCategoryIds);
+	}
+
 	public long[] getNotAllTagIds() {
 		return _notAllTagIds;
+	}
+
+	public long[] getNotAnyLeftAndRightCategoryIds() {
+		return _getLeftAndRightCategoryIds(_notAnyCategoryIds);
 	}
 
 	public long[] getNotAnyCategoryIds() {
@@ -276,6 +296,27 @@ public class AssetEntryQuery {
 		_visible = visible;
 	}
 
+	private long[] _getLeftAndRightCategoryIds(long[] categoryIds) {
+		long[] leftRightIds = new long[categoryIds.length * 2];
+
+		for (int i = 0; i < categoryIds.length; i++) {
+			long categoryId = categoryIds[i];
+
+			try {
+				AssetCategory category =
+					AssetCategoryLocalServiceUtil.getCategory(categoryId);
+
+				leftRightIds[2 * i] = category.getLeftCategoryId();
+				leftRightIds[2 * i + 1] = category.getRightCategoryId();
+			}
+			catch (Exception e) {
+				_log.warn("Error retrieving category " + categoryId);
+			}
+		}
+
+		return leftRightIds;
+	}
+
 	private long[] _allCategoryIds = new long[0];
 	private long[] _allTagIds = new long[0];
 	private long[] _anyCategoryIds = new long[0];
@@ -296,5 +337,7 @@ public class AssetEntryQuery {
 	private Date _publishDate;
 	private int _start = QueryUtil.ALL_POS;
 	private Boolean _visible = Boolean.TRUE;
+
+	private static Log _log = LogFactoryUtil.getLog(AssetEntryQuery.class);
 
 }

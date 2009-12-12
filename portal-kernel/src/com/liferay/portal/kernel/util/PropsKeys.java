@@ -89,6 +89,8 @@ public interface PropsKeys {
 
 	public static final String ASSET_CATEGORIES_PROPERTIES_DEFAULT = "asset.categories.properties.default";
 
+	public static final String ASSET_CATEGORIES_SEARCH_HIERARCHICAL = "asset.categories.search.hierarchical";
+
 	public static final String ASSET_ENTRY_VALIDATOR = "asset.entry.validator";
 
 	public static final String ASSET_PUBLISHER_DISPLAY_STYLES = "asset.publisher.display.styles";

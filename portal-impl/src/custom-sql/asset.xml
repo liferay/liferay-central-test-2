@@ -133,6 +133,20 @@
 				categoryId = ?
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetEntryFinder.findByAndCategoryIdsTree">
+		<![CDATA[
+			SELECT
+				DISTINCT AssetEntries_AssetCategories.entryId
+			FROM
+				AssetEntries_AssetCategories
+			INNER JOIN
+				AssetCategory ON
+				(AssetCategory.categoryId =
+				AssetEntries_AssetCategories.categoryId)
+			WHERE
+				(AssetCategory.leftCategoryId BETWEEN ? AND ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetEntryFinder.findByAndTagIds">
 		<![CDATA[
 			SELECT
