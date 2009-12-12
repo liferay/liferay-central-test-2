@@ -48,8 +48,11 @@ groupId = ParamUtil.getLong(request, "groupId", groupId);
 type = ParamUtil.getString(request, "type", type);
 %>
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
-<liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
+<style type="text/css">
+	.displaying-article-id.modified {
+		color: #4DCF0C;
+	}
+</style>
 
 <script type="text/javascript">
 	function <portlet:namespace />selectArticle(articleId) {
@@ -57,19 +60,16 @@ type = ParamUtil.getString(request, "type", type);
 		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 
 		AUI().one('.displaying-article-id-holder').show();
-		
+
 		var displayArticleId = AUI().one('.displaying-article-id');
 
-		displayArticleId.set('innerHTML', articleId + ' (<%= LanguageUtil.get(pageContext, "modified")%>)');
+		displayArticleId.set('innerHTML', articleId + ' (<%= LanguageUtil.get(pageContext, "modified") %>)');
 		displayArticleId.addClass('modified');
 	}
 </script>
 
-<style type="text/css">
-	.displaying-article-id.modified {
-		color: #4DCF0C;
-	}
-</style>
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+<liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm1">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
