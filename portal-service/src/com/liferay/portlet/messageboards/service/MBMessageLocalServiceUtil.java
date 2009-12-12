@@ -379,6 +379,11 @@ public class MBMessageLocalServiceUtil {
 		return getService().getNoAssetMessages();
 	}
 
+	public static int getPositionInThread(long messageId)
+		throws com.liferay.portal.SystemException {
+		return getService().getPositionInThread(messageId);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
 		long threadId, int status) throws com.liferay.portal.SystemException {
 		return getService().getThreadMessages(threadId, status);

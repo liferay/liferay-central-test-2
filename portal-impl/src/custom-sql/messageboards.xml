@@ -58,6 +58,32 @@
 				[$STATUS$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countPositionInThread">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				MBMessage
+			WHERE
+				createDate <= (
+					SELECT
+						createDate
+					FROM
+						MBMessage
+					WHERE
+						messageId = ?
+				)
+			AND
+				threadId = (
+					SELECT
+						threadId
+					FROM
+						MBMessage
+					WHERE
+						messageId = ?
+				)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByNoAssets">
 		<![CDATA[
 			SELECT

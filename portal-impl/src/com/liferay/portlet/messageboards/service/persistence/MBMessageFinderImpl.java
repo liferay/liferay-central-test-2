@@ -53,6 +53,9 @@ public class MBMessageFinderImpl
 	public static String COUNT_BY_G_U_A_S =
 		MBMessageFinder.class.getName() + ".countByG_U_A_S";
 
+	public static String COUNT_POSITION_IN_THREAD =
+		MBMessageFinder.class.getName() + ".countPositionInThread";
+
 	public static String FIND_BY_NO_ASSETS =
 		MBMessageFinder.class.getName() + ".findByNoAssets";
 
@@ -155,6 +158,45 @@ public class MBMessageFinderImpl
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countPositionInThread(long messageId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_POSITION_IN_THREAD);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.INTEGER);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(messageId);
+			qPos.add(messageId);
+
+			Iterator<Integer> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Integer position = itr.next();
+
+				if (position != null) {
+					return position.intValue();
+				}
+			}
+
+			return -1;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

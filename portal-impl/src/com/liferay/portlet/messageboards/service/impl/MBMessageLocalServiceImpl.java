@@ -1149,6 +1149,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessageFinder.findByNoAssets();
 	}
 
+	public int getPositionInThread(long messageId) throws SystemException {
+
+		return mbMessageFinder.countPositionInThread(messageId);
+	}
+
 	public List<MBMessage> getThreadMessages(long threadId, int status)
 		throws SystemException {
 

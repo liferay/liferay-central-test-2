@@ -41,6 +41,11 @@ public class MBMessageFinderUtil {
 		return getFinder().countByG_U_A_S(groupId, userId, anonymous, status);
 	}
 
+	public static int countPositionInThread(long messageId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countPositionInThread(messageId);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByNoAssets();

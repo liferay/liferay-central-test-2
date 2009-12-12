@@ -31,9 +31,14 @@ portletURL.setParameter("messageId", String.valueOf(message.getMessageId()));
 SearchContainer searchContainer = null;
 
 if (threadView.equals(MBThreadConstants.THREAD_VIEW_FLAT)) {
-	int delta = 10;
+	int delta = 20;
+	int position = 0;
 
-	searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
+	if (ParamUtil.getInteger(renderRequest, SearchContainer.DEFAULT_CUR_PARAM) < 1) {
+		position = MBMessageLocalServiceUtil.getPositionInThread(message.getMessageId());
+	}
+
+	searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null, position);
 
 	int total = MBMessageLocalServiceUtil.getThreadMessagesCount(message.getThreadId(), StatusConstants.APPROVED);
 
