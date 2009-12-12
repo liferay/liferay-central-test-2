@@ -5954,6 +5954,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationPersistence")
 	protected com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence")
+	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")

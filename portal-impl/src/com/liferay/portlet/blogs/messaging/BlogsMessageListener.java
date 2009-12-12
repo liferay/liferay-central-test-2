@@ -75,11 +75,11 @@ public class BlogsMessageListener implements MessageListener {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Sending notifications for {mailId=" + mailId +
-					", entryId=" + entryId + "}");
+				"Sending notifications for {mailId=" + mailId + ", entryId=" +
+					entryId + "}");
 		}
 
-		// Blogs
+		// Entries
 
 		List<Subscription> subscriptions =
 			SubscriptionLocalServiceUtil.getSubscriptions(

@@ -53,7 +53,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.util.Portal;
@@ -202,6 +201,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
 		}
 
+		// Subscriptions
+
+		notifySubscribers(entry, serviceContext, false);
+
 		// Indexer
 
 		reIndex(entry);
@@ -215,10 +218,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				pingTrackbacks(entry, trackbacks, false, serviceContext);
 			}
 		}
-
-		// Subscriptions
-
-		notifySubscribers(entry, serviceContext, false);
 
 		return entry;
 	}
@@ -706,13 +705,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		expandoBridge.setAttributes(serviceContext);
 
-		// Indexer
-
-		reIndex(entry);
-
 		// Subscriptions
 
 		notifySubscribers(entry, serviceContext, true);
+
+		// Indexer
+
+		reIndex(entry);
 
 		return entry;
 	}
@@ -848,7 +847,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			String portletId = PortletKeys.BLOGS;
 			String defaultPreferences = null;
 
-			preferences = PortletPreferencesLocalServiceUtil.getPreferences(
+			preferences = portletPreferencesLocalService.getPreferences(
 				entry.getCompanyId(), ownerId, ownerType, plid, portletId,
 				defaultPreferences);
 		}
@@ -927,8 +926,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				portletName
 			});
 
-		String url = layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs" +
-			StringPool.SLASH + entry.getEntryId();
+		String entryURL =
+			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs" +
+				StringPool.SLASH + entry.getEntryId();
 
 		String subject = null;
 		String body = null;
@@ -960,7 +960,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			new String[] {
 				emailAddress,
 				fullName,
-				url,
+				entryURL,
 				String.valueOf(company.getCompanyId()),
 				company.getMx(),
 				company.getName(),
@@ -989,7 +989,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			new String[] {
 				emailAddress,
 				fullName,
-				url,
+				entryURL,
 				String.valueOf(company.getCompanyId()),
 				company.getMx(),
 				company.getName(),
@@ -1000,22 +1000,22 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				portletName
 			});
 
-		Message messagingObj = new Message();
+		Message message = new Message();
 
-		messagingObj.put("companyId", entry.getCompanyId());
-		messagingObj.put("userId", entry.getUserId());
-		messagingObj.put("groupId", entry.getGroupId());
-		messagingObj.put("entryId", entry.getEntryId());
-		messagingObj.put("fromName", fromName);
-		messagingObj.put("fromAddress", fromAddress);
-		messagingObj.put("subject", subject);
-		messagingObj.put("body", body);
-		messagingObj.put("replyToAddress", fromAddress);
-		messagingObj.put(
+		message.put("companyId", entry.getCompanyId());
+		message.put("userId", entry.getUserId());
+		message.put("groupId", entry.getGroupId());
+		message.put("entryId", entry.getEntryId());
+		message.put("fromName", fromName);
+		message.put("fromAddress", fromAddress);
+		message.put("subject", subject);
+		message.put("body", body);
+		message.put("replyToAddress", fromAddress);
+		message.put(
 			"mailId", BlogsUtil.getMailId(company.getMx(), entry.getEntryId()));
-		messagingObj.put("htmlFormat", Boolean.TRUE);
+		message.put("htmlFormat", Boolean.TRUE);
 
-		MessageBusUtil.sendMessage(DestinationNames.BLOGS, messagingObj);
+		MessageBusUtil.sendMessage(DestinationNames.BLOGS, message);
 	}
 
 	protected void pingGoogle(BlogsEntry entry, ServiceContext serviceContext)

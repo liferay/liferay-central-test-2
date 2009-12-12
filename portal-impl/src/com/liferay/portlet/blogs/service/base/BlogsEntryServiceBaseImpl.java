@@ -35,6 +35,8 @@ import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.OrganizationLocalService;
 import com.liferay.portal.service.OrganizationService;
+import com.liferay.portal.service.PortletPreferencesLocalService;
+import com.liferay.portal.service.PortletPreferencesService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -45,6 +47,8 @@ import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.OrganizationFinder;
 import com.liferay.portal.service.persistence.OrganizationPersistence;
+import com.liferay.portal.service.persistence.PortletPreferencesFinder;
+import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
@@ -250,6 +254,42 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 
 	public void setOrganizationFinder(OrganizationFinder organizationFinder) {
 		this.organizationFinder = organizationFinder;
+	}
+
+	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
+		return portletPreferencesLocalService;
+	}
+
+	public void setPortletPreferencesLocalService(
+		PortletPreferencesLocalService portletPreferencesLocalService) {
+		this.portletPreferencesLocalService = portletPreferencesLocalService;
+	}
+
+	public PortletPreferencesService getPortletPreferencesService() {
+		return portletPreferencesService;
+	}
+
+	public void setPortletPreferencesService(
+		PortletPreferencesService portletPreferencesService) {
+		this.portletPreferencesService = portletPreferencesService;
+	}
+
+	public PortletPreferencesPersistence getPortletPreferencesPersistence() {
+		return portletPreferencesPersistence;
+	}
+
+	public void setPortletPreferencesPersistence(
+		PortletPreferencesPersistence portletPreferencesPersistence) {
+		this.portletPreferencesPersistence = portletPreferencesPersistence;
+	}
+
+	public PortletPreferencesFinder getPortletPreferencesFinder() {
+		return portletPreferencesFinder;
+	}
+
+	public void setPortletPreferencesFinder(
+		PortletPreferencesFinder portletPreferencesFinder) {
+		this.portletPreferencesFinder = portletPreferencesFinder;
 	}
 
 	public ResourceLocalService getResourceLocalService() {
@@ -540,6 +580,14 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	protected OrganizationPersistence organizationPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationFinder")
 	protected OrganizationFinder organizationFinder;
+	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesLocalService")
+	protected PortletPreferencesLocalService portletPreferencesLocalService;
+	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesService")
+	protected PortletPreferencesService portletPreferencesService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence")
+	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesFinder")
+	protected PortletPreferencesFinder portletPreferencesFinder;
 	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(name = "com.liferay.portal.service.ResourceService")
