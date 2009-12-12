@@ -66,7 +66,7 @@ else {
 	String className = "portlet-msg-info";
 
 	if (denyAccess) {
-		description = LanguageUtil.get(pageContext, "you-do-not-have-enough-permissions-to-access-this-application");
+		description = LanguageUtil.get(pageContext, "you-do-not-have-the-required-permissions-to-access-this-application");
 
 		className = "portlet-msg-error";
 	}
