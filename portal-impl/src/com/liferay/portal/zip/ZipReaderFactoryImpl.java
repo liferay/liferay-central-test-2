@@ -22,6 +22,7 @@
 
 package com.liferay.portal.zip;
 
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactory;
 
@@ -37,11 +38,45 @@ import java.io.InputStream;
 public class ZipReaderFactoryImpl implements ZipReaderFactory {
 
 	public ZipReader getZipReader(File file) {
-		return new ZipReaderImpl(file);
+		ZipReader zipReader = null;
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(portalClassLoader);
+
+			zipReader = new ZipReaderImpl(file);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+
+		return zipReader;
 	}
 
 	public ZipReader getZipReader(InputStream inputStream) throws IOException {
-		return new ZipReaderImpl(inputStream);
+		ZipReader zipReader = null;
+
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(portalClassLoader);
+
+			zipReader = new ZipReaderImpl(inputStream);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+
+		return zipReader;
 	}
 
 }
