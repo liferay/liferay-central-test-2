@@ -1149,9 +1149,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessageFinder.findByNoAssets();
 	}
 
-	public int getPositionInThread(long messageId) throws SystemException {
+	public int getPositionInThread(long messageId)
+		throws PortalException, SystemException {
 
-		return mbMessageFinder.countPositionInThread(messageId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		return mbMessageFinder.countByC_T(
+			message.getCreateDate(), message.getThreadId());
 	}
 
 	public List<MBMessage> getThreadMessages(long threadId, int status)

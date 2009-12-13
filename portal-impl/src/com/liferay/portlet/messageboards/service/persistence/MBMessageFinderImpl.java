@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.StatusConstants;
@@ -36,6 +37,9 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.sql.Timestamp;
+
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,14 +51,14 @@ import java.util.List;
 public class MBMessageFinderImpl
 	extends BasePersistenceImpl<MBMessage> implements MBMessageFinder {
 
+	public static String COUNT_BY_C_T =
+		MBMessageFinder.class.getName() + ".countByC_T";
+
 	public static String COUNT_BY_G_U_S =
 		MBMessageFinder.class.getName() + ".countByG_U_S";
 
 	public static String COUNT_BY_G_U_A_S =
 		MBMessageFinder.class.getName() + ".countByG_U_A_S";
-
-	public static String COUNT_POSITION_IN_THREAD =
-		MBMessageFinder.class.getName() + ".countPositionInThread";
 
 	public static String FIND_BY_NO_ASSETS =
 		MBMessageFinder.class.getName() + ".findByNoAssets";
@@ -64,6 +68,47 @@ public class MBMessageFinderImpl
 
 	public static String FIND_BY_G_U_A_S =
 		MBMessageFinder.class.getName() + ".findByG_U_A_S";
+
+	public int countByC_T(Date createDate, long threadId)
+		throws SystemException {
+
+		Timestamp createDate_TS = CalendarUtil.getTimestamp(createDate);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_C_T);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.INTEGER);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(createDate_TS);
+			qPos.add(threadId);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
 
 	public int countByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
@@ -158,45 +203,6 @@ public class MBMessageFinderImpl
 			}
 
 			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countPositionInThread(long messageId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_POSITION_IN_THREAD);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.INTEGER);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(messageId);
-			qPos.add(messageId);
-
-			Iterator<Integer> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Integer position = itr.next();
-
-				if (position != null) {
-					return position.intValue();
-				}
-			}
-
-			return -1;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

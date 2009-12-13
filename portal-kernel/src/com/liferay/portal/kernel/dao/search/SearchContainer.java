@@ -83,16 +83,16 @@ public class SearchContainer<R> {
 		PortletURL iteratorURL, List<String> headerNames,
 		String emptyResultsMessage) {
 
-		this(
-			portletRequest, null, null, DEFAULT_CUR_PARAM, DEFAULT_DELTA,
-			iteratorURL, headerNames, emptyResultsMessage, 0);
+		this (
+			portletRequest, displayTerms, searchTerms, curParam, 0, delta,
+			iteratorURL, headerNames, emptyResultsMessage);
 	}
 
 	public SearchContainer(
 		PortletRequest portletRequest, DisplayTerms displayTerms,
-		DisplayTerms searchTerms, String curParam, int delta,
+		DisplayTerms searchTerms, String curParam, int cur, int delta,
 		PortletURL iteratorURL, List<String> headerNames,
-		String emptyResultsMessage, int position) {
+		String emptyResultsMessage) {
 
 		_portletRequest = portletRequest;
 		_displayTerms = displayTerms;
@@ -100,20 +100,18 @@ public class SearchContainer<R> {
 
 		_curParam = curParam;
 
-		delta = ParamUtil.getInteger(portletRequest, _deltaParam, delta);
+		if (cur < 1) {
+			_cur = ParamUtil.getInteger(portletRequest, _curParam, DEFAULT_CUR);
 
-		_cur = ParamUtil.getInteger(portletRequest, _curParam);
-
-		if (_cur < 1) {
-			if (position > delta) {
-				_cur = (int) Math.ceil(((double) position) / delta);
-			}
-			else {
+			if (_cur < 1) {
 				_cur = DEFAULT_CUR;
 			}
 		}
+		else {
+			_cur = cur;
+		}
 
-		setDelta(delta);
+		setDelta(ParamUtil.getInteger(portletRequest, _deltaParam, delta));
 
 		_iteratorURL = iteratorURL;
 

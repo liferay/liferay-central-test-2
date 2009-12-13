@@ -33,6 +33,17 @@
 				MBCategory.lastPostDate DESC
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByC_T">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				MBMessage
+			WHERE
+				(createDate <= ?) AND
+				(threadId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByG_U_S">
 		<![CDATA[
 			SELECT
@@ -56,32 +67,6 @@
 				(userId = ?) AND
 				(anonymous = ?) 
 				[$STATUS$]
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countPositionInThread">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				MBMessage
-			WHERE
-				createDate <= (
-					SELECT
-						createDate
-					FROM
-						MBMessage
-					WHERE
-						messageId = ?
-				)
-			AND
-				threadId = (
-					SELECT
-						threadId
-					FROM
-						MBMessage
-					WHERE
-						messageId = ?
-				)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByNoAssets">

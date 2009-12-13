@@ -380,7 +380,8 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static int getPositionInThread(long messageId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().getPositionInThread(messageId);
 	}
 

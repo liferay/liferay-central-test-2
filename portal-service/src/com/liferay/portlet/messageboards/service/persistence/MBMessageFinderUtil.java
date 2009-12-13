@@ -30,6 +30,11 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class MBMessageFinderUtil {
+	public static int countByC_T(java.util.Date createDate, long threadId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByC_T(createDate, threadId);
+	}
+
 	public static int countByG_U_S(long groupId, long userId, int status)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByG_U_S(groupId, userId, status);
@@ -39,11 +44,6 @@ public class MBMessageFinderUtil {
 		boolean anonymous, int status)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByG_U_A_S(groupId, userId, anonymous, status);
-	}
-
-	public static int countPositionInThread(long messageId)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countPositionInThread(messageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
