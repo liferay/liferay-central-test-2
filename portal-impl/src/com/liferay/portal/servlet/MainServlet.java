@@ -84,6 +84,7 @@ import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.ExtRegistry;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
@@ -555,6 +556,15 @@ public class MainServlet extends ActionServlet {
 				servletContext.getResource("/WEB-INF/web.xml"));
 
 			checkWebSettings(xml);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Extension environment
+
+		try {
+			ExtRegistry.registerPortal(servletContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

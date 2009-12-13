@@ -57,7 +57,7 @@ public class HookAutoDeployListener extends BaseAutoDeployListener {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Web plugin for " +  file.getPath() + " copied successfully. " +
+				"Hook for " +  file.getPath() + " copied successfully. " +
 					"Deployment will start in a few seconds.");
 		}
 	}

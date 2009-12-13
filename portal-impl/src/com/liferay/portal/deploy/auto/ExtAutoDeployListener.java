@@ -57,8 +57,9 @@ public class ExtAutoDeployListener extends BaseAutoDeployListener {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Web plugin for " +  file.getPath() + " copied successfully. " +
-					"Deployment will start in a few seconds.");
+				"Extension environment for " +  file.getPath() +
+					" copied successfully. Deployment will start in a few " +
+						"seconds.");
 		}
 	}
 

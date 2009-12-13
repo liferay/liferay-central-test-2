@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.tools.WebXMLBuilder;
+import com.liferay.portal.util.ExtRegistry;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -65,6 +66,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -134,22 +136,30 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void addOptionalJar(List<String> jars, String resource)
+	protected void addExtJar(List<String> jars, String resource)
 		throws Exception {
 
-		String path = DeployUtil.getResourcePath(resource);
+		Set<String> servletContextNames = ExtRegistry.getServletContextNames();
 
-		if (_log.isDebugEnabled()) {
-			if (path == null) {
-				_log.debug("Resource " + resource + " is not available");
-			}
-			else {
-				_log.debug("Resource " + resource + " is available at " + path);
-			}
-		}
+		for (String servletContextName : servletContextNames) {
+			String extResource =
+				"ext-" + servletContextName + resource.substring(3);
 
-		if (path != null) {
-			jars.add(path);
+			String path = DeployUtil.getResourcePath(extResource);
+
+			if (_log.isDebugEnabled()) {
+				if (path == null) {
+					_log.debug("Resource " + extResource + " is not available");
+				}
+				else {
+					_log.debug(
+						"Resource " + extResource + " is available at " + path);
+				}
+			}
+
+			if (path != null) {
+				jars.add(path);
+			}
 		}
 	}
 

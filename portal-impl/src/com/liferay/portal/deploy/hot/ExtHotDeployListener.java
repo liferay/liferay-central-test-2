@@ -29,10 +29,12 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.WebDirDetector;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.tools.WebXMLBuilder;
+import com.liferay.portal.util.ExtRegistry;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.ant.CopyTask;
@@ -40,6 +42,10 @@ import com.liferay.util.ant.CopyTask;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 
@@ -74,6 +80,8 @@ public class ExtHotDeployListener extends BaseHotDeployListener {
 			ServletContext servletContext, String dir, String jarName)
 		throws Exception {
 
+		String servletContextName = servletContext.getServletContextName();
+
 		String jarFullName = "/WEB-INF/" + jarName + "/" + jarName + ".jar";
 
 		InputStream is = servletContext.getResourceAsStream(jarFullName);
@@ -82,8 +90,10 @@ public class ExtHotDeployListener extends BaseHotDeployListener {
 			throw new HotDeployException(jarFullName + " does not exist");
 		}
 
-		StreamUtil.transfer(
-			is, new FileOutputStream(new File(dir + jarName + ".jar")));
+		String newJarFullName =
+			dir + "ext-" + servletContextName + jarName.substring(3) + ".jar";
+
+		StreamUtil.transfer(is, new FileOutputStream(new File(newJarFullName)));
 	}
 
 	protected void installExt(
@@ -97,27 +107,122 @@ public class ExtHotDeployListener extends BaseHotDeployListener {
 		String portalLibDir = PortalUtil.getPortalLibDir();
 		String pluginWebDir = WebDirDetector.getRootDir(portletClassLoader);
 
-		if (FileUtil.exists(portalWebDir + _EXT_DEPLOYMENT)) {
-			String extServletContextName = FileUtil.read(
-				portalWebDir + _EXT_DEPLOYMENT);
-
-			if (!extServletContextName.equals(servletContextName)) {
-				throw new HotDeployException(
-					"Not installing extension environment " +
-						servletContextName + " because " +
-							extServletContextName + " is already installed");
-			}
-		}
-
 		copyJar(servletContext, globalLibDir, "ext-service");
 		copyJar(servletContext, portalLibDir, "ext-impl");
 		copyJar(servletContext, portalLibDir, "ext-util-bridges");
 		copyJar(servletContext, portalLibDir, "ext-util-java");
 		copyJar(servletContext, portalLibDir, "ext-util-taglib");
 
+		mergeWebXml(portalWebDir, pluginWebDir);
+
 		CopyTask.copyDirectory(
 			pluginWebDir + "WEB-INF/ext-web/docroot", portalWebDir,
 			StringPool.BLANK, "**/WEB-INF/web.xml", true, false);
+
+		FileUtil.copyFile(
+			pluginWebDir + "WEB-INF/ext-" + servletContextName + ".xml",
+			portalWebDir + "WEB-INF/ext-" + servletContextName + ".xml");
+
+		ExtRegistry.registerExt(servletContext);
+	}
+
+	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
+		ServletContext servletContext = event.getServletContext();
+
+		String servletContextName = servletContext.getServletContextName();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + servletContextName);
+		}
+
+		String xml = HttpUtil.URLtoString(servletContext.getResource(
+			"/WEB-INF/ext-" + servletContextName + ".xml"));
+
+		if (xml == null) {
+			return;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Registering extension environment for " + servletContextName);
+		}
+
+		if (ExtRegistry.isRegistered(servletContextName)) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Extension environment for " + servletContextName +
+						" has been applied.");
+			}
+
+			return;
+		}
+
+		Map<String, Set<String>> conflicts = ExtRegistry.getConflicts(
+			servletContext);
+
+		if (!conflicts.isEmpty()) {
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(
+				"Extension environment for " + servletContextName +
+					" cannot be applied because of detected conflicts:");
+
+			Iterator<Map.Entry<String, Set<String>>> itr =
+				conflicts.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry<String, Set<String>> entry = itr.next();
+
+				String conflictServletContextName = entry.getKey();
+				Set<String> conflictFiles = entry.getValue();
+
+				sb.append("\n\t");
+				sb.append(conflictServletContextName);
+				sb.append(":");
+
+				for (String conflictFile : conflictFiles) {
+					sb.append("\n\t\t");
+					sb.append(conflictFile);
+				}
+			}
+
+			_log.error(sb.toString());
+
+			return;
+		}
+
+		installExt(servletContext, event.getContextClassLoader());
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Extension environment for " + servletContextName +
+					" has been applied. You must reboot the server and " +
+						"redeploy all other plugins.");
+		}
+	}
+
+	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
+		ServletContext servletContext = event.getServletContext();
+
+		String servletContextName = servletContext.getServletContextName();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking undeploy for " + servletContextName);
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Extension environment for " +
+					servletContextName + " will not be undeployed");
+		}
+	}
+
+	protected void mergeWebXml(String portalWebDir, String pluginWebDir) {
+		if (!FileUtil.exists(
+				pluginWebDir + "WEB-INF/ext-web/docroot/WEB-INF/web.xml")) {
+
+			return;
+		}
 
 		String tmpDir =
 			SystemProperties.get(SystemProperties.TMP_DIR) + StringPool.SLASH +
@@ -139,66 +244,7 @@ public class ExtHotDeployListener extends BaseHotDeployListener {
 			tmpWebXml, new File(portalWebDir + "WEB-INF"), true, true);
 
 		FileUtil.deltree(tmpDir);
-
-		FileUtil.write(portalWebDir + _EXT_DEPLOYMENT, servletContextName);
-		FileUtil.write(pluginWebDir + _EXT_DEPLOYMENT, Time.getTimestamp());
 	}
-
-	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
-		ServletContext servletContext = event.getServletContext();
-
-		String servletContextName = servletContext.getServletContextName();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invoking deploy for " + servletContextName);
-		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Registering extension environment for " + servletContextName);
-		}
-
-		InputStream is = servletContext.getResourceAsStream(_EXT_DEPLOYMENT);
-
-		if (is != null) {
-			is.close();
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Extension environment for " + servletContextName +
-						" has been applied. No reboot or redeploy of plugins " +
-							"is required.");
-			}
-		}
-		else {
-			installExt(servletContext, event.getContextClassLoader());
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Extension environment for " + servletContextName +
-						" has been applied. You must reboot the server and " +
-							"redeploy all other plugins.");
-			}
-		}
-	}
-
-	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
-		ServletContext servletContext = event.getServletContext();
-
-		String servletContextName = servletContext.getServletContextName();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Invoking undeploy for " + servletContextName);
-		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Extension environment for " +
-					servletContextName + " will not be undeployed");
-		}
-	}
-
-	private static final String _EXT_DEPLOYMENT = "WEB-INF/ext-deployment";
 
 	private static Log _log = LogFactoryUtil.getLog(ExtHotDeployListener.class);
 
