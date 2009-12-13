@@ -90,10 +90,10 @@ public class MBMessageFinderImpl
 			qPos.add(createDate_TS);
 			qPos.add(threadId);
 
-			Iterator<Long> itr = q.list().iterator();
+			Iterator<Integer> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = itr.next();
+				Integer count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
