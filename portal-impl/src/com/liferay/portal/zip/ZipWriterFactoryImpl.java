@@ -22,7 +22,6 @@
 
 package com.liferay.portal.zip;
 
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.kernel.zip.ZipWriterFactory;
 
@@ -36,45 +35,11 @@ import java.io.File;
 public class ZipWriterFactoryImpl implements ZipWriterFactory {
 
 	public ZipWriter getZipWriter() {
-		ZipWriter zipWriter = null;
-
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(portalClassLoader);
-
-			zipWriter = new ZipWriterImpl();
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
-
-		return zipWriter;
+		return new ZipWriterImpl();
 	}
 
 	public ZipWriter getZipWriter(File file) {
-		ZipWriter zipWriter = null;
-
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(portalClassLoader);
-
-			zipWriter = new ZipWriterImpl(file);
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
-
-		return zipWriter;
+		return new ZipWriterImpl(file);
 	}
 
 }
