@@ -327,7 +327,7 @@ Liferay.Util = {
 	disableFormButtons: function(inputs, form) {
 		var instance = this;
 
-		instance._submitLocked = A.later(
+		instance._submitLocked = AUI().later(
 			10000,
 			instance,
 			instance.enableFormButtons,
