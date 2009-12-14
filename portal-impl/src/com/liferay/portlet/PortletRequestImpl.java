@@ -417,6 +417,14 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		}
 	}
 
+	public boolean isInvalidParameter(String name) {
+		return Validator.isNull(name) ||
+			name.startsWith(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) ||
+			name.startsWith(
+				PortletQName.REMOVE_PUBLIC_RENDER_PARAMETER_NAMESPACE) ||
+			PortalUtil.isReservedParameter(name);
+	}
+
 	public boolean isPrivateRequestAttributes() {
 		return _portlet.isPrivateRequestAttributes();
 	}
@@ -577,15 +585,15 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
 
-				if (Validator.isNull(name) ||
-					PortalUtil.isReservedParameter(name)) {
-
+				if (isInvalidParameter(name)) {
 					continue;
 				}
 
-				String[] values = getParameterValues(
-					request, themeDisplay, portletFocus, renderParameters,
-					name);
+				String[] values = request.getParameterValues(name);
+
+				if (themeDisplay.isLifecycleRender()) {
+					renderParameters.put(name, values);
+				}
 
 				if (values == null) {
 					continue;
@@ -660,43 +668,6 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 		_locale = themeDisplay.getLocale();
 		_plid = plid;
-	}
-
-	protected String[] getParameterValues(
-		HttpServletRequest request, ThemeDisplay themeDisplay,
-		boolean portletFocus, Map<String, String[]> renderParameters,
-		String name) {
-
-		String[] values = request.getParameterValues(name);
-
-		QName qName = PortletQNameUtil.getQName(name);
-
-		if (qName != null) {
-			PublicRenderParameter publicRenderParameter =
-				_portlet.getPublicRenderParameter(
-					qName.getNamespaceURI(), qName.getLocalPart());
-
-			if (publicRenderParameter != null) {
-				if (name.startsWith(
-						PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
-
-					_publicRenderParameters.put(
-						PortletQNameUtil.getKey(qName), values);
-				}
-				else {
-					_publicRenderParameters.remove(
-						PortletQNameUtil.getKey(qName));
-				}
-			}
-
-			return null;
-		}
-
-		if (themeDisplay.isLifecycleRender()) {
-			renderParameters.put(name, values);
-		}
-
-		return values;
 	}
 
 	protected void mergePublicRenderParameters(

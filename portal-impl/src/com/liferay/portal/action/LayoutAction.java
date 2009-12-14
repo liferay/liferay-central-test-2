@@ -46,6 +46,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
+import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -74,8 +75,11 @@ import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.PortletQName;
+import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PublicRenderParametersPool;
 import com.liferay.portlet.RenderParametersPool;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
@@ -91,6 +95,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -663,6 +668,8 @@ public class LayoutAction extends Action {
 			PortletPreferencesLocalServiceUtil.getPreferences(
 				portletPreferencesIds);
 
+		processPublicRenderParameters(request, layout, portlet);
+
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 			String contentType = request.getHeader(HttpHeaders.CONTENT_TYPE);
 
@@ -790,6 +797,42 @@ public class LayoutAction extends Action {
 		}
 
 		return portlet;
+	}
+
+	protected void processPublicRenderParameters(
+		HttpServletRequest request, Layout layout, Portlet portlet) {
+
+		Map<String, String[]> publicRenderParameters =
+			PublicRenderParametersPool.get(request, layout.getPlid());
+
+		Enumeration<String> enu = request.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			String[] values = request.getParameterValues(name);
+
+			QName qName = PortletQNameUtil.getQName(name);
+
+			if (qName != null) {
+				PublicRenderParameter publicRenderParameter =
+					portlet.getPublicRenderParameter(
+						qName.getNamespaceURI(), qName.getLocalPart());
+
+				if (publicRenderParameter != null) {
+					if (name.startsWith(
+							PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+
+						publicRenderParameters.put(
+							PortletQNameUtil.getKey(qName), values);
+					}
+					else {
+						publicRenderParameters.remove(
+							PortletQNameUtil.getKey(qName));
+					}
+				}
+			}
+		}
 	}
 
 	protected void redirectActionURL(
