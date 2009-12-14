@@ -3448,7 +3448,7 @@ public class PortalImpl implements Portal {
 
 			_log.info(
 				"Current URL " + currentURL + " generates exception: " +
-					e.getMessage();
+					e.getMessage());
 		}
 
 		if (_log.isWarnEnabled()) {
