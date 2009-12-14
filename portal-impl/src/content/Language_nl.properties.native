@@ -1279,6 +1279,7 @@ delete-document=Document verwijderen
 delete-entry=Invoer verwijderen
 delete-folder=Map verwijderen
 delete-image=Afbeelding verwijderen
+delete-live-page=Schrap levende pagina. (Automatic Translation)
 delete-missing-layouts-help=Als deze optie wordt gekozen, zullen alle pagina's in deze gemeenschap die niet in het invoer LAR bestand zitten worden verwijderd.
 delete-missing-layouts=Ontbrekende pagina's verwijderen
 delete-page=Pagina verwijderen

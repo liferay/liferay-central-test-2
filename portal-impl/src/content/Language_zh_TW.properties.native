@@ -1279,6 +1279,7 @@ delete-document=刪除文件
 delete-entry=刪除項目
 delete-folder=刪除文件夾
 delete-image=刪除圖像
+delete-live-page=刪除活頁。 (Automatic Translation)
 delete-missing-layouts-help=如果這個選擇被選擇，不是存在進口家神文件在這個社區的所有頁將被刪除。
 delete-missing-layouts=刪除缺掉頁
 delete-page=刪除頁

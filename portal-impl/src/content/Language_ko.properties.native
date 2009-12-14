@@ -1279,6 +1279,7 @@ delete-document=감소 문서
 delete-entry=감소 입장
 delete-folder=감소 폴더
 delete-image=감소 심상
+delete-live-page=감소 살아있는 페이지. (Automatic Translation)
 delete-missing-layouts-help=이 선택권이 선택되는 경우에, 수입품 LAR 파일에서 출석하 이 지역 사회에 있는 모든 페이지는 삭제될 것이다.
 delete-missing-layouts=감소 없는 페이지
 delete-page=감소 페이지

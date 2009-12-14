@@ -1279,6 +1279,7 @@ delete-document=Dokument l√∂schen
 delete-entry=Eintrag l√∂schen
 delete-folder=Ordner l√∂schen
 delete-image=Bild l√∂schen
+delete-live-page=Löschungphasenseite. (Automatic Translation)
 delete-missing-layouts-help=Wenn diese Option ausgew√§hlt wird, werden alle Seiten in dieser Community, die nicht in der Import LAR-Datei verf√ºgbar sind, gel√∂scht.
 delete-missing-layouts=L√∂schung-fehlende Seiten
 delete-page=Seite l√∂schen

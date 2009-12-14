@@ -1279,6 +1279,7 @@ delete-document=删除文档
 delete-entry=删除条目
 delete-folder=删除文件夹
 delete-image=删除图片
+delete-live-page=删除活页。 (Automatic Translation)
 delete-missing-layouts-help=如果选择了此选项，将删除该社区中未出现在导入 LAR 文件中的所有页面。
 delete-missing-layouts=删除缺少的页面
 delete-page=删除页面

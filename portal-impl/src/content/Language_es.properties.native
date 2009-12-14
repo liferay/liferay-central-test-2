@@ -1278,6 +1278,7 @@ delete-document=Eliminar documento
 delete-entry=Eliminar registro
 delete-folder=Eliminar carpeta
 delete-image=Eliminar imagen
+delete-live-page=Página viva de la cancelación. (Automatic Translation)
 delete-missing-layouts-help=Si se elige esta opción, todas las páginas en esta comunidad que no están presentes en el archivo del LAR de la importación serán suprimidas.
 delete-missing-layouts=Eliminar las páginas no presentes en el archivo importado.
 delete-page=Eliminar página

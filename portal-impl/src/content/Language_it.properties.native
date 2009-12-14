@@ -1278,6 +1278,7 @@ delete-document=Elimina Documento
 delete-entry=Elimina Elemento
 delete-folder=Elimina Cartella
 delete-image=Elimina Immagine
+delete-live-page=Pagina in tensione di cancellazione. (Automatic Translation)
 delete-missing-layouts-help=Se l'opzione è selezionata, tutti i layout in questa comunità che non sono presenti nel file LAR di importazione saranno eliminate.
 delete-missing-layouts=Elimina i layout mancanti
 delete-page=Elimina Pagina

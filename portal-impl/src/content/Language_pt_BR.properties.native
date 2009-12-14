@@ -1279,6 +1279,7 @@ delete-document=Apagar Documento
 delete-entry=Apagar Entrada
 delete-folder=Apagar Pasta
 delete-image=Apagar Imagem
+delete-live-page=Página viva da supressão. (Automatic Translation)
 delete-missing-layouts-help=Se esta opção estiver selecionada, todas as páginas desta comunidade que não estiverem presentes no arquivo de importação LAR serão apagadas. 
 delete-missing-layouts=Apagar Páginas Desaparecidas
 delete-page=Apagar Página

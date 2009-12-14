@@ -1279,6 +1279,7 @@ delete-document=Διαγραφή Εγγράφου
 delete-entry=Διαγραφή Καταχώρησης
 delete-folder=Διαγραφή Φακέλου
 delete-image=Διαγραφή Εικόνας
+delete-live-page=Διαγράψτε τη ζωντανή σελίδα. (Automatic Translation)
 delete-missing-layouts-help=Εάν αυτή η επιλογή επιλέγεται, όλες οι σελίδες σε αυτήν την κοινότητα που δεν είναι παρούσες στο αρχείο ΕΦΕΣΤΙΩΝ ΘΕΏΝ εισαγωγών θα διαγραφούν.
 delete-missing-layouts=Διαγράψτε τις ελλείπουσες σελίδες
 delete-page=Διαγράψτε τη σελίδα
