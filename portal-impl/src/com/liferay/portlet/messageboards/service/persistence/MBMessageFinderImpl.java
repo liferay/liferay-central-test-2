@@ -83,17 +83,17 @@ public class MBMessageFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(COUNT_COLUMN_NAME, Type.INTEGER);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(createDate_TS);
 			qPos.add(threadId);
 
-			Iterator<Integer> itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
