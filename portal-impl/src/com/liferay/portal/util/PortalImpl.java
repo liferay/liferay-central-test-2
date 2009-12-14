@@ -66,6 +66,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -3448,7 +3449,8 @@ public class PortalImpl implements Portal {
 
 			_log.warn(
 				"Current URL " + currentURL + " generates exception: " +
-					e.getMessage());
+					e.getMessage() + "\n Stacktrace: " +
+					StackTraceUtil.getStackTrace(e));
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(e, e);
@@ -3940,7 +3942,7 @@ public class PortalImpl implements Portal {
 		}
 		catch (SystemException se) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(se.getMessage());
+				_log.warn(se.getMessage(), se);
 			}
 		}
 
