@@ -814,23 +814,26 @@ public class LayoutAction extends Action {
 
 			QName qName = PortletQNameUtil.getQName(name);
 
-			if (qName != null) {
-				PublicRenderParameter publicRenderParameter =
-					portlet.getPublicRenderParameter(
-						qName.getNamespaceURI(), qName.getLocalPart());
+			if (qName == null) {
+				continue;
+			}
 
-				if (publicRenderParameter != null) {
-					if (name.startsWith(
-							PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+			PublicRenderParameter publicRenderParameter =
+				portlet.getPublicRenderParameter(
+					qName.getNamespaceURI(), qName.getLocalPart());
 
-						publicRenderParameters.put(
-							PortletQNameUtil.getKey(qName), values);
-					}
-					else {
-						publicRenderParameters.remove(
-							PortletQNameUtil.getKey(qName));
-					}
-				}
+			if (publicRenderParameter == null) {
+				continue;
+			}
+
+			if (name.startsWith(
+					PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+
+				publicRenderParameters.put(
+					PortletQNameUtil.getKey(qName), values);
+			}
+			else {
+				publicRenderParameters.remove(PortletQNameUtil.getKey(qName));
 			}
 		}
 	}

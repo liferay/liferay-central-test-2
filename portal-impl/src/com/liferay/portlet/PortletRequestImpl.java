@@ -407,6 +407,20 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		_invalidSession = true;
 	}
 
+	public boolean isInvalidParameter(String name) {
+		if (Validator.isNull(name) ||
+			name.startsWith(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) ||
+			name.startsWith(
+				PortletQName.REMOVE_PUBLIC_RENDER_PARAMETER_NAMESPACE) ||
+			PortalUtil.isReservedParameter(name)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isPortletModeAllowed(PortletMode portletMode) {
 		if ((portletMode == null) || Validator.isNull(portletMode.toString())) {
 			return true;
@@ -415,14 +429,6 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			return _portlet.hasPortletMode(
 				getResponseContentType(), portletMode);
 		}
-	}
-
-	public boolean isInvalidParameter(String name) {
-		return Validator.isNull(name) ||
-			name.startsWith(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) ||
-			name.startsWith(
-				PortletQName.REMOVE_PUBLIC_RENDER_PARAMETER_NAMESPACE) ||
-			PortalUtil.isReservedParameter(name);
 	}
 
 	public boolean isPrivateRequestAttributes() {
