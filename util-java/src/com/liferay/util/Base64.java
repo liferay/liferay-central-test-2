@@ -20,10 +20,11 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,8 +36,6 @@ import java.io.ObjectOutputStream;
  * <a href="Base64.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @deprecated This class has been moved to util-java at 
- *             <code>com.liferay.util.Base64</code>
  */
 public class Base64 {
 

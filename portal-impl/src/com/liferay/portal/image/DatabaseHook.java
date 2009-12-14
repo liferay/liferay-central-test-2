@@ -22,8 +22,8 @@
 
 package com.liferay.portal.image;
 
-import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
+import com.liferay.util.Base64;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

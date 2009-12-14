@@ -24,8 +24,8 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.Digester;
+import com.liferay.util.Base64;
 
 import java.io.UnsupportedEncodingException;
 
