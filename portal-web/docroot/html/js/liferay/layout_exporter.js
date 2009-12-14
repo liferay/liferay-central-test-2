@@ -39,7 +39,7 @@ Liferay.LayoutExporter = {
 		options = options || {};
 
 		var detail = AUI().one(options.detail);
-		var img = AUI().one(toggle);
+		var img = AUI().one(options.toggle);
 
 		if (detail && img) {
 			var icon = Liferay.LayoutExporter.icons.plus;

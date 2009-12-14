@@ -254,6 +254,19 @@ public class LayoutExporter {
 		Element layoutsEl = root.addElement("layouts");
 
 		for (Layout layout : layouts) {
+			boolean deleteLayout = MapUtil.getBoolean(
+				parameterMap, "delete_" + layout.getPlid());
+
+			if (deleteLayout) {
+				Element el = layoutsEl.addElement("layout");
+
+				el.addAttribute(
+					"layout-id", String.valueOf(layout.getLayoutId()));
+				el.addAttribute("delete", String.valueOf(true));
+
+				continue;
+			}
+
 			context.setPlid(layout.getPlid());
 
 			Document layoutDoc = SAXReaderUtil.createDocument();

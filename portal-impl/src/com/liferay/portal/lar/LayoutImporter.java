@@ -338,6 +338,23 @@ public class LayoutImporter {
 
 			long oldLayoutId = layoutId;
 
+			boolean deleteLayout = GetterUtil.getBoolean(
+				layoutRefEl.attributeValue("delete"));
+
+			if (deleteLayout) {
+				try {
+					LayoutLocalServiceUtil.deleteLayout(
+						context.getGroupId(), privateLayout, oldLayoutId);
+				}
+				catch (NoSuchLayoutException nsle) {
+					_log.warn(
+						"Error deleting layout for {" + sourceGroupId + ", " +
+							privateLayout + ", " + oldLayoutId + "}");
+				}
+
+				continue;
+			}
+
 			String layoutPath = layoutRefEl.attributeValue("path");
 
 			Element layoutEl = null;

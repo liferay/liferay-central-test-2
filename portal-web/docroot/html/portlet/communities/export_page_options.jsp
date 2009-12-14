@@ -46,6 +46,8 @@ Layout curLayout = (Layout)row.getObject();
 <div class="aui-helper-hidden export-layout-detail" id="_detail_<%= curLayout.getPlid() %>" style="border-top: 1px solid #CCC; margin-top: 4px; padding-top: 4px; width: 95%;">
 	<aui:input checked="<%= true %>" disabled="<%= true%>" inlineLabel="left" label="include-ancestor-pages-if-necessary" name='<%= "includeAncestors_" + curLayout.getPlid() %>' type="checkbox" value="1" />
 
+	<aui:input inlineLabel="left" label="delete-live-page" name='<%= "delete_" + curLayout.getPlid() %>' type="checkbox" />
+
 	<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
 		<aui:input label="include-all-descendent-pages" name='<%= "includeChildren_" + curLayout.getPlid() %>' type="checkbox" value="1" />
 	</c:if>
