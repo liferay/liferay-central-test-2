@@ -60,7 +60,9 @@
 }
 
 .js .lfr-js-required {
+	left: 0;
 	position: static;
+	top: 0;
 }
 
 /* ---------- Add content styles ---------- */
@@ -162,10 +164,6 @@
 	position: relative;
 }
 
-.js .lfr-flyout li ul {
-	display: none;
-}
-
 .js .lfr-flyout-has-children {
 	background: url(<%= themeImagesPath %>/arrows/04_left.png) no-repeat 5px 50%;
 	padding-left: 12px;
@@ -176,7 +174,6 @@
 }
 
 .js .lfr-flyout-has-children ul {
-	display: none;
 	min-width: 150px;
 	position: absolute;
 	right: 100%;

@@ -90,7 +90,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		typesRightList = ListUtil.sort(typesRightList, new KeyValuePairComparator(false, true));
 		%>
 
-		<div id="<portlet:namespace />assetVocabulariesBoxes" style="display: <%= allAssetVocabularies ? "none" : "block" %>;">
+		<div class="<%= allAssetVocabularies ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />assetVocabulariesBoxes">
 			<liferay-ui:input-move-boxes
 				formName="fm"
 				leftTitle="current"

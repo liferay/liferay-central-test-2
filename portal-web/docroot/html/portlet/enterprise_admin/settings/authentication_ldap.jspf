@@ -208,7 +208,19 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		var groupMappingDescription = "";
 		var groupMappingUser = "";
 
-		var ldapType = Liferay.Util.getSelectedRadioValue(document.<portlet:namespace />fm.<portlet:namespace />defaultLdap);
+		var ldapType = '';
+
+		AUI().all(document.<portlet:namespace />fm.<portlet:namespace />defaultLdap).some(
+			function(item, index, collection) {
+				var checked = item.get('checked');
+
+				if (checked) {
+					ldapType = item.val();
+				}
+
+				return checked;
+			}
+		);
 
 		if (ldapType == "apache") {
 			baseProviderURL = "ldap://localhost:10389";

@@ -64,7 +64,7 @@ AUI().add(
 					if (instance._collapsible) {
 						instance.makeCollapsible();
 
-						Liferay.Util.disableSelection(instance._panelTitles);
+						instance._panelTitles.unselectable();
 
 						instance._panelTitles.setStyle(
 							{

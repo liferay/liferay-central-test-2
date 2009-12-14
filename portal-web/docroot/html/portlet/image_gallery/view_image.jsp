@@ -63,10 +63,10 @@ if (portletDisplay.isWebDAVEnabled()) {
 	var maxDimension = <%= PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>;
 
 	function <portlet:namespace />viewImage(id, token, name, description, width, height) {
-		var page = Liferay.Util.viewport.page();
+		var page = AUI().getBody().get('viewportRegion');
 
-		var maxWidth = Math.max(page.x - 150, maxDimension);
-		var maxHeight = Math.max(page.y - 150, maxDimension);
+		var maxWidth = Math.max(page.right - 150, maxDimension);
+		var maxHeight = Math.max(page.bottom - 150, maxDimension);
 
 		var imgWidth = width;
 		var imgHeight = height;

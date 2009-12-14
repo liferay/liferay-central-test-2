@@ -360,7 +360,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								scopesRightList = ListUtil.sort(scopesRightList, new KeyValuePairComparator(false, true));
 								%>
 
-								<div id="<portlet:namespace />scopesBoxes" style="display: <%= defaultScope ? "none" : "block" %>;">
+								<div class="<%= defaultScope ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />scopesBoxes">
 									<liferay-ui:input-move-boxes
 										formName="fm"
 										leftTitle="current"
@@ -414,7 +414,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								typesRightList = ListUtil.sort(typesRightList, new KeyValuePairComparator(false, true));
 								%>
 
-								<div id="<portlet:namespace />classNamesBoxes" style="display: <%= anyAssetType ? "none" : "block" %>;">
+								<div class="<%= anyAssetType ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />classNamesBoxes">
 									<liferay-ui:input-move-boxes
 										formName="fm"
 										leftTitle="current"

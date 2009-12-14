@@ -53,7 +53,7 @@ Liferay.Util = {
 
 					var nodeType = target.get('type');
 
-					if (((tagName == 'input') && /text|password/.test(nodeType)) ||
+					if (((tagName == 'input') && (/text|password/).test(nodeType)) ||
 						(tagName == 'textarea')) {
 
 						var action = 'addClass';
@@ -84,23 +84,25 @@ Liferay.Util = {
 				var item;
 
 				if (el) {
-					if (typeof el == 'object') {
-						item = jQuery(el);
+					if (AUI().Lang.isString(el)) {
+						el = '#' + el;
 					}
-					else {
-						item = jQuery('#' + el);
-					}
+
+					el = AUI().one(el);
 				}
 				else {
-					item = document.body;
+					el = AUI().getBody();
 				}
 
-				jQuery('input', item).each(function() {
-					var current = jQuery(this);
-					var type = this.type || 'text';
+				var defaultType = 'text';
 
-					current.addClass(type);
-				});
+				el.all('input').each(
+					function(item, index, collection) {
+						var type = item.get('type') || defaultType;
+
+						item.addClass(type);
+					}
+				);
 			};
 		}
 
@@ -110,14 +112,14 @@ Liferay.Util = {
 	addParams: function(params, url) {
 		var instance = this;
 
-		if (typeof params == 'object') {
-			params = jQuery.param(params);
+		if (AUI().Lang.isObject(params)) {
+			params = AUI().toQueryString(params);
 		}
 		else {
-			params = jQuery.trim(params);
+			params = AUI().Lang.trim(params);
 		}
 
-		if (params != '') {
+		if (params) {
 			var loc = url || location.href;
 			var anchorHash, finalUrl;
 
@@ -143,50 +145,43 @@ Liferay.Util = {
 				if (!url) {
 					location.href = finalUrl;
 				}
+
 				return finalUrl;
 			}
 		}
 	},
 
 	check: function(form, name, checked) {
-		jQuery('input[name=' + name + ']:checkbox',form).attr('checked', checked);
+		AUI().use(
+			'node',
+			function(A) {
+				var checkbox = A.one(form[name]);
+
+				if (checkbox) {
+					checkbox.set('checked', checked);
+				}
+			}
+		);
 	},
 
 	checkAll: function(form, name, allBox) {
-		var inputs;
+		AUI().use(
+			'node',
+			function(A) {
+				var selector;
 
-		if (Liferay.Util.isArray(name)) {
-			var names = 'input[name='+ name.join(']:checkbox,input[name=') + ']:checkbox';
+				if (Liferay.Util.isArray(name)) {
+					selector = 'input[name='+ name.join('], input[name=') + ']';
+				}
+				else {
+					selector = 'input[name=' + name + ']';
+				}
 
-			inputs = jQuery(names, form);
-		}
-		else {
-			inputs = jQuery('input[name=' + name + ']:checkbox', form);
-		}
+				form = A.one(form);
 
-		inputs.attr('checked', allBox.checked);
-	},
-
-	checkAllBox: function(form, name, allBox) {
-		var totalBoxes = 0;
-		var totalOn = 0;
-		var inputs;
-
-		if (Liferay.Util.isArray(name)) {
-			var names = 'input[name='+ name.join(']:checkbox,input[name=') + ']:checkbox';
-
-			inputs = jQuery(names, form);
-		}
-		else {
-			inputs = jQuery('input[name=' + name + ']:checkbox', form);
-		}
-
-		inputs = inputs.not(allBox);
-
-		totalBoxes = inputs.length;
-		totalOn = inputs.filter(':checked').length;
-
-		allBox.checked = (totalBoxes == totalOn);
+				form.all(selector).set('checked', A.one(allBox).get('checked'));
+			}
+		);
 	},
 
 	checkTab: function(box) {
@@ -203,152 +198,124 @@ Liferay.Util = {
 	},
 
 	createFlyouts: function(options) {
-		var instance = this;
-
 		AUI().use(
 			'delayed-task',
+			'event',
+			'node',
 			function(A) {
 				options = options || {};
 
-				var flyout, containers;
+				var flyout = A.one(options.container);
+				var containers = [];
 
-				var containerFilter = function() {
-					return (jQuery('ul', this).length != 0);
-				};
+				if (flyout) {
+					var lis = flyout.all('li');
 
-				if (!options.container) {
-					flyout = jQuery('.lfr-flyout');
-					containers = flyout.find('li').filter(containerFilter);
-				}
-				else {
-					flyout = jQuery('li', options.container);
-					containers = flyout.filter(containerFilter);
-				}
+					lis.each(
+						function(item, index, collection) {
+							var childUL = item.one('ul');
 
-				containers.addClass('lfr-flyout');
-				containers.addClass('has-children lfr-flyout-has-children');
+							if (childUL) {
+								childUL.hide();
 
-				if (!options.container) {
-					containers = containers.add(flyout);
-				}
-
-				var hideTask = new A.DelayedTask(
-					function() {
-						showTask.cancel();
-
-						containers.find('> ul').hide();
-
-						if (options.mouseOut) {
-							options.mouseOut.apply(event.target, [event]);
+								item.addClass('lfr-flyout');
+								item.addClass('has-children lfr-flyout-has-children');
+							}
 						}
-					}
-				);
+					);
 
-				var showTask = new A.DelayedTask(
-					function() {
-						hideTask.cancel();
+					var hideTask = new A.DelayedTask(
+						function(event) {
+							showTask.cancel();
 
-						containers.find('> ul').show();
+							var li = event.currentTarget;
 
-						if (options.mouseOver) {
-							options.mouseOver.apply(event.target, [event]);
+							if (li.hasClass('has-children')) {
+								var childUL = event.currentTarget.one('> ul');
+
+								if (childUL) {
+									childUL.hide();
+
+									if (options.mouseOut) {
+										options.mouseOut.apply(event.currentTarget, [event]);
+									}
+								}
+							}
 						}
-					}
-				);
+					);
 
-				containers.mouseover(
-					function(event) {
-						showTask.delay(0, null, null, event);
-					}
-				);
+					var showTask = new A.DelayedTask(
+						function(event) {
+							hideTask.cancel();
 
-				containers.mouseout(
-					function(event) {
-						hideTask.delay(300, null, null, event);
-					}
-				);
+							var li = event.currentTarget;
+
+							if (li.hasClass('has-children')) {
+								var childUL = event.currentTarget.one('> ul');
+
+								if (childUL) {
+									childUL.show();
+
+									if (options.mouseOver) {
+										options.mouseOver.apply(event.currentTarget, [event]);
+									}
+								}
+							}
+						}
+					);
+
+					lis.on(
+						'mouseenter',
+						A.bind(showTask.delay, showTask, 0, null, null),
+						'li'
+					);
+
+					lis.on(
+						'mouseleave',
+						A.bind(hideTask.delay, hideTask, 300, null, null),
+						'li'
+					);
+				}
 			}
 		)
 	},
 
-	defaultValue: function(obj, defaultValue) {
-		var inputs = jQuery(obj);
-
-		inputs.each(function() {
-			var input = jQuery(this);
-
-			input.unbind('.lfrDefaultValue');
-
-			if (!input.val().length) {
-				input.val(defaultValue);
-			}
-
-			input.bind(
-				'focus.lfrDefaultValue',
-				function() {
-					if (this.value == defaultValue) {
-						this.value = '';
-					}
-				}
-			);
-
-			input.bind(
-				'blur.lfrDefaultValue',
-				function() {
-					if (!this.value) {
-						this.value = defaultValue;
-					}
-				}
-			);
-		});
-	},
-
 	disableElements: function(obj) {
-		var el = jQuery(obj);
-		var children = el.find('*');
+		AUI().use(
+			'event',
+			'node',
+			function(A) {
+				var el = A.one(obj);
 
-		var emptyFn = function() { return false; };
+				if (el) {
+					el = el.getDOM();
 
-		var defaultEvents = function(el) {
-			el.onclick = emptyFn;
-			el.onmouseover = emptyFn;
-			el.onmouseout = emptyFn;
-			jQuery.event.remove(el);
-		};
+					var children = el.getElementsByTagName('*');
 
-		var ieEvents = function(el) {
-			el.onmouseenter = emptyFn;
-			el.onmouseleave = emptyFn;
-		};
+					var emptyFn = function() { return false; };
+					var Event = A.Event;
 
-		var removeEvents = defaultEvents;
+					for (var i = children.length - 1; i >= 0; i--) {
+						var item = children[i];
 
-		if (Liferay.Browser.isIe()) {
-			removeEvents = function(el) {
-				defaultEvents(el);
-				ieEvents(el);
-			};
-		}
+						item.style.cursor = 'default';
 
-		for (var i = children.length - 1; i >= 0; i--) {
-			var item = children[i];
-			var nodeName = item.nodeName.toLowerCase();
+						el.onclick = emptyFn;
+						el.onmouseover = emptyFn;
+						el.onmouseout = emptyFn;
+						el.onmouseenter = emptyFn;
+						el.onmouseleave = emptyFn;
 
-			item.style.cursor = 'default';
+						Event.purgeElement(el, false);
 
-			removeEvents(item);
-
-			if (nodeName == 'a') {
-				item.href = 'javascript:;';
+						item.href = 'javascript:;';
+						item.disabled = true;
+						item.action = '';
+						item.onsubmit = emptyFn;
+					}
+				}
 			}
-			else if (nodeName == 'input' || nodeName == 'select' || nodeName == 'script') {
-				item.disabled = true;
-			}
-			else if (nodeName == 'form') {
-				item.action = '';
-				item.onsubmit = emptyFn;
-			}
-		};
+		);
 	},
 
 	disableEsc: function() {
@@ -357,63 +324,64 @@ Liferay.Util = {
 		}
 	},
 
-	disableMatchedKeys: function(input, pattern, allowedKeyCodes) {
-		input = jQuery(input);
+	disableFormButtons: function(inputs, form) {
+		var instance = this;
 
-		var blockChars = function(event) {
-			var charCode = event.charCode;
-			var keyCode = event.keyCode;
+		instance._submitLocked = A.later(
+			10000,
+			instance,
+			instance.enableFormButtons,
+			[inputs, form]
+		);
 
-			if (event.shiftKey) {
-				return false;
-			}
+		document.body.style.cursor = 'wait';
 
-			if (allowedKeyCodes && jQuery.inArray(keyCode, allowedKeyCodes) != -1) {
-				return true;
-			}
-
-			var typed = String.fromCharCode(charCode || keyCode);
-			var regex = new RegExp(pattern);
-
-			return !(regex.test(typed));
-		};
-
-		input.unbind('.disableMatchedKeys');
-		input.bind('keypress.disableMatchedKeys', blockChars);
-	},
-
-	disableSelection: function(el) {
-		jQuery(el).attr('unselectable', 'on').css('MozUserSelect', 'none');
+		inputs.set('disabled', true);
+		inputs.setStyle('opacity', 0.5);
 	},
 
 	disableTextareaTabs: function(textarea) {
-		var instance = this;
+		AUI().use(
+			'event',
+			'node',
+			function(A) {
+				textarea = A.one(textarea);
 
-		if (!textarea.jquery) {
-			textarea = jQuery(textarea);
-		}
+				if (textarea && textarea.attr('textareatabs') != 'enabled') {
+					textarea.attr('textareatabs', 'disabled');
 
-		if (textarea.attr('textareatabs') != 'enabled') {
-			textarea.attr('textareatabs', 'disabled');
-			textarea.unbind('keydown.liferay', Liferay.Util.textareaTabs);
-		}
+					textarea.detach('keydown', Liferay.Util.textareaTabs);
+				}
+			}
+		);
 	},
 
-	enableSelection: function(el) {
-		jQuery(el).attr('unselectable', 'off').css('MozUserSelect', '');
+	enableFormButtons: function(inputs, form) {
+		var instance = this;
+
+		instance._submitLocked = null;
+
+		document.body.style.cursor = 'auto';
+
+		inputs.set('disabled', false);
+		inputs.setStyle('opacity', 1);
 	},
 
 	enableTextareaTabs: function(textarea) {
 		var instance = this;
+		AUI().use(
+			'event',
+			'node',
+			function(A) {
+				textarea = A.one(textarea);
 
-		if (!textarea.jquery) {
-			textarea = jQuery(textarea);
-		}
+				if (textarea && textarea.attr('textareatabs') != 'enabled') {
+					textarea.attr('textareatabs', 'disabled');
 
-		if (textarea.attr('textareatabs') != 'enabled') {
-			textarea.attr('textareatabs', 'enabled');
-			textarea.bind('keydown.liferay', Liferay.Util.textareaTabs);
-		}
+					textarea.on('keydown', Liferay.Util.textareaTabs);
+				}
+			}
+		);
 	},
 
 	endsWith: function(str, x) {
@@ -481,13 +449,18 @@ Liferay.Util = {
 	},
 
 	forcePost: function(link) {
-		var instance = this;
+		AUI().use(
+			'node',
+			function(A) {
+				link = A.one(link);
 
-		if (link) {
-			var url = jQuery(link).attr('href');
+				if (link) {
+					var url = link.attr('href');
 
-			submitForm(document.hrefFm, url);
-		}
+					submitForm(document.hrefFm, url);
+				}
+			}
+		);
 	},
 
 	getColumnId: function(str) {
@@ -501,10 +474,6 @@ Liferay.Util = {
 		portletId = portletId.replace(/_$/, '');
 
 		return portletId;
-	},
-
-	getSelectedRadioValue: function(col) {
-		return jQuery(col).filter(':checked').val() || '';
 	},
 
 	getURLWithSessionId: function(url) {
@@ -558,48 +527,53 @@ Liferay.Util = {
 	inlineEditor: function(options) {
 		var instance = this;
 
-		if (options.url && options.button) {
-			var url = options.url;
-			var button = options.button;
-			var width = options.width || 680;
-			var height = options.height || 640;
-			var textarea = options.textarea;
-			var clicked = false;
+		AUI().ready(
+			'dialog',
+			'io-plugin',
+			function(A) {
+				if (options.url && options.button) {
+					var url = options.url;
+					var button = options.button;
+					var width = options.width || 680;
+					var height = options.height || 640;
+					var textarea = options.textarea;
+					var clicked = false;
 
-			var editorButton = jQuery(button);
-			var popup = null;
+					var editorButton = A.one(button);
+					var popup = null;
 
-			editorButton.click(
-				function(event) {
-					if (!clicked) {
-						var form = jQuery([]);
-
-						AUI().use(
-							'dialog',
-							function(A) {
-								popup = new A.Dialog(
-									{
-										title: Liferay.Language.get('editor'),
-										height: 640,
-										width: 680,
-										io: {
-											url: url + '&rt=' + Liferay.Util.randomInt()
+					if (editorButton) {
+						editorButton.on(
+							'click',
+							function(event) {
+								if (!clicked) {
+									popup = new A.Dialog(
+										{
+											title: Liferay.Language.get('editor'),
+											height: 640,
+											width: 680
 										}
-									}
-								)
-								.render();
+									).render();
+
+									popup.plug(
+										A.Plugin.IO,
+										{
+											uri: url + '&rt=' + Liferay.Util.randomInt()
+										}
+									);
+
+									clicked = true;
+								}
+								else {
+									popup.show();
+									popup.io.refresh();
+								}
 							}
 						);
-
-						clicked = true;
-					}
-					else {
-						popup.show();
-						popup.io.refresh();
 					}
 				}
-			);
-		}
+			}
+		);
 	},
 
 	isArray: function(object) {
@@ -608,26 +582,40 @@ Liferay.Util = {
 
 	listChecked: function(form) {
 		var s = [];
-		var inputs = jQuery('input[value!=]:checked:checkbox', form);
 
-		inputs.each(
-			function() {
-				s.push(this.value);
-			}
-		);
+		form = AUI().one(form);
+
+		if (form) {
+			form.all('input[type=checkbox]').each(
+				function(item, index, collection) {
+					var val = item.val();
+
+					if (val && item.get('checked')) {
+						s.push(val);
+					}
+				}
+			);
+		}
 
 		return s.join(',');
 	},
 
 	listCheckedExcept: function(form, except) {
 		var s = [];
-		var inputs = jQuery('input[value!=][name!="' + except + '"]:checked:checkbox', form);
 
-		inputs.each(
-			function() {
-				s.push(this.value);
-			}
-		);
+		form = AUI().one(form);
+
+		if (form) {
+			form.all('input[type=checkbox]').each(
+				function(item, index, collection) {
+					var val = item.val();
+
+					if (val && item.get('name') != except && item.get('checked')) {
+						s.push(val);
+					}
+				}
+			);
+		}
 
 		return s.join(',');
 	},
@@ -641,13 +629,21 @@ Liferay.Util = {
 			return '';
 		}
 
-		var opts = jQuery(box).find('option[value!=]');
+		var select = AUI().one(box);
 
-		opts.each(
-			function() {
-				s.push(this.value);
-			}
-		);
+		if (select) {
+			var opts = select.all('option');
+
+			opts.each(
+				function(item, index, collection) {
+					var val = item.val();
+
+					if (val) {
+						s.push(val);
+					}
+				}
+			);
+		}
 
 		if (s[0] == '.none') {
 			return '';
@@ -659,21 +655,32 @@ Liferay.Util = {
 
 	listUncheckedExcept: function(form, except) {
 		var s = [];
-		var inputs = jQuery('input[value!=][name!="' + except + '"]:checkbox:not(:checked)', form);
 
-		inputs.each(
-			function() {
-				s.push(this.value);
-			}
-		);
+		form = AUI().one(form);
+
+		if (form) {
+			form.all('input[type=checkbox]').each(
+				function(item, index, collection) {
+					var val = item.val();
+
+					if (val && item.get('name') != except && !item.get('checked')) {
+						s.push(val);
+					}
+				}
+			);
+		}
 
 		return s.join(',');
 	},
 
 	moveItem: function(fromBox, toBox, sort) {
-		if (fromBox.selectedIndex >= 0) {
-			var toSelect = jQuery(toBox);
-			var selectedOption = jQuery(fromBox).find('option:selected');
+		fromBox = AUI().one(fromBox);
+		toBox = AUI().one(toBox);
+
+		var selectedIndex = fromBox.get('selectedIndex');
+
+		if (selectedIndex >= 0) {
+			var selectedOption = fromBox.all('option').item(selectedIndex);
 
 			toSelect.append(selectedOption);
 		}
@@ -760,13 +767,15 @@ Liferay.Util = {
 	},
 
 	removeItem: function(box, value) {
-		var selectEl = jQuery(box);
+		box = AUI().one(box);
+
+		var selectedIndex =  box.get('selectedIndex');
 
 		if (!value) {
-			selectEl.find('option:selected').remove();
+			box.all('option').item(selectedIndex).remove();
 		}
 		else {
-			selectEl.find('option[value=' + value + ']:selected').remove();
+			box.all('option[value=' + value + ']').item(selectedIndex).remove();
 		}
 	},
 
@@ -820,118 +829,115 @@ Liferay.Util = {
 	},
 
 	resizeTextarea: function(elString, usingRichEditor, resizeToInlinePopup) {
-		var init = function() {
-			var el = jQuery('#' + elString);
+		AUI().ready(
+			function(A) {
+				var el = A.one('#' + elString);
 
-			if (!el.length) {
-				el = jQuery('textarea[name=' + elString + ']');
-			}
-
-			if (el.length) {
-				var pageBody;
-
-				if (resizeToInlinePopup) {
-					pageBody = el.parents('.aui-body:first');
-				}
-				else {
-					pageBody = jQuery('body');
+				if (!el) {
+					el = A.one('textarea[name=' + elString + ']');
 				}
 
-				var resize = function() {
-					var pageBodyHeight = pageBody.height();
+				if (el) {
+					var pageBody;
 
-					if (usingRichEditor) {
-						try {
-							if (!el.is('iframe')) {
-								el = eval(elString);
+					if (resizeToInlinePopup) {
+						pageBody = el.ancestor('.aui-dialog-bd');
+					}
+					else {
+						pageBody = A.getBody();
+					}
 
-								if (!el.jquery) {
-									el = jQuery(el);
+					var resize = function() {
+						var pageBodyHeight = pageBody.get('offsetHeight');
+
+						if (usingRichEditor) {
+							try {
+								if (el.get('nodeName').toLowerCase() != 'iframe') {
+									el = window[elString];
 								}
 							}
+							catch (e) {
+							}
 						}
-						catch (e) {
+
+						var diff = 170;
+
+						if (!resizeToInlinePopup) {
+							diff = 100;
 						}
-					}
 
-					var diff = 170;
+						el = A.one(el);
 
-					if (!resizeToInlinePopup) {
-						diff = 100;
-					}
-
-					el.css(
-						{
+						var styles = {
 							height: (pageBodyHeight - diff) + 'px',
 							width: '98%'
+						};
+
+						if (usingRichEditor) {
+							if (!el || !A.DOM.inDoc(el)) {
+								A.on(
+									'available',
+									function(event) {
+										el = A.one(window[elString]);
+
+										if (el) {
+											el.setStyles(styles);
+										}
+									},
+									'#' + elString + '_cp'
+								);
+
+								return;
+							}
 						}
-					);
-				};
 
-				resize();
+						if (el) {
+							el.setStyles(styles);
+						}
+					};
 
-				if (resizeToInlinePopup) {
-					jQuery(document).bind('popupResize.liferay', resize);
-				}
-				else {
-					jQuery(window).resize(resize);
-				}
-			}
-		};
+					resize();
 
-		AUI().ready(init);
-	},
-
-	resubmitCountdown: function(formName) {
-		if (Liferay.Util.submitCountdown > 0) {
-			Liferay.Util.submitCountdown--;
-
-			setTimeout(
-				function() {
-					Liferay.Util.resubmitCountdown(formName);
-				},
-				1000
-			);
-		}
-		else {
-			Liferay.Util.submitCountdown = 0;
-
-			if (!Liferay.Browser.isMozilla()) {
-				document.body.style.cursor = 'auto';
-			}
-
-			var form = document.forms[formName];
-
-			for (var i = 0; i < form.length; i++) {
-				var e = form.elements[i];
-
-				if (e.type && (e.type.toLowerCase() == 'button' || e.type.toLowerCase() == 'reset' || e.type.toLowerCase() == 'submit')) {
-					e.disabled = false;
+					if (resizeToInlinePopup) {
+						A.on('popupResize', resize);
+					}
+					else {
+						A.getWin().on('resize', resize);
+					}
 				}
 			}
-		}
+		);
 	},
 
 	savePortletTitle: function(params) {
-		var defaultParams = {
-			plid: 0,
-			doAsUserId: 0,
-			portletId: 0,
-			title: '',
-			url: themeDisplay.getPathMain() + '/portlet_configuration/update_title'
-		};
+		AUI().use(
+			'io',
+			function(A) {
+				A.mix(
+					params,
+					{
+						plid: 0,
+						doAsUserId: 0,
+						portletId: 0,
+						title: '',
+						url: themeDisplay.getPathMain() + '/portlet_configuration/update_title'
+					}
+				);
 
-		var settings = jQuery.extend(defaultParams, params);
-
-		jQuery.ajax(
-			{
-				url: settings.url,
-				data: {
-					p_l_id: settings.plid,
-					doAsUserId: settings.doAsUserId,
-					portletId: settings.portletId,
-					title: settings.title
-				}
+				A.io(
+					params.url,
+					{
+						data: A.toQueryString(
+							{
+								doAsUserId: params.doAsUserId,
+								portletId: params.portletId,
+								p_l_id: params.plid,
+								title: params.title
+							}
+						),
+						method: 'POST'
+					}
+				);
 			}
 		);
 	},
@@ -960,7 +966,11 @@ Liferay.Util = {
 	},
 
 	setSelectedValue: function(col, value) {
-		jQuery('option[value=' + value + ']', col).attr('selected', true);
+		var option = AUI().one(col).one('option[value=' + value + ']');
+
+		if (option) {
+			option.set('selected', true);
+		}
 	},
 
 	showCapsLock: function(event, span) {
@@ -978,32 +988,37 @@ Liferay.Util = {
 	},
 
 	sortBox: function(box) {
-		var newBox = [];
+		AUI().use(
+			'node',
+			function(A) {
+				var newBox = [];
 
-		for (var i = 0; i < box.length; i++) {
-			newBox[i] = [box[i].value, box[i].text];
-		}
+				for (var i = 0; i < box.length; i++) {
+					newBox[i] = [box[i].value, box[i].text];
+				}
 
-		newBox.sort(Liferay.Util.sortByAscending);
+				newBox.sort(Liferay.Util.sortByAscending);
 
-		var boxObj = jQuery(box);
+				var boxObj = A.one(box);
 
-		boxObj.find('option').remove();
+				boxObj.all('option').remove();
 
-		jQuery.each(
-			newBox,
-			function(key, value) {
-				boxObj.append('<option value="' + value[0] + '">' + value[1] + '</option>');
+				A.each(
+					newBox,
+					function(item, index, collection) {
+						boxObj.append('<option value="' + item[0] + '">' + item[1] + '</option>');
+					}
+				);
+
+				if (Liferay.Browser.isIe()) {
+					var currentWidth = boxObj.getStyle('width');
+
+					if (currentWidth == 'auto') {
+						boxObj.setStyle('width', 'auto');
+					}
+				}
 			}
 		);
-
-		if (Liferay.Browser.isIe()) {
-			var currentWidth = boxObj.css('width');
-
-			if (currentWidth == 'auto') {
-				boxObj.css('width', 'auto');
-			}
-		}
 	},
 
 	sortByAscending: function(a, b) {
@@ -1029,48 +1044,46 @@ Liferay.Util = {
 	 * OPTIONS
 	 *
 	 * Required
-	 * popup {string|object}: A jQuery selector or DOM element of the popup that contains the editor.
+	 * popup {string|object}: A selector or DOM element of the popup that contains the editor.
 	 * textarea {string}: the name of the textarea to auto-resize.
 	 * url {string}: The url to open that sets the editor.
 	 */
 
 	switchEditor: function(options) {
-		var instance = this;
-
 		if (options.url && options.popup) {
-			var url = options.url;
-			var popup = options.popup;
-			var textarea = options.textarea;
+			AUI().use(
+				'io-plugin',
+				function(A) {
+					var url = options.url;
+					var popup = A.one(options.popup);
+					var textarea = options.textarea;
 
-			if (!popup.jquery) {
-				popup = jQuery(popup);
-			}
+					if (popup) {
+						if (!popup.io) {
+							popup.plug(
+								A.Plugin.IO,
+								{
+									uri: url
+								}
+							);
+						}
+						else {
+							popup.io.set('uri', url);
 
-			var popupMessage = popup;
-
-			jQuery.ajax(
-				{
-					url: url,
-					beforeSend: function() {
-						popupMessage.empty();
-						popupMessage.append('<div class="loading-animation"></div>');
-					},
-				  	success: function(message) {
-						popupMessage.empty();
-						popupMessage.append(message);
-				 	}
+							popup.io.start();
+						}
+					}
 				}
 			);
 		}
 	},
 
 	textareaTabs: function(event) {
-		var el = this;
-		var pressedKey = event.which;
+		var el = event.currentTarget.getDOM();
+		var pressedKey = event.keyCode;
 
-		if(pressedKey == 9 || (Liferay.Browser.isSafari() && pressedKey == 25)) {
-			event.preventDefault();
-			event.stopPropagation();
+		if(pressedKey == 9) {
+			event.halt();
 
 			var oldscroll = el.scrollTop;
 
@@ -1097,98 +1110,94 @@ Liferay.Util = {
 	    }
 	},
 
-	toggleByIdSpan: function(obj, id) {
-		jQuery('#' + id).toggle();
-
-		var spans = jQuery(obj).find('span');
-
-		spans.toggle();
-	},
-
-	toggle: function(obj, returnState, displayType) {
-		if (typeof obj == 'string') {
-			obj = '#' + obj;
-		}
-
-		var el = jQuery(obj);
-		var hidden = el.toggle().is(':visible');
-
-		if (displayType) {
-			el.css('display', displayType);
-			hidden = el.is(':visible');
-		}
-
-		if (returnState) {
-			return hidden;
-		}
-	},
-
 	toggleBoxes: function(checkBoxId, toggleBoxId) {
-		var checkBox = jQuery('#' + checkBoxId);
-		var toggleBox = jQuery('#' + toggleBoxId);
+		AUI().use(
+			'node',
+			function(A) {
+				var checkBox = A.one('#' + checkBoxId);
+				var toggleBox = A.one('#' + toggleBoxId);
 
-		if (!checkBox.is(':checked')) {
-			toggleBox.hide();
-		}
+				if (checkBox && toggleBox) {
+					if (!checkBox.get('checked')) {
+						toggleBox.hide();
+					}
 
-		checkBox.click(
-			function() {
-				toggleBox.toggle();
+					checkBox.on(
+						'click',
+						function() {
+							toggleBox.toggle();
+						}
+					);
+				}
 			}
 		);
 	},
 
 	toggleControls: function() {
-		var instance = this;
+		AUI().use(
+			'event',
+			'io',
+			'node',
+			function(A) {
+				var trigger = A.one('.toggle-controls');
 
-		var trigger = jQuery('.toggle-controls');
-		var docBody = jQuery(document.body);
-		var hiddenClass = 'controls-hidden';
-		var visibleClass = 'controls-visible';
-		var currentClass = visibleClass;
+				if (trigger) {
+					var docBody = A.getBody();
+					var hiddenClass = 'controls-hidden';
+					var visibleClass = 'controls-visible';
+					var currentClass = visibleClass;
 
-		if (Liferay._editControlsState != 'visible') {
-			currentClass = hiddenClass;
-		}
-
-		docBody.addClass(currentClass);
-
-		trigger.click(
-			function(event) {
-				docBody.toggleClass(visibleClass).toggleClass(hiddenClass);
-
-				Liferay._editControlsState = (docBody.is('.' + visibleClass) ? 'visible' : 'hidden');
-
-				jQuery.ajax(
-					{
-						url: themeDisplay.getPathMain() + '/portal/session_click',
-						data: {
-							'liferay_toggle_controls': Liferay._editControlsState
-						}
+					if (Liferay._editControlsState != 'visible') {
+						currentClass = hiddenClass;
 					}
-				);
+
+					docBody.addClass(currentClass);
+
+					trigger.on(
+						'click',
+						function(event) {
+							docBody.toggleClass(visibleClass).toggleClass(hiddenClass);
+
+							Liferay._editControlsState = (docBody.hasClass(visibleClass) ? 'visible' : 'hidden');
+
+							A.io(
+								themeDisplay.getPathMain() + '/portal/session_click',
+								{
+									data: {
+										'liferay_toggle_controls': Liferay._editControlsState
+									},
+									method: 'POST'
+								}
+							);
+						}
+					);
+				}
 			}
 		);
 	},
 
 	toggleSelectBox: function(selectBoxId, value, toggleBoxId) {
-		var selectBox = jQuery('#' + selectBoxId);
-		var toggleBox = jQuery('#' + toggleBoxId);
+		AUI().use(
+			'event',
+			'node',
+			function(A) {
+				var selectBox = A.one('#' + selectBoxId);
+				var toggleBox = A.one('#' + toggleBoxId);
 
-		if (selectBox.val() != value) {
-			toggleBox.hide();
-		}
-		else {
-			toggleBox.show();
-		}
+				if (selectBox && toggleBox) {
+					var toggle = function() {
+						var action = 'show';
 
-		selectBox.change(
-			function(event) {
-				if (selectBox.val() != value) {
-					toggleBox.hide();
-				}
-				else {
-					toggleBox.show();
+						if (selectBox.val() != value) {
+							action = 'hide';
+						}
+
+						toggleBox[action]();
+					};
+
+					toggle();
+
+					selectBox.on('change', toggle);
 				}
 			}
 		);
@@ -1228,72 +1237,35 @@ Liferay.Util = {
 				return str;
 			}
 		);
-	},
-
-	viewport: {
-		frame: function() {
-			var instance = this;
-			var viewport = jQuery(window);
-
-			var x = viewport.width();
-			var y = viewport.height();
-
-			return {x: x, y: y};
-		},
-		page: function() {
-			var instance = this;
-			var viewport = jQuery(document);
-
-			var x = viewport.width();
-			var y = viewport.height();
-
-			return {x: x, y: y};
-		},
-		scroll: function() {
-			var instance = this;
-			var viewport = jQuery(window);
-
-			var x = viewport.scrollLeft();
-			var y = viewport.scrollTop();
-
-			return {x: x, y: y};
-		}
 	}
 };
 
-function submitForm(form, action, singleSubmit) {
-	if (Liferay.Util.submitCountdown == 0) {
-		Liferay.Util.submitCountdown = 10;
+function submitForm(form, action) {
+	if (!Liferay.Util._submitLocked) {
+		AUI().use(
+			'event',
+			'node',
+			function(A) {
+				form = A.one(form);
 
-		setTimeout(
-			function() {
-				if (form) {
-					Liferay.Util.resubmitCountdown(form.name);
+				var inputs = form.all('input[type=button], input[type=reset], input[type=submit]');
+
+				Liferay.Util.disableFormButtons(inputs, form);
+
+				if (action != null) {
+					form.attr('action', action);
 				}
-			},
-			1000
+
+				Liferay.fire(
+					'submitForm',
+					{
+						form: form
+					}
+				);
+
+				form.submit();
+			}
 		);
-
-		if ((singleSubmit == null) || singleSubmit) {
-			Liferay.Util.submitCountdown++;
-
-			var inputs = jQuery('input[type=button], input[type=reset], input[type=submit]', form);
-
-			inputs.attr('disabled', true);
-			inputs.fadeTo(50, 0.5);
-		}
-
-		if (action != null) {
-			form.action = action;
-		}
-
-		if (!Liferay.Browser.isMozilla()) {
-			document.body.style.cursor = 'wait';
-		}
-
-		Liferay.fire('submitForm', {form: form});
-
-		form.submit();
 	}
 }
 
