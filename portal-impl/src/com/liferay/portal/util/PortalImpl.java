@@ -66,7 +66,6 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -3443,18 +3442,17 @@ public class PortalImpl implements Portal {
 			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		if (_log.isWarnEnabled()) {
+		if (_log.isInfoEnabled()) {
 			String currentURL = (String)request.getAttribute(
 				WebKeys.CURRENT_URL);
 
-			_log.warn(
+			_log.info(
 				"Current URL " + currentURL + " generates exception: " +
-					e.getMessage() + "\n Stacktrace: " +
-					StackTraceUtil.getStackTrace(e));
+					e.getMessage();
+		}
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(e, e);
-			}
+		if (_log.isWarnEnabled()) {
+			_log.warn(e, e);
 		}
 
 		if (response.isCommitted()) {
