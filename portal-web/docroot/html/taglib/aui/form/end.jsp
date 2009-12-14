@@ -44,22 +44,22 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 
 			var form = A.one('#<%= name %>');
 
-			form.on(
-				'submit',
-				function() {
-					<c:choose>
-						<c:when test="<%= Validator.isNull(onSubmit) %>">
-							<%= randomNamespace %>saveForm();
-							return false;
-						</c:when>
-						<c:otherwise>
-							<%= onSubmit %>
-						</c:otherwise>
-					</c:choose>
-				}
-			);
-
 			if (form) {
+				form.on(
+					'submit',
+					function() {
+						<c:choose>
+							<c:when test="<%= Validator.isNull(onSubmit) %>">
+								<%= randomNamespace %>saveForm();
+								return false;
+							</c:when>
+							<c:otherwise>
+								<%= onSubmit %>
+							</c:otherwise>
+						</c:choose>
+					}
+				);
+
 				var inputs = form.all('button,input,select,textarea');
 
 				if (inputs) {
