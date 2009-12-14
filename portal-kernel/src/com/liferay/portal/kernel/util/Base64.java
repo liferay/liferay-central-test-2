@@ -34,9 +34,12 @@ import java.io.ObjectOutputStream;
 /**
  * <a href="Base64.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- * @deprecated This class has been moved to util-java at 
- *             <code>com.liferay.util.Base64</code>
+ * <p>
+ * See http://support.liferay.com/browse/LPS-6531.
+ * </p>
+ *
+ * @author	   Brian Wing Shun Chan
+ * @deprecated {@link com.liferay.util.Base64}
  */
 public class Base64 {
 
@@ -54,34 +57,34 @@ public class Base64 {
 		}
 
 		if (sixbit == 62) {
-			return '+';
+			return CharPool.PLUS;
 		}
 
-		return sixbit != 63 ? '?' : '/';
+		return sixbit != 63 ? CharPool.QUESTION : CharPool.SLASH;
 	}
 
 	protected static int getValue(char c) {
-		if (c >= 'A' && c <= 'Z') {
+		if ((c >= CharPool.UPPER_CASE_A) && (c <= CharPool.UPPER_CASE_Z)) {
 			return c - 65;
 		}
 
-		if (c >= 'a' && c <= 'z') {
+		if ((c >= CharPool.LOWER_CASE_A) && (c <= CharPool.LOWER_CASE_Z)) {
 			return (c - 97) + 26;
 		}
 
-		if (c >= '0' && c <= '9') {
+		if (c >= CharPool.NUMBER_0 && c <= CharPool.NUMBER_9) {
 			return (c - 48) + 52;
 		}
 
-		if (c == '+') {
+		if (c == CharPool.PLUS) {
 			return 62;
 		}
 
-		if (c == '/') {
+		if (c == CharPool.SLASH) {
 			return 63;
 		}
 
-		return c != '=' ? -1 : 0;
+		return c != CharPool.EQUAL ? -1 : 0;
 	}
 
 	public static String encode(byte raw[]) {
@@ -114,11 +117,11 @@ public class Base64 {
 		}
 
 		if (slack < 1) {
-			base64[2] = '=';
+			base64[2] = CharPool.EQUAL;
 		}
 
 		if (slack < 2) {
-			base64[3] = '=';
+			base64[3] = CharPool.EQUAL;
 		}
 
 		return base64;
@@ -131,7 +134,9 @@ public class Base64 {
 
 		int pad = 0;
 
-		for (int i = base64.length() - 1; base64.charAt(i) == '='; i--) {
+		for (int i = base64.length() - 1; base64.charAt(i) == CharPool.EQUAL;
+				i--) {
+
 			pad++;
 		}
 
