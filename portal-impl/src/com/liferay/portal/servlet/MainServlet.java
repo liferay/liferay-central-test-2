@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.events.StartupAction;
@@ -145,26 +147,73 @@ import org.apache.struts.tiles.TilesUtilImpl;
  */
 public class MainServlet extends ActionServlet {
 
+	public void destroy() {
+		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Destroy schedulers");
+		}
+
+		try {
+			destroySchedulers(portlets);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Destroy portlets");
+		}
+
+		try {
+			destroyPortlets(portlets);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Destroy companies");
+		}
+
+		try {
+			destroyCompanies();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Process global shutdown events");
+		}
+
+		try {
+			processGlobalShutdownEvents();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Destroy");
+		}
+
+		callParentDestroy();
+	}
+
 	public void init() throws ServletException {
-
-		// Initialize
-
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize");
 		}
 
-		super.init();
-
-		// Startup events
+		callParentInit();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Process startup events");
 		}
 
 		try {
-			StartupAction startupAction = new StartupAction();
-
-			startupAction.run(null);
+			processStartupEvents();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -175,15 +224,16 @@ public class MainServlet extends ActionServlet {
 			System.exit(0);
 		}
 
-		// Velocity
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize velocity");
+		}
 
-		String contextPath = PortalUtil.getPathContext();
-
-		ServletContext servletContext = getServletContext();
-
-		VelocityContextPool.put(contextPath, servletContext);
-
-		// Plugin package
+		try {
+			initVelocity();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize plugin package");
@@ -192,15 +242,11 @@ public class MainServlet extends ActionServlet {
 		PluginPackage pluginPackage = null;
 
 		try {
-			pluginPackage =
-				PluginPackageHotDeployListener.readPluginPackage(
-					servletContext);
+			pluginPackage = initPluginPackage();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Portlets
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize portlets");
@@ -209,597 +255,302 @@ public class MainServlet extends ActionServlet {
 		List<Portlet> portlets = null;
 
 		try {
-			String[] xmls = new String[] {
-				HttpUtil.URLtoString(servletContext.getResource(
-					"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_CUSTOM)),
-				HttpUtil.URLtoString(servletContext.getResource(
-					"/WEB-INF/portlet-ext.xml")),
-				HttpUtil.URLtoString(servletContext.getResource(
-					"/WEB-INF/liferay-portlet.xml")),
-				HttpUtil.URLtoString(servletContext.getResource(
-					"/WEB-INF/liferay-portlet-ext.xml")),
-				HttpUtil.URLtoString(servletContext.getResource(
-					"/WEB-INF/web.xml"))
-			};
-
-			PortletLocalServiceUtil.initEAR(
-				servletContext, xmls, pluginPackage);
-
-			portlets = PortletLocalServiceUtil.getPortlets();
-
-			for (int i = 0; i < portlets.size(); i++) {
-				Portlet portlet = portlets.get(i);
-
-				if (i == 0) {
-					initPortletApp(portlet, servletContext);
-				}
-
-				PortletInstanceFactoryUtil.create(portlet, servletContext);
-			}
+			portlets = initPortlets(pluginPackage);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Layout templates
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize layout templates");
 		}
 
 		try {
-			String[] xmls = new String[] {
-				HttpUtil.URLtoString(servletContext.getResource(
-					"/WEB-INF/liferay-layout-templates.xml")),
-				HttpUtil.URLtoString(servletContext.getResource(
-					"/WEB-INF/liferay-layout-templates-ext.xml"))
-			};
-
-			LayoutTemplateLocalServiceUtil.init(
-				servletContext, xmls, pluginPackage);
+			initLayoutTemplates(pluginPackage, portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Look and feel
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize look and feel");
+			_log.debug("Initialize themes");
 		}
 
 		try {
-			String[] xmls = new String[] {
-				HttpUtil.URLtoString(servletContext.getResource(
-					"/WEB-INF/liferay-look-and-feel.xml")),
-				HttpUtil.URLtoString(servletContext.getResource(
-					"/WEB-INF/liferay-look-and-feel-ext.xml"))
-			};
-
-			ThemeLocalServiceUtil.init(
-				servletContext, null, true, xmls, pluginPackage);
+			initThemes(pluginPackage, portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Indexer
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Indexer");
+			_log.debug("Initialize indexers");
 		}
 
 		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				String indexerClass = portlet.getIndexerClass();
-
-				if (!portlet.isActive() || Validator.isNull(indexerClass)) {
-					continue;
-				}
-
-				Indexer indexer = (Indexer)InstancePool.get(indexerClass);
-
-				for (String modelClassName : indexer.getClassNames()) {
-					IndexerRegistryUtil.register(modelClassName, indexer);
-				}
-			}
+			initIndexers(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Scheduler
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Scheduler");
+			_log.debug("Initialize schedulers");
 		}
 
 		try {
-			if (PropsValues.SCHEDULER_ENABLED) {
-				for (String className : PropsValues.SCHEDULER_CLASSES) {
-					Scheduler scheduler = (Scheduler)InstancePool.get(
-						className);
-
-					scheduler.schedule();
-				}
-
-				Iterator<Portlet> itr = portlets.iterator();
-
-				while (itr.hasNext()) {
-					Portlet portlet = itr.next();
-
-					String className = portlet.getSchedulerClass();
-
-					if (!portlet.isActive() || Validator.isNull(className)) {
-						continue;
-					}
-
-					Scheduler scheduler = (Scheduler)InstancePool.get(
-						className);
-
-					scheduler.schedule();
-				}
-			}
+			initSchedulers(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Poller processor
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Poller processor");
+			_log.debug("Initialize poller processors");
 		}
 
 		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				PollerProcessor pollerProcessor =
-					portlet.getPollerProcessorInstance();
-
-				if (!portlet.isActive() || (pollerProcessor == null)) {
-					continue;
-				}
-
-				PollerProcessorUtil.addPollerProcessor(
-					portlet.getPortletId(), pollerProcessor);
-			}
+			initPollerProcessors(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// POP message listener
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("POP message listener");
+			_log.debug("Initialize POP message listeners");
 		}
 
 		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				MessageListener popMessageListener =
-					portlet.getPopMessageListenerInstance();
-
-				if (!portlet.isActive() || (popMessageListener == null)) {
-					continue;
-				}
-
-				POPServerUtil.addListener(popMessageListener);
-			}
+			initPOPMessageListeners(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Social activity interpreter
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Social activity interpreter");
+			_log.debug("Initialize social activity interpreters");
 		}
 
 		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				SocialActivityInterpreter socialActivityInterpreter =
-					portlet.getSocialActivityInterpreterInstance();
-
-				if (!portlet.isActive() ||
-					(socialActivityInterpreter == null)) {
-
-					continue;
-				}
-
-				socialActivityInterpreter = new SocialActivityInterpreterImpl(
-					portlet.getPortletId(), socialActivityInterpreter);
-
-				SocialActivityInterpreterLocalServiceUtil.
-					addActivityInterpreter(socialActivityInterpreter);
-			}
+			initSocialActivityInterpreters(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Social request interpreter
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Social request interpreter");
+			_log.debug("Initialize social request interpreters");
 		}
 
 		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				SocialRequestInterpreter socialRequestInterpreter =
-					portlet.getSocialRequestInterpreterInstance();
-
-				if (!portlet.isActive() || (socialRequestInterpreter == null)) {
-					continue;
-				}
-
-				socialRequestInterpreter = new SocialRequestInterpreterImpl(
-					portlet.getPortletId(), socialRequestInterpreter);
-
-				SocialRequestInterpreterLocalServiceUtil.
-					addRequestInterpreter(socialRequestInterpreter);
-			}
+			initSocialRequestInterpreters(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// WebDAV storage
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("WebDAV storage");
+			_log.debug("Initialize WebDAV storages");
 		}
 
 		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				WebDAVStorage webDAVStorage =
-					portlet.getWebDAVStorageInstance();
-
-				if (!portlet.isActive() || (webDAVStorage == null)) {
-					continue;
-				}
-
-				webDAVStorage.setToken(portlet.getWebDAVStorageToken());
-
-				WebDAVUtil.addStorage(webDAVStorage);
-			}
+			initWebDAVStorages(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Asset renderer factory
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Asset renderer factory");
+			_log.debug("Initialize asset renderer factories");
 		}
 
 		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				List<AssetRendererFactory> assetRendererFactories =
-					portlet.getAssetRendererFactoryInstances();
-
-				if (assetRendererFactories == null) {
-					continue;
-				}
-
-				AssetRendererFactoryRegistryUtil.register(
-					assetRendererFactories);
-			}
+			initAssetRendererFactories(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Workflow handler
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Workflow handler");
+			_log.debug("Initialize workflow handlers");
 		}
 
 		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				List<WorkflowHandler> workflowHandlers =
-					portlet.getWorkflowHandlerInstances();
-
-				if (workflowHandlers == null) {
-					continue;
-				}
-
-				WorkflowHandlerRegistryUtil.register(workflowHandlers);
-			}
+			initWorkflowHandlers(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Check web settings
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Check web settings");
+			_log.debug("Initialize web settings");
 		}
 
 		try {
-			String xml = HttpUtil.URLtoString(
-				servletContext.getResource("/WEB-INF/web.xml"));
-
-			checkWebSettings(xml);
+			initWebSettings();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		// Extension environment
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize extension environment");
+		}
 
 		try {
-			ExtRegistry.registerPortal(servletContext);
+			initExt();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Global startup events
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Process global startup events");
 		}
 
 		try {
-			EventsProcessorUtil.process(
-				PropsKeys.GLOBAL_STARTUP_EVENTS,
-				PropsValues.GLOBAL_STARTUP_EVENTS);
+			processGlobalStartupEvents();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Resource actions
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize resource actions");
 		}
 
 		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				List<String> portletActions =
-					ResourceActionsUtil.getPortletResourceActions(
-						portlet.getPortletId());
-
-				ResourceActionLocalServiceUtil.checkResourceActions(
-					portlet.getPortletId(), portletActions);
-
-				List<String> modelNames =
-					ResourceActionsUtil.getPortletModelResources(
-						portlet.getPortletId());
-
-				for (String modelName : modelNames) {
-					List<String> modelActions =
-						ResourceActionsUtil.getModelResourceActions(modelName);
-
-					ResourceActionLocalServiceUtil.checkResourceActions(
-						modelName, modelActions);
-				}
-			}
+			initResourceActions(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Resource codes
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize resource codes");
 		}
 
 		try {
-			long[] companyIds = PortalInstances.getCompanyIds();
-
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				List<String> modelNames =
-					ResourceActionsUtil.getPortletModelResources(
-						portlet.getPortletId());
-
-				for (long companyId : companyIds) {
-					ResourceCodeLocalServiceUtil.checkResourceCodes(
-						companyId, portlet.getPortletId());
-
-					for (String modelName : modelNames) {
-						ResourceCodeLocalServiceUtil.checkResourceCodes(
-							companyId, modelName);
-					}
-				}
-			}
+			initResourceCodes(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		// Companies
-
-		String[] webIds = PortalInstances.getWebIds();
-
-		for (int i = 0; i < webIds.length; i++) {
-			PortalInstances.initCompany(servletContext, webIds[i]);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize companies");
 		}
 
-		// Message resources
+		try {
+			initCompanies();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize message resources");
 		}
 
-		MultiMessageResources messageResources =
-			(MultiMessageResources)servletContext.getAttribute(
-				Globals.MESSAGES_KEY);
-
-		LanguageResources.init(messageResources);
-
-		// See LEP-2885. Don't flush hot deploy events until after the portal
-		// has initialized.
-
-		PortalInitableUtil.flushInitables();
-		HotDeployUtil.flushPrematureEvents();
-	}
-
-	public void callParentService(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
-
-		super.service(request, response);
-	}
-
-	public void service(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		try {
+			initMessageResources();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Process service request");
+			_log.debug("Initialize plugins");
 		}
 
-		if (ShutdownUtil.isShutdown()) {
-			response.setContentType(ContentTypes.TEXT_HTML_UTF8);
+		try {
+			initPlugins();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
 
-			String html = ContentUtil.get(
-				"com/liferay/portal/dependencies/shutdown.html");
+	protected boolean processShutdownRequest(
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException {
 
-			response.getOutputStream().print(html);
-
-			return;
+		if (!ShutdownUtil.isShutdown()) {
+			return false;
 		}
 
-		if (MaintenanceUtil.isMaintaining()) {
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher(
-				"/html/portal/maintenance.jsp");
+		response.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
-			requestDispatcher.include(request, response);
+		String html = ContentUtil.get(
+			"com/liferay/portal/dependencies/shutdown.html");
 
-			return;
+		response.getOutputStream().print(html);
+
+		return true;
+	}
+
+	protected boolean processMaintenanceRequest(
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
+
+		if (!MaintenanceUtil.isMaintaining()) {
+			return false;
 		}
 
-		HttpSession session = request.getSession();
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
+			"/html/portal/maintenance.jsp");
 
-		// Company id
+		requestDispatcher.include(request, response);
 
-		long companyId = PortalInstances.getCompanyId(request);
+		return true;
+	}
 
-		//CompanyThreadLocal.setCompanyId(companyId);
+	protected HttpServletRequest protectRequest(
+		HttpServletRequest request, String remoteUser) {
 
-		// Portal port
+		// WebSphere will not return the remote user unless you are
+		// authenticated AND accessing a protected path. Other servers will
+		// return the remote user for all threads associated with an
+		// authenticated user. We use ProtectedServletRequest to ensure we get
+		// similar behavior across all servers.
 
-		PortalUtil.setPortalPort(request);
+		return new ProtectedServletRequest(request, remoteUser);
+	}
 
-		// CTX
+	protected HttpServletRequest encryptRequest(
+		HttpServletRequest request, long companyId) {
 
-		ServletContext servletContext = getServletContext();
+		boolean encryptRequest = ParamUtil.getBoolean(request, WebKeys.ENCRYPT);
 
-		request.setAttribute(WebKeys.CTX, servletContext);
-
-		// Struts module config
-
-		ModuleConfig moduleConfig = getModuleConfig(request);
-
-		// Portlet session tracker
-
-		if (session.getAttribute(WebKeys.PORTLET_SESSION_TRACKER) == null ) {
-			session.setAttribute(
-				WebKeys.PORTLET_SESSION_TRACKER,
-				PortletSessionTracker.getInstance());
+		if (!encryptRequest) {
+			return request;
 		}
 
-		// Portlet Request Processor
+		try {
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				companyId);
 
-		PortletRequestProcessor portletReqProcessor =
-			(PortletRequestProcessor)servletContext.getAttribute(
-				WebKeys.PORTLET_STRUTS_PROCESSOR);
-
-		if (portletReqProcessor == null) {
-			portletReqProcessor =
-				PortletRequestProcessor.getInstance(this, moduleConfig);
-
-			servletContext.setAttribute(
-				WebKeys.PORTLET_STRUTS_PROCESSOR, portletReqProcessor);
+			request = new EncryptedServletRequest(
+				request, company.getKeyObj());
+		}
+		catch (Exception e) {
 		}
 
-		// Tiles definitions factory
+		return request;
+	}
 
-		if (servletContext.getAttribute(
-				TilesUtilImpl.DEFINITIONS_FACTORY) == null) {
+	protected long getUserId(HttpServletRequest request) {
+		return PortalUtil.getUserId(request);
+	}
 
-			servletContext.setAttribute(
-				TilesUtilImpl.DEFINITIONS_FACTORY,
-				servletContext.getAttribute(TilesUtilImpl.DEFINITIONS_FACTORY));
-		}
+	protected String getRemoteUser(
+		HttpServletRequest request, long userId) {
 
-		Object applicationAssociate = servletContext.getAttribute(
-			WebKeys.ASSOCIATE_KEY);
-
-		if (servletContext.getAttribute(WebKeys.ASSOCIATE_KEY) == null) {
-			servletContext.setAttribute(
-				WebKeys.ASSOCIATE_KEY, applicationAssociate);
-		}
-
-		// Encrypt request
-
-		if (ParamUtil.get(request, WebKeys.ENCRYPT, false)) {
-			try {
-				Company company = CompanyLocalServiceUtil.getCompanyById(
-					companyId);
-
-				request = new EncryptedServletRequest(
-					request, company.getKeyObj());
-			}
-			catch (Exception e) {
-			}
-		}
-
-		// Login
-
-		long userId = PortalUtil.getUserId(request);
 		String remoteUser = request.getRemoteUser();
 
-		// Is JAAS enabled?
-
 		if (!PropsValues.PORTAL_JAAS_ENABLE) {
+			HttpSession session = request.getSession();
+
 			String jRemoteUser = (String)session.getAttribute("j_remoteuser");
 
 			if (jRemoteUser != null) {
@@ -813,69 +564,115 @@ public class MainServlet extends ActionServlet {
 			remoteUser = String.valueOf(userId);
 		}
 
-		// WebSphere will not return the remote user unless you are
-		// authenticated AND accessing a protected path. Other servers will
-		// return the remote user for all threads associated with an
-		// authenticated user. We use ProtectedServletRequest to ensure we get
-		// similar behavior across all servers.
+		return remoteUser;
+	}
 
-		request = new ProtectedServletRequest(request, remoteUser);
-
-		if ((userId > 0) || (remoteUser != null)) {
-
-			// Set the principal associated with this thread
-
-			String name = String.valueOf(userId);
-
-			if (remoteUser != null) {
-				name = remoteUser;
-			}
-
-			PrincipalThreadLocal.setName(name);
+	protected void setPrincipalName(long userId, String remoteUser) {
+		if ((userId == 0) && (remoteUser == null)) {
+			return;
 		}
 
-		if ((userId <= 0) && (remoteUser != null)) {
-			try {
+		String name = String.valueOf(userId);
 
-				// User id
-
-				userId = GetterUtil.getLong(remoteUser);
-
-				// Pre login events
-
-				EventsProcessorUtil.process(
-					PropsKeys.LOGIN_EVENTS_PRE, PropsValues.LOGIN_EVENTS_PRE,
-					request, response);
-
-				// User
-
-				User user = UserLocalServiceUtil.getUserById(userId);
-
-				if (PropsValues.USERS_UPDATE_LAST_LOGIN) {
-					UserLocalServiceUtil.updateLastLogin(
-						userId, request.getRemoteAddr());
-				}
-
-				// User id
-
-				session.setAttribute(WebKeys.USER_ID, new Long(userId));
-
-				// User locale
-
-				session.setAttribute(Globals.LOCALE_KEY, user.getLocale());
-
-				// Post login events
-
-				EventsProcessorUtil.process(
-					PropsKeys.LOGIN_EVENTS_POST, PropsValues.LOGIN_EVENTS_POST,
-					request, response);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+		if (remoteUser != null) {
+			name = remoteUser;
 		}
 
-		// Pre service events
+		PrincipalThreadLocal.setName(name);
+	}
+
+	protected long getCompanyId(HttpServletRequest request) {
+		long companyId = PortalInstances.getCompanyId(request);
+
+		//CompanyThreadLocal.setCompanyId(companyId);
+
+		return companyId;
+	}
+
+	protected long loginUser(
+			HttpServletRequest request, HttpServletResponse response,
+			long userId, String remoteUser)
+		throws PortalException, SystemException {
+
+		if ((userId > 0) || (remoteUser == null)) {
+			return userId;
+		}
+
+		userId = GetterUtil.getLong(remoteUser);
+
+		EventsProcessorUtil.process(
+			PropsKeys.LOGIN_EVENTS_PRE, PropsValues.LOGIN_EVENTS_PRE, request,
+			response);
+
+		User user = UserLocalServiceUtil.getUserById(userId);
+
+		if (PropsValues.USERS_UPDATE_LAST_LOGIN) {
+			UserLocalServiceUtil.updateLastLogin(
+				userId, request.getRemoteAddr());
+		}
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute(WebKeys.USER_ID, new Long(userId));
+		session.setAttribute(Globals.LOCALE_KEY, user.getLocale());
+
+		EventsProcessorUtil.process(
+			PropsKeys.LOGIN_EVENTS_POST, PropsValues.LOGIN_EVENTS_POST,
+			request, response);
+
+		return userId;
+	}
+
+	protected void checkPortletSessionTracker(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		if (session.getAttribute(WebKeys.PORTLET_SESSION_TRACKER) != null) {
+			return;
+		}
+
+		session.setAttribute(
+			WebKeys.PORTLET_SESSION_TRACKER,
+			PortletSessionTracker.getInstance());
+	}
+
+	protected void checkPortletRequestProcessor(HttpServletRequest request)
+		throws ServletException {
+
+		ServletContext servletContext = getServletContext();
+
+		PortletRequestProcessor portletReqProcessor =
+			(PortletRequestProcessor)servletContext.getAttribute(
+				WebKeys.PORTLET_STRUTS_PROCESSOR);
+
+		if (portletReqProcessor == null) {
+			ModuleConfig moduleConfig = getModuleConfig(request);
+
+			portletReqProcessor =
+				PortletRequestProcessor.getInstance(this, moduleConfig);
+
+			servletContext.setAttribute(
+				WebKeys.PORTLET_STRUTS_PROCESSOR, portletReqProcessor);
+		}
+	}
+
+	protected void checkTilesDefinitionsFactory() {
+		ServletContext servletContext = getServletContext();
+
+		if (servletContext.getAttribute(
+				TilesUtilImpl.DEFINITIONS_FACTORY) != null) {
+
+			return;
+		}
+
+		servletContext.setAttribute(
+			TilesUtilImpl.DEFINITIONS_FACTORY,
+			servletContext.getAttribute(TilesUtilImpl.DEFINITIONS_FACTORY));
+	}
+
+	protected boolean processServicePre(
+			HttpServletRequest request, HttpServletResponse response,
+			long userId)
+		throws IOException, ServletException {
 
 		try {
 			EventsProcessorUtil.process(
@@ -889,151 +686,227 @@ public class MainServlet extends ActionServlet {
 				sendError(
 					HttpServletResponse.SC_NOT_FOUND, cause, request, response);
 
-				return;
+				return true;
 			}
 			else if (cause instanceof PrincipalException) {
 				processServicePrePrincipalException(
 					cause, userId, request, response);
 
-				return;
+				return true;
 			}
 
 			_log.error(e, e);
 
 			request.setAttribute(PageContext.EXCEPTION, e);
 
+			ServletContext servletContext = getServletContext();
+
 			StrutsUtil.forward(
 				PropsValues.SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE,
 				servletContext, request, response);
 
-			return;
+			return true;
 		}
 
-		if (request.getAttribute(
-				AbsoluteRedirectsResponse.class.getName()) != null) {
+		return false;
+	}
 
-			return;
+	protected void processServicePost(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+			EventsProcessorUtil.process(
+				PropsKeys.SERVLET_SERVICE_EVENTS_POST,
+				PropsValues.SERVLET_SERVICE_EVENTS_POST, request, response);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
+		response.addHeader(
+			_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
+
+		CompanyThreadLocal.setCompanyId(0);
+		PrincipalThreadLocal.setName(null);
+	}
+
+	protected void checkServletContext(HttpServletRequest request) {
+		ServletContext servletContext = getServletContext();
+
+		request.setAttribute(WebKeys.CTX, servletContext);
+	}
+
+	protected boolean hasThemeDisplay(HttpServletRequest request) {
 		if (request.getAttribute(WebKeys.THEME_DISPLAY) == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	protected boolean hasAbsoluteRedirect(HttpServletRequest request) {
+		if (request.getAttribute(
+				AbsoluteRedirectsResponse.class.getName()) == null) {
+
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	protected void setPortalPort(HttpServletRequest request) {
+		PortalUtil.setPortalPort(request);
+	}
+
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Process service request");
+		}
+
+		if (processShutdownRequest(request, response)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Processed shutdown request");
+			}
+
+			return;
+		}
+
+		if (processMaintenanceRequest(request, response)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Processed maintenance request");
+			}
+
+			return;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Get company id");
+		}
+
+		long companyId = getCompanyId(request);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Set portal port");
+		}
+
+		setPortalPort(request);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Check variables");
+		}
+
+		checkServletContext(request);
+		checkPortletSessionTracker(request);
+		checkPortletRequestProcessor(request);
+		checkTilesDefinitionsFactory();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Encrypt request");
+		}
+
+		request = encryptRequest(request, companyId);
+
+		long userId = getUserId(request);
+		String remoteUser = getRemoteUser(request, userId);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Protect request");
+		}
+
+		request = protectRequest(request, remoteUser);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Set principal");
+		}
+
+		setPrincipalName(userId, remoteUser);
+
+		try {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+				"Authenticate user id " + userId + " and remote user " +
+					remoteUser);
+			}
+
+			userId = loginUser(request, response, userId, remoteUser);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Authenticated user id " + userId);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Process service pre events");
+		}
+
+		if (processServicePre(request, response, userId)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Processing service pre events has errors");
+			}
+
+			return;
+		}
+
+		if (hasAbsoluteRedirect(request)) {
+			if (_log.isDebugEnabled()) {
+				String currentURL = PortalUtil.getCurrentURL(request);
+
+				_log.debug(
+					"Current URL " + currentURL + " has absolute redirect");
+			}
+
+			return;
+		}
+
+		if (!hasThemeDisplay(request)) {
+			if (_log.isDebugEnabled()) {
+				String currentURL = PortalUtil.getCurrentURL(request);
+
+				_log.debug(
+					"Current URL " + currentURL +
+						" does not have a theme display");
+			}
+
 			return;
 		}
 
 		try {
-
-			// Struts service
+			if (_log.isDebugEnabled()) {
+				_log.debug("Call parent service");
+			}
 
 			callParentService(request, response);
 		}
 		finally {
-
-			// Post service events
-
-			try {
-				EventsProcessorUtil.process(
-					PropsKeys.SERVLET_SERVICE_EVENTS_POST,
-					PropsValues.SERVLET_SERVICE_EVENTS_POST, request, response);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Process service post events");
 			}
 
-			response.addHeader(
-				_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
-
-			// Clear the company id associated with this thread
-
-			CompanyThreadLocal.setCompanyId(0);
-
-			// Clear the principal associated with this thread
-
-			PrincipalThreadLocal.setName(null);
+			processServicePost(request, response);
 		}
 	}
 
-	public void destroy() {
-		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
-
-		// Scheduler
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Scheduler");
-		}
-
-		try {
-			if (PropsValues.SCHEDULER_ENABLED) {
-				for (String className : PropsValues.SCHEDULER_CLASSES) {
-					Scheduler scheduler = (Scheduler)InstancePool.get(
-						className, false);
-
-					if (scheduler != null) {
-						scheduler.unschedule();
-					}
-				}
-
-				Iterator<Portlet> itr = portlets.iterator();
-
-				while (itr.hasNext()) {
-					Portlet portlet = itr.next();
-
-					String className = portlet.getSchedulerClass();
-
-					if (!portlet.isActive() || Validator.isNull(className)) {
-						continue;
-					}
-
-					Scheduler scheduler = (Scheduler)InstancePool.get(
-						className, false);
-
-					if (scheduler != null) {
-						scheduler.unschedule();
-					}
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		// Portlets
-
-		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				PortletInstanceFactoryUtil.destroy(portlet);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		// Companies
-
-		long[] companyIds = PortalInstances.getCompanyIds();
-
-		for (int i = 0; i < companyIds.length; i++) {
-			destroyCompany(companyIds[i]);
-		}
-
-		// Global shutdown events
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Process global shutdown events");
-		}
-
-		try {
-			EventsProcessorUtil.process(
-				PropsKeys.GLOBAL_SHUTDOWN_EVENTS,
-				PropsValues.GLOBAL_SHUTDOWN_EVENTS);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
+	protected void callParentDestroy() {
 		super.destroy();
+	}
+
+	protected void callParentInit() throws ServletException {
+		super.init();
+	}
+
+	protected void callParentService(
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
+
+		super.service(request, response);
 	}
 
 	protected void checkWebSettings(String xml) throws DocumentException {
@@ -1060,6 +933,14 @@ public class MainServlet extends ActionServlet {
 		I18nFilter.setLanguageIds(I18nServlet.getLanguageIds());
 	}
 
+	protected void destroyCompanies() throws Exception {
+		long[] companyIds = PortalInstances.getCompanyIds();
+
+		for (int i = 0; i < companyIds.length; i++) {
+			destroyCompany(companyIds[i]);
+		}
+	}
+
 	protected void destroyCompany(long companyId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Process shutdown events");
@@ -1073,6 +954,48 @@ public class MainServlet extends ActionServlet {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+		}
+	}
+
+	protected void destroyPortlets(List<Portlet> portlets) throws Exception {
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			PortletInstanceFactoryUtil.destroy(portlet);
+		}
+	}
+
+	protected void destroySchedulers(List<Portlet> portlets) throws Exception {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		for (String className : PropsValues.SCHEDULER_CLASSES) {
+			Scheduler scheduler = (Scheduler)InstancePool.get(className, false);
+
+			if (scheduler != null) {
+				scheduler.unschedule();
+			}
+		}
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			String className = portlet.getSchedulerClass();
+
+			if (!portlet.isActive() || Validator.isNull(className)) {
+				continue;
+			}
+
+			Scheduler scheduler = (Scheduler)InstancePool.get(className, false);
+
+			if (scheduler != null) {
+				scheduler.unschedule();
+			}
 		}
 	}
 
@@ -1111,6 +1034,144 @@ public class MainServlet extends ActionServlet {
 		return processor;
 	}
 
+	protected void initAssetRendererFactories(List<Portlet> portlets)
+		throws Exception {
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			List<AssetRendererFactory> assetRendererFactories =
+				portlet.getAssetRendererFactoryInstances();
+
+			if (assetRendererFactories == null) {
+				continue;
+			}
+
+			AssetRendererFactoryRegistryUtil.register(assetRendererFactories);
+		}
+	}
+
+	protected void initCompanies() throws Exception {
+		ServletContext servletContext = getServletContext();
+
+		String[] webIds = PortalInstances.getWebIds();
+
+		for (int i = 0; i < webIds.length; i++) {
+			PortalInstances.initCompany(servletContext, webIds[i]);
+		}
+	}
+
+	protected void initExt() throws Exception {
+		ServletContext servletContext = getServletContext();
+
+		ExtRegistry.registerPortal(servletContext);
+	}
+
+	protected void initIndexers(List<Portlet> portlets) throws Exception {
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			String indexerClass = portlet.getIndexerClass();
+
+			if (!portlet.isActive() || Validator.isNull(indexerClass)) {
+				continue;
+			}
+
+			Indexer indexer = (Indexer)InstancePool.get(indexerClass);
+
+			for (String modelClassName : indexer.getClassNames()) {
+				IndexerRegistryUtil.register(modelClassName, indexer);
+			}
+		}
+	}
+
+	protected void initLayoutTemplates(
+			PluginPackage pluginPackage, List<Portlet> portlets)
+		throws Exception {
+
+		ServletContext servletContext = getServletContext();
+
+		String[] xmls = new String[] {
+			HttpUtil.URLtoString(
+				servletContext.getResource(
+					"/WEB-INF/liferay-layout-templates.xml")),
+			HttpUtil.URLtoString(
+				servletContext.getResource(
+					"/WEB-INF/liferay-layout-templates-ext.xml"))
+		};
+
+		LayoutTemplateLocalServiceUtil.init(
+			servletContext, xmls, pluginPackage);
+	}
+
+	protected void initMessageResources() throws Exception {
+		ServletContext servletContext = getServletContext();
+
+		MultiMessageResources messageResources =
+			(MultiMessageResources)servletContext.getAttribute(
+				Globals.MESSAGES_KEY);
+
+		LanguageResources.init(messageResources);
+	}
+
+	protected PluginPackage initPluginPackage() throws Exception {
+		ServletContext servletContext = getServletContext();
+
+		return PluginPackageHotDeployListener.readPluginPackage(servletContext);
+	}
+
+	protected void initPlugins() throws Exception {
+
+		// See LEP-2885. Don't flush hot deploy events until after the portal
+		// has initialized.
+
+		PortalInitableUtil.flushInitables();
+		HotDeployUtil.flushPrematureEvents();
+	}
+
+	protected void initPollerProcessors(List<Portlet> portlets)
+		throws Exception {
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			PollerProcessor pollerProcessor =
+				portlet.getPollerProcessorInstance();
+
+			if (!portlet.isActive() || (pollerProcessor == null)) {
+				continue;
+			}
+
+			PollerProcessorUtil.addPollerProcessor(
+				portlet.getPortletId(), pollerProcessor);
+		}
+	}
+
+	protected void initPOPMessageListeners(List<Portlet> portlets)
+		throws Exception {
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			MessageListener popMessageListener =
+				portlet.getPopMessageListenerInstance();
+
+			if (!portlet.isActive() || (popMessageListener == null)) {
+				continue;
+			}
+
+			POPServerUtil.addListener(popMessageListener);
+		}
+	}
+
 	protected void initPortletApp(
 			Portlet portlet, ServletContext servletContext)
 		throws PortletException {
@@ -1134,6 +1195,257 @@ public class MainServlet extends ActionServlet {
 		for (PortletURLListener portletURLListener : portletURLListeners) {
 			PortletURLListenerFactory.create(portletURLListener);
 		}
+	}
+
+	protected List<Portlet> initPortlets(PluginPackage pluginPackage)
+		throws Exception {
+
+		ServletContext servletContext = getServletContext();
+
+		String[] xmls = new String[] {
+			HttpUtil.URLtoString(
+				servletContext.getResource(
+					"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_CUSTOM)),
+			HttpUtil.URLtoString(
+				servletContext.getResource("/WEB-INF/portlet-ext.xml")),
+			HttpUtil.URLtoString(
+				servletContext.getResource("/WEB-INF/liferay-portlet.xml")),
+			HttpUtil.URLtoString(
+				servletContext.getResource("/WEB-INF/liferay-portlet-ext.xml")),
+			HttpUtil.URLtoString(
+				servletContext.getResource("/WEB-INF/web.xml"))
+		};
+
+		PortletLocalServiceUtil.initEAR(servletContext, xmls, pluginPackage);
+
+		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
+
+		for (int i = 0; i < portlets.size(); i++) {
+			Portlet portlet = portlets.get(i);
+
+			if (i == 0) {
+				initPortletApp(portlet, servletContext);
+			}
+
+			PortletInstanceFactoryUtil.create(portlet, servletContext);
+		}
+
+		return portlets;
+	}
+
+	protected void initResourceActions(List<Portlet> portlets)
+		throws Exception {
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			List<String> portletActions =
+				ResourceActionsUtil.getPortletResourceActions(
+					portlet.getPortletId());
+
+			ResourceActionLocalServiceUtil.checkResourceActions(
+				portlet.getPortletId(), portletActions);
+
+			List<String> modelNames =
+				ResourceActionsUtil.getPortletModelResources(
+					portlet.getPortletId());
+
+			for (String modelName : modelNames) {
+				List<String> modelActions =
+					ResourceActionsUtil.getModelResourceActions(modelName);
+
+				ResourceActionLocalServiceUtil.checkResourceActions(
+					modelName, modelActions);
+			}
+		}
+	}
+
+	protected void initResourceCodes(List<Portlet> portlets) throws Exception {
+		long[] companyIds = PortalInstances.getCompanyIds();
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			List<String> modelNames =
+				ResourceActionsUtil.getPortletModelResources(
+					portlet.getPortletId());
+
+			for (long companyId : companyIds) {
+				ResourceCodeLocalServiceUtil.checkResourceCodes(
+					companyId, portlet.getPortletId());
+
+				for (String modelName : modelNames) {
+					ResourceCodeLocalServiceUtil.checkResourceCodes(
+						companyId, modelName);
+				}
+			}
+		}
+	}
+
+	protected void initSchedulers(List<Portlet> portlets) throws Exception {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		for (String className : PropsValues.SCHEDULER_CLASSES) {
+			Scheduler scheduler = (Scheduler)InstancePool.get(className);
+
+			scheduler.schedule();
+		}
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			String className = portlet.getSchedulerClass();
+
+			if (!portlet.isActive() || Validator.isNull(className)) {
+				continue;
+			}
+
+			Scheduler scheduler = (Scheduler)InstancePool.get(className);
+
+			scheduler.schedule();
+		}
+	}
+
+	protected void initSocialActivityInterpreters(List<Portlet> portlets)
+		throws Exception {
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			SocialActivityInterpreter socialActivityInterpreter =
+				portlet.getSocialActivityInterpreterInstance();
+
+			if (!portlet.isActive() ||
+				(socialActivityInterpreter == null)) {
+
+				continue;
+			}
+
+			socialActivityInterpreter = new SocialActivityInterpreterImpl(
+				portlet.getPortletId(), socialActivityInterpreter);
+
+			SocialActivityInterpreterLocalServiceUtil.addActivityInterpreter(
+				socialActivityInterpreter);
+		}
+	}
+
+	protected void initSocialRequestInterpreters(List<Portlet> portlets)
+		throws Exception {
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			SocialRequestInterpreter socialRequestInterpreter =
+				portlet.getSocialRequestInterpreterInstance();
+
+			if (!portlet.isActive() || (socialRequestInterpreter == null)) {
+				continue;
+			}
+
+			socialRequestInterpreter = new SocialRequestInterpreterImpl(
+				portlet.getPortletId(), socialRequestInterpreter);
+
+			SocialRequestInterpreterLocalServiceUtil.addRequestInterpreter(
+				socialRequestInterpreter);
+		}
+	}
+
+	protected void initThemes(
+			PluginPackage pluginPackage, List<Portlet> portlets)
+		throws Exception {
+
+		ServletContext servletContext = getServletContext();
+
+		String[] xmls = new String[] {
+			HttpUtil.URLtoString(
+				servletContext.getResource(
+					"/WEB-INF/liferay-look-and-feel.xml")),
+			HttpUtil.URLtoString(
+				servletContext.getResource(
+					"/WEB-INF/liferay-look-and-feel-ext.xml"))
+		};
+
+		ThemeLocalServiceUtil.init(
+			servletContext, null, true, xmls, pluginPackage);
+	}
+
+	protected void initVelocity() throws Exception {
+		ServletContext servletContext = getServletContext();
+
+		String contextPath = PortalUtil.getPathContext();
+
+		VelocityContextPool.put(contextPath, servletContext);
+	}
+
+	protected void initWebDAVStorages(List<Portlet> portlets) throws Exception {
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			WebDAVStorage webDAVStorage = portlet.getWebDAVStorageInstance();
+
+			if (!portlet.isActive() || (webDAVStorage == null)) {
+				continue;
+			}
+
+			webDAVStorage.setToken(portlet.getWebDAVStorageToken());
+
+			WebDAVUtil.addStorage(webDAVStorage);
+		}
+	}
+
+	protected void initWebSettings() throws Exception {
+		ServletContext servletContext = getServletContext();
+
+		String xml = HttpUtil.URLtoString(
+			servletContext.getResource("/WEB-INF/web.xml"));
+
+		checkWebSettings(xml);
+	}
+
+	protected void initWorkflowHandlers(List<Portlet> portlets)
+		throws Exception {
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			List<WorkflowHandler> workflowHandlers =
+				portlet.getWorkflowHandlerInstances();
+
+			if (workflowHandlers == null) {
+				continue;
+			}
+
+			WorkflowHandlerRegistryUtil.register(workflowHandlers);
+		}
+	}
+
+	protected void processGlobalShutdownEvents() throws Exception {
+		EventsProcessorUtil.process(
+			PropsKeys.GLOBAL_SHUTDOWN_EVENTS,
+			PropsValues.GLOBAL_SHUTDOWN_EVENTS);
+
+		super.destroy();
+	}
+
+	protected void processGlobalStartupEvents() throws Exception {
+		EventsProcessorUtil.process(
+			PropsKeys.GLOBAL_STARTUP_EVENTS, PropsValues.GLOBAL_STARTUP_EVENTS);
 	}
 
 	protected void processServicePrePrincipalException(
@@ -1179,6 +1491,12 @@ public class MainServlet extends ActionServlet {
 		}
 
 		response.sendRedirect(redirect);
+	}
+
+	protected void processStartupEvents() throws Exception {
+		StartupAction startupAction = new StartupAction();
+
+		startupAction.run(null);
 	}
 
 	protected void sendError(
