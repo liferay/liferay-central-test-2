@@ -290,8 +290,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	private static Log _log =
 		LogFactoryUtil.getLog(ConvertDocumentLibrary.class);
 
-	private static ServiceContext _serviceContext = new ServiceContext();
-
+	private ServiceContext _serviceContext = new ServiceContext();
 	private Hook _sourceHook;
 	private Hook _targetHook;
 
