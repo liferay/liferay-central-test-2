@@ -48,6 +48,15 @@ public class FreeMarkerEngineUtil {
 	}
 
 	public static boolean mergeTemplate(
+			String freeMarkerTemplateId, FreeMarkerContext freeMarkerContext,
+			StringWriter stringWriter)
+		throws Exception {
+
+		return getFreeMarkerEngine().mergeTemplate(
+			freeMarkerTemplateId, freeMarkerContext, stringWriter);
+	}
+
+	public static boolean mergeTemplate(
 			String freeMarkerTemplateId, String freemarkerTemplateContent,
 			FreeMarkerContext freeMarkerContext, StringWriter stringWriter)
 		throws Exception {
@@ -57,15 +66,7 @@ public class FreeMarkerEngineUtil {
 			stringWriter);
 	}
 
-	public static boolean mergeTemplate(
-		String freeMarkerTemplateId, FreeMarkerContext freeMarkerContext,
-		StringWriter stringWriter) throws Exception {
-
-		return getFreeMarkerEngine().mergeTemplate(
-			freeMarkerTemplateId, freeMarkerContext, stringWriter);
-	}
-
-	public static boolean resourceExists(String resource)  {
+	public static boolean resourceExists(String resource) {
 		return getFreeMarkerEngine().resourceExists(resource);
 	}
 

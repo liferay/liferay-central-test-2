@@ -72,11 +72,11 @@ public class ThemeUtil {
 
 		String extension = theme.getTemplateExtension();
 
-		if (extension.equals("vm")) {
-			includeVM(servletContext, request, pageContext, page, theme, true);
-		}
-		else if (extension.equals("ftl")) {
+		if (extension.equals(_TEMPLATE_EXTENSION_FTL)) {
 			includeFTL(servletContext, request, pageContext, page, theme, true);
+		}
+		else if (extension.equals(_TEMPLATE_EXTENSION_VM)) {
+			includeVM(servletContext, request, pageContext, page, theme, true);
 		}
 		else {
 			String path =
@@ -116,7 +116,7 @@ public class ThemeUtil {
 		sb.append(theme.getTemplatesPath());
 		sb.append(StringPool.SLASH);
 		sb.append(page.substring(0, pos));
-		sb.append(".ftl");
+		sb.append(_TEMPLATE_EXTENSION_FTL);
 
 		String source = sb.toString();
 
@@ -165,13 +165,15 @@ public class ThemeUtil {
 
 		freeMarkerContext.put("ThemeJspTaglibs", themeTaglib);
 
-		// Required by FreeMarker JSP Taglib support
+		// FreeMarker JSP tag library support
 
 		HttpServletResponse response =
-			(HttpServletResponse) pageContext.getResponse();
-		HttpRequestHashModel httpRequestModel = new HttpRequestHashModel(
+			(HttpServletResponse)pageContext.getResponse();
+
+		HttpRequestHashModel httpRequestHashModel = new HttpRequestHashModel(
 			request, response, ObjectWrapper.DEFAULT_WRAPPER);
-		freeMarkerContext.put("Request", httpRequestModel);
+
+		freeMarkerContext.put("Request", httpRequestHashModel);
 
 		// Merge templates
 
@@ -276,7 +278,7 @@ public class ThemeUtil {
 		sb.append(theme.getTemplatesPath());
 		sb.append(StringPool.SLASH);
 		sb.append(page.substring(0, pos));
-		sb.append(".vm");
+		sb.append(_TEMPLATE_EXTENSION_VM);
 
 		String source = sb.toString();
 
@@ -346,6 +348,10 @@ public class ThemeUtil {
 
 		return value;
 	}
+
+	private static final String _TEMPLATE_EXTENSION_FTL = ".ftl";
+
+	private static final String _TEMPLATE_EXTENSION_VM = ".vm";
 
 	private static Log _log = LogFactoryUtil.getLog(ThemeUtil.class);
 

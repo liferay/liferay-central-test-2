@@ -98,9 +98,9 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String FORWARD_URL = "FORWARD_URL";
 
-	public static final String FTL_VARIABLES = "FTL_VARIABLES";
-
 	public static final String FRIENDLY_URL = "FRIENDLY_URL";
+
+	public static final String FTL_VARIABLES = "FTL_VARIABLES";
 
 	public static final String GOOGLE_GADGET = "GOOGLE_GADGET";
 

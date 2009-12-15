@@ -84,9 +84,9 @@ public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 		return null;
 	}
 
-	public long getLastModified(Object source) {
-		if (source instanceof JournalTemplate) {
-			JournalTemplate template = (JournalTemplate)source;
+	public long getLastModified(Object templateSource) {
+		if (templateSource instanceof JournalTemplate) {
+			JournalTemplate template = (JournalTemplate)templateSource;
 
 			return template.getModifiedDate().getTime();
 		}
@@ -94,9 +94,11 @@ public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 		return -1;
 	}
 
-	public Reader getReader(Object source, String encoding) throws IOException {
-		if (source instanceof JournalTemplate) {
-			JournalTemplate template = (JournalTemplate)source;
+	public Reader getReader(Object templateSource, String encoding)
+		throws IOException {
+
+		if (templateSource instanceof JournalTemplate) {
+			JournalTemplate template = (JournalTemplate)templateSource;
 
 			String xsl = template.getXsl();
 

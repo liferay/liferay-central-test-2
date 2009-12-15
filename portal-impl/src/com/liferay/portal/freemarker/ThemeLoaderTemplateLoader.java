@@ -40,7 +40,6 @@ import java.net.URL;
 public class ThemeLoaderTemplateLoader extends URLTemplateLoader {
 
 	public URL getURL(String name) throws IOException {
-
 		int pos = name.indexOf(THEME_LOADER_SEPARATOR);
 
 		if (pos != -1) {
@@ -64,7 +63,7 @@ public class ThemeLoaderTemplateLoader extends URLTemplateLoader {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						name + " is associated with the theme loader " +
-						ctxName + " " + themeLoader);
+							ctxName + " " + themeLoader);
 				}
 
 				File fileStorage = themeLoader.getFileStorage();
@@ -73,8 +72,9 @@ public class ThemeLoaderTemplateLoader extends URLTemplateLoader {
 
 			}
 			else {
-				_log.error(name + " is not valid because " + ctxName +
-					" does not map to a theme loader");
+				_log.error(
+					name + " is not valid because " + ctxName +
+						" does not map to a theme loader");
 			}
 		}
 

@@ -39,16 +39,16 @@ public abstract class FreeMarkerTemplateLoader {
 	public static final String THEME_LOADER_SEPARATOR =
 		"_THEME_LOADER_CONTEXT_";
 
-	public void closeTemplateSource(Object source) {
+	public void closeTemplateSource(Object templateSource) {
 	}
 
 	public abstract Object findTemplateSource(String name) throws IOException;
 
-	public long getLastModified(Object source) {
+	public long getLastModified(Object templateSource) {
 		return 0;
 	}
 
-	public abstract Reader getReader(Object source, String encoding)
+	public abstract Reader getReader(Object templateSource, String encoding)
 		throws IOException;
 
 }

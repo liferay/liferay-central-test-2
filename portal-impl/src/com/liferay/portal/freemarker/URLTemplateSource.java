@@ -40,13 +40,16 @@ public class URLTemplateSource {
 		_urlConnection = url.openConnection();
 	}
 
-	public boolean equals(Object o) {
-		if (o instanceof URLTemplateSource) {
-			return _url.equals(((URLTemplateSource) o)._url);
+	public boolean equals(Object obj) {
+		if (obj instanceof URLTemplateSource) {
+			URLTemplateSource urlTemplateSource = (URLTemplateSource)obj;
+
+			if (_url.equals(urlTemplateSource._url)) {
+				return true;
+			}
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	public int hashCode() {

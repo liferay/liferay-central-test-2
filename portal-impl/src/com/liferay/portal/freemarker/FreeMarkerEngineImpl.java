@@ -104,6 +104,15 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 	}
 
 	public boolean mergeTemplate(
+			String freeMarkerTemplateId, FreeMarkerContext freeMarkerContext,
+			StringWriter stringWriter)
+		throws Exception {
+
+		return mergeTemplate(
+			freeMarkerTemplateId, null, freeMarkerContext, stringWriter);
+	}
+
+	public boolean mergeTemplate(
 			String freeMarkerTemplateId, String freemarkerTemplateContent,
 			FreeMarkerContext freeMarkerContext, StringWriter stringWriter)
 		throws Exception {
@@ -133,15 +142,6 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 			freeMarkerContextImpl.getWrappedContext(), stringWriter);
 
 		return true;
-	}
-
-	public boolean mergeTemplate(
-			String freeMarkerTemplateId, FreeMarkerContext freeMarkerContext,
-			StringWriter stringWriter)
-		throws Exception {
-
-		return mergeTemplate(freeMarkerTemplateId, null, freeMarkerContext,
-			stringWriter);
 	}
 
 	public boolean resourceExists(String resource) {

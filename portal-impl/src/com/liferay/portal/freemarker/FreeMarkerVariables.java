@@ -216,7 +216,7 @@ public class FreeMarkerVariables {
 
 		_insertHelperUtility(
 			freeMarkerContext, restrictedVariables,
-			"velocityPortletPreferences", new VelocityPortletPreferences());
+			"freeMarkerPortletPreferences", new VelocityPortletPreferences());
 
 		// Randomizer
 
@@ -399,19 +399,19 @@ public class FreeMarkerVariables {
 
 			freeMarkerContext.put(
 				"fullCssPath",
-				"/" + servletContextName + theme.getFreeMarkerTemplateLoader() +
+				servletContextName + theme.getFreeMarkerTemplateLoader() +
 					theme.getCssPath());
 
 			freeMarkerContext.put(
 				"fullTemplatesPath",
-				"/" + servletContextName + theme.getFreeMarkerTemplateLoader() +
+				servletContextName + theme.getFreeMarkerTemplateLoader() +
 					theme.getTemplatesPath());
 
 			// Init
 
 			freeMarkerContext.put(
 				"init",
-				"/" + themeDisplay.getPathContext() +
+				themeDisplay.getPathContext() +
 					FreeMarkerTemplateLoader.SERVLET_SEPARATOR +
 						"/html/themes/_unstyled/templates/init.ftl");
 
@@ -442,6 +442,7 @@ public class FreeMarkerVariables {
 			freeMarkerContext.put(
 				"pageTitle", request.getAttribute(WebKeys.PAGE_TITLE));
 		}
+
 		if (request.getAttribute(WebKeys.PAGE_SUBTITLE) != null) {
 			freeMarkerContext.put(
 				"pageSubtitle", request.getAttribute(WebKeys.PAGE_SUBTITLE));

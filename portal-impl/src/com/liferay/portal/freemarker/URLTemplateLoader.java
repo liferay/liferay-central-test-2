@@ -22,9 +22,6 @@
 
 package com.liferay.portal.freemarker;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -39,29 +36,18 @@ import java.net.URL;
  */
 public abstract class URLTemplateLoader extends FreeMarkerTemplateLoader {
 
-	public void closeTemplateSource(Object source) {
-		if (source instanceof URLTemplateSource) {
-			URLTemplateSource urlTemplateSource = (URLTemplateSource)source;
+	public void closeTemplateSource(Object templateSource) {
+		if (templateSource instanceof URLTemplateSource) {
+			URLTemplateSource urlTemplateSource =
+				(URLTemplateSource)templateSource;
 
 			try {
 				urlTemplateSource.closeStream();
 			}
-			catch (IOException e) {
+			catch (IOException ioe) {
 			}
 		}
 	}
-
-	public long getLastModified(Object source) {
-		if (source instanceof URLTemplateSource) {
-			URLTemplateSource urlTemplateSource = (URLTemplateSource)source;
-
-			return urlTemplateSource.getLastModified();
-		}
-
-		return super.getLastModified(source);
-	}
-
-	public abstract URL getURL(String name) throws IOException;
 
 	public Object findTemplateSource(String name) throws IOException {
 		URL url = getURL(name);
@@ -73,20 +59,32 @@ public abstract class URLTemplateLoader extends FreeMarkerTemplateLoader {
 		return null;
 	}
 
-	public Reader getReader(Object source, String encoding)
+	public long getLastModified(Object templateSource) {
+		if (templateSource instanceof URLTemplateSource) {
+			URLTemplateSource urlTemplateSource =
+				(URLTemplateSource)templateSource;
+
+			return urlTemplateSource.getLastModified();
+		}
+
+		return super.getLastModified(templateSource);
+	}
+
+	public Reader getReader(Object templateSource, String encoding)
 		throws IOException {
 
-		if (source instanceof URLTemplateSource) {
-			URLTemplateSource urlTemplateSource = (URLTemplateSource)source;
+		if (templateSource instanceof URLTemplateSource) {
+			URLTemplateSource urlTemplateSource =
+				(URLTemplateSource)templateSource;
 
-			return new BufferedReader(new InputStreamReader(
-				urlTemplateSource.getInputStream(), encoding));
+			return new BufferedReader(
+				new InputStreamReader(
+					urlTemplateSource.getInputStream(), encoding));
 		}
 
 		return null;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(URLTemplateLoader.class);
+	public abstract URL getURL(String name) throws IOException;
 
 }
