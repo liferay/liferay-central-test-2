@@ -32,6 +32,8 @@ import java.io.Reader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="LiferayTemplateLoader.java.html"><i>View Source</i></a>
@@ -41,59 +43,54 @@ import java.util.List;
 public class LiferayTemplateLoader implements TemplateLoader {
 
 	public void closeTemplateSource(Object templateSource) {
-		for (FreeMarkerTemplateLoader freeMarkerTemplateLoader :
-				_freeMarkerTemplateLoaders) {
+		LiferayTemplateSource source = (LiferayTemplateSource)templateSource;
 
-			freeMarkerTemplateLoader.closeTemplateSource(templateSource);
-		}
+		source.close();
 	}
 
 	public Object findTemplateSource(String name) throws IOException {
-		Object templateSource = null;
+		// Give the last template loader that found this resource a change to
+		// find it again.
+
+		FreeMarkerTemplateLoader templateLoader = _lastLoaderForName.get(name);
+		if (templateLoader != null) {
+			Object templateSource = templateLoader.findTemplateSource(name);
+
+			if (templateSource != null) {
+				return new LiferayTemplateSource(
+					templateSource, templateLoader);
+			}
+		}
 
 		for (FreeMarkerTemplateLoader freeMarkerTemplateLoader :
 				_freeMarkerTemplateLoaders) {
 
-			templateSource = freeMarkerTemplateLoader.findTemplateSource(name);
+			Object templateSource = 
+				freeMarkerTemplateLoader.findTemplateSource(name);
 
 			if (templateSource != null) {
-				break;
+				_lastLoaderForName.put(name, freeMarkerTemplateLoader);
+
+				return new LiferayTemplateSource(
+					templateSource, freeMarkerTemplateLoader);
 			}
 		}
 
-		return templateSource;
+		return null;
 	}
 
 	public long getLastModified(Object templateSource) {
-		long lastModified = 0;
+		LiferayTemplateSource source = (LiferayTemplateSource)templateSource;
 
-		for (FreeMarkerTemplateLoader freeMarkerTemplateLoader :
-				_freeMarkerTemplateLoaders) {
-
-			long curLastModified = freeMarkerTemplateLoader.getLastModified(
-				templateSource);
-
-			if (curLastModified > lastModified) {
-				lastModified = curLastModified;
-			}
-		}
-
-		return lastModified;
+		return source.getLastModified();
 	}
 
 	public Reader getReader(Object templateSource, String encoding)
 		throws IOException {
 
-		Reader reader = null;
+		LiferayTemplateSource source = (LiferayTemplateSource)templateSource;
 
-		for (FreeMarkerTemplateLoader freeMarkerTemplateLoader :
-				_freeMarkerTemplateLoaders) {
-
-			reader = freeMarkerTemplateLoader.getReader(
-				templateSource, encoding);
-		}
-
-		return reader;
+		return source.getReader(encoding);
 	}
 
 	public void setTemplateLoaders(
@@ -126,5 +123,7 @@ public class LiferayTemplateLoader implements TemplateLoader {
 		LogFactoryUtil.getLog(LiferayTemplateLoader.class);
 
 	private FreeMarkerTemplateLoader[] _freeMarkerTemplateLoaders;
+	private Map<String, FreeMarkerTemplateLoader> _lastLoaderForName = 
+		new ConcurrentHashMap<String, FreeMarkerTemplateLoader>();
 
 }

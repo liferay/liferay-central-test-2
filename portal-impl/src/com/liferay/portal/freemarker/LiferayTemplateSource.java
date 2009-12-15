@@ -22,41 +22,52 @@
 
 package com.liferay.portal.freemarker;
 
-import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
-
-import freemarker.cache.ConcurrentCacheStorage;
+import java.io.IOException;
+import java.io.Reader;
 
 /**
- * <a href="LiferayCacheStorage.java.html"><i>View Source</i></a>
- *
+ * <a href="LiferayTemplateSource.java.html"><i>View Source</i></a>
+ * 
  * @author Mika Koivisto
  */
-public class LiferayCacheStorage implements ConcurrentCacheStorage {
+public class LiferayTemplateSource {
 
-	public static final String CACHE_NAME = LiferayCacheStorage.class.getName();
+	public LiferayTemplateSource(
+		Object source, FreeMarkerTemplateLoader loader) {
 
-	public void clear() {
-		_cache.removeAll();
+		_loader = loader;
+		_source = source;
 	}
 
-	public Object get(Object key) {
-		return _cache.get(key.toString());
+	public void close() {
+		_loader.closeTemplateSource(_source);
 	}
 
-	public void put(Object key, Object value) {
-		_cache.put(key.toString(), value);
+	public boolean equals(Object o) {
+		if (o instanceof LiferayTemplateSource) {
+			LiferayTemplateSource lts = (LiferayTemplateSource) o;
+			return lts._loader.equals(_loader) && lts._source.equals(_source);
+		}
+		return false;
 	}
 
-	public void remove(Object key) {
-		_cache.remove(key.toString());
+	public long getLastModified() {
+		return _loader.getLastModified(_source);
 	}
 
-	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
-
-	public boolean isConcurrent() {
-
-		return true;
+	public Reader getReader(String encoding) throws IOException {
+		return _loader.getReader(_source, encoding);
 	}
+
+	public int hashCode() {
+		return _loader.hashCode() + 31 * _source.hashCode();
+	}
+
+	public String toString() {
+		return _source.toString();
+	}
+
+	private FreeMarkerTemplateLoader _loader;
+	private Object _source;
 
 }
