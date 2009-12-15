@@ -158,7 +158,6 @@ audio/x-ms-wma wma
 audio/x-pn-realaudio ra
 audio/x-pn-realaudio ram
 audio/x-wav wav
-ideo/mp4 mp4
 image/bmp bmp
 image/cis-cod cod
 image/gif gif
@@ -204,6 +203,7 @@ text/x-component htc
 text/x-setext etx
 text/x-vcard vcf
 video/3gpp 3gp
+video/mp4 mp4
 video/mpeg mp2
 video/mpeg mpa
 video/mpeg mpe
