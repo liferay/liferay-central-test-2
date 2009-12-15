@@ -22,6 +22,9 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.freemarker.FreeMarkerVariables;
+import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
+import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
@@ -34,6 +37,11 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.velocity.VelocityVariables;
+
+import freemarker.ext.jsp.TaglibFactory;
+import freemarker.ext.servlet.HttpRequestHashModel;
+
+import freemarker.template.ObjectWrapper;
 
 import java.io.StringWriter;
 
@@ -52,6 +60,7 @@ import org.apache.struts.tiles.ComponentContext;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Raymond Augé
+ * @author Mika Koivisto
  */
 public class ThemeUtil {
 
@@ -66,11 +75,120 @@ public class ThemeUtil {
 		if (extension.equals("vm")) {
 			includeVM(servletContext, request, pageContext, page, theme, true);
 		}
+		else if (extension.equals("ftl")) {
+			includeFTL(servletContext, request, pageContext, page, theme, true);
+		}
 		else {
 			String path =
 				theme.getTemplatesPath() + StringPool.SLASH + page;
 
 			includeJSP(servletContext, request, response, path, theme);
+		}
+	}
+
+	public static String includeFTL(
+			ServletContext servletContext, HttpServletRequest request,
+			PageContext pageContext, String page, Theme theme, boolean write)
+		throws Exception {
+
+		// The servlet context name will be null when the theme is deployed to
+		// the root directory in Tomcat. See
+		// com.liferay.portal.servlet.MainServlet and
+		// com.liferay.portlet.PortletContextImpl for other cases where a null
+		// servlet context name is also converted to an empty string.
+
+		String ctxName = GetterUtil.getString(theme.getServletContextName());
+
+		if (VelocityContextPool.get(ctxName) == null) {
+
+			// This should only happen if the FreeMarker template is the first
+			// page to be accessed in the system
+
+			VelocityContextPool.put(ctxName, servletContext);
+		}
+
+		int pos = page.lastIndexOf(StringPool.PERIOD);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(ctxName);
+		sb.append(theme.getFreeMarkerTemplateLoader());
+		sb.append(theme.getTemplatesPath());
+		sb.append(StringPool.SLASH);
+		sb.append(page.substring(0, pos));
+		sb.append(".ftl");
+
+		String source = sb.toString();
+
+		if (!FreeMarkerEngineUtil.resourceExists(source)) {
+			_log.error(source + " does not exist");
+
+			return null;
+		}
+
+		StringWriter stringWriter = new StringWriter();
+
+		FreeMarkerContext freeMarkerContext =
+			FreeMarkerEngineUtil.getWrappedStandardToolsContext();
+
+		// FreeMarker variables
+
+		FreeMarkerVariables.insertVariables(freeMarkerContext, request);
+
+		// Theme servlet context
+
+		ServletContext themeServletContext = VelocityContextPool.get(ctxName);
+
+		// liferay:include tag library
+
+		StringServletResponse stringResponse = new StringServletResponse(
+			(HttpServletResponse)pageContext.getResponse());
+
+		VelocityTaglib velocityTaglib = new VelocityTaglib(
+			servletContext, request, stringResponse, pageContext);
+
+		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
+
+		freeMarkerContext.put("themeServletContext", themeServletContext);
+		freeMarkerContext.put("taglibLiferay", velocityTaglib);
+		freeMarkerContext.put("theme", velocityTaglib);
+
+		// Portal JSP tag library factory
+
+		TaglibFactory portalTaglib = new TaglibFactory(servletContext);
+
+		freeMarkerContext.put("PortalJspTagLibs", portalTaglib);
+
+		// Theme JSP tag library factory
+
+		TaglibFactory themeTaglib = new TaglibFactory(themeServletContext);
+
+		freeMarkerContext.put("ThemeJspTaglibs", themeTaglib);
+
+		// Required by FreeMarker JSP Taglib support
+
+		HttpServletResponse response =
+			(HttpServletResponse) pageContext.getResponse();
+		HttpRequestHashModel httpRequestModel = new HttpRequestHashModel(
+			request, response, ObjectWrapper.DEFAULT_WRAPPER);
+		freeMarkerContext.put("Request", httpRequestModel);
+
+		// Merge templates
+
+		FreeMarkerEngineUtil.mergeTemplate(
+			source, freeMarkerContext, stringWriter);
+
+		// Print output
+
+		String output = stringWriter.toString();
+
+		if (write) {
+			pageContext.getOut().print(output);
+
+			return null;
+		}
+		else {
+			return output;
 		}
 	}
 

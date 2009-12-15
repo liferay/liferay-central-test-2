@@ -27,7 +27,7 @@ import java.io.Reader;
 
 /**
  * <a href="LiferayTemplateSource.java.html"><i>View Source</i></a>
- * 
+ *
  * @author Mika Koivisto
  */
 public class LiferayTemplateSource {

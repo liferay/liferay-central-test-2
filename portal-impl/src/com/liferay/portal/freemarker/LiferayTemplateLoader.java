@@ -65,7 +65,7 @@ public class LiferayTemplateLoader implements TemplateLoader {
 		for (FreeMarkerTemplateLoader freeMarkerTemplateLoader :
 				_freeMarkerTemplateLoaders) {
 
-			Object templateSource = 
+			Object templateSource =
 				freeMarkerTemplateLoader.findTemplateSource(name);
 
 			if (templateSource != null) {
@@ -123,7 +123,7 @@ public class LiferayTemplateLoader implements TemplateLoader {
 		LogFactoryUtil.getLog(LiferayTemplateLoader.class);
 
 	private FreeMarkerTemplateLoader[] _freeMarkerTemplateLoaders;
-	private Map<String, FreeMarkerTemplateLoader> _lastLoaderForName = 
+	private Map<String, FreeMarkerTemplateLoader> _lastLoaderForName =
 		new ConcurrentHashMap<String, FreeMarkerTemplateLoader>();
 
 }

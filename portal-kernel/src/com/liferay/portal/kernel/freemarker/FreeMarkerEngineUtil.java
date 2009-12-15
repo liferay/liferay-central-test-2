@@ -39,6 +39,10 @@ public class FreeMarkerEngineUtil {
 		return getFreeMarkerEngine().getWrappedRestrictedToolsContext();
 	}
 
+	public static FreeMarkerContext getWrappedStandardToolsContext() {
+		return getFreeMarkerEngine().getWrappedStandardToolsContext();
+	}
+
 	public static void init() throws Exception {
 		getFreeMarkerEngine().init();
 	}
@@ -51,6 +55,18 @@ public class FreeMarkerEngineUtil {
 		return getFreeMarkerEngine().mergeTemplate(
 			freeMarkerTemplateId, freemarkerTemplateContent, freeMarkerContext,
 			stringWriter);
+	}
+
+	public static boolean mergeTemplate(
+		String freeMarkerTemplateId, FreeMarkerContext freeMarkerContext,
+		StringWriter stringWriter) throws Exception {
+
+		return getFreeMarkerEngine().mergeTemplate(
+			freeMarkerTemplateId, freeMarkerContext, stringWriter);
+	}
+
+	public static boolean resourceExists(String resource)  {
+		return getFreeMarkerEngine().resourceExists(resource);
 	}
 
 	public void setFreeMarkerEngine(FreeMarkerEngine freeMarkerEngine) {

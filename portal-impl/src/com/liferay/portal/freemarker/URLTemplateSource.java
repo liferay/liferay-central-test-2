@@ -23,32 +23,67 @@
 package com.liferay.portal.freemarker;
 
 import java.io.IOException;
-import java.io.Reader;
+import java.io.InputStream;
+
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
- * <a href="FreeMarkerTemplateLoader.java.html"><i>View Source</i></a>
+ * <a href="URLTemplateSource.java.html"><i>View Source</i></a>
  *
  * @author Mika Koivisto
  */
-public abstract class FreeMarkerTemplateLoader {
+public class URLTemplateSource {
 
-	public static final String JOURNAL_SEPARATOR = "_JOURNAL_CONTEXT_";
-
-	public static final String SERVLET_SEPARATOR = "_SERVLET_CONTEXT_";
-
-	public static final String THEME_LOADER_SEPARATOR =
-		"_THEME_LOADER_CONTEXT_";
-
-	public void closeTemplateSource(Object source) {
+	public URLTemplateSource(URL url) throws IOException {
+		_url = url;
+		_urlConnection = url.openConnection();
 	}
 
-	public abstract Object findTemplateSource(String name) throws IOException;
-
-	public long getLastModified(Object source) {
-		return 0;
+	public boolean equals(Object o) {
+		if (o instanceof URLTemplateSource) {
+			return _url.equals(((URLTemplateSource) o)._url);
+		}
+		else {
+			return false;
+		}
 	}
 
-	public abstract Reader getReader(Object source, String encoding)
-		throws IOException;
+	public int hashCode() {
+		return _url.hashCode();
+	}
+
+	public String toString() {
+		return _url.toString();
+	}
+
+	protected void closeStream() throws IOException {
+		try {
+			if (_inputStream != null) {
+				_inputStream.close();
+			}
+			else {
+				_urlConnection.getInputStream().close();
+			}
+		}
+		finally {
+			_inputStream = null;
+			_urlConnection = null;
+		}
+	}
+
+	protected InputStream getInputStream() throws IOException {
+		_inputStream = _urlConnection.getInputStream();
+
+		return _inputStream;
+	}
+
+	protected long getLastModified() {
+		return _urlConnection.getLastModified();
+	}
+
+	private InputStream _inputStream;
+	private URL _url;
+	private URLConnection _urlConnection;
 
 }

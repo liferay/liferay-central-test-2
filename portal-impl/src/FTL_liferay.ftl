@@ -1,30 +1,30 @@
 <#ftl strip_whitespace=true>
 
 <#macro css file_name>
-	<#assign $file_id = "">
+	<#assign file_id = "">
 
-	<#if $file_name == $css_main_file>
-		<#assign $file_id = "mainLiferayThemeCSS"/>
+	<#if file_name = css_main_file>
+		<#assign file_id = "mainLiferayThemeCSS"/>
 	</#if>
 
-	<link class="lfr-css-file" href="$file_name" id="$file_id" rel="stylesheet" type="text/css" />
+	<link class="lfr-css-file" href="${file_name}" id="${file_id}" rel="stylesheet" type="text/css" />
 </#macro>
 
 <#macro js file_name>
-	<#assign $file_id = ""/>
+	<#assign file_id = ""/>
 
-	<#if $file_name == $js_main_file>
-		<#assign $file_id = "mainLiferayThemeJavaScript"/>
+	<#if file_name == js_main_file>
+		<#assign file_id = "mainLiferayThemeJavaScript"/>
 	</#if>
 
-	<script id="$file_id" src="$file_name" type="text/javascript"></script>
+	<script id="${file_id}" src="${file_name}" type="text/javascript"></script>
 </#macro>
 
-<#macro language lang_key>
-${languageUtil.get(locale, lang_key)}</#macro>
+<#macro language key>
+${languageUtil.get(locale, key)}</#macro>
 
-<#macro date date_format>
-${dateUtil.getCurrentDate(date_format, locale)}</#macro>
+<#macro date format>
+${dateUtil.getCurrentDate(format, locale)}</#macro>
 
 <#macro ie6_png_fix>
 <#if browserSniffer.isIe(request) && browserSniffer.getMajorVersion(request) < 7>
@@ -48,7 +48,7 @@ img, .png {
 							(
 								this.runtimeStyle.backgroundImage = "none",
 								this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",
-								this.src = "$images_folder/spacer.png"
+								this.src = "${images_folder}/spacer.png"
 							) :
 								(
 									(
@@ -73,7 +73,7 @@ img, .png {
 </#macro>
 
 <#macro breadcrumbs control_panel = "">
-	<#if $control_panel == "control_panel">
+	<#if control_panel = "control_panel">
 		${theme.breadcrumb(0, false, false, true, true)}
 	<#else>
 		${theme.breadcrumb()}

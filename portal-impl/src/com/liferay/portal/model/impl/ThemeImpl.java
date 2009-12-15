@@ -23,6 +23,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.freemarker.FreeMarkerTemplateLoader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -325,6 +326,15 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 		else {
 			return PortalUtil.getPathContext();
+		}
+	}
+
+	public String getFreeMarkerTemplateLoader() {
+		if (_loadFromServletContext) {
+			return FreeMarkerTemplateLoader.SERVLET_SEPARATOR;
+		}
+		else {
+			return FreeMarkerTemplateLoader.THEME_LOADER_SEPARATOR;
 		}
 	}
 

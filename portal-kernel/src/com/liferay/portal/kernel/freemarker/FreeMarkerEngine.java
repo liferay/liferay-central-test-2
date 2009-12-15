@@ -33,11 +33,20 @@ public interface FreeMarkerEngine {
 
 	public FreeMarkerContext getWrappedRestrictedToolsContext();
 
+	public FreeMarkerContext getWrappedStandardToolsContext();
+
 	public void init() throws Exception;
 
 	public boolean mergeTemplate(
 			String freeMarkerTemplateId, String freemarkerTemplateContent,
 			FreeMarkerContext freeMarkerContext, StringWriter StringWriter)
 		throws Exception;
+
+	public boolean mergeTemplate(
+			String freeMarkerTemplateId, FreeMarkerContext freeMarkerContext,
+			StringWriter stringWriter)
+		throws Exception;
+
+	public boolean resourceExists(String resource);
 
 }

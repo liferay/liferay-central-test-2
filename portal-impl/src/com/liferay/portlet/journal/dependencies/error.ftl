@@ -1,6 +1,6 @@
 <div class="journal-template-error">
 	<span class="portlet-msg-error">
-		<@liferay.language lang_key="an-error-occurred-while-processing-the-template"/>
+		<@liferay.language key="an-error-occurred-while-processing-the-template"/>
 	</span>
 
 	<pre>${exception?html}</pre>

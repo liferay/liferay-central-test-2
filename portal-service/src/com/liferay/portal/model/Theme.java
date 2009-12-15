@@ -121,6 +121,8 @@ public interface Theme extends Comparable<Theme>, Plugin, Serializable {
 
 	public String getContextPath();
 
+	public String getFreeMarkerTemplateLoader();
+
 	public boolean getLoadFromServletContext();
 
 	public boolean isLoadFromServletContext();

@@ -54,6 +54,11 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 			_restrictedToolsContext.getWrappedContext());
 	}
 
+	public FreeMarkerContext getWrappedStandardToolsContext() {
+		return new FreeMarkerContextImpl(
+			_standardToolsContext.getWrappedContext());
+	}
+
 	public void init() throws Exception {
 		LiferayTemplateLoader liferayTemplateLoader =
 			new LiferayTemplateLoader();
@@ -104,6 +109,7 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		throws Exception {
 
 		if ((Validator.isNotNull(freeMarkerTemplateId)) &&
+			(Validator.isNotNull(freemarkerTemplateContent)) &&
 			(!PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED ||
 			 !resourceExists(freeMarkerTemplateId))) {
 
@@ -127,6 +133,15 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 			freeMarkerContextImpl.getWrappedContext(), stringWriter);
 
 		return true;
+	}
+
+	public boolean mergeTemplate(
+			String freeMarkerTemplateId, FreeMarkerContext freeMarkerContext,
+			StringWriter stringWriter)
+		throws Exception {
+
+		return mergeTemplate(freeMarkerTemplateId, null, freeMarkerContext,
+			stringWriter);
 	}
 
 	public boolean resourceExists(String resource) {

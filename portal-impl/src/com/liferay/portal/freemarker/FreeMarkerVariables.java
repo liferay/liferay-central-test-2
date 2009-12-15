@@ -31,9 +31,11 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ArrayUtil_IW;
 import com.liferay.portal.kernel.util.DateUtil_IW;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.GetterUtil_IW;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil_IW;
 import com.liferay.portal.kernel.util.Randomizer_IW;
@@ -41,8 +43,11 @@ import com.liferay.portal.kernel.util.StaticFieldGetter;
 import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.TimeZoneUtil_IW;
 import com.liferay.portal.kernel.util.UnicodeFormatter_IW;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.Validator_IW;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.permission.AccountPermissionUtil;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
@@ -54,19 +59,38 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portal.theme.NavItem;
+import com.liferay.portal.theme.RequestVars;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil_IW;
 import com.liferay.portal.util.PropsUtil_IW;
 import com.liferay.portal.util.SessionClicks_IW;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.ServiceLocator;
 import com.liferay.portal.velocity.UtilLocator;
 import com.liferay.portal.velocity.VelocityPortletPreferences;
+import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
 import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+import com.liferay.util.portlet.PortletRequestUtil;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.taglib.tiles.ComponentConstants;
+import org.apache.struts.tiles.ComponentContext;
 
 /**
  * <a href="FreeMarkerVariables.java.html"><i>View Source</i></a>
@@ -275,6 +299,171 @@ public class FreeMarkerVariables {
 			"userPermission", UserPermissionUtil.getUserPermission());
 	}
 
+	public static void insertVariables(
+		FreeMarkerContext freeMarkerContext, HttpServletRequest request) {
+
+		// Request
+
+		freeMarkerContext.put("request", request);
+
+		// Portlet config
+
+		PortletConfigImpl portletConfigImpl =
+			(PortletConfigImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
+
+		if (portletConfigImpl != null) {
+			freeMarkerContext.put("portletConfig", portletConfigImpl);
+		}
+
+		// Render request
+
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		if (portletRequest != null) {
+			if (portletRequest instanceof RenderRequest) {
+				freeMarkerContext.put("renderRequest", portletRequest);
+			}
+		}
+
+		// Render response
+
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+		if (portletResponse != null) {
+			if (portletResponse instanceof RenderResponse) {
+				freeMarkerContext.put("renderResponse", portletResponse);
+			}
+		}
+
+		// XML request
+
+		if ((portletRequest != null) && (portletResponse != null)) {
+			String xmlRequest = PortletRequestUtil.toXML(
+				portletRequest, portletResponse);
+
+			freeMarkerContext.put("xmlRequest", xmlRequest);
+		}
+
+		// Theme display
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		if (themeDisplay != null) {
+			Theme theme = themeDisplay.getTheme();
+
+			Layout layout = themeDisplay.getLayout();
+			List<Layout> layouts = themeDisplay.getLayouts();
+
+			freeMarkerContext.put("themeDisplay", themeDisplay);
+			freeMarkerContext.put("company", themeDisplay.getCompany());
+			freeMarkerContext.put("user", themeDisplay.getUser());
+			freeMarkerContext.put("realUser", themeDisplay.getRealUser());
+			freeMarkerContext.put("layout", layout);
+			freeMarkerContext.put("layouts", layouts);
+			freeMarkerContext.put(
+				"plid", String.valueOf(themeDisplay.getPlid()));
+			freeMarkerContext.put(
+				"layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
+			freeMarkerContext.put(
+				"scopeGroupId", new Long(themeDisplay.getScopeGroupId()));
+			freeMarkerContext.put(
+				"permissionChecker", themeDisplay.getPermissionChecker());
+			freeMarkerContext.put("locale", themeDisplay.getLocale());
+			freeMarkerContext.put("timeZone", themeDisplay.getTimeZone());
+			freeMarkerContext.put("theme", theme);
+			freeMarkerContext.put("colorScheme", themeDisplay.getColorScheme());
+			freeMarkerContext.put(
+				"portletDisplay", themeDisplay.getPortletDisplay());
+
+			// Navigation items
+
+			if (layout != null) {
+				RequestVars requestVars = new RequestVars(
+					request, themeDisplay, layout.getAncestorPlid(),
+					layout.getAncestorLayoutId());
+
+				List<NavItem> navItems = NavItem.fromLayouts(
+					requestVars, layouts);
+
+				freeMarkerContext.put("navItems", navItems);
+			}
+
+			// Full css and templates path
+
+			String servletContextName = GetterUtil.getString(
+				theme.getServletContextName());
+
+			freeMarkerContext.put(
+				"fullCssPath",
+				"/" + servletContextName + theme.getFreeMarkerTemplateLoader() +
+					theme.getCssPath());
+
+			freeMarkerContext.put(
+				"fullTemplatesPath",
+				"/" + servletContextName + theme.getFreeMarkerTemplateLoader() +
+					theme.getTemplatesPath());
+
+			// Init
+
+			freeMarkerContext.put(
+				"init",
+				"/" + themeDisplay.getPathContext() +
+					FreeMarkerTemplateLoader.SERVLET_SEPARATOR +
+						"/html/themes/_unstyled/templates/init.ftl");
+
+			// Deprecated
+
+			freeMarkerContext.put(
+				"portletGroupId", new Long(themeDisplay.getScopeGroupId()));
+		}
+
+		// Tiles attributes
+
+		String tilesTitle = _insertTilesVariables(
+			freeMarkerContext, request, "tilesTitle", "title");
+		String tilesContent = _insertTilesVariables(
+			freeMarkerContext, request, "tilesContent", "content");
+		boolean tilesSelectable = GetterUtil.getBoolean(_insertTilesVariables(
+			freeMarkerContext, request, "tilesSelectable", "selectable"));
+
+		if (themeDisplay != null) {
+			themeDisplay.setTilesTitle(tilesTitle);
+			themeDisplay.setTilesContent(tilesContent);
+			themeDisplay.setTilesSelectable(tilesSelectable);
+		}
+
+		// Page title and subtitle
+
+		if (request.getAttribute(WebKeys.PAGE_TITLE) != null) {
+			freeMarkerContext.put(
+				"pageTitle", request.getAttribute(WebKeys.PAGE_TITLE));
+		}
+		if (request.getAttribute(WebKeys.PAGE_SUBTITLE) != null) {
+			freeMarkerContext.put(
+				"pageSubtitle", request.getAttribute(WebKeys.PAGE_SUBTITLE));
+		}
+
+		// Insert custom ftl variables
+
+		Map<String, Object> ftlVariables =
+			(Map<String, Object>)request.getAttribute(WebKeys.FTL_VARIABLES);
+
+		if (ftlVariables != null) {
+			for (Map.Entry<String, Object> entry : ftlVariables.entrySet()) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
+
+				if (Validator.isNotNull(key)) {
+					freeMarkerContext.put(key, value);
+				}
+			}
+		}
+	}
+
 	private static void _insertHelperUtility(
 		FreeMarkerContext freeMarkerContext, String[] restrictedVariables,
 		String key, Object value) {
@@ -282,6 +471,27 @@ public class FreeMarkerVariables {
 		if (!ArrayUtil.contains(restrictedVariables, key)) {
 			freeMarkerContext.put(key, value);
 		}
+	}
+
+	private static String _insertTilesVariables(
+		FreeMarkerContext freeMarkerContext, HttpServletRequest request,
+		String attributeId, String attributeName) {
+
+		ComponentContext componentContext =
+			(ComponentContext)request.getAttribute(
+				ComponentConstants.COMPONENT_CONTEXT);
+
+		String value = null;
+
+		if (componentContext != null) {
+			value = (String)componentContext.getAttribute(attributeName);
+
+			if (value != null) {
+				freeMarkerContext.put(attributeId, value);
+			}
+		}
+
+		return value;
 	}
 
 }
