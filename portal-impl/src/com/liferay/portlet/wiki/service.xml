@@ -81,6 +81,10 @@
 		<column name="version" type="double" />
 		<column name="minorEdit" type="boolean" />
 		<column name="content" type="String" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 		<column name="summary" type="String" />
 		<column name="format" type="String" />
 		<column name="head" type="boolean" />
@@ -136,13 +140,13 @@
 		</finder>
 
 		<!-- References -->
-
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
 		<reference package-path="com.liferay.portal" entity="Company" />
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
 		<reference package-path="com.liferay.portal" entity="Subscription" />
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetCategory" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />

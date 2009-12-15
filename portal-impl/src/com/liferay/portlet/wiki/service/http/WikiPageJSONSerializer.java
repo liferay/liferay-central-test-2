@@ -84,6 +84,19 @@ public class WikiPageJSONSerializer {
 		jsonObj.put("version", model.getVersion());
 		jsonObj.put("minorEdit", model.getMinorEdit());
 		jsonObj.put("content", model.getContent());
+		jsonObj.put("status", model.getStatus());
+		jsonObj.put("statusByUserId", model.getStatusByUserId());
+		jsonObj.put("statusByUserName", model.getStatusByUserName());
+
+		Date statusDate = model.getStatusDate();
+
+		String statusDateJSON = StringPool.BLANK;
+
+		if (statusDate != null) {
+			statusDateJSON = String.valueOf(statusDate.getTime());
+		}
+
+		jsonObj.put("statusDate", statusDateJSON);
 		jsonObj.put("summary", model.getSummary());
 		jsonObj.put("format", model.getFormat());
 		jsonObj.put("head", model.getHead());

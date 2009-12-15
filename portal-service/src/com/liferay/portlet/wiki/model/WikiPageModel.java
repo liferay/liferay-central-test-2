@@ -118,6 +118,26 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setContent(String content);
 
+	public int getStatus();
+
+	public void setStatus(int status);
+
+	public long getStatusByUserId();
+
+	public void setStatusByUserId(long statusByUserId);
+
+	public String getStatusByUserUuid() throws SystemException;
+
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	public String getStatusByUserName();
+
+	public void setStatusByUserName(String statusByUserName);
+
+	public Date getStatusDate();
+
+	public void setStatusDate(Date statusDate);
+
 	public String getSummary();
 
 	public void setSummary(String summary);

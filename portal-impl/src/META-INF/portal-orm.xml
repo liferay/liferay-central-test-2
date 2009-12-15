@@ -2450,12 +2450,19 @@
 			<basic name="version" />
 			<basic name="minorEdit" />
 			<basic name="content" />
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="summary" />
 			<basic name="format" />
 			<basic name="head" />
 			<basic name="parentTitle" />
 			<basic name="redirectTitle" />
 			<transient name="primaryKey" />
+			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>

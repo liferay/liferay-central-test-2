@@ -184,6 +184,7 @@ else if (type.equals("tagged_pages")) {
 List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("page");
+headerNames.add("status");
 headerNames.add("revision");
 headerNames.add("user");
 headerNames.add("date");
@@ -302,6 +303,19 @@ for (int i = 0; i < results.size(); i++) {
 	// Title
 
 	row.addText(curWikiPage.getTitle(), rowURL);
+
+	// Status
+
+	String status = null;
+
+	if (curWikiPage.isApproved()) {
+		status = "approved";
+	}
+	else {
+		status = "not-approved";
+	}
+
+	row.addText(LanguageUtil.get(pageContext, status), rowURL);
 
 	// Revision
 

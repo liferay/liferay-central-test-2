@@ -63,6 +63,10 @@ public class WikiPageSoap implements Serializable {
 		soapModel.setVersion(model.getVersion());
 		soapModel.setMinorEdit(model.getMinorEdit());
 		soapModel.setContent(model.getContent());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 		soapModel.setSummary(model.getSummary());
 		soapModel.setFormat(model.getFormat());
 		soapModel.setHead(model.getHead());
@@ -236,6 +240,38 @@ public class WikiPageSoap implements Serializable {
 		_content = content;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	public String getSummary() {
 		return _summary;
 	}
@@ -294,6 +330,10 @@ public class WikiPageSoap implements Serializable {
 	private double _version;
 	private boolean _minorEdit;
 	private String _content;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private String _summary;
 	private String _format;
 	private boolean _head;

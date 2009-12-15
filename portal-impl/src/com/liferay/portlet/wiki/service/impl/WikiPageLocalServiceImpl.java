@@ -81,6 +81,7 @@ import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
+import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
 import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
@@ -108,6 +109,7 @@ import javax.portlet.WindowState;
  * @author Bruno Farache
  * @author Julio Camarero
  * @author Wesley Gong
+ * @author Marcellus Tavares
  */
 public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
@@ -149,6 +151,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long resourcePrimKey =
 			wikiPageResourceLocalService.getPageResourcePrimKey(nodeId, title);
 
+		int status = serviceContext.getStatus();
+
 		WikiPage page = wikiPagePersistence.create(pageId);
 
 		page.setUuid(uuid);
@@ -164,6 +168,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setVersion(version);
 		page.setMinorEdit(minorEdit);
 		page.setContent(content);
+		page.setStatus(status);
 		page.setSummary(summary);
 		page.setFormat(format);
 		page.setHead(head);
@@ -221,13 +226,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		if (!minorEdit && NotificationThreadLocal.isEnabled()) {
+		if (page.isApproved() && !minorEdit &&
+			NotificationThreadLocal.isEnabled()) {
+
 			notifySubscribers(node, page, serviceContext, false);
 		}
 
 		// Indexer
 
-		reIndex(page);
+		if (page.isApproved()) {
+			reIndex(page);
+		}
 
 		// Cache
 
@@ -953,9 +962,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
+		boolean visible = false;
+
+		if (page.isApproved()) {
+			visible = true;
+		}
+
 		assetEntryLocalService.updateEntry(
 			userId, page.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), assetCategoryIds, assetTagNames, true,
+			page.getResourcePrimKey(), assetCategoryIds, assetTagNames, visible,
 			null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
 			null, null, null, 0, 0, null, false);
 	}
@@ -994,8 +1009,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		long resourcePrimKey = page.getResourcePrimKey();
 		long groupId = page.getGroupId();
+		int status = serviceContext.getStatus();
 
-		page.setHead(false);
+		boolean isApproved = (status == StatusConstants.APPROVED);
+
+		if (isApproved) {
+			page.setHead(false);
+		}
+
 		page.setModifiedDate(now);
 
 		wikiPagePersistence.update(page, false);
@@ -1018,9 +1039,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setVersion(newVersion);
 		page.setMinorEdit(minorEdit);
 		page.setContent(content);
+		page.setStatus(status);
 		page.setSummary(summary);
 		page.setFormat(format);
-		page.setHead(true);
+
+		if (isApproved) {
+			page.setHead(true);
+		}
 
 		if (Validator.isNotNull(parentTitle)) {
 			page.setParentTitle(parentTitle);
@@ -1061,19 +1086,64 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		if (!minorEdit && NotificationThreadLocal.isEnabled()) {
+		if (isApproved && !minorEdit &&	NotificationThreadLocal.isEnabled()) {
 			notifySubscribers(node, page, serviceContext, true);
 		}
-
-		// Indexer
-
-		reIndex(page);
 
 		// Cache
 
 		clearPageCache(page);
 
 		return page;
+	}
+
+	public WikiPage updateStatus(long userId, long resourcePrimKey, int status)
+		throws PortalException, SystemException {
+
+		WikiPageResource wikiPageResource =
+			wikiPageResourceLocalService.getPageResource(resourcePrimKey);
+
+		List<WikiPage> pages = wikiPagePersistence.findByN_T(
+			wikiPageResource.getNodeId(), wikiPageResource.getTitle(), 0, 1,
+			new PageVersionComparator());
+
+		WikiPage page = null;
+
+		if (pages.size() > 0) {
+			page = pages.get(0);
+		}
+		else {
+			throw new NoSuchPageException();
+		}
+
+		return updateStatus(userId, page, status);
+	}
+
+	public WikiPage updateStatus(long userId, WikiPage page, int status)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		Date now = new Date();
+
+		page.setStatus(status);
+		page.setStatusByUserId(userId);
+		page.setStatusByUserName(user.getFullName());
+		page.setStatusDate(now);
+
+		if (status == StatusConstants.APPROVED) {
+			page.setHead(true);
+
+			// Asset
+
+			assetEntryLocalService.updateVisible(
+				WikiPage.class.getName(), page.getResourcePrimKey(), true);
+
+			// Indexer
+
+			reIndex(page);
+		}
+
+		return wikiPagePersistence.update(page, false);
 	}
 
 	public void validateTitle(String title) throws PortalException {

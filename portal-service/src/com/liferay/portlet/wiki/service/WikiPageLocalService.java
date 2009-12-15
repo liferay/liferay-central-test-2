@@ -321,6 +321,16 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiPage updateStatus(long userId,
+		long resourcePrimKey, int status)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiPage updateStatus(long userId,
+		com.liferay.portlet.wiki.model.WikiPage page, int status)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void validateTitle(java.lang.String title)
 		throws com.liferay.portal.PortalException;
 }

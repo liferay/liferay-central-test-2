@@ -423,6 +423,20 @@ public class WikiPageLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage updateStatus(
+		long userId, long resourcePrimKey, int status)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateStatus(userId, resourcePrimKey, status);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage updateStatus(
+		long userId, com.liferay.portlet.wiki.model.WikiPage page, int status)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateStatus(userId, page, status);
+	}
+
 	public static void validateTitle(java.lang.String title)
 		throws com.liferay.portal.PortalException {
 		getService().validateTitle(title);

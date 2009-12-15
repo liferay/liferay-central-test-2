@@ -29,6 +29,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -150,6 +151,15 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		}
 
 		return page;
+	}
+
+	public boolean isApproved() {
+		if (getStatus() == StatusConstants.APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void setAttachmentsDir(String attachmentsDir) {

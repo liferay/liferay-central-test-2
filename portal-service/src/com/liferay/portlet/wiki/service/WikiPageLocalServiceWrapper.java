@@ -410,6 +410,21 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 			serviceContext);
 	}
 
+	public com.liferay.portlet.wiki.model.WikiPage updateStatus(long userId,
+		long resourcePrimKey, int status)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _wikiPageLocalService.updateStatus(userId, resourcePrimKey,
+			status);
+	}
+
+	public com.liferay.portlet.wiki.model.WikiPage updateStatus(long userId,
+		com.liferay.portlet.wiki.model.WikiPage page, int status)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _wikiPageLocalService.updateStatus(userId, page, status);
+	}
+
 	public void validateTitle(java.lang.String title)
 		throws com.liferay.portal.PortalException {
 		_wikiPageLocalService.validateTitle(title);

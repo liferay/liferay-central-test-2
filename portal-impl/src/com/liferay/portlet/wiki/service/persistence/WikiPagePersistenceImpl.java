@@ -525,6 +525,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		wikiPageImpl.setVersion(wikiPage.getVersion());
 		wikiPageImpl.setMinorEdit(wikiPage.isMinorEdit());
 		wikiPageImpl.setContent(wikiPage.getContent());
+		wikiPageImpl.setStatus(wikiPage.getStatus());
+		wikiPageImpl.setStatusByUserId(wikiPage.getStatusByUserId());
+		wikiPageImpl.setStatusByUserName(wikiPage.getStatusByUserName());
+		wikiPageImpl.setStatusDate(wikiPage.getStatusDate());
 		wikiPageImpl.setSummary(wikiPage.getSummary());
 		wikiPageImpl.setFormat(wikiPage.getFormat());
 		wikiPageImpl.setHead(wikiPage.isHead());
@@ -4288,6 +4292,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
+	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence")
 	protected com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence assetCategoryPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence")

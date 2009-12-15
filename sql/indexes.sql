@@ -626,6 +626,8 @@ create index IX_46EEF3C8 on WikiPage (nodeId, parentTitle);
 create index IX_1ECC7656 on WikiPage (nodeId, redirectTitle);
 create index IX_997EEDD2 on WikiPage (nodeId, title);
 create index IX_E745EA26 on WikiPage (nodeId, title, head);
+create index IX_EA22A30C on WikiPage (nodeId, title, head, status);
+create index IX_BEA33AB8 on WikiPage (nodeId, title, status);
 create unique index IX_3D4AF476 on WikiPage (nodeId, title, version);
 create index IX_9C0E478F on WikiPage (uuid_);
 create unique index IX_899D3DFB on WikiPage (uuid_, groupId);

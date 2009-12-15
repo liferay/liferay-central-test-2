@@ -1984,6 +1984,10 @@
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="minorEdit" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 		<property name="summary" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="format" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="head" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />

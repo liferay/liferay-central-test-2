@@ -43,6 +43,7 @@ import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupFinder;
@@ -54,6 +55,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
 import com.liferay.portlet.asset.service.AssetCategoryLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryService;
@@ -377,6 +379,24 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
+	public WorkflowInstanceLinkLocalService getWorkflowInstanceLinkLocalService() {
+		return workflowInstanceLinkLocalService;
+	}
+
+	public void setWorkflowInstanceLinkLocalService(
+		WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService) {
+		this.workflowInstanceLinkLocalService = workflowInstanceLinkLocalService;
+	}
+
+	public WorkflowInstanceLinkPersistence getWorkflowInstanceLinkPersistence() {
+		return workflowInstanceLinkPersistence;
+	}
+
+	public void setWorkflowInstanceLinkPersistence(
+		WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence) {
+		this.workflowInstanceLinkPersistence = workflowInstanceLinkPersistence;
+	}
+
 	public AssetCategoryLocalService getAssetCategoryLocalService() {
 		return assetCategoryLocalService;
 	}
@@ -645,6 +665,10 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 	protected UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
 	protected UserFinder userFinder;
+	@BeanReference(name = "com.liferay.portal.service.WorkflowInstanceLinkLocalService")
+	protected WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
+	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.AssetCategoryLocalService")
 	protected AssetCategoryLocalService assetCategoryLocalService;
 	@BeanReference(name = "com.liferay.portlet.asset.service.AssetCategoryService")
