@@ -107,41 +107,6 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 				" in your portal-ext.properties to use " + targetHookClassName);
 	}
 
-	protected void migratePortlets() throws Exception {
-		migrateDL();
-		migrateMB();
-		migrateWiki();
-	}
-
-	protected void migrateFiles(
-			long companyId, String dirName, String[] fileNames)
-		throws Exception {
-
-		String portletId = CompanyConstants.SYSTEM_STRING;
-		long groupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
-		long repositoryId = CompanyConstants.SYSTEM;
-		long fileEntryId = 0;
-		double versionNumber = Hook.DEFAULT_VERSION;
-		String properties = StringPool.BLANK;
-		Date modifiedDate = new Date();
-
-		try {
-			_targetHook.addDirectory(companyId, repositoryId, dirName);
-		}
-		catch (DuplicateDirectoryException dde) {
-		}
-
-		for (String fileName : fileNames) {
-			if (fileName.startsWith(StringPool.SLASH)) {
-				fileName = fileName.substring(1);
-			}
-
-			migrateFile(
-				companyId, portletId, groupId, repositoryId, fileEntryId,
-				fileName, versionNumber, properties, modifiedDate);
-		}
-	}
-
 	protected void migrateDL() throws Exception {
 		int count = DLFileEntryLocalServiceUtil.getDLFileEntriesCount();
 		int pages = count / Indexer.DEFAULT_INTERVAL;
@@ -205,28 +170,6 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		}
 	}
 
-	protected void migrateMB() throws Exception {
-		int count = MBMessageLocalServiceUtil.getMBMessagesCount();
-		int pages = count / Indexer.DEFAULT_INTERVAL;
-
-		MaintenanceUtil.appendStatus(
-			"Migrating message boards attachments in " + count + " messages");
-
-		for (int i = 0; i <= pages; i++) {
-			int start = (i * Indexer.DEFAULT_INTERVAL);
-			int end = start + Indexer.DEFAULT_INTERVAL;
-
-			List<MBMessage> messages =
-				MBMessageLocalServiceUtil.getMBMessages(start, end);
-
-			for (MBMessage message : messages) {
-				migrateFiles(
-					message.getCompanyId(), message.getAttachmentsDir(),
-					message.getAttachmentsFiles());
-			}
-		}
-	}
-
 	protected void migrateFile(
 		long companyId, String portletId, long groupId, long repositoryId,
 		long fileEntryId, String fileName, double versionNumber,
@@ -252,6 +195,62 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		catch (Exception e) {
 			_log.error("Migration failed for " + fileName, e);
 		}
+	}
+	protected void migrateFiles(
+			long companyId, String dirName, String[] fileNames)
+		throws Exception {
+
+		String portletId = CompanyConstants.SYSTEM_STRING;
+		long groupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
+		long repositoryId = CompanyConstants.SYSTEM;
+		long fileEntryId = 0;
+		double versionNumber = Hook.DEFAULT_VERSION;
+		String properties = StringPool.BLANK;
+		Date modifiedDate = new Date();
+
+		try {
+			_targetHook.addDirectory(companyId, repositoryId, dirName);
+		}
+		catch (DuplicateDirectoryException dde) {
+		}
+
+		for (String fileName : fileNames) {
+			if (fileName.startsWith(StringPool.SLASH)) {
+				fileName = fileName.substring(1);
+			}
+
+			migrateFile(
+				companyId, portletId, groupId, repositoryId, fileEntryId,
+				fileName, versionNumber, properties, modifiedDate);
+		}
+	}
+
+	protected void migrateMB() throws Exception {
+		int count = MBMessageLocalServiceUtil.getMBMessagesCount();
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		MaintenanceUtil.appendStatus(
+			"Migrating message boards attachments in " + count + " messages");
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			List<MBMessage> messages =
+				MBMessageLocalServiceUtil.getMBMessages(start, end);
+
+			for (MBMessage message : messages) {
+				migrateFiles(
+					message.getCompanyId(), message.getAttachmentsDir(),
+					message.getAttachmentsFiles());
+			}
+		}
+	}
+
+	protected void migratePortlets() throws Exception {
+		migrateDL();
+		migrateMB();
+		migrateWiki();
 	}
 
 	protected void migrateWiki() throws Exception {
@@ -280,11 +279,6 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		}
 	}
 
-	private Hook _sourceHook;
-	private Hook _targetHook;
-
-	private static ServiceContext _serviceContext = new ServiceContext();
-
 	private static final String[] _HOOKS = new String[] {
 		"com.liferay.documentlibrary.util.AdvancedFileSystemHook",
 		"com.liferay.documentlibrary.util.CMISHook",
@@ -295,5 +289,10 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 
 	private static Log _log =
 		LogFactoryUtil.getLog(ConvertDocumentLibrary.class);
+
+	private static ServiceContext _serviceContext = new ServiceContext();
+
+	private Hook _sourceHook;
+	private Hook _targetHook;
 
 }
