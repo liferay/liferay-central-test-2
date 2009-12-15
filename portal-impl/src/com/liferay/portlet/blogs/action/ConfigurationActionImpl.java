@@ -23,9 +23,11 @@
 package com.liferay.portlet.blogs.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
@@ -39,6 +41,7 @@ import javax.portlet.RenderResponse;
  * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Thiago Moreira
  */
 public class ConfigurationActionImpl extends BaseConfigurationAction {
 
@@ -53,6 +56,51 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			return;
 		}
 
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+
+		PortletPreferences preferences =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
+
+		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
+
+		if (tabs2.equals("display-settings")) {
+			updateDisplaySettings(actionRequest, preferences);
+		}
+		else if (tabs2.equals("email-from")) {
+			updateEmailFrom(actionRequest, preferences);
+		}
+		else if (tabs2.equals("blogs-added-email")) {
+			updateEmailBlogsAdded(actionRequest, preferences);
+		}
+		else if (tabs2.equals("blogs-updated-email")) {
+			updateEmailBlogsUpdated(actionRequest, preferences);
+		}
+		else if (tabs2.equals("rss")) {
+			updateRSS(actionRequest, preferences);
+		}
+
+		if (SessionErrors.isEmpty(actionRequest)) {
+			preferences.store();
+
+			SessionMessages.add(
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
+		}
+	}
+
+	public String render(
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
+		throws Exception {
+
+		return "/html/portlet/blogs/configuration.jsp";
+	}
+
+	protected void updateDisplaySettings(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
 		int pageDelta = ParamUtil.getInteger(actionRequest, "pageDelta");
 		String pageDisplayStyle = ParamUtil.getString(
 			actionRequest, "pageDisplayStyle");
@@ -65,18 +113,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		boolean enableCommentRatings = ParamUtil.getBoolean(
 			actionRequest, "enableCommentRatings");
 
-		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
-		String rssDisplayStyle = ParamUtil.getString(
-			actionRequest, "rssDisplayStyle");
-		String rssFormat = ParamUtil.getString(actionRequest, "rssFormat");
-
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
-
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletResource);
-
 		preferences.setValue("page-delta", String.valueOf(pageDelta));
 		preferences.setValue("page-display-style", pageDisplayStyle);
 		preferences.setValue("enable-flags", String.valueOf(enableFlags));
@@ -84,23 +120,98 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
+	}
+
+	protected void updateEmailFrom(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		String emailFromName = ParamUtil.getString(
+			actionRequest, "emailFromName");
+		String emailFromAddress = ParamUtil.getString(
+			actionRequest, "emailFromAddress");
+
+		if (Validator.isNull(emailFromName)) {
+			SessionErrors.add(actionRequest, "emailFromName");
+		}
+		else if (!Validator.isEmailAddress(emailFromAddress) &&
+				 !Validator.isVariableTerm(emailFromAddress)) {
+
+			SessionErrors.add(actionRequest, "emailFromAddress");
+		}
+		else {
+			preferences.setValue("email-from-name", emailFromName);
+			preferences.setValue("email-from-address", emailFromAddress);
+		}
+	}
+
+	protected void updateEmailBlogsAdded(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		boolean emailBlogsAddedEnabled = ParamUtil.getBoolean(
+			actionRequest, "emailBlogsAddedEnabled");
+		String emailBlogsAddedSubject = ParamUtil.getString(
+			actionRequest, "emailBlogsAddedSubject");
+		String emailBlogsAddedBody = ParamUtil.getString(
+			actionRequest, "emailBlogsAddedBody");
+
+		if (Validator.isNull(emailBlogsAddedSubject)) {
+			SessionErrors.add(actionRequest, "emailBlogsAddedSubject");
+		}
+		else if (Validator.isNull(emailBlogsAddedBody)) {
+			SessionErrors.add(actionRequest, "emailBlogsAddedBody");
+		}
+		else {
+			preferences.setValue(
+				"email-blogs-added-enabled",
+				String.valueOf(emailBlogsAddedEnabled));
+			preferences.setValue(
+				"email-blogs-added-subject", emailBlogsAddedSubject);
+			preferences.setValue("email-blogs-added-body", emailBlogsAddedBody);
+		}
+	}
+
+	protected void updateEmailBlogsUpdated(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		boolean emailBlogsUpdatedEnabled = ParamUtil.getBoolean(
+			actionRequest, "emailBlogsUpdatedEnabled");
+		String emailBlogsUpdatedSubject = ParamUtil.getString(
+			actionRequest, "emailBlogsUpdatedSubject");
+		String emailBlogsUpdatedBody = ParamUtil.getString(
+			actionRequest, "emailBlogsUpdatedBody");
+
+		if (Validator.isNull(emailBlogsUpdatedSubject)) {
+			SessionErrors.add(actionRequest, "emailBlogsUpdatedSubject");
+		}
+		else if (Validator.isNull(emailBlogsUpdatedBody)) {
+			SessionErrors.add(actionRequest, "emailBlogsUpdatedBody");
+		}
+		else {
+			preferences.setValue(
+				"email-blogs-updated-enabled",
+				String.valueOf(emailBlogsUpdatedEnabled));
+			preferences.setValue(
+				"email-blogs-updated-subject", emailBlogsUpdatedSubject);
+			preferences.setValue(
+				"email-blogs-updated-body", emailBlogsUpdatedBody);
+		}
+	}
+
+	protected void updateRSS(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
+		String rssDisplayStyle = ParamUtil.getString(
+			actionRequest, "rssDisplayStyle");
+		String rssFormat = ParamUtil.getString(actionRequest, "rssFormat");
 
 		preferences.setValue("rss-delta", String.valueOf(rssDelta));
 		preferences.setValue("rss-display-style", rssDisplayStyle);
 		preferences.setValue("rss-format", rssFormat);
-
-		preferences.store();
-
-		SessionMessages.add(
-			actionRequest, portletConfig.getPortletName() + ".doConfigure");
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/blogs/configuration.jsp";
 	}
 
 }

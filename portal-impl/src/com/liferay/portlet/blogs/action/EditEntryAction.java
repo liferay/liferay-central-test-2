@@ -36,6 +36,7 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -74,6 +75,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Brian Wing Shun Chan
  * @author Wilson S. Man
+ * @author Thiago Moreira
  */
 public class EditEntryAction extends PortletAction {
 
@@ -96,6 +98,12 @@ public class EditEntryAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteEntry(actionRequest);
+			}
+			else if (cmd.equals(Constants.SUBSCRIBE)) {
+				subscribe(actionRequest);
+			}
+			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
+				unsubscribe(actionRequest);
 			}
 
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
@@ -225,6 +233,28 @@ public class EditEntryAction extends PortletAction {
 		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
 		BlogsEntryServiceUtil.deleteEntry(entryId);
+	}
+
+	protected void subscribe(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long userId = themeDisplay.getUserId();
+		long groupId = themeDisplay.getScopeGroupId();
+
+		SubscriptionLocalServiceUtil.addSubscription(
+			userId, BlogsEntry.class.getName(), groupId);
+	}
+
+	protected void unsubscribe(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long userId = themeDisplay.getUserId();
+		long groupId = themeDisplay.getScopeGroupId();
+
+		SubscriptionLocalServiceUtil.deleteSubscription(
+			userId, BlogsEntry.class.getName(), groupId);
 	}
 
 	protected Object[] updateEntry(ActionRequest actionRequest)
