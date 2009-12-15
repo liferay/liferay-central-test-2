@@ -342,9 +342,9 @@ numberFormat.setMinimumIntegerDigits(2);
 
 												<%
 												for (String parameter : convertProcess.getParameterNames()) {
-													if (parameter.contains("=") && parameter.contains(";")) {
-														String[] parameterPair = StringUtil.split(parameter, "=");
-														String[] parameterSelect = StringUtil.split(parameterPair[1], ";");
+													if (parameter.contains(StringPool.EQUAL) && parameter.contains(StringPool.SEMICOLON)) {
+														String[] parameterPair = StringUtil.split(parameter, StringPool.EQUAL);
+														String[] parameterSelectEntries = StringUtil.split(parameterPair[1], StringPool.SEMICOLON);
 												%>
 
 														<tr>
@@ -352,10 +352,10 @@ numberFormat.setMinimumIntegerDigits(2);
 																<liferay-ui:message key="<%= parameterPair[0] %>" />
 															</td>
 															<td>
-																<select id="<%= convertProcess.getClass().getName() + "." + parameterPair[0] %>" name="<%= convertProcess.getClass().getName() + "." + parameterPair[0] %>">
+																<select id="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterPair[0] %>" name="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterPair[0] %>">
 
 																	<%
-																	for (String parameterSelectEntry: parameterSelect) {
+																	for (String parameterSelectEntry : parameterSelectEntries) {
 																	%>
 
 																		<option value="<%= parameterSelectEntry %>"><%= parameterSelectEntry %></option>
@@ -378,7 +378,7 @@ numberFormat.setMinimumIntegerDigits(2);
 																<liferay-ui:message key="<%= parameter %>" />
 															</td>
 															<td>
-																<input name="<%= convertProcess.getClass().getName() + "." + parameter %>" />
+																<input name="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameter %>" />
 															</td>
 														</tr>
 

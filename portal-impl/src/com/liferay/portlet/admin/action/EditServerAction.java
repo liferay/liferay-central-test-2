@@ -204,13 +204,17 @@ public class EditServerAction extends PortletAction {
 			String[] values = new String[parameters.length];
 
 			for (int i = 0; i < parameters.length; i++) {
-				String parameter = className + "." + parameters[i];
+				String parameter =
+					className + StringPool.PERIOD + parameters[i];
 
-				if (parameters[i].contains("=") && parameters[i].contains(";"))
-				{
-					String[] pair = StringUtil.split(parameters[i], "=");
+				if (parameters[i].contains(StringPool.EQUAL) &&
+					parameters[i].contains(StringPool.SEMICOLON)) {
 
-					parameter = className + "." + pair[0];
+					String[] parameterPair = StringUtil.split(
+						parameters[i], StringPool.EQUAL);
+
+					parameter =
+						className + StringPool.PERIOD + parameterPair[0];
 				}
 
 				values[i] = ParamUtil.getString(actionRequest, parameter);

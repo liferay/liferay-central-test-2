@@ -583,7 +583,8 @@ public class PropsValues {
 	public static final boolean DL_FILE_RANK_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.DL_FILE_RANK_ENABLED));
 
-	public static String DL_HOOK_IMPL = PropsUtil.get(PropsKeys.DL_HOOK_IMPL);
+	public static final String DL_HOOK_IMPL =
+		PropsUtil.get(PropsKeys.DL_HOOK_IMPL);
 
 	public static final boolean DL_LAYOUTS_SYNC_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_ENABLED));
