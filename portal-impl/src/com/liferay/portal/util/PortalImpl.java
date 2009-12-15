@@ -1611,14 +1611,14 @@ public class PortalImpl implements Portal {
 			return null;
 		}
 
+		StringBuilder sb = new StringBuilder();
+
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 		Company company = CompanyLocalServiceUtil.getCompany(
-			group.getCompanyId());
+			layout.getCompanyId());
 
-		StringBuilder sb = new StringBuilder();
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		String portalURL = getPortalURL(
 			company.getVirtualHost(), getPortalPort(), false);
