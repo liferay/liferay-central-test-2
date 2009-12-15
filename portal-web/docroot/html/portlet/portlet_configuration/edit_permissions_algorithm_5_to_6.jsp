@@ -366,7 +366,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 		<br />
 
 		<aui:button-row>
-			<aui:button value="save" />
+			<aui:button type="submit" value="save" />
 
 			<aui:button onClick="<%= redirect %>" type="cancel" />
 	 	</aui:button-row>
