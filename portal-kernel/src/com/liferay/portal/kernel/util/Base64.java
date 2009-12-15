@@ -22,7 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.io.ClassLoaderAwareObjectInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -191,8 +190,14 @@ public class Base64 {
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
 		try {
-			ObjectInputStream is =
-				new ClassLoaderAwareObjectInputStream(bais, classLoader);
+			ObjectInputStream is = null;
+
+			if (classLoader == null) {
+				is = new ObjectInputStream(bais);
+			}
+			else {
+				is = new ClassLoaderObjectInputStream(bais, classLoader);
+			}
 
 			return is.readObject();
 		}
