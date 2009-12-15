@@ -132,10 +132,8 @@ public class ConvertDatabase extends ConvertProcess {
 			DataAccess.cleanUp(connection);
 		}
 
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Please change your JDBC settings before restarting server");
-		}
+		MaintenanceUtil.appendStatus(
+			"Please change your JDBC settings before restarting server");
 
 		ShutdownUtil.shutdown(0);
 	}
