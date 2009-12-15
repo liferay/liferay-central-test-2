@@ -98,7 +98,6 @@ public class VelocityTaglib {
 		_request = request;
 		_stringResponse = stringResponse;
 		_pageContext = pageContext;
-		_themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 
 		return this;
 	}
@@ -227,7 +226,10 @@ public class VelocityTaglib {
 	}
 
 	public String getSetting(String name) {
-		Theme theme = _themeDisplay.getTheme();
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Theme theme = themeDisplay.getTheme();
 
 		return theme.getSetting(name);
 	}
@@ -746,6 +748,5 @@ public class VelocityTaglib {
 	private HttpServletRequest _request;
 	private StringServletResponse _stringResponse;
 	private PageContext _pageContext;
-	private ThemeDisplay _themeDisplay;
 
 }
