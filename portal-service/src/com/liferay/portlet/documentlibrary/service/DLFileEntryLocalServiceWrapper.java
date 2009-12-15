@@ -399,6 +399,10 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 		return _dlFileEntryLocalService.getNoAssetFileEntries();
 	}
 
+	public long getRepositoryId(long groupId, long folderId) {
+		return _dlFileEntryLocalService.getRepositoryId(groupId, folderId);
+	}
+
 	public void reIndex(long fileEntryId)
 		throws com.liferay.portal.SystemException {
 		_dlFileEntryLocalService.reIndex(fileEntryId);

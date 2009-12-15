@@ -310,6 +310,9 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getRepositoryId(long groupId, long folderId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(long fileEntryId)
 		throws com.liferay.portal.SystemException;
 

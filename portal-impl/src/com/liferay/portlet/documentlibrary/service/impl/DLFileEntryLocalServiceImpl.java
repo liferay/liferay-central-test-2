@@ -689,6 +689,15 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryFinder.findByNoAssets();
 	}
 
+	public long getRepositoryId(long groupId, long folderId) {
+		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return groupId;
+		}
+		else {
+			return folderId;
+		}
+	}
+
 	public void reIndex(long fileEntryId) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
@@ -1220,15 +1229,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return folderId;
-	}
-
-	protected long getRepositoryId(long groupId, long folderId) {
-		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			return groupId;
-		}
-		else {
-			return folderId;
-		}
 	}
 
 	protected void validate(

@@ -206,6 +206,13 @@ public class EditServerAction extends PortletAction {
 			for (int i = 0; i < parameters.length; i++) {
 				String parameter = className + "." + parameters[i];
 
+				if (parameters[i].contains("=") && parameters[i].contains(";"))
+				{
+					String[] pair = StringUtil.split(parameters[i], "=");
+
+					parameter = className + "." + pair[0];
+				}
+
 				values[i] = ParamUtil.getString(actionRequest, parameter);
 			}
 

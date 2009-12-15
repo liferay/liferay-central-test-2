@@ -342,18 +342,48 @@ numberFormat.setMinimumIntegerDigits(2);
 
 												<%
 												for (String parameter : convertProcess.getParameterNames()) {
+													if (parameter.contains("=") && parameter.contains(";")) {
+														String[] parameterPair = StringUtil.split(parameter, "=");
+														String[] parameterSelect = StringUtil.split(parameterPair[1], ";");
 												%>
 
-													<tr>
-														<td>
-															<liferay-ui:message key="<%= parameter %>" />
-														</td>
-														<td>
-															<input name="<%= convertProcess.getClass().getName() + "." + parameter %>" />
-														</td>
-													</tr>
+														<tr>
+															<td>
+																<liferay-ui:message key="<%= parameterPair[0] %>" />
+															</td>
+															<td>
+																<select id="<%= convertProcess.getClass().getName() + "." + parameterPair[0] %>" name="<%= convertProcess.getClass().getName() + "." + parameterPair[0] %>">
+
+																	<%
+																	for (String parameterSelectEntry: parameterSelect) {
+																	%>
+
+																		<option value="<%= parameterSelectEntry %>"><%= parameterSelectEntry %></option>
+
+																	<%
+																	}
+																	%>
+
+																</select>
+															</td>
+														</tr>
 
 												<%
+													}
+													else {
+												%>
+
+														<tr>
+															<td>
+																<liferay-ui:message key="<%= parameter %>" />
+															</td>
+															<td>
+																<input name="<%= convertProcess.getClass().getName() + "." + parameter %>" />
+															</td>
+														</tr>
+
+												<%
+													}
 												}
 												%>
 

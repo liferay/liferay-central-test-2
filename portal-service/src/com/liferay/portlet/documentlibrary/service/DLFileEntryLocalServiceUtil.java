@@ -398,6 +398,10 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().getNoAssetFileEntries();
 	}
 
+	public static long getRepositoryId(long groupId, long folderId) {
+		return getService().getRepositoryId(groupId, folderId);
+	}
+
 	public static void reIndex(long fileEntryId)
 		throws com.liferay.portal.SystemException {
 		getService().reIndex(fileEntryId);
