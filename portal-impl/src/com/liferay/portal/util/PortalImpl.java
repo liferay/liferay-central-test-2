@@ -1605,16 +1605,20 @@ public class PortalImpl implements Portal {
 	public String getLayoutFullURL(long groupId, String portletId)
 		throws PortalException, SystemException {
 
-		StringBuilder sb = new StringBuilder();
+		long plid = getPlidFromPortletId(groupId, portletId);
+
+		if (plid == LayoutConstants.DEFAULT_PLID) {
+			return null;
+		}
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		Company company = CompanyLocalServiceUtil.getCompany(
 			group.getCompanyId());
 
-		long plid = getPlidFromPortletId(groupId, portletId);
-
-		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+		StringBuilder sb = new StringBuilder();
 
 		String portalURL = getPortalURL(
 			company.getVirtualHost(), getPortalPort(), false);
@@ -1984,11 +1988,19 @@ public class PortalImpl implements Portal {
 	public long getPlidFromPortletId(long groupId, String portletId) {
 		long plid = getPlidFromPortletId(groupId, false, portletId);
 
-		if (plid != 0) {
-			return plid;
+		if (plid == LayoutConstants.DEFAULT_PLID) {
+			plid = getPlidFromPortletId(groupId, true, portletId);
 		}
 
-		return getPlidFromPortletId(groupId, true, portletId);
+		if (plid == LayoutConstants.DEFAULT_PLID) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Portlet " + portletId +
+						" does not exist on a page in group " + groupId);
+			}
+		}
+
+		return plid;
 	}
 
 	public String getPortalLibDir() {
