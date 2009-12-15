@@ -112,35 +112,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		return enabled;
 	}
 
-	protected void doConvert() throws Exception {
-		try {
-			BatchSessionUtil.setEnabled(true);
-
-			_initialize();
-
-			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
-				_convertToRBAC();
-			}
-
-			_convertToBitwise();
-
-			MaintenanceUtil.appendStatus(
-				"Please set " + PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM +
-					" in your portal-ext.properties to use algorithm 6");
-		}
-		catch (Exception e) {
-			_log.fatal(e, e);
-		}
-		finally {
-			CacheRegistry.clear();
-
-			PermissionCacheUtil.clearCache();
-
-			BatchSessionUtil.setEnabled(false);
-		}
-	}
-
-	private void _convertToBitwise() throws Exception {
+	protected void convertToBitwise() throws Exception {
 
 		// ResourceAction and ResourcePermission
 
@@ -181,7 +153,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 				ResourceActionLocalServiceUtil.checkResourceActions(
 					name, defaultActionIds);
 
-				_convertResourcePermission(resourcePermissionWriter, name);
+				convertResourcePermission(resourcePermissionWriter, name);
 			}
 
 			resourcePermissionWriter.close();
@@ -223,12 +195,12 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		MaintenanceUtil.appendStatus("Converted to bitwise permission");
 	}
 
-	private void _convertToRBAC() throws Exception {
-		_initializeRBAC();
+	protected void convertToRBAC() throws Exception {
+		initializeRBAC();
 
 		// Groups_Permissions
 
-		_convertPermissions(
+		convertPermissions(
 			RoleConstants.TYPE_COMMUNITY, "Groups_Permissions",
 			new String[] {"groupId"}, "Groups_Roles",
 			new Object[][] {
@@ -237,7 +209,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		// OrgGroupPermission
 
-		_convertPermissions(
+		convertPermissions(
 			RoleConstants.TYPE_ORGANIZATION, "OrgGroupPermission",
 			new String[] {"organizationId", "groupId"}, "OrgGroupRole",
 			new Object[][] {
@@ -247,7 +219,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		// Users_Permissions
 
-		_convertPermissions(
+		convertPermissions(
 			RoleConstants.TYPE_REGULAR, "Users_Permissions",
 			new String[] {"userId"}, "Users_Roles",
 			new Object[][] {
@@ -263,7 +235,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		MaintenanceUtil.appendStatus("Converted to RBAC permission");
 	}
 
-	private String _convertGuestUsers(String legacyFile) throws Exception {
+	protected String convertGuestUsers(String legacyFile) throws Exception {
 		BufferedReader legacyFileReader = new BufferedReader(
 			new FileReader(legacyFile));
 
@@ -326,7 +298,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		return legacyFile + _UPDATED;
 	}
 
-	private void _convertPermissions(
+	protected void convertPermissions(
 			int type, String legacyName, String[] primKeys, String newName,
 			Object[][] newColumns)
 		throws Exception {
@@ -342,13 +314,13 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		}
 
 		if (type == RoleConstants.TYPE_REGULAR) {
-			legacyFile = _convertGuestUsers(legacyFile);
+			legacyFile = convertGuestUsers(legacyFile);
 
 			MaintenanceUtil.appendStatus(
 				"Converted guest users to guest roles");
 		}
 
-		_convertRoles(legacyFile, type, newName, newColumns);
+		convertRoles(legacyFile, type, newName, newColumns);
 
 		MaintenanceUtil.appendStatus("Converted roles for " + legacyName);
 
@@ -359,7 +331,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		FileUtil.delete(legacyFile);
 	}
 
-	private void _convertResourcePermission(BufferedWriter writer, String name)
+	protected void convertResourcePermission(BufferedWriter writer, String name)
 		throws Exception {
 
 		ResourcePermissionView resourcePermissionView =
@@ -443,7 +415,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		}
 	}
 
-	private void _convertRoles(
+	protected void convertRoles(
 			String legacyFile, int type, String newName, Object[][] newColumns)
 		throws Exception {
 
@@ -667,7 +639,32 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		FileUtil.delete(legacyFile + _EXT_OTHER_ROLES);
 	}
 
-	private void _initialize() throws Exception {
+	protected void doConvert() throws Exception {
+		try {
+			BatchSessionUtil.setEnabled(true);
+
+			initialize();
+
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
+				convertToRBAC();
+			}
+
+			convertToBitwise();
+
+			MaintenanceUtil.appendStatus(
+				"Please set " + PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM +
+					" in your portal-ext.properties to use algorithm 6");
+		}
+		finally {
+			CacheRegistry.clear();
+
+			PermissionCacheUtil.clearCache();
+
+			BatchSessionUtil.setEnabled(false);
+		}
+	}
+
+	protected void initialize() throws Exception {
 
 		// Resource actions for unknown portlets
 
@@ -684,7 +681,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		}
 	}
 
-	private void _initializeRBAC() throws Exception {
+	protected void initializeRBAC() throws Exception {
 
 		// System roles and default users
 

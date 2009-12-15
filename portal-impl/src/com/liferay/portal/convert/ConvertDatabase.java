@@ -73,7 +73,7 @@ public class ConvertDatabase extends ConvertProcess {
 	}
 
 	protected void doConvert() throws Exception {
-		DataSource dataSource = _getDataSource();
+		DataSource dataSource = getDataSource();
 
 		Dialect dialect = DialectDetector.getDialect(dataSource);
 
@@ -140,7 +140,7 @@ public class ConvertDatabase extends ConvertProcess {
 		ShutdownUtil.shutdown(0);
 	}
 
-	private DataSource _getDataSource() throws Exception {
+	protected DataSource getDataSource() throws Exception {
 		String[] values = getParameterValues();
 
 		String jdbcDriverClassName = values[0];
