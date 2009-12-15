@@ -1406,6 +1406,7 @@
 		<field name="viewCount" type="int" />
 		<field name="lastPostByUserId" type="long" />
 		<field name="lastPostDate" type="Date" />
+		<field name="locked" type="boolean" />
 		<field name="priority" type="double" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />

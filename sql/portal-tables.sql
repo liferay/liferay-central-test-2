@@ -882,6 +882,7 @@ create table MBThread (
 	viewCount INTEGER,
 	lastPostByUserId LONG,
 	lastPostDate DATE null,
+	locked BOOLEAN,
 	priority DOUBLE,
 	status INTEGER,
 	statusByUserId LONG,

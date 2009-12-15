@@ -77,13 +77,14 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 			{ "viewCount", new Integer(Types.INTEGER) },
 			{ "lastPostByUserId", new Integer(Types.BIGINT) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
+			{ "locked", new Integer(Types.BOOLEAN) },
 			{ "priority", new Integer(Types.DOUBLE) },
 			{ "status", new Integer(Types.INTEGER) },
 			{ "statusByUserId", new Integer(Types.BIGINT) },
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,groupId LONG,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,groupId LONG,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,locked BOOLEAN,priority DOUBLE,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBThread";
 	public static final String ORDER_BY_JPQL = " ORDER BY mbThread.priority DESC, mbThread.lastPostDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY MBThread.priority DESC, MBThread.lastPostDate DESC";
@@ -108,6 +109,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 		model.setViewCount(soapModel.getViewCount());
 		model.setLastPostByUserId(soapModel.getLastPostByUserId());
 		model.setLastPostDate(soapModel.getLastPostDate());
+		model.setLocked(soapModel.getLocked());
 		model.setPriority(soapModel.getPriority());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
@@ -218,6 +220,18 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 		_lastPostDate = lastPostDate;
 	}
 
+	public boolean getLocked() {
+		return _locked;
+	}
+
+	public boolean isLocked() {
+		return _locked;
+	}
+
+	public void setLocked(boolean locked) {
+		_locked = locked;
+	}
+
 	public double getPriority() {
 		return _priority;
 	}
@@ -285,6 +299,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 			model.setViewCount(getViewCount());
 			model.setLastPostByUserId(getLastPostByUserId());
 			model.setLastPostDate(getLastPostDate());
+			model.setLocked(getLocked());
 			model.setPriority(getPriority());
 			model.setStatus(getStatus());
 			model.setStatusByUserId(getStatusByUserId());
@@ -323,6 +338,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 		clone.setViewCount(getViewCount());
 		clone.setLastPostByUserId(getLastPostByUserId());
 		clone.setLastPostDate(getLastPostDate());
+		clone.setLocked(getLocked());
 		clone.setPriority(getPriority());
 		clone.setStatus(getStatus());
 		clone.setStatusByUserId(getStatusByUserId());
@@ -391,7 +407,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{threadId=");
 		sb.append(getThreadId());
@@ -409,6 +425,8 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 		sb.append(getLastPostByUserId());
 		sb.append(", lastPostDate=");
 		sb.append(getLastPostDate());
+		sb.append(", locked=");
+		sb.append(getLocked());
 		sb.append(", priority=");
 		sb.append(getPriority());
 		sb.append(", status=");
@@ -425,7 +443,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.messageboards.model.MBThread");
@@ -464,6 +482,10 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 		sb.append(getLastPostDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>locked</column-name><column-value><![CDATA[");
+		sb.append(getLocked());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>priority</column-name><column-value><![CDATA[");
 		sb.append(getPriority());
 		sb.append("]]></column-value></column>");
@@ -498,6 +520,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	private long _lastPostByUserId;
 	private String _lastPostByUserUuid;
 	private Date _lastPostDate;
+	private boolean _locked;
 	private double _priority;
 	private int _status;
 	private long _statusByUserId;

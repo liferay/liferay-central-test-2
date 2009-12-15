@@ -224,6 +224,13 @@ public class MBThreadLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread updateThread(
+		long threadId, boolean locked)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateThread(threadId, locked);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread updateThread(
 		long threadId, int viewCount)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

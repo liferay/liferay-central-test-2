@@ -1534,6 +1534,7 @@
 		<property name="viewCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="lastPostByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="lastPostDate" type="org.hibernate.type.TimestampType" />
+		<property name="locked" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />

@@ -67,4 +67,9 @@ public interface MBThreadService {
 		long messageId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBThread updateThread(
+		long threadId, boolean locked)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }
