@@ -43,36 +43,38 @@ import java.util.concurrent.ConcurrentHashMap;
 public class LiferayTemplateLoader implements TemplateLoader {
 
 	public void closeTemplateSource(Object templateSource) {
-		LiferayTemplateSource source = (LiferayTemplateSource)templateSource;
+		LiferayTemplateSource liferayTemplateSource =
+			(LiferayTemplateSource)templateSource;
 
-		source.close();
+		liferayTemplateSource.close();
 	}
 
 	public Object findTemplateSource(String name) throws IOException {
-		// Give the last template loader that found this resource a change to
-		// find it again.
+		FreeMarkerTemplateLoader freeMarkerTemplateLoader =
+			_freeMarkerTemplateLoadersMap.get(name);
 
-		FreeMarkerTemplateLoader templateLoader = _lastLoaderForName.get(name);
-		if (templateLoader != null) {
-			Object templateSource = templateLoader.findTemplateSource(name);
+		if (freeMarkerTemplateLoader != null) {
+			Object templateSource = freeMarkerTemplateLoader.findTemplateSource(
+				name);
 
 			if (templateSource != null) {
 				return new LiferayTemplateSource(
-					templateSource, templateLoader);
+					freeMarkerTemplateLoader, templateSource);
 			}
 		}
 
-		for (FreeMarkerTemplateLoader freeMarkerTemplateLoader :
-				_freeMarkerTemplateLoaders) {
+		for (int i = 0; i < _freeMarkerTemplateLoaders.length; i++) {
+			freeMarkerTemplateLoader = _freeMarkerTemplateLoaders[i];
 
-			Object templateSource =
-				freeMarkerTemplateLoader.findTemplateSource(name);
+			Object templateSource = freeMarkerTemplateLoader.findTemplateSource(
+				name);
 
 			if (templateSource != null) {
-				_lastLoaderForName.put(name, freeMarkerTemplateLoader);
+				_freeMarkerTemplateLoadersMap.put(
+					name, freeMarkerTemplateLoader);
 
 				return new LiferayTemplateSource(
-					templateSource, freeMarkerTemplateLoader);
+					freeMarkerTemplateLoader, templateSource);
 			}
 		}
 
@@ -80,19 +82,20 @@ public class LiferayTemplateLoader implements TemplateLoader {
 	}
 
 	public long getLastModified(Object templateSource) {
-		LiferayTemplateSource source = (LiferayTemplateSource)templateSource;
+		LiferayTemplateSource liferayTemplateSource =
+			(LiferayTemplateSource)templateSource;
 
-		return source.getLastModified();
+		return liferayTemplateSource.getLastModified();
 	}
 
 	public Reader getReader(Object templateSource, String encoding)
 		throws IOException {
 
-		LiferayTemplateSource source = (LiferayTemplateSource)templateSource;
+		LiferayTemplateSource liferayTemplateSource =
+			(LiferayTemplateSource)templateSource;
 
-		return source.getReader(encoding);
+		return liferayTemplateSource.getReader(encoding);
 	}
-
 	public void setTemplateLoaders(
 		String[] freeMarkerTemplateLoaderClassNames) {
 
@@ -123,7 +126,8 @@ public class LiferayTemplateLoader implements TemplateLoader {
 		LogFactoryUtil.getLog(LiferayTemplateLoader.class);
 
 	private FreeMarkerTemplateLoader[] _freeMarkerTemplateLoaders;
-	private Map<String, FreeMarkerTemplateLoader> _lastLoaderForName =
-		new ConcurrentHashMap<String, FreeMarkerTemplateLoader>();
+	private Map<String, FreeMarkerTemplateLoader>
+		_freeMarkerTemplateLoadersMap =
+			new ConcurrentHashMap<String, FreeMarkerTemplateLoader>();
 
 }

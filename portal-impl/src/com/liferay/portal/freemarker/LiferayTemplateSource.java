@@ -33,41 +33,51 @@ import java.io.Reader;
 public class LiferayTemplateSource {
 
 	public LiferayTemplateSource(
-		Object source, FreeMarkerTemplateLoader loader) {
+		FreeMarkerTemplateLoader freeMarkerTemplateLoader,
+		Object templateSource) {
 
-		_loader = loader;
-		_source = source;
+		_freeMarkerTemplateLoader = freeMarkerTemplateLoader;
+		_templateSource = templateSource;
 	}
 
 	public void close() {
-		_loader.closeTemplateSource(_source);
+		_freeMarkerTemplateLoader.closeTemplateSource(_templateSource);
 	}
 
-	public boolean equals(Object o) {
-		if (o instanceof LiferayTemplateSource) {
-			LiferayTemplateSource lts = (LiferayTemplateSource) o;
-			return lts._loader.equals(_loader) && lts._source.equals(_source);
+	public boolean equals(Object obj) {
+		if (obj instanceof LiferayTemplateSource) {
+			LiferayTemplateSource liferayTemplateSource =
+				(LiferayTemplateSource)obj;
+
+			if (liferayTemplateSource._freeMarkerTemplateLoader.equals(
+					_freeMarkerTemplateLoader) &&
+				liferayTemplateSource._templateSource.equals(_templateSource)) {
+
+				return true;
+			}
 		}
+
 		return false;
 	}
 
 	public long getLastModified() {
-		return _loader.getLastModified(_source);
+		return _freeMarkerTemplateLoader.getLastModified(_templateSource);
 	}
 
 	public Reader getReader(String encoding) throws IOException {
-		return _loader.getReader(_source, encoding);
+		return _freeMarkerTemplateLoader.getReader(_templateSource, encoding);
 	}
 
 	public int hashCode() {
-		return _loader.hashCode() + 31 * _source.hashCode();
+		return _freeMarkerTemplateLoader.hashCode() +
+			(31 * _templateSource.hashCode());
 	}
 
 	public String toString() {
-		return _source.toString();
+		return _templateSource.toString();
 	}
 
-	private FreeMarkerTemplateLoader _loader;
-	private Object _source;
+	private FreeMarkerTemplateLoader _freeMarkerTemplateLoader;
+	private Object _templateSource;
 
 }

@@ -44,6 +44,10 @@ public class LiferayCacheStorage implements ConcurrentCacheStorage {
 		return _cache.get(key.toString());
 	}
 
+	public boolean isConcurrent() {
+		return true;
+	}
+
 	public void put(Object key, Object value) {
 		_cache.put(key.toString(), value);
 	}
@@ -53,10 +57,5 @@ public class LiferayCacheStorage implements ConcurrentCacheStorage {
 	}
 
 	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
-
-	public boolean isConcurrent() {
-
-		return true;
-	}
 
 }
