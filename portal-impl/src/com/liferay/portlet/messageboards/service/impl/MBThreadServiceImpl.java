@@ -86,4 +86,16 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		return mbThreadLocalService.splitThread(messageId, serviceContext);
 	}
 
+	public MBThread updateThread(long threadId, boolean locked) 
+		throws PortalException, SystemException {
+
+		MBThread thread = mbThreadLocalService.getThread(threadId);
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), thread.getGroupId(), thread.getCategoryId(),
+			ActionKeys.LOCK_THREAD);
+
+		return mbThreadLocalService.updateThread(threadId, locked);
+	}
+
 }

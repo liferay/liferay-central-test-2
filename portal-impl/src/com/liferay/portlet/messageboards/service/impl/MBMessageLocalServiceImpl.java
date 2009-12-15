@@ -71,6 +71,7 @@ import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
+import com.liferay.portlet.messageboards.ThreadLockedException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
@@ -320,6 +321,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setGroupId(groupId);
 			thread.setCategoryId(categoryId);
 			thread.setRootMessageId(messageId);
+			thread.setLocked(false);
 			thread.setStatus(serviceContext.getStatus());
 			thread.setStatusByUserId(user.getUserId());
 			thread.setStatusByUserName(userName);
@@ -336,6 +338,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				mbCategoryPersistence.update(category, false);
 			}
+		}
+
+		if (thread.isLocked()) {
+			throw new ThreadLockedException();
 		}
 
 		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
@@ -1350,6 +1356,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
+		MBThread thread = mbThreadPersistence.fetchByPrimaryKey(
+			message.getThreadId());
+
+		if (thread.isLocked()) {
+			throw new ThreadLockedException();
+		}
+
 		MBCategory category = message.getCategory();
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
@@ -1428,9 +1441,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		// Thread
-
-		MBThread thread = mbThreadPersistence.findByPrimaryKey(
-			message.getThreadId());
 
 		if ((priority != MBThreadConstants.PRIORITY_NOT_GIVEN) &&
 			(thread.getPriority() != priority)) {

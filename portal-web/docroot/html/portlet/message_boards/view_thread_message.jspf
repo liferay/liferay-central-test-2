@@ -196,7 +196,7 @@
 								</li>
 							</c:if>
 
-							<c:if test="<%= hasReplyPermission %>">
+							<c:if test="<%= hasReplyPermission && !thread.isLocked() %>">
 								<li>
 									<portlet:renderURL var="replyURL">
 										<portlet:param name="struts_action" value="/message_boards/edit_message" />
@@ -461,7 +461,7 @@
 						<liferay-ui:icon image="top" url="<%= topHREF %>" label="<%= true %>" />
 					</li>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
+					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE)  && !thread.isLocked() %>">
 						<li>
 							<portlet:renderURL var="editURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
@@ -473,7 +473,7 @@
 						</li>
 					</c:if>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
+					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) && !thread.isLocked() %>">
 						<li>
 							<liferay-security:permissionsURL
 								modelResource="<%= MBMessage.class.getName() %>"
@@ -498,7 +498,7 @@
 						</li>
 					</c:if>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
+					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) && !thread.isLocked() %>">
 						<li>
 
 							<%

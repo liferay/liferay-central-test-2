@@ -420,6 +420,7 @@
 		<column name="viewCount" type="int" />
 		<column name="lastPostByUserId" type="long" />
 		<column name="lastPostDate" type="Date" />
+		<column name="locked" type="boolean" />
 		<column name="priority" type="double" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
@@ -479,5 +480,6 @@
 		<exception>MessageSubject</exception>
 		<exception>RequiredMessage</exception>
 		<exception>SplitThread</exception>
+		<exception>ThreadLocked</exception>
 	</exceptions>
 </service-builder>
