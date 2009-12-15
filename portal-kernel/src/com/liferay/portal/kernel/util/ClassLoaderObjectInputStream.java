@@ -47,7 +47,7 @@ public class ClassLoaderObjectInputStream extends ObjectInputStream {
 	protected Class<?> resolveClass(ObjectStreamClass osc)
 		throws ClassNotFoundException {
 
-		return _classLoader.loadClass(osc.getName());
+		return Class.forName(osc.getName(), true, _classLoader);
 	}
 
 	private ClassLoader _classLoader;
