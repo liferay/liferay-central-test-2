@@ -26,10 +26,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ImageConstants;
 import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.util.Base64;
 
 /**
  * <a href="ImageTextUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>

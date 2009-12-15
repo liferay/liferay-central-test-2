@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.translator.util;
 
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portlet.translator.model.Translation;
-import com.liferay.util.Base64;
 
 /**
  * <a href="TranslatorUtil.java.html"><b><i>View Source</i></b></a>

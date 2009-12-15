@@ -26,8 +26,8 @@ import com.liferay.portal.image.Hook;
 import com.liferay.portal.image.HookFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
-import com.liferay.util.Base64;
 
 /**
  * <a href="ImageImpl.java.html"><b><i>View Source</i></b></a>
