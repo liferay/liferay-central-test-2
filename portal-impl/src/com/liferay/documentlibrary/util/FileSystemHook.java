@@ -71,7 +71,7 @@ public class FileSystemHook extends BaseHook {
 		File dirNameDir = getDirNameDir(companyId, repositoryId, dirName);
 
 		if (dirNameDir.exists()) {
-			throw new DuplicateDirectoryException();
+			throw new DuplicateDirectoryException(dirNameDir.getPath());
 		}
 
 		dirNameDir.mkdirs();
@@ -88,7 +88,7 @@ public class FileSystemHook extends BaseHook {
 				companyId, repositoryId, fileName, DEFAULT_VERSION);
 
 			if (fileNameVersionFile.exists()) {
-				throw new DuplicateFileException();
+				throw new DuplicateFileException(fileNameVersionFile.getPath());
 			}
 
 			FileUtil.write(fileNameVersionFile, is);
@@ -130,7 +130,7 @@ public class FileSystemHook extends BaseHook {
 				companyId, repositoryId, fileName);
 
 			if (!fileNameDir.exists()) {
-				throw new NoSuchFileException();
+				throw new NoSuchFileException(fileNameDir.getPath());
 			}
 
 			FileUtil.deltree(fileNameDir);
@@ -152,7 +152,7 @@ public class FileSystemHook extends BaseHook {
 			companyId, repositoryId, fileName, versionNumber);
 
 		if (!fileNameVersionFile.exists()) {
-			throw new NoSuchFileException();
+			throw new NoSuchFileException(fileNameVersionFile.getPath());
 		}
 
 		fileNameVersionFile.delete();
@@ -173,7 +173,7 @@ public class FileSystemHook extends BaseHook {
 				companyId, repositoryId, fileName, versionNumber);
 
 			if (!fileNameVersionFile.exists()) {
-				throw new NoSuchFileException();
+				throw new NoSuchFileException(fileNameVersionFile.getPath());
 			}
 
 			return new FileInputStream(fileNameVersionFile);
@@ -190,7 +190,7 @@ public class FileSystemHook extends BaseHook {
 		File dirNameDir = getDirNameDir(companyId, repositoryId, dirName);
 
 		if (!dirNameDir.exists()) {
-			throw new NoSuchDirectoryException();
+			throw new NoSuchDirectoryException(dirNameDir.getPath());
 		}
 
 		String[] fileNames = FileUtil.listDirs(dirNameDir);
@@ -218,7 +218,7 @@ public class FileSystemHook extends BaseHook {
 			companyId, repositoryId, fileName, versionNumber);
 
 		if (!fileNameVersionFile.exists()) {
-			throw new NoSuchFileException();
+			throw new NoSuchFileException(fileNameVersionFile.getPath());
 		}
 
 		return fileNameVersionFile.length();
@@ -310,7 +310,7 @@ public class FileSystemHook extends BaseHook {
 				companyId, repositoryId, fileName, versionNumber);
 
 			if (fileNameVersionFile.exists()) {
-				throw new DuplicateFileException();
+				throw new DuplicateFileException(fileNameVersionFile.getPath());
 			}
 
 			FileUtil.write(fileNameVersionFile, is);
