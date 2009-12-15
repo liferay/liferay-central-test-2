@@ -116,6 +116,7 @@ public class ThemeUtil {
 		sb.append(theme.getTemplatesPath());
 		sb.append(StringPool.SLASH);
 		sb.append(page.substring(0, pos));
+		sb.append(StringPool.PERIOD);
 		sb.append(_TEMPLATE_EXTENSION_FTL);
 
 		String source = sb.toString();
@@ -278,6 +279,7 @@ public class ThemeUtil {
 		sb.append(theme.getTemplatesPath());
 		sb.append(StringPool.SLASH);
 		sb.append(page.substring(0, pos));
+		sb.append(StringPool.PERIOD);
 		sb.append(_TEMPLATE_EXTENSION_VM);
 
 		String source = sb.toString();
@@ -349,9 +351,9 @@ public class ThemeUtil {
 		return value;
 	}
 
-	private static final String _TEMPLATE_EXTENSION_FTL = ".ftl";
+	private static final String _TEMPLATE_EXTENSION_FTL = "ftl";
 
-	private static final String _TEMPLATE_EXTENSION_VM = ".vm";
+	private static final String _TEMPLATE_EXTENSION_VM = "vm";
 
 	private static Log _log = LogFactoryUtil.getLog(ThemeUtil.class);
 
