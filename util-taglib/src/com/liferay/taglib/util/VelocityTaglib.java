@@ -24,9 +24,12 @@ package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.Theme;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.taglib.portlet.ActionURLTag;
 import com.liferay.taglib.portletext.IconBackTag;
@@ -95,6 +98,7 @@ public class VelocityTaglib {
 		_request = request;
 		_stringResponse = stringResponse;
 		_pageContext = pageContext;
+		_themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 
 		return this;
 	}
@@ -220,6 +224,12 @@ public class VelocityTaglib {
 
 	public String doAsURL(long doAsUserId) throws Exception {
 		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
+	}
+
+	public String getSetting(String name) {
+		Theme theme = _themeDisplay.getTheme();
+
+		return theme.getSetting(name);
 	}
 
 	public String iconBack() throws Exception {
@@ -736,5 +746,6 @@ public class VelocityTaglib {
 	private HttpServletRequest _request;
 	private StringServletResponse _stringResponse;
 	private PageContext _pageContext;
+	private ThemeDisplay _themeDisplay;
 
 }
