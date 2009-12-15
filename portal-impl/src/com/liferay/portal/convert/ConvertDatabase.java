@@ -88,7 +88,7 @@ public class ConvertDatabase extends ConvertProcess {
 		try {
 			MaintenanceUtil.appendStatus(
 				"Migrating " + modelNames.size() +
-					" database tables to new schema.");
+					" database tables to new schema");
 
 			for (int i = 0; i < modelNames.size(); i++) {
 				if ((i > 0) && (i % (modelNames.size() / 4) == 0)) {
@@ -132,9 +132,9 @@ public class ConvertDatabase extends ConvertProcess {
 			DataAccess.cleanUp(connection);
 		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Please change your JDBC settings before restarting server.");
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Please change your JDBC settings before restarting server");
 		}
 
 		ShutdownUtil.shutdown(0);

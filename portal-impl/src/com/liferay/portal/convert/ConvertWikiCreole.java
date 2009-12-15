@@ -68,7 +68,7 @@ public class ConvertWikiCreole extends ConvertProcess {
 
 		MaintenanceUtil.appendStatus(
 			"Converting " + pages.size() +
-				" Wiki pages from Classic Wiki to Creole format.");
+				" Wiki pages from Classic Wiki to Creole format");
 
 		for (int i = 0; i < pages.size(); i++) {
 			if ((i > 0) && (i % (pages.size() / 4) == 0)) {
