@@ -168,7 +168,7 @@ public class AssetCategoryLocalServiceImpl
 	public void deleteCategory(AssetCategory category)
 		throws PortalException, SystemException {
 
-		// Children
+		// Categories
 
 		List<AssetCategory> categories =
 			assetCategoryPersistence.findByParentCategoryId(
