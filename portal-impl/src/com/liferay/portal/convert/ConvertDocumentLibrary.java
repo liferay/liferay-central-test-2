@@ -141,8 +141,8 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			DLFileEntry fileEntry)
 		throws Exception {
 
-		long fileEntryId = fileEntry.getFileEntryId();
 		String fileName = fileEntry.getName();
+		long fileEntryId = fileEntry.getFileEntryId();
 		String properties = fileEntry.getLuceneProperties();
 
 		List<DLFileVersion> dlFileVersions =
@@ -154,8 +154,8 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			Date modifiedDate = fileEntry.getModifiedDate();
 
 			migrateFile(
-				companyId, portletId, groupId, repositoryId, fileEntryId,
-				fileName, versionNumber, properties, modifiedDate);
+				companyId, portletId, groupId, repositoryId, fileName,
+				versionNumber, fileEntryId, properties, modifiedDate);
 
 			return;
 		}
@@ -165,14 +165,14 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			Date modifiedDate = dlFileVersion.getCreateDate();
 
 			migrateFile(
-				companyId, portletId, groupId, repositoryId, fileEntryId,
-				fileName, versionNumber, properties, modifiedDate);
+				companyId, portletId, groupId, repositoryId, fileName,
+				versionNumber, fileEntryId, properties, modifiedDate);
 		}
 	}
 
 	protected void migrateFile(
 		long companyId, String portletId, long groupId, long repositoryId,
-		long fileEntryId, String fileName, double versionNumber,
+		String fileName, double versionNumber, long fileEntryId,
 		String properties, Date modifiedDate) {
 
 		try {
@@ -203,8 +203,8 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		String portletId = CompanyConstants.SYSTEM_STRING;
 		long groupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 		long repositoryId = CompanyConstants.SYSTEM;
-		long fileEntryId = 0;
 		double versionNumber = Hook.DEFAULT_VERSION;
+		long fileEntryId = 0;
 		String properties = StringPool.BLANK;
 		Date modifiedDate = new Date();
 
@@ -220,8 +220,8 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			}
 
 			migrateFile(
-				companyId, portletId, groupId, repositoryId, fileEntryId,
-				fileName, versionNumber, properties, modifiedDate);
+				companyId, portletId, groupId, repositoryId, fileName,
+				versionNumber, fileEntryId, properties, modifiedDate);
 		}
 	}
 
