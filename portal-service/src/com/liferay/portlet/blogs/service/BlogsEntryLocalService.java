@@ -99,15 +99,6 @@ public interface BlogsEntryLocalService {
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean allowTrackbacks,
-		java.lang.String[] trackbacks,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		java.lang.String uuid, long userId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
@@ -266,16 +257,9 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
-		long userId, com.liferay.portlet.blogs.model.BlogsEntry entry,
-		boolean pingOldTrackbaks, java.lang.String[] trackbacks,
-		com.liferay.portal.service.ServiceContext serviceContext,
-		boolean reIndex)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
-		long userId, long entryId,
+	public com.liferay.portlet.blogs.model.BlogsEntry updateWorkflowStatus(
+		long userId, long entryId, java.lang.String[] trackbacks,
+		boolean pingOldTrackbaks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

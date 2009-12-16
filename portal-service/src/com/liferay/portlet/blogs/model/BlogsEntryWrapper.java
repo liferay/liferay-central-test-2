@@ -279,6 +279,10 @@ public class BlogsEntryWrapper implements BlogsEntry {
 		return _blogsEntry.toXmlString();
 	}
 
+	public boolean isApproved() {
+		return _blogsEntry.isApproved();
+	}
+
 	public BlogsEntry getWrappedBlogsEntry() {
 		return _blogsEntry;
 	}

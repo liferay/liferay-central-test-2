@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.model.impl;
 
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 
 /**
@@ -32,6 +33,15 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 public class BlogsEntryImpl extends BlogsEntryModelImpl implements BlogsEntry {
 
 	public BlogsEntryImpl() {
+	}
+
+	public boolean isApproved() {
+		if (getStatus() == StatusConstants.APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

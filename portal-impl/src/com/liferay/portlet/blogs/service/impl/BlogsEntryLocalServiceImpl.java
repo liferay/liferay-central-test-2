@@ -96,19 +96,6 @@ import javax.xml.stream.XMLStreamReader;
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			long userId, String title, String content, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean allowTrackbacks, String[] trackbacks,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addEntry(
-			null, userId, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			allowTrackbacks, trackbacks, serviceContext);
-	}
-
-	public BlogsEntry addEntry(
 			String uuid, long userId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
@@ -149,6 +136,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setStatusByUserId(user.getUserId());
 		entry.setStatusByUserName(user.getFullName());
 		entry.setStatusDate(now);
+		entry.setExpandoBridgeAttributes(serviceContext);
 
 		blogsEntryPersistence.update(entry, false);
 
@@ -167,18 +155,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				serviceContext.getGuestPermissions());
 		}
 
-		// Expando
-
-		ExpandoBridge expandoBridge = entry.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
-		// Statistics
-
-		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
-			blogsStatsUserLocalService.updateStatsUser(groupId, userId, now);
-		}
-
 		// Asset
 
 		updateAsset(
@@ -193,31 +169,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				entryId, StatusConstants.APPROVED);
 		}
 
-		// Social
+		// Status
 
-		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
-			socialActivityLocalService.addActivity(
-				userId, groupId, BlogsEntry.class.getName(), entryId,
-				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
-		}
-
-		// Subscriptions
-
-		notifySubscribers(entry, serviceContext, false);
-
-		// Indexer
-
-		reIndex(entry);
-
-		// Ping
-
-		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
-			pingGoogle(entry, serviceContext);
-
-			if (allowTrackbacks) {
-				pingTrackbacks(entry, trackbacks, false, serviceContext);
-			}
-		}
+		updateWorkflowStatus(
+			userId, entryId, trackbacks, false, serviceContext);
 
 		return entry;
 	}
@@ -275,6 +230,46 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public void deleteEntry(BlogsEntry entry)
 		throws PortalException, SystemException {
 
+		// Entry
+
+		blogsEntryPersistence.remove(entry);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			entry.getCompanyId(), BlogsEntry.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, entry.getEntryId());
+
+		// Statistics
+
+		blogsStatsUserLocalService.updateStatsUser(
+			entry.getGroupId(), entry.getUserId());
+
+		// Asset
+
+		assetEntryLocalService.deleteEntry(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Message boards
+
+		mbMessageLocalService.deleteDiscussionMessages(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Ratings
+
+		ratingsStatsLocalService.deleteStats(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Social
+
+		socialActivityLocalService.deleteActivities(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
 		// Indexer
 
 		try {
@@ -283,46 +278,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		catch (SearchException se) {
 			_log.error("Deleting index " + entry.getEntryId(), se);
 		}
-
-		// Social
-
-		socialActivityLocalService.deleteActivities(
-			BlogsEntry.class.getName(), entry.getEntryId());
-
-		// Ratings
-
-		ratingsStatsLocalService.deleteStats(
-			BlogsEntry.class.getName(), entry.getEntryId());
-
-		// Message boards
-
-		mbMessageLocalService.deleteDiscussionMessages(
-			BlogsEntry.class.getName(), entry.getEntryId());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			BlogsEntry.class.getName(), entry.getEntryId());
-
-		// Asset
-
-		assetEntryLocalService.deleteEntry(
-			BlogsEntry.class.getName(), entry.getEntryId());
-
-		// Statistics
-
-		blogsStatsUserLocalService.updateStatsUser(
-			entry.getGroupId(), entry.getUserId());
-
-		// Resources
-
-		resourceLocalService.deleteResource(
-			entry.getCompanyId(), BlogsEntry.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, entry.getEntryId());
-
-		// Entry
-
-		blogsEntryPersistence.remove(entry);
 	}
 
 	public void deleteEntry(long entryId)
@@ -499,7 +454,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public void reIndex(BlogsEntry entry) throws SystemException {
-		if (entry.getStatus() != StatusConstants.APPROVED) {
+		if (!entry.isApproved()) {
 			return;
 		}
 
@@ -650,7 +605,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
 		String oldUrlTitle = entry.getUrlTitle();
-		int oldStatus = entry.getStatus();
 
 		entry.setModifiedDate(new Date());
 		entry.setTitle(title);
@@ -659,6 +613,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 		entry.setAllowTrackbacks(allowTrackbacks);
+		entry.setExpandoBridgeAttributes(serviceContext);
 
 		blogsEntryPersistence.update(entry, false);
 
@@ -672,46 +627,22 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				serviceContext.getGuestPermissions());
 		}
 
-		// Status
-
-		if (oldStatus != serviceContext.getStatus()) {
-			boolean pingOldTrackbacks = false;
-
-			if (oldUrlTitle != entry.getUrlTitle()) {
-				pingOldTrackbacks = true;
-			}
-
-			entry = updateStatus(
-				userId, entry, pingOldTrackbacks, trackbacks, serviceContext,
-				false);
-		}
-
-		// Statistics
-
-		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
-			blogsStatsUserLocalService.updateStatsUser(
-				entry.getGroupId(), entry.getUserId(), displayDate);
-		}
-
 		// Asset
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
 
-		// Expando
+		// Status
 
-		ExpandoBridge expandoBridge = entry.getExpandoBridge();
+		boolean pingOldTrackbacks = false;
 
-		expandoBridge.setAttributes(serviceContext);
+		if (!oldUrlTitle.equals(entry.getUrlTitle())) {
+			pingOldTrackbacks = true;
+		}
 
-		// Subscriptions
-
-		notifySubscribers(entry, serviceContext, true);
-
-		// Indexer
-
-		reIndex(entry);
+		updateWorkflowStatus(
+			userId, entryId, trackbacks, pingOldTrackbacks, serviceContext);
 
 		return entry;
 	}
@@ -727,16 +658,19 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			communityPermissions, guestPermissions);
 	}
 
-	public BlogsEntry updateStatus(
-			long userId, BlogsEntry entry, boolean pingOldTrackbaks,
-			String[] trackbacks, ServiceContext serviceContext, boolean reIndex)
+	public BlogsEntry updateWorkflowStatus(
+			long userId, long entryId, String[] trackbacks,
+			boolean pingOldTrackbaks, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		int oldStatus = entry.getStatus();
+		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
+		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
+
+		entry.setModifiedDate(now);
 		entry.setStatus(serviceContext.getStatus());
 		entry.setStatusByUserId(user.getUserId());
 		entry.setStatusByUserName(user.getFullName());
@@ -744,59 +678,56 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		blogsEntryPersistence.update(entry, false);
 
-		// Asset
+		// Statistics
 
-		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
-			(oldStatus != StatusConstants.APPROVED)) {
-
-			assetEntryLocalService.updateVisible(
-				BlogsEntry.class.getName(), entry.getEntryId(), true);
-
-			if (reIndex) {
-				reIndex(entry);
-			}
+		if (entry.isApproved()) {
+			blogsStatsUserLocalService.updateStatsUser(
+				entry.getGroupId(), userId, entry.getDisplayDate());
 		}
 
-		if ((serviceContext.getStatus() != StatusConstants.APPROVED) &&
-			(oldStatus == StatusConstants.APPROVED)) {
+		// Asset
 
+		if (entry.isApproved()) {
 			assetEntryLocalService.updateVisible(
-				BlogsEntry.class.getName(), entry.getEntryId(), false);
+				BlogsEntry.class.getName(), entryId, true);
+		}
+		else {
+			assetEntryLocalService.updateVisible(
+				BlogsEntry.class.getName(), entryId, false);
 		}
 
 		// Social
 
-		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
-			(oldStatus != StatusConstants.APPROVED)) {
-
-			socialActivityLocalService.addActivity(
+		if (entry.isApproved()) {
+			socialActivityLocalService.addUniqueActivity(
 				userId, entry.getGroupId(), BlogsEntry.class.getName(),
-				entry.getEntryId(), BlogsActivityKeys.ADD_ENTRY,
-				StringPool.BLANK, 0);
+				entryId, BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
 		}
 
-		// Ping
+		// Indexer
 
-		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
-			pingGoogle(entry, serviceContext);
-
-			if (entry.getAllowTrackbacks()) {
-				pingTrackbacks(
-					entry, trackbacks, pingOldTrackbaks, serviceContext);
+		if (entry.isApproved()) {
+			reIndex(entry);
+		}
+		else {
+			try {
+				Indexer.deleteEntry(entry.getCompanyId(), entryId);
+			}
+			catch (SearchException se) {
+				_log.error("Deleting index " + entry.getEntryId(), se);
 			}
 		}
 
+		// Subscriptions
+
+		notifySubscribers(entry, serviceContext);
+
+		// Ping
+
+		pingGoogle(entry, serviceContext);
+		pingTrackbacks(entry, trackbacks, pingOldTrackbaks, serviceContext);
+
 		return entry;
-	}
-
-	public BlogsEntry updateStatus(
-			long userId, long entryId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		BlogsEntry entry = getEntry(entryId);
-
-		return updateStatus(
-			userId, entry, false, null, serviceContext, true);
 	}
 
 	protected String getUniqueUrlTitle(
@@ -823,10 +754,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	protected void notifySubscribers(
-			BlogsEntry entry, ServiceContext serviceContext, boolean update)
+			BlogsEntry entry, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (entry.getStatus() != StatusConstants.APPROVED) {
+		if (!entry.isApproved()) {
 			return;
 		}
 
@@ -852,9 +783,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				defaultPreferences);
 		}
 
-		if (!update && BlogsUtil.getEmailEntryAddedEnabled(preferences)) {
+		if (serviceContext.isCommandAdd() &&
+			BlogsUtil.getEmailEntryAddedEnabled(preferences)) {
 		}
-		else if (update && BlogsUtil.getEmailEntryUpdatedEnabled(preferences)) {
+		else if (serviceContext.isCommandUpdate() &&
+				 BlogsUtil.getEmailEntryUpdatedEnabled(preferences)) {
 		}
 		else {
 			return;
@@ -933,7 +866,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String subject = null;
 		String body = null;
 
-		if (update) {
+		if (serviceContext.isCommandUpdate()) {
 			subject = BlogsUtil.getEmailEntryUpdatedSubject(preferences);
 			body = BlogsUtil.getEmailEntryUpdatedBody(preferences);
 		}
@@ -1021,7 +954,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	protected void pingGoogle(BlogsEntry entry, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.BLOGS_PING_GOOGLE_ENABLED) {
+		if (!PropsValues.BLOGS_PING_GOOGLE_ENABLED || !entry.isApproved()) {
 			return;
 		}
 
@@ -1135,7 +1068,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws SystemException {
 
-		if (!PropsValues.BLOGS_TRACKBACK_ENABLED) {
+		if (!PropsValues.BLOGS_TRACKBACK_ENABLED ||
+			!entry.isAllowTrackbacks() || !entry.isApproved()) {
+
 			return;
 		}
 

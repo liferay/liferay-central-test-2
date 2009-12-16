@@ -76,7 +76,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			ActionKeys.ADD_ENTRY);
 
 		return blogsEntryLocalService.addEntry(
-			getUserId(), title, content, displayDateMonth, displayDateDay,
+			null, getUserId(), title, content, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
 			allowTrackbacks, trackbacks, serviceContext);
 	}

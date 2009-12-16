@@ -257,9 +257,10 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-				userId, entry.getTitle(), entry.getContent(), displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, allowTrackbacks, trackbacks, serviceContext);
+				null, userId, entry.getTitle(), entry.getContent(),
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, allowTrackbacks, trackbacks,
+				serviceContext);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {

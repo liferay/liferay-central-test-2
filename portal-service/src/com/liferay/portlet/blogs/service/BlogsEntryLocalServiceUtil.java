@@ -110,20 +110,6 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		long userId, java.lang.String title, java.lang.String content,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
-		java.lang.String[] trackbacks,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addEntry(userId, title, content, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, allowTrackbacks, trackbacks, serviceContext);
-	}
-
-	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		java.lang.String uuid, long userId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -343,24 +329,15 @@ public class BlogsEntryLocalServiceUtil {
 			.updateEntryResources(entry, communityPermissions, guestPermissions);
 	}
 
-	public static com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
-		long userId, com.liferay.portlet.blogs.model.BlogsEntry entry,
-		boolean pingOldTrackbaks, java.lang.String[] trackbacks,
-		com.liferay.portal.service.ServiceContext serviceContext,
-		boolean reIndex)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .updateStatus(userId, entry, pingOldTrackbaks, trackbacks,
-			serviceContext, reIndex);
-	}
-
-	public static com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
-		long userId, long entryId,
+	public static com.liferay.portlet.blogs.model.BlogsEntry updateWorkflowStatus(
+		long userId, long entryId, java.lang.String[] trackbacks,
+		boolean pingOldTrackbaks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().updateStatus(userId, entryId, serviceContext);
+		return getService()
+				   .updateWorkflowStatus(userId, entryId, trackbacks,
+			pingOldTrackbaks, serviceContext);
 	}
 
 	public static BlogsEntryLocalService getService() {
