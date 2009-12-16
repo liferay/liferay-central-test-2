@@ -211,6 +211,11 @@ create table UserGroupGroupRole (
 	primary key (userGroupId, groupId, roleId)
 );
 
+alter table WikiPage add status INTEGER;
+alter table WikiPage add statusByUserId LONG;
+alter table WikiPage add statusByUserName VARCHAR(75);
+alter table WikiPage add statusDate DATE;
+
 create table WorkflowDefinitionLink (
 	workflowDefinitionLinkId LONG not null primary key,
 	groupId LONG,
