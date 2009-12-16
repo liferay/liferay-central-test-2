@@ -1447,6 +1447,26 @@ public class PortalImpl implements Portal {
 		if (!themeDisplay.getServerName().equals(_LOCALHOST)) {
 			String virtualHost = layoutSet.getVirtualHost();
 
+			if (Validator.isNull(virtualHost) &&
+				Validator.isNotNull(
+					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
+
+				try {
+					Group group = GroupLocalServiceUtil.getGroup(
+						themeDisplay.getCompanyId(),
+						PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
+
+					if (layoutSet.getGroupId() == group.getGroupId()) {
+						Company company = themeDisplay.getCompany();
+
+						virtualHost = company.getVirtualHost();
+					}
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+
 			if (Validator.isNotNull(virtualHost)) {
 				virtualHost = getPortalURL(
 					virtualHost, themeDisplay.getServerPort(),
@@ -1632,6 +1652,26 @@ public class PortalImpl implements Portal {
 		throws PortalException, SystemException {
 
 		String virtualHost = layoutSet.getVirtualHost();
+
+		if (Validator.isNull(virtualHost) &&
+			Validator.isNotNull(
+				PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
+
+			try {
+				Group group = GroupLocalServiceUtil.getGroup(
+					themeDisplay.getCompanyId(),
+					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
+
+				if (layoutSet.getGroupId() == group.getGroupId()) {
+					Company company = themeDisplay.getCompany();
+
+					virtualHost = company.getVirtualHost();
+				}
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
 
 		if (Validator.isNotNull(virtualHost)) {
 			String portalURL = getPortalURL(
