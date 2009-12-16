@@ -20,25 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.amazonrankings;
+package com.liferay.portalweb.portlet.amazonrankings.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.amazonrankings.portlet.PortletTests;
+import com.liferay.portalweb.portlet.amazonrankings.portlet.addportlet.AddPortletTests;
+import com.liferay.portalweb.portlet.amazonrankings.portlet.addportletduplicate.AddPortletDuplicateTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="AmazonRankingsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AmazonRankingsTests extends BaseTests {
+public class PortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(AddPortletTests.suite());
+		testSuite.addTest(AddPortletDuplicateTests.suite());
 
 		return testSuite;
 	}

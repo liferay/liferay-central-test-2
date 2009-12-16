@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.amazonrankings.addportlet;
+package com.liferay.portalweb.portlet.amazonrankings.portlet.addportletduplicate;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -37,7 +37,8 @@ public class TearDownTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
-				selenium.open("/web/guest/home");
+				selenium.open("/web/guest/home/");
+				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -65,7 +66,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//li/div/div[1]")) {
+						if (selenium.isVisible("link=Guest")) {
 							break;
 						}
 					}
@@ -75,21 +76,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
-				Thread.sleep(5000);
-
-				boolean dropDownVisble = selenium.isVisible(
-						"//li/ul/li[1]/div/div[3]/a");
-
-				if (dropDownVisble) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
-
-			case 2:
+				selenium.clickAt("//div[@id='_88_treeExpandAll']/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -111,6 +99,45 @@ public class TearDownTest extends BaseTestCase {
 						"//li[2]/div/div[3]/a");
 
 				if (!page1Present) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.clickAt("//li[2]/div/div[3]/a",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/a",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+
+			case 2:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//li/ul/li[1]/div/div[3]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				boolean page2Present = selenium.isElementPresent(
+						"//li[2]/div/div[3]/a");
+
+				if (!page2Present) {
 					label = 3;
 
 					continue;
@@ -146,10 +173,10 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				boolean page2Present = selenium.isElementPresent(
+				boolean page3Present = selenium.isElementPresent(
 						"//li[2]/div/div[3]/a");
 
-				if (!page2Present) {
+				if (!page3Present) {
 					label = 4;
 
 					continue;
@@ -185,10 +212,10 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				boolean page3Present = selenium.isElementPresent(
+				boolean page4Present = selenium.isElementPresent(
 						"//li[2]/div/div[3]/a");
 
-				if (!page3Present) {
+				if (!page4Present) {
 					label = 5;
 
 					continue;
@@ -224,10 +251,10 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				boolean page4Present = selenium.isElementPresent(
+				boolean page5Present = selenium.isElementPresent(
 						"//li[2]/div/div[3]/a");
 
-				if (!page4Present) {
+				if (!page5Present) {
 					label = 6;
 
 					continue;
@@ -246,45 +273,6 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 
 			case 6:
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible("//li/ul/li[1]/div/div[3]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				boolean page5Present = selenium.isElementPresent(
-						"//li[2]/div/div[3]/a");
-
-				if (!page5Present) {
-					label = 7;
-
-					continue;
-				}
-
-				selenium.clickAt("//li[2]/div/div[3]/a",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/a",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-
-			case 7:
 			case 100:
 				label = -1;
 			}

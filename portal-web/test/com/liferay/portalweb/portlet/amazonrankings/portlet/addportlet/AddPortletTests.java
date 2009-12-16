@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.amazonrankings.addportletduplicate;
+package com.liferay.portalweb.portlet.amazonrankings.portlet.addportlet;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -28,18 +28,17 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="AddPortletDuplicateTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddPortletDuplicateTests extends BaseTests {
+public class AddPortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(AddPortletDuplicateTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

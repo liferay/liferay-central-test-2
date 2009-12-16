@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.amazonrankings.addportletduplicate;
+package com.liferay.portalweb.portlet.amazonrankings.portlet.addportlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -33,6 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddPageTest extends BaseTestCase {
 	public void testAddPage() throws Exception {
 		selenium.open("/web/guest/home");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +59,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input")) {
+				if (selenium.isElementPresent("//input")) {
 					break;
 				}
 			}
@@ -89,8 +90,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Amazon Rankings Test Page"));
+		selenium.clickAt("link=Amazon Rankings Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }
