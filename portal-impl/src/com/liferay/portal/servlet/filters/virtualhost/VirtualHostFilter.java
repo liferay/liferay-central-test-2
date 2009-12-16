@@ -322,7 +322,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 	private static final String _PATH_DELEGATE = "/delegate/";
 
-	private static final String _PATH_DISPLAY_CHART = "/display_chart/";
+	private static final String _PATH_DISPLAY_CHART = "/display_chart";
 
 	private static final String _PATH_DOCUMENT = "/document/";
 
