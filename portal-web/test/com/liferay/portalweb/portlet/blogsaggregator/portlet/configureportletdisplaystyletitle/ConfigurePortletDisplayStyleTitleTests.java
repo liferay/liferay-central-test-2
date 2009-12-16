@@ -20,38 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogsaggregator;
+package com.liferay.portalweb.portlet.blogsaggregator.portlet.configureportletdisplaystyletitle;
 
-import com.liferay.portalweb.portal.BaseTestCase;
-import com.liferay.portalweb.portal.util.RuntimeVariables;
+import com.liferay.portalweb.portal.BaseTests;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
- * <a href="ViewBlogsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurePortletDisplayStyleTitleTests.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ViewBlogsTest extends BaseTestCase {
-	public void testViewBlogs() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+public class ConfigurePortletDisplayStyleTitleTests extends BaseTests {
 
-			try {
-				if (selenium.isElementPresent("link=Blogs Aggregator Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-			Thread.sleep(1000);
-		}
+		testSuite.addTestSuite(AddPageBATest.class);
+		testSuite.addTestSuite(AddPortletBATest.class);
+		testSuite.addTestSuite(AddPageBlogsTest.class);
+		testSuite.addTestSuite(AddPortletBlogsTest.class);
+		testSuite.addTestSuite(AddEntryTest.class);
+		testSuite.addTestSuite(ConfigurePortletDisplayStyleTitleTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
-		selenium.clickAt("link=Blogs Aggregator Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=BA Setup Test Entry"));
-		assertTrue(selenium.isTextPresent("This is a BA setup test entry!"));
+		return testSuite;
 	}
+
 }

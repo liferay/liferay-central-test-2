@@ -20,27 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogsaggregator;
+package com.liferay.portalweb.portlet.blogsaggregator.entry;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.blogsaggregator.entry.EntryTests;
-import com.liferay.portalweb.portlet.blogsaggregator.portlet.PortletTests;
+import com.liferay.portalweb.portlet.blogsaggregator.entry.viewentry.ViewEntryTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="BlogsAggregatorTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EntryTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BlogsAggregatorTests extends BaseTests {
+public class EntryTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(ViewEntryTests.suite());
 
 		return testSuite;
 	}

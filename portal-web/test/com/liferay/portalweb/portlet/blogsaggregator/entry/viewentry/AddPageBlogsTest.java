@@ -20,25 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogsaggregator;
+package com.liferay.portalweb.portlet.blogsaggregator.entry.viewentry;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DisplayStylesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPageBlogsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DisplayStylesTest extends BaseTestCase {
-	public void testDisplayStyles() throws Exception {
+public class AddPageBlogsTest extends BaseTestCase {
+	public void testAddPageBlogs() throws Exception {
+		selenium.open("/web/guest/home/");
+		Thread.sleep(5000);
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Aggregator Test Page")) {
+				if (selenium.isElementPresent("addPage")) {
 					break;
 				}
 			}
@@ -48,9 +51,7 @@ public class DisplayStylesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Blogs Aggregator Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +59,7 @@ public class DisplayStylesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isVisible("//input")) {
 					break;
 				}
 			}
@@ -68,11 +69,9 @@ public class DisplayStylesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//img[@alt='Configuration']",
+		selenium.type("//input", RuntimeVariables.replace("Blogs Test Page"));
+		selenium.clickAt("//span[2]/span/span/span/span",
 			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_displayStyle",
-			RuntimeVariables.replace("label=Title"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -80,7 +79,7 @@ public class DisplayStylesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -90,13 +89,7 @@ public class DisplayStylesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("This is a BA setup test entry!"));
 	}
 }
