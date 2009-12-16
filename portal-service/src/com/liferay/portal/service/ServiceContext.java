@@ -68,6 +68,10 @@ public class ServiceContext implements Serializable {
 		return _attributes;
 	}
 
+	public String getCommand() {
+		return _command;
+	}
+
 	public String[] getCommunityPermissions() {
 		return _communityPermissions;
 	}
@@ -156,6 +160,10 @@ public class ServiceContext implements Serializable {
 		_attributes = attributes;
 	}
 
+	public void setCommand(String command) {
+		_command = command;
+	}
+
 	public void setCommunityPermissions(String[] communityPermissions) {
 		_communityPermissions = communityPermissions;
 	}
@@ -229,6 +237,7 @@ public class ServiceContext implements Serializable {
 	private long[] _assetCategoryIds;
 	private String[] _assetTagNames;
 	private Map<String, Serializable> _attributes;
+	private String _command;
 	private String[] _communityPermissions;
 	private long _companyId;
 	private Map<String, Serializable> _expandoBridgeAttributes;
