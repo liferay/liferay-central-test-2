@@ -41,16 +41,14 @@ import javax.portlet.PortletPreferences;
  */
 public class BlogsUtil {
 
-	public static final String POP_PORTLET_PREFIX = "blogs.";
-
-	public static String getEmailBlogsAddedBody(
+	public static String getEmailEntryAddedBody(
 		PortletPreferences preferences) {
 
-		String emailBlogsAddedBody = preferences.getValue(
-			"email-blogs-added-body", StringPool.BLANK);
+		String emailEntryAddedBody = preferences.getValue(
+			"email-entry-added-body", StringPool.BLANK);
 
-		if (Validator.isNotNull(emailBlogsAddedBody)) {
-			return emailBlogsAddedBody;
+		if (Validator.isNotNull(emailEntryAddedBody)) {
+			return emailEntryAddedBody;
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
@@ -58,14 +56,14 @@ public class BlogsUtil {
 		}
 	}
 
-	public static boolean getEmailBlogsAddedEnabled(
+	public static boolean getEmailEntryAddedEnabled(
 		PortletPreferences preferences) {
 
-		String emailBlogsAddedEnabled = preferences.getValue(
-			"email-blogs-added-enabled", StringPool.BLANK);
+		String emailEntryAddedEnabled = preferences.getValue(
+			"email-entry-added-enabled", StringPool.BLANK);
 
-		if (Validator.isNotNull(emailBlogsAddedEnabled)) {
-			return GetterUtil.getBoolean(emailBlogsAddedEnabled);
+		if (Validator.isNotNull(emailEntryAddedEnabled)) {
+			return GetterUtil.getBoolean(emailEntryAddedEnabled);
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
@@ -73,14 +71,14 @@ public class BlogsUtil {
 		}
 	}
 
-	public static String getEmailBlogsAddedSubject(
+	public static String getEmailEntryAddedSubject(
 		PortletPreferences preferences) {
 
-		String emailBlogsAddedSubject = preferences.getValue(
-			"email-blogs-added-subject", StringPool.BLANK);
+		String emailEntryAddedSubject = preferences.getValue(
+			"email-entry-added-subject", StringPool.BLANK);
 
-		if (Validator.isNotNull(emailBlogsAddedSubject)) {
-			return emailBlogsAddedSubject;
+		if (Validator.isNotNull(emailEntryAddedSubject)) {
+			return emailEntryAddedSubject;
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
@@ -88,14 +86,14 @@ public class BlogsUtil {
 		}
 	}
 
-	public static String getEmailBlogsUpdatedBody(
+	public static String getEmailEntryUpdatedBody(
 		PortletPreferences preferences) {
 
-		String emailBlogsUpdatedBody = preferences.getValue(
-			"email-blogs-updated-body", StringPool.BLANK);
+		String emailEntryUpdatedBody = preferences.getValue(
+			"email-entry-updated-body", StringPool.BLANK);
 
-		if (Validator.isNotNull(emailBlogsUpdatedBody)) {
-			return emailBlogsUpdatedBody;
+		if (Validator.isNotNull(emailEntryUpdatedBody)) {
+			return emailEntryUpdatedBody;
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
@@ -103,14 +101,14 @@ public class BlogsUtil {
 		}
 	}
 
-	public static boolean getEmailBlogsUpdatedEnabled(
+	public static boolean getEmailEntryUpdatedEnabled(
 		PortletPreferences preferences) {
 
-		String emailBlogsUpdatedEnabled = preferences.getValue(
-			"email-blogs-updated-enabled", StringPool.BLANK);
+		String emailEntryUpdatedEnabled = preferences.getValue(
+			"email-entry-updated-enabled", StringPool.BLANK);
 
-		if (Validator.isNotNull(emailBlogsUpdatedEnabled)) {
-			return GetterUtil.getBoolean(emailBlogsUpdatedEnabled);
+		if (Validator.isNotNull(emailEntryUpdatedEnabled)) {
+			return GetterUtil.getBoolean(emailEntryUpdatedEnabled);
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
@@ -118,14 +116,14 @@ public class BlogsUtil {
 		}
 	}
 
-	public static String getEmailBlogsUpdatedSubject(
+	public static String getEmailEntryUpdatedSubject(
 		PortletPreferences preferences) {
 
-		String emailBlogsUpdatedSubject = preferences.getValue(
-			"email-blogs-updated-subject", StringPool.BLANK);
+		String emailEntryUpdatedSubject = preferences.getValue(
+			"email-entry-updated-subject", StringPool.BLANK);
 
-		if (Validator.isNotNull(emailBlogsUpdatedSubject)) {
-			return emailBlogsUpdatedSubject;
+		if (Validator.isNotNull(emailEntryUpdatedSubject)) {
+			return emailEntryUpdatedSubject;
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
@@ -174,6 +172,8 @@ public class BlogsUtil {
 				title, _URL_TITLE_REPLACE_CHARS);
 		}
 	}
+
+	public static final String POP_PORTLET_PREFIX = "blogs.";
 
 	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
 		'.', '/'

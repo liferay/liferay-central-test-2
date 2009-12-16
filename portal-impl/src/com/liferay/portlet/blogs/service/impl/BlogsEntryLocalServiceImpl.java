@@ -852,9 +852,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				defaultPreferences);
 		}
 
-		if (!update && BlogsUtil.getEmailBlogsAddedEnabled(preferences)) {
+		if (!update && BlogsUtil.getEmailEntryAddedEnabled(preferences)) {
 		}
-		else if (update && BlogsUtil.getEmailBlogsUpdatedEnabled(preferences)) {
+		else if (update && BlogsUtil.getEmailEntryUpdatedEnabled(preferences)) {
 		}
 		else {
 			return;
@@ -887,42 +887,42 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		fromName = StringUtil.replace(
 			fromName,
 			new String[] {
+				"[$BLOGS_ENTRY_USER_ADDRESS$]",
+				"[$BLOGS_ENTRY_USER_NAME$]",
 				"[$COMPANY_ID$]",
 				"[$COMPANY_MX$]",
 				"[$COMPANY_NAME$]",
 				"[$COMMUNITY_NAME$]",
-				"[$BLOGS_ENTRY_USER_ADDRESS$]",
-				"[$BLOGS_ENTRY_USER_NAME$]",
 				"[$PORTLET_NAME$]"
 			},
 			new String[] {
+				emailAddress,
+				fullName,
 				String.valueOf(company.getCompanyId()),
 				company.getMx(),
 				company.getName(),
 				group.getName(),
-				emailAddress,
-				fullName,
 				portletName
 			});
 
 		fromAddress = StringUtil.replace(
 			fromAddress,
 			new String[] {
+				"[$BLOGS_ENTRY_USER_ADDRESS$]",
+				"[$BLOGS_ENTRY_USER_NAME$]",
 				"[$COMPANY_ID$]",
 				"[$COMPANY_MX$]",
 				"[$COMPANY_NAME$]",
 				"[$COMMUNITY_NAME$]",
-				"[$BLOGS_ENTRY_USER_ADDRESS$]",
-				"[$BLOGS_ENTRY_USER_NAME$]",
 				"[$PORTLET_NAME$]"
 			},
 			new String[] {
+				emailAddress,
+				fullName,
 				String.valueOf(company.getCompanyId()),
 				company.getMx(),
 				company.getName(),
 				group.getName(),
-				emailAddress,
-				fullName,
 				portletName
 			});
 
@@ -934,12 +934,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String body = null;
 
 		if (update) {
-			subject = BlogsUtil.getEmailBlogsUpdatedSubject(preferences);
-			body = BlogsUtil.getEmailBlogsUpdatedBody(preferences);
+			subject = BlogsUtil.getEmailEntryUpdatedSubject(preferences);
+			body = BlogsUtil.getEmailEntryUpdatedBody(preferences);
 		}
 		else {
-			subject = BlogsUtil.getEmailBlogsAddedSubject(preferences);
-			body = BlogsUtil.getEmailBlogsAddedBody(preferences);
+			subject = BlogsUtil.getEmailEntryAddedSubject(preferences);
+			body = BlogsUtil.getEmailEntryAddedBody(preferences);
 		}
 
 		subject = StringUtil.replace(

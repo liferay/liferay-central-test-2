@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -45,6 +47,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.blogs.EntryContentException;
+import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.NoSuchEntryException;
@@ -236,25 +239,37 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	protected void subscribe(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		long userId = themeDisplay.getUserId();
-		long groupId = themeDisplay.getScopeGroupId();
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
 
-		SubscriptionLocalServiceUtil.addSubscription(
-			userId, BlogsEntry.class.getName(), groupId);
+		if (BlogsPermission.contains(
+				permissionChecker, themeDisplay.getScopeGroupId(),
+				ActionKeys.SUBSCRIBE)) {
+
+			SubscriptionLocalServiceUtil.addSubscription(
+				themeDisplay.getUserId(), BlogsEntry.class.getName(),
+				themeDisplay.getScopeGroupId());
+		}
 	}
 
 	protected void unsubscribe(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		long userId = themeDisplay.getUserId();
-		long groupId = themeDisplay.getScopeGroupId();
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
 
-		SubscriptionLocalServiceUtil.deleteSubscription(
-			userId, BlogsEntry.class.getName(), groupId);
+		if (BlogsPermission.contains(
+				permissionChecker, themeDisplay.getScopeGroupId(),
+				ActionKeys.SUBSCRIBE)) {
+
+			SubscriptionLocalServiceUtil.deleteSubscription(
+				themeDisplay.getUserId(), BlogsEntry.class.getName(),
+				themeDisplay.getScopeGroupId());
+		}
 	}
 
 	protected Object[] updateEntry(ActionRequest actionRequest)
