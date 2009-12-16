@@ -20,31 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.blogs.lar;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.blogs.entry.EntryTests;
-import com.liferay.portalweb.portlet.blogs.entrycomment.EntryCommentTests;
-import com.liferay.portalweb.portlet.blogs.lar.LARTests;
-import com.liferay.portalweb.portlet.blogs.portlet.PortletTests;
+import com.liferay.portalweb.portlet.blogs.lar.importlar.ImportLARTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="LARTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BlogsTests extends BaseTests {
+public class LARTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(EntryCommentTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(ImportLARTests.suite());
 
 		return testSuite;
 	}

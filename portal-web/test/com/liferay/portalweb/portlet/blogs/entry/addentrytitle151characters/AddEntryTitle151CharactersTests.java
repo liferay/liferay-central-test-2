@@ -20,31 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.blogs.entry.addentrytitle151characters;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.blogs.entry.EntryTests;
-import com.liferay.portalweb.portlet.blogs.entrycomment.EntryCommentTests;
-import com.liferay.portalweb.portlet.blogs.lar.LARTests;
-import com.liferay.portalweb.portlet.blogs.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddEntryTitle151CharactersTests.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BlogsTests extends BaseTests {
+public class AddEntryTitle151CharactersTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(EntryCommentTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddEntryTitle151CharactersTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

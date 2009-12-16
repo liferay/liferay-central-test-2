@@ -20,33 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.blogs.portlet.configureportletdisplaystyleabstract;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.blogs.entry.EntryTests;
-import com.liferay.portalweb.portlet.blogs.entrycomment.EntryCommentTests;
-import com.liferay.portalweb.portlet.blogs.lar.LARTests;
-import com.liferay.portalweb.portlet.blogs.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewEntryDisplayStyleAbstractTest.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BlogsTests extends BaseTests {
+public class ViewEntryDisplayStyleAbstractTest extends BaseTestCase {
+	public void testViewEntryDisplayStyleAbstract() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(EntryCommentTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Title"),
+			selenium.getText("//div[2]/div[1]/div[1]/a"));
+		assertTrue(selenium.isTextPresent("Content."));
+		assertTrue(selenium.isElementPresent("link=Read More \u00bb"));
 	}
-
 }
