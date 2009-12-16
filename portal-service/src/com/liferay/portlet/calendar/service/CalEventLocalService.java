@@ -98,19 +98,6 @@ public interface CalEventLocalService {
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
-		java.lang.String title, java.lang.String description,
-		int startDateMonth, int startDateDay, int startDateYear,
-		int startDateHour, int startDateMinute, int endDateMonth,
-		int endDateDay, int endDateYear, int durationHour, int durationMinute,
-		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating,
-		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
-		int firstReminder, int secondReminder,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(
 		java.lang.String uuid, long userId, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
@@ -124,25 +111,25 @@ public interface CalEventLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addEventResources(long eventId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public void addEventResources(
 		com.liferay.portlet.calendar.model.CalEvent event,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addEventResources(long eventId,
+	public void addEventResources(
+		com.liferay.portlet.calendar.model.CalEvent event,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addEventResources(
-		com.liferay.portlet.calendar.model.CalEvent event,
+	public void addEventResources(long eventId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addEventResources(long eventId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -152,11 +139,11 @@ public interface CalEventLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteEvent(long eventId)
+	public void deleteEvent(com.liferay.portlet.calendar.model.CalEvent event)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteEvent(com.liferay.portlet.calendar.model.CalEvent event)
+	public void deleteEvent(long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -180,17 +167,17 @@ public interface CalEventLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
-		long groupId, java.lang.String type, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.util.Calendar cal, java.lang.String type)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.lang.String type, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -214,11 +201,11 @@ public interface CalEventLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(long eventId) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(com.liferay.portlet.calendar.model.CalEvent event)
 		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public void reIndex(long eventId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(java.lang.String[] ids)

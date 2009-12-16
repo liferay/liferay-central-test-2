@@ -140,25 +140,6 @@ import net.fortuna.ical4j.model.property.Version;
 public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	public CalEvent addEvent(
-			long userId, String title, String description, int startDateMonth,
-			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int endDateMonth, int endDateDay,
-			int endDateYear, int durationHour, int durationMinute,
-			boolean allDay, boolean timeZoneSensitive, String type,
-			boolean repeating, TZSRecurrence recurrence, int remindBy,
-			int firstReminder, int secondReminder,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addEvent(
-			null, userId, title, description, startDateMonth, startDateDay,
-			startDateYear, startDateHour, startDateMinute, endDateMonth,
-			endDateDay, endDateYear, durationHour, durationMinute, allDay,
-			timeZoneSensitive, type, repeating, recurrence, remindBy,
-			firstReminder, secondReminder, serviceContext);
-	}
-
-	public CalEvent addEvent(
 			String uuid, long userId, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
@@ -245,6 +226,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setRemindBy(remindBy);
 		event.setFirstReminder(firstReminder);
 		event.setSecondReminder(secondReminder);
+		event.setExpandoBridgeAttributes(serviceContext);
 
 		calEventPersistence.update(event, false);
 
@@ -262,12 +244,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				event, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
-
-		// Expando
-
-		ExpandoBridge expandoBridge = event.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Social
 
@@ -287,17 +263,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public void addEventResources(
-			long eventId, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
-
-		addEventResources(
-			event, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addEventResources(
 			CalEvent event, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -309,16 +274,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public void addEventResources(
-			long eventId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
-
-		addEventResources(event, communityPermissions, guestPermissions);
-	}
-
-	public void addEventResources(
 			CalEvent event, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -327,6 +282,27 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
 			CalEvent.class.getName(), event.getEventId(), communityPermissions,
 			guestPermissions);
+	}
+
+	public void addEventResources(
+			long eventId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
+
+		addEventResources(
+			event, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addEventResources(
+			long eventId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
+
+		addEventResources(event, communityPermissions, guestPermissions);
 	}
 
 	public void checkEvents() throws PortalException, SystemException {
@@ -398,30 +374,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteEvent(long eventId)
-		throws PortalException, SystemException {
-
-		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
-
-		deleteEvent(event);
-	}
-
 	public void deleteEvent(CalEvent event)
 		throws PortalException, SystemException {
 
-		// Pool
+		// Event
 
-		CalEventLocalUtil.clearEventsPool(event.getGroupId());
-
-		// Social
-
-		socialActivityLocalService.deleteActivities(
-			CalEvent.class.getName(), event.getEventId());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			CalEvent.class.getName(), event.getEventId());
+		calEventPersistence.remove(event);
 
 		// Resources
 
@@ -429,9 +387,27 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			event.getCompanyId(), CalEvent.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, event.getEventId());
 
-		// Event
+		// Expando
 
-		calEventPersistence.remove(event);
+		expandoValueLocalService.deleteValues(
+			CalEvent.class.getName(), event.getEventId());
+
+		// Social
+
+		socialActivityLocalService.deleteActivities(
+			CalEvent.class.getName(), event.getEventId());
+
+		// Pool
+
+		CalEventLocalUtil.clearEventsPool(event.getGroupId());
+	}
+
+	public void deleteEvent(long eventId)
+		throws PortalException, SystemException {
+
+		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
+
+		deleteEvent(event);
 	}
 
 	public void deleteEvents(long groupId)
@@ -471,18 +447,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return calEventPersistence.findByPrimaryKey(eventId);
-	}
-
-	public List<CalEvent> getEvents(
-			long groupId, String type, int start, int end)
-		throws SystemException {
-
-		if (Validator.isNull(type)) {
-			return calEventPersistence.findByGroupId(groupId, start, end);
-		}
-		else {
-			return calEventPersistence.findByG_T(groupId, type, start, end);
-		}
 	}
 
 	public List<CalEvent> getEvents(long groupId, Calendar cal)
@@ -590,6 +554,18 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
+	public List<CalEvent> getEvents(
+			long groupId, String type, int start, int end)
+		throws SystemException {
+
+		if (Validator.isNull(type)) {
+			return calEventPersistence.findByGroupId(groupId, start, end);
+		}
+		else {
+			return calEventPersistence.findByG_T(groupId, type, start, end);
+		}
+	}
+
 	public int getEventsCount(long groupId, String type)
 		throws SystemException {
 
@@ -677,20 +653,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-	public void reIndex(long eventId) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		CalEvent event = calEventPersistence.fetchByPrimaryKey(eventId);
-
-		if (event == null) {
-			return;
-		}
-
-		reIndex(event);
-	}
-
 	public void reIndex(CalEvent event) throws SystemException {
 		long companyId = event.getCompanyId();
 		long groupId = event.getGroupId();
@@ -714,6 +676,20 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		catch (SearchException se) {
 			_log.error("Reindexing " + eventId, se);
 		}
+	}
+
+	public void reIndex(long eventId) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		CalEvent event = calEventPersistence.fetchByPrimaryKey(eventId);
+
+		if (event == null) {
+			return;
+		}
+
+		reIndex(event);
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
@@ -863,14 +839,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setRemindBy(remindBy);
 		event.setFirstReminder(firstReminder);
 		event.setSecondReminder(secondReminder);
+		event.setExpandoBridgeAttributes(serviceContext);
 
 		calEventPersistence.update(event, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = event.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Social
 
@@ -1142,7 +1113,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		serviceContext.setScopeGroupId(groupId);
 
 		addEvent(
-			userId, title, description, startDate.get(Calendar.MONTH),
+			null, userId, title, description, startDate.get(Calendar.MONTH),
 			startDate.get(Calendar.DAY_OF_MONTH), startDate.get(Calendar.YEAR),
 			startDate.get(Calendar.HOUR_OF_DAY),
 			startDate.get(Calendar.MINUTE), endDate.get(Calendar.MONTH),
