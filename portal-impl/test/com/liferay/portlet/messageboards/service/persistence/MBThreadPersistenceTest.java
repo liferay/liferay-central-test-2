@@ -82,7 +82,6 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		newMBThread.setViewCount(nextInt());
 		newMBThread.setLastPostByUserId(nextLong());
 		newMBThread.setLastPostDate(nextDate());
-		newMBThread.setLocked(randomBoolean());
 		newMBThread.setPriority(nextDouble());
 		newMBThread.setStatus(nextInt());
 		newMBThread.setStatusByUserId(nextLong());
@@ -106,7 +105,6 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 			newMBThread.getLastPostByUserId());
 		assertEquals(Time.getShortTimestamp(existingMBThread.getLastPostDate()),
 			Time.getShortTimestamp(newMBThread.getLastPostDate()));
-		assertEquals(existingMBThread.getLocked(), newMBThread.getLocked());
 		assertEquals(existingMBThread.getPriority(), newMBThread.getPriority());
 		assertEquals(existingMBThread.getStatus(), newMBThread.getStatus());
 		assertEquals(existingMBThread.getStatusByUserId(),
@@ -195,7 +193,6 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		mbThread.setViewCount(nextInt());
 		mbThread.setLastPostByUserId(nextLong());
 		mbThread.setLastPostDate(nextDate());
-		mbThread.setLocked(randomBoolean());
 		mbThread.setPriority(nextDouble());
 		mbThread.setStatus(nextInt());
 		mbThread.setStatusByUserId(nextLong());

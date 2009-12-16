@@ -223,13 +223,6 @@ public class MBThreadLocalServiceWrapper implements MBThreadLocalService {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBThread updateThread(
-		long threadId, boolean locked)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _mbThreadLocalService.updateThread(threadId, locked);
-	}
-
-	public com.liferay.portlet.messageboards.model.MBThread updateThread(
 		long threadId, int viewCount)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

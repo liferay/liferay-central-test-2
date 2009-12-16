@@ -163,8 +163,6 @@ public class ActionKeys {
 
 	public static final String IMPORT = "IMPORT";
 
-	public static final String LOCK_THREAD = "LOCK_THREAD";
-
 	public static final String MANAGE = "MANAGE";
 
 	public static final String MANAGE_ANNOUNCEMENTS = "MANAGE_ANNOUNCEMENTS";

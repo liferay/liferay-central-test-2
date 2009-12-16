@@ -69,7 +69,6 @@ public class MBThreadJSONSerializer {
 		}
 
 		jsonObj.put("lastPostDate", lastPostDateJSON);
-		jsonObj.put("locked", model.getLocked());
 		jsonObj.put("priority", model.getPriority());
 		jsonObj.put("status", model.getStatus());
 		jsonObj.put("statusByUserId", model.getStatusByUserId());

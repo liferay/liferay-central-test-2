@@ -24,7 +24,6 @@ package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -157,44 +156,6 @@ public class MBThreadServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBThreadServiceUtil.class.getName(),
 					"splitThread", new Object[] { paramObj0, paramObj1 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.messageboards.model.MBThread)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBThread updateThread(
-		HttpPrincipal httpPrincipal, long threadId, boolean locked)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(threadId);
-
-			Object paramObj1 = new BooleanWrapper(locked);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBThreadServiceUtil.class.getName(),
-					"updateThread", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 

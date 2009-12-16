@@ -1862,7 +1862,6 @@
 			<basic name="lastPostDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="locked" />
 			<basic name="priority" />
 			<basic name="status" />
 			<basic name="statusByUserId" />

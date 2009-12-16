@@ -37,7 +37,6 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.SplitThreadException;
-import com.liferay.portlet.messageboards.ThreadLockedException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -70,10 +69,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			thread.getCategoryId());
 		MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
 			thread.getRootMessageId());
-
-		if (thread.isLocked()) {
-			throw new ThreadLockedException();
-		}
 
 		// Indexer
 
@@ -487,18 +482,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return thread;
 	}
 
-	public MBThread updateThread(long threadId, boolean locked)
-		throws PortalException, SystemException{
-
-		MBThread thread = mbThreadPersistence.findByPrimaryKey(threadId);
-
-		thread.setLocked(locked);
-
-		mbThreadPersistence.update(thread, false);
-
-		return thread;
-	}
-
 	public MBThread updateThread(long threadId, int viewCount)
 		throws PortalException, SystemException {
 
@@ -521,7 +504,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		thread.setGroupId(message.getGroupId());
 		thread.setCategoryId(categoryId);
 		thread.setRootMessageId(message.getMessageId());
-		thread.setLocked(false);
 		thread.setStatus(message.getStatus());
 		thread.setStatusByUserId(message.getStatusByUserId());
 		thread.setStatusByUserName(message.getStatusByUserName());

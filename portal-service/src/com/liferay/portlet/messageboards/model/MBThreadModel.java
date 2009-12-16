@@ -92,12 +92,6 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 
 	public void setLastPostDate(Date lastPostDate);
 
-	public boolean getLocked();
-
-	public boolean isLocked();
-
-	public void setLocked(boolean locked);
-
 	public double getPriority();
 
 	public void setPriority(double priority);

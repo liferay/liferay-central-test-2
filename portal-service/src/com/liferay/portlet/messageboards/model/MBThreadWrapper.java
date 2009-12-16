@@ -125,18 +125,6 @@ public class MBThreadWrapper implements MBThread {
 		_mbThread.setLastPostDate(lastPostDate);
 	}
 
-	public boolean getLocked() {
-		return _mbThread.getLocked();
-	}
-
-	public boolean isLocked() {
-		return _mbThread.isLocked();
-	}
-
-	public void setLocked(boolean locked) {
-		_mbThread.setLocked(locked);
-	}
-
 	public double getPriority() {
 		return _mbThread.getPriority();
 	}

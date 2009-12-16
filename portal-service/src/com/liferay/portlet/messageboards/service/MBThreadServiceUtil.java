@@ -65,13 +65,6 @@ public class MBThreadServiceUtil {
 		return getService().splitThread(messageId, serviceContext);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBThread updateThread(
-		long threadId, boolean locked)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().updateThread(threadId, locked);
-	}
-
 	public static MBThreadService getService() {
 		if (_service == null) {
 			_service = (MBThreadService)PortalBeanLocatorUtil.locate(MBThreadService.class.getName());

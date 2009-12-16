@@ -64,13 +64,6 @@ public class MBThreadServiceWrapper implements MBThreadService {
 		return _mbThreadService.splitThread(messageId, serviceContext);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBThread updateThread(
-		long threadId, boolean locked)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _mbThreadService.updateThread(threadId, locked);
-	}
-
 	public MBThreadService getWrappedMBThreadService() {
 		return _mbThreadService;
 	}

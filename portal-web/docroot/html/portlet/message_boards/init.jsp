@@ -50,7 +50,6 @@
 <%@ page import="com.liferay.portlet.messageboards.NoSuchThreadException" %>
 <%@ page import="com.liferay.portlet.messageboards.RequiredMessageException" %>
 <%@ page import="com.liferay.portlet.messageboards.SplitThreadException" %>
-<%@ page import="com.liferay.portlet.messageboards.ThreadLockedException" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBBan" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBCategory" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBCategoryDisplay" %>

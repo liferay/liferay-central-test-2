@@ -756,8 +756,7 @@ Liferay.Service.registerClass(
 	{
 		deleteThread: true,
 		moveThread: true,
-		splitThread: true,
-		updateThread: true
+		splitThread: true
 	}
 );
 

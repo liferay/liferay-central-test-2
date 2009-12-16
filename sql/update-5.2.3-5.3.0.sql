@@ -187,7 +187,6 @@ alter table MBMessage add statusDate DATE;
 
 COMMIT_TRANSACTION;
 
-alter table MBThread add locked BOOLEAN;
 alter table MBThread add status INTEGER;
 alter table MBThread add statusByUserId LONG;
 alter table MBThread add statusByUserName VARCHAR(75);
@@ -195,7 +194,6 @@ alter table MBThread add statusDate DATE;
 
 COMMIT_TRANSACTION;
 
-update MBThread set locked = FALSE;
 update MBThread set status = 1;
 
 alter table Release_ add servletContextName VARCHAR(75);

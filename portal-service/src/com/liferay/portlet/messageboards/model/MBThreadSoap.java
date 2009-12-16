@@ -57,7 +57,6 @@ public class MBThreadSoap implements Serializable {
 		soapModel.setViewCount(model.getViewCount());
 		soapModel.setLastPostByUserId(model.getLastPostByUserId());
 		soapModel.setLastPostDate(model.getLastPostDate());
-		soapModel.setLocked(model.getLocked());
 		soapModel.setPriority(model.getPriority());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
@@ -179,18 +178,6 @@ public class MBThreadSoap implements Serializable {
 		_lastPostDate = lastPostDate;
 	}
 
-	public boolean getLocked() {
-		return _locked;
-	}
-
-	public boolean isLocked() {
-		return _locked;
-	}
-
-	public void setLocked(boolean locked) {
-		_locked = locked;
-	}
-
 	public double getPriority() {
 		return _priority;
 	}
@@ -239,7 +226,6 @@ public class MBThreadSoap implements Serializable {
 	private int _viewCount;
 	private long _lastPostByUserId;
 	private Date _lastPostDate;
-	private boolean _locked;
 	private double _priority;
 	private int _status;
 	private long _statusByUserId;
