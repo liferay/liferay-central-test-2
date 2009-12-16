@@ -65,7 +65,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	}
 
 	public String getParameterDescription() {
-		return "please-select-the-new-repository-hook";
+		return "please-select-a-new-repository-hook";
 	}
 
 	public String[] getParameterNames() {
