@@ -1489,8 +1489,6 @@ public interface PropsKeys {
 
 	public static final String VERIFY_PROCESSES = "verify.processes";
 
-	public static final String VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME = "virtual.hosts.default.community.name";
-
 	public static final String VIRTUAL_HOSTS_IGNORE_EXTENSIONS = "virtual.hosts.ignore.extensions";
 
 	public static final String VIRTUAL_HOSTS_IGNORE_HOSTS = "virtual.hosts.ignore.hosts";

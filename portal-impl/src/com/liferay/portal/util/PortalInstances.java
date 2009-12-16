@@ -33,13 +33,11 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
@@ -171,26 +169,6 @@ public class PortalInstances {
 
 				request.setAttribute(
 					WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
-			}
-		}
-		else if (Validator.isNotNull(
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
-
-			try {
-				Group group = GroupLocalServiceUtil.getGroup(
-					companyId,
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
-
-				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					group.getGroupId(), false);
-
-				if (Validator.isNull(layoutSet.getVirtualHost())) {
-					request.setAttribute(
-						WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e, e);
 			}
 		}
 
