@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil_IW;
 import com.liferay.portal.kernel.util.Randomizer_IW;
 import com.liferay.portal.kernel.util.StaticFieldGetter;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.TimeZoneUtil_IW;
 import com.liferay.portal.kernel.util.UnicodeFormatter_IW;
@@ -399,19 +400,20 @@ public class FreeMarkerVariables {
 
 			freeMarkerContext.put(
 				"fullCssPath",
-				servletContextName + theme.getFreeMarkerTemplateLoader() +
-					theme.getCssPath());
+				StringPool.SLASH + servletContextName +
+					theme.getFreeMarkerTemplateLoader() + theme.getCssPath());
 
 			freeMarkerContext.put(
 				"fullTemplatesPath",
-				servletContextName + theme.getFreeMarkerTemplateLoader() +
-					theme.getTemplatesPath());
+				StringPool.SLASH + servletContextName +
+					theme.getFreeMarkerTemplateLoader() +
+						theme.getTemplatesPath());
 
 			// Init
 
 			freeMarkerContext.put(
 				"init",
-				themeDisplay.getPathContext() +
+				StringPool.SLASH + themeDisplay.getPathContext() +
 					FreeMarkerTemplateLoader.SERVLET_SEPARATOR +
 						"/html/themes/_unstyled/templates/init.ftl");
 
