@@ -88,13 +88,22 @@ public class VirtualHostFilter extends BasePortalFilter {
 					StringPool.SLASH) ||
 			friendlyURL.startsWith(_PATH_C) ||
 			friendlyURL.startsWith(_PATH_DELEGATE) ||
+			friendlyURL.startsWith(_PATH_DISPLAY_CHART) ||
+			friendlyURL.startsWith(_PATH_DOCUMENT) ||
+			friendlyURL.startsWith(_PATH_FACEBOOK) ||
+			friendlyURL.startsWith(_PATH_GOOGLE_GADGET) ||
 			friendlyURL.startsWith(_PATH_HTML) ||
 			friendlyURL.startsWith(_PATH_IMAGE) ||
 			friendlyURL.startsWith(_PATH_LANGUAGE) ||
+			friendlyURL.startsWith(_PATH_NETVIBES) ||
+			friendlyURL.startsWith(_PATH_PBHS) ||
 			friendlyURL.startsWith(_PATH_POLLER) ||
+			friendlyURL.startsWith(_PATH_SHAREPOINT) ||
 			friendlyURL.startsWith(_PATH_SITEMAP_XML) ||
 			friendlyURL.startsWith(_PATH_SOFTWARE_CATALOG) ||
-			friendlyURL.startsWith(_PATH_WAP)) {
+			friendlyURL.startsWith(_PATH_VTI) ||
+			friendlyURL.startsWith(_PATH_WAP) ||
+			friendlyURL.startsWith(_PATH_WIDGET)) {
 
 			return false;
 		}
@@ -313,19 +322,37 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 	private static final String _PATH_DELEGATE = "/delegate/";
 
+	private static final String _PATH_DISPLAY_CHART = "/display_chart/";
+
+	private static final String _PATH_DOCUMENT = "/document/";
+
+	private static final String _PATH_FACEBOOK = "/facebook/";
+
+	private static final String _PATH_GOOGLE_GADGET = "/google_gadget/";
+
 	private static final String _PATH_HTML = "/html/";
 
 	private static final String _PATH_IMAGE = "/image/";
 
 	private static final String _PATH_LANGUAGE = "/language/";
 
+	private static final String _PATH_NETVIBES = "/netvibes/";
+
+	private static final String _PATH_PBHS = "/pbhs/";
+
 	private static final String _PATH_POLLER = "/poller/";
+
+	private static final String _PATH_SHAREPOINT = "/sharepoint/";
 
 	private static final String _PATH_SITEMAP_XML = "/sitemap.xml";
 
 	private static final String _PATH_SOFTWARE_CATALOG = "/software_catalog/";
 
+	private static final String _PATH_VTI = "/_vti_";
+
 	private static final String _PATH_WAP = "/wap/";
+
+	private static final String _PATH_WIDGET = "/widget/";
 
 	private static final String _PRIVATE_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
