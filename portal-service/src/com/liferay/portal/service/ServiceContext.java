@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
 
@@ -130,6 +132,24 @@ public class ServiceContext implements Serializable {
 
 	public long getUserId() {
 		return _userId;
+	}
+
+	public boolean isCommandAdd() {
+		if (Validator.equals(_command, Constants.ADD)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isCommandUpdate() {
+		if (Validator.equals(_command, Constants.UPDATE)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isStartWorkflow() {
