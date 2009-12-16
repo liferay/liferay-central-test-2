@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal.workflow;
 
-import com.liferay.portal.workflow.BaseWokflowHandler;
+import com.liferay.portal.workflow.BaseWorkflowHandler;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -33,7 +33,7 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
  * @author Bruno Farache
  * @author Marcellus Tavares
  */
-public class JournalArticleWorkflowHandler extends BaseWokflowHandler {
+public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = JournalArticle.class.getName();
 

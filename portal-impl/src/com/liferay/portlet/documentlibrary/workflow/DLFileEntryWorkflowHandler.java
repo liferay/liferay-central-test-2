@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.workflow;
 
-import com.liferay.portal.workflow.BaseWokflowHandler;
+import com.liferay.portal.workflow.BaseWorkflowHandler;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 
@@ -31,7 +31,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
  *
  * @author Bruno Farache
  */
-public class DLFileEntryWorkflowHandler extends BaseWokflowHandler {
+public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = DLFileEntry.class.getName();
 

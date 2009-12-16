@@ -33,12 +33,12 @@ import com.liferay.portlet.asset.model.AssetRendererFactory;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="BaseWokflowHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseWorkflowHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  * @author Marcellus Tavares
  */
-public abstract class BaseWokflowHandler implements WorkflowHandler {
+public abstract class BaseWorkflowHandler implements WorkflowHandler {
 
 	public String getTitle(long classPK) throws Exception {
 		AssetRenderer assetRenderer = getAssetRenderer(classPK);
