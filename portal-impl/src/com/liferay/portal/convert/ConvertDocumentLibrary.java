@@ -105,6 +105,8 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		MaintenanceUtil.appendStatus(
 			"Please set " + PropsKeys.DL_HOOK_IMPL +
 				" in your portal-ext.properties to use " + targetHookClassName);
+
+		PropsValues.DL_HOOK_IMPL = targetHookClassName;
 	}
 
 	protected void migrateDL() throws Exception {
