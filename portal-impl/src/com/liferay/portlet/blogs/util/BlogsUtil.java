@@ -41,6 +41,8 @@ import javax.portlet.PortletPreferences;
  */
 public class BlogsUtil {
 
+	public static final String POP_PORTLET_PREFIX = "blogs.";
+
 	public static String getEmailEntryAddedBody(
 		PortletPreferences preferences) {
 
@@ -172,8 +174,6 @@ public class BlogsUtil {
 				title, _URL_TITLE_REPLACE_CHARS);
 		}
 	}
-
-	public static final String POP_PORTLET_PREFIX = "blogs.";
 
 	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
 		'.', '/'
