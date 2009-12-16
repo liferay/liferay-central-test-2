@@ -20,25 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.announcements;
+package com.liferay.portalweb.portlet.announcements.entry.editentrygeneral;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.announcements.entry.EntryTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="AnnouncementsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditEntryGeneralTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AnnouncementsTests extends BaseTests {
+public class EditEntryGeneralTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddEntryGeneralTest.class);
+		testSuite.addTestSuite(EditEntryGeneralTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

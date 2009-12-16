@@ -1,0 +1,159 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddEntryPriorityNormalTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddEntryPriorityNormalTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Announcements Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Announcements Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Manage Entries</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>_84_distributionScope</td>
+	<td>label=General</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Add Entry']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Add Entry']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_84_title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_84_title</td>
+	<td>Normal Priority Announcement</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_84_url</td>
+	<td>www.liferay.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_84_content</td>
+	<td>Hi everyone. This is a normal priority announcement.</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_84_priority</td>
+	<td>label=Normal</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_84_priority</td>
+	<td>label=Important</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_84_displayDateMonth</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[3]</td>
+	<td>label=2004</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[2]/select[1]</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[2]/select[2]</td>
+	<td>label=:00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[2]/select[3]</td>
+	<td>label=AM</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//tr[12]/td[2]/div[1]/div[1]/select[3]</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//tr[12]/td[2]/div[1]/div[1]/select[1]</td>
+	<td>label=December</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//tr[12]/td[2]/div[2]/select[1]</td>
+	<td>label=11</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//tr[12]/td[2]/div[2]/select[2]</td>
+	<td>label=:59</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//tr[12]/td[2]/div[2]/select[3]</td>
+	<td>label=PM</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Entries</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Normal Priority Announcement</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Hi everyone. This is a normal priority announcement.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

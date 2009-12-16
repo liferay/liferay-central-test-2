@@ -20,25 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.announcements;
+package com.liferay.portalweb.portlet.announcements.entry.addentryprioritynormal;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.announcements.entry.EntryTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="AnnouncementsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddEntryPriorityNormalTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AnnouncementsTests extends BaseTests {
+public class AddEntryPriorityNormalTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddEntryPriorityNormalTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

@@ -20,27 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.announcements;
+package com.liferay.portalweb.portlet.announcements.entry.deleteentrygeneral;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.announcements.entry.EntryTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AnnouncementsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteEntryGeneralTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AnnouncementsTests extends BaseTests {
+public class DeleteEntryGeneralTest extends BaseTestCase {
+	public void testDeleteEntryGeneral() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(EntryTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Announcements Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Announcements Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		assertFalse(selenium.isElementPresent(
+				"link=This Test General Annoucement has been edited."));
 	}
-
 }
