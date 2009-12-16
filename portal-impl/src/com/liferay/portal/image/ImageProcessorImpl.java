@@ -31,6 +31,7 @@ import com.liferay.portal.util.FileImpl;
 
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;
+import com.sun.media.jai.codec.ImageEncoder;
 
 import java.awt.Graphics2D;
 import java.awt.Graphics;
@@ -42,6 +43,7 @@ import java.awt.image.RenderedImage;
 import java.awt.image.SampleModel;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -82,7 +84,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 		throws IOException {
 
 		if (JavaProps.isJDK6()) {
-			ImageIO.write(renderedImage, "GIF", os);
+			ImageIO.write(renderedImage, TYPE_GIF, os);
 		}
 		else {
 			BufferedImage bufferedImage = getBufferedImage(renderedImage);
@@ -154,6 +156,43 @@ public class ImageProcessorImpl implements ImageProcessor {
 		}
 	}
 
+	public byte[] getBytes(RenderedImage renderedImage, String contentType)
+		throws IOException {
+
+		if (contentType.equals("jpeg")) {
+			contentType = TYPE_JPEG;
+		}
+		else if (contentType.equals("tif")) {
+			contentType = TYPE_TIFF;
+		}
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		if (contentType.indexOf(TYPE_BMP) != -1) {
+			ImageEncoder encoder = ImageCodec.createImageEncoder(
+				TYPE_BMP, baos, null);
+
+			encoder.encode(renderedImage);
+		}
+		else if (contentType.indexOf(TYPE_GIF) != -1) {
+			encodeGIF(renderedImage, baos);
+		}
+		else if (contentType.indexOf(TYPE_JPEG) != -1) {
+			ImageIO.write(renderedImage, TYPE_JPEG, baos);
+		}
+		else if (contentType.indexOf(TYPE_PNG) != -1) {
+			ImageIO.write(renderedImage, TYPE_PNG, baos);
+		}
+		else if (contentType.indexOf(TYPE_TIFF) != -1) {
+			ImageEncoder encoder = ImageCodec.createImageEncoder(
+				TYPE_TIFF, baos, null);
+
+			encoder.encode(renderedImage);
+		}
+
+		return baos.toByteArray();
+	}
+
 	public ImageBag read(File file) throws IOException {
 		return read(_fileUtil.getBytes(file));
 	}
@@ -187,7 +226,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 		}
 
 		if (type.equals("jpeg")) {
-			type = ImageProcessor.TYPE_JPEG;
+			type = TYPE_JPEG;
 		}
 
 		return new ImageBag(renderedImage, type);

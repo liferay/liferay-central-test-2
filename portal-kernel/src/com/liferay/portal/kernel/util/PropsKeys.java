@@ -1435,7 +1435,11 @@ public interface PropsKeys {
 
 	public static final String USERS_FORM_UPDATE_MISCELLANEOUS = "users.form.update.miscellaneous";
 
+	public static final String USERS_IMAGE_MAX_HEIGHT = "users.image.max.height";
+
 	public static final String USERS_IMAGE_MAX_SIZE = "users.image.max.size";
+
+	public static final String USERS_IMAGE_MAX_WIDTH = "users.image.max.width";
 
 	public static final String USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED = "users.reminder.queries.custom.question.enabled";
 

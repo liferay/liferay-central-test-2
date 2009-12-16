@@ -58,20 +58,14 @@ import com.liferay.portlet.imagegallery.social.IGActivityKeys;
 import com.liferay.portlet.imagegallery.util.Indexer;
 import com.liferay.portlet.imagegallery.util.comparator.ImageModifiedDateComparator;
 
-import com.sun.media.jai.codec.ImageCodec;
-import com.sun.media.jai.codec.ImageEncoder;
-
 import java.awt.image.RenderedImage;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Date;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 /**
  * <a href="IGImageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -782,33 +776,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		RenderedImage thumbnail = ImageProcessorUtil.scale(
 			renderedImage, dimension, dimension);
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-		if (contentType.indexOf("bmp") != -1) {
-			ImageEncoder encoder = ImageCodec.createImageEncoder(
-				"BMP", baos, null);
-
-			encoder.encode(thumbnail);
-		}
-		else if (contentType.indexOf("gif") != -1) {
-			ImageProcessorUtil.encodeGIF(thumbnail, baos);
-		}
-		else if (contentType.indexOf("jpg") != -1 ||
-				 contentType.indexOf("jpeg") != -1) {
-
-			ImageIO.write(thumbnail, "jpeg", baos);
-		}
-		else if (contentType.indexOf("png") != -1) {
-			ImageIO.write(thumbnail, "png", baos);
-		}
-		else if (contentType.indexOf("tif") != -1) {
-			ImageEncoder encoder = ImageCodec.createImageEncoder(
-				"TIFF", baos, null);
-
-			encoder.encode(thumbnail);
-		}
-
-		imageLocalService.updateImage(imageId, baos.toByteArray());
+		imageLocalService.updateImage(
+			imageId, ImageProcessorUtil.getBytes(thumbnail, contentType));
 	}
 
 	protected void validate(byte[] bytes)

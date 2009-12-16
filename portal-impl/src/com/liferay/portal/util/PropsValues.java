@@ -1640,6 +1640,12 @@ public class PropsValues {
 	public static final String[] USERS_FORM_UPDATE_MISCELLANEOUS =
 		PropsUtil.getArray(PropsKeys.USERS_FORM_UPDATE_MISCELLANEOUS);
 
+	public static final int USERS_IMAGE_MAX_HEIGHT = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.USERS_IMAGE_MAX_HEIGHT));
+
+	public static final int USERS_IMAGE_MAX_WIDTH = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.USERS_IMAGE_MAX_WIDTH));
+
 	public static final boolean USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 			USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED));

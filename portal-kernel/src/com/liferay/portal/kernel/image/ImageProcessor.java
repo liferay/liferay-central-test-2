@@ -59,6 +59,9 @@ public interface ImageProcessor {
 
 	public BufferedImage getBufferedImage(RenderedImage renderedImage);
 
+	public byte[] getBytes(RenderedImage renderedImage, String contentType)
+		throws IOException;
+
 	public ImageBag read(File file) throws IOException;
 
 	public ImageBag read(byte[] bytes) throws IOException;

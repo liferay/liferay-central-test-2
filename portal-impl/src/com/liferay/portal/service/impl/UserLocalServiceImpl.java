@@ -50,6 +50,8 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.image.ImageBag;
+import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -117,8 +119,11 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
+import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
+
+import java.awt.image.RenderedImage;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -2253,7 +2258,24 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			userPersistence.update(user, false);
 		}
 
-		imageLocalService.updateImage(portraitId, bytes);
+		try {
+			ImageBag imageBag = ImageProcessorUtil.read(bytes);
+
+			RenderedImage renderedImage = imageBag.getRenderedImage();
+
+			renderedImage = ImageProcessorUtil.scale(
+				renderedImage, PropsValues.USERS_IMAGE_MAX_HEIGHT,
+				PropsValues.USERS_IMAGE_MAX_WIDTH);
+
+			String contentType = imageBag.getType();
+
+			imageLocalService.updateImage(
+				portraitId,
+				ImageProcessorUtil.getBytes(renderedImage, contentType));
+		}
+		catch (IOException ioe) {
+			throw new ImageSizeException(ioe);
+		}
 	}
 
 	public void updateReminderQuery(long userId, String question, String answer)

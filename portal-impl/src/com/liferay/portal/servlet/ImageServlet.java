@@ -40,6 +40,7 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -130,6 +131,23 @@ public class ImageServlet extends HttpServlet {
 		return false;
 	}
 
+	protected boolean checkUserImageMaxDimensions(Image image, long imageId)
+		throws PortalException, SystemException {
+
+		if ((image.getHeight() > PropsValues.USERS_IMAGE_MAX_HEIGHT) ||
+			(image.getWidth() > PropsValues.USERS_IMAGE_MAX_WIDTH)) {
+
+			User user = UserLocalServiceUtil.getUserByPortraitId(imageId);
+
+			UserLocalServiceUtil.updatePortrait(
+				user.getUserId(), image.getTextObj());
+
+			return true;
+		}
+
+		return false;
+	}
+
 	protected Image getDefaultImage(HttpServletRequest request, long imageId)
 		throws NoSuchImageException {
 
@@ -166,13 +184,25 @@ public class ImageServlet extends HttpServlet {
 		if (imageId > 0) {
 			image = ImageLocalServiceUtil.getImage(imageId);
 
-			long igImageId = ParamUtil.getLong(request, "igImageId");
-			boolean igSmallImage = ParamUtil.getBoolean(
-				request, "igSmallImage");
+			String path = GetterUtil.getString(request.getPathInfo());
 
-			if ((igImageId > 0) && igSmallImage) {
-				if (checkIGImageThumbnailMaxDimensions(image, igImageId)) {
+			if (path.startsWith("/user_female_portrait") ||
+				path.startsWith("/user_male_portrait") ||
+				path.startsWith("/user_portrait")) {
+
+				if (checkUserImageMaxDimensions(image, imageId)) {
 					image = ImageLocalServiceUtil.getImage(imageId);
+				}
+			}
+			else {
+				long igImageId = ParamUtil.getLong(request, "igImageId");
+				boolean igSmallImage = ParamUtil.getBoolean(
+					request, "igSmallImage");
+
+				if ((igImageId > 0) && igSmallImage) {
+					if (checkIGImageThumbnailMaxDimensions(image, igImageId)) {
+						image = ImageLocalServiceUtil.getImage(imageId);
+					}
 				}
 			}
 		}

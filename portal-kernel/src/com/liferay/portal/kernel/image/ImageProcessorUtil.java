@@ -58,6 +58,13 @@ public class ImageProcessorUtil {
 		return getImageProcessor().getBufferedImage(renderedImage);
 	}
 
+	public static byte[] getBytes(
+			RenderedImage renderedImage, String contentType)
+		throws IOException {
+
+		return getImageProcessor().getBytes(renderedImage, contentType);
+	}
+
 	public static ImageProcessor getImageProcessor() {
 		return _imageProcessor;
 	}
