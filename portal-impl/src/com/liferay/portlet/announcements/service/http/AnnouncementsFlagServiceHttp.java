@@ -104,6 +104,37 @@ public class AnnouncementsFlagServiceHttp {
 		}
 	}
 
+	public static void deleteFlag(HttpPrincipal httpPrincipal, long flagId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(flagId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsFlagServiceUtil.class.getName(),
+					"deleteFlag", new Object[] { paramObj0 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		HttpPrincipal httpPrincipal, long entryId, int value)
 		throws com.liferay.portal.PortalException,
@@ -134,37 +165,6 @@ public class AnnouncementsFlagServiceHttp {
 			}
 
 			return (com.liferay.portlet.announcements.model.AnnouncementsFlag)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void deleteFlag(HttpPrincipal httpPrincipal, long flagId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(flagId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsFlagServiceUtil.class.getName(),
-					"deleteFlag", new Object[] { paramObj0 });
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

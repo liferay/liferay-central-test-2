@@ -44,13 +44,6 @@ public class AnnouncementsFlagServiceImpl
 		announcementsFlagLocalService.addFlag(getUserId(), entryId, value);
 	}
 
-	public AnnouncementsFlag getFlag(long entryId, int value)
-		throws PortalException, SystemException {
-
-		return announcementsFlagLocalService.getFlag(
-			getUserId(), entryId, value);
-	}
-
 	public void deleteFlag(long flagId)
 		throws PortalException, SystemException {
 
@@ -62,6 +55,13 @@ public class AnnouncementsFlagServiceImpl
 		}
 
 		announcementsFlagLocalService.deleteFlag(flagId);
+	}
+
+	public AnnouncementsFlag getFlag(long entryId, int value)
+		throws PortalException, SystemException {
+
+		return announcementsFlagLocalService.getFlag(
+			getUserId(), entryId, value);
 	}
 
 }

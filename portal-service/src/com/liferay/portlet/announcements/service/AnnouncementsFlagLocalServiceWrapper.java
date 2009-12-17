@@ -118,13 +118,6 @@ public class AnnouncementsFlagLocalServiceWrapper
 		return _announcementsFlagLocalService.addFlag(userId, entryId, value);
 	}
 
-	public com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
-		long userId, long entryId, int value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _announcementsFlagLocalService.getFlag(userId, entryId, value);
-	}
-
 	public void deleteFlag(long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -134,6 +127,13 @@ public class AnnouncementsFlagLocalServiceWrapper
 	public void deleteFlags(long entryId)
 		throws com.liferay.portal.SystemException {
 		_announcementsFlagLocalService.deleteFlags(entryId);
+	}
+
+	public com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
+		long userId, long entryId, int value)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _announcementsFlagLocalService.getFlag(userId, entryId, value);
 	}
 
 	public AnnouncementsFlagLocalService getWrappedAnnouncementsFlagLocalService() {

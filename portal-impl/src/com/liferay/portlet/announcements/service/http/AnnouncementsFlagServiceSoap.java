@@ -92,13 +92,9 @@ public class AnnouncementsFlagServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.announcements.model.AnnouncementsFlagSoap getFlag(
-		long entryId, int value) throws RemoteException {
+	public static void deleteFlag(long flagId) throws RemoteException {
 		try {
-			com.liferay.portlet.announcements.model.AnnouncementsFlag returnValue =
-				AnnouncementsFlagServiceUtil.getFlag(entryId, value);
-
-			return com.liferay.portlet.announcements.model.AnnouncementsFlagSoap.toSoapModel(returnValue);
+			AnnouncementsFlagServiceUtil.deleteFlag(flagId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -107,9 +103,13 @@ public class AnnouncementsFlagServiceSoap {
 		}
 	}
 
-	public static void deleteFlag(long flagId) throws RemoteException {
+	public static com.liferay.portlet.announcements.model.AnnouncementsFlagSoap getFlag(
+		long entryId, int value) throws RemoteException {
 		try {
-			AnnouncementsFlagServiceUtil.deleteFlag(flagId);
+			com.liferay.portlet.announcements.model.AnnouncementsFlag returnValue =
+				AnnouncementsFlagServiceUtil.getFlag(entryId, value);
+
+			return com.liferay.portlet.announcements.model.AnnouncementsFlagSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

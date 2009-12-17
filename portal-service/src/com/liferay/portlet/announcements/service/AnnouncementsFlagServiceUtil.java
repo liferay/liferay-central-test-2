@@ -51,17 +51,17 @@ public class AnnouncementsFlagServiceUtil {
 		getService().addFlag(entryId, value);
 	}
 
+	public static void deleteFlag(long flagId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteFlag(flagId);
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		long entryId, int value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().getFlag(entryId, value);
-	}
-
-	public static void deleteFlag(long flagId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().deleteFlag(flagId);
 	}
 
 	public static AnnouncementsFlagService getService() {

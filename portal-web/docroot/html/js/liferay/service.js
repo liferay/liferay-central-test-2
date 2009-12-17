@@ -408,8 +408,8 @@ Liferay.Service.registerClass(
 	Liferay.Service.Announcements, "AnnouncementsFlag",
 	{
 		addFlag: true,
-		getFlag: true,
-		deleteFlag: true
+		deleteFlag: true,
+		getFlag: true
 	}
 );
 

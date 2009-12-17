@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
@@ -151,22 +152,57 @@ public class AnnouncementsEntryLocalServiceImpl
 		}
 	}
 
-	public void deleteEntry(long entryId)
+	public void deleteEntry(AnnouncementsEntry entry)
 		throws PortalException, SystemException {
-
-		// Flags
-
-		announcementsFlagLocalService.deleteFlags(entryId);
 
 		// Entry
 
-		announcementsEntryPersistence.remove(entryId);
+		announcementsEntryPersistence.remove(entry);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			entry.getCompanyId(), AnnouncementsEntry.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, entry.getEntryId());
+
+		// Flags
+
+		announcementsFlagLocalService.deleteFlags(entry.getEntryId());
 	}
 
-	public AnnouncementsEntry getEntry(long entryId)
+	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
-		return announcementsEntryPersistence.findByPrimaryKey(entryId);
+		AnnouncementsEntry entry =
+			announcementsEntryPersistence.findByPrimaryKey(entryId);
+
+		deleteEntry(entry);
+	}
+
+	public List<AnnouncementsEntry> getEntries(
+			long userId, LinkedHashMap<Long, long[]> scopes, boolean alert,
+			int flagValue, int start, int end)
+		throws SystemException {
+
+		return getEntries(
+			userId, scopes, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, alert, flagValue,
+			start, end);
+	}
+
+	public List<AnnouncementsEntry> getEntries(
+			long userId, LinkedHashMap<Long, long[]> scopes,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute, boolean alert,
+			int flagValue, int start, int end)
+		throws SystemException {
+
+		return announcementsEntryFinder.findByScopes(
+			userId, scopes, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, alert, flagValue, start, end);
 	}
 
 	public List<AnnouncementsEntry> getEntries(
@@ -194,30 +230,29 @@ public class AnnouncementsEntryLocalServiceImpl
 			end);
 	}
 
-	public List<AnnouncementsEntry> getEntries(
+	public int getEntriesCount(
 			long userId, LinkedHashMap<Long, long[]> scopes, boolean alert,
-			int flagValue, int start, int end)
+			int flagValue)
 		throws SystemException {
 
-		return getEntries(
-			userId, scopes, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, alert, flagValue,
-			start, end);
+		return getEntriesCount(
+			userId, scopes, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, alert, flagValue);
 	}
 
-	public List<AnnouncementsEntry> getEntries(
+	public int getEntriesCount(
 			long userId, LinkedHashMap<Long, long[]> scopes,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute, boolean alert,
-			int flagValue, int start, int end)
+			int flagValue)
 		throws SystemException {
 
-		return announcementsEntryFinder.findByScopes(
+		return announcementsEntryFinder.countByScopes(
 			userId, scopes, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, alert, flagValue, start, end);
+			expirationDateMinute, alert, flagValue);
 	}
 
 	public int getEntriesCount(long classNameId, long classPK, boolean alert)
@@ -253,29 +288,10 @@ public class AnnouncementsEntryLocalServiceImpl
 			expirationDateHour, expirationDateMinute, alert, flagValue);
 	}
 
-	public int getEntriesCount(
-			long userId, LinkedHashMap<Long, long[]> scopes, boolean alert,
-			int flagValue)
-		throws SystemException {
+	public AnnouncementsEntry getEntry(long entryId)
+		throws PortalException, SystemException {
 
-		return getEntriesCount(
-			userId, scopes, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, alert, flagValue);
-	}
-
-	public int getEntriesCount(
-			long userId, LinkedHashMap<Long, long[]> scopes,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute, boolean alert,
-			int flagValue)
-		throws SystemException {
-
-		return announcementsEntryFinder.countByScopes(
-			userId, scopes, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, alert, flagValue);
+		return announcementsEntryPersistence.findByPrimaryKey(entryId);
 	}
 
 	public List<AnnouncementsEntry> getUserEntries(

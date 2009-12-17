@@ -56,13 +56,6 @@ public class AnnouncementsFlagLocalServiceImpl
 		return flag;
 	}
 
-	public AnnouncementsFlag getFlag(long userId, long entryId, int value)
-		throws PortalException, SystemException {
-
-		return announcementsFlagPersistence.findByU_E_V(
-			userId, entryId, value);
-	}
-
 	public void deleteFlag(long flagId)
 		throws PortalException, SystemException {
 
@@ -71,6 +64,13 @@ public class AnnouncementsFlagLocalServiceImpl
 
 	public void deleteFlags(long entryId) throws SystemException {
 		announcementsFlagPersistence.removeByEntryId(entryId);
+	}
+
+	public AnnouncementsFlag getFlag(long userId, long entryId, int value)
+		throws PortalException, SystemException {
+
+		return announcementsFlagPersistence.findByU_E_V(
+			userId, entryId, value);
 	}
 
 }

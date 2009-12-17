@@ -104,16 +104,16 @@ public interface AnnouncementsFlagLocalService {
 		long userId, long entryId, int value)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
-		long userId, long entryId, int value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public void deleteFlag(long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void deleteFlags(long entryId)
 		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
+		long userId, long entryId, int value)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }
