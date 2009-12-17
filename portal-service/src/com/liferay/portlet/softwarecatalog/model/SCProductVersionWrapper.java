@@ -223,13 +223,13 @@ public class SCProductVersionWrapper implements SCProductVersion {
 		return _scProductVersion.toXmlString();
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry() {
-		return _scProductVersion.getProductEntry();
-	}
-
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions()
 		throws com.liferay.portal.SystemException {
 		return _scProductVersion.getFrameworkVersions();
+	}
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry() {
+		return _scProductVersion.getProductEntry();
 	}
 
 	public SCProductVersion getWrappedSCProductVersion() {

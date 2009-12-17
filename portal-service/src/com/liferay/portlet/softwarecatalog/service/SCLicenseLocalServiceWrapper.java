@@ -136,11 +136,6 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService {
 	}
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
-		int start, int end) throws com.liferay.portal.SystemException {
-		return _scLicenseLocalService.getLicenses(start, end);
-	}
-
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
 		boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException {
 		return _scLicenseLocalService.getLicenses(active, recommended);
@@ -151,6 +146,11 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService {
 		throws com.liferay.portal.SystemException {
 		return _scLicenseLocalService.getLicenses(active, recommended, start,
 			end);
+	}
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
+		int start, int end) throws com.liferay.portal.SystemException {
+		return _scLicenseLocalService.getLicenses(start, end);
 	}
 
 	public int getLicensesCount() throws com.liferay.portal.SystemException {

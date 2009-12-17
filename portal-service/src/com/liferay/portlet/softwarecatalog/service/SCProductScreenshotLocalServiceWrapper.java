@@ -134,11 +134,6 @@ public class SCProductScreenshotLocalServiceWrapper
 			priority);
 	}
 
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getProductScreenshots(
-		long productEntryId) throws com.liferay.portal.SystemException {
-		return _scProductScreenshotLocalService.getProductScreenshots(productEntryId);
-	}
-
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getProductScreenshotByFullImageId(
 		long fullImageId)
 		throws com.liferay.portal.PortalException,
@@ -151,6 +146,11 @@ public class SCProductScreenshotLocalServiceWrapper
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _scProductScreenshotLocalService.getProductScreenshotByThumbnailId(thumbnailId);
+	}
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getProductScreenshots(
+		long productEntryId) throws com.liferay.portal.SystemException {
+		return _scProductScreenshotLocalService.getProductScreenshots(productEntryId);
 	}
 
 	public SCProductScreenshotLocalService getWrappedSCProductScreenshotLocalService() {

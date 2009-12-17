@@ -135,15 +135,6 @@ public class SCProductEntryLocalServiceWrapper
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addProductEntryResources(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_scProductEntryLocalService.addProductEntryResources(productEntry,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
 	public void addProductEntryResources(long productEntryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -151,6 +142,15 @@ public class SCProductEntryLocalServiceWrapper
 			com.liferay.portal.SystemException {
 		_scProductEntryLocalService.addProductEntryResources(productEntryId,
 			communityPermissions, guestPermissions);
+	}
+
+	public void addProductEntryResources(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_scProductEntryLocalService.addProductEntryResources(productEntry,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addProductEntryResources(
@@ -180,13 +180,6 @@ public class SCProductEntryLocalServiceWrapper
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		_scProductEntryLocalService.deleteProductEntry(productEntry);
-	}
-
-	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
-		long productEntryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _scProductEntryLocalService.getProductEntry(productEntryId);
 	}
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
@@ -227,6 +220,13 @@ public class SCProductEntryLocalServiceWrapper
 		throws com.liferay.portal.SystemException {
 		return _scProductEntryLocalService.getProductEntriesCount(groupId,
 			userId);
+	}
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
+		long productEntryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _scProductEntryLocalService.getProductEntry(productEntryId);
 	}
 
 	public java.lang.String getRepositoryXML(long groupId,

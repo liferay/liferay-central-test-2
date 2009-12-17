@@ -48,8 +48,8 @@ package com.liferay.portlet.softwarecatalog.model;
  * @generated
  */
 public interface SCProductVersion extends SCProductVersionModel {
-	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry();
-
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions()
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry();
 }

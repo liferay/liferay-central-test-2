@@ -129,11 +129,6 @@ public class SCProductScreenshotLocalServiceUtil {
 		return getService().getProductScreenshot(productEntryId, priority);
 	}
 
-	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getProductScreenshots(
-		long productEntryId) throws com.liferay.portal.SystemException {
-		return getService().getProductScreenshots(productEntryId);
-	}
-
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getProductScreenshotByFullImageId(
 		long fullImageId)
 		throws com.liferay.portal.PortalException,
@@ -146,6 +141,11 @@ public class SCProductScreenshotLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().getProductScreenshotByThumbnailId(thumbnailId);
+	}
+
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getProductScreenshots(
+		long productEntryId) throws com.liferay.portal.SystemException {
+		return getService().getProductScreenshots(productEntryId);
 	}
 
 	public static SCProductScreenshotLocalService getService() {

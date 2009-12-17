@@ -121,10 +121,6 @@ public interface SCLicenseLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
-		int start, int end) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
 		boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException;
 
@@ -132,6 +128,10 @@ public interface SCLicenseLocalService {
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
 		boolean active, boolean recommended, int start, int end)
 		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getLicensesCount() throws com.liferay.portal.SystemException;
