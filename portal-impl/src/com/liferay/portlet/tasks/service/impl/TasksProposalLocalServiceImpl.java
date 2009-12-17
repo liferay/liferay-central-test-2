@@ -63,17 +63,6 @@ public class TasksProposalLocalServiceImpl
 	public TasksProposal addProposal(
 			long userId, long groupId, String className, String classPK,
 			String name, String description, long reviewUserId,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addProposal(
-			userId, groupId, className, classPK, name, description,
-			reviewUserId, null, null, communityPermissions, guestPermissions);
-	}
-
-	public TasksProposal addProposal(
-			long userId, long groupId, String className, String classPK,
-			String name, String description, long reviewUserId,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -123,6 +112,8 @@ public class TasksProposalLocalServiceImpl
 		tasksReviewLocalService.addReview(
 			reviewUserId, proposal.getProposalId(), assignedByUserId, stage);
 
+		// Message boards
+
 		mbMessageLocalService.addDiscussionMessage(
 			userId, proposal.getUserName(), TasksProposal.class.getName(),
 			proposalId, StatusConstants.APPROVED);
@@ -134,6 +125,17 @@ public class TasksProposalLocalServiceImpl
 			TasksActivityKeys.ADD_PROPOSAL, StringPool.BLANK, 0);
 
 		return proposal;
+	}
+
+	public TasksProposal addProposal(
+			long userId, long groupId, String className, String classPK,
+			String name, String description, long reviewUserId,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addProposal(
+			userId, groupId, className, classPK, name, description,
+			reviewUserId, null, null, communityPermissions, guestPermissions);
 	}
 
 	public void addProposalResources(
@@ -149,6 +151,17 @@ public class TasksProposalLocalServiceImpl
 	}
 
 	public void addProposalResources(
+			long proposalId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
+
+		addProposalResources(proposal, communityPermissions, guestPermissions);
+	}
+
+	public void addProposalResources(
 			TasksProposal proposal, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -158,17 +171,6 @@ public class TasksProposalLocalServiceImpl
 			proposal.getUserId(), TasksProposal.class.getName(),
 			proposal.getProposalId(), false, addCommunityPermissions,
 			addGuestPermissions);
-	}
-
-	public void addProposalResources(
-			long proposalId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
-			proposalId);
-
-		addProposalResources(proposal, communityPermissions, guestPermissions);
 	}
 
 	public void addProposalResources(
@@ -182,12 +184,13 @@ public class TasksProposalLocalServiceImpl
 			proposal.getProposalId(), communityPermissions, guestPermissions);
 	}
 
-	public void deleteProposal(String className, String classPK)
+	public void deleteProposal(long proposalId)
 		throws PortalException, SystemException {
 
-		long classNameId = PortalUtil.getClassNameId(className);
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
 
-		deleteProposal(classNameId, classPK);
+		deleteProposal(proposal);
 	}
 
 	public void deleteProposal(long classNameId, String classPK)
@@ -202,31 +205,20 @@ public class TasksProposalLocalServiceImpl
 		}
 	}
 
-	public void deleteProposal(long proposalId)
+	public void deleteProposal(String className, String classPK)
 		throws PortalException, SystemException {
 
-		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
-			proposalId);
+		long classNameId = PortalUtil.getClassNameId(className);
 
-		deleteProposal(proposal);
+		deleteProposal(classNameId, classPK);
 	}
 
 	public void deleteProposal(TasksProposal proposal)
 		throws PortalException, SystemException {
 
-		// Reviews
+		// Proposal
 
-		tasksReviewLocalService.deleteReviews(proposal.getProposalId());
-
-		// Social
-
-		socialActivityLocalService.deleteActivities(
-			TasksProposal.class.getName(), proposal.getProposalId());
-
-		// Message boards
-
-		mbMessageLocalService.deleteDiscussionMessages(
-			TasksProposal.class.getName(), proposal.getProposalId());
+		tasksProposalPersistence.remove(proposal);
 
 		// Resources
 
@@ -234,9 +226,19 @@ public class TasksProposalLocalServiceImpl
 			proposal.getCompanyId(), TasksProposal.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, proposal.getProposalId());
 
-		// Proposal
+		// Reviews
 
-		tasksProposalPersistence.remove(proposal);
+		tasksReviewLocalService.deleteReviews(proposal.getProposalId());
+
+		// Message boards
+
+		mbMessageLocalService.deleteDiscussionMessages(
+			TasksProposal.class.getName(), proposal.getProposalId());
+
+		// Social
+
+		socialActivityLocalService.deleteActivities(
+			TasksProposal.class.getName(), proposal.getProposalId());
 	}
 
 	public void deleteProposals(long groupId)
@@ -256,18 +258,18 @@ public class TasksProposalLocalServiceImpl
 		return tasksProposalPersistence.findByPrimaryKey(proposalId);
 	}
 
+	public TasksProposal getProposal(long classNameId, String classPK)
+		throws PortalException, SystemException {
+
+		return tasksProposalPersistence.findByC_C(classNameId, classPK);
+	}
+
 	public TasksProposal getProposal(String className, String classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return getProposal(classNameId, classPK);
-	}
-
-	public TasksProposal getProposal(long classNameId, String classPK)
-		throws PortalException, SystemException {
-
-		return tasksProposalPersistence.findByC_C(classNameId, classPK);
 	}
 
 	public List<TasksProposal> getProposals(long groupId, int start, int end)

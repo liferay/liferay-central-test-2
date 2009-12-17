@@ -127,19 +127,6 @@ public class TasksProposalLocalServiceWrapper
 		long userId, long groupId, java.lang.String className,
 		java.lang.String classPK, java.lang.String name,
 		java.lang.String description, long reviewUserId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _tasksProposalLocalService.addProposal(userId, groupId,
-			className, classPK, name, description, reviewUserId,
-			communityPermissions, guestPermissions);
-	}
-
-	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String className,
-		java.lang.String classPK, java.lang.String name,
-		java.lang.String description, long reviewUserId,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -152,20 +139,24 @@ public class TasksProposalLocalServiceWrapper
 			guestPermissions);
 	}
 
+	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
+		long userId, long groupId, java.lang.String className,
+		java.lang.String classPK, java.lang.String name,
+		java.lang.String description, long reviewUserId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _tasksProposalLocalService.addProposal(userId, groupId,
+			className, classPK, name, description, reviewUserId,
+			communityPermissions, guestPermissions);
+	}
+
 	public void addProposalResources(long proposalId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		_tasksProposalLocalService.addProposalResources(proposalId,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addProposalResources(
-		com.liferay.portlet.tasks.model.TasksProposal proposal,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_tasksProposalLocalService.addProposalResources(proposal,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -180,6 +171,15 @@ public class TasksProposalLocalServiceWrapper
 
 	public void addProposalResources(
 		com.liferay.portlet.tasks.model.TasksProposal proposal,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_tasksProposalLocalService.addProposalResources(proposal,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addProposalResources(
+		com.liferay.portlet.tasks.model.TasksProposal proposal,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -188,11 +188,10 @@ public class TasksProposalLocalServiceWrapper
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteProposal(java.lang.String className,
-		java.lang.String classPK)
+	public void deleteProposal(long proposalId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_tasksProposalLocalService.deleteProposal(className, classPK);
+		_tasksProposalLocalService.deleteProposal(proposalId);
 	}
 
 	public void deleteProposal(long classNameId, java.lang.String classPK)
@@ -201,10 +200,11 @@ public class TasksProposalLocalServiceWrapper
 		_tasksProposalLocalService.deleteProposal(classNameId, classPK);
 	}
 
-	public void deleteProposal(long proposalId)
+	public void deleteProposal(java.lang.String className,
+		java.lang.String classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_tasksProposalLocalService.deleteProposal(proposalId);
+		_tasksProposalLocalService.deleteProposal(className, classPK);
 	}
 
 	public void deleteProposal(
@@ -228,17 +228,17 @@ public class TasksProposalLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _tasksProposalLocalService.getProposal(className, classPK);
-	}
-
-	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
 		long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _tasksProposalLocalService.getProposal(classNameId, classPK);
+	}
+
+	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
+		java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _tasksProposalLocalService.getProposal(className, classPK);
 	}
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getProposals(
