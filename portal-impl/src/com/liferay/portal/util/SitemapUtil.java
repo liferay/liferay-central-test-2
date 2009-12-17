@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -57,7 +58,7 @@ public class SitemapUtil {
 			"urlset", "http://www.google.com/schemas/sitemap/0.84");
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout);
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 		_visitLayouts(root, layouts, themeDisplay);
 
