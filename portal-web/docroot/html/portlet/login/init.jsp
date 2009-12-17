@@ -35,6 +35,7 @@
 <%@ page import="com.liferay.portal.ReservedUserEmailAddressException" %>
 <%@ page import="com.liferay.portal.ReservedUserIdException" %>
 <%@ page import="com.liferay.portal.RequiredReminderQueryException" %>
+<%@ page import="com.liferay.portal.ReservedUserFullNameException" %>
 <%@ page import="com.liferay.portal.ReservedUserScreenNameException" %>
 <%@ page import="com.liferay.portal.SendPasswordException" %>
 <%@ page import="com.liferay.portal.UserEmailAddressException" %>

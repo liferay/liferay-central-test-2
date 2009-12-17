@@ -31,6 +31,7 @@ import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
+import com.liferay.portal.ReservedUserFullNameException;
 import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
@@ -103,6 +104,7 @@ public class CreateAccountAction extends PortletAction {
 				e instanceof OrganizationParentException ||
 				e instanceof RequiredUserException ||
 				e instanceof ReservedUserEmailAddressException ||
+				e instanceof ReservedUserFullNameException ||
 				e instanceof ReservedUserScreenNameException ||
 				e instanceof UserEmailAddressException ||
 				e instanceof UserIdException ||

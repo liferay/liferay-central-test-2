@@ -49,18 +49,25 @@ public class PropsValues {
 			PropsUtil.get(PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES),
 			StringPool.NEW_LINE);
 
-	public static final String[] ADMIN_MAIL_HOST_NAMES = StringUtil.split(
-		PropsUtil.get(PropsKeys.ADMIN_MAIL_HOST_NAMES),
-		StringPool.NEW_LINE);
+	public static final String[] ADMIN_MAIL_HOST_NAMES =
+		StringUtil.split(
+			PropsUtil.get(PropsKeys.ADMIN_MAIL_HOST_NAMES),
+			StringPool.NEW_LINE);
 
 	public static final String[] ADMIN_RESERVED_EMAIL_ADDRESSES =
 		StringUtil.split(
 			PropsUtil.get(PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES),
 			StringPool.NEW_LINE);
 
-	public static final String[] ADMIN_RESERVED_SCREEN_NAMES = StringUtil.split(
-		PropsUtil.get(PropsKeys.ADMIN_RESERVED_SCREEN_NAMES),
-		StringPool.NEW_LINE);
+	public static final String[] ADMIN_RESERVED_FULL_NAMES =
+		StringUtil.split(
+			PropsUtil.get(PropsKeys.ADMIN_RESERVED_FULL_NAMES),
+			StringPool.NEW_LINE);
+
+	public static final String[] ADMIN_RESERVED_SCREEN_NAMES =
+		StringUtil.split(
+			PropsUtil.get(PropsKeys.ADMIN_RESERVED_SCREEN_NAMES),
+			StringPool.NEW_LINE);
 
 	public static final boolean ADMIN_SYNC_DEFAULT_ASSOCIATIONS =
 		GetterUtil.getBoolean(
