@@ -628,7 +628,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return _PATH_PORTAL_ERROR;
 		}
 
-		if (!path.equals(_PATH_PORTAL_RENDER_PORTLET)) {
+		if (!path.equals(_PATH_PORTAL_RENDER_PORTLET) &&
+			!ParamUtil.getBoolean(request, "wsrp")) {
 
 			// Authenticated users should agree to Terms of Use
 
