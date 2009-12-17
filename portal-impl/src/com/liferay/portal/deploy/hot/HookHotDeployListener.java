@@ -68,6 +68,8 @@ import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.security.auth.FullNameValidator;
+import com.liferay.portal.security.auth.FullNameValidatorFactory;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
 import com.liferay.portal.security.auth.ScreenNameValidator;
@@ -219,6 +221,10 @@ public class HookHotDeployListener
 
 		if (portalProperties.containsKey(PropsKeys.MAIL_HOOK_IMPL)) {
 			com.liferay.mail.util.HookFactory.setInstance(null);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_VALIDATOR)) {
+			FullNameValidatorFactory.setInstance(null);
 		}
 
 		if (portalProperties.containsKey(
@@ -1120,6 +1126,22 @@ public class HookHotDeployListener
 						mailHook, portletClassLoader));
 
 			com.liferay.mail.util.HookFactory.setInstance(mailHook);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_VALIDATOR)) {
+			String fullNameValidatorClassName = portalProperties.getProperty(
+				PropsKeys.USERS_FULL_NAME_VALIDATOR);
+
+			FullNameValidator fullNameValidator =
+				(FullNameValidator)portletClassLoader.loadClass(
+					fullNameValidatorClassName).newInstance();
+
+			fullNameValidator = (FullNameValidator)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {FullNameValidator.class},
+				new ContextClassLoaderBeanHandler(
+					fullNameValidator, portletClassLoader));
+
+			FullNameValidatorFactory.setInstance(fullNameValidator);
 		}
 
 		if (portalProperties.containsKey(

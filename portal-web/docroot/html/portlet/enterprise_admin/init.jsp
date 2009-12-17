@@ -62,6 +62,7 @@
 <%@ page import="com.liferay.portal.RoleNameException" %>
 <%@ page import="com.liferay.portal.RolePermissionsException" %>
 <%@ page import="com.liferay.portal.UserEmailAddressException" %>
+<%@ page import="com.liferay.portal.UserFullNameException" %>
 <%@ page import="com.liferay.portal.UserGroupNameException" %>
 <%@ page import="com.liferay.portal.UserIdException" %>
 <%@ page import="com.liferay.portal.UserPasswordException" %>

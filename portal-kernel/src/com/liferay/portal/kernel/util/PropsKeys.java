@@ -1435,6 +1435,8 @@ public interface PropsKeys {
 
 	public static final String USERS_FORM_UPDATE_MISCELLANEOUS = "users.form.update.miscellaneous";
 
+	public static final String USERS_FULL_NAME_VALIDATOR = "users.full.name.validator";
+
 	public static final String USERS_IMAGE_MAX_HEIGHT = "users.image.max.height";
 
 	public static final String USERS_IMAGE_MAX_SIZE = "users.image.max.size";

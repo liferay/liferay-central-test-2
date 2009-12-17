@@ -41,6 +41,7 @@ import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserEmailAddressException;
+import com.liferay.portal.UserFullNameException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
@@ -97,6 +98,8 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
+import com.liferay.portal.security.auth.FullNameValidator;
+import com.liferay.portal.security.auth.FullNameValidatorFactory;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
@@ -394,8 +397,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		validate(
 			companyId, userId, autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, firstName, lastName,
-			organizationIds);
+			autoScreenName, screenName, emailAddress, firstName, middleName,
+			lastName, organizationIds);
 
 		if (autoPassword) {
 			password1 = PwdToolkitUtil.generate();
@@ -2368,7 +2371,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				user.getCompanyId(), userId);
 		}
 
-		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);
+		validate(
+			userId, screenName, emailAddress, firstName, middleName, lastName,
+			smsSn);
 
 		if (Validator.isNotNull(newPassword1) ||
 			Validator.isNotNull(newPassword2)) {
@@ -3174,7 +3179,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected void validate(
 			long userId, String screenName, String emailAddress,
-			String firstName, String lastName, String smsSn)
+			String firstName, String middleName, String lastName, String smsSn)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -3196,12 +3201,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				}
 			}
 
-			if (Validator.isNull(firstName)) {
-				throw new ContactFirstNameException();
-			}
-			else if (Validator.isNull(lastName)) {
-				throw new ContactLastNameException();
-			}
+			validateName(user.getCompanyId(), firstName, middleName, lastName);
 		}
 
 		if (Validator.isNotNull(smsSn) && !Validator.isEmailAddress(smsSn)) {
@@ -3212,8 +3212,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	protected void validate(
 			long companyId, long userId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
-			String emailAddress, String firstName, String lastName,
-			long[] organizationIds)
+			String emailAddress, String firstName, String middleName,
+			String lastName, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -3244,12 +3244,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		if (Validator.isNull(firstName)) {
-			throw new ContactFirstNameException();
-		}
-		else if (Validator.isNull(lastName)) {
-			throw new ContactLastNameException();
-		}
+		validateName(companyId, firstName, middleName, lastName);
 	}
 
 	protected void validateEmailAddress(long companyId, String emailAddress)
@@ -3276,6 +3271,28 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
 				throw new ReservedUserEmailAddressException();
 			}
+		}
+	}
+
+	protected void validateName(
+			long companyId, String firstName, String middleName,
+			String lastName)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(firstName)) {
+			throw new ContactFirstNameException();
+		}
+		else if (Validator.isNull(lastName)) {
+			throw new ContactLastNameException();
+		}
+
+		FullNameValidator fullNameValidator =
+			FullNameValidatorFactory.getInstance();
+
+		if (!fullNameValidator.validate(
+				companyId, firstName, middleName, lastName)) {
+
+			throw new UserFullNameException();
 		}
 	}
 
