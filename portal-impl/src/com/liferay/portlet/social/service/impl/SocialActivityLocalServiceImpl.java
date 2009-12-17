@@ -47,34 +47,6 @@ public class SocialActivityLocalServiceImpl
 	extends SocialActivityLocalServiceBaseImpl {
 
 	public SocialActivity addActivity(
-			long userId, long groupId, String className, long classPK, int type,
-			String extraData, long receiverUserId)
-		throws PortalException, SystemException {
-
-		Date createDate = new Date();
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		while (true) {
-			SocialActivity socialActivity =
-				socialActivityPersistence.fetchByG_U_CD_C_C_T_R(
-					groupId, userId, createDate.getTime(), classNameId, classPK,
-					type, receiverUserId);
-
-			if (socialActivity != null) {
-				createDate = new Date(createDate.getTime() + 1);
-			}
-			else {
-				break;
-			}
-		}
-
-		return addActivity(
-			userId, groupId, createDate, className, classPK, type, extraData,
-			receiverUserId);
-	}
-
-	public SocialActivity addActivity(
 			long userId, long groupId, Date createDate, String className,
 			long classPK, int type, String extraData, long receiverUserId)
 		throws PortalException, SystemException {
@@ -140,13 +112,31 @@ public class SocialActivityLocalServiceImpl
 		return activity;
 	}
 
-	public SocialActivity addUniqueActivity(
+	public SocialActivity addActivity(
 			long userId, long groupId, String className, long classPK, int type,
 			String extraData, long receiverUserId)
 		throws PortalException, SystemException {
 
-		return addUniqueActivity(
-			userId, groupId, new Date(), className, classPK, type, extraData,
+		Date createDate = new Date();
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		while (true) {
+			SocialActivity socialActivity =
+				socialActivityPersistence.fetchByG_U_CD_C_C_T_R(
+					groupId, userId, createDate.getTime(), classNameId, classPK,
+					type, receiverUserId);
+
+			if (socialActivity != null) {
+				createDate = new Date(createDate.getTime() + 1);
+			}
+			else {
+				break;
+			}
+		}
+
+		return addActivity(
+			userId, groupId, createDate, className, classPK, type, extraData,
 			receiverUserId);
 	}
 
@@ -171,12 +161,14 @@ public class SocialActivityLocalServiceImpl
 			receiverUserId);
 	}
 
-	public void deleteActivities(String className, long classPK)
-		throws SystemException {
+	public SocialActivity addUniqueActivity(
+			long userId, long groupId, String className, long classPK, int type,
+			String extraData, long receiverUserId)
+		throws PortalException, SystemException {
 
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		deleteActivities(classNameId, classPK);
+		return addUniqueActivity(
+			userId, groupId, new Date(), className, classPK, type, extraData,
+			receiverUserId);
 	}
 
 	public void deleteActivities(long classNameId, long classPK)
@@ -185,19 +177,32 @@ public class SocialActivityLocalServiceImpl
 		socialActivityPersistence.removeByC_C(classNameId, classPK);
 	}
 
+	public void deleteActivities(String className, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		deleteActivities(classNameId, classPK);
+	}
+
 	public void deleteActivity(long activityId)
 		throws PortalException, SystemException {
 
 		SocialActivity activity = socialActivityPersistence.findByPrimaryKey(
 			activityId);
 
+		deleteActivity(activity);
+	}
+
+	public void deleteActivity(SocialActivity activity) throws SystemException {
+		socialActivityPersistence.remove(activity);
+
 		try {
-			socialActivityPersistence.removeByMirrorActivityId(activityId);
+			socialActivityPersistence.removeByMirrorActivityId(
+				activity.getActivityId());
 		}
 		catch (NoSuchActivityException nsae) {
 		}
-
-		socialActivityPersistence.remove(activity);
 	}
 
 	public void deleteUserActivities(long userId) throws SystemException {
@@ -218,20 +223,20 @@ public class SocialActivityLocalServiceImpl
 	}
 
 	public List<SocialActivity> getActivities(
-			String className, int start, int end)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return getActivities(classNameId, start, end);
-	}
-
-	public List<SocialActivity> getActivities(
 			long classNameId, int start, int end)
 		throws SystemException {
 
 		return socialActivityPersistence.findByClassNameId(
 			classNameId, start, end);
+	}
+
+	public List<SocialActivity> getActivities(
+			long mirrorActivityId, long classNameId, long classPK, int start,
+			int end)
+		throws SystemException {
+
+		return socialActivityPersistence.findByM_C_C(
+			mirrorActivityId, classNameId, classPK, start, end);
 	}
 
 	public List<SocialActivity> getActivities(
@@ -246,22 +251,24 @@ public class SocialActivityLocalServiceImpl
 	}
 
 	public List<SocialActivity> getActivities(
-			long mirrorActivityId, long classNameId, long classPK, int start,
-			int end)
+			String className, int start, int end)
 		throws SystemException {
 
-		return socialActivityPersistence.findByM_C_C(
-			mirrorActivityId, classNameId, classPK, start, end);
-	}
-
-	public int getActivitiesCount(String className) throws SystemException {
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getActivitiesCount(classNameId);
+		return getActivities(classNameId, start, end);
 	}
 
 	public int getActivitiesCount(long classNameId) throws SystemException {
 		return socialActivityPersistence.countByClassNameId(classNameId);
+	}
+
+	public int getActivitiesCount(
+			long mirrorActivityId, long classNameId, long classPK)
+		throws SystemException {
+
+		return socialActivityPersistence.countByM_C_C(
+			mirrorActivityId, classNameId, classPK);
 	}
 
 	public int getActivitiesCount(
@@ -273,12 +280,10 @@ public class SocialActivityLocalServiceImpl
 		return getActivitiesCount(mirrorActivityId, classNameId, classPK);
 	}
 
-	public int getActivitiesCount(
-			long mirrorActivityId, long classNameId, long classPK)
-		throws SystemException {
+	public int getActivitiesCount(String className) throws SystemException {
+		long classNameId = PortalUtil.getClassNameId(className);
 
-		return socialActivityPersistence.countByM_C_C(
-			mirrorActivityId, classNameId, classPK);
+		return getActivitiesCount(classNameId);
 	}
 
 	public SocialActivity getActivity(long activityId)

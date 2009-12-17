@@ -101,15 +101,7 @@ public class SocialRelationLocalServiceImpl
 		SocialRelation relation = socialRelationPersistence.findByPrimaryKey(
 			relationId);
 
-		if (SocialRelationConstants.isTypeBi(relation.getType())) {
-			SocialRelation biRelation = socialRelationPersistence.findByU1_U2_T(
-				relation.getUserId2(), relation.getUserId1(),
-				relation.getType());
-
-			socialRelationPersistence.remove(biRelation);
-		}
-
-		socialRelationPersistence.remove(relation);
+		deleteRelation(relation);
 	}
 
 	public void deleteRelation(long userId1, long userId2, int type)
@@ -118,7 +110,21 @@ public class SocialRelationLocalServiceImpl
 		SocialRelation relation = socialRelationPersistence.findByU1_U2_T(
 			userId1, userId2, type);
 
-		deleteRelation(relation.getRelationId());
+		deleteRelation(relation);
+	}
+
+	public void deleteRelation(SocialRelation relation)
+		throws PortalException, SystemException {
+
+		socialRelationPersistence.remove(relation);
+
+		if (SocialRelationConstants.isTypeBi(relation.getType())) {
+			SocialRelation biRelation = socialRelationPersistence.findByU1_U2_T(
+				relation.getUserId2(), relation.getUserId1(),
+				relation.getType());
+
+			socialRelationPersistence.remove(biRelation);
+		}
 	}
 
 	public void deleteRelations(long userId) throws SystemException {

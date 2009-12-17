@@ -113,6 +113,11 @@ public interface SocialRelationLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void deleteRelation(
+		com.liferay.portlet.social.model.SocialRelation relation)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteRelations(long userId)
 		throws com.liferay.portal.SystemException;
 

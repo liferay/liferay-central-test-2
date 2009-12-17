@@ -128,6 +128,13 @@ public class SocialRelationLocalServiceUtil {
 		getService().deleteRelation(userId1, userId2, type);
 	}
 
+	public static void deleteRelation(
+		com.liferay.portlet.social.model.SocialRelation relation)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteRelation(relation);
+	}
+
 	public static void deleteRelations(long userId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteRelations(userId);

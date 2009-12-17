@@ -101,19 +101,13 @@ public interface SocialActivityLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.social.model.SocialActivity addActivity(
-		long userId, long groupId, java.lang.String className, long classPK,
-		int type, java.lang.String extraData, long receiverUserId)
+		long userId, long groupId, java.util.Date createDate,
+		java.lang.String className, long classPK, int type,
+		java.lang.String extraData, long receiverUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.social.model.SocialActivity addActivity(
-		long userId, long groupId, java.util.Date createDate,
-		java.lang.String className, long classPK, int type,
-		java.lang.String extraData, long receiverUserId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.social.model.SocialActivity addUniqueActivity(
 		long userId, long groupId, java.lang.String className, long classPK,
 		int type, java.lang.String extraData, long receiverUserId)
 		throws com.liferay.portal.PortalException,
@@ -126,22 +120,27 @@ public interface SocialActivityLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteActivities(java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException;
+	public com.liferay.portlet.social.model.SocialActivity addUniqueActivity(
+		long userId, long groupId, java.lang.String className, long classPK,
+		int type, java.lang.String extraData, long receiverUserId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteActivities(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public void deleteActivities(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	public void deleteActivity(long activityId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteUserActivities(long userId)
+	public void deleteActivity(
+		com.liferay.portlet.social.model.SocialActivity activity)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
-		java.lang.String className, int start, int end)
+	public void deleteUserActivities(long userId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -151,16 +150,17 @@ public interface SocialActivityLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
+		long mirrorActivityId, long classNameId, long classPK, int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
 		long mirrorActivityId, java.lang.String className, long classPK,
 		int start, int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
-		long mirrorActivityId, long classNameId, long classPK, int start,
-		int end) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getActivitiesCount(java.lang.String className)
+		java.lang.String className, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -168,13 +168,17 @@ public interface SocialActivityLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getActivitiesCount(long mirrorActivityId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getActivitiesCount(long mirrorActivityId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getActivitiesCount(long mirrorActivityId, long classNameId,
-		long classPK) throws com.liferay.portal.SystemException;
+	public int getActivitiesCount(java.lang.String className)
+		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.social.model.SocialActivity getActivity(
