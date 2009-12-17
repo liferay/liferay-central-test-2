@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -47,6 +46,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
+import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -119,8 +119,7 @@ public class UserImpl extends UserModelImpl implements User {
 		String emailAddress = super.getEmailAddress();
 
 		EmailAddressGenerator emailAddressGenerator =
-			(EmailAddressGenerator)InstancePool.get(
-				PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
+			(EmailAddressGenerator)EmailAddressGeneratorFactory.getInstance();
 
 		if (emailAddressGenerator.isFake(emailAddress)) {
 			emailAddress = StringPool.BLANK;

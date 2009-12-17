@@ -24,17 +24,18 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.model.UserConstants;
 
 /**
- * <a href="EmailAddressGenerator.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultEmailAddressGenerator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Wesley Gong
  */
-public class EmailAddressGenerator {
+public class DefaultEmailAddressGenerator implements EmailAddressGenerator {
 
 	public String generate(long companyId, long userId) {
-		return userId + PropsValues.USERS_EMAIL_ADDRESS_AUTO_SUFFIX;
+		return userId + UserConstants.USERS_EMAIL_ADDRESS_AUTO_SUFFIX;
 	}
 
 	public boolean isGenerated(String emailAddress) {
@@ -44,7 +45,7 @@ public class EmailAddressGenerator {
 	public boolean isFake(String emailAddress) {
 		if (Validator.isNull(emailAddress) ||
 			StringUtil.endsWith(
-				emailAddress, PropsValues.USERS_EMAIL_ADDRESS_AUTO_SUFFIX)) {
+				emailAddress, UserConstants.USERS_EMAIL_ADDRESS_AUTO_SUFFIX)) {
 
 			return true;
 		}

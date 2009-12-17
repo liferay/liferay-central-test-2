@@ -68,6 +68,8 @@ import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.security.auth.EmailAddressGenerator;
+import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
 import com.liferay.portal.security.auth.FullNameValidator;
 import com.liferay.portal.security.auth.FullNameValidatorFactory;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
@@ -1126,6 +1128,27 @@ public class HookHotDeployListener
 						mailHook, portletClassLoader));
 
 			com.liferay.mail.util.HookFactory.setInstance(mailHook);
+		}
+
+		if (portalProperties.containsKey(
+				PropsKeys.USERS_EMAIL_ADDRESS_GENERATOR)) {
+
+			String emailAddressGeneratorClassName =
+				portalProperties.getProperty(
+					PropsKeys.USERS_EMAIL_ADDRESS_GENERATOR);
+
+			EmailAddressGenerator emailAddressGenerator =
+				(EmailAddressGenerator)portletClassLoader.loadClass(
+					emailAddressGeneratorClassName).newInstance();
+
+			emailAddressGenerator =
+				(EmailAddressGenerator)Proxy.newProxyInstance(
+					portletClassLoader,
+					new Class[] {EmailAddressGenerator.class},
+					new ContextClassLoaderBeanHandler(
+						emailAddressGenerator, portletClassLoader));
+
+			EmailAddressGeneratorFactory.setInstance(emailAddressGenerator);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_VALIDATOR)) {

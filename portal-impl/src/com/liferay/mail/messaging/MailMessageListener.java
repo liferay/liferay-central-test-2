@@ -29,10 +29,10 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
+import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.mail.MailEngine;
 
@@ -134,8 +134,7 @@ public class MailMessageListener implements MessageListener {
 		InternetAddress internetAddress) {
 
 		EmailAddressGenerator emailAddressGenerator =
-			(EmailAddressGenerator)InstancePool.get(
-				PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
+			(EmailAddressGenerator)EmailAddressGeneratorFactory.getInstance();
 
 		if (emailAddressGenerator.isFake(internetAddress.getAddress())) {
 			return null;

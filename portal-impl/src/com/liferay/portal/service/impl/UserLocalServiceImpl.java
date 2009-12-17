@@ -71,7 +71,6 @@ import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -98,6 +97,7 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
+import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
 import com.liferay.portal.security.auth.FullNameValidator;
 import com.liferay.portal.security.auth.FullNameValidatorFactory;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -382,8 +382,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		long userId = counterLocalService.increment();
 
 		EmailAddressGenerator emailAddressGenerator =
-			(EmailAddressGenerator)InstancePool.get(
-				PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
+			(EmailAddressGenerator)EmailAddressGeneratorFactory.getInstance();
 
 		if (emailAddressGenerator.isGenerated(emailAddress)) {
 			emailAddress = StringPool.BLANK;
@@ -2357,8 +2356,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Date now = new Date();
 
 		EmailAddressGenerator emailAddressGenerator =
-			(EmailAddressGenerator)InstancePool.get(
-				PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
+			(EmailAddressGenerator)EmailAddressGeneratorFactory.getInstance();
 
 		if (emailAddressGenerator.isGenerated(emailAddress)) {
 			emailAddress = StringPool.BLANK;
