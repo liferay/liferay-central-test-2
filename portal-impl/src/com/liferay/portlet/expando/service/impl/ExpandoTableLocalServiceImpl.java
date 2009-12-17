@@ -85,36 +85,39 @@ public class ExpandoTableLocalServiceImpl
 		return addTable(classNameId, name);
 	}
 
-	public void deleteTable(long tableId)
-		throws PortalException, SystemException {
-
-		// Values
-
-		runSQL("DELETE FROM ExpandoValue WHERE tableId = " + tableId);
-
-		// Columns
-
-		runSQL("DELETE FROM ExpandoColumn WHERE tableId = " + tableId);
-
-		// Rows
-
-		runSQL("DELETE FROM ExpandoRow WHERE tableId = " + tableId);
-
-		expandoColumnPersistence.clearCache();
-		expandoRowPersistence.clearCache();
-		expandoValuePersistence.clearCache();
-
-		/*// Columns
-
-		expandoColumnLocalService.deleteColumns(tableId);
-
-		// Rows
-
-		expandoRowPersistence.removeByTableId(tableId);*/
+	public void deleteTable(ExpandoTable table) throws SystemException {
 
 		// Table
 
-		expandoTablePersistence.remove(tableId);
+		expandoTablePersistence.remove(table);
+
+		// Columns
+
+		runSQL(
+			"delete from ExpandoColumn where tableId = " + table.getTableId());
+
+		expandoColumnPersistence.clearCache();
+
+		// Rows
+
+		runSQL("delete from ExpandoRow where tableId = " + table.getTableId());
+
+		expandoRowPersistence.clearCache();
+
+		// Values
+
+		runSQL(
+			"delete from ExpandoValue where tableId = " + table.getTableId());
+
+		expandoValuePersistence.clearCache();
+	}
+
+	public void deleteTable(long tableId)
+		throws PortalException, SystemException {
+
+		ExpandoTable table = expandoTablePersistence.findByPrimaryKey(tableId);
+
+		deleteTable(table);
 	}
 
 	public void deleteTable(long classNameId, String name)
@@ -125,7 +128,7 @@ public class ExpandoTableLocalServiceImpl
 		ExpandoTable table = expandoTablePersistence.findByC_C_N(
 			companyId, classNameId, name);
 
-		deleteTable(table.getTableId());
+		deleteTable(table);
 	}
 
 	public void deleteTable(String className, String name)
@@ -136,22 +139,18 @@ public class ExpandoTableLocalServiceImpl
 		deleteTable(classNameId, name);
 	}
 
-	public void deleteTables(long classNameId)
-		throws PortalException, SystemException {
-
+	public void deleteTables(long classNameId) throws SystemException {
 		long companyId = CompanyThreadLocal.getCompanyId();
 
 		List<ExpandoTable> tables = expandoTablePersistence.findByC_C(
 			companyId, classNameId);
 
 		for (ExpandoTable table : tables) {
-			deleteTable(table.getTableId());
+			deleteTable(table);
 		}
 	}
 
-	public void deleteTables(String className)
-		throws PortalException, SystemException {
-
+	public void deleteTables(String className) throws SystemException {
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		deleteTables(classNameId);

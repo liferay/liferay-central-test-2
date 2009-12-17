@@ -62,13 +62,13 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 	public void deleteRow(long rowId)
 		throws PortalException, SystemException {
 
-		// Values
-
-		expandoValueLocalService.deleteRowValues(rowId);
-
 		// Row
 
 		expandoRowPersistence.remove(rowId);
+
+		// Values
+
+		expandoValueLocalService.deleteRowValues(rowId);
 	}
 
 	public void deleteRow(long tableId, long classPK)

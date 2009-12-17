@@ -62,6 +62,8 @@ public class ExpandoColumnLocalServiceImpl
 			long tableId, String name, int type, Object defaultData)
 		throws PortalException, SystemException {
 
+		// Column
+
 		ExpandoTable table = expandoTablePersistence.findByPrimaryKey(tableId);
 
 		ExpandoValue value = validate(0, tableId, name, type, defaultData);
@@ -89,16 +91,24 @@ public class ExpandoColumnLocalServiceImpl
 		return column;
 	}
 
-	public void deleteColumn(long columnId)
-		throws PortalException, SystemException {
-
-		// Values
-
-		expandoValueLocalService.deleteColumnValues(columnId);
+	public void deleteColumn(ExpandoColumn column) throws SystemException {
 
 		// Column
 
-		expandoColumnPersistence.remove(columnId);
+		expandoColumnPersistence.remove(column);
+
+		// Values
+
+		expandoValueLocalService.deleteColumnValues(column.getColumnId());
+	}
+
+	public void deleteColumn(long columnId)
+		throws PortalException, SystemException {
+
+		ExpandoColumn column = expandoColumnPersistence.findByPrimaryKey(
+			columnId);
+
+		deleteColumn(column);
 	}
 
 	public void deleteColumn(long tableId, String name)
@@ -107,7 +117,7 @@ public class ExpandoColumnLocalServiceImpl
 		ExpandoColumn column = expandoColumnPersistence.findByT_N(
 			tableId, name);
 
-		deleteColumn(column.getColumnId());
+		deleteColumn(column);
 	}
 
 	public void deleteColumn(long classNameId, String tableName, String name)
@@ -127,14 +137,12 @@ public class ExpandoColumnLocalServiceImpl
 		deleteColumn(classNameId, tableName, name);
 	}
 
-	public void deleteColumns(long tableId)
-		throws PortalException, SystemException {
-
+	public void deleteColumns(long tableId) throws SystemException {
 		List<ExpandoColumn> columns = expandoColumnPersistence.findByTableId(
 			tableId);
 
 		for (ExpandoColumn column : columns) {
-			deleteColumn(column.getColumnId());
+			deleteColumn(column);
 		}
 	}
 

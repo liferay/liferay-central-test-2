@@ -137,6 +137,12 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 		return _expandoTableLocalService.addTable(className, name);
 	}
 
+	public void deleteTable(
+		com.liferay.portlet.expando.model.ExpandoTable table)
+		throws com.liferay.portal.SystemException {
+		_expandoTableLocalService.deleteTable(table);
+	}
+
 	public void deleteTable(long tableId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -156,14 +162,12 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 	}
 
 	public void deleteTables(long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		_expandoTableLocalService.deleteTables(classNameId);
 	}
 
 	public void deleteTables(java.lang.String className)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		_expandoTableLocalService.deleteTables(className);
 	}
 

@@ -124,6 +124,12 @@ public class ExpandoColumnLocalServiceUtil {
 		return getService().addColumn(tableId, name, type, defaultData);
 	}
 
+	public static void deleteColumn(
+		com.liferay.portlet.expando.model.ExpandoColumn column)
+		throws com.liferay.portal.SystemException {
+		getService().deleteColumn(column);
+	}
+
 	public static void deleteColumn(long columnId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -151,8 +157,7 @@ public class ExpandoColumnLocalServiceUtil {
 	}
 
 	public static void deleteColumns(long tableId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		getService().deleteColumns(tableId);
 	}
 
