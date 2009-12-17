@@ -82,6 +82,14 @@ public class RatingsEntryLocalServiceImpl
 		ratingsStatsPersistence.update(stats, false);
 	}
 
+	public List<RatingsEntry> getEntries(String className, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return ratingsEntryPersistence.findByC_C(classNameId, classPK);
+	}
+
 	public RatingsEntry getEntry(long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -91,17 +99,11 @@ public class RatingsEntryLocalServiceImpl
 			userId, classNameId, classPK);
 	}
 
-	public List<RatingsEntry> getEntries(String className, long classPK)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return ratingsEntryPersistence.findByC_C(classNameId, classPK);
-	}
-
 	public RatingsEntry updateEntry(
 			long userId, String className, long classPK, double score)
 		throws PortalException, SystemException {
+
+		// Entry
 
 		boolean newEntry = false;
 

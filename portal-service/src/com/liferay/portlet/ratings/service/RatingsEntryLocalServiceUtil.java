@@ -116,17 +116,17 @@ public class RatingsEntryLocalServiceUtil {
 		getService().deleteEntry(userId, className, classPK);
 	}
 
+	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> getEntries(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getService().getEntries(className, classPK);
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsEntry getEntry(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().getEntry(userId, className, classPK);
-	}
-
-	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> getEntries(
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException {
-		return getService().getEntries(className, classPK);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
