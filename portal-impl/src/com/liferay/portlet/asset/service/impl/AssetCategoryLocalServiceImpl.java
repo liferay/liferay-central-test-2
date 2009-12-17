@@ -168,6 +168,16 @@ public class AssetCategoryLocalServiceImpl
 	public void deleteCategory(AssetCategory category)
 		throws PortalException, SystemException {
 
+		// Category
+
+		assetCategoryPersistence.remove(category);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			category.getCompanyId(), AssetCategory.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, category.getCategoryId());
+
 		// Categories
 
 		List<AssetCategory> categories =
@@ -182,16 +192,6 @@ public class AssetCategoryLocalServiceImpl
 
 		assetCategoryPropertyLocalService.deleteCategoryProperties(
 			category.getCategoryId());
-
-		// Resources
-
-		resourceLocalService.deleteResource(
-			category.getCompanyId(), AssetCategory.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, category.getCategoryId());
-
-		// Category
-
-		assetCategoryPersistence.remove(category);
 	}
 
 	public void deleteCategory(long categoryId)

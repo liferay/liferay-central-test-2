@@ -128,10 +128,9 @@ public class AssetVocabularyLocalServiceImpl
 	public void deleteVocabulary(AssetVocabulary vocabulary)
 		throws PortalException, SystemException {
 
-		// Categories
+		// Vocabulary
 
-		assetCategoryLocalService.deleteVocabularyCategories(
-			vocabulary.getVocabularyId());
+		assetVocabularyPersistence.remove(vocabulary);
 
 		// Resources
 
@@ -139,7 +138,10 @@ public class AssetVocabularyLocalServiceImpl
 			vocabulary.getCompanyId(), AssetVocabulary.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, vocabulary.getVocabularyId());
 
-		assetVocabularyPersistence.remove(vocabulary);
+		// Categories
+
+		assetCategoryLocalService.deleteVocabularyCategories(
+			vocabulary.getVocabularyId());
 	}
 
 	public void deleteVocabulary(long vocabularyId)
@@ -155,6 +157,18 @@ public class AssetVocabularyLocalServiceImpl
 		throws SystemException {
 
 		return assetVocabularyPersistence.findByCompanyId(companyId);
+	}
+
+	public List<AssetVocabulary> getGroupsVocabularies(long[] groupIds)
+		throws PortalException, SystemException {
+
+		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
+
+		for (long groupId : groupIds) {
+			vocabularies.addAll(getGroupVocabularies(groupId));
+		}
+
+		return vocabularies;
 	}
 
 	public List<AssetVocabulary> getGroupVocabularies(long groupId)
@@ -190,18 +204,6 @@ public class AssetVocabularyLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return assetVocabularyPersistence.findByG_N(groupId, name);
-	}
-
-	public List<AssetVocabulary> getGroupsVocabularies(long[] groupIds)
-		throws PortalException, SystemException {
-
-		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
-
-		for (long groupId : groupIds) {
-			vocabularies.addAll(getGroupVocabularies(groupId));
-		}
-
-		return vocabularies;
 	}
 
 	public AssetVocabulary getVocabulary(long vocabularyId)

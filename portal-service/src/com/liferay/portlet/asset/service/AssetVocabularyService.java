@@ -72,14 +72,14 @@ public interface AssetVocabularyService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
-		long groupId)
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupsVocabularies(
+		long[] groupIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupsVocabularies(
-		long[] groupIds)
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
+		long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

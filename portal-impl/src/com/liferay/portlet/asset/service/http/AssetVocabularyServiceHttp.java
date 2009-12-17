@@ -186,15 +186,19 @@ public class AssetVocabularyServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
-		HttpPrincipal httpPrincipal, long groupId)
+	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupsVocabularies(
+		HttpPrincipal httpPrincipal, long[] groupIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = groupIds;
+
+			if (groupIds == null) {
+				paramObj0 = new NullWrapper("[J");
+			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"getGroupVocabularies", new Object[] { paramObj0 });
+					"getGroupsVocabularies", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
@@ -222,19 +226,15 @@ public class AssetVocabularyServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupsVocabularies(
-		HttpPrincipal httpPrincipal, long[] groupIds)
+	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
+		HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = groupIds;
-
-			if (groupIds == null) {
-				paramObj0 = new NullWrapper("[J");
-			}
+			Object paramObj0 = new LongWrapper(groupId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"getGroupsVocabularies", new Object[] { paramObj0 });
+					"getGroupVocabularies", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 

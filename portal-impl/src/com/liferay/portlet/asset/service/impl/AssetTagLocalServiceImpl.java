@@ -205,14 +205,14 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	public void deleteTag(AssetTag tag)
 		throws PortalException, SystemException {
 
-		// Properties
-
-		assetTagPropertyLocalService.deleteTagProperties(tag.getTagId());
-
 		// Entries
 
 		List<AssetEntry> entries = assetTagPersistence.getAssetEntries(
 			tag.getTagId());
+
+		// Tag
+
+		assetTagPersistence.remove(tag);
 
 		// Resources
 
@@ -220,9 +220,9 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 			tag.getCompanyId(), AssetTag.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, tag.getTagId());
 
-		// Tag
+		// Properties
 
-		assetTagPersistence.remove(tag);
+		assetTagPropertyLocalService.deleteTagProperties(tag.getTagId());
 
 		// Indexer
 

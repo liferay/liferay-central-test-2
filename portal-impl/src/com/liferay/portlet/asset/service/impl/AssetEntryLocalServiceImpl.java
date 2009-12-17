@@ -313,7 +313,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			String url, int height, int width, Integer priority, boolean sync)
 		throws PortalException, SystemException {
 
-		// Asset
+		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
