@@ -77,12 +77,6 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 		return scLicensePersistence.findAll();
 	}
 
-	public List<SCLicense> getLicenses(int start, int end)
-		throws SystemException {
-
-		return scLicensePersistence.findAll(start, end);
-	}
-
 	public List<SCLicense> getLicenses(boolean active, boolean recommended)
 		throws SystemException {
 
@@ -94,6 +88,12 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 		throws SystemException {
 
 		return scLicensePersistence.findByA_R(active, recommended, start, end);
+	}
+
+	public List<SCLicense> getLicenses(int start, int end)
+		throws SystemException {
+
+		return scLicensePersistence.findAll(start, end);
 	}
 
 	public int getLicensesCount() throws SystemException {

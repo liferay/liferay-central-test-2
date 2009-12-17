@@ -100,16 +100,16 @@ public class SCProductVersionLocalServiceImpl
 
 		scProductVersionPersistence.update(productVersion, false);
 
+		// Framework versions
+
+		scProductVersionPersistence.setSCFrameworkVersions(
+			productVersionId, frameworkVersionIds);
+
 		// Product entry
 
 		productEntry.setModifiedDate(now);
 
 		scProductEntryPersistence.update(productEntry, false);
-
-		// Framework versions
-
-		scProductVersionPersistence.setSCFrameworkVersions(
-			productVersionId, frameworkVersionIds);
 
 		// Indexer
 
@@ -215,6 +215,11 @@ public class SCProductVersionLocalServiceImpl
 
 		scProductVersionPersistence.update(productVersion, false);
 
+		// Framework versions
+
+		scProductVersionPersistence.setSCFrameworkVersions(
+			productVersionId, frameworkVersionIds);
+
 		// Product entry
 
 		SCProductEntry productEntry =
@@ -224,11 +229,6 @@ public class SCProductVersionLocalServiceImpl
 		productEntry.setModifiedDate(now);
 
 		scProductEntryPersistence.update(productEntry, false);
-
-		// Framework versions
-
-		scProductVersionPersistence.setSCFrameworkVersions(
-			productVersionId, frameworkVersionIds);
 
 		// Indexer
 
@@ -249,6 +249,31 @@ public class SCProductVersionLocalServiceImpl
 		}
 
 		return productVersion;
+	}
+
+	protected void testDirectDownloadURL(String directDownloadURL)
+		throws PortalException {
+
+		try {
+			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
+
+			HostConfiguration hostConfig = httpImpl.getHostConfig(
+				directDownloadURL);
+
+			HttpClient client = httpImpl.getClient(hostConfig);
+
+			GetMethod getFileMethod = new GetMethod(directDownloadURL);
+
+			int responseCode = client.executeMethod(
+				hostConfig, getFileMethod);
+
+			if (responseCode != HttpServletResponse.SC_OK) {
+				throw new UnavailableProductVersionDirectDownloadURLException();
+			}
+		}
+		catch (Exception e) {
+			throw new UnavailableProductVersionDirectDownloadURLException();
+		}
 	}
 
 	protected void validate(
@@ -285,31 +310,6 @@ public class SCProductVersionLocalServiceImpl
 		}
 		else if (frameworkVersionIds.length == 0) {
 			throw new ProductVersionFrameworkVersionException();
-		}
-	}
-
-	protected void testDirectDownloadURL(String directDownloadURL)
-		throws PortalException {
-
-		try {
-			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
-
-			HostConfiguration hostConfig = httpImpl.getHostConfig(
-				directDownloadURL);
-
-			HttpClient client = httpImpl.getClient(hostConfig);
-
-			GetMethod getFileMethod = new GetMethod(directDownloadURL);
-
-			int responseCode = client.executeMethod(
-				hostConfig, getFileMethod);
-
-			if (responseCode != HttpServletResponse.SC_OK) {
-				throw new UnavailableProductVersionDirectDownloadURLException();
-			}
-		}
-		catch (Exception e) {
-			throw new UnavailableProductVersionDirectDownloadURLException();
 		}
 	}
 

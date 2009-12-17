@@ -184,18 +184,6 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public void addProductEntryResources(
-			SCProductEntry productEntry, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		resourceLocalService.addResources(
-			productEntry.getCompanyId(), productEntry.getGroupId(),
-			productEntry.getUserId(), SCProductEntry.class.getName(),
-			productEntry.getProductEntryId(), false, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public void addProductEntryResources(
 			long productEntryId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -205,6 +193,18 @@ public class SCProductEntryLocalServiceImpl
 
 		addProductEntryResources(
 			productEntry, communityPermissions, guestPermissions);
+	}
+
+	public void addProductEntryResources(
+			SCProductEntry productEntry, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addResources(
+			productEntry.getCompanyId(), productEntry.getGroupId(),
+			productEntry.getUserId(), SCProductEntry.class.getName(),
+			productEntry.getProductEntryId(), false, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public void addProductEntryResources(
@@ -242,16 +242,16 @@ public class SCProductEntryLocalServiceImpl
 	public void deleteProductEntry(SCProductEntry productEntry)
 		throws PortalException, SystemException {
 
-		// Indexer
+		// Product entry
 
-		try {
-			Indexer.deleteProductEntry(
-				productEntry.getCompanyId(), productEntry.getProductEntryId());
-		}
-		catch (SearchException se) {
-			_log.error(
-				"Deleting index " + productEntry.getProductEntryId(), se);
-		}
+		scProductEntryPersistence.remove(productEntry);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			productEntry.getCompanyId(), SCProductEntry.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL,
+			productEntry.getProductEntryId());
 
 		// Product screenshots
 
@@ -263,32 +263,26 @@ public class SCProductEntryLocalServiceImpl
 		scProductVersionLocalService.deleteProductVersions(
 			productEntry.getProductEntryId());
 
-		// Ratings
-
-		ratingsStatsLocalService.deleteStats(
-			SCProductEntry.class.getName(), productEntry.getProductEntryId());
-
 		// Message boards
 
 		mbMessageLocalService.deleteDiscussionMessages(
 			SCProductEntry.class.getName(), productEntry.getProductEntryId());
 
-		// Resources
+		// Ratings
 
-		resourceLocalService.deleteResource(
-			productEntry.getCompanyId(), SCProductEntry.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL,
-			productEntry.getProductEntryId());
+		ratingsStatsLocalService.deleteStats(
+			SCProductEntry.class.getName(), productEntry.getProductEntryId());
 
-		// Product entry
+		// Indexer
 
-		scProductEntryPersistence.remove(productEntry);
-	}
-
-	public SCProductEntry getProductEntry(long productEntryId)
-		throws PortalException, SystemException {
-
-		return scProductEntryPersistence.findByPrimaryKey(productEntryId);
+		try {
+			Indexer.deleteProductEntry(
+				productEntry.getCompanyId(), productEntry.getProductEntryId());
+		}
+		catch (SearchException se) {
+			_log.error(
+				"Deleting index " + productEntry.getProductEntryId(), se);
+		}
 	}
 
 	public List<SCProductEntry> getProductEntries(
@@ -332,6 +326,12 @@ public class SCProductEntryLocalServiceImpl
 		throws SystemException {
 
 		return scProductEntryPersistence.countByG_U(groupId, userId);
+	}
+
+	public SCProductEntry getProductEntry(long productEntryId)
+		throws PortalException, SystemException {
+
+		return scProductEntryPersistence.findByPrimaryKey(productEntryId);
 	}
 
 	public String getRepositoryXML(

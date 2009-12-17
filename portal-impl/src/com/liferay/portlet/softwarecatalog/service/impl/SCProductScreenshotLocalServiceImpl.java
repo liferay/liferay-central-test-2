@@ -41,10 +41,14 @@ public class SCProductScreenshotLocalServiceImpl
 	public void deleteProductScreenshot(SCProductScreenshot productScreenshot)
 		throws PortalException, SystemException {
 
-		imageLocalService.deleteImage(productScreenshot.getThumbnailId());
-		imageLocalService.deleteImage(productScreenshot.getFullImageId());
+		// Product screenshot
 
 		scProductScreenshotPersistence.remove(productScreenshot);
+
+		// Images
+
+		imageLocalService.deleteImage(productScreenshot.getThumbnailId());
+		imageLocalService.deleteImage(productScreenshot.getFullImageId());
 	}
 
 	public void deleteProductScreenshots(long productEntryId)
@@ -66,13 +70,6 @@ public class SCProductScreenshotLocalServiceImpl
 			productEntryId, priority);
 	}
 
-	public List<SCProductScreenshot> getProductScreenshots(long productEntryId)
-		throws SystemException {
-
-		return scProductScreenshotPersistence.findByProductEntryId(
-			productEntryId);
-	}
-
 	public SCProductScreenshot getProductScreenshotByFullImageId(
 			long fullImageId)
 		throws PortalException, SystemException {
@@ -85,6 +82,13 @@ public class SCProductScreenshotLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return scProductScreenshotPersistence.findByThumbnailId(thumbnailId);
+	}
+
+	public List<SCProductScreenshot> getProductScreenshots(long productEntryId)
+		throws SystemException {
+
+		return scProductScreenshotPersistence.findByProductEntryId(
+			productEntryId);
 	}
 
 }

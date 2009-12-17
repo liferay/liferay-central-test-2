@@ -44,6 +44,13 @@ public class SCProductVersionImpl
 	public SCProductVersionImpl() {
 	}
 
+	public List<SCFrameworkVersion> getFrameworkVersions()
+		throws SystemException {
+
+		return SCFrameworkVersionLocalServiceUtil.
+			getProductVersionFrameworkVersions(getProductVersionId());
+	}
+
 	public SCProductEntry getProductEntry() {
 		SCProductEntry productEntry = null;
 
@@ -58,13 +65,6 @@ public class SCProductVersionImpl
 		}
 
 		return productEntry;
-	}
-
-	public List<SCFrameworkVersion> getFrameworkVersions()
-		throws SystemException {
-
-		return SCFrameworkVersionLocalServiceUtil.
-			getProductVersionFrameworkVersions(getProductVersionId());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SCProductVersionImpl.class);
