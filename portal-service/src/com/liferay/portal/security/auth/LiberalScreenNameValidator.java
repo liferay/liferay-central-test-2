@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.Validator;
  *
  * @author Brian Wing Shun Chan
  */
-public class LiberalScreenNameValidator extends ScreenNameValidator {
+public class LiberalScreenNameValidator extends DefaultScreenNameValidator {
 
 	public boolean validate(long companyId, String screenName) {
 		if (Validator.isNull(screenName)) {

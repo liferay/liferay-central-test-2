@@ -22,17 +22,28 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+
 /**
- * <a href="ScreenNameValidator.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultScreenNameValidator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface ScreenNameValidator {
+public class DefaultScreenNameValidator implements ScreenNameValidator {
 
-	public static final String CYRUS = "cyrus";
+	public boolean validate(long companyId, String screenName) {
+		if (Validator.isEmailAddress(screenName) ||
+			(screenName.equalsIgnoreCase(CYRUS)) ||
+			(screenName.equalsIgnoreCase(POSTFIX)) ||
+			(screenName.indexOf(StringPool.SLASH) != -1) ||
+			(screenName.indexOf(StringPool.UNDERLINE) != -1)) {
 
-	public static final String POSTFIX = "postfix";
-
-	public boolean validate(long companyId, String screenName);
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 
 }
