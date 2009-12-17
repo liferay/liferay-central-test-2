@@ -358,8 +358,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				BookmarksEntryLocalServiceUtil.addEntry(
-					userId, groupId, folderId, entry.getName(), entry.getUrl(),
-					entry.getComments(), serviceContext);
+					null, userId, groupId, folderId, entry.getName(),
+					entry.getUrl(), entry.getComments(), serviceContext);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
@@ -430,7 +430,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
-					userId, parentFolderId, folder.getName(),
+					null, userId, parentFolderId, folder.getName(),
 					folder.getDescription(), serviceContext);
 			}
 

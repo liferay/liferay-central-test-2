@@ -110,17 +110,6 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		long userId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFolder(userId, parentFolderId, name, description,
-			serviceContext);
-	}
-
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		java.lang.String uuid, long userId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)

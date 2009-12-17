@@ -112,16 +112,6 @@ public class BookmarksEntryLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		long userId, long groupId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _bookmarksEntryLocalService.addEntry(userId, groupId, folderId,
-			name, url, comments, serviceContext);
-	}
-
-	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)

@@ -61,16 +61,6 @@ public class BookmarksEntryLocalServiceImpl
 	extends BookmarksEntryLocalServiceBaseImpl {
 
 	public BookmarksEntry addEntry(
-			long userId, long groupId, long folderId, String name, String url,
-			String comments, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addEntry(
-			null, userId, groupId, folderId, name, url, comments,
-			serviceContext);
-	}
-
-	public BookmarksEntry addEntry(
 			String uuid, long userId, long groupId, long folderId, String name,
 			String url, String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -101,6 +91,7 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setName(name);
 		entry.setUrl(url);
 		entry.setComments(comments);
+		entry.setExpandoBridgeAttributes(serviceContext);
 
 		bookmarksEntryPersistence.update(entry, false);
 
@@ -124,12 +115,6 @@ public class BookmarksEntryLocalServiceImpl
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
-
-		// Expando
-
-		ExpandoBridge expandoBridge = entry.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Indexer
 
@@ -198,6 +183,26 @@ public class BookmarksEntryLocalServiceImpl
 	public void deleteEntry(BookmarksEntry entry)
 		throws PortalException, SystemException {
 
+		// Entry
+
+		bookmarksEntryPersistence.remove(entry);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			entry.getCompanyId(), BookmarksEntry.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, entry.getEntryId());
+
+		// Asset
+
+		assetEntryLocalService.deleteEntry(
+			BookmarksEntry.class.getName(), entry.getEntryId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			BookmarksEntry.class.getName(), entry.getEntryId());
+
 		// Indexer
 
 		try {
@@ -206,26 +211,6 @@ public class BookmarksEntryLocalServiceImpl
 		catch (SearchException se) {
 			_log.error("Deleting index " + entry.getEntryId(), se);
 		}
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			BookmarksEntry.class.getName(), entry.getEntryId());
-
-		// Asset
-
-		assetEntryLocalService.deleteEntry(
-			BookmarksEntry.class.getName(), entry.getEntryId());
-
-		// Resources
-
-		resourceLocalService.deleteResource(
-			entry.getCompanyId(), BookmarksEntry.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, entry.getEntryId());
-
-		// Entry
-
-		bookmarksEntryPersistence.remove(entry);
 	}
 
 	public void deleteEntry(long entryId)
@@ -405,6 +390,7 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setName(name);
 		entry.setUrl(url);
 		entry.setComments(comments);
+		entry.setExpandoBridgeAttributes(serviceContext);
 
 		bookmarksEntryPersistence.update(entry, false);
 
@@ -413,12 +399,6 @@ public class BookmarksEntryLocalServiceImpl
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
-
-		// Expando
-
-		ExpandoBridge expandoBridge = entry.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Indexer
 

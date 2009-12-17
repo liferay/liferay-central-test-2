@@ -48,7 +48,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
 import com.liferay.portlet.bookmarks.util.Indexer;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,15 +62,6 @@ import java.util.List;
  */
 public class BookmarksFolderLocalServiceImpl
 	extends BookmarksFolderLocalServiceBaseImpl {
-
-	public BookmarksFolder addFolder(
-			long userId, long parentFolderId, String name, String description,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addFolder(
-			null, userId, parentFolderId, name, description, serviceContext);
-	}
 
 	public BookmarksFolder addFolder(
 			String uuid, long userId, long parentFolderId, String name,
@@ -100,6 +90,7 @@ public class BookmarksFolderLocalServiceImpl
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
+		folder.setExpandoBridgeAttributes(serviceContext);
 
 		bookmarksFolderPersistence.update(folder, false);
 
@@ -117,12 +108,6 @@ public class BookmarksFolderLocalServiceImpl
 				folder, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
-
-		// Expando
-
-		ExpandoBridge expandoBridge = folder.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		return folder;
 	}
@@ -175,6 +160,21 @@ public class BookmarksFolderLocalServiceImpl
 	public void deleteFolder(BookmarksFolder folder)
 		throws PortalException, SystemException {
 
+		// Folder
+
+		bookmarksFolderPersistence.remove(folder);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			folder.getCompanyId(), BookmarksFolder.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
+
+		// Entries
+
+		bookmarksEntryLocalService.deleteEntries(
+			folder.getGroupId(), folder.getFolderId());
+
 		// Folders
 
 		List<BookmarksFolder> folders = bookmarksFolderPersistence.findByG_P(
@@ -184,25 +184,10 @@ public class BookmarksFolderLocalServiceImpl
 			deleteFolder(curFolder);
 		}
 
-		// Entries
-
-		bookmarksEntryLocalService.deleteEntries(
-			folder.getGroupId(), folder.getFolderId());
-
 		// Expando
 
 		expandoValueLocalService.deleteValues(
 			BookmarksFolder.class.getName(), folder.getFolderId());
-
-		// Resources
-
-		resourceLocalService.deleteResource(
-			folder.getCompanyId(), BookmarksFolder.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
-
-		// Folder
-
-		bookmarksFolderPersistence.remove(folder);
 	}
 
 	public void deleteFolder(long folderId)
@@ -386,14 +371,9 @@ public class BookmarksFolderLocalServiceImpl
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
+		folder.setExpandoBridgeAttributes(serviceContext);
 
 		bookmarksFolderPersistence.update(folder, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = folder.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Merge folders
 
