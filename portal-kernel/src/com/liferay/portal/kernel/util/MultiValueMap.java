@@ -52,7 +52,7 @@ public abstract class MultiValueMap
 	public void putAll(Map<? extends K, ? extends V> map) {
 		MultiValueMap<? extends K, ? extends V> multiValueMap = null;
 
-		if (map instanceof MultiValueMap) {
+		if (map instanceof MultiValueMap<?, ?>) {
 			multiValueMap = (MultiValueMap<? extends K, ? extends V>)map;
 		}
 
