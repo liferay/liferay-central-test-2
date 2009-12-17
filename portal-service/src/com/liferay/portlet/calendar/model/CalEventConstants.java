@@ -33,9 +33,6 @@ import com.liferay.portal.kernel.util.Time;
  */
 public class CalEventConstants {
 
-	public static final String[] TYPES =
-		PropsUtil.getArray(PropsKeys.CALENDAR_EVENT_TYPES);
-
 	public static final String BIRTHDAY = "birthday";
 
 	public static final int REMIND_BY_AIM = 3;
@@ -59,5 +56,8 @@ public class CalEventConstants {
 		Time.DAY * 7, Time.DAY * 8, Time.DAY * 9, Time.DAY * 10, Time.DAY * 11,
 		Time.DAY * 12, Time.DAY * 13, Time.DAY * 14
 	};
+
+	public static final String[] TYPES =
+		PropsUtil.getArray(PropsKeys.CALENDAR_EVENT_TYPES);
 
 }

@@ -37,12 +37,6 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 	public CalEventImpl() {
 	}
 
-	public void setRecurrence(String recurrence) {
-		_recurrenceObj = null;
-
-		super.setRecurrence(recurrence);
-	}
-
 	public TZSRecurrence getRecurrenceObj() {
 		if (_recurrenceObj == null) {
 			String recurrence = getRecurrence();
@@ -54,6 +48,12 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 		}
 
 		return _recurrenceObj;
+	}
+
+	public void setRecurrence(String recurrence) {
+		_recurrenceObj = null;
+
+		super.setRecurrence(recurrence);
 	}
 
 	public void setRecurrenceObj(TZSRecurrence recurrenceObj) {

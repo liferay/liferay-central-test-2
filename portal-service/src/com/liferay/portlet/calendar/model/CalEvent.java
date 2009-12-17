@@ -48,9 +48,9 @@ package com.liferay.portlet.calendar.model;
  * @generated
  */
 public interface CalEvent extends CalEventModel {
-	public void setRecurrence(java.lang.String recurrence);
-
 	public com.liferay.portal.kernel.cal.TZSRecurrence getRecurrenceObj();
+
+	public void setRecurrence(java.lang.String recurrence);
 
 	public void setRecurrenceObj(
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrenceObj);
