@@ -29,16 +29,16 @@ package com.liferay.portlet.shopping.model;
  */
 public class ShoppingCouponConstants {
 
-	public static final String[] DISCOUNT_TYPES = {
-		"percentage", "actual", "free-shipping", "tax-free"
-	};
-
-	public static final String DISCOUNT_TYPE_PERCENTAGE = "percentage";
-
 	public static final String DISCOUNT_TYPE_ACTUAL = "actual";
 
 	public static final String DISCOUNT_TYPE_FREE_SHIPPING = "free-shipping";
 
+	public static final String DISCOUNT_TYPE_PERCENTAGE = "percentage";
+
 	public static final String DISCOUNT_TYPE_TAX_FREE = "tax-free";
+
+	public static final String[] DISCOUNT_TYPES = {
+		"percentage", "actual", "free-shipping", "tax-free"
+	};
 
 }

@@ -29,9 +29,9 @@ package com.liferay.portlet.shopping.model;
  */
 public class ShoppingItemPriceConstants {
 
-	public static final int STATUS_ACTIVE_DEFAULT = 1;
-
 	public static final int STATUS_ACTIVE = 2;
+
+	public static final int STATUS_ACTIVE_DEFAULT = 1;
 
 	public static final int STATUS_INACTIVE = 0;
 

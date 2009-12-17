@@ -179,39 +179,6 @@ public class ShoppingItemLocalServiceImpl
 
 		shoppingItemPersistence.update(item, false);
 
-		// Fields
-
-		for (ShoppingItemField itemField : itemFields) {
-			long itemFieldId = counterLocalService.increment();
-
-			itemField.setItemFieldId(itemFieldId);
-			itemField.setItemId(itemId);
-			itemField.setName(checkItemField(itemField.getName()));
-			itemField.setValues(checkItemField(itemField.getValues()));
-
-			shoppingItemFieldPersistence.update(itemField, false);
-		}
-
-		// Prices
-
-		if (itemPrices.size() > 1) {
-			for (ShoppingItemPrice itemPrice : itemPrices) {
-				long itemPriceId = counterLocalService.increment();
-
-				itemPrice.setItemPriceId(itemPriceId);
-				itemPrice.setItemId(itemId);
-
-				shoppingItemPricePersistence.update(itemPrice, false);
-			}
-		}
-
-		// Images
-
-		saveImages(
-			smallImage, item.getSmallImageId(), smallFile, smallBytes,
-			mediumImage, item.getMediumImageId(), mediumFile, mediumBytes,
-			largeImage, item.getLargeImageId(), largeFile, largeBytes);
-
 		// Resources
 
 		if (serviceContext.getAddCommunityPermissions() ||
@@ -225,6 +192,39 @@ public class ShoppingItemLocalServiceImpl
 			addItemResources(
 				item, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
+		}
+
+		// Images
+
+		saveImages(
+			smallImage, item.getSmallImageId(), smallFile, smallBytes,
+			mediumImage, item.getMediumImageId(), mediumFile, mediumBytes,
+			largeImage, item.getLargeImageId(), largeFile, largeBytes);
+
+		// Item fields
+
+		for (ShoppingItemField itemField : itemFields) {
+			long itemFieldId = counterLocalService.increment();
+
+			itemField.setItemFieldId(itemFieldId);
+			itemField.setItemId(itemId);
+			itemField.setName(checkItemField(itemField.getName()));
+			itemField.setValues(checkItemField(itemField.getValues()));
+
+			shoppingItemFieldPersistence.update(itemField, false);
+		}
+
+		// Item prices
+
+		if (itemPrices.size() > 1) {
+			for (ShoppingItemPrice itemPrice : itemPrices) {
+				long itemPriceId = counterLocalService.increment();
+
+				itemPrice.setItemPriceId(itemPriceId);
+				itemPrice.setItemId(itemId);
+
+				shoppingItemPricePersistence.update(itemPrice, false);
+			}
 		}
 
 		return item;
@@ -284,19 +284,9 @@ public class ShoppingItemLocalServiceImpl
 	public void deleteItem(ShoppingItem item)
 		throws PortalException, SystemException {
 
-		// Fields
+		// Item
 
-		shoppingItemFieldPersistence.removeByItemId(item.getItemId());
-
-		// Prices
-
-		shoppingItemPricePersistence.removeByItemId(item.getItemId());
-
-		// Images
-
-		imageLocalService.deleteImage(item.getSmallImageId());
-		imageLocalService.deleteImage(item.getMediumImageId());
-		imageLocalService.deleteImage(item.getLargeImageId());
+		shoppingItemPersistence.remove(item);
 
 		// Resources
 
@@ -304,9 +294,19 @@ public class ShoppingItemLocalServiceImpl
 			item.getCompanyId(), ShoppingItem.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, item.getItemId());
 
-		// Item
+		// Images
 
-		shoppingItemPersistence.remove(item);
+		imageLocalService.deleteImage(item.getSmallImageId());
+		imageLocalService.deleteImage(item.getMediumImageId());
+		imageLocalService.deleteImage(item.getLargeImageId());
+
+		// Item fields
+
+		shoppingItemFieldPersistence.removeByItemId(item.getItemId());
+
+		// Item prices
+
+		shoppingItemPricePersistence.removeByItemId(item.getItemId());
 	}
 
 	public void deleteItems(long groupId, long categoryId)
@@ -542,7 +542,14 @@ public class ShoppingItemLocalServiceImpl
 
 		shoppingItemPersistence.update(item, false);
 
-		// Fields
+		// Images
+
+		saveImages(
+			smallImage, item.getSmallImageId(), smallFile, smallBytes,
+			mediumImage, item.getMediumImageId(), mediumFile, mediumBytes,
+			largeImage, item.getLargeImageId(), largeFile, largeBytes);
+
+		// Item fields
 
 		shoppingItemFieldPersistence.removeByItemId(itemId);
 
@@ -557,7 +564,7 @@ public class ShoppingItemLocalServiceImpl
 			shoppingItemFieldPersistence.update(itemField, false);
 		}
 
-		// Prices
+		// Item prices
 
 		shoppingItemPricePersistence.removeByItemId(itemId);
 
@@ -571,13 +578,6 @@ public class ShoppingItemLocalServiceImpl
 				shoppingItemPricePersistence.update(itemPrice, false);
 			}
 		}
-
-		// Images
-
-		saveImages(
-			smallImage, item.getSmallImageId(), smallFile, smallBytes,
-			mediumImage, item.getMediumImageId(), mediumFile, mediumBytes,
-			largeImage, item.getLargeImageId(), largeFile, largeBytes);
 
 		return item;
 	}

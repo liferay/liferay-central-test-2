@@ -36,14 +36,14 @@ public class ShoppingItemFieldImpl
 	public ShoppingItemFieldImpl() {
 	}
 
+	public String[] getValuesArray() {
+		return _valuesArray;
+	}
+
 	public void setValues(String values) {
 		_valuesArray = StringUtil.split(values);
 
 		super.setValues(values);
-	}
-
-	public String[] getValuesArray() {
-		return _valuesArray;
 	}
 
 	public void setValuesArray(String[] valuesArray) {

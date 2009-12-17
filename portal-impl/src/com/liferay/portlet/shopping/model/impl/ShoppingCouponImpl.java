@@ -38,14 +38,12 @@ public class ShoppingCouponImpl
 	public ShoppingCouponImpl() {
 	}
 
-	public boolean hasValidStartDate() {
-		Date now = new Date();
-
-		if (CalendarUtil.beforeByDay(now, getStartDate())) {
-			return false;
+	public boolean hasValidDateRange() {
+		if (hasValidStartDate() && hasValidEndDate()) {
+			return true;
 		}
 		else {
-			return true;
+			return false;
 		}
 	}
 
@@ -61,12 +59,14 @@ public class ShoppingCouponImpl
 		return true;
 	}
 
-	public boolean hasValidDateRange() {
-		if (hasValidStartDate() && hasValidEndDate()) {
-			return true;
+	public boolean hasValidStartDate() {
+		Date now = new Date();
+
+		if (CalendarUtil.beforeByDay(now, getStartDate())) {
+			return false;
 		}
 		else {
-			return false;
+			return true;
 		}
 	}
 

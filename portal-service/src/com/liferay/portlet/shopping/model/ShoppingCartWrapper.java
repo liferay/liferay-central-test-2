@@ -219,6 +219,12 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		_shoppingCart.addItemId(itemId, fields);
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _shoppingCart.getCoupon();
+	}
+
 	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems()
 		throws com.liferay.portal.SystemException {
 		return _shoppingCart.getItems();
@@ -226,12 +232,6 @@ public class ShoppingCartWrapper implements ShoppingCart {
 
 	public int getItemsSize() {
 		return _shoppingCart.getItemsSize();
-	}
-
-	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _shoppingCart.getCoupon();
 	}
 
 	public ShoppingCart getWrappedShoppingCart() {

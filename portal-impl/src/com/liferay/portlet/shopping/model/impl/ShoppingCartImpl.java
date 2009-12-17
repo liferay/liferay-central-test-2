@@ -52,15 +52,6 @@ public class ShoppingCartImpl
 			getItemIds(), itemId + fields, StringPool.COMMA, true));
 	}
 
-	public Map<ShoppingCartItem, Integer> getItems() throws SystemException {
-		return ShoppingCartLocalServiceUtil.getItems(
-			getGroupId(), getItemIds());
-	}
-
-	public int getItemsSize() {
-		return StringUtil.split(getItemIds()).length;
-	}
-
 	public ShoppingCoupon getCoupon() throws PortalException, SystemException {
 		ShoppingCoupon coupon = null;
 
@@ -75,6 +66,15 @@ public class ShoppingCartImpl
 		}
 
 		return coupon;
+	}
+
+	public Map<ShoppingCartItem, Integer> getItems() throws SystemException {
+		return ShoppingCartLocalServiceUtil.getItems(
+			getGroupId(), getItemIds());
+	}
+
+	public int getItemsSize() {
+		return StringUtil.split(getItemIds()).length;
 	}
 
 }

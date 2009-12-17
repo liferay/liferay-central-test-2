@@ -166,6 +166,16 @@ public class ShoppingCategoryLocalServiceImpl
 	public void deleteCategory(ShoppingCategory category)
 		throws PortalException, SystemException {
 
+		// Category
+
+		shoppingCategoryPersistence.remove(category);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			category.getCompanyId(), ShoppingCategory.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, category.getCategoryId());
+
 		// Categories
 
 		List<ShoppingCategory> categories =
@@ -180,16 +190,6 @@ public class ShoppingCategoryLocalServiceImpl
 
 		shoppingItemLocalService.deleteItems(
 			category.getGroupId(), category.getCategoryId());
-
-		// Resources
-
-		resourceLocalService.deleteResource(
-			category.getCompanyId(), ShoppingCategory.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, category.getCategoryId());
-
-		// Category
-
-		shoppingCategoryPersistence.remove(category);
 	}
 
 	public List<ShoppingCategory> getCategories(long groupId)

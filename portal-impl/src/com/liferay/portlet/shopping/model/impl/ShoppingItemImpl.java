@@ -47,6 +47,10 @@ public class ShoppingItemImpl
 	public ShoppingItemImpl() {
 	}
 
+	public int compareTo(ShoppingItem item) {
+		return new ItemNameComparator(true).compare(this, item);
+	}
+
 	public ShoppingCategory getCategory() {
 		ShoppingCategory category = null;
 
@@ -68,30 +72,26 @@ public class ShoppingItemImpl
 		return category;
 	}
 
-	public void setFieldsQuantities(String fieldsQuantities) {
-		_fieldsQuantitiesArray = StringUtil.split(fieldsQuantities);
-
-		super.setFieldsQuantities(fieldsQuantities);
-	}
-
 	public String[] getFieldsQuantitiesArray() {
 		return _fieldsQuantitiesArray;
-	}
-
-	public void setFieldsQuantitiesArray(String[] fieldsQuantitiesArray) {
-		_fieldsQuantitiesArray = fieldsQuantitiesArray;
-
-		super.setFieldsQuantities(StringUtil.merge(fieldsQuantitiesArray));
-	}
-
-	public int compareTo(ShoppingItem item) {
-		return new ItemNameComparator(true).compare(this, item);
 	}
 
 	public List<ShoppingItemPrice> getItemPrices()
 		throws PortalException, SystemException {
 
 		return ShoppingItemPriceLocalServiceUtil.getItemPrices(getItemId());
+	}
+
+	public void setFieldsQuantities(String fieldsQuantities) {
+		_fieldsQuantitiesArray = StringUtil.split(fieldsQuantities);
+
+		super.setFieldsQuantities(fieldsQuantities);
+	}
+
+	public void setFieldsQuantitiesArray(String[] fieldsQuantitiesArray) {
+		_fieldsQuantitiesArray = fieldsQuantitiesArray;
+
+		super.setFieldsQuantities(StringUtil.merge(fieldsQuantitiesArray));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ShoppingItemImpl.class);

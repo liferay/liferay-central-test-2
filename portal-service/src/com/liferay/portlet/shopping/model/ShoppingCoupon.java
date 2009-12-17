@@ -48,9 +48,9 @@ package com.liferay.portlet.shopping.model;
  * @generated
  */
 public interface ShoppingCoupon extends ShoppingCouponModel {
-	public boolean hasValidStartDate();
+	public boolean hasValidDateRange();
 
 	public boolean hasValidEndDate();
 
-	public boolean hasValidDateRange();
+	public boolean hasValidStartDate();
 }

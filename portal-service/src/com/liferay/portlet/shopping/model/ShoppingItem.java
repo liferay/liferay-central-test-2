@@ -48,18 +48,18 @@ package com.liferay.portlet.shopping.model;
  * @generated
  */
 public interface ShoppingItem extends ShoppingItemModel {
+	public int compareTo(com.liferay.portlet.shopping.model.ShoppingItem item);
+
 	public com.liferay.portlet.shopping.model.ShoppingCategory getCategory();
 
-	public void setFieldsQuantities(java.lang.String fieldsQuantities);
-
 	public java.lang.String[] getFieldsQuantitiesArray();
-
-	public void setFieldsQuantitiesArray(
-		java.lang.String[] fieldsQuantitiesArray);
-
-	public int compareTo(com.liferay.portlet.shopping.model.ShoppingItem item);
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public void setFieldsQuantities(java.lang.String fieldsQuantities);
+
+	public void setFieldsQuantitiesArray(
+		java.lang.String[] fieldsQuantitiesArray);
 }

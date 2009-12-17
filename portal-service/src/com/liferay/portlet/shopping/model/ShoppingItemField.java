@@ -48,9 +48,9 @@ package com.liferay.portlet.shopping.model;
  * @generated
  */
 public interface ShoppingItemField extends ShoppingItemFieldModel {
-	public void setValues(java.lang.String values);
-
 	public java.lang.String[] getValuesArray();
+
+	public void setValues(java.lang.String values);
 
 	public void setValuesArray(java.lang.String[] valuesArray);
 }

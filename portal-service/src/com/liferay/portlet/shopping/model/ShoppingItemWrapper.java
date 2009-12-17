@@ -439,15 +439,15 @@ public class ShoppingItemWrapper implements ShoppingItem {
 		return _shoppingItem.getFieldsQuantitiesArray();
 	}
 
-	public void setFieldsQuantitiesArray(
-		java.lang.String[] fieldsQuantitiesArray) {
-		_shoppingItem.setFieldsQuantitiesArray(fieldsQuantitiesArray);
-	}
-
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _shoppingItem.getItemPrices();
+	}
+
+	public void setFieldsQuantitiesArray(
+		java.lang.String[] fieldsQuantitiesArray) {
+		_shoppingItem.setFieldsQuantitiesArray(fieldsQuantitiesArray);
 	}
 
 	public ShoppingItem getWrappedShoppingItem() {

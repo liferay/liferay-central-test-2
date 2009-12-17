@@ -49,7 +49,7 @@ public class ShoppingItemPriceLocalServiceImpl
 		List<ShoppingItemPrice> itemPrices =
 			shoppingItemPricePersistence.findByItemId(itemId);
 
-		if (itemPrices.size() == 0) {
+		if (itemPrices.isEmpty()) {
 			itemPrices = new ArrayList<ShoppingItemPrice>();
 
 			ShoppingItemPrice itemPrice = shoppingItemPricePersistence.create(

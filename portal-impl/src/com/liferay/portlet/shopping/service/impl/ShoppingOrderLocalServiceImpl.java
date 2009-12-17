@@ -96,6 +96,8 @@ public class ShoppingOrderLocalServiceImpl
 	public ShoppingOrder addLatestOrder(long userId, long groupId)
 		throws PortalException, SystemException {
 
+		// Order
+
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
@@ -154,15 +156,12 @@ public class ShoppingOrderLocalServiceImpl
 
 		shoppingOrderPersistence.update(order, false);
 
-		if (order.isNew()) {
+		// Message boards
 
-			// Message boards
-
-			if (PropsValues.SHOPPING_ORDER_COMMENTS_ENABLED) {
-				mbMessageLocalService.addDiscussionMessage(
-					userId, order.getUserName(), ShoppingOrder.class.getName(),
-					orderId, StatusConstants.APPROVED);
-			}
+		if (PropsValues.SHOPPING_ORDER_COMMENTS_ENABLED) {
+			mbMessageLocalService.addDiscussionMessage(
+				userId, order.getUserName(), ShoppingOrder.class.getName(),
+				orderId, StatusConstants.APPROVED);
 		}
 
 		return order;
@@ -260,6 +259,10 @@ public class ShoppingOrderLocalServiceImpl
 	public void deleteOrder(ShoppingOrder order)
 		throws PortalException, SystemException {
 
+		// Order
+
+		shoppingOrderPersistence.remove(order);
+
 		// Items
 
 		shoppingOrderItemPersistence.removeByOrderId(order.getOrderId());
@@ -268,10 +271,6 @@ public class ShoppingOrderLocalServiceImpl
 
 		mbMessageLocalService.deleteDiscussionMessages(
 			ShoppingOrder.class.getName(), order.getOrderId());
-
-		// Order
-
-		shoppingOrderPersistence.remove(order);
 	}
 
 	public void deleteOrders(long groupId)

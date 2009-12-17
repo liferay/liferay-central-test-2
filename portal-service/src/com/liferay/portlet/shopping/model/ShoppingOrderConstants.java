@@ -29,20 +29,20 @@ package com.liferay.portlet.shopping.model;
  */
 public class ShoppingOrderConstants {
 
-	public static final String[] STATUSES = {
-		"checkout", "completed", "denied", "pending", "refunded"
-	};
-
-	public static final String STATUS_LATEST = "LIFERAY_STATUS_LATEST";
-
 	public static final String STATUS_CHECKOUT = "LIFERAY_STATUS_CHECKOUT";
 
 	public static final String STATUS_COMPLETED = "Completed";
 
 	public static final String STATUS_DENIED = "Denied";
 
+	public static final String STATUS_LATEST = "LIFERAY_STATUS_LATEST";
+
 	public static final String STATUS_PENDING = "Pending";
 
 	public static final String STATUS_REFUNDED = "Refunded";
+
+	public static final String[] STATUSES = {
+		"checkout", "completed", "denied", "pending", "refunded"
+	};
 
 }

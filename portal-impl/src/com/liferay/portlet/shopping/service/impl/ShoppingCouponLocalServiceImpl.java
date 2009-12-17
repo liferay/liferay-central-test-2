@@ -72,8 +72,6 @@ public class ShoppingCouponLocalServiceImpl
 			double discount, String discountType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Coupon
-
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = serviceContext.getScopeGroupId();
 

@@ -43,29 +43,6 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 		_fields = fields;
 	}
 
-	public String getCartItemId() {
-		long itemId = getItem().getItemId();
-
-		if (Validator.isNull(_fields)) {
-			return String.valueOf(itemId);
-		}
-		else {
-			return itemId + "|" + _fields;
-		}
-	}
-
-	public ShoppingItem getItem() {
-		return _item;
-	}
-
-	public String getFields() {
-		return _fields;
-	}
-
-	public String[] getFieldsArray() {
-		return getFieldsArray(_fields);
-	}
-
 	public int compareTo(ShoppingCartItem cartItem) {
 		if (cartItem == null) {
 			return -1;
@@ -97,7 +74,30 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 		}
 	}
 
-	private ShoppingItem _item;
+	public String getCartItemId() {
+		long itemId = getItem().getItemId();
+
+		if (Validator.isNull(_fields)) {
+			return String.valueOf(itemId);
+		}
+		else {
+			return itemId + "|" + _fields;
+		}
+	}
+
+	public String getFields() {
+		return _fields;
+	}
+
+	public String[] getFieldsArray() {
+		return getFieldsArray(_fields);
+	}
+
+	public ShoppingItem getItem() {
+		return _item;
+	}
+
 	private String _fields;
+	private ShoppingItem _item;
 
 }

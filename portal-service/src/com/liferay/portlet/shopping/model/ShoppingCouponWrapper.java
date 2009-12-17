@@ -271,16 +271,16 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 		return _shoppingCoupon.toXmlString();
 	}
 
-	public boolean hasValidStartDate() {
-		return _shoppingCoupon.hasValidStartDate();
+	public boolean hasValidDateRange() {
+		return _shoppingCoupon.hasValidDateRange();
 	}
 
 	public boolean hasValidEndDate() {
 		return _shoppingCoupon.hasValidEndDate();
 	}
 
-	public boolean hasValidDateRange() {
-		return _shoppingCoupon.hasValidDateRange();
+	public boolean hasValidStartDate() {
+		return _shoppingCoupon.hasValidStartDate();
 	}
 
 	public ShoppingCoupon getWrappedShoppingCoupon() {
