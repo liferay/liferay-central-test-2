@@ -57,7 +57,7 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			ActionKeys.ADD_QUESTION);
 
 		return pollsQuestionLocalService.addQuestion(
-			getUserId(), titleMap, descriptionMap, expirationDateMonth,
+			null, getUserId(), titleMap, descriptionMap, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, neverExpire, choices, serviceContext);
 	}

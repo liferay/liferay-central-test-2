@@ -42,6 +42,14 @@ public class PollsQuestionImpl
 	public PollsQuestionImpl() {
 	}
 
+	public List<PollsChoice> getChoices() throws SystemException {
+		return PollsChoiceLocalServiceUtil.getChoices(getQuestionId());
+	}
+
+	public int getVotesCount() throws SystemException {
+		return PollsVoteLocalServiceUtil.getQuestionVotesCount(getQuestionId());
+	}
+
 	public boolean isExpired() {
 		Date expirationDate = getExpirationDate();
 
@@ -51,14 +59,6 @@ public class PollsQuestionImpl
 		else {
 			return false;
 		}
-	}
-
-	public List<PollsChoice> getChoices() throws SystemException {
-		return PollsChoiceLocalServiceUtil.getChoices(getQuestionId());
-	}
-
-	public int getVotesCount() throws SystemException {
-		return PollsVoteLocalServiceUtil.getQuestionVotesCount(getQuestionId());
 	}
 
 }

@@ -100,11 +100,6 @@ public interface PollsChoiceLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsChoice addChoice(
-		long questionId, java.lang.String name, java.lang.String description)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.polls.model.PollsChoice addChoice(
 		java.lang.String uuid, long questionId, java.lang.String name,
 		java.lang.String description)
 		throws com.liferay.portal.PortalException,

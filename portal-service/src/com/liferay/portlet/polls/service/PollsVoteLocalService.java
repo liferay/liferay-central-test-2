@@ -113,12 +113,6 @@ public interface PollsVoteLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.polls.model.PollsVote getVote(long questionId,
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> getQuestionVotes(
 		long questionId, int start, int end)
 		throws com.liferay.portal.SystemException;
@@ -126,4 +120,10 @@ public interface PollsVoteLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getQuestionVotesCount(long questionId)
 		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.polls.model.PollsVote getVote(long questionId,
+		long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

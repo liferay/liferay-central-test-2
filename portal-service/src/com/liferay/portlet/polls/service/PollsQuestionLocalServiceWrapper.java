@@ -112,21 +112,6 @@ public class PollsQuestionLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, java.util.Map<java.util.Locale, String> titleMap,
-		java.util.Map<java.util.Locale, String> descriptionMap,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _pollsQuestionLocalService.addQuestion(userId, titleMap,
-			descriptionMap, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, choices, serviceContext);
-	}
-
-	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		java.lang.String uuid, long userId,
 		java.util.Map<java.util.Locale, String> titleMap,
 		java.util.Map<java.util.Locale, String> descriptionMap,
@@ -150,15 +135,6 @@ public class PollsQuestionLocalServiceWrapper
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addQuestionResources(
-		com.liferay.portlet.polls.model.PollsQuestion question,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_pollsQuestionLocalService.addQuestionResources(question,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
 	public void addQuestionResources(long questionId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -166,6 +142,15 @@ public class PollsQuestionLocalServiceWrapper
 			com.liferay.portal.SystemException {
 		_pollsQuestionLocalService.addQuestionResources(questionId,
 			communityPermissions, guestPermissions);
+	}
+
+	public void addQuestionResources(
+		com.liferay.portlet.polls.model.PollsQuestion question,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_pollsQuestionLocalService.addQuestionResources(question,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addQuestionResources(

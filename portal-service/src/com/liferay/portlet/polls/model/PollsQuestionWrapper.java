@@ -280,10 +280,6 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		return _pollsQuestion.toXmlString();
 	}
 
-	public boolean isExpired() {
-		return _pollsQuestion.isExpired();
-	}
-
 	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> getChoices()
 		throws com.liferay.portal.SystemException {
 		return _pollsQuestion.getChoices();
@@ -291,6 +287,10 @@ public class PollsQuestionWrapper implements PollsQuestion {
 
 	public int getVotesCount() throws com.liferay.portal.SystemException {
 		return _pollsQuestion.getVotesCount();
+	}
+
+	public boolean isExpired() {
+		return _pollsQuestion.isExpired();
 	}
 
 	public PollsQuestion getWrappedPollsQuestion() {

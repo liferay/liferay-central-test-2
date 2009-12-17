@@ -101,12 +101,6 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 		return pollsVotePersistence.countByChoiceId(choiceId);
 	}
 
-	public PollsVote getVote(long questionId, long userId)
-		throws PortalException, SystemException {
-
-		return pollsVotePersistence.findByQ_U(questionId, userId);
-	}
-
 	public List<PollsVote> getQuestionVotes(long questionId, int start, int end)
 		throws SystemException {
 
@@ -115,6 +109,12 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
 	public int getQuestionVotesCount(long questionId) throws SystemException {
 		return pollsVotePersistence.countByQuestionId(questionId);
+	}
+
+	public PollsVote getVote(long questionId, long userId)
+		throws PortalException, SystemException {
+
+		return pollsVotePersistence.findByQ_U(questionId, userId);
 	}
 
 }

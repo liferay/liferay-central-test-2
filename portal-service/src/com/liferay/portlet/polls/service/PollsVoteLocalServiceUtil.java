@@ -127,13 +127,6 @@ public class PollsVoteLocalServiceUtil {
 		return getService().getChoiceVotesCount(choiceId);
 	}
 
-	public static com.liferay.portlet.polls.model.PollsVote getVote(
-		long questionId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getVote(questionId, userId);
-	}
-
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getQuestionVotes(
 		long questionId, int start, int end)
 		throws com.liferay.portal.SystemException {
@@ -143,6 +136,13 @@ public class PollsVoteLocalServiceUtil {
 	public static int getQuestionVotesCount(long questionId)
 		throws com.liferay.portal.SystemException {
 		return getService().getQuestionVotesCount(questionId);
+	}
+
+	public static com.liferay.portlet.polls.model.PollsVote getVote(
+		long questionId, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getVote(questionId, userId);
 	}
 
 	public static PollsVoteLocalService getService() {

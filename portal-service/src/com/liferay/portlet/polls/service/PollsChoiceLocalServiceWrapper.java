@@ -109,13 +109,6 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 	}
 
 	public com.liferay.portlet.polls.model.PollsChoice addChoice(
-		long questionId, java.lang.String name, java.lang.String description)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _pollsChoiceLocalService.addChoice(questionId, name, description);
-	}
-
-	public com.liferay.portlet.polls.model.PollsChoice addChoice(
 		java.lang.String uuid, long questionId, java.lang.String name,
 		java.lang.String description)
 		throws com.liferay.portal.PortalException,

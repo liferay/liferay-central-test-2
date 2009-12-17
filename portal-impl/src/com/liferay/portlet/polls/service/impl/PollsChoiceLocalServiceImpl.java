@@ -40,13 +40,6 @@ public class PollsChoiceLocalServiceImpl
 	extends PollsChoiceLocalServiceBaseImpl {
 
 	public PollsChoice addChoice(
-			long questionId, String name, String description)
-		throws PortalException, SystemException {
-
-		return addChoice(null, questionId, name, description);
-	}
-
-	public PollsChoice addChoice(
 			String uuid, long questionId, String name, String description)
 		throws PortalException, SystemException {
 

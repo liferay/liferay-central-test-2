@@ -125,13 +125,6 @@ public class PollsVoteLocalServiceWrapper implements PollsVoteLocalService {
 		return _pollsVoteLocalService.getChoiceVotesCount(choiceId);
 	}
 
-	public com.liferay.portlet.polls.model.PollsVote getVote(long questionId,
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _pollsVoteLocalService.getVote(questionId, userId);
-	}
-
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> getQuestionVotes(
 		long questionId, int start, int end)
 		throws com.liferay.portal.SystemException {
@@ -141,6 +134,13 @@ public class PollsVoteLocalServiceWrapper implements PollsVoteLocalService {
 	public int getQuestionVotesCount(long questionId)
 		throws com.liferay.portal.SystemException {
 		return _pollsVoteLocalService.getQuestionVotesCount(questionId);
+	}
+
+	public com.liferay.portlet.polls.model.PollsVote getVote(long questionId,
+		long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _pollsVoteLocalService.getVote(questionId, userId);
 	}
 
 	public PollsVoteLocalService getWrappedPollsVoteLocalService() {

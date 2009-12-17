@@ -54,21 +54,6 @@ public class PollsQuestionLocalServiceImpl
 	extends PollsQuestionLocalServiceBaseImpl {
 
 	public PollsQuestion addQuestion(
-			long userId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, List<PollsChoice> choices,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addQuestion(
-			null, userId, titleMap, descriptionMap, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, choices, serviceContext);
-	}
-
-	public PollsQuestion addQuestion(
 			String uuid, long userId, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
@@ -132,7 +117,8 @@ public class PollsQuestionLocalServiceImpl
 		if (choices != null) {
 			for (PollsChoice choice : choices) {
 				pollsChoiceLocalService.addChoice(
-					questionId, choice.getName(), choice.getDescription());
+					null, questionId, choice.getName(),
+					choice.getDescription());
 			}
 		}
 
@@ -152,6 +138,17 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public void addQuestionResources(
+			long questionId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
+			questionId);
+
+		addQuestionResources(question, communityPermissions, guestPermissions);
+	}
+
+	public void addQuestionResources(
 			PollsQuestion question, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -161,17 +158,6 @@ public class PollsQuestionLocalServiceImpl
 			question.getUserId(), PollsQuestion.class.getName(),
 			question.getQuestionId(), false, addCommunityPermissions,
 			addGuestPermissions);
-	}
-
-	public void addQuestionResources(
-			long questionId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
-			questionId);
-
-		addQuestionResources(question, communityPermissions, guestPermissions);
 	}
 
 	public void addQuestionResources(
@@ -197,13 +183,9 @@ public class PollsQuestionLocalServiceImpl
 	public void deleteQuestion(PollsQuestion question)
 		throws PortalException, SystemException {
 
-		// Votes
+		// Question
 
-		pollsVotePersistence.removeByQuestionId(question.getQuestionId());
-
-		// Choices
-
-		pollsChoicePersistence.removeByQuestionId(question.getQuestionId());
+		pollsQuestionPersistence.remove(question);
 
 		// Resources
 
@@ -211,9 +193,13 @@ public class PollsQuestionLocalServiceImpl
 			question.getCompanyId(), PollsQuestion.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, question.getQuestionId());
 
-		// Question
+		// Choices
 
-		pollsQuestionPersistence.remove(question);
+		pollsChoicePersistence.removeByQuestionId(question.getQuestionId());
+
+		// Votes
+
+		pollsVotePersistence.removeByQuestionId(question.getQuestionId());
 	}
 
 	public void deleteQuestions(long groupId)
@@ -315,7 +301,7 @@ public class PollsQuestionLocalServiceImpl
 
 				if (choice == null) {
 					pollsChoiceLocalService.addChoice(
-						questionId, choiceName, choiceDescription);
+						null, questionId, choiceName, choiceDescription);
 				}
 				else {
 					pollsChoiceLocalService.updateChoice(

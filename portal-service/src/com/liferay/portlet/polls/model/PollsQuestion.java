@@ -48,10 +48,10 @@ package com.liferay.portlet.polls.model;
  * @generated
  */
 public interface PollsQuestion extends PollsQuestionModel {
-	public boolean isExpired();
-
 	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> getChoices()
 		throws com.liferay.portal.SystemException;
 
 	public int getVotesCount() throws com.liferay.portal.SystemException;
+
+	public boolean isExpired();
 }

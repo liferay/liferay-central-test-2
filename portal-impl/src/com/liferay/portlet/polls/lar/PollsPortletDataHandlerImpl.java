@@ -140,7 +140,8 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				existingChoice = PollsChoiceLocalServiceUtil.addChoice(
-					questionId, choice.getName(), choice.getDescription());
+					null, questionId, choice.getName(),
+					choice.getDescription());
 			}
 
 			choicePKs.put(choice.getChoiceId(), existingChoice.getChoiceId());
@@ -216,9 +217,10 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-				userId, question.getTitleMap(), question.getDescriptionMap(),
-				expirationMonth, expirationDay, expirationYear, expirationHour,
-				expirationMinute, neverExpire, null, serviceContext);
+				null, userId, question.getTitleMap(),
+				question.getDescriptionMap(), expirationMonth, expirationDay,
+				expirationYear, expirationHour, expirationMinute, neverExpire,
+				null, serviceContext);
 		}
 
 		questionPKs.put(
