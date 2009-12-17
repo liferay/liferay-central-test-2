@@ -37,7 +37,6 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
-import com.liferay.portal.ReservedUserFullNameException;
 import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
@@ -211,7 +210,6 @@ public class EditUserAction extends PortletAction {
 					 e instanceof PhoneNumberException ||
 					 e instanceof RequiredUserException ||
 					 e instanceof ReservedUserEmailAddressException ||
-					 e instanceof ReservedUserFullNameException ||
 					 e instanceof ReservedUserScreenNameException ||
 					 e instanceof UserEmailAddressException ||
 					 e instanceof UserIdException ||

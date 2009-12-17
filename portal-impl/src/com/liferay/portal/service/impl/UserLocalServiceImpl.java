@@ -38,7 +38,6 @@ import com.liferay.portal.PasswordExpiredException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
-import com.liferay.portal.ReservedUserFullNameException;
 import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserEmailAddressException;
@@ -395,8 +394,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		validate(
 			companyId, userId, autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, firstName, middleName,
-			lastName, organizationIds);
+			autoScreenName, screenName, emailAddress, firstName, lastName,
+			organizationIds);
 
 		if (autoPassword) {
 			password1 = PwdToolkitUtil.generate();
@@ -2369,9 +2368,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				user.getCompanyId(), userId);
 		}
 
-		validate(
-			userId, screenName, emailAddress, firstName, middleName, lastName,
-			smsSn);
+		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);
 
 		if (Validator.isNotNull(newPassword1) ||
 			Validator.isNotNull(newPassword2)) {
@@ -3177,7 +3174,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected void validate(
 			long userId, String screenName, String emailAddress,
-			String firstName, String middleName, String lastName, String smsSn)
+			String firstName, String lastName, String smsSn)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -3199,7 +3196,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				}
 			}
 
-			validateName(user.getCompanyId(), firstName, middleName, lastName);
+			if (Validator.isNull(firstName)) {
+				throw new ContactFirstNameException();
+			}
+			else if (Validator.isNull(lastName)) {
+				throw new ContactLastNameException();
+			}
 		}
 
 		if (Validator.isNotNull(smsSn) && !Validator.isEmailAddress(smsSn)) {
@@ -3210,8 +3212,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	protected void validate(
 			long companyId, long userId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
-			String emailAddress, String firstName, String middleName,
-			String lastName, long[] organizationIds)
+			String emailAddress, String firstName, String lastName,
+			long[] organizationIds)
 		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -3242,7 +3244,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		validateName(companyId, firstName, middleName, lastName);
+		if (Validator.isNull(firstName)) {
+			throw new ContactFirstNameException();
+		}
+		else if (Validator.isNull(lastName)) {
+			throw new ContactLastNameException();
+		}
 	}
 
 	protected void validateEmailAddress(long companyId, String emailAddress)
@@ -3268,31 +3275,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		for (int i = 0; i < reservedEmailAddresses.length; i++) {
 			if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
 				throw new ReservedUserEmailAddressException();
-			}
-		}
-	}
-
-	protected void validateName(
-			long companyId, String firstName, String middleName,
-			String lastName)
-		throws PortalException, SystemException {
-
-		if (Validator.isNull(firstName)) {
-			throw new ContactFirstNameException();
-		}
-		else if (Validator.isNull(lastName)) {
-			throw new ContactLastNameException();
-		}
-
-		String fullName = firstName + middleName + lastName;
-
-		String[] reservedFullNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsKeys.ADMIN_RESERVED_FULL_NAMES,
-			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_FULL_NAMES);
-
-		for (int i = 0; i < reservedFullNames.length; i++) {
-			if (fullName.equalsIgnoreCase(reservedFullNames[i])) {
-				throw new ReservedUserFullNameException();
 			}
 		}
 	}
