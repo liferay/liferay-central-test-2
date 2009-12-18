@@ -2,14 +2,25 @@ AUI().ready(
 	'hudcrumbs',
 	function(A) {
 		if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7) {
-			jQuery('#navigation > ul > li').hover(
-				function(event) {
-					jQuery(this).addClass('hover');
-				},
-				function(event) {
-					jQuery(this).removeClass('hover');
-				}
-			);
+			var navigation = A.one('#navigation > ul');
+
+			if (navigation) {
+				navigation.delegate(
+					'mouseenter',
+					function(event) {
+						event.currentTarget.addClass('hover');
+					},
+					'> li'
+				);
+
+				navigation.delegate(
+					'mouseleave',
+					function(event) {
+						event.currentTarget.removeClass('hover');
+					},
+					'> li'
+				);
+			}
 		}
 
 		A.one('.site-breadcrumbs').plug(A.Hudcrumbs);
