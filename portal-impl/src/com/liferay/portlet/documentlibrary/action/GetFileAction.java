@@ -119,13 +119,15 @@ public class GetFileAction extends PortletAction {
 				actionRequest, "fileShortcutId");
 
 			String uuid = ParamUtil.getString(actionRequest, "uuid");
-			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 			String targetExtension = ParamUtil.getString(
 				actionRequest, "targetExtension");
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+			long groupId = ParamUtil.getLong(
+				actionRequest, "groupId", themeDisplay.getScopeGroupId());
 
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
