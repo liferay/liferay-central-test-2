@@ -230,12 +230,12 @@ for (int i = 0; i < portlets.size(); i++) {
 				rowSB.append("\">");
 			}
 
-			rowSB.append(StringUtil.highlight(entryTitle, queryTerms));
+			rowSB.append(StringUtil.highlight(HtmlUtil.escape(entryTitle), queryTerms));
 			rowSB.append("</a>");
 
 			if (Validator.isNotNull(summary)) {
 				rowSB.append("<br />");
-				rowSB.append(StringUtil.highlight(summary, queryTerms));
+				rowSB.append(StringUtil.highlight(HtmlUtil.escape(summary), queryTerms));
 			}
 
 			rowSB.append("<br />");
