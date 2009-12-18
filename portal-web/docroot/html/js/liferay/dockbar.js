@@ -18,12 +18,14 @@ AUI().use(
 						function(event) {
 							body.toggleClass('lfr-dockbar-pinned');
 
+							var pinned = body.hasClass('lfr-dockbar-pinned');
+
 							A.io(
 								themeDisplay.getPathMain() + '/portal/session_click',
 								{
 									data: A.toQueryString(
 										{
-											'liferay_dockbar_pinned': body.hasClass('lfr-dockbar-pinned')
+											'liferay_dockbar_pinned': pinned
 										}
 									),
 									method: 'POST'
@@ -31,6 +33,13 @@ AUI().use(
 							);
 
 							event.halt();
+
+							Liferay.fire(
+								'dockbar:pinned',
+								{
+									pinned: pinned
+								}
+							);
 						}
 					);
 

@@ -662,6 +662,23 @@ body.lfr-has-sidebar {
 	font-size: 1.3em;
 }
 
+.lfr-hudcrumbs {
+	position: fixed;
+	top: 0;
+}
+
+.lfr-hudcrumbs ul {
+	background: #414445;
+}
+
+.lfr-hudcrumbs .breadcrumbs li a {
+	color: #fff;
+}
+
+.lfr-hudcrumbs li span {
+	background-image: url(../images/common/breadcrumbs_hud.png);
+}
+
 .aui-dialog-content {
 	border: 1px solid #C8C9CA;
 	padding: 5px;
@@ -749,4 +766,14 @@ body.lfr-has-sidebar {
 	-moz-border-radius: 20px;
 	-webkit-border-radius: 20px;
 	border-radius: 20px;
+}
+
+.lfr-hudcrumbs ul {
+	background: rgba(0, 0, 0, 0.8);
+	-moz-border-radius-topleft: 0;
+	-moz-border-radius-topright: 0;
+	-webkit-border-top-right-radius: 0;
+	-webkit-border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
 }

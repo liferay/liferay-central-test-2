@@ -1,5 +1,6 @@
 AUI().ready(
-	function() {
+	'hudcrumbs',
+	function(A) {
 		if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7) {
 			jQuery('#navigation > ul > li').hover(
 				function(event) {
@@ -10,5 +11,7 @@ AUI().ready(
 				}
 			);
 		}
+
+		A.one('.site-breadcrumbs').plug(A.Hudcrumbs);
 	}
 );
