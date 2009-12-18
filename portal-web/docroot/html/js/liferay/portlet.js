@@ -449,7 +449,7 @@ Liferay.Portlet = {
 
 					var list = instance.list;
 
-					var index = list.indexOf(portletId);
+					var index = A.Array.indexOf(list, portletId);
 
 					if (index > -1) {
 						list.splice(index, 1);

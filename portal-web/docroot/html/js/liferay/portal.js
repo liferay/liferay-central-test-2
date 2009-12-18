@@ -18,7 +18,7 @@ AUI().ready(
 				panel.show();
 			}
 
-			var index = names.indexOf(id);
+			var index = A.Array.indexOf(names, id);
 
 			names.splice(index, 1);
 
