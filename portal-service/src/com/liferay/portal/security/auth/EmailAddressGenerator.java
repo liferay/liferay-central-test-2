@@ -31,8 +31,8 @@ public interface EmailAddressGenerator {
 
 	public String generate(long companyId, long userId);
 
-	public boolean isGenerated(String emailAddress);
-
 	public boolean isFake(String emailAddress);
+
+	public boolean isGenerated(String emailAddress);
 
 }

@@ -225,6 +225,12 @@ public class HookHotDeployListener
 			com.liferay.mail.util.HookFactory.setInstance(null);
 		}
 
+		if (portalProperties.containsKey(
+				PropsKeys.USERS_EMAIL_ADDRESS_GENERATOR)) {
+
+			EmailAddressGeneratorFactory.setInstance(null);
+		}
+
 		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_VALIDATOR)) {
 			FullNameValidatorFactory.setInstance(null);
 		}

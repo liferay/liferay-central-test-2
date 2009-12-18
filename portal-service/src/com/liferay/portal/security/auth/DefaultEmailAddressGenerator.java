@@ -38,10 +38,6 @@ public class DefaultEmailAddressGenerator implements EmailAddressGenerator {
 		return userId + UserConstants.USERS_EMAIL_ADDRESS_AUTO_SUFFIX;
 	}
 
-	public boolean isGenerated(String emailAddress) {
-		return isFake(emailAddress);
-	}
-
 	public boolean isFake(String emailAddress) {
 		if (Validator.isNull(emailAddress) ||
 			StringUtil.endsWith(
@@ -52,6 +48,10 @@ public class DefaultEmailAddressGenerator implements EmailAddressGenerator {
 		else {
 			return false;
 		}
+	}
+
+	public boolean isGenerated(String emailAddress) {
+		return isFake(emailAddress);
 	}
 
 }
