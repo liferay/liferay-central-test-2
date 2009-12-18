@@ -382,7 +382,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		long userId = counterLocalService.increment();
 
 		EmailAddressGenerator emailAddressGenerator =
-			(EmailAddressGenerator)EmailAddressGeneratorFactory.getInstance();
+			EmailAddressGeneratorFactory.getInstance();
 
 		if (emailAddressGenerator.isGenerated(emailAddress)) {
 			emailAddress = StringPool.BLANK;
@@ -2356,7 +2356,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Date now = new Date();
 
 		EmailAddressGenerator emailAddressGenerator =
-			(EmailAddressGenerator)EmailAddressGeneratorFactory.getInstance();
+			EmailAddressGeneratorFactory.getInstance();
 
 		if (emailAddressGenerator.isGenerated(emailAddress)) {
 			emailAddress = StringPool.BLANK;
@@ -3276,7 +3276,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	protected void validateFullName(
 			long companyId, String firstName, String middleName,
 			String lastName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (Validator.isNull(firstName)) {
 			throw new ContactFirstNameException();

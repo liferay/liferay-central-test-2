@@ -134,7 +134,7 @@ public class MailMessageListener implements MessageListener {
 		InternetAddress internetAddress) {
 
 		EmailAddressGenerator emailAddressGenerator =
-			(EmailAddressGenerator)EmailAddressGeneratorFactory.getInstance();
+			EmailAddressGeneratorFactory.getInstance();
 
 		if (emailAddressGenerator.isFake(internetAddress.getAddress())) {
 			return null;

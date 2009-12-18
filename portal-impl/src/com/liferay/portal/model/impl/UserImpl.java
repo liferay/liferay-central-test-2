@@ -119,7 +119,7 @@ public class UserImpl extends UserModelImpl implements User {
 		String emailAddress = super.getEmailAddress();
 
 		EmailAddressGenerator emailAddressGenerator =
-			(EmailAddressGenerator)EmailAddressGeneratorFactory.getInstance();
+			EmailAddressGeneratorFactory.getInstance();
 
 		if (emailAddressGenerator.isFake(emailAddress)) {
 			emailAddress = StringPool.BLANK;
