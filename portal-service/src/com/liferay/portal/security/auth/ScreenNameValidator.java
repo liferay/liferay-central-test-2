@@ -29,10 +29,6 @@ package com.liferay.portal.security.auth;
  */
 public interface ScreenNameValidator {
 
-	public static final String CYRUS = "cyrus";
-
-	public static final String POSTFIX = "postfix";
-
 	public boolean validate(long companyId, String screenName);
 
 }

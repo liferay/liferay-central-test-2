@@ -32,6 +32,10 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class DefaultScreenNameValidator implements ScreenNameValidator {
 
+	public static final String CYRUS = "cyrus";
+
+	public static final String POSTFIX = "postfix";
+
 	public boolean validate(long companyId, String screenName) {
 		if (Validator.isEmailAddress(screenName) ||
 			(screenName.equalsIgnoreCase(CYRUS)) ||
