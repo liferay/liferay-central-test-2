@@ -665,13 +665,14 @@ body.lfr-has-sidebar {
 .lfr-hudcrumbs {
 	position: fixed;
 	top: 0;
+	z-index: 400;
 }
 
 .lfr-hudcrumbs ul {
 	background: #414445;
 }
 
-.lfr-hudcrumbs .breadcrumbs li a {
+.lfr-hudcrumbs .breadcrumbs li a, .lfr-hudcrumbs .breadcrumbs li span {
 	color: #fff;
 }
 
