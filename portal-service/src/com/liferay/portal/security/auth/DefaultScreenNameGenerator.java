@@ -52,8 +52,8 @@ public class DefaultScreenNameGenerator implements ScreenNameGenerator {
 				new String[] {StringPool.SLASH, StringPool.UNDERLINE},
 				new String[] {StringPool.PERIOD, StringPool.PERIOD});
 
-			if (screenName.equals(ScreenNameValidator.CYRUS) ||
-				screenName.equals(ScreenNameValidator.POSTFIX)) {
+			if (screenName.equals(DefaultScreenNameValidator.CYRUS) ||
+				screenName.equals(DefaultScreenNameValidator.POSTFIX)) {
 
 				screenName += StringPool.PERIOD + userId;
 			}
