@@ -110,39 +110,6 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, long groupId, long folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String extraSettings, byte[] bytes,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _dlFileEntryLocalService.addFileEntry(userId, groupId, folderId,
-			name, title, description, extraSettings, bytes, serviceContext);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, long groupId, long folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String extraSettings, java.io.File file,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _dlFileEntryLocalService.addFileEntry(userId, groupId, folderId,
-			name, title, description, extraSettings, file, serviceContext);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, long groupId, long folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String extraSettings, java.io.InputStream is, long size,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _dlFileEntryLocalService.addFileEntry(userId, groupId, folderId,
-			name, title, description, extraSettings, is, size, serviceContext);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String extraSettings,
@@ -399,10 +366,6 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 		return _dlFileEntryLocalService.getNoAssetFileEntries();
 	}
 
-	public long getRepositoryId(long groupId, long folderId) {
-		return _dlFileEntryLocalService.getRepositoryId(groupId, folderId);
-	}
-
 	public void reIndex(long fileEntryId)
 		throws com.liferay.portal.SystemException {
 		_dlFileEntryLocalService.reIndex(fileEntryId);
@@ -456,30 +419,13 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 			extraSettings, is, size, serviceContext);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
-		long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
-		boolean reIndex, int status)
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateWorkflowStatus(
+		long userId, long fileEntryId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _dlFileEntryLocalService.updateStatus(userId, fileVersion,
-			reIndex, status);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
-		long userId, long fileEntryId, int status)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _dlFileEntryLocalService.updateStatus(userId, fileEntryId, status);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
-		long userId, long groupId, long folderId, java.lang.String name,
-		double version, int status)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _dlFileEntryLocalService.updateStatus(userId, groupId, folderId,
-			name, version, status);
+		return _dlFileEntryLocalService.updateWorkflowStatus(userId,
+			fileEntryId, serviceContext);
 	}
 
 	public DLFileEntryLocalService getWrappedDLFileEntryLocalService() {

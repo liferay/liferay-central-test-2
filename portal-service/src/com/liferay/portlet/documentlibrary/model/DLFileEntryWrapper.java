@@ -284,21 +284,25 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.toXmlString();
 	}
 
+	public java.util.Properties getExtraSettingsProperties() {
+		return _dlFileEntry.getExtraSettingsProperties();
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder() {
 		return _dlFileEntry.getFolder();
 	}
 
-	public java.util.Properties getExtraSettingsProperties() {
-		return _dlFileEntry.getExtraSettingsProperties();
+	public java.lang.String getLuceneProperties() {
+		return _dlFileEntry.getLuceneProperties();
+	}
+
+	public long getRepositoryId() {
+		return _dlFileEntry.getRepositoryId();
 	}
 
 	public void setExtraSettingsProperties(
 		java.util.Properties extraSettingsProperties) {
 		_dlFileEntry.setExtraSettingsProperties(extraSettingsProperties);
-	}
-
-	public java.lang.String getLuceneProperties() {
-		return _dlFileEntry.getLuceneProperties();
 	}
 
 	public DLFileEntry getWrappedDLFileEntry() {

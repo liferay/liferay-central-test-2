@@ -244,6 +244,10 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		return _dlFileVersion.toXmlString();
 	}
 
+	public boolean isApproved() {
+		return _dlFileVersion.isApproved();
+	}
+
 	public DLFileVersion getWrappedDLFileVersion() {
 		return _dlFileVersion;
 	}

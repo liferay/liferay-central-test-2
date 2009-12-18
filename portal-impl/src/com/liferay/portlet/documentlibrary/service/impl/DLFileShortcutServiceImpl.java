@@ -59,7 +59,8 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 		}
 
 		return dlFileShortcutLocalService.addFileShortcut(
-			getUserId(), groupId, folderId, toFolderId, toName, serviceContext);
+			null, getUserId(), groupId, folderId, toFolderId, toName,
+			serviceContext);
 	}
 
 	public void deleteFileShortcut(long fileShortcutId)

@@ -110,17 +110,6 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long userId, long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFolder(userId, groupId, parentFolderId, name,
-			description, serviceContext);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		java.lang.String uuid, long userId, long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)

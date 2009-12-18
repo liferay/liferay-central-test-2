@@ -110,17 +110,6 @@ public class DLFileShortcutLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long userId, long groupId, long folderId, long toFolderId,
-		java.lang.String toName,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFileShortcut(userId, groupId, folderId, toFolderId,
-			toName, serviceContext);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		java.lang.String uuid, long userId, long groupId, long folderId,
 		long toFolderId, java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -224,14 +213,6 @@ public class DLFileShortcutLocalServiceUtil {
 		getService()
 			.updateFileShortcuts(groupId, oldToFolderId, oldToName,
 			newToFolderId, newToName);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateStatus(
-		long userId, long fileShortcutId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().updateStatus(userId, fileShortcutId, serviceContext);
 	}
 
 	public static DLFileShortcutLocalService getService() {

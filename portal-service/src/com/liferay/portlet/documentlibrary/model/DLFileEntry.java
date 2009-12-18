@@ -48,16 +48,18 @@ package com.liferay.portlet.documentlibrary.model;
  * @generated
  */
 public interface DLFileEntry extends DLFileEntryModel {
-	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
-
 	public java.lang.String getExtraSettings();
-
-	public void setExtraSettings(java.lang.String extraSettings);
 
 	public java.util.Properties getExtraSettingsProperties();
 
-	public void setExtraSettingsProperties(
-		java.util.Properties extraSettingsProperties);
+	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
 
 	public java.lang.String getLuceneProperties();
+
+	public long getRepositoryId();
+
+	public void setExtraSettings(java.lang.String extraSettings);
+
+	public void setExtraSettingsProperties(
+		java.util.Properties extraSettingsProperties);
 }

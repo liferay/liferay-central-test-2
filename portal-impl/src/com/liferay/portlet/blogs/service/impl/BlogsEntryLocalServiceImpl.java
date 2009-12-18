@@ -682,7 +682,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		if (entry.isApproved()) {
 			blogsStatsUserLocalService.updateStatsUser(
-				entry.getGroupId(), userId, entry.getDisplayDate());
+				entry.getGroupId(), entry.getUserId(), entry.getDisplayDate());
 		}
 
 		// Asset
@@ -700,8 +700,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		if (entry.isApproved()) {
 			socialActivityLocalService.addUniqueActivity(
-				userId, entry.getGroupId(), BlogsEntry.class.getName(),
-				entryId, BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
+				entry.getUserId(), entry.getGroupId(),
+				BlogsEntry.class.getName(), entryId,
+				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
 		}
 
 		// Indexer

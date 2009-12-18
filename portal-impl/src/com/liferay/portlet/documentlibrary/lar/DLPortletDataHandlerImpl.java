@@ -288,7 +288,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				existingFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-					userId, groupId, folderId, fileEntry.getName(),
+					null, userId, groupId, folderId, fileEntry.getName(),
 					fileEntry.getTitle(), fileEntry.getDescription(),
 					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
 					serviceContext);
@@ -421,7 +421,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					folder.getName(), 2);
 
 				existingFolder = DLFolderLocalServiceUtil.addFolder(
-					userId, groupId, parentFolderId, name,
+					null, userId, groupId, parentFolderId, name,
 					folder.getDescription(), serviceContext);
 			}
 
@@ -858,7 +858,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				DLFileShortcutLocalServiceUtil.addFileShortcut(
-					userId, groupId, folderId, toFolderId, toName,
+					null, userId, groupId, folderId, toFolderId, toName,
 					serviceContext);
 			}
 		}

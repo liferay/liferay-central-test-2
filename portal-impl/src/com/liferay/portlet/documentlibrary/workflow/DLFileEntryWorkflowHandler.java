@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.workflow;
 
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.workflow.BaseWorkflowHandler;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -47,8 +48,12 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 			long companyId, long groupId, long userId, long classPK, int status)
 		throws Exception {
 
-		return DLFileEntryLocalServiceUtil.updateStatus(
-			userId, classPK, status);
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setStatus(status);
+
+		return DLFileEntryLocalServiceUtil.updateWorkflowStatus(
+			userId, classPK, serviceContext);
 	}
 
 }

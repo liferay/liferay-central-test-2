@@ -62,7 +62,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), groupId, folderId, name, title, description,
+			null, getUserId(), groupId, folderId, name, title, description,
 			extraSettings, bytes, serviceContext);
 	}
 
@@ -76,7 +76,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), groupId, folderId, name, title, description,
+			null, getUserId(), groupId, folderId, name, title, description,
 			extraSettings, file, serviceContext);
 	}
 

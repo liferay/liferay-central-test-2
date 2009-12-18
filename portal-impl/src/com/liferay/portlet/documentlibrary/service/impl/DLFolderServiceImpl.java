@@ -69,7 +69,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			ActionKeys.ADD_FOLDER);
 
 		return dlFolderLocalService.addFolder(
-			getUserId(), groupId, parentFolderId, name, description,
+			null, getUserId(), groupId, parentFolderId, name, description,
 			serviceContext);
 	}
 

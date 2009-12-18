@@ -47,7 +47,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.util.Indexer;
 
 import java.util.ArrayList;
@@ -60,16 +59,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
-
-	public DLFolder addFolder(
-			long userId, long groupId, long parentFolderId, String name,
-			String description, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addFolder(
-			null, userId, groupId, parentFolderId, name, description,
-			serviceContext);
-	}
 
 	public DLFolder addFolder(
 			String uuid, long userId, long groupId, long parentFolderId,
@@ -97,6 +86,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
+		folder.setExpandoBridgeAttributes(serviceContext);
 
 		dlFolderPersistence.update(folder, false);
 
@@ -113,23 +103,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			addFolderResources(
 				folder, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
-		}
-
-		// Expando
-
-		ExpandoBridge expandoBridge = folder.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
-		// Parent folder
-
-		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder parentFolder = dlFolderPersistence.findByPrimaryKey(
-				parentFolderId);
-
-			parentFolder.setLastPostDate(now);
-
-			dlFolderPersistence.update(parentFolder, false);
 		}
 
 		// Layout
@@ -176,6 +149,17 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 					layoutDescription, type, hidden, friendlyURL,
 					folder.getFolderId(), new ServiceContext());
 			}
+		}
+
+		// Parent folder
+
+		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			DLFolder parentFolder = dlFolderPersistence.findByPrimaryKey(
+				parentFolderId);
+
+			parentFolder.setLastPostDate(now);
+
+			dlFolderPersistence.update(parentFolder, false);
 		}
 
 		return folder;
@@ -227,6 +211,26 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	public void deleteFolder(DLFolder folder)
 		throws PortalException, SystemException {
 
+		// Folder
+
+		dlFolderPersistence.remove(folder);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			folder.getCompanyId(), DLFolder.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
+
+		// WebDAVProps
+
+		webDAVPropsLocalService.deleteWebDAVProps(
+			DLFolder.class.getName(), folder.getPrimaryKey());
+
+		// File entries
+
+		dlFileEntryLocalService.deleteFileEntries(
+			folder.getGroupId(), folder.getFolderId());
+
 		// Folders
 
 		List<DLFolder> folders = dlFolderPersistence.findByG_P(
@@ -236,30 +240,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			deleteFolder(curFolder);
 		}
 
-		// File entries
-
-		dlFileEntryLocalService.deleteFileEntries(
-			folder.getGroupId(), folder.getFolderId());
-
-		// WebDAVProps
-
-		webDAVPropsLocalService.deleteWebDAVProps(
-			DLFolder.class.getName(), folder.getPrimaryKey());
-
 		// Expando
 
 		expandoValueLocalService.deleteValues(
 			DLFolder.class.getName(), folder.getFolderId());
-
-		// Resources
-
-		resourceLocalService.deleteResource(
-			folder.getCompanyId(), DLFolder.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
-
-		// Folder
-
-		dlFolderPersistence.remove(folder);
 	}
 
 	public void deleteFolder(long folderId)
@@ -453,14 +437,9 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
+		folder.setExpandoBridgeAttributes(serviceContext);
 
 		dlFolderPersistence.update(folder, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = folder.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Layout
 

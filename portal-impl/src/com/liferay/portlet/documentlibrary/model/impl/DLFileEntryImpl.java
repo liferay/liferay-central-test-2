@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 import java.io.IOException;
@@ -48,7 +49,41 @@ import java.util.Properties;
 public class DLFileEntryImpl
 	extends DLFileEntryModelImpl implements DLFileEntry {
 
+	public static long getRepositoryId(long groupId, long folderId) {
+		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return groupId;
+		}
+		else {
+			return folderId;
+		}
+	}
+
 	public DLFileEntryImpl() {
+	}
+
+	public String getExtraSettings() {
+		if (_extraSettingsProperties == null) {
+			return super.getExtraSettings();
+		}
+		else {
+			return PropertiesUtil.toString(_extraSettingsProperties);
+		}
+	}
+
+	public Properties getExtraSettingsProperties() {
+		if (_extraSettingsProperties == null) {
+			_extraSettingsProperties = new SafeProperties();
+
+			try {
+				PropertiesUtil.load(
+					_extraSettingsProperties, super.getExtraSettings());
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
+
+		return _extraSettingsProperties;
 	}
 
 	public DLFolder getFolder() {
@@ -69,44 +104,6 @@ public class DLFileEntryImpl
 		}
 
 		return folder;
-	}
-
-	public String getExtraSettings() {
-		if (_extraSettingsProperties == null) {
-			return super.getExtraSettings();
-		}
-		else {
-			return PropertiesUtil.toString(_extraSettingsProperties);
-		}
-	}
-
-	public void setExtraSettings(String extraSettings) {
-		_extraSettingsProperties = null;
-
-		super.setExtraSettings(extraSettings);
-	}
-
-	public Properties getExtraSettingsProperties() {
-		if (_extraSettingsProperties == null) {
-			_extraSettingsProperties = new SafeProperties();
-
-			try {
-				PropertiesUtil.load(
-					_extraSettingsProperties, super.getExtraSettings());
-			}
-			catch (IOException ioe) {
-				_log.error(ioe);
-			}
-		}
-
-		return _extraSettingsProperties;
-	}
-
-	public void setExtraSettingsProperties(Properties extraSettingsProperties) {
-		_extraSettingsProperties = extraSettingsProperties;
-
-		super.setExtraSettings(
-			PropertiesUtil.toString(_extraSettingsProperties));
 	}
 
 	public String getLuceneProperties() {
@@ -131,6 +128,23 @@ public class DLFileEntryImpl
 		}
 
 		return sb.toString();
+	}
+
+	public long getRepositoryId() {
+		return getRepositoryId(getGroupId(), getFolderId());
+	}
+
+	public void setExtraSettings(String extraSettings) {
+		_extraSettingsProperties = null;
+
+		super.setExtraSettings(extraSettings);
+	}
+
+	public void setExtraSettingsProperties(Properties extraSettingsProperties) {
+		_extraSettingsProperties = extraSettingsProperties;
+
+		super.setExtraSettings(
+			PropertiesUtil.toString(_extraSettingsProperties));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLFileEntryImpl.class);

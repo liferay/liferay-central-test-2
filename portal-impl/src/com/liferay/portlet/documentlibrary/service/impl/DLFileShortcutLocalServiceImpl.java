@@ -49,16 +49,6 @@ public class DLFileShortcutLocalServiceImpl
 	extends DLFileShortcutLocalServiceBaseImpl {
 
 	public DLFileShortcut addFileShortcut(
-			long userId, long groupId, long folderId, long toFolderId,
-			String toName, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addFileShortcut(
-			null, userId, groupId, folderId, toFolderId, toName,
-			serviceContext);
-	}
-
-	public DLFileShortcut addFileShortcut(
 			String uuid, long userId, long groupId, long folderId,
 			long toFolderId, String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -108,6 +98,16 @@ public class DLFileShortcutLocalServiceImpl
 				serviceContext.getGuestPermissions());
 		}
 
+		// Folder
+
+		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+			folder.setLastPostDate(fileShortcut.getModifiedDate());
+
+			dlFolderPersistence.update(folder, false);
+		}
+
 		// Asset
 
 		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
@@ -118,16 +118,6 @@ public class DLFileShortcutLocalServiceImpl
 		updateAsset(
 			userId, fileShortcut, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
-
-		// Folder
-
-		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-			folder.setLastPostDate(fileShortcut.getModifiedDate());
-
-			dlFolderPersistence.update(folder, false);
-		}
 
 		return fileShortcut;
 	}
@@ -183,10 +173,9 @@ public class DLFileShortcutLocalServiceImpl
 	public void deleteFileShortcut(DLFileShortcut fileShortcut)
 		throws PortalException, SystemException {
 
-		// Asset
+		// File shortcut
 
-		assetEntryLocalService.deleteEntry(
-			DLFileShortcut.class.getName(), fileShortcut.getFileShortcutId());
+		dlFileShortcutPersistence.remove(fileShortcut);
 
 		// Resources
 
@@ -195,9 +184,10 @@ public class DLFileShortcutLocalServiceImpl
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			fileShortcut.getFileShortcutId());
 
-		// File shortcut
+		// Asset
 
-		dlFileShortcutPersistence.remove(fileShortcut);
+		assetEntryLocalService.deleteEntry(
+			DLFileShortcut.class.getName(), fileShortcut.getFileShortcutId());
 	}
 
 	public void deleteFileShortcut(long fileShortcutId)
@@ -267,6 +257,16 @@ public class DLFileShortcutLocalServiceImpl
 
 		dlFileShortcutPersistence.update(fileShortcut, false);
 
+		// Folder
+
+		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+			folder.setLastPostDate(fileShortcut.getModifiedDate());
+
+			dlFolderPersistence.update(folder, false);
+		}
+
 		// Asset
 
 		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
@@ -277,16 +277,6 @@ public class DLFileShortcutLocalServiceImpl
 		updateAsset(
 			userId, fileShortcut, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
-
-		// Folder
-
-		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-			folder.setLastPostDate(fileShortcut.getModifiedDate());
-
-			dlFolderPersistence.update(folder, false);
-		}
 
 		return fileShortcut;
 	}
@@ -306,20 +296,6 @@ public class DLFileShortcutLocalServiceImpl
 
 			dlFileShortcutPersistence.update(fileShortcut, false);
 		}
-	}
-
-	public DLFileShortcut updateStatus(
-			long userId, long fileShortcutId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		DLFileShortcut fileShortcut =
-			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
-
-		fileShortcut.setStatus(serviceContext.getStatus());
-
-		dlFileShortcutPersistence.update(fileShortcut, false);
-
-		return fileShortcut;
 	}
 
 	protected void copyAssetTags(

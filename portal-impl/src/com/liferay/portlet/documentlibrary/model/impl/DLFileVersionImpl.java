@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 
 /**
@@ -33,6 +34,15 @@ public class DLFileVersionImpl
 	extends DLFileVersionModelImpl implements DLFileVersion {
 
 	public DLFileVersionImpl() {
+	}
+
+	public boolean isApproved() {
+		if (getStatus() == StatusConstants.APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }
