@@ -772,6 +772,11 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
+		<action path="/enterprise_admin_roles/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
+			<forward name="portlet.enterprise_admin.edit_user" path="portlet.enterprise_admin.edit_user" />
+			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
 		<action path="/enterprise_admin_roles/edit_user_roles" type="com.liferay.portlet.communities.action.EditUserRolesAction">
 			<forward name="portlet.communities.edit_user_roles" path="portlet.communities.edit_user_roles" />
 			<forward name="portlet.communities.error" path="portlet.enterprise_admin.error" />
