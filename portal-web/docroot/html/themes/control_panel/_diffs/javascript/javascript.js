@@ -3,6 +3,7 @@ Liferay.Util.portletTitleEdit = function() {
 
 AUI().use(
 	'context-panel',
+	'io',
 	function(A) {
 		var portletInformationEl = A.get('#cpContextPanelTemplate');
 		var portletInformationIcon = A.get('#cpPortletTitleHelpIcon');
@@ -25,17 +26,16 @@ AUI().use(
 					visible: false,
 					on: {
 						hide: function() {
-							jQuery.ajax(
+							A.io(
+								themeDisplay.getPathMain() + '/portal/session_click',
 								{
-									url: themeDisplay.getPathMain() + '/portal/session_click',
 									data: sessionData
 								}
 							);
 						}
 					}
 				}
-			)
-			.render();
+			).render();
 
 			if (visible) {
 				contextPanel.show();
