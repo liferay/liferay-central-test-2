@@ -169,7 +169,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					parentFolderId, folder.getName(), 2);
 
 				existingFolder = IGFolderLocalServiceUtil.addFolder(
-					userId, parentFolderId, name, folder.getDescription(),
+					null, userId, parentFolderId, name, folder.getDescription(),
 					serviceContext);
 			}
 
@@ -263,7 +263,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				IGImageLocalServiceUtil.addImage(
-					userId, groupId, folderId, image.getName(),
+					null, userId, groupId, folderId, image.getName(),
 					image.getDescription(), imageFile, image.getImageType(),
 					serviceContext);
 			}

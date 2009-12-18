@@ -50,11 +50,11 @@ package com.liferay.portlet.imagegallery.model;
 public interface IGImage extends IGImageModel {
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder();
 
-	public java.lang.String getNameWithExtension();
+	public int getImageSize();
 
 	public java.lang.String getImageType();
 
-	public void setImageType(java.lang.String imageType);
+	public java.lang.String getNameWithExtension();
 
-	public int getImageSize();
+	public void setImageType(java.lang.String imageType);
 }

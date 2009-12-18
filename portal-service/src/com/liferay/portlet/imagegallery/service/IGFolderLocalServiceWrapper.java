@@ -109,16 +109,6 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long userId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _igFolderLocalService.addFolder(userId, parentFolderId, name,
-			description, serviceContext);
-	}
-
-	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		java.lang.String uuid, long userId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)

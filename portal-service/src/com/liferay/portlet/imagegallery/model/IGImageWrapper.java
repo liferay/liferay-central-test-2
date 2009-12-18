@@ -238,20 +238,20 @@ public class IGImageWrapper implements IGImage {
 		return _igImage.getFolder();
 	}
 
-	public java.lang.String getNameWithExtension() {
-		return _igImage.getNameWithExtension();
+	public int getImageSize() {
+		return _igImage.getImageSize();
 	}
 
 	public java.lang.String getImageType() {
 		return _igImage.getImageType();
 	}
 
-	public void setImageType(java.lang.String imageType) {
-		_igImage.setImageType(imageType);
+	public java.lang.String getNameWithExtension() {
+		return _igImage.getNameWithExtension();
 	}
 
-	public int getImageSize() {
-		return _igImage.getImageSize();
+	public void setImageType(java.lang.String imageType) {
+		_igImage.setImageType(imageType);
 	}
 
 	public IGImage getWrappedIGImage() {

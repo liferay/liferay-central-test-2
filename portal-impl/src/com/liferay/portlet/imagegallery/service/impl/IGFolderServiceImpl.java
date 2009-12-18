@@ -61,7 +61,8 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			parentFolderId, ActionKeys.ADD_FOLDER);
 
 		return igFolderLocalService.addFolder(
-			getUserId(), parentFolderId, name, description, serviceContext);
+			null, getUserId(), parentFolderId, name, description,
+			serviceContext);
 	}
 
 	public IGFolder copyFolder(

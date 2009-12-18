@@ -77,39 +77,6 @@ import java.util.List;
 public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage addImage(
-			long userId, long groupId, long folderId, String name,
-			String description, File file, String contentType,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addImage(
-			null, userId, groupId, folderId, name, description, file,
-			contentType, serviceContext);
-	}
-
-	public IGImage addImage(
-			long userId, long groupId, long folderId, String name,
-			String description, String fileName, byte[] bytes,
-			String contentType, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addImage(
-			null, userId, groupId, folderId, name, description, fileName, bytes,
-			contentType, serviceContext);
-	}
-
-	public IGImage addImage(
-			long userId, long groupId, long folderId, String name,
-			String description, String fileName, InputStream is,
-			String contentType, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addImage(
-			null, userId, groupId, folderId, name, description, fileName, is,
-			contentType, serviceContext);
-	}
-
-	public IGImage addImage(
 			String uuid, long userId, long groupId, long folderId, String name,
 			String description, File file, String contentType,
 			ServiceContext serviceContext)
@@ -183,14 +150,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				image.setCustom2ImageId(counterLocalService.increment());
 			}
 
+			image.setExpandoBridgeAttributes(serviceContext);
+
 			igImagePersistence.update(image, false);
-
-			// Images
-
-			saveImages(
-				image.getLargeImageId(), renderedImage, image.getSmallImageId(),
-				image.getCustom1ImageId(), image.getCustom2ImageId(), bytes,
-				contentType);
 
 			// Resources
 
@@ -207,17 +169,18 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 					serviceContext.getGuestPermissions());
 			}
 
+			// Images
+
+			saveImages(
+				image.getLargeImageId(), renderedImage, image.getSmallImageId(),
+				image.getCustom1ImageId(), image.getCustom2ImageId(), bytes,
+				contentType);
+
 			// Asset
 
 			updateAsset(
 				userId, image, serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames(), contentType);
-
-			// Expando
-
-			ExpandoBridge expandoBridge = image.getExpandoBridge();
-
-			expandoBridge.setAttributes(serviceContext);
 
 			// Social
 
@@ -299,29 +262,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public void deleteImage(IGImage image)
 		throws PortalException, SystemException {
 
-		// Indexer
+		// Image
 
-		try {
-			Indexer.deleteImage(image.getCompanyId(), image.getImageId());
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + image.getImageId(), se);
-		}
-
-		// Social
-
-		socialActivityLocalService.deleteActivities(
-			IGImage.class.getName(), image.getImageId());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			IGImage.class.getName(), image.getImageId());
-
-		// Asset
-
-		assetEntryLocalService.deleteEntry(
-			IGImage.class.getName(), image.getImageId());
+		igImagePersistence.remove(image);
 
 		// Resources
 
@@ -334,9 +277,29 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		imageLocalService.deleteImage(image.getSmallImageId());
 		imageLocalService.deleteImage(image.getLargeImageId());
 
-		// Image
+		// Asset
 
-		igImagePersistence.remove(image);
+		assetEntryLocalService.deleteEntry(
+			IGImage.class.getName(), image.getImageId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			IGImage.class.getName(), image.getImageId());
+
+		// Social
+
+		socialActivityLocalService.deleteActivities(
+			IGImage.class.getName(), image.getImageId());
+
+		// Indexer
+
+		try {
+			Indexer.deleteImage(image.getCompanyId(), image.getImageId());
+		}
+		catch (SearchException se) {
+			_log.error("Deleting index " + image.getImageId(), se);
+		}
 	}
 
 	public void deleteImage(long imageId)
@@ -596,6 +559,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.setFolderId(folderId);
 			image.setName(name);
 			image.setDescription(description);
+			image.setExpandoBridgeAttributes(serviceContext);
 
 			igImagePersistence.update(image, false);
 
@@ -615,12 +579,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			updateAsset(
 				userId, image, assetCategoryIds, assetTagNames, contentType);
-
-			// Expando
-
-			ExpandoBridge expandoBridge = image.getExpandoBridge();
-
-			expandoBridge.setAttributes(serviceContext);
 
 			// Social
 

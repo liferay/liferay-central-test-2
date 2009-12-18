@@ -70,16 +70,22 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		return folder;
 	}
 
-	public String getNameWithExtension() {
-		String nameWithExtension = getName();
+	public int getImageSize() {
+		if (_imageSize == null) {
+			try {
+				Image largeImage = ImageLocalServiceUtil.getImage(
+					getLargeImageId());
 
-		if (Validator.isNull(nameWithExtension)) {
-			nameWithExtension = String.valueOf(getImageId());
+				_imageSize = new Integer(largeImage.getSize());
+			}
+			catch (Exception e) {
+				_imageSize = new Integer(0);
+
+				_log.error(e);
+			}
 		}
 
-		String type = getImageType();
-
-		return getNameWithExtension(nameWithExtension, type);
+		return _imageSize.intValue();
 	}
 
 	public String getImageType() {
@@ -100,31 +106,25 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		return _imageType;
 	}
 
+	public String getNameWithExtension() {
+		String nameWithExtension = getName();
+
+		if (Validator.isNull(nameWithExtension)) {
+			nameWithExtension = String.valueOf(getImageId());
+		}
+
+		String type = getImageType();
+
+		return getNameWithExtension(nameWithExtension, type);
+	}
+
 	public void setImageType(String imageType) {
 		_imageType = imageType;
 	}
 
-	public int getImageSize() {
-		if (_imageSize == null) {
-			try {
-				Image largeImage = ImageLocalServiceUtil.getImage(
-					getLargeImageId());
-
-				_imageSize = new Integer(largeImage.getSize());
-			}
-			catch (Exception e) {
-				_imageSize = new Integer(0);
-
-				_log.error(e);
-			}
-		}
-
-		return _imageSize.intValue();
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(IGImageImpl.class);
 
-	private String _imageType;
 	private Integer _imageSize;
+	private String _imageType;
 
 }

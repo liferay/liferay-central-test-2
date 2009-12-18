@@ -44,7 +44,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.util.AssetUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
@@ -65,15 +64,6 @@ import java.util.List;
  * @author Alexander Chow
  */
 public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
-
-	public IGFolder addFolder(
-			long userId, long parentFolderId, String name, String description,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addFolder(
-			null, userId, parentFolderId, name, description, serviceContext);
-	}
 
 	public IGFolder addFolder(
 			String uuid, long userId, long parentFolderId, String name,
@@ -100,6 +90,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
+		folder.setExpandoBridgeAttributes(serviceContext);
 
 		igFolderPersistence.update(folder, false);
 
@@ -117,12 +108,6 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				folder, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
-
-		// Expando
-
-		ExpandoBridge expandoBridge = folder.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		return folder;
 	}
@@ -173,6 +158,16 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	public void deleteFolder(IGFolder folder)
 		throws PortalException, SystemException {
 
+		// Folder
+
+		igFolderPersistence.remove(folder);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			folder.getCompanyId(), IGFolder.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
+
 		// Folders
 
 		List<IGFolder> folders = igFolderPersistence.findByG_P(
@@ -191,16 +186,6 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		expandoValueLocalService.deleteValues(
 			IGFolder.class.getName(), folder.getFolderId());
-
-		// Resources
-
-		resourceLocalService.deleteResource(
-			folder.getCompanyId(), IGFolder.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
-
-		// Folder
-
-		igFolderPersistence.remove(folder);
 	}
 
 	public void deleteFolder(long folderId)
@@ -385,14 +370,9 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
+		folder.setExpandoBridgeAttributes(serviceContext);
 
 		igFolderPersistence.update(folder, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = folder.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Merge folders
 
