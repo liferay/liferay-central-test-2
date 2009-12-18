@@ -23,26 +23,25 @@
 package com.liferay.portal;
 
 /**
- * <a href="UserFullNameException.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ContactFullNameException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Amos Fong
  */
-public class UserFullNameException extends PortalException {
+public class ContactFullNameException extends PortalException {
 
-	public UserFullNameException() {
+	public ContactFullNameException() {
 		super();
 	}
 
-	public UserFullNameException(String msg) {
+	public ContactFullNameException(String msg) {
 		super(msg);
 	}
 
-	public UserFullNameException(String msg, Throwable cause) {
+	public ContactFullNameException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public UserFullNameException(Throwable cause) {
+	public ContactFullNameException(Throwable cause) {
 		super(cause);
 	}
 

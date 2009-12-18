@@ -23,6 +23,7 @@
 package com.liferay.portlet.login.action;
 
 import com.liferay.portal.ContactFirstNameException;
+import com.liferay.portal.ContactFullNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
@@ -33,7 +34,6 @@ import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.UserEmailAddressException;
-import com.liferay.portal.UserFullNameException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
@@ -97,6 +97,7 @@ public class CreateAccountAction extends PortletAction {
 		catch (Exception e) {
 			if (e instanceof CaptchaTextException ||
 				e instanceof ContactFirstNameException ||
+				e instanceof ContactFullNameException ||
 				e instanceof ContactLastNameException ||
 				e instanceof DuplicateUserEmailAddressException ||
 				e instanceof DuplicateUserScreenNameException ||
@@ -106,7 +107,6 @@ public class CreateAccountAction extends PortletAction {
 				e instanceof ReservedUserEmailAddressException ||
 				e instanceof ReservedUserScreenNameException ||
 				e instanceof UserEmailAddressException ||
-				e instanceof UserFullNameException ||
 				e instanceof UserIdException ||
 				e instanceof UserPasswordException ||
 				e instanceof UserScreenNameException ||

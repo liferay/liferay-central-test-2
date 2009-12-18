@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.ContactBirthdayException;
 import com.liferay.portal.ContactFirstNameException;
+import com.liferay.portal.ContactFullNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
@@ -41,7 +42,6 @@ import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserEmailAddressException;
-import com.liferay.portal.UserFullNameException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
@@ -3199,7 +3199,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				}
 			}
 
-			validateName(user.getCompanyId(), firstName, middleName, lastName);
+			validateFullName(
+				user.getCompanyId(), firstName, middleName, lastName);
 		}
 
 		if (Validator.isNotNull(smsSn) && !Validator.isEmailAddress(smsSn)) {
@@ -3242,7 +3243,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		validateName(companyId, firstName, middleName, lastName);
+		validateFullName(companyId, firstName, middleName, lastName);
 	}
 
 	protected void validateEmailAddress(long companyId, String emailAddress)
@@ -3272,7 +3273,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validateName(
+	protected void validateFullName(
 			long companyId, String firstName, String middleName,
 			String lastName)
 		throws PortalException, SystemException {
@@ -3290,7 +3291,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (!fullNameValidator.validate(
 				companyId, firstName, middleName, lastName)) {
 
-			throw new UserFullNameException();
+			throw new ContactFullNameException();
 		}
 	}
 
