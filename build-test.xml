@@ -14,31 +14,6 @@
 	<propertycopy name="db.username" from="db.${db.type}.username" silent="true" />
 	<propertycopy name="db.password" from="db.${db.type}.password" silent="true" />
 
-	<target name="deploy-simple-server-plugins">
-		<property name="liferay.home" value="${simple.server.dir}/.." />
-
-		<delete dir="${liferay.home}/data" />
-		<delete dir="${liferay.home}/deploy" />
-
-		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
-			<arg line="/c svn update" />
-		</exec>
-
-		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${simple.server.dir}
-app.server.lib.global.dir=${simple.server.lib.global.dir}
-app.server.portal.dir=${simple.server.portal.dir}
-
-plugins.includes=${plugins.includes}</echo>
-
-		<ant dir="${lp.plugins.dir}/${plugin.types}" inheritAll="false">
-			<target name="clean" />
-			<target name="deploy" />
-		</ant>
-
-		<delete dir="${lp.plugins.dir}/dist" />
-		<mkdir dir="${lp.plugins.dir}/dist" />
-	</target>
-
 	<target name="prepare-common">
 		<antcall target="prepare-portal-properties" inheritAll="false" />
 
@@ -72,27 +47,6 @@ plugins.includes=${plugins.includes}</echo>
 		<antcall target="prepare-common" />
 	</target>
 
-	<target name="prepare-portal-properties">
-		<exec executable="cmd.exe">
-			<arg line="/c svn revert portal-impl/src/portal.properties" />
-		</exec>
-
-		<replace file="portal-impl/src/portal.properties">
-			<replacefilter
-				token="#upgrade.processes="
-				value="upgrade.processes="
-			/>
-			<replacefilter
-				token="#com.liferay.portal.upgrade.UpgradeProcess_"
-				value="com.liferay.portal.upgrade.UpgradeProcess_"
-			/>
-			<replacefilter
-				token="verify.frequency=0"
-				value="verify.frequency=1"
-			/>
-		</replace>
-	</target>
-
 	<target name="prepare-portal-ext-properties">
 		<echo file="portal-impl/src/portal-ext.properties"><![CDATA[jdbc.default.jndi.name=
 
@@ -124,6 +78,27 @@ jdbc.default.numHelperThreads=1]]></echo>
 		</if>
 	</target>
 
+	<target name="prepare-portal-properties">
+		<exec executable="cmd.exe">
+			<arg line="/c svn revert portal-impl/src/portal.properties" />
+		</exec>
+
+		<replace file="portal-impl/src/portal.properties">
+			<replacefilter
+				token="#upgrade.processes="
+				value="upgrade.processes="
+			/>
+			<replacefilter
+				token="#com.liferay.portal.upgrade.UpgradeProcess_"
+				value="com.liferay.portal.upgrade.UpgradeProcess_"
+			/>
+			<replacefilter
+				token="verify.frequency=0"
+				value="verify.frequency=1"
+			/>
+		</replace>
+	</target>
+
 	<target name="prepare-postgresql-8.3">
 		<echo file="test.${user.name}.properties">db.type=postgresql-8.3</echo>
 
@@ -136,53 +111,46 @@ jdbc.default.numHelperThreads=1]]></echo>
 		<antcall target="prepare-common" />
 	</target>
 
-	<target name="prepare-tck">
-		<antcall target="prepare-portal-ext-properties" />
+	<target name="prepare-vm-server">
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
 
-		<echo file="portal-impl/src/portal-ext.properties" append="true">
+		<delete dir="dist" />
+		<mkdir dir="dist" />
 
-tck.url=true</echo>
+		<ant antfile="build-dist.xml" target="zip-portal-war-2.4" />
 
-		<exec executable="cmd.exe">
-			<arg line="/c svn revert portal-web/docroot/WEB-INF/web.xml" />
+		<echo>Copying ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} to ${vm.drive}\${vm.host}\${vm.host}.vmdk</echo>
+
+		<exec executable="cmd">
+			<arg line="/c copy /y ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} ${vm.drive}\${vm.host}\${vm.host}.vmdk" />
 		</exec>
 
-		<antcall target="clean" />
-		<antcall target="start" />
+		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx start" />
+		</exec>
 
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+		<sleep seconds="30" />
 
-		<delete dir="tools/tck" />
+		<echo file="hosts">127.0.0.1	localhost
+127.0.0.1	liferay-b711dd9
+127.0.0.1	www.able.com
+127.0.0.1	www.baker.com
+127.0.0.1	www.charlie.com
+127.0.0.1	www.dog.com
+127.0.0.1	www.easy.com
+127.0.0.1	www.fox.com</echo>
 
-		<unzip src="tools/portlet-tck070508.zip" dest="tools/tck" />
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} hosts dist\liferay-portal-${lp.version}.war tunnel-web\tunnel-web.war ${vm.username}@${vm.host}:/" />
+		</exec>
 
-		<replace file="tools/tck/bin/ts.jte">
-			<replacefilter token="http://localhost:8080/pluto/tck" value="http://localhost:8080/c/portal/tck" />
-		</replace>
+		<delete file="hosts" />
 
-		<echo file="tools/tck/bin/build.properties" append="true">
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move /y C:\hosts C:\WINDOWS\system32\drivers\etc\hosts" />
+		</exec>
 
-work.dir=${basedir.unix}/tools/tck/work</echo>
-
-		<property name="liferay.home" value="${app.server.dir}/.." />
-
-		<delete dir="${liferay.home}/data" />
-		<delete dir="${liferay.home}/deploy" />
-
-		<copy todir="${liferay.home}/deploy" flatten="true">
-			<fileset
-				dir="tools/tck"
-				includes="**/*.war"
-			/>
-		</copy>
-
-		<antcall target="rebuild-database" inheritAll="false" />
-	</target>
-
-	<target name="prepare-tomcat-6.0-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
-
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+		<ant antfile="build-dist.xml" target="zip-portal-dependencies" />
 	</target>
 
 	<target name="rebuild-database">
@@ -397,6 +365,28 @@ file.
 		<delete file="${sql.file}" />
 	</target>
 
+	<target name="replace-remote-file">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${remote.host}:${remote.file} ${tstamp.value}" />
+		</exec>
+
+		<replace
+			file="${tstamp.value}"
+			token="${remote.replace.token}"
+			value="${remote.replace.value}"
+		/>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} ${tstamp.value} ${vm.username}@${remote.host}:${remote.file}" />
+		</exec>
+
+		<delete file="${tstamp.value}" />
+	</target>
+
 	<target name="revert-test-properties">
 		<exec executable="cmd.exe">
 			<arg line="/c svn revert portal-impl/test/test-portal-impl.properties" />
@@ -405,48 +395,6 @@ file.
 		<exec executable="cmd.exe">
 			<arg line="/c svn revert portal-web/test/test-portal-web.properties" />
 		</exec>
-	</target>
-
-	<target name="prepare-vm-server">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
-
-		<delete dir="dist" />
-		<mkdir dir="dist" />
-
-		<ant antfile="build-dist.xml" target="zip-portal-war-2.4" />
-
-		<echo>Copying ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} to ${vm.drive}\${vm.host}\${vm.host}.vmdk</echo>
-
-		<exec executable="cmd">
-			<arg line="/c copy /y ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} ${vm.drive}\${vm.host}\${vm.host}.vmdk" />
-		</exec>
-
-		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
-			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx start" />
-		</exec>
-
-		<sleep seconds="30" />
-
-		<echo file="hosts">127.0.0.1	localhost
-127.0.0.1	liferay-b711dd9
-127.0.0.1	www.able.com
-127.0.0.1	www.baker.com
-127.0.0.1	www.charlie.com
-127.0.0.1	www.dog.com
-127.0.0.1	www.easy.com
-127.0.0.1	www.fox.com</echo>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} hosts dist\liferay-portal-${lp.version}.war tunnel-web\tunnel-web.war ${vm.username}@${vm.host}:/" />
-		</exec>
-
-		<delete file="hosts" />
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move /y C:\hosts C:\WINDOWS\system32\drivers\etc\hosts" />
-		</exec>
-
-		<ant antfile="build-dist.xml" target="zip-portal-dependencies" />
 	</target>
 
 	<target name="run-selenium-test">
@@ -483,10 +431,10 @@ file.
 				<equals arg1="${portlet.plugins.includes}" arg2="$${portlet.plugins.includes}" />
 			</not>
 			<then>
-				<antcall target="deploy-simple-server-plugins">
-					<param name="plugin.types" value="portlets" />
-					<param name="plugins.includes" value="${portlet.plugins.includes}" />
-				</antcall>
+				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
+					<property name="plugin.types" value="portlets" />
+					<property name="plugins.includes" value="${portlet.plugins.includes}" />
+				</ant>
 			</then>
 		</if>
 
@@ -495,10 +443,10 @@ file.
 				<equals arg1="${theme.plugins.includes}" arg2="$${theme.plugins.includes}" />
 			</not>
 			<then>
-				<antcall target="deploy-simple-server-plugins">
-					<param name="plugin.types" value="themes" />
-					<param name="plugins.includes" value="${theme.plugins.includes}" />
-				</antcall>
+				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
+					<property name="plugin.types" value="themes" />
+					<property name="plugins.includes" value="${theme.plugins.includes}" />
+				</ant>
 			</then>
 		</if>
 
@@ -535,19 +483,6 @@ file.
 		</parallel>
 	</target>
 
-	<target name="run-tomcat-6.0">
-		<antcall target="run-simple-server">
-			<param name="simple.server.dir" value="${app.server.tomcat.dir}" />
-			<param name="simple.server.bin.dir" value="${app.server.tomcat.bin.dir}" />
-			<param name="simple.server.deploy.dir" value="${app.server.tomcat.deploy.dir}" />
-			<param name="simple.server.lib.global.dir" value="${app.server.tomcat.lib.global.dir}" />
-			<param name="simple.server.portal.dir" value="${app.server.tomcat.portal.dir}" />
-			<param name="simple.server.start.executable" value="catalina${file.suffix.bat}" />
-			<param name="simple.server.start.executable.arg.line" value="run" />
-			<param name="simple.server.stop.executable" value="shutdown${file.suffix.bat}" />
-		</antcall>
-	</target>
-
 	<target name="start-selenium">
 		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true">
 			<arg line="-port 14444 -singleWindow" />
@@ -580,69 +515,5 @@ file.
 		<ant dir="portal-kernel" target="test" inheritAll="false" />
 
 		<!--<ant dir="util-java" target="test" inheritAll="false" />-->
-	</target>
-
-	<target name="test-db">
-		<ant antfile="build-test-db-mysql.xml" target="test-db-mysql-5.0" inheritAll="false" />
-		<ant antfile="build-test-db-oracle.xml" target="test-db-oracle-10" inheritAll="false" />
-		<ant antfile="build-test-db-postgresql.xml" target="test-db-postgresql-8.3" inheritAll="false" />
-		<ant antfile="build-test-db-sql-server.xml" target="test-db-sql-server-2005" inheritAll="false" />
-	</target>
-
-	<target name="test-tck">
-		<antcall target="prepare-tck" />
-
-		<parallel>
-			<exec dir="${app.server.tomcat.bin.dir}" executable="catalina${file.suffix.bat}" resolveexecutable="true">
-				<arg line="run" />
-			</exec>
-
-			<sequential>
-				<waitfor>
-					<http url="http://localhost:8080" />
-				</waitfor>
-
-				<sleep seconds="60" />
-
-				<exec dir="tools/tck/src/com" executable="${basedir}/tools/tck/bin/tsant.bat">
-					<arg line="runclient" />
-					<env key="TS_HOME" value="${basedir}\tools\tck" />
-				</exec>
-
-				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown${file.suffix.bat}" resolveexecutable="true" />
-			</sequential>
-		</parallel>
-
-		<mkdir dir="portal-impl/test-results" />
-
-		<java
-			classname="com.liferay.portal.tools.TCKtoJUnitConverter"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<arg value="tools/tck/work/jtData/harness.trace" />
-			<arg value="portal-impl/test-results" />
-		</java>
-	</target>
-
-	<target name="test-themes">
-		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
-
-		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
-			<arg line="/c svn update" />
-		</exec>
-
-		<antcall target="revert-test-properties" />
-
-		<antcall target="start-selenium" />
-
-		<antcall target="run-tomcat-6.0">
-			<param name="test.class" value="ThemesTestSuite" />
-			<param name="theme.plugins.includes" value="08-gulona-theme,liferay-jedi-theme" />
-		</antcall>
-
-		<antcall target="stop-selenium" />
 	</target>
 </project>

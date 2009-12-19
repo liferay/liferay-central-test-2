@@ -111,72 +111,23 @@ JkShmFile logs/jk-runtime-status</echo>
 		</exec>
 	</target>
 
-	<target name="prepare-cluster-tomcat-node">
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-6.0-${lp.version}.zip ${vm.username}@${cluster-node.host}:/" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${cluster-node.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-6.0-5.3.0.zip -oC:\" />
-		</exec>
-
-		<antcall target="replace-remote-file">
-			<param name="remote.host" value="${cluster-node.host}" />
-			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.18/bin/startup.bat" />
-			<param name="remote.replace.token" value="set CATALINA_HOME=%cd%" />
-			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-6.0.18" />
-		</antcall>
-
-		<antcall target="replace-remote-file">
-			<param name="remote.host" value="${cluster-node.host}" />
-			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.18/bin/shutdown.bat" />
-			<param name="remote.replace.token" value="set CATALINA_HOME=%cd%" />
-			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-6.0.18" />
-		</antcall>
-
-		<antcall target="replace-remote-file">
-			<param name="remote.host" value="${cluster-node.host}" />
-			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.18/conf/server.xml" />
-			<param name="remote.replace.token" value="&lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;localhost&quot;&gt;" />
-			<param name="remote.replace.value" value="&lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;localhost&quot; jvmRoute=&quot;${cluster-node.value}&quot;&gt;" />
-		</antcall>
-
-		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
-
-		<echo file="portal-impl/src/portal-ext.properties" append="true">
-
-net.sf.ehcache.configurationResourceName=/ehcache/hibernate-clustered.xml
-
-ehcache.multi.vm.config.location=/ehcache/liferay-multi-vm-clustered.xml
-
-cluster.link.enabled=true
-
-web.server.display.node=true</echo>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} portal-impl/src/portal-ext.properties ${vm.username}@${cluster-node.host}:/liferay-portal-${lp.version}/tomcat-6.0.18/webapps/ROOT/WEB-INF/classes" />
-		</exec>
-
-		<delete file="portal-impl/src/portal-ext.properties" />
+	<target name="prepare-cluster-tomcat-6.0-node-1">
+		<ant antfile="build-test-tomcat-6.0.xml" target="prepare-cluster-tomcat-6.0-node">
+			<property name="cluster-node.host" value="${vm.host.cluster-node-1}" />
+			<property name="cluster-node.value" value="node-1" />
+		</ant>
 	</target>
 
-	<target name="prepare-cluster-tomcat-node-1">
-		<antcall target="prepare-cluster-tomcat-node">
-			<param name="cluster-node.host" value="${vm.host.cluster-node-1}" />
-			<param name="cluster-node.value" value="node-1" />
-		</antcall>
+	<target name="prepare-cluster-tomcat-6.0-node-2">
+		<ant antfile="build-test-tomcat-6.0.xml" target="prepare-cluster-tomcat-6.0-node">
+			<property name="cluster-node.host" value="${vm.host.cluster-node-2}" />
+			<property name="cluster-node.value" value="node-2" />
+		</ant>
 	</target>
 
-	<target name="prepare-cluster-tomcat-node-2">
-		<antcall target="prepare-cluster-tomcat-node">
-			<param name="cluster-node.host" value="${vm.host.cluster-node-2}" />
-			<param name="cluster-node.value" value="node-2" />
-		</antcall>
-	</target>
-
-	<target name="prepare-cluster-tomcats">
-		<antcall target="prepare-cluster-tomcat-node-1" />
-		<antcall target="prepare-cluster-tomcat-node-2" />
+	<target name="prepare-cluster-tomcat-6.0">
+		<antcall target="prepare-cluster-tomcat-6.0-node-1" />
+		<antcall target="prepare-cluster-tomcat-6.0-node-2" />
 	</target>
 
 	<target name="prepare-cluster-vm-node">
@@ -212,40 +163,16 @@ web.server.display.node=true</echo>
 		<antcall target="prepare-cluster-vm-node-2" />
 	</target>
 
-	<target name="replace-remote-file">
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${remote.host}:${remote.file} ${tstamp.value}" />
-		</exec>
-
-		<replace
-			file="${tstamp.value}"
-			token="${remote.replace.token}"
-			value="${remote.replace.value}"
-		/>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${tstamp.value} ${vm.username}@${remote.host}:${remote.file}" />
-		</exec>
-
-		<delete file="${tstamp.value}" />
-	</target>
-
-	<target name="test-cluster">
-		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
-
-		<mkdir dir="dist" />
-
-		<ant antfile="build-dist.xml" target="zip-tomcat-6.0" />
+	<target name="run-cluster-tomcat-6.0-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
 
 		<antcall target="prepare-cluster-vms" />
 
+		<ant antfile="build-test-tomcat-6.0.xml" target="prepare-zip-tomcat-6.0"> </ant>
+
 		<antcall target="prepare-cluster-apache-node-1" />
 
-		<antcall target="prepare-cluster-tomcats" />
+		<antcall target="prepare-cluster-tomcat-6.0" />
 
 		<antcall target="rebuild-database" inheritAll="false" />
 

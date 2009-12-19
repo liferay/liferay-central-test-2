@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+
+<project name="portal-test-tags" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+	<import file="build-test.xml" />
+
+	<target name="run-tags-jboss-tomcat-5.0-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<ant antfile="build-test-jboss-tomcat-5.0.xml" target="run-selenium-jboss-tomcat-5.0">
+			<property name="test.name" value="TagsTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-tags-tomcat-5.5-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<ant antfile="build-test-tomcat-5.5.xml" target="run-selenium-tomcat-5.5">
+			<property name="test.name" value="TagsTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-tags-tomcat-6.0-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+			<property name="test.name" value="TagsTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-tags-tomcat-6.0-oracle-10">
+		<antcall target="prepare-oracle-10" />
+
+		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+			<property name="test.name" value="TagsTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-tags-tomcat-6.0-postgresql-8.3">
+		<antcall target="prepare-postgresql-8.3" />
+
+		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+			<property name="test.name" value="TagsTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-tags-tomcat-6.0-sql-server-2005">
+		<antcall target="prepare-sql-server-2005" />
+
+		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+			<property name="test.name" value="TagsTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-tags-weblogic-10.3-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<ant antfile="build-test-weblogic-10.3.xml" target="run-selenium-weblogic-10.3">
+			<property name="test.name" value="TagsTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-tags-websphere-6.1-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<ant antfile="build-test-websphere-6.1.xml" target="run-selenium-websphere-6.1">
+			<property name="test.name" value="TagsTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-tags-websphere-7.0-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
+
+		<ant antfile="build-test-websphere-7.0.xml" target="run-selenium-websphere-7.0">
+			<property name="test.name" value="TagsTestSuite" />
+		</ant>
+	</target>
+</project>

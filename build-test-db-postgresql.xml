@@ -4,7 +4,8 @@
 	<import file="build-test.xml" />
 
 	<target name="test-db-postgresql-8.3">
-		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
+		<antcall target="prepare-postgresql-8.3" />
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
 
 		<antcall target="test-db-postgresql-8.3-latest" />
 		<antcall target="test-db-postgresql-8.3-5.1.0" />
@@ -54,10 +55,10 @@
 
 		<antcall target="start-selenium" />
 
-		<antcall target="run-tomcat-6.0">
-			<param name="skip.rebuild-database" value="true" />
-			<param name="test.class" value="SmokeTestSuite" />
-		</antcall>
+		<ant antfile="build-test-tomcat-6.0.xml" target="run-tomcat-6.0">
+			<property name="skip.rebuild-database" value="true" />
+			<property name="test.class" value="SmokeTestSuite" />
+		</ant>
 
 		<antcall target="stop-selenium" />
 

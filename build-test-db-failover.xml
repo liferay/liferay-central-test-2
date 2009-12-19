@@ -1,51 +1,16 @@
 <?xml version="1.0"?>
 
 <project name="portal-test-db-failover" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
-	<import file="build-test-cluster.xml" />
+	<import file="build-test.xml" />
 
-	<target name="prepare-db-failover-tomcat">
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-6.0-${lp.version}.zip ${vm.username}@${vm.host}:/" />
-		</exec>
+	<target name="run-db-failover-tomcat-6.0-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
 
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-6.0-${lp.version}.zip -oC:\" />
-		</exec>
-
-		<antcall target="replace-remote-file">
-			<param name="remote.host" value="${vm.host}" />
-			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.18/bin/startup.bat" />
-			<param name="remote.replace.token" value="set CATALINA_HOME=%cd%" />
-			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-6.0.18" />
-		</antcall>
-	</target>
-
-	<target name="prepare-db-failover-vm">
-		<echo>Copying ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} to ${vm.drive}\${vm.host}\${vm.host}.vmdk</echo>
-
-		<exec executable="cmd">
-			<arg line="/c copy /y ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} ${vm.drive}\${vm.host}\${vm.host}.vmdk" />
-		</exec>
-
-		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
-			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx start" />
-		</exec>
-
-		<sleep seconds="60" />
-	</target>
-
-	<target name="test-db-failover">
-		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
-
-		<mkdir dir="dist" />
-
-		<ant antfile="build-dist.xml" target="zip-tomcat-6.0" />
-
-		<antcall target="prepare-db-failover-vm">
-			<param name="vm.vmdk.suffix" value="ldap" />
+		<antcall target="prepare-vm-server">
+			<param name="vm.vmdk.suffix" value="generic" />
 		 </antcall>
 
-		<antcall target="prepare-db-failover-tomcat" />
+		<ant antfile="build-test-tomcat-6.0.xml" target="prepare-vm-tomcat-6.0"> </ant>
 
 		<echo file="portal-impl/src/portal-ext.properties" append="true">
 

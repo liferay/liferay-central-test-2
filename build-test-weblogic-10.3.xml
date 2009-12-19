@@ -1,31 +1,9 @@
 <?xml version="1.0"?>
 
-<project name="portal-test-weblogic" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+<project name="portal-test-weblogic-10.3" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="run-weblogic-10.3">
-		<antcall target="rebuild-database" inheritAll="false" />
-
-		<parallel>
-			<exec executable="${plink.executable}">
-				<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\startWebLogic.cmd" />
-			</exec>
-
-			<sequential>
-				<waitfor>
-					<http url="http://${vm.host}:7001/console" />
-				</waitfor>
-
-				<antcall target="run-selenium-test" />
-
-				<exec executable="${plink.executable}">
-					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\stopWebLogic.cmd" />
-				</exec>
-			</sequential>
-		</parallel>
-	</target>
-
-	<target name="test-weblogic-10.3-common">
+	<target name="run-selenium-weblogic-10.3">
 		<antcall target="prepare-vm-server">
 			<param name="vm.vmdk.suffix" value="weblogic-10.3" />
 		</antcall>
@@ -121,7 +99,7 @@
 		<antcall target="start-selenium" />
 
 		<antcall target="run-weblogic-10.3">
-			<param name="test.class" value="SmokeTestSuite" />
+			<param name="test.class" value="${test.name}" />
 		</antcall>
 
 		<antcall target="stop-selenium" />
@@ -131,27 +109,25 @@
 		</exec>
 	</target>
 
-	<target name="test-weblogic-10.3-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-weblogic-10.3">
+		<antcall target="rebuild-database" inheritAll="false" />
 
-		<antcall target="test-weblogic-10.3-common" />
-	</target>
+		<parallel>
+			<exec executable="${plink.executable}">
+				<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\startWebLogic.cmd" />
+			</exec>
 
-	<target name="test-weblogic-10.3-oracle-10">
-		<antcall target="prepare-oracle-10" />
+			<sequential>
+				<waitfor>
+					<http url="http://${vm.host}:7001/console" />
+				</waitfor>
 
-		<antcall target="test-weblogic-10.3-common" />
-	</target>
+				<antcall target="run-selenium-test" />
 
-	<target name="test-weblogic-10.3-postgresql-8.3">
-		<antcall target="prepare-postgresql-8.3" />
-
-		<antcall target="test-weblogic-10.3-common" />
-	</target>
-
-	<target name="test-weblogic-10.3-sql-server-2005">
-		<antcall target="prepare-sql-server-2005" />
-
-		<antcall target="test-weblogic-10.3-common" />
+				<exec executable="${plink.executable}">
+					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\stopWebLogic.cmd" />
+				</exec>
+			</sequential>
+		</parallel>
 	</target>
 </project>

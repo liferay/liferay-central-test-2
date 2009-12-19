@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+<project name="portal-test-tomcat" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+	<import file="build-test.xml" />
+
+	<target name="prepare-db-sharding">
+		<exec executable="cmd.exe">
+			<arg line="/c mysql &lt; sql/create-sharded/create-sharded-mysql.sql" />
+		</exec>
+	</target>
+
+	<target name="test-db-sharding">
+		<antcall target="prepare-mysql-5.0" />
+
+		<antcall target="prepare-db-sharding" />
+
+		<antcall target="prepare-sharding-properties" />
+
+		<antcall target="test-tomcat-6.0-localhost" />
+	</target>
+
+	<target name="prepare-sharding-properties">
+		<echo file="portal-impl/src/portal-ext.properties" append="true"><![CDATA[
+
+jdbc.one.driverClassName=com.mysql.jdbc.Driver
+jdbc.one.url=jdbc:mysql://localhost/lportal1?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
+jdbc.one.username=
+jdbc.one.password=
+
+jdbc.two.driverClassName=com.mysql.jdbc.Driver
+jdbc.two.url=jdbc:mysql://localhost/lportal2?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
+jdbc.two.username=
+jdbc.two.password=
+
+shard.available.names=default,one,two
+
+spring.configs=\
+		META-INF/base-spring.xml,\
+        \
+        META-INF/hibernate-spring.xml,\
+        META-INF/infrastructure-spring.xml,\
+        META-INF/management-spring.xml,\
+        \
+        META-INF/util-spring.xml,\
+        \
+        META-INF/editor-spring.xml,\
+        META-INF/jcr-spring.xml,\
+        META-INF/messaging-core-spring.xml,\
+        META-INF/messaging-misc-spring.xml,\
+        META-INF/scheduler-spring.xml,\
+        META-INF/search-spring.xml,\
+        \
+        META-INF/counter-spring.xml,\
+        META-INF/document-library-spring.xml,\
+        META-INF/lock-spring.xml,\
+        META-INF/mail-spring.xml,\
+        META-INF/portal-spring.xml,\
+        META-INF/portlet-container-spring.xml,\
+        \
+        #META-INF/dynamic-data-source-spring.xml,\
+        META-INF/shard-data-source-spring.xml,\
+        #META-INF/monitoring-spring.xml,\
+        \
+        META-INF/ext-spring.xml]]></echo>
+	</target>
+
+	<target name="test-tomcat-6.0-localhost">
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+
+		<antcall target="revert-test-properties" />
+
+		<!--<antcall target="start-selenium" />
+
+		<antcall target="run-tomcat-6.0">
+			<param name="test.class" value="localhost" />
+		</antcall>
+
+		<antcall target="stop-selenium" />-->
+	</target>
+
+	<!--<target name="test-tomcat-6.0-able">
+		<antcall target="start-selenium" />
+
+		<antcall target="run-tomcat-6.0">
+			<param name="test.class" value="able" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+	</target>
+
+	<target name="test-tomcat-6.0-baker">
+		<antcall target="start-selenium" />
+
+		<antcall target="run-tomcat-6.0">
+			<param name="test.class" value="baker" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+	</target>-->
+
+</project>

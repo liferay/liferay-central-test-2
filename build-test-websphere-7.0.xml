@@ -1,25 +1,11 @@
 <?xml version="1.0"?>
 
-<project name="portal-test-websphere" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+<project name="portal-test-websphere-7.0" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="run-websphere-6.1">
-		<antcall target="rebuild-database" inheritAll="false" />
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\startServer.bat server1" />
-		</exec>
-
-		<antcall target="run-selenium-test" />
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\stopServer.bat server1" />
-		</exec>
-	</target>
-
-	<target name="test-websphere-6.1-common">
+	<target name="run-selenium-websphere-7.0">
 		<antcall target="prepare-vm-server">
-			<param name="vm.vmdk.suffix" value="websphere-6.1.0.21" />
+			<param name="vm.vmdk.suffix" value="websphere-7.0.0.0" />
 		</antcall>
 
 		<tstamp>
@@ -83,12 +69,12 @@ print AdminConfig.save()
 
 print AdminApp.list()
 
-applicationManager = AdminControl.queryNames('type=ApplicationManager,process=server1,*')
+appManager = AdminControl.queryNames('type=ApplicationManager,process=server1,*')
 
-print applicationManager
+print appManager
 
-print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-portal')
-print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-tunnel-web')</echo>
+print AdminControl.invoke(appManager, 'startApplication', 'liferay-portal')
+print AdminControl.invoke(appManager, 'startApplication', 'liferay-tunnel-web')</echo>
 
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} wsadmin.py ${vm.username}@${vm.host}:/" />
@@ -118,10 +104,14 @@ print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-tunne
 			value="${vm.host}:9080"
 		/>
 
+		<waitfor>
+			<http url="http://localhost:8080" />
+		</waitfor>
+
 		<antcall target="start-selenium" />
 
-		<antcall target="run-websphere-6.1">
-			<param name="test.class" value="SmokeTestSuite" />
+		<antcall target="run-websphere-7.0">
+			<param name="test.class" value="${test.name}" />
 		</antcall>
 
 		<antcall target="stop-selenium" />
@@ -131,27 +121,17 @@ print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-tunne
 		</exec>
 	</target>
 
-	<target name="test-websphere-6.1-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-websphere-7.0">
+		<antcall target="rebuild-database" inheritAll="false" />
 
-		<antcall target="test-websphere-6.1-common" />
-	</target>
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\startServer.bat server1" />
+		</exec>
 
-	<target name="test-websphere-6.1-oracle-10">
-		<antcall target="prepare-oracle-10" />
+		<antcall target="run-selenium-test" />
 
-		<antcall target="test-websphere-6.1-common" />
-	</target>
-
-	<target name="test-websphere-6.1-postgresql-8.3">
-		<antcall target="prepare-postgresql-8.3" />
-
-		<antcall target="test-websphere-6.1-common" />
-	</target>
-
-	<target name="test-websphere-6.1-sql-server-2005">
-		<antcall target="prepare-sql-server-2005" />
-
-		<antcall target="test-websphere-6.1-common" />
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\stopServer.bat server1" />
+		</exec>
 	</target>
 </project>

@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+
+<project name="portal-test-tomcat-5.5" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+	<import file="build-test.xml" />
+
+	<target name="prepare-cluster-tomcat-5.5-node">
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-5.5-${lp.version}.zip ${vm.username}@${cluster-node.host}:/" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${cluster-node.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-5.5-${lp.version}.zip -oC:\" />
+		</exec>
+
+		<antcall target="replace-remote-file">
+			<param name="remote.host" value="${cluster-node.host}" />
+			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-5.5.27/bin/startup.bat" />
+			<param name="remote.replace.token" value="set CATALINA_HOME=%cd%" />
+			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-5.5.27" />
+		</antcall>
+
+		<antcall target="replace-remote-file">
+			<param name="remote.host" value="${cluster-node.host}" />
+			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-5.5.27/bin/shutdown.bat" />
+			<param name="remote.replace.token" value="set CATALINA_HOME=%cd%" />
+			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-5.5.27" />
+		</antcall>
+
+		<antcall target="replace-remote-file">
+			<param name="remote.host" value="${cluster-node.host}" />
+			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-5.5.27/conf/server.xml" />
+			<param name="remote.replace.token" value="&lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;localhost&quot;&gt;" />
+			<param name="remote.replace.value" value="&lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;localhost&quot; jvmRoute=&quot;${cluster-node.value}&quot;&gt;" />
+		</antcall>
+
+		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
+
+		<echo file="portal-impl/src/portal-ext.properties" append="true">
+
+net.sf.ehcache.configurationResourceName=/ehcache/hibernate-clustered.xml
+
+ehcache.multi.vm.config.location=/ehcache/liferay-multi-vm-clustered.xml
+
+cluster.link.enabled=true
+
+web.server.display.node=true</echo>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} portal-impl/src/portal-ext.properties ${vm.username}@${cluster-node.host}:/liferay-portal-${lp.version}/tomcat-6.0.18/webapps/ROOT/WEB-INF/classes" />
+		</exec>
+
+		<delete file="portal-impl/src/portal-ext.properties" />
+	</target>
+
+	<target name="prepare-vm-tomcat-5.5">
+		<antcall target="prepare-zip-tomcat-5.5" />
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-5.5-${lp.version}.zip ${vm.username}@${vm.host}:/" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-5.5-${lp.version}.zip -oC:\" />
+		</exec>
+
+		<antcall target="replace-remote-file">
+			<param name="remote.host" value="${vm.host}" />
+			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-5.5.27/bin/startup.bat" />
+			<param name="remote.replace.token" value="set CATALINA_HOME=%cd%" />
+			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-5.5.27" />
+		</antcall>
+	</target>
+
+	<target name="prepare-zip-tomcat-5.5">
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+
+		<antcall target="revert-test-properties" />
+
+		<mkdir dir="dist" />
+
+		<ant antfile="build-dist.xml" target="zip-tomcat-5.5" />
+	</target>
+
+	<target name="run-selenium-tomcat-5.5">
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+
+		<antcall target="revert-test-properties" />
+
+		<antcall target="start-selenium" />
+
+		<antcall target="run-tomcat-5.5">
+			<param name="portlet.plugins.includes" value="${portlet.plugins.includes}" />
+			<param name="test.class" value="${test.name}" />
+			<param name="theme.plugins.includes" value="${theme.plugins.includes}" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+	</target>
+
+	<target name="run-tomcat-5.5">
+		<antcall target="run-simple-server">
+			<param name="simple.server.dir" value="${app.server.tomcat.dir}" />
+			<param name="simple.server.bin.dir" value="${app.server.tomcat.bin.dir}" />
+			<param name="simple.server.deploy.dir" value="${app.server.tomcat.deploy.dir}" />
+			<param name="simple.server.lib.global.dir" value="${app.server.tomcat.lib.global.dir}" />
+			<param name="simple.server.portal.dir" value="${app.server.tomcat.portal.dir}" />
+			<param name="simple.server.start.executable" value="catalina${file.suffix.bat}" />
+			<param name="simple.server.start.executable.arg.line" value="run" />
+			<param name="simple.server.stop.executable" value="shutdown${file.suffix.bat}" />
+		</antcall>
+	</target>
+</project>
