@@ -11,7 +11,7 @@
 		</ant>
 	</target>
 
-	<target name="run-tags-tomcat-5.5-mysql-5.0">
+	<target name="run-portal-web-tomcat-5.5-mysql-5.0">
 		<antcall target="prepare-mysql-5.0" />
 
 		<ant antfile="build-test-tomcat-5.5.xml" target="run-selenium-tomcat-5.5">
