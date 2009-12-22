@@ -22,7 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -31,7 +30,6 @@ import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.verify.VerifyException;
@@ -45,10 +43,6 @@ import com.liferay.portal.verify.VerifyProcessUtil;
  * @author Raymond Augé
  */
 public class StartupHelper {
-
-	public void createTablesAndPopulate() throws SystemException {
-		ReleaseLocalServiceUtil.createTablesAndPopulate();
-	}
 
 	public void setDropIndexes(boolean dropIndexes) {
 		_dropIndexes = dropIndexes;
