@@ -103,8 +103,6 @@ import javax.mail.internet.InternetAddress;
 
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.lang.time.StopWatch;
-
 /**
  * <a href="MBMessageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -243,14 +241,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		StopWatch stopWatch = null;
-
-		if (_log.isDebugEnabled()) {
-			stopWatch = new StopWatch();
-
-			stopWatch.start();
-		}
-
 		// Message
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -278,8 +268,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		validate(subject, body);
 
 		long messageId = counterLocalService.increment();
-
-		logAddMessage(messageId, stopWatch, 1);
 
 		MBMessage message = mbMessagePersistence.create(messageId);
 
@@ -359,8 +347,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			updatePriorities(thread.getThreadId(), priority);
 		}
 
-		logAddMessage(messageId, stopWatch, 2);
-
 		// Message
 
 		message.setCategoryId(categoryId);
@@ -416,14 +402,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		logAddMessage(messageId, stopWatch, 3);
-
 		// Commit
 
 		mbThreadPersistence.update(thread, false);
 		mbMessagePersistence.update(message, false);
-
-		logAddMessage(messageId, stopWatch, 4);
 
 		// Resources
 
@@ -445,8 +427,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		logAddMessage(messageId, stopWatch, 5);
-
 		if (!message.isDiscussion() &&
 			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
 
@@ -454,8 +434,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			mbStatsUserLocalService.updateStatsUser(
 				message.getGroupId(), userId, now);
-
-			logAddMessage(messageId, stopWatch, 6);
 
 			// Category
 
@@ -470,23 +448,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		logAddMessage(messageId, stopWatch, 7);
-
 		// Asset
 
 		updateAsset(
 			userId, message, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
 
-		logAddMessage(messageId, stopWatch, 8);
-
 		// Expando
 
 		ExpandoBridge expandoBridge = message.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
-
-		logAddMessage(messageId, stopWatch, 9);
 
 		// Social
 
@@ -507,13 +479,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				messageId, activityType, StringPool.BLANK, receiverUserId);
 		}
 
-		logAddMessage(messageId, stopWatch, 10);
-
 		// Subscriptions
 
 		notifySubscribers(message, serviceContext, false);
-
-		logAddMessage(messageId, stopWatch, 11);
 
 		// Testing roll back
 
@@ -524,8 +492,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Indexer
 
 		reIndex(message);
-
-		logAddMessage(messageId, stopWatch, 12);
 
 		return message;
 	}
@@ -1735,20 +1701,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				socialActivityLocalService.deleteActivity(
 					socialActivity.getActivityId());
 			}
-		}
-	}
-
-	protected void logAddMessage(
-		long messageId, StopWatch stopWatch, int block) {
-
-		if (_log.isDebugEnabled()) {
-			if ((messageId != 1) && ((messageId % 10) != 0)) {
-				return;
-			}
-
-			_log.debug(
-				"Adding message block " + block + " for " + messageId +
-					" takes " + stopWatch.getTime() + " ms");
 		}
 	}
 
