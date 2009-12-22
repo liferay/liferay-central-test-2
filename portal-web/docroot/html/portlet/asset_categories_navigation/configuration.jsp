@@ -105,7 +105,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button type="save" />
+		<aui:button type="submit" />
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
