@@ -131,7 +131,16 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 			DLFileRank lastFileRank = fileRanks.get(fileRanks.size() - 1);
 
-			dlFileRankPersistence.remove(lastFileRank);
+			long lastFileRankId = lastFileRank.getFileRankId();
+
+			try {
+				dlFileRankPersistence.remove(lastFileRank);
+			}
+			catch (Exception e) {
+				_log.warn(
+					"Failed to remove file rank " + lastFileRankId +
+						" because another thread already removed it");
+			}
 		}
 
 		return fileRank;
