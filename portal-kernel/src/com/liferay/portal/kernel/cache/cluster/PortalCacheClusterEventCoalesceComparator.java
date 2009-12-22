@@ -20,49 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.orm.hibernate;
+package com.liferay.portal.kernel.cache.cluster;
 
-import com.liferay.portal.SystemException;
-
-import java.lang.reflect.Field;
-
-import net.sf.ehcache.CacheManager;
-
-import org.hibernate.cache.CacheProvider;
+import java.util.Comparator;
 
 /**
- * <a href="EhCacheProvider.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalCacheClusterEventCoalesceComparator.java.html"><b><i>
+ * View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class EhCacheProvider extends CacheProviderWrapper {
+public class PortalCacheClusterEventCoalesceComparator
+	implements Comparator<PortalCacheClusterEvent> {
 
-	public EhCacheProvider() {
-		super("net.sf.ehcache.hibernate.EhCacheProvider");
-		_CACHE_PRIVIDER = _cacheProvider;
+	public PortalCacheClusterEventCoalesceComparator() {
 	}
 
-	public static CacheManager getCacheManager() throws SystemException {
-		try {
-			Class clazz =
-				Class.forName("net.sf.ehcache.hibernate.EhCacheProvider");
-			Field filed = clazz.getDeclaredField("manager");
-			filed.setAccessible(true);
-			CacheManager cacheManager =
-				(CacheManager) filed.get(_CACHE_PRIVIDER);
-			if (cacheManager == null) {
-				throw new SystemException(
-					"Underline CacheManger has been initialized yet, " +
-					"make sure you are not calling this method too early.");
-			}
-			return cacheManager;
+	public int compare(
+		PortalCacheClusterEvent event1, PortalCacheClusterEvent event2) {
+		if (event1 == null || event2 == null) {
+			return 1;
 		}
-		catch (Exception ex) {
-			throw new SystemException(ex);
+		if (event1.getCacheName().equals(event2.getCacheName()) &&
+			event1.getElementKey().equals(event2.getElementKey())) {
+			return 0;
+		}
+		else {
+			return -1;
 		}
 	}
-
-	private static CacheProvider _CACHE_PRIVIDER;
 
 }

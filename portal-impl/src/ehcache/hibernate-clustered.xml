@@ -1,15 +1,6 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" name="hibernate-clustered" updateCheck="false">
 	<diskStore path="ehcache.disk.store.dir/hibernate" />
 	<cacheManagerEventListenerFactory class="" properties="" />
-	<cacheManagerPeerProviderFactory
-		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
-		properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.1,multicastGroupPort=4446,timeToLive=1"
-		propertySeparator=","
-	/>
-	<cacheManagerPeerListenerFactory
-		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-	/>
-
 	<!--
 	Hibernate will use the defaultCache unless custom configurations are defined
 	below for individual domain objects, collection, queries, etc.
@@ -22,11 +13,7 @@
 		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
-			propertySeparator=","
-		/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+			class="com.liferay.portal.cache.cluster.EhcachePortalCacheClusterReplicatorFactory"/>
 	</defaultCache>
 
 	<!--
@@ -44,9 +31,7 @@
 		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-		/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+			class="com.liferay.portal.cache.cluster.EhcachePortalCacheClusterReplicatorFactory"/>
 	</cache>
 
 	<!--
@@ -62,10 +47,6 @@
 		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
-			propertySeparator=","
-		/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+			class="com.liferay.portal.cache.cluster.EhcachePortalCacheClusterReplicatorFactory"/>
 	</cache>
 </ehcache>

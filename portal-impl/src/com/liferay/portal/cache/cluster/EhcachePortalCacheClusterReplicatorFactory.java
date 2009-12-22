@@ -20,49 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.orm.hibernate;
+package com.liferay.portal.cache.cluster;
 
-import com.liferay.portal.SystemException;
+import java.util.Properties;
 
-import java.lang.reflect.Field;
-
-import net.sf.ehcache.CacheManager;
-
-import org.hibernate.cache.CacheProvider;
+import net.sf.ehcache.event.CacheEventListener;
+import net.sf.ehcache.event.CacheEventListenerFactory;
 
 /**
- * <a href="EhCacheProvider.java.html"><b><i>View Source</i></b></a>
+ * <a href="EhcachePortalCacheClusterReplicatorFactory.java.html"><b><i>
+ * View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class EhCacheProvider extends CacheProviderWrapper {
+public class EhcachePortalCacheClusterReplicatorFactory
+	extends CacheEventListenerFactory {
 
-	public EhCacheProvider() {
-		super("net.sf.ehcache.hibernate.EhCacheProvider");
-		_CACHE_PRIVIDER = _cacheProvider;
+	@Override
+	public CacheEventListener createCacheEventListener(Properties prprts) {
+		return _cacheEventListener;
 	}
 
-	public static CacheManager getCacheManager() throws SystemException {
-		try {
-			Class clazz =
-				Class.forName("net.sf.ehcache.hibernate.EhCacheProvider");
-			Field filed = clazz.getDeclaredField("manager");
-			filed.setAccessible(true);
-			CacheManager cacheManager =
-				(CacheManager) filed.get(_CACHE_PRIVIDER);
-			if (cacheManager == null) {
-				throw new SystemException(
-					"Underline CacheManger has been initialized yet, " +
-					"make sure you are not calling this method too early.");
-			}
-			return cacheManager;
-		}
-		catch (Exception ex) {
-			throw new SystemException(ex);
-		}
-	}
-
-	private static CacheProvider _CACHE_PRIVIDER;
+	private static final CacheEventListener _cacheEventListener =
+		new EhcachePortalCacheClusterReplicator();
 
 }
