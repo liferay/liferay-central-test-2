@@ -41,6 +41,7 @@ import com.liferay.portal.util.ShutdownUtil;
 import java.lang.reflect.Field;
 
 import java.sql.Connection;
+import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +122,10 @@ public class ConvertDatabase extends ConvertProcess {
 				}
 			}
 
+			for (Tuple tuple : _UNMAPPED_TABLES) {
+				tableDetails.add(tuple);
+			}
+
 			if (_log.isDebugEnabled()) {
 				_log.debug("Migrating database tables");
 			}
@@ -128,7 +133,7 @@ public class ConvertDatabase extends ConvertProcess {
 			for (int i = 0; i < tableDetails.size(); i++) {
 				if ((i > 0) && (i % (tableDetails.size() / 4) == 0)) {
 					MaintenanceUtil.appendStatus(
-						 (i * 100. / tableDetails.size()) + "%");
+						 (i * 100 / tableDetails.size()) + "%");
 				}
 
 				Tuple tuple = tableDetails.get(i);
@@ -215,6 +220,30 @@ public class ConvertDatabase extends ConvertProcess {
 	}
 
 	private static final String _JDBC_PREFIX = "jdbc.upgrade.";
+
+	private static final Tuple[] _UNMAPPED_TABLES = new Tuple[] {
+		new Tuple(
+			"Counter",
+			new Object[][] {
+				{ "name", new Integer(Types.VARCHAR) },
+				{ "currentId", new Integer(Types.BIGINT) },
+			},
+			"create table Counter (name VARCHAR(75) not null primary key, currentId LONG);"),
+		new Tuple(
+			"CyrusUser",
+			new Object[][] {
+				{ "userId", new Integer(Types.VARCHAR) },
+				{ "password_", new Integer(Types.VARCHAR) },
+			},
+			"create table CyrusUser (userId VARCHAR(75) not null primary key, password_ VARCHAR(75) not null);"),
+		new Tuple(
+			"CyrusVirtual",
+			new Object[][] {
+				{ "emailAddress", new Integer(Types.VARCHAR) },
+				{ "userId", new Integer(Types.VARCHAR) },
+			},
+			"create table CyrusVirtual (emailAddress VARCHAR(75) not null primary key, userId VARCHAR(75) not null);"),
+	};
 
 	private static Log _log = LogFactoryUtil.getLog(ConvertDatabase.class);
 
