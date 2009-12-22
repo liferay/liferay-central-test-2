@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.ReleaseConstants;
-import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsUtil;
 
@@ -163,7 +162,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		if (GetterUtil.getBoolean(
 				PropsUtil.get(PropsKeys.SCHEMA_RUN_ENABLED))) {
 
-			ReleaseLocalServiceUtil.createTablesAndPopulate();
+			releaseLocalService.createTablesAndPopulate();
 
 			testSupportsStringCaseSensitiveQuery();
 
