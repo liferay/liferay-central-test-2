@@ -94,6 +94,8 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				<liferay-ui:icon image="edit" url="<%= editURL %>" />
 			</c:if>
 
+			<%@ include file="/html/portlet/document_library/file_entry_action_lock.jspf" %>
+
 			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.PERMISSIONS) %>">
 				<liferay-security:permissionsURL
 					modelResource="<%= DLFileEntry.class.getName() %>"
@@ -153,6 +155,8 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 
 				<liferay-ui:icon image="view" message="view-original-file" url="<%= viewOriginalFileURL %>" />
 			</c:if>
+
+			<%@ include file="/html/portlet/document_library/file_entry_action_lock.jspf" %>
 
 			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">
 				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editShortcutURL">
