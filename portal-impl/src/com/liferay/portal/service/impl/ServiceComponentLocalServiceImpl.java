@@ -43,7 +43,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ServiceComponent;
-import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
 import com.liferay.portal.tools.servicebuilder.Entity;
 
@@ -169,7 +168,7 @@ public class ServiceComponentLocalServiceImpl
 
 			serviceComponentPersistence.update(serviceComponent, false);
 
-			ServiceComponentLocalServiceUtil.upgradeDB(
+			serviceComponentLocalService.upgradeDB(
 				classLoader, buildNamespace, buildNumber, buildAutoUpgrade,
 				previousServiceComponent, tablesSQL, sequencesSQL, indexesSQL);
 
