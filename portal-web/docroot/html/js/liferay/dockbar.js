@@ -141,18 +141,14 @@ AUI().use(
 											name: 'addApplication',
 											className: 'add-application',
 											io: {
-												cfg: {
-													data: {
-														p_l_id: themeDisplay.getPlid(),
-														p_p_id: 87,
-														p_p_state: 'exclusive',
-														doAsUserId: themeDisplay.getDoAsUserIdEncoded()
-													}
+												data: {
+													p_l_id: themeDisplay.getPlid(),
+													p_p_id: 87,
+													p_p_state: 'exclusive',
+													doAsUserId: themeDisplay.getDoAsUserIdEncoded()
 												},
 												on: {
-													success: function(event) {
-														var response = event.io.xhr;
-
+													success: function(event, id, response) {
 														AUI().use(
 															'liferay-layout-configuration',
 															function(A) {
@@ -209,14 +205,12 @@ AUI().use(
 									instance.addUnderlay(
 										{
 											io: {
-												uri: themeDisplay.getPathMain() + '/layout_configuration/templates',
-												cfg: {
-													data: {
-														p_l_id: themeDisplay.getPlid(),
-														doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-														redirect: Liferay.currentURL
-													}
-												}
+												data: {
+													p_l_id: themeDisplay.getPlid(),
+													doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+													redirect: Liferay.currentURL
+												},
+												uri: themeDisplay.getPathMain() + '/layout_configuration/templates'
 											},
 											className: 'manage-layouts',
 											name: 'manageLayouts',

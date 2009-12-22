@@ -177,9 +177,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 					dialog.plug(
 						A.Plugin.IO,
 						{
-							cfg: {
-								data: data
-							},
+							data: data,
 							uri: url
 						}
 					);

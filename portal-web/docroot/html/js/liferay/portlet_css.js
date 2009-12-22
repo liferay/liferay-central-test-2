@@ -63,13 +63,11 @@ AUI().add(
 										}
 									},
 									autoLoad: false,
-									cfg: {
-										data: {
-											p_l_id: themeDisplay.getPlid(),
-											p_p_id: 113,
-											p_p_state: 'exclusive',
-											doAsUserId: themeDisplay.getDoAsUserIdEncoded()
-										}
+									data: {
+										p_l_id: themeDisplay.getPlid(),
+										p_p_id: 113,
+										p_p_state: 'exclusive',
+										doAsUserId: themeDisplay.getDoAsUserIdEncoded()
 									},
 									uri: themeDisplay.getPathMain() + '/portal/render_portlet'
 								}

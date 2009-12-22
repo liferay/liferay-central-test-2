@@ -20,12 +20,10 @@ Liferay.LayoutConfiguration = {
 				dialog.plug(
 					A.Plugin.IO,
 					{
-						cfg: {
-							data: {
-								p_l_id: themeDisplay.getPlid(),
-								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-								redirect: Liferay.currentURL
-							}
+						data: {
+							p_l_id: themeDisplay.getPlid(),
+							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+							redirect: Liferay.currentURL
 						},
 						uri: url
 					}
