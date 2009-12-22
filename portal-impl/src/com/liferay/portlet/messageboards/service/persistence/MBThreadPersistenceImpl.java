@@ -2201,6 +2201,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	protected com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence")
 	protected com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence")
+	protected com.liferay.portal.service.persistence.LockPersistence lockPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
