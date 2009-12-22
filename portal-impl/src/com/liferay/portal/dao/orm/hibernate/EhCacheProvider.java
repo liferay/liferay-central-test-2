@@ -22,47 +22,15 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.SystemException;
-
-import java.lang.reflect.Field;
-
-import net.sf.ehcache.CacheManager;
-
-import org.hibernate.cache.CacheProvider;
-
 /**
  * <a href="EhCacheProvider.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Shuyang Zhou
  */
 public class EhCacheProvider extends CacheProviderWrapper {
 
 	public EhCacheProvider() {
 		super("net.sf.ehcache.hibernate.EhCacheProvider");
-		_CACHE_PRIVIDER = _cacheProvider;
 	}
-
-	public static CacheManager getCacheManager() throws SystemException {
-		try {
-			Class clazz =
-				Class.forName("net.sf.ehcache.hibernate.EhCacheProvider");
-			Field filed = clazz.getDeclaredField("manager");
-			filed.setAccessible(true);
-			CacheManager cacheManager =
-				(CacheManager) filed.get(_CACHE_PRIVIDER);
-			if (cacheManager == null) {
-				throw new SystemException(
-					"Underline CacheManger has been initialized yet, " +
-					"make sure you are not calling this method too early.");
-			}
-			return cacheManager;
-		}
-		catch (Exception ex) {
-			throw new SystemException(ex);
-		}
-	}
-
-	private static CacheProvider _CACHE_PRIVIDER;
 
 }

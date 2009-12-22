@@ -104,10 +104,6 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		return portalCache;
 	}
 
-	public CacheManager getEhcacheManager() {
-		return _cacheManager;
-	}
-
 	public void setConfigPropertyKey(String configPropertyKey) {
 		_configPropertyKey = configPropertyKey;
 	}

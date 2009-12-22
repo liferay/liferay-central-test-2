@@ -76,8 +76,8 @@ public class CacheProviderWrapper implements CacheProvider {
 		_cacheProvider.stop();
 	}
 
-	protected CacheProvider _cacheProvider;
-
 	private static Log _log = LogFactoryUtil.getLog(CacheProviderWrapper.class);
+
+	private CacheProvider _cacheProvider;
 
 }
