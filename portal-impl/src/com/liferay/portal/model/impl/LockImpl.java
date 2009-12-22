@@ -38,11 +38,15 @@ public class LockImpl extends LockModelImpl implements Lock {
 	}
 
 	public long getExpirationTime() {
+		if (getExpirationDate().getTime() == 0) {
+			return Long.MAX_VALUE;
+		}
+
 		return getExpirationDate().getTime() - getCreateDate().getTime();
 	}
 
 	public boolean isExpired() {
-		if (DateUtil.compareTo(new Date(), getExpirationDate()) > 0) {
+		if (new Date().getTime() > getExpirationTime()) {
 			return true;
 		}
 		else {
