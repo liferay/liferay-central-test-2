@@ -114,6 +114,7 @@
 			<aop:around pointcut="bean(*Persistence) || bean(*Finder)" method="invokePersistence" />
 			<aop:around pointcut="execution(void com.liferay.portal.convert.messaging.ConvertProcessMessageListener.receive(..))" method="invokeGlobally" />
 			<aop:around pointcut="execution(void com.liferay.portal.events.StartupHelper.*(..))" method="invokeGlobally" />
+			<aop:around pointcut="execution(void com.liferay.portal.service.impl.ServiceComponentLocalServiceImpl.upgradeDB(..))" method="invokeGlobally" />
 			<aop:around pointcut="execution(* com.liferay.portal.service.impl.AccountLocalServiceImpl.getAccount(long, long))" method="invokeByParameter" />
 			<aop:around pointcut="execution(* com.liferay.portal.service.impl.ResourceCodeLocalServiceImpl.checkResourceCodes(long, String))" method="invokeByParameter" />
 			<aop:around pointcut="execution(* com.liferay.portal.service.impl.UserLocalServiceImpl.searchCount(..))" method="invokeByParameter" />

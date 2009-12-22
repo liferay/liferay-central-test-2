@@ -111,4 +111,11 @@ public interface ServiceComponentLocalService {
 		long buildNumber, long buildDate, boolean buildAutoUpgrade)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public void upgradeDB(java.lang.ClassLoader classLoader,
+		java.lang.String buildNamespace, long buildNumber,
+		boolean buildAutoUpgrade,
+		com.liferay.portal.model.ServiceComponent previousServiceComponent,
+		java.lang.String tablesSQL, java.lang.String sequencesSQL,
+		java.lang.String indexesSQL) throws java.lang.Exception;
 }

@@ -127,6 +127,18 @@ public class ServiceComponentLocalServiceUtil {
 			buildNamespace, buildNumber, buildDate, buildAutoUpgrade);
 	}
 
+	public static void upgradeDB(java.lang.ClassLoader classLoader,
+		java.lang.String buildNamespace, long buildNumber,
+		boolean buildAutoUpgrade,
+		com.liferay.portal.model.ServiceComponent previousServiceComponent,
+		java.lang.String tablesSQL, java.lang.String sequencesSQL,
+		java.lang.String indexesSQL) throws java.lang.Exception {
+		getService()
+			.upgradeDB(classLoader, buildNamespace, buildNumber,
+			buildAutoUpgrade, previousServiceComponent, tablesSQL,
+			sequencesSQL, indexesSQL);
+	}
+
 	public static ServiceComponentLocalService getService() {
 		if (_service == null) {
 			_service = (ServiceComponentLocalService)PortalBeanLocatorUtil.locate(ServiceComponentLocalService.class.getName());

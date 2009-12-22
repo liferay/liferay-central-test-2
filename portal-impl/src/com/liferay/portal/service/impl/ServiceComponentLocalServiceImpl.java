@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ServiceComponent;
+import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
 import com.liferay.portal.tools.servicebuilder.Entity;
 
@@ -168,7 +169,7 @@ public class ServiceComponentLocalServiceImpl
 
 			serviceComponentPersistence.update(serviceComponent, false);
 
-			upgradeDB(
+			ServiceComponentLocalServiceUtil.upgradeDB(
 				classLoader, buildNamespace, buildNumber, buildAutoUpgrade,
 				previousServiceComponent, tablesSQL, sequencesSQL, indexesSQL);
 
@@ -178,6 +179,66 @@ public class ServiceComponentLocalServiceImpl
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
+		}
+	}
+
+	public void upgradeDB(
+			ClassLoader classLoader, String buildNamespace, long buildNumber,
+			boolean buildAutoUpgrade, ServiceComponent previousServiceComponent,
+			String tablesSQL, String sequencesSQL, String indexesSQL)
+		throws Exception {
+
+		DB db = DBFactoryUtil.getDB();
+
+		if (previousServiceComponent == null) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Running " + buildNamespace +
+						" SQL scripts for the first time");
+			}
+
+			db.runSQLTemplateString(tablesSQL, true, false);
+			db.runSQLTemplateString(sequencesSQL, true, false);
+			db.runSQLTemplateString(indexesSQL, true, false);
+		}
+		else if (buildAutoUpgrade) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Upgrading " + buildNamespace +
+						" database to build number " + buildNumber);
+			}
+
+			if (!tablesSQL.equals(
+					previousServiceComponent.getTablesSQL())) {
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Upgrading database with tables.sql");
+				}
+
+				db.runSQLTemplateString(tablesSQL, true, false);
+
+				upgradeModels(classLoader);
+			}
+
+			if (!sequencesSQL.equals(
+					previousServiceComponent.getSequencesSQL())) {
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Upgrading database with sequences.sql");
+				}
+
+				db.runSQLTemplateString(sequencesSQL, true, false);
+			}
+
+			if (!indexesSQL.equals(
+					previousServiceComponent.getIndexesSQL())) {
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Upgrading database with indexes.sql");
+				}
+
+				db.runSQLTemplateString(indexesSQL, true, false);
+			}
 		}
 	}
 
@@ -255,66 +316,6 @@ public class ServiceComponentLocalServiceImpl
 		}
 
 		return models;
-	}
-
-	protected void upgradeDB(
-			ClassLoader classLoader, String buildNamespace, long buildNumber,
-			boolean buildAutoUpgrade, ServiceComponent previousServiceComponent,
-			String tablesSQL, String sequencesSQL, String indexesSQL)
-		throws Exception {
-
-		DB db = DBFactoryUtil.getDB();
-
-		if (previousServiceComponent == null) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Running " + buildNamespace +
-						" SQL scripts for the first time");
-			}
-
-			db.runSQLTemplateString(tablesSQL, true, false);
-			db.runSQLTemplateString(sequencesSQL, true, false);
-			db.runSQLTemplateString(indexesSQL, true, false);
-		}
-		else if (buildAutoUpgrade) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Upgrading " + buildNamespace +
-						" database to build number " + buildNumber);
-			}
-
-			if (!tablesSQL.equals(
-					previousServiceComponent.getTablesSQL())) {
-
-				if (_log.isInfoEnabled()) {
-					_log.info("Upgrading database with tables.sql");
-				}
-
-				db.runSQLTemplateString(tablesSQL, true, false);
-
-				upgradeModels(classLoader);
-			}
-
-			if (!sequencesSQL.equals(
-					previousServiceComponent.getSequencesSQL())) {
-
-				if (_log.isInfoEnabled()) {
-					_log.info("Upgrading database with sequences.sql");
-				}
-
-				db.runSQLTemplateString(sequencesSQL, true, false);
-			}
-
-			if (!indexesSQL.equals(
-					previousServiceComponent.getIndexesSQL())) {
-
-				if (_log.isInfoEnabled()) {
-					_log.info("Upgrading database with indexes.sql");
-				}
-
-				db.runSQLTemplateString(indexesSQL, true, false);
-			}
-		}
 	}
 
 	protected void upgradeModels(ClassLoader classLoader) throws Exception {
