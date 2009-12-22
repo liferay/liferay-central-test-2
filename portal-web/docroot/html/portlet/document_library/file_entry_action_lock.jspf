@@ -23,7 +23,6 @@
 %>
 
 <c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
-
 	<c:if test="<%= !fileEntry.isLocked() %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var ="lockURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
@@ -47,5 +46,4 @@
 
 		<liferay-ui:icon image="unlock" url="<%= unlockURL %>" />
 	</c:if>
-
 </c:if>
