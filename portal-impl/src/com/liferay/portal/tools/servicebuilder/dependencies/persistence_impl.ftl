@@ -301,7 +301,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					throw processException(e);
 				}
 				finally {
-					FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+					FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 				}
 			</#if>
 		</#list>
@@ -1553,7 +1553,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#if>
 
 				<#if column.mappingTable??>
-					${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)},
+					${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME,
 				<#else>
 					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST,
 				</#if>
@@ -1656,7 +1656,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#if>
 
 				<#if column.mappingTable??>
-					${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)},
+					${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME,
 				<#else>
 					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST,
 				</#if>
@@ -1734,7 +1734,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#if>
 
 				<#if column.mappingTable??>
-					${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)},
+					${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME,
 				<#else>
 					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST,
 				</#if>
@@ -1830,7 +1830,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 
@@ -1842,7 +1842,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 
@@ -1856,7 +1856,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 
@@ -1870,7 +1870,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 
@@ -1882,7 +1882,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 
@@ -1894,7 +1894,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 
@@ -1906,7 +1906,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 
@@ -1920,7 +1920,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 
@@ -1934,7 +1934,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 
@@ -1961,7 +1961,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 
@@ -1981,7 +1981,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME);
 					}
 				}
 			</#if>

@@ -1147,6 +1147,21 @@ public class ServiceBuilder {
 		return name;
 	}
 
+	public String getCreateMappingTableSQL(EntityMapping entityMapping) 
+		throws IOException {
+		
+		String createMappingTableSQL = _getCreateMappingTableSQL(entityMapping);
+		
+		createMappingTableSQL = 
+			StringUtil.replace(createMappingTableSQL, "\n", "");
+		createMappingTableSQL =
+			StringUtil.replace(createMappingTableSQL, "\t", "");
+		createMappingTableSQL = createMappingTableSQL.substring(
+			0, createMappingTableSQL.length() - 1);
+
+		return createMappingTableSQL;
+	}
+	
 	public String getCreateTableSQL(Entity entity) {
 		String createTableSQL = _getCreateTableSQL(entity);
 
@@ -1271,12 +1286,36 @@ public class ServiceBuilder {
 		}
 	}
 
+	public EntityMapping getEntityMapping(String mappingTable) {
+		return _entityMappings.get(mappingTable);
+	}
+
 	public String getGeneratorClass(String idType) {
 		if (Validator.isNull(idType)) {
 			idType = "assigned";
 		}
 
 		return idType;
+	}
+	
+	public List<EntityColumn> getMappingEntities(String mappingTable) 
+		throws IOException {
+		
+		List<EntityColumn> entities = new ArrayList<EntityColumn>();
+
+		EntityMapping entityMapping = _entityMappings.get(mappingTable);
+
+		for (int i = 0; i < 2; i++) {
+			Entity entity = getEntity(entityMapping.getEntity(i));
+
+			if (entity == null) {
+				return null;
+			}
+		
+			entities.addAll(entity.getPKList());
+		}
+
+		return entities;
 	}
 
 	public String getNoSuchEntityException(Entity entity) {
