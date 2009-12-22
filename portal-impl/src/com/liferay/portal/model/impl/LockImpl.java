@@ -22,10 +22,7 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.model.Lock;
-
-import java.util.Date;
 
 /**
  * <a href="LockImpl.java.html"><b><i>View Source</i></b></a>
@@ -46,7 +43,7 @@ public class LockImpl extends LockModelImpl implements Lock {
 	}
 
 	public boolean isExpired() {
-		if (new Date().getTime() > getExpirationTime()) {
+		if (System.currentTimeMillis() > getExpirationTime()) {
 			return true;
 		}
 		else {
