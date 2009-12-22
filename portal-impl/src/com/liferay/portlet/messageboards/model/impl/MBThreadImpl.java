@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
-import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBThread;
 
 /**
@@ -37,18 +36,6 @@ public class MBThreadImpl extends MBThreadModelImpl implements MBThread {
 
 	public String getAttachmentsDir() {
 		return "messageboards/" + getThreadId();
-	}
-
-	public boolean isLocked() {
-		try {
-
-			return LockLocalServiceUtil.isLocked(
-				MBThread.class.getName(), getThreadId());
-		}
-		catch (Exception e) {
-		}
-
-		return false;
 	}
 
 }

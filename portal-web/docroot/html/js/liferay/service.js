@@ -755,10 +755,8 @@ Liferay.Service.registerClass(
 	Liferay.Service.MB, "MBThread",
 	{
 		deleteThread: true,
-		lockThread: true,
 		moveThread: true,
-		splitThread: true,
-		unlockThread: true
+		splitThread: true
 	}
 );
 

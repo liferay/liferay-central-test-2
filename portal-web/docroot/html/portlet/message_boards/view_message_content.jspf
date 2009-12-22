@@ -173,33 +173,6 @@
 					<liferay-ui:icon image="forward" message="move-thread" url="<%= editThreadURL %>" label="<%= true %>" />
 				</td>
 			</c:if>
-
-			<if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.LOCK_THREAD) %>">
-				<td>
-					<c:choose>
-						<c:when test="<%= thread.isLocked() %>">
-							<portlet:actionURL var="unlockThreadURL">
-								<portlet:param name="struts_action" value="/message_boards/edit_message" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
-							</portlet:actionURL>
-
-							<liferay-ui:icon image="unlock" message="unlock-thread" url="<%= unlockThreadURL %>" label="<%= true %>" />
-						</c:when>
-						<c:otherwise>
-							<portlet:actionURL var="lockThreadURL">
-								<portlet:param name="struts_action" value="/message_boards/edit_message" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
-							</portlet:actionURL>
-
-							<liferay-ui:icon image="lock" message="lock-thread" url="<%= lockThreadURL %>" label="<%= true %>" />
-						</c:otherwise>
-					</c:choose>
-				</td>
-			</if>
 		</tr>
 		</table>
 	</div>

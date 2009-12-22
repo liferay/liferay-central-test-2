@@ -240,10 +240,6 @@ public class MBThreadWrapper implements MBThread {
 		return _mbThread.getAttachmentsDir();
 	}
 
-	public boolean isLocked() {
-		return _mbThread.isLocked();
-	}
-
 	public MBThread getWrappedMBThread() {
 		return _mbThread;
 	}

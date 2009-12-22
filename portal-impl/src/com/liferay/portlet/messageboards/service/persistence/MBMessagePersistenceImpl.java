@@ -6757,8 +6757,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	protected com.liferay.portal.service.persistence.CompanyPersistence companyPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
 	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence")
-	protected com.liferay.portal.service.persistence.LockPersistence lockPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence")
 	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")

@@ -71,7 +71,6 @@ import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
-import com.liferay.portlet.messageboards.ThreadLockedException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
@@ -337,12 +336,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				mbCategoryPersistence.update(category, false);
 			}
-		}
-
-		if (lockLocalService.isLocked(
-			MBThread.class.getName(), thread.getThreadId())) {
-
-			throw new ThreadLockedException();
 		}
 
 		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
@@ -1356,12 +1349,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Message
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
-
-		if (lockLocalService.isLocked(
-			MBThread.class.getName(), message.getThreadId())) {
-
-			throw new ThreadLockedException();
-		}
 
 		MBCategory category = message.getCategory();
 		subject = ModelHintsUtil.trimString(

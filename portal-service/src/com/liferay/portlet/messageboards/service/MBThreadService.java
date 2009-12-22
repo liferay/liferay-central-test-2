@@ -58,10 +58,6 @@ public interface MBThreadService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Lock lockThread(long threadId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
 		throws com.liferay.portal.PortalException,
@@ -69,10 +65,6 @@ public interface MBThreadService {
 
 	public com.liferay.portlet.messageboards.model.MBThread splitThread(
 		long messageId, com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void unlockThread(long threadId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

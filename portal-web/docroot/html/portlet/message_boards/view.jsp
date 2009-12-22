@@ -359,16 +359,6 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					sb.append("\" />");
 				}
 
-				if (thread.isLocked()) {
-					sb.append("<img align=\"left\" alt=\"");
-					sb.append(LanguageUtil.get(pageContext, "thread-locked"));
-					sb.append("\" border=\"0\" src=\"");
-					sb.append(themeDisplay.getPathThemeImages() + "/common/lock.png");
-					sb.append("\" title=\"");
-					sb.append(LanguageUtil.get(pageContext, "thread-locked"));
-					sb.append("\" />");
-				}
-
 				sb.append(message.getSubject());
 
 				row.addText(sb.toString(), rowURL);
