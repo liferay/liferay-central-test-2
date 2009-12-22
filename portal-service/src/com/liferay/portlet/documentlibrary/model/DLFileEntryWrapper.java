@@ -292,12 +292,24 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getFolder();
 	}
 
+	public com.liferay.portal.model.Lock getLock() {
+		return _dlFileEntry.getLock();
+	}
+
 	public java.lang.String getLuceneProperties() {
 		return _dlFileEntry.getLuceneProperties();
 	}
 
 	public long getRepositoryId() {
 		return _dlFileEntry.getRepositoryId();
+	}
+
+	public boolean hasLock(long userId) {
+		return _dlFileEntry.hasLock(userId);
+	}
+
+	public boolean isLocked() {
+		return _dlFileEntry.isLocked();
 	}
 
 	public void setExtraSettingsProperties(

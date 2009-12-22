@@ -29,10 +29,13 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Lock;
+import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.IOException;
 
@@ -106,6 +109,20 @@ public class DLFileEntryImpl
 		return folder;
 	}
 
+	public Lock getLock() {
+		try {
+			String lockId =
+				DLUtil.getLockId(getGroupId(), getFolderId(), getName());
+
+			return LockLocalServiceUtil.getLock(
+				DLFileEntry.class.getName(), lockId);
+		}
+		catch (Exception e) {
+		}
+
+		return null;
+	}
+
 	public String getLuceneProperties() {
 		StringBuilder sb = new StringBuilder();
 
@@ -132,6 +149,34 @@ public class DLFileEntryImpl
 
 	public long getRepositoryId() {
 		return getRepositoryId(getGroupId(), getFolderId());
+	}
+
+	public boolean hasLock(long userId) {
+		try {
+			String lockId =
+				DLUtil.getLockId(getGroupId(), getFolderId(), getName());
+
+			return LockLocalServiceUtil.hasLock(
+				userId, DLFileEntry.class.getName(), lockId);
+		}
+		catch (Exception e) {
+		}
+
+		return false;
+	}
+
+	public boolean isLocked() {
+		try {
+			String lockId =
+				DLUtil.getLockId(getGroupId(), getFolderId(), getName());
+
+			return LockLocalServiceUtil.isLocked(
+				DLFileEntry.class.getName(), lockId);
+		}
+		catch (Exception e) {
+		}
+
+		return false;
 	}
 
 	public void setExtraSettings(String extraSettings) {

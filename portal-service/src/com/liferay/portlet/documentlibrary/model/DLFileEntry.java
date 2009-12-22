@@ -54,9 +54,15 @@ public interface DLFileEntry extends DLFileEntryModel {
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
 
+	public com.liferay.portal.model.Lock getLock();
+
 	public java.lang.String getLuceneProperties();
 
 	public long getRepositoryId();
+
+	public boolean hasLock(long userId);
+
+	public boolean isLocked();
 
 	public void setExtraSettings(java.lang.String extraSettings);
 
