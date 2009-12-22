@@ -111,8 +111,8 @@ public class DLFileEntryImpl
 
 	public Lock getLock() {
 		try {
-			String lockId =
-				DLUtil.getLockId(getGroupId(), getFolderId(), getName());
+			String lockId = DLUtil.getLockId(
+				getGroupId(), getFolderId(), getName());
 
 			return LockLocalServiceUtil.getLock(
 				DLFileEntry.class.getName(), lockId);
@@ -153,8 +153,8 @@ public class DLFileEntryImpl
 
 	public boolean hasLock(long userId) {
 		try {
-			String lockId =
-				DLUtil.getLockId(getGroupId(), getFolderId(), getName());
+			String lockId = DLUtil.getLockId(
+				getGroupId(), getFolderId(), getName());
 
 			return LockLocalServiceUtil.hasLock(
 				userId, DLFileEntry.class.getName(), lockId);
@@ -167,8 +167,8 @@ public class DLFileEntryImpl
 
 	public boolean isLocked() {
 		try {
-			String lockId =
-				DLUtil.getLockId(getGroupId(), getFolderId(), getName());
+			String lockId = DLUtil.getLockId(
+				getGroupId(), getFolderId(), getName());
 
 			return LockLocalServiceUtil.isLocked(
 				DLFileEntry.class.getName(), lockId);
