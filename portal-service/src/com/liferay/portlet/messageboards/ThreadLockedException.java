@@ -20,35 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.model.impl;
+package com.liferay.portlet.messageboards;
 
-import com.liferay.portal.service.LockLocalServiceUtil;
-import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="MBThreadImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThreadLockedException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class MBThreadImpl extends MBThreadModelImpl implements MBThread {
+public class ThreadLockedException extends PortalException {
 
-	public MBThreadImpl() {
+	public ThreadLockedException() {
+		super();
 	}
 
-	public String getAttachmentsDir() {
-		return "messageboards/" + getThreadId();
+	public ThreadLockedException(String msg) {
+		super(msg);
 	}
 
-	public boolean isLocked() {
-		try {
+	public ThreadLockedException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-			return LockLocalServiceUtil.isLocked(
-				MBThread.class.getName(), getThreadId());
-		}
-		catch (Exception e) {
-		}
-
-		return false;
+	public ThreadLockedException(Throwable cause) {
+		super(cause);
 	}
 
 }
