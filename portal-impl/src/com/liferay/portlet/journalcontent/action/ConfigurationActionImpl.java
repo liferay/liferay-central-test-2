@@ -23,6 +23,8 @@
 package com.liferay.portlet.journalcontent.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
@@ -92,9 +94,14 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 
-		preferences.store();
+		if (SessionErrors.isEmpty(actionRequest)) {
+			preferences.store();
 
-		updateContentSearch(actionRequest, portletResource, articleId);
+			updateContentSearch(actionRequest, portletResource, articleId);
+
+			SessionMessages.add(
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
+		}
 
 		actionResponse.sendRedirect(
 			ParamUtil.getString(actionRequest, "redirect"));
