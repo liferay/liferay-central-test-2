@@ -174,8 +174,8 @@ List<String> primaryKeys = new ArrayList<String>();
 		</c:if>
 
 		<c:if test="<%= resultRows.isEmpty() && (emptyResultsMessage != null) %>">
-			<tr class="portlet-section-body results-row">
-				<td align="center" colspan="<%= (headerNames == null) ? 1 : headerNames.size() %>">
+			<tr class="portlet-section-body results-row last">
+				<td align="center" class="only" colspan="<%= (headerNames == null) ? 1 : headerNames.size() %>">
 					<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
 				</td>
 			</tr>
@@ -187,31 +187,36 @@ List<String> primaryKeys = new ArrayList<String>();
 		for (int i = 0; i < resultRows.size(); i++) {
 			ResultRow row = (ResultRow)resultRows.get(i);
 
-			String className = "portlet-section-alternate results-row alt";
-			String classHoverName = "portlet-section-alternate-hover results-row alt hover";
+			String rowClassName = "portlet-section-alternate results-row alt";
+			String rowClassHoverName = "portlet-section-alternate-hover results-row alt hover";
 
 			primaryKeys.add(row.getPrimaryKey());
 
 			if (MathUtil.isEven(i)) {
-				className = "portlet-section-body results-row";
-				classHoverName = "portlet-section-body-hover results-row hover";
+				rowClassName = "portlet-section-body results-row";
+				rowClassHoverName = "portlet-section-body-hover results-row hover";
 			}
 
 			if (Validator.isNotNull(row.getClassName())) {
-				className += " " + row.getClassName();
+				rowClassName += " " + row.getClassName();
 			}
 
 			if (Validator.isNotNull(row.getClassHoverName())) {
-				classHoverName += " " + row.getClassHoverName();
+				rowClassHoverName += " " + row.getClassHoverName();
 			}
 
 			if (row.isRestricted()) {
-				className += " restricted";
-				classHoverName += " restricted";
+				rowClassName += " restricted";
+				rowClassHoverName += " restricted";
 			}
 
-			row.setClassName(className);
-			row.setClassHoverName(classHoverName);
+			if ((i + 1) == resultRows.size()) {
+				rowClassName += " last";
+				rowClassHoverName += " last";
+			}
+
+			row.setClassName(rowClassName);
+			row.setClassHoverName(rowClassHoverName);
 
 			request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW, row);
 
@@ -228,9 +233,9 @@ List<String> primaryKeys = new ArrayList<String>();
 			}
 		%>
 
-			<tr class="<%= className %>"
+			<tr class="<%= rowClassName %>"
 				<c:if test="<%= searchContainer.isHover() %>">
-					onmouseover="this.className = '<%= classHoverName %>';" onmouseout="this.className = '<%= className %>';"
+					onmouseover="this.className = '<%= rowClassHoverName %>';" onmouseout="this.className = '<%= rowClassName %>';"
 				</c:if>
 			>
 
@@ -241,9 +246,21 @@ List<String> primaryKeys = new ArrayList<String>();
 				entry.setIndex(j);
 
 				request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY, entry);
+
+				String columnClassName = StringPool.BLANK;
+
+				if (entries.size() == 1) {
+					columnClassName = " only";
+				}
+				else if (j == 0) {
+					columnClassName = " first";
+				}
+				else if ((j + 1) == entries.size()) {
+					columnClassName = " last";
+				}
 			%>
 
-				<td align="<%= entry.getAlign() %>" class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %>" colspan="<%= entry.getColspan() %>" valign="<%= entry.getValign() %>">
+				<td align="<%= entry.getAlign() %>" class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %><%= columnClassName %>" colspan="<%= entry.getColspan() %>" valign="<%= entry.getValign() %>">
 
 					<%
 					entry.print(pageContext);
