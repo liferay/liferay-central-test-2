@@ -22,10 +22,10 @@
 
 package com.liferay.portal.image;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 /**
@@ -43,7 +43,7 @@ public class DatabaseHook extends BaseHook {
 	}
 
 	public InputStream getImageAsStream(Image image) {
-		return new ByteArrayInputStream(image.getTextObj());
+		return new UnsyncByteArrayInputStream(image.getTextObj());
 	}
 
 	public void updateImage(Image image, String type, byte[] bytes) {

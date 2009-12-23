@@ -22,12 +22,12 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import javax.servlet.ServletContext;
@@ -77,7 +77,7 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 							"The template " + name + " should be created");
 					}
 
-					is = new ByteArrayInputStream(new byte[0]);
+					is = new UnsyncByteArrayInputStream(new byte[0]);
 				}
 			}
 			else {

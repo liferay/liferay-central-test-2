@@ -22,14 +22,14 @@
 
 package com.liferay.portal.upload;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStreamWrapper;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.servlet.ByteArrayInputStreamWrapper;
 import com.liferay.util.servlet.ServletInputStreamWrapper;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -92,8 +92,8 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 			return this;
 		}
 		else {
-			return new ByteArrayInputStreamWrapper(
-				new ByteArrayInputStream(_cachedBytes.toByteArray()));
+			return new UnsyncByteArrayInputStreamWrapper(
+				new UnsyncByteArrayInputStream(_cachedBytes.toByteArray()));
 		}
 	}
 

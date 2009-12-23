@@ -22,7 +22,8 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
-import java.io.ByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+
 import java.io.InputStream;
 
 import java.util.Date;
@@ -43,7 +44,7 @@ public class MemoryReportDesignRetriever implements ReportDesignRetriever {
 	}
 
 	public InputStream getInputStream() {
-		return new ByteArrayInputStream(_bytes);
+		return new UnsyncByteArrayInputStream(_bytes);
 	}
 
 	public Date getModifiedDate() {

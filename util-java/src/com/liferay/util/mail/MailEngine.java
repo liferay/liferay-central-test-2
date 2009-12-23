@@ -24,6 +24,7 @@ package com.liferay.util.mail;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
@@ -33,7 +34,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 
 import java.net.SocketException;
@@ -390,7 +390,7 @@ public class MailEngine {
 			Session session = getSession();
 
 			Message msg = new MimeMessage(
-				session, new ByteArrayInputStream(msgByteArray));
+				session, new UnsyncByteArrayInputStream(msgByteArray));
 
 			_send(session, msg, null);
 		}

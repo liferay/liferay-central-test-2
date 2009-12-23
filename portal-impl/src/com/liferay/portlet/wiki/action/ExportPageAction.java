@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -43,7 +44,6 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import javax.portlet.ActionRequest;
@@ -171,7 +171,7 @@ public class ExportPageAction extends PortletAction {
 		sb.append("</body>");
 		sb.append("</html>");
 
-		InputStream is = new ByteArrayInputStream(
+		InputStream is = new UnsyncByteArrayInputStream(
 			sb.toString().getBytes(StringPool.UTF8));
 
 		String sourceExtension = "html";

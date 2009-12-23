@@ -20,66 +20,66 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.servlet;
+package com.liferay.portal.kernel.io.unsync;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import javax.servlet.ServletInputStream;
 
 /**
- * <a href="ByteArrayInputStreamWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="UnsyncByteArrayInputStreamWrapper.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ByteArrayInputStreamWrapper extends ServletInputStream {
+public class UnsyncByteArrayInputStreamWrapper extends ServletInputStream {
 
-	public ByteArrayInputStreamWrapper(
-		ByteArrayInputStream byteArrayInputStream) {
+	public UnsyncByteArrayInputStreamWrapper(
+		UnsyncByteArrayInputStream unsyncByteArrayInputStream) {
 
-		_byteArrayInputStream = byteArrayInputStream;
+		_unsyncByteArrayInputStream = unsyncByteArrayInputStream;
 	}
 
 	public int available() {
-		return _byteArrayInputStream.available();
+		return _unsyncByteArrayInputStream.available();
 	}
 
 	public void close() throws IOException {
-		_byteArrayInputStream.close();
+		_unsyncByteArrayInputStream.close();
 	}
 
 	public void mark(int readlimit) {
-		_byteArrayInputStream.mark(readlimit);
+		_unsyncByteArrayInputStream.mark(readlimit);
 	}
 
 	public boolean markSupported() {
-		return _byteArrayInputStream.markSupported();
+		return _unsyncByteArrayInputStream.markSupported();
 	}
 
 	public int read() {
-		return _byteArrayInputStream.read();
+		return _unsyncByteArrayInputStream.read();
 	}
 
-	public int read(byte[] b) throws IOException {
-		return _byteArrayInputStream.read(b);
+	public int read(byte[] b) {
+		return _unsyncByteArrayInputStream.read(b);
 	}
 
 	public int read(byte[] b, int off, int len) {
-		return _byteArrayInputStream.read(b, off, len);
+		return _unsyncByteArrayInputStream.read(b, off, len);
 	}
 
 	public int readLine(byte[] b, int off, int len) {
-		return _byteArrayInputStream.read(b, off, len);
+		return _unsyncByteArrayInputStream.read(b, off, len);
 	}
 
 	public void reset() {
-		_byteArrayInputStream.reset();
+		_unsyncByteArrayInputStream.reset();
 	}
 
 	public long skip(long n) {
-		return _byteArrayInputStream.skip(n);
+		return _unsyncByteArrayInputStream.skip(n);
 	}
 
-	private ByteArrayInputStream _byteArrayInputStream;
+	private UnsyncByteArrayInputStream _unsyncByteArrayInputStream;
 
 }

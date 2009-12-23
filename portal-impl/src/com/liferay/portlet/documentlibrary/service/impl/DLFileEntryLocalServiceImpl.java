@@ -29,6 +29,7 @@ import com.liferay.documentlibrary.util.DLIndexerUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -65,7 +66,6 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -103,7 +103,7 @@ public class DLFileEntryLocalServiceImpl
 			}
 		}
 
-		InputStream is = new ByteArrayInputStream(bytes);
+		InputStream is = new UnsyncByteArrayInputStream(bytes);
 
 		return addFileEntry(
 			uuid, userId, groupId, folderId, name, title, description,
@@ -722,7 +722,7 @@ public class DLFileEntryLocalServiceImpl
 		long size = 0;
 
 		if ((bytes != null) && (bytes.length > 0)) {
-			is = new ByteArrayInputStream(bytes);
+			is = new UnsyncByteArrayInputStream(bytes);
 			size = bytes.length;
 		}
 

@@ -22,12 +22,12 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStreamWrapper;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.servlet.ByteArrayInputStreamWrapper;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -120,8 +120,8 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 			is.close();
 		}
 
-		return new ByteArrayInputStreamWrapper(
-			new ByteArrayInputStream(_bytes));
+		return new UnsyncByteArrayInputStreamWrapper(
+			new UnsyncByteArrayInputStream(_bytes));
 	}
 
 	private Map<String, Object> _strutsAttributes;

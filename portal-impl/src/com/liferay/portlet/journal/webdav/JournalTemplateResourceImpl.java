@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.journal.webdav;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 /**
@@ -63,7 +63,7 @@ public class JournalTemplateResourceImpl extends BaseResourceImpl {
 
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
-			return new ByteArrayInputStream(
+			return new UnsyncByteArrayInputStream(
 				_template.getXsl().getBytes(StringPool.UTF8));
 		}
 		catch (Exception e) {

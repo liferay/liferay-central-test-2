@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
@@ -43,7 +44,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -128,9 +128,9 @@ public class CompareVersionsAction extends PortletAction {
 			String escapedSource = HtmlUtil.escape(StringUtil.read(sourceIs));
 			String escapedTarget = HtmlUtil.escape(StringUtil.read(targetIs));
 
-			sourceIs = new ByteArrayInputStream(
+			sourceIs = new UnsyncByteArrayInputStream(
 				escapedSource.getBytes(StringPool.UTF8));
-			targetIs = new ByteArrayInputStream(
+			targetIs = new UnsyncByteArrayInputStream(
 				escapedTarget.getBytes(StringPool.UTF8));
 		}
 

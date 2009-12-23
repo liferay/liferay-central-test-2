@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journalcontent.action;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -41,7 +42,6 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import javax.portlet.ActionRequest;
@@ -141,7 +141,7 @@ public class ExportArticleAction extends PortletAction {
 			sb.append("</body>");
 			sb.append("</html>");
 
-			InputStream is = new ByteArrayInputStream(
+			InputStream is = new UnsyncByteArrayInputStream(
 				sb.toString().getBytes(StringPool.UTF8));
 
 			String title = articleDisplay.getTitle();

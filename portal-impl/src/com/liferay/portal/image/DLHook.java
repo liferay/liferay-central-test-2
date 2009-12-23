@@ -28,13 +28,13 @@ import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -95,7 +95,7 @@ public class DLHook extends BaseHook {
 
 		String fileName = getFileName(image.getImageId(), image.getType());
 		Date now = new Date();
-		InputStream is = new ByteArrayInputStream(bytes);
+		InputStream is = new UnsyncByteArrayInputStream(bytes);
 
 		if (DLLocalServiceUtil.hasFile(
 			_COMPANY_ID, _REPOSITORY_ID, fileName, _VERSION_NUMBER)) {

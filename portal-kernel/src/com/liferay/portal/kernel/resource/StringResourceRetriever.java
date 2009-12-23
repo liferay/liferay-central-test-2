@@ -22,7 +22,8 @@
 
 package com.liferay.portal.kernel.resource;
 
-import java.io.ByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+
 import java.io.InputStream;
 
 /**
@@ -33,7 +34,7 @@ import java.io.InputStream;
 public class StringResourceRetriever implements ResourceRetriever {
 
 	public StringResourceRetriever(String resource) {
-		_inputStream = new ByteArrayInputStream(resource.getBytes());
+		_inputStream = new UnsyncByteArrayInputStream(resource.getBytes());
 	}
 
 	public InputStream getInputStream() {

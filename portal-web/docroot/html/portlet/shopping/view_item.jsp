@@ -119,7 +119,6 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 		<%
 		Properties props = new OrderedProperties();
 
-		//props.load(new ByteArrayInputStream(item.getProperties().getBytes("ISO-8859-1")));
 		PropertiesUtil.load(props, item.getProperties());
 
 		Enumeration enu = props.propertyNames();

@@ -204,7 +204,6 @@
 <%@ page import="com.liferay.util.servlet.UploadException" %>
 <%@ page import="com.liferay.util.xml.XMLFormatter" %>
 
-<%@ page import="java.io.ByteArrayInputStream" %>
 <%@ page import="java.io.Serializable" %>
 <%@ page import="java.io.StringReader" %>
 
