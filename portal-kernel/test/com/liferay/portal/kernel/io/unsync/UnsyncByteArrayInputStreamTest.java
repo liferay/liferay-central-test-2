@@ -33,14 +33,14 @@ import com.liferay.portal.kernel.test.TestCase;
 public class UnsyncByteArrayInputStreamTest extends TestCase {
 
 	public void testBlockRead() {
-		UnsyncByteArrayInputStream unsyncBais = new UnsyncByteArrayInputStream(
+		UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
 			_BUFFER);
 
 		int bufferSize = _BUFFER_SIZE * 2 / 3;
 
 		byte[] buffer = new byte[bufferSize];
 
-		int number = unsyncBais.read(buffer);
+		int number = ubais.read(buffer);
 
 		assertEquals(bufferSize, number);
 
@@ -48,7 +48,7 @@ public class UnsyncByteArrayInputStreamTest extends TestCase {
 			assertEquals(i, buffer[i]);
 		}
 
-		number = unsyncBais.read(buffer);
+		number = ubais.read(buffer);
 
 		assertEquals(_BUFFER_SIZE - bufferSize, number);
 
@@ -58,68 +58,68 @@ public class UnsyncByteArrayInputStreamTest extends TestCase {
 	}
 
 	public void testConstructor() {
-		UnsyncByteArrayInputStream unsyncBais = new UnsyncByteArrayInputStream(
+		UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
 			_BUFFER);
 
-		assertEquals(_BUFFER_SIZE, unsyncBais.available());
+		assertEquals(_BUFFER_SIZE, ubais.available());
 
-		unsyncBais = new UnsyncByteArrayInputStream(
+		ubais = new UnsyncByteArrayInputStream(
 			_BUFFER, _BUFFER_SIZE / 2, _BUFFER_SIZE / 2);
 
-		assertEquals(_BUFFER_SIZE / 2, unsyncBais.available());
+		assertEquals(_BUFFER_SIZE / 2, ubais.available());
 	}
 
 	public void testMarkAndReset() {
-		UnsyncByteArrayInputStream unsyncBais = new UnsyncByteArrayInputStream(
+		UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
 			_BUFFER);
 
-		assertEquals(0, unsyncBais.read());
-		assertEquals(1, unsyncBais.read());
+		assertEquals(0, ubais.read());
+		assertEquals(1, ubais.read());
 
-		unsyncBais.mark(-1);
+		ubais.mark(-1);
 
-		assertEquals(_BUFFER_SIZE - 2, unsyncBais.available());
-		assertEquals(2, unsyncBais.read());
-		assertEquals(3, unsyncBais.read());
-		assertEquals(_BUFFER_SIZE - 4, unsyncBais.available());
+		assertEquals(_BUFFER_SIZE - 2, ubais.available());
+		assertEquals(2, ubais.read());
+		assertEquals(3, ubais.read());
+		assertEquals(_BUFFER_SIZE - 4, ubais.available());
 
-		unsyncBais.reset();
+		ubais.reset();
 
-		assertEquals(_BUFFER_SIZE - 2, unsyncBais.available());
-		assertEquals(2, unsyncBais.read());
-		assertEquals(3, unsyncBais.read());
+		assertEquals(_BUFFER_SIZE - 2, ubais.available());
+		assertEquals(2, ubais.read());
+		assertEquals(3, ubais.read());
 
-		assertEquals(_BUFFER_SIZE - 4, unsyncBais.available());
+		assertEquals(_BUFFER_SIZE - 4, ubais.available());
 	}
 
 	public void testMarkSupported() {
-		UnsyncByteArrayInputStream unsyncBais = new UnsyncByteArrayInputStream(
+		UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
 			_BUFFER);
 
-		assertTrue(unsyncBais.markSupported());
+		assertTrue(ubais.markSupported());
 	}
 
 	public void testRead() {
-		UnsyncByteArrayInputStream unsyncBais = new UnsyncByteArrayInputStream(
+		UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
 			_BUFFER);
 
 		for (int i = 0; i < _BUFFER_SIZE; i++) {
-			assertEquals(i, unsyncBais.read());
+			assertEquals(i, ubais.read());
 		}
 
-		assertEquals(-1, unsyncBais.read());
+		assertEquals(-1, ubais.read());
 	}
 
 	public void testSkip() {
-		UnsyncByteArrayInputStream unsyncBais = new UnsyncByteArrayInputStream(
+		UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
 			_BUFFER);
 
 		long bufferSize = _BUFFER_SIZE * 2 / 3;
 
-		assertEquals(bufferSize, unsyncBais.skip(bufferSize));
-		assertEquals(_BUFFER_SIZE - bufferSize, unsyncBais.available());
-		assertEquals(_BUFFER_SIZE - bufferSize, unsyncBais.skip(bufferSize));
-		assertEquals(0, unsyncBais.available());
+		assertEquals(bufferSize, ubais.skip(bufferSize));
+		assertEquals(_BUFFER_SIZE - bufferSize, ubais.available());
+		assertEquals(_BUFFER_SIZE - bufferSize, ubais.skip(bufferSize));
+		assertEquals(0, ubais.available());
 	}
 
 	private static final int _BUFFER_SIZE = 10;

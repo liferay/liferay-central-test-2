@@ -40,57 +40,57 @@ public class UnsyncBufferedOutputStreamTest extends TestCase {
 	public void testBlockWrite() throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-		UnsyncBufferedOutputStream unsyncBos = new UnsyncBufferedOutputStream(
+		UnsyncBufferedOutputStream ubos = new UnsyncBufferedOutputStream(
 			baos, _BUFFER_SIZE * 2);
 
-		assertEquals(_BUFFER_SIZE * 2, unsyncBos.buffer.length);
+		assertEquals(_BUFFER_SIZE * 2, ubos.buffer.length);
 
-		unsyncBos.write(_BUFFER);
+		ubos.write(_BUFFER);
 
 		for (int i = 0; i < _BUFFER_SIZE; i++) {
-			assertEquals(i, unsyncBos.buffer[i]);
+			assertEquals(i, ubos.buffer[i]);
 		}
 
-		unsyncBos.write(_BUFFER);
+		ubos.write(_BUFFER);
 
 		for (int i = _BUFFER_SIZE; i < _BUFFER_SIZE * 2; i++) {
-			assertEquals(i - _BUFFER_SIZE, unsyncBos.buffer[i]);
+			assertEquals(i - _BUFFER_SIZE, ubos.buffer[i]);
 		}
 
-		unsyncBos.write(100);
+		ubos.write(100);
 
-		assertEquals(100, unsyncBos.buffer[0]);
+		assertEquals(100, ubos.buffer[0]);
 		assertEquals(_BUFFER_SIZE * 2, baos.size());
 	}
 
 	public void testConstructor() {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-		UnsyncBufferedOutputStream unsyncBos = new UnsyncBufferedOutputStream(
+		UnsyncBufferedOutputStream ubos = new UnsyncBufferedOutputStream(
 			baos);
 
-		assertEquals(8192, unsyncBos.buffer.length);
+		assertEquals(8192, ubos.buffer.length);
 
-		unsyncBos = new UnsyncBufferedOutputStream(baos, 10);
+		ubos = new UnsyncBufferedOutputStream(baos, 10);
 
-		assertEquals(10, unsyncBos.buffer.length);
+		assertEquals(10, ubos.buffer.length);
 	}
 
 	public void testWrite() throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-		UnsyncBufferedOutputStream unsyncBos = new UnsyncBufferedOutputStream(
+		UnsyncBufferedOutputStream ubos = new UnsyncBufferedOutputStream(
 			baos, _BUFFER_SIZE * 2);
 
-		assertEquals(_BUFFER_SIZE * 2, unsyncBos.buffer.length);
+		assertEquals(_BUFFER_SIZE * 2, ubos.buffer.length);
 
 		for (int i = 0; i < _BUFFER_SIZE; i++) {
-			unsyncBos.write(i);
+			ubos.write(i);
 
-			assertEquals(i, unsyncBos.buffer[i]);
+			assertEquals(i, ubos.buffer[i]);
 		}
 
-		unsyncBos.flush();
+		ubos.flush();
 
 		assertTrue(Arrays.equals(_BUFFER, baos.toByteArray()));
 	}
