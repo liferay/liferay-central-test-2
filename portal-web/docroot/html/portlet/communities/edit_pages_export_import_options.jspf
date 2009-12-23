@@ -345,7 +345,7 @@
 													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"><liferay-ui:message key="data" /></label>
 
 													<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId + "Controls" %>">
-														<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls, portletDataHandler.isPublishToLiveByDefault()) %>
+														<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls, !portletDataHandler.isPublishToLiveByDefault()) %>
 													</ul>
 												</li>
 

@@ -98,7 +98,7 @@
 					if (controls != null) {
 				%>
 
-						<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls, portletDataHandler.isPublishToLiveByDefault()) %>
+						<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls, !portletDataHandler.isPublishToLiveByDefault()) %>
 
 				<%
 					}
