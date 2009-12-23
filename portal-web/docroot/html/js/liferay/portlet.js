@@ -323,7 +323,7 @@ Liferay.Portlet = {
 			instance.registerStatic(portletId);
 		}
 
-		AUI().ready(
+		AUI().ready('dialog',
 			function(A) {
 				var portlet = A.one('#' + namespacedId);
 
@@ -354,7 +354,9 @@ Liferay.Portlet = {
 							configurationLink.on(
 								'click',
 								function(event) {
-									location.href = event.currentTarget.attr('href') + '&previewWidth=' + portlet.offsetHeight;
+									var configurationURL = event.currentTarget.attr('href');
+
+									instance.openConfiguration(portlet, portletId, configurationURL, namespacedId);
 
 									event.halt();
 								}
@@ -466,6 +468,68 @@ Liferay.Portlet = {
 				}
 			}
 		);
+	},
+
+	openConfiguration: function(portlet, portletId, configurationURL, namespacedId) {
+		var instance = this;
+		var A = AUI();
+
+		portlet = A.one(portlet);
+
+		if (portlet && configurationURL) {
+			var title = portlet.one('.portlet-title');
+			var loading = '<div class="aui-icon-loading"> </div>'
+
+			var iframe = document.createElement("iframe");
+
+			iframe.setAttribute('id', namespacedId + 'configurationIframe');
+			iframe.setAttribute('name', namespacedId + 'configurationIframe');
+			iframe.setAttribute('src', configurationURL);
+			iframe.setAttribute('width', 800);
+			iframe.setAttribute('style', "border-width:0; overflow:auto");
+
+			var dialog = new A.Dialog(
+				{
+					title: title.html() + ' - ' + Liferay.Language.get('configuration'),
+					bodyContent: loading + A.one(iframe).outerHTML(),
+					centered: true,
+					constrain2view: true,
+					draggable: true,
+					destroyOnClose: true,
+					width: 820
+				}).render();
+
+			iframe = dialog.get('contentBox').one('iframe');
+
+			iframe.on(
+				'load',
+				function(){
+					if (iframe.get('contentWindow.location.search').indexOf('p_p_id=86') == -1) {
+						// backwards compatibility
+
+						dialog.close();
+					}
+
+					loading = dialog.get('contentBox').one('.aui-icon-loading')
+
+					if (loading) {
+						loading.hide();
+					}
+
+					iframe.set('height', iframe.get('contentWindow.document.body.scrollHeight'));
+
+					var closeButton = iframe.get('contentWindow.document.body').one('.aui-button-input-cancel');
+
+					if (closeButton) {
+						closeButton.on(
+								'click', function() {
+									dialog.close();
+								}
+						);
+					}
+				}
+				);
+		}
 	},
 
 	refresh: function(portlet) {

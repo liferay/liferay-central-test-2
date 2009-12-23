@@ -67,3 +67,16 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 		</c:otherwise>
 	</c:choose>
 </c:if>
+
+<c:if test='<%= themeDisplay.isStatePopUp() && SessionMessages.contains(renderRequest, portletConfig.getPortletName() + ".doConfigure") %>'>
+	<script type="text/javascript">
+		AUI().ready(
+			function(A) {
+				var curPortletBoundaryId = '#p_p_id_<%= portletResource %>_';
+
+				if (window.parent) {
+					window.parent.Liferay.Portlet.refresh(curPortletBoundaryId);
+				}
+		});
+	</script>
+</c:if>

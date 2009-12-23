@@ -451,7 +451,7 @@ portletDisplay.setURLClose(urlClose.toString());
 
 PortletURLImpl urlConfiguration = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid, PortletRequest.RENDER_PHASE);
 
-urlConfiguration.setWindowState(WindowState.MAXIMIZED);
+urlConfiguration.setWindowState(LiferayWindowState.POP_UP);
 
 if (Validator.isNotNull(portlet.getConfigurationActionClass())) {
 	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_configuration");
