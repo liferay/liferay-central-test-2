@@ -55,8 +55,8 @@
 			dayValue="<%= cal.get(Calendar.DATE) %>"
 			yearParam="schedulerStartDateYear"
 			yearValue="<%= cal.get(Calendar.YEAR) %>"
-			yearRangeStart="<%= cal.get(Calendar.YEAR) - 100 %>"
-			yearRangeEnd="<%= cal.get(Calendar.YEAR) %>"
+			yearRangeStart="<%= cal.get(Calendar.YEAR) %>"
+			yearRangeEnd="<%= cal.get(Calendar.YEAR) + 100 %>"
 			firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
 			disabled="<%= false %>"
 		/>
@@ -86,8 +86,8 @@
 			dayValue="<%= cal.get(Calendar.DATE) %>"
 			yearParam="schedulerEndDateYear"
 			yearValue="<%= cal.get(Calendar.YEAR) %>"
-			yearRangeStart="<%= cal.get(Calendar.YEAR) - 100 %>"
-			yearRangeEnd="<%= cal.get(Calendar.YEAR) %>"
+			yearRangeStart="<%= cal.get(Calendar.YEAR) %>"
+			yearRangeEnd="<%= cal.get(Calendar.YEAR) + 100 %>"
 			firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
 			disabled="<%= false %>"
 		/>
