@@ -22,14 +22,14 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.FileImpl;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
 
 import java.sql.Connection;
@@ -136,8 +136,9 @@ public class DBLoader {
 
 					ij.runScript(
 						con,
-						new ByteArrayInputStream(sql.getBytes(StringPool.UTF8)),
-						StringPool.UTF8, new ByteArrayOutputStream(),
+						new UnsyncByteArrayInputStream(
+							sql.getBytes(StringPool.UTF8)),
+						StringPool.UTF8, new UnsyncByteArrayOutputStream(),
 						StringPool.UTF8);
 				}
 			}

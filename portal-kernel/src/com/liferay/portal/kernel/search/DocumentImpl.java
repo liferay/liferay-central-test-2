@@ -22,13 +22,13 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -62,7 +62,7 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addFile(String name, byte[] bytes, String fileExt) {
-		InputStream is = new ByteArrayInputStream(bytes);
+		InputStream is = new UnsyncByteArrayInputStream(bytes);
 
 		addFile(name, is, fileExt);
 	}

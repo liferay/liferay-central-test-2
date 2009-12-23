@@ -22,11 +22,11 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import java.util.HashMap;
@@ -100,7 +100,7 @@ public class PortletResourceBundles {
 		if (bundle == null) {
 			try {
 				bundle = new PropertyResourceBundle(
-					new ByteArrayInputStream(new byte[0]));
+					new UnsyncByteArrayInputStream(new byte[0]));
 
 				bundles.put(languageId, bundle);
 			}

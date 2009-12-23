@@ -22,11 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -160,7 +160,8 @@ public class Base64 {
 			return null;
 		}
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream(32000);
+		UnsyncByteArrayOutputStream baos =
+			new UnsyncByteArrayOutputStream(32000);
 
 		try {
 			ObjectOutputStream os = new ObjectOutputStream(baos);
@@ -187,7 +188,7 @@ public class Base64 {
 
 		byte bytes[] = decode(s);
 
-		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+		UnsyncByteArrayInputStream bais = new UnsyncByteArrayInputStream(bytes);
 
 		try {
 			ObjectInputStream is = null;

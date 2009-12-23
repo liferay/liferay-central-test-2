@@ -22,6 +22,7 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -91,7 +92,6 @@ import com.liferay.portlet.StateAwareResponseImpl;
 import com.liferay.portlet.login.util.LoginUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -886,7 +886,7 @@ public class LayoutAction extends Action {
 		renderResponseImpl.transferHeaders(response);
 
 		if (stringResponse.isCalledGetOutputStream()) {
-			InputStream is = new ByteArrayInputStream(
+			InputStream is = new UnsyncByteArrayInputStream(
 				stringResponse.getByteArrayOutputStream().toByteArray());
 
 			ServletResponseUtil.sendFile(

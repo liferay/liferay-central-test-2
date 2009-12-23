@@ -22,11 +22,11 @@
 
 package com.liferay.util.xml;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -124,7 +124,7 @@ public class XMLFormatter {
 			Branch branch, String indent, boolean expandEmptyElements)
 		throws IOException {
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		UnsyncByteArrayOutputStream baos = new UnsyncByteArrayOutputStream();
 
 		OutputFormat format = OutputFormat.createPrettyPrint();
 

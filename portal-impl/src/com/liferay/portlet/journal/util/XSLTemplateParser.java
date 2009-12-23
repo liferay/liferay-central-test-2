@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,7 +34,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.util.PwdGenerator;
 
-import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
 
 import java.util.Locale;
@@ -57,7 +57,7 @@ public class XSLTemplateParser extends BaseTemplateParser {
 			String xml, String script)
 		throws Exception {
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		UnsyncByteArrayOutputStream baos = new UnsyncByteArrayOutputStream();
 
 		long companyId = GetterUtil.getLong(tokens.get("company_id"));
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);

@@ -29,11 +29,11 @@ import com.ecyrd.jspwiki.attachment.Attachment;
 import com.ecyrd.jspwiki.providers.ProviderException;
 import com.ecyrd.jspwiki.providers.WikiAttachmentProvider;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -122,7 +122,7 @@ public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 	}
 
 	private static final InputStream _EMPTY_STREAM =
-		new ByteArrayInputStream(new byte[0]);
+		new UnsyncByteArrayInputStream(new byte[0]);
 
 	private WikiEngine _engine;
 	private long _nodeId;

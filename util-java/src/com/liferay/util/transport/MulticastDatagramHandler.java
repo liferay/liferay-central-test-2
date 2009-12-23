@@ -22,8 +22,9 @@
 
 package com.liferay.util.transport;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+
 import java.io.InputStream;
 
 import java.net.DatagramPacket;
@@ -83,8 +84,10 @@ public class MulticastDatagramHandler implements DatagramHandler {
 	}
 
 	protected byte[] getUnzippedBytes(byte[] bytes) throws Exception {
-		InputStream is = new GZIPInputStream(new ByteArrayInputStream(bytes));
-		ByteArrayOutputStream baos = new ByteArrayOutputStream(bytes.length);
+		InputStream is =
+			new GZIPInputStream(new UnsyncByteArrayInputStream(bytes));
+		UnsyncByteArrayOutputStream baos =
+			new UnsyncByteArrayOutputStream(bytes.length);
 
 		byte[] buffer = new byte[1500];
 

@@ -28,6 +28,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserGroupNameException;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchException;
@@ -46,8 +47,6 @@ import com.liferay.portal.model.UserGroupConstants;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
-
-import java.io.ByteArrayInputStream;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -155,7 +154,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			byte[] bytes = layoutLocalService.exportLayouts(
 				sourceGroupId, true, parameterMap, null, null);
 
-			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+			UnsyncByteArrayInputStream bais =
+				new UnsyncByteArrayInputStream(bytes);
 
 			layoutLocalService.importLayouts(
 				userId, targetGroupId, true, parameterMap, bais);
@@ -168,7 +168,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			byte[] bytes = layoutLocalService.exportLayouts(
 				sourceGroupId, false, parameterMap, null, null);
 
-			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+			UnsyncByteArrayInputStream bais =
+				new UnsyncByteArrayInputStream(bytes);
 
 			layoutLocalService.importLayouts(
 				userId, targetGroupId, false, parameterMap, bais);

@@ -22,12 +22,12 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -55,7 +55,7 @@ public class LuceneFileExtractor {
 	}
 
 	public Field getFile(String field, byte[] bytes, String fileExt) {
-		InputStream is = new ByteArrayInputStream(bytes);
+		InputStream is = new UnsyncByteArrayInputStream(bytes);
 
 		return getFile(field, is, fileExt);
 	}

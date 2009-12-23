@@ -24,6 +24,7 @@ package com.liferay.portal.freemarker;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -33,7 +34,6 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -104,7 +104,7 @@ public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 
 			return new BufferedReader(
 				new InputStreamReader(
-					new ByteArrayInputStream(xsl.getBytes()), encoding));
+					new UnsyncByteArrayInputStream(xsl.getBytes()), encoding));
 		}
 
 		return null;

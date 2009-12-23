@@ -22,6 +22,8 @@
 
 package com.liferay.portal.zip;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -37,8 +39,6 @@ import de.schlichtherle.io.FileInputStream;
 import de.schlichtherle.io.FileOutputStream;
 import de.schlichtherle.io.archive.zip.ZipDriver;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -72,8 +72,8 @@ public class ZipWriterImpl implements ZipWriter {
 	}
 
 	public void addEntry(String name, byte[] bytes) throws IOException {
-		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
-			bytes);
+		UnsyncByteArrayInputStream byteArrayInputStream =
+			new UnsyncByteArrayInputStream(bytes);
 
 		try {
 			addEntry(name, byteArrayInputStream);
@@ -120,8 +120,8 @@ public class ZipWriterImpl implements ZipWriter {
 	}
 
 	public byte[] finish() throws IOException {
-		ByteArrayOutputStream byteArrayOutputStream =
-			new ByteArrayOutputStream();
+		UnsyncByteArrayOutputStream byteArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
 
 		InputStream inputStream = new FileInputStream(_file);
 

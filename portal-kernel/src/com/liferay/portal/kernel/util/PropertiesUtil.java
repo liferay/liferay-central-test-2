@@ -22,8 +22,9 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -134,7 +135,7 @@ public class PropertiesUtil {
 	}
 
 	public static String list(Properties properties) {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		UnsyncByteArrayOutputStream baos = new UnsyncByteArrayOutputStream();
 		PrintStream ps = new PrintStream(baos);
 
 		properties.list(ps);
@@ -153,7 +154,7 @@ public class PropertiesUtil {
 			s = StringUtil.replace(s, "\\u0020", " ");
 			s = StringUtil.replace(s, "\\u005c", "\\");
 
-			p.load(new ByteArrayInputStream(s.getBytes()));
+			p.load(new UnsyncByteArrayInputStream(s.getBytes()));
 
 			List<String> propertyNames = Collections.list(
 				(Enumeration<String>)p.propertyNames());

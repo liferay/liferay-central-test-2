@@ -22,6 +22,7 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Converter;
@@ -31,7 +32,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import org.hibernate.cfg.Configuration;
@@ -131,7 +131,7 @@ public class PortalHibernateConfiguration
 			configurationString = _hibernateConfigurationConverter.convert(
 				configurationString);
 
-			is = new ByteArrayInputStream(
+			is = new UnsyncByteArrayInputStream(
 				configurationString.getBytes());
 		}
 

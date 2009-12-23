@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet.filters.strip;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -37,7 +38,6 @@ import com.liferay.portal.servlet.filters.etag.ETagUtil;
 import com.liferay.portal.util.MinifierUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -139,7 +139,7 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected int processCSS(
-			byte[] oldByteArray, ByteArrayOutputStream newBytes,
+			byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
 			int currentIndex)
 		throws IOException {
 
@@ -238,7 +238,7 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected int processJavaScript(
-			byte[] oldByteArray, ByteArrayOutputStream newBytes,
+			byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
 			int currentIndex, byte[] openTag)
 		throws IOException {
 
@@ -281,7 +281,8 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected int processPre(
-		byte[] oldByteArray, ByteArrayOutputStream newBytes, int currentIndex) {
+		byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
+		int currentIndex) {
 
 		int beginIndex = currentIndex + _MARKER_PRE_OPEN.length + 1;
 
@@ -306,7 +307,8 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected int processTextArea(
-		byte[] oldByteArray, ByteArrayOutputStream newBytes, int currentIndex) {
+		byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
+		int currentIndex) {
 
 		int beginIndex = currentIndex + _MARKER_TEXTAREA_OPEN.length + 1;
 
@@ -331,7 +333,7 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected byte[] strip(byte[] oldByteArray) throws IOException {
-		ByteArrayOutputStream newBytes = new ByteArrayOutputStream(
+		UnsyncByteArrayOutputStream newBytes = new UnsyncByteArrayOutputStream(
 			(int)(oldByteArray.length * _COMPRESSION_RATE));
 
 		int count = countContinuousWhiteSpace(oldByteArray, 0);

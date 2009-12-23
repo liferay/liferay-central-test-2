@@ -22,6 +22,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileComparator;
@@ -38,7 +39,6 @@ import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -382,8 +382,8 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	public byte[] getBytes(InputStream inputStream, int bufferSize)
 		throws IOException {
 
-		ByteArrayOutputStream byteArrayOutputStream =
-			new ByteArrayOutputStream();
+		UnsyncByteArrayOutputStream byteArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
 
 		StreamUtil.transfer(inputStream, byteArrayOutputStream, bufferSize);
 

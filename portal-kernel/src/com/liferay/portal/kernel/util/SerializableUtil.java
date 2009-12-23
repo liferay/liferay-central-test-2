@@ -22,8 +22,9 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -41,7 +42,7 @@ public class SerializableUtil {
 		ObjectInputStream ois = null;
 
 		try {
-			ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
+			ois = new ObjectInputStream(new UnsyncByteArrayInputStream(bytes));
 
 			Object obj = ois.readObject();
 
@@ -62,7 +63,8 @@ public class SerializableUtil {
 		ObjectOutputStream oos = null;
 
 		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			UnsyncByteArrayOutputStream baos =
+				new UnsyncByteArrayOutputStream();
 
 			oos = new ObjectOutputStream(baos);
 

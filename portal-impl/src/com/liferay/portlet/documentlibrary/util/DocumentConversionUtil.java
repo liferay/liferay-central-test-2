@@ -32,6 +32,7 @@ import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConv
 import com.artofsolving.jodconverter.openoffice.converter.StreamOpenOfficeDocumentConverter;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -41,7 +42,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SystemProperties;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -146,7 +146,8 @@ public class DocumentConversionUtil {
 			DocumentFormat inputFormat = registry.getFormatByFileExtension(
 				sourceExtension);
 
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			UnsyncByteArrayOutputStream baos =
+				new UnsyncByteArrayOutputStream();
 
 			DocumentFormat outputFormat = registry.getFormatByFileExtension(
 				targetExtension);

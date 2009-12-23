@@ -27,6 +27,7 @@ import com.ecyrd.jspwiki.WikiException;
 import com.ecyrd.jspwiki.WikiPage;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -35,7 +36,6 @@ import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -181,7 +181,8 @@ public class JSPWikiEngine implements WikiEngine {
 	protected synchronized void setProperties(String configuration) {
 		_props = new Properties();
 
-		InputStream is = new ByteArrayInputStream(configuration.getBytes());
+		InputStream is =
+			new UnsyncByteArrayInputStream(configuration.getBytes());
 
 		try {
 			_props.load(is);

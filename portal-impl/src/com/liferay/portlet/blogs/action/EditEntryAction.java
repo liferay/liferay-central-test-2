@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.action;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -56,7 +57,6 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import java.util.Calendar;
@@ -157,7 +157,7 @@ public class EditEntryAction extends PortletAction {
 
 				HttpServletResponse response =
 					PortalUtil.getHttpServletResponse(actionResponse);
-				InputStream is = new ByteArrayInputStream(
+				InputStream is = new UnsyncByteArrayInputStream(
 					jsonObj.toString().getBytes());
 				String contentType = ContentTypes.TEXT_JAVASCRIPT;
 

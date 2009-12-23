@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBag;
@@ -34,8 +35,6 @@ import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PublicRenderParameter;
-
-import java.io.ByteArrayInputStream;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -173,7 +172,8 @@ public class PortletConfigImpl implements PortletConfig {
 					sb.append("\n");
 
 					bundle = new PropertyResourceBundle(
-						new ByteArrayInputStream(sb.toString().getBytes()));
+						new UnsyncByteArrayInputStream(
+							sb.toString().getBytes()));
 				}
 				catch (Exception e) {
 					_log.error(e, e);

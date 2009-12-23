@@ -24,6 +24,8 @@ package com.liferay.portal.image;
 
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessor;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.JavaProps;
@@ -42,8 +44,6 @@ import java.awt.image.IndexColorModel;
 import java.awt.image.RenderedImage;
 import java.awt.image.SampleModel;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -166,7 +166,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 			contentType = TYPE_TIFF;
 		}
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		UnsyncByteArrayOutputStream baos = new UnsyncByteArrayOutputStream();
 
 		if (contentType.indexOf(TYPE_BMP) != -1) {
 			ImageEncoder encoder = ImageCodec.createImageEncoder(
@@ -210,7 +210,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 				type = codec.getFormatName();
 
 				ImageDecoder decoder = ImageCodec.createImageDecoder(
-					type, new ByteArrayInputStream(bytes), null);
+					type, new UnsyncByteArrayInputStream(bytes), null);
 
 				try {
 					renderedImage = decoder.decodeAsRenderedImage();

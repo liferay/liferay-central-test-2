@@ -22,6 +22,7 @@
 
 package com.liferay.util.portlet;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -37,7 +38,6 @@ import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.xml.DocUtil;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -119,7 +119,8 @@ public class PortletRequestUtil {
 		InputStream is = actionRequest.getPortletInputStream();
 
 		if (is != null) {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			UnsyncByteArrayOutputStream baos =
+				new UnsyncByteArrayOutputStream();
 
 			StreamUtil.transfer(is, baos);
 

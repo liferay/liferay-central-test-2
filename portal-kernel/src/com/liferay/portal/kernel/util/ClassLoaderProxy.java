@@ -22,11 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -157,7 +157,8 @@ public class ClassLoaderProxy {
 		Throwable t1, ClassLoader contextClassLoader) {
 
 		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			UnsyncByteArrayOutputStream baos =
+				new UnsyncByteArrayOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(baos);
 
 			oos.writeObject(t1);
@@ -167,7 +168,8 @@ public class ClassLoaderProxy {
 
 			byte[] bytes = baos.toByteArray();
 
-			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+			UnsyncByteArrayInputStream bais =
+				new UnsyncByteArrayInputStream(bytes);
 			ObjectInputStream ois = new ClassLoaderObjectInputStream(
 				bais, contextClassLoader);
 

@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.xslcontent.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.util.HttpUtil;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -64,7 +64,7 @@ public class XSLContentUtil {
 		Transformer transformer =
 			transformerFactory.newTransformer(xslSource);
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		UnsyncByteArrayOutputStream baos = new UnsyncByteArrayOutputStream();
 
 		transformer.transform(xmlSource, new StreamResult(baos));
 
