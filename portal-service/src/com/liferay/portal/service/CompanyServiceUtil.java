@@ -94,6 +94,12 @@ public class CompanyServiceUtil {
 		return getService().getCompanyByWebId(webId);
 	}
 
+	public static void removePreferences(long companyId, java.lang.String[] keys)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().removePreferences(companyId, keys);
+	}
+
 	public static com.liferay.portal.model.Company updateCompany(
 		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,

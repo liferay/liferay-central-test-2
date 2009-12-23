@@ -103,6 +103,18 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		return companyLocalService.getCompanyByWebId(webId);
 	}
 
+	public void removePreferences(long companyId, String[] keys)
+		throws PortalException, SystemException {
+
+		if (!roleLocalService.hasUserRole(
+				getUserId(), companyId, RoleConstants.ADMINISTRATOR, true)) {
+
+			throw new PrincipalException();
+		}
+
+		companyLocalService.removePreferences(companyId, keys);
+	}
+
 	public Company updateCompany(long companyId, String virtualHost, String mx)
 		throws PortalException, SystemException {
 

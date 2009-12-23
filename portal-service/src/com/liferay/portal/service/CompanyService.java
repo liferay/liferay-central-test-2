@@ -92,6 +92,10 @@ public interface CompanyService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void removePreferences(long companyId, java.lang.String[] keys)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Company updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,

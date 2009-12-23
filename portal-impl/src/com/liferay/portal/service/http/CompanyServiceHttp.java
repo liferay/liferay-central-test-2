@@ -357,6 +357,44 @@ public class CompanyServiceHttp {
 		}
 	}
 
+	public static void removePreferences(HttpPrincipal httpPrincipal,
+		long companyId, java.lang.String[] keys)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = keys;
+
+			if (keys == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
+					"removePreferences", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.Company updateCompany(
 		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String virtualHost, java.lang.String mx)

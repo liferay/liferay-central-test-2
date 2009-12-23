@@ -438,6 +438,24 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return companyPersistence.findByWebId(webId);
 	}
 
+	public void removePreferences(long companyId, String[] keys)
+		throws SystemException {
+
+		PortletPreferences preferences = PrefsPropsUtil.getPreferences(
+			companyId);
+
+		try {
+			for (String key : keys) {
+				preferences.reset(key);
+			}
+
+			preferences.store();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
 	public Hits search(
 			long companyId, long userId, String keywords, int start, int end)
 		throws SystemException {
@@ -619,9 +637,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			companyId);
 
 		try {
-			String oldLocales = preferences.getValue(
-				PropsKeys.LOCALES, StringPool.BLANK);
-
 			for (String key : properties.keySet()) {
 				String value = properties.getProperty(key);
 
@@ -630,10 +645,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			preferences.store();
 
-			String newLocales = properties.getProperty(PropsKeys.LOCALES);
+			if (properties.containsKey(PropsKeys.LOCALES)) {
+				String oldLocales = preferences.getValue(
+					PropsKeys.LOCALES, StringPool.BLANK);
+				String newLocales = properties.getProperty(PropsKeys.LOCALES);
 
-			if (!Validator.equals(oldLocales, newLocales)) {
-				LanguageUtil.resetAvailableLocales(companyId);
+				if (!Validator.equals(oldLocales, newLocales)) {
+					LanguageUtil.resetAvailableLocales(companyId);
+				}
 			}
 		}
 		catch (Exception e) {

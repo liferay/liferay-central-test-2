@@ -177,6 +177,18 @@ public class CompanyServiceSoap {
 		}
 	}
 
+	public static void removePreferences(long companyId, java.lang.String[] keys)
+		throws RemoteException {
+		try {
+			CompanyServiceUtil.removePreferences(companyId, keys);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.CompanySoap updateCompany(
 		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws RemoteException {

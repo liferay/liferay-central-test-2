@@ -158,6 +158,9 @@ public interface CompanyLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void removePreferences(long companyId, java.lang.String[] keys)
+		throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		long userId, java.lang.String keywords, int start, int end)

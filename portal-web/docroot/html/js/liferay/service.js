@@ -29,6 +29,7 @@ Liferay.Service.registerClass(
 		getCompanyByMx: true,
 		getCompanyByVirtualHost: true,
 		getCompanyByWebId: true,
+		removePreferences: true,
 		updateCompany: true,
 		updateDisplay: true,
 		updatePreferences: true,

@@ -190,6 +190,11 @@ public class CompanyLocalServiceUtil {
 		return getService().getCompanyByWebId(webId);
 	}
 
+	public static void removePreferences(long companyId, java.lang.String[] keys)
+		throws com.liferay.portal.SystemException {
+		getService().removePreferences(companyId, keys);
+	}
+
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		long userId, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException {

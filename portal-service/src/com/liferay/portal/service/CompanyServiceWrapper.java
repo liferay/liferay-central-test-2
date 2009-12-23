@@ -91,6 +91,12 @@ public class CompanyServiceWrapper implements CompanyService {
 		return _companyService.getCompanyByWebId(webId);
 	}
 
+	public void removePreferences(long companyId, java.lang.String[] keys)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_companyService.removePreferences(companyId, keys);
+	}
+
 	public com.liferay.portal.model.Company updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
