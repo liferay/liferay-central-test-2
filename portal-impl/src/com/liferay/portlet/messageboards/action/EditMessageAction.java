@@ -47,9 +47,11 @@ import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
+import com.liferay.portlet.messageboards.ThreadLockedException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
 
 import java.io.File;
 
@@ -88,16 +90,24 @@ public class EditMessageAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteMessage(actionRequest);
 			}
+			else if (cmd.equals(Constants.LOCK)) {
+				lockThread(actionRequest);
+			}
 			else if (cmd.equals(Constants.SUBSCRIBE)) {
 				subscribeMessage(actionRequest);
+			}
+			else if (cmd.equals(Constants.UNLOCK)) {
+				unlockThread(actionRequest);
 			}
 			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
 				unsubscribeMessage(actionRequest);
 			}
 
 			if (cmd.equals(Constants.DELETE) ||
+				cmd.equals(Constants.LOCK) ||
 				cmd.equals(Constants.SUBSCRIBE) ||
-				cmd.equals(Constants.UNSUBSCRIBE)) {
+				cmd.equals(Constants.UNSUBSCRIBE) ||
+				cmd.equals(Constants.UNLOCK)) {
 
 				sendRedirect(actionRequest, actionResponse);
 			}
@@ -115,7 +125,8 @@ public class EditMessageAction extends PortletAction {
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof MessageBodyException ||
-					 e instanceof MessageSubjectException) {
+					 e instanceof MessageSubjectException ||
+					 e instanceof ThreadLockedException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
@@ -159,12 +170,24 @@ public class EditMessageAction extends PortletAction {
 		MBMessageServiceUtil.deleteMessage(messageId);
 	}
 
+	protected void lockThread(ActionRequest actionRequest) throws Exception {
+		long threadId = ParamUtil.getLong(actionRequest, "threadId");
+
+		MBThreadServiceUtil.lockThread(threadId);
+	}
+
 	protected void subscribeMessage(ActionRequest actionRequest)
 		throws Exception {
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessageServiceUtil.subscribeMessage(messageId);
+	}
+
+	protected void unlockThread(ActionRequest actionRequest) throws Exception {
+		long threadId = ParamUtil.getLong(actionRequest, "threadId");
+
+		MBThreadServiceUtil.unlockThread(threadId);
 	}
 
 	protected void unsubscribeMessage(ActionRequest actionRequest)

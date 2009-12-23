@@ -40,6 +40,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
+import com.liferay.portlet.messageboards.ThreadLockedException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
@@ -69,6 +70,7 @@ import java.util.List;
  * <a href="MBMessageServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Mika Koivisto
  */
 public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
@@ -127,6 +129,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		checkReplyToPermission(groupId, categoryId, parentMessageId);
+
+		if (lockLocalService.isLocked(
+			MBThread.class.getName(), threadId)) {
+
+			throw new ThreadLockedException();
+		}
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), groupId, categoryId,
@@ -506,6 +514,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.UPDATE);
+
+		if (lockLocalService.isLocked(
+			MBThread.class.getName(), message.getThreadId())) {
+
+			throw new ThreadLockedException();
+		}
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), message.getGroupId(),

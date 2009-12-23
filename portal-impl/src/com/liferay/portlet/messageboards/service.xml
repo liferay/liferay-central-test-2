@@ -299,6 +299,7 @@
 		<reference package-path="com.liferay.mail" entity="Mail" />
 		<reference package-path="com.liferay.portal" entity="Company" />
 		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portal" entity="Lock" />
 		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
 		<reference package-path="com.liferay.portal" entity="Subscription" />
 		<reference package-path="com.liferay.portal" entity="User" />
@@ -460,6 +461,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
+		<reference package-path="com.liferay.portal" entity="Lock" />
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
@@ -479,5 +481,6 @@
 		<exception>MessageSubject</exception>
 		<exception>RequiredMessage</exception>
 		<exception>SplitThread</exception>
+		<exception>ThreadLocked</exception>
 	</exceptions>
 </service-builder>

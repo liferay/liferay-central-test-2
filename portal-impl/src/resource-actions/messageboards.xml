@@ -52,6 +52,7 @@
 			<action-key>ADD_MESSAGE</action-key>
 			<action-key>ADD_SUBCATEGORY</action-key>
 			<action-key>DELETE</action-key>
+			<action-key>LOCK_THREAD</action-key>
 			<action-key>MOVE_THREAD</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>REPLY_TO_MESSAGE</action-key>
@@ -73,6 +74,7 @@
 		<guest-unsupported>
 			<action-key>ADD_FILE</action-key>
 			<action-key>ADD_SUBCATEGORY</action-key>
+			<action-key>LOCK_THREAD</action-key>
 			<action-key>SUBSCRIBE</action-key>
 			<action-key>UPDATE</action-key>
 			<action-key>UPDATE_THREAD_PRIORITY</action-key>
