@@ -25,6 +25,7 @@ package com.liferay.documentlibrary.util;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,7 +33,6 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.service.ServiceContext;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -84,7 +84,7 @@ public abstract class BaseHook implements Hook {
 		InputStream is = null;
 
 		try {
-			is = new BufferedInputStream(new FileInputStream(file));
+			is = new UnsyncBufferedInputStream(new FileInputStream(file));
 
 			addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
@@ -234,7 +234,7 @@ public abstract class BaseHook implements Hook {
 		InputStream is = null;
 
 		try {
-			is = new BufferedInputStream(new FileInputStream(file));
+			is = new UnsyncBufferedInputStream(new FileInputStream(file));
 
 			updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,

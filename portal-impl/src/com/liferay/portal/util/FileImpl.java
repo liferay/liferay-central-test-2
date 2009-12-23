@@ -22,6 +22,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -36,7 +37,6 @@ import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -439,7 +439,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		nsDetector detector = new nsDetector(nsPSMDetector.ALL);
 
-		BufferedInputStream bis = new BufferedInputStream(
+		UnsyncBufferedInputStream bis = new UnsyncBufferedInputStream(
 			new FileInputStream(file));
 
 		byte[] buffer = new byte[1024];
@@ -457,6 +457,8 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		}
 
 		detector.DataEnd();
+
+		bis.close();
 
 		return ascii;
 	}

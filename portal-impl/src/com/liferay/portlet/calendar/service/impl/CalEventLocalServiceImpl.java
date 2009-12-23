@@ -31,6 +31,7 @@ import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -79,7 +80,6 @@ import com.liferay.portlet.calendar.util.Indexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.util.TimeZoneSensitive;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -883,7 +883,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			File file = File.createTempFile(fileName, extension);
 
-			os = new BufferedOutputStream(new FileOutputStream(file.getPath()));
+			os = new UnsyncBufferedOutputStream(
+				new FileOutputStream(file.getPath()));
 
 			CalendarOutputter calOutput = new CalendarOutputter();
 

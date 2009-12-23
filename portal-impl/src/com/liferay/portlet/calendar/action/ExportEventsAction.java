@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.calendar.action;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -35,7 +36,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -82,7 +82,8 @@ public class ExportEventsAction extends PortletAction {
 					themeDisplay.getScopeGroupId(), exportFileName);
 			}
 
-			InputStream is = new BufferedInputStream(new FileInputStream(file));
+			InputStream is =
+				new UnsyncBufferedInputStream(new FileInputStream(file));
 
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);

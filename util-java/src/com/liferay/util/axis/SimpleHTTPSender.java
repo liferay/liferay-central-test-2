@@ -22,6 +22,7 @@
 
 package com.liferay.util.axis;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.SystemProperties;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -154,7 +154,7 @@ public class SimpleHTTPSender extends HTTPSender {
 			urlc.setRequestProperty("SOAPAction", ctx.getSOAPActionURI());
 		}
 
-		OutputStream os = new BufferedOutputStream(
+		OutputStream os = new UnsyncBufferedOutputStream(
 			urlc.getOutputStream(), 8192);
 
 		request.writeTo(os);

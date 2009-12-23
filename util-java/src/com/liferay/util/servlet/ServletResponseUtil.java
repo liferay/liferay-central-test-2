@@ -22,6 +22,7 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -34,7 +35,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -127,7 +127,7 @@ public class ServletResponseUtil {
 
 				response.setContentLength(contentLength);
 
-				os = new BufferedOutputStream(response.getOutputStream());
+				os = new UnsyncBufferedOutputStream(response.getOutputStream());
 
 				os.write(bytes, 0, contentLength);
 			}
