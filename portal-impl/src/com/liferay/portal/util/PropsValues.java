@@ -338,6 +338,10 @@ public class PropsValues {
 	public static final String CMIS_SYSTEM_ROOT_DIR =
 		PropsUtil.get(PropsKeys.CMIS_SYSTEM_ROOT_DIR);
 
+	public static final boolean COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE));
+
 	public static final String COMPANY_DEFAULT_HOME_URL =
 		PropsUtil.get(PropsKeys.COMPANY_DEFAULT_HOME_URL);
 

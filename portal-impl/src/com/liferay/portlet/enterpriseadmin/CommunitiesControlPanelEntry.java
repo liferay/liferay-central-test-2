@@ -25,6 +25,7 @@ package com.liferay.portlet.enterpriseadmin;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.BaseControlPanelEntry;
 
 import java.util.LinkedHashMap;
@@ -41,20 +42,22 @@ public class CommunitiesControlPanelEntry extends BaseControlPanelEntry {
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception {
 
-		LinkedHashMap<String, Object> groupParams =
-			new LinkedHashMap<String, Object>();
+		if (PropsValues.COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE) {
+			LinkedHashMap<String, Object> groupParams =
+				new LinkedHashMap<String, Object>();
 
-		groupParams.put("usersGroups", new Long(permissionChecker.getUserId()));
+			groupParams.put(
+				"usersGroups", new Long(permissionChecker.getUserId()));
 
-		int count = GroupLocalServiceUtil.searchCount(
-			permissionChecker.getCompanyId(), null, null, groupParams);
+			int count = GroupLocalServiceUtil.searchCount(
+				permissionChecker.getCompanyId(), null, null, groupParams);
 
-		if (count > 0) {
-			return true;
+			if (count > 0) {
+				return true;
+			}
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 }
