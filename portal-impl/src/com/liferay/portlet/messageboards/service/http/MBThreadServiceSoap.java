@@ -122,5 +122,16 @@ public class MBThreadServiceSoap {
 		}
 	}
 
+	public static void unlockThread(long threadId) throws RemoteException {
+		try {
+			MBThreadServiceUtil.unlockThread(threadId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(MBThreadServiceSoap.class);
 }

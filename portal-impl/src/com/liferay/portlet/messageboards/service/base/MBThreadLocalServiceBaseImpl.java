@@ -34,10 +34,12 @@ import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.service.LockLocalService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.persistence.LockPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
@@ -382,6 +384,22 @@ public abstract class MBThreadLocalServiceBaseImpl
 		this.dlService = dlService;
 	}
 
+	public LockLocalService getLockLocalService() {
+		return lockLocalService;
+	}
+
+	public void setLockLocalService(LockLocalService lockLocalService) {
+		this.lockLocalService = lockLocalService;
+	}
+
+	public LockPersistence getLockPersistence() {
+		return lockPersistence;
+	}
+
+	public void setLockPersistence(LockPersistence lockPersistence) {
+		this.lockPersistence = lockPersistence;
+	}
+
 	public ResourceLocalService getResourceLocalService() {
 		return resourceLocalService;
 	}
@@ -593,6 +611,10 @@ public abstract class MBThreadLocalServiceBaseImpl
 	protected DLLocalService dlLocalService;
 	@BeanReference(name = "com.liferay.documentlibrary.service.DLService")
 	protected DLService dlService;
+	@BeanReference(name = "com.liferay.portal.service.LockLocalService")
+	protected LockLocalService lockLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence")
+	protected LockPersistence lockPersistence;
 	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(name = "com.liferay.portal.service.ResourceService")

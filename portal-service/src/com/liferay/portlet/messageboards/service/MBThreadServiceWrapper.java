@@ -50,6 +50,12 @@ public class MBThreadServiceWrapper implements MBThreadService {
 		_mbThreadService.deleteThread(threadId);
 	}
 
+	public com.liferay.portal.model.Lock lockThread(long threadId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _mbThreadService.lockThread(threadId);
+	}
+
 	public com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
 		throws com.liferay.portal.PortalException,
@@ -62,6 +68,12 @@ public class MBThreadServiceWrapper implements MBThreadService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbThreadService.splitThread(messageId, serviceContext);
+	}
+
+	public void unlockThread(long threadId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_mbThreadService.unlockThread(threadId);
 	}
 
 	public MBThreadService getWrappedMBThreadService() {

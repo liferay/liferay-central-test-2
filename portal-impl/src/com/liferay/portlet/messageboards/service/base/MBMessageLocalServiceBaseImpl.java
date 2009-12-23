@@ -40,6 +40,7 @@ import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.LockLocalService;
 import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.PortletPreferencesService;
 import com.liferay.portal.service.ResourceLocalService;
@@ -50,6 +51,7 @@ import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.LockPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
@@ -475,6 +477,22 @@ public abstract class MBMessageLocalServiceBaseImpl
 		this.groupFinder = groupFinder;
 	}
 
+	public LockLocalService getLockLocalService() {
+		return lockLocalService;
+	}
+
+	public void setLockLocalService(LockLocalService lockLocalService) {
+		this.lockLocalService = lockLocalService;
+	}
+
+	public LockPersistence getLockPersistence() {
+		return lockPersistence;
+	}
+
+	public void setLockPersistence(LockPersistence lockPersistence) {
+		this.lockPersistence = lockPersistence;
+	}
+
 	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
 		return portletPreferencesLocalService;
 	}
@@ -849,6 +867,10 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected GroupPersistence groupPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder")
 	protected GroupFinder groupFinder;
+	@BeanReference(name = "com.liferay.portal.service.LockLocalService")
+	protected LockLocalService lockLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence")
+	protected LockPersistence lockPersistence;
 	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesLocalService")
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
 	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesService")
