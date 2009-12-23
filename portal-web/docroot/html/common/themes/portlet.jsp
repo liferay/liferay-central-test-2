@@ -125,6 +125,10 @@ containerStyles = sb.toString();
 	<c:when test="<%= themeDisplay.isStatePopUp() %>">
 		<div class="portlet-body">
 			<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
+				<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
+					<%@ include file="/html/common/themes/portlet_messages.jspf" %>
+				</c:if>
+
 				<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + tilesPortletContent %>" />
 			</c:if>
 
