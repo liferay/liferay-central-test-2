@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.messageboards.ThreadLockedException;
+import com.liferay.portlet.messageboards.LockedThreadException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl;
@@ -49,13 +49,12 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 	public void deleteThread(long threadId)
 		throws PortalException, SystemException {
 
-
 		if (lockLocalService.isLocked(
-			MBThread.class.getName(), threadId)) {
+				MBThread.class.getName(), threadId)) {
 
-			throw new ThreadLockedException();
+			throw new LockedThreadException();
 		}
-		
+
 		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
 			threadId);
 

@@ -461,7 +461,7 @@
 						<liferay-ui:icon image="top" url="<%= topHREF %>" label="<%= true %>" />
 					</li>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE)  && !thread.isLocked() %>">
+					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) && !thread.isLocked() %>">
 						<li>
 							<portlet:renderURL var="editURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />

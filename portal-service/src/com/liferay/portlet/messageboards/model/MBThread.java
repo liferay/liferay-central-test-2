@@ -50,5 +50,9 @@ package com.liferay.portlet.messageboards.model;
 public interface MBThread extends MBThreadModel {
 	public java.lang.String getAttachmentsDir();
 
+	public com.liferay.portal.model.Lock getLock();
+
+	public boolean hasLock(long userId);
+
 	public boolean isLocked();
 }

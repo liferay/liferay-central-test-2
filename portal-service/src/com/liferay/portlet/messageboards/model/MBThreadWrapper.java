@@ -240,6 +240,14 @@ public class MBThreadWrapper implements MBThread {
 		return _mbThread.getAttachmentsDir();
 	}
 
+	public com.liferay.portal.model.Lock getLock() {
+		return _mbThread.getLock();
+	}
+
+	public boolean hasLock(long userId) {
+		return _mbThread.hasLock(userId);
+	}
+
 	public boolean isLocked() {
 		return _mbThread.isLocked();
 	}

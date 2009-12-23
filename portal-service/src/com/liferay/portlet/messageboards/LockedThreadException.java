@@ -25,25 +25,25 @@ package com.liferay.portlet.messageboards;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="ThreadLockedException.java.html"><b><i>View Source</i></b></a>
+ * <a href="LockedThreadException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ThreadLockedException extends PortalException {
+public class LockedThreadException extends PortalException {
 
-	public ThreadLockedException() {
+	public LockedThreadException() {
 		super();
 	}
 
-	public ThreadLockedException(String msg) {
+	public LockedThreadException(String msg) {
 		super(msg);
 	}
 
-	public ThreadLockedException(String msg, Throwable cause) {
+	public LockedThreadException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public ThreadLockedException(Throwable cause) {
+	public LockedThreadException(Throwable cause) {
 		super(cause);
 	}
 

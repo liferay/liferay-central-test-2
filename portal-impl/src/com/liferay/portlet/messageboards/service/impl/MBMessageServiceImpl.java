@@ -39,8 +39,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.messageboards.LockedThreadException;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
-import com.liferay.portlet.messageboards.ThreadLockedException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
@@ -131,9 +131,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		checkReplyToPermission(groupId, categoryId, parentMessageId);
 
 		if (lockLocalService.isLocked(
-			MBThread.class.getName(), threadId)) {
+				MBThread.class.getName(), threadId)) {
 
-			throw new ThreadLockedException();
+			throw new LockedThreadException();
 		}
 
 		if (!MBCategoryPermission.contains(
@@ -516,9 +516,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			getPermissionChecker(), messageId, ActionKeys.UPDATE);
 
 		if (lockLocalService.isLocked(
-			MBThread.class.getName(), message.getThreadId())) {
+				MBThread.class.getName(), message.getThreadId())) {
 
-			throw new ThreadLockedException();
+			throw new LockedThreadException();
 		}
 
 		if (!MBCategoryPermission.contains(

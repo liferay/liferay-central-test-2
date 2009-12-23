@@ -65,7 +65,6 @@ public class MBThreadImpl extends MBThreadModelImpl implements MBThread {
 
 	public boolean isLocked() {
 		try {
-
 			return LockLocalServiceUtil.isLocked(
 				MBThread.class.getName(), getThreadId());
 		}

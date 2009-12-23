@@ -33,7 +33,7 @@ MBMessage message = (MBMessage)objArray[0];
 Set<Long> threadSubscriptionClassPKs = (Set<Long>)objArray[1];
 
 MBCategory category = message.getCategory();
-MBThread  thread = message.getThread();
+MBThread thread = message.getThread();
 %>
 
 <liferay-ui:icon-menu>

@@ -470,6 +470,7 @@
 	<exceptions>
 		<exception>BannedUser</exception>
 		<exception>CategoryName</exception>
+		<exception>LockedThread</exception>
 		<exception>MessageBody</exception>
 		<exception>MessageSubject</exception>
 		<exception>MailingListEmailAddress</exception>
@@ -481,6 +482,5 @@
 		<exception>MessageSubject</exception>
 		<exception>RequiredMessage</exception>
 		<exception>SplitThread</exception>
-		<exception>ThreadLocked</exception>
 	</exceptions>
 </service-builder>
