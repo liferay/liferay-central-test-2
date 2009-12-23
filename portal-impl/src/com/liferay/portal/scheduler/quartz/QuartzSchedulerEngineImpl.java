@@ -60,6 +60,7 @@ import org.quartz.impl.StdSchedulerFactory;
  * @author Michael C. Han
  * @author Bruno Farache
  * @author Shuyang Zhou
+ * @author Wesley Gong
  */
 public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
@@ -98,6 +99,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			for (String jobName : jobNames) {
 				JobDetail jobDetail = _scheduler.getJobDetail(
 					jobName, groupName);
+
+				if (jobDetail == null) {
+					continue;
+				}
 
 				JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
@@ -191,6 +196,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				throw new SchedulerException(
 					"Unknown trigger type " + trigger.getTriggerType());
 			}
+
+			quartzTrigger.setJobGroup(groupName);
+			quartzTrigger.setJobName(jobName);
 
 			Date startDate = trigger.getStartDate();
 

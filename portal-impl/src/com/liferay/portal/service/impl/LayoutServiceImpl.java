@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
@@ -56,6 +57,7 @@ import java.util.Map;
  * <a href="LayoutServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
@@ -285,8 +287,10 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
+		String jobName = PortalUUIDUtil.generate();
+
 		Trigger trigger = new CronTrigger(
-			groupName, groupName, schedulerStartDate, schedulerEndDate,
+			jobName, groupName, schedulerStartDate, schedulerEndDate,
 			cronText);
 
 		String command = StringPool.BLANK;
@@ -345,9 +349,11 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				parameterMap, remoteAddress, remotePort, secureConnection,
 				remoteGroupId, remotePrivateLayout, startDate, endDate);
 
+		String jobName = PortalUUIDUtil.generate();
+
 		Trigger trigger =
 			new CronTrigger(
-				groupName, groupName, schedulerStartDate, schedulerEndDate,
+				jobName, groupName, schedulerStartDate, schedulerEndDate,
 				cronText);
 		SchedulerEngineUtil.schedule(
 			trigger, description, DestinationNames.LAYOUTS_REMOTE_PUBLISHER,
