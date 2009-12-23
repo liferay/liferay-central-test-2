@@ -527,7 +527,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								<aui:option label="descending" selected='<%= orderByType1.equals("DESC") %>' value="DESC" />
 							</aui:select>
 
-							<aui:select inlineField="<%= true %>" inlineLabel="left" label="order-by" name="orderByColumn2">
+							<aui:select inlineField="<%= true %>" inlineLabel="left" label="and-then-by" name="orderByColumn2">
 								<aui:option label="title" selected='<%= orderByColumn2.equals("title") %>' />
 								<aui:option label="create-date" selected='<%= orderByColumn2.equals("createDate") %>' value="createDate" />
 								<aui:option label="modified-date" selected='<%= orderByColumn2.equals("modifiedDate") %>' value="modifiedDate" />
