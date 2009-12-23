@@ -22,6 +22,7 @@
 
 package com.liferay.util.axis;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.SystemProperties;
 
-import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -116,7 +116,7 @@ public class SimpleHTTPSender extends HTTPSender {
 			is = urlc.getInputStream();
 		}
 
-		is = new BufferedInputStream(is, 8192);
+		is = new UnsyncBufferedInputStream(is, 8192);
 
 		Message response = new Message(is, false, contentType, contentLocation);
 

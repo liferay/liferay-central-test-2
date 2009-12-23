@@ -22,13 +22,13 @@
 
 package com.liferay.portal.kernel.io;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -46,7 +46,7 @@ public class FileCacheOutputStream extends OutputStream {
 		_tempFile = File.createTempFile(
 			PortalUUIDUtil.generate() + StringPool.DASH, _EXTENSION);
 
-		_bos = new BufferedOutputStream(
+		_ubos = new UnsyncBufferedOutputStream(
 			new FileOutputStream(_tempFile), _BUFFER);
 	}
 
@@ -69,11 +69,11 @@ public class FileCacheOutputStream extends OutputStream {
 	}
 
 	public void close() throws IOException {
-		_bos.close();
+		_ubos.close();
 	}
 
 	public void flush() throws IOException {
-		_bos.flush();
+		_ubos.flush();
 	}
 
 	public byte[] getBytes() throws IOException {
@@ -106,24 +106,24 @@ public class FileCacheOutputStream extends OutputStream {
 	}
 
 	public void write(byte[] b) throws IOException {
-		_bos.write(b);
+		_ubos.write(b);
 	}
 
 	public void write(byte[] b, int off, int len) throws IOException {
-		_bos.write(b, off, len);
+		_ubos.write(b, off, len);
 	}
 
 	public void write(int b) throws IOException {
-		_bos.write(b);
+		_ubos.write(b);
 	}
 
 	private static final int _BUFFER = 2048;
 
 	private static final String _EXTENSION = ".fcos";
 
-	protected BufferedOutputStream _bos;
 	protected FileInputStream _fis;
 	protected File _tempFile;
+	protected UnsyncBufferedOutputStream _ubos;
 
 	private static Log _log =
 		LogFactoryUtil.getLog(FileCacheOutputStream.class);

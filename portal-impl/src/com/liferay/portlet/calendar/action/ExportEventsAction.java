@@ -82,8 +82,8 @@ public class ExportEventsAction extends PortletAction {
 					themeDisplay.getScopeGroupId(), exportFileName);
 			}
 
-			InputStream is =
-				new UnsyncBufferedInputStream(new FileInputStream(file));
+			InputStream is = new UnsyncBufferedInputStream(
+				new FileInputStream(file));
 
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);

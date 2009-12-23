@@ -31,6 +31,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactory;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
@@ -42,7 +43,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 
-import java.io.BufferedInputStream;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -403,7 +403,7 @@ public class JCRHook extends BaseHook {
 
 			Property data = contentNode.getProperty(JCRConstants.JCR_DATA);
 
-			is = new BufferedInputStream(data.getStream());
+			is = new UnsyncBufferedInputStream(data.getStream());
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
