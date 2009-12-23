@@ -197,8 +197,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 					"Unknown trigger type " + trigger.getTriggerType());
 			}
 
-			quartzTrigger.setJobGroup(groupName);
 			quartzTrigger.setJobName(jobName);
+			quartzTrigger.setJobGroup(groupName);
 
 			Date startDate = trigger.getStartDate();
 
