@@ -22,11 +22,11 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
@@ -46,14 +46,17 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 	public StringServletResponse(HttpServletResponse response) {
 		super(response);
+
+		_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
+		_servletOutputStream = new StringServletOutputStream(
+			_unsyncByteArrayOutputStream);
+
+		_stringWriter = new StringWriter();
+		_printWriter = new PrintWriter(_stringWriter);
 	}
 
 	public int getBufferSize() {
 		return _bufferSize;
-	}
-
-	public ByteArrayOutputStream getByteArrayOutputStream() {
-		return _baos;
 	}
 
 	public String getContentType() {
@@ -61,13 +64,9 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public ServletOutputStream getOutputStream() {
-		/*if (_callGetWriter) {
-			throw new IllegalStateException();
-		}*/
-
 		_callGetOutputStream = true;
 
-		return _sos;
+		return _servletOutputStream;
 	}
 
 	public int getStatus() {
@@ -80,7 +79,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		}
 		else if (_callGetOutputStream) {
 			try {
-				return _baos.toString(StringPool.UTF8);
+				return _unsyncByteArrayOutputStream.toString(StringPool.UTF8);
 			}
 			catch (UnsupportedEncodingException uee) {
 				_log.error(uee, uee);
@@ -89,21 +88,21 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 			}
 		}
 		else if (_callGetWriter) {
-			return _sw.toString();
+			return _stringWriter.toString();
 		}
 		else {
 			return StringPool.BLANK;
 		}
 	}
 
-	public PrintWriter getWriter() {
-		/*if (_callGetOutputStream) {
-			throw new IllegalStateException();
-		}*/
+	public UnsyncByteArrayOutputStream getUnsyncByteArrayOutputStream() {
+		return _unsyncByteArrayOutputStream;
+	}
 
+	public PrintWriter getWriter() {
 		_callGetWriter = true;
 
-		return _pw;
+		return _printWriter;
 	}
 
 	public boolean isCalledGetOutputStream() {
@@ -111,22 +110,23 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public void recycle() {
-		_baos.reset();
-		//_sos = new StringServletOutputStream(_bam);
-		_status = SC_OK;
-		_sw = new StringWriter();
-		_pw = new PrintWriter(_sw);
 		_callGetOutputStream = false;
 		_callGetWriter = false;
+		_status = SC_OK;
 		_string = null;
+
+		_unsyncByteArrayOutputStream.reset();
+
+		_stringWriter = new StringWriter();
+		_printWriter = new PrintWriter(_stringWriter);
 	}
 
 	public void resetBuffer() {
 		if (_callGetOutputStream) {
-			_baos.reset();
+			_unsyncByteArrayOutputStream.reset();
 		}
 		else if (_callGetWriter) {
-			StringBuffer sb = _sw.getBuffer();
+			StringBuffer sb = _stringWriter.getBuffer();
 
 			sb.delete(0, sb.length());
 		}
@@ -156,15 +156,15 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	private static Log _log =
 		LogFactoryUtil.getLog(StringServletResponse.class);
 
-	private String _contentType;
-	private int _status = SC_OK;
-	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
-	private ServletOutputStream _sos = new StringServletOutputStream(_baos);
-	private StringWriter _sw = new StringWriter();
-	private PrintWriter _pw = new PrintWriter(_sw);
 	private int _bufferSize;
 	private boolean _callGetOutputStream;
 	private boolean _callGetWriter;
-	private String _string = null;
+	private String _contentType;
+	private PrintWriter _printWriter;
+	private ServletOutputStream _servletOutputStream;
+	private int _status = SC_OK;
+	private String _string;
+	private StringWriter _stringWriter;
+	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
 
 }

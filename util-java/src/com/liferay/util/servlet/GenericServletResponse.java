@@ -22,7 +22,8 @@
 
 package com.liferay.util.servlet;
 
-import java.io.ByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+
 import java.io.PrintWriter;
 
 import javax.servlet.ServletOutputStream;
@@ -39,11 +40,11 @@ public class GenericServletResponse extends HttpServletResponseWrapper {
 	public GenericServletResponse(HttpServletResponse response) {
 		super(response);
 
-		_baos = new ByteArrayOutputStream();
+		_ubaos = new UnsyncByteArrayOutputStream();
 	}
 
 	public byte[] getData() {
-		return _baos.toByteArray();
+		return _ubaos.toByteArray();
 	}
 
 	public int getContentLength() {
@@ -67,15 +68,15 @@ public class GenericServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public ServletOutputStream getOutputStream() {
-		return new GenericServletOutputStream(_baos);
+		return new GenericServletOutputStream(_ubaos);
 	}
 
 	public PrintWriter getWriter() {
 		return new PrintWriter(getOutputStream(), true);
 	}
 
-	private ByteArrayOutputStream _baos;
 	private int _contentLength;
 	private String _contentType;
+	private UnsyncByteArrayOutputStream _ubaos;
 
 }

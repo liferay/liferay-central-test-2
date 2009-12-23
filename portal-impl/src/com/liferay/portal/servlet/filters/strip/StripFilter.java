@@ -38,8 +38,6 @@ import com.liferay.portal.servlet.filters.etag.ETagUtil;
 import com.liferay.portal.util.MinifierUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.IOException;
-
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -139,9 +137,8 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected int processCSS(
-			byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
-			int currentIndex)
-		throws IOException {
+		byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
+		int currentIndex) {
 
 		int beginIndex = currentIndex + _MARKER_STYLE_OPEN.length + 1;
 
@@ -238,9 +235,8 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected int processJavaScript(
-			byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
-			int currentIndex, byte[] openTag)
-		throws IOException {
+		byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
+		int currentIndex, byte[] openTag) {
 
 		int beginIndex = currentIndex + openTag.length + 1;
 
@@ -332,7 +328,7 @@ public class StripFilter extends BasePortalFilter {
 		return newBeginIndex;
 	}
 
-	protected byte[] strip(byte[] oldByteArray) throws IOException {
+	protected byte[] strip(byte[] oldByteArray) {
 		UnsyncByteArrayOutputStream newBytes = new UnsyncByteArrayOutputStream(
 			(int)(oldByteArray.length * _COMPRESSION_RATE));
 

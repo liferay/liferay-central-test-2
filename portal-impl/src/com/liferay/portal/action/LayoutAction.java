@@ -887,7 +887,7 @@ public class LayoutAction extends Action {
 
 		if (stringResponse.isCalledGetOutputStream()) {
 			InputStream is = new UnsyncByteArrayInputStream(
-				stringResponse.getByteArrayOutputStream().toByteArray());
+				stringResponse.getUnsyncByteArrayOutputStream().toByteArray());
 
 			ServletResponseUtil.sendFile(
 				response, renderResponseImpl.getResourceName(), is,

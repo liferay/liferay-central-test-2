@@ -26,6 +26,7 @@ import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.convert.ConvertProcess;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
@@ -37,7 +38,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
-import com.liferay.portal.kernel.servlet.StringServletOutputStream;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -62,7 +62,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.log4j.Log4JUtil;
 
-import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import java.util.Enumeration;
@@ -314,18 +313,19 @@ public class EditServerAction extends PortletAction {
 		Map<String, Object> portletObjects = ScriptingUtil.getPortletObjects(
 			portletConfig, portletContext, actionRequest, actionResponse);
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
 
-		PrintStream ps = new PrintStream(
-			new StringServletOutputStream(baos));
+		PrintStream printStream = new PrintStream(unsyncByteArrayOutputStream);
 
-		portletObjects.put("out", ps);
+		portletObjects.put("out", printStream);
 
 		try {
 			ScriptingUtil.exec(null, portletObjects, language, script);
 
 			SessionMessages.add(
-				actionRequest, "script_output", baos.toString());
+				actionRequest, "script_output",
+				unsyncByteArrayOutputStream.toString());
 		}
 		catch (ScriptingException se) {
 			SessionErrors.add(

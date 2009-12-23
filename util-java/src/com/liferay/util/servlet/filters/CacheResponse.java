@@ -22,10 +22,10 @@
 
 package com.liferay.util.servlet.filters;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.util.servlet.Header;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -137,7 +137,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	public byte[] getData() {
 		finishResponse();
 
-		return _baos.toByteArray();
+		return _ubaos.toByteArray();
 	}
 
 	public String getHeader(String name) {
@@ -274,10 +274,9 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	}
 
 	protected CacheResponseStream createOutputStream() {
-		return new CacheResponseStream(_baos);
+		return new CacheResponseStream(_ubaos);
 	}
 
-	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
 	private int _bufferSize;
 	private String _contentType;
 	private String _encoding;
@@ -285,6 +284,8 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		new HashMap<String, List<Header>>();
 	private int _status = HttpServletResponse.SC_OK;
 	private CacheResponseStream _stream;
+	private UnsyncByteArrayOutputStream _ubaos =
+		new UnsyncByteArrayOutputStream();
 	private PrintWriter _writer;
 
 }

@@ -22,10 +22,10 @@
 
 package com.liferay.portal.servlet.filters.strip;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.servlet.StringServletOutputStream;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -47,64 +47,73 @@ public class StripResponse extends HttpServletResponseWrapper {
 
 	public void finishResponse() {
 		try {
-			if (_writer != null) {
-				_writer.close();
+			if (_printWriter != null) {
+				_printWriter.close();
 			}
-			else if (_stream != null) {
-				_stream.close();
+			else if (_servletOutputStream != null) {
+				_servletOutputStream.close();
 			}
 		}
-		catch (IOException e) {
+		catch (IOException ioe) {
 		}
 	}
 
 	public void flushBuffer() throws IOException {
-		if (_stream != null) {
-			_stream.flush();
-		}
-	}
-
-	public ServletOutputStream getOutputStream() {
-		if (_writer != null) {
-			throw new IllegalStateException();
-		}
-
-		if (_stream == null) {
-			_stream = createOutputStream();
-		}
-
-		return _stream;
-	}
-
-	public PrintWriter getWriter() throws IOException {
-		if (_writer != null) {
-			return _writer;
-		}
-
-		if (_stream != null) {
-			throw new IllegalStateException();
-		}
-
-		_stream = createOutputStream();
-
-		_writer = new PrintWriter(new OutputStreamWriter(
-			//_stream, _res.getCharacterEncoding()));
-			_stream, StringPool.UTF8));
-
-		return _writer;
-	}
-
-	public boolean isCommitted() {
-		if (_stream != null) {
-			return true;
-		}
-		else {
-			return super.isCommitted();
+		if (_servletOutputStream != null) {
+			_servletOutputStream.flush();
 		}
 	}
 
 	public String getContentType() {
 		return _contentType;
+	}
+
+	public byte[] getData() {
+		finishResponse();
+
+		if (_unsyncByteArrayOutputStream != null) {
+			return _unsyncByteArrayOutputStream.toByteArray();
+		}
+
+		return null;
+	}
+
+	public ServletOutputStream getOutputStream() {
+		if (_printWriter != null) {
+			throw new IllegalStateException();
+		}
+
+		if (_servletOutputStream == null) {
+			_servletOutputStream = createOutputStream();
+		}
+
+		return _servletOutputStream;
+	}
+
+	public PrintWriter getWriter() throws IOException {
+		if (_printWriter != null) {
+			return _printWriter;
+		}
+
+		if (_servletOutputStream != null) {
+			throw new IllegalStateException();
+		}
+
+		_servletOutputStream = createOutputStream();
+
+		_printWriter = new PrintWriter(
+			new OutputStreamWriter(_servletOutputStream, StringPool.UTF8));
+
+		return _printWriter;
+	}
+
+	public boolean isCommitted() {
+		if (_servletOutputStream != null) {
+			return true;
+		}
+		else {
+			return super.isCommitted();
+		}
 	}
 
 	public void setContentType(String contentType) {
@@ -113,25 +122,15 @@ public class StripResponse extends HttpServletResponseWrapper {
 		super.setContentType(contentType);
 	}
 
-	public byte[] getData() {
-		finishResponse();
-
-		if (_baos != null) {
-			return _baos.toByteArray();
-		}
-
-		return null;
-	}
-
 	protected ServletOutputStream createOutputStream() {
-		_baos = new ByteArrayOutputStream();
+		_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
 
-		return new StringServletOutputStream(_baos);
+		return new StringServletOutputStream(_unsyncByteArrayOutputStream);
 	}
 
-	private ByteArrayOutputStream _baos = null;
-	private ServletOutputStream _stream = null;
-	private PrintWriter _writer = null;
 	private String _contentType;
+	private PrintWriter _printWriter;
+	private ServletOutputStream _servletOutputStream;
+	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
 
 }

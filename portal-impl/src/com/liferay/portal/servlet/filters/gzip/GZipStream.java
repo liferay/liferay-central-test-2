@@ -22,11 +22,11 @@
 
 package com.liferay.portal.servlet.filters.gzip;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import java.util.zip.GZIPOutputStream;
@@ -48,8 +48,8 @@ public class GZipStream extends ServletOutputStream {
 
 		_response = response;
 		_outputStream = response.getOutputStream();
-		_byteArrayOutputStream = new ByteArrayOutputStream();
-		_gzipOutputStream = new GZIPOutputStream(_byteArrayOutputStream);
+		_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
+		_gzipOutputStream = new GZIPOutputStream(_unsyncByteArrayOutputStream);
 	}
 
 	public void close() throws IOException {
@@ -59,7 +59,7 @@ public class GZipStream extends ServletOutputStream {
 
 		_gzipOutputStream.finish();
 
-		byte[] bytes = _byteArrayOutputStream.toByteArray();
+		byte[] bytes = _unsyncByteArrayOutputStream.toByteArray();
 
 		_response.setContentLength(bytes.length);
 		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
@@ -124,10 +124,10 @@ public class GZipStream extends ServletOutputStream {
 
 	private static Log _log = LogFactoryUtil.getLog(GZipStream.class);
 
-	private ByteArrayOutputStream _byteArrayOutputStream;
 	private boolean _closed;
 	private GZIPOutputStream _gzipOutputStream;
 	private ServletOutputStream _outputStream;
 	private HttpServletResponse _response;
+	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
 
 }

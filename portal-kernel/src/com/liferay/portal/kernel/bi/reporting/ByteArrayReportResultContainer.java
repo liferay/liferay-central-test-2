@@ -22,7 +22,8 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
-import java.io.ByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+
 import java.io.OutputStream;
 import java.io.Serializable;
 
@@ -57,12 +58,12 @@ public class ByteArrayReportResultContainer
 	}
 
 	public OutputStream getOutputStream() {
-		if (_byteArrayOutputStream == null) {
-			_byteArrayOutputStream = new ByteArrayOutputStream(
+		if (_unsyncByteArrayOutputStream == null) {
+			_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream(
 				_initialCapacity);
 		}
 
-		return _byteArrayOutputStream;
+		return _unsyncByteArrayOutputStream;
 	}
 
 	public ReportGenerationException getReportGenerationException() {
@@ -74,7 +75,7 @@ public class ByteArrayReportResultContainer
 	}
 
 	public byte[] getResults() {
-		return _byteArrayOutputStream.toByteArray();
+		return _unsyncByteArrayOutputStream.toByteArray();
 	}
 
 	public boolean hasError() {
@@ -95,6 +96,6 @@ public class ByteArrayReportResultContainer
 	private int _initialCapacity;
 	private ReportGenerationException _reportGenerationException;
 	private String _reportName;
-	private ByteArrayOutputStream _byteArrayOutputStream;
+	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
 
 }

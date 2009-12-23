@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import java.io.ByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 
 import javax.servlet.ServletOutputStream;
 
@@ -33,14 +33,14 @@ import javax.servlet.ServletOutputStream;
  */
 public class StringServletOutputStream extends ServletOutputStream {
 
-	public StringServletOutputStream(ByteArrayOutputStream baos) {
-		_baos = baos;
+	public StringServletOutputStream(UnsyncByteArrayOutputStream ubaos) {
+		_ubaos = ubaos;
 	}
 
 	public void write(int b) {
-		_baos.write(b);
+		_ubaos.write(b);
 	}
 
-	private ByteArrayOutputStream _baos = null;
+	private UnsyncByteArrayOutputStream _ubaos = null;
 
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.scripting;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
@@ -29,7 +30,6 @@ import com.liferay.portal.kernel.scripting.UnsupportedLanguageException;
 import com.liferay.portal.kernel.servlet.StringServletOutputStream;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.PrintStream;
@@ -169,16 +169,17 @@ public class ScriptingImpl implements Scripting {
 		if (e instanceof PySyntaxError) {
 			PySyntaxError pySyntaxError = (PySyntaxError)e;
 
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			UnsyncByteArrayOutputStream ubaos =
+				new UnsyncByteArrayOutputStream();
 
 			PrintStream ps = new PrintStream(
-				new StringServletOutputStream(baos));
+				new StringServletOutputStream(ubaos));
 
 			Py.displayException(
 				pySyntaxError.type, pySyntaxError.value,
 				pySyntaxError.traceback, new PyFile(ps));
 
-			message = baos.toString();
+			message = ubaos.toString();
 		}
 
 		return message;
