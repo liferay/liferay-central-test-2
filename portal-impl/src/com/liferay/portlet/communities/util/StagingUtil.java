@@ -89,6 +89,7 @@ import javax.portlet.ActionRequest;
  *
  * @author Raymond Augé
  * @author Bruno Farache
+ * @author Wesley Gong
  */
 public class StagingUtil {
 
@@ -1007,10 +1008,10 @@ public class StagingUtil {
 				actionRequest, "recurrenceType");
 
 			Calendar startCal = _getDate(
-				actionRequest, "schedulerStartDate", false);
+				actionRequest, "schedulerStartDate", true);
 
 			String cronText = _getCronText(
-				actionRequest, startCal, false, recurrenceType);
+				actionRequest, startCal, true, recurrenceType);
 
 			Date schedulerEndDate = null;
 
@@ -1019,7 +1020,7 @@ public class StagingUtil {
 
 			if (endDateType == 1) {
 				Calendar endCal = _getDate(
-					actionRequest, "schedulerEndDate", false);
+					actionRequest, "schedulerEndDate", true);
 
 				schedulerEndDate = endCal.getTime();
 			}
@@ -1153,10 +1154,10 @@ public class StagingUtil {
 				actionRequest, "recurrenceType");
 
 			Calendar startCal = _getDate(
-				actionRequest, "schedulerStartDate", false);
+				actionRequest, "schedulerStartDate", true);
 
 			String cronText = _getCronText(
-				actionRequest, startCal, false, recurrenceType);
+				actionRequest, startCal, true, recurrenceType);
 
 			Date schedulerEndDate = null;
 
@@ -1165,7 +1166,7 @@ public class StagingUtil {
 
 			if (endDateType == 1) {
 				Calendar endCal = _getDate(
-					actionRequest, "schedulerEndDate", false);
+					actionRequest, "schedulerEndDate", true);
 
 				schedulerEndDate = endCal.getTime();
 			}
