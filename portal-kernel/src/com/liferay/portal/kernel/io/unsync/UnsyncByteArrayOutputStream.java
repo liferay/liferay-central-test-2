@@ -29,12 +29,9 @@ import java.io.UnsupportedEncodingException;
 /**
  * <a href="UnsyncByteArrayOutputStream.java.html"><b><i>View Source</i></b></a>
  *
- * Note: This class has the same function as
- * {@link java.io.ByteArrayOutputStream}, but without synchronized protection.
- * We make this for performance, see http://issues.liferay.com/browse/LPS-6648.
- *
- * Warning: This class is not thread safe, make sure using it only under single
- * thread context or adding external synchronized protection.
+ * <p>
+ * See http://support.liferay.com/browse/LPS-6648.
+ * </p>
  *
  * @author Shuyang Zhou
  */
@@ -56,9 +53,11 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 		return index;
 	}
 
-	public byte[] toByteArray () {
+	public byte[] toByteArray() {
 		byte[] copyBuffer = new byte[index];
+
 		System.arraycopy(buffer, 0, copyBuffer, 0, index);
+
 		return copyBuffer;
 	}
 
@@ -68,19 +67,8 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 
 	public String toString(String charsetName)
 		throws UnsupportedEncodingException {
-		return new String(buffer, 0, index, charsetName);
-	}
 
-	public void write(int b) {
-		int newIndex = index + 1;
-		if (newIndex > buffer.length) {
-			int newBufferSize = buffer.length << 1;
-			byte[] newBuffer = new byte[newBufferSize];
-			System.arraycopy(buffer, 0, newBuffer, 0, buffer.length);
-			buffer = newBuffer;
-		}
-		buffer[index] = (byte) b;
-		index = newIndex;
+		return new String(buffer, 0, index, charsetName);
 	}
 
 	public void write(byte[] b) {
@@ -91,20 +79,44 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 		if (len <= 0) {
 			return;
 		}
+
 		int newIndex = index + len;
+
 		if (newIndex > buffer.length) {
-			int newBufferSize = buffer.length << 1;
-			newBufferSize = newBufferSize < newIndex ? newIndex : newBufferSize;
+			int newBufferSize = Math.max(buffer.length << 1, newIndex);
+
 			byte[] newBuffer = new byte[newBufferSize];
+
 			System.arraycopy(buffer, 0, newBuffer, 0, index);
+
 			buffer = newBuffer;
 		}
+
 		System.arraycopy(b, off, buffer, index, len);
+
 		index = newIndex;
 	}
 
-	public void writeTo(OutputStream out) throws IOException {
-		out.write(buffer, 0, index);
+	public void write(int b) {
+		int newIndex = index + 1;
+
+		if (newIndex > buffer.length) {
+			int newBufferSize = buffer.length << 1;
+
+			byte[] newBuffer = new byte[newBufferSize];
+
+			System.arraycopy(buffer, 0, newBuffer, 0, buffer.length);
+
+			buffer = newBuffer;
+		}
+
+		buffer[index] = (byte)b;
+
+		index = newIndex;
+	}
+
+	public void writeTo(OutputStream outputStream) throws IOException {
+		outputStream.write(buffer, 0, index);
 	}
 
 	protected byte[] buffer;

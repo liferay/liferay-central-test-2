@@ -27,12 +27,9 @@ import java.io.InputStream;
 /**
  * <a href="UnsyncByteArrayInputStream.java.html"><b><i>View Source</i></b></a>
  *
- * Note: This class has the same function as
- * {@link java.io.ByteArrayInputStream}, but without synchronized protection.
- * We make this for performance, see http://issues.liferay.com/browse/LPS-6648.
- *
- * Warning: This class is not thread safe, make sure using it only under single
- * thread context or adding external synchronized protection.
+ * <p>
+ * See http://support.liferay.com/browse/LPS-6648.
+ * </p>
  *
  * @author Shuyang Zhou
  */
@@ -47,11 +44,7 @@ public class UnsyncByteArrayInputStream extends InputStream {
 	public UnsyncByteArrayInputStream(byte[] buffer, int offset, int length) {
 		this.buffer = buffer;
 		this.index = offset;
-		int expectedCapability = offset + length;
-		int physicalCapability = buffer.length;
-		this.capability =
-			expectedCapability > physicalCapability
-				? physicalCapability : expectedCapability;
+		this.capability = Math.max(buffer.length, offset + length);
 		this.markIndex = offset;
 	}
 
@@ -68,7 +61,12 @@ public class UnsyncByteArrayInputStream extends InputStream {
 	}
 
 	public int read() {
-		return (index < capability) ? (buffer[index++] & 0xff) : -1;
+		if (index < capability) {
+			return buffer[index++] & 0xff;
+		}
+		else {
+			return -1;
+		}
 	}
 
 	public int read(byte[] b) {
@@ -76,22 +74,24 @@ public class UnsyncByteArrayInputStream extends InputStream {
 	}
 
 	public int read(byte[] b, int off, int len) {
-
 		if (len <= 0) {
 			return 0;
 		}
-		int length = len;
 
 		if (index >= capability) {
 			return -1;
 		}
-		//Trim len to available
+
+		int length = len;
+
 		if (index + length > capability) {
 			length = capability - index;
 		}
 
 		System.arraycopy(buffer, index, b, off, length);
+
 		index += length;
+
 		return length;
 	}
 
@@ -103,13 +103,15 @@ public class UnsyncByteArrayInputStream extends InputStream {
 		if (n < 0) {
 			return 0;
 		}
+
 		long number = n;
-		//Trim skip number
-		if (index + number > capability) {
+
+		if ((index + number) > capability) {
 			number = capability - index;
 		}
 
 		index += number;
+
 		return number;
 	}
 

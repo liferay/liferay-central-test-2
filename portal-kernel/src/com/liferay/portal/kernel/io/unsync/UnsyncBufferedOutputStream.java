@@ -28,64 +28,75 @@ import java.io.OutputStream;
 /**
  * <a href="UnsyncBufferedOutputStream.java.html"><b><i>View Source</i></b></a>
  *
- * Note: This class has the same function as
- * {@link java.io.BufferedOutputStream}, but without synchronized protection.
- * We make this for performance, see http://issues.liferay.com/browse/LPS-6648.
- *
- * Warning: This class is not thread safe, make sure using it only under single
- * thread context or adding external synchronized protection.
+ * <p>
+ * See http://support.liferay.com/browse/LPS-6648.
+ * </p>
  *
  * @author Shuyang Zhou
  */
 public class UnsyncBufferedOutputStream extends UnsyncFilterOutputStream {
 
-	public UnsyncBufferedOutputStream(OutputStream out) {
-		this(out, 8192);
+	public UnsyncBufferedOutputStream(OutputStream outputStream) {
+		this(outputStream, _DEFAULT_BUFFER_SIZE);
 	}
 
-	public UnsyncBufferedOutputStream(OutputStream out, int size) {
-		super(out);
+	public UnsyncBufferedOutputStream(OutputStream outputStream, int size) {
+		super(outputStream);
+
 		buffer = new byte[size];
 	}
 
-	public void write(int b) throws IOException {
-		if (count >= buffer.length) {
-			out.write(buffer, 0, count);
+	public void flush() throws IOException {
+		if (count > 0) {
+			outputStream.write(buffer, 0, count);
+
 			count = 0;
 		}
-		buffer[count++] = (byte) b;
+
+		outputStream.flush();
+	}
+
+	public void write(byte b[], int off, int len) throws IOException {
+		if (len >= buffer.length) {
+			if (count > 0) {
+				outputStream.write(buffer, 0, count);
+
+				count = 0;
+			}
+
+			outputStream.write(b, off, len);
+
+			return;
+		}
+
+		if (count > 0 && len > buffer.length - count) {
+			outputStream.write(buffer, 0, count);
+
+			count = 0;
+		}
+
+		System.arraycopy(b, off, buffer, count, len);
+
+		count += len;
 	}
 
 	public void write(byte[] b) throws IOException {
 		write(b, 0, b.length);
 	}
 
-	public void write(byte b[], int off, int len) throws IOException {
-		if (len >= buffer.length) {
-			if (count > 0) {
-				out.write(buffer, 0, count);
-				count = 0;
-			}
-			out.write(b, off, len);
-			return;
-		}
-		if (count > 0 && len > buffer.length - count) {
-			out.write(buffer, 0, count);
-			count = 0;
-		}
-		System.arraycopy(b, off, buffer, count, len);
-		count += len;
-	}
+	public void write(int b) throws IOException {
+		if (count >= buffer.length) {
+			outputStream.write(buffer, 0, count);
 
-	public void flush() throws IOException {
-		if (count > 0) {
-			out.write(buffer, 0, count);
 			count = 0;
 		}
-		out.flush();
+
+		buffer[count++] = (byte)b;
 	}
 
 	protected byte[] buffer;
 	protected int count;
+
+	private static int _DEFAULT_BUFFER_SIZE = 8192;
 
 }

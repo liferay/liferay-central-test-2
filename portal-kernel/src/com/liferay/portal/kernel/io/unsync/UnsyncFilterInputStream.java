@@ -28,57 +28,54 @@ import java.io.InputStream;
 /**
  * <a href="UnsyncFilterInputStream.java.html"><b><i>View Source</i></b></a>
  *
- * Note: This class has the same function as
- * {@link java.io.FilterInputStream}, but without synchronized protection.
- * We make this for performance, see http://issues.liferay.com/browse/LPS-6648.
- *
- * Warning: This class is not thread safe, make sure using it only under single
- * thread context or adding external synchronized protection.
+ * <p>
+ * See http://support.liferay.com/browse/LPS-6648.
+ * </p>
  *
  * @author Shuyang Zhou
  */
 public class UnsyncFilterInputStream extends InputStream {
 
-	public UnsyncFilterInputStream(InputStream in) {
-		this.in = in;
+	public UnsyncFilterInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
 	}
 
 	public int available() throws IOException {
-		return in.available();
+		return inputStream.available();
 	}
 
 	public void close() throws IOException {
-		in.close();
+		inputStream.close();
 	}
 
-	public void mark(int readlimit) {
-		in.mark(readlimit);
+	public void mark(int readLimit) {
+		inputStream.mark(readLimit);
 	}
 
 	public boolean markSupported() {
-		return in.markSupported();
+		return inputStream.markSupported();
 	}
 
 	public int read() throws IOException {
-		return in.read();
+		return inputStream.read();
 	}
 
 	public int read(byte[] b) throws IOException {
-		return in.read(b);
+		return inputStream.read(b);
 	}
 
 	public int read(byte[] b, int off, int len) throws IOException {
-		return in.read(b, off, len);
+		return inputStream.read(b, off, len);
 	}
 
 	public void reset() throws IOException {
-		in.reset();
+		inputStream.reset();
 	}
 
 	public long skip(long n) throws IOException {
-		return in.skip(n);
+		return inputStream.skip(n);
 	}
 
-	protected InputStream in;
+	protected InputStream inputStream;
 
 }

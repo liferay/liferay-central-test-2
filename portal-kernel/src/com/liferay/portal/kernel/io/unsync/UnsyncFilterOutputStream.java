@@ -28,46 +28,44 @@ import java.io.OutputStream;
 /**
  * <a href="UnsyncFilterOutputStream.java.html"><b><i>View Source</i></b></a>
  *
- * Note: This class has the same function as
- * {@link java.io.FilterOutputStream}, but without synchronized protection.
- * We make this for performance, see http://issues.liferay.com/browse/LPS-6648.
- *
- * Warning: This class is not thread safe, make sure using it only under single
- * thread context or adding external synchronized protection.
+ * <p>
+ * See http://support.liferay.com/browse/LPS-6648.
+ * </p>
  *
  * @author Shuyang Zhou
  */
 public class UnsyncFilterOutputStream extends OutputStream {
 
-	public UnsyncFilterOutputStream(OutputStream out) {
-		this.out = out;
+	public UnsyncFilterOutputStream(OutputStream outputStream) {
+		this.outputStream = outputStream;
 	}
 
 	public void close() throws IOException {
 		try {
 			flush();
 		}
-		catch (IOException ignored) {
+		catch (IOException ioe) {
 		}
-		out.close();
+
+		outputStream.close();
 	}
 
 	public void flush() throws IOException {
-		out.flush();
-	}
-
-	public void write(int b) throws IOException {
-		out.write(b);
+		outputStream.flush();
 	}
 
 	public void write(byte[] b) throws IOException {
-		out.write(b, 0, b.length);
+		outputStream.write(b, 0, b.length);
 	}
 
 	public void write(byte[] b, int off, int len) throws IOException {
-		out.write(b, off, len);
+		outputStream.write(b, off, len);
 	}
 
-	protected OutputStream out;
+	public void write(int b) throws IOException {
+		outputStream.write(b);
+	}
+
+	protected OutputStream outputStream;
 
 }
