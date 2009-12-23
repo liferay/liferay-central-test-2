@@ -159,13 +159,6 @@ public class ImageProcessorImpl implements ImageProcessor {
 	public byte[] getBytes(RenderedImage renderedImage, String contentType)
 		throws IOException {
 
-		if (contentType.equals("jpeg")) {
-			contentType = TYPE_JPEG;
-		}
-		else if (contentType.equals("tif")) {
-			contentType = TYPE_TIFF;
-		}
-
 		UnsyncByteArrayOutputStream baos = new UnsyncByteArrayOutputStream();
 
 		if (contentType.indexOf(TYPE_BMP) != -1) {
@@ -177,13 +170,15 @@ public class ImageProcessorImpl implements ImageProcessor {
 		else if (contentType.indexOf(TYPE_GIF) != -1) {
 			encodeGIF(renderedImage, baos);
 		}
-		else if (contentType.indexOf(TYPE_JPEG) != -1) {
-			ImageIO.write(renderedImage, TYPE_JPEG, baos);
+		else if ((contentType.indexOf(TYPE_JPEG) != -1) ||
+				 (contentType.indexOf("jpeg") != -1)) {
+
+			ImageIO.write(renderedImage, "jpeg", baos);
 		}
 		else if (contentType.indexOf(TYPE_PNG) != -1) {
 			ImageIO.write(renderedImage, TYPE_PNG, baos);
 		}
-		else if (contentType.indexOf(TYPE_TIFF) != -1) {
+		else if (contentType.indexOf("tif") != -1) {
 			ImageEncoder encoder = ImageCodec.createImageEncoder(
 				TYPE_TIFF, baos, null);
 
