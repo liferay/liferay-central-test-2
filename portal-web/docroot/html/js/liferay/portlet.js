@@ -323,7 +323,8 @@ Liferay.Portlet = {
 			instance.registerStatic(portletId);
 		}
 
-		AUI().ready('dialog',
+		AUI().ready(
+			'dialog',
 			function(A) {
 				var portlet = A.one('#' + namespacedId);
 
