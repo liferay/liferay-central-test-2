@@ -1693,6 +1693,7 @@ first-version=Primera versión
 first=Primero
 flag-this-page=Marcar esta página como inapropiada
 flag=Bandera
+flag[action]=Marcar como inapropiado
 flags=Banderas
 flash-attributes=Propiedades de la animación flash
 flash-variables=Variables de la animación flash
