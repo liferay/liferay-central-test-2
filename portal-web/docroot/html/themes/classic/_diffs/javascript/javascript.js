@@ -23,6 +23,10 @@ AUI().ready(
 			}
 		}
 
-		A.one('.site-breadcrumbs').plug(A.Hudcrumbs);
+		var siteBreadcrumbs = A.one('.site-breadcrumbs');
+
+		if (siteBreadcrumbs) {
+			siteBreadcrumbs.plug(A.Hudcrumbs);
+		}
 	}
 );
