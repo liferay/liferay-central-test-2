@@ -60,6 +60,7 @@ type = ParamUtil.getString(request, "type", type);
 		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 
 		AUI().one('.displaying-article-id-holder').show();
+		AUI().one('.displaying-help-message-holder').hide();
 
 		var displayArticleId = AUI().one('.displaying-article-id');
 
@@ -77,8 +78,14 @@ type = ParamUtil.getString(request, "type", type);
 
 	<liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
 
-	<div class='portlet-msg-info displaying-article-id-holder <%= article == null ? "aui-helper-hidden" : StringPool.BLANK %>'>
-		<liferay-ui:message key="displaying-content" />: <span class="displaying-article-id"><%= article != null ? articleId : StringPool.BLANK %></span>
+	<div class='portlet-msg-info'>
+		<span class='displaying-help-message-holder <%= article == null ? StringPool.BLANK : "aui-helper-hidden" %>'>
+			<liferay-ui:message key="please-select-a-web-content-from-the-list-below" />
+		</span>
+
+		<span class='displaying-article-id-holder <%= article == null ? "aui-helper-hidden" : StringPool.BLANK %>'>
+			<liferay-ui:message key="displaying-content" />: <span class="displaying-article-id"><%= article != null ? articleId : StringPool.BLANK %></span>
+		</span>
 	</div>
 
 	<c:if test="<%= article != null %>">
