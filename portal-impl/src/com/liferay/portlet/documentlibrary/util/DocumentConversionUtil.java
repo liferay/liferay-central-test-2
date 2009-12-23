@@ -146,15 +146,15 @@ public class DocumentConversionUtil {
 			DocumentFormat inputFormat = registry.getFormatByFileExtension(
 				sourceExtension);
 
-			UnsyncByteArrayOutputStream baos =
+			UnsyncByteArrayOutputStream ubaos =
 				new UnsyncByteArrayOutputStream();
 
 			DocumentFormat outputFormat = registry.getFormatByFileExtension(
 				targetExtension);
 
-			converter.convert(is, inputFormat, baos, outputFormat);
+			converter.convert(is, inputFormat, ubaos, outputFormat);
 
-			FileUtil.write(file, baos.toByteArray());
+			FileUtil.write(file, ubaos.toByteArray());
 		}
 
 		return new FileInputStream(file);

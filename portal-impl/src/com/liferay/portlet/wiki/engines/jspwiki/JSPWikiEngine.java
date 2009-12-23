@@ -181,8 +181,8 @@ public class JSPWikiEngine implements WikiEngine {
 	protected synchronized void setProperties(String configuration) {
 		_props = new Properties();
 
-		InputStream is =
-			new UnsyncByteArrayInputStream(configuration.getBytes());
+		InputStream is = new UnsyncByteArrayInputStream(
+			configuration.getBytes());
 
 		try {
 			_props.load(is);

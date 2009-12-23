@@ -154,11 +154,11 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			byte[] bytes = layoutLocalService.exportLayouts(
 				sourceGroupId, true, parameterMap, null, null);
 
-			UnsyncByteArrayInputStream bais =
-				new UnsyncByteArrayInputStream(bytes);
+			UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
+				bytes);
 
 			layoutLocalService.importLayouts(
-				userId, targetGroupId, true, parameterMap, bais);
+				userId, targetGroupId, true, parameterMap, ubais);
 		}
 
 		if (userGroup.hasPublicLayouts()) {
@@ -168,11 +168,11 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			byte[] bytes = layoutLocalService.exportLayouts(
 				sourceGroupId, false, parameterMap, null, null);
 
-			UnsyncByteArrayInputStream bais =
-				new UnsyncByteArrayInputStream(bytes);
+			UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
+				bytes);
 
 			layoutLocalService.importLayouts(
-				userId, targetGroupId, false, parameterMap, bais);
+				userId, targetGroupId, false, parameterMap, ubais);
 		}
 	}
 

@@ -131,12 +131,12 @@ public class SharepointServlet extends HttpServlet {
 				sharepointRequest.addParam(key, value);
 			}
 
-			UnsyncByteArrayOutputStream baos =
+			UnsyncByteArrayOutputStream ubaos =
 				new UnsyncByteArrayOutputStream();
 
-			StreamUtil.transfer(is, baos);
+			StreamUtil.transfer(is, ubaos);
 
-			sharepointRequest.setBytes(baos.toByteArray());
+			sharepointRequest.setBytes(ubaos.toByteArray());
 		}
 		catch (Exception e) {
 			throw new SharepointException(e);

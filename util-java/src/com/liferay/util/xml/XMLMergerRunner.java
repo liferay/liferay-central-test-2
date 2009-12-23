@@ -89,18 +89,18 @@ public class XMLMergerRunner {
 	private String _documentToString(Document doc, String docType)
 		throws IOException {
 
-		UnsyncByteArrayOutputStream baos = new UnsyncByteArrayOutputStream();
+		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream();
 
 		OutputFormat format = OutputFormat.createPrettyPrint();
 
 		format.setIndent("\t");
 		format.setLineSeparator("\n");
 
-		XMLWriter writer = new XMLWriter(baos, format);
+		XMLWriter writer = new XMLWriter(ubaos, format);
 
 		writer.write(doc);
 
-		String xml = baos.toString();
+		String xml = ubaos.toString();
 
 		int pos = xml.indexOf("<?");
 

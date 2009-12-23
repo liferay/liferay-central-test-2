@@ -119,12 +119,12 @@ public class PortletRequestUtil {
 		InputStream is = actionRequest.getPortletInputStream();
 
 		if (is != null) {
-			UnsyncByteArrayOutputStream baos =
+			UnsyncByteArrayOutputStream ubaos =
 				new UnsyncByteArrayOutputStream();
 
-			StreamUtil.transfer(is, baos);
+			StreamUtil.transfer(is, ubaos);
 
-			byte[] bytes = baos.toByteArray();
+			byte[] bytes = ubaos.toByteArray();
 
 			if (_log.isInfoEnabled()) {
 				_log.info(

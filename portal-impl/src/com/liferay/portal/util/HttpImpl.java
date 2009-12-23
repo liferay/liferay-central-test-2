@@ -748,20 +748,20 @@ public class HttpImpl implements Http {
 
 			InputStream is = con.getInputStream();
 
-			UnsyncByteArrayOutputStream baos =
+			UnsyncByteArrayOutputStream ubaos =
 				new UnsyncByteArrayOutputStream();
 			byte[] bytes = new byte[512];
 
 			for (int i = is.read(bytes, 0, 512); i != -1;
 					i = is.read(bytes, 0, 512)) {
 
-				baos.write(bytes, 0, i);
+				ubaos.write(bytes, 0, i);
 			}
 
-			xml = new String(baos.toByteArray());
+			xml = new String(ubaos.toByteArray());
 
 			is.close();
-			baos.close();
+			ubaos.close();
 		}
 
 		return xml;

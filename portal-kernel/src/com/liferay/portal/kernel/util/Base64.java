@@ -160,11 +160,11 @@ public class Base64 {
 			return null;
 		}
 
-		UnsyncByteArrayOutputStream baos =
-			new UnsyncByteArrayOutputStream(32000);
+		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream(
+			32000);
 
 		try {
-			ObjectOutputStream os = new ObjectOutputStream(baos);
+			ObjectOutputStream os = new ObjectOutputStream(ubaos);
 
 			os.flush();
 			os.writeObject(o);
@@ -174,7 +174,7 @@ public class Base64 {
 			_log.error(e.getMessage());
 		}
 
-		return encode(baos.toByteArray());
+		return encode(ubaos.toByteArray());
 	}
 
 	public static Object stringToObject(String s) {
@@ -188,16 +188,17 @@ public class Base64 {
 
 		byte bytes[] = decode(s);
 
-		UnsyncByteArrayInputStream bais = new UnsyncByteArrayInputStream(bytes);
+		UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
+			bytes);
 
 		try {
 			ObjectInputStream is = null;
 
 			if (classLoader == null) {
-				is = new ObjectInputStream(bais);
+				is = new ObjectInputStream(ubais);
 			}
 			else {
-				is = new ClassLoaderObjectInputStream(bais, classLoader);
+				is = new ClassLoaderObjectInputStream(ubais, classLoader);
 			}
 
 			return is.readObject();

@@ -157,16 +157,16 @@ public class ClassLoaderProxy {
 		Throwable t1, ClassLoader contextClassLoader) {
 
 		try {
-			UnsyncByteArrayOutputStream baos =
+			UnsyncByteArrayOutputStream ubaos =
 				new UnsyncByteArrayOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(baos);
+			ObjectOutputStream oos = new ObjectOutputStream(ubaos);
 
 			oos.writeObject(t1);
 
 			oos.flush();
 			oos.close();
 
-			byte[] bytes = baos.toByteArray();
+			byte[] bytes = ubaos.toByteArray();
 
 			UnsyncByteArrayInputStream bais =
 				new UnsyncByteArrayInputStream(bytes);

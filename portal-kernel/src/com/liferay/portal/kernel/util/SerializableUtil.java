@@ -63,10 +63,10 @@ public class SerializableUtil {
 		ObjectOutputStream oos = null;
 
 		try {
-			UnsyncByteArrayOutputStream baos =
+			UnsyncByteArrayOutputStream ubaos =
 				new UnsyncByteArrayOutputStream();
 
-			oos = new ObjectOutputStream(baos);
+			oos = new ObjectOutputStream(ubaos);
 
 			oos.writeObject(obj);
 
@@ -74,7 +74,7 @@ public class SerializableUtil {
 
 			oos = null;
 
-			return baos.toByteArray();
+			return ubaos.toByteArray();
 		}
 		finally {
 			if (oos != null) {

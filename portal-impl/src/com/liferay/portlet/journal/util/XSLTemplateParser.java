@@ -57,7 +57,7 @@ public class XSLTemplateParser extends BaseTemplateParser {
 			String xml, String script)
 		throws Exception {
 
-		UnsyncByteArrayOutputStream baos = new UnsyncByteArrayOutputStream();
+		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream();
 
 		long companyId = GetterUtil.getLong(tokens.get("company_id"));
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
@@ -99,7 +99,7 @@ public class XSLTemplateParser extends BaseTemplateParser {
 				PermissionThreadLocal.getPermissionChecker());
 			transformer.setParameter("randomNamespace", randomNamespace);
 
-			transformer.transform(xmlSource, new StreamResult(baos));
+			transformer.transform(xmlSource, new StreamResult(ubaos));
 		}
 		catch (Exception e1) {
 			String errorTemplate = ContentUtil.get(
@@ -130,10 +130,10 @@ public class XSLTemplateParser extends BaseTemplateParser {
 					"line", new Integer(xslErrorListener.getLineNumber()));
 			}
 
-			transformer.transform(xmlSource, new StreamResult(baos));
+			transformer.transform(xmlSource, new StreamResult(ubaos));
 		}
 
-		return baos.toString(StringPool.UTF8);
+		return ubaos.toString(StringPool.UTF8);
 	}
 
 }

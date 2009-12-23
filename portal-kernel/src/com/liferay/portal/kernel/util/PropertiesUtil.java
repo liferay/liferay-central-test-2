@@ -135,12 +135,12 @@ public class PropertiesUtil {
 	}
 
 	public static String list(Properties properties) {
-		UnsyncByteArrayOutputStream baos = new UnsyncByteArrayOutputStream();
-		PrintStream ps = new PrintStream(baos);
+		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream();
+		PrintStream ps = new PrintStream(ubaos);
 
 		properties.list(ps);
 
-		return baos.toString();
+		return ubaos.toString();
 	}
 
 	public static void load(Properties p, String s) throws IOException {

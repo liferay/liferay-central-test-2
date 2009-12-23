@@ -72,14 +72,14 @@ public class ZipWriterImpl implements ZipWriter {
 	}
 
 	public void addEntry(String name, byte[] bytes) throws IOException {
-		UnsyncByteArrayInputStream byteArrayInputStream =
+		UnsyncByteArrayInputStream unsyncByteArrayInputStream =
 			new UnsyncByteArrayInputStream(bytes);
 
 		try {
-			addEntry(name, byteArrayInputStream);
+			addEntry(name, unsyncByteArrayInputStream);
 		}
 		finally {
-			byteArrayInputStream.close();
+			unsyncByteArrayInputStream.close();
 		}
 	}
 
@@ -120,20 +120,20 @@ public class ZipWriterImpl implements ZipWriter {
 	}
 
 	public byte[] finish() throws IOException {
-		UnsyncByteArrayOutputStream byteArrayOutputStream =
+		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
 		InputStream inputStream = new FileInputStream(_file);
 
 		try {
-			File.cat(inputStream, byteArrayOutputStream);
+			File.cat(inputStream, unsyncByteArrayOutputStream);
 		}
 		finally {
-			byteArrayOutputStream.close();
+			unsyncByteArrayOutputStream.close();
 			inputStream.close();
 		}
 
-		return byteArrayOutputStream.toByteArray();
+		return unsyncByteArrayOutputStream.toByteArray();
 	}
 
 	public java.io.File getFile() {

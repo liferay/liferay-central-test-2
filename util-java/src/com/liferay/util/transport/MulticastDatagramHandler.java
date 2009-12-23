@@ -84,9 +84,9 @@ public class MulticastDatagramHandler implements DatagramHandler {
 	}
 
 	protected byte[] getUnzippedBytes(byte[] bytes) throws Exception {
-		InputStream is =
-			new GZIPInputStream(new UnsyncByteArrayInputStream(bytes));
-		UnsyncByteArrayOutputStream baos =
+		InputStream is = new GZIPInputStream(
+			new UnsyncByteArrayInputStream(bytes));
+		UnsyncByteArrayOutputStream ubaos =
 			new UnsyncByteArrayOutputStream(bytes.length);
 
 		byte[] buffer = new byte[1500];
@@ -101,16 +101,16 @@ public class MulticastDatagramHandler implements DatagramHandler {
 			c = is.read(buffer, 0, 1500);
 
 			if (c != -1) {
-				baos.write(buffer, 0, c);
+				ubaos.write(buffer, 0, c);
 			}
 		}
 
 		is.close();
 
-		baos.flush();
-		baos.close();
+		ubaos.flush();
+		ubaos.close();
 
-		return baos.toByteArray();
+		return ubaos.toByteArray();
 	}
 
 	private static Log _log = LogFactory.getLog(MulticastDatagramHandler.class);

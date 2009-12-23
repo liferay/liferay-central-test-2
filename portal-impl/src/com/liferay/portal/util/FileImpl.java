@@ -382,12 +382,13 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	public byte[] getBytes(InputStream inputStream, int bufferSize)
 		throws IOException {
 
-		UnsyncByteArrayOutputStream byteArrayOutputStream =
+		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
-		StreamUtil.transfer(inputStream, byteArrayOutputStream, bufferSize);
+		StreamUtil.transfer(
+			inputStream, unsyncByteArrayOutputStream, bufferSize);
 
-		return byteArrayOutputStream.toByteArray();
+		return unsyncByteArrayOutputStream.toByteArray();
 	}
 
 	public String getExtension(String fileName) {
