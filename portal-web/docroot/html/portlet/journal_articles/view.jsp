@@ -78,7 +78,7 @@ double version = ParamUtil.getDouble(request, "version");
 			searchTerms.setStructureId(structureId);
 		}
 
-		searchTerms.setDisplayDateGT(new Date());
+		searchTerms.setDisplayDateLT(new Date());
 		searchTerms.setStatus(status);
 		%>
 
