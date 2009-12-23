@@ -86,7 +86,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		values.add(header);
 
 		if (name.equals(HttpHeaders.CONTENT_TYPE)) {
-			_contentType = value;
+			setContentType(value);
 		}
 	}
 
@@ -248,6 +248,10 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		header.setStringValue(value);
 
 		values.add(header);
+
+		if (name.equals(HttpHeaders.CONTENT_TYPE)) {
+			setContentType(value);
+		}
 	}
 
 	public void setIntHeader(String name, int value) {
