@@ -249,7 +249,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 
 		try {
@@ -259,7 +259,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 
 		shrinkTree(organization);
@@ -1708,7 +1708,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS,
-			OrganizationModelImpl.TABLE_GROUPS_ORGS, "getGroups",
+			OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME, "getGroups",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1781,8 +1781,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS,
-			OrganizationModelImpl.TABLE_GROUPS_ORGS, "getGroupsSize",
-			new String[] { Long.class.getName() });
+			OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME,
+			"getGroupsSize", new String[] { Long.class.getName() });
 
 	public int getGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1826,7 +1826,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public static final FinderPath FINDER_PATH_CONTAINS_GROUP = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS,
-			OrganizationModelImpl.TABLE_GROUPS_ORGS, "containsGroup",
+			OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME,
+			"containsGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsGroup(long pk, long groupPK)
@@ -1873,7 +1874,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -1886,7 +1887,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -1900,7 +1901,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -1915,7 +1916,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -1927,7 +1928,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -1939,7 +1940,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -1952,7 +1953,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -1967,7 +1968,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -1982,7 +1983,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -2009,7 +2010,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -2030,7 +2031,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_GROUPS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME);
 		}
 	}
 
@@ -2046,7 +2047,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public static final FinderPath FINDER_PATH_GET_USERS = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS,
-			OrganizationModelImpl.TABLE_USERS_ORGS, "getUsers",
+			OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME, "getUsers",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -2117,8 +2118,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public static final FinderPath FINDER_PATH_GET_USERS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS,
-			OrganizationModelImpl.TABLE_USERS_ORGS, "getUsersSize",
-			new String[] { Long.class.getName() });
+			OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME,
+			"getUsersSize", new String[] { Long.class.getName() });
 
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -2162,7 +2163,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public static final FinderPath FINDER_PATH_CONTAINS_USER = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS,
-			OrganizationModelImpl.TABLE_USERS_ORGS, "containsUser",
+			OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME,
+			"containsUser",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
@@ -2208,7 +2210,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -2221,7 +2223,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -2235,7 +2237,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -2250,7 +2252,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -2262,7 +2264,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -2274,7 +2276,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -2287,7 +2289,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -2301,7 +2303,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -2316,7 +2318,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -2343,7 +2345,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -2364,7 +2366,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(OrganizationModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 

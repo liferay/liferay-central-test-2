@@ -219,7 +219,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 
 		Session session = null;
@@ -1039,7 +1039,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 	public static final FinderPath FINDER_PATH_GET_SCFRAMEWORKVERSIONS = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS,
-			SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS,
+			SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME,
 			"getSCFrameworkVersions",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -1114,7 +1114,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 	public static final FinderPath FINDER_PATH_GET_SCFRAMEWORKVERSIONS_SIZE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS,
-			SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS,
+			SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME,
 			"getSCFrameworkVersionsSize", new String[] { Long.class.getName() });
 
 	public int getSCFrameworkVersionsSize(long pk) throws SystemException {
@@ -1159,7 +1159,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 	public static final FinderPath FINDER_PATH_CONTAINS_SCFRAMEWORKVERSION = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS,
-			SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS,
+			SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME,
 			"containsSCFrameworkVersion",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
@@ -1214,7 +1214,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 
@@ -1228,7 +1228,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 
@@ -1243,7 +1243,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 
@@ -1259,7 +1259,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 
@@ -1271,7 +1271,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 
@@ -1284,7 +1284,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 
@@ -1299,7 +1299,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 
@@ -1314,7 +1314,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 
@@ -1331,7 +1331,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 
@@ -1362,7 +1362,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 
@@ -1385,7 +1385,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCProductVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
+			FinderCacheUtil.clearCache(SCProductVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME);
 		}
 	}
 

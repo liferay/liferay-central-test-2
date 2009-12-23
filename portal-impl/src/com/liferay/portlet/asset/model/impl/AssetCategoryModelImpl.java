@@ -126,7 +126,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		return models;
 	}
 
-	public static final String TABLE_ASSETENTRIES_ASSETCATEGORIES = com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES;
+	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME = com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES =
 		com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(

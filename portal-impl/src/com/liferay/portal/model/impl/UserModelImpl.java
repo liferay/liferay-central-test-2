@@ -169,19 +169,44 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		return models;
 	}
 
-	public static final String TABLE_USERS_GROUPS = "Users_Groups";
+	public static final String MAPPING_TABLE_USERS_GROUPS_NAME = "Users_Groups";
+	public static final Object[][] MAPPING_TABLE_USERS_GROUPS_COLUMNS = {
+			{ "userId", new Integer(Types.BIGINT) },
+			{ "groupId", new Integer(Types.BIGINT) }
+		};
+	public static final String MAPPING_TABLE_USERS_GROUPS_SQL_CREATE = "create table Users_Groups (userId LONG not null,groupId LONG not null,primary key (userId, groupId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Groups"), true);
-	public static final String TABLE_USERS_ORGS = "Users_Orgs";
+	public static final String MAPPING_TABLE_USERS_ORGS_NAME = "Users_Orgs";
+	public static final Object[][] MAPPING_TABLE_USERS_ORGS_COLUMNS = {
+			{ "userId", new Integer(Types.BIGINT) },
+			{ "organizationId", new Integer(Types.BIGINT) }
+		};
+	public static final String MAPPING_TABLE_USERS_ORGS_SQL_CREATE = "create table Users_Orgs (userId LONG not null,organizationId LONG not null,primary key (userId, organizationId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Orgs"), true);
-	public static final String TABLE_USERS_PERMISSIONS = "Users_Permissions";
+	public static final String MAPPING_TABLE_USERS_PERMISSIONS_NAME = "Users_Permissions";
+	public static final Object[][] MAPPING_TABLE_USERS_PERMISSIONS_COLUMNS = {
+			{ "userId", new Integer(Types.BIGINT) },
+			{ "permissionId", new Integer(Types.BIGINT) }
+		};
+	public static final String MAPPING_TABLE_USERS_PERMISSIONS_SQL_CREATE = "create table Users_Permissions (userId LONG not null,permissionId LONG not null,primary key (userId, permissionId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Permissions"), true);
-	public static final String TABLE_USERS_ROLES = "Users_Roles";
+	public static final String MAPPING_TABLE_USERS_ROLES_NAME = "Users_Roles";
+	public static final Object[][] MAPPING_TABLE_USERS_ROLES_COLUMNS = {
+			{ "userId", new Integer(Types.BIGINT) },
+			{ "roleId", new Integer(Types.BIGINT) }
+		};
+	public static final String MAPPING_TABLE_USERS_ROLES_SQL_CREATE = "create table Users_Roles (userId LONG not null,roleId LONG not null,primary key (userId, roleId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Roles"), true);
-	public static final String TABLE_USERS_USERGROUPS = "Users_UserGroups";
+	public static final String MAPPING_TABLE_USERS_USERGROUPS_NAME = "Users_UserGroups";
+	public static final Object[][] MAPPING_TABLE_USERS_USERGROUPS_COLUMNS = {
+			{ "userGroupId", new Integer(Types.BIGINT) },
+			{ "userId", new Integer(Types.BIGINT) }
+		};
+	public static final String MAPPING_TABLE_USERS_USERGROUPS_SQL_CREATE = "create table Users_UserGroups (userGroupId LONG not null,userId LONG not null,primary key (userGroupId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_UserGroups"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(

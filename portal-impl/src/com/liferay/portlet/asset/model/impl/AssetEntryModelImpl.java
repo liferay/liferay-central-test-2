@@ -145,12 +145,24 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 		return models;
 	}
 
-	public static final String TABLE_ASSETENTRIES_ASSETCATEGORIES = "AssetEntries_AssetCategories";
+	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME = "AssetEntries_AssetCategories";
+	public static final Object[][] MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_COLUMNS =
+		{
+			{ "entryId", new Integer(Types.BIGINT) },
+			{ "categoryId", new Integer(Types.BIGINT) }
+		};
+	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_SQL_CREATE =
+		"create table AssetEntries_AssetCategories (entryId LONG not null,categoryId LONG not null,primary key (entryId, categoryId))";
 	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES =
 		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.AssetEntries_AssetCategories"),
 			true);
-	public static final String TABLE_ASSETENTRIES_ASSETTAGS = "AssetEntries_AssetTags";
+	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME = "AssetEntries_AssetTags";
+	public static final Object[][] MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_COLUMNS = {
+			{ "entryId", new Integer(Types.BIGINT) },
+			{ "tagId", new Integer(Types.BIGINT) }
+		};
+	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_SQL_CREATE = "create table AssetEntries_AssetTags (entryId LONG not null,tagId LONG not null,primary key (entryId, tagId))";
 	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.AssetEntries_AssetTags"),
 			true);

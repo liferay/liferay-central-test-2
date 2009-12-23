@@ -118,7 +118,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 		return models;
 	}
 
-	public static final String TABLE_ASSETENTRIES_ASSETTAGS = com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS;
+	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME = com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS = com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.asset.model.AssetTag"));

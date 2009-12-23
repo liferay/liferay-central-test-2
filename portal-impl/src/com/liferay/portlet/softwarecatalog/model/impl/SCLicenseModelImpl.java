@@ -109,7 +109,14 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 		return models;
 	}
 
-	public static final String TABLE_SCLICENSES_SCPRODUCTENTRIES = "SCLicenses_SCProductEntries";
+	public static final String MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME = "SCLicenses_SCProductEntries";
+	public static final Object[][] MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_COLUMNS =
+		{
+			{ "licenseId", new Integer(Types.BIGINT) },
+			{ "productEntryId", new Integer(Types.BIGINT) }
+		};
+	public static final String MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_SQL_CREATE =
+		"create table SCLicenses_SCProductEntries (licenseId LONG not null,productEntryId LONG not null,primary key (licenseId, productEntryId))";
 	public static final boolean FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES =
 		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.SCLicenses_SCProductEntries"),

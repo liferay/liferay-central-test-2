@@ -126,7 +126,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 		return models;
 	}
 
-	public static final String TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS = com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS;
+	public static final String MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME =
+		com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS =
 		com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(

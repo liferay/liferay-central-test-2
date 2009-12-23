@@ -106,7 +106,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 		return models;
 	}
 
-	public static final String TABLE_USERS_USERGROUPS = com.liferay.portal.model.impl.UserModelImpl.TABLE_USERS_USERGROUPS;
+	public static final String MAPPING_TABLE_USERS_USERGROUPS_NAME = com.liferay.portal.model.impl.UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_USERS_USERGROUPS = com.liferay.portal.model.impl.UserModelImpl.FINDER_CACHE_ENABLED_USERS_USERGROUPS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserGroup"));

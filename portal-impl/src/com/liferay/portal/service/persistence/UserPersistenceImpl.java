@@ -308,7 +308,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 
 		try {
@@ -318,7 +318,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 
 		try {
@@ -328,7 +328,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 
 		try {
@@ -338,7 +338,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 
 		try {
@@ -348,7 +348,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 
 		Session session = null;
@@ -2988,7 +2988,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS,
-			UserModelImpl.TABLE_USERS_GROUPS, "getGroups",
+			UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME, "getGroups",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -3061,7 +3061,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS,
-			UserModelImpl.TABLE_USERS_GROUPS, "getGroupsSize",
+			UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME, "getGroupsSize",
 			new String[] { Long.class.getName() });
 
 	public int getGroupsSize(long pk) throws SystemException {
@@ -3106,7 +3106,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_GROUP = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS,
-			UserModelImpl.TABLE_USERS_GROUPS, "containsGroup",
+			UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME, "containsGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsGroup(long pk, long groupPK)
@@ -3153,7 +3153,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3166,7 +3166,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3180,7 +3180,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3195,7 +3195,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3207,7 +3207,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3219,7 +3219,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3232,7 +3232,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3247,7 +3247,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3262,7 +3262,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3289,7 +3289,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3310,7 +3310,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME);
 		}
 	}
 
@@ -3326,7 +3326,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_ORGANIZATIONS = new FinderPath(com.liferay.portal.model.impl.OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS,
-			UserModelImpl.TABLE_USERS_ORGS, "getOrganizations",
+			UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME, "getOrganizations",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -3400,8 +3400,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_ORGANIZATIONS_SIZE = new FinderPath(com.liferay.portal.model.impl.OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS,
-			UserModelImpl.TABLE_USERS_ORGS, "getOrganizationsSize",
-			new String[] { Long.class.getName() });
+			UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME,
+			"getOrganizationsSize", new String[] { Long.class.getName() });
 
 	public int getOrganizationsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -3445,7 +3445,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ORGANIZATION = new FinderPath(com.liferay.portal.model.impl.OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS,
-			UserModelImpl.TABLE_USERS_ORGS, "containsOrganization",
+			UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME,
+			"containsOrganization",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsOrganization(long pk, long organizationPK)
@@ -3498,7 +3499,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3512,7 +3513,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3527,7 +3528,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3543,7 +3544,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3555,7 +3556,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3568,7 +3569,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3582,7 +3583,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3597,7 +3598,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3613,7 +3614,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3641,7 +3642,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3663,7 +3664,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME);
 		}
 	}
 
@@ -3679,7 +3680,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_PERMISSIONS = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			UserModelImpl.TABLE_USERS_PERMISSIONS, "getPermissions",
+			UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME,
+			"getPermissions",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -3750,8 +3752,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_PERMISSIONS_SIZE = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			UserModelImpl.TABLE_USERS_PERMISSIONS, "getPermissionsSize",
-			new String[] { Long.class.getName() });
+			UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME,
+			"getPermissionsSize", new String[] { Long.class.getName() });
 
 	public int getPermissionsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -3795,7 +3797,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_PERMISSION = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			UserModelImpl.TABLE_USERS_PERMISSIONS, "containsPermission",
+			UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME,
+			"containsPermission",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsPermission(long pk, long permissionPK)
@@ -3844,7 +3847,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -3858,7 +3861,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -3873,7 +3876,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -3889,7 +3892,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -3901,7 +3904,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -3914,7 +3917,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -3928,7 +3931,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -3943,7 +3946,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -3959,7 +3962,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -3987,7 +3990,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -4009,7 +4012,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -4025,7 +4028,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_ROLES = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES,
-			UserModelImpl.TABLE_USERS_ROLES, "getRoles",
+			UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME, "getRoles",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -4098,7 +4101,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_ROLES_SIZE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES,
-			UserModelImpl.TABLE_USERS_ROLES, "getRolesSize",
+			UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME, "getRolesSize",
 			new String[] { Long.class.getName() });
 
 	public int getRolesSize(long pk) throws SystemException {
@@ -4143,7 +4146,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ROLE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES,
-			UserModelImpl.TABLE_USERS_ROLES, "containsRole",
+			UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME, "containsRole",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
@@ -4189,7 +4192,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4202,7 +4205,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4216,7 +4219,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4231,7 +4234,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4243,7 +4246,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4255,7 +4258,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4268,7 +4271,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4282,7 +4285,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4297,7 +4300,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4324,7 +4327,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4345,7 +4348,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_ROLES_NAME);
 		}
 	}
 
@@ -4361,7 +4364,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_USERGROUPS = new FinderPath(com.liferay.portal.model.impl.UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_USERGROUPS,
-			UserModelImpl.TABLE_USERS_USERGROUPS, "getUserGroups",
+			UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME, "getUserGroups",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -4434,8 +4437,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_USERGROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_USERGROUPS,
-			UserModelImpl.TABLE_USERS_USERGROUPS, "getUserGroupsSize",
-			new String[] { Long.class.getName() });
+			UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME,
+			"getUserGroupsSize", new String[] { Long.class.getName() });
 
 	public int getUserGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -4479,7 +4482,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_USERGROUP = new FinderPath(com.liferay.portal.model.impl.UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_USERGROUPS,
-			UserModelImpl.TABLE_USERS_USERGROUPS, "containsUserGroup",
+			UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME,
+			"containsUserGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUserGroup(long pk, long userGroupPK)
@@ -4528,7 +4532,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 
@@ -4541,7 +4545,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 
@@ -4556,7 +4560,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 
@@ -4572,7 +4576,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 
@@ -4584,7 +4588,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 
@@ -4597,7 +4601,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 
@@ -4610,7 +4614,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 
@@ -4625,7 +4629,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 
@@ -4641,7 +4645,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 
@@ -4669,7 +4673,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 
@@ -4691,7 +4695,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 	}
 

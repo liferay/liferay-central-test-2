@@ -217,7 +217,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 
 		Session session = null;
@@ -1117,7 +1117,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 	public static final FinderPath FINDER_PATH_GET_SCPRODUCTENTRIES = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
-			SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES,
+			SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME,
 			"getSCProductEntries",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -1192,7 +1192,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 	public static final FinderPath FINDER_PATH_GET_SCPRODUCTENTRIES_SIZE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
-			SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES,
+			SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME,
 			"getSCProductEntriesSize", new String[] { Long.class.getName() });
 
 	public int getSCProductEntriesSize(long pk) throws SystemException {
@@ -1237,7 +1237,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_SCPRODUCTENTRY = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
-			SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES,
+			SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME,
 			"containsSCProductEntry",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
@@ -1291,7 +1291,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 
@@ -1305,7 +1305,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 
@@ -1320,7 +1320,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 
@@ -1336,7 +1336,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 
@@ -1348,7 +1348,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 
@@ -1361,7 +1361,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 
@@ -1375,7 +1375,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 
@@ -1390,7 +1390,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 
@@ -1406,7 +1406,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 
@@ -1437,7 +1437,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 
@@ -1460,7 +1460,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME);
 		}
 	}
 

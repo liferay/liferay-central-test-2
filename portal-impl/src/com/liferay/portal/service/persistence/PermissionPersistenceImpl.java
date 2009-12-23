@@ -212,7 +212,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 
 		try {
@@ -222,7 +222,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 
 		try {
@@ -232,7 +232,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 
 		Session session = null;
@@ -1040,7 +1040,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
-			PermissionModelImpl.TABLE_GROUPS_PERMISSIONS, "getGroups",
+			PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME,
+			"getGroups",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1113,8 +1114,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
-			PermissionModelImpl.TABLE_GROUPS_PERMISSIONS, "getGroupsSize",
-			new String[] { Long.class.getName() });
+			PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME,
+			"getGroupsSize", new String[] { Long.class.getName() });
 
 	public int getGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1158,7 +1159,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_GROUP = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
-			PermissionModelImpl.TABLE_GROUPS_PERMISSIONS, "containsGroup",
+			PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME,
+			"containsGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsGroup(long pk, long groupPK)
@@ -1205,7 +1207,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1218,7 +1220,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1232,7 +1234,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1247,7 +1249,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1259,7 +1261,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1271,7 +1273,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1284,7 +1286,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1299,7 +1301,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1314,7 +1316,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1341,7 +1343,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1362,7 +1364,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1378,7 +1380,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_ROLES = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
-			PermissionModelImpl.TABLE_ROLES_PERMISSIONS, "getRoles",
+			PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME,
+			"getRoles",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1451,8 +1454,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_ROLES_SIZE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
-			PermissionModelImpl.TABLE_ROLES_PERMISSIONS, "getRolesSize",
-			new String[] { Long.class.getName() });
+			PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME,
+			"getRolesSize", new String[] { Long.class.getName() });
 
 	public int getRolesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1496,7 +1499,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ROLE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
-			PermissionModelImpl.TABLE_ROLES_PERMISSIONS, "containsRole",
+			PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME,
+			"containsRole",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
@@ -1542,7 +1546,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1555,7 +1559,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1569,7 +1573,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1584,7 +1588,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1596,7 +1600,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1608,7 +1612,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1621,7 +1625,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1635,7 +1639,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1650,7 +1654,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1677,7 +1681,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1698,7 +1702,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1714,7 +1718,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_USERS = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			PermissionModelImpl.TABLE_USERS_PERMISSIONS, "getUsers",
+			PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME,
+			"getUsers",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1785,8 +1790,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_USERS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			PermissionModelImpl.TABLE_USERS_PERMISSIONS, "getUsersSize",
-			new String[] { Long.class.getName() });
+			PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME,
+			"getUsersSize", new String[] { Long.class.getName() });
 
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1830,7 +1835,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_USER = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			PermissionModelImpl.TABLE_USERS_PERMISSIONS, "containsUser",
+			PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME,
+			"containsUser",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
@@ -1876,7 +1882,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1889,7 +1895,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1903,7 +1909,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1918,7 +1924,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1930,7 +1936,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1942,7 +1948,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1955,7 +1961,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1969,7 +1975,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -1984,7 +1990,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -2011,7 +2017,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 
@@ -2032,7 +2038,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
+			FinderCacheUtil.clearCache(PermissionModelImpl.MAPPING_TABLE_USERS_PERMISSIONS_NAME);
 		}
 	}
 

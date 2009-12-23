@@ -214,7 +214,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 
 		try {
@@ -224,7 +224,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 
 		Session session = null;
@@ -1024,7 +1024,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_GET_ASSETCATEGORIES = new FinderPath(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES,
-			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES,
+			AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME,
 			"getAssetCategories",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
@@ -1099,7 +1099,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_GET_ASSETCATEGORIES_SIZE = new FinderPath(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES,
-			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES,
+			AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME,
 			"getAssetCategoriesSize", new String[] { Long.class.getName() });
 
 	public int getAssetCategoriesSize(long pk) throws SystemException {
@@ -1144,7 +1144,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ASSETCATEGORY = new FinderPath(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES,
-			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES,
+			AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME,
 			"containsAssetCategory",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
@@ -1198,7 +1198,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1212,7 +1212,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1227,7 +1227,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1243,7 +1243,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1255,7 +1255,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1268,7 +1268,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1282,7 +1282,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1297,7 +1297,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1313,7 +1313,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1341,7 +1341,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1363,7 +1363,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME);
 		}
 	}
 
@@ -1379,7 +1379,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_GET_ASSETTAGS = new FinderPath(com.liferay.portlet.asset.model.impl.AssetTagModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS,
-			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS, "getAssetTags",
+			AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME,
+			"getAssetTags",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1453,7 +1454,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_GET_ASSETTAGS_SIZE = new FinderPath(com.liferay.portlet.asset.model.impl.AssetTagModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS,
-			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS,
+			AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME,
 			"getAssetTagsSize", new String[] { Long.class.getName() });
 
 	public int getAssetTagsSize(long pk) throws SystemException {
@@ -1498,7 +1499,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ASSETTAG = new FinderPath(com.liferay.portlet.asset.model.impl.AssetTagModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS,
-			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS,
+			AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME,
 			"containsAssetTag",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
@@ -1546,7 +1547,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
@@ -1560,7 +1561,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
@@ -1575,7 +1576,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
@@ -1591,7 +1592,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
@@ -1603,7 +1604,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
@@ -1616,7 +1617,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
@@ -1630,7 +1631,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
@@ -1645,7 +1646,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
@@ -1661,7 +1662,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
@@ -1689,7 +1690,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
@@ -1711,7 +1712,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
 		}
 	}
 
