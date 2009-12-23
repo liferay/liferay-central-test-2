@@ -1103,6 +1103,12 @@
 	display: block;
 }
 
+.configuration-frame {
+	border-width: 0;
+	overflow: auto;
+	width: 800px;
+}
+
 .float-container:after {
 	clear: both;
 	content: ".";

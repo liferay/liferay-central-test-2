@@ -77,6 +77,7 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 				if (window.parent) {
 					window.parent.Liferay.Portlet.refresh(curPortletBoundaryId);
 				}
-		});
+			}
+		);
 	</script>
 </c:if>
