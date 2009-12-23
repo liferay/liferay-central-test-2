@@ -22,6 +22,9 @@
 
 package com.liferay.portal.convert;
 
+import com.liferay.counter.model.Counter;
+import com.liferay.mail.model.CyrusUser;
+import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
@@ -41,7 +44,6 @@ import com.liferay.portal.util.ShutdownUtil;
 import java.lang.reflect.Field;
 
 import java.sql.Connection;
-import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,10 +97,10 @@ public class ConvertDatabase extends ConvertProcess {
 				"Collecting information for database tables to migration");
 
 			for (String modelName : modelNames) {
-				String implName = modelName.replaceFirst(
+				String implClassName = modelName.replaceFirst(
 					"(\\.model\\.)(\\p{Upper}.*)", "$1impl.$2Impl");
 
-				Class<?> implClass = InstancePool.get(implName).getClass();
+				Class<?> implClass = InstancePool.get(implClassName).getClass();
 
 				Field[] fields = implClass.getFields();
 
@@ -155,14 +157,38 @@ public class ConvertDatabase extends ConvertProcess {
 		ShutdownUtil.shutdown(0);
 	}
 
+	protected DataSource getDataSource() throws Exception {
+		String[] values = getParameterValues();
+
+		String jdbcDriverClassName = values[0];
+		String jdbcURL = values[1];
+		String jdbcUserName = values[2];
+		String jdbcPassword = values[3];
+
+		Properties properties = new Properties();
+
+		properties.setProperty(
+			_JDBC_PREFIX + "driverClassName", jdbcDriverClassName);
+		properties.setProperty(_JDBC_PREFIX + "url", jdbcURL);
+		properties.setProperty(_JDBC_PREFIX + "username", jdbcUserName);
+		properties.setProperty(_JDBC_PREFIX + "password", jdbcPassword);
+
+		DataSourceFactoryBean dataSourceFactory = new DataSourceFactoryBean();
+
+		dataSourceFactory.setProperties(properties);
+		dataSourceFactory.setPropertyPrefix(_JDBC_PREFIX);
+
+		return (DataSource)dataSourceFactory.createInstance();
+	}
+
 	protected Tuple getTableDetails(
-			Class<?> implClass, Field tableField, String tableFieldVar) {
+		Class<?> implClass, Field tableField, String tableFieldVar) {
 
 		try {
-			String columnsFieldVar =
-				StringUtil.replace(tableFieldVar, "_NAME", "_COLUMNS");
-			String sqlCreateFieldVar =
-				StringUtil.replace(tableFieldVar, "_NAME", "_SQL_CREATE");
+			String columnsFieldVar = StringUtil.replace(
+				tableFieldVar, "_NAME", "_COLUMNS");
+			String sqlCreateFieldVar = StringUtil.replace(
+				tableFieldVar, "_NAME", "_SQL_CREATE");
 
 			Field columnsField = implClass.getField(columnsFieldVar);
 			Field sqlCreateField = implClass.getField(sqlCreateFieldVar);
@@ -195,54 +221,18 @@ public class ConvertDatabase extends ConvertProcess {
 		}
 	}
 
-	protected DataSource getDataSource() throws Exception {
-		String[] values = getParameterValues();
-
-		String jdbcDriverClassName = values[0];
-		String jdbcURL = values[1];
-		String jdbcUserName = values[2];
-		String jdbcPassword = values[3];
-
-		Properties properties = new Properties();
-
-		properties.setProperty(
-			_JDBC_PREFIX + "driverClassName", jdbcDriverClassName);
-		properties.setProperty(_JDBC_PREFIX + "url", jdbcURL);
-		properties.setProperty(_JDBC_PREFIX + "username", jdbcUserName);
-		properties.setProperty(_JDBC_PREFIX + "password", jdbcPassword);
-
-		DataSourceFactoryBean dataSourceFactory = new DataSourceFactoryBean();
-
-		dataSourceFactory.setProperties(properties);
-		dataSourceFactory.setPropertyPrefix(_JDBC_PREFIX);
-
-		return (DataSource)dataSourceFactory.createInstance();
-	}
-
 	private static final String _JDBC_PREFIX = "jdbc.upgrade.";
 
 	private static final Tuple[] _UNMAPPED_TABLES = new Tuple[] {
 		new Tuple(
-			"Counter",
-			new Object[][] {
-				{ "name", new Integer(Types.VARCHAR) },
-				{ "currentId", new Integer(Types.BIGINT) },
-			},
-			"create table Counter (name VARCHAR(75) not null primary key, currentId LONG);"),
+			Counter.TABLE_NAME, Counter.TABLE_COLUMNS,
+			Counter.TABLE_SQL_CREATE),
 		new Tuple(
-			"CyrusUser",
-			new Object[][] {
-				{ "userId", new Integer(Types.VARCHAR) },
-				{ "password_", new Integer(Types.VARCHAR) },
-			},
-			"create table CyrusUser (userId VARCHAR(75) not null primary key, password_ VARCHAR(75) not null);"),
+			CyrusUser.TABLE_NAME, CyrusUser.TABLE_COLUMNS,
+			CyrusUser.TABLE_SQL_CREATE),
 		new Tuple(
-			"CyrusVirtual",
-			new Object[][] {
-				{ "emailAddress", new Integer(Types.VARCHAR) },
-				{ "userId", new Integer(Types.VARCHAR) },
-			},
-			"create table CyrusVirtual (emailAddress VARCHAR(75) not null primary key, userId VARCHAR(75) not null);"),
+			CyrusVirtual.TABLE_NAME, CyrusVirtual.TABLE_COLUMNS,
+			CyrusVirtual.TABLE_SQL_CREATE)
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(ConvertDatabase.class);

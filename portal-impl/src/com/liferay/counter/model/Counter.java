@@ -24,6 +24,8 @@ package com.liferay.counter.model;
 
 import java.io.Serializable;
 
+import java.sql.Types;
+
 /**
  * <a href="Counter.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,26 +33,37 @@ import java.io.Serializable;
  */
 public class Counter implements Serializable {
 
+	public static final Object[][] TABLE_COLUMNS = {
+		{"name", new Integer(Types.VARCHAR)},
+		{"currentId", new Integer(Types.BIGINT)},
+	};
+
+	public static final String TABLE_NAME = "Counter";
+
+	public static final String TABLE_SQL_CREATE =
+		"create table Counter (name VARCHAR(75) not null primary key, " +
+			"currentId LONG)";
+
 	public Counter() {
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
 	}
 
 	public long getCurrentId() {
 		return _currentId;
 	}
 
+	public String getName() {
+		return _name;
+	}
+
 	public void setCurrentId(long currentId) {
 		_currentId = currentId;
 	}
 
-	private String _name;
+	public void setName(String name) {
+		_name = name;
+	}
+
 	private long _currentId;
+	private String _name;
 
 }

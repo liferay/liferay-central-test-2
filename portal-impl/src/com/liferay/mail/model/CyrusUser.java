@@ -33,12 +33,16 @@ import java.sql.Types;
  */
 public class CyrusUser implements Serializable {
 
-	public static String TABLE_NAME = "CyrusUser";
-
 	public static Object[][] TABLE_COLUMNS = {
 		{"userId", new Integer(Types.VARCHAR)},
 		{"password_", new Integer(Types.VARCHAR)}
 	};
+
+	public static String TABLE_NAME = "CyrusUser";
+
+	public static final String TABLE_SQL_CREATE =
+		"create table CyrusUser (userId VARCHAR(75) not null primary key, " +
+			"password_ VARCHAR(75) not null)";
 
 	public CyrusUser() {
 	}
@@ -52,23 +56,23 @@ public class CyrusUser implements Serializable {
 		_password = password;
 	}
 
-	public String getUserId() {
-		return _userId;
-	}
-
-	public void setUserId(String userId) {
-		_userId = userId;
-	}
-
 	public String getPassword() {
 		return _password;
+	}
+
+	public String getUserId() {
+		return _userId;
 	}
 
 	public void setPassword(String password) {
 		_password = password;
 	}
 
-	private String _userId;
+	public void setUserId(String userId) {
+		_userId = userId;
+	}
+
 	private String _password;
+	private String _userId;
 
 }

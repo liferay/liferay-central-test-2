@@ -33,12 +33,16 @@ import java.sql.Types;
  */
 public class CyrusVirtual implements Serializable {
 
-	public static String TABLE_NAME = "CyrusVirtual";
-
 	public static Object[][] TABLE_COLUMNS = {
 		{"emailAddress", new Integer(Types.VARCHAR)},
 		{"userId", new Integer(Types.VARCHAR)}
 	};
+
+	public static String TABLE_NAME = "CyrusVirtual";
+
+	public static final String TABLE_SQL_CREATE =
+		"create table CyrusVirtual (emailAddress VARCHAR(75) not null " +
+			"primary key, userId VARCHAR(75) not null)";
 
 	public CyrusVirtual() {
 	}
@@ -56,12 +60,12 @@ public class CyrusVirtual implements Serializable {
 		return _emailAddress;
 	}
 
-	public void setEmailAddress(String emailAddress) {
-		_emailAddress = emailAddress;
-	}
-
 	public String getUserId() {
 		return _userId;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
 	}
 
 	public void setUserId(String userId) {
