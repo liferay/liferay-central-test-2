@@ -28,8 +28,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import java.nio.charset.Charset;
-
 import java.util.Arrays;
 
 /**
@@ -43,110 +41,123 @@ public class UnsyncByteArrayOutputStreamTest extends TestCase {
 	public void testBlockWrite() {
 		UnsyncByteArrayOutputStream unsyncBaos =
 			new UnsyncByteArrayOutputStream();
-		unsyncBaos.write(testData);
-		assertEquals(testDataSize, unsyncBaos.size());
-		assertTrue(Arrays.equals(testData, unsyncBaos.toByteArray()));
+
+		unsyncBaos.write(_BUFFER);
+
+		assertEquals(_BUFFER_SIZE, unsyncBaos.size());
+		assertTrue(Arrays.equals(_BUFFER, unsyncBaos.toByteArray()));
 	}
 
-	public void testConstruct() {
+	public void testConstructor() {
 		UnsyncByteArrayOutputStream unsyncBaos =
 			new UnsyncByteArrayOutputStream();
-		int size = unsyncBaos.size();
-		assertEquals(0, size);
 
-		unsyncBaos =
-			new UnsyncByteArrayOutputStream(64);
-		size = unsyncBaos.size();
-		assertEquals(0, size);
+		assertEquals(0, unsyncBaos.size());
+
+		unsyncBaos = new UnsyncByteArrayOutputStream(64);
+
+		assertEquals(0, unsyncBaos.size());
 	}
 
 	public void testSizeAndReset() {
 		UnsyncByteArrayOutputStream unsyncBaos =
 			new UnsyncByteArrayOutputStream();
-		int size = unsyncBaos.size();
-		assertEquals(0, size);
+
+		assertEquals(0, unsyncBaos.size());
+
 		unsyncBaos.write(0);
-		size = unsyncBaos.size();
-		assertEquals(1, size);
+
+		assertEquals(1, unsyncBaos.size());
+
 		unsyncBaos.write(1);
-		size = unsyncBaos.size();
-		assertEquals(2, size);
+
+		assertEquals(2, unsyncBaos.size());
 
 		unsyncBaos.reset();
 
-		size = unsyncBaos.size();
-		assertEquals(0, size);
+		assertEquals(0, unsyncBaos.size());
+
 		unsyncBaos.write(0);
-		size = unsyncBaos.size();
-		assertEquals(1, size);
+
+		assertEquals(1, unsyncBaos.size());
+
 		unsyncBaos.write(1);
-		size = unsyncBaos.size();
-		assertEquals(2, size);
+
+		assertEquals(2, unsyncBaos.size());
 	}
 
 	public void testToByteArray() {
 		UnsyncByteArrayOutputStream unsyncBaos =
 			new UnsyncByteArrayOutputStream();
-		unsyncBaos.write(testData);
-		byte[] newByteArray1 = unsyncBaos.toByteArray();
 
-		assertTrue(Arrays.equals(testData, newByteArray1));
+		unsyncBaos.write(_BUFFER);
 
-		byte[] newByteArray2 = unsyncBaos.toByteArray();
+		byte[] byteArray1 = unsyncBaos.toByteArray();
 
-		assertTrue(Arrays.equals(testData, newByteArray2));
+		assertTrue(Arrays.equals(_BUFFER, byteArray1));
 
-		//Make sure it creates a new copy everytime
-		assertNotSame(newByteArray1, newByteArray2);
+		byte[] byteArray2 = unsyncBaos.toByteArray();
+
+		assertTrue(Arrays.equals(_BUFFER, unsyncBaos.toByteArray()));
+
+		assertNotSame(byteArray1, byteArray2);
 	}
 
 	public void testToString() throws UnsupportedEncodingException {
 		UnsyncByteArrayOutputStream unsyncBaos =
 			new UnsyncByteArrayOutputStream();
-		unsyncBaos.write(testData);
 
-		assertEquals(new String(testData), unsyncBaos.toString());
-		String testCharSetName1 = "UTF-16BE";
-		String testCharSetName2 = "UTF-16LE";
+		unsyncBaos.write(_BUFFER);
+
+		assertEquals(new String(_BUFFER), unsyncBaos.toString());
+
+		String charsetName1 = "UTF-16BE";
+		String charsetName2 = "UTF-16LE";
+
 		assertFalse(
-			new String(
-			testData, Charset.forName(testCharSetName1)).equals(
-			unsyncBaos.toString(testCharSetName2)));
+			new String(_BUFFER, charsetName1).equals(
+				unsyncBaos.toString(charsetName2)));
 		assertEquals(
-			new String(testData, Charset.forName(testCharSetName1)),
-			unsyncBaos.toString(testCharSetName1));
+			new String(_BUFFER, charsetName1),
+			unsyncBaos.toString(charsetName1));
 		assertEquals(
-			new String(testData, Charset.forName(testCharSetName2)),
-			unsyncBaos.toString(testCharSetName2));
+			new String(_BUFFER, charsetName2),
+			unsyncBaos.toString(charsetName2));
 	}
 
 	public void testWrite() {
 		UnsyncByteArrayOutputStream unsyncBaos =
 			new UnsyncByteArrayOutputStream();
-		for (int i = 0; i < testDataSize; i++) {
+
+		for (int i = 0; i < _BUFFER_SIZE; i++) {
 			unsyncBaos.write(i);
+
 			assertEquals(i + 1, unsyncBaos.size());
 		}
-		assertTrue(Arrays.equals(testData, unsyncBaos.toByteArray()));
+
+		assertTrue(Arrays.equals(_BUFFER, unsyncBaos.toByteArray()));
 	}
 
 	public void testWriteTo() throws IOException {
 		UnsyncByteArrayOutputStream unsyncBaos =
 			new UnsyncByteArrayOutputStream();
-		unsyncBaos.write(testData);
+
+		unsyncBaos.write(_BUFFER);
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
 		unsyncBaos.writeTo(baos);
 
-		assertTrue(Arrays.equals(testData, baos.toByteArray()));
+		assertTrue(Arrays.equals(_BUFFER, baos.toByteArray()));
 	}
 
-	private static final int testDataSize = 64;
-	private static final byte[] testData = new byte[testDataSize];
+	private static final int _BUFFER_SIZE = 64;
+
+	private static final byte[] _BUFFER = new byte[_BUFFER_SIZE];
 
 	static {
-		for (int i = 0; i < testDataSize; i++) {
-			testData[i] = (byte) i;
+		for (int i = 0; i < _BUFFER_SIZE; i++) {
+			_BUFFER[i] = (byte)i;
 		}
 	}
 

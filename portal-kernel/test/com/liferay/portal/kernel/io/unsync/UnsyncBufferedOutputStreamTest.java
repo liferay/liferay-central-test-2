@@ -37,55 +37,71 @@ import java.util.Arrays;
  */
 public class UnsyncBufferedOutputStreamTest extends TestCase {
 
-	public void testConstruct() {
+	public void testBlockWrite() throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		UnsyncBufferedOutputStream unsyncBos =
-			new UnsyncBufferedOutputStream(baos);
+
+		UnsyncBufferedOutputStream unsyncBos = new UnsyncBufferedOutputStream(
+			baos, _BUFFER_SIZE * 2);
+
+		assertEquals(_BUFFER_SIZE * 2, unsyncBos.buffer.length);
+
+		unsyncBos.write(_BUFFER);
+
+		for (int i = 0; i < _BUFFER_SIZE; i++) {
+			assertEquals(i, unsyncBos.buffer[i]);
+		}
+
+		unsyncBos.write(_BUFFER);
+
+		for (int i = _BUFFER_SIZE; i < _BUFFER_SIZE * 2; i++) {
+			assertEquals(i - _BUFFER_SIZE, unsyncBos.buffer[i]);
+		}
+
+		unsyncBos.write(100);
+
+		assertEquals(100, unsyncBos.buffer[0]);
+		assertEquals(_BUFFER_SIZE * 2, baos.size());
+	}
+
+	public void testConstructor() {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		UnsyncBufferedOutputStream unsyncBos = new UnsyncBufferedOutputStream(
+			baos);
+
 		assertEquals(8192, unsyncBos.buffer.length);
 
 		unsyncBos = new UnsyncBufferedOutputStream(baos, 10);
+
 		assertEquals(10, unsyncBos.buffer.length);
 	}
 
 	public void testWrite() throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		UnsyncBufferedOutputStream unsyncBos =
-			new UnsyncBufferedOutputStream(baos, testDataSize * 2);
-		assertEquals(testDataSize * 2, unsyncBos.buffer.length);
-		for (int i = 0; i < testDataSize; i++) {
+
+		UnsyncBufferedOutputStream unsyncBos = new UnsyncBufferedOutputStream(
+			baos, _BUFFER_SIZE * 2);
+
+		assertEquals(_BUFFER_SIZE * 2, unsyncBos.buffer.length);
+
+		for (int i = 0; i < _BUFFER_SIZE; i++) {
 			unsyncBos.write(i);
+
 			assertEquals(i, unsyncBos.buffer[i]);
 		}
+
 		unsyncBos.flush();
-		byte[] resultData = baos.toByteArray();
-		assertTrue(Arrays.equals(testData, resultData));
+
+		assertTrue(Arrays.equals(_BUFFER, baos.toByteArray()));
 	}
 
-	public void testBlockWrite() throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		UnsyncBufferedOutputStream unsyncBos =
-			new UnsyncBufferedOutputStream(baos, testDataSize * 2);
-		assertEquals(testDataSize * 2, unsyncBos.buffer.length);
-		unsyncBos.write(testData);
-		for (int i = 0; i < testDataSize; i++) {
-			assertEquals(i, unsyncBos.buffer[i]);
-		}
-		unsyncBos.write(testData);
-		for (int i = testDataSize; i < testDataSize * 2; i++) {
-			assertEquals(i - testDataSize, unsyncBos.buffer[i]);
-		}
-		//auto flush
-		unsyncBos.write(100);
-		assertEquals(100, unsyncBos.buffer[0]);
-		assertEquals(testDataSize * 2, baos.size());
-	}
+	private static final int _BUFFER_SIZE = 10;
 
-	private static final int testDataSize = 10;
-	private static final byte[] testData = new byte[testDataSize];
+	private static final byte[] _BUFFER = new byte[_BUFFER_SIZE];
 
 	static {
-		for (int i = 0; i < testDataSize; i++) {
-			testData[i] = (byte) i;
+		for (int i = 0; i < _BUFFER_SIZE; i++) {
+			_BUFFER[i] = (byte)i;
 		}
 	}
 
