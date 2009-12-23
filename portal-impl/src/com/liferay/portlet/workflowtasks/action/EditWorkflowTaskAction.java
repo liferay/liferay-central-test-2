@@ -22,30 +22,15 @@
 
 package com.liferay.portlet.workflowtasks.action;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.workflow.WorkflowException;
-import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.MBMessageDisplay;
-import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -79,8 +64,6 @@ public class EditWorkflowTaskAction extends PortletAction {
 			else if (cmd.equals(Constants.SAVE)) {
 				updateTask(actionRequest);
 			}
-
-			logAction(actionRequest);
 
 			sendRedirect(actionRequest, actionResponse);
 		}
@@ -130,58 +113,11 @@ public class EditWorkflowTaskAction extends PortletAction {
 			actionRequest, "workflowTaskId");
 		long assigneeUserId = ParamUtil.getLong(
 			actionRequest, "assigneeUserId");
-
-		WorkflowTaskManagerUtil.assignWorkflowTaskToUser(
-			themeDisplay.getUserId(), workflowTaskId, assigneeUserId, null,
-			null);
-	}
-
-	protected void logAction(ActionRequest actionRequest) throws Exception {
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long workflowTaskId = ParamUtil.getLong(
-			actionRequest, "workflowTaskId");
-		long assigneeUserId = ParamUtil.getLong(
-			actionRequest, "assigneeUserId");
 		String comment = ParamUtil.getString(actionRequest, "comment");
 
-		StringBundler sb = new StringBundler(6);
-
-		if (cmd.equals(Constants.ASSIGN)) {
-			sb.append(
-				LanguageUtil.get(themeDisplay.getLocale(), "task-assigned-to"));
-			sb.append(StringPool.SPACE);
-			sb.append(PortalUtil.getUserName(assigneeUserId, StringPool.BLANK));
-		}
-		else {
-			sb.append(
-				LanguageUtil.get(themeDisplay.getLocale(), "task-updated"));
-		}
-
-		if (Validator.isNotNull(comment)) {
-			sb.append(StringPool.COLON);
-			sb.append(StringPool.SPACE);
-			sb.append(comment);
-		}
-
-		String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
-
-		MBMessageDisplay messageDisplay =
-			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
-				themeDisplay.getUserId(), WorkflowTask.class.getName(),
-				workflowTaskId, StatusConstants.APPROVED, threadView);
-
-		MBThread thread = messageDisplay.getThread();
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			MBMessage.class.getName(), actionRequest);
-
-		MBMessageServiceUtil.addDiscussionMessage(
-			WorkflowTask.class.getName(), workflowTaskId, thread.getThreadId(),
-			thread.getRootMessageId(), null, sb.toString(), serviceContext);
+		WorkflowTaskManagerUtil.assignWorkflowTaskToUser(
+			themeDisplay.getUserId(), workflowTaskId, assigneeUserId, comment,
+			null);
 	}
 
 	protected void updateTask(ActionRequest actionRequest) throws Exception {
@@ -192,9 +128,10 @@ public class EditWorkflowTaskAction extends PortletAction {
 			actionRequest, "workflowTaskId");
 		String transitionName = ParamUtil.getString(
 			actionRequest, "transitionName");
+		String comment = ParamUtil.getString(actionRequest, "comment");
 
 		WorkflowTaskManagerUtil.completeWorkflowTask(
-			themeDisplay.getUserId(), workflowTaskId, transitionName, null,
+			themeDisplay.getUserId(), workflowTaskId, transitionName, comment,
 			null);
 	}
 
