@@ -125,22 +125,7 @@ if (organizationId > 0) {
 <script type="text/javascript">
 	AUI().ready(
 		function(A) {
-			var selectionMethod = A.one('#<portlet:namespace />selectionMethod');
-
-			function showHiddenFields() {
-				var usersSelectionOptions = A.one('#<portlet:namespace />UsersSelectionOptions');
-
-				if (selectionMethod.val() == 'users') {
-					usersSelectionOptions.show();
-				}
-				else {
-					usersSelectionOptions.hide();
-				}
-			}
-
-			showHiddenFields();
-
-			selectionMethod.on('change', showHiddenFields);
+			Liferay.Util.toggleSelectBox('<portlet:namespace />selectionMethod', 'users', '<portlet:namespace />UsersSelectionOptions');
 		}
 	);
 </script>
