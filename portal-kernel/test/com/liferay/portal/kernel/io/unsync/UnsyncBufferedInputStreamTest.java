@@ -112,7 +112,7 @@ public class UnsyncBufferedInputStreamTest extends TestCase {
 
 		assertEquals(5, number);
 
-		assertEquals(-1, ubis.read());
+		assertEquals(-1, ubis.read(buffer));
 	}
 
 	public void testClose() throws IOException {
