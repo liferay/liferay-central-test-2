@@ -83,7 +83,6 @@ String htmlAttributes =
 				<aui:option label="form" selected='<%= authType.equals("form") %>' />
 			</aui:select>
 
-
 			<div id="<portlet:namespace />formAuthOptions">
 				<aui:select name="formMethod">
 					<aui:option label="get" selected='<%= formMethod.equals("get") %>' />
@@ -153,4 +152,3 @@ String htmlAttributes =
 		}
 	);
 </script>
-
