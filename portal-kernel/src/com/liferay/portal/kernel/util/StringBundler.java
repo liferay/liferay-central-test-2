@@ -97,6 +97,10 @@ public class StringBundler {
 		return this;
 	}
 
+	public int capacity() {
+		return _array.length;
+	}
+
 	public int index() {
 		return _arrayIndex;
 	}
