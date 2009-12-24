@@ -101,7 +101,7 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 		int newIndex = index + 1;
 
 		if (newIndex > buffer.length) {
-			int newBufferSize = buffer.length << 1;
+			int newBufferSize = Math.max(buffer.length << 1, newIndex);
 
 			byte[] newBuffer = new byte[newBufferSize];
 
