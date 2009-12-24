@@ -82,47 +82,48 @@ String htmlAttributes =
 				<aui:option label="basic" selected='<%= authType.equals("basic") %>' />
 				<aui:option label="form" selected='<%= authType.equals("form") %>' />
 			</aui:select>
-		</div>
 
-		<div id="<portlet:namespace />formAuthOptions">
-			<aui:select name="formMethod">
-				<aui:option label="get" selected='<%= formMethod.equals("get") %>' />
-				<aui:option label="post" selected='<%= formMethod.equals("post") %>' />
-			</aui:select>
 
-			<aui:field-wrapper label="user-name">
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<aui:input cssClass="lfr-input-text-container" label="field-name" name="userNameField" type="text" value="<%= userNameField %>" />
-					</td>
-					<td>
-						<aui:input cssClass="lfr-input-text-container" label="value" name="userName" type="text" value="<%= userName %>" />
-					</td>
-				</tr>
-				</table>
-			</aui:field-wrapper>
+			<div id="<portlet:namespace />formAuthOptions">
+				<aui:select name="formMethod">
+					<aui:option label="get" selected='<%= formMethod.equals("get") %>' />
+					<aui:option label="post" selected='<%= formMethod.equals("post") %>' />
+				</aui:select>
 
-			<aui:field-wrapper name="password">
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<aui:input cssClass="lfr-input-text-container" label="field-name" name="passwordField" type="text" value="<%= passwordField %>" />
-					</td>
-					<td>
-						<aui:input cssClass="lfr-input-text-container" label="value" name="password" type="text" value="<%= password %>" />
-					</td>
-				</tr>
-				</table>
+				<aui:field-wrapper label="user-name">
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<aui:input cssClass="lfr-input-text-container" label="field-name" name="userNameField" type="text" value="<%= userNameField %>" />
+						</td>
+						<td>
+							<aui:input cssClass="lfr-input-text-container" label="value" name="userName" type="text" value="<%= userName %>" />
+						</td>
+					</tr>
+					</table>
+				</aui:field-wrapper>
 
-				<aui:input cssClass="lfr-input-text-container" name="hiddenVariables" type="text" value="<%= hiddenVariables %>" />
-			</aui:field-wrapper>
-		</div>
+				<aui:field-wrapper name="password">
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<aui:input cssClass="lfr-input-text-container" label="field-name" name="passwordField" type="text" value="<%= passwordField %>" />
+						</td>
+						<td>
+							<aui:input cssClass="lfr-input-text-container" label="value" name="password" type="text" value="<%= password %>" />
+						</td>
+					</tr>
+					</table>
 
-		<div id="<portlet:namespace />basicAuthOptions">
-			<aui:input cssClass="lfr-input-text-container" name="userName" type="text" value="<%= userName %>" />
+					<aui:input cssClass="lfr-input-text-container" name="hiddenVariables" type="text" value="<%= hiddenVariables %>" />
+				</aui:field-wrapper>
+			</div>
 
-			<aui:input cssClass="lfr-input-text-container" name="password" type="text" value="<%= password %>" />
+			<div id="<portlet:namespace />basicAuthOptions">
+				<aui:input cssClass="lfr-input-text-container" name="userName" type="text" value="<%= userName %>" />
+
+				<aui:input cssClass="lfr-input-text-container" name="password" type="text" value="<%= password %>" />
+			</div>
 		</div>
 	</aui:fieldset>
 
