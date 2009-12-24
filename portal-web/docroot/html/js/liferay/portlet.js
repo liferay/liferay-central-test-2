@@ -359,7 +359,7 @@ Liferay.Portlet = {
 
 									instance.openConfiguration(portlet, portletId, configurationURL, namespacedId);
 
-									event.halt();
+									event.preventDefault();
 								}
 							);
 						}
