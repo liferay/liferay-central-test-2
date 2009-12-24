@@ -143,7 +143,7 @@ String htmlAttributes =
 <script type="text/javascript">
 	AUI().ready(
 		function(A) {
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />src);
 			</c:if>
 
