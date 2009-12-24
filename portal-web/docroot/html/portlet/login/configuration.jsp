@@ -131,7 +131,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<aui:field-wrapper label="body">
 							<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-							<aui:input name="<%= editorParam %>" type="hidden" value="" />
+							<aui:input name="<%= editorParam %>" type="hidden" />
 						</aui:field-wrapper>
 					</aui:fieldset>
 
