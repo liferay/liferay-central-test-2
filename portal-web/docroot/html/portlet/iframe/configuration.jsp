@@ -47,63 +47,6 @@ String htmlAttributes =
 	}
 </style>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			var authCheckbox = A.one('#<portlet:namespace />authCheckbox');
-			var auth = A.one('#<portlet:namespace />auth');
-
-			function toggleAuthOptions() {
-				var authenticationOptions = A.one('#<portlet:namespace />authenticationOptions');
-				var formAuthOptions = A.one('#<portlet:namespace />formAuthOptions');
-				var basicAuthOptions = A.one('#<portlet:namespace />basicAuthOptions');
-				var currentLoginMsg = A.one('#<portlet:namespace />currentLoginMsg');
-
-				if (auth.val() == 'true') {
-					authenticationOptions.show();
-					currentLoginMsg.show();
-
-					toggleAuthTypeOptions();
-				}
-				else {
-					authenticationOptions.hide();
-					formAuthOptions.hide();
-					basicAuthOptions.hide();
-					currentLoginMsg.hide();
-				}
-			}
-
-			var authType = A.one('select[name=<portlet:namespace />authType]');
-
-			function toggleAuthTypeOptions() {
-				var formAuthOptions = A.one('#<portlet:namespace />formAuthOptions');
-				var basicAuthOptions = A.one('#<portlet:namespace />basicAuthOptions');
-
-				if (authType.val() == 'form') {
-					formAuthOptions.show();
-					formAuthOptions.all('input').set('disabled', false);
-
-					basicAuthOptions.hide();
-					basicAuthOptions.all('input').set('disabled', true);
-				}
-				else {
-					formAuthOptions.hide();
-					formAuthOptions.all('input').set('disabled', true);
-
-					basicAuthOptions.show();
-					basicAuthOptions.all('input').set('disabled', false);
-				}
-			}
-
-			toggleAuthOptions();
-
-			authCheckbox.on('click', toggleAuthOptions);
-
-			authType.on('change', toggleAuthTypeOptions);
-		}
-	);
-</script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
@@ -121,20 +64,20 @@ String htmlAttributes =
 	<aui:fieldset>
 		<aui:legend label="authentication" />
 
-		<div class="portlet-msg-info" id="<portlet:namespace />currentLoginMsg">
-			<c:choose>
-				<c:when test="<%= IFrameUtil.isPasswordTokenEnabled(renderRequest) %>">
-					<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid-and-password" />
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid" />
-				</c:otherwise>
-			</c:choose>
-		</div>
-
 		<aui:input inlineLabel="left" label="authenticate" name="auth" type="checkbox" value="<%= auth %>" />
 
 		<div id="<portlet:namespace />authenticationOptions">
+			<div class="portlet-msg-info" id="<portlet:namespace />currentLoginMsg">
+				<c:choose>
+					<c:when test="<%= IFrameUtil.isPasswordTokenEnabled(renderRequest) %>">
+						<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid-and-password" />
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid" />
+					</c:otherwise>
+				</c:choose>
+			</div>
+
 			<aui:select label="authentication-type" name="authType">
 				<aui:option label="basic" selected='<%= authType.equals("basic") %>' />
 				<aui:option label="form" selected='<%= authType.equals("form") %>' />
@@ -196,8 +139,17 @@ String htmlAttributes =
 	</aui:button-row>
 </aui:form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />src);
-	</script>
-</c:if>
+<script type="text/javascript">
+	AUI().ready(
+		function(A) {
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />src);
+			</c:if>
+
+			Liferay.Util.toggleBoxes('<portlet:namespace />authCheckbox','<portlet:namespace />authenticationOptions');
+			Liferay.Util.toggleSelectBox('<portlet:namespace />authType', 'form', '<portlet:namespace />formAuthOptions');
+			Liferay.Util.toggleSelectBox('<portlet:namespace />authType', 'basic', '<portlet:namespace />basicAuthOptions');
+		}
+	);
+</script>
+
