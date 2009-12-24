@@ -164,8 +164,8 @@ public class JSONServiceAction extends JSONAction {
 				}
 			}
 			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
+				if (_log.isDebugEnabled()) {
+					_log.debug(
 						"Invoked class " + classObj + " on method " +
 							method.getName() + " with args " + args,
 						e);
