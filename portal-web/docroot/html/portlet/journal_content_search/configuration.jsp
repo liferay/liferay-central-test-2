@@ -54,9 +54,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		</aui:select>
 
-		<aui:input inlineLabel="left" label="only-show-results-for-web-content-listed-in-a-web-content-display-portlet" name="showListed" onClick='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "targetPortletId.disabled = this.checked;" %>' type="checkbox" value="<%= showListed %>" />
+		<aui:input inlineLabel="left" label="only-show-results-for-web-content-listed-in-a-web-content-display-portlet" name="showListed" type="checkbox" value="<%= showListed %>" />
 
-		<aui:input cssClass="lfr-input-text-container" disabled="<%= showListed %>" inlneLabel="left" name="targetPortletId" type="text" />
+		<div class="<%= showListed ? StringPool.BLANK : " aui-helper-hidden" %>" id="<portlet:namespace />webContentDisplay">
+			<aui:input cssClass="lfr-input-text-container" name="targetPortletId" />
+		</div>
 	</aui:fieldset>
 
 	<aui:button-row>
@@ -65,3 +67,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<script type="text/javascript">
+	AUI().ready(
+		function(A) {
+			Liferay.Util.toggleBoxes('<portlet:namespace />showListedCheckbox','<portlet:namespace />webContentDisplay');
+		}
+	);
+</script>
