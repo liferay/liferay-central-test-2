@@ -23,6 +23,7 @@
 package com.liferay.portal.dao.db;
 
 import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringReader;
 
 /**
  * <a href="DerbyDB.java.html"><b><i>View Source</i></b></a>
@@ -99,7 +99,7 @@ public class DerbyDB extends BaseDB {
 	}
 
 	protected String reword(String data) throws IOException {
-		BufferedReader br = new BufferedReader(new StringReader(data));
+		BufferedReader br = new BufferedReader(new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 

@@ -23,6 +23,7 @@
 package com.liferay.portal.scripting;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
@@ -33,7 +34,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.PrintStream;
-import java.io.StringReader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -193,7 +193,7 @@ public class ScriptingImpl implements Scripting {
 
 		try{
 			LineNumberReader lineNumberReader = new LineNumberReader(
-				new StringReader(script));
+				new UnsyncStringReader(script));
 
 			while (true) {
 				String line = lineNumberReader.readLine();

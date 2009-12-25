@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -47,7 +48,6 @@ import jargs.gnu.CmdLineParser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.Reader;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -899,7 +899,7 @@ public class JavadocFormatter {
 		}
 
 		JavaClass javaClass = _getJavaClass(
-			fileName, new StringReader(originalContent));
+			fileName, new UnsyncStringReader(originalContent));
 
 		String javadocLessContent = _removeJavadocFromJava(
 			javaClass, originalContent);
@@ -918,7 +918,7 @@ public class JavadocFormatter {
 		String[] lines = StringUtil.split(javadocLessContent, "\n");
 
 		JavaClass javaClass = _getJavaClass(
-			fileName, new StringReader(javadocLessContent));
+			fileName, new UnsyncStringReader(javadocLessContent));
 
 		Element rootElement = document.getRootElement();
 

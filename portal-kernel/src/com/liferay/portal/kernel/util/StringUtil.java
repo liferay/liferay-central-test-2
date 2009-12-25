@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -29,7 +30,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 
 import java.net.URL;
 
@@ -953,7 +953,8 @@ public class StringUtil {
 			delimiter.equals(StringPool.RETURN)) {
 
 			try {
-				BufferedReader br = new BufferedReader(new StringReader(s));
+				BufferedReader br =
+					new BufferedReader(new UnsyncStringReader(s));
 
 				String line = null;
 
@@ -1414,7 +1415,7 @@ public class StringUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new StringReader(text));
+		BufferedReader br = new BufferedReader(new UnsyncStringReader(text));
 
 		String s = StringPool.BLANK;
 

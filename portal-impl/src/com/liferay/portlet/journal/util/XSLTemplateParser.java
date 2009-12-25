@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,8 +34,6 @@ import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.util.PwdGenerator;
-
-import java.io.StringReader;
 
 import java.util.Locale;
 import java.util.Map;
@@ -72,7 +71,7 @@ public class XSLTemplateParser extends BaseTemplateParser {
 
 		XSLErrorListener xslErrorListener = new XSLErrorListener(locale);
 
-		StreamSource xmlSource = new StreamSource(new StringReader(xml));
+		StreamSource xmlSource = new StreamSource(new UnsyncStringReader(xml));
 
 		TransformerFactory transformerFactory =
 			TransformerFactory.newInstance();
@@ -82,7 +81,7 @@ public class XSLTemplateParser extends BaseTemplateParser {
 
 		try {
 			StreamSource scriptSource = new StreamSource(
-				new StringReader(script));
+				new UnsyncStringReader(script));
 
 			Transformer transformer = transformerFactory.newTransformer(
 				scriptSource);
@@ -106,7 +105,7 @@ public class XSLTemplateParser extends BaseTemplateParser {
 				PropsValues.JOURNAL_ERROR_TEMPLATE_XSL);
 
 			StreamSource scriptSource = new StreamSource(
-				new StringReader(errorTemplate));
+				new UnsyncStringReader(errorTemplate));
 
 			Transformer transformer = transformerFactory.newTransformer(
 				scriptSource);

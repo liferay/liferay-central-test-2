@@ -115,7 +115,7 @@
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 <%@ page import="com.liferay.util.xml.DocUtil" %>
 
-<%@ page import="java.io.StringReader" %>
+<%@ page import="com.liferay.portal.kernel.io.unsync.UnsyncStringReader" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

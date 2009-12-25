@@ -68,6 +68,7 @@
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchEntry" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.TextSearchEntry" %>
+<%@ page import="com.liferay.portal.kernel.io.unsync.UnsyncStringReader" %>
 <%@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 <%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.json.JSONObject" %>
@@ -205,7 +206,6 @@
 <%@ page import="com.liferay.util.xml.XMLFormatter" %>
 
 <%@ page import="java.io.Serializable" %>
-<%@ page import="java.io.StringReader" %>
 
 <%@ page import="java.math.BigDecimal" %>
 

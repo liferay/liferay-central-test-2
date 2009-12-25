@@ -22,6 +22,7 @@
 
 package com.liferay.portal.webdav.methods;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -37,8 +38,6 @@ import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.XMLFormatter;
-
-import java.io.StringReader;
 
 import java.util.List;
 
@@ -97,7 +96,7 @@ public class LockMethodImpl implements Method {
 
 				SAXReader reader = new SAXReader();
 
-				Document doc = reader.read(new StringReader(xml));
+				Document doc = reader.read(new UnsyncStringReader(xml));
 
 				Element root = doc.getRootElement();
 

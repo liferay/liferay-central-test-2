@@ -23,10 +23,10 @@
 package com.liferay.portlet.xslcontent.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.HttpUtil;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.net.URL;
 
@@ -55,8 +55,8 @@ public class XSLContentUtil {
 		String xml = HttpUtil.URLtoString(xmlURL);
 		String xsl = HttpUtil.URLtoString(xslURL);
 
-		StreamSource xmlSource = new StreamSource(new StringReader(xml));
-		StreamSource xslSource = new StreamSource(new StringReader(xsl));
+		StreamSource xmlSource = new StreamSource(new UnsyncStringReader(xml));
+		StreamSource xslSource = new StreamSource(new UnsyncStringReader(xsl));
 
 		TransformerFactory transformerFactory =
 			TransformerFactory.newInstance();

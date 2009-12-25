@@ -39,7 +39,8 @@ try {
 
 	BaseModel model = PortalUtil.getBaseModel(resourcePermission);
 
-	Document doc = SAXReaderUtil.read(new StringReader(model.toXmlString()));
+	Document doc = SAXReaderUtil.read(
+		new UnsyncStringReader(model.toXmlString()));
 
 	Element root = doc.getRootElement();
 

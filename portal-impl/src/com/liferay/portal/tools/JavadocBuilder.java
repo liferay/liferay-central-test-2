@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,7 +45,6 @@ import jargs.gnu.CmdLineParser;
 
 import java.io.File;
 import java.io.Reader;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -687,7 +687,7 @@ public class JavadocBuilder {
 		String[] lines = StringUtil.split(oldContent, "\n");
 
 		JavaClass javaClass = _getJavaClass(
-			fileName, new StringReader(oldContent));
+			fileName, new UnsyncStringReader(oldContent));
 
 		Set<Integer> lineNumbers = new HashSet<Integer>();
 
@@ -787,7 +787,7 @@ public class JavadocBuilder {
 		String[] lines = StringUtil.split(oldContent, "\n");
 
 		JavaClass javaClass = _getJavaClass(
-			fileName, new StringReader(oldContent));
+			fileName, new UnsyncStringReader(oldContent));
 
 		Document document = _saxReaderUtil.read(javadocFile);
 

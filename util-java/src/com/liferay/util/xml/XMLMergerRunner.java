@@ -23,6 +23,7 @@
 package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -30,7 +31,6 @@ import com.liferay.util.xml.descriptor.XMLDescriptor;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -147,8 +147,8 @@ public class XMLMergerRunner {
 
 		SAXReader reader = new SAXReader();
 
-		Document masterDoc = reader.read(new StringReader(masterXml));
-		Document slaveDoc = reader.read(new StringReader(slaveXml));
+		Document masterDoc = reader.read(new UnsyncStringReader(masterXml));
+		Document slaveDoc = reader.read(new UnsyncStringReader(slaveXml));
 
 		XMLDescriptor descriptor = null;
 

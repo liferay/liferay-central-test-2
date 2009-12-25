@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.db.Index;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -44,7 +45,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -278,7 +278,8 @@ public abstract class BaseDB implements DB {
 
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new StringReader(template));
+		BufferedReader br =
+			new BufferedReader(new UnsyncStringReader(template));
 
 		String line = null;
 
@@ -428,8 +429,8 @@ public abstract class BaseDB implements DB {
 
 		DB db = DBFactoryUtil.getDB();
 
-		BufferedReader bufferedReader = new BufferedReader(new StringReader(
-			indexesSQL));
+		BufferedReader bufferedReader = new BufferedReader(
+			new UnsyncStringReader(indexesSQL));
 
 		String sql = null;
 
@@ -514,7 +515,8 @@ public abstract class BaseDB implements DB {
 		if (fileName.equals("portal") || fileName.equals("portal-minimal") ||
 			fileName.equals("update-5.0.1-5.1.0")) {
 
-			BufferedReader br = new BufferedReader(new StringReader(template));
+			BufferedReader br = new BufferedReader(
+				new UnsyncStringReader(template));
 
 			StringBuilder sb = new StringBuilder();
 
@@ -676,7 +678,8 @@ public abstract class BaseDB implements DB {
 
 		// Trim insert statements because it breaks MySQL Query Browser
 
-		BufferedReader br = new BufferedReader(new StringReader(template));
+		BufferedReader br = new BufferedReader(
+			new UnsyncStringReader(template));
 
 		StringBuilder sb = new StringBuilder();
 
@@ -748,7 +751,8 @@ public abstract class BaseDB implements DB {
 	protected String removeBooleanIndexes(String data) throws IOException {
 		String portalData = FileUtil.read("../sql/portal-tables.sql");
 
-		BufferedReader br = new BufferedReader(new StringReader(data));
+		BufferedReader br = new BufferedReader(
+			new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 
@@ -797,7 +801,7 @@ public abstract class BaseDB implements DB {
 	}
 
 	protected String removeInserts(String data) throws IOException {
-		BufferedReader br = new BufferedReader(new StringReader(data));
+		BufferedReader br = new BufferedReader(new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 
@@ -818,7 +822,7 @@ public abstract class BaseDB implements DB {
 	}
 
 	protected String removeLongInserts(String data) throws IOException {
-		BufferedReader br = new BufferedReader(new StringReader(data));
+		BufferedReader br = new BufferedReader(new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 

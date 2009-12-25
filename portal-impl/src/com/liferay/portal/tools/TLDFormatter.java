@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -31,7 +32,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.InitUtil;
 
 import java.io.File;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +85,7 @@ public class TLDFormatter {
 			String content = FileUtil.read(file);
 
 			Document document = SAXReaderUtil.read(
-				new StringReader(
+				new UnsyncStringReader(
 				StringUtil.replace(
 					content, "xml/ns/j2ee/web-jsptaglibrary_2_0.xsd",
 					"dtd/web-jsptaglibrary_1_2.dtd")));

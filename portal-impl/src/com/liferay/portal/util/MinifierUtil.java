@@ -24,12 +24,12 @@ package com.liferay.portal.util;
 
 import com.liferay.mozilla.javascript.ErrorReporter;
 import com.liferay.mozilla.javascript.EvaluatorException;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.yahoo.platform.yui.compressor.CssCompressor;
 import com.liferay.yahoo.platform.yui.compressor.JavaScriptCompressor;
 
-import java.io.StringReader;
 import java.io.StringWriter;
 
 /**
@@ -55,7 +55,7 @@ public class MinifierUtil {
 
 		try {
 			CssCompressor cssCompressor = new CssCompressor(
-				new StringReader(content));
+				new UnsyncStringReader(content));
 
 			cssCompressor.compress(stringWriter, _CSS_LINE_BREAK);
 		}
@@ -74,7 +74,8 @@ public class MinifierUtil {
 		try {
 			JavaScriptCompressor javaScriptCompressor =
 				new JavaScriptCompressor(
-					new StringReader(content), new JavaScriptErrorReporter());
+					new UnsyncStringReader(content),
+					new JavaScriptErrorReporter());
 
 			javaScriptCompressor.compress(
 					stringWriter, _JS_LINE_BREAK, _JS_MUNGE, _JS_VERBOSE,

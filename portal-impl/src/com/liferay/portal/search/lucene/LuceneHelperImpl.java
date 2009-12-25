@@ -22,6 +22,7 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
@@ -33,7 +34,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.lucene.KeywordsUtil;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -230,7 +230,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		highlighter.setTextFragmenter(new SimpleFragmenter(fragmentLength));
 
 		TokenStream tokenStream = getAnalyzer().tokenStream(
-			field, new StringReader(s));
+			field, new UnsyncStringReader(s));
 
 		try {
 			String snippet = highlighter.getBestFragments(

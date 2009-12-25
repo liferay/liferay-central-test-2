@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -34,7 +35,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.StringReader;
 import java.io.StringWriter;
 
 import java.util.HashMap;
@@ -162,7 +162,7 @@ public class LocalizationUtil {
 
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 
-			reader = factory.createXMLStreamReader(new StringReader(xml));
+			reader = factory.createXMLStreamReader(new UnsyncStringReader(xml));
 
 			String defaultLanguageId = StringPool.BLANK;
 
@@ -375,7 +375,8 @@ public class LocalizationUtil {
 
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
-			reader = inputFactory.createXMLStreamReader(new StringReader(xml));
+			reader = inputFactory.createXMLStreamReader(
+				new UnsyncStringReader(xml));
 
 			String availableLocales = StringPool.BLANK;
 			String defaultLanguageId = StringPool.BLANK;
@@ -539,7 +540,8 @@ public class LocalizationUtil {
 
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
-			reader = inputFactory.createXMLStreamReader(new StringReader(xml));
+			reader = inputFactory.createXMLStreamReader(
+				new UnsyncStringReader(xml));
 
 			String availableLocales = StringPool.BLANK;
 
@@ -726,7 +728,7 @@ public class LocalizationUtil {
 
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 
-			reader = factory.createXMLStreamReader(new StringReader(xml));
+			reader = factory.createXMLStreamReader(new UnsyncStringReader(xml));
 
 			if (reader.hasNext()) {
 				reader.nextTag();

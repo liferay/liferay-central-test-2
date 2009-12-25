@@ -24,13 +24,13 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.FileImpl;
 
 import java.io.BufferedReader;
-import java.io.StringReader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -97,7 +97,7 @@ public class DBLoader {
 		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(
-			new StringReader(_fileUtil.read(fileName)));
+			new UnsyncStringReader(_fileUtil.read(fileName)));
 
 		String line = null;
 
@@ -190,7 +190,7 @@ public class DBLoader {
 		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(
-			new StringReader(_fileUtil.read(fileName)));
+			new UnsyncStringReader(_fileUtil.read(fileName)));
 
 		String line = null;
 

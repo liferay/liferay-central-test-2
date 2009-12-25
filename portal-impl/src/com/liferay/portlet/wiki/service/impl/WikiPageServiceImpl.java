@@ -24,6 +24,7 @@ package com.liferay.portlet.wiki.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.Diff;
 import com.liferay.portal.kernel.util.DiffResult;
@@ -61,7 +62,6 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 
-import java.io.StringReader;
 import java.io.StringWriter;
 
 import java.util.ArrayList;
@@ -416,7 +416,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		targetContent = HtmlUtil.escape(targetContent);
 
 		List<DiffResult>[] diffResults = DiffUtil.diff(
-			new StringReader(sourceContent), new StringReader(targetContent));
+			new UnsyncStringReader(sourceContent),
+			new UnsyncStringReader(targetContent));
 
 		String velocityTemplateId =
 			"com/liferay/portlet/wiki/dependencies/rss.vm";

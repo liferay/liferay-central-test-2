@@ -25,6 +25,7 @@ package com.liferay.portlet.blogs.service.impl;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -71,7 +72,6 @@ import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -1022,7 +1022,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
 		XMLStreamReader reader = inputFactory.createXMLStreamReader(
-			new StringReader(xml));
+			new UnsyncStringReader(xml));
 
 		String error = xml;
 

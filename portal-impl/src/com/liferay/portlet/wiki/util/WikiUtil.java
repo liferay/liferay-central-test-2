@@ -25,6 +25,7 @@ package com.liferay.portlet.wiki.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.DiffHtmlUtil;
@@ -52,7 +53,6 @@ import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -105,7 +105,8 @@ public class WikiUtil {
 		}
 
 		return DiffHtmlUtil.diff(
-			new StringReader(sourceContent),new StringReader(targetContent));
+			new UnsyncStringReader(sourceContent),
+			new UnsyncStringReader(targetContent));
 	}
 
 	public static String getEditPage(String format) {

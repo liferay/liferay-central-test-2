@@ -22,11 +22,10 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.Diff;
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
-
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +38,8 @@ import java.util.List;
 public class DiffImplTest extends BaseTestCase {
 
 	public void testOne() {
-		StringReader reader1 = new StringReader("liferay");
-		StringReader reader2 = new StringReader("liferay");
+		UnsyncStringReader reader1 = new UnsyncStringReader("liferay");
+		UnsyncStringReader reader2 = new UnsyncStringReader("liferay");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -52,8 +51,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testTwo() {
-		StringReader reader1 = new StringReader("liferay");
-		StringReader reader2 = new StringReader("LifeRay");
+		UnsyncStringReader reader1 = new UnsyncStringReader("liferay");
+		UnsyncStringReader reader2 = new UnsyncStringReader("LifeRay");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -81,8 +80,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testThree() {
-		StringReader reader1 = new StringReader("aaa");
-		StringReader reader2 = new StringReader("bbb");
+		UnsyncStringReader reader1 = new UnsyncStringReader("aaa");
+		UnsyncStringReader reader2 = new UnsyncStringReader("bbb");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -104,8 +103,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testFour() {
-		StringReader reader1 = new StringReader("rahab");
-		StringReader reader2 = new StringReader("boaz");
+		UnsyncStringReader reader1 = new UnsyncStringReader("rahab");
+		UnsyncStringReader reader2 = new UnsyncStringReader("boaz");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -127,8 +126,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testFive() {
-		StringReader reader1 = new StringReader("aaa\nbbb");
-		StringReader reader2 = new StringReader("ccc\naaa");
+		UnsyncStringReader reader1 = new UnsyncStringReader("aaa\nbbb");
+		UnsyncStringReader reader2 = new UnsyncStringReader("ccc\naaa");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -159,8 +158,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testSix() {
-		StringReader reader1 = new StringReader("ccc\naaa");
-		StringReader reader2 = new StringReader("aaa\nbbb");
+		UnsyncStringReader reader1 = new UnsyncStringReader("ccc\naaa");
+		UnsyncStringReader reader2 = new UnsyncStringReader("aaa\nbbb");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -191,8 +190,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testSeven() {
-		StringReader reader1 = new StringReader("ccc\naaa\nbbe");
-		StringReader reader2 = new StringReader("aaa\nbbb");
+		UnsyncStringReader reader1 = new UnsyncStringReader("ccc\naaa\nbbe");
+		UnsyncStringReader reader2 = new UnsyncStringReader("aaa\nbbb");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -221,8 +220,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testEight() {
-		StringReader reader1 = new StringReader("add\nbbb\nccc");
-		StringReader reader2 = new StringReader("bbb\nccc\naee");
+		UnsyncStringReader reader1 = new UnsyncStringReader("add\nbbb\nccc");
+		UnsyncStringReader reader2 = new UnsyncStringReader("bbb\nccc\naee");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -253,8 +252,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testNine() {
-		StringReader reader1 = new StringReader("abcd");
-		StringReader reader2 = new StringReader("abcdee");
+		UnsyncStringReader reader1 = new UnsyncStringReader("abcd");
+		UnsyncStringReader reader2 = new UnsyncStringReader("abcdee");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -272,8 +271,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testTen() {
-		StringReader reader1 = new StringReader("abcd");
-		StringReader reader2 = new StringReader("abcdeee");
+		UnsyncStringReader reader1 = new UnsyncStringReader("abcd");
+		UnsyncStringReader reader2 = new UnsyncStringReader("abcdeee");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -295,8 +294,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testEleven() {
-		StringReader reader1 = new StringReader("aaa\nbbb\nfff");
-		StringReader reader2 = new StringReader("ccc\nada\nbeb");
+		UnsyncStringReader reader1 = new UnsyncStringReader("aaa\nbbb\nfff");
+		UnsyncStringReader reader2 = new UnsyncStringReader("ccc\nada\nbeb");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -334,8 +333,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testTwelve() {
-		StringReader reader1 = new StringReader("ada");
-		StringReader reader2 = new StringReader("aaa\nccc");
+		UnsyncStringReader reader1 = new UnsyncStringReader("ada");
+		UnsyncStringReader reader2 = new UnsyncStringReader("aaa\nccc");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();

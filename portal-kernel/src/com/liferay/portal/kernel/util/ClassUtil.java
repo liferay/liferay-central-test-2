@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -31,7 +32,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StreamTokenizer;
-import java.io.StringReader;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -274,7 +274,7 @@ public class ClassUtil {
 			String s, List<String> tokens)
 		throws IOException {
 
-		StreamTokenizer st = new StreamTokenizer(new StringReader(s));
+		StreamTokenizer st = new StreamTokenizer(new UnsyncStringReader(s));
 
 		_setupParseTable(st);
 

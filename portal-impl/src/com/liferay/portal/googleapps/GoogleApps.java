@@ -22,6 +22,7 @@
 
 package com.liferay.portal.googleapps;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -40,8 +41,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-
-import java.io.StringReader;
 
 import java.util.Properties;
 
@@ -170,7 +169,7 @@ public class GoogleApps {
 	public void updatePassword(long userId, String password) throws Exception {
 		String userXML = _getUserXML(userId);
 
-		Document document = SAXReaderUtil.read(new StringReader(userXML));
+		Document document = SAXReaderUtil.read(new UnsyncStringReader(userXML));
 
 		Element atomEntry = document.getRootElement();
 

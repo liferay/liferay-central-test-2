@@ -23,12 +23,12 @@
 package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import org.dom4j.Branch;
 import org.dom4j.Document;
@@ -168,7 +168,7 @@ public class XMLFormatter {
 
 		SAXReader reader = new SAXReader();
 
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = reader.read(new UnsyncStringReader(xml));
 
 		return toString(doc, indent);
 	}

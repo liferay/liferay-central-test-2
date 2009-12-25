@@ -23,6 +23,7 @@
 package com.liferay.util.dao.orm;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -38,7 +39,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -456,7 +456,7 @@ public class CustomSQL {
 			_log.debug("Loading " + source);
 		}
 
-		Document doc = SAXReaderUtil.read(new StringReader(xml));
+		Document doc = SAXReaderUtil.read(new UnsyncStringReader(xml));
 
 		Element root = doc.getRootElement();
 
@@ -487,7 +487,7 @@ public class CustomSQL {
 		StringBuilder sb = new StringBuilder();
 
 		try {
-			BufferedReader br = new BufferedReader(new StringReader(sql));
+			BufferedReader br = new BufferedReader(new UnsyncStringReader(sql));
 
 			String line = null;
 

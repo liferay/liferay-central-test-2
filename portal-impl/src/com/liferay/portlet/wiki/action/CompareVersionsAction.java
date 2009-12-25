@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
@@ -36,8 +37,6 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
-
-import java.io.StringReader;
 
 import java.util.List;
 
@@ -149,8 +148,8 @@ public class CompareVersionsAction extends PortletAction {
 			}
 
 			List<DiffResult>[] diffResults = DiffUtil.diff(
-				new StringReader(sourceContent),
-				new StringReader(targetContent));
+				new UnsyncStringReader(sourceContent),
+				new UnsyncStringReader(targetContent));
 
 			renderRequest.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
 		}

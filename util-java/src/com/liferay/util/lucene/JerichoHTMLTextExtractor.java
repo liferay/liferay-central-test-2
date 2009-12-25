@@ -24,10 +24,11 @@ package com.liferay.util.lucene;
 
 import au.id.jericho.lib.html.Source;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-import java.io.StringReader;
 
 import org.apache.jackrabbit.extractor.HTMLTextExtractor;
 
@@ -43,7 +44,7 @@ public class JerichoHTMLTextExtractor extends HTMLTextExtractor {
 
 		Source source = new Source(stream);
 
-		return new StringReader(source.getTextExtractor().toString());
+		return new UnsyncStringReader(source.getTextExtractor().toString());
 	}
 
 }

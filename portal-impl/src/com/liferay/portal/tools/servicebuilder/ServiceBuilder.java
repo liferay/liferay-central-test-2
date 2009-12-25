@@ -25,6 +25,7 @@ package com.liferay.portal.tools.servicebuilder;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.freemarker.FreeMarkerUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ArrayUtil_IW;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -71,7 +72,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -3462,7 +3462,8 @@ public class ServiceBuilder {
 		else if (addMissingTables) {
 			StringBuilder sb = new StringBuilder();
 
-			BufferedReader br = new BufferedReader(new StringReader(content));
+			BufferedReader br =
+				new BufferedReader(new UnsyncStringReader(content));
 
 			String line = null;
 			boolean appendNewTable = true;
@@ -3649,7 +3650,8 @@ public class ServiceBuilder {
 		else if (addMissingTables) {
 			StringBuilder sb = new StringBuilder();
 
-			BufferedReader br = new BufferedReader(new StringReader(content));
+			BufferedReader br =
+				new BufferedReader(new UnsyncStringReader(content));
 
 			String line = null;
 			boolean appendNewTable = true;
@@ -3685,7 +3687,7 @@ public class ServiceBuilder {
 	private String _fixHbmXml(String content) throws IOException {
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new StringReader(content));
+		BufferedReader br = new BufferedReader(new UnsyncStringReader(content));
 
 		String line = null;
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.words.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -39,7 +40,6 @@ import com.swabunga.spell.event.SpellChecker;
 import com.swabunga.spell.event.StringWordTokenizer;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,7 +107,7 @@ public class WordsUtil {
 			};
 
 			for (int i = 0; i < dics.length; i++) {
-				_spellDictionary.addDictionary(new StringReader(
+				_spellDictionary.addDictionary(new UnsyncStringReader(
 					ContentUtil.get(
 						"com/liferay/portlet/words/dependencies/" + dics[i])));
 			}

@@ -25,12 +25,12 @@ package com.liferay.portal.dao.db;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.Index;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -65,7 +65,7 @@ public class OracleDB extends BaseDB {
 
 		oracle = _preBuildSQL(oracle);
 
-		BufferedReader br = new BufferedReader(new StringReader(oracle));
+		BufferedReader br = new BufferedReader(new UnsyncStringReader(oracle));
 
 		StringBuilder imageSB = new StringBuilder();
 		StringBuilder journalArticleSB = new StringBuilder();
@@ -206,7 +206,7 @@ public class OracleDB extends BaseDB {
 	}
 
 	protected String reword(String data) throws IOException {
-		BufferedReader br = new BufferedReader(new StringReader(data));
+		BufferedReader br = new BufferedReader(new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 

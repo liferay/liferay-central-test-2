@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-
-import java.io.StringReader;
 
 import java.util.Map;
 
@@ -67,7 +66,7 @@ public class URIResolver implements javax.xml.transform.URIResolver {
 				content = HttpUtil.URLtoString(href);
 			}
 
-			return new StreamSource(new StringReader(content));
+			return new StreamSource(new UnsyncStringReader(content));
 		}
 		catch (Exception e) {
 			_log.error(href + " does not reference a valid template");
