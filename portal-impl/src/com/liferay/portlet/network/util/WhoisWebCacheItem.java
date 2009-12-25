@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.network.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.network.model.Whois;
 
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
@@ -55,7 +55,7 @@ public class WhoisWebCacheItem implements WebCacheItem {
 		try {
 			Socket socket = new Socket(WHOIS_SERVER, WHOIS_SERVER_PORT);
 
-			BufferedReader br = new BufferedReader(
+			UnsyncBufferedReader br = new UnsyncBufferedReader(
 				new InputStreamReader(socket.getInputStream()));
 
 			PrintStream out = new PrintStream(socket.getOutputStream());

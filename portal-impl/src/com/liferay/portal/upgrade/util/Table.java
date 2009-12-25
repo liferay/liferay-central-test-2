@@ -29,6 +29,7 @@ import com.liferay.portal.dao.orm.hibernate.IntegerType;
 import com.liferay.portal.dao.orm.hibernate.LongType;
 import com.liferay.portal.dao.orm.hibernate.ShortType;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.StagnantRowException;
@@ -42,7 +43,6 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -274,7 +274,7 @@ public class Table {
 					value = StringPool.BLANK;
 				}
 				else {
-					BufferedReader br = new BufferedReader(
+					UnsyncBufferedReader br = new UnsyncBufferedReader(
 						clob.getCharacterStream());
 
 					StringBuilder sb = new StringBuilder();
@@ -442,7 +442,8 @@ public class Table {
 
 		String insertSQL = getInsertSQL();
 
-		BufferedReader br = new BufferedReader(new FileReader(tempFileName));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new FileReader(tempFileName));
 
 		String line = null;
 

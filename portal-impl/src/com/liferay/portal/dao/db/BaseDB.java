@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.db.Index;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -40,7 +41,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.util.SimpleCounter;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -278,8 +278,8 @@ public abstract class BaseDB implements DB {
 
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br =
-			new BufferedReader(new UnsyncStringReader(template));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(template));
 
 		String line = null;
 
@@ -429,7 +429,7 @@ public abstract class BaseDB implements DB {
 
 		DB db = DBFactoryUtil.getDB();
 
-		BufferedReader bufferedReader = new BufferedReader(
+		UnsyncBufferedReader bufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(indexesSQL));
 
 		String sql = null;
@@ -515,7 +515,7 @@ public abstract class BaseDB implements DB {
 		if (fileName.equals("portal") || fileName.equals("portal-minimal") ||
 			fileName.equals("update-5.0.1-5.1.0")) {
 
-			BufferedReader br = new BufferedReader(
+			UnsyncBufferedReader br = new UnsyncBufferedReader(
 				new UnsyncStringReader(template));
 
 			StringBuilder sb = new StringBuilder();
@@ -678,7 +678,7 @@ public abstract class BaseDB implements DB {
 
 		// Trim insert statements because it breaks MySQL Query Browser
 
-		BufferedReader br = new BufferedReader(
+		UnsyncBufferedReader br = new UnsyncBufferedReader(
 			new UnsyncStringReader(template));
 
 		StringBuilder sb = new StringBuilder();
@@ -719,7 +719,7 @@ public abstract class BaseDB implements DB {
 	protected String readSQL(String fileName, String comments, String eol)
 		throws IOException {
 
-		BufferedReader br = new BufferedReader(
+		UnsyncBufferedReader br = new UnsyncBufferedReader(
 			new FileReader(new File(fileName)));
 
 		StringBuilder sb = new StringBuilder();
@@ -751,7 +751,7 @@ public abstract class BaseDB implements DB {
 	protected String removeBooleanIndexes(String data) throws IOException {
 		String portalData = FileUtil.read("../sql/portal-tables.sql");
 
-		BufferedReader br = new BufferedReader(
+		UnsyncBufferedReader br = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
@@ -801,7 +801,8 @@ public abstract class BaseDB implements DB {
 	}
 
 	protected String removeInserts(String data) throws IOException {
-		BufferedReader br = new BufferedReader(new UnsyncStringReader(data));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 
@@ -822,7 +823,8 @@ public abstract class BaseDB implements DB {
 	}
 
 	protected String removeLongInserts(String data) throws IOException {
-		BufferedReader br = new BufferedReader(new UnsyncStringReader(data));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 

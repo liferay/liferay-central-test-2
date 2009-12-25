@@ -22,6 +22,7 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,7 +35,6 @@ import com.liferay.portal.sharepoint.methods.MethodFactory;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -112,7 +112,8 @@ public class SharepointServlet extends HttpServlet {
 		try {
 			InputStream is = request.getInputStream();
 
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			UnsyncBufferedReader br =
+				new UnsyncBufferedReader(new InputStreamReader(is));
 
 			String url = br.readLine();
 

@@ -25,6 +25,7 @@ package com.liferay.portal.tools.samplesqlbuilder;
 import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil_IW;
@@ -50,7 +51,6 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.SimpleCounter;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -167,7 +167,7 @@ public class SampleSQLBuilder {
 
 			boolean previousBlankLine = false;
 
-			BufferedReader br = new BufferedReader(
+			UnsyncBufferedReader br = new UnsyncBufferedReader(
 				new FileReader(_outputDir +  "/sample.sql"));
 
 			String s = null;

@@ -25,6 +25,7 @@ package com.liferay.portal.tools.servicebuilder;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.freemarker.FreeMarkerUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ArrayUtil_IW;
@@ -67,7 +68,6 @@ import freemarker.template.TemplateModelException;
 
 import java.beans.Introspector;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -3249,7 +3249,8 @@ public class ServiceBuilder {
 
 		Map<String, String> indexSQLs = new TreeMap<String, String>();
 
-		BufferedReader br = new BufferedReader(new FileReader(sqlFile));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new FileReader(sqlFile));
 
 		while (true) {
 			String indexSQL = br.readLine();
@@ -3280,7 +3281,7 @@ public class ServiceBuilder {
 
 		Map<String, String> indexProps = new TreeMap<String, String>();
 
-		br = new BufferedReader(new FileReader(propsFile));
+		br = new UnsyncBufferedReader(new FileReader(propsFile));
 
 		while (true) {
 			String indexMapping = br.readLine();
@@ -3462,8 +3463,8 @@ public class ServiceBuilder {
 		else if (addMissingTables) {
 			StringBuilder sb = new StringBuilder();
 
-			BufferedReader br =
-				new BufferedReader(new UnsyncStringReader(content));
+			UnsyncBufferedReader br =
+				new UnsyncBufferedReader(new UnsyncStringReader(content));
 
 			String line = null;
 			boolean appendNewTable = true;
@@ -3509,7 +3510,8 @@ public class ServiceBuilder {
 
 		Set<String> sequenceSQLs = new TreeSet<String>();
 
-		BufferedReader br = new BufferedReader(new FileReader(sqlFile));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new FileReader(sqlFile));
 
 		while (true) {
 			String sequenceSQL = br.readLine();
@@ -3650,8 +3652,8 @@ public class ServiceBuilder {
 		else if (addMissingTables) {
 			StringBuilder sb = new StringBuilder();
 
-			BufferedReader br =
-				new BufferedReader(new UnsyncStringReader(content));
+			UnsyncBufferedReader br =
+				new UnsyncBufferedReader(new UnsyncStringReader(content));
 
 			String line = null;
 			boolean appendNewTable = true;
@@ -3687,7 +3689,8 @@ public class ServiceBuilder {
 	private String _fixHbmXml(String content) throws IOException {
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new UnsyncStringReader(content));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(content));
 
 		String line = null;
 

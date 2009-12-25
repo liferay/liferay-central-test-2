@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ClassUtil;
@@ -32,7 +33,6 @@ import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.IOException;
@@ -128,7 +128,8 @@ public class SourceFormatter {
 
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new UnsyncStringReader(imports));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(imports));
 
 		String line = null;
 
@@ -349,7 +350,8 @@ public class SourceFormatter {
 
 		List<String> importsList = new ArrayList<String>();
 
-		BufferedReader br = new BufferedReader(new UnsyncStringReader(imports));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(imports));
 
 		String line = null;
 
@@ -549,7 +551,8 @@ public class SourceFormatter {
 
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new UnsyncStringReader(content));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(content));
 
 		int lineCount = 0;
 
@@ -749,7 +752,8 @@ public class SourceFormatter {
 
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new UnsyncStringReader(content));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(content));
 
 		String line = null;
 

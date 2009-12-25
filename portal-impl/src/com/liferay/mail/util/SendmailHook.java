@@ -23,6 +23,7 @@
 package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -31,7 +32,6 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsUtil;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
@@ -188,7 +188,7 @@ public class SendmailHook implements Hook {
 				PropsUtil.get(PropsKeys.MAIL_HOOK_SENDMAIL_VIRTUSERTABLE);
 
 			FileReader fr = new FileReader(virtusertable);
-			BufferedReader br = new BufferedReader(fr);
+			UnsyncBufferedReader br = new UnsyncBufferedReader(fr);
 
 			StringBuilder sb = new StringBuilder();
 

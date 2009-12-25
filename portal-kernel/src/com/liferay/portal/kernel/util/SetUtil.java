@@ -22,7 +22,8 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.io.BufferedReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -95,7 +96,8 @@ public class SetUtil {
 	public static Set<String> fromFile(File file) throws IOException {
 		Set<String> set = new HashSet<String>();
 
-		BufferedReader br = new BufferedReader(new FileReader(file));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new FileReader(file));
 
 		String s = StringPool.BLANK;
 

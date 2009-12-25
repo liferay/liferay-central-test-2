@@ -26,6 +26,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -61,7 +62,6 @@ import com.liferay.portlet.wiki.model.WikiPageConstants;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.translators.MediaWikiToCreoleTranslator;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -649,7 +649,8 @@ public class MediaWikiImporter implements WikiImporter {
 
 		Map<String, String> usersMap = new HashMap<String, String>();
 
-		BufferedReader reader = new BufferedReader(new FileReader(usersFile));
+		UnsyncBufferedReader reader =
+			new UnsyncBufferedReader(new FileReader(usersFile));
 
 		String line = reader.readLine();
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.InitUtil;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
@@ -65,7 +65,8 @@ public class TCKtoJUnitConverter {
 	}
 
 	private void _convert(File inputFile, File outputDir) throws Exception {
-		BufferedReader br = new BufferedReader(new FileReader(inputFile));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new FileReader(inputFile));
 
 		String s = StringPool.BLANK;
 

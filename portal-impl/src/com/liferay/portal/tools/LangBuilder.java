@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -32,7 +33,6 @@ import com.liferay.portal.util.InitUtil;
 import com.liferay.portlet.translator.model.Translation;
 import com.liferay.portlet.translator.util.TranslationWebCacheItem;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -155,7 +155,8 @@ public class LangBuilder {
 			translationId = "en_zt";
 		}
 
-		BufferedReader br = new BufferedReader(new UnsyncStringReader(content));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(content));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(nativePropsFile));
 
 		String line = null;
@@ -285,7 +286,8 @@ public class LangBuilder {
 	private String _orderProps(File propsFile) throws IOException {
 		String content = FileUtil.read(propsFile);
 
-		BufferedReader br = new BufferedReader(new UnsyncStringReader(content));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(content));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(propsFile));
 
 		Set<String> messages = new TreeSet<String>();

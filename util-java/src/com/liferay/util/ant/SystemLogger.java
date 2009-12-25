@@ -22,9 +22,9 @@
 
 package com.liferay.util.ant;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import org.apache.tools.ant.BuildEvent;
@@ -46,7 +46,7 @@ public class SystemLogger extends DefaultLogger {
 			StringBuilder sb = new StringBuilder();
 
 			try {
-				BufferedReader reader = new BufferedReader(
+				UnsyncBufferedReader reader = new UnsyncBufferedReader(
 					new UnsyncStringReader(event.getMessage()));
 
 				String line = reader.readLine();

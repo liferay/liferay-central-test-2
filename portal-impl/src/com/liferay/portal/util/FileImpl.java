@@ -23,6 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -37,7 +38,6 @@ import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -322,7 +322,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 				StringBuilder sb = new StringBuilder();
 
-				BufferedReader reader = new BufferedReader(
+				UnsyncBufferedReader reader = new UnsyncBufferedReader(
 					extractor.extractText(is, contentType, encoding));
 
 				int i;
@@ -600,7 +600,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		List<String> list = new ArrayList<String>();
 
 		try {
-			BufferedReader br = new BufferedReader(reader);
+			UnsyncBufferedReader br = new UnsyncBufferedReader(reader);
 
 			String line = null;
 

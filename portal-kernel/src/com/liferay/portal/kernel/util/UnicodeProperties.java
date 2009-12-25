@@ -22,11 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import java.util.HashMap;
@@ -83,10 +83,10 @@ public class UnicodeProperties extends HashMap<String, String> {
 			return;
 		}
 
-		BufferedReader br = null;
+		UnsyncBufferedReader br = null;
 
 		try {
-			br = new BufferedReader(new UnsyncStringReader(props));
+			br = new UnsyncBufferedReader(new UnsyncStringReader(props));
 
 			String line = br.readLine();
 

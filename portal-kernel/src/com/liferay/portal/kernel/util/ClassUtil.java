@@ -22,11 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -67,7 +67,8 @@ public class ClassUtil {
 
 		Set<String> classes = new HashSet<String>();
 
-		StreamTokenizer st = new StreamTokenizer(new BufferedReader(reader));
+		StreamTokenizer st =
+			new StreamTokenizer(new UnsyncBufferedReader(reader));
 
 		_setupParseTableForAnnotationProcessing(st);
 

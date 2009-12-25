@@ -23,8 +23,8 @@
 package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -137,7 +137,8 @@ public class ListUtil {
 	public static List<String> fromFile(File file) throws IOException {
 		List<String> list = new ArrayList<String>();
 
-		BufferedReader br = new BufferedReader(new FileReader(file));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new FileReader(file));
 
 		String s = StringPool.BLANK;
 

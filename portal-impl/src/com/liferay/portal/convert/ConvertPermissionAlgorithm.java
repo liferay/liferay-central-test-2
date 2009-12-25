@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -66,7 +67,6 @@ import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -131,7 +131,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		String tempFile = table.generateTempFile();
 
-		BufferedReader resourceNameReader = new BufferedReader(
+		UnsyncBufferedReader resourceNameReader = new UnsyncBufferedReader(
 			new FileReader(tempFile));
 
 		BufferedWriter resourcePermissionWriter = new BufferedWriter(
@@ -236,7 +236,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 	}
 
 	protected String convertGuestUsers(String legacyFile) throws Exception {
-		BufferedReader legacyFileReader = new BufferedReader(
+		UnsyncBufferedReader legacyFileReader = new UnsyncBufferedReader(
 			new FileReader(legacyFile));
 
 		BufferedWriter legacyFileUpdatedWriter = new BufferedWriter(
@@ -337,7 +337,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		ResourcePermissionView resourcePermissionView =
 			new ResourcePermissionView(name);
 
-		BufferedReader resourcePermReader = null;
+		UnsyncBufferedReader resourcePermReader = null;
 
 		String resourcePermissionFile =
 			resourcePermissionView.generateTempFile();
@@ -350,7 +350,8 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		try {
 			resourcePermReader =
-				new BufferedReader(new FileReader(resourcePermissionFile));
+				new UnsyncBufferedReader(
+					new FileReader(resourcePermissionFile));
 
 			String line = null;
 
@@ -419,7 +420,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			String legacyFile, int type, String newName, Object[][] newColumns)
 		throws Exception {
 
-		BufferedReader legacyFileReader = new BufferedReader(
+		UnsyncBufferedReader legacyFileReader = new UnsyncBufferedReader(
 			new FileReader(legacyFile));
 
 		BufferedWriter legacyFileExtRoleWriter = new BufferedWriter(

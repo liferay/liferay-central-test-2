@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -33,7 +34,6 @@ import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
 import com.liferay.portlet.shopping.util.ShoppingPreferences;
 import com.liferay.portlet.shopping.util.ShoppingUtil;
 
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
@@ -99,7 +99,7 @@ public class PayPalNotificationAction extends Action {
 
 			pw.close();
 
-			BufferedReader br = new BufferedReader(
+			UnsyncBufferedReader br = new UnsyncBufferedReader(
 				new InputStreamReader(urlc.getInputStream()));
 
 			String payPalStatus = br.readLine();

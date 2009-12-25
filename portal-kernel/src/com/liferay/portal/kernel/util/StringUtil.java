@@ -22,11 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -588,7 +588,8 @@ public class StringUtil {
 	public static String read(InputStream is) throws IOException {
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new InputStreamReader(is));
 
 		String line = null;
 
@@ -953,8 +954,8 @@ public class StringUtil {
 			delimiter.equals(StringPool.RETURN)) {
 
 			try {
-				BufferedReader br =
-					new BufferedReader(new UnsyncStringReader(s));
+				UnsyncBufferedReader br =
+					new UnsyncBufferedReader(new UnsyncStringReader(s));
 
 				String line = null;
 
@@ -1415,7 +1416,8 @@ public class StringUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new UnsyncStringReader(text));
+		UnsyncBufferedReader br =
+			new UnsyncBufferedReader(new UnsyncStringReader(text));
 
 		String s = StringPool.BLANK;
 

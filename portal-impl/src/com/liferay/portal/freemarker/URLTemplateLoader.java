@@ -22,7 +22,8 @@
 
 package com.liferay.portal.freemarker;
 
-import java.io.BufferedReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -77,7 +78,7 @@ public abstract class URLTemplateLoader extends FreeMarkerTemplateLoader {
 			URLTemplateSource urlTemplateSource =
 				(URLTemplateSource)templateSource;
 
-			return new BufferedReader(
+			return new UnsyncBufferedReader(
 				new InputStreamReader(
 					urlTemplateSource.getInputStream(), encoding));
 		}

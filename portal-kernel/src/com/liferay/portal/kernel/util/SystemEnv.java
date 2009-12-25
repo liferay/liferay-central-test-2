@@ -22,7 +22,8 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.io.BufferedReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -57,7 +58,7 @@ public class SystemEnv {
 				process = runtime.exec("env");
 			}
 
-			BufferedReader br = new BufferedReader(
+			UnsyncBufferedReader br = new UnsyncBufferedReader(
 				new InputStreamReader(process.getInputStream()));
 
 			String line;

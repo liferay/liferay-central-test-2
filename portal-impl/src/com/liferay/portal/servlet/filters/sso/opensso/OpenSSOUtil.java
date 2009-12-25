@@ -22,13 +22,13 @@
 
 package com.liferay.portal.servlet.filters.sso.opensso;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.CookieUtil;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -111,7 +111,7 @@ public class OpenSSOUtil {
 			int responseCode = urlc.getResponseCode();
 
 			if (responseCode == HttpURLConnection.HTTP_OK) {
-				BufferedReader br = new BufferedReader(
+				UnsyncBufferedReader br = new UnsyncBufferedReader(
 					new InputStreamReader((InputStream)urlc.getContent()));
 
 				String line = null;
@@ -172,7 +172,7 @@ public class OpenSSOUtil {
 
 			HttpURLConnection urlc = (HttpURLConnection)urlObj.openConnection();
 
-			BufferedReader br = new BufferedReader(
+			UnsyncBufferedReader br = new UnsyncBufferedReader(
 				new InputStreamReader((InputStream)urlc.getContent()));
 
 			int responseCode = urlc.getResponseCode();
@@ -200,7 +200,7 @@ public class OpenSSOUtil {
 
 			urlc = (HttpURLConnection)urlObj.openConnection();
 
-			br = new BufferedReader(
+			br = new UnsyncBufferedReader(
 				new InputStreamReader((InputStream)urlc.getContent()));
 
 			if (urlc.getResponseCode() != HttpURLConnection.HTTP_OK) {

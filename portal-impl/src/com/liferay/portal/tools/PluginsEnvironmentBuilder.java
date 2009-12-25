@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.InitUtil;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -365,10 +365,10 @@ public class PluginsEnvironmentBuilder {
 	private String[] _getExecOutput(InputStream is) throws IOException {
 		List<String> list = new ArrayList<String>();
 
-		BufferedReader br = null;
+		UnsyncBufferedReader br = null;
 
 		try {
-			br = new BufferedReader(new InputStreamReader(is));
+			br = new UnsyncBufferedReader(new InputStreamReader(is));
 
 			String line = br.readLine();
 
