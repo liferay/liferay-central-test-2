@@ -29,6 +29,7 @@ import com.germinus.easyconf.Conventions;
 import com.germinus.easyconf.EasyConf;
 
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -39,7 +40,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.Writer;
 
@@ -97,7 +97,7 @@ public class ConfigurationImpl
 					String fileName = StringUtil.replace(
 						url.getFile(), "%20", StringPool.SPACE);
 
-					Writer writer = new BufferedWriter(
+					Writer writer = new UnsyncBufferedWriter(
 						new FileWriter(fileName, true));
 
 					writer.write("\n\nbase.path=" + basePath);

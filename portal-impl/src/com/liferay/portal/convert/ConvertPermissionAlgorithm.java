@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -67,7 +68,6 @@ import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 
@@ -134,8 +134,9 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		UnsyncBufferedReader resourceNameReader = new UnsyncBufferedReader(
 			new FileReader(tempFile));
 
-		BufferedWriter resourcePermissionWriter = new BufferedWriter(
-			new FileWriter(tempFile + _EXT_RESOURCE_PERMISSION));
+		UnsyncBufferedWriter resourcePermissionWriter =
+			new UnsyncBufferedWriter(
+				new FileWriter(tempFile + _EXT_RESOURCE_PERMISSION));
 
 		PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM = 6;
 
@@ -239,10 +240,11 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		UnsyncBufferedReader legacyFileReader = new UnsyncBufferedReader(
 			new FileReader(legacyFile));
 
-		BufferedWriter legacyFileUpdatedWriter = new BufferedWriter(
+		UnsyncBufferedWriter legacyFileUpdatedWriter = new UnsyncBufferedWriter(
 			new FileWriter(legacyFile + _UPDATED));
-		BufferedWriter legacyFileExtRolesPermissionsWriter = new BufferedWriter(
-			new FileWriter(legacyFile + _EXT_ROLES_PERMIMISSIONS));
+		UnsyncBufferedWriter legacyFileExtRolesPermissionsWriter =
+			new UnsyncBufferedWriter(
+				new FileWriter(legacyFile + _EXT_ROLES_PERMIMISSIONS));
 
 		try {
 			String line = null;
@@ -331,7 +333,8 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		FileUtil.delete(legacyFile);
 	}
 
-	protected void convertResourcePermission(BufferedWriter writer, String name)
+	protected void convertResourcePermission(
+			UnsyncBufferedWriter writer, String name)
 		throws Exception {
 
 		ResourcePermissionView resourcePermissionView =
@@ -423,12 +426,14 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		UnsyncBufferedReader legacyFileReader = new UnsyncBufferedReader(
 			new FileReader(legacyFile));
 
-		BufferedWriter legacyFileExtRoleWriter = new BufferedWriter(
+		UnsyncBufferedWriter legacyFileExtRoleWriter = new UnsyncBufferedWriter(
 			new FileWriter(legacyFile + _EXT_ROLE));
-		BufferedWriter legacyFileExtRolesPermissionsWriter = new BufferedWriter(
-			new FileWriter(legacyFile + _EXT_ROLES_PERMIMISSIONS));
-		BufferedWriter legacyFileExtOtherRolesWriter = new BufferedWriter(
-			new FileWriter(legacyFile + _EXT_OTHER_ROLES));
+		UnsyncBufferedWriter legacyFileExtRolesPermissionsWriter =
+			new UnsyncBufferedWriter(
+				new FileWriter(legacyFile + _EXT_ROLES_PERMIMISSIONS));
+		UnsyncBufferedWriter legacyFileExtOtherRolesWriter =
+			new UnsyncBufferedWriter(
+				new FileWriter(legacyFile + _EXT_OTHER_ROLES));
 
 		try {
 

@@ -22,9 +22,9 @@
 
 package com.liferay.portal.kernel.upgrade.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.util.FileUtil;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 import java.util.Iterator;
@@ -42,7 +42,7 @@ public class ValueMapperUtil {
 
 		FileUtil.mkdirs(tmpDir);
 
-		BufferedWriter bw = new BufferedWriter(
+		UnsyncBufferedWriter bw = new UnsyncBufferedWriter(
 			new FileWriter(tmpDir + "/" + fileName + ".txt"));
 
 		try {

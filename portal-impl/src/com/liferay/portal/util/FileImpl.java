@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -38,7 +39,6 @@ import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -707,8 +707,9 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			}
 		}
 
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-			new FileOutputStream(file, append), StringPool.UTF8));
+		UnsyncBufferedWriter bw = new UnsyncBufferedWriter(
+			new OutputStreamWriter(
+				new FileOutputStream(file, append), StringPool.UTF8));
 
 		bw.write(s);
 

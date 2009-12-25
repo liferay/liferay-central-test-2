@@ -23,6 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -33,7 +34,6 @@ import com.liferay.portal.util.InitUtil;
 import com.liferay.portlet.translator.model.Translation;
 import com.liferay.portlet.translator.util.TranslationWebCacheItem;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -157,7 +157,8 @@ public class LangBuilder {
 
 		UnsyncBufferedReader br =
 			new UnsyncBufferedReader(new UnsyncStringReader(content));
-		BufferedWriter bw = new BufferedWriter(new FileWriter(nativePropsFile));
+		UnsyncBufferedWriter bw =
+			new UnsyncBufferedWriter(new FileWriter(nativePropsFile));
 
 		String line = null;
 
@@ -288,7 +289,8 @@ public class LangBuilder {
 
 		UnsyncBufferedReader br =
 			new UnsyncBufferedReader(new UnsyncStringReader(content));
-		BufferedWriter bw = new BufferedWriter(new FileWriter(propsFile));
+		UnsyncBufferedWriter bw =
+			new UnsyncBufferedWriter(new FileWriter(propsFile));
 
 		Set<String> messages = new TreeSet<String>();
 
@@ -331,7 +333,7 @@ public class LangBuilder {
 		return FileUtil.read(propsFile);
 	}
 
-	private void _sortAndWrite(BufferedWriter bw, Set<String> messages)
+	private void _sortAndWrite(UnsyncBufferedWriter bw, Set<String> messages)
 		throws IOException {
 
 		String[] messagesArray = messages.toArray(new String[messages.size()]);
