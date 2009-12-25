@@ -38,6 +38,8 @@ public interface DestinationNames {
 	public static final String DOCUMENT_LIBRARY_HOOK =
 		"liferay/document_library_hook";
 
+	public static final String FLAG = "liferay/flag";
+
 	/**
 	 * This is a special destination. Binding a message listener to this
 	 * destination will allow it to listen to messages sent to all destinations.

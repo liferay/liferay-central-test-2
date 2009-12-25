@@ -171,7 +171,7 @@ public class Base64 {
 			os.flush();
 		}
 		catch (IOException e) {
-			_log.error(e.getMessage());
+			_log.error(e.getMessage(), e);
 		}
 
 		return encode(ubaos.toByteArray());
@@ -204,7 +204,7 @@ public class Base64 {
 			return is.readObject();
 		}
 		catch (Exception e) {
-			_log.error(e.getMessage());
+			_log.error(e.getMessage(), e);
 		}
 
 		return null;
