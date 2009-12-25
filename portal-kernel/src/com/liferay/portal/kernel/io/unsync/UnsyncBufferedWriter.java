@@ -48,6 +48,7 @@ public class UnsyncBufferedWriter extends Writer {
 		buffer = new char[bufferSize];
 		this.bufferSize = bufferSize;
 		count = 0;
+		lineSeparator = System.getProperty("line.separator");
 	}
 
 	public void close() throws IOException {
@@ -62,6 +63,10 @@ public class UnsyncBufferedWriter extends Writer {
 		writer.close();
 		writer = null;
 		buffer = null;
+	}
+
+	public void newLine() throws IOException {
+		write(lineSeparator);
 	}
 
 	public void flush() throws IOException {
@@ -142,6 +147,7 @@ public class UnsyncBufferedWriter extends Writer {
 	protected char[] buffer;
 	protected int bufferSize;
 	protected int count;
+	protected String lineSeparator;
 
 	private static int _DEFAULT_BUFFER_SIZE = 8192;
 

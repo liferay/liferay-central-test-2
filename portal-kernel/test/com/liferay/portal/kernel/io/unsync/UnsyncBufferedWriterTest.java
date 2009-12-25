@@ -84,6 +84,20 @@ public class UnsyncBufferedWriterTest extends TestCase {
 		assertEquals(0, ubw.count);
 	}
 
+	public void testNewLine() throws IOException{
+		String lineSeparator = System.getProperty("line.separator");
+		StringWriter sw = new StringWriter();
+		UnsyncBufferedWriter ubw = new UnsyncBufferedWriter(sw, 10);
+		ubw.newLine();
+		assertEquals(lineSeparator.length(), ubw.count);
+		ubw.write('a');
+		assertEquals(lineSeparator.length() + 1, ubw.count);
+		ubw.newLine();
+		assertEquals(lineSeparator.length() * 2 + 1, ubw.count);
+		ubw.flush();
+		assertEquals(lineSeparator + "a" + lineSeparator, sw.toString());
+	}
+	
 	public void testStringWrite() throws IOException {
 		StringWriter sw = new StringWriter();
 		UnsyncBufferedWriter ubw = new UnsyncBufferedWriter(sw, 3);
