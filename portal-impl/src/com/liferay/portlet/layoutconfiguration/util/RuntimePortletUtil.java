@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
@@ -43,8 +44,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
-
-import java.io.StringWriter;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -230,7 +229,7 @@ public class RuntimePortletUtil {
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
 
-		StringWriter stringWriter = new StringWriter();
+		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 		try {
 			VelocityEngineUtil.mergeTemplate(

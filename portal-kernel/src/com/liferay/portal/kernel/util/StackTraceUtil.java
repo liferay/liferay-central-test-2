@@ -22,9 +22,10 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 
 /**
  * <a href="StackTraceUtil.java.html"><b><i>View Source</i></b></a>
@@ -39,7 +40,7 @@ public class StackTraceUtil {
 		PrintWriter printWriter = null;
 
 		try {
-			StringWriter stringWriter = new StringWriter();
+			UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 			printWriter = new PrintWriter(new BufferedWriter(stringWriter));
 

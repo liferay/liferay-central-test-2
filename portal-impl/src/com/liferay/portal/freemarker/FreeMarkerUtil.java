@@ -22,6 +22,7 @@
 
 package com.liferay.portal.freemarker;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.util.StringPool;
 
 import freemarker.cache.ClassTemplateLoader;
@@ -30,7 +31,6 @@ import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 
-import java.io.StringWriter;
 import java.io.Writer;
 
 /**
@@ -44,7 +44,7 @@ public class FreeMarkerUtil {
 	public static String process(String name, Object context)
 		throws Exception {
 
-		StringWriter stringWriter = new StringWriter();
+		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 		process(name, context, stringWriter);
 

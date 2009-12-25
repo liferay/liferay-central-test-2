@@ -23,12 +23,12 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 
 import java.util.Locale;
@@ -51,7 +51,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		_servletOutputStream = new StringServletOutputStream(
 			_unsyncByteArrayOutputStream);
 
-		_stringWriter = new StringWriter();
+		_stringWriter = new UnsyncStringWriter(true);
 		_printWriter = new PrintWriter(_stringWriter);
 	}
 
@@ -117,7 +117,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 		_unsyncByteArrayOutputStream.reset();
 
-		_stringWriter = new StringWriter();
+		_stringWriter = new UnsyncStringWriter(true);
 		_printWriter = new PrintWriter(_stringWriter);
 	}
 
@@ -126,9 +126,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 			_unsyncByteArrayOutputStream.reset();
 		}
 		else if (_callGetWriter) {
-			StringBuffer sb = _stringWriter.getBuffer();
-
-			sb.delete(0, sb.length());
+			_stringWriter.reset();
 		}
 	}
 
@@ -164,7 +162,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	private ServletOutputStream _servletOutputStream;
 	private int _status = SC_OK;
 	private String _string;
-	private StringWriter _stringWriter;
+	private UnsyncStringWriter _stringWriter;
 	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
 
 }

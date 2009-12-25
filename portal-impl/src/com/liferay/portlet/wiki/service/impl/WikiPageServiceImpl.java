@@ -25,6 +25,7 @@ package com.liferay.portlet.wiki.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.Diff;
 import com.liferay.portal.kernel.util.DiffResult;
@@ -61,8 +62,6 @@ import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
-
-import java.io.StringWriter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -435,7 +434,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		velocityContext.put("targetResults", diffResults[1]);
 
 		try {
-			StringWriter stringWriter = new StringWriter();
+			UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 			VelocityEngineUtil.mergeTemplate(
 				velocityTemplateId, velocityTemplateContent, velocityContext,

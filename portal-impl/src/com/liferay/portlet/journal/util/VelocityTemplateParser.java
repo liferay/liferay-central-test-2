@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -45,7 +46,6 @@ import com.liferay.util.PwdGenerator;
 import com.liferay.util.xml.CDATAUtil;
 
 import java.io.IOException;
-import java.io.StringWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,7 +69,7 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 			String xml, String script)
 		throws Exception {
 
-		StringWriter stringWriter = new StringWriter();
+		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 		boolean load = false;
 

@@ -22,12 +22,12 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.util.DiffHtml;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Reader;
-import java.io.StringWriter;
 
 import java.util.Locale;
 
@@ -70,7 +70,7 @@ public class DiffHtmlImpl implements DiffHtml {
 		InputSource oldSource = new InputSource(source);
 		InputSource newSource = new InputSource(target);
 
-		StringWriter stringWriter = new StringWriter();
+		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 		SAXTransformerFactory saxTransformerFactory =
 			(SAXTransformerFactory)TransformerFactory.newInstance();

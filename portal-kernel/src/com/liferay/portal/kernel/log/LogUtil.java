@@ -22,10 +22,10 @@
 
 package com.liferay.portal.kernel.log;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +47,12 @@ public class LogUtil {
 
 	public static void debug(Log log, Properties props) {
 		if (log.isDebugEnabled()) {
-			StringWriter sw = new StringWriter();
+			UnsyncStringWriter sw =
+				new UnsyncStringWriter(true, props.size() + 1);
 
 			props.list(new PrintWriter(sw));
 
-			log.debug(sw.getBuffer().toString());
+			log.debug(sw.toString());
 		}
 	}
 

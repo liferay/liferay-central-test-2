@@ -23,6 +23,7 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -34,8 +35,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
-
-import java.io.StringWriter;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -402,7 +401,7 @@ public class LocalizationUtil {
 				availableLocales = StringUtil.remove(
 					availableLocales, requestedLanguageId, StringPool.COMMA);
 
-				StringWriter sw = new StringWriter(xml.length());
+				UnsyncStringWriter sw = new UnsyncStringWriter(true);
 
 				XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 
@@ -564,7 +563,7 @@ public class LocalizationUtil {
 				}
 			}
 
-			StringWriter sw = new StringWriter(xml.length());
+			UnsyncStringWriter sw = new UnsyncStringWriter(true);
 
 			XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 

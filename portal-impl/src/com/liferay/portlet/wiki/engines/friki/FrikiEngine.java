@@ -25,13 +25,13 @@ package com.liferay.portlet.wiki.engines.friki;
 import com.efsol.friki.PageRepository;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
 import com.liferay.portlet.wiki.model.WikiPage;
 
 import java.io.IOException;
-import java.io.StringWriter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -127,7 +127,7 @@ public class FrikiEngine implements WikiEngine {
 			return StringPool.BLANK;
 		}
 
-		StringWriter writer = new StringWriter();
+		UnsyncStringWriter writer = new UnsyncStringWriter(true);
 
 		filter.filter(new UnsyncStringReader(content), writer);
 

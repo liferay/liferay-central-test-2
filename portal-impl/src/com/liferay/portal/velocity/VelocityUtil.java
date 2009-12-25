@@ -22,9 +22,8 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.util.Validator;
-
-import java.io.StringWriter;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -66,7 +65,7 @@ public class VelocityUtil {
 			}
 		}
 
-		StringWriter stringWriter = new StringWriter();
+		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 		Velocity.evaluate(
 			velocityContext, stringWriter, VelocityUtil.class.getName(), input);

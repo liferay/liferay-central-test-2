@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.Renderer;
 import com.liferay.portal.kernel.bean.RendererException;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -42,8 +43,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-
-import java.io.StringWriter;
 
 import java.lang.reflect.Method;
 
@@ -158,7 +157,7 @@ public class RendererImpl implements Renderer {
 		velocityContext.put(_BEAN, bean);
 
 		try {
-			StringWriter stringWriter = new StringWriter();
+			UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 			VelocityEngineUtil.mergeTemplate(
 				className, velocityTemplateContent, velocityContext,
