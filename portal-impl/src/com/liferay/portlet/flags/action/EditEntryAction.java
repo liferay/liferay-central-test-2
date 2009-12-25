@@ -27,7 +27,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.flags.service.FlagsEntryServiceUtil;
+import com.liferay.portlet.flags.FlagRequest;
+import com.liferay.portlet.flags.FlagRequestUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -65,9 +66,11 @@ public class EditEntryAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			"com.liferay.portlet.flags.model.FlagsEntry", actionRequest);
 
-		FlagsEntryServiceUtil.addEntry(
+		FlagRequest flagRequest = new FlagRequest(
 			className, classPK, reporterEmailAddress, reportedUserId,
 			contentTitle, contentURL, reason, serviceContext);
+
+		FlagRequestUtil.submitRequest(flagRequest);
 
 		setForward(actionRequest, ActionConstants.COMMON_NULL);
 	}

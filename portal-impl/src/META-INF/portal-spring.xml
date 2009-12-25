@@ -226,7 +226,6 @@
 	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalService" class="com.liferay.portlet.expando.service.impl.ExpandoValueLocalServiceImpl" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoValueService" class="com.liferay.portlet.expando.service.impl.ExpandoValueServiceImpl" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence" class="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.flags.service.FlagsEntryService" class="com.liferay.portlet.flags.service.impl.FlagsEntryServiceImpl" />
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalService" class="com.liferay.portlet.imagegallery.service.impl.IGFolderLocalServiceImpl" />
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderService" class="com.liferay.portlet.imagegallery.service.impl.IGFolderServiceImpl" />
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistenceImpl" parent="basePersistence" />

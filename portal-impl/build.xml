@@ -611,12 +611,6 @@ ${exception.message}
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-flags">
-		<antcall target="build-service">
-			<param name="service.file" value="src/com/liferay/portlet/flags/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-service-portlet-imagegallery">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/imagegallery/service.xml" />
