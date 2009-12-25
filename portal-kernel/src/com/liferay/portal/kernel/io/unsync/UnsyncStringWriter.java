@@ -90,6 +90,15 @@ public class UnsyncStringWriter extends Writer {
 		return stringBundler;
 	}
 
+	public void reset() {
+		if (stringBundler != null) {
+			stringBundler.setIndex(0);
+		}
+		else {
+			stringBuilder.setLength(0);
+		}
+	}
+
 	public String toString() {
 		if (stringBundler != null) {
 			return stringBundler.toString();

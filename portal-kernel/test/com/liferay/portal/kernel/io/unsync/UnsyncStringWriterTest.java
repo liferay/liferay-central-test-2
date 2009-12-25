@@ -118,6 +118,21 @@ public class UnsyncStringWriterTest extends TestCase {
 		assertEquals(32, usw.stringBundler.capacity());
 	}
 
+	public void testReset() {
+		//StringBuilder
+		UnsyncStringWriter usw = new UnsyncStringWriter(false);
+		usw.write("test1");
+		assertEquals(5, usw.stringBuilder.length());
+		usw.reset();
+		assertEquals(0, usw.stringBuilder.length());
+		//StringBundler
+		usw = new UnsyncStringWriter(true);
+		usw.write("test1");
+		assertEquals(1, usw.stringBundler.index());
+		usw.reset();
+		assertEquals(0, usw.stringBundler.index());
+	}
+
 	public void testToString() {
 		//StringBuilder
 		UnsyncStringWriter usw = new UnsyncStringWriter(false);
