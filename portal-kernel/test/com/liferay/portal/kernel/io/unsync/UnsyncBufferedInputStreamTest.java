@@ -236,6 +236,32 @@ public class UnsyncBufferedInputStreamTest extends TestCase {
 		assertEquals(3, ubis.read());
 		assertEquals(4, ubis.read());
 		assertEquals(5, ubis.read());
+
+		// Grow buffer size to 8192, _MAX_MARK_WASTE_SIZE defaults to 4096
+
+		ubis = new UnsyncBufferedInputStream(
+			new ByteArrayInputStream(_BUFFER), 16);
+
+		ubis.mark(8192);
+		assertEquals(0, ubis.markIndex);
+
+		for (int i = 0; i < 4097; i++) {
+			assertEquals(i & 0xff, ubis.read());
+		}
+		assertEquals(8192, ubis.buffer.length);
+		assertEquals(0, ubis.markIndex);
+		assertEquals(4097, ubis.index);
+
+		// Shuffle
+
+		ubis.mark(8192);
+		assertEquals(4097, ubis.markIndex);
+
+		for (int i = 4097; i < 8193; i++) {
+			assertEquals(i & 0xff, ubis.read());
+		}
+
+		assertEquals(0, ubis.markIndex);
 	}
 
 	public void testMarkSupported() {
