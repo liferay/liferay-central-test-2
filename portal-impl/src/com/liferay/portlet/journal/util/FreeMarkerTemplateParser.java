@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.freemarker.JournalTemplateLoader;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -46,7 +47,6 @@ import freemarker.core.ParseException;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
-import java.io.StringWriter;
 
 import java.util.List;
 import java.util.Map;
@@ -63,7 +63,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 			String xml, String script)
 		throws Exception {
 
-		StringWriter stringWriter = new StringWriter();
+		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 		boolean load = false;
 
@@ -131,7 +131,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 						ContentUtil.get(
 							PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
 
-					stringWriter = new StringWriter();
+					stringWriter = new UnsyncStringWriter(true);
 
 					load = FreeMarkerEngineUtil.mergeTemplate(
 						freeMarkerTemplateId, freemarkerTemplateContent,
@@ -156,7 +156,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 					ContentUtil.get(
 						PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
 
-				stringWriter = new StringWriter();
+				stringWriter = new UnsyncStringWriter(true);
 
 				load = FreeMarkerEngineUtil.mergeTemplate(
 					freeMarkerTemplateId, freemarkerTemplateContent,

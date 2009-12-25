@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.freemarker;
 
-import java.io.StringWriter;
+import java.io.Writer;
 
 /**
  * <a href="FreeMarkerEngineUtil.java.html"><b><i>View Source</i></b></a>
@@ -49,21 +49,21 @@ public class FreeMarkerEngineUtil {
 
 	public static boolean mergeTemplate(
 			String freeMarkerTemplateId, FreeMarkerContext freeMarkerContext,
-			StringWriter stringWriter)
+			Writer writer)
 		throws Exception {
 
 		return getFreeMarkerEngine().mergeTemplate(
-			freeMarkerTemplateId, freeMarkerContext, stringWriter);
+			freeMarkerTemplateId, freeMarkerContext, writer);
 	}
 
 	public static boolean mergeTemplate(
 			String freeMarkerTemplateId, String freemarkerTemplateContent,
-			FreeMarkerContext freeMarkerContext, StringWriter stringWriter)
+			FreeMarkerContext freeMarkerContext, Writer writer)
 		throws Exception {
 
 		return getFreeMarkerEngine().mergeTemplate(
 			freeMarkerTemplateId, freemarkerTemplateContent, freeMarkerContext,
-			stringWriter);
+			writer);
 	}
 
 	public static boolean resourceExists(String resource) {

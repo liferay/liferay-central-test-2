@@ -40,7 +40,7 @@ import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 
 import java.io.IOException;
-import java.io.StringWriter;
+import java.io.Writer;
 
 /**
  * <a href="FreeMarkerEngineImpl.java.html"><b><i>View Source</i></b></a>
@@ -105,16 +105,16 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 
 	public boolean mergeTemplate(
 			String freeMarkerTemplateId, FreeMarkerContext freeMarkerContext,
-			StringWriter stringWriter)
+			Writer writer)
 		throws Exception {
 
 		return mergeTemplate(
-			freeMarkerTemplateId, null, freeMarkerContext, stringWriter);
+			freeMarkerTemplateId, null, freeMarkerContext, writer);
 	}
 
 	public boolean mergeTemplate(
 			String freeMarkerTemplateId, String freemarkerTemplateContent,
-			FreeMarkerContext freeMarkerContext, StringWriter stringWriter)
+			FreeMarkerContext freeMarkerContext, Writer writer)
 		throws Exception {
 
 		if ((Validator.isNotNull(freeMarkerTemplateId)) &&
@@ -139,7 +139,7 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 			freeMarkerTemplateId, StringPool.UTF8);
 
 		template.process(
-			freeMarkerContextImpl.getWrappedContext(), stringWriter);
+			freeMarkerContextImpl.getWrappedContext(), writer);
 
 		return true;
 	}

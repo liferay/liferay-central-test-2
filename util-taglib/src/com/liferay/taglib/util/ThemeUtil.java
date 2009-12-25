@@ -25,6 +25,7 @@ package com.liferay.taglib.util;
 import com.liferay.portal.freemarker.FreeMarkerVariables;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
@@ -42,8 +43,6 @@ import freemarker.ext.jsp.TaglibFactory;
 import freemarker.ext.servlet.HttpRequestHashModel;
 
 import freemarker.template.ObjectWrapper;
-
-import java.io.StringWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -127,7 +126,7 @@ public class ThemeUtil {
 			return null;
 		}
 
-		StringWriter stringWriter = new StringWriter();
+		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 		FreeMarkerContext freeMarkerContext =
 			FreeMarkerEngineUtil.getWrappedStandardToolsContext();
@@ -290,7 +289,7 @@ public class ThemeUtil {
 			return null;
 		}
 
-		StringWriter stringWriter = new StringWriter();
+		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
 
 		VelocityContext velocityContext =
 			VelocityEngineUtil.getWrappedStandardToolsContext();
