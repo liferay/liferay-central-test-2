@@ -106,11 +106,11 @@ public class StringBundler {
 	}
 
 	public void setIndex(int newIndex) {
-		if (newIndex < 0)
+		if (newIndex < 0) {
 			throw new ArrayIndexOutOfBoundsException(newIndex);
+		}
 
 		if (newIndex > _array.length) {
-			// Grow array
 			String[] newArray = new String[newIndex];
 
 			System.arraycopy(_array, 0, newArray, 0, _arrayIndex);
@@ -118,14 +118,12 @@ public class StringBundler {
 			_array = newArray;
 		}
 
-		// Null protection
 		if (_arrayIndex < newIndex) {
-			for(int i = _arrayIndex; i < newIndex; i++) {
+			for( int i = _arrayIndex; i < newIndex; i++) {
 				_array[i] = StringPool.BLANK;
 			}
 		}
 
-		// Help gc
 		if (_arrayIndex > newIndex) {
 			for (int i = newIndex; i < _arrayIndex; i++) {
 				_array[i] = null;
@@ -179,7 +177,6 @@ public class StringBundler {
 	protected void expandCapacity() {
 		String[] newArray = new String[_array.length << 1];
 
-		// Only copy needed data
 		System.arraycopy(_array, 0, newArray, 0, _arrayIndex);
 
 		_array = newArray;
