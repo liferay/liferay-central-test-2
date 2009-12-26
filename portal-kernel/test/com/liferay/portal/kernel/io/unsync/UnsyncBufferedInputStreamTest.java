@@ -243,11 +243,13 @@ public class UnsyncBufferedInputStreamTest extends TestCase {
 			new ByteArrayInputStream(_BUFFER), 16);
 
 		ubis.mark(8192);
+
 		assertEquals(0, ubis.markIndex);
 
 		for (int i = 0; i < 4097; i++) {
 			assertEquals(i & 0xff, ubis.read());
 		}
+
 		assertEquals(8192, ubis.buffer.length);
 		assertEquals(0, ubis.markIndex);
 		assertEquals(4097, ubis.index);
@@ -255,6 +257,7 @@ public class UnsyncBufferedInputStreamTest extends TestCase {
 		// Shuffle
 
 		ubis.mark(8192);
+
 		assertEquals(4097, ubis.markIndex);
 
 		for (int i = 4097; i < 8193; i++) {
