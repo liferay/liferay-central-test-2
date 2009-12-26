@@ -140,180 +140,185 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 		<liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="an-error-occurred-because-the-live-group-does-not-have-the-current-page" />
 		<liferay-ui:error exception="<%= PortletIdException.class %>" message="please-import-a-lar-file-for-the-current-portlet" />
 
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="exportImportPagesURL">
-			<portlet:param name="struts_action" value="/portlet_configuration/export_import" />
-		</portlet:actionURL>
+		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/export_import" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveData(); return false;">
+		<input name="<portlet:namespace />tabs1" type="hidden" value="export_import">
+		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>">
+		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
+		<input name="<portlet:namespace />plid" type="hidden" value="<%= layout.getPlid() %>">
+		<input name="<portlet:namespace />groupId" type="hidden" value="<%= themeDisplay.getScopeGroupId() %>">
+		<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletResource) %>">
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>">
 
-		<aui:form action="<%= exportImportPagesURL %>" method="post" name="fm">
-			<aui:input name="tabs1" type="hidden" value="export_import" />
-			<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
-			<aui:input name="<%= Constants.CMD %>" type="hidden" />
-			<aui:input name="plid" type="hidden" value="<%= layout.getPlid() %>" />
-			<aui:input name="groupId" type="hidden" value="<%= themeDisplay.getScopeGroupId() %>" />
-			<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+		<c:choose>
+			<c:when test='<%= tabs2.equals("export") %>'>
+				<liferay-ui:message key="export-the-selected-data-to-the-given-lar-file-name" />
 
-			<c:choose>
-				<c:when test='<%= tabs2.equals("export") %>'>
-				<aui:fieldset>
-					<aui:input label="export-the-selected-data-to-the-given-lar-file-name" name="exportFileName" size="50" value='<%= StringUtil.replace(selPortlet.getDisplayName(), " ", "_") + "-" + Time.getShortTimestamp() + ".portlet.lar" %>' />
+				<br /><br />
 
-					<aui:field-wrapper label="what-would-you-like-to-export">
+				<div>
+					<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(selPortlet.getDisplayName(), " ", "_") %>-<%= Time.getShortTimestamp() %>.portlet.lar">
+				</div>
+
+				<br />
+
+				<liferay-ui:message key="what-would-you-like-to-export" />
+
+				<br /><br />
+
+				<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
+
+				<br />
+
+				<input type="button" value='<liferay-ui:message key="export" />' onClick="<portlet:namespace />exportData();" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("import") %>'>
+				<liferay-ui:message key="import-a-lar-file-to-overwrite-the-selected-data" />
+
+				<br /><br />
+
+				<div>
+					<input name="<portlet:namespace />importFileName" size="50" type="file" />
+				</div>
+
+				<br />
+
+				<liferay-ui:message key="what-would-you-like-to-import" />
+
+				<br /><br />
+
+				<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importData();">
+			</c:when>
+			<c:when test='<%= tabs2.equals("staging") %>'>
+
+				<%
+				String errorMessageKey = StringPool.BLANK;
+
+				Group stagingGroup = themeDisplay.getScopeGroup();
+				Group liveGroup = stagingGroup.getLiveGroup();
+
+				Layout targetLayout = null;
+
+				if (!controlPanel) {
+					try {
+						targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+					}
+					catch (NoSuchLayoutException nsle) {
+						errorMessageKey = "this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first";
+					}
+
+					if (targetLayout != null) {
+						LayoutType layoutType = targetLayout.getLayoutType();
+
+						if (!(layoutType instanceof LayoutTypePortlet) || !((LayoutTypePortlet)layoutType).hasPortletId(selPortlet.getPortletId())) {
+							errorMessageKey = "this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first";
+						}
+					}
+				}
+
+				boolean workflowEnabled = liveGroup.isWorkflowEnabled();
+
+				TasksProposal proposal = null;
+
+				if (workflowEnabled) {
+					try {
+						proposal = TasksProposalLocalServiceUtil.getProposal(Portlet.class.getName(), selPortletPrimaryKey);
+					}
+					catch (NoSuchProposalException nspe) {
+					}
+				}
+				%>
+
+				<c:choose>
+					<c:when test="<%= Validator.isNull(errorMessageKey) %>">
+						<liferay-ui:message key="what-would-you-like-to-copy-from-live-or-publish-to-live" />
+
+						<br /><br />
+
 						<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
-					</aui:field-wrapper>
 
-					<aui:button-row>
-						<aui:button value="export" onClick='<%= renderResponse.getNamespace() + "exportData();" %>' />
+						<br />
 
-						<aui:button onClick="<%= redirect %>" type="cancel" />
-					</aui:button-row>
-				</aui:fieldset>
-				</c:when>
-				<c:when test='<%= tabs2.equals("import") %>'>
-					<aui:fieldset>
-						<aui:input label="import-a-lar-file-to-overwrite-the-selected-data" name="importFileName" size="50" type="file" />
+						<c:choose>
+							<c:when test="<%= workflowEnabled %>">
+								<c:if test="<%= proposal == null %>">
 
-						<aui:field-wrapper label="what-would-you-like-to-import">
-							<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
-						</aui:field-wrapper>
+									<%
+									PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
 
-						<aui:button-row>
-							<aui:button value="import" onClick='<%= renderResponse.getNamespace() + "importData();" %>' />
+									proposePublicationURL.setWindowState(WindowState.MAXIMIZED);
+									proposePublicationURL.setPortletMode(PortletMode.VIEW);
 
-							<aui:button onClick="<%= redirect %>" type="cancel" />
-						</aui:button-row>
-					</aui:fieldset>
-				</c:when>
-				<c:when test='<%= tabs2.equals("staging") %>'>
+									proposePublicationURL.setParameter("struts_action", "/layout_management/edit_proposal");
+									proposePublicationURL.setParameter(Constants.CMD, Constants.ADD);
+									proposePublicationURL.setParameter("redirect", currentURL);
+									proposePublicationURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
+									proposePublicationURL.setParameter("className", Portlet.class.getName());
+									proposePublicationURL.setParameter("classPK", selPortletPrimaryKey);
 
-					<%
-					String errorMessageKey = StringPool.BLANK;
+									String[] workflowRoleNames = StringUtil.split(liveGroup.getWorkflowRoleNames());
 
-					Group stagingGroup = themeDisplay.getScopeGroup();
-					Group liveGroup = stagingGroup.getLiveGroup();
+									JSONArray jsonReviewers = JSONFactoryUtil.createJSONArray();
 
-					Layout targetLayout = null;
+									Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
 
-					if (!controlPanel) {
-						try {
-							targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
-						}
-						catch (NoSuchLayoutException nsle) {
-							errorMessageKey = "this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first";
-						}
+									LinkedHashMap userParams = new LinkedHashMap();
 
-						if (targetLayout != null) {
-							LayoutType layoutType = targetLayout.getLayoutType();
+									if (liveGroup.isOrganization()) {
+										userParams.put("usersOrgs", new Long(liveGroup.getClassPK()));
+									}
+									else {
+										userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
+									}
 
-							if (!(layoutType instanceof LayoutTypePortlet) || !((LayoutTypePortlet)layoutType).hasPortletId(selPortlet.getPortletId())) {
-								errorMessageKey = "this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first";
-							}
-						}
-					}
+									userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
 
-					boolean workflowEnabled = liveGroup.isWorkflowEnabled();
+									List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
-					TasksProposal proposal = null;
+									if (reviewers.isEmpty()) {
+										if (liveGroup.isCommunity()) {
+											role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
+										}
+										else {
+											role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
+										}
 
-					if (workflowEnabled) {
-						try {
-							proposal = TasksProposalLocalServiceUtil.getProposal(Portlet.class.getName(), selPortletPrimaryKey);
-						}
-						catch (NoSuchProposalException nspe) {
-						}
-					}
-					%>
+										userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
 
-					<c:choose>
-						<c:when test="<%= Validator.isNull(errorMessageKey) %>">
-							<aui:fieldset>
-								<aui:field-wrapper label="what-would-you-like-to-copy-from-live-or-publish-to-live">
-									<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
-								</aui:field-wrapper>
+										reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+									}
 
-								<c:choose>
-									<c:when test="<%= workflowEnabled %>">
-										<c:if test="<%= proposal == null %>">
+									for (User reviewer : reviewers) {
+										JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
 
-											<%
-											PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
+										jsonReviewer.put("userId", reviewer.getUserId());
+										jsonReviewer.put("fullName", reviewer.getFullName());
 
-											proposePublicationURL.setWindowState(WindowState.MAXIMIZED);
-											proposePublicationURL.setPortletMode(PortletMode.VIEW);
+										jsonReviewers.put(jsonReviewer);
+									}
+									%>
 
-											proposePublicationURL.setParameter("struts_action", "/layout_management/edit_proposal");
-											proposePublicationURL.setParameter(Constants.CMD, Constants.ADD);
-											proposePublicationURL.setParameter("redirect", currentURL);
-											proposePublicationURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
-											proposePublicationURL.setParameter("className", Portlet.class.getName());
-											proposePublicationURL.setParameter("classPK", selPortletPrimaryKey);
+									<input type="button" value="<liferay-ui:message key="propose-publication" />" onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
+								</c:if>
+							</c:when>
+							<c:when test="<%= (themeDisplay.getURLPublishToLive() != null) || controlPanel %>">
+								<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="<portlet:namespace />publishToLive();" />
+							</c:when>
+						</c:choose>
 
-											String[] workflowRoleNames = StringUtil.split(liveGroup.getWorkflowRoleNames());
+						<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="<portlet:namespace />copyFromLive();" />
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message key="<%= errorMessageKey %>" />
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+		</c:choose>
 
-											JSONArray jsonReviewers = JSONFactoryUtil.createJSONArray();
-
-											Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
-
-											LinkedHashMap userParams = new LinkedHashMap();
-
-											if (liveGroup.isOrganization()) {
-												userParams.put("usersOrgs", new Long(liveGroup.getClassPK()));
-											}
-											else {
-												userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
-											}
-
-											userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
-
-											List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
-
-											if (reviewers.isEmpty()) {
-												if (liveGroup.isCommunity()) {
-													role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
-												}
-												else {
-													role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
-												}
-
-												userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
-
-												reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
-											}
-
-											for (User reviewer : reviewers) {
-												JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
-
-												jsonReviewer.put("userId", reviewer.getUserId());
-												jsonReviewer.put("fullName", reviewer.getFullName());
-
-												jsonReviewers.put(jsonReviewer);
-											}
-											%>
-
-											<aui:button-row>
-												<input type="button" value="<liferay-ui:message key="propose-publication" />" onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
-
-												<aui:button onClick='<%= renderResponse.getNamespace() + "copyFromLive();" %>' value="copy-from-live" />
-											</aui:button-row>
-										</c:if>
-									</c:when>
-									<c:when test="<%= (themeDisplay.getURLPublishToLive() != null) || controlPanel %>">
-										<aui:button-row>
-											<aui:button onClick='<%= renderResponse.getNamespace() + "publishToLive();" %>' value="publish-to-live" />
-
-											<aui:button onClick='<%= renderResponse.getNamespace() + "copyFromLive();" %>' value="copy-from-live" />
-										</aui:button-row>
-									</c:when>
-								</c:choose>
-							</aui:fieldset>
-						</c:when>
-						<c:otherwise>
-							<liferay-ui:message key="<%= errorMessageKey %>" />
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-			</c:choose>
-		</aui:form>
+		</form>
 
 		<script type="text/javascript">
 			AUI().ready(
