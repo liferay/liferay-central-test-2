@@ -130,7 +130,12 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 
 					// Cannot read any more, stop reading
 
-					return readNumber == 0 ? -1 : readNumber;
+					if (readNumber == 0) {
+						return -1;
+					}
+					else {
+						return readNumber;
+					}
 				}
 			}
 			else {
