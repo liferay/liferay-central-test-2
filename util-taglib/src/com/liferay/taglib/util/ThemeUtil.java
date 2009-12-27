@@ -126,7 +126,7 @@ public class ThemeUtil {
 			return null;
 		}
 
-		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		FreeMarkerContext freeMarkerContext =
 			FreeMarkerEngineUtil.getWrappedStandardToolsContext();
@@ -178,11 +178,11 @@ public class ThemeUtil {
 		// Merge templates
 
 		FreeMarkerEngineUtil.mergeTemplate(
-			source, freeMarkerContext, stringWriter);
+			source, freeMarkerContext, unsyncStringWriter);
 
 		// Print output
 
-		String output = stringWriter.toString();
+		String output = unsyncStringWriter.toString();
 
 		if (write) {
 			pageContext.getOut().print(output);
@@ -289,7 +289,7 @@ public class ThemeUtil {
 			return null;
 		}
 
-		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		VelocityContext velocityContext =
 			VelocityEngineUtil.getWrappedStandardToolsContext();
@@ -318,11 +318,12 @@ public class ThemeUtil {
 
 		// Merge templates
 
-		VelocityEngineUtil.mergeTemplate(source, velocityContext, stringWriter);
+		VelocityEngineUtil.mergeTemplate(
+			source, velocityContext, unsyncStringWriter);
 
 		// Print output
 
-		String output = stringWriter.toString();
+		String output = unsyncStringWriter.toString();
 
 		if (write) {
 			pageContext.getOut().print(output);

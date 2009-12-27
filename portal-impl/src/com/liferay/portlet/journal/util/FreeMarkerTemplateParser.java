@@ -63,7 +63,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 			String xml, String script)
 		throws Exception {
 
-		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		boolean load = false;
 
@@ -116,7 +116,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 
 				load = FreeMarkerEngineUtil.mergeTemplate(
 					freeMarkerTemplateId, script, freeMarkerContext,
-					stringWriter);
+					unsyncStringWriter);
 			}
 			catch (SystemException se) {
 				if (se.getCause() instanceof TemplateException) {
@@ -131,11 +131,11 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 						ContentUtil.get(
 							PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
 
-					stringWriter = new UnsyncStringWriter(true);
+					unsyncStringWriter = new UnsyncStringWriter(true);
 
 					load = FreeMarkerEngineUtil.mergeTemplate(
 						freeMarkerTemplateId, freemarkerTemplateContent,
-						freeMarkerContext, stringWriter);
+						freeMarkerContext, unsyncStringWriter);
 				}
 				else {
 					throw se;
@@ -156,11 +156,11 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 					ContentUtil.get(
 						PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
 
-				stringWriter = new UnsyncStringWriter(true);
+				unsyncStringWriter = new UnsyncStringWriter(true);
 
 				load = FreeMarkerEngineUtil.mergeTemplate(
 					freeMarkerTemplateId, freemarkerTemplateContent,
-					freeMarkerContext, stringWriter);
+					freeMarkerContext, unsyncStringWriter);
 			}
 		}
 		catch (Exception e) {
@@ -184,7 +184,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 				"Unable to dynamically load freemarker transform script");
 		}
 
-		return stringWriter.toString();
+		return unsyncStringWriter.toString();
 	}
 
 }

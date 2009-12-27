@@ -138,8 +138,7 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		Template template = _configuration.getTemplate(
 			freeMarkerTemplateId, StringPool.UTF8);
 
-		template.process(
-			freeMarkerContextImpl.getWrappedContext(), writer);
+		template.process(freeMarkerContextImpl.getWrappedContext(), writer);
 
 		return true;
 	}
