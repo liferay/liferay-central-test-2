@@ -35,117 +35,167 @@ import java.io.StringWriter;
 public class UnsyncBufferedWriterTest extends TestCase {
 
 	public void testBlockWrite() throws IOException {
-		StringWriter sw = new StringWriter();
-		UnsyncBufferedWriter ubw = new UnsyncBufferedWriter(sw, 3);
-		//Normal write
-		ubw.write("ab".toCharArray());
-		assertEquals(2, ubw.count);
-		assertEquals('a', ubw.buffer[0]);
-		assertEquals('b', ubw.buffer[1]);
-		assertEquals(0, sw.getBuffer().length());
+		StringWriter stringWriter = new StringWriter();
 
-		//Auto flush
-		ubw.write("cd".toCharArray());
-		assertEquals(2, ubw.count);
-		assertEquals('c', ubw.buffer[0]);
-		assertEquals('d', ubw.buffer[1]);
-		assertEquals(2, sw.getBuffer().length());
-		assertEquals("ab", sw.getBuffer().toString());
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
+			stringWriter, 3);
 
-		//Directly write with auto flush
-		ubw.write("efg".toCharArray());
-		assertEquals(0, ubw.count);
-		assertEquals(7, sw.getBuffer().length());
-		assertEquals("abcdefg", sw.getBuffer().toString());
+		// Normal
 
-		//Directly write without auto flush
-		ubw.write("hij".toCharArray());
-		assertEquals(0, ubw.count);
-		assertEquals(10, sw.getBuffer().length());
-		assertEquals("abcdefghij", sw.getBuffer().toString());
+		unsyncBufferedWriter.write("ab".toCharArray());
+
+		assertEquals(2, unsyncBufferedWriter.count);
+		assertEquals('a', unsyncBufferedWriter.buffer[0]);
+		assertEquals('b', unsyncBufferedWriter.buffer[1]);
+		assertEquals(0, stringWriter.getBuffer().length());
+
+		// Auto flush
+
+		unsyncBufferedWriter.write("cd".toCharArray());
+
+		assertEquals(2, unsyncBufferedWriter.count);
+		assertEquals('c', unsyncBufferedWriter.buffer[0]);
+		assertEquals('d', unsyncBufferedWriter.buffer[1]);
+		assertEquals(2, stringWriter.getBuffer().length());
+		assertEquals("ab", stringWriter.getBuffer().toString());
+
+		// Direct with auto flush
+
+		unsyncBufferedWriter.write("efg".toCharArray());
+
+		assertEquals(0, unsyncBufferedWriter.count);
+		assertEquals(7, stringWriter.getBuffer().length());
+		assertEquals("abcdefg", stringWriter.getBuffer().toString());
+
+		// Direct without auto flush
+
+		unsyncBufferedWriter.write("hij".toCharArray());
+
+		assertEquals(0, unsyncBufferedWriter.count);
+		assertEquals(10, stringWriter.getBuffer().length());
+		assertEquals("abcdefghij", stringWriter.getBuffer().toString());
 	}
 
 	public void testClose() throws IOException {
-		UnsyncBufferedWriter ubw = new UnsyncBufferedWriter(new StringWriter());
-		assertNotNull(ubw.buffer);
-		assertNotNull(ubw.writer);
-		ubw.close();
-		assertNull(ubw.buffer);
-		assertNull(ubw.writer);
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
+			new StringWriter());
+
+		assertNotNull(unsyncBufferedWriter.buffer);
+		assertNotNull(unsyncBufferedWriter.writer);
+
+		unsyncBufferedWriter.close();
+
+		assertNull(unsyncBufferedWriter.buffer);
+		assertNull(unsyncBufferedWriter.writer);
 	}
 
 	public void testConstructor() {
-		UnsyncBufferedWriter ubw = new UnsyncBufferedWriter(new StringWriter());
-		assertEquals(8192, ubw.buffer.length);
-		assertEquals(0, ubw.count);
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
+			new StringWriter());
 
-		ubw = new UnsyncBufferedWriter(new StringWriter(), 10);
-		assertEquals(10, ubw.buffer.length);
-		assertEquals(0, ubw.count);
+		assertEquals(8192, unsyncBufferedWriter.buffer.length);
+		assertEquals(0, unsyncBufferedWriter.count);
+
+		unsyncBufferedWriter = new UnsyncBufferedWriter(new StringWriter(), 10);
+
+		assertEquals(10, unsyncBufferedWriter.buffer.length);
+		assertEquals(0, unsyncBufferedWriter.count);
 	}
 
 	public void testNewLine() throws IOException{
+		StringWriter stringWriter = new StringWriter();
+
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
+			stringWriter, 10);
+
+		unsyncBufferedWriter.newLine();
+
 		String lineSeparator = System.getProperty("line.separator");
-		StringWriter sw = new StringWriter();
-		UnsyncBufferedWriter ubw = new UnsyncBufferedWriter(sw, 10);
-		ubw.newLine();
-		assertEquals(lineSeparator.length(), ubw.count);
-		ubw.write('a');
-		assertEquals(lineSeparator.length() + 1, ubw.count);
-		ubw.newLine();
-		assertEquals(lineSeparator.length() * 2 + 1, ubw.count);
-		ubw.flush();
-		assertEquals(lineSeparator + "a" + lineSeparator, sw.toString());
+
+		assertEquals(lineSeparator.length(), unsyncBufferedWriter.count);
+
+		unsyncBufferedWriter.write('a');
+
+		assertEquals(lineSeparator.length() + 1, unsyncBufferedWriter.count);
+
+		unsyncBufferedWriter.newLine();
+
+		assertEquals(
+			lineSeparator.length() * 2 + 1, unsyncBufferedWriter.count);
+
+		unsyncBufferedWriter.flush();
+
+		assertEquals(
+			lineSeparator + "a" + lineSeparator, stringWriter.toString());
 	}
-	
+
 	public void testStringWrite() throws IOException {
-		StringWriter sw = new StringWriter();
-		UnsyncBufferedWriter ubw = new UnsyncBufferedWriter(sw, 3);
-		//Normal write
-		ubw.write("ab");
-		assertEquals(2, ubw.count);
-		assertEquals('a', ubw.buffer[0]);
-		assertEquals('b', ubw.buffer[1]);
-		assertEquals(0, sw.getBuffer().length());
+		StringWriter stringWriter = new StringWriter();
 
-		//Auto flush
-		ubw.write("cd");
-		assertEquals(1, ubw.count);
-		assertEquals('d', ubw.buffer[0]);
-		assertEquals(3, sw.getBuffer().length());
-		assertEquals("abc", sw.getBuffer().toString());
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
+			stringWriter, 3);
 
-		//cycle write
-		ubw.write("efghi".toCharArray());
-		assertEquals(0, ubw.count);
-		assertEquals(9, sw.getBuffer().length());
-		assertEquals("abcdefghi", sw.getBuffer().toString());
+		// Normal
 
+		unsyncBufferedWriter.write("ab");
+
+		assertEquals(2, unsyncBufferedWriter.count);
+		assertEquals('a', unsyncBufferedWriter.buffer[0]);
+		assertEquals('b', unsyncBufferedWriter.buffer[1]);
+		assertEquals(0, stringWriter.getBuffer().length());
+
+		// Auto flush
+
+		unsyncBufferedWriter.write("cd");
+
+		assertEquals(1, unsyncBufferedWriter.count);
+		assertEquals('d', unsyncBufferedWriter.buffer[0]);
+		assertEquals(3, stringWriter.getBuffer().length());
+		assertEquals("abc", stringWriter.getBuffer().toString());
+
+		// Cycle
+
+		unsyncBufferedWriter.write("efghi".toCharArray());
+
+		assertEquals(0, unsyncBufferedWriter.count);
+		assertEquals(9, stringWriter.getBuffer().length());
+		assertEquals("abcdefghi", stringWriter.getBuffer().toString());
 	}
 
 	public void testWrite() throws IOException {
-		StringWriter sw = new StringWriter();
-		UnsyncBufferedWriter ubw = new UnsyncBufferedWriter(sw, 3);
-		//Normal write
-		ubw.write('a');
-		assertEquals(1, ubw.count);
-		assertEquals('a', ubw.buffer[0]);
-		assertEquals(0, sw.getBuffer().length());
-		ubw.write('b');
-		assertEquals(2, ubw.count);
-		assertEquals('b', ubw.buffer[1]);
-		assertEquals(0, sw.getBuffer().length());
-		ubw.write('c');
-		assertEquals(3, ubw.count);
-		assertEquals('c', ubw.buffer[2]);
-		assertEquals(0, sw.getBuffer().length());
+		StringWriter stringWriter = new StringWriter();
 
-		//Auto flush
-		ubw.write('d');
-		assertEquals(1, ubw.count);
-		assertEquals('d', ubw.buffer[0]);
-		assertEquals(3, sw.getBuffer().length());
-		assertEquals("abc", sw.getBuffer().toString());
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
+			stringWriter, 3);
+
+		// Normal
+
+		unsyncBufferedWriter.write('a');
+
+		assertEquals(1, unsyncBufferedWriter.count);
+		assertEquals('a', unsyncBufferedWriter.buffer[0]);
+		assertEquals(0, stringWriter.getBuffer().length());
+
+		unsyncBufferedWriter.write('b');
+
+		assertEquals(2, unsyncBufferedWriter.count);
+		assertEquals('b', unsyncBufferedWriter.buffer[1]);
+		assertEquals(0, stringWriter.getBuffer().length());
+
+		unsyncBufferedWriter.write('c');
+
+		assertEquals(3, unsyncBufferedWriter.count);
+		assertEquals('c', unsyncBufferedWriter.buffer[2]);
+		assertEquals(0, stringWriter.getBuffer().length());
+
+		// Auto flush
+
+		unsyncBufferedWriter.write('d');
+
+		assertEquals(1, unsyncBufferedWriter.count);
+		assertEquals('d', unsyncBufferedWriter.buffer[0]);
+		assertEquals(3, stringWriter.getBuffer().length());
+		assertEquals("abc", stringWriter.getBuffer().toString());
 	}
 
 }

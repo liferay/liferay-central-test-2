@@ -54,11 +54,11 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 	}
 
 	public byte[] toByteArray() {
-		byte[] copyBuffer = new byte[index];
+		byte[] newBuffer = new byte[index];
 
-		System.arraycopy(buffer, 0, copyBuffer, 0, index);
+		System.arraycopy(buffer, 0, newBuffer, 0, index);
 
-		return copyBuffer;
+		return newBuffer;
 	}
 
 	public String toString() {
@@ -71,16 +71,16 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 		return new String(buffer, 0, index, charsetName);
 	}
 
-	public void write(byte[] b) {
-		write(b, 0, b.length);
+	public void write(byte[] byteArray) {
+		write(byteArray, 0, byteArray.length);
 	}
 
-	public void write(byte[] b, int off, int len) {
-		if (len <= 0) {
+	public void write(byte[] byteArray, int offset, int length) {
+		if (length <= 0) {
 			return;
 		}
 
-		int newIndex = index + len;
+		int newIndex = index + length;
 
 		if (newIndex > buffer.length) {
 			int newBufferSize = Math.max(buffer.length << 1, newIndex);
@@ -92,7 +92,7 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 			buffer = newBuffer;
 		}
 
-		System.arraycopy(b, off, buffer, index, len);
+		System.arraycopy(byteArray, offset, buffer, index, length);
 
 		index = newIndex;
 	}

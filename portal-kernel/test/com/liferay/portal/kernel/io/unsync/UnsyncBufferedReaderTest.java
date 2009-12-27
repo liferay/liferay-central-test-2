@@ -38,291 +38,304 @@ import java.io.StringReader;
 public class UnsyncBufferedReaderTest extends TestCase {
 
 	public void testBlockRead() throws IOException {
-		StringReader sr = new StringReader("abcdefghi");
-		UnsyncBufferedReader ubr = new UnsyncBufferedReader(sr, 5);
+		StringReader stringReader = new StringReader("abcdefghi");
 
-		assertEquals(5, ubr.buffer.length);
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			stringReader, 5);
 
-		assertTrue(sr.ready());
-		assertTrue(ubr.ready());
+		assertEquals(5, unsyncBufferedReader.buffer.length);
+		assertTrue(stringReader.ready());
+		assertTrue(unsyncBufferedReader.ready());
 
 		// In-memory
 
-		assertEquals('a', ubr.read());
-		assertEquals(1, ubr.index);
-		assertEquals(5, ubr.firstInvalidIndex);
+		assertEquals('a', unsyncBufferedReader.read());
+		assertEquals(1, unsyncBufferedReader.index);
+		assertEquals(5, unsyncBufferedReader.firstInvalidIndex);
 
 		char[] buffer = new char[3];
 
-		int number = ubr.read(buffer);
+		int read = unsyncBufferedReader.read(buffer);
 
-		assertEquals(buffer.length, number);
+		assertEquals(buffer.length, read);
 		assertEquals('b', buffer[0]);
 		assertEquals('c', buffer[1]);
 		assertEquals('d', buffer[2]);
-		assertEquals(4, ubr.index);
-		assertEquals(5, ubr.firstInvalidIndex);
+		assertEquals(4, unsyncBufferedReader.index);
+		assertEquals(5, unsyncBufferedReader.firstInvalidIndex);
 
 		// Exhaust buffer
 
-		assertEquals('e', ubr.read());
-		assertEquals(5, ubr.index);
-		assertEquals(5, ubr.firstInvalidIndex);
+		assertEquals('e', unsyncBufferedReader.read());
+		assertEquals(5, unsyncBufferedReader.index);
+		assertEquals(5, unsyncBufferedReader.firstInvalidIndex);
 
 		// Force reload
 
-		number = ubr.read(buffer);
+		read = unsyncBufferedReader.read(buffer);
 
-		assertEquals(buffer.length, number);
+		assertEquals(buffer.length, read);
 
 		assertEquals('f', buffer[0]);
 		assertEquals('g', buffer[1]);
 		assertEquals('h', buffer[2]);
 
-		assertEquals(3, ubr.index);
-		assertEquals(4, ubr.firstInvalidIndex);
+		assertEquals(3, unsyncBufferedReader.index);
+		assertEquals(4, unsyncBufferedReader.firstInvalidIndex);
 
-		//Finish
+		// Finish
 
-		number = ubr.read(buffer);
+		read = unsyncBufferedReader.read(buffer);
 
-		assertEquals(1, number);
-
+		assertEquals(1, read);
 		assertEquals('i', buffer[0]);
-
-		assertEquals(-1, ubr.read(buffer));
+		assertEquals(-1, unsyncBufferedReader.read(buffer));
 	}
 
 	public void testClose() throws IOException {
-		UnsyncBufferedReader ubr =
-			new UnsyncBufferedReader(new StringReader(""));
-		ubr.close();
-		assertNull(ubr.buffer);
-		assertNull(ubr.reader);
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader(""));
+
+		unsyncBufferedReader.close();
+
+		assertNull(unsyncBufferedReader.buffer);
+		assertNull(unsyncBufferedReader.reader);
 	}
 
-	public void testConstructor() throws IOException {
-		UnsyncBufferedReader ubr =
-			new UnsyncBufferedReader(new StringReader(""));
-		assertEquals(8192, ubr.buffer.length);
-		ubr = new UnsyncBufferedReader(new StringReader(""), 10);
-		assertEquals(10, ubr.buffer.length);
+	public void testConstructor() {
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader(""));
+
+		assertEquals(8192, unsyncBufferedReader.buffer.length);
+
+		unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader(""), 10);
+
+		assertEquals(10, unsyncBufferedReader.buffer.length);
 	}
 
 	public void testMarkAndReset() throws IOException {
-		UnsyncBufferedReader ubr =
-			new UnsyncBufferedReader(new StringReader("abcdefghi"), 5);
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader("abcdefghi"), 5);
+
 		// Normal
-		assertEquals(-1, ubr.markIndex);
+
+		assertEquals(-1, unsyncBufferedReader.markIndex);
 
 		int markLimit = 3;
 
-		ubr.mark(markLimit);
-		assertEquals(markLimit, ubr.markLimit);
+		unsyncBufferedReader.mark(markLimit);
 
-		assertEquals(0, ubr.markIndex);
-		assertEquals('a', ubr.read());
-		assertEquals('b', ubr.read());
-		assertEquals('c', ubr.read());
-		assertEquals(3, ubr.index);
+		assertEquals(markLimit, unsyncBufferedReader.markLimit);
 
-		ubr.reset();
+		assertEquals(0, unsyncBufferedReader.markIndex);
+		assertEquals('a', unsyncBufferedReader.read());
+		assertEquals('b', unsyncBufferedReader.read());
+		assertEquals('c', unsyncBufferedReader.read());
+		assertEquals(3, unsyncBufferedReader.index);
 
-		assertEquals(0, ubr.markIndex);
-		assertEquals('a', ubr.read());
-		assertEquals('b', ubr.read());
-		assertEquals('c', ubr.read());
-		assertEquals(3, ubr.index);
+		unsyncBufferedReader.reset();
+
+		assertEquals(0, unsyncBufferedReader.markIndex);
+		assertEquals('a', unsyncBufferedReader.read());
+		assertEquals('b', unsyncBufferedReader.read());
+		assertEquals('c', unsyncBufferedReader.read());
+		assertEquals(3, unsyncBufferedReader.index);
 
 		// Overrun
 
-		ubr = new UnsyncBufferedReader(new StringReader("abcdefghi"), 5);
+		unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader("abcdefghi"), 5);
 
-		assertEquals(-1, ubr.markIndex);
+		assertEquals(-1, unsyncBufferedReader.markIndex);
 
-		ubr.mark(markLimit);
-		assertEquals(markLimit, ubr.markLimit);
+		unsyncBufferedReader.mark(markLimit);
 
-		assertEquals(0, ubr.markIndex);
-
-		assertEquals('a', ubr.read());
-		assertEquals('b', ubr.read());
-		assertEquals('c', ubr.read());
-		assertEquals('d', ubr.read());
-		assertEquals('e', ubr.read());
-		assertEquals('f', ubr.read());
-		assertEquals(1, ubr.index);
-		assertEquals(-1, ubr.markIndex);
+		assertEquals(markLimit, unsyncBufferedReader.markLimit);
+		assertEquals(0, unsyncBufferedReader.markIndex);
+		assertEquals('a', unsyncBufferedReader.read());
+		assertEquals('b', unsyncBufferedReader.read());
+		assertEquals('c', unsyncBufferedReader.read());
+		assertEquals('d', unsyncBufferedReader.read());
+		assertEquals('e', unsyncBufferedReader.read());
+		assertEquals('f', unsyncBufferedReader.read());
+		assertEquals(1, unsyncBufferedReader.index);
+		assertEquals(-1, unsyncBufferedReader.markIndex);
 
 		// Grow buffer size to 8192, _MAX_MARK_WASTE_SIZE defaults to 4096
 
-		ubr = new UnsyncBufferedReader(
+		unsyncBufferedReader = new UnsyncBufferedReader(
 			new StringReader(new String(_BUFFER)), 16);
 
-		ubr.mark(8192);
-		assertEquals(0, ubr.markIndex);
+		unsyncBufferedReader.mark(8192);
+
+		assertEquals(0, unsyncBufferedReader.markIndex);
 
 		for (int i = 0; i < 4097; i++) {
-			assertEquals(i % 16 + 'a', ubr.read());
+			assertEquals(i % 16 + 'a', unsyncBufferedReader.read());
 		}
-		assertEquals(8192, ubr.buffer.length);
-		assertEquals(0, ubr.markIndex);
-		assertEquals(4097, ubr.index);
+
+		assertEquals(8192, unsyncBufferedReader.buffer.length);
+		assertEquals(0, unsyncBufferedReader.markIndex);
+		assertEquals(4097, unsyncBufferedReader.index);
 
 		// Shuffle
 
-		ubr.mark(8192);
-		assertEquals(4097, ubr.markIndex);
+		unsyncBufferedReader.mark(8192);
+
+		assertEquals(4097, unsyncBufferedReader.markIndex);
 
 		for (int i = 4097; i < 8193; i++) {
-			assertEquals(i % 16 + 'a', ubr.read());
+			assertEquals(i % 16 + 'a', unsyncBufferedReader.read());
 		}
 
-		assertEquals(0, ubr.markIndex);
+		assertEquals(0, unsyncBufferedReader.markIndex);
 	}
 
 	public void testMarkSupported() {
-		UnsyncBufferedReader ubr =
-			new UnsyncBufferedReader(new StringReader("abcdefghi"), 5);
-		assertTrue(ubr.markSupported());
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader("abcdefghi"), 5);
+
+		assertTrue(unsyncBufferedReader.markSupported());
 	}
 
 	public void testRead() throws IOException {
-		UnsyncBufferedReader ubr =
-			new UnsyncBufferedReader(new StringReader("ab\r\nef"), 3);
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader("ab\r\nef"), 3);
 
-		assertEquals(3, ubr.buffer.length);
-		assertEquals(0, ubr.index);
-
-		assertEquals('a', ubr.read());
-		assertEquals(1, ubr.index);
-
-		assertEquals('b', ubr.read());
-		assertEquals(2, ubr.index);
-
-		assertEquals('\r', ubr.read());
-		assertEquals(3, ubr.index);
-
-		assertEquals('\n', ubr.read());
-		assertEquals(1, ubr.index);
-
-		assertEquals('e', ubr.read());
-		assertEquals(2, ubr.index);
-
-		assertEquals('f', ubr.read());
-		assertEquals(3, ubr.index);
-
-		assertEquals(-1, ubr.read());
+		assertEquals(3, unsyncBufferedReader.buffer.length);
+		assertEquals(0, unsyncBufferedReader.index);
+		assertEquals('a', unsyncBufferedReader.read());
+		assertEquals(1, unsyncBufferedReader.index);
+		assertEquals('b', unsyncBufferedReader.read());
+		assertEquals(2, unsyncBufferedReader.index);
+		assertEquals('\r', unsyncBufferedReader.read());
+		assertEquals(3, unsyncBufferedReader.index);
+		assertEquals('\n', unsyncBufferedReader.read());
+		assertEquals(1, unsyncBufferedReader.index);
+		assertEquals('e', unsyncBufferedReader.read());
+		assertEquals(2, unsyncBufferedReader.index);
+		assertEquals('f', unsyncBufferedReader.read());
+		assertEquals(3, unsyncBufferedReader.index);
+		assertEquals(-1, unsyncBufferedReader.read());
 	}
 
 	public void testReadLine() throws IOException {
-		// In Buffer read with \r
-		UnsyncBufferedReader ubr =
-			new UnsyncBufferedReader(new StringReader("abc\rde"), 5);
-		String line = ubr.readLine();
-		assertEquals("abc", line);
-		assertEquals(4, ubr.index);
 
-		// In Buffer read with \n
-		ubr = new UnsyncBufferedReader(new StringReader("abc\nde"), 5);
-		line = ubr.readLine();
-		assertEquals("abc", line);
-		assertEquals(4, ubr.index);
+		// With \r
 
-		// In Buffer read with \r\n
-		ubr = new UnsyncBufferedReader(new StringReader("abc\r\nde"), 5);
-		line = ubr.readLine();
-		assertEquals("abc", line);
-		assertEquals(5, ubr.index);
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader("abc\rde"), 5);
 
-		// In Buffer read without \r or \n
-		ubr = new UnsyncBufferedReader(new StringReader("abc"), 5);
-		line = ubr.readLine();
-		assertEquals("abc", line);
-		assertEquals(0, ubr.index);
+		assertEquals("abc", unsyncBufferedReader.readLine());
+		assertEquals(4, unsyncBufferedReader.index);
 
-		// Empty read
-		line = ubr.readLine();
-		assertNull(line);
+		// With \n
 
-		// Load buffer multiple time for one line
-		ubr = new UnsyncBufferedReader(new StringReader("abcdefghijklmn\r"), 5);
-		line = ubr.readLine();
-		assertEquals("abcdefghijklmn", line);
-		assertEquals(5, ubr.index);
+		unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader("abc\nde"), 5);
+
+		assertEquals("abc", unsyncBufferedReader.readLine());
+		assertEquals(4, unsyncBufferedReader.index);
+
+		// With \r\n
+
+		unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader("abc\r\nde"), 5);
+
+		assertEquals("abc", unsyncBufferedReader.readLine());
+		assertEquals(5, unsyncBufferedReader.index);
+
+		// Without \r or \n
+
+		unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader("abc"), 5);
+
+		assertEquals("abc", unsyncBufferedReader.readLine());
+		assertEquals(0, unsyncBufferedReader.index);
+
+		// Empty
+
+		assertNull(unsyncBufferedReader.readLine());
+
+		// Load multiple times for one line
+
+		unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader("abcdefghijklmn\r"), 5);
+
+		assertEquals("abcdefghijklmn", unsyncBufferedReader.readLine());
+		assertEquals(5, unsyncBufferedReader.index);
 	}
 
 	public void testReady() throws IOException {
-		UnsyncBufferedReader ubr =
-		new UnsyncBufferedReader(new StringReader(""));
-		assertTrue(ubr.ready());
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new StringReader(""));
 
-		ubr = new UnsyncBufferedReader(
+		assertTrue(unsyncBufferedReader.ready());
+
+		unsyncBufferedReader = new UnsyncBufferedReader(
 			new InputStreamReader(new ByteArrayInputStream(new byte[0])));
 
-		assertFalse(ubr.ready());
+		assertFalse(unsyncBufferedReader.ready());
 	}
 
 	public void testSkip() throws IOException {
-
-		UnsyncBufferedReader ubr =
-		new UnsyncBufferedReader(
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new StringReader("abcdefghijklmnopqrstuvwxyz"), 5);
 
-		assertEquals(0, ubr.index);
-		assertEquals(0, ubr.firstInvalidIndex);
-		assertEquals('a', ubr.read());
-		assertEquals(1, ubr.index);
-		assertEquals(5, ubr.firstInvalidIndex);
+		assertEquals(0, unsyncBufferedReader.index);
+		assertEquals(0, unsyncBufferedReader.firstInvalidIndex);
+		assertEquals('a', unsyncBufferedReader.read());
+		assertEquals(1, unsyncBufferedReader.index);
+		assertEquals(5, unsyncBufferedReader.firstInvalidIndex);
 
 		// In-memory
 
-		assertEquals(3, ubr.skip(3));
-		assertEquals(4, ubr.index);
-		assertEquals(5, ubr.firstInvalidIndex);
-
-		assertEquals(1, ubr.skip(3));
-		assertEquals(5, ubr.index);
-		assertEquals(5, ubr.firstInvalidIndex);
+		assertEquals(3, unsyncBufferedReader.skip(3));
+		assertEquals(4, unsyncBufferedReader.index);
+		assertEquals(5, unsyncBufferedReader.firstInvalidIndex);
+		assertEquals(1, unsyncBufferedReader.skip(3));
+		assertEquals(5, unsyncBufferedReader.index);
+		assertEquals(5, unsyncBufferedReader.firstInvalidIndex);
 
 		// Underlying reader
 
-		assertEquals(6, ubr.skip(6));
-		assertEquals(11, ubr.index);
-		assertEquals(5, ubr.firstInvalidIndex);
-		assertEquals('l', ubr.read());
-		assertEquals(1, ubr.index);
-		assertEquals(5, ubr.firstInvalidIndex);
+		assertEquals(6, unsyncBufferedReader.skip(6));
+		assertEquals(11, unsyncBufferedReader.index);
+		assertEquals(5, unsyncBufferedReader.firstInvalidIndex);
+		assertEquals('l', unsyncBufferedReader.read());
+		assertEquals(1, unsyncBufferedReader.index);
+		assertEquals(5, unsyncBufferedReader.firstInvalidIndex);
 
 		// Mark
 
-		ubr.mark(10);
+		unsyncBufferedReader.mark(10);
 
 		// In-memory
 
-		assertEquals(4, ubr.skip(4));
-		assertEquals(5, ubr.index);
-		assertEquals(5, ubr.firstInvalidIndex);
+		assertEquals(4, unsyncBufferedReader.skip(4));
+		assertEquals(5, unsyncBufferedReader.index);
+		assertEquals(5, unsyncBufferedReader.firstInvalidIndex);
 
 		// Force
 
-		assertEquals(5, ubr.skip(6));
-		assertEquals(10, ubr.index);
-		assertEquals(10, ubr.firstInvalidIndex);
+		assertEquals(5, unsyncBufferedReader.skip(6));
+		assertEquals(10, unsyncBufferedReader.index);
+		assertEquals(10, unsyncBufferedReader.firstInvalidIndex);
 
-		ubr.reset();
-		assertEquals(1, ubr.index);
-		assertEquals(10, ubr.firstInvalidIndex);
-		assertEquals('m', ubr.read());
+		unsyncBufferedReader.reset();
 
+		assertEquals(1, unsyncBufferedReader.index);
+		assertEquals(10, unsyncBufferedReader.firstInvalidIndex);
+		assertEquals('m', unsyncBufferedReader.read());
 	}
 
-	private static final int _BUFFER_SIZE = 16 * 1024;
+	private static final int _SIZE = 16 * 1024;
 
-	private static final char[] _BUFFER = new char[_BUFFER_SIZE];
+	private static final char[] _BUFFER = new char[_SIZE];
 
 	static {
-		for (int i = 0; i < _BUFFER_SIZE; i++) {
+		for (int i = 0; i < _SIZE; i++) {
 			_BUFFER[i] = (char) (i % 16 + 'a');
 		}
 	}

@@ -37,9 +37,9 @@ import java.nio.CharBuffer;
  */
 public class UnsyncStringReader extends Reader {
 
-	public UnsyncStringReader(String s) {
-		string = s;
-		capability = s.length();
+	public UnsyncStringReader(String string) {
+		this.string = string;
+		stringLength = string.length();
 	}
 
 	public void close() {
@@ -54,43 +54,51 @@ public class UnsyncStringReader extends Reader {
 	}
 
 	public int read() {
-		if (index >= capability) {
+		if (index >= stringLength) {
 			return -1;
 		}
+
 		return string.charAt(index++);
 	}
 
-	public int read(CharBuffer target) {
-		int length = target.remaining();
-		char[] cbuf = new char[length];
-		int number = read(cbuf, 0, length);
-		if (number > 0) {
-			target.put(cbuf, 0, number);
-		}
-		return number;
+	public int read(char[] charArray) {
+		return read(charArray, 0, charArray.length);
 	}
 
-	public int read(char[] cbuf) {
-		return read(cbuf, 0, cbuf.length);
-	}
-
-	public int read(char[] cbuf, int off, int len) {
-		if (len <= 0) {
+	public int read(char[] charArray, int offset, int length) {
+		if (length <= 0) {
 			return 0;
 		}
-		if (index >= capability) {
+
+		if (index >= stringLength) {
 			return -1;
 		}
 
-		int length = len;
+		int read = length;
 
-		if (index + length > capability) {
-			length = capability - index;
+		if ((index + read) > stringLength) {
+			read = stringLength - index;
 		}
 
-		string.getChars(index, index + length, cbuf, off);
-		index += length;
-		return length;
+		string.getChars(index, index + read, charArray, offset);
+
+		index += read;
+
+		return read;
+	}
+
+	public int read(CharBuffer charBuffer) {
+		int remaining = charBuffer.remaining();
+
+		char[] charArray = new char[remaining];
+
+		int read = read(charArray, 0, remaining);
+
+		if (read > 0) {
+			charBuffer.put(charArray, 0, read);
+		}
+
+		return read;
 	}
 
 	public boolean ready() {
@@ -101,21 +109,23 @@ public class UnsyncStringReader extends Reader {
 		index = markIndex;
 	}
 
-	public long skip(long ns) {
-		if (index >= capability) {
+	public long skip(long skip) {
+		if (index >= stringLength) {
 			return 0;
 		}
-		long length = ns;
-		if (index + ns > capability) {
-			length = capability - index;
+
+		if ((skip + index) > stringLength) {
+			skip = stringLength - index;
 		}
-		index += length;
-		return length;
+
+		index += skip;
+
+		return skip;
 	}
 
-	protected String string;
-	protected int capability;
 	protected int index;
+	protected int stringLength;
 	protected int markIndex;
+	protected String string;
 
 }

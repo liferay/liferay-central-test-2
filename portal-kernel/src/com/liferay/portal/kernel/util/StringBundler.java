@@ -38,12 +38,12 @@ public class StringBundler {
 		_array = new String[_DEFAULT_ARRAY_CAPACITY];
 	}
 
-	public StringBundler(int arrayCapacity) {
-		if (arrayCapacity <= 0) {
+	public StringBundler(int initialCapacity) {
+		if (initialCapacity <= 0) {
 			throw new IllegalArgumentException();
 		}
 
-		_array = new String[arrayCapacity];
+		_array = new String[initialCapacity];
 	}
 
 	public StringBundler(String s) {

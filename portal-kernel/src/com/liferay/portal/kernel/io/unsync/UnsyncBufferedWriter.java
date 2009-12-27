@@ -40,115 +40,140 @@ public class UnsyncBufferedWriter extends Writer {
 		this(writer, _DEFAULT_BUFFER_SIZE);
 	}
 
-	public UnsyncBufferedWriter(Writer writer, int bufferSize) {
-		if (bufferSize <= 0) {
-			throw new IllegalArgumentException("Buffer size <= 0");
+	public UnsyncBufferedWriter(Writer writer, int size) {
+		if (size <= 0) {
+			throw new IllegalArgumentException("Buffer size is less than 0");
 		}
+
 		this.writer = writer;
-		buffer = new char[bufferSize];
-		this.bufferSize = bufferSize;
-		count = 0;
-		lineSeparator = System.getProperty("line.separator");
+		this.size = size;
+
+		buffer = new char[size];
 	}
 
 	public void close() throws IOException {
 		if (writer == null) {
 			return;
 		}
+
 		if (count > 0) {
 			writer.write(buffer, 0, count);
+
 			count = 0;
 		}
+
 		writer.flush();
 		writer.close();
+
 		writer = null;
 		buffer = null;
-	}
-
-	public void newLine() throws IOException {
-		write(lineSeparator);
 	}
 
 	public void flush() throws IOException {
 		if (count > 0) {
 			writer.write(buffer, 0, count);
+
 			count = 0;
 		}
+
 		writer.flush();
+	}
+
+	public void newLine() throws IOException {
+		write(_LINE_SEPARATOR);
+	}
+
+	public void write(char[] charArray, int offset, int length)
+		throws IOException {
+
+		if (writer == null) {
+			throw new IOException("Writer is null");
+		}
+
+		if (length >= size) {
+			if (count > 0) {
+				writer.write(buffer, 0, count);
+
+				count = 0;
+			}
+
+			writer.write(charArray, offset, length);
+
+			return;
+		}
+
+		if ((count > 0) && (length > (size - count))) {
+			writer.write(buffer, 0, count);
+
+			count = 0;
+		}
+
+		System.arraycopy(charArray, offset, buffer, count, length);
+
+		count += length;
 	}
 
 	public void write(int c) throws IOException {
 		if (writer == null) {
-			throw new IOException("Writer closed");
+			throw new IOException("Writer is null");
 		}
 
-		if (count >= bufferSize) {
+		if (count >= size) {
 			writer.write(buffer);
+
 			count = 0;
 		}
-		buffer[count++] = (char) c;
+
+		buffer[count++] = (char)c;
 	}
 
-	public void write(char[] cbuf, int off, int len) throws IOException {
-		if (writer == null) {
-			throw new IOException("Writer closed");
-		}
-		//Directly write
-		if (len >= bufferSize) {
-			if (count > 0) {
-				writer.write(buffer, 0, count);
-				count = 0;
-			}
-			writer.write(cbuf, off, len);
-			return;
-		}
-		//Auto flush
-		if (count > 0 && len > bufferSize - count) {
-			writer.write(buffer, 0, count);
-			count = 0;
-		}
-		System.arraycopy(cbuf, off, buffer, count, len);
-		count += len;
-	}
+	public void write(String string, int offset, int length)
+		throws IOException {
 
-	public void write(String s, int off, int len) throws IOException {
 		if (writer == null) {
-			throw new IOException("Writer closed");
+			throw new IOException("Writer is null");
 		}
 
-		int begin = off;
-		int end = off + len;
-		while (begin < end) {
-			//Flush buffer
-			if (count >= bufferSize) {
+		int x = offset;
+		int y = offset + length;
+
+		while (x < y) {
+			if (count >= size) {
 				writer.write(buffer);
+
 				count = 0;
 			}
-			int leftFreeSpace = bufferSize - count;
-			int leftDataSize = end - begin;
+
+			int leftFreeSpace = size - count;
+			int leftDataSize = y - x;
+
 			if (leftFreeSpace > leftDataSize) {
-				//last copy
-				s.getChars(begin, end, buffer, count);
+				string.getChars(x, y, buffer, count);
+
 				count += leftDataSize;
+
 				break;
 			}
 			else {
-				//need more copy
-				int copyEnd = begin + leftFreeSpace;
-				s.getChars(begin, copyEnd, buffer, count);
-				count += leftFreeSpace;
-				begin = copyEnd;
-			}
+				int copyEnd = x + leftFreeSpace;
 
+				string.getChars(x, copyEnd, buffer, count);
+
+				count += leftFreeSpace;
+
+				x = copyEnd;
+			}
 		}
 	}
 
-	protected Writer writer;
 	protected char[] buffer;
-	protected int bufferSize;
 	protected int count;
-	protected String lineSeparator;
+	protected int size;
+	protected Writer writer;
 
 	private static int _DEFAULT_BUFFER_SIZE = 8192;
+
+	private static String _LINE_SEPARATOR = System.getProperty(
+		"line.separator");
 
 }

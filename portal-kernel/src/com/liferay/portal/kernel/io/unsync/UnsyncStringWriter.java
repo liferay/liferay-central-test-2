@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.io.unsync;
 
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Writer;
 
@@ -46,33 +47,41 @@ public class UnsyncStringWriter extends Writer {
 		}
 	}
 
-	public UnsyncStringWriter(boolean useStringBundler, int initialSize) {
+	public UnsyncStringWriter(boolean useStringBundler, int initialCapacity) {
 		if (useStringBundler) {
-			stringBundler = new StringBundler(initialSize);
+			stringBundler = new StringBundler(initialCapacity);
 		}
 		else {
-			stringBuilder = new StringBuilder(initialSize);
+			stringBuilder = new StringBuilder(initialCapacity);
 		}
 	}
 
 	public UnsyncStringWriter append(char c) {
 		write(c);
+
 		return this;
 	}
 
-	public UnsyncStringWriter append(CharSequence csq) {
-		if (csq == null) {
-			write("null");
+	public UnsyncStringWriter append(CharSequence charSequence) {
+		if (charSequence == null) {
+			write(StringPool.NULL);
 		}
 		else {
-			write(csq.toString());
+			write(charSequence.toString());
 		}
+
 		return this;
 	}
 
-	public UnsyncStringWriter append(CharSequence csq, int start, int end) {
-		CharSequence cs = csq == null ? "null" : csq;
-		write(cs.subSequence(start, end).toString());
+	public UnsyncStringWriter append(
+		CharSequence charSequence, int start, int end) {
+
+		if (charSequence == null) {
+			charSequence = StringPool.NULL;
+		}
+
+		write(charSequence.subSequence(start, end).toString());
+
 		return this;
 	}
 
@@ -108,48 +117,48 @@ public class UnsyncStringWriter extends Writer {
 		}
 	}
 
-	public void write(int c) {
-		if (stringBundler != null) {
-			stringBundler.append(String.valueOf((char) c));
-		}
-		else {
-			stringBuilder.append((char) c);
-		}
-	}
-
-	public void write(String str) {
-		if (stringBundler != null) {
-			stringBundler.append(str);
-		}
-		else {
-			stringBuilder.append(str);
-		}
-	}
-
-	public void write(char[] cbuf) {
-		write(cbuf, 0, cbuf.length);
-
-	}
-
-	public void write(char cbuf[], int off, int len) {
-		if (len <= 0) {
+	public void write(char[] charArray, int offset, int length) {
+		if (length <= 0) {
 			return;
 		}
 
 		if (stringBundler != null) {
-			stringBundler.append(new String(cbuf, off, len));
+			stringBundler.append(new String(charArray, offset, length));
 		}
 		else {
-			stringBuilder.append(cbuf, off, len);
+			stringBuilder.append(charArray, offset, length);
 		}
 	}
 
-	public void write(String str, int off, int len) {
+	public void write(char[] charArray) {
+		write(charArray, 0, charArray.length);
+
+	}
+
+	public void write(int c) {
 		if (stringBundler != null) {
-			stringBundler.append(str.substring(off, off + len));
+			stringBundler.append(String.valueOf((char)c));
 		}
 		else {
-			stringBuilder.append(str.substring(off, off + len));
+			stringBuilder.append((char)c);
+		}
+	}
+
+	public void write(String string) {
+		if (stringBundler != null) {
+			stringBundler.append(string);
+		}
+		else {
+			stringBuilder.append(string);
+		}
+	}
+
+	public void write(String string, int offset, int length) {
+		if (stringBundler != null) {
+			stringBundler.append(string.substring(offset, offset + length));
+		}
+		else {
+			stringBuilder.append(string.substring(offset, offset + length));
 		}
 	}
 

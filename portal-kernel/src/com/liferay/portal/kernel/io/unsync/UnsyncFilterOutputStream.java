@@ -54,12 +54,14 @@ public class UnsyncFilterOutputStream extends OutputStream {
 		outputStream.flush();
 	}
 
-	public void write(byte[] b) throws IOException {
-		outputStream.write(b, 0, b.length);
+	public void write(byte[] byteArray) throws IOException {
+		outputStream.write(byteArray, 0, byteArray.length);
 	}
 
-	public void write(byte[] b, int off, int len) throws IOException {
-		outputStream.write(b, off, len);
+	public void write(byte[] byteArray, int offset, int length)
+		throws IOException {
+
+		outputStream.write(byteArray, offset, length);
 	}
 
 	public void write(int b) throws IOException {

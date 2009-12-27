@@ -36,27 +36,28 @@ import java.io.IOException;
 public class UnsyncBufferedInputStreamTest extends TestCase {
 
 	public void testBlockRead() throws IOException {
-		ByteArrayInputStream bais = new ByteArrayInputStream(_BUFFER);
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			_BUFFER);
 
-		int bufferSize = 10;
+		int size = 10;
 
-		UnsyncBufferedInputStream ubis = new UnsyncBufferedInputStream(
-			bais, bufferSize);
+		UnsyncBufferedInputStream unsyncBufferedInputStream =
+			new UnsyncBufferedInputStream(byteArrayInputStream, size);
 
-		assertEquals(_BUFFER_SIZE, bais.available());
-		assertEquals(_BUFFER_SIZE, ubis.available());
+		assertEquals(_SIZE, byteArrayInputStream.available());
+		assertEquals(_SIZE, unsyncBufferedInputStream.available());
 
 		// In-memory
 
-		assertEquals(0, ubis.read());
-		assertEquals(_BUFFER_SIZE - bufferSize, bais.available());
-		assertEquals(_BUFFER_SIZE - 1, ubis.available());
+		assertEquals(0, unsyncBufferedInputStream.read());
+		assertEquals(_SIZE - size, byteArrayInputStream.available());
+		assertEquals(_SIZE - 1, unsyncBufferedInputStream.available());
 
 		byte[] buffer = new byte[5];
 
-		int number = ubis.read(buffer);
+		int read = unsyncBufferedInputStream.read(buffer);
 
-		assertEquals(buffer.length, number);
+		assertEquals(buffer.length, read);
 
 		for (int i = 1; i < buffer.length + 1; i++) {
 			assertEquals(i, buffer[i - 1]);
@@ -64,291 +65,292 @@ public class UnsyncBufferedInputStreamTest extends TestCase {
 
 		// Exhaust buffer
 
-		assertEquals(6, ubis.read());
-		assertEquals(7, ubis.read());
-		assertEquals(8, ubis.read());
-		assertEquals(9, ubis.read());
+		assertEquals(6, unsyncBufferedInputStream.read());
+		assertEquals(7, unsyncBufferedInputStream.read());
+		assertEquals(8, unsyncBufferedInputStream.read());
+		assertEquals(9, unsyncBufferedInputStream.read());
 
 		// Force reload
 
-		number = ubis.read(buffer);
+		read = unsyncBufferedInputStream.read(buffer);
 
-		assertEquals(buffer.length, number);
+		assertEquals(buffer.length, read);
 
 		for (int i = 10; i < buffer.length + 10; i++) {
 			assertEquals(i, buffer[i - 10]);
 		}
 
-		assertEquals(_BUFFER_SIZE - bufferSize * 2, bais.available());
-		assertEquals(_BUFFER_SIZE - 15, ubis.available());
+		assertEquals(_SIZE - size * 2, byteArrayInputStream.available());
+		assertEquals(_SIZE - 15, unsyncBufferedInputStream.available());
 
 		// Fill the buffer
 
 		buffer = new byte[10];
 
-		number = ubis.read(buffer);
+		read = unsyncBufferedInputStream.read(buffer);
 
-		assertEquals(buffer.length, number);
+		assertEquals(buffer.length, read);
 
 		for (int i = 15; i < buffer.length + 15; i++) {
 			assertEquals(i, buffer[i - 15]);
 		}
 
-		assertEquals(_BUFFER_SIZE - bufferSize * 3, bais.available());
-		assertEquals(_BUFFER_SIZE - 25, ubis.available());
+		assertEquals(_SIZE - size * 3, byteArrayInputStream.available());
+		assertEquals(_SIZE - 25, unsyncBufferedInputStream.available());
 
 		// Leave 5 bytes
 
-		for (int i = 25; i < _BUFFER_SIZE - 5; i++) {
-			assertEquals(i & 0xff, ubis.read());
+		for (int i = 25; i < _SIZE - 5; i++) {
+			assertEquals(i & 0xff, unsyncBufferedInputStream.read());
 		}
 
-		assertEquals(_BUFFER_SIZE % 5, bais.available());
-		assertEquals(5, ubis.available());
+		assertEquals(_SIZE % 5, byteArrayInputStream.available());
+		assertEquals(5, unsyncBufferedInputStream.available());
 
 		// Finish
 
-		number = ubis.read(buffer);
+		read = unsyncBufferedInputStream.read(buffer);
 
-		assertEquals(5, number);
-
-		assertEquals(-1, ubis.read(buffer));
+		assertEquals(5, read);
+		assertEquals(-1, unsyncBufferedInputStream.read(buffer));
 	}
 
 	public void testClose() throws IOException {
-		int bufferSize = 10;
+		int size = 10;
 
-		UnsyncBufferedInputStream ubis = new UnsyncBufferedInputStream(
-			new ByteArrayInputStream(new byte[bufferSize]));
+		UnsyncBufferedInputStream unsyncBufferedInputStream =
+			new UnsyncBufferedInputStream(
+				new ByteArrayInputStream(new byte[size]));
 
-		ubis.close();
+		unsyncBufferedInputStream.close();
 
-		assertTrue(ubis.inputStream == null);
-		assertTrue(ubis.buffer == null);
+		assertTrue(unsyncBufferedInputStream.inputStream == null);
+		assertTrue(unsyncBufferedInputStream.buffer == null);
 	}
 
 	public void testConstructor() throws IOException {
-		int bufferSize = 10;
+		int size = 10;
 
-		UnsyncBufferedInputStream ubis = new UnsyncBufferedInputStream(
-			new ByteArrayInputStream(new byte[bufferSize]));
+		UnsyncBufferedInputStream unsyncBufferedInputStream =
+			new UnsyncBufferedInputStream(
+				new ByteArrayInputStream(new byte[size]));
 
-		assertEquals(bufferSize, ubis.available());
+		assertEquals(size, unsyncBufferedInputStream.available());
 
-		ubis = new UnsyncBufferedInputStream(
-			new ByteArrayInputStream(new byte[bufferSize]), _BUFFER_SIZE);
+		unsyncBufferedInputStream = new UnsyncBufferedInputStream(
+			new ByteArrayInputStream(new byte[size]), _SIZE);
 
-		assertEquals(bufferSize, ubis.available());
+		assertEquals(size, unsyncBufferedInputStream.available());
 	}
 
 	public void testMarkAndReset() throws IOException {
-		UnsyncBufferedInputStream ubis = new UnsyncBufferedInputStream(
-			new ByteArrayInputStream(_BUFFER));
+		UnsyncBufferedInputStream unsyncBufferedInputStream =
+			new UnsyncBufferedInputStream(new ByteArrayInputStream(_BUFFER));
 
 		// Normal
 
-		assertEquals(-1, ubis.markIndex);
+		assertEquals(-1, unsyncBufferedInputStream.markIndex);
 
 		int markLimit = 10;
 
-		ubis.mark(markLimit);
+		unsyncBufferedInputStream.mark(markLimit);
 
-		assertEquals(0, ubis.markIndex);
-		assertEquals(_BUFFER_SIZE, ubis.available());
-		assertEquals(0, ubis.read());
-		assertEquals(1, ubis.read());
-		assertEquals(2, ubis.read());
-		assertEquals(3, ubis.index);
+		assertEquals(0, unsyncBufferedInputStream.markIndex);
+		assertEquals(_SIZE, unsyncBufferedInputStream.available());
+		assertEquals(0, unsyncBufferedInputStream.read());
+		assertEquals(1, unsyncBufferedInputStream.read());
+		assertEquals(2, unsyncBufferedInputStream.read());
+		assertEquals(3, unsyncBufferedInputStream.index);
 
-		ubis.reset();
+		unsyncBufferedInputStream.reset();
 
-		assertEquals(_BUFFER_SIZE, ubis.available());
-		assertEquals(0, ubis.read());
-		assertEquals(1, ubis.read());
-		assertEquals(2, ubis.read());
-		assertEquals(3, ubis.index);
+		assertEquals(_SIZE, unsyncBufferedInputStream.available());
+		assertEquals(0, unsyncBufferedInputStream.read());
+		assertEquals(1, unsyncBufferedInputStream.read());
+		assertEquals(2, unsyncBufferedInputStream.read());
+		assertEquals(3, unsyncBufferedInputStream.index);
 
 		// Overrun
 
 		int bufferSize = 20;
 
-		ubis = new UnsyncBufferedInputStream(
+		unsyncBufferedInputStream = new UnsyncBufferedInputStream(
 			new ByteArrayInputStream(_BUFFER), bufferSize);
 
-		assertEquals(-1, ubis.markIndex);
+		assertEquals(-1, unsyncBufferedInputStream.markIndex);
 
-		ubis.mark(markLimit);
+		unsyncBufferedInputStream.mark(markLimit);
 
-		assertEquals(0, ubis.markIndex);
+		assertEquals(0, unsyncBufferedInputStream.markIndex);
 
 		for (int i = 0; i < bufferSize * 2; i++) {
-			assertEquals(i, ubis.read());
+			assertEquals(i, unsyncBufferedInputStream.read());
 		}
 
-		assertEquals(bufferSize, ubis.index);
-		assertEquals(_BUFFER_SIZE - bufferSize * 2, ubis.available());
-
-		assertEquals(-1, ubis.markIndex);
+		assertEquals(bufferSize, unsyncBufferedInputStream.index);
+		assertEquals(
+			_SIZE - bufferSize * 2, unsyncBufferedInputStream.available());
+		assertEquals(-1, unsyncBufferedInputStream.markIndex);
 
 		// Shuffle
 
-		ubis = new UnsyncBufferedInputStream(
+		unsyncBufferedInputStream = new UnsyncBufferedInputStream(
 			new ByteArrayInputStream(_BUFFER));
 
 		// _MAX_MARK_WASTE_SIZE defaults to 4096
 
 		for (int i = 0; i < 4097; i++) {
-			assertEquals(i & 0xff, ubis.read());
+			assertEquals(i & 0xff, unsyncBufferedInputStream.read());
 		}
 
-		ubis.mark(markLimit);
+		unsyncBufferedInputStream.mark(markLimit);
 
-		assertEquals(_BUFFER_SIZE - 4097, ubis.available());
-		assertEquals(4097 & 0xff, ubis.read());
-		assertEquals(4098 & 0xff, ubis.read());
-		assertEquals(_BUFFER_SIZE - 4099, ubis.available());
+		assertEquals(_SIZE - 4097, unsyncBufferedInputStream.available());
+		assertEquals(4097 & 0xff, unsyncBufferedInputStream.read());
+		assertEquals(4098 & 0xff, unsyncBufferedInputStream.read());
+		assertEquals(_SIZE - 4099, unsyncBufferedInputStream.available());
 
-		ubis.reset();
+		unsyncBufferedInputStream.reset();
 
-		assertEquals(_BUFFER_SIZE - 4097, ubis.available());
-		assertEquals(4097 & 0xff, ubis.read());
-		assertEquals(4098 & 0xff, ubis.read());
-		assertEquals(_BUFFER_SIZE - 4099, ubis.available());
+		assertEquals(_SIZE - 4097, unsyncBufferedInputStream.available());
+		assertEquals(4097 & 0xff, unsyncBufferedInputStream.read());
+		assertEquals(4098 & 0xff, unsyncBufferedInputStream.read());
+		assertEquals(_SIZE - 4099, unsyncBufferedInputStream.available());
 
 		// Grow
 
-		ubis = new UnsyncBufferedInputStream(
+		unsyncBufferedInputStream = new UnsyncBufferedInputStream(
 			new ByteArrayInputStream(_BUFFER), 5);
 
-		assertEquals(0, ubis.read());
-		assertEquals(1, ubis.read());
+		assertEquals(0, unsyncBufferedInputStream.read());
+		assertEquals(1, unsyncBufferedInputStream.read());
 
-		ubis.mark(markLimit);
+		unsyncBufferedInputStream.mark(markLimit);
 
-		assertEquals(2, ubis.read());
-		assertEquals(3, ubis.read());
-		assertEquals(4, ubis.read());
-		assertEquals(5, ubis.read());
+		assertEquals(2, unsyncBufferedInputStream.read());
+		assertEquals(3, unsyncBufferedInputStream.read());
+		assertEquals(4, unsyncBufferedInputStream.read());
+		assertEquals(5, unsyncBufferedInputStream.read());
 
-		ubis.reset();
+		unsyncBufferedInputStream.reset();
 
-		assertEquals(2, ubis.read());
-		assertEquals(3, ubis.read());
-		assertEquals(4, ubis.read());
-		assertEquals(5, ubis.read());
+		assertEquals(2, unsyncBufferedInputStream.read());
+		assertEquals(3, unsyncBufferedInputStream.read());
+		assertEquals(4, unsyncBufferedInputStream.read());
+		assertEquals(5, unsyncBufferedInputStream.read());
 
 		// Grow buffer size to 8192, _MAX_MARK_WASTE_SIZE defaults to 4096
 
-		ubis = new UnsyncBufferedInputStream(
+		unsyncBufferedInputStream = new UnsyncBufferedInputStream(
 			new ByteArrayInputStream(_BUFFER), 16);
 
-		ubis.mark(8192);
+		unsyncBufferedInputStream.mark(8192);
 
-		assertEquals(0, ubis.markIndex);
+		assertEquals(0, unsyncBufferedInputStream.markIndex);
 
 		for (int i = 0; i < 4097; i++) {
-			assertEquals(i & 0xff, ubis.read());
+			assertEquals(i & 0xff, unsyncBufferedInputStream.read());
 		}
 
-		assertEquals(8192, ubis.buffer.length);
-		assertEquals(0, ubis.markIndex);
-		assertEquals(4097, ubis.index);
+		assertEquals(8192, unsyncBufferedInputStream.buffer.length);
+		assertEquals(0, unsyncBufferedInputStream.markIndex);
+		assertEquals(4097, unsyncBufferedInputStream.index);
 
 		// Shuffle
 
-		ubis.mark(8192);
+		unsyncBufferedInputStream.mark(8192);
 
-		assertEquals(4097, ubis.markIndex);
+		assertEquals(4097, unsyncBufferedInputStream.markIndex);
 
 		for (int i = 4097; i < 8193; i++) {
-			assertEquals(i & 0xff, ubis.read());
+			assertEquals(i & 0xff, unsyncBufferedInputStream.read());
 		}
 
-		assertEquals(0, ubis.markIndex);
+		assertEquals(0, unsyncBufferedInputStream.markIndex);
 	}
 
 	public void testMarkSupported() {
-		int bufferSize = 10;
+		int size = 10;
 
-		UnsyncBufferedInputStream ubis = new UnsyncBufferedInputStream(
-			new ByteArrayInputStream(new byte[bufferSize]));
+		UnsyncBufferedInputStream unsyncBufferedInputStream =
+			new UnsyncBufferedInputStream(
+				new ByteArrayInputStream(new byte[size]));
 
-		assertTrue(ubis.markSupported());
+		assertTrue(unsyncBufferedInputStream.markSupported());
 	}
 
 	public void testRead() throws IOException {
-		int bufferSize = 10;
+		int size = 10;
 
-		ByteArrayInputStream bais = new ByteArrayInputStream(_BUFFER);
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			_BUFFER);
 
-		UnsyncBufferedInputStream ubis = new UnsyncBufferedInputStream(
-			bais, bufferSize);
+		UnsyncBufferedInputStream unsyncBufferedInputStream =
+			new UnsyncBufferedInputStream(byteArrayInputStream, size);
 
-		assertEquals(_BUFFER_SIZE, bais.available());
-		assertEquals(_BUFFER_SIZE, ubis.available());
+		assertEquals(_SIZE, byteArrayInputStream.available());
+		assertEquals(_SIZE, unsyncBufferedInputStream.available());
+		assertEquals(0, unsyncBufferedInputStream.read());
+		assertEquals(_SIZE - size, byteArrayInputStream.available());
+		assertEquals(_SIZE - 1, unsyncBufferedInputStream.available());
 
-		assertEquals(0, ubis.read());
-
-		assertEquals(_BUFFER_SIZE - bufferSize, bais.available());
-		assertEquals(_BUFFER_SIZE - 1, ubis.available());
-
-		for (int i = 1; i < bufferSize + 1; i++) {
-			assertEquals(i, ubis.read());
+		for (int i = 1; i < size + 1; i++) {
+			assertEquals(i, unsyncBufferedInputStream.read());
 		}
 
-		assertEquals(_BUFFER_SIZE - bufferSize * 2, bais.available());
-		assertEquals(_BUFFER_SIZE - bufferSize - 1, ubis.available());
+		assertEquals(_SIZE - size * 2, byteArrayInputStream.available());
+		assertEquals(_SIZE - size - 1, unsyncBufferedInputStream.available());
 	}
 
 	public void testSkip() throws IOException {
-		ByteArrayInputStream bais = new ByteArrayInputStream(_BUFFER);
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+			_BUFFER);
 
-		int bufferSize = 10;
+		int size = 10;
 
-		UnsyncBufferedInputStream ubis = new UnsyncBufferedInputStream(
-			bais, bufferSize);
+		UnsyncBufferedInputStream unsyncBufferedInputStream =
+			new UnsyncBufferedInputStream(byteArrayInputStream, size);
 
-		assertEquals(_BUFFER_SIZE, bais.available());
-		assertEquals(_BUFFER_SIZE, ubis.available());
-		assertEquals(0, ubis.read());
-		assertEquals(_BUFFER_SIZE - bufferSize, bais.available());
-		assertEquals(_BUFFER_SIZE - 1, ubis.available());
+		assertEquals(_SIZE, byteArrayInputStream.available());
+		assertEquals(_SIZE, unsyncBufferedInputStream.available());
+		assertEquals(0, unsyncBufferedInputStream.read());
+		assertEquals(_SIZE - size, byteArrayInputStream.available());
+		assertEquals(_SIZE - 1, unsyncBufferedInputStream.available());
 
 		// In-memory
 
-		assertEquals(bufferSize - 1, ubis.skip(bufferSize * 2));
-		assertEquals(10, ubis.read());
-
-		assertEquals(bufferSize - 1, ubis.skip(bufferSize * 2));
+		assertEquals(size - 1, unsyncBufferedInputStream.skip(size * 2));
+		assertEquals(10, unsyncBufferedInputStream.read());
+		assertEquals(size - 1, unsyncBufferedInputStream.skip(size * 2));
 
 		// Underlying input stream
 
-		assertEquals(bufferSize * 2, ubis.skip(bufferSize * 2));
-		assertEquals(40, ubis.read());
+		assertEquals(size * 2, unsyncBufferedInputStream.skip(size * 2));
+		assertEquals(40, unsyncBufferedInputStream.read());
 
 		// Mark
 
-		ubis.mark(bufferSize * 2);
+		unsyncBufferedInputStream.mark(size * 2);
 
 		// In-memory
 
-		assertEquals(bufferSize - 1, ubis.skip(bufferSize * 2));
+		assertEquals(size - 1, unsyncBufferedInputStream.skip(size * 2));
 
 		// Force
 
-		assertEquals(bufferSize / 2, ubis.skip(bufferSize / 2));
+		assertEquals(size / 2, unsyncBufferedInputStream.skip(size / 2));
 
-		ubis.reset();
+		unsyncBufferedInputStream.reset();
 
-		assertEquals(41, ubis.read());
+		assertEquals(41, unsyncBufferedInputStream.read());
 	}
 
-	private static final int _BUFFER_SIZE = 16 * 1024;
+	private static final int _SIZE = 16 * 1024;
 
-	private static final byte[] _BUFFER = new byte[_BUFFER_SIZE];
+	private static final byte[] _BUFFER = new byte[_SIZE];
 
 	static {
-		for (int i = 0; i < _BUFFER_SIZE; i++) {
+		for (int i = 0; i < _SIZE; i++) {
 			_BUFFER[i] = (byte)i;
 		}
 	}

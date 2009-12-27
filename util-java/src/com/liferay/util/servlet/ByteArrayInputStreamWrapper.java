@@ -48,8 +48,8 @@ public class ByteArrayInputStreamWrapper extends ServletInputStream {
 		_byteArrayInputStream.close();
 	}
 
-	public void mark(int readlimit) {
-		_byteArrayInputStream.mark(readlimit);
+	public void mark(int readLimit) {
+		_byteArrayInputStream.mark(readLimit);
 	}
 
 	public boolean markSupported() {
@@ -60,24 +60,24 @@ public class ByteArrayInputStreamWrapper extends ServletInputStream {
 		return _byteArrayInputStream.read();
 	}
 
-	public int read(byte[] b) throws IOException {
-		return _byteArrayInputStream.read(b);
+	public int read(byte[] byteArray) throws IOException {
+		return _byteArrayInputStream.read(byteArray);
 	}
 
-	public int read(byte[] b, int off, int len) {
-		return _byteArrayInputStream.read(b, off, len);
+	public int read(byte[] byteArray, int offset, int length) {
+		return _byteArrayInputStream.read(byteArray, offset, length);
 	}
 
-	public int readLine(byte[] b, int off, int len) {
-		return _byteArrayInputStream.read(b, off, len);
+	public int readLine(byte[] byteArray, int offset, int length) {
+		return _byteArrayInputStream.read(byteArray, offset, length);
 	}
 
 	public void reset() {
 		_byteArrayInputStream.reset();
 	}
 
-	public long skip(long n) {
-		return _byteArrayInputStream.skip(n);
+	public long skip(long skip) {
+		return _byteArrayInputStream.skip(skip);
 	}
 
 	private ByteArrayInputStream _byteArrayInputStream;

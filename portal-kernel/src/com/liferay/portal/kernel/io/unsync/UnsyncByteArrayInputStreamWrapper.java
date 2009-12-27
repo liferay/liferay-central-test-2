@@ -48,8 +48,8 @@ public class UnsyncByteArrayInputStreamWrapper extends ServletInputStream {
 		_unsyncByteArrayInputStream.close();
 	}
 
-	public void mark(int readlimit) {
-		_unsyncByteArrayInputStream.mark(readlimit);
+	public void mark(int readLimit) {
+		_unsyncByteArrayInputStream.mark(readLimit);
 	}
 
 	public boolean markSupported() {
@@ -60,24 +60,24 @@ public class UnsyncByteArrayInputStreamWrapper extends ServletInputStream {
 		return _unsyncByteArrayInputStream.read();
 	}
 
-	public int read(byte[] b) {
-		return _unsyncByteArrayInputStream.read(b);
+	public int read(byte[] byteArray) {
+		return _unsyncByteArrayInputStream.read(byteArray);
 	}
 
-	public int read(byte[] b, int off, int len) {
-		return _unsyncByteArrayInputStream.read(b, off, len);
+	public int read(byte[] byteArray, int offset, int length) {
+		return _unsyncByteArrayInputStream.read(byteArray, offset, length);
 	}
 
-	public int readLine(byte[] b, int off, int len) {
-		return _unsyncByteArrayInputStream.read(b, off, len);
+	public int readLine(byte[] byteArray, int offset, int length) {
+		return _unsyncByteArrayInputStream.read(byteArray, offset, length);
 	}
 
 	public void reset() {
 		_unsyncByteArrayInputStream.reset();
 	}
 
-	public long skip(long n) {
-		return _unsyncByteArrayInputStream.skip(n);
+	public long skip(long skip) {
+		return _unsyncByteArrayInputStream.skip(skip);
 	}
 
 	private UnsyncByteArrayInputStream _unsyncByteArrayInputStream;

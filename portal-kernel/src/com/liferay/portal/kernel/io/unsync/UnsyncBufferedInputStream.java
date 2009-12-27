@@ -87,54 +87,56 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 		return buffer[index++] & 0xff;
 	}
 
-	public int read(byte[] b) throws IOException {
-		return read(b, 0, b.length);
+	public int read(byte[] byteArray) throws IOException {
+		return read(byteArray, 0, byteArray.length);
 	}
 
-	public int read(byte[] b, int off, int len) throws IOException {
+	public int read(byte[] byteArray, int offset, int length)
+		throws IOException {
+
 		if (inputStream == null) {
 			throw new IOException("Input stream is null");
 		}
 
-		if (len <= 0) {
+		if (length <= 0) {
 			return 0;
 		}
 
-		int readNumber = 0;
+		int read = 0;
 
 		while (true) {
-			int inBufferAvailable = firstInvalidIndex - index;
+			int available = firstInvalidIndex - index;
 
-			if ((inBufferAvailable + readNumber) >= len) {
+			if ((available + read) >= length) {
 
 				// Enough data, stop reading
 
-				int leftSize = len - readNumber;
+				int leftSize = length - read;
 
-				System.arraycopy(buffer, index, b, readNumber, leftSize);
+				System.arraycopy(buffer, index, byteArray, read, leftSize);
 
 				index += leftSize;
 
-				return len;
+				return length;
 			}
 
-			if (inBufferAvailable <= 0) {
+			if (available <= 0) {
 
 				// No more data in buffer, continue reading
 
 				readUnderlyingInputStream();
 
-				inBufferAvailable = firstInvalidIndex - index;
+				available = firstInvalidIndex - index;
 
-				if (inBufferAvailable <= 0) {
+				if (available <= 0) {
 
 					// Cannot read any more, stop reading
 
-					if (readNumber == 0) {
+					if (read == 0) {
 						return -1;
 					}
 					else {
-						return readNumber;
+						return read;
 					}
 				}
 			}
@@ -143,10 +145,10 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 				// Copy all in-memory data, continue reading
 
 				System.arraycopy(
-					buffer, index, b, readNumber, inBufferAvailable);
+					buffer, index, byteArray, read, available);
 
-				index += inBufferAvailable;
-				readNumber += inBufferAvailable;
+				index += available;
+				read += available;
 			}
 		}
 	}
@@ -162,27 +164,22 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 		index = markIndex;
 	}
 
-	public long skip(long n) throws IOException {
+	public long skip(long skip) throws IOException {
 		if (inputStream == null) {
 			throw new IOException("Input stream is null");
 		}
 
-		if (n <= 0) {
+		if (skip <= 0) {
 			return 0;
 		}
+		long available = firstInvalidIndex - index;
 
-		long skipped = 0;
-		long inBufferAvailable = firstInvalidIndex - index;
-
-		if (inBufferAvailable > 0) {
+		if (available > 0) {
 
 			// Skip the data in buffer
 
-			if (inBufferAvailable < n) {
-				skipped = inBufferAvailable;
-			}
-			else {
-				skipped = n;
+			if (available < skip) {
+				skip = available;
 			}
 		}
 		else {
@@ -193,7 +190,7 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 
 				// No mark required, skip
 
-				skipped = inputStream.skip(n);
+				skip = inputStream.skip(skip);
 			}
 			else {
 
@@ -201,28 +198,25 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 
 				readUnderlyingInputStream();
 
-				inBufferAvailable = firstInvalidIndex - index;
+				available = firstInvalidIndex - index;
 
-				if (inBufferAvailable > 0) {
+				if (available > 0) {
 
 					// Skip the data in buffer
 
-					if (inBufferAvailable < n) {
-						skipped = inBufferAvailable;
-					}
-					else {
-						skipped = n;
+					if (available < skip) {
+						skip = available;
 					}
 				}
 			}
 		}
 
-		index += skipped;
+		index += skip;
 
-		return skipped;
+		return skip;
 	}
 
-	private void readUnderlyingInputStream() throws IOException {
+	protected void readUnderlyingInputStream() throws IOException {
 		if (inputStream == null) {
 			throw new IOException("Input stream is null");
 		}

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.io.unsync;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.IOException;
@@ -38,29 +39,31 @@ import java.io.Reader;
  */
 public class UnsyncBufferedReader extends Reader {
 
-	public UnsyncBufferedReader(Reader reader, int bufferSize) {
-		this.reader = reader;
-		buffer = new char[bufferSize];
+	public UnsyncBufferedReader(Reader reader) {
+		this(reader, _DEFAULT_BUFFER_SIZE);
 	}
 
-	public UnsyncBufferedReader(Reader in) {
-		this(in, _DEFAULT_BUFFER_SIZE);
+	public UnsyncBufferedReader(Reader reader, int size) {
+		this.reader = reader;
+		buffer = new char[size];
 	}
 
 	public void close() throws IOException {
 		if (reader == null) {
-			throw new IOException("Reader closed");
+			throw new IOException("Reader is null");
 		}
+
 		reader.close();
+
 		reader = null;
 		buffer = null;
-
 	}
 
 	public void mark(int markLimit) throws IOException {
 		if (reader == null) {
-			throw new IOException("Reader closed");
+			throw new IOException("Reader is null");
 		}
+
 		this.markLimit = markLimit;
 		markIndex = index;
 	}
@@ -71,91 +74,99 @@ public class UnsyncBufferedReader extends Reader {
 
 	public int read() throws IOException {
 		if (reader == null) {
-			throw new IOException("Reader closed");
+			throw new IOException("Reader is null");
 		}
+
 		if (index >= firstInvalidIndex) {
 			readUnderlyingReader();
+
 			if (index >= firstInvalidIndex) {
 				return -1;
 			}
 		}
+
 		return buffer[index++];
 	}
 
-	public int read(char[] b) throws IOException {
-		return read(b, 0, b.length);
+	public int read(char[] charArray) throws IOException {
+		return read(charArray, 0, charArray.length);
 	}
 
-	public int read(char[] b, int off, int len) throws IOException {
+	public int read(char[] charArray, int offset, int length)
+		throws IOException {
+
 		if (reader == null) {
-			throw new IOException("Reader closed");
+			throw new IOException("Reader is null");
 		}
 
-		if (len <= 0) {
+		if (length <= 0) {
 			return 0;
 		}
 
-		int readNumber = 0;
+		int read = 0;
 
 		while (true) {
-			int inBufferAvailable = firstInvalidIndex - index;
+			int available = firstInvalidIndex - index;
 
-			if ((inBufferAvailable + readNumber) >= len) {
+			if ((available + read) >= length) {
 
 				// Enough data, stop reading
 
-				int leftSize = len - readNumber;
+				int leftSize = length - read;
 
-				System.arraycopy(buffer, index, b, readNumber, leftSize);
+				System.arraycopy(buffer, index, charArray, read, leftSize);
 
 				index += leftSize;
 
-				return len;
+				return length;
 			}
 
-			if (inBufferAvailable <= 0) {
+			if (available <= 0) {
 
 				// No more data in buffer, continue reading
 
 				readUnderlyingReader();
 
-				inBufferAvailable = firstInvalidIndex - index;
+				available = firstInvalidIndex - index;
 
-				if (inBufferAvailable <= 0) {
+				if (available <= 0) {
 
 					// Cannot read any more, stop reading
 
-					return readNumber == 0 ? -1 : readNumber;
+					if (read == 0) {
+						return -1;
+					}
+					else {
+						return read;
+					}
 				}
 			}
 			else {
 
 				// Copy all in-memory data, continue reading
 
-				System.arraycopy(
-					buffer, index, b, readNumber, inBufferAvailable);
+				System.arraycopy(buffer, index, charArray, read, available);
 
-				index += inBufferAvailable;
-				readNumber += inBufferAvailable;
+				index += available;
+				read += available;
 			}
 		}
 	}
 
 	public String readLine() throws IOException {
 		if (reader == null) {
-			throw new IOException("Reader closed");
+			throw new IOException("Reader is null");
 		}
 
 		StringBundler sb = null;
 
 		while (true) {
-			//Fill buffer if needed
 			if (index >= firstInvalidIndex) {
 				readUnderlyingReader();
 			}
+
 			if (index >= firstInvalidIndex) {
-				//No more data, stop reading
-				if (sb != null && sb.index() > 0) {
+				if ((sb != null) && (sb.index() > 0)) {
 					return sb.toString();
 				}
 				else {
@@ -163,62 +174,62 @@ public class UnsyncBufferedReader extends Reader {
 				}
 			}
 
-			boolean isLineEnd = false;
-			int lineStartPosition = index;
-			int lineEndPosition = index;
+			boolean hasLineBreak = false;
 			char lineEndChar = 0;
 
-			//Search line end position
-			while (lineEndPosition < firstInvalidIndex) {
-				lineEndChar = buffer[lineEndPosition];
-				if ((lineEndChar == '\n') || (lineEndChar == '\r')) {
-					isLineEnd = true;
+			int x = index;
+			int y = index;
+
+			while (y < firstInvalidIndex) {
+				lineEndChar = buffer[y];
+
+				if ((lineEndChar == CharPool.NEW_LINE) ||
+					(lineEndChar == CharPool.RETURN)) {
+
+					hasLineBreak = true;
+
 					break;
 				}
-				lineEndPosition++;
+
+				y++;
 			}
 
-			String thisLine =
-				new String(buffer, lineStartPosition,
-					lineEndPosition - lineStartPosition);
+			String line = new String(buffer, x, y - x);
 
-			//skip line data
-			index = lineEndPosition;
+			index = y;
 
-			if (isLineEnd) {
-				//skip line end char '\n' or '\r'
+			if (hasLineBreak) {
 				index++;
-				if (lineEndChar == '\r') {
-					//if end with '\r', check next char for '\n'
-					if (index < buffer.length && buffer[index] == '\n') {
-						//skip '\n'
+
+				if (lineEndChar == CharPool.RETURN) {
+					if ((index < buffer.length) &&
+						(buffer[index] == CharPool.NEW_LINE)) {
+
 						index++;
 					}
 				}
 
 				if (sb == null) {
-					//SB has not been created yet, return the String directly
-					return thisLine;
+					return line;
 				}
 				else {
-					//Append to SB, then get the final String
-					sb.append(thisLine);
+					sb.append(line);
+
 					return sb.toString();
 				}
-
 			}
 
-			//lazy create SB
 			if (sb == null) {
 				sb = new StringBundler();
 			}
-			sb.append(thisLine);
+
+			sb.append(line);
 		}
 	}
 
 	public boolean ready() throws IOException {
 		if (reader == null) {
-			throw new IOException("Reader closed");
+			throw new IOException("Reader is null");
 		}
 
 		return (index < firstInvalidIndex) || reader.ready();
@@ -226,8 +237,9 @@ public class UnsyncBufferedReader extends Reader {
 
 	public void reset() throws IOException {
 		if (reader == null) {
-			throw new IOException("Reader closed");
+			throw new IOException("Reader is null");
 		}
+
 		if (markIndex < 0) {
 			throw new IOException("Resetting to invalid mark");
 		}
@@ -235,27 +247,23 @@ public class UnsyncBufferedReader extends Reader {
 		index = markIndex;
 	}
 
-	public long skip(long n) throws IOException {
+	public long skip(long skip) throws IOException {
 		if (reader == null) {
-			throw new IOException("Reader closed");
+			throw new IOException("Reader is null");
 		}
 
-		if (n <= 0) {
+		if (skip <= 0) {
 			return 0;
 		}
 
-		long skipped = 0;
-		long inBufferAvailable = firstInvalidIndex - index;
+		long available = firstInvalidIndex - index;
 
-		if (inBufferAvailable > 0) {
+		if (available > 0) {
 
 			// Skip the data in buffer
 
-			if (inBufferAvailable < n) {
-				skipped = inBufferAvailable;
-			}
-			else {
-				skipped = n;
+			if (available < skip) {
+				skip = available;
 			}
 		}
 		else {
@@ -266,7 +274,7 @@ public class UnsyncBufferedReader extends Reader {
 
 				// No mark required, skip
 
-				skipped = reader.skip(n);
+				skip = reader.skip(skip);
 			}
 			else {
 
@@ -274,30 +282,27 @@ public class UnsyncBufferedReader extends Reader {
 
 				readUnderlyingReader();
 
-				inBufferAvailable = firstInvalidIndex - index;
+				available = firstInvalidIndex - index;
 
-				if (inBufferAvailable > 0) {
+				if (available > 0) {
 
 					// Skip the data in buffer
 
-					if (inBufferAvailable < n) {
-						skipped = inBufferAvailable;
-					}
-					else {
-						skipped = n;
+					if (available < skip) {
+						skip = available;
 					}
 				}
 			}
 		}
 
-		index += skipped;
+		index += skip;
 
-		return skipped;
+		return skip;
 	}
 
-	private void readUnderlyingReader() throws IOException {
+	protected void readUnderlyingReader() throws IOException {
 		if (reader == null) {
-			throw new IOException("Reader closed");
+			throw new IOException("Reader is null");
 		}
 
 		if (markIndex < 0) {

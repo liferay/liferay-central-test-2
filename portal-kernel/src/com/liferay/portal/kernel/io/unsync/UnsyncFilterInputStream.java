@@ -60,20 +60,22 @@ public class UnsyncFilterInputStream extends InputStream {
 		return inputStream.read();
 	}
 
-	public int read(byte[] b) throws IOException {
-		return inputStream.read(b);
+	public int read(byte[] byteArray) throws IOException {
+		return inputStream.read(byteArray);
 	}
 
-	public int read(byte[] b, int off, int len) throws IOException {
-		return inputStream.read(b, off, len);
+	public int read(byte[] byteArray, int offset, int length)
+		throws IOException {
+
+		return inputStream.read(byteArray, offset, length);
 	}
 
 	public void reset() throws IOException {
 		inputStream.reset();
 	}
 
-	public long skip(long n) throws IOException {
-		return inputStream.skip(n);
+	public long skip(long skip) throws IOException {
+		return inputStream.skip(skip);
 	}
 
 	protected InputStream inputStream;

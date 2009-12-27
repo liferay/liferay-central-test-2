@@ -38,18 +38,18 @@ public class UnsyncByteArrayInputStream extends InputStream {
 	public UnsyncByteArrayInputStream(byte[] buffer) {
 		this.buffer = buffer;
 		this.index = 0;
-		this.capability = buffer.length;
+		this.capacity = buffer.length;
 	}
 
 	public UnsyncByteArrayInputStream(byte[] buffer, int offset, int length) {
 		this.buffer = buffer;
 		this.index = offset;
-		this.capability = Math.max(buffer.length, offset + length);
+		this.capacity = Math.max(buffer.length, offset + length);
 		this.markIndex = offset;
 	}
 
 	public int available() {
-		return capability - index;
+		return capacity - index;
 	}
 
 	public void mark(int readAheadLimit) {
@@ -61,7 +61,7 @@ public class UnsyncByteArrayInputStream extends InputStream {
 	}
 
 	public int read() {
-		if (index < capability) {
+		if (index < capacity) {
 			return buffer[index++] & 0xff;
 		}
 		else {
@@ -69,54 +69,52 @@ public class UnsyncByteArrayInputStream extends InputStream {
 		}
 	}
 
-	public int read(byte[] b) {
-		return read(b, 0, b.length);
+	public int read(byte[] byteArray) {
+		return read(byteArray, 0, byteArray.length);
 	}
 
-	public int read(byte[] b, int off, int len) {
-		if (len <= 0) {
+	public int read(byte[] byteArray, int offset, int length) {
+		if (length <= 0) {
 			return 0;
 		}
 
-		if (index >= capability) {
+		if (index >= capacity) {
 			return -1;
 		}
 
-		int length = len;
+		int read = length;
 
-		if (index + length > capability) {
-			length = capability - index;
+		if ((index + read) > capacity) {
+			read = capacity - index;
 		}
 
-		System.arraycopy(buffer, index, b, off, length);
+		System.arraycopy(buffer, index, byteArray, offset, read);
 
-		index += length;
+		index += read;
 
-		return length;
+		return read;
 	}
 
 	public void reset() {
 		index = markIndex;
 	}
 
-	public long skip(long n) {
-		if (n < 0) {
+	public long skip(long skip) {
+		if (skip < 0) {
 			return 0;
 		}
 
-		long number = n;
-
-		if ((index + number) > capability) {
-			number = capability - index;
+		if ((skip + index) > capacity) {
+			skip = capacity - index;
 		}
 
-		index += number;
+		index += skip;
 
-		return number;
+		return skip;
 	}
 
 	protected byte[] buffer;
-	protected int capability;
+	protected int capacity;
 	protected int index;
 	protected int markIndex;
 

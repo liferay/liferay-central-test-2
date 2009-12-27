@@ -38,69 +38,73 @@ import java.util.Arrays;
 public class UnsyncBufferedOutputStreamTest extends TestCase {
 
 	public void testBlockWrite() throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
-		UnsyncBufferedOutputStream ubos = new UnsyncBufferedOutputStream(
-			baos, _BUFFER_SIZE * 2);
+		UnsyncBufferedOutputStream unsyncBufferedOutputStream =
+			new UnsyncBufferedOutputStream(byteArrayOutputStream, _SIZE * 2);
 
-		assertEquals(_BUFFER_SIZE * 2, ubos.buffer.length);
+		assertEquals(_SIZE * 2, unsyncBufferedOutputStream.buffer.length);
 
-		ubos.write(_BUFFER);
+		unsyncBufferedOutputStream.write(_BUFFER);
 
-		for (int i = 0; i < _BUFFER_SIZE; i++) {
-			assertEquals(i, ubos.buffer[i]);
+		for (int i = 0; i < _SIZE; i++) {
+			assertEquals(i, unsyncBufferedOutputStream.buffer[i]);
 		}
 
-		ubos.write(_BUFFER);
+		unsyncBufferedOutputStream.write(_BUFFER);
 
-		for (int i = _BUFFER_SIZE; i < _BUFFER_SIZE * 2; i++) {
-			assertEquals(i - _BUFFER_SIZE, ubos.buffer[i]);
+		for (int i = _SIZE; i < _SIZE * 2; i++) {
+			assertEquals(i - _SIZE, unsyncBufferedOutputStream.buffer[i]);
 		}
 
-		ubos.write(100);
+		unsyncBufferedOutputStream.write(100);
 
-		assertEquals(100, ubos.buffer[0]);
-		assertEquals(_BUFFER_SIZE * 2, baos.size());
+		assertEquals(100, unsyncBufferedOutputStream.buffer[0]);
+		assertEquals(_SIZE * 2, byteArrayOutputStream.size());
 	}
 
 	public void testConstructor() {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
-		UnsyncBufferedOutputStream ubos = new UnsyncBufferedOutputStream(
-			baos);
+		UnsyncBufferedOutputStream unsyncBufferedOutputStream =
+			new UnsyncBufferedOutputStream(byteArrayOutputStream);
 
-		assertEquals(8192, ubos.buffer.length);
+		assertEquals(8192, unsyncBufferedOutputStream.buffer.length);
 
-		ubos = new UnsyncBufferedOutputStream(baos, 10);
+		unsyncBufferedOutputStream = new UnsyncBufferedOutputStream(
+			byteArrayOutputStream, 10);
 
-		assertEquals(10, ubos.buffer.length);
+		assertEquals(10, unsyncBufferedOutputStream.buffer.length);
 	}
 
 	public void testWrite() throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
-		UnsyncBufferedOutputStream ubos = new UnsyncBufferedOutputStream(
-			baos, _BUFFER_SIZE * 2);
+		UnsyncBufferedOutputStream unsyncBufferedOutputStream =
+			new UnsyncBufferedOutputStream(byteArrayOutputStream, _SIZE * 2);
 
-		assertEquals(_BUFFER_SIZE * 2, ubos.buffer.length);
+		assertEquals(_SIZE * 2, unsyncBufferedOutputStream.buffer.length);
 
-		for (int i = 0; i < _BUFFER_SIZE; i++) {
-			ubos.write(i);
+		for (int i = 0; i < _SIZE; i++) {
+			unsyncBufferedOutputStream.write(i);
 
-			assertEquals(i, ubos.buffer[i]);
+			assertEquals(i, unsyncBufferedOutputStream.buffer[i]);
 		}
 
-		ubos.flush();
+		unsyncBufferedOutputStream.flush();
 
-		assertTrue(Arrays.equals(_BUFFER, baos.toByteArray()));
+		assertTrue(Arrays.equals(_BUFFER, byteArrayOutputStream.toByteArray()));
 	}
 
-	private static final int _BUFFER_SIZE = 10;
+	private static final int _SIZE = 10;
 
-	private static final byte[] _BUFFER = new byte[_BUFFER_SIZE];
+	private static final byte[] _BUFFER = new byte[_SIZE];
 
 	static {
-		for (int i = 0; i < _BUFFER_SIZE; i++) {
+		for (int i = 0; i < _SIZE; i++) {
 			_BUFFER[i] = (byte)i;
 		}
 	}

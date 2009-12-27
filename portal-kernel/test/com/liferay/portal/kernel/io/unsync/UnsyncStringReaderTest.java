@@ -35,66 +35,77 @@ import java.util.Arrays;
 public class UnsyncStringReaderTest extends TestCase {
 
 	public void testBlockRead() {
-		UnsyncStringReader usr = new UnsyncStringReader("abcdefg");
-		char[] resultData = new char[4];
-		int number = usr.read(resultData);
-		assertEquals(4, number);
-		assertEquals(4, usr.index);
-		assertTrue(Arrays.equals("abcd".toCharArray(), resultData));
-		number = usr.read(resultData);
-		assertEquals(3, number);
-		assertEquals('e', resultData[0]);
-		assertEquals('f', resultData[1]);
-		assertEquals('g', resultData[2]);
-		number = usr.read(resultData);
-		assertEquals(-1, number);
+		UnsyncStringReader unsyncStringReader = new UnsyncStringReader(
+			"abcdefg");
+
+		char[] charArray = new char[4];
+
+		assertEquals(4, unsyncStringReader.read(charArray));
+		assertEquals(4, unsyncStringReader.index);
+		assertTrue(Arrays.equals("abcd".toCharArray(), charArray));
+
+		assertEquals(3, unsyncStringReader.read(charArray));
+		assertEquals('e', charArray[0]);
+		assertEquals('f', charArray[1]);
+		assertEquals('g', charArray[2]);
+
+		assertEquals(-1, unsyncStringReader.read(charArray));
 	}
 
 	public void testConstructor() {
-		UnsyncStringReader usr = new UnsyncStringReader("abc");
-		assertEquals("abc", usr.string);
-		assertEquals(3, usr.capability);
+		UnsyncStringReader unsyncStringReader = new UnsyncStringReader("abc");
 
-		usr = new UnsyncStringReader("defg");
-		assertEquals("defg", usr.string);
-		assertEquals(4, usr.capability);
+		assertEquals("abc", unsyncStringReader.string);
+		assertEquals(3, unsyncStringReader.stringLength);
+
+		unsyncStringReader = new UnsyncStringReader("defg");
+
+		assertEquals("defg", unsyncStringReader.string);
+		assertEquals(4, unsyncStringReader.stringLength);
 	}
 
 	public void testMarkAndReset() {
-		UnsyncStringReader usr = new UnsyncStringReader("abc");
-		assertEquals('a', usr.read());
-		usr.mark(-1);
-		assertEquals('b', usr.read());
-		assertEquals('c', usr.read());
-		assertEquals(-1, usr.read());
-		usr.reset();
-		assertEquals('b', usr.read());
-		assertEquals('c', usr.read());
-		assertEquals(-1, usr.read());
+		UnsyncStringReader unsyncStringReader = new UnsyncStringReader("abc");
+
+		assertEquals('a', unsyncStringReader.read());
+
+		unsyncStringReader.mark(-1);
+
+		assertEquals('b', unsyncStringReader.read());
+		assertEquals('c', unsyncStringReader.read());
+		assertEquals(-1, unsyncStringReader.read());
+
+		unsyncStringReader.reset();
+
+		assertEquals('b', unsyncStringReader.read());
+		assertEquals('c', unsyncStringReader.read());
+		assertEquals(-1, unsyncStringReader.read());
 	}
 
 	public void testMarkSupported() {
-		UnsyncStringReader usr = new UnsyncStringReader("abc");
-		assertTrue(usr.markSupported());
+		UnsyncStringReader unsyncStringReader = new UnsyncStringReader("abc");
+
+		assertTrue(unsyncStringReader.markSupported());
 	}
 
 	public void testRead() {
-		UnsyncStringReader usr = new UnsyncStringReader("abc");
-		assertEquals('a', usr.read());
-		assertEquals('b', usr.read());
-		assertEquals('c', usr.read());
-		assertEquals(-1, usr.read());
+		UnsyncStringReader unsyncStringReader = new UnsyncStringReader("abc");
+
+		assertEquals('a', unsyncStringReader.read());
+		assertEquals('b', unsyncStringReader.read());
+		assertEquals('c', unsyncStringReader.read());
+		assertEquals(-1, unsyncStringReader.read());
 	}
 
 	public void testSkip() {
-		UnsyncStringReader usr = new UnsyncStringReader("abcdef");
-		assertEquals('a', usr.read());
-		long skippedNumber = usr.skip(2);
-		assertEquals(2, skippedNumber);
-		assertEquals('d', usr.read());
-		skippedNumber = usr.skip(3);
-		assertEquals(2, skippedNumber);
-		assertEquals(-1, usr.read());
+		UnsyncStringReader unsyncStringReader = new UnsyncStringReader(
+			"abcdef");
+
+		assertEquals('a', unsyncStringReader.read());
+		assertEquals(2, unsyncStringReader.skip(2));
+		assertEquals('d', unsyncStringReader.read());
+		assertEquals(2, unsyncStringReader.skip(3));
+		assertEquals(-1, unsyncStringReader.read());
 	}
 
 }
