@@ -83,18 +83,19 @@ public class UnicodeProperties extends HashMap<String, String> {
 			return;
 		}
 
-		UnsyncBufferedReader br = null;
+		UnsyncBufferedReader unsyncBufferedReader = null;
 
 		try {
-			br = new UnsyncBufferedReader(new UnsyncStringReader(props));
+			unsyncBufferedReader = new UnsyncBufferedReader(
+				new UnsyncStringReader(props));
 
-			String line = br.readLine();
+			String line = unsyncBufferedReader.readLine();
 
 			while (line != null) {
 				line = line.trim();
 
 				if (_isComment(line)) {
-					line = br.readLine();
+					line = unsyncBufferedReader.readLine();
 
 					continue;
 				}
@@ -115,13 +116,13 @@ public class UnicodeProperties extends HashMap<String, String> {
 					_log.error("Invalid property on line " + line);
 				}
 
-				line = br.readLine();
+				line = unsyncBufferedReader.readLine();
 			}
 		}
 		finally {
-			if (br != null) {
+			if (unsyncBufferedReader != null) {
 				try {
-					br.close();
+					unsyncBufferedReader.close();
 				}
 				catch (Exception e) {
 				}

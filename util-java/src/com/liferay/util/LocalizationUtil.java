@@ -401,11 +401,13 @@ public class LocalizationUtil {
 				availableLocales = StringUtil.remove(
 					availableLocales, requestedLanguageId, StringPool.COMMA);
 
-				UnsyncStringWriter sw = new UnsyncStringWriter(true);
+				UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
+					true);
 
 				XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 
-				writer = outputFactory.createXMLStreamWriter(sw);
+				writer = outputFactory.createXMLStreamWriter(
+					unsyncStringWriter);
 
 				writer.writeStartDocument();
 				writer.writeStartElement(_ROOT);
@@ -422,7 +424,7 @@ public class LocalizationUtil {
 				writer.close();
 				writer = null;
 
-				xml = sw.toString();
+				xml = unsyncStringWriter.toString();
 			}
 		}
 		catch (Exception e) {
@@ -563,11 +565,12 @@ public class LocalizationUtil {
 				}
 			}
 
-			UnsyncStringWriter sw = new UnsyncStringWriter(true);
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
+				true);
 
 			XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 
-			writer = outputFactory.createXMLStreamWriter(sw);
+			writer = outputFactory.createXMLStreamWriter(unsyncStringWriter);
 
 			writer.writeStartDocument();
 			writer.writeStartElement(_ROOT);
@@ -597,7 +600,7 @@ public class LocalizationUtil {
 			writer.close();
 			writer = null;
 
-			xml = sw.toString();
+			xml = unsyncStringWriter.toString();
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {

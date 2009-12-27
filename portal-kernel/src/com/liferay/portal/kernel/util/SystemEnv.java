@@ -58,12 +58,13 @@ public class SystemEnv {
 				process = runtime.exec("env");
 			}
 
-			UnsyncBufferedReader br = new UnsyncBufferedReader(
-				new InputStreamReader(process.getInputStream()));
+			UnsyncBufferedReader unsyncBufferedReader =
+				new UnsyncBufferedReader(
+					new InputStreamReader(process.getInputStream()));
 
 			String line;
 
-			while ((line = br.readLine()) != null) {
+			while ((line = unsyncBufferedReader.readLine()) != null) {
 				int pos = line.indexOf(StringPool.EQUAL);
 
 				if (pos != -1) {

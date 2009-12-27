@@ -155,14 +155,14 @@ public class LangBuilder {
 			translationId = "en_zt";
 		}
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(content));
-		UnsyncBufferedWriter bw =
-			new UnsyncBufferedWriter(new FileWriter(nativePropsFile));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(content));
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
+			new FileWriter(nativePropsFile));
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			line = line.trim();
 
 			int pos = line.indexOf("=");
@@ -260,37 +260,37 @@ public class LangBuilder {
 							translatedText, "&#39;", "\'");
 					}
 
-					bw.write(key + "=" + translatedText);
+					unsyncBufferedWriter.write(key + "=" + translatedText);
 
-					bw.newLine();
-					bw.flush();
+					unsyncBufferedWriter.newLine();
+					unsyncBufferedWriter.flush();
 				}
 				else if (nativeProps.containsKey(key)) {
-					bw.write(key + "=");
+					unsyncBufferedWriter.write(key + "=");
 
-					bw.newLine();
-					bw.flush();
+					unsyncBufferedWriter.newLine();
+					unsyncBufferedWriter.flush();
 				}
 			}
 			else {
-				bw.write(line);
+				unsyncBufferedWriter.write(line);
 
-				bw.newLine();
-				bw.flush();
+				unsyncBufferedWriter.newLine();
+				unsyncBufferedWriter.flush();
 			}
 		}
 
-		br.close();
-		bw.close();
+		unsyncBufferedReader.close();
+		unsyncBufferedWriter.close();
 	}
 
 	private String _orderProps(File propsFile) throws IOException {
 		String content = FileUtil.read(propsFile);
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(content));
-		UnsyncBufferedWriter bw =
-			new UnsyncBufferedWriter(new FileWriter(propsFile));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(content));
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
+			new FileWriter(propsFile));
 
 		Set<String> messages = new TreeSet<String>();
 
@@ -298,7 +298,7 @@ public class LangBuilder {
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			int pos = line.indexOf("=");
 
 			if (pos != -1) {
@@ -309,38 +309,39 @@ public class LangBuilder {
 			}
 			else {
 				if (begin == true && line.equals("")) {
-					_sortAndWrite(bw, messages);
+					_sortAndWrite(unsyncBufferedWriter, messages);
 				}
 
 				if (line.equals("")) {
 					begin = !begin;
 				}
 
-				bw.write(line);
-				bw.newLine();
+				unsyncBufferedWriter.write(line);
+				unsyncBufferedWriter.newLine();
 			}
 
-			bw.flush();
+			unsyncBufferedWriter.flush();
 		}
 
 		if (messages.size() > 0) {
-			_sortAndWrite(bw, messages);
+			_sortAndWrite(unsyncBufferedWriter, messages);
 		}
 
-		br.close();
-		bw.close();
+		unsyncBufferedReader.close();
+		unsyncBufferedWriter.close();
 
 		return FileUtil.read(propsFile);
 	}
 
-	private void _sortAndWrite(UnsyncBufferedWriter bw, Set<String> messages)
+	private void _sortAndWrite(
+			UnsyncBufferedWriter unsyncBufferedWriter, Set<String> messages)
 		throws IOException {
 
 		String[] messagesArray = messages.toArray(new String[messages.size()]);
 
 		for (int i = 0; i < messagesArray.length; i++) {
-			bw.write(messagesArray[i]);
-			bw.newLine();
+			unsyncBufferedWriter.write(messagesArray[i]);
+			unsyncBufferedWriter.newLine();
 		}
 
 		messages.clear();

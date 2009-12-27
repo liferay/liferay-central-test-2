@@ -99,8 +99,8 @@ public class InformixDB extends BaseDB {
 	}
 
 	protected String reword(String data) throws IOException {
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(data));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 
@@ -108,7 +108,7 @@ public class InformixDB extends BaseDB {
 
 		boolean createTable = false;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
 
@@ -165,7 +165,7 @@ public class InformixDB extends BaseDB {
 			sb.append("\n");
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return sb.toString();
 	}

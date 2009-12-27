@@ -65,12 +65,13 @@ public class VelocityUtil {
 			}
 		}
 
-		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		Velocity.evaluate(
-			velocityContext, stringWriter, VelocityUtil.class.getName(), input);
+			velocityContext, unsyncStringWriter, VelocityUtil.class.getName(),
+			input);
 
-		return stringWriter.toString();
+		return unsyncStringWriter.toString();
 	}
 
 }

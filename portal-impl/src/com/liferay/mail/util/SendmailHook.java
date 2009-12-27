@@ -187,12 +187,15 @@ public class SendmailHook implements Hook {
 			String virtusertable =
 				PropsUtil.get(PropsKeys.MAIL_HOOK_SENDMAIL_VIRTUSERTABLE);
 
-			FileReader fr = new FileReader(virtusertable);
-			UnsyncBufferedReader br = new UnsyncBufferedReader(fr);
+			FileReader fileReader = new FileReader(virtusertable);
+			UnsyncBufferedReader unsyncBufferedReader =
+				new UnsyncBufferedReader(fileReader);
 
 			StringBuilder sb = new StringBuilder();
 
-			for (String s = br.readLine(); s != null; s = br.readLine()) {
+			for (String s = unsyncBufferedReader.readLine(); s != null;
+					s = unsyncBufferedReader.readLine()) {
+
 				if (!s.endsWith(" " + userId)) {
 					sb.append(s);
 					sb.append('\n');
@@ -206,8 +209,8 @@ public class SendmailHook implements Hook {
 				sb.append('\n');
 			}
 
-			br.close();
-			fr.close();
+			unsyncBufferedReader.close();
+			fileReader.close();
 
 			FileUtil.write(virtusertable, sb.toString());
 

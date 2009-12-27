@@ -487,17 +487,17 @@ public class CustomSQL {
 		StringBuilder sb = new StringBuilder();
 
 		try {
-			UnsyncBufferedReader br =
+			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(sql));
 
 			String line = null;
 
-			while ((line = br.readLine()) != null) {
+			while ((line = unsyncBufferedReader.readLine()) != null) {
 				sb.append(line.trim());
 				sb.append(StringPool.SPACE);
 			}
 
-			br.close();
+			unsyncBufferedReader.close();
 		}
 		catch (IOException ioe) {
 			return sql;

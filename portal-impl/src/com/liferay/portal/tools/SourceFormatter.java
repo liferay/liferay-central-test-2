@@ -128,12 +128,12 @@ public class SourceFormatter {
 
 		StringBuilder sb = new StringBuilder();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(imports));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(imports));
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (line.indexOf("import ") != -1) {
 				int importX = line.indexOf(" ");
 				int importY = line.lastIndexOf(".");
@@ -350,12 +350,12 @@ public class SourceFormatter {
 
 		List<String> importsList = new ArrayList<String>();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(imports));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(imports));
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (line.indexOf("import ") != -1) {
 				if (!importsList.contains(line)) {
 					importsList.add(line);
@@ -551,14 +551,14 @@ public class SourceFormatter {
 
 		StringBuilder sb = new StringBuilder();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(content));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(content));
 
 		int lineCount = 0;
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			lineCount++;
 
 			if (line.trim().length() == 0) {
@@ -633,7 +633,7 @@ public class SourceFormatter {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		String newContent = sb.toString();
 
@@ -752,12 +752,12 @@ public class SourceFormatter {
 
 		StringBuilder sb = new StringBuilder();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(content));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(content));
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (line.trim().length() == 0) {
 				line = StringPool.BLANK;
 			}
@@ -768,7 +768,7 @@ public class SourceFormatter {
 			sb.append("\n");
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		content = sb.toString();
 

@@ -69,7 +69,7 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 			String xml, String script)
 		throws Exception {
 
-		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		boolean load = false;
 
@@ -120,7 +120,8 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 				String velocityTemplateId = companyId + groupId + templateId;
 
 				load = VelocityEngineUtil.mergeTemplate(
-					velocityTemplateId, script, velocityContext, stringWriter);
+					velocityTemplateId, script, velocityContext,
+					unsyncStringWriter);
 			}
 			catch (VelocityException ve) {
 				velocityContext.put("exception", ve.getMessage());
@@ -142,7 +143,7 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 
 				load = VelocityEngineUtil.mergeTemplate(
 					velocityTemplateId, velocityTemplateContent,
-					velocityContext, stringWriter);
+					velocityContext, unsyncStringWriter);
 			}
 		}
 		catch (Exception e) {
@@ -174,7 +175,7 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 				"Unable to dynamically load velocity transform script");
 		}
 
-		return stringWriter.toString();
+		return unsyncStringWriter.toString();
 	}
 
 	protected List<TemplateNode> extractDynamicContents(Element parent)

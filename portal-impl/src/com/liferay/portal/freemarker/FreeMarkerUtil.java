@@ -44,11 +44,11 @@ public class FreeMarkerUtil {
 	public static String process(String name, Object context)
 		throws Exception {
 
-		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
-		process(name, context, stringWriter);
+		process(name, context, unsyncStringWriter);
 
-		return stringWriter.toString();
+		return unsyncStringWriter.toString();
 	}
 
 	public static void process(String name, Object context, Writer writer)

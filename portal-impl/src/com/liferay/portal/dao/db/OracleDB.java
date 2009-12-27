@@ -65,8 +65,8 @@ public class OracleDB extends BaseDB {
 
 		oracle = _preBuildSQL(oracle);
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(oracle));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(oracle));
 
 		StringBuilder imageSB = new StringBuilder();
 		StringBuilder journalArticleSB = new StringBuilder();
@@ -75,7 +75,7 @@ public class OracleDB extends BaseDB {
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (line.startsWith("insert into Image")) {
 				_convertToOracleCSV(line, imageSB);
 			}
@@ -90,7 +90,7 @@ public class OracleDB extends BaseDB {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		if (imageSB.length() > 0) {
 			FileUtil.write(
@@ -207,14 +207,14 @@ public class OracleDB extends BaseDB {
 	}
 
 	protected String reword(String data) throws IOException {
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(data));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
 
@@ -235,7 +235,7 @@ public class OracleDB extends BaseDB {
 			sb.append("\n");
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return sb.toString();
 	}

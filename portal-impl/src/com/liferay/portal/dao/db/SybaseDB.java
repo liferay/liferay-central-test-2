@@ -103,15 +103,14 @@ public class SybaseDB extends BaseDB {
 	}
 
 	protected String reword(String data) throws IOException {
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(data));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
-
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (line.indexOf(DROP_COLUMN) != -1) {
 				line = StringUtil.replace(line, " drop column ", " drop ");
 			}
@@ -136,7 +135,7 @@ public class SybaseDB extends BaseDB {
 			sb.append("\n");
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return sb.toString();
 	}

@@ -322,16 +322,17 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 				StringBuilder sb = new StringBuilder();
 
-				UnsyncBufferedReader reader = new UnsyncBufferedReader(
-					extractor.extractText(is, contentType, encoding));
+				UnsyncBufferedReader unsyncBufferedReader =
+					new UnsyncBufferedReader(
+						extractor.extractText(is, contentType, encoding));
 
 				int i;
 
-				while ((i = reader.read()) != -1) {
+				while ((i = unsyncBufferedReader.read()) != -1) {
 					sb.append((char)i);
 				}
 
-				reader.close();
+				unsyncBufferedReader.close();
 
 				text = sb.toString();
 			}
@@ -440,14 +441,16 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		nsDetector detector = new nsDetector(nsPSMDetector.ALL);
 
-		UnsyncBufferedInputStream ubis = new UnsyncBufferedInputStream(
-			new FileInputStream(file));
+		UnsyncBufferedInputStream unsyncByteArrayInputStream =
+			new UnsyncBufferedInputStream(new FileInputStream(file));
 
 		byte[] buffer = new byte[1024];
 
 		int len = 0;
 
-		while ((len = ubis.read(buffer, 0, buffer.length)) != -1) {
+		while ((len = unsyncByteArrayInputStream.read(
+					buffer, 0, buffer.length)) != -1) {
+
 			if (ascii) {
 				ascii = detector.isAscii(buffer, len);
 
@@ -459,7 +462,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		detector.DataEnd();
 
-		ubis.close();
+		unsyncByteArrayInputStream.close();
 
 		return ascii;
 	}
@@ -600,15 +603,16 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		List<String> list = new ArrayList<String>();
 
 		try {
-			UnsyncBufferedReader br = new UnsyncBufferedReader(reader);
+			UnsyncBufferedReader unsyncBufferedReader =
+				new UnsyncBufferedReader(reader);
 
 			String line = null;
 
-			while ((line = br.readLine()) != null) {
+			while ((line = unsyncBufferedReader.readLine()) != null) {
 				list.add(line);
 			}
 
-			br.close();
+			unsyncBufferedReader.close();
 		}
 		catch (IOException ioe) {
 		}
@@ -707,13 +711,13 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			}
 		}
 
-		UnsyncBufferedWriter bw = new UnsyncBufferedWriter(
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
 			new OutputStreamWriter(
 				new FileOutputStream(file, append), StringPool.UTF8));
 
-		bw.write(s);
+		unsyncBufferedWriter.write(s);
 
-		bw.close();
+		unsyncBufferedWriter.close();
 	}
 
 	public void write(String fileName, byte[] bytes) throws IOException {

@@ -649,10 +649,10 @@ public class MediaWikiImporter implements WikiImporter {
 
 		Map<String, String> usersMap = new HashMap<String, String>();
 
-		UnsyncBufferedReader reader =
+		UnsyncBufferedReader unsyncBufferedReader =
 			new UnsyncBufferedReader(new FileReader(usersFile));
 
-		String line = reader.readLine();
+		String line = unsyncBufferedReader.readLine();
 
 		while (line != null) {
 			String[] array = StringUtil.split(line);
@@ -670,7 +670,7 @@ public class MediaWikiImporter implements WikiImporter {
 				}
 			}
 
-			line = reader.readLine();
+			line = unsyncBufferedReader.readLine();
 		}
 
 		return usersMap;

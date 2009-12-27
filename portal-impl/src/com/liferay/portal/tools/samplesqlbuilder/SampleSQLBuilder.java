@@ -167,12 +167,13 @@ public class SampleSQLBuilder {
 
 			boolean previousBlankLine = false;
 
-			UnsyncBufferedReader br = new UnsyncBufferedReader(
-				new FileReader(_outputDir +  "/sample.sql"));
+			UnsyncBufferedReader unsyncBufferedReader =
+				new UnsyncBufferedReader(
+					new FileReader(_outputDir +  "/sample.sql"));
 
 			String s = null;
 
-			while ((s = br.readLine()) != null) {
+			while ((s = unsyncBufferedReader.readLine()) != null) {
 				s = specificDB.buildSQL(s).trim();
 
 				_writerSpecific.write(s);
@@ -188,7 +189,7 @@ public class SampleSQLBuilder {
 				}
 			}
 
-			br.close();
+			unsyncBufferedReader.close();
 
 			_writerSpecific.flush();
 		}

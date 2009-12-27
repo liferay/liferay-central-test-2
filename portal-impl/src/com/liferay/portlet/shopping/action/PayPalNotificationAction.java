@@ -99,12 +99,13 @@ public class PayPalNotificationAction extends Action {
 
 			pw.close();
 
-			UnsyncBufferedReader br = new UnsyncBufferedReader(
-				new InputStreamReader(urlc.getInputStream()));
+			UnsyncBufferedReader unsyncBufferedReader =
+				new UnsyncBufferedReader(
+					new InputStreamReader(urlc.getInputStream()));
 
-			String payPalStatus = br.readLine();
+			String payPalStatus = unsyncBufferedReader.readLine();
 
-			br.close();
+			unsyncBufferedReader.close();
 
 			String itemName = ParamUtil.getString(request, "item_name");
 			String itemNumber = ParamUtil.getString(request, "item_number");

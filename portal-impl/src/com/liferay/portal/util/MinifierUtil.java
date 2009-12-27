@@ -50,25 +50,25 @@ public class MinifierUtil {
 	}
 
 	private String _minifyCss(String content) {
-		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		try {
 			CssCompressor cssCompressor = new CssCompressor(
 				new UnsyncStringReader(content));
 
-			cssCompressor.compress(stringWriter, _CSS_LINE_BREAK);
+			cssCompressor.compress(unsyncStringWriter, _CSS_LINE_BREAK);
 		}
 		catch (Exception e) {
 			_log.error("CSS Minifier failed for\n" + content);
 
-			stringWriter.append(content);
+			unsyncStringWriter.append(content);
 		}
 
-		return stringWriter.toString();
+		return unsyncStringWriter.toString();
 	}
 
 	private String _minifyJavaScript(String content) {
-		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		try {
 			JavaScriptCompressor javaScriptCompressor =
@@ -77,16 +77,16 @@ public class MinifierUtil {
 					new JavaScriptErrorReporter());
 
 			javaScriptCompressor.compress(
-					stringWriter, _JS_LINE_BREAK, _JS_MUNGE, _JS_VERBOSE,
+					unsyncStringWriter, _JS_LINE_BREAK, _JS_MUNGE, _JS_VERBOSE,
 					_JS_PRESERVE_ALL_SEMICOLONS, _JS_DISABLE_OPTIMIZATIONS);
 		}
 		catch (Exception e) {
 			_log.error("JavaScript Minifier failed for\n" + content);
 
-			stringWriter.append(content);
+			unsyncStringWriter.append(content);
 		}
 
-		return stringWriter.toString();
+		return unsyncStringWriter.toString();
 	}
 
 	private static final int _CSS_LINE_BREAK = -1;

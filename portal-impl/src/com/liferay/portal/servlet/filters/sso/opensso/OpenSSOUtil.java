@@ -111,17 +111,18 @@ public class OpenSSOUtil {
 			int responseCode = urlc.getResponseCode();
 
 			if (responseCode == HttpURLConnection.HTTP_OK) {
-				UnsyncBufferedReader br = new UnsyncBufferedReader(
-					new InputStreamReader((InputStream)urlc.getContent()));
+				UnsyncBufferedReader unsyncBufferedReader =
+					new UnsyncBufferedReader(
+						new InputStreamReader((InputStream)urlc.getContent()));
 
 				String line = null;
 
-				while ((line = br.readLine()) != null) {
+				while ((line = unsyncBufferedReader.readLine()) != null) {
 					if (line.startsWith("userdetails.attribute.name=")) {
 						String name = line.replaceFirst(
 							"userdetails.attribute.name=", "");
 
-						line = br.readLine();
+						line = unsyncBufferedReader.readLine();
 
 						if (line.startsWith("userdetails.attribute.value=")) {
 							String value = line.replaceFirst(
@@ -172,8 +173,9 @@ public class OpenSSOUtil {
 
 			HttpURLConnection urlc = (HttpURLConnection)urlObj.openConnection();
 
-			UnsyncBufferedReader br = new UnsyncBufferedReader(
-				new InputStreamReader((InputStream)urlc.getContent()));
+			UnsyncBufferedReader unsyncBufferedReader =
+				new UnsyncBufferedReader(
+					new InputStreamReader((InputStream)urlc.getContent()));
 
 			int responseCode = urlc.getResponseCode();
 
@@ -185,7 +187,7 @@ public class OpenSSOUtil {
 			else {
 				String line = null;
 
-				while ((line = br.readLine()) != null) {
+				while ((line = unsyncBufferedReader.readLine()) != null) {
 					if (line.startsWith("string=")) {
 						line = line.replaceFirst("string=", "");
 
@@ -200,7 +202,7 @@ public class OpenSSOUtil {
 
 			urlc = (HttpURLConnection)urlObj.openConnection();
 
-			br = new UnsyncBufferedReader(
+			unsyncBufferedReader = new UnsyncBufferedReader(
 				new InputStreamReader((InputStream)urlc.getContent()));
 
 			if (urlc.getResponseCode() != HttpURLConnection.HTTP_OK) {
@@ -211,7 +213,7 @@ public class OpenSSOUtil {
 			else {
 				String line = null;
 
-				while ((line = br.readLine()) != null) {
+				while ((line = unsyncBufferedReader.readLine()) != null) {
 					if (line.startsWith("string=")) {
 						line = line.replaceFirst("string=", "");
 

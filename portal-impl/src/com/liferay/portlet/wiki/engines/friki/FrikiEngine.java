@@ -127,11 +127,11 @@ public class FrikiEngine implements WikiEngine {
 			return StringPool.BLANK;
 		}
 
-		UnsyncStringWriter writer = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
-		filter.filter(new UnsyncStringReader(content), writer);
+		filter.filter(new UnsyncStringReader(content), unsyncStringWriter);
 
-		return writer.toString();
+		return unsyncStringWriter.toString();
 	}
 
 	protected NodeFilter getFilter(long nodeId) {

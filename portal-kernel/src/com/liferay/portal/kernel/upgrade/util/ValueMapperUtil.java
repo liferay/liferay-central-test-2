@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.upgrade.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.FileWriter;
 
@@ -42,7 +43,7 @@ public class ValueMapperUtil {
 
 		FileUtil.mkdirs(tmpDir);
 
-		UnsyncBufferedWriter bw = new UnsyncBufferedWriter(
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
 			new FileWriter(tmpDir + "/" + fileName + ".txt"));
 
 		try {
@@ -53,15 +54,16 @@ public class ValueMapperUtil {
 
 				Object newValue = valueMapper.getNewValue(oldValue);
 
-				bw.write(oldValue + "=" + newValue);
+				unsyncBufferedWriter.write(
+					oldValue + StringPool.EQUAL + newValue);
 
 				if (itr.hasNext()) {
-					bw.write("\n");
+					unsyncBufferedWriter.write(StringPool.NEW_LINE);
 				}
 			}
 		}
 		finally {
-			bw.close();
+			unsyncBufferedWriter.close();
 		}
 	}
 

@@ -434,13 +434,14 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		velocityContext.put("targetResults", diffResults[1]);
 
 		try {
-			UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
+				true);
 
 			VelocityEngineUtil.mergeTemplate(
 				velocityTemplateId, velocityTemplateContent, velocityContext,
-				stringWriter);
+				unsyncStringWriter);
 
-			return stringWriter.toString();
+			return unsyncStringWriter.toString();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

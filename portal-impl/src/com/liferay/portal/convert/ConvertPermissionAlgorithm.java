@@ -70,6 +70,7 @@ import com.liferay.portal.util.PropsValues;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.Writer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -134,9 +135,8 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		UnsyncBufferedReader resourceNameReader = new UnsyncBufferedReader(
 			new FileReader(tempFile));
 
-		UnsyncBufferedWriter resourcePermissionWriter =
-			new UnsyncBufferedWriter(
-				new FileWriter(tempFile + _EXT_RESOURCE_PERMISSION));
+		Writer resourcePermissionWriter = new UnsyncBufferedWriter(
+			new FileWriter(tempFile + _EXT_RESOURCE_PERMISSION));
 
 		PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM = 6;
 
@@ -240,11 +240,10 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		UnsyncBufferedReader legacyFileReader = new UnsyncBufferedReader(
 			new FileReader(legacyFile));
 
-		UnsyncBufferedWriter legacyFileUpdatedWriter = new UnsyncBufferedWriter(
+		Writer legacyFileUpdatedWriter = new UnsyncBufferedWriter(
 			new FileWriter(legacyFile + _UPDATED));
-		UnsyncBufferedWriter legacyFileExtRolesPermissionsWriter =
-			new UnsyncBufferedWriter(
-				new FileWriter(legacyFile + _EXT_ROLES_PERMIMISSIONS));
+		Writer legacyFileExtRolesPermissionsWriter = new UnsyncBufferedWriter(
+			new FileWriter(legacyFile + _EXT_ROLES_PERMIMISSIONS));
 
 		try {
 			String line = null;
@@ -333,14 +332,13 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		FileUtil.delete(legacyFile);
 	}
 
-	protected void convertResourcePermission(
-			UnsyncBufferedWriter writer, String name)
+	protected void convertResourcePermission(Writer writer, String name)
 		throws Exception {
 
 		ResourcePermissionView resourcePermissionView =
 			new ResourcePermissionView(name);
 
-		UnsyncBufferedReader resourcePermReader = null;
+		UnsyncBufferedReader resourcePermissionReader = null;
 
 		String resourcePermissionFile =
 			resourcePermissionView.generateTempFile();
@@ -352,13 +350,14 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		MultiValueMap mvp = new MultiValueMap();
 
 		try {
-			resourcePermReader =
-				new UnsyncBufferedReader(
-					new FileReader(resourcePermissionFile));
+			resourcePermissionReader = new UnsyncBufferedReader(
+				new FileReader(resourcePermissionFile));
 
 			String line = null;
 
-			while (Validator.isNotNull(line = resourcePermReader.readLine())) {
+			while (Validator.isNotNull(
+					line = resourcePermissionReader.readLine())) {
+
 				String[] values = StringUtil.split(line);
 
 				String actionId = ResourcePermissionView.getActionId(values);
@@ -371,8 +370,8 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			}
 		}
 		finally {
-			if (resourcePermReader != null) {
-				resourcePermReader.close();
+			if (resourcePermissionReader != null) {
+				resourcePermissionReader.close();
 			}
 
 			FileUtil.delete(resourcePermissionFile);
@@ -426,14 +425,12 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		UnsyncBufferedReader legacyFileReader = new UnsyncBufferedReader(
 			new FileReader(legacyFile));
 
-		UnsyncBufferedWriter legacyFileExtRoleWriter = new UnsyncBufferedWriter(
+		Writer legacyFileExtRoleWriter = new UnsyncBufferedWriter(
 			new FileWriter(legacyFile + _EXT_ROLE));
-		UnsyncBufferedWriter legacyFileExtRolesPermissionsWriter =
-			new UnsyncBufferedWriter(
-				new FileWriter(legacyFile + _EXT_ROLES_PERMIMISSIONS));
-		UnsyncBufferedWriter legacyFileExtOtherRolesWriter =
-			new UnsyncBufferedWriter(
-				new FileWriter(legacyFile + _EXT_OTHER_ROLES));
+		Writer legacyFileExtRolesPermissionsWriter = new UnsyncBufferedWriter(
+			new FileWriter(legacyFile + _EXT_ROLES_PERMIMISSIONS));
+		Writer legacyFileExtOtherRolesWriter = new UnsyncBufferedWriter(
+			new FileWriter(legacyFile + _EXT_OTHER_ROLES));
 
 		try {
 

@@ -229,12 +229,12 @@ public class RuntimePortletUtil {
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
 
-		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		try {
 			VelocityEngineUtil.mergeTemplate(
 				velocityTemplateId, velocityTemplateContent, velocityContext,
-				stringWriter);
+				unsyncStringWriter);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -242,7 +242,7 @@ public class RuntimePortletUtil {
 			throw e;
 		}
 
-		String output = stringWriter.toString();
+		String output = unsyncStringWriter.toString();
 
 		Map<String, String> columnsMap = processor.getColumnsMap();
 

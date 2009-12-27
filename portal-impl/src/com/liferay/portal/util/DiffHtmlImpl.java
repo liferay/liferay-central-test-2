@@ -70,7 +70,7 @@ public class DiffHtmlImpl implements DiffHtml {
 		InputSource oldSource = new InputSource(source);
 		InputSource newSource = new InputSource(target);
 
-		UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		SAXTransformerFactory saxTransformerFactory =
 			(SAXTransformerFactory)TransformerFactory.newInstance();
@@ -78,7 +78,7 @@ public class DiffHtmlImpl implements DiffHtml {
 		TransformerHandler tranformHandler =
 			saxTransformerFactory.newTransformerHandler();
 
-		tranformHandler.setResult(new StreamResult(stringWriter));
+		tranformHandler.setResult(new StreamResult(unsyncStringWriter));
 
 		XslFilter xslFilter = new XslFilter();
 
@@ -121,9 +121,9 @@ public class DiffHtmlImpl implements DiffHtml {
 		contentHandler.endElement(StringPool.BLANK, _DIFF_REPORT, _DIFF_REPORT);
 		contentHandler.endDocument();
 
-		stringWriter.flush();
+		unsyncStringWriter.flush();
 
-		return stringWriter.toString();
+		return unsyncStringWriter.toString();
 	}
 
 	private static final String _DIFF = "diff";

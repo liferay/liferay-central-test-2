@@ -169,17 +169,17 @@ public class ScriptingImpl implements Scripting {
 		if (e instanceof PySyntaxError) {
 			PySyntaxError pySyntaxError = (PySyntaxError)e;
 
-			UnsyncByteArrayOutputStream ubaos =
+			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream();
 
 			PrintStream ps = new PrintStream(
-				new StringServletOutputStream(ubaos));
+				new StringServletOutputStream(unsyncByteArrayOutputStream));
 
 			Py.displayException(
 				pySyntaxError.type, pySyntaxError.value,
 				pySyntaxError.traceback, new PyFile(ps));
 
-			message = ubaos.toString();
+			message = unsyncByteArrayOutputStream.toString();
 		}
 
 		return message;

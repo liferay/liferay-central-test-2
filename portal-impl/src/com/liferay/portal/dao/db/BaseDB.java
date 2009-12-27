@@ -278,12 +278,12 @@ public abstract class BaseDB implements DB {
 
 		StringBuilder sb = new StringBuilder();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(template));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(template));
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (!line.startsWith("##")) {
 				if (line.startsWith("@include ")) {
 					int pos = line.indexOf(" ");
@@ -372,7 +372,7 @@ public abstract class BaseDB implements DB {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 	}
 
 	public void setSupportsStringCaseSensitiveQuery(
@@ -515,14 +515,14 @@ public abstract class BaseDB implements DB {
 		if (fileName.equals("portal") || fileName.equals("portal-minimal") ||
 			fileName.equals("update-5.0.1-5.1.0")) {
 
-			UnsyncBufferedReader br = new UnsyncBufferedReader(
-				new UnsyncStringReader(template));
+			UnsyncBufferedReader unsyncBufferedReader =
+				new UnsyncBufferedReader(new UnsyncStringReader(template));
 
 			StringBuilder sb = new StringBuilder();
 
 			String line = null;
 
-			while ((line = br.readLine()) != null) {
+			while ((line = unsyncBufferedReader.readLine()) != null) {
 				if (line.startsWith("@include ")) {
 					int pos = line.indexOf(" ");
 
@@ -557,7 +557,7 @@ public abstract class BaseDB implements DB {
 				}
 			}
 
-			br.close();
+			unsyncBufferedReader.close();
 
 			template = sb.toString();
 		}
@@ -678,21 +678,21 @@ public abstract class BaseDB implements DB {
 
 		// Trim insert statements because it breaks MySQL Query Browser
 
-		UnsyncBufferedReader br = new UnsyncBufferedReader(
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(template));
 
 		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			line = line.trim();
 
 			sb.append(line);
 			sb.append("\n");
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		template = sb.toString();
 		template = StringUtil.replace(template, "\n\n\n", "\n\n");
@@ -719,14 +719,14 @@ public abstract class BaseDB implements DB {
 	protected String readSQL(String fileName, String comments, String eol)
 		throws IOException {
 
-		UnsyncBufferedReader br = new UnsyncBufferedReader(
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new FileReader(new File(fileName)));
 
 		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (!line.startsWith(comments)) {
 				line = StringUtil.replace(
 					line,
@@ -743,7 +743,7 @@ public abstract class BaseDB implements DB {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return sb.toString();
 	}
@@ -751,14 +751,14 @@ public abstract class BaseDB implements DB {
 	protected String removeBooleanIndexes(String data) throws IOException {
 		String portalData = FileUtil.read("../sql/portal-tables.sql");
 
-		UnsyncBufferedReader br = new UnsyncBufferedReader(
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			boolean append = true;
 
 			int x = line.indexOf(" on ");
@@ -795,20 +795,20 @@ public abstract class BaseDB implements DB {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return sb.toString();
 	}
 
 	protected String removeInserts(String data) throws IOException {
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(data));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (!line.startsWith("insert into ") &&
 				!line.startsWith("update ")) {
 
@@ -817,20 +817,20 @@ public abstract class BaseDB implements DB {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return sb.toString();
 	}
 
 	protected String removeLongInserts(String data) throws IOException {
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(data));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(data));
 
 		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (!line.startsWith("insert into Image (") &&
 				!line.startsWith("insert into JournalArticle (") &&
 				!line.startsWith("insert into JournalStructure (") &&
@@ -841,7 +841,7 @@ public abstract class BaseDB implements DB {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return sb.toString();
 	}

@@ -112,10 +112,10 @@ public class SharepointServlet extends HttpServlet {
 		try {
 			InputStream is = request.getInputStream();
 
-			UnsyncBufferedReader br =
+			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new InputStreamReader(is));
 
-			String url = br.readLine();
+			String url = unsyncBufferedReader.readLine();
 
 			String[] params = url.split(StringPool.AMPERSAND);
 
@@ -132,12 +132,13 @@ public class SharepointServlet extends HttpServlet {
 				sharepointRequest.addParam(key, value);
 			}
 
-			UnsyncByteArrayOutputStream ubaos =
+			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream();
 
-			StreamUtil.transfer(is, ubaos);
+			StreamUtil.transfer(is, unsyncByteArrayOutputStream);
 
-			sharepointRequest.setBytes(ubaos.toByteArray());
+			sharepointRequest.setBytes(
+				unsyncByteArrayOutputStream.toByteArray());
 		}
 		catch (Exception e) {
 			throw new SharepointException(e);

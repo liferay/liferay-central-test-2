@@ -64,11 +64,13 @@ public class XSLContentUtil {
 		Transformer transformer =
 			transformerFactory.newTransformer(xslSource);
 
-		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream();
+		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
 
-		transformer.transform(xmlSource, new StreamResult(ubaos));
+		transformer.transform(
+			xmlSource, new StreamResult(unsyncByteArrayOutputStream));
 
-		return ubaos.toString();
+		return unsyncByteArrayOutputStream.toString();
 	}
 
 }

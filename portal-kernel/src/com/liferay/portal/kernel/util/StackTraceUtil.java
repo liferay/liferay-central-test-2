@@ -40,16 +40,17 @@ public class StackTraceUtil {
 		PrintWriter printWriter = null;
 
 		try {
-			UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
+				true);
 
 			printWriter = new PrintWriter(
-				new UnsyncBufferedWriter(stringWriter));
+				new UnsyncBufferedWriter(unsyncStringWriter));
 
 			t.printStackTrace(printWriter);
 
 			printWriter.flush();
 
-			stackTrace = stringWriter.toString();
+			stackTrace = unsyncStringWriter.toString();
 		}
 		finally {
 			if (printWriter != null) {

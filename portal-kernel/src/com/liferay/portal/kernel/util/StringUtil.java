@@ -588,17 +588,17 @@ public class StringUtil {
 	public static String read(InputStream is) throws IOException {
 		StringBuilder sb = new StringBuilder();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new InputStreamReader(is));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new InputStreamReader(is));
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			sb.append(line);
 			sb.append(CharPool.NEW_LINE);
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return sb.toString().trim();
 	}
@@ -954,16 +954,16 @@ public class StringUtil {
 			delimiter.equals(StringPool.RETURN)) {
 
 			try {
-				UnsyncBufferedReader br =
+				UnsyncBufferedReader unsyncBufferedReader =
 					new UnsyncBufferedReader(new UnsyncStringReader(s));
 
 				String line = null;
 
-				while ((line = br.readLine()) != null) {
+				while ((line = unsyncBufferedReader.readLine()) != null) {
 					nodeValues.add(line);
 				}
 
-				br.close();
+				unsyncBufferedReader.close();
 			}
 			catch (IOException ioe) {
 				_log.error(ioe.getMessage());
@@ -1416,12 +1416,12 @@ public class StringUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(text));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(text));
 
 		String s = StringPool.BLANK;
 
-		while ((s = br.readLine()) != null) {
+		while ((s = unsyncBufferedReader.readLine()) != null) {
 			if (s.length() == 0) {
 				sb.append(lineSeparator);
 

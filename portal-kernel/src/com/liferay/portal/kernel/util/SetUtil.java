@@ -96,16 +96,16 @@ public class SetUtil {
 	public static Set<String> fromFile(File file) throws IOException {
 		Set<String> set = new HashSet<String>();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new FileReader(file));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new FileReader(file));
 
 		String s = StringPool.BLANK;
 
-		while ((s = br.readLine()) != null) {
+		while ((s = unsyncBufferedReader.readLine()) != null) {
 			set.add(s);
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return set;
 	}

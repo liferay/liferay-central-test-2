@@ -55,8 +55,9 @@ public class WhoisWebCacheItem implements WebCacheItem {
 		try {
 			Socket socket = new Socket(WHOIS_SERVER, WHOIS_SERVER_PORT);
 
-			UnsyncBufferedReader br = new UnsyncBufferedReader(
-				new InputStreamReader(socket.getInputStream()));
+			UnsyncBufferedReader unsyncBufferedReader =
+				new UnsyncBufferedReader(
+					new InputStreamReader(socket.getInputStream()));
 
 			PrintStream out = new PrintStream(socket.getOutputStream());
 
@@ -65,7 +66,7 @@ public class WhoisWebCacheItem implements WebCacheItem {
 			StringBuilder sb = new StringBuilder();
 			String line = null;
 
-			while ((line = br.readLine()) != null) {
+			while ((line = unsyncBufferedReader.readLine()) != null) {
 				if (line.startsWith("Results ")) {
 					break;
 				}
@@ -73,7 +74,7 @@ public class WhoisWebCacheItem implements WebCacheItem {
 				sb.append(line).append("\n");
 			}
 
-			br.close();
+			unsyncBufferedReader.close();
 			socket.close();
 
 			whois = new Whois(

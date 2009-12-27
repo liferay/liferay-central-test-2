@@ -146,8 +146,8 @@ public class MySQLDB extends BaseDB {
 	}
 
 	protected String reword(String data) throws IOException {
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(data));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(data));
 
 		boolean createTable = false;
 
@@ -155,7 +155,7 @@ public class MySQLDB extends BaseDB {
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (StringUtil.startsWith(line, "create table")) {
 				createTable = true;
 			}
@@ -189,7 +189,7 @@ public class MySQLDB extends BaseDB {
 			sb.append("\n");
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return sb.toString();
 	}

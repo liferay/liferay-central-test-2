@@ -274,14 +274,14 @@ public class Table {
 					value = StringPool.BLANK;
 				}
 				else {
-					UnsyncBufferedReader br = new UnsyncBufferedReader(
-						clob.getCharacterStream());
+					UnsyncBufferedReader unsyncBufferedReader =
+						new UnsyncBufferedReader(clob.getCharacterStream());
 
 					StringBuilder sb = new StringBuilder();
 
 					String line = null;
 
-					while ((line = br.readLine()) != null) {
+					while ((line = unsyncBufferedReader.readLine()) != null) {
 						if (sb.length() != 0) {
 							sb.append(SAFE_NEWLINE_CHARACTER);
 						}
@@ -370,8 +370,8 @@ public class Table {
 
 		String selectSQL = getSelectSQL();
 
-		UnsyncBufferedWriter bw =
-			new UnsyncBufferedWriter(new FileWriter(tempFileName));
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
+			new FileWriter(tempFileName));
 
 		try {
 			ps = con.prepareStatement(selectSQL);
@@ -384,7 +384,7 @@ public class Table {
 				try {
 					data = getExportedData(rs);
 
-					bw.write(data);
+					unsyncBufferedWriter.write(data);
 
 					_totalRows++;
 
@@ -412,7 +412,7 @@ public class Table {
 		finally {
 			DataAccess.cleanUp(null, ps, rs);
 
-			bw.close();
+			unsyncBufferedWriter.close();
 		}
 
 		if (!isEmpty) {
@@ -443,8 +443,8 @@ public class Table {
 
 		String insertSQL = getInsertSQL();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new FileReader(tempFileName));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new FileReader(tempFileName));
 
 		String line = null;
 
@@ -459,7 +459,7 @@ public class Table {
 
 			int count = 0;
 
-			while ((line = br.readLine()) != null) {
+			while ((line = unsyncBufferedReader.readLine()) != null) {
 				String[] values = StringUtil.split(line);
 
 				Object[][] columns = getColumns();
@@ -508,7 +508,7 @@ public class Table {
 		finally {
 			DataAccess.cleanUp(null, ps);
 
-			br.close();
+			unsyncBufferedReader.close();
 		}
 
 		if (_log.isDebugEnabled()) {

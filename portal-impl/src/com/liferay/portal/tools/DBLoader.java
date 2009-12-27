@@ -95,12 +95,12 @@ public class DBLoader {
 
 		StringBuilder sb = new StringBuilder();
 
-		UnsyncBufferedReader br = new UnsyncBufferedReader(
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(_fileUtil.read(fileName)));
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (!line.startsWith("--")) {
 				sb.append(line);
 
@@ -143,7 +143,7 @@ public class DBLoader {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 	}
 
 	private void _loadHypersonic() throws Exception {
@@ -188,12 +188,12 @@ public class DBLoader {
 
 		StringBuilder sb = new StringBuilder();
 
-		UnsyncBufferedReader br = new UnsyncBufferedReader(
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(_fileUtil.read(fileName)));
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (!line.startsWith("//")) {
 				sb.append(line);
 
@@ -227,7 +227,7 @@ public class DBLoader {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 	}
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();

@@ -51,8 +51,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		_servletOutputStream = new StringServletOutputStream(
 			_unsyncByteArrayOutputStream);
 
-		_stringWriter = new UnsyncStringWriter(true);
-		_printWriter = new PrintWriter(_stringWriter);
+		_unsyncStringWriter = new UnsyncStringWriter(true);
+		_printWriter = new PrintWriter(_unsyncStringWriter);
 	}
 
 	public int getBufferSize() {
@@ -88,7 +88,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 			}
 		}
 		else if (_callGetWriter) {
-			return _stringWriter.toString();
+			return _unsyncStringWriter.toString();
 		}
 		else {
 			return StringPool.BLANK;
@@ -117,8 +117,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 		_unsyncByteArrayOutputStream.reset();
 
-		_stringWriter = new UnsyncStringWriter(true);
-		_printWriter = new PrintWriter(_stringWriter);
+		_unsyncStringWriter = new UnsyncStringWriter(true);
+		_printWriter = new PrintWriter(_unsyncStringWriter);
 	}
 
 	public void resetBuffer() {
@@ -126,7 +126,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 			_unsyncByteArrayOutputStream.reset();
 		}
 		else if (_callGetWriter) {
-			_stringWriter.reset();
+			_unsyncStringWriter.reset();
 		}
 	}
 
@@ -162,7 +162,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	private ServletOutputStream _servletOutputStream;
 	private int _status = SC_OK;
 	private String _string;
-	private UnsyncStringWriter _stringWriter;
 	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
+	private UnsyncStringWriter _unsyncStringWriter;
 
 }

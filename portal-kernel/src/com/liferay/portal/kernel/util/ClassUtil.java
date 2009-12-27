@@ -67,8 +67,8 @@ public class ClassUtil {
 
 		Set<String> classes = new HashSet<String>();
 
-		StreamTokenizer st =
-			new StreamTokenizer(new UnsyncBufferedReader(reader));
+		StreamTokenizer st = new StreamTokenizer(
+			new UnsyncBufferedReader(reader));
 
 		_setupParseTableForAnnotationProcessing(st);
 

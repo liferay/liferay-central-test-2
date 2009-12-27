@@ -46,10 +46,11 @@ public class SystemLogger extends DefaultLogger {
 			StringBuilder sb = new StringBuilder();
 
 			try {
-				UnsyncBufferedReader reader = new UnsyncBufferedReader(
-					new UnsyncStringReader(event.getMessage()));
+				UnsyncBufferedReader unsyncBufferedReader =
+					new UnsyncBufferedReader(
+						new UnsyncStringReader(event.getMessage()));
 
-				String line = reader.readLine();
+				String line = unsyncBufferedReader.readLine();
 
 				boolean first = true;
 
@@ -63,7 +64,7 @@ public class SystemLogger extends DefaultLogger {
 					sb.append("  ");
 					sb.append(line);
 
-					line = reader.readLine();
+					line = unsyncBufferedReader.readLine();
 				}
 			}
 			catch (IOException e) {

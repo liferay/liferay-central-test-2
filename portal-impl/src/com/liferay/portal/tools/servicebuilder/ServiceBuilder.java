@@ -3249,11 +3249,11 @@ public class ServiceBuilder {
 
 		Map<String, String> indexSQLs = new TreeMap<String, String>();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new FileReader(sqlFile));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new FileReader(sqlFile));
 
 		while (true) {
-			String indexSQL = br.readLine();
+			String indexSQL = unsyncBufferedReader.readLine();
 
 			if (indexSQL == null) {
 				break;
@@ -3268,7 +3268,7 @@ public class ServiceBuilder {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		// indexes.properties
 
@@ -3281,10 +3281,11 @@ public class ServiceBuilder {
 
 		Map<String, String> indexProps = new TreeMap<String, String>();
 
-		br = new UnsyncBufferedReader(new FileReader(propsFile));
+		unsyncBufferedReader = new UnsyncBufferedReader(
+			new FileReader(propsFile));
 
 		while (true) {
-			String indexMapping = br.readLine();
+			String indexMapping = unsyncBufferedReader.readLine();
 
 			if (indexMapping == null) {
 				break;
@@ -3297,7 +3298,7 @@ public class ServiceBuilder {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		// indexes.sql
 
@@ -3463,13 +3464,13 @@ public class ServiceBuilder {
 		else if (addMissingTables) {
 			StringBuilder sb = new StringBuilder();
 
-			UnsyncBufferedReader br =
+			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(content));
 
 			String line = null;
 			boolean appendNewTable = true;
 
-			while ((line = br.readLine()) != null) {
+			while ((line = unsyncBufferedReader.readLine()) != null) {
 				if (appendNewTable && line.startsWith(_SQL_CREATE_TABLE)) {
 					x = _SQL_CREATE_TABLE.length();
 					y = line.indexOf(" ", x);
@@ -3491,7 +3492,7 @@ public class ServiceBuilder {
 				sb.append("\n" + newCreateTableString);
 			}
 
-			br.close();
+			unsyncBufferedReader.close();
 
 			FileUtil.write(sqlFile, sb.toString(), true);
 		}
@@ -3510,11 +3511,11 @@ public class ServiceBuilder {
 
 		Set<String> sequenceSQLs = new TreeSet<String>();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new FileReader(sqlFile));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new FileReader(sqlFile));
 
 		while (true) {
-			String sequenceSQL = br.readLine();
+			String sequenceSQL = unsyncBufferedReader.readLine();
 
 			if (sequenceSQL == null) {
 				break;
@@ -3525,7 +3526,7 @@ public class ServiceBuilder {
 			}
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = _ejbList.get(i);
@@ -3652,13 +3653,13 @@ public class ServiceBuilder {
 		else if (addMissingTables) {
 			StringBuilder sb = new StringBuilder();
 
-			UnsyncBufferedReader br =
+			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(content));
 
 			String line = null;
 			boolean appendNewTable = true;
 
-			while ((line = br.readLine()) != null) {
+			while ((line = unsyncBufferedReader.readLine()) != null) {
 				if (appendNewTable && line.startsWith(_SQL_CREATE_TABLE)) {
 					x = _SQL_CREATE_TABLE.length();
 					y = line.indexOf(" ", x);
@@ -3680,7 +3681,7 @@ public class ServiceBuilder {
 				sb.append("\n" + newCreateTableString);
 			}
 
-			br.close();
+			unsyncBufferedReader.close();
 
 			FileUtil.write(sqlFile, sb.toString(), true);
 		}
@@ -3689,12 +3690,12 @@ public class ServiceBuilder {
 	private String _fixHbmXml(String content) throws IOException {
 		StringBuilder sb = new StringBuilder();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new UnsyncStringReader(content));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(content));
 
 		String line = null;
 
-		while ((line = br.readLine()) != null) {
+		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (line.startsWith("\t<class name=\"")) {
 				line = StringUtil.replace(
 					line,
@@ -3721,7 +3722,7 @@ public class ServiceBuilder {
 			sb.append('\n');
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return sb.toString().trim();
 	}

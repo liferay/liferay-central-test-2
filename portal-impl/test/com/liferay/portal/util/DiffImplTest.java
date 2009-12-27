@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.Diff;
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
 
+import java.io.Reader;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,8 +40,8 @@ import java.util.List;
 public class DiffImplTest extends BaseTestCase {
 
 	public void testOne() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("liferay");
-		UnsyncStringReader reader2 = new UnsyncStringReader("liferay");
+		Reader reader1 = new UnsyncStringReader("liferay");
+		Reader reader2 = new UnsyncStringReader("liferay");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -51,8 +53,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testTwo() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("liferay");
-		UnsyncStringReader reader2 = new UnsyncStringReader("LifeRay");
+		Reader reader1 = new UnsyncStringReader("liferay");
+		Reader reader2 = new UnsyncStringReader("LifeRay");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -80,8 +82,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testThree() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("aaa");
-		UnsyncStringReader reader2 = new UnsyncStringReader("bbb");
+		Reader reader1 = new UnsyncStringReader("aaa");
+		Reader reader2 = new UnsyncStringReader("bbb");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -103,8 +105,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testFour() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("rahab");
-		UnsyncStringReader reader2 = new UnsyncStringReader("boaz");
+		Reader reader1 = new UnsyncStringReader("rahab");
+		Reader reader2 = new UnsyncStringReader("boaz");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -126,8 +128,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testFive() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("aaa\nbbb");
-		UnsyncStringReader reader2 = new UnsyncStringReader("ccc\naaa");
+		Reader reader1 = new UnsyncStringReader("aaa\nbbb");
+		Reader reader2 = new UnsyncStringReader("ccc\naaa");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -158,8 +160,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testSix() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("ccc\naaa");
-		UnsyncStringReader reader2 = new UnsyncStringReader("aaa\nbbb");
+		Reader reader1 = new UnsyncStringReader("ccc\naaa");
+		Reader reader2 = new UnsyncStringReader("aaa\nbbb");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -190,8 +192,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testSeven() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("ccc\naaa\nbbe");
-		UnsyncStringReader reader2 = new UnsyncStringReader("aaa\nbbb");
+		Reader reader1 = new UnsyncStringReader("ccc\naaa\nbbe");
+		Reader reader2 = new UnsyncStringReader("aaa\nbbb");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -220,8 +222,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testEight() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("add\nbbb\nccc");
-		UnsyncStringReader reader2 = new UnsyncStringReader("bbb\nccc\naee");
+		Reader reader1 = new UnsyncStringReader("add\nbbb\nccc");
+		Reader reader2 = new UnsyncStringReader("bbb\nccc\naee");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -252,8 +254,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testNine() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("abcd");
-		UnsyncStringReader reader2 = new UnsyncStringReader("abcdee");
+		Reader reader1 = new UnsyncStringReader("abcd");
+		Reader reader2 = new UnsyncStringReader("abcdee");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -271,8 +273,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testTen() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("abcd");
-		UnsyncStringReader reader2 = new UnsyncStringReader("abcdeee");
+		Reader reader1 = new UnsyncStringReader("abcd");
+		Reader reader2 = new UnsyncStringReader("abcdeee");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -294,8 +296,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testEleven() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("aaa\nbbb\nfff");
-		UnsyncStringReader reader2 = new UnsyncStringReader("ccc\nada\nbeb");
+		Reader reader1 = new UnsyncStringReader("aaa\nbbb\nfff");
+		Reader reader2 = new UnsyncStringReader("ccc\nada\nbeb");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -333,8 +335,8 @@ public class DiffImplTest extends BaseTestCase {
 	}
 
 	public void testTwelve() {
-		UnsyncStringReader reader1 = new UnsyncStringReader("ada");
-		UnsyncStringReader reader2 = new UnsyncStringReader("aaa\nccc");
+		Reader reader1 = new UnsyncStringReader("ada");
+		Reader reader2 = new UnsyncStringReader("aaa\nccc");
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();

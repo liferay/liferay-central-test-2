@@ -365,12 +365,13 @@ public class PluginsEnvironmentBuilder {
 	private String[] _getExecOutput(InputStream is) throws IOException {
 		List<String> list = new ArrayList<String>();
 
-		UnsyncBufferedReader br = null;
+		UnsyncBufferedReader unsyncBufferedReader = null;
 
 		try {
-			br = new UnsyncBufferedReader(new InputStreamReader(is));
+			unsyncBufferedReader = new UnsyncBufferedReader(
+				new InputStreamReader(is));
 
-			String line = br.readLine();
+			String line = unsyncBufferedReader.readLine();
 
 			while (line != null) {
 				line = line.trim();
@@ -379,13 +380,13 @@ public class PluginsEnvironmentBuilder {
 					list.add(line);
 				}
 
-				line = br.readLine();
+				line = unsyncBufferedReader.readLine();
 			}
 		}
 		finally {
-			if (br != null) {
+			if (unsyncBufferedReader != null) {
 				try {
-					br.close();
+					unsyncBufferedReader.close();
 				}
 				catch (Exception e) {
 				}

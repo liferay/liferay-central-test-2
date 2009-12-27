@@ -137,16 +137,16 @@ public class ListUtil {
 	public static List<String> fromFile(File file) throws IOException {
 		List<String> list = new ArrayList<String>();
 
-		UnsyncBufferedReader br =
-			new UnsyncBufferedReader(new FileReader(file));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new FileReader(file));
 
 		String s = StringPool.BLANK;
 
-		while ((s = br.readLine()) != null) {
+		while ((s = unsyncBufferedReader.readLine()) != null) {
 			list.add(s);
 		}
 
-		br.close();
+		unsyncBufferedReader.close();
 
 		return list;
 	}

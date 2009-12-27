@@ -124,19 +124,21 @@ public class XMLFormatter {
 			Branch branch, String indent, boolean expandEmptyElements)
 		throws IOException {
 
-		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream();
+		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
 
-		OutputFormat format = OutputFormat.createPrettyPrint();
+		OutputFormat outputFormat = OutputFormat.createPrettyPrint();
 
-		format.setExpandEmptyElements(expandEmptyElements);
-		format.setIndent(indent);
-		format.setLineSeparator("\n");
+		outputFormat.setExpandEmptyElements(expandEmptyElements);
+		outputFormat.setIndent(indent);
+		outputFormat.setLineSeparator(StringPool.NEW_LINE);
 
-		XMLWriter writer = new XMLWriter(ubaos, format);
+		XMLWriter writer = new XMLWriter(
+			unsyncByteArrayOutputStream, outputFormat);
 
 		writer.write(branch);
 
-		String content = ubaos.toString(StringPool.UTF8);
+		String content = unsyncByteArrayOutputStream.toString(StringPool.UTF8);
 
 		// LEP-4257
 

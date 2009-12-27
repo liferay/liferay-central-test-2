@@ -1019,39 +1019,40 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			_log.debug(xml);
 		}
 
-		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+		XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
 
-		XMLStreamReader reader = inputFactory.createXMLStreamReader(
+		XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(
 			new UnsyncStringReader(xml));
 
 		String error = xml;
 
 		try {
-			reader.nextTag();
-			reader.nextTag();
+			xmlStreamReader.nextTag();
+			xmlStreamReader.nextTag();
 
-			String name = reader.getLocalName();
+			String name = xmlStreamReader.getLocalName();
 
 			if (name.equals("error")) {
-				int status = GetterUtil.getInteger(reader.getElementText(), 1);
+				int status = GetterUtil.getInteger(
+					xmlStreamReader.getElementText(), 1);
 
 				if (status == 0) {
 					return true;
 				}
 
-				reader.nextTag();
+				xmlStreamReader.nextTag();
 
-				name = reader.getLocalName();
+				name = xmlStreamReader.getLocalName();
 
 				if (name.equals("message")) {
-					error = reader.getElementText();
+					error = xmlStreamReader.getElementText();
 				}
 			}
 		}
 		finally {
-			if (reader != null) {
+			if (xmlStreamReader != null) {
 				try {
-					reader.close();
+					xmlStreamReader.close();
 				}
 				catch (Exception e) {
 				}

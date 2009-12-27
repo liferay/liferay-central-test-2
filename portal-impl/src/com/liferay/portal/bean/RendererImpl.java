@@ -157,13 +157,14 @@ public class RendererImpl implements Renderer {
 		velocityContext.put(_BEAN, bean);
 
 		try {
-			UnsyncStringWriter stringWriter = new UnsyncStringWriter(true);
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
+				true);
 
 			VelocityEngineUtil.mergeTemplate(
 				className, velocityTemplateContent, velocityContext,
-				stringWriter);
+				unsyncStringWriter);
 
-			return stringWriter.toString();
+			return unsyncStringWriter.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

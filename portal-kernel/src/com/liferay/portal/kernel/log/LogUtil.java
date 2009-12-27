@@ -47,12 +47,12 @@ public class LogUtil {
 
 	public static void debug(Log log, Properties props) {
 		if (log.isDebugEnabled()) {
-			UnsyncStringWriter sw =
-				new UnsyncStringWriter(true, props.size() + 1);
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
+				true, props.size() + 1);
 
-			props.list(new PrintWriter(sw));
+			props.list(new PrintWriter(unsyncStringWriter));
 
-			log.debug(sw.toString());
+			log.debug(unsyncStringWriter.toString());
 		}
 	}
 
