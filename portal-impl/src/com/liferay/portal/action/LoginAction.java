@@ -24,10 +24,12 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
@@ -104,16 +106,26 @@ public class LoginAction extends Action {
 		String loginRedirect = ParamUtil.getString(request, "redirect");
 
 		if (Validator.isNotNull(loginRedirect)) {
-			String loginPortletNamespace = PortalUtil.getPortletNamespace(
-				PropsValues.AUTH_LOGIN_PORTLET_NAME);
+			if (PrefsPropsUtil.getBoolean(
+					themeDisplay.getCompanyId(), PropsKeys.CAS_AUTH_ENABLED,
+					PropsValues.CAS_AUTH_ENABLED)) {
 
-			String loginRedirectParameter = loginPortletNamespace + "redirect";
+				redirect = loginRedirect;
+			}
+			else {
+				String loginPortletNamespace = PortalUtil.getPortletNamespace(
+					PropsValues.AUTH_LOGIN_PORTLET_NAME);
 
-			redirect = HttpUtil.setParameter(
-				redirect, "p_p_id", PropsValues.AUTH_LOGIN_PORTLET_NAME);
-			redirect = HttpUtil.setParameter(redirect, "p_p_lifecycle", "0");
-			redirect = HttpUtil.setParameter(
-				redirect, loginRedirectParameter, loginRedirect);
+				String loginRedirectParameter =
+					loginPortletNamespace + "redirect";
+
+				redirect = HttpUtil.setParameter(
+					redirect, "p_p_id", PropsValues.AUTH_LOGIN_PORTLET_NAME);
+				redirect = HttpUtil.setParameter(
+					redirect, "p_p_lifecycle", "0");
+				redirect = HttpUtil.setParameter(
+					redirect, loginRedirectParameter, loginRedirect);
+			}
 		}
 
 		response.sendRedirect(redirect);
