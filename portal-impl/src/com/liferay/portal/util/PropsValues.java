@@ -1139,6 +1139,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.MONITORING_SHOW_PER_REQUEST_DATA_SAMPLE));
 
+	public static final String MY_PLACES_DISPLAY_STYLE = PropsUtil.get(
+		PropsKeys.MY_PLACES_DISPLAY_STYLE);
+
 	public static final int MY_PLACES_MAX_ELEMENTS =
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.MY_PLACES_MAX_ELEMENTS));
 

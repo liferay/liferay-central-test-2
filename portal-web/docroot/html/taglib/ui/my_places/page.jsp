@@ -177,131 +177,230 @@ List<Group> myPlaces = user.getMyPlaces(max);
 		%>
 
 			<c:if test="<%= showPublicPlace || showPrivatePlace %>">
+				<c:choose>
+					<c:when test='<%= PropsValues.MY_PLACES_DISPLAY_STYLE.equals("simple") %>'>
 
-				<%
-				portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
-				portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
+						<%
+						portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
+						portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
-				boolean firstCommunity = false;
+						boolean firstCommunity = false;
 
-				if (myPlaces.indexOf(myPlace) == 0) {
-					firstCommunity = true;
-				}
+						if (myPlaces.indexOf(myPlace) == 0) {
+							firstCommunity = true;
+						}
 
-				boolean lastCommunity = false;
+						boolean lastCommunity = false;
 
-				if (myPlaces.size()	== (myPlaces.indexOf(myPlace) + 1)) {
-					lastCommunity = true;
-				}
+						if (myPlaces.size()	== (myPlaces.indexOf(myPlace) + 1)) {
+							lastCommunity = true;
+						}
 
-				boolean selectedCommunity = false;
+						boolean selectedCommunity = false;
 
-				if (layout != null) {
-					if (layout.getGroupId() == myPlace.getGroupId()) {
-						selectedCommunity = true;
-					}
-				}
+						if (layout != null) {
+							if (layout.getGroupId() == myPlace.getGroupId()) {
+								selectedCommunity = true;
+							}
+						}
 
-				boolean selectedPlace = false;
+						boolean selectedPlace = false;
 
-				if (layout != null) {
-					if (!layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId())) {
-						selectedPlace = true;
-					}
-				}
+						if (layout != null) {
+							if (!layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId())) {
+								selectedPlace = true;
+							}
+						}
 
-				String cssClass = "public-community";
+						String cssClass = "public-community";
 
-				if (firstCommunity) {
-					cssClass += " first";
-				}
+						if (firstCommunity) {
+							cssClass += " first";
+						}
 
-				if (lastCommunity) {
-					cssClass += " last";
-				}
+						if (lastCommunity) {
+							cssClass += " last";
+						}
 
-				if (selectedCommunity) {
-					cssClass += " current-community";
-				}
+						if (selectedCommunity) {
+							cssClass += " current-community";
+						}
 
-				if (selectedPlace) {
-					cssClass += " current-site";
-				}
-				%>
+						if (selectedPlace) {
+							cssClass += " current-site";
+						}
+						%>
 
-				<c:if test="<%= showPublicPlace && publicLayoutsPageCount > 0 %>">
-					<li class="<%= cssClass %>">
-						<a href="<%= HtmlUtil.escape(portletURL.toString()) %>" onclick="Liferay.Util.forcePost(this); return false;">
-							<span class="site-name">
-								<c:choose>
-									<c:when test="<%= organizationCommunity %>">
-										<%= HtmlUtil.escape(organization.getName()) %>
-									</c:when>
-									<c:when test="<%= userCommunity %>">
-										<liferay-ui:message key="my-public-pages" />
-									</c:when>
-									<c:when test="<%= myPlace.getName().equals(GroupConstants.GUEST) %>">
-										<%= HtmlUtil.escape(themeDisplay.getAccount().getName()) %>
-									</c:when>
-									<c:otherwise>
-										<%= myPlace.getName() %>
-									</c:otherwise>
-								</c:choose>
-							</span>
+						<c:if test="<%= showPublicPlace && publicLayoutsPageCount > 0 %>">
+							<li class="<%= cssClass %>">
+								<a href="<%= HtmlUtil.escape(portletURL.toString()) %>" onclick="Liferay.Util.forcePost(this); return false;">
+									<span class="site-name">
+										<c:choose>
+											<c:when test="<%= organizationCommunity %>">
+												<%= HtmlUtil.escape(organization.getName()) %>
+											</c:when>
+											<c:when test="<%= userCommunity %>">
+												<liferay-ui:message key="my-public-pages" />
+											</c:when>
+											<c:when test="<%= myPlace.getName().equals(GroupConstants.GUEST) %>">
+												<%= HtmlUtil.escape(themeDisplay.getAccount().getName()) %>
+											</c:when>
+											<c:otherwise>
+												<%= myPlace.getName() %>
+											</c:otherwise>
+										</c:choose>
+									</span>
 
-							<c:if test="<%= privateLayoutsPageCount > 0 %>">
-								<span class="site-type"><liferay-ui:message key="public" /></span>
-							</c:if>
-						</a>
-					</li>
-				</c:if>
+									<c:if test="<%= privateLayoutsPageCount > 0 %>">
+										<span class="site-type"><liferay-ui:message key="public" /></span>
+									</c:if>
+								</a>
+							</li>
+						</c:if>
 
-				<%
-				portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
+						<%
+						portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
-				selectedPlace = false;
+						selectedPlace = false;
 
-				if (layout != null) {
-					selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId());
-				}
+						if (layout != null) {
+							selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId());
+						}
 
-				cssClass = "private-community";
+						cssClass = "private-community";
 
-				if (selectedCommunity) {
-					cssClass += " current-community";
-				}
+						if (selectedCommunity) {
+							cssClass += " current-community";
+						}
 
-				if (selectedPlace) {
-					cssClass += " current-site";
-				}
-				%>
+						if (selectedPlace) {
+							cssClass += " current-site";
+						}
+						%>
 
-				<c:if test="<%= showPrivatePlace && privateLayoutsPageCount > 0 %>">
-					<li class="<%= cssClass %>">
-						<a href="<%= HtmlUtil.escape(portletURL.toString()) %>" onclick="Liferay.Util.forcePost(this); return false;">
-							<span class="site-name">
-								<c:choose>
-									<c:when test="<%= organizationCommunity %>">
-										<%= HtmlUtil.escape(organization.getName()) %>
-									</c:when>
-									<c:when test="<%= userCommunity %>">
-										<liferay-ui:message key="my-private-pages" />
-									</c:when>
-									<c:when test="<%= myPlace.getName().equals(GroupConstants.GUEST) %>">
-										<%= HtmlUtil.escape(themeDisplay.getAccount().getName()) %>
-									</c:when>
-									<c:otherwise>
-										<%= myPlace.getName() %>
-									</c:otherwise>
-								</c:choose>
-							</span>
+						<c:if test="<%= showPrivatePlace && privateLayoutsPageCount > 0 %>">
+							<li class="<%= cssClass %>">
+								<a href="<%= HtmlUtil.escape(portletURL.toString()) %>" onclick="Liferay.Util.forcePost(this); return false;">
+									<span class="site-name">
+										<c:choose>
+											<c:when test="<%= organizationCommunity %>">
+												<%= HtmlUtil.escape(organization.getName()) %>
+											</c:when>
+											<c:when test="<%= userCommunity %>">
+												<liferay-ui:message key="my-private-pages" />
+											</c:when>
+											<c:when test="<%= myPlace.getName().equals(GroupConstants.GUEST) %>">
+												<%= HtmlUtil.escape(themeDisplay.getAccount().getName()) %>
+											</c:when>
+											<c:otherwise>
+												<%= myPlace.getName() %>
+											</c:otherwise>
+										</c:choose>
+									</span>
 
-							<c:if test="<%= publicLayoutsPageCount > 0 %>">
-								<span class="site-type"><liferay-ui:message key="private" /></span>
-							</c:if>
-						</a>
-					</li>
-				</c:if>
+									<c:if test="<%= publicLayoutsPageCount > 0 %>">
+										<span class="site-type"><liferay-ui:message key="private" /></span>
+									</c:if>
+								</a>
+							</li>
+						</c:if>
+					</c:when>
+					<c:when test='<%= PropsValues.MY_PLACES_DISPLAY_STYLE.equals("classic") %>'>
+
+						<%
+						boolean selectedCommunity = false;
+
+						if (layout != null) {
+							if (layout.getGroupId() == myPlace.getGroupId()) {
+								selectedCommunity = true;
+							}
+						}
+						%>
+
+						<li class="<%= selectedCommunity ? "current-community" : "" %>">
+							<h3>
+								<a href="javascript:;">
+									<c:choose>
+										<c:when test="<%= organizationCommunity %>">
+											<%= HtmlUtil.escape(organization.getName()) %>
+										</c:when>
+										<c:when test="<%= userCommunity %>">
+											<liferay-ui:message key="my-community" />
+										</c:when>
+										<c:otherwise>
+											<%= myPlace.getName() %>
+										</c:otherwise>
+									</c:choose>
+								</a>
+							</h3>
+
+							<ul>
+
+								<%
+								portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
+								portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
+
+								boolean selectedPlace = false;
+
+								if (layout != null) {
+									selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId());
+								}
+								%>
+
+								<c:if test="<%= showPublicPlace %>">
+									<li class="public <%= selectedPlace ? "current" : "" %>">
+										<a href="<%= publicLayoutsPageCount > 0 ? HtmlUtil.escape(portletURL.toString()) : "javascript:;" %>"
+
+										<c:if test="<%= userCommunity %>">
+											id="my-community-public-pages"
+										</c:if>
+
+										<c:if test="<%= publicLayoutsPageCount > 0 %>">
+											onclick="Liferay.Util.forcePost(this); return false;"
+										</c:if>
+
+										><liferay-ui:message key="public-pages" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
+
+										<c:if test="<%= publicAddPageHREF != null %>">
+											<a class="add-page" href="<%= HtmlUtil.escape(publicAddPageHREF) %>" onclick="Liferay.Util.forcePost(this); return false;"><liferay-ui:message key="manage-pages" /></a>
+										</c:if>
+									</li>
+								</c:if>
+
+								<%
+								portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
+								portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
+
+								selectedPlace = false;
+
+								if (layout != null) {
+									selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == myPlace.getGroupId());
+								}
+								%>
+
+								<c:if test="<%= showPrivatePlace %>">
+									<li class="private <%= selectedPlace ? "current" : "" %>">
+										<a href="<%= privateLayoutsPageCount > 0 ? HtmlUtil.escape(portletURL.toString()) : "javascript:;" %>"
+
+										<c:if test="<%= userCommunity %>">
+											id="my-community-private-pages"
+										</c:if>
+
+										<c:if test="<%= privateLayoutsPageCount > 0 %>">
+											onclick="Liferay.Util.forcePost(this); return false;"
+										</c:if>
+
+										><liferay-ui:message key="private-pages" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
+
+										<c:if test="<%= privateAddPageHREF != null %>">
+											<a class="add-page" href="<%= HtmlUtil.escape(privateAddPageHREF) %>" onclick="Liferay.Util.forcePost(this); return false;"><liferay-ui:message key="manage-pages" /></a>
+										</c:if>
+									</li>
+								</c:if>
+							</ul>
+						</li>
+					</c:when>
+				</c:choose>
 			</c:if>
 
 		<%

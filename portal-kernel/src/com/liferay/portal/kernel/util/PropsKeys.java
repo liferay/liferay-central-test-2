@@ -1027,6 +1027,8 @@ public interface PropsKeys {
 
 	public static final String MSN_PASSWORD = "msn.password";
 
+	public static final String MY_PLACES_DISPLAY_STYLE = "my.places.display.style";
+
 	public static final String MY_PLACES_MAX_ELEMENTS = "my.places.max.elements";
 
 	public static final String MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS = "my.places.show.community.private.sites.with.no.layouts";
