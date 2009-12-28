@@ -363,13 +363,9 @@ public class GetterUtil {
 			return defaultValue;
 		}
 
-		int result = 0;
 		boolean negative = false;
 		int index = 0;
 		int limit = -Integer.MAX_VALUE;
-		int multmin;
-		int digit;
-
 		char firstChar = value.charAt(0);
 		if (firstChar < '0') {
 			if (firstChar == '-') {
@@ -384,20 +380,23 @@ public class GetterUtil {
 			}
 			index++;
 		}
-		multmin = limit / 10;
+		int smallerMin = limit / 10;
+		int result = 0;
 		while (index < length) {
-			digit = Character.digit(value.charAt(index++), 10);
-			if (digit < 0) {
+			// Prevent int overflow
+			if (result < smallerMin) {
 				return defaultValue;
 			}
-			if (result < multmin) {
+			char ch = value.charAt(index++);
+			if(ch < '0' || ch > '9') {
 				return defaultValue;
 			}
+			int number = ch - '0';
 			result *= 10;
-			if (result < limit + digit) {
+			if (result < limit + number) {
 				return defaultValue;
 			}
-			result -= digit;
+			result -= number;
 		}
 		return negative ? result : -result;
 	}
@@ -409,13 +408,9 @@ public class GetterUtil {
 			return defaultValue;
 		}
 
-		long result = 0;
 		boolean negative = false;
 		int index = 0;
 		long limit = -Long.MAX_VALUE;
-		long multmin;
-		int digit;
-
 		char firstChar = value.charAt(0);
 		if (firstChar < '0') {
 			if (firstChar == '-') {
@@ -430,20 +425,23 @@ public class GetterUtil {
 			}
 			index++;
 		}
-		multmin = limit / 10;
+		long smallerMin = limit / 10;
+		long result = 0;
 		while (index < length) {
-			digit = Character.digit(value.charAt(index++), 10);
-			if (digit < 0) {
+			// Prevent long overflow
+			if (result < smallerMin) {
 				return defaultValue;
 			}
-			if (result < multmin) {
+			char ch = value.charAt(index++);
+			if(ch < '0' || ch > '9') {
 				return defaultValue;
 			}
+			int number = ch - '0';
 			result *= 10;
-			if (result < limit + digit) {
+			if (result < limit + number) {
 				return defaultValue;
 			}
-			result -= digit;
+			result -= number;
 		}
 		return negative ? result : -result;
 	}
