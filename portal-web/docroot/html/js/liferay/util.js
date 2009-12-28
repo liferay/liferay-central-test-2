@@ -682,7 +682,7 @@ Liferay.Util = {
 		if (selectedIndex >= 0) {
 			var selectedOption = fromBox.all('option').item(selectedIndex);
 
-			toSelect.append(selectedOption);
+			toBox.append(selectedOption);
 		}
 
 		if (selectedOption.text() != '' && sort == true) {
