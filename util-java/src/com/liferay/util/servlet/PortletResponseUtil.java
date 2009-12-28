@@ -125,7 +125,8 @@ public class PortletResponseUtil {
 				resourceResponse.setContentLength(contentLength);
 			}
 
-			mimeResponse.getPortletOutputStream().write(bytes, 0, contentLength);
+			mimeResponse.getPortletOutputStream().write(
+				bytes, 0, contentLength);
 		}
 	}
 

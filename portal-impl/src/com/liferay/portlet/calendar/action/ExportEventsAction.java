@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.calendar.action;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -38,7 +37,6 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
