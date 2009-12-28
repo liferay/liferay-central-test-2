@@ -60,8 +60,6 @@ public class StripFilter extends BasePortalFilter {
 		for (int i = offset ; i < oldByteArray.length ; i++) {
 			char c = (char)oldByteArray[i];
 
-			// Only test the common "white space", ignore other "white space"
-			// according to Charactor.isWhitespace(char ch)
 			if ((c == CharPool.SPACE) || (c == CharPool.TAB) ||
 				(c == CharPool.RETURN) || (c == CharPool.NEW_LINE)) {
 
