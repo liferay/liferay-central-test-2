@@ -46,17 +46,17 @@
 	<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="<%= false %>" />
 
 	<%
-	String	DataInputOnChange = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "portletDataControls');";
+	String taglibTogglePortletDataControls = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "portletDataControls');";
 	%>
 
 	<c:choose>
 		<c:when test='<%= tabs2.equals("import") || tabs2.equals("staging") %>'>
 			<aui:input helpMessage="delete-portlet-data-help" inlineLabel="left" label="delete-portlet-data-before-importing" name="<%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
 
-			<aui:input inlineLabel="left" label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" onChange="<%= DataInputOnChange %>" type="checkbox" value="<%= true %>" />
+			<aui:input inlineLabel="left" label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" onChange="<%= taglibTogglePortletDataControls %>" type="checkbox" value="<%= true %>" />
 		</c:when>
 		<c:otherwise>
-			<aui:input inlineLabel="left" label="data" name='<%= PortletDataHandlerKeys.PORTLET_DATA + "_" + selPortlet.getRootPortletId() %>' onChange="<%= DataInputOnChange %>" type="checkbox" value="<%= true %>" />
+			<aui:input inlineLabel="left" label="data" name='<%= PortletDataHandlerKeys.PORTLET_DATA + "_" + selPortlet.getRootPortletId() %>' onChange="<%= taglibTogglePortletDataControls %>" type="checkbox" value="<%= true %>" />
 		</c:otherwise>
 	</c:choose>
 
@@ -154,6 +154,7 @@
 								disabled="<%= false %>"
 							/>
 						</aui:field-wrapper>
+
 						<aui:field-wrapper label="end-date">
 							<liferay-ui:input-date
 								monthParam="endDateMonth"
@@ -187,10 +188,10 @@
 	</div>
 
 	<%
-	String	permissionsInputOnChange = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "permissionsUl');";
+	String taglibTogglePermissionsUl = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "permissionsUl');";
 	%>
 
-	<aui:input helpMessage="export-import-portlet-permissions-help" inlineLabel="left" label="permissions" name="<%= PortletDataHandlerKeys.PERMISSIONS %>" onChange="<%= permissionsInputOnChange %>" type="checkbox" />
+	<aui:input helpMessage="export-import-portlet-permissions-help" inlineLabel="left" label="permissions" name="<%= PortletDataHandlerKeys.PERMISSIONS %>" onChange="<%= taglibTogglePermissionsUl %>" type="checkbox" />
 
 	<div id="<portlet:namespace />permissionsUl">
 		<c:choose>
