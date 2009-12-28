@@ -352,7 +352,7 @@ public class GetterUtil {
 		}
 
 		int pos = 0;
-		long limit = -Integer.MAX_VALUE;
+		int limit = -Integer.MAX_VALUE;
 		boolean negative = false;
 
 		char c = value.charAt(0);
@@ -373,7 +373,7 @@ public class GetterUtil {
 			pos++;
 		}
 
-		long smallLimit = limit / 10;
+		int smallLimit = limit / 10;
 
 		int result = 0;
 
