@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.portlet.MimeResponse;
 import javax.portlet.ResourceResponse;
@@ -125,8 +126,9 @@ public class PortletResponseUtil {
 				resourceResponse.setContentLength(contentLength);
 			}
 
-			mimeResponse.getPortletOutputStream().write(
-				bytes, 0, contentLength);
+			OutputStream outputStream = mimeResponse.getPortletOutputStream();
+
+			outputStream.write(bytes, 0, contentLength);
 		}
 	}
 

@@ -40,6 +40,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 
 import java.io.FileWriter;
+import java.io.Writer;
 
 import java.lang.reflect.Field;
 
@@ -95,7 +96,7 @@ public class ConfigurationImpl
 					String fileName = StringUtil.replace(
 						url.getFile(), "%20", StringPool.SPACE);
 
-					FileWriter writer =	new FileWriter(fileName, true);
+					Writer writer =	new FileWriter(fileName, true);
 
 					writer.write("\n\nbase.path=".concat(basePath));
 

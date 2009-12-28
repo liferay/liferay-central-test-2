@@ -39,6 +39,7 @@ import java.io.InputStream;
 
 import java.net.SocketException;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.net.URLCodec;
@@ -123,7 +124,10 @@ public class ServletResponseUtil {
 
 				response.setContentLength(contentLength);
 
-				response.getOutputStream().write(bytes, 0, contentLength);
+				ServletOutputStream servletOutputStream =
+					response.getOutputStream();
+
+				servletOutputStream.write(bytes, 0, contentLength);
 			}
 		}
 		catch (IOException ioe) {

@@ -440,13 +440,13 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		nsDetector detector = new nsDetector(nsPSMDetector.ALL);
 
-		FileInputStream fileInputStream = new FileInputStream(file);
+		InputStream inputStream = new FileInputStream(file);
 
 		byte[] buffer = new byte[1024];
 
 		int len = 0;
 
-		while ((len = fileInputStream.read(buffer, 0, buffer.length)) != -1) {
+		while ((len = inputStream.read(buffer, 0, buffer.length)) != -1) {
 
 			if (ascii) {
 				ascii = detector.isAscii(buffer, len);
@@ -459,7 +459,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		detector.DataEnd();
 
-		fileInputStream.close();
+		inputStream.close();
 
 		return ascii;
 	}
@@ -709,8 +709,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		}
 
 		Writer writer = new OutputStreamWriter(
-				new FileOutputStream(file, append), StringPool.UTF8);
+			new FileOutputStream(file, append), StringPool.UTF8);
+
 		writer.write(s);
+
 		writer.close();
 	}
 
