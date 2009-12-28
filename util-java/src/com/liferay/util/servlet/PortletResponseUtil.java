@@ -22,7 +22,6 @@
 
 package com.liferay.util.servlet;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -37,7 +36,6 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import javax.portlet.MimeResponse;
 import javax.portlet.ResourceResponse;
@@ -110,35 +108,24 @@ public class PortletResponseUtil {
 			MimeResponse mimeResponse, byte[] bytes, int contentLength)
 		throws IOException {
 
-		OutputStream os = null;
+		// LEP-3122
 
-		try {
+		if (!mimeResponse.isCommitted()) {
 
-			// LEP-3122
+			// LEP-536
 
-			if (!mimeResponse.isCommitted()) {
-
-				// LEP-536
-
-				if (contentLength == 0) {
-					contentLength = bytes.length;
-				}
-
-				if (mimeResponse instanceof ResourceResponse) {
-					ResourceResponse resourceResponse =
-						(ResourceResponse)mimeResponse;
-
-					resourceResponse.setContentLength(contentLength);
-				}
-
-				os = new UnsyncBufferedOutputStream(
-					mimeResponse.getPortletOutputStream());
-
-				os.write(bytes, 0, contentLength);
+			if (contentLength == 0) {
+				contentLength = bytes.length;
 			}
-		}
-		finally {
-			StreamUtil.cleanUp(os);
+
+			if (mimeResponse instanceof ResourceResponse) {
+				ResourceResponse resourceResponse =
+					(ResourceResponse)mimeResponse;
+
+				resourceResponse.setContentLength(contentLength);
+			}
+
+			mimeResponse.getPortletOutputStream().write(bytes, 0, contentLength);
 		}
 	}
 

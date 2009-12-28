@@ -97,10 +97,9 @@ public class ConfigurationImpl
 					String fileName = StringUtil.replace(
 						url.getFile(), "%20", StringPool.SPACE);
 
-					Writer writer = new UnsyncBufferedWriter(
-						new FileWriter(fileName, true));
+					FileWriter writer =	new FileWriter(fileName, true);
 
-					writer.write("\n\nbase.path=" + basePath);
+					writer.write("\n\nbase.path=".concat(basePath));
 
 					writer.close();
 				}

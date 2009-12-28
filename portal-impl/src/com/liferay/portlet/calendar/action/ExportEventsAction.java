@@ -82,14 +82,12 @@ public class ExportEventsAction extends PortletAction {
 					themeDisplay.getScopeGroupId(), exportFileName);
 			}
 
-			InputStream is = new UnsyncBufferedInputStream(
-				new FileInputStream(file));
-
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 
 			ServletResponseUtil.sendFile(
-				response, file.getName(), is, ContentTypes.TEXT_CALENDAR);
+				response, file.getName(), new FileInputStream(file),
+				ContentTypes.TEXT_CALENDAR);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}

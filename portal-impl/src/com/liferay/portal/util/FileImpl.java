@@ -22,9 +22,7 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -47,6 +45,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
+import java.io.Writer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -441,15 +440,13 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		nsDetector detector = new nsDetector(nsPSMDetector.ALL);
 
-		UnsyncBufferedInputStream unsyncByteArrayInputStream =
-			new UnsyncBufferedInputStream(new FileInputStream(file));
+		FileInputStream fileInputStream = new FileInputStream(file);
 
 		byte[] buffer = new byte[1024];
 
 		int len = 0;
 
-		while ((len = unsyncByteArrayInputStream.read(
-					buffer, 0, buffer.length)) != -1) {
+		while ((len = fileInputStream.read(buffer, 0, buffer.length)) != -1) {
 
 			if (ascii) {
 				ascii = detector.isAscii(buffer, len);
@@ -462,7 +459,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		detector.DataEnd();
 
-		unsyncByteArrayInputStream.close();
+		fileInputStream.close();
 
 		return ascii;
 	}
@@ -711,13 +708,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			}
 		}
 
-		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
-			new OutputStreamWriter(
-				new FileOutputStream(file, append), StringPool.UTF8));
-
-		unsyncBufferedWriter.write(s);
-
-		unsyncBufferedWriter.close();
+		Writer writer = new OutputStreamWriter(
+				new FileOutputStream(file, append), StringPool.UTF8);
+		writer.write(s);
+		writer.close();
 	}
 
 	public void write(String fileName, byte[] bytes) throws IOException {

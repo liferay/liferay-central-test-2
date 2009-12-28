@@ -22,7 +22,6 @@
 
 package com.liferay.util.servlet;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -37,7 +36,6 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import java.net.SocketException;
 
@@ -111,8 +109,6 @@ public class ServletResponseUtil {
 			HttpServletResponse response, byte[] bytes, int contentLength)
 		throws IOException {
 
-		OutputStream os = null;
-
 		try {
 
 			// LEP-3122
@@ -127,9 +123,7 @@ public class ServletResponseUtil {
 
 				response.setContentLength(contentLength);
 
-				os = new UnsyncBufferedOutputStream(response.getOutputStream());
-
-				os.write(bytes, 0, contentLength);
+				response.getOutputStream().write(bytes, 0, contentLength);
 			}
 		}
 		catch (IOException ioe) {
@@ -143,9 +137,6 @@ public class ServletResponseUtil {
 			else {
 				throw ioe;
 			}
-		}
-		finally {
-			StreamUtil.cleanUp(os);
 		}
 	}
 
