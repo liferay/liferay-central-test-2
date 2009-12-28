@@ -352,7 +352,6 @@ public class GetterUtil {
 		}
 
 		int pos = 0;
-
 		long limit = -Integer.MAX_VALUE;
 		boolean negative = false;
 
@@ -374,12 +373,12 @@ public class GetterUtil {
 			pos++;
 		}
 
-		long smallerMin = limit / 10;
+		long smallLimit = limit / 10;
 
 		int result = 0;
 
 		while (pos < length) {
-			if (result < smallerMin) {
+			if (result < smallLimit) {
 				return defaultValue;
 			}
 
@@ -416,7 +415,6 @@ public class GetterUtil {
 		}
 
 		int pos = 0;
-
 		long limit = -Long.MAX_VALUE;
 		boolean negative = false;
 
@@ -438,12 +436,12 @@ public class GetterUtil {
 			pos++;
 		}
 
-		long smallerMin = limit / 10;
+		long smallLimit = limit / 10;
 
 		long result = 0;
 
 		while (pos < length) {
-			if (result < smallerMin) {
+			if (result < smallLimit) {
 				return defaultValue;
 			}
 
