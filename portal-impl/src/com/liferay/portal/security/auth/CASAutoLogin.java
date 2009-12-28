@@ -134,20 +134,25 @@ public class CASAutoLogin implements AutoLogin {
 	protected User importLDAPUser(long companyId, String screenName)
 		throws Exception {
 
+		long ldapServerId = PortalLDAPUtil.getLdapServerId(
+			companyId, screenName);
+
+		String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
+
 		LdapContext ctx = null;
 
 		try {
 			String baseDN = PrefsPropsUtil.getString(
-				companyId, PropsKeys.LDAP_BASE_DN);
+				companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
-			ctx = PortalLDAPUtil.getContext(companyId);
+			ctx = PortalLDAPUtil.getContext(ldapServerId, companyId);
 
 			if (ctx == null) {
 				throw new SystemException("Failed to bind to the LDAP server");
 			}
 
 			String filter = PrefsPropsUtil.getString(
-				companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER);
+				companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER + postfix);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Search filter before transformation " + filter);
@@ -180,11 +185,13 @@ public class CASAutoLogin implements AutoLogin {
 				Binding binding = enu.nextElement();
 
 				Attributes attrs = PortalLDAPUtil.getUserAttributes(
-					companyId, ctx,
-					PortalLDAPUtil.getNameInNamespace(companyId, binding));
+					ldapServerId, companyId, ctx,
+					PortalLDAPUtil.getNameInNamespace(
+						ldapServerId, companyId, binding));
 
 				return PortalLDAPUtil.importLDAPUser(
-					companyId, ctx, attrs, StringPool.BLANK, true);
+					ldapServerId, companyId, ctx, attrs, StringPool.BLANK,
+					true);
 			}
 			else {
 				throw new NoSuchUserException(

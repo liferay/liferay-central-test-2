@@ -89,8 +89,9 @@ import javax.naming.ldap.PagedResultsResponseControl;
  * @author Brian Wing Shun Chan
  * @author Jerry Niu
  * @author Scott Lee
- * @author Herv� M�nage
+ * @author Hervé Ménage
  * @author Samuel Kong
+ * @author Ryan Park
  */
 public class PortalLDAPUtil {
 
@@ -105,31 +106,33 @@ public class PortalLDAPUtil {
 			return;
 		}
 
-		LdapContext ctx = getContext(companyId);
+		User user = UserLocalServiceUtil.getUserByContactId(
+			contact.getContactId());
+
+		long ldapServerId = getLdapServerId(companyId, user.getScreenName());
+
+		LdapContext ctx = getContext(ldapServerId, companyId);
 
 		try {
 			if (ctx == null) {
 				return;
 			}
 
-			User user = UserLocalServiceUtil.getUserByContactId(
-				contact.getContactId());
-
-			Properties userMappings = getUserMappings(companyId);
+			Properties userMappings = getUserMappings(ldapServerId, companyId);
 			Binding binding = getUser(
-				contact.getCompanyId(), user.getScreenName());
+				ldapServerId, contact.getCompanyId(), user.getScreenName());
 			Name name = new CompositeName();
 
 			if (binding == null) {
 
 				// Create new user in LDAP
 
-				_getDNName(companyId, user, userMappings, name);
+				_getDNName(ldapServerId, companyId, user, userMappings, name);
 
 				LDAPUser ldapUser = (LDAPUser)Class.forName(
 					PropsValues.LDAP_USER_IMPL).newInstance();
 
-				ldapUser.setUser(user);
+				ldapUser.setUser(user, ldapServerId);
 
 				ctx.bind(name, ldapUser);
 			}
@@ -137,7 +140,7 @@ public class PortalLDAPUtil {
 
 				// Modify existing LDAP user record
 
-				name.add(getNameInNamespace(companyId, binding));
+				name.add(getNameInNamespace(ldapServerId, companyId, binding));
 
 				Modifications mods = Modifications.getInstance();
 
@@ -182,39 +185,42 @@ public class PortalLDAPUtil {
 			return;
 		}
 
-		LdapContext ctx = getContext(companyId);
+		long ldapServerId = getLdapServerId(companyId, user.getScreenName());
+
+		LdapContext ctx = getContext(ldapServerId, companyId);
 
 		try {
 			if (ctx == null) {
 				return;
 			}
 
-			Properties userMappings = getUserMappings(companyId);
+			Properties userMappings = getUserMappings(ldapServerId, companyId);
 			Binding binding = getUser(
-				user.getCompanyId(), user.getScreenName());
+				ldapServerId, user.getCompanyId(), user.getScreenName());
 			Name name = new CompositeName();
 
 			if (binding == null) {
 
 				// Create new user in LDAP
 
-				_getDNName(companyId, user, userMappings, name);
+				_getDNName(ldapServerId, companyId, user, userMappings, name);
 
 				LDAPUser ldapUser = (LDAPUser)Class.forName(
 					PropsValues.LDAP_USER_IMPL).newInstance();
 
-				ldapUser.setUser(user);
+				ldapUser.setUser(user, ldapServerId);
 
 				ctx.bind(name, ldapUser);
 
-				binding = getUser(user.getCompanyId(), user.getScreenName());
+				binding = getUser(ldapServerId, user.getCompanyId(),
+					user.getScreenName());
 
 				name = new CompositeName();
 			}
 
 			// Modify existing LDAP user record
 
-			name.add(getNameInNamespace(companyId, binding));
+			name.add(getNameInNamespace(ldapServerId, companyId, binding));
 
 			Modifications mods = Modifications.getInstance();
 
@@ -264,12 +270,14 @@ public class PortalLDAPUtil {
 	}
 
 	public static String getAuthSearchFilter(
-			long companyId, String emailAddress, String screenName,
-			String userId)
+			long ldapServerId, long companyId, String emailAddress,
+			String screenName, String userId)
 		throws SystemException {
 
+		String postfix = getPropertyPostfix(ldapServerId);
+
 		String filter = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER);
+			companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER + postfix);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Search filter before transformation " + filter);
@@ -292,13 +300,17 @@ public class PortalLDAPUtil {
 		return filter;
 	}
 
-	public static LdapContext getContext(long companyId) throws Exception {
+	public static LdapContext getContext(long ldapServerId, long companyId)
+		throws Exception {
+
+		String postfix = getPropertyPostfix(ldapServerId);
+
 		String baseProviderURL = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_BASE_PROVIDER_URL);
+			companyId, PropsKeys.LDAP_BASE_PROVIDER_URL + postfix);
 		String pricipal = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_SECURITY_PRINCIPAL);
+			companyId, PropsKeys.LDAP_SECURITY_PRINCIPAL + postfix);
 		String credentials = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_SECURITY_CREDENTIALS);
+			companyId, PropsKeys.LDAP_SECURITY_CREDENTIALS + postfix);
 
 		return getContext(companyId, baseProviderURL, pricipal, credentials);
 	}
@@ -348,18 +360,20 @@ public class PortalLDAPUtil {
 	}
 
 	public static Attributes getGroupAttributes(
-			long companyId, LdapContext ctx, String fullDistinguishedName)
+			long ldapServerId, long companyId, LdapContext ctx,
+			String fullDistinguishedName)
 		throws Exception {
 
-		return getGroupAttributes(companyId, ctx, fullDistinguishedName, false);
+		return getGroupAttributes(ldapServerId, companyId, ctx,
+			fullDistinguishedName, false);
 	}
 
 	public static Attributes getGroupAttributes(
-			long companyId, LdapContext ctx, String fullDistinguishedName,
-			boolean includeReferenceAttributes)
+			long ldapServerId, long companyId, LdapContext ctx,
+			String fullDistinguishedName, boolean includeReferenceAttributes)
 		throws Exception {
 
-		Properties groupMappings = getGroupMappings(companyId);
+		Properties groupMappings = getGroupMappings(ldapServerId, companyId);
 
 		List<String> mappedGroupAttributeIds = new ArrayList<String>();
 
@@ -375,11 +389,14 @@ public class PortalLDAPUtil {
 			mappedGroupAttributeIds.toArray(new String[0]));
 	}
 
-	public static Properties getGroupMappings(long companyId)
+	public static Properties getGroupMappings(long ldapServerId, long companyId)
 		throws Exception {
 
+		String postfix = getPropertyPostfix(ldapServerId);
+
 		Properties groupMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(companyId, PropsKeys.LDAP_GROUP_MAPPINGS));
+			PrefsPropsUtil.getString(companyId,
+				PropsKeys.LDAP_GROUP_MAPPINGS + postfix));
 
 		LogUtil.debug(_log, groupMappings);
 
@@ -387,13 +404,15 @@ public class PortalLDAPUtil {
 	}
 
 	public static List<SearchResult> getGroups(
-			long companyId, LdapContext ctx, int maxResults)
+			long ldapServerId, long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
+		String postfix = getPropertyPostfix(ldapServerId);
+
 		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_BASE_DN);
+			companyId, PropsKeys.LDAP_BASE_DN + postfix);
 		String groupFilter = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER);
+			companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix);
 
 		return getGroups(companyId, ctx, maxResults, baseDN, groupFilter);
 	}
@@ -405,6 +424,25 @@ public class PortalLDAPUtil {
 
 		return _searchLDAP(
 			companyId, ctx, maxResults, baseDN, groupFilter, null);
+	}
+
+	public static long getLdapServerId(long companyId, String screenName)
+		throws Exception {
+
+		long[] ldapServerIds = StringUtil.split(
+			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+
+		for (long ldapServerId : ldapServerIds) {
+			if (hasUser(ldapServerId, companyId, screenName)) {
+				return ldapServerId;
+			}
+		}
+
+		if (ldapServerIds.length > 0) {
+			return ldapServerIds[0];
+		}
+
+		return 0;
 	}
 
 	public static Attribute getMultivaluedAttribute(
@@ -458,11 +496,14 @@ public class PortalLDAPUtil {
 		return attribute;
 	}
 
-	public static String getNameInNamespace(long companyId, Binding binding)
+	public static String getNameInNamespace(
+			long ldapServerId, long companyId, Binding binding)
 		throws Exception {
 
+		String postfix = getPropertyPostfix(ldapServerId);
+
 		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_BASE_DN);
+			companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
 		String name = binding.getName();
 
@@ -486,10 +527,21 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static Binding getUser(long companyId, String screenName)
+	public static String getPropertyPostfix(long ldapServerId) {
+		if (ldapServerId > 0) {
+			return StringPool.PERIOD + ldapServerId;
+		}
+
+		return StringPool.BLANK;
+	}
+
+	public static Binding getUser(
+			long ldapServerId, long companyId, String screenName)
 		throws Exception {
 
-		LdapContext ctx = getContext(companyId);
+		String postfix = getPropertyPostfix(ldapServerId);
+
+		LdapContext ctx = getContext(ldapServerId, companyId);
 
 		NamingEnumeration<SearchResult> enu = null;
 
@@ -499,9 +551,9 @@ public class PortalLDAPUtil {
 			}
 
 			String baseDN = PrefsPropsUtil.getString(
-				companyId, PropsKeys.LDAP_BASE_DN);
+				companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
-			Properties userMappings = getUserMappings(companyId);
+			Properties userMappings = getUserMappings(ldapServerId, companyId);
 
 			StringBuilder filter = new StringBuilder();
 
@@ -538,10 +590,11 @@ public class PortalLDAPUtil {
 	}
 
 	public static Attributes getUserAttributes(
-			long companyId, LdapContext ctx, String fullDistinguishedName)
+			long ldapServerId, long companyId, LdapContext ctx,
+			String fullDistinguishedName)
 		throws Exception {
 
-		Properties userMappings = getUserMappings(companyId);
+		Properties userMappings = getUserMappings(ldapServerId, companyId);
 
 		String[] mappedUserAttributeIds = {
 			userMappings.getProperty("screenName"),
@@ -558,9 +611,14 @@ public class PortalLDAPUtil {
 			ctx, fullDistinguishedName, mappedUserAttributeIds);
 	}
 
-	public static Properties getUserMappings(long companyId) throws Exception {
+	public static Properties getUserMappings(long ldapServerId, long companyId)
+		throws Exception {
+
+		String postfix = getPropertyPostfix(ldapServerId);
+
 		Properties userMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(companyId, PropsKeys.LDAP_USER_MAPPINGS));
+			PrefsPropsUtil.getString(companyId,
+				PropsKeys.LDAP_USER_MAPPINGS + postfix));
 
 		LogUtil.debug(_log, userMappings);
 
@@ -568,13 +626,15 @@ public class PortalLDAPUtil {
 	}
 
 	public static List<SearchResult> getUsers(
-			long companyId, LdapContext ctx, int maxResults)
+			long ldapServerId, long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
+		String postfix = getPropertyPostfix(ldapServerId);
+
 		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_BASE_DN);
+			companyId, PropsKeys.LDAP_BASE_DN + postfix);
 		String userFilter = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER);
+			companyId, PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix);
 
 		return getUsers(companyId, ctx, maxResults, baseDN, userFilter);
 	}
@@ -588,14 +648,20 @@ public class PortalLDAPUtil {
 			companyId, ctx, maxResults, baseDN, userFilter, null);
 	}
 
-	public static String getUsersDN(long companyId) throws Exception {
-		return PrefsPropsUtil.getString(companyId, PropsKeys.LDAP_USERS_DN);
-	}
-
-	public static boolean hasUser(long companyId, String screenName)
+	public static String getUsersDN(long ldapServerId, long companyId)
 		throws Exception {
 
-		if (getUser(companyId, screenName) != null) {
+		String postfix = getPropertyPostfix(ldapServerId);
+
+		return PrefsPropsUtil.getString(companyId,
+			PropsKeys.LDAP_USERS_DN + postfix);
+	}
+
+	public static boolean hasUser(
+			long ldapServerId, long companyId, String screenName)
+		throws Exception {
+
+		if (getUser(ldapServerId, companyId, screenName) != null) {
 			return true;
 		}
 		else {
@@ -616,7 +682,22 @@ public class PortalLDAPUtil {
 			return;
 		}
 
-		LdapContext ctx = getContext(companyId);
+		long[] ldapServerIds = StringUtil.split(
+			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+
+		for (long ldapServerId : ldapServerIds) {
+			importFromLDAP(ldapServerId, companyId);
+		}
+	}
+
+	public static void importFromLDAP(long ldapServerId, long companyId)
+		throws Exception {
+
+		if (!isImportEnabled(companyId)) {
+			return;
+		}
+
+		LdapContext ctx = getContext(ldapServerId, companyId);
 
 		if (ctx == null) {
 			return;
@@ -627,29 +708,35 @@ public class PortalLDAPUtil {
 				companyId, PropsKeys.LDAP_IMPORT_METHOD);
 
 			if (importMethod.equals(IMPORT_BY_USER)) {
-				List<SearchResult> results = getUsers(companyId, ctx, 0);
+				List<SearchResult> results = getUsers(
+					ldapServerId, companyId, ctx, 0);
 
 				// Loop through all LDAP users
 
 				for (SearchResult result : results) {
 					Attributes attributes = getUserAttributes(
-						companyId, ctx, getNameInNamespace(companyId, result));
+						ldapServerId, companyId, ctx,
+						getNameInNamespace(ldapServerId, companyId, result));
 
 					importLDAPUser(
-						companyId, ctx, attributes, StringPool.BLANK, true);
+						ldapServerId, companyId, ctx, attributes,
+						StringPool.BLANK, true);
 				}
 			}
 			else if (importMethod.equals(IMPORT_BY_GROUP)) {
-				List<SearchResult> results = getGroups(companyId, ctx, 0);
+				List<SearchResult> results = getGroups(
+					ldapServerId, companyId, ctx, 0);
 
 				// Loop through all LDAP groups
 
 				for (SearchResult result : results) {
 					Attributes attributes = getGroupAttributes(
-						companyId, ctx, getNameInNamespace(companyId, result),
+						ldapServerId, companyId, ctx,
+						getNameInNamespace(ldapServerId, companyId, result),
 						true);
 
-					importLDAPGroup(companyId, ctx, attributes, true);
+					importLDAPGroup(ldapServerId, companyId, ctx, attributes,
+						true);
 				}
 			}
 		}
@@ -664,16 +751,18 @@ public class PortalLDAPUtil {
 	}
 
 	public static UserGroup importLDAPGroup(
-			long companyId, LdapContext ctx, Attributes attributes,
-			boolean importGroupMembership)
+			long ldapServerId, long companyId, LdapContext ctx,
+			Attributes attributes, boolean importGroupMembership)
 		throws Exception {
+
+		String postfix = getPropertyPostfix(ldapServerId);
 
 		AttributesTransformer attributesTransformer =
 			AttributesTransformerFactory.getInstance();
 
 		attributes = attributesTransformer.transformGroup(attributes);
 
-		Properties groupMappings = getGroupMappings(companyId);
+		Properties groupMappings = getGroupMappings(ldapServerId, companyId);
 
 		LogUtil.debug(_log, groupMappings);
 
@@ -724,14 +813,15 @@ public class PortalLDAPUtil {
 
 			if (attribute != null) {
 				String baseDN = PrefsPropsUtil.getString(
-					companyId, PropsKeys.LDAP_BASE_DN);
+					companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
 				StringBuilder sb = new StringBuilder();
 
 				sb.append("(&");
 				sb.append(
 					PrefsPropsUtil.getString(
-						companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER));
+						companyId,
+						PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix));
 				sb.append("(");
 				sb.append(groupMappings.getProperty("groupName"));
 				sb.append("=");
@@ -744,7 +834,8 @@ public class PortalLDAPUtil {
 					companyId, ctx, baseDN, sb.toString(), attribute);
 
 				_importUsersAndMembershipFromLDAPGroup(
-					companyId, ctx, userGroup.getUserGroupId(), attribute);
+					ldapServerId, companyId, ctx, userGroup.getUserGroupId(),
+					attribute);
 			}
 		}
 
@@ -752,15 +843,17 @@ public class PortalLDAPUtil {
 	}
 
 	public static User importLDAPUser(
-			long companyId, LdapContext ctx, Attributes attributes,
-			String password, boolean importGroupMembership)
+			long ldapServerId, long companyId, LdapContext ctx,
+			Attributes attributes, String password,
+			boolean importGroupMembership)
 		throws Exception {
 
 		LDAPUserTransactionThreadLocal.setOriginatesFromLDAP(true);
 
 		try {
 			return _importLDAPUser(
-				companyId, ctx, attributes, password, importGroupMembership);
+				ldapServerId, companyId, ctx, attributes, password,
+				importGroupMembership);
 		}
 		finally {
 			LDAPUserTransactionThreadLocal.setOriginatesFromLDAP(false);
@@ -937,7 +1030,8 @@ public class PortalLDAPUtil {
 	}
 
 	private static void _getDNName(
-			long companyId, User user, Properties userMappings, Name name)
+			long ldapServerId, long companyId, User user,
+			Properties userMappings, Name name)
 		throws Exception {
 
 		// Generate full DN based on user DN
@@ -948,7 +1042,7 @@ public class PortalLDAPUtil {
 		sb.append(StringPool.EQUAL);
 		sb.append(user.getScreenName());
 		sb.append(StringPool.COMMA);
-		sb.append(getUsersDN(companyId));
+		sb.append(getUsersDN(ldapServerId, companyId));
 
 		name.add(sb.toString());
 	}
@@ -989,7 +1083,8 @@ public class PortalLDAPUtil {
 	}
 
 	private static void _importGroupsAndMembershipFromLDAPUser(
-			long companyId, LdapContext ctx, long userId, Attribute attr)
+			long ldapServerId, long companyId, LdapContext ctx, long userId,
+			Attribute attr)
 		throws Exception {
 
 		List<Long> newUserGroupIds = new ArrayList<Long>(attr.size());
@@ -1004,7 +1099,7 @@ public class PortalLDAPUtil {
 
 			try {
 				groupAttributes = getGroupAttributes(
-					companyId, ctx, fullGroupDN);
+					ldapServerId, companyId, ctx, fullGroupDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
@@ -1016,7 +1111,7 @@ public class PortalLDAPUtil {
 			}
 
 			UserGroup userGroup = importLDAPGroup(
-				companyId, ctx, groupAttributes, false);
+				ldapServerId, companyId, ctx, groupAttributes, false);
 
 			// Add user to user group
 
@@ -1038,8 +1133,9 @@ public class PortalLDAPUtil {
 	}
 
 	private static User _importLDAPUser(
-			long companyId, LdapContext ctx, Attributes attributes,
-			String password, boolean importGroupMembership)
+			long ldapServerId, long companyId, LdapContext ctx,
+			Attributes attributes, String password,
+			boolean importGroupMembership)
 		throws Exception {
 
 		AttributesTransformer attributesTransformer =
@@ -1047,7 +1143,7 @@ public class PortalLDAPUtil {
 
 		attributes = attributesTransformer.transformUser(attributes);
 
-		Properties userMappings = getUserMappings(companyId);
+		Properties userMappings = getUserMappings(ldapServerId, companyId);
 
 		LogUtil.debug(_log, userMappings);
 
@@ -1292,7 +1388,8 @@ public class PortalLDAPUtil {
 
 				if (attribute != null) {
 					_importGroupsAndMembershipFromLDAPUser(
-						companyId, ctx, user.getUserId(), attribute);
+						ldapServerId, companyId, ctx, user.getUserId(),
+						attribute);
 				}
 			}
 		}
@@ -1301,7 +1398,8 @@ public class PortalLDAPUtil {
 	}
 
 	private static void _importUsersAndMembershipFromLDAPGroup(
-			long companyId, LdapContext ctx, long userGroupId, Attribute attr)
+			long ldapServerId, long companyId, LdapContext ctx,
+			long userGroupId, Attribute attr)
 		throws Exception {
 
 		List<Long> newUserIds = new ArrayList<Long>(attr.size());
@@ -1315,7 +1413,8 @@ public class PortalLDAPUtil {
 			Attributes userAttributes = null;
 
 			try {
-				userAttributes = getUserAttributes(companyId, ctx, fullUserDN);
+				userAttributes = getUserAttributes(ldapServerId, companyId, ctx,
+					fullUserDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error("LDAP user not found with fullUserDN " + fullUserDN);
@@ -1326,7 +1425,8 @@ public class PortalLDAPUtil {
 			}
 
 			User user = importLDAPUser(
-				companyId, ctx, userAttributes, StringPool.BLANK, false);
+				ldapServerId, companyId, ctx, userAttributes, StringPool.BLANK,
+				false);
 
 			// Add user to user group
 

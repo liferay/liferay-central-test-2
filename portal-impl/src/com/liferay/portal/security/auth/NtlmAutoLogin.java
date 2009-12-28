@@ -91,8 +91,11 @@ public class NtlmAutoLogin implements AutoLogin {
 	}
 
 	protected User getUser(long companyId, String screenName) throws Exception {
-		SearchResult result = (SearchResult)PortalLDAPUtil.getUser(
+		long ldapServerId = PortalLDAPUtil.getLdapServerId(
 			companyId, screenName);
+
+		SearchResult result = (SearchResult)PortalLDAPUtil.getUser(
+			ldapServerId, companyId, screenName);
 
 		if (result == null) {
 			if (_log.isWarnEnabled()) {
@@ -103,10 +106,11 @@ public class NtlmAutoLogin implements AutoLogin {
 			return null;
 		}
 
-		LdapContext ctx = PortalLDAPUtil.getContext(companyId);
+		LdapContext ctx = PortalLDAPUtil.getContext(ldapServerId, companyId);
 
 		User user = PortalLDAPUtil.importLDAPUser(
-			companyId, ctx, result.getAttributes(), StringPool.BLANK, false);
+			ldapServerId, companyId, ctx, result.getAttributes(),
+			StringPool.BLANK, false);
 
 		ctx.close();
 

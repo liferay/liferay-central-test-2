@@ -385,6 +385,10 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_company_logo.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.edit_ldap_server" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_ldap_server.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.edit_organization" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_organization.jsp" />
 	</definition>

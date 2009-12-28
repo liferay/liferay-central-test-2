@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
@@ -136,21 +137,49 @@ public class LDAPAuth implements Authenticator {
 			_log.debug("Authenticator is enabled");
 		}
 
-		LdapContext ctx = PortalLDAPUtil.getContext(companyId);
+		long[] ldapServerIds = StringUtil.split(
+			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+
+		if (ldapServerIds.length <= 0) {
+			ldapServerIds = new long[] {0};
+		}
+
+		for (long ldapServerId : ldapServerIds) {
+			int result = authenticate(
+				companyId, ldapServerId, emailAddress, screenName, userId,
+				password);
+
+			if (result == SUCCESS) {
+				return result;
+			}
+		}
+
+		return authenticateRequired(
+			companyId, userId, emailAddress, screenName, true, FAILURE);
+	}
+
+	protected int authenticate(
+			long companyId, long ldapServerId, String emailAddress,
+			String screenName, long userId, String password)
+		throws Exception {
+
+		String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
+
+		LdapContext ctx = PortalLDAPUtil.getContext(ldapServerId, companyId);
 
 		if (ctx == null) {
-			return authenticateRequired(
-				companyId, userId, emailAddress, screenName, true, FAILURE);
+			return FAILURE;
 		}
 
 		try {
 			String baseDN = PrefsPropsUtil.getString(
-				companyId, PropsKeys.LDAP_BASE_DN);
+				companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
 			//  Process LDAP auth search filter
 
 			String filter = PortalLDAPUtil.getAuthSearchFilter(
-				companyId, emailAddress, screenName, String.valueOf(userId));
+				ldapServerId, companyId, emailAddress, screenName,
+				String.valueOf(userId));
 
 			SearchControls cons = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
@@ -166,10 +195,10 @@ public class LDAPAuth implements Authenticator {
 				SearchResult result = enu.nextElement();
 
 				String fullUserDN = PortalLDAPUtil.getNameInNamespace(
-					companyId, result);
+					ldapServerId, companyId, result);
 
 				Attributes attrs = PortalLDAPUtil.getUserAttributes(
-					companyId, ctx, fullUserDN);
+					ldapServerId, companyId, ctx, fullUserDN);
 
 				LDAPAuthResult ldapAuthResult = authenticate(
 					ctx, companyId, attrs, fullUserDN, password);
@@ -194,15 +223,13 @@ public class LDAPAuth implements Authenticator {
 				}
 
 				if (!ldapAuthResult.isAuthenticated()) {
-					return authenticateRequired(
-						companyId, userId, emailAddress, screenName, false,
-						FAILURE);
+					return FAILURE;
 				}
 
 				// Get user or create from LDAP
 
 				User user = PortalLDAPUtil.importLDAPUser(
-					companyId, ctx, attrs, password, true);
+					ldapServerId, companyId, ctx, attrs, password, true);
 
 				// Process LDAP success codes
 
@@ -224,8 +251,7 @@ public class LDAPAuth implements Authenticator {
 					_log.debug("Search filter did not return any results");
 				}
 
-				return authenticateRequired(
-					companyId, userId, emailAddress, screenName, true, DNE);
+				return DNE;
 			}
 
 			enu.close();
@@ -233,12 +259,7 @@ public class LDAPAuth implements Authenticator {
 		catch (Exception e) {
 			_log.error("Problem accessing LDAP server: " + e.getMessage());
 
-			int authResult = authenticateRequired(
-				companyId, userId, emailAddress, screenName, true, FAILURE);
-
-			if (authResult == FAILURE) {
-				throw e;
-			}
+			return FAILURE;
 		}
 		finally {
 			if (ctx != null) {

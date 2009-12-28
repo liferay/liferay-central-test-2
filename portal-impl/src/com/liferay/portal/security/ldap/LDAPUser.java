@@ -54,11 +54,13 @@ public class LDAPUser extends DummyDirContext {
 		return _user;
 	}
 
-	public void setUser(User user) throws Exception {
+	public void setUser(User user, long ldapServerId) throws Exception {
+		String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
+
 		_user = user;
 
 		Properties userMappings = PortalLDAPUtil.getUserMappings(
-			_user.getCompanyId());
+			ldapServerId, _user.getCompanyId());
 
 		_attributes = new BasicAttributes(true);
 
@@ -67,7 +69,7 @@ public class LDAPUser extends DummyDirContext {
 		Attribute objectClass = new BasicAttribute("objectclass");
 
 		String[] defaultObjectClasses = PropsUtil.getArray(
-			PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES);
+			PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + postfix);
 
 		for (int i = 0; i < defaultObjectClasses.length; i++) {
 			objectClass.add(defaultObjectClasses[i]);

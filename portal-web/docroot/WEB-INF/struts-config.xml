@@ -802,6 +802,11 @@
 
 		<action path="/enterprise_admin_settings/test_ldap_groups" forward="portlet.enterprise_admin.test_ldap_groups" />
 
+		<action path="/enterprise_admin_settings/edit_ldap_server" type="com.liferay.portlet.enterpriseadmin.action.EditLDAPServerAction">
+			<forward name="portlet.enterprise_admin.edit_ldap_server" path="portlet.enterprise_admin.edit_ldap_server" />
+			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
 		<action path="/enterprise_admin_settings/test_ldap_users" forward="portlet.enterprise_admin.test_ldap_users" />
 
 		<action path="/enterprise_admin_settings/view" forward="portlet.enterprise_admin.view" />
