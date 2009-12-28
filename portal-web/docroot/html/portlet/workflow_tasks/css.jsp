@@ -22,40 +22,28 @@
  */
 %>
 
-<%
-String toolbarItem = ParamUtil.getString(request, "toolbarItem", "all");
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("toolbarItem", toolbarItem);
-%>
-
-<liferay-util:include page="/html/portlet/workflow_tasks/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value="<%= toolbarItem %>" />
-</liferay-util:include>
-
-<%
-try {
-%>
-
-	<%@ include file="/html/portlet/workflow_tasks/workflow_tasks.jspf" %>
-
-<%
+.portlet-workflow-tasks h3.task-title, .portlet-workflow-tasks h3.comments {
+	border-bottom: 1px solid #000;
+	font-size: 14px;
+	font-weight: 700;
+	margin-top: 0;
 }
-catch (Exception e) {
-	if (_log.isWarnEnabled()) {
-		_log.warn("Error retrieving the tasks of user " + user.getUserId(), e);
-	}
-%>
 
-	<div class="portlet-msg-error">
-		<liferay-ui:message key="an-error-occurred-while-retrieving-the-list-of-tasks" />
-	</div>
-
-<%
+.portlet-workflow-tasks .lfr-portlet-toolbar .lfr-toolbar-button.completed-button a {
+	background-image: url(<%= themeImagesPath %>/common/checked.png);
 }
-%>
 
-<%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.workflow_tasks.view.jsp");
-%>
+.portlet-workflow-tasks .lfr-portlet-toolbar .lfr-toolbar-button.assigned-to-me a {
+	background-image: url(<%= themeImagesPath %>/common/assign.png);
+}
+
+.portlet-workflow-tasks .lfr-portlet-toolbar .lfr-toolbar-button.assigned-to-my-role a {
+	background-image: url(<%= themeImagesPath %>/common/assign_user_roles.png);
+}
+
+.portlet-workflow-tasks .user-avatar {
+	vertical-align: middle;
+	width: 25px;
+}

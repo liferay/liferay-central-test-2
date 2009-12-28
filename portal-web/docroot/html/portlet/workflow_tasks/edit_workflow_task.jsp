@@ -75,9 +75,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	}
 </script>
 
-<liferay-ui:tabs
-	names="workflow-task"
-/>
+<h3 class="task-title"><%= workflowTask.getName() %></h3>
 
 <portlet:actionURL var="editWorkflowTaskURL">
 	<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
@@ -90,111 +88,109 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<aui:input name="transitionName" type="hidden" />
 	<aui:input name="comment" type="hidden" />
 
-	<aui:fieldset>
-		<aui:field-wrapper inlineLabel="left" label="name">
-			<%= workflowTask.getName() %>
-		</aui:field-wrapper>
+	<aui:field-wrapper inlineLabel="left" label="name">
+		<%= workflowTask.getName() %>
+	</aui:field-wrapper>
 
-		<aui:field-wrapper label="description">
-			<%= GetterUtil.getString(workflowTask.getDescription()) %>
-		</aui:field-wrapper>
+	<aui:field-wrapper label="description">
+		<%= GetterUtil.getString(workflowTask.getDescription()) %>
+	</aui:field-wrapper>
 
-		<aui:field-wrapper inlineLabel="left" label="assignee">
-			<%= PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK) %>
-		</aui:field-wrapper>
+	<aui:field-wrapper inlineLabel="left" label="assignee">
+		<%= PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK) %>
+	</aui:field-wrapper>
+
+	<%
+	WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
+	PortletURL editPortletURL =  workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+	%>
+
+	<c:if test="<%= editPortletURL != null %>">
 
 		<%
-		WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+		editPortletURL.setWindowState(WindowState.MAXIMIZED);
+		editPortletURL.setPortletMode(PortletMode.VIEW);
 
-		PortletURL editPortletURL =  workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+		editPortletURL.setParameter("redirect", currentURL);
 		%>
 
-		<c:if test="<%= editPortletURL != null %>">
-
-			<%
-			editPortletURL.setWindowState(WindowState.MAXIMIZED);
-			editPortletURL.setPortletMode(PortletMode.VIEW);
-
-			editPortletURL.setParameter("redirect", currentURL);
-			%>
-
-			<aui:field-wrapper inlineLabel="left" label="asset-title">
-				<aui:a href="<%= editPortletURL.toString() %>"><%= workflowHandler.getTitle(classPK) %></aui:a>
-			</aui:field-wrapper>
-		</c:if>
-
-		<aui:field-wrapper inlineLabel="left" label="state">
-			<%= WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK) %>
+		<aui:field-wrapper inlineLabel="left" label="asset-title">
+			<aui:a href="<%= editPortletURL.toString() %>"><%= workflowHandler.getTitle(classPK) %></aui:a>
 		</aui:field-wrapper>
+	</c:if>
 
-		<aui:field-wrapper inlineLabel="left" label="create-date">
-			<%= dateFormatDateTime.format(workflowTask.getCreateDate()) %>
-		</aui:field-wrapper>
+	<aui:field-wrapper inlineLabel="left" label="state">
+		<%= WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK) %>
+	</aui:field-wrapper>
 
-		<aui:field-wrapper inlineLabel="left" label="due-date">
-			<%= (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate()) %>
-		</aui:field-wrapper>
+	<aui:field-wrapper inlineLabel="left" label="create-date">
+		<%= dateFormatDateTime.format(workflowTask.getCreateDate()) %>
+	</aui:field-wrapper>
 
-		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) %>">
+	<aui:field-wrapper inlineLabel="left" label="due-date">
+		<%= (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate()) %>
+	</aui:field-wrapper>
 
-			<%
-			long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(workflowTask.getWorkflowTaskId());
-			%>
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) %>">
 
-			<c:if test="<%= (pooledActorsIds != null) && (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
-				<aui:select inlineLabel="left" label="assigned-to" name="assigneeUserId" showEmptyOption="<%= true %>">
+		<%
+		long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(workflowTask.getWorkflowTaskId());
+		%>
 
-					<%
-					for (long pooledActorId : pooledActorsIds) {
-					%>
-
-						<aui:option label="<%= PortalUtil.getUserName(pooledActorId, StringPool.BLANK) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
-
-					<%
-					}
-
-					String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.ASSIGN +"');";
-					%>
-
-					<aui:button name="assignButton" onClick="<%= taglibOnClick %>" type="button" value="assign" />
-				</aui:select>
-			</c:if>
-		</c:if>
-
-		<br />
-
-		<aui:button-row>
-			<c:if test="<%= !workflowTask.isCompleted() && (workflowTask.getAssigneeUserId() == user.getUserId()) %>">
+		<c:if test="<%= (pooledActorsIds != null) && (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
+			<aui:select inlineLabel="left" label="assigned-to" name="assigneeUserId" showEmptyOption="<%= true %>">
 
 				<%
-				List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
-
-				for (String transitionName : transitionNames) {
-					String message = "proceed";
-
-					if (Validator.isNotNull(transitionName)) {
-						message = transitionName;
-					}
-
-					String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.SAVE +"', '" + UnicodeFormatter.toString(message) + "');";
+				for (long pooledActorId : pooledActorsIds) {
 				%>
 
-					<aui:button name='<%= message + "Button" %>' onClick="<%= taglibOnClick %>" type="button" value="<%= message %>" />
+					<aui:option label="<%= PortalUtil.getUserName(pooledActorId, StringPool.BLANK) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
 
 				<%
 				}
+
+				String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.ASSIGN +"');";
 				%>
 
-			</c:if>
+				<aui:button name="assignButton" onClick="<%= taglibOnClick %>" type="button" value="assign" />
+			</aui:select>
+		</c:if>
+	</c:if>
 
-			<aui:button onClick="<%= redirect %>" type="cancel" />
-		</aui:button-row>
-	</aui:fieldset>
+	<br />
+
+	<aui:button-row>
+		<c:if test="<%= !workflowTask.isCompleted() && (workflowTask.getAssigneeUserId() == user.getUserId()) %>">
+
+			<%
+			List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
+
+			for (String transitionName : transitionNames) {
+				String message = "proceed";
+
+				if (Validator.isNotNull(transitionName)) {
+					message = transitionName;
+				}
+
+				String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.SAVE +"', '" + UnicodeFormatter.toString(message) + "');";
+			%>
+
+				<aui:button name='<%= message + "Button" %>' onClick="<%= taglibOnClick %>" type="button" value="<%= message %>" />
+
+			<%
+			}
+			%>
+
+		</c:if>
+
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
 </aui:form>
 
 <br />
 
-<liferay-ui:tabs names="comments" />
+<h3 class="comments"><liferay-ui:message key="comments" /> </h3>
 
 <portlet:actionURL var="discussionURL">
 	<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task_discussion" />

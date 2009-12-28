@@ -35,7 +35,7 @@
 
 	int totalTasks = 0;
 
-	if (tabs1.equals("all-tasks")) {
+	if (toolbarItem.equals("all")) {
 		allTasks = true;
 
 		searchContainer.setEmptyResultsMessage("there-are-no-tasks");
@@ -43,8 +43,8 @@
 		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasks(null, searchContainer.getStart(), searchContainer.getEnd(), null);
 		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCount(null);
 	}
-	else if (tabs1.equals("pooled-pending-tasks")) {
-		searchContainer.setEmptyResultsMessage("there-are-no-pooled-tasks");
+	else if (toolbarItem.equals("assigned-to-my-roles")) {
+		searchContainer.setEmptyResultsMessage("there-are-no-tasks-assigned-to-my-roles");
 
 		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(user.getUserId(), false, searchContainer.getStart(), searchContainer.getEnd(), null);
 		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(user.getUserId(), false);
@@ -52,7 +52,7 @@
 	else {
 		boolean completedTasks = false;
 
-		if (tabs1.equals("my-completed-tasks")) {
+		if (toolbarItem.equals("completed")) {
 			completedTasks = true;
 
 			searchContainer.setEmptyResultsMessage("there-are-no-completed-tasks");
@@ -87,30 +87,54 @@
 			<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:search-container-column-text
-			name="name"
-			href="<%= rowURL %>"
-			property="name"
-		/>
-
 		<c:if test="<%= allTasks %>">
 			<liferay-ui:search-container-column-text
 				buffer="buffer"
-				name="assignee"
-				href="<%= rowURL %>"
 			>
 
 				<%
 				if (workflowTask.getAssigneeUserId() != 0 ){
-					buffer.append(PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK));
-				}
-				else {
-					buffer.append(LanguageUtil.get(pageContext, "not-assigned"));
+					User assigneeUser = UserLocalServiceUtil.getUser(workflowTask.getAssigneeUserId());
+
+					buffer.append("<img alt=\"");
+					buffer.append(assigneeUser.getFullName());
+					buffer.append("\" title=\"");
+					buffer.append(assigneeUser.getFullName());
+					buffer.append("\" class=\"user-avatar\" src=\"");
+					buffer.append(themeDisplay.getPathImage());
+					buffer.append("/user_");
+
+					if (assigneeUser.isFemale()) {
+						buffer.append("female");
+					}
+					else {
+						buffer.append("male");
+					}
+
+					buffer.append("_portrait?img_id=");
+					buffer.append(assigneeUser.getPortraitId());
+					buffer.append("&t=");
+					buffer.append(ImageServletTokenUtil.getToken(assigneeUser.getPortraitId()));
+					buffer.append("\" />");
 				}
 				%>
 
 			</liferay-ui:search-container-column-text>
 		</c:if>
+
+		<liferay-ui:search-container-column-text
+			buffer="buffer"
+			name="name"
+			href="<%= rowURL %>"
+		>
+
+			<%
+			buffer.append("<span id=\"" + workflowTask.getWorkflowTaskId() + "\" class=\"name\">");
+			buffer.append(workflowTask.getName());
+			buffer.append("</span>");
+			%>
+
+		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-text
 			buffer="buffer"
