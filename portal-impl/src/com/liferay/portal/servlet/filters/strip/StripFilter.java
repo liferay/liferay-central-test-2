@@ -60,8 +60,10 @@ public class StripFilter extends BasePortalFilter {
 		for (int i = offset ; i < oldByteArray.length ; i++) {
 			char c = (char)oldByteArray[i];
 
-			if ((c == CharPool.NEW_LINE) || (c == CharPool.RETURN) ||
-				(c == CharPool.TAB) || Character.isWhitespace(c)) {
+			// Only test the common "white space", ignore other "white space"
+			// according to Charactor.isWhitespace(char ch)
+			if ((c == CharPool.SPACE) || (c == CharPool.TAB) ||
+				(c == CharPool.RETURN) || (c == CharPool.NEW_LINE)) {
 
 				count++;
 			}
@@ -337,9 +339,7 @@ public class StripFilter extends BasePortalFilter {
 		for (int i = count; i < oldByteArray.length; i++) {
 			byte b = oldByteArray[i];
 
-			char c = (char)b;
-
-			if (c == CharPool.LESS_THAN) {
+			if (b == CharPool.LESS_THAN) {
 				if (hasMarker(oldByteArray, i, _MARKER_PRE_OPEN)) {
 					i = processPre(oldByteArray, newBytes, i) - 1;
 
@@ -368,8 +368,8 @@ public class StripFilter extends BasePortalFilter {
 					continue;
 				}
 			}
-			else if (c == CharPool.GREATER_THAN) {
-				newBytes.write(c);
+			else if (b == CharPool.GREATER_THAN) {
+				newBytes.write(b);
 
 				int spaceCount = countContinuousWhiteSpace(oldByteArray, i + 1);
 
