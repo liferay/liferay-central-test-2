@@ -62,41 +62,46 @@ public class GetterUtil {
 	public static final String DEFAULT_STRING = StringPool.BLANK;
 
 	public static boolean get(String value, boolean defaultValue) {
-		if (value != null) {
-			try {
-				value = value.trim();
+		if (value == null) {
+			return defaultValue;
+		}
 
-				if (value.equalsIgnoreCase(BOOLEANS[0]) ||
-					value.equalsIgnoreCase(BOOLEANS[1]) ||
-					value.equalsIgnoreCase(BOOLEANS[2]) ||
-					value.equalsIgnoreCase(BOOLEANS[3]) ||
-					value.equalsIgnoreCase(BOOLEANS[4])) {
+		try {
+			value = value.trim();
 
-					return true;
-				}
-				else {
-					return false;
-				}
+			if (value.equalsIgnoreCase(BOOLEANS[0]) ||
+				value.equalsIgnoreCase(BOOLEANS[1]) ||
+				value.equalsIgnoreCase(BOOLEANS[2]) ||
+				value.equalsIgnoreCase(BOOLEANS[3]) ||
+				value.equalsIgnoreCase(BOOLEANS[4])) {
+
+				return true;
 			}
-			catch (Exception e) {
+			else {
+				return false;
 			}
+		}
+		catch (Exception e) {
 		}
 
 		return defaultValue;
 	}
 
 	public static Date get(String value, DateFormat df, Date defaultValue) {
-		if (value != null) {
-			try {
-				Date date = df.parse(value.trim());
+		if (value == null) {
+			return defaultValue;
+		}
 
-				if (date != null) {
-					return date;
-				}
-			}
-			catch (Exception e) {
+		try {
+			Date date = df.parse(value.trim());
+
+			if (date != null) {
+				return date;
 			}
 		}
+		catch (Exception e) {
+		}
+
 		return defaultValue;
 	}
 
@@ -108,17 +113,21 @@ public class GetterUtil {
 			catch (Exception e) {
 			}
 		}
+
 		return defaultValue;
 	}
 
 	public static float get(String value, float defaultValue) {
-		if (value != null) {
-			try {
-				return Float.parseFloat(_trim(value));
-			}
-			catch (Exception e) {
-			}
+		if (value == null) {
+			return defaultValue;
 		}
+
+		try {
+			return Float.parseFloat(_trim(value));
+		}
+		catch (Exception e) {
+		}
+
 		return defaultValue;
 	}
 
@@ -126,6 +135,7 @@ public class GetterUtil {
 		if (value == null) {
 			return defaultValue;
 		}
+
 		return _parseInt(_trim(value), defaultValue);
 	}
 
@@ -133,6 +143,7 @@ public class GetterUtil {
 		if (value == null) {
 			return defaultValue;
 		}
+
 		return _parseLong(_trim(value), defaultValue);
 	}
 
@@ -140,19 +151,17 @@ public class GetterUtil {
 		if (value == null) {
 			return defaultValue;
 		}
+
 		return _parseShort(_trim(value), defaultValue);
 	}
 
 	public static String get(String value, String defaultValue) {
-		if (value != null) {
-			value = value.trim();
-			value = StringUtil.replace(
-				value, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
-
-			return value;
+		if (value == null) {
+			return defaultValue;
 		}
 
-		return defaultValue;
+		return StringUtil.replace(
+			value.trim(), StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
 	}
 
 	public static boolean getBoolean(String value) {
@@ -335,27 +344,6 @@ public class GetterUtil {
 		return get(value, defaultValue);
 	}
 
-	private static String _trim(String value) {
-		value = value.trim();
-
-		StringBuilder sb = new StringBuilder(value.length());
-
-		for (int i = 0; i < value.length(); i++) {
-			char ch = value.charAt(i);
-			if ((Character.isDigit(ch)) ||
-				((ch == CharPool.DASH) && (i == 0)) ||
-				(ch == CharPool.PERIOD) || (ch == CharPool.UPPER_CASE_E) ||
-				(ch == CharPool.LOWER_CASE_E)) {
-
-				sb.append(ch);
-			}
-		}
-
-		value = sb.toString();
-
-		return value;
-	}
-
 	private static int _parseInt(String value, int defaultValue) {
 		int length = value.length();
 
@@ -363,42 +351,61 @@ public class GetterUtil {
 			return defaultValue;
 		}
 
+		int pos = 0;
+
+		long limit = -Integer.MAX_VALUE;
 		boolean negative = false;
-		int index = 0;
-		int limit = -Integer.MAX_VALUE;
-		char firstChar = value.charAt(0);
-		if (firstChar < '0') {
-			if (firstChar == '-') {
-				negative = true;
+
+		char c = value.charAt(0);
+
+		if (c < CharPool.NUMBER_0) {
+			if (c == CharPool.MINUS) {
 				limit = Integer.MIN_VALUE;
-			} else if (firstChar != '+') {
+				negative = true;
+			}
+			else if (c != CharPool.PLUS) {
 				return defaultValue;
 			}
 
 			if (length == 1) {
 				return defaultValue;
 			}
-			index++;
+
+			pos++;
 		}
-		int smallerMin = limit / 10;
+
+		long smallerMin = limit / 10;
+
 		int result = 0;
-		while (index < length) {
-			// Prevent int overflow
+
+		while (pos < length) {
 			if (result < smallerMin) {
 				return defaultValue;
 			}
-			char ch = value.charAt(index++);
-			if(ch < '0' || ch > '9') {
+
+			c = value.charAt(pos++);
+
+			if ((c < CharPool.NUMBER_0) || (c > CharPool.NUMBER_9)) {
 				return defaultValue;
 			}
-			int number = ch - '0';
+
+			int number = c - CharPool.NUMBER_0;
+
 			result *= 10;
-			if (result < limit + number) {
+
+			if (result < (limit + number)) {
 				return defaultValue;
 			}
+
 			result -= number;
 		}
-		return negative ? result : -result;
+
+		if (negative) {
+			return result;
+		}
+		else {
+			return -result;
+		}
 	}
 
 	private static long _parseLong(String value, long defaultValue) {
@@ -408,50 +415,93 @@ public class GetterUtil {
 			return defaultValue;
 		}
 
-		boolean negative = false;
-		int index = 0;
+		int pos = 0;
+
 		long limit = -Long.MAX_VALUE;
-		char firstChar = value.charAt(0);
-		if (firstChar < '0') {
-			if (firstChar == '-') {
-				negative = true;
+		boolean negative = false;
+
+		char c = value.charAt(0);
+
+		if (c < CharPool.NUMBER_0) {
+			if (c == CharPool.MINUS) {
 				limit = Long.MIN_VALUE;
-			} else if (firstChar != '+') {
+				negative = true;
+			}
+			else if (c != CharPool.PLUS) {
 				return defaultValue;
 			}
 
 			if (length == 1) {
 				return defaultValue;
 			}
-			index++;
+
+			pos++;
 		}
+
 		long smallerMin = limit / 10;
+
 		long result = 0;
-		while (index < length) {
-			// Prevent long overflow
+
+		while (pos < length) {
 			if (result < smallerMin) {
 				return defaultValue;
 			}
-			char ch = value.charAt(index++);
-			if(ch < '0' || ch > '9') {
+
+			c = value.charAt(pos++);
+
+			if ((c < CharPool.NUMBER_0) || (c > CharPool.NUMBER_9)) {
 				return defaultValue;
 			}
-			int number = ch - '0';
+
+			int number = c - CharPool.NUMBER_0;
+
 			result *= 10;
-			if (result < limit + number) {
+
+			if (result < (limit + number)) {
 				return defaultValue;
 			}
+
 			result -= number;
 		}
-		return negative ? result : -result;
+
+		if (negative) {
+			return result;
+		}
+		else {
+			return -result;
+		}
 	}
 
 	private static short _parseShort(String value, short defaultValue) {
 		int i = _parseInt(value, defaultValue);
-		if (i < Short.MIN_VALUE || i > Short.MAX_VALUE) {
+
+		if ((i < Short.MIN_VALUE) || (i > Short.MAX_VALUE)) {
 			return defaultValue;
 		}
+
 		return (short)i;
+	}
+
+	private static String _trim(String value) {
+		value = value.trim();
+
+		int length = value.length();
+
+		StringBuilder sb = new StringBuilder(length);
+
+		for (int i = 0; i < length; i++) {
+			char c = value.charAt(i);
+
+			if ((Character.isDigit(c)) ||
+				((c == CharPool.DASH) && (i == 0)) ||
+				(c == CharPool.PERIOD) || (c == CharPool.UPPER_CASE_E) ||
+				(c == CharPool.LOWER_CASE_E)) {
+
+				sb.append(c);
+			}
+		}
+
+		return sb.toString();
 	}
 
 }

@@ -31,111 +31,159 @@ import com.liferay.portal.kernel.test.TestCase;
  */
 public class GetterUtilTest extends TestCase {
 
-	public void testGetInt() {
+	public void testGetInteger() {
 
-		//Wrong first char
+		// Wrong first char
+
 		int result = GetterUtil.get("e123", -1);
+
 		assertEquals(-1, result);
 
-		//Wrong middle char
+		// Wrong middle char
+
 		result = GetterUtil.get("12e3", -1);
+
 		assertEquals(-1, result);
 
-		//Start with '+'
+		// Start with '+'
+
 		result = GetterUtil.get("+123", -1);
+
 		assertEquals(123, result);
 
-		//Start with '-'
+		// Start with '-'
+
 		result = GetterUtil.get("-123", -1);
+
 		assertEquals(-123, result);
 
-		//Max int
+		// Maximum int
+
 		result = GetterUtil.get(Integer.toString(Integer.MAX_VALUE), -1);
+
 		assertEquals(Integer.MAX_VALUE, result);
 
-		//Min int
+		// Minimum int
+
 		result = GetterUtil.get(Integer.toString(Integer.MIN_VALUE), -1);
+
 		assertEquals(Integer.MIN_VALUE, result);
 
-		//Bigger than Max int
+		// Larger than maximum int
+
 		result = GetterUtil.get(Integer.toString(Integer.MAX_VALUE) + "0", -1);
+
 		assertEquals(-1, result);
 
-		//Smaller than Min int
+		// Smaller than minimum int
+
 		result = GetterUtil.get(Integer.toString(Integer.MIN_VALUE) + "0", -1);
+
 		assertEquals(-1, result);
 	}
 
 	public void testGetLong() {
 
-		//Wrong first char
+		// Wrong first char
+
 		long result = GetterUtil.get("e123", -1L);
+
 		assertEquals(-1L, result);
 
-		//Wrong middle char
+		// Wrong middle char
+
 		result = GetterUtil.get("12e3", -1L);
+
 		assertEquals(-1L, result);
 
-		//Start with '+'
+		// Start with '+'
+
 		result = GetterUtil.get("+123", -1L);
+
 		assertEquals(123L, result);
 
-		//Start with '-'
+		// Start with '-'
+
 		result = GetterUtil.get("-123", -1L);
+
 		assertEquals(-123L, result);
 
-		//Max long
+		// Maximum long
+
 		result = GetterUtil.get(Long.toString(Long.MAX_VALUE), -1L);
+
 		assertEquals(Long.MAX_VALUE, result);
 
-		//Min long
+		// Minimum long
+
 		result = GetterUtil.get(Long.toString(Long.MIN_VALUE), -1L);
+
 		assertEquals(Long.MIN_VALUE, result);
 
-		//Bigger than Max long
+		// Larger than maximum long
+
 		result = GetterUtil.get(Long.toString(Long.MAX_VALUE) + "0", -1L);
+
 		assertEquals(-1L, result);
 
-		//Smaller than Min long
+		// Smaller than minimum long
+
 		result = GetterUtil.get(Long.toString(Long.MIN_VALUE) + "0", -1L);
+
 		assertEquals(-1L, result);
 	}
 
 	public void testGetShort() {
 
-		//Wrong first char
-		short result = GetterUtil.get("e123", (short) -1);
-		assertEquals((short) -1, result);
+		// Wrong first char
 
-		//Wrong middle char
-		result = GetterUtil.get("12e3", (short) -1);
-		assertEquals((short) -1, result);
+		short result = GetterUtil.get("e123", (short)-1);
 
-		//Start with '+'
-		result = GetterUtil.get("+123", (short) -1);
-		assertEquals((short) 123, result);
+		assertEquals((short)-1, result);
 
-		//Start with '-'
-		result = GetterUtil.get("-123", (short) -1);
-		assertEquals((short) -123, result);
+		// Wrong middle char
 
-		//Max short
-		result = GetterUtil.get(Short.toString(Short.MAX_VALUE), (short) -1);
+		result = GetterUtil.get("12e3", (short)-1);
+
+		assertEquals((short)-1, result);
+
+		// Start with '+'
+
+		result = GetterUtil.get("+123", (short)-1);
+
+		assertEquals((short)123, result);
+
+		// Start with '-'
+
+		result = GetterUtil.get("-123", (short)-1);
+
+		assertEquals((short)-123, result);
+
+		// Maximum short
+
+		result = GetterUtil.get(Short.toString(Short.MAX_VALUE), (short)-1);
+
 		assertEquals(Short.MAX_VALUE, result);
 
-		//Min short
-		result = GetterUtil.get(Short.toString(Short.MIN_VALUE), (short) -1);
+		// Minimum short
+
+		result = GetterUtil.get(Short.toString(Short.MIN_VALUE), (short)-1);
+
 		assertEquals(Short.MIN_VALUE, result);
 
-		//Bigger than Max short
-		result = GetterUtil.get(
-			Short.toString(Short.MAX_VALUE) + "0", (short) -1);
-		assertEquals((short) -1, result);
+		// Larger than maximum short
 
-		//Smaller than Min short
 		result = GetterUtil.get(
-			Short.toString(Short.MIN_VALUE) + "0", (short) -1);
-		assertEquals((short) -1, result);
+			Short.toString(Short.MAX_VALUE) + "0", (short)-1);
+
+		assertEquals((short)-1, result);
+
+		// Smaller than minimum short
+
+		result = GetterUtil.get(
+			Short.toString(Short.MIN_VALUE) + "0", (short)-1);
+
+		assertEquals((short)-1, result);
 	}
 
 }
