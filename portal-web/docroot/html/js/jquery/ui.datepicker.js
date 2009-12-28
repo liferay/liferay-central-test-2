@@ -687,6 +687,8 @@ $.extend(Datepicker.prototype, {
 		}
 		this._adjustDate(target);
 		this._notifyChange(inst);
+
+		this._selectDate(id, this._formatDate(inst, inst.selectedDay, inst.drawMonth, inst.drawYear));
 	},
 
 	/* Action for selecting a new month/year. */
