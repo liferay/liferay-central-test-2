@@ -86,67 +86,61 @@ public class GetterUtil {
 	}
 
 	public static Date get(String value, DateFormat df, Date defaultValue) {
-		try {
-			Date date = df.parse(value.trim());
+		if (value != null) {
+			try {
+				Date date = df.parse(value.trim());
 
-			if (date != null) {
-				return date;
+				if (date != null) {
+					return date;
+				}
+			}
+			catch (Exception e) {
 			}
 		}
-		catch (Exception e) {
-		}
-
 		return defaultValue;
 	}
 
 	public static double get(String value, double defaultValue) {
-		try {
-			return Double.parseDouble(_trim(value));
+		if (value != null) {
+			try {
+				return Double.parseDouble(_trim(value));
+			}
+			catch (Exception e) {
+			}
 		}
-		catch (Exception e) {
-		}
-
 		return defaultValue;
 	}
 
 	public static float get(String value, float defaultValue) {
-		try {
-			return Float.parseFloat(_trim(value));
+		if (value != null) {
+			try {
+				return Float.parseFloat(_trim(value));
+			}
+			catch (Exception e) {
+			}
 		}
-		catch (Exception e) {
-		}
-
 		return defaultValue;
 	}
 
 	public static int get(String value, int defaultValue) {
-		try {
-			return Integer.parseInt(_trim(value));
+		if (value == null) {
+			return defaultValue;
 		}
-		catch (Exception e) {
-		}
-
-		return defaultValue;
+		return _parseInt(_trim(value), defaultValue);
 	}
 
 	public static long get(String value, long defaultValue) {
-		try {
-			return Long.parseLong(_trim(value));
+		if (value == null) {
+			return defaultValue;
 		}
-		catch (Exception e) {
-		}
-
-		return defaultValue;
+		return _parseLong(_trim(value), defaultValue);
 	}
 
 	public static short get(String value, short defaultValue) {
-		try {
-			return Short.parseShort(_trim(value));
+		if (value == null) {
+			return defaultValue;
 		}
-		catch (Exception e) {
-		}
-
-		return defaultValue;
+		return _parseShort(_trim(value), defaultValue);
 	}
 
 	public static String get(String value, String defaultValue) {
@@ -342,28 +336,124 @@ public class GetterUtil {
 	}
 
 	private static String _trim(String value) {
-		if (value != null) {
-			value = value.trim();
+		value = value.trim();
 
-			StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder(value.length());
 
-			char[] charArray = value.toCharArray();
+		for (int i = 0; i < value.length(); i++) {
+			char ch = value.charAt(i);
+			if ((Character.isDigit(ch)) ||
+				((ch == CharPool.DASH) && (i == 0)) ||
+				(ch == CharPool.PERIOD) || (ch == CharPool.UPPER_CASE_E) ||
+				(ch == CharPool.LOWER_CASE_E)) {
 
-			for (int i = 0; i < charArray.length; i++) {
-				if ((Character.isDigit(charArray[i])) ||
-					((charArray[i] == CharPool.DASH) && (i == 0)) ||
-					(charArray[i] == CharPool.PERIOD) ||
-					(charArray[i] == CharPool.UPPER_CASE_E) ||
-					(charArray[i] == CharPool.LOWER_CASE_E)) {
-
-					sb.append(charArray[i]);
-				}
+				sb.append(ch);
 			}
-
-			value = sb.toString();
 		}
 
+		value = sb.toString();
+
 		return value;
+	}
+
+	private static int _parseInt(String value, int defaultValue) {
+		int length = value.length();
+
+		if (length <= 0) {
+			return defaultValue;
+		}
+
+		int result = 0;
+		boolean negative = false;
+		int index = 0;
+		int limit = -Integer.MAX_VALUE;
+		int multmin;
+		int digit;
+
+		char firstChar = value.charAt(0);
+		if (firstChar < '0') {
+			if (firstChar == '-') {
+				negative = true;
+				limit = Integer.MIN_VALUE;
+			} else if (firstChar != '+') {
+				return defaultValue;
+			}
+
+			if (length == 1) {
+				return defaultValue;
+			}
+			index++;
+		}
+		multmin = limit / 10;
+		while (index < length) {
+			digit = Character.digit(value.charAt(index++), 10);
+			if (digit < 0) {
+				return defaultValue;
+			}
+			if (result < multmin) {
+				return defaultValue;
+			}
+			result *= 10;
+			if (result < limit + digit) {
+				return defaultValue;
+			}
+			result -= digit;
+		}
+		return negative ? result : -result;
+	}
+
+	private static long _parseLong(String value, long defaultValue) {
+		int length = value.length();
+
+		if (length <= 0) {
+			return defaultValue;
+		}
+
+		long result = 0;
+		boolean negative = false;
+		int index = 0;
+		long limit = -Long.MAX_VALUE;
+		long multmin;
+		int digit;
+
+		char firstChar = value.charAt(0);
+		if (firstChar < '0') {
+			if (firstChar == '-') {
+				negative = true;
+				limit = Long.MIN_VALUE;
+			} else if (firstChar != '+') {
+				return defaultValue;
+			}
+
+			if (length == 1) {
+				return defaultValue;
+			}
+			index++;
+		}
+		multmin = limit / 10;
+		while (index < length) {
+			digit = Character.digit(value.charAt(index++), 10);
+			if (digit < 0) {
+				return defaultValue;
+			}
+			if (result < multmin) {
+				return defaultValue;
+			}
+			result *= 10;
+			if (result < limit + digit) {
+				return defaultValue;
+			}
+			result -= digit;
+		}
+		return negative ? result : -result;
+	}
+
+	private static short _parseShort(String value, short defaultValue) {
+		int i = _parseInt(value, defaultValue);
+		if (i < Short.MIN_VALUE || i > Short.MAX_VALUE) {
+			return defaultValue;
+		}
+		return (short)i;
 	}
 
 }
