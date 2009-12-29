@@ -479,7 +479,7 @@ Liferay.Portlet = {
 		portlet = A.one(portlet);
 
 		if (portlet && configurationURL) {
-			var title = portlet.one('.portlet-title');
+			var title = portlet.one('.portlet-title') || portlet.one('.portlet-title-default');
 			var loading = '<div class="aui-icon-loading"></div>';
 
 			var iframeId = namespacedId + 'configurationIframe';
