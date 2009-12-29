@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.io.unsync;
 
+import java.io.IOException;
 import java.io.Reader;
 
 import java.nio.CharBuffer;
@@ -43,9 +44,13 @@ public class UnsyncStringReader extends Reader {
 	}
 
 	public void close() {
+		string = null;
 	}
 
-	public void mark(int readAheadLimit) {
+	public void mark(int readAheadLimit) throws IOException {
+		if (string == null) {
+			throw new IOException("String is null");
+		}
 		markIndex = index;
 	}
 
@@ -53,7 +58,11 @@ public class UnsyncStringReader extends Reader {
 		return true;
 	}
 
-	public int read() {
+	public int read() throws IOException {
+		if (string == null) {
+			throw new IOException("String is null");
+		}
+
 		if (index >= stringLength) {
 			return -1;
 		}
@@ -61,11 +70,16 @@ public class UnsyncStringReader extends Reader {
 		return string.charAt(index++);
 	}
 
-	public int read(char[] charArray) {
+	public int read(char[] charArray) throws IOException {
 		return read(charArray, 0, charArray.length);
 	}
 
-	public int read(char[] charArray, int offset, int length) {
+	public int read(char[] charArray, int offset, int length)
+		throws IOException {
+		if (string == null) {
+			throw new IOException("String is null");
+		}
+
 		if (length <= 0) {
 			return 0;
 		}
@@ -87,7 +101,7 @@ public class UnsyncStringReader extends Reader {
 		return read;
 	}
 
-	public int read(CharBuffer charBuffer) {
+	public int read(CharBuffer charBuffer) throws IOException {
 		int remaining = charBuffer.remaining();
 
 		char[] charArray = new char[remaining];
@@ -101,11 +115,17 @@ public class UnsyncStringReader extends Reader {
 		return read;
 	}
 
-	public boolean ready() {
+	public boolean ready() throws IOException {
+		if (string == null) {
+			throw new IOException("String is null");
+		}
 		return true;
 	}
 
-	public void reset() {
+	public void reset() throws IOException {
+		if (string == null) {
+			throw new IOException("String is null");
+		}
 		index = markIndex;
 	}
 

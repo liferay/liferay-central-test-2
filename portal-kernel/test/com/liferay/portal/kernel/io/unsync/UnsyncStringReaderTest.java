@@ -24,6 +24,8 @@ package com.liferay.portal.kernel.io.unsync;
 
 import com.liferay.portal.kernel.test.TestCase;
 
+import java.io.IOException;
+
 import java.util.Arrays;
 
 /**
@@ -34,7 +36,7 @@ import java.util.Arrays;
  */
 public class UnsyncStringReaderTest extends TestCase {
 
-	public void testBlockRead() {
+	public void testBlockRead() throws IOException {
 		UnsyncStringReader unsyncStringReader = new UnsyncStringReader(
 			"abcdefg");
 
@@ -52,6 +54,60 @@ public class UnsyncStringReaderTest extends TestCase {
 		assertEquals(-1, unsyncStringReader.read(charArray));
 	}
 
+	public void testClose() throws IOException {
+
+		UnsyncStringReader unsyncStringReader = new UnsyncStringReader(
+			"abcdefg");
+
+		unsyncStringReader.close();
+
+		assertTrue(unsyncStringReader.string == null);
+
+		// Unable to read after close
+		try {
+			unsyncStringReader.read();
+			fail();
+		}
+		catch(IOException ioe) {
+		}
+
+		// Unable to block read
+		try {
+			unsyncStringReader.read(new char[5]);
+			fail();
+		}
+		catch(IOException ioe) {
+		}
+
+		// Unable to ready
+		try {
+			unsyncStringReader.ready();
+			fail();
+		}
+		catch(IOException ioe) {
+		}
+
+		// Unable to mark
+		try {
+			unsyncStringReader.mark(0);
+			fail();
+		}
+		catch(IOException ioe) {
+		}
+
+		// Unable to reset
+		try {
+			unsyncStringReader.reset();
+			fail();
+		}
+		catch(IOException ioe) {
+		}
+
+		// Close again should do nothing
+
+		unsyncStringReader.close();
+	}
+
 	public void testConstructor() {
 		UnsyncStringReader unsyncStringReader = new UnsyncStringReader("abc");
 
@@ -64,7 +120,7 @@ public class UnsyncStringReaderTest extends TestCase {
 		assertEquals(4, unsyncStringReader.stringLength);
 	}
 
-	public void testMarkAndReset() {
+	public void testMarkAndReset() throws IOException {
 		UnsyncStringReader unsyncStringReader = new UnsyncStringReader("abc");
 
 		assertEquals('a', unsyncStringReader.read());
@@ -88,7 +144,7 @@ public class UnsyncStringReaderTest extends TestCase {
 		assertTrue(unsyncStringReader.markSupported());
 	}
 
-	public void testRead() {
+	public void testRead() throws IOException {
 		UnsyncStringReader unsyncStringReader = new UnsyncStringReader("abc");
 
 		assertEquals('a', unsyncStringReader.read());
@@ -97,7 +153,7 @@ public class UnsyncStringReaderTest extends TestCase {
 		assertEquals(-1, unsyncStringReader.read());
 	}
 
-	public void testSkip() {
+	public void testSkip() throws IOException {
 		UnsyncStringReader unsyncStringReader = new UnsyncStringReader(
 			"abcdef");
 

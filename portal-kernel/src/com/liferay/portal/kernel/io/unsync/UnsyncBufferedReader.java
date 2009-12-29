@@ -49,13 +49,11 @@ public class UnsyncBufferedReader extends Reader {
 	}
 
 	public void close() throws IOException {
-		if (reader == null) {
-			throw new IOException("Reader is null");
+
+		if (reader != null) {
+			reader.close();
+			reader = null;
 		}
-
-		reader.close();
-
-		reader = null;
 		buffer = null;
 	}
 
@@ -301,9 +299,6 @@ public class UnsyncBufferedReader extends Reader {
 	}
 
 	protected void readUnderlyingReader() throws IOException {
-		if (reader == null) {
-			throw new IOException("Reader is null");
-		}
 
 		if (markIndex < 0) {
 

@@ -126,6 +126,50 @@ public class UnsyncBufferedInputStreamTest extends TestCase {
 
 		assertTrue(unsyncBufferedInputStream.inputStream == null);
 		assertTrue(unsyncBufferedInputStream.buffer == null);
+
+		// Unable to read after close
+		try {
+			unsyncBufferedInputStream.read();
+			fail();
+		}
+		catch(IOException ioe) {
+		}
+
+		// Unable to block read
+		try {
+			unsyncBufferedInputStream.read(new byte[5]);
+			fail();
+		}
+		catch(IOException ioe) {
+		}
+
+		// Unable to available
+		try {
+			unsyncBufferedInputStream.available();
+			fail();
+		}
+		catch(IOException ioe) {
+		}
+
+		// Unable to reset
+		try {
+			unsyncBufferedInputStream.reset();
+			fail();
+		}
+		catch(IOException ioe) {
+		}
+
+		// Unable to skip
+		try {
+			unsyncBufferedInputStream.skip(0);
+			fail();
+		}
+		catch(IOException ioe) {
+		}
+
+		// Close again should do nothing
+
+		unsyncBufferedInputStream.close();
 	}
 
 	public void testConstructor() throws IOException {

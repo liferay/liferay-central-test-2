@@ -70,6 +70,10 @@ public class UnsyncBufferedWriter extends Writer {
 	}
 
 	public void flush() throws IOException {
+		if (writer == null) {
+			throw new IOException("Writer is null");
+		}
+
 		if (count > 0) {
 			writer.write(buffer, 0, count);
 
