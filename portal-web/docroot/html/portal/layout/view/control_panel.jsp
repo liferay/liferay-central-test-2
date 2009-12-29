@@ -27,6 +27,19 @@
 <%
 String ppid = ParamUtil.getString(request, "p_p_id");
 
+if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+	String portletResource = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
+	String strutsAction = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "struts_action");
+
+	if (Validator.isNull(portletResource)) {
+		portletResource = ParamUtil.getString(request, "portletResource");
+	}
+
+	if (Validator.isNotNull(portletResource) && (!strutsAction.equals("/portlet_configuration/edit_configuration"))) {
+		ppid = portletResource;
+	}
+}
+
 if (ppid.equals(PortletKeys.EXPANDO)) {
 	String modelResource = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "modelResource");
 
