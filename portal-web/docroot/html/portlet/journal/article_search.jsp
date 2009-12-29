@@ -35,83 +35,44 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	displayTerms="<%= displayTerms %>"
 	buttonLabel="search"
 >
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="id" />
-		</td>
-		<td>
-			<liferay-ui:message key="version" />
-		</td>
-		<td>
-			<liferay-ui:message key="name" />
-		</td>
-		<td>
-			<liferay-ui:message key="description" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.ARTICLE_ID %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getArticleId()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.VERSION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getVersionString()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.TITLE %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getTitle()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getDescription()) %>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="content" />
-		</td>
-		<td>
-			<liferay-ui:message key="type" />
-		</td>
-		<td colspan="2">
-			<c:choose>
-				<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
-					<liferay-ui:message key="status" />
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:message key="my-places" />
-				</c:otherwise>
-			</c:choose>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.CONTENT %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getContent()) %>" />
-		</td>
-		<td>
-			<select name="<portlet:namespace /><%= displayTerms.TYPE %>">
-				<option value=""></option>
+	<aui:fieldset>
+		<aui:column>
+			<aui:input label="id" name="<%= displayTerms.ARTICLE_ID %>" size="20" value="<%= HtmlUtil.escape(displayTerms.getArticleId()) %>" />
+
+			<aui:input name="<%= displayTerms.CONTENT %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getContent()) %>" />
+		</aui:column>
+
+		<aui:column>
+			<aui:input name="<%= displayTerms.VERSION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getVersionString()) %>" />
+
+			<aui:select name="<%= displayTerms.TYPE %>">
+				<aui:option value=""></aui:option>
 
 				<%
 				for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
 				%>
 
-					<option <%= displayTerms.getType().equals(JournalArticleConstants.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleConstants.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleConstants.TYPES[i]) %></option>
+					<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= displayTerms.getType().equals(JournalArticleConstants.TYPES[i]) %>" />
 
 				<%
 				}
 				%>
 
-			</select>
-		</td>
-		<td colspan="2">
+			</aui:select>
+		</aui:column>
+
+		<aui:column>
+			<aui:input label="name" name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getTitle()) %>" />
+
 			<c:choose>
 				<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
-					<select name="<portlet:namespace /><%= displayTerms.STATUS %>">
-						<option value=""></option>
-						<option <%= displayTerms.getStatus().equals("approved") ? "selected" : "" %> value="approved"><liferay-ui:message key="approved" /></option>
-						<option <%= displayTerms.getStatus().equals("not-approved") ? "selected" : "" %> value="not-approved"><liferay-ui:message key="not-approved" /></option>
-						<option <%= displayTerms.getStatus().equals("expired") ? "selected" : "" %> value="expired"><liferay-ui:message key="expired" /></option>
-						<option <%= displayTerms.getStatus().equals("review") ? "selected" : "" %> value="review"><liferay-ui:message key="review" /></option>
-					</select>
+					<aui:select name="<%= displayTerms.STATUS %>">
+						<aui:option value=""></aui:option>
+						<aui:option label="approved" selected='<%= displayTerms.getStatus().equals("approved") %>' />
+						<aui:option label="not-approved" selected='<%= displayTerms.getStatus().equals("not-approved") %>' />
+						<aui:option label="expired" selected='<%= displayTerms.getStatus().equals("expired") %>' />
+						<aui:option label="review" selected='<%= displayTerms.getStatus().equals("review") %>' />
+					</aui:select>
 				</c:when>
 				<c:otherwise>
 
@@ -119,7 +80,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 					List<Group> myPlaces = user.getMyPlaces();
 					%>
 
-					<select name="<portlet:namespace /><%= displayTerms.GROUP_ID %>">
+					<aui:select label="my-places" name="<%= displayTerms.GROUP_ID %>">
 
 						<%
 						for (Group myPlace : myPlaces) {
@@ -128,27 +89,21 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 							}
 						%>
 
-							<option <%= displayTerms.getGroupId() == myPlace.getGroupId() ? "selected" : "" %> value="<%= myPlace.getGroupId() %>">
-								<c:choose>
-									<c:when test="<%= myPlace.isUser() %>">
-										<liferay-ui:message key="my-community" />
-									</c:when>
-									<c:otherwise>
-										<%= HtmlUtil.escape(myPlace.getDescriptiveName()) %>
-									</c:otherwise>
-								</c:choose>
-							</option>
+							<aui:option label='<%= myPlace.isUser() ? "my-community" : HtmlUtil.escape(myPlace.getDescriptiveName()) %>' selected="<%= displayTerms.getGroupId() == myPlace.getGroupId() %>" value="<%= myPlace.getGroupId() %>" />
 
 						<%
 						}
 						%>
 
-					</select>
+					</aui:select>
 				</c:otherwise>
 			</c:choose>
-		</td>
-	</tr>
-	</table>
+		</aui:column>
+
+		<aui:column>
+			<aui:input label="description" name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getDescription()) %>" />
+		</aui:column>
+	</aui:fieldset>
 </liferay-ui:search-toggle>
 
 <%
@@ -162,11 +117,9 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 %>
 
 <c:if test="<%= showAddArticleButtonButton || showPermissionsButton %>">
-	<br />
-
-	<div>
+	<aui:button-row>
 		<c:if test="<%= showAddArticleButtonButton %>">
-			<input type="button" value="<liferay-ui:message key="add-web-content" />" onClick="<portlet:namespace />addArticle();" />
+			<aui:button value="add-web-content" onClick='<%= renderResponse.getNamespace() + "addArticle();" %>' />
 		</c:if>
 
 		<c:if test="<%= showPermissionsButton %>">
@@ -177,25 +130,25 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 				var="permissionsURL"
 			/>
 
-			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+			<aui:button value="permissions" onClick="<%= permissionsURL %>" />
 		</c:if>
-	</div>
+	</aui:button-row>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
-	<br />
+	<aui:input name="<%= displayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
 
-	<input name="<portlet:namespace /><%= displayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
-
-	<liferay-ui:message key="filter-by-structure" />: <%= displayTerms.getStructureId() %><br />
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="filter-by-structure" />: <%= displayTerms.getStructureId() %><br />
+	</div>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getTemplateId()) %>">
-	<br />
+	<aui:input name="<%= displayTerms.TEMPLATE_ID %>" type="hidden" value="<%= displayTerms.getTemplateId() %>" />
 
-	<input name="<portlet:namespace /><%= displayTerms.TEMPLATE_ID %>" type="hidden" value="<%= displayTerms.getTemplateId() %>" />
-
-	<liferay-ui:message key="filter-by-template" />: <%= displayTerms.getTemplateId() %><br />
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="filter-by-template" />: <%= displayTerms.getTemplateId() %><br />
+	</div>
 </c:if>
 
 <script type="text/javascript">
