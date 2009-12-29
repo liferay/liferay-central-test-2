@@ -1693,6 +1693,16 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	padding-right: 10px;
 }
 
+/* ---------- Taglib search toggle ---------- */
+
+.taglib-search-toggle .inline-control {
+	display: inline;
+}
+
+.taglib-search-toggle .toggle-link {
+	clear: both;
+}
+
 /* ---------- Taglib social activities ---------- */
 
 .taglib-social-activities table {

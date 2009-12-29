@@ -24,93 +24,35 @@
 
 <%@ include file="/html/taglib/ui/search_toggle/init.jsp" %>
 
-<script type="text/javascript">
-	var <%= id %>curClickValue = "<%= clickValue %>";
+<div class="taglib-search-toggle">
+	<aui:input id="<%= id + displayTerms.ADVANCED_SEARCH %>" name="<%= displayTerms.ADVANCED_SEARCH %>" type="hidden" value='<%= clickValue.equals("basic") ? false : true %>' />
 
-	function <%= id %>toggleSearch() {
-		AUI().one("#<%= id %>basic").toggle();
-		AUI().one("#<%= id %>advanced").toggle();
+	<div class="<%= clickValue.equals("basic") ? "" : "aui-helper-hidden" %>" id="<%= id %>basic">
+		<c:choose>
+			<c:when test="<%= Validator.isNotNull(buttonLabel) %>">
+				<aui:input cssClass="input-text-search" id="<%= id + displayTerms.KEYWORDS %>" label="" name="<%= displayTerms.KEYWORDS %>" size="30" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
 
-		var advancedSearchObj = AUI().one("#<%= id %><%= displayTerms.ADVANCED_SEARCH %>");
+				<aui:button type="submit" value="<%= buttonLabel %>" />
 
-		if (<%= id %>curClickValue == "basic") {
-			<%= id %>curClickValue = "advanced";
+				<div class="toggle-link">
+					<aui:a href="javascript:;" tabindex="-1"><liferay-ui:message key="advanced" /> &raquo;</aui:a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<aui:input id="<%= id + displayTerms.KEYWORDS %>" label="search" name="<%= displayTerms.KEYWORDS %>" size="30" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
 
-			advancedSearchObj.val(true);
-		}
-		else {
-			<%= id %>curClickValue = "basic";
+				&nbsp;<aui:a href="javascript:;" tabindex="-1"><liferay-ui:message key="advanced" /> &raquo;</aui:a>
+			</c:otherwise>
+		</c:choose>
+	</div>
 
-			advancedSearchObj.val(false);
-		}
+	<div class="<%= !clickValue.equals("basic") ? "" : "aui-helper-hidden" %>" id="<%= id %>advanced">
+		<liferay-util:buffer var="andOperator">
+			<aui:select cssClass="inline-control" label="" name="<%= displayTerms.AND_OPERATOR %>">
+				<aui:option label="all" selected="<%= displayTerms.isAndOperator() %>" value="1" />
+				<aui:option label="any" selected="<%= !displayTerms.isAndOperator() %>" value="0" />
+			</aui:select>
+		</liferay-util:buffer>
 
-		AUI().io(
-			'<%= themeDisplay.getPathMain() %>/portal/session_click',
-			{
-				data: AUI().toQueryString(
-					{
-						'<%= id %>': <%= id %>curClickValue
-					}
-				)
-			}
-		);
-	}
-</script>
+		<%= LanguageUtil.format(pageContext, "match-x-of-the-following-fields", andOperator) %>
 
-<input id="<%= id %><%= displayTerms.ADVANCED_SEARCH %>" name="<%= namespace %><%= displayTerms.ADVANCED_SEARCH %>" type="hidden" value="<%= clickValue.equals("basic") ? false : true %>" />
-
-<div class="<%= clickValue.equals("basic") ? "" : "aui-helper-hidden" %>" id="<%= id %>basic">
-	<c:choose>
-		<c:when test="<%= Validator.isNotNull(buttonLabel) %>">
-			<input id="<%= id %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
-
-			<input type="submit" value="<liferay-ui:message key="<%= buttonLabel %>" />" /><br />
-
-			<a href="javascript:<%= id %>toggleSearch();" tabindex="-1"><liferay-ui:message key="advanced" /> &raquo;</a>
-		</c:when>
-		<c:otherwise>
-			<label for="<%= id %><%= displayTerms.KEYWORDS %>"><liferay-ui:message key="search" /></label>
-
-			<input id="<%= id %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
-
-			&nbsp;<a href="javascript:<%= id %>toggleSearch();" tabindex="-1"><liferay-ui:message key="advanced" /> &raquo;</a>
-		</c:otherwise>
-	</c:choose>
-</div>
-
-<div class="<%= !clickValue.equals("basic") ? "" : "aui-helper-hidden" %>" id="<%= id %>advanced">
-
-	<%
-	StringBuilder sb = new StringBuilder();
-
-	sb.append("<select name=\"");
-	sb.append(namespace);
-	sb.append(displayTerms.AND_OPERATOR);
-	sb.append("\">");
-
-	sb.append("<option ");
-
-	if (displayTerms.isAndOperator()) {
-		sb.append("selected ");
-	}
-
-	sb.append("value=\"1\">");
-	sb.append(LanguageUtil.get(pageContext, "all"));
-	sb.append("</option>");
-
-	sb.append("<option ");
-
-	if (!displayTerms.isAndOperator()) {
-		sb.append("selected ");
-	}
-
-	sb.append("value=\"0\">");
-	sb.append(LanguageUtil.get(pageContext, "any"));
-	sb.append("</option>");
-
-	sb.append("</select>");
-	%>
-
-	<%= LanguageUtil.format(pageContext, "match-x-of-the-following-fields", sb.toString()) %>
-
-	<br /><br />

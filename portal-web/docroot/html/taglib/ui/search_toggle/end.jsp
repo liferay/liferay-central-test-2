@@ -24,13 +24,72 @@
 
 <%@ include file="/html/taglib/ui/search_toggle/init.jsp" %>
 
-	<br />
+		<c:if test="<%= Validator.isNotNull(buttonLabel) %>">
+			<aui:button type="submit" value="<%= buttonLabel %>" />
+		</c:if>
 
-	<c:if test="<%= Validator.isNotNull(buttonLabel) %>">
-		<input type="submit" value="<liferay-ui:message key="<%= buttonLabel %>" />" />
-
-		<br />
-	</c:if>
-
-	<a href="javascript:<%= id %>toggleSearch();" tabindex="-1">&laquo; <liferay-ui:message key="basic" /></a>
+		<div class="toggle-link">
+			<aui:a href="javascript:;" tabindex="-1">&laquo; <liferay-ui:message key="basic" /></aui:a>
+		</div>
+	</div>
 </div>
+
+<script type="text/javascript">
+	AUI().ready(
+		function (A) {
+			var <%= id %>curClickValue = "<%= clickValue %>";
+
+			var basicForm = A.one("#<%= id %>basic");
+			var advancedForm = A.one("#<%= id %>advanced");
+
+			var basicControls = basicForm.all('input, select');
+			var advancedControls = advancedForm.all('input, select');
+
+			if (<%= id %>curClickValue == "basic") {
+				console.log("deshabilito advanced");
+				advancedControls.attr('disabled', 'disabled');
+			}
+			else {
+				basicControls.attr('disabled', 'disabled');
+			}
+
+			AUI().all('.toggle-link a').on(
+				'click',
+				function() {
+					basicForm.toggle();
+					advancedForm.toggle();
+
+					var advancedSearchObj = A.one("#<%= namespace %><%= id %><%= displayTerms.ADVANCED_SEARCH %>");
+
+					if (<%= id %>curClickValue == "basic") {
+						<%= id %>curClickValue = "advanced";
+
+						advancedSearchObj.val(true);
+
+						basicControls.attr('disabled', 'disabled');
+						advancedControls.attr('disabled', '');
+					}
+					else {
+						<%= id %>curClickValue = "basic";
+
+						advancedSearchObj.val(false);
+
+						basicControls.attr('disabled', '');
+						advancedControls.attr('disabled', 'disabled');
+					}
+
+					A.io(
+						'<%= themeDisplay.getPathMain() %>/portal/session_click',
+						{
+							data: AUI().toQueryString(
+								{
+									'<%= id %>': <%= id %>curClickValue
+								}
+							)
+						}
+					);
+				}
+			);
+		}
+	);
+</script>
