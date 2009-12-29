@@ -57,7 +57,7 @@ public class CoalescedPipeTest extends TestCase {
 		long time = System.currentTimeMillis() - startTime;
 		assertTrue(time > 250L);
 		scheduledExecutorService.shutdownNow();
-		scheduledExecutorService.awaitTermination(2, TimeUnit.MINUTES);
+		scheduledExecutorService.awaitTermination(120, TimeUnit.SECONDS);
 	}
 
 	public void testNonBlockingTake() throws InterruptedException {
