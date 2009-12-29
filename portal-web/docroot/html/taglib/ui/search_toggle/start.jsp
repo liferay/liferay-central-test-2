@@ -55,4 +55,3 @@
 		</liferay-util:buffer>
 
 		<%= LanguageUtil.format(pageContext, "match-x-of-the-following-fields", andOperator) %>
-
