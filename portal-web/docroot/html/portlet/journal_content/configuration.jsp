@@ -147,7 +147,7 @@ type = ParamUtil.getString(request, "type", type);
 			}
 		}
 		%>
-		
+
 	</c:if>
 
 	<%
