@@ -89,63 +89,65 @@ type = ParamUtil.getString(request, "type", type);
 	</div>
 
 	<c:if test="<%= article != null %>">
-		<aui:fieldset>
-			<%
-			String structureId = article.getStructureId();
 
-			if (Validator.isNotNull(structureId)) {
-				List templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
+		<%
+		String structureId = article.getStructureId();
 
-				if (!templates.isEmpty()) {
-					if (Validator.isNull(templateId)) {
-						templateId = article.getTemplateId();
-					}
-			%>
+		if (Validator.isNotNull(structureId)) {
+			List templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
 
-			<liferay-ui:message key="override-default-template" />
-
-			<liferay-ui:table-iterator
-				list="<%= templates %>"
-				listType="com.liferay.portlet.journal.model.JournalTemplate"
-				rowLength="3"
-				rowPadding="30"
-			>
-
-				<%
-				boolean templateChecked = false;
-
-				if (templateId.equals(tableIteratorObj.getTemplateId())) {
-					templateChecked = true;
+			if (!templates.isEmpty()) {
+				if (Validator.isNull(templateId)) {
+					templateId = article.getTemplateId();
 				}
+		%>
 
-				if ((tableIteratorPos.intValue() == 0) && Validator.isNull(templateId)) {
-					templateChecked = true;
-				}
-				%>
+				<aui:fieldset>
+					<liferay-ui:message key="override-default-template" />
 
-				<porlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="configurationURL">
-					<portlet:param name="struts_action" value="/journal/edit_template" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" />
-					<portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" />
-				</porlet:renderURL>
+					<liferay-ui:table-iterator
+						list="<%= templates %>"
+						listType="com.liferay.portlet.journal.model.JournalTemplate"
+						rowLength="3"
+						rowPadding="30"
+					>
 
-				<aui:a href="<%= configurationURL %>" id="tableIteratorObjName"><%= tableIteratorObj.getName() %></aui:a>
+						<%
+						boolean templateChecked = false;
 
-				<c:if test="<%= tableIteratorObj.isSmallImage() %>">
+						if (templateId.equals(tableIteratorObj.getTemplateId())) {
+							templateChecked = true;
+						}
+
+						if ((tableIteratorPos.intValue() == 0) && Validator.isNull(templateId)) {
+							templateChecked = true;
+						}
+						%>
+
+						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editTemplateURL">
+							<portlet:param name="struts_action" value="/journal/edit_template" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" />
+							<portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" />
+						</portlet:renderURL>
+
+						<aui:a href="<%= editTemplateURL %>" id="tableIteratorObjName"><%= tableIteratorObj.getName() %></aui:a>
+
+						<c:if test="<%= tableIteratorObj.isSmallImage() %>">
+							<br />
+
+							<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(tableIteratorObj.getSmallImageId()) %>" vspace="0" />
+						</c:if>
+					</liferay-ui:table-iterator>
+
 					<br />
+				</aui:fieldset>
 
-					<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(tableIteratorObj.getSmallImageId()) %>" vspace="0" />
-				</c:if>
-			</liferay-ui:table-iterator>
-
-			<br />
-
-			<%
-				}
+		<%
 			}
-			%>
-		</aui:fieldset>
+		}
+		%>
+		
 	</c:if>
 
 	<%
