@@ -55,6 +55,8 @@ if (ppid.equals(PortletKeys.PLUGIN_INSTALLER)) {
 	ppid = PortletKeys.ADMIN_PLUGINS;
 }
 
+request.setAttribute("control_panel.jsp-ppid", ppid);
+
 String category = PortalUtil.getControlPanelCategory(ppid, themeDisplay);
 
 List<Layout> scopeLayouts = new ArrayList<Layout>();

@@ -32,26 +32,7 @@
 	<liferay-ui:panel-container extended="<%= true %>" id="panel-manage-container" persistState="<%= true %>">
 
 		<%
-		String ppid = layoutTypePortlet.getStateMaxPortletId();
-
-		if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
-			ppid = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
-		}
-
-		if (ppid.equals(PortletKeys.EXPANDO)) {
-			String modelResource = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "modelResource");
-
-			if (modelResource.equals(User.class.getName())) {
-				ppid = PortletKeys.ENTERPRISE_ADMIN_USERS;
-			}
-			else if (modelResource.equals(Organization.class.getName())) {
-				ppid = PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS;
-			}
-		}
-
-		if (ppid.equals(PortletKeys.PLUGIN_INSTALLER)) {
-			ppid = PortletKeys.ADMIN_PLUGINS;
-		}
+		String ppid = GetterUtil.getString((String)request.getAttribute("control_panel.jsp-ppid"), layoutTypePortlet.getStateMaxPortletId());
 
 		for (String category : PortletCategoryKeys.ALL) {
 			String panelCategory = "panel-manage-" + category;
