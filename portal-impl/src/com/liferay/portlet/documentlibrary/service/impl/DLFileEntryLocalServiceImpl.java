@@ -742,7 +742,7 @@ public class DLFileEntryLocalServiceImpl
 			InputStream is = null;
 			long size = 0;
 
-			if ((file != null) && (file.length() > 0)) {
+			if (file != null) {
 				is = new UnsyncBufferedInputStream(new FileInputStream(file));
 				size = file.length();
 			}
