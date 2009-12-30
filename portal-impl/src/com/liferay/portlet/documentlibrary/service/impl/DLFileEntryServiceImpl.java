@@ -231,6 +231,8 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		String lockId = DLUtil.getLockId(groupId, folderId, name);
 
+		expirationTime += System.currentTimeMillis();
+
 		return lockLocalService.lock(
 			getUser().getUserId(), DLFileEntry.class.getName(), lockId, owner,
 			false, expirationTime);
