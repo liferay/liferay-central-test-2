@@ -31,9 +31,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 groupId = ParamUtil.getLong(request, "groupId", groupId);
 
+JournalStructure structure= null;
+
 if (Validator.isNotNull(structureId)) {
 	try {
-		JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
+		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
 	}
 	catch (NoSuchStructureException nsse) {
 		structureId = StringPool.BLANK;
@@ -50,33 +52,12 @@ if (Validator.isNotNull(structureId)) {
 <script type="text/javascript">
 	function <portlet:namespace />removeStructure() {
 		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
-		submitForm(document.<portlet:namespace />fm1);
-	}
-
-	function <portlet:namespace />saveConfiguration() {
-		AUI().use(
-			'io',
-			function(A) {
-				var form = A.get('#<portlet:namespace />fm1');
-
-				var uri = form.getAttribute('action');
-
-				A.io(
-					uri,
-					{
-						form: {
-							id: form
-						},
-						method: 'POST'
-					}
-				);
-			}
-		);
+		AUI().one('#<portlet:namespace/>structure').html('<liferay-ui:message key="any" />');
 	}
 
 	function <portlet:namespace />selectStructure(structureId) {
 		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
-		submitForm(document.<portlet:namespace />fm1);
+		AUI().one('#<portlet:namespace/>structure').html(structureId);
 	}
 </script>
 
@@ -88,7 +69,7 @@ if (Validator.isNotNull(structureId)) {
 	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
 
 	<aui:fieldset>
-		<aui:select label="community" name="groupId" onChange='<%= "submitForm(document." + renderResponse.getNamespace() + "fm1);" %>'>
+		<aui:select label="community" name="groupId">
 
 			<%
 			List<Group> myPlaces = user.getMyPlaces();
@@ -113,7 +94,7 @@ if (Validator.isNotNull(structureId)) {
 
 		</aui:select>
 
-		<aui:select label="web-content-type" name="type" onChange='<%= renderResponse.getNamespace() + "saveConfiguration();" %>'>
+		<aui:select label="web-content-type" name="type">
 			<aui:option value="" />
 
 			<%
@@ -128,13 +109,13 @@ if (Validator.isNotNull(structureId)) {
 
 		</aui:select>
 
-		<aui:select label="display-url" name="pageURL" onChange='<%= renderResponse.getNamespace() + "saveConfiguration();" %>'>
+		<aui:select label="display-url" name="pageURL">
 			<aui:option label="maximized" selected='<%= pageURL.equals("maximized") %>' />
 			<aui:option label="normal" selected='<%= pageURL.equals("normal") %>' />
 			<aui:option label="pop-up" selected='<%= pageURL.equals("popUp") %>' />
 		</aui:select>
 
-		<aui:select label="display-per-page" name="pageDelta" onChange='<%= renderResponse.getNamespace() + "saveConfiguration();" %>'>
+		<aui:select label="display-per-page" name="pageDelta">
 
 			<%
 			String[] pageDeltaValues = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLES_PAGE_DELTA_VALUES);
@@ -150,104 +131,57 @@ if (Validator.isNotNull(structureId)) {
 
 		</aui:select>
 
-		<aui:select label="order-by-column" name="orderByCol" onChange='<%= renderResponse.getNamespace() + "saveConfiguration();" %>'>
-			<aui:option label="display-date" selected='<%= orderByCol.equals("display-date") %>' />
-			<aui:option label="create-date" selected='<%= orderByCol.equals("create-date") %>' />
-			<aui:option label="modified-date" selected='<%= orderByCol.equals("modified-date") %>' />
-			<aui:option label="title" selected='<%= orderByCol.equals("title") %>' />
-			<aui:option label="id" selected='<%= orderByCol.equals("id") %>' />
-		</aui:select>
+		<aui:field-wrapper label="order-by-column">
+			<aui:select inlineField="<%= true %>" label="" name="orderByCol">
+				<aui:option label="display-date" selected='<%= orderByCol.equals("display-date") %>' />
+				<aui:option label="create-date" selected='<%= orderByCol.equals("create-date") %>' />
+				<aui:option label="modified-date" selected='<%= orderByCol.equals("modified-date") %>' />
+				<aui:option label="title" selected='<%= orderByCol.equals("title") %>' />
+				<aui:option label="id" selected='<%= orderByCol.equals("id") %>' />
+			</aui:select>
 
-		<aui:select label="order-by-type" name="orderByType" onChange='<%= renderResponse.getNamespace() + "saveConfiguration();" %>'>
-			<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' />
-			<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' />
-		</aui:select>
-	</aui:fieldset>
+			<aui:select label="" name="orderByType">
+				<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' />
+				<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' />
+			</aui:select>
+		</aui:field-wrapper>
 
-	<div class="portlet-msg-info">
-		<c:choose>
-			<c:when test="<%= Validator.isNull(structureId) %>">
-				<liferay-ui:message key="select-a-structure-to-filter-the-web-content-list-by-a-structure" />
-			</c:when>
-			<c:otherwise>
-				<%= LanguageUtil.format(pageContext, "filter-web-content-list-by-structure-x", structureId) %> <a href="javascript:<portlet:namespace />removeStructure();"><liferay-ui:message key="click-to-remove-filter" /></a>
-			</c:otherwise>
-		</c:choose>
-	</div>
-</aui:form>
+		<aui:field-wrapper label="structure">
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
-	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur %>' />
+			<%
+			String structureName = StringPool.BLANK;
+			String structureDescription = StringPool.BLANK;
 
-	<aui:fieldset>
-		<aui:legend label="structures" />
-
-		<%
-		DynamicRenderRequest dynamicRenderRequest = new DynamicRenderRequest(renderRequest);
-
-		dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
-
-		StructureSearch searchContainer = new StructureSearch(dynamicRenderRequest, portletURL);
-		%>
-
-		<liferay-ui:search-form
-			page="/html/portlet/journal/structure_search.jsp"
-			searchContainer="<%= searchContainer %>"
-		/>
-
-		<br />
-
-		<%
-		StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
-		%>
-
-		<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
-
-		<%
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			JournalStructure structure = (JournalStructure)results.get(i);
-
-			structure = structure.toEscapedModel();
-
-			ResultRow row = new ResultRow(structure, structure.getStructureId(), i);
-
-			StringBuilder sb = new StringBuilder();
-
-			sb.append("javascript:");
-			sb.append(renderResponse.getNamespace());
-			sb.append("selectStructure('");
-			sb.append(structure.getStructureId());
-			sb.append("');");
-
-			String rowHREF = sb.toString();
-
-			// Structure id
-
-			row.addText(structure.getStructureId(), rowHREF);
-
-			// Name and description
-
-			sb = new StringBuilder();
-
-			sb.append(structure.getName());
-
-			if (Validator.isNotNull(structure.getDescription())) {
-				sb.append("<br />");
-				sb.append(structure.getDescription());
+			if (structure != null) {
+				structureName = structure.getName();
+				structureDescription = structure.getDescription();
 			}
+			else {
+				structureName = LanguageUtil.get(pageContext, "any");
+			}
+			%>
 
-			row.addText(sb.toString(), rowHREF);
+			<div id="<portlet:namespace/>structure">
+				<%= structureName %>
 
-			// Add result row
+				<c:if test="<%= Validator.isNotNull (structureDescription) %>">
+					<em>(<%= structureDescription %>)</em>
+				</c:if>
+			</div>
 
-			resultRows.add(row);
-		}
-		%>
+			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectStructureURL">
+				<portlet:param name="struts_action" value="/portlet_configuration/select_structure" />
+				<portlet:param name="structureId" value="<%= structureId %>" />
+			</portlet:renderURL>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			<%
+			String taglibOpenStructureWindow = "var folderWindow = window.open('" + selectStructureURL + "','structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
+			%>
+
+			<aui:button onClick="<%= taglibOpenStructureWindow %>" value="select" />
+
+			<aui:button name="removeStructureButton" onClick='<%= renderResponse.getNamespace() + "removeStructure();" %>' value="remove" />
+		</aui:field-wrapper>
 	</aui:fieldset>
 
 	<aui:button-row>
