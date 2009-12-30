@@ -150,7 +150,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());
 	sb.append("/file_system/small/");
-	sb.append(DLUtil.getFileExtension(fileEntry.getTitle()));
+	sb.append(DLUtil.getFileIcon(fileEntry.getTitle()));
 	sb.append(".png\">");
 	sb.append(fileEntry.getTitle());
 

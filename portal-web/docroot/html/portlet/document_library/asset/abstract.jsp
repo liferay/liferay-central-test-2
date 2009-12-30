@@ -33,7 +33,7 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 
 <div class="asset-resource-info">
 	<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>">
-		<img align="left" alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= DLUtil.getFileExtension(fileEntry.getTitle()) %>.png">
+		<img align="left" alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= DLUtil.getFileIcon(fileEntry.getTitle()) %>.png">
 
 		<%= fileEntry.getTitle() %>
 	</a>

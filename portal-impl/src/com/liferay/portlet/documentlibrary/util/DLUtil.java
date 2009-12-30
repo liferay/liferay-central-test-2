@@ -164,8 +164,8 @@ public class DLUtil {
 			request, folder.getName(), portletURL.toString());
 	}
 
-	public static String getFileExtension(String title) {
-		return _instance._getFileExtension(title);
+	public static String getFileIcon(String title) {
+		return _instance._getFileIcon(title);
 	}
 
 	public static String getGenericName(String extension) {
@@ -185,32 +185,32 @@ public class DLUtil {
 	}
 
 	private DLUtil() {
-		_fileExtensions = new HashSet<String>();
+		_fileIcons = new HashSet<String>();
 
-		String[] fileExtensions = null;
+		String[] fileIcons = null;
 
 		try {
-			fileExtensions = PrefsPropsUtil.getStringArray(
-				PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA);
+			fileIcons = PrefsPropsUtil.getStringArray(
+				PropsKeys.DL_FILE_ICONS, StringPool.COMMA);
 		}
 		catch (SystemException se) {
 			_log.error(se, se);
 
-			fileExtensions = new String[] {StringPool.BLANK};
+			fileIcons = new String[] {StringPool.BLANK};
 		}
 
-		for (int i = 0; i < fileExtensions.length; i++) {
+		for (int i = 0; i < fileIcons.length; i++) {
 
 			// Only process non wildcard extensions
 
-			if (!StringPool.STAR.equals(fileExtensions[i])) {
+			if (!StringPool.STAR.equals(fileIcons[i])) {
 
 				// Strip starting period
 
-				String extension = fileExtensions[i];
+				String extension = fileIcons[i];
 				extension = extension.substring(1, extension.length());
 
-				_fileExtensions.add(extension);
+				_fileIcons.add(extension);
 			}
 		}
 
@@ -262,11 +262,11 @@ public class DLUtil {
 		_genericNames.put("wmv", "video");
 	}
 
-	private String _getFileExtension(String title) {
+	private String _getFileIcon(String title) {
 		String extension = FileUtil.getExtension(title);
 
-		if (!_fileExtensions.contains(extension)) {
-			extension = _DEFAULT_FILE_EXTENSION;
+		if (!_fileIcons.contains(extension)) {
+			extension = _DEFAULT_FILE_ICON;
 		}
 
 		return extension;
@@ -284,13 +284,13 @@ public class DLUtil {
 
 	private static final String _DEFAULT_GENERIC_NAME = "default";
 
-	private static final String _DEFAULT_FILE_EXTENSION = "page";
+	private static final String _DEFAULT_FILE_ICON = "page";
 
 	private static Log _log = LogFactoryUtil.getLog(DLUtil.class);
 
 	private static DLUtil _instance = new DLUtil();
 
 	private Map<String, String> _genericNames;
-	private Set<String> _fileExtensions;
+	private Set<String> _fileIcons;
 
 }

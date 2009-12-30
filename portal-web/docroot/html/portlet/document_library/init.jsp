@@ -161,7 +161,7 @@ private static final String _getFileEntryImage(DLFileEntry fileEntry, ThemeDispl
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());
 	sb.append("/file_system/small/");
-	sb.append(DLUtil.getFileExtension(fileEntry.getTitle()));
+	sb.append(DLUtil.getFileIcon(fileEntry.getTitle()));
 	sb.append(".png\">");
 
 	return sb.toString();

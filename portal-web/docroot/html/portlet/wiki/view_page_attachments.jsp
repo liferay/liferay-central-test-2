@@ -96,7 +96,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());
 	sb.append("/file_system/small/");
-	sb.append(DLUtil.getFileExtension(shortFileName));
+	sb.append(DLUtil.getFileIcon(shortFileName));
 	sb.append(".png\">&nbsp;");
 	sb.append(shortFileName);
 
