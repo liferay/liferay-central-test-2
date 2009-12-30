@@ -25,6 +25,8 @@ package com.liferay.portal.util;
 import com.liferay.portal.configuration.ConfigurationImpl;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -88,23 +90,30 @@ public class PropsUtil {
 	}
 
 	private PropsUtil() {
-		SystemProperties.set(
-			PropsKeys.DEFAULT_LIFERAY_HOME, _getDefaultLiferayHome());
+		try {
+			SystemProperties.set(
+				PropsKeys.DEFAULT_LIFERAY_HOME, _getDefaultLiferayHome());
 
-		_configuration = new ConfigurationImpl(
-			PropsUtil.class.getClassLoader(), PropsFiles.PORTAL);
+			_configuration = new ConfigurationImpl(
+				PropsUtil.class.getClassLoader(), PropsFiles.PORTAL);
 
-		String liferayHome = _get(PropsKeys.LIFERAY_HOME);
+			String liferayHome = _get(PropsKeys.LIFERAY_HOME);
 
-		SystemProperties.set(PropsKeys.LIFERAY_HOME, liferayHome);
+			SystemProperties.set(PropsKeys.LIFERAY_HOME, liferayHome);
 
-		SystemProperties.set(
-			"ehcache.disk.store.dir", liferayHome + "/data/ehcache");
+			SystemProperties.set(
+				"ehcache.disk.store.dir", liferayHome + "/data/ehcache");
 
-		if (GetterUtil.getBoolean(
-				SystemProperties.get("company-id-properties"))) {
+			if (GetterUtil.getBoolean(
+					SystemProperties.get("company-id-properties"))) {
 
-			_configurations = new HashMap<Long, Configuration>();
+				_configurations = new HashMap<Long, Configuration>();
+			}
+		}
+		catch (Exception e) {
+			if (_log.isErrorEnabled()) {
+				_log.error("Unable to initialize PropsUtil", e);
+			}
 		}
 	}
 
@@ -226,7 +235,7 @@ public class PropsUtil {
 	}
 
 	private static PropsUtil _instance = new PropsUtil();
-
+	private static Log _log = LogFactoryUtil.getLog(PropsUtil.class);
 	private Configuration _configuration;
 	private Map<Long, Configuration> _configurations;
 
