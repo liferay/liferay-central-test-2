@@ -290,8 +290,21 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 											}
 											%>
 
+											<script type="text/javascript">
+												function <portlet:namespace />proposePublication() {
+													Liferay.LayoutExporter.proposeLayout(
+														{
+															url: '<%= proposePublicationURL.toString() %>',
+															namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>',
+															reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>,
+															title: '<liferay-ui:message key="proposal-description" />'
+														}
+													);
+												}
+											</script>
+
 											<aui:button-row>
-												<input type="button" value="<liferay-ui:message key="propose-publication" />" onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
+												<aui:button onClick='<%= renderResponse.getNamespace() + "proposePublication();" %>' value="propose-publication" />
 
 												<aui:button onClick='<%= renderResponse.getNamespace() + "copyFromLive();" %>' value="copy-from-live" />
 											</aui:button-row>
