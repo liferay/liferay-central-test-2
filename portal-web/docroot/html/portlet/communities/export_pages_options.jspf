@@ -246,10 +246,6 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
 
-								PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
-
-								ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
-
 								try {
 									PortletDataHandlerControl[] controls = portletDataHandler.getExportControls();
 
@@ -257,6 +253,9 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 										String rootPortletId = curPortlet.getRootPortletId();
 
 										boolean checked = portletDataHandler.isPublishToLiveByDefault();
+
+										request.setAttribute("render_controls.jsp-controls", controls);
+										request.setAttribute("render_controls.jsp-portletDisabled", !checked);
 							%>
 
 										<li class="tree-item">
@@ -272,7 +271,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 													<aui:input disabled="<%= !checked %>" inlineLabel="right" label="setup "name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" value="<%= true %>" />
 												</li>
 
-												<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls, !checked) %>
+												<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
 											</ul>
 										</li>
 
@@ -330,5 +329,3 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 		</li>
 	</ul>
 </div>
-
-<%@ include file="/html/portlet/communities/render_controls.jspf" %>

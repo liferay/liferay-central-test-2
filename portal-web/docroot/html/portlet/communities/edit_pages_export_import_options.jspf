@@ -309,10 +309,6 @@
 
 										PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
 
-										PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
-
-										ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
-
 										try {
 											PortletDataHandlerControl[] controls = null;
 
@@ -325,6 +321,9 @@
 
 											if (controls != null) {
 												String rootPortletId = curPortlet.getRootPortletId();
+
+												request.setAttribute("render_controls.jsp-controls", controls);
+												request.setAttribute("render_controls.jsp-portletDisabled", !portletDataHandler.isPublishToLiveByDefault());
 									%>
 
 												<li class="tree-item">
@@ -345,7 +344,7 @@
 													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"><liferay-ui:message key="data" /></label>
 
 													<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId + "Controls" %>">
-														<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls, !portletDataHandler.isPublishToLiveByDefault()) %>
+														<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
 													</ul>
 												</li>
 

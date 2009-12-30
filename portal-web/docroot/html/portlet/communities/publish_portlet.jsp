@@ -87,5 +87,3 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		<aui:button onClick="AUI().DialogManager.closeByChild(this);" type="cancel" />
 	</aui:button-row>
 </aui:form>
-
-<%@ include file="/html/portlet/communities/render_controls.jspf" %>

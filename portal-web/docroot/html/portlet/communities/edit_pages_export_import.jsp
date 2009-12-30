@@ -188,5 +188,3 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 		}
 	);
 </script>
-
-<%@ include file="/html/portlet/communities/render_controls.jspf" %>

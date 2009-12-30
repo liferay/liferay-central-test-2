@@ -373,5 +373,3 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 		<%= LanguageUtil.format(locale, "the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it", PortalUtil.getPortletTitle(selPortlet, application, locale)) %>
 	</c:otherwise>
 </c:choose>
-
-<%@ include file="/html/portlet/communities/render_controls.jspf" %>
