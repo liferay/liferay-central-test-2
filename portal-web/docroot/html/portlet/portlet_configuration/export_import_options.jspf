@@ -54,6 +54,8 @@
 			<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="<%= false %>" />
 
 			<%
+			PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance();
+
 			String taglibTogglePortletDataControls = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "portletDataControls');";
 			%>
 
@@ -61,18 +63,16 @@
 				<c:when test='<%= tabs2.equals("import") || tabs2.equals("staging") %>'>
 					<aui:input helpMessage="delete-portlet-data-help" inlineLabel="right" label="delete-portlet-data-before-importing" name="<%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
 
-					<aui:input inlineLabel="right" label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" onChange="<%= taglibTogglePortletDataControls %>" type="checkbox" value="<%= true %>" />
+					<aui:input inlineLabel="right" label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" onChange="<%= taglibTogglePortletDataControls %>" type="checkbox" value="<%= portletDataHandler.isPublishToLiveByDefault() %>" />
 				</c:when>
 				<c:otherwise>
-					<aui:input inlineLabel="right" label="data" name='<%= PortletDataHandlerKeys.PORTLET_DATA + "_" + selPortlet.getRootPortletId() %>' onChange="<%= taglibTogglePortletDataControls %>" type="checkbox" value="<%= true %>" />
+					<aui:input inlineLabel="right" label="data" name='<%= PortletDataHandlerKeys.PORTLET_DATA + "_" + selPortlet.getRootPortletId() %>' onChange="<%= taglibTogglePortletDataControls %>" type="checkbox" value="<%= portletDataHandler.isPublishToLiveByDefault() %>" />
 				</c:otherwise>
 			</c:choose>
 
 			<ul id="<portlet:namespace/>portletDataControls">
 
 				<%
-				PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance();
-
 				try {
 					PortletDataHandlerControl[] controls = null;
 
