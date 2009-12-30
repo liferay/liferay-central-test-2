@@ -68,121 +68,129 @@ if (Validator.isNotNull(structureId)) {
 	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur %>' />
 	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
 
-	<aui:fieldset>
-		<aui:select label="community" name="groupId">
+	<liferay-ui:panel-container extended="<%= true %>" id='journalArticlesConfiguration' persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='filter' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter") %>' >
+			<aui:fieldset>
+				<aui:select label="community" name="groupId">
 
-			<%
-			List<Group> myPlaces = user.getMyPlaces();
+					<%
+					List<Group> myPlaces = user.getMyPlaces();
 
-			for (int i = 0; i < myPlaces.size(); i++) {
-				Group group = myPlaces.get(i);
+					for (int i = 0; i < myPlaces.size(); i++) {
+						Group group = myPlaces.get(i);
 
-				group = group.toEscapedModel();
+						group = group.toEscapedModel();
 
-				String groupName = group.getDescriptiveName();
+						String groupName = group.getDescriptiveName();
 
-				if (group.isUser()) {
-					groupName = LanguageUtil.get(pageContext, "my-community");
-				}
-			%>
+						if (group.isUser()) {
+							groupName = LanguageUtil.get(pageContext, "my-community");
+						}
+					%>
 
-				<aui:option label="<%= groupName %>" selected="<%= groupId == group.getGroupId() %>" value="<%= group.getGroupId() %>" />
+						<aui:option label="<%= groupName %>" selected="<%= groupId == group.getGroupId() %>" value="<%= group.getGroupId() %>" />
 
-			<%
-			}
-			%>
+					<%
+					}
+					%>
 
-		</aui:select>
+				</aui:select>
 
-		<aui:select label="web-content-type" name="type">
-			<aui:option value="" />
+				<aui:select label="web-content-type" name="type">
+					<aui:option value="" />
 
-			<%
-			for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
-			%>
+					<%
+					for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
+					%>
 
-				<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" />
+						<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" />
 
-			<%
-			}
-			%>
+					<%
+					}
+					%>
 
-		</aui:select>
+				</aui:select>
 
-		<aui:select label="display-url" name="pageURL">
-			<aui:option label="maximized" selected='<%= pageURL.equals("maximized") %>' />
-			<aui:option label="normal" selected='<%= pageURL.equals("normal") %>' />
-			<aui:option label="pop-up" selected='<%= pageURL.equals("popUp") %>' />
-		</aui:select>
+				<aui:field-wrapper label="structure">
 
-		<aui:select label="display-per-page" name="pageDelta">
+					<%
+					String structureName = StringPool.BLANK;
+					String structureDescription = StringPool.BLANK;
 
-			<%
-			String[] pageDeltaValues = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLES_PAGE_DELTA_VALUES);
+					if (structure != null) {
+						structureName = structure.getName();
+						structureDescription = structure.getDescription();
+					}
+					else {
+						structureName = LanguageUtil.get(pageContext, "any");
+					}
+					%>
 
-			for (int i = 0; i < pageDeltaValues.length; i++) {
-			%>
+					<div id="<portlet:namespace/>structure">
+						<%= structureName %>
 
-				<aui:option label="<%= pageDeltaValues[i] %>" selected="<%= pageDelta == GetterUtil.getInteger(pageDeltaValues[i]) %>" />
+						<c:if test="<%= Validator.isNotNull (structureDescription) %>">
+							<em>(<%= structureDescription %>)</em>
+						</c:if>
+					</div>
 
-			<%
-			}
-			%>
+					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectStructureURL">
+						<portlet:param name="struts_action" value="/portlet_configuration/select_structure" />
+						<portlet:param name="structureId" value="<%= structureId %>" />
+					</portlet:renderURL>
 
-		</aui:select>
+					<%
+					String taglibOpenStructureWindow = "var folderWindow = window.open('" + selectStructureURL + "','structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
+					%>
 
-		<aui:field-wrapper label="order-by-column">
-			<aui:select inlineField="<%= true %>" label="" name="orderByCol">
-				<aui:option label="display-date" selected='<%= orderByCol.equals("display-date") %>' />
-				<aui:option label="create-date" selected='<%= orderByCol.equals("create-date") %>' />
-				<aui:option label="modified-date" selected='<%= orderByCol.equals("modified-date") %>' />
-				<aui:option label="title" selected='<%= orderByCol.equals("title") %>' />
-				<aui:option label="id" selected='<%= orderByCol.equals("id") %>' />
-			</aui:select>
+					<aui:button onClick="<%= taglibOpenStructureWindow %>" value="select" />
 
-			<aui:select label="" name="orderByType">
-				<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' />
-				<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' />
-			</aui:select>
-		</aui:field-wrapper>
+					<aui:button name="removeStructureButton" onClick='<%= renderResponse.getNamespace() + "removeStructure();" %>' value="remove" />
+				</aui:field-wrapper>
+			</aui:fieldset>
+		</liferay-ui:panel>
 
-		<aui:field-wrapper label="structure">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='displaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
+			<aui:fieldset>
+				<aui:select label="display-url" name="pageURL">
+					<aui:option label="maximized" selected='<%= pageURL.equals("maximized") %>' />
+					<aui:option label="normal" selected='<%= pageURL.equals("normal") %>' />
+					<aui:option label="pop-up" selected='<%= pageURL.equals("popUp") %>' />
+				</aui:select>
 
-			<%
-			String structureName = StringPool.BLANK;
-			String structureDescription = StringPool.BLANK;
+				<aui:select label="display-per-page" name="pageDelta">
 
-			if (structure != null) {
-				structureName = structure.getName();
-				structureDescription = structure.getDescription();
-			}
-			else {
-				structureName = LanguageUtil.get(pageContext, "any");
-			}
-			%>
+					<%
+					String[] pageDeltaValues = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLES_PAGE_DELTA_VALUES);
 
-			<div id="<portlet:namespace/>structure">
-				<%= structureName %>
+					for (int i = 0; i < pageDeltaValues.length; i++) {
+					%>
 
-				<c:if test="<%= Validator.isNotNull (structureDescription) %>">
-					<em>(<%= structureDescription %>)</em>
-				</c:if>
-			</div>
+						<aui:option label="<%= pageDeltaValues[i] %>" selected="<%= pageDelta == GetterUtil.getInteger(pageDeltaValues[i]) %>" />
 
-			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectStructureURL">
-				<portlet:param name="struts_action" value="/portlet_configuration/select_structure" />
-				<portlet:param name="structureId" value="<%= structureId %>" />
-			</portlet:renderURL>
+					<%
+					}
+					%>
 
-			<%
-			String taglibOpenStructureWindow = "var folderWindow = window.open('" + selectStructureURL + "','structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
-			%>
+				</aui:select>
 
-			<aui:button onClick="<%= taglibOpenStructureWindow %>" value="select" />
+				<aui:field-wrapper label="order-by-column">
+					<aui:select inlineField="<%= true %>" label="" name="orderByCol">
+						<aui:option label="display-date" selected='<%= orderByCol.equals("display-date") %>' />
+						<aui:option label="create-date" selected='<%= orderByCol.equals("create-date") %>' />
+						<aui:option label="modified-date" selected='<%= orderByCol.equals("modified-date") %>' />
+						<aui:option label="title" selected='<%= orderByCol.equals("title") %>' />
+						<aui:option label="id" selected='<%= orderByCol.equals("id") %>' />
+					</aui:select>
 
-			<aui:button name="removeStructureButton" onClick='<%= renderResponse.getNamespace() + "removeStructure();" %>' value="remove" />
-		</aui:field-wrapper>
-	</aui:fieldset>
+					<aui:select label="" name="orderByType">
+						<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' />
+						<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' />
+					</aui:select>
+				</aui:field-wrapper>
+			</aui:fieldset>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
 
 	<aui:button-row>
 		<aui:button type="submit" />
