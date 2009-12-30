@@ -52,7 +52,7 @@
 	else {
 		boolean completedTasks = false;
 
-		if (toolbarItem.equals("completed")) {
+		if (toolbarItem.equals("my-completed-tasks")) {
 			completedTasks = true;
 
 			searchContainer.setEmptyResultsMessage("there-are-no-completed-tasks");

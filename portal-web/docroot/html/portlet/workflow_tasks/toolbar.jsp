@@ -59,7 +59,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="completedURL">
 		<portlet:param name="struts_action" value="/workflow_tasks/view" />
-		<portlet:param name="toolbarItem" value="completed" />
+		<portlet:param name="toolbarItem" value="my-completed-tasks" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button completed-button <%= toolbarItem.equals("my-completed-tasks") ? "current" : StringPool.BLANK %>">
