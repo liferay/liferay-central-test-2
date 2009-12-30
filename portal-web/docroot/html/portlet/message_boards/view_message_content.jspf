@@ -161,7 +161,7 @@
 				</td>
 			</c:if>
 
-			<if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.LOCK_THREAD) %>">
+			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.LOCK_THREAD) %>">
 				<td>
 					<c:choose>
 						<c:when test="<%= thread.isLocked() %>">
@@ -186,7 +186,7 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
-			</if>
+			</c:if>
 
 			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.MOVE_THREAD) %>">
 				<td>
