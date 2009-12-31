@@ -108,6 +108,7 @@
 			packagenames="*.*"
 			sourcepath="src"
 			stylesheetfile="${project.dir}/tools/javadoc.css"
+			useexternalfile="yes"
 		/>
 	</target>
 
