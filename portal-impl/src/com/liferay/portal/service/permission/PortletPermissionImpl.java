@@ -168,6 +168,10 @@ public class PortletPermissionImpl implements PortletPermission {
 			String actionId, boolean strict)
 		throws PortalException, SystemException {
 
+		if (portlet.isUndeployedPortlet()) {
+			return false;
+		}
+
 		boolean value = contains(
 			permissionChecker, plid, portlet.getPortletId(), actionId, strict);
 

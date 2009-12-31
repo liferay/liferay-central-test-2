@@ -269,7 +269,7 @@ Group group = layout.getGroup();
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if ((!group.hasStagingGroup() || group.isStagingGroup()) &&
-		(PortletPermissionUtil.contains(permissionChecker, plid, portletId, ActionKeys.CONFIGURATION))) {
+		(PortletPermissionUtil.contains(permissionChecker, plid, portlet, ActionKeys.CONFIGURATION))) {
 
 		showConfigurationIcon = true;
 
