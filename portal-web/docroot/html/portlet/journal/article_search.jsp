@@ -119,7 +119,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 <c:if test="<%= showAddArticleButtonButton || showPermissionsButton %>">
 	<aui:button-row>
 		<c:if test="<%= showAddArticleButtonButton %>">
-			<aui:button value="add-web-content" onClick='<%= renderResponse.getNamespace() + "addArticle();" %>' />
+			<aui:button onClick='<%= renderResponse.getNamespace() + "addArticle();" %>' value="add-web-content" />
 		</c:if>
 
 		<c:if test="<%= showPermissionsButton %>">
@@ -130,7 +130,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 				var="permissionsURL"
 			/>
 
-			<aui:button value="permissions" onClick="<%= permissionsURL %>" />
+			<aui:button onClick="<%= permissionsURL %>" value="permissions" />
 		</c:if>
 	</aui:button-row>
 </c:if>

@@ -123,9 +123,9 @@ portletURL.setParameter("tabs1", tabs1);
 				<div class="separator"><!-- --></div>
 
 				<aui:button-row>
-					<aui:button value="expire" onClick='<%= renderResponse.getNamespace() + "expireArticles();" %>' />
+					<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticles();" %>' value="expire" />
 
-					<aui:button value="delete" onClick='<%= renderResponse.getNamespace() + "deleteArticles();" %>' />
+					<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticles();" %>' value="delete" />
 				</aui:button-row>
 
 				<br /><br />
@@ -234,7 +234,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<div class="separator"><!-- --></div>
 
-				<aui:button value="delete" onClick='<%= renderResponse.getNamespace() + "deleteStructures();" %>' />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteStructures();" %>' value="delete" />
 
 				<br /><br />
 
@@ -320,7 +320,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<div class="separator"><!-- --></div>
 
-				<aui:button value="delete" onClick='<%= renderResponse.getNamespace() + "deleteTemplates();" %>' />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteTemplates();" %>' value="delete" />
 
 				<br /><br />
 
@@ -395,7 +395,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<div class="separator"><!-- --></div>
 
-				<aui:button value="delete" onClick='<%= renderResponse.getNamespace() + "deleteFeeds();" %>' />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteFeeds();" %>' value="delete" />
 
 				<br /><br />
 
