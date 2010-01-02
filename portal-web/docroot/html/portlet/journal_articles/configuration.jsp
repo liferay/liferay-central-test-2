@@ -52,11 +52,13 @@ if (Validator.isNotNull(structureId)) {
 <script type="text/javascript">
 	function <portlet:namespace />removeStructure() {
 		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
+
 		AUI().one('#<portlet:namespace/>structure').html('<liferay-ui:message key="any" />');
 	}
 
 	function <portlet:namespace />selectStructure(structureId) {
 		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
+
 		AUI().one('#<portlet:namespace/>structure').html(structureId);
 	}
 </script>
@@ -68,8 +70,8 @@ if (Validator.isNotNull(structureId)) {
 	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur %>' />
 	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
 
-	<liferay-ui:panel-container extended="<%= true %>" id='journalArticlesConfiguration' persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='filter' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter") %>' >
+	<liferay-ui:panel-container extended="<%= true %>" id="journalArticlesConfiguration" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="filter" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter") %>' >
 			<aui:fieldset>
 				<aui:select label="community" name="groupId">
 
@@ -150,7 +152,7 @@ if (Validator.isNotNull(structureId)) {
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='displaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="displaySettings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
 			<aui:fieldset>
 				<aui:select label="display-url" name="pageURL">
 					<aui:option label="maximized" selected='<%= pageURL.equals("maximized") %>' />
