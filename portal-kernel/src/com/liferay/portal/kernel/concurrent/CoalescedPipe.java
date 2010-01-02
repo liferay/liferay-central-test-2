@@ -39,9 +39,11 @@ public class CoalescedPipe<E> {
 		this(null);
 	}
 
-	public CoalescedPipe(Comparator<E> coalesceComparator) {
-		_coalesceComparator = coalesceComparator;
-		_last = _head = new Element<E>(null);
+	public CoalescedPipe(Comparator<E> comparator) {
+		_comparator = comparator;
+		_headElementLink = new ElementLink<E>(null);
+		_lastElementLink = _headElementLink;
+		_notEmptyCondition = _takeLock.newCondition();
 	}
 
 	public long coalescedCount() {
@@ -56,22 +58,31 @@ public class CoalescedPipe<E> {
 		if (e == null) {
 			throw new NullPointerException();
 		}
+
 		int pendingElements = -1;
+
 		_putLock.lockInterruptibly();
+
 		try {
 			if (_coalesceElement(e)) {
 				return;
 			}
-			_last = _last.next = new Element<E>(e);
+
+			_lastElementLink = new ElementLink<E>(e);
+
+			_lastElementLink._nextElementLink = _lastElementLink;
+
 			pendingElements = _pendingCount.getAndIncrement();
 		}
 		finally {
 			_putLock.unlock();
 		}
+
 		if (pendingElements == 0) {
 			_takeLock.lock();
+
 			try {
-				_notEmpty.signal();
+				_notEmptyCondition.signal();
 			}
 			finally {
 				_takeLock.unlock();
@@ -80,45 +91,55 @@ public class CoalescedPipe<E> {
 	}
 
 	public E take() throws InterruptedException {
-		E item;
+		E element = null;
+
 		_takeLock.lockInterruptibly();
+
 		try {
 			while (_pendingCount.get() == 0) {
-				_notEmpty.await();
+				_notEmptyCondition.await();
 			}
-			Element<E> garbageELement = _head;
-			_head = _head.next;
 
-			// Detach garbage element, help GC
-			garbageELement.next = null;
-			item = _head.item;
+			ElementLink<E> garbageElementLink = _headElementLink;
 
-			// Detach reference, help GC
-			_head.item = null;
+			_headElementLink = _headElementLink._nextElementLink;
+
+			garbageElementLink._nextElementLink = null;
+
+			element = _headElementLink._element;
+
+			_headElementLink._element = null;
+
 			int pendingElements = _pendingCount.getAndDecrement();
+
 			if (pendingElements > 1) {
-				_notEmpty.signal();
+				_notEmptyCondition.signal();
 			}
 		}
 		finally {
 			_takeLock.unlock();
 		}
-		return item;
+
+		return element;
 	}
 
 	public Object[] takeSnapshot() {
 		_putLock.lock();
 		_takeLock.lock();
+
 		try {
-			int pendingElements = _pendingCount.get();
-			Object[] array = new Object[pendingElements];
-			int index = 0;
-			Element<E> current = _head.next;
-			while (current != null) {
-				array[index++] = current.item;
-				current = current.next;
+			Object[] pendingElements = new Object[_pendingCount.get()];
+
+			ElementLink<E> currentElementLink =
+				_headElementLink._nextElementLink;
+
+			for (int i = 0; currentElementLink != null; i++) {
+				pendingElements[i++] = currentElementLink._element;
+
+				currentElementLink = currentElementLink._nextElementLink;
 			}
-			return array;
+
+			return pendingElements;
 		}
 		finally {
 			_putLock.unlock();
@@ -129,30 +150,31 @@ public class CoalescedPipe<E> {
 	private boolean _coalesceElement(E e) {
 		try {
 			_takeLock.lockInterruptibly();
-			try {
-				Element<E> current = _head.next;
 
-				if (_coalesceComparator != null) {
-					// coalesce by comparator
+			try {
+				ElementLink<E> current = _headElementLink._nextElementLink;
+
+				if (_comparator != null) {
 					while (current != null) {
-						if (_coalesceComparator.compare(current.item, e) == 0) {
+						if (_comparator.compare(current._element, e) == 0) {
 							_coalescedCount.incrementAndGet();
+
 							return true;
 						}
 						else {
-							current = current.next;
+							current = current._nextElementLink;
 						}
 					}
 				}
 				else {
-					// coalesce by equals
 					while (current != null) {
-						if (current.item.equals(e)) {
+						if (current._element.equals(e)) {
 							_coalescedCount.incrementAndGet();
+
 							return true;
 						}
 						else {
-							current = current.next;
+							current = current._nextElementLink;
 						}
 					}
 				}
@@ -161,32 +183,29 @@ public class CoalescedPipe<E> {
 				_takeLock.unlock();
 			}
 		}
-		catch (InterruptedException ignore) {
-			// If get an interrupt during coalescing, simply return false to
-			// let the current element go into the pipe.
+		catch (InterruptedException ie) {
 		}
 
 		return false;
 	}
 
-	private final Comparator<E> _coalesceComparator;
+	private final Comparator<E> _comparator;
 	private final AtomicLong _coalescedCount = new AtomicLong(0);
+	private ElementLink<E> _headElementLink;
+	private ElementLink<E> _lastElementLink;
+	private final Condition _notEmptyCondition;
 	private final AtomicInteger _pendingCount = new AtomicInteger(0);
 	private final ReentrantLock _putLock = new ReentrantLock();
 	private final ReentrantLock _takeLock = new ReentrantLock();
-	private final Condition _notEmpty = _takeLock.newCondition();
 
-	private Element<E> _head;
-	private Element<E> _last;
+	private static class ElementLink<E> {
 
-	static class Element<E> {
-
-		E item;
-		Element<E> next;
-
-		Element(E x) {
-			item = x;
+		private ElementLink(E element) {
+			this._element = element;
 		}
+
+		private E _element;
+		private ElementLink<E> _nextElementLink;
 
 	}
 

@@ -38,113 +38,157 @@ public class CoalescedPipeTest extends TestCase {
 
 	public void testBlockingTake() throws InterruptedException {
 		final CoalescedPipe<String> coalescedPipe = new CoalescedPipe<String>();
+
 		ScheduledExecutorService scheduledExecutorService =
 			Executors.newScheduledThreadPool(1);
-		scheduledExecutorService.schedule(new Runnable() {
 
-			public void run() {
-				try {
-					coalescedPipe.put("test1");
-				}
-				catch (InterruptedException ex) {
-					fail("Should never happen");
-				}
-			}
+		scheduledExecutorService.schedule(
+			new Runnable() {
 
-		}, 500, TimeUnit.MILLISECONDS);
+				public void run() {
+					try {
+						coalescedPipe.put("test1");
+					}
+					catch (InterruptedException ie) {
+						fail(ie.getMessage());
+					}
+				}
+
+			},
+			500, TimeUnit.MILLISECONDS
+		);
+
 		long startTime = System.currentTimeMillis();
+
 		assertEquals("test1", coalescedPipe.take());
-		long time = System.currentTimeMillis() - startTime;
-		assertTrue(time > 250L);
+		assertTrue((System.currentTimeMillis() - startTime) > 250L);
+
 		scheduledExecutorService.shutdownNow();
 		scheduledExecutorService.awaitTermination(120, TimeUnit.SECONDS);
 	}
 
 	public void testNonBlockingTake() throws InterruptedException {
 		CoalescedPipe<String> coalescedPipe = new CoalescedPipe<String>();
+
 		coalescedPipe.put("test2");
 		coalescedPipe.put("test3");
+
 		long startTime = System.currentTimeMillis();
+
 		assertEquals("test2", coalescedPipe.take());
-		long time = System.currentTimeMillis() - startTime;
-		assertTrue(time < 100);
+		assertTrue((System.currentTimeMillis() - startTime) < 100);
+
 		startTime = System.currentTimeMillis();
+
 		assertEquals("test3", coalescedPipe.take());
-		time = System.currentTimeMillis() - startTime;
-		assertTrue(time < 100);
+		assertTrue((System.currentTimeMillis() - startTime) < 100);
 	}
 
 	public void testPut() throws InterruptedException {
+
 		// Without comparator
+
 		CoalescedPipe<String> coalescedPipe = new CoalescedPipe<String>();
-		// Null put
-		boolean hasException = false;
+
+		// Null
+
 		try {
 			coalescedPipe.put(null);
+
+			fail();
 		}
-		catch (NullPointerException ex) {
-			hasException = true;
+		catch (NullPointerException npe) {
 		}
-		assertTrue(hasException);
-		// Normal put
+
+		// Normal
+
 		coalescedPipe.put("test1");
+
 		assertEquals(1, coalescedPipe.pendingCount());
 		assertEquals(0, coalescedPipe.coalescedCount());
+
 		coalescedPipe.put("test2");
+
 		assertEquals(2, coalescedPipe.pendingCount());
 		assertEquals(0, coalescedPipe.coalescedCount());
-		// Coalesce put
+
+		// Coalesce
+
 		coalescedPipe.put("test1");
+
 		assertEquals(2, coalescedPipe.pendingCount());
 		assertEquals(1, coalescedPipe.coalescedCount());
+
 		coalescedPipe.put("test2");
+
 		assertEquals(2, coalescedPipe.pendingCount());
 		assertEquals(2, coalescedPipe.coalescedCount());
 
-		// with comparator
-		coalescedPipe = new CoalescedPipe<String>(new Comparator<String>() {
+		// With comparator
 
-			public int compare(String o1, String o2) {
-				return o1.length() - o2.length();
+		coalescedPipe = new CoalescedPipe<String>(
+			new Comparator<String>() {
+
+				public int compare(String o1, String o2) {
+					return o1.length() - o2.length();
+				}
+
 			}
+		);
 
-		});
+		// Null
 
-		// Null put
-		hasException = false;
 		try {
 			coalescedPipe.put(null);
+
+			fail();
 		}
-		catch (NullPointerException ex) {
-			hasException = true;
+		catch (NullPointerException npe) {
 		}
-		assertTrue(hasException);
-		// Normal put
+
+		// Normal
+
 		coalescedPipe.put("a");
+
 		assertEquals(1, coalescedPipe.pendingCount());
 		assertEquals(0, coalescedPipe.coalescedCount());
+
 		coalescedPipe.put("ab");
+
 		assertEquals(2, coalescedPipe.pendingCount());
 		assertEquals(0, coalescedPipe.coalescedCount());
-		// Coalesce put
+
+		// Coalesce
+
 		coalescedPipe.put("c");
+
 		assertEquals(2, coalescedPipe.pendingCount());
 		assertEquals(1, coalescedPipe.coalescedCount());
+
 		coalescedPipe.put("cd");
+
 		assertEquals(2, coalescedPipe.pendingCount());
 		assertEquals(2, coalescedPipe.coalescedCount());
 	}
 
 	public void testTakeSnapshot() throws InterruptedException {
 		CoalescedPipe<String> coalescedPipe = new CoalescedPipe<String>();
+
 		Object[] snapShot = coalescedPipe.takeSnapshot();
+
 		assertEquals(0, snapShot.length);
+
 		coalescedPipe.put("test1");
+
 		snapShot = coalescedPipe.takeSnapshot();
+
 		assertEquals(1, snapShot.length);
 		assertEquals("test1", snapShot[0]);
+
 		coalescedPipe.put("test2");
+
 		snapShot = coalescedPipe.takeSnapshot();
+
 		assertEquals(2, snapShot.length);
 		assertEquals("test1", snapShot[0]);
 		assertEquals("test2", snapShot[1]);
