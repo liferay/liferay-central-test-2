@@ -107,7 +107,7 @@ public class EditLDAPServerAction extends PortletAction {
 		String[] keys = properties.keySet().toArray(new String[0]);
 
 		for (String key : keys) {
-			if (ArrayUtil.contains(_LDAP_SERVER_PREF_KEYS, key)) {
+			if (ArrayUtil.contains(_KEYS, key)) {
 				String value = properties.remove(key);
 
 				properties.setProperty(key + postfix, value);
@@ -140,10 +140,10 @@ public class EditLDAPServerAction extends PortletAction {
 
 		String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
 
-		String[] keys = new String[_LDAP_SERVER_PREF_KEYS.length];
+		String[] keys = new String[_KEYS.length];
 
-		for (int i = 0; i < _LDAP_SERVER_PREF_KEYS.length; i++) {
-			keys[i] = _LDAP_SERVER_PREF_KEYS[i] + postfix;
+		for (int i = 0; i < _KEYS.length; i++) {
+			keys[i] = _KEYS[i] + postfix;
 		}
 
 		CompanyServiceUtil.removePreferences(
@@ -188,20 +188,20 @@ public class EditLDAPServerAction extends PortletAction {
 			themeDisplay.getCompanyId(), properties);
 	}
 
-	private final String[] _LDAP_SERVER_PREF_KEYS = {
-		"ldap.server.name",
-		PropsKeys.LDAP_BASE_PROVIDER_URL,
-		PropsKeys.LDAP_BASE_DN,
-		PropsKeys.LDAP_SECURITY_PRINCIPAL,
-		PropsKeys.LDAP_SECURITY_CREDENTIALS,
+	private final String[] _KEYS = {
 		PropsKeys.LDAP_AUTH_SEARCH_FILTER,
-		PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER,
-		PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER,
-		PropsKeys.LDAP_USERS_DN,
-		PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES,
+		PropsKeys.LDAP_BASE_DN,
+		PropsKeys.LDAP_BASE_PROVIDER_URL,
+		PropsKeys.LDAP_GROUP_MAPPINGS,
 		PropsKeys.LDAP_GROUPS_DN,
+		PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER,
+		PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER,
+		PropsKeys.LDAP_SECURITY_CREDENTIALS,
+		PropsKeys.LDAP_SECURITY_PRINCIPAL,
+		PropsKeys.LDAP_SERVER_NAME,
+		PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES,
 		PropsKeys.LDAP_USER_MAPPINGS,
-		PropsKeys.LDAP_GROUP_MAPPINGS
+		PropsKeys.LDAP_USERS_DN
 	};
 
 }

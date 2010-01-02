@@ -855,6 +855,8 @@ public interface PropsKeys {
 
 	public static final String LDAP_SECURITY_PRINCIPAL = "ldap.security.principal";
 
+	public static final String LDAP_SERVER_NAME = "ldap.server.name";
+
 	public static final String LDAP_USER_DEFAULT_OBJECT_CLASSES = "ldap.user.default.object.classes";
 
 	public static final String LDAP_USER_IMPL = "ldap.user.impl";

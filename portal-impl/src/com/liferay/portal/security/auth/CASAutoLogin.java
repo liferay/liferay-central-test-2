@@ -134,14 +134,14 @@ public class CASAutoLogin implements AutoLogin {
 	protected User importLDAPUser(long companyId, String screenName)
 		throws Exception {
 
-		long ldapServerId = PortalLDAPUtil.getLdapServerId(
-			companyId, screenName);
-
-		String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
-
 		LdapContext ctx = null;
 
 		try {
+			long ldapServerId = PortalLDAPUtil.getLdapServerId(
+				companyId, screenName);
+
+			String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
+
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_BASE_DN + postfix);
 

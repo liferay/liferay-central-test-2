@@ -95,9 +95,9 @@ import javax.naming.ldap.PagedResultsResponseControl;
  */
 public class PortalLDAPUtil {
 
-	public static final String IMPORT_BY_USER = "user";
-
 	public static final String IMPORT_BY_GROUP = "group";
+
+	public static final String IMPORT_BY_USER = "user";
 
 	public static void exportToLDAP(Contact contact) throws Exception {
 		long companyId = contact.getCompanyId();
@@ -404,6 +404,15 @@ public class PortalLDAPUtil {
 	}
 
 	public static List<SearchResult> getGroups(
+			long companyId, LdapContext ctx, int maxResults, String baseDN,
+			String groupFilter)
+		throws Exception {
+
+		return _searchLDAP(
+			companyId, ctx, maxResults, baseDN, groupFilter, null);
+	}
+
+	public static List<SearchResult> getGroups(
 			long ldapServerId, long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
@@ -415,15 +424,6 @@ public class PortalLDAPUtil {
 			companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix);
 
 		return getGroups(companyId, ctx, maxResults, baseDN, groupFilter);
-	}
-
-	public static List<SearchResult> getGroups(
-			long companyId, LdapContext ctx, int maxResults, String baseDN,
-			String groupFilter)
-		throws Exception {
-
-		return _searchLDAP(
-			companyId, ctx, maxResults, baseDN, groupFilter, null);
 	}
 
 	public static long getLdapServerId(long companyId, String screenName)
@@ -626,6 +626,15 @@ public class PortalLDAPUtil {
 	}
 
 	public static List<SearchResult> getUsers(
+			long companyId, LdapContext ctx, int maxResults, String baseDN,
+			String userFilter)
+		throws Exception {
+
+		return _searchLDAP(
+			companyId, ctx, maxResults, baseDN, userFilter, null);
+	}
+
+	public static List<SearchResult> getUsers(
 			long ldapServerId, long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
@@ -637,15 +646,6 @@ public class PortalLDAPUtil {
 			companyId, PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix);
 
 		return getUsers(companyId, ctx, maxResults, baseDN, userFilter);
-	}
-
-	public static List<SearchResult> getUsers(
-			long companyId, LdapContext ctx, int maxResults, String baseDN,
-			String userFilter)
-		throws Exception {
-
-		return _searchLDAP(
-			companyId, ctx, maxResults, baseDN, userFilter, null);
 	}
 
 	public static String getUsersDN(long ldapServerId, long companyId)

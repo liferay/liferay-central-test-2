@@ -65,11 +65,11 @@ public class LDAPAuth implements Authenticator {
 	public static final String AUTH_METHOD_PASSWORD_COMPARE =
 		"password-compare";
 
-	public static final String RESULT_PASSWORD_RESET =
-		"2.16.840.1.113730.3.4.4";
-
 	public static final String RESULT_PASSWORD_EXP_WARNING =
 		"2.16.840.1.113730.3.4.5";
+
+	public static final String RESULT_PASSWORD_RESET =
+		"2.16.840.1.113730.3.4.4";
 
 	public int authenticateByEmailAddress(
 			long companyId, String emailAddress, String password,
@@ -120,42 +120,99 @@ public class LDAPAuth implements Authenticator {
 		}
 	}
 
-	protected int authenticate(
-			long companyId, String emailAddress, String screenName, long userId,
+	protected LDAPAuthResult authenticate(
+			LdapContext ctx, long companyId, Attributes attrs, String userDN,
 			String password)
 		throws Exception {
 
-		if (!PortalLDAPUtil.isAuthEnabled(companyId)) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Authenticator is not enabled");
+		LDAPAuthResult ldapAuthResult = new LDAPAuthResult();
+
+		// Check passwords by either doing a comparison between the passwords or
+		// by binding to the LDAP server. If using LDAP password policies, bind
+		// auth method must be used in order to get the result control codes.
+
+		String authMethod = PrefsPropsUtil.getString(
+			companyId, PropsKeys.LDAP_AUTH_METHOD);
+		InitialLdapContext innerCtx = null;
+
+		if (authMethod.equals(AUTH_METHOD_BIND)) {
+			try {
+				Hashtable<String, Object> env =
+					(Hashtable<String, Object>)ctx.getEnvironment();
+
+				env.put(Context.SECURITY_PRINCIPAL, userDN);
+				env.put(Context.SECURITY_CREDENTIALS, password);
+				env.put(
+					Context.REFERRAL,
+					PrefsPropsUtil.getString(
+						companyId, PropsKeys.LDAP_REFERRAL));
+
+				// Do not use pooling because principal changes
+
+				env.put("com.sun.jndi.ldap.connect.pool", "false");
+
+				innerCtx = new InitialLdapContext(env, null);
+
+				// Get LDAP bind results
+
+				Control[] responseControls =  innerCtx.getResponseControls();
+
+				ldapAuthResult.setAuthenticated(true);
+				ldapAuthResult.setResponseControl(responseControls);
 			}
+			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Failed to bind to the LDAP server with userDN "
+							+ userDN + " and password " + password);
+				}
 
-			return SUCCESS;
+				_log.error(
+					"Failed to bind to the LDAP server: " + e.getMessage());
+
+				ldapAuthResult.setAuthenticated(false);
+				ldapAuthResult.setErrorMessage(e.getMessage());
+			}
+			finally {
+				if (innerCtx != null) {
+					innerCtx.close();
+				}
+			}
 		}
+		else if (authMethod.equals(AUTH_METHOD_PASSWORD_COMPARE)) {
+			Attribute userPassword = attrs.get("userPassword");
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Authenticator is enabled");
-		}
+			if (userPassword != null) {
+				String ldapPassword = new String((byte[])userPassword.get());
 
-		long[] ldapServerIds = StringUtil.split(
-			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+				String encryptedPassword = password;
 
-		if (ldapServerIds.length <= 0) {
-			ldapServerIds = new long[] {0};
-		}
+				String algorithm = PrefsPropsUtil.getString(
+					companyId,
+					PropsKeys.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
 
-		for (long ldapServerId : ldapServerIds) {
-			int result = authenticate(
-				companyId, ldapServerId, emailAddress, screenName, userId,
-				password);
+				if (Validator.isNotNull(algorithm)) {
+					encryptedPassword =
+						"{" + algorithm + "}" +
+							PwdEncryptor.encrypt(
+								algorithm, password, ldapPassword);
+				}
 
-			if (result == SUCCESS) {
-				return result;
+				if (ldapPassword.equals(encryptedPassword)) {
+					ldapAuthResult.setAuthenticated(true);
+				}
+				else {
+					ldapAuthResult.setAuthenticated(false);
+
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Passwords do not match for userDN " + userDN);
+					}
+				}
 			}
 		}
 
-		return authenticateRequired(
-			companyId, userId, emailAddress, screenName, true, FAILURE);
+		return ldapAuthResult;
 	}
 
 	protected int authenticate(
@@ -270,99 +327,42 @@ public class LDAPAuth implements Authenticator {
 		return SUCCESS;
 	}
 
-	protected LDAPAuthResult authenticate(
-			LdapContext ctx, long companyId, Attributes attrs, String userDN,
+	protected int authenticate(
+			long companyId, String emailAddress, String screenName, long userId,
 			String password)
 		throws Exception {
 
-		LDAPAuthResult ldapAuthResult = new LDAPAuthResult();
-
-		// Check passwords by either doing a comparison between the passwords or
-		// by binding to the LDAP server. If using LDAP password policies, bind
-		// auth method must be used in order to get the result control codes.
-
-		String authMethod = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_AUTH_METHOD);
-		InitialLdapContext innerCtx = null;
-
-		if (authMethod.equals(AUTH_METHOD_BIND)) {
-			try {
-				Hashtable<String, Object> env =
-					(Hashtable<String, Object>)ctx.getEnvironment();
-
-				env.put(Context.SECURITY_PRINCIPAL, userDN);
-				env.put(Context.SECURITY_CREDENTIALS, password);
-				env.put(
-					Context.REFERRAL,
-					PrefsPropsUtil.getString(
-						companyId, PropsKeys.LDAP_REFERRAL));
-
-				// Do not use pooling because principal changes
-
-				env.put("com.sun.jndi.ldap.connect.pool", "false");
-
-				innerCtx = new InitialLdapContext(env, null);
-
-				// Get LDAP bind results
-
-				Control[] responseControls =  innerCtx.getResponseControls();
-
-				ldapAuthResult.setAuthenticated(true);
-				ldapAuthResult.setResponseControl(responseControls);
+		if (!PortalLDAPUtil.isAuthEnabled(companyId)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Authenticator is not enabled");
 			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Failed to bind to the LDAP server with userDN "
-							+ userDN + " and password " + password);
-				}
 
-				_log.error(
-					"Failed to bind to the LDAP server: " + e.getMessage());
-
-				ldapAuthResult.setAuthenticated(false);
-				ldapAuthResult.setErrorMessage(e.getMessage());
-			}
-			finally {
-				if (innerCtx != null) {
-					innerCtx.close();
-				}
-			}
+			return SUCCESS;
 		}
-		else if (authMethod.equals(AUTH_METHOD_PASSWORD_COMPARE)) {
-			Attribute userPassword = attrs.get("userPassword");
 
-			if (userPassword != null) {
-				String ldapPassword = new String((byte[])userPassword.get());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Authenticator is enabled");
+		}
 
-				String encryptedPassword = password;
+		long[] ldapServerIds = StringUtil.split(
+			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
 
-				String algorithm = PrefsPropsUtil.getString(
-					companyId,
-					PropsKeys.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
+		if (ldapServerIds.length <= 0) {
+			ldapServerIds = new long[] {0};
+		}
 
-				if (Validator.isNotNull(algorithm)) {
-					encryptedPassword =
-						"{" + algorithm + "}" +
-							PwdEncryptor.encrypt(
-								algorithm, password, ldapPassword);
-				}
+		for (long ldapServerId : ldapServerIds) {
+			int result = authenticate(
+				companyId, ldapServerId, emailAddress, screenName, userId,
+				password);
 
-				if (ldapPassword.equals(encryptedPassword)) {
-					ldapAuthResult.setAuthenticated(true);
-				}
-				else {
-					ldapAuthResult.setAuthenticated(false);
-
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Passwords do not match for userDN " + userDN);
-					}
-				}
+			if (result == SUCCESS) {
+				return result;
 			}
 		}
 
-		return ldapAuthResult;
+		return authenticateRequired(
+			companyId, userId, emailAddress, screenName, true, FAILURE);
 	}
 
 	protected int authenticateOmniadmin(
