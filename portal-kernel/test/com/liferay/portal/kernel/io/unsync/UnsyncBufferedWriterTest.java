@@ -88,36 +88,36 @@ public class UnsyncBufferedWriterTest extends TestCase {
 		assertNull(unsyncBufferedWriter.buffer);
 		assertNull(unsyncBufferedWriter.writer);
 
-		// Unable to write after close
-		try {
-			unsyncBufferedWriter.write(1);
-			fail();
-		}
-		catch(IOException ioe) {
-		}
-
-		// Unable to block write String
-		try {
-			unsyncBufferedWriter.write("abc", 0, 3);
-			fail();
-		}
-		catch(IOException ioe) {
-		}
-
-		// Unable to block write char array
-		try {
-			unsyncBufferedWriter.write("abc".toCharArray(), 0, 3);
-			fail();
-		}
-		catch(IOException ioe) {
-		}
-
-		// Unable to flush
 		try {
 			unsyncBufferedWriter.flush();
+
 			fail();
 		}
-		catch(IOException ioe) {
+		catch (IOException ioe) {
+		}
+
+		try {
+			unsyncBufferedWriter.write("abc".toCharArray(), 0, 3);
+
+			fail();
+		}
+		catch (IOException ioe) {
+		}
+
+		try {
+			unsyncBufferedWriter.write(1);
+
+			fail();
+		}
+		catch (IOException ioe) {
+		}
+
+		try {
+			unsyncBufferedWriter.write("abc", 0, 3);
+
+			fail();
+		}
+		catch (IOException ioe) {
 		}
 	}
 

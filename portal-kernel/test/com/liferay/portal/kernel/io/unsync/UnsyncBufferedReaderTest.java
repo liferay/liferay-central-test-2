@@ -101,55 +101,53 @@ public class UnsyncBufferedReaderTest extends TestCase {
 		assertNull(unsyncBufferedReader.buffer);
 		assertNull(unsyncBufferedReader.reader);
 
-		// Unable to read after close
-		try {
-			unsyncBufferedReader.read();
-			fail();
-		}
-		catch(IOException ioe) {
-		}
-
-		// Unable to block read
-		try {
-			unsyncBufferedReader.read(new char[5]);
-			fail();
-		}
-		catch(IOException ioe) {
-		}
-
-		// Unable to ready
-		try {
-			unsyncBufferedReader.ready();
-			fail();
-		}
-		catch(IOException ioe) {
-		}
-
-		// Unable to mark
 		try {
 			unsyncBufferedReader.mark(0);
+
 			fail();
 		}
-		catch(IOException ioe) {
+		catch (IOException ioe) {
 		}
 
-		// Unable to reset
+		try {
+			unsyncBufferedReader.read();
+
+			fail();
+		}
+		catch (IOException ioe) {
+		}
+
+		try {
+			unsyncBufferedReader.read(new char[5]);
+
+			fail();
+		}
+		catch (IOException ioe) {
+		}
+
+		try {
+			unsyncBufferedReader.ready();
+
+			fail();
+		}
+		catch (IOException ioe) {
+		}
+
 		try {
 			unsyncBufferedReader.reset();
+
 			fail();
 		}
-		catch(IOException ioe) {
+		catch (IOException ioe) {
 		}
 
-		// Unable to skip
 		try {
 			unsyncBufferedReader.skip(0);
+
 			fail();
 		}
-		catch(IOException ioe) {
+		catch (IOException ioe) {
 		}
-
-		// Close again should do nothing
 
 		unsyncBufferedReader.close();
 	}

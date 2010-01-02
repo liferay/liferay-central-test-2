@@ -55,7 +55,6 @@ public class UnsyncStringReaderTest extends TestCase {
 	}
 
 	public void testClose() throws IOException {
-
 		UnsyncStringReader unsyncStringReader = new UnsyncStringReader(
 			"abcdefg");
 
@@ -63,47 +62,45 @@ public class UnsyncStringReaderTest extends TestCase {
 
 		assertTrue(unsyncStringReader.string == null);
 
-		// Unable to read after close
-		try {
-			unsyncStringReader.read();
-			fail();
-		}
-		catch(IOException ioe) {
-		}
-
-		// Unable to block read
-		try {
-			unsyncStringReader.read(new char[5]);
-			fail();
-		}
-		catch(IOException ioe) {
-		}
-
-		// Unable to ready
-		try {
-			unsyncStringReader.ready();
-			fail();
-		}
-		catch(IOException ioe) {
-		}
-
-		// Unable to mark
 		try {
 			unsyncStringReader.mark(0);
+
 			fail();
 		}
-		catch(IOException ioe) {
+		catch (IOException ioe) {
 		}
 
-		// Unable to reset
+		try {
+			unsyncStringReader.read();
+
+			fail();
+		}
+		catch (IOException ioe) {
+		}
+
+		try {
+			unsyncStringReader.read(new char[5]);
+
+			fail();
+		}
+		catch (IOException ioe) {
+		}
+
+		try {
+			unsyncStringReader.ready();
+
+			fail();
+		}
+		catch (IOException ioe) {
+		}
+
 		try {
 			unsyncStringReader.reset();
+
 			fail();
 		}
-		catch(IOException ioe) {
+		catch (IOException ioe) {
 		}
-
-		// Close again should do nothing
 
 		unsyncStringReader.close();
 	}

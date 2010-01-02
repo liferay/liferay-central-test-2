@@ -55,13 +55,13 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 	}
 
 	public void close() throws IOException {
-
-		buffer = null;
-
 		if (inputStream != null) {
 			inputStream.close();
+
 			inputStream = null;
 		}
+
+		buffer = null;
 	}
 
 	public void mark(int readLimit) {
@@ -219,7 +219,6 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 	}
 
 	protected void readUnderlyingInputStream() throws IOException {
-
 		if (markIndex < 0) {
 
 			// No mark required, fill the buffer

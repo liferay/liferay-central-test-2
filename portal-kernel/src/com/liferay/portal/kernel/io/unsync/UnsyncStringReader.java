@@ -76,6 +76,7 @@ public class UnsyncStringReader extends Reader {
 
 	public int read(char[] charArray, int offset, int length)
 		throws IOException {
+
 		if (string == null) {
 			throw new IOException("String is null");
 		}
@@ -119,6 +120,7 @@ public class UnsyncStringReader extends Reader {
 		if (string == null) {
 			throw new IOException("String is null");
 		}
+
 		return true;
 	}
 
@@ -126,6 +128,7 @@ public class UnsyncStringReader extends Reader {
 		if (string == null) {
 			throw new IOException("String is null");
 		}
+
 		index = markIndex;
 	}
 

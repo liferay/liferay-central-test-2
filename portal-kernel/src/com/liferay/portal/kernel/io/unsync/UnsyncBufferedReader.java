@@ -49,11 +49,12 @@ public class UnsyncBufferedReader extends Reader {
 	}
 
 	public void close() throws IOException {
-
 		if (reader != null) {
 			reader.close();
+
 			reader = null;
 		}
+
 		buffer = null;
 	}
 
@@ -299,7 +300,6 @@ public class UnsyncBufferedReader extends Reader {
 	}
 
 	protected void readUnderlyingReader() throws IOException {
-
 		if (markIndex < 0) {
 
 			// No mark required, fill the buffer
