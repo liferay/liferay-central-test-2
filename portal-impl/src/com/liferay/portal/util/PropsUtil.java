@@ -234,8 +234,10 @@ public class PropsUtil {
 		_getConfiguration().set(key, value);
 	}
 
-	private static PropsUtil _instance = new PropsUtil();
 	private static Log _log = LogFactoryUtil.getLog(PropsUtil.class);
+
+	private static PropsUtil _instance = new PropsUtil();
+
 	private Configuration _configuration;
 	private Map<Long, Configuration> _configurations;
 
