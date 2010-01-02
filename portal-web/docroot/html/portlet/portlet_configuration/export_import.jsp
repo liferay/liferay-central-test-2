@@ -294,10 +294,10 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 												function <portlet:namespace />proposePublication() {
 													Liferay.LayoutExporter.proposeLayout(
 														{
-															url: '<%= proposePublicationURL.toString() %>',
 															namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>',
 															reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>,
-															title: '<liferay-ui:message key="proposal-description" />'
+															title: '<liferay-ui:message key="proposal-description" />',
+															url: '<%= proposePublicationURL.toString() %>'
 														}
 													);
 												}
