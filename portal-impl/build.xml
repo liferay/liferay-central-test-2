@@ -685,7 +685,6 @@ ${exception.message}
 		<antcall target="build-service-portlet-calendar" />
 		<antcall target="build-service-portlet-documentlibrary" />
 		<antcall target="build-service-portlet-expando" />
-		<antcall target="build-service-portlet-flags" />
 		<antcall target="build-service-portlet-imagegallery" />
 		<antcall target="build-service-portlet-journal" />
 		<antcall target="build-service-portlet-messageboards" />
@@ -837,12 +836,6 @@ ${exception.message}
 		</antcall>
 	</target>
 
-	<target name="build-wsdd-portlet-flags">
-		<antcall target="build-wsdd">
-			<param name="service.file" value="src/com/liferay/portlet/flags/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-wsdd-portlet-imagegallery">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portlet/imagegallery/service.xml" />
@@ -911,7 +904,6 @@ ${exception.message}
 		<antcall target="build-wsdd-portlet-calendar" />
 		<antcall target="build-wsdd-portlet-documentlibrary" />
 		<antcall target="build-wsdd-portlet-expando" />
-		<antcall target="build-wsdd-portlet-flags" />
 		<antcall target="build-wsdd-portlet-imagegallery" />
 		<antcall target="build-wsdd-portlet-journal" />
 		<antcall target="build-wsdd-portlet-messageboards" />

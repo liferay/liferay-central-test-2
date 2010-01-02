@@ -38,7 +38,7 @@ public interface DestinationNames {
 	public static final String DOCUMENT_LIBRARY_HOOK =
 		"liferay/document_library_hook";
 
-	public static final String FLAG = "liferay/flag";
+	public static final String FLAGS = "liferay/flags";
 
 	/**
 	 * This is a special destination. Binding a message listener to this

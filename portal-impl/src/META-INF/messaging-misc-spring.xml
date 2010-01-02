@@ -15,8 +15,8 @@
 	<bean id="destination.convert_process" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/convert_process" />
 	</bean>
-	<bean id="destination.flag" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/flag" />
+	<bean id="destination.flags" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/flags" />
 	</bean>
 	<bean id="destination.hot_deploy" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/hot_deploy" />
@@ -43,8 +43,8 @@
 	<!-- Listeners -->
 
 	<bean id="messageListener.blogs" class="com.liferay.portlet.blogs.messaging.BlogsMessageListener" />
-	<bean id="messageListener.flag" class="com.liferay.portlet.flags.messaging.FlagRequestMessageListener" />
 	<bean id="messageListener.convert_process" class="com.liferay.portal.convert.messaging.ConvertProcessMessageListener" />
+	<bean id="messageListener.flags" class="com.liferay.portlet.flags.messaging.FlagsRequestMessageListener" />
 	<bean id="messageListener.layouts_local_publisher" class="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener">
 		<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 		<property name="statusSender" ref="messageSender.service_request_status" />
@@ -65,7 +65,7 @@
 			<list>
 				<ref bean="destination.blogs" />
 				<ref bean="destination.convert_process" />
-				<ref bean="destination.flag" />
+				<ref bean="destination.flags" />
 				<ref bean="destination.hot_deploy" />
 				<ref bean="destination.layouts_local_publisher" />
 				<ref bean="destination.layouts_remote_publisher" />
@@ -90,9 +90,9 @@
 						<ref bean="messageListener.convert_process" />
 					</list>
 				</entry>
-				<entry key="liferay/flag">
+				<entry key="liferay/flags">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.flag" />
+						<ref bean="messageListener.flags" />
 					</list>
 				</entry>
 				<entry key="liferay/layouts_local_publisher">
