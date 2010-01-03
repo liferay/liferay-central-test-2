@@ -54,7 +54,7 @@ public class UnsyncStringReaderTest extends TestCase {
 		assertEquals(-1, unsyncStringReader.read(charArray));
 	}
 
-	public void testClose() throws IOException {
+	public void testClose() {
 		UnsyncStringReader unsyncStringReader = new UnsyncStringReader(
 			"abcdefg");
 
