@@ -98,8 +98,6 @@
 
 					buffer.append("<img alt=\"");
 					buffer.append(assigneeUser.getFullName());
-					buffer.append("\" title=\"");
-					buffer.append(assigneeUser.getFullName());
 					buffer.append("\" class=\"user-avatar\" src=\"");
 					buffer.append(themeDisplay.getPathImage());
 					buffer.append("/user_");
@@ -115,6 +113,8 @@
 					buffer.append(assigneeUser.getPortraitId());
 					buffer.append("&t=");
 					buffer.append(ImageServletTokenUtil.getToken(assigneeUser.getPortraitId()));
+					buffer.append("\" title=\"");
+					buffer.append(assigneeUser.getFullName());
 					buffer.append("\" />");
 				}
 				%>
@@ -124,12 +124,14 @@
 
 		<liferay-ui:search-container-column-text
 			buffer="buffer"
-			name="name"
 			href="<%= rowURL %>"
+			name="name"
 		>
 
 			<%
-			buffer.append("<span id=\"" + workflowTask.getWorkflowTaskId() + "\" class=\"name\">");
+			buffer.append("<span class=\"name\" id=\"");
+			buffer.append(workflowTask.getWorkflowTaskId());
+			buffer.append("\">");
 			buffer.append(workflowTask.getName());
 			buffer.append("</span>");
 			%>
