@@ -22,14 +22,12 @@
 
 package com.liferay.portlet.flags.action;
 
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.flags.messaging.FlagsRequest;
+import com.liferay.portlet.flags.service.FlagsEntryServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -67,11 +65,9 @@ public class EditEntryAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			"com.liferay.portlet.flags.model.FlagsEntry", actionRequest);
 
-		FlagsRequest flagsRequest = new FlagsRequest(
+		FlagsEntryServiceUtil.addEntry(
 			className, classPK, reporterEmailAddress, reportedUserId,
 			contentTitle, contentURL, reason, serviceContext);
-
-		MessageBusUtil.sendMessage(DestinationNames.FLAGS, flagsRequest);
 
 		setForward(actionRequest, ActionConstants.COMMON_NULL);
 	}

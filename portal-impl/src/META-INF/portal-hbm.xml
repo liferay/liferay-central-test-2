@@ -83,6 +83,7 @@
 	<import class="com.liferay.portlet.expando.model.ExpandoRow" />
 	<import class="com.liferay.portlet.expando.model.ExpandoTable" />
 	<import class="com.liferay.portlet.expando.model.ExpandoValue" />
+	<import class="com.liferay.portlet.flags.model.FlagsEntry" />
 	<import class="com.liferay.portlet.imagegallery.model.IGFolder" />
 	<import class="com.liferay.portlet.imagegallery.model.IGImage" />
 	<import class="com.liferay.portlet.journal.model.JournalArticle" />
