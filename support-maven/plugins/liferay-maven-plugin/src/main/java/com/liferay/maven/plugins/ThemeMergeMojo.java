@@ -23,19 +23,20 @@
 package com.liferay.maven.plugins;
 
 import java.io.File;
-import java.io.IOException;
+
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
-import org.apache.maven.artifact.resolver.ArtifactResolutionException;
+import org.apache.maven.artifact.factory.ArtifactFactory;
+import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.artifact.resolver.ArtifactResolver;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.codehaus.plexus.archiver.ArchiverException;
+
 import org.codehaus.plexus.archiver.UnArchiver;
 import org.codehaus.plexus.archiver.manager.ArchiverManager;
-import org.codehaus.plexus.archiver.manager.NoSuchArchiverException;
 import org.codehaus.plexus.components.io.fileselectors.FileSelector;
 import org.codehaus.plexus.components.io.fileselectors.IncludeExcludeFileSelector;
 
@@ -43,156 +44,133 @@ import org.codehaus.plexus.components.io.fileselectors.IncludeExcludeFileSelecto
  * <a href="ThemeMergeMojo.java.html"><b><i>View Source</i></b></a>
  *
  * @author Mika Koivisto
- * @goal theme-merge
- * @phase process-sources
+ * @goal   theme-merge
+ * @phase  process-sources
  */
 public class ThemeMergeMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
+		try {
+			doExecute();
+		}
+		catch (Exception e) {
+			throw new MojoExecutionException(e.getMessage(), e);
+		}
+	}
 
-		File f = workDir;
-
-		if (!f.exists()) {
-			f.mkdirs();
+	protected void doExecute() throws Exception {
+		if (!workDir.exists()) {
+			workDir.mkdirs();
 		}
 
 		String parentThemeGroupId = "com.liferay.portal";
 		String parentThemeArtifactId = "portal-web";
 		String parentThemeVersion = liferayVersion;
 
-		String[] selectorIncludesPattern =
-			new String[] {
-				"html/themes/_unstyled/**", "html/themes/_styled/**",
-				"html/themes/classic/**", "html/themes/control_panel/**"
-			};
+		String[] excludes = {
+			"html/themes/classic/_diffs/**",
+			"html/themes/control_panel/_diffs/**"
+		};
 
-		String[] selectorExcludesPattern =
-			new String[] {
-				"html/themes/classic/_diffs/**",
-				"html/themes/control_panel/_diffs/**"
-			};
+		String[] includes = {
+			"html/themes/_unstyled/**", "html/themes/_styled/**",
+			"html/themes/classic/**", "html/themes/control_panel/**"
+		};
 
-		if (!("_styled".equals(parentTheme) ||
-			"_unstyled".equals(parentTheme) || "classic".equals(parentTheme) ||
-			"control_panel".equals(parentTheme))) {
+		if (!parentTheme.equals("_styled") &&
+			!parentTheme.equals("_unstyled") &&
+			!parentTheme.equals("classic") &&
+			!parentTheme.equals("control_panel")) {
 
-			String[] pieces = parentTheme.split(":");
-			parentThemeGroupId = pieces[0];
-			parentThemeArtifactId = pieces[1];
-			parentThemeVersion = pieces[2];
-			selectorExcludesPattern = new String[] {
-				"WEB-INF/**"
-			};
+			String[] parentThemeArray = parentTheme.split(":");
+
+			parentThemeGroupId = parentThemeArray[0];
+			parentThemeArtifactId = parentThemeArray[1];
+			parentThemeVersion = parentThemeArray[2];
+
+			excludes = new String[] {"WEB-INF/**"};
 		}
 
-		Artifact artifact =
-			factory.createArtifact(
-				parentThemeGroupId, parentThemeArtifactId, parentThemeVersion,
-				"", "war");
+		Artifact artifact = artifactFactory.createArtifact(
+			parentThemeGroupId, parentThemeArtifactId, parentThemeVersion, "",
+			"war");
 
-		try {
-			resolver.resolve(
-				artifact, remoteRepos, local);
-		}
-		catch (ArtifactResolutionException are) {
-			throw new MojoExecutionException("Artifact resolution failed", are);
-		}
-		catch (ArtifactNotFoundException anfe) {
-			throw new MojoExecutionException("Artifact not found", anfe);
-		}
+		artifactResolver.resolve(
+			artifact, remoteArtifactRepositories, localArtifactRepository);
 
-		workDir.mkdirs();
+		UnArchiver unArchiver = archiverManager.getUnArchiver(
+			artifact.getFile());
 
-		try {
-			UnArchiver unArchiver =
-				archiverManager.getUnArchiver(artifact.getFile());
+		unArchiver.setDestDirectory(workDir);
+		unArchiver.setSourceFile(artifact.getFile());
 
-			unArchiver.setSourceFile(artifact.getFile());
+		IncludeExcludeFileSelector includeExcludeFileSelector =
+			new IncludeExcludeFileSelector();
 
-			unArchiver.setDestDirectory(workDir);
+		includeExcludeFileSelector.setExcludes(excludes);
+		includeExcludeFileSelector.setIncludes(includes);
 
-			IncludeExcludeFileSelector selector =
-				new IncludeExcludeFileSelector();
+		unArchiver.setFileSelectors(
+			new FileSelector[] {includeExcludeFileSelector});
 
-			selector.setIncludes(selectorIncludesPattern);
-			selector.setExcludes(selectorExcludesPattern);
+		unArchiver.extract();
 
-			unArchiver.setFileSelectors(new FileSelector[] {
-				selector
-			});
+		webappDirectory.mkdirs();
 
-			unArchiver.extract();
+		if (parentThemeArtifactId.equals("portal-web")) {
+			FileUtils.copyDirectory(
+				new File(workDir, "html/themes/_unstyled"), webappDirectory);
 
-			webappDirectory.mkdirs();
+			getLog().info(
+				"Copying html/themes/_unstyled to " + webappDirectory);
 
-			try {
-				if (parentThemeArtifactId.equals("portal-web")) {
-					FileUtils.copyDirectory(
-						new File(workDir, "html/themes/_unstyled"),
+			if (!"_unstyled".equals(parentTheme)) {
+				FileUtils.copyDirectory(
+					new File(workDir, "html/themes/_styled"), webappDirectory);
+
+				getLog().info(
+					"Copying html/themes/_styled to " + webappDirectory);
+			}
+
+			if (!"_unstyled".equals(parentTheme) &&
+				!"_styled".equals(parentTheme)) {
+
+				FileUtils.copyDirectory(
+					new File(workDir, "html/themes/" + parentTheme),
+					webappDirectory);
+
+				getLog().info(
+					"Copying html/themes/" + parentTheme + " to " +
 						webappDirectory);
-
-					getLog().info(
-						"Copying html/themes/_unstyled to " + webappDirectory);
-
-					if (!"_unstyled".equals(parentTheme)) {
-						FileUtils.copyDirectory(
-							new File(workDir, "html/themes/_styled"),
-							webappDirectory);
-						getLog().info(
-							"Copying html/themes/_styled to " + webappDirectory);
-					}
-
-					if (!"_unstyled".equals(parentTheme) &&
-						!"_styled".equals(parentTheme)) {
-						FileUtils.copyDirectory(
-							new File(workDir, "html/themes/" + parentTheme),
-							webappDirectory);
-						getLog().info(
-							"Copying html/themes/" + parentTheme + " to " +
-								webappDirectory);
-					}
-				}
-				else {
-					FileUtils.copyDirectory(
-						workDir, webappDirectory);
-				}
-
-				// Cleanup
-
-				File initFile = new File(
-					webappDirectory, "templates/init." + themeType);
-				File templatesDirectory = new File(
-					webappDirectory, "templates/");
-				String[] extensions = null;
-
-				if ("ftl".equals(themeType)) {
-					extensions = new String[] {"vm"};
-				}
-				else {
-					extensions = new String[] {"ftl"};
-				}
-
-				FileUtils.deleteQuietly(initFile);
-
-				Iterator<File> iterator = FileUtils.iterateFiles(
-					templatesDirectory, extensions, false);
-
-				while (iterator.hasNext()) {
-					File file = iterator.next();
-					FileUtils.deleteQuietly(file);
-				}
 			}
-			catch (IOException e) {
-				throw new MojoExecutionException("Theme merge failed", e);
-			}
+		}
+		else {
+			FileUtils.copyDirectory(workDir, webappDirectory);
+		}
 
+		File initFile = new File(
+			webappDirectory, "templates/init." + themeType);
+
+		FileUtils.deleteQuietly(initFile);
+
+		File templatesDirectory = new File(webappDirectory, "templates/");
+
+		String[] extensions = null;
+
+		if (themeType.equals("ftl")) {
+			extensions = new String[] {"vm"};
 		}
-		catch (ArchiverException ae) {
-			throw new MojoExecutionException("Artifact extraction failed", ae);
+		else {
+			extensions = new String[] {"ftl"};
 		}
-		catch (NoSuchArchiverException nsae) {
-			throw new MojoExecutionException(
-				"Archiver not found for artifact", nsae);
+
+		Iterator<File> itr = FileUtils.iterateFiles(
+			templatesDirectory, extensions, false);
+
+		while (itr.hasNext()) {
+			File file = itr.next();
+
+			FileUtils.deleteQuietly(file);
 		}
 	}
 
@@ -204,7 +182,12 @@ public class ThemeMergeMojo extends AbstractMojo {
 	/**
 	 * @component
 	 */
-	private org.apache.maven.artifact.factory.ArtifactFactory factory;
+	private ArtifactFactory artifactFactory;
+
+	/**
+	 * @component
+	 */
+	private ArtifactResolver artifactResolver;
 
 	/**
 	 * @parameter
@@ -217,7 +200,7 @@ public class ThemeMergeMojo extends AbstractMojo {
 	 * @readonly
 	 * @required
 	 */
-	private org.apache.maven.artifact.repository.ArtifactRepository local;
+	private ArtifactRepository localArtifactRepository;
 
 	/**
 	 * Parent theme. Can be _styled | _unstyled | classic | control_panel |
@@ -232,12 +215,7 @@ public class ThemeMergeMojo extends AbstractMojo {
 	 * @readonly
 	 * @required
 	 */
-	private java.util.List remoteRepos;
-
-	/**
-	 * @component
-	 */
-	private org.apache.maven.artifact.resolver.ArtifactResolver resolver;
+	private List remoteArtifactRepositories;
 
 	/**
 	 * @parameter default-value="vm"

@@ -23,12 +23,10 @@
 package com.liferay.maven.plugins;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.logging.Log;
 
 /**
  * <a href="PluginDeployerMojo.java.html"><b><i>View Source</i></b></a>
@@ -41,18 +39,19 @@ public class PluginDeployerMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		try {
-			Log log = getLog();
-
-			log.info(
-				"Deploying " + warFileName + " to " +
-					autoDeployDir.getAbsolutePath());
-
-			FileUtils.copyFile(warFile, new File(autoDeployDir, warFileName));
+			doExecute();
 		}
-		catch (IOException e) {
-			throw new MojoExecutionException(
-				"Deploying " + warFileName + "failed", e);
+		catch (Exception e) {
+			throw new MojoExecutionException(e.getMessage(), e);
 		}
+	}
+
+	protected void doExecute() throws Exception {
+		getLog().info(
+			"Deploying " + warFileName + " to " +
+				autoDeployDir.getAbsolutePath());
+
+		FileUtils.copyFile(warFile, new File(autoDeployDir, warFileName));
 	}
 
 	/**

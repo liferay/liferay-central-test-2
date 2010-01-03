@@ -22,30 +22,28 @@
 
 package com.liferay.maven.plugins;
 
+import com.liferay.portal.tools.ThumbnailBuilder;
+
 import java.io.File;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
-import com.liferay.portal.tools.ThumbnailBuilder;
-
-
 /**
  * <a href="ThumbnailBuilderMojo.java.html"><b><i>View Source</i></b></a>
  *
  * @author Mika Koivisto
- * @goal build-thumbnail
- * @phase process-sources
+ * @goal   build-thumbnail
+ * @phase  process-sources
  */
 public class ThumbnailBuilderMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		new ThumbnailBuilder(
 			originalFile, thumbnailFile, height, width, overwrite);
-
 	}
 
-	/** 
+	/**
 	 * @parameter default-value="120"
 	 * @required
 	 */
@@ -61,7 +59,7 @@ public class ThumbnailBuilderMojo extends AbstractMojo {
 	 * @parameter default-value="false"
 	 * @required
 	 */
-	private boolean overwrite;		
+	private boolean overwrite;
 
 	/**
 	 * @parameter expression="${basedir}/src/main/webapp/images/thumbnail.png"
@@ -73,6 +71,6 @@ public class ThumbnailBuilderMojo extends AbstractMojo {
 	 * @parameter default-value="160"
 	 * @required
 	 */
-	private int width;		
+	private int width;
 
 }
