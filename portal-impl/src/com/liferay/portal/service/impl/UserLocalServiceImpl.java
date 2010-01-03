@@ -2466,6 +2466,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		groupPersistence.update(group, false);
 
+		// Groups
+
+		updateGroups(userId, groupIds);
+
+		// Organizations
+
+		updateOrganizations(userId, organizationIds);
+
 		// Roles
 
 		if (roleIds != null) {
@@ -2503,14 +2511,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userGroupRoleLocalService.addUserGroupRole(userGroupRole);
 			}
 		}
-
-		// Groups
-
-		updateGroups(userId, groupIds);
-
-		// Organizations
-
-		updateOrganizations(userId, organizationIds);
 
 		// User groups
 
