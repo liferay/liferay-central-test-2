@@ -13,14 +13,6 @@
 				<groupId>com.liferay.maven.plugins</groupId>
 				<artifactId>liferay-maven-plugin</artifactId>
 				<version>${liferay.version}</version>
-				<configuration>
-					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.liferay.maven.plugins</groupId>
-				<artifactId>liferay-maven-plugin</artifactId>
-				<version>${liferay.version}</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -31,6 +23,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
 					<liferayVersion>${liferay.version}</liferayVersion>
 					<parentTheme>${liferay.theme.parent}</parentTheme>
 					<themeType>${liferay.theme.type}</themeType>
