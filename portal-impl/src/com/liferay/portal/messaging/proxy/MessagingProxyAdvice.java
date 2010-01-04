@@ -27,9 +27,9 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
 import com.liferay.portal.kernel.messaging.proxy.ProxyResponse;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
+import com.liferay.util.aspectj.AspectJUtil;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.reflect.MethodSignature;
 
 /**
  * <a href="MessagingProxyAdvice.java.html"><b><i>View Source</i></b></a>
@@ -59,13 +59,12 @@ public class MessagingProxyAdvice {
 	}
 
 	protected ProxyRequest createProxyRequest(
-		ProceedingJoinPoint proceedingJoinPoint) throws Exception {
-
-		MethodSignature methodSignature =
-			(MethodSignature)proceedingJoinPoint.getSignature();
+			ProceedingJoinPoint proceedingJoinPoint)
+		throws Exception {
 
 		return new ProxyRequest(
-			methodSignature.getMethod(), proceedingJoinPoint.getArgs());
+			AspectJUtil.getMethod(proceedingJoinPoint),
+			proceedingJoinPoint.getArgs());
 	}
 
 	protected void doInvokeAsynchronous(
