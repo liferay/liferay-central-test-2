@@ -96,28 +96,24 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 		swapLdapServer.attr('data-ldapServerId', ldapServerId);
 	}
 
-	function <portlet:namespace />lowerLDAPServerPriority(ldapServerId) {
-		var ldapServer = jQuery('.ldap-servers tr[data-ldapServerId="' + ldapServerId + '"]');
+	function <portlet:namespace />changeLDAPServerPriority(ldapServerId, action) {
+		var ldapServer = AUI().one('.ldap-servers tr[data-ldapServerId="' + ldapServerId + '"]');
 
-		var swapLdapServer = ldapServer.next();
+		if (ldapServer) {
+			var swapLdapServer = ldapServer[action]();
 
-		if (swapLdapServer.length == 0) {
-			return;
+			if (swapLdapServer) {
+				<portlet:namespace />changePriority(ldapServer, swapLdapServer);
+			}
 		}
+	}
 
-		<portlet:namespace />changePriority(ldapServer, swapLdapServer);
+	function <portlet:namespace />lowerLDAPServerPriority(ldapServerId) {
+		<portlet:namespace />changeLDAPServerPriority(ldapServerId, 'next');
 	}
 
 	function <portlet:namespace />raiseLDAPServerPriority(ldapServerId) {
-		var ldapServer = jQuery('.ldap-servers tr[data-ldapServerId="' + ldapServerId + '"]');
-
-		var swapLdapServer = ldapServer.prev();
-
-		if (swapLdapServer.length == 0) {
-			return;
-		}
-
-		<portlet:namespace />changePriority(ldapServer, swapLdapServer);
+		<portlet:namespace />changeLDAPServerPriority(ldapServerId, 'previous');
 	}
 
 	AUI().ready(
@@ -240,16 +236,14 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 
 <script type="text/javascript">
 	function <portlet:namespace />saveLdap() {
-		var ldapServerIds = '';
+		var ldapServerIds = [];
 
-		jQuery('.ldap-servers .results-row').each(
-			function() {
-				var ldapServerId = jQuery(this).attr('data-ldapServerId');
-
-				ldapServerIds += ldapServerId + ',';
+		AUI().all('.ldap-servers .results-row').each(
+			function(item, index, collection) {
+				ldapServerIds.push(item.attr('data-ldapServerId'));
 			}
 		);
 
-		document.<portlet:namespace />fm['<portlet:namespace />settings(ldap.server.ids)'].value = ldapServerIds;
+		document.<portlet:namespace />fm['<portlet:namespace />settings(ldap.server.ids)'].value = ldapServerIds.join(',');
 	}
 </script>
