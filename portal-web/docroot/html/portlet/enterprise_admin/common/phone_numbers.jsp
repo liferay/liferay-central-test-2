@@ -90,7 +90,7 @@ else {
 
 		<div class="lfr-form-row">
 			<div class="row-fields">
-				<aui:input name='<%= "phoneId" + phonesIndex %>' type="hidden" />
+				<aui:input name='<%= "phoneId" + phonesIndex %>' type="hidden" value="<%= phone.getPhoneId() %>" />
 
 				<aui:input fieldParam='<%= "phoneNumber" + phonesIndex %>' name="number" />
 

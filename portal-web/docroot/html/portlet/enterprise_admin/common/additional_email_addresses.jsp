@@ -88,7 +88,7 @@ else {
 
 		<div class="lfr-form-row">
 			<div class="row-fields">
-				<aui:input name='<%= "emailAddressId" + emailAddressesIndex %>' type="hidden" />
+				<aui:input name='<%= "emailAddressId" + emailAddressesIndex %>' type="hidden" value="<%= emailAddress.getEmailAddressId() %>" />
 
 				<aui:input fieldParam='<%= "emailAddressAddress" + emailAddressesIndex %>' label="email-address" name="address" />
 
