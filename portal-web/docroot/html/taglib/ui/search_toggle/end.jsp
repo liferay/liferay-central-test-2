@@ -47,7 +47,6 @@
 			var advancedControls = advancedForm.all('input, select');
 
 			if (<%= id %>curClickValue == "basic") {
-				console.log("deshabilito advanced");
 				advancedControls.attr('disabled', 'disabled');
 			}
 			else {
