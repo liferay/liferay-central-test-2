@@ -628,7 +628,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return _PATH_PORTAL_ERROR;
 		}
 
-		if (!path.equals(_PATH_PORTAL_RENDER_PORTLET) &&
+		if (!path.equals(_PATH_PORTAL_JSON_SERVICE) &&
+			!path.equals(_PATH_PORTAL_RENDER_PORTLET) &&
 			!ParamUtil.getBoolean(request, "wsrp")) {
 
 			// Authenticated users should agree to Terms of Use
@@ -869,6 +870,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	private static String _PATH_PORTAL_FLASH = "/portal/flash";
 
 	private static String _PATH_PORTAL_J_LOGIN = "/portal/j_login";
+
+	private static String _PATH_PORTAL_JSON_SERVICE = "/portal/json_service";
 
 	private static String _PATH_PORTAL_LAYOUT = "/portal/layout";
 
