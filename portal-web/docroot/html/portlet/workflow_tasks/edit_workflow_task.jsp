@@ -170,32 +170,35 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 		%>
 
 			<div class="activity">
-				<div class="date"><%= dateFormatDateTime.format(workflowLog.getCreateDate()) %></div>
+				<div class="date">
+					<%= dateFormatDateTime.format(workflowLog.getCreateDate()) %>
+				</div>
+
 				<c:choose>
 					<c:when test="<%= workflowLog.getType() == WorkflowLog.TRANSITION %>">
-						<div><%= LanguageUtil.format(pageContext, "x-changed-the-state-from-x-to-x", new Object[]{curUser.getFullName(), workflowLog.getPreviousState(), workflowLog.getState()}) %></div>
+						<div>
+							<%= LanguageUtil.format(pageContext, "x-changed-the-state-from-x-to-x", new Object[] {curUser.getFullName(), workflowLog.getPreviousState(), workflowLog.getState()}) %>
+						</div>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
 							<c:when test="<%= workflowLog.getPreviousUserId() == 0 %>">
-
-								<%
-								String pattern = "x-assigned-the-task-to-himself";
-
-								if (curUser.isFemale()){
-									pattern = "x-assigned-the-task-to-herself";
-								}
-								%>
-
-								<div><%= LanguageUtil.format(pageContext, pattern, curUser.getFullName()) %></div>
+								<div>
+									<%= LanguageUtil.format(pageContext, curUser.isMale() ? "x-assigned-the-task-to-himself" : "x-assigned-the-task-to-herself", curUser.getFullName()) %>
+								</div>
 							</c:when>
 							<c:otherwise>
-								<div><%= LanguageUtil.format(pageContext, "x-assigned-the-task-to-x", new Object[]{PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK), curUser.getFullName()}) %></div>
+								<div>
+									<%= LanguageUtil.format(pageContext, "x-assigned-the-task-to-x", new Object[] {PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK), curUser.getFullName()}) %>
+								</div>
 							</c:otherwise>
 						</c:choose>
 					</c:otherwise>
 				</c:choose>
-				<div><%= workflowLog.getComment() %></div>
+
+				<div>
+					<%= workflowLog.getComment() %>
+				</div>
 			</div>
 
 		<%

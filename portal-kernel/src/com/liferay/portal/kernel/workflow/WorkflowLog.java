@@ -34,8 +34,9 @@ import java.util.Date;
  */
 public interface WorkflowLog {
 
-	public final int TRANSITION = 0;
 	public final int TASK_ASSIGN = 1;
+
+	public final int TRANSITION = 0;
 
 	public String getComment();
 
