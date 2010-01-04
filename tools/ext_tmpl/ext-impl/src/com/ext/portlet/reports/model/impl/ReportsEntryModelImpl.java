@@ -6,6 +6,7 @@ import com.ext.portlet.reports.model.ReportsEntrySoap;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import java.io.Serializable;
@@ -51,6 +52,8 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
         };
     public static final String TABLE_SQL_CREATE = "create table ReportsEntry (entryId VARCHAR(75) not null primary key,companyId VARCHAR(75) null,userId VARCHAR(75) null,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table ReportsEntry";
+    public static final String ORDER_BY_JPQL = " ORDER BY reportsEntry.name ASC";
+    public static final String ORDER_BY_SQL = " ORDER BY ReportsEntry.name ASC";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";
     public static final String TX_MANAGER = "liferayTransactionManager";
@@ -244,7 +247,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBundler sb = new StringBundler(15);
 
         sb.append("{entryId=");
         sb.append(getEntryId());
@@ -266,7 +269,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     }
 
     public String toXmlString() {
-        StringBuilder sb = new StringBuilder();
+        StringBundler sb = new StringBundler(25);
 
         sb.append("<model><model-name>");
         sb.append("com.ext.portlet.reports.model.ReportsEntry");

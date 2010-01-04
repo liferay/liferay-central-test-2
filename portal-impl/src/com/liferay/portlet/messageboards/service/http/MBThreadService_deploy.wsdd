@@ -20,7 +20,10 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="splitThread deleteThread moveThread"/>
+		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" name="unlockThread" qname="operNS:unlockThread" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="threadId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="splitThread deleteThread moveThread unlockThread"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.messageboards.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.messageboards.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>

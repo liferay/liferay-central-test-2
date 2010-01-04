@@ -8,6 +8,8 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -15,30 +17,29 @@ import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
-import com.liferay.portal.util.PortalUtil;
 
 
 public abstract class ReportsEntryServiceBaseImpl extends PrincipalBean
     implements ReportsEntryService {
-    @BeanReference(name = "com.ext.portlet.reports.service.ReportsEntryService.impl")
+    @BeanReference(name = "com.ext.portlet.reports.service.ReportsEntryService")
     protected ReportsEntryService reportsEntryService;
-    @BeanReference(name = "com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl")
+    @BeanReference(name = "com.ext.portlet.reports.service.persistence.ReportsEntryPersistence")
     protected ReportsEntryPersistence reportsEntryPersistence;
-    @BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+    @BeanReference(name = "com.liferay.counter.service.CounterLocalService")
     protected CounterLocalService counterLocalService;
-    @BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+    @BeanReference(name = "com.liferay.counter.service.CounterService")
     protected CounterService counterService;
-    @BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+    @BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
     protected ResourceLocalService resourceLocalService;
-    @BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+    @BeanReference(name = "com.liferay.portal.service.ResourceService")
     protected ResourceService resourceService;
-    @BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+    @BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
     protected ResourcePersistence resourcePersistence;
-    @BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+    @BeanReference(name = "com.liferay.portal.service.UserLocalService")
     protected UserLocalService userLocalService;
-    @BeanReference(name = "com.liferay.portal.service.UserService.impl")
+    @BeanReference(name = "com.liferay.portal.service.UserService")
     protected UserService userService;
-    @BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+    @BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
     protected UserPersistence userPersistence;
 
     public ReportsEntryService getReportsEntryService() {
@@ -125,7 +126,9 @@ public abstract class ReportsEntryServiceBaseImpl extends PrincipalBean
 
     protected void runSQL(String sql) throws SystemException {
         try {
-            PortalUtil.runSQL(sql);
+            DB db = DBFactoryUtil.getDB();
+
+            db.runSQL(sql);
         } catch (Exception e) {
             throw new SystemException(e);
         }

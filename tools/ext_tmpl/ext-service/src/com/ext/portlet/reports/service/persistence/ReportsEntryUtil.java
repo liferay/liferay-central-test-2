@@ -1,5 +1,13 @@
 package com.ext.portlet.reports.service.persistence;
 
+import com.ext.portlet.reports.model.ReportsEntry;
+
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import java.util.List;
+
 
 /**
  * <a href="ReportsEntryUtil.java.html"><b><i>View Source</i></b></a>
@@ -17,6 +25,45 @@ package com.ext.portlet.reports.service.persistence;
 public class ReportsEntryUtil {
     private static ReportsEntryPersistence _persistence;
 
+    /**
+     * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+     */
+    public static void clearCache() {
+        getPersistence().clearCache();
+    }
+
+    /**
+     * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+     */
+    public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+        throws SystemException {
+        return getPersistence().findWithDynamicQuery(dynamicQuery);
+    }
+
+    /**
+     * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+     */
+    public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+        int start, int end) throws SystemException {
+        return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+    }
+
+    /**
+     * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+     */
+    public static ReportsEntry remove(ReportsEntry reportsEntry)
+        throws SystemException {
+        return getPersistence().remove(reportsEntry);
+    }
+
+    /**
+     * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+     */
+    public static ReportsEntry update(ReportsEntry reportsEntry, boolean merge)
+        throws SystemException {
+        return getPersistence().update(reportsEntry, merge);
+    }
+
     public static void cacheResult(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry) {
         getPersistence().cacheResult(reportsEntry);
@@ -25,10 +72,6 @@ public class ReportsEntryUtil {
     public static void cacheResult(
         java.util.List<com.ext.portlet.reports.model.ReportsEntry> reportsEntries) {
         getPersistence().cacheResult(reportsEntries);
-    }
-
-    public static void clearCache() {
-        getPersistence().clearCache();
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry create(
@@ -41,39 +84,6 @@ public class ReportsEntryUtil {
         throws com.ext.portlet.reports.NoSuchEntryException,
             com.liferay.portal.SystemException {
         return getPersistence().remove(entryId);
-    }
-
-    public static com.ext.portlet.reports.model.ReportsEntry remove(
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry)
-        throws com.liferay.portal.SystemException {
-        return getPersistence().remove(reportsEntry);
-    }
-
-    /**
-     * @deprecated Use {@link #update(ReportsEntry, boolean merge)}.
-     */
-    public static com.ext.portlet.reports.model.ReportsEntry update(
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry)
-        throws com.liferay.portal.SystemException {
-        return getPersistence().update(reportsEntry);
-    }
-
-    /**
-     * Add, update, or merge, the entity. This method also calls the model
-     * listeners to trigger the proper events associated with adding, deleting,
-     * or updating an entity.
-     *
-     * @param  reportsEntry the entity to add, update, or merge
-     * @param  merge boolean value for whether to merge the entity. The default
-     *         value is false. Setting merge to true is more expensive and
-     *         should only be true when reportsEntry is transient. See
-     *         LEP-5473 for a detailed discussion of this method.
-     * @return the entity that was added, updated, or merged
-     */
-    public static com.ext.portlet.reports.model.ReportsEntry update(
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
-        throws com.liferay.portal.SystemException {
-        return getPersistence().update(reportsEntry, merge);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry updateImpl(
@@ -179,18 +189,6 @@ public class ReportsEntryUtil {
         return getPersistence().findByUserId_PrevAndNext(entryId, userId, obc);
     }
 
-    public static java.util.List<Object> findWithDynamicQuery(
-        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-        throws com.liferay.portal.SystemException {
-        return getPersistence().findWithDynamicQuery(dynamicQuery);
-    }
-
-    public static java.util.List<Object> findWithDynamicQuery(
-        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-        int end) throws com.liferay.portal.SystemException {
-        return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
-    }
-
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findAll()
         throws com.liferay.portal.SystemException {
         return getPersistence().findAll();
@@ -236,6 +234,10 @@ public class ReportsEntryUtil {
     }
 
     public static ReportsEntryPersistence getPersistence() {
+        if (_persistence == null) {
+            _persistence = (ReportsEntryPersistence) PortalBeanLocatorUtil.locate(ReportsEntryPersistence.class.getName());
+        }
+
         return _persistence;
     }
 

@@ -5,6 +5,7 @@ import com.ext.portlet.reports.model.ReportsEntry;
 import com.ext.portlet.reports.model.impl.ReportsEntryImpl;
 import com.ext.portlet.reports.model.impl.ReportsEntryModelImpl;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -20,11 +21,14 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +48,7 @@ import java.util.List;
  * @see       ReportsEntryUtil
  * @generated
  */
-public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
+public class ReportsEntryPersistenceImpl extends BasePersistenceImpl<ReportsEntry>
     implements ReportsEntryPersistence {
     public static final String FINDER_CLASS_NAME_ENTITY = ReportsEntryImpl.class.getName();
     public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -85,12 +89,25 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
     public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
             ReportsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
             "countAll", new String[0]);
+    private static final String _SQL_SELECT_REPORTSENTRY = "SELECT reportsEntry FROM ReportsEntry reportsEntry";
+    private static final String _SQL_SELECT_REPORTSENTRY_WHERE = "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ";
+    private static final String _SQL_COUNT_REPORTSENTRY = "SELECT COUNT(reportsEntry) FROM ReportsEntry reportsEntry";
+    private static final String _SQL_COUNT_REPORTSENTRY_WHERE = "SELECT COUNT(reportsEntry) FROM ReportsEntry reportsEntry WHERE ";
+    private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_1 = "reportsEntry.companyId IS NULL";
+    private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "reportsEntry.companyId = ?";
+    private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_3 = "(reportsEntry.companyId IS NULL OR reportsEntry.companyId = ?)";
+    private static final String _FINDER_COLUMN_USERID_USERID_1 = "reportsEntry.userId IS NULL";
+    private static final String _FINDER_COLUMN_USERID_USERID_2 = "reportsEntry.userId = ?";
+    private static final String _FINDER_COLUMN_USERID_USERID_3 = "(reportsEntry.userId IS NULL OR reportsEntry.userId = ?)";
+    private static final String _ORDER_BY_ENTITY_ALIAS = "reportsEntry.";
+    private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ReportsEntry exists with the primary key ";
+    private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ReportsEntry exists with the key {";
     private static Log _log = LogFactoryUtil.getLog(ReportsEntryPersistenceImpl.class);
-    @BeanReference(name = "com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl")
+    @BeanReference(name = "com.ext.portlet.reports.service.persistence.ReportsEntryPersistence")
     protected com.ext.portlet.reports.service.persistence.ReportsEntryPersistence reportsEntryPersistence;
-    @BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+    @BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
     protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-    @BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+    @BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
     protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 
     public void cacheResult(ReportsEntry reportsEntry) {
@@ -125,6 +142,11 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         return reportsEntry;
     }
 
+    public ReportsEntry remove(Serializable primaryKey)
+        throws NoSuchModelException, SystemException {
+        return remove((String) primaryKey);
+    }
+
     public ReportsEntry remove(String entryId)
         throws NoSuchEntryException, SystemException {
         Session session = null;
@@ -137,12 +159,11 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
             if (reportsEntry == null) {
                 if (_log.isWarnEnabled()) {
-                    _log.warn("No ReportsEntry exists with the primary key " +
-                        entryId);
+                    _log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + entryId);
                 }
 
-                throw new NoSuchEntryException(
-                    "No ReportsEntry exists with the primary key " + entryId);
+                throw new NoSuchEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+                    entryId);
             }
 
             return remove(reportsEntry);
@@ -172,6 +193,8 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
     protected ReportsEntry removeImpl(ReportsEntry reportsEntry)
         throws SystemException {
+        reportsEntry = toUnwrappedModel(reportsEntry);
+
         Session session = null;
 
         try {
@@ -203,59 +226,11 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         return reportsEntry;
     }
 
-    /**
-     * @deprecated Use {@link #update(ReportsEntry, boolean merge)}.
-     */
-    public ReportsEntry update(ReportsEntry reportsEntry)
-        throws SystemException {
-        if (_log.isWarnEnabled()) {
-            _log.warn(
-                "Using the deprecated update(ReportsEntry reportsEntry) method. Use update(ReportsEntry reportsEntry, boolean merge) instead.");
-        }
-
-        return update(reportsEntry, false);
-    }
-
-    /**
-     * Add, update, or merge, the entity. This method also calls the model
-     * listeners to trigger the proper events associated with adding, deleting,
-     * or updating an entity.
-     *
-     * @param  reportsEntry the entity to add, update, or merge
-     * @param  merge boolean value for whether to merge the entity. The default
-     *         value is false. Setting merge to true is more expensive and
-     *         should only be true when reportsEntry is transient. See
-     *         LEP-5473 for a detailed discussion of this method.
-     * @return the entity that was added, updated, or merged
-     */
-    public ReportsEntry update(ReportsEntry reportsEntry, boolean merge)
-        throws SystemException {
-        boolean isNew = reportsEntry.isNew();
-
-        for (ModelListener<ReportsEntry> listener : listeners) {
-            if (isNew) {
-                listener.onBeforeCreate(reportsEntry);
-            } else {
-                listener.onBeforeUpdate(reportsEntry);
-            }
-        }
-
-        reportsEntry = updateImpl(reportsEntry, merge);
-
-        for (ModelListener<ReportsEntry> listener : listeners) {
-            if (isNew) {
-                listener.onAfterCreate(reportsEntry);
-            } else {
-                listener.onAfterUpdate(reportsEntry);
-            }
-        }
-
-        return reportsEntry;
-    }
-
     public ReportsEntry updateImpl(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
         throws SystemException {
+        reportsEntry = toUnwrappedModel(reportsEntry);
+
         Session session = null;
 
         try {
@@ -278,21 +253,51 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         return reportsEntry;
     }
 
+    protected ReportsEntry toUnwrappedModel(ReportsEntry reportsEntry) {
+        if (reportsEntry instanceof ReportsEntryImpl) {
+            return reportsEntry;
+        }
+
+        ReportsEntryImpl reportsEntryImpl = new ReportsEntryImpl();
+
+        reportsEntryImpl.setNew(reportsEntry.isNew());
+        reportsEntryImpl.setPrimaryKey(reportsEntry.getPrimaryKey());
+
+        reportsEntryImpl.setEntryId(reportsEntry.getEntryId());
+        reportsEntryImpl.setCompanyId(reportsEntry.getCompanyId());
+        reportsEntryImpl.setUserId(reportsEntry.getUserId());
+        reportsEntryImpl.setUserName(reportsEntry.getUserName());
+        reportsEntryImpl.setCreateDate(reportsEntry.getCreateDate());
+        reportsEntryImpl.setModifiedDate(reportsEntry.getModifiedDate());
+        reportsEntryImpl.setName(reportsEntry.getName());
+
+        return reportsEntryImpl;
+    }
+
+    public ReportsEntry findByPrimaryKey(Serializable primaryKey)
+        throws NoSuchModelException, SystemException {
+        return findByPrimaryKey((String) primaryKey);
+    }
+
     public ReportsEntry findByPrimaryKey(String entryId)
         throws NoSuchEntryException, SystemException {
         ReportsEntry reportsEntry = fetchByPrimaryKey(entryId);
 
         if (reportsEntry == null) {
             if (_log.isWarnEnabled()) {
-                _log.warn("No ReportsEntry exists with the primary key " +
-                    entryId);
+                _log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + entryId);
             }
 
-            throw new NoSuchEntryException(
-                "No ReportsEntry exists with the primary key " + entryId);
+            throw new NoSuchEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+                entryId);
         }
 
         return reportsEntry;
+    }
+
+    public ReportsEntry fetchByPrimaryKey(Serializable primaryKey)
+        throws SystemException {
+        return fetchByPrimaryKey((String) primaryKey);
     }
 
     public ReportsEntry fetchByPrimaryKey(String entryId)
@@ -335,24 +340,25 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             try {
                 session = openSession();
 
-                StringBuilder query = new StringBuilder();
+                StringBundler query = new StringBundler(3);
 
-                query.append(
-                    "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
+                query.append(_SQL_SELECT_REPORTSENTRY_WHERE);
 
                 if (companyId == null) {
-                    query.append("reportsEntry.companyId IS NULL");
+                    query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_1);
                 } else {
-                    query.append("reportsEntry.companyId = ?");
+                    if (companyId.equals(StringPool.BLANK)) {
+                        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_3);
+                    } else {
+                        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+                    }
                 }
 
-                query.append(" ");
+                query.append(ReportsEntryModelImpl.ORDER_BY_JPQL);
 
-                query.append("ORDER BY ");
+                String sql = query.toString();
 
-                query.append("reportsEntry.name ASC");
-
-                Query q = session.createQuery(query.toString());
+                Query q = session.createQuery(sql);
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
@@ -402,46 +408,37 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             try {
                 session = openSession();
 
-                StringBuilder query = new StringBuilder();
-
-                query.append(
-                    "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
-
-                if (companyId == null) {
-                    query.append("reportsEntry.companyId IS NULL");
-                } else {
-                    query.append("reportsEntry.companyId = ?");
-                }
-
-                query.append(" ");
+                StringBundler query = null;
 
                 if (obc != null) {
-                    query.append("ORDER BY ");
+                    query = new StringBundler(3 +
+                            (obc.getOrderByFields().length * 3));
+                } else {
+                    query = new StringBundler(3);
+                }
 
-                    String[] orderByFields = obc.getOrderByFields();
+                query.append(_SQL_SELECT_REPORTSENTRY_WHERE);
 
-                    for (int i = 0; i < orderByFields.length; i++) {
-                        query.append("reportsEntry.");
-                        query.append(orderByFields[i]);
-
-                        if (obc.isAscending()) {
-                            query.append(" ASC");
-                        } else {
-                            query.append(" DESC");
-                        }
-
-                        if ((i + 1) < orderByFields.length) {
-                            query.append(", ");
-                        }
+                if (companyId == null) {
+                    query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_1);
+                } else {
+                    if (companyId.equals(StringPool.BLANK)) {
+                        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_3);
+                    } else {
+                        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
                     }
                 }
-                else {
-                    query.append("ORDER BY ");
 
-                    query.append("reportsEntry.name ASC");
+                if (obc != null) {
+                    appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+                }
+                else {
+                    query.append(ReportsEntryModelImpl.ORDER_BY_JPQL);
                 }
 
-                Query q = session.createQuery(query.toString());
+                String sql = query.toString();
+
+                Query q = session.createQuery(sql);
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
@@ -475,11 +472,12 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         List<ReportsEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
         if (list.isEmpty()) {
-            StringBuilder msg = new StringBuilder();
+            StringBundler msg = new StringBundler(4);
 
-            msg.append("No ReportsEntry exists with the key {");
+            msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-            msg.append("companyId=" + companyId);
+            msg.append("companyId=");
+            msg.append(companyId);
 
             msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -497,11 +495,12 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                 obc);
 
         if (list.isEmpty()) {
-            StringBuilder msg = new StringBuilder();
+            StringBundler msg = new StringBundler(4);
 
-            msg.append("No ReportsEntry exists with the key {");
+            msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-            msg.append("companyId=" + companyId);
+            msg.append("companyId=");
+            msg.append(companyId);
 
             msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -523,46 +522,37 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         try {
             session = openSession();
 
-            StringBuilder query = new StringBuilder();
-
-            query.append(
-                "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
-
-            if (companyId == null) {
-                query.append("reportsEntry.companyId IS NULL");
-            } else {
-                query.append("reportsEntry.companyId = ?");
-            }
-
-            query.append(" ");
+            StringBundler query = null;
 
             if (obc != null) {
-                query.append("ORDER BY ");
+                query = new StringBundler(3 +
+                        (obc.getOrderByFields().length * 3));
+            } else {
+                query = new StringBundler(3);
+            }
 
-                String[] orderByFields = obc.getOrderByFields();
+            query.append(_SQL_SELECT_REPORTSENTRY_WHERE);
 
-                for (int i = 0; i < orderByFields.length; i++) {
-                    query.append("reportsEntry.");
-                    query.append(orderByFields[i]);
-
-                    if (obc.isAscending()) {
-                        query.append(" ASC");
-                    } else {
-                        query.append(" DESC");
-                    }
-
-                    if ((i + 1) < orderByFields.length) {
-                        query.append(", ");
-                    }
+            if (companyId == null) {
+                query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_1);
+            } else {
+                if (companyId.equals(StringPool.BLANK)) {
+                    query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_3);
+                } else {
+                    query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
                 }
             }
-            else {
-                query.append("ORDER BY ");
 
-                query.append("reportsEntry.name ASC");
+            if (obc != null) {
+                appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+            }
+            else {
+                query.append(ReportsEntryModelImpl.ORDER_BY_JPQL);
             }
 
-            Query q = session.createQuery(query.toString());
+            String sql = query.toString();
+
+            Query q = session.createQuery(sql);
 
             QueryPos qPos = QueryPos.getInstance(q);
 
@@ -600,24 +590,25 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             try {
                 session = openSession();
 
-                StringBuilder query = new StringBuilder();
+                StringBundler query = new StringBundler(3);
 
-                query.append(
-                    "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
+                query.append(_SQL_SELECT_REPORTSENTRY_WHERE);
 
                 if (userId == null) {
-                    query.append("reportsEntry.userId IS NULL");
+                    query.append(_FINDER_COLUMN_USERID_USERID_1);
                 } else {
-                    query.append("reportsEntry.userId = ?");
+                    if (userId.equals(StringPool.BLANK)) {
+                        query.append(_FINDER_COLUMN_USERID_USERID_3);
+                    } else {
+                        query.append(_FINDER_COLUMN_USERID_USERID_2);
+                    }
                 }
 
-                query.append(" ");
+                query.append(ReportsEntryModelImpl.ORDER_BY_JPQL);
 
-                query.append("ORDER BY ");
+                String sql = query.toString();
 
-                query.append("reportsEntry.name ASC");
-
-                Query q = session.createQuery(query.toString());
+                Query q = session.createQuery(sql);
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
@@ -667,46 +658,37 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             try {
                 session = openSession();
 
-                StringBuilder query = new StringBuilder();
-
-                query.append(
-                    "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
-
-                if (userId == null) {
-                    query.append("reportsEntry.userId IS NULL");
-                } else {
-                    query.append("reportsEntry.userId = ?");
-                }
-
-                query.append(" ");
+                StringBundler query = null;
 
                 if (obc != null) {
-                    query.append("ORDER BY ");
+                    query = new StringBundler(3 +
+                            (obc.getOrderByFields().length * 3));
+                } else {
+                    query = new StringBundler(3);
+                }
 
-                    String[] orderByFields = obc.getOrderByFields();
+                query.append(_SQL_SELECT_REPORTSENTRY_WHERE);
 
-                    for (int i = 0; i < orderByFields.length; i++) {
-                        query.append("reportsEntry.");
-                        query.append(orderByFields[i]);
-
-                        if (obc.isAscending()) {
-                            query.append(" ASC");
-                        } else {
-                            query.append(" DESC");
-                        }
-
-                        if ((i + 1) < orderByFields.length) {
-                            query.append(", ");
-                        }
+                if (userId == null) {
+                    query.append(_FINDER_COLUMN_USERID_USERID_1);
+                } else {
+                    if (userId.equals(StringPool.BLANK)) {
+                        query.append(_FINDER_COLUMN_USERID_USERID_3);
+                    } else {
+                        query.append(_FINDER_COLUMN_USERID_USERID_2);
                     }
                 }
-                else {
-                    query.append("ORDER BY ");
 
-                    query.append("reportsEntry.name ASC");
+                if (obc != null) {
+                    appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+                }
+                else {
+                    query.append(ReportsEntryModelImpl.ORDER_BY_JPQL);
                 }
 
-                Query q = session.createQuery(query.toString());
+                String sql = query.toString();
+
+                Query q = session.createQuery(sql);
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
@@ -740,11 +722,12 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         List<ReportsEntry> list = findByUserId(userId, 0, 1, obc);
 
         if (list.isEmpty()) {
-            StringBuilder msg = new StringBuilder();
+            StringBundler msg = new StringBundler(4);
 
-            msg.append("No ReportsEntry exists with the key {");
+            msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-            msg.append("userId=" + userId);
+            msg.append("userId=");
+            msg.append(userId);
 
             msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -761,11 +744,12 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         List<ReportsEntry> list = findByUserId(userId, count - 1, count, obc);
 
         if (list.isEmpty()) {
-            StringBuilder msg = new StringBuilder();
+            StringBundler msg = new StringBundler(4);
 
-            msg.append("No ReportsEntry exists with the key {");
+            msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-            msg.append("userId=" + userId);
+            msg.append("userId=");
+            msg.append(userId);
 
             msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -787,46 +771,37 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         try {
             session = openSession();
 
-            StringBuilder query = new StringBuilder();
-
-            query.append(
-                "SELECT reportsEntry FROM ReportsEntry reportsEntry WHERE ");
-
-            if (userId == null) {
-                query.append("reportsEntry.userId IS NULL");
-            } else {
-                query.append("reportsEntry.userId = ?");
-            }
-
-            query.append(" ");
+            StringBundler query = null;
 
             if (obc != null) {
-                query.append("ORDER BY ");
+                query = new StringBundler(3 +
+                        (obc.getOrderByFields().length * 3));
+            } else {
+                query = new StringBundler(3);
+            }
 
-                String[] orderByFields = obc.getOrderByFields();
+            query.append(_SQL_SELECT_REPORTSENTRY_WHERE);
 
-                for (int i = 0; i < orderByFields.length; i++) {
-                    query.append("reportsEntry.");
-                    query.append(orderByFields[i]);
-
-                    if (obc.isAscending()) {
-                        query.append(" ASC");
-                    } else {
-                        query.append(" DESC");
-                    }
-
-                    if ((i + 1) < orderByFields.length) {
-                        query.append(", ");
-                    }
+            if (userId == null) {
+                query.append(_FINDER_COLUMN_USERID_USERID_1);
+            } else {
+                if (userId.equals(StringPool.BLANK)) {
+                    query.append(_FINDER_COLUMN_USERID_USERID_3);
+                } else {
+                    query.append(_FINDER_COLUMN_USERID_USERID_2);
                 }
             }
-            else {
-                query.append("ORDER BY ");
 
-                query.append("reportsEntry.name ASC");
+            if (obc != null) {
+                appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+            }
+            else {
+                query.append(ReportsEntryModelImpl.ORDER_BY_JPQL);
             }
 
-            Query q = session.createQuery(query.toString());
+            String sql = query.toString();
+
+            Query q = session.createQuery(sql);
 
             QueryPos qPos = QueryPos.getInstance(q);
 
@@ -911,38 +886,24 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             try {
                 session = openSession();
 
-                StringBuilder query = new StringBuilder();
-
-                query.append(
-                    "SELECT reportsEntry FROM ReportsEntry reportsEntry ");
+                StringBundler query = null;
+                String sql = null;
 
                 if (obc != null) {
-                    query.append("ORDER BY ");
+                    query = new StringBundler(2 +
+                            (obc.getOrderByFields().length * 3));
 
-                    String[] orderByFields = obc.getOrderByFields();
+                    query.append(_SQL_SELECT_REPORTSENTRY);
 
-                    for (int i = 0; i < orderByFields.length; i++) {
-                        query.append("reportsEntry.");
-                        query.append(orderByFields[i]);
+                    appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-                        if (obc.isAscending()) {
-                            query.append(" ASC");
-                        } else {
-                            query.append(" DESC");
-                        }
-
-                        if ((i + 1) < orderByFields.length) {
-                            query.append(", ");
-                        }
-                    }
+                    sql = query.toString();
                 }
                 else {
-                    query.append("ORDER BY ");
-
-                    query.append("reportsEntry.name ASC");
+                    sql = _SQL_SELECT_REPORTSENTRY.concat(ReportsEntryModelImpl.ORDER_BY_JPQL);
                 }
 
-                Query q = session.createQuery(query.toString());
+                Query q = session.createQuery(sql);
 
                 if (obc == null) {
                     list = (List<ReportsEntry>) QueryUtil.list(q, getDialect(),
@@ -1001,20 +962,23 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             try {
                 session = openSession();
 
-                StringBuilder query = new StringBuilder();
+                StringBundler query = new StringBundler(2);
 
-                query.append("SELECT COUNT(reportsEntry) ");
-                query.append("FROM ReportsEntry reportsEntry WHERE ");
+                query.append(_SQL_COUNT_REPORTSENTRY_WHERE);
 
                 if (companyId == null) {
-                    query.append("reportsEntry.companyId IS NULL");
+                    query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_1);
                 } else {
-                    query.append("reportsEntry.companyId = ?");
+                    if (companyId.equals(StringPool.BLANK)) {
+                        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_3);
+                    } else {
+                        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+                    }
                 }
 
-                query.append(" ");
+                String sql = query.toString();
 
-                Query q = session.createQuery(query.toString());
+                Query q = session.createQuery(sql);
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1052,20 +1016,23 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             try {
                 session = openSession();
 
-                StringBuilder query = new StringBuilder();
+                StringBundler query = new StringBundler(2);
 
-                query.append("SELECT COUNT(reportsEntry) ");
-                query.append("FROM ReportsEntry reportsEntry WHERE ");
+                query.append(_SQL_COUNT_REPORTSENTRY_WHERE);
 
                 if (userId == null) {
-                    query.append("reportsEntry.userId IS NULL");
+                    query.append(_FINDER_COLUMN_USERID_USERID_1);
                 } else {
-                    query.append("reportsEntry.userId = ?");
+                    if (userId.equals(StringPool.BLANK)) {
+                        query.append(_FINDER_COLUMN_USERID_USERID_3);
+                    } else {
+                        query.append(_FINDER_COLUMN_USERID_USERID_2);
+                    }
                 }
 
-                query.append(" ");
+                String sql = query.toString();
 
-                Query q = session.createQuery(query.toString());
+                Query q = session.createQuery(sql);
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1103,8 +1070,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             try {
                 session = openSession();
 
-                Query q = session.createQuery(
-                        "SELECT COUNT(reportsEntry) FROM ReportsEntry reportsEntry");
+                Query q = session.createQuery(_SQL_COUNT_REPORTSENTRY);
 
                 count = (Long) q.uniqueResult();
             } catch (Exception e) {

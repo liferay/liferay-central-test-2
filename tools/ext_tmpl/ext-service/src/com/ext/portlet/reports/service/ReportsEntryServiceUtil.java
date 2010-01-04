@@ -1,5 +1,7 @@
 package com.ext.portlet.reports.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 
 /**
  * <a href="ReportsEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -26,7 +28,7 @@ public class ReportsEntryServiceUtil {
 
     public static ReportsEntryService getService() {
         if (_service == null) {
-            throw new RuntimeException("ReportsEntryService is not set");
+            _service = (ReportsEntryService) PortalBeanLocatorUtil.locate(ReportsEntryService.class.getName());
         }
 
         return _service;
