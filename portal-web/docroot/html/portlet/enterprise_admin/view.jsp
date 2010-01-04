@@ -107,13 +107,13 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 		<portlet:namespace />getUsersCount(
 			className, ids, false,
-			function(count) {
+			function(event, count) {
 				count = parseInt(count);
 
 				if (count > 0) {
 					<portlet:namespace />getUsersCount(
 						className, ids, true,
-						function(count) {
+						function(event, count) {
 							count = parseInt(count);
 
 							if (count > 0) {
@@ -185,18 +185,16 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 	function <portlet:namespace />getUsersCount(className, ids, active, callback) {
 		AUI().use(
-			'io',
+			'io-request',
 			function(A) {
-				A.io(
+				A.io.request(
 					'<%= themeDisplay.getPathMain() %>/enterprise_admin/get_users_count',
 					{
-						data: A.toQueryString(
-							{
-								active: active,
-								className: className,
-								ids: ids
-							}
-						),
+						data: {
+							active: active,
+							className: className,
+							ids: ids
+						},
 						method: 'POST',
 						on: {
 							success: callback

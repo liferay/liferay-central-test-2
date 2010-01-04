@@ -60,6 +60,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 	AUI().ready(
 		'dataschema-xml',
 		'datatype-xml',
+		'io-request',
 		'tree-view',
 		function(A) {
 			var TreeUtil = {
@@ -172,11 +173,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 				updateLayout: function(data) {
 					var updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
 
-					A.io(
+					A.io.request(
 						updateURL,
 						{
 							method: 'POST',
-							data: A.toQueryString(data)
+							data: data
 						}
 					);
 				},
@@ -210,11 +211,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 						treeId: treeId
 					};
 
-					A.io(
+					A.io.request(
 						sessionClickURL,
 						{
 							method: 'POST',
-							data: A.toQueryString(data)
+							data: data
 						}
 					);
 				}

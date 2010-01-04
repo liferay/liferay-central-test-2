@@ -924,17 +924,15 @@ Liferay.Util = {
 					}
 				);
 
-				A.io(
+				A.io.request(
 					params.url,
 					{
-						data: A.toQueryString(
-							{
-								doAsUserId: params.doAsUserId,
-								portletId: params.portletId,
-								p_l_id: params.plid,
-								title: params.title
-							}
-						),
+						data: {
+							doAsUserId: params.doAsUserId,
+							portletId: params.portletId,
+							p_l_id: params.plid,
+							title: params.title
+						},
 						method: 'POST'
 					}
 				);
@@ -1136,7 +1134,7 @@ Liferay.Util = {
 	toggleControls: function() {
 		AUI().use(
 			'event',
-			'io',
+			'io-request',
 			'node',
 			function(A) {
 				var trigger = A.one('.toggle-controls');
@@ -1160,7 +1158,7 @@ Liferay.Util = {
 
 							Liferay._editControlsState = (docBody.hasClass(visibleClass) ? 'visible' : 'hidden');
 
-							A.io(
+							A.io.request(
 								themeDisplay.getPathMain() + '/portal/session_click',
 								{
 									data: {

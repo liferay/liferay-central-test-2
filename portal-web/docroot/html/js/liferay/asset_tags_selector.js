@@ -209,11 +209,9 @@ AUI().add(
 						}
 					);
 
-					var proxyData = A.toQueryString(
-						{
-							url: suggestionsURL
-						}
-					);
+					var proxyData = {
+						url: suggestionsURL
+					};
 
 					return proxyData;
 				},
@@ -373,14 +371,15 @@ AUI().add(
 
 					instance._popup.set('title', Liferay.Language.get('suggestions'));
 
-					A.io(
+					A.io.request(
 						themeDisplay.getPathMain() + '/portal/rest_proxy',
 						{
 							data: instance._getProxyData(),
+							dataType: 'json',
 							method: 'POST',
 							on: {
-								success: function(id, obj) {
-									var results = A.JSON.parse(obj.responseText);
+								success: function(event, id, obj) {
+									var results = this.get('responseData');
 
 									instance._updateSelectList(results.ResultSet.Result, instance._suggestionsIterator);
 								}
@@ -466,6 +465,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['autocomplete', 'dialog', 'live-search', 'substitute', 'textboxlist', 'textfield']
+		requires: ['autocomplete', 'dialog', 'io-request', 'live-search', 'substitute', 'textboxlist', 'textfield']
 	}
 );

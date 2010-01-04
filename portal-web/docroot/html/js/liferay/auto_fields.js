@@ -379,20 +379,18 @@ AUI().add(
 
 						contentBox.plug(A.Plugin.ParseContent);
 
-						A.io(
+						A.io.request(
 							url,
 							{
-								data: A.toQueryString(
-									{
-										index: guid
-									}
-								),
+								data: {
+									index: guid
+								},
 								method: 'POST',
 								on: {
-									success: function(id, obj) {
-										var instance = this;
+									success: function(event, id, obj) {
+										var responseData = this.get('responseData');
 
-										contentBox.setContent(obj.responseText);
+										contentBox.setContent(responseData);
 									}
 								}
 							}
@@ -569,6 +567,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['base', 'data-set', 'liferay-undo-manager', 'parse-content', 'sortable']
+		requires: ['base', 'data-set', 'io-request', 'liferay-undo-manager', 'parse-content', 'sortable']
 	}
 );

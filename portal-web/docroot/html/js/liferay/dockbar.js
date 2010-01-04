@@ -1,6 +1,7 @@
 AUI().use(
 	'context-overlay',
 	'io-plugin',
+	'io-request',
 	'overlay-manager',
 	'tool-item',
 	function(A) {
@@ -20,14 +21,12 @@ AUI().use(
 
 							var pinned = body.hasClass('lfr-dockbar-pinned');
 
-							A.io(
+							A.io.request(
 								themeDisplay.getPathMain() + '/portal/session_click',
 								{
-									data: A.toQueryString(
-										{
-											'liferay_dockbar_pinned': pinned
-										}
-									),
+									data: {
+										'liferay_dockbar_pinned': pinned
+									},
 									method: 'POST'
 								}
 							);

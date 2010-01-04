@@ -93,11 +93,11 @@ AUI().add(
 			_createEmoticons: function(callback) {
 				var instance = this;
 
-				A.io(
+				A.io.request(
 					themeDisplay.getPathMain() + '/portal/emoticons',
 					{
 						on: {
-							success: function(id, xHR) {
+							success: function(event, id, xHR) {
 								var response = xHR.responseText;
 								var emoticonsContainer = A.Node.create('<div class="lfr-emoticon-container"></div>');
 
@@ -563,6 +563,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: []
+		requires: ['io-request']
 	}
 );

@@ -153,10 +153,10 @@ AUI().add(
 
 						data[id] = state;
 
-						A.io(
+						A.io.request(
 							themeDisplay.getPathMain() + '/portal/session_click',
 							{
-								data: A.toQueryString(data)
+								data: data
 							}
 						);
 					}
@@ -187,6 +187,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base']
+		requires: ['aui-base', 'io-request']
 	}
 );

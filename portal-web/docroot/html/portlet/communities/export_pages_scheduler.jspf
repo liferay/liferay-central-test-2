@@ -67,13 +67,13 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 		}
 
 		AUI().use(
-			'io',
+			'io-request',
 			function(A) {
 				var form = A.get(document.<portlet:namespace />exportPagesFm);
 
 				var uri = form.getAttribute('action');
 
-				A.io(
+				A.io.request(
 					uri,
 					{
 						form: {
@@ -101,13 +101,13 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 			document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
 
 			AUI().use(
-				'io',
+				'io-request',
 				function(A) {
 					var form = A.get(document.<portlet:namespace />exportPagesFm);
 
 					var uri = form.getAttribute('action');
 
-					A.io(
+					A.io.request(
 						uri,
 						{
 							form: {
@@ -130,13 +130,13 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 
 	function <portlet:namespace />updateScheduledPublishEventsDiv() {
 		AUI().use(
-			'io',
+			'io-request',
 			function(A) {
 				var form = A.get(document.<portlet:namespace />exportPagesFm);
 
 				var uri = form.getAttribute('action');
 
-				A.io(
+				A.io.request(
 					'<%= scheduledPublishEventsURL %>',
 					{
 						form: {
@@ -144,11 +144,13 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 						},
 						method: 'POST',
 						on: {
-							success: function(id, obj) {
+							success: function(event, id, obj) {
+								var responseData = this.get('responseData');
+
 								var scheduledPublishEventsDiv = A.one('#<portlet:namespace />scheduledPublishEventsDiv');
 
 								if (scheduledPublishEventsDiv) {
-									scheduledPublishEventsDiv.html(obj.responseText);
+									scheduledPublishEventsDiv.html(responseData);
 								}
 
 								var addButton = A.one('#<portlet:namespace />addButton');

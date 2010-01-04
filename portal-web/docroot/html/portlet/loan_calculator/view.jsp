@@ -50,7 +50,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 <script type="text/javascript">
 	AUI().ready(
-		'io',
+		'io-request',
 		function(A) {
 			var form = A.get('#<portlet:namespace />fm');
 
@@ -59,17 +59,17 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 				function(event) {
 					var uri = form.getAttribute('action');
 
-					A.io(
+					A.io.request(
 						uri,
 						{
 							form: {
 								id: form
 							},
 							on: {
-								success: function(id, response) {
-									var instance = this;
+								success: function(event, id, response) {
+									var responseData = this.get('responseData');
 
-									form.get('parentNode').html(response.responseText);
+									form.get('parentNode').html(responseData);
 								}
 							}
 						}

@@ -98,7 +98,8 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	];
 
 	AUI().ready(
-		'io',
+		'io-request',
+		'parse-content',
 		function(A) {
 			var form = A.get('#<portlet:namespace />fm');
 
@@ -106,18 +107,21 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 				'submit',
 				function(event) {
 					var uri = form.getAttribute('action');
+					var parentNode = form.get('parentNode');
 
-					A.io(
+					parentNode.plug(A.Plugin.ParseContent);
+
+					A.io.request(
 						uri,
 						{
 							form: {
 								id: form
 							},
 							on: {
-								success: function(id, response) {
-									var instance = this;
+								success: function(event, id, response) {
+									var responseData = this.get('responseData');
 
-									form.get('parentNode').html(response.responseText);
+									parentNode.setContent(responseData);
 								}
 							}
 						}

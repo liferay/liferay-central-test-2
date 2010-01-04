@@ -3,7 +3,7 @@ Liferay.Util.portletTitleEdit = function() {
 
 AUI().use(
 	'context-panel',
-	'io',
+	'io-request',
 	function(A) {
 		var portletInformationEl = A.get('#cpContextPanelTemplate');
 		var portletInformationIcon = A.get('#cpPortletTitleHelpIcon');
@@ -26,7 +26,7 @@ AUI().use(
 					visible: false,
 					on: {
 						hide: function() {
-							A.io(
+							A.io.request(
 								themeDisplay.getPathMain() + '/portal/session_click',
 								{
 									data: sessionData

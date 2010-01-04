@@ -100,10 +100,10 @@ AUI().add(
 
 					A.mix(data, options);
 
-					A.io(
+					A.io.request(
 						themeDisplay.getPathMain() + '/portal/update_layout',
 						{
-							data: A.toQueryString(data),
+							data: data,
 							method: 'POST'
 						}
 					);
@@ -777,7 +777,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['dd', 'io', 'resize'],
+		requires: ['dd', 'io-request', 'resize'],
 		use: []
 	}
 );

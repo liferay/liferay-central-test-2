@@ -86,7 +86,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 	<script type="text/javascript">
 		AUI().ready(
-			'io-base', 'json', 'rating', 'substitute',
+			'io-request', 'rating', 'substitute',
 			function(A) {
 				var getLabel = function(desc, totalEntries) {
 					var labelScoreTpl = '{desc} ({totalEntries} {voteLabel})';
@@ -108,20 +108,19 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 				};
 
 				var sendVoteRequest = function(url, score, callback) {
-					var params = A.toQueryString(
-						{
-							className: '<%= className %>',
-							classPK: '<%= classPK %>',
-							p_l_id: '<%= themeDisplay.getPlid() %>',
-							score: score
-						}
-					);
+					var params = {
+						className: '<%= className %>',
+						classPK: '<%= classPK %>',
+						p_l_id: '<%= themeDisplay.getPlid() %>',
+						score: score
+					};
 
-					A.io(
+					A.io.request(
 						url,
 						{
 							method: 'POST',
 							data: params,
+							dataType: 'json',
 							on: {
 								success: callback
 							}
@@ -162,8 +161,8 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 				<c:choose>
 					<c:when test='<%= type.equals("stars") %>'>
-						var saveCallback = function(id, obj) {
-							var json = A.JSON.parse(obj.responseText);
+						var saveCallback = function(event, id, obj) {
+							var json = this.get('responseData');
 							var label = getLabel('<liferay-ui:message key="average" />', json.totalEntries);
 							var averageIndex = json.averageScore - 1;
 
@@ -220,8 +219,8 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 									click: function() {
 										var instance = this;
 
-										var saveCallback = function(id, obj) {
-											var json = A.JSON.parse(obj.responseText);
+										var saveCallback = function(event, id, obj) {
+											var json = this.get('responseData');
 											var score = Math.round(json.totalEntries * json.averageScore);
 											var label = getLabel(fixScore(score), json.totalEntries);
 

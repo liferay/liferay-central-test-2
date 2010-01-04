@@ -138,26 +138,24 @@ Liferay.Portlet = {
 		}
 
 		AUI().use(
-			'io',
-			'json',
+			'io-request',
 			function(A) {
-				A.io(
+				A.io.request(
 					url,
 					{
-						data: A.toQueryString(data),
+						data: data,
+						dataType: dataType,
 						method: 'POST',
 						on: {
-							success: function(id, obj) {
+							success: function(event, id, obj) {
 								var instance = this;
 
-								var response = obj.responseText;
+								var response = this.get('responseData');
 
 								if (dataType == 'html') {
 									addPortletReturn(response);
 								}
 								else {
-									response = A.JSON.parse(response);
-
 									if (response.refresh) {
 										location.reload();
 									}
@@ -194,17 +192,15 @@ Liferay.Portlet = {
 				AUI().use(
 					'io',
 					function(A) {
-						A.io(
+						A.io.request(
 							url,
 							{
-								data: A.toQueryString(
-									{
-										cmd: 'delete',
-										doAsUserId: doAsUserId,
-										p_l_id: plid,
-										p_p_id: portletId
-									}
-								),
+								data: {
+									cmd: 'delete',
+									doAsUserId: doAsUserId,
+									p_l_id: plid,
+									p_p_id: portletId
+								},
 								method: 'POST'
 							}
 						);
@@ -288,18 +284,16 @@ Liferay.Portlet = {
 				AUI().use(
 					'io',
 					function(A) {
-						A.io(
+						A.io.request(
 							themeDisplay.getPathMain() + '/portal/update_layout',
 							{
-								data: A.toQueryString(
-									{
-										cmd: 'minimize',
-										doAsUserId: doAsUserId,
-										p_l_id: plid,
-										p_p_id: portlet.portletId,
-										p_p_restore: restore
-									}
-								),
+								data: {
+									cmd: 'minimize',
+									doAsUserId: doAsUserId,
+									p_l_id: plid,
+									p_p_id: portlet.portletId,
+									p_p_restore: restore
+								},
 								method: 'POST'
 							}
 						);

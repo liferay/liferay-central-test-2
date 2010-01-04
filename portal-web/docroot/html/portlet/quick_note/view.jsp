@@ -53,6 +53,7 @@
 	<script type="text/javascript">
 		AUI().ready(
 			'editable',
+			'io-request',
 			function(A) {
 				var quickNotePad = A.one('#<portlet:namespace />pad');
 
@@ -66,16 +67,14 @@
 
 							quickNotePad.setStyle('backgroundColor', bgColor);
 
-							A.io(
+							A.io.request(
 								'<%= themeDisplay.getPathMain() %>/quick_note/save',
 								{
-									data: A.toQueryString(
-										{
-											color: bgColor,
-											portletId: '<%= portletDisplay.getId() %>',
-											p_l_id: '<%= plid %>'
-										}
-									),
+									data: {
+										color: bgColor,
+										portletId: '<%= portletDisplay.getId() %>',
+										p_l_id: '<%= plid %>'
+									},
 									method: 'POST'
 								}
 							);
@@ -96,16 +95,14 @@
 
 									event.newVal = instance._toText(event.newVal);
 
-									A.io(
+									A.io.request(
 										'<%= themeDisplay.getPathMain() %>/quick_note/save',
 										{
-											data: A.toQueryString(
-												{
-													p_l_id: '<%= plid %>',
-													portletId: '<%= portletDisplay.getId() %>',
-													data: newValue
-												}
-											),
+											data: {
+												p_l_id: '<%= plid %>',
+												portletId: '<%= portletDisplay.getId() %>',
+												data: newValue
+											},
 											method: 'POST'
 										}
 									);

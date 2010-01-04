@@ -154,7 +154,7 @@ AUI().add(
 
 				var responseText = null;
 
-				A.io(
+				A.io.request(
 					themeDisplay.getPathContext() + '/c/portal/portlet_url',
 					{
 						sync: true,
@@ -249,6 +249,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['json']
+		requires: ['io-request']
 	}
 );

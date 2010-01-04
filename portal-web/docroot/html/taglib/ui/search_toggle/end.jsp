@@ -36,6 +36,7 @@
 
 <script type="text/javascript">
 	AUI().ready(
+		'io-request',
 		function (A) {
 			var <%= id %>curClickValue = "<%= clickValue %>";
 
@@ -78,14 +79,12 @@
 						advancedControls.attr('disabled', 'disabled');
 					}
 
-					A.io(
+					A.io.request(
 						'<%= themeDisplay.getPathMain() %>/portal/session_click',
 						{
-							data: AUI().toQueryString(
-								{
-									'<%= id %>': <%= id %>curClickValue
-								}
-							)
+							data: {
+								'<%= id %>': <%= id %>curClickValue
+							}
 						}
 					);
 				}

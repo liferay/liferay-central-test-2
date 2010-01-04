@@ -55,26 +55,30 @@ catch (Exception e) {
 
 <script type="text/javascript">
 	AUI().ready(
-		'io',
+		'io-request',
+		'parse-content',
 		function(A) {
 			var form = A.get('#<portlet:namespace />fm');
+			var parentNode = form.get('parentNode');
+
+			parentNode.plug(A.Plugin.ParseContent);
 
 			form.on(
 				'submit',
 				function(event) {
 					var uri = form.getAttribute('action');
 
-					A.io(
+					A.io.request(
 						uri,
 						{
 							form: {
 								id: form
 							},
 							on: {
-								success: function(id, response) {
-									var instance = this;
+								success: function(event, id, response) {
+									var responseData = this.get('responseData');
 
-									form.get('parentNode').html(response.responseText);
+									parentNode.setContent(responseData);
 								}
 							}
 						}

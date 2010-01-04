@@ -926,7 +926,7 @@ AUI().add(
 
 					useForAll.each(handleForms);
 
-					var saveHandler = function(xHR, type) {
+					var saveHandler = function(event, xHR, type) {
 						var ajaxResponseMsg = instance._portletMsgResponse;
 						var ajaxResponseHTML = '<div id="lfr-portlet-css-response"></div>';
 						var message = '';
@@ -965,17 +965,15 @@ AUI().add(
 							instance._objData.wapData.title = instance._wapTitleInput.val();
 							instance._objData.wapData.initialWindowState = instance._wapInitialWindowStateSelect.val();
 
-							A.io(
+							A.io.request(
 								themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
 								{
-									data: A.toQueryString(
-										{
-											p_l_id: themeDisplay.getPlid(),
-											doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-											portletId: instance._portletId,
-											css: A.JSON.stringify(instance._objData)
-										}
-									),
+									data: {
+										p_l_id: themeDisplay.getPlid(),
+										doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+										portletId: instance._portletId,
+										css: A.JSON.stringify(instance._objData)
+									},
 									method: 'POST',
 									on: {
 										complete: saveHandler
@@ -1006,23 +1004,19 @@ AUI().add(
 
 				instance._objData = defaultData;
 
-				A.io(
+				A.io.request(
 					themeDisplay.getPathMain() + '/portlet_configuration/get_look_and_feel',
 					{
-						data: A.toQueryString(
-							{
-								p_l_id: themeDisplay.getPlid(),
-								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-								portletId: instance._portletId
-							}
-						),
+						data: {
+							p_l_id: themeDisplay.getPlid(),
+							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+							portletId: instance._portletId
+						},
+						dataType: 'json',
 						method: 'POST',
 						on: {
-							complete: function(i, o) {
-								try {
-									var objectData = A.JSON.parse(o.responseText);
-								}
-								catch(e) {}
+							success: function(event, i, o) {
+								var objectData = this.get('responseData');
 
 								if (objectData && objectData.responseText.length) {
 									instance._objData = objectData;
@@ -1772,7 +1766,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['color-picker', 'dialog', 'io', 'json', 'tabs'],
+		requires: ['color-picker', 'dialog', 'io-request', 'tabs'],
 		use: []
 	}
 );

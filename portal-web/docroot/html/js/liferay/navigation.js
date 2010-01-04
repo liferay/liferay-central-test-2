@@ -521,10 +521,10 @@ AUI().add(
 							layoutId: tab._LFR_layoutId
 						};
 
-						A.io(
+						A.io.request(
 							instance._updateURL,
 							{
-								data: A.toQueryString(data),
+								data: data,
 								on: {
 									success: function() {
 										Liferay.fire(
@@ -572,8 +572,8 @@ AUI().add(
 									languageId: themeDisplay.getLanguageId()
 								};
 
-								onSuccess = function(id, obj) {
-									var data = A.JSON.parse(obj.responseText);
+								onSuccess = function(event, id, obj) {
+									var data = this.get('responseData');
 
 									var doc = A.getDoc();
 
@@ -613,8 +613,8 @@ AUI().add(
 								layoutPrototypeId: layoutPrototypeId
 							};
 
-							onSuccess = function(id, obj) {
-								var data = A.JSON.parse(obj.responseText);
+							onSuccess = function(event, id, obj) {
+								var data = this.get('responseData');
 
 								var tabHtml = A.substitute(
 									TPL_TAB_LINK,
@@ -650,10 +650,11 @@ AUI().add(
 						}
 
 						if (data) {
-							A.io(
+							A.io.request(
 								instance._updateURL,
 								{
-									data: A.toQueryString(data),
+									data: data,
+									dataType: 'json',
 									method: 'POST',
 									on: {
 										success: onSuccess
@@ -678,11 +679,11 @@ AUI().add(
 						priority: priority
 					};
 
-					A.io(
+					A.io.request(
 						instance._updateURL,
 						{
 							method: 'POST',
-							data: A.toQueryString(data)
+							data: data
 						}
 					);
 				},
@@ -706,6 +707,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['overlay', 'selector-css3', 'sortable', 'node-event-simulate', 'combobox', 'io', 'substitute', 'json-parse']
+		requires: ['overlay', 'selector-css3', 'sortable', 'node-event-simulate', 'combobox', 'io-request', 'substitute', 'json-parse']
 	}
 );

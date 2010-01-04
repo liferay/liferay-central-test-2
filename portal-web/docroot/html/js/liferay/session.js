@@ -100,7 +100,7 @@ AUI().add(
 
 				document.title = instance._originalTitle;
 
-				A.io(
+				A.io.request(
 					instance._sessionUrls.expire,
 					{
 						on: {
@@ -125,7 +125,7 @@ AUI().add(
 					clearInterval(instance._countdownTimer);
 				}
 
-				A.io(instance._sessionUrls.extend);
+				A.io.request(instance._sessionUrls.extend);
 
 				document.title = instance._originalTitle;
 
