@@ -23,6 +23,7 @@
 package com.liferay.portal.spring.annotation;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.lang.reflect.Field;
 
@@ -33,6 +34,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.util.ReflectionUtils;
 
@@ -94,7 +96,13 @@ public class BeanReferenceAnnotationBeanPostProcessor
 			Object referencedBean = _beans.get(referencedBeanName);
 
 			if (referencedBean == null) {
-				referencedBean = _beanFactory.getBean(referencedBeanName);
+				try {
+					referencedBean = _beanFactory.getBean(referencedBeanName);
+				}
+				catch (NoSuchBeanDefinitionException nsbde) {
+					referencedBean = PortalBeanLocatorUtil.locate(
+						referencedBeanName);
+				}
 
 				_beans.put(referencedBeanName, referencedBean);
 			}
