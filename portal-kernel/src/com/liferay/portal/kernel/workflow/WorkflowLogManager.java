@@ -39,12 +39,11 @@ import java.util.List;
 public interface WorkflowLogManager {
 
 	public List<WorkflowLog> getWorkflowLogs(
-			long workflowInstanceId, boolean includeChildren, int start,
-			int end, OrderByComparator orderByComparator)
+			long workflowInstanceId, int start,	int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
-	public int getWorkflowLogCount(
-			long workflowInstanceId, boolean includeChildren)
+	public int getWorkflowLogCount(long workflowInstanceId)
 		throws WorkflowException;
 
 }

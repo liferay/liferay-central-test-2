@@ -31,8 +31,11 @@
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowInstance" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil" %>
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowLog" %>
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowLogManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTask" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil" %>
+<%@ page import="com.liferay.portal.kernel.workflow.comparator.WorkflowLogCreateDateComparator" %>
 
 <%
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);

@@ -24,6 +24,14 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.portlet-workflow-tasks .activity {
+	padding: 5px;
+}
+
+.portlet-workflow-tasks .date {
+	font-weight: bold;
+}
+
 .portlet-workflow-tasks h3.task-title, .portlet-workflow-tasks h3.comments {
 	border-bottom: 1px solid #000;
 	font-size: 14px;

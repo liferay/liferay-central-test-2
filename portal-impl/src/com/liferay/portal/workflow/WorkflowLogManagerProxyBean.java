@@ -40,15 +40,13 @@ public class WorkflowLogManagerProxyBean
 	extends BaseProxyBean implements WorkflowLogManager {
 
 	public List<WorkflowLog> getWorkflowLogs(
-		long workflowInstanceId, boolean includeChildren, int start, int end,
+		long workflowInstanceId, int start, int end,
 		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public int getWorkflowLogCount(
-		long workflowInstanceId, boolean includeChildren) {
-
+	public int getWorkflowLogCount(long workflowInstanceId) {
 		throw new UnsupportedOperationException();
 	}
 

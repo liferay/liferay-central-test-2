@@ -23,7 +23,6 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.util.Date;
-import java.util.Map;
 
 /**
  * <a href="WorkflowLog.java.html"><b><i>View Source</i></b></a>
@@ -31,14 +30,24 @@ import java.util.Map;
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public interface WorkflowLog {
 
+	public final int TRANSITION = 0;
+	public final int TASK_ASSIGN = 1;
+
+	public String getComment();
+
 	public Date getCreateDate();
 
-	public String getDescription();
+	public String getPreviousState();
 
-	public Map<String, Object> getOptionalAttributes();
+	public long getPreviousUserId();
+
+	public String getState();
+
+	public int getType();
 
 	public long getUserId();
 
