@@ -83,8 +83,8 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 
 <script type="text/javascript">
 	function <portlet:namespace />changePriority(ldapServer, swapLdapServer) {
-		var ldapServerId = ldapServer.attr('data-ldapServerId');
-		var swapLdapServerId = swapLdapServer.attr('data-ldapServerId');
+		var ldapServerId = ldapServer.getAttribute('data-ldapServerId');
+		var swapLdapServerId = swapLdapServer.getAttribute('data-ldapServerId');
 
 		var ldapServerHTML = ldapServer.html();
 		var swapLdapServerHTML = swapLdapServer.html();
@@ -92,8 +92,8 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 		ldapServer.html(swapLdapServerHTML);
 		swapLdapServer.html(ldapServerHTML);
 
-		ldapServer.attr('data-ldapServerId', swapLdapServerId);
-		swapLdapServer.attr('data-ldapServerId', ldapServerId);
+		ldapServer.setAttribute('data-ldapServerId', swapLdapServerId);
+		swapLdapServer.setAttribute('data-ldapServerId', ldapServerId);
 	}
 
 	function <portlet:namespace />changeLDAPServerPriority(ldapServerId, action) {
@@ -240,7 +240,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 
 		AUI().all('.ldap-servers .results-row').each(
 			function(item, index, collection) {
-				ldapServerIds.push(item.attr('data-ldapServerId'));
+				ldapServerIds.push(item.getAttribute('data-ldapServerId'));
 			}
 		);
 
