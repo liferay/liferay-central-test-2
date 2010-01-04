@@ -81,7 +81,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 						},
 						method: 'POST',
 						on: {
-							success: function() {
+							success: function(event, id, obj) {
 								<portlet:namespace />updateScheduledPublishEventsDiv();
 							}
 						}
@@ -115,7 +115,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 							},
 							method: 'POST',
 							on: {
-								success: function() {
+								success: function(event, id, obj) {
 									<portlet:namespace />updateScheduledPublishEventsDiv();
 								}
 							}

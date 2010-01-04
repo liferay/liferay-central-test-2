@@ -926,11 +926,16 @@ AUI().add(
 
 					useForAll.each(handleForms);
 
-					var saveHandler = function(event, xHR, type) {
+					var saveHandler = function(event, id, obj) {
 						var ajaxResponseMsg = instance._portletMsgResponse;
 						var ajaxResponseHTML = '<div id="lfr-portlet-css-response"></div>';
 						var message = '';
 						var messageClass = '';
+						var type = 'success';
+
+						if (obj.statusText.toLowerCase() != 'ok') {
+							type = 'error';
+						}
 
 						if (type == 'success') {
 							message = Liferay.Language.get('your-request-processed-successfully');
@@ -948,11 +953,9 @@ AUI().add(
 							instance._portletMsgResponse = ajaxResponse;
 						}
 
-						ajaxResponse.hide();
-						ajaxResponse.attr('class', messageClass);
-						ajaxResponse.empty();
+						ajaxResponse.addClass(messageClass);
 						ajaxResponse.html(message);
-						ajaxResponse.fadeIn('normal');
+						ajaxResponse.show();
 					};
 
 					instance._saveButton.detach('click');
@@ -1015,10 +1018,10 @@ AUI().add(
 						dataType: 'json',
 						method: 'POST',
 						on: {
-							success: function(event, i, o) {
+							success: function(event, id, obj) {
 								var objectData = this.get('responseData');
 
-								if (objectData && objectData.responseText.length) {
+								if (objectData) {
 									instance._objData = objectData;
 								}
 

@@ -160,8 +160,8 @@ AUI().add(
 						sync: true,
 						data: instance._buildRequestData(),
 						on: {
-							complete: function(i, o) {
-								responseText = o.responseText;
+							complete: function(event, id, obj) {
+								responseText = obj.responseText;
 							}
 						},
 						type: 'GET'

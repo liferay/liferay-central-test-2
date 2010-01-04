@@ -66,7 +66,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 								id: form
 							},
 							on: {
-								success: function(event, id, response) {
+								success: function(event, id, obj) {
 									var responseData = this.get('responseData');
 
 									form.get('parentNode').html(responseData);

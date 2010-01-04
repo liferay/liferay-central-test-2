@@ -147,13 +147,13 @@ AUI().use(
 													doAsUserId: themeDisplay.getDoAsUserIdEncoded()
 												},
 												on: {
-													success: function(event, id, response) {
+													success: function(event, id, obj) {
 														AUI().use(
 															'liferay-layout-configuration',
 															function(A) {
 																var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
 
-																Liferay.Dockbar.addApplication.set('bodyContent', response.responseText);
+																Liferay.Dockbar.addApplication.set('bodyContent', obj.responseText);
 
 																Liferay.LayoutConfiguration._dialogBody = contentBox;
 

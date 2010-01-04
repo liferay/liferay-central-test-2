@@ -97,11 +97,11 @@ AUI().add(
 					themeDisplay.getPathMain() + '/portal/emoticons',
 					{
 						on: {
-							success: function(event, id, xHR) {
-								var response = xHR.responseText;
+							success: function(event, id, obj) {
+								var responseData = this.get('responseData');
 								var emoticonsContainer = A.Node.create('<div class="lfr-emoticon-container"></div>');
 
-								instance._emoticons = emoticonsContainer.html(response);
+								instance._emoticons = emoticonsContainer.html(responseData);
 
 								var emoticons = instance._emoticons.all('.emoticon');
 

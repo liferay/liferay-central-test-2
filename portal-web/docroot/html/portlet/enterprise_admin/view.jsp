@@ -107,14 +107,16 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 		<portlet:namespace />getUsersCount(
 			className, ids, false,
-			function(event, count) {
-				count = parseInt(count);
+			function(event, id, obj) {
+				var responseData = this.get('responseData');
+				var count = parseInt(responseData);
 
 				if (count > 0) {
 					<portlet:namespace />getUsersCount(
 						className, ids, true,
-						function(event, count) {
-							count = parseInt(count);
+						function(event, id, obj) {
+							responseData = this.get('responseData')
+							count = parseInt(responseData);
 
 							if (count > 0) {
 								if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {

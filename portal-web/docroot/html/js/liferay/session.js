@@ -104,7 +104,7 @@ AUI().add(
 					instance._sessionUrls.expire,
 					{
 						on: {
-							success: function() {
+							success: function(event, id, obj) {
 								if (instance.redirectOnExpire) {
 									location.href = themeDisplay.getURLHome();
 								}
