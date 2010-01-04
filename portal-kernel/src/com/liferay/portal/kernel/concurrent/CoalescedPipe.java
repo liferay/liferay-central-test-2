@@ -68,9 +68,9 @@ public class CoalescedPipe<E> {
 				return;
 			}
 
-			_lastElementLink = new ElementLink<E>(e);
+			_lastElementLink._nextElementLink = new ElementLink<E>(e);
 
-			_lastElementLink._nextElementLink = _lastElementLink;
+			_lastElementLink = _lastElementLink._nextElementLink;
 
 			pendingElements = _pendingCount.getAndIncrement();
 		}
@@ -100,11 +100,11 @@ public class CoalescedPipe<E> {
 				_notEmptyCondition.await();
 			}
 
-			ElementLink<E> garbageElementLink = _headElementLink;
+			ElementLink<E> garbageELementLink = _headElementLink;
 
 			_headElementLink = _headElementLink._nextElementLink;
 
-			garbageElementLink._nextElementLink = null;
+			garbageELementLink._nextElementLink = null;
 
 			element = _headElementLink._element;
 
@@ -134,7 +134,7 @@ public class CoalescedPipe<E> {
 				_headElementLink._nextElementLink;
 
 			for (int i = 0; currentElementLink != null; i++) {
-				pendingElements[i++] = currentElementLink._element;
+				pendingElements[i] = currentElementLink._element;
 
 				currentElementLink = currentElementLink._nextElementLink;
 			}
@@ -152,29 +152,34 @@ public class CoalescedPipe<E> {
 			_takeLock.lockInterruptibly();
 
 			try {
-				ElementLink<E> current = _headElementLink._nextElementLink;
+				ElementLink<E> currentElementLink =
+					_headElementLink._nextElementLink;
 
 				if (_comparator != null) {
-					while (current != null) {
-						if (_comparator.compare(current._element, e) == 0) {
+					while (currentElementLink != null) {
+						if (_comparator.compare(
+								currentElementLink._element, e) == 0) {
+
 							_coalescedCount.incrementAndGet();
 
 							return true;
 						}
 						else {
-							current = current._nextElementLink;
+							currentElementLink =
+								currentElementLink._nextElementLink;
 						}
 					}
 				}
 				else {
-					while (current != null) {
-						if (current._element.equals(e)) {
+					while (currentElementLink != null) {
+						if (currentElementLink._element.equals(e)) {
 							_coalescedCount.incrementAndGet();
 
 							return true;
 						}
 						else {
-							current = current._nextElementLink;
+							currentElementLink =
+								currentElementLink._nextElementLink;
 						}
 					}
 				}
@@ -184,13 +189,16 @@ public class CoalescedPipe<E> {
 			}
 		}
 		catch (InterruptedException ie) {
+
+			// Continue to let the current element enter the pipe
+
 		}
 
 		return false;
 	}
 
-	private final Comparator<E> _comparator;
 	private final AtomicLong _coalescedCount = new AtomicLong(0);
+	private final Comparator<E> _comparator;
 	private ElementLink<E> _headElementLink;
 	private ElementLink<E> _lastElementLink;
 	private final Condition _notEmptyCondition;
@@ -201,7 +209,7 @@ public class CoalescedPipe<E> {
 	private static class ElementLink<E> {
 
 		private ElementLink(E element) {
-			this._element = element;
+			_element = element;
 		}
 
 		private E _element;
