@@ -75,7 +75,10 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\calendar\\dependencies\\Calendar-Selenium.portlet.lar"));
-		selenium.clickAt("_86_DELETE_PORTLET_DATA", RuntimeVariables.replace(""));
+		selenium.clickAt("_86_DELETE_PORTLET_DATACheckbox",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("_86_PORTLET_DATACheckbox",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Import']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
