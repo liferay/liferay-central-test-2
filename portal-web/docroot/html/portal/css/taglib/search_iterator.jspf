@@ -1,0 +1,119 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+.taglib-search-iterator {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.taglib-search-iterator td {
+	padding: 4px;
+}
+
+.taglib-search-iterator-highlighted {
+	font-weight: bold;
+}
+
+.taglib-search-iterator-page-iterator-top {
+	padding-bottom: 5px;
+}
+
+.taglib-search-iterator-page-iterator-bottom {
+	padding-top: 5px;
+}
+
+.taglib-page-iterator {
+	clear: both;
+	height: auto;
+	overflow: hidden;
+	width: auto;
+}
+
+.taglib-page-iterator .search-results {
+	color: #555;
+	float: left;
+}
+
+.taglib-page-iterator .search-pages {
+	float: right;
+}
+
+.taglib-page-iterator .search-pages .page-links a, .taglib-page-iterator .search-pages .page-links span {
+	background: url() no-repeat 0 0;
+	border-left: 1px solid #ccc;
+	padding: 2px 15px;
+}
+
+.taglib-page-iterator .search-pages .page-links span {
+	background-position: 0 100%;
+}
+
+.taglib-page-iterator .search-pages .page-links a.first, .taglib-page-iterator .search-pages .page-links span.first {
+	background-image: url(<%= themeImagesPath %>/arrows/paging_first.png);
+	background-repeat: no-repeat;
+	border-left: none;
+}
+
+.taglib-page-iterator .search-pages .page-links a.previous, .taglib-page-iterator .search-pages .page-links span.previous {
+	background-image: url(<%= themeImagesPath %>/arrows/paging_previous.png);
+	background-repeat: no-repeat;
+}
+
+.taglib-page-iterator .search-pages .page-links a.next, .taglib-page-iterator .search-pages .page-links span.next {
+	background-image: url(<%= themeImagesPath %>/arrows/paging_next.png);
+	background-repeat: no-repeat;
+}
+
+.taglib-page-iterator .search-pages .page-links a.last, .taglib-page-iterator .search-pages .page-links span.last {
+	background-image: url(<%= themeImagesPath %>/arrows/paging_last.png);
+	background-repeat: no-repeat;
+}
+
+.taglib-page-iterator .search-pages .page-links a.first, .taglib-page-iterator .search-pages .page-links span.first, .taglib-page-iterator .search-pages .page-links a.previous, .taglib-page-iterator .search-pages .page-links span.previous {
+	padding-right: 5px;
+}
+
+.taglib-page-iterator .search-pages .page-links a.next, .taglib-page-iterator .search-pages .page-links span.next, .taglib-page-iterator .search-pages .page-links a.last, .taglib-page-iterator .search-pages .page-links span.last {
+	background-position: 100% 0;
+	padding-left: 5px;
+}
+
+.taglib-page-iterator .search-pages .page-links span.first, .taglib-page-iterator .search-pages .page-links span.previous {
+	background-position: 0 100%;
+}
+
+.taglib-page-iterator .search-pages .page-links span.next, .taglib-page-iterator .search-pages .page-links span.last {
+	background-position: 100% 100%;
+}
+
+.taglib-page-iterator .search-pages .delta-selector, .taglib-page-iterator .search-pages .page-selector, .taglib-page-iterator .search-pages .page-links {
+	float: left;
+}
+
+.taglib-page-iterator .search-pages .page-selector {
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
