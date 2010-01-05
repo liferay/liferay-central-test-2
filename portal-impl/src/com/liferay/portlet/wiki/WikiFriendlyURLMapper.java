@@ -167,8 +167,10 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			else {
 				if (Validator.isNumber(urlFragment0)) {
 					addParam(params, "nodeId", urlFragment0);
+					addParam(params, "nodeName", StringPool.BLANK);
 				}
 				else {
+					addParam(params, "nodeId", StringPool.BLANK);
 					addParam(params, "nodeName", urlFragment0);
 				}
 
