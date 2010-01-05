@@ -1,0 +1,83 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+.taglib-calendar {
+	width: 190px;
+}
+
+.taglib-calendar table {
+	border: 1px solid #999;
+	width: 100%;
+}
+
+.taglib-calendar tr th, .taglib-calendar tr td {
+	height: 25px;
+	text-align: center;
+	border-bottom: 1px solid #999;
+}
+
+.taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
+	border: 1px solid #999;
+	border-bottom: none;
+	border-top: none;
+	padding: 0;
+	width: 26px;
+}
+
+.taglib-calendar tr.portlet-section-header th.first, .taglib-calendar tr td.first {
+	border-left: none;
+}
+
+.taglib-calendar tr.portlet-section-header th.last, .taglib-calendar tr td.last {
+	border-right: none;
+}
+
+.taglib-calendar tr td a {
+	display: block;
+	height: 15px;
+	padding: 5px 0;
+}
+
+.taglib-calendar a:hover, .taglib-calendar a:focus {
+	background-color: #ccc;
+}
+
+.taglib-calendar .calendar-inactive {
+	color: #999;
+}
+
+.taglib-calendar .calendar-current-day {
+}
+
+.taglib-calendar .calendar-current-day a {
+}
+
+.taglib-calendar .has-events a span {
+	background: url(<%= themeImagesPath %>/calendar/event_indicator.png) no-repeat 50% 95%;
+	padding-bottom: 5px;
+}
+
+.taglib-calendar .has-events.calendar-current-day a span {
+	background-image: url(<%= themeImagesPath %>/calendar/event_indicator_current.png);
+}

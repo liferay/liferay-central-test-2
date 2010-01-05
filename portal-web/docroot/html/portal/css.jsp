@@ -1162,88 +1162,11 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	padding-right: 5px;
 }
 
-
-/* ---------- Taglib calendar ---------- */
-
-.taglib-calendar {
-	width: 190px;
-}
-
-.taglib-calendar table {
-	border: 1px solid #999;
-	width: 100%;
-}
-
-.taglib-calendar tr th, .taglib-calendar tr td {
-	height: 25px;
-	text-align: center;
-	border-bottom: 1px solid #999;
-}
-
-.taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
-	border: 1px solid #999;
-	border-bottom: none;
-	border-top: none;
-	padding: 0;
-	width: 26px;
-}
-
-.taglib-calendar tr.portlet-section-header th.first, .taglib-calendar tr td.first {
-	border-left: none;
-}
-
-.taglib-calendar tr.portlet-section-header th.last, .taglib-calendar tr td.last {
-	border-right: none;
-}
-
-.taglib-calendar tr td a {
-	display: block;
-	height: 15px;
-	padding: 5px 0;
-}
-
-.taglib-calendar a:hover, .taglib-calendar a:focus {
-	background-color: #ccc;
-}
-
-.taglib-calendar .calendar-inactive {
-	color: #999;
-}
-
-.taglib-calendar .calendar-current-day {
-}
-
-.taglib-calendar .calendar-current-day a {
-}
-
-.taglib-calendar .has-events a span {
-	background: url(<%= themeImagesPath %>/calendar/event_indicator.png) no-repeat 50% 95%;
-	padding-bottom: 5px;
-}
-
-.taglib-calendar .has-events.calendar-current-day a span {
-	background-image: url(<%= themeImagesPath %>/calendar/event_indicator_current.png);
-}
-
-/* ---------- Taglib captcha ---------- */
-
-.taglib-captcha {
-	margin: 1em 0;
-}
-
-.taglib-captcha .captcha {
-	display: block;
-	margin-bottom: 1em;
-}
-
-/* ---------- Taglib discussion thread ---------- */
-
-.taglib-discussion td img {
-	vertical-align: middle;
-}
-
+<%@ include file="/html/portal/css/taglib/calendar.jspf" %>
+<%@ include file="/html/portal/css/taglib/captcha.jspf" %>
 <%@ include file="/html/portal/css/taglib/diff.jspf" %>
 <%@ include file="/html/portal/css/taglib/diff_html.jspf" %>
+<%@ include file="/html/portal/css/taglib/discussion.jspf" %>
 <%@ include file="/html/portal/css/taglib/flags.jspf" %>
 <%@ include file="/html/portal/css/taglib/icon_list.jspf" %>
 <%@ include file="/html/portal/css/taglib/input_localized.jspf" %>
