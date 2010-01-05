@@ -2539,7 +2539,7 @@
 	</library>
 	<library>
 		<file-name>portal/vaadin.jar</file-name>
-		<version>6.2.0</version>
+		<version>6.2.1</version>
 		<project-name>Vaadin</project-name>
 		<project-url>http://vaadin.com</project-url>
 		<licenses>
