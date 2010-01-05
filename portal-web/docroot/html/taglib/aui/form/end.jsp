@@ -25,8 +25,6 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
-
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:form:name"));
 String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:onSubmit"));
 %>
@@ -36,12 +34,6 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 <script type="text/javascript">
 	AUI().ready(
 		function(A) {
-			<c:if test="<%= Validator.isNull(onSubmit) %>">
-				function <%= randomNamespace %>saveForm() {
-					submitForm(document.<%= name %>);
-				}
-			</c:if>
-
 			var form = A.one('#<%= name %>');
 
 			if (form) {
@@ -50,7 +42,7 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 					function() {
 						<c:choose>
 							<c:when test="<%= Validator.isNull(onSubmit) %>">
-								<%= randomNamespace %>saveForm();
+								submitForm(document.<%= name %>);
 								return false;
 							</c:when>
 							<c:otherwise>
