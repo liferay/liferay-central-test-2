@@ -511,11 +511,12 @@ AUI().use(
 		);
 
 		Liferay.Dockbar.Underlay = Underlay;
-	}
-);
 
-AUI().ready(
-	function() {
-		Liferay.Dockbar.init();
+		A.on(
+			'available',
+			Liferay.Dockbar.init,
+			'#dockbar',
+			Liferay.Dockbar
+		);
 	}
 );
