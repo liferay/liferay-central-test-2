@@ -69,11 +69,39 @@ public class PortletPreferencesImpl
 		_originalPreferences = preferences;
 	}
 
+	public Object clone() {
+		return new PortletPreferencesImpl(
+			_companyId, _ownerId, _ownerType, _plid, _portletId,
+			_originalPreferences);
+	}
+
+	public boolean equals(Object obj) {
+		PortletPreferencesImpl portletPreferences = (PortletPreferencesImpl)obj;
+
+		if (this == portletPreferences) {
+			return true;
+		}
+
+		if ((getCompanyId() == portletPreferences.getCompanyId()) &&
+			(getOwnerId() == portletPreferences.getOwnerId()) &&
+			(getOwnerType() == portletPreferences.getOwnerType()) &&
+			(getPlid() == portletPreferences.getPlid()) &&
+			(getPortletId().equals(portletPreferences.getPortletId())) &&
+			(getMap().equals(portletPreferences.getMap()))) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public Map<String, String[]> getMap() {
 		Map<String, String[]> map = new HashMap<String, String[]>();
 
 		for (Map.Entry<String, Preference> entry :
-			getPreferences().entrySet()) {
+				getPreferences().entrySet()) {
+
 			String key = entry.getKey();
 			Preference preference = entry.getValue();
 
@@ -108,29 +136,6 @@ public class PortletPreferencesImpl
 		}
 	}
 
-	public void setValue(String key, String value) throws ReadOnlyException {
-		if (key == null) {
-			throw new IllegalArgumentException();
-		}
-
-		value = _getXmlSafeValue(value);
-
-		Preference preference = getPreferences().get(key);
-
-		if (preference == null) {
-			preference = new Preference(key, value);
-
-			_getOrCreateModifiedPreferences().put(key, preference);
-		}
-
-		if (preference.isReadOnly()) {
-			throw new ReadOnlyException(key);
-		}
-		else {
-			preference.setValues(new String[] {value});
-		}
-	}
-
 	public String[] getValues(String key, String[] def) {
 		if (key == null) {
 			throw new IllegalArgumentException();
@@ -151,31 +156,6 @@ public class PortletPreferencesImpl
 		}
 	}
 
-	public void setValues(String key, String[] values)
-		throws ReadOnlyException {
-
-		if (key == null) {
-			throw new IllegalArgumentException();
-		}
-
-		values = _getXmlSafeValues(values);
-
-		Preference preference = getPreferences().get(key);
-
-		if (preference == null) {
-			preference = new Preference(key, values);
-
-			_getOrCreateModifiedPreferences().put(key, preference);
-		}
-
-		if (preference.isReadOnly()) {
-			throw new ReadOnlyException(key);
-		}
-		else {
-			preference.setValues(values);
-		}
-	}
-
 	public boolean isReadOnly(String key) {
 		if (key == null) {
 			throw new IllegalArgumentException();
@@ -192,7 +172,7 @@ public class PortletPreferencesImpl
 	}
 
 	public void reset() {
-		_getOrCreateModifiedPreferences().clear();
+		_getModifiedPreferences().clear();
 	}
 
 	public void reset(String key) throws ReadOnlyException {
@@ -224,7 +204,55 @@ public class PortletPreferencesImpl
 			setValues(key, defaultValues);
 		}
 		else {
-			_getOrCreateModifiedPreferences().remove(key);
+			_getModifiedPreferences().remove(key);
+		}
+	}
+
+	public void setValue(String key, String value) throws ReadOnlyException {
+		if (key == null) {
+			throw new IllegalArgumentException();
+		}
+
+		value = _getXmlSafeValue(value);
+
+		Preference preference = getPreferences().get(key);
+
+		if (preference == null) {
+			preference = new Preference(key, value);
+
+			_getModifiedPreferences().put(key, preference);
+		}
+
+		if (preference.isReadOnly()) {
+			throw new ReadOnlyException(key);
+		}
+		else {
+			preference.setValues(new String[] {value});
+		}
+	}
+
+	public void setValues(String key, String[] values)
+		throws ReadOnlyException {
+
+		if (key == null) {
+			throw new IllegalArgumentException();
+		}
+
+		values = _getXmlSafeValues(values);
+
+		Preference preference = getPreferences().get(key);
+
+		if (preference == null) {
+			preference = new Preference(key, values);
+
+			_getModifiedPreferences().put(key, preference);
+		}
+
+		if (preference.isReadOnly()) {
+			throw new ReadOnlyException(key);
+		}
+		else {
+			preference.setValues(values);
 		}
 	}
 
@@ -251,34 +279,6 @@ public class PortletPreferencesImpl
 		}
 		catch (SystemException se) {
 			throw new IOException(se.getMessage());
-		}
-	}
-
-	public Object clone() {
-
-		return new PortletPreferencesImpl(
-			_companyId, _ownerId, _ownerType, _plid, _portletId,
-			_originalPreferences);
-	}
-
-	public boolean equals(Object obj) {
-		PortletPreferencesImpl portletPreferences = (PortletPreferencesImpl)obj;
-
-		if (this == portletPreferences) {
-			return true;
-		}
-
-		if ((getCompanyId() == portletPreferences.getCompanyId()) &&
-			(getOwnerId() == portletPreferences.getOwnerId()) &&
-			(getOwnerType() == portletPreferences.getOwnerType()) &&
-			(getPlid() == portletPreferences.getPlid()) &&
-			(getPortletId().equals(portletPreferences.getPortletId())) &&
-			(getMap().equals(portletPreferences.getMap()))) {
-
-			return true;
-		}
-		else {
-			return false;
 		}
 	}
 
@@ -340,12 +340,13 @@ public class PortletPreferencesImpl
 		return actualValues;
 	}
 
-	private Map<String, Preference> _getOrCreateModifiedPreferences() {
+	private Map<String, Preference> _getModifiedPreferences() {
 		if (_modifiedPreferences == null) {
 			_modifiedPreferences = new HashMap<String, Preference>();
 
 			for (Map.Entry<String, Preference> entry :
-				_originalPreferences.entrySet()) {
+					_originalPreferences.entrySet()) {
+
 				String key = entry.getKey();
 				Preference preference = entry.getValue();
 
@@ -391,12 +392,12 @@ public class PortletPreferencesImpl
 		LogFactoryUtil.getLog(PortletPreferencesImpl.class);
 
 	private long _companyId;
+	private PortletPreferences _defaultPreferences;
+	private Map<String, Preference> _modifiedPreferences;
+	private Map<String, Preference> _originalPreferences;
 	private long _ownerId;
 	private int _ownerType;
 	private long _plid;
 	private String _portletId;
-	private Map<String, Preference> _originalPreferences;
-	private Map<String, Preference> _modifiedPreferences;
-	private PortletPreferences _defaultPreferences;
 
 }
