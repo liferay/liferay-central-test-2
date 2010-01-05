@@ -1,0 +1,74 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+.taglib-diff-html div.diff-removed-image {
+	background: #fdc6c6 url(<%= themeImagesPath %>/diff/minus.png);
+}
+
+.taglib-diff-html div.diff-added-image {
+	background: #cfc url(<%= themeImagesPath %>/diff/plus.png) no-repeat;
+}
+
+.taglib-diff-html div.diff-removed-image, div.diff-added-image {
+	height: 300px;
+	margin: 2px;
+	opacity: 0.55;
+	position: absolute;
+	width: 200px;
+}
+
+.gecko .taglib-diff-html div.diff-removed-image, .gecko div.diff-added-image {
+	-moz-opacity: 0.55;
+}
+
+.ie .taglib-diff-html div.diff-removed-image, .ie div.diff-added-image {
+	filter: alpha(opacity=55);
+}
+
+.taglib-diff-html span.diff-html-added img {
+	border: 2px solid #cfc;
+}
+
+.taglib-diff-html span.diff-html-added {
+	background-color: #cfc;
+	font-size: 1em;
+}
+
+.taglib-diff-html span.diff-html-changed img {
+	border: 2px dotted #009;
+}
+
+.taglib-diff-html span.diff-html-changed {
+	background: url(<%= themeImagesPath %>/diff/underline.png) bottom repeat-x;
+}
+
+.taglib-diff-html span.diff-html-removed img {
+	border: 2px solid #fdc6c6;
+}
+
+.taglib-diff-html span.diff-html-removed {
+	background-color: #fdc6c6;
+	font-size: 1em;
+	text-decoration: line-through;
+}
