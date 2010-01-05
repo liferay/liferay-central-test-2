@@ -1683,22 +1683,5 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	height: 1%;
 }
 
-/* ----------- OpenID ---------- */
-
-.openid-login input[type="text"] {
-	background: url(<%= themeImagesPath %>/common/openid.gif) no-repeat;
-	background-color: #fff;
-	background-position: 0 50%;
-	color: #000;
-	padding-left: 18px;
-}
-
-.ie6 .openid-login input.text {
-	background: url(<%= themeImagesPath %>/common/openid.gif) no-repeat;
-	background-color: #fff;
-	background-position: 0 50%;
-	color: #000;
-	padding-left: 18px;
-}
-
+<%@ include file="/html/portal/css/portal/openid.jspf" %>
 <%@ include file="/html/portal/css/portal/accessibility.jspf" %>

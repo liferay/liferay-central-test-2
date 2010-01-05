@@ -22,29 +22,18 @@
  */
 %>
 
-img.label-icon {
-	border: 0px;
-	float: left;
+.openid-login input[type="text"] {
+	background: url(<%= themeImagesPath %>/common/openid.gif) no-repeat;
+	background-color: #fff;
+	background-position: 0 50%;
+	color: #000;
+	padding-left: 18px;
 }
 
-img.icon {
-	border: 0px;
-	float: absmiddle;
-}
-
-img.avatar {
-	border: 0px;
-}
-
-label.hidden-label {
-	float: left;
-	font-size: 0;
-}
-
-td.stretch {
-	width: 99%;
-}
-
-.nobr {
-	white-space: nowrap;
+.ie6 .openid-login input.text {
+	background: url(<%= themeImagesPath %>/common/openid.gif) no-repeat;
+	background-color: #fff;
+	background-position: 0 50%;
+	color: #000;
+	padding-left: 18px;
 }
