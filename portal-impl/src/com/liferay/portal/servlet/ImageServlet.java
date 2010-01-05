@@ -241,6 +241,32 @@ public class ImageServlet extends HttpServlet {
 		return image;
 	}
 
+	protected byte[] getImageBytes(HttpServletRequest request, Image image) {
+		int height = ParamUtil.getInteger(request, "height", image.getHeight());
+		int width = ParamUtil.getInteger(request, "width", image.getWidth());
+
+		if ((height > image.getHeight()) && (width > image.getWidth())) {
+			return image.getTextObj();
+		}
+
+		try {
+			ImageBag imageBag = ImageProcessorUtil.read(image.getTextObj());
+
+			RenderedImage renderedImage = ImageProcessorUtil.scale(
+				imageBag.getRenderedImage(), height, width);
+
+			return ImageProcessorUtil.getBytes(
+				renderedImage, imageBag.getType());
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error scaling image " + image.getImageId(), e);
+			}
+		}
+
+		return image.getTextObj();
+	}
+
 	protected long getImageId(HttpServletRequest request) {
 
 		// The image id may be passed in as image_id, img_id, or i_id
@@ -299,33 +325,6 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
-	protected byte[] getImageBytes(HttpServletRequest request, Image image) {
-		int height = ParamUtil.getInteger(request, "height", image.getHeight());
-		int width = ParamUtil.getInteger(request, "width", image.getWidth());
-
-		if ((height < image.getHeight()) || (width < image.getWidth())) {
-			try {
-				ImageBag imageBag = ImageProcessorUtil.read(image.getTextObj());
-
-				RenderedImage renderedImage = imageBag.getRenderedImage();
-
-				renderedImage = ImageProcessorUtil.scale(
-					renderedImage, height, width);
-
-				return ImageProcessorUtil.getBytes(
-					renderedImage, imageBag.getType());
-			}
-			catch (IOException ioe) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Error scaling Image: " + image.getImageId(), ioe);
-				}
-			}
-		}
-
-		return image.getTextObj();
-	}
-
 	protected void writeImage(
 			HttpServletRequest request, HttpServletResponse response)
 		throws PortalException, SystemException {
@@ -347,12 +346,14 @@ public class ImageServlet extends HttpServlet {
 			String fileName = ParamUtil.getString(request, "fileName");
 
 			try {
+				byte[] bytes = getImageBytes(request, image);
+
 				if (Validator.isNotNull(fileName)) {
 					ServletResponseUtil.sendFile(
-						response, fileName, getImageBytes(request, image), contentType);
+						response, fileName, bytes, contentType);
 				}
 				else {
-					ServletResponseUtil.write(response, getImageBytes(request, image));
+					ServletResponseUtil.write(response, bytes);
 				}
 			}
 			catch (Exception e) {
