@@ -43,6 +43,7 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 						<c:choose>
 							<c:when test="<%= Validator.isNull(onSubmit) %>">
 								submitForm(document.<%= name %>);
+
 								return false;
 							</c:when>
 							<c:otherwise>
