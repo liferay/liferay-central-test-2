@@ -77,24 +77,20 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 	</style>
 
 	<script type="text/javascript">
-		// <![CDATA[
-			var themeDisplay = {
-				getPathContext: function() {
-					return "<%= PortalUtil.getPathContext() %>";
-				},
-				getPathMain: function() {
-					return "<%= PortalUtil.getPathMain() %>";
-				}
+		var win = window;
+		var Liferay = win.Liferay;
+		var themeDisplay = win.themeDisplay;
+
+		while (!Liferay) {
+			if (!win.opener && win.parent == win) {
+				break;
 			}
-		// ]]>
-	</script>
 
-	<script type="text/javascript" src="../jquery/jquery.js"></script>
-	<script type="text/javascript" src="../jquery/j2browse.js"></script>
-	<script type="text/javascript" src="../liferay/liferay.js"></script>
-	<script type="text/javascript" src="../liferay/util.js"></script>
+			win = win.opener || win.parent;
 
-	<script type="text/javascript">
+			Liferay = win.Liferay;
+			themeDisplay = win.themeDisplay;
+		}
 
 		// Public description
 
@@ -500,7 +496,11 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 			%>
 
 				if (getHTML().replace(/\s/g,"") != originalText.replace(/\s/g,"")) {
-					parent.<%= HtmlUtil.escape(onChangeMethod) %>(getText());
+					try {
+						parent.<%= HtmlUtil.escape(onChangeMethod) %>(getText());
+					}
+					catch (e) {
+					}
 				}
 
 			<%
