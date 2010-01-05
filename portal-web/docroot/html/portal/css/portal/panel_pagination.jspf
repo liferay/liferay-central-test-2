@@ -1,0 +1,69 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+.lfr-panel-content .aui-paginator-container .aui-paginator-page-container,
+.lfr-panel-content .aui-paginator-container .lfr-paginator-next,
+.lfr-panel-content .aui-paginator-container .lfr-paginator-prev {
+	display: inline-block;
+}
+
+.lfr-panel-content .aui-paginator-container .lfr-paginator-next,
+.lfr-panel-content .aui-paginator-container .lfr-paginator-prev {
+	padding: 8px;
+}
+
+.lfr-panel-content .aui-paginator-container {
+	background: #cfd2d5;
+	border-bottom: 1px solid #dcdee0;
+	border-top: 1px solid #dcdee0;
+	text-align: center;
+}
+
+.lfr-panel-content .aui-paginator-page-container .aui-paginator-page-link {
+	background: none;
+	border: 1px solid #CFD2D5;
+	display: inline-block;
+	float: none;
+	padding: 5px 10px;
+	text-align: center;
+	width: auto;
+}
+
+.lfr-panel-content .aui-paginator-page-container .aui-paginator-page-link.aui-paginator-current-page:hover {
+	background: #5094d7 url(<%= themeImagesPath %>/application/current_page_bg.png) repeat-x 0 0;
+	border-color: #31659c #396ea8 #4c8ccb;
+	color: #fff;
+	font-weight: bold;
+}
+
+.lfr-panel-content .aui-paginator-page-container .aui-paginator-page-link.aui-paginator-current-page {
+	background: #99a7b3 url(<%= themeImagesPath %>/application/current_page_hover_bg.png) repeat-x 0 0;
+	border-color: #6b7785 #7c8994 #919fa9;
+	color: #fff;
+	font-weight: bold;
+}
+
+.lfr-panel-content .aui-paginator-container {
+	overflow: hidden;
+}

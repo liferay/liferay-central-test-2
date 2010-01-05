@@ -1,0 +1,142 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+.lfr-panel.lfr-extended, .lfr-panel-container, .lfr-floating-container {
+	border: 1px solid;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
+}
+
+.lfr-panel-container, .lfr-floating-container {
+	background: #fff;
+	clear: both;
+}
+
+.lfr-floating-container {
+	position: relative;
+}
+
+.lfr-panel-container .lfr-panel {
+	border: none;
+}
+
+.lfr-panel .lfr-panel-titlebar {
+	margin-bottom: 0.5em;
+	overflow: hidden;
+}
+
+.lfr-panel.lfr-collapsible .lfr-panel-titlebar {
+	background: url(<%= themeImagesPath %>/arrows/05_down.png) no-repeat 2px 50%;
+	cursor: pointer;
+	padding-left: 15px;
+}
+
+.lfr-panel-titlebar .lfr-panel-title {
+	float: left;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 0;
+}
+
+.lfr-panel-titlebar .lfr-panel-button {
+	background: url(<%= themeImagesPath %>/application/panel_header_toggler_close.png) no-repeat 0 0;
+	display: none;
+	float: right;
+	height: 22px;
+	width: 19px;
+}
+
+.lfr-extended.lfr-collapsible .lfr-panel-button {
+	display: block;
+}
+
+.lfr-panel.lfr-collapsed .lfr-panel-titlebar .lfr-panel-button {
+	background-image: url(<%= themeImagesPath %>/application/panel_header_toggler_open.png);
+}
+
+.lfr-panel-titlebar .lfr-panel-button:hover {
+	background-position: 0 100%;
+}
+
+.lfr-panel.lfr-collapsed .lfr-panel-titlebar {
+	background-image: url(<%= themeImagesPath %>/arrows/05_right.png);
+	margin-bottom: 0;
+}
+
+.lfr-panel.lfr-extended .lfr-panel-titlebar {
+	background: #d6d6d6 url(<%= themeImagesPath %>/application/panel_header.png) repeat-x 0 0;
+	border-bottom: 1px solid #cdcdcd;
+	line-height: 1.6;
+	padding: 2px;
+}
+
+.ie6 .lfr-extended.lfr-collapsible .lfr-panel-titlebar {
+	height: 1%;
+}
+
+.lfr-extended.lfr-collapsed .lfr-panel-titlebar {
+	border-bottom: none;
+}
+
+.lfr-panel-container .lfr-extended.lfr-collapsible .lfr-panel-titlebar {
+	border-top: 1px solid #cecece;
+}
+
+.lfr-panel.lfr-collapsed .lfr-panel-content {
+	display: none;
+}
+
+.js .lfr-floating-container {
+	position: absolute;
+}
+
+.js .lfr-floating-trigger {
+	background-image: url(<%= themeImagesPath %>/arrows/05_down.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	padding: 3px;
+	padding-right: 15px;
+	text-decoration: none;
+}
+
+.js .lfr-trigger-selected {
+	background-color: #069;
+	color: #fff;
+}
+
+.lfr-floating-container .col {
+	float: left;
+	margin-right: 10px;
+	width: auto;
+}
+
+.lfr-floating-container .lfr-form-row {
+	border: none;
+}
+
+.lfr-panel .lfr-panel-content .undo-queue {
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	margin: -0.5em 0 10px;
+}
