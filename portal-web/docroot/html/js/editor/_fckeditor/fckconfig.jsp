@@ -114,6 +114,8 @@ var _TOKEN_PAGE_BREAK = '<%= _TOKEN_PAGE_BREAK %>';
 
 FCKConfig.Plugins.Add('liferaypagebreak', null, sOtherPluginPath ) ;
 
+FCKConfig.ProtectedSource.Add(/<[\/]{0,1}(article|aside|audio|canvas|command|datalist|details|dialog|embed|figure|footer|header|hgroup|keygen|mark|meter|nav|output|progress|rp|rt|ruby|script|section|time|video).*?>/gi);
+
 <%!
 private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
 %>
