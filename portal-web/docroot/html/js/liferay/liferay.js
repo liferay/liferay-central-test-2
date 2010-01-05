@@ -1,28 +1,16 @@
-jQuery.noConflict();
-
 Liferay = Liferay || {};
 
 Liferay.namespace = AUI().namespace;
 
-if (!Liferay._ajaxOld) {
-	Liferay._ajaxOld = jQuery.ajax;
-}
-
-if (Liferay._ajaxOld) {
-	jQuery.ajax = function(options) {
-		if (Liferay.Util) {
-			options.url = Liferay.Util.getURLWithSessionId(options.url);
-		}
-
-		return Liferay._ajaxOld(options);
-	};
-}
-
-jQuery.ajaxSetup(
+AUI().mix(
+	AUI.defaults.io,
 	{
-		data: {},
-		type: 'POST'
-	}
+		method: 'POST',
+		uriFormatter: function(value) {
+			return Liferay.Util.getURLWithSessionId(value);
+		}
+	},
+	true
 );
 
 Liferay.Service = {
@@ -35,10 +23,10 @@ Liferay.Service = {
 	ajax: function(options, callback) {
 		var instance = this;
 
-		var type = "POST";
+		var type = 'POST';
 
 		if (Liferay.PropsValues.NTLM_AUTH_ENABLED && Liferay.Browser.isIe()) {
-			type = "GET";
+			type = 'GET';
 		}
 
 		var serviceUrl = instance.actionUrl;
@@ -52,38 +40,48 @@ Liferay.Service = {
 		options.serviceParameters = Liferay.Service.getParameters(options);
 		options.doAsUserId = themeDisplay.getDoAsUserIdEncoded();
 
+		var config = {
+			cache: false,
+			data: options,
+			dataType: 'json',
+			on: {}
+		};
+
+		var xHR = null;
+
+		if (Liferay.PropsValues.NTLM_AUTH_ENABLED && Liferay.Browser.isIe()) {
+			config.method = 'GET';
+		}
+
 		if (callback) {
-			jQuery.ajax(
-				{
-					type: type,
-					url: serviceUrl,
-					data: options,
-					cache: false,
-					dataType: 'json',
-					beforeSend: function(xHR) {
-						if (tunnelEnabled) {
-							xHR.setRequestHeader('Authorization', Liferay.ServiceAuth.header);
-						}
-					},
-					success: callback
-				}
-			);
+			config.on.success = function(event, id, obj) {
+				callback.call(this, this.get('responseData'), obj);
+			};
+
+			if (tunnelEnabled) {
+				config.headers = {
+					Authorization: Liferay.ServiceAuth.header
+				};
+			}
 		}
 		else {
-			var xHR = jQuery.ajax(
-				{
-					url: serviceUrl,
-					data: options,
-					dataType: 'json',
-					async: false
-				}
-			);
+			config.on.success = function(event, id, obj) {
+				xHR = obj;
+			};
 
+			config.sync = true;
+		}
+
+		AUI().io.request(serviceUrl, config);
+
+		if (xHR) {
 			return eval('(' + xHR.responseText + ')');
 		}
 	},
 
 	getParameters: function(options) {
+		var instance = this;
+
 		var serviceParameters = [];
 
 		for (var key in options) {
@@ -92,16 +90,16 @@ Liferay.Service = {
 			}
 		}
 
-		return jQuery.toJSON(serviceParameters);
+		return instance._getJSONParser().stringify(serviceParameters);
 	},
 
 	namespace: function(namespace) {
 		var curLevel = Liferay || {};
 
 		if (typeof namespace == 'string') {
-			var levels = namespace.split(".");
+			var levels = namespace.split('.');
 
-			for (var i = (levels[0] == "Liferay") ? 1 : 0; i < levels.length; i++) {
+			for (var i = (levels[0] == 'Liferay') ? 1 : 0; i < levels.length; i++) {
 		 		curLevel[levels[i]] = curLevel[levels[i]] || {};
 				curLevel = curLevel[levels[i]];
 			}
@@ -122,30 +120,46 @@ Liferay.Service = {
 	},
 
 	registerClass: function(serviceName, className, prototype) {
-		var module = Liferay.Service.namespace(serviceName);
+		var module = serviceName || {};
 		var moduleClassName = module[className] = {};
 
 		moduleClassName.serviceClassName = module.servicePackage + className + Liferay.Service.classNameSuffix;
 
-		jQuery.each(
+		var Lang = AUI().Lang;
+
+		AUI().Object.each(
 			prototype,
-			function(methodName, value) {
-				if (value) {
-					var handler = function(params, callback) {
+			function(item, index, collection) {
+				var handler = item;
+
+				if (!Lang.isFunction(handler)) {
+					handler = function(params, callback) {
 						params.serviceClassName = moduleClassName.serviceClassName;
-						params.serviceMethodName = methodName;
+						params.serviceMethodName = index;
 
 						return Liferay.Service.ajax(params, callback);
 					};
-
-					if (jQuery.isFunction(value)) {
-						handler = value;
-					}
-
-					moduleClassName[methodName] = handler;
 				}
+
+				moduleClassName[index] = handler;
 			}
 		);
+	},
+
+	_getJSONParser: function() {
+		var instance = this;
+
+		if (!instance._JSONParser) {
+			var A = AUI();
+
+			if (!A.JSON) {
+				A = AUI({}).use('json');
+			}
+
+			instance._JSONParser = A.JSON;
+		}
+
+		return instance._JSONParser;
 	}
 };
 
