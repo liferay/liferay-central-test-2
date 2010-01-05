@@ -153,7 +153,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 				String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.ASSIGN +"');";
 				%>
 
-				<aui:button name="assignButton" onClick="<%= taglibOnClick %>" type="button" value="assign" />
+				<input name="assignButton" onClick="<%= taglibOnClick %>" type="button" value="<%= LanguageUtil.get(locale, "assign") %>" />
 			</aui:select>
 		</c:if>
 	</c:if>
