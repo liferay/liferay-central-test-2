@@ -1,4 +1,4 @@
-Liferay = Liferay || {};
+Liferay = window.Liferay || {};
 
 Liferay.namespace = AUI().namespace;
 
