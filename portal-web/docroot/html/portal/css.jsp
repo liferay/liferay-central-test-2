@@ -31,39 +31,7 @@
 <%@ include file="/html/portal/alloy/layout.css.jsp" %>
 <%@ include file="/html/portal/aui/css.jspf" %>
 
-/* ---------- Modules ---------- */
-
-/* ---------- Generic module styling ---------- */
-
-.lfr-grid {
-	width: 100%;
-}
-
-.lfr-component, .lfr-component ul, .lfr-component li, .lfr-component dl, .lfr-component dt, .lfr-component dd {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-.lfr-component li img, img.icon {
-	vertical-align: middle;
-}
-
-#layout-grid.dragging .lfr-portlet-column.empty {
-	padding: 20px;
-}
-
-.lfr-js-required {
-	position: absolute;
-	left: -9999em;
-	top: -9999em;
-}
-
-.js .lfr-js-required {
-	left: 0;
-	position: static;
-	top: 0;
-}
+<%@ include file="/html/portal/css/generic_portal.jsp" %>
 
 /* ---------- Add content styles ---------- */
 
@@ -1028,153 +996,13 @@
 	display: block;
 }
 
-/* ---------- Generic styling ---------- */
-
-.popup-alert-notice, .popup-alert-warning {
-	background: #ffc url() no-repeat 5px 50%;
-	border-bottom: 1px solid;
-	font-size: 1.1em;
-	left: 0;
-	padding: 10px;
-	padding-left: 25px;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 10000;
-}
-
-.popup-alert-notice {
-	background-color: #ffc;
-	background-image: url(<%= themeImagesPath %>/messages/alert.png);
-	border-bottom-color: #fc0;
-}
-
-.popup-alert-warning {
-	background-color: #fcc;
-	background-image: url(<%= themeImagesPath %>/messages/error.png);
-	border-bottom-color: #f00;
-	font-weight: bold;
-}
-
-.ie6 .popup-alert-notice, .ie6 .popup-alert-warning {
-	bottom: auto;
-	left: expression( ( LFR_IGNORE_ME2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) + 'px' );
-	position: absolute;
-	right: auto;
-	top: expression( ( LFR_IGNORE_ME = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) + 'px' );
-}
-
-.popup-alert-notice .countdown-timer {
-	font-size: 1.1em;
-	font-weight: bold;
-}
-
-.popup-alert-notice input, .popup-alert-warning input {
-	vertical-align: middle;
-}
-
-#ui-datepicker-div {
-	z-index: 500;
-}
-
 /* ---------- Portlets ---------- */
 
 #lfr-look-and-feel fieldset {
 	border:1px solid #BFBFBF;
 }
 
-/* ---------- Generic styling ---------- */
-
-.breadcrumbs {
-	margin-bottom: 10px;
-	margin-left: 0px;
-}
-
-.lfr-button {
-	background: url() no-repeat 0 50%;
-	padding: 2px 0 2px 20px;
-}
-
-.js .controls-hidden .lfr-meta-actions, .js .controls-hidden .portlet-borderless-bar, .js .controls-hidden .portlet-icons, .js .controls-hidden .lfr-configurator-visibility {
-	display: none;
-}
-
-.js .page-maximized .portlet-icons {
-	display: block;
-}
-
-.configuration-frame {
-	border-width: 0;
-	overflow: auto;
-	width: 800px;
-}
-
-.float-container:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-}
-
-.ie .float-container {
-	height: 1%;
-}
-
-.lfr-meta-actions {
-	padding-top: 1em;
-}
-
-.lfr-table {
-	border-collapse: collapse;
-	clear: both;
-}
-
-.lfr-table tr td, .lfr-table tr th {
-	padding: 0 5px;
-}
-
-.lfr-table tr th {
-	font-weight: bold;
-}
-
-.lfr-table tr td:first-child, .lfr-table tr td.first-child, .lfr-table tr th:first-child, .lfr-table tr th.first-child {
-	padding-left: 0;
-}
-
-.lfr-table tr td:last-child, .lfr-table tr td.last-child, .lfr-table tr th:last-child, .lfr-table tr th.last-child {
-	padding-right: 0;
-}
-
-.lfr-control-links a {
-	margin-right: 1em;
-}
-
-.portlet-toolbar {
-	margin-bottom: 1.5em;
-}
-
-.lfr-checkbox-preselected {
-	opacity: 0.5;
-}
-
-.ie .lfr-checkbox-preselected {
-	filter: alpha(opacity=50);
-	zoom: 1;
-}
-
-.lfr-configurator-visibility {
-	opacity: 0.5;
-}
-
-.ie .lfr-configurator-visibility {
-	filter: alpha(opacity=50);
-	zoom: 1;
-}
-
-.gecko .lfr-input-time, .ie .lfr-input-time {
-	padding-left: 2px;
-}
+<%@ include file="/html/portal/css/generic_portlet.jsp" %>
 
 /* ---------- Liferay forms ---------- */
 
