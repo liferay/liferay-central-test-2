@@ -31,7 +31,7 @@
 <%@ include file="/html/portal/alloy/layout.css.jsp" %>
 <%@ include file="/html/portal/aui/css.jspf" %>
 
-<%@ include file="/html/portal/css/portal/generic_portal.jspf" %>
+<%@ include file="/html/portal/css/generic_portal.jsp" %>
 
 /* ---------- Add content styles ---------- */
 
@@ -1002,7 +1002,7 @@
 	border:1px solid #BFBFBF;
 }
 
-<%@ include file="/html/portal/css/portal/generic_portlet.jspf" %>
+<%@ include file="/html/portal/css/generic_portlet.jsp" %>
 
 /* ---------- Liferay forms ---------- */
 
@@ -1701,4 +1701,31 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	padding-left: 18px;
 }
 
-<%@ include file="/html/portal/css/portal/accessibility.jspf" %>
+/* ----------- Accessibility ---------- */
+
+img.label-icon {
+	border: 0px;
+	float: left;
+}
+
+img.icon {
+	border: 0px;
+	float: absmiddle;
+}
+
+img.avatar {
+	border: 0px;
+}
+
+label.hidden-label {
+	float: left;
+	font-size: 0;
+}
+
+td.stretch {
+	width: 99%;
+}
+
+.nobr {
+	white-space: nowrap;
+}
