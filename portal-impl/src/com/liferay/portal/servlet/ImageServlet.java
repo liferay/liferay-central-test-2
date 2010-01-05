@@ -25,6 +25,8 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.image.ImageBag;
+import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -44,6 +46,8 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
+
+import java.awt.image.RenderedImage;
 
 import java.io.IOException;
 
@@ -295,6 +299,33 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
+	protected byte[] getImageBytes(HttpServletRequest request, Image image) {
+		int height = ParamUtil.getInteger(request, "height", image.getHeight());
+		int width = ParamUtil.getInteger(request, "width", image.getWidth());
+
+		if ((height < image.getHeight()) || (width < image.getWidth())) {
+			try {
+				ImageBag imageBag = ImageProcessorUtil.read(image.getTextObj());
+
+				RenderedImage renderedImage = imageBag.getRenderedImage();
+
+				renderedImage = ImageProcessorUtil.scale(
+					renderedImage, height, width);
+
+				return ImageProcessorUtil.getBytes(
+					renderedImage, imageBag.getType());
+			}
+			catch (IOException ioe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Error scaling Image: " + image.getImageId(), ioe);
+				}
+			}
+		}
+
+		return image.getTextObj();
+	}
+
 	protected void writeImage(
 			HttpServletRequest request, HttpServletResponse response)
 		throws PortalException, SystemException {
@@ -318,10 +349,10 @@ public class ImageServlet extends HttpServlet {
 			try {
 				if (Validator.isNotNull(fileName)) {
 					ServletResponseUtil.sendFile(
-						response, fileName, image.getTextObj(), contentType);
+						response, fileName, getImageBytes(request, image), contentType);
 				}
 				else {
-					ServletResponseUtil.write(response, image.getTextObj());
+					ServletResponseUtil.write(response, getImageBytes(request, image));
 				}
 			}
 			catch (Exception e) {
