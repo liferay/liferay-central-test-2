@@ -1354,75 +1354,9 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	width: 200px;
 }
 
-/* ---------- Taglib input move boxes ---------- */
-
-.taglib-move-boxes {
-}
-
-.taglib-move-boxes .choice-selector {
-	min-width: 150px;
-}
-
-.ie .taglib-move-boxes .choice-selector {
-	width: expression(this.currentStyle.getAttribute('minWidth') || 150 + 'px');
-}
-
-.taglib-move-boxes .category-header {
-	background: #ebf1f9;
-	border-bottom: 1px solid #8db2f3;
-	display: block;
-	margin-bottom: 5px;
-	padding: 5px;
-}
-
-/* ---------- Taglib input repeat ---------- */
-
-.taglib-input-repeat .end-date-field {
-	clear: both;
-	padding-left: 1em;
-}
-
-.taglib-input-repeat .weekdays {
-	clear: both;
-	padding-top: 1em;
-}
-
-/* ---------- Taglib ratings ---------- */
-
-.taglib-ratings.stars {
-	overflow: hidden;
-	padding-top: 10px;
-}
-
-.taglib-ratings.stars .liferay-rating-score {
-	padding-left: 15px;
-}
-
-.taglib-ratings .aui-rating-content {
-	display: block;
-}
-
-.taglib-ratings.stars .liferay-rating-vote, .taglib-ratings.stars .liferay-rating-score {
-	float: left;
-}
-
-.taglib-ratings.score {
-	white-space: nowrap;
-}
-
-.taglib-ratings.thumbs .aui-thumbrating {
-	height: 20px;
-}
-
-.taglib-ratings.thumbs .aui-thumbrating .aui-rating-label-element {
-	padding: 0 5px;
-}
-
-.taglib-ratings.thumbs {
-	float: left;
-	margin: 0;
-}
-
+<%@ include file="/html/portal/css/taglib/input_move_boxes.jspf" %>
+<%@ include file="/html/portal/css/taglib/input_repeat.jspf" %>
+<%@ include file="/html/portal/css/taglib/ratings.jspf" %>
 <%@ include file="/html/portal/css/taglib/search_iterator.jspf" %>
 <%@ include file="/html/portal/css/taglib/search_toggle.jspf" %>
 <%@ include file="/html/portal/css/taglib/social_activities.jspf" %>
