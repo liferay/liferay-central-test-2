@@ -35,11 +35,11 @@
 </div>
 
 <script type="text/javascript">
+	var <%= id %>curClickValue = "<%= clickValue %>";
+
 	AUI().ready(
 		'io-request',
 		function (A) {
-			var <%= id %>curClickValue = "<%= clickValue %>";
-
 			var basicForm = A.one("#<%= id %>basic");
 			var advancedForm = A.one("#<%= id %>advanced");
 
