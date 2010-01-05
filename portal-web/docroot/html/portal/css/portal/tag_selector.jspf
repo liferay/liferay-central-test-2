@@ -1,0 +1,96 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+.lfr-tags-selector-content {
+	border: solid #999;
+	border-width: 1px 0;
+	padding: 10px 5px 5px;
+	width: 100%;
+}
+
+.lfr-tag-selector-input {
+	width: 300px;
+}
+
+.lfr-tag-selector-popup {
+	width: 250px;
+}
+
+.lfr-tags-selector-list {
+	border: solid #ccc;
+	border-width: 0 1px 1px;
+	height: 265px;
+	margin-bottom: 0.5em;
+	overflow: auto;
+}
+
+.lfr-tag-selector-popup fieldset {
+	border-width: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.lfr-tag-selector-popup label {
+	border-bottom: 1px solid #ccc;
+	cursor: pointer;
+	display: block;
+	padding: 2px;
+}
+
+.lfr-tag-selector-popup ul {
+	margin: 0;
+}
+
+.lfr-tag-selector-popup li li {
+	list-style: none;
+	margin-left: 1em;
+}
+
+.lfr-tag-selector-popup label input {
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.lfr-tag-selector-popup .lfr-tag-message {
+	display: none;
+}
+
+.lfr-tag-selector-popup .aui-textfield-content {
+	background-color: #D3DADD;
+	border-bottom: 1px solid #AEB8BC;
+	padding: 5px;
+}
+
+.lfr-tag-selector-popup .aui-field-input-text {
+	width: 99%;
+}
+
+.lfr-tag-selector-popup .no-matches {
+	color: #999;
+	padding: 3px;
+}
+
+.lfr-tag-selector-popup .no-matches .lfr-tag-message {
+	display: block;
+}

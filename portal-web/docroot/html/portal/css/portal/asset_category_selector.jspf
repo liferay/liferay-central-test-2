@@ -1,0 +1,109 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+.lfr-asset-category-container {
+	height: 260px;
+	margin-bottom: 0.5em;
+	overflow: auto;
+}
+
+.lfr-asset-category-container fieldset {
+	margin: 5px;
+}
+
+.lfr-asset-category-container legend {
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+.lfr-asset-category-container label {
+	display: block;
+}
+
+.lfr-asset-category-container label input {
+	vertical-align: middle;
+}
+
+.lfr-asset-category-container .lfr-asset-category-message {
+	display: none;
+}
+
+.lfr-asset-category-search-container {
+	background-color: #D3DADD;
+	border-bottom: 1px solid #AEB8BC;
+	margin: 3px 0;
+	padding: 5px;
+}
+
+.lfr-asset-category-search-input {
+	width: 250px;
+}
+
+.lfr-asset-category-container .no-matches {
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	color: #999;
+	margin-bottom: 0;
+	margin-left: 5px;
+	margin-top: 0;
+	padding: 0;
+}
+
+.lfr-asset-vocabulary-container.no-matches legend {
+	padding-left: 0;
+}
+
+
+.lfr-asset-vocabulary-container .lfr-asset-category-message, .lfr-asset-vocabulary-container.no-matches .lfr-asset-category-list {
+	display: none;
+}
+
+.lfr-asset-vocabulary-container.no-matches .lfr-asset-category-message {
+	display: block;
+}
+
+.lfr-asset-category-list-container {
+	cursor: pointer;
+}
+
+.lfr-asset-category-list ul {
+	list-style: none;
+	margin-top: 4px;
+	padding: 0;
+}
+
+.lfr-asset-category-list li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0 0 3px 16px;
+}
+
+.lfr-asset-category-list a.selected {
+	background-color: #EEE;
+}
+
+.lfr-asset-category-list span {
+	padding-left: 3px;
+}

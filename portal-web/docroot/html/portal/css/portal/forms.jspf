@@ -1,0 +1,56 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+.aui-form-button.aui-input-disabled input, .aui-form-button.aui-input-disabled button {
+	background: #F5F5F5 url(../images/forms/button.png) repeat-x 0 0;
+	color: #ccc;
+}
+
+.aui-form-button.aui-input-disabled input:hover, .aui-form-button.aui-input-disabled button:hover {
+	background: #F5F5F5 url(../images/forms/button.png) repeat-x 0 0;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
+	color: #ccc;
+	cursor: auto;
+}
+
+.lfr-input-text, .aui-form .aui-block-labels .aui-ctrl-holder.lfr-input-text-container input {
+	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;
+}
+
+.lfr-input-text.flexible, .lfr-input-text-container.flexible input {
+	width: auto;
+}
+
+.lfr-textarea, .aui-form .aui-block-labels .aui-ctrl-holder.lfr-textarea-container textarea {
+	height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px;
+	width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;
+}
+
+fieldset, .aui-form fieldset {
+	margin-bottom: 2em;
+}
+
+fieldset:last-child, .aui-form fieldset:last-child {
+	margin-bottom: 0;
+}
