@@ -1039,129 +1039,8 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	margin-bottom: 0;
 }
 
-/* ---------- Separator ---------- */
-
-.separator {
-	margin: 15px auto;
-}
-
-/* ---------- Taglib action bar ---------- */
-
-.lfr-actions {
-	float: right;
-	text-align: left;
-}
-
-.lfr-actions.left {
-	float: left;
-}
-
-.lfr-actions ul {
-	display: none;
-	bottom: 0%;
-	position: absolute;
-	right: 100%;
-	z-index: 99999;
-}
-
-.lfr-actions.visible ul {
-	display: block;
-}
-
-.lfr-actions.left ul {
-	right: auto;
-	left: 100%;
-}
-
-.lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
-	background: url(<%= themeImagesPath %>/common/button_bg.png) no-repeat;
-	font-weight: normal;
-}
-
-.lfr-actions .lfr-trigger {
-	background-position: 100% -42px;
-	cursor: pointer;
-	padding-right: 3px;
-}
-
-.ie6 .lfr-actions {
-	height: 15px;
-}
-
-.lfr-actions .lfr-trigger strong {
-	display: block;
-	min-width: 70px;
-	padding: 2px 0 3px;
-	text-align: center;
-}
-
-.ie6 .lfr-actions .lfr-trigger strong {
-	display: inline-block;
-}
-
-.lfr-actions.visible .lfr-trigger {
-	background-position: 100% 100%;
-}
-
-.lfr-actions.visible .lfr-trigger strong {
-	background-position: 0 -21px;
-}
-
-.lfr-actions .lfr-trigger strong span {
-	background: url(<%= themeImagesPath %>/common/action.png) no-repeat 5px 50%;
-	padding: 2px 10px 2px 35px;
-}
-
-.lfr-actions.left .lfr-trigger strong span {
-	background-image: url(<%= themeImagesPath %>/common/action_right.png);
-	background-position: 98% 50%;
-	padding: 2px 35px 2px 10px;
-}
-
-.lfr-menu-list ul {
-	background: #fff url(<%= themeImagesPath %>/forms/button.png) repeat-x 0 100%;
-	border: 1px solid;
-	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
-}
-
-.lfr-menu-list li {
-	background: transparent;
-	border-bottom: 1px solid #DEDEDE;
-	padding: 2px;
-}
-
-.lfr-menu-list li nobr {
-	display: block;
-}
-
-.lfr-menu-list li a {
-	padding: 5px 10px 5px 0;
-	display: block;
-	font-weight: normal;
-	text-decoration: none;
-}
-
-.lfr-menu-list li a:hover {
-	background-color: #828F95;
-	color: #fff;
-}
-
-.lfr-menu-list li a img {
-	padding: 0 3px;
-}
-
-.lfr-menu-list li.last {
-	border-bottom: none;
-}
-
-/* ---------- Taglib asset categories summary ---------- */
-
-.taglib-asset-categories-summary .asset-category {
-	margin-bottom: 3px;
-	margin-right: 3px;
-	padding-right: 5px;
-}
-
+<%@ include file="/html/portal/css/portal/separator.jspf" %>
+<%@ include file="/html/portal/css/taglib/asset_categories_summary.jspf" %>
 <%@ include file="/html/portal/css/taglib/calendar.jspf" %>
 <%@ include file="/html/portal/css/taglib/captcha.jspf" %>
 <%@ include file="/html/portal/css/taglib/diff.jspf" %>
@@ -1169,6 +1048,7 @@ fieldset:last-child, .aui-form fieldset:last-child {
 <%@ include file="/html/portal/css/taglib/discussion.jspf" %>
 <%@ include file="/html/portal/css/taglib/flags.jspf" %>
 <%@ include file="/html/portal/css/taglib/icon_list.jspf" %>
+<%@ include file="/html/portal/css/taglib/icon_menu.jspf" %>
 <%@ include file="/html/portal/css/taglib/input_localized.jspf" %>
 <%@ include file="/html/portal/css/taglib/input_move_boxes.jspf" %>
 <%@ include file="/html/portal/css/taglib/input_repeat.jspf" %>

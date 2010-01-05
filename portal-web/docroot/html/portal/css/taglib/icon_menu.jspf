@@ -1,0 +1,130 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+.lfr-actions {
+	float: right;
+	text-align: left;
+}
+
+.lfr-actions.left {
+	float: left;
+}
+
+.lfr-actions ul {
+	display: none;
+	bottom: 0%;
+	position: absolute;
+	right: 100%;
+	z-index: 99999;
+}
+
+.lfr-actions.visible ul {
+	display: block;
+}
+
+.lfr-actions.left ul {
+	right: auto;
+	left: 100%;
+}
+
+.lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
+	background: url(<%= themeImagesPath %>/common/button_bg.png) no-repeat;
+	font-weight: normal;
+}
+
+.lfr-actions .lfr-trigger {
+	background-position: 100% -42px;
+	cursor: pointer;
+	padding-right: 3px;
+}
+
+.ie6 .lfr-actions {
+	height: 15px;
+}
+
+.lfr-actions .lfr-trigger strong {
+	display: block;
+	min-width: 70px;
+	padding: 2px 0 3px;
+	text-align: center;
+}
+
+.ie6 .lfr-actions .lfr-trigger strong {
+	display: inline-block;
+}
+
+.lfr-actions.visible .lfr-trigger {
+	background-position: 100% 100%;
+}
+
+.lfr-actions.visible .lfr-trigger strong {
+	background-position: 0 -21px;
+}
+
+.lfr-actions .lfr-trigger strong span {
+	background: url(<%= themeImagesPath %>/common/action.png) no-repeat 5px 50%;
+	padding: 2px 10px 2px 35px;
+}
+
+.lfr-actions.left .lfr-trigger strong span {
+	background-image: url(<%= themeImagesPath %>/common/action_right.png);
+	background-position: 98% 50%;
+	padding: 2px 35px 2px 10px;
+}
+
+.lfr-menu-list ul {
+	background: #fff url(<%= themeImagesPath %>/forms/button.png) repeat-x 0 100%;
+	border: 1px solid;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
+}
+
+.lfr-menu-list li {
+	background: transparent;
+	border-bottom: 1px solid #DEDEDE;
+	padding: 2px;
+}
+
+.lfr-menu-list li nobr {
+	display: block;
+}
+
+.lfr-menu-list li a {
+	padding: 5px 10px 5px 0;
+	display: block;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.lfr-menu-list li a:hover {
+	background-color: #828F95;
+	color: #fff;
+}
+
+.lfr-menu-list li a img {
+	padding: 0 3px;
+}
+
+.lfr-menu-list li.last {
+	border-bottom: none;
+}
