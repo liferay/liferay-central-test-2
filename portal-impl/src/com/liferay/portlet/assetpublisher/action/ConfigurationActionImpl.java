@@ -100,6 +100,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 					actionRequest,
 					portletConfig.getPortletName() + ".doConfigure");
 			}
+
+			actionResponse.sendRedirect(
+				ParamUtil.getString(actionRequest, "redirect"));
 		}
 		catch (Exception e) {
 			if (e instanceof AssetTagException) {
