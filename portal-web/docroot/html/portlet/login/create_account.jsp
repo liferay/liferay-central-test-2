@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/login/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 String openId = ParamUtil.getString(request, "openId");
 
 User user2 = null;
@@ -48,6 +50,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 <aui:form action="<%= createAccoutURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="openId" type="hidden" value="<%= openId %>" />
 
 	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />

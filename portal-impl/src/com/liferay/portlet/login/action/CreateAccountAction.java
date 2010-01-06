@@ -69,6 +69,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
@@ -260,12 +261,24 @@ public class CreateAccountAction extends PortletAction {
 			login = user.getEmailAddress();
 		}
 
-		PortletURL loginURL = LoginUtil.getLoginURL(
-			request, themeDisplay.getPlid());
+		String redirect = PortalUtil.escapeRedirect(
+			ParamUtil.getString(actionRequest, "redirect"));
 
-		loginURL.setParameter("login", login);
+		if (Validator.isNotNull(redirect)) {
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
-		String redirect = loginURL.toString();
+			LoginUtil.login(
+				request, response, login, password1, false, null);
+		}
+		else {
+			PortletURL loginURL = LoginUtil.getLoginURL(
+				request, themeDisplay.getPlid());
+
+			loginURL.setParameter("login", login);
+
+			redirect = loginURL.toString();
+		}
 
 		actionResponse.sendRedirect(redirect);
 	}
