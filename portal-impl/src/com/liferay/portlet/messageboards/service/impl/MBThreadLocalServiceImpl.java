@@ -38,6 +38,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.SplitThreadException;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
@@ -302,6 +303,35 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				}
 			}
 		}
+	}
+
+	public List<MBThread> getPriorityThreads(long categoryId, double priority)
+		throws PortalException, SystemException {
+
+		return getPriorityThreads(categoryId, priority, false);
+	}
+
+	public List<MBThread> getPriorityThreads(
+			long categoryId, double priority, boolean inherit)
+		throws PortalException, SystemException {
+
+		if (!inherit) {
+			return mbThreadPersistence.findByC_P(categoryId, priority);
+		}
+
+		List<MBThread> threads = new ArrayList<MBThread>();
+
+		while (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			threads.addAll(
+				0, mbThreadPersistence.findByC_P(categoryId, priority));
+
+			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+				categoryId);
+
+			categoryId = category.getParentCategoryId();
+		}
+
+		return threads;
 	}
 
 	public MBThread getThread(long threadId)

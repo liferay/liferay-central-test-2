@@ -191,6 +191,20 @@ public class MBThreadLocalServiceUtil {
 			includeAnonymous);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getPriorityThreads(
+		long categoryId, double priority)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getPriorityThreads(categoryId, priority);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getPriorityThreads(
+		long categoryId, double priority, boolean inherit)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getPriorityThreads(categoryId, priority, inherit);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBThread getThread(
 		long threadId)
 		throws com.liferay.portal.PortalException,
