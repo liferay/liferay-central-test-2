@@ -22,8 +22,6 @@
 
 package com.liferay.portal.action;
 
-import com.liferay.portal.kernel.audit.AuditMessage;
-import com.liferay.portal.kernel.audit.AuditRouterUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -517,19 +515,6 @@ public class LayoutAction extends Action {
 				(layout.getPlid() != previousLayout.getPlid())) {
 
 				session.setAttribute(WebKeys.PREVIOUS_LAYOUT, layout);
-
-				if (PropsValues.AUDIT_TRACKING_ENABLED &&
-					themeDisplay.isSignedIn()) {
-
-					User user = themeDisplay.getUser();
-
-					AuditMessage auditMessage = new AuditMessage(
-						"VIEW", themeDisplay.getCompanyId(), user.getUserId(),
-						user.getFullName(), Layout.class.getName(),
-						String.valueOf(layout.getPlid()), StringPool.BLANK);
-
-					AuditRouterUtil.route(auditMessage);
-				}
 			}
 
 			if (!PropsValues.TCK_URL && resetLayout &&

@@ -99,8 +99,6 @@ public interface PropsKeys {
 
 	public static final String ASSET_VOCABULARY_DEFAULT = "asset.vocabulary.default";
 
-	public static final String AUDIT_TRACKING_ENABLED = "audit.tracking.enabled";
-
 	public static final String AUTH_FAILURE = "auth.failure";
 
 	public static final String AUTH_FORWARD_BY_LAST_PATH = "auth.forward.by.last.path";
