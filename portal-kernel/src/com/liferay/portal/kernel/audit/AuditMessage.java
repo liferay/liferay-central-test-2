@@ -83,8 +83,17 @@ public class AuditMessage implements Serializable {
 		String eventType, long companyId, long userId, String userName) {
 
 		this(
-			eventType, companyId, userId, userName, null, null, null,
-			new Date(), JSONFactoryUtil.createJSONObject());
+			eventType, companyId, userId, userName, null, null, null, null,
+			null);
+	}
+
+	public AuditMessage(
+		String eventType, long companyId, long userId, String userName,
+		String className, String classPK) {
+
+		this(
+			eventType, companyId, userId, userName, className, classPK, null,
+			null, null);
 	}
 
 	public AuditMessage(
@@ -93,7 +102,7 @@ public class AuditMessage implements Serializable {
 
 		this(
 			eventType, companyId, userId, userName, className, classPK, message,
-			new Date(), JSONFactoryUtil.createJSONObject());
+			null, null);
 	}
 
 	public AuditMessage(
@@ -119,7 +128,16 @@ public class AuditMessage implements Serializable {
 		_sessionID = auditRequestThreadLocal.getSessionID();
 
 		_timestamp = timestamp;
+
+		if (_timestamp == null) {
+			_timestamp = new Date();
+		}
+
 		_additionalInfo = additionalInfo;
+
+		if (_additionalInfo == null) {
+			JSONFactoryUtil.createJSONObject();
+		}
 	}
 
 	public AuditMessage(
@@ -129,7 +147,7 @@ public class AuditMessage implements Serializable {
 
 		this(
 			eventType, companyId, userId, userName, className, classPK, message,
-			new Date(), additionalInfo);
+			null, additionalInfo);
 	}
 
 	public JSONObject getAdditionalInfo() {
@@ -194,6 +212,10 @@ public class AuditMessage implements Serializable {
 
 	public void setClassName(String className) {
 		_className = className;
+	}
+
+	public void setClassPK(long classPK) {
+		_classPK = String.valueOf(classPK);
 	}
 
 	public void setClassPK(String classPK) {

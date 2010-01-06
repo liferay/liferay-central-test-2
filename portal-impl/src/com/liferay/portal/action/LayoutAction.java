@@ -22,10 +22,14 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.audit.AuditMessage;
+import com.liferay.portal.kernel.audit.AuditRouterUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
@@ -49,6 +53,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
@@ -515,6 +520,19 @@ public class LayoutAction extends Action {
 				(layout.getPlid() != previousLayout.getPlid())) {
 
 				session.setAttribute(WebKeys.PREVIOUS_LAYOUT, layout);
+
+				if (themeDisplay.isSignedIn() &&
+					MessageBusUtil.hasMessageListener(DestinationNames.AUDIT)) {
+
+					User user = themeDisplay.getUser();
+
+					AuditMessage auditMessage = new AuditMessage(
+						ActionKeys.VIEW, user.getCompanyId(), user.getUserId(),
+						user.getFullName(), Layout.class.getName(),
+						String.valueOf(layout.getPlid()));
+
+					AuditRouterUtil.route(auditMessage);
+				}
 			}
 
 			if (!PropsValues.TCK_URL && resetLayout &&
