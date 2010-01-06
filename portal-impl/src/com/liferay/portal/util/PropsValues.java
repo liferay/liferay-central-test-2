@@ -109,6 +109,9 @@ public class PropsValues {
 	public static final String ASSET_VOCABULARY_DEFAULT =
 		PropsUtil.get(PropsKeys.ASSET_VOCABULARY_DEFAULT);
 
+	public static final boolean AUDIT_TRACKING_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUDIT_TRACKING_ENABLED));
+
 	public static final String[] AUTH_FAILURE =
 		PropsUtil.getArray(PropsKeys.AUTH_FAILURE);
 
