@@ -163,7 +163,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<liferay-ui:panel defaultState="closed" id='<%= renderResponse.getNamespace() + "activitiesPanel" %>'  title='<%= LanguageUtil.get(pageContext, "activities") %>'>
 
 		<%
-		List<WorkflowLog> workflowLogs =  WorkflowLogManagerUtil.getWorkflowLogs(workflowInstance.getWorkflowInstanceId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, new WorkflowLogCreateDateComparator(true));
+		List<WorkflowLog> workflowLogs =  WorkflowLogManagerUtil.getWorkflowLogs(workflowTask.getWorkflowTaskId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, new WorkflowLogCreateDateComparator(true));
 
 		for (WorkflowLog workflowLog : workflowLogs) {
 			User curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());

@@ -36,18 +36,18 @@ import java.util.List;
 public class WorkflowLogManagerUtil {
 
 	public static List<WorkflowLog> getWorkflowLogs(
-			long workflowInstanceId, int start, int end,
+			long workflowTaskId, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowLogManager.getWorkflowLogs(
-			workflowInstanceId, start, end, orderByComparator);
+			workflowTaskId, start, end, orderByComparator);
 	}
 
-	public static int getWorkflowLogCount(long workflowInstanceId)
+	public static int getWorkflowLogCount(long workflowTaskId)
 		throws WorkflowException {
 
-		return _workflowLogManager.getWorkflowLogCount(workflowInstanceId);
+		return _workflowLogManager.getWorkflowLogCount(workflowTaskId);
 	}
 
 	public static WorkflowLogManager getWorkflowLogManager() {
