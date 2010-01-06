@@ -30,14 +30,16 @@ String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <div class="lfr-portlet-toolbar">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewAllURL">
-		<portlet:param name="struts_action" value="/workflow_tasks/view" />
-		<portlet:param name="toolbarItem" value="all" />
-	</portlet:renderURL>
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.VIEW_ALL_TASKS) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewAllURL">
+			<portlet:param name="struts_action" value="/workflow_tasks/view" />
+			<portlet:param name="toolbarItem" value="all" />
+		</portlet:renderURL>
 
-	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("all") ? "current" : StringPool.BLANK %>">
-		<a href="<%= viewAllURL %>"><liferay-ui:message key="all" /></a>
-	</span>
+		<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("all") ? "current" : StringPool.BLANK %>">
+			<a href="<%= viewAllURL %>"><liferay-ui:message key="all" /></a>
+		</span>
+	</c:if>
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignedToMeURL">
 		<portlet:param name="struts_action" value="/workflow_tasks/view" />

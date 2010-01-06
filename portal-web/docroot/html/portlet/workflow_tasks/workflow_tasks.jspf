@@ -35,7 +35,7 @@
 
 	int totalTasks = 0;
 
-	if (toolbarItem.equals("all")) {
+	if (toolbarItem.equals("all") && PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.VIEW_ALL_TASKS)) {
 		allTasks = true;
 
 		searchContainer.setEmptyResultsMessage("there-are-no-tasks");
