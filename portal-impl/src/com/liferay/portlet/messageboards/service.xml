@@ -447,6 +447,11 @@
 			<finder-column name="groupId" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="C_P" return-type="Collection">
+			<finder-column name="categoryId" />
+			<finder-column name="priority" />
+		</finder>
+
 		<finder name="G_C_L" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="categoryId" />

@@ -125,6 +125,23 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByG_S",
 			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_P = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_P",
+			new String[] { Long.class.getName(), Double.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_P = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_P",
+			new String[] {
+				Long.class.getName(), Double.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_P = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_P",
+			new String[] { Long.class.getName(), Double.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_C_L = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_C_L",
@@ -1134,6 +1151,257 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	public List<MBThread> findByC_P(long categoryId, double priority)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(categoryId), new Double(priority)
+			};
+
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_P,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(4);
+
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+				query.append(_FINDER_COLUMN_C_P_CATEGORYID_2);
+
+				query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
+
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(categoryId);
+
+				qPos.add(priority);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBThread>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_P, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<MBThread> findByC_P(long categoryId, double priority,
+		int start, int end) throws SystemException {
+		return findByC_P(categoryId, priority, start, end, null);
+	}
+
+	public List<MBThread> findByC_P(long categoryId, double priority,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(categoryId), new Double(priority),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_P,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
+
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+				query.append(_FINDER_COLUMN_C_P_CATEGORYID_2);
+
+				query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
+
+				if (obc != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				}
+
+				else {
+					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(categoryId);
+
+				qPos.add(priority);
+
+				list = (List<MBThread>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBThread>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_P,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public MBThread findByC_P_First(long categoryId, double priority,
+		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+		List<MBThread> list = findByC_P(categoryId, priority, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("categoryId=");
+			msg.append(categoryId);
+
+			msg.append(", priority=");
+			msg.append(priority);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchThreadException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBThread findByC_P_Last(long categoryId, double priority,
+		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+		int count = countByC_P(categoryId, priority);
+
+		List<MBThread> list = findByC_P(categoryId, priority, count - 1, count,
+				obc);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("categoryId=");
+			msg.append(categoryId);
+
+			msg.append(", priority=");
+			msg.append(priority);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchThreadException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBThread[] findByC_P_PrevAndNext(long threadId, long categoryId,
+		double priority, OrderByComparator obc)
+		throws NoSuchThreadException, SystemException {
+		MBThread mbThread = findByPrimaryKey(threadId);
+
+		int count = countByC_P(categoryId, priority);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_C_P_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
+
+			if (obc != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(categoryId);
+
+			qPos.add(priority);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
+
+			MBThread[] array = new MBThreadImpl[3];
+
+			array[0] = (MBThread)objArray[0];
+			array[1] = (MBThread)objArray[1];
+			array[2] = (MBThread)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<MBThread> findByG_C_L(long groupId, long categoryId,
 		Date lastPostDate) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1835,6 +2103,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	public void removeByC_P(long categoryId, double priority)
+		throws SystemException {
+		for (MBThread mbThread : findByC_P(categoryId, priority)) {
+			remove(mbThread);
+		}
+	}
+
 	public void removeByG_C_L(long groupId, long categoryId, Date lastPostDate)
 		throws SystemException {
 		for (MBThread mbThread : findByG_C_L(groupId, categoryId, lastPostDate)) {
@@ -1997,6 +2272,59 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_S, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByC_P(long categoryId, double priority)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(categoryId), new Double(priority)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_P,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+				query.append(_FINDER_COLUMN_C_P_CATEGORYID_2);
+
+				query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(categoryId);
+
+				qPos.add(priority);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_P, finderArgs,
 					count);
 
 				closeSession(session);
@@ -2222,6 +2550,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	private static final String _FINDER_COLUMN_G_C_CATEGORYID_2 = "mbThread.categoryId = ?";
 	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "mbThread.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_S_STATUS_2 = "mbThread.status = ?";
+	private static final String _FINDER_COLUMN_C_P_CATEGORYID_2 = "mbThread.categoryId = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_PRIORITY_2 = "mbThread.priority = ?";
 	private static final String _FINDER_COLUMN_G_C_L_GROUPID_2 = "mbThread.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_L_CATEGORYID_2 = "mbThread.categoryId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_L_LASTPOSTDATE_1 = "mbThread.lastPostDate IS NULL";

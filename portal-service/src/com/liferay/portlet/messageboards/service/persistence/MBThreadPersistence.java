@@ -155,6 +155,37 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_P(
+		long categoryId, double priority)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_P(
+		long categoryId, double priority, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_P(
+		long categoryId, double priority, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBThread findByC_P_First(
+		long categoryId, double priority,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
+	public com.liferay.portlet.messageboards.model.MBThread findByC_P_Last(
+		long categoryId, double priority,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
+	public com.liferay.portlet.messageboards.model.MBThread[] findByC_P_PrevAndNext(
+		long threadId, long categoryId, double priority,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_L(
 		long groupId, long categoryId, java.util.Date lastPostDate)
 		throws com.liferay.portal.SystemException;
@@ -237,6 +268,9 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	public void removeByG_S(long groupId, int status)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByC_P(long categoryId, double priority)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_C_L(long groupId, long categoryId,
 		java.util.Date lastPostDate) throws com.liferay.portal.SystemException;
 
@@ -252,6 +286,9 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_S(long groupId, int status)
+		throws com.liferay.portal.SystemException;
+
+	public int countByC_P(long categoryId, double priority)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_C_L(long groupId, long categoryId,

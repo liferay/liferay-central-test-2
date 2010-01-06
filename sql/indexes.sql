@@ -341,6 +341,7 @@ create index IX_FAB5A88B on MBStatsUser (groupId, messageCount);
 create unique index IX_9168E2C9 on MBStatsUser (groupId, userId);
 create index IX_847F92B5 on MBStatsUser (userId);
 
+create index IX_41F6DC8A on MBThread (categoryId, priority);
 create index IX_95C0EA45 on MBThread (groupId);
 create index IX_9A2D11B2 on MBThread (groupId, categoryId);
 create index IX_50F1904A on MBThread (groupId, categoryId, lastPostDate);
