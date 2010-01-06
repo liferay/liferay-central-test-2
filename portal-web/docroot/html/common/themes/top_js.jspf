@@ -275,8 +275,8 @@
 		);
 
 		Liferay.Portlet.ready(
-			function(portletId, jQueryObj) {
-				Liferay.Util.addInputType(portletId, jQueryObj);
+			function(portletId, node) {
+				Liferay.Util.addInputType(portletId, node);
 			}
 		);
 
@@ -348,45 +348,6 @@
 							hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>
 						}
 					);
-
-					<%--/*jQuery(".journal-content-eip-text").leditable(
-						"<%= themeDisplay.getPathMain() %>/journal_content/update_article_field",
-						{
-							cancel: Liferay.Language.get('cancel'),
-							event: 'click',
-							id: 'fieldName',
-							name: 'fieldData',
-							submit: Liferay.Language.get('ok'),
-							type: 'text',
-							width: '100%'
-						}
-					);
-
-					jQuery(".journal-content-eip-text_box").leditable(
-						"<%= themeDisplay.getPathMain() %>/journal_content/update_article_field",
-						{
-							cancel: Liferay.Language.get('cancel'),
-							event: 'click',
-							id: 'fieldName',
-							name: 'fieldData',
-							submit: Liferay.Language.get('ok'),
-							type: 'textarea',
-							width: '100%'
-						}
-					);
-
-					jQuery(".journal-content-eip-text_area").leditable(
-						"<%= themeDisplay.getPathMain() %>/journal_content/update_article_field",
-						{
-							cancel: Liferay.Language.get('cancel'),
-							event: 'click',
-							id: 'fieldName',
-							name: 'fieldData',
-							submit: Liferay.Language.get('ok'),
-							type: 'fcktextarea',
-							width: '100%'
-						}
-					);*/--%>
 				}
 			);
 		</c:if>
