@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet.filters.strip;
 
+import com.liferay.portal.kernel.concurrent.ConcurrentLRUCache;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -36,7 +37,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.servlet.filters.etag.ETagUtil;
 import com.liferay.portal.util.MinifierUtil;
+import com.liferay.util.ThreadLocalRandomWordGenerator;
 import com.liferay.util.servlet.ServletResponseUtil;
+
+import java.security.MessageDigest;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -163,14 +167,29 @@ public class StripFilter extends BasePortalFilter {
 			return newBeginIndex;
 		}
 
-		content = MinifierUtil.minifyCss(content);
-
-		if (Validator.isNull(content)) {
+		String key;
+		MessageDigest messageDigest = _THREAD_LOCAL_MESSAGE_DIGEST.get();
+		if (messageDigest == null) {
+			key = Integer.toString(content.hashCode());
+		}
+		else {
+			key = new String(messageDigest.digest(content.getBytes()));
+		}
+		String cachedContent = _concurrentLRUCache.get(key);
+		if (cachedContent == null) {
+			// Multiple threads may arrive here at same time,
+			// we simply let them go, this may waste a few CPU cycles,
+			// but can improve concurrency.
+			// Hopefully this won't happen that often
+			cachedContent = MinifierUtil.minifyCss(content);
+			_concurrentLRUCache.put(key, cachedContent);
+		}
+		if (Validator.isNull(cachedContent)) {
 			return newBeginIndex;
 		}
 
 		newBytes.write(_STYLE_TYPE_CSS);
-		newBytes.write(content.getBytes());
+		newBytes.write(cachedContent.getBytes());
 		newBytes.write(_MARKER_STYLE_CLOSE);
 
 		return newBeginIndex;
@@ -193,7 +212,7 @@ public class StripFilter extends BasePortalFilter {
 			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
 			StripResponse stripResponse = new StripResponse(response);
-
+			ThreadLocalRandomWordGenerator.reset();
 			processFilter(
 				StripFilter.class, request, stripResponse, filterChain);
 
@@ -261,15 +280,30 @@ public class StripFilter extends BasePortalFilter {
 			return newBeginIndex;
 		}
 
-		content = MinifierUtil.minifyJavaScript(content);
-
-		if (Validator.isNull(content)) {
+		String key;
+		MessageDigest messageDigest = _THREAD_LOCAL_MESSAGE_DIGEST.get();
+		if (messageDigest == null) {
+			key = Integer.toString(content.hashCode());
+		}
+		else {
+			key = new String(messageDigest.digest(content.getBytes()));
+		}
+		String cachedContent = _concurrentLRUCache.get(key);
+		if (cachedContent == null) {
+			// Multiple threads may arrive here at same time,
+			// we simply let them go, this may waste a few CPU cycles,
+			// but can improve concurrency.
+			// Hopefully this won't happen that often
+			cachedContent = MinifierUtil.minifyJavaScript(content);
+			_concurrentLRUCache.put(key, cachedContent);
+		}
+		if (Validator.isNull(cachedContent)) {
 			return newBeginIndex;
 		}
 
 		newBytes.write(_SCRIPT_TYPE_JAVASCRIPT);
 		newBytes.write(_CDATA_OPEN);
-		newBytes.write(content.getBytes());
+		newBytes.write(cachedContent.getBytes());
 		newBytes.write(_CDATA_CLOSE);
 		newBytes.write(_MARKER_SCRIPT_CLOSE);
 
@@ -394,6 +428,27 @@ public class StripFilter extends BasePortalFilter {
 
 		return newBytes.toByteArray();
 	}
+
+	private final ConcurrentLRUCache<String, String> _concurrentLRUCache =
+		new ConcurrentLRUCache<String, String>(_MAX_CACHE_SIZE);
+
+	private static final ThreadLocal<MessageDigest>
+		_THREAD_LOCAL_MESSAGE_DIGEST = new ThreadLocal<MessageDigest>() {
+
+		protected MessageDigest initialValue() {
+			try {
+				return (MessageDigest) MessageDigest.getInstance("MD5").clone();
+			}
+			catch(Exception e) {
+				_log.warn("Fail to load MD5 MessageDigest, " +
+					"will use String.hashCode() instead.");
+				return null;
+			}
+		}
+
+	};
+
+	private static final int _MAX_CACHE_SIZE = 1000;
 
 	private static final byte[] _CDATA_CLOSE = "/*]]>*/".getBytes();
 
