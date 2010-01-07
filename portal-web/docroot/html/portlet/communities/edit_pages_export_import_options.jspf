@@ -291,7 +291,6 @@
 							%>
 
 										<li class="tree-item">
-
 											<br />
 
 											<%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>
@@ -374,40 +373,20 @@
 <c:choose>
 	<c:when test='<%= tabs4.equals("export") || tabs4.equals("export-live") %>'>
 		<div id="<portlet:namespace />exportMoreDiv">
-
-			<%
-			String exportMoreOptionsURL = "javascript:" + renderResponse.getNamespace() + "exportMore();";
-			%>
-
-			<aui:a href="<%= exportMoreOptionsURL %>" label="more-options"> &raquo;</aui:a>
+			<aui:a href='<%= "javascript:" + renderResponse.getNamespace() + "exportMore();" %>' label="more-options"> &raquo;</aui:a>
 		</div>
 
 		<div id="<portlet:namespace />exportLessDiv" style="display: none;">
-
-			<%
-			String exportLessOptionsURL = "javascript:" + renderResponse.getNamespace() + "exportLess();";
-			%>
-
-			<aui:a href="<%= exportLessOptionsURL %>" label="less-options"> &raquo;</aui:a>
+			<aui:a href='<%= "javascript:" + renderResponse.getNamespace() + "exportLess();" %>' label="more-options"> &raquo;</aui:a>
 		</div>
 	</c:when>
 	<c:otherwise>
 		<div id="<portlet:namespace />importMoreDiv">
-
-			<%
-			String importMoreOptionsURL = "javascript:" + renderResponse.getNamespace() + "importMore();";
-			%>
-
-			<aui:a href="<%= importMoreOptionsURL %>" label="more-options"> &raquo;</aui:a>
+			<aui:a href='<%= "javascript:" + renderResponse.getNamespace() + "importMore();" %>' label="more-options"> &raquo;</aui:a>
 		</div>
 
 		<div id="<portlet:namespace />importLessDiv" style="display: none;">
-
-			<%
-			String importLessOptionsURL = "javascript:" + renderResponse.getNamespace() + "importLess();";
-			%>
-
-			<aui:a href="<%= importLessOptionsURL %>" label="less-options"> &raquo;</aui:a>
+			<aui:a href='<%= "javascript:" + renderResponse.getNamespace() + "importLess();" %>' label="less-options"> &raquo;</aui:a>
 		</div>
 	</c:otherwise>
 </c:choose>
