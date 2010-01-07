@@ -50,7 +50,8 @@ Object value = request.getAttribute("aui:input:value");
 boolean showForLabel = true;
 
 if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
-	((model != null) && (field != null) && Validator.equals(ModelHintsUtil.getType(model.getName(), field), Date.class.getName()))) {
+	((model != null) && (field != null) && Validator.equals(ModelHintsUtil.getType(model.getName(), field), Date.class.getName())) ||
+	(type.equals("radio"))) {
 
 	showForLabel = false;
 }
@@ -69,19 +70,80 @@ String forLabel = name;
 if (type.equals("checkbox") || (model != null) && type.equals("boolean")) {
 	forLabel = name + "Checkbox";
 }
+
+boolean choiceField = false;
+
+if (type.equals("checkbox") || type.equals("radio")) {
+	choiceField = true;
+}
+
+String baseTypeCss = StringPool.BLANK;
+
+String fieldCss = _getFieldCss(StringPool.BLANK);
+String inputCss = _getInputCss(StringPool.BLANK);
+
+if ((model != null) && Validator.isNull(type)) {
+	baseTypeCss = ModelHintsUtil.getType(model.getName(), field).toLowerCase();
+}
+else {
+	if (type.equals("timeZone")) {
+		baseTypeCss = "time-zone";
+	}
+	else if (type.equals("assetCategories")) {
+		baseTypeCss = "asset-categories";
+	}
+	else if (type.equals("assetTags")) {
+		baseTypeCss = "asset-tags";
+	}
+	else {
+		baseTypeCss = type;
+	}
+}
+
+fieldCss += " " + _getFieldCss(baseTypeCss);
+inputCss += " " + _getInputCss(baseTypeCss);
+
+if (inlineField) {
+	fieldCss += " " + _getFieldCss("labels-inline");
+}
+
+if (disabled) {
+	fieldCss += " " + _getFieldCss("disabled");
+}
+
+if (baseTypeCss.equals("checkbox") || baseTypeCss.equals("radio")) {
+	fieldCss += " " + _getFieldCss("choice");
+	inputCss += " " + _getInputCss("choice");
+}
+else if (baseTypeCss.equals("textarea") || baseTypeCss.equals("password") || baseTypeCss.equals("string")) {
+	fieldCss += " " + _getFieldCss("text");
+	inputCss += " " + _getInputCss("text");
+}
+
+if (first) {
+	fieldCss += " " + _getFieldCss("first");
+}
+else if (last) {
+	fieldCss +=  " " + _getFieldCss("last");
+}
+
+if (!cssClass.isEmpty()) {
+	fieldCss += " " + cssClass;
+}
 %>
 
-<c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
-	<div class="aui-ctrl-holder <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
-		<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-			<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
-				<liferay-ui:message key="<%= label %>" />
+<c:if test='<%= !type.equals("hidden") %>'>
+	<span class="<%= fieldCss %>">
+		<span class="aui-field-content">
+			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") && !choiceField %>'>
+				<label class="aui-field-label" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
+					<liferay-ui:message key="<%= label %>" />
 
-				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
-					<liferay-ui:icon-help message="<%= helpMessage %>" />
-				</c:if>
-			</label>
-		</c:if>
+					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+						<liferay-ui:icon-help message="<%= helpMessage %>" />
+					</c:if>
+				</label>
+			</c:if>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(prefix) %>">
@@ -104,96 +166,95 @@ if (type.equals("checkbox") || (model != null) && type.equals("boolean")) {
 		/>
 	</c:when>
 	<c:when test="<%= (model != null) && Validator.isNull(type) %>">
-		<span class="aui-form-field aui-form-<%= ModelHintsUtil.getType(model.getName(), field).toLowerCase() %>">
-			<liferay-ui:input-field
-				bean="<%= bean %>"
-				defaultValue="<%= value %>"
-				disabled="<%= disabled %>"
-				field="<%= field %>"
-				fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
-				format='<%= (Format)dynamicAttributes.get("format") %>'
-				formName='<%= (String)dynamicAttributes.get("formName") %>'
-				model="<%= model %>"
-			/>
-		</span>
+		<liferay-ui:input-field
+			bean="<%= bean %>"
+			cssClass="<%= inputCss %>"
+			defaultValue="<%= value %>"
+			disabled="<%= disabled %>"
+			field="<%= field %>"
+			fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
+			format='<%= (Format)dynamicAttributes.get("format") %>'
+			formName='<%= (String)dynamicAttributes.get("formName") %>'
+			model="<%= model %>"
+		/>
 	</c:when>
-	<c:when test='<%= type.equals("checkbox") %>'>
-		<span class="aui-form-field aui-form-checkbox">
+	<c:when test='<%= choiceField %>'>
+		<label class="aui-field-label" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 
 			<%
-			boolean booleanValue = false;
+			String valueString = StringPool.BLANK;
 
 			if (value != null) {
-				booleanValue = GetterUtil.getBoolean(value.toString());
-			}
-
-			booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
-
-			String onClick = "AUI().one(this).previous().val(this.checked);";
-			String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
-
-			if (onClickDynamicAttribute != null) {
-				onClick += onClickDynamicAttribute;
+				valueString = value.toString();
 			}
 			%>
 
-			<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
+			<c:if test='<%= inlineLabel.equals("left") %>'>
+				<liferay-ui:message key="<%= label %>" />
 
-			<input <%= booleanValue ? "checked" : StringPool.BLANK %> <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
-		</span>
+				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+					<liferay-ui:icon-help message="<%= helpMessage %>" />
+				</c:if>
+			</c:if>
+
+			<c:choose>
+				<c:when test='<%= type.equals("checkbox") %>'>
+						<%
+						boolean booleanValue = false;
+
+						if (value != null) {
+							booleanValue = GetterUtil.getBoolean(value.toString());
+						}
+
+						booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
+
+						String onClick = "AUI().one(this).previous().val(this.checked);";
+						String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
+
+						if (onClickDynamicAttribute != null) {
+							onClick += onClickDynamicAttribute;
+						}
+						%>
+
+						<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
+
+						<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				</c:when>
+				<c:otherwise>
+					<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> <%= !id.equals(name) ? "id=\"" + id + "\"" : StringPool.BLANK %> name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				</c:otherwise>
+			</c:choose>
+
+			<c:if test='<%= !inlineLabel.equals("left") %>'>
+				<liferay-ui:message key="<%= label %>" />
+
+				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+					<liferay-ui:icon-help message="<%= helpMessage %>" />
+				</c:if>
+			</c:if>
+		</label>
+
 	</c:when>
-	<c:when test='<%= type.equals("radio") %>'>
-		<span class="aui-form-field aui-form-radio <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
-			<label class="aui-form-label">
-
+	<c:when test='<%= type.equals("timeZone") %>'>
+		<span class="<%= fieldCss %>">
+			<span class="aui-field-content">
 				<%
-				String valueString = StringPool.BLANK;
+				int displayStyle = TimeZone.LONG;
 
-				if (value != null) {
-					valueString = value.toString();
+				if (dynamicAttributes.get("displayStyle") != null) {
+					displayStyle = GetterUtil.getInteger((String)dynamicAttributes.get("displayStyle"));
 				}
 				%>
 
-				<c:if test='<%= inlineLabel.equals("left") %>'>
-					<liferay-ui:message key="<%= label %>" />
-
-					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
-						<liferay-ui:icon-help message="<%= helpMessage %>" />
-					</c:if>
-				</c:if>
-
-				<input <%= checked ? "checked" : StringPool.BLANK %> <%= disabled ? "disabled" : StringPool.BLANK %> <%= !id.equals(name) ? "id=\"" + id + "\"" : StringPool.BLANK %> name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
-
-
-				<c:if test='<%= !inlineLabel.equals("left") %>'>
-					<liferay-ui:message key="<%= label %>" />
-
-					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
-						<liferay-ui:icon-help message="<%= helpMessage %>" />
-					</c:if>
-				</c:if>
-			</label>
-		</span>
-	</c:when>
-	<c:when test='<%= type.equals("timeZone") %>'>
-		<span class="aui-form-field aui-form-time-zone">
-
-			<%
-			int displayStyle = TimeZone.LONG;
-
-			if (dynamicAttributes.get("displayStyle") != null) {
-				displayStyle = GetterUtil.getInteger((String)dynamicAttributes.get("displayStyle"));
-			}
-			%>
-
-			<liferay-ui:input-time-zone
-				daylight='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("daylight")) %>'
-				disabled="<%= disabled %>"
-				displayStyle="<%= displayStyle %>"
-				name="<%= name %>"
-				nullable='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("nullable")) %>'
-				value="<%= value.toString() %>"
-			/>
+				<liferay-ui:input-time-zone
+					daylight='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("daylight")) %>'
+					disabled="<%= disabled %>"
+					displayStyle="<%= displayStyle %>"
+					name="<%= name %>"
+					nullable='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("nullable")) %>'
+					value="<%= value.toString() %>"
+				/>
+			</span>
 		</span>
 	</c:when>
 	<c:otherwise>
@@ -203,10 +264,6 @@ if (type.equals("checkbox") || (model != null) && type.equals("boolean")) {
 			type = "text";
 		}
 		%>
-
-		<c:if test='<%= !type.equals("hidden") %>'>
-			<span class="aui-form-field aui-form-<%= type %>">
-		</c:if>
 
 		<%
 		String valueString = StringPool.BLANK;
@@ -225,16 +282,12 @@ if (type.equals("checkbox") || (model != null) && type.equals("boolean")) {
 
 		<c:choose>
 			<c:when test='<%= type.equals("textarea") %>'>
-				<textarea <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
+				<textarea class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
 			</c:when>
 			<c:otherwise>
-				<input <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				<input class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 			</c:otherwise>
 		</c:choose>
-
-		<c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
-			</span>
-		</c:if>
 	</c:otherwise>
 </c:choose>
 
@@ -242,8 +295,8 @@ if (type.equals("checkbox") || (model != null) && type.equals("boolean")) {
 	<span class="aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
 </c:if>
 
-<c:if test='<%= Validator.isNotNull(label) && !type.equals("radio") && inlineLabel.equals("right") %>'>
-	<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
+<c:if test='<%= Validator.isNotNull(label) && !choiceField && inlineLabel.equals("right") %>'>
+	<label class="aui-field-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 		<liferay-ui:message key="<%= label %>" />
 
 		<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -252,11 +305,32 @@ if (type.equals("checkbox") || (model != null) && type.equals("boolean")) {
 	</label>
 </c:if>
 
-<c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
-	</div>
+<c:if test='<%= !type.equals("hidden") %>'>
+		</span>
+	</span>
 </c:if>
 
 <%!
+private String _getInputCss(String suffix) {
+	String cssClass = _getFieldCss("input");
+
+	if (!suffix.isEmpty()) {
+		cssClass += "-" + suffix;
+	}
+
+	return cssClass;
+}
+
+private String _getFieldCss(String suffix) {
+	String cssClass = "aui-field";
+
+	if (!suffix.isEmpty()) {
+		cssClass += "-" + suffix;
+	}
+
+	return cssClass;
+}
+
 private long _getClassPK(BaseModel bean, Map<String, Object> dynamicAttributes) {
 	long classPK = 0;
 
