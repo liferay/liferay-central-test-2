@@ -612,10 +612,11 @@ AUI().add(
 				var instance = this;
 
 				var downloadAction = themeDisplay.getPathMain() + '/journal/get_article_content';
+				var auxForm = instance.getPrincipalForm('fm2');
 				var form = instance.getPrincipalForm();
 
 				var articleContent = instance.getArticleContentXML();
-				var xmlInput = instance.getByName(form, 'xml', true);
+				var xmlInput = instance.getByName(auxForm, 'xml', true);
 
 				if (instance.structureChange()) {
 					if (confirm(Liferay.Language.get('you-should-save-the-structure-first'))) {
@@ -623,12 +624,12 @@ AUI().add(
 					}
 				}
 				else {
-					form.attr('action', downloadAction);
-					form.attr('target', '_self');
+					auxForm.attr('action', downloadAction);
+					auxForm.attr('target', '_self');
 
 					xmlInput.val(articleContent);
 
-					form.submit();
+					auxForm.submit();
 				}
 			},
 
@@ -1275,7 +1276,7 @@ AUI().add(
 					auxForm.attr('action', previewURL);
 					auxForm.attr('target', '_blank');
 
-					var titleInput = instance.getByName(form, 'title', true);
+					var titleInput = instance.getByName(form, 'title');
 					var titleAuxFormInput = instance.getByName(auxForm, 'title', true);
 					var xmlAuxFormInput = instance.getByName(auxForm, 'xml', true);
 
