@@ -25,6 +25,7 @@
 <%
 boolean showAddEntryButton = BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY);
 boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+boolean showSubscribeButton = BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.SUBSCRIBE);
 showSearch = showSearch && !results.isEmpty();
 %>
 
@@ -102,7 +103,30 @@ if (rssURLParams.length() > 0) {
 %>
 
 <div class="subscribe">
-	<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" method="get" target="_blank" label="<%= true %>" />
+	<liferay-ui:icon image="rss" message="rss" url="<%= rssURL %>" method="get" target="_blank" label="<%= true %>" />
+
+	<c:if test="<%= showSubscribeButton %>">
+		<c:choose>
+			<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(company.getCompanyId(), user.getUserId(), BlogsEntry.class.getName(), scopeGroupId) %>">
+				<portlet:actionURL var="unsubscribeURL">
+					<portlet:param name="struts_action" value="/blogs/edit_entry" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+				</portlet:actionURL>
+
+				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
+			</c:when>
+			<c:otherwise>
+				<portlet:actionURL var="subscribeURL">
+					<portlet:param name="struts_action" value="/blogs/edit_entry" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+				</portlet:actionURL>
+
+				<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
+			</c:otherwise>
+		</c:choose>
+	</c:if>
 </div>
 
 <liferay-util:html-top>
