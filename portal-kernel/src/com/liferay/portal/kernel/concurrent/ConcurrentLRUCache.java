@@ -32,27 +32,70 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * <a href="ConcurrentLRUCache.java.html"><b><i>View Source</i></b></a>
  *
- * Link based thread-safe in-memory LRU Cache. Suitable for high concurrent,
- * but small data size cache.
- *
  * @author Shuyang Zhou
  */
 public class ConcurrentLRUCache<K, V> {
 
 	public ConcurrentLRUCache(int maxSize) {
-		if (maxSize <= 0) {
-			throw new IllegalArgumentException(
-				"Maxsize has to be bigger than 0");
-		}
 		_maxSize = maxSize;
-		_headEntry = new Entry<K, V>(null, null);
-		_lastEntry = new Entry<K, V>(null, null);
+
+		_readLock = _readWriteLock.readLock();
+		_writeLock = _readWriteLock.writeLock();
+
 		_headEntry._nextEntry = _lastEntry;
 		_lastEntry._previousEntry = _headEntry;
 	}
 
 	public long evictCount() {
 		return _evictCount.get();
+	}
+
+	public V get(K key) {
+		Entry<K, V> matchEntry = null;
+
+		boolean requiresMove = false;
+
+		_readLock.lock();
+
+		try {
+			matchEntry = _lastEntry._previousEntry;
+
+			while (matchEntry != _headEntry) {
+				if (matchEntry._key.equals(key)) {
+					if (matchEntry._nextEntry != _lastEntry) {
+						requiresMove = true;
+					}
+
+					_hitCount.getAndIncrement();
+
+					return matchEntry._value;
+				}
+
+				matchEntry = matchEntry._previousEntry;
+			}
+		}
+		finally {
+			_readLock.unlock();
+
+			if (requiresMove) {
+				_writeLock.lock();
+
+				try {
+					if (matchEntry._key != null) {
+						_detachEntry(matchEntry);
+
+						_insertEntryBefore(_lastEntry, matchEntry);
+					}
+				}
+				finally {
+					_writeLock.unlock();
+				}
+			}
+		}
+
+		_missCount.getAndIncrement();
+
+		return null;
 	}
 
 	public long hitCount() {
@@ -67,6 +110,45 @@ public class ConcurrentLRUCache<K, V> {
 		return _missCount.get();
 	}
 
+	public void put(K key, V value) {
+		if (key == null) {
+			throw new NullPointerException("Key is null");
+		}
+
+		_putCount.getAndIncrement();
+		_writeLock.lock();
+
+		try {
+			Entry<K, V> currentEntry = _lastEntry._previousEntry;
+
+			while (currentEntry != _headEntry) {
+				if (currentEntry._key.equals(key)) {
+					currentEntry._value = value;
+
+					if (currentEntry._nextEntry != _lastEntry) {
+						_detachEntry(currentEntry);
+						_insertEntryBefore(_lastEntry, currentEntry);
+					}
+
+					return;
+				}
+
+				currentEntry = currentEntry._previousEntry;
+			}
+
+			while (_size.get() >= _maxSize) {
+				_removeHeadEntry();
+			}
+
+			_insertEntryBefore(_lastEntry, new Entry<K, V>(key, value));
+
+			_size.getAndIncrement();
+		}
+		finally {
+			_writeLock.unlock();
+		}
+	}
+
 	public long putCount() {
 		return _putCount.get();
 	}
@@ -75,117 +157,35 @@ public class ConcurrentLRUCache<K, V> {
 		return _size.get();
 	}
 
-	public void put(K key, V value) {
-		if (key == null) {
-			throw new NullPointerException("key is null");
-		}
-
-		_putCount.getAndIncrement();
-		_writeLock.lock();
-		try {
-			// Try to overwrite exist value
-			Entry<K, V> currentEntry = _lastEntry._previousEntry;
-			while (currentEntry != _headEntry) {
-				if (currentEntry._key.equals(key)) {
-					currentEntry._value = value;
-					if (currentEntry._nextEntry != _lastEntry) {
-						detachEntry(currentEntry);
-						insertEntryBefore(_lastEntry, currentEntry);
-					}
-					return;
-				}
-				currentEntry = currentEntry._previousEntry;
-			}
-
-			// Clean up room
-			while (_size.get() >= _maxSize) {
-				removeHeadEntry();
-			}
-
-			// Add new entry
-			insertEntryBefore(_lastEntry, new Entry<K, V>(key, value));
-			_size.getAndIncrement();
-		}
-		finally {
-			_writeLock.unlock();
-		}
-	}
-
-	public V get(K key) {
-		Entry<K, V> matchEntry = null;
-		boolean needMove = false;
-		_readLock.lock();
-		try {
-			matchEntry = _lastEntry._previousEntry;
-			while (matchEntry != _headEntry) {
-				if (matchEntry._key.equals(key)) {
-					if (matchEntry._nextEntry != _lastEntry) {
-						// Mark to move matchEntry to last after release
-						// read lock
-						needMove = true;
-					}
-					_hitCount.getAndIncrement();
-					return matchEntry._value;
-				}
-				matchEntry = matchEntry._previousEntry;
-			}
-		}
-		finally {
-			_readLock.unlock();
-			if (needMove) {
-				// There is a window time here, other thread may evict
-				// matchEntry before current thread lock up the write lock,
-				// so before move matchEntry to the last, have to make sure it
-				// has not been evicted.
-				_writeLock.lock();
-				try {
-					// Evicted entry should have a null key
-					if (matchEntry._key != null) {
-						detachEntry(matchEntry);
-						insertEntryBefore(_lastEntry, matchEntry);
-					}
-				}
-				finally {
-					_writeLock.unlock();
-				}
-			}
-		}
-		_missCount.getAndIncrement();
-		return null;
-	}
-
 	public String toString() {
 		StringBundler sb = new StringBundler();
-		sb.append("ConcurrentLRUCache: MaxSize(");
+
+		sb.append("{evictCount=");
+		sb.append(_evictCount);
+		sb.append(", hitCount=");
+		sb.append(_hitCount);
+		sb.append(", maxSize=");
 		sb.append(_maxSize);
-		sb.append("), Size(");
-		sb.append(_size.toString());
-		sb.append("), Hit(");
-		sb.append(_hitCount.toString());
-		sb.append("), Miss(");
-		sb.append(_missCount.toString());
-		sb.append("), Put(");
-		sb.append(_putCount.toString());
-		sb.append("), Evict(");
-		sb.append(_evictCount.toString());
-		sb.append(")");
+		sb.append(", missCount=");
+		sb.append(_missCount);
+		sb.append(", putCount=");
+		sb.append(_putCount);
+		sb.append(", size=");
+		sb.append(_size);
+		sb.append("}");
+
 		return sb.toString();
 	}
 
-	/**
-	 * Must access with write lock
-	 */
-	private void detachEntry(Entry<K, V> entry) {
+	private void _detachEntry(Entry<K, V> entry) {
 		entry._previousEntry._nextEntry = entry._nextEntry;
 		entry._nextEntry._previousEntry = entry._previousEntry;
 		entry._nextEntry = entry._previousEntry = null;
 	}
 
-	/**
-	 * Must access with write lock
-	 */
-	private void insertEntryBefore(
+	private void _insertEntryBefore(
 		Entry<K, V> referenceEntry, Entry<K, V> insertEntry) {
+
 		insertEntry._previousEntry = referenceEntry._previousEntry;
 		insertEntry._nextEntry = referenceEntry;
 
@@ -193,18 +193,30 @@ public class ConcurrentLRUCache<K, V> {
 		referenceEntry._previousEntry = insertEntry;
 	}
 
-	/**
-	 * Must access with write lock
-	 */
-	private void removeHeadEntry() {
-		Entry<K, V> garbageEntry = _headEntry._nextEntry;
-		detachEntry(garbageEntry);
-		// Help GC
-		garbageEntry._key = null;
-		garbageEntry._value = null;
+	private void _removeHeadEntry() {
+		Entry<K, V> entry = _headEntry._nextEntry;
+
+		_detachEntry(entry);
+
+		entry._key = null;
+		entry._value = null;
+
 		_size.getAndDecrement();
 		_evictCount.getAndIncrement();
 	}
+
+	private final AtomicLong _evictCount = new AtomicLong(0);
+	private final Entry<K, V> _headEntry = new Entry<K, V>(null, null);
+	private final AtomicLong _hitCount = new AtomicLong(0);
+	private final Entry<K, V> _lastEntry = new Entry<K, V>(null, null);
+	private final int _maxSize;
+	private final AtomicLong _missCount = new AtomicLong(0);
+	private final AtomicLong _putCount = new AtomicLong(0);
+	private final Lock _readLock;
+	private final ReentrantReadWriteLock _readWriteLock =
+		new ReentrantReadWriteLock();
+	private final AtomicInteger _size = new AtomicInteger(0);
+	private final Lock _writeLock;
 
 	private static class Entry<K, V> {
 
@@ -214,22 +226,10 @@ public class ConcurrentLRUCache<K, V> {
 		}
 
 		private K _key;
-		private V _value;
-		private Entry<K, V> _previousEntry;
 		private Entry<K, V> _nextEntry;
-	}
+		private Entry<K, V> _previousEntry;
+		private V _value;
 
-	private final int _maxSize;
-	private final AtomicLong _evictCount = new AtomicLong(0);
-	private final AtomicLong _hitCount = new AtomicLong(0);
-	private final AtomicLong _missCount = new AtomicLong(0);
-	private final AtomicLong _putCount = new AtomicLong(0);
-	private final AtomicInteger _size = new AtomicInteger(0);
-	private final Entry<K, V> _headEntry;
-	private final Entry<K, V> _lastEntry;
-	private final ReentrantReadWriteLock _readWriteLock =
-		new ReentrantReadWriteLock();
-	private final Lock _readLock = _readWriteLock.readLock();
-	private final Lock _writeLock = _readWriteLock.writeLock();
+	}
 
 }

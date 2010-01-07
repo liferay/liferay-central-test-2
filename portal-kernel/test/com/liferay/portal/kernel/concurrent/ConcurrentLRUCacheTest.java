@@ -32,135 +32,132 @@ import com.liferay.portal.kernel.test.TestCase;
 public class ConcurrentLRUCacheTest extends TestCase {
 
 	public void testConstruct() {
-		// Illegal arg
-		try {
-			new ConcurrentLRUCache<String, String>(0);
-			fail();
-		}
-		catch(IllegalArgumentException iae) {
-		}
-
-		// Normal create
 		ConcurrentLRUCache<String, String> concurrentLRUCache =
 			new ConcurrentLRUCache<String, String>(10);
-		assertEquals(10, concurrentLRUCache.maxSize());
+
 		assertEquals(0, concurrentLRUCache.evictCount());
 		assertEquals(0, concurrentLRUCache.hitCount());
+		assertEquals(10, concurrentLRUCache.maxSize());
 		assertEquals(0, concurrentLRUCache.missCount());
 		assertEquals(0, concurrentLRUCache.putCount());
 		assertEquals(0, concurrentLRUCache.size());
-		assertNull(concurrentLRUCache.get("testKey"));
+
+		assertNull(concurrentLRUCache.get("key"));
 	}
 
 	public void testPut() {
 		ConcurrentLRUCache<String, String> concurrentLRUCache =
 			new ConcurrentLRUCache<String, String>(2);
-		// Null key put
-		try{
-			concurrentLRUCache.put(null, "testValue");
-			fail();
-		}catch(NullPointerException ne) {
 
+		try{
+			concurrentLRUCache.put(null, "value");
+
+			fail();
 		}
-		// Normal put
-		concurrentLRUCache.put("testKey1", "testValue1");
+		catch (NullPointerException npe) {
+		}
+
+		concurrentLRUCache.put("key1", "value1");
+
 		assertEquals(0, concurrentLRUCache.evictCount());
 		assertEquals(0, concurrentLRUCache.hitCount());
 		assertEquals(0, concurrentLRUCache.missCount());
 		assertEquals(1, concurrentLRUCache.putCount());
 		assertEquals(1, concurrentLRUCache.size());
 
-		concurrentLRUCache.put("testKey2", "testValue2");
+		concurrentLRUCache.put("key2", "value2");
+
 		assertEquals(0, concurrentLRUCache.evictCount());
 		assertEquals(0, concurrentLRUCache.hitCount());
 		assertEquals(0, concurrentLRUCache.missCount());
 		assertEquals(2, concurrentLRUCache.putCount());
 		assertEquals(2, concurrentLRUCache.size());
 
-		// Overwrite put
-		concurrentLRUCache.put("testKey1", "testValue1-2");
+		concurrentLRUCache.put("key1", "value1-2");
+
 		assertEquals(0, concurrentLRUCache.evictCount());
 		assertEquals(0, concurrentLRUCache.hitCount());
 		assertEquals(0, concurrentLRUCache.missCount());
 		assertEquals(3, concurrentLRUCache.putCount());
 		assertEquals(2, concurrentLRUCache.size());
 
-		concurrentLRUCache.put("testKey2", "testValue2-2");
+		concurrentLRUCache.put("key2", "value2-2");
+
 		assertEquals(0, concurrentLRUCache.evictCount());
 		assertEquals(0, concurrentLRUCache.hitCount());
 		assertEquals(0, concurrentLRUCache.missCount());
 		assertEquals(4, concurrentLRUCache.putCount());
 		assertEquals(2, concurrentLRUCache.size());
 
-		// Evict put
-		concurrentLRUCache.put("testKey3", "testValue3");
+		concurrentLRUCache.put("key3", "value3");
+
 		assertEquals(1, concurrentLRUCache.evictCount());
 		assertEquals(0, concurrentLRUCache.hitCount());
 		assertEquals(0, concurrentLRUCache.missCount());
 		assertEquals(5, concurrentLRUCache.putCount());
 		assertEquals(2, concurrentLRUCache.size());
-		assertNull(concurrentLRUCache.get("testKey1"));
-		assertEquals("testValue2-2", concurrentLRUCache.get("testKey2"));
-		assertEquals("testValue3", concurrentLRUCache.get("testKey3"));
+		assertNull(concurrentLRUCache.get("key1"));
+		assertEquals("value2-2", concurrentLRUCache.get("key2"));
+		assertEquals("value3", concurrentLRUCache.get("key3"));
 
-		concurrentLRUCache.put("testKey4", "testValue4");
+		concurrentLRUCache.put("key4", "value4");
+
 		assertEquals(2, concurrentLRUCache.evictCount());
 		assertEquals(2, concurrentLRUCache.hitCount());
 		assertEquals(1, concurrentLRUCache.missCount());
 		assertEquals(6, concurrentLRUCache.putCount());
 		assertEquals(2, concurrentLRUCache.size());
-		assertNull(concurrentLRUCache.get("testKey1"));
-		assertNull(concurrentLRUCache.get("testKey2"));
-		assertEquals("testValue3", concurrentLRUCache.get("testKey3"));
-		assertEquals("testValue4", concurrentLRUCache.get("testKey4"));
+		assertNull(concurrentLRUCache.get("key1"));
+		assertNull(concurrentLRUCache.get("key2"));
+		assertEquals("value3", concurrentLRUCache.get("key3"));
+		assertEquals("value4", concurrentLRUCache.get("key4"));
 	}
 
 	public void testGet() {
 		ConcurrentLRUCache<String, String> concurrentLRUCache =
 			new ConcurrentLRUCache<String, String>(2);
-		// Null get
+
 		assertNull(concurrentLRUCache.get(null));
 		assertEquals(0, concurrentLRUCache.evictCount());
 		assertEquals(0, concurrentLRUCache.hitCount());
 		assertEquals(1, concurrentLRUCache.missCount());
 		assertEquals(0, concurrentLRUCache.putCount());
 		assertEquals(0, concurrentLRUCache.size());
-		// Empty get
-		assertNull(concurrentLRUCache.get("testKey"));
+
+		assertNull(concurrentLRUCache.get("key"));
 		assertEquals(0, concurrentLRUCache.evictCount());
 		assertEquals(0, concurrentLRUCache.hitCount());
 		assertEquals(2, concurrentLRUCache.missCount());
 		assertEquals(0, concurrentLRUCache.putCount());
 		assertEquals(0, concurrentLRUCache.size());
 
-		// Prepare data
-		concurrentLRUCache.put("testKey1", "testValue1");
-		concurrentLRUCache.put("testKey2", "testValue2");
+		concurrentLRUCache.put("key1", "value1");
+		concurrentLRUCache.put("key2", "value2");
+
 		assertEquals(0, concurrentLRUCache.evictCount());
 		assertEquals(0, concurrentLRUCache.hitCount());
 		assertEquals(2, concurrentLRUCache.missCount());
 		assertEquals(2, concurrentLRUCache.putCount());
 		assertEquals(2, concurrentLRUCache.size());
 
-		// Hit get
-		assertEquals("testValue1", concurrentLRUCache.get("testKey1"));
+		assertEquals("value1", concurrentLRUCache.get("key1"));
 		assertEquals(0, concurrentLRUCache.evictCount());
 		assertEquals(1, concurrentLRUCache.hitCount());
 		assertEquals(2, concurrentLRUCache.missCount());
 		assertEquals(2, concurrentLRUCache.putCount());
 		assertEquals(2, concurrentLRUCache.size());
 
-		// Impact to evict
-		concurrentLRUCache.put("testKey3", "testValue3");
+		concurrentLRUCache.put("key3", "value3");
+
 		assertEquals(1, concurrentLRUCache.evictCount());
 		assertEquals(1, concurrentLRUCache.hitCount());
 		assertEquals(2, concurrentLRUCache.missCount());
 		assertEquals(3, concurrentLRUCache.putCount());
 		assertEquals(2, concurrentLRUCache.size());
 
-		assertEquals("testValue1", concurrentLRUCache.get("testKey1"));
-		assertNull(concurrentLRUCache.get("testKey2"));
-		assertEquals("testValue3", concurrentLRUCache.get("testKey3"));
+		assertEquals("value1", concurrentLRUCache.get("key1"));
+		assertNull(concurrentLRUCache.get("key2"));
+		assertEquals("value3", concurrentLRUCache.get("key3"));
 	}
 
 }
