@@ -243,16 +243,15 @@ public class ServiceComponentLocalServiceImpl
 	}
 
 	public void verifyDB() throws PortalException, SystemException {
-		List<ServiceComponent> serviceComponents = null;
-
-		Company defaultCompany =
-			companyPersistence.findByWebId(PropsValues.COMPANY_DEFAULT_WEB_ID);
+		Company defaultCompany = companyPersistence.findByWebId(
+			PropsValues.COMPANY_DEFAULT_WEB_ID);
 
 		ShardUtil.pushCompanyService(defaultCompany.getCompanyId());
 
+		List<ServiceComponent> serviceComponents = null;
+
 		try {
-			serviceComponents =
-				serviceComponentPersistence.findAll();
+			serviceComponents = serviceComponentPersistence.findAll();
 		}
 		finally {
 			ShardUtil.popCompanyService();
