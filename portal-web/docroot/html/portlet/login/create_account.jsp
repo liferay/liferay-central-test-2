@@ -65,7 +65,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
 	<liferay-ui:error exception="<%= EmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
-	<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeConstants.ADDRESS %>" message="please-select-a-type" />
+	<liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 	<liferay-ui:error exception="<%= NoSuchRegionException.class %>" message="please-select-a-region" />
 	<liferay-ui:error exception="<%= PhoneNumberException.class %>" message="please-enter-a-valid-phone-number" />
 	<liferay-ui:error exception="<%= RequiredFieldException.class %>" message="please-fill-out-all-required-fields" />
