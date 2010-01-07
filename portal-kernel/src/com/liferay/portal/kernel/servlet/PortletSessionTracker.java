@@ -38,7 +38,7 @@ import javax.servlet.http.HttpSessionBindingListener;
  * <a href="PortletSessionTracker.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * See http://support.liferay.com/browse/LEP-1466.
+ * See http://issues.liferay.com/browse/LEP-1466.
  * </p>
  *
  * @author Rudy Hilado

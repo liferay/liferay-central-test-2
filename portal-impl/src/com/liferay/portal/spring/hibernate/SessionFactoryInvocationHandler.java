@@ -39,7 +39,7 @@ import org.springframework.orm.hibernate3.SessionFactoryUtils;
  * </a>
  *
  * <p>
- * See http://support.liferay.com/browse/LEP-2996.
+ * See http://issues.liferay.com/browse/LEP-2996.
  * </p>
  *
  * @author Brian Wing Shun Chan

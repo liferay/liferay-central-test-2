@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSessionListener;
  * </a>
  *
  * <p>
- * See http://support.liferay.com/browse/LEP-2299.
+ * See http://issues.liferay.com/browse/LEP-2299.
  * </p>
  *
  * @author Olaf Fricke

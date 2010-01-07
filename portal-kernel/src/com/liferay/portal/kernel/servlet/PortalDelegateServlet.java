@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServlet;
  * <a href="PortalDelegateServlet.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * See http://support.liferay.com/browse/LEP-2297.
+ * See http://issues.liferay.com/browse/LEP-2297.
  * </p>
  *
  * @author Olaf Fricke

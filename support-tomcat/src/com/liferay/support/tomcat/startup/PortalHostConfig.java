@@ -50,7 +50,7 @@ import org.apache.catalina.startup.HostConfig;
  * </p>
  *
  * <p>
- * See http://support.liferay.com/browse/LEP-2346.
+ * See http://issues.liferay.com/browse/LEP-2346.
  * </p>
  *
  * <p>

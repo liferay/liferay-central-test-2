@@ -30,7 +30,7 @@ import java.io.UnsupportedEncodingException;
  * <a href="UnsyncByteArrayOutputStream.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * See http://support.liferay.com/browse/LPS-6648.
+ * See http://issues.liferay.com/browse/LPS-6648.
  * </p>
  *
  * @author Shuyang Zhou

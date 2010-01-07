@@ -26,7 +26,7 @@ package com.liferay.portal.kernel.util;
  * <a href="StringBundler.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * See http://support.liferay.com/browse/LPS-6072.
+ * See http://issues.liferay.com/browse/LPS-6072.
  * </p>
  *
  * @author Shuyang Zhou

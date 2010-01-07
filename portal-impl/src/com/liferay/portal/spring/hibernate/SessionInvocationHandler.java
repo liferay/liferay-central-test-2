@@ -36,7 +36,7 @@ import org.hibernate.classic.Session;
  * <a href="SessionInvocationHandler.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * See http://support.liferay.com/browse/LEP-2996.
+ * See http://issues.liferay.com/browse/LEP-2996.
  * </p>
  *
  * @author Brian Wing Shun Chan

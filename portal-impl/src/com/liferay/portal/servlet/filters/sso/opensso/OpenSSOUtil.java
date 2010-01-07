@@ -50,7 +50,7 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="OpenSSOUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * See http://support.liferay.com/browse/LEP-5943.
+ * See http://issues.liferay.com/browse/LEP-5943.
  * </p>
  *
  * @author Prashant Dighe

@@ -33,7 +33,7 @@ import org.apache.catalina.core.StandardService;
  * <a href="PortalStandardService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * See http://support.liferay.com/browse/LEP-4602.
+ * See http://issues.liferay.com/browse/LEP-4602.
  * </p>
  *
  * @author Minhchau Dang
