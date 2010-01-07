@@ -566,7 +566,7 @@ Liferay.Util = {
 								}
 								else {
 									popup.show();
-									popup.io.refresh();
+									popup.io.start();
 								}
 							}
 						);
