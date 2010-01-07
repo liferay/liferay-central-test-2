@@ -232,7 +232,7 @@ public class LangBuilder {
 					else if (translationId.equals("en_ja") &&
 							 (key.equals("any") || key.equals("anytime") ||
 							  key.equals("down") || key.equals("on") ||
-							  key.equals("the"))) {
+							  key.equals("on-date") || key.equals("the"))) {
 
 						translatedText = "";
 					}
@@ -242,7 +242,8 @@ public class LangBuilder {
 						translatedText = "";
 					}
 					else {
-						translatedText = _translate(translationId, value, 0);
+						translatedText = _translate(
+							translationId, key, value, 0);
 					}
 				}
 
@@ -348,7 +349,7 @@ public class LangBuilder {
 	}
 
 	private String _translate(
-		String translationId, String fromText, int limit) {
+		String translationId, String key, String fromText, int limit) {
 
 		if (translationId.equals("en_ar") ||
 			translationId.equals("en_eu") ||
@@ -383,7 +384,8 @@ public class LangBuilder {
 		String toText = null;
 
 		try {
-			System.out.println("Translating " + translationId + " " + fromText);
+			System.out.println(
+				"Translating " + translationId + " " + key + " " + fromText);
 
 			WebCacheItem wci = new TranslationWebCacheItem(
 				translationId, fromText);
@@ -405,7 +407,7 @@ public class LangBuilder {
 		// Keep trying
 
 		if (toText == null) {
-			return _translate(translationId, fromText, ++limit);
+			return _translate(translationId, key, fromText, ++limit);
 		}
 
 		if (Validator.isNotNull(toText)) {
