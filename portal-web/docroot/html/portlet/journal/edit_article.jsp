@@ -550,7 +550,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<c:when test="<%= structure == null %>">
 						<div id="<portlet:namespace />structureTreeWrapper">
 							<ul class="structure-tree" id="<portlet:namespace />structureTree">
-								<li class="structure-field" dataName="TextAreaField" dataType="text_area">
+								<li class="structure-field" dataName="content" dataType="text_area">
 									<span class="journal-article-close"></span>
 
 									<span class="folder">
@@ -558,7 +558,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 											<div class="journal-article-move-handler"></div>
 
 											<label class="journal-article-field-label" for="">
-												<span>TextAreaField</span>
+												<span>Content</span>
 											</label>
 
 											<div class="journal-article-component-container">
