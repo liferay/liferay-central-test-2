@@ -53,30 +53,29 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 					}
 				);
 
-				var inputs = form.all('button,input,select,textarea');
+				form.delegate(
+					'focus',
+					function(event) {
+						var row = event.currentTarget.ancestor('.aui-field');
 
-				if (inputs) {
-					inputs.on(
-						'focus',
-						function(event) {
-							var holder = event.target.ancestor('.aui-ctrl-holder');
-
-							if (holder) {
-								holder.addClass('aui-row-focused');
-							}
+						if (row) {
+							row.addClass('aui-field-focused');
 						}
-					);
-					inputs.on(
-						'blur',
-						function(event) {
-							var holder = event.target.ancestor('.aui-ctrl-holder');
+					},
+					'button,input,select,textarea'
+				);
 
-							if (holder) {
-								holder.removeClass('aui-row-focused');
-							}
+				form.delegate(
+					'blur',
+					function(event) {
+						var row = event.currentTarget.ancestor('.aui-field');
+
+						if (row) {
+							row.removeClass('aui-field-focused');
 						}
-					);
-				}
+					},
+					'button,input,select,textarea'
+				);
 			}
 		}
 	);
