@@ -493,7 +493,7 @@
 	display: inline;
 }
 
-.journal-article-edit-field .aui-ctrl-holder {
+.journal-article-edit-field .aui-field {
 	padding: 0;
 }
 
@@ -506,11 +506,11 @@
 	margin-top: 10px;
 }
 
-.journal-article-edit-field .aui-ctrl-holder .text-input, .journal-article-edit-field .aui-ctrl-holder .textarea {
+.journal-article-edit-field .aui-field .text-input, .journal-article-edit-field .aui-field .textarea {
 	width: 98%;
 }
 
-.journal-article-edit-field .aui-ctrl-holder .textarea {
+.journal-article-edit-field .aui-field .textarea {
 	height: 6em;
 }
 

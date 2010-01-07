@@ -65,76 +65,94 @@
 
 			<strong>Options</strong>
 
-		 	<div class="aui-ctrl-holder">
-			 	<label class="journal-edit-label" for="<portlet:namespace />fieldType">Field type</label>
+			<span class="aui-field">
+				<span class="aui-field-content">
+					<label class="journal-edit-label" for="<portlet:namespace />fieldType">Field type</label>
 
-				<select class="aui-select-input" disabled="disabled" id="<portlet:namespace />fieldType">
-					<option value="text"><liferay-ui:message key="text-field" /></option>
-					<option value="text_box"><liferay-ui:message key="text-box" /></option>
-					<option value="text_area"><liferay-ui:message key="text-area" /></option>
-					<option value="boolean"><liferay-ui:message key="checkbox" /></option>
-					<option value="options"><liferay-ui:message key="options" /></option>
-					<option value="list"><liferay-ui:message key="select-box" /></option>
-					<option value="multi-list"><liferay-ui:message key="multi-selection-list" /></option>
-					<option value="image"><liferay-ui:message key="image-uploader" /></option>
-					<option value="image_gallery"><liferay-ui:message key="image-gallery" /></option>
-					<option value="document_library"><liferay-ui:message key="document-library" /></option>
-					<option value="link_to_layout"><liferay-ui:message key="link-to-page" /></option>
-					<option value="selection_break"><liferay-ui:message key="selection-break" /></option>
-				</select>
-			</div>
+					<select class="aui-select-input" disabled="disabled" id="<portlet:namespace />fieldType">
+						<option value="text"><liferay-ui:message key="text-field" /></option>
+						<option value="text_box"><liferay-ui:message key="text-box" /></option>
+						<option value="text_area"><liferay-ui:message key="text-area" /></option>
+						<option value="boolean"><liferay-ui:message key="checkbox" /></option>
+						<option value="options"><liferay-ui:message key="options" /></option>
+						<option value="list"><liferay-ui:message key="select-box" /></option>
+						<option value="multi-list"><liferay-ui:message key="multi-selection-list" /></option>
+						<option value="image"><liferay-ui:message key="image-uploader" /></option>
+						<option value="image_gallery"><liferay-ui:message key="image-gallery" /></option>
+						<option value="document_library"><liferay-ui:message key="document-library" /></option>
+						<option value="link_to_layout"><liferay-ui:message key="link-to-page" /></option>
+						<option value="selection_break"><liferay-ui:message key="selection-break" /></option>
+					</select>	
+				</span>
+			</span>
 
-			<div class="aui-ctrl-holder">
-		 		<label class="journal-edit-label" for="<portlet:namespace />fieldLabel"><liferay-ui:message key="field-label" /></label>
+			<span class="aui-field">
+				<span class="aui-field-content">
+					<label class="journal-edit-label" for="<portlet:namespace />fieldLabel"><liferay-ui:message key="field-label" /></label>
 
-				<input id="<portlet:namespace />fieldLabel" name="fieldLabel" type="text" value="" />
-		 	</div>
+					<input id="<portlet:namespace />fieldLabel" name="fieldLabel" type="text" value="" />	
+				</span>
+			</span>
 
-		 	<div class="aui-ctrl-holder">
-		 		<label class="journal-edit-label" for="<portlet:namespace />predefinedValue"><liferay-ui:message key="predefined-value" /></label>
+		 	<span class="aui-field">
+		 		<span class="aui-field-content">
+		 			<label class="journal-edit-label" for="<portlet:namespace />predefinedValue"><liferay-ui:message key="predefined-value" /></label>
 
-				<input class="text-input" id="<portlet:namespace />predefinedValue" name="predefinedValue" type="text" value="" />
-		 	</div>
+					<input class="text-input" id="<portlet:namespace />predefinedValue" name="predefinedValue" type="text" value="" />	
+		 		</span>
+		 	</span>
 
 			<fieldset class="user-instructions">
-			 	<div class="aui-ctrl-holder">
-			 		<label class="journal-edit-label" for="<portlet:namespace />instructions"><liferay-ui:message key="instructions-for-the-user" /></label>
+			 	<span class="aui-field">
+			 		<span class="aui-field-content">
+			 			<label class="journal-edit-label" for="<portlet:namespace />instructions"><liferay-ui:message key="instructions-for-the-user" /></label>
 
-					<textarea class="textarea" id="<portlet:namespace />instructions" name="instructions"></textarea>
-			 	</div>
+						<textarea class="textarea" id="<portlet:namespace />instructions" name="instructions"></textarea>	
+			 		</span>
+			 	</span>
 
-				<div class="aui-ctrl-holder">
-			 		<label for="<portlet:namespace />displayAsTooltip">
-			 			<input id="<portlet:namespace />displayAsTooltip" name="displayAsTooltip" type="checkbox" value="true" /> <liferay-ui:message key="display-as-tooltip" />
-			 		</label>
-		 		</div>
+				<span class="aui-field">
+					<span class="aui-field-content">
+						<label for="<portlet:namespace />displayAsTooltip">
+				 			<input id="<portlet:namespace />displayAsTooltip" name="displayAsTooltip" type="checkbox" value="true" /> <liferay-ui:message key="display-as-tooltip" />
+				 		</label>	
+					</span>
+				</span>
 			</fieldset>
 
-	 		<div class="aui-ctrl-holder">
-		 		<label class="journal-edit-label" for="<portlet:namespace />variableName"><liferay-ui:message key="variable-name" /></label>
+	 		<span class="aui-field">
+	 			<span class="aui-field-content">
+	 				<label class="journal-edit-label" for="<portlet:namespace />variableName"><liferay-ui:message key="variable-name" /></label>
 
-				<input id="<portlet:namespace />variableName" name="variableName" type="text" value="" />
-		 	</div>
+					<input id="<portlet:namespace />variableName" name="variableName" type="text" value="" />	
+	 			</span>
+	 		</span>
 
 			<br />
 
-		 	<div class="aui-ctrl-holder">
-		 		<label for="<portlet:namespace />repeatable">
-		 			<input id="<portlet:namespace />repeatable" name="repeatable" type="checkbox" value="true" /> <liferay-ui:message key="repeatable" />
-		 		</label>
-	 		</div>
+		 	<span class="aui-field">
+		 		<span class="aui-field-content">
+		 			<label for="<portlet:namespace />repeatable">
+			 			<input id="<portlet:namespace />repeatable" name="repeatable" type="checkbox" value="true" /> <liferay-ui:message key="repeatable" />
+			 		</label>	
+		 		</span>
+		 	</span>
 
-	 		<div class="aui-ctrl-holder">
-		 		<label for="<portlet:namespace />required">
-		 			<input id="<portlet:namespace />required" name="required" type="checkbox" value="true" /> <liferay-ui:message key="required" />
-		 		</label>
-	 		</div>
+	 		<span class="aui-field">
+	 			<span class="aui-field-content">
+	 				<label for="<portlet:namespace />required">
+			 			<input id="<portlet:namespace />required" name="required" type="checkbox" value="true" /> <liferay-ui:message key="required" />
+			 		</label>	
+	 			</span>
+	 		</span>
 
-			<div class="aui-ctrl-holder">
-		 		<label for="<portlet:namespace />localized">
-		 			<input id="<portlet:namespace />localized" name="localized" type="checkbox" value="true" /> <liferay-ui:message key="localized" />
-		 		</label>
-	 		</div>
+			<span class="aui-field">
+				<span class="aui-field-content">
+					<label for="<portlet:namespace />localized">
+			 			<input id="<portlet:namespace />localized" name="localized" type="checkbox" value="true" /> <liferay-ui:message key="localized" />
+			 		</label>	
+				</span>
+			</span>
 
 	 		<div class="aui-button-holder">
 	 			<input class="save-button" name="save" type="button" value="<liferay-ui:message key="save" />" />

@@ -120,11 +120,11 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		background-color: #DFFCCB;
 	}
 
-	.aui-form .lfr-form-row .aui-ctrl-holder {
+	.aui-form .lfr-form-row .aui-field {
 		line-height: 2;
 	}
 
-	.aui-form .lfr-form-row .aui-ctrl-holder.tags-selector, .aui-form .lfr-form-row .aui-ctrl-holder.categories-selector{
+	.aui-form .lfr-form-row .aui-field.tags-selector, .aui-form .lfr-form-row .aui-field.categories-selector{
 		clear: both;
 		line-height: 1.5;
 	}

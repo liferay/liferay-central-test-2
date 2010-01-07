@@ -81,17 +81,21 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 <fieldset class="aui-block-labels">
 	<legend><liferay-ui:message key="new-password" /></legend>
 
-	<div class="aui-ctrl-holder">
-		<label for="password1"><liferay-ui:message key="password" /></label>
+	<span class="aui-field">
+		<span class="aui-field-content">
+			<label for="password1"><liferay-ui:message key="password" /></label>
 
-		<input class="lfr-input-text" name="password1" type="password" />
-	</div>
+			<input class="lfr-input-text" name="password1" type="password" />	
+		</span>
+	</span>
 
-	<div class="aui-ctrl-holder">
-		<label for="password2"><liferay-ui:message key="enter-again" /></label>
+	<span class="aui-field">
+		<span class="aui-field-content">
+			<label for="password2"><liferay-ui:message key="enter-again" /></label>
 
-		<input class="lfr-input-text" name="password2" type="password" />
-	</div>
+			<input class="lfr-input-text" name="password2" type="password" />
+		</span>
+	</span>
 </fieldset>
 
 <input type="submit" value="<liferay-ui:message key="save" />" />

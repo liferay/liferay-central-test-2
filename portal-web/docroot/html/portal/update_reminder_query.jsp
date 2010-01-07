@@ -42,38 +42,42 @@
 <fieldset class="aui-block-labels">
 	<legend><liferay-ui:message key="password-reminder" /></legend>
 
-	<div class="aui-ctrl-holder">
-		<label for="reminderQueryQuestion"><liferay-ui:message key="question" /></label>
+	<span class="aui-field">
+		<span class="aui-field-content">
+			<label for="reminderQueryQuestion"><liferay-ui:message key="question" /></label>
 
-		<select id="reminderQueryQuestion" name="reminderQueryQuestion">
+			<select id="reminderQueryQuestion" name="reminderQueryQuestion">
 
-			<%
-			for (String question : user.getReminderQueryQuestions()) {
-			%>
+				<%
+				for (String question : user.getReminderQueryQuestions()) {
+				%>
 
-				<option value="<%= question %>"><liferay-ui:message key="<%= question %>" /></option>
+					<option value="<%= question %>"><liferay-ui:message key="<%= question %>" /></option>
 
-			<%
-			}
-			%>
+				<%
+				}
+				%>
+
+				<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
+					<option value="<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>"><liferay-ui:message key="write-my-own-question" /></option>
+				</c:if>
+			</select>
 
 			<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-				<option value="<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>"><liferay-ui:message key="write-my-own-question" /></option>
-			</c:if>
-		</select>
+				<div class="aui-helper-hidden" id="customQuestionContainer">
+					<liferay-ui:input-field model="<%= User.class %>" bean="<%= user %>" field="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
+				</div>
+			</c:if>	
+		</span>
+	</span>
 
-		<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-			<div class="aui-helper-hidden" id="customQuestionDiv">
-				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user %>" field="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
-			</div>
-		</c:if>
-	</div>
+	<span class="aui-field">
+		<span class="aui-field-content">
+			<label for="reminderQueryAnswer"><liferay-ui:message key="answer" /></label>
 
-	<div class="aui-ctrl-holder">
-		<label for="reminderQueryAnswer"><liferay-ui:message key="answer" /></label>
-
-		<input id="reminderQueryAnswer" name="reminderQueryAnswer" size="50" type="text" value="<%= HtmlUtil.escapeAttribute(user.getReminderQueryAnswer()) %>" />
-	</div>
+			<input id="reminderQueryAnswer" name="reminderQueryAnswer" size="50" type="text" value="<%= HtmlUtil.escapeAttribute(user.getReminderQueryAnswer()) %>" />	
+		</span>
+	</span>
 </fieldset>
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
@@ -84,11 +88,11 @@
 	AUI().ready(
 		function(A) {
 			var reminderQueryQuestion = A.one('#reminderQueryQuestion');
-			var customQuestionDiv = A.one('#customQuestionDiv');
+			var customQuestionContainer = A.one('#customQuestionContainer');
 
-			if (reminderQueryQuestion && customQuestionDiv) {
+			if (reminderQueryQuestion && customQuestionContainer) {
 				if (reminderQueryQuestion.val() != '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
-					customQuestionDiv.hide();
+					customQuestionContainer.hide();
 				}
 
 				reminderQueryQuestion.on(
@@ -96,13 +100,13 @@
 					function(event) {
 						if (this.val() == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
 							<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-								customQuestionDiv.show();
+								customQuestionContainer.show();
 
 								Liferay.Util.focusFormField('#reminderQueryCustomQuestion');
 							</c:if>
 						}
 						else {
-							customQuestionDiv.hide();
+							customQuestionContainer.hide();
 
 							Liferay.Util.focusFormField('#reminderQueryAnswer');
 						}
