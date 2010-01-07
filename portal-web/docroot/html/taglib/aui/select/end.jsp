@@ -32,13 +32,12 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:suffix"));
 %>
 
-		</select>
+	</select>
 
-		<span class="aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
-	</span>
+	<span class="aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
 
 	<c:if test='<%= inlineLabel.equals("right") %>'>
-		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" for="<%= name %>">
+		<label class="aui-field-label" for="<%= name %>">
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -46,4 +45,6 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 			</c:if>
 		</label>
 	</c:if>
-</div>
+
+	</span>
+</span>

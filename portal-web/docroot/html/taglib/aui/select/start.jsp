@@ -41,19 +41,19 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 %>
 
-<div class="aui-ctrl-holder <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
-	<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" for="<%= name %>">
-			<liferay-ui:message key="<%= label %>" />
+<span class="aui-field aui-field-menu aui-field-select <%= disabled ? "aui-field-disabled" : StringPool.BLANK %> <%= inlineField ? "aui-field-labels-inline" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-field-first" : StringPool.BLANK %> <%= last ? "aui-field-last" : StringPool.BLANK %> ">
+	<span class="aui-field-content">
+		<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
+			<label class="aui-field-label" for="<%= name %>">
+				<liferay-ui:message key="<%= label %>" />
 
-			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
-				<liferay-ui:icon-help message="<%= helpMessage %>" />
-			</c:if>
-		</label>
-	</c:if>
+				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+					<liferay-ui:icon-help message="<%= helpMessage %>" />
+				</c:if>
+			</label>
+		</c:if>
 
-	<span class="aui-form-field aui-form-select">
-		<select <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+		<select class="aui-field-input aui-field-input-menu aui-field-input-select" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 			<c:if test="<%= showEmptyOption %>">
 				<aui:option />
 			</c:if>
