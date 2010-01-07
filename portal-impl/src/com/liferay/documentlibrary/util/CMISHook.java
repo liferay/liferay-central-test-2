@@ -58,10 +58,12 @@ public class CMISHook extends BaseHook {
 		try {
 			String version = CMISUtil.verifyRepository();
 
-			_log.info("CMIS Service is running version " + version);
+			if (_log.isInfoEnabled()) {
+				_log.info("CMIS Service is running version " + version);
+			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
