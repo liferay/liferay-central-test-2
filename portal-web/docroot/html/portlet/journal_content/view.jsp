@@ -300,7 +300,7 @@ if (articleDisplay != null) {
 					</c:if>
 
 					<c:if test="<%= showSelectArticleIcon %>">
-						<liferay-ui:icon image="configuration" message="select-web-content" url="<%= portletDisplay.getURLConfiguration() %>" />
+						<liferay-ui:icon cssClass="portlet-configuration" image="configuration" message="select-web-content" method="get" url="<%= portletDisplay.getURLConfiguration() %>" />
 					</c:if>
 
 					<c:if test="<%= showAddArticleIcon %>">

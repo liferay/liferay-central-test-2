@@ -343,20 +343,18 @@ Liferay.Portlet = {
 					}
 
 					if (!themeDisplay.layoutMaximized) {
-						var configurationLink = portlet.one('.portlet-configuration a');
+						var configurationLink = portlet.all('.portlet-configuration a');
 
-						if (configurationLink) {
-							configurationLink.on(
-								'click',
-								function(event) {
-									var configurationURL = event.currentTarget.attr('href');
+						configurationLink.on(
+							'click',
+							function(event) {
+								var configurationURL = event.currentTarget.attr('href');
 
-									instance.openConfiguration(portlet, portletId, configurationURL, namespacedId);
+								instance.openConfiguration(portlet, portletId, configurationURL, namespacedId);
 
-									event.preventDefault();
-								}
-							);
-						}
+								event.preventDefault();
+							}
+						);
 
 						var minimizeLink = portlet.one('.portlet-minimize a');
 
