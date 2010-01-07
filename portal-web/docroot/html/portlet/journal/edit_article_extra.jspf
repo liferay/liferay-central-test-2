@@ -195,7 +195,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 							<input id="<portlet:namespace />template<%= tableIteratorObj.getTemplateId() %>_xsl" type="hidden" value="<%= JS.encodeURIComponent(tableIteratorObj.getXsl()) %>" />
 
 							<liferay-util:buffer var="templateLabel">
-							    <a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></portlet:renderURL>">
+								<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></portlet:renderURL>">
 									<%= tableIteratorObj.getName() %>
 								</a>
 							</liferay-util:buffer>
