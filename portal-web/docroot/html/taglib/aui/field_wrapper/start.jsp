@@ -35,15 +35,14 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:last"));
 %>
 
-<div class="aui-ctrl-holder <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %> ">
-	<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= !Validator.equals(name, namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
-			<liferay-ui:message key="<%= label %>" />
+<span class="aui-field <%= inlineField ? "aui-field-labels-inline" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-field-first" : StringPool.BLANK %> <%= last ? "aui-field-last" : StringPool.BLANK %> ">
+	<span class="aui-field-content">
+		<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
+			<label class="aui-field-label" <%= !Validator.equals(name, namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+				<liferay-ui:message key="<%= label %>" />
 
-			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
-				<liferay-ui:icon-help message="<%= helpMessage %>" />
-			</c:if>
-		</label>
-	</c:if>
-
-	<span class="aui-form-field">
+				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+					<liferay-ui:icon-help message="<%= helpMessage %>" />
+				</c:if>
+			</label>
+		</c:if>

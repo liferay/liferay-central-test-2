@@ -31,11 +31,8 @@ String label = GetterUtil.getString((String)request.getAttribute("aui:field-wrap
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:name"));
 %>
 
-		</select>
-	</span>
-
 	<c:if test='<%= inlineLabel.equals("right") %>'>
-		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= !name.equals(namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+		<label class="aui-field-label" <%= !name.equals(namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -43,4 +40,6 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 			</c:if>
 		</label>
 	</c:if>
-</div>
+
+	</span>
+</span>
