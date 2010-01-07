@@ -139,11 +139,6 @@ body {
 	padding: 0 15px;
 }
 
-.lfr-ctrl-panel .panel-page-menu {
-	padding-bottom: 10000px;
-	margin-bottom: -10000px;
-}
-
 .lfr-ctrl-panel .lfr-add-content {
 	background: url(../images/common/category_bg.png) repeat-x 0 0;
 	margin: 0;
