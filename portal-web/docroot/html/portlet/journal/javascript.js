@@ -439,6 +439,7 @@ AUI().add(
 				else {
 					if (!confirm(Liferay.Language.get('are-you-sure-you-want-to-switch-the-languages-view'))) {
 						languageIdInput.one('option[value=' + defaultLocaleInput.val() + ']').attr('selected', 'selected');
+
 						return;
 					}
 				}
@@ -484,16 +485,14 @@ AUI().add(
 
 				var fields = instance.getFields();
 
-				if (fields && fields.size() <= 1) {
-					return;
-				}
+				if (fields && fields.size() > 1) {
+					if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-field-and-all-its-children'))) {
+						instance.closeRepeatedSiblings(source);
+						instance.closeEditFieldOptions();
 
-				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-field-and-all-its-children'))) {
-					instance.closeRepeatedSiblings(source);
-					instance.closeEditFieldOptions();
-
-					if (source.inDoc()) {
-						source.remove();
+						if (source.inDoc()) {
+							source.remove();
+						}
 					}
 				}
 			},
@@ -622,16 +621,15 @@ AUI().add(
 					if (confirm(Liferay.Language.get('you-should-save-the-structure-first'))) {
 						instance.openSaveStructureDialog();
 					}
-
-					return;
 				}
+				else {
+					form.attr('action', downloadAction);
+					form.attr('target', '_self');
 
-				form.attr('action', downloadAction);
-				form.attr('target', '_self');
+					xmlInput.val(articleContent);
 
-				xmlInput.val(articleContent);
-
-				form.submit();
+					form.submit();
+				}
 			},
 
 			editContainerNormalMode: function() {
@@ -719,6 +717,8 @@ AUI().add(
 				var sourceRoots = A.all(structureTreeId + ' > li');
 				var hasStructure = instance.hasStructure();
 
+				var content;
+
 				if (!hasStructure) {
 					var item = sourceRoots.item(0);
 
@@ -726,7 +726,7 @@ AUI().add(
 						var id = item.get('id');
 						var fieldInstance = fieldsDataSet.item(id);
 
-						return fieldInstance.getContent(item); // NOTE: return
+						content = fieldInstance.getContent(item);
 					}
 				}
 				else {
@@ -777,8 +777,10 @@ AUI().add(
 
 					buffer.push(root.closeTag);
 
-					return buffer.join('');
+					content = buffer.join('');
 				}
+
+				return content;
 			},
 
 			getById: function(id, namespace) {
@@ -1260,29 +1262,28 @@ AUI().add(
 					if (confirm(Liferay.Language.get('you-should-save-the-structure-first'))) {
 						instance.openSaveStructureDialog();
 					}
-
-					return;
 				}
+				else {
+					var languageIdInput = instance.getByName(form, 'languageId');
+					var typeInput = instance.getByName(form, 'type');
+					var versionInput = instance.getByName(form, 'version');
+					var structureIdInput = instance.getByName(form, 'structureId');
+					var templateIdInput = instance.getByName(form, 'templateId');
 
-				var languageIdInput = instance.getByName(form, 'languageId');
-				var typeInput = instance.getByName(form, 'type');
-				var versionInput = instance.getByName(form, 'version');
-				var structureIdInput = instance.getByName(form, 'structureId');
-				var templateIdInput = instance.getByName(form, 'templateId');
+					var previewURL = themeDisplay.getPathMain() + '/journal/view_article_content?cmd=preview&groupId=' + themeDisplay.getScopeGroupId() + '&articleId=' + instance.articleId + '&version=' + versionInput.val() + '&languageId=' + languageIdInput.val() + '&type=' + typeInput.val() + '&structureId=' + structureIdInput.val() + '&templateId=' + templateIdInput.val();
 
-				var previewURL = themeDisplay.getPathMain() + '/journal/view_article_content?cmd=preview&groupId=' + themeDisplay.getScopeGroupId() + '&articleId=' + instance.articleId + '&version=' + versionInput.val() + '&languageId=' + languageIdInput.val() + '&type=' + typeInput.val() + '&structureId=' + structureIdInput.val() + '&templateId=' + templateIdInput.val();
+					auxForm.attr('action', previewURL);
+					auxForm.attr('target', '_blank');
 
-				auxForm.attr('action', previewURL);
-				auxForm.attr('target', '_blank');
+					var titleInput = instance.getByName(form, 'title', true);
+					var titleAuxFormInput = instance.getByName(auxForm, 'title', true);
+					var xmlAuxFormInput = instance.getByName(auxForm, 'xml', true);
 
-				var titleInput = instance.getByName(form, 'title', true);
-				var titleAuxFormInput = instance.getByName(auxForm, 'title', true);
-				var xmlAuxFormInput = instance.getByName(auxForm, 'xml', true);
+					titleAuxFormInput.val(titleInput.val());
+					xmlAuxFormInput.val(articleContent);
 
-				titleAuxFormInput.val(titleInput.val());
-				xmlAuxFormInput.val(articleContent);
-
-				auxForm.submit();
+					auxForm.submit();
+				}
 			},
 
 			renderEditFieldOptions: function(source) {
@@ -1376,11 +1377,8 @@ AUI().add(
 					if (confirm(Liferay.Language.get('you-should-save-the-structure-first'))) {
 						instance.openSaveStructureDialog();
 					}
-
-					return;
 				}
-
-				if (instance.hasStructure() && !instance.hasTemplate()) {
+				else if (instance.hasStructure() && !instance.hasTemplate()) {
 					var templateMessage = Liferay.Language.get('please-add-a-template-to-render-this-structure');
 
 					alert(templateMessage);
@@ -1393,45 +1391,44 @@ AUI().add(
 					);
 
 					A.one('#selectTemplateBtn').focus();
-
-					return;
 				}
-
-				if (!cmd) {
-					cmd = instance.articleId ? 'update' : 'add';
-				}
-
-				var cmdInput = instance.getByName(form, 'cmd');
-				var newArticleIdInput = instance.getByName(form, 'newArticleId');
-				var articleIdInput = instance.getByName(form, 'articleId');
-				var contentInput = instance.getByName(form, 'content');
-				var approveInput = instance.getByName(form, 'approve');
-				var saveAndContinueInput = instance.getByName(form, 'saveAndContinue');
-
-				var canSubmit = instance.validadeRequiredFields();
-
-				if (canSubmit) {
-					if (cmd == 'approve') {
-						approveInput.val(1);
-
+				else {
+					if (!cmd) {
 						cmd = instance.articleId ? 'update' : 'add';
 					}
 
-					cmdInput.val(cmd);
+					var cmdInput = instance.getByName(form, 'cmd');
+					var newArticleIdInput = instance.getByName(form, 'newArticleId');
+					var articleIdInput = instance.getByName(form, 'articleId');
+					var contentInput = instance.getByName(form, 'content');
+					var approveInput = instance.getByName(form, 'approve');
+					var saveAndContinueInput = instance.getByName(form, 'saveAndContinue');
 
-					if (saveAndContinue) {
-						saveAndContinueInput.val(1);
+					var canSubmit = instance.validadeRequiredFields();
+
+					if (canSubmit) {
+						if (cmd == 'approve') {
+							approveInput.val(1);
+
+							cmd = instance.articleId ? 'update' : 'add';
+						}
+
+						cmdInput.val(cmd);
+
+						if (saveAndContinue) {
+							saveAndContinueInput.val(1);
+						}
+
+						if (!instance.articleId) {
+							articleIdInput.val(newArticleIdInput.val());
+						}
+
+						var content = instance.getArticleContentXML();
+
+						contentInput.val(content);
+
+						form.submit();
 					}
-
-					if (!instance.articleId) {
-						articleIdInput.val(newArticleIdInput.val());
-					}
-
-					var content = instance.getArticleContentXML();
-
-					contentInput.val(content);
-
-					form.submit();
 				}
 			},
 
