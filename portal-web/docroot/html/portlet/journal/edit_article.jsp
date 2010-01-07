@@ -212,7 +212,7 @@ if (Validator.isNotNull(content)) {
 String textAreaContent = content;
 
 if ((article != null) && (structure == null)) {
-	textAreaContent = _getDefaultStructureContent(content, "TextAreaField");
+	textAreaContent = _getDefaultStructureContent(content, "content");
 }
 
 boolean disableIncrementVersion = false;
