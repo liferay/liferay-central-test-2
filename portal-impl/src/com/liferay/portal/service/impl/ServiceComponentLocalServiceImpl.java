@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.OldServiceComponentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
@@ -41,10 +42,12 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
 import com.liferay.portal.tools.servicebuilder.Entity;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 
@@ -191,9 +194,7 @@ public class ServiceComponentLocalServiceImpl
 
 		if (previousServiceComponent == null) {
 			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Running " + buildNamespace +
-						" SQL scripts for the first time");
+				_log.info("Running " + buildNamespace + " SQL scripts");
 			}
 
 			db.runSQLTemplateString(tablesSQL, true, false);
@@ -237,6 +238,39 @@ public class ServiceComponentLocalServiceImpl
 				}
 
 				db.runSQLTemplateString(indexesSQL, true, false);
+			}
+		}
+	}
+
+	public void verifyDB() throws PortalException, SystemException {
+		List<ServiceComponent> serviceComponents = null;
+
+		Company defaultCompany =
+			companyPersistence.findByWebId(PropsValues.COMPANY_DEFAULT_WEB_ID);
+
+		ShardUtil.pushCompanyService(defaultCompany.getCompanyId());
+
+		try {
+			serviceComponents =
+				serviceComponentPersistence.findAll();
+		}
+		finally {
+			ShardUtil.popCompanyService();
+		}
+
+		for (ServiceComponent serviceComponent : serviceComponents) {
+			String buildNamespace = serviceComponent.getBuildNamespace();
+			String tablesSQL = serviceComponent.getTablesSQL();
+			String sequencesSQL = serviceComponent.getSequencesSQL();
+			String indexesSQL = serviceComponent.getIndexesSQL();
+
+			try {
+				serviceComponentLocalService.upgradeDB(
+					null, buildNamespace, 0, false, null, tablesSQL,
+					sequencesSQL, indexesSQL);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 	}

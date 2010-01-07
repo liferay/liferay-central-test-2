@@ -959,6 +959,14 @@ numberFormat.setMinimumIntegerDigits(2);
 						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('threadDump');" />
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="verify-database-tables-of-all-plugins" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('verifyPluginTables');" />
+					</td>
+				</tr>
 				</table>
 			</c:otherwise>
 		</c:choose>

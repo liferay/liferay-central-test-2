@@ -142,6 +142,12 @@ public class ServiceComponentLocalServiceWrapper
 			sequencesSQL, indexesSQL);
 	}
 
+	public void verifyDB()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_serviceComponentLocalService.verifyDB();
+	}
+
 	public ServiceComponentLocalService getWrappedServiceComponentLocalService() {
 		return _serviceComponentLocalService;
 	}

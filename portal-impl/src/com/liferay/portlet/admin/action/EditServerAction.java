@@ -52,6 +52,7 @@ import com.liferay.portal.search.lucene.LuceneIndexer;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.MaintenanceUtil;
@@ -155,6 +156,9 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("updateOpenOffice")) {
 			updateOpenOffice(actionRequest, preferences);
+		}
+		else if (cmd.equals("verifyPluginTables")) {
+			verifyPluginTables();
 		}
 
 		sendRedirect(actionRequest, actionResponse, redirect);
@@ -573,6 +577,10 @@ public class EditServerAction extends PortletAction {
 			PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(port));
 
 		preferences.store();
+	}
+
+	protected void verifyPluginTables() throws Exception {
+		ServiceComponentLocalServiceUtil.verifyDB();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(EditServerAction.class);

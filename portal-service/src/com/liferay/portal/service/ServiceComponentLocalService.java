@@ -118,4 +118,8 @@ public interface ServiceComponentLocalService {
 		com.liferay.portal.model.ServiceComponent previousServiceComponent,
 		java.lang.String tablesSQL, java.lang.String sequencesSQL,
 		java.lang.String indexesSQL) throws java.lang.Exception;
+
+	public void verifyDB()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

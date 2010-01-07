@@ -139,6 +139,12 @@ public class ServiceComponentLocalServiceUtil {
 			sequencesSQL, indexesSQL);
 	}
 
+	public static void verifyDB()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().verifyDB();
+	}
+
 	public static ServiceComponentLocalService getService() {
 		if (_service == null) {
 			_service = (ServiceComponentLocalService)PortalBeanLocatorUtil.locate(ServiceComponentLocalService.class.getName());
