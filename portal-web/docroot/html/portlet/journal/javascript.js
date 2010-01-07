@@ -717,55 +717,68 @@ AUI().add(
 				var buffer = [];
 				var structureTreeId = instance._guid('#structureTree');
 				var sourceRoots = A.all(structureTreeId + ' > li');
+				var hasStructure = instance.hasStructure();
 
-				var attributes = null;
-				var availableLocales = [];
-				var stillLocalized = false;
-				var availableLocalesElements = A.all('[name=' + instance.portletNamespace + 'available_locales]');
-				var defaultLocale = instance.getById('defaultLocale').val();
+				if (!hasStructure) {
+					var item = sourceRoots.item(0);
 
-				instance.getFields().each(
-					function(item, index, collection) {
+					if (item) {
 						var id = item.get('id');
 						var fieldInstance = fieldsDataSet.item(id);
-						var isLocalized = fieldInstance.get('localized');
 
-						if (isLocalized) {
-							stillLocalized = true;
-						}
+						return fieldInstance.getContent(item); // NOTE: return
 					}
-				);
+				}
+				else {
+					var attributes = null;
+					var availableLocales = [];
+					var stillLocalized = false;
+					var availableLocalesElements = A.all('[name=' + instance.portletNamespace + 'available_locales]');
+					var defaultLocale = instance.getById('defaultLocale').val();
 
-				if (stillLocalized) {
-					availableLocalesElements.each(
+					instance.getFields().each(
 						function(item, index, collection) {
-							var locale = item.val();
+							var id = item.get('id');
+							var fieldInstance = fieldsDataSet.item(id);
+							var isLocalized = fieldInstance.get('localized');
 
-							if (locale) {
-								availableLocales.push(locale);
+							if (isLocalized) {
+								stillLocalized = true;
 							}
 						}
 					);
 
-					attributes = {
-						'available-locales': availableLocales.join(','),
-						'default-locale': defaultLocale
-					};
-				}
+					if (stillLocalized) {
+						availableLocalesElements.each(
+							function(item, index, collection) {
+								var locale = item.val();
 
-				var root = instance._createDynamicNode('root', attributes);
+								if (locale) {
+									availableLocales.push(locale);
+								}
+							}
+						);
 
-				buffer.push(root.openTag);
-
-				sourceRoots.each(
-					function(item, index, collection) {
-						instance._appendStructureDynamicElementAndMetaData(item, buffer, true);
+						attributes = {
+							'available-locales': availableLocales.join(','),
+							'default-locale': defaultLocale
+						};
 					}
-				);
 
-				buffer.push(root.closeTag);
+					var root = instance._createDynamicNode('root', attributes);
 
-				return buffer.join('');
+					buffer.push(root.openTag);
+
+					sourceRoots.each(
+						function(item, index, collection) {
+							instance._appendStructureTypeElementAndMetaData(item, buffer, true);
+						}
+					);
+
+					buffer.push(root.closeTag);
+
+					return buffer.join('');
+				}
 			},
 
 			getById: function(id, namespace) {
@@ -1042,7 +1055,7 @@ AUI().add(
 				A.each(
 					sourceRoots,
 					function(item, index, collection) {
-						instance._appendStructureDynamicElementAndMetaData(item, buffer);
+						instance._appendStructureTypeElementAndMetaData(item, buffer);
 					}
 				);
 
@@ -1079,6 +1092,25 @@ AUI().add(
 				var inputName = withoutNamespace ? name : instance.portletNamespace + name;
 
 				return A.get(currentForm).one('[name=' + inputName + ']');
+			},
+
+			getNodeTypeContent: function() {
+				var instance = this;
+
+				return instance.hasStructure() ? 'dynamic-content' : 'static-content';
+			},
+
+			hasStructure: function() {
+				var instance = this;
+
+				return !!instance.getById('structureId').val();
+			},
+
+			hasTemplate: function() {
+				var instance = this;
+				var form = instance.getPrincipalForm();
+
+				return !!instance.getByName(form, 'templateId').val();
 			},
 
 			helperIntersecting: function() {
@@ -1344,6 +1376,23 @@ AUI().add(
 					if (confirm(Liferay.Language.get('you-should-save-the-structure-first'))) {
 						instance.openSaveStructureDialog();
 					}
+
+					return;
+				}
+
+				if (instance.hasStructure() && !instance.hasTemplate()) {
+					var templateMessage = Liferay.Language.get('please-add-a-template-to-render-this-structure');
+
+					alert(templateMessage);
+
+					instance.showMessage(
+						'#selectTemplateMessage',
+						'info',
+						templateMessage,
+						30000
+					);
+
+					A.one('#selectTemplateBtn').focus();
 
 					return;
 				}
@@ -2122,19 +2171,19 @@ AUI().add(
 				A.each(
 					children,
 					function(item, index, collection) {
-						instance._appendStructureDynamicElementAndMetaData(item, buffer, generateArticleContent);
+						instance._appendStructureTypeElementAndMetaData(item, buffer, generateArticleContent);
 					}
 				);
 			},
 
-			_appendStructureDynamicElementAndMetaData: function(source, buffer, generateArticleContent) {
+			_appendStructureTypeElementAndMetaData: function(source, buffer, generateArticleContent) {
 				var instance = this;
 
 				var id = source.get('id');
 				var fieldInstance = fieldsDataSet.item(id);
 
 				if (fieldInstance) {
-					var dynamicElement;
+					var typeElement;
 					var type = fieldInstance.get('fieldType');
 					var indexType = fieldInstance.get('indexType');
 
@@ -2146,7 +2195,7 @@ AUI().add(
 							fieldInstance.set('instanceId', instanceId);
 						}
 
-						dynamicElement = instance._createDynamicNode(
+						typeElement = instance._createDynamicNode(
 							'dynamic-element',
 							{
 								'instance-id': instanceId,
@@ -2157,7 +2206,7 @@ AUI().add(
 						);
 					}
 					else {
-						dynamicElement = instance._createDynamicNode(
+						typeElement = instance._createDynamicNode(
 							'dynamic-element',
 							{
 								name: encodeURI(fieldInstance.get('variableName')),
@@ -2176,7 +2225,8 @@ AUI().add(
 						};
 					}
 
-					var dynamicContent = instance._createDynamicNode('dynamic-content', dynConAttributes);
+					var nodeTypeContent = instance.getNodeTypeContent();
+					var typeContent = instance._createDynamicNode(nodeTypeContent, dynConAttributes);
 					var metadata = instance._createDynamicNode('meta-data');
 
 					var entryInstructions = instance._createDynamicNode(
@@ -2214,7 +2264,7 @@ AUI().add(
 						}
 					);
 
-					buffer.push(dynamicElement.openTag);
+					buffer.push(typeElement.openTag);
 
 					if (!generateArticleContent) {
 						instance._appendStructureFieldOptionsBuffer(source, buffer);
@@ -2258,10 +2308,10 @@ AUI().add(
 							buffer.push(predefinedValue.openTag);
 							buffer.push('<![CDATA[' + predefinedValueVal + ']]>');
 							buffer.push(predefinedValue.closeTag);
-							buffer.push(metadata.closeTag);
+						buffer.push(metadata.closeTag);
 					}
 					else if (generateArticleContent) {
-						buffer.push(dynamicContent.openTag);
+						buffer.push(typeContent.openTag);
 
 						var appendOptions = (type == 'multi-list' || type == 'list');
 
@@ -2274,10 +2324,10 @@ AUI().add(
 							buffer.push('<![CDATA[' + content + ']]>')
 						}
 
-						buffer.push(dynamicContent.closeTag);
+						buffer.push(typeContent.closeTag);
 					}
 
-					buffer.push(dynamicElement.closeTag);
+					buffer.push(typeElement.closeTag);
 				}
 			},
 
@@ -2297,7 +2347,7 @@ AUI().add(
 							var optionValue = item.val();
 
 							if (!generateArticleContent) {
-								var dynamicElementOption = instance._createDynamicNode(
+								var typeElementOption = instance._createDynamicNode(
 									'dynamic-element',
 									{
 										name: optionKey,
@@ -2306,7 +2356,7 @@ AUI().add(
 									}
 								);
 
-								buffer.push(dynamicElementOption.openTag + dynamicElementOption.closeTag);
+								buffer.push(typeElementOption.openTag + typeElementOption.closeTag);
 							}
 							else {
 								if (item.get('selected')) {
@@ -2333,13 +2383,13 @@ AUI().add(
 				var instance = this;
 
 				var attrs = [];
-				var dynamicElement = [];
+				var typeElement = [];
 
 				if (!nodeName) {
 					nodeName = 'dynamic-element';
 				}
 
-				var dynamicElementModel = ['<', nodeName, (attributeMap ? ' ' : ''), , '>', ,'</', nodeName, '>'];
+				var typeElementModel = ['<', nodeName, (attributeMap ? ' ' : ''), , '>', ,'</', nodeName, '>'];
 
 				A.each(
 					attributeMap || {},
@@ -2350,12 +2400,12 @@ AUI().add(
 					}
 				);
 
-				dynamicElementModel[3] = attrs.join('').replace(/[\s]+$/g, '');
-				dynamicElement = dynamicElementModel.join('').replace(/></, '>><<').split(/></);
+				typeElementModel[3] = attrs.join('').replace(/[\s]+$/g, '');
+				typeElement = typeElementModel.join('').replace(/></, '>><<').replace(/ +>/, '>').split(/></);
 
 				return {
-					closeTag: dynamicElement[1],
-					openTag: dynamicElement[0]
+					closeTag: typeElement[1],
+					openTag: typeElement[0]
 				};
 			},
 

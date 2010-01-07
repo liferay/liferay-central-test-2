@@ -156,13 +156,11 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			<div class="journal-form-presentation-label">
 				<c:choose>
 					<c:when test="<%= templates.isEmpty() %>">
-						<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
+						<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
 
-						<div class="journal-article-required-message portlet-msg-info">
-							<liferay-ui:message key="please-select-a-template-first" />
-						</div>
+						<div id="selectTemplateMessage"></div>
 
-						<input type="button" value="<liferay-ui:message key="select" />"
+						<input id="selectTemplateBtn" type="button" value="<liferay-ui:message key="select" />"
 							onClick="
 								if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
 									var templateWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'template', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
@@ -196,10 +194,13 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 
 							<input id="<portlet:namespace />template<%= tableIteratorObj.getTemplateId() %>_xsl" type="hidden" value="<%= JS.encodeURIComponent(tableIteratorObj.getXsl()) %>" />
 
-							<input <%= templateChecked ? "checked" : "" %> name="<portlet:namespace />templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" />
+							<liferay-util:buffer var="templateLabel">
+							    <a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></portlet:renderURL>">
+									<%= tableIteratorObj.getName() %>
+								</a>
+							</liferay-util:buffer>
 
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></portlet:renderURL>">
-							<%= tableIteratorObj.getName() %></a>
+							<aui:input checked="<%= templateChecked %>" label="<%= templateLabel %>" name="templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" />
 
 							<c:if test="<%= tableIteratorObj.isSmallImage() %>">
 								<br />

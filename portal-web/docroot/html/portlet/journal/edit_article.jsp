@@ -209,12 +209,6 @@ if (Validator.isNotNull(content)) {
 	}
 }
 
-String textAreaContent = content;
-
-if ((article != null) && (structure == null)) {
-	textAreaContent = _getDefaultStructureContent(content, "content");
-}
-
 boolean disableIncrementVersion = false;
 
 if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION) {
@@ -303,7 +297,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	}
 
 	function <portlet:namespace />initEditor() {
-		return "<%= UnicodeFormatter.toString(textAreaContent) %>";
+		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 
 	function <portlet:namespace />removeArticleLocale() {
@@ -912,24 +906,6 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 			pageContext.include("/html/portlet/journal/edit_article_content_xsd_el_bottom.jsp");
 		}
 	}
-}
-
-private String _getDefaultStructureContent(String content, String fieldName) throws Exception {
-	List<Element> elements = new ArrayList<Element>();
-
-	Document document = SAXReaderUtil.read(content);
-
-	Iterator<Element> itr = document.getRootElement().elements().iterator();
-
-	while (itr.hasNext()) {
-		Element element = itr.next();
-
-		if (fieldName.equals(element.attributeValue("name", StringPool.BLANK))) {
-			return element.elementTextTrim("dynamic-content");
-		}
-	}
-
-	return StringPool.BLANK;
 }
 
 private Map<String, String> _getMetaData(Element xsdElement, String elName) {
