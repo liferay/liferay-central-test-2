@@ -28,7 +28,6 @@ import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchRoleException;
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
@@ -131,20 +130,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			friendlyName = organization.getName();
 		}
 
-		long groupId = -1;
+		long groupId = 0;
 
 		while (true) {
 			groupId = counterLocalService.increment();
 
-			try {
-				User userScreenName = userPersistence.findByC_SN(
-					user.getCompanyId(), String.valueOf(groupId));
+			User userScreenName = userPersistence.fetchByC_SN(
+				user.getCompanyId(), String.valueOf(groupId));
 
-				if (userScreenName == null) {
-					break;
-				}
-			}
-			catch (NoSuchUserException nsue) {
+			if (userScreenName == null) {
 				break;
 			}
 		}

@@ -3355,7 +3355,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 
 			Group group = groupPersistence.fetchByPrimaryKey(
-				Long.valueOf(screenName));
+				GetterUtil.getLong(screenName));
 
 			if (group != null) {
 				throw new UserScreenNameException();
