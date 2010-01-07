@@ -41,9 +41,10 @@ public class CoalescedPipe<E> {
 
 	public CoalescedPipe(Comparator<E> comparator) {
 		_comparator = comparator;
+		_notEmptyCondition = _takeLock.newCondition();
+
 		_headElementLink = new ElementLink<E>(null);
 		_lastElementLink = _headElementLink;
-		_notEmptyCondition = _takeLock.newCondition();
 	}
 
 	public long coalescedCount() {
