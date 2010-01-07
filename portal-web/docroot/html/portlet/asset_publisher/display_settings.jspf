@@ -81,7 +81,7 @@
 
 <aui:input inlineLabel="left" name="showAvailableLocales" type="checkbox" value="<%= showAvailableLocales %>" />
 
-<aui:field-wrapper helpMessage='<%= !openOfficeServerEnabled ? "enabling-openoffice-integration-provides-document-conversion-functionality" : StringPool.BLANK %>' label="convert-to">
+<aui:field-wrapper helpMessage='<%= !openOfficeServerEnabled ? "enabling-openoffice-integration-provides-document-conversion-functionality" : StringPool.BLANK %>' label="enable-conversion-to">
 
 	<%
 	for (String conversion : conversions) {
