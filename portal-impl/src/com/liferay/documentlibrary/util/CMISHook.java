@@ -55,6 +55,14 @@ import org.apache.abdera.model.Link;
 public class CMISHook extends BaseHook {
 
 	public CMISHook() {
+		try {
+			String version = CMISUtil.verifyRepository();
+
+			_log.info("CMIS Service is running version " + version);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 	}
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)

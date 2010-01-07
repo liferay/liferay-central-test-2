@@ -144,6 +144,10 @@ public class CMISUtil {
 		return _instance._getService();
 	}
 
+	public static String verifyRepository() throws Exception {
+		return _instance._verifyRepository();
+	}
+
 	private CMISUtil() {
 		try {
 			_abdera = Abdera.getInstance();
@@ -155,8 +159,6 @@ public class CMISUtil {
 			Factory factory = _abdera.getFactory();
 
 			factory.registerExtension(new CMISExtensionFactory());
-
-			_verifyRepository();
 		}
 		catch (Exception e) {
 			if (e instanceof RuntimeException) {
@@ -203,6 +205,8 @@ public class CMISUtil {
 		ClientResponse clientResponse = _getAbedraClient().post(
 			url, entry);
 
+		_verify(clientResponse);
+
 		if (ResponseType.select(
 				clientResponse.getStatus()) != ResponseType.SUCCESS) {
 
@@ -245,6 +249,8 @@ public class CMISUtil {
 
 	private void _delete(String url) throws CMISException {
 		ClientResponse clientResponse = _getAbedraClient().delete(url);
+
+		_verify(clientResponse);
 
 		if (ResponseType.select(
 				clientResponse.getStatus()) != ResponseType.SUCCESS) {
@@ -299,6 +305,8 @@ public class CMISUtil {
 
 		ClientResponse clientResponse = _getAbedraClient().get(url);
 
+		_verify(clientResponse);
+
 		Feed feed = (Feed)clientResponse.getDocument().getRoot();
 
 		for (Entry entry : feed.getEntries()) {
@@ -338,6 +346,8 @@ public class CMISUtil {
 
 		ClientResponse clientResponse = _getAbedraClient().get(url);
 
+		_verify(clientResponse);
+
 		Feed feed = (Feed)clientResponse.getDocument().getRoot();
 
 		for (Entry curEntry : feed.getEntries()) {
@@ -355,6 +365,8 @@ public class CMISUtil {
 
 			ClientResponse clientResponse = _getAbedraClient().get(url);
 
+			_verify(clientResponse);
+
 			return clientResponse.getInputStream();
 		}
 		catch (Exception e) {
@@ -366,10 +378,22 @@ public class CMISUtil {
 		ClientResponse clientResponse = _getAbedraClient().get(
 			PropsValues.CMIS_REPOSITORY_URL);
 
+		_verify(clientResponse);
+
 		return (Service)clientResponse.getDocument().getRoot();
 	}
 
-	private void _verifyRepository() throws Exception {
+	private void _verify(ClientResponse clientResponse) throws CMISException {
+		int status = clientResponse.getStatus();
+		String statusText = clientResponse.getStatusText();
+
+		if (status >= 300) {
+			throw new CMISException(
+				"CMIS server returned " + status + " " + statusText);
+		}
+	}
+
+	private String _verifyRepository() throws Exception {
 		Service service = _getService();
 
 		Workspace workspace = service.getWorkspaces().get(0);
@@ -409,6 +433,8 @@ public class CMISUtil {
 		Link link = entry.getLink(_cmisConstants.LINK_CHILDREN);
 
 		_linkChildrenURL = link.getHref().toString();
+
+		return version;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CMISUtil.class);

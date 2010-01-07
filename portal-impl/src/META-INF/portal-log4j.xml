@@ -28,6 +28,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.documentlibrary.util.CMISHook">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.documentlibrary.util.HookFactory">
 		<priority value="ERROR" />
 	</category>
