@@ -210,11 +210,9 @@ if (Validator.isNotNull(content)) {
 }
 
 String textAreaContent = content;
-String textFieldContent = StringPool.BLANK;
 
 if ((article != null) && (structure == null)) {
 	textAreaContent = _getDefaultStructureContent(content, "TextAreaField");
-	textFieldContent = _getDefaultStructureContent(content, "TextField");
 }
 
 boolean disableIncrementVersion = false;
@@ -552,34 +550,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<c:when test="<%= structure == null %>">
 						<div id="<portlet:namespace />structureTreeWrapper">
 							<ul class="structure-tree" id="<portlet:namespace />structureTree">
-								<li class="structure-field" dataName="TextField" dataType="text">
-									<span class="journal-article-close"></span>
-
-									<span class="folder">
-										<div class="field-container">
-											<div class="journal-article-move-handler"></div>
-
-											<label class="journal-article-field-label" for="">
-												<span>TextField</span>
-											</label>
-
-											<div class="journal-article-component-container">
-												<input class="principal-field-element" size="55" type="text" value="<%= textFieldContent %>" />
-											</div>
-
-											<div class="journal-article-required-message portlet-msg-error"><liferay-ui:message key="this-field-is-required" /></div>
-
-											<div class="journal-article-buttons">
-												<input class="edit-button" type="button" value="<liferay-ui:message key="edit-options" />" />
-
-												<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
-											</div>
-										</div>
-
-										<ul class="folder-droppable"></ul>
-									</span>
-								</li>
-
 								<li class="structure-field" dataName="TextAreaField" dataType="text_area">
 									<span class="journal-article-close"></span>
 
