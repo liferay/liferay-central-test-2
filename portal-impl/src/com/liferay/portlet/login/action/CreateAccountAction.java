@@ -22,22 +22,33 @@
 
 package com.liferay.portlet.login.action;
 
+import com.liferay.portal.AddressCityException;
+import com.liferay.portal.AddressStreetException;
+import com.liferay.portal.AddressZipException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactFullNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
+import com.liferay.portal.EmailAddressException;
+import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.NoSuchOrganizationException;
+import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.OrganizationParentException;
+import com.liferay.portal.PhoneNumberException;
+import com.liferay.portal.RequiredFieldException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.ReservedUserScreenNameException;
+import com.liferay.portal.TermsOfUseException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
+import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -80,6 +91,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="CreateAccountAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Amos Fong
  */
 public class CreateAccountAction extends PortletAction {
 
@@ -96,22 +108,33 @@ public class CreateAccountAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof CaptchaTextException ||
+			if (e instanceof AddressCityException ||
+				e instanceof AddressStreetException ||
+				e instanceof AddressZipException ||
+				e instanceof CaptchaTextException ||
 				e instanceof ContactFirstNameException ||
 				e instanceof ContactFullNameException ||
 				e instanceof ContactLastNameException ||
 				e instanceof DuplicateUserEmailAddressException ||
 				e instanceof DuplicateUserScreenNameException ||
+				e instanceof EmailAddressException ||
+				e instanceof NoSuchCountryException ||
+				e instanceof NoSuchListTypeException ||
 				e instanceof NoSuchOrganizationException ||
+				e instanceof NoSuchRegionException ||
 				e instanceof OrganizationParentException ||
+				e instanceof PhoneNumberException ||
+				e instanceof RequiredFieldException ||
 				e instanceof RequiredUserException ||
 				e instanceof ReservedUserEmailAddressException ||
 				e instanceof ReservedUserScreenNameException ||
+				e instanceof TermsOfUseException ||
 				e instanceof UserEmailAddressException ||
 				e instanceof UserIdException ||
 				e instanceof UserPasswordException ||
 				e instanceof UserScreenNameException ||
-				e instanceof UserSmsException) {
+				e instanceof UserSmsException ||
+				e instanceof WebsiteURLException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
@@ -175,7 +198,7 @@ public class CreateAccountAction extends PortletAction {
 		boolean autoPassword = true;
 		String password1 = null;
 		String password2 = null;
-		boolean autoScreenName = false;
+		boolean autoScreenName = getAutoScreenName();
 		String screenName = ParamUtil.getString(actionRequest, "screenName");
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
@@ -261,6 +284,22 @@ public class CreateAccountAction extends PortletAction {
 			login = user.getEmailAddress();
 		}
 
+		sendRedirect(
+			login, password1, themeDisplay, actionRequest, actionResponse);
+	}
+
+	protected boolean getAutoScreenName() {
+		return _AUTO_SCREEN_NAME;
+	}
+
+	protected void sendRedirect(
+			String login, String password, ThemeDisplay themeDisplay,
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
 		String redirect = PortalUtil.escapeRedirect(
 			ParamUtil.getString(actionRequest, "redirect"));
 
@@ -268,8 +307,7 @@ public class CreateAccountAction extends PortletAction {
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 
-			LoginUtil.login(
-				request, response, login, password1, false, null);
+			LoginUtil.login(request, response, login, password, false, null);
 		}
 		else {
 			PortletURL loginURL = LoginUtil.getLoginURL(
@@ -286,6 +324,8 @@ public class CreateAccountAction extends PortletAction {
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
+
+	private static final boolean _AUTO_SCREEN_NAME = false;
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 

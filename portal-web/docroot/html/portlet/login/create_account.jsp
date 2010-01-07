@@ -53,6 +53,9 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="openId" type="hidden" value="<%= openId %>" />
 
+	<liferay-ui:error exception="<%= AddressCityException.class %>" message="please-enter-a-valid-city" />
+	<liferay-ui:error exception="<%= AddressStreetException.class %>" message="please-enter-a-valid-street" />
+	<liferay-ui:error exception="<%= AddressZipException.class %>" message="please-enter-a-valid-zip" />
 	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 	<liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
 	<liferay-ui:error exception="<%= ContactFullNameException.class %>" message="please-enter-a-valid-first-middle-and-last-name" />
@@ -60,9 +63,16 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
 	<liferay-ui:error exception="<%= DuplicateUserIdException.class %>" message="the-user-id-you-requested-is-already-taken" />
 	<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
+	<liferay-ui:error exception="<%= EmailAddressException.class %>" message="please-enter-a-valid-email-address" />
+	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
+	<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeConstants.ADDRESS %>" message="please-select-a-type" />
+	<liferay-ui:error exception="<%= NoSuchRegionException.class %>" message="please-select-a-region" />
+	<liferay-ui:error exception="<%= PhoneNumberException.class %>" message="please-enter-a-valid-phone-number" />
+	<liferay-ui:error exception="<%= RequiredFieldException.class %>" message="please-fill-out-all-required-fields" />
 	<liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
 	<liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
 	<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
+	<liferay-ui:error exception="<%= TermsOfUseException.class %>" message="you-must-agree-to-the-terms-of-use" />
 	<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 	<liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
 
@@ -90,6 +100,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
+	<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
 
 	<c:if test='<%= SessionMessages.contains(request, "missingOpenIdUserInformation") %>'>
 		<div class="portlet-msg-info">
