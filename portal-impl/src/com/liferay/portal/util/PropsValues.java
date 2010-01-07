@@ -1671,6 +1671,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.USERS_REMINDER_QUERIES_REQUIRED));
 
+	public static boolean USERS_SCREEN_NAME_ALLOW_NUMERIC =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.USERS_SCREEN_NAME_ALLOW_NUMERIC));
+
 	public static boolean USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));

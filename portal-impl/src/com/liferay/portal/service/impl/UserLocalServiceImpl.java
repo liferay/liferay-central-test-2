@@ -3350,7 +3350,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (Validator.isNumber(screenName) &&
 			!screenName.equals(String.valueOf(userId))) {
 
-			throw new UserScreenNameException();
+			if (!PropsValues.USERS_SCREEN_NAME_ALLOW_NUMERIC) {
+				throw new UserScreenNameException();
+			}
+
+			Group group = groupPersistence.fetchByPrimaryKey(
+				Long.valueOf(screenName));
+
+			if (group != null) {
+				throw new UserScreenNameException();
+			}
 		}
 
 		for (char c : screenName.toCharArray()) {

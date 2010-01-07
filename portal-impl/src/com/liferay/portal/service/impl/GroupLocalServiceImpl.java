@@ -28,6 +28,7 @@ import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
@@ -90,6 +91,7 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  * @author Bruno Farache
+ * @author Wesley Gong
  */
 public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
@@ -129,7 +131,23 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			friendlyName = organization.getName();
 		}
 
-		long groupId = counterLocalService.increment();
+		long groupId = -1;
+
+		while (true) {
+			groupId = counterLocalService.increment();
+
+			try {
+				User userScreenName = userPersistence.findByC_SN(
+					user.getCompanyId(), String.valueOf(groupId));
+
+				if (userScreenName == null) {
+					break;
+				}
+			}
+			catch (NoSuchUserException nsue) {
+				break;
+			}
+		}
 
 		long groupClassNameId = PortalUtil.getClassNameId(Group.class);
 
@@ -1230,7 +1248,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			long groupClassNameId = PortalUtil.getClassNameId(Group.class);
 
 			if (((classNameId != groupClassNameId) &&
-				 (!groupIdFriendlyURL.equals(String.valueOf(classPK)))) ||
+				 (!groupIdFriendlyURL.equals(String.valueOf(classPK))) &&
+				 (!PropsValues.USERS_SCREEN_NAME_ALLOW_NUMERIC)) ||
 				((classNameId == groupClassNameId) &&
 				 (!groupIdFriendlyURL.equals(String.valueOf(groupId))))) {
 
