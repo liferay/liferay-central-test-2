@@ -441,166 +441,169 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
-<input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs3) %>" />
-<input name="<portlet:namespace />tabs4" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs4) %>" />
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />tabs4=<%= tabs4 %>&<portlet:namespace />selPlid=<%= selPlid %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>" />
-<input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
-<input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>" />
-<input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>" />
-<input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>" />
-<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>' />
-<input name="<portlet:namespace /><%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" value="" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPagesURL">
+	<portlet:param name="struts_action" value="/communities/edit_pages" />
+</portlet:actionURL>
 
-<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.MY_PAGES) %>">
-	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) %>">
-		<div>
-			<liferay-ui:message key="edit-pages-for-community" />: <%= liveGroup.getName() %>
-		</div>
+<aui:form action="<%= editPagesURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "savePage(); return false;" %>'>
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
+	<aui:input name="tabs4" type="hidden" value="<%= tabs4 %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="pagesRedirect" type="hidden" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid  %>' />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
+	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
+	<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />
+	<aui:input name="layoutId" type="hidden" value="<%= layoutId %>" />
+	<aui:input name="selPlid" type="hidden" value="<%= selPlid %>" />
+	<aui:input name="wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>' />
+	<aui:input name="<%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" />
 
-		<br />
+	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.MY_PAGES) %>">
+		<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) %>">
+			<div>
+				<liferay-ui:message key="edit-pages-for-community" />: <%= liveGroup.getName() %>
+			</div>
+
+			<br />
+		</c:if>
+
+		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+			<div>
+				<c:choose>
+					<c:when test="<%= liveGroup.isOrganization() %>">
+						<liferay-ui:message key='<%= "edit-pages-for-" + (organization.isRoot() ? "organization" : "location" ) %>' />: <%= HtmlUtil.escape(organization.getName()) %>
+					</c:when>
+					<c:when test="<%= liveGroup.isUser() %>">
+						<liferay-ui:message key="edit-pages-for-user" />: <%= selUser.getFullName() %>
+					</c:when>
+					<c:when test="<%= liveGroup.isUserGroup() %>">
+						<liferay-ui:message key="edit-pages-for-user-group" />: <%= HtmlUtil.escape(group.getDescriptiveName()) %>
+					</c:when>
+				</c:choose>
+			</div>
+
+			<br />
+		</c:if>
+
+		<%
+		String tabs1URL = portletURL.toString();
+
+		if (liveGroup.isUser()) {
+			PortletURL userTabs1URL = renderResponse.createRenderURL();
+
+			userTabs1URL.setWindowState(WindowState.MAXIMIZED);
+
+			userTabs1URL.setParameter("struts_action", "/my_pages/edit_pages");
+			userTabs1URL.setParameter("tabs1", tabs1);
+			userTabs1URL.setParameter("backURL", backURL);
+			userTabs1URL.setParameter("groupId", String.valueOf(liveGroupId));
+
+			tabs1URL = userTabs1URL.toString();
+		}
+		else if (!liveGroup.isUserGroup() && ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)))) {
+			tabs1Names += ",settings";
+		}
+		%>
+
+		<liferay-ui:tabs
+			names="<%= tabs1Names %>"
+			param="tabs1"
+			value="<%= tabs1 %>"
+			url="<%= tabs1URL %>"
+			backURL="<%= PortalUtil.escapeRedirect(backURL) %>"
+		/>
+
+		<%
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), currentURL);
+		%>
 	</c:if>
 
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-		<div>
+	<c:if test="<%= liveGroup.isUserGroup() %>">
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="users-who-belongs-to-this-user-group-will-have-these-pages-copied-to-their-user-pages-when-the-user-is-first-associated-with-the-user-group" />
+		</div>
+	</c:if>
+
+	<c:choose>
+		<c:when test='<%= tabs1.equals("settings") %>'>
+			<liferay-util:include page="/html/portlet/communities/edit_pages_settings.jsp" />
+		</c:when>
+		<c:otherwise>
+
+			<%
+			String tabs2Names = null;
+
+			if (group.isLayoutPrototype()) {
+				tabs2Names = "template";
+			}
+			else {
+				tabs2Names = "pages";
+
+				if (permissionChecker.isOmniadmin() || (PropsValues.LOOK_AND_FEEL_MODIFIABLE && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS))) {
+					tabs2Names += ",look-and-feel";
+				}
+			}
+
+			if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {
+				tabs2Names += ",export-import";
+			}
+
+			if (workflowEnabled) {
+				tabs2Names += ",proposals";
+			}
+
+			if (!StringUtil.contains(tabs2Names, tabs2)) {
+				tabs2 = "pages";
+			}
+
+			if (!GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {
+				tabs2Names = StringUtil.replace(tabs2Names, "pages,", StringPool.BLANK);
+				tabs2 = "proposals";
+			}
+			%>
+
 			<c:choose>
-				<c:when test="<%= liveGroup.isOrganization() %>">
-					<liferay-ui:message key='<%= "edit-pages-for-" + (organization.isRoot() ? "organization" : "location" ) %>' />: <%= HtmlUtil.escape(organization.getName()) %>
+				<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && liveGroup.isUser() %>">
+					<liferay-ui:tabs
+						names="<%= tabs2Names %>"
+						param="tabs2"
+						url="<%= portletURL.toString() %>"
+						backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+					/>
 				</c:when>
-				<c:when test="<%= liveGroup.isUser() %>">
-					<liferay-ui:message key="edit-pages-for-user" />: <%= selUser.getFullName() %>
+				<c:otherwise>
+					<liferay-ui:tabs
+						names="<%= tabs2Names %>"
+						param="tabs2"
+						url="<%= portletURL.toString() %>"
+					/>
+				</c:otherwise>
+			</c:choose>
+
+			<c:choose>
+				<c:when test='<%= tabs2.equals("pages") %>'>
+					<%@ include file="/html/portlet/communities/edit_pages_public_and_private.jspf" %>
 				</c:when>
-				<c:when test="<%= liveGroup.isUserGroup() %>">
-					<liferay-ui:message key="edit-pages-for-user-group" />: <%= HtmlUtil.escape(group.getDescriptiveName()) %>
+				<c:when test='<%= tabs2.equals("look-and-feel") %>'>
+					<liferay-util:include page="/html/portlet/communities/edit_pages_look_and_feel.jsp" />
+				</c:when>
+				<c:when test='<%= tabs2.equals("export-import") %>'>
+					<liferay-util:include page="/html/portlet/communities/edit_pages_export_import.jsp" />
+				</c:when>
+				<c:when test='<%= tabs2.equals("proposals") %>'>
+					<liferay-util:include page="/html/portlet/communities/edit_pages_proposals.jsp" />
 				</c:when>
 			</c:choose>
-		</div>
 
-		<br />
-	</c:if>
-
-	<%
-	String tabs1URL = portletURL.toString();
-
-	if (liveGroup.isUser()) {
-		PortletURL userTabs1URL = renderResponse.createRenderURL();
-
-		userTabs1URL.setWindowState(WindowState.MAXIMIZED);
-
-		userTabs1URL.setParameter("struts_action", "/my_pages/edit_pages");
-		userTabs1URL.setParameter("tabs1", tabs1);
-		userTabs1URL.setParameter("backURL", backURL);
-		userTabs1URL.setParameter("groupId", String.valueOf(liveGroupId));
-
-		tabs1URL = userTabs1URL.toString();
-	}
-	else if (!liveGroup.isUserGroup() && ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)))) {
-		tabs1Names += ",settings";
-	}
-	%>
-
-	<liferay-ui:tabs
-		names="<%= tabs1Names %>"
-		param="tabs1"
-		value="<%= tabs1 %>"
-		url="<%= tabs1URL %>"
-		backURL="<%= PortalUtil.escapeRedirect(backURL) %>"
-	/>
-
-	<%
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), currentURL);
-	%>
-</c:if>
-
-<c:if test="<%= liveGroup.isUserGroup() %>">
-	<div class="portlet-msg-info">
-		<liferay-ui:message key="users-who-belongs-to-this-user-group-will-have-these-pages-copied-to-their-user-pages-when-the-user-is-first-associated-with-the-user-group" />
-	</div>
-</c:if>
-
-<c:choose>
-	<c:when test='<%= tabs1.equals("settings") %>'>
-		<liferay-util:include page="/html/portlet/communities/edit_pages_settings.jsp" />
-	</c:when>
-	<c:otherwise>
-
-		<%
-		String tabs2Names = null;
-
-		if (group.isLayoutPrototype()) {
-			tabs2Names = "template";
-		}
-		else {
-			tabs2Names = "pages";
-
-			if (permissionChecker.isOmniadmin() || (PropsValues.LOOK_AND_FEEL_MODIFIABLE && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS))) {
-				tabs2Names += ",look-and-feel";
+			<%
+			if (!tabs2.equals("pages")) {
+				PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs2, TextFormatter.O)), currentURL);
 			}
-		}
+			%>
 
-		if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {
-			tabs2Names += ",export-import";
-		}
-
-		if (workflowEnabled) {
-			tabs2Names += ",proposals";
-		}
-
-		if (!StringUtil.contains(tabs2Names, tabs2)) {
-			tabs2 = "pages";
-		}
-
-		if (!GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {
-			tabs2Names = StringUtil.replace(tabs2Names, "pages,", StringPool.BLANK);
-			tabs2 = "proposals";
-		}
-		%>
-
-		<c:choose>
-			<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && liveGroup.isUser() %>">
-				<liferay-ui:tabs
-					names="<%= tabs2Names %>"
-					param="tabs2"
-					url="<%= portletURL.toString() %>"
-					backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-				/>
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:tabs
-					names="<%= tabs2Names %>"
-					param="tabs2"
-					url="<%= portletURL.toString() %>"
-				/>
-			</c:otherwise>
-		</c:choose>
-
-		<c:choose>
-			<c:when test='<%= tabs2.equals("pages") %>'>
-				<%@ include file="/html/portlet/communities/edit_pages_public_and_private.jspf" %>
-			</c:when>
-			<c:when test='<%= tabs2.equals("look-and-feel") %>'>
-				<liferay-util:include page="/html/portlet/communities/edit_pages_look_and_feel.jsp" />
-			</c:when>
-			<c:when test='<%= tabs2.equals("export-import") %>'>
-				<liferay-util:include page="/html/portlet/communities/edit_pages_export_import.jsp" />
-			</c:when>
-			<c:when test='<%= tabs2.equals("proposals") %>'>
-				<liferay-util:include page="/html/portlet/communities/edit_pages_proposals.jsp" />
-			</c:when>
-		</c:choose>
-
-		<%
-		if (!tabs2.equals("pages")) {
-			PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs2, TextFormatter.O)), currentURL);
-		}
-		%>
-
-	</c:otherwise>
-</c:choose>
-
-</form>
+		</c:otherwise>
+	</c:choose>
+</aui:form>

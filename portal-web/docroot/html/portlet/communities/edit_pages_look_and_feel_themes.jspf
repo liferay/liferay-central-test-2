@@ -28,8 +28,8 @@ List<ColorScheme> colorSchemes = selTheme.getColorSchemes();
 PluginPackage selPluginPackage = selTheme.getPluginPackage();
 %>
 
-<input name="<portlet:namespace />themeId" type="hidden" value="<%= selTheme.getThemeId() %>" />
-<input name="<portlet:namespace />colorSchemeId" type="hidden" value="<%= selColorScheme.getColorSchemeId() %>" />
+<aui:input name="themeId" type="hidden" value="<%= selTheme.getThemeId() %>" />
+<aui:input name="colorSchemeId" type="hidden" value="<%= selColorScheme.getColorSchemeId() %>" />
 
 <div class="lfr-theme-list">
 	<div class="float-container lfr-current-theme">

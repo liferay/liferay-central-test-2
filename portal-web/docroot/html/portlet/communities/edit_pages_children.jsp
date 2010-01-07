@@ -62,8 +62,8 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 	url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
 />
 
-<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>" />
-<input name="<portlet:namespace />layoutIds" type="hidden" value="" />
+<aui:input name="parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>" />
+<aui:input name="layoutIds" type="hidden" />
 
 <c:choose>
 	<c:when test='<%= tabs4.equals("new-page") %>'>
