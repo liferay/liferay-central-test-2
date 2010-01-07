@@ -117,7 +117,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 		<c:when test='<%= tabs4.equals("import") %>'>
 			<c:choose>
 				<c:when test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">
-					<aui:input label="import-a-lar-file-to-overwrite-the-selected-data" name="importFileName" size="50" />
+					<aui:input label="import-a-lar-file-to-overwrite-the-selected-data" name="importFileName" size="50" type="file" />
 
 					<aui:field-wrapper label="what-would-you-like-to-import">
 						<%@ include file="/html/portlet/communities/edit_pages_export_import_options.jspf" %>

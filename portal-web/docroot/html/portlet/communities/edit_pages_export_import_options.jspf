@@ -166,7 +166,7 @@
 						String taglibToggleDataControls = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "portletDataControls');";
 						%>
 
-						<aui:input checked="<%= true %>" inlineLabel="right" label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" onChange="<%= taglibToggleDataControls %>" type="checkbox" />
+						<aui:input inlineLabel="right" label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" onChange="<%= taglibToggleDataControls %>" type="checkbox" value="<%= true %>" />
 
 						<ul id="<portlet:namespace/>portletDataControls">
 							<li class="tree-item">
@@ -249,9 +249,9 @@
 											</ul>
 										</li>
 										<li>
-											<aui:input inlineLabel="right" label="last" name="range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="last" />
+											<aui:input inlineField="<%= true %>" inlineLabel="right" label="last" name="range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="last" />
 
-											<aui:select name="last">
+											<aui:select label="" name="last">
 												<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "12") %>' value="12" />
 												<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "24") %>' value="24" />
 												<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "48") %>' value="48" />
@@ -297,13 +297,13 @@
 
 											<br />
 
-											<aui:input checked="<%= true %>" inlineLabel="right" label="setup" name='<%= PortletDataHandlerKeys.PORTLET_SETUP + "_" + rootPortletId %>' type="checkbox" />
+											<aui:input inlineLabel="right" label="setup" name='<%= PortletDataHandlerKeys.PORTLET_SETUP + "_" + rootPortletId %>' type="checkbox" value="<%= true %>" />
 
 											<%
 											String taglibToggleControls = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + PortletDataHandlerKeys.PORTLET_DATA + "_" + rootPortletId + "Controls');";
 											%>
 
-											<aui:input checked="<%= true %>" inlineLabel="right" label="data" name='<%= PortletDataHandlerKeys.PORTLET_DATA + "_" + rootPortletId %>' onChange="<%= taglibToggleControls %>" type="checkbox" />
+											<aui:input inlineLabel="right" label="data" name='<%= PortletDataHandlerKeys.PORTLET_DATA + "_" + rootPortletId %>' onChange="<%= taglibToggleControls %>" type="checkbox" value="<%= true %>" />
 
 											<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId + "Controls" %>">
 												<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
@@ -377,7 +377,7 @@
 		</div>
 
 		<div id="<portlet:namespace />exportLessDiv" style="display: none;">
-			<aui:a href='<%= "javascript:" + renderResponse.getNamespace() + "exportLess();" %>' label="more-options"> &raquo;</aui:a>
+			<aui:a href='<%= "javascript:" + renderResponse.getNamespace() + "exportLess();" %>' label="less-options"> &laquo;</aui:a>
 		</div>
 	</c:when>
 	<c:otherwise>
@@ -386,7 +386,7 @@
 		</div>
 
 		<div id="<portlet:namespace />importLessDiv" style="display: none;">
-			<aui:a href='<%= "javascript:" + renderResponse.getNamespace() + "importLess();" %>' label="less-options"> &raquo;</aui:a>
+			<aui:a href='<%= "javascript:" + renderResponse.getNamespace() + "importLess();" %>' label="less-options"> &laquo;</aui:a>
 		</div>
 	</c:otherwise>
 </c:choose>
