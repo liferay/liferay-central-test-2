@@ -37,7 +37,7 @@
 	padding-top: 0;
 }
 
-.lfr-form-row .aui-ctrl-holder {
+.lfr-form-row .aui-field {
 	clear: none;
 	float: left;
 }

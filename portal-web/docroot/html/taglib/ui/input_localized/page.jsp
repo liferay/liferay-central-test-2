@@ -97,7 +97,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 
 					<div class="lfr-form-row">
 						<div class="row-names">
-							<div class="aui-ctrl-holder aui-form-column">
+							<div class="aui-form-column">
 								<img alt="<%= Validator.isNotNull(curLanguageId) ? LocaleUtil.fromLanguageId(curLanguageId).getDisplayName() : StringPool.BLANK %>" class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= Validator.isNotNull(curLanguageId) ? curLanguageId : "../spacer" %>.png" />
 
 								<select <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace />languageId<%= i %>">
@@ -128,7 +128,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 								</select>
 							</div>
 
-							<div class="aui-ctrl-holder aui-form-column">
+							<div class="aui-form-column">
 
 								<%
 								String languageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + curLanguageId);

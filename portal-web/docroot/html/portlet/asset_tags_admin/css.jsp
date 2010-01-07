@@ -187,7 +187,7 @@
 	text-align: left;
 }
 
-.aui-widget-bd .add-tag-layer .aui-ctrl-holder {
+.aui-widget-bd .add-tag-layer .aui-field {
 	margin-bottom: 10px;
 }
 
@@ -196,11 +196,11 @@
 	font-weight: bold;
 }
 
-.aui-widget-bd .add-tag-layer .aui-ctrl-holder input, .aui-widget-bd .add-tag-layer .aui-ctrl-holder select {
+.aui-widget-bd .add-tag-layer .aui-field input, .aui-widget-bd .add-tag-layer .aui-field select {
 	width: 200px;
 }
 
-.ie6 .add-tag-layer .aui-widget-bd .aui-ctrl-holder, .ie6 .add-tag-layer .aui-widget-bd .aui-ctrl-holder {
+.ie6 .add-tag-layer .aui-widget-bd .aui-field, .ie6 .add-tag-layer .aui-widget-bd .aui-field {
 	width: 200px;
 }
 

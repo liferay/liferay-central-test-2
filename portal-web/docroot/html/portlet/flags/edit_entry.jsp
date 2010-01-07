@@ -47,7 +47,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 <script type="text/javascript">
 	AUI().ready(
 		function() {
-			Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonDiv');
+			Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonContainer');
 		}
 	);
 
@@ -115,38 +115,44 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 		</p>
 
 		<fieldset class="aui-block-labels">
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />reason"><liferay-ui:message key="reason-for-the-report" /></label>
+			<span class="aui-field">
+				<span class="aui-field-content">
+					<label for="<portlet:namespace />reason"><liferay-ui:message key="reason-for-the-report" /></label>
 
-				<select name="<portlet:namespace />reason" id="<portlet:namespace />reason">
-					<option value=""></option>
+					<select name="<portlet:namespace />reason" id="<portlet:namespace />reason">
+						<option value=""></option>
 
-					<%
-					for (String reason : PropsValues.FLAGS_REASONS) {
-					%>
+						<%
+						for (String reason : PropsValues.FLAGS_REASONS) {
+						%>
 
-						<option value="<%= reason %>"><liferay-ui:message key="<%= reason %>" /></option>
+							<option value="<%= reason %>"><liferay-ui:message key="<%= reason %>" /></option>
 
-					<%
-					}
-					%>
+						<%
+						}
+						%>
 
-					<option value="other"><liferay-ui:message key="other" /></option>
-				</select>
-			</div>
+						<option value="other"><liferay-ui:message key="other" /></option>
+					</select>	
+				</span>
+			</span>
 
-			<div class="aui-ctrl-holder" id="<portlet:namespace />otherReasonDiv">
-				<label for="<portlet:namespace />otherReason"><liferay-ui:message key="other-reason" /></label>
+			<span class="aui-field" id="<portlet:namespace />otherReasonContainer">
+				<span class="aui-field-content">
+					<label for="<portlet:namespace />otherReason"><liferay-ui:message key="other-reason" /></label>
 
-				<input id="<portlet:namespace />otherReason" name="<portlet:namespace />otherReason" type="text" value="" />
-			</div>
+					<input id="<portlet:namespace />otherReason" name="<portlet:namespace />otherReason" type="text" value="" />
+				</span>
+			</span>
 
 			<c:if test="<%= !themeDisplay.isSignedIn() %>">
-				<div class="aui-ctrl-holder">
-					<label for="<portlet:namespace />reporterEmailAddress"><liferay-ui:message key="email-address" /></label>
+				<span class="aui-field">
+					<span class="aui-field-content">
+						<label for="<portlet:namespace />reporterEmailAddress"><liferay-ui:message key="email-address" /></label>
 
-					<input id="<portlet:namespace />reporterEmailAddress" name="<portlet:namespace />reporterEmailAddress" type="text" value="" />
-				</div>
+						<input id="<portlet:namespace />reporterEmailAddress" name="<portlet:namespace />reporterEmailAddress" type="text" value="" />	
+					</span>
+				</span>
 			</c:if>
 
 			<div class="aui-button-holder">

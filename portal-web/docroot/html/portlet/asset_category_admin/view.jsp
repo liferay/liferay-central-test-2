@@ -63,21 +63,25 @@
 
 				<div class="asset-category-layer-wrapper">
 					<div class="add-category-layer asset-category-layer">
-						<div class="aui-ctrl-holder">
-							<label class="vocabulary-label" for="vocabulary-category-name">
-								<liferay-ui:message key="name" />
-							</label>
+						<span class="aui-field">
+							<span class="aui-field-content">
+								<label class="vocabulary-label" for="vocabulary-category-name">
+									<liferay-ui:message key="name" />
+								</label>
 
-							<input class="vocabulary-category-name" name="vocabulary-category-name" type="text" value="" />
-						</div>
+								<input class="vocabulary-category-name" name="vocabulary-category-name" type="text" value="" />
+							</span>
+						</span>
 
-						<div class="aui-ctrl-holder">
-							<label for="vocabulary-select-list">
-								<liferay-ui:message key="to-vocabulary" />
-							</label>
+						<span class="aui-field">
+							<span class="aui-field-content">
+								<label for="vocabulary-select-list">
+									<liferay-ui:message key="to-vocabulary" />
+								</label>
 
-							<select class="vocabulary-select-list" name="vocabulary-select-list"></select>
-						</div>
+								<select class="vocabulary-select-list" name="vocabulary-select-list"></select>
+							</span>
+						</span>
 
 						<div class="category-permissions-actions">
 							<liferay-ui:input-permissions
@@ -95,13 +99,15 @@
 
 				<div class="asset-category-layer-wrapper">
 					<div class="add-vocabulary-layer asset-category-layer">
-						<div class="aui-ctrl-holder">
-							<label for="vocabulary-name">
-								<liferay-ui:message key="add-vocabulary" />
-							</label>
+						<span class="aui-field">
+							<span class="aui-field-content">
+								<label for="vocabulary-name">
+									<liferay-ui:message key="add-vocabulary" />
+								</label>
 
-							<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
-						</div>
+								<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
+							</span>
+						</span>
 
 						<div class="vocabulary-permissions-actions">
 							<liferay-ui:input-permissions

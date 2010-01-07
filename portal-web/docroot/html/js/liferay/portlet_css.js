@@ -427,7 +427,7 @@ AUI().add(
 				var portlet = instance._curPortlet;
 
 				var customCSS = A.one('#lfr-custom-css');
-				var customCSSContainer = customCSS.ancestor('.aui-ctrl-holder');
+				var customCSSContainer = customCSS.ancestor('.aui-field');
 				var customPortletNoteHTML = '<p class="portlet-msg-info form-hint"></p>';
 				var customPortletNote = A.one('#lfr-portlet-info');
 				var refreshText = '';
@@ -531,13 +531,13 @@ AUI().add(
 					addIdLink = A.Node.create('<a href="javascript:;" id="lfr-add-id">' + Liferay.Language.get('add-a-css-rule-for-just-this-portlet') + '</a>');
 					addClassLink = A.Node.create('<a href="javascript:;" id="lfr-add-class">' + Liferay.Language.get('add-a-css-rule-for-all-portlets-like-this-one') + '</a>');
 
-					var updateOnTypeHolder = A.Node.create('<div class="aui-ctrl-holder"></div>');
+					var updateOnTypeHolder = A.Node.create('<span class="aui-field"><span class="aui-field-content"></span></span>');
 					var updateOnTypeLabel = A.Node.create('<label>' + Liferay.Language.get('update-my-styles-as-i-type') + ' </label>');
 
 					updateOnType = A.Node.create('<input id="lfr-update-on-type" type="checkbox" />');
 
 					updateOnTypeLabel.appendChild(updateOnType);
-					updateOnTypeHolder.appendChild(updateOnTypeLabel);
+					updateOnTypeHolder.get('firstChild').appendChild(updateOnTypeLabel);
 
 					customCSSContainer.placeAfter(insertContainer);
 
@@ -887,7 +887,7 @@ AUI().add(
 					var handleForms = function(item, index, collection) {
 						var checkBox = item;
 
-						var otherHolders = checkBox.ancestor('fieldset').all('.aui-ctrl-holder');
+						var otherHolders = checkBox.ancestor('fieldset').all('.aui-field');
 
 						var checked = item.get('checked');
 

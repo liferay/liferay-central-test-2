@@ -83,7 +83,7 @@
 	width: 100px;
 }
 
-.portlet-enterprise-admin .aui-ctrl-holder.action-ctrl, .portlet-enterprise-admin .aui-ctrl-holder.mailing-ctrl, .portlet-enterprise-admin .aui-ctrl-holder.primary-ctrl {
+.portlet-enterprise-admin .aui-field.action-ctrl, .portlet-enterprise-admin .aui-field.mailing-ctrl, .portlet-enterprise-admin .aui-field.primary-ctrl {
 	margin: 1.8em 0;
 }
 
@@ -245,7 +245,7 @@
 	margin-top: 1.8em;
 }
 
-.portlet-enterprise-admin .instant-messenger .aui-ctrl-holder, .portlet-enterprise-admin .social-network .aui-ctrl-holder {
+.portlet-enterprise-admin .instant-messenger .aui-field, .portlet-enterprise-admin .social-network .aui-field {
 	float: left;
 }
 
@@ -259,7 +259,7 @@
 	margin-bottom: 30px;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels table.org-labor-table td .aui-ctrl-holder {
+.portlet-enterprise-admin .aui-form .aui-block-labels table.org-labor-table td .aui-field {
 	margin-bottom: 0;
 	padding: 3px 1px;
 }
@@ -272,19 +272,19 @@
 	vertical-align: middle;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels .aui-ctrl-holder {
+.portlet-enterprise-admin .aui-form .aui-block-labels .aui-field {
 	margin-bottom: 10px;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels .aui-ctrl-holder.mailing-ctrl {
+.portlet-enterprise-admin .aui-form .aui-block-labels .aui-field.mailing-ctrl {
 	clear: both;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels .aui-ctrl-holder.mailing-ctrl span {
+.portlet-enterprise-admin .aui-form .aui-block-labels .aui-field.mailing-ctrl span {
 	margin-right: 0.5em;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels .aui-ctrl-holder.localized-language-selector {
+.portlet-enterprise-admin .aui-form .aui-block-labels .aui-field.localized-language-selector {
 	margin-bottom: 0;
 }
 
@@ -294,7 +294,7 @@
 	width: auto;
 }
 
-.portlet-enterprise-admin #addresses .aui-ctrl-holder {
+.portlet-enterprise-admin #addresses .aui-field {
 	float: none;
 	width: auto;
 }
@@ -362,7 +362,7 @@
 	background-position: 0 100%;
 }
 
-.lfr-floating-container .aui-ctrl-holder input, .lfr-floating-container .aui-ctrl-holder img {
+.lfr-floating-container .aui-field input, .lfr-floating-container .aui-field img {
 	vertical-align: top;
 }
 

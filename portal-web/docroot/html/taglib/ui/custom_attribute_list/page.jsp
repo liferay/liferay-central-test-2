@@ -48,22 +48,26 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 for (String attributeName : attributeNames) {
 %>
 
-	<div class="aui-ctrl-holder">
-		<liferay-ui:custom-attribute
-			 className="<%= className %>"
-			 classPK="<%= classPK %>"
-			 editable="<%= editable %>"
-			 label="<%= label %>"
-			 name="<%= attributeName %>"
-		/>
-	</div>
+	<span class="aui-field">
+		<span class="aui-field-content">
+			<liferay-ui:custom-attribute
+				 className="<%= className %>"
+				 classPK="<%= classPK %>"
+				 editable="<%= editable %>"
+				 label="<%= label %>"
+				 name="<%= attributeName %>"
+			/>	
+		</span>
+	</span>
 
 <%
 }
 %>
 
 <c:if test="<%= attributeNames.isEmpty() %>">
-	<div class="aui-ctrl-holder">
-		<label><%= LanguageUtil.format(pageContext, "no-custom-fields-are-defined-for-x", modelResourceName) %></label>
-	</div>
+	<span class="aui-field">
+		<span class="aui-field-content">
+			<label><%= LanguageUtil.format(pageContext, "no-custom-fields-are-defined-for-x", modelResourceName) %></label>	
+		</span>
+	</span>
 </c:if>

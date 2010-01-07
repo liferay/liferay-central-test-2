@@ -33,6 +33,6 @@
 	margin: 0.5em 0.5em 0 0;
 }
 
-.portlet-polls .choice .aui-ctrl-holder {
+.portlet-polls .choice .aui-field {
 	float: left;
 }

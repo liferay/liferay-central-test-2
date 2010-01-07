@@ -54,13 +54,15 @@
 
 				<div class="add-tag-layer-wrapper">
 					<div class="add-tag-layer">
-						<div class="aui-ctrl-holder">
-							<label class="tag-label" for="new-tag-name">
-								<liferay-ui:message key="name" />
-							</label>
+						<span class="aui-field">
+							<span class="aui-field-content">
+								<label class="tag-label" for="new-tag-name">
+									<liferay-ui:message key="name" />
+								</label>
 
-							<input class="new-tag-name" id="new-tag-name" name="new-tag-name" type="text" value="" />
-						</div>
+								<input class="new-tag-name" id="new-tag-name" name="new-tag-name" type="text" value="" />	
+							</span>
+						</span>
 
 						<div class="tag-permissions-actions">
 							<liferay-ui:input-permissions
