@@ -80,6 +80,7 @@ public class AssetVocabularyJSONSerializer {
 		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("name", model.getName());
 		jsonObj.put("description", model.getDescription());
+		jsonObj.put("settings", model.getSettings());
 
 		return jsonObj;
 	}

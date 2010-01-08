@@ -46,11 +46,13 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class AssetVocabularyServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
-		java.lang.String name,
+		java.lang.String name, java.lang.String description,
+		java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().addVocabulary(name, serviceContext);
+		return getService()
+				   .addVocabulary(name, description, settings, serviceContext);
 	}
 
 	public static void deleteVocabulary(long vocabularyId)
@@ -88,11 +90,14 @@ public class AssetVocabularyServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
-		long vocabularyId, java.lang.String name,
+		long vocabularyId, java.lang.String name, java.lang.String description,
+		java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().updateVocabulary(vocabularyId, name, serviceContext);
+		return getService()
+				   .updateVocabulary(vocabularyId, name, description, settings,
+			serviceContext);
 	}
 
 	public static AssetVocabularyService getService() {

@@ -56,7 +56,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface AssetVocabularyService {
 	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
-		java.lang.String name,
+		java.lang.String name, java.lang.String description,
+		java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -90,7 +91,8 @@ public interface AssetVocabularyService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
-		long vocabularyId, java.lang.String name,
+		long vocabularyId, java.lang.String name, java.lang.String description,
+		java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

@@ -100,6 +100,10 @@ public interface AssetVocabularyModel extends BaseModel<AssetVocabulary> {
 
 	public void setDescription(String description);
 
+	public String getSettings();
+
+	public void setSettings(String settings);
+
 	public AssetVocabulary toEscapedModel();
 
 	public boolean isNew();

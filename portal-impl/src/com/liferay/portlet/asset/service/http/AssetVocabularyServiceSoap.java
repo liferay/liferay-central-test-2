@@ -81,12 +81,13 @@ import java.rmi.RemoteException;
  */
 public class AssetVocabularyServiceSoap {
 	public static com.liferay.portlet.asset.model.AssetVocabularySoap addVocabulary(
-		java.lang.String name,
+		java.lang.String name, java.lang.String description,
+		java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.asset.model.AssetVocabulary returnValue = AssetVocabularyServiceUtil.addVocabulary(name,
-					serviceContext);
+					description, settings, serviceContext);
 
 			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModel(returnValue);
 		}
@@ -169,12 +170,13 @@ public class AssetVocabularyServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabularySoap updateVocabulary(
-		long vocabularyId, java.lang.String name,
+		long vocabularyId, java.lang.String name, java.lang.String description,
+		java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.asset.model.AssetVocabulary returnValue = AssetVocabularyServiceUtil.updateVocabulary(vocabularyId,
-					name, serviceContext);
+					name, description, settings, serviceContext);
 
 			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModel(returnValue);
 		}

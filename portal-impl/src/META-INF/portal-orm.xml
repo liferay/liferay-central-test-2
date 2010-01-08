@@ -1130,6 +1130,9 @@
 			</basic>
 			<basic name="name" />
 			<basic name="description" />
+			<basic name="settings">
+				<column name="SETTINGS_" />
+			</basic>
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>

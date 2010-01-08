@@ -77,9 +77,10 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "name", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) }
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "settings_", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetVocabulary (uuid_ VARCHAR(75) null,vocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table AssetVocabulary (uuid_ VARCHAR(75) null,vocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null,settings_ STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table AssetVocabulary";
 	public static final String ORDER_BY_JPQL = " ORDER BY assetVocabulary.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY AssetVocabulary.name ASC";
@@ -106,6 +107,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
+		model.setSettings(soapModel.getSettings());
 
 		return model;
 	}
@@ -253,6 +255,14 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		_description = description;
 	}
 
+	public String getSettings() {
+		return GetterUtil.getString(_settings);
+	}
+
+	public void setSettings(String settings) {
+		_settings = settings;
+	}
+
 	public AssetVocabulary toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AssetVocabulary)this;
@@ -273,6 +283,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 			model.setModifiedDate(getModifiedDate());
 			model.setName(HtmlUtil.escape(getName()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
+			model.setSettings(HtmlUtil.escape(getSettings()));
 
 			model = (AssetVocabulary)Proxy.newProxyInstance(AssetVocabulary.class.getClassLoader(),
 					new Class[] { AssetVocabulary.class },
@@ -308,6 +319,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
+		clone.setSettings(getSettings());
 
 		return clone;
 	}
@@ -353,7 +365,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -375,13 +387,15 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		sb.append(getName());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", settings=");
+		sb.append(getSettings());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.asset.model.AssetVocabulary");
@@ -427,6 +441,10 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>settings</column-name><column-value><![CDATA[");
+		sb.append(getSettings());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -448,5 +466,6 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	private String _name;
 	private String _originalName;
 	private String _description;
+	private String _settings;
 	private transient ExpandoBridge _expandoBridge;
 }

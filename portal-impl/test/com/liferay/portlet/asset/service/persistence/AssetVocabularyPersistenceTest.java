@@ -85,6 +85,7 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 		newAssetVocabulary.setModifiedDate(nextDate());
 		newAssetVocabulary.setName(randomString());
 		newAssetVocabulary.setDescription(randomString());
+		newAssetVocabulary.setSettings(randomString());
 
 		_persistence.update(newAssetVocabulary, false);
 
@@ -112,6 +113,8 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 			newAssetVocabulary.getName());
 		assertEquals(existingAssetVocabulary.getDescription(),
 			newAssetVocabulary.getDescription());
+		assertEquals(existingAssetVocabulary.getSettings(),
+			newAssetVocabulary.getSettings());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -194,6 +197,7 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 		assetVocabulary.setModifiedDate(nextDate());
 		assetVocabulary.setName(randomString());
 		assetVocabulary.setDescription(randomString());
+		assetVocabulary.setSettings(randomString());
 
 		_persistence.update(assetVocabulary, false);
 

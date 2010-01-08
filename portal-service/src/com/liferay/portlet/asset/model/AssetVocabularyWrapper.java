@@ -141,6 +141,14 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		_assetVocabulary.setDescription(description);
 	}
 
+	public java.lang.String getSettings() {
+		return _assetVocabulary.getSettings();
+	}
+
+	public void setSettings(java.lang.String settings) {
+		_assetVocabulary.setSettings(settings);
+	}
+
 	public com.liferay.portlet.asset.model.AssetVocabulary toEscapedModel() {
 		return _assetVocabulary.toEscapedModel();
 	}

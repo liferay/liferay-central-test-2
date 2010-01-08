@@ -72,6 +72,7 @@ import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
 public class AssetVocabularyServiceHttp {
 	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
 		HttpPrincipal httpPrincipal, java.lang.String name,
+		java.lang.String description, java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -82,15 +83,28 @@ public class AssetVocabularyServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = serviceContext;
+			Object paramObj1 = description;
+
+			if (description == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = settings;
+
+			if (settings == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj1 = new NullWrapper(
+				paramObj3 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"addVocabulary", new Object[] { paramObj0, paramObj1 });
+					"addVocabulary",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
@@ -300,6 +314,7 @@ public class AssetVocabularyServiceHttp {
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
 		HttpPrincipal httpPrincipal, long vocabularyId, java.lang.String name,
+		java.lang.String description, java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -312,16 +327,30 @@ public class AssetVocabularyServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = serviceContext;
+			Object paramObj2 = description;
+
+			if (description == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = settings;
+
+			if (settings == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj2 = new NullWrapper(
+				paramObj4 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
 					"updateVocabulary",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
