@@ -75,11 +75,6 @@ public class ParserTest extends BaseCMISTest {
 		assertEquals(_cmisConstants.BASE_TYPE_FOLDER, cmisObject.getBaseType());
 	}
 
-	protected Service getService() throws Exception {
-		Service service = (Service)getElement("cmis-service.xml");
-		return service;
-	}
-
 	protected CMISConstants getConstants() {
 		return _cmisConstants;
 	}
@@ -91,6 +86,10 @@ public class ParserTest extends BaseCMISTest {
 		Parser parser = _abdera.getParser();
 
 		return parser.parse(new FileInputStream(path)).getRoot();
+	}
+
+	protected Service getService() throws Exception {
+		return (Service)getElement("cmis-service.xml");
 	}
 
 	private static CMISConstants _cmisConstants = CMISConstants.getInstance();

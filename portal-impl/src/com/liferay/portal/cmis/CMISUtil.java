@@ -444,8 +444,8 @@ public class CMISUtil {
 
 	private String _getCollectionType(Collection collection) {
 		if (_cmisConstants instanceof CMISConstants_1_0_0) {
-			Element element =
-				collection.getFirstChild(_cmisConstants.COLLECTION_TYPE);
+			Element element = collection.getFirstChild(
+				_cmisConstants.COLLECTION_TYPE);
 
 			if (element == null) {
 				return null;

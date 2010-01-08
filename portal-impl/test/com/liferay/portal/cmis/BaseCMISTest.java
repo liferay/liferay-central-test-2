@@ -61,8 +61,8 @@ public abstract class BaseCMISTest extends TestCase {
 		}
 	}
 
-	protected abstract Service getService() throws Exception;
-
 	protected abstract CMISConstants getConstants();
+
+	protected abstract Service getService() throws Exception;
 
 }
