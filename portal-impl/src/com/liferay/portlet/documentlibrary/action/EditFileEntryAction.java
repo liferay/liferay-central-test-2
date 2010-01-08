@@ -221,8 +221,6 @@ public class EditFileEntryAction extends PortletAction {
 
 		File file = uploadRequest.getFile("file");
 
-		// LPS-6892
-
 		if (Validator.isNotNull(sourceFileName) && !file.exists()) {
 			file.createNewFile();
 		}
