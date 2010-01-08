@@ -38,6 +38,7 @@ String label = GetterUtil.getString((String)request.getAttribute("aui:select:lab
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:select:last"));
 String listType = GetterUtil.getString((String)request.getAttribute("aui:select:listType"));
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:name"));
+String prefix = GetterUtil.getString((String)request.getAttribute("aui:select:prefix"));
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 %>
 
@@ -51,6 +52,10 @@ boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("au
 					<liferay-ui:icon-help message="<%= helpMessage %>" />
 				</c:if>
 			</label>
+		</c:if>
+
+		<c:if test="<%= Validator.isNotNull(prefix) %>">
+			<span class="aui-prefix"><liferay-ui:message key="<%= prefix %>" /></span>
 		</c:if>
 
 		<select class="aui-field-input aui-field-input-menu aui-field-input-select" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>

@@ -68,6 +68,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 				_last = false;
 				_listType = null;
 				_name = null;
+				_prefix = null;
 				_showEmptyOption = false;
 				_startPage = null;
 				_suffix = null;
@@ -108,6 +109,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 			request.setAttribute("aui:select:last", String.valueOf(_last));
 			request.setAttribute("aui:select:listType", _listType);
 			request.setAttribute("aui:select:name", _name);
+			request.setAttribute("aui:select:prefix", _prefix);
 			request.setAttribute(
 				"aui:select:showEmptyOption", String.valueOf(_showEmptyOption));
 			request.setAttribute("aui:select:suffix", _suffix);
@@ -197,6 +199,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		_name = name;
 	}
 
+	public void setPrefix(String prefix) {
+		_prefix = prefix;
+	}
+
 	public void setShowEmptyOption(boolean showEmptyOption) {
 		_showEmptyOption = showEmptyOption;
 	}
@@ -229,6 +235,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 	private boolean _last;
 	private String _listType;
 	private String _name;
+	private String _prefix;
 	private boolean _showEmptyOption;
 	private String _startPage;
 	private String _suffix;
