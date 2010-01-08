@@ -24,9 +24,12 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -35,6 +38,8 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategorySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
+
+import com.liferay.util.LocalizationUtil;
 
 import java.io.Serializable;
 
@@ -45,6 +50,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="AssetCategoryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -80,9 +87,10 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 			{ "leftCategoryId", new Integer(Types.BIGINT) },
 			{ "rightCategoryId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
+			{ "title", new Integer(Types.VARCHAR) },
 			{ "vocabularyId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,leftCategoryId LONG,rightCategoryId LONG,name VARCHAR(75) null,vocabularyId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table AssetCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,leftCategoryId LONG,rightCategoryId LONG,name VARCHAR(75) null,title STRING null,vocabularyId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table AssetCategory";
 	public static final String ORDER_BY_JPQL = " ORDER BY assetCategory.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY AssetCategory.name ASC";
@@ -111,6 +119,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		model.setLeftCategoryId(soapModel.getLeftCategoryId());
 		model.setRightCategoryId(soapModel.getRightCategoryId());
 		model.setName(soapModel.getName());
+		model.setTitle(soapModel.getTitle());
 		model.setVocabularyId(soapModel.getVocabularyId());
 
 		return model;
@@ -279,6 +288,80 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		_name = name;
 	}
 
+	public String getTitle() {
+		return GetterUtil.getString(_title);
+	}
+
+	public String getTitle(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId);
+	}
+
+	public String getTitle(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId, useDefault);
+	}
+
+	public String getTitle(String languageId) {
+		String value = LocalizationUtil.getLocalization(getTitle(), languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getTitle(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getTitle(), languageId,
+				useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getTitleMap() {
+		return LocalizationUtil.getLocalizationMap(getTitle());
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public void setTitle(Locale locale, String title) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(title)) {
+			setTitle(LocalizationUtil.updateLocalization(getTitle(), "Title",
+					title, languageId));
+		}
+		else {
+			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
+					languageId));
+		}
+	}
+
+	public void setTitleMap(Map<Locale, String> titleMap) {
+		if (titleMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String title = titleMap.get(locale);
+
+			setTitle(locale, title);
+		}
+	}
+
 	public long getVocabularyId() {
 		return _vocabularyId;
 	}
@@ -309,6 +392,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 			model.setLeftCategoryId(getLeftCategoryId());
 			model.setRightCategoryId(getRightCategoryId());
 			model.setName(HtmlUtil.escape(getName()));
+			model.setTitle(getTitle());
 			model.setVocabularyId(getVocabularyId());
 
 			model = (AssetCategory)Proxy.newProxyInstance(AssetCategory.class.getClassLoader(),
@@ -347,6 +431,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		clone.setLeftCategoryId(getLeftCategoryId());
 		clone.setRightCategoryId(getRightCategoryId());
 		clone.setName(getName());
+		clone.setTitle(getTitle());
 		clone.setVocabularyId(getVocabularyId());
 
 		return clone;
@@ -393,7 +478,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -419,6 +504,8 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		sb.append(getRightCategoryId());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", title=");
+		sb.append(getTitle());
 		sb.append(", vocabularyId=");
 		sb.append(getVocabularyId());
 		sb.append("}");
@@ -427,7 +514,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.asset.model.AssetCategory");
@@ -482,6 +569,10 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>vocabularyId</column-name><column-value><![CDATA[");
 		sb.append(getVocabularyId());
 		sb.append("]]></column-value></column>");
@@ -509,6 +600,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	private long _leftCategoryId;
 	private long _rightCategoryId;
 	private String _name;
+	private String _title;
 	private long _vocabularyId;
 	private transient ExpandoBridge _expandoBridge;
 }

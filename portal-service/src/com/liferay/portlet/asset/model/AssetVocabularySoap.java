@@ -58,6 +58,7 @@ public class AssetVocabularySoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
+		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setSettings(model.getSettings());
 
@@ -186,6 +187,14 @@ public class AssetVocabularySoap implements Serializable {
 		_name = name;
 	}
 
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	public String getDescription() {
 		return _description;
 	}
@@ -211,6 +220,7 @@ public class AssetVocabularySoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _name;
+	private String _title;
 	private String _description;
 	private String _settings;
 }

@@ -410,6 +410,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		assetVocabularyImpl.setCreateDate(assetVocabulary.getCreateDate());
 		assetVocabularyImpl.setModifiedDate(assetVocabulary.getModifiedDate());
 		assetVocabularyImpl.setName(assetVocabulary.getName());
+		assetVocabularyImpl.setTitle(assetVocabulary.getTitle());
 		assetVocabularyImpl.setDescription(assetVocabulary.getDescription());
 		assetVocabularyImpl.setSettings(assetVocabulary.getSettings());
 

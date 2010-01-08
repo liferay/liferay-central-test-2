@@ -86,6 +86,7 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		newAssetCategory.setLeftCategoryId(nextLong());
 		newAssetCategory.setRightCategoryId(nextLong());
 		newAssetCategory.setName(randomString());
+		newAssetCategory.setTitle(randomString());
 		newAssetCategory.setVocabularyId(nextLong());
 
 		_persistence.update(newAssetCategory, false);
@@ -116,6 +117,8 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingAssetCategory.getRightCategoryId(),
 			newAssetCategory.getRightCategoryId());
 		assertEquals(existingAssetCategory.getName(), newAssetCategory.getName());
+		assertEquals(existingAssetCategory.getTitle(),
+			newAssetCategory.getTitle());
 		assertEquals(existingAssetCategory.getVocabularyId(),
 			newAssetCategory.getVocabularyId());
 	}
@@ -201,6 +204,7 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		assetCategory.setLeftCategoryId(nextLong());
 		assetCategory.setRightCategoryId(nextLong());
 		assetCategory.setName(randomString());
+		assetCategory.setTitle(randomString());
 		assetCategory.setVocabularyId(nextLong());
 
 		_persistence.update(assetCategory, false);

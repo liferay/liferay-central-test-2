@@ -102,7 +102,7 @@ public interface AssetCategoryLocalService {
 
 	public com.liferay.portlet.asset.model.AssetCategory addCategory(
 		java.lang.String uuid, long userId, long parentCategoryId,
-		java.lang.String name, long vocabularyId,
+		java.util.Map<java.util.Locale, String> titleMap, long vocabularyId,
 		java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -185,7 +185,7 @@ public interface AssetCategoryLocalService {
 
 	public com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		long userId, long categoryId, long parentCategoryId,
-		java.lang.String name, long vocabularyId,
+		java.util.Map<java.util.Locale, String> titleMap, long vocabularyId,
 		java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,

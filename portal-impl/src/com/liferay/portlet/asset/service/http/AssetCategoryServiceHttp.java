@@ -73,7 +73,7 @@ import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 public class AssetCategoryServiceHttp {
 	public static com.liferay.portlet.asset.model.AssetCategory addCategory(
 		HttpPrincipal httpPrincipal, long parentCategoryId,
-		java.lang.String name, long vocabularyId,
+		java.util.Map<java.util.Locale, String> titleMap, long vocabularyId,
 		java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -81,10 +81,10 @@ public class AssetCategoryServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(parentCategoryId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = titleMap;
 
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+			if (titleMap == null) {
+				paramObj1 = new NullWrapper("java.util.Map");
 			}
 
 			Object paramObj2 = new LongWrapper(vocabularyId);
@@ -405,7 +405,7 @@ public class AssetCategoryServiceHttp {
 
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		HttpPrincipal httpPrincipal, long categoryId, long parentCategoryId,
-		java.lang.String name, long vocabularyId,
+		java.util.Map<java.util.Locale, String> titleMap, long vocabularyId,
 		java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -415,10 +415,10 @@ public class AssetCategoryServiceHttp {
 
 			Object paramObj1 = new LongWrapper(parentCategoryId);
 
-			Object paramObj2 = name;
+			Object paramObj2 = titleMap;
 
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+			if (titleMap == null) {
+				paramObj2 = new NullWrapper("java.util.Map");
 			}
 
 			Object paramObj3 = new LongWrapper(vocabularyId);

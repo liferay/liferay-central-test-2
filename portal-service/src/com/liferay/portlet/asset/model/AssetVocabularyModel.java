@@ -31,6 +31,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="AssetVocabularyModel.java.html"><b><i>View Source</i></b></a>
@@ -96,9 +98,41 @@ public interface AssetVocabularyModel extends BaseModel<AssetVocabulary> {
 
 	public void setName(String name);
 
+	public String getTitle();
+
+	public String getTitle(Locale locale);
+
+	public String getTitle(Locale locale, boolean useDefault);
+
+	public String getTitle(String languageId);
+
+	public String getTitle(String languageId, boolean useDefault);
+
+	public Map<Locale, String> getTitleMap();
+
+	public void setTitle(String title);
+
+	public void setTitle(Locale locale, String title);
+
+	public void setTitleMap(Map<Locale, String> titleMap);
+
 	public String getDescription();
 
+	public String getDescription(Locale locale);
+
+	public String getDescription(Locale locale, boolean useDefault);
+
+	public String getDescription(String languageId);
+
+	public String getDescription(String languageId, boolean useDefault);
+
+	public Map<Locale, String> getDescriptionMap();
+
 	public void setDescription(String description);
+
+	public void setDescription(Locale locale, String description);
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap);
 
 	public String getSettings();
 

@@ -133,12 +133,81 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		_assetVocabulary.setName(name);
 	}
 
+	public java.lang.String getTitle() {
+		return _assetVocabulary.getTitle();
+	}
+
+	public java.lang.String getTitle(java.util.Locale locale) {
+		return _assetVocabulary.getTitle(locale);
+	}
+
+	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault) {
+		return _assetVocabulary.getTitle(locale, useDefault);
+	}
+
+	public java.lang.String getTitle(java.lang.String languageId) {
+		return _assetVocabulary.getTitle(languageId);
+	}
+
+	public java.lang.String getTitle(java.lang.String languageId,
+		boolean useDefault) {
+		return _assetVocabulary.getTitle(languageId, useDefault);
+	}
+
+	public java.util.Map<java.util.Locale, String> getTitleMap() {
+		return _assetVocabulary.getTitleMap();
+	}
+
+	public void setTitle(java.lang.String title) {
+		_assetVocabulary.setTitle(title);
+	}
+
+	public void setTitle(java.util.Locale locale, java.lang.String title) {
+		_assetVocabulary.setTitle(locale, title);
+	}
+
+	public void setTitleMap(java.util.Map<java.util.Locale, String> titleMap) {
+		_assetVocabulary.setTitleMap(titleMap);
+	}
+
 	public java.lang.String getDescription() {
 		return _assetVocabulary.getDescription();
 	}
 
+	public java.lang.String getDescription(java.util.Locale locale) {
+		return _assetVocabulary.getDescription(locale);
+	}
+
+	public java.lang.String getDescription(java.util.Locale locale,
+		boolean useDefault) {
+		return _assetVocabulary.getDescription(locale, useDefault);
+	}
+
+	public java.lang.String getDescription(java.lang.String languageId) {
+		return _assetVocabulary.getDescription(languageId);
+	}
+
+	public java.lang.String getDescription(java.lang.String languageId,
+		boolean useDefault) {
+		return _assetVocabulary.getDescription(languageId, useDefault);
+	}
+
+	public java.util.Map<java.util.Locale, String> getDescriptionMap() {
+		return _assetVocabulary.getDescriptionMap();
+	}
+
 	public void setDescription(java.lang.String description) {
 		_assetVocabulary.setDescription(description);
+	}
+
+	public void setDescription(java.util.Locale locale,
+		java.lang.String description) {
+		_assetVocabulary.setDescription(locale, description);
+	}
+
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, String> descriptionMap) {
+		_assetVocabulary.setDescriptionMap(descriptionMap);
 	}
 
 	public java.lang.String getSettings() {

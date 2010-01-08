@@ -157,6 +157,43 @@ public class AssetCategoryWrapper implements AssetCategory {
 		_assetCategory.setName(name);
 	}
 
+	public java.lang.String getTitle() {
+		return _assetCategory.getTitle();
+	}
+
+	public java.lang.String getTitle(java.util.Locale locale) {
+		return _assetCategory.getTitle(locale);
+	}
+
+	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault) {
+		return _assetCategory.getTitle(locale, useDefault);
+	}
+
+	public java.lang.String getTitle(java.lang.String languageId) {
+		return _assetCategory.getTitle(languageId);
+	}
+
+	public java.lang.String getTitle(java.lang.String languageId,
+		boolean useDefault) {
+		return _assetCategory.getTitle(languageId, useDefault);
+	}
+
+	public java.util.Map<java.util.Locale, String> getTitleMap() {
+		return _assetCategory.getTitleMap();
+	}
+
+	public void setTitle(java.lang.String title) {
+		_assetCategory.setTitle(title);
+	}
+
+	public void setTitle(java.util.Locale locale, java.lang.String title) {
+		_assetCategory.setTitle(locale, title);
+	}
+
+	public void setTitleMap(java.util.Map<java.util.Locale, String> titleMap) {
+		_assetCategory.setTitleMap(titleMap);
+	}
+
 	public long getVocabularyId() {
 		return _assetCategory.getVocabularyId();
 	}

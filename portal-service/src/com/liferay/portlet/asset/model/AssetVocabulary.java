@@ -48,4 +48,8 @@ package com.liferay.portlet.asset.model;
  * @generated
  */
 public interface AssetVocabulary extends AssetVocabularyModel {
+	public java.lang.String getTitle(java.lang.String languageId);
+
+	public java.lang.String getTitle(java.lang.String languageId,
+		boolean useDefault);
 }

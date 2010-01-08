@@ -71,22 +71,24 @@ import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
  */
 public class AssetVocabularyServiceHttp {
 	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
-		HttpPrincipal httpPrincipal, java.lang.String name,
-		java.lang.String description, java.lang.String settings,
+		HttpPrincipal httpPrincipal,
+		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
+		java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = name;
+			Object paramObj0 = titleMap;
 
-			if (name == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+			if (titleMap == null) {
+				paramObj0 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj1 = description;
+			Object paramObj1 = descriptionMap;
 
-			if (description == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+			if (descriptionMap == null) {
+				paramObj1 = new NullWrapper("java.util.Map");
 			}
 
 			Object paramObj2 = settings;
@@ -313,24 +315,26 @@ public class AssetVocabularyServiceHttp {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
-		HttpPrincipal httpPrincipal, long vocabularyId, java.lang.String name,
-		java.lang.String description, java.lang.String settings,
+		HttpPrincipal httpPrincipal, long vocabularyId,
+		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
+		java.lang.String settings,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(vocabularyId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = titleMap;
 
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+			if (titleMap == null) {
+				paramObj1 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj2 = description;
+			Object paramObj2 = descriptionMap;
 
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+			if (descriptionMap == null) {
+				paramObj2 = new NullWrapper("java.util.Map");
 			}
 
 			Object paramObj3 = settings;

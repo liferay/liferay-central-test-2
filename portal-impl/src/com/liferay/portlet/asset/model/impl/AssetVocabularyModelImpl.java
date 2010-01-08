@@ -24,9 +24,12 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -35,6 +38,8 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.model.AssetVocabularySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
+
+import com.liferay.util.LocalizationUtil;
 
 import java.io.Serializable;
 
@@ -45,6 +50,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="AssetVocabularyModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -77,10 +84,11 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "name", new Integer(Types.VARCHAR) },
+			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "settings_", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetVocabulary (uuid_ VARCHAR(75) null,vocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null,settings_ STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table AssetVocabulary (uuid_ VARCHAR(75) null,vocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,title STRING null,description STRING null,settings_ STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table AssetVocabulary";
 	public static final String ORDER_BY_JPQL = " ORDER BY assetVocabulary.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY AssetVocabulary.name ASC";
@@ -106,6 +114,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
+		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
 		model.setSettings(soapModel.getSettings());
 
@@ -247,12 +256,153 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		return GetterUtil.getString(_originalName);
 	}
 
+	public String getTitle() {
+		return GetterUtil.getString(_title);
+	}
+
+	public String getTitle(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId);
+	}
+
+	public String getTitle(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId, useDefault);
+	}
+
+	public String getTitle(String languageId) {
+		String value = LocalizationUtil.getLocalization(getTitle(), languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getTitle(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getTitle(), languageId,
+				useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getTitleMap() {
+		return LocalizationUtil.getLocalizationMap(getTitle());
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public void setTitle(Locale locale, String title) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(title)) {
+			setTitle(LocalizationUtil.updateLocalization(getTitle(), "Title",
+					title, languageId));
+		}
+		else {
+			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
+					languageId));
+		}
+	}
+
+	public void setTitleMap(Map<Locale, String> titleMap) {
+		if (titleMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String title = titleMap.get(locale);
+
+			setTitle(locale, title);
+		}
+	}
+
 	public String getDescription() {
 		return GetterUtil.getString(_description);
 	}
 
+	public String getDescription(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDescription(languageId);
+	}
+
+	public String getDescription(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDescription(languageId, useDefault);
+	}
+
+	public String getDescription(String languageId) {
+		String value = LocalizationUtil.getLocalization(getDescription(),
+				languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getDescription(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getDescription(),
+				languageId, useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getDescriptionMap() {
+		return LocalizationUtil.getLocalizationMap(getDescription());
+	}
+
 	public void setDescription(String description) {
 		_description = description;
+	}
+
+	public void setDescription(Locale locale, String description) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(description)) {
+			setDescription(LocalizationUtil.updateLocalization(
+					getDescription(), "Description", description, languageId));
+		}
+		else {
+			setDescription(LocalizationUtil.removeLocalization(
+					getDescription(), "Description", languageId));
+		}
+	}
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
+		if (descriptionMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String description = descriptionMap.get(locale);
+
+			setDescription(locale, description);
+		}
 	}
 
 	public String getSettings() {
@@ -282,7 +432,8 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
+			model.setTitle(getTitle());
+			model.setDescription(getDescription());
 			model.setSettings(HtmlUtil.escape(getSettings()));
 
 			model = (AssetVocabulary)Proxy.newProxyInstance(AssetVocabulary.class.getClassLoader(),
@@ -318,6 +469,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setName(getName());
+		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
 		clone.setSettings(getSettings());
 
@@ -365,7 +517,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -385,6 +537,8 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		sb.append(getModifiedDate());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", title=");
+		sb.append(getTitle());
 		sb.append(", description=");
 		sb.append(getDescription());
 		sb.append(", settings=");
@@ -395,7 +549,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.asset.model.AssetVocabulary");
@@ -438,6 +592,10 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
@@ -465,6 +623,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	private Date _modifiedDate;
 	private String _name;
 	private String _originalName;
+	private String _title;
 	private String _description;
 	private String _settings;
 	private transient ExpandoBridge _expandoBridge;

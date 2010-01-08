@@ -80,24 +80,6 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class AssetVocabularyServiceSoap {
-	public static com.liferay.portlet.asset.model.AssetVocabularySoap addVocabulary(
-		java.lang.String name, java.lang.String description,
-		java.lang.String settings,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.asset.model.AssetVocabulary returnValue = AssetVocabularyServiceUtil.addVocabulary(name,
-					description, settings, serviceContext);
-
-			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void deleteVocabulary(long vocabularyId)
 		throws RemoteException {
 		try {
@@ -159,24 +141,6 @@ public class AssetVocabularyServiceSoap {
 		long vocabularyId) throws RemoteException {
 		try {
 			com.liferay.portlet.asset.model.AssetVocabulary returnValue = AssetVocabularyServiceUtil.getVocabulary(vocabularyId);
-
-			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.asset.model.AssetVocabularySoap updateVocabulary(
-		long vocabularyId, java.lang.String name, java.lang.String description,
-		java.lang.String settings,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.asset.model.AssetVocabulary returnValue = AssetVocabularyServiceUtil.updateVocabulary(vocabularyId,
-					name, description, settings, serviceContext);
 
 			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModel(returnValue);
 		}

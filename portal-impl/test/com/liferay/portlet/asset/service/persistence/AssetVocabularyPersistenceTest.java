@@ -84,6 +84,7 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 		newAssetVocabulary.setCreateDate(nextDate());
 		newAssetVocabulary.setModifiedDate(nextDate());
 		newAssetVocabulary.setName(randomString());
+		newAssetVocabulary.setTitle(randomString());
 		newAssetVocabulary.setDescription(randomString());
 		newAssetVocabulary.setSettings(randomString());
 
@@ -111,6 +112,8 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newAssetVocabulary.getModifiedDate()));
 		assertEquals(existingAssetVocabulary.getName(),
 			newAssetVocabulary.getName());
+		assertEquals(existingAssetVocabulary.getTitle(),
+			newAssetVocabulary.getTitle());
 		assertEquals(existingAssetVocabulary.getDescription(),
 			newAssetVocabulary.getDescription());
 		assertEquals(existingAssetVocabulary.getSettings(),
@@ -196,6 +199,7 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 		assetVocabulary.setCreateDate(nextDate());
 		assetVocabulary.setModifiedDate(nextDate());
 		assetVocabulary.setName(randomString());
+		assetVocabulary.setTitle(randomString());
 		assetVocabulary.setDescription(randomString());
 		assetVocabulary.setSettings(randomString());
 

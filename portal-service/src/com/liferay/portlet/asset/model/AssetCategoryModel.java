@@ -31,6 +31,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="AssetCategoryModel.java.html"><b><i>View Source</i></b></a>
@@ -107,6 +109,24 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory> {
 	public String getName();
 
 	public void setName(String name);
+
+	public String getTitle();
+
+	public String getTitle(Locale locale);
+
+	public String getTitle(Locale locale, boolean useDefault);
+
+	public String getTitle(String languageId);
+
+	public String getTitle(String languageId, boolean useDefault);
+
+	public Map<Locale, String> getTitleMap();
+
+	public void setTitle(String title);
+
+	public void setTitle(Locale locale, String title);
+
+	public void setTitleMap(Map<Locale, String> titleMap);
 
 	public long getVocabularyId();
 
