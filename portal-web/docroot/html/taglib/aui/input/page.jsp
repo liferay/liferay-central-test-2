@@ -199,26 +199,27 @@ if (Validator.isNotNull(cssClass)) {
 
 			<c:choose>
 				<c:when test='<%= type.equals("checkbox") %>'>
-						<%
-						boolean booleanValue = false;
 
-						if (value != null) {
-							booleanValue = GetterUtil.getBoolean(value.toString());
-						}
+					<%
+					boolean booleanValue = false;
 
-						booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
+					if (value != null) {
+						booleanValue = GetterUtil.getBoolean(valueString);
+					}
 
-						String onClick = "AUI().one(this).previous().val(this.checked);";
-						String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
+					booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
 
-						if (onClickDynamicAttribute != null) {
-							onClick += onClickDynamicAttribute;
-						}
-						%>
+					String onClick = "AUI().one(this).previous().val(this.checked);";
+					String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
 
-						<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
+					if (onClickDynamicAttribute != null) {
+						onClick += onClickDynamicAttribute;
+					}
+					%>
 
-						<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+					<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
+
+					<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 				</c:when>
 				<c:otherwise>
 					<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> <%= !id.equals(name) ? "id=\"" + id + "\"" : StringPool.BLANK %> name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
