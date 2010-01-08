@@ -795,6 +795,9 @@
 				<copyright-notice>Copyright (c) 2002-2007 the original author or authors.</copyright-notice>
 			</license>
 		</licenses>
+		<comments>
+			See LPS-6887.
+		</comments>
 	</library>
 	<library>
 		<file-name>development/tomcat-coyote.jar</file-name>
@@ -2455,6 +2458,9 @@
 				<copyright-notice>Copyright (c) 2002-2007 the original author or authors.</copyright-notice>
 			</license>
 		</licenses>
+		<comments>
+			See LPS-6887.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/spring-webmvc.jar</file-name>
@@ -2467,6 +2473,9 @@
 				<copyright-notice>Copyright (c) 2002-2007 the original author or authors.</copyright-notice>
 			</license>
 		</licenses>
+		<comments>
+			See LPS-6887.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/stax.jar</file-name>
