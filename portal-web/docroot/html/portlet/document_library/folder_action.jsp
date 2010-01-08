@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+String randomNamespace = DeterminateKeyGenerator.generate("portlet_document_library_folder_action") + StringPool.UNDERLINE;
 
 String redirect = currentURL;
 

@@ -22,10 +22,10 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/social_bookmarks/init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_webdav") + StringPool.UNDERLINE;
 
 String path = (String)request.getAttribute("liferay-ui:webdav:path");
 %>

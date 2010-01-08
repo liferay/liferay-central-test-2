@@ -27,7 +27,7 @@
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_input_permissions") + StringPool.UNDERLINE;
 
 String formName = namespace + request.getAttribute("liferay-ui:input-permissions:formName");
 String modelName = (String)request.getAttribute("liferay-ui:input-permissions:modelName");

@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+String randomNamespace = DeterminateKeyGenerator.generate("portlet_image_gallery_folder_action") + StringPool.UNDERLINE;
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 

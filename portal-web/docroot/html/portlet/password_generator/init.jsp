@@ -23,5 +23,3 @@
 %>
 
 <%@ include file="/html/portlet/init.jsp" %>
-
-<%@ page import="com.liferay.util.PwdGenerator" %>

@@ -27,5 +27,5 @@
 <%
 namespace = PortalUtil.getPortletNamespace(PortletKeys.SEARCH);
 
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_search");
 %>

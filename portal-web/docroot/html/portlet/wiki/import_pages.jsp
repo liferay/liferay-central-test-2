@@ -25,8 +25,8 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
-String uploadProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
-String importProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+String uploadProgressId = DeterminateKeyGenerator.generate("portlet_wiki_import_pages_uploadProgressId");
+String importProgressId = DeterminateKeyGenerator.generate("portlet_wiki_import_pages_importProgressId");
 
 String tabs2 = ParamUtil.getString(request, "tabs2");
 

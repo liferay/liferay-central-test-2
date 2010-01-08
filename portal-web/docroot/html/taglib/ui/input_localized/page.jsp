@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_input_localized");
 
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-localized:cssClass"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-localized:disabled"));

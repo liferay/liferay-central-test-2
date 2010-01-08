@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_flash") + StringPool.UNDERLINE;
 
 String align = (String)request.getAttribute("liferay-ui:flash:align");
 String allowScriptAccess = (String)request.getAttribute("liferay-ui:flash:allowScriptAccess");

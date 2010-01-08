@@ -31,7 +31,7 @@
 <%@ page import="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" %>
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_ratings") + StringPool.UNDERLINE;
 
 String className = (String)request.getAttribute("liferay-ui:ratings:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:ratings:classPK"));
