@@ -78,7 +78,7 @@
 							}
 							%>
 
-						</select>	
+						</select>
 					</span>
 				</span>
 
@@ -86,7 +86,7 @@
 					<span class="aui-field-content">
 						<label class="inline-label">
 							<liferay-ui:message key="use-custom-title" /> <input id="use-custom-title-checkbox" name="use-custom-title-checkbox" type="checkbox" />
-						</label>	
+						</label>
 					</span>
 				</span>
 
@@ -148,7 +148,7 @@
 							}
 							%>
 
-						</select>	
+						</select>
 					</span>
 				</span>
 
@@ -160,7 +160,7 @@
 
 						<span class="form-hint portlet-msg-info" id="border-note">
 							<liferay-ui:message key="this-change-will-only-be-shown-after-you-refresh-the-page" />
-						</span>	
+						</span>
 					</span>
 				</span>
 			</fieldset>
@@ -181,7 +181,7 @@
 								<option value="Tahoma">Tahoma</option>
 								<option value="Trebuchet MS">Trebuchet MS</option>
 								<option value="Verdana">Verdana</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -189,7 +189,7 @@
 						<span class="aui-field-content">
 							<label class="inline-label" for="lfr-font-bold"><liferay-ui:message key="bold" />
 								<input type="checkbox" name="lfr-font-bold" id="lfr-font-bold" />
-							</label>	
+							</label>
 						</span>
 					</span>
 
@@ -197,7 +197,7 @@
 						<span class="aui-field-content">
 							<label class="inline-label" for="lfr-font-italic"><liferay-ui:message key="italic" />
 								<input type="checkbox" name="lfr-font-italic" id="lfr-font-italic" />
-							</label>	
+							</label>
 						</span>
 					</span>
 
@@ -327,7 +327,7 @@
 								<option value="11.8em">11.8em</option>
 								<option value="11.9em">11.9em</option>
 								<option value="12em">12em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -335,7 +335,7 @@
 						<span class="aui-field-content">
 							<label for="lfr-font-color"><liferay-ui:message key="color" /></label>
 
-							<input id="lfr-font-color" name="lfr-font-color" class="text-input" type="text" size="9" value="" />	
+							<input id="lfr-font-color" name="lfr-font-color" class="text-input" type="text" size="9" value="" />
 						</span>
 					</span>
 
@@ -349,7 +349,7 @@
 								<option value="left"><liferay-ui:message key="left" /></option>
 								<option value="right"><liferay-ui:message key="right" /></option>
 								<option value="center"><liferay-ui:message key="center" /></option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -363,7 +363,7 @@
 								<option value="underline"><liferay-ui:message key="underline" /></option>
 								<option value="overline"><liferay-ui:message key="overline" /></option>
 								<option value="line-through"><liferay-ui:message key="strikethrough" /></option>
-							</select>	
+							</select>
 						</span>
 					</span>
 				</div>
@@ -416,7 +416,7 @@
 								<option value="0.9em">0.9em</option>
 								<option value="0.95em">0.95em</option>
 								<option value="1em">1em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -546,7 +546,7 @@
 								<option value="11.8em">11.8em</option>
 								<option value="11.9em">11.9em</option>
 								<option value="12em">12em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -617,7 +617,7 @@
 								<option value="48px">48px</option>
 								<option value="49px">49px</option>
 								<option value="50px">50px</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 				</div>
@@ -630,7 +630,7 @@
 					<span class="aui-field-content">
 						<label for="lfr-bg-color"><liferay-ui:message key="background-color" /></label>
 
-						<input class="text-input" id="lfr-bg-color" name="lfr-bg-color" size="9" type="text" value="#f00" />	
+						<input class="text-input" id="lfr-bg-color" name="lfr-bg-color" size="9" type="text" value="#f00" />
 					</span>
 				</span>
 			</fieldset>
@@ -647,7 +647,7 @@
 								<liferay-ui:message key="same-for-all" />
 
 								<input checked="checked" class="lfr-use-for-all" id="lfr-use-for-all-width" type="checkbox" />
-							</label>	
+							</label>
 						</span>
 					</span>
 
@@ -661,7 +661,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -675,7 +675,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -689,7 +689,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -703,7 +703,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 				</fieldset>
@@ -717,7 +717,7 @@
 								<liferay-ui:message key="same-for-all" />
 
 								<input checked="checked" class="lfr-use-for-all" id="lfr-use-for-all-style" type="checkbox" />
-							</label>	
+							</label>
 						</span>
 					</span>
 
@@ -736,7 +736,7 @@
 								<option value="outset"><liferay-ui:message key="outset" /></option>
 								<option value="ridge"><liferay-ui:message key="ridge" /></option>
 								<option value="solid"><liferay-ui:message key="solid" /></option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -755,7 +755,7 @@
 								<option value="outset"><liferay-ui:message key="outset" /></option>
 								<option value="ridge"><liferay-ui:message key="ridge" /></option>
 								<option value="solid"><liferay-ui:message key="solid" /></option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -774,7 +774,7 @@
 								<option value="outset"><liferay-ui:message key="outset" /></option>
 								<option value="ridge"><liferay-ui:message key="ridge" /></option>
 								<option value="solid"><liferay-ui:message key="solid" /></option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -793,7 +793,7 @@
 								<option value="outset"><liferay-ui:message key="outset" /></option>
 								<option value="ridge"><liferay-ui:message key="ridge" /></option>
 								<option value="solid"><liferay-ui:message key="solid" /></option>
-							</select>	
+							</select>
 						</span>
 					</span>
 				</fieldset>
@@ -807,7 +807,7 @@
 								<liferay-ui:message key="same-for-all" />
 
 								<input checked="checked" class="lfr-use-for-all" id="lfr-use-for-all-color" type="checkbox" />
-							</label>	
+							</label>
 						</span>
 					</span>
 
@@ -815,7 +815,7 @@
 						<span class="aui-field-content">
 							<label for="lfr-border-color-top"><liferay-ui:message key="top" /></label>
 
-							<input class="text-input" id="lfr-border-color-top" type="text" />	
+							<input class="text-input" id="lfr-border-color-top" type="text" />
 						</span>
 					</span>
 
@@ -823,7 +823,7 @@
 						<span class="aui-field-content">
 							<label for="lfr-border-color-right"><liferay-ui:message key="right" /></label>
 
-							<input class="text-input" id="lfr-border-color-right" type="text" />	
+							<input class="text-input" id="lfr-border-color-right" type="text" />
 						</span>
 					</span>
 
@@ -831,7 +831,7 @@
 						<span class="aui-field-content">
 							<label for="lfr-border-color-bottom"><liferay-ui:message key="bottom" /></label>
 
-							<input class="text-input" id="lfr-border-color-bottom" type="text" />	
+							<input class="text-input" id="lfr-border-color-bottom" type="text" />
 						</span>
 					</span>
 
@@ -839,7 +839,7 @@
 						<span class="aui-field-content">
 							<label for="lfr-border-color-left"><liferay-ui:message key="left" /></label>
 
-							<input class="text-input" id="lfr-border-color-left" type="text" />	
+							<input class="text-input" id="lfr-border-color-left" type="text" />
 						</span>
 					</span>
 				</fieldset>
@@ -857,7 +857,7 @@
 								<liferay-ui:message key="same-for-all" />
 
 								<input checked="checked" class="lfr-use-for-all" id="lfr-use-for-all-padding" type="checkbox" />
-							</label>	
+							</label>
 						</span>
 					</span>
 
@@ -871,7 +871,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -885,7 +885,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -899,7 +899,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -913,7 +913,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 				</fieldset>
@@ -927,7 +927,7 @@
 								<liferay-ui:message key="same-for-all" />
 
 								<input checked="checked" class="lfr-use-for-all" id="lfr-use-for-all-margin" type="checkbox" />
-							</label>	
+							</label>
 						</span>
 					</span>
 
@@ -941,7 +941,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -955,7 +955,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -969,7 +969,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 
@@ -983,7 +983,7 @@
 								<option value="%">%</option>
 								<option value="px">px</option>
 								<option value="em">em</option>
-							</select>	
+							</select>
 						</span>
 					</span>
 				</fieldset>
@@ -996,7 +996,7 @@
 					<span class="aui-field-content">
 						<label for="lfr-custom-css"><liferay-ui:message key="enter-your-custom-css" /></label>
 
-						<textarea id="lfr-custom-css"></textarea>	
+						<textarea id="lfr-custom-css"></textarea>
 					</span>
 				</span>
 			</fieldset>
@@ -1008,7 +1008,7 @@
 					<span class="aui-field-content">
 						<label for="lfr-wap-title"><liferay-ui:message key="title" /></label>
 
-						<input class="text-input" id="lfr-wap-title" type="text" />	
+						<input class="text-input" id="lfr-wap-title" type="text" />
 					</span>
 				</span>
 
@@ -1019,7 +1019,7 @@
 						<select id="lfr-wap-initial-window-state">
 							<option value="MINIMIZED"><liferay-ui:message key="minimized" /></option>
 							<option value="NORMAL"><liferay-ui:message key="normal" /></option>
-						</select>	
+						</select>
 					</span>
 				</span>
 			</fieldset>

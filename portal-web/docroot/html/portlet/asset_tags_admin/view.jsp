@@ -60,7 +60,7 @@
 									<liferay-ui:message key="name" />
 								</label>
 
-								<input class="new-tag-name" id="new-tag-name" name="new-tag-name" type="text" value="" />	
+								<input class="new-tag-name" id="new-tag-name" name="new-tag-name" type="text" value="" />
 							</span>
 						</span>
 

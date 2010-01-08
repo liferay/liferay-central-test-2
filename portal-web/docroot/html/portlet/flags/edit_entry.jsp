@@ -133,7 +133,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 						%>
 
 						<option value="other"><liferay-ui:message key="other" /></option>
-					</select>	
+					</select>
 				</span>
 			</span>
 
@@ -150,7 +150,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 					<span class="aui-field-content">
 						<label for="<portlet:namespace />reporterEmailAddress"><liferay-ui:message key="email-address" /></label>
 
-						<input id="<portlet:namespace />reporterEmailAddress" name="<portlet:namespace />reporterEmailAddress" type="text" value="" />	
+						<input id="<portlet:namespace />reporterEmailAddress" name="<portlet:namespace />reporterEmailAddress" type="text" value="" />
 					</span>
 				</span>
 			</c:if>

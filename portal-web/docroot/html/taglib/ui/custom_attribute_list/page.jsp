@@ -51,12 +51,12 @@ for (String attributeName : attributeNames) {
 	<span class="aui-field">
 		<span class="aui-field-content">
 			<liferay-ui:custom-attribute
-				 className="<%= className %>"
-				 classPK="<%= classPK %>"
-				 editable="<%= editable %>"
-				 label="<%= label %>"
-				 name="<%= attributeName %>"
-			/>	
+				className="<%= className %>"
+				classPK="<%= classPK %>"
+				editable="<%= editable %>"
+				label="<%= label %>"
+				name="<%= attributeName %>"
+			/>
 		</span>
 	</span>
 
@@ -67,7 +67,7 @@ for (String attributeName : attributeNames) {
 <c:if test="<%= attributeNames.isEmpty() %>">
 	<span class="aui-field">
 		<span class="aui-field-content">
-			<label><%= LanguageUtil.format(pageContext, "no-custom-fields-are-defined-for-x", modelResourceName) %></label>	
+			<label><%= LanguageUtil.format(pageContext, "no-custom-fields-are-defined-for-x", modelResourceName) %></label>
 		</span>
 	</span>
 </c:if>
