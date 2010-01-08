@@ -32,16 +32,14 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 String rowHREF = (String)row.getParameter("rowHREF");
 %>
 
-<a href="<%= rowHREF %>">
-
-<c:choose>
-	<c:when test="<%= template.isSmallImage() %>">
-		<img border="0" src="<%= Validator.isNotNull(template.getSmallImageURL()) ? template.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + template.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(template.getSmallImageId()) %>" />
-	</c:when>
-	<c:otherwise>
-		<%= template.getName() %><br />
-		<%= template.getDescription() %>
-	</c:otherwise>
-</c:choose>
-
-</a>
+<aui:a href="<%= rowHREF %>">
+	<c:choose>
+		<c:when test="<%= template.isSmallImage() %>">
+			<img border="0" src="<%= Validator.isNotNull(template.getSmallImageURL()) ? template.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + template.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(template.getSmallImageId()) %>" />
+		</c:when>
+		<c:otherwise>
+			<%= template.getName() %><br />
+			<%= template.getDescription() %>
+		</c:otherwise>
+	</c:choose>
+</aui:a>

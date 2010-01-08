@@ -24,94 +24,93 @@
 
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
-<form method="post" name="<portlet:namespace />fm">
+<aui:form method="post" name="fm">
 
-<%
-String tabs1 = ParamUtil.getString(request, "tabs1", "templates");
+	<%
+	String tabs1 = ParamUtil.getString(request, "tabs1", "templates");
 
-PortletURL portletURL = renderResponse.createRenderURL();
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/journal/select_template");
-portletURL.setParameter("tabs1", tabs1);
+	portletURL.setParameter("struts_action", "/journal/select_template");
+	portletURL.setParameter("tabs1", tabs1);
 
-TemplateSearch searchContainer = new TemplateSearch(renderRequest, portletURL);
+	TemplateSearch searchContainer = new TemplateSearch(renderRequest, portletURL);
 
-searchContainer.setDelta(10);
+	searchContainer.setDelta(10);
 
-String tabs1Names = "shared-templates";
+	String tabs1Names = "shared-templates";
 
-if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
-	tabs1Names = "templates," + tabs1Names;
-}
-%>
+	if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
+		tabs1Names = "templates," + tabs1Names;
+	}
+	%>
 
-<liferay-ui:tabs
-	names="<%= tabs1Names %>"
-	url="<%= portletURL.toString() %>"
-/>
+	<liferay-ui:tabs
+		names="<%= tabs1Names %>"
+		url="<%= portletURL.toString() %>"
+	/>
 
-<liferay-ui:search-form
-	page="/html/portlet/journal/template_search.jsp"
-	searchContainer="<%= searchContainer %>"
-/>
+	<liferay-ui:search-form
+		page="/html/portlet/journal/template_search.jsp"
+		searchContainer="<%= searchContainer %>"
+	/>
 
-<%
-TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearchTerms();
+	<%
+	TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearchTerms();
 
-if (tabs1.equals("shared-templates")) {
-	long companyGroupId = themeDisplay.getCompanyGroupId();
+	if (tabs1.equals("shared-templates")) {
+		long companyGroupId = themeDisplay.getCompanyGroupId();
 
-	searchTerms.setGroupId(companyGroupId);
-}
+		searchTerms.setGroupId(companyGroupId);
+	}
 
-searchTerms.setStructureId(StringPool.BLANK);
-searchTerms.setStructureIdComparator(StringPool.NOT_EQUAL);
-%>
+	searchTerms.setStructureId(StringPool.BLANK);
+	searchTerms.setStructureIdComparator(StringPool.NOT_EQUAL);
+	%>
 
-<%@ include file="/html/portlet/journal/template_search_results.jspf" %>
+	<%@ include file="/html/portlet/journal/template_search_results.jspf" %>
 
-<div class="separator"><!-- --></div>
+	<div class="separator"><!-- --></div>
 
-<%
+	<%
 
-List resultRows = searchContainer.getResultRows();
+	List resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < results.size(); i++) {
-	JournalTemplate template = (JournalTemplate)results.get(i);
+	for (int i = 0; i < results.size(); i++) {
+		JournalTemplate template = (JournalTemplate)results.get(i);
 
-	ResultRow row = new ResultRow(template, template.getId(), i);
+		ResultRow row = new ResultRow(template, template.getId(), i);
 
-	StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-	sb.append("javascript:opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectTemplate('");
-	sb.append(template.getStructureId());
-	sb.append("', '");
-	sb.append(template.getTemplateId());
-	sb.append("'); window.close();");
+		sb.append("javascript:opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectTemplate('");
+		sb.append(template.getStructureId());
+		sb.append("', '");
+		sb.append(template.getTemplateId());
+		sb.append("'); window.close();");
 
-	String rowHREF = sb.toString();
+		String rowHREF = sb.toString();
 
-	row.setParameter("rowHREF", rowHREF);
+		row.setParameter("rowHREF", rowHREF);
 
-	// Template id
+		// Template id
 
-	row.addText(template.getTemplateId(), rowHREF);
+		row.addText(template.getTemplateId(), rowHREF);
 
-	// Name, description, and image
+		// Name, description, and image
 
-	row.addJSP("/html/portlet/journal/template_description.jsp");
+		row.addJSP("/html/portlet/journal/template_description.jsp");
 
-	// Add result row
+		// Add result row
 
-	resultRows.add(row);
-}
-%>
+		resultRows.add(row);
+	}
+	%>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-</form>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>
 
 <script type="text/javascript">
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />searchTemplateId);

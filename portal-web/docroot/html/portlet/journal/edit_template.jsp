@@ -92,6 +92,12 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		document.<portlet:namespace />fm2.submit();
 	}
 
+	function <portlet:namespace />openStructureSelector() {
+		var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+
+		structureWindow.focus();
+	}
+
 	function <portlet:namespace />removeStructure() {
 		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
 
@@ -130,288 +136,179 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	}
 </script>
 
-<form method="post" name="<portlet:namespace />fm2">
-<input name="xslContent" type="hidden" value="" />
-<input name="formatXsl" type="hidden" value="" />
-<input name="langType" type="hidden" value="" />
-</form>
+<portlet:actionURL var="editTemplateURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/journal/edit_template" />
+</portlet:actionURL>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveTemplate(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(originalRedirect) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />templateId" type="hidden" value="<%= HtmlUtil.escapeAttribute(templateId) %>" />
-<input name="<portlet:namespace />xslContent" type="hidden" value="<%= JS.encodeURIComponent(xsl) %>" />
-<input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
+<aui:form method="post" name="fm2">
+	<aui:input name="xslContent" type="hidden" />
+	<aui:input name="formatXsl" type="hidden" />
+	<aui:input name="langType" type="hidden" />
+</aui:form>
 
-<liferay-ui:tabs
-	names="template"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+<aui:form action="<%= editTemplateURL %>" enctype="multipart/form-data" method="post" name="fm1" onSubmit='<%= renderResponse.getNamespace() + "saveTemplate(); return false;" %>' >
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
+	<aui:input name="xslContent" type="hidden" value="<%= JS.encodeURIComponent(xsl) %>" />
+	<aui:input name="saveAndContinue" type="hidden" />
 
-<liferay-ui:error exception="<%= DuplicateTemplateIdException.class %>" message="please-enter-a-unique-id" />
-<liferay-ui:error exception="<%= TemplateDescriptionException.class %>" message="please-enter-a-valid-description" />
-<liferay-ui:error exception="<%= TemplateIdException.class %>" message="please-enter-a-valid-id" />
-<liferay-ui:error exception="<%= TemplateNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:tabs
+		names="template"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-<liferay-ui:error exception="<%= TemplateSmallImageNameException.class %>">
+	<liferay-ui:error exception="<%= DuplicateTemplateIdException.class %>" message="please-enter-a-unique-id" />
+	<liferay-ui:error exception="<%= TemplateDescriptionException.class %>" message="please-enter-a-valid-description" />
+	<liferay-ui:error exception="<%= TemplateIdException.class %>" message="please-enter-a-valid-id" />
+	<liferay-ui:error exception="<%= TemplateNameException.class %>" message="please-enter-a-valid-name" />
 
-	<%
-	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS, ",");
-	%>
+	<liferay-ui:error exception="<%= TemplateSmallImageNameException.class %>">
 
-	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, StringPool.COMMA) %>.
-</liferay-ui:error>
+		<%
+		String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS, ",");
+		%>
+
+		<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, StringPool.COMMA) %>.
+	</liferay-ui:error>
 
 
-<liferay-ui:error exception="<%= TemplateSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
-<liferay-ui:error exception="<%= TemplateXslException.class %>" message="please-enter-a-valid-script-template" />
+	<liferay-ui:error exception="<%= TemplateSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+	<liferay-ui:error exception="<%= TemplateXslException.class %>" message="please-enter-a-valid-script-template" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="id" />
-	</td>
-	<td>
-		<c:choose>
-			<c:when test="<%= PropsValues.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID %>">
-				<c:choose>
-					<c:when test="<%= template == null %>">
-						<liferay-ui:message key="autogenerate-id" />
-
-						<input name="<portlet:namespace />newTemplateId" type="hidden" value="" />
-						<input name="<portlet:namespace />autoTemplateId" type="hidden" value="true" />
-					</c:when>
-					<c:otherwise>
-						<%= templateId %>
-					</c:otherwise>
-				</c:choose>
-			</c:when>
-			<c:otherwise>
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<c:choose>
-							<c:when test="<%= template == null %>">
-								<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="templateId" fieldParam="newTemplateId" defaultValue="<%= newTemplateId %>" />
-							</c:when>
-							<c:otherwise>
-								<%= templateId %>
-							</c:otherwise>
-						</c:choose>
-					</td>
-					<td>
-						<c:if test="<%= template == null %>">
-							<liferay-ui:input-checkbox param="autoTemplateId" />
-
+	<aui:fieldset>
+		<aui:field-wrapper label="id">
+			<c:choose>
+				<c:when test="<%= PropsValues.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID %>">
+					<c:choose>
+						<c:when test="<%= template == null %>">
 							<liferay-ui:message key="autogenerate-id" />
-						</c:if>
-					</td>
-				</tr>
-				</table>
-			</c:otherwise>
-		</c:choose>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="description" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="cacheable" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="cacheable" defaultValue="<%= new Boolean(cacheable) %>" />
 
-		<liferay-ui:icon-help message="journal-template-cacheable-help" />
-	</td>
-</tr>
+							<aui:input name="newTemplateId" type="hidden" />
+							<aui:input name="autoTemplateId" type="hidden" value="<%= true %>" />
+						</c:when>
+						<c:otherwise>
+							<%= templateId %>
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+				<c:otherwise>
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<c:choose>
+								<c:when test="<%= template == null %>">
+									<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="templateId" fieldParam="newTemplateId" defaultValue="<%= newTemplateId %>" />
+								</c:when>
+								<c:otherwise>
+									<%= templateId %>
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+							<c:if test="<%= template == null %>">
+								<aui:input inlineLabel="right" name="autogenerateId" type="checkbox" value="autoTemplateId" />
+							</c:if>
+						</td>
+					</tr>
+					</table>
+				</c:otherwise>
+			</c:choose>
+		</aui:field-wrapper>
 
-<c:if test="<%= template != null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="url" />
-		</td>
-		<td>
-			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/journal/get_template?groupId=" + groupId + "&templateId=" + templateId %>'
-			/>
-		</td>
-	</tr>
+		<aui:input bean="<%= template %>" cssClass="lfr-input-text-container" model="<%= JournalTemplate.class %>" name="name" />
 
-	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
-		<tr>
-			<td>
-				<liferay-ui:message key="webdav-url" />
-			</td>
-			<td>
-				<liferay-ui:input-resource
-					url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/journal/Templates/" + templateId %>'
-				/>
-			</td>
-		</tr>
-	</c:if>
-</c:if>
+		<aui:input bean="<%= template %>" cssClass="lfr-textarea-container"  model="<%= JournalTemplate.class %>" name="description" />
 
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="structure" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>" />
+		<aui:input bean="<%= template %>" helpMessage="journal-template-cacheable-help" inlineLabel="left" model="<%= JournalTemplate.class %>" name="cacheable" value="<%= new Boolean(cacheable) %>" />
 
-		<c:choose>
-			<c:when test="<%= (template == null) || (Validator.isNotNull(structureId)) %>">
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="structureId" value="<%= structureId %>" /></portlet:renderURL>" id="<portlet:namespace />structureName">
-				<%= structureName %></a>
-			</c:when>
-			<c:otherwise>
-				<a id="<portlet:namespace />structureName"></a>
-			</c:otherwise>
-		</c:choose>
+		<c:if test="<%= template != null %>">
+			<aui:input cssClass="lfr-input-text-container" name="url" value='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/journal/get_template?groupId=" + groupId + "&templateId=" + templateId %>' />
 
-		<c:if test="<%= (template == null) || (Validator.isNull(template.getStructureId())) %>">
-			<input type="button" value="<liferay-ui:message key="select" />" onClick="var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); structureWindow.focus();" />
-
-			<input <%= Validator.isNull(structureId) ? "disabled" : "" %> id="<portlet:namespace />removeStructureButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeStructure();">
+			<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
+				<aui:input cssClass="lfr-input-text-container" name="webdav-url" value='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/journal/Templates/" + templateId %>' />
+			</c:if>
 		</c:if>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="language-type" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />langType">
+
+		<aui:field-wrapper label="structure">
+			<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
+
+			<c:choose>
+				<c:when test="<%= (template == null) || (Validator.isNotNull(structureId)) %>">
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editStructureURL">
+						<portlet:param name="struts_action" value="/journal/edit_structure" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+						<portlet:param name="structureId" value="<%= structureId %>" />
+					</portlet:renderURL>
+
+					<aui:a href="<%= editStructureURL %>" label="<%= structureName %>" id="structureName" />
+				</c:when>
+				<c:otherwise>
+					<aui:a href="" id="structureName" />
+				</c:otherwise>
+			</c:choose>
+
+			<c:if test="<%= (template == null) || (Validator.isNull(template.getStructureId())) %>">
+				<aui:button onClick='<%= renderResponse.getNamespace() + "openStructureSelector();" %>'  type="button" value="select" />
+
+				<aui:button disabled="<%= Validator.isNull(structureId) %>" name="removeStructureButton" onClick='<%= renderResponse.getNamespace() + "removeStructure();" %>' type="button" value="remove" />
+			</c:if>
+		</aui:field-wrapper>
+
+		<aui:select label="language-type" name="langType">
 
 			<%
 			for (int i = 0; i < JournalTemplateConstants.LANG_TYPES.length; i++) {
 			%>
 
-				<option <%= langType.equals(JournalTemplateConstants.LANG_TYPES[i]) ? "selected" : "" %> value="<%= JournalTemplateConstants.LANG_TYPES[i] %>"><%= JournalTemplateConstants.LANG_TYPES[i].toUpperCase() %></option>
+				<aui:option label="<%= JournalTemplateConstants.LANG_TYPES[i].toUpperCase() %>" selected="<%= langType.equals(JournalTemplateConstants.LANG_TYPES[i]) %>" value="<%= JournalTemplateConstants.LANG_TYPES[i] %>" />
 
 			<%
 			}
 			%>
 
-		</select>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="script" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />xsl" type="file" />
+		</aui:select>
 
-		<input id="<portlet:namespace />editorButton" type="button" value="<liferay-ui:message key="launch-editor" />" />
+		<aui:field-wrapper label="script">
+			<aui:input label="" name="xsl" type="file" />
 
-		<c:if test="<%= template != null %>">
-			<input type="button" value="<liferay-ui:message key="download" />" onClick="<portlet:namespace />downloadTemplateContent();" />
+			<aui:button name="editorButton" type="button" value="launch-editor" />
+
+			<c:if test="<%= template != null %>">
+				<aui:button onClick='<%= renderResponse.getNamespace() + "downloadTemplateContent();" %>' type="button" value="download" />
+			</c:if>
+		</aui:field-wrapper>
+
+		<aui:input inlineLabel="left" name="format-script" type="checkbox" value="formatXsl" />
+
+		<aui:input bean="<%= template %>" cssClass="lfr-input-text-container" label="small-image-url" model="<%= JournalTemplate.class %>" name="smallImageURL" />
+
+		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span>
+
+		<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" type="file" />
+
+		<aui:input bean="<%= template %>" inlineLabel="left" model="<%= JournalTemplate.class %>" name="smallImage"  />
+
+		<c:if test="<%= template == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= JournalTemplate.class.getName() %>"
+				/>
+			</aui:field-wrapper>
 		</c:if>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="format-script" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="formatXsl" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="small-image-url" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="smallImageURL" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="small-image" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />smallFile" type="file" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="use-small-image" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="smallImage" />
-	</td>
-</tr>
+	</aui:fieldset>
 
-<c:if test="<%= template == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= JournalTemplate.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
+	<aui:button-row>
+		<aui:button type="submit" />
 
-</table>
+		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueTemplate();" %>' type="button" value="save-and-continue" />
 
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />saveAndContinueTemplate();" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
-
-</form>
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <script type="text/javascript">
 	Liferay.Util.inlineEditor(

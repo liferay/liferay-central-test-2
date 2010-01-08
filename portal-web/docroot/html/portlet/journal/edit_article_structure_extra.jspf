@@ -57,7 +57,7 @@
 </div>
 
 <div class="journal-article-edit-field-wrapper aui-helper-hidden" id="<portlet:namespace />journalArticleEditFieldWrapper">
-	<form action="" class="aui-form" method="post">
+	<aui:form method="post">
 		<div class="journal-article-edit-field aui-block-labels" id="<portlet:namespace />journalArticleEditField">
 			<div class="portlet-msg-success journal-message aui-helper-hidden" id="<portlet:namespace />journalMessage">
 				<liferay-ui:message key="your-request-processed-successfully" />
@@ -65,140 +65,122 @@
 
 			<strong>Options</strong>
 
-			<span class="aui-field">
-				<span class="aui-field-content">
-					<label class="journal-edit-label" for="<portlet:namespace />fieldType">Field type</label>
-
-					<select class="aui-select-input" disabled="disabled" id="<portlet:namespace />fieldType">
-						<option value="text"><liferay-ui:message key="text-field" /></option>
-						<option value="text_box"><liferay-ui:message key="text-box" /></option>
-						<option value="text_area"><liferay-ui:message key="text-area" /></option>
-						<option value="boolean"><liferay-ui:message key="checkbox" /></option>
-						<option value="options"><liferay-ui:message key="options" /></option>
-						<option value="list"><liferay-ui:message key="select-box" /></option>
-						<option value="multi-list"><liferay-ui:message key="multi-selection-list" /></option>
-						<option value="image"><liferay-ui:message key="image-uploader" /></option>
-						<option value="image_gallery"><liferay-ui:message key="image-gallery" /></option>
-						<option value="document_library"><liferay-ui:message key="document-library" /></option>
-						<option value="link_to_layout"><liferay-ui:message key="link-to-page" /></option>
-						<option value="selection_break"><liferay-ui:message key="selection-break" /></option>
-					</select>
-				</span>
-			</span>
-
-			<span class="aui-field">
-				<span class="aui-field-content">
-					<label class="journal-edit-label" for="<portlet:namespace />fieldLabel"><liferay-ui:message key="field-label" /></label>
-
-					<input id="<portlet:namespace />fieldLabel" name="fieldLabel" type="text" value="" />
-				</span>
-			</span>
-
 		 	<span class="aui-field">
 		 		<span class="aui-field-content">
-		 			<label class="journal-edit-label" for="<portlet:namespace />predefinedValue"><liferay-ui:message key="predefined-value" /></label>
+		 			<aui:select disabled="<%= true %>" name="fieldType">
+		 				<aui:option label="text-field" value="text" />
+		 				<aui:option label="text-box" value="text_box" />
+		 				<aui:option label="text-area" value="text_area" />
+		 				<aui:option label="checkbox" value="boolean" />
+	 					<aui:option label="options" />
+		 				<aui:option label="select-box" value="list" />
+		 				<aui:option label="multi-selection-list" value="multi-list" />
+		 				<aui:option label="image-uploader" value="image" />
+		 				<aui:option label="image-gallery" value="image_gallery" />
+						<aui:option label="document-library" value="document_library" />
+	 					<aui:option label="link-to-page" value="link_to_layout" />
+			 			<aui:option label="selection-break" value="selection_break" />
+					</aui:select>
+				</span>
+			</span>
 
-					<input class="text-input" id="<portlet:namespace />predefinedValue" name="predefinedValue" type="text" value="" />
+			<span class="aui-field">
+				<span class="aui-field-content">
+		 			<aui:input name="fieldLabel" />
 		 		</span>
 		 	</span>
 
-			<fieldset class="user-instructions">
+		 	<span class="aui-field">
+		 		<span class="aui-field-content">
+		 			<aui:input name="predefinedValue" />
+		 		</span>
+		 	</span>
+
+			<aui:fieldset>
 			 	<span class="aui-field">
 			 		<span class="aui-field-content">
-			 			<label class="journal-edit-label" for="<portlet:namespace />instructions"><liferay-ui:message key="instructions-for-the-user" /></label>
-
-						<textarea class="textarea" id="<portlet:namespace />instructions" name="instructions"></textarea>
-			 		</span>
+						<aui:input label="instructions-for-the-user" name="instructions" type="textarea" />
+					</span>
 			 	</span>
 
 				<span class="aui-field">
 					<span class="aui-field-content">
-						<label for="<portlet:namespace />displayAsTooltip">
-				 			<input id="<portlet:namespace />displayAsTooltip" name="displayAsTooltip" type="checkbox" value="true" /> <liferay-ui:message key="display-as-tooltip" />
-				 		</label>
+						<aui:input inlineLabel="right" name="displayAsTooltip" type="checkbox" value="<%= true %>" />
 					</span>
-				</span>
-			</fieldset>
+		 		</span>
+			</aui:fieldset>
 
 	 		<span class="aui-field">
 	 			<span class="aui-field-content">
-	 				<label class="journal-edit-label" for="<portlet:namespace />variableName"><liferay-ui:message key="variable-name" /></label>
-
-					<input id="<portlet:namespace />variableName" name="variableName" type="text" value="" />
-	 			</span>
-	 		</span>
+		 			<aui:input name="variableName" />
+		 		</span>
+		 	</span>
 
 			<br />
 
 		 	<span class="aui-field">
 		 		<span class="aui-field-content">
-		 			<label for="<portlet:namespace />repeatable">
-			 			<input id="<portlet:namespace />repeatable" name="repeatable" type="checkbox" value="true" /> <liferay-ui:message key="repeatable" />
-			 		</label>
-		 		</span>
-		 	</span>
+					<aui:input inlineLabel="right" name="repeatable" type="checkbox" value="<%= true %>" />
+				</span>
+	 		</span>
 
 	 		<span class="aui-field">
 	 			<span class="aui-field-content">
-	 				<label for="<portlet:namespace />required">
-			 			<input id="<portlet:namespace />required" name="required" type="checkbox" value="true" /> <liferay-ui:message key="required" />
-			 		</label>
-	 			</span>
+		 			<aui:input inlineLabel="right" name="required" type="checkbox" value="<%= true %>" />
+		 		</span>
 	 		</span>
 
 			<span class="aui-field">
 				<span class="aui-field-content">
-					<label for="<portlet:namespace />localized">
-			 			<input id="<portlet:namespace />localized" name="localized" type="checkbox" value="true" /> <liferay-ui:message key="localized" />
-			 		</label>
-				</span>
-			</span>
+		 			<aui:input name="localized" type="checkbox" value="<%= true %>" />
+		 		</span>
+	 		</span>
 
 	 		<div class="aui-button-holder">
-	 			<input class="save-button" name="save" type="button" value="<liferay-ui:message key="save" />" />
+	 			<aui:button-row>
+	 				<aui:button type="submit" />
 
-				<input class="cancel-button" name="cancel" type="button" value="<liferay-ui:message key="cancel" />" />
+	 				<aui:button onClick="<%= redirect %>" type="cancel" />
 
-				<input class="close-button" name="close" type="button" value="<liferay-ui:message key="close" />" />
+					<aui:button type="button" value="close" />
+				</aui:button-row>
 	 		</div>
  		</div>
-	</form>
+	</aui:form>
 </div>
 
 <div class="journal-fieldmodel-container" id="journalFieldModelContainer">
 	<div dataType="text">
-		<input class="principal-field-element lfr-input-text" size="55" type="text" value="" />
+		<aui:input name="text" size="55" />
 	</div>
 
 	<div dataType="text_area">
-		<input class="principal-field-element lfr-input-text" size="55" type="text" value="" />
+		<aui:input name="textArea" size="55" type="textarea" />
 	</div>
 
 	<div dataType="text_box">
-		<textarea class="principal-field-element lfr-textarea" cols="60" rows="10"></textarea>
+		<aui:input cols="60" name="textBox" rows="10" size="55" type="textarea" />
 	</div>
 
 	<div dataType="image">
-		<input class="principal-field-element lfr-input-text flexible" size="40" type="file" value="" />
+		<aui:input name="imageUploader" size="40" type="file" />
 	</div>
 
 	<div dataType="image_gallery">
-		<input class="principal-field-element lfr-input-text journal-imagegallery-text" size="55" type="text" value="" />
+		<aui:input name="imageGallery" size="55" />
 
 		<input class="journal-imagegallery-button" dataImagegalleryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 	</div>
 
 	<div dataType="document_library">
-		<input class="principal-field-element lfr-input-text journal-documentlibrary-text" size="55" type="text" value="" />
+		<aui:input name="documentLibrary" size="55" />
 
 		<input class="journal-documentlibrary-button" dataDocumentlibraryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 	</div>
 
 	<div dataType="boolean">
 		<div class="journal-subfield">
-			<input class="principal-field-element" type="checkbox" />
-
-			<label class="journal-article-field-label"><span>BooleanField</span></label>
+			<aui:input inlineLabel="right" name="booleanField" type="checkbox" />
 		</div>
 	</div>
 
@@ -211,18 +193,22 @@
 			<select class="principal-field-element"></select>
 
 			<span class="journal-icon-button journal-delete-field">
-				<liferay-ui:icon image="delete" /><liferay-ui:message key="delete-selected-value" />
+				<aui:field-wrapper label="delete-selected-value">
+					<liferay-ui:icon image="delete" />
+				</aui:field-wrapper>
 			</span>
 
 			<div class="journal-edit-field-control">
 				<br /><br />
 
-				<input class="journal-list-key" title="<liferay-ui:message key="new-item" />" size="15" type="text" value="<liferay-ui:message key="new-item" />" />
+				<aui:input name="newItem" size="15" title='<liferay-ui:message key="new-item" />' value='<liferay-ui:message key="new-item" />' />
 
-				<input class="journal-list-value" size="15" title="<liferay-ui:message key="item-value" />" type="text" value="value" />
+				<aui:input name="itemValue" size="15" title='<liferay-ui:message key="item-value" />' value="value" />
 
 				<span class="journal-icon-button journal-add-field">
-					<liferay-ui:icon image="add" /> <liferay-ui:message key="add-to-list" />
+					<aui:field-wrapper label="add-to-list">
+						<liferay-ui:icon image="add" />
+					</aui:field-wrapper>
 				</span>
 			</div>
 		</div>
@@ -230,29 +216,33 @@
 
 	<div dataType="multi-list">
 		<div class="journal-list-subfield">
-			<select class="principal-field-element" multiple="true"></select>
+			<aui:select cssClass="principal-field-element" multiple="true" name="journalListSubfield" />
 
 			<span class="journal-icon-button journal-delete-field">
-				<liferay-ui:icon image="delete" /><liferay-ui:message key="delete-selected-value" />
+				<aui:field-wrapper label="delete-selected-value">
+					<liferay-ui:icon image="delete" />
+				</aui:field-wrapper>
 			</span>
 
 			<div class="journal-edit-field-control">
 				<br /><br />
 
-				<input class="journal-list-key" size="15" title="<liferay-ui:message key="new-item" />" type="text" value="<liferay-ui:message key="new-item" />" />
+				<aui:input name="newItem" size="15" title='<liferay-ui:message key="new-item" />' value='<liferay-ui:message key="new-item" />' />
 
-				<input class="journal-list-value" size="15" title="<liferay-ui:message key="item-value" />" type="text" value="value" />
+				<aui:input name="itemValue" size="15" title='<liferay-ui:message key="item-value" />' value="value" />
 
 				<span class="journal-icon-button journal-add-field">
-					<liferay-ui:icon image="add" /> <liferay-ui:message key="add-to-list" />
+					<aui:field-wrapper label="add-to-list">
+						<liferay-ui:icon image="add" />
+					</aui:field-wrapper>
 				</span>
 			</div>
 		</div>
 	</div>
 
 	<div dataType="link_to_layout">
-		<select class="principal-field-element">
-			<option value=""></option>
+		<aui:select cssClass="principal-field-element" name="linkToLayout">
+			<aui:option value="" />
 
 			<%
 			LayoutLister layoutLister = new LayoutLister();
@@ -293,14 +283,14 @@
 				if (linkableLayout != null) {
 			%>
 
-					<option value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
+					<aui:option label="<%= name %>" value="<%= linkableLayout.getLayoutId() %>" />
 
 			<%
 			}
 				}
 			%>
 
-		</select>
+		</aui:select>
 	</div>
 
 	<div id="repeatable-field-image-model">
@@ -311,5 +301,5 @@
 </div>
 
 <div id="<portlet:namespace />repeatableBtnTemplate">
-	<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
+	<aui:button cssClass="repeatable-button" name="repeatableButton" tyep="button" value="repeat" />
 </div>

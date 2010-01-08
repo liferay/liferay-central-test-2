@@ -32,56 +32,50 @@ String oldTemplateId = ParamUtil.getString(request, "oldTemplateId");
 String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/copy_template" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.COPY %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />oldTemplateId" type="hidden" value="<%= HtmlUtil.escapeAttribute(oldTemplateId) %>" />
+<portlet:actionURL var="copyTemplateURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/journal/copy_template" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="template"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+<aui:form action="<%= copyTemplateURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.COPY %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="oldTemplateId" type="hidden" value="<%= oldTemplateId %>" />
 
-<liferay-ui:error exception="<%= DuplicateTemplateIdException.class %>" message="please-enter-a-unique-id" />
-<liferay-ui:error exception="<%= TemplateIdException.class %>" message="please-enter-a-valid-id" />
+	<liferay-ui:tabs
+		names="template"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="id" />
-	</td>
-	<td>
-		<%= oldTemplateId %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="new-id" />
-	</td>
-	<td>
-		<c:choose>
-			<c:when test="<%= PropsValues.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID %>">
-				<liferay-ui:message key="autogenerate-id" />
+	<liferay-ui:error exception="<%= DuplicateTemplateIdException.class %>" message="please-enter-a-unique-id" />
+	<liferay-ui:error exception="<%= TemplateIdException.class %>" message="please-enter-a-valid-id" />
 
-				<input name="<portlet:namespace />newTemplateId" type="hidden" value="" />
-				<input name="<portlet:namespace />autoTemplateId" type="hidden" value="true" />
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= null %>" field="templateId" fieldParam="newTemplateId" defaultValue="<%= newTemplateId %>" />
-			</c:otherwise>
-		</c:choose>
-	</td>
-</tr>
-</table>
+	<aui:fieldset>
+		<aui:field-wrapper label="id">
+			<%= oldTemplateId %>
+		</aui:field-wrapper>
 
-<br />
+		<aui:field-wrapper label="new-id">
+			<c:choose>
+				<c:when test="<%= PropsValues.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID %>">
+					<liferay-ui:message key="autogenerate-id" />
 
-<input type="submit" value="<liferay-ui:message key="copy" />" />
+					<aui:input name="newTemplateId" type="hidden" />
+					<aui:input name="autoTemplateId" type="hidden" value="<%= true %>" />
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= null %>" field="templateId" fieldParam="newTemplateId" defaultValue="<%= newTemplateId %>" />
+				</c:otherwise>
+			</c:choose>
+		</aui:field-wrapper>
+	</aui:fieldset>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
+	<aui:button-row>
+		<aui:button type="submit" value="copy" />
 
-</form>
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
