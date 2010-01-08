@@ -35,19 +35,30 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 	displayTerms="<%= displayTerms %>"
 	buttonLabel="search"
 >
-	<aui:fieldset>
-		<aui:column>
-			<aui:input label="id" name="<%= displayTerms.TEMPLATE_ID %>" size="20" value="<%= HtmlUtil.escape(displayTerms.getTemplateId()) %>" />
-		</aui:column>
-
-		<aui:column>
-			<aui:input label="name" name="<%= displayTerms.NAME %>" size="20" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
-		</aui:column>
-
-		<aui:column>
-			<aui:input label="description" name="<%= displayTerms.DESCRIPTION %>" size="20" value="<%= HtmlUtil.escape(displayTerms.getDescription()) %>" />
-		</aui:column>
-	</aui:fieldset>
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="id" />
+		</td>
+		<td>
+			<liferay-ui:message key="name" />
+		</td>
+		<td>
+			<liferay-ui:message key="description" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.TEMPLATE_ID %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getTemplateId()) %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getDescription()) %>" />
+		</td>
+	</tr>
+	</table>
 </liferay-ui:search-toggle>
 
 <%
@@ -56,9 +67,11 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 %>
 
 <c:if test="<%= showAddTemplateButton || showPermissionsButton %>">
-	<aui:button-row>
+	<br />
+
+	<div>
 		<c:if test="<%= showAddTemplateButton %>">
-			<aui:button onClick='<%= renderResponse.getNamespace() + "addTemplate();" %>' value="add-template" />
+			<input type="button" value="<liferay-ui:message key="add-template" />" onClick="<portlet:namespace />addTemplate();" />
 		</c:if>
 
 		<c:if test="<%= showPermissionsButton %>">
@@ -69,17 +82,17 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 				var="permissionsURL"
 			/>
 
-			<aui:button onClick="<%= permissionsURL %>" value="permissions" />
+			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 		</c:if>
-	</aui:button-row>
+	</div>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
-	<aui:input name="<%= displayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
+	<br />
 
-	<div class="portlet-msg-info">
-		<liferay-ui:message key="filter-by-structure" />: <%= displayTerms.getStructureId() %><br />
-	</div>
+	<input name="<portlet:namespace /><%= displayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
+
+	<liferay-ui:message key="filter-by-structure" />: <%= displayTerms.getStructureId() %><br />
 </c:if>
 
 <script type="text/javascript">

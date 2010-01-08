@@ -84,7 +84,7 @@ if (layoutList.size() > 1) {
 			String layoutLink = linkableLayout.getLayoutId() + StringPool.AT + suffix;
 	%>
 
-			<aui:option label="<%= name %>" selected="<%= elContent.equals(layoutLink) %>" value="<%= layoutLink %>" />
+			<option <%= elContent.equals(layoutLink) ? "selected" : "" %> value="<%= layoutLink %>"><%= name %></option>
 
 	<%
 		}

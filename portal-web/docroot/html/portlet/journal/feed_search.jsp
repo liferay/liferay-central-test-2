@@ -35,20 +35,33 @@ FeedDisplayTerms displayTerms = (FeedDisplayTerms)searchContainer.getDisplayTerm
 	displayTerms="<%= displayTerms %>"
 	buttonLabel="search"
 >
-	<aui:fieldset>
-		<aui:column>
-			<aui:input label="id" name="<%= displayTerms.FEED_ID %>" size="20" value="<%= HtmlUtil.escape(displayTerms.getFeedId()) %>" />
-		</aui:column>
-
-		<aui:column>
-			<aui:input label="name" name="<%= displayTerms.NAME %>" size="20" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
-		</aui:column>
-
-		<aui:column>
-			<aui:input label="description" name="<%= displayTerms.DESCRIPTION %>" size="20" value="<%= HtmlUtil.escape(displayTerms.getDescription()) %>" />
-		</aui:column>
-	</aui:fieldset>
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="id" />
+		</td>
+		<td>
+			<liferay-ui:message key="name" />
+		</td>
+		<td>
+			<liferay-ui:message key="description" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.FEED_ID %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getFeedId()) %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getDescription()) %>" />
+		</td>
+	</tr>
+	</table>
 </liferay-ui:search-toggle>
+
+<br />
 
 <%
 boolean showAddFeedButtonButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_FEED);
@@ -56,9 +69,9 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 %>
 
 <c:if test="<%= showAddFeedButtonButton || showPermissionsButton %>">
-	<aui:button-row>
+	<div>
 		<c:if test="<%= showAddFeedButtonButton %>">
-			<aui:button onClick='<%= renderResponse.getNamespace() + "addFeed();" %>' value="add-feed" />
+			<input type="button" value="<liferay-ui:message key="add-feed" />" onClick="<portlet:namespace />addFeed();" />
 		</c:if>
 
 		<c:if test="<%= showPermissionsButton %>">
@@ -69,9 +82,9 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 				var="permissionsURL"
 			/>
 
-			<aui:button onClick="<%= permissionsURL %>" value="permissions" />
+			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 		</c:if>
-	</aui:button-row>
+	</div>
 </c:if>
 
 

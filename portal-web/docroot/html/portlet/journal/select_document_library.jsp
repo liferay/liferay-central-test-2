@@ -42,152 +42,154 @@ if (folder != null) {
 }
 %>
 
-<aui:form method="post" name="">
-	<aui:legend label="folders" />
+<form method="post" name="<portlet:namespace />">
 
-	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
+<liferay-ui:tabs names="folders" />
 
-	<%
-	List<String> headerNames = new ArrayList<String>();
+<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
-	headerNames.add("folder");
-	headerNames.add("num-of-folders");
-	headerNames.add("num-of-documents");
+<%
+List<String> headerNames = new ArrayList<String>();
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+headerNames.add("folder");
+headerNames.add("num-of-folders");
+headerNames.add("num-of-documents");
 
-	int total = DLFolderLocalServiceUtil.getFoldersCount(groupId, folderId);
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	searchContainer.setTotal(total);
+int total = DLFolderLocalServiceUtil.getFoldersCount(groupId, folderId);
 
-	List results = DLFolderLocalServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+searchContainer.setTotal(total);
 
-	searchContainer.setResults(results);
+List results = DLFolderLocalServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
-	List resultRows = searchContainer.getResultRows();
+searchContainer.setResults(results);
 
-	for (int i = 0; i < results.size(); i++) {
-		DLFolder curFolder = (DLFolder)results.get(i);
+List resultRows = searchContainer.getResultRows();
 
-		ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
+for (int i = 0; i < results.size(); i++) {
+	DLFolder curFolder = (DLFolder)results.get(i);
 
-		PortletURL rowURL = renderResponse.createRenderURL();
+	ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
-		rowURL.setParameter("struts_action", "/journal/select_document_library");
-		rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-		rowURL.setParameter("groupId", String.valueOf(groupId));
+	PortletURL rowURL = renderResponse.createRenderURL();
 
-		// Name
+	rowURL.setParameter("struts_action", "/journal/select_document_library");
+	rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+	rowURL.setParameter("groupId", String.valueOf(groupId));
 
-		StringBuilder sb = new StringBuilder();
+	// Name
 
-		sb.append("<img align=\"left\" border=\"0\" src=\"");
-		sb.append(themeDisplay.getPathThemeImages());
-		sb.append("/common/folder.png\">");
-		sb.append(curFolder.getName());
+	StringBuilder sb = new StringBuilder();
 
-		row.addText(sb.toString(), rowURL);
+	sb.append("<img align=\"left\" border=\"0\" src=\"");
+	sb.append(themeDisplay.getPathThemeImages());
+	sb.append("/common/folder.png\">");
+	sb.append(curFolder.getName());
 
-		// Statistics
+	row.addText(sb.toString(), rowURL);
 
-		List subfolderIds = new ArrayList();
+	// Statistics
 
-		subfolderIds.add(new Long(curFolder.getFolderId()));
+	List subfolderIds = new ArrayList();
 
-		DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
+	subfolderIds.add(new Long(curFolder.getFolderId()));
 
-		int foldersCount = subfolderIds.size() - 1;
-		int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(groupId, subfolderIds, StatusConstants.APPROVED);
+	DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
-		row.addText(String.valueOf(foldersCount), rowURL);
-		row.addText(String.valueOf(fileEntriesCount), rowURL);
+	int foldersCount = subfolderIds.size() - 1;
+	int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(groupId, subfolderIds, StatusConstants.APPROVED);
 
-		// Add result row
+	row.addText(String.valueOf(foldersCount), rowURL);
+	row.addText(String.valueOf(fileEntriesCount), rowURL);
 
-		resultRows.add(row);
-	}
-	%>
+	// Add result row
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	resultRows.add(row);
+}
+%>
 
-	<br />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-	<aui:legend label="documents" />
+<br />
 
-	<%
-	headerNames.clear();
+<liferay-ui:tabs names="documents" />
 
-	headerNames.add("document");
-	headerNames.add("size");
-	headerNames.add("downloads");
-	headerNames.add("locked");
-	headerNames.add(StringPool.BLANK);
+<%
+headerNames.clear();
 
-	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+headerNames.add("document");
+headerNames.add("size");
+headerNames.add("downloads");
+headerNames.add("locked");
+headerNames.add(StringPool.BLANK);
 
-	total = DLFileEntryLocalServiceUtil.getFileEntriesCount(groupId, folderId);
+searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	searchContainer.setTotal(total);
+total = DLFileEntryLocalServiceUtil.getFileEntriesCount(groupId, folderId);
 
-	results = DLFileEntryLocalServiceUtil.getFileEntries(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+searchContainer.setTotal(total);
 
-	searchContainer.setResults(results);
+results = DLFileEntryLocalServiceUtil.getFileEntries(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
-	resultRows = searchContainer.getResultRows();
+searchContainer.setResults(results);
 
-	for (int i = 0; i < results.size(); i++) {
-		DLFileEntry fileEntry = (DLFileEntry)results.get(i);
+resultRows = searchContainer.getResultRows();
 
-		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
+for (int i = 0; i < results.size(); i++) {
+	DLFileEntry fileEntry = (DLFileEntry)results.get(i);
 
-		String rowHREF = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
+	ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
-		// Title
+	String rowHREF = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
 
-		StringBuilder sb = new StringBuilder();
+	// Title
 
-		sb.append("<img align=\"left\" border=\"0\" src=\"");
-		sb.append(themeDisplay.getPathThemeImages());
-		sb.append("/file_system/small/");
-		sb.append(DLUtil.getFileIcon(fileEntry.getTitle()));
-		sb.append(".png\">");
-		sb.append(fileEntry.getTitle());
+	StringBuilder sb = new StringBuilder();
 
-		row.addText(sb.toString(), rowHREF);
+	sb.append("<img align=\"left\" border=\"0\" src=\"");
+	sb.append(themeDisplay.getPathThemeImages());
+	sb.append("/file_system/small/");
+	sb.append(DLUtil.getFileIcon(fileEntry.getTitle()));
+	sb.append(".png\">");
+	sb.append(fileEntry.getTitle());
 
-		// Statistics
+	row.addText(sb.toString(), rowHREF);
 
-		row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
-		row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
+	// Statistics
 
-		// Locked
+	row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
+	row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
 
-		boolean isLocked = LockLocalServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName()));
+	// Locked
 
-		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
+	boolean isLocked = LockLocalServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName()));
 
-		// Action
+	row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 
-		sb = new StringBuilder();
+	// Action
 
-		sb.append("opener.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("selectDocumentLibrary('");
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(themeDisplay.getPathContext());
-		sb.append("/document/");
-		sb.append(groupId);
-		sb.append(StringPool.SLASH);
-		sb.append(fileEntry.getUuid());
-		sb.append("'); window.close();");
+	sb = new StringBuilder();
 
-		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
+	sb.append("opener.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectDocumentLibrary('");
+	sb.append(themeDisplay.getPortalURL());
+	sb.append(themeDisplay.getPathContext());
+	sb.append("/document/");
+	sb.append(groupId);
+	sb.append(StringPool.SLASH);
+	sb.append(fileEntry.getUuid());
+	sb.append("'); window.close();");
 
-		// Add result row
+	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
 
-		resultRows.add(row);
-	}
-	%>
+	// Add result row
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</aui:form>
+	resultRows.add(row);
+}
+%>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+</form>
