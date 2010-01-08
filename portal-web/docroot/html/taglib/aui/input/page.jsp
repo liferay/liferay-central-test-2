@@ -179,6 +179,10 @@ if (Validator.isNotNull(cssClass)) {
 		/>
 	</c:when>
 	<c:when test='<%= choiceField %>'>
+		<c:if test='<%= type.equals("checkbox") %>'>
+			<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
+		</c:if>	
+
 		<label class="aui-field-label" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 
 			<%
@@ -209,15 +213,13 @@ if (Validator.isNotNull(cssClass)) {
 
 					booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
 
-					String onClick = "AUI().one(this).previous().val(this.checked);";
+					String onClick = "AUI().one('#" + id + "').val(this.checked);";
 					String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
 
 					if (onClickDynamicAttribute != null) {
 						onClick += onClickDynamicAttribute;
 					}
 					%>
-
-					<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
 
 					<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 				</c:when>
