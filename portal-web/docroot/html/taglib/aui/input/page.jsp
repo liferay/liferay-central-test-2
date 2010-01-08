@@ -181,7 +181,7 @@ if (Validator.isNotNull(cssClass)) {
 	<c:when test='<%= choiceField %>'>
 		<c:if test='<%= type.equals("checkbox") %>'>
 			<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
-		</c:if>	
+		</c:if>
 
 		<label class="aui-field-label" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 
