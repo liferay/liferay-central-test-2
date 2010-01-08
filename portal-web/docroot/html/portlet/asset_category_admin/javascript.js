@@ -518,18 +518,14 @@ AUI().add(
 					var communityPermission = instance._getPermissionsEnabled('category', 'community');
 					var guestPermission = instance._getPermissionsEnabled('category', 'guest');
 
-					var serviceParameterTypes = [
-						'long',
-						'java.lang.String',
-						'long',
-						'[Ljava.lang.String;',
-						'com.liferay.portal.service.ServiceContext'
-					];
-
 					Liferay.Service.Asset.AssetCategory.addCategory(
 						{
 							parentCategoryId: 0,
-							name: categoryName,
+							titleMap: A.JSON.stringify(
+								{
+									'en_US': categoryName  //this is temporary
+								}
+							),
 							vocabularyId: vocabularyId,
 							properties: [],
 							serviceContext: A.JSON.stringify(
@@ -538,8 +534,7 @@ AUI().add(
 									guestPermissions: guestPermission,
 									scopeGroupId: themeDisplay.getScopeGroupId()
 								}
-							),
-							serviceParameterTypes: A.JSON.stringify(serviceParameterTypes)
+							)
 						},
 						function(message) {
 							var exception = message.exception;
@@ -626,7 +621,11 @@ AUI().add(
 
 					Liferay.Service.Asset.AssetVocabulary.addVocabulary(
 						{
-							name: vocabularyName,
+							title: A.JSON.stringify(
+								{
+									'en_US': vocabularyName  //this is temporary
+								}
+							),
 							description: '',
 							settings: '',
 							serviceContext: A.JSON.stringify(
@@ -1276,7 +1275,11 @@ AUI().add(
 						{
 							categoryId: categoryId,
 							parentCategoryId: parentCategoryId,
-							name: name,
+							title: A.JSON.stringify(
+								{
+									'en_US': name  //this is temporary
+								}
+							),
 							vocabularyId: vocabularyId,
 							properties: categoryProperties,
 							serviceContext: null
@@ -1324,8 +1327,12 @@ AUI().add(
 					Liferay.Service.Asset.AssetVocabulary.updateVocabulary(
 						{
 							vocabularyId: vocabularyId,
-							name: vocabularyName,
-							description: '',
+							title: A.JSON.stringify(
+								{
+									'en_US': vocabularyName  //this is temporary
+								}
+							),
+							description: null,
 							settings: '',
 							serviceContext: null
 						},

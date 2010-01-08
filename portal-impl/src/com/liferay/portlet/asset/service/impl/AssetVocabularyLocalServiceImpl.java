@@ -25,6 +25,7 @@ package com.liferay.portlet.asset.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
@@ -37,7 +38,10 @@ import com.liferay.portlet.asset.service.base.AssetVocabularyLocalServiceBaseImp
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="AssetVocabularyLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -51,15 +55,19 @@ public class AssetVocabularyLocalServiceImpl
 	extends AssetVocabularyLocalServiceBaseImpl {
 
 	public AssetVocabulary addVocabulary(
-			String uuid, long userId, String name, String description,
-			String settings, ServiceContext serviceContext)
+			String uuid, long userId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, String settings,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Vocabulary
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = serviceContext.getScopeGroupId();
-		name = name.trim();
+
+		Locale locale = LocaleUtil.getDefault();
+		String name = titleMap.get(locale);
+
 		Date now = new Date();
 
 		if (hasVocabulary(groupId, name)) {
@@ -81,7 +89,8 @@ public class AssetVocabularyLocalServiceImpl
 		vocabulary.setCreateDate(now);
 		vocabulary.setModifiedDate(now);
 		vocabulary.setName(name);
-		vocabulary.setDescription(description);
+		vocabulary.setTitleMap(titleMap);
+		vocabulary.setDescriptionMap(descriptionMap);
 		vocabulary.setSettings(settings);
 
 		assetVocabularyPersistence.update(vocabulary, false);
@@ -190,10 +199,15 @@ public class AssetVocabularyLocalServiceImpl
 
 			serviceContext.setScopeGroupId(groupId);
 
+			Locale locale = LocaleUtil.getDefault();
+
+			Map<Locale, String> titleMap = new HashMap<Locale, String>();
+			titleMap.put(locale, PropsValues.ASSET_VOCABULARY_DEFAULT);
+
 			AssetVocabulary vocabulary =
 				assetVocabularyLocalService.addVocabulary(
-					null, defaultUserId, PropsValues.ASSET_VOCABULARY_DEFAULT,
-					StringPool.BLANK, StringPool.BLANK,	serviceContext);
+					null, defaultUserId, titleMap, null, StringPool.BLANK,
+					serviceContext);
 
 			vocabularies = ListUtil.copy(vocabularies);
 
@@ -216,11 +230,13 @@ public class AssetVocabularyLocalServiceImpl
 	}
 
 	public AssetVocabulary updateVocabulary(
-			long vocabularyId, String name, String description, String settings,
+			long vocabularyId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, String settings,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		name = name.trim();
+		Locale locale = LocaleUtil.getDefault();
+		String name = titleMap.get(locale);
 
 		AssetVocabulary vocabulary =
 			assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
@@ -233,7 +249,8 @@ public class AssetVocabularyLocalServiceImpl
 
 		vocabulary.setModifiedDate(new Date());
 		vocabulary.setName(name);
-		vocabulary.setDescription(description);
+		vocabulary.setTitleMap(titleMap);
+		vocabulary.setDescriptionMap(descriptionMap);
 		vocabulary.setSettings(settings);
 
 		assetVocabularyPersistence.update(vocabulary, false);

@@ -35,6 +35,8 @@ import com.liferay.portlet.asset.service.permission.AssetVocabularyPermission;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="AssetVocabularyServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -47,8 +49,8 @@ public class AssetVocabularyServiceImpl
 	extends AssetVocabularyServiceBaseImpl {
 
 	public AssetVocabulary addVocabulary(
-			String name, String description, String settings,
-			ServiceContext serviceContext)
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			String settings, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AssetPermission.check(
@@ -56,7 +58,8 @@ public class AssetVocabularyServiceImpl
 			ActionKeys.ADD_VOCABULARY);
 
 		return assetVocabularyLocalService.addVocabulary(
-			null, getUserId(), name, description, settings, serviceContext);
+			null, getUserId(), titleMap, descriptionMap, settings,
+				serviceContext);
 	}
 
 	public void deleteVocabulary(long vocabularyId)
@@ -99,7 +102,8 @@ public class AssetVocabularyServiceImpl
 	}
 
 	public AssetVocabulary updateVocabulary(
-			long vocabularyId, String name, String description, String settings,
+			long vocabularyId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, String settings,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -107,7 +111,7 @@ public class AssetVocabularyServiceImpl
 			getPermissionChecker(), vocabularyId, ActionKeys.UPDATE);
 
 		return assetVocabularyLocalService.updateVocabulary(
-			vocabularyId, name, description, settings, serviceContext);
+			vocabularyId, titleMap, descriptionMap, settings, serviceContext);
 	}
 
 	protected List<AssetVocabulary> filterVocabularies(

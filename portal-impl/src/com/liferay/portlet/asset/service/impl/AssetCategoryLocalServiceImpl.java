@@ -25,11 +25,7 @@ package com.liferay.portlet.asset.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.*;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -44,6 +40,8 @@ import com.liferay.util.Autocomplete;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="AssetCategoryLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -58,16 +56,18 @@ public class AssetCategoryLocalServiceImpl
 	extends AssetCategoryLocalServiceBaseImpl {
 
 	public AssetCategory addCategory(
-			String uuid, long userId, long parentCategoryId, String name,
-			long vocabularyId, String[] categoryProperties,
-			ServiceContext serviceContext)
+			String uuid, long userId, long parentCategoryId,
+			Map<Locale, String> titleMap, long vocabularyId,
+			String[] categoryProperties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = serviceContext.getScopeGroupId();
-		name = name.trim();
+
+		Locale locale = LocaleUtil.getDefault();
+		String name = titleMap.get(locale);
 
 		if (categoryProperties == null) {
 			categoryProperties = new String[0];
@@ -96,6 +96,7 @@ public class AssetCategoryLocalServiceImpl
 		category.setModifiedDate(now);
 		category.setParentCategoryId(parentCategoryId);
 		category.setName(name);
+		category.setTitleMap(titleMap);
 		category.setVocabularyId(vocabularyId);
 
 		assetCategoryPersistence.update(category, false);
@@ -309,14 +310,15 @@ public class AssetCategoryLocalServiceImpl
 	}
 
 	public AssetCategory updateCategory(
-			long userId, long categoryId, long parentCategoryId, String name,
-			long vocabularyId, String[] categoryProperties,
-			ServiceContext serviceContext)
+			long userId, long categoryId, long parentCategoryId,
+			Map<Locale, String> titleMap, long vocabularyId,
+			String[] categoryProperties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
 
-		name = name.trim();
+		Locale locale = LocaleUtil.getDefault();
+		String name = titleMap.get(locale);
 
 		if (categoryProperties == null) {
 			categoryProperties = new String[0];
@@ -336,6 +338,7 @@ public class AssetCategoryLocalServiceImpl
 		category.setModifiedDate(new Date());
 		category.setParentCategoryId(parentCategoryId);
 		category.setName(name);
+		category.setTitleMap(titleMap);
 		category.setVocabularyId(vocabularyId);
 
 		assetCategoryPersistence.update(category, false);

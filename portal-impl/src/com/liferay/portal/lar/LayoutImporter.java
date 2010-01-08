@@ -101,14 +101,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang.time.StopWatch;
 
@@ -852,26 +845,37 @@ public class LayoutImporter {
 						vocabularyUuid, context.getGroupId());
 
 				if (existingAssetVocabulary == null) {
+					Locale locale = LocaleUtil.getDefault();
+
+					Map<Locale, String> titleMap =
+							new HashMap<Locale, String>();
+					titleMap.put(locale, vocabularyName);
+
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.addVocabulary(
 							vocabularyUuid, context.getUserId(userUuid),
-							vocabularyName, StringPool.BLANK, StringPool.BLANK,
+							titleMap, null, StringPool.BLANK,
 							serviceContext);
 				}
 				else {
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.updateVocabulary(
 							existingAssetVocabulary.getVocabularyId(),
-							vocabularyName,
-							existingAssetVocabulary.getDescription(),
+							existingAssetVocabulary.getTitleMap(),
+							existingAssetVocabulary.getDescriptionMap(),
 							existingAssetVocabulary.getSettings(),
 							serviceContext);
 				}
 			}
 			else {
+				Locale locale = LocaleUtil.getDefault();
+
+				Map<Locale, String> titleMap = 	new HashMap<Locale, String>();
+				titleMap.put(locale, vocabularyName);
+
 				assetVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
-					null, context.getUserId(userUuid), vocabularyName,
-					StringPool.BLANK, StringPool.BLANK, serviceContext);
+					null, context.getUserId(userUuid), titleMap,
+					null, StringPool.BLANK, serviceContext);
 			}
 		}
 		catch (DuplicateVocabularyException dve) {
@@ -970,21 +974,32 @@ public class LayoutImporter {
 					categoryUuid, context.getGroupId());
 
 			if (existingAssetCategory == null) {
+				Locale locale = LocaleUtil.getDefault();
+
+				Map<Locale, String> titleMap =	new HashMap<Locale, String>();
+				titleMap.put(locale, categoryName);
+
 				AssetCategoryLocalServiceUtil.addCategory(
 					categoryUuid, context.getUserId(userUuid), parentCategoryId,
-					categoryName, vocabularyId, properties, serviceContext);
+					titleMap, vocabularyId, properties, serviceContext);
 			}
 			else {
 				AssetCategoryLocalServiceUtil.updateCategory(
 					context.getUserId(userUuid),
 					existingAssetCategory.getCategoryId(), parentCategoryId,
-					categoryName, vocabularyId, properties, serviceContext);
+					existingAssetCategory.getTitleMap(), vocabularyId,
+					properties, serviceContext);
 			}
 		}
 		else {
+			Locale locale = LocaleUtil.getDefault();
+
+			Map<Locale, String> titleMap =	new HashMap<Locale, String>();
+			titleMap.put(locale, categoryName);
+
 			AssetCategoryLocalServiceUtil.addCategory(
 				null, context.getUserId(userUuid), parentCategoryId,
-				categoryName, vocabularyId, properties, serviceContext);
+				titleMap, vocabularyId, properties, serviceContext);
 		}
 	}
 

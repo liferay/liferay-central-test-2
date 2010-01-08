@@ -35,6 +35,8 @@ import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="AssetCategoryServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -48,8 +50,9 @@ import java.util.List;
 public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 	public AssetCategory addCategory(
-			long parentCategoryId, String name, long vocabularyId,
-			String[] categoryProperties, ServiceContext serviceContext)
+			long parentCategoryId, Map<Locale, String> titleMap,
+			long vocabularyId, String[] categoryProperties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AssetCategoryPermission.check(
@@ -57,7 +60,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			parentCategoryId, ActionKeys.ADD_CATEGORY);
 
 		return assetCategoryLocalService.addCategory(
-			null, getUserId(), parentCategoryId, name, vocabularyId,
+			null, getUserId(), parentCategoryId, titleMap, vocabularyId,
 			categoryProperties, serviceContext);
 	}
 
@@ -118,16 +121,16 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	}
 
 	public AssetCategory updateCategory(
-			long categoryId, long parentCategoryId, String name,
-			long vocabularyId, String[] categoryProperties,
-			ServiceContext serviceContext)
+			long categoryId, long parentCategoryId,
+			Map<Locale, String> titleMap, long vocabularyId,
+			String[] categoryProperties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AssetCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
 
 		return assetCategoryLocalService.updateCategory(
-			getUserId(), categoryId, parentCategoryId, name, vocabularyId,
+			getUserId(), categoryId, parentCategoryId, titleMap, vocabularyId,
 			categoryProperties, serviceContext);
 	}
 

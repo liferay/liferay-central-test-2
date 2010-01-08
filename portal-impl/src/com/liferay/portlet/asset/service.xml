@@ -27,6 +27,7 @@
 		<column name="leftCategoryId" type="long" />
 		<column name="rightCategoryId" type="long" />
 		<column name="name" type="String" />
+		<column name="title" type="String" localized="true" />
 		<column name="vocabularyId" type="long" />
 
 		<!-- Relationships -->
@@ -321,7 +322,8 @@
 		<!-- Other fields -->
 
 		<column name="name" type="String" />
-		<column name="description" type="String" />
+		<column name="title" type="String" localized="true" />
+		<column name="description" type="String" localized="true" />
 		<column name="settings" type="String" />
 
 		<!-- Order -->
