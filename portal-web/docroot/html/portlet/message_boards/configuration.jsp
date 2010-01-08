@@ -367,7 +367,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			<table class="lfr-table">
 			<tr>
 				<td>
-					<aui:field-wrapper label="default-language" >
+					<aui:field-wrapper label="default-language">
 						<%= defaultLocale.getDisplayName(defaultLocale) %>
 					</aui:field-wrapper>
 				</td>
@@ -480,7 +480,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 								<aui:input label="" name='<%= "priorityImage" + i + "_temp" %>' onChange='<%= renderResponse.getNamespace() + "onChanged();" %>' size="40" />
 							</td>
 							<td>
-								<aui:input label="" name='<%= "priorityValue" + i + "_temp" %>' onChange='<%= renderResponse.getNamespace() + "onChanged();" %>' size="4" />	
+								<aui:input label="" name='<%= "priorityValue" + i + "_temp" %>' onChange='<%= renderResponse.getNamespace() + "onChanged();" %>' size="4" />
 							</td>
 						</tr>
 
@@ -656,7 +656,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				<table class="lfr-table">
 				<tr>
 					<td class="lfr-label">
-						<aui:field-wrapper label="default-language" >
+						<aui:field-wrapper label="default-language">
 							<%= defaultLocale.getDisplayName(defaultLocale) %>
 						</aui:field-wrapper>
 					</td>
@@ -795,7 +795,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 					<aui:option label="100" selected="<%= rssDelta == 100 %>" />
 				</aui:select>
 
-				<aui:select label="display-style" name="rssDisplayStyle" >
+				<aui:select label="display-style" name="rssDisplayStyle">
 					<aui:option label="full-content" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>" value="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>" />
 					<aui:option label="abstract" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>" value="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>" />
 					<aui:option label="title" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>" value="<%= RSSUtil.DISPLAY_STYLE_TITLE %>" />
