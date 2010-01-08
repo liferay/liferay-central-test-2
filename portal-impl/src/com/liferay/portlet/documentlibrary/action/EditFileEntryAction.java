@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -219,6 +220,12 @@ public class EditFileEntryAction extends PortletAction {
 			fileEntryForm.getExtraSettingsProperties());
 
 		File file = uploadRequest.getFile("file");
+
+		// LPS-6892
+
+		if (Validator.isNotNull(sourceFileName) && !file.exists()) {
+			file.createNewFile();
+		}
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
