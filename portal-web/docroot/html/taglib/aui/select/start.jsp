@@ -55,7 +55,9 @@ boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("au
 		</c:if>
 
 		<c:if test="<%= Validator.isNotNull(prefix) %>">
-			<span class="aui-prefix"><liferay-ui:message key="<%= prefix %>" /></span>
+			<span class="aui-prefix">
+				<liferay-ui:message key="<%= prefix %>" />
+			</span>
 		</c:if>
 
 		<select class="aui-field-input aui-field-input-menu aui-field-input-select" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
