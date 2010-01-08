@@ -25,7 +25,12 @@ package com.liferay.portlet.asset.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.util.*;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -65,9 +70,7 @@ public class AssetCategoryLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = serviceContext.getScopeGroupId();
-
-		Locale locale = LocaleUtil.getDefault();
-		String name = titleMap.get(locale);
+		String name = titleMap.get(LocaleUtil.getDefault());
 
 		if (categoryProperties == null) {
 			categoryProperties = new String[0];
@@ -317,8 +320,7 @@ public class AssetCategoryLocalServiceImpl
 
 		// Category
 
-		Locale locale = LocaleUtil.getDefault();
-		String name = titleMap.get(locale);
+		String name = titleMap.get(LocaleUtil.getDefault());
 
 		if (categoryProperties == null) {
 			categoryProperties = new String[0];

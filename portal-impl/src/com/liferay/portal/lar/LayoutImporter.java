@@ -101,7 +101,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.time.StopWatch;
 
@@ -845,17 +853,15 @@ public class LayoutImporter {
 						vocabularyUuid, context.getGroupId());
 
 				if (existingAssetVocabulary == null) {
-					Locale locale = LocaleUtil.getDefault();
-
 					Map<Locale, String> titleMap =
-							new HashMap<Locale, String>();
-					titleMap.put(locale, vocabularyName);
+						new HashMap<Locale, String>();
+
+					titleMap.put(LocaleUtil.getDefault(), vocabularyName);
 
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.addVocabulary(
 							vocabularyUuid, context.getUserId(userUuid),
-							titleMap, null, StringPool.BLANK,
-							serviceContext);
+							titleMap, null, StringPool.BLANK, serviceContext);
 				}
 				else {
 					assetVocabulary =
@@ -868,14 +874,13 @@ public class LayoutImporter {
 				}
 			}
 			else {
-				Locale locale = LocaleUtil.getDefault();
-
 				Map<Locale, String> titleMap = 	new HashMap<Locale, String>();
-				titleMap.put(locale, vocabularyName);
+
+				titleMap.put(LocaleUtil.getDefault(), vocabularyName);
 
 				assetVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
-					null, context.getUserId(userUuid), titleMap,
-					null, StringPool.BLANK, serviceContext);
+					null, context.getUserId(userUuid), titleMap, null,
+					StringPool.BLANK, serviceContext);
 			}
 		}
 		catch (DuplicateVocabularyException dve) {
@@ -974,10 +979,9 @@ public class LayoutImporter {
 					categoryUuid, context.getGroupId());
 
 			if (existingAssetCategory == null) {
-				Locale locale = LocaleUtil.getDefault();
-
 				Map<Locale, String> titleMap =	new HashMap<Locale, String>();
-				titleMap.put(locale, categoryName);
+
+				titleMap.put(LocaleUtil.getDefault(), categoryName);
 
 				AssetCategoryLocalServiceUtil.addCategory(
 					categoryUuid, context.getUserId(userUuid), parentCategoryId,
@@ -992,14 +996,13 @@ public class LayoutImporter {
 			}
 		}
 		else {
-			Locale locale = LocaleUtil.getDefault();
-
 			Map<Locale, String> titleMap =	new HashMap<Locale, String>();
-			titleMap.put(locale, categoryName);
+
+			titleMap.put(LocaleUtil.getDefault(), categoryName);
 
 			AssetCategoryLocalServiceUtil.addCategory(
-				null, context.getUserId(userUuid), parentCategoryId,
-				titleMap, vocabularyId, properties, serviceContext);
+				null, context.getUserId(userUuid), parentCategoryId, titleMap,
+				vocabularyId, properties, serviceContext);
 		}
 	}
 
