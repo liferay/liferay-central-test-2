@@ -67,7 +67,7 @@
 				<div class="aui-helper-hidden" id="customQuestionContainer">
 					<liferay-ui:input-field model="<%= User.class %>" bean="<%= user %>" field="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
 				</div>
-			</c:if>	
+			</c:if>
 		</span>
 	</span>
 
@@ -75,7 +75,7 @@
 		<span class="aui-field-content">
 			<label for="reminderQueryAnswer"><liferay-ui:message key="answer" /></label>
 
-			<input id="reminderQueryAnswer" name="reminderQueryAnswer" size="50" type="text" value="<%= HtmlUtil.escapeAttribute(user.getReminderQueryAnswer()) %>" />	
+			<input id="reminderQueryAnswer" name="reminderQueryAnswer" size="50" type="text" value="<%= HtmlUtil.escapeAttribute(user.getReminderQueryAnswer()) %>" />
 		</span>
 	</span>
 </fieldset>

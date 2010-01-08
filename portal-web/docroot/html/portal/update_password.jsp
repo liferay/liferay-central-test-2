@@ -85,7 +85,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 		<span class="aui-field-content">
 			<label for="password1"><liferay-ui:message key="password" /></label>
 
-			<input class="lfr-input-text" name="password1" type="password" />	
+			<input class="lfr-input-text" name="password1" type="password" />
 		</span>
 	</span>
 
