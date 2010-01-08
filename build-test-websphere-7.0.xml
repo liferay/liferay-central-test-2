@@ -104,10 +104,6 @@ print AdminControl.invoke(appManager, 'startApplication', 'liferay-tunnel-web')<
 			value="${vm.host}:9080"
 		/>
 
-		<waitfor>
-			<http url="http://localhost:8080" />
-		</waitfor>
-
 		<antcall target="start-selenium" />
 
 		<antcall target="run-websphere-7.0">

@@ -129,7 +129,7 @@ jdbc.default.numHelperThreads=1]]></echo>
 			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx start" />
 		</exec>
 
-		<sleep seconds="30" />
+		<sleep seconds="60" />
 
 		<echo file="hosts">127.0.0.1	localhost
 127.0.0.1	liferay-b711dd9
