@@ -24,12 +24,12 @@ package com.liferay.portal.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.DeterminateKeyGenerator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.SessionClicks;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.PwdGenerator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -99,7 +99,8 @@ public class ToggleTagUtil {
 			}
 
 			if (stateVar == null) {
-				stateVar = PwdGenerator.getPassword(PwdGenerator.KEY3, 8);
+				stateVar = DeterminateKeyGenerator.generate(
+					ToggleTagUtil.class.getName());
 			}
 
 			request.setAttribute("liferay-ui:toggle:id", id);
