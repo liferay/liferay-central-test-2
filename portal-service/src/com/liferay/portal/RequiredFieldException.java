@@ -29,36 +29,20 @@ package com.liferay.portal;
  */
 public class RequiredFieldException extends PortalException {
 
-	public RequiredFieldException() {
-		super();
-	}
-
-	public RequiredFieldException(String msg) {
-		super(msg);
-	}
-
-	public RequiredFieldException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public RequiredFieldException(Throwable cause) {
-		super(cause);
-	}
-
 	public RequiredFieldException(String requiredField, String labelId) {
-		_requiredField= requiredField;
+		_requiredField = requiredField;
 		_labelId = labelId;
-	}
-
-	public String getRequiredField() {
-		return _requiredField;
 	}
 
 	public String getLabelId() {
 		return _labelId;
 	}
 
-	private String _requiredField;
+	public String getRequiredField() {
+		return _requiredField;
+	}
+
 	private String _labelId;
+	private String _requiredField;
 
 }

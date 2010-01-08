@@ -198,7 +198,7 @@ public class CreateAccountAction extends PortletAction {
 		boolean autoPassword = true;
 		String password1 = null;
 		String password2 = null;
-		boolean autoScreenName = getAutoScreenName();
+		boolean autoScreenName = isAutoScreenName();
 		String screenName = ParamUtil.getString(actionRequest, "screenName");
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
@@ -285,16 +285,16 @@ public class CreateAccountAction extends PortletAction {
 		}
 
 		sendRedirect(
-			login, password1, themeDisplay, actionRequest, actionResponse);
+			actionRequest, actionResponse, themeDisplay, login, password1);
 	}
 
-	protected boolean getAutoScreenName() {
+	protected boolean isAutoScreenName() {
 		return _AUTO_SCREEN_NAME;
 	}
 
 	protected void sendRedirect(
-			String login, String password, ThemeDisplay themeDisplay,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			ThemeDisplay themeDisplay, String login, String password)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
