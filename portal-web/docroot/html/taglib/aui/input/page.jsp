@@ -86,14 +86,14 @@ if ((model != null) && Validator.isNull(type)) {
 	baseTypeCss = ModelHintsUtil.getType(model.getName(), field).toLowerCase();
 }
 else {
-	if (type.equals("timeZone")) {
-		baseTypeCss = "time-zone";
-	}
-	else if (type.equals("assetCategories")) {
+	if (type.equals("assetCategories")) {
 		baseTypeCss = "asset-categories";
 	}
 	else if (type.equals("assetTags")) {
 		baseTypeCss = "asset-tags";
+	}
+	if (type.equals("timeZone")) {
+		baseTypeCss = "time-zone";
 	}
 	else {
 		baseTypeCss = type;
@@ -127,7 +127,7 @@ else if (last) {
 	fieldCss +=  " " + _getFieldCss("last");
 }
 
-if (!cssClass.isEmpty()) {
+if (Validator.isNotNull(cssClass)) {
 	fieldCss += " " + cssClass;
 }
 %>
@@ -311,26 +311,6 @@ if (!cssClass.isEmpty()) {
 </c:if>
 
 <%!
-private String _getInputCss(String suffix) {
-	String cssClass = _getFieldCss("input");
-
-	if (!suffix.isEmpty()) {
-		cssClass += "-" + suffix;
-	}
-
-	return cssClass;
-}
-
-private String _getFieldCss(String suffix) {
-	String cssClass = "aui-field";
-
-	if (!suffix.isEmpty()) {
-		cssClass += "-" + suffix;
-	}
-
-	return cssClass;
-}
-
 private long _getClassPK(BaseModel bean, Map<String, Object> dynamicAttributes) {
 	long classPK = 0;
 
@@ -349,5 +329,25 @@ private long _getClassPK(BaseModel bean, Map<String, Object> dynamicAttributes) 
 	}
 
 	return classPK;
+}
+
+private String _getFieldCss(String suffix) {
+	String cssClass = "aui-field";
+
+	if (Validator.isNotNull(suffix.isEmpty())) {
+		cssClass += "-" + suffix;
+	}
+
+	return cssClass;
+}
+
+private String _getInputCss(String suffix) {
+	String cssClass = _getFieldCss("input");
+
+	if (Validator.isNotNull(suffix.isEmpty())) {
+		cssClass += "-" + suffix;
+	}
+
+	return cssClass;
 }
 %>
