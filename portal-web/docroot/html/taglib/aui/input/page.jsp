@@ -104,7 +104,7 @@ fieldCss += " " + _getFieldCss(baseTypeCss);
 inputCss += " " + _getInputCss(baseTypeCss);
 
 if (inlineField) {
-	fieldCss += " " + _getFieldCss("labels-inline");
+	fieldCss += " " + _getFieldCss("inline-labels");
 }
 
 if (disabled) {
