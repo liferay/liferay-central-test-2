@@ -33,6 +33,8 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
+import java.util.Date;
+
 /**
  * <a href="MBMessageFlagServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -85,6 +87,8 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 			messageFlag = mbMessageFlagPersistence.create(messageFlagId);
 
 			messageFlag.setUserId(message.getUserId());
+			messageFlag.setModifiedDate(new Date());
+			messageFlag.setThreadId(message.getThreadId());
 			messageFlag.setMessageId(message.getMessageId());
 			messageFlag.setFlag(MBMessageFlagConstants.ANSWER_FLAG);
 
@@ -131,7 +135,7 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 		int answerFlagsCount = mbMessageFlagPersistence.countByT_F(
 			message.getThreadId(), MBMessageFlagConstants.ANSWER_FLAG);
 
-		if (answerFlagsCount == 0) {
+		if (answerFlagsCount == 1) {
 			answerMessageFlag.setFlag(MBMessageFlagConstants.QUESTION_FLAG);
 
 			mbMessageFlagPersistence.update(answerMessageFlag, false);
