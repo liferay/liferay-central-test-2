@@ -20,26 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.cmis.model;
+package com.liferay.portal.cmis;
 
-import org.apache.abdera.util.AbstractExtensionFactory;
+import com.liferay.portal.cmis.model.CMISConstants;
+import com.liferay.portal.cmis.model.CMISRepositoryInfo;
+
+import junit.framework.TestCase;
+
+import org.apache.abdera.model.Service;
+import org.apache.abdera.model.Workspace;
 
 /**
- * <a href="CMISExtensionFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseCMISTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  */
-public class CMISExtensionFactory extends AbstractExtensionFactory {
+public abstract class BaseCMISTest extends TestCase {
 
-	public CMISExtensionFactory() {
-		super(CMISConstants.getInstance().CMIS_NS);
+	public void testService() throws Exception {
+		Service service = getService();
 
-		_cmisConstants = CMISConstants.getInstance();
+		assertNotNull(service);
 
-		addImpl(_cmisConstants.REPOSITORY_INFO, CMISRepositoryInfo.class);
-		addImpl(_cmisConstants.OBJECT, CMISObject.class);
+		for (Workspace workspace : service.getWorkspaces()) {
+			assertNotNull(workspace);
+
+			CMISRepositoryInfo cmisRepositoryInfo = workspace.getFirstChild(
+				getConstants().REPOSITORY_INFO);
+
+			assertNotNull(cmisRepositoryInfo);
+			assertNotNull(cmisRepositoryInfo.getId());
+			assertEquals(
+				getConstants().VERSION,
+				cmisRepositoryInfo.getVersionSupported());
+
+			String rootChildrenUrl = CMISUtil.getCollectionUrl(
+				workspace, getConstants().COLLECTION_ROOT);
+
+			assertNotNull(rootChildrenUrl);
+		}
 	}
 
-	private CMISConstants _cmisConstants;
+	protected abstract Service getService() throws Exception;
+
+	protected abstract CMISConstants getConstants();
 
 }

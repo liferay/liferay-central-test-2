@@ -204,8 +204,14 @@ public class CMISObject extends ExtensibleElementWrapper {
 				_cmisConstants.PROPERTY_TYPE_STRING, propertiesElement);
 		}
 
-		propertyElement.setAttributeValue(
-			_cmisConstants.PROPERTY_NAME, propertyName);
+		if (_cmisConstants instanceof CMISConstants_1_0_0) {
+			propertyElement.setAttributeValue(
+				_cmisConstants.PROPERTY_DEFINITION_ID, propertyName);
+		}
+		else {
+			propertyElement.setAttributeValue(
+				_cmisConstants.PROPERTY_NAME, propertyName);
+		}
 
 		Element valueElement = factory.newElement(
 			_cmisConstants.PROPERTY_VALUE, propertyElement);

@@ -39,14 +39,21 @@ public abstract class CMISConstants {
 		if (version.equals("0.61")) {
 			return CMISConstants_0_6_1.getInstance();
 		}
+		else if (version.equals("1.0")) {
+			return CMISConstants_1_0_0.getInstance();
+		}
 		else {
 			throw new RuntimeException("Unsupported CMIS version");
 		}
 	}
 
-	public String NS = null;
+	public String CMIS_NS = null;
 
-	public String PREFIX = null;
+	public String CMIS_PREFIX = null;
+
+	public String CMISRA_NS = null;
+
+	public String CMISRA_PREFIX = null;
 
 	public String VERSION = null;
 
@@ -82,7 +89,7 @@ public abstract class CMISConstants {
 
 	public String COLLECTION_QUERY = null;
 
-	public String COLLECTION_ROOT_CHILDREN = null;
+	public String COLLECTION_ROOT = null;
 
 	public String COLLECTION_ROOT_DESCENDANTS = null;
 
@@ -129,6 +136,8 @@ public abstract class CMISConstants {
 	public String LINK_TYPE = null;
 
 	public QName PROPERTIES = null;
+
+	public String PROPERTY_DEFINITION_ID = null;
 
 	public QName PROPERTY_NAME = null;
 

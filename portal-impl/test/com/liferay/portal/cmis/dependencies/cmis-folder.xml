@@ -1,58 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200901">
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/" xmlns:app="http://www.w3.org/2007/app" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
 	<author>
-		<name>System</name>
+		<name>admin</name>
 	</author>
-	<content>15a1573d-04bf-4055-8421-eac05aae865f</content>
-	<id>urn:uuid:15a1573d-04bf-4055-8421-eac05aae865f</id>
-	<link rel="self" href="http://localhost:8080/cmis/path/root/15a1573d-04bf-4055-8421-eac05aae865f" />
-	<link rel="edit" href="http://localhost:8080/cmis/path/root/15a1573d-04bf-4055-8421-eac05aae865f" />
-	<link rel="allowableactions" href="http://localhost:8080/cmis/path/root/15a1573d-04bf-4055-8421-eac05aae865f/permissions" />
-	<link rel="relationships" href="http://localhost:8080/cmis/path/root/15a1573d-04bf-4055-8421-eac05aae865f/associations" />
-	<link rel="parents" href="http://localhost:8080/cmis/path/root/15a1573d-04bf-4055-8421-eac05aae865f/parent" />
-	<link rel="children" href="http://localhost:8080/cmis/path/root/15a1573d-04bf-4055-8421-eac05aae865f/children" />
-	<link rel="descendants" href="http://localhost:8080/cmis/path/root/15a1573d-04bf-4055-8421-eac05aae865f/descendants" />
-	<link rel="type" href="http://localhost:8080/cmis/type/folder" />
-	<link rel="repository" href="http://localhost:8080/cmis/repository" />
-	<published>2009-05-27T11:01:08.790+01:00</published>
-	<summary>This is My Home</summary>
-	<title>My Home</title>
-	<updated>2009-05-27T11:01:08.808+01:00</updated>
-	<cmis:object>
+	<content type="text">fc66bd7b-472a-4735-ab60-2f423ce3123c</content>
+	<id>urn:uuid:fc66bd7b-472a-4735-ab60-2f423ce3123c</id>
+	<link rel="self" href="http://localhost:8080/cmis/path/root/fc66bd7b-472a-4735-ab60-2f423ce3123c" />
+	<link rel="edit" href="http://localhost:8080/cmis/path/root/fc66bd7b-472a-4735-ab60-2f423ce3123c" />
+	<link rel="http://docs.oasis-open.org/ns/cmis/link/200908/allowableactions" href="http://localhost:8080/cmis/path/root/fc66bd7b-472a-4735-ab60-2f423ce3123c/allowableactions" />
+	<link rel="http://docs.oasis-open.org/ns/cmis/link/200908/relationships" href="http://localhost:8080/cmis/path/root/fc66bd7b-472a-4735-ab60-2f423ce3123c/rels" />
+	<link rel="up" href="http://localhost:8080/cmis/path/root/06a28263-377d-4b9f-9989-b60dee087263" type="application/atom+xml;type=entry" />
+	<link rel="down" href="http://localhost:8080/cmis/path/root/fc66bd7b-472a-4735-ab60-2f423ce3123c/children" type="application/atom+xml;type=feed" />
+	<link rel="down" href="http://localhost:8080/cmis/path/root/fc66bd7b-472a-4735-ab60-2f423ce3123c/descendants" type="application/cmistree+xml" />
+	<link rel="http://docs.oasis-open.org/ns/cmis/link/200908/foldertree" href="http://localhost:8080/cmis/path/root/fc66bd7b-472a-4735-ab60-2f423ce3123c/tree" type="application/cmistree+xml" />
+	<link rel="describedby" href="http://localhost:8080/cmis/type/cmis:folder" />
+	<link rel="service" href="http://localhost:8080/cmis" />
+	<published>2010-01-08T17:21:01.566Z</published>
+	<summary type="text" />
+	<title type="text">My Home</title>
+	<updated>2010-01-08T17:21:01.576Z</updated>
+	<app:edited>2010-01-08T17:21:01.576Z</app:edited>
+	<cmisra:object>
 		<cmis:properties>
-			<cmis:propertyString cmis:name="BaseType">
-				<cmis:value>folder</cmis:value>
-			</cmis:propertyString>
-			<cmis:propertyId cmis:name="ParentId">
-				<cmis:value>b5ce9345-0cb8-4f42-9281-fc8669b5f90b</cmis:value>
-			</cmis:propertyId>
-			<cmis:propertyDateTime cmis:name="LastModificationDate">
-				<cmis:value>2009-05-27T11:01:08.808+01:00</cmis:value>
-			</cmis:propertyDateTime>
-			<cmis:propertyString cmis:name="ChangeToken" />
-			<cmis:propertyString cmis:name="CreatedBy">
-				<cmis:value>System</cmis:value>
-			</cmis:propertyString>
-			<cmis:propertyId cmis:name="ObjectId">
-				<cmis:value>15a1573d-04bf-4055-8421-eac05aae865f</cmis:value>
-			</cmis:propertyId>
-			<cmis:propertyId cmis:name="AllowedChildObjectTypeIds" />
-			<cmis:propertyString cmis:name="LastModifiedBy">
-				<cmis:value>System</cmis:value>
-			</cmis:propertyString>
-			<cmis:propertyString cmis:name="Name">
+			<cmis:propertyId propertyDefinitionId="cmis:allowedChildObjectTypeIds" />
+			<cmis:propertyString propertyDefinitionId="cmis:path">
 				<cmis:value>My Home</cmis:value>
 			</cmis:propertyString>
-			<cmis:propertyUri cmis:name="Uri" />
-			<cmis:propertyId cmis:name="ObjectTypeId">
-				<cmis:value>folder</cmis:value>
+			<cmis:propertyString propertyDefinitionId="cmis:lastModifiedBy">
+				<cmis:value>admin</cmis:value>
+			</cmis:propertyString>
+			<cmis:propertyId propertyDefinitionId="cmis:objectTypeId">
+				<cmis:value>cmis:folder</cmis:value>
 			</cmis:propertyId>
-			<cmis:propertyDateTime cmis:name="CreationDate">
-				<cmis:value>2009-05-27T11:01:08.790+01:00</cmis:value>
+			<cmis:propertyString propertyDefinitionId="cmis:createdBy">
+				<cmis:value>admin</cmis:value>
+			</cmis:propertyString>
+			<cmis:propertyString propertyDefinitionId="cmis:name">
+				<cmis:value>My Home</cmis:value>
+			</cmis:propertyString>
+			<cmis:propertyId propertyDefinitionId="cmis:objectId">
+				<cmis:value>fc66bd7b-472a-4735-ab60-2f423ce3123c</cmis:value>
+			</cmis:propertyId>
+			<cmis:propertyDateTime propertyDefinitionId="cmis:creationDate">
+				<cmis:value>2010-01-08T17:21:01.566Z</cmis:value>
+			</cmis:propertyDateTime>
+			<cmis:propertyString propertyDefinitionId="cmis:changeToken" />
+			<cmis:propertyId propertyDefinitionId="cmis:baseTypeId">
+				<cmis:value>cmis:folder</cmis:value>
+			</cmis:propertyId>
+			<cmis:propertyId propertyDefinitionId="cmis:parentId">
+				<cmis:value>06a28263-377d-4b9f-9989-b60dee087263</cmis:value>
+			</cmis:propertyId>
+			<cmis:propertyDateTime propertyDefinitionId="cmis:lastModificationDate">
+				<cmis:value>2010-01-08T17:21:01.576Z</cmis:value>
 			</cmis:propertyDateTime>
 		</cmis:properties>
-	</cmis:object>
-	<cmis:terminator />
-	<app:edited>2009-05-27T11:01:08.808+01:00</app:edited>
+		<cmis:allowableActions>
+			<cmis:canDeleteObject>true</cmis:canDeleteObject>
+			<cmis:canUpdateProperties>true</cmis:canUpdateProperties>
+			<cmis:canGetFolderTree>true</cmis:canGetFolderTree>
+			<cmis:canGetProperties>true</cmis:canGetProperties>
+			<cmis:canGetObjectRelationships>true</cmis:canGetObjectRelationships>
+			<cmis:canGetObjectParents>true</cmis:canGetObjectParents>
+			<cmis:canGetFolderParent>true</cmis:canGetFolderParent>
+			<cmis:canGetDescendants>true</cmis:canGetDescendants>
+			<cmis:canMoveObject>true</cmis:canMoveObject>
+			<cmis:canApplyPolicy>false</cmis:canApplyPolicy>
+			<cmis:canGetAppliedPolicies>false</cmis:canGetAppliedPolicies>
+			<cmis:canRemovePolicy>false</cmis:canRemovePolicy>
+			<cmis:canGetChildren>true</cmis:canGetChildren>
+			<cmis:canCreateDocument>true</cmis:canCreateDocument>
+			<cmis:canCreateFolder>true</cmis:canCreateFolder>
+			<cmis:canCreateRelationship>true</cmis:canCreateRelationship>
+			<cmis:canCreatePolicy>false</cmis:canCreatePolicy>
+			<cmis:canGetACL>false</cmis:canGetACL>
+			<cmis:canApplyACL>false</cmis:canApplyACL>
+		</cmis:allowableActions>
+	</cmisra:object>
+	<cmisra:pathSegment>My Home</cmisra:pathSegment>
 </entry>

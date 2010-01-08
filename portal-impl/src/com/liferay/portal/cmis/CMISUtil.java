@@ -23,6 +23,7 @@
 package com.liferay.portal.cmis;
 
 import com.liferay.portal.cmis.model.CMISConstants;
+import com.liferay.portal.cmis.model.CMISConstants_1_0_0;
 import com.liferay.portal.cmis.model.CMISExtensionFactory;
 import com.liferay.portal.cmis.model.CMISObject;
 import com.liferay.portal.cmis.model.CMISRepositoryInfo;
@@ -38,6 +39,7 @@ import java.util.List;
 import org.apache.abdera.Abdera;
 import org.apache.abdera.factory.Factory;
 import org.apache.abdera.model.Collection;
+import org.apache.abdera.model.Element;
 import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.Feed;
 import org.apache.abdera.model.Link;
@@ -90,6 +92,10 @@ public class CMISUtil {
 
 	public static void delete(String url) throws CMISException {
 		_instance._delete(url);
+	}
+
+	public static String getCollectionType(Collection collection) {
+		return _instance._getCollectionType(collection);
 	}
 
 	public static String getCollectionUrl(
@@ -279,8 +285,7 @@ public class CMISUtil {
 		Workspace workspace, String collectionType) {
 
 		for (Collection collection : workspace.getCollections()) {
-			String curCollectionType = collection.getAttributeValue(
-				_cmisConstants.COLLECTION_TYPE);
+			String curCollectionType = _getCollectionType(collection);
 
 			if (collectionType.equals(curCollectionType)) {
 				return collection.getHref().toString();
@@ -420,7 +425,7 @@ public class CMISUtil {
 		// Find root folder
 
 		String url = _getCollectionUrl(
-			workspace, _cmisConstants.COLLECTION_ROOT_CHILDREN);
+			workspace, _cmisConstants.COLLECTION_ROOT);
 
 		Entry entry = _getEntry(
 			url, PropsValues.CMIS_SYSTEM_ROOT_DIR,
@@ -435,6 +440,23 @@ public class CMISUtil {
 		_linkChildrenURL = link.getHref().toString();
 
 		return version;
+	}
+
+	private String _getCollectionType(Collection collection) {
+		if (_cmisConstants instanceof CMISConstants_1_0_0) {
+			Element element =
+				collection.getFirstChild(_cmisConstants.COLLECTION_TYPE);
+
+			if (element == null) {
+				return null;
+			}
+			else {
+				return element.getText();
+			}
+		}
+		else {
+			return collection.getAttributeValue(_cmisConstants.COLLECTION_TYPE);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CMISUtil.class);

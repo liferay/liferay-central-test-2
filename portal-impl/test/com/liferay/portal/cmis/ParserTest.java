@@ -25,20 +25,14 @@ package com.liferay.portal.cmis;
 import com.liferay.portal.cmis.model.CMISConstants;
 import com.liferay.portal.cmis.model.CMISExtensionFactory;
 import com.liferay.portal.cmis.model.CMISObject;
-import com.liferay.portal.cmis.model.CMISRepositoryInfo;
 
 import java.io.FileInputStream;
 
-import junit.framework.TestCase;
-
 import org.apache.abdera.Abdera;
 import org.apache.abdera.factory.Factory;
-import org.apache.abdera.i18n.iri.IRI;
-import org.apache.abdera.model.Collection;
 import org.apache.abdera.model.Element;
 import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.Service;
-import org.apache.abdera.model.Workspace;
 import org.apache.abdera.parser.Parser;
 
 /**
@@ -46,7 +40,7 @@ import org.apache.abdera.parser.Parser;
  *
  * @author Alexander Chow
  */
-public class ParserTest extends TestCase {
+public class ParserTest extends BaseCMISTest {
 
 	public void setUp() throws Exception {
 		_abdera = Abdera.getInstance();
@@ -81,35 +75,13 @@ public class ParserTest extends TestCase {
 		assertEquals(_cmisConstants.BASE_TYPE_FOLDER, cmisObject.getBaseType());
 	}
 
-	public void testService() throws Exception {
+	protected Service getService() throws Exception {
 		Service service = (Service)getElement("cmis-service.xml");
+		return service;
+	}
 
-		assertNotNull(service);
-
-		for (Workspace workspace : service.getWorkspaces()) {
-			assertNotNull(workspace);
-
-			CMISRepositoryInfo cmisRepositoryInfo = workspace.getFirstChild(
-				_cmisConstants.REPOSITORY_INFO);
-
-			assertNotNull(cmisRepositoryInfo.getId());
-			assertEquals(
-				_cmisConstants.VERSION,
-				cmisRepositoryInfo.getVersionSupported());
-
-			IRI rootChildrenIRI = null;
-
-			for (Collection collection : workspace.getCollections()) {
-				String type = collection.getAttributeValue(
-					_cmisConstants.COLLECTION_TYPE);
-
-				if (_cmisConstants.COLLECTION_ROOT_CHILDREN.equals(type)) {
-					rootChildrenIRI = collection.getHref();
-				}
-			}
-
-			assertNotNull(rootChildrenIRI);
-		}
+	protected CMISConstants getConstants() {
+		return _cmisConstants;
 	}
 
 	protected Element getElement(String filename) throws Exception {
