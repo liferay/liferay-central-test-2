@@ -43,7 +43,7 @@ public class SocialRequestTable {
 		{"modifiedDate", new Integer(Types.BIGINT)},
 		{"classNameId", new Integer(Types.BIGINT)},
 		{"classPK", new Integer(Types.BIGINT)},
-		{"ype_", new Integer(Types.INTEGER)},
+		{"type_", new Integer(Types.INTEGER)},
 		{"extraData", new Integer(Types.VARCHAR)},
 		{"receiverUserId", new Integer(Types.BIGINT)},
 		{"status", new Integer(Types.INTEGER)}

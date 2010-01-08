@@ -42,7 +42,7 @@ public class PollsQuestionTable {
 		{"userName", new Integer(Types.VARCHAR)},
 		{"createDate", new Integer(Types.TIMESTAMP)},
 		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"itle", new Integer(Types.VARCHAR)},
+		{"title", new Integer(Types.VARCHAR)},
 		{"description", new Integer(Types.VARCHAR)},
 		{"expirationDate", new Integer(Types.TIMESTAMP)},
 		{"lastVoteDate", new Integer(Types.TIMESTAMP)}
