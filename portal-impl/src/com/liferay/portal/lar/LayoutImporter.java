@@ -855,19 +855,23 @@ public class LayoutImporter {
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.addVocabulary(
 							vocabularyUuid, context.getUserId(userUuid),
-							vocabularyName, serviceContext);
+							vocabularyName, StringPool.BLANK, StringPool.BLANK,
+							serviceContext);
 				}
 				else {
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.updateVocabulary(
 							existingAssetVocabulary.getVocabularyId(),
-							vocabularyName, serviceContext);
+							vocabularyName,
+							existingAssetVocabulary.getDescription(),
+							existingAssetVocabulary.getSettings(),
+							serviceContext);
 				}
 			}
 			else {
 				assetVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
 					null, context.getUserId(userUuid), vocabularyName,
-					serviceContext);
+					StringPool.BLANK, StringPool.BLANK, serviceContext);
 			}
 		}
 		catch (DuplicateVocabularyException dve) {

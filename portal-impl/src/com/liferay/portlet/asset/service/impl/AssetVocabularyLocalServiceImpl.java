@@ -25,6 +25,7 @@ package com.liferay.portlet.asset.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -50,8 +51,8 @@ public class AssetVocabularyLocalServiceImpl
 	extends AssetVocabularyLocalServiceBaseImpl {
 
 	public AssetVocabulary addVocabulary(
-			String uuid, long userId, String name,
-			ServiceContext serviceContext)
+			String uuid, long userId, String name, String description,
+			String settings, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Vocabulary
@@ -80,6 +81,8 @@ public class AssetVocabularyLocalServiceImpl
 		vocabulary.setCreateDate(now);
 		vocabulary.setModifiedDate(now);
 		vocabulary.setName(name);
+		vocabulary.setDescription(description);
+		vocabulary.setSettings(settings);
 
 		assetVocabularyPersistence.update(vocabulary, false);
 
@@ -190,7 +193,7 @@ public class AssetVocabularyLocalServiceImpl
 			AssetVocabulary vocabulary =
 				assetVocabularyLocalService.addVocabulary(
 					null, defaultUserId, PropsValues.ASSET_VOCABULARY_DEFAULT,
-					serviceContext);
+					StringPool.BLANK, StringPool.BLANK,	serviceContext);
 
 			vocabularies = ListUtil.copy(vocabularies);
 
@@ -213,7 +216,8 @@ public class AssetVocabularyLocalServiceImpl
 	}
 
 	public AssetVocabulary updateVocabulary(
-			long vocabularyId, String name, ServiceContext serviceContext)
+			long vocabularyId, String name, String description, String settings,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		name = name.trim();
@@ -229,6 +233,8 @@ public class AssetVocabularyLocalServiceImpl
 
 		vocabulary.setModifiedDate(new Date());
 		vocabulary.setName(name);
+		vocabulary.setDescription(description);
+		vocabulary.setSettings(settings);
 
 		assetVocabularyPersistence.update(vocabulary, false);
 

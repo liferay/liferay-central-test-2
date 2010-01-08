@@ -322,6 +322,7 @@
 
 		<column name="name" type="String" />
 		<column name="description" type="String" />
+		<column name="settings" type="String" />
 
 		<!-- Order -->
 

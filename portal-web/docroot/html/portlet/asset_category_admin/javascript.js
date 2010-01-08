@@ -627,6 +627,8 @@ AUI().add(
 					Liferay.Service.Asset.AssetVocabulary.addVocabulary(
 						{
 							name: vocabularyName,
+							description: '',
+							settings: '',
 							serviceContext: A.JSON.stringify(
 								{
 									communityPermissions: communityPermission,
@@ -1323,6 +1325,8 @@ AUI().add(
 						{
 							vocabularyId: vocabularyId,
 							name: vocabularyName,
+							description: '',
+							settings: '',
 							serviceContext: null
 						},
 						callback
