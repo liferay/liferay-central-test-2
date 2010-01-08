@@ -1,3 +1,4 @@
+
 create table AssetCategory (
 	uuid_ VARCHAR(75) null,
 	categoryId LONG not null primary key,
@@ -11,6 +12,7 @@ create table AssetCategory (
 	leftCategoryId LONG,
 	rightCategoryId LONG,
 	name VARCHAR(75) null,
+	title STRING null,
 	vocabularyId LONG
 );
 
@@ -105,7 +107,9 @@ create table AssetVocabulary (
 	createDate DATE null,
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
-	description VARCHAR(75) null
+	title STRING null,
+	description STRING null,
+	settings_ STRING null
 );
 
 alter table BlogsEntry add status INTEGER;
