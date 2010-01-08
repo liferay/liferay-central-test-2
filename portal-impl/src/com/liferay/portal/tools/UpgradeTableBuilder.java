@@ -70,7 +70,12 @@ public class UpgradeTableBuilder {
 					fileName.substring(x, y) + "ModelImpl.java";
 
 			if (!_fileUtil.exists(upgradeFileName)) {
-				continue;
+				upgradeFileName = _findUpgradeFileName(
+					fileName.substring(x, y));
+
+				if (upgradeFileName == null) {
+					continue;
+				}
 			}
 
 			String content = _fileUtil.read(upgradeFileName);
@@ -83,6 +88,24 @@ public class UpgradeTableBuilder {
 			content = _getContent(packagePath, className, content);
 
 			_fileUtil.write(fileName, content);
+		}
+	}
+
+	private String _findUpgradeFileName(String modelName) {
+		DirectoryScanner ds = new DirectoryScanner();
+
+		ds.setBasedir(".");
+		ds.setIncludes(new String[] {"**\\" + modelName + "ModelImpl.java"});
+
+		ds.scan();
+
+		String[] fileNames = ds.getIncludedFiles();
+
+		if (fileNames.length > 0) {
+			return fileNames[0];
+		}
+		else {
+			return null;
 		}
 	}
 
