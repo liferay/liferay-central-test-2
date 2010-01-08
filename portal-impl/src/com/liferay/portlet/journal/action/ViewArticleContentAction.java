@@ -119,7 +119,7 @@ public class ViewArticleContentAction extends Action {
 
 				String previewArticleId =
 					"PREVIEW_" +
-					PwdGenerator.getPassword(PwdGenerator.KEY3, 10);
+						PwdGenerator.getPassword(PwdGenerator.KEY3, 10);
 
 				format(
 					groupId, articleId, version, previewArticleId, root,
