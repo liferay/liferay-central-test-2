@@ -148,7 +148,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 					<liferay-ui:message key="url" />
 				</td>
 				<td>
-					<aui:a href="javascript:;" onclick='<%= renderResponse.getNamespace() + "addRssRow(this.parentNode.parentNode.parentNode);" %>'><img alt="<liferay-ui:message key="add-location" />" src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></aui:a>
+					<aui:a href="javascript:;" onClick='<%= renderResponse.getNamespace() + "addRssRow(this.parentNode.parentNode.parentNode);" %>'><img alt="<liferay-ui:message key="add-location" />" src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></aui:a>
 				</td>
 			</tr>
 
@@ -178,24 +178,6 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 			%>
 
 			</table>
-
-			<script type="text/javascript" charset="utf-8">
-				AUI().ready(
-					function(A) {
-						var subscriptionsTable = A.one('#<portlet:namespace />subscriptions');
-
-						if (subscriptionsTable) {
-							subscriptionsTable.delegate(
-								'click',
-								function(event) {
-									event.currentTarget.get('parentNode.parentNode').remove();
-								},
-								'.remove-subscription'
-							);
-						}
-					}
-				);
-			</script>
 
 			<aui:fieldset>
 				<aui:input inlineLabel="left" name="showFeedTitle" type="checkbox" value="<%= showFeedTitle %>" />
@@ -267,6 +249,24 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 					<aui:button onClick="<%= redirect %>" type="cancel" />
 				</aui:button-row>
 			</aui:fieldset>
+
+			<script type="text/javascript">
+				AUI().ready(
+					function(A) {
+						var subscriptionsTable = A.one('#<portlet:namespace />subscriptions');
+
+						if (subscriptionsTable) {
+							subscriptionsTable.delegate(
+								'click',
+								function(event) {
+									event.currentTarget.get('parentNode.parentNode').remove();
+								},
+								'.remove-subscription'
+							);
+						}
+					}
+				);
+			</script>
 		</c:when>
 		<c:when test="<%= typeSelection.equals(JournalArticle.class.getName()) %>">
 			<aui:input name="assetType" type="hidden" value="<%= JournalArticle.class.getName() %>" />
