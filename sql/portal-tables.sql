@@ -1137,7 +1137,7 @@ create table Resource_ (
 
 create table ResourceAction (
 	resourceActionId LONG not null primary key,
-	name VARCHAR(75) null,
+	name VARCHAR(255) null,
 	actionId VARCHAR(75) null,
 	bitwiseValue LONG
 );

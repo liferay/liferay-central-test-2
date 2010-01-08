@@ -503,7 +503,9 @@
 	</model>
 	<model name="com.liferay.portal.model.ResourceAction">
 		<field name="resourceActionId" type="long" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<hint name="max-length">255</hint>
+		</field>
 		<field name="actionId" type="String" />
 		<field name="bitwiseValue" type="long" />
 	</model>
