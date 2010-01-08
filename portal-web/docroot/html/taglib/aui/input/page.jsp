@@ -334,7 +334,7 @@ private long _getClassPK(BaseModel bean, Map<String, Object> dynamicAttributes) 
 private String _getFieldCss(String suffix) {
 	String cssClass = "aui-field";
 
-	if (Validator.isNotNull(suffix.isEmpty())) {
+	if (Validator.isNotNull(suffix)) {
 		cssClass += "-" + suffix;
 	}
 
@@ -344,7 +344,7 @@ private String _getFieldCss(String suffix) {
 private String _getInputCss(String suffix) {
 	String cssClass = _getFieldCss("input");
 
-	if (Validator.isNotNull(suffix.isEmpty())) {
+	if (Validator.isNotNull(suffix)) {
 		cssClass += "-" + suffix;
 	}
 
