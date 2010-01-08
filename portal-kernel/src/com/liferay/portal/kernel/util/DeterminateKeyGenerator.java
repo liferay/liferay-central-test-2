@@ -64,7 +64,7 @@ public class DeterminateKeyGenerator {
 			seed = previousSeed;
 		}
 
-		StringBundler sb = new StringBundler(length);
+		StringBuilder sb = new StringBuilder(length);
 
 		for (int i = 0; i < length; i++) {
 			int index = 0;
