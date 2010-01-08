@@ -359,6 +359,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<aui:input name="version" type="hidden" value="<%= version %>" />
 	<aui:input name="content" type="hidden" />
 	<aui:input name="defaultLocale" type="hidden" value="<%= defaultLanguageId %>" />
+	<aui:input name="originalContent" type="hidden" />
 	<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
 	<aui:input name="articleURL" type="hidden" value="<%= editArticleRenderURL %>" />
 	<aui:input name="approve" type="hidden" />
@@ -484,7 +485,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 											</c:otherwise>
 										</c:choose>
 										id="<portlet:namespace />defaultLanguageIdSelect"
-										onChange="<portlet:namespace />changeLanguageView();"
 									>
 
 										<%

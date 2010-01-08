@@ -305,10 +305,8 @@ AUI().add(
 			instance._attachEditContainerEvents();
 			instance._attachDelegatedEvents();
 
-			var currentXSD = encodeURIComponent(instance.getStructureXSD());
-			var structureXSDInput = instance.getByName(instance.getPrincipalForm(), 'structureXSD');
-
-			structureXSDInput.val(currentXSD);
+			instance._updateOriginalContent();
+			instance._updateOriginalStructureXSD();
 		};
 
 		Journal.prototype = {
@@ -354,6 +352,17 @@ AUI().add(
 						}
 					}
 				);
+			},
+
+			articleChange: function(attribute) {
+				var instance = this;
+
+				var form = instance.getPrincipalForm();
+				var content = instance.getByName(form, 'originalContent').val();
+
+				var hasChanged = (content != encodeURIComponent(instance.getArticleContentXML()));
+
+				return hasChanged;
 			},
 
 			buildHTMLEditor: function(fieldInstance) {
@@ -424,17 +433,18 @@ AUI().add(
 				var instance = this;
 
 				var form = instance.getPrincipalForm();
-				var articleContent = instance.getArticleContentXML();
 
 				var articleContent = instance.getArticleContentXML();
 				var cmdInput = instance.getByName(form, 'cmd');
-				var contentInput = instance.getByName(form, 'content');
 				var defaultLocaleInput = instance.getByName(form, 'defaultLocale');
 				var languageIdInput = instance.getByName(form, 'languageId');
 				var redirectInput = instance.getByName(form, 'redirect');
 
-				if (confirm(Liferay.Language.get('would-you-like-to-save-the-changes-made-to-this-language'))) {
+				if (instance.articleChange() && confirm(Liferay.Language.get('would-you-like-to-save-the-changes-made-to-this-language'))) {
+					var contentInput = instance.getByName(form, 'content');
+
 					cmdInput.val('update');
+					contentInput.val(articleContent);
 				}
 				else {
 					if (!confirm(Liferay.Language.get('are-you-sure-you-want-to-switch-the-languages-view'))) {
@@ -449,7 +459,6 @@ AUI().add(
 				var languageViewURL = getLanguageViewURL(languageId);
 
 				redirectInput.val(languageViewURL);
-				contentInput.val(articleContent);
 
 				form.submit();
 			},
@@ -2596,6 +2605,26 @@ AUI().add(
 				}
 
 				return errorText;
+			},
+
+			_updateOriginalContent: function() {
+				var instance = this;
+				var form = instance.getPrincipalForm();
+
+				var originalContent = encodeURIComponent(instance.getArticleContentXML());
+				var originalContentInput = instance.getByName(form, 'originalContent');
+
+				originalContentInput.val(originalContent);
+			},
+
+			_updateOriginalStructureXSD: function() {
+				var instance = this;
+				var form = instance.getPrincipalForm();
+
+				var currentXSD = encodeURIComponent(instance.getStructureXSD());
+				var structureXSDInput = instance.getByName(form, 'structureXSD');
+
+				structureXSDInput.val(currentXSD);
 			}
 		};
 
