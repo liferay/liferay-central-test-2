@@ -215,7 +215,7 @@ public class PortletPreferencesImpl
 
 		value = _getXmlSafeValue(value);
 
-		Preference preference = getPreferences().get(key);
+		Preference preference = _getModifiedPreferences().get(key);
 
 		if (preference == null) {
 			preference = new Preference(key, value);
@@ -240,7 +240,7 @@ public class PortletPreferencesImpl
 
 		values = _getXmlSafeValues(values);
 
-		Preference preference = getPreferences().get(key);
+		Preference preference = _getModifiedPreferences().get(key);
 
 		if (preference == null) {
 			preference = new Preference(key, values);
