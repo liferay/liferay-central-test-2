@@ -33,8 +33,10 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -103,8 +105,18 @@ public class TCKAction extends Action {
 			LayoutTypePortlet layoutType =
 				(LayoutTypePortlet)layout.getLayoutType();
 
-			for (int i = 0; i < portletIds.length; i++) {
-				layoutType.addPortletId(userId, portletIds[i]);
+			for (String portletId : portletIds) {
+				layoutType.addPortletId(userId, portletId, false);
+
+				String rootPortletId = PortletConstants.getRootPortletId(
+					portletId);
+
+				String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(
+					layout.getPlid(), portletId);
+
+				ResourceLocalServiceUtil.addResources(
+					user.getCompanyId(), groupId, 0, rootPortletId,
+					portletPrimaryKey, true, true, true);
 			}
 
 			LayoutLocalServiceUtil.updateLayout(
