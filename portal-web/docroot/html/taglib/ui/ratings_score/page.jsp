@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_ratings_score") + StringPool.UNDERLINE;
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_ratings_score_page") + StringPool.UNDERLINE;
 
 double score = GetterUtil.getDouble((String)request.getAttribute("liferay-ui:ratings-score:score"));
 

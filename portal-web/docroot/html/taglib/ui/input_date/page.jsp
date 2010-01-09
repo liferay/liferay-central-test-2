@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_input_date") + StringPool.UNDERLINE;
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_input_date_page") + StringPool.UNDERLINE;
 
 if (GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disableNamespace"))) {
 	namespace = StringPool.BLANK;

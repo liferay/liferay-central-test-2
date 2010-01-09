@@ -27,7 +27,7 @@
 <%
 themeDisplay.setIncludeServiceJs(true);
 
-String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_asset_tags_selector") + StringPool.UNDERLINE;
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_asset_tags_selector_page") + StringPool.UNDERLINE;
 
 String className = (String)request.getAttribute("liferay-ui:asset-tags-selector:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-tags-selector:classPK"));

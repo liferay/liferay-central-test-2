@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomNamespace = DeterminateKeyGenerator.generate("taglib_portlet_preview") + StringPool.UNDERLINE;
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_portlet_preview_page") + StringPool.UNDERLINE;
 
 String portletResource = (String)request.getAttribute("liferay-portlet:preview:portletName");
 String queryString = (String)request.getAttribute("liferay-portlet:preview:queryString");
