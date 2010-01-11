@@ -1035,43 +1035,6 @@ ${exception.message}
 		</java>
 	</target>
 
-	<target name="build-basic-rules-parser">
-		<java classname="antlr.Tool"
-			description="Process rules grammer and generate lexer/parsers"
-			classpath="${project.dir}/lib/portal/antlr.jar"
-			dir="src/com/liferay/portal/bi/rules/basicrulesengine/impl"
-			fork="true"
-		>
-			<arg file="src/com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRules.g"/>
-		</java>
-
-		<antcall target="compile" />
-
-		<jar basedir="${portal-impl.classes.dir}"
-			description="Bundle antlr generated code"
-			destfile="${project.dir}/lib/portal/basic-rules-parser.jar">
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesLexer.class" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesLexer.smap" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesLexerTokenTypes.class" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesLexerTokenTypes.txt" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesParser.class" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesParser.smap" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesTreeParser.class" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesTreeParser.smap" />
-		</jar>
-		<delete dir="src"
-			description="Delete auto generated code from source tree">
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesLexer.java" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesLexer.smap" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesLexerTokenTypes.java" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesLexerTokenTypes.txt" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesParser.java" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesParser.smap" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesTreeParser.java" />
-			<include name="com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRulesTreeParser.smap" />
-		</delete>
-	</target>
-
 	<target name="upgrade-db">
 		<java
 			classname="com.liferay.portal.tools.DBUpgrader"
