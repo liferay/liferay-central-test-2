@@ -22,11 +22,13 @@
 
 package com.liferay.portal.servlet.filters.strip;
 
+import com.liferay.portal.kernel.concurrent.ConcurrentLRUCache;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.DeterminateKeyGenerator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -36,6 +38,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.servlet.filters.etag.ETagUtil;
 import com.liferay.portal.util.MinifierUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.FilterChain;
@@ -163,14 +166,26 @@ public class StripFilter extends BasePortalFilter {
 			return newBeginIndex;
 		}
 
-		content = MinifierUtil.minifyCss(content);
+		String minifiedContent = content;
 
-		if (Validator.isNull(content)) {
+		if (PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE > 0) {
+			String key = String.valueOf(content.hashCode());
+
+			minifiedContent = _minifierCache.get(key);
+
+			if (minifiedContent == null) {
+				minifiedContent = MinifierUtil.minifyCss(content);
+
+				_minifierCache.put(key, minifiedContent);
+			}
+		}
+
+		if (Validator.isNull(minifiedContent)) {
 			return newBeginIndex;
 		}
 
 		newBytes.write(_STYLE_TYPE_CSS);
-		newBytes.write(content.getBytes());
+		newBytes.write(minifiedContent.getBytes());
 		newBytes.write(_MARKER_STYLE_CLOSE);
 
 		return newBeginIndex;
@@ -191,6 +206,8 @@ public class StripFilter extends BasePortalFilter {
 			}
 
 			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
+
+			DeterminateKeyGenerator.reset();
 
 			StripResponse stripResponse = new StripResponse(response);
 
@@ -261,15 +278,27 @@ public class StripFilter extends BasePortalFilter {
 			return newBeginIndex;
 		}
 
-		content = MinifierUtil.minifyJavaScript(content);
+		String minifiedContent = content;
 
-		if (Validator.isNull(content)) {
+		if (PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE > 0) {
+			String key = String.valueOf(content.hashCode());
+
+			minifiedContent = _minifierCache.get(key);
+
+			if (minifiedContent == null) {
+				minifiedContent = MinifierUtil.minifyJavaScript(content);
+
+				_minifierCache.put(key, minifiedContent);
+			}
+		}
+
+		if (Validator.isNull(minifiedContent)) {
 			return newBeginIndex;
 		}
 
 		newBytes.write(_SCRIPT_TYPE_JAVASCRIPT);
 		newBytes.write(_CDATA_OPEN);
-		newBytes.write(content.getBytes());
+		newBytes.write(minifiedContent.getBytes());
 		newBytes.write(_CDATA_CLOSE);
 		newBytes.write(_MARKER_SCRIPT_CLOSE);
 
@@ -444,5 +473,9 @@ public class StripFilter extends BasePortalFilter {
 		"<style type=\"text/css\">".getBytes();
 
 	private static Log _log = LogFactoryUtil.getLog(StripFilter.class);
+
+	private ConcurrentLRUCache<String, String> _minifierCache =
+		new ConcurrentLRUCache<String, String>(
+			PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE);
 
 }
