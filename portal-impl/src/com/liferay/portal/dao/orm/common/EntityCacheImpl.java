@@ -286,10 +286,6 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		return String.valueOf(primaryKeyObj);
 	}
 
-	private String _encodeGroupKey(String className) {
-		return CACHE_NAME.concat(StringPool.PERIOD).concat(className);
-	}
-
 	private String _encodeLocalCacheKey(
 		Class<?> classObj, Serializable primaryKeyObj) {
 
@@ -298,7 +294,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	private PortalCache _getPortalCache(String className) {
-		String groupKey = _encodeGroupKey(className);
+		String groupKey = _GROUP_KEY_PREFIX.concat(className);
 
 		PortalCache portalCache = _portalCaches.get(groupKey);
 
@@ -327,6 +323,9 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		}
 	}
 
+	private static final String _GROUP_KEY_PREFIX =
+		CACHE_NAME.concat(StringPool.PERIOD);
+	
 	private static Log _log = LogFactoryUtil.getLog(EntityCacheImpl.class);
 
 	private static ThreadLocal<LRUMap> _localCache;

@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
@@ -108,9 +107,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		if (_localCacheEnabled.get().booleanValue()) {
 			localCache = _localCache.get();
 
-			localCacheKey = _encodeLocalCacheKey(
-				finderPath.getClassName(), finderPath.getMethodName(),
-				finderPath.getParams(), args);
+			localCacheKey = finderPath.encodeLocalCacheKey(args);
 
 			primaryKey = localCache.get(localCacheKey);
 		}
@@ -119,8 +116,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			PortalCache portalCache = _getPortalCache(
 				finderPath.getClassName());
 
-			String cacheKey = _encodeCacheKey(
-				finderPath.getMethodName(), finderPath.getParams(), args);
+			String cacheKey = finderPath.encodeCacheKey(args);
 
 			primaryKey = portalCache.get(cacheKey);
 
@@ -156,17 +152,14 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		if (_localCacheEnabled.get().booleanValue()) {
 			Map<String, Object> localCache = _localCache.get();
 
-			String localCacheKey = _encodeLocalCacheKey(
-				finderPath.getClassName(), finderPath.getMethodName(),
-				finderPath.getParams(), args);
+			String localCacheKey = finderPath.encodeLocalCacheKey(args);
 
 			localCache.put(localCacheKey, primaryKey);
 		}
 
 		PortalCache portalCache = _getPortalCache(finderPath.getClassName());
 
-		String cacheKey = _encodeCacheKey(
-			finderPath.getMethodName(), finderPath.getParams(), args);
+		String cacheKey = finderPath.encodeCacheKey(args);
 
 		portalCache.put(cacheKey, primaryKey);
 	}
@@ -181,17 +174,14 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		if (_localCacheEnabled.get().booleanValue()) {
 			Map<String, Object> localCache = _localCache.get();
 
-			String localCacheKey = _encodeLocalCacheKey(
-				finderPath.getClassName(), finderPath.getMethodName(),
-				finderPath.getParams(), args);
+			String localCacheKey = finderPath.encodeLocalCacheKey(args);
 
 			localCache.remove(localCacheKey);
 		}
 
 		PortalCache portalCache = _getPortalCache(finderPath.getClassName());
 
-		String cacheKey = _encodeCacheKey(
-			finderPath.getMethodName(), finderPath.getParams(), args);
+		String cacheKey = finderPath.encodeCacheKey(args);
 
 		portalCache.remove(cacheKey);
 	}
@@ -206,62 +196,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		_multiVMPool = multiVMPool;
 	}
 
-	private String _encodeCacheKey(
-		String methodName, String[] params, Object[] args) {
-
-		StringBundler sb = new StringBundler(
-			(params.length + args.length) * 2 + 3);
-
-		sb.append(methodName);
-		sb.append(_PARAMS_SEPARATOR);
-
-		for (String param : params) {
-			sb.append(StringPool.PERIOD);
-			sb.append(param);
-		}
-
-		sb.append(_ARGS_SEPARATOR);
-
-		for (Object arg : args) {
-			sb.append(StringPool.PERIOD);
-			sb.append(String.valueOf(arg));
-		}
-
-		return sb.toString();
-	}
-
-	private String _encodeGroupKey(String className) {
-		return CACHE_NAME.concat(StringPool.PERIOD).concat(className);
-	}
-
-	private String _encodeLocalCacheKey(
-		String className, String methodName, String[] params, Object[] args) {
-
-		StringBundler sb = new StringBundler(
-			(params.length + args.length) * 2 + 5);
-
-		sb.append(className);
-		sb.append(StringPool.PERIOD);
-		sb.append(methodName);
-		sb.append(_PARAMS_SEPARATOR);
-
-		for (String param : params) {
-			sb.append(StringPool.PERIOD);
-			sb.append(param);
-		}
-
-		sb.append(_ARGS_SEPARATOR);
-
-		for (Object arg : args) {
-			sb.append(StringPool.PERIOD);
-			sb.append(String.valueOf(arg));
-		}
-
-		return sb.toString();
-	}
-
 	private PortalCache _getPortalCache(String className) {
-		String groupKey = _encodeGroupKey(className);
+		String groupKey = _GROUP_KEY_PREFIX.concat(className);
 
 		PortalCache portalCache = _portalCaches.get(groupKey);
 
@@ -335,10 +271,9 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		}
 	}
 
-	private static final String _ARGS_SEPARATOR = "_A_";
-
-	private static final String _PARAMS_SEPARATOR = "_P_";
-
+	private static final String _GROUP_KEY_PREFIX = 
+		CACHE_NAME.concat(StringPool.PERIOD);
+	
 	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;
 	private static ThreadLocal<Boolean> _localCacheEnabled =

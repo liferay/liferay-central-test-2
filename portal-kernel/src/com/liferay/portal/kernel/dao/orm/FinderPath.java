@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+
 /**
  * <a href="FinderPath.java.html"><b><i>View Source</i></b></a>
  *
@@ -38,8 +41,55 @@ public class FinderPath {
 		_className = className;
 		_methodName = methodName;
 		_params = params;
+
+		// CacheKey prefix
+		StringBundler sb = new StringBundler(params.length * 2 + 3);
+
+		sb.append(methodName);
+		sb.append(_PARAMS_SEPARATOR);
+
+		for (String param : params) {
+			sb.append(StringPool.PERIOD);
+			sb.append(param);
+		}
+
+		sb.append(_ARGS_SEPARATOR);
+		
+		_cacheKeyPrefix = sb.toString();
+		
+		// Local CacheKey prefix
+		_localCacheKeyPrefix =
+			className.concat(StringPool.PERIOD).concat(_cacheKeyPrefix);
+		
 	}
 
+	public String encodeCacheKey(Object[] args) {
+
+		StringBundler sb = new StringBundler(args.length * 2 + 1);
+
+		sb.append(_cacheKeyPrefix);
+
+		for (Object arg : args) {
+			sb.append(StringPool.PERIOD);
+			sb.append(String.valueOf(arg));
+		}
+
+		return sb.toString();
+	}
+
+	public String encodeLocalCacheKey(Object[] args) {
+		StringBundler sb = new StringBundler(args.length * 2 + 1);
+
+		sb.append(_localCacheKeyPrefix);
+
+		for (Object arg : args) {
+			sb.append(StringPool.PERIOD);
+			sb.append(String.valueOf(arg));
+		}
+
+		return sb.toString();
+	}
+	
 	public String getClassName() {
 		return _className;
 	}
@@ -60,9 +110,15 @@ public class FinderPath {
 		return _finderCacheEnabled;
 	}
 
+	private static final String _ARGS_SEPARATOR = "_A_";
+	
+	private static final String _PARAMS_SEPARATOR = "_P_";
+	
+	private String _cacheKeyPrefix;
 	private String _className;
 	private boolean _entityCacheEnabled;
 	private boolean _finderCacheEnabled;
+	private String _localCacheKeyPrefix;
 	private String _methodName;
 	private String[] _params;
 
