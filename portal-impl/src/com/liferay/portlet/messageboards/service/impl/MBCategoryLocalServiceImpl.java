@@ -61,6 +61,7 @@ import java.util.List;
  * <a href="MBCategoryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
@@ -472,35 +473,36 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 			mergeCategories(category, parentCategoryId);
 		}
-
-		// Mailing list
-
-		MBMailingList mailingList = mbMailingListPersistence.fetchByG_C(
-			category.getGroupId(), category.getCategoryId());
-
-		if (mailingList != null) {
-			mbMailingListLocalService.updateMailingList(
-				mailingList.getMailingListId(), emailAddress, inProtocol,
-				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
-				inReadInterval, outEmailAddress, outCustom, outServerName,
-				outServerPort, outUseSSL, outUserName, outPassword,
-				mailingListActive);
-		}
 		else {
-			mbMailingListLocalService.addMailingList(
-				null, category.getUserId(), category.getGroupId(),
-				category.getCategoryId(), emailAddress, inProtocol,
-				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
-				inReadInterval, outEmailAddress, outCustom, outServerName,
-				outServerPort, outUseSSL, outUserName, outPassword,
-				mailingListActive);
+			// Mailing list
+
+			MBMailingList mailingList = mbMailingListPersistence.fetchByG_C(
+				category.getGroupId(), category.getCategoryId());
+
+			if (mailingList != null) {
+				mbMailingListLocalService.updateMailingList(
+					mailingList.getMailingListId(), emailAddress, inProtocol,
+					inServerName, inServerPort, inUseSSL, inUserName,
+					inPassword, inReadInterval, outEmailAddress, outCustom,
+					outServerName, outServerPort, outUseSSL, outUserName,
+					outPassword, mailingListActive);
+			}
+			else {
+				mbMailingListLocalService.addMailingList(
+					null, category.getUserId(), category.getGroupId(),
+					category.getCategoryId(), emailAddress, inProtocol,
+					inServerName, inServerPort, inUseSSL, inUserName,
+					inPassword, inReadInterval, outEmailAddress, outCustom,
+					outServerName, outServerPort, outUseSSL, outUserName,
+					outPassword, mailingListActive);
+			}
+
+			// Expando
+
+			ExpandoBridge expandoBridge = category.getExpandoBridge();
+
+			expandoBridge.setAttributes(serviceContext);
 		}
-
-		// Expando
-
-		ExpandoBridge expandoBridge = category.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		return category;
 	}
