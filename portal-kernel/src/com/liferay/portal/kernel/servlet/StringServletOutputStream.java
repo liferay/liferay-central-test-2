@@ -41,6 +41,14 @@ public class StringServletOutputStream extends ServletOutputStream {
 		_ubaos.write(b);
 	}
 
+	public void write(byte[] b) {
+		_ubaos.write(b);
+	}
+
+	public void write(byte[] b, int off, int len) {
+		_ubaos.write(b, off, len);
+	}
+
 	private UnsyncByteArrayOutputStream _ubaos = null;
 
 }
