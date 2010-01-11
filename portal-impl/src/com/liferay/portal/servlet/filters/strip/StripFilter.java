@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.DeterminateKeyGenerator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -206,8 +205,6 @@ public class StripFilter extends BasePortalFilter {
 			}
 
 			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
-
-			DeterminateKeyGenerator.reset();
 
 			StripResponse stripResponse = new StripResponse(response);
 
