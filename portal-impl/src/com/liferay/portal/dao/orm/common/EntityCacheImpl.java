@@ -323,10 +323,10 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		}
 	}
 
-	private static final String _GROUP_KEY_PREFIX =
-		CACHE_NAME.concat(StringPool.PERIOD);
-	
 	private static Log _log = LogFactoryUtil.getLog(EntityCacheImpl.class);
+
+	private static final String _GROUP_KEY_PREFIX = CACHE_NAME.concat(
+		StringPool.PERIOD);
 
 	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;

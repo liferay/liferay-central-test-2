@@ -271,9 +271,9 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		}
 	}
 
-	private static final String _GROUP_KEY_PREFIX = 
-		CACHE_NAME.concat(StringPool.PERIOD);
-	
+	private static final String _GROUP_KEY_PREFIX = CACHE_NAME.concat(
+		StringPool.PERIOD);
+
 	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;
 	private static ThreadLocal<Boolean> _localCacheEnabled =

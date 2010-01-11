@@ -42,29 +42,11 @@ public class FinderPath {
 		_methodName = methodName;
 		_params = params;
 
-		// CacheKey prefix
-		StringBundler sb = new StringBundler(params.length * 2 + 3);
-
-		sb.append(methodName);
-		sb.append(_PARAMS_SEPARATOR);
-
-		for (String param : params) {
-			sb.append(StringPool.PERIOD);
-			sb.append(param);
-		}
-
-		sb.append(_ARGS_SEPARATOR);
-		
-		_cacheKeyPrefix = sb.toString();
-		
-		// Local CacheKey prefix
-		_localCacheKeyPrefix =
-			className.concat(StringPool.PERIOD).concat(_cacheKeyPrefix);
-		
+		_initCacheKeyPrefix();
+		_initLocalCacheKeyPrefix();
 	}
 
 	public String encodeCacheKey(Object[] args) {
-
 		StringBundler sb = new StringBundler(args.length * 2 + 1);
 
 		sb.append(_cacheKeyPrefix);
@@ -89,7 +71,7 @@ public class FinderPath {
 
 		return sb.toString();
 	}
-	
+
 	public String getClassName() {
 		return _className;
 	}
@@ -110,10 +92,31 @@ public class FinderPath {
 		return _finderCacheEnabled;
 	}
 
+	private void _initCacheKeyPrefix() {
+		StringBundler sb = new StringBundler(_params.length * 2 + 3);
+
+		sb.append(_methodName);
+		sb.append(_PARAMS_SEPARATOR);
+
+		for (String param : _params) {
+			sb.append(StringPool.PERIOD);
+			sb.append(param);
+		}
+
+		sb.append(_ARGS_SEPARATOR);
+
+		_cacheKeyPrefix = sb.toString();
+	}
+
+	private void _initLocalCacheKeyPrefix() {
+		_localCacheKeyPrefix = _className.concat(StringPool.PERIOD).concat(
+			_cacheKeyPrefix);
+	}
+
 	private static final String _ARGS_SEPARATOR = "_A_";
-	
+
 	private static final String _PARAMS_SEPARATOR = "_P_";
-	
+
 	private String _cacheKeyPrefix;
 	private String _className;
 	private boolean _entityCacheEnabled;
