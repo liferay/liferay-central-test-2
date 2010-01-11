@@ -25,6 +25,7 @@ package com.liferay.taglib.aui;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
+import com.liferay.util.PwdGenerator;
 import com.liferay.util.TextFormatter;
 
 import java.util.HashMap;
@@ -88,7 +89,12 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		}
 
 		if (Validator.isNull(_id)) {
-			_id = _name;
+			if (!Validator.equals(_type, "radio")) {
+				_id = _name;
+			}
+			else {
+				_id = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+			}
 		}
 
 		if (_label == null) {
@@ -98,6 +104,15 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		if (_model == null) {
 			_model = (Class<?>)pageContext.getAttribute(
 				"aui:model-context:model");
+		}
+
+		if (_inlineLabel == null) {
+			if (Validator.equals(_type, "radio")) {
+				_inlineLabel = "right";
+			}
+			if (Validator.equals(_type, "checkbox")) {
+				_inlineLabel = "left";
+			}
 		}
 
 		request.setAttribute("aui:input:bean", _bean);
