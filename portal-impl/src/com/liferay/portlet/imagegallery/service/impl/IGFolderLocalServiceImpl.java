@@ -363,6 +363,16 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
+		// Merge folders
+
+		if (mergeWithParentFolder && (folderId != parentFolderId)) {
+			mergeFolders(folder, parentFolderId);
+
+			return folder;
+		}
+
+		// Folder
+
 		validate(
 			folder.getFolderId(), folder.getGroupId(), parentFolderId, name);
 
@@ -373,12 +383,6 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		folder.setExpandoBridgeAttributes(serviceContext);
 
 		igFolderPersistence.update(folder, false);
-
-		// Merge folders
-
-		if (mergeWithParentFolder && (folderId != parentFolderId)) {
-			mergeFolders(folder, parentFolderId);
-		}
 
 		return folder;
 	}

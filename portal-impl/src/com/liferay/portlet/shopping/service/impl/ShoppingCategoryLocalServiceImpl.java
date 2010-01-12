@@ -290,15 +290,6 @@ public class ShoppingCategoryLocalServiceImpl
 
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
 
-		validate(name);
-
-		category.setModifiedDate(new Date());
-		category.setParentCategoryId(parentCategoryId);
-		category.setName(name);
-		category.setDescription(description);
-
-		shoppingCategoryPersistence.update(category, false);
-
 		// Merge categories
 
 		if (mergeWithParentCategory &&
@@ -307,7 +298,20 @@ public class ShoppingCategoryLocalServiceImpl
 				ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			mergeCategories(category, parentCategoryId);
+
+			return category;
 		}
+
+		// Category
+
+		validate(name);
+
+		category.setModifiedDate(new Date());
+		category.setParentCategoryId(parentCategoryId);
+		category.setName(name);
+		category.setDescription(description);
+
+		shoppingCategoryPersistence.update(category, false);
 
 		return category;
 	}

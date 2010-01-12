@@ -455,6 +455,20 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
 
+		// Merge categories
+
+		if (mergeWithParentCategory &&
+			(categoryId != parentCategoryId) &&
+			(parentCategoryId !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
+
+			mergeCategories(category, parentCategoryId);
+
+			return category;
+		}
+
+		// Category
+
 		validate(name);
 
 		category.setModifiedDate(new Date());
@@ -464,45 +478,34 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		mbCategoryPersistence.update(category, false);
 
-		// Merge categories
+		// Mailing list
 
-		if (mergeWithParentCategory &&
-			(categoryId != parentCategoryId) &&
-			(parentCategoryId !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
+		MBMailingList mailingList = mbMailingListPersistence.fetchByG_C(
+			category.getGroupId(), category.getCategoryId());
 
-			mergeCategories(category, parentCategoryId);
+		if (mailingList != null) {
+			mbMailingListLocalService.updateMailingList(
+				mailingList.getMailingListId(), emailAddress, inProtocol,
+				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
+				inReadInterval, outEmailAddress, outCustom, outServerName,
+				outServerPort, outUseSSL, outUserName, outPassword,
+				mailingListActive);
 		}
 		else {
-			// Mailing list
-
-			MBMailingList mailingList = mbMailingListPersistence.fetchByG_C(
-				category.getGroupId(), category.getCategoryId());
-
-			if (mailingList != null) {
-				mbMailingListLocalService.updateMailingList(
-					mailingList.getMailingListId(), emailAddress, inProtocol,
-					inServerName, inServerPort, inUseSSL, inUserName,
-					inPassword, inReadInterval, outEmailAddress, outCustom,
-					outServerName, outServerPort, outUseSSL, outUserName,
-					outPassword, mailingListActive);
-			}
-			else {
-				mbMailingListLocalService.addMailingList(
-					null, category.getUserId(), category.getGroupId(),
-					category.getCategoryId(), emailAddress, inProtocol,
-					inServerName, inServerPort, inUseSSL, inUserName,
-					inPassword, inReadInterval, outEmailAddress, outCustom,
-					outServerName, outServerPort, outUseSSL, outUserName,
-					outPassword, mailingListActive);
-			}
-
-			// Expando
-
-			ExpandoBridge expandoBridge = category.getExpandoBridge();
-
-			expandoBridge.setAttributes(serviceContext);
+			mbMailingListLocalService.addMailingList(
+				null, category.getUserId(), category.getGroupId(),
+				category.getCategoryId(), emailAddress, inProtocol,
+				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
+				inReadInterval, outEmailAddress, outCustom, outServerName,
+				outServerPort, outUseSSL, outUserName, outPassword,
+				mailingListActive);
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = category.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return category;
 	}

@@ -139,8 +139,8 @@ public class BookmarksFolderLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder =
-			bookmarksFolderPersistence.findByPrimaryKey(folderId);
+		BookmarksFolder folder = bookmarksFolderPersistence.findByPrimaryKey(
+			folderId);
 
 		addFolderResources(
 			folder, addCommunityPermissions, addGuestPermissions);
@@ -151,8 +151,8 @@ public class BookmarksFolderLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder =
-			bookmarksFolderPersistence.findByPrimaryKey(folderId);
+		BookmarksFolder folder = bookmarksFolderPersistence.findByPrimaryKey(
+			folderId);
 
 		addFolderResources(folder, communityPermissions, guestPermissions);
 	}
@@ -193,8 +193,8 @@ public class BookmarksFolderLocalServiceImpl
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder =
-			bookmarksFolderPersistence.findByPrimaryKey(folderId);
+		BookmarksFolder folder = bookmarksFolderPersistence.findByPrimaryKey(
+			folderId);
 
 		deleteFolder(folder);
 	}
@@ -360,10 +360,20 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Folder
 
-		BookmarksFolder folder =
-			bookmarksFolderPersistence.findByPrimaryKey(folderId);
+		BookmarksFolder folder = bookmarksFolderPersistence.findByPrimaryKey(
+			folderId);
 
 		parentFolderId = getParentFolderId(folder, parentFolderId);
+
+		// Merge folders
+
+		if (mergeWithParentFolder && (folderId != parentFolderId)) {
+			mergeFolders(folder, parentFolderId);
+
+			return folder;
+		}
+
+		// Folder
 
 		validate(name);
 
@@ -374,12 +384,6 @@ public class BookmarksFolderLocalServiceImpl
 		folder.setExpandoBridgeAttributes(serviceContext);
 
 		bookmarksFolderPersistence.update(folder, false);
-
-		// Merge folders
-
-		if (mergeWithParentFolder && (folderId != parentFolderId)) {
-			mergeFolders(folder, parentFolderId);
-		}
 
 		return folder;
 	}
