@@ -58,8 +58,16 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		row.insertCell(1);
 		row.insertCell(2);
 
-		row.cells[0].innerHTML = "<input name=\"<portlet:namespace />title\" />";
-		row.cells[1].innerHTML = "<input name=\"<portlet:namespace />url\" style=\"width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;\" />";
+		row.cells[0].innerHTML = "<span class=\"aui-field aui-field lfr-input-text-container\">" +
+				"<span class=\"aui-field-content\">" +
+					"<input class=\"aui-field-input aui-field-input\" id=\"<portlet:namespace />title\" name=\"<portlet:namespace />title\" type=\"text\" />" +
+				"</span>" +
+			 "</span>";
+		row.cells[1].innerHTML = "<span class=\"aui-field aui-field lfr-input-text-container\">" +
+				"<span class=\"aui-field-content\">" +
+					"<input class=\"aui-field-input aui-field-input\" id=\"<portlet:namespace />url\" name=\"<portlet:namespace />url\" type=\"text\" />" +
+				"</span>" +
+			 "</span>";
 		row.cells[2].innerHTML = "<a class=\"remove-subscription\" href=\"javascript:;\"><img alt=\"<liferay-ui:message key="unsubscribe" />\" src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
 
 		table.appendChild(row);
@@ -73,10 +81,6 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 	function <portlet:namespace />removeSelectionForHeader() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-header-article';
 		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
-	}
-
-	function <portlet:namespace />saveConfiguration() {
-		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />selectAsset(resourcePrimKey, resourceTitle, assetOrder) {
@@ -107,12 +111,13 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="typeSelection" type="hidden" value="" />
-	<aui:input name="resourcePrimKey" type="hidden" value="" />
-	<aui:input name="assetOrder" type="hidden" value="" />
+	<aui:input name="typeSelection" type="hidden" />
+	<aui:input name="resourcePrimKey" type="hidden" />
+	<aui:input name="resourceTitle" type="hidden" />
+	<aui:input name="assetOrder" type="hidden" />
 
 	<c:choose>
 		<c:when test="<%= typeSelection.equals(StringPool.BLANK) %>">
@@ -139,45 +144,47 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 			</liferay-ui:error>
 
-			<table class="lfr-table" id="<portlet:namespace />subscriptions">
-			<tr>
-				<td>
-					<liferay-ui:message key="title" />
-				</td>
-				<td>
-					<liferay-ui:message key="url" />
-				</td>
-				<td>
-					<aui:a href="javascript:;" onClick='<%= renderResponse.getNamespace() + "addRssRow(this.parentNode.parentNode.parentNode);" %>'><img alt="<liferay-ui:message key="add-location" />" src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></aui:a>
-				</td>
-			</tr>
-
-			<%
-			for (int i = 0; i < urls.length; i++) {
-				String title = StringPool.BLANK;
-
-				if (i < titles.length) {
-					title = titles[i];
-				}
-			%>
-
+			<aui:fieldset>
+				<table class="lfr-table" id="<portlet:namespace />subscriptions">
 				<tr>
 					<td>
-						<aui:input inlineLabel="left" label="" name="title" type="text" value="<%= title %>" />
+						<liferay-ui:message key="title" />
 					</td>
 					<td>
-						<aui:input cssClass="lfr-input-text-container" inlineLabel="left" label="" name="url" type="text" value="<%= urls[i] %>" />
+						<liferay-ui:message key="url" />
 					</td>
 					<td>
-						<aui:a href="javascript:;"><img alt="<liferay-ui:message key="unsubscribe" />" src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></aui:a>
+						<aui:a href="javascript:;" onClick='<%= renderResponse.getNamespace() + "addRssRow(this.parentNode.parentNode.parentNode);" %>'><img alt="<liferay-ui:message key="add-location" />" src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></aui:a>
 					</td>
 				</tr>
 
-			<%
-			}
-			%>
+				<%
+				for (int i = 0; i < urls.length; i++) {
+					String title = StringPool.BLANK;
 
-			</table>
+					if (i < titles.length) {
+						title = titles[i];
+					}
+				%>
+
+					<tr>
+						<td>
+							<aui:input cssClass="lfr-input-text-container" label="" name="title" value="<%= title %>" />
+						</td>
+						<td>
+							<aui:input cssClass="lfr-input-text-container" label="" name="url" value="<%= urls[i] %>" />
+						</td>
+						<td>
+							<aui:a href="javascript:;"><img alt="<liferay-ui:message key="unsubscribe" />" src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></aui:a>
+						</td>
+					</tr>
+
+				<%
+				}
+				%>
+
+				</table>
+			</aui:fieldset>
 
 			<aui:fieldset>
 				<aui:input inlineLabel="left" name="showFeedTitle" type="checkbox" value="<%= showFeedTitle %>" />
@@ -228,11 +235,11 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 				</aui:select>
 
 				<aui:field-wrapper label="header-web-content">
-					<%= footerArticleResouceTitle %>
+					<%= headerArticleResouceTitle %>
 
-					<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' type="button" value="select" />
+					<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForHeader();" %>' type="button" value="select" />
 
-					<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForFooter();" %>' type="button" value="remove" />
+					<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForHeader();" %>' type="button" value="remove" />
 				</aui:field-wrapper>
 
 				<aui:field-wrapper label="footer-web-content">
