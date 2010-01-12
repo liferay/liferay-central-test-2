@@ -47,11 +47,18 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:input:suf
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
 Object value = request.getAttribute("aui:input:value");
 
+String baseType = type;
+if ((model != null) && Validator.isNull(type)) {
+	baseType = ModelHintsUtil.getType(model.getName(), field);
+}
+
 boolean showForLabel = true;
 
-if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
-	((model != null) && (field != null) && Validator.equals(ModelHintsUtil.getType(model.getName(), field), Date.class.getName()))) {
+boolean checkboxField = (baseType.equals("checkbox")) || (baseType.equals("boolean"));
+boolean dateField = baseType.equals(Date.class.getName());
+boolean choiceField = checkboxField || baseType.equals("radio");
 
+if ((baseType.equals("assetCategories")) || (baseType.equals("assetTags")) || dateField) {
 	showForLabel = false;
 }
 
@@ -66,32 +73,14 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 
 String forLabel = id;
 
-if (type.equals("checkbox") || (model != null) && type.equals("boolean")) {
+if (checkboxField) {
 	forLabel = name + "Checkbox";
 }
-
-String baseTypeCss = StringPool.BLANK;
 
 String fieldCss = _getFieldCss(StringPool.BLANK);
 String inputCss = _getInputCss(StringPool.BLANK);
 
-if ((model != null) && Validator.isNull(type)) {
-	baseTypeCss = ModelHintsUtil.getType(model.getName(), field).toLowerCase();
-}
-else {
-	if (type.equals("assetCategories")) {
-		baseTypeCss = "asset-categories";
-	}
-	else if (type.equals("assetTags")) {
-		baseTypeCss = "asset-tags";
-	}
-	if (type.equals("timeZone")) {
-		baseTypeCss = "time-zone";
-	}
-	else {
-		baseTypeCss = type;
-	}
-}
+String baseTypeCss = TextFormatter.format(baseType, TextFormatter.K);
 
 fieldCss += " " + _getFieldCss(baseTypeCss);
 inputCss += " " + _getInputCss(baseTypeCss);
@@ -104,7 +93,7 @@ if (disabled) {
 	fieldCss += " " + _getFieldCss("disabled");
 }
 
-if (baseTypeCss.equals("checkbox") || baseTypeCss.equals("radio")) {
+if (choiceField) {
 	fieldCss += " " + _getFieldCss("choice");
 	inputCss += " " + _getInputCss("choice");
 }
@@ -129,7 +118,7 @@ if (Validator.isNotNull(cssClass)) {
 	<span class="<%= fieldCss %>">
 		<span class="aui-field-content">
 			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-				<label class="aui-field-label <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
+				<label class="<%= choiceField ? "aui-choice-label" : "aui-field-label" %> <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 					<liferay-ui:message key="<%= label %>" />
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -137,10 +126,10 @@ if (Validator.isNotNull(cssClass)) {
 					</c:if>
 				</label>
 			</c:if>
-</c:if>
 
-<c:if test="<%= Validator.isNotNull(prefix) %>">
-	<span class="aui-prefix"><liferay-ui:message key="<%= prefix %>" /></span>
+			<c:if test="<%= Validator.isNotNull(prefix) %>">
+				<span class="aui-prefix"><liferay-ui:message key="<%= prefix %>" /></span>
+			</c:if>
 </c:if>
 
 <c:choose>
@@ -268,21 +257,20 @@ if (Validator.isNotNull(cssClass)) {
 	</c:otherwise>
 </c:choose>
 
-<c:if test="<%= Validator.isNotNull(suffix) %>">
-	<span class="aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
-</c:if>
-
-<c:if test='<%= Validator.isNotNull(label) && inlineLabel.equals("right") %>'>
-	<label class="aui-field-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
-		<liferay-ui:message key="<%= label %>" />
-
-		<c:if test="<%= Validator.isNotNull(helpMessage) %>">
-			<liferay-ui:icon-help message="<%= helpMessage %>" />
-		</c:if>
-	</label>
-</c:if>
-
 <c:if test='<%= !type.equals("hidden") %>'>
+			<c:if test="<%= Validator.isNotNull(suffix) %>">
+				<span class="aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
+			</c:if>
+
+			<c:if test='<%= Validator.isNotNull(label) && inlineLabel.equals("right") %>'>
+				<label class="<%= choiceField ? "aui-choice-label" : "aui-field-label" %> <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
+					<liferay-ui:message key="<%= label %>" />
+
+					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+						<liferay-ui:icon-help message="<%= helpMessage %>" />
+					</c:if>
+				</label>
+			</c:if>
 		</span>
 	</span>
 </c:if>
