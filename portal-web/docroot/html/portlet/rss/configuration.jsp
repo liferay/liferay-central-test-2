@@ -58,16 +58,20 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		row.insertCell(1);
 		row.insertCell(2);
 
-		row.cells[0].innerHTML = "<span class=\"aui-field aui-field lfr-input-text-container\">" +
+		row.cells[0].innerHTML =
+			"<span class=\"aui-field aui-field lfr-input-text-container\">" +
 				"<span class=\"aui-field-content\">" +
 					"<input class=\"aui-field-input aui-field-input\" id=\"<portlet:namespace />title\" name=\"<portlet:namespace />title\" type=\"text\" />" +
 				"</span>" +
 			 "</span>";
-		row.cells[1].innerHTML = "<span class=\"aui-field aui-field lfr-input-text-container\">" +
+
+		row.cells[1].innerHTML =
+			"<span class=\"aui-field aui-field lfr-input-text-container\">" +
 				"<span class=\"aui-field-content\">" +
 					"<input class=\"aui-field-input aui-field-input\" id=\"<portlet:namespace />url\" name=\"<portlet:namespace />url\" type=\"text\" />" +
 				"</span>" +
 			 "</span>";
+
 		row.cells[2].innerHTML = "<a class=\"remove-subscription\" href=\"javascript:;\"><img alt=\"<liferay-ui:message key="unsubscribe" />\" src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
 
 		table.appendChild(row);
