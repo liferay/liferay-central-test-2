@@ -1721,7 +1721,6 @@ industry=Индустрия
 inherit=Наследяване
 initial-window-state=Начално състояние на прозореца
 initiate-process=Иницииране на процес
-insert-custom-css-that-will-loaded-after-the-theme=Вмъкване на потребителски CSS, който ще се зареди след темата.
 inserted-in=Вмъкнат в
 install-and-configure-maxmind-geoip-city-or-geolite-city-to-enable-this-portlet=Инсталирайте и конфигурирайте Maxmind GeoIP City или GeoLite City, за да разрешите този портлет.
 install-and-configure-the-ip-geocoder-portlet-to-enable-this-portlet=Инсталирайте и конфигурирайте IP Geocoder портлета, за да разрешите този портлет.

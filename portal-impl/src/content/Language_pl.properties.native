@@ -1772,7 +1772,6 @@ industry=Branża
 inherit=Dziedzicz
 initial-window-state=Początkowy stan okna
 initiate-process=Zainicjować proces
-insert-custom-css-that-will-loaded-after-the-theme=Wprowadź własny kod CSS, który będzie załadowany po załadowaniu motywu.
 inserted-in=Wprowadzona w
 install-and-configure-maxmind-geoip-city-or-geolite-city-to-enable-this-portlet=Zainstaluj i skonfiguruj Maxmind GeoIP City lub GeoLite City aby włączyć ten portlet.
 install-and-configure-the-ip-geocoder-portlet-to-enable-this-portlet=Zainstaluj i skonfiguruj portlet IP Geocoder aby włączyć ten portlet.

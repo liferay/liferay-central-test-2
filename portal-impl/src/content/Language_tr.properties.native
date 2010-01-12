@@ -1801,7 +1801,6 @@ infringes-my-rights=Kurallarımı Boz
 inherit=Devral
 initial-window-state=Başlangıç Pencere Durumu
 initiate-process=İşlemi Başlat
-insert-custom-css-that-will-loaded-after-the-theme=Temadan sonra yüklenmiş olacak ozel CSS’i ekle.
 inserted-in=Ekli/Eklendi
 install-and-configure-maxmind-geoip-city-or-geolite-city-to-enable-this-portlet=Bu portleti etkinleştirmek için Maxmind GeoIP City veya GeoLite City indir ve konfigüre et.
 install-and-configure-the-ip-geocoder-portlet-to-enable-this-portlet=Bu portleti etkinleştirmek için IP Geocoder portletini indir ve konfigüre et.

@@ -1777,7 +1777,6 @@ industry=Industria
 inherit=Hereta
 initial-window-state=Finestra de l'estat inicial
 initiate-process=Inicia el procés
-insert-custom-css-that-will-loaded-after-the-theme=Inserta el CSS personalitzat que es carregarà després del tema.
 inserted-in=Insertat en
 install-and-configure-maxmind-geoip-city-or-geolite-city-to-enable-this-portlet=Instal·la i configura Maxmind GeoIP City o GeoLite City per activar aquest portlet.
 install-and-configure-the-ip-geocoder-portlet-to-enable-this-portlet=Instal·la i configura el portlet IP Geocoder per activar aquest portlet.
