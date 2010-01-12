@@ -47,21 +47,6 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:input:suf
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
 Object value = request.getAttribute("aui:input:value");
 
-String baseType = type;
-if ((model != null) && Validator.isNull(type)) {
-	baseType = ModelHintsUtil.getType(model.getName(), field);
-}
-
-boolean showForLabel = true;
-
-boolean checkboxField = (baseType.equals("checkbox")) || (baseType.equals("boolean"));
-boolean dateField = baseType.equals(Date.class.getName());
-boolean choiceField = checkboxField || baseType.equals("radio");
-
-if ((baseType.equals("assetCategories")) || (baseType.equals("assetTags")) || dateField) {
-	showForLabel = false;
-}
-
 if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldParam") != null)) {
 	if (!ModelHintsUtil.isLocalized(model.toString(), field)) {
 		name = namespace + dynamicAttributes.get("fieldParam");
@@ -69,6 +54,22 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 	else {
 		name = (String)dynamicAttributes.get("fieldParam");
 	}
+}
+
+String baseType = type;
+
+if ((model != null) && Validator.isNull(type)) {
+	baseType = ModelHintsUtil.getType(model.getName(), field);
+}
+
+boolean checkboxField = baseType.equals("checkbox") || baseType.equals("boolean");
+boolean choiceField = checkboxField || baseType.equals("radio");
+boolean dateField = baseType.equals(Date.class.getName());
+
+boolean showForLabel = true;
+
+if ((baseType.equals("assetCategories")) || (baseType.equals("assetTags")) || dateField) {
+	showForLabel = false;
 }
 
 String forLabel = id;
