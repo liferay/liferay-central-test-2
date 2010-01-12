@@ -134,7 +134,7 @@ td.user-info {
 }
 
 .portlet-message-boards .thread-body {
-	overview: hidden;
+	overflow: hidden;
 	padding: 15px;
 }
 
