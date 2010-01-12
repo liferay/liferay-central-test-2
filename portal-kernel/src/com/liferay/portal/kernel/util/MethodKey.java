@@ -100,11 +100,11 @@ public class MethodKey implements Serializable {
 			sb.append(_className);
 			sb.append(_methodName);
 
-			if (_types != null && _types.length > 0) {
-				sb.append("-");
+			if ((_types != null) && (_types.length > 0)) {
+				sb.append(StringPool.DASH);
 
-				for (int i = 0; i < _types.length; i++) {
-					sb.append(_types[i].getName());
+				for (Class<?> type : _types) {
+					sb.append(type.getName());
 				}
 			}
 
