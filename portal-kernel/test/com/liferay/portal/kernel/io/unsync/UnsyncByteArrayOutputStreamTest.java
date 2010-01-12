@@ -99,8 +99,7 @@ public class UnsyncByteArrayOutputStreamTest extends TestCase {
 
 		byte[] byteArray2 = unsyncByteArrayOutputStream.toByteArray();
 
-		assertTrue(
-			Arrays.equals(_BUFFER, unsyncByteArrayOutputStream.toByteArray()));
+		assertTrue(Arrays.equals(_BUFFER, byteArray2));
 
 		assertNotSame(byteArray1, byteArray2);
 	}
@@ -126,6 +125,24 @@ public class UnsyncByteArrayOutputStreamTest extends TestCase {
 		assertEquals(
 			new String(_BUFFER, charsetName2),
 			unsyncByteArrayOutputStream.toString(charsetName2));
+	}
+
+	public void testUnsafeGetByteArray() {
+		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
+
+		unsyncByteArrayOutputStream.write(_BUFFER);
+
+		byte[] byteArray1 = unsyncByteArrayOutputStream.unsafeGetByteArray();
+
+		assertTrue(Arrays.equals(_BUFFER, byteArray1));
+		assertSame(unsyncByteArrayOutputStream.buffer, byteArray1);
+
+		byte[] byteArray2 = unsyncByteArrayOutputStream.unsafeGetByteArray();
+
+		assertTrue(Arrays.equals(_BUFFER, byteArray2));
+
+		assertSame(byteArray1, byteArray2);
 	}
 
 	public void testWrite() {
