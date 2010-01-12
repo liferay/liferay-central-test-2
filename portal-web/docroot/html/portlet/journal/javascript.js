@@ -354,15 +354,13 @@ AUI().add(
 				);
 			},
 
-			articleChange: function(attribute) {
+			articleChanged: function() {
 				var instance = this;
 
 				var form = instance.getPrincipalForm();
 				var content = instance.getByName(form, 'originalContent').val();
 
-				var hasChanged = (content != encodeURIComponent(instance.getArticleContentXML()));
-
-				return hasChanged;
+				return (content != encodeURIComponent(instance.getArticleContentXML()));
 			},
 
 			buildHTMLEditor: function(fieldInstance) {
@@ -440,7 +438,7 @@ AUI().add(
 				var languageIdInput = instance.getByName(form, 'languageId');
 				var redirectInput = instance.getByName(form, 'redirect');
 
-				if (instance.articleChange() && confirm(Liferay.Language.get('would-you-like-to-save-the-changes-made-to-this-language'))) {
+				if (instance.articleChanged() && confirm(Liferay.Language.get('would-you-like-to-save-the-changes-made-to-this-language'))) {
 					var contentInput = instance.getByName(form, 'content');
 
 					cmdInput.val('update');
@@ -2609,6 +2607,7 @@ AUI().add(
 
 			_updateOriginalContent: function() {
 				var instance = this;
+
 				var form = instance.getPrincipalForm();
 
 				var originalContent = encodeURIComponent(instance.getArticleContentXML());
@@ -2619,6 +2618,7 @@ AUI().add(
 
 			_updateOriginalStructureXSD: function() {
 				var instance = this;
+
 				var form = instance.getPrincipalForm();
 
 				var currentXSD = encodeURIComponent(instance.getStructureXSD());
