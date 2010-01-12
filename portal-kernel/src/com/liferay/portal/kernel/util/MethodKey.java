@@ -104,7 +104,7 @@ public class MethodKey implements Serializable {
 				sb.append("-");
 
 				for (int i = 0; i < _types.length; i++) {
-					sb.append(_types[i].getClass().getName());
+					sb.append(_types[i].getName());
 				}
 			}
 
