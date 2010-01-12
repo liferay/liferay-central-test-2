@@ -32,13 +32,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
  */
 public class UnicodeFormatter {
 
-	public static char HEX_DIGIT[] = {
-		'0', '1', '2', '3', '4', '5', '6', '7',
-		'8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-	};
-
 	public static String byteToHex(byte b) {
-		char[] array = {HEX_DIGIT[(b >> 4) & 0x0f], HEX_DIGIT[b & 0x0f]};
+		char[] array = {_HEX_DIGITS[(b >> 4) & 0x0f], _HEX_DIGITS[b & 0x0f]};
 
 		return new String(array);
 	}
@@ -48,8 +43,8 @@ public class UnicodeFormatter {
 		byte lo = (byte)(c & 0xff);
 
 		char[] array = {
-			HEX_DIGIT[(hi >> 4) & 0x0f], HEX_DIGIT[hi & 0x0f],
-			HEX_DIGIT[(lo >> 4) & 0x0f], HEX_DIGIT[lo & 0x0f]
+			_HEX_DIGITS[(hi >> 4) & 0x0f], _HEX_DIGITS[hi & 0x0f],
+			_HEX_DIGITS[(lo >> 4) & 0x0f], _HEX_DIGITS[lo & 0x0f]
 		};
 
 		return new String(array);
@@ -90,7 +85,7 @@ public class UnicodeFormatter {
 		char[] hexes = new char[4];
 
 		for (int i = 0; i < array.length; i++) {
-			sb.append("\\u");
+			sb.append(_UNICODE_PREFIX);
 			sb.append(_charToHex(array[i], hexes));
 		}
 
@@ -107,7 +102,7 @@ public class UnicodeFormatter {
 		char[] hexes = new char[4];
 
 		for (int i = 0; i < s.length(); i++) {
-			sb.append("\\u");
+			sb.append(_UNICODE_PREFIX);
 			sb.append(_charToHex(s.charAt(i), hexes));
 		}
 
@@ -118,13 +113,20 @@ public class UnicodeFormatter {
 		byte hi = (byte)(c >>> 8);
 		byte lo = (byte)(c & 0xff);
 
-		hexes[0] = HEX_DIGIT[(hi >> 4) & 0x0f];
-		hexes[1] = HEX_DIGIT[hi & 0x0f];
-		hexes[2] = HEX_DIGIT[(lo >> 4) & 0x0f];
-		hexes[3] = HEX_DIGIT[lo & 0x0f];
+		hexes[0] = _HEX_DIGITS[(hi >> 4) & 0x0f];
+		hexes[1] = _HEX_DIGITS[hi & 0x0f];
+		hexes[2] = _HEX_DIGITS[(lo >> 4) & 0x0f];
+		hexes[3] = _HEX_DIGITS[lo & 0x0f];
 
 		return hexes;
 	}
+
+	private static final char[] _HEX_DIGITS = {
+		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
+		'e', 'f'
+	};
+
+	private static final String _UNICODE_PREFIX = "\\u";
 
 	private static Log _log = LogFactoryUtil.getLog(UnicodeFormatter.class);
 
