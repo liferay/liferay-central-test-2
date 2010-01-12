@@ -113,7 +113,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			<aui:fieldset>
 				<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" value="<%= emailFromName %>" />
 
-				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" value="<%=emailFromAddress  %>" />
+				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" value="<%= emailFromAddress %>" />
 
 				<aui:input inlineLabel="left" label="html-format" name="emailHtmlFormat" type="checkbox" value="<%= MBUtil.getEmailHtmlFormat(preferences) %>" />
 			</aui:fieldset>
@@ -188,6 +188,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				</td>
 			</tr>
 			</table>
+
+			<br />
 		</c:when>
 		<c:when test='<%= tabs2.startsWith("message-") %>'>
 			<aui:fieldset>
@@ -356,6 +358,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				</td>
 			</tr>
 			</table>
+
+			<br />
 		</c:when>
 		<c:when test='<%= tabs2.equals("thread-priorities") %>'>
 			<div class="portlet-msg-info">
@@ -372,8 +376,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 					</aui:field-wrapper>
 				</td>
 				<td>
-					<aui:select label="localized-language" name="languageId" onClick='<%= renderResponse.getNamespace() + "updateLanguage();" %>' >
-						<aui:option value="" />
+					<aui:select label="localized-language" name="languageId" onClick='<%= renderResponse.getNamespace() + "updateLanguage();" %>' showEmptyOption="<%= true %>">
 
 						<%
 						for (int i = 0; i < locales.length; i++) {
@@ -455,7 +458,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 					</table>
 				</td>
 				<td>
-					<table id="<portlet:namespace />localized-priorities-table" class="lfr-table" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %>>
+					<table id="<portlet:namespace />localized-priorities-table" class='<%= (currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "") + " lfr-table" %>'>
 					<tr>
 						<td class="lfr-label">
 							<liferay-ui:message key="name" />
@@ -533,6 +536,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				</td>
 			</tr>
 			</table>
+
+			<br />
 
 			<script type="text/javascript">
 				var changed = false;
@@ -661,8 +666,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 						</aui:field-wrapper>
 					</td>
 					<td class="lfr-label">
-						<aui:select label="localized-language" name="languageId" onChange='<%= renderResponse.getNamespace() + "updateLanguage();" %>' >
-							<aui:option value="" />
+						<aui:select label="localized-language" name="languageId" onChange='<%= renderResponse.getNamespace() + "updateLanguage();" %>' showEmptyOption="<%= true %>">
 
 							<%
 							for (int i = 0; i < locales.length; i++) {
@@ -688,12 +692,12 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 
 						<%
 						for (int i = 0; i < locales.length; i++) {
-						if (locales[i].equals(defaultLocale)) {
-							continue;
-						}
+							if (locales[i].equals(defaultLocale)) {
+								continue;
+							}
 						%>
 
-							<aui:input name="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value='<%= StringUtil.merge(LocalizationUtil.getPreferencesValues(preferences, "ranks", LocaleUtil.toLanguageId(locales[i]), false), StringPool.NEW_LINE) %>' />
+							<aui:input name='<%= "ranks_" + LocaleUtil.toLanguageId(locales[i]) %>' type="hidden" value='<%= StringUtil.merge(LocalizationUtil.getPreferencesValues(preferences, "ranks", LocaleUtil.toLanguageId(locales[i]), false), StringPool.NEW_LINE) %>' />
 
 						<%
 						}
