@@ -85,11 +85,13 @@ public class UnicodeFormatter {
 	}
 
 	public static String toString(char[] array) {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder(array.length * 5);
+
+		char[] hexes = new char[4];
 
 		for (int i = 0; i < array.length; i++) {
 			sb.append("\\u");
-			sb.append(charToHex(array[i]));
+			sb.append(_charToHex(array[i], hexes));
 		}
 
 		return sb.toString();
@@ -100,7 +102,28 @@ public class UnicodeFormatter {
 			return null;
 		}
 
-		return toString(s.toCharArray());
+		StringBuilder sb = new StringBuilder(s.length() * 5);
+
+		char[] hexes = new char[4];
+
+		for (int i = 0; i < s.length(); i++) {
+			sb.append("\\u");
+			sb.append(_charToHex(s.charAt(i), hexes));
+		}
+
+		return sb.toString();
+	}
+
+	private static char[] _charToHex(char c, char[] hexes) {
+		byte hi = (byte)(c >>> 8);
+		byte lo = (byte)(c & 0xff);
+
+		hexes[0] = HEX_DIGIT[(hi >> 4) & 0x0f];
+		hexes[1] = HEX_DIGIT[hi & 0x0f];
+		hexes[2] = HEX_DIGIT[(lo >> 4) & 0x0f];
+		hexes[3] = HEX_DIGIT[lo & 0x0f];
+
+		return hexes;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UnicodeFormatter.class);
