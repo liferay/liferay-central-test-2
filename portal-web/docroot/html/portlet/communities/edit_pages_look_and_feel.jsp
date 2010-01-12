@@ -112,7 +112,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 				}
 				%>
 
-				<liferay-ui:message key="insert-custom-css-that-will-loaded-after-the-theme" />
+				<liferay-ui:message key="insert-custom-css-that-will-be-loaded-after-the-theme" />
 
 				<br /><br />
 
