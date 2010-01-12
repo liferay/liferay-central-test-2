@@ -38,8 +38,7 @@ import com.liferay.portlet.imagegallery.service.permission.IGPermission;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="IGImageAssetRendererFactory.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="IGImageAssetRendererFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
  */

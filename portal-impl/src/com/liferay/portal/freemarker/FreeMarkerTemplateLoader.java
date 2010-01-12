@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * <a href="FreeMarkerTemplateLoader.java.html"><i>View Source</i></a>
+ * <a href="FreeMarkerTemplateLoader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Mika Koivisto
  */

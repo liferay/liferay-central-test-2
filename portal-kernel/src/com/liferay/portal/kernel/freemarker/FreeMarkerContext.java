@@ -23,7 +23,7 @@
 package com.liferay.portal.kernel.freemarker;
 
 /**
- * <a href="FreeMarkerContext.java.html"><i>View Source</i></a>
+ * <a href="FreeMarkerContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Mika Koivisto
  */

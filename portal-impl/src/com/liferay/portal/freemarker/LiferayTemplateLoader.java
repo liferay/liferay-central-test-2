@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <a href="LiferayTemplateLoader.java.html"><i>View Source</i></a>
+ * <a href="LiferayTemplateLoader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Mika Koivisto
  */

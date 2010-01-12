@@ -31,7 +31,7 @@ import java.io.Reader;
 import java.net.URL;
 
 /**
- * <a href="URLTemplateLoader.java.html"><i>View Source</i></a>
+ * <a href="URLTemplateLoader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Mika Koivisto
  */

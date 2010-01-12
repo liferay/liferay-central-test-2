@@ -35,7 +35,7 @@ import java.net.URL;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="ServletTemplateLoader.java.html"><i>View Source</i></a>
+ * <a href="ServletTemplateLoader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Mika Koivisto
  */

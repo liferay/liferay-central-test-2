@@ -29,7 +29,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * <a href="URLTemplateSource.java.html"><i>View Source</i></a>
+ * <a href="URLTemplateSource.java.html"><b><i>View Source</i></b></a>
  *
  * @author Mika Koivisto
  */

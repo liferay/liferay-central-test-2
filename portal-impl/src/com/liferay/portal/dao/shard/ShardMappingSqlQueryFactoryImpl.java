@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import javax.sql.DataSource;
 
 /**
- * <a href="ShardMappingSqlQueryFactoryImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ShardMappingSqlQueryFactoryImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Alexander Chow
  */

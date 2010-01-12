@@ -52,7 +52,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="FreeMarkerTemplateParser.java.html"><i>View Source</i></a>
+ * <a href="FreeMarkerTemplateParser.java.html"><b><i>View Source</i></b></a>
  *
  * @author Mika Koivisto
  */
