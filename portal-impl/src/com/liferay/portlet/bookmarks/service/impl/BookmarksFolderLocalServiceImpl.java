@@ -358,14 +358,12 @@ public class BookmarksFolderLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Folder
+		// Merge folders
 
 		BookmarksFolder folder = bookmarksFolderPersistence.findByPrimaryKey(
 			folderId);
 
 		parentFolderId = getParentFolderId(folder, parentFolderId);
-
-		// Merge folders
 
 		if (mergeWithParentFolder && (folderId != parentFolderId)) {
 			mergeFolders(folder, parentFolderId);

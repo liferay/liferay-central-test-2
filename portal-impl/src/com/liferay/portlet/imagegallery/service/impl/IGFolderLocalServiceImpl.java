@@ -357,13 +357,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			boolean mergeWithParentFolder, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Folder
+		// Merge folders
 
 		IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
 
 		parentFolderId = getParentFolderId(folder, parentFolderId);
-
-		// Merge folders
 
 		if (mergeWithParentFolder && (folderId != parentFolderId)) {
 			mergeFolders(folder, parentFolderId);

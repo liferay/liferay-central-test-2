@@ -283,14 +283,12 @@ public class ShoppingCategoryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Category
+		// Merge categories
 
 		ShoppingCategory category =
 			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
-
-		// Merge categories
 
 		if (mergeWithParentCategory &&
 			(categoryId != parentCategoryId) &&

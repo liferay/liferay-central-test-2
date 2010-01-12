@@ -448,14 +448,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			boolean mergeWithParentCategory, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Category
+		// Merge categories
 
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			categoryId);
 
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
-
-		// Merge categories
 
 		if (mergeWithParentCategory &&
 			(categoryId != parentCategoryId) &&
