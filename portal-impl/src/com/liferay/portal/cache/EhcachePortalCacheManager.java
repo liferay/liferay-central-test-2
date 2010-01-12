@@ -77,10 +77,10 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		Ehcache cache = _cacheManager.getEhcache(name);
 
 		if (cache == null) {
-			synchronized(_cacheManager) {
-
+			synchronized (_cacheManager) {
 				cache = _cacheManager.getEhcache(name);
-				if(cache == null) {
+
+				if (cache == null) {
 					try {
 						_cacheManager.addCache(name);
 					}
