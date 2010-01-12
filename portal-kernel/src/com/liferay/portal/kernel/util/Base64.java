@@ -83,18 +83,24 @@ public class Base64 {
 	}
 
 	public static String encode(byte raw[]) {
+		return encode(raw, 0, raw.length);
+	}
+
+	public static String encode(byte raw[], int offset, int length) {
 		StringBuilder encoded = new StringBuilder();
 
-		for (int i = 0; i < raw.length; i += 3) {
-			encoded.append(encodeBlock(raw, i));
+		int lastIndex = Math.min(raw.length, offset + length);
+
+		for (int i = offset; i < lastIndex; i += 3) {
+			encoded.append(encodeBlock(raw, i, lastIndex));
 		}
 
 		return encoded.toString();
 	}
 
-	protected static char[] encodeBlock(byte raw[], int offset) {
+	protected static char[] encodeBlock(byte raw[], int offset, int lastIndex) {
 		int block = 0;
-		int slack = raw.length - offset - 1;
+		int slack = lastIndex - offset - 1;
 		int end = slack < 2 ? slack : 2;
 
 		for (int i = 0; i <= end; i++) {
@@ -174,7 +180,7 @@ public class Base64 {
 			_log.error(e, e);
 		}
 
-		return encode(ubaos.toByteArray());
+		return encode(ubaos.unsafeGetByteArray(), 0, ubaos.size());
 	}
 
 	public static Object stringToObject(String s) {

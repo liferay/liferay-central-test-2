@@ -124,15 +124,14 @@ public class PortletRequestUtil {
 
 			StreamUtil.transfer(is, ubaos);
 
-			byte[] bytes = ubaos.toByteArray();
+			int size = ubaos.size();
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Byte array size from the raw input stream is " +
-						bytes.length);
+					"Byte array size from the raw input stream is " + size);
 			}
 
-			return bytes.length;
+			return size;
 		}
 
 		return -1;

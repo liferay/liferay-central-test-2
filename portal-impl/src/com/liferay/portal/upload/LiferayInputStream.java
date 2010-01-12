@@ -93,7 +93,8 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 		}
 		else {
 			return new UnsyncByteArrayInputStreamWrapper(
-				new UnsyncByteArrayInputStream(_cachedBytes.toByteArray()));
+				new UnsyncByteArrayInputStream(
+					_cachedBytes.unsafeGetByteArray(), 0, _cachedBytes.size()));
 		}
 	}
 

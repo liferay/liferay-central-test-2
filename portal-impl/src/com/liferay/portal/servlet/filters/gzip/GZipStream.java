@@ -59,12 +59,13 @@ public class GZipStream extends ServletOutputStream {
 
 		_gzipOutputStream.finish();
 
-		byte[] bytes = _unsyncByteArrayOutputStream.toByteArray();
+		int size = _unsyncByteArrayOutputStream.size();
 
-		_response.setContentLength(bytes.length);
+		_response.setContentLength(size);
 		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
 
-		_outputStream.write(bytes);
+		_outputStream.write(
+			_unsyncByteArrayOutputStream.unsafeGetByteArray(), 0, size);
 
 		_outputStream.flush();
 		_outputStream.close();

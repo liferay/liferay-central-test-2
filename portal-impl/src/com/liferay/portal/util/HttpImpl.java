@@ -758,7 +758,7 @@ public class HttpImpl implements Http {
 				ubaos.write(bytes, 0, i);
 			}
 
-			xml = new String(ubaos.toByteArray());
+			xml = new String(ubaos.unsafeGetByteArray(), 0, ubaos.size());
 
 			is.close();
 			ubaos.close();

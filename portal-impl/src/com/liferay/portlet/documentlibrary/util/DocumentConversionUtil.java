@@ -154,7 +154,7 @@ public class DocumentConversionUtil {
 
 			converter.convert(is, inputFormat, ubaos, outputFormat);
 
-			FileUtil.write(file, ubaos.toByteArray());
+			FileUtil.write(file, ubaos.unsafeGetByteArray(), 0, ubaos.size());
 		}
 
 		return new FileInputStream(file);

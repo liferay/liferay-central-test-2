@@ -25,6 +25,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.audit.AuditMessage;
 import com.liferay.portal.kernel.audit.AuditRouterUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -904,8 +905,11 @@ public class LayoutAction extends Action {
 		renderResponseImpl.transferHeaders(response);
 
 		if (stringResponse.isCalledGetOutputStream()) {
+			UnsyncByteArrayOutputStream ubaos =
+				stringResponse.getUnsyncByteArrayOutputStream();
+
 			InputStream is = new UnsyncByteArrayInputStream(
-				stringResponse.getUnsyncByteArrayOutputStream().toByteArray());
+				ubaos.unsafeGetByteArray(), 0, ubaos.size());
 
 			ServletResponseUtil.sendFile(
 				response, renderResponseImpl.getResourceName(), is,
