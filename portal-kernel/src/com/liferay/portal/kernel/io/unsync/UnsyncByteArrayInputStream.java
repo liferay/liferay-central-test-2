@@ -44,7 +44,7 @@ public class UnsyncByteArrayInputStream extends InputStream {
 	public UnsyncByteArrayInputStream(byte[] buffer, int offset, int length) {
 		this.buffer = buffer;
 		this.index = offset;
-		this.capacity = Math.max(buffer.length, offset + length);
+		this.capacity = Math.min(buffer.length, offset + length);
 		this.markIndex = offset;
 	}
 
