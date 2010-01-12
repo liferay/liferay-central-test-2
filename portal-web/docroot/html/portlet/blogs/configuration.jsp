@@ -101,7 +101,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$COMPANY_ID$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-company-id-associated-with-the-blogs" />
+					<liferay-ui:message key="the-company-id-associated-with-the-blog" />
 				</td>
 			</tr>
 			<tr>
@@ -109,7 +109,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$COMPANY_MX$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-company-mx-associated-with-the-blogs" />
+					<liferay-ui:message key="the-company-mx-associated-with-the-blog" />
 				</td>
 			</tr>
 			<tr>
@@ -117,7 +117,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$COMPANY_NAME$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-company-name-associated-with-the-blogs" />
+					<liferay-ui:message key="the-company-name-associated-with-the-blog" />
 				</td>
 			</tr>
 			<tr>
@@ -125,7 +125,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$COMMUNITY_NAME$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-community-name-associated-with-the-blogs" />
+					<liferay-ui:message key="the-community-name-associated-with-the-blog" />
 				</td>
 			</tr>
 			<tr>
@@ -133,7 +133,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$BLOGS_ENTRY_USER_ADDRESS$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-blogs-entry" />
+					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-blog-entry" />
 				</td>
 			</tr>
 			<tr>
@@ -141,7 +141,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$BLOGS_ENTRY_USER_NAME$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-user-who-added-the-blogs-entry" />
+					<liferay-ui:message key="the-user-who-added-the-blog-entry" />
 				</td>
 			</tr>
 			<tr>
@@ -189,7 +189,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$COMPANY_ID$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-company-id-associated-with-the-blogs" />
+					<liferay-ui:message key="the-company-id-associated-with-the-blog" />
 				</td>
 			</tr>
 			<tr>
@@ -197,7 +197,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$COMPANY_MX$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-company-mx-associated-with-the-blogs" />
+					<liferay-ui:message key="the-company-mx-associated-with-the-blog" />
 				</td>
 			</tr>
 			<tr>
@@ -205,7 +205,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$COMPANY_NAME$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-company-name-associated-with-the-blogs" />
+					<liferay-ui:message key="the-company-name-associated-with-the-blog" />
 				</td>
 			</tr>
 			<tr>
@@ -213,7 +213,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$COMMUNITY_NAME$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-community-name-associated-with-the-blogs" />
+					<liferay-ui:message key="the-community-name-associated-with-the-blog" />
 				</td>
 			</tr>
 			<tr>
@@ -221,7 +221,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$BLOGS_ENTRY_USER_ADDRESS$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-blogs-entry" />
+					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-blog-entry" />
 				</td>
 			</tr>
 			<tr>
@@ -229,7 +229,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$BLOGS_ENTRY_USER_NAME$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-user-who-added-the-blogs-entry" />
+					<liferay-ui:message key="the-user-who-added-the-blog-entry" />
 				</td>
 			</tr>
 			<tr>
@@ -237,7 +237,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 					<strong>[$BLOGS_ENTRY_URL$]</strong>
 				</td>
 				<td>
-					<liferay-ui:message key="the-blogs-entry-url" />
+					<liferay-ui:message key="the-blog-entry-url" />
 				</td>
 			</tr>
 			<tr>
