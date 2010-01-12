@@ -28,12 +28,10 @@ import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 import com.liferay.portal.kernel.scripting.UnsupportedLanguageException;
-import com.liferay.portal.kernel.servlet.StringServletOutputStream;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
 import java.io.LineNumberReader;
-import java.io.PrintStream;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -172,12 +170,10 @@ public class ScriptingImpl implements Scripting {
 			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream();
 
-			PrintStream ps = new PrintStream(
-				new StringServletOutputStream(unsyncByteArrayOutputStream));
-
 			Py.displayException(
 				pySyntaxError.type, pySyntaxError.value,
-				pySyntaxError.traceback, new PyFile(ps));
+				pySyntaxError.traceback,
+				new PyFile(unsyncByteArrayOutputStream));
 
 			message = unsyncByteArrayOutputStream.toString();
 		}

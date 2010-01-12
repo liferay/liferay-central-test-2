@@ -63,8 +63,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.log4j.Log4JUtil;
 
-import java.io.PrintStream;
-
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -320,9 +318,7 @@ public class EditServerAction extends PortletAction {
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
-		PrintStream printStream = new PrintStream(unsyncByteArrayOutputStream);
-
-		portletObjects.put("out", printStream);
+		portletObjects.put("out", unsyncByteArrayOutputStream);
 
 		try {
 			ScriptingUtil.exec(null, portletObjects, language, script);
