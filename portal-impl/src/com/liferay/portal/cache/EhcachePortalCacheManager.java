@@ -77,21 +77,27 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		Ehcache cache = _cacheManager.getEhcache(name);
 
 		if (cache == null) {
-			try {
-				_cacheManager.addCache(name);
-			}
-			catch (ObjectExistsException oee) {
+			synchronized(_cacheManager) {
 
-				// LEP-7122
+				cache = _cacheManager.getEhcache(name);
+				if(cache == null) {
+					try {
+						_cacheManager.addCache(name);
+					}
+					catch (ObjectExistsException oee) {
 
-			}
+						// LEP-7122
 
-			cache = _cacheManager.getEhcache(name);
+					}
 
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Cache name " + name + " is using implementation " +
-						cache.getClass().getName());
+					cache = _cacheManager.getEhcache(name);
+
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Cache name " + name + " is using implementation " +
+								cache.getClass().getName());
+					}
+				}
 			}
 		}
 
