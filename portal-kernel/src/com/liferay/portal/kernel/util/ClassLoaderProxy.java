@@ -166,9 +166,8 @@ public class ClassLoaderProxy {
 			oos.flush();
 			oos.close();
 
-			UnsyncByteArrayInputStream bais =
-				new UnsyncByteArrayInputStream(
-					ubaos.unsafeGetByteArray(), 0, ubaos.size());
+			UnsyncByteArrayInputStream bais = new UnsyncByteArrayInputStream(
+				ubaos.unsafeGetByteArray(), 0, ubaos.size());
 			ObjectInputStream ois = new ClassLoaderObjectInputStream(
 				bais, contextClassLoader);
 

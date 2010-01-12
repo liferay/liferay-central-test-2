@@ -71,34 +71,6 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 		return new String(buffer, 0, index, charsetName);
 	}
 
-	/**
-	 * <p>
-	 * This method is very dangerous, it returns the internal byte[] buffer
-	 * directly without copy protection. Consider to use toByteArray() which is
-	 * much more safer. Use this method only when you are 100% sure what you are
-	 * doing!
-	 * </p>
-	 * <p>
-	 * It must work with size() method to indicate where is the last valid byte.
-	 * </p>
-	 * <p>
-	 * Since there is no copy protection, any modification to the return byte[]
-	 * will propagate to the source output stream, on the other side, any
-	 * modification to the source output stream will also propagate to the
-	 * return byte[]. There is no way to detect or prevent these kinds of
-	 * modification propagating, so again this is very dangerous!
-	 * </p>
-	 * <p>
-	 * The only situation you will need this method is when using
-	 * UnsyncByteArrayOutputStream to collect data, after the collection the
-	 * data has to be transfer to other place for further processing. No other
-	 * code will ever use the original UnsyncByteArrayOutputStream any more, so
-	 * it is safe to deliver the internal buffer to other code. When you are
-	 * collecting huge data, this metod can save you a lot of temporary byte[]
-	 * buffers.
-	 * </p>
-	 * @return the internal byte[] buffer
-	 */
 	public byte[] unsafeGetByteArray() {
 		return buffer;
 	}
