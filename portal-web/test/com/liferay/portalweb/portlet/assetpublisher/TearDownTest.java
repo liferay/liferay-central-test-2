@@ -352,7 +352,6 @@ public class TearDownTest extends BaseTestCase {
 						fail("timeout");
 					}
 
-
 					try {
 						if (selenium.isElementPresent("//div[5]/ul/li[5]/a")) {
 							break;
