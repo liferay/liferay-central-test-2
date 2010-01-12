@@ -721,13 +721,19 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public void write(File file, byte[] bytes) throws IOException {
+		write(file, bytes, 0, bytes.length);
+	}
+
+	public void write(File file, byte[] bytes, int offset, int length)
+		throws IOException {
+
 		if (file.getParent() != null) {
 			mkdirs(file.getParent());
 		}
 
 		FileOutputStream fos = new FileOutputStream(file);
 
-		fos.write(bytes);
+		fos.write(bytes, offset, length);
 
 		fos.close();
 	}

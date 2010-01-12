@@ -281,6 +281,12 @@ public class FileUtil {
 		getFile().write(file, bytes);
 	}
 
+	public static void write(File file, byte[] bytes, int offset, int length)
+		throws IOException {
+
+		getFile().write(file, bytes, offset, length);
+	}
+
 	public static void write(String fileName, InputStream is)
 		throws IOException {
 
