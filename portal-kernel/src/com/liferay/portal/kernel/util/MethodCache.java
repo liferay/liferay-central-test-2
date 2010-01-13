@@ -72,6 +72,10 @@ public class MethodCache {
 		return _instance._get(methodKey);
 	}
 
+	public static Method put(MethodKey methodKey, Method method) {
+		return _instance._put(methodKey, method);
+	}
+
 	private MethodCache() {
 		_classesMap = new HashMap<String, Class<?>>();
 		_methodsMap = new HashMap<MethodKey, Method>();
@@ -118,6 +122,10 @@ public class MethodCache {
 		}
 
 		return method;
+	}
+
+	public Method _put(MethodKey methodKey, Method method) {
+		return _methodsMap.put(methodKey, method);
 	}
 
 	private static MethodCache _instance = new MethodCache();

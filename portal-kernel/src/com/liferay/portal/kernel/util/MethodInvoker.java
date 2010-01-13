@@ -189,8 +189,10 @@ public class MethodInvoker {
 
 		Method method = null;
 
+		MethodKey methodKey = null;
+
 		try {
-			MethodKey methodKey = new MethodKey(
+			methodKey = new MethodKey(
 				methodWrapper.getClassName(), methodWrapper.getMethodName(),
 				parameterTypes.toArray(new Class[parameterTypes.size()]));
 
@@ -230,6 +232,8 @@ public class MethodInvoker {
 
 					if (correctParams) {
 						method = methods[i];
+
+						MethodCache.put(methodKey, method);
 
 						break;
 					}
