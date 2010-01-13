@@ -105,7 +105,7 @@ public class AddEntryGeneralTest extends BaseTestCase {
 				"Hello Everyone! This is a test general announcement for everyone! Yay."));
 		selenium.select("_84_displayDateMonth",
 			RuntimeVariables.replace("label=January"));
-		selenium.select("//select[3]", RuntimeVariables.replace("label=2004"));
+		selenium.select("//select[3]", RuntimeVariables.replace("label=2005"));
 		selenium.select("//div[2]/select[1]",
 			RuntimeVariables.replace("label=12"));
 		selenium.select("//div[2]/select[2]",
@@ -126,6 +126,7 @@ public class AddEntryGeneralTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Entries", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent("link=Test General Announcement"));
 	}
 }

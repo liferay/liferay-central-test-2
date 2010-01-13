@@ -108,7 +108,7 @@ public class AddEntryPriorityImportantTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Important"));
 		selenium.select("_84_displayDateMonth",
 			RuntimeVariables.replace("label=January"));
-		selenium.select("//select[3]", RuntimeVariables.replace("label=2004"));
+		selenium.select("//select[3]", RuntimeVariables.replace("label=2005"));
 		selenium.select("//div[2]/select[1]",
 			RuntimeVariables.replace("label=12"));
 		selenium.select("//div[2]/select[2]",
