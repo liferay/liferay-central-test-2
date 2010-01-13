@@ -67,7 +67,7 @@ String format = ParamUtil.getString(request, "format");
 <input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
 
 <div class="add-search-provider">
-	<input type="button" value="<liferay-ui:message key="add-liferay-as-a-search-provider" />" onClick='window.external.AddSearchProvider("http://localhost:8080/c/search/open_search_description.xml");' />
+	<input type="button" value='<%= LanguageUtil.format(pageContext, "add-x-as-a-search-provider", company.getName(), false) %>' onClick='window.external.AddSearchProvider("<%= themeDisplay.getPortalURL() %><%= PortalUtil.getPathMain() %>/search/open_search_description.xml?targetPlid=<%= themeDisplay.getPlid() %>&targetGroupId=<%= groupId %>");' />
 </div>
 
 <%
