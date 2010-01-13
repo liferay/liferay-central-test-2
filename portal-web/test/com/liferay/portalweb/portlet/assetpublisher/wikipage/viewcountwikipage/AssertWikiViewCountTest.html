@@ -1,0 +1,94 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AssertWikiViewCountTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AssertWikiViewCountTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Asset Publisher Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Asset Publisher Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>FrontPage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeIncrementedText</td>
+	<td>//div[2]/span</td>
+	<td>viewCount</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Asset Publisher Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Asset Publisher Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>//div[2]/span</td>
+	<td>${viewCount}</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeIncrementedText</td>
+	<td>//div/div/div[3]</td>
+	<td>viewCount2</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Wiki Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Asset Publisher Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Asset Publisher Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>//div[2]/span</td>
+	<td>${viewCount2}</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
