@@ -44,19 +44,29 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAtAndWait</td>
+	<td>link=Display Settings</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>_86_pageDisplayStyle</td>
 	<td>label=Abstract</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>clickAtAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>You have successfully updated the setup.</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[5]/div/div/div/div</td>
+	<td>You have successfully updated the setup.</td>
 </tr>
 
 </tbody></table>

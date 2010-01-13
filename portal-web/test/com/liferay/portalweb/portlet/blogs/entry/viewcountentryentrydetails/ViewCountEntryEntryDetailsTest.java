@@ -56,6 +56,27 @@ public class ViewCountEntryEntryDetailsTest extends BaseTestCase {
 		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+
 		String viewCount = selenium.getIncrementedText("//div[2]/span[1]");
 		RuntimeVariables.setValue("viewCount", viewCount);
 

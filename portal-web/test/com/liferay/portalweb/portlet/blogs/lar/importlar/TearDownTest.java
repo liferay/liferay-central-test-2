@@ -58,6 +58,57 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("link=Blogs Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
+				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Configuration")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("link=Configuration",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Display Settings",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.select("_86_pageDisplayStyle",
+					RuntimeVariables.replace("label=Full Content"));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Blogs Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("link=Blogs Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
 				boolean entry1Present = selenium.isElementPresent("link=Delete");
 

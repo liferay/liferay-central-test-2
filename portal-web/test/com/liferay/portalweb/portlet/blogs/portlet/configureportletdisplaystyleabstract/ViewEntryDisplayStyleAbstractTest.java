@@ -53,6 +53,7 @@ public class ViewEntryDisplayStyleAbstractTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));
 		assertTrue(selenium.isTextPresent("Content."));

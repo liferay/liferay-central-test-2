@@ -54,6 +54,7 @@ public class ViewEntryEntryDetailsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//form/div/div[1]/div[1]"));
 		assertEquals(RuntimeVariables.replace("By Joe Bloggs"),

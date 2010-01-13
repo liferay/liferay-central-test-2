@@ -75,11 +75,15 @@ public class ConfigurePortletDisplayStyleAbstractTest extends BaseTestCase {
 
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Display Settings", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_pageDisplayStyle",
 			RuntimeVariables.replace("label=Abstract"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[5]/div/div/div/div"));
 	}
 }
