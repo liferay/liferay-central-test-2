@@ -29,6 +29,8 @@ package com.liferay.portal.kernel.util;
  */
 public interface WebKeys {
 
+	public static final String AUI_SCRIPT_DATA = "AUI_SCRIPT_DATA";
+
 	public static final String CLP_MESSAGE_LISTENERS = "CLP_MESSAGE_LISTENERS";
 
 	public static final String CTX = "CTX";

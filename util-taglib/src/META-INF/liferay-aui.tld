@@ -466,6 +466,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>script</name>
+		<tag-class>com.liferay.taglib.aui.ScriptTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>use</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>select</name>
 		<tag-class>com.liferay.taglib.aui.SelectTag</tag-class>
 		<body-content>JSP</body-content>
