@@ -935,15 +935,6 @@ public class StringUtil {
 
 		s = s.trim();
 
-		if (!s.endsWith(delimiter)) {
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(s);
-			sb.append(delimiter);
-
-			s = sb.toString();
-		}
-
 		if (s.equals(delimiter)) {
 			return new String[0];
 		}
@@ -974,10 +965,14 @@ public class StringUtil {
 			int pos = s.indexOf(delimiter, offset);
 
 			while (pos != -1) {
-				nodeValues.add(new String(s.substring(offset, pos)));
+				nodeValues.add(s.substring(offset, pos));
 
 				offset = pos + delimiter.length();
 				pos = s.indexOf(delimiter, offset);
+			}
+
+			if (offset < s.length()) {
+				nodeValues.add(s.substring(offset));
 			}
 		}
 
