@@ -25,8 +25,7 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <%
-long targetPlid = ParamUtil.getLong(request, "targetPlid");
-long targetGroupId = ParamUtil.getLong(request, "targetGroupId");
+long groupId = ParamUtil.getLong(request, "groupId");
 
 response.setContentType(ContentTypes.TEXT_XML_UTF8);
 %>
@@ -37,20 +36,20 @@ response.setContentType(ContentTypes.TEXT_XML_UTF8);
 	<ShortName><%= LanguageUtil.format(pageContext, "x-search", company.getName(), false) %></ShortName>
 	<Description><%= LanguageUtil.format(pageContext, "x-search-provider", company.getName(), false) %></Description>
 
-	<c:if test="<%= targetPlid > 0 %>">
+	<c:if test="<%= groupId > 0 %>">
 
 		<%
-		PortletURL searchURL = new PortletURLImpl(request, PortletKeys.SEARCH, targetPlid, PortletRequest.RENDER_PHASE);
+		PortletURLImpl searchURL = new PortletURLImpl(request, PortletKeys.SEARCH, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		searchURL.setWindowState(WindowState.MAXIMIZED);
 
-		searchURL.setParameter("struts_action", "/search/search");
-		searchURL.setParameter("groupId", String.valueOf(targetGroupId));
+		searchURL.setEscapeXml(true);
 
-		String templateURL = StringUtil.replace(searchURL.toString(), StringPool.AMPERSAND, StringPool.AMPERSAND_ENCODED);
+		searchURL.setParameter("struts_action", "/search/search");
+		searchURL.setParameter("groupId", String.valueOf(groupId));
 		%>
 
-		<Url type="text/html" template="<%= templateURL %>&amp;keywords={searchTerms}" />
+		<Url type="text/html" template="<%= searchURL.toString() %>&amp;keywords={searchTerms}" />
 	</c:if>
 
 	<Url type="application/atom+xml" template="<%= themeDisplay.getPortalURL() %><%= PortalUtil.getPathMain() %>/search/open_search?keywords={searchTerms}&amp;p={startPage?}&amp;c={count?}&amp;format=atom" />
