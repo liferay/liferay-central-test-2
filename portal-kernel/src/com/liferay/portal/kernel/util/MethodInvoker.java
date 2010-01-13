@@ -187,9 +187,9 @@ public class MethodInvoker {
 			}
 		}
 
-		Method method = null;
-
 		MethodKey methodKey = null;
+
+		Method method = null;
 
 		try {
 			methodKey = new MethodKey(
