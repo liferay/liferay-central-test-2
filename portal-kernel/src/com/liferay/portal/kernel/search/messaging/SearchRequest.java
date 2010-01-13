@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.search.Sort;
 
 import java.io.Serializable;
 
+import java.util.Arrays;
+
 /**
  * <a href="SearchRequest.java.html"><b><i>View Source</i></b></a>
  *
@@ -169,7 +171,7 @@ public class SearchRequest implements Serializable {
 		sb.append(", query=");
 		sb.append(_query);
 		sb.append(", sorts=");
-		sb.append(_sorts);
+		sb.append(Arrays.toString(_sorts));
 		sb.append(", start=");
 		sb.append(_start);
 		sb.append(", end=");

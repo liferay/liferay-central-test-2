@@ -47,6 +47,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -149,7 +150,8 @@ public class JSONServiceAction extends JSONAction {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Invoking class " + classObj + " on method " +
-							method.getName() + " with args " + args);
+							method.getName() + " with args " +
+								Arrays.toString(args));
 				}
 
 				Object returnObj = method.invoke(classObj, args);
@@ -167,7 +169,8 @@ public class JSONServiceAction extends JSONAction {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Invoked class " + classObj + " on method " +
-							method.getName() + " with args " + args,
+							method.getName() + " with args " +
+								Arrays.toString(args),
 						e);
 				}
 

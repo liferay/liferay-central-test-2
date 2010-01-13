@@ -38,6 +38,7 @@ import java.io.File;
 
 import java.net.SocketException;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
 
@@ -250,14 +251,14 @@ public class MailEngine {
 			stopWatch.start();
 
 			_log.debug("From: " + from);
-			_log.debug("To: " + to);
-			_log.debug("CC: " + cc);
-			_log.debug("BCC: " + bcc);
-			_log.debug("List Addresses: " + bulkAddresses);
+			_log.debug("To: " + Arrays.toString(to));
+			_log.debug("CC: " + Arrays.toString(cc));
+			_log.debug("BCC: " + Arrays.toString(bcc));
+			_log.debug("List Addresses: " + Arrays.toString(bulkAddresses));
 			_log.debug("Subject: " + subject);
 			_log.debug("Body: " + body);
 			_log.debug("HTML Format: " + htmlFormat);
-			_log.debug("Reply to: " + replyTo);
+			_log.debug("Reply to: " + Arrays.toString(replyTo));
 			_log.debug("Message ID: " + messageId);
 			_log.debug("In Reply To: " + inReplyTo);
 

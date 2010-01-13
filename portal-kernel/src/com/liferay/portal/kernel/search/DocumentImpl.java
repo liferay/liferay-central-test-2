@@ -37,6 +37,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -337,7 +338,7 @@ public class DocumentImpl implements Document {
 
 			sb.append(field.getName());
 			sb.append(StringPool.EQUAL);
-			sb.append(field.getValues());
+			sb.append(Arrays.toString(field.getValues()));
 		}
 
 		sb.append(StringPool.CLOSE_CURLY_BRACE);

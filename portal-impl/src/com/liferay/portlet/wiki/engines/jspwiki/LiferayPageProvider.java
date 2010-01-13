@@ -36,6 +36,7 @@ import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -77,7 +78,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 
 	public Collection<WikiPage> findPages(QueryItem[] query) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Invoking findPages(" + query + ")");
+			_log.debug("Invoking findPages(" + Arrays.toString(query) + ")");
 		}
 
 		return Collections.EMPTY_LIST;
