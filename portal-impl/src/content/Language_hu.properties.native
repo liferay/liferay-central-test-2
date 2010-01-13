@@ -88,6 +88,7 @@ activity-wiki-add-page-in={1} wrote a new wiki page, {2}, in {0}.
 activity-wiki-add-page={1} wrote a new wiki page, {2}.
 activity-wiki-update-page-in={1} updated a wiki page, {2}, in {0}.
 activity-wiki-update-page={1} updated a wiki page, {2}.
+add-x-as-a-search-provider=Add {0} as a Search Provider (Automatic Copy)
 add-x=Add {0}
 all-commits-on-x=All commits on {0}.
 all-email-from-x-is-being-forwarded-to-x=All email from {0} is being forwarded to {1}.
@@ -315,6 +316,8 @@ x-needs-to-approve-you-as-her-friend={0} needs to approve you as her friend.
 x-needs-to-approve-you-as-his-friend={0} needs to approve you as his friend.
 x-of-the-emails-in-this-folder-have-been-downloaded={0}% of the emails in this folder have been downloaded. This may take a while to finish.
 x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> people are planning to attend this meetup.
+x-search-provider={0} Search Provider (Automatic Copy)
+x-search={0} Search (Automatic Copy)
 x-users-were-successfully-notified={0} users were successfully notified.
 you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}">Terms of Use</a>. All reports are strictly confidential.
 you-are-impersonating-x=You are impersonating {0}. (Automatic Copy)
