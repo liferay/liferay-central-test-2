@@ -127,7 +127,7 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 					<aui:input name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 
-					<aui:input cssClass="input-text-search" inlineField="<%= true %>" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
+					<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
 
 					<aui:button type="submit" value="search" />
 				</aui:form>

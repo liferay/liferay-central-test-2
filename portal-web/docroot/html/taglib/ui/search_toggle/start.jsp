@@ -30,7 +30,7 @@
 	<div class="<%= clickValue.equals("basic") ? "" : "aui-helper-hidden" %>" id="<%= id %>basic">
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(buttonLabel) %>">
-				<aui:input cssClass="input-text-search" id="<%= id + displayTerms.KEYWORDS %>" label="" name="<%= displayTerms.KEYWORDS %>" size="30" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
+				<aui:input id="<%= id + displayTerms.KEYWORDS %>" inlineField="<%= true %>" label="" name="<%= displayTerms.KEYWORDS %>" size="30" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
 
 				<aui:button type="submit" value="<%= buttonLabel %>" />
 

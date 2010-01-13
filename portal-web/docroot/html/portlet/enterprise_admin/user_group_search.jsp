@@ -31,7 +31,7 @@ UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getD
 %>
 
 <div>
-	<aui:input cssClass="input-text-search" label="" name="<%= displayTerms.NAME %>" size="30" type="text" value="<%= displayTerms.getName() %>" />
+	<aui:input inlineField="<%= true %>" label="" name="<%= displayTerms.NAME %>" size="30" type="text" value="<%= displayTerms.getName() %>" />
 
 	<aui:button type="submit" value="search" />
 </div>

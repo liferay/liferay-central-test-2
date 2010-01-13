@@ -97,7 +97,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 					<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
 					<aui:input name="searchCategoryId" type="hidden" value="<%= categoryId %>" />
 
-					<aui:input cssClass="input-text-search" id="keywords1" label="" name="keywords" size="30" type="text" />
+					<aui:input id="keywords1" inlineField="<%= true %>" label="" name="keywords" size="30" type="text" />
 
 					<aui:button type="submit" value="search" />
 				</aui:form>
