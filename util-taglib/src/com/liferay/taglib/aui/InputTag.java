@@ -106,15 +106,6 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 				"aui:model-context:model");
 		}
 
-		if (_inlineLabel == null) {
-			if (Validator.equals(_type, "radio")) {
-				_inlineLabel = "right";
-			}
-			if (Validator.equals(_type, "checkbox")) {
-				_inlineLabel = "left";
-			}
-		}
-
 		request.setAttribute("aui:input:bean", _bean);
 		request.setAttribute("aui:input:checked", String.valueOf(_checked));
 		request.setAttribute("aui:input:cssClass", _cssClass);

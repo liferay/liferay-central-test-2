@@ -32,7 +32,8 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:suffix"));
 %>
 
-		</select>
+			</select>
+        </span>
 
 		<c:if test="<%= Validator.isNotNull(suffix) %>">
 			<span class="aui-suffix">

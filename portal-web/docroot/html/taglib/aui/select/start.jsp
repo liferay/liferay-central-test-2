@@ -42,10 +42,10 @@ String prefix = GetterUtil.getString((String)request.getAttribute("aui:select:pr
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 %>
 
-<span class="aui-field aui-field-menu aui-field-select <%= disabled ? "aui-field-disabled" : StringPool.BLANK %> <%= inlineField ? "aui-field-labels-inline" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-field-first" : StringPool.BLANK %> <%= last ? "aui-field-last" : StringPool.BLANK %> ">
+<span class="aui-field aui-field-menu aui-field-select <%= disabled ? "aui-field-disabled" : StringPool.BLANK %> <%= inlineField ? "aui-field-inline" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-field-first" : StringPool.BLANK %> <%= last ? "aui-field-last" : StringPool.BLANK %> ">
 	<span class="aui-field-content">
 		<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-			<label class="aui-field-label" for="<%= name %>">
+			<label class="aui-field-label <%= Validator.isNotNull(inlineLabel) ? "aui-field-label-inline" : StringPool.BLANK %>" for="<%= name %>">
 				<liferay-ui:message key="<%= label %>" />
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -60,25 +60,26 @@ boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("au
 			</span>
 		</c:if>
 
-		<select class="aui-field-input aui-field-input-menu aui-field-input-select" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
-			<c:if test="<%= showEmptyOption %>">
-				<aui:option />
-			</c:if>
+		<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
+			<select class="aui-field-input aui-field-input-menu aui-field-input-select" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+				<c:if test="<%= showEmptyOption %>">
+					<aui:option />
+				</c:if>
 
-			<c:if test="<%= Validator.isNotNull(listType) %>">
+				<c:if test="<%= Validator.isNotNull(listType) %>">
 
-				<%
-				int listTypeId = ParamUtil.getInteger(request, (String)request.getAttribute("aui:select:name"), BeanParamUtil.getInteger(bean, request, "typeId"));
+					<%
+					int listTypeId = ParamUtil.getInteger(request, (String)request.getAttribute("aui:select:name"), BeanParamUtil.getInteger(bean, request, "typeId"));
 
-				List<ListType> listTypeModels = ListTypeServiceUtil.getListTypes(listType);
+					List<ListType> listTypeModels = ListTypeServiceUtil.getListTypes(listType);
 
-				for (ListType listTypeModel : listTypeModels) {
-				%>
+					for (ListType listTypeModel : listTypeModels) {
+					%>
 
-					<aui:option selected="<%= listTypeId == listTypeModel.getListTypeId() %>" value="<%= listTypeModel.getListTypeId() %>"><liferay-ui:message key="<%= listTypeModel.getName() %>" /></aui:option>
+						<aui:option selected="<%= listTypeId == listTypeModel.getListTypeId() %>" value="<%= listTypeModel.getListTypeId() %>"><liferay-ui:message key="<%= listTypeModel.getName() %>" /></aui:option>
 
-				<%
-				}
-				%>
+					<%
+					}
+					%>
 
-			</c:if>
+				</c:if>

@@ -81,13 +81,13 @@ if (checkboxField) {
 String fieldCss = _getFieldCss(StringPool.BLANK);
 String inputCss = _getInputCss(StringPool.BLANK);
 
-String baseTypeCss = TextFormatter.format(baseType, TextFormatter.K);
+String baseTypeCss = TextFormatter.format(baseType.toLowerCase(), TextFormatter.K);
 
 fieldCss += " " + _getFieldCss(baseTypeCss);
 inputCss += " " + _getInputCss(baseTypeCss);
 
 if (inlineField) {
-	fieldCss += " " + _getFieldCss("inline-labels");
+	fieldCss += " " + _getFieldCss("inline");
 }
 
 if (disabled) {
@@ -95,6 +95,7 @@ if (disabled) {
 }
 
 if (choiceField) {
+	inlineLabel = "right";
 	fieldCss += " " + _getFieldCss("choice");
 	inputCss += " " + _getInputCss("choice");
 }
@@ -119,7 +120,7 @@ if (Validator.isNotNull(cssClass)) {
 	<span class="<%= fieldCss %>">
 		<span class="aui-field-content">
 			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-				<label class="<%= choiceField ? "aui-choice-label" : "aui-field-label" %> <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
+				<label class="aui-field-label <%= Validator.isNotNull(inlineLabel) ? "aui-field-label-inline" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 					<liferay-ui:message key="<%= label %>" />
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -133,130 +134,132 @@ if (Validator.isNotNull(cssClass)) {
 			</c:if>
 </c:if>
 
-<c:choose>
-	<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
-		<liferay-ui:asset-categories-selector
-			className="<%= model.getName() %>"
-			classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
-			contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
-		/>
-	</c:when>
-	<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
-		<liferay-ui:asset-tags-selector
-			className="<%= model.getName() %>"
-			classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
-			contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
-		/>
-	</c:when>
-	<c:when test="<%= (model != null) && Validator.isNull(type) %>">
-		<liferay-ui:input-field
-			bean="<%= bean %>"
-			cssClass="<%= inputCss %>"
-			defaultValue="<%= value %>"
-			disabled="<%= disabled %>"
-			field="<%= field %>"
-			fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
-			format='<%= (Format)dynamicAttributes.get("format") %>'
-			formName='<%= (String)dynamicAttributes.get("formName") %>'
-			model="<%= model %>"
-		/>
-	</c:when>
-	<c:when test='<%= type.equals("checkbox") %>'>
+<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
+	<c:choose>
+		<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
+			<liferay-ui:asset-categories-selector
+				className="<%= model.getName() %>"
+				classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
+				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+			/>
+		</c:when>
+		<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
+			<liferay-ui:asset-tags-selector
+				className="<%= model.getName() %>"
+				classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
+				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+			/>
+		</c:when>
+		<c:when test="<%= (model != null) && Validator.isNull(type) %>">
+			<liferay-ui:input-field
+				bean="<%= bean %>"
+				cssClass="<%= inputCss %>"
+				defaultValue="<%= value %>"
+				disabled="<%= disabled %>"
+				field="<%= field %>"
+				fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
+				format='<%= (Format)dynamicAttributes.get("format") %>'
+				formName='<%= (String)dynamicAttributes.get("formName") %>'
+				model="<%= model %>"
+			/>
+		</c:when>
+		<c:when test='<%= type.equals("checkbox") %>'>
 
-		<%
-		String valueString = StringPool.BLANK;
+			<%
+			String valueString = StringPool.BLANK;
 
-		if (value != null) {
-			valueString = value.toString();
-		}
+			if (value != null) {
+				valueString = value.toString();
+			}
 
-		boolean booleanValue = false;
+			boolean booleanValue = false;
 
-		if (value != null) {
-			booleanValue = GetterUtil.getBoolean(valueString);
-		}
+			if (value != null) {
+				booleanValue = GetterUtil.getBoolean(valueString);
+			}
 
-		booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
+			booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
 
-		String onClick = "AUI().one('#" + id + "').val(this.checked);";
-		String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
+			String onClick = "AUI().one('#" + id + "').val(this.checked);";
+			String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
 
-		if (onClickDynamicAttribute != null) {
-			onClick += onClickDynamicAttribute;
-		}
-		%>
+			if (onClickDynamicAttribute != null) {
+				onClick += onClickDynamicAttribute;
+			}
+			%>
 
-		<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
+			<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
 
-		<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
-	</c:when>
-	<c:when test='<%= type.equals("radio") %>'>
+			<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+		</c:when>
+		<c:when test='<%= type.equals("radio") %>'>
 
-		<%
-		String valueString = StringPool.BLANK;
+			<%
+			String valueString = StringPool.BLANK;
 
-		if (value != null) {
-			valueString = value.toString();
-		}
-		%>
+			if (value != null) {
+				valueString = value.toString();
+			}
+			%>
 
-		<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> <%= !id.equals(name) ? "id=\"" + id + "\"" : StringPool.BLANK %> name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
-	</c:when>
-	<c:when test='<%= type.equals("timeZone") %>'>
-		<span class="<%= fieldCss %>">
-			<span class="aui-field-content">
-				<%
-				int displayStyle = TimeZone.LONG;
+			<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+		</c:when>
+		<c:when test='<%= type.equals("timeZone") %>'>
+			<span class="<%= fieldCss %>">
+				<span class="aui-field-content">
+					<%
+					int displayStyle = TimeZone.LONG;
 
-				if (dynamicAttributes.get("displayStyle") != null) {
-					displayStyle = GetterUtil.getInteger((String)dynamicAttributes.get("displayStyle"));
-				}
-				%>
+					if (dynamicAttributes.get("displayStyle") != null) {
+						displayStyle = GetterUtil.getInteger((String)dynamicAttributes.get("displayStyle"));
+					}
+					%>
 
-				<liferay-ui:input-time-zone
-					daylight='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("daylight")) %>'
-					disabled="<%= disabled %>"
-					displayStyle="<%= displayStyle %>"
-					name="<%= name %>"
-					nullable='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("nullable")) %>'
-					value="<%= value.toString() %>"
-				/>
+					<liferay-ui:input-time-zone
+						daylight='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("daylight")) %>'
+						disabled="<%= disabled %>"
+						displayStyle="<%= displayStyle %>"
+						name="<%= name %>"
+						nullable='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("nullable")) %>'
+						value="<%= value.toString() %>"
+					/>
+				</span>
 			</span>
-		</span>
-	</c:when>
-	<c:otherwise>
+		</c:when>
+		<c:otherwise>
 
-		<%
-		if (Validator.isNull(type)) {
-			type = "text";
-		}
-		%>
-
-		<%
-		String valueString = StringPool.BLANK;
-
-		if (value != null) {
-			valueString = value.toString();
-
-			if (type.equals("hidden") || type.equals("text")) {
-				valueString = HtmlUtil.escapeAttribute(valueString);
+			<%
+			if (Validator.isNull(type)) {
+				type = "text";
 			}
-			else if (type.equals("textarea")) {
-				valueString = HtmlUtil.escape(valueString);
-			}
-		}
-		%>
+			%>
 
-		<c:choose>
-			<c:when test='<%= type.equals("textarea") %>'>
-				<textarea class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
-			</c:when>
-			<c:otherwise>
-				<input class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
-			</c:otherwise>
-		</c:choose>
-	</c:otherwise>
-</c:choose>
+			<%
+			String valueString = StringPool.BLANK;
+
+			if (value != null) {
+				valueString = value.toString();
+
+				if (type.equals("hidden") || type.equals("text")) {
+					valueString = HtmlUtil.escapeAttribute(valueString);
+				}
+				else if (type.equals("textarea")) {
+					valueString = HtmlUtil.escape(valueString);
+				}
+			}
+			%>
+
+			<c:choose>
+				<c:when test='<%= type.equals("textarea") %>'>
+					<textarea class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
+				</c:when>
+				<c:otherwise>
+					<input class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				</c:otherwise>
+			</c:choose>
+		</c:otherwise>
+	</c:choose>
+</span>
 
 <c:if test='<%= !type.equals("hidden") %>'>
 			<c:if test="<%= Validator.isNotNull(suffix) %>">
@@ -264,7 +267,7 @@ if (Validator.isNotNull(cssClass)) {
 			</c:if>
 
 			<c:if test='<%= Validator.isNotNull(label) && inlineLabel.equals("right") %>'>
-				<label class="<%= choiceField ? "aui-choice-label" : "aui-field-label" %> <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
+				<label class="aui-field-label" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 					<liferay-ui:message key="<%= label %>" />
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
