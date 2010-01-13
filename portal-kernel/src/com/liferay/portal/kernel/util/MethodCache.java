@@ -124,7 +124,7 @@ public class MethodCache {
 		return method;
 	}
 
-	public Method _put(MethodKey methodKey, Method method) {
+	private Method _put(MethodKey methodKey, Method method) {
 		return _methodsMap.put(methodKey, method);
 	}
 
