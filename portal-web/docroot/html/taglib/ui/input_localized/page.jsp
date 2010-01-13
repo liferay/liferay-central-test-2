@@ -97,51 +97,51 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 
 					<div class="lfr-form-row">
 						<div class="row-names">
-								<img alt="<%= Validator.isNotNull(curLanguageId) ? LocaleUtil.fromLanguageId(curLanguageId).getDisplayName() : StringPool.BLANK %>" class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= Validator.isNotNull(curLanguageId) ? curLanguageId : "../spacer" %>.png" />
+							<img alt="<%= Validator.isNotNull(curLanguageId) ? LocaleUtil.fromLanguageId(curLanguageId).getDisplayName() : StringPool.BLANK %>" class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= Validator.isNotNull(curLanguageId) ? curLanguageId : "../spacer" %>.png" />
 
-								<select <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace />languageId<%= i %>">
-									<option value="" />
-
-									<%
-									for (Locale curLocale : locales) {
-										if (curLocale.equals(defaultLocale)) {
-											continue;
-										}
-
-										String optionStyle = StringPool.BLANK;
-
-										String languageId = LocaleUtil.toLanguageId(curLocale);
-										String languageValue = LocalizationUtil.getLocalization(xml, languageId, false);
-
-										if ((Validator.isNotNull(xml)) && Validator.isNotNull(languageValue)) {
-											optionStyle = "style=\"font-weight: bold\"";
-										}
-									%>
-
-										<option <%= (curLanguageId.equals(languageId)) ? "selected" : "" %> <%= optionStyle %> value="<%= languageId %>"><%= curLocale.getDisplayName(locale) %></option>
-
-									<%
-									}
-									%>
-
-								</select>
+							<select <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace />languageId<%= i %>">
+								<option value="" />
 
 								<%
-								String languageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + curLanguageId);
+								for (Locale curLocale : locales) {
+									if (curLocale.equals(defaultLocale)) {
+										continue;
+									}
 
-								if (Validator.isNotNull(xml) && Validator.isNull(languageValue)) {
-									languageValue = LocalizationUtil.getLocalization(xml, curLanguageId, false);
+									String optionStyle = StringPool.BLANK;
+
+									String languageId = LocaleUtil.toLanguageId(curLocale);
+									String languageValue = LocalizationUtil.getLocalization(xml, languageId, false);
+
+									if ((Validator.isNotNull(xml)) && Validator.isNotNull(languageValue)) {
+										optionStyle = "style=\"font-weight: bold\"";
+									}
+								%>
+
+									<option <%= (curLanguageId.equals(languageId)) ? "selected" : "" %> <%= optionStyle %> value="<%= languageId %>"><%= curLocale.getDisplayName(locale) %></option>
+
+								<%
 								}
 								%>
 
-								<c:choose>
-									<c:when test='<%= type.equals("input") %>'>
-										<input class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>" type="text" value="<%= HtmlUtil.escape(languageValue) %>" />
-									</c:when>
-									<c:when test='<%= type.equals("textarea") %>'>
-										<textarea class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
-									</c:when>
-								</c:choose>
+							</select>
+
+							<%
+							String languageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + curLanguageId);
+
+							if (Validator.isNotNull(xml) && Validator.isNull(languageValue)) {
+								languageValue = LocalizationUtil.getLocalization(xml, curLanguageId, false);
+							}
+							%>
+
+							<c:choose>
+								<c:when test='<%= type.equals("input") %>'>
+									<input class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>" type="text" value="<%= HtmlUtil.escape(languageValue) %>" />
+								</c:when>
+								<c:when test='<%= type.equals("textarea") %>'>
+									<textarea class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
+								</c:when>
+							</c:choose>
 						</div>
 					</div>
 
