@@ -453,14 +453,14 @@ PortletURLImpl urlConfiguration = new PortletURLImpl(request, PortletKeys.PORTLE
 
 urlConfiguration.setWindowState(LiferayWindowState.POP_UP);
 
+urlConfiguration.setEscapeXml(false);
+
 if (Validator.isNotNull(portlet.getConfigurationActionClass())) {
 	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_configuration");
 }
 else {
 	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_permissions");
 }
-
-urlConfiguration.setEscapeXml(false);
 
 urlConfiguration.setParameter("redirect", currentURL);
 urlConfiguration.setParameter("returnToFullPageURL", currentURL);
