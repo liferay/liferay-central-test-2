@@ -37,7 +37,7 @@
 	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/portlet_css.js", javaScriptLastModified)) %>" type="text/javascript"></script>
 </c:if>
 
-<%-- Portlet CSS and JavaScript References --%>
+<%-- Portlet CSS References --%>
 
 <%
 List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORTLETS);
@@ -83,7 +83,15 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 			}
 		}
 	}
+	%>
 
+</c:if>
+
+<%-- Portlet JavaScript References --%>
+
+<c:if test="<%= portlets != null %>">
+
+	<%
 	Set<String> footerPortalJavaScriptSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
