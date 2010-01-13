@@ -40,5 +40,5 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 				</c:if>
 			</label>
 		</c:if>
-	</span>
-</span>
+	</div>
+</div>
