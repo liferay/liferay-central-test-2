@@ -52,6 +52,7 @@ String userMappingPassword = StringPool.BLANK;
 String userMappingEmailAddress = StringPool.BLANK;
 String userMappingFullName = StringPool.BLANK;
 String userMappingFirstName = StringPool.BLANK;
+String userMappingMiddleName = StringPool.BLANK;
 String userMappingLastName = StringPool.BLANK;
 String userMappingJobTitle = StringPool.BLANK;
 String userMappingGroup = StringPool.BLANK;
@@ -81,6 +82,9 @@ for (int i = 0 ; i < userMappingArray.length ; i++) {
 	}
 	else if (mapping[0].equals("firstName")) {
 		userMappingFirstName = mapping[1];
+	}
+	else if (mapping[0].equals("middleName")) {
+		userMappingMiddleName = mapping[1];
 	}
 	else if (mapping[0].equals("lastName")) {
 		userMappingLastName = mapping[1];
@@ -152,6 +156,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			data.<portlet:namespace />userMappingEmailAddress = document.<portlet:namespace />fm['<portlet:namespace />userMappingEmailAddress'].value;
 			data.<portlet:namespace />userMappingFullName = document.<portlet:namespace />fm['<portlet:namespace />userMappingFullName'].value;
 			data.<portlet:namespace />userMappingFirstName = document.<portlet:namespace />fm['<portlet:namespace />userMappingFirstName'].value;
+			data.<portlet:namespace />userMappingMiddleName = document.<portlet:namespace />fm['<portlet:namespace />userMappingMiddleName'].value;
 			data.<portlet:namespace />userMappingLastName = document.<portlet:namespace />fm['<portlet:namespace />userMappingLastName'].value;
 			data.<portlet:namespace />userMappingJobTitle = document.<portlet:namespace />fm['<portlet:namespace />userMappingJobTitle'].value;
 			data.<portlet:namespace />userMappingGroup = document.<portlet:namespace />fm['<portlet:namespace />userMappingGroup'].value;
@@ -190,8 +195,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 	}
 
 	function <portlet:namespace />saveLdap() {
-		var userMappingFields = ['screenName','password','emailAddress','fullName','firstName','lastName','jobTitle','group'];
-		var userMappingFieldValues = ['userMappingScreenName','userMappingPassword','userMappingEmailAddress','userMappingFullName','userMappingFirstName','userMappingLastName','userMappingJobTitle','userMappingGroup'];
+		var userMappingFields = ['screenName','password','emailAddress','fullName','firstName','middleName','lastName','jobTitle','group'];
+		var userMappingFieldValues = ['userMappingScreenName','userMappingPassword','userMappingEmailAddress','userMappingFullName','userMappingFirstName','userMappingMiddleName','userMappingLastName','userMappingJobTitle','userMappingGroup'];
 		var userMappingInput = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_MAPPINGS + postfix %>)'];
 
 		userMappingInput.value = '';
@@ -237,6 +242,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		var userMappingEmailAddress = "";
 		var userMappingFullName = "";
 		var userMappingFirstName = "";
+		var userMappingMiddleName = "";
 		var userMappingLastName = "";
 		var userMappingJobTitle = "";
 		var userMappingGroup = "";
@@ -271,6 +277,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			userMappingEmailAddress = "mail";
 			userMappingFullName = "";
 			userMappingFirstName = "givenName";
+			userMappingMiddleName = "";
 			userMappingLastName = "sn";
 			userMappingJobTitle = "";
 			userMappingGroup = "";
@@ -291,6 +298,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			userMappingEmailAddress = "mail";
 			userMappingFullName = "cn";
 			userMappingFirstName = "givenName";
+			userMappingMiddleName = "";
 			userMappingLastName = "sn";
 			userMappingJobTitle = "title";
 			userMappingGroup = "";
@@ -311,6 +319,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			userMappingEmailAddress = "userprincipalname";
 			userMappingFullName = "cn";
 			userMappingFirstName = "givenName";
+			userMappingMiddleName = "middleName";
 			userMappingLastName = "sn";
 			userMappingJobTitle = "";
 			userMappingGroup = "memberOf";
@@ -331,6 +340,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			userMappingEmailAddress = "mail";
 			userMappingFullName = "";
 			userMappingFirstName = "givenName";
+			userMappingMiddleName = "";
 			userMappingLastName = "sn";
 			userMappingJobTitle = "title";
 			userMappingGroup = "";
@@ -351,6 +361,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			userMappingEmailAddress = "mail";
 			userMappingFullName = "";
 			userMappingFirstName = "givenName";
+			userMappingMiddleName = "";
 			userMappingLastName = "sn";
 			userMappingJobTitle = "title";
 			userMappingGroup = "";
@@ -371,6 +382,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		document.<portlet:namespace />fm['<portlet:namespace />userMappingEmailAddress'].value = userMappingEmailAddress;
 		document.<portlet:namespace />fm['<portlet:namespace />userMappingFullName'].value = userMappingFullName;
 		document.<portlet:namespace />fm['<portlet:namespace />userMappingFirstName'].value = userMappingFirstName;
+		document.<portlet:namespace />fm['<portlet:namespace />userMappingMiddleName'].value = userMappingMiddleName;
 		document.<portlet:namespace />fm['<portlet:namespace />userMappingLastName'].value = userMappingLastName;
 		document.<portlet:namespace />fm['<portlet:namespace />userMappingJobTitle'].value = userMappingJobTitle;
 		document.<portlet:namespace />fm['<portlet:namespace />userMappingGroup'].value = userMappingGroup;
@@ -454,6 +466,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<aui:input cssClass="lfr-input-text-container" label="full-name" name="userMappingFullName" type="text" value="<%= userMappingFullName %>" />
 
 		<aui:input cssClass="lfr-input-text-container" label="first-name" name="userMappingFirstName" type="text" value="<%= userMappingFirstName %>" />
+
+		<aui:input cssClass="lfr-input-text-container" label="middle-name" name="userMappingMiddleName" type="text" value="<%= userMappingMiddleName %>" />
 
 		<aui:input cssClass="lfr-input-text-container" label="last-name" name="userMappingLastName" type="text" value="<%= userMappingLastName %>" />
 
