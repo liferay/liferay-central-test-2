@@ -64,7 +64,7 @@
 	String rssURL = sb.toString();
 	%>
 
-	<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
+	<liferay-ui:icon image="rss" url="<%= rssURL %>" method="get" target="_blank" label="<%= true %>" />
 </c:if>
 
 <c:if test="<%= !results.isEmpty() %>">

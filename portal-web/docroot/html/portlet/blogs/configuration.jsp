@@ -50,11 +50,11 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 	String bodyEditorParam = "";
 	String bodyEditorBody = "";
 
-	if (tabs2.equals("blogs-added-email")) {
+	if (tabs2.equals("entry-added-email")) {
 		bodyEditorParam = "emailEntryAddedBody";
 		bodyEditorBody = emailEntryAddedBody;
 	}
-	else if (tabs2.equals("blogs-updated-email")) {
+	else if (tabs2.equals("entry-updated-email")) {
 		bodyEditorParam = "emailEntryUpdatedBody";
 		bodyEditorBody = emailEntryUpdatedBody;
 	}
@@ -78,7 +78,7 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<liferay-ui:tabs
-		names="email-from,blogs-added-email,blogs-updated-email,display-settings,rss"
+		names="email-from,entry-added-email,entry-updated-email,display-settings,rss"
 		param="tabs2"
 		url="<%= portletURL %>"
 	/>
@@ -165,22 +165,22 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 
 			<br />
 		</c:when>
-		<c:when test='<%= tabs2.startsWith("blogs-") %>'>
+		<c:when test='<%= tabs2.startsWith("entry-") %>'>
 			<aui:fieldset>
 				<c:choose>
-					<c:when test='<%= tabs2.equals("blogs-added-email") %>'>
+					<c:when test='<%= tabs2.equals("entry-added-email") %>'>
 						<aui:input inlineLabel="left" label="enabled" name="emailEntryAddedEnabled" type="checkbox" value="<%= BlogsUtil.getEmailEntryAddedEnabled(preferences) %>" />
 					</c:when>
-					<c:when test='<%= tabs2.equals("blogs-updated-email") %>'>
+					<c:when test='<%= tabs2.equals("entry-updated-email") %>'>
 						<aui:input inlineLabel="left" label="enabled" name="emailEntryUpdatedEnabled" type="checkbox" value="<%= BlogsUtil.getEmailEntryUpdatedEnabled(preferences) %>" />
 					</c:when>
 				</c:choose>
 
 				<c:choose>
-					<c:when test='<%= tabs2.equals("blogs-added-email") %>'>
+					<c:when test='<%= tabs2.equals("entry-added-email") %>'>
 						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailEntryAddedSubject" type="text" value="<%= emailEntryAddedSubject %>" />
 					</c:when>
-					<c:when test='<%= tabs2.equals("blogs-updated-email") %>'>
+					<c:when test='<%= tabs2.equals("entry-updated-email") %>'>
 						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailEntryUpdatedSubject" type="text" value="<%= emailEntryUpdatedSubject %>" />
 					</c:when>
 				</c:choose>

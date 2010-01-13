@@ -71,10 +71,10 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		else if (tabs2.equals("email-from")) {
 			updateEmailFrom(actionRequest, preferences);
 		}
-		else if (tabs2.equals("blogs-added-email")) {
+		else if (tabs2.equals("entry-added-email")) {
 			updateEmailEntryAdded(actionRequest, preferences);
 		}
-		else if (tabs2.equals("blogs-updated-email")) {
+		else if (tabs2.equals("entry-updated-email")) {
 			updateEmailEntryUpdated(actionRequest, preferences);
 		}
 		else if (tabs2.equals("rss")) {
