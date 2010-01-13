@@ -64,6 +64,24 @@ boolean dateFormatMDY = true;
 if (dateFormatPattern.indexOf("y") == 0) {
 	dateFormatMDY = false;
 }
+
+Date selectedDate = new Date();
+
+Calendar cal = new GregorianCalendar();
+
+cal.setTime(selectedDate);
+
+if (dayValue > 0) {
+	cal.set(Calendar.DATE, dayValue);
+}
+
+if (monthValue > -1) {
+	cal.set(Calendar.MONTH, monthValue);
+}
+
+if (yearValue > 0) {
+	cal.set(Calendar.YEAR, yearValue);
+}
 %>
 
 <script type="text/javascript">
@@ -73,6 +91,13 @@ if (dateFormatPattern.indexOf("y") == 0) {
 			var datePicker = new A.DatePickerSelect(
 				{
 					appendOrder: <%= dateFormatMDY ? "['m', 'd', 'y']" : "['y', 'm', 'd']" %>,
+					dates: [
+						new Date(
+							<%= cal.get(Calendar.YEAR) %>,
+							<%= cal.get(Calendar.MONTH) %>,
+							<%= cal.get(Calendar.DATE) %>
+						)
+					],
 					dateFormat: '%m/%e/%Y',
 					dayFieldName: '<%= dayParam %>',
 					displayBoundingBox: '#<%= randomNamespace %>displayDate',
