@@ -211,6 +211,10 @@
 	padding-top: .5em;
 }
 
+.portlet-calendar .event-duration-hour {
+	float: left;
+}
+
 .portlet-calendar .reminders {
 	clear: both;
 	padding-left: 1em;

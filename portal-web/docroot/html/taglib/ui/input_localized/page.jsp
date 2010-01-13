@@ -41,7 +41,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + defaultLanguageId, LocalizationUtil.getLocalization(xml, defaultLanguageId));
 %>
 
-<div class="taglib-input-localized">
+<span class="taglib-input-localized">
 	<c:choose>
 		<c:when test='<%= type.equals("input") %>'>
 			<input class="language-value <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" type="text" value="<%= HtmlUtil.escape(defaultLanguageValue) %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
@@ -97,7 +97,6 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 
 					<div class="lfr-form-row">
 						<div class="row-names">
-							<div class="aui-form-column">
 								<img alt="<%= Validator.isNotNull(curLanguageId) ? LocaleUtil.fromLanguageId(curLanguageId).getDisplayName() : StringPool.BLANK %>" class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= Validator.isNotNull(curLanguageId) ? curLanguageId : "../spacer" %>.png" />
 
 								<select <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace />languageId<%= i %>">
@@ -126,9 +125,6 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 									%>
 
 								</select>
-							</div>
-
-							<div class="aui-form-column">
 
 								<%
 								String languageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + curLanguageId);
@@ -146,7 +142,6 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 										<textarea class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
 									</c:when>
 								</c:choose>
-							</div>
 						</div>
 					</div>
 
@@ -157,7 +152,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 			</div>
 		</div>
 	</div>
-</div>
+</span>
 
 <script type="text/javascript">
 	AUI().ready(

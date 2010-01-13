@@ -157,36 +157,32 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<aui:input name="startDate" value="<%= startDate %>" />
 
 		<aui:field-wrapper label="duration">
-			<aui:column>
-				<aui:select label="hours" name="durationHour">
+			<aui:select cssClass="event-duration-hour" label="hours" name="durationHour">
 
-					<%
-					for (int i = 0; i <= 24 ; i++) {
-					%>
+				<%
+				for (int i = 0; i <= 24 ; i++) {
+				%>
 
-						<aui:option label="<%= i %>" selected="<%= durationHour == i %>" />
+					<aui:option label="<%= i %>" selected="<%= durationHour == i %>" />
 
-					<%
-					}
-					%>
+				<%
+				}
+				%>
 
-				</aui:select>
-			</aui:column>
-			<aui:column>
-				<aui:select label="minutes" name="durationMinute">
+			</aui:select>
+			<aui:select label="minutes" name="durationMinute">
 
-					<%
-					for (int i=0; i < 60 ; i = i + 5) {
-					%>
+				<%
+				for (int i=0; i < 60 ; i = i + 5) {
+				%>
 
-						<aui:option label='<%= ":" + (i < 10 ? "0" : StringPool.BLANK) + i %>' selected="<%= durationMinute == i %>" value="<%= i %>" />
+					<aui:option label='<%= ":" + (i < 10 ? "0" : StringPool.BLANK) + i %>' selected="<%= durationMinute == i %>" value="<%= i %>" />
 
-					<%
-					}
-					%>
+				<%
+				}
+				%>
 
-				</aui:select>
-			</aui:column>
+			</aui:select>
 		</aui:field-wrapper>
 
 		<aui:input inlineLabel="left" label="all-day-event" name="allDay" type="checkbox" value="<%= event == null ? false : event.isAllDay() %>" />
@@ -268,7 +264,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 				</aui:select>
 
-				<aui:select inlineField="<%= true %>" inlineLabel="left" label="before-and-again" name="secondReminder" suffix="before-the-event-by">
+				<aui:select inlineLabel="left" label="before-and-again" name="secondReminder" suffix="before-the-event-by">
 
 					<%
 					for (int i = 0; i < CalEventConstants.REMINDERS.length; i++) {
