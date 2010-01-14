@@ -191,6 +191,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		return sb.toString();
 	}
 
+	public String decodeSafeFileName(String fileName) {
+		return StringUtil.replace(fileName, _ENCODED_STRINGS, _REPLACE_STRINGS);
+	}
+
 	public boolean delete(String file) {
 		return delete(new File(file));
 	}
@@ -223,6 +227,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 			directory.delete();
 		}
+	}
+
+	public String encodeSafeFileName(String fileName) {
+		return StringUtil.replace(fileName, _REPLACE_STRINGS, _ENCODED_STRINGS);
 	}
 
 	public boolean exists(String fileName) {
@@ -749,6 +757,15 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		StreamUtil.transfer(is, new FileOutputStream(file));
 	}
+
+	private static final String[] _REPLACE_STRINGS = new String[] {
+		StringPool.SPACE, StringPool.AMPERSAND, StringPool.CLOSE_PARENTHESIS,
+		StringPool.OPEN_PARENTHESIS, StringPool.SEMICOLON 
+	};
+
+	private static final String[] _ENCODED_STRINGS = new String[] {
+		"_SP_", "_AMP_", "_CP_", "_OP_", "_SEM_"
+	};
 
 	private static Log _log = LogFactoryUtil.getLog(FileImpl.class);
 

@@ -763,7 +763,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			(nameWithExtension.indexOf("<") != -1) ||
 			(nameWithExtension.indexOf(">") != -1) ||
 			(nameWithExtension.indexOf("|") != -1) ||
-			(nameWithExtension.indexOf("&") != -1) ||
 			(nameWithExtension.indexOf("[") != -1) ||
 			(nameWithExtension.indexOf("]") != -1) ||
 			(nameWithExtension.indexOf("'") != -1)) {

@@ -42,7 +42,11 @@
 	</bean>
 	<bean id="messageListener.document_library_hook" class="com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener">
 		<property name="manager">
-			<bean class="com.liferay.documentlibrary.util.HookProxyImpl" />
+			<bean class="com.liferay.documentlibrary.util.SafeFileNameHookWrapper">
+				<constructor-arg>
+					<bean class="com.liferay.documentlibrary.util.HookProxyImpl" />
+				</constructor-arg>
+			</bean>
 		</property>
 	</bean>
 	<bean id="messagingConfigurator.document_library" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">

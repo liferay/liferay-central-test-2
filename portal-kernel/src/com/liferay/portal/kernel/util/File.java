@@ -58,6 +58,8 @@ public interface File {
 
 	public String createTempFileName(String extension);
 
+	public String decodeSafeFileName(String fileName);
+
 	public boolean delete(String file);
 
 	public boolean delete(java.io.File file);
@@ -65,6 +67,8 @@ public interface File {
 	public void deltree(String directory);
 
 	public void deltree(java.io.File directory);
+
+	public String encodeSafeFileName(String fileName);
 
 	public boolean exists(String fileName);
 
