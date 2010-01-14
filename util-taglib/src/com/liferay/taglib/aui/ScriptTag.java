@@ -22,10 +22,14 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
@@ -34,6 +38,8 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  * @author Brian Wing Shun Chan
  */
 public class ScriptTag extends BodyTagSupport {
+
+	public static final String PAGE = "/html/taglib/aui/script/page.jsp";
 
 	public int doStartTag() {
 		return EVAL_BODY_BUFFERED;
@@ -45,29 +51,73 @@ public class ScriptTag extends BodyTagSupport {
 		return SKIP_BODY;
 	}
 
-	public int doEndTag() {
+	public int doEndTag() throws JspException {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		ScriptData scriptData = (ScriptData)request.getAttribute(
-			WebKeys.AUI_SCRIPT_DATA);
+		try {
+			if (Validator.isNull(_position)) {
+				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
-		if (scriptData == null) {
-			scriptData = new ScriptData();
+				if (themeDisplay.isLifecycleResource() ||
+					themeDisplay.isStateExclusive()) {
 
-			request.setAttribute(WebKeys.AUI_SCRIPT_DATA, scriptData);
+					_position = _POSITION_INLINE;
+				}
+				else {
+					_position = _POSITION_AUTO;
+				}
+			}
+
+			if (_position.equals(_POSITION_INLINE)) {
+				ScriptData scriptData = new ScriptData();
+
+				request.setAttribute(ScriptTag.class.getName(), scriptData);
+
+				scriptData.append(_bodyContentString, _use);
+
+				PortalIncludeUtil.include(pageContext, PAGE);
+			}
+			else {
+				ScriptData scriptData = (ScriptData)request.getAttribute(
+					WebKeys.AUI_SCRIPT_DATA);
+
+				if (scriptData == null) {
+					scriptData = new ScriptData();
+
+					request.setAttribute(WebKeys.AUI_SCRIPT_DATA, scriptData);
+				}
+
+				scriptData.append(_bodyContentString, _use);
+			}
+
+			return EVAL_PAGE;
 		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
+		finally {
+			if (_position.equals(_POSITION_INLINE)) {
+				request.removeAttribute(ScriptTag.class.getName());
+			}
+		}
+	}
 
-		scriptData.append(_bodyContentString, _use);
-
-		return EVAL_PAGE;
+	public void setPosition(String position) {
+		_position = position;
 	}
 
 	public void setUse(String use) {
 		_use = use;
 	}
 
+	private static final String _POSITION_AUTO = "auto";
+
+	private static final String _POSITION_INLINE = "inline";
+
 	private String _bodyContentString = StringPool.BLANK;
+	private String _position;
 	private String _use;
 
 }

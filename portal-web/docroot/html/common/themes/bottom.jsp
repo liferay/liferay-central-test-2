@@ -24,8 +24,6 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<%@ page import="com.liferay.taglib.aui.ScriptData" %>
-
 <%-- Portal JavaScript --%>
 
 <c:if test="<%= themeDisplay.isIncludePortletCssJs() %>">
@@ -133,44 +131,7 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 
 </c:if>
 
-<%
-ScriptData scriptData = (ScriptData)request.getAttribute(WebKeys.AUI_SCRIPT_DATA);
-%>
-
-<c:if test="<%= scriptData != null %>">
-	<script type="text/javascript">
-		// <![CDATA[
-			<%= scriptData.getRawSB().toString() %>
-
-			<%
-			String callback = scriptData.getCallbackSB().toString();
-			%>
-
-			<c:if test="<%= Validator.isNotNull(callback) %>">
-
-				<%
-				Set<String> useSet = scriptData.getUseSet();
-
-				StringBundler useSB = new StringBundler(useSet.size() * 4);
-
-				for (String use : useSet) {
-					useSB.append(StringPool.APOSTROPHE);
-					useSB.append(use);
-					useSB.append(StringPool.APOSTROPHE);
-					useSB.append(StringPool.COMMA_AND_SPACE);
-				}
-				%>
-
-				AUI().use(
-					<%= useSB.toString() %>
-					function(A) {
-						<%= callback %>
-					}
-				);
-			</c:if>
-		// ]]>
-	</script>
-</c:if>
+<%@ include file="/html/taglib/aui/script/page.jsp" %>
 
 <%-- Raw Text --%>
 
