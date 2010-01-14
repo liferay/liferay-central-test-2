@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="ETagUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class ETagUtil {
 
@@ -46,7 +45,62 @@ public class ETagUtil {
 			return false;
 		}
 
-		String eTag = Integer.toHexString(Arrays.hashCode(bytes));
+		return _processETag(request, response,
+			_hashCode(bytes, 0, bytes.length));
+	}
+
+	public static boolean processETag(
+		HttpServletRequest request, HttpServletResponse response,
+		byte[] bytes, int length) {
+
+		if (!_ETAG_FILTER_ENABLED) {
+			return false;
+		}
+
+		return _processETag(request, response, _hashCode(bytes, 0, length));
+	}
+
+	public static boolean processETag(
+		HttpServletRequest request, HttpServletResponse response,
+		byte[] bytes, int offset, int length) {
+
+		if (!_ETAG_FILTER_ENABLED) {
+			return false;
+		}
+
+		return _processETag(request, response,
+			_hashCode(bytes, offset, length));
+	}
+
+	public static boolean processETag(
+		HttpServletRequest request, HttpServletResponse response, String s) {
+
+		if (!_ETAG_FILTER_ENABLED) {
+			return false;
+		}
+
+		return _processETag(request, response, s.hashCode());
+	}
+
+	private static int _hashCode(byte[] data, int offset, int length) {
+		int hashCode=0;
+
+		for (int i = 0; i < length; i++) {
+			hashCode = 31 * hashCode + data[offset++];
+		}
+
+		return hashCode;
+	}
+
+	private static boolean _processETag(
+		HttpServletRequest request, HttpServletResponse response,
+		int hashCode) {
+
+		if (!_ETAG_FILTER_ENABLED) {
+			return false;
+		}
+
+		String eTag = Integer.toHexString(hashCode);
 
 		response.setHeader(HttpHeaders.ETAG, eTag);
 
@@ -61,12 +115,6 @@ public class ETagUtil {
 		else {
 			return false;
 		}
-	}
-
-	public static boolean processETag(
-		HttpServletRequest request, HttpServletResponse response, String s) {
-
-		return processETag(request, response, s.getBytes());
 	}
 
 	private static final boolean _ETAG_FILTER_ENABLED = GetterUtil.getBoolean(

@@ -341,7 +341,8 @@ public class MinifierFilter extends BasePortalFilter {
 				response.setContentType(cacheResponse.getContentType());
 
 				minifiedContent = new String(
-					cacheResponse.getData(), StringPool.UTF8);
+					cacheResponse.unsafeGetData(), 0,
+					cacheResponse.getDataLength(), StringPool.UTF8);
 
 				if (minifierType.equals("css")) {
 					minifiedContent = minifyCss(request, minifiedContent);

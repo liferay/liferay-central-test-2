@@ -134,10 +134,8 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		return _contentType;
 	}
 
-	public byte[] getData() {
-		finishResponse();
-
-		return _ubaos.toByteArray();
+	public int getDataLength() {
+		return _ubaos.size();
 	}
 
 	public String getHeader(String name) {
@@ -271,6 +269,12 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		_status = status;
 
 		super.setStatus(status);
+	}
+
+	public byte[] unsafeGetData() {
+		finishResponse();
+
+		return _ubaos.unsafeGetByteArray();
 	}
 
 	protected CacheResponseStream createOutputStream() {

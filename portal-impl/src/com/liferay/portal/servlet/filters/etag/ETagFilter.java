@@ -57,11 +57,12 @@ public class ETagFilter extends BasePortalFilter {
 				ETagFilter.class, request, cacheResponse, filterChain);
 
 			CacheResponseData cacheResponseData = new CacheResponseData(
-				cacheResponse.getData(), cacheResponse.getContentType(),
-				cacheResponse.getHeaders());
+				cacheResponse.unsafeGetData(), cacheResponse.getDataLength(),
+				cacheResponse.getContentType(), cacheResponse.getHeaders());
 
 			if (!ETagUtil.processETag(
-					request, response, cacheResponse.getData())) {
+					request, response, cacheResponse.unsafeGetData(),
+					cacheResponse.getDataLength())) {
 
 				CacheResponseUtil.write(response, cacheResponseData);
 			}

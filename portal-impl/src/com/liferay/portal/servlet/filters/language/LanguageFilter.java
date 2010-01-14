@@ -58,22 +58,24 @@ public class LanguageFilter extends BasePortalFilter {
 			LanguageFilter.class, request, cacheResponse, filterChain);
 
 		byte[] bytes = translateResponse(
-			request, cacheResponse, cacheResponse.getData());
+			request, cacheResponse, cacheResponse.unsafeGetData(),
+			cacheResponse.getDataLength());
 
 		CacheResponseData cacheResponseData = new CacheResponseData(
-			bytes, cacheResponse.getContentType(), cacheResponse.getHeaders());
+			bytes, bytes.length, cacheResponse.getContentType(),
+			cacheResponse.getHeaders());
 
 		CacheResponseUtil.write(response, cacheResponseData);
 	}
 
 	protected byte[] translateResponse(
 		HttpServletRequest request, HttpServletResponse response,
-		byte[] bytes) {
+		byte[] bytes, int length) {
 
 		String languageId = LanguageUtil.getLanguageId(request);
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
-		String content = new String(bytes);
+		String content = new String(bytes, 0 ,length);
 
 		Matcher matcher = _pattern.matcher(content);
 

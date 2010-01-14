@@ -408,7 +408,9 @@ public class CacheFilter extends BasePortalFilter {
 					CacheFilter.class, request, cacheResponse, filterChain);
 
 				cacheResponseData = new CacheResponseData(
-					cacheResponse.getData(), cacheResponse.getContentType(),
+					cacheResponse.unsafeGetData(),
+					cacheResponse.getDataLength(),
+					cacheResponse.getContentType(),
 					cacheResponse.getHeaders());
 
 				LastPath lastPath = (LastPath)request.getAttribute(

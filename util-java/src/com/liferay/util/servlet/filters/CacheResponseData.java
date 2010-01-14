@@ -38,15 +38,21 @@ import java.util.Map;
 public class CacheResponseData implements Serializable {
 
 	public CacheResponseData(
-		byte[] data, String contentType, Map<String, List<Header>> headers) {
+		byte[] data, int dataLength, String contentType,
+		Map<String, List<Header>> headers) {
 
 		_data = data;
+		_dataLength = dataLength;
 		_contentType = contentType;
 		_headers = headers;
 	}
 
 	public byte[] getData() {
 		return _data;
+	}
+
+	public int getDataLength() {
+		return _dataLength;
 	}
 
 	public String getContentType() {
@@ -66,6 +72,7 @@ public class CacheResponseData implements Serializable {
 	}
 
 	private byte[] _data;
+	private int _dataLength;
 	private String _contentType;
 	private Map<String, List<Header>> _headers;
 	private Map<String, Object> _attributes = new HashMap<String, Object>();
