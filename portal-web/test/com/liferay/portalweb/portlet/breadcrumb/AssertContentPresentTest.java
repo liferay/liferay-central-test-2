@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertContentPresentTest extends BaseTestCase {
 	public void testAssertContentPresent() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,8 +55,6 @@ public class AssertContentPresentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
 				"//input[@value='Add Blog Entry']"));
-		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,7 +62,7 @@ public class AssertContentPresentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
+				if (selenium.isElementPresent("link=Child Test Page")) {
 					break;
 				}
 			}
@@ -72,6 +72,8 @@ public class AssertContentPresentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Add Blog Entry']"));
 	}
 }

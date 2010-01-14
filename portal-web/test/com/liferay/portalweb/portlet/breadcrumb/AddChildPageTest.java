@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddChildPageTest extends BaseTestCase {
 	public void testAddChildPage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +53,8 @@ public class AddChildPageTest extends BaseTestCase {
 		selenium.clickAt("link=Breadcrumb Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//div[3]/div/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,6 +75,7 @@ public class AddChildPageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Children", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -94,6 +98,7 @@ public class AddChildPageTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Page']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -117,21 +122,7 @@ public class AddChildPageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Child Test Page"));
 		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertEquals(RuntimeVariables.replace("Child Test Page"),
+			selenium.getText("//div[3]/ul/li[3]/span/a"));
 	}
 }

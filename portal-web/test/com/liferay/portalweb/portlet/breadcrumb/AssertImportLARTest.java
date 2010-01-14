@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertImportLARTest extends BaseTestCase {
 	public void testAssertImportLAR() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,27 +55,10 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertFalse(selenium.isTextPresent("Breadcrumb Test Page \u00bb"));
 		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),
-			selenium.getText("//div[2]/div/div/ul/li[4]/span/a"));
+			selenium.getText("//div[2]/div/div/ul/li[2]/span/a"));
 		assertEquals(RuntimeVariables.replace("Child Test Page"),
-			selenium.getText("//div[2]/div/div/ul/li[5]/span/a"));
+			selenium.getText("//div[2]/div/div/ul/li[3]/span/a"));
 	}
 }

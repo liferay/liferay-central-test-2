@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertBreadCrumbPresentTest extends BaseTestCase {
 	public void testAssertBreadCrumbPresent() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,11 +54,9 @@ public class AssertBreadCrumbPresentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),
-			selenium.getText("//div[2]/div/div/ul/li[4]/span/a"));
+			selenium.getText("//div[2]/div/div/ul/li[2]/span/a"));
 		assertFalse(selenium.isElementPresent(
-				"//div[2]/div/div/ul/li[5]/span/a"));
-		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				"//div[2]/div/div/ul/li[3]/span/a"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +64,7 @@ public class AssertBreadCrumbPresentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
+				if (selenium.isElementPresent("link=Child Test Page")) {
 					break;
 				}
 			}
@@ -74,9 +74,11 @@ public class AssertBreadCrumbPresentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),
-			selenium.getText("//div[2]/div/div/ul/li[4]/span/a"));
+			selenium.getText("//div[2]/div/div/ul/li[2]/span/a"));
 		assertEquals(RuntimeVariables.replace("Child Test Page"),
-			selenium.getText("//div[2]/div/div/ul/li[5]/span/a"));
+			selenium.getText("//div[2]/div/div/ul/li[3]/span/a"));
 	}
 }

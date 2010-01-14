@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class VerifyDisplayStyleTest extends BaseTestCase {
 	public void testVerifyDisplayStyle() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,27 +55,10 @@ public class VerifyDisplayStyleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isTextPresent("Breadcrumb Test Page \u00bb"));
 		assertFalse(selenium.isElementPresent(
-				"//div[2]/div/div/ul/li[4]/span/a"));
+				"//div[2]/div/div/ul/li[2]/span/a"));
 		assertFalse(selenium.isElementPresent(
-				"//div[2]/div/div/ul/li[5]/span/a"));
+				"//div[2]/div/div/ul/li[3]/span/a"));
 	}
 }

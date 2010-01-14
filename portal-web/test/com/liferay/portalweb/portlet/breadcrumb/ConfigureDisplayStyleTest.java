@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ConfigureDisplayStyleTest extends BaseTestCase {
 	public void testConfigureDisplayStyle() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,23 +55,7 @@ public class ConfigureDisplayStyleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		selenium.clickAt("//div[2]/div/div[1]/div/ul/li/strong/span",
 			RuntimeVariables.replace(""));
 
@@ -79,7 +65,7 @@ public class ConfigureDisplayStyleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
+				if (selenium.isElementPresent("//div[8]/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -89,8 +75,8 @@ public class ConfigureDisplayStyleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[5]/ul/li[2]/a", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//div[8]/ul/li[2]/a");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -109,26 +95,11 @@ public class ConfigureDisplayStyleTest extends BaseTestCase {
 		}
 
 		selenium.select("_86_displayStyle", RuntimeVariables.replace("label=2"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[5]/div/div/div/div[1]"));
 	}
 }
