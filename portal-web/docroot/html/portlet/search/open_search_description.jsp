@@ -25,6 +25,8 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <%
+long groupId = ParamUtil.getLong(request, "groupId");
+
 PortletURLImpl searchURL = new PortletURLImpl(request, PortletKeys.SEARCH, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 searchURL.setWindowState(WindowState.MAXIMIZED);
