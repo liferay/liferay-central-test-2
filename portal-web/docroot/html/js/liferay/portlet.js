@@ -477,10 +477,35 @@ Liferay.Portlet = {
 			var iframeId = namespacedId + 'configurationIframe';
 
 			var iframeTPL = '<iframe class="configuration-frame" frameborder="0" id="' + iframeId + '" name="' + iframeId + '" src="' + configurationURL + '"></iframe>';
+			var iframe = A.Node.create(iframeTPL);
+
+			var bodyContent = A.Node.create('<div></div>');
+			bodyContent.append(loading);
+			bodyContent.append(iframe);
+
+			var updateIframeSize = function(event) {
+				var bodyNode = event.currentTarget.bodyNode;
+
+				var fixSize = function(n) {
+					return ((parseInt(n, 10) || 0) - 5) + 'px';
+				};
+
+				setTimeout(
+					function() {
+						var bodyHeight = bodyNode.getStyle('height');
+
+						iframe.setStyle('height', fixSize(bodyHeight));
+					},
+					50
+				);
+			};
 
 			var dialog = new A.Dialog(
 				{
-					bodyContent: loading + iframeTPL,
+					after: {
+						heightChange: updateIframeSize
+					},
+					bodyContent: bodyContent,
 					centered: true,
 					constrain2view: true,
 					destroyOnClose: true,
@@ -489,8 +514,6 @@ Liferay.Portlet = {
 					width: 820
 				}
 			).render();
-
-			var iframe = dialog.get('contentBox').one('iframe');
 
 			iframe.on(
 				'load',
