@@ -42,7 +42,7 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "lastPostDate DESC, threadId DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"lastPostDate, threadId"};
+	public static String[] ORDER_BY_FIELDS = {"lastPostDate", "threadId"};
 
 	public ThreadLastPostDateComparator() {
 		this(false);
