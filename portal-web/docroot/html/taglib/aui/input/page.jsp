@@ -75,7 +75,7 @@ if ((baseType.equals("assetCategories")) || (baseType.equals("assetTags")) || da
 String forLabel = id;
 
 if (checkboxField) {
-	forLabel = name + "Checkbox";
+	forLabel += "Checkbox";
 }
 
 String fieldCss = _getFieldCss(StringPool.BLANK);
