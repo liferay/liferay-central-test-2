@@ -130,12 +130,12 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		return _bufferSize;
 	}
 
-	public String getContentType() {
-		return _contentType;
+	public int getContentLength() {
+		return _ubaos.size();
 	}
 
-	public int getDataLength() {
-		return _ubaos.size();
+	public String getContentType() {
+		return _contentType;
 	}
 
 	public String getHeader(String name) {

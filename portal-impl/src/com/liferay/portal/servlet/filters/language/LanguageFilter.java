@@ -59,7 +59,7 @@ public class LanguageFilter extends BasePortalFilter {
 
 		byte[] bytes = translateResponse(
 			request, cacheResponse, cacheResponse.unsafeGetData(),
-			cacheResponse.getDataLength());
+			cacheResponse.getContentLength());
 
 		CacheResponseData cacheResponseData = new CacheResponseData(
 			bytes, bytes.length, cacheResponse.getContentType(),

@@ -45,13 +45,13 @@ public class ETagUtil {
 			return false;
 		}
 
-		return _processETag(request, response,
-			_hashCode(bytes, 0, bytes.length));
+		return _processETag(
+			request, response, _hashCode(bytes, 0, bytes.length));
 	}
 
 	public static boolean processETag(
-		HttpServletRequest request, HttpServletResponse response,
-		byte[] bytes, int length) {
+		HttpServletRequest request, HttpServletResponse response, byte[] bytes,
+		int length) {
 
 		if (!_ETAG_FILTER_ENABLED) {
 			return false;
@@ -61,15 +61,15 @@ public class ETagUtil {
 	}
 
 	public static boolean processETag(
-		HttpServletRequest request, HttpServletResponse response,
-		byte[] bytes, int offset, int length) {
+		HttpServletRequest request, HttpServletResponse response, byte[] bytes,
+		int offset, int length) {
 
 		if (!_ETAG_FILTER_ENABLED) {
 			return false;
 		}
 
-		return _processETag(request, response,
-			_hashCode(bytes, offset, length));
+		return _processETag(
+			request, response, _hashCode(bytes, offset, length));
 	}
 
 	public static boolean processETag(
@@ -83,7 +83,7 @@ public class ETagUtil {
 	}
 
 	private static int _hashCode(byte[] data, int offset, int length) {
-		int hashCode=0;
+		int hashCode = 0;
 
 		for (int i = 0; i < length; i++) {
 			hashCode = 31 * hashCode + data[offset++];

@@ -114,11 +114,11 @@ public class DoubleClickController implements Serializable {
 			}
 		}
 
-		CacheResponseData data = new CacheResponseData(
-			cacheResponse.unsafeGetData(), cacheResponse.getDataLength(),
+		CacheResponseData cacheResponseData = new CacheResponseData(
+			cacheResponse.unsafeGetData(), cacheResponse.getContentLength(),
 			cacheResponse.getContentType(), cacheResponse.getHeaders());
 
-		CacheResponseUtil.write(response, data);
+		CacheResponseUtil.write(response, cacheResponseData);
 	}
 
 	private CacheResponse _cacheResponse;
