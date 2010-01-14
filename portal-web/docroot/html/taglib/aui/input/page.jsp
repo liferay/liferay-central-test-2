@@ -56,19 +56,21 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 	}
 }
 
-String baseType = type;
-
 if ((model != null) && Validator.isNull(type)) {
-	baseType = ModelHintsUtil.getType(model.getName(), field);
+	type = ModelHintsUtil.getType(model.getName(), field);
 }
 
-boolean checkboxField = baseType.equals("checkbox") || baseType.equals("boolean");
-boolean choiceField = checkboxField || baseType.equals("radio");
-boolean dateField = baseType.equals(Date.class.getName());
+if (Validator.isNull(type)){
+	type = "text";
+}
+
+boolean checkboxField = type.equals("checkbox") || type.equals("boolean");
+boolean choiceField = checkboxField || type.equals("radio");
+boolean dateField = type.equals(Date.class.getName());
 
 boolean showForLabel = true;
 
-if ((baseType.equals("assetCategories")) || (baseType.equals("assetTags")) || dateField) {
+if ((type.equals("assetCategories")) || (type.equals("assetTags")) || dateField) {
 	showForLabel = false;
 }
 
@@ -81,7 +83,7 @@ if (checkboxField) {
 String fieldCss = _getFieldCss(StringPool.BLANK);
 String inputCss = _getInputCss(StringPool.BLANK);
 
-String baseTypeCss = TextFormatter.format(baseType.toLowerCase(), TextFormatter.K);
+String baseTypeCss = TextFormatter.format(type.toLowerCase(), TextFormatter.K);
 
 fieldCss += " " + _getFieldCss(baseTypeCss);
 inputCss += " " + _getInputCss(baseTypeCss);
@@ -227,12 +229,6 @@ if (Validator.isNotNull(cssClass)) {
 			</span>
 		</c:when>
 		<c:otherwise>
-
-			<%
-			if (Validator.isNull(type)) {
-				type = "text";
-			}
-			%>
 
 			<%
 			String valueString = StringPool.BLANK;
