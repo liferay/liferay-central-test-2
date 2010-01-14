@@ -480,6 +480,7 @@ Liferay.Portlet = {
 			var iframe = A.Node.create(iframeTPL);
 
 			var bodyContent = A.Node.create('<div></div>');
+
 			bodyContent.append(loading);
 			bodyContent.append(iframe);
 
