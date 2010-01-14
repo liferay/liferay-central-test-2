@@ -22,25 +22,6 @@
  */
 %>
 
-.aui-field-inline {
-	float: left;
-}
-
-.aui-field-input-choice {
-	float: left;
-	margin: 0 0.4em 0 0;
-	vertical-align: middle;
-}
-
-.aui-field-label-inline {
-	float: left;
-	margin: 0.4em 0.4em 0 0
-}
-
-.aui-field-label-right {
-	float: left;
-}
-
 .aui-field-wrapper {
 	clear: both;
 	overflow: hidden;

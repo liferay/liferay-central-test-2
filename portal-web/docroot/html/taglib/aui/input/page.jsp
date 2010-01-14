@@ -82,6 +82,7 @@ if (checkboxField) {
 
 String fieldCss = _getFieldCss(StringPool.BLANK);
 String inputCss = _getInputCss(StringPool.BLANK);
+String labelCss = _getLabelCss(StringPool.BLANK);
 
 String baseTypeCss = TextFormatter.format(type.toLowerCase(), TextFormatter.K);
 
@@ -100,10 +101,15 @@ if (choiceField) {
 	inlineLabel = "right";
 	fieldCss += " " + _getFieldCss("choice");
 	inputCss += " " + _getInputCss("choice");
+	labelCss += " " + _getLabelCss("choice");
 }
 else if (baseTypeCss.equals("textarea") || baseTypeCss.equals("password") || baseTypeCss.equals("string")) {
 	fieldCss += " " + _getFieldCss("text");
 	inputCss += " " + _getInputCss("text");
+}
+
+if (Validator.isNotNull(inlineLabel)) {
+	labelCss += " " + _getLabelCss("inline");
 }
 
 if (first) {
@@ -122,7 +128,7 @@ if (Validator.isNotNull(cssClass)) {
 	<span class="<%= fieldCss %>">
 		<span class="aui-field-content">
 			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-				<label class="aui-field-label <%= Validator.isNotNull(inlineLabel) ? "aui-field-label-inline" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
+				<label class="<%= labelCss %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 					<liferay-ui:message key="<%= label %>" />
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -136,7 +142,7 @@ if (Validator.isNotNull(cssClass)) {
 			</c:if>
 </c:if>
 
-<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
+<span class="aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-element-left" : StringPool.BLANK %>">
 	<c:choose>
 		<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
 			<liferay-ui:asset-categories-selector
@@ -263,7 +269,7 @@ if (Validator.isNotNull(cssClass)) {
 			</c:if>
 
 			<c:if test='<%= Validator.isNotNull(label) && inlineLabel.equals("right") %>'>
-				<label class="aui-field-label" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
+				<label class="<%= labelCss %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 					<liferay-ui:message key="<%= label %>" />
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -308,6 +314,16 @@ private String _getFieldCss(String suffix) {
 
 private String _getInputCss(String suffix) {
 	String cssClass = _getFieldCss("input");
+
+	if (Validator.isNotNull(suffix)) {
+		cssClass += "-" + suffix;
+	}
+
+	return cssClass;
+}
+
+private String _getLabelCss(String suffix) {
+	String cssClass = _getFieldCss("label");
 
 	if (Validator.isNotNull(suffix)) {
 		cssClass += "-" + suffix;
