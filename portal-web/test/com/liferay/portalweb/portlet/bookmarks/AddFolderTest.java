@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddFolderTest extends BaseTestCase {
 	public void testAddFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,26 +53,9 @@ public class AddFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Subfolder']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Folder", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		selenium.type("_28_name", RuntimeVariables.replace("Test Folder"));
 		selenium.type("_28_description",
 			RuntimeVariables.replace("This is a test folder!"));

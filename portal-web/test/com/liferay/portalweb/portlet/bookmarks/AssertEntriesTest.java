@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertEntriesTest extends BaseTestCase {
 	public void testAssertEntries() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,23 +55,6 @@ public class AssertEntriesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=My Entries", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isElementPresent("link=http://www.digg.com"));
 		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));
 		selenium.clickAt("link=Recent Entries", RuntimeVariables.replace(""));

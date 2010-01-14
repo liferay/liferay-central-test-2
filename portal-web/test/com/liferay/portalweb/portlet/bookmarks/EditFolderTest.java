@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditFolderTest extends BaseTestCase {
 	public void testEditFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,6 +53,7 @@ public class EditFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.clickAt("//td[4]/ul/li/strong/span",
 			RuntimeVariables.replace(""));
 
@@ -72,45 +75,12 @@ public class EditFolderTest extends BaseTestCase {
 
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[7]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		selenium.type("_28_name", RuntimeVariables.replace("Edited Test Folder"));
 		selenium.type("_28_description",
 			RuntimeVariables.replace("This is an edited test folder!"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("//li[7]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Edited Test Folder"));

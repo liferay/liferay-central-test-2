@@ -37,6 +37,7 @@ public class DeleteAllTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -58,6 +59,7 @@ public class DeleteAllTest extends BaseTestCase {
 				selenium.clickAt("link=Bookmarks Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				boolean FolderPresent = selenium.isElementPresent(
 						"//td[4]/ul/li/strong/span");

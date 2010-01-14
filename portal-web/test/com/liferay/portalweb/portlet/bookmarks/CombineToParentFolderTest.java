@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CombineToParentFolderTest extends BaseTestCase {
 	public void testCombineToParentFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,26 +53,11 @@ public class CombineToParentFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertFalse(selenium.isElementPresent("link=Edited Test Bookmark"));
+		assertTrue(selenium.isTextPresent("Edited Test Subfolder"));
+		Thread.sleep(5000);
 		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -79,7 +66,7 @@ public class CombineToParentFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("//div[8]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -89,25 +76,9 @@ public class CombineToParentFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[8]/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[8]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		selenium.clickAt("_28_mergeWithParentFolderCheckbox",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -115,6 +86,6 @@ public class CombineToParentFolderTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=http://www.narutofan.com"));
-		assertFalse(selenium.isElementPresent("link=Edited Test SubFolder"));
+		assertFalse(selenium.isTextPresent("Edited Test Subfolder"));
 	}
 }

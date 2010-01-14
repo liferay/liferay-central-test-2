@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ImportLARTest extends BaseTestCase {
 	public void testImportLAR() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,6 +53,7 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -73,10 +76,13 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Import", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("_86_DELETE_PORTLET_DATA", RuntimeVariables.replace(""));
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\bookmarks\\dependencies\\Bookmarks-Selenium.portlet.lar"));
+		selenium.clickAt("_86_DELETE_PORTLET_DATACheckbox",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("_86_PORTLET_DATACheckbox",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Import']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

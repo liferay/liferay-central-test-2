@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class MoveEntryTest extends BaseTestCase {
 	public void testMoveEntry() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,47 +53,12 @@ public class MoveEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Folders", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[7]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//tr[4]/td[6]/ul/li/strong/span",
+		Thread.sleep(5000);
+		selenium.clickAt("//tr[4]/td[5]/ul/li/strong",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -100,7 +67,7 @@ public class MoveEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//div[8]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -110,29 +77,14 @@ public class MoveEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[5]/ul/li[1]/a", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//div[8]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[8]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Select']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("folder");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -150,10 +102,28 @@ public class MoveEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Bookmarks Home", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("link=Bookmarks Home"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Choose']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -195,23 +165,6 @@ public class MoveEntryTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=http://www.digg.com"));
 		selenium.clickAt("link=Test Folder", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("//li[7]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isElementPresent("link=http://www.digg.com"));
 	}
 }

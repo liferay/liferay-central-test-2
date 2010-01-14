@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertImportLARTest extends BaseTestCase {
 	public void testAssertImportLAR() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,7 +54,7 @@ public class AssertImportLARTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Edited Test Folder"));
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Edited Test Bookmark"));
 		assertTrue(selenium.isElementPresent("link=http://www.narutofan.com"));

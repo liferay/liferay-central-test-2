@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddNullURLTest extends BaseTestCase {
 	public void testAddNullURL() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,13 +53,11 @@ public class AddNullURLTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Entry']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Bookmark", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_28_name",
-			RuntimeVariables.replace("Null Entry Test"));
+		Thread.sleep(5000);
 		selenium.type("_28_name", RuntimeVariables.replace("Null Entry Test"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
