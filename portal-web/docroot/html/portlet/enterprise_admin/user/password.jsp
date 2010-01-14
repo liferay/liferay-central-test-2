@@ -78,9 +78,9 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 </liferay-ui:error>
 
 <aui:fieldset>
-	<aui:input label="password" name="password1" size="30" type="password" />
+	<aui:input autocomplete="off" label="password" name="password1" size="30" type="password" />
 
-	<aui:input label="enter-again" name="password2" size="30" type="password" />
+	<aui:input autocomplete="off" label="enter-again" name="password2" size="30" type="password" />
 
 	<c:if test="<%= (selUser != null) && (user.getUserId() != selUser.getUserId()) %>">
 		<aui:input inlineLabel="left" label="password-reset-required" name="passwordReset" type="checkbox" value="<%= passwordReset %>" />
