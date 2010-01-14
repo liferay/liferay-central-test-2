@@ -192,7 +192,8 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String decodeSafeFileName(String fileName) {
-		return StringUtil.replace(fileName, _ENCODED_STRINGS, _REPLACE_STRINGS);
+		return StringUtil.replace(
+			fileName, _SAFE_FILE_NAME_2, _SAFE_FILE_NAME_1);
 	}
 
 	public boolean delete(String file) {
@@ -230,7 +231,8 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String encodeSafeFileName(String fileName) {
-		return StringUtil.replace(fileName, _REPLACE_STRINGS, _ENCODED_STRINGS);
+		return StringUtil.replace(
+			fileName, _SAFE_FILE_NAME_1, _SAFE_FILE_NAME_2);
 	}
 
 	public boolean exists(String fileName) {
@@ -758,12 +760,12 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		StreamUtil.transfer(is, new FileOutputStream(file));
 	}
 
-	private static final String[] _REPLACE_STRINGS = new String[] {
+	private static final String[] _SAFE_FILE_NAME_1 = {
 		StringPool.SPACE, StringPool.AMPERSAND, StringPool.CLOSE_PARENTHESIS,
-		StringPool.OPEN_PARENTHESIS, StringPool.SEMICOLON 
+		StringPool.OPEN_PARENTHESIS, StringPool.SEMICOLON
 	};
 
-	private static final String[] _ENCODED_STRINGS = new String[] {
+	private static final String[] _SAFE_FILE_NAME_2 = {
 		"_SP_", "_AMP_", "_CP_", "_OP_", "_SEM_"
 	};
 
