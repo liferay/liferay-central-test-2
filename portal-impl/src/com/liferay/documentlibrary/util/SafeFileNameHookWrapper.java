@@ -34,7 +34,7 @@ import java.io.InputStream;
 import java.util.Date;
 
 /**
- * <a href="HookWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="SafeFileNameHookWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
