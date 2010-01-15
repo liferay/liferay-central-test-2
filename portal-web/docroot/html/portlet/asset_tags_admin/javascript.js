@@ -547,6 +547,7 @@ AUI().add(
 
 				_getTagId: function(exp) {
 					var instance = this;
+
 					var elem = A.one(exp);
 
 					if (elem) {
@@ -558,6 +559,7 @@ AUI().add(
 
 				_getTagName: function(exp) {
 					var instance = this;
+
 					var elem = A.one(exp);
 
 					if (elem) {
