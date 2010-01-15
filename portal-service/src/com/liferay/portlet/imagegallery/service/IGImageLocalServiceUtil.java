@@ -299,6 +299,15 @@ public class IGImageLocalServiceUtil {
 		throws com.liferay.portal.SystemException {
 		return getService().getImages(groupId, folderId, start, end, obc);
 	}
+	
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> 
+		getImagesByPermission(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker, 
+		long groupId, long folderId, String actionId) 
+		throws com.liferay.portal.PortalException, com.liferay.portal.SystemException {
+		return getService().getImagesByPermission(permissionChecker, groupId, 
+			folderId, actionId);
+	} 
 
 	public static int getImagesCount(long groupId, long folderId)
 		throws com.liferay.portal.SystemException {

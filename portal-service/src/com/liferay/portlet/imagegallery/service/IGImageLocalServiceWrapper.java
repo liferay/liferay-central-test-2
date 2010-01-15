@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.imagegallery.service;
 
+import com.liferay.portal.security.permission.PermissionChecker;
+
 
 /**
  * <a href="IGImageLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -290,6 +292,15 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		throws com.liferay.portal.SystemException {
 		return _igImageLocalService.getImages(groupId, folderId, start, end, obc);
 	}
+	
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> 
+		getImagesByPermission(
+		PermissionChecker permissionChecker, long groupId, 
+		long folderId, String actionId) 
+		throws com.liferay.portal.PortalException, com.liferay.portal.SystemException {
+		return _igImageLocalService.getImagesByPermission(permissionChecker, groupId, 
+			folderId, actionId);
+	} 
 
 	public int getImagesCount(long groupId, long folderId)
 		throws com.liferay.portal.SystemException {
