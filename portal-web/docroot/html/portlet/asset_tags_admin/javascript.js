@@ -547,14 +547,24 @@ AUI().add(
 
 				_getTagId: function(exp) {
 					var instance = this;
+					var elem = A.one(exp);
 
-					return A.one(exp).attr('data-tagId');
+					if (elem) {
+						var attr = elem.attr('data-tagId');
+					}
+
+					return attr;
 				},
 
 				_getTagName: function(exp) {
 					var instance = this;
+					var elem = A.one(exp);
 
-					return A.one(exp).attr('data-tag');
+					if (elem) {
+						var attr = elem.attr('data-tag');
+					}
+
+					return attr;
 				},
 
 				_getPermissionsEnabled: function(type) {
