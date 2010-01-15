@@ -56,21 +56,19 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 	}
 }
 
+String baseType = type;
+
 if ((model != null) && Validator.isNull(type)) {
-	type = ModelHintsUtil.getType(model.getName(), field);
+	baseType = ModelHintsUtil.getType(model.getName(), field);
 }
 
-if (Validator.isNull(type)){
-	type = "text";
-}
-
-boolean checkboxField = type.equals("checkbox") || type.equals("boolean");
-boolean choiceField = checkboxField || type.equals("radio");
-boolean dateField = type.equals(Date.class.getName());
+boolean checkboxField = baseType.equals("checkbox") || baseType.equals("boolean");
+boolean choiceField = checkboxField || baseType.equals("radio");
+boolean dateField = baseType.equals(Date.class.getName());
 
 boolean showForLabel = true;
 
-if ((type.equals("assetCategories")) || (type.equals("assetTags")) || dateField) {
+if ((baseType.equals("assetCategories")) || (baseType.equals("assetTags")) || dateField) {
 	showForLabel = false;
 }
 
@@ -82,9 +80,8 @@ if (checkboxField) {
 
 String fieldCss = _getFieldCss(StringPool.BLANK);
 String inputCss = _getInputCss(StringPool.BLANK);
-String labelCss = _getLabelCss(StringPool.BLANK);
 
-String baseTypeCss = TextFormatter.format(type.toLowerCase(), TextFormatter.K);
+String baseTypeCss = TextFormatter.format(baseType.toLowerCase(), TextFormatter.K);
 
 fieldCss += " " + _getFieldCss(baseTypeCss);
 inputCss += " " + _getInputCss(baseTypeCss);
@@ -101,15 +98,10 @@ if (choiceField) {
 	inlineLabel = "right";
 	fieldCss += " " + _getFieldCss("choice");
 	inputCss += " " + _getInputCss("choice");
-	labelCss += " " + _getLabelCss("choice");
 }
 else if (baseTypeCss.equals("textarea") || baseTypeCss.equals("password") || baseTypeCss.equals("string")) {
 	fieldCss += " " + _getFieldCss("text");
 	inputCss += " " + _getInputCss("text");
-}
-
-if (Validator.isNotNull(inlineLabel)) {
-	labelCss += " " + _getLabelCss("inline");
 }
 
 if (first) {
@@ -128,7 +120,7 @@ if (Validator.isNotNull(cssClass)) {
 	<span class="<%= fieldCss %>">
 		<span class="aui-field-content">
 			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-				<label class="<%= labelCss %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
+				<label class="aui-field-label <%= Validator.isNotNull(inlineLabel) ? "aui-field-label-inline" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 					<liferay-ui:message key="<%= label %>" />
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -142,8 +134,35 @@ if (Validator.isNotNull(cssClass)) {
 			</c:if>
 </c:if>
 
-<span class="aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-element-left" : StringPool.BLANK %>">
+<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
 	<c:choose>
+		<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
+			<liferay-ui:asset-categories-selector
+				className="<%= model.getName() %>"
+				classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
+				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+			/>
+		</c:when>
+		<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
+			<liferay-ui:asset-tags-selector
+				className="<%= model.getName() %>"
+				classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
+				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+			/>
+		</c:when>
+		<c:when test="<%= (model != null) && Validator.isNull(type) %>">
+			<liferay-ui:input-field
+				bean="<%= bean %>"
+				cssClass="<%= inputCss %>"
+				defaultValue="<%= value %>"
+				disabled="<%= disabled %>"
+				field="<%= field %>"
+				fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
+				format='<%= (Format)dynamicAttributes.get("format") %>'
+				formName='<%= (String)dynamicAttributes.get("formName") %>'
+				model="<%= model %>"
+			/>
+		</c:when>
 		<c:when test='<%= type.equals("checkbox") %>'>
 
 			<%
@@ -207,38 +226,13 @@ if (Validator.isNotNull(cssClass)) {
 				</span>
 			</span>
 		</c:when>
-		<c:when test='<%= (model != null) %>'>
-			<c:choose>
-				<c:when test='<%= type.equals("assetCategories") %>'>
-					<liferay-ui:asset-categories-selector
-						className="<%= model.getName() %>"
-						classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
-						contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
-					/>
-				</c:when>
-				<c:when test='<%= type.equals("assetTags") %>'>
-					<liferay-ui:asset-tags-selector
-						className="<%= model.getName() %>"
-						classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
-						contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
-					/>
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:input-field
-						bean="<%= bean %>"
-						cssClass="<%= inputCss %>"
-						defaultValue="<%= value %>"
-						disabled="<%= disabled %>"
-						field="<%= field %>"
-						fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
-						format='<%= (Format)dynamicAttributes.get("format") %>'
-						formName='<%= (String)dynamicAttributes.get("formName") %>'
-						model="<%= model %>"
-					/>
-				</c:otherwise>
-			</c:choose>
-		</c:when>
 		<c:otherwise>
+
+			<%
+			if (Validator.isNull(type)) {
+				type = "text";
+			}
+			%>
 
 			<%
 			String valueString = StringPool.BLANK;
@@ -273,7 +267,7 @@ if (Validator.isNotNull(cssClass)) {
 			</c:if>
 
 			<c:if test='<%= Validator.isNotNull(label) && inlineLabel.equals("right") %>'>
-				<label class="<%= labelCss %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
+				<label class="aui-field-label" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 					<liferay-ui:message key="<%= label %>" />
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -318,16 +312,6 @@ private String _getFieldCss(String suffix) {
 
 private String _getInputCss(String suffix) {
 	String cssClass = _getFieldCss("input");
-
-	if (Validator.isNotNull(suffix)) {
-		cssClass += "-" + suffix;
-	}
-
-	return cssClass;
-}
-
-private String _getLabelCss(String suffix) {
-	String cssClass = _getFieldCss("label");
 
 	if (Validator.isNotNull(suffix)) {
 		cssClass += "-" + suffix;
