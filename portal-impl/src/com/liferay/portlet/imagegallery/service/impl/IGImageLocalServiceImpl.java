@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -55,7 +54,6 @@ import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
-import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
 import com.liferay.portlet.imagegallery.social.IGActivityKeys;
 import com.liferay.portlet.imagegallery.util.Indexer;
 import com.liferay.portlet.imagegallery.util.comparator.ImageModifiedDateComparator;
@@ -66,7 +64,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -450,24 +447,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		throws SystemException {
 
 		return igImagePersistence.findByG_F(groupId, folderId, start, end, obc);
-	}
-
-	public List<IGImage> getImagesByPermission(
-			PermissionChecker permissionChecker, long groupId, long folderId, 
-			String actionId)
-		throws SystemException, PortalException {
-
-		List<IGImage> filteredImages = new ArrayList<IGImage>();
-
-		for (IGImage image : getImages(groupId, folderId)) {
-			if (IGImagePermission.contains(
-					permissionChecker, image, actionId)) {
-				
-				filteredImages.add(image);
-			}
-		}
-
-		return filteredImages;
 	}
 
 	public int getImagesCount(long groupId, long folderId)

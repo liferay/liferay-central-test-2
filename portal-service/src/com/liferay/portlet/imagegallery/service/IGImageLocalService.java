@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
-import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
  * <a href="IGImageLocalService.java.html"><b><i>View Source</i></b></a>
@@ -240,12 +239,6 @@ public interface IGImageLocalService {
 		long groupId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
-	
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImagesByPermission(
-		PermissionChecker permissionChecker, long groupId,
-		long folderId, String actionId) 
-		throws SystemException, PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getImagesCount(long groupId, long folderId)

@@ -32,7 +32,7 @@
 
 	long folderId = (folder == null) ? 0 : folder.getFolderId();
 
-	List images = IGImageLocalServiceUtil.getImagesByPermission(permissionChecker, scopeGroupId, folderId, ActionKeys.VIEW);
+	List images = IGImageLocalServiceUtil.getImages(scopeGroupId, folderId);
 
 	for	(int i = 0; i < images.size(); i++) {
 		IGImage image = (IGImage)images.get(i);
