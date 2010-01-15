@@ -1139,8 +1139,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		<ant dir="${lp.plugins.dir}/portlets/web-form-portlet" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/themes/sevencogs-theme" target="all" inheritAll="false" />
 
-		<property name="liferay.home" value="${app.server.dir}/.." />
-
 		<delete dir="${liferay.home}/data" />
 		<delete dir="${liferay.home}/deploy" />
 

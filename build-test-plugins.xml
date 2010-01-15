@@ -4,8 +4,6 @@
 	<import file="build-test.xml" />
 
 	<target name="deploy-simple-server-plugins">
-		<property name="liferay.home" value="${simple.server.dir}/.." />
-
 		<delete dir="${liferay.home}/data" />
 		<delete dir="${liferay.home}/deploy" />
 

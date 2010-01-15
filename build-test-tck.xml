@@ -31,8 +31,6 @@ tck.url=true</echo>
 
 work.dir=${basedir.unix}/tools/tck/work</echo>
 
-		<property name="liferay.home" value="${app.server.dir}/.." />
-
 		<delete dir="${liferay.home}/data" />
 		<delete dir="${liferay.home}/deploy" />
 
