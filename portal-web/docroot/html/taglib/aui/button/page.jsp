@@ -38,8 +38,8 @@ if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WI
 }
 %>
 
-<span class="aui-button <%= !type.equals("button") ? "aui-button-" + type : StringPool.BLANK %> <%= cssClass %> <%= disabled ? "aui-button-disabled" : StringPool.BLANK %>">
+<span class="<%= _buildCss (BUTTON_PREFIX, type, false, disabled, false, false, false, cssClass) %>">
 	<span class="aui-button-content">
-		<input class="aui-button-input <%= !type.equals("button") ? "aui-button-input-" + type : StringPool.BLANK %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= name %>" <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type='<%= type.equals("cancel") ? "button" : type %>' value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+		<input class="<%= _buildCss(BUTTON_INPUT_PREFIX, type, false, false, false, false, false, null)%>" <%= disabled ? "disabled" : StringPool.BLANK %> <%= !name.equals(namespace) ? "id=\"" + name + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type='<%= type.equals("cancel") ? "button" : type %>' value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 	</span>
 </span>

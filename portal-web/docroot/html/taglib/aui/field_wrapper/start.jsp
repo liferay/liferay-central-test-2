@@ -31,14 +31,23 @@ String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:fiel
 boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:inlineField"));
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:label"));
-String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:name"));
+String name = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:name"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:last"));
+
+boolean showForLabel = false;
+
+if (Validator.isNotNull(name)) {
+	showForLabel = true;
+	name = namespace + name;
+}
+	
+String fieldCss = _buildCss(FIELD_PREFIX, "field-wrapper", inlineField, false, false, first, last, cssClass);
 %>
 
-<div class="aui-field aui-field-wrapper <%= inlineField ? "aui-field-inline" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-field-first" : StringPool.BLANK %> <%= last ? "aui-field-last" : StringPool.BLANK %> ">
+<div class="<%= fieldCss %>">
 	<div class="aui-field-content">
 		<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-			<label class="aui-field-label <%= Validator.isNotNull(inlineLabel) ? "aui-field-label-inline" : StringPool.BLANK %>" <%= !Validator.equals(name, namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+			<label <%= _buildLabel(inlineLabel, showForLabel, name)%>>
 				<liferay-ui:message key="<%= label %>" />
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">

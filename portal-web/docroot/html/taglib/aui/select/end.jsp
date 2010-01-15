@@ -26,9 +26,9 @@
 
 <%
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
+String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:id"));
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:select:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
-String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:name"));
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:suffix"));
 %>
 
@@ -42,7 +42,7 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 		</c:if>
 
 		<c:if test='<%= inlineLabel.equals("right") %>'>
-			<label class="aui-field-label" for="<%= name %>">
+			<label <%= _buildLabel(inlineLabel, true, id) %>>
 				<liferay-ui:message key="<%= label %>" />
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">

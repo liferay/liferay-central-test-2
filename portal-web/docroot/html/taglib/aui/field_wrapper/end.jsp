@@ -28,11 +28,18 @@
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:helpMessage"));
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:label"));
-String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:name"));
+String name = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:name"));
+
+boolean showForLabel = false;
+
+if (Validator.isNotNull(name)) {
+	showForLabel = true;
+	name = namespace + name;
+}
 %>
 
 		<c:if test='<%= inlineLabel.equals("right") %>'>
-			<label class="aui-field-label" <%= !name.equals(namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+			<label <%= _buildLabel(inlineLabel, showForLabel, name)%>>
 				<liferay-ui:message key="<%= label %>" />
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">

@@ -40,12 +40,15 @@ String listType = GetterUtil.getString((String)request.getAttribute("aui:select:
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:name"));
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:select:prefix"));
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
+
+String fieldCss = _buildCss(FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass);
+String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, false, null);
 %>
 
-<span class="aui-field aui-field-menu aui-field-select <%= disabled ? "aui-field-disabled" : StringPool.BLANK %> <%= inlineField ? "aui-field-inline" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-field-first" : StringPool.BLANK %> <%= last ? "aui-field-last" : StringPool.BLANK %> ">
+<span class="<%= fieldCss %>">
 	<span class="aui-field-content">
 		<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-			<label class="aui-field-label <%= Validator.isNotNull(inlineLabel) ? "aui-field-label-inline" : StringPool.BLANK %>" for="<%= name %>">
+			<label <%= _buildLabel(inlineLabel, true, id) %>>
 				<liferay-ui:message key="<%= label %>" />
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -61,7 +64,7 @@ boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("au
 		</c:if>
 
 		<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
-			<select class="aui-field-input aui-field-input-menu aui-field-input-select" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 				<c:if test="<%= showEmptyOption %>">
 					<aui:option />
 				</c:if>

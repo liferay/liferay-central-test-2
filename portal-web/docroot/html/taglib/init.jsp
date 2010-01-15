@@ -41,6 +41,73 @@ String currentURL = PortalUtil.getCurrentURL(request);
 <%@ include file="/html/taglib/init-ext.jsp" %>
 
 <%!
+private final String FIELD_PREFIX = "aui-field";
+private final String BUTTON_PREFIX = "aui-button";
+private final String BUTTON_INPUT_PREFIX = BUTTON_PREFIX + "-input";
+private final String INPUT_PREFIX = FIELD_PREFIX + "-input";
+private final String LABEL_PREFIX = FIELD_PREFIX + "-label";
+
+private String _buildCss (String prefix, String baseTypeCss, boolean inlineField, boolean disabled, boolean choiceField, boolean first, boolean last, String cssClass) {
+	StringBundler sb = new StringBundler();
+
+	sb.append(prefix);
+
+	if (choiceField) {
+		sb.append(" " + prefix + "-choice");
+	}
+	else if (baseTypeCss.equals("textarea") || baseTypeCss.equals("password") || baseTypeCss.equals("string")) {
+		sb.append(" " + prefix + "-text");
+	}
+	else if (baseTypeCss.equals("select")) {
+		sb.append(" " + prefix + "-select");
+		sb.append(" " + prefix + "-menu");
+	}
+	else if (baseTypeCss.equals("button")) {
+	}
+	else {
+		sb.append(" " + prefix + "-" + baseTypeCss);
+	}
+
+	if (inlineField) {
+		sb.append (" " + prefix + "-inline");
+	}
+
+	if (disabled) {
+		sb.append (" " + prefix + "-disabled");
+	}
+
+	if (first) {
+		sb.append (" " + prefix + "-first");
+	}
+	else if (last) {
+		sb.append (" " + prefix + "-last");
+	}
+
+	if (Validator.isNotNull(cssClass)) {
+		sb.append (" " + cssClass);
+	}
+
+	return sb.toString();
+}
+
+private String _buildLabel(String inlineLabel, boolean showForLabel, String forLabel) {
+	StringBundler sb = new StringBundler();
+
+	sb.append("class=\"" + LABEL_PREFIX);
+
+	if (Validator.isNotNull(inlineLabel) && !inlineLabel.equals("right")) {
+		sb.append("-inline-label");
+	}
+
+	sb.append("\"");
+
+	if (showForLabel) {
+		sb.append("for=\"" + forLabel + "\"");
+	}
+
+	return sb.toString();
+}
+
 private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
 	if (dynamicAttributes == null) {
 		return StringPool.BLANK;
