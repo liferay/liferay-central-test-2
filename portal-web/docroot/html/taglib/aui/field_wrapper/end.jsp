@@ -34,12 +34,13 @@ boolean showForLabel = false;
 
 if (Validator.isNotNull(name)) {
 	showForLabel = true;
+
 	name = namespace + name;
 }
 %>
 
 		<c:if test='<%= inlineLabel.equals("right") %>'>
-			<label <%= _buildLabel(inlineLabel, showForLabel, name)%>>
+			<label <%= _buildLabel(inlineLabel, showForLabel, name) %>>
 				<liferay-ui:message key="<%= label %>" />
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">

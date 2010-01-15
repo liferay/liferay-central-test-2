@@ -41,68 +41,64 @@ String currentURL = PortalUtil.getCurrentURL(request);
 <%@ include file="/html/taglib/init-ext.jsp" %>
 
 <%!
-private final String FIELD_PREFIX = "aui-field";
-private final String BUTTON_PREFIX = "aui-button";
-private final String BUTTON_INPUT_PREFIX = BUTTON_PREFIX + "-input";
-private final String INPUT_PREFIX = FIELD_PREFIX + "-input";
-private final String LABEL_PREFIX = FIELD_PREFIX + "-label";
-
-private String _buildCss (String prefix, String baseTypeCss, boolean inlineField, boolean disabled, boolean choiceField, boolean first, boolean last, String cssClass) {
+private String _buildCss(String prefix, String baseTypeCss, boolean inlineField, boolean disabled, boolean choiceField, boolean first, boolean last, String cssClass) {
 	StringBundler sb = new StringBundler();
 
 	sb.append(prefix);
 
 	if (choiceField) {
-		sb.append(" " + prefix + "-choice");
+		sb.append(StringPool.SPACE);
+		sb.append(prefix);
+		sb.append("-choice");
 	}
 	else if (baseTypeCss.equals("textarea") || baseTypeCss.equals("password") || baseTypeCss.equals("string")) {
-		sb.append(" " + prefix + "-text");
+		sb.append(StringPool.SPACE);
+		sb.append(prefix);
+		sb.append("-text");
 	}
 	else if (baseTypeCss.equals("select")) {
-		sb.append(" " + prefix + "-select");
-		sb.append(" " + prefix + "-menu");
+		sb.append(StringPool.SPACE);
+		sb.append(prefix);
+		sb.append("-select");
+		sb.append(StringPool.SPACE);
+		sb.append(prefix);
+		sb.append("-menu");
 	}
 	else if (baseTypeCss.equals("button")) {
 	}
 	else {
-		sb.append(" " + prefix + "-" + baseTypeCss);
+		sb.append(StringPool.SPACE);
+		sb.append(prefix);
+		sb.append("-");
+		sb.append(baseTypeCss);
 	}
 
 	if (inlineField) {
-		sb.append (" " + prefix + "-inline");
+		sb.append(StringPool.SPACE);
+		sb.append(prefix);
+		sb.append("-inline");
 	}
 
 	if (disabled) {
-		sb.append (" " + prefix + "-disabled");
+		sb.append(StringPool.SPACE);
+		sb.append(prefix);
+		sb.append("-disabled");
 	}
 
 	if (first) {
-		sb.append (" " + prefix + "-first");
+		sb.append(StringPool.SPACE);
+		sb.append(prefix);
+		sb.append("-first");
 	}
 	else if (last) {
-		sb.append (" " + prefix + "-last");
+		sb.append(StringPool.SPACE);
+		sb.append(prefix);
+		sb.append("-last");
 	}
 
 	if (Validator.isNotNull(cssClass)) {
-		sb.append (" " + cssClass);
-	}
-
-	return sb.toString();
-}
-
-private String _buildLabel(String inlineLabel, boolean showForLabel, String forLabel) {
-	StringBundler sb = new StringBundler();
-
-	sb.append("class=\"" + LABEL_PREFIX);
-
-	if (Validator.isNotNull(inlineLabel) && !inlineLabel.equals("right")) {
-		sb.append("-inline-label");
-	}
-
-	sb.append("\"");
-
-	if (showForLabel) {
-		sb.append("for=\"" + forLabel + "\"");
+		sb.append(StringPool.SPACE);
+		sb.append(cssClass);
 	}
 
 	return sb.toString();
@@ -130,6 +126,24 @@ private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
 	return sb.toString();
 }
 
+private String _buildLabel(String inlineLabel, boolean showForLabel, String forLabel) {
+	StringBundler sb = new StringBundler();
+
+	sb.append("class=\"" + LABEL_PREFIX);
+
+	if (Validator.isNotNull(inlineLabel) && !inlineLabel.equals("right")) {
+		sb.append("-inline-label");
+	}
+
+	sb.append("\"");
+
+	if (showForLabel) {
+		sb.append("for=\"" + forLabel + "\"");
+	}
+
+	return sb.toString();
+}
+
 private String _getAttributeIgnoreCase(Map<String, Object> dynamicAttributes, String attribute) {
 	if (dynamicAttributes == null) {
 		return null;
@@ -147,4 +161,14 @@ private String _getAttributeIgnoreCase(Map<String, Object> dynamicAttributes, St
 
 	return null;
 }
+
+private final String _BUTTON_INPUT_PREFIX = "aui-button-input";
+
+private final String _BUTTON_PREFIX = "aui-button";
+
+private final String _FIELD_PREFIX = "aui-field";
+
+private final String _INPUT_PREFIX = "aui-field-input";
+
+private final String _LABEL_PREFIX = "aui-field-label";
 %>
