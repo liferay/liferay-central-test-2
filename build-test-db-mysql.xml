@@ -5,12 +5,17 @@
 
 	<target name="test-db-mysql-5.0">
 		<antcall target="prepare-mysql-5.0" />
+
 		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
 
 		<antcall target="test-db-mysql-5.0-latest" />
 		<antcall target="test-db-mysql-5.0-5.1.0" />
 		<antcall target="test-db-mysql-5.0-5.1.1" />
 		<antcall target="test-db-mysql-5.0-5.1.2" />
+		<antcall target="test-db-mysql-5.0-5.2.0" />
+		<antcall target="test-db-mysql-5.0-5.2.1" />
+		<antcall target="test-db-mysql-5.0-5.2.2" />
+		<antcall target="test-db-mysql-5.0-5.2.3" />
 	</target>
 
 	<target name="test-db-mysql-5.0-5.1.0">
@@ -28,6 +33,30 @@
 	<target name="test-db-mysql-5.0-5.1.2">
 		<antcall target="test-db-mysql-5.0-common">
 			<param name="sql.version" value="5.1.2" />
+		</antcall>
+	</target>
+
+	<target name="test-db-mysql-5.0-5.2.0">
+		<antcall target="test-db-mysql-5.0-common">
+			<param name="sql.version" value="5.2.0" />
+		</antcall>
+	</target>
+
+	<target name="test-db-mysql-5.0-5.2.1">
+		<antcall target="test-db-mysql-5.0-common">
+			<param name="sql.version" value="5.2.1" />
+		</antcall>
+	</target>
+
+	<target name="test-db-mysql-5.0-5.2.2">
+		<antcall target="test-db-mysql-5.0-common">
+			<param name="sql.version" value="5.2.2" />
+		</antcall>
+	</target>
+
+	<target name="test-db-mysql-5.0-5.2.3">
+		<antcall target="test-db-mysql-5.0-common">
+			<param name="sql.version" value="5.2.3" />
 		</antcall>
 	</target>
 
