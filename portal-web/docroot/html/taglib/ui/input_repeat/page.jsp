@@ -310,33 +310,37 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 		</div>
 
 		<div id="<portlet:namespace />monthlyTable" style="display: none;">
-			<aui:input checked="<%= monthlyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="day" name="monthlyType" type="radio" value="0" />
+			<span class="aui-field-row">
+				<aui:input checked="<%= monthlyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="day" name="monthlyType" type="radio" value="0" />
 
-			<aui:input inlineField="<%= true %>" inlineLabel="right" label="of-every" maxlength="2" name="monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" />
+				<aui:input inlineField="<%= true %>" inlineLabel="right" label="of-every" maxlength="2" name="monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" />
 
-			<aui:input inlineField="<%= true %>" inlineLabel="right" label="month-s" maxlength="2" name="monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" />
+				<aui:input inlineField="<%= true %>" inlineLabel="right" label="month-s" maxlength="2" name="monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" />
+			</span>
 
-			<aui:input checked="<%= (monthlyType == 1) %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="monthlyType" type="radio" value="1" />
+			<span class="aui-field-row">
+				<aui:input checked="<%= (monthlyType == 1) %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="monthlyType" type="radio" value="1" />
 
-			<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="left" label="" name="monthlyPos">
-				<aui:option label="first" selected="<%= monthlyPos == 1 %>" value="1" />
-				<aui:option label="second" selected="<%= monthlyPos == 2 %>" value="2" />
-				<aui:option label="third" selected="<%= monthlyPos == 3 %>" value="3" />
-				<aui:option label="fourth" selected="<%= monthlyPos == 4 %>" value="4" />
-				<aui:option label="last" selected="<%= monthlyPos == -1 %>" value="-1" />
-			</aui:select>
+				<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="left" label="" name="monthlyPos">
+					<aui:option label="first" selected="<%= monthlyPos == 1 %>" value="1" />
+					<aui:option label="second" selected="<%= monthlyPos == 2 %>" value="2" />
+					<aui:option label="third" selected="<%= monthlyPos == 3 %>" value="3" />
+					<aui:option label="fourth" selected="<%= monthlyPos == 4 %>" value="4" />
+					<aui:option label="last" selected="<%= monthlyPos == -1 %>" value="-1" />
+				</aui:select>
 
-			<aui:select cssClass="input-container" inlineField="<%= true %>" label="" name="monthlyDay1">
-				<aui:option label="<%= days[0] %>" selected="<%= monthlyDay1 == Calendar.SUNDAY %>" value="<%= Calendar.SUNDAY %>" />
-				<aui:option label="<%= days[1] %>" selected="<%= monthlyDay1 == Calendar.MONDAY %>" value="<%= Calendar.MONDAY %>" />
-				<aui:option label="<%= days[2] %>" selected="<%= monthlyDay1 == Calendar.TUESDAY %>" value="<%= Calendar.TUESDAY %>" />
-				<aui:option label="<%= days[3] %>" selected="<%= monthlyDay1 == Calendar.WEDNESDAY %>" value="<%= Calendar.WEDNESDAY %>" />
-				<aui:option label="<%= days[4] %>" selected="<%= monthlyDay1 == Calendar.THURSDAY %>" value="<%= Calendar.THURSDAY %>" />
-				<aui:option label="<%= days[5] %>" selected="<%= monthlyDay1 == Calendar.FRIDAY %>" value="<%= Calendar.FRIDAY %>" />
-				<aui:option label="<%= days[6] %>" selected="<%= monthlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
-			</aui:select>
+				<aui:select cssClass="input-container" inlineField="<%= true %>" label="" name="monthlyDay1">
+					<aui:option label="<%= days[0] %>" selected="<%= monthlyDay1 == Calendar.SUNDAY %>" value="<%= Calendar.SUNDAY %>" />
+					<aui:option label="<%= days[1] %>" selected="<%= monthlyDay1 == Calendar.MONDAY %>" value="<%= Calendar.MONDAY %>" />
+					<aui:option label="<%= days[2] %>" selected="<%= monthlyDay1 == Calendar.TUESDAY %>" value="<%= Calendar.TUESDAY %>" />
+					<aui:option label="<%= days[3] %>" selected="<%= monthlyDay1 == Calendar.WEDNESDAY %>" value="<%= Calendar.WEDNESDAY %>" />
+					<aui:option label="<%= days[4] %>" selected="<%= monthlyDay1 == Calendar.THURSDAY %>" value="<%= Calendar.THURSDAY %>" />
+					<aui:option label="<%= days[5] %>" selected="<%= monthlyDay1 == Calendar.FRIDAY %>" value="<%= Calendar.FRIDAY %>" />
+					<aui:option label="<%= days[6] %>" selected="<%= monthlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
+				</aui:select>
 
-			<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="monthlyInterval1" size="2" suffix="month-s" type="text" value="<%= monthlyInterval1 %>" />
+				<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="monthlyInterval1" size="2" suffix="month-s" type="text" value="<%= monthlyInterval1 %>" />
+			</span>
 		</div>
 
 		<%
@@ -345,63 +349,67 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 		%>
 
 		<div id="<portlet:namespace />yearlyTable" style="display: none;">
-			<aui:input checked="<%= yearlyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="every" name="yearlyType" type="radio" value="0" />
+			<span class="aui-field-row">
+				<aui:input checked="<%= yearlyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="every" name="yearlyType" type="radio" value="0" />
 
-			<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="left" label="" name="yearlyMonth0">
-
-			<%
-			for (int i = 0; i < 12; i++) {
-			%>
-
-				<aui:option label="<%= months[i] %>" selected="<%= monthIds[i] == yearlyMonth0 %>" value="<%= monthIds[i] %>" />
-
-			<%
-			}
-			%>
-
-			</aui:select>
-
-			<aui:input inlineField="<%= true %>" inlineLabel="right" label="of-every" maxlength="2" name="yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>" />
-
-			<aui:input inlineField="<%= true %>" inlineLabel="right" label="year-s" maxlength="2" name="yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>" />
-
-			<aui:input checked="<%= yearlyType == 1 %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="yearlyType" type="radio" value="1" />
-
-			<aui:select cssClass="input-container" inlineField="<%= true %>" label="" name="yearlyPos">
-				<aui:option label="first" selected="<%= yearlyPos == 1 %>" value="1" />
-				<aui:option label="second" selected="<%= yearlyPos == 2 %>" value="2" />
-				<aui:option label="third" selected="<%= yearlyPos == 3 %>" value="3" />
-				<aui:option label="fourth" selected="<%= yearlyPos == 4 %>" value="4" />
-				<aui:option label="last" selected="<%= yearlyPos == -1 %>" value="-1" />
-			</aui:select>
-
-			<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="right" label="of" name="yearlyDay1">
-				<aui:option label="weekday" selected="<%= yearlyDay1 == Calendar.MONDAY %>" value="<%= Calendar.MONDAY %>" />
-				<aui:option label="weekend-day" selected="<%= yearlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
-				<aui:option label="<%= days[0] %>" selected="<%= yearlyDay1 == Calendar.SUNDAY %>" value="<%= Calendar.SUNDAY %>" />
-				<aui:option label="<%= days[1] %>" selected="<%= yearlyDay1 == Calendar.MONDAY %>" value="<%= Calendar.MONDAY %>" />
-				<aui:option label="<%= days[2] %>" selected="<%= yearlyDay1 == Calendar.TUESDAY %>" value="<%= Calendar.TUESDAY %>" />
-				<aui:option label="<%= days[3] %>" selected="<%= yearlyDay1 == Calendar.WEDNESDAY %>" value="<%= Calendar.WEDNESDAY %>" />
-				<aui:option label="<%= days[4] %>" selected="<%= yearlyDay1 == Calendar.THURSDAY %>" value="<%= Calendar.THURSDAY %>" />
-				<aui:option label="<%= days[5] %>" selected="<%= yearlyDay1 == Calendar.FRIDAY %>" value="<%= Calendar.FRIDAY %>" />
-				<aui:option label="<%= days[6] %>" selected="<%= yearlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
-			</aui:select>
-
-			<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="right" label="of-every" name="yearlyMonth1">
+				<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="left" label="" name="yearlyMonth0">
 
 				<%
 				for (int i = 0; i < 12; i++) {
 				%>
 
-					<aui:option label="<%= months[i] %>" selected="<%= (monthIds[i] == yearlyMonth1) %>" value="<%= monthIds[i] %>" />
+					<aui:option label="<%= months[i] %>" selected="<%= monthIds[i] == yearlyMonth0 %>" value="<%= monthIds[i] %>" />
 
 				<%
 				}
 				%>
 
-			</aui:select>
+				</aui:select>
 
-			<aui:input inlineField="<%= true %>" inlineLabel="right" label="year-s" maxlength="2" name="yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>" />
+				<aui:input inlineField="<%= true %>" inlineLabel="right" label="of-every" maxlength="2" name="yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>" />
+
+				<aui:input inlineField="<%= true %>" inlineLabel="right" label="year-s" maxlength="2" name="yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>" />
+			</span>
+
+			<span class="aui-field-row">
+				<aui:input checked="<%= yearlyType == 1 %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="yearlyType" type="radio" value="1" />
+
+				<aui:select cssClass="input-container" inlineField="<%= true %>" label="" name="yearlyPos">
+					<aui:option label="first" selected="<%= yearlyPos == 1 %>" value="1" />
+					<aui:option label="second" selected="<%= yearlyPos == 2 %>" value="2" />
+					<aui:option label="third" selected="<%= yearlyPos == 3 %>" value="3" />
+					<aui:option label="fourth" selected="<%= yearlyPos == 4 %>" value="4" />
+					<aui:option label="last" selected="<%= yearlyPos == -1 %>" value="-1" />
+				</aui:select>
+
+				<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="right" label="of" name="yearlyDay1">
+					<aui:option label="weekday" selected="<%= yearlyDay1 == Calendar.MONDAY %>" value="<%= Calendar.MONDAY %>" />
+					<aui:option label="weekend-day" selected="<%= yearlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
+					<aui:option label="<%= days[0] %>" selected="<%= yearlyDay1 == Calendar.SUNDAY %>" value="<%= Calendar.SUNDAY %>" />
+					<aui:option label="<%= days[1] %>" selected="<%= yearlyDay1 == Calendar.MONDAY %>" value="<%= Calendar.MONDAY %>" />
+					<aui:option label="<%= days[2] %>" selected="<%= yearlyDay1 == Calendar.TUESDAY %>" value="<%= Calendar.TUESDAY %>" />
+					<aui:option label="<%= days[3] %>" selected="<%= yearlyDay1 == Calendar.WEDNESDAY %>" value="<%= Calendar.WEDNESDAY %>" />
+					<aui:option label="<%= days[4] %>" selected="<%= yearlyDay1 == Calendar.THURSDAY %>" value="<%= Calendar.THURSDAY %>" />
+					<aui:option label="<%= days[5] %>" selected="<%= yearlyDay1 == Calendar.FRIDAY %>" value="<%= Calendar.FRIDAY %>" />
+					<aui:option label="<%= days[6] %>" selected="<%= yearlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
+				</aui:select>
+
+				<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="right" label="of-every" name="yearlyMonth1">
+
+					<%
+					for (int i = 0; i < 12; i++) {
+					%>
+
+						<aui:option label="<%= months[i] %>" selected="<%= (monthIds[i] == yearlyMonth1) %>" value="<%= monthIds[i] %>" />
+
+					<%
+					}
+					%>
+
+				</aui:select>
+
+				<aui:input inlineField="<%= true %>" inlineLabel="right" label="year-s" maxlength="2" name="yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>" />
+			</span>
 		</div>
 	</aui:column>
 </aui:fieldset>
