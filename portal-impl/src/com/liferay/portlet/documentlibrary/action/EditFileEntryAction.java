@@ -233,7 +233,7 @@ public class EditFileEntryAction extends PortletAction {
 			// Add file entry
 
 			DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
-				groupId, folderId, sourceFileName, title, description,
+				groupId, newFolderId, sourceFileName, title, description,
 				extraSettings, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
