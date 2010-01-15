@@ -87,8 +87,8 @@ if (choiceField) {
 
 String baseTypeCss = TextFormatter.format(baseType.toLowerCase(), TextFormatter.K);
 
-String fieldCss = _buildCss(_FIELD_PREFIX, baseTypeCss, inlineField, disabled, choiceField, first, last, cssClass);
-String inputCss = _buildCss(_INPUT_PREFIX, baseTypeCss, false, false, choiceField, false, false, null);
+String fieldCss = _buildCss(FIELD_PREFIX, baseTypeCss, inlineField, disabled, choiceField, first, last, cssClass);
+String inputCss = _buildCss(INPUT_PREFIX, baseTypeCss, false, false, choiceField, false, false, null);
 String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 %>
 

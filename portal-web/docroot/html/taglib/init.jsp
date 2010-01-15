@@ -41,7 +41,17 @@ String currentURL = PortalUtil.getCurrentURL(request);
 <%@ include file="/html/taglib/init-ext.jsp" %>
 
 <%!
-private String _buildCss(String prefix, String baseTypeCss, boolean inlineField, boolean disabled, boolean choiceField, boolean first, boolean last, String cssClass) {
+public static final String BUTTON_INPUT_PREFIX = "aui-button-input";
+
+public static final String BUTTON_PREFIX = "aui-button";
+
+public static final String FIELD_PREFIX = "aui-field";
+
+public static final String INPUT_PREFIX = "aui-field-input";
+
+public static final String LABEL_PREFIX = "aui-field-label";
+
+private static String _buildCss(String prefix, String baseTypeCss, boolean inlineField, boolean disabled, boolean choiceField, boolean first, boolean last, String cssClass) {
 	StringBundler sb = new StringBundler();
 
 	sb.append(prefix);
@@ -104,7 +114,7 @@ private String _buildCss(String prefix, String baseTypeCss, boolean inlineField,
 	return sb.toString();
 }
 
-private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
+private static String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
 	if (dynamicAttributes == null) {
 		return StringPool.BLANK;
 	}
@@ -126,7 +136,7 @@ private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
 	return sb.toString();
 }
 
-private String _buildLabel(String inlineLabel, boolean showForLabel, String forLabel) {
+private static String _buildLabel(String inlineLabel, boolean showForLabel, String forLabel) {
 	StringBundler sb = new StringBundler();
 
 	sb.append("class=\"" + LABEL_PREFIX);
@@ -144,7 +154,7 @@ private String _buildLabel(String inlineLabel, boolean showForLabel, String forL
 	return sb.toString();
 }
 
-private String _getAttributeIgnoreCase(Map<String, Object> dynamicAttributes, String attribute) {
+private static String _getAttributeIgnoreCase(Map<String, Object> dynamicAttributes, String attribute) {
 	if (dynamicAttributes == null) {
 		return null;
 	}
@@ -161,14 +171,4 @@ private String _getAttributeIgnoreCase(Map<String, Object> dynamicAttributes, St
 
 	return null;
 }
-
-private final String _BUTTON_INPUT_PREFIX = "aui-button-input";
-
-private final String _BUTTON_PREFIX = "aui-button";
-
-private final String _FIELD_PREFIX = "aui-field";
-
-private final String _INPUT_PREFIX = "aui-field-input";
-
-private final String _LABEL_PREFIX = "aui-field-label";
 %>

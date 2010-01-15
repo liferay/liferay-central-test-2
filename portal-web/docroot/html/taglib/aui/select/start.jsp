@@ -41,8 +41,8 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:select:prefix"));
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 
-String fieldCss = _buildCss(_FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass);
-String inputCss = _buildCss(_INPUT_PREFIX, "select", false, false, false, false, false, null);
+String fieldCss = _buildCss(FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass);
+String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, false, null);
 %>
 
 <span class="<%= fieldCss %>">
