@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditSecondFolderTest extends BaseTestCase {
 	public void testEditSecondFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,6 +53,7 @@ public class EditSecondFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.clickAt("//tr[4]/td[4]/ul/li/strong/span",
 			RuntimeVariables.replace(""));
 
@@ -60,7 +63,7 @@ public class EditSecondFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//div[13]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -70,25 +73,9 @@ public class EditSecondFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[5]/ul/li[1]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[13]/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		selenium.type("_31_name",
 			RuntimeVariables.replace("Edited Test2 Folder2"));
 		selenium.type("_31_description",

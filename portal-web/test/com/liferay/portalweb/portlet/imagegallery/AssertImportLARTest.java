@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertImportLARTest extends BaseTestCase {
 	public void testAssertImportLAR() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,7 +55,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a test folder!"));
 		assertTrue(selenium.isTextPresent("This is a test3 folder3."));
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -76,7 +78,8 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[4]/td[1]/a[1]/b", RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[4]/td[1]/a[1]/strong",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -96,7 +99,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isTextPresent("This is a test3 subfolder3."));
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -106,7 +109,7 @@ public class AssertImportLARTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//img[@alt='Test Image. This is the Liferay logo!']")) {
+							"//img[@alt='Test Image - This is the Liferay logo!']")) {
 					break;
 				}
 			}
@@ -117,6 +120,6 @@ public class AssertImportLARTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent(
-				"//img[@alt='Test Image. This is the Liferay logo!']"));
+				"//img[@alt='Test Image - This is the Liferay logo!']"));
 	}
 }

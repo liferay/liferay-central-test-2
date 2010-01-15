@@ -32,14 +32,16 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SetupTest extends BaseTestCase {
 	public void testSetup() throws Exception {
+		selenium.open("/web/guest/home/");
+		Thread.sleep(5000);
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
+				if (selenium.isElementPresent("addPage")) {
 					break;
 				}
 			}
@@ -49,11 +51,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,8 +59,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span")) {
+				if (selenium.isElementPresent("//input")) {
 					break;
 				}
 			}
@@ -72,9 +69,9 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
+		selenium.type("//input", RuntimeVariables.replace("DLD Setup Test Page"));
+		selenium.clickAt("//span[2]/span/span/span/span",
 			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,7 +79,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_88_name_en_US")) {
+				if (selenium.isElementPresent("link=DLD Setup Test Page")) {
 					break;
 				}
 			}
@@ -92,15 +89,29 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("DLD Setup Test Page"));
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=DLD Setup Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_145_addApplication")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -128,7 +139,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Document']")) {
+				if (selenium.isElementPresent("link=Add Document")) {
 					break;
 				}
 			}
@@ -138,8 +149,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//input[@value='Add Document']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Document", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
@@ -180,11 +190,7 @@ public class SetupTest extends BaseTestCase {
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrarydisplay\\dependencies\\DLD_test_document.txt"));
-		selenium.typeKeys("_20_title",
-			RuntimeVariables.replace("DLD Test Document"));
 		selenium.type("_20_title", RuntimeVariables.replace("DLD Test Document"));
-		selenium.typeKeys("_20_description",
-			RuntimeVariables.replace("This is a DLD test document."));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is a DLD test document."));
 

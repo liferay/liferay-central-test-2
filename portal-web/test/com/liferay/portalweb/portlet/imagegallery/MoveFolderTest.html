@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">MoveFolderTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Image Gallery Test Page</td>
 	<td></td>
@@ -20,12 +25,12 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//tr[4]/td[1]/a/b</td>
+	<td>//tr[4]/td[1]/a/strong</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//li[6]/span/a</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -35,17 +40,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Edit</td>
+	<td>//div[13]/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[7]/span/a</td>
+	<td>clickAndWait</td>
+	<td>//div[13]/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -65,12 +65,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Folders</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Folders</td>
+	<td>link=Image Home</td>
 	<td></td>
 </tr>
 <tr>
@@ -94,8 +89,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
-	<td>//div[1]/span/a</td>
+	<td>_31_parentFolderName</td>
 	<td>Test1 Subfolder1</td>
 </tr>
 <tr>
@@ -114,28 +114,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Image Gallery Test Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Image Gallery Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[6]/span/a</td>
+	<td>//a/strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[7]/span/a</td>
+	<td>//a/strong</td>
 	<td></td>
 </tr>
 <tr>
@@ -145,17 +145,12 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[8]/span/a</td>
+	<td>//a/strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//img[@alt='Test1 Image1. This is Test1 Image1.']</td>
+	<td>//img[@alt='Test1 Image1 - This is Test1 Image1.']</td>
 	<td></td>
 </tr>
 <tr>
@@ -164,8 +159,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
-	<td>//li[8]/span/a</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -175,12 +170,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Edit</td>
+	<td>//div[13]/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Edit</td>
+	<td>clickAndWait</td>
+	<td>//div[13]/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -200,12 +195,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Folders</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Folders</td>
+	<td>link=Image Home</td>
 	<td></td>
 </tr>
 <tr>
@@ -224,8 +214,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
-	<td>//div[1]/span/a</td>
+	<td>_31_parentFolderName</td>
 	<td>Test3 Folder3</td>
 </tr>
 <tr>
@@ -244,18 +239,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Image Gallery Test Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Image Gallery Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//tr[4]/td[1]/a/b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[6]/span/a</td>
+	<td>//tr[4]/td[1]/a/strong</td>
 	<td></td>
 </tr>
 <tr>
@@ -265,17 +265,12 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[7]/span/a</td>
+	<td>//a/strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//img[@alt='Test1 Image1. This is Test1 Image1.']</td>
+	<td>//img[@alt='Test1 Image1 - This is Test1 Image1.']</td>
 	<td></td>
 </tr>
 

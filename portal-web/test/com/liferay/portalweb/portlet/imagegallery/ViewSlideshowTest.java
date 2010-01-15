@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ViewSlideshowTest extends BaseTestCase {
 	public void testViewSlideshow() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,46 +53,12 @@ public class ViewSlideshowTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[7]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//input[@value='View Slide Show']",
-			RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("link=View Slide Show", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("slideShow", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=slideShow");
 
@@ -120,7 +88,7 @@ public class ViewSlideshowTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//img[@alt='Test1 Image1. This is Test1 Image1.']")) {
+							"//img[@alt='Test1 Image1 - This is Test1 Image1.']")) {
 					break;
 				}
 			}
@@ -131,6 +99,6 @@ public class ViewSlideshowTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent(
-				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
+				"//img[@alt='Test1 Image1 - This is Test1 Image1.']"));
 	}
 }
