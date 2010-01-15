@@ -73,6 +73,8 @@ public class AddBlogsEntryCommentTest extends BaseTestCase {
 
 		selenium.type("//textarea",
 			RuntimeVariables.replace("AP Blogs Entry Comment."));
+		selenium.keyPress("//textarea", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("//textarea", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//tr[3]/td/input[1]", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

@@ -54,11 +54,13 @@ public class EditEntryCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Comment"),
+		assertEquals(RuntimeVariables.replace("Comment."),
 			selenium.getText("//td[2]/div[1]"));
 		selenium.clickAt("//td[4]/span/a[2]", RuntimeVariables.replace(""));
 		selenium.type("_33_editReplyBody1",
 			RuntimeVariables.replace("CommentEdit."));
+		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("_33_editReplyButton1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

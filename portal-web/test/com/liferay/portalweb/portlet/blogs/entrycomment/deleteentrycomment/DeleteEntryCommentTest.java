@@ -54,7 +54,7 @@ public class DeleteEntryCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Comment"),
+		assertEquals(RuntimeVariables.replace("Comment."),
 			selenium.getText("//td[2]/div[1]"));
 		selenium.click(RuntimeVariables.replace("//td[5]/span/a[2]"));
 		selenium.waitForPageToLoad("30000");
@@ -81,7 +81,7 @@ public class DeleteEntryCommentTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertNotEquals(RuntimeVariables.replace("Comment"),
+		assertNotEquals(RuntimeVariables.replace("Comment."),
 			selenium.getText("//td[2]/div[1]"));
 	}
 }
