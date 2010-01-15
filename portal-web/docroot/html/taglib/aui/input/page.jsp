@@ -144,33 +144,6 @@ if (Validator.isNotNull(cssClass)) {
 
 <span class="aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-element-left" : StringPool.BLANK %>">
 	<c:choose>
-		<c:when test='<%= (model != null) && type.equals("assetCategories") %>'>
-			<liferay-ui:asset-categories-selector
-				className="<%= model.getName() %>"
-				classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
-				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
-			/>
-		</c:when>
-		<c:when test='<%= (model != null) && type.equals("assetTags") %>'>
-			<liferay-ui:asset-tags-selector
-				className="<%= model.getName() %>"
-				classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
-				contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
-			/>
-		</c:when>
-		<c:when test="<%= (model != null) && Validator.isNull(type) %>">
-			<liferay-ui:input-field
-				bean="<%= bean %>"
-				cssClass="<%= inputCss %>"
-				defaultValue="<%= value %>"
-				disabled="<%= disabled %>"
-				field="<%= field %>"
-				fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
-				format='<%= (Format)dynamicAttributes.get("format") %>'
-				formName='<%= (String)dynamicAttributes.get("formName") %>'
-				model="<%= model %>"
-			/>
-		</c:when>
 		<c:when test='<%= type.equals("checkbox") %>'>
 
 			<%
@@ -233,6 +206,37 @@ if (Validator.isNotNull(cssClass)) {
 					/>
 				</span>
 			</span>
+		</c:when>
+		<c:when test='<%= (model != null) %>'>
+			<c:choose>
+				<c:when test='<%= type.equals("assetCategories") %>'>
+					<liferay-ui:asset-categories-selector
+						className="<%= model.getName() %>"
+						classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
+						contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+					/>
+				</c:when>
+				<c:when test='<%= type.equals("assetTags") %>'>
+					<liferay-ui:asset-tags-selector
+						className="<%= model.getName() %>"
+						classPK="<%= _getClassPK(bean, dynamicAttributes) %>"
+						contentCallback='<%= portletResponse.getNamespace() + "getSuggestionsContent" %>'
+					/>
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:input-field
+						bean="<%= bean %>"
+						cssClass="<%= inputCss %>"
+						defaultValue="<%= value %>"
+						disabled="<%= disabled %>"
+						field="<%= field %>"
+						fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
+						format='<%= (Format)dynamicAttributes.get("format") %>'
+						formName='<%= (String)dynamicAttributes.get("formName") %>'
+						model="<%= model %>"
+					/>
+				</c:otherwise>
+			</c:choose>
 		</c:when>
 		<c:otherwise>
 
