@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddNullDocumentTest extends BaseTestCase {
 	public void testAddNullDocument() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,13 +53,13 @@ public class AddNullDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Document']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Document", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,27 +78,7 @@ public class AddNullDocumentTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Use the classic uploader.");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_20_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_20_title",
-			RuntimeVariables.replace("Null Document Test"));
-		selenium.type("_20_title",
-			RuntimeVariables.replace("Null Document Test"));
+		Thread.sleep(5000);
 		selenium.type("_20_description",
 			RuntimeVariables.replace("Null Document Test"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

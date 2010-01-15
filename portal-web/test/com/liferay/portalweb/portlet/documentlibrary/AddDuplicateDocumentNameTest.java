@@ -33,6 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddDuplicateDocumentNameTest extends BaseTestCase {
 	public void testAddDuplicateDocumentName() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,13 +54,13 @@ public class AddDuplicateDocumentNameTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Document']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Document", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,30 +79,12 @@ public class AddDuplicateDocumentNameTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Use the classic uploader.");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_20_file")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\dependencies\\test_document.txt"));
-		selenium.typeKeys("_20_title",
-			RuntimeVariables.replace("Edited Test Document.txt"));
 		selenium.type("_20_title",
-			RuntimeVariables.replace("Edited Test Document.txt"));
+			RuntimeVariables.replace("Edited Test Document"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("Duplicate Document Test"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

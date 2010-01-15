@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddDuplicateFolderTitleTest extends BaseTestCase {
 	public void testAddDuplicateFolderTitle() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,11 +53,9 @@ public class AddDuplicateFolderTitleTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Subfolder']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Folder", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_20_name",
-			RuntimeVariables.replace("Edited Second Folder Test"));
+		Thread.sleep(5000);
 		selenium.type("_20_name",
 			RuntimeVariables.replace("Edited Second Folder Test"));
 		selenium.type("_20_description",

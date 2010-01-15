@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddNullFolderTitleTest extends BaseTestCase {
 	public void testAddNullFolderTitle() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,12 +53,10 @@ public class AddNullFolderTitleTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Subfolder']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Folder", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.type("_20_name", RuntimeVariables.replace(""));
-		selenium.typeKeys("_20_description",
-			RuntimeVariables.replace("Null Title Folder"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("Null Title Folder"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

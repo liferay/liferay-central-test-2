@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SearchTest extends BaseTestCase {
 	public void testSearch() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -54,7 +56,7 @@ public class SearchTest extends BaseTestCase {
 		selenium.typeKeys("_20_keywords1",
 			RuntimeVariables.replace("Test Document"));
 		selenium.type("_20_keywords1", RuntimeVariables.replace("Test Document"));
-		selenium.clickAt("//input[@value='Search Folders']",
+		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Document"));

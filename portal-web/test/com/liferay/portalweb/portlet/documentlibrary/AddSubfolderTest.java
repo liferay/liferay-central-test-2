@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSubfolderTest extends BaseTestCase {
 	public void testAddSubfolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,12 +53,11 @@ public class AddSubfolderTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[1]/a[2]", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Subfolder']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Subfolder", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_20_name", RuntimeVariables.replace("Test Subfolder"));
+		Thread.sleep(5000);
 		selenium.type("_20_name", RuntimeVariables.replace("Test Subfolder"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is a test subfolder!"));

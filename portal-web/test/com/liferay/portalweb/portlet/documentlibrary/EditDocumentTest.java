@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditDocumentTest extends BaseTestCase {
 	public void testEditDocument() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,10 +53,11 @@ public class EditDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.clickAt("//strong", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -63,7 +66,7 @@ public class EditDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("//div[8]/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -73,10 +76,9 @@ public class EditDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[8]/ul/li[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_20_title",
-			RuntimeVariables.replace("Edited Test Document"));
+		Thread.sleep(5000);
 		selenium.type("_20_title",
 			RuntimeVariables.replace("Edited Test Document"));
 		selenium.type("_20_description",
@@ -85,7 +87,7 @@ public class EditDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Edited Test Document.txt"));
+		assertTrue(selenium.isTextPresent("Edited Test Document"));
 		assertTrue(selenium.isTextPresent("This is an edited test document!"));
 	}
 }

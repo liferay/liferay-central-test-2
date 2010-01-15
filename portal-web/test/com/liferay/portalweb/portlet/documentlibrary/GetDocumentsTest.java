@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class GetDocumentsTest extends BaseTestCase {
 	public void testGetDocuments() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -54,10 +56,10 @@ public class GetDocumentsTest extends BaseTestCase {
 		selenium.clickAt("link=My Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Test Document.txt\nThis is a test document!"));
+				"Test Document\nThis is a test document!"));
 		selenium.clickAt("link=Recent Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Test Document.txt\nThis is a test document!"));
+				"Test Document\nThis is a test document!"));
 	}
 }

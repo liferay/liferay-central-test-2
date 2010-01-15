@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddInvalidFolderTitleTest extends BaseTestCase {
 	public void testAddInvalidFolderTitle() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,10 +53,9 @@ public class AddInvalidFolderTitleTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Subfolder']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Subfolder", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_20_name", RuntimeVariables.replace("!@#$%^&amp;*"));
+		Thread.sleep(5000);
 		selenium.type("_20_name", RuntimeVariables.replace("!@#$%^&amp;*"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("Invalid Title Folder"));

@@ -44,8 +44,8 @@ public class DocumentLibraryTests extends BaseTests {
 		testSuite.addTestSuite(AddDocumentTest.class);
 		testSuite.addTestSuite(AddCommentsTest.class);
 		testSuite.addTestSuite(EditCommentsTest.class);
-		testSuite.addTestSuite(CompareVersionsTest.class);
-		testSuite.addTestSuite(DeleteCompareVersionsTest.class);
+		//testSuite.addTestSuite(CompareVersionsTest.class);
+		//testSuite.addTestSuite(DeleteCompareVersionsTest.class);
  		testSuite.addTestSuite(SearchTest.class);
 		testSuite.addTestSuite(GetDocumentsTest.class);
 		testSuite.addTestSuite(AddSecondFolderTest.class);
