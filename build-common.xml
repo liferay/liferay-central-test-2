@@ -29,6 +29,8 @@
 	<property file="${project.dir}/sql/sql.${env.COMPUTERNAME}.properties" />
 	<property file="${project.dir}/sql/sql.properties" />
 
+	<property name="liferay.home" value="${app.server.dir}/.." />
+
 	<path id="lib.classpath">
 		<fileset dir="${project.dir}/lib/development" includes="*.jar" />
 		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
