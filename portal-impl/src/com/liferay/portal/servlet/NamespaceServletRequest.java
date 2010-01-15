@@ -98,6 +98,9 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 				names.add(
 					name.substring(_attrNamespace.length(), name.length()));
 			}
+			else if (_isReservedParam(name)) {
+				names.add(name);
+			}
 		}
 
 		return Collections.enumeration(names);
