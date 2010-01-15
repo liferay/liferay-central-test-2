@@ -484,12 +484,12 @@ Liferay.Portlet = {
 			bodyContent.append(loading);
 			bodyContent.append(iframe);
 
+			var fixSize = function(number) {
+				return ((parseInt(number, 10) || 0) - 5) + 'px';
+			};
+
 			var updateIframeSize = function(event) {
 				var bodyNode = event.currentTarget.bodyNode;
-
-				var fixSize = function(n) {
-					return ((parseInt(n, 10) || 0) - 5) + 'px';
-				};
 
 				setTimeout(
 					function() {
