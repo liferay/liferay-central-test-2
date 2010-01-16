@@ -625,8 +625,6 @@
 						</span>
 					</div>
 				</div>
-				
-
 			</fieldset>
 
 			<fieldset class="aui-block-labels" id="background-styles">
