@@ -90,6 +90,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			friendlyURL.startsWith(_PATH_DELEGATE) ||
 			friendlyURL.startsWith(_PATH_DISPLAY_CHART) ||
 			friendlyURL.startsWith(_PATH_DOCUMENT) ||
+			friendlyURL.startsWith(_PATH_DTD) ||
 			friendlyURL.startsWith(_PATH_FACEBOOK) ||
 			friendlyURL.startsWith(_PATH_GOOGLE_GADGET) ||
 			friendlyURL.startsWith(_PATH_HTML) ||
@@ -325,6 +326,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 	private static final String _PATH_DISPLAY_CHART = "/display_chart";
 
 	private static final String _PATH_DOCUMENT = "/document/";
+
+	private static final String _PATH_DTD = "/dtd/";
 
 	private static final String _PATH_FACEBOOK = "/facebook/";
 
