@@ -71,8 +71,7 @@ public class AddPageAPTest extends BaseTestCase {
 
 		selenium.type("//input",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
-		selenium.clickAt("//span[2]/span/span/span/span",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

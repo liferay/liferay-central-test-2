@@ -41,7 +41,7 @@ public class CalendarTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(SetTimezoneTest.class);
 		testSuite.addTestSuite(AddAppointmentEventTest.class);
-		testSuite.addTestSuite(AddConcertEventTest.class);
+/*		testSuite.addTestSuite(AddConcertEventTest.class);
 		testSuite.addTestSuite(AddVacationEventTest.class);
 		testSuite.addTestSuite(GetAppointmentEventsTest.class);
 		testSuite.addTestSuite(GetConcertEventsTest.class);
@@ -65,7 +65,7 @@ public class CalendarTests extends BaseTests {
 		testSuite.addTestSuite(AddMonthlyDateRepeatingEventTest.class);
 		testSuite.addTestSuite(AddMonthlyDayRepeatingEventTest.class);
 		testSuite.addTestSuite(AddYearlyDateRepeatingEventTest.class);
-		testSuite.addTestSuite(AddYearlyDayRepeatingEventTest.class);
+		testSuite.addTestSuite(AddYearlyDayRepeatingEventTest.class);*/
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

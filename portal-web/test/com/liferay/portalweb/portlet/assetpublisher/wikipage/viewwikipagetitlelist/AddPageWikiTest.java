@@ -70,8 +70,7 @@ public class AddPageWikiTest extends BaseTestCase {
 		}
 
 		selenium.type("//input", RuntimeVariables.replace("Wiki Test Page"));
-		selenium.clickAt("//span[2]/span/span/span/span",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
