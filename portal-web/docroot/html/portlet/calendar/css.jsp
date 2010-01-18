@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-calendar .calendar-container {
-	background: url(<%= themeImagesPath %>/calendar/calendar_day_drop_shadow.png) repeat-x 0 99%;
+	background: #fff url(<%= themeImagesPath %>/calendar/calendar_day_drop_shadow.png) repeat-x 0 99%;
 	border: 1px solid #D7D7D7;
 	width: 400px;
 }
