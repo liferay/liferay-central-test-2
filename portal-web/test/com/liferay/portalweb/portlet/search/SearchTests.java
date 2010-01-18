@@ -40,7 +40,7 @@ public class SearchTests extends BaseTests {
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(SearchTest.class);
-		testSuite.addTestSuite(DeletePageTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

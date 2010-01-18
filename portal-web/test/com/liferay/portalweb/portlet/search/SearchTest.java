@@ -32,6 +32,43 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SearchTest extends BaseTestCase {
 	public void testSearch() throws Exception {
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Search Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Search Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_3_keywords")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_3_keywords", RuntimeVariables.replace("Test"));
 		selenium.clickAt("//input[@type='image']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -52,8 +89,6 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Joe Bloggs"));
 	}
 }

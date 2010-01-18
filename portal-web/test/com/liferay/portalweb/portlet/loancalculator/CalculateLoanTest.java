@@ -32,11 +32,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CalculateLoanTest extends BaseTestCase {
 	public void testCalculateLoan() throws Exception {
-		selenium.type("_61_loanAmount", RuntimeVariables.replace("1,000"));
-		selenium.type("_61_interest", RuntimeVariables.replace("4.75"));
-		selenium.type("_61_years", RuntimeVariables.replace("20"));
-		selenium.clickAt("//input[@value='Calculate']",
-			RuntimeVariables.replace(""));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -44,7 +40,7 @@ public class CalculateLoanTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[6]/td[2]/b")) {
+				if (selenium.isElementPresent("link=Loan Calculator Test Page")) {
 					break;
 				}
 			}
@@ -53,5 +49,17 @@ public class CalculateLoanTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.clickAt("link=Loan Calculator Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_61_loanAmount", RuntimeVariables.replace("1,000"));
+		selenium.type("_61_interest", RuntimeVariables.replace("4.75"));
+		selenium.type("_61_years", RuntimeVariables.replace("20"));
+		selenium.clickAt("//input[@value='Calculate']",
+			RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace("1,551"),
+			selenium.getText("//tr[6]/td[2]/strong"));
 	}
 }

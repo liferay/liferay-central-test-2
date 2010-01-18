@@ -39,7 +39,8 @@ public class InternationalizationJapaneseTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='??? (??)']")) {
+				if (selenium.isElementPresent(
+							"//img[@alt='\u65e5\u672c\u8a9e (\u65e5\u672c)']")) {
 					break;
 				}
 			}
@@ -49,13 +50,20 @@ public class InternationalizationJapaneseTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//img[@alt='??? (??)']", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//img[@alt='\u65e5\u672c\u8a9e (\u65e5\u672c)']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@id='navigation']/ul/li[3]/a/span",
+		Thread.sleep(5000);
+		selenium.clickAt("//div[2]/ul/li[2]/a/span",
 			RuntimeVariables.replace(""));
-		selenium.typeKeys("new_page", RuntimeVariables.replace("????????"));
-		selenium.type("new_page", RuntimeVariables.replace("????????"));
-		selenium.clickAt("link=??", RuntimeVariables.replace(""));
+		selenium.typeKeys("//input",
+			RuntimeVariables.replace(
+				"\u8a00\u8a9e\u30c6\u30b9\u30c8\u30da\u30fc\u30b8"));
+		selenium.type("//input",
+			RuntimeVariables.replace(
+				"\u8a00\u8a9e\u30c6\u30b9\u30c8\u30da\u30fc\u30b8"));
+		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 		selenium.clickAt("//img[@alt='English (United States)']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

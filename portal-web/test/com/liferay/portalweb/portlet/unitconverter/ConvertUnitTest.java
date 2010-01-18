@@ -32,11 +32,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ConvertUnitTest extends BaseTestCase {
 	public void testConvertUnit() throws Exception {
-		selenium.type("_27_fromValue", RuntimeVariables.replace("1.0"));
-		selenium.select("_27_fromId", RuntimeVariables.replace("label=Inch"));
-		selenium.select("_27_toId", RuntimeVariables.replace("label=Centimeter"));
-		selenium.clickAt("//input[@value='Convert']",
-			RuntimeVariables.replace(""));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -44,7 +40,7 @@ public class ConvertUnitTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_27_to_value")) {
+				if (selenium.isElementPresent("link=Unit Converter Test Page")) {
 					break;
 				}
 			}
@@ -53,5 +49,16 @@ public class ConvertUnitTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.clickAt("link=Unit Converter Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_27_fromValue", RuntimeVariables.replace("1.0"));
+		selenium.select("_27_fromId", RuntimeVariables.replace("label=Inch"));
+		selenium.select("_27_toId", RuntimeVariables.replace("label=Centimeter"));
+		selenium.clickAt("//input[@value='Convert']",
+			RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		assertEquals("2.5399999187200026", selenium.getValue("_27_to_value"));
 	}
 }

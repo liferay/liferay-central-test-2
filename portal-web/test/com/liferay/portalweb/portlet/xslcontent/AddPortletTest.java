@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddPortletTest extends BaseTestCase {
 	public void testAddPortlet() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +53,26 @@ public class AddPortletTest extends BaseTestCase {
 		selenium.clickAt("link=XSL Content Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_145_addApplication")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,7 +81,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"ContentManagement-XSLContent\"]")) {
+							"//div[@id=\"ContentManagement-XSLContent\"]/p/a")) {
 					break;
 				}
 			}

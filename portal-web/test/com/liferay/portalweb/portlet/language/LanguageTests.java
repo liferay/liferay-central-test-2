@@ -44,7 +44,7 @@ public class LanguageTests extends BaseTests {
 		testSuite.addTestSuite(InternationalizationSpanishTest.class);
 		testSuite.addTestSuite(InternationalizationVerifyTest.class);
 		testSuite.addTestSuite(ConfirmEnglishTest.class);
-		testSuite.addTestSuite(DeletePageTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

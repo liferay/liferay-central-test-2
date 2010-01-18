@@ -53,13 +53,15 @@ public class InternationalizationSpanishTest extends BaseTestCase {
 		selenium.clickAt("//img[@alt='espa\u00f1ol (Espa\u00f1a)']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@id='navigation']/ul/li[3]/a/span",
+		Thread.sleep(5000);
+		selenium.clickAt("//div[2]/ul/li[2]/a/span",
 			RuntimeVariables.replace(""));
-		selenium.typeKeys("new_page",
+		selenium.typeKeys("//input",
 			RuntimeVariables.replace("P\u00e1gina de la prueba de lengua"));
-		selenium.type("new_page",
+		selenium.type("//input",
 			RuntimeVariables.replace("P\u00e1gina de la prueba de lengua"));
-		selenium.clickAt("link=Guardar", RuntimeVariables.replace(""));
+		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 		selenium.clickAt("//img[@alt='English (United States)']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

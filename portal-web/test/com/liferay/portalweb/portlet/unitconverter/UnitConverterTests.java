@@ -40,7 +40,7 @@ public class UnitConverterTests extends BaseTests {
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(ConvertUnitTest.class);
-		testSuite.addTestSuite(DeletePageTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
