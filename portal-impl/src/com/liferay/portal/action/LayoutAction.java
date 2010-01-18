@@ -870,7 +870,7 @@ public class LayoutAction extends Action {
 
 		PortletURL portletURL = new PortletURLImpl(
 			actionRequestImpl, actionRequestImpl.getPortletName(),
-			layout.getLayoutId(), PortletRequest.RENDER_PHASE);
+			layout.getPlid(), PortletRequest.RENDER_PHASE);
 
 		Map<String, String[]> renderParameters =
 			actionResponseImpl.getRenderParameterMap();
