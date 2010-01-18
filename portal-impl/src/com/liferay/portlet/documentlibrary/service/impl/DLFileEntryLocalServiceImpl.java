@@ -578,7 +578,23 @@ public class DLFileEntryLocalServiceImpl
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
-		return dlFileEntryFinder.countByG_F_S(groupId, folderIds, status);
+		if (folderIds.size() <= PropsValues.SQL_DATA_MAX_PARAMETERS) {
+			return dlFileEntryFinder.countByG_F_S(groupId, folderIds, status);
+		}
+		else {
+			int start = 0;
+			int end = PropsValues.SQL_DATA_MAX_PARAMETERS;
+
+			int filesCount = dlFileEntryFinder.countByG_F_S(
+				groupId, folderIds.subList(start, end), status);
+
+			folderIds.subList(start, end).clear();
+
+			filesCount += getFoldersFileEntriesCount(
+				groupId, folderIds, status);
+
+			return filesCount;
+		}
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(

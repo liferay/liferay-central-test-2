@@ -1365,6 +1365,8 @@ public interface PropsKeys {
 
 	public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_REGION_REGION_ID = "sql.data.com.liferay.portal.model.Region.region.id";
 
+	public static final String SQL_DATA_MAX_PARAMETERS = "sql.data.max.parameters";
+
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = "struts.portlet.request.processor";
 
 	public static final String SYSTEM_COMMUNITY_ROLES = "system.community.roles";
