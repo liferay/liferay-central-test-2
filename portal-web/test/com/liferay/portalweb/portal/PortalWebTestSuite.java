@@ -42,6 +42,7 @@ import com.liferay.portalweb.portlet.helloworld.HelloWorldTests;
 import com.liferay.portalweb.portlet.iframe.IFrameTests;
 import com.liferay.portalweb.portlet.imagegallery.ImageGalleryTests;
 import com.liferay.portalweb.portlet.invitation.InvitationTests;
+import com.liferay.portalweb.portlet.language.LanguageTests;
 import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
 import com.liferay.portalweb.portlet.managepages.ManagePagesTests;
 import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
@@ -106,7 +107,7 @@ public class PortalWebTestSuite extends BaseTests {
 		testSuite.addTest(IFrameTests.suite());
 		testSuite.addTest(ImageGalleryTests.suite());
 		testSuite.addTest(InvitationTests.suite());
-		//testSuite.addTest(LanguageTests.suite());
+		testSuite.addTest(LanguageTests.suite());
 		testSuite.addTest(LoanCalculatorTests.suite());
 		testSuite.addTest(ManagePagesTests.suite());
 		testSuite.addTest(MessageBoardsTests.suite());
