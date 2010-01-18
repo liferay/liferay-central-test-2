@@ -43,8 +43,6 @@ import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
-import java.io.IOException;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -222,30 +220,23 @@ public class SharepointFilter extends BasePortalFilter {
 				PermissionCheckerFactoryUtil.create(user, false);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
-		}
-		catch (Exception e) {
-			sendUnauthorized(response);
 
-			return;
-		}
-
-		try {
 			processFilter(
 				SharepointFilter.class, request, response, filterChain);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
+			response.setHeader("WWW-Authenticate", "BASIC realm=\"Liferay\"");
+
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+			response.flushBuffer();
 		}
-	}
-
-	protected void sendUnauthorized(HttpServletResponse response)
-		throws IOException {
-
-		response.setHeader("WWW-Authenticate", "BASIC realm=\"Liferay\"");
-
-		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-
-		response.flushBuffer();
+		finally {
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
+		}
 	}
 
 	protected void setGetHeaders(HttpServletResponse response) {

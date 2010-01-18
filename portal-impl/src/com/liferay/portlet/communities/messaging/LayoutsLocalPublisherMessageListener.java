@@ -104,19 +104,25 @@ public class LayoutsLocalPublisherMessageListener extends BaseMessageListener {
 
 		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-		if (command.equals(
-				LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES)) {
+		try {
+			if (command.equals(
+					LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES)) {
 
-			StagingUtil.publishLayouts(
-				sourceGroupId, targetGroupId, privateLayout, parameterMap,
-				startDate, endDate);
+				StagingUtil.publishLayouts(
+					sourceGroupId, targetGroupId, privateLayout, parameterMap,
+					startDate, endDate);
+			}
+			else if (command.equals(
+				LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES)) {
+
+				StagingUtil.publishLayouts(
+					sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
+					parameterMap, startDate, endDate);
+			}
 		}
-		else if (command.equals(
-			LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES)) {
-
-			StagingUtil.publishLayouts(
-				sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
-				parameterMap, startDate, endDate);
+		finally {
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
 		}
 	}
 

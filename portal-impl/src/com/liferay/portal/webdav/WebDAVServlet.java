@@ -76,8 +76,6 @@ public class WebDAVServlet extends HttpServlet {
 				storage.setRootPath(getRootPath(request));
 			}
 
-			// Permission checker
-
 			PermissionChecker permissionChecker = null;
 
 			String remoteUser = request.getRemoteUser();
@@ -110,6 +108,9 @@ public class WebDAVServlet extends HttpServlet {
 			_log.error(e, e);
 		}
 		finally {
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
+
 			response.setStatus(status);
 
 			if (_log.isInfoEnabled()) {

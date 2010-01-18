@@ -74,15 +74,13 @@ public class RemotingServlet extends DispatcherServlet {
 		throws ServletException {
 
 		try {
+			PortalInstances.getCompanyId(request);
+
 			String remoteUser = request.getRemoteUser();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Remote user " + remoteUser);
 			}
-
-			long companyId = PortalInstances.getCompanyId(request);
-
-			CompanyThreadLocal.setCompanyId(companyId);
 
 			if (remoteUser != null) {
 				PrincipalThreadLocal.setName(remoteUser);
@@ -108,6 +106,11 @@ public class RemotingServlet extends DispatcherServlet {
 		}
 		catch (Exception e) {
 			throw new ServletException(e);
+		}
+		finally {
+			CompanyThreadLocal.setCompanyId(0);
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
 		}
 	}
 

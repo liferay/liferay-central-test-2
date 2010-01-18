@@ -36,6 +36,13 @@ import com.liferay.portal.util.PropsValues;
 public class PermissionCheckerUtil {
 
 	public static void setThreadValues(User user) {
+		if (user == null) {
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
+
+			return;
+		}
+
 		long userId = user.getUserId();
 
 		String name = String.valueOf(userId);

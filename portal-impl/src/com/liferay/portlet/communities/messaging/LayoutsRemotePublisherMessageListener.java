@@ -107,10 +107,16 @@ public class LayoutsRemotePublisherMessageListener extends BaseMessageListener {
 
 		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-		StagingUtil.copyRemoteLayouts(
-			sourceGroupId, privateLayout, layoutIdMap, parameterMap,
-			remoteAddress, remotePort, secureConnection, remoteGroupId,
-			remotePrivateLayout, parameterMap, startDate, endDate);
+		try {
+			StagingUtil.copyRemoteLayouts(
+				sourceGroupId, privateLayout, layoutIdMap, parameterMap,
+				remoteAddress, remotePort, secureConnection, remoteGroupId,
+				remotePrivateLayout, parameterMap, startDate, endDate);
+		}
+		finally {
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
+		}
 	}
 
 }

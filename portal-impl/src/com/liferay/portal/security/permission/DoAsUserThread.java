@@ -61,6 +61,10 @@ public abstract class DoAsUserThread extends Thread {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+		finally {
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
+		}
 	}
 
 	protected abstract void doRun() throws Exception;

@@ -216,6 +216,9 @@ public class MessageListenerImpl implements MessageListener {
 
 			throw new MessageListenerException(e);
 		}
+		finally {
+			PermissionCheckerUtil.setThreadValues(null);
+		}
 	}
 
 	public String getId() {

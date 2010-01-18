@@ -62,12 +62,7 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 
 		// Company id
 
-		long companyId = PortalInstances.getCompanyId(request);
-
-		// We need to set the COMPANY_ID request attribute explicitly because
-		// the above does not.
-
-		request.setAttribute(WebKeys.COMPANY_ID, new Long(companyId));
+		PortalInstances.getCompanyId(request);
 
 		// Authorize
 
@@ -143,14 +138,9 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 				ServletAuthorizingFilter.class, request, response, filterChain);
 		}
 		finally {
-
-			// Clear the company id associated with this thread
-
 			CompanyThreadLocal.setCompanyId(0);
-
-			// Clear the principal associated with this thread
-
 			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
 		}
 	}
 

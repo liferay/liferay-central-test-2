@@ -236,7 +236,12 @@ public class MailingListMessageListener implements MessageListener {
 		throws Exception {
 
 		for (Message message : messages) {
-			processMessage(mailingListRequest, message);
+			try {
+				processMessage(mailingListRequest, message);
+			}
+			finally {
+				PermissionCheckerUtil.setThreadValues(null);
+			}
 		}
 	}
 

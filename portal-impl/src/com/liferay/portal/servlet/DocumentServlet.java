@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -40,7 +39,6 @@ import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -74,16 +72,16 @@ public class DocumentServlet extends HttpServlet {
 		throws IOException, ServletException {
 
 		try {
-			long companyId = PortalInstances.getCompanyId(request);
-
-			CompanyThreadLocal.setCompanyId(companyId);
+			long companyId = PortalUtil.getCompanyId(request);
 
 			long userId = PortalUtil.getUserId(request);
 
 			if (userId == 0) {
 				Company company = CompanyLocalServiceUtil.getCompany(companyId);
 
-				userId = company.getDefaultUser().getUserId();
+				User defaultUser = company.getDefaultUser();
+
+				userId = defaultUser.getUserId();
 			}
 
 			PermissionChecker permissionChecker = null;
@@ -121,6 +119,10 @@ public class DocumentServlet extends HttpServlet {
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(e, request, response);
+		}
+		finally {
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
 		}
 	}
 

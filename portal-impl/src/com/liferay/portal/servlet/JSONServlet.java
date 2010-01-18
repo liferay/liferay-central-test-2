@@ -78,6 +78,10 @@ public class JSONServlet extends HttpServlet {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+		finally {
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(JSONServlet.class);

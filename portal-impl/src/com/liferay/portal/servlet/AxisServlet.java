@@ -31,11 +31,13 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -53,6 +55,8 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 		HttpServletRequest request, HttpServletResponse response) {
 
 		try {
+			PortalInstances.getCompanyId(request);
+
 			String remoteUser = request.getRemoteUser();
 
 			if (_log.isDebugEnabled()) {
@@ -93,6 +97,11 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+		}
+		finally {
+			CompanyThreadLocal.setCompanyId(0);
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
 		}
 	}
 

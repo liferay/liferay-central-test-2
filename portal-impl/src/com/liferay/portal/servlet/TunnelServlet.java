@@ -82,8 +82,6 @@ public class TunnelServlet extends HttpServlet {
 
 			long companyId = PortalInstances.getCompanyId(request);
 
-			CompanyThreadLocal.setCompanyId(companyId);
-
 			if (Validator.isNotNull(httpPrincipal.getLogin())) {
 				User user = null;
 
@@ -138,6 +136,11 @@ public class TunnelServlet extends HttpServlet {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+		}
+		finally {
+			CompanyThreadLocal.setCompanyId(0);
+			PrincipalThreadLocal.setName(null);
+			PermissionThreadLocal.setPermissionChecker(null);
 		}
 
 		if (returnObj != null) {
