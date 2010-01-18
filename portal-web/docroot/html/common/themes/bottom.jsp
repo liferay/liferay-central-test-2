@@ -174,15 +174,19 @@ StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BO
 	%>
 
 		<script type="text/javascript">
-			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+			var _gaq = _gaq || [];
 
-			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-		</script>
+			_gaq.push(['_setAccount', '<%= googleAnalyticsId %>']);
+			_gaq.push(['_trackPageview']);
 
-		<script type="text/javascript">
-			var pageTracker = _gat._getTracker("<%= googleAnalyticsId %>");
+			(function() {
+				var ga = document.createElement('script');
 
-			pageTracker._trackPageview();
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				ga.setAttribute('async', 'true');
+
+				document.documentElement.firstChild.appendChild(ga);
+			})();
 		</script>
 
 	<%
