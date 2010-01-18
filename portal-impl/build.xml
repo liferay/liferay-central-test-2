@@ -472,6 +472,10 @@ ${exception.message}
 		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="vi" />
 		</antcall>
+		
+		<antcall target="build-lang-native2ascii">
+				<param name="lang.code" value="et" />
+		</antcall>
 	</target>
 
 	<target name="build-lib-versions">

@@ -111,6 +111,7 @@ public class LangBuilder {
 				_createProps(content, "sv"); // Swedish
 				_createProps(content, "tr"); // Turkish
 				_createProps(content, "vi"); // Vietnamese
+				_createProps(content, "et"); // Estonian
 			}
 		}
 		catch (Exception e) {
@@ -366,7 +367,8 @@ public class LangBuilder {
 			translationId.equals("en_sk") ||
 			translationId.equals("en_sv") ||
 			translationId.equals("en_tr") ||
-			translationId.equals("en_vi")) {
+			translationId.equals("en_vi") ||
+			translationId.equals("en_et")) {
 
 			// Automatic translator does not support Arabic, Basque, Bulgarian,
 			// Catalan, Czech, Finnish, Galician, Hungarian, Norwegian Bokmål,
