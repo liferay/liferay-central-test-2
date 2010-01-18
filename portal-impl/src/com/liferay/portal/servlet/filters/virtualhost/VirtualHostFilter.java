@@ -349,7 +349,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 	private static final String _PATH_SITEMAP_XML = "/sitemap.xml";
 
-	private static final String _PATH_SOFTWARE_CATALOG = "/software_catalog/";
+	private static final String _PATH_SOFTWARE_CATALOG = "/software_catalog";
 
 	private static final String _PATH_VTI = "/_vti_";
 
