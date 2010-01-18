@@ -26,6 +26,8 @@ import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -244,6 +246,17 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		expandoValueLocalService.deleteValues(
 			DLFolder.class.getName(), folder.getFolderId());
+
+		try {
+			dlService.deleteDirectory(
+				folder.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				folder.getFolderId(), StringPool.BLANK);
+		}
+		catch(Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
 	}
 
 	public void deleteFolder(long folderId)
@@ -601,5 +614,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		validate(folderId, groupId, parentFolderId, name);
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(DLFolderLocalServiceImpl.class);
 
 }
