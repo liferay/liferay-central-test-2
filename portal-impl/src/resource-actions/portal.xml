@@ -261,6 +261,24 @@
 			<action-key>CONFIGURATION</action-key>
 		</guest-unsupported>
 	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>149</portlet-name>
+		<supports>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+			<action-key>CONFIGURATION</action-key>
+			<action-key>VIEW</action-key>
+		</supports>
+		<community-defaults>
+			<action-key>VIEW</action-key>
+		</community-defaults>
+		<guest-defaults>
+			<action-key>VIEW</action-key>
+		</guest-defaults>
+		<guest-unsupported>
+			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+			<action-key>CONFIGURATION</action-key>
+		</guest-unsupported>
+	</portlet-resource>
 	<model-resource>
 		<model-name>com.liferay.portal.model.Group</model-name>
 		<portlet-ref>
