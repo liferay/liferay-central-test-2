@@ -59,11 +59,11 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		boolean inputPermissionsPublicChecked = false;
 
 		if (layoutGroup.getName().equals(GroupConstants.CONTROL_PANEL)) {
-			if (!group.hasPrivateLayouts()) {
+			if (!group.hasPrivateLayouts() && guestDefaultActions.contains(ActionKeys.VIEW)) {
 				inputPermissionsPublicChecked = true;
 			}
 		}
-		else if (layout.isPublicLayout()) {
+		else if (layout.isPublicLayout() && guestDefaultActions.contains(ActionKeys.VIEW)) {
 			inputPermissionsPublicChecked = true;
 		}
 		%>
