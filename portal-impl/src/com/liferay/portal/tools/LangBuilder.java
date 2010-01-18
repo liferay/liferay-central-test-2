@@ -91,6 +91,7 @@ public class LangBuilder {
 				_createProps(content, "zh_TW"); // Chinese (Taiwan)
 				_createProps(content, "cs"); // Czech
 				_createProps(content, "nl"); // Dutch
+				_createProps(content, "et"); // Estonian
 				_createProps(content, "fi"); // Finnish
 				_createProps(content, "fr"); // French
 				_createProps(content, "gl"); // Galician
@@ -111,7 +112,6 @@ public class LangBuilder {
 				_createProps(content, "sv"); // Swedish
 				_createProps(content, "tr"); // Turkish
 				_createProps(content, "vi"); // Vietnamese
-				_createProps(content, "et"); // Estonian
 			}
 		}
 		catch (Exception e) {

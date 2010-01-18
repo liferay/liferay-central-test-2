@@ -394,6 +394,10 @@ ${exception.message}
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="et" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="fi" />
 		</antcall>
 
@@ -471,10 +475,6 @@ ${exception.message}
 
 		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="vi" />
-		</antcall>
-		
-		<antcall target="build-lang-native2ascii">
-				<param name="lang.code" value="et" />
 		</antcall>
 	</target>
 

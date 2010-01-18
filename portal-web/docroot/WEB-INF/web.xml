@@ -972,6 +972,14 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/et/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/et_EE/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
 		<url-pattern>/eu/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -1129,14 +1137,6 @@
 	<servlet-mapping>
 		<servlet-name>I18n Servlet</servlet-name>
 		<url-pattern>/zh_TW/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>I18n Servlet</servlet-name>
-		<url-pattern>/et/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>I18n Servlet</servlet-name>
-		<url-pattern>/et_EE/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Image Servlet</servlet-name>
