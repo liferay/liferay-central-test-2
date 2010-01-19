@@ -612,6 +612,10 @@ body.lfr-has-sidebar {
 
 /* ---------- Misc. ---------- */
 
+.lfr-panel-container {
+	background: transparent;
+}
+
 .results-header {
 	background-color: #d1d6dc;
 }
