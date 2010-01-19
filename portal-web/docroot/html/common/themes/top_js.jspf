@@ -207,6 +207,14 @@
 		%>
 
 		<%@ include file="/html/portal/aui/js.jspf" %>
+
+		<%
+		String currentURL = PortalUtil.getCurrentURL(request);
+		%>
+
+		Liferay.currentURL = '<%= UnicodeFormatter.toString(currentURL) %>';
+		Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
+
 	// ]]>
 </script>
 
@@ -257,45 +265,6 @@
 
 <script type="text/javascript">
 	// <![CDATA[
-
-		<%@ include file="/html/portal/layout/view/portlet_js.jspf" %>
-
-		<%
-		String currentURL = PortalUtil.getCurrentURL(request);
-		%>
-
-		Liferay.currentURL = '<%= UnicodeFormatter.toString(currentURL) %>';
-		Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
-
-		AUI().ready(
-			function() {
-				Liferay.Util.addInputType();
-				Liferay.Util.addInputFocus();
-			}
-		);
-
-		Liferay.Portlet.ready(
-			function(portletId, node) {
-				Liferay.Util.addInputType(portletId, node);
-			}
-		);
-
-		<c:if test="<%= !themeDisplay.isStatePopUp() %>">
-
-			<%
-			String scroll = ParamUtil.getString(request, "scroll");
-			%>
-
-			<c:if test="<%= Validator.isNotNull(scroll) %>">
-				Liferay.on(
-					'allPortletsReady',
-					function(event) {
-						document.getElementById('<%= HtmlUtil.escape(scroll) %>').scrollIntoView();
-					}
-				);
-			</c:if>
-		</c:if>
-
 		<c:if test="<%= (layoutTypePortlet != null) %>">
 
 			<%
@@ -306,81 +275,5 @@
 				Liferay.Portlet.list = ['<%= StringUtil.merge(portletIds.toArray(new String[portletIds.size()]), "','") %>'];
 			</c:if>
 		</c:if>
-
-		<%
-		Group group = null;
-
-		if (layout != null) {
-			group = layout.getGroup();
-		}
-		%>
-
-		<c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
-			AUI().ready(
-				'liferay-layout',
-				'liferay-navigation',
-				function(A) {
-					var layoutOptions = {};
-
-					if (!themeDisplay.isFreeformLayout()) {
-						layoutOptions = {
-							boxSelector: '.portlet-boundary',
-							columnSelector: '.lfr-portlet-column',
-							grid: '#layout-grid, .lfr-grid',
-							handleSelector: '.portlet-title, .portlet-title-default'
-						};
-					}
-					else {
-						layoutOptions = {
-							boxSelector: '.portlet-boundary',
-							columnSelector: '.lfr-portlet-column',
-							handleSelector: '.portlet-header-bar, .portlet-title-default, .portlet-topper',
-							freeForm: true
-						};
-					}
-
-					Liferay.Layout.init(layoutOptions);
-
-					new Liferay.Navigation(
-						{
-							layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
-							navBlock: '#navigation',
-							hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>
-						}
-					);
-				}
-			);
-		</c:if>
-
-		AUI().ready(
-			'liferay-menu',
-			'liferay-notice',
-			function() {
-				if (Liferay.Dock) {
-					Liferay.Dock.init();
-				}
-
-				new Liferay.Menu();
-
-				Liferay.Notice.prototype.setClosing();
-
-				<c:if test="<%= themeDisplay.isSignedIn() %>">
-					Liferay._editControlsState = '<%= GetterUtil.getString(SessionClicks.get(request, "liferay_toggle_controls", null), "visible") %>';
-
-					if (Liferay.Util) {
-						Liferay.Util.toggleControls();
-					}
-
-					if (Liferay.Poller) {
-						Liferay.Poller.init(
-							{
-								encryptedUserId: '<%= Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId())) %>',
-								supportsComet: <%= ServerDetector.isSupportsComet() %>
-							}
-						);
-					}
-				</c:if>
-			}
-		);
 	// ]]>
 </script>

@@ -29,35 +29,30 @@
 	%>
 
 	<c:if test="<%= Validator.isNull(autoRememberMe) %>">
-		<script type="text/javascript">
+	
+		<%
+		int sessionTimeout = PropsValues.SESSION_TIMEOUT;
+		int sessionTimeoutMinute = sessionTimeout * (int)Time.MINUTE;
+		int sessionTimeoutWarning = PropsValues.SESSION_TIMEOUT_WARNING;
+		int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
+		int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
 
-			<%
-			int sessionTimeout = PropsValues.SESSION_TIMEOUT;
-			int sessionTimeoutMinute = sessionTimeout * (int)Time.MINUTE;
-			int sessionTimeoutWarning = PropsValues.SESSION_TIMEOUT_WARNING;
-			int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
-			int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
+		Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
 
-			Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
+		sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
+		%>
 
-			sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
-			%>
-
-			<c:if test="<%= sessionTimeoutWarning > 0 %>">
-				AUI().use(
-					'liferay-session',
-					function(A) {
-						Liferay.Session.init(
-							{
-								autoExtend: <%= PropsValues.SESSION_TIMEOUT_AUTO_EXTEND %>,
-								timeout: <%= sessionTimeout %>,
-								timeoutWarning: <%= sessionTimeoutWarning %>,
-								redirectOnExpire: <%= PropsValues.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE %>
-							}
-						);
+		<c:if test="<%= sessionTimeoutWarning > 0 %>">
+			<aui:script use="liferay-session">
+				Liferay.Session.init(
+					{
+						autoExtend: <%= PropsValues.SESSION_TIMEOUT_AUTO_EXTEND %>,
+						timeout: <%= sessionTimeout %>,
+						timeoutWarning: <%= sessionTimeoutWarning %>,
+						redirectOnExpire: <%= PropsValues.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE %>
 					}
 				);
-			</c:if>
-		</script>
+			</aui:script>
+		</c:if>
 	</c:if>
 </c:if>

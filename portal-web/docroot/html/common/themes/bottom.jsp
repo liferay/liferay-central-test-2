@@ -131,6 +131,8 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 
 </c:if>
 
+<%@ include file="/html/common/themes/bottom_js.jspf" %>
+
 <%@ include file="/html/taglib/aui/script/page.jsp" %>
 
 <%-- Raw Text --%>
