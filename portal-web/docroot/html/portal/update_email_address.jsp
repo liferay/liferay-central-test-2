@@ -81,6 +81,6 @@ String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 
 </form>
 
-<script type="text/javascript">
+<aui:script>
 	Liferay.Util.focusFormField(document.fm.emailAddress1);
-</script>
+</aui:script>

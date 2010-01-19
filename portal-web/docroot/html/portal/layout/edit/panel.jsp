@@ -64,93 +64,88 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 
 <div id="<portlet:namespace />panelSelectPortletsOutput" style="margin: 4px;"></div>
 
-<script type="text/javascript">
-	AUI().ready(
-		'tree-view',
-		function(A) {
-			var panelSelectedPortletsEl = A.get('#<portlet:namespace />panelSelectedPortlets');
-			var selectedPortlets = panelSelectedPortletsEl.val().split(',');
+<aui:script use="tree-view">
+	var panelSelectedPortletsEl = A.get('#<portlet:namespace />panelSelectedPortlets');
+	var selectedPortlets = panelSelectedPortletsEl.val().split(',');
 
-			var onCheck = function(event, plid) {
-				var node = event.target;
-				var add = A.Array.indexOf(selectedPortlets, plid) == -1;
+	var onCheck = function(event, plid) {
+		var node = event.target;
+		var add = A.Array.indexOf(selectedPortlets, plid) == -1;
 
-				if (plid && add) {
-					selectedPortlets.push(plid);
+		if (plid && add) {
+			selectedPortlets.push(plid);
 
-					panelSelectedPortletsEl.val(selectedPortlets.join(','));
-				}
-			};
+			panelSelectedPortletsEl.val(selectedPortlets.join(','));
+		}
+	};
 
-			var onUncheck = function(event, plid) {
-				var node = event.target;
+	var onUncheck = function(event, plid) {
+		var node = event.target;
 
-				if (plid) {
-					if (selectedPortlets.length) {
-						A.Array.removeItem(selectedPortlets, plid);
-					}
+		if (plid) {
+			if (selectedPortlets.length) {
+				A.Array.removeItem(selectedPortlets, plid);
+			}
 
-					panelSelectedPortletsEl.val( selectedPortlets.join(',') );
-				}
-			};
+			panelSelectedPortletsEl.val( selectedPortlets.join(',') );
+		}
+	};
 
-			var treeView = new A.TreeView(
+	var treeView = new A.TreeView(
+		{
+			boundingBox: '#<portlet:namespace />panelSelectPortletsOutput'
+		}
+	)
+	.render();
+
+	<%
+	PortletLister portletLister = new PortletLister();
+
+	portletLister.setIncludeInstanceablePortlets(false);
+
+	TreeView treeView = portletLister.getTreeView(layoutTypePortlet, LanguageUtil.get(pageContext, "application"), user, application);
+
+	Iterator itr = treeView.getList().iterator();
+
+	for (int i = 0; itr.hasNext(); i++) {
+		TreeNodeView treeNodeView = (TreeNodeView)itr.next();
+	%>
+
+		var parentNode<%= i %> = treeView.getNodeById('treePanel<%= treeNodeView.getParentId() %>') || treeView;
+		var objId<%= i %> = '<%= treeNodeView.getObjId() %>';
+		var checked<%= i %> = objId<%= i %> ? (A.Array.indexOf(selectedPortlets, objId<%= i %>) > -1) : false;
+
+		parentNode<%= i %>.appendChild(
+			new A.TreeNodeTask(
 				{
-					boundingBox: '#<portlet:namespace />panelSelectPortletsOutput'
+					checked: checked<%= i %>,
+					expanded: <%= treeNodeView.getDepth() == 0 %>,
+					id: 'treePanel<%= treeNodeView.getId() %>',
+					label: '<%= UnicodeFormatter.toString(treeNodeView.getName()) %>',
+					leaf: <%= treeNodeView.getDepth() > 1 %>,
+					on: {
+						check: A.rbind(onCheck, window, objId<%= i %>),
+						uncheck: A.rbind(onUncheck, window, objId<%= i %>)
+					}
 				}
 			)
-			.render();
+		);
 
-			<%
-			PortletLister portletLister = new PortletLister();
+	<%
+	}
+	%>
 
-			portletLister.setIncludeInstanceablePortlets(false);
-
-			TreeView treeView = portletLister.getTreeView(layoutTypePortlet, LanguageUtil.get(pageContext, "application"), user, application);
-
-			Iterator itr = treeView.getList().iterator();
-
-			for (int i = 0; itr.hasNext(); i++) {
-				TreeNodeView treeNodeView = (TreeNodeView)itr.next();
-			%>
-
-				var parentNode<%= i %> = treeView.getNodeById('treePanel<%= treeNodeView.getParentId() %>') || treeView;
-				var objId<%= i %> = '<%= treeNodeView.getObjId() %>';
-				var checked<%= i %> = objId<%= i %> ? (A.Array.indexOf(selectedPortlets, objId<%= i %>) > -1) : false;
-
-				parentNode<%= i %>.appendChild(
-					new A.TreeNodeTask(
-						{
-							checked: checked<%= i %>,
-							expanded: <%= treeNodeView.getDepth() == 0 %>,
-							id: 'treePanel<%= treeNodeView.getId() %>',
-							label: '<%= UnicodeFormatter.toString(treeNodeView.getName()) %>',
-							leaf: <%= treeNodeView.getDepth() > 1 %>,
-							on: {
-								check: A.rbind(onCheck, window, objId<%= i %>),
-								uncheck: A.rbind(onUncheck, window, objId<%= i %>)
-							}
-						}
-					)
-				);
-
-			<%
-			}
-			%>
-
-			A.on(
-				'click',
-				treeView.collapseAll,
-				'#<portlet:namespace />panelTreeCollapseAll',
-				treeView
-			);
-
-			A.on(
-				'click',
-				treeView.expandAll,
-				'#<portlet:namespace />panelTreeExpandAll',
-				treeView
-			);
-		}
+	A.on(
+		'click',
+		treeView.collapseAll,
+		'#<portlet:namespace />panelTreeCollapseAll',
+		treeView
 	);
-</script>
+
+	A.on(
+		'click',
+		treeView.expandAll,
+		'#<portlet:namespace />panelTreeExpandAll',
+		treeView
+	);
+</aui:script>

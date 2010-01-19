@@ -22,7 +22,7 @@
  */
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function resizeIframe() {
 		var winHeight = 0;
 
@@ -59,4 +59,4 @@
 	}
 
 	window.onresize = resizeIframe;
-</script>
+</aui:script>

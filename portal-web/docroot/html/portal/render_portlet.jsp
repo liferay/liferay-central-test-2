@@ -952,7 +952,17 @@ else {
 %>
 
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
-		<script type="text/javascript">
+		<%
+			ArrayList<String> modules = new ArrayList<String>();
+
+			modules.add("dialog");
+
+			if (showConfigurationIcon) {
+				modules.add("editable");
+			}
+		%>
+
+		<aui:script position="<%= showRefreshIcon ? "inline" : "auto" %>" use="<%= StringUtil.merge(modules) %>">
 			Liferay.Portlet.onLoad(
 				{
 					canEditTitle: <%= showConfigurationIcon %>,
@@ -963,7 +973,7 @@ else {
 					refreshURL: '<%= UnicodeFormatter.toString(PortletURLUtil.getRefreshURL(request, themeDisplay)) %>'
 				}
 			);
-		</script>
+		</aui:script>
 	</div>
 </c:if>
 

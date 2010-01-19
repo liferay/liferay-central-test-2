@@ -84,37 +84,33 @@
 
 </form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			var reminderQueryQuestion = A.one('#reminderQueryQuestion');
-			var customQuestionContainer = A.one('#customQuestionContainer');
+<aui:script use="event,node">
+	var reminderQueryQuestion = A.one('#reminderQueryQuestion');
+	var customQuestionContainer = A.one('#customQuestionContainer');
 
-			if (reminderQueryQuestion && customQuestionContainer) {
-				if (reminderQueryQuestion.val() != '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
-					customQuestionContainer.hide();
-				}
-
-				reminderQueryQuestion.on(
-					'change',
-					function(event) {
-						if (this.val() == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
-							<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-								customQuestionContainer.show();
-
-								Liferay.Util.focusFormField('#reminderQueryCustomQuestion');
-							</c:if>
-						}
-						else {
-							customQuestionContainer.hide();
-
-							Liferay.Util.focusFormField('#reminderQueryAnswer');
-						}
-					}
-				);
-
-				Liferay.Util.focusFormField(reminderQueryQuestion);
-			}
+	if (reminderQueryQuestion && customQuestionContainer) {
+		if (reminderQueryQuestion.val() != '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
+			customQuestionContainer.hide();
 		}
-	);
-</script>
+
+		reminderQueryQuestion.on(
+			'change',
+			function(event) {
+				if (this.val() == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
+					<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
+						customQuestionContainer.show();
+
+						Liferay.Util.focusFormField('#reminderQueryCustomQuestion');
+					</c:if>
+				}
+				else {
+					customQuestionContainer.hide();
+
+					Liferay.Util.focusFormField('#reminderQueryAnswer');
+				}
+			}
+		);
+
+		Liferay.Util.focusFormField(reminderQueryQuestion);
+	}
+</aui:script>

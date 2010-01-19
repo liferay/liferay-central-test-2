@@ -45,22 +45,18 @@ String portletId = portlet.getPortletId();
 
 		<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>
 
-		<script type="text/javascript">
-			AUI().ready(
-				function(A) {
-					var ns = '<%= portletDisplay.getNamespace() %>';
+		<aui:script use="node">
+			var ns = '<%= portletDisplay.getNamespace() %>';
 
-					Liferay.Portlet.addHTML(
-						{
-							onComplete: function(portlet, portletId) {
-								portlet.refreshURL = '<%= url %>';
-							},
-							placeHolder: A.one('#p_load' + ns),
-							url: '<%= url %>'
-						}
-					);
+			Liferay.Portlet.addHTML(
+				{
+					onComplete: function(portlet, portletId) {
+						portlet.refreshURL = '<%= url %>';
+					},
+					placeHolder: A.one('#p_load' + ns),
+					url: '<%= url %>'
 				}
 			);
-		</script>
+		</aui:script>
 	</c:otherwise>
 </c:choose>

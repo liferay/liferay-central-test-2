@@ -278,7 +278,7 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 	</c:if>
 </liferay-ui:panel-container>
 
-<script type="text/javascript">
+<aui:script>
 	var robotsChanged = false;
 	var keywordsChanged = false;
 	var descriptionChanged = false;
@@ -409,4 +409,4 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 	}
 
 	<portlet:namespace />updateMetaLanguageTemps(lastMetaLanguageId);
-</script>
+</aui:script>

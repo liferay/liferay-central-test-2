@@ -102,6 +102,6 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 
 </form>
 
-<script type="text/javascript">
+<aui:script>
 	Liferay.Util.focusFormField(document.fm.password1);
-</script>
+</aui:script>
