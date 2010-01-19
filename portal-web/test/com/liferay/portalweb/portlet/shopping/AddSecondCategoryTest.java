@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSecondCategoryTest extends BaseTestCase {
 	public void testAddSecondCategory() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,11 +55,7 @@ public class AddSecondCategoryTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Category']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_34_name", RuntimeVariables.replace("Video"));
 		selenium.type("_34_name", RuntimeVariables.replace("Video"));
-		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace(
-				"VHS, DVD, BETA, LaserDisc, Blura, HD-DVD. All in stock! All the time!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"VHS, DVD, BETA, LaserDisc, Bluray, HD-DVD. All in stock! All the time!"));

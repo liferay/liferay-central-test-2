@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSubcategoryTest extends BaseTestCase {
 	public void testAddSubcategory() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -55,12 +57,8 @@ public class AddSubcategoryTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Subcategory']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_34_name",
-			RuntimeVariables.replace("T\u00e9st Subcat\u00e9gor"));
 		selenium.type("_34_name",
 			RuntimeVariables.replace("T\u00e9st Subcat\u00e9gory"));
-		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace("This is a t\u00e9st subcat\u00e9gor!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("This is a t\u00e9st subcat\u00e9gory!"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -70,8 +68,5 @@ public class AddSubcategoryTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("T\u00e9st Subcat\u00e9gory"));
 		assertTrue(selenium.isTextPresent(
 				"This is a t\u00e9st subcat\u00e9gory!"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

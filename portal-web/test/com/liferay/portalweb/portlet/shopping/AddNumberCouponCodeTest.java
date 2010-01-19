@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddNumberCouponCodeTest extends BaseTestCase {
 	public void testAddNumberCouponCode() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -55,27 +57,17 @@ public class AddNumberCouponCodeTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Coupon']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_34_code", RuntimeVariables.replace("123456789"));
 		selenium.type("_34_code", RuntimeVariables.replace("123456789"));
-		selenium.typeKeys("_34_name",
-			RuntimeVariables.replace("Friends and Famil Discount"));
 		selenium.type("_34_name",
 			RuntimeVariables.replace("Friends and Family Discount"));
-		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace(
-				"This discount is for everyone who is considered a friend or part of the famil."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"This discount is for everyone who is considered a friend or part of the family."));
-		selenium.typeKeys("_34_discount", RuntimeVariables.replace("0.50"));
 		selenium.type("_34_discount", RuntimeVariables.replace("0.50"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid code."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

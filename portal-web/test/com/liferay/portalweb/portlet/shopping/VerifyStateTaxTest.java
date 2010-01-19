@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class VerifyStateTaxTest extends BaseTestCase {
 	public void testVerifyStateTax() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -56,19 +58,13 @@ public class VerifyStateTaxTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_34_ccType", RuntimeVariables.replace("label=Visa"));
-		selenium.typeKeys("_34_ccNumber",
-			RuntimeVariables.replace("4111111111111111"));
 		selenium.type("_34_ccNumber",
 			RuntimeVariables.replace("4111111111111111"));
 		selenium.select("_34_ccExpYear", RuntimeVariables.replace("label=2011"));
-		selenium.typeKeys("_34_ccVerNumber", RuntimeVariables.replace("526"));
 		selenium.type("_34_ccVerNumber", RuntimeVariables.replace("526"));
 		selenium.clickAt("//input[@value='Continue']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("$12.92"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

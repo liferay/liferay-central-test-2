@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ViewInvoiceTest extends BaseTestCase {
 	public void testViewInvoice() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -96,8 +98,5 @@ public class ViewInvoiceTest extends BaseTestCase {
 
 		selenium.close();
 		selenium.selectWindow("null");
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

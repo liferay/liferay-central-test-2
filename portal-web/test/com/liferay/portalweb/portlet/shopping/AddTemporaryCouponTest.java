@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddTemporaryCouponTest extends BaseTestCase {
 	public void testAddTemporaryCoupon() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -58,24 +60,15 @@ public class AddTemporaryCouponTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("_34_autoCodeCheckbox"));
 		selenium.clickAt("_34_autoCodeCheckbox", RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_34_autoCodeCheckbox"));
-		selenium.typeKeys("_34_name",
-			RuntimeVariables.replace("Temporar Coupon"));
 		selenium.type("_34_name", RuntimeVariables.replace("Temporary Coupon"));
-		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace(
-				"This is a limited time onl coupon - soon to be - Deleted!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"This is a limited time only coupon - soon to be - Deleted!"));
-		selenium.typeKeys("_34_discount", RuntimeVariables.replace("0.99"));
 		selenium.type("_34_discount", RuntimeVariables.replace("0.99"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Temporary Coupon"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ChangeCurrentSetupTest extends BaseTestCase {
 	public void testChangeCurrentSetup() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,12 +52,32 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//img[@alt='Configuration']",
-			RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Configuration")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Archived", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Setup"));
+		assertEquals(RuntimeVariables.replace("Test Setup"),
+			selenium.getText(
+				"//form[@id='_86_fm']/div[1]/table/tbody/tr[3]/td[1]"));
 		selenium.clickAt("link=Current", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Shipping Calculation",
@@ -63,22 +85,36 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_shippingFormula",
 			RuntimeVariables.replace("label=Flat Amount"));
-		selenium.typeKeys("_86_shipping0", RuntimeVariables.replace("99999"));
 		selenium.type("_86_shipping0", RuntimeVariables.replace("99999"));
-		selenium.typeKeys("_86_shipping1", RuntimeVariables.replace("10020"));
 		selenium.type("_86_shipping1", RuntimeVariables.replace("10020"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("$10,020.00"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

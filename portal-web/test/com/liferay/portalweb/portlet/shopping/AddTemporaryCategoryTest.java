@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddTemporaryCategoryTest extends BaseTestCase {
 	public void testAddTemporaryCategory() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,10 +55,7 @@ public class AddTemporaryCategoryTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Category']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_34_name", RuntimeVariables.replace("Horses"));
 		selenium.type("_34_name", RuntimeVariables.replace("Horses"));
-		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace("Horses for sale here!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("Horses for sale here!"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

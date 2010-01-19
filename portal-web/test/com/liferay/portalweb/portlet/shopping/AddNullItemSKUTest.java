@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddNullItemSKUTest extends BaseTestCase {
 	public void testAddNullItemSKU() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -55,32 +57,19 @@ public class AddNullItemSKUTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Item']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_34_sku", RuntimeVariables.replace(""));
 		selenium.type("_34_sku", RuntimeVariables.replace(""));
-		selenium.typeKeys("_34_name",
-			RuntimeVariables.replace("Jona Lons - Wheel"));
 		selenium.type("_34_name", RuntimeVariables.replace("Jona Lyons - Wheel"));
-		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace("Sounds like: The middle of a vacation."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("Sounds like: The middle of a vacation."));
-		selenium.typeKeys("_34_stockQuantity", RuntimeVariables.replace("50"));
 		selenium.type("_34_stockQuantity", RuntimeVariables.replace("50"));
-		selenium.typeKeys("_34_properties",
-			RuntimeVariables.replace("Limited Time Onl"));
 		selenium.type("_34_properties",
 			RuntimeVariables.replace("Limited Time Only"));
-		selenium.typeKeys("_34_price0", RuntimeVariables.replace("$9.99"));
 		selenium.type("_34_price0", RuntimeVariables.replace("$9.99"));
-		selenium.typeKeys("_34_minQuantity0", RuntimeVariables.replace("1"));
 		selenium.type("_34_minQuantity0", RuntimeVariables.replace("1"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid item SKU."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

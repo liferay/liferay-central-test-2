@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddTemporaryItemTest extends BaseTestCase {
 	public void testAddTemporaryItem() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -55,19 +57,12 @@ public class AddTemporaryItemTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Item']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_34_sku", RuntimeVariables.replace("2222"));
 		selenium.type("_34_sku", RuntimeVariables.replace("2222"));
-		selenium.typeKeys("_34_name",
-			RuntimeVariables.replace("The Prodigal Project - J. H."));
 		selenium.type("_34_name",
 			RuntimeVariables.replace("The Prodigal Project - J. H."));
-		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace(
-				"For those on a journe, the end of which is faintl out of sight."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"For those on a journey, the end of which is faintly out of sight."));
-		selenium.typeKeys("_34_price0", RuntimeVariables.replace("$2.99"));
 		selenium.type("_34_price0", RuntimeVariables.replace("$2.99"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

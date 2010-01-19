@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class VerifyAcceptedCCTest extends BaseTestCase {
 	public void testVerifyAcceptedCC() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -60,8 +62,5 @@ public class VerifyAcceptedCCTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent(
 				"//option[@value='americanexpress']"));
 		assertFalse(selenium.isElementPresent("//option[@value='mastercard']"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

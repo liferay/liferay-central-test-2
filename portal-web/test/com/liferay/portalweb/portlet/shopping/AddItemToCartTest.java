@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddItemToCartTest extends BaseTestCase {
 	public void testAddItemToCart() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -62,8 +64,5 @@ public class AddItemToCartTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

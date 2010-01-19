@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeleteTemporaryItemTest extends BaseTestCase {
 	public void testDeleteTemporaryItem() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,6 +54,9 @@ public class DeleteTemporaryItemTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.clickAt("//tr[4]/td[5]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +64,7 @@ public class DeleteTemporaryItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[4]/td[5]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//div[8]/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -69,12 +74,11 @@ public class DeleteTemporaryItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//tr[4]/td[5]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
-		selenium.click(RuntimeVariables.replace("//body/div[4]/ul/li[3]/a"));
+		selenium.click(RuntimeVariables.replace("//div[8]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent("The Prodigal Project - J. H."));

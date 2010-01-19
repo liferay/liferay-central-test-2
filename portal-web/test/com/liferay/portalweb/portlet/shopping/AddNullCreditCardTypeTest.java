@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddNullCreditCardTypeTest extends BaseTestCase {
 	public void testAddNullCreditCardType() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -55,37 +57,24 @@ public class AddNullCreditCardTypeTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Checkout']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_34_billingStreet",
-			RuntimeVariables.replace("1234 Sesame Street"));
 		selenium.type("_34_billingStreet",
 			RuntimeVariables.replace("1234 Sesame Street"));
-		selenium.typeKeys("_34_billingCity",
-			RuntimeVariables.replace("Gotham Cit"));
 		selenium.type("_34_billingCity", RuntimeVariables.replace("Gotham City"));
 		selenium.select("_34_billingStateSel",
 			RuntimeVariables.replace("label=California"));
-		selenium.typeKeys("_34_billingZip", RuntimeVariables.replace("90028"));
 		selenium.type("_34_billingZip", RuntimeVariables.replace("90028"));
-		selenium.typeKeys("_34_billingCountry", RuntimeVariables.replace("USA"));
 		selenium.type("_34_billingCountry", RuntimeVariables.replace("USA"));
-		selenium.typeKeys("_34_billingPhone",
-			RuntimeVariables.replace("626-589-1453"));
 		selenium.type("_34_billingPhone",
 			RuntimeVariables.replace("626-589-1453"));
 		assertTrue(selenium.isElementPresent("_34_shipToBillingCheckbox"));
 		selenium.clickAt("_34_shipToBillingCheckbox",
 			RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_34_shipToBillingCheckbox"));
-		selenium.typeKeys("_34_ccName", RuntimeVariables.replace("Joe Bloggs"));
 		selenium.type("_34_ccName", RuntimeVariables.replace("Joe Bloggs"));
 		selenium.select("_34_ccType", RuntimeVariables.replace("label="));
-		selenium.typeKeys("_34_ccNumber",
-			RuntimeVariables.replace("4111111111111111"));
 		selenium.type("_34_ccNumber",
 			RuntimeVariables.replace("4111111111111111"));
 		selenium.select("_34_ccExpYear", RuntimeVariables.replace("label=2011"));
-		selenium.typeKeys("_34_comments",
-			RuntimeVariables.replace("Please take care of m order."));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
 		selenium.clickAt("//input[@value='Continue']",
@@ -95,8 +84,5 @@ public class AddNullCreditCardTypeTest extends BaseTestCase {
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent(
 				"Please enter a valid credit card type."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

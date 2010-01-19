@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class VerifyFlatRateInsuranceTest extends BaseTestCase {
 	public void testVerifyFlatRateInsurance() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -54,8 +56,5 @@ public class VerifyFlatRateInsuranceTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_34_insure", RuntimeVariables.replace("label=$3.00"));
 		assertTrue(selenium.isTextPresent("$3.00"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

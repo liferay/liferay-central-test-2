@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSecondItemTest extends BaseTestCase {
 	public void testAddSecondItem() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -55,23 +57,14 @@ public class AddSecondItemTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Item']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_34_sku", RuntimeVariables.replace("1112"));
 		selenium.type("_34_sku", RuntimeVariables.replace("1112"));
-		selenium.typeKeys("_34_name",
-			RuntimeVariables.replace(
-				"M. Saech - How to Pla Guitar - for Dummies."));
 		selenium.type("_34_name",
 			RuntimeVariables.replace(
 				"M. Saech - How to Play Guitar - for Dummies."));
-		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace(
-				"Noted guitarist and performer (for one) las down how to thrash with the might battle axe of music."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"Noted guitarist and performer (for one) lays down how to thrash with the might battle axe of music."));
-		selenium.typeKeys("_34_price0", RuntimeVariables.replace("$16.99"));
 		selenium.type("_34_price0", RuntimeVariables.replace("$16.99"));
-		selenium.typeKeys("_34_stockQuantity", RuntimeVariables.replace("200"));
 		selenium.type("_34_stockQuantity", RuntimeVariables.replace("200"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -79,8 +72,5 @@ public class AddSecondItemTest extends BaseTestCase {
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent(
 				"M. Saech - How to Play Guitar - for Dummies."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

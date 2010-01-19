@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">TearDownTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Shopping Test Page</td>
 	<td></td>
@@ -24,13 +29,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_34_allRowIds</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_34_rowIds'))</td>
+	<td>coupon1Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${coupon1Present}</td>
+	<td>Coupon1NotPresent</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>_34_allRowIds</td>
+	<td>_34_rowIds</td>
 	<td></td>
 </tr>
 <tr>
@@ -44,18 +54,163 @@
 	<td></td>
 </tr>
 <tr>
+	<td>label</td>
+	<td>Coupon1NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_34_rowIds'))</td>
+	<td>coupon2Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${coupon2Present}</td>
+	<td>Coupon2NotPresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_34_rowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected coupons.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Coupon2NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_34_rowIds'))</td>
+	<td>coupon3Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${coupon3Present}</td>
+	<td>Coupon3NotPresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_34_rowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected coupons.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Coupon3NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_34_rowIds'))</td>
+	<td>coupon4Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${coupon4Present}</td>
+	<td>Coupon4NotPresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_34_rowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected coupons.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Coupon4NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_34_rowIds'))</td>
+	<td>coupon5Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${coupon5Present}</td>
+	<td>Coupon5NotPresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_34_rowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected coupons.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Coupon5NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Orders</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_34_allRowIds</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_34_rowIds'))</td>
+	<td>order1Present</td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>_34_allRowIds</td>
+	<td>gotoIf</td>
+	<td>!${order1Present}</td>
+	<td>Order1NotPresent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_34_rowIds</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,13 +224,188 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>label</td>
+	<td>Order1NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_34_rowIds'))</td>
+	<td>order2Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${order2Present}</td>
+	<td>Order2NotPresent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_34_rowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected orders?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Order2NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_34_rowIds'))</td>
+	<td>order3Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${order3Present}</td>
+	<td>Order3NotPresent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_34_rowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected orders?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Order3NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_34_rowIds'))</td>
+	<td>order4Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${order4Present}</td>
+	<td>Order4NotPresent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_34_rowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected orders?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Order4NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_34_rowIds'))</td>
+	<td>order5Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${order5Present}</td>
+	<td>Order5NotPresent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_34_rowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected orders?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Order5NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Shopping Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//img[@alt='Configuration']</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Cart</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Empty Cart']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Configuration</td>
 	<td></td>
 </tr>
 <tr>
@@ -84,18 +414,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//strong/span</td>
+	<td>clickAt</td>
+	<td>//form[@id='_86_fm']/div[1]/table/tbody/tr[3]/td[4]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//strong/span</td>
+	<td>waitForElementPresent</td>
+	<td>//body/div[6]/ul/li[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='Delete']</td>
+	<td>//body/div[6]/ul/li[2]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -104,23 +434,53 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
+	<td>category1Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${category1Present}</td>
+	<td>Category1NotPresent</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>//td[4]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//td[4]/ul/li/strong/span</td>
+	<td>waitForElementPresent</td>
+	<td>//div[8]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[3]/a</td>
+	<td>//div[8]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -129,18 +489,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>label</td>
+	<td>Category1NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
+	<td>category2Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${category2Present}</td>
+	<td>Category2NotPresent</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>//td[4]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//td[4]/ul/li/strong/span</td>
+	<td>waitForElementPresent</td>
+	<td>//div[8]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Delete</td>
+	<td>//div[8]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -149,48 +529,358 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//div[2]/ul/li[1]/a/span</td>
+	<td>label</td>
+	<td>Category2NotPresent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Manage Pages</td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
+	<td>category3Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${category3Present}</td>
+	<td>Category3NotPresent</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span</td>
+	<td>click</td>
+	<td>//td[4]/ul/li/strong/span</td>
 	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Display Order</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_88_layoutIdsBox</td>
-	<td>label=Shopping Test Page</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='portlet-wrapper-88']/div[2]/div/div/form/table/tbody/tr/td[2]/table/tbody/tr/td[2]/a[3]/img</td>
+	<td>//div[8]/ul/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[8]/ul/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Category3NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
+	<td>category4Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${category4Present}</td>
+	<td>Category4NotPresent</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[4]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[8]/ul/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[8]/ul/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Category4NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
+	<td>category5Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${category5Present}</td>
+	<td>Category5NotPresent</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[4]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[8]/ul/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[8]/ul/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Category5NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[3]/div/ul/li[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[3]/div/ul/li[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Guest</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//div[@id='portlet-wrapper-88']/div[2]/div/div/form/table/tbody/tr/td[2]/table/tbody/tr/td[2]/a[3]/img</td>
+	<td>//div[@id='_88_treeExpandAll']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li/ul/li[1]/div/div[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li[2]/div/div[3]/a'))</td>
+	<td>page1Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${page1Present}</td>
+	<td>Page1NotPresent</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//li[2]/div/div[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Update Display Order']</td>
+	<td>//li[@id='_88_tabs3pageTabsId']/span/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Page1NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li/ul/li[1]/div/div[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li[2]/div/div[3]/a'))</td>
+	<td>page2Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${page2Present}</td>
+	<td>Page2NotPresent</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//li[2]/div/div[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>//li[@id='_88_tabs3pageTabsId']/span/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Page2NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li/ul/li[1]/div/div[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li[2]/div/div[3]/a'))</td>
+	<td>page3Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${page3Present}</td>
+	<td>Page3NotPresent</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//li[2]/div/div[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//li[@id='_88_tabs3pageTabsId']/span/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Page3NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li/ul/li[1]/div/div[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li[2]/div/div[3]/a'))</td>
+	<td>page4Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${page4Present}</td>
+	<td>Page4NotPresent</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//li[2]/div/div[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//li[@id='_88_tabs3pageTabsId']/span/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Page4NotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li/ul/li[1]/div/div[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li[2]/div/div[3]/a'))</td>
+	<td>page5Present</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${page5Present}</td>
+	<td>Page5NotPresent</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//li[2]/div/div[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//li[@id='_88_tabs3pageTabsId']/span/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Page5NotPresent</td>
 	<td></td>
 </tr>
 

@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditCouponTest extends BaseTestCase {
 	public void testEditCoupon() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,6 +54,8 @@ public class EditCouponTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Coupons", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +63,7 @@ public class EditCouponTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//strong/span")) {
+				if (selenium.isElementPresent("link=Edit")) {
 					break;
 				}
 			}
@@ -69,13 +73,10 @@ public class EditCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_34_name", RuntimeVariables.replace("Famil Discount"));
+		Thread.sleep(5000);
 		selenium.type("_34_name", RuntimeVariables.replace("Family Discount"));
-		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace("Discount for famil onl!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("Discount for family only!"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -84,8 +85,5 @@ public class EditCouponTest extends BaseTestCase {
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Family Discount"));
 		assertFalse(selenium.isTextPresent("Friends and Family Discount"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

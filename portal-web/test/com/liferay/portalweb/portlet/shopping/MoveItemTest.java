@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class MoveItemTest extends BaseTestCase {
 	public void testMoveItem() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,6 +54,8 @@ public class MoveItemTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.clickAt("//strong", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +63,7 @@ public class MoveItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//strong")) {
+				if (selenium.isElementPresent("//div[8]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -69,9 +73,7 @@ public class MoveItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//strong", RuntimeVariables.replace(""));
-		selenium.clickAt("//body/div[4]/ul/li[1]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[8]/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -145,6 +147,8 @@ public class MoveItemTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//tr[4]/td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.clickAt("//strong", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -152,7 +156,7 @@ public class MoveItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//strong/span")) {
+				if (selenium.isElementPresent("//div[8]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -162,9 +166,7 @@ public class MoveItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-		selenium.clickAt("//body/div[4]/ul/li[1]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[8]/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -239,8 +241,5 @@ public class MoveItemTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
 		assertTrue(selenium.isTextPresent(
 				"M. Saech - How to Play Guitar - for Dummies."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

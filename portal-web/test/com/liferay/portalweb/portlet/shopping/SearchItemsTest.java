@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SearchItemsTest extends BaseTestCase {
 	public void testSearchItems() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -58,8 +60,5 @@ public class SearchItemsTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
 		assertFalse(selenium.isTextPresent(
 				"M. Saech - How to Play Guitar - for Dummies."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddCouponTest extends BaseTestCase {
 	public void testAddCoupon() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -58,25 +60,16 @@ public class AddCouponTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("_34_autoCodeCheckbox"));
 		selenium.clickAt("_34_autoCodeCheckbox", RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_34_autoCodeCheckbox"));
-		selenium.typeKeys("_34_name",
-			RuntimeVariables.replace("Friends and Famil Discount"));
 		selenium.type("_34_name",
 			RuntimeVariables.replace("Friends and Family Discount"));
-		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace(
-				"This discount is for everyone who is considered a friend or part of the famil."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"This discount is for everyone who is considered a friend or part of the family."));
-		selenium.typeKeys("_34_discount", RuntimeVariables.replace("0.50"));
 		selenium.type("_34_discount", RuntimeVariables.replace("0.50"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Friends and Family Discount"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

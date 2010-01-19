@@ -64,8 +64,6 @@ public class ShoppingTests extends BaseTests {
 		testSuite.addTestSuite(ConfirmCartTest.class);
 		testSuite.addTestSuite(RemoveItemFromCartTest.class);
 		testSuite.addTestSuite(AddSecondItemToCartTest.class);
-		testSuite.addTestSuite(AddNullBillingAddressFirstNameTest.class);
-		testSuite.addTestSuite(AddNullBillingAddressLastNameTest.class);
 		testSuite.addTestSuite(AddNullItemSKUTest.class);
 		testSuite.addTestSuite(AddNullItemNameTest.class);
 		testSuite.addTestSuite(AddNumberCouponCodeTest.class);

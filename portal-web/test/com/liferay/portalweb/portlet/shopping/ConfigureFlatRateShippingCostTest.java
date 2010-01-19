@@ -33,6 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ConfigureFlatRateShippingCostTest extends BaseTestCase {
 	public void testConfigureFlatRateShippingCost() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,28 +53,40 @@ public class ConfigureFlatRateShippingCostTest extends BaseTestCase {
 
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//img[@alt='Configuration']",
-			RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Configuration")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Shipping Calculation",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_86_shipping0", RuntimeVariables.replace("2.49"));
 		selenium.type("_86_shipping0", RuntimeVariables.replace("2.49"));
-		selenium.typeKeys("_86_shipping1", RuntimeVariables.replace("5.49"));
 		selenium.type("_86_shipping1", RuntimeVariables.replace("5.49"));
-		selenium.typeKeys("_86_shipping2", RuntimeVariables.replace("12.49"));
 		selenium.type("_86_shipping2", RuntimeVariables.replace("12.49"));
-		selenium.typeKeys("_86_shipping3", RuntimeVariables.replace("19.99"));
 		selenium.type("_86_shipping3", RuntimeVariables.replace("19.99"));
-		selenium.typeKeys("_86_shipping4", RuntimeVariables.replace("25.61"));
 		selenium.type("_86_shipping4", RuntimeVariables.replace("25.61"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 	}
 }
