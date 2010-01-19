@@ -952,17 +952,16 @@ else {
 %>
 
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
+
 		<%
-			ArrayList<String> modules = new ArrayList<String>();
+		String modules = "dialog";
 
-			modules.add("dialog");
-
-			if (showConfigurationIcon) {
-				modules.add("editable");
-			}
+		if (showConfigurationIcon) {
+			modules += ",editable";
+		}
 		%>
 
-		<aui:script position="<%= showRefreshIcon ? "inline" : "auto" %>" use="<%= StringUtil.merge(modules) %>">
+		<aui:script position='<%= showRefreshIcon ? "inline" : "auto" %>' use="<%= modules %>">
 			Liferay.Portlet.onLoad(
 				{
 					canEditTitle: <%= showConfigurationIcon %>,
