@@ -247,6 +247,9 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getNextLayoutId() throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getNextLayoutId(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 

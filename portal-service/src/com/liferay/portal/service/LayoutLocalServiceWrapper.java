@@ -309,6 +309,10 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 			preferencesKey, preferencesValue);
 	}
 
+	public long getNextLayoutId() throws com.liferay.portal.SystemException {
+		return _layoutLocalService.getNextLayoutId();
+	}
+
 	public long getNextLayoutId(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException {
 		return _layoutLocalService.getNextLayoutId(groupId, privateLayout);

@@ -23,16 +23,23 @@
 package com.liferay.portal.verify;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * <a href="VerifyCounter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
+ * @author Zsolt Berentey
  */
 public class VerifyCounter extends VerifyProcess {
 
@@ -61,6 +68,33 @@ public class VerifyCounter extends VerifyProcess {
 		if (latestPermissionId > counterPermissionId - 1) {
 			CounterLocalServiceUtil.reset(
 				Permission.class.getName(), latestPermissionId);
+		}
+
+		// Layout
+
+		long latestLayoutId = 0;
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DataAccess.getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery("select max(layoutId) from Layout");
+
+			if (rs.next()) {
+				latestLayoutId = rs.getLong(1);
+			}
+		} finally {
+			DataAccess.cleanUp(conn, st, rs);
+		}
+
+		long counterLayoutId = CounterLocalServiceUtil.increment(
+				Layout.class.getName());
+
+		if (latestLayoutId > counterLayoutId - 1) {
+			CounterLocalServiceUtil.reset(
+				Layout.class.getName(), latestLayoutId);
 		}
 	}
 

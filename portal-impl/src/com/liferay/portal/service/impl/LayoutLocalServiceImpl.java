@@ -107,7 +107,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Layout
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long layoutId = getNextLayoutId(groupId, privateLayout);
+		long layoutId = getNextLayoutId();
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
 		String name = localeNamesMap.get(LocaleUtil.getDefault());
@@ -585,23 +585,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			new LayoutReference[layoutReferences.size()]);
 	}
 
+	public long getNextLayoutId() throws SystemException {
+		return counterLocalService.increment(Layout.class.getName());
+	}
+
+	@Deprecated
 	public long getNextLayoutId(long groupId, boolean privateLayout)
 		throws SystemException {
 
-		long layoutId = 0;
-
-		List<Layout> layouts = layoutPersistence.findByG_P(
-			groupId, privateLayout);
-
-		for (Layout curLayout : layouts) {
-			long curLayoutId = curLayout.getLayoutId();
-
-			if (curLayoutId > layoutId) {
-				layoutId = curLayoutId;
-			}
-		}
-
-		return ++layoutId;
+		return getNextLayoutId();
 	}
 
 	public List<Layout> getNullFriendlyURLLayouts() throws SystemException {
