@@ -22,15 +22,11 @@
 
 package com.liferay.portlet.imagegallery.service;
 
-import java.util.List;
-
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portlet.imagegallery.model.IGImage;
 
 /**
  * <a href="IGImageService.java.html"><b><i>View Source</i></b></a>
@@ -105,13 +101,6 @@ public interface IGImageService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<IGImage> getImagesByPermission(
-		PermissionChecker permissionChecker, long groupId,
-		long folderId, String actionId)
-		throws  com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-	
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long imageId, long groupId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
