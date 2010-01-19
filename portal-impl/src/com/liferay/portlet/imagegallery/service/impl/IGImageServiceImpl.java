@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGImageServiceBaseImpl;
@@ -139,6 +140,30 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 
 			if (!IGImagePermission.contains(
 					getPermissionChecker(), image, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return images;
+	}
+
+	public List<IGImage> getImagesByPermission(
+			PermissionChecker permissionChecker, long groupId,
+			long folderId, String actionId)
+		throws PortalException, SystemException {
+
+		List<IGImage> images = igImageLocalService.getImages(groupId, folderId);
+
+		images = ListUtil.copy(images);
+
+		Iterator<IGImage> itr = images.iterator();
+
+		while (itr.hasNext()) {
+			IGImage image = itr.next();
+
+			if (!IGImagePermission.contains(
+					permissionChecker, image, actionId)) {
 
 				itr.remove();
 			}
