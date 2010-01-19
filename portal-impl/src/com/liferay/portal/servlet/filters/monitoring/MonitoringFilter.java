@@ -57,7 +57,6 @@ public class MonitoringFilter extends BasePortalFilter {
 	}
 
 	protected boolean isFilterEnabled() {
-		DataSampleThreadLocal.clearDataSamples();
 
 		if (!super.isFilterEnabled()) {
 			return false;

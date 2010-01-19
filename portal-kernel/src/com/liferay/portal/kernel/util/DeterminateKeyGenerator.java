@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.concurrent.ThreadLocalRegistry;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -107,8 +109,8 @@ public class DeterminateKeyGenerator {
 
 	private static final int _DEFAULT_LENGTH = 4;
 
-	private static ThreadLocal<Map<String, Integer>> _seedMap =
-		new InitialThreadLocal<Map<String, Integer>>(
+	private static ThreadLocal<HashMap<String, Integer>> _seedMap =
+		ThreadLocalRegistry.createAndRegisterThreadLocal(
 			new HashMap<String, Integer>());
 
 }

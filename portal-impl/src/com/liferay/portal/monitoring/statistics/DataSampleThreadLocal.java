@@ -22,7 +22,7 @@
 
 package com.liferay.portal.monitoring.statistics;
 
-import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.kernel.concurrent.ThreadLocalRegistry;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ public class DataSampleThreadLocal implements Cloneable {
 	}
 
 	private static ThreadLocal<DataSampleThreadLocal> _dataSampleThreadLocal =
-		new InitialThreadLocal<DataSampleThreadLocal>(
+		ThreadLocalRegistry.createAndRegisterThreadLocal(
 			new DataSampleThreadLocal());
 	private static boolean _monitoringDataSampleThreadLocal =
 		PropsValues.MONITORING_DATA_SAMPLE_THREAD_LOCAL;
