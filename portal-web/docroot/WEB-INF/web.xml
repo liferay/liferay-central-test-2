@@ -315,10 +315,6 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
-		<url-pattern>/document/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Auto Login Filter</filter-name>
 		<url-pattern>/group/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
