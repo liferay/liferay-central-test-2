@@ -707,7 +707,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				boolean hasSavePermission = false;
 
 				if (article != null) {
-					hasSavePermission = JournalArticlePermission.contains(permissionChecker, groupId, articleId, ActionKeys.UPDATE);
+					hasSavePermission = JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE);
 				}
 				else {
 					hasSavePermission = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE);
