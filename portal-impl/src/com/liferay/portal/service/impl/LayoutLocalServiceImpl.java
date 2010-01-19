@@ -63,6 +63,7 @@ import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -588,20 +589,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public long getNextLayoutId(long groupId, boolean privateLayout)
 		throws SystemException {
 
-		long layoutId = 0;
-
 		List<Layout> layouts = layoutPersistence.findByG_P(
-			groupId, privateLayout);
+			groupId, privateLayout, 0, 1, new LayoutComparator());
 
-		for (Layout curLayout : layouts) {
-			long curLayoutId = curLayout.getLayoutId();
-
-			if (curLayoutId > layoutId) {
-				layoutId = curLayoutId;
-			}
+		if (layouts.isEmpty()) {
+			return 1;
 		}
+		else {
+			Layout layout = layouts.get(0);
 
-		return ++layoutId;
+			return layout.getLayoutId() + 1;
+		}
 	}
 
 	public List<Layout> getNullFriendlyURLLayouts() throws SystemException {
