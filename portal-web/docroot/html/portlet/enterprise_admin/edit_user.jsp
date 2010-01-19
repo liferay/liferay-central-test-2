@@ -268,8 +268,11 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 
 					<aui:button-row>
 						<aui:button type="submit" />
-
-						<aui:button onClick="<%= backURL %>" type="cancel" />
+						<%
+						PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
+						portletURL.setWindowState(WindowState.MAXIMIZED);
+						%>
+						<aui:button onClick="<%= portletURL.toString() %>" type="cancel" />
 					</aui:button-row>
 
 					<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">
