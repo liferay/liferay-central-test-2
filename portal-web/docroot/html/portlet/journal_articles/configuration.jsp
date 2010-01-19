@@ -157,7 +157,7 @@ if (Validator.isNotNull(structureId)) {
 				<aui:select label="display-url" name="pageURL">
 					<aui:option label="maximized" selected='<%= pageURL.equals("maximized") %>' />
 					<aui:option label="normal" selected='<%= pageURL.equals("normal") %>' />
-					<aui:option label="pop-up" selected='<%= pageURL.equals("popUp") %>' />
+					<aui:option label="pop-up" selected='<%= pageURL.equals("popUp") %>' value="popUp" />
 				</aui:select>
 
 				<aui:select label="display-per-page" name="pageDelta">
