@@ -20,39 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.concurrent;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.InitialThreadLocal;
-
-import java.util.HashSet;
-import java.util.Set;
+import com.liferay.portal.kernel.concurrent.ThreadLocalRegistry;
 
 /**
- * <a href="ThreadLocalRegistry.java.html"><b><i>View Source</i></b></a>
+ * <a href="AutoResetThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class ThreadLocalRegistry {
+public class AutoResetThreadLocal<T> extends InitialThreadLocal<T> {
 
-	public static ThreadLocal<?>[] captureSnapshot() {
-		Set<ThreadLocal<?>> threadLocalSet = _THREAD_LOCAL_SET.get();
-
-		return threadLocalSet.toArray(
-			new ThreadLocal<?>[threadLocalSet.size()]);
+	public AutoResetThreadLocal() {
+		this(null);
 	}
 
-	public static void registerThreadLocal(ThreadLocal<?> threadLocal) {
-		_THREAD_LOCAL_SET.get().add(threadLocal);
+	public AutoResetThreadLocal(T initialValue) {
+		super(initialValue);
 	}
 
-	public static void resetThreadLocals() {
-		for(ThreadLocal<?> threadLocal : _THREAD_LOCAL_SET.get()) {
-			threadLocal.remove();
-		}
+	protected T initialValue() {
+		ThreadLocalRegistry.registerThreadLocal(this);
+		return super.initialValue();
 	}
-
-	private static ThreadLocal<Set<ThreadLocal<?>>> _THREAD_LOCAL_SET =
-		new InitialThreadLocal<Set<ThreadLocal<?>>>(
-			new HashSet<ThreadLocal<?>>());
 
 }

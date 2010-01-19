@@ -52,6 +52,6 @@ public class NotificationThreadLocal {
 	}
 
 	private static ThreadLocal<Boolean> _enabled =
-		new InitialThreadLocal<Boolean>(true);
+		new AutoResetThreadLocal<Boolean>(Boolean.TRUE);
 
 }

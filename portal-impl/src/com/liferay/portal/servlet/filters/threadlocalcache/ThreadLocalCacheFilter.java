@@ -22,9 +22,7 @@
 
 package com.liferay.portal.servlet.filters.threadlocalcache;
 
-import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
-import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
-import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.kernel.concurrent.ThreadLocalRegistry;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import javax.servlet.FilterChain;
@@ -48,9 +46,7 @@ public class ThreadLocalCacheFilter extends BasePortalFilter {
 				ThreadLocalCacheFilter.class, request, response, filterChain);
 		}
 		finally {
-			EntityCacheUtil.clearLocalCache();
-			FinderCacheUtil.clearLocalCache();
-			PermissionCacheUtil.clearLocalCache();
+			ThreadLocalRegistry.resetThreadLocals();
 		}
 	}
 

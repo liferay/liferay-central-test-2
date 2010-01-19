@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.audit;
 
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
+
 /**
  * <a href="AuditRequestThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
@@ -111,7 +113,8 @@ public class AuditRequestThreadLocal {
 	}
 
 	private static ThreadLocal<AuditRequestThreadLocal>
-		_auditRequestThreadLocal = new ThreadLocal<AuditRequestThreadLocal>();
+		_auditRequestThreadLocal =
+			new AutoResetThreadLocal<AuditRequestThreadLocal>();
 
 	private String _clientHost;
 	private String _clientIP;

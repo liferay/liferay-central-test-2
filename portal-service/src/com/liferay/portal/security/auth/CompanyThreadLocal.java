@@ -24,7 +24,7 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.model.CompanyConstants;
 
 /**
@@ -59,7 +59,7 @@ public class CompanyThreadLocal {
 
 	private static Log _log = LogFactoryUtil.getLog(CompanyThreadLocal.class);
 
-	private static ThreadLocal<Long> _companyId = new InitialThreadLocal<Long>(
-		CompanyConstants.SYSTEM);
+	private static ThreadLocal<Long> _companyId =
+		new AutoResetThreadLocal<Long>(CompanyConstants.SYSTEM);
 
 }
