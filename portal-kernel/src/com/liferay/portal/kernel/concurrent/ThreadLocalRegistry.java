@@ -35,23 +35,27 @@ import java.util.Set;
 public class ThreadLocalRegistry {
 
 	public static ThreadLocal<?>[] captureSnapshot() {
-		Set<ThreadLocal<?>> threadLocalSet = _THREAD_LOCAL_SET.get();
+		Set<ThreadLocal<?>> threadLocalSet = _threadLocalSet.get();
 
 		return threadLocalSet.toArray(
 			new ThreadLocal<?>[threadLocalSet.size()]);
 	}
 
 	public static void registerThreadLocal(ThreadLocal<?> threadLocal) {
-		_THREAD_LOCAL_SET.get().add(threadLocal);
+		Set<ThreadLocal<?>> threadLocalSet = _threadLocalSet.get();
+
+		threadLocalSet.add(threadLocal);
 	}
 
 	public static void resetThreadLocals() {
-		for(ThreadLocal<?> threadLocal : _THREAD_LOCAL_SET.get()) {
+		Set<ThreadLocal<?>> threadLocalSet = _threadLocalSet.get();
+
+		for (ThreadLocal<?> threadLocal : threadLocalSet) {
 			threadLocal.remove();
 		}
 	}
 
-	private static ThreadLocal<Set<ThreadLocal<?>>> _THREAD_LOCAL_SET =
+	private static ThreadLocal<Set<ThreadLocal<?>>> _threadLocalSet =
 		new InitialThreadLocal<Set<ThreadLocal<?>>>(
 			new HashSet<ThreadLocal<?>>());
 
