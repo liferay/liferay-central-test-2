@@ -1456,8 +1456,12 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	public JournalArticle removeArticleLocale(JournalArticle article,
-			String languageId) throws PortalException, SystemException {
+	public JournalArticle removeArticleLocale(
+			long groupId, String articleId, double version, String languageId)
+		throws PortalException, SystemException {
+
+		JournalArticle article = journalArticlePersistence.findByG_A_V(
+			groupId, articleId, version);
 
 		String content = article.getContent();
 
@@ -1474,16 +1478,6 @@ public class JournalArticleLocalServiceImpl
 		journalArticlePersistence.update(article, false);
 
 		return article;
-	}
-
-	public JournalArticle removeArticleLocale(
-			long groupId, String articleId, double version, String languageId)
-		throws PortalException, SystemException {
-
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
-
-		return removeArticleLocale(article, languageId);
 	}
 
 	public Hits search(
@@ -1670,18 +1664,10 @@ public class JournalArticleLocalServiceImpl
 			boolean incrementVersion, String content)
 		throws PortalException, SystemException {
 
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-				groupId, articleId, version);
-
-		return updateArticle(userId, article, incrementVersion, content);
-	}
-
-	public JournalArticle updateArticle(
-			long userId, JournalArticle article,
-			boolean incrementVersion, String content)
-		throws PortalException, SystemException {
-
 		User user = userPersistence.findByPrimaryKey(userId);
+
+		JournalArticle article = journalArticlePersistence.findByG_A_V(
+			groupId, articleId, version);
 
 		Date displayDate = article.getDisplayDate();
 
@@ -1772,8 +1758,7 @@ public class JournalArticleLocalServiceImpl
 		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
 
 		return updateArticle(
-			userId, article.getGroupId(), article.getArticleId(),
-			article.getVersion(), incrementVersion,
+			userId, groupId, articleId, version, incrementVersion,
 			article.getTitle(), article.getDescription(), content,
 			article.getType(), article.getStructureId(),
 			article.getTemplateId(), displayDateMonth, displayDateDay,
@@ -1844,7 +1829,7 @@ public class JournalArticleLocalServiceImpl
 			smallImageURL, smallFile, smallBytes);
 
 		JournalArticle oldArticle = journalArticlePersistence.findByG_A_V(
-				groupId, articleId, version);
+			groupId, articleId, version);
 
 		JournalArticle article = null;
 
@@ -1994,14 +1979,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
-				groupId, articleId, version);
-
-		return updateContent(article, content);
-	}
-
-	public JournalArticle updateContent(
-			JournalArticle article, String content)
-		throws PortalException, SystemException {
+			groupId, articleId, version);
 
 		article.setContent(content);
 

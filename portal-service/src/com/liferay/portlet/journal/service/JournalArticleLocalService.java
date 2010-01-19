@@ -482,12 +482,6 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
-		com.liferay.portlet.journal.model.JournalArticle article,
-		java.lang.String languageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String languageId)
 		throws com.liferay.portal.PortalException,
@@ -593,12 +587,6 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		long userId, com.liferay.portlet.journal.model.JournalArticle article,
-		boolean incrementVersion, java.lang.String content)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long userId, long groupId, java.lang.String articleId, double version,
 		boolean incrementVersion, java.lang.String title,
 		java.lang.String description, java.lang.String content,
@@ -624,12 +612,6 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String content)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.journal.model.JournalArticle updateContent(
-		com.liferay.portlet.journal.model.JournalArticle article,
 		java.lang.String content)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
