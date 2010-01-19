@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.concurrent;
 
 import com.liferay.portal.kernel.test.TestCase;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 
 import java.util.concurrent.CyclicBarrier;
@@ -43,7 +44,7 @@ public class ThreadLocalRegistryTest extends TestCase {
 			public void run() {
 				try {
 					ThreadLocal<Boolean> threadLocal =
-						new InitialThreadLocal<Boolean>(Boolean.FALSE);
+						new AutoResetThreadLocal<Boolean>(Boolean.FALSE);
 
 					ThreadLocal<?>[] threadLocals =
 						ThreadLocalRegistry.captureSnapshot();
@@ -96,7 +97,7 @@ public class ThreadLocalRegistryTest extends TestCase {
 		ThreadLocal<?>[] threadLocals = ThreadLocalRegistry.captureSnapshot();
 		assertEquals(0, threadLocals.length);
 
-		ThreadLocal<Integer> threadLocal = new InitialThreadLocal<Integer>(0);
+		ThreadLocal<Integer> threadLocal = new AutoResetThreadLocal<Integer>(0);
 		threadLocals = ThreadLocalRegistry.captureSnapshot();
 		assertEquals(0, threadLocals.length);
 
