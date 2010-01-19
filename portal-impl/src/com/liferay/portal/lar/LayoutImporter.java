@@ -422,7 +422,8 @@ public class LayoutImporter {
 			if (layoutsImportMode.equals(
 					PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_ADD_AS_NEW)) {
 
-				layoutId = LayoutLocalServiceUtil.getNextLayoutId();
+				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
+					groupId, privateLayout);
 				friendlyURL = StringPool.SLASH + layoutId;
 			}
 			else if (layoutsImportMode.equals(
@@ -443,7 +444,8 @@ public class LayoutImporter {
 				}
 
 				if (layout == null) {
-					layoutId = LayoutLocalServiceUtil.getNextLayoutId();
+					layoutId = LayoutLocalServiceUtil.getNextLayoutId(
+						groupId, privateLayout);
 				}
 			}
 			else {

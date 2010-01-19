@@ -186,7 +186,7 @@ create table AssetVocabulary (
 	name VARCHAR(75) null,
 	title STRING null,
 	description STRING null,
-	settings_ VARCHAR(75) null
+	settings_ STRING null
 );
 
 create table BlogsEntry (
@@ -1137,7 +1137,7 @@ create table Resource_ (
 
 create table ResourceAction (
 	resourceActionId LONG not null primary key,
-	name VARCHAR(75) null,
+	name VARCHAR(255) null,
 	actionId VARCHAR(75) null,
 	bitwiseValue LONG
 );

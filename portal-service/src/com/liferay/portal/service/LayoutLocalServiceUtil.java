@@ -322,11 +322,6 @@ public class LayoutLocalServiceUtil {
 			preferencesValue);
 	}
 
-	public static long getNextLayoutId()
-		throws com.liferay.portal.SystemException {
-		return getService().getNextLayoutId();
-	}
-
 	public static long getNextLayoutId(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException {
 		return getService().getNextLayoutId(groupId, privateLayout);
