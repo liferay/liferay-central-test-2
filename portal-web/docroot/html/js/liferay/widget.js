@@ -8,7 +8,7 @@ Liferay.Widget = function(options) {
 	var url = options.url || 'http://www.liferay.com/widget/web/guest/community/forums/-/message_boards';
 	var width = options.width || '100%';
 
-	var html = '<iframe border="0" height="' + height + '" id="' + id + '" src="' + url + '" width="' + width + '"></iframe>';
+	var html = '<iframe frameborder="0" height="' + height + '" id="' + id + '" src="' + url + '" width="' + width + '"></iframe>';
 
 	document.write(html);
 }
