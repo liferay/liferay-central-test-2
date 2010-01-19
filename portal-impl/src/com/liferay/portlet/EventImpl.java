@@ -43,6 +43,17 @@ public class EventImpl implements Event {
 		_value = value;
 	}
 
+	public String getBase64Value() {
+		if (_base64Value != null) {
+			return _base64Value;
+		}
+		else {
+			_base64Value = Base64.objectToString(_value);
+
+			return _base64Value;
+		}
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -55,21 +66,9 @@ public class EventImpl implements Event {
 		return _value;
 	}
 
-	public String getBase64Value() {
-		if (_base64Value != null) {
-			return _base64Value;
-		}
-
-		if (_value == null) {
-			_base64Value = Base64.objectToString(_value);
-		}
-
-		return _base64Value;
-	}
-
+	private String _base64Value;
 	private String _name;
 	private QName _qName;
 	private Serializable _value;
-	private String _base64Value;
 
 }
