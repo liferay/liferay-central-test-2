@@ -32,7 +32,48 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DisplayOrderTest extends BaseTestCase {
 	public void testDisplayOrder() throws Exception {
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Manage Pages Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Manage Pages Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//li[@class='first manage-page']/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//li[@class='first manage-page']/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -59,6 +100,7 @@ public class DisplayOrderTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Child Test Page 2"));
 		selenium.clickAt("//td[2]/a[1]/img", RuntimeVariables.replace(""));
 		selenium.clickAt("//a[3]/img", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Update Display Order']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

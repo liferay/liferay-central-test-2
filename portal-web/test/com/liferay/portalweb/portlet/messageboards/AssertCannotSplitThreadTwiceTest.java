@@ -33,6 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertCannotSplitThreadTwiceTest extends BaseTestCase {
 	public void testAssertCannotSplitThreadTwice() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -55,45 +57,11 @@ public class AssertCannotSplitThreadTwiceTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//tr[4]/td[1]/a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//div[5]/table/tbody/tr[2]/td/ul/li[4]/span/a[2]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Split Thread", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -101,7 +69,7 @@ public class AssertCannotSplitThreadTwiceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='OK']")) {
+				if (selenium.isVisible("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -111,10 +79,11 @@ public class AssertCannotSplitThreadTwiceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//input[@value='OK']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.keyPress("//div[1]/span", RuntimeVariables.replace("\\8"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -122,7 +91,7 @@ public class AssertCannotSplitThreadTwiceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='OK']")) {
+				if (selenium.isVisible("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -132,7 +101,7 @@ public class AssertCannotSplitThreadTwiceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//input[@value='OK']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

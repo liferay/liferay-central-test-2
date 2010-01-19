@@ -37,6 +37,7 @@ public class DeleteAllTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -68,6 +69,7 @@ public class DeleteAllTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				selenium.clickAt("//td[5]/ul/li/strong/span",
 					RuntimeVariables.replace(""));
 
@@ -77,7 +79,8 @@ public class DeleteAllTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[5]/ul/li[5]/a")) {
+						if (selenium.isElementPresent(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
 							break;
 						}
 					}
@@ -87,7 +90,8 @@ public class DeleteAllTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[5]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -105,6 +109,7 @@ public class DeleteAllTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				selenium.clickAt("//td[5]/ul/li/strong/span",
 					RuntimeVariables.replace(""));
 
@@ -114,7 +119,8 @@ public class DeleteAllTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[5]/ul/li[5]/a")) {
+						if (selenium.isElementPresent(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
 							break;
 						}
 					}
@@ -124,12 +130,11 @@ public class DeleteAllTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[5]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 3:
 			case 100:

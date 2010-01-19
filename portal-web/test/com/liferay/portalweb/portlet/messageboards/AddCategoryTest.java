@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddCategoryTest extends BaseTestCase {
 	public void testAddCategory() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -55,25 +57,7 @@ public class AddCategoryTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Category']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_19_name",
-			RuntimeVariables.replace("T\u00e9st Cat\u00e9gor"));
+		Thread.sleep(5000);
 		selenium.type("_19_name",
 			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"));
 		selenium.type("_19_description",

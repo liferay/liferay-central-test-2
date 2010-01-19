@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">MoveThreadTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Méssagé Boards Tést Pagé</td>
 	<td></td>
@@ -20,47 +25,32 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//tr[4]/td[1]/a[1]/b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[5]/span/a</td>
+	<td>//tr[4]/td[1]/a[1]/strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[6]/span/a</td>
+	<td>//a/strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//b</td>
+	<td>//a/strong</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//td[7]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//li[7]/span/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Tést Méssagé to bé Délétéd</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[8]/span/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>This méssagé will bé délétéd!</td>
+	<td>link=Move Thread</td>
 	<td></td>
 </tr>
 <tr>
@@ -70,18 +60,13 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>_19_addExplanationPost</td>
+	<td>_19_addExplanationPostCheckbox</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_19_subject</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_19_subject</td>
-	<td>Moved to Sujr</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -115,17 +100,42 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=Categories'))</td>
-	<td>Categories1Present</td>
+	<td>eval(selenium.isElementPresent('//td[5]/input'))</td>
+	<td>categoryPresentA</td>
 </tr>
 <tr>
 	<td>gotoIf</td>
-	<td>!${Categories1Present}</td>
-	<td>Categories1NotPresent</td>
+	<td>${categoryPresentA}</td>
+	<td>CategoryPresentA</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Categories</td>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>CategoryPresentA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[5]/input'))</td>
+	<td>categoryPresentB</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${categoryPresentB}</td>
+	<td>CategoryNotPresentB</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=category</td>
 	<td></td>
 </tr>
 <tr>
@@ -134,33 +144,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>label</td>
-	<td>Categories1NotPresent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=Categories'))</td>
-	<td>Categories2Present</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>${Categories2Present}</td>
-	<td>Categories2IsPresent</td>
-</tr>
-<tr>
-	<td>close</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>Categories2IsPresent</td>
-	<td></td>
-</tr>
-<tr>
 	<td>selectWindow</td>
 	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>CategoryNotPresentB</td>
 	<td></td>
 </tr>
 <tr>
@@ -181,11 +171,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>link=Sujr</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>//li[8]/span/a</td>
 	<td></td>
 </tr>
 <tr>

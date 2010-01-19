@@ -37,6 +37,7 @@ public class MoveThreadTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -58,67 +59,16 @@ public class MoveThreadTest extends BaseTestCase {
 				selenium.clickAt("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//tr[4]/td[1]/a[1]/b",
+				selenium.clickAt("//tr[4]/td[1]/a[1]/strong",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[5]/span/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//b", RuntimeVariables.replace(""));
+				selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[6]/span/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//b", RuntimeVariables.replace(""));
+				selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[7]/span/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d",
+				Thread.sleep(5000);
+				selenium.clickAt("//td[7]/ul/li/strong/span",
 					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -126,7 +76,7 @@ public class MoveThreadTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//li[8]/span/a")) {
+						if (selenium.isElementPresent("link=Move Thread")) {
 							break;
 						}
 					}
@@ -136,32 +86,12 @@ public class MoveThreadTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				assertTrue(selenium.isTextPresent(
-						"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!"));
 				selenium.clickAt("link=Move Thread",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("_19_addExplanationPost",
+				selenium.clickAt("_19_addExplanationPostCheckbox",
 					RuntimeVariables.replace(""));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("_19_subject")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.typeKeys("_19_subject",
-					RuntimeVariables.replace("Moved to Sujr"));
+				Thread.sleep(5000);
 				selenium.type("_19_subject",
 					RuntimeVariables.replace("Moved to Sujr"));
 				selenium.type("_19_textArea",
@@ -173,57 +103,40 @@ public class MoveThreadTest extends BaseTestCase {
 				selenium.selectWindow("category");
 				Thread.sleep(5000);
 
-				boolean Categories1Present = selenium.isElementPresent(
-						"link=Categories");
+				boolean categoryPresentA = selenium.isElementPresent(
+						"//td[5]/input");
 
-				if (!Categories1Present) {
+				if (categoryPresentA) {
 					label = 2;
 
 					continue;
 				}
 
-				selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.click("//input[@value='Choose']");
+				selenium.close();
+				selenium.selectWindow("null");
 
 			case 2:
 
-				boolean Categories2Present = selenium.isElementPresent(
-						"link=Categories");
+				boolean categoryPresentB = selenium.isElementPresent(
+						"//td[5]/input");
 
-				if (Categories2Present) {
+				if (!categoryPresentB) {
 					label = 3;
 
 					continue;
 				}
 
-				selenium.close();
+				selenium.selectWindow("name=category");
+				selenium.click("//input[@value='Choose']");
+				selenium.selectWindow("null");
 
 			case 3:
-				selenium.selectWindow("null");
 				Thread.sleep(5000);
 				assertTrue(selenium.isElementPresent("link=Sujr"));
 				selenium.clickAt("//input[@value=\"Move Thread\"]",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=Sujr"));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (!selenium.isElementPresent("//li[8]/span/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				assertTrue(selenium.isElementPresent(
 						"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
 				assertTrue(selenium.isTextPresent(

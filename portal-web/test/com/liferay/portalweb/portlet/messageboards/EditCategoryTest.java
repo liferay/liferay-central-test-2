@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditCategoryTest extends BaseTestCase {
 	public void testEditCategory() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,6 +54,7 @@ public class EditCategoryTest extends BaseTestCase {
 		selenium.clickAt("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.clickAt("//td[5]/ul/li/strong/span",
 			RuntimeVariables.replace(""));
 
@@ -61,7 +64,8 @@ public class EditCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[1]/a")) {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -71,27 +75,10 @@ public class EditCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[5]/ul/li[1]/a", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_19_name",
-			RuntimeVariables.replace("T\u00e9st Cat\u00e9gor Edit\u00e9d"));
+		Thread.sleep(5000);
 		selenium.type("_19_name",
 			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory Edit\u00e9d"));
 		selenium.type("_19_description",

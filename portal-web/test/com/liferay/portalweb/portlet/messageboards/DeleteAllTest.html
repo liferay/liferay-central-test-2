@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">DeleteAllTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Méssagé Boards Tést Pagé</td>
 	<td></td>
@@ -29,18 +34,23 @@
 	<td>No CategoryA Present</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAt</td>
 	<td>//td[5]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[5]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[5]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,28 +79,28 @@
 	<td>No CategoryB Present</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAt</td>
 	<td>//td[5]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[5]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[5]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
