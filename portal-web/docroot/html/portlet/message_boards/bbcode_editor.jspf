@@ -22,30 +22,27 @@
  */
 %>
 
-<script type="text/javascript">
+<aui:script>
 	var <portlet:namespace />bbCode = null;
 
 	function <portlet:namespace />getHTML() {
 		return <portlet:namespace />bbCode.getHTML();
 	}
+</aui:script>
 
-	AUI().ready(
-		'liferay-bbcode-editor',
-		function() {
-			<portlet:namespace />bbCode = new Liferay.Editor.bbCode(
-				{
-					textarea: '#<portlet:namespace />textArea'
-				}
-			);
-
-			<c:if test="<%= quote && Validator.isNull(body) && (curParentMessage != null) %>">
-				var respondee = "<%= UnicodeFormatter.toString(parentAuthor) %>";
-				var quote = "<%= UnicodeFormatter.toString(curParentMessage.getBody(false)) %>";
-
-				<portlet:namespace />bbCode.insertTag("quote", respondee, quote);
-			</c:if>
+<aui:script use="liferay-bbcode-editor">
+	<portlet:namespace />bbCode = new Liferay.Editor.bbCode(
+		{
+			textarea: '#<portlet:namespace />textArea'
 		}
 	);
-</script>
+
+	<c:if test="<%= quote && Validator.isNull(body) && (curParentMessage != null) %>">
+		var respondee = "<%= UnicodeFormatter.toString(parentAuthor) %>";
+		var quote = "<%= UnicodeFormatter.toString(curParentMessage.getBody(false)) %>";
+
+		<portlet:namespace />bbCode.insertTag("quote", respondee, quote);
+	</c:if>
+</aui:script>
 
 <aui:input cssClass="lfr-textarea message-edit" label="" name="textArea" type="textarea" value="<%= GetterUtil.getString(body) %>" />

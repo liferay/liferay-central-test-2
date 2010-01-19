@@ -46,7 +46,7 @@ catch (NoSuchMailingListException nsmle) {
 boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "active");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />removeCategory() {
 		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>";
 
@@ -69,7 +69,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + parentCategoryId;
 		nameEl.innerHTML = parentCategoryName + "&nbsp;";
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL var="editCategoryURL">
 	<portlet:param name="struts_action" value="/message_boards/edit_category" />
@@ -231,14 +231,14 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
+<aui:script>
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</c:if>
 
 	Liferay.Util.toggleBoxes('<portlet:namespace />mailingListActiveCheckbox', '<portlet:namespace />mailingListSettings');
 	Liferay.Util.toggleBoxes('<portlet:namespace />outCustomCheckbox', '<portlet:namespace />outCustomSettings');
-</script>
+</aui:script>
 
 <%
 if (category != null) {

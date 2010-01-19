@@ -73,7 +73,7 @@ if ((message != null) && message.isAttachments()) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />getSuggestionsContent() {
 		var content = '';
 
@@ -97,7 +97,7 @@ if ((message != null) && message.isAttachments()) {
 		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + categoryId;
 		nameEl.innerHTML = categoryName + "&nbsp;";
 	}
-</script>
+</aui:script>
 
 <c:if test="<%= preview %>">
 	<liferay-ui:message key="preview" />:
@@ -366,47 +366,42 @@ if ((message != null) && message.isAttachments()) {
 	</c:if>
 </aui:form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);
-			</c:if>
+<aui:script use="event,node">
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);
+	</c:if>
 
-			<%
-			for (int i = 1; i <= existingAttachments.length; i++) {
-			%>
-				var removeExisting = A.one("#<portlet:namespace />removeExisting" + <%= i %>);
+	<%
+	for (int i = 1; i <= existingAttachments.length; i++) {
+	%>
+		var removeExisting = A.one("#<portlet:namespace />removeExisting" + <%= i %>);
 
-				if (removeExisting) {
-					removeExisting.on(
-						'click',
-						function(event) {
-							var button = event.target;
-							var span = A.one("#<portlet:namespace />existingFile" + <%= i %>);
-							var file = A.one("#<portlet:namespace />msgFile" + <%= i %>);
+		if (removeExisting) {
+			removeExisting.on(
+				'click',
+				function(event) {
+					var button = event.target;
+					var span = A.one("#<portlet:namespace />existingFile" + <%= i %>);
+					var file = A.one("#<portlet:namespace />msgFile" + <%= i %>);
 
-							if (button) {
-								button.remove();
-							}
+					if (button) {
+						button.remove();
+					}
 
-							if (span) {
-								span.remove();
-							}
+					if (span) {
+						span.remove();
+					}
 
-							if (files) {
-								file.show();
-							}
-						}
-					);
+					if (files) {
+						file.show();
+					}
 				}
-			<%
-			}
-			%>
-
+			);
 		}
-	);
-</script>
+	<%
+	}
+	%>
+</aui:script>
 
 <%
 if (curParentMessage != null) {

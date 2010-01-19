@@ -41,7 +41,7 @@ String body = StringPool.BLANK;
 boolean quote = false;
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />moveThread() {
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
 		submitForm(document.<portlet:namespace />fm);
@@ -64,7 +64,7 @@ boolean quote = false;
 			document.getElementById("<portlet:namespace />explanationPost").style.display = "none";
 		}
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL var="moveThreadURL">
 	<portlet:param name="struts_action" value="/message_boards/move_thread" />
@@ -125,14 +125,9 @@ boolean quote = false;
 
 				<aui:input name="body" type="hidden" />
 
-				<script type="text/javascript">
-					AUI().use(
-						'liferay-bbcode-editor',
-						function(A) {
-							<portlet:namespace />bbCode.setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=[$NEW_THREAD_URL$]][$NEW_THREAD_URL$][/url]") %>');
-						}
-					);
-				</script>
+				<aui:script use="liferay-bbcode-editor">
+					<portlet:namespace />setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=[$NEW_THREAD_URL$]][$NEW_THREAD_URL$][/url]") %>');
+				</aui:script>
 			</aui:field-wrapper>
 		</div>
 	</aui:fieldset>

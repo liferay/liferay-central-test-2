@@ -104,9 +104,9 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 			</div>
 
 			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
-				<script type="text/javascript">
+				<aui:script>
 					Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
-				</script>
+				</aui:script>
 			</c:if>
 		</c:if>
 	</div>

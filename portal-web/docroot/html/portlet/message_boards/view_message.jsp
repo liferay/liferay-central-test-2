@@ -45,7 +45,7 @@ PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferenc
 String threadView = messageDisplay.getThreadView();
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addAnswerFlag(messageId) {
 		Liferay.Service.MB.MBMessageFlag.addAnswerFlag(
 			{
@@ -85,13 +85,9 @@ String threadView = messageDisplay.getThreadView();
 	}
 
 	<c:if test="<%= thread.getRootMessageId() != message.getMessageId() %>">
-		AUI().ready(
-			function() {
-				document.getElementById("<portlet:namespace />message_" + <%= message.getMessageId() %>).scrollIntoView(true);
-			}
-		);
+		document.getElementById("<portlet:namespace />message_" + <%= message.getMessageId() %>).scrollIntoView(true);
 	</c:if>
-</script>
+</aui:script>
 
 <div id="<portlet:namespace />addAnswerFlagDiv" style="display: none;">
 	<liferay-ui:icon

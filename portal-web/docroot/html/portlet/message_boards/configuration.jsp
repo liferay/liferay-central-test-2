@@ -46,7 +46,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>
 
-<script type="text/javascript">
+<aui:script>
 
 	<%
 	String bodyEditorParam = "";
@@ -75,7 +75,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
@@ -539,7 +539,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 
 			<br />
 
-			<script type="text/javascript">
+			<aui:script>
 				var changed = false;
 				var lastLanguageId = "<%= currentLanguageId %>";
 
@@ -650,7 +650,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				}
 
 				<portlet:namespace />updateLanguageTemps(lastLanguageId);
-			</script>
+			</aui:script>
 		</c:when>
 		<c:when test='<%= tabs2.equals("user-ranks") %>'>
 			<div class="portlet-msg-info">
@@ -709,7 +709,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				</table>
 			</aui:fieldset>
 
-			<script type="text/javascript">
+			<aui:script>
 				var ranksChanged = false;
 				var lastLanguageId = "<%= currentLanguageId %>";
 
@@ -775,7 +775,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				}
 
 				<portlet:namespace />updateLanguageTemps(lastLanguageId);
-			</script>
+			</aui:script>
 		</c:when>
 		<c:when test='<%= tabs2.equals("rss") %>'>
 			<aui:fieldset>
