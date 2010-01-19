@@ -342,23 +342,18 @@ AUI().add(
 				var offsetWidth = 0;
 				var boxWidth = 0;
 
-				AUI().use(
-					'context-overlay',
-					function(A) {
-						var emoticonOverlay = new A.ContextOverlay(
-							{
-								trigger: emoticonButton.item(0),
-								contentBox: instance._emoticons.item(0),
-								hideDelay: 500,
-								align: {
-									 points: ['tr', 'br']
-								}
-							}
-						);
-
-						emoticonOverlay.render();
+				var emoticonOverlay = new A.ContextOverlay(
+					{
+						trigger: emoticonButton.item(0),
+						contentBox: instance._emoticons.item(0),
+						hideDelay: 500,
+						align: {
+							 points: ['tr', 'br']
+						}
 					}
 				);
+
+				emoticonOverlay.render();
 
 				instance._location.on(
 					'click',
@@ -391,34 +386,30 @@ AUI().add(
 
 				instance._fontColorInput = A.Node.create('<input type="hidden" val="" />');
 
-				AUI().use(
-					'color-picker',
-					function(A) {
-						var colorpicker = instance._location.one('.use-colorpicker');
+				var colorpicker = instance._location.one('.use-colorpicker');
 
-						if (colorpicker) {
-							instance._fontColorInput.placeBefore(colorpicker);
+				var colorpicker = instance._location.one('.use-colorpicker');
 
-							new A.ColorPicker(
-								{
-									after: {
-										colorChange: function() {
-											instance._fontColorInput.val('#' + this.get('hex'));
-										},
-										visibleChange: function(event) {
-											if (!event.newVal) {
-												instance._insertColor();
-											}
-										}
-									},
-									trigger: colorpicker,
-									zIndex: 9999
+				if (colorpicker) {
+					instance._fontColorInput.placeBefore(colorpicker);
+
+					new A.ColorPicker(
+						{
+							after: {
+								colorChange: function() {
+									instance._fontColorInput.val('#' + this.get('hex'));
+								},
+								visibleChange: function(event) {
+									if (!event.newVal) {
+										instance._insertColor();
+									}
 								}
-							)
-							.render();
+							},
+							trigger: colorpicker,
+							zIndex: 9999
 						}
-					}
-				);
+					).render();
+				}
 			},
 
 			_insertColor: function() {
@@ -563,6 +554,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['io-request']
+		requires: ['color-picker', 'context-overlay', 'io-request']
 	}
 );
