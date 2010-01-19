@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -72,6 +73,7 @@ import com.liferay.portlet.ActionRequestFactory;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseFactory;
 import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.EventImpl;
 import com.liferay.portlet.EventRequestFactory;
 import com.liferay.portlet.EventRequestImpl;
 import com.liferay.portlet.EventResponseFactory;
@@ -99,6 +101,7 @@ import com.liferay.portlet.login.util.LoginUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -421,6 +424,22 @@ public class LayoutAction extends Action {
 		EventRequestImpl eventRequestImpl = EventRequestFactory.create(
 			request, portlet, invokerPortlet, portletContext, windowState,
 			portletMode, portletPreferences, layout.getPlid());
+
+		ClassLoader portletClassLoader = invokerPortlet.getPortletClassLoader();
+
+		ClassLoader eventClassLoader =
+			event.getValue().getClass().getClassLoader();
+
+		if (portletClassLoader != eventClassLoader) {
+			EventImpl eventImpl = (EventImpl)event;
+
+			String base64Value = eventImpl.getBase64Value();
+
+			Serializable value = (Serializable)Base64.stringToObject(
+				base64Value, portletClassLoader);
+
+			event = new EventImpl(event.getName(), event.getQName(), value);
+		}
 
 		eventRequestImpl.setEvent(event);
 

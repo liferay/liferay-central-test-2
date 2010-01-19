@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.Base64;
+
 import java.io.Serializable;
 
 import javax.portlet.Event;
@@ -53,8 +55,21 @@ public class EventImpl implements Event {
 		return _value;
 	}
 
+	public String getBase64Value() {
+		if (_base64Value != null) {
+			return _base64Value;
+		}
+
+		if (_value == null) {
+			_base64Value = Base64.objectToString(_value);
+		}
+
+		return _base64Value;
+	}
+
 	private String _name;
 	private QName _qName;
 	private Serializable _value;
+	private String _base64Value;
 
 }
