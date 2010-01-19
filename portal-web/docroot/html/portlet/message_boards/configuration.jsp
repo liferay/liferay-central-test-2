@@ -39,6 +39,24 @@ String emailMessageAddedSignature = ParamUtil.getString(request, "emailMessageAd
 String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMessageUpdatedSubjectPrefix", MBUtil.getEmailMessageUpdatedSubjectPrefix(preferences));
 String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(preferences));
 String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessageUpdatedSignature", MBUtil.getEmailMessageUpdatedSignature(preferences));
+
+String bodyEditorParam = "";
+String bodyEditorContent = "";
+String signatureEditorParam = "";
+String signatureEditorContent = "";
+
+if (tabs2.equals("message-added-email")) {
+	bodyEditorParam = "emailMessageAddedBody";
+	bodyEditorContent = emailMessageAddedBody;
+	signatureEditorParam = "emailMessageAddedSignature";
+	signatureEditorContent = emailMessageAddedSignature;
+}
+else if (tabs2.equals("message-updated-email")) {
+	bodyEditorParam = "emailMessageUpdatedBody";
+	bodyEditorContent = emailMessageUpdatedBody;
+	signatureEditorParam = "emailMessageUpdatedSignature";
+	signatureEditorContent = emailMessageUpdatedSignature;
+}
 %>
 
 <liferay-portlet:renderURL var="portletURL" portletConfiguration="true">
@@ -47,27 +65,6 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 </liferay-portlet:renderURL>
 
 <aui:script>
-
-	<%
-	String bodyEditorParam = "";
-	String bodyEditorContent = "";
-	String signatureEditorParam = "";
-	String signatureEditorContent = "";
-
-	if (tabs2.equals("message-added-email")) {
-		bodyEditorParam = "emailMessageAddedBody";
-		bodyEditorContent = emailMessageAddedBody;
-		signatureEditorParam = "emailMessageAddedSignature";
-		signatureEditorContent = emailMessageAddedSignature;
-	}
-	else if (tabs2.equals("message-updated-email")) {
-		bodyEditorParam = "emailMessageUpdatedBody";
-		bodyEditorContent = emailMessageUpdatedBody;
-		signatureEditorParam = "emailMessageUpdatedSignature";
-		signatureEditorContent = emailMessageUpdatedSignature;
-	}
-	%>
-
 	function <portlet:namespace />saveConfiguration() {
 		<c:if test='<%= tabs2.equals("user-ranks") || tabs2.equals("thread-priorities") %>'>
 			<portlet:namespace />updateLanguage();

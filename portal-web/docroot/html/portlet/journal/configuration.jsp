@@ -47,6 +47,26 @@ String emailArticleApprovalRequestedBody = ParamUtil.getString(request, "emailAr
 
 String emailArticleReviewSubject = ParamUtil.getString(request, "emailArticleReviewSubject", JournalUtil.getEmailArticleReviewSubject(portletSetup));
 String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReviewBody", JournalUtil.getEmailArticleReviewBody(portletSetup));
+
+String editorParam = StringPool.BLANK;
+String editorContent = StringPool.BLANK;
+
+if (tabs2.equals("web-content-approval-denied-email")) {
+	editorParam = "emailArticleApprovalDeniedBody";
+	editorContent = emailArticleApprovalDeniedBody;
+}
+else if (tabs2.equals("web-content-approval-granted-email")) {
+	editorParam = "emailArticleApprovalGrantedBody";
+	editorContent = emailArticleApprovalGrantedBody;
+}
+else if (tabs2.equals("web-content-approval-requested-email")) {
+	editorParam = "emailArticleApprovalRequestedBody";
+	editorContent = emailArticleApprovalRequestedBody;
+}
+else if (tabs2.equals("web-content-review-email")) {
+	editorParam = "emailArticleReviewBody";
+	editorContent = emailArticleReviewBody;
+}
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
@@ -55,29 +75,6 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 </liferay-portlet:renderURL>
 
 <script type="text/javascript">
-
-	<%
-	String editorParam = "";
-	String editorContent = "";
-
-	if (tabs2.equals("web-content-approval-denied-email")) {
-		editorParam = "emailArticleApprovalDeniedBody";
-		editorContent = emailArticleApprovalDeniedBody;
-	}
-	else if (tabs2.equals("web-content-approval-granted-email")) {
-		editorParam = "emailArticleApprovalGrantedBody";
-		editorContent = emailArticleApprovalGrantedBody;
-	}
-	else if (tabs2.equals("web-content-approval-requested-email")) {
-		editorParam = "emailArticleApprovalRequestedBody";
-		editorContent = emailArticleApprovalRequestedBody;
-	}
-	else if (tabs2.equals("web-content-review-email")) {
-		editorParam = "emailArticleReviewBody";
-		editorContent = emailArticleReviewBody;
-	}
-	%>
-
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}

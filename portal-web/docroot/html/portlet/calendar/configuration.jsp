@@ -34,6 +34,9 @@ String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", CalUt
 
 String emailEventReminderSubject = ParamUtil.getString(request, "emailEventReminderSubject", CalUtil.getEmailEventReminderSubject(preferences));
 String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminderBody", CalUtil.getEmailEventReminderBody(preferences));
+
+String editorParam = "emailEventReminderBody";
+String editorContent = emailEventReminderBody;
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
@@ -42,12 +45,6 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 </liferay-portlet:renderURL>
 
 <script type="text/javascript">
-
-	<%
-	String editorParam = "emailEventReminderBody";
-	String editorContent = emailEventReminderBody;
-	%>
-
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}

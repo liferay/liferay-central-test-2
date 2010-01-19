@@ -37,6 +37,18 @@ String emailEntryAddedBody = ParamUtil.getString(request, "emailEntryAddedBody",
 
 String emailEntryUpdatedSubject = ParamUtil.getString(request, "emailEntryUpdatedSubject", BlogsUtil.getEmailEntryUpdatedSubject(preferences));
 String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBody", BlogsUtil.getEmailEntryUpdatedBody(preferences));
+
+String bodyEditorParam = "";
+String bodyEditorBody = "";
+
+if (tabs2.equals("entry-added-email")) {
+	bodyEditorParam = "emailEntryAddedBody";
+	bodyEditorBody = emailEntryAddedBody;
+}
+else if (tabs2.equals("entry-updated-email")) {
+	bodyEditorParam = "emailEntryUpdatedBody";
+	bodyEditorBody = emailEntryUpdatedBody;
+}
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
@@ -45,21 +57,6 @@ String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBo
 </liferay-portlet:renderURL>
 
 <script type="text/javascript">
-
-	<%
-	String bodyEditorParam = "";
-	String bodyEditorBody = "";
-
-	if (tabs2.equals("entry-added-email")) {
-		bodyEditorParam = "emailEntryAddedBody";
-		bodyEditorBody = emailEntryAddedBody;
-	}
-	else if (tabs2.equals("entry-updated-email")) {
-		bodyEditorParam = "emailEntryUpdatedBody";
-		bodyEditorBody = emailEntryUpdatedBody;
-	}
-	%>
-
 	function <portlet:namespace />saveConfiguration() {
 		<c:if test='<%= tabs2.equals("display-settings") %>'>
 			document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);

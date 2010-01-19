@@ -29,6 +29,27 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "payment-settings");
 String tabs3 = ParamUtil.getString(request, "tabs3", "email-from");
 
 String redirect = ParamUtil.getString(request, "redirect");
+
+String emailFromName = ParamUtil.getString(request, "emailFromName", shoppingPrefs.getEmailFromName());
+String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", shoppingPrefs.getEmailFromAddress());
+
+String emailOrderConfirmationSubject = ParamUtil.getString(request, "emailOrderConfirmationSubject", shoppingPrefs.getEmailOrderConfirmationSubject());
+String emailOrderConfirmationBody = ParamUtil.getString(request, "emailOrderConfirmationBody", shoppingPrefs.getEmailOrderConfirmationBody());
+
+String emailOrderShippingSubject = ParamUtil.getString(request, "emailOrderShippingSubject", shoppingPrefs.getEmailOrderShippingSubject());
+String emailOrderShippingBody = ParamUtil.getString(request, "emailOrderShippingBody", shoppingPrefs.getEmailOrderShippingBody());
+
+String editorParam = StringPool.BLANK;
+String editorContent = StringPool.BLANK;
+
+if (tabs3.equals("confirmation-email")) {
+	editorParam = "emailOrderConfirmationBody";
+	editorContent = emailOrderConfirmationBody;
+}
+else if (tabs3.equals("shipping-email")) {
+	editorParam = "emailOrderShippingBody";
+	editorContent = emailOrderShippingBody;
+}
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
@@ -37,30 +58,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 </liferay-portlet:renderURL>
 
 <script type="text/javascript">
-
-	<%
-	String emailFromName = ParamUtil.getString(request, "emailFromName", shoppingPrefs.getEmailFromName());
-	String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", shoppingPrefs.getEmailFromAddress());
-
-	String emailOrderConfirmationSubject = ParamUtil.getString(request, "emailOrderConfirmationSubject", shoppingPrefs.getEmailOrderConfirmationSubject());
-	String emailOrderConfirmationBody = ParamUtil.getString(request, "emailOrderConfirmationBody", shoppingPrefs.getEmailOrderConfirmationBody());
-
-	String emailOrderShippingSubject = ParamUtil.getString(request, "emailOrderShippingSubject", shoppingPrefs.getEmailOrderShippingSubject());
-	String emailOrderShippingBody = ParamUtil.getString(request, "emailOrderShippingBody", shoppingPrefs.getEmailOrderShippingBody());
-
-	String editorParam = "";
-	String editorContent = "";
-
-	if (tabs3.equals("confirmation-email")) {
-		editorParam = "emailOrderConfirmationBody";
-		editorContent = emailOrderConfirmationBody;
-	}
-	else if (tabs3.equals("shipping-email")) {
-		editorParam = "emailOrderShippingBody";
-		editorContent = emailOrderShippingBody;
-	}
-	%>
-
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}

@@ -32,15 +32,12 @@ PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(r
 
 String emailMessageSubject = ParamUtil.getString(request, "emailMessageSubject", InvitationUtil.getEmailMessageSubject(preferences));
 String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", InvitationUtil.getEmailMessageBody(preferences));
+
+String editorParam = "emailMessageBody";
+String editorContent = emailMessageBody;
 %>
 
 <script type="text/javascript">
-
-	<%
-	String editorParam = "emailMessageBody";
-	String editorContent = emailMessageBody;
-	%>
-
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}

@@ -53,25 +53,25 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("email-notifications") %>'>
+
+			<%
+			String currentLanguageId = LanguageUtil.getLanguageId(request);
+			Locale defaultLocale = LocaleUtil.getDefault();
+			String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+			Locale[] locales = LanguageUtil.getAvailableLocales();
+
+			String emailFromName = PrefsParamUtil.getString(preferences, request, "emailFromName");
+			String emailFromAddress = PrefsParamUtil.getString(preferences, request, "emailFromAddress");
+
+			String emailPasswordSentSubject = PrefsParamUtil.getString(preferences, request, "emailPasswordSentSubject_" + currentLanguageId, StringPool.BLANK);
+			String emailPasswordSentBody = PrefsParamUtil.getString(preferences, request, "emailPasswordSentBody_" + currentLanguageId, StringPool.BLANK);
+
+			String editorParam = "emailPasswordSentBody_" + currentLanguageId;
+			String editorContent = emailPasswordSentBody;
+			%>
+
 			<script type="text/javascript">
-
-				<%
-				String currentLanguageId = LanguageUtil.getLanguageId(request);
-				Locale defaultLocale = LocaleUtil.getDefault();
-				String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
-
-				Locale[] locales = LanguageUtil.getAvailableLocales();
-
-				String emailFromName = PrefsParamUtil.getString(preferences, request, "emailFromName");
-				String emailFromAddress = PrefsParamUtil.getString(preferences, request, "emailFromAddress");
-
-				String emailPasswordSentSubject = PrefsParamUtil.getString(preferences, request, "emailPasswordSentSubject_" + currentLanguageId, StringPool.BLANK);
-				String emailPasswordSentBody = PrefsParamUtil.getString(preferences, request, "emailPasswordSentBody_" + currentLanguageId, StringPool.BLANK);
-
-				String editorParam = "emailPasswordSentBody_" + currentLanguageId;
-				String editorContent = emailPasswordSentBody;
-				%>
-
 				function <portlet:namespace />initEditor() {
 					return "<%= UnicodeFormatter.toString(editorContent) %>";
 				}

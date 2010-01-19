@@ -39,6 +39,24 @@ String emailPageAddedSignature = ParamUtil.getString(request, "emailPageAddedSig
 String emailPageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailPageUpdatedSubjectPrefix", WikiUtil.getEmailPageUpdatedSubjectPrefix(preferences));
 String emailPageUpdatedBody = ParamUtil.getString(request, "emailPageUpdatedBody", WikiUtil.getEmailPageUpdatedBody(preferences));
 String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdatedSignature", WikiUtil.getEmailPageUpdatedSignature(preferences));
+
+String bodyEditorParam = "";
+String bodyEditorBody = "";
+String signatureEditorParam = "";
+String signatureEditorBody = "";
+
+if (tabs2.equals("page-added-email")) {
+	bodyEditorParam = "emailPageAddedBody";
+	bodyEditorBody = emailPageAddedBody;
+	signatureEditorParam = "emailPageAddedSignature";
+	signatureEditorBody = emailPageAddedSignature;
+}
+else if (tabs2.equals("page-updated-email")) {
+	bodyEditorParam = "emailPageUpdatedBody";
+	bodyEditorBody = emailPageUpdatedBody;
+	signatureEditorParam = "emailPageUpdatedSignature";
+	signatureEditorBody = emailPageUpdatedSignature;
+}
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
@@ -47,27 +65,6 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 </liferay-portlet:renderURL>
 
 <script type="text/javascript">
-
-	<%
-	String bodyEditorParam = "";
-	String bodyEditorBody = "";
-	String signatureEditorParam = "";
-	String signatureEditorBody = "";
-
-	if (tabs2.equals("page-added-email")) {
-		bodyEditorParam = "emailPageAddedBody";
-		bodyEditorBody = emailPageAddedBody;
-		signatureEditorParam = "emailPageAddedSignature";
-		signatureEditorBody = emailPageAddedSignature;
-	}
-	else if (tabs2.equals("page-updated-email")) {
-		bodyEditorParam = "emailPageUpdatedBody";
-		bodyEditorBody = emailPageUpdatedBody;
-		signatureEditorParam = "emailPageUpdatedSignature";
-		signatureEditorBody = emailPageUpdatedSignature;
-	}
-	%>
-
 	function <portlet:namespace />saveConfiguration() {
 		<c:if test='<%= tabs2.equals("display-settings") %>'>
 			document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
