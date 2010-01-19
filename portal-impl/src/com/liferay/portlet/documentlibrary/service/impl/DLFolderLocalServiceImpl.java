@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -50,7 +51,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
-import com.liferay.documentlibrary.NoSuchDirectoryException;
 
 import java.util.ArrayList;
 import java.util.Date;
