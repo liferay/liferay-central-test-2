@@ -41,20 +41,14 @@ public class ThreadLocalRegistry {
 			new ThreadLocal<?>[threadLocalSet.size()]);
 	}
 
-	public static <T> ThreadLocal<T> createAndRegisterThreadLocal() {
-		return createAndRegisterThreadLocal(null);
-	}
-
-	public static <T> ThreadLocal<T> createAndRegisterThreadLocal(
-		T initialValue) {
-		Set<ThreadLocal<?>> threadLocalSet = _THREAD_LOCAL_SET.get();
-		ThreadLocal<T> threadLocal = new InitialThreadLocal<T>(initialValue);
-		threadLocalSet.add(threadLocal);
-		return threadLocal;
+	public static void registerThreadLocal(ThreadLocal<?> threadLocal) {
+		_THREAD_LOCAL_SET.get().add(threadLocal);
 	}
 
 	public static void resetThreadLocals() {
+		System.out.println("Size:"+_THREAD_LOCAL_SET.get().size());
 		for(ThreadLocal<?> threadLocal : _THREAD_LOCAL_SET.get()) {
+			System.out.println(threadLocal.get());
 			threadLocal.remove();
 		}
 	}
