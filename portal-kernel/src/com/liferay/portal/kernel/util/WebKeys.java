@@ -83,6 +83,8 @@ public interface WebKeys {
 
 	public static final String VELOCITY_TAGLIB = "VELOCITY_TAGLIB";
 
+	public static final String VM_VARIABLES = "VM_VARIABLES";
+	
 	public static final String VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
 
 	public static final String VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
