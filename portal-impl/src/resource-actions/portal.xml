@@ -304,6 +304,7 @@
 			<action-key>APPROVE_PROPOSAL</action-key>
 			<action-key>ASSIGN_MEMBERS</action-key>
 			<action-key>ASSIGN_REVIEWER</action-key>
+			<action-key>ASSIGN_USER_ROLES</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>MANAGE_ANNOUNCEMENTS</action-key>
 			<action-key>MANAGE_ARCHIVED_SETUPS</action-key>
@@ -342,6 +343,7 @@
 			<action-key>APPROVE_PROPOSAL</action-key>
 			<action-key>ASSIGN_MEMBERS</action-key>
 			<action-key>ASSIGN_REVIEWER</action-key>
+			<action-key>ASSIGN_USER_ROLES</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>MANAGE_ANNOUNCEMENTS</action-key>
 			<action-key>MANAGE_ARCHIVED_SETUPS</action-key>
