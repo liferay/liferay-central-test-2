@@ -214,7 +214,6 @@
 
 		Liferay.currentURL = '<%= UnicodeFormatter.toString(currentURL) %>';
 		Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
-
 	// ]]>
 </script>
 
