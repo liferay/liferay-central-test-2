@@ -404,8 +404,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String VIRTUAL_HOST_LAYOUT_SET = "VIRTUAL_HOST_LAYOUT_SET";
 
-	public static final String VM_VARIABLES = com.liferay.portal.kernel.util.WebKeys.VM_VARIABLES;
-
 	public static final String WEBSITE = "WEBSITE";
 
 	public static final String WIDGET = "WIDGET";
