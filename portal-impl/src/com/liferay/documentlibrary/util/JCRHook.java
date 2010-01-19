@@ -214,8 +214,15 @@ public class JCRHook extends BaseHook {
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchDirectoryException(dirName);
 		}
-		catch (RepositoryException e) {
-			throw new PortalException(e);
+		catch (RepositoryException re) {
+			String message = GetterUtil.getString(re.getMessage());
+
+			if (message.contains("failed to resolve path")) {
+				throw new NoSuchDirectoryException(dirName);
+			}
+			else {
+				throw new PortalException(re);
+			}
 		}
 		catch (SearchException se) {
 			throw new SystemException(se);
