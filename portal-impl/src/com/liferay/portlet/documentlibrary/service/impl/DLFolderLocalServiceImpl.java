@@ -50,6 +50,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.documentlibrary.NoSuchDirectoryException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -247,14 +248,16 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		expandoValueLocalService.deleteValues(
 			DLFolder.class.getName(), folder.getFolderId());
 
+		// Directory
+
 		try {
 			dlService.deleteDirectory(
 				folder.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				folder.getFolderId(), StringPool.BLANK);
 		}
-		catch(Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
+		catch (NoSuchDirectoryException nsde) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(nsde.getMessage());
 			}
 		}
 	}
