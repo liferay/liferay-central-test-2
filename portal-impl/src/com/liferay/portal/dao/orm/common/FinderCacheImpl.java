@@ -27,11 +27,11 @@ import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.concurrent.ThreadLocalRegistry;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
+import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
@@ -273,8 +273,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	static {
 		if (PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
-			_localCache =
-				ThreadLocalRegistry.createAndRegisterThreadLocal(new LRUMap(
+			_localCache = new InitialThreadLocal<LRUMap>(new LRUMap(
 				PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE));
 			_localCacheAvailable = true;
 		}

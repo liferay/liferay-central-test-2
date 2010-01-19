@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.DeterminateKeyGenerator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -68,6 +69,7 @@ import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.User;
 import com.liferay.portal.poller.PollerProcessorUtil;
 import com.liferay.portal.pop.POPServerUtil;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -724,6 +726,11 @@ public class MainServlet extends ActionServlet {
 
 		response.addHeader(
 			_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
+
+		CompanyThreadLocal.setCompanyId(0);
+		PrincipalThreadLocal.setName(null);
+
+		DeterminateKeyGenerator.reset();
 	}
 
 	protected void checkServletContext(HttpServletRequest request) {

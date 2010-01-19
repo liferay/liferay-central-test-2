@@ -64,7 +64,12 @@ public class AuditFilter extends BasePortalFilter {
 		auditRequestThreadLocal.setServerPort(request.getServerPort());
 		auditRequestThreadLocal.setSessionID(request.getSession().getId());
 
-		processFilter(AuditFilter.class, request, response, filterChain);
+		try {
+			processFilter(AuditFilter.class, request, response, filterChain);
+		}
+		finally {
+			AuditRequestThreadLocal.removeAuditThreadLocal();
+		}
 	}
 
 }
