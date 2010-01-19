@@ -38,8 +38,8 @@ String emailEntryAddedBody = ParamUtil.getString(request, "emailEntryAddedBody",
 String emailEntryUpdatedSubject = ParamUtil.getString(request, "emailEntryUpdatedSubject", BlogsUtil.getEmailEntryUpdatedSubject(preferences));
 String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBody", BlogsUtil.getEmailEntryUpdatedBody(preferences));
 
-String bodyEditorParam = "";
-String bodyEditorBody = "";
+String bodyEditorParam = StringPool.BLANK;
+String bodyEditorBody = StringPool.BLANK;
 
 if (tabs2.equals("entry-added-email")) {
 	bodyEditorParam = "emailEntryAddedBody";

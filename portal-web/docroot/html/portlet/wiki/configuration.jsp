@@ -40,10 +40,10 @@ String emailPageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailPageUp
 String emailPageUpdatedBody = ParamUtil.getString(request, "emailPageUpdatedBody", WikiUtil.getEmailPageUpdatedBody(preferences));
 String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdatedSignature", WikiUtil.getEmailPageUpdatedSignature(preferences));
 
-String bodyEditorParam = "";
-String bodyEditorBody = "";
-String signatureEditorParam = "";
-String signatureEditorBody = "";
+String bodyEditorParam = StringPool.BLANK;
+String bodyEditorBody = StringPool.BLANK;
+String signatureEditorParam = StringPool.BLANK;
+String signatureEditorBody = StringPool.BLANK;
 
 if (tabs2.equals("page-added-email")) {
 	bodyEditorParam = "emailPageAddedBody";

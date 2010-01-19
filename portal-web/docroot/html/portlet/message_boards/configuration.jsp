@@ -40,10 +40,10 @@ String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMes
 String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(preferences));
 String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessageUpdatedSignature", MBUtil.getEmailMessageUpdatedSignature(preferences));
 
-String bodyEditorParam = "";
-String bodyEditorContent = "";
-String signatureEditorParam = "";
-String signatureEditorContent = "";
+String bodyEditorParam = StringPool.BLANK;
+String bodyEditorContent = StringPool.BLANK;
+String signatureEditorParam = StringPool.BLANK;
+String signatureEditorContent = StringPool.BLANK;
 
 if (tabs2.equals("message-added-email")) {
 	bodyEditorParam = "emailMessageAddedBody";
