@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">RemoveFooterArticleTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=RSS Test Page</td>
 	<td></td>
@@ -16,6 +21,16 @@
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=RSS Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//strong/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -30,12 +45,22 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//tr[12]/td[2]/input[2]</td>
+	<td>//div[2]/div/span[2]/span/input</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='p_p_id_86_']/div/div</td>
 	<td>You have successfully updated the setup.</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home</td>
 	<td></td>
 </tr>
 <tr>

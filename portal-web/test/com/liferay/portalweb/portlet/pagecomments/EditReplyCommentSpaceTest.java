@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditReplyCommentSpaceTest extends BaseTestCase {
 	public void testEditReplyCommentSpace() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,14 +55,33 @@ public class EditReplyCommentSpaceTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//tr[8]/td[2]/table[1]/tbody/tr/td[4]/span/a[2]",
 			RuntimeVariables.replace(""));
-		assertTrue(selenium.isVisible("_107_editReplyBody3"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_107_editReplyBody3")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_107_editReplyBody3", RuntimeVariables.replace(""));
+		selenium.keyPress("_107_editReplyBody3",
+			RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_107_editReplyBody3", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("_107_editReplyButton3", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isVisible("_107_editReplyBody3"));
-		selenium.clickAt("//tr[8]/td[2]/table[2]/tbody/tr[2]/td/input[2]",
+		selenium.clickAt("//tr[@id='_107_editForm3']/td/input[2]",
 			RuntimeVariables.replace(""));
 		assertFalse(selenium.isVisible("_107_editReplyBody3"));
 	}

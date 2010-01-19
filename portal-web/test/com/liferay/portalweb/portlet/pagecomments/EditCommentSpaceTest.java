@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditCommentSpaceTest extends BaseTestCase {
 	public void testEditCommentSpace() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -70,12 +72,16 @@ public class EditCommentSpaceTest extends BaseTestCase {
 		}
 
 		selenium.type("_107_editReplyBody1", RuntimeVariables.replace(""));
+		selenium.keyPress("_107_editReplyBody1",
+			RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_107_editReplyBody1", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("_107_editReplyButton1", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isVisible("_107_editReplyBody1"));
-		selenium.clickAt("//tr[2]/td/input[2]", RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[@id='_107_editForm1']/td/input[2]",
+			RuntimeVariables.replace(""));
 		assertFalse(selenium.isVisible("_107_editReplyBody1"));
 		assertEquals(RuntimeVariables.replace("This is a test page comment."),
 			selenium.getText("//td[2]/div[1]"));

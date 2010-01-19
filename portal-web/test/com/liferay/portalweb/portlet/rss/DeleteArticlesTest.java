@@ -32,45 +32,146 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeleteArticlesTest extends BaseTestCase {
 	public void testDeleteArticles() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Web Content")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
+				Thread.sleep(5000);
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Control Panel")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("link=Web Content")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("_15_allRowIds")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.clickAt("link=Web Content",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+
+				boolean article1Present = selenium.isElementPresent(
+						"_15_rowIds");
+
+				if (!article1Present) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.clickAt("_15_rowIds", RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
+
+			case 2:
+
+				boolean article2Present = selenium.isElementPresent(
+						"_15_rowIds");
+
+				if (!article2Present) {
+					label = 3;
+
+					continue;
+				}
+
+				selenium.clickAt("_15_rowIds", RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
+
+			case 3:
+
+				boolean article3Present = selenium.isElementPresent(
+						"_15_rowIds");
+
+				if (!article3Present) {
+					label = 4;
+
+					continue;
+				}
+
+				selenium.clickAt("_15_rowIds", RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
+
+			case 4:
+
+				boolean article4Present = selenium.isElementPresent(
+						"_15_rowIds");
+
+				if (!article4Present) {
+					label = 5;
+
+					continue;
+				}
+
+				selenium.clickAt("_15_rowIds", RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
+
+			case 5:
+
+				boolean article5Present = selenium.isElementPresent(
+						"_15_rowIds");
+
+				if (!article5Present) {
+					label = 6;
+
+					continue;
+				}
+
+				selenium.clickAt("_15_rowIds", RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
+
+			case 6:
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 	}
 }

@@ -32,14 +32,16 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SetupTest extends BaseTestCase {
 	public void testSetup() throws Exception {
+		selenium.open("/web/guest/home/");
+		Thread.sleep(5000);
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -49,9 +51,6 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -93,25 +92,7 @@ public class SetupTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Question']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_25_title_en_US")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_25_title_en_US",
-			RuntimeVariables.replace("PD Setup Test Question"));
+		Thread.sleep(5000);
 		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("PD Setup Test Question"));
 		selenium.type("_25_description_en_US",
@@ -139,14 +120,12 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_25_choiceDescriptionc_en_US",
-			RuntimeVariables.replace("PD Setup Choice C"));
 		selenium.type("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace("PD Setup Choice C"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Back to My Community",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Back to Guest", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

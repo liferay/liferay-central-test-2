@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddReplyCommentTest extends BaseTestCase {
 	public void testAddReplyComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -72,6 +74,9 @@ public class AddReplyCommentTest extends BaseTestCase {
 		assertTrue(selenium.isVisible("_107_postReplyBody1"));
 		selenium.type("_107_postReplyBody1",
 			RuntimeVariables.replace("This is a test reply comment."));
+		selenium.keyPress("_107_postReplyBody1",
+			RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_107_postReplyBody1", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("_107_postReplyButton1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

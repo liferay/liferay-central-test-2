@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DisplayStylesTest extends BaseTestCase {
 	public void testDisplayStyles() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,6 +53,8 @@ public class DisplayStylesTest extends BaseTestCase {
 		selenium.clickAt("link=Recent Bloggers Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +62,7 @@ public class DisplayStylesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("link=Configuration")) {
 					break;
 				}
 			}
@@ -68,35 +72,17 @@ public class DisplayStylesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//img[@alt='Configuration']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.select("_86_displayStyle",
 			RuntimeVariables.replace("label=User Name"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 		assertTrue(selenium.isElementPresent("link=Joe Bloggs"));
 		assertFalse(selenium.isTextPresent("Posts: 1"));
 	}

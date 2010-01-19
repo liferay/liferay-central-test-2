@@ -40,17 +40,13 @@ public class RSSTests extends BaseTests {
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(EditConfigurationTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddHeaderArticleTest.class);
 		testSuite.addTestSuite(AddFooterArticleTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 		testSuite.addTestSuite(SelectHeaderArticleTest.class);
 		testSuite.addTestSuite(RemoveHeaderArticleTest.class);
 		testSuite.addTestSuite(SelectFooterArticleTest.class);
 		testSuite.addTestSuite(RemoveFooterArticleTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(DeleteArticlesTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

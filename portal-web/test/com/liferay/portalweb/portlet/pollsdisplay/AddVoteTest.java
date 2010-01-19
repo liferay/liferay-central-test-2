@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddVoteTest extends BaseTestCase {
 	public void testAddVote() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +53,8 @@ public class AddVoteTest extends BaseTestCase {
 		selenium.clickAt("link=Polls Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[3]/td[1]/input", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//span/span/input", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Vote']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Thank you for your vote."));

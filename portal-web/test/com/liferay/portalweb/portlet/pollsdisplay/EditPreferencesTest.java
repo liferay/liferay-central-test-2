@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditPreferencesTest extends BaseTestCase {
 	public void testEditPreferences() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,18 +53,36 @@ public class EditPreferencesTest extends BaseTestCase {
 		selenium.clickAt("link=Polls Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//img[@alt='Configuration']",
-			RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Configuration")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.select("_86_questionId",
 			RuntimeVariables.replace("label=PD Setup Test Question"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 		assertTrue(selenium.isTextPresent("PD Setup Choice A"));
 		assertTrue(selenium.isTextPresent("PD Setup Choice B"));
 		assertTrue(selenium.isTextPresent("PD Setup Choice C"));

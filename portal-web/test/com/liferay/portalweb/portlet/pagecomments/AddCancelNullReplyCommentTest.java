@@ -33,6 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddCancelNullReplyCommentTest extends BaseTestCase {
 	public void testAddCancelNullReplyComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -71,7 +73,7 @@ public class AddCancelNullReplyCommentTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isVisible("_107_postReplyBody1"));
-		selenium.clickAt("//td[2]/table[2]/tbody/tr[1]/td/input[2]",
+		selenium.clickAt("//tr[@id='_107_postReplyForm1']/td/input[2]",
 			RuntimeVariables.replace(""));
 		assertFalse(selenium.isVisible("_107_postReplyBody1"));
 	}

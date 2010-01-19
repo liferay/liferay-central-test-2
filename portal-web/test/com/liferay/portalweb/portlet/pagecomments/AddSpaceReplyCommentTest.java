@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSpaceReplyCommentTest extends BaseTestCase {
 	public void testAddSpaceReplyComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -70,12 +72,15 @@ public class AddSpaceReplyCommentTest extends BaseTestCase {
 		}
 
 		selenium.type("_107_postReplyBody1", RuntimeVariables.replace(""));
+		selenium.keyPress("_107_postReplyBody1",
+			RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_107_postReplyBody1", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("_107_postReplyButton1", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isVisible("_107_postReplyBody1"));
-		selenium.clickAt("//td[2]/table[2]/tbody/tr[1]/td/input[2]",
+		selenium.clickAt("//tr[@id='_107_postReplyForm1']/td/input[2]",
 			RuntimeVariables.replace(""));
 		assertFalse(selenium.isVisible("_107_postReplyBody1"));
 	}

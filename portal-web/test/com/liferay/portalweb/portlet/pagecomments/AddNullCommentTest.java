@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddNullCommentTest extends BaseTestCase {
 	public void testAddNullComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,6 +54,9 @@ public class AddNullCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
+		selenium.keyPress("_107_postReplyBody0",
+			RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_107_postReplyBody0", RuntimeVariables.replace("\\8"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

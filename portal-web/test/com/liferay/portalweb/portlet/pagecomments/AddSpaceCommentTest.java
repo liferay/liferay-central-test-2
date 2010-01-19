@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSpaceCommentTest extends BaseTestCase {
 	public void testAddSpaceComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -69,6 +71,9 @@ public class AddSpaceCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.keyPress("_107_postReplyBody0",
+			RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_107_postReplyBody0", RuntimeVariables.replace("\\8"));
 		selenium.type("_107_postReplyBody0", RuntimeVariables.replace(""));
 		selenium.clickAt("_107_postReplyButton0", RuntimeVariables.replace(""));
 		Thread.sleep(5000);

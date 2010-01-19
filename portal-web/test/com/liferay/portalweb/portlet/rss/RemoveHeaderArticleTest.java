@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class RemoveHeaderArticleTest extends BaseTestCase {
 	public void testRemoveHeaderArticle() throws Exception {
+		selenium.open("/web/guest/home");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,6 +52,8 @@ public class RemoveHeaderArticleTest extends BaseTestCase {
 
 		selenium.clickAt("link=RSS Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,8 +76,11 @@ public class RemoveHeaderArticleTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Remove']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+		selenium.open("/web/guest/home");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

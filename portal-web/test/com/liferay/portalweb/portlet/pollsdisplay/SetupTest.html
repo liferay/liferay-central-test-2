@@ -9,13 +9,18 @@
 <tr><td rowspan="1" colspan="3">SetupTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]</td>
+	<td>open</td>
+	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]</td>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
@@ -44,14 +49,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>_25_title_en_US</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_25_title_en_US</td>
-	<td>PD Setup Test Question</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -84,14 +84,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>_25_choiceDescriptionc_en_US</td>
 	<td>PD Setup Choice C</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>_25_choiceDescriptionc_en_US</td>
-	<td>PD Setup Choice C</td>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -100,7 +100,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Back to My Community</td>
+	<td>link=Back to Guest</td>
 	<td></td>
 </tr>
 

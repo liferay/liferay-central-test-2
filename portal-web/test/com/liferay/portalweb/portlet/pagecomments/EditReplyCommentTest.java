@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditReplyCommentTest extends BaseTestCase {
 	public void testEditReplyComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -72,14 +74,17 @@ public class EditReplyCommentTest extends BaseTestCase {
 
 		assertTrue(selenium.isVisible("_107_editReplyBody3"));
 		selenium.type("_107_editReplyBody3",
-			RuntimeVariables.replace("This is a edtied test reply comment."));
+			RuntimeVariables.replace("This is a edited test reply comment."));
+		selenium.keyPress("_107_editReplyBody3",
+			RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_107_editReplyBody3", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("_107_editReplyButton3", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isVisible("_107_editReplyBody3"));
 		assertEquals(RuntimeVariables.replace(
-				"This is a edtied test reply comment."),
+				"This is a edited test reply comment."),
 			selenium.getText("//tr[8]/td[2]/div[1]"));
 	}
 }

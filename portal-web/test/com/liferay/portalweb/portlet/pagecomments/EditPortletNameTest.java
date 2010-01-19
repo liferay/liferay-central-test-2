@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditPortletNameTest extends BaseTestCase {
 	public void testEditPortletName() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +53,9 @@ public class EditPortletNameTest extends BaseTestCase {
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[1]/span", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//div[@class='portlet-topper']/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +63,7 @@ public class EditPortletNameTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("value")) {
+				if (selenium.isVisible("//span/input")) {
 					break;
 				}
 			}
@@ -69,7 +73,7 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("value", RuntimeVariables.replace("T\u00e9st Name"));
+		selenium.type("//span/input", RuntimeVariables.replace("T\u00e9st Name"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,7 +81,8 @@ public class EditPortletNameTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[1]/a")) {
+				if (selenium.isElementPresent(
+							"//span[@class='aui-icon-circle-check aui-icon']")) {
 					break;
 				}
 			}
@@ -87,7 +92,8 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[2]/ul/li[1]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//span[@class='aui-icon-circle-check aui-icon']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -109,11 +115,32 @@ public class EditPortletNameTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st Name"),
-			selenium.getText("//div[1]/span"));
+			selenium.getText("//div[@class='portlet-topper']/span"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Page Comments Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[1]/span", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//div[@class='portlet-topper']/span",
+			RuntimeVariables.replace(""));
+		selenium.type("//span/input", RuntimeVariables.replace("Page Comments"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -121,7 +148,8 @@ public class EditPortletNameTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("value")) {
+				if (selenium.isElementPresent(
+							"//span[@class='aui-icon-circle-check aui-icon']")) {
 					break;
 				}
 			}
@@ -131,25 +159,8 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("value", RuntimeVariables.replace("Page Comments"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[1]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//div[2]/ul/li[1]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//span[@class='aui-icon-circle-check aui-icon']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -171,6 +182,6 @@ public class EditPortletNameTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Page Comments"),
-			selenium.getText("//div[1]/span"));
+			selenium.getText("//div[@class='portlet-topper']/span"));
 	}
 }

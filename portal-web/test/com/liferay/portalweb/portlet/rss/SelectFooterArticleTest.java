@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SelectFooterArticleTest extends BaseTestCase {
 	public void testSelectFooterArticle() throws Exception {
+		selenium.open("/web/guest/home");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,6 +52,8 @@ public class SelectFooterArticleTest extends BaseTestCase {
 
 		selenium.clickAt("link=RSS Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,15 +73,17 @@ public class SelectFooterArticleTest extends BaseTestCase {
 
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[12]/td[2]/input[1]", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/div/span[1]/span/input",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Footer Web Content Article",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		assertEquals(RuntimeVariables.replace("Footer Web Content Article"),
-			selenium.getText("//tr[12]/td[2]"));
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

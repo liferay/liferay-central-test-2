@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditConfigurationTest extends BaseTestCase {
 	public void testEditConfiguration() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,6 +52,8 @@ public class EditConfigurationTest extends BaseTestCase {
 
 		selenium.clickAt("link=RSS Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,7 +73,8 @@ public class EditConfigurationTest extends BaseTestCase {
 
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[3]/a/img", RuntimeVariables.replace(""));
+		selenium.clickAt("//img[@alt='Add Location']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,7 +82,7 @@ public class EditConfigurationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[5]/td[2]/input")) {
+				if (selenium.isElementPresent("//td[2]/span/span/input")) {
 					break;
 				}
 			}
@@ -87,17 +92,17 @@ public class EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//tr[5]/td[2]/input",
+		selenium.type("//td[2]/span/span/input",
 			RuntimeVariables.replace("http://sitening.com/digg/rss/"));
 		selenium.select("_86_entriesPerFeed",
 			RuntimeVariables.replace("label=4"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
