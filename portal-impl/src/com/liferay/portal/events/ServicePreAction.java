@@ -1433,6 +1433,7 @@ public class ServicePreAction extends Action {
 			request, "js_fast_load", PropsValues.JAVASCRIPT_FAST_LOAD);
 
 		String lifecycle = ParamUtil.getString(request, "p_p_lifecycle", "0");
+		boolean isolated = ParamUtil.getBoolean(request, "p_p_isolated");
 
 		String facebookCanvasPageURL = (String)request.getAttribute(
 			WebKeys.FACEBOOK_CANVAS_PAGE_URL);
@@ -1498,6 +1499,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(request));
 		themeDisplay.setStateMaximized(LiferayWindowState.isMaximized(request));
 		themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(request));
+		themeDisplay.setIsolated(isolated);
 		themeDisplay.setPathApplet(contextPath.concat("/applets"));
 		themeDisplay.setPathCms(contextPath.concat("/cms"));
 		themeDisplay.setPathContext(contextPath);

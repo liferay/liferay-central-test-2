@@ -202,6 +202,8 @@ public class PortletURLUtil {
 			}
 		}
 
+		sb.append("&p_p_isolated=1");
+
 		String doAsUserId = themeDisplay.getDoAsUserId();
 
 		if (Validator.isNotNull(doAsUserId)) {

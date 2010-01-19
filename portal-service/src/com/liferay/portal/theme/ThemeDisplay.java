@@ -565,6 +565,14 @@ public class ThemeDisplay implements Serializable {
 		_statePopUp = statePopUp;
 	}
 
+	public boolean isIsolated() {
+		return _isolated;
+	}
+
+	public void setIsolated(boolean isolated) {
+		_isolated = isolated;
+	}
+
 	public boolean isFacebook() {
 		return _facebook;
 	}
@@ -1062,6 +1070,7 @@ public class ThemeDisplay implements Serializable {
 		_stateExclusive = false;
 		_stateMaximized = false;
 		_statePopUp = false;
+		_isolated = false;
 		_facebook = false;
 		_facebookCanvasPageURL = StringPool.BLANK;
 		_widget = false;
@@ -1166,6 +1175,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _stateExclusive;
 	private boolean _stateMaximized;
 	private boolean _statePopUp;
+	private boolean _isolated;
 	private boolean _facebook;
 	private String _facebookCanvasPageURL;
 	private boolean _widget;

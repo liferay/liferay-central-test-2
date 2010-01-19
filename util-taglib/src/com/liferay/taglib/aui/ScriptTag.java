@@ -60,7 +60,8 @@ public class ScriptTag extends BodyTagSupport {
 				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 					WebKeys.THEME_DISPLAY);
 
-				if (themeDisplay.isLifecycleResource() ||
+				if (themeDisplay.isIsolated() ||
+					themeDisplay.isLifecycleResource() ||
 					themeDisplay.isStateExclusive()) {
 
 					_position = _POSITION_INLINE;
