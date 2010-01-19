@@ -44,10 +44,6 @@ public class ThreadLocalCacheFilter extends BasePortalFilter {
 		throws Exception {
 
 		try {
-			EntityCacheUtil.setLocalCacheEnabled(true);
-			FinderCacheUtil.setLocalCacheEnabled(true);
-			PermissionCacheUtil.setLocalCacheEnabled(true);
-
 			processFilter(
 				ThreadLocalCacheFilter.class, request, response, filterChain);
 		}

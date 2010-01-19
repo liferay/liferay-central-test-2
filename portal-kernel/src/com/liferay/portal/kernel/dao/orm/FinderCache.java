@@ -44,6 +44,4 @@ public interface FinderCache {
 
 	public void removeResult(FinderPath finderPath, Object[] args);
 
-	public void setLocalCacheEnabled(boolean localCacheEnabled);
-
 }

@@ -76,7 +76,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	public void clearLocalCache() {
-		if (_localCacheEnabled.get().booleanValue()) {
+		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
 			localCache.clear();
@@ -103,7 +103,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		String localCacheKey = null;
 
-		if (_localCacheEnabled.get().booleanValue()) {
+		if (_localCacheAvailable) {
 			localCache = _localCache.get();
 
 			localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
@@ -124,7 +124,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 				portalCache.put(cacheKey, result);
 			}
 
-			if (_localCacheEnabled.get().booleanValue()) {
+			if (_localCacheAvailable) {
 				localCache.put(localCacheKey, result);
 			}
 		}
@@ -165,7 +165,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		String localCacheKey = null;
 
-		if (_localCacheEnabled.get().booleanValue()) {
+		if (_localCacheAvailable) {
 			localCache = _localCache.get();
 
 			localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
@@ -207,7 +207,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 				}
 			}
 
-			if (_localCacheEnabled.get().booleanValue()) {
+			if (_localCacheAvailable) {
 				localCache.put(localCacheKey, result);
 			}
 		}
@@ -230,7 +230,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		result = _objectToResult(result);
 
-		if (_localCacheEnabled.get().booleanValue()) {
+		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
 			String localCacheKey = _encodeLocalCacheKey(
@@ -256,7 +256,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			return;
 		}
 
-		if (_localCacheEnabled.get().booleanValue()) {
+		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
 			String localCacheKey = _encodeLocalCacheKey(
@@ -270,12 +270,6 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		String cacheKey = _encodeCacheKey(primaryKeyObj);
 
 		portalCache.remove(cacheKey);
-	}
-
-	public void setLocalCacheEnabled(boolean localCacheEnabled) {
-		if (_localCacheAvailable) {
-			_localCacheEnabled.set(Boolean.valueOf(localCacheEnabled));
-		}
 	}
 
 	public void setMultiVMPool(MultiVMPool multiVMPool) {
@@ -330,8 +324,6 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;
-	private static ThreadLocal<Boolean> _localCacheEnabled =
-		new InitialThreadLocal<Boolean>(Boolean.FALSE);
 
 	static {
 		if (PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {

@@ -78,7 +78,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	public void clearLocalCache() {
-		if (_localCacheEnabled.get().booleanValue()) {
+		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
 			localCache.clear();
@@ -104,7 +104,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 		String localCacheKey = null;
 
-		if (_localCacheEnabled.get().booleanValue()) {
+		if (_localCacheAvailable) {
 			localCache = _localCache.get();
 
 			localCacheKey = finderPath.encodeLocalCacheKey(args);
@@ -121,7 +121,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			primaryKey = portalCache.get(cacheKey);
 
 			if (primaryKey != null) {
-				if (_localCacheEnabled.get().booleanValue()) {
+				if (_localCacheAvailable) {
 					localCache.put(localCacheKey, primaryKey);
 				}
 			}
@@ -149,7 +149,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 		Object primaryKey = _resultToPrimaryKey(result);
 
-		if (_localCacheEnabled.get().booleanValue()) {
+		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
 			String localCacheKey = finderPath.encodeLocalCacheKey(args);
@@ -171,7 +171,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			return;
 		}
 
-		if (_localCacheEnabled.get().booleanValue()) {
+		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
 			String localCacheKey = finderPath.encodeLocalCacheKey(args);
@@ -184,12 +184,6 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		String cacheKey = finderPath.encodeCacheKey(args);
 
 		portalCache.remove(cacheKey);
-	}
-
-	public void setLocalCacheEnabled(boolean localCacheEnabled) {
-		if (_localCacheAvailable) {
-			_localCacheEnabled.set(Boolean.valueOf(localCacheEnabled));
-		}
 	}
 
 	public void setMultiVMPool(MultiVMPool multiVMPool) {
@@ -276,8 +270,6 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;
-	private static ThreadLocal<Boolean> _localCacheEnabled =
-		new InitialThreadLocal<Boolean>(Boolean.FALSE);
 
 	static {
 		if (PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
