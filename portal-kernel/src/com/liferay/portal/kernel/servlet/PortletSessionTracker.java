@@ -86,6 +86,8 @@ public class PortletSessionTracker
 	}
 
 	private void _invalidate(String sessionId) {
+		Set<HttpSession> sessionsToInvalidate = new HashSet<HttpSession>();
+
 		synchronized (_sessions) {
 			Set<HttpSession> portletSessions = _sessions.get(sessionId);
 
@@ -93,17 +95,23 @@ public class PortletSessionTracker
 				Iterator<HttpSession> itr = portletSessions.iterator();
 
 				while (itr.hasNext()) {
-					HttpSession session = itr.next();
-
-					try {
-						session.invalidate();
-					}
-					catch (Exception e) {
-					}
+					sessionsToInvalidate.add(itr.next());
 				}
 			}
 
 			_sessions.remove(sessionId);
+		}
+
+		Iterator<HttpSession> itr = sessionsToInvalidate.iterator();
+
+		while (itr.hasNext()) {
+			HttpSession session = itr.next();
+
+			try {
+				session.invalidate();
+			}
+			catch (Exception e) {
+			}
 		}
 	}
 
