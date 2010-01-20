@@ -41,10 +41,14 @@ int flagValue = AnnouncementsFlagConstants.NOT_HIDDEN;
 boolean hasResults = total > 0;
 %>
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
+<c:if test="<%= hasResults %>">
+    <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
+</c:if>
 
 <%
 flagValue = AnnouncementsFlagConstants.HIDDEN;
+
+searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, "no-entries-were-found");
 %>
 
 <div class="read-entries">
@@ -55,7 +59,9 @@ flagValue = AnnouncementsFlagConstants.HIDDEN;
 hasResults = hasResults || (total > 0);
 %>
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
+<c:if test="<%= total > 0 %>">
+    <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
+</c:if>
 
 <aui:script>
 	function <portlet:namespace />handleEntry(entryId) {
