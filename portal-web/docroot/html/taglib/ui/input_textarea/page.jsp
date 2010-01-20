@@ -35,16 +35,11 @@ String value = ParamUtil.getString(request, param, defaultValue);
 
 <textarea class="lfr-textarea <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" wrap="soft" onKeyDown="Liferay.Util.disableEsc();"><%= value %></textarea>
 
-<script type="text/javascript">
-	AUI().ready(
-		'char-counter',
-		function(A) {
-			new A.CharCounter(
-				{
-					input: '#<%= namespace %><%= param %>',
-					maxLength: <%= ModelHintsConstants.TEXTAREA_MAX_LENGTH %>
-				}
-			);
+<aui:script use="char-counter">
+	new A.CharCounter(
+		{
+			input: '#<%= namespace %><%= param %>',
+			maxLength: <%= ModelHintsConstants.TEXTAREA_MAX_LENGTH %>
 		}
 	);
-</script>
+</aui:script>

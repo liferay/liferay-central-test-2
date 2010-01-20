@@ -363,19 +363,14 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				</c:otherwise>
 			</c:choose>
 
-			<script type="text/javascript">
-				AUI().ready(
-					'char-counter',
-					function(A) {
-						new A.CharCounter(
-							{
-								input: '#<%= fieldParam %>',
-								maxLength: <%= maxLength %>
-							}
-						);
+			<aui:script use="char-counter">
+				new A.CharCounter(
+					{
+						input: '#<%= fieldParam %>',
+						maxLength: <%= maxLength %>
 					}
 				);
-			</script>
+			</aui:script>
 		</c:when>
 	</c:choose>
 </c:if>

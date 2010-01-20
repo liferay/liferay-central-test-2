@@ -66,7 +66,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
 
 <c:if test='<%= type.equals("regular") && !themeDisplay.isFacebook() %>'>
-	<script type="text/javascript">
+	<aui:script>
 		function <%= namespace %><%= curParam %>updateCur(box) {
 			var cur = AUI().one(box).val();
 
@@ -96,7 +96,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				<%= jsCall %>;
 			}
 		}
-	</script>
+	</aui:script>
 </c:if>
 
 <c:if test='<%= type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>

@@ -68,19 +68,14 @@ if (Validator.isNotNull(curCategoryIds)) {
 	<aui:input name="<%= hiddenInput %>" type="hidden" />
 </div>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-categories-selector',
-		function() {
-			new Liferay.AssetCategoriesSelector(
-				{
-					contentBox: '#<%= namespace + randomNamespace %>assetCategoriesSelector',
-					curEntries: '<%= curCategoryNames %>',
-					curEntryIds: '<%= curCategoryIds %>',
-					hiddenInput: '#<%= namespace + hiddenInput %>',
-					instanceVar: '<%= namespace + randomNamespace %>'
-				}
-			).render();
+<aui:script use="liferay-categories-selector">
+	new Liferay.AssetCategoriesSelector(
+		{
+			contentBox: '#<%= namespace + randomNamespace %>assetCategoriesSelector',
+			curEntries: '<%= curCategoryNames %>',
+			curEntryIds: '<%= curCategoryIds %>',
+			hiddenInput: '#<%= namespace + hiddenInput %>',
+			instanceVar: '<%= namespace + randomNamespace %>'
 		}
-	);
-</script>
+	).render();
+</aui:script>

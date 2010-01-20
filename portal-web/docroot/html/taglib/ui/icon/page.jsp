@@ -139,35 +139,31 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 </c:choose>
 
 <c:if test="<%= srcHoverIsNotNull %>">
-	<script type="text/javascript">
-		AUI().ready(
-			function(A) {
-				var icon = A.one('#<%= randomId %>');
+	<aui:script use="event,node">
+		var icon = A.one('#<%= randomId %>');
 
-				if (icon) {
-					icon.on(
-						'mouseout',
-						function(event) {
-							var img = event.currentTarget.one('img');
+		if (icon) {
+			icon.on(
+				'mouseout',
+				function(event) {
+					var img = event.currentTarget.one('img');
 
-							if (img) {
-								img.attr('src', '<%= src %>');
-							}
-						}
-					);
-
-					icon.on(
-						'mouseover',
-						function(event) {
-							var img = event.currentTarget.one('img');
-
-							if (img) {
-								img.attr('src', '<%= srcHover %>');
-							}
-						}
-					);
+					if (img) {
+						img.attr('src', '<%= src %>');
+					}
 				}
-			}
-		);
-	</script>
+			);
+
+			icon.on(
+				'mouseover',
+				function(event) {
+					var img = event.currentTarget.one('img');
+
+					if (img) {
+						img.attr('src', '<%= srcHover %>');
+					}
+				}
+			);
+		}
+	</aui:script>
 </c:if>

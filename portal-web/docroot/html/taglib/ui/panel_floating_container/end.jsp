@@ -26,24 +26,19 @@
 
 </div>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-panel-floating',
-		function () {
-			var panel = new Liferay.PanelFloating(
-				{
-					container: '#<%= id %>',
-					trigger: '<%= trigger %>',
-					accordion: <%= accordion %>,
-					persistState: <%= persistState %>,
-					paging: <%= paging %>,
-					pagingElements: '<%= pagingElements %>',
-					resultsPerPage: <%= resultsPerPage %>,
-					width: <%= width %>
-				}
-			);
-
-			Liferay.Panel.register('<%= id %>', panel);
+<aui:script use="liferay-panel-floating">
+	var panel = new Liferay.PanelFloating(
+		{
+			container: '#<%= id %>',
+			trigger: '<%= trigger %>',
+			accordion: <%= accordion %>,
+			persistState: <%= persistState %>,
+			paging: <%= paging %>,
+			pagingElements: '<%= pagingElements %>',
+			resultsPerPage: <%= resultsPerPage %>,
+			width: <%= width %>
 		}
 	);
-</script>
+
+	Liferay.Panel.register('<%= id %>', panel);
+</aui:script>

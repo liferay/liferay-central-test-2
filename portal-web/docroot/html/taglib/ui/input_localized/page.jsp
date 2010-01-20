@@ -154,100 +154,94 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 	</div>
 </span>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-auto-fields',
-		'liferay-panel-floating',
-		function (A) {
-			var updateLanguageFlag = function(event) {
-				var target = event.target;
+<aui:script use="liferay-auto-fields,liferay-panel-floating">
+	var updateLanguageFlag = function(event) {
+		var target = event.target;
 
-				var selectedValue = target.val();
+		var selectedValue = target.val();
 
-				var newName = '<portlet:namespace /><%= name %>_';
+		var newName = '<portlet:namespace /><%= name %>_';
 
-				var currentRow = target.ancestor('.lfr-form-row');
+		var currentRow = target.ancestor('.lfr-form-row');
 
-				var img = currentRow.all('img.language-flag');
-				var imgSrc = 'spacer';
+		var img = currentRow.all('img.language-flag');
+		var imgSrc = 'spacer';
 
-				if (selectedValue) {
-					newName ='<portlet:namespace /><%= name %>_' + selectedValue;
+		if (selectedValue) {
+			newName ='<portlet:namespace /><%= name %>_' + selectedValue;
 
-					imgSrc = 'language/' + selectedValue;
-				}
+			imgSrc = 'language/' + selectedValue;
+		}
 
-				var inputField = currentRow.one('.language-value');
+		var inputField = currentRow.one('.language-value');
 
-				if (inputField) {
-					inputField.attr('name', newName);
-					inputField.attr('id', newName);
-				}
+		if (inputField) {
+			inputField.attr('name', newName);
+			inputField.attr('id', newName);
+		}
 
-				if (img) {
-					img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/' + imgSrc + '.png');
-				}
-			};
+		if (img) {
+			img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/' + imgSrc + '.png');
+		}
+	};
 
-			<c:if test="<%= !disabled %>">
-				new Liferay.AutoFields(
-					{
-						contentBox: '#<%= randomNamespace %>languageSelector .lfr-panel-content',
-						on: {
-							'autorow:clone': function(event) {
-								var instance = this;
+	<c:if test="<%= !disabled %>">
+		new Liferay.AutoFields(
+			{
+				contentBox: '#<%= randomNamespace %>languageSelector .lfr-panel-content',
+				on: {
+					'autorow:clone': function(event) {
+						var instance = this;
 
-								var row = event.row.get('contentBox');
+						var row = event.row.get('contentBox');
 
-								var select = row.one('select');
-								var img = row.one('img.language-flag');
+						var select = row.one('select');
+						var img = row.one('img.language-flag');
 
-								if (select) {
-									select.on('change', updateLanguageFlag);
-								}
+						if (select) {
+							select.on('change', updateLanguageFlag);
+						}
 
-								if (img) {
-									img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/spacer.png');
-								}
-							}
+						if (img) {
+							img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/spacer.png');
 						}
 					}
-				).render();
-			</c:if>
-
-			var panel = new Liferay.PanelFloating(
-				{
-					container: '#<%= randomNamespace %>languageSelector',
-					isCollapsible: false,
-					on: {
-						hide: function(event) {
-							var instance = this;
-
-							var container = instance.get('container');
-
-							container.appendTo(document.<portlet:namespace />fm);
-						},
-						show: function(event) {
-							var instance = this;
-
-							var container = instance.get('container');
-							var positionHelper = instance._positionHelper;
-
-							if (container.get('parentNode') != positionHelper) {
-								positionHelper.append(container);
-							}
-						}
-					},
-					trigger: '#<%= randomNamespace %>languageSelectorTrigger',
-					width: 500,
 				}
-			);
-
-			var languageSelector = A.one('#<%= randomNamespace %>languageSelector select');
-
-			if (languageSelector) {
-				languageSelector.on('change', updateLanguageFlag);
 			}
+		).render();
+	</c:if>
+
+	var panel = new Liferay.PanelFloating(
+		{
+			container: '#<%= randomNamespace %>languageSelector',
+			isCollapsible: false,
+			on: {
+				hide: function(event) {
+					var instance = this;
+
+					var container = instance.get('container');
+
+					container.appendTo(document.<portlet:namespace />fm);
+				},
+				show: function(event) {
+					var instance = this;
+
+					var container = instance.get('container');
+					var positionHelper = instance._positionHelper;
+
+					if (container.get('parentNode') != positionHelper) {
+						positionHelper.append(container);
+					}
+				}
+			},
+			trigger: '#<%= randomNamespace %>languageSelectorTrigger',
+			width: 500,
 		}
 	);
-</script>
+
+	var languageSelector = A.one('#<%= randomNamespace %>languageSelector select');
+
+	if (languageSelector) {
+		languageSelector.on('change', updateLanguageFlag);
+	}
+</aui:script>

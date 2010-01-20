@@ -44,28 +44,23 @@ String scoreString = numberFormat.format(score);
 	<c:otherwise>
 		<div class="taglib-ratings score" id="<%= randomNamespace %>averageRating"></div>
 
-		<script type="text/javascript">
-			AUI().ready(
-				'rating',
-				function(A) {
-					var ratingScore = new A.Rating(
-						{
-							boundingBox: '#<%= randomNamespace %>averageRating',
-							defaultSelected: <%= MathUtil.format(score, 1, 1) %>,
-							disabled: true
-						}
-					);
-
-					ratingScore.get('boundingBox').on(
-						'mouseenter',
-						function(event) {
-							var el = A.Node.getDOMNode(event.currentTarget);
-
-							Liferay.Portal.ToolTip.show(el, '<%= scoreString %> Stars');
-						}
-					);
+		<aui:script use="rating">
+			var ratingScore = new A.Rating(
+				{
+					boundingBox: '#<%= randomNamespace %>averageRating',
+					defaultSelected: <%= MathUtil.format(score, 1, 1) %>,
+					disabled: true
 				}
 			);
-		</script>
+
+			ratingScore.get('boundingBox').on(
+				'mouseenter',
+				function(event) {
+					var el = A.Node.getDOMNode(event.currentTarget);
+
+					Liferay.Portal.ToolTip.show(el, '<%= scoreString %> Stars');
+				}
+			);
+		</aui:script>
 	</c:otherwise>
 </c:choose>

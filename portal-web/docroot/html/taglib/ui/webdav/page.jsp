@@ -47,23 +47,19 @@ String path = (String)request.getAttribute("liferay-ui:webdav:path");
 	</table>
 </div>
 
-<script type="text/javascript">
-	AUI().ready(
-		function (A) {
-			var webdavDiv = A.one('#<%= randomNamespace %>webdav');
+<aui:script use="event,node">
+	var webdavDiv = A.one('#<%= randomNamespace %>webdav');
 
-			if (webdavDiv) {
-				var webdavLink = webdavDiv.all('.show-webdav');
+	if (webdavDiv) {
+		var webdavLink = webdavDiv.all('.show-webdav');
 
-				if (webdavLink) {
-					webdavLink.on(
-						'click',
-						function(event) {
-							webdavDiv.toggleClass('visible');
-						}
-					);
+		if (webdavLink) {
+			webdavLink.on(
+				'click',
+				function(event) {
+					webdavDiv.toggleClass('visible');
 				}
-			}
+			);
 		}
-	);
-</script>
+	}
+</aui:script>

@@ -36,7 +36,7 @@ String defaultImage = (String)request.getAttribute("liferay-ui:toggle:defaultIma
 String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultMessage");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	var <%= stateVar %> = "<%= defaultStateValue %>";
 
 	function <%= stateVar %>Toggle(state, saveState) {
@@ -99,7 +99,7 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 			}
 		}
 	}
-</script>
+</aui:script>
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(showMessage) %>">

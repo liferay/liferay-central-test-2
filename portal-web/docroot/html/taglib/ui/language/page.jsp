@@ -94,7 +94,7 @@ for (int i = 0; i < locales.length; i++) {
 
 		</form>
 
-		<script type="text/javascript">
+		<aui:script>
 
 			<%
 			for (int i = 0; i < locales.length; i++) {
@@ -108,7 +108,7 @@ for (int i = 0; i < locales.length; i++) {
 			}
 			%>
 
-		</script>
+		</aui:script>
 	</c:when>
 	<c:otherwise>
 

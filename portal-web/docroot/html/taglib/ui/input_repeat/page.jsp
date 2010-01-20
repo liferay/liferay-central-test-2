@@ -216,7 +216,7 @@ boolean weeklyPosFr = _getWeeklyDayPos(request, Calendar.FRIDAY, event, recurren
 boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurrence);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />showTable(id) {
 		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
 		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
@@ -226,7 +226,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 
 		document.getElementById(id).style.display = "block";
 	}
-</script>
+</aui:script>
 
 <aui:fieldset cssClass='<%= "taglib-input-repeat " + cssClass %>'>
 	<aui:column columnWidth="25">

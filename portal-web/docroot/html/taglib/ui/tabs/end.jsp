@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/ui/tabs/init.jsp" %>
 
 <c:if test="<%= !themeDisplay.isFacebook() %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Portal.Tabs.show("<%= namespace + param %>", <%= namesJS %>, "<%= value %>");
-	</script>
+	</aui:script>
 </c:if>

@@ -50,24 +50,20 @@
 		</ul>
 	</div>
 
-	<script type="text/javascript">
-		AUI().ready(
-			function (A) {
-				var socialBookmarks = A.one('#<%= randomNamespace %>socialBookmarks');
+	<aui:script>
+		var socialBookmarks = A.one('#<%= randomNamespace %>socialBookmarks');
 
-				if (socialBookmarks) {
-					var linkSocialBookmarks = socialBookmarks.all('.show-bookmarks');
+		if (socialBookmarks) {
+			var linkSocialBookmarks = socialBookmarks.all('.show-bookmarks');
 
-					if (linkSocialBookmarks) {
-						linkSocialBookmarks.on(
-							'click',
-							function(event) {
-								socialBookmarks.toggleClass('visible');
-							}
-						);
+			if (linkSocialBookmarks) {
+				linkSocialBookmarks.on(
+					'click',
+					function(event) {
+						socialBookmarks.toggleClass('visible');
 					}
-				}
+				);
 			}
-		);
-	</script>
+		}
+	</aui:script>
 </c:if>

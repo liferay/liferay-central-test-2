@@ -33,9 +33,9 @@ String message = (String)request.getAttribute("liferay-ui:upload-progress:messag
 
 <script src="<%= themeDisplay.getPathJavaScript() %>/liferay/upload_progress.js" type="text/javascript"></script>
 
-<script type="text/javascript">
+<aui:script>
 	var <%= id %> = new UploadProgress("<%= id %>", "<%= HttpUtil.encodeURL(redirect) %>");
-</script>
+</aui:script>
 
 <c:if test="<%= Validator.isNotNull(iframeSrc) %>">
 	<div><iframe frameborder="0" id="<%= id %>-iframe" src="<%= iframeSrc %>" style="width: 100%;"></iframe></div>

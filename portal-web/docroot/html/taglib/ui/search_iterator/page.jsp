@@ -288,25 +288,20 @@ List<String> primaryKeys = new ArrayList<String>();
 	</c:if>
 
 	<c:if test="<%= (rowChecker != null) && !resultRows.isEmpty() && Validator.isNotNull(rowChecker.getAllRowsId()) && allRowsIsChecked %>">
-		<script type="text/javascript">
+		<aui:script>
 			document.<%= rowChecker.getFormName() %>.<%= rowChecker.getAllRowsId() %>.checked = true;
-		</script>
+		</aui:script>
 	</c:if>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(id) %>">
 	<input id="<%= id %>PrimaryKeys" name="<%= id %>PrimaryKeys" type="hidden" value="<%= StringUtil.merge(primaryKeys) %>" />
 
-	<script type="text/javascript">
-		AUI().ready(
-			'liferay-search-container',
-			function () {
-				new Liferay.SearchContainer(
-					{
-						id: '<%= id %>'
-					}
-				).render();
+	<aui:script use="liferay-search-container">
+		new Liferay.SearchContainer(
+			{
+				id: '<%= id %>'
 			}
-		);
-	</script>
+		).render();
+	</aui:script>
 </c:if>

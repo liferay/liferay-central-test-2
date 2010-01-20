@@ -28,7 +28,7 @@
 String diffHtmlResults = (String)request.getAttribute("liferay-ui:diff-html:diffHtmlResults");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function updateOverlays() {
 		var images = document.getElementsByTagName("img");
 
@@ -71,7 +71,7 @@ String diffHtmlResults = (String)request.getAttribute("liferay-ui:diff-html:diff
 			}
 		}
 	}
-</script>
+</aui:script>
 
 <div class="taglib-diff-html">
 	<%= diffHtmlResults %>

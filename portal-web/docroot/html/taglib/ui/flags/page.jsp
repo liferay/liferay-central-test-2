@@ -48,72 +48,66 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 
 <c:choose>
 	<c:when test="<%= PropsValues.FLAGS_GUEST_USERS_ENABLED || themeDisplay.isSignedIn() %>">
-		<script type="text/javascript">
-			AUI().use(
-				'dialog',
-				function(A) {
-					var params = A.toQueryString({
-						className: '<%= className %>',
-						classPK: '<%= classPK %>',
-						contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
-						contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
-						reportedUserId: '<%= reportedUserId %>'
-					});
-
-					A.on('click', function() {
-						var popup = new A.Dialog(
-							{
-								centered: true,
-								destroyOnClose: true,
-								draggable: true,
-								io:	{
-									cfg: {
-										data: params
-									},
-									uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
-								},
-								modal: true,
-								stack: true,
-								title: '<liferay-ui:message key="report-inappropriate-content" />',
-								width: 435
-							}
-						).render();
-					},
-					'.<%= randomNamespace %>');
+		<aui:script use="dialog">
+			var params = A.toQueryString(
+				{
+					className: '<%= className %>',
+					classPK: '<%= classPK %>',
+					contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
+					contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
+					reportedUserId: '<%= reportedUserId %>'
 				}
 			);
-		</script>
+
+			A.on(
+				'click',
+				function() {
+					var popup = new A.Dialog(
+						{
+							centered: true,
+							destroyOnClose: true,
+							draggable: true,
+							io:	{
+								cfg: {
+									data: params
+								},
+								uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
+							},
+							modal: true,
+							stack: true,
+							title: '<liferay-ui:message key="report-inappropriate-content" />',
+							width: 435
+						}
+					).render();
+				},
+			'.<%= randomNamespace %>'
+			);
+		</aui:script>
 	</c:when>
 	<c:otherwise>
 		<div id="<portlet:namespace />signIn" style="display:none">
 			<liferay-ui:message key="please-sign-in-to-flag-this-as-inappropriate" />
 		</div>
 
-		<script type="text/javascript">
-				AUI().use(
-					'dialog',
-					function(A) {
-						A.on(
-							'click',
-							function(event) {
-								var popup = new A.Dialog(
-									{
-										bodyContent: A.get('#<portlet:namespace />signIn').html(),
-										centered: true,
-										destroyOnClose: true,
-										title: '<liferay-ui:message key="report-inappropriate-content" />',
-										modal: true,
-										width: 500
-									}
-								)
-								.render();
+		<aui:script use="dialog">
+			A.on(
+				'click',
+				function(event) {
+					var popup = new A.Dialog(
+						{
+							bodyContent: A.get('#<portlet:namespace />signIn').html(),
+							centered: true,
+							destroyOnClose: true,
+							title: '<liferay-ui:message key="report-inappropriate-content" />',
+							modal: true,
+							width: 500
+						}
+					).render();
 
-								event.preventDefault();
-							},
-							'.<%= randomNamespace %>'
-						);
-					}
-				);
-		</script>
+					event.preventDefault();
+				},
+				'.<%= randomNamespace %>'
+			);
+		</aui:script>
 	</c:otherwise>
 </c:choose>

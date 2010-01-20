@@ -26,7 +26,7 @@
 
 <%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />showTable(id) {
 		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
 		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
@@ -36,7 +36,7 @@
 
 		document.getElementById(id).style.display = "block";
 	}
-</script>
+</aui:script>
 
 <aui:fieldset>
 	<aui:legend label="schedule-event" />

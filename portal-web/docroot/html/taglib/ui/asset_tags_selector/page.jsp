@@ -57,25 +57,19 @@ if (curTagsParam != null) {
 	<input class="lfr-tag-selector-input" id="<%= randomNamespace %>assetTagNames" size="15" type="text" />
 </div>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-tags-selector',
-		function() {
-
-			new Liferay.AssetTagsSelector(
-				{
-					allowSuggestions: true,
-					contentBox: '#<%= namespace + randomNamespace %>assetTagsSelector',
-					contentCallback: function() {
-						return <%= contentCallback %>();
-					},
-					curEntries: '<%= HtmlUtil.escapeJS(curTags) %>',
-					focused: <%= focus %>,
-					hiddenInput: '#<%= namespace + hiddenInput %>',
-					input: '#<%= randomNamespace %>assetTagNames',
-					instanceVar: '<%= namespace + randomNamespace %>'
-				}
-			).render();
+<aui:script use="liferay-tags-selector">
+	new Liferay.AssetTagsSelector(
+		{
+			allowSuggestions: true,
+			contentBox: '#<%= namespace + randomNamespace %>assetTagsSelector',
+			contentCallback: function() {
+				return <%= contentCallback %>();
+			},
+			curEntries: '<%= HtmlUtil.escapeJS(curTags) %>',
+			focused: <%= focus %>,
+			hiddenInput: '#<%= namespace + hiddenInput %>',
+			input: '#<%= randomNamespace %>assetTagNames',
+			instanceVar: '<%= namespace + randomNamespace %>'
 		}
-	);
-</script>
+	).render();
+</aui:script>

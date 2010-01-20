@@ -34,60 +34,57 @@
 	</div>
 </div>
 
-<script type="text/javascript">
+<aui:script>
 	var <%= id %>curClickValue = "<%= clickValue %>";
+</aui:script>
 
-	AUI().ready(
-		'io-request',
-		function (A) {
-			var basicForm = A.one("#<%= id %>basic");
-			var advancedForm = A.one("#<%= id %>advanced");
+<aui:script use="io-request">
+	var basicForm = A.one("#<%= id %>basic");
+	var advancedForm = A.one("#<%= id %>advanced");
 
-			var basicControls = basicForm.all('input, select');
-			var advancedControls = advancedForm.all('input, select');
+	var basicControls = basicForm.all('input, select');
+	var advancedControls = advancedForm.all('input, select');
+
+	if (<%= id %>curClickValue == "basic") {
+		advancedControls.attr('disabled', 'disabled');
+	}
+	else {
+		basicControls.attr('disabled', 'disabled');
+	}
+
+	A.all('.toggle-link a').on(
+		'click',
+		function() {
+			basicForm.toggle();
+			advancedForm.toggle();
+
+			var advancedSearchObj = A.one("#<%= namespace %><%= id %><%= displayTerms.ADVANCED_SEARCH %>");
 
 			if (<%= id %>curClickValue == "basic") {
-				advancedControls.attr('disabled', 'disabled');
+				<%= id %>curClickValue = "advanced";
+
+				advancedSearchObj.val(true);
+
+				basicControls.attr('disabled', 'disabled');
+				advancedControls.attr('disabled', '');
 			}
 			else {
-				basicControls.attr('disabled', 'disabled');
+				<%= id %>curClickValue = "basic";
+
+				advancedSearchObj.val(false);
+
+				basicControls.attr('disabled', '');
+				advancedControls.attr('disabled', 'disabled');
 			}
 
-			AUI().all('.toggle-link a').on(
-				'click',
-				function() {
-					basicForm.toggle();
-					advancedForm.toggle();
-
-					var advancedSearchObj = A.one("#<%= namespace %><%= id %><%= displayTerms.ADVANCED_SEARCH %>");
-
-					if (<%= id %>curClickValue == "basic") {
-						<%= id %>curClickValue = "advanced";
-
-						advancedSearchObj.val(true);
-
-						basicControls.attr('disabled', 'disabled');
-						advancedControls.attr('disabled', '');
+			A.io.request(
+				'<%= themeDisplay.getPathMain() %>/portal/session_click',
+				{
+					data: {
+						'<%= id %>': <%= id %>curClickValue
 					}
-					else {
-						<%= id %>curClickValue = "basic";
-
-						advancedSearchObj.val(false);
-
-						basicControls.attr('disabled', '');
-						advancedControls.attr('disabled', 'disabled');
-					}
-
-					A.io.request(
-						'<%= themeDisplay.getPathMain() %>/portal/session_click',
-						{
-							data: {
-								'<%= id %>': <%= id %>curClickValue
-							}
-						}
-					);
 				}
 			);
 		}
 	);
-</script>
+</aui:script>

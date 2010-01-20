@@ -28,20 +28,15 @@
 </div>
 
 <c:if test="<%= collapsible && (panelCount == null) %>">
-	<script type="text/javascript">
-		AUI().ready(
-			'liferay-panel',
-			function () {
-				var panel = new Liferay.Panel(
-					{
-						panel: '#<%= id %>',
-						collapsible: <%= collapsible %>,
-						persistState: <%= persistState %>
-					}
-				);
-
-				Liferay.Panel.register('<%= id %>', panel);
+	<aui:script use="liferay-panel">
+		var panel = new Liferay.Panel(
+			{
+				panel: '#<%= id %>',
+				collapsible: <%= collapsible %>,
+				persistState: <%= persistState %>
 			}
 		);
-	</script>
+
+		Liferay.Panel.register('<%= id %>', panel);
+	</aui:script>
 </c:if>

@@ -86,27 +86,22 @@ if (hidePortletWhenEmpty) {
 }
 %>
 
-<script type="text/javascript">
-	AUI().ready(
-		'tree-view',
-		function(A) {
-			var treeViews = A.all('#<%= namespace %>taglibAssetCategoriesNavigation .lfr-asset-category-list-container');
+<aui:script use="tree-view">
+	var treeViews = A.all('#<%= namespace %>taglibAssetCategoriesNavigation .lfr-asset-category-list-container');
 
-			treeViews.each(
-				function(treeEl) {
-					new A.TreeView(
-						{
-							boundingBox: treeEl,
-							contentBox: treeEl.one('.lfr-asset-category-list'),
-							type: 'normal'
-						}
-					)
-					.render();
+	treeViews.each(
+		function(treeEl) {
+			new A.TreeView(
+				{
+					boundingBox: treeEl,
+					contentBox: treeEl.one('.lfr-asset-category-list'),
+					type: 'normal'
 				}
-			);
+			)
+			.render();
 		}
 	);
-</script>
+</aui:script>
 
 <%!
 private void _buildCategoriesNavigation(List<AssetCategory> categories, long curCategoryId, PortletURL portletURL, StringBuilder sb) throws Exception {

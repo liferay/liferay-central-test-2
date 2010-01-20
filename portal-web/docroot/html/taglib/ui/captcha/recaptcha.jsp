@@ -26,12 +26,12 @@
 
 <script src="<%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT %><%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC %>" type="text/javascript"></script>
 
-<script type="text/javascript">
+<aui:script position="inline">
 	var RecaptchaOptions = {
 		lang : '<%= locale.getLanguage() %>',
 		theme : 'white'
 	};
-</script>
+</aui:script>
 
 <noscript>
 	<iframe frameborder="0" height="300" src="<%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT %><%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC %>" width="500"></iframe><br />

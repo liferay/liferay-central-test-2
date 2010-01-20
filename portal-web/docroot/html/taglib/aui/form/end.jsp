@@ -31,52 +31,48 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 
 </form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			var form = A.one('#<%= name %>');
+<aui:script use="node">
+	var form = A.one('#<%= name %>');
 
-			if (form) {
-				form.on(
-					'submit',
-					function() {
-						<c:choose>
-							<c:when test="<%= Validator.isNull(onSubmit) %>">
-								submitForm(document.<%= name %>);
+	if (form) {
+		form.on(
+			'submit',
+			function() {
+				<c:choose>
+					<c:when test="<%= Validator.isNull(onSubmit) %>">
+						submitForm(document.<%= name %>);
 
-								return false;
-							</c:when>
-							<c:otherwise>
-								<%= onSubmit %>
-							</c:otherwise>
-						</c:choose>
-					}
-				);
-
-				form.delegate(
-					'focus',
-					function(event) {
-						var row = event.currentTarget.ancestor('.aui-field');
-
-						if (row) {
-							row.addClass('aui-field-focused');
-						}
-					},
-					'button,input,select,textarea'
-				);
-
-				form.delegate(
-					'blur',
-					function(event) {
-						var row = event.currentTarget.ancestor('.aui-field');
-
-						if (row) {
-							row.removeClass('aui-field-focused');
-						}
-					},
-					'button,input,select,textarea'
-				);
+						return false;
+					</c:when>
+					<c:otherwise>
+						<%= onSubmit %>
+					</c:otherwise>
+				</c:choose>
 			}
-		}
-	);
-</script>
+		);
+
+		form.delegate(
+			'focus',
+			function(event) {
+				var row = event.currentTarget.ancestor('.aui-field');
+
+				if (row) {
+					row.addClass('aui-field-focused');
+				}
+			},
+			'button,input,select,textarea'
+		);
+
+		form.delegate(
+			'blur',
+			function(event) {
+				var row = event.currentTarget.ancestor('.aui-field');
+
+				if (row) {
+					row.removeClass('aui-field-focused');
+				}
+			},
+			'button,input,select,textarea'
+		);
+	}
+</aui:script>

@@ -157,7 +157,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 			<a href="javascript:<%= randomNamespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
 		</div>
 
-		<script type="text/javascript">
+		<aui:script>
 			function <%= randomNamespace %>inputPermissionsConfigure() {
 				<%= randomNamespace %>updatePermissionsGuestView();
 
@@ -257,7 +257,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					publicCheckbox.set("checked", guestViewCheckbox.get("checked"));
 				}
 			}
-		</script>
+		</aui:script>
 	</c:when>
 	<c:otherwise>
 
@@ -273,7 +273,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		<input <%= addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addGuestPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addGuestPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <liferay-ui:message key="assign-default-permissions-to-guest" /><br />
 		<input <%= !addCommunityPermissions && !addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addUserPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = !this.checked; document.<%= formName %>.<%= namespace %>addGuestPermissions.value = !this.checked; <%= namespace %>checkUserPermissions();"> <liferay-ui:message key="only-assign-permissions-to-me" />
 
-		<script type="text/javascript">
+		<aui:script>
 			function <%= namespace %>checkCommunityAndGuestPermissions() {
 				if (document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked ||
 					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked) {
@@ -297,6 +297,6 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked = true;
 				}
 			}
-		</script>
+		</aui:script>
 	</c:otherwise>
 </c:choose>

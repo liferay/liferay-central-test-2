@@ -84,45 +84,39 @@ if (yearValue > 0) {
 }
 %>
 
-<script type="text/javascript">
-	AUI().ready(
-		'date-picker-select',
-		function(A) {
-			var datePicker = new A.DatePickerSelect(
-				{
-					appendOrder: <%= dateFormatMDY ? "['m', 'd', 'y']" : "['y', 'm', 'd']" %>,
-					dates: [
-						new Date(
-							<%= cal.get(Calendar.YEAR) %>,
-							<%= cal.get(Calendar.MONTH) %>,
-							<%= cal.get(Calendar.DATE) %>
-						)
-					],
-					dateFormat: '%m/%e/%Y',
-					dayFieldName: '<%= dayParam %>',
-					displayBoundingBox: '#<%= randomNamespace %>displayDate',
-					firstDayOfWeek: <%= firstDayOfWeek %>,
-					monthField: '#<%= monthParam %>',
-					monthFieldName: '<%= monthParam %>',
-					on: {
-						select: function(event) {
-							var formatted = event.date.formatted[0];
+<aui:script use="date-picker-select">
+	var datePicker = new A.DatePickerSelect(
+		{
+			appendOrder: <%= dateFormatMDY ? "['m', 'd', 'y']" : "['y', 'm', 'd']" %>,
+			dates: [
+				new Date(
+					<%= cal.get(Calendar.YEAR) %>,
+					<%= cal.get(Calendar.MONTH) %>,
+					<%= cal.get(Calendar.DATE) %>
+				)
+			],
+			dateFormat: '%m/%e/%Y',
+			dayFieldName: '<%= dayParam %>',
+			displayBoundingBox: '#<%= randomNamespace %>displayDate',
+			firstDayOfWeek: <%= firstDayOfWeek %>,
+			monthField: '#<%= monthParam %>',
+			monthFieldName: '<%= monthParam %>',
+			on: {
+				select: function(event) {
+					var formatted = event.date.formatted[0];
 
-							A.get('#<%= imageInputId %>Input').val(formatted);
-						},
-						render: function() {
-							A.get('#<%= monthParam %>').removeClass('aui-helper-hidden');
-						}
-					},
-					populateMonth: false,
-					yearFieldName: '<%= yearParam %>',
-					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
+					A.get('#<%= imageInputId %>Input').val(formatted);
+				},
+				render: function() {
+					A.get('#<%= monthParam %>').removeClass('aui-helper-hidden');
 				}
-			)
-			.render();
+			},
+			populateMonth: false,
+			yearFieldName: '<%= yearParam %>',
+			yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
 		}
-	);
-</script>
+	).render();
+</aui:script>
 
 <div <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> id="<%= randomNamespace %>displayDate"></div>
 

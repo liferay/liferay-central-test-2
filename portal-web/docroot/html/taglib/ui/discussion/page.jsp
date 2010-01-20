@@ -73,7 +73,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 <c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
 	<div class="taglib-discussion">
-		<script type="text/javascript">
+		<aui:script>
 			function <%= namespace %>deleteMessage(i) {
 				eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
 
@@ -110,36 +110,33 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				document.<%= formName %>.<%= namespace %>body.value = body;
 				submitForm(document.<%= formName %>);
 			}
+		</aui:script>
 
-			AUI().ready(
-				'input-handler',
-				function(A) {
-					var form = A.one(document.<%= formName %>);
+		<aui:script use="input-handler">
+			var form = A.one(document.<%= formName %>);
 
-					if (form) {
-						var textareas = form.all('textarea');
+			if (form) {
+				var textareas = form.all('textarea');
 
-						if (textareas) {
-							textareas.on(
-								'input',
-								function(event) {
-									var textarea = event.currentTarget;
-									var currentValue = A.Lang.trim(textarea.val());
+				if (textareas) {
+					textareas.on(
+						'input',
+						function(event) {
+							var textarea = event.currentTarget;
+							var currentValue = A.Lang.trim(textarea.val());
 
-									var id = textarea.get('id');
-									var buttonId = id.replace(/Body/, 'Button');
-									var button = A.one('#' + buttonId);
+							var id = textarea.get('id');
+							var buttonId = id.replace(/Body/, 'Button');
+							var button = A.one('#' + buttonId);
 
-									if (button) {
-										button.set('disabled', !currentValue.length);
-									}
-								}
-							);
+							if (button) {
+								button.set('disabled', !currentValue.length);
+							}
 						}
-					}
+					);
 				}
-			);
-		</script>
+			}
+		</aui:script>
 
 		<form action="<%= formAction %>" method="post" name="<%= formName %>">
 		<input name="<%= namespace %><%= Constants.CMD %>" type="hidden" value="" />
