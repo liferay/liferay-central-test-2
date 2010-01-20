@@ -477,28 +477,28 @@
 					/>
 				</replaceregexp>
 
-				<replaceregexp match="(var PATH_THEME_IMAGES ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathThemeImages() %&gt;/aui/';" flags="g" byline="false">
+				<replaceregexp match="(var PATH_THEME_IMAGES ?= ?)[^;]+;" replace="\1Liferay.ThemeDisplay.getPathThemeImages() + '/aui/';" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"
 					/>
 				</replaceregexp>
 
-				<replaceregexp match="(var PATH_THEME_ROOT ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathThemeRoot() %&gt;/css/';" flags="g" byline="false">
+				<replaceregexp match="(var PATH_THEME_ROOT ?= ?)[^;]+;" replace="\1Liferay.ThemeDisplay.getPathThemeRoot() + '/css/';" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"
 					/>
 				</replaceregexp>
 
-				<replaceregexp match="(\n)(\t+)(window.AUI = \{)" replace="\1\2var getFullPath = function(file) {\1\2\2return '&lt;%= alloyURL %&gt;'.replace('{file}', file);\1\2};\1\1\2\3" flags="g" byline="false">
+				<replaceregexp match="(\n)(\t+)(window.AUI = \{)" replace="\1\2var getFullPath = Liferay.AUI.getPath;\1\1\2\3" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"
 					/>
 				</replaceregexp>
 
-				<replaceregexp match="(filter: ?)'[\w-]+'" replace="\1'&lt;%= alloyFilter %&gt;'" flags="g" byline="false">
+				<replaceregexp match="(filter: ?)'[\w-]+'" replace="\1Liferay.AUI.getFilter()" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"
@@ -526,16 +526,10 @@
 
 				<!-- Copy files -->
 
-				<copy
-					file="docroot/html/ALLOY_ZIP/src/javascript/defaults.js"
-					tofile="docroot/html/portal/aui/js.jspf"
-					overwrite="yes"
-				/>
-
 				<copy todir="docroot/html/js/aui">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						excludes="alloy.js,defaults.js,*-min.js"
+						excludes="alloy.js,*-min.js"
 						includes="*.js"
 					/>
 				</copy>

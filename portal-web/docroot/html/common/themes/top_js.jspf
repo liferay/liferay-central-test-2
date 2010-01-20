@@ -206,7 +206,15 @@
 		}
 		%>
 
-		<%@ include file="/html/portal/aui/js.jspf" %>
+		Liferay.AUI = {
+			getFilter: function() {
+				return '<%= alloyFilter %>';
+			},
+
+			getPath: function(file) {
+				return '<%= alloyURL %>'.replace('{file}', file);
+			}
+		};
 
 		<%
 		String currentURL = PortalUtil.getCurrentURL(request);
