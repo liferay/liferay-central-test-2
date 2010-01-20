@@ -505,6 +505,20 @@
 					/>
 				</replaceregexp>
 
+				<replaceregexp match="(combine: ?)true" replace="\1false" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						includes="defaults.js"
+					/>
+				</replaceregexp>
+
+				<replaceregexp match="(fetchCSS: ?)true" replace="\1false" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						includes="defaults.js"
+					/>
+				</replaceregexp>
+
 				<replace dir="docroot/html/ALLOY_ZIP/src/javascript/" includes="**/defaults.js">
 					<replacetoken><![CDATA[//base: '',]]></replacetoken>
 					<replacevalue><![CDATA[base: '<%= themeDisplay.getPathJavaScript() %>/aui/lib/yui/',]]></replacevalue>
