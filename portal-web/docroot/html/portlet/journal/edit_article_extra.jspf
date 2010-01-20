@@ -200,7 +200,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 								</a>
 							</liferay-util:buffer>
 
-							<aui:input checked="<%= templateChecked %>" label="<%= templateLabel %>" name="templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" />
+							<aui:input checked="<%= templateChecked %>" inlineField="<%= true %>" label="<%= templateLabel %>" name="templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" />
 
 							<c:if test="<%= tableIteratorObj.isSmallImage() %>">
 								<br />
