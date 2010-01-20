@@ -306,6 +306,8 @@ Liferay.Portlet = {
 	onLoad: function(options) {
 		var instance = this;
 
+		var A = AUI();
+
 		var canEditTitle = options.canEditTitle;
 		var columnPos = options.columnPos;
 		var isStatic = (options.isStatic == 'no') ? null : options.isStatic;
@@ -317,150 +319,145 @@ Liferay.Portlet = {
 			instance.registerStatic(portletId);
 		}
 
-		AUI().ready(
-			'dialog',
-			function(A) {
-				var portlet = A.one('#' + namespacedId);
+		var portlet = A.one('#' + namespacedId);
 
-				if (portlet && !portlet.portletProcessed) {
-					portlet.portletProcessed = true;
-					portlet.portletId = portletId;
-					portlet.columnPos = columnPos;
-					portlet.isStatic = isStatic;
-					portlet.refreshURL = refreshURL;
+		if (portlet && !portlet.portletProcessed) {
+			portlet.portletProcessed = true;
+			portlet.portletId = portletId;
+			portlet.columnPos = columnPos;
+			portlet.isStatic = isStatic;
+			portlet.refreshURL = refreshURL;
 
-					// Functions to run on portlet load
+			// Functions to run on portlet load
 
-					if (canEditTitle) {
-						Liferay.Util.portletTitleEdit(
-							{
-								obj: portlet,
-								plid: themeDisplay.getPlid(),
-								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-								portletId: portletId
-							}
-						);
+			if (canEditTitle) {
+				Liferay.Util.portletTitleEdit(
+					{
+						obj: portlet,
+						plid: themeDisplay.getPlid(),
+						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+						portletId: portletId
 					}
+				);
+			}
 
-					if (!themeDisplay.layoutMaximized) {
-						var configurationLink = portlet.all('.portlet-configuration a');
+			if (!themeDisplay.layoutMaximized) {
+				var configurationLink = portlet.all('.portlet-configuration a');
 
-						configurationLink.on(
-							'click',
-							function(event) {
-								var configurationURL = event.currentTarget.attr('href');
+				configurationLink.on(
+					'click',
+					function(event) {
+						var configurationURL = event.currentTarget.attr('href');
 
-								instance.openConfiguration(portlet, portletId, configurationURL, namespacedId);
+						instance.openConfiguration(portlet, portletId, configurationURL, namespacedId);
 
-								event.preventDefault();
-							}
-						);
-
-						var minimizeLink = portlet.one('.portlet-minimize a');
-
-						if (minimizeLink) {
-							minimizeLink.on(
-								'click',
-								function(event) {
-									instance.minimize(portlet, minimizeLink);
-
-									event.halt();
-								}
-							);
-						}
-
-						var maximizeLink = portlet.one('.portlet-maximize a');
-
-						if (maximizeLink) {
-							maximizeLink.on(
-								'click',
-								function(event) {
-									submitForm(document.hrefFm, event.currentTarget.attr('href'));
-
-									event.halt();
-								}
-							);
-						}
-
-						var closeLink = portlet.one('.portlet-close a');
-
-						if (closeLink) {
-							closeLink.on(
-								'click',
-								function(event) {
-									instance.close(portlet);
-
-									event.halt();
-								}
-							);
-						}
-
-						var refreshLink = portlet.one('.portlet-refresh a');
-
-						if (refreshLink) {
-							refreshLink.on(
-								'click',
-								A.bind(instance.refresh, instance, portlet)
-							);
-						}
-
-						var printLink = portlet.one('.portlet-print a');
-
-						if (printLink) {
-							printLink.on(
-								'click',
-								function(event) {
-									location.href = event.currentTarget.attr('href');
-
-									event.halt();
-								}
-							);
-						}
-
-						var portletCSSLink = portlet.one('.portlet-css a');
-
-						if (portletCSSLink) {
-							portletCSSLink.on(
-								'click',
-								function(event) {
-									A.use(
-										'liferay-look-and-feel',
-										function() {
-											Liferay.PortletCSS.init(portletId);
-										}
-									);
-								}
-							);
-						}
+						event.preventDefault();
 					}
+				);
 
-					Liferay.fire(
-						'portletReady',
-						{
-							portlet: portlet,
-							portletId: portletId
+				var minimizeLink = portlet.one('.portlet-minimize a');
+
+				if (minimizeLink) {
+					minimizeLink.on(
+						'click',
+						function(event) {
+							instance.minimize(portlet, minimizeLink);
+
+							event.halt();
 						}
 					);
+				}
 
-					var list = instance.list;
+				var maximizeLink = portlet.one('.portlet-maximize a');
 
-					var index = A.Array.indexOf(list, portletId);
+				if (maximizeLink) {
+					maximizeLink.on(
+						'click',
+						function(event) {
+							submitForm(document.hrefFm, event.currentTarget.attr('href'));
 
-					if (index > -1) {
-						list.splice(index, 1);
-					}
+							event.halt();
+						}
+					);
+				}
 
-					if (!list.length) {
-						Liferay.fire(
-							'allPortletsReady',
-							{
-								portletId: portletId
-							}
-						);
-					}
+				var closeLink = portlet.one('.portlet-close a');
+
+				if (closeLink) {
+					closeLink.on(
+						'click',
+						function(event) {
+							instance.close(portlet);
+
+							event.halt();
+						}
+					);
+				}
+
+				var refreshLink = portlet.one('.portlet-refresh a');
+
+				if (refreshLink) {
+					refreshLink.on(
+						'click',
+						A.bind(instance.refresh, instance, portlet)
+					);
+				}
+
+				var printLink = portlet.one('.portlet-print a');
+
+				if (printLink) {
+					printLink.on(
+						'click',
+						function(event) {
+							location.href = event.currentTarget.attr('href');
+
+							event.halt();
+						}
+					);
+				}
+
+				var portletCSSLink = portlet.one('.portlet-css a');
+
+				if (portletCSSLink) {
+					portletCSSLink.on(
+						'click',
+						function(event) {
+							A.use(
+								'liferay-look-and-feel',
+								function() {
+									Liferay.PortletCSS.init(portletId);
+								}
+							);
+						}
+					);
 				}
 			}
-		);
+
+			Liferay.fire(
+				'portletReady',
+				{
+					portlet: portlet,
+					portletId: portletId
+				}
+			);
+
+			var list = instance.list;
+
+			var index = A.Array.indexOf(list, portletId);
+
+			if (index > -1) {
+				list.splice(index, 1);
+			}
+
+			if (!list.length) {
+				Liferay.fire(
+					'allPortletsReady',
+					{
+						portletId: portletId
+					}
+				);
+			}
+		}
 	},
 
 	openConfiguration: function(portlet, portletId, configurationURL, namespacedId) {

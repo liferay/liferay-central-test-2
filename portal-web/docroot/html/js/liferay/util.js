@@ -704,50 +704,47 @@ Liferay.Util = {
 		var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
 
 		if (title && !title.hasClass('not-editable')) {
-			AUI().use(
-				'editable',
-				function(A) {
-					var editableTitle = new A.Editable(
-						{
-							after: {
-								contentTextChange: function(event) {
-									var instance = this;
+			var A = AUI();
 
-									if (!event.initial) {
-										Liferay.Util.savePortletTitle(
-											{
-												plid: plid,
-												doAsUserId: doAsUserId,
-												portletId: portletId,
-												title: event.newVal
-											}
-										);
+			var editableTitle = new A.Editable(
+				{
+					after: {
+						contentTextChange: function(event) {
+							var instance = this;
+
+							if (!event.initial) {
+								Liferay.Util.savePortletTitle(
+									{
+										plid: plid,
+										doAsUserId: doAsUserId,
+										portletId: portletId,
+										title: event.newVal
 									}
-								},
+								);
+							}
+						},
 
-								startEditing: function(event) {
-									var instance = this;
+						startEditing: function(event) {
+							var instance = this;
 
-									var value = instance.get('node').get('innerHTML');
+							var value = instance.get('node').get('innerHTML');
 
-									instance._LFR_cruft = value.match(re);
-								}
-							},
-							cssClass: 'lfr-portlet-title-editable',
-							formatOutput: function(value) {
-								var instance = this;
-
-								value = instance._toHTML(value);
-
-								var cruft = instance._LFR_cruft || [];
-
-								cruft = cruft.join('');
-
-								return cruft + value;
-							},
-							node: title
+							instance._LFR_cruft = value.match(re);
 						}
-					);
+					},
+					cssClass: 'lfr-portlet-title-editable',
+					formatOutput: function(value) {
+						var instance = this;
+
+						value = instance._toHTML(value);
+
+						var cruft = instance._LFR_cruft || [];
+
+						cruft = cruft.join('');
+
+						return cruft + value;
+					},
+					node: title
 				}
 			);
 		}
