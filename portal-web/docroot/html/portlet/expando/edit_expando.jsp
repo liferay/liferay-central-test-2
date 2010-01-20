@@ -258,14 +258,14 @@ portletURL.setParameter("modelResource", modelResource);
 			<c:if test="<%= type == ExpandoColumnConstants.STRING %>">
 				<aui:input type="hidden" name="PropertyName(indexable)" value="indexable" />
 
-				<aui:select helpMessage="custom-field-indexable-help" label="searchable" name="<portlet:namespace />Property(indexable)">
+				<aui:select helpMessage="custom-field-indexable-help" label="searchable" name="Property(indexable)">
 					<aui:option label="true" selected="<%= propertyIndexable %>" value="1" />
 					<aui:option label="false" selected="<%= !propertyIndexable %>" value="0" />
 				</aui:select>
 
 				<aui:input type="hidden" name="PropertyName(secret)" value="secret" />
 
-				<aui:select helpMessage="custom-field-secret-help" label="secret" name="<portlet:namespace />Property(secret)">
+				<aui:select helpMessage="custom-field-secret-help" label="secret" name="Property(secret)">
 					<aui:option label="true" selected="<%= propertySecret %>" value="1" />
 					<aui:option label="false" selected="<%= !propertySecret %>" value="0" />
 				</aui:select>
