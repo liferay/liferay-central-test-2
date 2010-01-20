@@ -96,40 +96,36 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 		new Option(3, 'Rankine'),
 		new Option(4, 'Réaumure')
 	];
+</aui:script>
 
-	AUI().ready(
-		'io-request',
-		'parse-content',
-		function(A) {
-			var form = A.get('#<portlet:namespace />fm');
+<aui:script use="io-request,parse-content">
+	var form = A.get('#<portlet:namespace />fm');
 
-			form.on(
-				'submit',
-				function(event) {
-					var uri = form.getAttribute('action');
-					var parentNode = form.get('parentNode');
+	form.on(
+		'submit',
+		function(event) {
+			var uri = form.getAttribute('action');
+			var parentNode = form.get('parentNode');
 
-					parentNode.plug(A.Plugin.ParseContent);
+			parentNode.plug(A.Plugin.ParseContent);
 
-					A.io.request(
-						uri,
-						{
-							form: {
-								id: form
-							},
-							on: {
-								success: function(event, id, obj) {
-									var responseData = this.get('responseData');
+			A.io.request(
+				uri,
+				{
+					form: {
+						id: form
+					},
+					on: {
+						success: function(event, id, obj) {
+							var responseData = this.get('responseData');
 
-									parentNode.setContent(responseData);
-								}
-							}
+							parentNode.setContent(responseData);
 						}
-					);
-
-					event.halt();
+					}
 				}
 			);
+
+			event.halt();
 		}
 	);
 </aui:script>

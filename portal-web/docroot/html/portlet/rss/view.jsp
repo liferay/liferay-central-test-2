@@ -57,40 +57,36 @@ for (int i = 0; i < urls.length; i++) {
 }
 %>
 
-<aui:script>
-	AUI().ready(
-		function(A) {
-			var minusAlt = '<liferay-ui:message key="collapse" />';
-			var minusImage = '01_minus.png';
-			var plusAlt = '<liferay-ui:message key="expand" />';
-			var plusImage = '01_plus.png';
+<aui:script use="event,node">
+	var minusAlt = '<liferay-ui:message key="collapse" />';
+	var minusImage = '01_minus.png';
+	var plusAlt = '<liferay-ui:message key="expand" />';
+	var plusImage = '01_plus.png';
 
-			A.all('.<portlet:namespace />entry-expander').on(
-				'click',
-				function(event) {
-					var expander = event.currentTarget;
-					var feedContent = expander.get('parentNode').one('.feed-entry-content');
+	A.all('.<portlet:namespace />entry-expander').on(
+		'click',
+		function(event) {
+			var expander = event.currentTarget;
+			var feedContent = expander.get('parentNode').one('.feed-entry-content');
 
-					if (feedContent) {
-						var altText = expander.attr('alt');
-						var src = expander.attr('src');
+			if (feedContent) {
+				var altText = expander.attr('alt');
+				var src = expander.attr('src');
 
-						if (src.indexOf('minus.png') > -1) {
-							altText = altText.replace(minusAlt, plusAlt);
-							src = src.replace(minusImage, plusImage);
-						}
-						else {
-							altText = altText.replace(plusAlt, minusAlt);
-							src = src.replace(plusImage, minusImage);
-						}
-
-						feedContent.toggle();
-
-						expander.attr('alt', altText);
-						expander.attr('src', src);
-					}
+				if (src.indexOf('minus.png') > -1) {
+					altText = altText.replace(minusAlt, plusAlt);
+					src = src.replace(minusImage, plusImage);
 				}
-			);
+				else {
+					altText = altText.replace(plusAlt, minusAlt);
+					src = src.replace(plusImage, minusImage);
+				}
+
+				feedContent.toggle();
+
+				expander.attr('alt', altText);
+				expander.attr('src', src);
+			}
 		}
 	);
 </aui:script>

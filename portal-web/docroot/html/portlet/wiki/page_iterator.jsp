@@ -164,17 +164,15 @@ else if (type.equals("tagged_pages")) {
 				}
 			);
 		}
+	</aui:script>
 
-		AUI().ready(
-			function() {
-				<portlet:namespace />initRowsChecked();
+	<aui:script use="event,node">
+		<portlet:namespace />initRowsChecked();
 
-				AUI().all('input[name=<portlet:namespace />rowIds]').on(
-					'click',
-					function(event) {
-						<portlet:namespace />updateRowsChecked(event.currentTarget);
-					}
-				);
+		A.all('input[name=<portlet:namespace />rowIds]').on(
+			'click',
+			function(event) {
+				<portlet:namespace />updateRowsChecked(event.currentTarget);
 			}
 		);
 	</aui:script>

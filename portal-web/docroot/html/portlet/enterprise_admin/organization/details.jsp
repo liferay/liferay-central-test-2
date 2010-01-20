@@ -129,21 +129,19 @@ if (organization != null) {
 			}
 		);
 	}
+</aui:script>
 
-	AUI().ready(
-		function(A) {
-			var modifyLinks = A.all('span.modify-link');
+<aui:script use="event,node">
+	var modifyLinks = A.all('span.modify-link');
 
-			if (modifyLinks) {
-				modifyLinks.on(
-					'click',
-					function() {
-						<portlet:namespace />trackChanges();
-					}
-				);
+	if (modifyLinks) {
+		modifyLinks.on(
+			'click',
+			function() {
+				<portlet:namespace />trackChanges();
 			}
-		}
-	);
+		);
+	}
 </aui:script>
 
 <liferay-ui:error-marker key="errorSection" value="details" />

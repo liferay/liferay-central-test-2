@@ -116,12 +116,8 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 		<portlet:namespace />changeLDAPServerPriority(ldapServerId, 'previous');
 	}
 
-	AUI().ready(
-		function() {
-			Liferay.Util.toggleBoxes('<portlet:namespace />ldapImportEnabledCheckbox', '<portlet:namespace />importEnabledSettings');
-			Liferay.Util.toggleBoxes('<portlet:namespace />ldapExportEnabledCheckbox', '<portlet:namespace />exportEnabledSettings');
-		}
-	);
+	Liferay.Util.toggleBoxes('<portlet:namespace />ldapImportEnabledCheckbox', '<portlet:namespace />importEnabledSettings');
+	Liferay.Util.toggleBoxes('<portlet:namespace />ldapExportEnabledCheckbox', '<portlet:namespace />exportEnabledSettings');
 </aui:script>
 
 <aui:fieldset>

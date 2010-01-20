@@ -184,31 +184,27 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			submitForm(document.<portlet:namespace />fm);
 		}
 	}
+</aui:script>
 
-	AUI().ready(
-		'io',
-		'json',
-		function(A) {
-			var cancelButton = A.one('#<portlet:namespace />cancelButton');
+<aui:script use="io,json">
+	var cancelButton = A.one('#<portlet:namespace />cancelButton');
 
-			if (cancelButton) {
-				cancelButton.on(
-					'click',
-					function() {
-						<portlet:namespace />clearSaveDraftIntervalId();
+	if (cancelButton) {
+		cancelButton.on(
+			'click',
+			function() {
+				<portlet:namespace />clearSaveDraftIntervalId();
 
-						location.href = '<%= UnicodeFormatter.toString(redirect) %>';
-					}
-				);
+				location.href = '<%= UnicodeFormatter.toString(redirect) %>';
 			}
+		);
+	}
 
-			<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
-				<portlet:namespace />saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true)', 30000);
-				<portlet:namespace />oldTitle = document.<portlet:namespace />fm.<portlet:namespace />title.value;
-				<portlet:namespace />oldContent = <portlet:namespace />initEditor();
-			</c:if>
-		}
-	);
+	<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
+		<portlet:namespace />saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true)', 30000);
+		<portlet:namespace />oldTitle = document.<portlet:namespace />fm.<portlet:namespace />title.value;
+		<portlet:namespace />oldContent = <portlet:namespace />initEditor();
+	</c:if>
 </aui:script>
 
 <portlet:actionURL var="editEntryURL">

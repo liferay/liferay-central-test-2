@@ -62,24 +62,22 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 
 		editCompanyLogoWindow.focus();
 	}
+</aui:script>
 
-	AUI().ready(
-		function(A) {
-			var modifyLinks = A.all('span.modify-link');
+<aui:script use="event,node">
+	var modifyLinks = A.all('span.modify-link');
 
-			if (modifyLinks) {
-				modifyLinks.on(
-					'click',
-					function() {
-						A.fire(
-							'enterpriseAdmin:trackChanges',
-							A.one('.selected .modify-link')
-						);
-					}
+	if (modifyLinks) {
+		modifyLinks.on(
+			'click',
+			function() {
+				A.fire(
+					'enterpriseAdmin:trackChanges',
+					A.one('.selected .modify-link')
 				);
 			}
-		}
-	);
+		);
+	}
 </aui:script>
 
 <h3><liferay-ui:message key="language-and-time-zone" /></h3>

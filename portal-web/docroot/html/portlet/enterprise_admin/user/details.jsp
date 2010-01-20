@@ -71,24 +71,22 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 		editUserPortraitWindow.focus();
 	}
+</aui:script>
 
-	AUI().ready(
-		function(A) {
-			var modifyLinks = A.all('span.modify-link');
+<aui:script use="event,node">
+	var modifyLinks = A.all('span.modify-link');
 
-			if (modifyLinks) {
-				modifyLinks.on(
-					'click',
-					function() {
-						A.fire(
-							'enterpriseAdmin:trackChanges',
-							A.one('.selected .modify-link')
-						);
-					}
+	if (modifyLinks) {
+		modifyLinks.on(
+			'click',
+			function() {
+				A.fire(
+					'enterpriseAdmin:trackChanges',
+					A.one('.selected .modify-link')
 				);
 			}
-		}
-	);
+		);
+	}
 </aui:script>
 
 <liferay-ui:error-marker key="errorSection" value="details" />
