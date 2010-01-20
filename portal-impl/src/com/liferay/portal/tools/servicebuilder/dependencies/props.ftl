@@ -34,6 +34,4 @@
         \
         WEB-INF/classes/META-INF/portlet-spring.xml,\
         \
-        #WEB-INF/classes/META-INF/shard-data-source-spring.xml,\
-        \
         WEB-INF/classes/META-INF/ext-spring.xml
