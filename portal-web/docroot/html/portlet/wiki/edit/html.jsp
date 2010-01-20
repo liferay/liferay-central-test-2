@@ -29,11 +29,11 @@ WikiPage wikiPage = (WikiPage)request.getAttribute("edit_page.jsp-wikiPage");
 String content = BeanParamUtil.getString(wikiPage, request, "content");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
-</script>
+</aui:script>
 
 <liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 

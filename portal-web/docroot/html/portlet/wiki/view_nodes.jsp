@@ -132,7 +132,7 @@ searchContainer.setResults(results);
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
-	</script>
+	</aui:script>
 </c:if>

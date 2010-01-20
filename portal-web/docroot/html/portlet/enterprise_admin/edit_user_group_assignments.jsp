@@ -44,7 +44,7 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />updateUserGroupUsers(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_users";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
@@ -52,7 +52,7 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />

@@ -52,7 +52,7 @@ String openId = ParamUtil.getString(request, "openId");
 <%@ include file="/html/portlet/login/navigation.jspf" %>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />openId);
-	</script>
+	</aui:script>
 </c:if>

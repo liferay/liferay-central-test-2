@@ -71,27 +71,23 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			var showAssetCount = A.one('#<portlet:namespace />showAssetCountCheckbox');
+<aui:script use="event,node">
+	var showAssetCount = A.one('#<portlet:namespace />showAssetCountCheckbox');
 
-			function showHiddenFields() {
-				var assetCountOptions = A.one('#<portlet:namespace />assetCountOptions');
+	function showHiddenFields() {
+		var assetCountOptions = A.one('#<portlet:namespace />assetCountOptions');
 
-				if (showAssetCount && assetCountOptions) {
-					if (showAssetCount.get('checked')) {
-						assetCountOptions.show();
-					}
-					else {
-						assetCountOptions.hide();
-					}
-				}
+		if (showAssetCount && assetCountOptions) {
+			if (showAssetCount.get('checked')) {
+				assetCountOptions.show();
 			}
-
-			showHiddenFields();
-
-			showAssetCount.on('change', showHiddenFields);
+			else {
+				assetCountOptions.hide();
+			}
 		}
-	);
-</script>
+	}
+
+	showHiddenFields();
+
+	showAssetCount.on('change', showHiddenFields);
+</aui:script>

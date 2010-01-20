@@ -168,7 +168,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 <%@ include file="/html/portlet/login/navigation.jspf" %>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />firstName);
-	</script>
+	</aui:script>
 </c:if>

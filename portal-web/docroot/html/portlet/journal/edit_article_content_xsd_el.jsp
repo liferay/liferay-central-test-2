@@ -120,11 +120,11 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_area") %>'>
-					<script type="text/javascript">
+					<aui:script>
 						function <portlet:namespace />initEditor<%= elName %>() {
 							return "<%= UnicodeFormatter.toString(elContent) %>";
 						}
-					</script>
+					</aui:script>
 
 					<liferay-ui:input-editor
 						name='<%= renderResponse.getNamespace() + "structure_el_" + elName + "_content" %>'

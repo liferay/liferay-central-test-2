@@ -48,7 +48,7 @@ configurationRenderURL.setParameter("backURL", redirect);
 configurationRenderURL.setParameter("portletResource", portletResource);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	<portlet:namespace />addRssRow = function(table) {
 		table.insertRow(table.rows.length);
 
@@ -111,7 +111,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 1;
 		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
@@ -261,23 +261,19 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 				</aui:button-row>
 			</aui:fieldset>
 
-			<script type="text/javascript">
-				AUI().ready(
-					function(A) {
-						var subscriptionsTable = A.one('#<portlet:namespace />subscriptions');
+			<aui:script use="event,node">
+				var subscriptionsTable = A.one('#<portlet:namespace />subscriptions');
 
-						if (subscriptionsTable) {
-							subscriptionsTable.delegate(
-								'click',
-								function(event) {
-									event.currentTarget.get('parentNode.parentNode').remove();
-								},
-								'.remove-subscription'
-							);
-						}
-					}
-				);
-			</script>
+				if (subscriptionsTable) {
+					subscriptionsTable.delegate(
+						'click',
+						function(event) {
+							event.currentTarget.get('parentNode.parentNode').remove();
+						},
+						'.remove-subscription'
+					);
+				}
+			</aui:script>
 		</c:when>
 		<c:when test="<%= typeSelection.equals(JournalArticle.class.getName()) %>">
 			<aui:input name="assetType" type="hidden" value="<%= JournalArticle.class.getName() %>" />

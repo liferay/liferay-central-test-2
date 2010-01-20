@@ -50,68 +50,62 @@
 </div>
 
 <c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
-	<script type="text/javascript">
-		AUI().ready(
-			'editable',
-			'io-request',
-			function(A) {
-				var quickNotePad = A.one('#<portlet:namespace />pad');
+	<aui:script use="editable,io-request">
+		var quickNotePad = A.one('#<portlet:namespace />pad');
 
-				if (quickNotePad) {
-					quickNotePad.all('.note-color').on(
-						'click',
-						function(event) {
-							var box = event.currentTarget;
+		if (quickNotePad) {
+			quickNotePad.all('.note-color').on(
+				'click',
+				function(event) {
+					var box = event.currentTarget;
 
-							var bgColor = box.getStyle('backgroundColor');
+					var bgColor = box.getStyle('backgroundColor');
 
-							quickNotePad.setStyle('backgroundColor', bgColor);
+					quickNotePad.setStyle('backgroundColor', bgColor);
+
+					A.io.request(
+						'<%= themeDisplay.getPathMain() %>/quick_note/save',
+						{
+							data: {
+								color: bgColor,
+								portletId: '<%= portletDisplay.getId() %>',
+								p_l_id: '<%= plid %>'
+							},
+							method: 'POST'
+						}
+					);
+				}
+			);
+		}
+
+		new A.Editable(
+			{
+				node: '#<portlet:namespace />note',
+				inputType: 'textarea',
+				on: {
+					contentTextChange: function(event) {
+						var instance = this;
+
+						if (!event.initial) {
+							var newValue = event.newVal.replace(/\n/gi, '<br />');
+
+							event.newVal = instance._toText(event.newVal);
 
 							A.io.request(
 								'<%= themeDisplay.getPathMain() %>/quick_note/save',
 								{
 									data: {
-										color: bgColor,
+										p_l_id: '<%= plid %>',
 										portletId: '<%= portletDisplay.getId() %>',
-										p_l_id: '<%= plid %>'
+										data: newValue
 									},
 									method: 'POST'
 								}
 							);
 						}
-					);
-				}
-
-				new A.Editable(
-					{
-						node: '#<portlet:namespace />note',
-						inputType: 'textarea',
-						on: {
-							contentTextChange: function(event) {
-								var instance = this;
-
-								if (!event.initial) {
-									var newValue = event.newVal.replace(/\n/gi, '<br />');
-
-									event.newVal = instance._toText(event.newVal);
-
-									A.io.request(
-										'<%= themeDisplay.getPathMain() %>/quick_note/save',
-										{
-											data: {
-												p_l_id: '<%= plid %>',
-												portletId: '<%= portletDisplay.getId() %>',
-												data: newValue
-											},
-											method: 'POST'
-										}
-									);
-								}
-							}
-						}
 					}
-				);
+				}
 			}
 		);
-	</script>
+	</aui:script>
 </c:if>

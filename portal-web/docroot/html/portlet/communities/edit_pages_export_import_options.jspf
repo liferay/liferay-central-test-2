@@ -22,7 +22,7 @@
  */
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />exportLess() {
 		document.getElementById("<portlet:namespace />portletDataList").style.display = "none";
 
@@ -90,7 +90,7 @@
 			);
 		}
 	}
-</script>
+</aui:script>
 
 <ul class="lfr-tree lfr-component">
 	<li class="tree-item">

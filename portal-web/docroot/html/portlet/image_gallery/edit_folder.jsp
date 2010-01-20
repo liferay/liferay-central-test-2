@@ -34,7 +34,7 @@ long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />removeFolder() {
 		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= rootFolderId %>";
 
@@ -57,7 +57,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId;
 		nameEl.innerHTML = parentFolderName + "&nbsp;";
 	}
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
 
@@ -152,9 +152,9 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

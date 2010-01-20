@@ -39,7 +39,7 @@ String adminEmailPasswordSentSubject = ParamUtil.getString(request, "emailPasswo
 String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordSentBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY));
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />initEmailUserAddedBodyEditor() {
 		return "<%= UnicodeFormatter.toString(adminEmailUserAddedBody) %>";
 	}
@@ -56,7 +56,7 @@ String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordS
 		catch(error) {
 		}
 	}
-</script>
+</aui:script>
 
 <liferay-ui:error-marker key="errorSection" value="email_notifications" />
 

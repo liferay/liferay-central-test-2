@@ -88,7 +88,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 </c:if>
 
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addFeed() {
 		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
 
@@ -107,4 +107,4 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.FEED_ID %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
 	</c:if>
-</script>
+</aui:script>

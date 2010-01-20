@@ -110,16 +110,11 @@ else {
 
 </aui:fieldset>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-auto-fields',
-		function () {
-			new Liferay.AutoFields(
-				{
-					contentBox: '#phoneNumbers > fieldset',
-					fieldIndexes: '<portlet:namespace />phonesIndexes'
-				}
-			).render();
+<aui:script use="liferay-auto-fields">
+	new Liferay.AutoFields(
+		{
+			contentBox: '#phoneNumbers > fieldset',
+			fieldIndexes: '<portlet:namespace />phonesIndexes'
 		}
-	);
-</script>
+	).render();
+</aui:script>

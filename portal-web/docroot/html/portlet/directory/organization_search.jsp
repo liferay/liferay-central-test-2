@@ -128,33 +128,30 @@ if (displayTerms.getParentOrganizationId() > 0) {
 	<liferay-ui:message key="filter-by-organization" />: <%= HtmlUtil.escape(organization.getName()) %><br />
 </c:if>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-dynamic-select',
-		function () {
-			new Liferay.DynamicSelect(
-				[
-					{
-						select: '<portlet:namespace /><%= displayTerms.COUNTRY_ID %>',
-						selectId: 'countryId',
-						selectDesc: 'name',
-						selectVal: '<%= displayTerms.getCountryId() %>',
-						selectData: Liferay.Address.getCountries
-					},
-					{
-						select: '<portlet:namespace /><%= displayTerms.REGION_ID %>',
-						selectId: 'regionId',
-						selectDesc: 'name',
-						selectVal: '<%= displayTerms.getRegionId() %>',
-						selectData: Liferay.Address.getRegions
-					}
-				]
-			);
-		}
-	);
-
+<aui:script>
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
 	</c:if>
-</script>
+</aui:script>
+
+<aui:script use="liferay-dynamic-select">
+	new Liferay.DynamicSelect(
+		[
+			{
+				select: '<portlet:namespace /><%= displayTerms.COUNTRY_ID %>',
+				selectId: 'countryId',
+				selectDesc: 'name',
+				selectVal: '<%= displayTerms.getCountryId() %>',
+				selectData: Liferay.Address.getCountries
+			},
+			{
+				select: '<portlet:namespace /><%= displayTerms.REGION_ID %>',
+				selectId: 'regionId',
+				selectDesc: 'name',
+				selectVal: '<%= displayTerms.getRegionId() %>',
+				selectData: Liferay.Address.getRegions
+			}
+		]
+	);
+</aui:script>

@@ -101,7 +101,7 @@ portletURL.setParameter("tabs1", tabs1);
 </form>
 
 <c:if test='<%= windowState.equals(WindowState.MAXIMIZED) && (tabs1.equals("dns-lookup") || tabs1.equals("whois")) %>'>
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />domain);
-	</script>
+	</aui:script>
 </c:if>

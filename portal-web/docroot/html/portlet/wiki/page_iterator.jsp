@@ -103,7 +103,7 @@ else if (type.equals("tagged_pages")) {
 %>
 
 <c:if test='<%= type.equals("history") %>'>
-	<script type="text/javascript">
+	<aui:script>
 		function <portlet:namespace />compare() {
 			AUI().use(
 				'selector-css3',
@@ -177,7 +177,7 @@ else if (type.equals("tagged_pages")) {
 				);
 			}
 		);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

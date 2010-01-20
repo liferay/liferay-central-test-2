@@ -37,7 +37,7 @@ else {
 boolean useEditorCodepress = editorType.equals("codepress");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function getEditorContent() {
 		return <portlet:namespace />getXsd();
 	}
@@ -94,7 +94,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 		submitForm(document.<portlet:namespace />fm1);
 	}
-</script>
+</aui:script>
 
 <form method="post" name="<portlet:namespace />editorForm">
 
@@ -135,15 +135,11 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 </form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function() {
-			document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value = getEditorContent();
+<aui:script>
+	document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value = getEditorContent();
 
-			Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent', <%= useEditorCodepress %>, true);
-		}
-	);
-</script>
+	Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent', <%= useEditorCodepress %>, true);
+</aui:script>
 
 <c:if test="<%= useEditorCodepress %>">
 	<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>

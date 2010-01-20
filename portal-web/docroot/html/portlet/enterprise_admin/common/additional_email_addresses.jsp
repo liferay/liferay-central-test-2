@@ -106,16 +106,11 @@ else {
 
 </aui:fieldset>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-auto-fields',
-		function () {
-			new Liferay.AutoFields(
-				{
-					contentBox: '#additionalEmailAddresses > fieldset',
-					fieldIndexes: '<portlet:namespace />emailAddressesIndexes'
-				}
-			).render();
+<aui:script use="liferay-auto-fields">
+	new Liferay.AutoFields(
+		{
+			contentBox: '#additionalEmailAddresses > fieldset',
+			fieldIndexes: '<portlet:namespace />emailAddressesIndexes'
 		}
-	);
-</script>
+	).render();
+</aui:script>

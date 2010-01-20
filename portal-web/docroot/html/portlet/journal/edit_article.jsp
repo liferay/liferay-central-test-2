@@ -229,7 +229,7 @@ boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	var <portlet:namespace />documentLibraryInput = null;
 	var <portlet:namespace />imageGalleryInput = null;
 	var <portlet:namespace />contentChangedFlag = false;
@@ -329,7 +329,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
 		submitForm(document.<portlet:namespace />fm1);
 	}
-</script>
+</aui:script>
 
 <aui:form enctype="multipart/form-data" method="post" name="fm2">
 	<input name="groupId" type="hidden" value="" />
@@ -596,18 +596,18 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 										<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>" />
 
-										<script type="text/javascript">
+										<aui:script>
 											document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
-										</script>
+										</aui:script>
 
 									<%
 									}
 									else{
 									%>
 
-										<script type="text/javascript">
+										<aui:script>
 											document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
-										</script>
+										</aui:script>
 
 							<%
 									}
@@ -623,9 +623,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 								<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>" />
 
-								<script type="text/javascript">
+								<aui:script>
 									document.<portlet:namespace />fm1.<portlet:namespace />removeArticleLocaleButton.disabled = true;
-								</script>
+								</aui:script>
 
 						<%
 							}
@@ -760,28 +760,23 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 <%@ include file="edit_article_structure_extra.jspf" %>
 
-<script type="text/javascript">
 
-	<%
-	String doAsUserId = themeDisplay.getDoAsUserId();
+<%
+String doAsUserId = themeDisplay.getDoAsUserId();
 
-	if (Validator.isNull(doAsUserId)) {
-		doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
-	}
-	%>
+if (Validator.isNull(doAsUserId)) {
+	doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
+}
+%>
 
-	AUI().ready(
-		'liferay-portlet-journal',
-		function() {
-			Liferay.Portlet.Journal.PROXY = {};
-			Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= HttpUtil.encodeURL(doAsUserId) %>';
-			Liferay.Portlet.Journal.PROXY.editorImpl = '<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>';
-			Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
-			Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
+<aui:script use="liferay-portlet-journal">
+	Liferay.Portlet.Journal.PROXY = {};
+	Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= HttpUtil.encodeURL(doAsUserId) %>';
+	Liferay.Portlet.Journal.PROXY.editorImpl = '<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>';
+	Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
+	Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
 
-			new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>', '<%= instanceIdKey %>');
-		}
-	);
+	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>', '<%= instanceIdKey %>');
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		<c:choose>
@@ -793,7 +788,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			</c:otherwise>
 		</c:choose>
 	</c:if>
-</script>
+</aui:script>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content.jsp";

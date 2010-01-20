@@ -636,7 +636,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 </form>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addProduct() {
 		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
 
@@ -651,7 +651,7 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
 	</c:if>
-</script>
+</aui:script>
 
 <%
 if (!tabs1.equals("products")) {

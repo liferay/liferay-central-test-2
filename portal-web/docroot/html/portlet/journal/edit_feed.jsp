@@ -107,7 +107,7 @@ if (feed != null) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveFeed() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= feed == null ? Constants.ADD : Constants.UPDATE %>";
 
@@ -145,7 +145,7 @@ if (feed != null) {
 		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
 		<portlet:namespace />saveFeed();
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFeed(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= feed == null ? Constants.ADD : Constants.UPDATE %>" />
@@ -563,7 +563,7 @@ if (feed != null) {
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		<c:choose>
 			<c:when test="<%= PropsValues.JOURNAL_FEED_FORCE_AUTOGENERATE_ID %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
@@ -572,5 +572,5 @@ if (feed != null) {
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (feed == null) ? "newFeedId" : "name" %>);
 			</c:otherwise>
 		</c:choose>
-	</script>
+	</aui:script>
 </c:if>

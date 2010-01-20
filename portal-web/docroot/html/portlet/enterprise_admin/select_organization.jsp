@@ -160,6 +160,6 @@
 	</liferay-ui:search-container>
 </aui:form>
 
-<script type="text/javascript">
+<aui:script>
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-</script>
+</aui:script>

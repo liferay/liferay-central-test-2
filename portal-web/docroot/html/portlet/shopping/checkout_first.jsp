@@ -66,7 +66,7 @@ String ccVerNumber = ParamUtil.getString(request, "ccVerNumber");
 List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contact.getContactId());
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />updateAddress(addressId, type) {
 
 		<%
@@ -104,7 +104,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		%>
 
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
@@ -555,7 +555,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />billingFirstName);
-	</script>
+	</aui:script>
 </c:if>

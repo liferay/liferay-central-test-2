@@ -32,7 +32,7 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
 </liferay-util:buffer>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />openUserGroupSelector() {
 		var userGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_user_group" /></portlet:renderURL>', 'usergroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
 
@@ -69,7 +69,7 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 			}
 		);
 	}
-</script>
+</aui:script>
 
 <h3><liferay-ui:message key="user-groups" /></h3>
 
@@ -115,24 +115,19 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 	/>
 </c:if>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-search-container',
-		function () {
-			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer');
+<aui:script use="liferay-search-container">
+	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer');
 
-			searchContainer.get('contentBox').delegate(
-				'click',
-				function(event) {
-					var link = event.currentTarget;
-					var tr = link.ancestor('tr');
+	searchContainer.get('contentBox').delegate(
+		'click',
+		function(event) {
+			var link = event.currentTarget;
+			var tr = link.ancestor('tr');
 
-					searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
+			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
 
-					<portlet:namespace />trackChanges();
-				},
-				'.modify-link'
-			);
-		}
+			<portlet:namespace />trackChanges();
+		},
+		'.modify-link'
 	);
-</script>
+</aui:script>

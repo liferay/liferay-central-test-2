@@ -32,12 +32,12 @@ SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)request.getAttribute(W
 long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "frameworkVersionId");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveFrameworkVersion() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= frameworkVersion == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_framework_version" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFrameworkVersion(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
@@ -106,9 +106,9 @@ long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "fram
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

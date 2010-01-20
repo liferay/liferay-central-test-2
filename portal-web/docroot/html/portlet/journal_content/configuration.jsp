@@ -54,7 +54,7 @@ type = ParamUtil.getString(request, "type", type);
 	}
 </style>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />selectArticle(articleId) {
 		document.<portlet:namespace />fm.<portlet:namespace />articleId.value = articleId;
 		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
@@ -67,7 +67,7 @@ type = ParamUtil.getString(request, "type", type);
 		displayArticleId.set('innerHTML', articleId + ' (<%= LanguageUtil.get(pageContext, "modified") %>)');
 		displayArticleId.addClass('modified');
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />

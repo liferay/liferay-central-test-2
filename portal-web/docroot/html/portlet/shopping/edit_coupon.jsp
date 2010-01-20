@@ -62,7 +62,7 @@ double discount = BeanParamUtil.getDouble(coupon, request, "discount");
 String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />disableInputDate(date, checked) {
 		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
 		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
@@ -82,7 +82,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= coupon == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_coupon" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCoupon(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
@@ -307,7 +307,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (coupon == null) ? "code" : "name" %>);
-	</script>
+	</aui:script>
 </c:if>

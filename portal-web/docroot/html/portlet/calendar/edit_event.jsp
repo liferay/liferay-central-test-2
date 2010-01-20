@@ -101,7 +101,7 @@ int firstReminder = BeanParamUtil.getInteger(event, request, "firstReminder", (i
 int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", (int)Time.MINUTE * 5);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />init() {
 		<c:choose>
 			<c:when test="<%= recurrenceType == Recurrence.NO_RECURRENCE %>">
@@ -136,7 +136,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= event == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL var="editEventURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/calendar/edit_event" />
@@ -298,7 +298,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
+<aui:script>
 	<portlet:namespace />init();
 
 	<%-- LEP-6018 --%>
@@ -306,7 +306,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	document.<portlet:namespace />fm.<portlet:namespace />endDateHour.disabled = true;
 	document.<portlet:namespace />fm.<portlet:namespace />endDateMinute.disabled = true;
 	document.<portlet:namespace />fm.<portlet:namespace />endDateAmPm.disabled = true;
-</script>
+</aui:script>
 
 <%
 if (event != null) {

@@ -84,7 +84,7 @@
 		String portletURLString = portletURL.toString();
 		%>
 
-		<script type="text/javascript">
+		<aui:script>
 			function <portlet:namespace />installPluginPackage(cmd) {
 				document.<portlet:namespace />fm.method = "post";
 
@@ -111,7 +111,7 @@
 			function <portlet:namespace />searchPlugins() {
 				submitForm(document.<portlet:namespace />fm);
 			}
-		</script>
+		</aui:script>
 
 		<form action="<%= portletURL %>" method="get" name="<portlet:namespace />fm">
 		<liferay-portlet:renderURLParams varImpl="portletURL" />

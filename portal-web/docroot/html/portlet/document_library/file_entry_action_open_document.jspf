@@ -76,7 +76,7 @@
 	}
 %>
 
-	<script type="text/javascript">
+	<aui:script>
 		function <portlet:namespace />openDocument() {
 			var fileUrl = "<%= fileUrl %>";
 			var webDavUrl = "<%= webDavUrl %>";
@@ -97,7 +97,7 @@
 				</c:otherwise>
 			</c:choose>
 		}
-	</script>
+	</aui:script>
 
 	<c:if test="<%= officeDoc != null %>">
 		<liferay-ui:icon

@@ -57,7 +57,7 @@ if (organization != null) {
 	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
 </liferay-util:buffer>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />changeLogo(newLogoURL) {
 		AUI().one('#<portlet:namespace />avatar').attr('src', newLogoURL);
 		AUI().one('.avatar').attr('src', newLogoURL);
@@ -144,7 +144,7 @@ if (organization != null) {
 			}
 		}
 	);
-</script>
+</aui:script>
 
 <liferay-ui:error-marker key="errorSection" value="details" />
 
@@ -343,69 +343,61 @@ if (parentOrganization != null) {
 	cssClass="modify-link"
 />
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-dynamic-select',
-		'liferay-search-container',
-		function () {
-			new Liferay.DynamicSelect(
-				[
-					{
-						select: "<portlet:namespace />countryId",
-						selectId: "countryId",
-						selectDesc: "name",
-						selectVal: "<%= countryId %>",
-						selectData: Liferay.Address.getCountries
-					},
-					{
-						select: "<portlet:namespace />regionId",
-						selectId: "regionId",
-						selectDesc: "name",
-						selectVal: "<%= regionId %>",
-						selectData: Liferay.Address.getRegions
-					}
-				]
-			);
-
-			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
-
-			searchContainer.get('contentBox').delegate(
-				'click',
-				function(event) {
-					var link = event.currentTarget;
-					var tr = link.ancestor('tr');
-
-					searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
-
-					<portlet:namespace />trackChanges();
-				},
-				'.modify-link'
-			);
-		}
+<aui:script use="liferay-dynamic-select,liferay-search-container">
+	new Liferay.DynamicSelect(
+		[
+			{
+				select: "<portlet:namespace />countryId",
+				selectId: "countryId",
+				selectDesc: "name",
+				selectVal: "<%= countryId %>",
+				selectData: Liferay.Address.getCountries
+			},
+			{
+				select: "<portlet:namespace />regionId",
+				selectId: "regionId",
+				selectDesc: "name",
+				selectVal: "<%= regionId %>",
+				selectData: Liferay.Address.getRegions
+			}
+		]
 	);
 
-	<c:if test="<%= organization == null %>">
-		AUI().ready(
-			function(A) {
-				A.one('#<portlet:namespace />type').on(
-					'change',
-					function(event) {
+	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
 
-						<%
-						for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
-						%>
+	searchContainer.get('contentBox').delegate(
+		'click',
+		function(event) {
+			var link = event.currentTarget;
+			var tr = link.ancestor('tr');
 
-							if (event.target.val() == '<%= curType %>') {
-								A.one('#<portlet:namespace />countryDiv').<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(curType)))) ? "show" : "hide" %>();
-							}
+			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
 
-						<%
-						}
-						%>
+			<portlet:namespace />trackChanges();
+		},
+		'.modify-link'
+	);
+</aui:script>
 
+<c:if test="<%= organization == null %>">
+	<aui:script use="node">
+		A.one('#<portlet:namespace />type').on(
+			'change',
+			function(event) {
+
+				<%
+				for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
+				%>
+
+					if (event.target.val() == '<%= curType %>') {
+						A.one('#<portlet:namespace />countryDiv').<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(curType)))) ? "show" : "hide" %>();
 					}
-				);
+
+				<%
+				}
+				%>
+
 			}
 		);
-	</c:if>
-</script>
+	</aui:script>
+</c:if>

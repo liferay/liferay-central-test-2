@@ -59,12 +59,12 @@ List updatablePackageIds = new ArrayList();
 				pluginInstallerURL.setParameter("backURL", currentURL);
 				%>
 
-				<script type="text/javascript">
+				<aui:script>
 					function <portlet:namespace />reloadRepositories() {
 						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
 						submitForm(document.<portlet:namespace />fm);
 					}
-				</script>
+				</aui:script>
 
 				<form action="<portlet:actionURL><portlet:param name="struts_action" value="/update_manager/install_plugin" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 				<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />

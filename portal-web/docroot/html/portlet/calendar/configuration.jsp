@@ -44,7 +44,7 @@ String editorContent = emailEventReminderBody;
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}
@@ -56,7 +56,7 @@ String editorContent = emailEventReminderBody;
 
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 

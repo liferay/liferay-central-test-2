@@ -82,7 +82,7 @@ boolean smallImage = BeanParamUtil.getBoolean(template, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />downloadTemplateContent() {
 		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_template_content";
 		document.<portlet:namespace />fm2.target = "_self";
@@ -128,7 +128,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 		document.getElementById("<portlet:namespace />removeStructureButton").disabled = false;
 	}
-</script>
+</aui:script>
 
 <form method="post" name="<portlet:namespace />fm2">
 <input name="xslContent" type="hidden" value="" />
@@ -413,7 +413,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 </form>
 
-<script type="text/javascript">
+<aui:script>
 	Liferay.Util.inlineEditor(
 		{
 			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm1.<portlet:namespace />langType.value,
@@ -432,4 +432,4 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 			</c:otherwise>
 		</c:choose>
 	</c:if>
-</script>
+</aui:script>

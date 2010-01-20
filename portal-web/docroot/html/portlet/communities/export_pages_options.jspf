@@ -74,7 +74,7 @@ for (Portlet alwaysExportablePortlet : alwaysExportablePortlets) {
 portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(application, locale));
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />hideDateRange() {
 		AUI().one('#<portlet:namespace />startEndDate').hide();
 	}
@@ -102,7 +102,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 			);
 		}
 	}
-</script>
+</aui:script>
 
 <div style="border: 1px solid #CCC; height: 445px; overflow: auto;">
 	<ul class="lfr-tree lfr-component">

@@ -100,33 +100,30 @@ if (displayTerms.getParentOrganizationId() > 0) {
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-dynamic-select',
-		function () {
-			new Liferay.DynamicSelect(
-				[
-					{
-						select: '<portlet:namespace /><%= displayTerms.COUNTRY_ID %>',
-						selectId: 'countryId',
-						selectDesc: 'name',
-						selectVal: '<%= displayTerms.getCountryId() %>',
-						selectData: Liferay.Address.getCountries
-					},
-					{
-						select: '<portlet:namespace /><%= displayTerms.REGION_ID %>',
-						selectId: 'regionId',
-						selectDesc: 'name',
-						selectVal: '<%= displayTerms.getRegionId() %>',
-						selectData: Liferay.Address.getRegions
-					}
-				]
-			);
-		}
+<aui:script use="liferay-dynamic-select">
+	new Liferay.DynamicSelect(
+		[
+			{
+				select: '<portlet:namespace /><%= displayTerms.COUNTRY_ID %>',
+				selectId: 'countryId',
+				selectDesc: 'name',
+				selectVal: '<%= displayTerms.getCountryId() %>',
+				selectData: Liferay.Address.getCountries
+			},
+			{
+				select: '<portlet:namespace /><%= displayTerms.REGION_ID %>',
+				selectId: 'regionId',
+				selectDesc: 'name',
+				selectVal: '<%= displayTerms.getRegionId() %>',
+				selectData: Liferay.Address.getRegions
+			}
+		]
 	);
+</aui:script>
 
+<aui:script>
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
 	</c:if>
-</script>
+</aui:script>

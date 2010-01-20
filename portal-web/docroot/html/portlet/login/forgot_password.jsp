@@ -135,6 +135,6 @@ if (Validator.isNull(authType)) {
 
 <%@ include file="/html/portlet/login/navigation.jspf" %>
 
-<script type="text/javascript">
+<aui:script>
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (user2 == null) ? "emailAddress" : "answer" %>);
-</script>
+</aui:script>

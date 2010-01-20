@@ -53,7 +53,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs
 portletURL.setParameter("tabs3", tabs3);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />updatePasswordPolicyOrganizations(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "password_policy_organizations";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
@@ -69,7 +69,7 @@ portletURL.setParameter("tabs3", tabs3);
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy_assignments" />

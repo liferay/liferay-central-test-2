@@ -121,25 +121,23 @@
 
 		<%@ include file="/html/portlet/login/navigation.jspf" %>
 
-		<script type="text/javascript">
-			AUI().ready(
-				function(A) {
-					var password = A.one('#<portlet:namespace />password');
-
-					if (password) {
-						password.on(
-							'keypress',
-							function(event) {
-								Liferay.Util.showCapsLock(event, '<portlet:namespace />passwordCapsLockSpan');
-							}
-						);
-					}
-				}
-			);
-
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<aui:script>
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />login);
-			</c:if>
-		</script>
+			</aui:script>
+		</c:if>
+
+		<aui:script use="event,node">
+			var password = A.one('#<portlet:namespace />password');
+
+			if (password) {
+				password.on(
+					'keypress',
+					function(event) {
+						Liferay.Util.showCapsLock(event, '<portlet:namespace />passwordCapsLockSpan');
+					}
+				);
+			}
+		</aui:script>
 	</c:otherwise>
 </c:choose>

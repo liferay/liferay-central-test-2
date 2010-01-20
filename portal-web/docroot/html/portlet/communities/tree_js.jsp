@@ -56,282 +56,274 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 <div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output"></div>
 
-<script type="text/javascript">
-	AUI().ready(
-		'dataschema-xml',
-		'datatype-xml',
-		'io-request',
-		'tree-view',
-		function(A) {
-			var TreeUtil = {
-				DEFAULT_PARENT_LAYOUT_ID: <%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>,
-				OPEN_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId) %>'.split(','),
-				SELECTED_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId + "SelectedNode") %>'.split(','),
-				PREFIX_LAYOUT_ID: '_layoutId_',
-				PREFIX_PLID: '_plid_',
+<aui:script use="dataschema-xml,datatype-xml,io-request,tree-view">
+	var TreeUtil = {
+		DEFAULT_PARENT_LAYOUT_ID: <%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>,
+		OPEN_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId) %>'.split(','),
+		SELECTED_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId + "SelectedNode") %>'.split(','),
+		PREFIX_LAYOUT_ID: '_layoutId_',
+		PREFIX_PLID: '_plid_',
 
-				afterRenderTree: function(event) {
-					var treeInstance = event.target;
+		afterRenderTree: function(event) {
+			var treeInstance = event.target;
 
-					var rootNode = treeInstance.item(0);
-					var loadingEl = A.get('#<portlet:namespace />treeLoading');
+			var rootNode = treeInstance.item(0);
+			var loadingEl = A.get('#<portlet:namespace />treeLoading');
 
-					loadingEl.hide();
+			loadingEl.hide();
 
-					TreeUtil.restoreNodeState(rootNode);
-				},
+			TreeUtil.restoreNodeState(rootNode);
+		},
 
-				createId: function(layoutId, plid) {
-					return '<%= HtmlUtil.escape(treeId) %>' + TreeUtil.PREFIX_LAYOUT_ID + layoutId + TreeUtil.PREFIX_PLID + plid;
-				},
+		createId: function(layoutId, plid) {
+			return '<%= HtmlUtil.escape(treeId) %>' + TreeUtil.PREFIX_LAYOUT_ID + layoutId + TreeUtil.PREFIX_PLID + plid;
+		},
 
-				createLink: function(label, plid) {
-					return '<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" %>'+ plid +'">'+ label +'</a>';
-				},
+		createLink: function(label, plid) {
+			return '<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" %>'+ plid +'">'+ label +'</a>';
+		},
 
-				extractLayoutId: function(node) {
-					return node.get('id').match(/\d+/g)[0];
-				},
+		extractLayoutId: function(node) {
+			return node.get('id').match(/\d+/g)[0];
+		},
 
-				extractPlid: function(node) {
-					return node.get('id').match(/\d+/g)[1];
-				},
+		extractPlid: function(node) {
+			return node.get('id').match(/\d+/g)[1];
+		},
 
-				formatJSONResults: function(json) {
-					var output = [];
+		formatJSONResults: function(json) {
+			var output = [];
 
-					A.each(
-						json,
-						function(node) {
-							var nameXML = A.DataType.XML.parse(node.name);
+			A.each(
+				json,
+				function(node) {
+					var nameXML = A.DataType.XML.parse(node.name);
 
-							var schema = {
-								resultListLocator: 'root',
-								resultFields: [
-									{
-										key: 'label',
-										locator: 'name'
-									}
-								]
-							};
-
-							var nodeBase = A.DataSchema.XML.apply(schema, nameXML).results[0];
-
-							var newNode = A.mix(
-								nodeBase,
-								{
-									after: {
-										check: function(event) {
-											var plid = TreeUtil.extractPlid(event.target);
-
-											TreeUtil.updateSessionTreeClick(plid, true, '<%= HtmlUtil.escape(treeId) %>SelectedNode');
-										},
-										uncheck: function(event) {
-											var plid = TreeUtil.extractPlid(event.target);
-
-											TreeUtil.updateSessionTreeClick(plid, false, '<%= HtmlUtil.escape(treeId) %>SelectedNode');
-										}
-									},
-									alwaysShowHitArea: node.hasChildren,
-									id: TreeUtil.createId(node.layoutId, node.plid),
-									type: '<%= selectableTree ? "task" : "io" %>'
-								}
-							);
-
-							if (!<%= selectableTree %>) {
-								newNode.label = TreeUtil.createLink(newNode.label, node.plid);
+					var schema = {
+						resultListLocator: 'root',
+						resultFields: [
+							{
+								key: 'label',
+								locator: 'name'
 							}
-
-							output.push(newNode);
-						}
-					);
-
-					return output;
-				},
-
-				restoreNodeState: function(node) {
-					var instance = this;
-
-					var id = node.get('id');
-					var plid = TreeUtil.extractPlid(node);
-
-					if (plid == '<%= selPlid %>') {
-						node.select();
-					}
-
-					if (A.Array.indexOf(TreeUtil.OPEN_NODES, id) > -1) {
-						node.expand();
-					}
-
-					if (A.Array.indexOf(TreeUtil.SELECTED_NODES, plid) > -1) {
-						if (node.check) {
-							node.check();
-						}
-					}
-				},
-
-				updateLayout: function(data) {
-					var updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
-
-					A.io.request(
-						updateURL,
-						{
-							method: 'POST',
-							data: data
-						}
-					);
-				},
-
-				updateLayoutParent: function(dragPlid, dropPlid) {
-					TreeUtil.updateLayout(
-						{
-							cmd: 'parent_layout_id',
-							parentPlid: dropPlid,
-							plid: dragPlid
-						}
-					);
-				},
-
-				updateLayoutPriority: function(dragPlid, index) {
-					TreeUtil.updateLayout(
-						{
-							cmd: 'priority',
-							plid: dragPlid,
-							priority: index
-						}
-					);
-				},
-
-				updateSessionTreeClick: function(id, open, treeId) {
-					var sessionClickURL = themeDisplay.getPathMain() + '/portal/session_tree_js_click';
-
-					var data = {
-						nodeId: id,
-						openNode: open || false,
-						treeId: treeId
+						]
 					};
 
-					A.io.request(
-						sessionClickURL,
+					var nodeBase = A.DataSchema.XML.apply(schema, nameXML).results[0];
+
+					var newNode = A.mix(
+						nodeBase,
 						{
-							method: 'POST',
-							data: data
+							after: {
+								check: function(event) {
+									var plid = TreeUtil.extractPlid(event.target);
+
+									TreeUtil.updateSessionTreeClick(plid, true, '<%= HtmlUtil.escape(treeId) %>SelectedNode');
+								},
+								uncheck: function(event) {
+									var plid = TreeUtil.extractPlid(event.target);
+
+									TreeUtil.updateSessionTreeClick(plid, false, '<%= HtmlUtil.escape(treeId) %>SelectedNode');
+								}
+							},
+							alwaysShowHitArea: node.hasChildren,
+							id: TreeUtil.createId(node.layoutId, node.plid),
+							type: '<%= selectableTree ? "task" : "io" %>'
 						}
 					);
+
+					if (!<%= selectableTree %>) {
+						newNode.label = TreeUtil.createLink(newNode.label, node.plid);
+					}
+
+					output.push(newNode);
 				}
-			};
+			);
 
-			var getLayoutsURL = themeDisplay.getPathMain() + '/layout_management/get_layouts';
-			var rootId = TreeUtil.createId(TreeUtil.DEFAULT_PARENT_LAYOUT_ID, 0);
-			var rootLabel = '<%= HtmlUtil.escape(rootNodeName) %>';
-			var treeElId = '<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output';
+			return output;
+		},
 
-			var RootNodeType = A.TreeNodeTask;
-			var TreeViewType = A.TreeView;
+		restoreNodeState: function(node) {
+			var instance = this;
 
-			if (!<%= selectableTree %>) {
-				RootNodeType = A.TreeNodeIO;
-				TreeViewType = A.TreeViewDD;
+			var id = node.get('id');
+			var plid = TreeUtil.extractPlid(node);
 
-				rootLabel = TreeUtil.createLink(rootLabel, TreeUtil.DEFAULT_PARENT_LAYOUT_ID);
+			if (plid == '<%= selPlid %>') {
+				node.select();
 			}
 
-			var rootNode = new RootNodeType(
+			if (A.Array.indexOf(TreeUtil.OPEN_NODES, id) > -1) {
+				node.expand();
+			}
+
+			if (A.Array.indexOf(TreeUtil.SELECTED_NODES, plid) > -1) {
+				if (node.check) {
+					node.check();
+				}
+			}
+		},
+
+		updateLayout: function(data) {
+			var updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
+
+			A.io.request(
+				updateURL,
 				{
-					alwaysShowHitArea: true,
-					draggable: false,
-					id: rootId,
-					label: rootLabel,
-					leaf: false
+					method: 'POST',
+					data: data
 				}
 			);
+		},
 
-			rootNode.get('contentBox').addClass('lfr-root-node');
-
-			var treeview = new TreeViewType(
+		updateLayoutParent: function(dragPlid, dropPlid) {
+			TreeUtil.updateLayout(
 				{
-					after: {
-						collapse: function(event) {
-							var id = event.tree.node.get('id');
-
-							TreeUtil.updateSessionTreeClick(id, false, '<%= HtmlUtil.escape(treeId) %>');
-						},
-						expand: function(event) {
-							var id = event.tree.node.get('id');
-
-							TreeUtil.updateSessionTreeClick(id, true, '<%= HtmlUtil.escape(treeId) %>');
-						},
-						render: TreeUtil.afterRenderTree
-					},
-					boundingBox: '#' + treeElId,
-					children: [rootNode],
-					io: {
-						cfg: {
-							data: function(node) {
-								var parentLayoutId = TreeUtil.extractLayoutId(node);
-
-								return A.toQueryString(
-									{
-										groupId: <%= groupId %>,
-										privateLayout: false,
-										parentLayoutId: parentLayoutId
-									}
-								);
-							},
-							method: 'POST'
-						},
-						formatter: TreeUtil.formatJSONResults,
-						url: getLayoutsURL
-					},
-					on: {
-						append: function(event) {
-							TreeUtil.restoreNodeState(event.tree.node);
-						},
-						drop: function(event) {
-							var tree = event.tree;
-
-							var index = tree.dragNode.get('parentNode').indexOf(tree.dragNode);
-
-							TreeUtil.updateLayoutPriority(
-								TreeUtil.extractPlid(tree.dragNode),
-								index
-							);
-						},
-						dropAppend: function(event) {
-							var tree = event.tree;
-
-							TreeUtil.updateLayoutParent(
-								TreeUtil.extractPlid(tree.dragNode),
-								TreeUtil.extractPlid(tree.dropNode)
-							);
-						},
-						dropInsert: function(event) {
-							var tree = event.tree;
-
-							TreeUtil.updateLayoutParent(
-								TreeUtil.extractPlid(tree.dragNode),
-								TreeUtil.extractPlid(tree.dropNode.get('parentNode'))
-							);
-						}
-					},
-					type: 'pages'
+					cmd: 'parent_layout_id',
+					parentPlid: dropPlid,
+					plid: dragPlid
 				}
-			)
-			.render();
-
-			A.on(
-				'click',
-				treeview.collapseAll,
-				'#<portlet:namespace />treeCollapseAll',
-				treeview
 			);
+		},
 
-			A.on(
-				'click',
-				treeview.expandAll,
-				'#<portlet:namespace />treeExpandAll',
-				treeview
+		updateLayoutPriority: function(dragPlid, index) {
+			TreeUtil.updateLayout(
+				{
+					cmd: 'priority',
+					plid: dragPlid,
+					priority: index
+				}
+			);
+		},
+
+		updateSessionTreeClick: function(id, open, treeId) {
+			var sessionClickURL = themeDisplay.getPathMain() + '/portal/session_tree_js_click';
+
+			var data = {
+				nodeId: id,
+				openNode: open || false,
+				treeId: treeId
+			};
+
+			A.io.request(
+				sessionClickURL,
+				{
+					method: 'POST',
+					data: data
+				}
 			);
 		}
+	};
+
+	var getLayoutsURL = themeDisplay.getPathMain() + '/layout_management/get_layouts';
+	var rootId = TreeUtil.createId(TreeUtil.DEFAULT_PARENT_LAYOUT_ID, 0);
+	var rootLabel = '<%= HtmlUtil.escape(rootNodeName) %>';
+	var treeElId = '<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output';
+
+	var RootNodeType = A.TreeNodeTask;
+	var TreeViewType = A.TreeView;
+
+	if (!<%= selectableTree %>) {
+		RootNodeType = A.TreeNodeIO;
+		TreeViewType = A.TreeViewDD;
+
+		rootLabel = TreeUtil.createLink(rootLabel, TreeUtil.DEFAULT_PARENT_LAYOUT_ID);
+	}
+
+	var rootNode = new RootNodeType(
+		{
+			alwaysShowHitArea: true,
+			draggable: false,
+			id: rootId,
+			label: rootLabel,
+			leaf: false
+		}
 	);
-</script>
+
+	rootNode.get('contentBox').addClass('lfr-root-node');
+
+	var treeview = new TreeViewType(
+		{
+			after: {
+				collapse: function(event) {
+					var id = event.tree.node.get('id');
+
+					TreeUtil.updateSessionTreeClick(id, false, '<%= HtmlUtil.escape(treeId) %>');
+				},
+				expand: function(event) {
+					var id = event.tree.node.get('id');
+
+					TreeUtil.updateSessionTreeClick(id, true, '<%= HtmlUtil.escape(treeId) %>');
+				},
+				render: TreeUtil.afterRenderTree
+			},
+			boundingBox: '#' + treeElId,
+			children: [rootNode],
+			io: {
+				cfg: {
+					data: function(node) {
+						var parentLayoutId = TreeUtil.extractLayoutId(node);
+
+						return A.toQueryString(
+							{
+								groupId: <%= groupId %>,
+								privateLayout: false,
+								parentLayoutId: parentLayoutId
+							}
+						);
+					},
+					method: 'POST'
+				},
+				formatter: TreeUtil.formatJSONResults,
+				url: getLayoutsURL
+			},
+			on: {
+				append: function(event) {
+					TreeUtil.restoreNodeState(event.tree.node);
+				},
+				drop: function(event) {
+					var tree = event.tree;
+
+					var index = tree.dragNode.get('parentNode').indexOf(tree.dragNode);
+
+					TreeUtil.updateLayoutPriority(
+						TreeUtil.extractPlid(tree.dragNode),
+						index
+					);
+				},
+				dropAppend: function(event) {
+					var tree = event.tree;
+
+					TreeUtil.updateLayoutParent(
+						TreeUtil.extractPlid(tree.dragNode),
+						TreeUtil.extractPlid(tree.dropNode)
+					);
+				},
+				dropInsert: function(event) {
+					var tree = event.tree;
+
+					TreeUtil.updateLayoutParent(
+						TreeUtil.extractPlid(tree.dragNode),
+						TreeUtil.extractPlid(tree.dropNode.get('parentNode'))
+					);
+				}
+			},
+			type: 'pages'
+		}
+	)
+	.render();
+
+	A.on(
+		'click',
+		treeview.collapseAll,
+		'#<portlet:namespace />treeCollapseAll',
+		treeview
+	);
+
+	A.on(
+		'click',
+		treeview.expandAll,
+		'#<portlet:namespace />treeExpandAll',
+		treeview
+	);
+</aui:script>

@@ -38,7 +38,7 @@ if (organizationId > 0) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />openOrganizationSelector() {
 		var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/select_organization" /><portlet:param name="tabs1" value="organizations" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
 
@@ -64,7 +64,7 @@ if (organizationId > 0) {
 
 		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = false;
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
@@ -122,10 +122,6 @@ if (organizationId > 0) {
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			Liferay.Util.toggleSelectBox('<portlet:namespace />selectionMethod', 'users', '<portlet:namespace />UsersSelectionOptions');
-		}
-	);
-</script>
+<aui:script>
+	Liferay.Util.toggleSelectBox('<portlet:namespace />selectionMethod', 'users', '<portlet:namespace />UsersSelectionOptions');
+</aui:script>

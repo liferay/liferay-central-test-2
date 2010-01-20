@@ -70,7 +70,7 @@ if (choiceName > 0) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addPollChoice() {
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addPollChoiceURL">
 			<portlet:param name="struts_action" value="/polls/edit_question" />
@@ -106,7 +106,7 @@ if (choiceName > 0) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= question == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editQuestionURL">
 	<portlet:param name="struts_action" value="/polls/edit_question" />
@@ -202,9 +202,9 @@ if (choiceName > 0) {
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

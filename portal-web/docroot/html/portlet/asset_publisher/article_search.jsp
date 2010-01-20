@@ -160,7 +160,7 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 	</table>
 </liferay-ui:search-toggle>
 
-<script type="text/javascript">
+<aui:script>
 	var <portlet:namespace />configurationActionURL = "";
 
 	Liferay.Util.actsAsAspect(window);
@@ -176,20 +176,18 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 		}
 	);
 
-	AUI().ready(
-		function() {
-			var fm = AUI().one(document.<portlet:namespace />fm);
-
-			if (fm) {
-				<portlet:namespace />configurationActionURL = fm.attr('action');
-
-				fm.attr('action', '<%= portletURL.toString() %>');
-			}
-		}
-	);
-
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.ARTICLE_ID %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
 	</c:if>
-</script>
+</aui:script>
+
+<aui:script use="node">
+	var fm = A.one(document.<portlet:namespace />fm);
+
+	if (fm) {
+		<portlet:namespace />configurationActionURL = fm.attr('action');
+
+		fm.attr('action', '<%= portletURL.toString() %>');
+	}
+</aui:script>

@@ -87,7 +87,7 @@ editPermissionsURL.setParameter("redirect", viewPermissionsURL.toString());
 editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addPermissions(field) {
 		var permissionsURL = field.value;
 
@@ -161,7 +161,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 		nameEl.innerHTML = groupsHTML;
 	}
-</script>
+</aui:script>
 
 <c:choose>
 	<c:when test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">

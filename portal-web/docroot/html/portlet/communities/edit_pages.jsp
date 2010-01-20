@@ -292,7 +292,7 @@ request.setAttribute("edit_pages.jsp-workflowRoleNames", workflowRoleNames);
 request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />changeWorkflowStages() {
 		submitForm(document.<portlet:namespace />fm, '<%= currentURL %>');
 	}
@@ -439,7 +439,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			document.<portlet:namespace />fm.<portlet:namespace />workflowEnabled.checked = !checked;
 		}
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPagesURL">
 	<portlet:param name="struts_action" value="/communities/edit_pages" />

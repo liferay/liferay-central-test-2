@@ -33,7 +33,7 @@ double fromValue = ParamUtil.getDouble(request, "fromValue");
 Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValue);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	var lengthArray = [
 		new Option(0, '<%= UnicodeLanguageUtil.get(pageContext, "meter") %>'),
 		new Option(1, '<%= UnicodeLanguageUtil.get(pageContext, "millimeter") %>'),
@@ -132,7 +132,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 			);
 		}
 	);
-</script>
+</aui:script>
 
 <form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/unit_converter/view" /></liferay-portlet:renderURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 
@@ -320,7 +320,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fromValue);
-	</script>
+	</aui:script>
 </c:if>

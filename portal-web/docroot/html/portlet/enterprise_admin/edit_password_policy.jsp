@@ -214,7 +214,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
+<aui:script>
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= defaultPolicy ? "description" : "name" %>);
 	</c:if>
@@ -224,7 +224,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 	Liferay.Util.toggleBoxes('<portlet:namespace />historyCheckbox', '<portlet:namespace />historySettings');
 	Liferay.Util.toggleBoxes('<portlet:namespace />expireableCheckbox', '<portlet:namespace />expirationSettings');
 	Liferay.Util.toggleBoxes('<portlet:namespace />lockoutCheckbox', '<portlet:namespace />lockoutSettings');
-</script>
+</aui:script>
 
 <%
 if (passwordPolicy != null) {

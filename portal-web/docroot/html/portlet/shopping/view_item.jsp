@@ -42,7 +42,7 @@ OrderByComparator orderByComparator = ShoppingUtil.getItemOrderByComparator(orde
 ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(item.getItemId(), orderByComparator);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addToCart() {
 		document.<portlet:namespace />fm.<portlet:namespace />fields.value = "";
 
@@ -68,7 +68,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />

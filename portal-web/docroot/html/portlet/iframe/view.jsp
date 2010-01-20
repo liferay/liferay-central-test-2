@@ -65,7 +65,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />init() {
 		var hash = document.location.hash;
 
@@ -200,12 +200,8 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		}
 	}
 
-	AUI().ready(
-		function() {
-			<portlet:namespace />init();
-		}
-	);
-</script>
+	<portlet:namespace />init();
+</aui:script>
 
 <c:choose>
 	<c:when test="<%= auth && Validator.isNull(userName) && !themeDisplay.isSignedIn() %>">

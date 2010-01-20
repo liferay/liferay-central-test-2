@@ -70,7 +70,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 portletURL.setParameter("proposalId", String.valueOf(proposalId));
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />approveProposal() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-approve-this-proposal") %>')) {
 			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.APPROVE %>";
@@ -101,7 +101,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 		submitForm(document.<portlet:namespace />fm1);
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL var="editProposalURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/communities/edit_proposal" />

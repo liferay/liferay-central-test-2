@@ -102,7 +102,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("name", name);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />lock() {
 		submitForm(document.hrefFm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>");
 	}
@@ -135,7 +135,7 @@ portletURL.setParameter("name", name);
 	function <portlet:namespace />unlock() {
 		submitForm(document.hrefFm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>");
 	}
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
@@ -160,24 +160,19 @@ portletURL.setParameter("name", name);
 </c:if>
 
 <c:if test="<%= fileEntry == null %>">
-	<script type="text/javascript">
-		AUI().ready(
-			'liferay-upload',
-			function() {
-				new Liferay.Upload(
-					{
-						allowedFileTypes: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
-						container: '#<portlet:namespace />fileUpload',
-						fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
-						fallbackContainer: '#<portlet:namespace />fallback',
-						maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %> / 1024,
-						namespace: '<portlet:namespace />',
-						uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="newFolderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="status" value="<%= String.valueOf(status) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntry.class.getName() %>" />'
-					}
-				);
+	<aui:script use="liferay-upload">
+		new Liferay.Upload(
+			{
+				allowedFileTypes: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
+				container: '#<portlet:namespace />fileUpload',
+				fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
+				fallbackContainer: '#<portlet:namespace />fallback',
+				maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %> / 1024,
+				namespace: '<portlet:namespace />',
+				uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="newFolderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="status" value="<%= String.valueOf(status) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntry.class.getName() %>" />'
 			}
 		);
-	</script>
+	</aui:script>
 
 	<div class="lfr-dynamic-uploader">
 		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
@@ -336,44 +331,42 @@ portletURL.setParameter("name", name);
 	</aui:fieldset>
 </aui:form>
 
-<script type="text/javascript">
+<aui:script>
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
+</aui:script>
 
-	AUI().ready(
-		function(A) {
-			var validateFile = function(fileField) {
-				var value = fileField.val();
+<aui:script use="event,node">
+	var validateFile = function(fileField) {
+		var value = fileField.val();
 
-				if (value) {
-					var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
-					var validExtensions = ['<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), "', '") %>'];
+		if (value) {
+			var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
+			var validExtensions = ['<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), "', '") %>'];
 
-					if ((A.Array.indexOf(validExtensions, '*') == -1) &&
-						(A.Array.indexOf(validExtensions, extension) == -1)) {
+			if ((A.Array.indexOf(validExtensions, '*') == -1) &&
+				(A.Array.indexOf(validExtensions, extension) == -1)) {
 
-						alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>');
+				alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>');
 
-						fileField.val('');
-					}
-				}
-			};
-
-			var onFileChange = function(event) {
-				validateFile(event.currentTarget);
-			};
-
-			var fileField = A.one('#<portlet:namespace />file')
-
-			if (fileField) {
-				fileField.on('change', onFileChange);
-
-				validateFile(fileField);
+				fileField.val('');
 			}
 		}
-	);
-</script>
+	};
+
+	var onFileChange = function(event) {
+		validateFile(event.currentTarget);
+	};
+
+	var fileField = A.one('#<portlet:namespace />file')
+
+	if (fileField) {
+		fileField.on('change', onFileChange);
+
+		validateFile(fileField);
+	}
+</aui:script>
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"

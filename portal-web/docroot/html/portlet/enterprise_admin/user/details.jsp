@@ -51,7 +51,7 @@ if (selContact != null) {
 boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />changePortrait(newPortraitURL) {
 		AUI().one('#<portlet:namespace />avatar').attr('src', newPortraitURL);
 		AUI().one('.avatar').attr('src', newPortraitURL);
@@ -89,7 +89,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 			}
 		}
 	);
-</script>
+</aui:script>
 
 <liferay-ui:error-marker key="errorSection" value="details" />
 

@@ -71,7 +71,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			String editorContent = emailPasswordSentBody;
 			%>
 
-			<script type="text/javascript">
+			<aui:script>
 				function <portlet:namespace />initEditor() {
 					return "<%= UnicodeFormatter.toString(editorContent) %>";
 				}
@@ -88,7 +88,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
 					submitForm(document.<portlet:namespace />fm);
 				}
-			</script>
+			</aui:script>
 
 			<liferay-ui:tabs
 				names="general,password-changed-notification"

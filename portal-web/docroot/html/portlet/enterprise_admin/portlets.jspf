@@ -23,12 +23,12 @@
 %>
 
 <c:if test="<%= showReindexButton %>">
-	<script type="text/javascript">
+	<aui:script>
 		function <portlet:namespace />reindexPortlet(portletId) {
 			document.<portlet:namespace />fm.<portlet:namespace />portletId.value = portletId;
 			<portlet:namespace />saveServer('reIndex');
 		}
-	</script>
+	</aui:script>
 </c:if>
 
 <c:if test="<%= installPluginsURL != null %>">

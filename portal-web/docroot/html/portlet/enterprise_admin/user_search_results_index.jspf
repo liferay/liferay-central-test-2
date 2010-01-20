@@ -79,11 +79,14 @@ private static List<User> _getResults(Hits hits) throws Exception {
 
 	List<Document> hitsList = hits.toList();
 
-	for (Document doc : hitsList) {
-		long userId = GetterUtil.getLong(doc.get(Field.USER_ID));
-
-		users.add(UserLocalServiceUtil.getUserById(userId));
+	try {
+		for (Document doc : hitsList) {
+			long userId = GetterUtil.getLong(doc.get(Field.USER_ID));
+System.out.println(userId);
+			users.add(UserLocalServiceUtil.getUserById(userId));
+		}
 	}
+	catch (NoSuchUserException e) {}
 
 	return users;
 }

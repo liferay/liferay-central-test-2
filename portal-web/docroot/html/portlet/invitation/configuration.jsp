@@ -37,7 +37,7 @@ String editorParam = "emailMessageBody";
 String editorContent = emailMessageBody;
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}
@@ -46,7 +46,7 @@ String editorContent = emailMessageBody;
 		document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 

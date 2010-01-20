@@ -56,24 +56,19 @@ if (image != null) {
 %>
 
 <c:if test="<%= image == null %>">
-	<script type="text/javascript">
-		AUI().ready(
-			'liferay-upload',
-			function() {
-				new Liferay.Upload(
-					{
-						allowedFileTypes: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA)) %>',
-						container: '#<portlet:namespace />fileUpload',
-						fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA)) %>',
-						fallbackContainer: '#<portlet:namespace />fallback',
-						maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) %> / 1024,
-						namespace: '<portlet:namespace />',
-						uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= IGImage.class.getName() %>" />'
-					}
-				);
+	<aui:script use="liferay-upload">
+		new Liferay.Upload(
+			{
+				allowedFileTypes: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA)) %>',
+				container: '#<portlet:namespace />fileUpload',
+				fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA)) %>',
+				fallbackContainer: '#<portlet:namespace />fallback',
+				maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) %> / 1024,
+				namespace: '<portlet:namespace />',
+				uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= IGImage.class.getName() %>" />'
 			}
 		);
-	</script>
+	</aui:script>
 
 	<div class="lfr-dynamic-uploader">
 		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
@@ -82,7 +77,7 @@ if (image != null) {
 	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
 </c:if>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />removeFolder() {
 		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = "<%= rootFolderId %>";
 
@@ -107,7 +102,7 @@ if (image != null) {
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId;
 		nameEl.innerHTML = folderName + "&nbsp;";
 	}
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
 
@@ -226,44 +221,42 @@ if (image != null) {
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
+<aui:script>
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
+</aui:script>
 
-	AUI().ready(
-		function(A) {
-			var validateFile = function(fileField) {
-				var value = fileField.val();
+<aui:script use="event,node">
+	var validateFile = function(fileField) {
+		var value = fileField.val();
 
-				if (value) {
-					var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
-					var validExtensions = ['<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA), "', '") %>'];
+		if (value) {
+			var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
+			var validExtensions = ['<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA), "', '") %>'];
 
-					if ((A.Array.indexOf(validExtensions, '*') == -1) &&
-						(A.Array.indexOf(validExtensions, extension) == -1)) {
+			if ((A.Array.indexOf(validExtensions, '*') == -1) &&
+				(A.Array.indexOf(validExtensions, extension) == -1)) {
 
-						alert('<%= UnicodeLanguageUtil.get(pageContext, "image-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>');
+				alert('<%= UnicodeLanguageUtil.get(pageContext, "image-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>');
 
-						fileField.val('');
-					}
-				}
-			};
-
-			var onFileChange = function(event) {
-				validateFile(event.currentTarget);
-			};
-
-			var fileField = A.one('#<portlet:namespace />file')
-
-			if (fileField) {
-				fileField.on('change', onFileChange);
-
-				validateFile(fileField);
+				fileField.val('');
 			}
 		}
-	);
-</script>
+	};
+
+	var onFileChange = function(event) {
+		validateFile(event.currentTarget);
+	};
+
+	var fileField = A.one('#<portlet:namespace />file')
+
+	if (fileField) {
+		fileField.on('change', onFileChange);
+
+		validateFile(fileField);
+	}
+</aui:script>
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"

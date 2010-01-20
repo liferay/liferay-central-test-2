@@ -46,7 +46,7 @@ if (entry != null) {
 boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	var <portlet:namespace />saveDraftIntervalId = null;
 	var <portlet:namespace />oldTitle = null;
 	var <portlet:namespace />oldContent = null;
@@ -209,7 +209,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			</c:if>
 		}
 	);
-</script>
+</aui:script>
 
 <portlet:actionURL var="editEntryURL">
 	<portlet:param name="struts_action" value="/blogs/edit_entry" />
@@ -298,9 +298,9 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

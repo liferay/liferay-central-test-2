@@ -124,31 +124,27 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			var select = A.one('#<portlet:namespace/>displayStyle');
+<aui:script use="event,node">
+	var select = A.one('#<portlet:namespace/>displayStyle');
 
-			var toggleCustomFields = function() {
-				var customDisplayStyle = A.one('#<portlet:namespace/>customDisplayStyle');
-				var displayStyle = select.val();
+	var toggleCustomFields = function() {
+		var customDisplayStyle = A.one('#<portlet:namespace/>customDisplayStyle');
+		var displayStyle = select.val();
 
-				if (customDisplayStyle) {
-					var action = 'hide';
+		if (customDisplayStyle) {
+			var action = 'hide';
 
-					if (displayStyle == '[custom]') {
-						action = 'show';
-					}
-
-					customDisplayStyle[action]();
-				}
+			if (displayStyle == '[custom]') {
+				action = 'show';
 			}
 
-			if (select) {
-				select.on('change', toggleCustomFields);
-
-				toggleCustomFields();
-			}
+			customDisplayStyle[action]();
 		}
-	)
-</script>
+	}
+
+	if (select) {
+		select.on('change', toggleCustomFields);
+
+		toggleCustomFields();
+	}
+</aui:script>

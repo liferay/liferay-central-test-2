@@ -48,7 +48,7 @@ configurationActionURL.setParameter("backURL", redirect);
 configurationActionURL.setParameter("portletResource", portletResource);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />chooseSelectionStyle() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'selection-style';
 
@@ -99,7 +99,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
 	}
-</script>
+</aui:script>
 
 <style type="text/css">
 	.aui-form .queryRules fieldset {
@@ -490,23 +490,18 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								</aui:fieldset>
 							</div>
 
-							<script type="text/javascript">
-								AUI().ready(
-									'liferay-auto-fields',
-									function (A) {
-										Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
-										Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
+							<aui:script use="liferay-auto-fields">
+								Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
+								Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 
-										var autoFields = new Liferay.AutoFields(
-											{
-												contentBox: '#<portlet:namespace />queryRules > fieldset',
-												fieldIndexes: '<portlet:namespace />queryLogicIndexes',
-												url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_query_rule" /></portlet:renderURL>'
-											}
-										).render();
+								var autoFields = new Liferay.AutoFields(
+									{
+										contentBox: '#<portlet:namespace />queryRules > fieldset',
+										fieldIndexes: '<portlet:namespace />queryLogicIndexes',
+										url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_query_rule" /></portlet:renderURL>'
 									}
-								);
-							</script>
+								).render();
+							</aui:script>
 
 							<aui:input inlineLabel="left" label="include-tags-specified-in-the-url" name="mergeUrlTags" type="checkbox" value="<%= mergeUrlTags %>" />
 					</liferay-ui:panel>
@@ -669,6 +664,6 @@ private String _getKey(Group group) throws Exception {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />selectionStyle);
-</script>
+</aui:script>

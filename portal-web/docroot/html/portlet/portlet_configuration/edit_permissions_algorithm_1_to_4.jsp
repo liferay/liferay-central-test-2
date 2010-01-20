@@ -116,7 +116,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-resource", resource)
 request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portletURL);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveGroupPermissions() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_permissions";
 		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= portletURL.toString() %>";
@@ -242,7 +242,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <div class="edit-permissions">
 	<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">

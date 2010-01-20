@@ -32,12 +32,12 @@ Company company2 = (Company)request.getAttribute(WebKeys.SEL_COMPANY);
 long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveCompany() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= company2 == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_instance" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCompany(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />

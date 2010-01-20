@@ -64,7 +64,7 @@ else if (tabs2.equals("page-updated-email")) {
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveConfiguration() {
 		<c:if test='<%= tabs2.equals("display-settings") %>'>
 			document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
@@ -73,7 +73,7 @@ else if (tabs2.equals("page-updated-email")) {
 
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 

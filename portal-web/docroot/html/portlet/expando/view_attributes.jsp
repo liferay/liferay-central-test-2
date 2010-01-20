@@ -37,11 +37,11 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("modelResource", modelResource);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addExpando() {
 		submitForm(document.hrefFm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/expando/edit_expando" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="modelResource" value="<%= modelResource %>" /></portlet:renderURL>');
 	}
-</script>
+</aui:script>
 
 <div>
 	<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= modelResourceName %></aui:a>

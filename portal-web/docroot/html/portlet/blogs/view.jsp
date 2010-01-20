@@ -86,7 +86,7 @@ portletURL.setParameter("struts_action", "/blogs/view");
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-	</script>
+	</aui:script>
 </c:if>

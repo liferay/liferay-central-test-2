@@ -139,16 +139,12 @@ String htmlAttributes =
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />src);
-			</c:if>
+<aui:script>
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />src);
+	</c:if>
 
-			Liferay.Util.toggleBoxes('<portlet:namespace />authCheckbox','<portlet:namespace />authenticationOptions');
-			Liferay.Util.toggleSelectBox('<portlet:namespace />authType', 'form', '<portlet:namespace />formAuthOptions');
-			Liferay.Util.toggleSelectBox('<portlet:namespace />authType', 'basic', '<portlet:namespace />basicAuthOptions');
-		}
-	);
-</script>
+	Liferay.Util.toggleBoxes('<portlet:namespace />authCheckbox','<portlet:namespace />authenticationOptions');
+	Liferay.Util.toggleSelectBox('<portlet:namespace />authType', 'form', '<portlet:namespace />formAuthOptions');
+	Liferay.Util.toggleSelectBox('<portlet:namespace />authType', 'basic', '<portlet:namespace />basicAuthOptions');
+</aui:script>

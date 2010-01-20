@@ -107,16 +107,11 @@ else {
 
 </aui:fieldset>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-auto-fields',
-		function () {
-			new Liferay.AutoFields(
-				{
-					contentBox: '#websites > fieldset',
-					fieldIndexes: '<portlet:namespace />websitesIndexes'
-				}
-			).render();
+<aui:script use="liferay-auto-fields">
+	new Liferay.AutoFields(
+		{
+			contentBox: '#websites > fieldset',
+			fieldIndexes: '<portlet:namespace />websitesIndexes'
 		}
-	);
-</script>
+	).render();
+</aui:script>

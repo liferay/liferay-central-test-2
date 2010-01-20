@@ -158,56 +158,52 @@
 	/>
 </aui:fieldset>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
+<aui:script use="event,node">
+	var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
 
-			function showHiddenFields () {
-				var assetLinkBehaviour = A.one('#assetLinkBehaviour');
-				var hiddenFields = A.all('.hidden-field');
-				var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
+	function showHiddenFields () {
+		var assetLinkBehaviour = A.one('#assetLinkBehaviour');
+		var hiddenFields = A.all('.hidden-field');
+		var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
 
-				if (hiddenFields) {
-					hiddenFields.hide();
+		if (hiddenFields) {
+			hiddenFields.hide();
+		}
+
+		if (selectDisplayStyle) {
+			var displayStyle = selectDisplayStyle.val();
+
+			if (displayStyle == 'full-content') {
+				var showAssetTitle = A.one('#showAssetTitle');
+				var showContextLink = A.one('#showContextLink');
+
+				if (showAssetTitle) {
+					showAssetTitle.show();
 				}
 
-				if (selectDisplayStyle) {
-					var displayStyle = selectDisplayStyle.val();
-
-					if (displayStyle == 'full-content') {
-						var showAssetTitle = A.one('#showAssetTitle');
-						var showContextLink = A.one('#showContextLink');
-
-						if (showAssetTitle) {
-							showAssetTitle.show();
-						}
-
-						if (showContextLink) {
-							showContextLink.show();
-						}
-					}
-					else {
-						if (displayStyle == 'abstracts') {
-							var abstractLength = A.one('#abstractLength');
-
-							if (abstractLength) {
-								abstractLength.show();
-							}
-						}
-
-						if (assetLinkBehaviour) {
-							assetLinkBehaviour.show();
-						}
-					}
+				if (showContextLink) {
+					showContextLink.show();
 				}
 			}
+			else {
+				if (displayStyle == 'abstracts') {
+					var abstractLength = A.one('#abstractLength');
 
-			showHiddenFields();
+					if (abstractLength) {
+						abstractLength.show();
+					}
+				}
 
-			if (selectDisplayStyle) {
-				selectDisplayStyle.on('change', showHiddenFields);
+				if (assetLinkBehaviour) {
+					assetLinkBehaviour.show();
+				}
 			}
 		}
-	);
-</script>
+	}
+
+	showHiddenFields();
+
+	if (selectDisplayStyle) {
+		selectDisplayStyle.on('change', showHiddenFields);
+	}
+</aui:script>

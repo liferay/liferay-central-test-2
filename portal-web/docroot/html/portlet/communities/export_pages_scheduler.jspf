@@ -54,7 +54,7 @@ scheduledPublishEventsURL.setParameter("privateLayout", String.valueOf(privateLa
 scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? DestinationNames.LAYOUTS_LOCAL_PUBLISHER : DestinationNames.LAYOUTS_REMOTE_PUBLISHER);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />schedulePublishEvent() {
 		var oldCmd = document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value;
 
@@ -166,12 +166,8 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 		);
 	}
 
-	AUI().ready(
-		function() {
-			<portlet:namespace />updateScheduledPublishEventsDiv();
-		}
-	);
-</script>
+	<portlet:namespace />updateScheduledPublishEventsDiv();
+</aui:script>
 
 <aui:input name="jobName" type="hidden" />
 

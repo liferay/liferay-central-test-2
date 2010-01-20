@@ -165,7 +165,7 @@ if (Validator.isNull(redirect)) {
 	<br />
 </c:if>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />changeFormat(formatSel) {
 		if (window.<portlet:namespace />editor) {
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
@@ -208,7 +208,7 @@ if (Validator.isNull(redirect)) {
 		document.<portlet:namespace />fm.<portlet:namespace />saveAndContinue.value = "true";
 		<portlet:namespace />savePage();
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL var="editPageActionURL">
 	<portlet:param name="struts_action" value="/wiki/edit_page" />
@@ -388,11 +388,11 @@ if (Validator.isNull(redirect)) {
 </aui:form>
 
 <c:if test="<%= editable && !preview %>">
-	<script type="text/javascript">
+	<aui:script>
 		if (!window.<portlet:namespace />editor) {
 			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= editTitle ? "title" : "content" %>);
 		}
-	</script>
+	</aui:script>
 </c:if>
 
 <%

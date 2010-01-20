@@ -92,7 +92,7 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />createSelectFileEntryURL(url) {
 		url += '&<portlet:namespace />groupId='+ document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value;
 		url += '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value;
@@ -139,7 +139,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			button.get('parentNode').removeClass('aui-input-disabled');
 		}
 	}
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 

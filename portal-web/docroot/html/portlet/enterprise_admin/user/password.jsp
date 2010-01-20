@@ -137,52 +137,48 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 		<aui:input label="answer" name="reminderQueryAnswer" size="50" value="<%= selUser.getReminderQueryAnswer() %>" />
 	</aui:fieldset>
 
-	<script type="text/javascript">
-		AUI().ready(
-			function(A) {
-				var reminderQueryQuestion = A.one('#<portlet:namespace />reminderQueryQuestion');
-				var customQuestionDiv = A.one('#<portlet:namespace />customQuestionDiv');
+	<aui:script use="event,node">
+		var reminderQueryQuestion = A.one('#<portlet:namespace />reminderQueryQuestion');
+		var customQuestionDiv = A.one('#<portlet:namespace />customQuestionDiv');
 
-				if (<%= !hasCustomQuestion %> && customQuestionDiv) {
-					customQuestionDiv.hide();
-				}
+		if (<%= !hasCustomQuestion %> && customQuestionDiv) {
+			customQuestionDiv.hide();
+		}
 
-				if (reminderQueryQuestion) {
-					reminderQueryQuestion.on(
-						'change',
-						function(event) {
-							if (event.target.val() == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
-								var reminderQueryCustomQuestion = A.one('#<portlet:namespace />reminderQueryCustomQuestion');
+		if (reminderQueryQuestion) {
+			reminderQueryQuestion.on(
+				'change',
+				function(event) {
+					if (event.target.val() == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
+						var reminderQueryCustomQuestion = A.one('#<portlet:namespace />reminderQueryCustomQuestion');
 
-								if (customQuestionDiv) {
-									customQuestionDiv.show();
-								}
-
-								<%
-								for (String question : PropsValues.USERS_REMINDER_QUERIES_QUESTIONS) {
-								%>
-
-									if (reminderQueryCustomQuestion && (reminderQueryCustomQuestion.val() == '<%= UnicodeFormatter.toString(question) %>')) {
-										reminderQueryCustomQuestion.val('');
-									}
-
-								<%
-								}
-								%>
-
-								Liferay.Util.focusFormField(reminderQueryCustomQuestion);
-							}
-							else{
-								if (customQuestionDiv) {
-									customQuestionDiv.hide();
-								}
-
-								Liferay.Util.focusFormField(A.one('#<portlet:namespace />reminderQueryAnswer'));
-							}
+						if (customQuestionDiv) {
+							customQuestionDiv.show();
 						}
-					);
+
+						<%
+						for (String question : PropsValues.USERS_REMINDER_QUERIES_QUESTIONS) {
+						%>
+
+							if (reminderQueryCustomQuestion && (reminderQueryCustomQuestion.val() == '<%= UnicodeFormatter.toString(question) %>')) {
+								reminderQueryCustomQuestion.val('');
+							}
+
+						<%
+						}
+						%>
+
+						Liferay.Util.focusFormField(reminderQueryCustomQuestion);
+					}
+					else{
+						if (customQuestionDiv) {
+							customQuestionDiv.hide();
+						}
+
+						Liferay.Util.focusFormField(A.one('#<portlet:namespace />reminderQueryAnswer'));
+					}
 				}
-			}
-		);
-	</script>
+			);
+		}
+	</aui:script>
 </c:if>

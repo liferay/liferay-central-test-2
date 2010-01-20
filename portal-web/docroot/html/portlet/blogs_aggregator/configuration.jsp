@@ -43,7 +43,7 @@ if (organizationId > 0) {
 	<portlet:param name="tabs1" value="organizations" />
 </portlet:renderURL>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />openOrganizationSelector() {
 		var organizationWindow = window.open('<%= organizationSelectorURL %>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
 
@@ -69,7 +69,7 @@ if (organizationId > 0) {
 
 		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = false;
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
@@ -136,25 +136,21 @@ if (organizationId > 0) {
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			var selectionMethod = A.one('#<portlet:namespace />selectionMethod');
+<aui:script use="event,node">
+	var selectionMethod = A.one('#<portlet:namespace />selectionMethod');
 
-			function showHiddenFields() {
-				var usersSelectionOptions = A.one('#<portlet:namespace />UsersSelectionOptions');
+	function showHiddenFields() {
+		var usersSelectionOptions = A.one('#<portlet:namespace />UsersSelectionOptions');
 
-				if (selectionMethod.val() == 'users') {
-					usersSelectionOptions.show();
-				}
-				else {
-					usersSelectionOptions.hide();
-				}
-			}
-
-			showHiddenFields();
-
-			selectionMethod.on('change', showHiddenFields);
+		if (selectionMethod.val() == 'users') {
+			usersSelectionOptions.show();
 		}
-	);
-</script>
+		else {
+			usersSelectionOptions.hide();
+		}
+	}
+
+	showHiddenFields();
+
+	selectionMethod.on('change', showHiddenFields);
+</aui:script>

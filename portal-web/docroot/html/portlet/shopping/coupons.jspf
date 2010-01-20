@@ -31,7 +31,7 @@ portletURL.setParameter("struts_action", "/shopping/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />deleteCoupons() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-coupons") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
@@ -39,7 +39,7 @@ portletURL.setParameter("tabs1", tabs1);
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_coupon" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
 		}
 	}
-</script>
+</aui:script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />

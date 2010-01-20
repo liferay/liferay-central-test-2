@@ -390,7 +390,7 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 	<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deletePage();" />
 </c:if>
 
-<script type="text/javascript">
+<aui:script>
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
 	</c:if>
@@ -513,20 +513,17 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 			}
 		}
 	}
+</aui:script>
 
-	AUI().use(
-		'aui-base',
-		function(A) {
-			<portlet:namespace />toggleLayoutTypeFields('<%= selLayout.getType() %>');
+<aui:script use="aui-base,event,node">
+	<portlet:namespace />toggleLayoutTypeFields('<%= selLayout.getType() %>');
 
-			<portlet:namespace />updateLanguageTemps(lastLanguageId);
+	<portlet:namespace />updateLanguageTemps(lastLanguageId);
 
-			A.one("#<portlet:namespace />type").on(
-				'change',
-				function(event) {
-					<portlet:namespace />toggleLayoutTypeFields(event.currentTarget.val());
-				}
-			);
+	A.one("#<portlet:namespace />type").on(
+		'change',
+		function(event) {
+			<portlet:namespace />toggleLayoutTypeFields(event.currentTarget.val());
 		}
-	)
-</script>
+	);
+</aui:script>

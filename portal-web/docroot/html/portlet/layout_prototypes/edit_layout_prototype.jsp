@@ -44,12 +44,12 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 Locale[] locales = LanguageUtil.getAvailableLocales();
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveLayoutPrototype() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= layoutPrototype == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" /></portlet:actionURL>");
 	}
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/layout_prototypes/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= layoutPrototype.isNew() ? "add" : "view-all" %>' />
@@ -90,9 +90,9 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

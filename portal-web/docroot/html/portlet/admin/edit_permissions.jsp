@@ -37,11 +37,11 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />invoke(link) {
 		submitForm(document.<portlet:namespace />fm, link);
 	}
-</script>
+</aui:script>
 
 <form method="post" name="<portlet:namespace />fm">
 

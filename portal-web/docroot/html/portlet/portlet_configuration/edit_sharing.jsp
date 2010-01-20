@@ -83,9 +83,9 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 
 				<liferay-util:buffer var="textAreaContent">
 <script src="<%= themeDisplay.getPortalURL() %><%= themeDisplay.getPathContext() %>/html/js/liferay/widget.js" type="text/javascript"></script>
-<script type="text/javascript">
+<aui:script>
 	Liferay.Widget({ url: '<%= widgetURL %>'});
-</script>
+</aui:script>
 				</liferay-util:buffer>
 
 				<aui:input type="textarea" cssClass="lfr-textarea-container" label="" name="example" onClick="Liferay.Util.selectAndCopy(this);" value="<%= textAreaContent %>" />

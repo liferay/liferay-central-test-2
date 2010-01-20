@@ -22,17 +22,15 @@
  */
 %>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			var selectedPages = A.one('#<portlet:namespace />scope_selected_pages');
+<aui:script use="node">
+	var selectedPages = A.one('#<portlet:namespace />scope_selected_pages');
 
-			if (selectedPages && selectedPages.get('checked') && <%= !publish %>) {
-				<portlet:namespace />hideTabs();
-			}
-		}
-	);
+	if (selectedPages && selectedPages.get('checked') && <%= !publish %>) {
+		<portlet:namespace />hideTabs();
+	}
+</aui:script>
 
+<aui:script>
 	function <portlet:namespace />hideTabs() {
 		var optionsTab = AUI().one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
 		var schedulerTab = AUI().one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
@@ -68,7 +66,7 @@
 			remoteOptionsTab.show();
 		}
 	}
-</script>
+</aui:script>
 
 <aui:fieldset style='<%= (proposalId > 0) ? "display: none;" : "" %>'>
 	<aui:legend label="scope" />

@@ -45,7 +45,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 request.setAttribute("view.jsp-portletURLString", portletURLString);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />deleteOrganization(organizationId) {
 		<portlet:namespace />doDeleteOrganizationOrUserGroup('<%= Organization.class.getName() %>', organizationId);
 	}
@@ -217,7 +217,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company" /></portlet:actionURL>");
 	}
-</script>
+</aui:script>
 
 <aui:form action="<%= portletURLString %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />

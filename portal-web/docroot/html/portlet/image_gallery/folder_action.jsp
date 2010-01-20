@@ -191,42 +191,33 @@ if (row == null) {
 	<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 </portlet:renderURL>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			A.on(
-				'click',
-				function(event) {
-					var slideShowWindow = window.open('<%= viewSlideShowURL %>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
-					slideShowWindow.focus();
-				},
-				'.<%= randomNamespace %>-slide-show'
-			);
-		}
+<aui:script use="dialog">
+	A.on(
+		'click',
+		function(event) {
+			var slideShowWindow = window.open('<%= viewSlideShowURL %>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
+			slideShowWindow.focus();
+		},
+		'.<%= randomNamespace %>-slide-show'
 	);
 
-	AUI().ready(
-		'dialog',
-		function(A) {
-			A.on(
-				'click',
-				function(event) {
-					var popup = new A.Dialog(
-						{
-							bodyContent: A.get('#<%= randomNamespace %>webDav').html(),
-							centered: true,
-							destroyOnClose: true,
-							modal: true,
-							title: '<liferay-ui:message key="access-from-my-desktop" />',
-							width: 500
-						}
-					)
-					.render();
+	A.on(
+		'click',
+		function(event) {
+			var popup = new A.Dialog(
+				{
+					bodyContent: A.get('#<%= randomNamespace %>webDav').html(),
+					centered: true,
+					destroyOnClose: true,
+					modal: true,
+					title: '<liferay-ui:message key="access-from-my-desktop" />',
+					width: 500
+				}
+			)
+			.render();
 
-					event.preventDefault();
-				},
-				'.<%= randomNamespace %>-webdav-action'
-			);
-		}
+			event.preventDefault();
+		},
+		'.<%= randomNamespace %>-webdav-action'
 	);
-</script>
+</aui:script>

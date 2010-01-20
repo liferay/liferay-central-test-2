@@ -24,16 +24,20 @@
 
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
-<script type="text/javascript">
+<%
+IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
+
+long folderId = (folder == null) ? 0 : folder.getFolderId();
+
+List images = IGImageServiceUtil.getImages(scopeGroupId, folderId);
+
+int defaultSpeed = 3000;
+%>
+
+<aui:script>
 	var <portlet:namespace />imgArray = new Array();
 
 	<%
-	IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
-
-	long folderId = (folder == null) ? 0 : folder.getFolderId();
-
-	List images = IGImageServiceUtil.getImages(scopeGroupId, folderId);
-
 	for	(int i = 0; i < images.size(); i++) {
 		IGImage image = (IGImage)images.get(i);
 	%>
@@ -42,8 +46,6 @@
 
 	<%
 	}
-
-	int defaultSpeed = 3000;
 	%>
 
 	var <portlet:namespace />imgArrayPos = 0
@@ -80,7 +82,7 @@
 
 		document.images.<portlet:namespace />slideShow.src = <portlet:namespace />imgArray[<portlet:namespace />imgArrayPos];
 	}
-</script>
+</aui:script>
 
 <aui:form>
 	<aui:fieldset>
@@ -109,9 +111,9 @@
 	</aui:fieldset>
 </aui:form>
 
-<script type="text/javascript">
+<aui:script>
 	<portlet:namespace />play();
-</script>
+</aui:script>
 
 <br />
 

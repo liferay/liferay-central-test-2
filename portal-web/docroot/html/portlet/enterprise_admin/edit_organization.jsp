@@ -51,7 +51,7 @@ String[][] categorySections = {mainSections, identificationSections, miscellaneo
 String curSection = mainSections[0];
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />createURL(href, value, onclick) {
 		return '<a href="' + href + '"' + (onclick ? ' onclick="' + onclick + '" ' : '') + '>' + value + '</a>';
 	};
@@ -69,7 +69,7 @@ String curSection = mainSections[0];
 
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add" : "view-all" %>' />
@@ -149,9 +149,9 @@ String curSection = mainSections[0];
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

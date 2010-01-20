@@ -95,7 +95,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 	<liferay-ui:message key="filter-by-structure" />: <%= displayTerms.getStructureId() %><br />
 </c:if>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addTemplate() {
 		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="structureId" value="<%= displayTerms.getStructureId() %>" /></portlet:renderURL>';
 
@@ -114,4 +114,4 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.TEMPLATE_ID %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
 	</c:if>
-</script>
+</aui:script>

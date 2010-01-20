@@ -82,7 +82,7 @@ else {
 int priceId = ParamUtil.getInteger(request, "priceId", -1);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addField() {
 		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />fields";
 		document.<portlet:namespace />fm.<portlet:namespace />fieldsCount.value = <%= fieldsCount + 1 %>;
@@ -157,7 +157,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
 		nameEl.innerHTML = categoryName + "&nbsp;";
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveItem(); return false;">
 <input name="scroll" type="hidden" value="" />

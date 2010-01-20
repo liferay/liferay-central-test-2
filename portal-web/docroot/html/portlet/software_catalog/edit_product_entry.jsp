@@ -57,7 +57,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", productScreenshots.size());
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addScreenShot() {
 		document.<portlet:namespace />fm.<portlet:namespace />screenshotsCount.value = "<%= screenshotsCount + 1 %>";
 		submitForm(document.<portlet:namespace />fm);
@@ -72,7 +72,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= productEntry == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" enctype="multipart/form-data" onSubmit="<portlet:namespace />saveProductEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
@@ -326,9 +326,9 @@ for (int i = 0; i < screenshotsCount; i++) {
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

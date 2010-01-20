@@ -92,7 +92,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 	</div>
 </c:if>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addStructure() {
 		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
 
@@ -111,4 +111,4 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.STRUCTURE_ID %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
 	</c:if>
-</script>
+</aui:script>

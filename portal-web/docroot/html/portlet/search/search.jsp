@@ -43,7 +43,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 String format = ParamUtil.getString(request, "format");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />search() {
 		var keywords = document.<portlet:namespace />fm.<portlet:namespace />keywords.value;
 
@@ -53,7 +53,7 @@ String format = ParamUtil.getString(request, "format");
 			document.<portlet:namespace />fm.submit();
 		}
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />search(); return false;">
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
@@ -338,9 +338,9 @@ for (int i = 0; i < portlets.size(); i++) {
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

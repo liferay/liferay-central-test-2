@@ -75,7 +75,7 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />isbns);
-	</script>
+	</aui:script>
 </c:if>

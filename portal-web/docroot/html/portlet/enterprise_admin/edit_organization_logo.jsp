@@ -42,14 +42,10 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 		}
 		%>
 
-		<script type="text/javascript">
-			AUI().ready(
-				function() {
-					window.close();
-					opener.<portlet:namespace />changeLogo('<%= logoURL %>');
-				}
-			);
-		</script>
+		<aui:script>
+			window.close();
+			opener.<portlet:namespace />changeLogo('<%= logoURL %>');
+		</aui:script>
 	</c:when>
 	<c:otherwise>
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationLogoURL">
@@ -74,9 +70,9 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 		</aui:form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-			<script type="text/javascript">
+			<aui:script>
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fileName);
-			</script>
+			</aui:script>
 		</c:if>
 	</c:otherwise>
 </c:choose>

@@ -62,7 +62,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />copyFromLive() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-copy-from-live-and-update-the-existing-staging-portlet-information") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "copy_from_live";
@@ -114,7 +114,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 			);
 		}
 	}
-</script>
+</aui:script>
 
 <c:choose>
 	<c:when test="<%= supportsLAR || supportsSetup %>">
@@ -290,7 +290,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 											}
 											%>
 
-											<script type="text/javascript">
+											<aui:script>
 												function <portlet:namespace />proposePublication() {
 													Liferay.LayoutExporter.proposeLayout(
 														{
@@ -301,7 +301,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 														}
 													);
 												}
-											</script>
+											</aui:script>
 
 											<aui:button-row>
 												<aui:button onClick='<%= renderResponse.getNamespace() + "proposePublication();" %>' value="propose-publication" />
@@ -328,45 +328,40 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 			</c:choose>
 		</aui:form>
 
-		<script type="text/javascript">
-			AUI().ready(
-				'selector-css3',
-				function(A) {
-					var toggleHandlerControl = function(item, index, collection) {
-						var container = item.ancestor('.<portlet:namespace />handler-control').one('ul');
+		<aui:script use="selector-css3">
+			var toggleHandlerControl = function(item, index, collection) {
+				var container = item.ancestor('.<portlet:namespace />handler-control').one('ul');
 
-						if (container) {
-							var action = 'hide';
+				if (container) {
+					var action = 'hide';
 
-							if (item.get('checked')) {
-								action = 'show';
-							}
-
-							container[action]();
-						}
-					};
-
-					var checkboxes = A.all('.<portlet:namespace />handler-control input[type=checkbox]');
-
-					if (checkboxes) {
-						var uncheckedBoxes = checkboxes.filter(':not(:checked)');
-
-						if (uncheckedBoxes) {
-							uncheckedBoxes.each(toggleHandlerControl);
-						}
-
-						checkboxes.detach('click');
-
-						checkboxes.on(
-							'click',
-							function(event) {
-								toggleHandlerControl(event.currentTarget);
-							}
-						);
+					if (item.get('checked')) {
+						action = 'show';
 					}
+
+					container[action]();
 				}
-			);
-		</script>
+			};
+
+			var checkboxes = A.all('.<portlet:namespace />handler-control input[type=checkbox]');
+
+			if (checkboxes) {
+				var uncheckedBoxes = checkboxes.filter(':not(:checked)');
+
+				if (uncheckedBoxes) {
+					uncheckedBoxes.each(toggleHandlerControl);
+				}
+
+				checkboxes.detach('click');
+
+				checkboxes.on(
+					'click',
+					function(event) {
+						toggleHandlerControl(event.currentTarget);
+					}
+				);
+			}
+		</aui:script>
 
 	</c:when>
 	<c:otherwise>

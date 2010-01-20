@@ -80,7 +80,7 @@ xsd = StringUtil.replace(xsd, StringPool.DOUBLE_SPACE, StringPool.BLANK);
 int tabIndex = 1;
 %>
 
-<script type="text/javascript">
+<aui:script>
 	var xmlIndent = "<%= StringPool.DOUBLE_SPACE %>";
 
 	function <portlet:namespace />downloadStructureContent() {
@@ -260,7 +260,7 @@ int tabIndex = 1;
 
 		document.getElementById("<portlet:namespace />removeParentStructureButton").disabled = false;
 	}
-</script>
+</aui:script>
 
 <form method="post" name="<portlet:namespace />fm2">
 <input name="xml" type="hidden" value="" />
@@ -486,7 +486,7 @@ tabIndex = tabIndexWrapper.getValue();
 
 </form>
 
-<script type="text/javascript">
+<aui:script>
 	Liferay.Util.inlineEditor(
 		{
 			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>',
@@ -505,7 +505,7 @@ tabIndex = tabIndexWrapper.getValue();
 			</c:otherwise>
 		</c:choose>
 	</c:if>
-</script>
+</aui:script>
 
 <%!
 private void _format(Element root, IntegerWrapper count, Integer depth, IntegerWrapper tabIndex, PageContext pageContext, HttpServletRequest request) throws Exception {

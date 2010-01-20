@@ -34,7 +34,7 @@ order = order.toEscapedModel();
 long orderId = BeanParamUtil.getLong(order, request, "orderId");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />deleteOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= HtmlUtil.escape(redirect) %>";
@@ -51,7 +51,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 		document.<portlet:namespace />fm.<portlet:namespace />emailType.value = emailType;
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />

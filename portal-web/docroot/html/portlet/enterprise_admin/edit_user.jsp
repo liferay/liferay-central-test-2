@@ -165,7 +165,7 @@ String[][] categorySections = {mainSections, identificationSections, miscellaneo
 String curSection = mainSections[0];
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />createURL(href, value, onclick) {
 		return '<a href="' + href + '"' + (onclick ? ' onclick="' + onclick + '" ' : '') + '>' + value + '</a>';
 	};
@@ -183,7 +183,7 @@ String curSection = mainSections[0];
 
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:actionURL>");
 	}
-</script>
+</aui:script>
 
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">
@@ -297,9 +297,9 @@ if (selUser != null) {
 %>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />screenName);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

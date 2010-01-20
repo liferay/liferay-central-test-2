@@ -103,7 +103,7 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 	<aui:input label="" name="reminderQueries_temp" onChange='<%= renderResponse.getNamespace() + "onReminderQueriesChanged();" %>' type="textarea" />
 </aui:fieldset>
 
-<script type="text/javascript">
+<aui:script>
 	var reminderQueriesChanged = false;
 	var lastLanguageId = "<%= currentLanguageId %>";
 
@@ -185,4 +185,4 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 			<portlet:namespace />updateReminderQueriesLanguage();
 		}
 	);
-</script>
+</aui:script>

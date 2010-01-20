@@ -26,14 +26,10 @@
 
 <c:choose>
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
-		<script type="text/javascript">
-			AUI().ready(
-				function() {
-					window.close();
-					opener.<portlet:namespace />changeLogo('<%= themeDisplay.getPathImage() + "/company_logo?img_id=" + company.getLogoId() + "&t=" + ImageServletTokenUtil.getToken(company.getLogoId()) %>');
-				}
-			);
-		</script>
+		<aui:script>
+			window.close();
+			opener.<portlet:namespace />changeLogo('<%= themeDisplay.getPathImage() + "/company_logo?img_id=" + company.getLogoId() + "&t=" + ImageServletTokenUtil.getToken(company.getLogoId()) %>');
+		</aui:script>
 	</c:when>
 	<c:otherwise>
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editCompanyLogoURL">
@@ -55,9 +51,9 @@
 		</aui:form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-			<script type="text/javascript">
+			<aui:script>
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fileName);
-			</script>
+			</aui:script>
 		</c:if>
 	</c:otherwise>
 </c:choose>

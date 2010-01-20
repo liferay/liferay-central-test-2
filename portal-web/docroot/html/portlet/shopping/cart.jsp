@@ -34,9 +34,11 @@ Map items = cart.getItems();
 ShoppingCoupon coupon = cart.getCoupon();
 
 boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SHOPPING_CART_MIN_QTY_MULTIPLE);
+
+Iterator itr = items.entrySet().iterator();
 %>
 
-<script type="text/javascript">
+<aui:script position="inline">
 	var itemsInStock = true;
 
 	function <portlet:namespace />checkout() {
@@ -70,8 +72,6 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 		var count = 0;
 
 		<%
-		Iterator itr = items.entrySet().iterator();
-
 		for (int i = 0; itr.hasNext(); i++) {
 			Map.Entry entry = (Map.Entry)itr.next();
 
@@ -95,7 +95,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 		document.<portlet:namespace />fm.<portlet:namespace />itemIds.value = itemIds;
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCart(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />

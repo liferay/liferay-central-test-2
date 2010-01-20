@@ -68,10 +68,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			Liferay.Util.toggleBoxes('<portlet:namespace />showListedCheckbox','<portlet:namespace />webContentDisplay');
-		}
-	);
-</script>
+<aui:script>
+	Liferay.Util.toggleBoxes('<portlet:namespace />showListedCheckbox','<portlet:namespace />webContentDisplay');
+</aui:script>

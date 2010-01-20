@@ -57,7 +57,7 @@ for (int i = 0; i < urls.length; i++) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	AUI().ready(
 		function(A) {
 			var minusAlt = '<liferay-ui:message key="collapse" />';
@@ -93,7 +93,7 @@ for (int i = 0; i < urls.length; i++) {
 			);
 		}
 	);
-</script>
+</aui:script>
 
 <c:if test="<%= footerArticleResourcePrimKey > 0 %>">
 	<liferay-ui:journal-article articleResourcePrimKey="<%= footerArticleResourcePrimKey %>" />

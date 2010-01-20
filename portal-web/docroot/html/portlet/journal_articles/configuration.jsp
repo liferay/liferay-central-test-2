@@ -49,7 +49,7 @@ if (Validator.isNotNull(structureId)) {
 
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />removeStructure() {
 		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
 
@@ -61,7 +61,7 @@ if (Validator.isNotNull(structureId)) {
 
 		AUI().one('#<portlet:namespace/>structure').html(structureId);
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 

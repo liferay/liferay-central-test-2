@@ -34,7 +34,7 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId");
 long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId", ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />removeCategory() {
 		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>";
 
@@ -76,7 +76,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 			}
 		}
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_category" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCategory(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
@@ -196,7 +196,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
+	</aui:script>
 </c:if>

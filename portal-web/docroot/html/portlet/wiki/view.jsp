@@ -103,20 +103,20 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 
 <c:choose>
 	<c:when test="<%= print %>">
-		<script type="text/javascript">
+		<aui:script>
 			print();
-		</script>
+		</aui:script>
 
 		<div class="popup-print">
 			<liferay-ui:icon image="print" url="javascript:print();" label="<%= true %>" />
 		</div>
 	</c:when>
 	<c:otherwise>
-		<script type="text/javascript">
+		<aui:script>
 			function <portlet:namespace />printPage() {
 				window.open('<%= printPageURL %>', '', "directories=0,height=480,left=80,location=1,menubar=1,resizable=1,scrollbars=yes,status=0,toolbar=0,top=180,width=640");
 			}
-		</script>
+		</aui:script>
 	</c:otherwise>
 </c:choose>
 
@@ -299,9 +299,9 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 </c:if>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

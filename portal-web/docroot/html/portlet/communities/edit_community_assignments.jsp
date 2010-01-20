@@ -59,7 +59,7 @@ request.setAttribute("edit_community_assignments.jsp-selUser", selUser);
 request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />updateGroupOrganizations(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_organizations";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
@@ -91,7 +91,7 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 		document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
 	}
-</script>
+</aui:script>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />

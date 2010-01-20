@@ -83,43 +83,39 @@ if (queryLogicIndex >= 0) {
 	</div>
 </div>
 
-<script type="text/javascript">
-	AUI().ready(
-		function (A) {
-			var select = A.one('#<portlet:namespace /><%= randomNamespace %>selector');
+<aui:script use="event,node">
+	var select = A.one('#<portlet:namespace /><%= randomNamespace %>selector');
 
-			if (select) {
-				var row = select.ancestor('.query-row');
+	if (select) {
+		var row = select.ancestor('.query-row');
 
-				if (row) {
-					select.on(
-						'change',
-						function(event) {
-							var tagsSelector = row.one('.tags-selector');
-							var categoriesSelector = row.one('.categories-selector');
+		if (row) {
+			select.on(
+				'change',
+				function(event) {
+					var tagsSelector = row.one('.tags-selector');
+					var categoriesSelector = row.one('.categories-selector');
 
-							if (select.val() == 'assetTags') {
-								if (tagsSelector) {
-									tagsSelector.show();
-								}
-
-								if (categoriesSelector) {
-									categoriesSelector.hide();
-								}
-							}
-							else {
-								if (tagsSelector) {
-									tagsSelector.hide();
-								}
-
-								if (categoriesSelector) {
-									categoriesSelector.show();
-								}
-							}
+					if (select.val() == 'assetTags') {
+						if (tagsSelector) {
+							tagsSelector.show();
 						}
-					);
+
+						if (categoriesSelector) {
+							categoriesSelector.hide();
+						}
+					}
+					else {
+						if (tagsSelector) {
+							tagsSelector.hide();
+						}
+
+						if (categoriesSelector) {
+							categoriesSelector.show();
+						}
+					}
 				}
-			}
+			);
 		}
-	);
-</script>
+	}
+</aui:script>

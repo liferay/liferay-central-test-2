@@ -171,41 +171,39 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 		<input type="submit" value="<liferay-ui:message key="add-page" />" /><br />
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-			<script type="text/javascript">
-				AUI().ready(
-					function() {
-						<c:if test="<%= !layoutPrototypes.isEmpty() %>">
-							var layoutPrototypeIdSelect = AUI().one('#<portlet:namespace />layoutPrototypeId');
+			<c:if test="<%= !layoutPrototypes.isEmpty() %>">
+				<aui:script use="event,node">
+					var layoutPrototypeIdSelect = A.one('#<portlet:namespace />layoutPrototypeId');
 
-							function showHiddenFields() {
-								var hiddenFields = AUI().all('.hidden-field');
+					function showHiddenFields() {
+						var hiddenFields = A.all('.hidden-field');
 
-								hiddenFields.hide();
+						hiddenFields.hide();
 
-								if (layoutPrototypeIdSelect && layoutPrototypeIdSelect.val() == '') {
-									hiddenFields.show();
-								}
-								else {
-									hiddenFields.hide();
-								}
-							}
-
-							showHiddenFields();
-
-							if (layoutPrototypeIdSelect) {
-								layoutPrototypeIdSelect.on(
-									'change',
-									function(event) {
-										showHiddenFields();
-									}
-								);
-							}
-						</c:if>
-
-						Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
+						if (layoutPrototypeIdSelect && layoutPrototypeIdSelect.val() == '') {
+							hiddenFields.show();
+						}
+						else {
+							hiddenFields.hide();
+						}
 					}
-				);
-			</script>
+
+					showHiddenFields();
+
+					if (layoutPrototypeIdSelect) {
+						layoutPrototypeIdSelect.on(
+							'change',
+							function(event) {
+								showHiddenFields();
+							}
+						);
+					}
+				</aui:script>
+			</c:if>
+
+			<aui:script>
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
+			</aui:script>
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs4.equals("display-order") %>'>

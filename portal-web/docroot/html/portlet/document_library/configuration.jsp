@@ -34,7 +34,7 @@ if (portletResource.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />openFolderSelector() {
 		var folderWindow = window.open('<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/select_folder" %>' /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=830');
 
@@ -65,7 +65,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		nameEl.href = "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
 		nameEl.innerHTML = rootFolderName + "&nbsp;";
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 

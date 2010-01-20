@@ -117,7 +117,7 @@ portletURL.setParameter("name", name);
 request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />compare() {
 		AUI().use(
 			'selector-css3',
@@ -178,20 +178,18 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			}
 		);
 	}
+</aui:script>
 
-	AUI().ready(
-		function() {
-			<portlet:namespace />initRowsChecked();
+<aui:script use="event,node">
+	<portlet:namespace />initRowsChecked();
 
-			AUI().all('input[name=<portlet:namespace />rowIds]').on(
-				'click',
-				function(event) {
-					<portlet:namespace />updateRowsChecked(event.currentTarget);
-				}
-			);
+	A.all('input[name=<portlet:namespace />rowIds]').on(
+		'click',
+		function(event) {
+			<portlet:namespace />updateRowsChecked(event.currentTarget);
 		}
 	);
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 

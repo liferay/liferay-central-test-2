@@ -40,12 +40,12 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />selectDistributionScope(distributionScope) {
 		var url = "<%= portletURL.toString() %>&<portlet:namespace />distributionScope=" + distributionScope;
 		submitForm(document.<portlet:namespace />fm, url);
 	}
-</script>
+</aui:script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;" />
 

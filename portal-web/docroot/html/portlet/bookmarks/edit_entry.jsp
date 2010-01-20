@@ -36,7 +36,7 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />removeFolder() {
 		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = "<%= rootFolderId %>";
 
@@ -59,7 +59,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId;
 		nameEl.innerHTML = folderName + "&nbsp;";
 	}
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
 
@@ -158,9 +158,9 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

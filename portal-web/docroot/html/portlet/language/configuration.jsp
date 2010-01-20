@@ -28,13 +28,13 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveConfiguration() {
 		document.<portlet:namespace />fm.<portlet:namespace />languageIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentLanguageIds);
 
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 

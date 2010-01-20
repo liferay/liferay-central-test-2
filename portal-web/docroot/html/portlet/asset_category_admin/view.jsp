@@ -200,11 +200,6 @@
 
 </form>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-category-admin',
-		function() {
-			new Liferay.Portlet.AssetCategoryAdmin('<%= portletDisplay.getId() %>');
-		}
-	);
-</script>
+<aui:script use="liferay-category-admin">
+	new Liferay.Portlet.AssetCategoryAdmin('<%= portletDisplay.getId() %>');
+</aui:script>

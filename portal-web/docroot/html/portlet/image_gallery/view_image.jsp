@@ -59,7 +59,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	var maxDimension = <%= PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>;
 
 	function <portlet:namespace />viewImage(id, token, name, description, width, height) {
@@ -122,7 +122,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 			}
 		);
 	}
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
 

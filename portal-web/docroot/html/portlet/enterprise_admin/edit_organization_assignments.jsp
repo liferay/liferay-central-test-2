@@ -57,7 +57,7 @@ request.setAttribute("edit_organization_assignments.jsp-organization", organizat
 request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />updateOrganizationUserGroups(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_user_groups";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
@@ -73,7 +73,7 @@ request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL)
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" />

@@ -269,7 +269,7 @@ String tomcatLibDir = PrefsPropsUtil.getString(PropsKeys.AUTO_DEPLOY_TOMCAT_LIB_
 <input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveDeployConfiguration();" />
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />deployDir);
-	</script>
+	</aui:script>
 </c:if>

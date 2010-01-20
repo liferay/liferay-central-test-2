@@ -59,7 +59,7 @@ searchContainer.setResults(results);
 <%@ include file="/html/portlet/blogs_aggregator/view_entries.jspf" %>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-	</script>
+	</aui:script>
 </c:if>

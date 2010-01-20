@@ -45,7 +45,7 @@ GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTe
 	</c:if>
 </div>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />addGroup() {
 		document.<portlet:namespace />fm.method = 'post';
 		submitForm(document.<portlet:namespace />fm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>');
@@ -54,4 +54,4 @@ GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTe
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
 	</c:if>
-</script>
+</aui:script>

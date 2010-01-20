@@ -102,28 +102,23 @@ for (int i = 0; i < categoryNames.length; i++) {
 }
 %>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-enterprise-admin',
-		function () {
-			var <portlet:namespace />formNavigator = new Liferay.EnterpriseAdmin.FormNavigator(
-				{
-					container: '#<portlet:namespace />sectionsContainer',
-					modifiedSections: '<portlet:namespace />modifiedSections',
-					defaultModifiedSections: <%= JS.toScript(modifiedSections) %>
-				}
-			);
-
-			<%
-			String errorSection = (String)request.getAttribute("errorSection");
-			%>
-
-			<c:if test="<%= Validator.isNotNull(errorSection) %>">
-				<portlet:namespace />formNavigator._revealSection('#<%= errorSection %>', '');
-			</c:if>
+<aui:script use="liferay-enterprise-admin">
+	var <portlet:namespace />formNavigator = new Liferay.EnterpriseAdmin.FormNavigator(
+		{
+			container: '#<portlet:namespace />sectionsContainer',
+			modifiedSections: '<portlet:namespace />modifiedSections',
+			defaultModifiedSections: <%= JS.toScript(modifiedSections) %>
 		}
 	);
-</script>
+
+	<%
+	String errorSection = (String)request.getAttribute("errorSection");
+	%>
+
+	<c:if test="<%= Validator.isNotNull(errorSection) %>">
+		<portlet:namespace />formNavigator._revealSection('#<%= errorSection %>', '');
+	</c:if>
+</aui:script>
 
 <%!
 private String _getSectionId(String name) {

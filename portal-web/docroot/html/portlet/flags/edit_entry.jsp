@@ -44,12 +44,8 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 	}
 </style>
 
-<script type="text/javascript">
-	AUI().ready(
-		function() {
-			Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonContainer');
-		}
-	);
+<aui:script>
+	Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonContainer');
 
 	function <portlet:namespace />flag() {
 		AUI().use(
@@ -106,7 +102,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 			}
 		);
 	}
-</script>
+</aui:script>
 
 <div class="portlet-flags" id="<portlet:namespace />flagsPopup">
 	<form class="aui-form" method="post" name="<portlet:namespace />flagsForm">

@@ -130,7 +130,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	<portlet:namespace/>testSettings = function(type) {
 		var url = null;
 
@@ -393,7 +393,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_USERS_DN + postfix %>)'].value = baseDN;
 		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUPS_DN + postfix %>)'].value = baseDN;
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL var="editLDAPServerURL">
 	<portlet:param name="struts_action" value="/enterprise_admin_settings/edit_ldap_server" />

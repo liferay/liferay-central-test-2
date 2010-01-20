@@ -51,7 +51,7 @@ for (int i = 0; i < values.size(); i++) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />updateItemQuantities() {
 		var itemQuantities = "";
 
@@ -69,7 +69,7 @@ for (int i = 0; i < values.size(); i++) {
 
 		self.close();
 	}
-</script>
+</aui:script>
 
 <form method="post" name="<portlet:namespace />fm">
 

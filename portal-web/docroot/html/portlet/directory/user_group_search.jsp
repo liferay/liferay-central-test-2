@@ -36,8 +36,8 @@ UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getD
 	<input type="submit" value="<liferay-ui:message key="search" />" />
 </div>
 
-<script type="text/javascript">
+<aui:script>
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
 	</c:if>
-</script>
+</aui:script>

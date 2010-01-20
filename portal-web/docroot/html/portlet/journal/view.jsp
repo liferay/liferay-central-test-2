@@ -35,7 +35,7 @@ portletURL.setParameter("struts_action", "/journal/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />deleteArticles() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-web-content") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
@@ -80,7 +80,7 @@ portletURL.setParameter("tabs1", tabs1);
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
 		}
 	}
-</script>
+</aui:script>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />

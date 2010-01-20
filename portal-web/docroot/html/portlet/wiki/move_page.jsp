@@ -41,7 +41,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />changeParent() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "changeParent";
 
@@ -53,7 +53,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL var="movePageURL">
 	<portlet:param name="struts_action" value="/wiki/move_page" />

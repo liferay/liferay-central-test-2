@@ -31,24 +31,19 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 %>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-upload',
-		function() {
-			new Liferay.Upload(
-				{
-					allowedFileTypes: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
-					container: '#<portlet:namespace />fileUpload',
-					fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
-					fallbackContainer: '#<portlet:namespace />fallback',
-					maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %> / 1024,
-					namespace: '<portlet:namespace />',
-					uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/wiki/edit_page_attachment" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= WikiPage.class.getName() %>" />'
-				}
-			);
+<aui:script use="liferay-upload">
+	new Liferay.Upload(
+		{
+			allowedFileTypes: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
+			container: '#<portlet:namespace />fileUpload',
+			fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
+			fallbackContainer: '#<portlet:namespace />fallback',
+			maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %> / 1024,
+			namespace: '<portlet:namespace />',
+			uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/wiki/edit_page_attachment" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= WikiPage.class.getName() %>" />'
 		}
 	);
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
@@ -94,39 +89,35 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 	</div>
 </aui:form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
-			var validateFile = function(fileField) {
-				var value = fileField.val();
+<aui:script use="event,node">
+	var validateFile = function(fileField) {
+		var value = fileField.val();
 
-				if (value) {
-					var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
-					var validExtensions = ['<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), "', '") %>'];
+		if (value) {
+			var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
+			var validExtensions = ['<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), "', '") %>'];
 
-					if ((A.Array.indexOf(validExtensions, '*') == -1) &&
-						(A.Array.indexOf(validExtensions, extension) == -1)) {
+			if ((A.Array.indexOf(validExtensions, '*') == -1) &&
+				(A.Array.indexOf(validExtensions, extension) == -1)) {
 
-						alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>');
+				alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>');
 
-						fileField.val('');
-					}
-				}
-			};
-
-			var onFileChange = function(event) {
-				validateFile(event.currentTarget);
-			};
-
-			for (var i = 1; i < 4; i++) {
-				var fileField = A.one('#<portlet:namespace />file' + i);
-
-				if (fileField) {
-					fileField.on('change', onFileChange);
-
-					validateFile(fileField);
-				}
+				fileField.val('');
 			}
 		}
-	);
-</script>
+	};
+
+	var onFileChange = function(event) {
+		validateFile(event.currentTarget);
+	};
+
+	for (var i = 1; i < 4; i++) {
+		var fileField = A.one('#<portlet:namespace />file' + i);
+
+		if (fileField) {
+			fileField.on('change', onFileChange);
+
+			validateFile(fileField);
+		}
+	}
+</aui:script>

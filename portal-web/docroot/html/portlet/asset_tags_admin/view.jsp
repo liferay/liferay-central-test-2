@@ -140,11 +140,6 @@
 
 </form>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-tags-admin',
-		function(A) {
-			new Liferay.Portlet.AssetTagsAdmin('<%= portletDisplay.getId() %>');
-		}
-	);
-</script>
+<aui:script use="liferay-tags-admin">
+	new Liferay.Portlet.AssetTagsAdmin('<%= portletDisplay.getId() %>');
+</aui:script>

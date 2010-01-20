@@ -86,7 +86,7 @@ double version = ParamUtil.getDouble(request, "version");
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />newArticleId);
-	</script>
+	</aui:script>
 </c:if>

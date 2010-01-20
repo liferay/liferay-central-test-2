@@ -39,7 +39,7 @@ String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CL
 long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />updateWorkflowTask(cmd, transitionName) {
 		AUI().ready(
 			'dialog',
@@ -73,7 +73,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 			}
 		);
 	}
-</script>
+</aui:script>
 
 <h3 class="task-title"><%= workflowTask.getName() %></h3>
 

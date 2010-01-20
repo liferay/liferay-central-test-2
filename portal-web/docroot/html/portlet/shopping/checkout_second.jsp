@@ -39,11 +39,11 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 order = order.toEscapedModel();
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />continueCheckout() {
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SAVE %>" />

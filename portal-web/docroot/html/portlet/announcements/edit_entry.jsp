@@ -54,7 +54,7 @@ if (entry != null) {
 int priority = BeanParamUtil.getInteger(entry, request, "priority");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />previewEntry() {
 		document.<portlet:namespace />fm.action = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/preview_entry" /></portlet:actionURL>';
 		document.<portlet:namespace />fm.target = '_blank';
@@ -68,7 +68,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <form method="post" name="<portlet:namespace/>fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
@@ -230,7 +230,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);
-	</script>
+	</aui:script>
 </c:if>

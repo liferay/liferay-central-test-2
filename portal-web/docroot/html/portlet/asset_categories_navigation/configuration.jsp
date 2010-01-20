@@ -28,7 +28,7 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveConfiguration() {
 		if (document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds) {
 			document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentAssetVocabularyIds);
@@ -37,12 +37,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	AUI().ready(
-		function () {
-			Liferay.Util.toggleSelectBox('<portlet:namespace />allAssetVocabularies', 'false', '<portlet:namespace />assetVocabulariesBoxes');
-		}
-	);
-</script>
+	Liferay.Util.toggleSelectBox('<portlet:namespace />allAssetVocabularies', 'false', '<portlet:namespace />assetVocabulariesBoxes');
+</aui:script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 

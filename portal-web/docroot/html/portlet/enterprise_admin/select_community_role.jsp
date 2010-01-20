@@ -58,13 +58,13 @@ if (step == 1) {
 <aui:form method="post" name="fm">
 	<c:choose>
 		<c:when test="<%= step == 1 %>">
-			<script type="text/javascript">
+			<aui:script>
 				function <portlet:namespace />selectGroup(groupId) {
 					document.<portlet:namespace />fm.<portlet:namespace />groupId.value = groupId;
 
 					submitForm(document.<portlet:namespace />fm, "<%= portletURL.toString() %>");
 				}
-			</script>
+			</aui:script>
 
 			<aui:input name="step" type="hidden" value="2" />
 			<aui:input name="groupId" type="hidden" />
@@ -217,9 +217,9 @@ if (step == 1) {
 				<liferay-ui:search-iterator />
 			</liferay-ui:search-container>
 
-			<script type="text/javascript">
+			<aui:script>
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-			</script>
+			</aui:script>
 		</c:when>
 	</c:choose>
 </aui:form>

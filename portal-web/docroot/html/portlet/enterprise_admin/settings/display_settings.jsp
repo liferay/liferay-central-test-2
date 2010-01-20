@@ -42,7 +42,7 @@ String defaultWapThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.
 String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />changeLogo(newLogoURL) {
 		AUI().one('#<portlet:namespace />avatar').attr('src', newLogoURL);
 		AUI().one('.company-logo').attr('src', newLogoURL);
@@ -80,7 +80,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 			}
 		}
 	);
-</script>
+</aui:script>
 
 <h3><liferay-ui:message key="language-and-time-zone" /></h3>
 

@@ -54,7 +54,7 @@ request.setAttribute("edit_role_assignments.jsp-role", role);
 request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />updateRoleGroups(assignmentsRedirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "role_groups";
 		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
@@ -70,7 +70,7 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />

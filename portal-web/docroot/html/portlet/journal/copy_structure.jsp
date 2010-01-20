@@ -84,7 +84,7 @@ String newStructureId = ParamUtil.getString(request, "newStructureId");
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />newStructureId);
-	</script>
+	</aui:script>
 </c:if>

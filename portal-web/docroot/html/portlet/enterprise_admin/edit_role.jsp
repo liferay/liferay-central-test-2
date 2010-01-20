@@ -54,12 +54,12 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	</liferay-util:include>
 </c:if>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveRole() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
 	}
-</script>
+</aui:script>
 
 <aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveRole(); return false;" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
@@ -154,9 +154,9 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

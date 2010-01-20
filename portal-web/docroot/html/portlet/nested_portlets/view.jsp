@@ -29,23 +29,19 @@
 		<liferay-ui:message key="drag-portlets-below-to-nest-them" />
 	</div>
 
-	<script type="text/javascript">
-		AUI().ready(
-			function(A) {
-				var portletWrapper = A.one('#portlet-wrapper-<%= portletDisplay.getId() %>');
+	<aui:script use="event,node">
+		var portletWrapper = A.one('#portlet-wrapper-<%= portletDisplay.getId() %>');
 
-				if (portletWrapper) {
-					var message = portletWrapper.one('#<portlet:namespace />nested-portlets-msg');
+		if (portletWrapper) {
+			var message = portletWrapper.one('#<portlet:namespace />nested-portlets-msg');
 
-					var nestedPortlet = portletWrapper.one('.portlet, .portlet-borderless-container');
+			var nestedPortlet = portletWrapper.one('.portlet, .portlet-borderless-container');
 
-					if (!nestedPortlet) {
-						message.show();
-					}
-				}
+			if (!nestedPortlet) {
+				message.show();
 			}
-		);
-	</script>
+		}
+	</aui:script>
 </c:if>
 
 <%

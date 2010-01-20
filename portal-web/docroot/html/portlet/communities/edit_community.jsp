@@ -35,12 +35,12 @@ int type = BeanParamUtil.getInteger(group, request, "type");
 String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveGroup() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= group == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-</script>
+</aui:script>
 
 <portlet:actionURL var="editCommunityURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/communities/edit_community" />
@@ -176,9 +176,9 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 </aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
+	</aui:script>
 </c:if>
 
 <%

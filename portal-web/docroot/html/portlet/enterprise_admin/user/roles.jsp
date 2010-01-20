@@ -43,7 +43,7 @@ userGroupRoles.addAll(organizationRoles);
 	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
 </liferay-util:buffer>
 
-<script type="text/javascript">
+<aui:script>
 	var <portlet:namespace />groupRolesGroupIds = ['<%= ListUtil.toString(userGroupRoles, "groupId", "', '") %>'];
 	var <portlet:namespace />groupRolesRoleIds = ['<%= ListUtil.toString(userGroupRoles, "roleId", "', '") %>'];
 
@@ -127,7 +127,7 @@ userGroupRoles.addAll(organizationRoles);
 			}
 		);
 	}
-</script>
+</aui:script>
 
 <aui:input name="groupRolesRoleIds" type="hidden" value='<%= ListUtil.toString(userGroupRoles, "roleId") %>' />
 <aui:input name="groupRolesGroupIds" type="hidden" value='<%= ListUtil.toString(userGroupRoles, "groupId") %>' />
@@ -176,27 +176,22 @@ userGroupRoles.addAll(organizationRoles);
 	/>
 </c:if>
 
-<script type="text/javascript">
-	AUI().ready(
-		'liferay-search-container',
-		function () {
-			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />rolesSearchContainer');
+<aui:script use="liferay-search-container">
+	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />rolesSearchContainer');
 
-			searchContainer.get('contentBox').delegate(
-				'click',
-				function(event) {
-					var link = event.currentTarget;
-					var tr = link.ancestor('tr');
+	searchContainer.get('contentBox').delegate(
+		'click',
+		function(event) {
+			var link = event.currentTarget;
+			var tr = link.ancestor('tr');
 
-					searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
+			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
 
-					<portlet:namespace />trackChanges();
-				},
-				'.modify-link'
-			);
-		}
+			<portlet:namespace />trackChanges();
+		},
+		'.modify-link'
 	);
-</script>
+</aui:script>
 
 <br /><br />
 
@@ -254,32 +249,27 @@ userGroupRoles.addAll(organizationRoles);
 			/>
 		</c:if>
 
-		<script type="text/javascript">
-			AUI().ready(
-				'liferay-search-container',
-				function () {
-					var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />organizationRolesSearchContainer');
+		<aui:script use="liferay-search-container">
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />organizationRolesSearchContainer');
 
-					searchContainer.get('contentBox').delegate(
-						'click',
-						function(event) {
-							var link = event.currentTarget;
-							var tr = link.ancestor('tr');
+			searchContainer.get('contentBox').delegate(
+				'click',
+				function(event) {
+					var link = event.currentTarget;
+					var tr = link.ancestor('tr');
 
-							var rowId = link.getAttribute('data-rowId');
-							var groupId =link.getAttribute('data-groupId');
+					var rowId = link.getAttribute('data-rowId');
+					var groupId =link.getAttribute('data-groupId');
 
-							searchContainer.deleteRow(tr, rowId);
+					searchContainer.deleteRow(tr, rowId);
 
-							<portlet:namespace />deleteGroupRole(rowId, groupId);
+					<portlet:namespace />deleteGroupRole(rowId, groupId);
 
-							<portlet:namespace />trackChanges();
-						},
-						'.modify-link'
-					);
-				}
+					<portlet:namespace />trackChanges();
+				},
+				'.modify-link'
 			);
-		</script>
+		</aui:script>
 	</c:otherwise>
 </c:choose>
 
@@ -339,29 +329,24 @@ userGroupRoles.addAll(organizationRoles);
 			/>
 		</c:if>
 
-		<script type="text/javascript">
-			AUI().ready(
-				'liferay-search-container',
-				function () {
-					var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />communityRolesSearchContainer');
+		<aui:script use="liferay-search-container">
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />communityRolesSearchContainer');
 
-					searchContainer.get('contentBox').delegate(
-						'click',
-						function(event) {
-							var link = event.currentTarget;
-							var tr = link.ancestor('tr');
+			searchContainer.get('contentBox').delegate(
+				'click',
+				function(event) {
+					var link = event.currentTarget;
+					var tr = link.ancestor('tr');
 
-							var rowId = link.getAttribute('data-rowId');
-							var groupId =link.getAttribute('data-groupId');
+					var rowId = link.getAttribute('data-rowId');
+					var groupId =link.getAttribute('data-groupId');
 
-							searchContainer.deleteRow(tr, rowId);
+					searchContainer.deleteRow(tr, rowId);
 
-							<portlet:namespace />deleteGroupRole(rowId, groupId);
-						},
-						'.modify-link'
-					);
-				}
+					<portlet:namespace />deleteGroupRole(rowId, groupId);
+				},
+				'.modify-link'
 			);
-		</script>
+		</aui:script>
 	</c:otherwise>
 </c:choose>

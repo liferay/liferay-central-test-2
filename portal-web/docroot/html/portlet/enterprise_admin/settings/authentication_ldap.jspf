@@ -81,7 +81,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 }
 %>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />changePriority(ldapServer, swapLdapServer) {
 		var ldapServerId = ldapServer.getAttribute('data-ldapServerId');
 		var swapLdapServerId = swapLdapServer.getAttribute('data-ldapServerId');
@@ -122,7 +122,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 			Liferay.Util.toggleBoxes('<portlet:namespace />ldapExportEnabledCheckbox', '<portlet:namespace />exportEnabledSettings');
 		}
 	);
-</script>
+</aui:script>
 
 <aui:fieldset>
 	<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.LDAP_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= ldapAuthEnabled %>" />
@@ -234,7 +234,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 	<aui:input inlineLabel="left" label="use-ldap-password-policy" name='<%= "settings(" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED + ")" %>' type="checkbox" value="<%= ldapPasswordPolicyEnabled %>" />
 </aui:fieldset>
 
-<script type="text/javascript">
+<aui:script>
 	function <portlet:namespace />saveLdap() {
 		var ldapServerIds = [];
 
@@ -246,4 +246,4 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 
 		document.<portlet:namespace />fm['<portlet:namespace />settings(ldap.server.ids)'].value = ldapServerIds.join(',');
 	}
-</script>
+</aui:script>

@@ -53,43 +53,37 @@ catch (Exception e) {
 }
 %>
 
-<script type="text/javascript">
-	AUI().ready(
-		'io-request',
-		'parse-content',
-		function(A) {
-			var form = A.get('#<portlet:namespace />fm');
-			var parentNode = form.get('parentNode');
+<aui:script use="io-request,parse-content">
+	var form = A.get('#<portlet:namespace />fm');
+	var parentNode = form.get('parentNode');
 
-			parentNode.plug(A.Plugin.ParseContent);
+	parentNode.plug(A.Plugin.ParseContent);
 
-			form.on(
-				'submit',
-				function(event) {
-					var uri = form.getAttribute('action');
+	form.on(
+		'submit',
+		function(event) {
+			var uri = form.getAttribute('action');
 
-					A.io.request(
-						uri,
-						{
-							form: {
-								id: form
-							},
-							on: {
-								success: function(event, id, obj) {
-									var responseData = this.get('responseData');
+			A.io.request(
+				uri,
+				{
+					form: {
+						id: form
+					},
+					on: {
+						success: function(event, id, obj) {
+							var responseData = this.get('responseData');
 
-									parentNode.setContent(responseData);
-								}
-							}
+							parentNode.setContent(responseData);
 						}
-					);
-
-					event.halt();
+					}
 				}
 			);
+
+			event.halt();
 		}
 	);
-</script>
+</aui:script>
 
 <form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/password_generator/view" /></liferay-portlet:renderURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 

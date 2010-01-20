@@ -30,14 +30,10 @@ User selUser = PortalUtil.getSelectedUser(request);
 
 <c:choose>
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
-		<script type="text/javascript">
-			AUI().ready(
-				function() {
-					window.close();
-					opener.<portlet:namespace />changePortrait('<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>');
-				}
-			);
-		</script>
+		<aui:script>
+			window.close();
+			opener.<portlet:namespace />changePortrait('<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>');
+		</aui:script>
 	</c:when>
 	<c:otherwise>
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editUserPortraitURL">
@@ -62,9 +58,9 @@ User selUser = PortalUtil.getSelectedUser(request);
 		</aui:form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-			<script type="text/javascript">
+			<aui:script>
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fileName);
-			</script>
+			</aui:script>
 		</c:if>
 	</c:otherwise>
 </c:choose>

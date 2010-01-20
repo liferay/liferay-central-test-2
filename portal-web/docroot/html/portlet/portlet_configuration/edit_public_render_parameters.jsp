@@ -115,38 +115,32 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
-	AUI().ready(
-		function(A) {
+<aui:script use="event,node">
+	<%
+	for (PublicRenderParameterConfiguration publicRenderParameterConfiguration : publicRenderParameterConfigurations) {
+	%>
 
-			<%
-			for (PublicRenderParameterConfiguration publicRenderParameterConfiguration : publicRenderParameterConfigurations) {
-			%>
+		var checkbox = A.one('#<%= publicRenderParameterConfiguration.getIgnoreKey() %>');
 
-				var checkbox = A.one('#<%= publicRenderParameterConfiguration.getIgnoreKey() %>');
+		if (checkbox) {
+			checkbox.on(
+				'click',
+				function(event) {
+					var select = A.one('#<%= publicRenderParameterConfiguration.getMappingKey() %>');
 
-				if (checkbox) {
-					checkbox.on(
-						'click',
-						function(event) {
-							var select = A.one('#<%= publicRenderParameterConfiguration.getMappingKey() %>');
+					if (select) {
+						var disabled = false;
 
-							if (select) {
-								var disabled = false;
-
-								if (event.currentTarget.get('checked')) {
-									disabled = true;
-								}
-
-								select.set('disabled', disabled);
-							}
+						if (event.currentTarget.get('checked')) {
+							disabled = true;
 						}
-					);
-				}
-			<%
-			}
-			%>
 
+						select.set('disabled', disabled);
+					}
+				}
+			);
 		}
-	);
-</script>
+	<%
+	}
+	%>
+</aui:script>
