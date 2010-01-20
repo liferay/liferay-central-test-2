@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
@@ -106,11 +105,6 @@ public class RemotingServlet extends DispatcherServlet {
 		}
 		catch (Exception e) {
 			throw new ServletException(e);
-		}
-		finally {
-			CompanyThreadLocal.setCompanyId(0);
-			PrincipalThreadLocal.setName(null);
-			PermissionThreadLocal.setPermissionChecker(null);
 		}
 	}
 

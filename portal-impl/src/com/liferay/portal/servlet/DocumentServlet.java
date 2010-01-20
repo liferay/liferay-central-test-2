@@ -120,10 +120,6 @@ public class DocumentServlet extends HttpServlet {
 		catch (Exception e) {
 			PortalUtil.sendError(e, request, response);
 		}
-		finally {
-			PrincipalThreadLocal.setName(null);
-			PermissionThreadLocal.setPermissionChecker(null);
-		}
 	}
 
 	protected void sendFile(

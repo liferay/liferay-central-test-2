@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
@@ -133,15 +132,8 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 			}
 		}
 
-		try {
-			processFilter(
-				ServletAuthorizingFilter.class, request, response, filterChain);
-		}
-		finally {
-			CompanyThreadLocal.setCompanyId(0);
-			PrincipalThreadLocal.setName(null);
-			PermissionThreadLocal.setPermissionChecker(null);
-		}
+		processFilter(
+			ServletAuthorizingFilter.class, request, response, filterChain);
 	}
 
 	private static Log _log =

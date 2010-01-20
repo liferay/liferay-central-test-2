@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -136,11 +135,6 @@ public class TunnelServlet extends HttpServlet {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-		finally {
-			CompanyThreadLocal.setCompanyId(0);
-			PrincipalThreadLocal.setName(null);
-			PermissionThreadLocal.setPermissionChecker(null);
 		}
 
 		if (returnObj != null) {

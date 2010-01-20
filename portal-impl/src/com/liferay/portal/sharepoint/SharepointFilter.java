@@ -233,10 +233,6 @@ public class SharepointFilter extends BasePortalFilter {
 
 			response.flushBuffer();
 		}
-		finally {
-			PrincipalThreadLocal.setName(null);
-			PermissionThreadLocal.setPermissionChecker(null);
-		}
 	}
 
 	protected void setGetHeaders(HttpServletResponse response) {

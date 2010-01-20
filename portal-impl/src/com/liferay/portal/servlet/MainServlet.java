@@ -581,11 +581,7 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected long getCompanyId(HttpServletRequest request) {
-		long companyId = PortalInstances.getCompanyId(request);
-
-		//CompanyThreadLocal.setCompanyId(companyId);
-
-		return companyId;
+		return PortalInstances.getCompanyId(request);
 	}
 
 	protected long loginUser(

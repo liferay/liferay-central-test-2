@@ -108,9 +108,6 @@ public class WebDAVServlet extends HttpServlet {
 			_log.error(e, e);
 		}
 		finally {
-			PrincipalThreadLocal.setName(null);
-			PermissionThreadLocal.setPermissionChecker(null);
-
 			response.setStatus(status);
 
 			if (_log.isInfoEnabled()) {
