@@ -122,6 +122,7 @@ public class ServiceBuilder {
 			String springDynamicDataSourceFileName = "";
 			String springHibernateFileName = "";
 			String springInfrastructureFileName = "";
+			String springShardDataSourceFileName = "";
 			String apiDir = args[5];
 			String implDir = "src";
 			String jsonFileName = args[6];
@@ -141,9 +142,9 @@ public class ServiceBuilder {
 				fileName, hbmFileName, ormFileName, modelHintsFileName,
 				springFileName, springBaseFileName,
 				springDynamicDataSourceFileName, springHibernateFileName,
-				springInfrastructureFileName, apiDir, implDir, jsonFileName,
-				remotingFileName, sqlDir, sqlFileName,
-				sqlIndexesFileName, sqlIndexesPropertiesFileName,
+				springInfrastructureFileName, springShardDataSourceFileName,
+				apiDir, implDir, jsonFileName, remotingFileName, sqlDir,
+				sqlFileName, sqlIndexesFileName, sqlIndexesPropertiesFileName,
 				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
 				propsUtil, pluginName, testDir);
 		}
@@ -157,6 +158,7 @@ public class ServiceBuilder {
 			String springDynamicDataSourceFileName = System.getProperty("service.spring.dynamic.data.source.file");
 			String springHibernateFileName = System.getProperty("service.spring.hibernate.file");
 			String springInfrastructureFileName = System.getProperty("service.spring.infrastructure.file");
+			String springShardDataSourceFileName = System.getProperty("service.spring.shard.data.source.file");
 			String apiDir = System.getProperty("service.api.dir");
 			String implDir = System.getProperty("service.impl.dir");
 			String jsonFileName = System.getProperty("service.json.file");
@@ -176,9 +178,9 @@ public class ServiceBuilder {
 				fileName, hbmFileName, ormFileName, modelHintsFileName,
 				springFileName,	springBaseFileName,
 				springDynamicDataSourceFileName, springHibernateFileName,
-				springInfrastructureFileName, apiDir,
-				implDir, jsonFileName, remotingFileName, sqlDir, sqlFileName,
-				sqlIndexesFileName, sqlIndexesPropertiesFileName,
+				springInfrastructureFileName, springShardDataSourceFileName,
+				apiDir, implDir, jsonFileName, remotingFileName, sqlDir, 
+				sqlFileName, sqlIndexesFileName, sqlIndexesPropertiesFileName,
 				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
 				propsUtil, pluginName, testDir);
 		}
@@ -404,21 +406,22 @@ public class ServiceBuilder {
 		String modelHintsFileName, String springFileName,
 		String springBaseFileName, String springDynamicDataSourceFileName,
 		String springHibernateFileName,	String springInfrastructureFileName,
-		String apiDir, String implDir, String jsonFileName,
-		String remotingFileName, String sqlDir, String sqlFileName,
-		String sqlIndexesFileName, String sqlIndexesPropertiesFileName,
-		String sqlSequencesFileName, boolean autoNamespaceTables,
-		String beanLocatorUtil, String propsUtil, String pluginName,
-		String testDir) {
+		String springShardDataSourceFileName, String apiDir, String implDir,
+		String jsonFileName, String remotingFileName, String sqlDir,
+		String sqlFileName, String sqlIndexesFileName, 
+		String sqlIndexesPropertiesFileName, String sqlSequencesFileName, 
+		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil, 
+		String pluginName, String testDir) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, ormFileName, modelHintsFileName,
 			springFileName, springBaseFileName, springDynamicDataSourceFileName,
-			springHibernateFileName, springInfrastructureFileName, apiDir,
-			implDir, jsonFileName, remotingFileName, sqlDir, sqlFileName,
-			sqlIndexesFileName, sqlIndexesPropertiesFileName,
-			sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
-			propsUtil, pluginName, testDir, true);
+			springHibernateFileName, springInfrastructureFileName,
+			springShardDataSourceFileName, apiDir, implDir, jsonFileName, 
+			remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
+			sqlIndexesPropertiesFileName, sqlSequencesFileName, 
+			autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName, 
+			testDir, true);
 	}
 
 	public ServiceBuilder(
@@ -426,12 +429,12 @@ public class ServiceBuilder {
 		String modelHintsFileName, String springFileName,
 		String springBaseFileName, String springDynamicDataSourceFileName,
 		String springHibernateFileName,	String springInfrastructureFileName,
-		String apiDir, String implDir, String jsonFileName,
-		String remotingFileName, String sqlDir, String sqlFileName,
-		String sqlIndexesFileName, String sqlIndexesPropertiesFileName,
-		String sqlSequencesFileName, boolean autoNamespaceTables,
-		String beanLocatorUtil, String propsUtil, String pluginName,
-		String testDir, boolean build) {
+		String springShardDataSourceFileName, String apiDir, String implDir, 
+		String jsonFileName, String remotingFileName, String sqlDir,
+		String sqlFileName, String sqlIndexesFileName, 
+		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
+		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
+		String pluginName, String testDir, boolean build) {
 
 		_tplBadAliasNames = _getTplProperty(
 			"bad_alias_names", _tplBadAliasNames);
@@ -490,6 +493,8 @@ public class ServiceBuilder {
 			"spring_hibernate_xml", _tplSpringHibernateXml);
 		_tplSpringInfrastructureXml = _getTplProperty(
 			"spring_infrastructure_xml", _tplSpringInfrastructureXml);
+		_tplSpringShardDataSourceXml = _getTplProperty(
+			"spring_shard_data_source_xml", _tplSpringShardDataSourceXml);
 		_tplSpringXml = _getTplProperty("spring_xml", _tplSpringXml);
 
 		try {
@@ -509,6 +514,7 @@ public class ServiceBuilder {
 			_springDynamicDataSourceFileName = springDynamicDataSourceFileName;
 			_springHibernateFileName = springHibernateFileName;
 			_springInfrastructureFileName = springInfrastructureFileName;
+			_springShardDataSourceFileName = springShardDataSourceFileName;
 			_apiDir = apiDir;
 			_implDir = implDir;
 			_jsonFileName = jsonFileName;
@@ -1094,6 +1100,7 @@ public class ServiceBuilder {
 				_createSpringDynamicDataSourceXml();
 				_createSpringHibernateXml();
 				_createSpringInfrastructureXml();
+				_createSpringShardDataSourceXml();
 			}
 		}
 		catch (FileNotFoundException fnfe) {
@@ -1240,8 +1247,9 @@ public class ServiceBuilder {
 				refFileName, _hbmFileName, _ormFileName, _modelHintsFileName,
 				_springFileName, _springBaseFileName,
 				_springDynamicDataSourceFileName, _springHibernateFileName,
-				_springInfrastructureFileName, _apiDir, _implDir, _jsonFileName,
-				_remotingFileName, _sqlDir, _sqlFileName, _sqlIndexesFileName,
+				_springInfrastructureFileName, _springShardDataSourceFileName, 
+				_apiDir, _implDir, _jsonFileName, _remotingFileName, _sqlDir, 
+				_sqlFileName, _sqlIndexesFileName,
 				_sqlIndexesPropertiesFileName, _sqlSequencesFileName,
 				_autoNamespaceTables, _beanLocatorUtil, _propsUtil, _pluginName,
 				_testDir, false);
@@ -3158,6 +3166,22 @@ public class ServiceBuilder {
 		FileUtil.write(ejbFile, content, true);
 	}
 
+	private void _createSpringShardDataSourceXml() throws Exception {
+		if (Validator.isNull(_springShardDataSourceFileName)) {
+			return;
+		}
+
+		// Content
+
+		String content = _processTemplate(_tplSpringShardDataSourceXml);
+
+		// Write file
+
+		File ejbFile = new File(_springShardDataSourceFileName);
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
 	private void _createSpringXml() throws Exception {
 		Map<String, Object> context = _getContext();
 
@@ -4326,6 +4350,8 @@ public class ServiceBuilder {
 		_TPL_ROOT + "spring_hibernate_xml.ftl";
 	private String _tplSpringInfrastructureXml =
 		_TPL_ROOT + "spring_infrastructure_xml.ftl";
+	private String _tplSpringShardDataSourceXml =
+		_TPL_ROOT + "spring_shard_data_source_xml.ftl";
 	private String _tplSpringXml = _TPL_ROOT + "spring_xml.ftl";
 	private Set<String> _badTableNames;
 	private Set<String> _badAliasNames;
@@ -4339,6 +4365,7 @@ public class ServiceBuilder {
 	private String _springDynamicDataSourceFileName;
 	private String _springHibernateFileName;
 	private String _springInfrastructureFileName;
+	private String _springShardDataSourceFileName;
 	private String _apiDir;
 	private String _implDir;
 	private String _jsonFileName;
