@@ -70,7 +70,7 @@ portletURL.setParameter("modelResource", modelResource);
 	<aui:input name="modelResource" type="hidden" value="<%= modelResource %>" />
 
 	<div>
-		<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= PortalUtil.escapeRedirect(redirect) %>"><%= modelResourceName %></aui:a>
+		<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= modelResourceName %></aui:a>
 	</div>
 
 	<br />
