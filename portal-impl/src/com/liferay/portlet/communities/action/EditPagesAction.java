@@ -38,9 +38,11 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -124,8 +126,15 @@ public class EditPagesAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
+			Layout layout = null;
+			String oldFriendlyURL = StringPool.BLANK;
+
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateLayout(actionRequest, actionResponse);
+				Object[] returnValue = updateLayout(
+					actionRequest, actionResponse);
+
+				layout = (Layout)returnValue[0];
+				oldFriendlyURL = (String)returnValue[1];
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				CommunitiesUtil.deleteLayout(actionRequest, actionResponse);
@@ -184,6 +193,26 @@ public class EditPagesAction extends PortletAction {
 
 			String redirect = ParamUtil.getString(
 				actionRequest, "pagesRedirect");
+
+			if ((layout != null) && Validator.isNotNull(oldFriendlyURL)) {
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)actionRequest.getAttribute(
+						WebKeys.THEME_DISPLAY);
+
+				if (themeDisplay.getPlid() == layout.getPlid()) {
+					Group group = themeDisplay.getScopeGroup();
+
+					String oldPath = group.getFriendlyURL() + oldFriendlyURL;
+					String newPath =
+						group.getFriendlyURL() + layout.getFriendlyURL();
+
+					redirect = StringUtil.replace(redirect, oldPath, newPath);
+
+					redirect = StringUtil.replace(
+						redirect, HttpUtil.encodeURL(oldPath),
+						HttpUtil.encodeURL(newPath));
+				}
+			}
 
 			sendRedirect(actionRequest, actionResponse, redirect);
 		}
@@ -381,7 +410,7 @@ public class EditPagesAction extends PortletAction {
 			groupId, privateLayout, parentLayoutId, layoutIds);
 	}
 
-	protected void updateLayout(
+	protected Object[] updateLayout(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
@@ -419,6 +448,9 @@ public class EditPagesAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Layout.class.getName(), actionRequest);
 
+		Layout layout = null;
+		String oldFriendlyURL = StringPool.BLANK;
+
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add layout
@@ -427,7 +459,7 @@ public class EditPagesAction extends PortletAction {
 				Layout parentLayout = LayoutLocalServiceUtil.getLayout(
 					groupId, privateLayout, parentLayoutId);
 
-				Layout layout = LayoutServiceUtil.addLayout(
+				layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, localeNamesMap,
 					localeTitlesMap, description, parentLayout.getType(),
 					parentLayout.isHidden(), friendlyURL,
@@ -451,7 +483,7 @@ public class EditPagesAction extends PortletAction {
 
 				Layout layoutPrototypeLayout = layoutPrototype.getLayout();
 
-				Layout layout = LayoutServiceUtil.addLayout(
+				layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, localeNamesMap,
 					localeTitlesMap, description, LayoutConstants.TYPE_PORTLET,
 					false, friendlyURL, serviceContext);
@@ -475,14 +507,23 @@ public class EditPagesAction extends PortletAction {
 
 			// Update layout
 
-			Layout layout = LayoutLocalServiceUtil.getLayout(
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+			layout = LayoutLocalServiceUtil.getLayout(
 				groupId, privateLayout, layoutId);
+
+			String tempOldFriendlyURL = layout.getFriendlyURL();
 
 			layout = LayoutServiceUtil.updateLayout(
 				groupId, privateLayout, layoutId, layout.getParentLayoutId(),
 				localeNamesMap, localeTitlesMap, description, type, hidden,
 				friendlyURL, Boolean.valueOf(iconImage), iconBytes,
 				serviceContext);
+
+			if (!tempOldFriendlyURL.equals(layout.getFriendlyURL())) {
+				oldFriendlyURL = tempOldFriendlyURL;
+			}
 
 			UnicodeProperties formTypeSettingsProperties =
 				getTypeSettingsProperties(actionRequest);
@@ -543,6 +584,8 @@ public class EditPagesAction extends PortletAction {
 				PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses,
 				uploadRequest, response);
 		}
+
+		return new Object[] {layout, oldFriendlyURL};
 	}
 
 	protected void updateLogo(ActionRequest actionRequest) throws Exception {
