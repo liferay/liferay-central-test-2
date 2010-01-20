@@ -220,7 +220,7 @@
 		String currentURL = PortalUtil.getCurrentURL(request);
 		%>
 
-		Liferay.currentURL = '<%= UnicodeFormatter.toString(currentURL) %>';
+		Liferay.currentURL = '<%= HtmlUtil.escapeJS(currentURL) %>';
 		Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
 	// ]]>
 </script>

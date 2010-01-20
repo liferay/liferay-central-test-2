@@ -967,9 +967,9 @@ else {
 					canEditTitle: <%= showConfigurationIcon %>,
 					columnPos: <%= columnPos %>,
 					isStatic: '<%= staticVar %>',
-					namespacedId: 'p_p_id<%= UnicodeFormatter.toString(renderResponseImpl.getNamespace()) %>',
-					portletId: '<%= UnicodeFormatter.toString(portletDisplay.getId()) %>',
-					refreshURL: '<%= UnicodeFormatter.toString(PortletURLUtil.getRefreshURL(request, themeDisplay)) %>'
+					namespacedId: 'p_p_id<%= HtmlUtil.escapeJS(renderResponseImpl.getNamespace()) %>',
+					portletId: '<%= HtmlUtil.escapeJS(portletDisplay.getId()) %>',
+					refreshURL: '<%= HtmlUtil.escapeJS(PortletURLUtil.getRefreshURL(request, themeDisplay)) %>'
 				}
 			);
 		</aui:script>
