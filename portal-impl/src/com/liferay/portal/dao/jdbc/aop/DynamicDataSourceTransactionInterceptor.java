@@ -22,6 +22,7 @@
 
 package com.liferay.portal.dao.jdbc.aop;
 
+import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.lang.reflect.Method;
@@ -41,7 +42,16 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 public class DynamicDataSourceTransactionInterceptor
 	extends TransactionInterceptor {
 
+	public void afterPropertiesSet() {
+		_dynamicDataSourceTargetSource = (DynamicDataSourceTargetSource)
+			InfrastructureUtil.getDynamicDataSourceTargetSource();
+	}
+
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+		if (_dynamicDataSourceTargetSource == null) {
+			return super.invoke(methodInvocation);
+		}
+		
 		Class<?> targetClass = null;
 
 		if (methodInvocation.getThis() != null) {
