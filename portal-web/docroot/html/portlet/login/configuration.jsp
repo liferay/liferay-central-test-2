@@ -71,25 +71,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 			String editorContent = emailPasswordSentBody;
 			%>
 
-			<aui:script>
-				function <portlet:namespace />initEditor() {
-					return "<%= UnicodeFormatter.toString(editorContent) %>";
-				}
-
-				function <portlet:namespace />saveConfiguration() {
-					<c:if test='<%= tabs2.endsWith("-notification") %>'>
-						document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
-					</c:if>
-
-					submitForm(document.<portlet:namespace />fm);
-				}
-
-				function <portlet:namespace />updateLanguage() {
-					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
-					submitForm(document.<portlet:namespace />fm);
-				}
-			</aui:script>
-
 			<liferay-ui:tabs
 				names="general,password-changed-notification"
 				param="tabs2"
@@ -243,6 +224,25 @@ String redirect = ParamUtil.getString(request, "redirect");
 					</aui:fieldset>
 				</c:otherwise>
 			</c:choose>
+
+			<aui:script>
+				function <portlet:namespace />initEditor() {
+					return "<%= UnicodeFormatter.toString(editorContent) %>";
+				}
+
+				function <portlet:namespace />saveConfiguration() {
+					<c:if test='<%= tabs2.endsWith("-notification") %>'>
+						document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
+					</c:if>
+
+					submitForm(document.<portlet:namespace />fm);
+				}
+
+				function <portlet:namespace />updateLanguage() {
+					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
+					submitForm(document.<portlet:namespace />fm);
+				}
+			</aui:script>
 		</c:when>
 		<c:otherwise>
 			<aui:fieldset>

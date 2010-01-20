@@ -57,24 +57,6 @@ request.setAttribute("edit_organization_assignments.jsp-organization", organizat
 request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL);
 %>
 
-<aui:script>
-	function <portlet:namespace />updateOrganizationUserGroups(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_user_groups";
-		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />updateOrganizationUsers(assignmentsRedirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_users";
-		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
@@ -116,6 +98,24 @@ request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL)
 		</c:when>
 	</c:choose>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />updateOrganizationUserGroups(assignmentsRedirect) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_user_groups";
+		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
+		document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />updateOrganizationUsers(assignmentsRedirect) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_users";
+		document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
+		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>
 
 <%
 EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);

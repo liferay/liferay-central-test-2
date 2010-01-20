@@ -87,82 +87,6 @@ editPermissionsURL.setParameter("redirect", viewPermissionsURL.toString());
 editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 %>
 
-<aui:script>
-	function <portlet:namespace />addPermissions(field) {
-		var permissionsURL = field.value;
-
-		if (permissionsURL == '') {
-			permissionsURL = '<%= viewPermissionsURL %>';
-		}
-
-		location.href = permissionsURL;
-	}
-
-	function <portlet:namespace />removeGroup(pos, target) {
-		var selectedGroupIds = document.<portlet:namespace />fm['<portlet:namespace />groupIds' + target].value.split(",");
-		var selectedGroupNames = document.<portlet:namespace />fm['<portlet:namespace />groupNames' + target].value.split("@@");
-
-		selectedGroupIds.splice(pos, 1);
-		selectedGroupNames.splice(pos, 1);
-
-		<portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target);
-	}
-
-	function <portlet:namespace />selectGroup(groupId, name, target) {
-		var selectedGroupIds = [];
-		var selectedGroupIdsField = document.<portlet:namespace />fm['<portlet:namespace />groupIds' + target].value;
-
-		if (selectedGroupIdsField != "") {
-			selectedGroupIds = selectedGroupIdsField.split(",");
-		}
-
-		var selectedGroupNames = [];
-		var selectedGroupNamesField = document.<portlet:namespace />fm['<portlet:namespace />groupNames' + target].value;
-
-		if (selectedGroupNamesField != "") {
-			selectedGroupNames = selectedGroupNamesField.split("@@");
-		}
-
-		if (AUI().Array.indexOf(selectedGroupIds, groupId) == -1) {
-			selectedGroupIds.push(groupId);
-			selectedGroupNames.push(name);
-		}
-
-		<portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target);
-	}
-
-	function <portlet:namespace />updateActions() {
-		var selectedTargets = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "actions";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= portletURL.toString() %>";
-		document.<portlet:namespace />fm.<portlet:namespace />selectedTargets.value = selectedTargets;
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target) {
-		document.<portlet:namespace />fm['<portlet:namespace />groupIds' + target].value = selectedGroupIds.join(',');
-		document.<portlet:namespace />fm['<portlet:namespace />groupNames' + target].value = selectedGroupNames.join('@@');
-
-		var nameEl = document.getElementById("<portlet:namespace />groupHTML" + target);
-
-		var groupsHTML = '';
-
-		for (var i = 0; i < selectedGroupIds.length; i++) {
-			var id = selectedGroupIds[i];
-			var name = selectedGroupNames[i];
-
-			groupsHTML += '<span class="permission-scope">' + name + '<a class="permission-scope-delete" href="javascript:<portlet:namespace />removeGroup(' + i + ', \'' + target + '\' );"><span>x</span></a></span>';
-		}
-
-		if (groupsHTML == '') {
-			groupsHTML = '<%= LanguageUtil.get(pageContext, "portal") %>';
-		}
-
-		nameEl.innerHTML = groupsHTML;
-	}
-</aui:script>
-
 <c:choose>
 	<c:when test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
 		<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
@@ -264,6 +188,82 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		</aui:form>
 	</c:otherwise>
 </c:choose>
+
+<aui:script>
+	function <portlet:namespace />addPermissions(field) {
+		var permissionsURL = field.value;
+
+		if (permissionsURL == '') {
+			permissionsURL = '<%= viewPermissionsURL %>';
+		}
+
+		location.href = permissionsURL;
+	}
+
+	function <portlet:namespace />removeGroup(pos, target) {
+		var selectedGroupIds = document.<portlet:namespace />fm['<portlet:namespace />groupIds' + target].value.split(",");
+		var selectedGroupNames = document.<portlet:namespace />fm['<portlet:namespace />groupNames' + target].value.split("@@");
+
+		selectedGroupIds.splice(pos, 1);
+		selectedGroupNames.splice(pos, 1);
+
+		<portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target);
+	}
+
+	function <portlet:namespace />selectGroup(groupId, name, target) {
+		var selectedGroupIds = [];
+		var selectedGroupIdsField = document.<portlet:namespace />fm['<portlet:namespace />groupIds' + target].value;
+
+		if (selectedGroupIdsField != "") {
+			selectedGroupIds = selectedGroupIdsField.split(",");
+		}
+
+		var selectedGroupNames = [];
+		var selectedGroupNamesField = document.<portlet:namespace />fm['<portlet:namespace />groupNames' + target].value;
+
+		if (selectedGroupNamesField != "") {
+			selectedGroupNames = selectedGroupNamesField.split("@@");
+		}
+
+		if (AUI().Array.indexOf(selectedGroupIds, groupId) == -1) {
+			selectedGroupIds.push(groupId);
+			selectedGroupNames.push(name);
+		}
+
+		<portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target);
+	}
+
+	function <portlet:namespace />updateActions() {
+		var selectedTargets = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "actions";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= portletURL.toString() %>";
+		document.<portlet:namespace />fm.<portlet:namespace />selectedTargets.value = selectedTargets;
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target) {
+		document.<portlet:namespace />fm['<portlet:namespace />groupIds' + target].value = selectedGroupIds.join(',');
+		document.<portlet:namespace />fm['<portlet:namespace />groupNames' + target].value = selectedGroupNames.join('@@');
+
+		var nameEl = document.getElementById("<portlet:namespace />groupHTML" + target);
+
+		var groupsHTML = '';
+
+		for (var i = 0; i < selectedGroupIds.length; i++) {
+			var id = selectedGroupIds[i];
+			var name = selectedGroupNames[i];
+
+			groupsHTML += '<span class="permission-scope">' + name + '<a class="permission-scope-delete" href="javascript:<portlet:namespace />removeGroup(' + i + ', \'' + target + '\' );"><span>x</span></a></span>';
+		}
+
+		if (groupsHTML == '') {
+			groupsHTML = '<%= LanguageUtil.get(pageContext, "portal") %>';
+		}
+
+		nameEl.innerHTML = groupsHTML;
+	}
+</aui:script>
 
 <%
 PortletURL definePermissionsURL = renderResponse.createRenderURL();

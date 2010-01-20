@@ -49,20 +49,6 @@ if (Validator.isNotNull(structureId)) {
 
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
-<aui:script>
-	function <portlet:namespace />removeStructure() {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
-
-		AUI().one('#<portlet:namespace/>structure').html('<liferay-ui:message key="any" />');
-	}
-
-	function <portlet:namespace />selectStructure(structureId) {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
-
-		AUI().one('#<portlet:namespace/>structure').html(structureId);
-	}
-</aui:script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm1">
@@ -200,3 +186,17 @@ if (Validator.isNotNull(structureId)) {
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />removeStructure() {
+		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
+
+		AUI().one('#<portlet:namespace/>structure').html('<liferay-ui:message key="any" />');
+	}
+
+	function <portlet:namespace />selectStructure(structureId) {
+		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
+
+		AUI().one('#<portlet:namespace/>structure').html(structureId);
+	}
+</aui:script>

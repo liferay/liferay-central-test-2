@@ -66,46 +66,6 @@ String ccVerNumber = ParamUtil.getString(request, "ccVerNumber");
 List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contact.getContactId());
 %>
 
-<aui:script>
-	function <portlet:namespace />updateAddress(addressId, type) {
-
-		<%
-		for (int i = 0; addresses != null && i < addresses.size(); i++) {
-			Address address = (Address)addresses.get(i);
-
-			Region region = address.getRegion();
-			Country country = address.getCountry();
-		%>
-
-			if ("<%= address.getAddressId() %>" == addressId) {
-				//document.getElementById("<portlet:namespace />" + type + "FirstName").value = "<%= user.getFirstName() %>";
-				//document.getElementById("<portlet:namespace />" + type + "LastName").value = "<%= user.getLastName() %>";
-				//document.getElementById("<portlet:namespace />" + type + "EmailAddress").value = "<%= user.getEmailAddress() %>";
-				document.getElementById("<portlet:namespace />" + type + "Street").value = "<%= address.getStreet1() %>";
-				document.getElementById("<portlet:namespace />" + type + "City").value = "<%= address.getCity() %>";
-
-				var stateSel = document.getElementById("<portlet:namespace />" + type + "StateSel");
-				var stateSelValue = "<%= region.getRegionCode() %>";
-
-				for (var i = 0; i < stateSel.length; i++) {
-					if (stateSel[i].value == stateSelValue) {
-						stateSel.selectedIndex = i;
-
-						break;
-					}
-				}
-
-				document.getElementById("<portlet:namespace />" + type + "Zip").value = "<%= address.getZip() %>";
-				document.getElementById("<portlet:namespace />" + type + "Country").value = "<%= country.getName() %>";
-			}
-
-		<%
-		}
-		%>
-
-	}
-</aui:script>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
@@ -554,8 +514,46 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 
 </form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />updateAddress(addressId, type) {
+
+		<%
+		for (int i = 0; addresses != null && i < addresses.size(); i++) {
+			Address address = (Address)addresses.get(i);
+
+			Region region = address.getRegion();
+			Country country = address.getCountry();
+		%>
+
+			if ("<%= address.getAddressId() %>" == addressId) {
+				//document.getElementById("<portlet:namespace />" + type + "FirstName").value = "<%= user.getFirstName() %>";
+				//document.getElementById("<portlet:namespace />" + type + "LastName").value = "<%= user.getLastName() %>";
+				//document.getElementById("<portlet:namespace />" + type + "EmailAddress").value = "<%= user.getEmailAddress() %>";
+				document.getElementById("<portlet:namespace />" + type + "Street").value = "<%= address.getStreet1() %>";
+				document.getElementById("<portlet:namespace />" + type + "City").value = "<%= address.getCity() %>";
+
+				var stateSel = document.getElementById("<portlet:namespace />" + type + "StateSel");
+				var stateSelValue = "<%= region.getRegionCode() %>";
+
+				for (var i = 0; i < stateSel.length; i++) {
+					if (stateSel[i].value == stateSelValue) {
+						stateSel.selectedIndex = i;
+
+						break;
+					}
+				}
+
+				document.getElementById("<portlet:namespace />" + type + "Zip").value = "<%= address.getZip() %>";
+				document.getElementById("<portlet:namespace />" + type + "Country").value = "<%= country.getName() %>";
+			}
+
+		<%
+		}
+		%>
+
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />billingFirstName);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>

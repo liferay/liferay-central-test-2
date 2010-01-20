@@ -101,43 +101,6 @@ int firstReminder = BeanParamUtil.getInteger(event, request, "firstReminder", (i
 int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", (int)Time.MINUTE * 5);
 %>
 
-<aui:script>
-	function <portlet:namespace />init() {
-		<c:choose>
-			<c:when test="<%= recurrenceType == Recurrence.NO_RECURRENCE %>">
-				<portlet:namespace />showTable("<portlet:namespace />neverTable");
-			</c:when>
-			<c:when test="<%= recurrenceType == Recurrence.DAILY %>">
-				<portlet:namespace />showTable("<portlet:namespace />dailyTable");
-			</c:when>
-			<c:when test="<%= recurrenceType == Recurrence.WEEKLY %>">
-				<portlet:namespace />showTable("<portlet:namespace />weeklyTable");
-			</c:when>
-			<c:when test="<%= recurrenceType == Recurrence.MONTHLY %>">
-				<portlet:namespace />showTable("<portlet:namespace />monthlyTable");
-			</c:when>
-			<c:when test="<%= recurrenceType == Recurrence.YEARLY %>">
-				<portlet:namespace />showTable("<portlet:namespace />yearlyTable");
-			</c:when>
-		</c:choose>
-	}
-
-	function <portlet:namespace />showTable(id) {
-		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
-		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />weeklyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />monthlyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />yearlyTable").style.display = "none";
-
-		document.getElementById(id).style.display = "block";
-	}
-
-	function <portlet:namespace />saveEvent() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= event == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <portlet:actionURL var="editEventURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/calendar/edit_event" />
 </portlet:actionURL>
@@ -299,6 +262,41 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </aui:form>
 
 <aui:script>
+	function <portlet:namespace />init() {
+		<c:choose>
+			<c:when test="<%= recurrenceType == Recurrence.NO_RECURRENCE %>">
+				<portlet:namespace />showTable("<portlet:namespace />neverTable");
+			</c:when>
+			<c:when test="<%= recurrenceType == Recurrence.DAILY %>">
+				<portlet:namespace />showTable("<portlet:namespace />dailyTable");
+			</c:when>
+			<c:when test="<%= recurrenceType == Recurrence.WEEKLY %>">
+				<portlet:namespace />showTable("<portlet:namespace />weeklyTable");
+			</c:when>
+			<c:when test="<%= recurrenceType == Recurrence.MONTHLY %>">
+				<portlet:namespace />showTable("<portlet:namespace />monthlyTable");
+			</c:when>
+			<c:when test="<%= recurrenceType == Recurrence.YEARLY %>">
+				<portlet:namespace />showTable("<portlet:namespace />yearlyTable");
+			</c:when>
+		</c:choose>
+	}
+
+	function <portlet:namespace />showTable(id) {
+		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
+		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />weeklyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />monthlyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />yearlyTable").style.display = "none";
+
+		document.getElementById(id).style.display = "block";
+	}
+
+	function <portlet:namespace />saveEvent() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= event == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	<portlet:namespace />init();
 
 	<%-- LEP-6018 --%>

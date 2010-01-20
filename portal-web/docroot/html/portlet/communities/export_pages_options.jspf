@@ -74,36 +74,6 @@ for (Portlet alwaysExportablePortlet : alwaysExportablePortlets) {
 portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(application, locale));
 %>
 
-<aui:script>
-	function <portlet:namespace />hideDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').hide();
-	}
-
-	function <portlet:namespace />showDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').show();
-	}
-
-	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
-		var parentDiv = AUI().one('#' + parentDivId);
-
-		var enabled = checkbox.checked;
-
-		if (parentDiv) {
-			parentDiv.all('input').each(
-				function(item, index, collection) {
-					var disabled = !enabled;
-
-					if (enabled && item.hasClass('disabled')) {
-						disabled = true;
-					}
-
-					item.set('disabled', disabled);
-				}
-			);
-		}
-	}
-</aui:script>
-
 <div style="border: 1px solid #CCC; height: 445px; overflow: auto;">
 	<ul class="lfr-tree lfr-component">
 		<li class="tree-item" <%= (proposalId > 0) ? "style=\"display: none;\"" : "" %>>
@@ -329,3 +299,33 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 		</li>
 	</ul>
 </div>
+
+<aui:script>
+	function <portlet:namespace />hideDateRange() {
+		AUI().one('#<portlet:namespace />startEndDate').hide();
+	}
+
+	function <portlet:namespace />showDateRange() {
+		AUI().one('#<portlet:namespace />startEndDate').show();
+	}
+
+	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
+		var parentDiv = AUI().one('#' + parentDivId);
+
+		var enabled = checkbox.checked;
+
+		if (parentDiv) {
+			parentDiv.all('input').each(
+				function(item, index, collection) {
+					var disabled = !enabled;
+
+					if (enabled && item.hasClass('disabled')) {
+						disabled = true;
+					}
+
+					item.set('disabled', disabled);
+				}
+			);
+		}
+	}
+</aui:script>

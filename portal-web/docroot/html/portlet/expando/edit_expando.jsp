@@ -59,13 +59,6 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("modelResource", modelResource);
 %>
 
-<aui:script>
-	function <portlet:namespace />saveExpando(options) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= column == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <portlet:actionURL var="editExpandoURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/expando/edit_expando" />
 </portlet:actionURL>
@@ -295,11 +288,16 @@ portletURL.setParameter("modelResource", modelResource);
 	</aui:button-row>
 </aui:form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && (column == null) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />saveExpando(options) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= column == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && (column == null) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</aui:script>
-</c:if>
+</aui:script>
 
 <%
 PortalUtil.addPortletBreadcrumbEntry(request, modelResourceName, portletURL.toString());

@@ -92,55 +92,6 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 %>
 
-<aui:script>
-	function <portlet:namespace />createSelectFileEntryURL(url) {
-		url += '&<portlet:namespace />groupId='+ document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value;
-		url += '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value;
-		url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value;
-
-		return url;
-	}
-
-	function <portlet:namespace />saveFileShortcut() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= fileShortcut == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectFileEntry(folderId, name, title) {
-		document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value = folderId;
-		document.<portlet:namespace />fm.<portlet:namespace />toName.value = name;
-
-		var titleEl = document.getElementById("<portlet:namespace />toFileEntryTitle");
-
-		if (title != "") {
-			title += "&nbsp;";
-		}
-
-		titleEl.innerHTML = title;
-	}
-
-	function <portlet:namespace />selectGroup(groupId, groupName) {
-		if (document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value != groupId) {
-			<portlet:namespace />selectFileEntry("", "", "");
-		}
-
-		document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value = groupId;
-		document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value = "";
-		document.<portlet:namespace />fm.<portlet:namespace />toName.value = "";
-
-		var nameEl = document.getElementById("<portlet:namespace />toGroupName");
-
-		nameEl.innerHTML = groupName + "&nbsp;";
-
-		var button = AUI().one('#<portlet:namespace />selectToFileEntryButton');
-
-		if (button) {
-			button.set('disabled', false);
-			button.get('parentNode').removeClass('aui-input-disabled');
-		}
-	}
-</aui:script>
-
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFileShortcutURL">
@@ -224,6 +175,55 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />createSelectFileEntryURL(url) {
+		url += '&<portlet:namespace />groupId='+ document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value;
+		url += '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value;
+		url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value;
+
+		return url;
+	}
+
+	function <portlet:namespace />saveFileShortcut() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= fileShortcut == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectFileEntry(folderId, name, title) {
+		document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value = folderId;
+		document.<portlet:namespace />fm.<portlet:namespace />toName.value = name;
+
+		var titleEl = document.getElementById("<portlet:namespace />toFileEntryTitle");
+
+		if (title != "") {
+			title += "&nbsp;";
+		}
+
+		titleEl.innerHTML = title;
+	}
+
+	function <portlet:namespace />selectGroup(groupId, groupName) {
+		if (document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value != groupId) {
+			<portlet:namespace />selectFileEntry("", "", "");
+		}
+
+		document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value = groupId;
+		document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />toName.value = "";
+
+		var nameEl = document.getElementById("<portlet:namespace />toGroupName");
+
+		nameEl.innerHTML = groupName + "&nbsp;";
+
+		var button = AUI().one('#<portlet:namespace />selectToFileEntryButton');
+
+		if (button) {
+			button.set('disabled', false);
+			button.get('parentNode').removeClass('aui-input-disabled');
+		}
+	}
+</aui:script>
 
 <%
 if (fileShortcut != null) {

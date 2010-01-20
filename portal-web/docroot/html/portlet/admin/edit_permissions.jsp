@@ -37,12 +37,6 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 %>
 
-<aui:script>
-	function <portlet:namespace />invoke(link) {
-		submitForm(document.<portlet:namespace />fm, link);
-	}
-</aui:script>
-
 <form method="post" name="<portlet:namespace />fm">
 
 <liferay-ui:tabs
@@ -67,3 +61,9 @@ portletURL.setParameter("tabs2", tabs2);
 </c:choose>
 
 </form>
+
+<aui:script>
+	function <portlet:namespace />invoke(link) {
+		submitForm(document.<portlet:namespace />fm, link);
+	}
+</aui:script>

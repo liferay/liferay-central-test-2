@@ -65,6 +65,21 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 }
 %>
 
+<c:choose>
+	<c:when test="<%= auth && Validator.isNull(userName) && !themeDisplay.isSignedIn() %>">
+		<div class="portlet-msg-info">
+			<a href="<%= themeDisplay.getURLSignIn() %>" target="_top"><liferay-ui:message key="please-sign-in-to-access-this-application" /></a>
+		</div>
+	</c:when>
+	<c:otherwise>
+		<div>
+			<iframe alt="<%= alt %>" border="<%= border %>" bordercolor="<%= bordercolor %>" frameborder="<%= frameborder %>" height="<%= iframeHeight %>" hspace="<%= hspace %>" id="<portlet:namespace />iframe" longdesc="<%= longdesc%>" name="<portlet:namespace />iframe" onload="<portlet:namespace />monitorIframe(); <portlet:namespace />resizeIframe();" scrolling="<%= scrolling %>" src="<%= iframeSrc %>" vspace="<%= vspace %>" width="<%= width %>">
+				<%= LanguageUtil.format(pageContext, "your-browser-does-not-support-inline-frames-or-is-currently-configured-not-to-display-inline-frames.-content-can-be-viewed-at-actual-source-page-x", iframeSrc) %>
+			</iframe>
+		</div>
+	</c:otherwise>
+</c:choose>
+
 <aui:script>
 	function <portlet:namespace />init() {
 		var hash = document.location.hash;
@@ -202,18 +217,3 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 
 	<portlet:namespace />init();
 </aui:script>
-
-<c:choose>
-	<c:when test="<%= auth && Validator.isNull(userName) && !themeDisplay.isSignedIn() %>">
-		<div class="portlet-msg-info">
-			<a href="<%= themeDisplay.getURLSignIn() %>" target="_top"><liferay-ui:message key="please-sign-in-to-access-this-application" /></a>
-		</div>
-	</c:when>
-	<c:otherwise>
-		<div>
-			<iframe alt="<%= alt %>" border="<%= border %>" bordercolor="<%= bordercolor %>" frameborder="<%= frameborder %>" height="<%= iframeHeight %>" hspace="<%= hspace %>" id="<portlet:namespace />iframe" longdesc="<%= longdesc%>" name="<portlet:namespace />iframe" onload="<portlet:namespace />monitorIframe(); <portlet:namespace />resizeIframe();" scrolling="<%= scrolling %>" src="<%= iframeSrc %>" vspace="<%= vspace %>" width="<%= width %>">
-				<%= LanguageUtil.format(pageContext, "your-browser-does-not-support-inline-frames-or-is-currently-configured-not-to-display-inline-frames.-content-can-be-viewed-at-actual-source-page-x", iframeSrc) %>
-			</iframe>
-		</div>
-	</c:otherwise>
-</c:choose>

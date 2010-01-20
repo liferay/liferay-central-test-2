@@ -34,6 +34,54 @@ List images = IGImageServiceUtil.getImages(scopeGroupId, folderId);
 int defaultSpeed = 3000;
 %>
 
+<aui:form>
+	<aui:fieldset>
+		 <aui:column>
+			 <aui:button onClick='<%= renderResponse.getNamespace() + "showPrevious();" %>' value="previous" />
+			 <aui:button onClick='<%= renderResponse.getNamespace() + "play();" %>' value="play" />
+			 <aui:button onClick='<%= renderResponse.getNamespace() + "pause();" %>' value="pause" />
+			 <aui:button onClick='<%= renderResponse.getNamespace() + "showNext();" %>' value="next" />
+		 </aui:column>
+		<aui:column>
+			<aui:select inlineLabel="left" name="speed" onChange='<%= renderResponse.getNamespace() + "pause();" + renderResponse.getNamespace() + "speed = this[this.selectedIndex].value * 1000;" + renderResponse.getNamespace() + "play();" %>'>
+
+				<%
+				for (int i = 1; i <= 10; i++) {
+				%>
+
+					<aui:option label="<%= i %>" selected="<%= (defaultSpeed / 1000) == i %>" />
+
+				<%
+				}
+				%>
+
+			</aui:select>
+
+		</aui:column>
+	</aui:fieldset>
+</aui:form>
+
+<br />
+
+<table class="lfr-table">
+<tr>
+	<td>
+
+		<%
+		if (!images.isEmpty()) {
+			IGImage image = (IGImage)images.get(0);
+		%>
+
+			<img border="0" name="<portlet:namespace />slideShow" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" />
+
+		<%
+		}
+		%>
+
+	</td>
+</tr>
+</table>
+
 <aui:script>
 	var <portlet:namespace />imgArray = new Array();
 
@@ -82,56 +130,6 @@ int defaultSpeed = 3000;
 
 		document.images.<portlet:namespace />slideShow.src = <portlet:namespace />imgArray[<portlet:namespace />imgArrayPos];
 	}
-</aui:script>
 
-<aui:form>
-	<aui:fieldset>
-		 <aui:column>
-			 <aui:button onClick='<%= renderResponse.getNamespace() + "showPrevious();" %>' value="previous" />
-			 <aui:button onClick='<%= renderResponse.getNamespace() + "play();" %>' value="play" />
-			 <aui:button onClick='<%= renderResponse.getNamespace() + "pause();" %>' value="pause" />
-			 <aui:button onClick='<%= renderResponse.getNamespace() + "showNext();" %>' value="next" />
-		 </aui:column>
-		<aui:column>
-			<aui:select inlineLabel="left" name="speed" onChange='<%= renderResponse.getNamespace() + "pause();" + renderResponse.getNamespace() + "speed = this[this.selectedIndex].value * 1000;" + renderResponse.getNamespace() + "play();" %>'>
-
-				<%
-				for (int i = 1; i <= 10; i++) {
-				%>
-
-					<aui:option label="<%= i %>" selected="<%= (defaultSpeed / 1000) == i %>" />
-
-				<%
-				}
-				%>
-
-			</aui:select>
-
-		</aui:column>
-	</aui:fieldset>
-</aui:form>
-
-<aui:script>
 	<portlet:namespace />play();
 </aui:script>
-
-<br />
-
-<table class="lfr-table">
-<tr>
-	<td>
-
-		<%
-		if (!images.isEmpty()) {
-			IGImage image = (IGImage)images.get(0);
-		%>
-
-			<img border="0" name="<portlet:namespace />slideShow" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" />
-
-		<%
-		}
-		%>
-
-	</td>
-</tr>
-</table>

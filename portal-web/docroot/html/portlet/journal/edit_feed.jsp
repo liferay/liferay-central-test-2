@@ -107,46 +107,6 @@ if (feed != null) {
 }
 %>
 
-<aui:script>
-	function <portlet:namespace />saveFeed() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= feed == null ? Constants.ADD : Constants.UPDATE %>";
-
-		<c:if test="<%= feed == null %>">
-			document.<portlet:namespace />fm.<portlet:namespace />feedId.value = document.<portlet:namespace />fm.<portlet:namespace />newFeedId.value;
-		</c:if>
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />removeStructure() {
-		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = "";
-		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
-		document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
-		document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedConstants.WEB_CONTENT_DESCRIPTION %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectRendererTemplate(rendererTemplateId) {
-		document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = rendererTemplateId;
-	}
-
-	function <portlet:namespace />selectStructure(structureId) {
-		if (document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
-			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
-			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
-			document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
-			document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedConstants.WEB_CONTENT_DESCRIPTION %>";
-			<portlet:namespace />saveFeed();
-		}
-	}
-
-	function <portlet:namespace />selectTemplate(structureId, templateId) {
-		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
-		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
-		<portlet:namespace />saveFeed();
-	}
-</aui:script>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFeed(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= feed == null ? Constants.ADD : Constants.UPDATE %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
@@ -562,8 +522,46 @@ if (feed != null) {
 
 </form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />saveFeed() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= feed == null ? Constants.ADD : Constants.UPDATE %>";
+
+		<c:if test="<%= feed == null %>">
+			document.<portlet:namespace />fm.<portlet:namespace />feedId.value = document.<portlet:namespace />fm.<portlet:namespace />newFeedId.value;
+		</c:if>
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />removeStructure() {
+		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedConstants.WEB_CONTENT_DESCRIPTION %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectRendererTemplate(rendererTemplateId) {
+		document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = rendererTemplateId;
+	}
+
+	function <portlet:namespace />selectStructure(structureId) {
+		if (document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
+			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
+			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedConstants.WEB_CONTENT_DESCRIPTION %>";
+			<portlet:namespace />saveFeed();
+		}
+	}
+
+	function <portlet:namespace />selectTemplate(structureId, templateId) {
+		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
+		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
+		<portlet:namespace />saveFeed();
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		<c:choose>
 			<c:when test="<%= PropsValues.JOURNAL_FEED_FORCE_AUTOGENERATE_ID %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
@@ -572,5 +570,5 @@ if (feed != null) {
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (feed == null) ? "newFeedId" : "name" %>);
 			</c:otherwise>
 		</c:choose>
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>

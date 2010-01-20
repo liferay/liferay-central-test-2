@@ -44,13 +44,6 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 Locale[] locales = LanguageUtil.getAvailableLocales();
 %>
 
-<aui:script>
-	function <portlet:namespace />saveLayoutPrototype() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= layoutPrototype == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" /></portlet:actionURL>");
-	}
-</aui:script>
-
 <liferay-util:include page="/html/portlet/layout_prototypes/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= layoutPrototype.isNew() ? "add" : "view-all" %>' />
 </liferay-util:include>
@@ -89,11 +82,16 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	</aui:button-row>
 </aui:form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />saveLayoutPrototype() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= layoutPrototype == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" /></portlet:actionURL>");
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>
 
 <%
 if (!layoutPrototype.isNew()) {

@@ -39,42 +39,6 @@ String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CL
 long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
 %>
 
-<aui:script>
-	function <portlet:namespace />updateWorkflowTask(cmd, transitionName) {
-		AUI().use(
-			'dialog',
-			function(A) {
-				var dialog = new A.Dialog(
-					{
-						bodyContent: '<textarea id="<%= renderResponse.getNamespace() + "comment" %>" rows="10" cols="55"></textarea>',
-						buttons: [
-							{
-								handler: function() {
-									document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-									document.<portlet:namespace />fm.<portlet:namespace />transitionName.value = transitionName;
-									document.<portlet:namespace />fm.<portlet:namespace />comment.value = A.one('#<%= renderResponse.getNamespace() + "comment" %>').val();
-									submitForm(document.<portlet:namespace />fm);
-								},
-								text: '<liferay-ui:message key="ok" />'
-							},
-							{
-								handler: function() {
-									this.close();
-								},
-								text: '<liferay-ui:message key="cancel" />'
-							}
-						],
-						centered: true,
-						modal: true,
-						title: '<liferay-ui:message key="comments" />',
-						width: 400
-					}
-				).render();
-			}
-		);
-	}
-</aui:script>
-
 <h3 class="task-title"><%= workflowTask.getName() %></h3>
 
 <portlet:actionURL var="editWorkflowTaskURL">
@@ -255,3 +219,39 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	redirect="<%= currentURL %>"
 	ratingsEnabled="<%= true %>"
 />
+
+<aui:script>
+	function <portlet:namespace />updateWorkflowTask(cmd, transitionName) {
+		AUI().use(
+			'dialog',
+			function(A) {
+				var dialog = new A.Dialog(
+					{
+						bodyContent: '<textarea id="<%= renderResponse.getNamespace() + "comment" %>" rows="10" cols="55"></textarea>',
+						buttons: [
+							{
+								handler: function() {
+									document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+									document.<portlet:namespace />fm.<portlet:namespace />transitionName.value = transitionName;
+									document.<portlet:namespace />fm.<portlet:namespace />comment.value = A.one('#<%= renderResponse.getNamespace() + "comment" %>').val();
+									submitForm(document.<portlet:namespace />fm);
+								},
+								text: '<liferay-ui:message key="ok" />'
+							},
+							{
+								handler: function() {
+									this.close();
+								},
+								text: '<liferay-ui:message key="cancel" />'
+							}
+						],
+						centered: true,
+						modal: true,
+						title: '<liferay-ui:message key="comments" />',
+						width: 400
+					}
+				).render();
+			}
+		);
+	}
+</aui:script>

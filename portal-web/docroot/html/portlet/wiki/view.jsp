@@ -103,13 +103,13 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 
 <c:choose>
 	<c:when test="<%= print %>">
-		<aui:script>
-			print();
-		</aui:script>
-
 		<div class="popup-print">
 			<liferay-ui:icon image="print" url="javascript:print();" label="<%= true %>" />
 		</div>
+
+		<aui:script>
+			print();
+		</aui:script>
 	</c:when>
 	<c:otherwise>
 		<aui:script>

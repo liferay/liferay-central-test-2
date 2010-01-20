@@ -229,108 +229,6 @@ boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
 
-<aui:script>
-	var <portlet:namespace />documentLibraryInput = null;
-	var <portlet:namespace />imageGalleryInput = null;
-	var <portlet:namespace />contentChangedFlag = false;
-
-	function <portlet:namespace />changeVersionView(version) {
-		location.href = "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=" + version;
-	}
-
-	function <portlet:namespace />contentChanged() {
-		<portlet:namespace />contentChangedFlag = true;
-	}
-
-	function <portlet:namespace />deleteArticle() {
-		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") %>")) {
-			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			submitForm(document.<portlet:namespace />fm1);
-		}
-	}
-
-	function <portlet:namespace />disableInputDate(date, checked) {
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Month"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Day"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Year"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Hour"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Minute"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "AmPm"].disabled = checked;
-
-		var imageInputIdInput = AUI().one(document.<portlet:namespace />fm1["<portlet:namespace />" + date + "ImageInputIdInput"]);
-
-		if (imageInputIdInput) {
-			imageInputIdInput.toggleClass('disabled');
-		}
-	}
-
-	function <portlet:namespace />editorContentChanged(text) {
-		<portlet:namespace />contentChanged();
-	}
-
-	function <portlet:namespace />expireArticle() {
-		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.EXPIRE %>";
-		submitForm(document.<portlet:namespace />fm1);
-	}
-
-	function <portlet:namespace />getChoice(value) {
-		for (var i = 0; i < document.<portlet:namespace />fm1.<portlet:namespace />languageId.length; i++) {
-			if (document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[i].value == value) {
-				return document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[i].index;
-			}
-		}
-
-		return null;
-	}
-
-	function <portlet:namespace />getLanguageViewURL(languageId) {
-		return "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=<%= version %>&<portlet:namespace />languageId=" + languageId;
-	}
-
-	function <portlet:namespace />getSuggestionsContent() {
-		var content = '';
-
-		content += document.<portlet:namespace />fm1.<portlet:namespace/>title.value + ' ';
-		content += window.<portlet:namespace />editor.getHTML();
-
-		return content;
-	}
-
-	function <portlet:namespace />initEditor() {
-		return "<%= UnicodeFormatter.toString(content) %>";
-	}
-
-	function <portlet:namespace />removeArticleLocale() {
-		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this-language") %>")) {
-			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "removeArticlesLocale";
-			document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=<%= defaultLanguageId %>";
-			submitForm(document.<portlet:namespace />fm1);
-		}
-	}
-
-	function <portlet:namespace />selectDocumentLibrary(url) {
-		document.getElementById(<portlet:namespace />documentLibraryInput).value = url;
-	}
-
-	function <portlet:namespace />selectImageGallery(url) {
-		document.getElementById(<portlet:namespace />imageGalleryInput).value = url;
-	}
-
-	function <portlet:namespace />selectStructure(structureId) {
-		if (document.<portlet:namespace />fm1.<portlet:namespace />structureId.value != structureId) {
-			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
-			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
-			submitForm(document.<portlet:namespace />fm1);
-		}
-	}
-
-	function <portlet:namespace />selectTemplate(structureId, templateId) {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
-		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
-		submitForm(document.<portlet:namespace />fm1);
-	}
-</aui:script>
-
 <aui:form enctype="multipart/form-data" method="post" name="fm2">
 	<input name="groupId" type="hidden" value="" />
 	<input name="articleId" type="hidden" value="" />
@@ -760,22 +658,106 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 <%@ include file="edit_article_structure_extra.jspf" %>
 
-<%
-String doAsUserId = themeDisplay.getDoAsUserId();
+<aui:script>
+	var <portlet:namespace />documentLibraryInput = null;
+	var <portlet:namespace />imageGalleryInput = null;
+	var <portlet:namespace />contentChangedFlag = false;
 
-if (Validator.isNull(doAsUserId)) {
-	doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
-}
-%>
+	function <portlet:namespace />changeVersionView(version) {
+		location.href = "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=" + version;
+	}
 
-<aui:script use="liferay-portlet-journal">
-	Liferay.Portlet.Journal.PROXY = {};
-	Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= HttpUtil.encodeURL(doAsUserId) %>';
-	Liferay.Portlet.Journal.PROXY.editorImpl = '<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>';
-	Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
-	Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
+	function <portlet:namespace />contentChanged() {
+		<portlet:namespace />contentChangedFlag = true;
+	}
 
-	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>', '<%= instanceIdKey %>');
+	function <portlet:namespace />deleteArticle() {
+		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") %>")) {
+			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+			submitForm(document.<portlet:namespace />fm1);
+		}
+	}
+
+	function <portlet:namespace />disableInputDate(date, checked) {
+		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Month"].disabled = checked;
+		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Day"].disabled = checked;
+		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Year"].disabled = checked;
+		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Hour"].disabled = checked;
+		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Minute"].disabled = checked;
+		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "AmPm"].disabled = checked;
+
+		var imageInputIdInput = AUI().one(document.<portlet:namespace />fm1["<portlet:namespace />" + date + "ImageInputIdInput"]);
+
+		if (imageInputIdInput) {
+			imageInputIdInput.toggleClass('disabled');
+		}
+	}
+
+	function <portlet:namespace />editorContentChanged(text) {
+		<portlet:namespace />contentChanged();
+	}
+
+	function <portlet:namespace />expireArticle() {
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.EXPIRE %>";
+		submitForm(document.<portlet:namespace />fm1);
+	}
+
+	function <portlet:namespace />getChoice(value) {
+		for (var i = 0; i < document.<portlet:namespace />fm1.<portlet:namespace />languageId.length; i++) {
+			if (document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[i].value == value) {
+				return document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[i].index;
+			}
+		}
+
+		return null;
+	}
+
+	function <portlet:namespace />getLanguageViewURL(languageId) {
+		return "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=<%= version %>&<portlet:namespace />languageId=" + languageId;
+	}
+
+	function <portlet:namespace />getSuggestionsContent() {
+		var content = '';
+
+		content += document.<portlet:namespace />fm1.<portlet:namespace/>title.value + ' ';
+		content += window.<portlet:namespace />editor.getHTML();
+
+		return content;
+	}
+
+	function <portlet:namespace />initEditor() {
+		return "<%= UnicodeFormatter.toString(content) %>";
+	}
+
+	function <portlet:namespace />removeArticleLocale() {
+		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this-language") %>")) {
+			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "removeArticlesLocale";
+			document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=<%= defaultLanguageId %>";
+			submitForm(document.<portlet:namespace />fm1);
+		}
+	}
+
+	function <portlet:namespace />selectDocumentLibrary(url) {
+		document.getElementById(<portlet:namespace />documentLibraryInput).value = url;
+	}
+
+	function <portlet:namespace />selectImageGallery(url) {
+		document.getElementById(<portlet:namespace />imageGalleryInput).value = url;
+	}
+
+	function <portlet:namespace />selectStructure(structureId) {
+		if (document.<portlet:namespace />fm1.<portlet:namespace />structureId.value != structureId) {
+			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
+			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
+			submitForm(document.<portlet:namespace />fm1);
+		}
+	}
+
+	function <portlet:namespace />selectTemplate(structureId, templateId) {
+		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
+		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
+		submitForm(document.<portlet:namespace />fm1);
+	}
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		<c:choose>
@@ -787,6 +769,25 @@ if (Validator.isNull(doAsUserId)) {
 			</c:otherwise>
 		</c:choose>
 	</c:if>
+</aui:script>
+
+<aui:script use="liferay-portlet-journal">
+
+	<%
+	String doAsUserId = themeDisplay.getDoAsUserId();
+
+	if (Validator.isNull(doAsUserId)) {
+		doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
+	}
+	%>
+
+	Liferay.Portlet.Journal.PROXY = {};
+	Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= HttpUtil.encodeURL(doAsUserId) %>';
+	Liferay.Portlet.Journal.PROXY.editorImpl = '<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>';
+	Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
+	Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
+
+	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>', '<%= instanceIdKey %>');
 </aui:script>
 
 <%!

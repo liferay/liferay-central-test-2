@@ -42,44 +42,6 @@ String defaultWapThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.
 String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
 %>
 
-<aui:script>
-	function <portlet:namespace />changeLogo(newLogoURL) {
-		AUI().one('#<portlet:namespace />avatar').attr('src', newLogoURL);
-		AUI().one('.company-logo').attr('src', newLogoURL);
-
-		AUI().one('#<portlet:namespace />deleteLogo').val(false);
-	}
-
-	function <portlet:namespace />deleteLogo(defaultLogoURL) {
-		AUI().one('#<portlet:namespace />deleteLogo').val(true);
-
-		AUI().one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
-		AUI().one('.company-logo').attr('src', defaultLogoURL);
-	}
-
-	function <portlet:namespace />openEditCompanyLogoWindow(editCompanyLogoURL) {
-		var editCompanyLogoWindow = window.open(editCompanyLogoURL, 'changeLogo', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
-
-		editCompanyLogoWindow.focus();
-	}
-</aui:script>
-
-<aui:script use="event,node">
-	var modifyLinks = A.all('span.modify-link');
-
-	if (modifyLinks) {
-		modifyLinks.on(
-			'click',
-			function() {
-				A.fire(
-					'enterpriseAdmin:trackChanges',
-					A.one('.selected .modify-link')
-				);
-			}
-		);
-	}
-</aui:script>
-
 <h3><liferay-ui:message key="language-and-time-zone" /></h3>
 
 <aui:fieldset>
@@ -221,3 +183,41 @@ boolean deployed = false;
 		</c:if>
 	</aui:select>
 </aui:fieldset>
+
+<aui:script>
+	function <portlet:namespace />changeLogo(newLogoURL) {
+		AUI().one('#<portlet:namespace />avatar').attr('src', newLogoURL);
+		AUI().one('.company-logo').attr('src', newLogoURL);
+
+		AUI().one('#<portlet:namespace />deleteLogo').val(false);
+	}
+
+	function <portlet:namespace />deleteLogo(defaultLogoURL) {
+		AUI().one('#<portlet:namespace />deleteLogo').val(true);
+
+		AUI().one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
+		AUI().one('.company-logo').attr('src', defaultLogoURL);
+	}
+
+	function <portlet:namespace />openEditCompanyLogoWindow(editCompanyLogoURL) {
+		var editCompanyLogoWindow = window.open(editCompanyLogoURL, 'changeLogo', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
+
+		editCompanyLogoWindow.focus();
+	}
+</aui:script>
+
+<aui:script use="event,node">
+	var modifyLinks = A.all('span.modify-link');
+
+	if (modifyLinks) {
+		modifyLinks.on(
+			'click',
+			function() {
+				A.fire(
+					'enterpriseAdmin:trackChanges',
+					A.one('.selected .modify-link')
+				);
+			}
+		);
+	}
+</aui:script>

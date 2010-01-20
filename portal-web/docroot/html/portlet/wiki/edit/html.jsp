@@ -29,15 +29,15 @@ WikiPage wikiPage = (WikiPage)request.getAttribute("edit_page.jsp-wikiPage");
 String content = BeanParamUtil.getString(wikiPage, request, "content");
 %>
 
+<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
+
+<aui:input name="content" type="hidden" />
+
 <aui:script>
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 </aui:script>
-
-<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
-
-<aui:input name="content" type="hidden" />
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.wiki.edit.html.jsp";

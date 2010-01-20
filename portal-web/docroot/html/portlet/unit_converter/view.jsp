@@ -33,103 +33,6 @@ double fromValue = ParamUtil.getDouble(request, "fromValue");
 Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValue);
 %>
 
-<aui:script>
-	var lengthArray = [
-		new Option(0, '<%= UnicodeLanguageUtil.get(pageContext, "meter") %>'),
-		new Option(1, '<%= UnicodeLanguageUtil.get(pageContext, "millimeter") %>'),
-		new Option(2, '<%= UnicodeLanguageUtil.get(pageContext, "centimeter") %>'),
-		new Option(3, '<%= UnicodeLanguageUtil.get(pageContext, "kilometer") %>'),
-		new Option(4, '<%= UnicodeLanguageUtil.get(pageContext, "foot") %>'),
-		new Option(5, '<%= UnicodeLanguageUtil.get(pageContext, "inch") %>'),
-		new Option(6, '<%= UnicodeLanguageUtil.get(pageContext, "yard") %>'),
-		new Option(7, '<%= UnicodeLanguageUtil.get(pageContext, "mile") %>'),
-		new Option(8, '<%= UnicodeLanguageUtil.get(pageContext, "cubit") %>'),
-		new Option(9, '<%= UnicodeLanguageUtil.get(pageContext, "talent") %>'),
-		new Option(10, '<%= UnicodeLanguageUtil.get(pageContext, "handbreath") %>')
-	];
-
-	var areaArray = [
-		new Option(0, '<%= UnicodeLanguageUtil.get(pageContext, "square-kilometer") %>'),
-		new Option(1, '<%= UnicodeLanguageUtil.get(pageContext, "square-meter") %>'),
-		new Option(2, '<%= UnicodeLanguageUtil.get(pageContext, "square-centimeter") %>'),
-		new Option(3, '<%= UnicodeLanguageUtil.get(pageContext, "square-millimeter") %>'),
-		new Option(4, '<%= UnicodeLanguageUtil.get(pageContext, "square-foot") %>'),
-		new Option(5, '<%= UnicodeLanguageUtil.get(pageContext, "square-inch") %>'),
-		new Option(6, '<%= UnicodeLanguageUtil.get(pageContext, "square-yard") %>'),
-		new Option(7, '<%= UnicodeLanguageUtil.get(pageContext, "square-mile") %>'),
-		new Option(8, '<%= UnicodeLanguageUtil.get(pageContext, "hectare") %>'),
-		new Option(9, '<%= UnicodeLanguageUtil.get(pageContext, "acre") %>')
-	];
-
-	var volumeArray = [
-		new Option(0, 'Liter'),
-		new Option(1, 'Cubic Centimeter'),
-		new Option(2, 'Cubic Inch (Liquid Measure)'),
-		new Option(3, 'Pint (Dry Measure)'),
-		new Option(4, 'Cor (Homer)'),
-		new Option(5, 'Lethek'),
-		new Option(6, 'Ephah'),
-		new Option(7, 'Seah'),
-		new Option(8, 'Omer'),
-		new Option(9, 'Cab'),
-		new Option(10, 'Bath'),
-		new Option(11, 'Hin'),
-		new Option(12, 'Log')
-	];
-
-	var massArray = [
-		new Option(0, '<%= UnicodeLanguageUtil.get(pageContext, "kilogram") %>'),
-		new Option(1, '<%= UnicodeLanguageUtil.get(pageContext, "pound") %>'),
-		new Option(2, '<%= UnicodeLanguageUtil.get(pageContext, "ton") %>'),
-		new Option(3, '<%= UnicodeLanguageUtil.get(pageContext, "talent") %>'),
-		new Option(4, '<%= UnicodeLanguageUtil.get(pageContext, "mina") %>'),
-		new Option(5, '<%= UnicodeLanguageUtil.get(pageContext, "shekel") %>'),
-		new Option(6, '<%= UnicodeLanguageUtil.get(pageContext, "pim") %>'),
-		new Option(7, '<%= UnicodeLanguageUtil.get(pageContext, "beka") %>'),
-		new Option(8, '<%= UnicodeLanguageUtil.get(pageContext, "gerah") %>')
-	];
-
-	var temperatureArray = [
-		new Option(0, 'Kelvin'),
-		new Option(1, 'Celcius'),
-		new Option(2, 'Fahrenheit'),
-		new Option(3, 'Rankine'),
-		new Option(4, 'Réaumure')
-	];
-</aui:script>
-
-<aui:script use="io-request,parse-content">
-	var form = A.get('#<portlet:namespace />fm');
-
-	form.on(
-		'submit',
-		function(event) {
-			var uri = form.getAttribute('action');
-			var parentNode = form.get('parentNode');
-
-			parentNode.plug(A.Plugin.ParseContent);
-
-			A.io.request(
-				uri,
-				{
-					form: {
-						id: form
-					},
-					on: {
-						success: function(event, id, obj) {
-							var responseData = this.get('responseData');
-
-							parentNode.setContent(responseData);
-						}
-					}
-				}
-			);
-
-			event.halt();
-		}
-	);
-</aui:script>
-
 <form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/unit_converter/view" /></liferay-portlet:renderURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 
 <table class="lfr-table">
@@ -315,8 +218,103 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 
 </form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	var lengthArray = [
+		new Option(0, '<%= UnicodeLanguageUtil.get(pageContext, "meter") %>'),
+		new Option(1, '<%= UnicodeLanguageUtil.get(pageContext, "millimeter") %>'),
+		new Option(2, '<%= UnicodeLanguageUtil.get(pageContext, "centimeter") %>'),
+		new Option(3, '<%= UnicodeLanguageUtil.get(pageContext, "kilometer") %>'),
+		new Option(4, '<%= UnicodeLanguageUtil.get(pageContext, "foot") %>'),
+		new Option(5, '<%= UnicodeLanguageUtil.get(pageContext, "inch") %>'),
+		new Option(6, '<%= UnicodeLanguageUtil.get(pageContext, "yard") %>'),
+		new Option(7, '<%= UnicodeLanguageUtil.get(pageContext, "mile") %>'),
+		new Option(8, '<%= UnicodeLanguageUtil.get(pageContext, "cubit") %>'),
+		new Option(9, '<%= UnicodeLanguageUtil.get(pageContext, "talent") %>'),
+		new Option(10, '<%= UnicodeLanguageUtil.get(pageContext, "handbreath") %>')
+	];
+
+	var areaArray = [
+		new Option(0, '<%= UnicodeLanguageUtil.get(pageContext, "square-kilometer") %>'),
+		new Option(1, '<%= UnicodeLanguageUtil.get(pageContext, "square-meter") %>'),
+		new Option(2, '<%= UnicodeLanguageUtil.get(pageContext, "square-centimeter") %>'),
+		new Option(3, '<%= UnicodeLanguageUtil.get(pageContext, "square-millimeter") %>'),
+		new Option(4, '<%= UnicodeLanguageUtil.get(pageContext, "square-foot") %>'),
+		new Option(5, '<%= UnicodeLanguageUtil.get(pageContext, "square-inch") %>'),
+		new Option(6, '<%= UnicodeLanguageUtil.get(pageContext, "square-yard") %>'),
+		new Option(7, '<%= UnicodeLanguageUtil.get(pageContext, "square-mile") %>'),
+		new Option(8, '<%= UnicodeLanguageUtil.get(pageContext, "hectare") %>'),
+		new Option(9, '<%= UnicodeLanguageUtil.get(pageContext, "acre") %>')
+	];
+
+	var volumeArray = [
+		new Option(0, 'Liter'),
+		new Option(1, 'Cubic Centimeter'),
+		new Option(2, 'Cubic Inch (Liquid Measure)'),
+		new Option(3, 'Pint (Dry Measure)'),
+		new Option(4, 'Cor (Homer)'),
+		new Option(5, 'Lethek'),
+		new Option(6, 'Ephah'),
+		new Option(7, 'Seah'),
+		new Option(8, 'Omer'),
+		new Option(9, 'Cab'),
+		new Option(10, 'Bath'),
+		new Option(11, 'Hin'),
+		new Option(12, 'Log')
+	];
+
+	var massArray = [
+		new Option(0, '<%= UnicodeLanguageUtil.get(pageContext, "kilogram") %>'),
+		new Option(1, '<%= UnicodeLanguageUtil.get(pageContext, "pound") %>'),
+		new Option(2, '<%= UnicodeLanguageUtil.get(pageContext, "ton") %>'),
+		new Option(3, '<%= UnicodeLanguageUtil.get(pageContext, "talent") %>'),
+		new Option(4, '<%= UnicodeLanguageUtil.get(pageContext, "mina") %>'),
+		new Option(5, '<%= UnicodeLanguageUtil.get(pageContext, "shekel") %>'),
+		new Option(6, '<%= UnicodeLanguageUtil.get(pageContext, "pim") %>'),
+		new Option(7, '<%= UnicodeLanguageUtil.get(pageContext, "beka") %>'),
+		new Option(8, '<%= UnicodeLanguageUtil.get(pageContext, "gerah") %>')
+	];
+
+	var temperatureArray = [
+		new Option(0, 'Kelvin'),
+		new Option(1, 'Celcius'),
+		new Option(2, 'Fahrenheit'),
+		new Option(3, 'Rankine'),
+		new Option(4, 'Réaumure')
+	];
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fromValue);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>
+
+<aui:script use="io-request,parse-content">
+	var form = A.get('#<portlet:namespace />fm');
+
+	form.on(
+		'submit',
+		function(event) {
+			var uri = form.getAttribute('action');
+			var parentNode = form.get('parentNode');
+
+			parentNode.plug(A.Plugin.ParseContent);
+
+			A.io.request(
+				uri,
+				{
+					form: {
+						id: form
+					},
+					on: {
+						success: function(event, id, obj) {
+							var responseData = this.get('responseData');
+
+							parentNode.setContent(responseData);
+						}
+					}
+				}
+			);
+
+			event.halt();
+		}
+	);
+</aui:script>

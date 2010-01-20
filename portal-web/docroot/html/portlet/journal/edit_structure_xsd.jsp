@@ -37,6 +37,49 @@ else {
 boolean useEditorCodepress = editorType.equals("codepress");
 %>
 
+<form method="post" name="<portlet:namespace />editorForm">
+
+<table class="lfr-table">
+<tr>
+	<td>
+		<strong><liferay-ui:message key="editor-type" /></strong>
+	</td>
+	<td>
+		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">
+			<option value="1"><liferay-ui:message key="plain" /></option>
+			<option <%= useEditorCodepress ? "selected" : "" %> value="0"><liferay-ui:message key="rich" /></option>
+		</select>
+	</td>
+</tr>
+</table>
+
+<br />
+
+<c:choose>
+	<c:when test="<%= useEditorCodepress %>">
+		<textarea class="codepress html" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" wrap="off"></textarea>
+	</c:when>
+	<c:otherwise>
+		<textarea class="lfr-textarea" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
+	</c:otherwise>
+</c:choose>
+
+<br /><br />
+
+<input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateStructureXsd();" />
+
+<c:if test="<%= !useEditorCodepress %>">
+	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent);" />
+</c:if>
+
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="AUI().DialogManager.closeByChild(this);" />
+
+</form>
+
+<c:if test="<%= useEditorCodepress %>">
+	<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
+</c:if>
+
 <aui:script>
 	function getEditorContent() {
 		return <portlet:namespace />getXsd();
@@ -94,53 +137,8 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 		submitForm(document.<portlet:namespace />fm1);
 	}
-</aui:script>
 
-<form method="post" name="<portlet:namespace />editorForm">
-
-<table class="lfr-table">
-<tr>
-	<td>
-		<strong><liferay-ui:message key="editor-type" /></strong>
-	</td>
-	<td>
-		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">
-			<option value="1"><liferay-ui:message key="plain" /></option>
-			<option <%= useEditorCodepress ? "selected" : "" %> value="0"><liferay-ui:message key="rich" /></option>
-		</select>
-	</td>
-</tr>
-</table>
-
-<br />
-
-<c:choose>
-	<c:when test="<%= useEditorCodepress %>">
-		<textarea class="codepress html" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" wrap="off"></textarea>
-	</c:when>
-	<c:otherwise>
-		<textarea class="lfr-textarea" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
-	</c:otherwise>
-</c:choose>
-
-<br /><br />
-
-<input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateStructureXsd();" />
-
-<c:if test="<%= !useEditorCodepress %>">
-	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent);" />
-</c:if>
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="AUI().DialogManager.closeByChild(this);" />
-
-</form>
-
-<aui:script>
 	document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value = getEditorContent();
 
 	Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent', <%= useEditorCodepress %>, true);
 </aui:script>
-
-<c:if test="<%= useEditorCodepress %>">
-	<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
-</c:if>

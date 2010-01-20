@@ -22,12 +22,6 @@
  */
 %>
 
-<aui:script>
-	function <portlet:namespace />updateCalendar(month, day, year) {
-		location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="tabs1" value="day" /><portlet:param name="eventType" value="<%= eventType %>" /></portlet:renderURL>&<portlet:namespace />month=' + month + '&<portlet:namespace />day=' + day + '&<portlet:namespace />year=' + year;
-	}
-</aui:script>
-
 <table>
 <tr>
 	<td>
@@ -148,6 +142,12 @@
 	</td>
 </tr>
 </table>
+
+<aui:script>
+	function <portlet:namespace />updateCalendar(month, day, year) {
+		location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="tabs1" value="day" /><portlet:param name="eventType" value="<%= eventType %>" /></portlet:renderURL>&<portlet:namespace />month=' + month + '&<portlet:namespace />day=' + day + '&<portlet:namespace />year=' + year;
+	}
+</aui:script>
 
 <%
 PortalUtil.setPageSubtitle(String.valueOf(selYear), request);

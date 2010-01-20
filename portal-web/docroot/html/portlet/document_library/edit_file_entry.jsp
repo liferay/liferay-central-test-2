@@ -102,41 +102,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("name", name);
 %>
 
-<aui:script>
-	function <portlet:namespace />lock() {
-		submitForm(document.hrefFm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>");
-	}
-
-	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = "<%= rootFolderId %>";
-
-		var nameEl = document.getElementById("<portlet:namespace />folderName");
-
-		nameEl.href = "";
-		nameEl.innerHTML = "";
-	}
-
-	function <portlet:namespace />saveFileEntry() {
-		<%= HtmlUtil.escape(uploadProgressId) %>.startProgress();
-
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= fileEntry == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectFolder(folderId, folderName) {
-		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = folderId;
-
-		var nameEl = document.getElementById("<portlet:namespace />folderName");
-
-		nameEl.href = "javascript:location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
-		nameEl.innerHTML = folderName + "&nbsp;";
-	}
-
-	function <portlet:namespace />unlock() {
-		submitForm(document.hrefFm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>");
-	}
-</aui:script>
-
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <c:if test="<%= isLocked.booleanValue() %>">
@@ -160,6 +125,12 @@ portletURL.setParameter("name", name);
 </c:if>
 
 <c:if test="<%= fileEntry == null %>">
+	<div class="lfr-dynamic-uploader">
+		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
+	</div>
+
+	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
+
 	<aui:script use="liferay-upload">
 		new Liferay.Upload(
 			{
@@ -173,12 +144,6 @@ portletURL.setParameter("name", name);
 			}
 		);
 	</aui:script>
-
-	<div class="lfr-dynamic-uploader">
-		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
-	</div>
-
-	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
 </c:if>
 
 <portlet:actionURL var="editFileEntryURL">
@@ -331,7 +296,50 @@ portletURL.setParameter("name", name);
 	</aui:fieldset>
 </aui:form>
 
+<liferay-ui:upload-progress
+	id="<%= uploadProgressId %>"
+	message="uploading"
+	redirect="<%= redirect %>"
+/>
+
+<c:if test="<%= fileEntry == null %>">
+	</div>
+</c:if>
+
 <aui:script>
+	function <portlet:namespace />lock() {
+		submitForm(document.hrefFm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>");
+	}
+
+	function <portlet:namespace />removeFolder() {
+		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = "<%= rootFolderId %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />folderName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
+	function <portlet:namespace />saveFileEntry() {
+		<%= HtmlUtil.escape(uploadProgressId) %>.startProgress();
+
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= fileEntry == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectFolder(folderId, folderName) {
+		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = folderId;
+
+		var nameEl = document.getElementById("<portlet:namespace />folderName");
+
+		nameEl.href = "javascript:location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
+		nameEl.innerHTML = folderName + "&nbsp;";
+	}
+
+	function <portlet:namespace />unlock() {
+		submitForm(document.hrefFm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>");
+	}
+
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
@@ -367,16 +375,6 @@ portletURL.setParameter("name", name);
 		validateFile(fileField);
 	}
 </aui:script>
-
-<liferay-ui:upload-progress
-	id="<%= uploadProgressId %>"
-	message="uploading"
-	redirect="<%= redirect %>"
-/>
-
-<c:if test="<%= fileEntry == null %>">
-	</div>
-</c:if>
 
 <%
 if (fileEntry != null) {

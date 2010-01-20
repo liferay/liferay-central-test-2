@@ -44,66 +44,6 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 	}
 </style>
 
-<aui:script>
-	Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonContainer');
-
-	function <portlet:namespace />flag() {
-		AUI().use(
-			'dialog',
-			function(A) {
-				var reasonNode = A.one('#<portlet:namespace />reason');
-				var reason = (reasonNode && reasonNode.val()) || '';
-
-				if (reason == 'other') {
-					var otherReasonNode = A.one('#<portlet:namespace />otherReason');
-
-					reason = (otherReasonNode && otherReasonNode.val()) || '<liferay-ui:message key="no-reason-specified" />';
-				}
-
-				var reporterEmailAddressNode = A.one('#<portlet:namespace />reporterEmailAddress');
-				var reporterEmailAddress = (reporterEmailAddressNode && reporterEmailAddressNode.val()) || '';
-
-				var flagsPopupNode = A.one('#<portlet:namespace />flagsPopup');
-				var errorMessageNode = A.one('#<portlet:namespace />error');
-				var confirmationMessageNode = A.one('#<portlet:namespace />confirmation');
-
-				var errorMessage = (errorMessageNode && errorMessageNode.html()) || '';
-				var confirmationMessage = (confirmationMessageNode && confirmationMessageNode.html()) || '';
-
-				if (flagsPopupNode) {
-					A.DialogManager.refreshByChild(
-						flagsPopupNode,
-						{
-							cfg: {
-								data: A.toQueryString(
-									{
-										className: '<%= HtmlUtil.escape(className) %>',
-										classPK: '<%= classPK %>',
-										contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
-										contentURL: '<%= HtmlUtil.escape(contentURL) %>',
-										reason: reason,
-										reportedUserId: '<%= reportedUserId %>',
-										reporterEmailAddress: reporterEmailAddress
-									}
-								),
-								on: {
-									failure: function() {
-										this.get('host').setStdModContent('body', errorMessage);
-									},
-									success: function() {
-										this.get('host').setStdModContent('body', confirmationMessage);
-									}
-								}
-							},
-							uri: '<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:actionURL>'
-						}
-					);
-				}
-			}
-		);
-	}
-</aui:script>
-
 <div class="portlet-flags" id="<portlet:namespace />flagsPopup">
 	<form class="aui-form" method="post" name="<portlet:namespace />flagsForm">
 		<p>
@@ -167,3 +107,63 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 <div class="aui-helper-hidden" id="<portlet:namespace />error">
 	<p><strong><liferay-ui:message key="an-error-occurred-while-sending-the-report.-please-try-again-in-a-few-minutes" /></strong></p>
 </div>
+
+<aui:script>
+	function <portlet:namespace />flag() {
+		AUI().use(
+			'dialog',
+			function(A) {
+				var reasonNode = A.one('#<portlet:namespace />reason');
+				var reason = (reasonNode && reasonNode.val()) || '';
+
+				if (reason == 'other') {
+					var otherReasonNode = A.one('#<portlet:namespace />otherReason');
+
+					reason = (otherReasonNode && otherReasonNode.val()) || '<liferay-ui:message key="no-reason-specified" />';
+				}
+
+				var reporterEmailAddressNode = A.one('#<portlet:namespace />reporterEmailAddress');
+				var reporterEmailAddress = (reporterEmailAddressNode && reporterEmailAddressNode.val()) || '';
+
+				var flagsPopupNode = A.one('#<portlet:namespace />flagsPopup');
+				var errorMessageNode = A.one('#<portlet:namespace />error');
+				var confirmationMessageNode = A.one('#<portlet:namespace />confirmation');
+
+				var errorMessage = (errorMessageNode && errorMessageNode.html()) || '';
+				var confirmationMessage = (confirmationMessageNode && confirmationMessageNode.html()) || '';
+
+				if (flagsPopupNode) {
+					A.DialogManager.refreshByChild(
+						flagsPopupNode,
+						{
+							cfg: {
+								data: A.toQueryString(
+									{
+										className: '<%= HtmlUtil.escape(className) %>',
+										classPK: '<%= classPK %>',
+										contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
+										contentURL: '<%= HtmlUtil.escape(contentURL) %>',
+										reason: reason,
+										reportedUserId: '<%= reportedUserId %>',
+										reporterEmailAddress: reporterEmailAddress
+									}
+								),
+								on: {
+									failure: function() {
+										this.get('host').setStdModContent('body', errorMessage);
+									},
+									success: function() {
+										this.get('host').setStdModContent('body', confirmationMessage);
+									}
+								}
+							},
+							uri: '<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:actionURL>'
+						}
+					);
+				}
+			}
+		);
+	}
+
+	Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonContainer');
+</aui:script>

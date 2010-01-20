@@ -36,31 +36,6 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 %>
 
-<aui:script>
-	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = "<%= rootFolderId %>";
-
-		var nameEl = document.getElementById("<portlet:namespace />folderName");
-
-		nameEl.href = "";
-		nameEl.innerHTML = "";
-	}
-
-	function <portlet:namespace />saveEntry() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectFolder(folderId, folderName) {
-		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
-
-		var nameEl = document.getElementById("<portlet:namespace />folderName");
-
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId;
-		nameEl.innerHTML = folderName + "&nbsp;";
-	}
-</aui:script>
-
 <liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
@@ -157,11 +132,34 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	</aui:button-row>
 </aui:form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />removeFolder() {
+		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = "<%= rootFolderId %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />folderName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
+	function <portlet:namespace />saveEntry() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectFolder(folderId, folderName) {
+		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
+
+		var nameEl = document.getElementById("<portlet:namespace />folderName");
+
+		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId;
+		nameEl.innerHTML = folderName + "&nbsp;";
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>
 
 <%
 if (entry != null) {

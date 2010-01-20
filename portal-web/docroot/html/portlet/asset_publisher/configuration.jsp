@@ -48,59 +48,6 @@ configurationActionURL.setParameter("backURL", redirect);
 configurationActionURL.setParameter("portletResource", portletResource);
 %>
 
-<aui:script>
-	function <portlet:namespace />chooseSelectionStyle() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'selection-style';
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />moveSelectionDown(assetEntryOrder) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'move-selection-down';
-		document.<portlet:namespace />fm.<portlet:namespace />assetEntryOrder.value = assetEntryOrder;
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />moveSelectionUp(assetEntryOrder) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'move-selection-up';
-		document.<portlet:namespace />fm.<portlet:namespace />assetEntryOrder.value = assetEntryOrder;
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />saveSelectBoxes() {
-		if (document.<portlet:namespace />fm.<portlet:namespace />scopeIds) {
-			document.<portlet:namespace />fm.<portlet:namespace />scopeIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentScopeIds);
-		}
-
-		if (document.<portlet:namespace />fm.<portlet:namespace />classNameIds) {
-			document.<portlet:namespace />fm.<portlet:namespace />classNameIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentClassNameIds);
-		}
-
-		document.<portlet:namespace />fm.<portlet:namespace />metadataFields.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentMetadataFields);
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectAsset(assetEntryId, assetParentId, assetTitle, assetEntryOrder) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'add-selection';
-		document.<portlet:namespace />fm.<portlet:namespace />assetEntryId.value = assetEntryId;
-		document.<portlet:namespace />fm.<portlet:namespace />assetParentId.value = assetParentId;
-		document.<portlet:namespace />fm.<portlet:namespace />assetTitle.value = assetTitle;
-		document.<portlet:namespace />fm.<portlet:namespace />assetEntryOrder.value = assetEntryOrder;
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectionForType(type) {
-		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = type;
-		document.<portlet:namespace />fm.<portlet:namespace />assetEntryOrder.value = -1;
-
-		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
-	}
-</aui:script>
-
 <style type="text/css">
 	.aui-form .queryRules fieldset {
 		padding: 0;
@@ -490,10 +437,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								</aui:fieldset>
 							</div>
 
-							<aui:script use="liferay-auto-fields">
-								Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
-								Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
+							<aui:input inlineLabel="left" label="include-tags-specified-in-the-url" name="mergeUrlTags" type="checkbox" value="<%= mergeUrlTags %>" />
 
+							<aui:script use="liferay-auto-fields">
 								var autoFields = new Liferay.AutoFields(
 									{
 										contentBox: '#<portlet:namespace />queryRules > fieldset',
@@ -501,77 +447,78 @@ configurationActionURL.setParameter("portletResource", portletResource);
 										url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_query_rule" /></portlet:renderURL>'
 									}
 								).render();
+
+								Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
+								Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 							</aui:script>
+						</liferay-ui:panel>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherGroupBy' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>'>
+							<aui:fieldset>
+								<aui:select inlineField="<%= true %>" inlineLabel="left" label="order-by" name="orderByColumn1">
+									<aui:option label="title" selected='<%= orderByColumn2.equals("title") %>' />
+									<aui:option label="create-date" selected='<%= orderByColumn2.equals("createDate") %>' value="createDate" />
+									<aui:option label="modified-date" selected='<%= orderByColumn2.equals("modifiedDate") %>' value="modifiedDate" />
+									<aui:option label="publish-date" selected='<%= orderByColumn2.equals("publishDate") %>' value="publishDate" />
+									<aui:option label="expiration-date" selected='<%= orderByColumn2.equals("expirationDate") %>' value="expirationDate" />
+									<aui:option label="priority" selected='<%= orderByColumn2.equals("priority") %>'><liferay-ui:message key="priority" /></aui:option>
+									<aui:option label="view-count" selected='<%= orderByColumn2.equals("viewCount") %>' value="viewCount" />
+								</aui:select>
 
-							<aui:input inlineLabel="left" label="include-tags-specified-in-the-url" name="mergeUrlTags" type="checkbox" value="<%= mergeUrlTags %>" />
-					</liferay-ui:panel>
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherGroupBy' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>'>
-						<aui:fieldset>
-							<aui:select inlineField="<%= true %>" inlineLabel="left" label="order-by" name="orderByColumn1">
-								<aui:option label="title" selected='<%= orderByColumn2.equals("title") %>' />
-								<aui:option label="create-date" selected='<%= orderByColumn2.equals("createDate") %>' value="createDate" />
-								<aui:option label="modified-date" selected='<%= orderByColumn2.equals("modifiedDate") %>' value="modifiedDate" />
-								<aui:option label="publish-date" selected='<%= orderByColumn2.equals("publishDate") %>' value="publishDate" />
-								<aui:option label="expiration-date" selected='<%= orderByColumn2.equals("expirationDate") %>' value="expirationDate" />
-								<aui:option label="priority" selected='<%= orderByColumn2.equals("priority") %>'><liferay-ui:message key="priority" /></aui:option>
-								<aui:option label="view-count" selected='<%= orderByColumn2.equals("viewCount") %>' value="viewCount" />
-							</aui:select>
+								<aui:select label="" name="orderByType1">
+									<aui:option label="ascending" selected='<%= orderByType1.equals("ASC") %>' value="ASC" />
+									<aui:option label="descending" selected='<%= orderByType1.equals("DESC") %>' value="DESC" />
+								</aui:select>
 
-							<aui:select label="" name="orderByType1">
-								<aui:option label="ascending" selected='<%= orderByType1.equals("ASC") %>' value="ASC" />
-								<aui:option label="descending" selected='<%= orderByType1.equals("DESC") %>' value="DESC" />
-							</aui:select>
+								<aui:select inlineField="<%= true %>" inlineLabel="left" label="and-then-by" name="orderByColumn2">
+									<aui:option label="title" selected='<%= orderByColumn2.equals("title") %>' />
+									<aui:option label="create-date" selected='<%= orderByColumn2.equals("createDate") %>' value="createDate" />
+									<aui:option label="modified-date" selected='<%= orderByColumn2.equals("modifiedDate") %>' value="modifiedDate" />
+									<aui:option label="publish-date" selected='<%= orderByColumn2.equals("publishDate") %>' value="publishDate" />
+									<aui:option label="expiration-date" selected='<%= orderByColumn2.equals("expirationDate") %>' value="expirationDate" />
+									<aui:option label="priority" selected='<%= orderByColumn2.equals("priority") %>'><liferay-ui:message key="priority" /></aui:option>
+									<aui:option label="view-count" selected='<%= orderByColumn2.equals("viewCount") %>' value="viewCount" />
+								</aui:select>
 
-							<aui:select inlineField="<%= true %>" inlineLabel="left" label="and-then-by" name="orderByColumn2">
-								<aui:option label="title" selected='<%= orderByColumn2.equals("title") %>' />
-								<aui:option label="create-date" selected='<%= orderByColumn2.equals("createDate") %>' value="createDate" />
-								<aui:option label="modified-date" selected='<%= orderByColumn2.equals("modifiedDate") %>' value="modifiedDate" />
-								<aui:option label="publish-date" selected='<%= orderByColumn2.equals("publishDate") %>' value="publishDate" />
-								<aui:option label="expiration-date" selected='<%= orderByColumn2.equals("expirationDate") %>' value="expirationDate" />
-								<aui:option label="priority" selected='<%= orderByColumn2.equals("priority") %>'><liferay-ui:message key="priority" /></aui:option>
-								<aui:option label="view-count" selected='<%= orderByColumn2.equals("viewCount") %>' value="viewCount" />
-							</aui:select>
+								<aui:select label="" name="orderByType2">
+									<aui:option label="ascending" selected='<%= orderByType2.equals("ASC") %>' value="ASC" />
+									<aui:option label="descending" selected='<%= orderByType2.equals("DESC") %>' value="DESC" />
+								</aui:select>
 
-							<aui:select label="" name="orderByType2">
-								<aui:option label="ascending" selected='<%= orderByType2.equals("ASC") %>' value="ASC" />
-								<aui:option label="descending" selected='<%= orderByType2.equals("DESC") %>' value="DESC" />
-							</aui:select>
+								<aui:select label="group-by" name="assetVocabularyId">
+									<aui:option value="" />
+									<aui:option label="asset-types" selected="<%= assetVocabularyId == -1 %>" value="-1" />
 
-							<aui:select label="group-by" name="assetVocabularyId">
-								<aui:option value="" />
-								<aui:option label="asset-types" selected="<%= assetVocabularyId == -1 %>" value="-1" />
+									<%
+									List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);
 
-								<%
-								List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);
+									if (!assetVocabularies.isEmpty()) {
+									%>
 
-								if (!assetVocabularies.isEmpty()) {
-								%>
+										<optgroup label="<liferay-ui:message key="vocabularies" />">
 
-									<optgroup label="<liferay-ui:message key="vocabularies" />">
+											<%
+											for (AssetVocabulary assetVocabulary : assetVocabularies) {
+											%>
 
-										<%
-										for (AssetVocabulary assetVocabulary : assetVocabularies) {
-										%>
+												<aui:option label="<%= assetVocabulary.getName() %>" selected="<%= assetVocabularyId == assetVocabulary.getVocabularyId() %>" value="<%= assetVocabulary.getVocabularyId() %>" />
 
-											<aui:option label="<%= assetVocabulary.getName() %>" selected="<%= assetVocabularyId == assetVocabulary.getVocabularyId() %>" value="<%= assetVocabulary.getVocabularyId() %>" />
+											<%
+											}
+											%>
 
-										<%
-										}
-										%>
+										</optgroup>
 
-									</optgroup>
+									<%
+									}
+									%>
 
-								<%
-								}
-								%>
-
-							</aui:select>
-						</aui:fieldset>
-					</liferay-ui:panel>
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherDisplaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
-						<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
-					</liferay-ui:panel>
-				</liferay-ui:panel-container>
+								</aui:select>
+							</aui:fieldset>
+						</liferay-ui:panel>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherDisplaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
+							<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
 
 					<aui:button-row>
 						<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' value="save" />
@@ -647,6 +594,61 @@ configurationActionURL.setParameter("portletResource", portletResource);
 	</c:choose>
 </aui:form>
 
+<aui:script>
+	function <portlet:namespace />chooseSelectionStyle() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'selection-style';
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />moveSelectionDown(assetEntryOrder) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'move-selection-down';
+		document.<portlet:namespace />fm.<portlet:namespace />assetEntryOrder.value = assetEntryOrder;
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />moveSelectionUp(assetEntryOrder) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'move-selection-up';
+		document.<portlet:namespace />fm.<portlet:namespace />assetEntryOrder.value = assetEntryOrder;
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />saveSelectBoxes() {
+		if (document.<portlet:namespace />fm.<portlet:namespace />scopeIds) {
+			document.<portlet:namespace />fm.<portlet:namespace />scopeIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentScopeIds);
+		}
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />classNameIds) {
+			document.<portlet:namespace />fm.<portlet:namespace />classNameIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentClassNameIds);
+		}
+
+		document.<portlet:namespace />fm.<portlet:namespace />metadataFields.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentMetadataFields);
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectAsset(assetEntryId, assetParentId, assetTitle, assetEntryOrder) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'add-selection';
+		document.<portlet:namespace />fm.<portlet:namespace />assetEntryId.value = assetEntryId;
+		document.<portlet:namespace />fm.<portlet:namespace />assetParentId.value = assetParentId;
+		document.<portlet:namespace />fm.<portlet:namespace />assetTitle.value = assetTitle;
+		document.<portlet:namespace />fm.<portlet:namespace />assetEntryOrder.value = assetEntryOrder;
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectionForType(type) {
+		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = type;
+		document.<portlet:namespace />fm.<portlet:namespace />assetEntryOrder.value = -1;
+
+		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
+	}
+
+	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />selectionStyle);
+</aui:script>
+
 <%!
 private String _getKey(Group group) throws Exception {
 	String key = null;
@@ -663,7 +665,3 @@ private String _getKey(Group group) throws Exception {
 	return key;
 }
 %>
-
-<aui:script>
-	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />selectionStyle);
-</aui:script>

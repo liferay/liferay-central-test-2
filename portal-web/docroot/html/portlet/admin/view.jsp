@@ -66,14 +66,6 @@
 		portletURL.setParameter("tabs3", tabs3);
 		%>
 
-		<aui:script>
-			function <portlet:namespace />saveServer(cmd) {
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /><portlet:param name="cur" value="<%= cur %>" /></portlet:renderURL>";
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_server" /></portlet:actionURL>");
-			}
-		</aui:script>
-
 		<form method="post" name="<portlet:namespace />fm">
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 		<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
@@ -121,6 +113,14 @@
 		</c:choose>
 
 		</form>
+
+		<aui:script>
+			function <portlet:namespace />saveServer(cmd) {
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /><portlet:param name="cur" value="<%= cur %>" /></portlet:renderURL>";
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_server" /></portlet:actionURL>");
+			}
+		</aui:script>
 	</c:when>
 	<c:otherwise>
 		<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />

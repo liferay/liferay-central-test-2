@@ -22,52 +22,6 @@
  */
 %>
 
-<aui:script use="node">
-	var selectedPages = A.one('#<portlet:namespace />scope_selected_pages');
-
-	if (selectedPages && selectedPages.get('checked') && <%= !publish %>) {
-		<portlet:namespace />hideTabs();
-	}
-</aui:script>
-
-<aui:script>
-	function <portlet:namespace />hideTabs() {
-		var optionsTab = AUI().one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
-		var schedulerTab = AUI().one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
-		var remoteOptionsTab = AUI().one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
-
-		if (optionsTab) {
-			optionsTab.hide();
-		}
-
-		if (schedulerTab) {
-			schedulerTab.hide();
-		}
-
-		if (remoteOptionsTab) {
-			remoteOptionsTab.hide();
-		}
-	}
-
-	function <portlet:namespace />showTabs() {
-		var optionsTab = AUI().one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
-		var schedulerTab = AUI().one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
-		var remoteOptionsTab = AUI().one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
-
-		if (optionsTab) {
-			optionsTab.show();
-		}
-
-		if (schedulerTab) {
-			schedulerTab.show();
-		}
-
-		if (remoteOptionsTab) {
-			remoteOptionsTab.show();
-		}
-	}
-</aui:script>
-
 <aui:fieldset style='<%= (proposalId > 0) ? "display: none;" : "" %>'>
 	<aui:legend label="scope" />
 
@@ -147,3 +101,49 @@
 		</c:otherwise>
 	</c:choose>
 </div>
+
+<aui:script use="node">
+	var selectedPages = A.one('#<portlet:namespace />scope_selected_pages');
+
+	if (selectedPages && selectedPages.get('checked') && <%= !publish %>) {
+		<portlet:namespace />hideTabs();
+	}
+</aui:script>
+
+<aui:script>
+	function <portlet:namespace />hideTabs() {
+		var optionsTab = AUI().one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
+		var schedulerTab = AUI().one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
+		var remoteOptionsTab = AUI().one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
+
+		if (optionsTab) {
+			optionsTab.hide();
+		}
+
+		if (schedulerTab) {
+			schedulerTab.hide();
+		}
+
+		if (remoteOptionsTab) {
+			remoteOptionsTab.hide();
+		}
+	}
+
+	function <portlet:namespace />showTabs() {
+		var optionsTab = AUI().one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
+		var schedulerTab = AUI().one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
+		var remoteOptionsTab = AUI().one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
+
+		if (optionsTab) {
+			optionsTab.show();
+		}
+
+		if (schedulerTab) {
+			schedulerTab.show();
+		}
+
+		if (remoteOptionsTab) {
+			remoteOptionsTab.show();
+		}
+	}
+</aui:script>

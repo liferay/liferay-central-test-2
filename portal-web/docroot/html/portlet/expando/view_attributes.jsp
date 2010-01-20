@@ -37,12 +37,6 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("modelResource", modelResource);
 %>
 
-<aui:script>
-	function <portlet:namespace />addExpando() {
-		submitForm(document.hrefFm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/expando/edit_expando" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="modelResource" value="<%= modelResource %>" /></portlet:renderURL>');
-	}
-</aui:script>
-
 <div>
 	<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= modelResourceName %></aui:a>
 </div>
@@ -211,6 +205,12 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 
 	<liferay-ui:search-iterator paginate="<%= false %>" />
 </liferay-ui:search-container>
+
+<aui:script>
+	function <portlet:namespace />addExpando() {
+		submitForm(document.hrefFm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/expando/edit_expando" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="modelResource" value="<%= modelResource %>" /></portlet:renderURL>');
+	}
+</aui:script>
 
 <%
 PortalUtil.addPortletBreadcrumbEntry(request, modelResourceName, portletURL.toString());

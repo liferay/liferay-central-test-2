@@ -22,6 +22,8 @@
  */
 %>
 
+<aui:input cssClass="lfr-textarea message-edit" label="" name="textArea" type="textarea" value="<%= GetterUtil.getString(body) %>" />
+
 <aui:script>
 	var <portlet:namespace />bbCode = null;
 
@@ -44,5 +46,3 @@
 		<portlet:namespace />bbCode.insertTag("quote", respondee, quote);
 	</c:if>
 </aui:script>
-
-<aui:input cssClass="lfr-textarea message-edit" label="" name="textArea" type="textarea" value="<%= GetterUtil.getString(body) %>" />

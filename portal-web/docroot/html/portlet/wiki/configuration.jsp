@@ -64,17 +64,6 @@ else if (tabs2.equals("page-updated-email")) {
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>
 
-<aui:script>
-	function <portlet:namespace />saveConfiguration() {
-		<c:if test='<%= tabs2.equals("display-settings") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
-			document.<portlet:namespace />fm.<portlet:namespace />hiddenNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />availableVisibleNodes);
-		</c:if>
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
@@ -485,3 +474,14 @@ else if (tabs2.equals("page-updated-email")) {
 	</aui:button-row>
 
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />saveConfiguration() {
+		<c:if test='<%= tabs2.equals("display-settings") %>'>
+			document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
+			document.<portlet:namespace />fm.<portlet:namespace />hiddenNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />availableVisibleNodes);
+		</c:if>
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>

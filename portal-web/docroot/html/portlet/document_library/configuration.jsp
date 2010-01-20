@@ -34,39 +34,6 @@ if (portletResource.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<aui:script>
-	function <portlet:namespace />openFolderSelector() {
-		var folderWindow = window.open('<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/select_folder" %>' /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=830');
-
-		folderWindow.focus();
-	}
-
-	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />rootFolderId.value = "<%= DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>";
-
-		var nameEl = document.getElementById("<portlet:namespace />rootFolderName");
-
-		nameEl.href = "";
-		nameEl.innerHTML = "";
-	}
-
-	function <portlet:namespace />saveConfiguration() {
-		document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns);
-		document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns);
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <%= PortalUtil.getPortletNamespace(portletResource) %>selectFolder(rootFolderId, rootFolderName) {
-		document.<portlet:namespace />fm.<portlet:namespace />rootFolderId.value = rootFolderId;
-
-		var nameEl = document.getElementById("<portlet:namespace />rootFolderName");
-
-		nameEl.href = "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
-		nameEl.innerHTML = rootFolderName + "&nbsp;";
-	}
-</aui:script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
@@ -215,3 +182,36 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />openFolderSelector() {
+		var folderWindow = window.open('<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/select_folder" %>' /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=830');
+
+		folderWindow.focus();
+	}
+
+	function <portlet:namespace />removeFolder() {
+		document.<portlet:namespace />fm.<portlet:namespace />rootFolderId.value = "<%= DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />rootFolderName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
+	function <portlet:namespace />saveConfiguration() {
+		document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns);
+		document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns);
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <%= PortalUtil.getPortletNamespace(portletResource) %>selectFolder(rootFolderId, rootFolderName) {
+		document.<portlet:namespace />fm.<portlet:namespace />rootFolderId.value = rootFolderId;
+
+		var nameEl = document.getElementById("<portlet:namespace />rootFolderName");
+
+		nameEl.href = "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
+		nameEl.innerHTML = rootFolderName + "&nbsp;";
+	}
+</aui:script>

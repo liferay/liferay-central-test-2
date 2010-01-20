@@ -171,6 +171,10 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 		<input type="submit" value="<liferay-ui:message key="add-page" />" /><br />
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<aui:script>
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
+			</aui:script>
+
 			<c:if test="<%= !layoutPrototypes.isEmpty() %>">
 				<aui:script use="event,node">
 					var layoutPrototypeIdSelect = A.one('#<portlet:namespace />layoutPrototypeId');
@@ -200,10 +204,6 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 					}
 				</aui:script>
 			</c:if>
-
-			<aui:script>
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
-			</aui:script>
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs4.equals("display-order") %>'>

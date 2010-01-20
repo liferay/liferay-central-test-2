@@ -22,6 +22,41 @@
  */
 %>
 
+<%
+LinkedHashMap<Long, long[]> scopes = AnnouncementsUtil.getAnnouncementScopes(user.getUserId());
+
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, "no-entries-were-found");
+
+List<AnnouncementsEntry> results = null;
+int total = 0;
+
+int flagValue = AnnouncementsFlagConstants.NOT_HIDDEN;
+%>
+
+<div class="unread-entries">
+	<%@ include file="/html/portlet/announcements/entry_iterator.jspf" %>
+</div>
+
+<%
+boolean hasResults = total > 0;
+%>
+
+<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
+
+<%
+flagValue = AnnouncementsFlagConstants.HIDDEN;
+%>
+
+<div class="read-entries">
+	<%@ include file="/html/portlet/announcements/entry_iterator.jspf" %>
+</div>
+
+<%
+hasResults = hasResults || (total > 0);
+%>
+
+<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
+
 <aui:script>
 	function <portlet:namespace />handleEntry(entryId) {
 		var entry = AUI().one('#<portlet:namespace/>' + entryId);
@@ -86,39 +121,6 @@
 	}
 </aui:script>
 
-<%
-LinkedHashMap<Long, long[]> scopes = AnnouncementsUtil.getAnnouncementScopes(user.getUserId());
-
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, "no-entries-were-found");
-
-List<AnnouncementsEntry> results = null;
-int total = 0;
-
-int flagValue = AnnouncementsFlagConstants.NOT_HIDDEN;
-%>
-
-<div class="unread-entries">
-	<%@ include file="/html/portlet/announcements/entry_iterator.jspf" %>
-</div>
-
-<%
-boolean hasResults = total > 0;
-%>
-
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
-
-<%
-flagValue = AnnouncementsFlagConstants.HIDDEN;
-%>
-
-<div class="read-entries">
-	<%@ include file="/html/portlet/announcements/entry_iterator.jspf" %>
-</div>
-
-<%
-hasResults = hasResults || (total > 0);
-%>
-
 <c:if test="<%= !hasResults && portletName.equals(PortletKeys.ALERTS) && !PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY) %>">
 	<aui:script use="node">
 		var portlet = A.one('#p_p_id<portlet:namespace />');
@@ -128,5 +130,3 @@ hasResults = hasResults || (total > 0);
 		}
 	</aui:script>
 </c:if>
-
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />

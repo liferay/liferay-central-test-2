@@ -41,20 +41,6 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
-<aui:script>
-	function <portlet:namespace />changeParent() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "changeParent";
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />renamePage() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "rename";
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <portlet:actionURL var="movePageURL">
 	<portlet:param name="struts_action" value="/wiki/move_page" />
 </portlet:actionURL>
@@ -175,3 +161,17 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 		</liferay-ui:section>
 	</liferay-ui:tabs>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />changeParent() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "changeParent";
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />renamePage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "rename";
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>

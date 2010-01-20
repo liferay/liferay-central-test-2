@@ -44,20 +44,6 @@ String editorContent = emailEventReminderBody;
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>
 
-<aui:script>
-	function <portlet:namespace />initEditor() {
-		return "<%= UnicodeFormatter.toString(editorContent) %>";
-	}
-
-	function <portlet:namespace />saveConfiguration() {
-		<c:if test='<%= tabs2.equals("event-reminder-email") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
-		</c:if>
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
@@ -210,6 +196,20 @@ String editorContent = emailEventReminderBody;
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />initEditor() {
+		return "<%= UnicodeFormatter.toString(editorContent) %>";
+	}
+
+	function <portlet:namespace />saveConfiguration() {
+		<c:if test='<%= tabs2.equals("event-reminder-email") %>'>
+			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
+		</c:if>
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.calendar.edit_configuration.jsp";

@@ -46,6 +46,92 @@ if (entry != null) {
 boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true);
 %>
 
+<portlet:actionURL var="editEntryURL">
+	<portlet:param name="struts_action" value="/blogs/edit_entry" />
+</portlet:actionURL>
+
+<aui:form action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEntry(false); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
+	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
+	<aui:input name="status" type="hidden" value="<%= StatusConstants.APPROVED %>" />
+
+	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
+	<liferay-ui:asset-tags-error />
+
+	<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
+
+	<aui:fieldset>
+		<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
+			<div class="save-status" id="<portlet:namespace />saveStatus"></div>
+		</c:if>
+
+		<aui:input name="title" />
+
+		<aui:input name="displayDate" value="<%= displayDate %>" />
+
+		<aui:field-wrapper label="content">
+			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+
+			<aui:input name="content" type="hidden" />
+		</aui:field-wrapper>
+
+		<liferay-ui:custom-attributes-available className="<%= BlogsEntry.class.getName() %>">
+			<liferay-ui:custom-attribute-list
+				className="<%= BlogsEntry.class.getName() %>"
+				classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+				editable="<%= true %>"
+				label="<%= true %>"
+			/>
+		</liferay-ui:custom-attributes-available>
+
+		<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
+			<aui:input defaultValue="<%= allowTrackbacks %>" helpMessage="to-allow-trackbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" inlineLabel="left" label="allow-incoming-trackbacks" name="allowTrackbacks" />
+
+			<aui:input label="trackbacks-to-send" name="trackbacks" />
+
+			<c:if test="<%= (entry != null) && Validator.isNotNull(entry.getTrackbacks()) %>">
+				<aui:field-wrapper name="trackbacks-already-sent">
+
+					<%
+					for (String trackback : StringUtil.split(entry.getTrackbacks())) {
+					%>
+
+						<%= HtmlUtil.escape(trackback) %><br />
+
+					<%
+					}
+					%>
+
+				</aui:field-wrapper>
+			</c:if>
+		</c:if>
+
+		<aui:input name="categories" type="assetCategories" />
+
+		<aui:input name="tags" type="assetTags" />
+
+		<c:if test="<%= entry == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= BlogsEntry.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
+
+		<aui:button-row>
+			<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
+				<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value="save-draft" />
+			</c:if>
+
+			<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || (entry.getStatus() == StatusConstants.DRAFT)) ? "publish" : "save" %>' />
+
+			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
+
 <aui:script>
 	var <portlet:namespace />saveDraftIntervalId = null;
 	var <portlet:namespace />oldTitle = null;
@@ -184,6 +270,10 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			submitForm(document.<portlet:namespace />fm);
 		}
 	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);
+	</c:if>
 </aui:script>
 
 <aui:script use="io,json">
@@ -206,98 +296,6 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		<portlet:namespace />oldContent = <portlet:namespace />initEditor();
 	</c:if>
 </aui:script>
-
-<portlet:actionURL var="editEntryURL">
-	<portlet:param name="struts_action" value="/blogs/edit_entry" />
-</portlet:actionURL>
-
-<aui:form action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEntry(false); return false;" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
-	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
-	<aui:input name="status" type="hidden" value="<%= StatusConstants.APPROVED %>" />
-
-	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
-	<liferay-ui:asset-tags-error />
-
-	<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
-
-	<aui:fieldset>
-		<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
-			<div class="save-status" id="<portlet:namespace />saveStatus"></div>
-		</c:if>
-
-		<aui:input name="title" />
-
-		<aui:input name="displayDate" value="<%= displayDate %>" />
-
-		<aui:field-wrapper label="content">
-			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
-
-			<aui:input name="content" type="hidden" />
-		</aui:field-wrapper>
-
-		<liferay-ui:custom-attributes-available className="<%= BlogsEntry.class.getName() %>">
-			<liferay-ui:custom-attribute-list
-				className="<%= BlogsEntry.class.getName() %>"
-				classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
-				editable="<%= true %>"
-				label="<%= true %>"
-			/>
-		</liferay-ui:custom-attributes-available>
-
-		<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
-			<aui:input defaultValue="<%= allowTrackbacks %>" helpMessage="to-allow-trackbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" inlineLabel="left" label="allow-incoming-trackbacks" name="allowTrackbacks" />
-
-			<aui:input label="trackbacks-to-send" name="trackbacks" />
-
-			<c:if test="<%= (entry != null) && Validator.isNotNull(entry.getTrackbacks()) %>">
-				<aui:field-wrapper name="trackbacks-already-sent">
-
-					<%
-					for (String trackback : StringUtil.split(entry.getTrackbacks())) {
-					%>
-
-						<%= HtmlUtil.escape(trackback) %><br />
-
-					<%
-					}
-					%>
-
-				</aui:field-wrapper>
-			</c:if>
-		</c:if>
-
-		<aui:input name="categories" type="assetCategories" />
-
-		<aui:input name="tags" type="assetTags" />
-
-		<c:if test="<%= entry == null %>">
-			<aui:field-wrapper label="permissions">
-				<liferay-ui:input-permissions
-					modelName="<%= BlogsEntry.class.getName() %>"
-				/>
-			</aui:field-wrapper>
-		</c:if>
-
-		<aui:button-row>
-			<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
-				<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value="save-draft" />
-			</c:if>
-
-			<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || (entry.getStatus() == StatusConstants.DRAFT)) ? "publish" : "save" %>' />
-
-			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
-		</aui:button-row>
-	</aui:fieldset>
-</aui:form>
-
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);
-	</aui:script>
-</c:if>
 
 <%
 if (entry != null) {

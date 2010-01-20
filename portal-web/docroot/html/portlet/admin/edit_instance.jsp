@@ -32,13 +32,6 @@ Company company2 = (Company)request.getAttribute(WebKeys.SEL_COMPANY);
 long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 %>
 
-<aui:script>
-	function <portlet:namespace />saveCompany() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= company2 == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_instance" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCompany(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
@@ -141,3 +134,10 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
 </form>
+
+<aui:script>
+	function <portlet:namespace />saveCompany() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= company2 == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>

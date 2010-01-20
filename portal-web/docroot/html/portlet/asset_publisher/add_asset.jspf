@@ -28,16 +28,6 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 
 <c:if test="<%= !addPortletURLs.isEmpty() %>">
 	<aui:form name="fm">
-		<aui:script>
-			function <portlet:namespace/>addNewAsset() {
-				var url = document.<portlet:namespace />fm.<portlet:namespace />assetURL.value;
-
-				if (url != '') {
-					location.href = url;
-				}
-			}
-		</aui:script>
-
 		<div class="lfr-meta-actions edit-controls">
 			<aui:select label="" name="assetURL" onChange='<%= renderResponse.getNamespace() + "addNewAsset();" %>'>
 				<aui:option label='<%= LanguageUtil.get(pageContext, "add-new") + "..." %>' value="" />
@@ -57,6 +47,16 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 			</aui:select>
 		</div>
 	</aui:form>
+
+	<aui:script>
+		function <portlet:namespace/>addNewAsset() {
+			var url = document.<portlet:namespace />fm.<portlet:namespace />assetURL.value;
+
+			if (url != '') {
+				location.href = url;
+			}
+		}
+	</aui:script>
 </c:if>
 
 <%!

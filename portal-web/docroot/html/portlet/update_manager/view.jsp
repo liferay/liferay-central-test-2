@@ -59,13 +59,6 @@ List updatablePackageIds = new ArrayList();
 				pluginInstallerURL.setParameter("backURL", currentURL);
 				%>
 
-				<aui:script>
-					function <portlet:namespace />reloadRepositories() {
-						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
-						submitForm(document.<portlet:namespace />fm);
-					}
-				</aui:script>
-
 				<form action="<portlet:actionURL><portlet:param name="struts_action" value="/update_manager/install_plugin" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 				<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 				<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL><portlet:param name="struts_action" value="/update_manager/view" /></portlet:renderURL>" />
@@ -261,6 +254,13 @@ List updatablePackageIds = new ArrayList();
 				%>
 
 				</form>
+
+				<aui:script>
+					function <portlet:namespace />reloadRepositories() {
+						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
+						submitForm(document.<portlet:namespace />fm);
+					}
+				</aui:script>
 			</c:otherwise>
 		</c:choose>
 	</c:when>

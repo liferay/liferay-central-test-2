@@ -38,34 +38,6 @@ if (organizationId > 0) {
 }
 %>
 
-<aui:script>
-	function <portlet:namespace />openOrganizationSelector() {
-		var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/select_organization" /><portlet:param name="tabs1" value="organizations" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-
-		organizationWindow.focus();
-	}
-
-	function <portlet:namespace />removeOrganization() {
-		document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = "";
-
-		var nameEl = document.getElementById("<portlet:namespace />organizationName");
-
-		nameEl.innerHTML = "";
-
-		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
-	}
-
-	function <portlet:namespace />selectOrganization(organizationId, name) {
-		document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = organizationId;
-
-		var nameEl = document.getElementById("<portlet:namespace />organizationName");
-
-		nameEl.innerHTML = name + "&nbsp;";
-
-		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = false;
-	}
-</aui:script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
@@ -123,5 +95,31 @@ if (organizationId > 0) {
 </aui:form>
 
 <aui:script>
+	function <portlet:namespace />openOrganizationSelector() {
+		var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/select_organization" /><portlet:param name="tabs1" value="organizations" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+
+		organizationWindow.focus();
+	}
+
+	function <portlet:namespace />removeOrganization() {
+		document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = "";
+
+		var nameEl = document.getElementById("<portlet:namespace />organizationName");
+
+		nameEl.innerHTML = "";
+
+		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
+	}
+
+	function <portlet:namespace />selectOrganization(organizationId, name) {
+		document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = organizationId;
+
+		var nameEl = document.getElementById("<portlet:namespace />organizationName");
+
+		nameEl.innerHTML = name + "&nbsp;";
+
+		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = false;
+	}
+
 	Liferay.Util.toggleSelectBox('<portlet:namespace />selectionMethod', 'users', '<portlet:namespace />UsersSelectionOptions');
 </aui:script>

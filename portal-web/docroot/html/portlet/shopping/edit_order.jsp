@@ -34,25 +34,6 @@ order = order.toEscapedModel();
 long orderId = BeanParamUtil.getLong(order, request, "orderId");
 %>
 
-<aui:script>
-	function <portlet:namespace />deleteOrder() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= HtmlUtil.escape(redirect) %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />saveOrder() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />sendEmail(emailType) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "sendEmail";
-		document.<portlet:namespace />fm.<portlet:namespace />emailType.value = emailType;
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
@@ -632,3 +613,22 @@ for (int i = 0; itr.hasNext(); i++) {
 		redirect="<%= currentURL %>"
 	/>
 </c:if>
+
+<aui:script>
+	function <portlet:namespace />deleteOrder() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= HtmlUtil.escape(redirect) %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />saveOrder() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />sendEmail(emailType) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "sendEmail";
+		document.<portlet:namespace />fm.<portlet:namespace />emailType.value = emailType;
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>

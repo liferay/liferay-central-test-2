@@ -70,44 +70,6 @@ if (choiceName > 0) {
 }
 %>
 
-<aui:script>
-	function <portlet:namespace />addPollChoice() {
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addPollChoiceURL">
-			<portlet:param name="struts_action" value="/polls/edit_question" />
-			<portlet:param name="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + (char)(96 + choicesCount + 1) %>" value="" />
-		</portlet:actionURL>
-
-		document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>';
-		submitForm(document.<portlet:namespace />fm, '<%= addPollChoiceURL %>');
-	}
-
-	function <portlet:namespace />deletePollChoice(choiceName) {
-		document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>';
-		document.<portlet:namespace />fm.<portlet:namespace />choiceName.value = '<%= choiceName %>';
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />disableInputDate(date, checked) {
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
-
-		var imageInputId = AUI().one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
-
-		if (imageInputId) {
-			imageInputId.toggleClass('disabled');
-		}
-	}
-
-	function <portlet:namespace />saveQuestion() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= question == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editQuestionURL">
 	<portlet:param name="struts_action" value="/polls/edit_question" />
 </portlet:actionURL>
@@ -201,11 +163,47 @@ if (choiceName > 0) {
 	</aui:fieldset>
 </aui:form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />addPollChoice() {
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addPollChoiceURL">
+			<portlet:param name="struts_action" value="/polls/edit_question" />
+			<portlet:param name="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + (char)(96 + choicesCount + 1) %>" value="" />
+		</portlet:actionURL>
+
+		document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>';
+		submitForm(document.<portlet:namespace />fm, '<%= addPollChoiceURL %>');
+	}
+
+	function <portlet:namespace />deletePollChoice(choiceName) {
+		document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>';
+		document.<portlet:namespace />fm.<portlet:namespace />choiceName.value = '<%= choiceName %>';
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />disableInputDate(date, checked) {
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
+
+		var imageInputId = AUI().one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
+
+		if (imageInputId) {
+			imageInputId.toggleClass('disabled');
+		}
+	}
+
+	function <portlet:namespace />saveQuestion() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= question == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>
 
 <%
 if (question != null) {

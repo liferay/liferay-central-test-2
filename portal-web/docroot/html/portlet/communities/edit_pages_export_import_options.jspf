@@ -22,76 +22,6 @@
  */
 %>
 
-<aui:script>
-	function <portlet:namespace />exportLess() {
-		document.getElementById("<portlet:namespace />portletDataList").style.display = "none";
-
-		document.getElementById("<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>").value = "true";
-
-		document.getElementById("<portlet:namespace />permissionsUl").style.display = "none";
-
-		document.getElementById("<portlet:namespace />exportMoreDiv").style.display = "";
-		document.getElementById("<portlet:namespace />exportLessDiv").style.display = "none";
-	}
-
-	function <portlet:namespace />exportMore() {
-		document.getElementById("<portlet:namespace />portletDataList").style.display = "inline";
-
-		document.getElementById("<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>").value = "false";
-
-		document.getElementById("<portlet:namespace />permissionsUl").style.display = "";
-
-		document.getElementById("<portlet:namespace />exportMoreDiv").style.display = "none";
-		document.getElementById("<portlet:namespace />exportLessDiv").style.display = "";
-	}
-
-	function <portlet:namespace />hideDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').hide();
-	}
-
-	function <portlet:namespace />importLess() {
-		document.getElementById("<portlet:namespace />deleteDataOption").style.display = "none";
-		document.getElementById("<portlet:namespace />portletDataStrategies").style.display = "none";
-		document.getElementById("<portlet:namespace />permissionsUl").style.display = "none";
-
-		document.getElementById("<portlet:namespace />importMoreDiv").style.display = "";
-		document.getElementById("<portlet:namespace />importLessDiv").style.display = "none";
-	}
-
-	function <portlet:namespace />importMore() {
-		document.getElementById("<portlet:namespace />deleteDataOption").style.display = "";
-		document.getElementById("<portlet:namespace />portletDataStrategies").style.display = "";
-		document.getElementById("<portlet:namespace />permissionsUl").style.display = "";
-
-		document.getElementById("<portlet:namespace />importMoreDiv").style.display = "none";
-		document.getElementById("<portlet:namespace />importLessDiv").style.display = "";
-	}
-
-	function <portlet:namespace />showDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').show();
-	}
-
-	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
-		var parentDiv = AUI().one('#' + parentDivId);
-
-		var enabled = checkbox.checked;
-
-		if (parentDiv) {
-			parentDiv.all('input').each(
-				function(item, index, collection) {
-					var disabled = !enabled;
-
-					if (enabled && item.hasClass('disabled')) {
-						disabled = true;
-					}
-
-					item.set('disabled', disabled);
-				}
-			);
-		}
-	}
-</aui:script>
-
 <ul class="lfr-tree lfr-component">
 	<li class="tree-item">
 		<aui:input disabled="<%= true %>" inlineLabel="right" name="pages" type="checkbox" value="<%= true %>" />
@@ -390,3 +320,73 @@
 		</div>
 	</c:otherwise>
 </c:choose>
+
+<aui:script>
+	function <portlet:namespace />exportLess() {
+		document.getElementById("<portlet:namespace />portletDataList").style.display = "none";
+
+		document.getElementById("<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>").value = "true";
+
+		document.getElementById("<portlet:namespace />permissionsUl").style.display = "none";
+
+		document.getElementById("<portlet:namespace />exportMoreDiv").style.display = "";
+		document.getElementById("<portlet:namespace />exportLessDiv").style.display = "none";
+	}
+
+	function <portlet:namespace />exportMore() {
+		document.getElementById("<portlet:namespace />portletDataList").style.display = "inline";
+
+		document.getElementById("<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>").value = "false";
+
+		document.getElementById("<portlet:namespace />permissionsUl").style.display = "";
+
+		document.getElementById("<portlet:namespace />exportMoreDiv").style.display = "none";
+		document.getElementById("<portlet:namespace />exportLessDiv").style.display = "";
+	}
+
+	function <portlet:namespace />hideDateRange() {
+		AUI().one('#<portlet:namespace />startEndDate').hide();
+	}
+
+	function <portlet:namespace />importLess() {
+		document.getElementById("<portlet:namespace />deleteDataOption").style.display = "none";
+		document.getElementById("<portlet:namespace />portletDataStrategies").style.display = "none";
+		document.getElementById("<portlet:namespace />permissionsUl").style.display = "none";
+
+		document.getElementById("<portlet:namespace />importMoreDiv").style.display = "";
+		document.getElementById("<portlet:namespace />importLessDiv").style.display = "none";
+	}
+
+	function <portlet:namespace />importMore() {
+		document.getElementById("<portlet:namespace />deleteDataOption").style.display = "";
+		document.getElementById("<portlet:namespace />portletDataStrategies").style.display = "";
+		document.getElementById("<portlet:namespace />permissionsUl").style.display = "";
+
+		document.getElementById("<portlet:namespace />importMoreDiv").style.display = "none";
+		document.getElementById("<portlet:namespace />importLessDiv").style.display = "";
+	}
+
+	function <portlet:namespace />showDateRange() {
+		AUI().one('#<portlet:namespace />startEndDate').show();
+	}
+
+	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
+		var parentDiv = AUI().one('#' + parentDivId);
+
+		var enabled = checkbox.checked;
+
+		if (parentDiv) {
+			parentDiv.all('input').each(
+				function(item, index, collection) {
+					var disabled = !enabled;
+
+					if (enabled && item.hasClass('disabled')) {
+						disabled = true;
+					}
+
+					item.set('disabled', disabled);
+				}
+			);
+		}
+	}
+</aui:script>

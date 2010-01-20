@@ -42,34 +42,6 @@ OrderByComparator orderByComparator = ShoppingUtil.getItemOrderByComparator(orde
 ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(item.getItemId(), orderByComparator);
 %>
 
-<aui:script>
-	function <portlet:namespace />addToCart() {
-		document.<portlet:namespace />fm.<portlet:namespace />fields.value = "";
-
-		<%
-		for (int i = 0; i < itemFields.length; i++) {
-			ShoppingItemField itemField = itemFields[i];
-
-			String fieldName = itemField.getName();
-			String[] fieldValues = itemField.getValuesArray();
-		%>
-
-			if (document.<portlet:namespace />fm.<portlet:namespace />fieldName<%= fieldName %>.value == "") {
-				alert("<%= UnicodeLanguageUtil.get(pageContext, "please-select-all-options") %>");
-
-				return;
-			}
-
-			document.<portlet:namespace />fm.<portlet:namespace />fields.value = document.<portlet:namespace />fm.<portlet:namespace />fields.value + '<%= fieldName %>=' + document.<portlet:namespace />fm.<portlet:namespace />fieldName<%= fieldName %>.value + '&';
-
-		<%
-		}
-		%>
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" />
@@ -250,3 +222,31 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 </table>
 
 </form>
+
+<aui:script>
+	function <portlet:namespace />addToCart() {
+		document.<portlet:namespace />fm.<portlet:namespace />fields.value = "";
+
+		<%
+		for (int i = 0; i < itemFields.length; i++) {
+			ShoppingItemField itemField = itemFields[i];
+
+			String fieldName = itemField.getName();
+			String[] fieldValues = itemField.getValuesArray();
+		%>
+
+			if (document.<portlet:namespace />fm.<portlet:namespace />fieldName<%= fieldName %>.value == "") {
+				alert("<%= UnicodeLanguageUtil.get(pageContext, "please-select-all-options") %>");
+
+				return;
+			}
+
+			document.<portlet:namespace />fm.<portlet:namespace />fields.value = document.<portlet:namespace />fm.<portlet:namespace />fields.value + '<%= fieldName %>=' + document.<portlet:namespace />fm.<portlet:namespace />fieldName<%= fieldName %>.value + '&';
+
+		<%
+		}
+		%>
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>

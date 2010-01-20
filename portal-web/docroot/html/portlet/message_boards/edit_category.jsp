@@ -46,31 +46,6 @@ catch (NoSuchMailingListException nsmle) {
 boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "active");
 %>
 
-<aui:script>
-	function <portlet:namespace />removeCategory() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>";
-
-		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
-
-		nameEl.href = "";
-		nameEl.innerHTML = "";
-	}
-
-	function <portlet:namespace />saveCategory() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= category == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectCategory(parentCategoryId, parentCategoryName) {
-		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = parentCategoryId;
-
-		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
-
-		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + parentCategoryId;
-		nameEl.innerHTML = parentCategoryName + "&nbsp;";
-	}
-</aui:script>
-
 <portlet:actionURL var="editCategoryURL">
 	<portlet:param name="struts_action" value="/message_boards/edit_category" />
 </portlet:actionURL>
@@ -232,6 +207,29 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 </aui:form>
 
 <aui:script>
+	function <portlet:namespace />removeCategory() {
+		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
+	function <portlet:namespace />saveCategory() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= category == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectCategory(parentCategoryId, parentCategoryName) {
+		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = parentCategoryId;
+
+		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
+
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + parentCategoryId;
+		nameEl.innerHTML = parentCategoryName + "&nbsp;";
+	}
+
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</c:if>

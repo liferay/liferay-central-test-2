@@ -54,13 +54,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	</liferay-util:include>
 </c:if>
 
-<aui:script>
-	function <portlet:namespace />saveRole() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
-	}
-</aui:script>
-
 <aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveRole(); return false;" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
@@ -153,11 +146,16 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	</aui:fieldset>
 </aui:form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />saveRole() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>
 
 <%
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, (role == null ? "add-role" : "edit")), currentURL);

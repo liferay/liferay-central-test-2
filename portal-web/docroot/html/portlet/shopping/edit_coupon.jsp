@@ -62,28 +62,6 @@ double discount = BeanParamUtil.getDouble(coupon, request, "discount");
 String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 %>
 
-<aui:script>
-	function <portlet:namespace />disableInputDate(date, checked) {
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
-
-		var imageInputId = AUI().one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
-
-		if (imageInputId) {
-			imageInputId.toggleClass('disabled');
-		}
-	}
-
-	function <portlet:namespace />saveCoupon() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= coupon == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_coupon" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCoupon(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
@@ -306,8 +284,28 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 </form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />disableInputDate(date, checked) {
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
+		document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
+
+		var imageInputId = AUI().one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
+
+		if (imageInputId) {
+			imageInputId.toggleClass('disabled');
+		}
+	}
+
+	function <portlet:namespace />saveCoupon() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= coupon == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (coupon == null) ? "code" : "name" %>);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>

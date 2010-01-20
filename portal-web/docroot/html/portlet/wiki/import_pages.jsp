@@ -49,15 +49,6 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("nodeId", String.valueOf(nodeId));
 %>
 
-<aui:script>
-	function <portlet:namespace />importPages() {
-		<%= uploadProgressId %>.startProgress();
-		<%= importProgressId %>.startProgress();
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <portlet:actionURL var="importPagesURL">
 	<portlet:param name="struts_action" value="/wiki/import_pages" />
 </portlet:actionURL>
@@ -103,3 +94,12 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 	message="importing"
 	redirect="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
 />
+
+<aui:script>
+	function <portlet:namespace />importPages() {
+		<%= uploadProgressId %>.startProgress();
+		<%= importProgressId %>.startProgress();
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>

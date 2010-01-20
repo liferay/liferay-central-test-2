@@ -34,31 +34,6 @@ long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 %>
 
-<aui:script>
-	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= rootFolderId %>";
-
-		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
-
-		nameEl.href = "";
-		nameEl.innerHTML = "";
-	}
-
-	function <portlet:namespace />saveFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= folder == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectFolder(parentFolderId, parentFolderName) {
-		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = parentFolderId;
-
-		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
-
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId;
-		nameEl.innerHTML = parentFolderName + "&nbsp;";
-	}
-</aui:script>
-
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFolderURL">
@@ -148,11 +123,34 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 	</aui:fieldset>
 </aui:form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />removeFolder() {
+		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= rootFolderId %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
+	function <portlet:namespace />saveFolder() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= folder == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectFolder(parentFolderId, parentFolderName) {
+		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = parentFolderId;
+
+		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
+
+		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId;
+		nameEl.innerHTML = parentFolderName + "&nbsp;";
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>
 
 <%
 if (folder == null) {

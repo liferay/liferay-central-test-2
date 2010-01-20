@@ -74,7 +74,15 @@
 			officeDoc = "SharePoint.OpenDocuments.2";
 		}
 	}
-%>
+	%>
+
+	<c:if test="<%= officeDoc != null %>">
+		<liferay-ui:icon
+			image="../document_library/msoffice"
+			url='<%= "javascript:" + renderResponse.getNamespace() + "openDocument();" %>'
+			message='<%= LanguageUtil.get(pageContext, "open-in-ms-office") %>'
+		/>
+	</c:if>
 
 	<aui:script>
 		function <portlet:namespace />openDocument() {
@@ -98,12 +106,4 @@
 			</c:choose>
 		}
 	</aui:script>
-
-	<c:if test="<%= officeDoc != null %>">
-		<liferay-ui:icon
-			image="../document_library/msoffice"
-			url='<%= "javascript:" + renderResponse.getNamespace() + "openDocument();" %>'
-			message='<%= LanguageUtil.get(pageContext, "open-in-ms-office") %>'
-		/>
-	</c:if>
 </c:if>

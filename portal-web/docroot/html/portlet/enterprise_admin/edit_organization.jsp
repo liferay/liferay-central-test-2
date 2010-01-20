@@ -51,26 +51,6 @@ String[][] categorySections = {mainSections, identificationSections, miscellaneo
 String curSection = mainSections[0];
 %>
 
-<aui:script>
-	function <portlet:namespace />createURL(href, value, onclick) {
-		return '<a href="' + href + '"' + (onclick ? ' onclick="' + onclick + '" ' : '') + '>' + value + '</a>';
-	};
-
-	function <portlet:namespace />saveOrganization() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (organization == null) ? Constants.ADD : Constants.UPDATE %>";
-
-		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>"></portlet:param></portlet:renderURL>";
-
-		if (location.hash) {
-			redirect += location.hash;
-		}
-
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (organization == null) ? "add" : "view-all" %>' />
 	<liferay-util:param name="backURL" value="<%= backURL %>" />
@@ -148,11 +128,29 @@ String curSection = mainSections[0];
 	</div>
 </aui:form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />createURL(href, value, onclick) {
+		return '<a href="' + href + '"' + (onclick ? ' onclick="' + onclick + '" ' : '') + '>' + value + '</a>';
+	};
+
+	function <portlet:namespace />saveOrganization() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (organization == null) ? Constants.ADD : Constants.UPDATE %>";
+
+		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>"></portlet:param></portlet:renderURL>";
+
+		if (location.hash) {
+			redirect += location.hash;
+		}
+
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>
 
 <%
 if (organization != null) {

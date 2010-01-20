@@ -70,39 +70,6 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 portletURL.setParameter("proposalId", String.valueOf(proposalId));
 %>
 
-<aui:script>
-	function <portlet:namespace />approveProposal() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-approve-this-proposal") %>')) {
-			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.APPROVE %>";
-			submitForm(document.<portlet:namespace />fm1);
-		}
-	}
-
-	function <portlet:namespace />rejectProposal() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-reject-this-proposal") %>')) {
-			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.REJECT %>";
-			submitForm(document.<portlet:namespace />fm1);
-		}
-	}
-
-	function <portlet:namespace />saveProposal() {
-		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.UPDATE %>';
-
-		<%
-		for (int i = 2; i <= workflowStages; i++) {
-			String workflowRoleName = workflowRoleNames[i - 1];
-		%>
-
-			document.<portlet:namespace />fm1.<portlet:namespace />reviewUserIds_<%= i %>.value = Liferay.Util.listSelect(document.<portlet:namespace />fm1.<portlet:namespace />current_reviewers_<%= i %>);
-
-		<%
-		}
-		%>
-
-		submitForm(document.<portlet:namespace />fm1);
-	}
-</aui:script>
-
 <portlet:actionURL var="editProposalURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/communities/edit_proposal" />
 </portlet:actionURL>
@@ -447,3 +414,36 @@ for (int i = 0; i < results.size(); i++) {
 	subject="<%= proposal.getName() %>"
 	redirect="<%= currentURL %>"
 />
+
+<aui:script>
+	function <portlet:namespace />approveProposal() {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-approve-this-proposal") %>')) {
+			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.APPROVE %>";
+			submitForm(document.<portlet:namespace />fm1);
+		}
+	}
+
+	function <portlet:namespace />rejectProposal() {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-reject-this-proposal") %>')) {
+			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.REJECT %>";
+			submitForm(document.<portlet:namespace />fm1);
+		}
+	}
+
+	function <portlet:namespace />saveProposal() {
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.UPDATE %>';
+
+		<%
+		for (int i = 2; i <= workflowStages; i++) {
+			String workflowRoleName = workflowRoleNames[i - 1];
+		%>
+
+			document.<portlet:namespace />fm1.<portlet:namespace />reviewUserIds_<%= i %>.value = Liferay.Util.listSelect(document.<portlet:namespace />fm1.<portlet:namespace />current_reviewers_<%= i %>);
+
+		<%
+		}
+		%>
+
+		submitForm(document.<portlet:namespace />fm1);
+	}
+</aui:script>

@@ -128,12 +128,12 @@ if (displayTerms.getParentOrganizationId() > 0) {
 	<liferay-ui:message key="filter-by-organization" />: <%= HtmlUtil.escape(organization.getName()) %><br />
 </c:if>
 
-<aui:script>
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
-	</c:if>
-</aui:script>
+	</aui:script>
+</c:if>
 
 <aui:script use="liferay-dynamic-select">
 	new Liferay.DynamicSelect(

@@ -57,93 +57,6 @@ if (organization != null) {
 	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
 </liferay-util:buffer>
 
-<aui:script>
-	function <portlet:namespace />changeLogo(newLogoURL) {
-		AUI().one('#<portlet:namespace />avatar').attr('src', newLogoURL);
-		AUI().one('.avatar').attr('src', newLogoURL);
-
-		AUI().one('#<portlet:namespace />deleteLogo').val(false);
-	}
-
-	function <portlet:namespace />deleteLogo(defaultLogoURL) {
-		AUI().one('#<portlet:namespace />deleteLogo').val(true);
-
-		AUI().one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
-		AUI().one('.avatar').attr('src', defaultLogoURL);
-	}
-
-	function <portlet:namespace />openEditOrganizationLogoWindow(editOrganizationLogoURL) {
-		var editOrganizationLogoWindow = window.open(editOrganizationLogoURL, '<liferay-ui:message key="change" />', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
-
-		editOrganizationLogoWindow.focus();
-	}
-
-	function <portlet:namespace />openOrganizationSelector() {
-		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>';
-
-		<c:choose>
-			<c:when test="<%= organization == null %>">
-				var type = document.<portlet:namespace />fm.<portlet:namespace />type.value;
-			</c:when>
-			<c:otherwise>
-				var type = '<%= type %>';
-			</c:otherwise>
-		</c:choose>
-
-		var organizationWindow = window.open(url, 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-
-		organizationWindow.focus();
-	}
-
-	function <portlet:namespace />selectOrganization(organizationId, name, type) {
-		AUI().use(
-			'liferay-search-container',
-			function(A) {
-				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
-
-				var rowColumns = [];
-
-				var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
-
-				rowColumns.push(<portlet:namespace />createURL(href, name));
-				rowColumns.push(<portlet:namespace />createURL(href, type));
-				rowColumns.push('<a class="modify-link" data-rowId="' + organizationId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeOrganizationIcon) %></a>');
-
-				searchContainer.deleteRow(1, searchContainer.getData());
-				searchContainer.addRow(rowColumns, organizationId);
-				searchContainer.updateDataStore(organizationId);
-
-				<portlet:namespace />trackChanges();
-			}
-		);
-	}
-
-	function <portlet:namespace />trackChanges() {
-		AUI().use(
-			'event',
-			function(A) {
-				A.fire(
-					'enterpriseAdmin:trackChanges',
-					A.one('.selected .modify-link')
-				);
-			}
-		);
-	}
-</aui:script>
-
-<aui:script use="event,node">
-	var modifyLinks = A.all('span.modify-link');
-
-	if (modifyLinks) {
-		modifyLinks.on(
-			'click',
-			function() {
-				<portlet:namespace />trackChanges();
-			}
-		);
-	}
-</aui:script>
-
 <liferay-ui:error-marker key="errorSection" value="details" />
 
 <aui:model-context bean="<%= organization %>" model="<%= Organization.class %>" />
@@ -340,6 +253,93 @@ if (parentOrganization != null) {
 	label="<%= true %>"
 	cssClass="modify-link"
 />
+
+<aui:script>
+	function <portlet:namespace />changeLogo(newLogoURL) {
+		AUI().one('#<portlet:namespace />avatar').attr('src', newLogoURL);
+		AUI().one('.avatar').attr('src', newLogoURL);
+
+		AUI().one('#<portlet:namespace />deleteLogo').val(false);
+	}
+
+	function <portlet:namespace />deleteLogo(defaultLogoURL) {
+		AUI().one('#<portlet:namespace />deleteLogo').val(true);
+
+		AUI().one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
+		AUI().one('.avatar').attr('src', defaultLogoURL);
+	}
+
+	function <portlet:namespace />openEditOrganizationLogoWindow(editOrganizationLogoURL) {
+		var editOrganizationLogoWindow = window.open(editOrganizationLogoURL, '<liferay-ui:message key="change" />', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
+
+		editOrganizationLogoWindow.focus();
+	}
+
+	function <portlet:namespace />openOrganizationSelector() {
+		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>';
+
+		<c:choose>
+			<c:when test="<%= organization == null %>">
+				var type = document.<portlet:namespace />fm.<portlet:namespace />type.value;
+			</c:when>
+			<c:otherwise>
+				var type = '<%= type %>';
+			</c:otherwise>
+		</c:choose>
+
+		var organizationWindow = window.open(url, 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+
+		organizationWindow.focus();
+	}
+
+	function <portlet:namespace />selectOrganization(organizationId, name, type) {
+		AUI().use(
+			'liferay-search-container',
+			function(A) {
+				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
+
+				var rowColumns = [];
+
+				var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
+
+				rowColumns.push(<portlet:namespace />createURL(href, name));
+				rowColumns.push(<portlet:namespace />createURL(href, type));
+				rowColumns.push('<a class="modify-link" data-rowId="' + organizationId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeOrganizationIcon) %></a>');
+
+				searchContainer.deleteRow(1, searchContainer.getData());
+				searchContainer.addRow(rowColumns, organizationId);
+				searchContainer.updateDataStore(organizationId);
+
+				<portlet:namespace />trackChanges();
+			}
+		);
+	}
+
+	function <portlet:namespace />trackChanges() {
+		AUI().use(
+			'event',
+			function(A) {
+				A.fire(
+					'enterpriseAdmin:trackChanges',
+					A.one('.selected .modify-link')
+				);
+			}
+		);
+	}
+</aui:script>
+
+<aui:script use="event,node">
+	var modifyLinks = A.all('span.modify-link');
+
+	if (modifyLinks) {
+		modifyLinks.on(
+			'click',
+			function() {
+				<portlet:namespace />trackChanges();
+			}
+		);
+	}
+</aui:script>
 
 <aui:script use="liferay-dynamic-select,liferay-search-container">
 	new Liferay.DynamicSelect(

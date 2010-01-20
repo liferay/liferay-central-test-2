@@ -73,32 +73,6 @@ if ((message != null) && message.isAttachments()) {
 }
 %>
 
-<aui:script>
-	function <portlet:namespace />getSuggestionsContent() {
-		var content = '';
-
-		content += document.<portlet:namespace />fm.<portlet:namespace />subject.value + ' ';
-		content += <portlet:namespace />getHTML();
-
-		return content;
-	}
-
-	function <portlet:namespace />saveMessage() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= message == null ? Constants.ADD : Constants.UPDATE %>";
-		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectCategory(categoryId, categoryName) {
-		document.<portlet:namespace />fm.<portlet:namespace />mbCategoryId.value = categoryId;
-
-		var nameEl = document.getElementById("<portlet:namespace />categoryName");
-
-		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + categoryId;
-		nameEl.innerHTML = categoryName + "&nbsp;";
-	}
-</aui:script>
-
 <c:if test="<%= preview %>">
 	<liferay-ui:message key="preview" />:
 
@@ -366,10 +340,37 @@ if ((message != null) && message.isAttachments()) {
 	</c:if>
 </aui:form>
 
-<aui:script use="event,node">
+<aui:script>
+	function <portlet:namespace />getSuggestionsContent() {
+		var content = '';
+
+		content += document.<portlet:namespace />fm.<portlet:namespace />subject.value + ' ';
+		content += <portlet:namespace />getHTML();
+
+		return content;
+	}
+
+	function <portlet:namespace />saveMessage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= message == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectCategory(categoryId, categoryName) {
+		document.<portlet:namespace />fm.<portlet:namespace />mbCategoryId.value = categoryId;
+
+		var nameEl = document.getElementById("<portlet:namespace />categoryName");
+
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + categoryId;
+		nameEl.innerHTML = categoryName + "&nbsp;";
+	}
+
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);
 	</c:if>
+</aui:script>
+
+<aui:script use="event,node">
 
 	<%
 	for (int i = 1; i <= existingAttachments.length; i++) {
@@ -401,6 +402,7 @@ if ((message != null) && message.isAttachments()) {
 	<%
 	}
 	%>
+
 </aui:script>
 
 <%

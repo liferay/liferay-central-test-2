@@ -84,35 +84,6 @@
 		String portletURLString = portletURL.toString();
 		%>
 
-		<aui:script>
-			function <portlet:namespace />installPluginPackage(cmd) {
-				document.<portlet:namespace />fm.method = "post";
-
-				if (cmd == "localDeploy") {
-					document.<portlet:namespace />fm.encoding = "multipart/form-data";
-				}
-
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
-			}
-
-			function <portlet:namespace />reloadRepositories() {
-				document.<portlet:namespace />fm.method = "post";
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
-			}
-
-			function <portlet:namespace />saveDeployConfiguration() {
-				document.<portlet:namespace />fm.method = "post";
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'deployConfiguration';
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
-			}
-
-			function <portlet:namespace />searchPlugins() {
-				submitForm(document.<portlet:namespace />fm);
-			}
-		</aui:script>
-
 		<form action="<%= portletURL %>" method="get" name="<portlet:namespace />fm">
 		<liferay-portlet:renderURLParams varImpl="portletURL" />
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
@@ -158,6 +129,35 @@
 		</c:choose>
 
 		</form>
+
+		<aui:script>
+			function <portlet:namespace />installPluginPackage(cmd) {
+				document.<portlet:namespace />fm.method = "post";
+
+				if (cmd == "localDeploy") {
+					document.<portlet:namespace />fm.encoding = "multipart/form-data";
+				}
+
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
+			}
+
+			function <portlet:namespace />reloadRepositories() {
+				document.<portlet:namespace />fm.method = "post";
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
+			}
+
+			function <portlet:namespace />saveDeployConfiguration() {
+				document.<portlet:namespace />fm.method = "post";
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'deployConfiguration';
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
+			}
+
+			function <portlet:namespace />searchPlugins() {
+				submitForm(document.<portlet:namespace />fm);
+			}
+		</aui:script>
 	</c:when>
 	<c:otherwise>
 		<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />

@@ -81,45 +81,6 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 }
 %>
 
-<aui:script>
-	function <portlet:namespace />changePriority(ldapServer, swapLdapServer) {
-		var ldapServerId = ldapServer.getAttribute('data-ldapServerId');
-		var swapLdapServerId = swapLdapServer.getAttribute('data-ldapServerId');
-
-		var ldapServerHTML = ldapServer.html();
-		var swapLdapServerHTML = swapLdapServer.html();
-
-		ldapServer.html(swapLdapServerHTML);
-		swapLdapServer.html(ldapServerHTML);
-
-		ldapServer.setAttribute('data-ldapServerId', swapLdapServerId);
-		swapLdapServer.setAttribute('data-ldapServerId', ldapServerId);
-	}
-
-	function <portlet:namespace />changeLDAPServerPriority(ldapServerId, action) {
-		var ldapServer = AUI().one('.ldap-servers tr[data-ldapServerId="' + ldapServerId + '"]');
-
-		if (ldapServer) {
-			var swapLdapServer = ldapServer[action]();
-
-			if (swapLdapServer) {
-				<portlet:namespace />changePriority(ldapServer, swapLdapServer);
-			}
-		}
-	}
-
-	function <portlet:namespace />lowerLDAPServerPriority(ldapServerId) {
-		<portlet:namespace />changeLDAPServerPriority(ldapServerId, 'next');
-	}
-
-	function <portlet:namespace />raiseLDAPServerPriority(ldapServerId) {
-		<portlet:namespace />changeLDAPServerPriority(ldapServerId, 'previous');
-	}
-
-	Liferay.Util.toggleBoxes('<portlet:namespace />ldapImportEnabledCheckbox', '<portlet:namespace />importEnabledSettings');
-	Liferay.Util.toggleBoxes('<portlet:namespace />ldapExportEnabledCheckbox', '<portlet:namespace />exportEnabledSettings');
-</aui:script>
-
 <aui:fieldset>
 	<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.LDAP_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= ldapAuthEnabled %>" />
 
@@ -231,6 +192,40 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 </aui:fieldset>
 
 <aui:script>
+	function <portlet:namespace />changePriority(ldapServer, swapLdapServer) {
+		var ldapServerId = ldapServer.getAttribute('data-ldapServerId');
+		var swapLdapServerId = swapLdapServer.getAttribute('data-ldapServerId');
+
+		var ldapServerHTML = ldapServer.html();
+		var swapLdapServerHTML = swapLdapServer.html();
+
+		ldapServer.html(swapLdapServerHTML);
+		swapLdapServer.html(ldapServerHTML);
+
+		ldapServer.setAttribute('data-ldapServerId', swapLdapServerId);
+		swapLdapServer.setAttribute('data-ldapServerId', ldapServerId);
+	}
+
+	function <portlet:namespace />changeLDAPServerPriority(ldapServerId, action) {
+		var ldapServer = AUI().one('.ldap-servers tr[data-ldapServerId="' + ldapServerId + '"]');
+
+		if (ldapServer) {
+			var swapLdapServer = ldapServer[action]();
+
+			if (swapLdapServer) {
+				<portlet:namespace />changePriority(ldapServer, swapLdapServer);
+			}
+		}
+	}
+
+	function <portlet:namespace />lowerLDAPServerPriority(ldapServerId) {
+		<portlet:namespace />changeLDAPServerPriority(ldapServerId, 'next');
+	}
+
+	function <portlet:namespace />raiseLDAPServerPriority(ldapServerId) {
+		<portlet:namespace />changeLDAPServerPriority(ldapServerId, 'previous');
+	}
+
 	function <portlet:namespace />saveLdap() {
 		var ldapServerIds = [];
 
@@ -242,4 +237,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 
 		document.<portlet:namespace />fm['<portlet:namespace />settings(ldap.server.ids)'].value = ldapServerIds.join(',');
 	}
+
+	Liferay.Util.toggleBoxes('<portlet:namespace />ldapImportEnabledCheckbox', '<portlet:namespace />importEnabledSettings');
+	Liferay.Util.toggleBoxes('<portlet:namespace />ldapExportEnabledCheckbox', '<portlet:namespace />exportEnabledSettings');
 </aui:script>

@@ -53,38 +53,6 @@ catch (Exception e) {
 }
 %>
 
-<aui:script use="io-request,parse-content">
-	var form = A.get('#<portlet:namespace />fm');
-	var parentNode = form.get('parentNode');
-
-	parentNode.plug(A.Plugin.ParseContent);
-
-	form.on(
-		'submit',
-		function(event) {
-			var uri = form.getAttribute('action');
-
-			A.io.request(
-				uri,
-				{
-					form: {
-						id: form
-					},
-					on: {
-						success: function(event, id, obj) {
-							var responseData = this.get('responseData');
-
-							parentNode.setContent(responseData);
-						}
-					}
-				}
-			);
-
-			event.halt();
-		}
-	);
-</aui:script>
-
 <form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/password_generator/view" /></liferay-portlet:renderURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 
 <table class="lfr-table">
@@ -146,3 +114,35 @@ catch (Exception e) {
 <input type="submit" value="<liferay-ui:message key="generate" />" />
 
 </form>
+
+<aui:script use="io-request,parse-content">
+	var form = A.get('#<portlet:namespace />fm');
+	var parentNode = form.get('parentNode');
+
+	parentNode.plug(A.Plugin.ParseContent);
+
+	form.on(
+		'submit',
+		function(event) {
+			var uri = form.getAttribute('action');
+
+			A.io.request(
+				uri,
+				{
+					form: {
+						id: form
+					},
+					on: {
+						success: function(event, id, obj) {
+							var responseData = this.get('responseData');
+
+							parentNode.setContent(responseData);
+						}
+					}
+				}
+			);
+
+			event.halt();
+		}
+	);
+</aui:script>

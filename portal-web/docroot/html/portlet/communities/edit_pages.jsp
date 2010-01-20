@@ -292,155 +292,6 @@ request.setAttribute("edit_pages.jsp-workflowRoleNames", workflowRoleNames);
 request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 %>
 
-<aui:script>
-	function <portlet:namespace />changeWorkflowStages() {
-		submitForm(document.<portlet:namespace />fm, '<%= currentURL %>');
-	}
-
-	function <portlet:namespace />deletePage() {
-		<c:choose>
-			<c:when test="<%= (selPlid == themeDisplay.getPlid()) || (selPlid == refererPlid) %>">
-				alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
-			</c:when>
-			<c:otherwise>
-				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-page") %>')) {
-					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-					document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PLID %>";
-					submitForm(document.<portlet:namespace />fm);
-				}
-			</c:otherwise>
-		</c:choose>
-	}
-
-	function <portlet:namespace />exportPages() {
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>&etag=0", false);
-	}
-
-	function <portlet:namespace />importPages() {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
-	}
-
-	function <portlet:namespace />removePage(box) {
-		var selectEl = AUI().one(box);
-
-		var layoutId = <%= ((refererLayout == null) ? layout.getLayoutId() : refererLayout.getLayoutId()) %>;
-		var currentValue = null;
-
-		if (selectEl) {
-			currentValue = selectEl.val();
-		}
-
-		if (layoutId == currentValue) {
-			alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
-		}
-		else {
-			Liferay.Util.removeItem(box);
-		}
-	}
-
-	function <portlet:namespace />savePage() {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-
-		<c:choose>
-			<c:when test='<%= tabs2.equals("monitoring") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "monitoring";
-			</c:when>
-			<c:when test='<%= tabs2.equals("virtual-host") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
-			</c:when>
-			<c:when test='<%= tabs2.equals("merge-pages") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "merge_pages";
-			</c:when>
-			<c:otherwise>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= tabs3.equals("children") ? Constants.ADD : Constants.UPDATE %>';
-			</c:otherwise>
-		</c:choose>
-
-		<c:if test='<%= tabs3.equals("page") %>'>
-			<portlet:namespace />updateLanguage();
-			<portlet:namespace />updateMetaLanguage();
-		</c:if>
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />saveWorkflowStages() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "workflow";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />updateDisplayOrder() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
-		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />updateLogo() {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "logo";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId, sectionParam, sectionName) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "look_and_feel";
-
-		var themeRadio = AUI().one(document.<portlet:namespace />fm.<portlet:namespace />themeId);
-
-		if (themeRadio) {
-			themeRadio.val(themeId);
-		}
-
-		var colorSchemeRadio = AUI().one(document.<portlet:namespace />fm.<portlet:namespace />colorSchemeId);
-
-		if (colorSchemeRadio) {
-			colorSchemeRadio.val(colorSchemeId);
-		}
-
-		if ((sectionParam != null) && (sectionName != null)) {
-			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&" + sectionParam + "=" + sectionName;
-		}
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />updateStaging() {
-		var checked = document.<portlet:namespace />fm.<portlet:namespace />stagingEnabled.checked;
-
-		var ok = true;
-
-		if (!checked) {
-			ok = confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-staging-public-and-private-pages") %>');
-		}
-
-		if (ok) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "staging";
-			submitForm(document.<portlet:namespace />fm);
-		}
-		else {
-			document.<portlet:namespace />fm.<portlet:namespace />stagingEnabled.checked = !checked;
-		}
-	}
-
-	function <portlet:namespace />updateWorkflow() {
-		var checked = document.<portlet:namespace />fm.<portlet:namespace />workflowEnabled.checked;
-
-		var ok = true;
-
-		if (!checked) {
-			ok = confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-workflow") %>');
-		}
-
-		if (ok) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "workflow";
-			submitForm(document.<portlet:namespace />fm);
-		}
-		else {
-			document.<portlet:namespace />fm.<portlet:namespace />workflowEnabled.checked = !checked;
-		}
-	}
-</aui:script>
-
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPagesURL">
 	<portlet:param name="struts_action" value="/communities/edit_pages" />
 </portlet:actionURL>
@@ -607,3 +458,152 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		</c:otherwise>
 	</c:choose>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />changeWorkflowStages() {
+		submitForm(document.<portlet:namespace />fm, '<%= currentURL %>');
+	}
+
+	function <portlet:namespace />deletePage() {
+		<c:choose>
+			<c:when test="<%= (selPlid == themeDisplay.getPlid()) || (selPlid == refererPlid) %>">
+				alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
+			</c:when>
+			<c:otherwise>
+				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-page") %>')) {
+					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+					document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PLID %>";
+					submitForm(document.<portlet:namespace />fm);
+				}
+			</c:otherwise>
+		</c:choose>
+	}
+
+	function <portlet:namespace />exportPages() {
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>&etag=0", false);
+	}
+
+	function <portlet:namespace />importPages() {
+		document.<portlet:namespace />fm.encoding = "multipart/form-data";
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
+	}
+
+	function <portlet:namespace />removePage(box) {
+		var selectEl = AUI().one(box);
+
+		var layoutId = <%= ((refererLayout == null) ? layout.getLayoutId() : refererLayout.getLayoutId()) %>;
+		var currentValue = null;
+
+		if (selectEl) {
+			currentValue = selectEl.val();
+		}
+
+		if (layoutId == currentValue) {
+			alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
+		}
+		else {
+			Liferay.Util.removeItem(box);
+		}
+	}
+
+	function <portlet:namespace />savePage() {
+		document.<portlet:namespace />fm.encoding = "multipart/form-data";
+
+		<c:choose>
+			<c:when test='<%= tabs2.equals("monitoring") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "monitoring";
+			</c:when>
+			<c:when test='<%= tabs2.equals("virtual-host") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
+			</c:when>
+			<c:when test='<%= tabs2.equals("merge-pages") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "merge_pages";
+			</c:when>
+			<c:otherwise>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= tabs3.equals("children") ? Constants.ADD : Constants.UPDATE %>';
+			</c:otherwise>
+		</c:choose>
+
+		<c:if test='<%= tabs3.equals("page") %>'>
+			<portlet:namespace />updateLanguage();
+			<portlet:namespace />updateMetaLanguage();
+		</c:if>
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />saveWorkflowStages() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "workflow";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />updateDisplayOrder() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
+		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />updateLogo() {
+		document.<portlet:namespace />fm.encoding = "multipart/form-data";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "logo";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId, sectionParam, sectionName) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "look_and_feel";
+
+		var themeRadio = AUI().one(document.<portlet:namespace />fm.<portlet:namespace />themeId);
+
+		if (themeRadio) {
+			themeRadio.val(themeId);
+		}
+
+		var colorSchemeRadio = AUI().one(document.<portlet:namespace />fm.<portlet:namespace />colorSchemeId);
+
+		if (colorSchemeRadio) {
+			colorSchemeRadio.val(colorSchemeId);
+		}
+
+		if ((sectionParam != null) && (sectionName != null)) {
+			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&" + sectionParam + "=" + sectionName;
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />updateStaging() {
+		var checked = document.<portlet:namespace />fm.<portlet:namespace />stagingEnabled.checked;
+
+		var ok = true;
+
+		if (!checked) {
+			ok = confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-staging-public-and-private-pages") %>');
+		}
+
+		if (ok) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "staging";
+			submitForm(document.<portlet:namespace />fm);
+		}
+		else {
+			document.<portlet:namespace />fm.<portlet:namespace />stagingEnabled.checked = !checked;
+		}
+	}
+
+	function <portlet:namespace />updateWorkflow() {
+		var checked = document.<portlet:namespace />fm.<portlet:namespace />workflowEnabled.checked;
+
+		var ok = true;
+
+		if (!checked) {
+			ok = confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-workflow") %>');
+		}
+
+		if (ok) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "workflow";
+			submitForm(document.<portlet:namespace />fm);
+		}
+		else {
+			document.<portlet:namespace />fm.<portlet:namespace />workflowEnabled.checked = !checked;
+		}
+	}
+</aui:script>

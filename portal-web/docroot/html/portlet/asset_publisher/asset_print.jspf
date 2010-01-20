@@ -33,23 +33,23 @@ printAssetURL.setParameter("viewMode", Constants.PRINT);
 
 <c:choose>
 	<c:when test="<%= print %>">
+		<liferay-ui:icon image="print" url="javascript:print();" label="<%= true %>" />
+
 		<aui:script>
 			print();
 		</aui:script>
-
-		<liferay-ui:icon image="print" url="javascript:print();" label="<%= true %>" />
 	</c:when>
 	<c:otherwise>
-		<aui:script>
-			function <portlet:namespace />printPage_<%= assetEntryIndex %>() {
-				window.open('<%= printAssetURL %>', '', "directories=0,height=480,left=80,location=1,menubar=1,resizable=1,scrollbars=yes,status=0,toolbar=0,top=180,width=640");
-			}
-		</aui:script>
-
 		<liferay-ui:icon
 			image="print"
 			url='<%= "javascript:" + renderResponse.getNamespace() + "printPage_" + assetEntryIndex + "();" %>'
 			label="<%= true %>"
 		/>
+
+		<aui:script>
+			function <portlet:namespace />printPage_<%= assetEntryIndex %>() {
+				window.open('<%= printAssetURL %>', '', "directories=0,height=480,left=80,location=1,menubar=1,resizable=1,scrollbars=yes,status=0,toolbar=0,top=180,width=640");
+			}
+		</aui:script>
 	</c:otherwise>
 </c:choose>

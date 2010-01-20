@@ -37,17 +37,6 @@ String editorParam = "emailMessageBody";
 String editorContent = emailMessageBody;
 %>
 
-<aui:script>
-	function <portlet:namespace />initEditor() {
-		return "<%= UnicodeFormatter.toString(editorContent) %>";
-	}
-
-	function <portlet:namespace />saveConfiguration() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
@@ -113,6 +102,17 @@ String editorContent = emailMessageBody;
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />initEditor() {
+		return "<%= UnicodeFormatter.toString(editorContent) %>";
+	}
+
+	function <portlet:namespace />saveConfiguration() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.invitation.edit_configuration.jsp";

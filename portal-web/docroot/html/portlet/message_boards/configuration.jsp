@@ -64,16 +64,6 @@ else if (tabs2.equals("message-updated-email")) {
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>
 
-<aui:script>
-	function <portlet:namespace />saveConfiguration() {
-		<c:if test='<%= tabs2.equals("user-ranks") || tabs2.equals("thread-priorities") %>'>
-			<portlet:namespace />updateLanguage();
-		</c:if>
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
@@ -817,6 +807,16 @@ else if (tabs2.equals("message-updated-email")) {
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />saveConfiguration() {
+		<c:if test='<%= tabs2.equals("user-ranks") || tabs2.equals("thread-priorities") %>'>
+			<portlet:namespace />updateLanguage();
+		</c:if>
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.message_boards.edit_configuration.jsp";

@@ -59,71 +59,6 @@ if (portletDisplay.isWebDAVEnabled()) {
 }
 %>
 
-<aui:script>
-	var maxDimension = <%= PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>;
-
-	function <portlet:namespace />viewImage(id, token, name, description, width, height) {
-		var page = AUI().getBody().get('viewportRegion');
-
-		var maxWidth = Math.max(page.right - 150, maxDimension);
-		var maxHeight = Math.max(page.bottom - 150, maxDimension);
-
-		var imgWidth = width;
-		var imgHeight = height;
-
-		if (imgWidth > maxWidth || imgHeight > maxHeight) {
-			if (imgWidth > maxWidth) {
-				var x = maxWidth / imgWidth;
-
-				imgWidth = maxWidth;
-				imgHeight = x * imgHeight;
-			}
-
-			if (imgHeight > maxHeight) {
-				var y = maxHeight / imgHeight;
-
-				imgHeight = maxHeight;
-				imgWidth = y * imgWidth;
-			}
-		}
-
-		var winWidth = imgWidth + 36;
-
-		if (winWidth < maxDimension) {
-			winWidth = maxDimension;
-		}
-
-		var messageId = "<portlet:namespace />popup_" + id;
-
-		var html = "";
-
-		html += "<div class='image-content'>";
-		html += "<img alt='" + name + ". " + description + "' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "&t=" + token + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' />"
-		html += "</div>"
-
-		AUI().use(
-			'dialog',
-			function(A) {
-				var popup = new A.Dialog(
-					{
-						bodyContent: html,
-						centered: true,
-						destroyOnClose: true,
-						draggable: false,
-						modal: true,
-						title: false,
-						width: winWidth
-					}
-				)
-				.render();
-
-				popup.get('boundingBox').addClass('portlet-image-gallery');
-				popup.get('contentBox').addClass('image-popup');
-			}
-		);
-	}
-</aui:script>
-
 <liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
 
 <aui:layout>
@@ -255,6 +190,71 @@ if (portletDisplay.isWebDAVEnabled()) {
 		</liferay-ui:icon-menu>
 	</aui:column>
 </aui:layout>
+
+<aui:script>
+	var maxDimension = <%= PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>;
+
+	function <portlet:namespace />viewImage(id, token, name, description, width, height) {
+		var page = AUI().getBody().get('viewportRegion');
+
+		var maxWidth = Math.max(page.right - 150, maxDimension);
+		var maxHeight = Math.max(page.bottom - 150, maxDimension);
+
+		var imgWidth = width;
+		var imgHeight = height;
+
+		if (imgWidth > maxWidth || imgHeight > maxHeight) {
+			if (imgWidth > maxWidth) {
+				var x = maxWidth / imgWidth;
+
+				imgWidth = maxWidth;
+				imgHeight = x * imgHeight;
+			}
+
+			if (imgHeight > maxHeight) {
+				var y = maxHeight / imgHeight;
+
+				imgHeight = maxHeight;
+				imgWidth = y * imgWidth;
+			}
+		}
+
+		var winWidth = imgWidth + 36;
+
+		if (winWidth < maxDimension) {
+			winWidth = maxDimension;
+		}
+
+		var messageId = "<portlet:namespace />popup_" + id;
+
+		var html = "";
+
+		html += "<div class='image-content'>";
+		html += "<img alt='" + name + ". " + description + "' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "&t=" + token + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' />"
+		html += "</div>"
+
+		AUI().use(
+			'dialog',
+			function(A) {
+				var popup = new A.Dialog(
+					{
+						bodyContent: html,
+						centered: true,
+						destroyOnClose: true,
+						draggable: false,
+						modal: true,
+						title: false,
+						width: winWidth
+					}
+				)
+				.render();
+
+				popup.get('boundingBox').addClass('portlet-image-gallery');
+				popup.get('contentBox').addClass('image-popup');
+			}
+		);
+	}
+</aui:script>
 
 <%
 IGUtil.addPortletBreadcrumbEntries(image, request, renderResponse);

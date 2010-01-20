@@ -83,12 +83,6 @@ portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 	<input type="button" value="<liferay-ui:message key="search" />" onclick="submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>')" />
 </div>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
-	</aui:script>
-</c:if>
-
 <div class="separator"><!-- --></div>
 
 <c:choose>
@@ -335,6 +329,12 @@ portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 		</c:if>
 	</c:otherwise>
 </c:choose>
+
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<aui:script>
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
+	</aui:script>
+</c:if>
 
 <%!
 public static String getBreadcrumbs(DLFolder folder, DLFileEntry fileEntry, PageContext pageContext, RenderRequest req, RenderResponse res, String portletResource, String redirect) throws Exception {

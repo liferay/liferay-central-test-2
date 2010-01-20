@@ -56,6 +56,12 @@ if (image != null) {
 %>
 
 <c:if test="<%= image == null %>">
+	<div class="lfr-dynamic-uploader">
+		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
+	</div>
+
+	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
+
 	<aui:script use="liferay-upload">
 		new Liferay.Upload(
 			{
@@ -69,40 +75,7 @@ if (image != null) {
 			}
 		);
 	</aui:script>
-
-	<div class="lfr-dynamic-uploader">
-		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
-	</div>
-
-	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
 </c:if>
-
-<aui:script>
-	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = "<%= rootFolderId %>";
-
-		var nameEl = document.getElementById("<portlet:namespace />folderName");
-
-		nameEl.href = "";
-		nameEl.innerHTML = "";
-	}
-
-	function <portlet:namespace />saveImage() {
-		<%= HtmlUtil.escape(uploadProgressId) %>.startProgress();
-
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= image == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectFolder(folderId, folderName) {
-		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
-
-		var nameEl = document.getElementById("<portlet:namespace />folderName");
-
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId;
-		nameEl.innerHTML = folderName + "&nbsp;";
-	}
-</aui:script>
 
 <liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
 
@@ -221,7 +194,42 @@ if (image != null) {
 	</aui:button-row>
 </aui:form>
 
+<liferay-ui:upload-progress
+	id="<%= uploadProgressId %>"
+	message="uploading"
+	redirect="<%= redirect %>"
+/>
+
+<c:if test="<%= image == null %>">
+	</div>
+</c:if>
+
 <aui:script>
+	function <portlet:namespace />removeFolder() {
+		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = "<%= rootFolderId %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />folderName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
+	function <portlet:namespace />saveImage() {
+		<%= HtmlUtil.escape(uploadProgressId) %>.startProgress();
+
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= image == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectFolder(folderId, folderName) {
+		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
+
+		var nameEl = document.getElementById("<portlet:namespace />folderName");
+
+		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId;
+		nameEl.innerHTML = folderName + "&nbsp;";
+	}
+
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
@@ -257,16 +265,6 @@ if (image != null) {
 		validateFile(fileField);
 	}
 </aui:script>
-
-<liferay-ui:upload-progress
-	id="<%= uploadProgressId %>"
-	message="uploading"
-	redirect="<%= redirect %>"
-/>
-
-<c:if test="<%= image == null %>">
-	</div>
-</c:if>
 
 <%
 if (image != null) {

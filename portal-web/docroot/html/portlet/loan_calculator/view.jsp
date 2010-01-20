@@ -48,38 +48,6 @@ integerFormat.setMinimumFractionDigits(0);
 NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 %>
 
-<aui:script use="io-request,parse-content">
-	var form = A.get('#<portlet:namespace />fm');
-	var parentNode = form.get('parentNode');
-
-	parentNode.plug(A.Plugin.ParseContent);
-
-	form.on(
-		'submit',
-		function(event) {
-			var uri = form.getAttribute('action');
-
-			A.io.request(
-				uri,
-				{
-					form: {
-						id: form
-					},
-					on: {
-						success: function(event, id, obj) {
-							var responseData = this.get('responseData');
-
-							parentNode.setContent(responseData);
-						}
-					}
-				}
-			);
-
-			event.halt();
-		}
-	);
-</aui:script>
-
 <form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/loan_calculator/view" /></liferay-portlet:renderURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 
 <table class="lfr-table">
@@ -144,3 +112,35 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />loanAmount);
 	</aui:script>
 </c:if>
+
+<aui:script use="io-request,parse-content">
+	var form = A.get('#<portlet:namespace />fm');
+	var parentNode = form.get('parentNode');
+
+	parentNode.plug(A.Plugin.ParseContent);
+
+	form.on(
+		'submit',
+		function(event) {
+			var uri = form.getAttribute('action');
+
+			A.io.request(
+				uri,
+				{
+					form: {
+						id: form
+					},
+					on: {
+						success: function(event, id, obj) {
+							var responseData = this.get('responseData');
+
+							parentNode.setContent(responseData);
+						}
+					}
+				}
+			);
+
+			event.halt();
+		}
+	);
+</aui:script>

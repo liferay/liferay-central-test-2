@@ -22,16 +22,6 @@
  */
 %>
 
-<aui:script>
-	function <portlet:namespace />hideDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').hide();
-	}
-
-	function <portlet:namespace />showDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').show();
-	}
-</aui:script>
-
 <ul class="lfr-tree lfr-component">
 	<c:if test="<%= supportsSetup %>">
 		<li class="tree-item">
@@ -247,3 +237,13 @@
 		</li>
 	</c:if>
 </ul>
+
+<aui:script>
+	function <portlet:namespace />hideDateRange() {
+		AUI().one('#<portlet:namespace />startEndDate').hide();
+	}
+
+	function <portlet:namespace />showDateRange() {
+		AUI().one('#<portlet:namespace />startEndDate').show();
+	}
+</aui:script>

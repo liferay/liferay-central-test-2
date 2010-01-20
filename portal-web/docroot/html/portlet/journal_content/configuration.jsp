@@ -54,21 +54,6 @@ type = ParamUtil.getString(request, "type", type);
 	}
 </style>
 
-<aui:script>
-	function <portlet:namespace />selectArticle(articleId) {
-		document.<portlet:namespace />fm.<portlet:namespace />articleId.value = articleId;
-		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
-
-		AUI().one('.displaying-article-id-holder').show();
-		AUI().one('.displaying-help-message-holder').hide();
-
-		var displayArticleId = AUI().one('.displaying-article-id');
-
-		displayArticleId.set('innerHTML', articleId + ' (<%= LanguageUtil.get(pageContext, "modified") %>)');
-		displayArticleId.addClass('modified');
-	}
-</aui:script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
@@ -281,3 +266,18 @@ type = ParamUtil.getString(request, "type", type);
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />selectArticle(articleId) {
+		document.<portlet:namespace />fm.<portlet:namespace />articleId.value = articleId;
+		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
+
+		AUI().one('.displaying-article-id-holder').show();
+		AUI().one('.displaying-help-message-holder').hide();
+
+		var displayArticleId = AUI().one('.displaying-article-id');
+
+		displayArticleId.set('innerHTML', articleId + ' (<%= LanguageUtil.get(pageContext, "modified") %>)');
+		displayArticleId.addClass('modified');
+	}
+</aui:script>

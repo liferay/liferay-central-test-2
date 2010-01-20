@@ -32,45 +32,6 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
 </liferay-util:buffer>
 
-<aui:script>
-	function <portlet:namespace />openUserGroupSelector() {
-		var userGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_user_group" /></portlet:renderURL>', 'usergroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-
-		userGroupWindow.focus();
-	}
-
-	function <portlet:namespace />selectUserGroup(userGroupId, name) {
-		AUI().use(
-			'liferay-search-container',
-			function(A) {
-				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer');
-
-				var rowColumns = [];
-
-				rowColumns.push(name);
-				rowColumns.push('<a class="modify-link" data-rowId="' + userGroupId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeUserGroupIcon) %></a>');
-
-				searchContainer.addRow(rowColumns, userGroupId);
-				searchContainer.updateDataStore();
-
-				<portlet:namespace />trackChanges();
-			}
-		);
-	}
-
-	function <portlet:namespace />trackChanges() {
-		AUI().use(
-			'event',
-			function(A) {
-				A.fire(
-					'enterpriseAdmin:trackChanges',
-					A.one('.selected .modify-link')
-				);
-			}
-		);
-	}
-</aui:script>
-
 <h3><liferay-ui:message key="user-groups" /></h3>
 
 <liferay-ui:search-container
@@ -114,6 +75,45 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 		cssClass="modify-link"
 	/>
 </c:if>
+
+<aui:script>
+	function <portlet:namespace />openUserGroupSelector() {
+		var userGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_user_group" /></portlet:renderURL>', 'usergroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+
+		userGroupWindow.focus();
+	}
+
+	function <portlet:namespace />selectUserGroup(userGroupId, name) {
+		AUI().use(
+			'liferay-search-container',
+			function(A) {
+				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer');
+
+				var rowColumns = [];
+
+				rowColumns.push(name);
+				rowColumns.push('<a class="modify-link" data-rowId="' + userGroupId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeUserGroupIcon) %></a>');
+
+				searchContainer.addRow(rowColumns, userGroupId);
+				searchContainer.updateDataStore();
+
+				<portlet:namespace />trackChanges();
+			}
+		);
+	}
+
+	function <portlet:namespace />trackChanges() {
+		AUI().use(
+			'event',
+			function(A) {
+				A.fire(
+					'enterpriseAdmin:trackChanges',
+					A.one('.selected .modify-link')
+				);
+			}
+		);
+	}
+</aui:script>
 
 <aui:script use="liferay-search-container">
 	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer');

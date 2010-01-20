@@ -39,25 +39,6 @@ String adminEmailPasswordSentSubject = ParamUtil.getString(request, "emailPasswo
 String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordSentBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY));
 %>
 
-<aui:script>
-	function <portlet:namespace />initEmailUserAddedBodyEditor() {
-		return "<%= UnicodeFormatter.toString(adminEmailUserAddedBody) %>";
-	}
-
-	function <portlet:namespace />initEmailPasswordSentBodyEditor() {
-		return "<%= UnicodeFormatter.toString(adminEmailPasswordSentBody) %>";
-	}
-
-	function <portlet:namespace />saveEmails() {
-		try {
-			document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY %>)'].value = window.emailUserAddedBody.getHTML();
-			document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY %>)'].value = window.emailPasswordSentBody.getHTML();
-		}
-		catch(error) {
-		}
-	}
-</aui:script>
-
 <liferay-ui:error-marker key="errorSection" value="email_notifications" />
 
 <liferay-ui:tabs
@@ -120,6 +101,25 @@ String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordS
 		</aui:fieldset>
 	</liferay-ui:section>
 </liferay-ui:tabs>
+
+<aui:script>
+	function <portlet:namespace />initEmailUserAddedBodyEditor() {
+		return "<%= UnicodeFormatter.toString(adminEmailUserAddedBody) %>";
+	}
+
+	function <portlet:namespace />initEmailPasswordSentBodyEditor() {
+		return "<%= UnicodeFormatter.toString(adminEmailPasswordSentBody) %>";
+	}
+
+	function <portlet:namespace />saveEmails() {
+		try {
+			document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY %>)'].value = window.emailUserAddedBody.getHTML();
+			document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY %>)'].value = window.emailPasswordSentBody.getHTML();
+		}
+		catch(error) {
+		}
+	}
+</aui:script>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.enterprise_admin.view.jsp";

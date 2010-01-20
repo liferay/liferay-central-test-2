@@ -45,6 +45,54 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 request.setAttribute("view.jsp-portletURLString", portletURLString);
 %>
 
+<aui:form action="<%= portletURLString %>" method="get" name="fm">
+	<liferay-portlet:renderURLParams varImpl="portletURL" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
+	<aui:input name="redirect" type="hidden" value="<%= portletURLString %>" />
+
+	<c:if test="<%= showTabs1 %>">
+		<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp" />
+	</c:if>
+
+	<c:choose>
+		<c:when test='<%= tabs1.equals("users") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/view_users.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("organizations") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/view_organizations.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("user-groups") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/view_user_groups.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("roles") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/view_roles.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("password-policies") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/view_password_policies.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("settings") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/edit_settings.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("monitoring") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/view_monitoring.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("plugins") %>'>
+
+			<%
+			PortletURL installPluginsURL = null;
+
+			boolean showEditPluginHREF = true;
+			boolean showReindexButton = false;
+			%>
+
+			<%@ include file="/html/portlet/enterprise_admin/plugins.jspf" %>
+		</c:when>
+	</c:choose>
+</aui:form>
+
 <aui:script>
 	function <portlet:namespace />deleteOrganization(organizationId) {
 		<portlet:namespace />doDeleteOrganizationOrUserGroup('<%= Organization.class.getName() %>', organizationId);
@@ -218,54 +266,6 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company" /></portlet:actionURL>");
 	}
 </aui:script>
-
-<aui:form action="<%= portletURLString %>" method="get" name="fm">
-	<liferay-portlet:renderURLParams varImpl="portletURL" />
-	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
-	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
-	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
-	<aui:input name="redirect" type="hidden" value="<%= portletURLString %>" />
-
-	<c:if test="<%= showTabs1 %>">
-		<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp" />
-	</c:if>
-
-	<c:choose>
-		<c:when test='<%= tabs1.equals("users") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/view_users.jsp" />
-		</c:when>
-		<c:when test='<%= tabs1.equals("organizations") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/view_organizations.jsp" />
-		</c:when>
-		<c:when test='<%= tabs1.equals("user-groups") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/view_user_groups.jsp" />
-		</c:when>
-		<c:when test='<%= tabs1.equals("roles") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/view_roles.jsp" />
-		</c:when>
-		<c:when test='<%= tabs1.equals("password-policies") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/view_password_policies.jsp" />
-		</c:when>
-		<c:when test='<%= tabs1.equals("settings") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/edit_settings.jsp" />
-		</c:when>
-		<c:when test='<%= tabs1.equals("monitoring") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/view_monitoring.jsp" />
-		</c:when>
-		<c:when test='<%= tabs1.equals("plugins") %>'>
-
-			<%
-			PortletURL installPluginsURL = null;
-
-			boolean showEditPluginHREF = true;
-			boolean showReindexButton = false;
-			%>
-
-			<%@ include file="/html/portlet/enterprise_admin/plugins.jspf" %>
-		</c:when>
-	</c:choose>
-</aui:form>
 
 <%!
 private static final long[] _DURATIONS = {300, 600, 1800, 3600, 7200, 10800, 21600};

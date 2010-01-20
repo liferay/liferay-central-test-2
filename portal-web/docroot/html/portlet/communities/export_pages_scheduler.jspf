@@ -54,6 +54,22 @@ scheduledPublishEventsURL.setParameter("privateLayout", String.valueOf(privateLa
 scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? DestinationNames.LAYOUTS_LOCAL_PUBLISHER : DestinationNames.LAYOUTS_REMOTE_PUBLISHER);
 %>
 
+<aui:input name="jobName" type="hidden" />
+
+<liferay-ui:input-scheduler />
+
+<br />
+
+<aui:button name="addButton" onClick='<%= renderResponse.getNamespace() + "schedulePublishEvent();" %>' value="add-event" />
+
+<br /><br />
+
+<aui:fieldset>
+	<aui:legend label="scheduled-events" />
+
+	<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
+</aui:fieldset>
+
 <aui:script>
 	function <portlet:namespace />schedulePublishEvent() {
 		var oldCmd = document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value;
@@ -168,19 +184,3 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 
 	<portlet:namespace />updateScheduledPublishEventsDiv();
 </aui:script>
-
-<aui:input name="jobName" type="hidden" />
-
-<liferay-ui:input-scheduler />
-
-<br />
-
-<aui:button name="addButton" onClick='<%= renderResponse.getNamespace() + "schedulePublishEvent();" %>' value="add-event" />
-
-<br /><br />
-
-<aui:fieldset>
-	<aui:legend label="scheduled-events" />
-
-	<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
-</aui:fieldset>

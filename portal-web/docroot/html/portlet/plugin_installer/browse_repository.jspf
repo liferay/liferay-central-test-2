@@ -112,12 +112,6 @@ try {
 
 	<input type="submit" value="<liferay-ui:message key="search" />" />
 
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		<aui:script>
-			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
-		</aui:script>
-	</c:if>
-
 	<br /><br />
 
 	<div class="separator"><!-- --></div>
@@ -340,6 +334,12 @@ catch (PluginPackageException ppe) {
 	<div class="portlet-msg-error">
 		<liferay-ui:message key="an-error-occurred-while-retrieving-available-plugins" />
 	</div>
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+		<aui:script>
+			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
+		</aui:script>
+	</c:if>
 
 <%
 }

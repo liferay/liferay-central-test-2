@@ -57,23 +57,6 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", productScreenshots.size());
 %>
 
-<aui:script>
-	function <portlet:namespace />addScreenShot() {
-		document.<portlet:namespace />fm.<portlet:namespace />screenshotsCount.value = "<%= screenshotsCount + 1 %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />removeScreenShot() {
-		document.<portlet:namespace />fm.<portlet:namespace />screenshotsCount.value = "<%= screenshotsCount - 1 %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />saveProductEntry() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= productEntry == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" enctype="multipart/form-data" onSubmit="<portlet:namespace />saveProductEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
@@ -325,11 +308,26 @@ for (int i = 0; i < screenshotsCount; i++) {
 
 </form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />addScreenShot() {
+		document.<portlet:namespace />fm.<portlet:namespace />screenshotsCount.value = "<%= screenshotsCount + 1 %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />removeScreenShot() {
+		document.<portlet:namespace />fm.<portlet:namespace />screenshotsCount.value = "<%= screenshotsCount - 1 %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />saveProductEntry() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= productEntry == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>
 
 <%
 if (productEntry != null) {

@@ -120,12 +120,6 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_area") %>'>
-					<aui:script>
-						function <portlet:namespace />initEditor<%= elName %>() {
-							return "<%= UnicodeFormatter.toString(elContent) %>";
-						}
-					</aui:script>
-
 					<liferay-ui:input-editor
 						name='<%= renderResponse.getNamespace() + "structure_el_" + elName + "_content" %>'
 						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
@@ -135,6 +129,12 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						height="250"
 						width="500"
 					/>
+
+					<aui:script>
+						function <portlet:namespace />initEditor<%= elName %>() {
+							return "<%= UnicodeFormatter.toString(elContent) %>";
+						}
+					</aui:script>
 				</c:if>
 
 				<c:if test='<%= elType.equals("image") %>'>

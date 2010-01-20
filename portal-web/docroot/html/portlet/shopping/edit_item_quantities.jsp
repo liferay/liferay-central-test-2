@@ -51,26 +51,6 @@ for (int i = 0; i < values.size(); i++) {
 }
 %>
 
-<aui:script>
-	function <portlet:namespace />updateItemQuantities() {
-		var itemQuantities = "";
-
-		<%
-		for (int i = 0; i < rowsCount; i++) {
-		%>
-
-			itemQuantities = itemQuantities + document.<portlet:namespace />fm.<portlet:namespace />fieldsQuantity<%= i %>.value + ",";
-
-		<%
-		}
-		%>
-
-		opener.document.<portlet:namespace />fm.<portlet:namespace />fieldsQuantities.value = itemQuantities;
-
-		self.close();
-	}
-</aui:script>
-
 <form method="post" name="<portlet:namespace />fm">
 
 <table border="1" cellpadding="4" cellspacing="0">
@@ -149,3 +129,23 @@ for (int i = 0; i < rowsCount; i++) {
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.close();" />
 
 </form>
+
+<aui:script>
+	function <portlet:namespace />updateItemQuantities() {
+		var itemQuantities = "";
+
+		<%
+		for (int i = 0; i < rowsCount; i++) {
+		%>
+
+			itemQuantities = itemQuantities + document.<portlet:namespace />fm.<portlet:namespace />fieldsQuantity<%= i %>.value + ",";
+
+		<%
+		}
+		%>
+
+		opener.document.<portlet:namespace />fm.<portlet:namespace />fieldsQuantities.value = itemQuantities;
+
+		self.close();
+	}
+</aui:script>

@@ -57,6 +57,10 @@ for (int i = 0; i < urls.length; i++) {
 }
 %>
 
+<c:if test="<%= footerArticleResourcePrimKey > 0 %>">
+	<liferay-ui:journal-article articleResourcePrimKey="<%= footerArticleResourcePrimKey %>" />
+</c:if>
+
 <aui:script use="event,node">
 	var minusAlt = '<liferay-ui:message key="collapse" />';
 	var minusImage = '01_minus.png';
@@ -90,7 +94,3 @@ for (int i = 0; i < urls.length; i++) {
 		}
 	);
 </aui:script>
-
-<c:if test="<%= footerArticleResourcePrimKey > 0 %>">
-	<liferay-ui:journal-article articleResourcePrimKey="<%= footerArticleResourcePrimKey %>" />
-</c:if>

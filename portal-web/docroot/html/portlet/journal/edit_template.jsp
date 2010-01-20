@@ -82,54 +82,6 @@ boolean smallImage = BeanParamUtil.getBoolean(template, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL");
 %>
 
-<aui:script>
-	function <portlet:namespace />downloadTemplateContent() {
-		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_template_content";
-		document.<portlet:namespace />fm2.target = "_self";
-		document.<portlet:namespace />fm2.xslContent.value = document.<portlet:namespace />fm1.<portlet:namespace />xslContent.value;
-		document.<portlet:namespace />fm2.formatXsl.value = document.<portlet:namespace />fm1.<portlet:namespace />formatXsl.value;
-		document.<portlet:namespace />fm2.langType.value = document.<portlet:namespace />fm1.<portlet:namespace />langType.value;
-		document.<portlet:namespace />fm2.submit();
-	}
-
-	function <portlet:namespace />removeStructure() {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
-
-		var nameEl = document.getElementById("<portlet:namespace />structureName");
-
-		nameEl.href = "#";
-		nameEl.innerHTML = "";
-
-		document.getElementById("<portlet:namespace />removeStructureButton").disabled = true;
-	}
-
-	function <portlet:namespace />saveAndContinueTemplate() {
-		document.<portlet:namespace />fm1.<portlet:namespace />saveAndContinue.value = "1";
-		<portlet:namespace />saveTemplate();
-	}
-
-	function <portlet:namespace />saveTemplate() {
-		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= template == null ? Constants.ADD : Constants.UPDATE %>";
-
-		<c:if test="<%= template == null %>">
-			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = document.<portlet:namespace />fm1.<portlet:namespace />newTemplateId.value;
-		</c:if>
-
-		submitForm(document.<portlet:namespace />fm1);
-	}
-
-	function <portlet:namespace />selectStructure(structureId, structureName) {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
-
-		var nameEl = document.getElementById("<portlet:namespace />structureName");
-
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>&<portlet:namespace />structureId=" + structureId;
-		nameEl.innerHTML = structureName + "&nbsp;";
-
-		document.getElementById("<portlet:namespace />removeStructureButton").disabled = false;
-	}
-</aui:script>
-
 <form method="post" name="<portlet:namespace />fm2">
 <input name="xslContent" type="hidden" value="" />
 <input name="formatXsl" type="hidden" value="" />
@@ -414,6 +366,52 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 </form>
 
 <aui:script>
+	function <portlet:namespace />downloadTemplateContent() {
+		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_template_content";
+		document.<portlet:namespace />fm2.target = "_self";
+		document.<portlet:namespace />fm2.xslContent.value = document.<portlet:namespace />fm1.<portlet:namespace />xslContent.value;
+		document.<portlet:namespace />fm2.formatXsl.value = document.<portlet:namespace />fm1.<portlet:namespace />formatXsl.value;
+		document.<portlet:namespace />fm2.langType.value = document.<portlet:namespace />fm1.<portlet:namespace />langType.value;
+		document.<portlet:namespace />fm2.submit();
+	}
+
+	function <portlet:namespace />removeStructure() {
+		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
+
+		var nameEl = document.getElementById("<portlet:namespace />structureName");
+
+		nameEl.href = "#";
+		nameEl.innerHTML = "";
+
+		document.getElementById("<portlet:namespace />removeStructureButton").disabled = true;
+	}
+
+	function <portlet:namespace />saveAndContinueTemplate() {
+		document.<portlet:namespace />fm1.<portlet:namespace />saveAndContinue.value = "1";
+		<portlet:namespace />saveTemplate();
+	}
+
+	function <portlet:namespace />saveTemplate() {
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= template == null ? Constants.ADD : Constants.UPDATE %>";
+
+		<c:if test="<%= template == null %>">
+			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = document.<portlet:namespace />fm1.<portlet:namespace />newTemplateId.value;
+		</c:if>
+
+		submitForm(document.<portlet:namespace />fm1);
+	}
+
+	function <portlet:namespace />selectStructure(structureId, structureName) {
+		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
+
+		var nameEl = document.getElementById("<portlet:namespace />structureName");
+
+		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>&<portlet:namespace />structureId=" + structureId;
+		nameEl.innerHTML = structureName + "&nbsp;";
+
+		document.getElementById("<portlet:namespace />removeStructureButton").disabled = false;
+	}
+
 	Liferay.Util.inlineEditor(
 		{
 			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm1.<portlet:namespace />langType.value,

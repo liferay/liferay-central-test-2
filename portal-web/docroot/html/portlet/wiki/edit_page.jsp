@@ -165,51 +165,6 @@ if (Validator.isNull(redirect)) {
 	<br />
 </c:if>
 
-<aui:script>
-	function <portlet:namespace />changeFormat(formatSel) {
-		if (window.<portlet:namespace />editor) {
-			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
-		}
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />getSuggestionsContent() {
-		var content = '';
-
-		content += document.<portlet:namespace />fm.<portlet:namespace/>title.value + ' ';
-		content += document.<portlet:namespace />fm.<portlet:namespace />content.value;
-
-		return content;
-	}
-
-	function <portlet:namespace />previewPage() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
-		document.<portlet:namespace />fm.<portlet:namespace />preview.value = "true";
-
-		if (window.<portlet:namespace />editor) {
-			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
-		}
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />savePage() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= newPage ? Constants.ADD : Constants.UPDATE %>";
-
-		if (window.<portlet:namespace />editor) {
-			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
-		}
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />saveAndContinuePage() {
-		document.<portlet:namespace />fm.<portlet:namespace />saveAndContinue.value = "true";
-		<portlet:namespace />savePage();
-	}
-</aui:script>
-
 <portlet:actionURL var="editPageActionURL">
 	<portlet:param name="struts_action" value="/wiki/edit_page" />
 </portlet:actionURL>
@@ -387,13 +342,56 @@ if (Validator.isNull(redirect)) {
 	</c:if>
 </aui:form>
 
-<c:if test="<%= editable && !preview %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />changeFormat(formatSel) {
+		if (window.<portlet:namespace />editor) {
+			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />getSuggestionsContent() {
+		var content = '';
+
+		content += document.<portlet:namespace />fm.<portlet:namespace/>title.value + ' ';
+		content += document.<portlet:namespace />fm.<portlet:namespace />content.value;
+
+		return content;
+	}
+
+	function <portlet:namespace />previewPage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />preview.value = "true";
+
+		if (window.<portlet:namespace />editor) {
+			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />savePage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= newPage ? Constants.ADD : Constants.UPDATE %>";
+
+		if (window.<portlet:namespace />editor) {
+			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />saveAndContinuePage() {
+		document.<portlet:namespace />fm.<portlet:namespace />saveAndContinue.value = "true";
+		<portlet:namespace />savePage();
+	}
+
+	<c:if test="<%= editable && !preview %>">
 		if (!window.<portlet:namespace />editor) {
 			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= editTitle ? "title" : "content" %>);
 		}
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>
 
 <%
 if (wikiPage != null) {

@@ -80,188 +80,6 @@ xsd = StringUtil.replace(xsd, StringPool.DOUBLE_SPACE, StringPool.BLANK);
 int tabIndex = 1;
 %>
 
-<aui:script>
-	var xmlIndent = "<%= StringPool.DOUBLE_SPACE %>";
-
-	function <portlet:namespace />downloadStructureContent() {
-		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_structure_content";
-		document.<portlet:namespace />fm2.target = "_self";
-		document.<portlet:namespace />fm2.xml.value = <portlet:namespace />getXsd();
-		document.<portlet:namespace />fm2.submit();
-	}
-
-	function <portlet:namespace />getXsd(cmd, elCount) {
-		if (cmd == null) {
-			cmd = "add";
-		}
-
-		var xsd = "<root>\n";
-
-		if ((cmd == "add") && (elCount == -1)) {
-			xsd += "<dynamic-element name='' type=''></dynamic-element>\n"
-		}
-
-		for (i = 0; i >= 0; i++) {
-			var elDepth = document.getElementById("<portlet:namespace />structure_el" + i + "_depth");
-			var elMetadataXML = document.getElementById("<portlet:namespace />structure_el" + i + "_metadata_xml");
-			var elName = document.getElementById("<portlet:namespace />structure_el" + i + "_name");
-			var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
-			var elIndexType = document.getElementById("<portlet:namespace />structure_el" + i + "_index_type");
-			var elRepeatable = document.getElementById("<portlet:namespace />structure_el" + i + "_repeatable");
-
-			if ((elDepth != null) && (elName != null) && (elType != null)) {
-				var elDepthValue = elDepth.value;
-				var elNameValue = encodeURIComponent(elName.value);
-				var elTypeValue = encodeURIComponent(elType.value);
-				var elIndexTypeValue = (elIndexType != null) ? elIndexType.value : "";
-				var elRepeatableValue = (elRepeatable != null) ? elRepeatable.checked : false;
-
-				if ((cmd == "add") || ((cmd == "remove") && (elCount != i))) {
-					for (var j = 0; j <= elDepthValue; j++) {
-						xsd += xmlIndent;
-					}
-
-					xsd += "<dynamic-element name='" + elNameValue + "' type='" + elTypeValue + "' index-type='" + elIndexTypeValue + "' repeatable='" + elRepeatableValue + "'>";
-
-					if ((cmd == "add") && (elCount == i)) {
-						xsd += "<dynamic-element name='' type='' repeatable='false'></dynamic-element>\n";
-					}
-					else {
-						if (elMetadataXML.value) {
-							var metadataXML = decodeURIComponent(elMetadataXML.value).replace(/[+]/g, ' ');
-
-							xsd += "\n";
-							xsd += xmlIndent;
-							xsd += metadataXML;
-							xsd += "\n";
-						}
-					}
-
-					var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
-
-					if (nextElDepth != null) {
-						var nextElDepthValue = nextElDepth.value;
-
-						if (elDepthValue == nextElDepthValue) {
-							for (var j = 0; j < elDepthValue; j++) {
-								xsd += xmlIndent;
-							}
-
-							xsd += "</dynamic-element>\n";
-						}
-						else if (elDepthValue > nextElDepthValue) {
-							var depthDiff = elDepthValue - nextElDepthValue;
-
-							for (var j = 0; j <= depthDiff; j++) {
-								if (j != 0) {
-									for (var k = 0; k <= depthDiff - j; k++) {
-										xsd += xmlIndent;
-									}
-								}
-
-								xsd += "</dynamic-element>\n";
-							}
-						}
-						else {
-							xsd += "\n";
-						}
-					}
-					else {
-						for (var j = 0; j <= elDepthValue; j++) {
-							if (j != 0) {
-								for (var k = 0; k <= elDepthValue - j; k++) {
-									xsd += xmlIndent;
-								}
-							}
-
-							xsd += "</dynamic-element>\n";
-						}
-					}
-				}
-				else if ((cmd == "remove") && (elCount == i)) {
-					var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
-
-					if (nextElDepth != null) {
-						var nextElDepthValue = nextElDepth.value;
-
-						if (elDepthValue > nextElDepthValue) {
-							var depthDiff = elDepthValue - nextElDepthValue;
-
-							for (var j = 0; j < depthDiff; j++) {
-								xsd += "</dynamic-element>\n";
-							}
-						}
-					}
-					else {
-						for (var j = 0; j < elDepthValue; j++) {
-							xsd += "</dynamic-element>\n";
-						}
-					}
-				}
-			}
-			else {
-				break;
-			}
-		}
-
-		xsd += "</root>";
-
-		return xsd;
-	}
-
-	function <portlet:namespace />editElement(cmd, elCount) {
-		document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
-		document.<portlet:namespace />fm1.<portlet:namespace />xsd.value = <portlet:namespace />getXsd(cmd, elCount);
-		submitForm(document.<portlet:namespace />fm1);
-	}
-
-	function <portlet:namespace />moveElement(moveUp, elCount) {
-		document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
-		document.<portlet:namespace />fm1.<portlet:namespace />move_up.value = moveUp;
-		document.<portlet:namespace />fm1.<portlet:namespace />move_depth.value = elCount;
-		document.<portlet:namespace />fm1.<portlet:namespace />xsd.value = <portlet:namespace />getXsd();
-		submitForm(document.<portlet:namespace />fm1);
-	}
-
-	function <portlet:namespace />removeParentStructure() {
-		document.<portlet:namespace />fm1.<portlet:namespace />parentStructureId.value = "";
-
-		var nameEl = document.getElementById("<portlet:namespace />parentStructureName");
-
-		nameEl.href = "#";
-		nameEl.innerHTML = "";
-
-		document.getElementById("<portlet:namespace />removeParentStructureButton").disabled = true;
-	}
-
-	function <portlet:namespace />saveAndContinueStructure() {
-		document.<portlet:namespace />fm1.<portlet:namespace />saveAndContinue.value = "1";
-		<portlet:namespace />saveStructure();
-	}
-
-	function <portlet:namespace />saveStructure(addAnother) {
-		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= structure == null ? Constants.ADD : Constants.UPDATE %>";
-
-		<c:if test="<%= structure == null %>">
-			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = document.<portlet:namespace />fm1.<portlet:namespace />newStructureId.value;
-		</c:if>
-
-		document.<portlet:namespace />fm1.<portlet:namespace />xsd.value = <portlet:namespace />getXsd();
-		submitForm(document.<portlet:namespace />fm1);
-	}
-
-	function <portlet:namespace />selectStructure(parentStructureId, parentStructureName) {
-		document.<portlet:namespace />fm1.<portlet:namespace />parentStructureId.value = parentStructureId;
-
-		var nameEl = document.getElementById("<portlet:namespace />parentStructureName");
-
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>&<portlet:namespace />parentStructureId=" + parentStructureId;
-		nameEl.innerHTML = parentStructureName + "&nbsp;";
-
-		document.getElementById("<portlet:namespace />removeParentStructureButton").disabled = false;
-	}
-</aui:script>
-
 <form method="post" name="<portlet:namespace />fm2">
 <input name="xml" type="hidden" value="" />
 </form>
@@ -487,6 +305,186 @@ tabIndex = tabIndexWrapper.getValue();
 </form>
 
 <aui:script>
+	var xmlIndent = "<%= StringPool.DOUBLE_SPACE %>";
+
+	function <portlet:namespace />downloadStructureContent() {
+		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_structure_content";
+		document.<portlet:namespace />fm2.target = "_self";
+		document.<portlet:namespace />fm2.xml.value = <portlet:namespace />getXsd();
+		document.<portlet:namespace />fm2.submit();
+	}
+
+	function <portlet:namespace />getXsd(cmd, elCount) {
+		if (cmd == null) {
+			cmd = "add";
+		}
+
+		var xsd = "<root>\n";
+
+		if ((cmd == "add") && (elCount == -1)) {
+			xsd += "<dynamic-element name='' type=''></dynamic-element>\n"
+		}
+
+		for (i = 0; i >= 0; i++) {
+			var elDepth = document.getElementById("<portlet:namespace />structure_el" + i + "_depth");
+			var elMetadataXML = document.getElementById("<portlet:namespace />structure_el" + i + "_metadata_xml");
+			var elName = document.getElementById("<portlet:namespace />structure_el" + i + "_name");
+			var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
+			var elIndexType = document.getElementById("<portlet:namespace />structure_el" + i + "_index_type");
+			var elRepeatable = document.getElementById("<portlet:namespace />structure_el" + i + "_repeatable");
+
+			if ((elDepth != null) && (elName != null) && (elType != null)) {
+				var elDepthValue = elDepth.value;
+				var elNameValue = encodeURIComponent(elName.value);
+				var elTypeValue = encodeURIComponent(elType.value);
+				var elIndexTypeValue = (elIndexType != null) ? elIndexType.value : "";
+				var elRepeatableValue = (elRepeatable != null) ? elRepeatable.checked : false;
+
+				if ((cmd == "add") || ((cmd == "remove") && (elCount != i))) {
+					for (var j = 0; j <= elDepthValue; j++) {
+						xsd += xmlIndent;
+					}
+
+					xsd += "<dynamic-element name='" + elNameValue + "' type='" + elTypeValue + "' index-type='" + elIndexTypeValue + "' repeatable='" + elRepeatableValue + "'>";
+
+					if ((cmd == "add") && (elCount == i)) {
+						xsd += "<dynamic-element name='' type='' repeatable='false'></dynamic-element>\n";
+					}
+					else {
+						if (elMetadataXML.value) {
+							var metadataXML = decodeURIComponent(elMetadataXML.value).replace(/[+]/g, ' ');
+
+							xsd += "\n";
+							xsd += xmlIndent;
+							xsd += metadataXML;
+							xsd += "\n";
+						}
+					}
+
+					var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
+
+					if (nextElDepth != null) {
+						var nextElDepthValue = nextElDepth.value;
+
+						if (elDepthValue == nextElDepthValue) {
+							for (var j = 0; j < elDepthValue; j++) {
+								xsd += xmlIndent;
+							}
+
+							xsd += "</dynamic-element>\n";
+						}
+						else if (elDepthValue > nextElDepthValue) {
+							var depthDiff = elDepthValue - nextElDepthValue;
+
+							for (var j = 0; j <= depthDiff; j++) {
+								if (j != 0) {
+									for (var k = 0; k <= depthDiff - j; k++) {
+										xsd += xmlIndent;
+									}
+								}
+
+								xsd += "</dynamic-element>\n";
+							}
+						}
+						else {
+							xsd += "\n";
+						}
+					}
+					else {
+						for (var j = 0; j <= elDepthValue; j++) {
+							if (j != 0) {
+								for (var k = 0; k <= elDepthValue - j; k++) {
+									xsd += xmlIndent;
+								}
+							}
+
+							xsd += "</dynamic-element>\n";
+						}
+					}
+				}
+				else if ((cmd == "remove") && (elCount == i)) {
+					var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
+
+					if (nextElDepth != null) {
+						var nextElDepthValue = nextElDepth.value;
+
+						if (elDepthValue > nextElDepthValue) {
+							var depthDiff = elDepthValue - nextElDepthValue;
+
+							for (var j = 0; j < depthDiff; j++) {
+								xsd += "</dynamic-element>\n";
+							}
+						}
+					}
+					else {
+						for (var j = 0; j < elDepthValue; j++) {
+							xsd += "</dynamic-element>\n";
+						}
+					}
+				}
+			}
+			else {
+				break;
+			}
+		}
+
+		xsd += "</root>";
+
+		return xsd;
+	}
+
+	function <portlet:namespace />editElement(cmd, elCount) {
+		document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
+		document.<portlet:namespace />fm1.<portlet:namespace />xsd.value = <portlet:namespace />getXsd(cmd, elCount);
+		submitForm(document.<portlet:namespace />fm1);
+	}
+
+	function <portlet:namespace />moveElement(moveUp, elCount) {
+		document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
+		document.<portlet:namespace />fm1.<portlet:namespace />move_up.value = moveUp;
+		document.<portlet:namespace />fm1.<portlet:namespace />move_depth.value = elCount;
+		document.<portlet:namespace />fm1.<portlet:namespace />xsd.value = <portlet:namespace />getXsd();
+		submitForm(document.<portlet:namespace />fm1);
+	}
+
+	function <portlet:namespace />removeParentStructure() {
+		document.<portlet:namespace />fm1.<portlet:namespace />parentStructureId.value = "";
+
+		var nameEl = document.getElementById("<portlet:namespace />parentStructureName");
+
+		nameEl.href = "#";
+		nameEl.innerHTML = "";
+
+		document.getElementById("<portlet:namespace />removeParentStructureButton").disabled = true;
+	}
+
+	function <portlet:namespace />saveAndContinueStructure() {
+		document.<portlet:namespace />fm1.<portlet:namespace />saveAndContinue.value = "1";
+		<portlet:namespace />saveStructure();
+	}
+
+	function <portlet:namespace />saveStructure(addAnother) {
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= structure == null ? Constants.ADD : Constants.UPDATE %>";
+
+		<c:if test="<%= structure == null %>">
+			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = document.<portlet:namespace />fm1.<portlet:namespace />newStructureId.value;
+		</c:if>
+
+		document.<portlet:namespace />fm1.<portlet:namespace />xsd.value = <portlet:namespace />getXsd();
+		submitForm(document.<portlet:namespace />fm1);
+	}
+
+	function <portlet:namespace />selectStructure(parentStructureId, parentStructureName) {
+		document.<portlet:namespace />fm1.<portlet:namespace />parentStructureId.value = parentStructureId;
+
+		var nameEl = document.getElementById("<portlet:namespace />parentStructureName");
+
+		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>&<portlet:namespace />parentStructureId=" + parentStructureId;
+		nameEl.innerHTML = parentStructureName + "&nbsp;";
+
+		document.getElementById("<portlet:namespace />removeParentStructureButton").disabled = false;
+	}
+
 	Liferay.Util.inlineEditor(
 		{
 			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>',

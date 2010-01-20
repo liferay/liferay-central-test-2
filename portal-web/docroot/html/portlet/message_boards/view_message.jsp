@@ -45,6 +45,49 @@ PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferenc
 String threadView = messageDisplay.getThreadView();
 %>
 
+<div id="<portlet:namespace />addAnswerFlagDiv" style="display: none;">
+	<liferay-ui:icon
+		image="checked"
+		message="answer"
+		label="<%= true %>"
+	/>
+
+	<%
+	String taglibHREF = "javascript:" + renderResponse.getNamespace() + "deleteAnswerFlag('@MESSAGE_ID@');";
+	%>
+
+	(<aui:a href="<%= taglibHREF %>"><liferay-ui:message key="unmark" /></aui:a>)
+</div>
+
+<div id="<portlet:namespace />deleteAnswerFlagDiv" style="display: none;">
+
+	<%
+	String taglibMarkAsAnAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('@MESSAGE_ID@');";
+	%>
+
+	<liferay-ui:icon
+		image="checked"
+		message="mark-as-an-answer"
+		url="<%= taglibMarkAsAnAnswerURL %>"
+		label="<%= true %>"
+	/>
+</div>
+
+<c:choose>
+	<c:when test="<%= includeFormTag %>">
+		<aui:form>
+			<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= category.getCategoryId() %>" />
+			<aui:input name="breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>" />
+			<aui:input name="threadId" type="hidden" value="<%= message.getThreadId() %>" />
+
+			<%@ include file="/html/portlet/message_boards/view_message_content.jspf" %>
+		</aui:form>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="/html/portlet/message_boards/view_message_content.jspf" %>
+	</c:otherwise>
+</c:choose>
+
 <aui:script>
 	function <portlet:namespace />addAnswerFlag(messageId) {
 		Liferay.Service.MB.MBMessageFlag.addAnswerFlag(
@@ -88,49 +131,6 @@ String threadView = messageDisplay.getThreadView();
 		document.getElementById("<portlet:namespace />message_" + <%= message.getMessageId() %>).scrollIntoView(true);
 	</c:if>
 </aui:script>
-
-<div id="<portlet:namespace />addAnswerFlagDiv" style="display: none;">
-	<liferay-ui:icon
-		image="checked"
-		message="answer"
-		label="<%= true %>"
-	/>
-
-	<%
-	String taglibHREF = "javascript:" + renderResponse.getNamespace() + "deleteAnswerFlag('@MESSAGE_ID@');";
-	%>
-
-	(<aui:a href="<%= taglibHREF %>"><liferay-ui:message key="unmark" /></aui:a>)
-</div>
-
-<div id="<portlet:namespace />deleteAnswerFlagDiv" style="display: none;">
-
-	<%
-	String taglibMarkAsAnAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('@MESSAGE_ID@');";
-	%>
-
-	<liferay-ui:icon
-		image="checked"
-		message="mark-as-an-answer"
-		url="<%= taglibMarkAsAnAnswerURL %>"
-		label="<%= true %>"
-	/>
-</div>
-
-<c:choose>
-	<c:when test="<%= includeFormTag %>">
-		<aui:form>
-			<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= category.getCategoryId() %>" />
-			<aui:input name="breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>" />
-			<aui:input name="threadId" type="hidden" value="<%= message.getThreadId() %>" />
-
-			<%@ include file="/html/portlet/message_boards/view_message_content.jspf" %>
-		</aui:form>
-	</c:when>
-	<c:otherwise>
-		<%@ include file="/html/portlet/message_boards/view_message_content.jspf" %>
-	</c:otherwise>
-</c:choose>
 
 <%
 MBMessageFlagLocalServiceUtil.addReadFlags(themeDisplay.getUserId(), thread);

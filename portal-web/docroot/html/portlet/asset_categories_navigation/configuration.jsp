@@ -28,18 +28,6 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<aui:script>
-	function <portlet:namespace />saveConfiguration() {
-		if (document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds) {
-			document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentAssetVocabularyIds);
-		}
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	Liferay.Util.toggleSelectBox('<portlet:namespace />allAssetVocabularies', 'false', '<portlet:namespace />assetVocabulariesBoxes');
-</aui:script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
@@ -106,3 +94,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />saveConfiguration() {
+		if (document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds) {
+			document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentAssetVocabularyIds);
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	Liferay.Util.toggleSelectBox('<portlet:namespace />allAssetVocabularies', 'false', '<portlet:namespace />assetVocabulariesBoxes');
+</aui:script>

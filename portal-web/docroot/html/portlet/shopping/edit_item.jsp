@@ -82,83 +82,6 @@ else {
 int priceId = ParamUtil.getInteger(request, "priceId", -1);
 %>
 
-<aui:script>
-	function <portlet:namespace />addField() {
-		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />fields";
-		document.<portlet:namespace />fm.<portlet:namespace />fieldsCount.value = <%= fieldsCount + 1 %>;
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />addPrice() {
-		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />prices";
-		document.<portlet:namespace />fm.<portlet:namespace />pricesCount.value = <%= pricesCount + 1 %>;
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />deleteField(i) {
-		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />fields";
-		document.<portlet:namespace />fm.<portlet:namespace />fieldsCount.value = <%= fieldsCount - 1 %>;
-		document.<portlet:namespace />fm.<portlet:namespace />fieldId.value = i;
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />deletePrice(i) {
-		if (document.<portlet:namespace />fm.<portlet:namespace />defaultPrice[i].checked) {
-			alert("<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-or-deactivate-a-default-price") %>");
-		}
-		else if (document.<portlet:namespace />fm.<portlet:namespace />pricesCount.value > 1) {
-			document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />prices";
-			document.<portlet:namespace />fm.<portlet:namespace />pricesCount.value = <%= pricesCount - 1 %>;
-			document.<portlet:namespace />fm.<portlet:namespace />priceId.value = i;
-			submitForm(document.<portlet:namespace />fm);
-		}
-	}
-
-	function <portlet:namespace />editItemQuantities() {
-		var itemQuantitiesURL = "<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" anchor="false"><portlet:param name="struts_action" value="/shopping/edit_item_quantities" /></liferay-portlet:renderURL>&<portlet:namespace />fieldsQuantities=" + document.<portlet:namespace />fm.<portlet:namespace />fieldsQuantities.value;
-
-		<%
-		for (int i = 0; i < fieldsCount; i++) {
-		%>
-
-			itemQuantitiesURL += "&<portlet:namespace />n<%= i %>=" + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />fieldName<%= i %>.value);
-			itemQuantitiesURL += "&<portlet:namespace />v<%= i %>=" + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />fieldValues<%= i %>.value);
-
-		<%
-		}
-		%>
-
-		var itemQuantitiesWindow = window.open(itemQuantitiesURL, "itemQuantities", "directories=no,height=400,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=300");
-
-		void("");
-
-		itemQuantitiesWindow.focus();
-	}
-
-	function <portlet:namespace />removeCategory() {
-		document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = "<%= ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>";
-
-		var nameEl = document.getElementById("<portlet:namespace />categoryName");
-
-		nameEl.href = "";
-		nameEl.innerHTML = "";
-	}
-
-	function <portlet:namespace />saveItem() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= item == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectCategory(categoryId, categoryName) {
-		document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = categoryId;
-
-		var nameEl = document.getElementById("<portlet:namespace />categoryName");
-
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
-		nameEl.innerHTML = categoryName + "&nbsp;";
-	}
-</aui:script>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveItem(); return false;">
 <input name="scroll" type="hidden" value="" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
@@ -726,3 +649,82 @@ for (int i = 0; i < pricesCount; i++) {
 	</td>
 </tr>
 </table>
+
+</form>
+
+<aui:script>
+	function <portlet:namespace />addField() {
+		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />fields";
+		document.<portlet:namespace />fm.<portlet:namespace />fieldsCount.value = <%= fieldsCount + 1 %>;
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />addPrice() {
+		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />prices";
+		document.<portlet:namespace />fm.<portlet:namespace />pricesCount.value = <%= pricesCount + 1 %>;
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />deleteField(i) {
+		document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />fields";
+		document.<portlet:namespace />fm.<portlet:namespace />fieldsCount.value = <%= fieldsCount - 1 %>;
+		document.<portlet:namespace />fm.<portlet:namespace />fieldId.value = i;
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />deletePrice(i) {
+		if (document.<portlet:namespace />fm.<portlet:namespace />defaultPrice[i].checked) {
+			alert("<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-or-deactivate-a-default-price") %>");
+		}
+		else if (document.<portlet:namespace />fm.<portlet:namespace />pricesCount.value > 1) {
+			document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />prices";
+			document.<portlet:namespace />fm.<portlet:namespace />pricesCount.value = <%= pricesCount - 1 %>;
+			document.<portlet:namespace />fm.<portlet:namespace />priceId.value = i;
+			submitForm(document.<portlet:namespace />fm);
+		}
+	}
+
+	function <portlet:namespace />editItemQuantities() {
+		var itemQuantitiesURL = "<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" anchor="false"><portlet:param name="struts_action" value="/shopping/edit_item_quantities" /></liferay-portlet:renderURL>&<portlet:namespace />fieldsQuantities=" + document.<portlet:namespace />fm.<portlet:namespace />fieldsQuantities.value;
+
+		<%
+		for (int i = 0; i < fieldsCount; i++) {
+		%>
+
+			itemQuantitiesURL += "&<portlet:namespace />n<%= i %>=" + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />fieldName<%= i %>.value);
+			itemQuantitiesURL += "&<portlet:namespace />v<%= i %>=" + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />fieldValues<%= i %>.value);
+
+		<%
+		}
+		%>
+
+		var itemQuantitiesWindow = window.open(itemQuantitiesURL, "itemQuantities", "directories=no,height=400,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=300");
+
+		void("");
+
+		itemQuantitiesWindow.focus();
+	}
+
+	function <portlet:namespace />removeCategory() {
+		document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = "<%= ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />categoryName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
+	function <portlet:namespace />saveItem() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= item == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectCategory(categoryId, categoryName) {
+		document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = categoryId;
+
+		var nameEl = document.getElementById("<portlet:namespace />categoryName");
+
+		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
+		nameEl.innerHTML = categoryName + "&nbsp;";
+	}
+</aui:script>

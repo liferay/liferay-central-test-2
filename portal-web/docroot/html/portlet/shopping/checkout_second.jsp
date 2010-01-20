@@ -39,12 +39,6 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 order = order.toEscapedModel();
 %>
 
-<aui:script>
-	function <portlet:namespace />continueCheckout() {
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SAVE %>" />
 <input name="<portlet:namespace />billingFirstName" type="hidden" value="<%= order.getBillingFirstName() %>" />
@@ -516,3 +510,9 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 <input type="button" value='<%= shoppingPrefs.usePayPal() ? LanguageUtil.get(pageContext, "continue") : LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />continueCheckout();" />
 
 </form>
+
+<aui:script>
+	function <portlet:namespace />continueCheckout() {
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>

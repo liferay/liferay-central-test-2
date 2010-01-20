@@ -62,60 +62,6 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 }
 %>
 
-<aui:script>
-	function <portlet:namespace />copyFromLive() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-copy-from-live-and-update-the-existing-staging-portlet-information") %>')) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "copy_from_live";
-
-			submitForm(document.<portlet:namespace />fm);
-		}
-	}
-
-	function <portlet:namespace />exportData() {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "export";
-
-		submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/export_import" /></portlet:actionURL>&etag=0');
-	}
-
-	function <portlet:namespace />importData() {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "import";
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />publishToLive() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-to-live-and-update-the-existing-portlet-data") %>')) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "publish_to_live";
-
-			submitForm(document.<portlet:namespace />fm);
-		}
-	}
-
-	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
-		var parentDiv = AUI().one('#' + parentDivId);
-
-		var enabled = checkbox.checked;
-
-		if (parentDiv) {
-			parentDiv.all('input').each(
-				function(item, index, collection) {
-					var disabled = !enabled;
-
-					if (enabled && item.hasClass('disabled')) {
-						disabled = true;
-					}
-
-					item.set('disabled', disabled);
-				}
-			);
-		}
-	}
-</aui:script>
-
 <c:choose>
 	<c:when test="<%= supportsLAR || supportsSetup %>">
 
@@ -290,6 +236,12 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 											}
 											%>
 
+											<aui:button-row>
+												<aui:button onClick='<%= renderResponse.getNamespace() + "proposePublication();" %>' value="propose-publication" />
+
+												<aui:button onClick='<%= renderResponse.getNamespace() + "copyFromLive();" %>' value="copy-from-live" />
+											</aui:button-row>
+
 											<aui:script>
 												function <portlet:namespace />proposePublication() {
 													Liferay.LayoutExporter.proposeLayout(
@@ -302,12 +254,6 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 													);
 												}
 											</aui:script>
-
-											<aui:button-row>
-												<aui:button onClick='<%= renderResponse.getNamespace() + "proposePublication();" %>' value="propose-publication" />
-
-												<aui:button onClick='<%= renderResponse.getNamespace() + "copyFromLive();" %>' value="copy-from-live" />
-											</aui:button-row>
 										</c:if>
 									</c:when>
 									<c:when test="<%= (themeDisplay.getURLPublishToLive() != null) || controlPanel %>">
@@ -362,9 +308,62 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 				);
 			}
 		</aui:script>
-
 	</c:when>
 	<c:otherwise>
 		<%= LanguageUtil.format(locale, "the-x-portlet-does-not-have-any-data-that-can-be-exported-or-does-not-include-support-for-it", PortalUtil.getPortletTitle(selPortlet, application, locale)) %>
 	</c:otherwise>
 </c:choose>
+
+<aui:script>
+	function <portlet:namespace />copyFromLive() {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-copy-from-live-and-update-the-existing-staging-portlet-information") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "copy_from_live";
+
+			submitForm(document.<portlet:namespace />fm);
+		}
+	}
+
+	function <portlet:namespace />exportData() {
+		document.<portlet:namespace />fm.encoding = "multipart/form-data";
+
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "export";
+
+		submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/export_import" /></portlet:actionURL>&etag=0');
+	}
+
+	function <portlet:namespace />importData() {
+		document.<portlet:namespace />fm.encoding = "multipart/form-data";
+
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "import";
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />publishToLive() {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-to-live-and-update-the-existing-portlet-data") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "publish_to_live";
+
+			submitForm(document.<portlet:namespace />fm);
+		}
+	}
+
+	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
+		var parentDiv = AUI().one('#' + parentDivId);
+
+		var enabled = checkbox.checked;
+
+		if (parentDiv) {
+			parentDiv.all('input').each(
+				function(item, index, collection) {
+					var disabled = !enabled;
+
+					if (enabled && item.hasClass('disabled')) {
+						disabled = true;
+					}
+
+					item.set('disabled', disabled);
+				}
+			);
+		}
+	}
+</aui:script>

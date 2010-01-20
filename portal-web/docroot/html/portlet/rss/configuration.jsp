@@ -48,71 +48,6 @@ configurationRenderURL.setParameter("backURL", redirect);
 configurationRenderURL.setParameter("portletResource", portletResource);
 %>
 
-<aui:script>
-	<portlet:namespace />addRssRow = function(table) {
-		table.insertRow(table.rows.length);
-
-		var row = table.rows[table.rows.length - 1];
-
-		row.insertCell(0);
-		row.insertCell(1);
-		row.insertCell(2);
-
-		row.cells[0].innerHTML =
-			"<span class=\"aui-field aui-field lfr-input-text-container\">" +
-				"<span class=\"aui-field-content\">" +
-					"<input class=\"aui-field-input aui-field-input\" id=\"<portlet:namespace />title\" name=\"<portlet:namespace />title\" type=\"text\" />" +
-				"</span>" +
-			 "</span>";
-
-		row.cells[1].innerHTML =
-			"<span class=\"aui-field aui-field lfr-input-text-container\">" +
-				"<span class=\"aui-field-content\">" +
-					"<input class=\"aui-field-input aui-field-input\" id=\"<portlet:namespace />url\" name=\"<portlet:namespace />url\" type=\"text\" />" +
-				"</span>" +
-			 "</span>";
-
-		row.cells[2].innerHTML = "<a class=\"remove-subscription\" href=\"javascript:;\"><img alt=\"<liferay-ui:message key="unsubscribe" />\" src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
-
-		table.appendChild(row);
-	}
-
-	function <portlet:namespace />removeSelectionForFooter() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-footer-article';
-		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
-	}
-
-	function <portlet:namespace />removeSelectionForHeader() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-header-article';
-		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
-	}
-
-	function <portlet:namespace />selectAsset(resourcePrimKey, resourceTitle, assetOrder) {
-		if (assetOrder == 1) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-footer-article';
-		}
-		else {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-header-article';
-		}
-
-		document.<portlet:namespace />fm.<portlet:namespace />resourcePrimKey.value = resourcePrimKey;
-		document.<portlet:namespace />fm.<portlet:namespace />resourceTitle.value = resourceTitle;
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectionForHeader() {
-		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '<%= JournalArticle.class.getName() %>';
-		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 0;
-		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
-	}
-
-	function <portlet:namespace />selectionForFooter() {
-		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '<%= JournalArticle.class.getName() %>';
-		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 1;
-		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
-	}
-</aui:script>
-
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
@@ -286,3 +221,68 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		</c:when>
 	</c:choose>
 </aui:form>
+
+<aui:script>
+	<portlet:namespace />addRssRow = function(table) {
+		table.insertRow(table.rows.length);
+
+		var row = table.rows[table.rows.length - 1];
+
+		row.insertCell(0);
+		row.insertCell(1);
+		row.insertCell(2);
+
+		row.cells[0].innerHTML =
+			"<span class=\"aui-field aui-field lfr-input-text-container\">" +
+				"<span class=\"aui-field-content\">" +
+					"<input class=\"aui-field-input aui-field-input\" id=\"<portlet:namespace />title\" name=\"<portlet:namespace />title\" type=\"text\" />" +
+				"</span>" +
+			 "</span>";
+
+		row.cells[1].innerHTML =
+			"<span class=\"aui-field aui-field lfr-input-text-container\">" +
+				"<span class=\"aui-field-content\">" +
+					"<input class=\"aui-field-input aui-field-input\" id=\"<portlet:namespace />url\" name=\"<portlet:namespace />url\" type=\"text\" />" +
+				"</span>" +
+			 "</span>";
+
+		row.cells[2].innerHTML = "<a class=\"remove-subscription\" href=\"javascript:;\"><img alt=\"<liferay-ui:message key="unsubscribe" />\" src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
+
+		table.appendChild(row);
+	}
+
+	function <portlet:namespace />removeSelectionForFooter() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-footer-article';
+		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
+	}
+
+	function <portlet:namespace />removeSelectionForHeader() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-header-article';
+		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
+	}
+
+	function <portlet:namespace />selectAsset(resourcePrimKey, resourceTitle, assetOrder) {
+		if (assetOrder == 1) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-footer-article';
+		}
+		else {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-header-article';
+		}
+
+		document.<portlet:namespace />fm.<portlet:namespace />resourcePrimKey.value = resourcePrimKey;
+		document.<portlet:namespace />fm.<portlet:namespace />resourceTitle.value = resourceTitle;
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectionForHeader() {
+		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '<%= JournalArticle.class.getName() %>';
+		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 0;
+		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
+	}
+
+	function <portlet:namespace />selectionForFooter() {
+		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '<%= JournalArticle.class.getName() %>';
+		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 1;
+		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
+	}
+</aui:script>

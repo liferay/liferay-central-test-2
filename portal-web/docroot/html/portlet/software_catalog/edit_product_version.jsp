@@ -68,13 +68,6 @@ editProductEntryURL.setParameter("redirect", currentURL);
 editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId));
 %>
 
-<aui:script>
-	function <portlet:namespace />saveEntry() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= productVersion == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_version" /><portlet:param name="productEntryId" value="<%= String.valueOf(productEntryId) %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
@@ -204,6 +197,11 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 </form>
 
 <aui:script>
+	function <portlet:namespace />saveEntry() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= productVersion == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	function <portlet:namespace />toggleSelectBoxes() {
 		if (document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact) {
 			if (document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.value == '') {

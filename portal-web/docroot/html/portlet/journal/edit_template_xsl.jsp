@@ -41,6 +41,49 @@ boolean useEditorCodepress = editorType.equals("codepress");
 String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE_LANGUAGE_CONTENT, new Filter(langType)));
 %>
 
+<form method="post" name="<portlet:namespace />editorForm">
+
+<table class="lfr-table">
+<tr>
+	<td>
+		<strong><liferay-ui:message key="editor-type" /></strong>
+	</td>
+	<td>
+		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">
+			<option value="1"><liferay-ui:message key="plain" /></option>
+			<option <%= useEditorCodepress ? "selected" : "" %> value="0"><liferay-ui:message key="rich" /></option>
+		</select>
+	</td>
+</tr>
+</table>
+
+<br />
+
+<c:choose>
+	<c:when test="<%= useEditorCodepress %>">
+		<textarea class="codepress html" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off"></textarea>
+	</c:when>
+	<c:otherwise>
+		<textarea class="lfr-textarea" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
+	</c:otherwise>
+</c:choose>
+
+<br /><br />
+
+<input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateTemplateXsl();" />
+
+<c:if test="<%= !useEditorCodepress %>">
+	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent);" />
+</c:if>
+
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="AUI().DialogManager.closeByChild(this);" />
+
+</form>
+
+<c:if test="<%= useEditorCodepress %>">
+	<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
+</c:if>
+
 <aui:script>
 	function <portlet:namespace />getEditorContent() {
 		var xslContent = AUI().one('input[name=<portlet:namespace />xslContent]');
@@ -104,53 +147,8 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 
 		AUI().DialogManager.closeByChild(document.<portlet:namespace />editorForm);
 	}
-</aui:script>
 
-<form method="post" name="<portlet:namespace />editorForm">
-
-<table class="lfr-table">
-<tr>
-	<td>
-		<strong><liferay-ui:message key="editor-type" /></strong>
-	</td>
-	<td>
-		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">
-			<option value="1"><liferay-ui:message key="plain" /></option>
-			<option <%= useEditorCodepress ? "selected" : "" %> value="0"><liferay-ui:message key="rich" /></option>
-		</select>
-	</td>
-</tr>
-</table>
-
-<br />
-
-<c:choose>
-	<c:when test="<%= useEditorCodepress %>">
-		<textarea class="codepress html" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off"></textarea>
-	</c:when>
-	<c:otherwise>
-		<textarea class="lfr-textarea" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
-	</c:otherwise>
-</c:choose>
-
-<br /><br />
-
-<input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateTemplateXsl();" />
-
-<c:if test="<%= !useEditorCodepress %>">
-	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent);" />
-</c:if>
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="AUI().DialogManager.closeByChild(this);" />
-
-</form>
-
-<aui:script>
 	document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value = <portlet:namespace />getEditorContent();
 
 	Liferay.Util.resizeTextarea('<portlet:namespace />xslContent', <%= useEditorCodepress %>, true);
 </aui:script>
-
-<c:if test="<%= useEditorCodepress %>">
-	<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
-</c:if>

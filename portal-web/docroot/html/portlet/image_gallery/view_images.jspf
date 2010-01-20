@@ -22,47 +22,6 @@
  */
 %>
 
-<aui:script use="image-gallery">
-	var imageGallery = new A.ImageGallery(
-		{
-			after: {
-				render: function(event) {
-					var instance = this;
-					var footerNode = instance.footerNode;
-
-					instance._actions = A.Node.create('<div class="lfr-image-gallery-actions"></div>');
-
-					if (footerNode) {
-						footerNode.append(
-							instance._actions
-						);
-					}
-				},
-				request: function(event) {
-					var instance = this;
-
-					var currentLink = instance.getCurrentLink();
-					var largeImageId = currentLink.attr('largeImageId');
-					var actions = instance._actions;
-
-					if (actions) {
-						var action = A.one('#<portlet:namespace />buttonsContainer_' + largeImageId);
-
-						actions.empty();
-
-						actions.append(
-							action.cloneNode(true).show()
-						);
-					}
-				}
-			},
-			delay: 5000,
-			links: '#imageGalleryPanels .image-thumbnail',
-			playingLabel: '(<liferay-ui:message key="playing" />)'
-		}
-	).render();
-</aui:script>
-
 <c:if test="<%= !results.isEmpty() %>">
 	<div class="taglib-search-iterator-page-iterator-top">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
@@ -156,3 +115,44 @@
 <div class="taglib-search-iterator-page-iterator-bottom">
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 </div>
+
+<aui:script use="image-gallery">
+	var imageGallery = new A.ImageGallery(
+		{
+			after: {
+				render: function(event) {
+					var instance = this;
+					var footerNode = instance.footerNode;
+
+					instance._actions = A.Node.create('<div class="lfr-image-gallery-actions"></div>');
+
+					if (footerNode) {
+						footerNode.append(
+							instance._actions
+						);
+					}
+				},
+				request: function(event) {
+					var instance = this;
+
+					var currentLink = instance.getCurrentLink();
+					var largeImageId = currentLink.attr('largeImageId');
+					var actions = instance._actions;
+
+					if (actions) {
+						var action = A.one('#<portlet:namespace />buttonsContainer_' + largeImageId);
+
+						actions.empty();
+
+						actions.append(
+							action.cloneNode(true).show()
+						);
+					}
+				}
+			},
+			delay: 5000,
+			links: '#imageGalleryPanels .image-thumbnail',
+			playingLabel: '(<liferay-ui:message key="playing" />)'
+		}
+	).render();
+</aui:script>

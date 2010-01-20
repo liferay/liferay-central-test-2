@@ -100,6 +100,13 @@ if (displayTerms.getParentOrganizationId() > 0) {
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<aui:script>
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
+	</aui:script>
+</c:if>
+
 <aui:script use="liferay-dynamic-select">
 	new Liferay.DynamicSelect(
 		[
@@ -119,11 +126,4 @@ if (displayTerms.getParentOrganizationId() > 0) {
 			}
 		]
 	);
-</aui:script>
-
-<aui:script>
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
-	</c:if>
 </aui:script>

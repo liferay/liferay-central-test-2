@@ -45,31 +45,6 @@ String body = StringPool.BLANK;
 boolean quote = false;
 %>
 
-<aui:script>
-	function <portlet:namespace />splitThread() {
-		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />selectCategory(categoryId, categoryName) {
-		document.<portlet:namespace />fm.<portlet:namespace />mbCategoryId.value = categoryId;
-
-		var nameEl = document.getElementById("<portlet:namespace />categoryName");
-
-		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + categoryId;
-		nameEl.innerHTML = categoryName + "&nbsp;";
-	}
-
-	function <portlet:namespace />toggleExplanationPost() {
-		if (document.getElementById("<portlet:namespace />addExplanationPostCheckbox").checked) {
-			document.getElementById("<portlet:namespace />explanationPost").style.display = "";
-		}
-		else {
-			document.getElementById("<portlet:namespace />explanationPost").style.display = "none";
-		}
-	}
-</aui:script>
-
 <portlet:actionURL var="splitThreadURL">
 	<portlet:param name="struts_action" value="/message_boards/split_thread" />
 </portlet:actionURL>
@@ -155,6 +130,31 @@ boolean quote = false;
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script>
+	function <portlet:namespace />splitThread() {
+		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectCategory(categoryId, categoryName) {
+		document.<portlet:namespace />fm.<portlet:namespace />mbCategoryId.value = categoryId;
+
+		var nameEl = document.getElementById("<portlet:namespace />categoryName");
+
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + categoryId;
+		nameEl.innerHTML = categoryName + "&nbsp;";
+	}
+
+	function <portlet:namespace />toggleExplanationPost() {
+		if (document.getElementById("<portlet:namespace />addExplanationPostCheckbox").checked) {
+			document.getElementById("<portlet:namespace />explanationPost").style.display = "";
+		}
+		else {
+			document.getElementById("<portlet:namespace />explanationPost").style.display = "none";
+		}
+	}
+</aui:script>
 
 <%
 MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);

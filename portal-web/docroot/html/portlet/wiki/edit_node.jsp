@@ -32,13 +32,6 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 %>
 
-<aui:script>
-	function <portlet:namespace />saveNode() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= node == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
-
 <portlet:actionURL var="editNodeURL">
 	<portlet:param name="struts_action" value="/wiki/edit_node" />
 </portlet:actionURL>
@@ -82,8 +75,13 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 	</aui:fieldset>
 </aui:form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	function <portlet:namespace />saveNode() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= node == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</aui:script>
-</c:if>
+	</c:if>
+</aui:script>
