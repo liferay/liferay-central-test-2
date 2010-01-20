@@ -87,7 +87,6 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 	</div>
 </c:if>
 
-
 <aui:script>
 	function <portlet:namespace />addFeed() {
 		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';

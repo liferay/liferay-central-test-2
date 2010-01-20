@@ -760,7 +760,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 <%@ include file="edit_article_structure_extra.jspf" %>
 
-
 <%
 String doAsUserId = themeDisplay.getDoAsUserId();
 

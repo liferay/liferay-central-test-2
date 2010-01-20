@@ -116,6 +116,7 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 </aui:form>
 
 <aui:script use="event,node">
+
 	<%
 	for (PublicRenderParameterConfiguration publicRenderParameterConfiguration : publicRenderParameterConfigurations) {
 	%>
@@ -143,4 +144,5 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 	<%
 	}
 	%>
+
 </aui:script>

@@ -79,37 +79,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		}
 	);
 </aui:script>
-<style type="text/css" media="screen">
-	.aui-field-disabled .aui-field-content {
-		color: #ccc;
-	}
-	.aui-field-disabled .aui-field-input-disabled {
-		border-color: #ccc;
-		background: #eee;
-		color: #555;
-	}
-	.aui-field-focused label {
-		border-left: 4px solid #333;
-		color: #fc0;
-	}
-</style>
-<aui:form name="myForm">
-	<aui:input name="input1" label="Text 1" type="text" />
-	<aui:input name="input2" label="Checkbox 1" type="checkbox" />
-	<aui:input name="input3" label="Radio 1" type="radio" />
-	<aui:input name="input4" label="Password 1" type="password" />
-	<aui:input name="input5" label="Textarea 1" type="textarea" />
-	<aui:input name="input6" label="File 1" type="file" />
-	<aui:input name="input7" type="hidden" value="hiddenTest" />
 
-	<aui:input name="input1a" disabled="true" label="Text 1" type="text" value="test" />
-	<aui:input name="input2a" label="Checkbox 1" type="checkbox" />
-	<aui:input name="input3a" label="Radio 1" type="radio" />
-	<aui:input name="input4a" label="Password 1" type="password" />
-	<aui:input name="input5a" label="Textarea 1" type="textarea" />
-	<aui:input name="input6a" label="File 1" type="file" />
-	<aui:input name="input7a" type="hidden" value="hiddenTest" />
-</aui:form>
 <form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/loan_calculator/view" /></liferay-portlet:renderURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 
 <table class="lfr-table">

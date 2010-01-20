@@ -34,8 +34,6 @@ Map items = cart.getItems();
 ShoppingCoupon coupon = cart.getCoupon();
 
 boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SHOPPING_CART_MIN_QTY_MULTIPLE);
-
-Iterator itr = items.entrySet().iterator();
 %>
 
 <aui:script position="inline">
@@ -72,6 +70,8 @@ Iterator itr = items.entrySet().iterator();
 		var count = 0;
 
 		<%
+		Iterator itr = items.entrySet().iterator();
+
 		for (int i = 0; itr.hasNext(); i++) {
 			Map.Entry entry = (Map.Entry)itr.next();
 
@@ -166,7 +166,7 @@ searchContainer.setTotal(total);
 
 List resultRows = searchContainer.getResultRows();
 
-itr = results.iterator();
+Iterator itr = results.iterator();
 
 for (int i = 0; itr.hasNext(); i++) {
 	Map.Entry entry = (Map.Entry)itr.next();
