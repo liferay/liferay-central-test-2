@@ -65,40 +65,6 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
 
-<c:if test='<%= type.equals("regular") && !themeDisplay.isFacebook() %>'>
-	<aui:script>
-		function <%= namespace %><%= curParam %>updateCur(box) {
-			var cur = AUI().one(box).val();
-
-			if (<%= Validator.isNotNull(url) %>) {
-				var href = "<%= url %><%= namespace %><%= curParam %>=" + cur + "<%= urlAnchor %>";
-
-				location.href = href;
-			}
-			else {
-				document.<%= formName %>.<%= curParam %>.value = cur;
-
-				<%= jsCall %>;
-			}
-		}
-
-		function <%= namespace %><%= deltaParam %>updateDelta(box) {
-			var delta = AUI().one(box).val();
-
-			if (<%= Validator.isNotNull(url) %>) {
-				var href = "<%= deltaURL %>&<%= namespace %><%= deltaParam %>=" + delta + "<%= urlAnchor %>";
-
-				location.href = href;
-			}
-			else {
-				document.<%= formName %>.<%= deltaParam %>.value = delta;
-
-				<%= jsCall %>;
-			}
-		}
-	</aui:script>
-</c:if>
-
 <c:if test='<%= type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>
 	<div class="taglib-page-iterator">
 </c:if>
@@ -332,6 +298,40 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 <c:if test='<%= type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>
 	</div>
+</c:if>
+
+<c:if test='<%= type.equals("regular") && !themeDisplay.isFacebook() %>'>
+	<aui:script>
+		function <%= namespace %><%= curParam %>updateCur(box) {
+			var cur = AUI().one(box).val();
+
+			if (<%= Validator.isNotNull(url) %>) {
+				var href = "<%= url %><%= namespace %><%= curParam %>=" + cur + "<%= urlAnchor %>";
+
+				location.href = href;
+			}
+			else {
+				document.<%= formName %>.<%= curParam %>.value = cur;
+
+				<%= jsCall %>;
+			}
+		}
+
+		function <%= namespace %><%= deltaParam %>updateDelta(box) {
+			var delta = AUI().one(box).val();
+
+			if (<%= Validator.isNotNull(url) %>) {
+				var href = "<%= deltaURL %>&<%= namespace %><%= deltaParam %>=" + delta + "<%= urlAnchor %>";
+
+				location.href = href;
+			}
+			else {
+				document.<%= formName %>.<%= deltaParam %>.value = delta;
+
+				<%= jsCall %>;
+			}
+		}
+	</aui:script>
 </c:if>
 
 <%!

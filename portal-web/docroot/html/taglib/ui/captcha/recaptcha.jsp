@@ -24,6 +24,14 @@
 
 <%@ include file="/html/taglib/ui/captcha/init.jsp" %>
 
+<noscript>
+	<iframe frameborder="0" height="300" src="<%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT %><%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC %>" width="500"></iframe><br />
+
+	<textarea cols="40" name="recaptcha_challenge_field" rows="3"></textarea>
+
+	<input name="recaptcha_response_field" type="hidden" value="manual_challenge" />
+</noscript>
+
 <script src="<%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT %><%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC %>" type="text/javascript"></script>
 
 <aui:script position="inline">
@@ -32,11 +40,3 @@
 		theme : 'white'
 	};
 </aui:script>
-
-<noscript>
-	<iframe frameborder="0" height="300" src="<%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT %><%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC %>" width="500"></iframe><br />
-
-	<textarea cols="40" name="recaptcha_challenge_field" rows="3"></textarea>
-
-	<input name="recaptcha_response_field" type="hidden" value="manual_challenge" />
-</noscript>

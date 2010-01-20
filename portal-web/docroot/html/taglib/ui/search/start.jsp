@@ -39,18 +39,6 @@ portletURL.setPortletMode(PortletMode.VIEW);
 portletURL.setParameter("struts_action", "/search/search");
 %>
 
-<aui:script>
-	function <%= randomNamespace %><%= namespace %>search() {
-		var keywords = document.<%= randomNamespace %><%= namespace %>fm.<%= namespace %>keywords.value;
-
-		keywords = keywords.replace(/^\s+|\s+$/, '');
-
-		if (keywords != '') {
-			document.<%= randomNamespace %><%= namespace %>fm.submit();
-		}
-	}
-</aui:script>
-
 <form action="<%= portletURL.toString() %>" method="post" name="<%= randomNamespace %><%= namespace %>fm" onSubmit="<%= randomNamespace %><%= namespace %>search(); return false;">
 <input name="<%= namespace %>keywords" size="30" type="text" value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
 

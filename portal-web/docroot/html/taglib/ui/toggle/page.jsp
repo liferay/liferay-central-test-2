@@ -36,6 +36,21 @@ String defaultImage = (String)request.getAttribute("liferay-ui:toggle:defaultIma
 String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultMessage");
 %>
 
+<c:choose>
+	<c:when test="<%= Validator.isNotNull(showMessage) %>">
+		<a href="javascript:<%= stateVar %>Toggle();" id="<%= id %>_message"><%= defaultMessage %></a>
+	</c:when>
+	<c:otherwise>
+		<img
+			alt="<liferay-ui:message key="toggle" />"
+			id="<%= id %>_image"
+			onclick="<%= stateVar %>Toggle();"
+			src="<%= defaultImage %>"
+			style="margin: 0px;"
+		/>
+	</c:otherwise>
+</c:choose>
+
 <aui:script>
 	var <%= stateVar %> = "<%= defaultStateValue %>";
 
@@ -100,18 +115,3 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 		}
 	}
 </aui:script>
-
-<c:choose>
-	<c:when test="<%= Validator.isNotNull(showMessage) %>">
-		<a href="javascript:<%= stateVar %>Toggle();" id="<%= id %>_message"><%= defaultMessage %></a>
-	</c:when>
-	<c:otherwise>
-		<img
-			alt="<liferay-ui:message key="toggle" />"
-			id="<%= id %>_image"
-			onclick="<%= stateVar %>Toggle();"
-			src="<%= defaultImage %>"
-			style="margin: 0px;"
-		/>
-	</c:otherwise>
-</c:choose>

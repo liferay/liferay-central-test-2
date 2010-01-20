@@ -31,12 +31,6 @@ String redirect = (String)request.getAttribute("liferay-ui:upload-progress:redir
 String message = (String)request.getAttribute("liferay-ui:upload-progress:message");
 %>
 
-<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/upload_progress.js" type="text/javascript"></script>
-
-<aui:script>
-	var <%= id %> = new UploadProgress("<%= id %>", "<%= HttpUtil.encodeURL(redirect) %>");
-</aui:script>
-
 <c:if test="<%= Validator.isNotNull(iframeSrc) %>">
 	<div><iframe frameborder="0" id="<%= id %>-iframe" src="<%= iframeSrc %>" style="width: 100%;"></iframe></div>
 </c:if>
@@ -63,3 +57,9 @@ String message = (String)request.getAttribute("liferay-ui:upload-progress:messag
 		</div>
 	</div>
 </div>
+
+<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/upload_progress.js" type="text/javascript"></script>
+
+<aui:script>
+	var <%= id %> = new UploadProgress("<%= id %>", "<%= HttpUtil.encodeURL(redirect) %>");
+</aui:script>

@@ -216,18 +216,6 @@ boolean weeklyPosFr = _getWeeklyDayPos(request, Calendar.FRIDAY, event, recurren
 boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurrence);
 %>
 
-<aui:script>
-	function <portlet:namespace />showTable(id) {
-		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
-		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />weeklyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />monthlyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />yearlyTable").style.display = "none";
-
-		document.getElementById(id).style.display = "block";
-	}
-</aui:script>
-
 <aui:fieldset cssClass='<%= "taglib-input-repeat " + cssClass %>'>
 	<aui:column columnWidth="25">
 		<aui:field-wrapper label="repeat" name="recurrenceType">
@@ -414,6 +402,17 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 	</aui:column>
 </aui:fieldset>
 
+<aui:script>
+	function <portlet:namespace />showTable(id) {
+		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
+		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />weeklyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />monthlyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />yearlyTable").style.display = "none";
+
+		document.getElementById(id).style.display = "block";
+	}
+</aui:script>
 
 <%!
 private boolean _getWeeklyDayPos(HttpServletRequest req, int day, CalEvent event, Recurrence recurrence) {

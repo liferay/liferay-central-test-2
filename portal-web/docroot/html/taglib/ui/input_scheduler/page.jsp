@@ -26,18 +26,6 @@
 
 <%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
 
-<aui:script>
-	function <portlet:namespace />showTable(id) {
-		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
-		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />weeklyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />monthlyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />yearlyTable").style.display = "none";
-
-		document.getElementById(id).style.display = "block";
-	}
-</aui:script>
-
 <aui:fieldset>
 	<aui:legend label="schedule-event" />
 
@@ -108,3 +96,15 @@
 </aui:fieldset>
 
 <liferay-ui:input-repeat />
+
+<aui:script>
+	function <portlet:namespace />showTable(id) {
+		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
+		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />weeklyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />monthlyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />yearlyTable").style.display = "none";
+
+		document.getElementById(id).style.display = "block";
+	}
+</aui:script>

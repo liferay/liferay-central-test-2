@@ -25,3 +25,15 @@
 <%@ include file="/html/taglib/ui/search/init.jsp" %>
 
 </form>
+
+<aui:script>
+	function <%= randomNamespace %><%= namespace %>search() {
+		var keywords = document.<%= randomNamespace %><%= namespace %>fm.<%= namespace %>keywords.value;
+
+		keywords = keywords.replace(/^\s+|\s+$/, '');
+
+		if (keywords != '') {
+			document.<%= randomNamespace %><%= namespace %>fm.submit();
+		}
+	}
+</aui:script>

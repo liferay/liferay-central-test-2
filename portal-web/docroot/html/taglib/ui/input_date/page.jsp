@@ -84,6 +84,22 @@ if (yearValue > 0) {
 }
 %>
 
+<div <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> id="<%= randomNamespace %>displayDate"></div>
+
+<c:choose>
+	<c:when test="<%= monthAndYearParam.equals(namespace) %>">
+
+		<%
+		int[] monthIds = CalendarUtil.getMonthIds();
+		String[] months = CalendarUtil.getMonths(locale);
+		%>
+
+		<%@ include file="select_month.jspf" %>
+	</c:when>
+</c:choose>
+
+<input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />
+
 <aui:script use="date-picker-select">
 	var datePicker = new A.DatePickerSelect(
 		{
@@ -117,19 +133,3 @@ if (yearValue > 0) {
 		}
 	).render();
 </aui:script>
-
-<div <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> id="<%= randomNamespace %>displayDate"></div>
-
-<c:choose>
-	<c:when test="<%= monthAndYearParam.equals(namespace) %>">
-
-		<%
-		int[] monthIds = CalendarUtil.getMonthIds();
-		String[] months = CalendarUtil.getMonths(locale);
-		%>
-
-		<%@ include file="select_month.jspf" %>
-	</c:when>
-</c:choose>
-
-<input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />

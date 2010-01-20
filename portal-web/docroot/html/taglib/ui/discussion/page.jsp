@@ -73,71 +73,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 <c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
 	<div class="taglib-discussion">
-		<aui:script>
-			function <%= namespace %>deleteMessage(i) {
-				eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
-
-				document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-				document.<%= formName %>.<%= namespace %>messageId.value = messageId;
-				submitForm(document.<%= formName %>);
-			}
-
-			function <%= namespace %>postReply(i) {
-				eval("var parentMessageId = document.<%= formName %>.<%= namespace %>parentMessageId" + i + ".value;");
-				eval("var body = document.<%= formName %>.<%= namespace %>postReplyBody" + i + ".value;");
-
-				document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.ADD %>";
-				document.<%= formName %>.<%= namespace %>parentMessageId.value = parentMessageId;
-				document.<%= formName %>.<%= namespace %>body.value = body;
-				submitForm(document.<%= formName %>);
-			}
-
-			function <%= namespace %>scrollIntoView(messageId) {
-				document.getElementById("<%= namespace %>messageScroll" + messageId).scrollIntoView();
-			}
-
-			function <%= namespace %>showForm(rowId, textAreaId) {
-				document.getElementById(rowId).style.display = "";
-				document.getElementById(textAreaId).focus();
-			}
-
-			function <%= namespace %>updateMessage(i) {
-				eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
-				eval("var body = document.<%= formName %>.<%= namespace %>editReplyBody" + i + ".value;");
-
-				document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
-				document.<%= formName %>.<%= namespace %>messageId.value = messageId;
-				document.<%= formName %>.<%= namespace %>body.value = body;
-				submitForm(document.<%= formName %>);
-			}
-		</aui:script>
-
-		<aui:script use="input-handler">
-			var form = A.one(document.<%= formName %>);
-
-			if (form) {
-				var textareas = form.all('textarea');
-
-				if (textareas) {
-					textareas.on(
-						'input',
-						function(event) {
-							var textarea = event.currentTarget;
-							var currentValue = A.Lang.trim(textarea.val());
-
-							var id = textarea.get('id');
-							var buttonId = id.replace(/Body/, 'Button');
-							var button = A.one('#' + buttonId);
-
-							if (button) {
-								button.set('disabled', !currentValue.length);
-							}
-						}
-					);
-				}
-			}
-		</aui:script>
-
 		<form action="<%= formAction %>" method="post" name="<%= formName %>">
 		<input name="<%= namespace %><%= Constants.CMD %>" type="hidden" value="" />
 		<input name="<%= namespace %>redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
@@ -459,4 +394,69 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 		</form>
 	</div>
+
+	<aui:script>
+		function <%= namespace %>deleteMessage(i) {
+			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
+
+			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+			document.<%= formName %>.<%= namespace %>messageId.value = messageId;
+			submitForm(document.<%= formName %>);
+		}
+
+		function <%= namespace %>postReply(i) {
+			eval("var parentMessageId = document.<%= formName %>.<%= namespace %>parentMessageId" + i + ".value;");
+			eval("var body = document.<%= formName %>.<%= namespace %>postReplyBody" + i + ".value;");
+
+			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.ADD %>";
+			document.<%= formName %>.<%= namespace %>parentMessageId.value = parentMessageId;
+			document.<%= formName %>.<%= namespace %>body.value = body;
+			submitForm(document.<%= formName %>);
+		}
+
+		function <%= namespace %>scrollIntoView(messageId) {
+			document.getElementById("<%= namespace %>messageScroll" + messageId).scrollIntoView();
+		}
+
+		function <%= namespace %>showForm(rowId, textAreaId) {
+			document.getElementById(rowId).style.display = "";
+			document.getElementById(textAreaId).focus();
+		}
+
+		function <%= namespace %>updateMessage(i) {
+			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
+			eval("var body = document.<%= formName %>.<%= namespace %>editReplyBody" + i + ".value;");
+
+			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+			document.<%= formName %>.<%= namespace %>messageId.value = messageId;
+			document.<%= formName %>.<%= namespace %>body.value = body;
+			submitForm(document.<%= formName %>);
+		}
+	</aui:script>
+
+	<aui:script use="input-handler">
+		var form = A.one(document.<%= formName %>);
+
+		if (form) {
+			var textareas = form.all('textarea');
+
+			if (textareas) {
+				textareas.on(
+					'input',
+					function(event) {
+						var textarea = event.currentTarget;
+						var currentValue = A.Lang.trim(textarea.val());
+
+						var id = textarea.get('id');
+						var buttonId = id.replace(/Body/, 'Button');
+						var button = A.one('#' + buttonId);
+
+						if (button) {
+							button.set('disabled', !currentValue.length);
+						}
+					}
+				);
+			}
+		}
+	</aui:script>
 </c:if>
