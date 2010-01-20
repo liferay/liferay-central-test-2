@@ -100,85 +100,7 @@ else if (type.equals("tagged_pages")) {
 
 	PortalUtil.addPortletBreadcrumbEntry(request, tagName, portletURL.toString());
 }
-%>
 
-<c:if test='<%= type.equals("history") %>'>
-	<aui:script>
-		function <portlet:namespace />compare() {
-			AUI().use(
-				'selector-css3',
-				function(A) {
-					var rowIds = A.all('input[name=<portlet:namespace />rowIds]:checked');
-					var sourceVersion = A.one('input[name="<portlet:namespace />sourceVersion"]');
-					var targetVersion = A.one('input[name="<portlet:namespace />targetVersion"]');
-
-					var rowIdsSize = rowIds.size();
-
-					if (rowIdsSize == 1) {
-						if (sourceVersion) {
-							sourceVersion.val(rowIds.item(0).val());
-						}
-					}
-					else if (rowIdsSize == 2) {
-						if (sourceVersion) {
-							sourceVersion.val(rowIds.item(1).val());
-						}
-
-						if (targetVersion) {
-							targetVersion.val(rowIds.item(0).val());
-						}
-					}
-
-					submitForm(document.<portlet:namespace />fm);
-				}
-			);
-		}
-
-		function <portlet:namespace />initRowsChecked() {
-			var rowIds = AUI().all('input[name=<portlet:namespace />rowIds]');
-
-			rowIds.each(
-				function(item, index, collection) {
-					if (index >= 2) {
-						item.set('checked', false);
-					}
-				}
-			);
-		}
-
-		function <portlet:namespace />updateRowsChecked(element) {
-			AUI().use(
-				'selector-css3',
-				function(A) {
-					var rowsChecked = A.all('input[name=<portlet:namespace />rowIds]:checked');
-
-					if (rowsChecked.size() > 2) {
-						var index = 2;
-
-						if (rowsChecked.item(2).compareTo(element)) {
-							index = 1;
-						}
-
-						rowsChecked.item(index).set('checked', false);
-					}
-				}
-			);
-		}
-	</aui:script>
-
-	<aui:script use="event,node">
-		<portlet:namespace />initRowsChecked();
-
-		A.all('input[name=<portlet:namespace />rowIds]').on(
-			'click',
-			function(event) {
-				<portlet:namespace />updateRowsChecked(event.currentTarget);
-			}
-		);
-	</aui:script>
-</c:if>
-
-<%
 List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("page");
@@ -306,7 +228,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	String status = null;
 
-	if (curWikiPage.isApproved()) {
+	if (curWikiPage.getStatus() == StatusConstants.APPROVED) {
 		status = "approved";
 	}
 	else {
@@ -418,3 +340,79 @@ for (int i = 0; i < results.size(); i++) {
 </c:if>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate='<%= type.equals("history") ? false : true %>' />
+
+<c:if test='<%= type.equals("history") %>'>
+	<aui:script>
+		function <portlet:namespace />compare() {
+			AUI().use(
+				'selector-css3',
+				function(A) {
+					var rowIds = A.all('input[name=<portlet:namespace />rowIds]:checked');
+					var sourceVersion = A.one('input[name="<portlet:namespace />sourceVersion"]');
+					var targetVersion = A.one('input[name="<portlet:namespace />targetVersion"]');
+
+					var rowIdsSize = rowIds.size();
+
+					if (rowIdsSize == 1) {
+						if (sourceVersion) {
+							sourceVersion.val(rowIds.item(0).val());
+						}
+					}
+					else if (rowIdsSize == 2) {
+						if (sourceVersion) {
+							sourceVersion.val(rowIds.item(1).val());
+						}
+
+						if (targetVersion) {
+							targetVersion.val(rowIds.item(0).val());
+						}
+					}
+
+					submitForm(document.<portlet:namespace />fm);
+				}
+			);
+		}
+
+		function <portlet:namespace />initRowsChecked() {
+			var rowIds = AUI().all('input[name=<portlet:namespace />rowIds]');
+
+			rowIds.each(
+				function(item, index, collection) {
+					if (index >= 2) {
+						item.set('checked', false);
+					}
+				}
+			);
+		}
+
+		function <portlet:namespace />updateRowsChecked(element) {
+			AUI().use(
+				'selector-css3',
+				function(A) {
+					var rowsChecked = A.all('input[name=<portlet:namespace />rowIds]:checked');
+
+					if (rowsChecked.size() > 2) {
+						var index = 2;
+
+						if (rowsChecked.item(2).compareTo(element)) {
+							index = 1;
+						}
+
+						rowsChecked.item(index).set('checked', false);
+					}
+				}
+			);
+		}
+	</aui:script>
+
+	<aui:script use="event,node">
+		<portlet:namespace />initRowsChecked();
+
+		A.all('input[name=<portlet:namespace />rowIds]').on(
+			'click',
+			function(event) {
+				<portlet:namespace />updateRowsChecked(event.currentTarget);
+			}
+		);
+	</aui:script>
+</c:if>

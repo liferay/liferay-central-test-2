@@ -31,7 +31,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && wikiPage.isApproved() %>">
+	<c:if test="<%= (wikiPage.getStatus() == StatusConstants.APPROVED) && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 		<portlet:actionURL var="revertURL">
 			<portlet:param name="struts_action" value="/wiki/edit_page" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.REVERT %>" />
