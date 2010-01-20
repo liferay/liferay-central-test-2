@@ -41,11 +41,13 @@ String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:inpu
 String label = GetterUtil.getString((String)request.getAttribute("aui:input:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:input:last"));
 Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
-String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:name"));
+String fieldName = GetterUtil.getString((String)request.getAttribute("aui:input:name"));
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:input:prefix"));
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:input:suffix"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
 Object value = request.getAttribute("aui:input:value");
+
+String name = namespace + fieldName;
 
 if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldParam") != null)) {
 	if (!ModelHintsUtil.isLocalized(model.toString(), field)) {
@@ -195,7 +197,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 						daylight='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("daylight")) %>'
 						disabled="<%= disabled %>"
 						displayStyle="<%= displayStyle %>"
-						name="<%= name %>"
+						name="<%= fieldName %>"
 						nullable='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("nullable")) %>'
 						value="<%= value.toString() %>"
 					/>
