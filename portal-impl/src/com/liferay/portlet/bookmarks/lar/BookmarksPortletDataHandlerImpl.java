@@ -105,6 +105,14 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportFolder(context, foldersEl, entriesEl, folder);
 			}
 
+			List<BookmarksEntry> entries = BookmarksEntryUtil.findByG_F(
+				context.getGroupId(),
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+			for (BookmarksEntry entry : entries) {
+				exportEntry(context, null, entriesEl, entry);
+			}
+
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -210,7 +218,9 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		exportParentFolder(context, foldersEl, entry.getFolderId());
+		if (foldersEl != null) {
+			exportParentFolder(context, foldersEl, entry.getFolderId());
+		}
 
 		String path = getEntryPath(context, entry);
 
@@ -332,10 +342,14 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		BookmarksEntry existingEntry = null;
 
 		try {
-			BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(
-				folderId);
+			long groupId = context.getGroupId();
 
-			long groupId = folder.getGroupId();
+			if (folderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(
+					folderId);
+
+				groupId = folder.getGroupId();
+			}
 
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
