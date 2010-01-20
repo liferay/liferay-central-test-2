@@ -108,6 +108,12 @@
 	<bean id="com.liferay.portal.dao.shard.ShardUtil" class="com.liferay.portal.dao.shard.ShardUtil">
 		<property name="shardAdvice" ref="com.liferay.portal.dao.shard.ShardAdvice" />
 	</bean>
+	<bean id="com.liferay.portal.kernel.util.InfrastructureUtil" class="com.liferay.portal.kernel.util.InfrastructureUtil">
+		<property name="dataSource" ref="liferayDataSource" />
+		<property name="shardDataSourceTargetSource" ref="shardDataSourceTargetSource" />
+		<property name="shardSessionFactoryTargetSource" ref="shardSessionFactoryTargetSource" />
+		<property name="mailSession" ref="mailSession" />
+	</bean>
 	<aop:config>
 		<aop:aspect ref="com.liferay.portal.dao.shard.ShardAdvice">
 			<aop:around pointcut="bean(com.liferay.portal.service.CompanyLocalService)" method="invokeCompanyService" />

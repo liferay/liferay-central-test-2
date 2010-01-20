@@ -28,6 +28,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -58,6 +59,14 @@ import org.aspectj.lang.ProceedingJoinPoint;
  */
 public class ShardAdvice {
 
+	public void afterPropertiesSet() {
+		_shardDataSourceTargetSource = (ShardDataSourceTargetSource)
+			InfrastructureUtil.getShardDataSourceTargetSource();
+		
+		_shardSessionFactoryTargetSource = (ShardSessionFactoryTargetSource)
+			InfrastructureUtil.getShardSessionFactoryTargetSource();
+	}
+	
 	public Object invokeByParameter(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
@@ -192,6 +201,12 @@ public class ShardAdvice {
 
 	public Object invokePersistence(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
+
+		if (_shardDataSourceTargetSource == null ||
+			_shardSessionFactoryTargetSource == null) {
+
+			return proceedingJoinPoint.proceed();
+		}
 
 		Object target = proceedingJoinPoint.getTarget();
 

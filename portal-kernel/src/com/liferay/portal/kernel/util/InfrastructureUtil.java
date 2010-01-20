@@ -42,6 +42,14 @@ public class InfrastructureUtil {
 		return _dynamicDataSourceTargetSource;
 	}
 
+	public static Object getShardDataSourceTargetSource() {
+		return _shardDataSourceTargetSource;
+	}
+
+	public static Object getShardSessionFactoryTargetSource() {
+		return _shardSessionFactoryTargetSource;
+	}
+
 	public static Session getMailSession() {
 		return _mailSession;
 	}
@@ -60,8 +68,22 @@ public class InfrastructureUtil {
 		_mailSession = mailSession;
 	}
 
+	public void setShardDataSourceTargetSource(
+		Object shardDataSourceTargetSource) {
+
+		_shardDataSourceTargetSource = shardDataSourceTargetSource;
+	}
+
+	public void setShardSessionFactoryTargetSource(
+		Object shardSessionFactoryTargetSource) {
+
+		_shardSessionFactoryTargetSource = shardSessionFactoryTargetSource;
+	}
+
 	private static DataSource _dataSource;
 	private static Object _dynamicDataSourceTargetSource;
 	private static Session _mailSession;
+	private static Object _shardDataSourceTargetSource;
+	private static Object _shardSessionFactoryTargetSource;
 
 }
