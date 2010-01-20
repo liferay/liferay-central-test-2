@@ -507,13 +507,10 @@ public class EditPagesAction extends PortletAction {
 
 			// Update layout
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
 			layout = LayoutLocalServiceUtil.getLayout(
 				groupId, privateLayout, layoutId);
 
-			String tempOldFriendlyURL = layout.getFriendlyURL();
+			oldFriendlyURL = layout.getFriendlyURL();
 
 			layout = LayoutServiceUtil.updateLayout(
 				groupId, privateLayout, layoutId, layout.getParentLayoutId(),
@@ -521,8 +518,8 @@ public class EditPagesAction extends PortletAction {
 				friendlyURL, Boolean.valueOf(iconImage), iconBytes,
 				serviceContext);
 
-			if (!tempOldFriendlyURL.equals(layout.getFriendlyURL())) {
-				oldFriendlyURL = tempOldFriendlyURL;
+			if (oldFriendlyURL.equals(layout.getFriendlyURL())) {
+				oldFriendlyURL = StringPool.BLANK;
 			}
 
 			UnicodeProperties formTypeSettingsProperties =
