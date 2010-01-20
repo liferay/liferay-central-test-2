@@ -199,8 +199,8 @@ public class EditPagesAction extends PortletAction {
 					(ThemeDisplay)actionRequest.getAttribute(
 						WebKeys.THEME_DISPLAY);
 
-				if (themeDisplay.getPlid() == layout.getPlid()) {
-					Group group = themeDisplay.getScopeGroup();
+				if (layout.getPlid() == themeDisplay.getPlid()) {
+					Group group = layout.getGroup();
 
 					String oldPath = group.getFriendlyURL() + oldFriendlyURL;
 					String newPath =
