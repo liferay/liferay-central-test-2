@@ -39,73 +39,41 @@ String type = displayTerms.getType();
 	displayTerms="<%= displayTerms %>"
 	buttonLabel="search"
 >
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="name" />
-		</td>
-		<td>
-			<liferay-ui:message key="street" />
-		</td>
-		<td>
-			<liferay-ui:message key="city" />
-		</td>
-		<td>
-			<liferay-ui:message key="zip" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.STREET %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getStreet()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.CITY %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getCity()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.ZIP %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getZip()) %>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="type" />
-		</td>
-		<td>
-			<liferay-ui:message key="country" />
-		</td>
-		<td>
-			<liferay-ui:message key="region" />
-		</td>
-		<td colspan="2"></td>
-	</tr>
-	<tr>
-		<td>
-			<select name="<portlet:namespace /><%= displayTerms.TYPE %>">
-				<option <%= (displayTerms.getType() == null) ? "selected" : "" %> value=""><liferay-ui:message key="any" /></option>
+	<aui:fieldset>
+		<aui:column>
+			<aui:input name="<%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
+
+			<aui:select name="<%= displayTerms.TYPE %>">
+				<aui:option label="any" selected="<%= (displayTerms.getType() == null) %>" />
 
 				<%
 				for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
 				%>
 
-					<option <%= type.equals(curType) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
+					<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
 
 				<%
 				}
 				%>
+			</aui:select>
+		</aui:column>
 
-			</select>
-		</td>
-		<td>
-			<select id="<portlet:namespace /><%= displayTerms.COUNTRY_ID %>" name="<portlet:namespace /><%= displayTerms.COUNTRY_ID %>"></select>
-		</td>
-		<td>
-			<select id="<portlet:namespace /><%= displayTerms.REGION_ID %>" name="<portlet:namespace /><%= displayTerms.REGION_ID %>"></select>
-		</td>
-		<td colspan="2"></td>
-	</tr>
-	</table>
+		<aui:column>
+			<aui:input name="<%= displayTerms.STREET %>" size="20" type="text" value="<%= displayTerms.getStreet() %>" />
+
+			<aui:select label="country" name="<%= displayTerms.COUNTRY_ID %>" />
+		</aui:column>
+
+		<aui:column>
+			<aui:input name="<%= displayTerms.CITY %>" size="20" type="text" value="<%= displayTerms.getCity() %>" />
+
+			<aui:select label="region" name="<%= displayTerms.REGION_ID %>" />
+		</aui:column>
+
+		<aui:column>
+			<aui:input name="<%= displayTerms.ZIP %>" size="20" type="text" value="<%= displayTerms.getZip() %>" />
+		</aui:column>
+	</aui:fieldset>
 </liferay-ui:search-toggle>
 
 <%
@@ -121,7 +89,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 %>
 
 <c:if test="<%= organization != null %>">
-	<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+	<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
 	<br />
 

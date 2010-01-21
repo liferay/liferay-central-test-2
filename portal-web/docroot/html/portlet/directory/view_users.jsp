@@ -35,13 +35,13 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 %>
 
 <c:if test="<%= Validator.isNotNull(viewUsersRedirect) %>">
-	<input name="<portlet:namespace />viewUsersRedirect" type="hidden" value="<%= HtmlUtil.escape(viewUsersRedirect) %>" />
+	<aui:input name="viewUsersRedirect" type="hidden" value="<%= viewUsersRedirect %>" />
 </c:if>
 
 <liferay-ui:search-container
 	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 >
-	<input name="<portlet:namespace />usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 	<%
 	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
@@ -71,13 +71,13 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	%>
 
 	<c:if test="<%= organization != null %>">
-		<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+		<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
 		<h3><%= HtmlUtil.escape(LanguageUtil.format(pageContext, "users-of-x", organization.getName())) %></h3>
 	</c:if>
 
 	<c:if test="<%= userGroup != null %>">
-		<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
+		<aui:input name="<%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
 		<h3><%= LanguageUtil.format(pageContext, "users-of-x", userGroup.getName()) %></h3>
 	</c:if>
@@ -132,13 +132,13 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 		</c:if>
 
 		<c:if test="<%= organization != null %>">
-			<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+			<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
 			<liferay-ui:message key="filter-by-organization" />: <%= HtmlUtil.escape(organization.getName()) %><br />
 		</c:if>
 
 		<c:if test="<%= userGroup != null %>">
-			<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
+			<aui:input name="<%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
 			<liferay-ui:message key="filter-by-user-group" />: <%= userGroup.getName() %><br />
 		</c:if>

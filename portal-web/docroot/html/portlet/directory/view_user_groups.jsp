@@ -31,7 +31,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 <liferay-ui:search-container
 	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 >
-	<input name="<portlet:namespace />userGroupsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="userGroupsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 	<liferay-ui:search-form
 		page="/html/portlet/directory/user_group_search.jsp"

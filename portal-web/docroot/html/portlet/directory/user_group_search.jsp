@@ -31,9 +31,13 @@ UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getD
 %>
 
 <div>
-	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+	<aui:fieldset>
+		<aui:input name="<%= displayTerms.NAME %>" size="30" type="text" value="<%= displayTerms.getName() %>" />
+	</aui:fieldset>
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
+	<aui:button-row>
+		<aui:button type="submit" value="search" />
+	</aui:button-row>
 </div>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

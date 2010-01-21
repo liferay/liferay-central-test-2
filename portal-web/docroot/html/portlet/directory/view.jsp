@@ -40,24 +40,23 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 request.setAttribute("view.jsp-portletURLString", portletURLString);
 %>
 
-<form action="<%= portletURLString %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="portletURL" />
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletURLString) %>" />
+<aui:form action="<%= portletURLString %>" method="get" name="fm">
+	<liferay-portlet:renderURLParams varImpl="portletURL" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="redirect" type="hidden" value="<%= portletURLString %>" />
 
-<liferay-util:include page="/html/portlet/directory/tabs1.jsp" />
+	<liferay-util:include page="/html/portlet/directory/tabs1.jsp" />
 
-<c:choose>
-	<c:when test='<%= tabs1.equals("users") %>'>
-		<liferay-util:include page="/html/portlet/directory/view_users.jsp" />
-	</c:when>
-	<c:when test='<%= tabs1.equals("organizations") %>'>
-		<liferay-util:include page="/html/portlet/directory/view_organizations.jsp" />
-	</c:when>
-	<c:when test='<%= tabs1.equals("user-groups") %>'>
-		<liferay-util:include page="/html/portlet/directory/view_user_groups.jsp" />
-	</c:when>
-</c:choose>
-
-</form>
+	<c:choose>
+		<c:when test='<%= tabs1.equals("users") %>'>
+			<liferay-util:include page="/html/portlet/directory/view_users.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("organizations") %>'>
+			<liferay-util:include page="/html/portlet/directory/view_organizations.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("user-groups") %>'>
+			<liferay-util:include page="/html/portlet/directory/view_user_groups.jsp" />
+		</c:when>
+	</c:choose>
+</aui:form>
