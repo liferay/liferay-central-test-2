@@ -43,8 +43,11 @@ public class DynamicDataSourceTransactionInterceptor
 	extends TransactionInterceptor {
 
 	public void afterPropertiesSet() {
-		_dynamicDataSourceTargetSource = (DynamicDataSourceTargetSource)
-			InfrastructureUtil.getDynamicDataSourceTargetSource();
+		if (_dynamicDataSourceTargetSource == null) {
+			_dynamicDataSourceTargetSource =
+				(DynamicDataSourceTargetSource)InfrastructureUtil.
+					getDynamicDataSourceTargetSource();
+		}
 	}
 
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
