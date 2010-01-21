@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.SessionParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -1416,9 +1417,9 @@ public class ServicePreAction extends Action {
 		request.setAttribute(WebKeys.THEME, theme);
 		request.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
 
-		boolean themeCssFastLoad = ParamUtil.getBoolean(
+		boolean themeCssFastLoad = SessionParamUtil.getBoolean(
 			request, "css_fast_load", PropsValues.THEME_CSS_FAST_LOAD);
-		boolean themeImagesFastLoad = ParamUtil.getBoolean(
+		boolean themeImagesFastLoad = SessionParamUtil.getBoolean(
 			request, "images_fast_load", PropsValues.THEME_IMAGES_FAST_LOAD);
 
 		boolean themeJsBarebone = PropsValues.JAVASCRIPT_BAREBONE_ENABLED;
@@ -1429,7 +1430,7 @@ public class ServicePreAction extends Action {
 			}
 		}
 
-		boolean themeJsFastLoad = ParamUtil.getBoolean(
+		boolean themeJsFastLoad = SessionParamUtil.getBoolean(
 			request, "js_fast_load", PropsValues.JAVASCRIPT_FAST_LOAD);
 
 		String lifecycle = ParamUtil.getString(request, "p_p_lifecycle", "0");
