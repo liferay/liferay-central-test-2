@@ -28,12 +28,16 @@
 		<supports>
 			<action-key>ADD_FOLDER</action-key>
 			<action-key>ADD_IMAGE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>VIEW</action-key>
 		</supports>
 		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_FOLDER</action-key>
 			<action-key>ADD_IMAGE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>VIEW</action-key>
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
