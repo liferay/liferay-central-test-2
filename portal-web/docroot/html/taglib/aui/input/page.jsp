@@ -183,6 +183,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		<c:when test='<%= type.equals("timeZone") %>'>
 			<span class="<%= fieldCss %>">
 				<span class="aui-field-content">
+
 					<%
 					int displayStyle = TimeZone.LONG;
 
