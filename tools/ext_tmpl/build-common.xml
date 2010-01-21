@@ -22,6 +22,8 @@
 	<property file="${project.dir}/sql/sql.ext.properties" />
 	<property file="${project.dir}/sql/sql.properties" />
 
+	<property name="liferay.home" value="${app.server.parent.dir}" />
+
 	<path id="lib.classpath">
 		<fileset dir="${project.dir}/ext-lib/development" includes="*.jar" />
 		<fileset dir="${project.dir}/ext-lib/global" includes="*.jar" />
