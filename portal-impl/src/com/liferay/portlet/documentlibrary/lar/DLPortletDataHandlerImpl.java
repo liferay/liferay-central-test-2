@@ -83,7 +83,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		exportParentFolder(context, foldersEl, fileEntry.getFolderId());
+		if (foldersEl != null) {
+			exportParentFolder(context, foldersEl, fileEntry.getFolderId());
+		}
 
 		String path = getFileEntryPath(context, fileEntry);
 
@@ -470,15 +472,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element fileShortcutsEl = root.addElement("file-shortcuts");
 			Element fileRanksEl = root.addElement("file-ranks");
 
-			List<DLFileEntry> rootFilesEntries = DLFileEntryUtil.findByG_F(
-				context.getGroupId(),
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-			for (DLFileEntry fileEntry : rootFilesEntries) {
-				exportFileEntry(
-					context, foldersEl, fileEntriesEl, fileRanksEl, fileEntry);
-			}
-
 			List<DLFolder> folders = DLFolderUtil.findByGroupId(
 				context.getGroupId());
 
@@ -486,6 +479,15 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportFolder(
 					context, foldersEl, fileEntriesEl, fileShortcutsEl,
 					fileRanksEl, folder);
+			}
+
+			List<DLFileEntry> fileEntries = DLFileEntryUtil.findByG_F(
+				context.getGroupId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+			for (DLFileEntry fileEntry : fileEntries) {
+				exportFileEntry(
+					context, foldersEl, fileEntriesEl, fileRanksEl, fileEntry);
 			}
 
 			return doc.formattedString();

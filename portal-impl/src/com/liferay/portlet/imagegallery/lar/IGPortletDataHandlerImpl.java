@@ -77,7 +77,9 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		exportParentFolder(context, foldersEl, image.getFolderId());
+		if (foldersEl != null) {
+			exportParentFolder(context, foldersEl, image.getFolderId());
+		}
 
 		String path = getImagePath(context, image);
 
@@ -188,6 +190,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(image.getUserUuid());
+		long groupId = context.getGroupId();
 		long folderId = MapUtil.getLong(
 			folderPKs, image.getFolderId(), image.getFolderId());
 
@@ -238,16 +241,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		IGImage existingImage = null;
 
 		try {
-			IGFolderUtil.findByPrimaryKey(folderId);
-
-			long groupId = image.getGroupId();
-
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				try {
 					existingImage = IGImageUtil.findByUUID_G(
-						image.getUuid(), context.getGroupId());
+						image.getUuid(), groupId);
 
 					IGImageLocalServiceUtil.updateImage(
 						userId, existingImage.getImageId(), groupId, folderId,
@@ -314,6 +313,14 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			for (IGFolder folder : folders) {
 				exportFolder(context, foldersEl, imagesEl, folder);
+			}
+
+			List<IGImage> images = IGImageUtil.findByG_F(
+				context.getGroupId(),
+				IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+			for (IGImage image : images) {
+				exportImage(context, null, imagesEl, image);
 			}
 
 			return doc.formattedString();

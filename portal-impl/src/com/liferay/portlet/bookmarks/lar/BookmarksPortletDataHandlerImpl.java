@@ -309,6 +309,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
+		long groupId = context.getGroupId();
 		long folderId = MapUtil.getLong(
 			folderPKs, entry.getFolderId(), entry.getFolderId());
 
@@ -342,21 +343,12 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		BookmarksEntry existingEntry = null;
 
 		try {
-			long groupId = context.getGroupId();
-
-			if (folderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(
-					folderId);
-
-				groupId = folder.getGroupId();
-			}
-
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				try {
 					existingEntry = BookmarksEntryUtil.findByUUID_G(
-						entry.getUuid(), context.getGroupId());
+						entry.getUuid(), groupId);
 
 					BookmarksEntryLocalServiceUtil.updateEntry(
 						userId, existingEntry.getEntryId(), groupId, folderId,
