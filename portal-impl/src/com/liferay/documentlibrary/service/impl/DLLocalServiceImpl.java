@@ -326,9 +326,16 @@ public class DLLocalServiceImpl implements DLLocalService {
 				throw new SourceFileNameException(sourceFileName);
 			}
 		}
-
-		if (is == null) {
-			throw new FileSizeException(fileName);
+		
+		try{
+			if ((is == null) ||
+				(is.available() >
+					PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE))) {
+				throw new FileSizeException(fileName);
+			}
+		}
+		catch (IOException ioe) {
+			throw new FileSizeException(ioe.getMessage());
 		}
 	}
 
