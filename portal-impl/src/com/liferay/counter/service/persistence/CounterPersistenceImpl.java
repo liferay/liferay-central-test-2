@@ -56,20 +56,20 @@ public class CounterPersistenceImpl
 
 	public List<String> getNames() throws SystemException {
 		Connection connection = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
 		try {
 			connection = getConnection();
 
-			ps = connection.prepareStatement(_SQL_SELECT_NAMES);
+			preparedStatement = connection.prepareStatement(_SQL_SELECT_NAMES);
 
-			rs = ps.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 
 			List<String> list = new ArrayList<String>();
 
-			while (rs.next()) {
-				list.add(rs.getString(1));
+			while (resultSet.next()) {
+				list.add(resultSet.getString(1));
 			}
 
 			return list;
@@ -78,7 +78,7 @@ public class CounterPersistenceImpl
 			throw processException(sqle);
 		}
 		finally {
-			DataAccess.cleanUp(connection, ps, rs);
+			DataAccess.cleanUp(connection, preparedStatement, resultSet);
 		}
 	}
 
@@ -95,32 +95,33 @@ public class CounterPersistenceImpl
 			size = _MINIMUM_INCREMENT_SIZE;
 		}
 
-		CounterRegister register = getCounterRegister(name);
+		CounterRegister counterRegister = getCounterRegister(name);
 
-		return competeIncrement(register, size);
+		return _competeIncrement(counterRegister, size);
 	}
 
 	public void rename(String oldName, String newName) throws SystemException {
-		CounterRegister register = getCounterRegister(oldName);
+		CounterRegister counterRegister = getCounterRegister(oldName);
 
-		synchronized (register) {
-			if (_registerLookup.containsKey(newName)) {
+		synchronized (counterRegister) {
+			if (_counterRegisterMap.containsKey(newName)) {
 				throw new SystemException(
 					"Cannot rename " + oldName + " to " + newName);
 			}
 
 			Connection connection = null;
-			PreparedStatement ps = null;
+			PreparedStatement preparedStatement = null;
 
 			try {
 				connection = getConnection();
 
-				ps = connection.prepareStatement(_SQL_UPDATE_NAME_BY_NAME);
+				preparedStatement = connection.prepareStatement(
+					_SQL_UPDATE_NAME_BY_NAME);
 
-				ps.setString(1, newName);
-				ps.setString(2, oldName);
+				preparedStatement.setString(1, newName);
+				preparedStatement.setString(2, oldName);
 
-				ps.executeUpdate();
+				preparedStatement.executeUpdate();
 			}
 			catch (ObjectNotFoundException onfe) {
 			}
@@ -128,31 +129,32 @@ public class CounterPersistenceImpl
 				throw processException(e);
 			}
 			finally {
-				DataAccess.cleanUp(connection, ps);
+				DataAccess.cleanUp(connection, preparedStatement);
 			}
 
-			register.setName(newName);
+			counterRegister.setName(newName);
 
-			_registerLookup.put(newName, register);
-			_registerLookup.remove(oldName);
+			_counterRegisterMap.put(newName, counterRegister);
+			_counterRegisterMap.remove(oldName);
 		}
 	}
 
 	public void reset(String name) throws SystemException {
-		CounterRegister register = getCounterRegister(name);
+		CounterRegister counterRegister = getCounterRegister(name);
 
-		synchronized (register) {
+		synchronized (counterRegister) {
 			Connection connection = null;
-			PreparedStatement ps = null;
+			PreparedStatement preparedStatement = null;
 
 			try {
 				connection = getConnection();
 
-				ps = connection.prepareStatement(_SQL_DELETE_BY_NAME);
+				preparedStatement = connection.prepareStatement(
+					_SQL_DELETE_BY_NAME);
 
-				ps.setString(1, name);
+				preparedStatement.setString(1, name);
 
-				ps.executeUpdate();
+				preparedStatement.executeUpdate();
 			}
 			catch (ObjectNotFoundException onfe) {
 			}
@@ -160,17 +162,17 @@ public class CounterPersistenceImpl
 				throw processException(e);
 			}
 			finally {
-				DataAccess.cleanUp(connection, ps);
+				DataAccess.cleanUp(connection, preparedStatement);
 			}
 
-			_registerLookup.remove(name);
+			_counterRegisterMap.remove(name);
 		}
 	}
 
 	public void reset(String name, long size) throws SystemException {
-		CounterRegister register = createCounterRegister(name, size);
+		CounterRegister counterRegister = createCounterRegister(name, size);
 
-		_registerLookup.put(name, register);
+		_counterRegisterMap.put(name, counterRegister);
 	}
 
 	protected CounterRegister createCounterRegister(String name)
@@ -184,62 +186,62 @@ public class CounterPersistenceImpl
 
 		long rangeMin = -1;
 		long rangeMax = -1;
+		int rangeSize = getRangeSize();
 
 		Connection connection = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
 		try {
 			connection = getConnection();
 
-			ps = connection.prepareStatement(_SQL_SELECT_ID_BY_NAME);
+			preparedStatement = connection.prepareStatement(
+				_SQL_SELECT_ID_BY_NAME);
 
-			ps.setString(1, name);
+			preparedStatement.setString(1, name);
 
-			rs = ps.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 
-			if (rs.next()) {
-				rangeMin = rs.getLong(1);
-				rangeMax = rangeMin + PropsValues.COUNTER_INCREMENT;
+			if (resultSet.next()) {
+				rangeMin = resultSet.getLong(1);
+				rangeMax = rangeMin + rangeSize;
 
-				rs.close();
-				ps.close();
+				resultSet.close();
+				preparedStatement.close();
 
-				ps = connection.prepareStatement(_SQL_UPDATE_ID_BY_NAME);
+				preparedStatement = connection.prepareStatement(
+					_SQL_UPDATE_ID_BY_NAME);
 
-				ps.setLong(1, rangeMax);
-				ps.setString(2, name);
+				preparedStatement.setLong(1, rangeMax);
+				preparedStatement.setString(2, name);
 			}
 			else {
 				rangeMin = _DEFAULT_CURRENT_ID;
-				rangeMax = rangeMin + PropsValues.COUNTER_INCREMENT;
+				rangeMax = rangeMin + rangeSize;
 
-				rs.close();
-				ps.close();
+				resultSet.close();
+				preparedStatement.close();
 
-				ps = connection.prepareStatement(_SQL_INSERT);
+				preparedStatement = connection.prepareStatement(_SQL_INSERT);
 
-				ps.setString(1, name);
-				ps.setLong(2, rangeMax);
+				preparedStatement.setString(1, name);
+				preparedStatement.setLong(2, rangeMax);
 			}
 
-			ps.executeUpdate();
+			preparedStatement.executeUpdate();
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
-			DataAccess.cleanUp(connection, ps, rs);
+			DataAccess.cleanUp(connection, preparedStatement, resultSet);
 		}
 
 		if (size > rangeMin) {
 			rangeMin = size;
 		}
 
-		CounterRegister register = new CounterRegister(
-			name, rangeMin, rangeMax, PropsValues.COUNTER_INCREMENT);
-
-		return register;
+		return new CounterRegister(name, rangeMin, rangeMax, rangeSize);
 	}
 
 	protected Connection getConnection() throws SQLException {
@@ -253,97 +255,103 @@ public class CounterPersistenceImpl
 	protected CounterRegister getCounterRegister(String name)
 		throws SystemException {
 
-		CounterRegister register = _registerLookup.get(name);
+		CounterRegister counterRegister = _counterRegisterMap.get(name);
 
-		if (register != null) {
-			return register;
+		if (counterRegister != null) {
+			return counterRegister;
 		}
 		else {
-			synchronized (_registerLookup) {
+			synchronized (_counterRegisterMap) {
 
 				// Double check
 
-				register = _registerLookup.get(name);
+				counterRegister = _counterRegisterMap.get(name);
 
-				if (register == null) {
-					register = createCounterRegister(name);
+				if (counterRegister == null) {
+					counterRegister = createCounterRegister(name);
 
-					_registerLookup.put(name, register);
+					_counterRegisterMap.put(name, counterRegister);
 				}
 
-				return register;
+				return counterRegister;
 			}
 		}
 	}
 
-	private long competeIncrement(CounterRegister register, int size)
+	protected int getRangeSize() {
+		return PropsValues.COUNTER_INCREMENT;
+	}
+
+	private long _competeIncrement(CounterRegister counterRegister, int size)
 		throws SystemException {
 
-		CounterHolder holder = register.getCounterHolder();
+		CounterHolder counterHolder = counterRegister.getCounterHolder();
 
 		// Try to use the fast path
 
-		long newValue = holder.addAndGet(size);
+		long newValue = counterHolder.addAndGet(size);
 
-		if (newValue <= holder.getRangeMax()) {
+		if (newValue <= counterHolder.getRangeMax()) {
 			return newValue;
 		}
 
 		// Use the slow path
 
-		CompeteLatch latch = register.getCompeteLatch();
+		CompeteLatch completeLatch = counterRegister.getCompeteLatch();
 
-		if (!latch.compete()) {
+		if (!completeLatch.compete()) {
 
 			// Loser thread has to wait for the winner thread to finish its job
 
-			latch.await();
+			completeLatch.await();
 
 			// Compete again
 
-			return competeIncrement(register, size);
+			return _competeIncrement(counterRegister, size);
 		}
 
 		// Winner thread
 
 		Connection connection = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
 		try {
 
 			// Double check
 
-			holder = register.getCounterHolder();
-			newValue = holder.addAndGet(size);
+			counterHolder = counterRegister.getCounterHolder();
+			newValue = counterHolder.addAndGet(size);
 
-			if (newValue > holder.getRangeMax()) {
+			if (newValue > counterHolder.getRangeMax()) {
 				connection = getConnection();
 
-				ps = connection.prepareStatement(_SQL_SELECT_ID_BY_NAME);
+				preparedStatement = connection.prepareStatement(
+					_SQL_SELECT_ID_BY_NAME);
 
-				ps.setString(1, register.getName());
+				preparedStatement.setString(1, counterRegister.getName());
 
-				rs = ps.executeQuery();
+				resultSet = preparedStatement.executeQuery();
 
-				rs.next();
+				resultSet.next();
 
-				long currentId = rs.getLong(1);
+				long currentId = resultSet.getLong(1);
 
 				newValue = currentId + 1;
-				long rangeMax = currentId + register.getRangeSize();
+				long rangeMax = currentId + counterRegister.getRangeSize();
 
-				rs.close();
-				ps.close();
+				resultSet.close();
+				preparedStatement.close();
 
-				ps = connection.prepareStatement(_SQL_UPDATE_ID_BY_NAME);
+				preparedStatement = connection.prepareStatement(
+					_SQL_UPDATE_ID_BY_NAME);
 
-				ps.setLong(1, rangeMax);
-				ps.setString(2, register.getName());
+				preparedStatement.setLong(1, rangeMax);
+				preparedStatement.setString(2, counterRegister.getName());
 
-				ps.executeUpdate();
+				preparedStatement.executeUpdate();
 
-				register.setCounterHolder(
+				counterRegister.setCounterHolder(
 					new CounterHolder(newValue, rangeMax));
 			}
 		}
@@ -351,11 +359,11 @@ public class CounterPersistenceImpl
 			throw processException(e);
 		}
 		finally {
-			DataAccess.cleanUp(connection, ps, rs);
+			DataAccess.cleanUp(connection, preparedStatement, resultSet);
 
 			// Winner thread opens the latch so that loser threads can continue
 
-			latch.done();
+			completeLatch.done();
 		}
 
 		return newValue;
@@ -385,7 +393,7 @@ public class CounterPersistenceImpl
 	private static final String _SQL_UPDATE_NAME_BY_NAME =
 		"update Counter set name = ? where name = ?";
 
-	private static final Map<String, CounterRegister> _registerLookup =
+	private static Map<String, CounterRegister> _counterRegisterMap =
 		new ConcurrentHashMap<String, CounterRegister>();
 
 }
