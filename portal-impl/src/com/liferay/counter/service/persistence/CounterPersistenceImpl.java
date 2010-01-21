@@ -204,6 +204,11 @@ public class CounterPersistenceImpl
 
 			if (resultSet.next()) {
 				rangeMin = resultSet.getLong(1);
+
+				if (size > rangeMin) {
+					rangeMin = size;
+				}
+
 				rangeMax = rangeMin + rangeSize;
 
 				resultSet.close();
@@ -217,6 +222,11 @@ public class CounterPersistenceImpl
 			}
 			else {
 				rangeMin = _DEFAULT_CURRENT_ID;
+
+				if (size > rangeMin) {
+					rangeMin = size;
+				}
+
 				rangeMax = rangeMin + rangeSize;
 
 				resultSet.close();
@@ -235,10 +245,6 @@ public class CounterPersistenceImpl
 		}
 		finally {
 			DataAccess.cleanUp(connection, preparedStatement, resultSet);
-		}
-
-		if (size > rangeMin) {
-			rangeMin = size;
 		}
 
 		return new CounterRegister(name, rangeMin, rangeMax, rangeSize);
