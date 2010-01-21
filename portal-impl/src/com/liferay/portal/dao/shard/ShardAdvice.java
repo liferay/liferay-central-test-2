@@ -60,12 +60,17 @@ import org.aspectj.lang.ProceedingJoinPoint;
 public class ShardAdvice {
 
 	public void afterPropertiesSet() {
-		_shardDataSourceTargetSource =
-			(ShardDataSourceTargetSource)InfrastructureUtil.
-				getShardDataSourceTargetSource();
-		_shardSessionFactoryTargetSource =
-			(ShardSessionFactoryTargetSource)InfrastructureUtil.
-				getShardSessionFactoryTargetSource();
+		if (_shardDataSourceTargetSource == null) {
+			_shardDataSourceTargetSource =
+				(ShardDataSourceTargetSource)InfrastructureUtil.
+					getShardDataSourceTargetSource();
+		}
+
+		if (_shardSessionFactoryTargetSource == null) {
+			_shardSessionFactoryTargetSource =
+				(ShardSessionFactoryTargetSource)InfrastructureUtil.
+					getShardSessionFactoryTargetSource();
+		}
 	}
 
 	public Object invokeByParameter(ProceedingJoinPoint proceedingJoinPoint)
