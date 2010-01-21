@@ -193,16 +193,17 @@
 		<%
 		long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js/", true);
 
-		String alloyBaseURL = themeDisplay.getPathJavaScript() + "/aui/{file}";
+		String alloyBaseURL = themeDisplay.getPathJavaScript() + "/aui/";
+		String alloyFileURL = alloyBaseURL + "{file}";
 
 		String alloyFilter = "raw";
 
-		String alloyURL = alloyBaseURL + "?t=" + javaScriptLastModified;
+		String alloyURL = alloyFileURL + "?t=" + javaScriptLastModified;
 
 		if (themeDisplay.isThemeJsFastLoad()) {
 			alloyFilter = "min";
 
-			alloyURL = PortalUtil.getStaticResourceURL(request, alloyBaseURL, javaScriptLastModified);
+			alloyURL = PortalUtil.getStaticResourceURL(request, alloyFileURL, javaScriptLastModified);
 		}
 		%>
 
@@ -211,7 +212,11 @@
 				return '<%= alloyFilter %>';
 			},
 
-			getPath: function(file) {
+			getBasePath: function() {
+				return '<%= alloyBaseURL %>';
+			},
+
+			getFilePath: function(file) {
 				return '<%= alloyURL %>'.replace('{file}', file);
 			}
 		};

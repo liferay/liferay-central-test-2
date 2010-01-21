@@ -470,7 +470,7 @@
 					/>
 				</replaceregexp>
 
-				<replaceregexp match="PATH_JAVASCRIPT \+ ('[\w-]+.js')" replace="getFullPath(\1)" flags="g" byline="false">
+				<replaceregexp match="PATH_JAVASCRIPT \+ ('[\w-]+.js')" replace="getFilePath(\1)" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"
@@ -491,7 +491,14 @@
 					/>
 				</replaceregexp>
 
-				<replaceregexp match="(\n)(\t+)(window.AUI = \{)" replace="\1\2var getFullPath = Liferay.AUI.getPath;\1\1\2\3" flags="g" byline="false">
+				<replaceregexp match="(\n)(\t+)(window.AUI = \{)" replace="\1\2var getFilePath = Liferay.AUI.getFilePath;\1\1\2\3" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						includes="defaults.js"
+					/>
+				</replaceregexp>
+
+				<replaceregexp match="(\n)(\t)(\t?)(defaults: \{)" replace="\1\2\3\4\1\2\3\2base: Liferay.AUI.getBasePath() + '/lib/yui/',\1\1\2\3\2fetchCSS: false,\1\1\2\3\2combine: false,\1" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"
@@ -504,25 +511,6 @@
 						includes="defaults.js"
 					/>
 				</replaceregexp>
-
-				<replaceregexp match="(combine: ?)true" replace="\1false" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="(fetchCSS: ?)true" replace="\1false" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replace dir="docroot/html/ALLOY_ZIP/src/javascript/" includes="**/defaults.js">
-					<replacetoken><![CDATA[//base: '',]]></replacetoken>
-					<replacevalue><![CDATA[base: '<%= themeDisplay.getPathJavaScript() %>/aui/lib/yui/',]]></replacevalue>
-				</replace>
 
 				<replaceregexp match="[\t\n]+'(?:\w+|-)+-css': \{[^}]+\},?|(, +)?'(?:\w+|-)+-css'" replace="" flags="g" byline="false">
 					<fileset
