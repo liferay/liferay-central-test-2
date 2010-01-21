@@ -425,23 +425,8 @@ public class LayoutAction extends Action {
 			request, portlet, invokerPortlet, portletContext, windowState,
 			portletMode, portletPreferences, layout.getPlid());
 
-		ClassLoader portletClassLoader = invokerPortlet.getPortletClassLoader();
-
-		ClassLoader eventClassLoader =
-			event.getValue().getClass().getClassLoader();
-
-		if (portletClassLoader != eventClassLoader) {
-			EventImpl eventImpl = (EventImpl)event;
-
-			String base64Value = eventImpl.getBase64Value();
-
-			Serializable value = (Serializable)Base64.stringToObject(
-				base64Value, portletClassLoader);
-
-			event = new EventImpl(event.getName(), event.getQName(), value);
-		}
-
-		eventRequestImpl.setEvent(event);
+		eventRequestImpl.setEvent(
+			serializeEvent(event, invokerPortlet.getPortletClassLoader()));
 
 		EventResponseImpl eventResponseImpl = EventResponseFactory.create(
 			eventRequestImpl, response, portletId, user, layout);
@@ -944,6 +929,31 @@ public class LayoutAction extends Action {
 		}
 
 		renderRequestImpl.cleanUp();
+	}
+
+	protected Event serializeEvent(
+		Event event, ClassLoader portletClassLoader) {
+
+		Serializable value = event.getValue();
+
+		if (value == null) {
+			return event;
+		}
+
+		ClassLoader eventClassLoader = value.getClass().getClassLoader();
+
+		if (portletClassLoader == eventClassLoader) {
+			return event;
+		}
+
+		EventImpl eventImpl = (EventImpl)event;
+
+		String base64Value = eventImpl.getBase64Value();
+
+		value = (Serializable)Base64.stringToObject(
+			base64Value, portletClassLoader);
+
+		return new EventImpl(event.getName(), event.getQName(), value);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutAction.class);
