@@ -326,11 +326,14 @@ public class DLLocalServiceImpl implements DLLocalService {
 				throw new SourceFileNameException(sourceFileName);
 			}
 		}
-		
-		try{
-			if ((is == null) ||
-				(is.available() >
-					PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE))) {
+
+		try {
+			if (((PropsValues.WEBDAV_LITMUS) ||
+				 (PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+				((is == null) ||
+				 (is.available() >
+					PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
+
 				throw new FileSizeException(fileName);
 			}
 		}
