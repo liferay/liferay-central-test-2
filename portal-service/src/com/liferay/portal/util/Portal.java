@@ -473,7 +473,7 @@ public interface Portal {
 	public String[] getSystemRoles();
 
 	public UploadPortletRequest getUploadPortletRequest(
-		ActionRequest actionRequest);
+		PortletRequest portletRequest);
 
 	public UploadServletRequest getUploadServletRequest(
 		HttpServletRequest request);

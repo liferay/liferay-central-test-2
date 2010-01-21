@@ -875,9 +875,9 @@ public class PortalUtil {
 	}
 
 	public static UploadPortletRequest getUploadPortletRequest(
-		ActionRequest actionRequest) {
+		PortletRequest portletRequest) {
 
-		return getPortal().getUploadPortletRequest(actionRequest);
+		return getPortal().getUploadPortletRequest(portletRequest);
 	}
 
 	public static UploadServletRequest getUploadServletRequest(

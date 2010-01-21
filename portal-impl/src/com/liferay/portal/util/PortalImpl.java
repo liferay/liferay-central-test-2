@@ -117,7 +117,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.upload.UploadPortletRequestImpl;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.comparator.PortletControlPanelWeightComparator;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.DefaultControlPanelEntryFactory;
@@ -2870,12 +2869,13 @@ public class PortalImpl implements Portal {
 	}
 
 	public UploadPortletRequest getUploadPortletRequest(
-		ActionRequest actionRequest) {
+		PortletRequest portletRequest) {
 
-		ActionRequestImpl actionRequestImpl = (ActionRequestImpl)actionRequest;
+		PortletRequestImpl portletRequestImpl =
+			(PortletRequestImpl)portletRequest;
 
 		DynamicServletRequest dynamicRequest =
-			(DynamicServletRequest)actionRequestImpl.getHttpServletRequest();
+			(DynamicServletRequest)portletRequestImpl.getHttpServletRequest();
 
 		HttpServletRequestWrapper requestWrapper =
 			(HttpServletRequestWrapper)dynamicRequest.getRequest();
@@ -2884,8 +2884,8 @@ public class PortalImpl implements Portal {
 			requestWrapper);
 
 		return new UploadPortletRequestImpl(
-			uploadRequest,
-			PortalUtil.getPortletNamespace(actionRequestImpl.getPortletName()));
+			uploadRequest, PortalUtil.getPortletNamespace(
+				portletRequestImpl.getPortletName()));
 	}
 
 	public UploadServletRequest getUploadServletRequest(
