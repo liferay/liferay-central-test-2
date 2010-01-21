@@ -54,7 +54,7 @@ public class DynamicDataSourceTransactionInterceptor
 		if (_dynamicDataSourceTargetSource == null) {
 			return super.invoke(methodInvocation);
 		}
-		
+
 		Class<?> targetClass = null;
 
 		if (methodInvocation.getThis() != null) {
