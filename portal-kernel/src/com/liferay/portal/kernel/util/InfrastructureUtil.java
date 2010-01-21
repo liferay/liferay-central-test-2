@@ -42,16 +42,16 @@ public class InfrastructureUtil {
 		return _dynamicDataSourceTargetSource;
 	}
 
+	public static Session getMailSession() {
+		return _mailSession;
+	}
+
 	public static Object getShardDataSourceTargetSource() {
 		return _shardDataSourceTargetSource;
 	}
 
 	public static Object getShardSessionFactoryTargetSource() {
 		return _shardSessionFactoryTargetSource;
-	}
-
-	public static Session getMailSession() {
-		return _mailSession;
 	}
 
 	public void setDataSource(DataSource dataSource) {
