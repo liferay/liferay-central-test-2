@@ -29,8 +29,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.concurrent.CompeteLatch;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Dummy;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.sql.Connection;
@@ -186,7 +190,7 @@ public class CounterPersistenceImpl
 
 		long rangeMin = -1;
 		long rangeMax = -1;
-		int rangeSize = getRangeSize();
+		int rangeSize = getRangeSize(name);
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -284,8 +288,34 @@ public class CounterPersistenceImpl
 		}
 	}
 
-	protected int getRangeSize() {
-		return PropsValues.COUNTER_INCREMENT;
+	protected int getRangeSize(String name) {
+		if (name.equals(_NAME)) {
+			return PropsValues.COUNTER_INCREMENT;
+		}
+
+		String incrementType = null;
+
+		int pos = name.indexOf(StringPool.POUND);
+
+		if (pos != -1) {
+			incrementType = name.substring(0, pos);
+		}
+		else {
+			incrementType = name;
+		}
+
+		Integer rangeSize = _rangeSizeMap.get(incrementType);
+
+		if (rangeSize == null) {
+			rangeSize = GetterUtil.getInteger(
+				PropsUtil.get(
+					PropsKeys.COUNTER_INCREMENT_PREFIX + incrementType),
+				PropsValues.COUNTER_INCREMENT);
+
+			_rangeSizeMap.put(incrementType, rangeSize);
+		}
+
+		return rangeSize.intValue();
 	}
 
 	private long _competeIncrement(CounterRegister counterRegister, int size)
@@ -399,7 +429,9 @@ public class CounterPersistenceImpl
 	private static final String _SQL_UPDATE_NAME_BY_NAME =
 		"update Counter set name = ? where name = ?";
 
-	private static Map<String, CounterRegister> _counterRegisterMap =
+	private Map<String, CounterRegister> _counterRegisterMap =
 		new ConcurrentHashMap<String, CounterRegister>();
+	private Map<String, Integer> _rangeSizeMap =
+		new ConcurrentHashMap<String, Integer>();
 
 }

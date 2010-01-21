@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
@@ -96,6 +97,18 @@ import java.util.Set;
  * @author Bruno Farache
  */
 public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
+
+	public static String getCounterName(long groupId, boolean privateLayout) {
+		StringBundler sb = new StringBundler();
+
+		sb.append(Layout.class.getName());
+		sb.append(StringPool.POUND);
+		sb.append(groupId);
+		sb.append(StringPool.POUND);
+		sb.append(privateLayout);
+
+		return sb.toString();
+	}
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
@@ -348,6 +361,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Layout set
 
 		layoutSetLocalService.updatePageCount(groupId, privateLayout);
+
+		// Counter
+
+		counterLocalService.reset(getCounterName(groupId, privateLayout));
 	}
 
 	public byte[] exportLayouts(
@@ -589,17 +606,25 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public long getNextLayoutId(long groupId, boolean privateLayout)
 		throws SystemException {
 
-		List<Layout> layouts = layoutPersistence.findByG_P(
-			groupId, privateLayout, 0, 1, new LayoutComparator());
+		long nextLayoutId = counterLocalService.increment(
+			getCounterName(groupId, privateLayout));
 
-		if (layouts.isEmpty()) {
-			return 1;
-		}
-		else {
-			Layout layout = layouts.get(0);
+		if (nextLayoutId == 1) {
+			List<Layout> layouts = layoutPersistence.findByG_P(
+				groupId, privateLayout, 0, 1, new LayoutComparator());
 
-			return layout.getLayoutId() + 1;
+			if (!layouts.isEmpty()) {
+				Layout layout = layouts.get(0);
+
+				nextLayoutId = layout.getLayoutId() + 1;
+
+				counterLocalService.reset(
+					getCounterName(groupId, privateLayout),
+					layout.getLayoutId());
+			}
 		}
+
+		return nextLayoutId;
 	}
 
 	public List<Layout> getNullFriendlyURLLayouts() throws SystemException {

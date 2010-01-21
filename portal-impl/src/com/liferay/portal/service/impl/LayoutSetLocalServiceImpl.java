@@ -111,6 +111,11 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		// Layout set
 
 		layoutSetPersistence.removeByG_P(groupId, privateLayout);
+
+		// Counter
+
+		counterLocalService.reset(
+			LayoutLocalServiceImpl.getCounterName(groupId, privateLayout));
 	}
 
 	public LayoutSet getLayoutSet(long groupId, boolean privateLayout)
