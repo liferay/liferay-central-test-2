@@ -736,8 +736,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			LinkedHashMap<String, Object> params, int start, int end)
 		throws SystemException {
 
-		return groupFinder.findByC_N_D(
-			companyId, name, description, params, start, end, null);
+		return search(companyId, name, description, params, start, end, null);
 	}
 
 	public List<Group> search(
