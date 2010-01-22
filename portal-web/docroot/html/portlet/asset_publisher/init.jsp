@@ -288,8 +288,8 @@ String[] conversions = DocumentConversionUtil.getConversions("html");
 String[] extensions = preferences.getValues("extensions", new String[0]);
 boolean openOfficeServerEnabled = PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED);
 boolean enableConversions = openOfficeServerEnabled && (extensions != null) && (extensions.length > 0);
-boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags", null));
 boolean enablePrint = GetterUtil.getBoolean(preferences.getValue("enable-print", null));
+boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags", null));
 
 String defaultMetadataFields = StringPool.BLANK;
 String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count,categories,tags";
