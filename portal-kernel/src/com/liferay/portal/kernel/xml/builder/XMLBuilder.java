@@ -20,50 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.xml;
+package com.liferay.portal.kernel.xml.builder;
 
 /**
  * <a href="XMLBuilder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class XMLBuilder {
 
-	public static BuilderElement createRootElement(String name) {
-		return new BuilderElement(name);
+	public static Element addElement(Element parentElement, String name) {
+		return new Element(parentElement, name);
 	}
 
-	public static BuilderElement createRootElement(String name, String text) {
-		return new BuilderElement(name, text);
-	}
+	public static Element addElement(
+		Element parentElement, String name, Object obj) {
 
-	public static BuilderElement createRootElement(String name, Object obj) {
 		if (obj == null) {
-			return new BuilderElement(name);
+			return new Element(parentElement, name);
 		}
 		else {
-			return new BuilderElement(name, String.valueOf(obj));
+			return new Element(parentElement, name, String.valueOf(obj));
 		}
 	}
 
-	public static BuilderElement addElement(
-		BuilderElement parentElement, String name) {
-		return new BuilderElement(parentElement, name);
+	public static Element addElement(
+		Element parentElement, String name, String text) {
+
+		return new Element(parentElement, name, text);
 	}
 
-	public static BuilderElement addElement(
-		BuilderElement parentElement, String name, String text) {
-		return new BuilderElement(parentElement, name, text);
+	public static Element createRootElement(String name) {
+		return new Element(name);
 	}
 
-	public static BuilderElement addElement(
-		BuilderElement parentElement, String name, Object obj) {
+	public static Element createRootElement(String name, Object obj) {
 		if (obj == null) {
-			return new BuilderElement(parentElement, name);
+			return new Element(name);
 		}
 		else {
-			return new BuilderElement(parentElement, name, String.valueOf(obj));
+			return new Element(name, String.valueOf(obj));
 		}
+	}
+
+	public static Element createRootElement(String name, String text) {
+		return new Element(name, text);
 	}
 
 }
