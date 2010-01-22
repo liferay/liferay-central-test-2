@@ -999,6 +999,21 @@ public class HttpImpl implements Http {
 			InputStream is = httpMethod.getResponseBodyAsStream();
 
 			if (is != null) {
+				Header contentLength =
+					httpMethod.getResponseHeader(HttpHeaders.CONTENT_LENGTH);
+
+				if (contentLength != null) {
+					response.setContentLength(
+						Integer.parseInt(contentLength.getValue()));
+				}
+
+				Header contentType =
+					httpMethod.getResponseHeader(HttpHeaders.CONTENT_TYPE);
+
+				if (contentType != null) {
+					response.setContentType(contentType.getValue());
+				}
+
 				bytes = FileUtil.getBytes(is);
 
 				is.close();

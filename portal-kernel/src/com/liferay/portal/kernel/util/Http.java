@@ -432,14 +432,32 @@ public interface Http {
 
 	public class Response {
 
+		public int getContentLength() {
+			return _contentLength;
+		}
+
+		public String getContentType() {
+			return _contentType;
+		}
+
 		public String getRedirect() {
 			return _redirect;
+		}
+
+		public void setContentLength(int contentLength) {
+			_contentLength = contentLength;
+		}
+
+		public void setContentType(String contentType) {
+			_contentType = contentType;
 		}
 
 		public void setRedirect(String redirect) {
 			_redirect = redirect;
 		}
 
+		private String _contentType;
+		private int _contentLength = -1;
 		private String _redirect;
 
 	}
