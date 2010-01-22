@@ -120,6 +120,7 @@ import javax.servlet.ServletContext;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Wesley Gong
  */
 public class HookHotDeployListener
 	extends BaseHotDeployListener implements PropsKeys {
@@ -659,18 +660,25 @@ public class HookHotDeployListener
 	}
 
 	protected File getPortalJspBackupFile(File portalJspFile) {
-		String fileName = portalJspFile.toString();
+		String fileName = portalJspFile.getName();
+		String filePath = portalJspFile.toString();
 
-		if (fileName.endsWith(".jsp")) {
+		int fileNameIndex = fileName.lastIndexOf(StringPool.PERIOD);
+
+		if (fileNameIndex > 0) {
+			int filePathIndex = filePath.lastIndexOf(fileName);
+
 			fileName =
-				fileName.substring(0, fileName.length() - 4) + ".portal.jsp";
+				fileName.substring(0, fileNameIndex) + ".portal" +
+					fileName.substring(fileNameIndex);
+
+			filePath = filePath.substring(0, filePathIndex) + fileName;
 		}
-		else if (fileName.endsWith(".jspf")) {
-			fileName =
-				fileName.substring(0, fileName.length() - 5) + ".portal.jspf";
+		else {
+			filePath += ".portal";
 		}
 
-		return new File(fileName);
+		return new File(filePath);
 	}
 
 	protected void initAuthenticators(
@@ -838,9 +846,7 @@ public class HookHotDeployListener
 				FileUtil.copyFile(portalJspFile, portalJspBackupFile);
 			}
 
-			String customJspContent = FileUtil.read(customJsp);
-
-			FileUtil.write(portalJspFile, customJspContent);
+			FileUtil.copyFile(customJsp, portalWebDir + portalJsp);
 		}
 	}
 
