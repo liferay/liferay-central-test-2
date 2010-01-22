@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.io.File;
+import java.io.InputStream;
 
 /**
  * <a href="MimeTypesUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,8 +37,8 @@ import java.io.File;
  */
 public class MimeTypesUtil {
 
-	public static String getContentType(File file) {
-		return getMimeTypes().getContentType(file);
+	public static String getContentType(InputStream is, String fileName) {
+		return getMimeTypes().getContentType(is, fileName);
 	}
 
 	public static String getContentType(String fileName) {

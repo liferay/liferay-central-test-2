@@ -1,0 +1,42 @@
+# OpenOffice.org / StarOffice documents
+0	string		PK\003\004
+>4	byte		0x14
+>>30	string		mimetype
+
+# OpenOffice formats (for OpenOffice 1.x / StarOffice 6/7)
+>>>50	string	vnd.sun.xml.
+>>>>62	string	writer			application/vnd.sun.xml.writer
+>>>>>68	byte	!0x2e			application/vnd.sun.xml.writer
+>>>>>68	string	.template		application/vnd.sun.xml.writer.template
+>>>>>68	string	.global			application/vnd.sun.xml.global
+>>>>62	string	calc			application/vnd.sun.xml.calc
+>>>>>66	byte	!0x2e			application/vnd.sun.xml.calc
+>>>>>66	string	.template		application/vnd.sun.xml.calc.template
+>>>>62	string	draw			application/vnd.sun.xml.draw
+>>>>>66	byte	!0x2e			application/vnd.sun.xml.draw
+>>>>>66	string	.template		application/vnd.sun.xml.draw.template
+>>>>62	string	impress			application/vnd.sun.xml.impress
+>>>>>69	byte	!0x2e			application/vnd.sun.xml.impress
+>>>>>69	string	.template		application/vnd.sun.xml.impress.template
+>>>>62	string	math			application/vnd.sun.xml.math
+
+# OpenDocument formats (for OpenOffice 2.x / StarOffice >= 8)
+# http://lists.oasis-open.org/archives/office/200505/msg00006.html
+>>>50	string	vnd.oasis.opendocument.
+>>>>73	string	text
+>>>>>77	byte	!0x2d			application/vnd.oasis.opendocument.text
+>>>>>77	string	-template		application/vnd.oasis.opendocument.text-template
+>>>>>77	string	-web			application/vnd.oasis.opendocument.text-web
+>>>>>77	string	-master			application/vnd.oasis.opendocument.text-master
+>>>>73	string	graphics		application/vnd.oasis.opendocument.graphics
+>>>>>81	string	-template		application/vnd.oasis.opendocument.graphics.template
+>>>>73	string	presentation		application/vnd.oasis.opendocument.presentation
+>>>>>85	string	-template		application/vnd.oasis.opendocument.presentation-template
+>>>>73	string	spreadsheet		application/vnd.oasis.opendocument.spreadsheet
+>>>>>84	string	-template		application/vnd.oasis.opendocument.spreadsheet-template
+>>>>73	string	chart			application/vnd.oasis.opendocument.chart
+>>>>>78	string	-template		application/vnd.oasis.opendocument.chart-template
+>>>>73	string	formula			application/vnd.oasis.opendocument.formula
+>>>>>80	string	-template		application/vnd.oasis.opendocument.formula-template
+>>>>73	string	database		application/vnd.oasis.opendocument.database
+>>>>73	string	image			application/vnd.oasis.opendocument.image

@@ -24,10 +24,22 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.MimeTypes;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
-import java.io.File;
+import eu.medsea.mimeutil.MimeType;
+import eu.medsea.mimeutil.MimeUtil;
+import eu.medsea.mimeutil.TextMimeType;
+import eu.medsea.util.EncodingGuesser;
+
+import java.io.InputStream;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.activation.MimetypesFileTypeMap;
 
@@ -36,22 +48,46 @@ import javax.activation.MimetypesFileTypeMap;
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
 public class MimeTypesImpl implements MimeTypes {
 
-	public String getContentType(File file) {
-		String contentType = _mimeTypes.getContentType(file);
+	public String getContentType(InputStream is, String fileName) {
+		List<MimeType> types =
+			new ArrayList<MimeType>(MimeUtil.getMimeTypes(is));
+
+		MimeType type = types.get(0);
+
+		if (types.size() > 1 && (type instanceof TextMimeType)) {
+			type = types.get(1);
+		}
+
+		String contentType = type.getMediaType() + "/" + type.getSubType();
+
+		if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
+			contentType = getContentType(fileName);
+		}
+		else if (contentType.equals(ContentTypes.APPLICATION_ZIP)) {
+			String typeByFileName = getContentType(fileName);
+
+			if (typeByFileName.contains("vnd.openxmlformats")) {
+				contentType = typeByFileName;
+			}
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Content type " + contentType + " returned for file " +
-					file.toString());
+				"Content type " + contentType + " returned for InputStream");
 		}
 
 		return contentType;
 	}
 
 	public String getContentType(String fileName) {
+		if (Validator.isNull(fileName)) {
+			return ContentTypes.APPLICATION_OCTET_STREAM;
+		}
+
 		if (!fileName.contains(StringPool.PERIOD)) {
 			fileName = StringPool.PERIOD + fileName;
 		}
@@ -70,5 +106,17 @@ public class MimeTypesImpl implements MimeTypes {
 	private static Log _log = LogFactoryUtil.getLog(MimeTypesImpl.class);
 
 	private MimetypesFileTypeMap _mimeTypes = new MimetypesFileTypeMap();
+
+	static {
+		MimeUtil.registerMimeDetector(
+			"eu.medsea.mimeutil.detector.MagicMimeMimeDetector");
+
+		Collection<String> encodings = new HashSet<String>();
+
+		encodings.add(StringPool.UTF8);
+		encodings.add(System.getProperty("file.encoding"));
+
+		EncodingGuesser.setSupportedEncodings(encodings);
+	}
 
 }
