@@ -505,7 +505,6 @@ AUI().add(
 							flashObj.setStyles(
 								{
 									left: left,
-									position: 'absolute',
 									top: top,
 									zIndex: 100000
 								}
@@ -658,6 +657,12 @@ AUI().add(
 						debug: false
 					}
 				);
+
+				var movieElement = instance._uploader.getMovieElement();
+
+				if (movieElement) {
+					movieElement.style.position = 'absolute';
+				}
 
 				window[instance._swfUpload] = instance._uploader;
 			},
