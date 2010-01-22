@@ -245,7 +245,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		</aui:button-row>
 	</aui:fieldset>
 
-	<h3><liferay-ui:message key="import-export" /></h3>
+	<h3><liferay-ui:message key="export" /></h3>
 
 	<aui:fieldset>
 		<aui:input cssClass="lfr-input-text-container" label="users-dn" name='<%= "settings(" + PropsKeys.LDAP_USERS_DN + postfix + ")" %>' type="text" value="<%= ldapUsersDN %>" />
