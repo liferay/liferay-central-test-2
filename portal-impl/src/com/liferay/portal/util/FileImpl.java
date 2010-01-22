@@ -80,6 +80,32 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		return _instance;
 	}
 
+	public FileImpl() {
+		Class<?>[] textExtractorClasses = new Class[] {
+			JerichoHTMLTextExtractor.class, MsExcelTextExtractor.class,
+			MsPowerPointTextExtractor.class, MsWordTextExtractor.class,
+			OpenOfficeTextExtractor.class, PdfTextExtractor.class,
+			PlainTextExtractor.class, RTFTextExtractor.class,
+			XMLTextExtractor.class
+		};
+
+		for (Class<?> textExtractorClass : textExtractorClasses) {
+			try {
+				TextExtractor textExtractor =
+					(TextExtractor)textExtractorClass.newInstance();
+
+				String[] contentTypes = textExtractor.getContentTypes();
+
+				for (String contentType : contentTypes) {
+					_textExtractors.put(contentType, textExtractor);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+	}
+
 	public void copyDirectory(String sourceDirName, String destinationDirName) {
 		copyDirectory(new File(sourceDirName), new File(destinationDirName));
 	}
@@ -256,24 +282,22 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 			String contentType = MimeTypesUtil.getContentType(is, fileExt);
 
-			Class extractorClass = _textExtractorMap.get(contentType);
+			TextExtractor textExtractor = _textExtractors.get(contentType);
 
-			if (extractorClass != null) {
-				TextExtractor extractor =
-					(TextExtractor)extractorClass.newInstance();
-
+			if (textExtractor != null) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Using extractor " + extractor.getClass().getName());
+						"Using text extractor " +
+							textExtractor.getClass().getName());
 				}
 
 				StringBuilder sb = new StringBuilder();
 
 				UnsyncBufferedReader unsyncBufferedReader =
 					new UnsyncBufferedReader(
-						extractor.extractText(is, contentType, null));
+						textExtractor.extractText(is, contentType, null));
 
-				int i;
+				int i = 0;
 
 				while ((i = unsyncBufferedReader.read()) != -1) {
 					sb.append((char)i);
@@ -285,7 +309,8 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			}
 			else {
 				if (_log.isInfoEnabled()) {
-					_log.info("No extractor found");
+					_log.info(
+						"No text extractor found for extension " + fileExt);
 				}
 			}
 		}
@@ -711,35 +736,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 	private static FileImpl _instance = new FileImpl();
 
-	private static Map<String, Class> _textExtractorMap =
-		new HashMap<String, Class>();
-
-	static {
-		Class [] extractors = new Class[] {
-				JerichoHTMLTextExtractor.class,
-				MsExcelTextExtractor.class,
-				MsPowerPointTextExtractor.class,
-				MsWordTextExtractor.class,
-				OpenOfficeTextExtractor.class,
-				PdfTextExtractor.class,
-				PlainTextExtractor.class,
-				RTFTextExtractor.class,
-				XMLTextExtractor.class
-		};
-
-		for (Class extractor : extractors) {
-			try {
-				TextExtractor temp = (TextExtractor)extractor.newInstance();
-
-				String[] contentTypes = temp.getContentTypes();
-
-				for (String contentType : contentTypes) {
-					_textExtractorMap.put(contentType, extractor);
-				}
-			}
-			catch (Exception e) {
-			}
-		}
-	}
+	private Map<String, TextExtractor> _textExtractors =
+		new HashMap<String, TextExtractor>();
 
 }
