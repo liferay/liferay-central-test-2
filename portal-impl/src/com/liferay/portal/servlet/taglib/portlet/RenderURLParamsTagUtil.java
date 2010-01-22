@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -34,6 +35,7 @@ import java.util.StringTokenizer;
 
 import javax.portlet.PortletURL;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
@@ -54,7 +56,7 @@ public class RenderURLParamsTagUtil {
 			String params = StringPool.BLANK;
 
 			if (portletURL != null) {
-				params = _toParamsString(portletURL);
+				params = _toParamsString(portletURL, pageContext);
 
 				pageContext.getOut().print(params);
 			}
@@ -68,12 +70,22 @@ public class RenderURLParamsTagUtil {
 		}
 	}
 
-	private static String _toParamsString(PortletURL portletURL)
+	private static String _toParamsString(
+			PortletURL portletURL, PageContext pageContext)
 		throws Exception {
 
 		StringBuilder sb = new StringBuilder();
 
 		String url = portletURL.toString();
+
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		if (ParamUtil.getBoolean(request, "wsrp")) {
+			int x = url.indexOf("/wsrp_rewrite");
+
+			url = url.substring(0, x);
+		}
 
 		String queryString = HttpUtil.getQueryString(url);
 
