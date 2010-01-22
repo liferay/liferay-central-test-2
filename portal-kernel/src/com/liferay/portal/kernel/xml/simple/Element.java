@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.xml.builder;
+package com.liferay.portal.kernel.xml.simple;
 
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -80,6 +80,42 @@ public class Element {
 		_stringBundler.append(StringPool.QUOTE);
 		_stringBundler.append(value);
 		_stringBundler.append(StringPool.QUOTE);
+	}
+
+	public Element addElement(String name) {
+		return addElement(name, null);
+	}
+
+	public Element addElement(String name, boolean text) {
+		return addElement(name, String.valueOf(text));
+	}
+
+	public Element addElement(String name, double text) {
+		return addElement(name, String.valueOf(text));
+	}
+
+	public Element addElement(String name, float text) {
+		return addElement(name, String.valueOf(text));
+	}
+
+	public Element addElement(String name, int text) {
+		return addElement(name, String.valueOf(text));
+	}
+
+	public Element addElement(String name, long text) {
+		return addElement(name, String.valueOf(text));
+	}
+
+	public Element addElement(String name, Object text) {
+		return addElement(name, String.valueOf(text));
+	}
+
+	public Element addElement(String name, short text) {
+		return addElement(name, String.valueOf(text));
+	}
+
+	public Element addElement(String name, String text) {
+		return new Element(this, name, text);
 	}
 
 	public String getName() {
