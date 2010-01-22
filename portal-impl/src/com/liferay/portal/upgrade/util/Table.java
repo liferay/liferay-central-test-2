@@ -368,6 +368,11 @@ public class Table {
 			SystemProperties.get(SystemProperties.TMP_DIR) + "/temp-db-" +
 				_tableName + "-" + System.currentTimeMillis();
 
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Starting backup of " + _tableName + " to " + tempFileName);
+		}
+
 		String selectSQL = getSelectSQL();
 
 		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
@@ -399,9 +404,9 @@ public class Table {
 				}
 			}
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					_tableName + " table backed up to file " + tempFileName);
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Finished backup of " + _tableName + " to " + tempFileName);
 			}
 		}
 		catch (Exception e) {
