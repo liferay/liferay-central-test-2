@@ -44,7 +44,8 @@ User selUser = PortalUtil.getSelectedUser(request);
 			<aui:input name="p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
 
 			<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
-			<liferay-ui:error exception="<%= UserPortraitException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+			<liferay-ui:error exception="<%= UserPortraitSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+			<liferay-ui:error exception="<%= UserPortraitTypeException.class %>" message="file-type-is-invalid" />
 
 			<aui:fieldset>
 				<aui:input label='<%= LanguageUtil.format(pageContext, "upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide", new Object[] {"120", "100"}, false) %>' name="fileName" size="50" type="file" />

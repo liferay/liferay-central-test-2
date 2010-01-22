@@ -45,7 +45,8 @@ import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
-import com.liferay.portal.UserPortraitException;
+import com.liferay.portal.UserPortraitSizeException;
+import com.liferay.portal.UserPortraitTypeException;
 import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
@@ -2247,7 +2248,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if ((imageMaxSize > 0) &&
 			((bytes == null) || (bytes.length > imageMaxSize))) {
 
-			throw new UserPortraitException();
+			throw new UserPortraitSizeException();
 		}
 
 		long portraitId = user.getPortraitId();
@@ -2264,6 +2265,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			ImageBag imageBag = ImageProcessorUtil.read(bytes);
 
 			RenderedImage renderedImage = imageBag.getRenderedImage();
+
+			if (renderedImage == null) {
+				throw new UserPortraitTypeException();
+			}
 
 			renderedImage = ImageProcessorUtil.scale(
 				renderedImage, PropsValues.USERS_IMAGE_MAX_HEIGHT,

@@ -23,7 +23,8 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.UserPortraitException;
+import com.liferay.portal.UserPortraitSizeException;
+import com.liferay.portal.UserPortraitTypeException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -75,7 +76,8 @@ public class EditUserPortraitAction extends PortletAction {
 				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof UploadException ||
-					 e instanceof UserPortraitException) {
+					 e instanceof UserPortraitSizeException ||
+					 e instanceof UserPortraitTypeException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}

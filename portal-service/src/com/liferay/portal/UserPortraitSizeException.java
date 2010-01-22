@@ -23,25 +23,25 @@
 package com.liferay.portal;
 
 /**
- * <a href="UserPortraitException.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserPortraitSizeException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class UserPortraitException extends PortalException {
+public class UserPortraitSizeException extends PortalException {
 
-	public UserPortraitException() {
+	public UserPortraitSizeException() {
 		super();
 	}
 
-	public UserPortraitException(String msg) {
+	public UserPortraitSizeException(String msg) {
 		super(msg);
 	}
 
-	public UserPortraitException(String msg, Throwable cause) {
+	public UserPortraitSizeException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public UserPortraitException(Throwable cause) {
+	public UserPortraitSizeException(Throwable cause) {
 		super(cause);
 	}
 
