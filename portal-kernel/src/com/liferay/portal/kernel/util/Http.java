@@ -380,6 +380,10 @@ public interface Http {
 			}
 		}
 
+		public void setFollowRedirects(boolean followRedirects) {
+			_followRedirects = followRedirects;
+		}
+
 		public void setHeaders(Map<String, String> headers) {
 			_headers = headers;
 		}
