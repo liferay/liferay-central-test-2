@@ -30,8 +30,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 
-import java.util.Properties;
 import java.io.IOException;
+
+import java.util.Properties;
+
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.distribution.CacheManagerPeerProvider;
 
@@ -65,7 +67,6 @@ public class RMICacheManagerPeerProviderFactory
 			portalPropertiesString, StringPool.COMMA, StringPool.NEW_LINE);
 
 		Properties portalProperties = null;
-		
 
 		try {
 			portalProperties = PropertiesUtil.load(
