@@ -22,14 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.io.File;
 import java.io.InputStream;
 
 /**
  * <a href="MimeTypesUtil.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * Additional MIME types should be added to the file META-INF/mime.types.
- * </p>
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
@@ -37,8 +34,14 @@ import java.io.InputStream;
  */
 public class MimeTypesUtil {
 
-	public static String getContentType(InputStream is, String fileName) {
-		return getMimeTypes().getContentType(is, fileName);
+	public static String getContentType(File file) {
+		return getMimeTypes().getContentType(file);
+	}
+
+	public static String getContentType(
+		InputStream inputStream, String fileName) {
+
+		return getMimeTypes().getContentType(inputStream, fileName);
 	}
 
 	public static String getContentType(String fileName) {

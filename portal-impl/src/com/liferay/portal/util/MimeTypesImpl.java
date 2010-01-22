@@ -32,8 +32,12 @@ import com.liferay.portal.kernel.util.Validator;
 import eu.medsea.mimeutil.MimeType;
 import eu.medsea.mimeutil.MimeUtil;
 import eu.medsea.mimeutil.TextMimeType;
+import eu.medsea.mimeutil.detector.MagicMimeMimeDetector;
 import eu.medsea.util.EncodingGuesser;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -46,38 +50,63 @@ import javax.activation.MimetypesFileTypeMap;
 /**
  * <a href="MimeTypesImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * Additional MIME types should be added to META-INF/mime.types or magic.mime.
+ * </p>
+ *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */
 public class MimeTypesImpl implements MimeTypes {
 
-	public String getContentType(InputStream is, String fileName) {
-		List<MimeType> types =
-			new ArrayList<MimeType>(MimeUtil.getMimeTypes(is));
+	public MimeTypesImpl() {
+		MimeUtil.registerMimeDetector(MagicMimeMimeDetector.class.getName());
 
-		MimeType type = types.get(0);
+		Collection<String> encodings = new HashSet<String>();
 
-		if (types.size() > 1 && (type instanceof TextMimeType)) {
-			type = types.get(1);
+		encodings.add(StringPool.UTF8);
+		encodings.add(System.getProperty("file.encoding"));
+
+		EncodingGuesser.setSupportedEncodings(encodings);
+	}
+
+	public String getContentType(File file) {
+		try {
+			return getContentType(new FileInputStream(file), file.getName());
+		}
+		catch (FileNotFoundException fnfe) {
+			return getContentType(file.getName());
+		}
+	}
+
+	public String getContentType(InputStream inputStream, String fileName) {
+		List<MimeType> mimeTypes = new ArrayList<MimeType>(
+			MimeUtil.getMimeTypes(inputStream));
+
+		MimeType mimeType = mimeTypes.get(0);
+
+		if ((mimeTypes.size() > 1) && (mimeType instanceof TextMimeType)) {
+			mimeType = mimeTypes.get(1);
 		}
 
-		String contentType = type.getMediaType() + "/" + type.getSubType();
+		String contentType =
+			mimeType.getMediaType() + StringPool.SLASH + mimeType.getSubType();
 
 		if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
 			contentType = getContentType(fileName);
 		}
 		else if (contentType.equals(ContentTypes.APPLICATION_ZIP)) {
-			String typeByFileName = getContentType(fileName);
+			String contentTypeByFileName = getContentType(fileName);
 
-			if (typeByFileName.contains("vnd.openxmlformats")) {
-				contentType = typeByFileName;
+			if (contentTypeByFileName.contains("vnd.openxmlformats")) {
+				contentType = contentTypeByFileName;
 			}
 		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Content type " + contentType + " returned for InputStream");
+				"Content type " + contentType + " returned for " + fileName);
 		}
 
 		return contentType;
@@ -106,17 +135,5 @@ public class MimeTypesImpl implements MimeTypes {
 	private static Log _log = LogFactoryUtil.getLog(MimeTypesImpl.class);
 
 	private MimetypesFileTypeMap _mimeTypes = new MimetypesFileTypeMap();
-
-	static {
-		MimeUtil.registerMimeDetector(
-			"eu.medsea.mimeutil.detector.MagicMimeMimeDetector");
-
-		Collection<String> encodings = new HashSet<String>();
-
-		encodings.add(StringPool.UTF8);
-		encodings.add(System.getProperty("file.encoding"));
-
-		EncodingGuesser.setSupportedEncodings(encodings);
-	}
 
 }
