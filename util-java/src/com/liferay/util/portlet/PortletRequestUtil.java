@@ -85,29 +85,29 @@ public class PortletRequestUtil {
 			_log.info("The given request is NOT a multipart request");
 		}
 
-		// Check for the number of file items
+		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
 
-		DiskFileItemFactory factory = new DiskFileItemFactory();
+		PortletFileUpload portletFileUpload = new PortletFileUpload(
+			diskFileItemFactory);
 
-		PortletFileUpload upload = new PortletFileUpload(factory);
-
-		List<DiskFileItem> fileItems = upload.parseRequest(actionRequest);
+		List<DiskFileItem> diskFileItems = portletFileUpload.parseRequest(
+			actionRequest);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Apache commons upload was able to parse " + fileItems.size() +
-					" items");
+				"Apache commons upload was able to parse " +
+					diskFileItems.size() + " items");
 		}
 
-		for (int i = 0; i < fileItems.size(); i++) {
-			DiskFileItem fileItem = fileItems.get(i);
+		for (int i = 0; i < diskFileItems.size(); i++) {
+			DiskFileItem diskFileItem = diskFileItems.get(i);
 
 			if (_log.isInfoEnabled()) {
-				_log.info("Item " + i + " " + fileItem);
+				_log.info("Item " + i + " " + diskFileItem);
 			}
 		}
 
-		return fileItems;
+		return diskFileItems;
 	}
 
 	public static int testMultipartWithPortletInputStream(
@@ -116,15 +116,15 @@ public class PortletRequestUtil {
 
 		// Read directly from the portlet input stream
 
-		InputStream is = actionRequest.getPortletInputStream();
+		InputStream inputStream = actionRequest.getPortletInputStream();
 
-		if (is != null) {
-			UnsyncByteArrayOutputStream ubaos =
+		if (inputStream != null) {
+			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream();
 
-			StreamUtil.transfer(is, ubaos);
+			StreamUtil.transfer(inputStream, unsyncByteArrayOutputStream);
 
-			int size = ubaos.size();
+			int size = unsyncByteArrayOutputStream.size();
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
