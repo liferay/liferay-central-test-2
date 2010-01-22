@@ -39,6 +39,12 @@ public class AutoResetThreadLocal<T> extends InitialThreadLocal<T> {
 		super(initialValue);
 	}
 
+	public void set(T value) {
+		ThreadLocalRegistry.registerThreadLocal(this);
+
+		super.set(value);
+	}
+
 	protected T initialValue() {
 		ThreadLocalRegistry.registerThreadLocal(this);
 
