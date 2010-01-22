@@ -1,78 +1,93 @@
 Liferay.Portal = {};
 
 Liferay.Portal.Tabs = {
-	show: function(namespace, names, id) {
-		var callback = function(A) {
-			var tab = A.one('#' + namespace + id + 'TabsId');
-			var panel = A.one('#' + namespace + id + 'TabsSection');
+	show: function() {
+		var instance = this;
 
-			if (tab) {
-				tab.radioClass('aui-selected');
-				tab.radioClass('aui-state-active');
-				tab.radioClass('aui-tab-active');
-				tab.radioClass('current');
+		var args = arguments;
+
+		AUI().use(
+			'node',
+			function(A) {
+				instance.show = instance._show;
+
+				instance.show.apply(instance, args);
 			}
+		);
+	},
 
-			if (panel) {
-				panel.show();
-			}
-
-			var index = A.Array.indexOf(names, id);
-
-			names.splice(index, 1);
-
-			for (var i = 0; i < names.length; i++) {
-				el = A.one('#' + namespace + names[i] + 'TabsSection');
-
-				if (el) {
-					el.hide();
-				}
-			}
-		};
+	_show: function(namespace, names, id) {
+		var instance = this;
 
 		var A = AUI();
 
-		if (A.one) {
-			callback(A);
+		var tab = A.one('#' + namespace + id + 'TabsId');
+		var panel = A.one('#' + namespace + id + 'TabsSection');
+
+		if (tab) {
+			tab.radioClass('aui-selected');
+			tab.radioClass('aui-state-active');
+			tab.radioClass('aui-tab-active');
+			tab.radioClass('current');
 		}
-		else {
-			AUI().use('node', callback);
+
+		if (panel) {
+			panel.show();
+		}
+
+		var index = A.Array.indexOf(names, id);
+
+		names.splice(index, 1);
+
+		for (var i = 0; i < names.length; i++) {
+			el = A.one('#' + namespace + names[i] + 'TabsSection');
+
+			if (el) {
+				el.hide();
+			}
 		}
 	}
 };
 
-(function() {
-	var elementsCache = {};
+Liferay.Portal.ToolTip = {
+	show: function() {
+		var instance = this;
 
-	AUI().ready(
-		'tooltip',
-		'simulate',
-		function(A) {
+		if (!instance._cached) {
+			var args = arguments;
 
-			Liferay.Portal.ToolTip = {
-				show: function(obj, text) {
-					var cachedTooltip = Liferay.Portal.ToolTip.cached;
-
-					if (cachedTooltip) {
-						var trigger = cachedTooltip.get('trigger');
-						var newElement = trigger.indexOf(obj) == -1;
-
-						if (newElement) {
-							cachedTooltip.set('trigger', obj);
-							cachedTooltip.set('bodyContent', text);
-							cachedTooltip.show();
+			AUI().use(
+				'tooltip',
+				function(A) {
+					instance._cached = new A.Tooltip(
+						{
+							trigger: '.liferay-tooltip',
+							zIndex: 10000
 						}
+					).render();
 
-						cachedTooltip.refreshAlign();
-					}
+					instance.show = instance._show;
+
+					instance.show.apply(instance, args);
 				}
-			};
-
-			Liferay.Portal.ToolTip.cached = new A.Tooltip({
-				trigger: '.liferay-tooltip',
-				zIndex: 10000
-			})
-			.render();
+			);
 		}
-	);
-})();
+	},
+
+	_show: function(obj, text) {
+		var instance = this;
+
+		var cached = instance._cached;
+
+		var trigger = cached.get('trigger');
+		var newElement = (trigger.indexOf(obj) == -1);
+
+		if (newElement) {
+			cached.set('trigger', obj);
+			cached.set('bodyContent', text);
+			cached.show();
+		}
+
+		cached.refreshAlign();
+	},
+};
