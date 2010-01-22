@@ -89,5 +89,5 @@ Liferay.Portal.ToolTip = {
 		}
 
 		cached.refreshAlign();
-	},
+	}
 };
