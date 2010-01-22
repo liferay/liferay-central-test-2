@@ -55,20 +55,6 @@ public class DocUtil {
 		add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element element, String name, short text) {
-		add(element, name, String.valueOf(text));
-	}
-
-	public static void add(Element element, String name, Object text) {
-		add(element, name, String.valueOf(text));
-	}
-
-	public static void add(Element element, String name, String text) {
-		Element childElement = element.addElement(name);
-
-		childElement.addText(GetterUtil.getString(text));
-	}
-
 	public static Element add(
 		Element element, String name, Namespace namespace) {
 
@@ -108,13 +94,13 @@ public class DocUtil {
 	}
 
 	public static void add(
-		Element element, String name, Namespace namespace, short text) {
+		Element element, String name, Namespace namespace, Object text) {
 
 		add(element, name, namespace, String.valueOf(text));
 	}
 
 	public static void add(
-		Element element, String name, Namespace namespace, Object text) {
+		Element element, String name, Namespace namespace, short text) {
 
 		add(element, name, namespace, String.valueOf(text));
 	}
@@ -125,6 +111,20 @@ public class DocUtil {
 		QName qName = SAXReaderUtil.createQName(name, namespace);
 
 		Element childElement = element.addElement(qName);
+
+		childElement.addText(GetterUtil.getString(text));
+	}
+
+	public static void add(Element element, String name, Object text) {
+		add(element, name, String.valueOf(text));
+	}
+
+	public static void add(Element element, String name, short text) {
+		add(element, name, String.valueOf(text));
+	}
+
+	public static void add(Element element, String name, String text) {
+		Element childElement = element.addElement(name);
 
 		childElement.addText(GetterUtil.getString(text));
 	}
@@ -171,28 +171,10 @@ public class DocUtil {
 	/**
 	 * @deprecated
 	 */
-	public static void add(org.dom4j.Element element, String name, short text) {
-		add(element, name, String.valueOf(text));
-	}
-
-	/**
-	 * @deprecated
-	 */
 	public static void add(
 		org.dom4j.Element element, String name, Object text) {
 
 		add(element, name, String.valueOf(text));
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static void add(
-		org.dom4j.Element element, String name, String text) {
-
-		org.dom4j.Element childElement = element.addElement(name);
-
-		childElement.addText(GetterUtil.getString(text));
 	}
 
 	/**
@@ -261,7 +243,7 @@ public class DocUtil {
 	 */
 	public static void add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
-		short text) {
+		Object text) {
 
 		add(element, name, namespace, String.valueOf(text));
 	}
@@ -271,7 +253,7 @@ public class DocUtil {
 	 */
 	public static void add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
-		Object text) {
+		short text) {
 
 		add(element, name, namespace, String.valueOf(text));
 	}
@@ -286,6 +268,24 @@ public class DocUtil {
 		org.dom4j.QName qName = new org.dom4j.QName(name, namespace);
 
 		org.dom4j.Element childElement = element.addElement(qName);
+
+		childElement.addText(GetterUtil.getString(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(org.dom4j.Element element, String name, short text) {
+		add(element, name, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, String text) {
+
+		org.dom4j.Element childElement = element.addElement(name);
 
 		childElement.addText(GetterUtil.getString(text));
 	}
