@@ -40,7 +40,7 @@ public class ActionResponseImpl
 	public void sendRedirect(String location) {
 		if ((location == null) ||
 			(!location.startsWith("/") && (location.indexOf("://") == -1) &&
-				(!location.startsWith("wsrp_rewrite?")))) {
+			(!location.startsWith("wsrp_rewrite?")))) {
 
 			throw new IllegalArgumentException(
 				location + " is not a valid redirect");
