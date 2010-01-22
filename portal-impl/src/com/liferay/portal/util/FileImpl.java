@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileComparator;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -37,6 +37,7 @@ import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -49,7 +50,9 @@ import java.io.Writer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.jackrabbit.extractor.MsExcelTextExtractor;
@@ -247,93 +250,28 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		String text = null;
 
 		try {
-			fileExt = GetterUtil.getString(fileExt).toLowerCase();
-
-			TextExtractor extractor = null;
-
-			String contentType = null;
-			String encoding = System.getProperty("encoding");
-
-			if (fileExt.equals(".doc")) {
-				extractor = new MsWordTextExtractor();
-
-				contentType = "application/vnd.ms-word";
-			}
-			else if (fileExt.equals(".htm") || fileExt.equals(".html")) {
-				extractor = new JerichoHTMLTextExtractor();
-
-				contentType = "text/html";
-			}
-			else if (fileExt.equals(".odb") || fileExt.equals(".odf") ||
-					 fileExt.equals(".odg") || fileExt.equals(".odp") ||
-					 fileExt.equals(".ods") || fileExt.equals(".odt")) {
-
-				extractor = new OpenOfficeTextExtractor();
-
-				contentType = "application/vnd.oasis.opendocument.";
-
-				if (fileExt.equals(".odb")) {
-					contentType += "database";
-				}
-				else if (fileExt.equals(".odf")) {
-					contentType += "formula";
-				}
-				else if (fileExt.equals(".odg")) {
-					contentType += "graphics";
-				}
-				else if (fileExt.equals(".odp")) {
-					contentType += "presentation";
-				}
-				else if (fileExt.equals(".ods")) {
-					contentType += "spreadsheet";
-				}
-				else if (fileExt.equals(".odt")) {
-					contentType += "text";
-				}
-			}
-			else if (fileExt.equals(".pdf")) {
-				extractor = new PdfTextExtractor();
-
-				contentType = "application/pdf";
-			}
-			else if (fileExt.equals(".ppt")) {
-				extractor = new MsPowerPointTextExtractor();
-
-				contentType = "application/vnd.ms-powerpoint";
-			}
-			else if (fileExt.equals(".rtf")) {
-				extractor = new RTFTextExtractor();
-
-				contentType = "application/rtf";
-			}
-			else if (fileExt.equals(".txt")) {
-				extractor = new PlainTextExtractor();
-
-				contentType = "text/plain";
-			}
-			else if (fileExt.equals(".xls")) {
-				extractor = new MsExcelTextExtractor();
-
-				contentType = "application/vnd.ms-excel";
-			}
-			else if (fileExt.equals(".xml")) {
-				extractor = new XMLTextExtractor();
-
-				contentType = "text/xml";
+			if (!is.markSupported()) {
+				is = new BufferedInputStream(is);
 			}
 
-			if (extractor != null) {
+			String contentType = MimeTypesUtil.getContentType(is, fileExt);
+
+			Class extractorClass = _textExtractorMap.get(contentType);
+
+			if (extractorClass != null) {
+				TextExtractor extractor =
+					(TextExtractor)extractorClass.newInstance();
+
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Using extractor " + extractor.getClass().getName() +
-							" for extension " + fileExt);
+						"Using extractor " + extractor.getClass().getName());
 				}
 
 				StringBuilder sb = new StringBuilder();
 
 				UnsyncBufferedReader unsyncBufferedReader =
 					new UnsyncBufferedReader(
-						extractor.extractText(is, contentType, encoding));
+						extractor.extractText(is, contentType, null));
 
 				int i;
 
@@ -347,7 +285,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			}
 			else {
 				if (_log.isInfoEnabled()) {
-					_log.info("No extractor found for extension " + fileExt);
+					_log.info("No extractor found");
 				}
 			}
 		}
@@ -772,5 +710,36 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	private static Log _log = LogFactoryUtil.getLog(FileImpl.class);
 
 	private static FileImpl _instance = new FileImpl();
+
+	private static Map<String, Class> _textExtractorMap =
+		new HashMap<String, Class>();
+
+	static {
+		Class [] extractors = new Class[] {
+				JerichoHTMLTextExtractor.class,
+				MsExcelTextExtractor.class,
+				MsPowerPointTextExtractor.class,
+				MsWordTextExtractor.class,
+				OpenOfficeTextExtractor.class,
+				PdfTextExtractor.class,
+				PlainTextExtractor.class,
+				RTFTextExtractor.class,
+				XMLTextExtractor.class
+		};
+
+		for (Class extractor : extractors) {
+			try {
+				TextExtractor temp = (TextExtractor)extractor.newInstance();
+
+				String[] contentTypes = temp.getContentTypes();
+
+				for (String contentType : contentTypes) {
+					_textExtractorMap.put(contentType, extractor);
+				}
+			}
+			catch (Exception e) {
+			}
+		}
+	}
 
 }
