@@ -76,8 +76,12 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.cache.EhcachePortalCacheManager">
+	<category name="com.liferay.portal.cache.ehcache.EhcachePortalCacheManager">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.cache.ehcache.RMICacheManagerPeerProviderFactory">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.cluster">

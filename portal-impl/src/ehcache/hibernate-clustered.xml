@@ -2,8 +2,8 @@
 	<diskStore path="ehcache.disk.store.dir/hibernate" />
 	<cacheManagerEventListenerFactory class="" properties="" />
 	<cacheManagerPeerProviderFactory
-		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
-		properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.1,multicastGroupPort=4446,timeToLive=1"
+		class="com.liferay.portal.cache.ehcache.RMICacheManagerPeerProviderFactory"
+		properties="portalPropertyKey=net.sf.ehcache.configurationResourceName.peerProviderProperties"
 		propertySeparator=","
 	/>
 	<cacheManagerPeerListenerFactory
