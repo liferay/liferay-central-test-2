@@ -278,6 +278,10 @@ public interface Http {
 			return _cookies;
 		}
 
+		public boolean getFollowRedirects() {
+			return _followRedirects;
+		}
+
 		public Map<String, String> getHeaders() {
 			return _headers;
 		}
@@ -294,6 +298,10 @@ public interface Http {
 			return _parts;
 		}
 
+		public Response getResponse() {
+			return _response;
+		}
+
 		public boolean isDelete() {
 			if (_method == Method.DELETE) {
 				return true;
@@ -301,6 +309,10 @@ public interface Http {
 			else {
 				return false;
 			}
+		}
+
+		public boolean isFollowRedirects() {
+			return _followRedirects;
 		}
 
 		public boolean isGet() {
@@ -402,13 +414,33 @@ public interface Http {
 			}
 		}
 
+		public void setResponse(Response response) {
+			_response = response;
+		}
+
 		private Auth _auth;
 		private Body _body;
 		private Cookie[] _cookies;
 		private Map<String, String> _headers;
 		private String _location;
 		private Map<String, String> _parts;
+		private Response _response = new Response();
+		private boolean _followRedirects = true;
 		private Method _method = Method.GET;
+
+	}
+
+	public class Response {
+
+		public String getRedirect() {
+			return _redirect;
+		}
+
+		public void setRedirect(String redirect) {
+			_redirect = redirect;
+		}
+
+		private String _redirect;
 
 	}
 

@@ -687,7 +687,8 @@ public class HttpImpl implements Http {
 		return URLtoByteArray(
 			options.getLocation(), options.getMethod(), options.getHeaders(),
 			options.getCookies(), options.getAuth(), options.getBody(),
-			options.getParts());
+			options.getParts(), options.getResponse(),
+			options.isFollowRedirects());
 	}
 
 	public byte[] URLtoByteArray(String location) throws IOException {
@@ -856,7 +857,7 @@ public class HttpImpl implements Http {
 	protected byte[] URLtoByteArray(
 			String location, Http.Method method, Map<String, String> headers,
 			Cookie[] cookies, Http.Auth auth, Http.Body body, Map<String,
-			String> parts)
+			String> parts, Http.Response response, boolean followRedirects)
 		throws IOException {
 
 		byte[] bytes = null;
@@ -954,8 +955,6 @@ public class HttpImpl implements Http {
 			httpMethod.getParams().setIntParameter(
 				HttpClientParams.SO_TIMEOUT, 0);
 
-			//httpMethod.setFollowRedirects(true);
-
 			httpState = new HttpState();
 
 			if ((cookies != null) && (cookies.length > 0)) {
@@ -985,9 +984,16 @@ public class HttpImpl implements Http {
 			Header locationHeader = httpMethod.getResponseHeader("location");
 
 			if ((locationHeader != null) && !locationHeader.equals(location)) {
-				return URLtoByteArray(
-					locationHeader.getValue(), Http.Method.GET, headers,
-					cookies, auth, body, parts);
+				String redirect = locationHeader.getValue();
+
+				if (followRedirects) {
+					return URLtoByteArray(
+						redirect, Http.Method.GET, headers,
+						cookies, auth, body, parts, response, followRedirects);
+				}
+				else {
+					response.setRedirect(redirect);
+				}
 			}
 
 			InputStream is = httpMethod.getResponseBodyAsStream();
