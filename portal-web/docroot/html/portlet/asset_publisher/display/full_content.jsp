@@ -131,10 +131,23 @@ request.setAttribute("view.jsp-showIconLabel", true);
 		</c:if>
 
 		<c:if test="<%= enableRatings %>">
-			<liferay-ui:ratings
-				className="<%= assetEntry.getClassName() %>"
-				classPK="<%= assetEntry.getClassPK() %>"
-			/>
+			<div class="asset-ratings">
+				<liferay-ui:ratings
+					className="<%= assetEntry.getClassName() %>"
+					classPK="<%= assetEntry.getClassPK() %>"
+				/>
+			</div>
+		</c:if>
+
+		<c:if test="<%= enableFlags %>">
+			<div class="asset-flag">
+				<liferay-ui:flags
+					className="<%= assetEntry.getClassName() %>"
+					classPK="<%= assetEntry.getClassPK() %>"
+					contentTitle="<%= assetRenderer.getTitle() %>"
+					reportedUserId="<%= assetRenderer.getUserId() %>"
+				/>
+			</div>
 		</c:if>
 
 		<c:if test="<%= Validator.isNotNull(assetRenderer.getDiscussionPath()) && enableComments %>">
@@ -155,6 +168,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 				ratingsEnabled="<%= enableCommentRatings %>"
 			/>
 		</c:if>
+
 	</div>
 
 	<c:if test="<%= show %>">

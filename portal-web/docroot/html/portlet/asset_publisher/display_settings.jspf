@@ -99,6 +99,8 @@
 
 <aui:input inlineLabel="left" name="enablePrint" type="checkbox" value="<%= enablePrint %>" />
 
+<aui:input inlineLabel="left" name="enableFlags" type="checkbox" value="<%= enableFlags %>" />
+
 <aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
 
 <aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />

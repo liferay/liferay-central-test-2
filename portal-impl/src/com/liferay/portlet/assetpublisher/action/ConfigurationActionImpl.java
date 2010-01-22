@@ -275,15 +275,15 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
 			actionRequest, "enableCommentRatings");
+		boolean enableFlags = ParamUtil.getBoolean(
+				actionRequest, "enableFlags");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
 		String medatadaFields = ParamUtil.getString(
 			actionRequest, "metadataFields");
 
 		preferences.setValue("selection-style", "dynamic");
-
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
-
 		preferences.setValue("default-scope", String.valueOf(defaultScope));
 		preferences.setValues("scope-ids", ArrayUtil.toStringArray(scopeIds));
 		preferences.setValue("any-asset-type", String.valueOf(anyAssetType));
@@ -311,11 +311,12 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		preferences.setValues("extensions", extensions);
-		preferences.setValue("enable-print", String.valueOf(enablePrint));
-		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
+		preferences.setValue("enable-flags", String.valueOf(enableFlags));
+		preferences.setValue("enable-print", String.valueOf(enablePrint));
+		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
 		preferences.setValue("metadata-fields", medatadaFields);
 	}
 
@@ -342,6 +343,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
 			actionRequest, "enableCommentRatings");
+		boolean enableFlags = ParamUtil.getBoolean(
+				actionRequest, "enableFlags");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
 		boolean enableTagBasedNavigation = ParamUtil.getBoolean(
@@ -364,6 +367,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
+		preferences.setValue("enable-flags", String.valueOf(enableFlags));
 		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
 		preferences.setValue(
 			"enable-tag-based-navigation",

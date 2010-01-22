@@ -44,6 +44,10 @@
 	margin-right: 10px;
 }
 
+.portlet-asset-publisher .asset-flag {
+	margin-top: 1.8em;
+}
+
 .portlet-asset-publisher .asset-full-content .asset-content {
 	margin-right: 25px;
 }
@@ -87,6 +91,10 @@
 	background-color: #EEE;
 	clear: both;
 	padding: 3px;
+}
+
+.portlet-asset-publisher .asset-ratings {
+	float: left;
 }
 
 .portlet-asset-publisher .asset-small-image {
