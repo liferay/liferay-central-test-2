@@ -874,16 +874,16 @@ public class PortalUtil {
 		return getPortal().getSystemRoles();
 	}
 
-	public static UploadPortletRequest getUploadPortletRequest(
-		PortletRequest portletRequest) {
-
-		return getPortal().getUploadPortletRequest(portletRequest);
-	}
-
 	public static UploadServletRequest getUploadServletRequest(
 		HttpServletRequest request) {
 
 		return getPortal().getUploadServletRequest(request);
+	}
+
+	public static UploadPortletRequest getUploadPortletRequest(
+		PortletRequest portletRequest) {
+
+		return getPortal().getUploadPortletRequest(portletRequest);
 	}
 
 	public static Date getUptime() {

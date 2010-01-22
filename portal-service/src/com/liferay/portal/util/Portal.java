@@ -472,11 +472,11 @@ public interface Portal {
 
 	public String[] getSystemRoles();
 
-	public UploadPortletRequest getUploadPortletRequest(
-		PortletRequest portletRequest);
-
 	public UploadServletRequest getUploadServletRequest(
 		HttpServletRequest request);
+
+	public UploadPortletRequest getUploadPortletRequest(
+		PortletRequest portletRequest);
 
 	public Date getUptime();
 

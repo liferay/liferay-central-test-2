@@ -2868,26 +2868,6 @@ public class PortalImpl implements Portal {
 		return _allSystemRoles;
 	}
 
-	public UploadPortletRequest getUploadPortletRequest(
-		PortletRequest portletRequest) {
-
-		PortletRequestImpl portletRequestImpl =
-			(PortletRequestImpl)portletRequest;
-
-		DynamicServletRequest dynamicRequest =
-			(DynamicServletRequest)portletRequestImpl.getHttpServletRequest();
-
-		HttpServletRequestWrapper requestWrapper =
-			(HttpServletRequestWrapper)dynamicRequest.getRequest();
-
-		UploadServletRequest uploadRequest = getUploadServletRequest(
-			requestWrapper);
-
-		return new UploadPortletRequestImpl(
-			uploadRequest, PortalUtil.getPortletNamespace(
-				portletRequestImpl.getPortletName()));
-	}
-
 	public UploadServletRequest getUploadServletRequest(
 		HttpServletRequest request) {
 
@@ -2927,6 +2907,27 @@ public class PortalImpl implements Portal {
 		}
 
 		return uploadRequest;
+	}
+
+	public UploadPortletRequest getUploadPortletRequest(
+		PortletRequest portletRequest) {
+
+		PortletRequestImpl portletRequestImpl =
+			(PortletRequestImpl)portletRequest;
+
+		DynamicServletRequest dynamicRequest =
+			(DynamicServletRequest)portletRequestImpl.getHttpServletRequest();
+
+		HttpServletRequestWrapper requestWrapper =
+			(HttpServletRequestWrapper)dynamicRequest.getRequest();
+
+		UploadServletRequest uploadRequest = getUploadServletRequest(
+			requestWrapper);
+
+		return new UploadPortletRequestImpl(
+			uploadRequest,
+			PortalUtil.getPortletNamespace(
+				portletRequestImpl.getPortletName()));
 	}
 
 	public Date getUptime() {
