@@ -114,8 +114,6 @@ public class PortletRequestUtil {
 			ActionRequest actionRequest)
 		throws Exception {
 
-		// Read directly from the portlet input stream
-
 		InputStream inputStream = actionRequest.getPortletInputStream();
 
 		if (inputStream != null) {
@@ -142,71 +140,84 @@ public class PortletRequestUtil {
 
 		String xml = null;
 
-		Document doc = SAXReaderUtil.createDocument();
+		Document document = SAXReaderUtil.createDocument();
 
-		Element reqEl = doc.addElement("request");
+		Element requestElement = document.addElement("request");
 
-		DocUtil.add(reqEl, "container-type", "portlet");
+		DocUtil.add(requestElement, "container-type", "portlet");
 		DocUtil.add(
-			reqEl, "container-namespace", portletRequest.getContextPath());
+			requestElement, "container-namespace",
+			portletRequest.getContextPath());
 		DocUtil.add(
-			reqEl, "content-type", portletRequest.getResponseContentType());
-		DocUtil.add(reqEl, "server-name", portletRequest.getServerName());
-		DocUtil.add(reqEl, "server-port", portletRequest.getServerPort());
-		DocUtil.add(reqEl, "secure", portletRequest.isSecure());
-		DocUtil.add(reqEl, "auth-type", portletRequest.getAuthType());
-		DocUtil.add(reqEl, "remote-user", portletRequest.getRemoteUser());
-		DocUtil.add(reqEl, "context-path", portletRequest.getContextPath());
-		DocUtil.add(reqEl, "locale", portletRequest.getLocale());
-		DocUtil.add(reqEl, "portlet-mode", portletRequest.getPortletMode());
+			requestElement, "content-type",
+			portletRequest.getResponseContentType());
 		DocUtil.add(
-			reqEl, "portlet-session-id",
+			requestElement, "server-name", portletRequest.getServerName());
+		DocUtil.add(
+			requestElement, "server-port", portletRequest.getServerPort());
+		DocUtil.add(requestElement, "secure", portletRequest.isSecure());
+		DocUtil.add(requestElement, "auth-type", portletRequest.getAuthType());
+		DocUtil.add(
+			requestElement, "remote-user", portletRequest.getRemoteUser());
+		DocUtil.add(
+			requestElement, "context-path", portletRequest.getContextPath());
+		DocUtil.add(requestElement, "locale", portletRequest.getLocale());
+		DocUtil.add(
+			requestElement, "portlet-mode", portletRequest.getPortletMode());
+		DocUtil.add(
+			requestElement, "portlet-session-id",
 			portletRequest.getRequestedSessionId());
-		DocUtil.add(reqEl, "scheme", portletRequest.getScheme());
-		DocUtil.add(reqEl, "window-state", portletRequest.getWindowState());
+		DocUtil.add(requestElement, "scheme", portletRequest.getScheme());
+		DocUtil.add(
+			requestElement, "window-state", portletRequest.getWindowState());
 
 		if (portletRequest instanceof ActionRequest) {
-			DocUtil.add(reqEl, "lifecycle", RenderRequest.ACTION_PHASE);
+			DocUtil.add(
+				requestElement, "lifecycle", RenderRequest.ACTION_PHASE);
 		}
 		else if (portletRequest instanceof RenderRequest) {
-			DocUtil.add(reqEl, "lifecycle", RenderRequest.RENDER_PHASE);
+			DocUtil.add(
+				requestElement, "lifecycle", RenderRequest.RENDER_PHASE);
 		}
 		else if (portletRequest instanceof ResourceRequest) {
-			DocUtil.add(reqEl, "lifecycle", RenderRequest.RESOURCE_PHASE);
+			DocUtil.add(
+				requestElement, "lifecycle", RenderRequest.RESOURCE_PHASE);
 		}
 
 		if (portletResponse instanceof MimeResponse) {
-			_mimeResponseToXML((MimeResponse)portletResponse, reqEl);
+			_mimeResponseToXML((MimeResponse)portletResponse, requestElement);
 		}
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
-			Element themeDisplayEl = reqEl.addElement("theme-display");
+			Element themeDisplayElement = requestElement.addElement(
+				"theme-display");
 
-			_themeDisplayToXML(themeDisplay, themeDisplayEl);
+			_themeDisplayToXML(themeDisplay, themeDisplayElement);
 		}
 
-		Element parametersEl = reqEl.addElement("parameters");
+		Element parametersElement = requestElement.addElement("parameters");
 
 		Enumeration<String> enu = portletRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
-			Element parameterEl = parametersEl.addElement("parameter");
+			Element parameterElement = parametersElement.addElement(
+				"parameter");
 
-			DocUtil.add(parameterEl, "name", name);
+			DocUtil.add(parameterElement, "name", name);
 
 			String[] values = portletRequest.getParameterValues(name);
 
 			for (int i = 0; i < values.length; i++) {
-				DocUtil.add(parameterEl, "value", values[i]);
+				DocUtil.add(parameterElement, "value", values[i]);
 			}
 		}
 
-		Element attributesEl = reqEl.addElement("attributes");
+		Element attributesElement = requestElement.addElement("attributes");
 
 		enu = portletRequest.getAttributeNames();
 
@@ -223,15 +234,18 @@ public class PortletRequestUtil {
 				continue;
 			}
 
-			Element attributeEl = attributesEl.addElement("attribute");
+			Element attributeElement = attributesElement.addElement(
+				"attribute");
 
-			DocUtil.add(attributeEl, "name", name);
-			DocUtil.add(attributeEl, "value", String.valueOf(value));
+			DocUtil.add(attributeElement, "name", name);
+			DocUtil.add(attributeElement, "value", String.valueOf(value));
 		}
 
-		Element portletSessionEl = reqEl.addElement("portlet-session");
+		Element portletSessionElement = requestElement.addElement(
+			"portlet-session");
 
-		attributesEl = portletSessionEl.addElement("portlet-attributes");
+		attributesElement = portletSessionElement.addElement(
+			"portlet-attributes");
 
 		PortletSession portletSession = portletRequest.getPortletSession();
 
@@ -253,13 +267,14 @@ public class PortletRequestUtil {
 					continue;
 				}
 
-				Element attributeEl = attributesEl.addElement("attribute");
+				Element attributeElement = attributesElement.addElement(
+					"attribute");
 
-				DocUtil.add(attributeEl, "name", name);
-				DocUtil.add(attributeEl, "value", String.valueOf(value));
+				DocUtil.add(attributeElement, "name", name);
+				DocUtil.add(attributeElement, "value", String.valueOf(value));
 			}
 
-			attributesEl = portletSessionEl.addElement(
+			attributesElement = portletSessionElement.addElement(
 				"application-attributes");
 
 			enu = portletSession.getAttributeNames(
@@ -279,10 +294,11 @@ public class PortletRequestUtil {
 					continue;
 				}
 
-				Element attributeEl = attributesEl.addElement("attribute");
+				Element attributeElement = attributesElement.addElement(
+					"attribute");
 
-				DocUtil.add(attributeEl, "name", name);
-				DocUtil.add(attributeEl, "value", String.valueOf(value));
+				DocUtil.add(attributeElement, "name", name);
+				DocUtil.add(attributeElement, "value", String.valueOf(value));
 			}
 		}
 		catch (IllegalStateException ise) {
@@ -292,151 +308,12 @@ public class PortletRequestUtil {
 		}
 
 		try {
-			xml = doc.formattedString();
+			xml = document.formattedString();
 		}
 		catch (IOException ioe) {
 		}
 
 		return xml;
-	}
-
-	private static void _mimeResponseToXML(
-		MimeResponse mimeResponse, Element reqEl) {
-
-		String namespace = mimeResponse.getNamespace();
-
-		DocUtil.add(reqEl, "portlet-namespace", namespace);
-
-		try {
-			PortletURL actionUrl = mimeResponse.createActionURL();
-
-			DocUtil.add(reqEl, "action-url", actionUrl);
-		}
-		catch (IllegalStateException ise) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(ise.getMessage());
-			}
-		}
-
-		try {
-			PortletURL renderUrl = mimeResponse.createRenderURL();
-
-			DocUtil.add(reqEl, "render-url", renderUrl);
-
-			try {
-				renderUrl.setWindowState(LiferayWindowState.EXCLUSIVE);
-
-				DocUtil.add(reqEl, "render-url-exclusive", renderUrl);
-			}
-			catch (WindowStateException wse) {
-			}
-
-			try {
-				renderUrl.setWindowState(LiferayWindowState.MAXIMIZED);
-
-				DocUtil.add(reqEl, "render-url-maximized", renderUrl);
-			}
-			catch (WindowStateException wse) {
-			}
-
-			try {
-				renderUrl.setWindowState(LiferayWindowState.MINIMIZED);
-
-				DocUtil.add(reqEl, "render-url-minimized", renderUrl);
-			}
-			catch (WindowStateException wse) {
-			}
-
-			try {
-				renderUrl.setWindowState(LiferayWindowState.NORMAL);
-
-				DocUtil.add(reqEl, "render-url-normal", renderUrl);
-			}
-			catch (WindowStateException wse) {
-			}
-
-			try {
-				renderUrl.setWindowState(LiferayWindowState.POP_UP);
-
-				DocUtil.add(reqEl, "render-url-pop-up", renderUrl);
-			}
-			catch (WindowStateException wse) {
-			}
-		}
-		catch (IllegalStateException ise) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(ise.getMessage());
-			}
-		}
-
-		ResourceURL resourceURL = mimeResponse.createResourceURL();
-
-		String resourceURLString = HttpUtil.removeParameter(
-			resourceURL.toString(), namespace + "struts_action");
-
-		resourceURLString = HttpUtil.removeParameter(
-			resourceURLString, namespace + "redirect");
-
-		DocUtil.add(reqEl, "resource-url", resourceURLString);
-	}
-
-	private static void _themeDisplayToXML(
-		ThemeDisplay themeDisplay, Element themeDisplayEl) {
-
-		DocUtil.add(themeDisplayEl, "cdn-host", themeDisplay.getCDNHost());
-		DocUtil.add(themeDisplayEl, "company-id", themeDisplay.getCompanyId());
-		DocUtil.add(
-			themeDisplayEl, "do-as-user-id", themeDisplay.getDoAsUserId());
-		DocUtil.add(
-			themeDisplayEl, "i18n-language-id",
-			themeDisplay.getI18nLanguageId());
-		DocUtil.add(themeDisplayEl, "i18n-path", themeDisplay.getI18nPath());
-		DocUtil.add(
-			themeDisplayEl, "language-id", themeDisplay.getLanguageId());
-		DocUtil.add(themeDisplayEl, "locale", themeDisplay.getLocale());
-		DocUtil.add(
-			themeDisplayEl, "path-context", themeDisplay.getPathContext());
-		DocUtil.add(
-			themeDisplayEl, "path-friendly-url-private-group",
-			themeDisplay.getPathFriendlyURLPrivateGroup());
-		DocUtil.add(
-			themeDisplayEl, "path-friendly-url-private-user",
-			themeDisplay.getPathFriendlyURLPrivateUser());
-		DocUtil.add(
-			themeDisplayEl, "path-friendly-url-public",
-			themeDisplay.getPathFriendlyURLPublic());
-		DocUtil.add(themeDisplayEl, "path-image", themeDisplay.getPathImage());
-		DocUtil.add(themeDisplayEl, "path-main", themeDisplay.getPathMain());
-		DocUtil.add(
-			themeDisplayEl, "path-theme-images",
-			themeDisplay.getPathThemeImages());
-		DocUtil.add(themeDisplayEl, "plid", themeDisplay.getPlid());
-		DocUtil.add(
-			themeDisplayEl, "portal-url",
-			HttpUtil.removeProtocol(themeDisplay.getPortalURL()));
-		DocUtil.add(
-			themeDisplayEl, "real-user-id", themeDisplay.getRealUserId());
-		DocUtil.add(
-			themeDisplayEl, "scope-group-id", themeDisplay.getScopeGroupId());
-		DocUtil.add(themeDisplayEl, "secure", themeDisplay.isSecure());
-		DocUtil.add(
-			themeDisplayEl, "server-name", themeDisplay.getServerName());
-		DocUtil.add(
-			themeDisplayEl, "server-port", themeDisplay.getServerPort());
-		DocUtil.add(
-			themeDisplayEl, "time-zone", themeDisplay.getTimeZone().getID());
-		DocUtil.add(
-			themeDisplayEl, "url-portal",
-			HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
-		DocUtil.add(themeDisplayEl, "user-id", themeDisplay.getUserId());
-
-		if (themeDisplay.getPortletDisplay() != null) {
-			Element portletDisplayEl = themeDisplayEl.addElement(
-				"portlet-display");
-
-			_portletDisplayToXML(
-				themeDisplay.getPortletDisplay(), portletDisplayEl);
-		}
 	}
 
 	private static boolean _isValidAttributeName(String name) {
@@ -497,21 +374,169 @@ public class PortletRequestUtil {
 		}
 	}
 
-	private static void _portletDisplayToXML(
-		PortletDisplay portletDisplay, Element portletDisplayEl) {
+	private static void _mimeResponseToXML(
+		MimeResponse mimeResponse, Element requestElement) {
 
-		DocUtil.add(portletDisplayEl, "id", portletDisplay.getId());
+		String namespace = mimeResponse.getNamespace();
+
+		DocUtil.add(requestElement, "portlet-namespace", namespace);
+
+		try {
+			PortletURL actionURL = mimeResponse.createActionURL();
+
+			DocUtil.add(requestElement, "action-url", actionURL);
+		}
+		catch (IllegalStateException ise) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ise.getMessage());
+			}
+		}
+
+		try {
+			PortletURL renderURL = mimeResponse.createRenderURL();
+
+			DocUtil.add(requestElement, "render-url", renderURL);
+
+			try {
+				renderURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+
+				DocUtil.add(requestElement, "render-url-exclusive", renderURL);
+			}
+			catch (WindowStateException wse) {
+			}
+
+			try {
+				renderURL.setWindowState(LiferayWindowState.MAXIMIZED);
+
+				DocUtil.add(requestElement, "render-url-maximized", renderURL);
+			}
+			catch (WindowStateException wse) {
+			}
+
+			try {
+				renderURL.setWindowState(LiferayWindowState.MINIMIZED);
+
+				DocUtil.add(requestElement, "render-url-minimized", renderURL);
+			}
+			catch (WindowStateException wse) {
+			}
+
+			try {
+				renderURL.setWindowState(LiferayWindowState.NORMAL);
+
+				DocUtil.add(requestElement, "render-url-normal", renderURL);
+			}
+			catch (WindowStateException wse) {
+			}
+
+			try {
+				renderURL.setWindowState(LiferayWindowState.POP_UP);
+
+				DocUtil.add(requestElement, "render-url-pop-up", renderURL);
+			}
+			catch (WindowStateException wse) {
+			}
+		}
+		catch (IllegalStateException ise) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ise.getMessage());
+			}
+		}
+
+		ResourceURL resourceURL = mimeResponse.createResourceURL();
+
+		String resourceURLString = HttpUtil.removeParameter(
+			resourceURL.toString(), namespace + "struts_action");
+
+		resourceURLString = HttpUtil.removeParameter(
+			resourceURLString, namespace + "redirect");
+
+		DocUtil.add(requestElement, "resource-url", resourceURLString);
+	}
+
+	private static void _portletDisplayToXML(
+		PortletDisplay portletDisplay, Element portletDisplayElement) {
+
+		DocUtil.add(portletDisplayElement, "id", portletDisplay.getId());
 		DocUtil.add(
-			portletDisplayEl, "instance-id", portletDisplay.getInstanceId());
+			portletDisplayElement, "instance-id",
+			portletDisplay.getInstanceId());
 		DocUtil.add(
-			portletDisplayEl, "portlet-name", portletDisplay.getPortletName());
+			portletDisplayElement, "portlet-name",
+			portletDisplay.getPortletName());
 		DocUtil.add(
-			portletDisplayEl, "resource-pk", portletDisplay.getResourcePK());
+			portletDisplayElement, "resource-pk",
+			portletDisplay.getResourcePK());
 		DocUtil.add(
-			portletDisplayEl, "root-portlet-id",
+			portletDisplayElement, "root-portlet-id",
 			portletDisplay.getRootPortletId());
 		DocUtil.add(
-			portletDisplayEl, "title", portletDisplay.getTitle());
+			portletDisplayElement, "title", portletDisplay.getTitle());
+	}
+
+	private static void _themeDisplayToXML(
+		ThemeDisplay themeDisplay, Element themeDisplayElement) {
+
+		DocUtil.add(themeDisplayElement, "cdn-host", themeDisplay.getCDNHost());
+		DocUtil.add(
+			themeDisplayElement, "company-id", themeDisplay.getCompanyId());
+		DocUtil.add(
+			themeDisplayElement, "do-as-user-id", themeDisplay.getDoAsUserId());
+		DocUtil.add(
+			themeDisplayElement, "i18n-language-id",
+			themeDisplay.getI18nLanguageId());
+		DocUtil.add(
+			themeDisplayElement, "i18n-path", themeDisplay.getI18nPath());
+		DocUtil.add(
+			themeDisplayElement, "language-id", themeDisplay.getLanguageId());
+		DocUtil.add(themeDisplayElement, "locale", themeDisplay.getLocale());
+		DocUtil.add(
+			themeDisplayElement, "path-context", themeDisplay.getPathContext());
+		DocUtil.add(
+			themeDisplayElement, "path-friendly-url-private-group",
+			themeDisplay.getPathFriendlyURLPrivateGroup());
+		DocUtil.add(
+			themeDisplayElement, "path-friendly-url-private-user",
+			themeDisplay.getPathFriendlyURLPrivateUser());
+		DocUtil.add(
+			themeDisplayElement, "path-friendly-url-public",
+			themeDisplay.getPathFriendlyURLPublic());
+		DocUtil.add(
+			themeDisplayElement, "path-image", themeDisplay.getPathImage());
+		DocUtil.add(
+			themeDisplayElement, "path-main", themeDisplay.getPathMain());
+		DocUtil.add(
+			themeDisplayElement, "path-theme-images",
+			themeDisplay.getPathThemeImages());
+		DocUtil.add(themeDisplayElement, "plid", themeDisplay.getPlid());
+		DocUtil.add(
+			themeDisplayElement, "portal-url",
+			HttpUtil.removeProtocol(themeDisplay.getPortalURL()));
+		DocUtil.add(
+			themeDisplayElement, "real-user-id", themeDisplay.getRealUserId());
+		DocUtil.add(
+			themeDisplayElement, "scope-group-id",
+			themeDisplay.getScopeGroupId());
+		DocUtil.add(themeDisplayElement, "secure", themeDisplay.isSecure());
+		DocUtil.add(
+			themeDisplayElement, "server-name", themeDisplay.getServerName());
+		DocUtil.add(
+			themeDisplayElement, "server-port", themeDisplay.getServerPort());
+		DocUtil.add(
+			themeDisplayElement, "time-zone",
+			themeDisplay.getTimeZone().getID());
+		DocUtil.add(
+			themeDisplayElement, "url-portal",
+			HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
+		DocUtil.add(themeDisplayElement, "user-id", themeDisplay.getUserId());
+
+		if (themeDisplay.getPortletDisplay() != null) {
+			Element portletDisplayElement = themeDisplayElement.addElement(
+				"portlet-display");
+
+			_portletDisplayToXML(
+				themeDisplay.getPortletDisplay(), portletDisplayElement);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletRequestUtil.class);
