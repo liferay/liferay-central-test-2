@@ -618,7 +618,7 @@ AUI().add(
 
 				instance._buttonPlaceHolder = A.Node.create('<div id="' + instance._buttonPlaceHolderId + '"></div>');
 
-				A.getBody().append(instance._buttonPlaceHolder);
+				A.getBody().prepend(instance._buttonPlaceHolder);
 
 				instance._uploader = new SWFUpload(
 					{
