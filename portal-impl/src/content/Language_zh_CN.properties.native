@@ -2726,6 +2726,7 @@ please-email-all-questions-to=请将所有的问题用电子邮件发送到 {0}�
 please-ensure-the-administrator-has-configured-a-proper-google-license=请确保管理员配置了一个合适的 Google 许可协议。
 please-enter-a-download-page-url-or-a-direct-download-url=请输入下载页面的 URL 或直接的下载 URL。
 please-enter-a-file-with-a-valid-file-size=请输入一个大小有效的文件。
+please-enter-a-file-with-a-valid-file-type=请进入与一个合法的文件类型的一个文件。 (Automatic Translation)
 please-enter-a-friendly-url-that-begins-with-a-slash=请输入以 "/" 开头的易用 URL。
 please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x=请输入不与关键字<strong>{0}</strong>冲突的易用 URl。
 please-enter-a-friendly-url-that-does-not-end-with-a-slash=请输入不以斜线结尾的易用 URl。

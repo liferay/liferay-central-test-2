@@ -2726,6 +2726,7 @@ please-email-all-questions-to=Please email all questions to {0}.
 please-ensure-the-administrator-has-configured-a-proper-google-license=제발 행정관을 형성했다 Google 적당한 면허를 지키십시요.
 please-enter-a-download-page-url-or-a-direct-download-url=다운로드 페이지URL또는 직접적인 다운로드URL에 들어가십시요.
 please-enter-a-file-with-a-valid-file-size=제발 유효한 파일 규모에 파일을 들어가십시요.
+please-enter-a-file-with-a-valid-file-type=유효한 파일 유형을 가진 파일에 들어가십시오. (Automatic Translation)
 please-enter-a-friendly-url-that-begins-with-a-slash=내리침으로 시작되는 친절한url에 들어가십시요.
 please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x=Please enter a friendly url that does not conflict with the keyword <strong>{0}</strong>.
 please-enter-a-friendly-url-that-does-not-end-with-a-slash=내리침에 끝내지 않는 친절한url에 들어가십시요.
