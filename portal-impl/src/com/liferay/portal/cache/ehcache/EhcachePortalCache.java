@@ -20,54 +20,73 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.cache;
+package com.liferay.portal.cache.ehcache;
 
 import com.liferay.portal.kernel.cache.PortalCache;
 
 import java.io.Serializable;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import net.sf.ehcache.Ehcache;
+import net.sf.ehcache.Element;
 
 /**
- * <a href="MemoryPortalCache.java.html"><b><i>View Source</i></b></a>
+ * <a href="EhcachePortalCache.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class MemoryPortalCache implements PortalCache {
+public class EhcachePortalCache implements PortalCache {
 
-	public MemoryPortalCache(int initialCapacity) {
-		 _map = new ConcurrentHashMap<String, Object>(initialCapacity);
+	public EhcachePortalCache(Ehcache cache) {
+		_cache = cache;
 	}
 
 	public Object get(String key) {
-		return _map.get(key);
+		Element element = _cache.get(key);
+
+		if (element == null) {
+			return null;
+		}
+		else {
+			return element.getObjectValue();
+		}
 	}
 
 	public void put(String key, Object obj) {
-		_map.put(key, obj);
+		Element element = new Element(key, obj);
+
+		_cache.put(element);
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		_map.put(key, obj);
+		Element element = new Element(key, obj);
+
+		element.setTimeToLive(timeToLive);
+
+		_cache.put(element);
 	}
 
 	public void put(String key, Serializable obj) {
-		_map.put(key, obj);
+		Element element = new Element(key, obj);
+
+		_cache.put(element);
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		_map.put(key, obj);
+		Element element = new Element(key, obj);
+
+		element.setTimeToLive(timeToLive);
+
+		_cache.put(element);
 	}
 
 	public void remove(String key) {
-		_map.remove(key);
+		_cache.remove(key);
 	}
 
 	public void removeAll() {
-		_map.clear();
+		_cache.removeAll();
 	}
 
-	private Map<String, Object> _map;
+	private Ehcache _cache;
 
 }

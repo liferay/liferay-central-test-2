@@ -32,22 +32,22 @@
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMPoolUtil">
 		<property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" destroy-method="destroy">
+	<bean id="com.liferay.portal.kernel.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.ehcache.EhcachePortalCacheManager" destroy-method="destroy">
 		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
 		<property name="MBeanServer" ref="mbeanServer" />
 	</bean>
-	<!--<bean id="com.liferay.kernel.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />-->
+	<!--<bean id="com.liferay.kernel.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.memory.MemoryPortalCacheManager" />-->
 	<bean id="com.liferay.portal.kernel.cache.SingleVMPool" class="com.liferay.portal.cache.SingleVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.kernel.cache.SingleVMPortalCacheManager" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.cache.SingleVMPoolUtil" class="com.liferay.portal.kernel.cache.SingleVMPoolUtil">
 		<property name="singleVMPool" ref="com.liferay.portal.kernel.cache.SingleVMPool" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" destroy-method="destroy">
+	<bean id="com.liferay.portal.kernel.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.ehcache.EhcachePortalCacheManager" destroy-method="destroy">
 		<property name="configPropertyKey" value="ehcache.single.vm.config.location" />
 		<property name="MBeanServer" ref="mbeanServer" />
 	</bean>
-	<!--<bean id="com.liferay.kernel.portal.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />-->
+	<!--<bean id="com.liferay.kernel.portal.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.memory.MemoryPortalCacheManager" />-->
 	<bean id="com.liferay.portal.kernel.captcha.CaptchaUtil" class="com.liferay.portal.kernel.captcha.CaptchaUtil">
 		<property name="captcha">
 			<bean class="com.liferay.portal.captcha.CaptchaImpl" />

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.cache;
+package com.liferay.portal.cache.ehcache;
 
 import com.liferay.portal.kernel.cache.BlockingPortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
