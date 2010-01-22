@@ -456,8 +456,8 @@ public interface Http {
 			_redirect = redirect;
 		}
 
-		private String _contentType;
 		private int _contentLength = -1;
+		private String _contentType;
 		private String _redirect;
 
 	}
