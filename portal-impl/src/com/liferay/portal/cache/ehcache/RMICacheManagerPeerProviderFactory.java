@@ -46,6 +46,12 @@ import net.sf.ehcache.distribution.CacheManagerPeerProvider;
 public class RMICacheManagerPeerProviderFactory
 	extends net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory {
 
+	public RMICacheManagerPeerProviderFactory() {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Instantiating " + this.hashCode());
+		}
+	}
+
 	public CacheManagerPeerProvider createCachePeerProvider(
 		CacheManager cacheManager, Properties properties) {
 
@@ -55,7 +61,8 @@ public class RMICacheManagerPeerProviderFactory
 			throw new RuntimeException("portalPropertyKey is null");
 		}
 
-		String portalPropertiesString = PropsUtil.get(portalPropertyKey);
+		String portalPropertiesString = PropsUtil.getProperties().getProperty(
+			portalPropertyKey);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -79,7 +86,7 @@ public class RMICacheManagerPeerProviderFactory
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(PropertiesUtil.list(properties));
+			_log.debug(PropertiesUtil.list(portalProperties));
 		}
 
 		return super.createCachePeerProvider(cacheManager, portalProperties);

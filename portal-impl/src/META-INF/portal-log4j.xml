@@ -800,6 +800,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="net.sf.ehcache.config.ConfigurationFactory">
+		<priority value="INFO" />
+	</category>
+
 	<category name="net.sf.ehcache.config.DiskStoreConfiguration">
 		<priority value="ERROR" />
 	</category>
