@@ -76,8 +76,7 @@ public class Element {
 
 		_stringBundler.append(StringPool.SPACE);
 		_stringBundler.append(name);
-		_stringBundler.append(StringPool.EQUAL);
-		_stringBundler.append(StringPool.QUOTE);
+		_stringBundler.append(_EQUAL_QUOTE);
 		_stringBundler.append(value);
 		_stringBundler.append(StringPool.QUOTE);
 	}
@@ -223,6 +222,8 @@ public class Element {
 	private static final String _CLOSE_POST = ">";
 
 	private static final String _CLOSE_PRE = "</";
+
+	private static final String _EQUAL_QUOTE = "=\"";
 
 	private static final String _OPEN_POST = ">";
 
