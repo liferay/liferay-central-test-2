@@ -57,6 +57,8 @@ public class PortletKeys {
 
 	public static final String COMMUNITIES = "29";
 
+	public static final String DOCKBAR = "145";
+
 	public static final String DOCUMENT_LIBRARY = "20";
 
 	public static final String DIRECTORY = "11";
