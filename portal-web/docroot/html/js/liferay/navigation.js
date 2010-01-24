@@ -202,15 +202,6 @@ AUI().add(
 
 									instance._syncUIPosExtras();
 								},
-								destroy: function(event) {
-									var instance = this;
-
-									if (instance.get('rendered')) {
-										instance.get('boundingBox').remove();
-									}
-
-									instance.detachAll();
-								},
 								visibleChange: function(event) {
 									var instance = this;
 
@@ -244,9 +235,9 @@ AUI().add(
 								destroy: function(event) {
 									var instance = this;
 
-									instance.get('boundingBox').remove();
-
-									optionsOverlay.destroy();
+									if (optionsOverlay.get('rendered')) {
+										optionsOverlay.destroy();
+									}
 								}
 							},
 							tools: tools
