@@ -63,7 +63,6 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 
 	<liferay-ui:panel-container extended="<%= true %>" id="editPasswordPolicy" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="passwordPolicyGeneral" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "general") %>'>
-
 			<aui:fieldset>
 				<aui:input disabled="<%= defaultPolicy %>" name="name" />
 
