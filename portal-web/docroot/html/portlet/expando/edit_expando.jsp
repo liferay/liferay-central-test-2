@@ -296,7 +296,7 @@ portletURL.setParameter("modelResource", modelResource);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && (column == null) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</aui:script>
+	</c:if>
 </aui:script>
 
 <%
