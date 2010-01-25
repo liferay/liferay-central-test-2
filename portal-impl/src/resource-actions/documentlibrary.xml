@@ -29,13 +29,18 @@
 			<action-key>ADD_DOCUMENT</action-key>
 			<action-key>ADD_FOLDER</action-key>
 			<action-key>ADD_SHORTCUT</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>VIEW</action-key>
 		</supports>
-		<community-defaults />
+		<community-defaults>
+			<action-key>VIEW</action-key>
+		</community-defaults>
 		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_DOCUMENT</action-key>
 			<action-key>ADD_FOLDER</action-key>
 			<action-key>ADD_SHORTCUT</action-key>
+			<action-key>PERMISSIONS</action-key>
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
