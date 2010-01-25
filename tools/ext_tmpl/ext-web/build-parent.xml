@@ -182,7 +182,6 @@
 				<unjar src="${project.dir}/lib/portal/portletbridge-core.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/portletbridge-portlet.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/simplecaptcha.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/spring.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/struts-el.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/urlrewrite.jar" dest="${classpath.jsp}" />
 			</then>

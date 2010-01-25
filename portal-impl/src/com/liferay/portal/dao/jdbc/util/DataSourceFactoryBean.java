@@ -52,9 +52,9 @@ import uk.org.primrose.pool.datasource.GenericDataSourceFactory;
  *
  * @author Brian Wing Shun Chan
  */
-public class DataSourceFactoryBean extends AbstractFactoryBean {
+public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 
-	public Object createInstance() throws Exception {
+	public DataSource createInstance() throws Exception {
 		Properties properties = _properties;
 
 		if (properties == null) {
@@ -69,7 +69,8 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 
 		if (Validator.isNotNull(jndiName)) {
 			try {
-				return JNDIUtil.lookup(new InitialContext(), jndiName);
+				return (DataSource)JNDIUtil.lookup(
+					new InitialContext(), jndiName);
 			}
 			catch (Exception e) {
 				_log.error("Unable to lookup " + jndiName, e);
@@ -106,7 +107,7 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 		return dataSource;
 	}
 
-	public Class<?> getObjectType() {
+	public Class<DataSource> getObjectType() {
 		return DataSource.class;
 	}
 

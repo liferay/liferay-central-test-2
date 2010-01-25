@@ -178,7 +178,7 @@ public class ConvertDatabase extends ConvertProcess {
 		dataSourceFactory.setProperties(properties);
 		dataSourceFactory.setPropertyPrefix(_JDBC_PREFIX);
 
-		return (DataSource)dataSourceFactory.createInstance();
+		return dataSourceFactory.createInstance();
 	}
 
 	protected Tuple getTableDetails(

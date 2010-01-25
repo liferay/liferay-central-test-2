@@ -42,9 +42,9 @@ import org.springframework.beans.factory.config.AbstractFactoryBean;
  *
  * @author Brian Wing Shun Chan
  */
-public class MailSessionFactoryBean extends AbstractFactoryBean {
+public class MailSessionFactoryBean extends AbstractFactoryBean<Session> {
 
-	public Class<?> getObjectType() {
+	public Class<Session> getObjectType() {
 		return Session.class;
 	}
 
@@ -52,7 +52,7 @@ public class MailSessionFactoryBean extends AbstractFactoryBean {
 		_propertyPrefix = propertyPrefix;
 	}
 
-	protected Object createInstance() throws Exception {
+	protected Session createInstance() throws Exception {
 		Properties properties = PropsUtil.getProperties(
 			_propertyPrefix, true);
 
@@ -60,7 +60,7 @@ public class MailSessionFactoryBean extends AbstractFactoryBean {
 
 		if (Validator.isNotNull(jndiName)) {
 			try {
-				return JNDIUtil.lookup(new InitialContext(), jndiName);
+				return (Session)JNDIUtil.lookup(new InitialContext(), jndiName);
 			}
 			catch (Exception e) {
 				_log.error("Unable to lookup " + jndiName, e);
