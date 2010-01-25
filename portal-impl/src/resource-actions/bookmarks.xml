@@ -28,14 +28,12 @@
 		<supports>
 			<action-key>ADD_ENTRY</action-key>
 			<action-key>ADD_FOLDER</action-key>
-			<action-key>PERMISSIONS</action-key>
 		</supports>
 		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_ENTRY</action-key>
 			<action-key>ADD_FOLDER</action-key>
-			<action-key>PERMISSIONS</action-key>
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
