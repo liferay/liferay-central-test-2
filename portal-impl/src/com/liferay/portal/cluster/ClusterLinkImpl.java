@@ -96,7 +96,7 @@ public class ClusterLinkImpl implements ClusterLink {
 		}
 	}
 
-	public void destory() {
+	public void destroy() {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
 			return;
 		}
