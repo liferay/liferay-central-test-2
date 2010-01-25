@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.MaintenanceUtil;
 
+import org.apache.commons.lang.time.StopWatch;
+
 /**
  * <a href="ConvertProcess.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,11 +41,23 @@ public abstract class ConvertProcess {
 				return;
 			}
 
-			_log.info("Converting");
+			StopWatch stopWatch = null;
+
+			if (_log.isInfoEnabled()) {
+				stopWatch = new StopWatch();
+
+				stopWatch.start();
+
+				_log.info("Starting conversion for " + getClass().getName());
+			}
 
 			doConvert();
 
-			_log.info("Conversion complete");
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Finished conversion for " + getClass().getName() + " in " +
+						stopWatch.getTime() + " ms");
+			}
 		}
 		catch (Exception e) {
 			throw new ConvertException(e);

@@ -59,6 +59,8 @@ import java.text.DateFormat;
 
 import java.util.Date;
 
+import org.apache.commons.lang.time.StopWatch;
+
 import org.hibernate.usertype.UserType;
 
 /**
@@ -368,7 +370,13 @@ public class Table {
 			SystemProperties.get(SystemProperties.TMP_DIR) + "/temp-db-" +
 				_tableName + "-" + System.currentTimeMillis();
 
+		StopWatch stopWatch = null;
+
 		if (_log.isInfoEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+
 			_log.info(
 				"Starting backup of " + _tableName + " to " + tempFileName);
 		}
@@ -406,7 +414,8 @@ public class Table {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Finished backup of " + _tableName + " to " + tempFileName);
+					"Finished backup of " + _tableName + " to " +
+						tempFileName + " in " + stopWatch.getTime() + " ms");
 			}
 		}
 		catch (Exception e) {
