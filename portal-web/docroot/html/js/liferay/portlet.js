@@ -49,7 +49,8 @@ Liferay.Portlet = {
 			p_l_id: plid,
 			p_p_col_id: currentColumnId,
 			p_p_col_pos: portletPosition,
-			p_p_id: portletId
+			p_p_id: portletId,
+			p_p_isolated: true
 		};
 
 		var firstPortlet = container.one('.portlet-boundary');
@@ -84,6 +85,8 @@ Liferay.Portlet = {
 	addHTML: function(options) {
 		var instance = this;
 
+		var A = AUI();
+
 		var portletBoundary = null;
 
 		var beforePortletLoaded = options.beforePortletLoaded;
@@ -100,9 +103,11 @@ Liferay.Portlet = {
 		var addPortletReturn = function(html) {
 			var container = placeHolder.get('parentNode');
 
-			var portletBound = AUI().Node.create('<div></div>');
+			var portletBound = A.Node.create('<div></div>');
 
-			portletBound.set('innerHTML', html);
+			portletBound.plug(A.Plugin.ParseContent);
+
+			portletBound.setContent(html);
 			portletBound = portletBound.get('firstChild');
 			var id = portletBound.attr('id');
 
@@ -137,8 +142,9 @@ Liferay.Portlet = {
 			beforePortletLoaded(placeHolder);
 		}
 
-		AUI().use(
+		A.use(
 			'io-request',
+			'parse-content',
 			function(A) {
 				A.io.request(
 					url,

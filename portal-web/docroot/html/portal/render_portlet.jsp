@@ -961,7 +961,7 @@ else {
 		}
 		%>
 
-		<aui:script position='<%= showRefreshIcon ? "inline" : "auto" %>' use="<%= modules %>">
+		<aui:script position='<%= themeDisplay.isIsolated() ? "inline" : "auto" %>' use="<%= modules %>">
 			Liferay.Portlet.onLoad(
 				{
 					canEditTitle: <%= showConfigurationIcon %>,
