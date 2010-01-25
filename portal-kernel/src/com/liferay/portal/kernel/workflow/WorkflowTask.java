@@ -38,8 +38,6 @@ public interface WorkflowTask {
 
 	public long getAssigneeUserId();
 
-	public Map<String, Object> getOptionalAttributes();
-
 	public Date getCompletionDate();
 
 	public Date getCreateDate();
@@ -48,9 +46,9 @@ public interface WorkflowTask {
 
 	public Date getDueDate();
 
-	public long getWorkflowTaskId();
-
 	public String getName();
+
+	public Map<String, Object> getOptionalAttributes();
 
 	public long getWorkflowDefinitionId();
 
@@ -59,6 +57,8 @@ public interface WorkflowTask {
 	public int getWorkflowDefinitionVersion();
 
 	public long getWorkflowInstanceId();
+
+	public long getWorkflowTaskId();
 
 	public boolean isAsynchronous();
 

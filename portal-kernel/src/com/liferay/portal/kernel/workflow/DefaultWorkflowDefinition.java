@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.io.InputStream;
+import java.io.Serializable;
 
 import java.util.Map;
 
@@ -32,17 +33,8 @@ import java.util.Map;
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
-public class DefaultWorkflowDefinition implements WorkflowDefinition {
-
-	public DefaultWorkflowDefinition(
-		String name, int version, InputStream inputStream,
-		Map<String, Object> optionalAttributes) {
-
-		_name = name;
-		_version = version;
-		_inputStream = inputStream;
-		_optionalAttributes = optionalAttributes;
-	}
+public class DefaultWorkflowDefinition
+	implements Serializable, WorkflowDefinition {
 
 	public InputStream getInputStream() {
 		return _inputStream;
@@ -58,6 +50,22 @@ public class DefaultWorkflowDefinition implements WorkflowDefinition {
 
 	public int getVersion() {
 		return _version;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		_inputStream = inputStream;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setOptionalAttributes(Map<String, Object> optionalAttributes) {
+		_optionalAttributes = optionalAttributes;
+	}
+
+	public void setVersion(int version) {
+		_version = version;
 	}
 
 	private InputStream _inputStream;

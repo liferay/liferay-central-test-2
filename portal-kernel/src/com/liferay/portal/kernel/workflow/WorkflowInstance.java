@@ -63,6 +63,4 @@ public interface WorkflowInstance {
 	public void setParentWorkflowInstance(
 		WorkflowInstance parentWorkflowInstance);
 
-
-
 }
