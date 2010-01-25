@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
@@ -52,8 +53,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.commons.id.uuid.UUID;
 
 import org.jets3t.service.S3Service;
 import org.jets3t.service.S3ServiceException;
@@ -336,7 +335,7 @@ public class S3Hook extends BaseHook {
 
 				File tempFile = new File(
 					SystemProperties.get(SystemProperties.TMP_DIR) +
-						File.separator + UUID.timeUUID());
+						File.separator + PortalUUIDUtil.generate());
 
 				FileUtil.write(tempFile, oldS3Object.getDataInputStream());
 
@@ -424,7 +423,7 @@ public class S3Hook extends BaseHook {
 
 				File tempFile = new File(
 					SystemProperties.get(SystemProperties.TMP_DIR) +
-						File.separator + UUID.timeUUID());
+						File.separator + PortalUUIDUtil.generate());
 
 				FileUtil.write(tempFile, oldS3Object.getDataInputStream());
 
