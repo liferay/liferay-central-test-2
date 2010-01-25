@@ -61,7 +61,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 	<c:choose>
 		<c:when test="<%= typeSelection.equals(StringPool.BLANK) %>">
 			<liferay-ui:panel-container extended="<%= true %>" id='rssConfiguration' persistState="<%= true %>">
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='feeds' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "feeds") %>' >
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="feeds" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "feeds") %>' >
 					<liferay-ui:error exception="<%= ValidatorException.class %>">
 
 					<%
@@ -116,7 +116,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 					</aui:fieldset>
 				</liferay-ui:panel>
 
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='displaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="displaySettings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
 					<aui:fieldset>
 						<aui:input inlineLabel="left" name="showFeedTitle" type="checkbox" value="<%= showFeedTitle %>" />
 
@@ -217,13 +217,6 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 </aui:form>
 
 <aui:script use="liferay-auto-fields">
-	new Liferay.AutoFields(
-		{
-			contentBox: 'fieldset.subscriptions',
-			fieldIndexes: '<portlet:namespace />subscriptionIndexes'
-		}
-	).render();
-
 	function <portlet:namespace />removeSelectionForFooter() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-footer-article';
 		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
@@ -258,4 +251,11 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 1;
 		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
 	}
+
+	new Liferay.AutoFields(
+		{
+			contentBox: 'fieldset.subscriptions',
+			fieldIndexes: '<portlet:namespace />subscriptionIndexes'
+		}
+	).render();
 </aui:script>

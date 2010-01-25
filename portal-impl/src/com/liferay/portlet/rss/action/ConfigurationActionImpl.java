@@ -158,13 +158,11 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		Map<String, String> subscriptions = new HashMap<String, String>();
 
-
 		for (int i = 0; i < subscriptionIndexes.length; i++) {
 			int subscriptionIndex = subscriptionIndexes[i];
 
 			String url = ParamUtil.getString(
 				actionRequest, "url" + subscriptionIndex);
-
 			String title = ParamUtil.getString(
 				actionRequest, "title" + subscriptionIndex);
 
