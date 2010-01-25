@@ -32,7 +32,7 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 </form>
 
 <aui:script use="node">
-	var form = A.one('#<%= name %>');
+	var form = A.one('#<%= namespace + name %>');
 
 	if (form) {
 		form.on(
@@ -40,7 +40,7 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 			function() {
 				<c:choose>
 					<c:when test="<%= Validator.isNull(onSubmit) %>">
-						submitForm(document.<%= name %>);
+						submitForm(document.<%= namespace + name %>);
 
 						return false;
 					</c:when>

@@ -29,8 +29,8 @@ String action = GetterUtil.getString((String)request.getAttribute("aui:form:acti
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:form:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:form:dynamicAttributes");
 boolean inlineLabels = GetterUtil.getBoolean((String)request.getAttribute("aui:form:inlineLabels"));
-String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:form:name"));
+String name = GetterUtil.getString((String)request.getAttribute("aui:form:name"));
 %>
 
 
-<form action="<%= action %>" class="aui-form <%= cssClass %> <%= inlineLabels ? "inline-labels" : StringPool.BLANK %>" id="<%= name %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+<form action="<%= action %>" class="aui-form <%= cssClass %> <%= inlineLabels ? "inline-labels" : StringPool.BLANK %>" id="<%= namespace + name %>" name="<%= namespace + name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>

@@ -28,7 +28,7 @@
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:button:cssClass"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:button:disabled"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:button:dynamicAttributes");
-String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:button:name"));
+String name = GetterUtil.getString((String)request.getAttribute("aui:button:name"));
 String onClick = GetterUtil.getString((String)request.getAttribute("aui:button:onClick"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"));
 String value = (String)request.getAttribute("aui:button:value");
@@ -40,6 +40,6 @@ if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WI
 
 <span class="<%= _buildCss(BUTTON_PREFIX, type, false, disabled, false, false, false, cssClass) %>">
 	<span class="aui-button-content">
-		<input class="<%= _buildCss(BUTTON_INPUT_PREFIX, type, false, false, false, false, false, null) %>" <%= disabled ? "disabled" : StringPool.BLANK %> <%= !name.equals(namespace) ? "id=\"" + name + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type='<%= type.equals("cancel") ? "button" : type %>' value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+		<input class="<%= _buildCss(BUTTON_INPUT_PREFIX, type, false, false, false, false, false, null) %>" <%= disabled ? "disabled" : StringPool.BLANK %> <%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type='<%= type.equals("cancel") ? "button" : type %>' value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 	</span>
 </span>

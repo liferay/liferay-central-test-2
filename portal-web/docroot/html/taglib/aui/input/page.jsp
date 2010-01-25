@@ -41,7 +41,7 @@ String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:inpu
 String label = GetterUtil.getString((String)request.getAttribute("aui:input:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:input:last"));
 Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
-String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:name"));
+String name = GetterUtil.getString((String)request.getAttribute("aui:input:name"));
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:input:prefix"));
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:input:suffix"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
@@ -154,7 +154,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 				booleanValue = GetterUtil.getBoolean(valueString);
 			}
 
-			booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
+			booleanValue = ParamUtil.getBoolean(request, namespace + name, booleanValue);
 
 			String onClick = "AUI().one('#" + id + "').val(this.checked);";
 			String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
@@ -164,9 +164,9 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			}
 			%>
 
-			<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
+			<input id="<%= id %>" name="<%= namespace + name %>" type="hidden" value="<%= value %>" />
 
-			<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+			<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%= namespace + name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 		</c:when>
 		<c:when test='<%= type.equals("radio") %>'>
 
@@ -178,7 +178,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			}
 			%>
 
-			<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+			<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 		</c:when>
 		<c:when test='<%= type.equals("timeZone") %>'>
 			<span class="<%= fieldCss %>">
@@ -222,10 +222,10 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 
 			<c:choose>
 				<c:when test='<%= type.equals("textarea") %>'>
-					<textarea class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
+					<textarea class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
 				</c:when>
 				<c:otherwise>
-					<input class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" type="<%= Validator.isNull(type) ? "text" : type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+					<input class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" type="<%= Validator.isNull(type) ? "text" : type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 				</c:otherwise>
 			</c:choose>
 		</c:otherwise>
