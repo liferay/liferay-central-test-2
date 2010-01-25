@@ -193,6 +193,8 @@ AUI().add(
 					var instance = this;
 
 					instance.rows.add(event.row);
+
+					instance._guid++;
 				},
 
 				_onDeleteRow: function(event) {
@@ -274,6 +276,11 @@ AUI().add(
 				value: null
 			},
 			guid: {
+				getter: function(value) {
+					var instance = this;
+
+					return instance.get('bubbles')._guid;
+				},
 				lazyAdd: false,
 				value: 0
 			},
