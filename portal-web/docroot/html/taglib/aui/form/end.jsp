@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:form:name"));
+String name = GetterUtil.getString((String)request.getAttribute("aui:form:name"));
 String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:onSubmit"));
 %>
 
