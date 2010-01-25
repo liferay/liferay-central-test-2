@@ -35,6 +35,9 @@ import java.util.Map;
  */
 public interface WorkflowInstance {
 
+	public void addChildWorkflowInstance(
+		WorkflowInstance childWorkflowInstance);
+
 	public int getChildrenWorkflowInstanceCount();
 
 	public List<WorkflowInstance> getChildrenWorkflowInstances();
@@ -56,5 +59,10 @@ public interface WorkflowInstance {
 	public int getWorkflowDefinitionVersion();
 
 	public long getWorkflowInstanceId();
+
+	public void setParentWorkflowInstance(
+		WorkflowInstance parentWorkflowInstance);
+
+
 
 }
