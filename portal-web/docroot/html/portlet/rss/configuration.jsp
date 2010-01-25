@@ -60,141 +60,147 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 	<c:choose>
 		<c:when test="<%= typeSelection.equals(StringPool.BLANK) %>">
-			<liferay-ui:error exception="<%= ValidatorException.class %>">
-
-				<%
-				ValidatorException ve = (ValidatorException)errorException;
-				%>
-
-				<liferay-ui:message key="the-following-are-invalid-urls" />
-
-				<%
-				Enumeration enu = ve.getFailedKeys();
-
-				while (enu.hasMoreElements()) {
-					String url = (String)enu.nextElement();
-				%>
-
-					<strong><%= url %></strong><%= (enu.hasMoreElements()) ? ", " : "." %>
-
-				<%
-				}
-				%>
-
-			</liferay-ui:error>
-
-			<aui:fieldset>
-				<table class="lfr-table" id="<portlet:namespace />subscriptions">
-				<tr>
-					<td>
-						<liferay-ui:message key="title" />
-					</td>
-					<td>
-						<liferay-ui:message key="url" />
-					</td>
-					<td>
-						<aui:a href="javascript:;" onClick='<%= renderResponse.getNamespace() + "addRssRow(this.parentNode.parentNode.parentNode);" %>'><img alt="<liferay-ui:message key="add-location" />" src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></aui:a>
-					</td>
-				</tr>
-
-				<%
-				for (int i = 0; i < urls.length; i++) {
-					String title = StringPool.BLANK;
-
-					if (i < titles.length) {
-						title = titles[i];
-					}
-				%>
-
-					<tr>
-						<td>
-							<aui:input cssClass="lfr-input-text-container" label="" name="title" value="<%= title %>" />
-						</td>
-						<td>
-							<aui:input cssClass="lfr-input-text-container" label="" name="url" value="<%= urls[i] %>" />
-						</td>
-						<td>
-							<aui:a href="javascript:;"><img alt="<liferay-ui:message key="unsubscribe" />" src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></aui:a>
-						</td>
-					</tr>
-
-				<%
-				}
-				%>
-
-				</table>
-			</aui:fieldset>
-
-			<aui:fieldset>
-				<aui:input inlineLabel="left" name="showFeedTitle" type="checkbox" value="<%= showFeedTitle %>" />
-
-				<aui:input inlineLabel="left" name="showFeedPublishedDate" type="checkbox" value="<%= showFeedPublishedDate %>" />
-
-				<aui:input inlineLabel="left" name="showFeedDescription" type="checkbox" value="<%= showFeedDescription %>" />
-
-				<%
-				String taglibShowFeedImageOnClick = "if (this.checked) {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = '';} else {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = 'disabled';}";
-				%>
-
-				<aui:input inlineLabel="left" name="showFeedImage" onClick="<%= taglibShowFeedImageOnClick %>" type="checkbox" value="<%= showFeedImage %>" />
-
-				<aui:input inlineLabel="left" name="showFeedItemAuthor" type="checkbox" value="<%= showFeedItemAuthor %>" />
-
-				<aui:select label="num-of-entries-per-feed" name="entriesPerFeed">
+			<liferay-ui:panel-container extended="<%= true %>" id='rssConfiguration' persistState="<%= true %>">
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='feeds' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "feeds") %>' >
+					<liferay-ui:error exception="<%= ValidatorException.class %>">
 
 					<%
-					for (int i = 1; i < 10; i++) {
+					ValidatorException ve = (ValidatorException)errorException;
 					%>
 
-						<aui:option label="<%= i %>" selected="<%= i == entriesPerFeed %>" />
+					<liferay-ui:message key="the-following-are-invalid-urls" />
+
+					<%
+					Enumeration enu = ve.getFailedKeys();
+
+					while (enu.hasMoreElements()) {
+						String url = (String)enu.nextElement();
+					%>
+
+						<strong><%= url %></strong><%= (enu.hasMoreElements()) ? ", " : "." %>
 
 					<%
 					}
 					%>
 
-				</aui:select>
+					</liferay-ui:error>
 
-				<aui:select label="num-of-expanded-entries-per-feed" name="expandedEntriesPerFeed">
+					<aui:fieldset>
+						<table class="lfr-table" id="<portlet:namespace />subscriptions">
+						<tr>
+							<td>
+								<liferay-ui:message key="title" />
+							</td>
+							<td>
+								<liferay-ui:message key="url" />
+							</td>
+							<td>
+								<aui:a href="javascript:;" onClick='<%= renderResponse.getNamespace() + "addRssRow(this.parentNode.parentNode.parentNode);" %>'><img alt="<liferay-ui:message key="add-location" />" src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></aui:a>
+							</td>
+						</tr>
 
-					<%
-					for (int i = 0; i < 10; i++) {
-					%>
+						<%
+						for (int i = 0; i < urls.length; i++) {
+							String title = StringPool.BLANK;
 
-						<aui:option label="<%= i %>" selected="<%= i == expandedEntriesPerFeed %>" />
+							if (i < titles.length) {
+								title = titles[i];
+							}
+						%>
 
-					<%
-					}
-					%>
+							<tr>
+								<td>
+									<aui:input cssClass="lfr-input-text-container" label="" name="title" value="<%= title %>" />
+								</td>
+								<td>
+									<aui:input cssClass="lfr-input-text-container" label="" name="url" value="<%= urls[i] %>" />
+								</td>
+								<td>
+									<aui:a href="javascript:;"><img alt="<liferay-ui:message key="unsubscribe" />" src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></aui:a>
+								</td>
+							</tr>
 
-				</aui:select>
+						<%
+						}
+						%>
 
-				<aui:select disabled="<%= !showFeedImage %>" name="feedImageAlignment">
-					<aui:option label="left" selected='<%= feedImageAlignment.equals("left") %>' />
-					<aui:option label="right" selected='<%= feedImageAlignment.equals("right") %>' />
-				</aui:select>
+						</table>
+					</aui:fieldset>
+				</liferay-ui:panel>
 
-				<aui:field-wrapper label="header-web-content">
-					<%= headerArticleResouceTitle %>
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='displaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
+					<aui:fieldset>
+						<aui:input inlineLabel="left" name="showFeedTitle" type="checkbox" value="<%= showFeedTitle %>" />
 
-					<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForHeader();" %>' type="button" value="select" />
+						<aui:input inlineLabel="left" name="showFeedPublishedDate" type="checkbox" value="<%= showFeedPublishedDate %>" />
 
-					<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForHeader();" %>' type="button" value="remove" />
-				</aui:field-wrapper>
+						<aui:input inlineLabel="left" name="showFeedDescription" type="checkbox" value="<%= showFeedDescription %>" />
 
-				<aui:field-wrapper label="footer-web-content">
-					<%= footerArticleResouceTitle %>
+						<%
+						String taglibShowFeedImageOnClick = "if (this.checked) {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = '';} else {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = 'disabled';}";
+						%>
 
-					<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' type="button" value="select" />
+						<aui:input inlineLabel="left" name="showFeedImage" onClick="<%= taglibShowFeedImageOnClick %>" type="checkbox" value="<%= showFeedImage %>" />
 
-					<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForFooter();" %>' type="button" value="remove" />
-				</aui:field-wrapper>
+						<aui:input inlineLabel="left" name="showFeedItemAuthor" type="checkbox" value="<%= showFeedItemAuthor %>" />
 
-				<aui:button-row>
-					<aui:button type="submit" />
+						<aui:select label="num-of-entries-per-feed" name="entriesPerFeed">
 
-					<aui:button onClick="<%= redirect %>" type="cancel" />
-				</aui:button-row>
-			</aui:fieldset>
+							<%
+							for (int i = 1; i < 10; i++) {
+							%>
+
+								<aui:option label="<%= i %>" selected="<%= i == entriesPerFeed %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+
+						<aui:select label="num-of-expanded-entries-per-feed" name="expandedEntriesPerFeed">
+
+							<%
+							for (int i = 0; i < 10; i++) {
+							%>
+
+								<aui:option label="<%= i %>" selected="<%= i == expandedEntriesPerFeed %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+
+						<aui:select disabled="<%= !showFeedImage %>" name="feedImageAlignment">
+							<aui:option label="left" selected='<%= feedImageAlignment.equals("left") %>' />
+							<aui:option label="right" selected='<%= feedImageAlignment.equals("right") %>' />
+						</aui:select>
+
+						<aui:field-wrapper label="header-web-content">
+							<%= headerArticleResouceTitle %>
+
+							<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForHeader();" %>' type="button" value="select" />
+
+							<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForHeader();" %>' type="button" value="remove" />
+						</aui:field-wrapper>
+
+						<aui:field-wrapper label="footer-web-content">
+							<%= footerArticleResouceTitle %>
+
+							<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' type="button" value="select" />
+
+							<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForFooter();" %>' type="button" value="remove" />
+						</aui:field-wrapper>
+					</aui:fieldset>
+				</liferay-ui:panel>
+			</liferay-ui:panel-container>
+
+			<aui:button-row>
+				<aui:button type="submit" />
+
+				<aui:button onClick="<%= redirect %>" type="cancel" />
+			</aui:button-row>
 
 			<aui:script use="event,node">
 				var subscriptionsTable = A.one('#<portlet:namespace />subscriptions');
