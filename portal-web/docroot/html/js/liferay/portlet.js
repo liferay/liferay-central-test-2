@@ -49,8 +49,8 @@ Liferay.Portlet = {
 			p_l_id: plid,
 			p_p_col_id: currentColumnId,
 			p_p_col_pos: portletPosition,
-			p_p_id: portletId,
-			p_p_isolated: true
+			p_p_isolated: true,
+			p_p_id: portletId
 		};
 
 		var firstPortlet = container.one('.portlet-boundary');
