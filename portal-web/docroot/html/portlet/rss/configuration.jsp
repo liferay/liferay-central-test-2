@@ -85,21 +85,14 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 					</liferay-ui:error>
 
-					<aui:fieldset>
-						<table class="lfr-table" id="<portlet:namespace />subscriptions">
-						<tr>
-							<td>
-								<liferay-ui:message key="title" />
-							</td>
-							<td>
-								<liferay-ui:message key="url" />
-							</td>
-							<td>
-								<aui:a href="javascript:;" onClick='<%= renderResponse.getNamespace() + "addRssRow(this.parentNode.parentNode.parentNode);" %>'><img alt="<liferay-ui:message key="add-location" />" src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></aui:a>
-							</td>
-						</tr>
+					<aui:fieldset cssClass="subscriptions">
 
 						<%
+						if (urls.length == 0) {
+							urls = new String[1];
+							urls [0] = StringPool.BLANK;
+						}
+
 						for (int i = 0; i < urls.length; i++) {
 							String title = StringPool.BLANK;
 
@@ -108,23 +101,18 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 							}
 						%>
 
-							<tr>
-								<td>
-									<aui:input cssClass="lfr-input-text-container" label="" name="title" value="<%= title %>" />
-								</td>
-								<td>
-									<aui:input cssClass="lfr-input-text-container" label="" name="url" value="<%= urls[i] %>" />
-								</td>
-								<td>
-									<aui:a href="javascript:;"><img alt="<liferay-ui:message key="unsubscribe" />" src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></aui:a>
-								</td>
-							</tr>
+							<div class="lfr-form-row">
+								<div class="row-fields">
+									<aui:input cssClass="lfr-input-text-container" label="title" name='<%= "title" + i %>' value="<%= title %>" />
+
+									<aui:input cssClass="lfr-input-text-container" label="url" name='<%= "url" + i %>' value="<%= urls[i] %>" />
+								</div>
+							</div>
 
 						<%
 						}
 						%>
 
-						</table>
 					</aui:fieldset>
 				</liferay-ui:panel>
 
@@ -228,34 +216,13 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 	</c:choose>
 </aui:form>
 
-<aui:script>
-	<portlet:namespace />addRssRow = function(table) {
-		table.insertRow(table.rows.length);
-
-		var row = table.rows[table.rows.length - 1];
-
-		row.insertCell(0);
-		row.insertCell(1);
-		row.insertCell(2);
-
-		row.cells[0].innerHTML =
-			"<span class=\"aui-field aui-field lfr-input-text-container\">" +
-				"<span class=\"aui-field-content\">" +
-					"<input class=\"aui-field-input aui-field-input\" id=\"<portlet:namespace />title\" name=\"<portlet:namespace />title\" type=\"text\" />" +
-				"</span>" +
-			 "</span>";
-
-		row.cells[1].innerHTML =
-			"<span class=\"aui-field aui-field lfr-input-text-container\">" +
-				"<span class=\"aui-field-content\">" +
-					"<input class=\"aui-field-input aui-field-input\" id=\"<portlet:namespace />url\" name=\"<portlet:namespace />url\" type=\"text\" />" +
-				"</span>" +
-			 "</span>";
-
-		row.cells[2].innerHTML = "<a class=\"remove-subscription\" href=\"javascript:;\"><img alt=\"<liferay-ui:message key="unsubscribe" />\" src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
-
-		table.appendChild(row);
-	}
+<aui:script use="liferay-auto-fields">
+	new Liferay.AutoFields(
+		{
+			contentBox: 'fieldset.subscriptions',
+			fieldIndexes: '<portlet:namespace />subscriptionIndexes'
+		}
+	).render();
 
 	function <portlet:namespace />removeSelectionForFooter() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-footer-article';

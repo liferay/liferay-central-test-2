@@ -27,7 +27,12 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -148,8 +153,40 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		String[] urls = actionRequest.getParameterValues("url");
-		String[] titles = actionRequest.getParameterValues("title");
+		int[] subscriptionIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "subscriptionIndexes"), 0);
+
+		Map<String, String> subscriptions = new HashMap<String, String>();
+
+
+		for (int i = 0; i < subscriptionIndexes.length; i++) {
+			int subscriptionIndex = subscriptionIndexes[i];
+
+			String url = ParamUtil.getString(
+				actionRequest, "url" + subscriptionIndex);
+
+			String title = ParamUtil.getString(
+				actionRequest, "title" + subscriptionIndex);
+
+			if (Validator.isNull(url)) {
+				continue;
+			}
+
+			subscriptions.put(url, title);
+		}
+
+		String[] urls = new String[subscriptions.size()];
+		String[] titles = new String[subscriptions.size()];
+
+		int i = 0;
+
+		for (String url : subscriptions.keySet()) {
+			urls[i] = url;
+			titles[i] = subscriptions.get(url);
+
+			i++;
+		}
+
 		int entriesPerFeed = ParamUtil.getInteger(
 			actionRequest, "entriesPerFeed", 4);
 		int expandedEntriesPerFeed = ParamUtil.getInteger(
@@ -167,15 +204,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		boolean showFeedItemAuthor = ParamUtil.getBoolean(
 			actionRequest, "showFeedItemAuthor");
 
-		if (urls != null && titles != null) {
-			preferences.setValues("urls", urls);
-			preferences.setValues("titles", titles);
-		}
-		else {
-			preferences.setValues("urls", new String[0]);
-			preferences.setValues("titles", new String[0]);
-		}
-
+		preferences.setValues("urls", urls);
+		preferences.setValues("titles", titles);
 		preferences.setValue(
 			"items-per-channel", String.valueOf(entriesPerFeed));
 		preferences.setValue(
