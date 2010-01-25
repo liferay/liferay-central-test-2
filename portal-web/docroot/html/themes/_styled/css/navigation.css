@@ -6,34 +6,6 @@
 }
 
 #navigation ul {
-	margin: 0 auto;
-}
-
-#navigation ul:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-}
-
-.ie #navigation ul {
-	height: 1%;
-}
-
-.ie6 #navigation, .ie6 #navigation ul {
-	height: 2em;
-	overflow: visible;
-}
-
-#navigation li {
-	float: left;
-	list-style-type: none;
-	position: relative;
-}
-
-#navigation .child-menu {
-	display: none;
 }
 
 /* ---------- Add/remove page ---------- */

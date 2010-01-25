@@ -1,6 +1,181 @@
+/* ---------- Menus ---------- */
+
+.lfr-actions.portlet-options .lfr-trigger strong span,
+.visible.portlet-options .lfr-trigger strong span {
+	background-image: url(../images/portlet/options.png);
+}
+
+.lfr-actions.portlet-options:hover,
+.lfr-actions.portlet-options:hover ul {
+	background: transparent;
+}
+
+.lfr-menu-list {
+	z-index: 450;
+}
+
+.aui-menu-content,
+.lfr-menu-list ul {
+	background: #CCC9C9 url(../images/application/menu_bg.png) repeat-x 0 0;
+	border: 1px solid;
+	border-color: #AEAFB1 #777879 #777879 #AEAFB1;
+	padding: 2px 0;
+}
+
+.aui-menugroup-content h4 {
+	background: #D2D6DE;
+	border-width: 0;
+	color: #5B677D;
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0;
+	padding: 5px 3px;
+	text-shadow: 1px 1px #FFF;
+}
+
+.aui-menugroup-content ul,
+.lfr-menu-list ul ul {
+	display: block;
+	min-width: 0;
+}
+
+.aui-menu-content li,
+.lfr-menu-list ul li {
+	border-bottom: 1px solid #BCBBBB;
+	border-top: 1px solid #EEE;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+.ie7 .aui-menu-content li {
+	z-index: 10;
+}
+
+.aui-menu-content li.first,
+.lfr-menu-list ul li.first {
+	border-top-width: 0;
+}
+
+.aui-menu-content li.last,
+.lfr-menu-list ul li.last {
+	border-bottom-width: 0;
+}
+
+.aui-menu-content li a,
+.lfr-menu-list ul li a {
+	color: #2C2F34;
+	display: block;
+	padding: 4px 5px;
+	text-decoration: none;
+}
+
+.aui-menu-content li a:hover,
+.lfr-menu-list ul a:hover {
+	background-color: #5B677D;
+	color: #FFF;
+	text-shadow: -1px -1px #2C2F34;
+}
+
+.aui-menu-content a,
+.lfr-menu-list li a,
+.lfr-actions .lfr-trigger,
+.lfr-actions .lfr-trigger strong {
+	font-weight: bold;
+	text-shadow: 1px 1px #FFF;
+}
+
+.aui-menu .notice-message {
+	background-image: none;
+	margin: 3px;
+	padding: 6px;
+}
+
+.aui-menu {
+	position: absolute;
+	width: auto;
+}
+
+.aui-menu-content {
+	min-width: 150px;
+}
+
+.aui-menu-content li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* ---------- Dockbar ---------- */
+
+.dockbar a {
+	color: #2C2F34;
+	font-weight: bold;
+	text-shadow: 1px 1px #FFF;
+}
+
+.dockbar .menu-button-active {
+	background: #5C94DA url(../images/dockbar/button_active_bg.png) repeat-x 0 0;
+}
+
+.dockbar .menu-button-active a {
+	color: #FFF;
+	text-shadow: -1px -1px #2C2F34;
+}
+
+.my-places-menu .current-site {
+	border: solid #1D4280;
+	border-width: 1px 0;
+}
+
+.my-places-menu .current-site .site-type {
+	color: #FFF;
+}
+
+.my-places-menu .current-site a:hover,
+.my-places-menu a:hover .site-type {
+	color: #FFF;
+	text-shadow: 1px 1px #333;
+}
+
+.add-content-menu .add-page a {
+	background: url(../images/navigation/add_page.png) no-repeat 3px 50%;
+	padding-left: 25px;
+}
+
+.add-content-menu .add-application a {
+	background: url(../images/common/portlet.png) no-repeat 3px 50%;
+	padding-left: 25px;
+}
+
+.manage-content-menu li a {
+	background: url() no-repeat 3px 50%;
+	padding-left: 25px;
+}
+
+.manage-content-menu .manage-page a {
+	background-image: url(../images/dock/page_settings.png);
+}
+
+.manage-content-menu .page-layout a {
+	background-image: url(../images/dock/layout.png);
+}
+
+.manage-content-menu .sitemap a {
+	background-image: url(../images/common/sitemap.png);
+}
+
+.manage-content-menu .settings a {
+	background-image: url(../images/common/configuration.png);
+}
+
+.manage-content-menu .control-panel a {
+	background-image: url(../images/dock/control_panel.png);
+}
+
 .dockbar {
-	background: #f1f8ff;
-	border-bottom: 1px solid #9fccff;
+	background: #97A1AE url(../images/dockbar/dockbar_bg.png) repeat-x 0 0;
+	border-bottom: 1px solid #636364;
 	font-size: 13px;
 	padding: 1px 5px;
 	position: relative;
@@ -19,7 +194,8 @@
 	zoom: 1;
 }
 
-.ie6 .dockbar, .ie6 .lfr-dockbar-pinned .dockbar {
+.ie6 .dockbar,
+.ie6 .lfr-dockbar-pinned .dockbar {
 	height: 10px;
 	left: 0;
 	position: relative;
@@ -84,27 +260,6 @@ html > .lfr-dockbar-pinned {
 	color: #999;
 }
 
-.aui-menu .notice-message {
-	background-image: none;
-	margin: 3px;
-	padding: 6px;
-}
-
-.aui-menu {
-	position: absolute;
-	width: auto;
-}
-
-.aui-menu-content {
-	background: #fff;
-}
-
-.aui-menu-content li {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
 .aui-dockbarmenu-hidden {
 	visibility: hidden;
 }
@@ -122,9 +277,11 @@ html > .lfr-dockbar-pinned {
 	margin: 0;
 	margin-left: 10px;
 	padding: 0;
+	vertical-align: middle;
 }
 
-.ie6 .aui-toolbar li, .ie7 .aui-toolbar li {
+.ie6 .aui-toolbar li,
+.ie7 .aui-toolbar li {
 	display: inline;
 }
 
@@ -133,11 +290,11 @@ html > .lfr-dockbar-pinned {
 	border-width: 0;
 	cursor: default;
 	font-size: 1px;
-	height:16px;
-	margin:0 2px;
-	overflow:hidden;
+	height: 16px;
+	margin: 0 2px;
+	overflow: hidden;
 	vertical-align: middle;
-	width:4px;
+	width: 4px;
 }
 
 .aui-underlay {
@@ -150,8 +307,10 @@ html > .lfr-dockbar-pinned {
 }
 
 .aui-underlay-content {
-	background: #eee url(../images/common/message_panel_shadow.png) repeat-x 0 0;
-	border: 1px solid #ccc;
+	background: #F4F3F3 url(../images/common/message_panel_shadow.png) repeat-x 0 0;
+	background-color: #F4F3F3;
+	border: 1px solid #CCC;
+	border-top-width: 0;
 	border-width: 0 1px 1px;
 }
 
@@ -190,7 +349,8 @@ html > .lfr-dockbar-pinned {
 	max-width: 350px;
 }
 
-.my-places-menu ul, .my-places-menu li {
+.my-places-menu ul,
+.my-places-menu li {
 	display: block;
 	list-style-type: none;
 	margin: 0;
@@ -198,14 +358,15 @@ html > .lfr-dockbar-pinned {
 }
 
 .my-places-menu a {
+	display: block;
 	overflow: hidden;
 	text-align: right;
 	white-space: nowrap;
-	display: block;
 }
 
 .my-places-menu .current-site a {
-	background: #A8D6ED url(../images/arrows/01_right.png) no-repeat scroll 2px 30%;
+	background: #3068BA url(../images/arrows/01_right.png) no-repeat scroll 2px 30%;
+	color: #FFF;
 	padding-left: 20px;
 }
 
@@ -223,7 +384,7 @@ html > .lfr-dockbar-pinned {
 }
 
 .my-places-menu a:hover .site-type {
-	color: #fff;
+	color: #FFF;
 }
 
 .ie7 .my-places-menu a {
@@ -298,7 +459,7 @@ html > .lfr-dockbar-pinned {
 }
 
 .multiple-messages .dockbar-message {
-	border-top: 1px solid #ccc;
+	border-top: 1px solid #CCC;
 	padding: 5px 0;
 }
 
