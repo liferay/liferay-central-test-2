@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -48,8 +49,6 @@ import java.util.List;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.aspectj.util.FileUtil;
 
 /**
  * <a href="SharepointDocumentWorkspaceServlet.java.html"><b><i>View Source</i>
@@ -110,7 +109,7 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 	protected String getResults(HttpServletRequest request)
 		throws Exception {
 
-		String xml = FileUtil.readAsString(request.getInputStream());
+		String xml = StringUtil.read(request.getInputStream());
 
 		String documentName = null;
 
