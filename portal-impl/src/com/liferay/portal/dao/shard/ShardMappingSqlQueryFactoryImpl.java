@@ -36,10 +36,12 @@ import javax.sql.DataSource;
  */
 public class ShardMappingSqlQueryFactoryImpl implements MappingSqlQueryFactory {
 
-	public MappingSqlQuery getMappingSqlQuery(
-		DataSource dataSource, String sql, int[] types, RowMapper rowMapper) {
+	public <T> MappingSqlQuery<T> getMappingSqlQuery(
+		DataSource dataSource, String sql, int[] types,
+		RowMapper<T> rowMapper) {
 
-		return new ShardMappingSqlQueryImpl(dataSource, sql, types, rowMapper);
+		return new ShardMappingSqlQueryImpl<T>(
+			dataSource, sql, types, rowMapper);
 	}
 
 }

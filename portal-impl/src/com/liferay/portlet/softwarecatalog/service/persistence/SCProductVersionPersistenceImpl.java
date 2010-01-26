@@ -1463,7 +1463,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddSCFrameworkVersion {

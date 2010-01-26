@@ -2137,7 +2137,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddSCLicense {

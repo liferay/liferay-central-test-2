@@ -2719,7 +2719,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddGroup {
@@ -2883,7 +2883,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddUser {

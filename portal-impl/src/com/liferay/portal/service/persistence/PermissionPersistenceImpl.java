@@ -2222,7 +2222,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddGroup {
@@ -2386,7 +2386,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddRole {
@@ -2550,7 +2550,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddUser {

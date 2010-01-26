@@ -1825,7 +1825,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddAssetCategory {
@@ -1999,7 +1999,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddAssetTag {

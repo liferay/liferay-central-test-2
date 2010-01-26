@@ -4580,7 +4580,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddOrganization {
@@ -4753,7 +4753,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddPermission {
@@ -4926,7 +4926,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddRole {
@@ -5089,7 +5089,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddUserGroup {
@@ -5261,7 +5261,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddUser {

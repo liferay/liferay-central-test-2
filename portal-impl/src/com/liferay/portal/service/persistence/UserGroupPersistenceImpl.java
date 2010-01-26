@@ -1845,7 +1845,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			return false;
 		}
 
-		private MappingSqlQuery _mappingSqlQuery;
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
 	}
 
 	protected class AddUser {
