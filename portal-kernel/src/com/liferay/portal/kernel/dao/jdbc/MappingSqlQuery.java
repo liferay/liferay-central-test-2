@@ -29,9 +29,8 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  */
-public interface MappingSqlQuery {
+public interface MappingSqlQuery<T> {
 
-	@SuppressWarnings("unchecked")
-	public List execute(Object[] params);
+	public List<T> execute(Object... params);
 
 }

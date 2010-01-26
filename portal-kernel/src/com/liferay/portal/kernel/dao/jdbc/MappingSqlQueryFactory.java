@@ -31,7 +31,7 @@ import javax.sql.DataSource;
  */
 public interface MappingSqlQueryFactory {
 
-	public MappingSqlQuery getMappingSqlQuery(
-		DataSource dataSource, String sql, int[] types, RowMapper rowMapper);
+	public <T> MappingSqlQuery<T> getMappingSqlQuery(
+		DataSource dataSource, String sql, int[] types, RowMapper<T> rowMapper);
 
 }

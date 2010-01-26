@@ -30,9 +30,9 @@ import java.sql.SQLException;
  *
  * @author Brian Wing Shun Chan
  */
-public class CountRowMapper implements RowMapper {
+public class CountRowMapper implements RowMapper<Integer> {
 
-	public Object mapRow(ResultSet rs, int rowNumber) throws SQLException {
+	public Integer mapRow(ResultSet rs, int rowNumber) throws SQLException {
 		return new Integer(rs.getInt(_COUNT_VALUE));
 	}
 

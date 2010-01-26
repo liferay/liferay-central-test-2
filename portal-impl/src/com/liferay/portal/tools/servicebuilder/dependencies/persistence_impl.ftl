@@ -2246,7 +2246,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					return false;
 				}
 
-				private MappingSqlQuery _mappingSqlQuery;
+				private MappingSqlQuery<Integer> _mappingSqlQuery;
 
 			}
 

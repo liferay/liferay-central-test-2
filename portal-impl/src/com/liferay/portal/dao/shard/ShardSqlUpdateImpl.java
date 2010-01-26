@@ -39,7 +39,7 @@ public class ShardSqlUpdateImpl extends SqlUpdateImpl {
 		super(dataSource, sql, types);
 	}
 
-	public int update(Object[] params) throws DataAccessException {
+	public int update(Object... params) throws DataAccessException {
 		setDataSource(ShardUtil.getDataSource());
 
 		return super.update(params);

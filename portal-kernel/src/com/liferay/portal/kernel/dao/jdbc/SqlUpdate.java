@@ -29,6 +29,6 @@ package com.liferay.portal.kernel.dao.jdbc;
  */
 public interface SqlUpdate {
 
-	public int update(Object[] params);
+	public int update(Object... params);
 
 }

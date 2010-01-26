@@ -37,12 +37,13 @@ import org.springframework.jdbc.core.SqlParameter;
  *
  * @author Brian Wing Shun Chan
  */
-public class MappingSqlQueryImpl
-	extends org.springframework.jdbc.object.MappingSqlQuery
-	implements MappingSqlQuery {
+public class MappingSqlQueryImpl<T>
+	extends org.springframework.jdbc.object.MappingSqlQuery<T>
+	implements MappingSqlQuery<T> {
 
 	public MappingSqlQueryImpl(
-		DataSource dataSource, String sql, int[] types, RowMapper rowMapper) {
+		DataSource dataSource, String sql, int[] types,
+		RowMapper<T> rowMapper) {
 
 		super(dataSource, sql);
 
@@ -55,10 +56,10 @@ public class MappingSqlQueryImpl
 		compile();
 	}
 
-	protected Object mapRow(ResultSet rs, int rowNumber) throws SQLException {
+	protected T mapRow(ResultSet rs, int rowNumber) throws SQLException {
 		return _rowMapper.mapRow(rs, rowNumber);
 	}
 
-	private RowMapper _rowMapper;
+	private RowMapper<T> _rowMapper;
 
 }

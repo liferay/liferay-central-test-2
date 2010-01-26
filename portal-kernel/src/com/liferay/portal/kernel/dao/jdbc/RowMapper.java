@@ -30,10 +30,10 @@ import java.sql.SQLException;
  *
  * @author Brian Wing Shun Chan
  */
-public interface RowMapper {
+public interface RowMapper<T> {
 
-	public static RowMapper COUNT = new CountRowMapper();
+	public static RowMapper<Integer> COUNT = new CountRowMapper();
 
-	public Object mapRow(ResultSet rs, int rowNumber) throws SQLException;
+	public T mapRow(ResultSet rs, int rowNumber) throws SQLException;
 
 }

@@ -35,10 +35,11 @@ import javax.sql.DataSource;
  */
 public class MappingSqlQueryFactoryImpl implements MappingSqlQueryFactory {
 
-	public MappingSqlQuery getMappingSqlQuery(
-		DataSource dataSource, String sql, int[] types, RowMapper rowMapper) {
+	public <T> MappingSqlQuery<T> getMappingSqlQuery(
+		DataSource dataSource, String sql, int[] types,
+		RowMapper<T> rowMapper) {
 
-		return new MappingSqlQueryImpl(dataSource, sql, types, rowMapper);
+		return new MappingSqlQueryImpl<T>(dataSource, sql, types, rowMapper);
 	}
 
 }

@@ -34,16 +34,16 @@ import javax.sql.DataSource;
  *
  * @author Alexander Chow
  */
-public class ShardMappingSqlQueryImpl extends MappingSqlQueryImpl {
+public class ShardMappingSqlQueryImpl<T> extends MappingSqlQueryImpl<T> {
 
 	public ShardMappingSqlQueryImpl(
-		DataSource dataSource, String sql, int[] types, RowMapper rowMapper) {
+		DataSource dataSource, String sql, int[] types,
+		RowMapper<T> rowMapper) {
 
 		super(dataSource, sql, types, rowMapper);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List execute(Object[] params) {
+	public List<T> execute(Object... params) {
 		setDataSource(ShardUtil.getDataSource());
 
 		return super.execute(params);
