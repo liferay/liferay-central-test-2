@@ -26,11 +26,11 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -68,44 +68,44 @@ public class UserIndexer implements Indexer {
 		long[] roleIds, long[] userGroupIds, String[] assetTagNames,
 		ExpandoBridge expandoBridge) {
 
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, String.valueOf(userId));
+		document.addUID(PORTLET_ID, String.valueOf(userId));
 
-		doc.addModifiedDate();
+		document.addModifiedDate();
 
-		doc.addKeyword(Field.COMPANY_ID, companyId);
-		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		doc.addKeyword(Field.USER_ID, userId);
+		document.addKeyword(Field.COMPANY_ID, companyId);
+		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		document.addKeyword(Field.USER_ID, userId);
 
-		doc.addKeyword("screenName", screenName);
-		doc.addKeyword("emailAddress", emailAddress);
-		doc.addKeyword("firstName", firstName, true);
-		doc.addKeyword("middleName", middleName, true);
-		doc.addKeyword("lastName", lastName, true);
-		doc.addKeyword("jobTitle", jobTitle);
-		doc.addKeyword("active", active);
-		doc.addKeyword("groupIds", groupIds);
-		doc.addKeyword("organizationIds", organizationIds);
-		doc.addKeyword(
+		document.addKeyword("screenName", screenName);
+		document.addKeyword("emailAddress", emailAddress);
+		document.addKeyword("firstName", firstName, true);
+		document.addKeyword("middleName", middleName, true);
+		document.addKeyword("lastName", lastName, true);
+		document.addKeyword("jobTitle", jobTitle);
+		document.addKeyword("active", active);
+		document.addKeyword("groupIds", groupIds);
+		document.addKeyword("organizationIds", organizationIds);
+		document.addKeyword(
 			"ancestorOrganizationIds",
 			_getAncestorOrganizationIds(userId, organizationIds));
-		doc.addKeyword("roleIds", roleIds);
-		doc.addKeyword("userGroupIds", userGroupIds);
+		document.addKeyword("roleIds", roleIds);
+		document.addKeyword("userGroupIds", userGroupIds);
 
-		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
+		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
-		return doc;
+		return document;
 	}
 
 	public static String getUserUID(long userId) {
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, String.valueOf(userId));
+		document.addUID(PORTLET_ID, String.valueOf(userId));
 
-		return doc.get(Field.UID);
+		return document.get(Field.UID);
 	}
 
 	public static void updateUser(User user) throws SearchException {
@@ -117,7 +117,7 @@ public class UserIndexer implements Indexer {
 			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 				User.class.getName(), user.getUserId());
 
-			Document doc = getUserDocument(
+			Document document = getUserDocument(
 				user.getCompanyId(), user.getUserId(), user.getScreenName(),
 				user.getEmailAddress(), user.getFirstName(),
 				user.getMiddleName(), user.getLastName(), user.getJobTitle(),
@@ -126,7 +126,7 @@ public class UserIndexer implements Indexer {
 				user.getExpandoBridge());
 
 			SearchEngineUtil.updateDocument(
-				user.getCompanyId(), doc.get(Field.UID), doc);
+				user.getCompanyId(), document.get(Field.UID), document);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -156,14 +156,14 @@ public class UserIndexer implements Indexer {
 		return _CLASS_NAMES;
 	}
 
-	public DocumentSummary getDocumentSummary(
-		Document doc, String snippet, PortletURL portletURL) {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
 		// Title
 
-		String firstName = doc.get("firstName");
-		String middleName = doc.get("middleName");
-		String lastName = doc.get("lastName");
+		String firstName = document.get("firstName");
+		String middleName = document.get("middleName");
+		String lastName = document.get("lastName");
 
 		String title = ContactConstants.getFullName(
 			firstName, middleName, lastName);
@@ -174,12 +174,12 @@ public class UserIndexer implements Indexer {
 
 		// Portlet URL
 
-		String userId = doc.get(Field.USER_ID);
+		String userId = document.get(Field.USER_ID);
 
 		portletURL.setParameter("struts_action", "/enterprise_admin/edit_user");
 		portletURL.setParameter("p_u_i_d", userId);
 
-		return new DocumentSummary(title, content, portletURL);
+		return new Summary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {

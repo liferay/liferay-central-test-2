@@ -25,11 +25,11 @@ package com.liferay.portal.search;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
@@ -114,14 +114,14 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				Indexer indexer = (Indexer)InstancePool.get(
 					portlet.getIndexerClass());
 
-				DocumentSummary docSummary = indexer.getDocumentSummary(
+				Summary summary = indexer.getSummary(
 					result, snippet, portletURL);
 
-				String title = docSummary.getTitle();
+				String title = summary.getTitle();
 				String url = getURL(
 					themeDisplay, resultGroupId, result, portletURL);
 				Date modifedDate = result.getDate(Field.MODIFIED);
-				String content = docSummary.getContent();
+				String content = summary.getContent();
 
 				String[] tags = new String[0];
 

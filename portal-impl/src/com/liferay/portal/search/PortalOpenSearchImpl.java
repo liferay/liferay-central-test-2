@@ -25,11 +25,11 @@ package com.liferay.portal.search;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
@@ -126,12 +126,12 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 					String snippet = results.snippet(i);
 
-					DocumentSummary docSummary = indexer.getDocumentSummary(
+					Summary summary = indexer.getSummary(
 						result, snippet, portletURL);
 
-					title = docSummary.getTitle();
+					title = summary.getTitle();
 					url = portletURL.toString();
-					content = docSummary.getContent();
+					content = summary.getContent();
 
 					if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
 						url = getJournalURL(

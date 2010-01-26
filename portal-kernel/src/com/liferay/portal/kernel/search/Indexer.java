@@ -36,8 +36,8 @@ public interface Indexer {
 
 	public String[] getClassNames();
 
-	public DocumentSummary getDocumentSummary(
-		Document doc, String snippet, PortletURL portletURL);
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL);
 
 	public void reIndex(String className, long classPK) throws SearchException;
 

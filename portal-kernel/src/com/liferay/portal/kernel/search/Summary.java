@@ -25,32 +25,32 @@ package com.liferay.portal.kernel.search;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="DocumentSummary.java.html"><b><i>View Source</i></b></a>
+ * <a href="Summary.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DocumentSummary {
+public class Summary {
 
-	public DocumentSummary(String title, String content, PortletURL url) {
+	public Summary(String title, String content, PortletURL portletURL) {
 		_title = title;
 		_content = content;
-		_url = url;
+		_portletURL = portletURL;
 	}
 
 	public String getContent() {
 		return _content;
 	}
 
+	public PortletURL getPortletURL() {
+		return _portletURL;
+	}
+
 	public String getTitle() {
 		return _title;
 	}
 
-	public PortletURL getURL() {
-		return _url;
-	}
-
 	private String _content;
+	private PortletURL _portletURL;
 	private String _title;
-	private PortletURL _url;
 
 }

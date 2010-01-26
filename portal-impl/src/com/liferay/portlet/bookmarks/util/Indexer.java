@@ -24,10 +24,10 @@ package com.liferay.portlet.bookmarks.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -58,11 +58,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document doc = getEntryDocument(
+		Document document = getEntryDocument(
 			companyId, groupId, folderId, entryId, name, url, comments,
 			modifiedDate, assetTagNames, expandoBridge);
 
-		SearchEngineUtil.addDocument(companyId, doc);
+		SearchEngineUtil.addDocument(companyId, document);
 	}
 
 	public static void deleteEntry(long companyId, long entryId)
@@ -88,37 +88,38 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		catch (Exception e) {
 		}
 
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, entryId);
+		document.addUID(PORTLET_ID, entryId);
 
-		doc.addModifiedDate(modifiedDate);
+		document.addModifiedDate(modifiedDate);
 
-		doc.addKeyword(Field.COMPANY_ID, companyId);
-		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		doc.addKeyword(Field.GROUP_ID, groupId);
-		doc.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
+		document.addKeyword(Field.COMPANY_ID, companyId);
+		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		document.addKeyword(Field.GROUP_ID, groupId);
+		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 
-		doc.addText(Field.TITLE, name);
-		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		document.addText(Field.TITLE, name);
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		doc.addKeyword("folderId", folderId);
-		doc.addKeyword(Field.ENTRY_CLASS_NAME, BookmarksEntry.class.getName());
-		doc.addKeyword(Field.ENTRY_CLASS_PK, entryId);
-		doc.addText(Field.URL, url);
-		doc.addText(Field.COMMENTS, comments);
+		document.addKeyword("folderId", folderId);
+		document.addKeyword(
+			Field.ENTRY_CLASS_NAME, BookmarksEntry.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, entryId);
+		document.addText(Field.URL, url);
+		document.addText(Field.COMMENTS, comments);
 
-		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
+		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
-		return doc;
+		return document;
 	}
 
 	public static String getEntryUID(long entryId) {
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, entryId);
+		document.addUID(PORTLET_ID, entryId);
 
-		return doc.get(Field.UID);
+		return document.get(Field.UID);
 	}
 
 	public static void updateEntry(
@@ -127,36 +128,37 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document doc = getEntryDocument(
+		Document document = getEntryDocument(
 			companyId, groupId, folderId, entryId, name, url, comments,
 			modifiedDate, assetTagNames, expandoBridge);
 
-		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
+		SearchEngineUtil.updateDocument(
+			companyId, document.get(Field.UID), document);
 	}
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
 	}
 
-	public DocumentSummary getDocumentSummary(
-		Document doc, String snippet, PortletURL portletURL) {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
 		// Title
 
-		String title = doc.get(Field.TITLE);
+		String title = document.get(Field.TITLE);
 
 		// URL
 
-		String url = doc.get(Field.URL);
+		String url = document.get(Field.URL);
 
 		// Portlet URL
 
-		String entryId = doc.get(Field.ENTRY_CLASS_PK);
+		String entryId = document.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter("struts_action", "/bookmarks/view_entry");
 		portletURL.setParameter("entryId", entryId);
 
-		return new DocumentSummary(title, url, portletURL);
+		return new Summary(title, url, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {

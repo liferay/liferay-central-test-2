@@ -24,10 +24,10 @@ package com.liferay.portlet.imagegallery.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -61,11 +61,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document doc = getImageDocument(
+		Document document = getImageDocument(
 			companyId, groupId, folderId, imageId, name, description,
 			modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
 
-		SearchEngineUtil.addDocument(companyId, doc);
+		SearchEngineUtil.addDocument(companyId, document);
 	}
 
 	public static void deleteImage(long companyId, long imageId)
@@ -92,37 +92,37 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		catch (Exception e) {
 		}
 
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, imageId);
+		document.addUID(PORTLET_ID, imageId);
 
-		doc.addModifiedDate(modifiedDate);
+		document.addModifiedDate(modifiedDate);
 
-		doc.addKeyword(Field.COMPANY_ID, companyId);
-		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		doc.addKeyword(Field.GROUP_ID, groupId);
-		doc.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
+		document.addKeyword(Field.COMPANY_ID, companyId);
+		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		document.addKeyword(Field.GROUP_ID, groupId);
+		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 
-		doc.addText(Field.TITLE, name);
-		doc.addText(Field.DESCRIPTION, description);
-		doc.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		document.addText(Field.TITLE, name);
+		document.addText(Field.DESCRIPTION, description);
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		doc.addKeyword("folderId", folderId);
-		doc.addKeyword(Field.ENTRY_CLASS_NAME, IGImage.class.getName());
-		doc.addKeyword(Field.ENTRY_CLASS_PK, imageId);
+		document.addKeyword("folderId", folderId);
+		document.addKeyword(Field.ENTRY_CLASS_NAME, IGImage.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, imageId);
 
-		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
+		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
-		return doc;
+		return document;
 	}
 
 	public static String getImageUID(long imageId) {
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, imageId);
+		document.addUID(PORTLET_ID, imageId);
 
-		return doc.get(Field.UID);
+		return document.get(Field.UID);
 	}
 
 	public static void updateImage(
@@ -132,40 +132,41 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document doc = getImageDocument(
+		Document document = getImageDocument(
 			companyId, groupId, folderId, imageId, name, description,
 			modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
 
-		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
+		SearchEngineUtil.updateDocument(
+			companyId, document.get(Field.UID), document);
 	}
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
 	}
 
-	public DocumentSummary getDocumentSummary(
-		Document doc, String snippet, PortletURL portletURL) {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
 		// Title
 
-		String title = doc.get(Field.TITLE);
+		String title = document.get(Field.TITLE);
 
 		// Content
 
 		String content = snippet;
 
 		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(doc.get(Field.DESCRIPTION), 200);
+			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
 		}
 
 		// Portlet URL
 
-		String imageId = doc.get(Field.ENTRY_CLASS_PK);
+		String imageId = document.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter("struts_action", "/image_gallery/edit_image");
 		portletURL.setParameter("imageId", imageId);
 
-		return new DocumentSummary(title, content, portletURL);
+		return new Summary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {

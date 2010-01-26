@@ -24,10 +24,10 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -65,12 +65,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document doc = getArticleDocument(
+		Document document = getArticleDocument(
 			companyId, groupId, resourcePrimKey, articleId, version, title,
 			description, content, type, displayDate, assetCategoryIds,
 			assetTagNames, expandoBridge);
 
-		SearchEngineUtil.addDocument(companyId, doc);
+		SearchEngineUtil.addDocument(companyId, document);
 	}
 
 	public static void deleteArticle(
@@ -87,13 +87,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		String type, Date displayDate, long[] assetCategoryIds,
 		String[] assetTagNames, ExpandoBridge expandoBridge) {
 
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
 		if ((content != null) &&
 			((content.indexOf("<dynamic-content") != -1) ||
 			 (content.indexOf("<static-content") != -1))) {
 
-			content = _getIndexableContent(doc, content);
+			content = _getIndexableContent(document, content);
 
 			content = StringUtil.replace(
 				content, "<![CDATA[", StringPool.BLANK);
@@ -106,37 +106,38 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		content = HtmlUtil.extractText(content);
 
-		doc.addUID(PORTLET_ID, groupId, articleId);
+		document.addUID(PORTLET_ID, groupId, articleId);
 
-		doc.addModifiedDate(displayDate);
+		document.addModifiedDate(displayDate);
 
-		doc.addKeyword(Field.COMPANY_ID, companyId);
-		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		doc.addKeyword(Field.GROUP_ID, groupId);
+		document.addKeyword(Field.COMPANY_ID, companyId);
+		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		document.addKeyword(Field.GROUP_ID, groupId);
 
-		doc.addText(Field.TITLE, title);
-		doc.addText(Field.CONTENT, content);
-		doc.addText(Field.DESCRIPTION, description);
-		doc.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		document.addText(Field.TITLE, title);
+		document.addText(Field.CONTENT, content);
+		document.addText(Field.DESCRIPTION, description);
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		doc.addKeyword(Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
-		doc.addKeyword(Field.ENTRY_CLASS_PK, articleId);
-		doc.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
-		doc.addKeyword(Field.VERSION, version);
-		doc.addKeyword(Field.TYPE, type);
+		document.addKeyword(
+			Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, articleId);
+		document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
+		document.addKeyword(Field.VERSION, version);
+		document.addKeyword(Field.TYPE, type);
 
-		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
+		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
-		return doc;
+		return document;
 	}
 
 	public static String getArticleUID(long groupId, String articleId) {
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, groupId, articleId);
+		document.addUID(PORTLET_ID, groupId, articleId);
 
-		return doc.get(Field.UID);
+		return document.get(Field.UID);
 	}
 
 	public static void updateArticle(
@@ -147,45 +148,46 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document doc = getArticleDocument(
+		Document document = getArticleDocument(
 			companyId, groupId, resourcePrimKey, articleId, version, title,
 			description, content, type, displayDate, assetCategoryIds,
 			assetTagNames, expandoBridge);
 
-		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
+		SearchEngineUtil.updateDocument(
+			companyId, document.get(Field.UID), document);
 	}
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
 	}
 
-	public DocumentSummary getDocumentSummary(
-		Document doc, String snippet, PortletURL portletURL) {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
 		// Title
 
-		String title = doc.get(Field.TITLE);
+		String title = document.get(Field.TITLE);
 
 		// Content
 
 		String content = snippet;
 
 		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(doc.get(Field.CONTENT), 200);
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
 		}
 
 		// Portlet URL
 
-		String groupId = doc.get("groupId");
-		String articleId = doc.get(Field.ENTRY_CLASS_PK);
-		String version = doc.get("version");
+		String groupId = document.get("groupId");
+		String articleId = document.get(Field.ENTRY_CLASS_PK);
+		String version = document.get("version");
 
 		portletURL.setParameter("struts_action", "/journal/edit_article");
 		portletURL.setParameter("groupId", groupId);
 		portletURL.setParameter("articleId", articleId);
 		portletURL.setParameter("version", version);
 
-		return new DocumentSummary(title, content, portletURL);
+		return new Summary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {
@@ -259,7 +261,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	private static void _indexField(
-		Document doc, Element el, String elType, String elIndexType) {
+		Document document, Element el, String elType, String elIndexType) {
 
 		if (Validator.isNull(elIndexType)) {
 			return;
@@ -281,10 +283,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		if (elIndexType.equals("keyword")) {
-			doc.addKeyword(name, value);
+			document.addKeyword(name, value);
 		}
 		else if (elIndexType.equals("text")) {
-			doc.addText(name, StringUtil.merge(value, StringPool.SPACE));
+			document.addText(name, StringUtil.merge(value, StringPool.SPACE));
 		}
 	}
 

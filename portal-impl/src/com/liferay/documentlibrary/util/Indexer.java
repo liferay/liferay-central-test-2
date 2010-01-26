@@ -23,9 +23,9 @@
 package com.liferay.documentlibrary.util;
 
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 
 import javax.portlet.PortletURL;
 
@@ -43,8 +43,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		return _CLASS_NAMES;
 	}
 
-	public DocumentSummary getDocumentSummary(
-		Document doc, String snippet, PortletURL portletURL) {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
 		return null;
 	}

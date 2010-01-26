@@ -29,11 +29,11 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -72,12 +72,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document doc = getMessageDocument(
+		Document document = getMessageDocument(
 			companyId, groupId, userId, userName, categoryId, threadId,
 			messageId, title, content, anonymous, modifiedDate, assetTagNames,
 			expandoBridge);
 
-		SearchEngineUtil.addDocument(companyId, doc);
+		SearchEngineUtil.addDocument(companyId, document);
 	}
 
 	public static void deleteMessage(long companyId, long messageId)
@@ -99,9 +99,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			companyId, booleanQuery, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (int i = 0; i < hits.getLength(); i++) {
-			Document doc = hits.doc(i);
+			Document document = hits.doc(i);
 
-			SearchEngineUtil.deleteDocument(companyId, doc.get(Field.UID));
+			SearchEngineUtil.deleteDocument(companyId, document.get(Field.UID));
 		}
 	}
 
@@ -135,51 +135,51 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		content = HtmlUtil.extractText(content);
 
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, messageId);
+		document.addUID(PORTLET_ID, messageId);
 
-		doc.addModifiedDate(modifiedDate);
+		document.addModifiedDate(modifiedDate);
 
-		doc.addKeyword(Field.COMPANY_ID, companyId);
-		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		doc.addKeyword(Field.GROUP_ID, groupId);
-		doc.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		doc.addKeyword(Field.USER_ID, userId);
+		document.addKeyword(Field.COMPANY_ID, companyId);
+		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		document.addKeyword(Field.GROUP_ID, groupId);
+		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
+		document.addKeyword(Field.USER_ID, userId);
 
 		if (!anonymous) {
-			doc.addText(Field.USER_NAME, userName);
+			document.addText(Field.USER_NAME, userName);
 		}
 
-		doc.addText(Field.TITLE, title);
-		doc.addText(Field.CONTENT, content);
-		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		document.addText(Field.TITLE, title);
+		document.addText(Field.CONTENT, content);
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		doc.addKeyword("categoryId", categoryId);
-		doc.addKeyword("threadId", threadId);
-		doc.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
-		doc.addKeyword(Field.ENTRY_CLASS_PK, messageId);
+		document.addKeyword("categoryId", categoryId);
+		document.addKeyword("threadId", threadId);
+		document.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, messageId);
 
 		try {
 			MBThread thread = MBThreadLocalServiceUtil.getMBThread(threadId);
 
-			doc.addKeyword(
+			document.addKeyword(
 				Field.ROOT_ENTRY_CLASS_PK, thread.getRootMessageId());
 		}
 		catch (Exception e) {
 		}
 
-		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
+		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
-		return doc;
+		return document;
 	}
 
 	public static String getMessageUID(long messageId) {
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, messageId);
+		document.addUID(PORTLET_ID, messageId);
 
-		return doc.get(Field.UID);
+		return document.get(Field.UID);
 	}
 
 	public static void updateMessage(
@@ -189,42 +189,43 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document doc = getMessageDocument(
+		Document document = getMessageDocument(
 			companyId, groupId, userId, userName, categoryId, threadId,
 			messageId, title, content, anonymous, modifiedDate, assetTagNames,
 			expandoBridge);
 
-		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
+		SearchEngineUtil.updateDocument(
+			companyId, document.get(Field.UID), document);
 	}
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
 	}
 
-	public DocumentSummary getDocumentSummary(
-		Document doc, String snippet, PortletURL portletURL) {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
 		// Title
 
-		String title = doc.get(Field.TITLE);
+		String title = document.get(Field.TITLE);
 
 		// Content
 
 		String content = snippet;
 
 		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(doc.get(Field.CONTENT), 200);
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
 		}
 
 		// Portlet URL
 
-		String messageId = doc.get(Field.ENTRY_CLASS_PK);
+		String messageId = document.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter(
 			"struts_action", "/message_boards/view_message");
 		portletURL.setParameter("messageId", messageId);
 
-		return new DocumentSummary(title, content, portletURL);
+		return new Summary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {

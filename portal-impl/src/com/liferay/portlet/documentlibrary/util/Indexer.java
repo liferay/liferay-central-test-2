@@ -25,9 +25,9 @@ package com.liferay.portlet.documentlibrary.util;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -50,8 +50,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		return _CLASS_NAMES;
 	}
 
-	public DocumentSummary getDocumentSummary(
-		Document doc, String snippet, PortletURL portletURL) {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
 		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
 
@@ -65,8 +65,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Title
 
-		String repositoryId = doc.get("repositoryId");
-		String fileName = doc.get("path");
+		String repositoryId = document.get("repositoryId");
+		String fileName = document.get("path");
 
 		String title = fileName;
 
@@ -75,7 +75,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		String content = snippet;
 
 		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(doc.get(Field.CONTENT), 200);
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
 		}
 
 		// Portlet URL
@@ -84,7 +84,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		portletURL.setParameter("folderId", repositoryId);
 		portletURL.setParameter("name", fileName);
 
-		return new DocumentSummary(title, content, portletURL);
+		return new Summary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {

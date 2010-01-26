@@ -24,10 +24,10 @@ package com.liferay.portlet.calendar.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -59,11 +59,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document doc = getEventDocument(
+		Document document = getEventDocument(
 			companyId, groupId, userId, userName, eventId, title, description,
 			displayDate, assetTagNames, expandoBridge);
 
-		SearchEngineUtil.addDocument(companyId, doc);
+		SearchEngineUtil.addDocument(companyId, document);
 	}
 
 	public static void deleteEvent(long companyId, long eventId)
@@ -92,37 +92,37 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		userName = PortalUtil.getUserName(userId, userName);
 		description = HtmlUtil.extractText(description);
 
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, eventId);
+		document.addUID(PORTLET_ID, eventId);
 
-		doc.addModifiedDate(displayDate);
+		document.addModifiedDate(displayDate);
 
-		doc.addKeyword(Field.COMPANY_ID, companyId);
-		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		doc.addKeyword(Field.GROUP_ID, groupId);
-		doc.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		doc.addKeyword(Field.USER_ID, userId);
-		doc.addText(Field.USER_NAME, userName);
+		document.addKeyword(Field.COMPANY_ID, companyId);
+		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		document.addKeyword(Field.GROUP_ID, groupId);
+		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
+		document.addKeyword(Field.USER_ID, userId);
+		document.addText(Field.USER_NAME, userName);
 
-		doc.addText(Field.TITLE, title);
-		doc.addText(Field.DESCRIPTION, description);
-		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		document.addText(Field.TITLE, title);
+		document.addText(Field.DESCRIPTION, description);
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		doc.addKeyword(Field.ENTRY_CLASS_NAME, CalEvent.class.getName());
-		doc.addKeyword(Field.ENTRY_CLASS_PK, eventId);
+		document.addKeyword(Field.ENTRY_CLASS_NAME, CalEvent.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, eventId);
 
-		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
+		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
-		return doc;
+		return document;
 	}
 
 	public static String getEventUID(long eventId) {
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, eventId);
+		document.addUID(PORTLET_ID, eventId);
 
-		return doc.get(Field.UID);
+		return document.get(Field.UID);
 	}
 
 	public static void updateEvent(
@@ -131,40 +131,41 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document doc = getEventDocument(
+		Document document = getEventDocument(
 			companyId, groupId, userId, userName, eventId, title, description,
 			displayDate, assetTagNames, expandoBridge);
 
-		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
+		SearchEngineUtil.updateDocument(
+			companyId, document.get(Field.UID), document);
 	}
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
 	}
 
-	public DocumentSummary getDocumentSummary(
-		Document doc, String snippet, PortletURL portletURL) {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
 		// Title
 
-		String title = doc.get(Field.TITLE);
+		String title = document.get(Field.TITLE);
 
 		// Content
 
 		String content = snippet;
 
 		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(doc.get(Field.DESCRIPTION), 200);
+			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
 		}
 
 		// Portlet URL
 
-		String eventId = doc.get(Field.ENTRY_CLASS_PK);
+		String eventId = document.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter("struts_action", "/calendar/view_event");
 		portletURL.setParameter("eventId", eventId);
 
-		return new DocumentSummary(title, content, portletURL);
+		return new Summary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {

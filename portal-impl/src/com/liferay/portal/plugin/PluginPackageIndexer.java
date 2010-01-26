@@ -25,11 +25,11 @@ package com.liferay.portal.plugin;
 import com.liferay.portal.kernel.plugin.License;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
-import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -61,12 +61,12 @@ public class PluginPackageIndexer implements Indexer {
 			String installedVersion)
 		throws SearchException {
 
-		Document doc = getPluginPackageDocument(
+		Document document = getPluginPackageDocument(
 			moduleId, name, version, modifiedDate, author, types, tags,
 			licenses, liferayVersions, shortDescription, longDescription,
 			changeLog, pageURL, repositoryURL, status, installedVersion);
 
-		SearchEngineUtil.addDocument(CompanyConstants.SYSTEM, doc);
+		SearchEngineUtil.addDocument(CompanyConstants.SYSTEM, document);
 	}
 
 	public static void cleanIndex() throws SearchException {
@@ -91,24 +91,24 @@ public class PluginPackageIndexer implements Indexer {
 			name + " " + author + " " + shortDescription + " " +
 				longDescription;
 
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, moduleId);
+		document.addUID(PORTLET_ID, moduleId);
 
-		doc.addModifiedDate(modifiedDate);
+		document.addModifiedDate(modifiedDate);
 
-		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		doc.addKeyword(Field.GROUP_ID, moduleIdObj.getGroupId());
+		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		document.addKeyword(Field.GROUP_ID, moduleIdObj.getGroupId());
 
-		doc.addText(Field.TITLE, name);
-		doc.addText(Field.CONTENT, content);
+		document.addText(Field.TITLE, name);
+		document.addText(Field.CONTENT, content);
 
-		doc.addKeyword("moduleId", moduleId);
-		doc.addKeyword("artifactId", moduleIdObj.getArtifactId());
-		doc.addKeyword("version", version);
-		doc.addText("author", author);
-		doc.addKeyword("type", types.toArray(new String[0]));
-		doc.addKeyword("tag", tags.toArray(new String[0]));
+		document.addKeyword("moduleId", moduleId);
+		document.addKeyword("artifactId", moduleIdObj.getArtifactId());
+		document.addKeyword("version", version);
+		document.addText("author", author);
+		document.addKeyword("type", types.toArray(new String[0]));
+		document.addKeyword("tag", tags.toArray(new String[0]));
 
 		String[] licenseNames = new String[licenses.size()];
 
@@ -124,25 +124,25 @@ public class PluginPackageIndexer implements Indexer {
 			}
 		}
 
-		doc.addKeyword("license", licenseNames);
-		doc.addKeyword("osi-approved-license", String.valueOf(osiLicense));
-		doc.addText("shortDescription", shortDescription);
-		doc.addText("longDescription", longDescription);
-		doc.addText("changeLog", changeLog);
-		doc.addText("pageURL", pageURL);
-		doc.addKeyword("repositoryURL", repositoryURL);
-		doc.addKeyword("status", status);
-		doc.addKeyword("installedVersion", installedVersion);
+		document.addKeyword("license", licenseNames);
+		document.addKeyword("osi-approved-license", String.valueOf(osiLicense));
+		document.addText("shortDescription", shortDescription);
+		document.addText("longDescription", longDescription);
+		document.addText("changeLog", changeLog);
+		document.addText("pageURL", pageURL);
+		document.addKeyword("repositoryURL", repositoryURL);
+		document.addKeyword("status", status);
+		document.addKeyword("installedVersion", installedVersion);
 
-		return doc;
+		return document;
 	}
 
 	public static String getPluginPackagerUID(String moduleId) {
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(PORTLET_ID, moduleId);
+		document.addUID(PORTLET_ID, moduleId);
 
-		return doc.get(Field.UID);
+		return document.get(Field.UID);
 	}
 
 	public static void removePluginPackage(String moduleId)
@@ -161,38 +161,38 @@ public class PluginPackageIndexer implements Indexer {
 			String installedVersion)
 		throws SearchException {
 
-		Document doc = getPluginPackageDocument(
+		Document document = getPluginPackageDocument(
 			moduleId, name, version, modifiedDate, author, types, tags,
 			licenses, liferayVersions, shortDescription, longDescription,
 			changeLog, pageURL, repositoryURL, status, installedVersion);
 
 		SearchEngineUtil.updateDocument(
-			CompanyConstants.SYSTEM, doc.get(Field.UID), doc);
+			CompanyConstants.SYSTEM, document.get(Field.UID), document);
 	}
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
 	}
 
-	public DocumentSummary getDocumentSummary(
-		Document doc, String snippet, PortletURL portletURL) {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
 		// Title
 
-		String title = doc.get(Field.TITLE);
+		String title = document.get(Field.TITLE);
 
 		// Content
 
 		String content = snippet;
 
 		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(doc.get(Field.CONTENT), 200);
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
 		}
 
 		// Portlet URL
 
-		String moduleId = doc.get("moduleId");
-		String repositoryURL = doc.get("repositoryURL");
+		String moduleId = document.get("moduleId");
+		String repositoryURL = document.get("repositoryURL");
 
 		portletURL.setParameter(
 			"struts_action", "/admin/view");
@@ -200,7 +200,7 @@ public class PluginPackageIndexer implements Indexer {
 		portletURL.setParameter("moduleId", moduleId);
 		portletURL.setParameter("repositoryURL", repositoryURL);
 
-		return new DocumentSummary(title, content, portletURL);
+		return new Summary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) {
