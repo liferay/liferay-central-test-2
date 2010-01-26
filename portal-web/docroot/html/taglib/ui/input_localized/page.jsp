@@ -219,19 +219,12 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 				hide: function(event) {
 					var instance = this;
 
-					var container = instance.get('container');
-
-					container.appendTo(document.<portlet:namespace />fm);
+					instance._positionHelper.appendTo(document.<portlet:namespace />fm);
 				},
 				show: function(event) {
 					var instance = this;
 
-					var container = instance.get('container');
-					var positionHelper = instance._positionHelper;
-
-					if (container.get('parentNode') != positionHelper) {
-						positionHelper.append(container);
-					}
+					instance._positionHelper.appendTo(document.body);
 				}
 			},
 			trigger: '#<%= randomNamespace %>languageSelectorTrigger',
