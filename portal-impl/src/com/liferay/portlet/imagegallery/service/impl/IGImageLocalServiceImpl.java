@@ -276,6 +276,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		imageLocalService.deleteImage(image.getSmallImageId());
 		imageLocalService.deleteImage(image.getLargeImageId());
+		imageLocalService.deleteImage(image.getCustom1ImageId());
+		imageLocalService.deleteImage(image.getCustom2ImageId());
 
 		// Asset
 
