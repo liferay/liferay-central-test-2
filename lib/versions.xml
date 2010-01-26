@@ -643,7 +643,7 @@
 	</library>
 	<library>
 		<file-name>development/postgresql.jar</file-name>
-		<version>8.3-604 JDBC 3</version>
+		<version>8.4-701 JDBC 3</version>
 		<project-name>PostgreSQL JDBC Driver</project-name>
 		<project-url>http://jdbc.postgresql.org</project-url>
 		<licenses>
@@ -1090,7 +1090,7 @@
 	</library>
 	<library>
 		<file-name>portal/chardet.jar</file-name>
-		<version>1.0</version>
+		<version>1.1</version>
 		<project-name>Mozilla Charset Detectors</project-name>
 		<project-url>http://jchardet.sourceforge.net</project-url>
 		<licenses>
@@ -1344,9 +1344,9 @@
 	</library>
 	<library>
 		<file-name>portal/displaytag.jar</file-name>
-		<version>1.1</version>
+		<version>1.2</version>
 		<project-name>Display Tag Library</project-name>
-		<project-url>http://displaytag.sourceforge.net/11</project-url>
+		<project-url>http://displaytag.sourceforge.net</project-url>
 		<licenses>
 			<license>
 				<license-name>Artistic License</license-name>
@@ -1580,7 +1580,7 @@
 	</library>
 	<library>
 		<file-name>portal/jabsorb.jar</file-name>
-		<version>1.3 RC2</version>
+		<version>1.3.1</version>
 		<project-name>jabsorb</project-name>
 		<project-url>http://jabsorb.org</project-url>
 		<licenses>
@@ -2189,7 +2189,7 @@
 	</library>
 	<library>
 		<file-name>portal/pdfbox.jar</file-name>
-		<version>0.7.1</version>
+		<version>0.8.0</version>
 		<project-name>PDFBox</project-name>
 		<project-url>http://www.pdfbox.org</project-url>
 		<licenses>
@@ -2201,7 +2201,7 @@
 	</library>
 	<library>
 		<file-name>portal/poi.jar</file-name>
-		<version>3.2</version>
+		<version>3.6</version>
 		<project-name>POI</project-name>
 		<project-url>http://poi.apache.org</project-url>
 		<licenses>
@@ -2213,7 +2213,7 @@
 	</library>
 	<library>
 		<file-name>portal/poi-contrib.jar</file-name>
-		<version>3.2</version>
+		<version>3.6</version>
 		<project-name>POI</project-name>
 		<licenses>
 			<license>
@@ -2224,7 +2224,7 @@
 	</library>
 	<library>
 		<file-name>portal/poi-scratchpad.jar</file-name>
-		<version>3.2</version>
+		<version>3.6</version>
 		<project-name>POI</project-name>
 		<project-url>http://poi.apache.org</project-url>
 		<licenses>
@@ -2697,7 +2697,7 @@
 	</library>
 	<library>
 		<file-name>portal/velocity.jar</file-name>
-		<version>1.6.1</version>
+		<version>1.6.3</version>
 		<project-name>Velocity</project-name>
 		<project-url>http://velocity.apache.org</project-url>
 		<licenses>
