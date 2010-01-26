@@ -29,8 +29,8 @@ import java.io.InputStream;
 
 import java.util.Iterator;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
@@ -52,15 +52,15 @@ public class XLSTextStripper {
 			for (int i = 0; i < numOfSheets; i++) {
 				HSSFSheet sheet = workbook.getSheetAt(i);
 
-				Iterator<HSSFRow> rowIterator = sheet.rowIterator();
+				Iterator<Row> rowIterator = sheet.rowIterator();
 
 				while (rowIterator.hasNext()) {
-					HSSFRow row = rowIterator.next();
+					Row row = rowIterator.next();
 
-					Iterator<HSSFCell> cellIterator = row.cellIterator();
+					Iterator<Cell> cellIterator = row.cellIterator();
 
 					while (cellIterator.hasNext()) {
-						HSSFCell cell = cellIterator.next();
+						Cell cell = cellIterator.next();
 
 						String cellStringValue = null;
 
