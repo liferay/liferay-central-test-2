@@ -1,9 +1,6 @@
-/* This CSS sets the default styles for the dockbar */
-
 .dockbar {
 	background: #97A1AE url(../images/dockbar/dockbar_bg.png) repeat-x 0 0;
-	border-bottom: 1px solid #9FCCFF;
-	border-color: #636364;
+	border-bottom: 1px solid #636364;
 	font-size: 13px;
 	padding: 1px 5px;
 	position: relative;
@@ -311,13 +308,4 @@ html > .lfr-dockbar-pinned {
 
 .manage-content-menu .control-panel a {
 	background-image: url(../images/dock/control_panel.png);
-}
-
-.aui-underlay-content {
-}
-
-.add-application {
-}
-
-.manage-layouts {
 }

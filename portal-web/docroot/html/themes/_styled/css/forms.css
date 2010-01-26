@@ -1,5 +1,3 @@
-/* This CSS sets the default styles for forms. */
-
 fieldset {
 	border: 1px solid #BFBFBF;
 	padding: 8px;
@@ -98,4 +96,3 @@ input.focus, textarea.focus, .ie6 input.focus, .ie6 textarea.focus {
 	background: #FFC none;
 	border: 1px solid #FC0;
 }
-

@@ -1,9 +1,58 @@
-/* This CSS sets the default styles for portlets. */
-
 /* ---------- Portlet wrapper and icons ---------- */
 
 .portlet {
 }
+
+.freeform .portlet {
+	margin-bottom: 0;
+}
+
+body.portlet {
+	border: none;
+}
+
+.portlet-topper {
+	position: relative;
+}
+
+.portlet-title {
+	display: block;
+}
+
+.portlet-title img {
+	vertical-align: middle;
+}
+
+.portlet-icons {
+	margin: 0;
+	padding: 2px;
+	position: absolute;
+	right: 3px;
+	text-align: right;
+	top: 3px;
+}
+
+.portlet-icons .nobr {
+	display: block;
+	float: left;
+	padding: 1px;
+}
+
+.portlet-content, .portlet-minimized .portlet-content-container {
+	padding: 12px 10px 10px;
+}
+
+.portlet-minimized .portlet-content {
+	padding: 0;
+}
+
+.portlet-icon-back {
+	background: url(../images/arrows/01_left.png) no-repeat 0 50%;
+	font-weight: bold;
+	padding: 5px 5px 5px 18px;
+}
+
+/* ---------- Borderless portlet ---------- */
 
 .portlet-borderless-container {
 	position: relative;
@@ -108,55 +157,6 @@
 
 .portlet-borderless-bar .portlet-title-default, .portlet-borderless-bar .portlet-actions {
 	vertical-align: top;
-}
-
-.freeform .portlet {
-	margin-bottom: 0;
-}
-
-body.portlet {
-	border: none;
-}
-
-.portlet-topper {
-	position: relative;
-}
-
-.portlet-title {
-	display: block;
-}
-
-.portlet-title img {
-	vertical-align: middle;
-}
-
-.portlet-icons {
-	margin: 0;
-	padding: 2px;
-	position: absolute;
-	right: 3px;
-	text-align: right;
-	top: 3px;
-}
-
-.portlet-icons .nobr {
-	display: block;
-	float: left;
-	padding: 1px;
-}
-
-.portlet-content, .portlet-minimized .portlet-content-container {
-	padding: 12px 10px 10px;
-}
-
-.portlet-minimized .portlet-content {
-	padding: 0;
-}
-
-.portlet-icon-back {
-	background: url(../images/arrows/01_left.png) no-repeat 0 50%;
-	font-weight: bold;
-	padding: 5px 5px 5px 18px;
 }
 
 /* ---------- Panel Page ---------- */
@@ -586,4 +586,3 @@ body.portlet {
 .ie .taglib-calendar tr td.first a {
 	border-right: none;
 }
-

@@ -1,5 +1,3 @@
-/* This CSS sets the default styles for the main navigation. */
-
 /* ---------- Main navigation ---------- */
 
 #navigation {
@@ -109,4 +107,3 @@
 .aui-save-trigger img {
 	background-image: url(../images/dock/my_place_current.png);
 }
-

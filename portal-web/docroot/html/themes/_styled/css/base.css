@@ -1,5 +1,3 @@
-/* This CSS sets the default styles for the base components. */
-
 /* ---------- Browser normalization ---------- */
 
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
@@ -240,6 +238,7 @@ body.live-view {
 /* ---------- Separator ---------- */
 
 hr, .separator {
+	border-top: 1px dotted #BFBFBF;
 }
 
 /* ---------- Update Manager ---------- */
