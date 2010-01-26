@@ -2200,7 +2200,7 @@
 	</library>
 	<library>
 		<file-name>portal/pdfbox.jar</file-name>
-		<version>0.8.0</version>
+		<version>0.7.1</version>
 		<project-name>PDFBox</project-name>
 		<project-url>http://www.pdfbox.org</project-url>
 		<licenses>
