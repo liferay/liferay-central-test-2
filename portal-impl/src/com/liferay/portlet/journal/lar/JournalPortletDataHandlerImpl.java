@@ -1368,7 +1368,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				List<JournalArticle> articles =
 					JournalArticleUtil.findByGroupId(context.getGroupId(),
-						QueryUtil.ALL_POS, QueryUtil.ALL_POS, 
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 						new ArticleIDVersionComparator(true));
 
 				for (JournalArticle article : articles) {
