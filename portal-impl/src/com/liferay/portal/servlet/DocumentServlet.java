@@ -74,21 +74,17 @@ public class DocumentServlet extends HttpServlet {
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
 
-			long userId = PortalUtil.getUserId(request);
+			User user = PortalUtil.getUser(request);
 
-			if (userId == 0) {
+			if (user == null) {
 				Company company = CompanyLocalServiceUtil.getCompany(companyId);
 
-				User defaultUser = company.getDefaultUser();
-
-				userId = defaultUser.getUserId();
-			}
+				user = company.getDefaultUser();
+ 			}
 
 			PermissionChecker permissionChecker = null;
 
-			PrincipalThreadLocal.setName(userId);
-
-			User user = UserLocalServiceUtil.getUserById(userId);
+			PrincipalThreadLocal.setName(user.getUserId());
 
 			permissionChecker = PermissionCheckerFactoryUtil.create(user, true);
 
