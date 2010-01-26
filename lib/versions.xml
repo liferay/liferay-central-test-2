@@ -188,7 +188,7 @@
 	</library>
 	<library>
 		<file-name>development/hsql.jar</file-name>
-		<version>1.8.0.7</version>
+		<version>1.8.1.1</version>
 		<project-name>HSQL Database Engine</project-name>
 		<project-url>http://hsqldb.org</project-url>
 		<licenses>
