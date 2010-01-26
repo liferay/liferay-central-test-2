@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.ClassLoaderProxy;
 public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 	<#list methods as method>
-		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
+		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
 			public static ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
 
 			<#list method.parameters as parameter>
