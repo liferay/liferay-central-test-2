@@ -151,6 +151,13 @@ public class PortalLDAPUtil {
 					userMappings.getProperty("lastName"),
 					contact.getLastName());
 
+				String middleNameMapping = userMappings.getProperty(
+					"middleName");
+
+				if (Validator.isNotNull(middleNameMapping)) {
+					mods.addItem(middleNameMapping, contact.getMiddleName());
+				}
+
 				String fullNameMapping = userMappings.getProperty("fullName");
 
 				if (Validator.isNotNull(fullNameMapping)) {
@@ -228,6 +235,13 @@ public class PortalLDAPUtil {
 				userMappings.getProperty("firstName"), user.getFirstName());
 			mods.addItem(
 				userMappings.getProperty("lastName"), user.getLastName());
+
+			String middleNameMapping = userMappings.getProperty(
+				"middleName");
+
+			if (Validator.isNotNull(middleNameMapping)) {
+				mods.addItem(middleNameMapping, user.getMiddleName());
+			}
 
 			String fullNameMapping = userMappings.getProperty("fullName");
 
