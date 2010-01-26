@@ -2000,7 +2000,6 @@
 		<exception>UserId</exception>
 		<exception>UserLockout</exception>
 		<exception>UserPassword</exception>
-		<exception>UserPortrait</exception>
 		<exception>UserReminderQuery</exception>
 		<exception>UserScreenName</exception>
 		<exception>UserSms</exception>
