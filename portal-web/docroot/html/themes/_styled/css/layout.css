@@ -1,4 +1,4 @@
-/* This CSS controls the column layout. It is not recommended that you change this file. */
+/* This CSS sets the default styles for the column layout. */
 
 /* ---------- Wrapper ---------- */
 
@@ -14,6 +14,7 @@
 /* ---------- Column widths ---------- */
 
 .lfr-grid.dragging .lfr-column {
+	border: 3px double #828F95;
 	height: 100px;
 	min-height: 100px;
 }
@@ -116,8 +117,4 @@
 
 .freeform .lfr-column {
 	position: relative;
-}
-
-.columns-2-2 #column-4 {
-	padding-right: 0;
 }

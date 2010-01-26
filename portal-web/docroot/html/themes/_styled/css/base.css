@@ -45,8 +45,8 @@ html {
 }
 
 body {
-	background-color: #FFF;
-	font: 62.5%/1.6em Arial,Helvetica,Verdana,sans-serif;
+	background: #FFF;
+	font: 62.5%/1.4 Arial, Helvetica, Verdana, sans-serif;
 }
 
 body.portal-popup {
@@ -107,13 +107,9 @@ p {
 /* ---------- Links ---------- */
 
 a {
-	color: #369;
-	text-decoration: underline;
 }
 
 a:hover {
-	color: #06C;
-	text-decoration: none;
 }
 
 a:visited {
@@ -156,7 +152,7 @@ i, em {
 }
 
 code, pre {
-	font-family: "Courier New",Courier,monospace;
+	font-family: "Courier New", Courier, monospace;
 	white-space: pre;
 }
 
@@ -193,26 +189,15 @@ body.live-view {
 /* ---------- Banner ---------- */
 
 #banner {
-	position: relative;
 }
 
 #banner .logo {
-	margin: 0;
 }
 
 .current-community {
-	display: none;
 }
 
 #banner .sign-in {
-	background: url(../images/common/key.png) no-repeat 3px 50%;
-	float: right;
-	font-weight: bold;
-	margin-top: 20px;
-	padding: 5px 5px 5px 25px;
-	position: absolute;
-	right: 0;
-	top: 0;
 }
 
 /* ---------- Alerts and popups ---------- */
@@ -255,7 +240,6 @@ body.live-view {
 /* ---------- Separator ---------- */
 
 hr, .separator {
-	border-top: 1px dotted #BFBFBF;
 }
 
 /* ---------- Update Manager ---------- */

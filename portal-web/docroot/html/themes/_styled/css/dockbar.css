@@ -1,6 +1,9 @@
+/* This CSS sets the default styles for the dockbar */
+
 .dockbar {
-	background: #f1f8ff;
-	border-bottom: 1px solid #9fccff;
+	background: #97A1AE url(../images/dockbar/dockbar_bg.png) repeat-x 0 0;
+	border-bottom: 1px solid #9FCCFF;
+	border-color: #636364;
 	font-size: 13px;
 	padding: 1px 5px;
 	position: relative;
@@ -24,6 +27,21 @@
 	left: 0;
 	position: relative;
 	top: 0;
+}
+
+.dockbar a {
+	color: #2C2F34;
+	font-weight: bold;
+	text-shadow: 1px 1px #FFF;
+}
+
+.dockbar .menu-button-active {
+	background: #5C94DA url(../images/dockbar/button_active_bg.png) repeat-x 0 0;
+}
+
+.dockbar .menu-button-active a {
+	color: #FFF;
+	text-shadow: -1px -1px #2C2F34;
 }
 
 .dockbar .user-avatar .sign-out {
@@ -84,26 +102,7 @@ html > .lfr-dockbar-pinned {
 	color: #999;
 }
 
-.aui-menu .notice-message {
-	background-image: none;
-	margin: 3px;
-	padding: 6px;
-}
-
-.aui-menu {
-	position: absolute;
-	width: auto;
-}
-
-.aui-menu-content {
-	background: #fff;
-}
-
-.aui-menu-content li {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
+/* ---------- Menus ---------- */
 
 .aui-dockbarmenu-hidden {
 	visibility: hidden;
@@ -117,61 +116,9 @@ html > .lfr-dockbar-pinned {
 	float: right;
 }
 
-.aui-toolbar li {
-	display: inline-block;
-	margin: 0;
-	margin-left: 10px;
-	padding: 0;
-}
-
-.ie6 .aui-toolbar li, .ie7 .aui-toolbar li {
-	display: inline;
-}
-
-.aui-toolbar-separator {
-	background: url(../images/dockbar/separator.png) no-repeat 100% 50%;
-	border-width: 0;
-	cursor: default;
-	font-size: 1px;
-	height:16px;
-	margin:0 2px;
-	overflow:hidden;
-	vertical-align: middle;
-	width:4px;
-}
-
-.aui-underlay {
-	clear: both;
-	top: 100%;
-}
-
-.aui-underlay-hidden {
-	display: none;
-}
-
-.aui-underlay-content {
-	background: #eee url(../images/common/message_panel_shadow.png) repeat-x 0 0;
-	border: 1px solid #ccc;
-	border-width: 0 1px 1px;
-}
-
-.aui-underlay .aui-widget-hd {
-	padding-bottom: 20px;
-}
-
-.aui-underlay-close {
-	position: absolute;
-	right: 5px;
-	top: 5px;
-}
-
 .aui-underlay .portal-add-content {
 	background-color: transparent;
 	font-size: 11px;
-}
-
-.aui-underlay .lfr-portlet-item {
-	border-width: 0;
 }
 
 .add-application .aui-widget-bd {
@@ -179,11 +126,11 @@ html > .lfr-dockbar-pinned {
 }
 
 .add-application {
-	left: 5px;
+	left: 10px !important;
 }
 
 .manage-layouts {
-	left: 50px;
+	left: 60px !important;
 }
 
 .my-places-menu {
@@ -198,15 +145,31 @@ html > .lfr-dockbar-pinned {
 }
 
 .my-places-menu a {
+	display: block;
 	overflow: hidden;
 	text-align: right;
 	white-space: nowrap;
-	display: block;
+}
+
+.my-places-menu .current-site {
+	border: solid #1D4280;
+	border-width: 1px 0;
 }
 
 .my-places-menu .current-site a {
-	background: #A8D6ED url(../images/arrows/01_right.png) no-repeat scroll 2px 30%;
+	background: #3068BA url(../images/arrows/01_right.png) no-repeat scroll 2px 30%;
+	color: #FFF;
 	padding-left: 20px;
+	text-shadow: 1px 1px #333;
+}
+
+.my-places-menu .current-site .site-type {
+	color: #FFF;
+}
+
+.my-places-menu .current-site a:hover, .my-places-menu a:hover .site-type {
+	color: #FFF;
+	text-shadow: 1px 1px #333;
 }
 
 .my-places-menu .site-name {
@@ -222,8 +185,12 @@ html > .lfr-dockbar-pinned {
 	margin-left: 10px;
 }
 
+.ie7 .my-places-menu .site-type {
+	float: none;
+}
+
 .my-places-menu a:hover .site-type {
-	color: #fff;
+	color: #FFF;
 }
 
 .ie7 .my-places-menu a {
@@ -298,11 +265,55 @@ html > .lfr-dockbar-pinned {
 }
 
 .multiple-messages .dockbar-message {
-	border-top: 1px solid #ccc;
+	border-top: 1px solid #CCC;
 	padding: 5px 0;
 }
 
 .multiple-messages .first {
 	border-top-width: 0;
 	padding-top: 0;
+}
+
+.add-content-menu .add-page a {
+	background: url(../images/navigation/add_page.png) no-repeat 3px 50%;
+	padding-left: 25px;
+}
+
+.add-content-menu .add-application a {
+	background: url(../images/common/portlet.png) no-repeat 3px 50%;
+	padding-left: 25px;
+}
+
+.manage-content-menu li a {
+	background: url() no-repeat 3px 50%;
+	padding-left: 25px;
+}
+
+.manage-content-menu .manage-page a {
+	background-image: url(../images/dock/page_settings.png);
+}
+
+.manage-content-menu .page-layout a {
+	background-image: url(../images/dock/layout.png);
+}
+
+.manage-content-menu .sitemap a {
+	background-image: url(../images/common/sitemap.png);
+}
+
+.manage-content-menu .settings a {
+	background-image: url(../images/common/configuration.png);
+}
+
+.manage-content-menu .control-panel a {
+	background-image: url(../images/dock/control_panel.png);
+}
+
+.aui-underlay-content {
+}
+
+.add-application {
+}
+
+.manage-layouts {
 }
