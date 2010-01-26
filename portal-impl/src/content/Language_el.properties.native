@@ -1210,6 +1210,7 @@ current-theme=Τρέχον θέμα
 current-title=Τρέχων τίτλος
 current-user=Τρέχων χρήστης
 current=Τρέχοντες
+custom-attributes=Ιδιότητες συνήθειας (Automatic Translation)
 custom-color=Προσαρμοσμένο Χρώμα
 custom-field-height-help=Αυτό θα θέσει το ύψος του τομέα εισαγωγής στα εικονοκύτταρα. (Automatic Translation)
 custom-field-hidden-help=Ο καθορισμός ενός τομέα συνήθειας που κρύβεται σημαίνει ότι το field&#039 η αξία του s δεν παρουσιάζεται ποτέ σε οποιοδήποτε ενδιάμεσο με τον χρήστη εκτός από αυτό. Αυτό επιτρέπει στον τομέα για να χρησιμοποιηθεί για λίγο περισσότερους σκοτεινούς και προηγμένους λόγους όπως η δράση ως placeholder για τις άδειες συνήθειας. (Automatic Translation)

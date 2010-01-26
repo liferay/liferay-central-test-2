@@ -1209,6 +1209,7 @@ current-theme=Tema actual
 current-title=Título actual
 current-user=Usuario actual
 current=Actual
+custom-attributes=Cualidades de encargo (Automatic Translation)
 custom-color=Color personalizado
 custom-field-height-help=Esto fijará la altura del campo de la entrada en pixeles. (Automatic Translation)
 custom-field-hidden-help=Ocultar un campo personalizado significa que el valor del atributo nunca es mostrado en ninguna interfaz de usuario aparte de ésta.Esto permite que el atributo sea utilizado para propósitos más avanzados y complejos tales como valer de parámetro para permisos personalizados.

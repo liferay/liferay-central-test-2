@@ -1209,6 +1209,7 @@ current-theme=Tema corrente
 current-title=Titolo Corrente
 current-user=Utente corrente
 current=Corrente
+custom-attributes=Attributi su ordinazione (Automatic Translation)
 custom-color=Colore personalizzato
 custom-field-height-help=Ciò fisserà l'altezza del campo dell'input in pixel. (Automatic Translation)
 custom-field-hidden-help=Regolando un campo su ordinazione al nascosto a significa che il field&#039; il valore di s non è indicato mai in alcun'interfaccia utente oltre a questa. Ciò permette che il campo sia usato per un po'più di scopi oscuri ed avanzati come fungere da placeholder per i permessi su ordinazione. (Automatic Translation)

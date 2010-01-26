@@ -1210,6 +1210,7 @@ current-theme=当前主题模式
 current-title=当前标题
 current-user=当前用户
 current=当前的
+custom-attributes=习惯属性 (Automatic Translation)
 custom-color=自定义颜色
 custom-field-height-help=这将设置输入领域的高度在映象点的。 (Automatic Translation)
 custom-field-hidden-help=设置一个习惯领域对掩藏意味着field&#039; s价值在除这一个以外的任何用户界面从未显示。 这允许领域为有些阴暗和先进的目的使用例如作为习惯允许的占位符。 (Automatic Translation)

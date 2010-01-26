@@ -1210,6 +1210,7 @@ current-theme=Tema corrente
 current-title=Título corrente
 current-user=Usuário corrente
 current=Corrente
+custom-attributes=Atributos feitos sob encomenda (Automatic Translation)
 custom-color=Cor customizada
 custom-field-height-help=Isto ajustará a altura do campo da entrada nos pixéis. (Automatic Translation)
 custom-field-hidden-help=Configurar um campo costumizado como escondido significa que o valor do campo nunca será mostrado em qualquer interface do usuário além desta. Isto permite que o campo seja usado para finalidadesmais obscuras e avançadas tais como um placeholder para permissões costumizadas.

@@ -1210,6 +1210,7 @@ current-theme=Thème courant
 current-title=Titre courant
 current-user=Utilisateur courant
 current=Actuel
+custom-attributes=Attributs faits sur commande (Automatic Translation)
 custom-color=Couleur personnalisée
 custom-field-height-help=Ceci placera la taille du champ d'entrée en Pixel. (Automatic Translation)
 custom-field-hidden-help=L'établissement d'un champ fait sur commande à cacher signifie que le field&#039 ; la valeur de s n'est jamais montrée dans n'importe quelle interface utilisateurs sans compter que celle-ci. Ceci permet au champ d'être employé pour encore plus de buts obscurs et avancés tels qu'agir en tant que texte d'attente pour des permissions faites sur commande. (Automatic Translation)

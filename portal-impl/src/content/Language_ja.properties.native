@@ -1210,6 +1210,7 @@ current-theme=現在のテーマ
 current-title=現在のタイトル
 current-user=現在のユーザ
 current=現在の設定
+custom-attributes=注文の属性 (Automatic Translation)
 custom-color=カスタムカラー
 custom-field-height-help=これはピクセルの入力分野の高さを置く。 (Automatic Translation)
 custom-field-hidden-help=隠されるへ注文分野を置くことはことをfield&#039意味する; sの価値はこの1のほかのあらゆるユーザ・インタフェースで決して示されていない。 これは分野が注文の許可のためのホルダーとして機能のようなもう少しの曖昧な、高度の目的に使用するようにする。 (Automatic Translation)

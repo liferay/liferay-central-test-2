@@ -1210,6 +1210,7 @@ current-theme=Aktuelles Theme
 current-title=Aktueller Titel
 current-user=Aktueller Benutzer
 current=Aktuell
+custom-attributes=Kundenspezifische Attribute (Automatic Translation)
 custom-color=Farbe anpassen
 custom-field-height-help=Dieses stellt die Höhe des Eingangsfeldes in den Pixeln ein. (Automatic Translation)
 custom-field-hidden-help=Ein eigenes Feld als "versteckt" einzustellen bedeutet, dass der Wert des Felds nie in irgendeiner Benutzerschnittstelle außer dieser gezeigt wird. Dieses erlaubt, dass das Feld für mehr obskure und erweiterte Zwecke verwendet wird, wie z.B. als ein Platzhalter für eigene Berechtigungen.

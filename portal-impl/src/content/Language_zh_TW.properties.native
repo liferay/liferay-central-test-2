@@ -1210,6 +1210,7 @@ current-theme=當前題材
 current-title=當前的標題
 current-user=當前用戶
 current=目前
+custom-attributes=習慣屬性 (Automatic Translation)
 custom-color=自訂顏色
 custom-field-height-help=這將設置輸入領域的高度在映像點的。 (Automatic Translation)
 custom-field-hidden-help=設置一個習慣領域對掩藏意味着field&#039; s價值在除這一個以外的任何用户界面從未顯示。 這允許領域為有些陰暗和先進的目的使用例如作為習慣允許的佔位符。 (Automatic Translation)
