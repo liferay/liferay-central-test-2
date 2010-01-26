@@ -92,6 +92,7 @@ import javax.naming.ldap.PagedResultsResponseControl;
  * @author Hervé Ménage
  * @author Samuel Kong
  * @author Ryan Park
+ * @author Wesley Gong
  */
 public class PortalLDAPUtil {
 
@@ -1403,6 +1404,48 @@ public class PortalLDAPUtil {
 				Attribute attribute = attributes.get(userMappingsGroup);
 
 				if (attribute != null) {
+					attribute.clear();
+
+					Properties groupMappings = getGroupMappings(
+						ldapServerId, companyId);
+
+					String postfix = getPropertyPostfix(ldapServerId);
+
+					String baseDN = PrefsPropsUtil.getString(
+						companyId, PropsKeys.LDAP_BASE_DN + postfix);
+
+					Binding binding = getUser(
+						ldapServerId, companyId, screenName);
+
+					String fullUserDN = getNameInNamespace(
+						ldapServerId, companyId, binding);
+
+					StringBuilder sb = new StringBuilder();
+
+					sb.append(StringPool.OPEN_PARENTHESIS);
+					sb.append(StringPool.AMPERSAND);
+					sb.append(
+						PrefsPropsUtil.getString(
+							companyId,
+							PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER +
+								postfix));
+					sb.append(StringPool.OPEN_PARENTHESIS);
+					sb.append(groupMappings.getProperty("user"));
+					sb.append(StringPool.EQUAL);
+					sb.append(fullUserDN);
+					sb.append(StringPool.CLOSE_PARENTHESIS);
+					sb.append(StringPool.CLOSE_PARENTHESIS);
+
+					List<SearchResult> results = _searchLDAP(
+						companyId, ctx, 0, baseDN, sb.toString(), null);
+
+					for (SearchResult result : results) {
+						String fullGroupDN = getNameInNamespace(
+							ldapServerId, companyId, result);
+
+						attribute.add(fullGroupDN);
+					}
+
 					_importGroupsAndMembershipFromLDAPUser(
 						ldapServerId, companyId, ctx, user.getUserId(),
 						attribute);
