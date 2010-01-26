@@ -527,7 +527,7 @@ AUI().add(
 							if (type == 'radio') {
 								oldName = item.getAttribute('id');
 
-								item.setAttribute('checked', '');
+								item.set('checked', false);
 								item.setAttribute('value', guid);
 								item.setAttribute('id', newName);
 							}
