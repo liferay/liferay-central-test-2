@@ -828,7 +828,7 @@
 			</license>
 		</licenses>
 		<comments>
-			This was repackaged for compatibility with JDK 5.
+			This was recompiled for compatibility with JDK 5.
 		</comments>
 	</library>
 	<library>
@@ -1098,6 +1098,9 @@
 				<license-name>MPL 1.1</license-name>
 			</license>
 		</licenses>
+		<comments>
+			This was recompiled for compatibility with JDK 5.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/commons-beanutils.jar</file-name>
