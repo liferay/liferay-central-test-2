@@ -31,7 +31,7 @@
 
 function SetResourceType( type )
 {
-	window.parent.frames["frmFolders"].SetResourceType(type) ;
+	window.parent.frames["frmFolders"].SetResourceType( type ) ;
 }
 
 var aTypes = [
@@ -44,13 +44,14 @@ var aTypes = [
 // Liferay
 
 aTypes = [
-	['Image','Image'],
 	['Document','Document'],
+	['Image','Image'],
+	['Page','Page']
 ] ;
 
 window.onload = function()
 {
-	var oCombo = document.getElementById('cmbType');
+	var oCombo = document.getElementById('cmbType') ;
 	oCombo.innerHTML = '' ;
 	for ( var i = 0 ; i < aTypes.length ; i++ )
 	{
@@ -59,7 +60,7 @@ window.onload = function()
 	}
 }
 
-</script>
+		</script>
 	</head>
 	<body>
 		<table class="fullHeight" cellSpacing="0" cellPadding="0" width="100%" border="0">
