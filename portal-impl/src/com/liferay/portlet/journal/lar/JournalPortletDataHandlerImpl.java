@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.lar;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -75,6 +76,7 @@ import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalFeedUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
+import com.liferay.portlet.journal.util.comparator.ArticleIDVersionComparator;
 
 import java.io.File;
 
@@ -1363,8 +1365,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element articlesEl = root.addElement("articles");
 
 			if (context.getBooleanParameter(_NAMESPACE, "articles")) {
+
 				List<JournalArticle> articles =
-					JournalArticleUtil.findByGroupId(context.getGroupId());
+					JournalArticleUtil.findByGroupId(context.getGroupId(),
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS, 
+						new ArticleIDVersionComparator(true));
 
 				for (JournalArticle article : articles) {
 					exportArticle(
