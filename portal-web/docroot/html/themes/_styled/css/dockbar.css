@@ -121,6 +121,10 @@ html > .lfr-dockbar-pinned {
 	font-size: 11px;
 }
 
+.aui-underlay .portal-add-content .portlet-dd-placeholder {
+	display: none;
+}
+
 .add-application .aui-widget-bd {
 	padding: 10px;
 }

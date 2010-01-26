@@ -246,6 +246,10 @@ body #banner .logo a {
 	text-shadow: 1px 1px #FFF;
 }
 
+.lfr-portlet-title-editable {
+	z-index: 9999;
+}
+
 .lfr-portlet-title-editable-content {
 	margin-left: 4px;
 	margin-top: 1px;

@@ -67,7 +67,6 @@ if (layout != null) {
 			layoutOptions = {
 				boxSelector: '.portlet-boundary',
 				columnSelector: '.lfr-portlet-column',
-				grid: '#layout-grid, .lfr-grid',
 				handleSelector: '.portlet-title, .portlet-title-default'
 			};
 		}
