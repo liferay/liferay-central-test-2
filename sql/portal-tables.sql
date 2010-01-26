@@ -597,7 +597,7 @@ create table JournalArticle (
 	indexable BOOLEAN,
 	smallImage BOOLEAN,
 	smallImageId LONG,
-	smallImageURL VARCHAR(75) null
+	smallImageURL STRING null
 );
 
 create table JournalArticleImage (
@@ -646,7 +646,7 @@ create table JournalFeed (
 	delta INTEGER,
 	orderByCol VARCHAR(75) null,
 	orderByType VARCHAR(75) null,
-	targetLayoutFriendlyUrl VARCHAR(75) null,
+	targetLayoutFriendlyUrl VARCHAR(255) null,
 	targetPortletId VARCHAR(75) null,
 	contentField VARCHAR(75) null,
 	feedType VARCHAR(75) null,
@@ -687,7 +687,7 @@ create table JournalTemplate (
 	cacheable BOOLEAN,
 	smallImage BOOLEAN,
 	smallImageId LONG,
-	smallImageURL VARCHAR(75) null
+	smallImageURL STRING null
 );
 
 create table Layout (
@@ -1347,13 +1347,13 @@ create table ShoppingItem (
 	sale_ BOOLEAN,
 	smallImage BOOLEAN,
 	smallImageId LONG,
-	smallImageURL VARCHAR(75) null,
+	smallImageURL STRING null,
 	mediumImage BOOLEAN,
 	mediumImageId LONG,
-	mediumImageURL VARCHAR(75) null,
+	mediumImageURL STRING null,
 	largeImage BOOLEAN,
 	largeImageId LONG,
-	largeImageURL VARCHAR(75) null
+	largeImageURL STRING null
 );
 
 create table ShoppingItemField (

@@ -1186,7 +1186,9 @@
 		</field>
 		<field name="smallImage" type="boolean" />
 		<field name="smallImageId" type="long" />
-		<field name="smallImageURL" type="String" />
+		<field name="smallImageURL" type="String">
+			<hint-collection name="URL" />
+		</field>
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticleImage">
 		<field name="articleImageId" type="long" />
@@ -1241,7 +1243,9 @@
 		<field name="delta" type="int" />
 		<field name="orderByCol" type="String" />
 		<field name="orderByType" type="String" />
-		<field name="targetLayoutFriendlyUrl" type="String" />
+		<field name="targetLayoutFriendlyUrl" type="String">
+			<hint name="max-length">255</hint>
+		</field>
 		<field name="targetPortletId" type="String" />
 		<field name="contentField" type="String" />
 		<field name="feedType" type="String" />
@@ -1296,7 +1300,9 @@
 		<field name="cacheable" type="boolean" />
 		<field name="smallImage" type="boolean" />
 		<field name="smallImageId" type="long" />
-		<field name="smallImageURL" type="String" />
+		<field name="smallImageURL" type="String">
+			<hint-collection name="URL" />
+		</field>
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBBan">
 		<field name="banId" type="long" />
@@ -1567,13 +1573,19 @@
 		<field name="sale" type="boolean" />
 		<field name="smallImage" type="boolean" />
 		<field name="smallImageId" type="long" />
-		<field name="smallImageURL" type="String" />
+		<field name="smallImageURL" type="String">
+			<hint-collection name="URL" />
+		</field>
 		<field name="mediumImage" type="boolean" />
 		<field name="mediumImageId" type="long" />
-		<field name="mediumImageURL" type="String" />
+		<field name="mediumImageURL" type="String">
+			<hint-collection name="URL" />
+		</field>
 		<field name="largeImage" type="boolean" />
 		<field name="largeImageId" type="long" />
-		<field name="largeImageURL" type="String" />
+		<field name="largeImageURL" type="String">
+			<hint-collection name="URL" />
+		</field>
 	</model>
 	<model name="com.liferay.portlet.shopping.model.ShoppingItemField">
 		<field name="itemFieldId" type="long" />

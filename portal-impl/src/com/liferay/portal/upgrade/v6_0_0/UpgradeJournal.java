@@ -25,34 +25,56 @@ package com.liferay.portal.upgrade.v6_0_0;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
-import com.liferay.portal.upgrade.v6_0_0.util.ShoppingItemTable;
+import com.liferay.portal.upgrade.v6_0_0.util.JournalArticleTable;
+import com.liferay.portal.upgrade.v6_0_0.util.JournalFeedTable;
+import com.liferay.portal.upgrade.v6_0_0.util.JournalTemplateTable;
 
 /**
- * <a href="UpgradeShopping.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Zsigmond Rab
  */
-public class UpgradeShopping extends UpgradeProcess {
+public class UpgradeJournal extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("update ShoppingItem set groupId = (select groupId from ");
-		sb.append("ShoppingCategory where ShoppingCategory.categoryId = ");
-		sb.append("ShoppingItem.categoryId)");
-
-		runSQL(sb.toString());
-
 		try {
-			runSQL("alter_column_type ShoppingItem smallImageURL STRING null");
-			runSQL("alter_column_type ShoppingItem mediumImageURL STRING null");
-			runSQL("alter_column_type ShoppingItem largeImageURL STRING null");
+			runSQL(
+				"alter_column_type JournalArticle smallImageURL STRING null");
 		}
 		catch (Exception e) {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-				ShoppingItemTable.TABLE_NAME, ShoppingItemTable.TABLE_COLUMNS);
+				JournalArticleTable.TABLE_NAME,
+				JournalArticleTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(ShoppingItemTable.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(JournalArticleTable.TABLE_SQL_CREATE);
+
+			upgradeTable.updateTable();
+		}
+
+		try {
+			runSQL(
+				"alter_column_type JournalFeed targetLayoutFriendlyUrl " +
+				"VARCHAR(255) null");
+		}
+		catch (Exception e) {
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
+				JournalFeedTable.TABLE_NAME, JournalFeedTable.TABLE_COLUMNS);
+
+			upgradeTable.setCreateSQL(JournalFeedTable.TABLE_SQL_CREATE);
+
+			upgradeTable.updateTable();
+		}
+
+		try {
+			runSQL(
+				"alter_column_type JournalTemplate smallImageURL STRING null");
+		}
+		catch (Exception e) {
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
+				JournalTemplateTable.TABLE_NAME,
+				JournalTemplateTable.TABLE_COLUMNS);
+
+			upgradeTable.setCreateSQL(JournalTemplateTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}
