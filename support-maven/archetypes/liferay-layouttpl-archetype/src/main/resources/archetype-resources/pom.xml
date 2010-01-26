@@ -75,7 +75,7 @@
 		</dependency>
 	</dependencies>
 	<properties>
-		<liferay.auto.deploy.dir>../bundles/liferay-portal-5.3.0/deploy</liferay.auto.deploy.dir>
-		<liferay.version>5.3.0-SNAPSHOT</liferay.version>
+		<liferay.auto.deploy.dir>../bundles/liferay-portal-6.0.0/deploy</liferay.auto.deploy.dir>
+		<liferay.version>6.0.0-SNAPSHOT</liferay.version>
 	</properties>
 </project>

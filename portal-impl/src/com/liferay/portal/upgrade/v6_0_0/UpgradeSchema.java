@@ -20,36 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0;
+package com.liferay.portal.upgrade.v6_0_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
-import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
-import com.liferay.portal.upgrade.v5_3_0.util.ResourceActionTable;
 
 /**
- * <a href="UpgradeResourceAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  */
-public class UpgradeResourceAction extends UpgradeProcess {
+public class UpgradeSchema extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		try {
-			runSQL("alter_column_type ResourceAction name VARCHAR(255) null");
-		}
-		catch (Exception e) {
-
-			// Resource
-
-			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-				ResourceActionTable.TABLE_NAME,
-				ResourceActionTable.TABLE_COLUMNS);
-
-			upgradeTable.setCreateSQL(ResourceActionTable.TABLE_SQL_CREATE);
-
-			upgradeTable.updateTable();
-		}
+		runSQLTemplate("update-5.2.3-6.0.0.sql", false);
 	}
 
 }

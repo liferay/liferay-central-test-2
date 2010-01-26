@@ -20,53 +20,55 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0;
+package com.liferay.portal.upgrade.v6_0_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
-import com.liferay.portal.upgrade.v5_3_0.util.PollsChoiceTable;
-import com.liferay.portal.upgrade.v5_3_0.util.PollsQuestionTable;
+import com.liferay.portal.upgrade.v6_0_0.util.WikiPageResourceTable;
+import com.liferay.portal.upgrade.v6_0_0.util.WikiPageTable;
 
 /**
- * <a href="UpgradePolls.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeWiki.java.html"><b><i>View Source</i></b></a>
  *
- * @author Julio Camarero Puras
+ * @author Brian Wing Shun Chan
  */
-public class UpgradePolls extends UpgradeProcess {
+public class UpgradeWiki extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		try {
-			runSQL("alter_column_type PollsChoice description STRING null");
+			runSQL("alter_column_type WikiPage parentTitle varchar(255) null");
+			runSQL(
+				"alter_column_type WikiPage redirectTitle varchar(255) null");
 		}
 		catch (Exception e) {
 
-			// PollsChoice
+			// WikiPage
 
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-				PollsChoiceTable.TABLE_NAME, PollsChoiceTable.TABLE_COLUMNS);
+				WikiPageTable.TABLE_NAME, WikiPageTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(PollsChoiceTable.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(WikiPageTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}
 
 		try {
-			runSQL("alter_column_type PollsQuestion title STRING null");
+			runSQL(
+				"alter_column_type WikiPageResource title varchar(255) null");
 		}
 		catch (Exception e) {
 
-			// PollsQuestion
+			// WikiPageResource
 
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-				PollsQuestionTable.TABLE_NAME,
-				PollsQuestionTable.TABLE_COLUMNS);
+				WikiPageResourceTable.TABLE_NAME,
+				WikiPageResourceTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(PollsQuestionTable.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(WikiPageResourceTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}
-
 	}
 
 }

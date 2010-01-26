@@ -20,25 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0;
+package com.liferay.portal.upgrade.v6_0_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.upgrade.v6_0_0.util.ResourceActionTable;
 
 /**
- * <a href="UpgradeShopping.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeResourceAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class UpgradeShopping extends UpgradeProcess {
+public class UpgradeResourceAction extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		try {
+			runSQL("alter_column_type ResourceAction name VARCHAR(255) null");
+		}
+		catch (Exception e) {
 
-		sb.append("update ShoppingItem set groupId = (select groupId from ");
-		sb.append("ShoppingCategory where ShoppingCategory.categoryId = ");
-		sb.append("ShoppingItem.categoryId)");
+			// Resource
 
-		runSQL(sb.toString());
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
+				ResourceActionTable.TABLE_NAME,
+				ResourceActionTable.TABLE_COLUMNS);
+
+			upgradeTable.setCreateSQL(ResourceActionTable.TABLE_SQL_CREATE);
+
+			upgradeTable.updateTable();
+		}
 	}
 
 }

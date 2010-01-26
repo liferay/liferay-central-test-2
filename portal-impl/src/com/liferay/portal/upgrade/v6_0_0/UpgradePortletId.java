@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0;
+package com.liferay.portal.upgrade.v6_0_0;
 
 /**
  * <a href="UpgradePortletId.java.html"><b><i>View Source</i></b></a>

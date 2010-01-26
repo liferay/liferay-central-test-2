@@ -20,37 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0.util;
+package com.liferay.portal.upgrade.v6_0_0.util;
 
 import java.sql.Types;
 
 /**
- * <a href="SocialRequestTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="PollsChoiceTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SocialRequestTable {
+public class PollsChoiceTable {
 
-	public static final String TABLE_NAME = "SocialRequest";
+	public static final String TABLE_NAME = "PollsChoice";
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", new Integer(Types.VARCHAR)},
-		{"requestId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"createDate", new Integer(Types.BIGINT)},
-		{"modifiedDate", new Integer(Types.BIGINT)},
-		{"classNameId", new Integer(Types.BIGINT)},
-		{"classPK", new Integer(Types.BIGINT)},
-		{"type_", new Integer(Types.INTEGER)},
-		{"extraData", new Integer(Types.VARCHAR)},
-		{"receiverUserId", new Integer(Types.BIGINT)},
-		{"status", new Integer(Types.INTEGER)}
+		{"choiceId", new Integer(Types.BIGINT)},
+		{"questionId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"description", new Integer(Types.VARCHAR)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table SocialRequest (uuid_ VARCHAR(75) null,requestId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate LONG,modifiedDate LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData STRING null,receiverUserId LONG,status INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table PollsChoice (uuid_ VARCHAR(75) null,choiceId LONG not null primary key,questionId LONG,name VARCHAR(75) null,description STRING null)";
 
-	public static final String TABLE_SQL_DROP = "drop table SocialRequest";
+	public static final String TABLE_SQL_DROP = "drop table PollsChoice";
 
 }

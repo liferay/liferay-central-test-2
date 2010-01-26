@@ -20,37 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0.util;
+package com.liferay.portal.upgrade.v6_0_0.util;
 
-import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.kernel.util.FileUtil;
+import java.sql.Types;
 
 /**
- * <a href="DLFileEntryNameUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="WikiPageResourceTable.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class DLFileEntryNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class WikiPageResourceTable {
 
-	public static String getNewName(String name) throws Exception {
-		if (name.startsWith("DLFE-")) {
-			name = name.substring("DLFE-".length());
-		}
+	public static final String TABLE_NAME = "WikiPageResource";
 
-		name = FileUtil.stripExtension(name);
+	public static final Object[][] TABLE_COLUMNS = {
+		{"resourcePrimKey", new Integer(Types.BIGINT)},
+		{"nodeId", new Integer(Types.BIGINT)},
+		{"title", new Integer(Types.VARCHAR)}
+	};
 
-		return name;
-	}
+	public static final String TABLE_SQL_CREATE = "create table WikiPageResource (resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(255) null)";
 
-	public DLFileEntryNameUpgradeColumnImpl(String name) {
-		super(name);
-	}
-
-	public Object getNewValue(Object oldValue) throws Exception {
-		String name = (String)oldValue;
-
-		return getNewName(name);
-	}
+	public static final String TABLE_SQL_DROP = "drop table WikiPageResource";
 
 }

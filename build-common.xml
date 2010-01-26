@@ -108,34 +108,34 @@
 		<dtd publicId="-//Liferay//DTD Display 5.0.0//EN" location="${definitions.dir}/liferay-display_5_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Display 5.1.0//EN" location="${definitions.dir}/liferay-display_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Display 5.2.0//EN" location="${definitions.dir}/liferay-display_5_2_0.dtd" />
-		<dtd publicId="-//Liferay//DTD Display 5.3.0//EN" location="${definitions.dir}/liferay-display_5_3_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Display 6.0.0//EN" location="${definitions.dir}/liferay-display_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Hook 5.1.0//EN" location="${definitions.dir}/liferay-hook_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Hook 5.2.0//EN" location="${definitions.dir}/liferay-hook_5_2_0.dtd" />
-		<dtd publicId="-//Liferay//DTD Hook 5.3.0//EN" location="${definitions.dir}/liferay-hook_5_3_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Hook 6.0.0//EN" location="${definitions.dir}/liferay-hook_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Layout Templates 3.6.0//EN" location="${definitions.dir}/liferay-layout-templates_3_6_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Layout Templates 4.0.0//EN" location="${definitions.dir}/liferay-layout-templates_4_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Layout Templates 4.3.0//EN" location="${definitions.dir}/liferay-layout-templates_4_3_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Layout Templates 5.0.0//EN" location="${definitions.dir}/liferay-layout-templates_5_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Layout Templates 5.1.0//EN" location="${definitions.dir}/liferay-layout-templates_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Layout Templates 5.2.0//EN" location="${definitions.dir}/liferay-layout-templates_5_2_0.dtd" />
-		<dtd publicId="-//Liferay//DTD Layout Templates 5.3.0//EN" location="${definitions.dir}/liferay-layout-templates_5_3_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Layout Templates 6.0.0//EN" location="${definitions.dir}/liferay-layout-templates_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Look and Feel 3.5.0//EN" location="${definitions.dir}/liferay-look-and-feel_3_5_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Look and Feel 4.0.0//EN" location="${definitions.dir}/liferay-look-and-feel_4_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Look and Feel 4.3.0//EN" location="${definitions.dir}/liferay-look-and-feel_4_3_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Look and Feel 5.0.0//EN" location="${definitions.dir}/liferay-look-and-feel_5_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Look and Feel 5.1.0//EN" location="${definitions.dir}/liferay-look-and-feel_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Look and Feel 5.2.0//EN" location="${definitions.dir}/liferay-look-and-feel_5_2_0.dtd" />
-		<dtd publicId="-//Liferay//DTD Look and Feel 5.3.0//EN" location="${definitions.dir}/liferay-look-and-feel_5_3_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Look and Feel 6.0.0//EN" location="${definitions.dir}/liferay-look-and-feel_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Plugin Package 4.3.0//EN" location="${definitions.dir}/liferay-plugin-package_4_3_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Plugin Package 5.0.0//EN" location="${definitions.dir}/liferay-plugin-package_5_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Plugin Package 5.1.0//EN" location="${definitions.dir}/liferay-plugin-package_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Plugin Package 5.2.0//EN" location="${definitions.dir}/liferay-plugin-package_5_2_0.dtd" />
-		<dtd publicId="-//Liferay//DTD Plugin Package 5.3.0//EN" location="${definitions.dir}/liferay-plugin-package_5_3_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Plugin Package 6.0.0//EN" location="${definitions.dir}/liferay-plugin-package_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Plugin Repository 4.3.0//EN" location="${definitions.dir}/liferay-plugin-repository_4_3_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Plugin Repository 5.0.0//EN" location="${definitions.dir}/liferay-plugin-repository_5_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Plugin Repository 5.1.0//EN" location="${definitions.dir}/liferay-plugin-repository_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Plugin Repository 5.2.0//EN" location="${definitions.dir}/liferay-plugin-repository_5_2_0.dtd" />
-		<dtd publicId="-//Liferay//DTD Plugin Repository 5.3.0//EN" location="${definitions.dir}/liferay-plugin-repository_5_3_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Plugin Repository 6.0.0//EN" location="${definitions.dir}/liferay-plugin-repository_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD PORTLET 2.0.0//EN" location="${definitions.dir}/liferay-portlet_2_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD PORTLET 2.2.0//EN" location="${definitions.dir}/liferay-portlet_2_2_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Portlet Application 3.5.0//EN" location="${definitions.dir}/liferay-portlet-app_3_5_0.dtd" />
@@ -150,7 +150,7 @@
 		<dtd publicId="-//Liferay//DTD Portlet Application 5.0.0//EN" location="${definitions.dir}/liferay-portlet-app_5_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Portlet Application 5.1.0//EN" location="${definitions.dir}/liferay-portlet-app_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Portlet Application 5.2.0//EN" location="${definitions.dir}/liferay-portlet-app_5_2_0.dtd" />
-		<dtd publicId="-//Liferay//DTD Portlet Application 5.3.0//EN" location="${definitions.dir}/liferay-portlet-app_5_3_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Portlet Application 6.0.0//EN" location="${definitions.dir}/liferay-portlet-app_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Service Builder 3.5.0//EN" location="${definitions.dir}/liferay-service-builder_3_5_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Service Builder 3.6.1//EN" location="${definitions.dir}/liferay-service-builder_3_6_1.dtd" />
 		<dtd publicId="-//Liferay//DTD Service Builder 4.0.0//EN" location="${definitions.dir}/liferay-service-builder_4_0_0.dtd" />
@@ -161,13 +161,13 @@
 		<dtd publicId="-//Liferay//DTD Service Builder 5.0.0//EN" location="${definitions.dir}/liferay-service-builder_5_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Service Builder 5.1.0//EN" location="${definitions.dir}/liferay-service-builder_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Service Builder 5.2.0//EN" location="${definitions.dir}/liferay-service-builder_5_2_0.dtd" />
-		<dtd publicId="-//Liferay//DTD Service Builder 5.3.0//EN" location="${definitions.dir}/liferay-service-builder_5_3_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Service Builder 6.0.0//EN" location="${definitions.dir}/liferay-service-builder_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD SKIN 2.0.0//EN" location="${definitions.dir}/liferay-skin_2_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Theme Loader 4.3.0//EN" location="${definitions.dir}/liferay-theme-loader_4_3_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Theme Loader 5.0.0//EN" location="${definitions.dir}/liferay-theme-loader_5_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Theme Loader 5.1.0//EN" location="${definitions.dir}/liferay-theme-loader_5_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Theme Loader 5.2.0//EN" location="${definitions.dir}/liferay-theme-loader_5_2_0.dtd" />
-		<dtd publicId="-//Liferay//DTD Theme Loader 5.3.0//EN" location="${definitions.dir}/liferay-theme-loader_5_3_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Theme Loader 6.0.0//EN" location="${definitions.dir}/liferay-theme-loader_6_0_0.dtd" />
 		<dtd publicId="-//MuleSource //DTD mule-configuration XML V1.0//EN" location="${definitions.dir}/mule-configuration.dtd" />
 		<dtd publicId="-//SPRING//DTD BEAN//EN" location="${definitions.dir}/spring-beans.dtd" />
 		<dtd publicId="-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" location="${definitions.dir}/struts-config_1_2.dtd" />

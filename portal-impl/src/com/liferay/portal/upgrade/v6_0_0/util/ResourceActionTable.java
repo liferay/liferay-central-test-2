@@ -20,27 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0.util;
+package com.liferay.portal.upgrade.v6_0_0.util;
 
 import java.sql.Types;
 
 /**
- * <a href="WikiPageResourceTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceActionTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WikiPageResourceTable {
+public class ResourceActionTable {
 
-	public static final String TABLE_NAME = "WikiPageResource";
+	public static final String TABLE_NAME = "ResourceAction";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"resourcePrimKey", new Integer(Types.BIGINT)},
-		{"nodeId", new Integer(Types.BIGINT)},
-		{"title", new Integer(Types.VARCHAR)}
+		{"resourceActionId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"actionId", new Integer(Types.VARCHAR)},
+		{"bitwiseValue", new Integer(Types.BIGINT)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table WikiPageResource (resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table ResourceAction (resourceActionId LONG not null primary key,name VARCHAR(255) null,actionId VARCHAR(75) null,bitwiseValue LONG)";
 
-	public static final String TABLE_SQL_DROP = "drop table WikiPageResource";
+	public static final String TABLE_SQL_DROP = "drop table ResourceAction";
 
 }

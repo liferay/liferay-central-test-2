@@ -20,19 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0;
+package com.liferay.portal.upgrade.v6_0_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
- * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeShopping.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Alexander Chow
  */
-public class UpgradeSchema extends UpgradeProcess {
+public class UpgradeShopping extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		runSQLTemplate("update-5.2.3-5.3.0.sql", false);
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("update ShoppingItem set groupId = (select groupId from ");
+		sb.append("ShoppingCategory where ShoppingCategory.categoryId = ");
+		sb.append("ShoppingItem.categoryId)");
+
+		runSQL(sb.toString());
 	}
 
 }

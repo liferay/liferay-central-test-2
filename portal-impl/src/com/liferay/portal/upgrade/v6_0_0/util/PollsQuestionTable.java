@@ -20,47 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0.util;
+package com.liferay.portal.upgrade.v6_0_0.util;
 
 import java.sql.Types;
 
 /**
- * <a href="WikiPageTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="PollsQuestionTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WikiPageTable {
+public class PollsQuestionTable {
 
-	public static final String TABLE_NAME = "WikiPage";
+	public static final String TABLE_NAME = "PollsQuestion";
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", new Integer(Types.VARCHAR)},
-		{"pageId", new Integer(Types.BIGINT)},
-		{"resourcePrimKey", new Integer(Types.BIGINT)},
+		{"questionId", new Integer(Types.BIGINT)},
 		{"groupId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.BIGINT)},
 		{"userName", new Integer(Types.VARCHAR)},
 		{"createDate", new Integer(Types.TIMESTAMP)},
 		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"nodeId", new Integer(Types.BIGINT)},
 		{"title", new Integer(Types.VARCHAR)},
-		{"version", new Integer(Types.DOUBLE)},
-		{"minorEdit", new Integer(Types.BOOLEAN)},
-		{"content", new Integer(Types.CLOB)},
-		{"status", new Integer(Types.INTEGER)},
-		{"statusByUserId", new Integer(Types.BIGINT)},
-		{"statusByUserName", new Integer(Types.VARCHAR)},
-		{"statusDate", new Integer(Types.TIMESTAMP)},
-		{"summary", new Integer(Types.VARCHAR)},
-		{"format", new Integer(Types.VARCHAR)},
-		{"head", new Integer(Types.BOOLEAN)},
-		{"parentTitle", new Integer(Types.VARCHAR)},
-		{"redirectTitle", new Integer(Types.VARCHAR)}
+		{"description", new Integer(Types.VARCHAR)},
+		{"expirationDate", new Integer(Types.TIMESTAMP)},
+		{"lastVoteDate", new Integer(Types.TIMESTAMP)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,nodeId LONG,title VARCHAR(255) null,version DOUBLE,minorEdit BOOLEAN,content TEXT null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,summary STRING null,format VARCHAR(75) null,head BOOLEAN,parentTitle VARCHAR(255) null,redirectTitle VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table PollsQuestion (uuid_ VARCHAR(75) null,questionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title STRING null,description STRING null,expirationDate DATE null,lastVoteDate DATE null)";
 
-	public static final String TABLE_SQL_DROP = "drop table WikiPage";
+	public static final String TABLE_SQL_DROP = "drop table PollsQuestion";
 
 }

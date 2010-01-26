@@ -20,28 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0.util;
+package com.liferay.portal.upgrade.v6_0_0.util;
 
-import java.sql.Types;
+import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.kernel.util.FileUtil;
 
 /**
- * <a href="ResourceActionTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFileEntryNameUpgradeColumnImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class ResourceActionTable {
+public class DLFileEntryNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public static final String TABLE_NAME = "ResourceAction";
+	public static String getNewName(String name) throws Exception {
+		if (name.startsWith("DLFE-")) {
+			name = name.substring("DLFE-".length());
+		}
 
-	public static final Object[][] TABLE_COLUMNS = {
-		{"resourceActionId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"actionId", new Integer(Types.VARCHAR)},
-		{"bitwiseValue", new Integer(Types.BIGINT)}
-	};
+		name = FileUtil.stripExtension(name);
 
-	public static final String TABLE_SQL_CREATE = "create table ResourceAction (resourceActionId LONG not null primary key,name VARCHAR(255) null,actionId VARCHAR(75) null,bitwiseValue LONG)";
+		return name;
+	}
 
-	public static final String TABLE_SQL_DROP = "drop table ResourceAction";
+	public DLFileEntryNameUpgradeColumnImpl(String name) {
+		super(name);
+	}
+
+	public Object getNewValue(Object oldValue) throws Exception {
+		String name = (String)oldValue;
+
+		return getNewName(name);
+	}
 
 }

@@ -20,13 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0;
+package com.liferay.portal.upgrade.v6_0_0.util;
+
+import java.sql.Types;
 
 /**
- * <a href="UpgradeBlogs.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocialRelationTable.java.html"><b><i>View Source</i></b></a>
  *
- * @author Douglas Wong
+ * @author Brian Wing Shun Chan
  */
-public class UpgradeBlogs
-	extends com.liferay.portal.upgrade.v5_1_0.UpgradeBlogs {
+public class SocialRelationTable {
+
+	public static final String TABLE_NAME = "SocialRelation";
+
+	public static final Object[][] TABLE_COLUMNS = {
+		{"uuid_", new Integer(Types.VARCHAR)},
+		{"relationId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"createDate", new Integer(Types.BIGINT)},
+		{"userId1", new Integer(Types.BIGINT)},
+		{"userId2", new Integer(Types.BIGINT)},
+		{"type_", new Integer(Types.INTEGER)}
+	};
+
+	public static final String TABLE_SQL_CREATE = "create table SocialRelation (uuid_ VARCHAR(75) null,relationId LONG not null primary key,companyId LONG,createDate LONG,userId1 LONG,userId2 LONG,type_ INTEGER)";
+
+	public static final String TABLE_SQL_DROP = "drop table SocialRelation";
+
 }

@@ -20,31 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_3_0.util;
+package com.liferay.portal.upgrade.v6_0_0.util;
 
 import java.sql.Types;
 
 /**
- * <a href="SocialRelationTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocialActivityTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SocialRelationTable {
+public class SocialActivityTable {
 
-	public static final String TABLE_NAME = "SocialRelation";
+	public static final String TABLE_NAME = "SocialActivity";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"uuid_", new Integer(Types.VARCHAR)},
-		{"relationId", new Integer(Types.BIGINT)},
+		{"activityId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
 		{"createDate", new Integer(Types.BIGINT)},
-		{"userId1", new Integer(Types.BIGINT)},
-		{"userId2", new Integer(Types.BIGINT)},
-		{"type_", new Integer(Types.INTEGER)}
+		{"mirrorActivityId", new Integer(Types.BIGINT)},
+		{"classNameId", new Integer(Types.BIGINT)},
+		{"classPK", new Integer(Types.BIGINT)},
+		{"type_", new Integer(Types.INTEGER)},
+		{"extraData", new Integer(Types.VARCHAR)},
+		{"receiverUserId", new Integer(Types.BIGINT)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table SocialRelation (uuid_ VARCHAR(75) null,relationId LONG not null primary key,companyId LONG,createDate LONG,userId1 LONG,userId2 LONG,type_ INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate LONG,mirrorActivityId LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData STRING null,receiverUserId LONG)";
 
-	public static final String TABLE_SQL_DROP = "drop table SocialRelation";
+	public static final String TABLE_SQL_DROP = "drop table SocialActivity";
 
 }

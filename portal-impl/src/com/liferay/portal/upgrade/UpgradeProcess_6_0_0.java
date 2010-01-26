@@ -24,29 +24,29 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeAsset;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeAssetPublisher;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeBlogs;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeDocumentLibrary;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeExpando;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeGroup;
-import com.liferay.portal.upgrade.v5_3_0.UpgradePolls;
-import com.liferay.portal.upgrade.v5_3_0.UpgradePortletId;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeResourceAction;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeShopping;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeSocial;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeWiki;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeAsset;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeAssetPublisher;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeBlogs;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeDocumentLibrary;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeExpando;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeGroup;
+import com.liferay.portal.upgrade.v6_0_0.UpgradePolls;
+import com.liferay.portal.upgrade.v6_0_0.UpgradePortletId;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeResourceAction;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeSchema;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeShopping;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeSocial;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeWiki;
 
 /**
- * <a href="UpgradeProcess_5_3_0.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeProcess_6_0_0.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
-public class UpgradeProcess_5_3_0 extends UpgradeProcess {
+public class UpgradeProcess_6_0_0 extends UpgradeProcess {
 
 	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_3_0_BUILD_NUMBER;
+		return ReleaseInfo.RELEASE_6_0_0_BUILD_NUMBER;
 	}
 
 	protected void doUpgrade() throws Exception {
