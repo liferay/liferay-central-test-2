@@ -48,7 +48,6 @@ String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"
 Object value = request.getAttribute("aui:input:value");
 
 String baseType = type;
-boolean showForLabel = true;
 String forLabel = id;
 
 if ((model != null) && Validator.isNull(type)) {
@@ -64,7 +63,7 @@ if ((model != null) && Validator.isNull(type)) {
 		Locale defaultLocale = LocaleUtil.getDefault();
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
-		forLabel = forLabel + StringPool.UNDERLINE + defaultLanguageId;
+		forLabel += StringPool.UNDERLINE + defaultLanguageId;
 	}
 }
 
@@ -75,10 +74,11 @@ if (Validator.isNull(baseType)){
 boolean checkboxField = baseType.equals("checkbox") || baseType.equals("boolean");
 boolean choiceField = checkboxField || baseType.equals("radio");
 
+boolean showForLabel = true;
+
 if ((baseType.equals("assetCategories")) || (baseType.equals("assetTags")) || baseType.equals(Date.class.getName())) {
 	showForLabel = false;
 }
-
 
 if (checkboxField) {
 	forLabel += "Checkbox";
