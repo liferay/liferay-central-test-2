@@ -147,9 +147,6 @@ public class PortalLDAPUtil {
 				mods.addItem(
 					userMappings.getProperty("firstName"),
 					contact.getFirstName());
-				mods.addItem(
-					userMappings.getProperty("lastName"),
-					contact.getLastName());
 
 				String middleNameMapping = userMappings.getProperty(
 					"middleName");
@@ -157,6 +154,10 @@ public class PortalLDAPUtil {
 				if (Validator.isNotNull(middleNameMapping)) {
 					mods.addItem(middleNameMapping, contact.getMiddleName());
 				}
+
+				mods.addItem(
+					userMappings.getProperty("lastName"),
+					contact.getLastName());
 
 				String fullNameMapping = userMappings.getProperty("fullName");
 
@@ -233,8 +234,6 @@ public class PortalLDAPUtil {
 
 			mods.addItem(
 				userMappings.getProperty("firstName"), user.getFirstName());
-			mods.addItem(
-				userMappings.getProperty("lastName"), user.getLastName());
 
 			String middleNameMapping = userMappings.getProperty(
 				"middleName");
@@ -242,6 +241,9 @@ public class PortalLDAPUtil {
 			if (Validator.isNotNull(middleNameMapping)) {
 				mods.addItem(middleNameMapping, user.getMiddleName());
 			}
+
+			mods.addItem(
+				userMappings.getProperty("lastName"), user.getLastName());
 
 			String fullNameMapping = userMappings.getProperty("fullName");
 
