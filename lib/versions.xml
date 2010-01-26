@@ -1602,7 +1602,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-api.jar</file-name>
-		<version>1.6.0</version>
+		<version>1.6.1</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1614,7 +1614,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-core.jar</file-name>
-		<version>1.6.0</version>
+		<version>1.6.1</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1630,7 +1630,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-jcr-commons.jar</file-name>
-		<version>1.6.0</version>
+		<version>1.6.1</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1642,7 +1642,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-spi.jar</file-name>
-		<version>1.6.0</version>
+		<version>1.6.1</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1654,7 +1654,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-spi-commons.jar</file-name>
-		<version>1.6.0</version>
+		<version>1.6.1</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1666,7 +1666,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-text-extractors.jar</file-name>
-		<version>1.6.0</version>
+		<version>1.6.1</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
