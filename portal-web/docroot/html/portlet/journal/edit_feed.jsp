@@ -186,7 +186,9 @@ if (feed != null) {
 				</aui:field-wrapper>
 			</c:when>
 			<c:otherwise>
-				<aui:input cssClass="lfr-input-text-container" name="url" value="<%= feedURL.toString() %>" />
+				<aui:field-wrapper label="url">
+					<liferay-ui:input-resource url="<%= feedURL.toString() %>" />
+				</aui:field-wrapper>
 			</c:otherwise>
 		</c:choose>
 	</aui:fieldset>
@@ -274,6 +276,11 @@ if (feed != null) {
 		<aui:legend label="presentation-settings" />
 
 		<aui:select label="feed-item-content" name="contentField">
+
+			<%
+			String taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('');";
+			%>
+
 			<aui:option label="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(JournalFeedConstants.WEB_CONTENT_DESCRIPTION) %>" />
 			<optgroup label='<liferay-ui:message key="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />'>
 				<aui:option label="use-default-template" onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(JournalFeedConstants.RENDERED_WEB_CONTENT) %>" value="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />
@@ -282,7 +289,7 @@ if (feed != null) {
 
 					<%
 					for (JournalTemplate currTemplate : templates) {
-						String taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('" + currTemplate.getTemplateId() + "');";
+						taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('" + currTemplate.getTemplateId() + "');";
 					%>
 
 						<aui:option label='<%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName()) %>' onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= rendererTemplateId.equals(currTemplate.getTemplateId()) %>" value="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />
@@ -311,7 +318,7 @@ if (feed != null) {
 						String elType = StringUtil.replace(el.attributeValue("type"), StringPool.UNDERLINE, StringPool.DASH);
 
 						if (!elType.equals("boolean") && !elType.equals("list") && !elType.equals("multi-list")) {
-							String taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('');";
+							taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('');";
 					%>
 
 							<aui:option label='<%= TextFormatter.format(elName, TextFormatter.J) + "(" + LanguageUtil.get(pageContext, elType) + ")" %>' onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(elName) %>" value="<%= elName %>" />
