@@ -87,9 +87,13 @@ function OpenFolder( folderPath )
 	window.parent.frames['frmFolders'].LoadFolders( folderPath ) ;
 }
 
-function OpenFile( fileUrl )
+function OpenFile(fileUrl)
 {
-	window.top.opener.SetUrl( encodeURI( fileUrl ).replace( '#', '%23' ) ) ;
+	var funcNum = 1;
+	if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)){
+	      funcNum = 2;
+	}
+	window.top.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl);	
 	window.top.close() ;
 	window.top.opener.focus() ;
 }
