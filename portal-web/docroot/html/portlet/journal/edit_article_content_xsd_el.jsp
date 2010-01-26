@@ -203,7 +203,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 								}
 							%>
 
-								<option <%= elContent.equals(listElName) ? "selected" : "" %> value="<%= listElValue %>"><%= listElName %></option>
+								<option <%= elContent.equals(listElName) ? "selected" : "" %> value="<%= listElName %>"><%= listElValue %></option>
 
 							<%
 							}

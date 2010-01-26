@@ -2372,7 +2372,7 @@ AUI().add(
 										buffer.push(option.openTag);
 									}
 
-									buffer.push('<![CDATA[' + optionKey + ']]>');
+									buffer.push('<![CDATA[' + optionValue + ']]>');
 
 									if (multiList) {
 										buffer.push(option.closeTag);
