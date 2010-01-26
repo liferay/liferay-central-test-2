@@ -171,8 +171,6 @@ if (feed != null) {
 			</c:choose>
 		</aui:field-wrapper>
 
-
-
 		<aui:input bean="<%= feed %>" cssClass="lfr-input-text-container" model="<%= JournalFeed.class %>" name="name" />
 
 		<aui:input bean="<%= feed %>" cssClass="lfr-textarea-container" model="<%= JournalFeed.class %>" name="description" />
@@ -275,10 +273,6 @@ if (feed != null) {
 	<aui:fieldset>
 		<aui:legend label="presentation-settings" />
 
-		<%
-		String taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('');";
-		%>
-
 		<aui:select label="feed-item-content" name="contentField">
 			<aui:option label="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(JournalFeedConstants.WEB_CONTENT_DESCRIPTION) %>" />
 			<optgroup label='<liferay-ui:message key="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />'>
@@ -288,7 +282,7 @@ if (feed != null) {
 
 					<%
 					for (JournalTemplate currTemplate : templates) {
-						taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('" + currTemplate.getTemplateId() + "');";
+						String taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('" + currTemplate.getTemplateId() + "');";
 					%>
 
 						<aui:option label='<%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName()) %>' onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= rendererTemplateId.equals(currTemplate.getTemplateId()) %>" value="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />
@@ -317,7 +311,7 @@ if (feed != null) {
 						String elType = StringUtil.replace(el.attributeValue("type"), StringPool.UNDERLINE, StringPool.DASH);
 
 						if (!elType.equals("boolean") && !elType.equals("list") && !elType.equals("multi-list")) {
-							taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('');";
+							String taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('');";
 					%>
 
 							<aui:option label='<%= TextFormatter.format(elName, TextFormatter.J) + "(" + LanguageUtil.get(pageContext, elType) + ")" %>' onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(elName) %>" value="<%= elName %>" />
@@ -374,7 +368,6 @@ if (feed != null) {
 			%>
 
 			<%= sb.toString() %>
-
 		</aui:select>
 
 		<aui:input label="maximum-items-to-display" name="delta" style="width: 50px;" value="<%= delta %>" />
@@ -396,10 +389,10 @@ if (feed != null) {
 		<c:if test="<%= feed != null %>">
 
 			<%
-			String taglibPriviewButton = "window.open('" + feedURL + "', 'feed');";
+			String taglibPreviewButton = "window.open('" + feedURL + "', 'feed');";
 			%>
 
-			<aui:button type="button" value="preview" onClick="<%= taglibPriviewButton %>" />
+			<aui:button type="button" value="preview" onClick="<%= taglibPreviewButton %>" />
 		</c:if>
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
