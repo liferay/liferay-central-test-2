@@ -396,6 +396,8 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 
 		// Tag
 
+		boolean reindex = false;
+
 		AssetTag tag = assetTagPersistence.findByPrimaryKey(tagId);
 
 		tag.setModifiedDate(new Date());
@@ -425,6 +427,8 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 			}
 			catch (NoSuchTagException nste) {
 			}
+
+			reindex = true;
 		}
 
 		validate(name);
@@ -462,6 +466,13 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 				assetTagPropertyLocalService.addTagProperty(
 					userId, tagId, key, value);
 			}
+		}
+
+		if (reindex) {
+			List<AssetEntry> entries = assetTagPersistence.getAssetEntries(
+				tag.getTagId());
+
+			reIndex(entries);
 		}
 
 		return tag;
