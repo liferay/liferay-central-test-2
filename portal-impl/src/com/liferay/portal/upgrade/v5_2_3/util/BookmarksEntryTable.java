@@ -27,7 +27,8 @@ import java.sql.Types;
 /**
  * <a href="BookmarksEntryTable.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author	  Brian Wing Shun Chan
+ * @generated
  */
 public class BookmarksEntryTable {
 

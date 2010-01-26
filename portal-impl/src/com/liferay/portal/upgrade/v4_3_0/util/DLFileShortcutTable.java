@@ -27,7 +27,8 @@ import java.sql.Types;
 /**
  * <a href="DLFileShortcutTable.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author	  Brian Wing Shun Chan
+ * @generated
  */
 public class DLFileShortcutTable {
 
