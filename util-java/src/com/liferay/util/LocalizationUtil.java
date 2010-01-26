@@ -146,7 +146,7 @@ public class LocalizationUtil {
 			return value;
 		}
 
-		XMLStreamReader reader = null;
+		XMLStreamReader xmlStreamReader = null;
 
 		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
@@ -159,18 +159,19 @@ public class LocalizationUtil {
 				currentThread.setContextClassLoader(portalClassLoader);
 			}
 
-			XMLInputFactory factory = XMLInputFactory.newInstance();
+			XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
 
-			reader = factory.createXMLStreamReader(new UnsyncStringReader(xml));
+			xmlStreamReader = xmlInputFactory.createXMLStreamReader(
+				new UnsyncStringReader(xml));
 
 			String defaultLanguageId = StringPool.BLANK;
 
 			// Skip root node
 
-			if (reader.hasNext()) {
-				reader.nextTag();
+			if (xmlStreamReader.hasNext()) {
+				xmlStreamReader.nextTag();
 
-				defaultLanguageId = reader.getAttributeValue(
+				defaultLanguageId = xmlStreamReader.getAttributeValue(
 					null, _DEFAULT_LOCALE);
 
 				if (Validator.isNull(defaultLanguageId)) {
@@ -180,11 +181,11 @@ public class LocalizationUtil {
 
 			// Find specified language and/or default language
 
-			while (reader.hasNext()) {
-				int event = reader.next();
+			while (xmlStreamReader.hasNext()) {
+				int event = xmlStreamReader.next();
 
 				if (event == XMLStreamConstants.START_ELEMENT) {
-					String languageId = reader.getAttributeValue(
+					String languageId = xmlStreamReader.getAttributeValue(
 						null, _LANGUAGE_ID);
 
 					if (Validator.isNull(languageId)) {
@@ -194,13 +195,13 @@ public class LocalizationUtil {
 					if (languageId.equals(defaultLanguageId) ||
 						languageId.equals(requestedLanguageId)) {
 
-						while (reader.hasNext()) {
-							event = reader.next();
+						while (xmlStreamReader.hasNext()) {
+							event = xmlStreamReader.next();
 
 							if (event == XMLStreamConstants.CHARACTERS ||
 								event == XMLStreamConstants.CDATA) {
 
-								String text = reader.getText();
+								String text = xmlStreamReader.getText();
 
 								if (languageId.equals(defaultLanguageId)) {
 									defaultValue = text;
@@ -241,9 +242,9 @@ public class LocalizationUtil {
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 
-			if (reader != null) {
+			if (xmlStreamReader != null) {
 				try {
-					reader.close();
+					xmlStreamReader.close();
 				}
 				catch (Exception e) {
 				}
@@ -358,8 +359,8 @@ public class LocalizationUtil {
 		String systemDefaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
 
-		XMLStreamReader reader = null;
-		XMLStreamWriter writer = null;
+		XMLStreamReader xmlStreamReader = null;
+		XMLStreamWriter xmlStreamWriter = null;
 
 		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
@@ -372,9 +373,9 @@ public class LocalizationUtil {
 				currentThread.setContextClassLoader(portalClassLoader);
 			}
 
-			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+			XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
 
-			reader = inputFactory.createXMLStreamReader(
+			xmlStreamReader = xmlInputFactory.createXMLStreamReader(
 				new UnsyncStringReader(xml));
 
 			String availableLocales = StringPool.BLANK;
@@ -382,12 +383,12 @@ public class LocalizationUtil {
 
 			// Read root node
 
-			if (reader.hasNext()) {
-				reader.nextTag();
+			if (xmlStreamReader.hasNext()) {
+				xmlStreamReader.nextTag();
 
-				availableLocales = reader.getAttributeValue(
+				availableLocales = xmlStreamReader.getAttributeValue(
 					null, _AVAILABLE_LOCALES);
-				defaultLanguageId = reader.getAttributeValue(
+				defaultLanguageId = xmlStreamReader.getAttributeValue(
 					null, _DEFAULT_LOCALE);
 
 				if (Validator.isNull(defaultLanguageId)) {
@@ -404,25 +405,28 @@ public class LocalizationUtil {
 				UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
 					true);
 
-				XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
+				XMLOutputFactory xmlOutputFactory =
+					XMLOutputFactory.newInstance();
 
-				writer = outputFactory.createXMLStreamWriter(
+				xmlStreamWriter = xmlOutputFactory.createXMLStreamWriter(
 					unsyncStringWriter);
 
-				writer.writeStartDocument();
-				writer.writeStartElement(_ROOT);
-				writer.writeAttribute(_AVAILABLE_LOCALES, availableLocales);
-				writer.writeAttribute(_DEFAULT_LOCALE, defaultLanguageId);
+				xmlStreamWriter.writeStartDocument();
+				xmlStreamWriter.writeStartElement(_ROOT);
+				xmlStreamWriter.writeAttribute(
+					_AVAILABLE_LOCALES, availableLocales);
+				xmlStreamWriter.writeAttribute(
+					_DEFAULT_LOCALE, defaultLanguageId);
 
 				_copyNonExempt(
-					reader, writer, requestedLanguageId, defaultLanguageId,
-					cdata);
+					xmlStreamReader, xmlStreamWriter, requestedLanguageId,
+					defaultLanguageId, cdata);
 
-				writer.writeEndElement();
-				writer.writeEndDocument();
+				xmlStreamWriter.writeEndElement();
+				xmlStreamWriter.writeEndDocument();
 
-				writer.close();
-				writer = null;
+				xmlStreamWriter.close();
+				xmlStreamWriter = null;
 
 				xml = unsyncStringWriter.toString();
 			}
@@ -437,17 +441,17 @@ public class LocalizationUtil {
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 
-			if (reader != null) {
+			if (xmlStreamReader != null) {
 				try {
-					reader.close();
+					xmlStreamReader.close();
 				}
 				catch (Exception e) {
 				}
 			}
 
-			if (writer != null) {
+			if (xmlStreamWriter != null) {
 				try {
-					writer.close();
+					xmlStreamWriter.close();
 				}
 				catch (Exception e) {
 				}
@@ -525,8 +529,8 @@ public class LocalizationUtil {
 
 		xml = _sanitizeXML(xml);
 
-		XMLStreamReader reader = null;
-		XMLStreamWriter writer = null;
+		XMLStreamReader xmlStreamReader = null;
+		XMLStreamWriter xmlStreamWriter = null;
 
 		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
@@ -539,19 +543,19 @@ public class LocalizationUtil {
 				currentThread.setContextClassLoader(portalClassLoader);
 			}
 
-			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+			XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
 
-			reader = inputFactory.createXMLStreamReader(
+			xmlStreamReader = xmlInputFactory.createXMLStreamReader(
 				new UnsyncStringReader(xml));
 
 			String availableLocales = StringPool.BLANK;
 
 			// Read root node
 
-			if (reader.hasNext()) {
-				reader.nextTag();
+			if (xmlStreamReader.hasNext()) {
+				xmlStreamReader.nextTag();
 
-				availableLocales = reader.getAttributeValue(
+				availableLocales = xmlStreamReader.getAttributeValue(
 					null, _AVAILABLE_LOCALES);
 
 				if (Validator.isNull(availableLocales)) {
@@ -568,37 +572,41 @@ public class LocalizationUtil {
 			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
 				true);
 
-			XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
+			XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
 
-			writer = outputFactory.createXMLStreamWriter(unsyncStringWriter);
+			xmlStreamWriter = xmlOutputFactory.createXMLStreamWriter(
+				unsyncStringWriter);
 
-			writer.writeStartDocument();
-			writer.writeStartElement(_ROOT);
-			writer.writeAttribute(_AVAILABLE_LOCALES, availableLocales);
-			writer.writeAttribute(_DEFAULT_LOCALE, defaultLanguageId);
+			xmlStreamWriter.writeStartDocument();
+			xmlStreamWriter.writeStartElement(_ROOT);
+			xmlStreamWriter.writeAttribute(
+				_AVAILABLE_LOCALES, availableLocales);
+			xmlStreamWriter.writeAttribute(_DEFAULT_LOCALE, defaultLanguageId);
 
 			_copyNonExempt(
-				reader, writer, requestedLanguageId, defaultLanguageId,
-				cdata);
+				xmlStreamReader, xmlStreamWriter, requestedLanguageId,
+				defaultLanguageId, cdata);
 
 			if (cdata) {
-				writer.writeStartElement(key);
-				writer.writeAttribute(_LANGUAGE_ID, requestedLanguageId);
-				writer.writeCData(value);
-				writer.writeEndElement();
+				xmlStreamWriter.writeStartElement(key);
+				xmlStreamWriter.writeAttribute(
+					_LANGUAGE_ID, requestedLanguageId);
+				xmlStreamWriter.writeCData(value);
+				xmlStreamWriter.writeEndElement();
 			}
 			else {
-				writer.writeStartElement(key);
-				writer.writeAttribute(_LANGUAGE_ID, requestedLanguageId);
-				writer.writeCharacters(value);
-				writer.writeEndElement();
+				xmlStreamWriter.writeStartElement(key);
+				xmlStreamWriter.writeAttribute(
+					_LANGUAGE_ID, requestedLanguageId);
+				xmlStreamWriter.writeCharacters(value);
+				xmlStreamWriter.writeEndElement();
 			}
 
-			writer.writeEndElement();
-			writer.writeEndDocument();
+			xmlStreamWriter.writeEndElement();
+			xmlStreamWriter.writeEndDocument();
 
-			writer.close();
-			writer = null;
+			xmlStreamWriter.close();
+			xmlStreamWriter = null;
 
 			xml = unsyncStringWriter.toString();
 		}
@@ -612,17 +620,17 @@ public class LocalizationUtil {
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 
-			if (reader != null) {
+			if (xmlStreamReader != null) {
 				try {
-					reader.close();
+					xmlStreamReader.close();
 				}
 				catch (Exception e) {
 				}
 			}
 
-			if (writer != null) {
+			if (xmlStreamWriter != null) {
 				try {
-					writer.close();
+					xmlStreamWriter.close();
 				}
 				catch (Exception e) {
 				}
@@ -633,15 +641,15 @@ public class LocalizationUtil {
 	}
 
 	private static void _copyNonExempt(
-			XMLStreamReader reader, XMLStreamWriter writer,
+			XMLStreamReader xmlStreamReader, XMLStreamWriter xmlStreamWriter,
 			String exemptLanguageId, String defaultLanguageId, boolean cdata)
 		throws XMLStreamException {
 
-		while (reader.hasNext()) {
-			int event = reader.next();
+		while (xmlStreamReader.hasNext()) {
+			int event = xmlStreamReader.next();
 
 			if (event == XMLStreamConstants.START_ELEMENT) {
-				String languageId = reader.getAttributeValue(
+				String languageId = xmlStreamReader.getAttributeValue(
 					null, _LANGUAGE_ID);
 
 				if (Validator.isNull(languageId)) {
@@ -649,22 +657,24 @@ public class LocalizationUtil {
 				}
 
 				if (!languageId.equals(exemptLanguageId)) {
-					writer.writeStartElement(reader.getLocalName());
-					writer.writeAttribute(_LANGUAGE_ID, languageId);
+					xmlStreamWriter.writeStartElement(
+						xmlStreamReader.getLocalName());
+					xmlStreamWriter.writeAttribute(_LANGUAGE_ID, languageId);
 
-					while (reader.hasNext()) {
-						event = reader.next();
+					while (xmlStreamReader.hasNext()) {
+						event = xmlStreamReader.next();
 
 						if (event == XMLStreamConstants.CHARACTERS ||
 							event == XMLStreamConstants.CDATA) {
 
-							String text = reader.getText();
+							String text = xmlStreamReader.getText();
 
 							if (cdata) {
-								writer.writeCData(text);
+								xmlStreamWriter.writeCData(text);
 							}
 							else {
-								writer.writeCharacters(reader.getText());
+								xmlStreamWriter.writeCharacters(
+									xmlStreamReader.getText());
 							}
 
 							break;
@@ -674,7 +684,7 @@ public class LocalizationUtil {
 						}
 					}
 
-					writer.writeEndElement();
+					xmlStreamWriter.writeEndElement();
 				}
 			}
 			else if (event == XMLStreamConstants.END_DOCUMENT) {
@@ -715,7 +725,7 @@ public class LocalizationUtil {
 
 		String value = null;
 
-		XMLStreamReader reader = null;
+		XMLStreamReader xmlStreamReader = null;
 
 		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
@@ -728,14 +738,15 @@ public class LocalizationUtil {
 				currentThread.setContextClassLoader(portalClassLoader);
 			}
 
-			XMLInputFactory factory = XMLInputFactory.newInstance();
+			XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
 
-			reader = factory.createXMLStreamReader(new UnsyncStringReader(xml));
+			xmlStreamReader = xmlInputFactory.createXMLStreamReader(
+				new UnsyncStringReader(xml));
 
-			if (reader.hasNext()) {
-				reader.nextTag();
+			if (xmlStreamReader.hasNext()) {
+				xmlStreamReader.nextTag();
 
-				value = reader.getAttributeValue(null, name);
+				value = xmlStreamReader.getAttributeValue(null, name);
 			}
 		}
 		catch (Exception e) {
@@ -748,9 +759,9 @@ public class LocalizationUtil {
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 
-			if (reader != null) {
+			if (xmlStreamReader != null) {
 				try {
-					reader.close();
+					xmlStreamReader.close();
 				}
 				catch (Exception e) {
 				}
