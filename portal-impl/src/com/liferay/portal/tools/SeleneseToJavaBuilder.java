@@ -636,9 +636,15 @@ public class SeleneseToJavaBuilder {
 			else if (param1.equals("waitForElementNotPresent") ||
 					 param1.equals("waitForElementPresent") ||
 					 param1.equals("waitForNotPartialText") ||
+					 param1.equals("waitForNotTable") ||
+					 param1.equals("waitForNotText") ||
+					 param1.equals("waitForNotVisible") ||
 					 param1.equals("waitForPartialText") ||
+					 param1.equals("waitForTable") ||
+					 param1.equals("waitForText") ||
 					 param1.equals("waitForTextNotPresent") ||
-					 param1.equals("waitForTextPresent")) {
+					 param1.equals("waitForTextPresent") ||
+					 param1.equals("waitForVisible")) {
 
 				sb.append("for (int second = 0;; second++) {");
 				sb.append("if (second >= 60) {");
@@ -650,25 +656,18 @@ public class SeleneseToJavaBuilder {
 
 				if (param1.equals("waitForElementNotPresent") ||
 					param1.equals("waitForNotPartialText") ||
+					param1.equals("waitForNotTable") ||
+					param1.equals("waitForNotText") ||
+					param1.equals("waitForNotVisible") ||
 					param1.equals("waitForTextNotPresent")) {
 
 					sb.append("!");
 				}
 
-				sb.append("selenium.");
-
 				if (param1.equals("waitForElementNotPresent") ||
 					param1.equals("waitForElementPresent")) {
 
-					sb.append("isElementPresent");
-					sb.append("(\"");
-					sb.append(param2);
-					sb.append("\")");
-				}
-				else if (param1.equals("waitForTextNotPresent") ||
-						 param1.equals("waitForTextPresent")) {
-
-					sb.append("isTextPresent");
+					sb.append("selenium.isElementPresent");
 					sb.append("(\"");
 					sb.append(param2);
 					sb.append("\")");
@@ -676,7 +675,7 @@ public class SeleneseToJavaBuilder {
 				else if (param1.equals("waitForNotPartialText") ||
 						 param1.equals("waitForPartialText")) {
 
-					sb.append("isPartialText(\"");
+					sb.append("selenium.isPartialText(\"");
 					sb.append(param2);
 					sb.append("\", ");
 
@@ -696,55 +695,40 @@ public class SeleneseToJavaBuilder {
 
 					sb.append(")");
 				}
+				else if (param1.equals("waitForNotTable") ||
+						 param1.equals("waitForTable")) {
 
-				sb.append(") {");
-				sb.append("break;");
-				sb.append("}");
-				sb.append("}");
-				sb.append("catch (Exception e) {");
-				sb.append("}");
+					sb.append("StringPool.BLANK.equals(selenium.getTable(\"");
+					sb.append(param2);
+					sb.append("\"))");
+				}
+				else if (param1.equals("waitForNotText") ||
+						 param1.equals("waitForText")) {
 
-				sb.append("Thread.sleep(1000);");
-				sb.append("}");
-			}
-			else if (param1.equals("waitForNotVisible") ||
-					 param1.equals("waitForVisible")) {
+					sb.append("RuntimeVariables.replace(\"");
+					sb.append(param3);
+					sb.append("\").equals(selenium.getText(\"");
+					sb.append(param2);
+					sb.append("\"))");
+				}
+				else if (param1.equals("waitForNotVisible") ||
+						 param1.equals("waitForVisible")) {
 
-				sb.append("for (int second = 0;; second++) {");
-				sb.append("if (second >= 60) {");
-				sb.append("fail(\"timeout\");");
-				sb.append("}");
+					sb.append("selenium.isVisible");
+					sb.append("(\"");
+					sb.append(param2);
+					sb.append("\")");
+				}
+				else if (param1.equals("waitForTextNotPresent") ||
+						 param1.equals("waitForTextPresent")) {
 
-				sb.append("try {");
-				sb.append("if (");
-
-				if (param1.equals("waitForNotVisible")) {
-					sb.append("!");
+					sb.append("selenium.isTextPresent");
+					sb.append("(\"");
+					sb.append(param2);
+					sb.append("\")");
 				}
 
-				sb.append("selenium.isVisible");
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\")) {");
-				sb.append("break;");
-				sb.append("}");
-				sb.append("}");
-				sb.append("catch (Exception e) {");
-				sb.append("}");
-
-				sb.append("Thread.sleep(1000);");
-				sb.append("}");
-			}
-			else if (param1.equals("waitForTable")) {
-				sb.append("for (int second = 0;; second++) {");
-				sb.append("if (second >= 60) {");
-				sb.append("fail(\"timeout\");");
-				sb.append("}");
-
-				sb.append("try {");
-				sb.append("if (StringPool.BLANK.equals(selenium.getTable(\"");
-				sb.append(param2);
-				sb.append("\"))) {");
+				sb.append(") {");
 				sb.append("break;");
 				sb.append("}");
 				sb.append("}");
