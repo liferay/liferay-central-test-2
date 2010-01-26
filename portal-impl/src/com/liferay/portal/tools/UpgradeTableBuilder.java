@@ -23,6 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.portal.util.FileImpl;
 
 import org.apache.tools.ant.DirectoryScanner;
@@ -85,7 +86,9 @@ public class UpgradeTableBuilder {
 					StringUtil.replace(version, ".", "_") + ".util";
 			String className = fileName.substring(x + 1, y) + "Table";
 
-			content = _getContent(packagePath, className, content);
+			String author = _getAuthor(fileName);
+
+			content = _getContent(packagePath, className, content, author);
 
 			_fileUtil.write(fileName, content);
 		}
@@ -109,8 +112,26 @@ public class UpgradeTableBuilder {
 		}
 	}
 
+	private String _getAuthor(String fileName) throws Exception {
+		if (_fileUtil.exists(fileName)) {
+			String content = _fileUtil.read(fileName);
+
+			int x = content.indexOf("* @author ");
+
+			if (x != -1) {
+				int y = content.indexOf("*", x + 1);
+
+				if (y != -1) {
+					return content.substring(x + 10, y).trim();
+				}
+			}
+		}
+
+		return ServiceBuilder.AUTHOR;
+	}
+
 	private String _getContent(
-			String packagePath, String className, String content)
+			String packagePath, String className, String content, String author)
 		throws Exception {
 
 		int x = content.indexOf("public static final String TABLE_NAME =");
@@ -155,7 +176,8 @@ public class UpgradeTableBuilder {
 			" * <a href=\"" + className +
 				".java.html\"><b><i>View Source</i></b></a>\n");
 		sb.append(" *\n");
-		sb.append(" * @author Brian Wing Shun Chan\n");
+		sb.append(" * @author\t  " + author + "\n");
+		sb.append(" * @generated\n");
 		sb.append(" */\n");
 		sb.append("public class " + className + " {\n\n");
 
