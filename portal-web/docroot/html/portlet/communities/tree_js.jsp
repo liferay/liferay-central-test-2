@@ -264,13 +264,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 					data: function(node) {
 						var parentLayoutId = TreeUtil.extractLayoutId(node);
 
-						return A.toQueryString(
-							{
-								groupId: <%= groupId %>,
-								privateLayout: false,
-								parentLayoutId: parentLayoutId
-							}
-						);
+						return {
+							groupId: <%= groupId %>,
+							privateLayout: false,
+							parentLayoutId: parentLayoutId
+						};
 					},
 					method: 'POST'
 				},

@@ -49,15 +49,13 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 <c:choose>
 	<c:when test="<%= PropsValues.FLAGS_GUEST_USERS_ENABLED || themeDisplay.isSignedIn() %>">
 		<aui:script use="dialog">
-			var params = A.toQueryString(
-				{
-					className: '<%= className %>',
-					classPK: '<%= classPK %>',
-					contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
-					contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
-					reportedUserId: '<%= reportedUserId %>'
-				}
-			);
+			var params = {
+				className: '<%= className %>',
+				classPK: '<%= classPK %>',
+				contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
+				contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
+				reportedUserId: '<%= reportedUserId %>'
+			};
 
 			A.on(
 				'click',

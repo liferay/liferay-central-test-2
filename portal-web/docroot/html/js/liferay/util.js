@@ -112,11 +112,13 @@ Liferay.Util = {
 	addParams: function(params, url) {
 		var instance = this;
 
-		if (AUI().Lang.isObject(params)) {
-			params = AUI().toQueryString(params);
+		var A = AUI().use('querystring-stringify-simple');
+
+		if (A.Lang.isObject(params)) {
+			params = A.QueryString.stringify(params);
 		}
 		else {
-			params = AUI().Lang.trim(params);
+			params = A.Lang.trim(params);
 		}
 
 		if (params) {

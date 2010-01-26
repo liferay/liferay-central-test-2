@@ -137,11 +137,9 @@ AUI().add(
 				A.io(
 					_getReceiveUrl(),
 					{
-						data: A.toQueryString(
-							{
-								pollerRequest: requestStr
-							}
-						),
+						data: {
+							pollerRequest: requestStr
+						},
 						method: 'POST',
 						on: {
 							success: _processResponse
@@ -175,11 +173,9 @@ AUI().add(
 				A.io(
 					_getSendUrl(),
 					{
-						data: A.toQueryString(
-							{
-								pollerRequest: requestStr
-							}
-						),
+						data: {
+							pollerRequest: requestStr
+						},
 						method: 'POST',
 						on: {
 							complete: _sendComplete

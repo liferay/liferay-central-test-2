@@ -137,17 +137,15 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 						flagsPopupNode,
 						{
 							cfg: {
-								data: A.toQueryString(
-									{
-										className: '<%= HtmlUtil.escape(className) %>',
-										classPK: '<%= classPK %>',
-										contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
-										contentURL: '<%= HtmlUtil.escape(contentURL) %>',
-										reason: reason,
-										reportedUserId: '<%= reportedUserId %>',
-										reporterEmailAddress: reporterEmailAddress
-									}
-								),
+								data: {
+									className: '<%= HtmlUtil.escape(className) %>',
+									classPK: '<%= classPK %>',
+									contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
+									contentURL: '<%= HtmlUtil.escape(contentURL) %>',
+									reason: reason,
+									reportedUserId: '<%= reportedUserId %>',
+									reporterEmailAddress: reporterEmailAddress
+								},
 								on: {
 									failure: function() {
 										this.get('host').setStdModContent('body', errorMessage);

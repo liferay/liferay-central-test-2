@@ -187,7 +187,7 @@ AUI().add(
 
 				data.parameterMap = A.JSON.stringify(instance._parameterMap);
 
-				return A.toQueryString(data);
+				return A.QueryString.stringify(data);
 			},
 
 			_forceStringValues: function(obj) {
@@ -249,6 +249,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['io-request']
+		requires: ['io-request', 'querystring-stringify-simple']
 	}
 );

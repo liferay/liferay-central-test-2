@@ -77,11 +77,9 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 				AUI().io(
 					themeDisplay.getPathMain() + '/portal/session_click',
 					{
-						data: AUI().toQueryString(
-							{
-								'<%= id %>': 'none'
-							}
-						)
+						data: {
+							'<%= id %>': 'none'
+						}
 					}
 				);
 			}
@@ -104,11 +102,9 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 				AUI().io(
 					themeDisplay.getPathMain() + '/portal/session_click',
 					{
-						data: AUI().toQueryString(
-							{
-								'<%= id %>': ''
-							}
-						)
+						data: {
+							'<%= id %>': ''
+						}
 					}
 				);
 			}
