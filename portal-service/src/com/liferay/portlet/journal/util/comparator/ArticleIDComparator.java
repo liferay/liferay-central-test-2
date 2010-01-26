@@ -32,11 +32,11 @@ import com.liferay.portlet.journal.model.JournalArticle;
  */
 public class ArticleIDComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "articleId ASC";
+	public static String ORDER_BY_ASC = "articleId ASC, version ASC";
 
-	public static String ORDER_BY_DESC = "articleId DESC";
+	public static String ORDER_BY_DESC = "articleId DESC, version DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"articleId"};
+	public static String[] ORDER_BY_FIELDS = {"articleId", "version"};
 
 	public ArticleIDComparator() {
 		this(false);
@@ -52,6 +52,15 @@ public class ArticleIDComparator extends OrderByComparator {
 
 		int value = article1.getArticleId().toLowerCase().compareTo(
 			article2.getArticleId().toLowerCase());
+
+		if (value == 0) {
+			if (article1.getVersion() < article2.getVersion()) {
+				value = -1;
+			}
+			else if (article1.getVersion() > article2.getVersion()) {
+				value = 1;
+			}
+		}
 
 		if (_asc) {
 			return value;
