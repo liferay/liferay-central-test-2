@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileComparator;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
@@ -64,6 +65,8 @@ import org.apache.jackrabbit.extractor.PlainTextExtractor;
 import org.apache.jackrabbit.extractor.RTFTextExtractor;
 import org.apache.jackrabbit.extractor.TextExtractor;
 import org.apache.jackrabbit.extractor.XMLTextExtractor;
+import org.apache.poi.POITextExtractor;
+import org.apache.poi.extractor.ExtractorFactory;
 
 import org.mozilla.intl.chardet.nsDetector;
 import org.mozilla.intl.chardet.nsPSMDetector;
@@ -308,7 +311,21 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 				text = sb.toString();
 			}
 			else {
-				if (_log.isInfoEnabled()) {
+				if (contentType.equals(ContentTypes.APPLICATION_ZIP) ||
+					contentType.startsWith(
+						"application/vnd.openxmlformats-officedocument.")) {
+
+					try {
+						POITextExtractor extractor =
+							ExtractorFactory.createExtractor(is);
+
+						text = extractor.getText();
+					}
+					catch (Exception e) {
+					}
+				}
+
+				if ((text == null) && _log.isInfoEnabled()) {
 					_log.info(
 						"No text extractor found for extension " + fileExt);
 				}
