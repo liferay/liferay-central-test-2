@@ -619,6 +619,10 @@
 	background: transparent;
 }
 
+.lfr-panel-container {
+	background: #FFF;
+}
+
 .lfr-hudcrumbs {
 	position: fixed;
 	top: 0;
