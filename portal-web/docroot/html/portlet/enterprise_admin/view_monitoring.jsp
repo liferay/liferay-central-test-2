@@ -38,98 +38,86 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 			url="<%= portletURLString %>"
 		/>
 
-		<%
-		SearchContainer searchContainer = new SearchContainer();
+		<liferay-ui:search-container
+			headerNames="session-id,user-id,name,screen-name,last-request,num-of-hits"
+			emptyResultsMessage="there-are-no-live-sessions"
+		>
 
-		List<String> headerNames = new ArrayList<String>();
+			<%
+			Map<String, UserTracker> sessionUsers = LiveUsers.getSessionUsers(company.getCompanyId());
 
-		headerNames.add("session-id");
-		headerNames.add("user-id");
-		headerNames.add("name");
-		headerNames.add("screen-name");
-		//headerNames.add("email-address");
-		headerNames.add("last-request");
-		headerNames.add("num-of-hits");
+			List<UserTracker> userTrackers = new ArrayList<UserTracker>(sessionUsers.values());
 
-		searchContainer.setHeaderNames(headerNames);
-		searchContainer.setEmptyResultsMessage("there-are-no-live-sessions");
+			userTrackers = ListUtil.sort(userTrackers, new UserTrackerModifiedDateComparator());
+			%>
 
-		Map<String, UserTracker> sessionUsers = LiveUsers.getSessionUsers(company.getCompanyId());
+			<liferay-ui:search-container-results
+				results="<%= ListUtil.subList(userTrackers, searchContainer.getStart(), searchContainer.getEnd()) %>"
+				total="<%= userTrackers.size() %>"
+			/>
 
-		int total = sessionUsers.size();
+			<liferay-ui:search-container-row
+				className="com.liferay.portal.model.UserTracker"
+				escapedModel="<%= false %>"
+				keyProperty="userTrackerId"
+				modelVar="userTracker"
+			>
+				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
+					<portlet:param name="struts_action" value="/enterprise_admin/edit_session" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="sessionId" value="<%= userTracker.getSessionId() %>" />
+				</portlet:renderURL>
 
-		searchContainer.setTotal(total);
+				<%
+				User user2 = null;
 
-		List results = new ArrayList();
+				try {
+					user2 = UserLocalServiceUtil.getUserById(userTracker.getUserId());
+				}
+				catch (NoSuchUserException nsue) {
+				}
+				%>
 
-		Iterator itr = sessionUsers.entrySet().iterator();
+				<liferay-ui:search-container-column-text
+					href="<%= rowURL %>"
+					name="session-id"
+					property="sessionId"
+				/>
 
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+				<liferay-ui:search-container-column-text
+					href="<%= rowURL %>"
+					name="user-id"
+					property="userId"
+				/>
 
-			results.add(entry.getValue());
-		}
+				<liferay-ui:search-container-column-text
+					href="<%= rowURL %>"
+					name="user-id"
+					value='<%= ((user2 != null) ? user2.getFullName() : LanguageUtil.get(pageContext, "not-available")) %>'
+				/>
 
-		results = ListUtil.sort(results, new UserTrackerModifiedDateComparator());
+				<liferay-ui:search-container-column-text
+					href="<%= rowURL %>"
+					name="screen-name"
+					value='<%= ((user2 != null) ? user2.getScreenName() : LanguageUtil.get(pageContext, "not-available")) %>'
+				/>
 
-		List resultRows = searchContainer.getResultRows();
+				<liferay-ui:search-container-column-text
+					href="<%= rowURL %>"
+					name="last-request"
+					value="<%= dateFormatDateTime.format(userTracker.getModifiedDate()) %>"
+				/>
 
-		for (int i = 0; i < results.size(); i++) {
-			UserTracker userTracker = (UserTracker)results.get(i);
+				<liferay-ui:search-container-column-text
+					href="<%= rowURL %>"
+					name="num-of-hits"
+					property="hits"
+				/>
 
-			ResultRow row = new ResultRow(userTracker, userTracker.getUserTrackerId(), i);
+			</liferay-ui:search-container-row>
 
-			PortletURL rowURL = renderResponse.createRenderURL();
-
-			rowURL.setWindowState(WindowState.MAXIMIZED);
-
-			rowURL.setParameter("struts_action", "/enterprise_admin/edit_session");
-			rowURL.setParameter("redirect", currentURL);
-			rowURL.setParameter("sessionId", userTracker.getSessionId());
-
-			User user2 = null;
-
-			try {
-				user2 = UserLocalServiceUtil.getUserById(userTracker.getUserId());
-			}
-			catch (NoSuchUserException nsue) {
-			}
-
-			// Session ID
-
-			row.addText(userTracker.getSessionId(), rowURL);
-
-			// User ID
-
-			row.addText(String.valueOf(userTracker.getUserId()), rowURL);
-
-			// Name
-
-			row.addText(((user2 != null) ? user2.getFullName() : LanguageUtil.get(pageContext, "not-available")), rowURL);
-
-			// Screen Name
-
-			row.addText(((user2 != null) ? user2.getScreenName() : LanguageUtil.get(pageContext, "not-available")), rowURL);
-
-			// Email Address
-
-			//row.addText(((user2 != null) ? user2.getEmailAddress() : LanguageUtil.get(pageContext, "not-available")), rowURL);
-
-			// Last Request
-
-			row.addText(dateFormatDateTime.format(userTracker.getModifiedDate()), rowURL);
-
-			// # of Hits
-
-			row.addText(String.valueOf(userTracker.getHits()), rowURL);
-
-			// Add result row
-
-			resultRows.add(row);
-		}
-		%>
-
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			<liferay-ui:search-iterator />
+		</liferay-ui:search-container>
 	</c:when>
 	<c:when test="<%= !PropsValues.LIVE_USERS_ENABLED %>">
 		<%= LanguageUtil.format(pageContext, "display-of-live-session-data-is-disabled", PropsKeys.LIVE_USERS_ENABLED) %>
