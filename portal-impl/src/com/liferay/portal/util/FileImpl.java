@@ -316,12 +316,15 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 						"application/vnd.openxmlformats-officedocument.")) {
 
 					try {
-						POITextExtractor extractor =
+						POITextExtractor poiTextExtractor =
 							ExtractorFactory.createExtractor(is);
 
-						text = extractor.getText();
+						text = poiTextExtractor.getText();
 					}
 					catch (Exception e) {
+						if (_log.isWarnEnabled()) {
+							_log.warn(e, e);
+						}
 					}
 				}
 
