@@ -496,9 +496,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupPersistence.findByCompanyId(companyId, start, end);
 	}
 
-	public int getCompanyGroupsCount(long companyId, int start, int end)
-		throws SystemException {
-
+	public int getCompanyGroupsCount(long companyId) throws SystemException {
 		return groupPersistence.countByCompanyId(companyId);
 	}
 

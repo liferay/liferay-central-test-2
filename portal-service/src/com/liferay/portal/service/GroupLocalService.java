@@ -137,7 +137,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCompanyGroupsCount(long companyId, int start, int end)
+	public int getCompanyGroupsCount(long companyId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

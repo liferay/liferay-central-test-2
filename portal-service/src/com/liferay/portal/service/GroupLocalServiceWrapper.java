@@ -161,9 +161,9 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 		return _groupLocalService.getCompanyGroups(companyId, start, end);
 	}
 
-	public int getCompanyGroupsCount(long companyId, int start, int end)
+	public int getCompanyGroupsCount(long companyId)
 		throws com.liferay.portal.SystemException {
-		return _groupLocalService.getCompanyGroupsCount(companyId, start, end);
+		return _groupLocalService.getCompanyGroupsCount(companyId);
 	}
 
 	public com.liferay.portal.model.Group getFriendlyURLGroup(long companyId,

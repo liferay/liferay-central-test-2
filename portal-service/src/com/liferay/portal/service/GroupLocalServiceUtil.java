@@ -164,9 +164,9 @@ public class GroupLocalServiceUtil {
 		return getService().getCompanyGroups(companyId, start, end);
 	}
 
-	public static int getCompanyGroupsCount(long companyId, int start, int end)
+	public static int getCompanyGroupsCount(long companyId)
 		throws com.liferay.portal.SystemException {
-		return getService().getCompanyGroupsCount(companyId, start, end);
+		return getService().getCompanyGroupsCount(companyId);
 	}
 
 	public static com.liferay.portal.model.Group getFriendlyURLGroup(
