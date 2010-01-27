@@ -426,7 +426,7 @@ AUI().add(
 
 				var portlet = instance._curPortlet;
 
-				var customCSS = A.one('#lfr-custom-css');
+				var customCSS = instance._getNodeById('lfr-custom-css');
 				var customCSSContainer = customCSS.ancestor('.aui-field');
 				var customPortletNoteHTML = '<p class="portlet-msg-info form-hint"></p>';
 				var customPortletNote = A.one('#lfr-portlet-info');
@@ -595,6 +595,12 @@ AUI().add(
 				return {input: inputVal, selectBox: selectVal, both: inputVal + selectVal};
 			},
 
+			_getNodeById: function(id) {
+				var instance = this;
+
+				return A.one('#_113_' + id);
+			},
+
 			_getSafeInteger: function(input) {
 				var instance = this;
 
@@ -633,93 +639,93 @@ AUI().add(
 
 					// Portlet config
 
-					instance._customTitleInput = A.one('#custom-title');
+					instance._customTitleInput = instance._getNodeById('custom-title');
 
 					var portletTitle = instance._curPortlet.one('.portlet-title');
 
 					instance._defaultPortletTitle = (portletTitle && portletTitle.text()) || '';
-					instance._customTitleCheckbox = A.one('#use-custom-title-checkbox');
-					instance._showBorders = A.one('#show-borders');
+					instance._customTitleCheckbox = instance._getNodeById('use-custom-titleCheckbox');
+					instance._showBorders = instance._getNodeById('show-bordersCheckbox');
 					instance._borderNote = A.one('#border-note');
-					instance._portletLanguage = A.one('#lfr-portlet-language');
-					instance._portletLinksTarget = A.one('#lfr-point-links');
+					instance._portletLanguage = instance._getNodeById('lfr-portlet-language');
+					instance._portletLinksTarget = instance._getNodeById('lfr-point-links');
 
 					// Text
 
-					instance._fontFamily = A.one('#lfr-font-family');
-					instance._fontWeight = A.one('#lfr-font-bold');
-					instance._fontStyle = A.one('#lfr-font-italic');
-					instance._fontSize = A.one('#lfr-font-size');
-					instance._fontColor = A.one('#lfr-font-color');
-					instance._textAlign = A.one('#lfr-font-align');
-					instance._textDecoration = A.one('#lfr-font-decoration');
-					instance._wordSpacing = A.one('#lfr-font-space');
-					instance._leading = A.one('#lfr-font-leading');
-					instance._tracking = A.one('#lfr-font-tracking');
+					instance._fontFamily = instance._getNodeById('lfr-font-family');
+					instance._fontWeight = instance._getNodeById('lfr-font-bold');
+					instance._fontStyle = instance._getNodeById('lfr-font-italic');
+					instance._fontSize = instance._getNodeById('lfr-font-size');
+					instance._fontColor = instance._getNodeById('lfr-font-color');
+					instance._textAlign = instance._getNodeById('lfr-font-align');
+					instance._textDecoration = instance._getNodeById('lfr-font-decoration');
+					instance._wordSpacing = instance._getNodeById('lfr-font-space');
+					instance._leading = instance._getNodeById('lfr-font-leading');
+					instance._tracking = instance._getNodeById('lfr-font-tracking');
 
 					// Background
 
-					instance._backgroundColor = A.one('#lfr-bg-color');
+					instance._backgroundColor = instance._getNodeById('lfr-bg-color');
 
 					// Border
 
-					instance._ufaBorderWidth = A.one('#lfr-use-for-all-width');
-					instance._ufaBorderStyle = A.one('#lfr-use-for-all-style');
-					instance._ufaBorderColor = A.one('#lfr-use-for-all-color');
+					instance._ufaBorderWidth = instance._getNodeById('lfr-use-for-all-width');
+					instance._ufaBorderStyle = instance._getNodeById('lfr-use-for-all-style');
+					instance._ufaBorderColor = instance._getNodeById('lfr-use-for-all-color');
 
-					instance._borderTopInt = A.one('#lfr-border-width-top');
-					instance._borderTopUnit = A.one('#lfr-border-width-top-unit');
-					instance._borderRightInt = A.one('#lfr-border-width-right');
-					instance._borderRightUnit = A.one('#lfr-border-width-right-unit');
-					instance._borderBottomInt = A.one('#lfr-border-width-bottom');
-					instance._borderBottomUnit = A.one('#lfr-border-width-bottom-unit');
-					instance._borderLeftInt = A.one('#lfr-border-width-left');
-					instance._borderLeftUnit = A.one('#lfr-border-width-left-unit');
+					instance._borderTopInt = instance._getNodeById('lfr-border-width-top');
+					instance._borderTopUnit = instance._getNodeById('lfr-border-width-top-unit');
+					instance._borderRightInt = instance._getNodeById('lfr-border-width-right');
+					instance._borderRightUnit = instance._getNodeById('lfr-border-width-right-unit');
+					instance._borderBottomInt = instance._getNodeById('lfr-border-width-bottom');
+					instance._borderBottomUnit = instance._getNodeById('lfr-border-width-bottom-unit');
+					instance._borderLeftInt = instance._getNodeById('lfr-border-width-left');
+					instance._borderLeftUnit = instance._getNodeById('lfr-border-width-left-unit');
 
-					instance._borderTopStyle = A.one('#lfr-border-style-top');
-					instance._borderRightStyle = A.one('#lfr-border-style-right');
-					instance._borderBottomStyle = A.one('#lfr-border-style-bottom');
-					instance._borderLeftStyle = A.one('#lfr-border-style-left');
+					instance._borderTopStyle = instance._getNodeById('lfr-border-style-top');
+					instance._borderRightStyle = instance._getNodeById('lfr-border-style-right');
+					instance._borderBottomStyle = instance._getNodeById('lfr-border-style-bottom');
+					instance._borderLeftStyle = instance._getNodeById('lfr-border-style-left');
 
-					instance._borderTopColor = A.one('#lfr-border-color-top');
-					instance._borderRightColor = A.one('#lfr-border-color-right');
-					instance._borderBottomColor = A.one('#lfr-border-color-bottom');
-					instance._borderLeftColor = A.one('#lfr-border-color-left');
+					instance._borderTopColor = instance._getNodeById('lfr-border-color-top');
+					instance._borderRightColor = instance._getNodeById('lfr-border-color-right');
+					instance._borderBottomColor = instance._getNodeById('lfr-border-color-bottom');
+					instance._borderLeftColor = instance._getNodeById('lfr-border-color-left');
 
 					// Spacing
 
-					instance._ufaPadding = A.one('#lfr-use-for-all-padding');
-					instance._ufaMargin = A.one('#lfr-use-for-all-margin');
+					instance._ufaPadding = instance._getNodeById('lfr-use-for-all-padding');
+					instance._ufaMargin = instance._getNodeById('lfr-use-for-all-margin');
 
-					instance._paddingTopInt = A.one('#lfr-padding-top');
-					instance._paddingTopUnit = A.one('#lfr-padding-top-unit');
-					instance._paddingRightInt = A.one('#lfr-padding-right');
-					instance._paddingRightUnit = A.one('#lfr-padding-right-unit');
-					instance._paddingBottomInt = A.one('#lfr-padding-bottom');
-					instance._paddingBottomUnit = A.one('#lfr-padding-bottom-unit');
-					instance._paddingLeftInt = A.one('#lfr-padding-left');
-					instance._paddingLeftUnit = A.one('#lfr-padding-left-unit');
+					instance._paddingTopInt = instance._getNodeById('lfr-padding-top');
+					instance._paddingTopUnit = instance._getNodeById('lfr-padding-top-unit');
+					instance._paddingRightInt = instance._getNodeById('lfr-padding-right');
+					instance._paddingRightUnit = instance._getNodeById('lfr-padding-right-unit');
+					instance._paddingBottomInt = instance._getNodeById('lfr-padding-bottom');
+					instance._paddingBottomUnit = instance._getNodeById('lfr-padding-bottom-unit');
+					instance._paddingLeftInt = instance._getNodeById('lfr-padding-left');
+					instance._paddingLeftUnit = instance._getNodeById('lfr-padding-left-unit');
 
-					instance._marginTopInt = A.one('#lfr-margin-top');
-					instance._marginTopUnit = A.one('#lfr-margin-top-unit');
-					instance._marginRightInt = A.one('#lfr-margin-right');
-					instance._marginRightUnit = A.one('#lfr-margin-right-unit');
-					instance._marginBottomInt = A.one('#lfr-margin-bottom');
-					instance._marginBottomUnit = A.one('#lfr-margin-bottom-unit');
-					instance._marginLeftInt = A.one('#lfr-margin-left');
-					instance._marginLeftUnit = A.one('#lfr-margin-left-unit');
+					instance._marginTopInt = instance._getNodeById('lfr-margin-top');
+					instance._marginTopUnit = instance._getNodeById('lfr-margin-top-unit');
+					instance._marginRightInt = instance._getNodeById('lfr-margin-right');
+					instance._marginRightUnit = instance._getNodeById('lfr-margin-right-unit');
+					instance._marginBottomInt = instance._getNodeById('lfr-margin-bottom');
+					instance._marginBottomUnit = instance._getNodeById('lfr-margin-bottom-unit');
+					instance._marginLeftInt = instance._getNodeById('lfr-margin-left');
+					instance._marginLeftUnit = instance._getNodeById('lfr-margin-left-unit');
 
 					// Advanced CSS
 
-					instance._customCSS = A.one('#lfr-custom-css');
+					instance._customCSS = instance._getNodeById('lfr-custom-css');
 
-					instance._saveButton = A.one('#lfr-lookfeel-save');
-					instance._resetButton = A.one('#lfr-lookfeel-reset');
+					instance._saveButton = instance._getNodeById('lfr-lookfeel-save');
+					instance._resetButton = instance._getNodeById('lfr-lookfeel-reset');
 
 					// WAP styling
 
-					instance._wapTitleInput = A.one('#lfr-wap-title');
-					instance._wapInitialWindowStateSelect = A.one('#lfr-wap-initial-window-state');
+					instance._wapTitleInput = instance._getNodeById('lfr-wap-title');
+					instance._wapInitialWindowStateSelect = instance._getNodeById('lfr-wap-initial-window-state');
 
 				}
 

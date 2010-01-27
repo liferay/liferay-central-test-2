@@ -89,7 +89,6 @@
 }
 
 #portlet-set-properties #border-note {
-	display: none;
 	margin-top: 10px;
 }
 
