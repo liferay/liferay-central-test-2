@@ -1,4 +1,4 @@
-/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+@import url(custom_common.css);
 
 @import url(color_schemes/green.css);
 
@@ -380,7 +380,7 @@ body.lfr-has-sidebar {
 	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5), 1px 1px 0 #FFF;
 }
 
-#navigation, #navigation a, .portlet, .portlet-topper, .site-breadcrumbs ul {
+.logo .current-community, #navigation, #navigation a, .portlet, .portlet-topper, .site-breadcrumbs ul {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
