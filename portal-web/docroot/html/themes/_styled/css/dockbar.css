@@ -138,9 +138,12 @@ html > .lfr-dockbar-pinned {
 	max-width: 350px;
 }
 
+.my-places-menu ul {
+	list-style: none;
+}
+
 .my-places-menu ul, .my-places-menu li {
 	display: block;
-	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }

@@ -110,6 +110,7 @@ body #banner .logo a {
 
 #navigation ul {
 	font-weight: bold;
+	list-style: none;
 	margin: 0 auto;
 	min-height: 2em;
 	padding: 3px;
@@ -141,7 +142,6 @@ body #banner .logo a {
 	display: inline;
 	float: left;
 	font-size: 1.1em;
-	list-style-type: none;
 	margin: 0 1px;
 	padding: 0;
 	position: relative;
