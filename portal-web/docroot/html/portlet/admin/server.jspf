@@ -320,92 +320,103 @@ numberFormat.setMinimumIntegerDigits(2);
 						</div>
 					</c:when>
 					<c:otherwise>
-						<table class="lfr-table">
 
 						<%
 						for (ConvertProcess convertProcess : convertProcesses) {
 						%>
 
-							<tr>
-								<td>
+							<fieldset>
+								<legend>
 									<liferay-ui:message key="<%= convertProcess.getDescription() %>" />
-								</td>
-								<td>
-									<c:choose>
-										<c:when test="<%= convertProcess.getParameterNames() != null %>">
-											<table class="lfr-table">
+								</legend>
+								<c:choose>
+									<c:when test="<%= convertProcess.getParameterNames() != null %>">
+										<table class="lfr-table">
+											<c:if test="<%= convertProcess.getParameterDescription() != null %>">
 												<tr>
 													<td colspan="2">
 														<liferay-ui:message key="<%= convertProcess.getParameterDescription() %>" />
 													</td>
 												</tr>
+											</c:if>
 
-												<%
-												for (String parameter : convertProcess.getParameterNames()) {
-													if (parameter.contains(StringPool.EQUAL) && parameter.contains(StringPool.SEMICOLON)) {
-														String[] parameterPair = StringUtil.split(parameter, StringPool.EQUAL);
-														String[] parameterSelectEntries = StringUtil.split(parameterPair[1], StringPool.SEMICOLON);
-												%>
+											<%
+											for (String parameter : convertProcess.getParameterNames()) {
+												if (parameter.contains(StringPool.EQUAL) && parameter.contains(StringPool.SEMICOLON)) {
+													String[] parameterPair = StringUtil.split(parameter, StringPool.EQUAL);
+													String[] parameterSelectEntries = StringUtil.split(parameterPair[1], StringPool.SEMICOLON);
+											%>
 
-														<tr>
-															<td>
-																<liferay-ui:message key="<%= parameterPair[0] %>" />
-															</td>
-															<td>
-																<select id="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterPair[0] %>" name="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterPair[0] %>">
+													<tr>
+														<td>
+															<liferay-ui:message key="<%= parameterPair[0] %>" />
+														</td>
+														<td>
+															<select id="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterPair[0] %>" name="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterPair[0] %>">
 
-																	<%
-																	for (String parameterSelectEntry : parameterSelectEntries) {
-																	%>
+																<%
+																for (String parameterSelectEntry : parameterSelectEntries) {
+																%>
 
-																		<option value="<%= parameterSelectEntry %>"><%= parameterSelectEntry %></option>
+																	<option value="<%= parameterSelectEntry %>"><%= parameterSelectEntry %></option>
 
-																	<%
-																	}
-																	%>
+																<%
+																}
+																%>
 
-																</select>
-															</td>
-														</tr>
+															</select>
+														</td>
+													</tr>
 
-												<%
+											<%
+												}
+												else {
+													String[] parameterPair = StringUtil.split(parameter, StringPool.EQUAL);
+
+													String parameterName = null;
+													String parameterType = null;
+
+													if (parameterPair.length > 1) {
+														parameterName = parameterPair[0];
+														parameterType = parameterPair[1];
 													}
 													else {
-												%>
-
-														<tr>
-															<td>
-																<liferay-ui:message key="<%= parameter %>" />
-															</td>
-															<td>
-																<input name="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameter %>" />
-															</td>
-														</tr>
-
-												<%
+														parameterName = parameter;
 													}
+											%>
+
+													<tr>
+														<td>
+															<liferay-ui:message key="<%= parameterName %>" />
+														</td>
+														<td>
+															<input name="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterName %>" <%= (parameterType != null) ? "type=\"" + parameterType + "\"" : "" %> />
+														</td>
+													</tr>
+
+											<%
 												}
-												%>
+											}
+											%>
 
-												<tr>
-													<td colspan="2">
-														<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcess.getClass().getName() %>');" />
-													</td>
-												</tr>
-											</table>
-										</c:when>
-										<c:otherwise>
-											<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcess.getClass().getName() %>');" />
-										</c:otherwise>
-									</c:choose>
-								</td>
-							</tr>
+											<tr>
+												<td colspan="2">
+													<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcess.getClass().getName() %>');" />
+												</td>
+											</tr>
+										</table>
+									</c:when>
+									<c:otherwise>
+										<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcess.getClass().getName() %>');" />
+									</c:otherwise>
+								</c:choose>
+							</fieldset>
 
+							<br />
 						<%
 						}
 						%>
 
-						</table>
 					</c:otherwise>
 				</c:choose>
 			</c:when>

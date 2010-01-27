@@ -208,9 +208,7 @@ public class EditServerAction extends PortletAction {
 				String parameter =
 					className + StringPool.PERIOD + parameters[i];
 
-				if (parameters[i].contains(StringPool.EQUAL) &&
-					parameters[i].contains(StringPool.SEMICOLON)) {
-
+				if (parameters[i].contains(StringPool.EQUAL)) {
 					String[] parameterPair = StringUtil.split(
 						parameters[i], StringPool.EQUAL);
 
