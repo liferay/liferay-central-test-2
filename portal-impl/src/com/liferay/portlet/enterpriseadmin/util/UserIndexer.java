@@ -24,10 +24,10 @@ package com.liferay.portlet.enterpriseadmin.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
@@ -51,7 +51,7 @@ import javax.portlet.PortletURL;
  *
  * @author Raymond Augé
  */
-public class UserIndexer implements Indexer {
+public class UserIndexer extends BaseIndexer {
 
 	public static final String PORTLET_ID = PortletKeys.ENTERPRISE_ADMIN_USERS;
 

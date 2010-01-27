@@ -39,7 +39,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
-import com.liferay.portlet.bookmarks.util.Indexer;
+import com.liferay.portlet.bookmarks.util.BookmarksIndexer;
 import com.liferay.portlet.bookmarks.util.comparator.EntryModifiedDateComparator;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -206,7 +206,8 @@ public class BookmarksEntryLocalServiceImpl
 		// Indexer
 
 		try {
-			Indexer.deleteEntry(entry.getCompanyId(), entry.getEntryId());
+			BookmarksIndexer.deleteEntry(
+				entry.getCompanyId(), entry.getEntryId());
 		}
 		catch (SearchException se) {
 			_log.error("Deleting index " + entry.getEntryId(), se);
@@ -333,7 +334,7 @@ public class BookmarksEntryLocalServiceImpl
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
 		try {
-			Indexer.updateEntry(
+			BookmarksIndexer.updateEntry(
 				companyId, groupId, folderId, entryId, name, url, comments,
 				modifiedDate, assetTagNames, expandoBridge);
 		}

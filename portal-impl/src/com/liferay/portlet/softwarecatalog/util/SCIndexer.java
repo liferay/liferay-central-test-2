@@ -20,8 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.calendar.util;
+package com.liferay.portlet.softwarecatalog.util;
 
+import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -35,47 +36,56 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.calendar.model.CalEvent;
-import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
+import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
+import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
 import java.util.Date;
 
 import javax.portlet.PortletURL;
 
 /**
- * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCIndexer.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brett Swaim
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ * @author Harry Mark
+ * @author Bruno Farache
+ * @author Raymond Augé
  */
-public class Indexer implements com.liferay.portal.kernel.search.Indexer {
+public class SCIndexer extends BaseIndexer {
 
-	public static final String PORTLET_ID = PortletKeys.CALENDAR;
+	public static final String PORTLET_ID = PortletKeys.SOFTWARE_CATALOG;
 
-	public static void addEvent(
+	public static void addProductEntry(
 			long companyId, long groupId, long userId, String userName,
-			long eventId, String title, String description, Date displayDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
+			long productEntryId, String name, Date modifiedDate, String version,
+			String type, String shortDescription, String longDescription,
+			String pageURL, String repoGroupId, String repoArtifactId,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document document = getEventDocument(
-			companyId, groupId, userId, userName, eventId, title, description,
-			displayDate, assetTagNames, expandoBridge);
+		Document document = getProductEntryDocument(
+			companyId, groupId, userId, userName, productEntryId, name,
+			modifiedDate, version, type, shortDescription, longDescription,
+			pageURL, repoGroupId, repoArtifactId, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, document);
 	}
 
-	public static void deleteEvent(long companyId, long eventId)
+	public static void deleteProductEntry(long companyId, long productEntryId)
 		throws SearchException {
 
-		SearchEngineUtil.deleteDocument(companyId, getEventUID(eventId));
+		SearchEngineUtil.deleteDocument(companyId, getEntryUID(productEntryId));
 	}
 
-	public static Document getEventDocument(
+	public static Document getProductEntryDocument(
 		long companyId, long groupId, long userId, String userName,
-		long eventId, String title, String description, Date displayDate,
-		String[] assetTagNames, ExpandoBridge expandoBridge) {
+		long productEntryId, String name, Date modifiedDate, String version,
+		String type, String shortDescription, String longDescription,
+		String pageURL, String repoGroupId, String repoArtifactId,
+		ExpandoBridge expandoBridge) {
 
 		long scopeGroupId = groupId;
 
@@ -90,13 +100,19 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		userName = PortalUtil.getUserName(userId, userName);
-		description = HtmlUtil.extractText(description);
+		shortDescription = HtmlUtil.extractText(shortDescription);
+		longDescription = HtmlUtil.extractText(longDescription);
+
+		String content =
+			userId + " " + userName + " " + type + " " + shortDescription +
+				" " + longDescription + " " + pageURL + repoGroupId + " " +
+					repoArtifactId;
 
 		Document document = new DocumentImpl();
 
-		document.addUID(PORTLET_ID, eventId);
+		document.addUID(PORTLET_ID, productEntryId);
 
-		document.addModifiedDate(displayDate);
+		document.addModifiedDate(modifiedDate);
 
 		document.addKeyword(Field.COMPANY_ID, companyId);
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
@@ -105,35 +121,45 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		document.addKeyword(Field.USER_ID, userId);
 		document.addText(Field.USER_NAME, userName);
 
-		document.addText(Field.TITLE, title);
-		document.addText(Field.DESCRIPTION, description);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		document.addText(Field.TITLE, name);
+		document.addText(Field.CONTENT, content);
 
-		document.addKeyword(Field.ENTRY_CLASS_NAME, CalEvent.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, eventId);
+		document.addKeyword(
+			Field.ENTRY_CLASS_NAME, SCProductEntry.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, productEntryId);
+		document.addKeyword("version", version);
+		document.addKeyword("type", type);
+		document.addText("shortDescription", shortDescription);
+		document.addText("longDescription", longDescription);
+		document.addText("pageURL", pageURL);
+		document.addKeyword("repoGroupId", repoGroupId);
+		document.addKeyword("repoArtifactId", repoArtifactId);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
 	}
 
-	public static String getEventUID(long eventId) {
+	public static String getEntryUID(long productEntryId) {
 		Document document = new DocumentImpl();
 
-		document.addUID(PORTLET_ID, eventId);
+		document.addUID(PORTLET_ID, productEntryId);
 
 		return document.get(Field.UID);
 	}
 
-	public static void updateEvent(
+	public static void updateProductEntry(
 			long companyId, long groupId, long userId, String userName,
-			long eventId, String title, String description, Date displayDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
+			long productEntryId, String name, Date modifiedDate, String version,
+			String type, String shortDescription, String longDescription,
+			String pageURL, String repoGroupId, String repoArtifactId,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document document = getEventDocument(
-			companyId, groupId, userId, userName, eventId, title, description,
-			displayDate, assetTagNames, expandoBridge);
+		Document document = getProductEntryDocument(
+			companyId, groupId, userId, userName, productEntryId, name,
+			modifiedDate, version, type, shortDescription, longDescription,
+			pageURL, repoGroupId, repoArtifactId, expandoBridge);
 
 		SearchEngineUtil.updateDocument(
 			companyId, document.get(Field.UID), document);
@@ -155,22 +181,23 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		String content = snippet;
 
 		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
 		}
 
 		// Portlet URL
 
-		String eventId = document.get(Field.ENTRY_CLASS_PK);
+		String productEntryId = document.get(Field.ENTRY_CLASS_PK);
 
-		portletURL.setParameter("struts_action", "/calendar/view_event");
-		portletURL.setParameter("eventId", eventId);
+		portletURL.setParameter(
+			"struts_action", "/software_catalog/view_product_entry");
+		portletURL.setParameter("productEntryId", productEntryId);
 
 		return new Summary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {
 		try {
-			CalEventLocalServiceUtil.reIndex(classPK);
+			SCProductEntryLocalServiceUtil.reIndex(classPK);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -179,7 +206,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public void reIndex(String[] ids) throws SearchException {
 		try {
-			CalEventLocalServiceUtil.reIndex(ids);
+			SCProductEntryLocalServiceUtil.reIndex(ids);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -187,7 +214,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {
-		CalEvent.class.getName()
+		SCProductEntry.class.getName()
 	};
 
 }

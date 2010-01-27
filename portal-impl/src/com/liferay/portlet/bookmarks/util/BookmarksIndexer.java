@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.bookmarks.util;
 
+import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -42,13 +43,13 @@ import java.util.Date;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
+ * <a href="BookmarksIndexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  * @author Raymond Augé
  */
-public class Indexer implements com.liferay.portal.kernel.search.Indexer {
+public class BookmarksIndexer extends BaseIndexer {
 
 	public static final String PORTLET_ID = PortletKeys.BOOKMARKS;
 

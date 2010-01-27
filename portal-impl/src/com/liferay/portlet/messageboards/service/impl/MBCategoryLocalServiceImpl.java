@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.TermQuery;
@@ -51,7 +52,7 @@ import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.base.MBCategoryLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.util.Indexer;
+import com.liferay.portlet.messageboards.util.MBIndexer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -234,7 +235,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			Indexer.deleteMessages(
+			MBIndexer.deleteMessages(
 				category.getCompanyId(), category.getCategoryId());
 		}
 		catch (SearchException se) {
@@ -379,7 +380,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(
+				Field.PORTLET_ID, MBIndexer.PORTLET_ID);
 
 			if (groupId > 0) {
 				Group group = groupLocalService.getGroup(groupId);

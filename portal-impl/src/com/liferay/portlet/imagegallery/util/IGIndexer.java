@@ -20,71 +20,65 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.softwarecatalog.util;
+package com.liferay.portlet.imagegallery.util;
 
+import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
-import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
-import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
+import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 
 import java.util.Date;
 
 import javax.portlet.PortletURL;
 
 /**
- * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
+ * <a href="IGIndexer.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
- * @author Harry Mark
  * @author Bruno Farache
  * @author Raymond Augé
  */
-public class Indexer
-	implements com.liferay.portal.kernel.search.Indexer {
+public class IGIndexer extends BaseIndexer {
 
-	public static final String PORTLET_ID = PortletKeys.SOFTWARE_CATALOG;
+	public static final String PORTLET_ID = PortletKeys.IMAGE_GALLERY;
 
-	public static void addProductEntry(
-			long companyId, long groupId, long userId, String userName,
-			long productEntryId, String name, Date modifiedDate, String version,
-			String type, String shortDescription, String longDescription,
-			String pageURL, String repoGroupId, String repoArtifactId,
+	public static void addImage(
+			long companyId, long groupId, long folderId, long imageId,
+			String name, String description, Date modifiedDate,
+			long[] assetCategoryIds, String[] assetTagNames,
 			ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document document = getProductEntryDocument(
-			companyId, groupId, userId, userName, productEntryId, name,
-			modifiedDate, version, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, expandoBridge);
+		Document document = getImageDocument(
+			companyId, groupId, folderId, imageId, name, description,
+			modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, document);
 	}
 
-	public static void deleteProductEntry(long companyId, long productEntryId)
+	public static void deleteImage(long companyId, long imageId)
 		throws SearchException {
 
-		SearchEngineUtil.deleteDocument(companyId, getEntryUID(productEntryId));
+		SearchEngineUtil.deleteDocument(companyId, getImageUID(imageId));
 	}
 
-	public static Document getProductEntryDocument(
-		long companyId, long groupId, long userId, String userName,
-		long productEntryId, String name, Date modifiedDate, String version,
-		String type, String shortDescription, String longDescription,
-		String pageURL, String repoGroupId, String repoArtifactId,
+	public static Document getImageDocument(
+		long companyId, long groupId, long folderId, long imageId,
+		String name, String description, Date modifiedDate,
+		long[] assetCategoryIds, String[] assetTagNames,
 		ExpandoBridge expandoBridge) {
 
 		long scopeGroupId = groupId;
@@ -99,18 +93,9 @@ public class Indexer
 		catch (Exception e) {
 		}
 
-		userName = PortalUtil.getUserName(userId, userName);
-		shortDescription = HtmlUtil.extractText(shortDescription);
-		longDescription = HtmlUtil.extractText(longDescription);
-
-		String content =
-			userId + " " + userName + " " + type + " " + shortDescription +
-				" " + longDescription + " " + pageURL + repoGroupId + " " +
-					repoArtifactId;
-
 		Document document = new DocumentImpl();
 
-		document.addUID(PORTLET_ID, productEntryId);
+		document.addUID(PORTLET_ID, imageId);
 
 		document.addModifiedDate(modifiedDate);
 
@@ -118,48 +103,39 @@ public class Indexer
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
-		document.addKeyword(Field.USER_ID, userId);
-		document.addText(Field.USER_NAME, userName);
 
 		document.addText(Field.TITLE, name);
-		document.addText(Field.CONTENT, content);
+		document.addText(Field.DESCRIPTION, description);
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		document.addKeyword(
-			Field.ENTRY_CLASS_NAME, SCProductEntry.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, productEntryId);
-		document.addKeyword("version", version);
-		document.addKeyword("type", type);
-		document.addText("shortDescription", shortDescription);
-		document.addText("longDescription", longDescription);
-		document.addText("pageURL", pageURL);
-		document.addKeyword("repoGroupId", repoGroupId);
-		document.addKeyword("repoArtifactId", repoArtifactId);
+		document.addKeyword("folderId", folderId);
+		document.addKeyword(Field.ENTRY_CLASS_NAME, IGImage.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, imageId);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
 	}
 
-	public static String getEntryUID(long productEntryId) {
+	public static String getImageUID(long imageId) {
 		Document document = new DocumentImpl();
 
-		document.addUID(PORTLET_ID, productEntryId);
+		document.addUID(PORTLET_ID, imageId);
 
 		return document.get(Field.UID);
 	}
 
-	public static void updateProductEntry(
-			long companyId, long groupId, long userId, String userName,
-			long productEntryId, String name, Date modifiedDate, String version,
-			String type, String shortDescription, String longDescription,
-			String pageURL, String repoGroupId, String repoArtifactId,
+	public static void updateImage(
+			long companyId, long groupId, long folderId, long imageId,
+			String name, String description, Date modifiedDate,
+			long[] assetCategoryIds, String[] assetTagNames,
 			ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document document = getProductEntryDocument(
-			companyId, groupId, userId, userName, productEntryId, name,
-			modifiedDate, version, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, expandoBridge);
+		Document document = getImageDocument(
+			companyId, groupId, folderId, imageId, name, description,
+			modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
 
 		SearchEngineUtil.updateDocument(
 			companyId, document.get(Field.UID), document);
@@ -181,23 +157,22 @@ public class Indexer
 		String content = snippet;
 
 		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
 		}
 
 		// Portlet URL
 
-		String productEntryId = document.get(Field.ENTRY_CLASS_PK);
+		String imageId = document.get(Field.ENTRY_CLASS_PK);
 
-		portletURL.setParameter(
-			"struts_action", "/software_catalog/view_product_entry");
-		portletURL.setParameter("productEntryId", productEntryId);
+		portletURL.setParameter("struts_action", "/image_gallery/edit_image");
+		portletURL.setParameter("imageId", imageId);
 
 		return new Summary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {
 		try {
-			SCProductEntryLocalServiceUtil.reIndex(classPK);
+			IGImageLocalServiceUtil.reIndex(classPK);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -206,7 +181,7 @@ public class Indexer
 
 	public void reIndex(String[] ids) throws SearchException {
 		try {
-			SCProductEntryLocalServiceUtil.reIndex(ids);
+			IGFolderLocalServiceUtil.reIndex(ids);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -214,7 +189,7 @@ public class Indexer
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {
-		SCProductEntry.class.getName()
+		IGImage.class.getName()
 	};
 
 }

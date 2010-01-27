@@ -50,7 +50,7 @@
 		<icon>/html/icons/calendar.png</icon>
 		<struts-path>calendar</struts-path>
 		<configuration-action-class>com.liferay.portlet.calendar.action.ConfigurationActionImpl</configuration-action-class>
-		<indexer-class>com.liferay.portlet.calendar.util.Indexer</indexer-class>
+		<indexer-class>com.liferay.portlet.calendar.util.CalIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.calendar.util.CalendarOpenSearchImpl</open-search-class>
 		<scheduler-class>com.liferay.portlet.calendar.job.CalendarScheduler</scheduler-class>
 		<portlet-data-handler-class>com.liferay.portlet.calendar.lar.CalendarPortletDataHandlerImpl</portlet-data-handler-class>
@@ -114,7 +114,7 @@
 		<icon>/html/icons/default.png</icon>
 		<struts-path>journal</struts-path>
 		<configuration-action-class>com.liferay.portlet.journal.action.ConfigurationActionImpl</configuration-action-class>
-		<indexer-class>com.liferay.portlet.journal.util.Indexer</indexer-class>
+		<indexer-class>com.liferay.portlet.journal.util.JournalIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.journal.util.JournalOpenSearchImpl</open-search-class>
 		<scheduler-class>com.liferay.portlet.journal.job.JournalScheduler</scheduler-class>
 		<friendly-url-mapper-class>com.liferay.portlet.journal.JournalFriendlyURLMapper</friendly-url-mapper-class>
@@ -154,7 +154,7 @@
 		<icon>/html/icons/message_boards.png</icon>
 		<struts-path>message_boards</struts-path>
 		<configuration-action-class>com.liferay.portlet.messageboards.action.ConfigurationActionImpl</configuration-action-class>
-		<indexer-class>com.liferay.portlet.messageboards.util.Indexer</indexer-class>
+		<indexer-class>com.liferay.portlet.messageboards.util.MBIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.messageboards.util.MBOpenSearchImpl</open-search-class>
 		<scheduler-class>com.liferay.portlet.messageboards.job.MBScheduler</scheduler-class>
 		<friendly-url-mapper-class>com.liferay.portlet.messageboards.MBFriendlyURLMapper</friendly-url-mapper-class>
@@ -185,7 +185,7 @@
 		<icon>/html/icons/document_library.png</icon>
 		<struts-path>document_library</struts-path>
 		<configuration-action-class>com.liferay.portlet.documentlibrary.action.ConfigurationActionImpl</configuration-action-class>
-		<indexer-class>com.liferay.portlet.documentlibrary.util.Indexer</indexer-class>
+		<indexer-class>com.liferay.portlet.documentlibrary.util.DLIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.documentlibrary.util.DLOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.documentlibrary.social.DLActivityInterpreter</social-activity-interpreter-class>
@@ -267,7 +267,7 @@
 		<portlet-name>28</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>bookmarks</struts-path>
-		<indexer-class>com.liferay.portlet.bookmarks.util.Indexer</indexer-class>
+		<indexer-class>com.liferay.portlet.bookmarks.util.BookmarksIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.bookmarks.util.BookmarksOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.bookmarks.lar.BookmarksPortletDataHandlerImpl</portlet-data-handler-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
@@ -311,7 +311,7 @@
 		<portlet-name>31</portlet-name>
 		<icon>/html/icons/image_gallery.png</icon>
 		<struts-path>image_gallery</struts-path>
-		<indexer-class>com.liferay.portlet.imagegallery.util.Indexer</indexer-class>
+		<indexer-class>com.liferay.portlet.imagegallery.util.IGIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.imagegallery.util.IGOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.imagegallery.social.IGActivityInterpreter</social-activity-interpreter-class>
@@ -338,7 +338,7 @@
 		<icon>/html/icons/blogs.png</icon>
 		<struts-path>blogs</struts-path>
 		<configuration-action-class>com.liferay.portlet.blogs.action.ConfigurationActionImpl</configuration-action-class>
-		<indexer-class>com.liferay.portlet.blogs.util.Indexer</indexer-class>
+		<indexer-class>com.liferay.portlet.blogs.util.BlogsIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.blogs.util.BlogsOpenSearchImpl</open-search-class>
 		<scheduler-class>com.liferay.portlet.blogs.job.BlogsScheduler</scheduler-class>
 		<friendly-url-mapper-class>com.liferay.portlet.blogs.BlogsFriendlyURLMapper</friendly-url-mapper-class>
@@ -378,7 +378,7 @@
 		<icon>/html/icons/wiki.png</icon>
 		<struts-path>wiki</struts-path>
 		<configuration-action-class>com.liferay.portlet.wiki.action.ConfigurationActionImpl</configuration-action-class>
-		<indexer-class>com.liferay.portlet.wiki.util.Indexer</indexer-class>
+		<indexer-class>com.liferay.portlet.wiki.util.WikiIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.wiki.util.WikiOpenSearchImpl</open-search-class>
 		<friendly-url-mapper-class>com.liferay.portlet.wiki.WikiFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.wiki.lar.WikiPortletDataHandlerImpl</portlet-data-handler-class>
@@ -790,7 +790,7 @@
 		<portlet-name>98</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>software_catalog</struts-path>
-		<indexer-class>com.liferay.portlet.softwarecatalog.util.Indexer</indexer-class>
+		<indexer-class>com.liferay.portlet.softwarecatalog.util.SCIndexer</indexer-class>
 		<friendly-url-mapper-class>com.liferay.portlet.softwarecatalog.SCFriendlyURLMapper</friendly-url-mapper-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>10.0</control-panel-entry-weight>

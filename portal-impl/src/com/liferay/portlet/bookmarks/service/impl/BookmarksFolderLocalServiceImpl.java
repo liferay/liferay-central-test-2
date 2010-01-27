@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
@@ -47,7 +48,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
-import com.liferay.portlet.bookmarks.util.Indexer;
+import com.liferay.portlet.bookmarks.util.BookmarksIndexer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -285,7 +286,8 @@ public class BookmarksFolderLocalServiceImpl
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(
+				Field.PORTLET_ID, BookmarksIndexer.PORTLET_ID);
 
 			if (groupId > 0) {
 				Group group = groupLocalService.getGroup(groupId);

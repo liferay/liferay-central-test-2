@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.util;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchException;
@@ -39,12 +40,12 @@ import javax.portlet.PortletURL;
 import javax.portlet.WindowStateException;
 
 /**
- * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLIndexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */
-public class Indexer implements com.liferay.portal.kernel.search.Indexer {
+public class DLIndexer extends BaseIndexer {
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;

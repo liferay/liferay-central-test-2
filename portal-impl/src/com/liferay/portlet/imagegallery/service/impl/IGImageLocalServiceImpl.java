@@ -55,7 +55,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.social.IGActivityKeys;
-import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.portlet.imagegallery.util.IGIndexer;
 import com.liferay.portlet.imagegallery.util.comparator.ImageModifiedDateComparator;
 
 import java.awt.image.RenderedImage;
@@ -297,7 +297,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			Indexer.deleteImage(image.getCompanyId(), image.getImageId());
+			IGIndexer.deleteImage(image.getCompanyId(), image.getImageId());
 		}
 		catch (SearchException se) {
 			_log.error("Deleting index " + image.getImageId(), se);
@@ -478,7 +478,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		ExpandoBridge expandoBridge = image.getExpandoBridge();
 
 		try {
-			Indexer.updateImage(
+			IGIndexer.updateImage(
 				companyId, groupId, folderId, imageId, name, description,
 				modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
 		}

@@ -20,49 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.documentlibrary.util;
-
-import com.liferay.portal.kernel.search.BaseIndexer;
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.search.Summary;
-
-import javax.portlet.PortletURL;
+package com.liferay.portal.kernel.search;
 
 /**
- * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseIndexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Harry Mark
- * @author Bruno Farache
- * @author Raymond Augé
  */
-public class Indexer extends BaseIndexer {
-
-	public String[] getClassNames() {
-		return _CLASS_NAMES;
-	}
-
-	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		return null;
-	}
-
-	public void reIndex(String className, long classPK) {
-	}
-
-	public void reIndex(String[] ids) throws SearchException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		Hook hook = HookFactory.getInstance();
-
-		hook.reIndex(ids);
-	}
-
-	private static final String[] _CLASS_NAMES = new String[0];
-
+public abstract class BaseIndexer implements Indexer {
 }

@@ -76,9 +76,9 @@ import com.liferay.portlet.wiki.model.impl.WikiPageDisplayImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.social.WikiActivityKeys;
-import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
+import com.liferay.portlet.wiki.util.WikiIndexer;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
@@ -408,7 +408,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			Indexer.deletePage(
+			WikiIndexer.deletePage(
 				page.getCompanyId(), page.getNodeId(), page.getTitle());
 		}
 		catch (SearchException se) {
@@ -877,7 +877,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			Indexer.deletePage(page.getCompanyId(), page.getGroupId(), title);
+			WikiIndexer.deletePage(
+				page.getCompanyId(), page.getGroupId(), title);
 		}
 		catch (SearchException se) {
 			_log.error("Indexing " + newTitle, se);
@@ -924,7 +925,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		ExpandoBridge expandoBridge = page.getExpandoBridge();
 
 		try {
-			Indexer.updatePage(
+			WikiIndexer.updatePage(
 				companyId, groupId, resourcePrimKey, nodeId, title, content,
 				modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
 		}

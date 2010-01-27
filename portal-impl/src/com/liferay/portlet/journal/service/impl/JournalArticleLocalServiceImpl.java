@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
@@ -96,7 +97,7 @@ import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl;
 import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
-import com.liferay.portlet.journal.util.Indexer;
+import com.liferay.portlet.journal.util.JournalIndexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
@@ -451,7 +452,7 @@ public class JournalArticleLocalServiceImpl
 
 			try {
 				if (article.isIndexable()) {
-					Indexer.deleteArticle(
+					JournalIndexer.deleteArticle(
 						article.getCompanyId(), article.getGroupId(),
 						article.getArticleId());
 				}
@@ -645,7 +646,7 @@ public class JournalArticleLocalServiceImpl
 
 		try {
 			if (article.isApproved() && article.isIndexable()) {
-				Indexer.deleteArticle(
+				JournalIndexer.deleteArticle(
 					article.getCompanyId(), article.getGroupId(),
 					article.getArticleId());
 			}
@@ -1408,7 +1409,7 @@ public class JournalArticleLocalServiceImpl
 		ExpandoBridge expandoBridge = article.getExpandoBridge();
 
 		try {
-			Indexer.updateArticle(
+			JournalIndexer.updateArticle(
 				companyId, groupId, resourcePrimKey, articleId, version, title,
 				description, content, type, displayDate, assetCategoryIds,
 				assetTagNames, expandoBridge);
@@ -1510,7 +1511,8 @@ public class JournalArticleLocalServiceImpl
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(
+				Field.PORTLET_ID, JournalIndexer.PORTLET_ID);
 
 			if (groupId > 0) {
 				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
@@ -2048,7 +2050,7 @@ public class JournalArticleLocalServiceImpl
 
 				try {
 					if (article.isIndexable()) {
-						Indexer.deleteArticle(
+						JournalIndexer.deleteArticle(
 							article.getCompanyId(), article.getGroupId(),
 							article.getArticleId());
 					}

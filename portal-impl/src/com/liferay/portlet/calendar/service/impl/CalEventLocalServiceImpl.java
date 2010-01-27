@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -75,8 +76,8 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.CalEventConstants;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
 import com.liferay.portlet.calendar.social.CalendarActivityKeys;
+import com.liferay.portlet.calendar.util.CalIndexer;
 import com.liferay.portlet.calendar.util.CalUtil;
-import com.liferay.portlet.calendar.util.Indexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.util.TimeZoneSensitive;
 
@@ -669,7 +670,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		ExpandoBridge expandoBridge = event.getExpandoBridge();
 
 		try {
-			Indexer.updateEvent(
+			CalIndexer.updateEvent(
 				companyId, groupId, userId, userName, eventId, title,
 				description, modifiedDate, assetTagNames, expandoBridge);
 		}
@@ -718,7 +719,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(
+				Field.PORTLET_ID, CalIndexer.PORTLET_ID);
 
 			if (groupId > 0) {
 				Group group = groupLocalService.getGroup(groupId);

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
@@ -66,7 +67,7 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServiceBaseImpl;
-import com.liferay.portlet.softwarecatalog.util.Indexer;
+import com.liferay.portlet.softwarecatalog.util.SCIndexer;
 import com.liferay.util.xml.DocUtil;
 
 import java.net.MalformedURLException;
@@ -276,7 +277,7 @@ public class SCProductEntryLocalServiceImpl
 		// Indexer
 
 		try {
-			Indexer.deleteProductEntry(
+			SCIndexer.deleteProductEntry(
 				productEntry.getCompanyId(), productEntry.getProductEntryId());
 		}
 		catch (SearchException se) {
@@ -449,7 +450,7 @@ public class SCProductEntryLocalServiceImpl
 		ExpandoBridge expandoBridge = productEntry.getExpandoBridge();
 
 		try {
-			Indexer.updateProductEntry(
+			SCIndexer.updateProductEntry(
 				companyId, groupId, userId, userName, productEntryId, name,
 				modifiedDate, version, type, shortDescription, longDescription,
 				pageURL, repoGroupId, repoArtifactId, expandoBridge);
@@ -485,7 +486,8 @@ public class SCProductEntryLocalServiceImpl
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(
+				Field.PORTLET_ID, SCIndexer.PORTLET_ID);
 
 			if (groupId > 0) {
 				Group group = groupLocalService.getGroup(groupId);

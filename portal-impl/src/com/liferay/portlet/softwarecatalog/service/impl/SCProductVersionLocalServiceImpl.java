@@ -41,7 +41,7 @@ import com.liferay.portlet.softwarecatalog.UnavailableProductVersionDirectDownlo
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductVersionLocalServiceBaseImpl;
-import com.liferay.portlet.softwarecatalog.util.Indexer;
+import com.liferay.portlet.softwarecatalog.util.SCIndexer;
 
 import java.util.Date;
 import java.util.List;
@@ -114,7 +114,7 @@ public class SCProductVersionLocalServiceImpl
 		// Indexer
 
 		try {
-			Indexer.updateProductEntry(
+			SCIndexer.updateProductEntry(
 				productEntry.getCompanyId(), productEntry.getGroupId(),
 				productEntry.getUserId(), productEntry.getUserName(),
 				productEntry.getProductEntryId(), productEntry.getName(), now,
@@ -233,7 +233,7 @@ public class SCProductVersionLocalServiceImpl
 		// Indexer
 
 		try {
-			Indexer.updateProductEntry(
+			SCIndexer.updateProductEntry(
 				productEntry.getCompanyId(), productEntry.getGroupId(),
 				productEntry.getUserId(), productEntry.getUserName(),
 				productEntry.getProductEntryId(), productEntry.getName(), now,

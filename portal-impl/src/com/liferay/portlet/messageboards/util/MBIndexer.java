@@ -20,11 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.blogs.util;
+package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
@@ -35,49 +42,74 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import java.util.Date;
 
 import javax.portlet.PortletURL;
 
 /**
- * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBIndexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
  * @author Raymond Augé
  */
-public class Indexer implements com.liferay.portal.kernel.search.Indexer {
+public class MBIndexer extends BaseIndexer {
 
-	public static final String PORTLET_ID = PortletKeys.BLOGS;
+	public static final String PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
 
-	public static void addEntry(
+	public static void addMessage(
 			long companyId, long groupId, long userId, String userName,
-			long entryId, String title, String content, Date displayDate,
+			long categoryId, long threadId, long messageId, String title,
+			String content, boolean anonymous, Date modifiedDate,
 			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document document = getEntryDocument(
-			companyId, groupId, userId, userName, entryId, title, content,
-			displayDate, assetTagNames, expandoBridge);
+		Document document = getMessageDocument(
+			companyId, groupId, userId, userName, categoryId, threadId,
+			messageId, title, content, anonymous, modifiedDate, assetTagNames,
+			expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, document);
 	}
 
-	public static void deleteEntry(long companyId, long entryId)
+	public static void deleteMessage(long companyId, long messageId)
 		throws SearchException {
 
-		SearchEngineUtil.deleteDocument(companyId, getEntryUID(entryId));
+		SearchEngineUtil.deleteDocument(companyId, getMessageUID(messageId));
 	}
 
-	public static Document getEntryDocument(
+	public static void deleteMessages(long companyId, long threadId)
+		throws SearchException {
+
+		BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create();
+
+		booleanQuery.addRequiredTerm(Field.PORTLET_ID, PORTLET_ID);
+
+		booleanQuery.addRequiredTerm("threadId", threadId);
+
+		Hits hits = SearchEngineUtil.search(
+			companyId, booleanQuery, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (int i = 0; i < hits.getLength(); i++) {
+			Document document = hits.doc(i);
+
+			SearchEngineUtil.deleteDocument(companyId, document.get(Field.UID));
+		}
+	}
+
+	public static Document getMessageDocument(
 		long companyId, long groupId, long userId, String userName,
-		long entryId, String title, String content, Date displayDate,
+		long categoryId, long threadId, long messageId, String title,
+		String content, boolean anonymous, Date modifiedDate,
 		String[] assetTagNames, ExpandoBridge expandoBridge) {
 
 		long scopeGroupId = groupId;
@@ -93,50 +125,75 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		userName = PortalUtil.getUserName(userId, userName);
+
+		try {
+			content = BBCodeUtil.getHTML(content);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Could not parse message " + messageId + ": " + e.getMessage());
+		}
+
 		content = HtmlUtil.extractText(content);
 
 		Document document = new DocumentImpl();
 
-		document.addUID(PORTLET_ID, entryId);
+		document.addUID(PORTLET_ID, messageId);
 
-		document.addModifiedDate(displayDate);
+		document.addModifiedDate(modifiedDate);
 
 		document.addKeyword(Field.COMPANY_ID, companyId);
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
-		document.addText(Field.USER_NAME, userName);
+
+		if (!anonymous) {
+			document.addText(Field.USER_NAME, userName);
+		}
 
 		document.addText(Field.TITLE, title);
 		document.addText(Field.CONTENT, content);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		document.addKeyword(Field.ENTRY_CLASS_NAME, BlogsEntry.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, entryId);
+		document.addKeyword("categoryId", categoryId);
+		document.addKeyword("threadId", threadId);
+		document.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, messageId);
+
+		try {
+			MBThread thread = MBThreadLocalServiceUtil.getMBThread(threadId);
+
+			document.addKeyword(
+				Field.ROOT_ENTRY_CLASS_PK, thread.getRootMessageId());
+		}
+		catch (Exception e) {
+		}
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
 	}
 
-	public static String getEntryUID(long entryId) {
+	public static String getMessageUID(long messageId) {
 		Document document = new DocumentImpl();
 
-		document.addUID(PORTLET_ID, entryId);
+		document.addUID(PORTLET_ID, messageId);
 
 		return document.get(Field.UID);
 	}
 
-	public static void updateEntry(
+	public static void updateMessage(
 			long companyId, long groupId, long userId, String userName,
-			long entryId, String title, String content, Date displayDate,
+			long categoryId, long threadId, long messageId, String title,
+			String content, boolean anonymous, Date modifiedDate,
 			String[] assetTagNames, ExpandoBridge expandoBridge)
 		throws SearchException {
 
-		Document document = getEntryDocument(
-			companyId, groupId, userId, userName, entryId, title, content,
-			displayDate, assetTagNames, expandoBridge);
+		Document document = getMessageDocument(
+			companyId, groupId, userId, userName, categoryId, threadId,
+			messageId, title, content, anonymous, modifiedDate, assetTagNames,
+			expandoBridge);
 
 		SearchEngineUtil.updateDocument(
 			companyId, document.get(Field.UID), document);
@@ -163,17 +220,18 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Portlet URL
 
-		String entryId = document.get(Field.ENTRY_CLASS_PK);
+		String messageId = document.get(Field.ENTRY_CLASS_PK);
 
-		portletURL.setParameter("struts_action", "/blogs/view_entry");
-		portletURL.setParameter("entryId", entryId);
+		portletURL.setParameter(
+			"struts_action", "/message_boards/view_message");
+		portletURL.setParameter("messageId", messageId);
 
 		return new Summary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {
 		try {
-			BlogsEntryLocalServiceUtil.reIndex(classPK);
+			MBMessageLocalServiceUtil.reIndex(classPK);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -182,7 +240,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public void reIndex(String[] ids) throws SearchException {
 		try {
-			BlogsEntryLocalServiceUtil.reIndex(ids);
+			MBCategoryLocalServiceUtil.reIndex(ids);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -190,7 +248,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {
-		BlogsEntry.class.getName()
+		MBMessage.class.getName()
 	};
+
+	private static Log _log = LogFactoryUtil.getLog(MBIndexer.class);
 
 }

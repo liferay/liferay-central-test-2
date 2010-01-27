@@ -23,10 +23,10 @@
 package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.plugin.License;
+import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
@@ -48,7 +48,7 @@ import javax.portlet.PortletURL;
  * @author Bruno Farache
  * @author Raymond Augé
  */
-public class PluginPackageIndexer implements Indexer {
+public class PluginPackageIndexer extends BaseIndexer {
 
 	public static final String PORTLET_ID = "PluginPackageIndexer";
 

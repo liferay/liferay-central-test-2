@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
@@ -51,7 +52,7 @@ import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
-import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.portlet.imagegallery.util.IGIndexer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -286,7 +287,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(
+				Field.PORTLET_ID, IGIndexer.PORTLET_ID);
 
 			if (groupId > 0) {
 				Group group = groupLocalService.getGroup(groupId);

@@ -82,7 +82,7 @@ import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.social.MBActivityKeys;
-import com.liferay.portlet.messageboards.util.Indexer;
+import com.liferay.portlet.messageboards.util.MBIndexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.MailingListThreadLocal;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
@@ -598,7 +598,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			Indexer.deleteMessage(
+			MBIndexer.deleteMessage(
 				message.getCompanyId(), message.getMessageId());
 		}
 		catch (SearchException se) {
@@ -1232,7 +1232,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		ExpandoBridge expandoBridge = message.getExpandoBridge();
 
 		try {
-			Indexer.updateMessage(
+			MBIndexer.updateMessage(
 				companyId, groupId, userId, userName, categoryId, threadId,
 				messageId, title, content, anonymous, modifiedDate,
 				assetTagNames, expandoBridge);

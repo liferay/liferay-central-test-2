@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -66,8 +67,8 @@ import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
+import com.liferay.portlet.blogs.util.BlogsIndexer;
 import com.liferay.portlet.blogs.util.BlogsUtil;
-import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -273,7 +274,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			Indexer.deleteEntry(entry.getCompanyId(), entry.getEntryId());
+			BlogsIndexer.deleteEntry(entry.getCompanyId(), entry.getEntryId());
 		}
 		catch (SearchException se) {
 			_log.error("Deleting index " + entry.getEntryId(), se);
@@ -473,7 +474,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
 		try {
-			Indexer.updateEntry(
+			BlogsIndexer.updateEntry(
 				companyId, groupId, userId, userName, entryId, title, content,
 				displayDate, assetTagNames, expandoBridge);
 		}
@@ -522,7 +523,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(
+				Field.PORTLET_ID, BlogsIndexer.PORTLET_ID);
 
 			if (groupId > 0) {
 				Group group = groupLocalService.getGroup(groupId);
@@ -712,7 +714,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 		else {
 			try {
-				Indexer.deleteEntry(entry.getCompanyId(), entryId);
+				BlogsIndexer.deleteEntry(entry.getCompanyId(), entryId);
 			}
 			catch (SearchException se) {
 				_log.error("Deleting index " + entry.getEntryId(), se);

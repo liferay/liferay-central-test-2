@@ -43,7 +43,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.util.Indexer;
+import com.liferay.portlet.messageboards.util.MBIndexer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +74,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			Indexer.deleteMessages(
+			MBIndexer.deleteMessages(
 				rootMessage.getCompanyId(), thread.getThreadId());
 		}
 		catch (SearchException se) {
@@ -394,7 +394,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			try {
 				if (!message.isDiscussion()) {
-					Indexer.updateMessage(
+					MBIndexer.updateMessage(
 						message.getCompanyId(), message.getGroupId(),
 						message.getUserId(), message.getUserName(),
 						category.getCategoryId(), message.getThreadId(),
@@ -468,7 +468,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		try {
 			if (!message.isDiscussion()) {
-				Indexer.updateMessage(
+				MBIndexer.updateMessage(
 					message.getCompanyId(), message.getGroupId(),
 					message.getUserId(), message.getUserName(),
 					category.getCategoryId(), message.getThreadId(),
@@ -625,7 +625,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			try {
 				if (!message.isDiscussion()) {
-					Indexer.updateMessage(
+					MBIndexer.updateMessage(
 						message.getCompanyId(), message.getGroupId(),
 						message.getUserId(), message.getUserName(),
 						category.getCategoryId(), message.getThreadId(),
