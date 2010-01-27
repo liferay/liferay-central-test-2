@@ -490,6 +490,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupPersistence.findByC_C_C(companyId, classNameId, companyId);
 	}
 
+	public List<Group> getCompanyGroups(long companyId, int start, int end)
+		throws SystemException {
+
+		return groupPersistence.findByCompanyId(companyId, start, end);
+	}
+
+	public int getCompanyGroupsCount(long companyId, int start, int end)
+		throws SystemException {
+
+		return groupPersistence.countByCompanyId(companyId);
+	}
+
 	public Group getFriendlyURLGroup(long companyId, String friendlyURL)
 		throws PortalException, SystemException {
 

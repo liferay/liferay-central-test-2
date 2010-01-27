@@ -158,6 +158,17 @@ public class GroupLocalServiceUtil {
 		return getService().getCompanyGroup(companyId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getCompanyGroups(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyGroups(companyId, start, end);
+	}
+
+	public static int getCompanyGroupsCount(long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyGroupsCount(companyId, start, end);
+	}
+
 	public static com.liferay.portal.model.Group getFriendlyURLGroup(
 		long companyId, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException,
