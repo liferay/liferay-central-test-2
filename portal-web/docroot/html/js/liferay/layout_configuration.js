@@ -415,7 +415,7 @@ AUI().add(
 
 		A.extend(
 			ColumnPortletItem,
-			Liferay.Layout.NestedPortlet,
+			Liferay.Layout.ColumnPortlet,
 			{
 				getCurrentPortletTitle: function() {
 					var instance = this;
@@ -533,7 +533,11 @@ AUI().add(
 
 					var placeholder = instance.get('placeholder');
 
-					A.one('#column-1 .lfr-portlet-column').append(placeholder);
+					var column = Liferay.Layout.layoutHandler.get('dropZones').item(0);
+
+					if (column) {
+						column.append(placeholder);
+					}
 
 					Liferay.Layout.placeholder.hide();
 				},

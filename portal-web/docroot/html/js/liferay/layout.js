@@ -8,10 +8,6 @@ AUI().add(
 		var DOM = A.DOM;
 		var DDM = A.DD.DDM;
 
-		var concat = function() {
-			return Array.prototype.slice.call(arguments).join(' ');
-		};
-
 		var hasClass = A.cached(
 			function(id, className) {
 				return A.one('#' + id).hasClass(className);
@@ -120,7 +116,11 @@ AUI().add(
 					instance.bindUI();
 				},
 
-				add: function() {},
+				add: function(portletNode) {
+					var instance = this;
+
+					instance.get('portletHandler').registerPortlet(portletNode);
+				},
 
 				bindUI: function() {
 					var instance = this;
@@ -143,7 +143,7 @@ AUI().add(
 
 					var contentWrapperSelector = instance.get('contentWrapperSelector');
 					var portletSelector = instance.get('portletSelector');
-					var portletsSelector = concat(contentWrapperSelector, portletSelector);
+					var portletsSelector = [contentWrapperSelector, portletSelector].join(' ');
 
 					return A.all(portletsSelector);
 				},
@@ -245,7 +245,7 @@ AUI().add(
 				_bindDragPortlets: function() {
 					var instance = this;
 
-					var portletHandler = new Layout.NestedPortlet(
+					var portletHandler = new Layout.ColumnPortlet(
 						{
 							nodes: instance.getPortlets()
 						}
@@ -259,11 +259,7 @@ AUI().add(
 
 					var dropZones = instance.get('dropZones');
 
-					dropZones.each(
-						function(node, index) {
-							instance._setupDroppable(node);
-						}
-					);
+					dropZones.each(instance._setupDroppable, instance);
 				},
 
 				_deactivateColumnUI: function(columnNode) {
@@ -396,8 +392,6 @@ AUI().add(
 
 		FreeFormLayout.NAME = 'FreeFormLayout';
 
-		FreeFormLayout.ATTRS = {};
-
 		A.extend(
 			FreeFormLayout,
 			ColumnLayout,
@@ -418,9 +412,9 @@ AUI().add(
 					FreeFormLayout.superclass.bindUI.apply(this, arguments);
 
 					instance.getPortlets().each(
-						function(node, index) {
-							instance._setupNodeResize(node);
-							instance._setupNodeStack(node);
+						function(item, index, collection) {
+							instance._setupNodeResize(item);
+							instance._setupNodeStack(item);
 						}
 					);
 
@@ -516,15 +510,15 @@ AUI().add(
 			}
 		);
 
-		var NestedPortlet = function() {
-			NestedPortlet.superclass.constructor.apply(this, arguments);
+		var ColumnPortlet = function() {
+			ColumnPortlet.superclass.constructor.apply(this, arguments);
 		};
 
 		Layout.placeholder = A.Node.create('<div class="portlet-boundary portlet-dd-placeholder"></div>');
 
-		NestedPortlet.NAME = 'NestedPortlet';
+		ColumnPortlet.NAME = 'ColumnPortlet';
 
-		NestedPortlet.ATTRS = {
+		ColumnPortlet.ATTRS = {
 			currentPortletNode: {
 				value: null
 			},
@@ -601,7 +595,7 @@ AUI().add(
 		};
 
 		A.extend(
-			NestedPortlet,
+			ColumnPortlet,
 			A.NestedList,
 			{
 				getCurrentPortletTitle: function() {
@@ -634,7 +628,9 @@ AUI().add(
 
 					instance.set('dragging', false);
 
-					NestedPortlet.superclass._onDragEnd.apply(this, arguments);
+					ColumnPortlet.superclass._onDragEnd.apply(this, arguments);
+
+					Liferay.Layout.layoutHandler._setDropZonesUI(false);
 				},
 
 				_onDragExit: function(event) {
@@ -646,7 +642,7 @@ AUI().add(
 					var hasActiveAncestor = portletNode.ancestor('.lfr-column.active-area');
 
 					if (hasActiveAncestor) {
-						NestedPortlet.superclass._onDragExit.apply(this, arguments);
+						ColumnPortlet.superclass._onDragExit.apply(this, arguments);
 					}
 				},
 
@@ -661,11 +657,13 @@ AUI().add(
 					instance.set('currentDrag', drag);
 					instance.set('currentPortletNode', portletNode);
 
-					NestedPortlet.superclass._onDragStart.apply(this, arguments);
+					ColumnPortlet.superclass._onDragStart.apply(this, arguments);
 
 					instance._syncHelperSizeUI();
 					instance._syncHelperTitleUI();
 					instance._syncHelperZIndexUI();
+
+					Liferay.Layout.layoutHandler._setDropZonesUI(true);
 				},
 
 				_syncHelperSizeUI: function() {
@@ -700,7 +698,7 @@ AUI().add(
 		);
 
 		var FreeFormPortlet = function() {
-			NestedPortlet.superclass.constructor.apply(this, arguments);
+			ColumnPortlet.superclass.constructor.apply(this, arguments);
 		};
 
 		FreeFormPortlet.NAME = 'FreeFormPortlet';
@@ -723,7 +721,7 @@ AUI().add(
 
 		A.extend(
 			FreeFormPortlet,
-			NestedPortlet,
+			ColumnPortlet,
 			{
 				_onDragEnd: function(event) {
 					var instance = this;
@@ -761,7 +759,7 @@ AUI().add(
 
 		Layout.ColumnLayout = ColumnLayout;
 		Layout.FreeFormPortlet = FreeFormPortlet;
-		Layout.NestedPortlet = NestedPortlet;
+		Layout.ColumnPortlet = ColumnPortlet;
 
 		Liferay.Layout = Layout;
 	},

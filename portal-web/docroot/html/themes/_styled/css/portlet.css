@@ -52,6 +52,12 @@ body.portlet {
 	padding: 5px 5px 5px 18px;
 }
 
+.portlet-nested-portlets .portlet-boundary {
+	position: relative !important;
+	top: 0 !important;
+	left: 0 !important;
+}
+
 /* ---------- Borderless portlet ---------- */
 
 .portlet-borderless-container {

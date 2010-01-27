@@ -17,6 +17,10 @@
 	min-height: 100px;
 }
 
+.portlet-nested-portlets .lfr-portlet-column.empty {
+	padding: 50px;
+}
+
 .lfr-column.ten {
 	width: 10%;
 }

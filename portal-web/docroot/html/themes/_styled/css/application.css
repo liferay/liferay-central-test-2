@@ -118,16 +118,6 @@
 	background: #FFC;
 }
 
-.portlet-nested-portlets .portlet-boundary {
-	position: relative !important;
-	top: 0 !important;
-	left: 0 !important;
-}
-
-.portlet-nested-portlets .lfr-portlet-column.empty {
-	padding: 50px;
-}
-
 .portlet-boundary.yui-dd-dragging {
 	background: #000;
 	visibility: hidden;
