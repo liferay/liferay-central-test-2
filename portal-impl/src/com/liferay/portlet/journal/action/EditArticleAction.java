@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -176,6 +177,11 @@ public class EditArticleAction extends PortletAction {
 
 		try {
 			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
+
+			if (cmd.equals(StringPool.BLANK)) {
+				SessionMessages.clear(renderRequest);
+				SessionErrors.clear(renderRequest);
+			}
 
 			if (!cmd.equals(Constants.ADD)) {
 				ActionUtil.getArticle(renderRequest);
