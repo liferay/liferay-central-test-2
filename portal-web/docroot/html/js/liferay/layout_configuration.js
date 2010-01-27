@@ -164,7 +164,8 @@ AUI().add(
 						item.remove();
 					}
 					else {
-						var firstColumn = A.one('.lfr-portlet-column');
+						var columnSelector = Liferay.Layout.layoutHandler.get('columnSelector');
+						var firstColumn = A.one(columnSelector);
 
 						if (firstColumn) {
 							firstColumn.prepend(placeHolder);
@@ -535,11 +536,11 @@ AUI().add(
 					var instance = this;
 
 					var placeholder = instance.get('placeholder');
+					var columnSelector = Liferay.Layout.layoutHandler.get('columnSelector');
+					var dropColumn = A.one(columnSelector);
 
-					var column = Liferay.Layout.layoutHandler.get('dropZones').item(0);
-
-					if (column) {
-						column.append(placeholder);
+					if (dropColumn) {
+						dropColumn.append(placeholder);
 					}
 
 					Liferay.Layout.placeholder.hide();
