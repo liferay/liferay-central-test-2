@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-
-<project name="ext-service" basedir="." default="compile">
-	<import file="build-parent.xml" />
-</project>

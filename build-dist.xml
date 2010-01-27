@@ -614,14 +614,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		<ant dir="portal-impl" target="build-services" inheritAll="false" />
 		<ant dir="portal-impl" target="build-wsdds" inheritAll="false" />
 
-		<delete dir="${lp.ext.dir}" />
-
-		<antcall target="build-ext" />
-
-		<ant dir="${lp.ext.dir}/ext-impl" target="build-service-portlet-reports" inheritAll="false" />
-
-		<antcall target="sync-ext" inheritAll="false" />
-
 		<antcall target="all" />
 
 		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
@@ -639,28 +631,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown.bat" resolveexecutable="true" />
 			</sequential>
 		</parallel>
-	</target>
-
-	<target name="sync-ext">
-		<copy todir="tools/ext_tmpl/ext-impl/src" overwrite="yes">
-			<fileset
-				dir="${lp.ext.dir}/ext-impl/src"
-			/>
-		</copy>
-
-		<copy todir="tools/ext_tmpl/ext-service" overwrite="yes">
-			<fileset
-				dir="${lp.ext.dir}/ext-service"
-				includes="**/*.java"
-			/>
-		</copy>
-
-		<copy todir="tools/ext_tmpl/ext-web/docroot/WEB-INF" overwrite="yes">
-			<fileset
-				dir="${lp.ext.dir}/ext-web/docroot/WEB-INF"
-				includes="*.xml,*.wsdd"
-			/>
-		</copy>
 	</target>
 
 	<target name="zip-api">
@@ -771,29 +741,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 				prefix="liferay-portal-${lp.version}"
 			/>
 		</zip>
-	</target>
-
-	<target name="zip-ext">
-		<delete file="dist/liferay-portal-ext-${lp.version}.zip" failonerror="false" />
-
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<move file="${lp.ext.dir}" tofile="${tstamp.value}" failonerror="false" />
-
-		<antcall target="build-ext" />
-
-		<zip destfile="dist/liferay-portal-ext-${lp.version}.zip">
-			<zipfileset
-				dir="${lp.ext.dir}"
-				prefix="liferay-portal-ext-${lp.version}"
-			/>
-		</zip>
-
-		<delete dir="${lp.ext.dir}" />
-
-		<move file="${tstamp.value}" tofile="${lp.ext.dir}" failonerror="false" />
 	</target>
 
 	<target name="zip-geronimo-tomcat">
@@ -1165,12 +1112,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		<antcall target="build-dist-resin" />
 		<antcall target="build-dist-tomcat" />
 
-		<delete dir="${lp.ext.dir}" />
-
-		<antcall target="build-ext" />
-
 		<antcall target="zip-api" />
-		<antcall target="zip-ext" />
 		<antcall target="zip-geronimo-tomcat" />
 		<antcall target="zip-glassfish" />
 		<antcall target="zip-jboss-tomcat" />
