@@ -86,19 +86,19 @@ public class BBCodeUtil {
 	};
 
 	static {
-		fontSizes.put(new Integer(1), "<span style='font-size: 0.7em';>");
-		fontSizes.put(new Integer(2), "<span style='font-size: 0.8em';>");
-		fontSizes.put(new Integer(3), "<span style='font-size: 0.9em';>");
-		fontSizes.put(new Integer(4), "<span style='font-size: 1.0em';>");
-		fontSizes.put(new Integer(5), "<span style='font-size: 1.1em';>");
-		fontSizes.put(new Integer(6), "<span style='font-size: 1.3em';>");
-		fontSizes.put(new Integer(7), "<span style='font-size: 1.5em';>");
+		fontSizes.put(new Integer(1), "<span style='font-size: 0.7em;'>");
+		fontSizes.put(new Integer(2), "<span style='font-size: 0.8em;'>");
+		fontSizes.put(new Integer(3), "<span style='font-size: 0.9em;'>");
+		fontSizes.put(new Integer(4), "<span style='font-size: 1.0em;'>");
+		fontSizes.put(new Integer(5), "<span style='font-size: 1.1em;'>");
+		fontSizes.put(new Integer(6), "<span style='font-size: 1.3em;'>");
+		fontSizes.put(new Integer(7), "<span style='font-size: 1.5em;'>");
 
-		listStyles.put("1", "<ol style='list-style-type: decimal';>");
-		listStyles.put("i", "<ol style='list-style-type: lower-roman';>");
-		listStyles.put("I", "<ol style='list-style-type: upper-roman';>");
-		listStyles.put("a", "<ol style='list-style-type: lower-alpha';>");
-		listStyles.put("A", "<ol style='list-style-type: upper-alpha';>");
+		listStyles.put("1", "<ol style='list-style: decimal inside;'>");
+		listStyles.put("i", "<ol style='list-style: lower-roman inside;'>");
+		listStyles.put("I", "<ol style='list-style: upper-roman inside;'>");
+		listStyles.put("a", "<ol style='list-style: lower-alpha inside;'>");
+		listStyles.put("A", "<ol style='list-style: upper-alpha inside;'>");
 
 		for (int i = 0; i < emoticons.length; i++) {
 			String[] emoticon = emoticons[i];
@@ -231,7 +231,7 @@ public class BBCodeUtil {
 
 			if (tag.hasParameter()) {
 				sb.append("<span style='font-family: ");
-				sb.append(tag.getParameter() + "';>");
+				sb.append(tag.getParameter() + ";'>");
 				sb.append(tag.getElement() + "</span>");
 			}
 			else {
@@ -277,7 +277,7 @@ public class BBCodeUtil {
 				sb.append("</ol>");
 			}
 			else {
-				sb.append("<ul style='list-style-type: disc';>");
+				sb.append("<ul style='list-style: disc inside;'>");
 
 				for (int i = 0; i < items.length; i++) {
 					if (items[i].trim().length() > 0) {
@@ -499,8 +499,8 @@ public class BBCodeUtil {
 	private static final String[] _HTML_TAGS = {
 		"<b>", "</b>", "<i>", "</i>", "<u>", "</u>", "<strike>", "</strike>",
 		"<img alt='' src='", "' />",
-		"<div style='text-align: left'>", "<div style='text-align: center'>",
-		"<div style='text-align: right'>", "<div style='margin-left: 15px'>",
+		"<div style='text-align: left;'>", "<div style='text-align: center;'>",
+		"<div style='text-align: right;'>", "<div style='margin-left: 15px;'>",
 		"</div>", "</div>", "</div>", "</div>", "<tt>", "</tt>"
 	};
 
