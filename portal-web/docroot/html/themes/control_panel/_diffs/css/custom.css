@@ -1,10 +1,13 @@
-/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
-
 /* ---------- Base styles ---------- */
 
 body {
 	background: #E3E8E8;
 	font-size: 11px;
+}
+
+a {
+	color: #5B677D;
+	text-decoration: none;
 }
 
 /* ---------- Main content body ---------- */
@@ -15,8 +18,8 @@ body {
 }
 
 #content-wrapper {
-	background: #fff;
-	border: 5px solid #fff;
+	background: #FFF;
+	border: 5px solid #FFF;
 	margin: 20px auto;
 	width: 976px;
 }
@@ -28,9 +31,13 @@ body {
 	width: 976px;
 }
 
+#banner .logo {
+	margin: 0;
+}
+
 #banner h1.logo a {
 	background: url(../images/common/company_logo.png) no-repeat 0 50%;
-	color: #fff;
+	color: #FFF;
 	display: inline;
 	font-size: 1em;
 	height: auto;
@@ -43,13 +50,57 @@ body {
 /* ---------- Site breadcrumbs ---------- */
 
 .site-breadcrumbs {
-	border-color: #fff;
+	border-color: #FFF;
 	border-style: solid;
 	border-width: 5px 5px 0;
 	margin: 0 auto;
 	position: relative;
 	top: 20px;
 	width: 976px;
+}
+
+.site-breadcrumbs ul {
+	background-color: #FFF;
+	border: 1px solid #DEDEDE;
+	height: 2.3em;
+	margin: 0;
+}
+
+.site-breadcrumbs li {
+	background: url(../images/arrows/05_right.png) no-repeat 100% 50%;
+	background-image: none;
+	display: inline;
+	float: left;
+	line-height: 2.3em;
+	padding-left: 0.75em;
+}
+
+.site-breadcrumbs li span {
+	background: url(../images/common/breadcrumbs.png) no-repeat 100% 50%;
+	display: block;
+	padding: 0 15px 0 0;
+}
+
+.site-breadcrumbs li span a {
+	text-decoration: none;
+}
+
+.site-breadcrumbs .last {
+	background-image: none;
+	display: inline;
+	font-size: 1em;
+	font-weight: bold;
+	margin-top: 0;
+	padding-right: 0;
+}
+
+.site-breadcrumbs .last a {
+	color: #555;
+}
+
+.site-breadcrumbs .last span {
+	background-image: none;
+	padding: 0;
 }
 
 /* ---------- Control panel ---------- */
@@ -200,7 +251,7 @@ body {
 
 .lfr-ctrl-panel .panel-page-category .category-portlets a:hover {
 	background-color: #4EA9DA;
-	color: #fff;
+	color: #FFF;
 }
 
 .js .lfr-ctrl-panel .toggle-menu {
