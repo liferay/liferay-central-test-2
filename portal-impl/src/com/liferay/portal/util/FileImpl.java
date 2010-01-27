@@ -724,12 +724,12 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	private static final String[] _SAFE_FILE_NAME_1 = {
-		StringPool.SPACE, StringPool.AMPERSAND, StringPool.CLOSE_PARENTHESIS,
+		StringPool.AMPERSAND, StringPool.CLOSE_PARENTHESIS,
 		StringPool.OPEN_PARENTHESIS, StringPool.SEMICOLON
 	};
 
 	private static final String[] _SAFE_FILE_NAME_2 = {
-		"_SP_", "_AMP_", "_CP_", "_OP_", "_SEM_"
+		"_AMP_", "_CP_", "_OP_", "_SEM_"
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(FileImpl.class);
