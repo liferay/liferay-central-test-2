@@ -16,19 +16,7 @@
 	box-shadow: inset 0 5px 15px rgba(255, 255, 255, 0.5);
 }
 
-.logo .current-community {
-	-moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5), 1px 1px 0 #FFF;
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5), 1px 1px 0 #FFF;
-	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5), 1px 1px 0 #FFF;
-}
-
-#navigation li.selected a {
-	-moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
-	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
-	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-
-.portlet-topper, .aui-dialog-hd {
+.aui-dialog-hd {
 	-moz-box-shadow: 1px 1px 0 #FFF;
 	-webkit-box-shadow: 1px 1px 0 #FFF;
 	box-shadow: 1px 1px 0 #FFF;
@@ -74,13 +62,4 @@
 	-webkit-border-top-right-radius: 0;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-}
-
-.portlet-borderless-bar {
-	-moz-border-radius: 20px;
-	-moz-box-shadow: inset 0 1px 3px #000;
-	-webkit-border-radius: 20px;
-	-webkit-box-shadow: inset 0 1px 3px #000;
-	border-radius: 20px;
-	box-shadow: inset 0 1px 3px #000;
 }
