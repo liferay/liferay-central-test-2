@@ -20,49 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.orm.hibernate;
+package com.liferay.portal.cache.cluster.clusterlink;
 
-import com.liferay.portal.SystemException;
-
-import java.lang.reflect.Field;
-
-import net.sf.ehcache.CacheManager;
-
-import org.hibernate.cache.CacheProvider;
+import com.liferay.portal.kernel.cache.cluster.BasePortalCacheClusterChannel;
+import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterEvent;
+import com.liferay.portal.kernel.cluster.ClusterLinkUtil;
+import com.liferay.portal.kernel.cluster.Priority;
+import com.liferay.portal.kernel.messaging.Message;
 
 /**
- * <a href="EhCacheProvider.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClusterLinkPortalCacheClusterChannel.java.html"><b><i>View Source
+ * </i></b></a>
  *
- * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class EhCacheProvider extends CacheProviderWrapper {
+public class ClusterLinkPortalCacheClusterChannel
+	extends BasePortalCacheClusterChannel {
 
-	public EhCacheProvider() {
-		super("net.sf.ehcache.hibernate.EhCacheProvider");
-		_CACHE_PRIVIDER = _cacheProvider;
+	public ClusterLinkPortalCacheClusterChannel(
+		String destination, Priority priority) {
+		_destination = destination;
+		_priority = priority;
 	}
 
-	public static CacheManager getCacheManager() throws SystemException {
-		try {
-			Class clazz =
-				Class.forName("net.sf.ehcache.hibernate.EhCacheProvider");
-			Field filed = clazz.getDeclaredField("manager");
-			filed.setAccessible(true);
-			CacheManager cacheManager =
-				(CacheManager) filed.get(_CACHE_PRIVIDER);
-			if (cacheManager == null) {
-				throw new SystemException(
-					"Underline CacheManger has been initialized yet, " +
-					"make sure you are not calling this method too early.");
-			}
-			return cacheManager;
-		}
-		catch (Exception ex) {
-			throw new SystemException(ex);
-		}
+	@Override
+	public void dispatchEvent(PortalCacheClusterEvent event) {
+		Message message = new Message();
+		message.setPayload(event);
+		message.setDestinationName(_destination);
+		ClusterLinkUtil.sendMulticastMessage(message, _priority);
 	}
 
-	private static CacheProvider _CACHE_PRIVIDER;
+	private final String _destination;
+	private final Priority _priority;
 
 }
