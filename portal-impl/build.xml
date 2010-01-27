@@ -1005,7 +1005,9 @@ ${exception.message}
 			dir="${project.dir}"
 			fork="true"
 			newenvironment="true"
-		/>
+		>
+			<jvmarg value="-Xmx128m" />
+		</java>
 
 		<delete file="ServiceBuilder.temp" />
 	</target>
