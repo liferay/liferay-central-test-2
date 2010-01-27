@@ -6,7 +6,12 @@ body {
 }
 
 a {
-	color: #5B677D;
+	color: #369;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #06C;
 	text-decoration: none;
 }
 
