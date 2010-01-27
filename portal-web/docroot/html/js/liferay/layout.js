@@ -742,13 +742,19 @@ AUI().add(
 					var portletNode = event.target.get('node');
 					var helper = event.target.get('dragNode');
 
+					FreeFormPortlet.superclass._onDragEnd.apply(this, arguments);
+
 					portletNode.show();
 
 					Liferay.Layout.layoutHandler.alignPortlet(portletNode, helper);
 
 					helper.hide();
+				},
 
-					FreeFormPortlet.superclass._onDragEnd.apply(this, arguments);
+				_onDragExit: function(event) {
+					var instance = this;
+
+					ColumnPortlet.superclass._onDragExit.apply(this, arguments);
 				},
 
 				_syncHelperSizeUI: function() {
