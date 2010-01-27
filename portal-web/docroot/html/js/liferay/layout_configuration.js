@@ -174,11 +174,14 @@ AUI().add(
 					var portletOptions = {
 						beforePortletLoaded: beforePortletLoaded,
 						onComplete: function(portletBoundary) {
-							var portletHandler = Liferay.Layout.layoutHandler.get('portletHandler');
+							var layoutHandler = Liferay.Layout.layoutHandler;
+							var portletHandler = layoutHandler.get('portletHandler');
 
 							if (portletHandler) {
 								portletHandler.registerPortlet(portletBoundary);
 							}
+
+							layoutHandler._bindDropColumns();
 
 							if (onComplete) {
 								onComplete.apply(this, arguments);

@@ -79,9 +79,7 @@ AUI().add(
 				valueFn: function() {
 					var instance = this;
 
-					var gridColumnSelector = instance.get('gridColumnSelector');
-
-					return A.all(gridColumnSelector);
+					return instance._updateDropZones();
 				}
 			},
 
@@ -257,6 +255,8 @@ AUI().add(
 				_bindDropColumns: function() {
 					var instance = this;
 
+					instance._updateDropZones();
+
 					var dropZones = instance.get('dropZones');
 
 					dropZones.each(instance._setupDroppable, instance);
@@ -362,13 +362,26 @@ AUI().add(
 				_setupDroppable: function(node) {
 					var instance = this;
 
-					new A.DD.Drop(
-						{
-							node: node,
-							bubbles: instance,
-							groups: ['portlets']
-						}
-					);
+					if (!DDM.getDrop(node)) {
+						new A.DD.Drop(
+							{
+								node: node,
+								bubbles: instance,
+								groups: ['portlets']
+							}
+						);
+					}
+				},
+
+				_updateDropZones: function() {
+					var instance = this;
+
+					var gridColumnSelector = instance.get('gridColumnSelector');
+					var dropZones = A.all(gridColumnSelector);
+
+					instance.set('dropZones', dropZones);
+
+					return dropZones;
 				},
 
 				_updatePortletInfo: function(event) {
