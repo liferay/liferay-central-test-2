@@ -178,7 +178,7 @@ public interface IGFolderLocalService {
 		long folderId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

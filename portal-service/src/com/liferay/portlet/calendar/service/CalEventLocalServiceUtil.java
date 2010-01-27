@@ -256,20 +256,20 @@ public class CalEventLocalServiceUtil {
 		getService().importICal4j(userId, groupId, file);
 	}
 
-	public static void reIndex(
+	public static void reindex(
 		com.liferay.portlet.calendar.model.CalEvent event)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(event);
+		getService().reindex(event);
 	}
 
-	public static void reIndex(long eventId)
+	public static void reindex(long eventId)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(eventId);
+		getService().reindex(eventId);
 	}
 
-	public static void reIndex(java.lang.String[] ids)
+	public static void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(ids);
+		getService().reindex(ids);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,

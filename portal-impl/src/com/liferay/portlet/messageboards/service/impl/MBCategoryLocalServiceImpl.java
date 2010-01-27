@@ -352,7 +352,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return category;
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -360,9 +360,9 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			reIndexCategories(companyId);
+			reindexCategories(companyId);
 
-			reIndexRoot(companyId);
+			reindexRoot(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -601,7 +601,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				// Indexer
 
-				mbMessageLocalService.reIndex(message);
+				mbMessageLocalService.reindex(message);
 			}
 		}
 
@@ -630,7 +630,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			userId, MBCategory.class.getName(), categoryId);
 	}
 
-	protected void reIndexCategories(long companyId) throws SystemException {
+	protected void reindexCategories(long companyId) throws SystemException {
 		int categoryCount = mbCategoryPersistence.countByCompanyId(companyId);
 
 		int categoryPages = categoryCount / Indexer.DEFAULT_INTERVAL;
@@ -639,11 +639,11 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			int categoryStart = (i * Indexer.DEFAULT_INTERVAL);
 			int categoryEnd = categoryStart + Indexer.DEFAULT_INTERVAL;
 
-			reIndexCategories(companyId, categoryStart, categoryEnd);
+			reindexCategories(companyId, categoryStart, categoryEnd);
 		}
 	}
 
-	protected void reIndexCategories(
+	protected void reindexCategories(
 			long companyId, int categoryStart, int categoryEnd)
 		throws SystemException {
 
@@ -663,12 +663,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				int messageStart = (i * Indexer.DEFAULT_INTERVAL);
 				int messageEnd = messageStart + Indexer.DEFAULT_INTERVAL;
 
-				reIndexMessages(groupId, categoryId, messageStart, messageEnd);
+				reindexMessages(groupId, categoryId, messageStart, messageEnd);
 			}
 		}
 	}
 
-	protected void reIndexMessages(
+	protected void reindexMessages(
 			long groupId, long categoryId, int messageStart, int messageEnd)
 		throws SystemException {
 
@@ -676,11 +676,11 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			groupId, categoryId, messageStart, messageEnd);
 
 		for (MBMessage message : messages) {
-			mbMessageLocalService.reIndex(message);
+			mbMessageLocalService.reindex(message);
 		}
 	}
 
-	protected void reIndexRoot(long companyId) throws SystemException {
+	protected void reindexRoot(long companyId) throws SystemException {
 		int groupCount = groupPersistence.countByCompanyId(companyId);
 
 		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
@@ -689,11 +689,11 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
 			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
 
-			reIndexRoot(companyId, groupStart, groupEnd);
+			reindexRoot(companyId, groupStart, groupEnd);
 		}
 	}
 
-	protected void reIndexRoot(long companyId, int groupStart, int groupEnd)
+	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
 		throws SystemException {
 
 		List<Group> groups = groupPersistence.findByCompanyId(
@@ -712,7 +712,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reIndexMessages(groupId, categoryId, entryStart, entryEnd);
+				reindexMessages(groupId, categoryId, entryStart, entryEnd);
 			}
 		}
 	}

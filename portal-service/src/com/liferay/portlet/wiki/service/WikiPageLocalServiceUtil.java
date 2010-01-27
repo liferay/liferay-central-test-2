@@ -368,14 +368,14 @@ public class WikiPageLocalServiceUtil {
 			.movePage(userId, nodeId, title, newTitle, strict, serviceContext);
 	}
 
-	public static void reIndex(long resourcePrimKey)
+	public static void reindex(long resourcePrimKey)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(resourcePrimKey);
+		getService().reindex(resourcePrimKey);
 	}
 
-	public static void reIndex(com.liferay.portlet.wiki.model.WikiPage page)
+	public static void reindex(com.liferay.portlet.wiki.model.WikiPage page)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(page);
+		getService().reindex(page);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(

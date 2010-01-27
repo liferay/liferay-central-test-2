@@ -235,7 +235,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Indexer
 
 		if (page.isApproved()) {
-			reIndex(page);
+			reindex(page);
 		}
 
 		// Cache
@@ -884,10 +884,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			_log.error("Indexing " + newTitle, se);
 		}
 
-		reIndex(page);
+		reindex(page);
 	}
 
-	public void reIndex(long resourcePrimKey) throws SystemException {
+	public void reindex(long resourcePrimKey) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -901,10 +901,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return;
 		}
 
-		reIndex(page);
+		reindex(page);
 	}
 
-	public void reIndex(WikiPage page) throws SystemException {
+	public void reindex(WikiPage page) throws SystemException {
 		if (Validator.isNotNull(page.getRedirectTitle())) {
 			return;
 		}
@@ -1149,7 +1149,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			// Indexer
 
-			reIndex(page);
+			reindex(page);
 		}
 
 		return wikiPagePersistence.update(page, false);

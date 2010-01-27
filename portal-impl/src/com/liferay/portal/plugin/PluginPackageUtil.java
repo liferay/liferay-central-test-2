@@ -221,8 +221,8 @@ public class PluginPackageUtil {
 		_instance._registerPluginPackageInstallation(preliminaryContext);
 	}
 
-	public static void reIndex() throws SystemException {
-		_instance._reIndex();
+	public static void reindex() throws SystemException {
+		_instance._reindex();
 	}
 
 	public static RepositoryReport reloadRepositories() throws SystemException {
@@ -1122,7 +1122,7 @@ public class PluginPackageUtil {
 			preliminaryContext);
 	}
 
-	private void _reIndex() throws SystemException {
+	private void _reindex() throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -1192,7 +1192,7 @@ public class PluginPackageUtil {
 
 		}
 
-		_reIndex();
+		_reindex();
 
 		return repositoryReport;
 	}

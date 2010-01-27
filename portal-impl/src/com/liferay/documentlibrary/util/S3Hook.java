@@ -275,7 +275,7 @@ public class S3Hook extends BaseHook {
 	public void move(String srcDir, String destDir) {
 	}
 
-	public void reIndex(String[] ids) throws SearchException {
+	public void reindex(String[] ids) throws SearchException {
 		long companyId = GetterUtil.getLong(ids[0]);
 		String portletId = ids[1];
 		long groupId = GetterUtil.getLong(ids[2]);
@@ -407,7 +407,7 @@ public class S3Hook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reIndex)
+			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException {
 
 		try {
@@ -451,7 +451,7 @@ public class S3Hook extends BaseHook {
 				FileUtil.delete(tempFile);
 			}
 
-			if (reIndex) {
+			if (reindex) {
 				DLIndexerUtil.deleteFile(
 					companyId, portletId, repositoryId, fileName);
 

@@ -454,7 +454,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			organizationId, new Date(), status);
 	}
 
-	public void reIndex(BlogsEntry entry) throws SystemException {
+	public void reindex(BlogsEntry entry) throws SystemException {
 		if (!entry.isApproved()) {
 			return;
 		}
@@ -483,7 +483,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 	}
 
-	public void reIndex(long entryId) throws SystemException {
+	public void reindex(long entryId) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -494,10 +494,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return;
 		}
 
-		reIndex(entry);
+		reindex(entry);
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -505,7 +505,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			reIndexEntries(companyId);
+			reindexEntries(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -710,7 +710,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Indexer
 
 		if (entry.isApproved()) {
-			reIndex(entry);
+			reindex(entry);
 		}
 		else {
 			try {
@@ -1149,7 +1149,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 	}
 
-	protected void reIndexEntries(long companyId) throws SystemException {
+	protected void reindexEntries(long companyId) throws SystemException {
 		int count = blogsEntryPersistence.countByCompanyId(companyId);
 
 		int pages = count / Indexer.DEFAULT_INTERVAL;
@@ -1158,18 +1158,18 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			int start = (i * Indexer.DEFAULT_INTERVAL);
 			int end = start + Indexer.DEFAULT_INTERVAL;
 
-			reIndexEntries(companyId, start, end);
+			reindexEntries(companyId, start, end);
 		}
 	}
 
-	protected void reIndexEntries(long companyId, int start, int end)
+	protected void reindexEntries(long companyId, int start, int end)
 		throws SystemException {
 
 		List<BlogsEntry> entries = blogsEntryPersistence.findByCompanyId(
 			companyId, start, end);
 
 		for (BlogsEntry entry : entries) {
-			reIndex(entry);
+			reindex(entry);
 		}
 	}
 

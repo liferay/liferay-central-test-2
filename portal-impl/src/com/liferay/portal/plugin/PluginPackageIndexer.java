@@ -203,12 +203,12 @@ public class PluginPackageIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
-	public void reIndex(String className, long classPK) {
+	public void reindex(String className, long classPK) {
 	}
 
-	public void reIndex(String[] ids) throws SearchException {
+	public void reindex(String[] ids) throws SearchException {
 		try {
-			PluginPackageUtil.reIndex();
+			PluginPackageUtil.reindex();
 		}
 		catch (Exception e) {
 			throw new SearchException(e);

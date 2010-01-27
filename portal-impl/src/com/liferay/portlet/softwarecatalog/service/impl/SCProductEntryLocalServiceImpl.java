@@ -167,7 +167,7 @@ public class SCProductEntryLocalServiceImpl
 
 		// Indexer
 
-		reIndex(productEntry);
+		reindex(productEntry);
 
 		return productEntry;
 	}
@@ -408,7 +408,7 @@ public class SCProductEntryLocalServiceImpl
 		return doc.asXML();
 	}
 
-	public void reIndex(long productEntryId) throws SystemException {
+	public void reindex(long productEntryId) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -420,10 +420,10 @@ public class SCProductEntryLocalServiceImpl
 			return;
 		}
 
-		reIndex(productEntry);
+		reindex(productEntry);
 	}
 
-	public void reIndex(SCProductEntry productEntry) throws SystemException {
+	public void reindex(SCProductEntry productEntry) throws SystemException {
 		long companyId = productEntry.getCompanyId();
 		long groupId = productEntry.getGroupId();
 		long userId = productEntry.getUserId();
@@ -460,7 +460,7 @@ public class SCProductEntryLocalServiceImpl
 		}
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -468,7 +468,7 @@ public class SCProductEntryLocalServiceImpl
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			reIndexProductEntries(companyId);
+			reindexProductEntries(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -580,7 +580,7 @@ public class SCProductEntryLocalServiceImpl
 
 		// Indexer
 
-		reIndex(productEntry);
+		reindex(productEntry);
 
 		return productEntry;
 	}
@@ -714,7 +714,7 @@ public class SCProductEntryLocalServiceImpl
 		}
 	}
 
-	protected void reIndexProductEntries(long companyId)
+	protected void reindexProductEntries(long companyId)
 		throws SystemException {
 
 		int count = scProductEntryPersistence.countByCompanyId(companyId);
@@ -725,18 +725,18 @@ public class SCProductEntryLocalServiceImpl
 			int start = (i * Indexer.DEFAULT_INTERVAL);
 			int end = start + Indexer.DEFAULT_INTERVAL;
 
-			reIndexProductEntries(companyId, start, end);
+			reindexProductEntries(companyId, start, end);
 		}
 	}
 
-	protected void reIndexProductEntries(long companyId, int start, int end)
+	protected void reindexProductEntries(long companyId, int start, int end)
 		throws SystemException {
 
 		List<SCProductEntry> productEntries =
 			scProductEntryPersistence.findByCompanyId(companyId, start, end);
 
 		for (SCProductEntry productEntry : productEntries) {
-			reIndex(productEntry);
+			reindex(productEntry);
 		}
 	}
 

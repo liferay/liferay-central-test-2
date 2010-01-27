@@ -258,7 +258,7 @@ public class BookmarksFolderLocalServiceImpl
 		}
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -266,9 +266,9 @@ public class BookmarksFolderLocalServiceImpl
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			reIndexFolders(companyId);
+			reindexFolders(companyId);
 
-			reIndexRoot(companyId);
+			reindexRoot(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -462,13 +462,13 @@ public class BookmarksFolderLocalServiceImpl
 
 			bookmarksEntryPersistence.update(entry, false);
 
-			bookmarksEntryLocalService.reIndex(entry);
+			bookmarksEntryLocalService.reindex(entry);
 		}
 
 		deleteFolder(fromFolder);
 	}
 
-	protected void reIndexEntries(
+	protected void reindexEntries(
 			long groupId, long folderId, int entryStart, int entryEnd)
 		throws SystemException {
 
@@ -476,11 +476,11 @@ public class BookmarksFolderLocalServiceImpl
 			groupId, folderId, entryStart, entryEnd);
 
 		for (BookmarksEntry entry : entries) {
-			bookmarksEntryLocalService.reIndex(entry);
+			bookmarksEntryLocalService.reindex(entry);
 		}
 	}
 
-	protected void reIndexFolders(long companyId) throws SystemException {
+	protected void reindexFolders(long companyId) throws SystemException {
 		int folderCount = bookmarksFolderPersistence.countByCompanyId(
 			companyId);
 
@@ -490,11 +490,11 @@ public class BookmarksFolderLocalServiceImpl
 			int folderStart = (i * Indexer.DEFAULT_INTERVAL);
 			int folderEnd = folderStart + Indexer.DEFAULT_INTERVAL;
 
-			reIndexFolders(companyId, folderStart, folderEnd);
+			reindexFolders(companyId, folderStart, folderEnd);
 		}
 	}
 
-	protected void reIndexFolders(
+	protected void reindexFolders(
 			long companyId, int folderStart, int folderEnd)
 		throws SystemException {
 
@@ -515,12 +515,12 @@ public class BookmarksFolderLocalServiceImpl
 				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reIndexEntries(groupId, folderId, entryStart, entryEnd);
+				reindexEntries(groupId, folderId, entryStart, entryEnd);
 			}
 		}
 	}
 
-	protected void reIndexRoot(long companyId) throws SystemException {
+	protected void reindexRoot(long companyId) throws SystemException {
 		int groupCount = groupPersistence.countByCompanyId(companyId);
 
 		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
@@ -529,11 +529,11 @@ public class BookmarksFolderLocalServiceImpl
 			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
 			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
 
-			reIndexRoot(companyId, groupStart, groupEnd);
+			reindexRoot(companyId, groupStart, groupEnd);
 		}
 	}
 
-	protected void reIndexRoot(long companyId, int groupStart, int groupEnd)
+	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
 		throws SystemException {
 
 		List<Group> groups = groupPersistence.findByCompanyId(
@@ -552,7 +552,7 @@ public class BookmarksFolderLocalServiceImpl
 				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reIndexEntries(groupId, folderId, entryStart, entryEnd);
+				reindexEntries(groupId, folderId, entryStart, entryEnd);
 			}
 		}
 	}

@@ -388,7 +388,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(resource.getName());
 
 		if (indexer != null) {
-			indexer.reIndex(
+			indexer.reindex(
 				resource.getName(), GetterUtil.getLong(resource.getPrimKey()));
 		}
 	}
@@ -400,7 +400,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(resourceName);
 
 		if (indexer != null) {
-			indexer.reIndex(resourceName, GetterUtil.getLong(resourceClassPK));
+			indexer.reindex(resourceName, GetterUtil.getLong(resourceClassPK));
 		}
 	}
 

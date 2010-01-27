@@ -160,7 +160,7 @@ for (int i = 0; i < results.size(); i++) {
 	<aui:script>
 		function <portlet:namespace />reindexPortlet(portletId) {
 			document.<portlet:namespace />fm.<portlet:namespace />portletId.value = portletId;
-			<portlet:namespace />saveServer('reIndex');
+			<portlet:namespace />saveServer('reindex');
 		}
 	</aui:script>
 </c:if>

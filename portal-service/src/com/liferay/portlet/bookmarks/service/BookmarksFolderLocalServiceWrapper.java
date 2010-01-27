@@ -214,9 +214,9 @@ public class BookmarksFolderLocalServiceWrapper
 			folderId);
 	}
 
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_bookmarksFolderLocalService.reIndex(ids);
+		_bookmarksFolderLocalService.reindex(ids);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

@@ -274,18 +274,18 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 			status);
 	}
 
-	public void reIndex(com.liferay.portlet.blogs.model.BlogsEntry entry)
+	public void reindex(com.liferay.portlet.blogs.model.BlogsEntry entry)
 		throws com.liferay.portal.SystemException {
-		_blogsEntryLocalService.reIndex(entry);
+		_blogsEntryLocalService.reindex(entry);
 	}
 
-	public void reIndex(long entryId) throws com.liferay.portal.SystemException {
-		_blogsEntryLocalService.reIndex(entryId);
+	public void reindex(long entryId) throws com.liferay.portal.SystemException {
+		_blogsEntryLocalService.reindex(entryId);
 	}
 
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_blogsEntryLocalService.reIndex(ids);
+		_blogsEntryLocalService.reindex(ids);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

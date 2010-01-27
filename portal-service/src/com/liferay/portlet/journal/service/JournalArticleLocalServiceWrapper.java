@@ -609,20 +609,20 @@ public class JournalArticleLocalServiceWrapper
 			version, status);
 	}
 
-	public void reIndex(
+	public void reindex(
 		com.liferay.portlet.journal.model.JournalArticle article)
 		throws com.liferay.portal.SystemException {
-		_journalArticleLocalService.reIndex(article);
+		_journalArticleLocalService.reindex(article);
 	}
 
-	public void reIndex(long resourcePrimKey)
+	public void reindex(long resourcePrimKey)
 		throws com.liferay.portal.SystemException {
-		_journalArticleLocalService.reIndex(resourcePrimKey);
+		_journalArticleLocalService.reindex(resourcePrimKey);
 	}
 
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_journalArticleLocalService.reIndex(ids);
+		_journalArticleLocalService.reindex(ids);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(

@@ -201,14 +201,14 @@ public interface CalEventLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(com.liferay.portlet.calendar.model.CalEvent event)
+	public void reindex(com.liferay.portlet.calendar.model.CalEvent event)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(long eventId) throws com.liferay.portal.SystemException;
+	public void reindex(long eventId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

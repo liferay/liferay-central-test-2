@@ -211,9 +211,9 @@ public class BookmarksFolderLocalServiceUtil {
 		getService().getSubfolderIds(folderIds, groupId, folderId);
 	}
 
-	public static void reIndex(java.lang.String[] ids)
+	public static void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(ids);
+		getService().reindex(ids);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,

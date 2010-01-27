@@ -245,14 +245,14 @@ public class BookmarksEntryLocalServiceWrapper
 		return _bookmarksEntryLocalService.openEntry(entryId);
 	}
 
-	public void reIndex(
+	public void reindex(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry)
 		throws com.liferay.portal.SystemException {
-		_bookmarksEntryLocalService.reIndex(entry);
+		_bookmarksEntryLocalService.reindex(entry);
 	}
 
-	public void reIndex(long entryId) throws com.liferay.portal.SystemException {
-		_bookmarksEntryLocalService.reIndex(entryId);
+	public void reindex(long entryId) throws com.liferay.portal.SystemException {
+		_bookmarksEntryLocalService.reindex(entryId);
 	}
 
 	public void updateAsset(long userId,

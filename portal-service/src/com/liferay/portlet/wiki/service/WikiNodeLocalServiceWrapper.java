@@ -214,9 +214,9 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 			options);
 	}
 
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_wikiNodeLocalService.reIndex(ids);
+		_wikiNodeLocalService.reindex(ids);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

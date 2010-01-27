@@ -266,9 +266,9 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		return _mbCategoryLocalService.getSystemCategory();
 	}
 
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_mbCategoryLocalService.reIndex(ids);
+		_mbCategoryLocalService.reindex(ids);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

@@ -948,7 +948,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="reindex-all-search-indexes" />
 					</td>
 					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('reIndex');" />
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('reindex');" />
 					</td>
 				</tr>
 				<tr>

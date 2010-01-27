@@ -88,18 +88,18 @@ public class DLIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
-	public void reIndex(String className, long classPK) throws SearchException {
+	public void reindex(String className, long classPK) throws SearchException {
 		try {
-			DLFileEntryLocalServiceUtil.reIndex(classPK);
+			DLFileEntryLocalServiceUtil.reindex(classPK);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
 	}
 
-	public void reIndex(String[] ids) throws SearchException {
+	public void reindex(String[] ids) throws SearchException {
 		try {
-			DLFolderLocalServiceUtil.reIndex(ids);
+			DLFolderLocalServiceUtil.reindex(ids);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);

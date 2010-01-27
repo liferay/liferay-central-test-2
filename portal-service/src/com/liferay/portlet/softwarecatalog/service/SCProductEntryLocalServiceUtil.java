@@ -246,20 +246,20 @@ public class SCProductEntryLocalServiceUtil {
 			oldestDate, maxNumOfVersions, repoSettings);
 	}
 
-	public static void reIndex(long productEntryId)
+	public static void reindex(long productEntryId)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(productEntryId);
+		getService().reindex(productEntryId);
 	}
 
-	public static void reIndex(
+	public static void reindex(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(productEntry);
+		getService().reindex(productEntry);
 	}
 
-	public static void reIndex(java.lang.String[] ids)
+	public static void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(ids);
+		getService().reindex(ids);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,

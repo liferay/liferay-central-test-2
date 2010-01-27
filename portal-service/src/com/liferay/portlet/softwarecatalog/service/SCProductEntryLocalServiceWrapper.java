@@ -246,20 +246,20 @@ public class SCProductEntryLocalServiceWrapper
 			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
 	}
 
-	public void reIndex(long productEntryId)
+	public void reindex(long productEntryId)
 		throws com.liferay.portal.SystemException {
-		_scProductEntryLocalService.reIndex(productEntryId);
+		_scProductEntryLocalService.reindex(productEntryId);
 	}
 
-	public void reIndex(
+	public void reindex(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry)
 		throws com.liferay.portal.SystemException {
-		_scProductEntryLocalService.reIndex(productEntry);
+		_scProductEntryLocalService.reindex(productEntry);
 	}
 
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_scProductEntryLocalService.reIndex(ids);
+		_scProductEntryLocalService.reindex(ids);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

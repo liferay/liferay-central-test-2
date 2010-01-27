@@ -242,7 +242,7 @@ public class FileSystemHook extends BaseHook {
 	public void move(String srcDir, String destDir) {
 	}
 
-	public void reIndex(String[] ids) {
+	public void reindex(String[] ids) {
 		long companyId = GetterUtil.getLong(ids[0]);
 		String portletId = ids[1];
 		long groupId = GetterUtil.getLong(ids[2]);
@@ -328,7 +328,7 @@ public class FileSystemHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reIndex)
+			String fileName, String newFileName, boolean reindex)
 		throws SystemException {
 
 		try {
@@ -341,7 +341,7 @@ public class FileSystemHook extends BaseHook {
 
 			FileUtil.deltree(fileNameDir);
 
-			if (reIndex) {
+			if (reindex) {
 				try {
 					DLIndexerUtil.deleteFile(
 						companyId, portletId, repositoryId, fileName);

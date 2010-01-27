@@ -135,10 +135,10 @@ public class DLFolderServiceUtil {
 		return getService().refreshFolderLock(lockUuid, expirationTime);
 	}
 
-	public static void reIndexSearch(long companyId)
+	public static void reindexSearch(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().reIndexSearch(companyId);
+		getService().reindexSearch(companyId);
 	}
 
 	public static void unlockFolder(long groupId, long folderId,

@@ -194,10 +194,10 @@ public class HookProxyImpl implements Hook {
 		hook.move(srcDir, destDir);
 	}
 
-	public void reIndex(String[] ids) throws SearchException {
+	public void reindex(String[] ids) throws SearchException {
 		Hook hook = HookFactory.getInstance();
 
-		hook.reIndex(ids);
+		hook.reindex(ids);
 	}
 
 	public void updateFile(

@@ -137,7 +137,7 @@ public class HookProxyBean extends BaseProxyBean implements Hook {
 		throw new UnsupportedOperationException();
 	}
 
-	public void reIndex(String[] ids) {
+	public void reindex(String[] ids) {
 		throw new UnsupportedOperationException();
 	}
 

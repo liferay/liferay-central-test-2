@@ -233,7 +233,7 @@ public class CMISHook extends BaseHook {
 	public void move(String srcDir, String destDir) {
 	}
 
-	public void reIndex(String[] ids) {
+	public void reindex(String[] ids) {
 		try {
 			long companyId = GetterUtil.getLong(ids[0]);
 			String portletId = ids[1];
@@ -347,7 +347,7 @@ public class CMISHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reIndex)
+			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException {
 
 		try {
@@ -371,7 +371,7 @@ public class CMISHook extends BaseHook {
 
 			CMISUtil.delete(oldVersioningFolderEntry);
 
-			if (reIndex) {
+			if (reindex) {
 				try {
 					DLIndexerUtil.deleteFile(
 						companyId, portletId, repositoryId, fileName);

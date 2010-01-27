@@ -274,19 +274,19 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getOrganizationEntriesCount(organizationId, status);
 	}
 
-	public static void reIndex(com.liferay.portlet.blogs.model.BlogsEntry entry)
+	public static void reindex(com.liferay.portlet.blogs.model.BlogsEntry entry)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(entry);
+		getService().reindex(entry);
 	}
 
-	public static void reIndex(long entryId)
+	public static void reindex(long entryId)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(entryId);
+		getService().reindex(entryId);
 	}
 
-	public static void reIndex(java.lang.String[] ids)
+	public static void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(ids);
+		getService().reindex(ids);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,

@@ -131,8 +131,8 @@ public class DLServiceUtil {
 		return _service;
 	}
 
-	public static void reIndex(String[] ids) throws SystemException {
-		getService().reIndex(ids);
+	public static void reindex(String[] ids) throws SystemException {
+		getService().reindex(ids);
 	}
 
 	public static void updateFile(
@@ -173,12 +173,12 @@ public class DLServiceUtil {
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reIndex)
+			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException {
 
 		getService().updateFile(
 			companyId, portletId, groupId, repositoryId, fileName, newFileName,
-			reIndex);
+			reindex);
 	}
 
 	public void setService(DLService service) {

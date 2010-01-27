@@ -254,7 +254,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Indexer
 
-		reIndex(event);
+		reindex(event);
 
 		// Pool
 
@@ -654,7 +654,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-	public void reIndex(CalEvent event) throws SystemException {
+	public void reindex(CalEvent event) throws SystemException {
 		long companyId = event.getCompanyId();
 		long groupId = event.getGroupId();
 		long userId = event.getUserId();
@@ -679,7 +679,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-	public void reIndex(long eventId) throws SystemException {
+	public void reindex(long eventId) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -690,10 +690,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			return;
 		}
 
-		reIndex(event);
+		reindex(event);
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -701,7 +701,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			reIndexEvents(companyId);
+			reindexEvents(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -853,7 +853,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Indexer
 
-		reIndex(event);
+		reindex(event);
 
 		// Pool
 
@@ -1137,7 +1137,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return false;
 	}
 
-	protected void reIndexEvents(long companyId) throws SystemException {
+	protected void reindexEvents(long companyId) throws SystemException {
 		int count = calEventPersistence.countByCompanyId(companyId);
 
 		int pages = count / Indexer.DEFAULT_INTERVAL;
@@ -1146,18 +1146,18 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int start = (i * Indexer.DEFAULT_INTERVAL);
 			int end = start + Indexer.DEFAULT_INTERVAL;
 
-			reIndexEvents(companyId, start, end);
+			reindexEvents(companyId, start, end);
 		}
 	}
 
-	protected void reIndexEvents(long companyId, int start, int end)
+	protected void reindexEvents(long companyId, int start, int end)
 		throws SystemException {
 
 		List<CalEvent> events = calEventPersistence.findByCompanyId(
 			companyId, start, end);
 
 		for (CalEvent event : events) {
-			reIndex(event);
+			reindex(event);
 		}
 	}
 

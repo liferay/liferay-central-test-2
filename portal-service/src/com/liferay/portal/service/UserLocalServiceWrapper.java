@@ -569,13 +569,13 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.isPasswordExpiringSoon(user);
 	}
 
-	public void reIndex(long userId) throws com.liferay.portal.SystemException {
-		_userLocalService.reIndex(userId);
+	public void reindex(long userId) throws com.liferay.portal.SystemException {
+		_userLocalService.reindex(userId);
 	}
 
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_userLocalService.reIndex(ids);
+		_userLocalService.reindex(ids);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

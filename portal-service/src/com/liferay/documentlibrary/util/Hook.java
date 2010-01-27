@@ -116,7 +116,7 @@ public interface Hook {
 
 	public void move(String srcDir, String destDir) throws SystemException;
 
-	public void reIndex(String[] ids) throws SearchException;
+	public void reindex(String[] ids) throws SearchException;
 
 	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void updateFile(

@@ -190,7 +190,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Indexer
 
-			reIndex(image);
+			reindex(image);
 
 			return image;
 		}
@@ -461,7 +461,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImageFinder.findByNoAssets();
 	}
 
-	public void reIndex(IGImage image) throws SystemException {
+	public void reindex(IGImage image) throws SystemException {
 		long companyId = image.getCompanyId();
 		long groupId = image.getGroupId();
 		long folderId = image.getFolderId();
@@ -487,7 +487,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
-	public void reIndex(long imageId) throws SystemException {
+	public void reindex(long imageId) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -498,7 +498,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			return;
 		}
 
-		reIndex(image);
+		reindex(image);
 	}
 
 	public void updateAsset(
@@ -590,7 +590,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Indexer
 
-			reIndex(image);
+			reindex(image);
 
 			return image;
 		}

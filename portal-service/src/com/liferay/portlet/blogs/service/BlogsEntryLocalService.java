@@ -220,14 +220,14 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(com.liferay.portlet.blogs.model.BlogsEntry entry)
+	public void reindex(com.liferay.portlet.blogs.model.BlogsEntry entry)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(long entryId) throws com.liferay.portal.SystemException;
+	public void reindex(long entryId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

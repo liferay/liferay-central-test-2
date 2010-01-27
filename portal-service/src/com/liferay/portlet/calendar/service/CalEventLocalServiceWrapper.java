@@ -250,18 +250,18 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		_calEventLocalService.importICal4j(userId, groupId, file);
 	}
 
-	public void reIndex(com.liferay.portlet.calendar.model.CalEvent event)
+	public void reindex(com.liferay.portlet.calendar.model.CalEvent event)
 		throws com.liferay.portal.SystemException {
-		_calEventLocalService.reIndex(event);
+		_calEventLocalService.reindex(event);
 	}
 
-	public void reIndex(long eventId) throws com.liferay.portal.SystemException {
-		_calEventLocalService.reIndex(eventId);
+	public void reindex(long eventId) throws com.liferay.portal.SystemException {
+		_calEventLocalService.reindex(eventId);
 	}
 
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_calEventLocalService.reIndex(ids);
+		_calEventLocalService.reindex(ids);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

@@ -357,14 +357,14 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 			serviceContext);
 	}
 
-	public void reIndex(long resourcePrimKey)
+	public void reindex(long resourcePrimKey)
 		throws com.liferay.portal.SystemException {
-		_wikiPageLocalService.reIndex(resourcePrimKey);
+		_wikiPageLocalService.reindex(resourcePrimKey);
 	}
 
-	public void reIndex(com.liferay.portlet.wiki.model.WikiPage page)
+	public void reindex(com.liferay.portlet.wiki.model.WikiPage page)
 		throws com.liferay.portal.SystemException {
-		_wikiPageLocalService.reIndex(page);
+		_wikiPageLocalService.reindex(page);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,

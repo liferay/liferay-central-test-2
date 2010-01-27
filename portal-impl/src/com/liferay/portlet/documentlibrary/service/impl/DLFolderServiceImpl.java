@@ -274,7 +274,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		return lockLocalService.refresh(lockUuid, expirationTime);
 	}
 
-	public void reIndexSearch(long companyId)
+	public void reindexSearch(long companyId)
 		throws PortalException, SystemException {
 
 		if (!getPermissionChecker().isOmniadmin()) {
@@ -283,7 +283,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		String[] ids = new String[] {String.valueOf(companyId)};
 
-		dlFolderLocalService.reIndex(ids);
+		dlFolderLocalService.reindex(ids);
 	}
 
 	public void unlockFolder(long groupId, long folderId, String lockUuid)

@@ -118,7 +118,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Indexer
 
-		reIndex(entry);
+		reindex(entry);
 
 		return entry;
 	}
@@ -318,7 +318,7 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
-	public void reIndex(BookmarksEntry entry) throws SystemException {
+	public void reindex(BookmarksEntry entry) throws SystemException {
 		long companyId = entry.getCompanyId();
 		long groupId = entry.getGroupId();
 		long folderId = entry.getFolderId();
@@ -343,7 +343,7 @@ public class BookmarksEntryLocalServiceImpl
 		}
 	}
 
-	public void reIndex(long entryId) throws SystemException {
+	public void reindex(long entryId) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -355,7 +355,7 @@ public class BookmarksEntryLocalServiceImpl
 			return;
 		}
 
-		reIndex(entry);
+		reindex(entry);
 	}
 
 	public void updateAsset(
@@ -403,7 +403,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Indexer
 
-		reIndex(entry);
+		reindex(entry);
 
 		return entry;
 	}

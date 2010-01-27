@@ -274,7 +274,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		getWikiImporter(importer).importPages(userId, node, files, options);
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -282,7 +282,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			reIndexNodes(companyId);
+			reindexNodes(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -417,7 +417,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return wikiImporter;
 	}
 
-	protected void reIndexNodes(long companyId) throws SystemException {
+	protected void reindexNodes(long companyId) throws SystemException {
 		int nodeCount = wikiNodePersistence.countByCompanyId(companyId);
 
 		int nodePages = nodeCount / Indexer.DEFAULT_INTERVAL;
@@ -426,11 +426,11 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			int nodeStart = (i * Indexer.DEFAULT_INTERVAL);
 			int nodeEnd = nodeStart + Indexer.DEFAULT_INTERVAL;
 
-			reIndexNodes(companyId, nodeStart, nodeEnd);
+			reindexNodes(companyId, nodeStart, nodeEnd);
 		}
 	}
 
-	protected void reIndexNodes(long companyId, int nodeStart, int nodeEnd)
+	protected void reindexNodes(long companyId, int nodeStart, int nodeEnd)
 		throws SystemException {
 
 		List<WikiNode> nodes = wikiNodePersistence.findByCompanyId(
@@ -447,19 +447,19 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 				int pageStart = (i * Indexer.DEFAULT_INTERVAL);
 				int pageEnd = pageStart + Indexer.DEFAULT_INTERVAL;
 
-				reIndexPages(nodeId, pageStart, pageEnd);
+				reindexPages(nodeId, pageStart, pageEnd);
 			}
 		}
 	}
 
-	protected void reIndexPages(long nodeId, int pageStart, int pageEnd)
+	protected void reindexPages(long nodeId, int pageStart, int pageEnd)
 		throws SystemException {
 
 		List<WikiPage> pages = wikiPagePersistence.findByN_H(
 			nodeId, true, pageStart, pageEnd);
 
 		for (WikiPage page : pages) {
-			wikiPageLocalService.reIndex(page);
+			wikiPageLocalService.reindex(page);
 		}
 	}
 

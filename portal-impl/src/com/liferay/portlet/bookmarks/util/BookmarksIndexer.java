@@ -162,18 +162,18 @@ public class BookmarksIndexer extends BaseIndexer {
 		return new Summary(title, url, portletURL);
 	}
 
-	public void reIndex(String className, long classPK) throws SearchException {
+	public void reindex(String className, long classPK) throws SearchException {
 		try {
-			BookmarksEntryLocalServiceUtil.reIndex(classPK);
+			BookmarksEntryLocalServiceUtil.reindex(classPK);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
 	}
 
-	public void reIndex(String[] ids) throws SearchException {
+	public void reindex(String[] ids) throws SearchException {
 		try {
-			BookmarksFolderLocalServiceUtil.reIndex(ids);
+			BookmarksFolderLocalServiceUtil.reindex(ids);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);

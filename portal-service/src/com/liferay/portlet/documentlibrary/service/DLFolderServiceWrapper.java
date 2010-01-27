@@ -132,10 +132,10 @@ public class DLFolderServiceWrapper implements DLFolderService {
 		return _dlFolderService.refreshFolderLock(lockUuid, expirationTime);
 	}
 
-	public void reIndexSearch(long companyId)
+	public void reindexSearch(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_dlFolderService.reIndexSearch(companyId);
+		_dlFolderService.reindexSearch(companyId);
 	}
 
 	public void unlockFolder(long groupId, long folderId,

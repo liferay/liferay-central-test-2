@@ -323,11 +323,11 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(long messageId)
+	public void reindex(long messageId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(
+	public void reindex(
 		com.liferay.portlet.messageboards.model.MBMessage message)
 		throws com.liferay.portal.SystemException;
 
@@ -373,7 +373,7 @@ public interface MBMessageLocalService {
 	public com.liferay.portlet.messageboards.model.MBMessage updateStatus(
 		long userId, com.liferay.portlet.messageboards.model.MBMessage message,
 		com.liferay.portal.service.ServiceContext serviceContext,
-		boolean reIndex)
+		boolean reindex)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

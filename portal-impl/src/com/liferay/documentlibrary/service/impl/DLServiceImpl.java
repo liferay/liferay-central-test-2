@@ -152,11 +152,11 @@ public class DLServiceImpl implements DLService {
 		return hook.getFileSize(companyId, repositoryId, fileName);
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		try {
 			Indexer indexer = new Indexer();
 
-			indexer.reIndex(ids);
+			indexer.reindex(ids);
 		}
 		catch (SearchException se) {
 			throw new SystemException(se);
@@ -205,12 +205,12 @@ public class DLServiceImpl implements DLService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reIndex)
+			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException {
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName, newFileName,
-			reIndex);
+			reindex);
 	}
 
 	@BeanReference(name = "com.liferay.documentlibrary.service.DLLocalService")

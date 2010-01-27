@@ -215,9 +215,9 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		_igFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_igFolderLocalService.reIndex(ids);
+		_igFolderLocalService.reindex(ids);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

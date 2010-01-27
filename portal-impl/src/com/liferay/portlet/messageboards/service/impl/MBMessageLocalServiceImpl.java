@@ -491,7 +491,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Indexer
 
-		reIndex(message);
+		reindex(message);
 
 		return message;
 	}
@@ -1184,7 +1184,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 	}
 
-	public void reIndex(long messageId) throws SystemException {
+	public void reindex(long messageId) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -1200,15 +1200,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getThreadId(), StatusConstants.APPROVED);
 
 			for (MBMessage curMessage : messages) {
-				reIndex(curMessage);
+				reindex(curMessage);
 			}
 		}
 		else {
-			reIndex(message);
+			reindex(message);
 		}
 	}
 
-	public void reIndex(MBMessage message) throws SystemException {
+	public void reindex(MBMessage message) throws SystemException {
 		if (message.isDiscussion()
 			|| message.getStatus() != StatusConstants.APPROVED) {
 			return;
@@ -1444,7 +1444,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Indexer
 
-		reIndex(message);
+		reindex(message);
 
 		return message;
 	}
@@ -1515,7 +1515,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage updateStatus(
 			long userId, MBMessage message, ServiceContext serviceContext,
-			boolean reIndex)
+			boolean reindex)
 		throws PortalException, SystemException {
 
 		int oldStatus = message.getStatus();
@@ -1599,8 +1599,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			assetEntryLocalService.updateVisible(
 				MBMessage.class.getName(), message.getMessageId(), true);
 
-			if (reIndex) {
-				reIndex(message);
+			if (reindex) {
+				reindex(message);
 			}
 		}
 

@@ -107,7 +107,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				companyId, 0, userId, Role.class.getName(), role.getRoleId(),
 				false, false, false);
 
-			userLocalService.reIndex(userId);
+			userLocalService.reindex(userId);
 		}
 
 		return role;
@@ -118,7 +118,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		userPersistence.addRoles(userId, roleIds);
 
-		userLocalService.reIndex(userId);
+		userLocalService.reindex(userId);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -409,7 +409,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		userPersistence.setRoles(userId, roleIds);
 
-		userLocalService.reIndex(userId);
+		userLocalService.reindex(userId);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -421,7 +421,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		userPersistence.removeRoles(userId, roleIds);
 
-		userLocalService.reIndex(userId);
+		userLocalService.reindex(userId);
 
 		PermissionCacheUtil.clearCache();
 	}

@@ -1385,7 +1385,7 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	public void reIndex(JournalArticle article) throws SystemException {
+	public void reindex(JournalArticle article) throws SystemException {
 		if (!article.isApproved() || !article.isIndexable()) {
 			return;
 		}
@@ -1419,7 +1419,7 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	public void reIndex(long resourcePrimKey) throws SystemException {
+	public void reindex(long resourcePrimKey) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -1436,10 +1436,10 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		reIndex(article);
+		reindex(article);
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -1447,7 +1447,7 @@ public class JournalArticleLocalServiceImpl
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			reIndexArticles(companyId);
+			reindexArticles(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -1933,7 +1933,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Indexer
 
-		reIndex(article);
+		reindex(article);
 
 		return article;
 	}
@@ -2036,7 +2036,7 @@ public class JournalArticleLocalServiceImpl
 
 				// Indexer
 
-				reIndex(article);
+				reindex(article);
 			}
 			else {
 
@@ -2547,7 +2547,7 @@ public class JournalArticleLocalServiceImpl
 		return newUrlTitle;
 	}
 
-	protected void reIndexArticles(long companyId) throws SystemException {
+	protected void reindexArticles(long companyId) throws SystemException {
 		int count = journalArticlePersistence.countByCompanyId(companyId);
 
 		int pages = count / Indexer.DEFAULT_INTERVAL;
@@ -2556,18 +2556,18 @@ public class JournalArticleLocalServiceImpl
 			int start = (i * Indexer.DEFAULT_INTERVAL);
 			int end = start + Indexer.DEFAULT_INTERVAL;
 
-			reIndexArticles(companyId, start, end);
+			reindexArticles(companyId, start, end);
 		}
 	}
 
-	protected void reIndexArticles(long companyId, int start, int end)
+	protected void reindexArticles(long companyId, int start, int end)
 		throws SystemException {
 
 		List<JournalArticle> articles =
 			journalArticlePersistence.findByCompanyId(companyId, start, end);
 
 		for (JournalArticle article : articles) {
-			reIndex(article);
+			reindex(article);
 		}
 	}
 

@@ -122,7 +122,7 @@ public interface DLFolderService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndexSearch(long companyId)
+	public void reindexSearch(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

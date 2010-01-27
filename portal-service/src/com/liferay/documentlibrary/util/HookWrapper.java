@@ -166,8 +166,8 @@ public class HookWrapper implements Hook {
 		_hook.move(srcDir, destDir);
 	}
 
-	public void reIndex(String[] ids) throws SearchException {
-		_hook.reIndex(ids);
+	public void reindex(String[] ids) throws SearchException {
+		_hook.reindex(ids);
 	}
 
 	public void updateFile(

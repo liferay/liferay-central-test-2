@@ -259,7 +259,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		}
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -267,9 +267,9 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			reIndexFolders(companyId);
+			reindexFolders(companyId);
 
-			reIndexRoot(companyId);
+			reindexRoot(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -455,13 +455,13 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 			igImagePersistence.update(image, false);
 
-			igImageLocalService.reIndex(image);
+			igImageLocalService.reindex(image);
 		}
 
 		deleteFolder(fromFolder);
 	}
 
-	protected void reIndexFolders(long companyId) throws SystemException {
+	protected void reindexFolders(long companyId) throws SystemException {
 		int folderCount = igFolderPersistence.countByCompanyId(companyId);
 
 		int folderPages = folderCount / Indexer.DEFAULT_INTERVAL;
@@ -470,11 +470,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			int folderStart = (i * Indexer.DEFAULT_INTERVAL);
 			int folderEnd = folderStart + Indexer.DEFAULT_INTERVAL;
 
-			reIndexFolders(companyId, folderStart, folderEnd);
+			reindexFolders(companyId, folderStart, folderEnd);
 		}
 	}
 
-	protected void reIndexFolders(
+	protected void reindexFolders(
 			long companyId, int folderStart, int folderEnd)
 		throws SystemException {
 
@@ -493,12 +493,12 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reIndexImages(groupId, folderId, entryStart, entryEnd);
+				reindexImages(groupId, folderId, entryStart, entryEnd);
 			}
 		}
 	}
 
-	protected void reIndexImages(
+	protected void reindexImages(
 			long groupId, long folderId, int entryStart, int entryEnd)
 		throws SystemException {
 
@@ -506,11 +506,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			groupId, folderId, entryStart, entryEnd);
 
 		for (IGImage image : images) {
-			igImageLocalService.reIndex(image);
+			igImageLocalService.reindex(image);
 		}
 	}
 
-	protected void reIndexRoot(long companyId) throws SystemException {
+	protected void reindexRoot(long companyId) throws SystemException {
 		int groupCount = groupPersistence.countByCompanyId(companyId);
 
 		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
@@ -519,11 +519,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
 			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
 
-			reIndexRoot(companyId, groupStart, groupEnd);
+			reindexRoot(companyId, groupStart, groupEnd);
 		}
 	}
 
-	protected void reIndexRoot(long companyId, int groupStart, int groupEnd)
+	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
 		throws SystemException {
 
 		List<Group> groups = groupPersistence.findByCompanyId(
@@ -542,7 +542,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				int entryStart = (j * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reIndexImages(groupId, folderId, entryStart, entryEnd);
+				reindexImages(groupId, folderId, entryStart, entryEnd);
 			}
 		}
 	}

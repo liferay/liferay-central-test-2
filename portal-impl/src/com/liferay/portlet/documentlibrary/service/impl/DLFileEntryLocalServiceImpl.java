@@ -654,7 +654,7 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryFinder.findByNoAssets();
 	}
 
-	public void reIndex(long fileEntryId) throws SystemException {
+	public void reindex(long fileEntryId) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -1122,7 +1122,7 @@ public class DLFileEntryLocalServiceImpl
 		if (fileVersion.isApproved() &&
 			(fileEntry.getVersion() == fileVersion.getVersion())) {
 
-			reIndex(fileEntry.getFileEntryId());
+			reindex(fileEntry.getFileEntryId());
 		}
 		else if (fileEntry.getVersion() == 0) {
 			try {

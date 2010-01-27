@@ -78,7 +78,7 @@ public class LuceneServlet extends HttpServlet {
 					indexerThread.start();
 				}
 				else {
-					indexer.reIndex();
+					indexer.reindex();
 				}
 
 				_indexers.add(

@@ -286,7 +286,7 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(long fileEntryId)
+	public void reindex(long fileEntryId)
 		throws com.liferay.portal.SystemException;
 
 	public void updateAsset(long userId,

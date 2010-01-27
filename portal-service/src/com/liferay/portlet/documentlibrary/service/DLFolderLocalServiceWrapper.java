@@ -269,9 +269,9 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService {
 		_dlFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
-	public void reIndex(java.lang.String[] ids)
+	public void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_dlFolderLocalService.reIndex(ids);
+		_dlFolderLocalService.reindex(ids);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

@@ -310,15 +310,15 @@ public class IGImageLocalServiceUtil {
 		return getService().getNoAssetImages();
 	}
 
-	public static void reIndex(
+	public static void reindex(
 		com.liferay.portlet.imagegallery.model.IGImage image)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(image);
+		getService().reindex(image);
 	}
 
-	public static void reIndex(long imageId)
+	public static void reindex(long imageId)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(imageId);
+		getService().reindex(imageId);
 	}
 
 	public static void updateAsset(long userId,

@@ -619,14 +619,14 @@ public class DLFolderServiceHttp {
 		}
 	}
 
-	public static void reIndexSearch(HttpPrincipal httpPrincipal, long companyId)
+	public static void reindexSearch(HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
-					"reIndexSearch", new Object[] { paramObj0 });
+					"reindexSearch", new Object[] { paramObj0 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

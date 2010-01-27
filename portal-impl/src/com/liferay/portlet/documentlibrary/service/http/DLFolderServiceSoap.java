@@ -214,9 +214,9 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	public static void reIndexSearch(long companyId) throws RemoteException {
+	public static void reindexSearch(long companyId) throws RemoteException {
 		try {
-			DLFolderServiceUtil.reIndexSearch(companyId);
+			DLFolderServiceUtil.reindexSearch(companyId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

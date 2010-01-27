@@ -84,7 +84,7 @@ public interface DLService {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException;
 
-	public void reIndex(String[] ids) throws SystemException;
+	public void reindex(String[] ids) throws SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
@@ -107,7 +107,7 @@ public interface DLService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reIndex)
+			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException;
 
 }

@@ -192,7 +192,7 @@ public abstract class BaseHook implements Hook {
 	public abstract void move(String srcDir, String destDir)
 		throws SystemException;
 
-	public abstract void reIndex(String[] ids) throws SearchException;
+	public abstract void reindex(String[] ids) throws SearchException;
 
 	public abstract void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,

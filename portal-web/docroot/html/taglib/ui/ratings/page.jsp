@@ -144,16 +144,16 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		};
 
 		var convertToIndex = function(score) {
-			var scoreIndex = -1;
+			var scoreindex = -1;
 
 			if (score == 1.0) {
-				scoreIndex = 0;
+				scoreindex = 0;
 			}
 			else if (score == -1.0) {
-				scoreIndex = 1;
+				scoreindex = 1;
 			}
 
-			return scoreIndex;
+			return scoreindex;
 		};
 
 		<c:choose>
@@ -206,7 +206,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			<c:when test='<%= type.equals("thumbs") && themeDisplay.isSignedIn() %>'>
 
 				var label = getLabel(fixScore(<%= stats.getAverageScore() %>), <%= stats.getTotalEntries() %>);
-				var yourScoreIndex = convertToIndex(<%= yourScore %>);
+				var yourScoreindex = convertToIndex(<%= yourScore %>);
 
 				var ratingThumb = new A.ThumbRating(
 					{
@@ -239,7 +239,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					}
 				);
 
-				ratingThumb.select(yourScoreIndex);
+				ratingThumb.select(yourScoreindex);
 			</c:when>
 		</c:choose>
 	</aui:script>

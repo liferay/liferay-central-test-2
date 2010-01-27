@@ -578,14 +578,14 @@ public class UserLocalServiceUtil {
 		return getService().isPasswordExpiringSoon(user);
 	}
 
-	public static void reIndex(long userId)
+	public static void reindex(long userId)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(userId);
+		getService().reindex(userId);
 	}
 
-	public static void reIndex(java.lang.String[] ids)
+	public static void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(ids);
+		getService().reindex(ids);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,

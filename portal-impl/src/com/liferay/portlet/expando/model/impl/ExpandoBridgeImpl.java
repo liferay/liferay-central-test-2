@@ -249,7 +249,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
-	public void reIndex() {
+	public void reindex() {
 		if (!isIndexEnabled()) {
 			return;
 		}
@@ -258,7 +258,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 		if (indexer != null) {
 			try {
-				indexer.reIndex(_className, _classPK);
+				indexer.reindex(_className, _classPK);
 			}
 			catch (Exception e) {
 				_log.error(e, e);

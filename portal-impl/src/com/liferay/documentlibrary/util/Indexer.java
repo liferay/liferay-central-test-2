@@ -50,17 +50,17 @@ public class Indexer extends BaseIndexer {
 		return null;
 	}
 
-	public void reIndex(String className, long classPK) {
+	public void reindex(String className, long classPK) {
 	}
 
-	public void reIndex(String[] ids) throws SearchException {
+	public void reindex(String[] ids) throws SearchException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		Hook hook = HookFactory.getInstance();
 
-		hook.reIndex(ids);
+		hook.reindex(ids);
 	}
 
 	private static final String[] _CLASS_NAMES = new String[0];

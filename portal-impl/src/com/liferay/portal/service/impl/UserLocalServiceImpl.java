@@ -1521,7 +1521,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return false;
 	}
 
-	public void reIndex(long userId) throws SystemException {
+	public void reindex(long userId) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -1534,7 +1534,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -1542,7 +1542,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			reIndexUsers(companyId);
+			reindexUsers(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -3035,7 +3035,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	protected void reIndexUsers(long companyId) throws SystemException {
+	protected void reindexUsers(long companyId) throws SystemException {
 		int count = userPersistence.countByCompanyId(companyId);
 
 		int pages = count / UserIndexer.DEFAULT_INTERVAL;
@@ -3044,11 +3044,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			int start = (i * UserIndexer.DEFAULT_INTERVAL);
 			int end = start + UserIndexer.DEFAULT_INTERVAL;
 
-			reIndexUsers(companyId, start, end);
+			reindexUsers(companyId, start, end);
 		}
 	}
 
-	protected void reIndexUsers(long companyId, int start, int end)
+	protected void reindexUsers(long companyId, int start, int end)
 		throws SystemException {
 
 		List<User> users = userPersistence.findByCompanyId(

@@ -615,20 +615,20 @@ public class JournalArticleLocalServiceUtil {
 		return getService().isLatestVersion(groupId, articleId, version, status);
 	}
 
-	public static void reIndex(
+	public static void reindex(
 		com.liferay.portlet.journal.model.JournalArticle article)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(article);
+		getService().reindex(article);
 	}
 
-	public static void reIndex(long resourcePrimKey)
+	public static void reindex(long resourcePrimKey)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(resourcePrimKey);
+		getService().reindex(resourcePrimKey);
 	}
 
-	public static void reIndex(java.lang.String[] ids)
+	public static void reindex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(ids);
+		getService().reindex(ids);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(

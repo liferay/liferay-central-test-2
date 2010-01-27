@@ -301,13 +301,13 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		return _igImageLocalService.getNoAssetImages();
 	}
 
-	public void reIndex(com.liferay.portlet.imagegallery.model.IGImage image)
+	public void reindex(com.liferay.portlet.imagegallery.model.IGImage image)
 		throws com.liferay.portal.SystemException {
-		_igImageLocalService.reIndex(image);
+		_igImageLocalService.reindex(image);
 	}
 
-	public void reIndex(long imageId) throws com.liferay.portal.SystemException {
-		_igImageLocalService.reIndex(imageId);
+	public void reindex(long imageId) throws com.liferay.portal.SystemException {
+		_igImageLocalService.reindex(imageId);
 	}
 
 	public void updateAsset(long userId,

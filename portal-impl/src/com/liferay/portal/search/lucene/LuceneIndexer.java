@@ -57,14 +57,14 @@ public class LuceneIndexer implements Runnable {
 	}
 
 	public void run() {
-		reIndex(PropsValues.INDEX_ON_STARTUP_DELAY);
+		reindex(PropsValues.INDEX_ON_STARTUP_DELAY);
 	}
 
-	public void reIndex() {
-		reIndex(0);
+	public void reindex() {
+		reindex(0);
 	}
 
-	public void reIndex(int delay) {
+	public void reindex(int delay) {
 		ShardUtil.pushCompanyService(_companyId);
 
 		try {
@@ -137,7 +137,7 @@ public class LuceneIndexer implements Runnable {
 					_log.info("Reindexing with " + indexerClass + " started");
 				}
 
-				indexer.reIndex(new String[] {String.valueOf(_companyId)});
+				indexer.reindex(new String[] {String.valueOf(_companyId)});
 
 				if (_log.isInfoEnabled()) {
 					_log.info(

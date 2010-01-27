@@ -249,11 +249,11 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(com.liferay.portlet.imagegallery.model.IGImage image)
+	public void reindex(com.liferay.portlet.imagegallery.model.IGImage image)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reIndex(long imageId) throws com.liferay.portal.SystemException;
+	public void reindex(long imageId) throws com.liferay.portal.SystemException;
 
 	public void updateAsset(long userId,
 		com.liferay.portlet.imagegallery.model.IGImage image,

@@ -409,13 +409,13 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reindex(String[] ids) throws SystemException {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			reIndexFolders(companyId);
+			reindexFolders(companyId);
 
-			reIndexRoot(companyId);
+			reindexRoot(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -535,7 +535,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return parentFolderId;
 	}
 
-	protected void reIndexFolders(long companyId) throws SystemException {
+	protected void reindexFolders(long companyId) throws SystemException {
 		List<DLFolder> folders = getFolders(companyId);
 
 		for (DLFolder folder : folders) {
@@ -548,11 +548,11 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 				String.valueOf(groupId), String.valueOf(folderId)
 			};
 
-			dlService.reIndex(newIds);
+			dlService.reindex(newIds);
 		}
 	}
 
-	protected void reIndexRoot(long companyId) throws SystemException {
+	protected void reindexRoot(long companyId) throws SystemException {
 		int groupCount = groupPersistence.countByCompanyId(companyId);
 
 		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
@@ -561,11 +561,11 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
 			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
 
-			reIndexRoot(companyId, groupStart, groupEnd);
+			reindexRoot(companyId, groupStart, groupEnd);
 		}
 	}
 
-	protected void reIndexRoot(long companyId, int groupStart, int groupEnd)
+	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
 		throws SystemException {
 
 		List<Group> groups = groupPersistence.findByCompanyId(
@@ -581,7 +581,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 				String.valueOf(groupId), String.valueOf(folderId)
 			};
 
-			dlService.reIndex(newIds);
+			dlService.reindex(newIds);
 		}
 	}
 

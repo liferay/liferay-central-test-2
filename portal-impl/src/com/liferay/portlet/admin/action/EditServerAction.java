@@ -131,8 +131,8 @@ public class EditServerAction extends PortletAction {
 		else if (cmd.equals("gc")) {
 			gc();
 		}
-		else if (cmd.equals("reIndex")) {
-			reIndex(actionRequest);
+		else if (cmd.equals("reindex")) {
+			reindex(actionRequest);
 		}
 		else if (cmd.equals("runScript")) {
 			runScript(portletConfig, actionRequest, actionResponse);
@@ -257,7 +257,7 @@ public class EditServerAction extends PortletAction {
 		return value.replace(", .", ",.");
 	}
 
-	protected void reIndex(ActionRequest actionRequest) throws Exception {
+	protected void reindex(ActionRequest actionRequest) throws Exception {
 		String portletId = ParamUtil.getString(actionRequest, "portletId");
 
 		long[] companyIds = PortalInstances.getCompanyIds();
@@ -267,7 +267,7 @@ public class EditServerAction extends PortletAction {
 				try {
 					LuceneIndexer indexer = new LuceneIndexer(companyId);
 
-					indexer.reIndex();
+					indexer.reindex();
 				}
 				catch (Exception e) {
 					_log.error(e, e);
@@ -293,7 +293,7 @@ public class EditServerAction extends PortletAction {
 					SearchEngineUtil.deletePortletDocuments(
 						companyId, portletId);
 
-					indexer.reIndex(new String[] {String.valueOf(companyId)});
+					indexer.reindex(new String[] {String.valueOf(companyId)});
 				}
 				catch (Exception e) {
 					_log.error(e, e);
