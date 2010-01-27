@@ -41,44 +41,33 @@ boolean useEditorCodepress = editorType.equals("codepress");
 String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE_LANGUAGE_CONTENT, new Filter(langType)));
 %>
 
-<form method="post" name="<portlet:namespace />editorForm">
+<aui:form method="post" name="editorForm">
+	<aui:fieldset>
+		<aui:select name="editorType" onChange='<%= renderResponse.getNamespace() + "updateEditorType();" %>'>
+			<aui:option label="plain" value="1" />
+			<aui:option label="rich" selected="<%= useEditorCodepress %>" value="0" />
+		</aui:select>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<strong><liferay-ui:message key="editor-type" /></strong>
-	</td>
-	<td>
-		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">
-			<option value="1"><liferay-ui:message key="plain" /></option>
-			<option <%= useEditorCodepress ? "selected" : "" %> value="0"><liferay-ui:message key="rich" /></option>
-		</select>
-	</td>
-</tr>
-</table>
+		<c:choose>
+			<c:when test="<%= useEditorCodepress %>">
+				 <aui:input cssClass="codepress html" label="" name="xslContent" type="textarea" wrap="off" />
+			</c:when>
+			<c:otherwise>
+				<aui:input cssClass="lfr-textarea" label="" name="xslContent" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" wrap="off" />
+			</c:otherwise>
+		</c:choose>
+	</aui:fieldset>
 
-<br />
+	<aui:button-row>
+		<aui:button onClick='<%= renderResponse.getNamespace() + "updateTemplateXsl();" %>' type="button" value="update" />
 
-<c:choose>
-	<c:when test="<%= useEditorCodepress %>">
-		<textarea class="codepress html" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off"></textarea>
-	</c:when>
-	<c:otherwise>
-		<textarea class="lfr-textarea" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
-	</c:otherwise>
-</c:choose>
+		<c:if test="<%= !useEditorCodepress %>">
+			<aui:button onClick='<%= "Liferay.Util.selectAndCopy(document." + renderResponse.getNamespace() + "editorForm." + renderResponse.getNamespace() + "xslContent);" %>' type="button" value="select-and-copy" />
+		</c:if>
 
-<br /><br />
-
-<input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateTemplateXsl();" />
-
-<c:if test="<%= !useEditorCodepress %>">
-	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent);" />
-</c:if>
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="AUI().DialogManager.closeByChild(this);" />
-
-</form>
+		<aui:button onClick="AUI().DialogManager.closeByChild(this);" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= useEditorCodepress %>">
 	<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
@@ -132,16 +121,7 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 		var xslContent = AUI().one('input[name=<portlet:namespace />xslContent]');
 		var content = '';
 
-		<c:choose>
-			<c:when test="<%= useEditorCodepress %>">
-				if (xslContent) {
-					content = encodeURIComponent(<portlet:namespace />xslContent.getCode());
-				}
-			</c:when>
-			<c:otherwise>
-				content = encodeURIComponent(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value);
-			</c:otherwise>
-		</c:choose>
+		content = encodeURIComponent(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value);
 
 		xslContent.attr('value', content);
 
