@@ -58,4 +58,7 @@ if (!panelState.equals("open")) {
 if (extended) {
 	cssClass += " lfr-extended";
 }
+else {
+	cssClass += " lfr-panel-basic";
+}
 %>

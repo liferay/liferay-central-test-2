@@ -72,21 +72,21 @@
 	width: 40px;
 }
 
-.portlet-journal .lfr-panel-titlebar .lfr-panel-title {
+.portlet-journal .lfr-panel-basic .lfr-panel-title {
 	border-bottom: 1px solid #ccc;
 	float: none;
 	position: relative;
 	top: -0.5em;
 }
 
-.portlet-journal .lfr-panel-titlebar .lfr-panel-title span {
+.portlet-journal .lfr-panel-basic .lfr-panel-title span {
 	background: #fff;
 	padding: 0 8px 0 4px;
 	position: relative;
 	top: 0.55em;
 }
 
-.portlet-journal .lfr-panel-content {
+.portlet-journal .lfr-panel-basic .lfr-panel-content {
 	background-color: #F0F5F7;
 	padding: 10px;
 }
