@@ -193,202 +193,204 @@ if (feed != null) {
 		</c:choose>
 	</aui:fieldset>
 
-	<aui:fieldset>
-		<aui:legend label="web-content-contraints" />
+	<liferay-ui:panel-container extended="<%= true %>" id='editFeed' persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="webContentContraints" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "web-content-contraints") %>' >
+			<aui:fieldset>
+				<aui:select label="web-content-type" name="type" showEmptyOption="<%= true %>">
 
-		<aui:select label="web-content-type" name="type" showEmptyOption="<%= true %>">
+					<%
+					for (String curType : JournalArticleConstants.TYPES) {
+					%>
 
-			<%
-			for (String curType : JournalArticleConstants.TYPES) {
-			%>
+						<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
 
-				<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
+					<%
+					}
+					%>
 
-			<%
-			}
-			%>
+				</aui:select>
 
-		</aui:select>
+				<aui:field-wrapper label="structure">
+					<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
 
-		<aui:field-wrapper label="structure">
-			<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="structureURL">
+						<portlet:param name="struts_action" value="/journal/edit_structure" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+						<portlet:param name="parentStructureId" value="<%= structureId %>" />
+					</portlet:renderURL>
 
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="structureURL">
-				<portlet:param name="struts_action" value="/journal/edit_structure" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-				<portlet:param name="parentStructureId" value="<%= structureId %>" />
-			</portlet:renderURL>
+					<aui:a href="<%= structureURL %>" label="<%= structureName %>" id="structureName" />
 
-			<aui:a href="<%= structureURL %>" label="<%= structureName %>" id="structureName" />
+					<aui:button name="selectStructureButton" onClick='<%= renderResponse.getNamespace() + "openStructureSelector();" %>' type="button" value="select" />
 
-			<aui:button name="selectStructureButton" onClick='<%= renderResponse.getNamespace() + "openStructureSelector();" %>' type="button" value="select" />
+					<aui:button disabled="<%= Validator.isNull(structureId) %>" name="removeStructureButton" onClick='<%= renderResponse.getNamespace() + "removeStructure();" %>' type="button" value="remove" />
+				</aui:field-wrapper>
 
-			<aui:button disabled="<%= Validator.isNull(structureId) %>" name="removeStructureButton" onClick='<%= renderResponse.getNamespace() + "removeStructure();" %>' type="button" value="remove" />
-		</aui:field-wrapper>
+				<aui:field-wrapper label="template">
+					<c:choose>
+						<c:when test="<%= templates.isEmpty() %>">
+							<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
 
-		<aui:field-wrapper label="template">
-			<c:choose>
-				<c:when test="<%= templates.isEmpty() %>">
-					<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
+							<aui:button name="selectTemplateButton" onClick='<%= renderResponse.getNamespace() + "openTemplateSelector();" %>' type="button" value="select" />
+						</c:when>
+						<c:otherwise>
+							<liferay-ui:table-iterator
+								list="<%= templates %>"
+								listType="com.liferay.portlet.journal.model.JournalTemplate"
+								rowLength="3"
+								rowPadding="30"
+							>
 
-					<aui:button name="selectTemplateButton" onClick='<%= renderResponse.getNamespace() + "openTemplateSelector();" %>' type="button" value="select" />
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:table-iterator
-						list="<%= templates %>"
-						listType="com.liferay.portlet.journal.model.JournalTemplate"
-						rowLength="3"
-						rowPadding="30"
-					>
+								<%
+								boolean templateChecked = false;
 
-						<%
-						boolean templateChecked = false;
+								if (templateId.equals(tableIteratorObj.getTemplateId())) {
+									templateChecked = true;
+								}
+								%>
 
-						if (templateId.equals(tableIteratorObj.getTemplateId())) {
-							templateChecked = true;
-						}
-						%>
+								<aui:input checked="<%= templateChecked %>" name="templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" />
 
-						<aui:input checked="<%= templateChecked %>" name="templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" />
+								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="templateURL">
+									<portlet:param name="struts_action" value="/journal/edit_template" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" />
+									<portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" />
+								</portlet:renderURL>
 
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="templateURL">
-							<portlet:param name="struts_action" value="/journal/edit_template" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" />
-							<portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" />
-						</portlet:renderURL>
+								<aui:a href="<%= templateURL %>"><%= tableIteratorObj.getName() %></aui:a>
 
-						<aui:a href="<%= templateURL %>"><%= tableIteratorObj.getName() %></aui:a>
+								<c:if test="<%= tableIteratorObj.isSmallImage() %>">
+									<br />
 
-						<c:if test="<%= tableIteratorObj.isSmallImage() %>">
-							<br />
+									<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(tableIteratorObj.getSmallImageId()) %>" vspace="0" />
+								</c:if>
+							</liferay-ui:table-iterator>
+						</c:otherwise>
+					</c:choose>
+				</aui:field-wrapper>
+			</aui:fieldset>
+		</liferay-ui:panel>
 
-							<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(tableIteratorObj.getSmallImageId()) %>" vspace="0" />
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="presentationSettings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "presentation-settings") %>' >
+			<aui:fieldset>
+				<aui:select label="feed-item-content" name="contentField">
+
+					<%
+					String taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('');";
+					%>
+
+					<aui:option label="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(JournalFeedConstants.WEB_CONTENT_DESCRIPTION) %>" />
+					<optgroup label='<liferay-ui:message key="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />'>
+						<aui:option label="use-default-template" onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(JournalFeedConstants.RENDERED_WEB_CONTENT) %>" value="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />
+
+						<c:if test="<%= (structure != null) && (templates.size() > 1) %>">
+
+							<%
+							for (JournalTemplate currTemplate : templates) {
+								taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('" + currTemplate.getTemplateId() + "');";
+							%>
+
+								<aui:option label='<%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName()) %>' onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= rendererTemplateId.equals(currTemplate.getTemplateId()) %>" value="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />
+
+							<%
+							}
+							%>
+
 						</c:if>
-					</liferay-ui:table-iterator>
-				</c:otherwise>
-			</c:choose>
-		</aui:field-wrapper>
-	</aui:fieldset>
+					</optgroup>
 
-	<aui:fieldset>
-		<aui:legend label="presentation-settings" />
+					<c:if test="<%= structure != null %>">
+						<optgroup label="<liferay-ui:message key="structure-fields" />">
 
-		<aui:select label="feed-item-content" name="contentField">
+							<%
+							Document doc = SAXReaderUtil.read(structure.getXsd());
 
-			<%
-			String taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('');";
-			%>
+							XPath xpathSelector = SAXReaderUtil.createXPath("//dynamic-element");
 
-			<aui:option label="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(JournalFeedConstants.WEB_CONTENT_DESCRIPTION) %>" />
-			<optgroup label='<liferay-ui:message key="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />'>
-				<aui:option label="use-default-template" onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(JournalFeedConstants.RENDERED_WEB_CONTENT) %>" value="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />
+							List<Node> nodes = xpathSelector.selectNodes(doc);
 
-				<c:if test="<%= (structure != null) && (templates.size() > 1) %>">
+							for (Node node : nodes) {
+								Element el = (Element)node;
 
-					<%
-					for (JournalTemplate currTemplate : templates) {
-						taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('" + currTemplate.getTemplateId() + "');";
-					%>
+								String elName = el.attributeValue("name");
+								String elType = StringUtil.replace(el.attributeValue("type"), StringPool.UNDERLINE, StringPool.DASH);
 
-						<aui:option label='<%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName()) %>' onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= rendererTemplateId.equals(currTemplate.getTemplateId()) %>" value="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />
+								if (!elType.equals("boolean") && !elType.equals("list") && !elType.equals("multi-list")) {
+									taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('');";
+							%>
 
-					<%
-					}
-					%>
+									<aui:option label='<%= TextFormatter.format(elName, TextFormatter.J) + "(" + LanguageUtil.get(pageContext, elType) + ")" %>' onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(elName) %>" value="<%= elName %>" />
 
-				</c:if>
-			</optgroup>
+							<%
+								}
+							}
+							%>
 
-			<c:if test="<%= structure != null %>">
-				<optgroup label="<liferay-ui:message key="structure-fields" />">
+						</optgroup>
+					</c:if>
+				</aui:select>
+
+				<aui:select label="feed-type" name="feedTypeAndVersion">
 
 					<%
-					Document doc = SAXReaderUtil.read(structure.getXsd());
+					StringBuilder sb = new StringBuilder();
 
-					XPath xpathSelector = SAXReaderUtil.createXPath("//dynamic-element");
+					for (int i = 4; i < RSSUtil.RSS_VERSIONS.length; i++) {
+						sb.append("<option ");
 
-					List<Node> nodes = xpathSelector.selectNodes(doc);
-
-					for (Node node : nodes) {
-						Element el = (Element)node;
-
-						String elName = el.attributeValue("name");
-						String elType = StringUtil.replace(el.attributeValue("type"), StringPool.UNDERLINE, StringPool.DASH);
-
-						if (!elType.equals("boolean") && !elType.equals("list") && !elType.equals("multi-list")) {
-							taglibSelectRendererTemplateOption = renderResponse.getNamespace() + "selectRendererTemplate('');";
-					%>
-
-							<aui:option label='<%= TextFormatter.format(elName, TextFormatter.J) + "(" + LanguageUtil.get(pageContext, elType) + ")" %>' onClick="<%= taglibSelectRendererTemplateOption %>" selected="<%= contentField.equals(elName) %>" value="<%= elName %>" />
-
-					<%
+						if (feedType.equals(RSSUtil.RSS) && (feedVersion == RSSUtil.RSS_VERSIONS[i])) {
+							sb.append("selected ");
 						}
+
+						sb.append("value=\"");
+						sb.append(RSSUtil.RSS);
+						sb.append(":");
+						sb.append(RSSUtil.RSS_VERSIONS[i]);
+						sb.append("\">");
+						sb.append(LanguageUtil.get(pageContext, RSSUtil.RSS));
+						sb.append(" ");
+						sb.append(RSSUtil.RSS_VERSIONS[i]);
+						sb.append("</option>");
+					}
+
+					for (int i = 1; i < RSSUtil.ATOM_VERSIONS.length; i++) {
+						sb.append("<option ");
+
+						if (feedType.equals(RSSUtil.ATOM) && (feedVersion == RSSUtil.ATOM_VERSIONS[i])) {
+							sb.append("selected ");
+						}
+
+						sb.append("value=\"");
+						sb.append(RSSUtil.ATOM);
+						sb.append(":");
+						sb.append(RSSUtil.ATOM_VERSIONS[i]);
+						sb.append("\">");
+						sb.append(LanguageUtil.get(pageContext, RSSUtil.ATOM));
+						sb.append(" ");
+						sb.append(RSSUtil.ATOM_VERSIONS[i]);
+						sb.append("</option>");
 					}
 					%>
 
-				</optgroup>
-			</c:if>
-		</aui:select>
+					<%= sb.toString() %>
+				</aui:select>
 
-		<aui:select label="feed-type" name="feedTypeAndVersion">
+				<aui:input label="maximum-items-to-display" name="delta" style="width: 50px;" value="<%= delta %>" />
 
-			<%
-			StringBuilder sb = new StringBuilder();
+				<aui:select label="order-by-column" name="orderByCol">
+					<aui:option label="modified-date" selected='<%=orderByCol.equals("modified-date") %>' />
+					<aui:option label="display-date" selected='<%= orderByCol.equals("display-date") %>' />
+				</aui:select>
 
-			for (int i = 4; i < RSSUtil.RSS_VERSIONS.length; i++) {
-				sb.append("<option ");
-
-				if (feedType.equals(RSSUtil.RSS) && (feedVersion == RSSUtil.RSS_VERSIONS[i])) {
-					sb.append("selected ");
-				}
-
-				sb.append("value=\"");
-				sb.append(RSSUtil.RSS);
-				sb.append(":");
-				sb.append(RSSUtil.RSS_VERSIONS[i]);
-				sb.append("\">");
-				sb.append(LanguageUtil.get(pageContext, RSSUtil.RSS));
-				sb.append(" ");
-				sb.append(RSSUtil.RSS_VERSIONS[i]);
-				sb.append("</option>");
-			}
-
-			for (int i = 1; i < RSSUtil.ATOM_VERSIONS.length; i++) {
-				sb.append("<option ");
-
-				if (feedType.equals(RSSUtil.ATOM) && (feedVersion == RSSUtil.ATOM_VERSIONS[i])) {
-					sb.append("selected ");
-				}
-
-				sb.append("value=\"");
-				sb.append(RSSUtil.ATOM);
-				sb.append(":");
-				sb.append(RSSUtil.ATOM_VERSIONS[i]);
-				sb.append("\">");
-				sb.append(LanguageUtil.get(pageContext, RSSUtil.ATOM));
-				sb.append(" ");
-				sb.append(RSSUtil.ATOM_VERSIONS[i]);
-				sb.append("</option>");
-			}
-			%>
-
-			<%= sb.toString() %>
-		</aui:select>
-
-		<aui:input label="maximum-items-to-display" name="delta" style="width: 50px;" value="<%= delta %>" />
-
-		<aui:select label="order-by-column" name="orderByCol">
-			<aui:option label="modified-date" selected='<%=orderByCol.equals("modified-date") %>' />
-			<aui:option label="display-date" selected='<%= orderByCol.equals("display-date") %>' />
-		</aui:select>
-
-		<aui:select name="orderByType">
-			<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' value="asc" />
-			<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' value="desc" />
-		</aui:select>
-	</aui:fieldset>
+				<aui:select name="orderByType">
+					<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' value="asc" />
+					<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' value="desc" />
+				</aui:select>
+			</aui:fieldset>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
 
 	<aui:button-row>
 		<aui:button type="submit" />
