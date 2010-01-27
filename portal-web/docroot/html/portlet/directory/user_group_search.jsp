@@ -31,13 +31,9 @@ UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getD
 %>
 
 <div>
-	<aui:fieldset>
-		<aui:input name="<%= displayTerms.NAME %>" size="30" type="text" value="<%= displayTerms.getName() %>" />
-	</aui:fieldset>
+	<aui:input inlineField="<%= true %>" label="" name="<%= displayTerms.NAME %>" size="30" type="text" value="<%= displayTerms.getName() %>" />
 
-	<aui:button-row>
-		<aui:button type="submit" value="search" />
-	</aui:button-row>
+	<aui:button type="submit" value="search" />
 </div>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
