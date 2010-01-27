@@ -32,6 +32,7 @@ String[] languageIds = LocaleUtil.toLanguageIds(locales);
 
 String timeZoneId = ParamUtil.getString(request, "timeZoneId", user2.getTimeZoneId());
 String languageId = ParamUtil.getString(request, "languageId", user2.getLanguageId());
+String availableLocales = ParamUtil.getString(request, "settings(" + PropsKeys.LOCALES + ")", StringUtil.merge(languageIds));
 
 boolean companySecurityCommunityLogo = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")", company.isCommunityLogo());
 boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
@@ -59,6 +60,8 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 		%>
 
 	</aui:select>
+
+	<aui:input cssClass="lfr-input-text-container" label="available-languages" name='<%= "settings(" + PropsKeys.LOCALES + ")" %>' type="text" value="<%= availableLocales %>" />
 
 	<aui:input label="time-zone" name="timeZoneId" type="timeZone" value="<%= timeZoneId %>" />
 </aui:fieldset>
