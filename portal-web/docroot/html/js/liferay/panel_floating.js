@@ -113,8 +113,6 @@ AUI().add(
 					if (!sets.all('.current-set').size()) {
 						sets.item(0).addClass('current-set');
 					}
-
-					instance.paginate(currentContainer);
 				},
 
 				onTriggerClick: function(trigger) {
