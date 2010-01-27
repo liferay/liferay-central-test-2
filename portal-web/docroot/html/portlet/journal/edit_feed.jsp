@@ -193,7 +193,7 @@ if (feed != null) {
 		</c:choose>
 	</aui:fieldset>
 
-	<liferay-ui:panel-container extended="<%= true %>" id='editFeed' persistState="<%= true %>">
+	<liferay-ui:panel-container extended="<%= true %>" id="editFeed" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="webContentContraints" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "web-content-contraints") %>' >
 			<aui:fieldset>
 				<aui:select label="web-content-type" name="type" showEmptyOption="<%= true %>">
