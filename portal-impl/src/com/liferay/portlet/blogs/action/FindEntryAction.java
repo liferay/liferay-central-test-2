@@ -70,12 +70,21 @@ public class FindEntryAction extends Action {
 			boolean showAllEntries = ParamUtil.getBoolean(
 				request, "showAllEntries");
 
-			plid = getPlid(plid, entryId);
+			String portletId = PortletKeys.BLOGS;
+
+			try {
+				plid = getPlid(plid, portletId, entryId);
+			}
+			catch (NoSuchLayoutException nsle) {
+				portletId = PortletKeys.BLOGS_AGGREGATOR;
+
+				plid = getPlid(plid, portletId, entryId);
+			}
 
 			String urlTitle = getUrlTitle(entryId);
 
 			PortletURL portletURL = new PortletURLImpl(
-				request, PortletKeys.BLOGS, plid, PortletRequest.RENDER_PHASE);
+				request, portletId, plid, PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
@@ -84,12 +93,11 @@ public class FindEntryAction extends Action {
 				portletURL.setParameter("redirect", redirect);
 			}
 
-			if (showAllEntries) {
-				portletURL.setParameter("struts_action", "/blogs/view");
-			}
-			else {
-				portletURL.setParameter("struts_action", "/blogs/view_entry");
+			String strutsAction = getStrutsAction(portletId, showAllEntries);
 
+			portletURL.setParameter("struts_action", strutsAction);
+
+			if (!showAllEntries) {
 				if (Validator.isNotNull(urlTitle)) {
 					portletURL.setParameter("urlTitle", urlTitle);
 				}
@@ -119,7 +127,9 @@ public class FindEntryAction extends Action {
 		}
 	}
 
-	protected long getPlid(long plid, long entryId) throws Exception {
+	protected long getPlid(long plid, String portletId, long entryId)
+		throws Exception {
+
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
@@ -127,7 +137,7 @@ public class FindEntryAction extends Action {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
-				if (layoutTypePortlet.hasPortletId(PortletKeys.BLOGS)) {
+				if (layoutTypePortlet.hasPortletId(portletId)) {
 					return plid;
 				}
 			}
@@ -137,8 +147,7 @@ public class FindEntryAction extends Action {
 
 		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
 
-		plid = PortalUtil.getPlidFromPortletId(
-			entry.getGroupId(), PortletKeys.BLOGS);
+		plid = PortalUtil.getPlidFromPortletId(entry.getGroupId(), portletId);
 
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;
@@ -147,6 +156,26 @@ public class FindEntryAction extends Action {
 			throw new NoSuchLayoutException(
 				"No page was found with the Blogs portlet.");
 		}
+	}
+
+	protected String getStrutsAction(String portletId, boolean showAllEntries) {
+		String strutsAction = StringPool.BLANK;
+
+		if (portletId.equals(PortletKeys.BLOGS)) {
+			strutsAction = "/blogs";
+		}
+		else {
+			strutsAction = "/blogs_aggregator";
+		}
+
+		if (showAllEntries) {
+			strutsAction += "/view";
+		}
+		else {
+			strutsAction += "/view_entry";
+		}
+
+		return strutsAction;
 	}
 
 	protected String getUrlTitle(long entryId) {
