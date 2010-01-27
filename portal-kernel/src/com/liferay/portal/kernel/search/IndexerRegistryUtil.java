@@ -31,6 +31,10 @@ import java.util.List;
  */
 public class IndexerRegistryUtil {
 
+	public static Indexer getIndexer(Class<?> classObj) {
+		return getIndexerRegistry().getIndexer(classObj.getName());
+	}
+
 	public static Indexer getIndexer(String className) {
 		return getIndexerRegistry().getIndexer(className);
 	}
