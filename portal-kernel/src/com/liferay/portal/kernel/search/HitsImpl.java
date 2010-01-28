@@ -129,7 +129,7 @@ public class HitsImpl implements Hits {
 	private String[] _queryTerms;
 	private float[] _scores = new float[0];
 	private float _searchTime;
-	private String[] _snippets;
+	private String[] _snippets = new String[0];
 	private long _start;
 
 }
