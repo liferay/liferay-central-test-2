@@ -367,21 +367,16 @@ Liferay.Util = {
 
 				if (checkBox && toggleBox) {
 					if (checkBox.get('checked') && checkDisabled) {
-						toggleBox.attr('disabled', 'disabled');
+						toggleBox.set('disabled', true);
 					}
 					else {
-						toggleBox.attr('disabled', '');
+						toggleBox.set('disabled', false);
 					}
 
 					checkBox.on(
 						'click',
 						function() {
-							if (toggleBox.attr('disabled')) {
-								toggleBox.attr('disabled', '');
-							}
-							else {
-								toggleBox.attr('disabled', 'disabled');
-							}
+							toggleBox.set('disabled', !toggleBox.get('disabled'));
 						}
 					);
 				}
