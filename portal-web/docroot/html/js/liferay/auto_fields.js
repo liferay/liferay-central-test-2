@@ -313,7 +313,7 @@ AUI().add(
 							tools: [
 								{
 									id: 'add',
-									icon: 'plusthick',
+									icon: 'plus',
 									handler: {
 										fn: instance.clone,
 										context: instance
@@ -321,7 +321,7 @@ AUI().add(
 								},
 								{
 									id: 'delete',
-									icon: 'minusthick',
+									icon: 'minus',
 									handler: {
 										fn: instance.remove,
 										context: instance
