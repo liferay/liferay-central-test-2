@@ -58,6 +58,7 @@ public class FieldsetTag extends IncludeTag implements DynamicAttributes {
 				_cssClass = null;
 				_dynamicAttributes.clear();
 				_endPage = null;
+				_label = null;
 				_startPage = null;
 			}
 		}
@@ -73,6 +74,7 @@ public class FieldsetTag extends IncludeTag implements DynamicAttributes {
 			request.setAttribute("aui:fieldset:cssClass", _cssClass);
 			request.setAttribute(
 				"aui:fieldset:dynamicAttributes", _dynamicAttributes);
+			request.setAttribute("aui:fieldset:label", _label);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -119,6 +121,10 @@ public class FieldsetTag extends IncludeTag implements DynamicAttributes {
 		_endPage = endPage;
 	}
 
+	public void setLabel(String label) {
+			_label = label;
+	}
+
 	public void setStartPage(String startPage) {
 		_startPage = startPage;
 	}
@@ -131,6 +137,7 @@ public class FieldsetTag extends IncludeTag implements DynamicAttributes {
 
 	private boolean _column;
 	private String _cssClass;
+	private String _label;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _endPage;
