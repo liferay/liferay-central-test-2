@@ -45,57 +45,41 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 </style>
 
 <div class="portlet-flags" id="<portlet:namespace />flagsPopup">
-	<form class="aui-form" method="post" name="<portlet:namespace />flagsForm">
+	<aui:form method="post" name="flagsForm"  onSubmit='<%= renderResponse.getNamespace() + "flag(); return false;" %>'>
 		<p>
 			<%= LanguageUtil.format(pageContext, "you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential", themeDisplay.getPathMain() + "/portal/terms_of_use") %>
 		</p>
 
-		<fieldset class="aui-fieldset">
-			<span class="aui-field">
-				<span class="aui-field-content">
-					<label for="<portlet:namespace />reason"><liferay-ui:message key="reason-for-the-report" /></label>
+		<aui:fieldset>
+			<aui:select label="reason-for-the-report" name="reason">
+				<aui:option value="" />
 
-					<select name="<portlet:namespace />reason" id="<portlet:namespace />reason">
-						<option value=""></option>
+				<%
+				for (String reason : PropsValues.FLAGS_REASONS) {
+				%>
 
-						<%
-						for (String reason : PropsValues.FLAGS_REASONS) {
-						%>
+					<aui:option label="<%= reason %>" />
 
-							<option value="<%= reason %>"><liferay-ui:message key="<%= reason %>" /></option>
+				<%
+				}
+				%>
 
-						<%
-						}
-						%>
+				<aui:option label="other" />
+			</aui:select>
 
-						<option value="other"><liferay-ui:message key="other" /></option>
-					</select>
-				</span>
-			</span>
-
-			<span class="aui-field" id="<portlet:namespace />otherReasonContainer">
-				<span class="aui-field-content">
-					<label for="<portlet:namespace />otherReason"><liferay-ui:message key="other-reason" /></label>
-
-					<input id="<portlet:namespace />otherReason" name="<portlet:namespace />otherReason" type="text" value="" />
-				</span>
+			<span id="<portlet:namespace />otherReasonContainer">
+				<aui:input name="otherReason" />
 			</span>
 
 			<c:if test="<%= !themeDisplay.isSignedIn() %>">
-				<span class="aui-field">
-					<span class="aui-field-content">
-						<label for="<portlet:namespace />reporterEmailAddress"><liferay-ui:message key="email-address" /></label>
-
-						<input id="<portlet:namespace />reporterEmailAddress" name="<portlet:namespace />reporterEmailAddress" type="text" value="" />
-					</span>
-				</span>
+				<aui:input label="email-address" name="reporterEmailAddress" />
 			</c:if>
+		</aui:fieldset>
 
-			<div class="aui-button-holder">
-				<input type="button" value="<liferay-ui:message key="send" />" onclick="<portlet:namespace />flag(); return false;" />
-			</div>
-		</fieldset>
-	</form>
+		<aui:button-row>
+			<aui:button type="submit" />
+		</aui:button-row>
+	</aui:form>
 </div>
 
 <div class="aui-helper-hidden" id="<portlet:namespace />confirmation">
