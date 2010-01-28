@@ -110,6 +110,11 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="eventId" type="hidden" value="<%= eventId %>" />
 
+	<liferay-ui:tabs
+		names="event"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
+
 	<liferay-ui:error exception="<%= EventDurationException.class %>" message="please-enter-a-longer-duration" />
 	<liferay-ui:error exception="<%= EventStartDateException.class %>" message="please-enter-a-valid-start-date" />
 	<liferay-ui:error exception="<%= EventTitleException.class %>" message="please-enter-a-valid-title" />
