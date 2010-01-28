@@ -45,6 +45,8 @@ PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferenc
 String threadView = messageDisplay.getThreadView();
 %>
 
+<liferay-util:include page="/html/portlet/message_boards/top_links.jsp" />
+
 <div id="<portlet:namespace />addAnswerFlagDiv" style="display: none;">
 	<liferay-ui:icon
 		image="checked"
