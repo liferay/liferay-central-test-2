@@ -207,7 +207,7 @@ body #banner .logo a {
 /* ---------- Portlet wrapper and icons ---------- */
 
 .portlet {
-	background-color: transparent;
+	background-color: #EEF0F2;
 	border: 1px solid #C8C9CA;
 	margin: 0 0 10px;
 	padding: 3px;
