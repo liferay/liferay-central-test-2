@@ -2758,12 +2758,23 @@
 	</library>
 	<library>
 		<file-name>portal/wstx.jar</file-name>
-		<version>3.2.4</version>
+		<version>4.0.7</version>
 		<project-name>Woodstox</project-name>
 		<project-url>http://woodstox.codehaus.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/wstx-stax2-api.jar</file-name>
+		<version>3.0.1</version>
+		<project-name>Woodstox</project-name>
+		<project-url>http://woodstox.codehaus.org</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
