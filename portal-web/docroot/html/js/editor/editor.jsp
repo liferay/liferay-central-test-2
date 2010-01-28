@@ -43,6 +43,7 @@ if (!BrowserSnifferUtil.isRtf(request)) {
 	}
 }
 
+//editorImpl = "ckeditor";
 //editorImpl = "fckeditor";
 //editorImpl = "liferay";
 //editorImpl = "simple";

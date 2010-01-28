@@ -81,8 +81,8 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			%>
 
 			CKEDITOR.replace('CKEditor1',{
-				filebrowserBrowseUrl : '/html/js/editor/_ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
-				filebrowserUploadUrl : '/html/js/editor/_ckeditor/editor/filemanager/browser/liferay/frmupload.html?Connector=<%= connectorURL %>'
+				filebrowserBrowseUrl : '/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
+				filebrowserUploadUrl : '/html/js/editor/ckeditor/editor/filemanager/browser/liferay/frmupload.html?Connector=<%= connectorURL %>'
 				})
 		</script>
 	</body>
