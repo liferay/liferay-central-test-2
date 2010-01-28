@@ -58,21 +58,21 @@ public class Element {
 		this(name, null, true);
 	}
 
-	public Element(String name, boolean withHeader) {
-		this(name, null, withHeader);
+	public Element(String name, boolean addHeader) {
+		this(name, null, addHeader);
 	}
 
 	public Element(String name, String text) {
 		this(name, text, true);
 	}
 
-	public Element(String name, String text, boolean withHeader) {
+	public Element(String name, String text, boolean addHeader) {
 		_name = name;
 		_text = _formatText(text);
 		_elementStack = new LinkedList<Element>();
 		_stringBundler = new StringBundler();
 
-		if (withHeader) {
+		if (addHeader) {
 			_stringBundler.append(_XML_HEADER);
 		}
 
