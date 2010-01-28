@@ -53,9 +53,11 @@
 
 <%
 Group group = null;
+String type = null;
 
 if (layout != null) {
 	group = layout.getGroup();
+	type = layout.getType();
 }
 %>
 
@@ -79,7 +81,9 @@ if (layout != null) {
 			};
 		}
 
-		Liferay.Layout.init(layoutOptions);
+		<c:if test="<%= (type != null) && type.equals(LayoutConstants.TYPE_PORTLET) %>">
+			Liferay.Layout.init(layoutOptions);
+		</c:if>
 
 		new Liferay.Navigation(
 			{
