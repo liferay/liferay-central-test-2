@@ -80,229 +80,177 @@ xsd = StringUtil.replace(xsd, StringPool.DOUBLE_SPACE, StringPool.BLANK);
 int tabIndex = 1;
 %>
 
-<form method="post" name="<portlet:namespace />fm2">
-<input name="xml" type="hidden" value="" />
-</form>
+<aui:form method="post" name="fm2">
+	<input name="xml" type="hidden" value="" />
+</aui:form>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveStructure(); return false;">
-<input name="scroll" type="hidden" value="" />
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(originalRedirect) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />structureId" type="hidden" value="<%= HtmlUtil.escapeAttribute(structureId) %>" />
-<input name="<portlet:namespace />move_up" type="hidden" value="" />
-<input name="<portlet:namespace />move_depth" type="hidden" value="" />
-<input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
+<portlet:actionURL var="editStructureURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/journal/edit_structure" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="structure"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+<aui:form action="<%= editStructureURL %>" method="post" name="fm1" onSubmit='<%= renderResponse.getNamespace() + "saveStructure(); return false;" %>'>
+	<input name="scroll" type="hidden" value="" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
+	<aui:input name="move_up" type="hidden" />
+	<aui:input name="move_depth" type="hidden" />
+	<aui:input name="saveAndContinue" type="hidden" />
 
-<liferay-ui:error exception="<%= DuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />
-<liferay-ui:error exception="<%= StructureDescriptionException.class %>" message="please-enter-a-valid-description" />
-<liferay-ui:error exception="<%= StructureIdException.class %>" message="please-enter-a-valid-id" />
-<liferay-ui:error exception="<%= StructureInheritanceException.class %>" message="this-structure-is-already-within-the-inheritance-path-of-the-selected-parent-please-select-another-parent-structure" />
-<liferay-ui:error exception="<%= StructureNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:tabs
+		names="structure"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="id" />
-	</td>
-	<td>
-		<c:choose>
-			<c:when test="<%= PropsValues.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
-				<c:choose>
-					<c:when test="<%= structure == null %>">
-						<liferay-ui:message key="autogenerate-id" />
+	<liferay-ui:error exception="<%= DuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />
+	<liferay-ui:error exception="<%= StructureDescriptionException.class %>" message="please-enter-a-valid-description" />
+	<liferay-ui:error exception="<%= StructureIdException.class %>" message="please-enter-a-valid-id" />
+	<liferay-ui:error exception="<%= StructureInheritanceException.class %>" message="this-structure-is-already-within-the-inheritance-path-of-the-selected-parent-please-select-another-parent-structure" />
+	<liferay-ui:error exception="<%= StructureNameException.class %>" message="please-enter-a-valid-name" />
 
-						<input name="<portlet:namespace />newStructureId" type="hidden" value="" />
-						<input name="<portlet:namespace />autoStructureId" type="hidden" value="true" />
-					</c:when>
-					<c:otherwise>
-						<%= structureId %>
-					</c:otherwise>
-				</c:choose>
-			</c:when>
-			<c:otherwise>
-				<table border="0" cellpadding="0" cellspacing="0">
-				<tr>
-					<td>
-						<c:choose>
-							<c:when test="<%= structure == null %>">
-								<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="structureId" fieldParam="newStructureId" defaultValue="<%= newStructureId %>" />
-							</c:when>
-							<c:otherwise>
-								<%= structureId %>
-							</c:otherwise>
-						</c:choose>
-					</td>
-					<td style="padding-left: 30px;"></td>
-					<td>
-						<c:if test="<%= structure == null %>">
-							<liferay-ui:input-checkbox param="autoStructureId" />
-
+	<aui:fieldset>
+		<aui:field-wrapper label="id">
+			<c:choose>
+				<c:when test="<%= PropsValues.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
+					<c:choose>
+						<c:when test="<%= structure == null %>">
 							<liferay-ui:message key="autogenerate-id" />
-						</c:if>
-					</td>
-				</tr>
+
+							<aui:input name="newStructureId" type="hidden" />
+							<aui:input name="autoStructureId" type="hidden" value="<%= true %>" />
+						</c:when>
+						<c:otherwise>
+							<%= structureId %>
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+				<c:otherwise>
+					<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>
+							<c:choose>
+								<c:when test="<%= structure == null %>">
+									<aui:input bean="<%= structure %>" cssClass="lfr-input-text-container" field="structureId" fieldParam="newStructureId" label="" model="<%= JournalStructure.class %>" name="newStructureId" value="<%= newStructureId %>" />
+								</c:when>
+								<c:otherwise>
+									<%= structureId %>
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td style="padding-left: 30px;"></td>
+						<td>
+							<c:if test="<%= structure == null %>">
+								<aui:input inlineLabel="right" label="autogenerate-id" name="autoStructureId" type="checkbox" />
+							</c:if>
+						</td>
+					</tr>
+					</table>
+				</c:otherwise>
+			</c:choose>
+		</aui:field-wrapper>
+
+		<aui:input bean="<%= structure %>" model="<%= JournalStructure.class %>" name="name" />
+
+		<aui:input bean="<%= structure %>" model="<%= JournalStructure.class %>" name="description" />
+
+		<aui:field-wrapper label="parent-structure">
+			<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
+
+			<c:choose>
+				<c:when test="<%= (structure == null) || (Validator.isNotNull(parentStructureId)) %>">
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="parentStructureURL">
+						<portlet:param name="struts_action" value="/journal/edit_structure" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+						<portlet:param name="parentStructureId" value="<%= parentStructureId %>" />
+					</portlet:renderURL>
+
+					<aui:a href="<%= parentStructureURL %>" label="<%= parentStructureName %>" id="parentStructureName" />
+				</c:when>
+				<c:otherwise>
+					<aui:a href="" id="parentStructureName" />
+				</c:otherwise>
+			</c:choose>
+
+			<aui:button onClick='<%= renderResponse.getNamespace() + "openParentStructureSelector();" %>'  type="button" value="select" />
+
+			<aui:button name="removeParentStructureButton" onClick='<%= renderResponse.getNamespace() + "removeParentStructure();" %>' type="button" value="remove" />
+		</aui:field-wrapper>
+
+		<c:if test="<%= structure != null %>">
+			<aui:field-wrapper label="url">
+				<liferay-ui:input-resource url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/journal/get_structure?groupId=" + groupId + "&structureId=" + structureId %>' />
+			</aui:field-wrapper>
+
+			<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
+				<aui:field-wrapper label="webdav-url">
+					<liferay-ui:input-resource url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/journal/Structures/" + structureId %>' />
+				</aui:field-wrapper>
+			</c:if>
+		</c:if>
+
+		<c:if test="<%= structure == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions modelName="<%= JournalStructure.class.getName() %>" />
+			</aui:field-wrapper>
+		</c:if>
+	</aui:fieldset>
+
+	<liferay-ui:panel-container extended="<%= true %>" id="xsd" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="xsdPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "xsd") %>'>
+			<aui:fieldset>
+				<liferay-ui:error exception="<%= StructureXsdException.class %>" message="please-enter-a-valid-xsd" />
+
+				<aui:input name="xsd" type="hidden" />
+
+				<%
+				String taglibEditElement = renderResponse.getNamespace() + "editElement('add', -1);";
+				%>
+
+				<aui:button onClick="<%= taglibEditElement %>" type="button" value="add-row" />
+
+				<aui:button name="editorButton" type="button" value="launch-editor" />
+
+				<c:if test="<%= structure != null %>">
+					<aui:button onClick='<%= renderResponse.getNamespace() + "downloadStructureContent();" %>' type="button" value="download" />
+				</c:if>
+
+				<table class="taglib-search-iterator">
+
+				<%
+				Document doc = SAXReaderUtil.read(xsd);
+
+				Element root = doc.getRootElement();
+
+				String moveUpParam = request.getParameter("move_up");
+				String moveDepthParam = request.getParameter("move_depth");
+
+				if (Validator.isNotNull(moveUpParam) && Validator.isNotNull(moveDepthParam)) {
+					_move(root, new IntegerWrapper(0), GetterUtil.getBoolean(moveUpParam), GetterUtil.getInteger(moveDepthParam), new BooleanWrapper(false));
+				}
+
+				IntegerWrapper tabIndexWrapper = new IntegerWrapper(tabIndex);
+
+				_format(root, new IntegerWrapper(0), new Integer(-1), tabIndexWrapper, pageContext, request);
+
+				tabIndex = tabIndexWrapper.getValue();
+				%>
+
 				</table>
-			</c:otherwise>
-		</c:choose>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="description" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="parent-structure" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />parentStructureId" type="hidden" value="<%= parentStructureId %>" />
+			</aui:fieldset>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
 
-		<c:choose>
-			<c:when test="<%= (structure == null) || (Validator.isNotNull(parentStructureId)) %>">
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="parentStructureId" value="<%= parentStructureId %>" /></portlet:renderURL>" id="<portlet:namespace />parentStructureName">
-				<%= parentStructureName %></a>
-			</c:when>
-			<c:otherwise>
-				<a id="<portlet:namespace />parentStructureName"></a>
-			</c:otherwise>
-		</c:choose>
+	<aui:button-row>
+		<aui:button type="submit" />
 
-		<input type="button" value="<liferay-ui:message key="select" />" onClick="var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); structureWindow.focus();" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueStructure();" %>' type="button" value="save-and-continue" />
 
-		<input <%= Validator.isNull(parentStructureId) ? "disabled" : "" %> id="<portlet:namespace />removeParentStructureButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeParentStructure();">
-	</td>
-</tr>
-
-<c:if test="<%= structure != null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="url" />
-		</td>
-		<td>
-			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/journal/get_structure?groupId=" + groupId + "&structureId=" + structureId %>'
-			/>
-		</td>
-	</tr>
-
-	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
-		<tr>
-			<td>
-				<liferay-ui:message key="webdav-url" />
-			</td>
-			<td>
-				<liferay-ui:input-resource
-					url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/journal/Structures/" + structureId %>'
-				/>
-			</td>
-		</tr>
-	</c:if>
-</c:if>
-
-<c:if test="<%= structure == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= JournalStructure.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
-
-</table>
-
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />saveAndContinueStructure();" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
-
-<br /><br />
-
-<liferay-ui:tabs names="xsd" />
-
-<liferay-ui:error exception="<%= StructureXsdException.class %>" message="please-enter-a-valid-xsd" />
-
-<input id="<portlet:namespace />xsd" name="<portlet:namespace />xsd" type="hidden" value="" />
-
-<input type="button" value="<liferay-ui:message key="add-row" />" onClick="<portlet:namespace />editElement('add', -1);" />
-
-<input id="<portlet:namespace />editorButton" type="button" value="<liferay-ui:message key="launch-editor" />" />
-
-<c:if test="<%= structure != null %>">
-	<input type="button" value="<liferay-ui:message key="download" />" onClick="<portlet:namespace />downloadStructureContent();" />
-</c:if>
-
-<br /><br />
-
-<table class="taglib-search-iterator">
-
-<%
-Document doc = SAXReaderUtil.read(xsd);
-
-Element root = doc.getRootElement();
-
-String moveUpParam = request.getParameter("move_up");
-String moveDepthParam = request.getParameter("move_depth");
-
-if (Validator.isNotNull(moveUpParam) && Validator.isNotNull(moveDepthParam)) {
-	_move(root, new IntegerWrapper(0), GetterUtil.getBoolean(moveUpParam), GetterUtil.getInteger(moveDepthParam), new BooleanWrapper(false));
-}
-
-IntegerWrapper tabIndexWrapper = new IntegerWrapper(tabIndex);
-
-_format(root, new IntegerWrapper(0), new Integer(-1), tabIndexWrapper, pageContext, request);
-
-tabIndex = tabIndexWrapper.getValue();
-%>
-
-</table>
-
-</form>
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <aui:script>
 	var xmlIndent = "<%= StringPool.DOUBLE_SPACE %>";
@@ -445,6 +393,12 @@ tabIndex = tabIndexWrapper.getValue();
 		document.<portlet:namespace />fm1.<portlet:namespace />move_depth.value = elCount;
 		document.<portlet:namespace />fm1.<portlet:namespace />xsd.value = <portlet:namespace />getXsd();
 		submitForm(document.<portlet:namespace />fm1);
+	}
+
+	function <portlet:namespace />openParentStructureSelector() {
+		var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+
+		structureWindow.focus();
 	}
 
 	function <portlet:namespace />removeParentStructure() {

@@ -56,8 +56,8 @@ if (MathUtil.isEven(count.getValue())) {
 
 <tr class="<%= className %>">
 	<td>
-		<input id="<portlet:namespace />structure_el<%= count.getValue() %>_depth" type="hidden" value="<%= depth %>" />
-		<input id="<portlet:namespace />structure_el<%= count.getValue() %>_metadata_xml" type="hidden" value="<%= HttpUtil.encodeURL(elMetadataXML) %>" />
+		<aui:input name='<%= "structure_el" + count.getValue() + "_depth" %>' type="hidden" value="<%= depth %>" />
+		<aui:input name='<%= "structure_el" + count.getValue() + "_metadata_xml" %>' type="hidden" value="<%= HttpUtil.encodeURL(elMetadataXML) %>" />
 
 		<table class="lfr-table">
 		<tr>
@@ -66,40 +66,43 @@ if (MathUtil.isEven(count.getValue())) {
 			</c:if>
 
 			<td>
-				<input id="<portlet:namespace />structure_el<%= count.getValue() %>_name" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elName %>" />
+				<aui:input label="" name='<%= "structure_el" + count.getValue() + "_name" %>' tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elName %>" />
 			</td>
 			<td>
 				<c:choose>
 					<c:when test='<%= parentElType.equals("list") || parentElType.equals("multi-list") %>'>
-						<input id="<portlet:namespace />structure_el<%= count.getValue() %>_type" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elType %>" />
+						<aui:input label="" name='<%= "structure_el" + count.getValue() + "_type" %>' tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elType %>" />
 					</c:when>
 					<c:otherwise>
-						<select id="<portlet:namespace />structure_el<%= count.getValue() %>_type" tabindex="<%= tabIndex.getValue() %>">
-							<option value=""></option>
-							<option <%= elType.equals("text") ? "selected" : "" %> value="text"><liferay-ui:message key="text" /></option>
-							<option <%= elType.equals("text_box") ? "selected" : "" %> value="text_box"><liferay-ui:message key="text-box" /></option>
-							<option <%= elType.equals("text_area") ? "selected" : "" %> value="text_area"><liferay-ui:message key="text-area" /></option>
-							<option <%= elType.equals("image") ? "selected" : "" %> value="image"><liferay-ui:message key="image" /></option>
-							<option <%= elType.equals("image_gallery") ? "selected" : "" %> value="image_gallery"><%= PortalUtil.getPortletTitle(PortletKeys.IMAGE_GALLERY, user) %></option>
-							<option <%= elType.equals("document_library") ? "selected" : "" %> value="document_library"><%= PortalUtil.getPortletTitle(PortletKeys.DOCUMENT_LIBRARY, user) %></option>
-							<option <%= elType.equals("boolean") ? "selected" : "" %> value="boolean"><liferay-ui:message key="boolean-flag" /></option>
-							<option <%= elType.equals("list") ? "selected" : "" %> value="list"><liferay-ui:message key="selection-list" /></option>
-							<option <%= elType.equals("multi-list") ? "selected" : "" %> value="multi-list"><liferay-ui:message key="multi-selection-list" /></option>
-							<option <%= elType.equals("link_to_layout") ? "selected" : "" %> value="link_to_layout"><liferay-ui:message key="link-to-layout" /></option>
-						</select>
+						<aui:column>
+							<aui:select label="" name='<%= "structure_el" + count.getValue() + "_type" %>' showEmptyOption="<%= true %>" tabindex="<%= tabIndex.getValue() %>">
+								<aui:option label="text" selected='<%= elType.equals("text") %>' />
+								<aui:option label="text-box" selected='<%= elType.equals("text_box") %>' value="text_box" />
+								<aui:option label="text-area" selected='<%= elType.equals("text_area") %>' value="text_area" />
+								<aui:option label="image" selected='<%= elType.equals("image") %>' />
+								<aui:option label="<%= PortalUtil.getPortletTitle(PortletKeys.IMAGE_GALLERY, user) %>" selected='<%= elType.equals("image_gallery") %>' value="image_gallery" />
+								<aui:option label="<%= PortalUtil.getPortletTitle(PortletKeys.DOCUMENT_LIBRARY, user) %>" selected='<%= elType.equals("document_library") %>' value="document_library" />
+								<aui:option label="boolean-flag" selected='<%= elType.equals("boolean") %>' value="boolean" />
+								<aui:option label="selection-list" selected='<%= elType.equals("list") %>' value="list" />
+								<aui:option label="multi-selection-list" selected='<%= elType.equals("multi-list") %>' value="multi-list" />
+								<aui:option label="link-to-layout" selected='<%= elType.equals("link_to_layout") %>' value="link_to_layout" />
+							</aui:select>
+						</aui:column>
 
-						<select id="<portlet:namespace />structure_el<%= count.getValue() %>_index_type">
-							<option value=""><liferay-ui:message key="not-searchable" /></option>
-							<option <%= elIndexType.equals("keyword") ? "selected" : "" %> value="keyword"><liferay-ui:message key="searchable-keyword" /></option>
-							<option <%= elIndexType.equals("text") ? "selected" : "" %> value="text"><liferay-ui:message key="searchable-text" /></option>
-						</select>
+						<aui:column>
+							<aui:select label="" name='<%= "structure_el" + count.getValue() + "_index_type" %>'>
+								<aui:option label="not-searchable" />
+								<aui:option label="searchable-keyword" selected='<%= elIndexType.equals("keyword") %>' value="keyword" />
+								<aui:option label="searchable-text" selected='<%= elIndexType.equals("text") %>' value="text" />
+							</aui:select>
+						</aui:column>
 					</c:otherwise>
 				</c:choose>
 			</td>
 
 			<c:if test='<%= !parentElType.equals("list") && !parentElType.equals("multi-list") %>'>
 				<td>
-					<input <%= repeatable ? "checked" : "" %> id="<portlet:namespace />structure_el<%= count.getValue() %>_repeatable" tabindex="<%= tabIndex.getValue() %>" type="checkbox" /> <liferay-ui:message key="repeatable" />
+					<aui:input inlineLabel="right" label="repeatable" name='<%= "structure_el" + count.getValue() + "_repeatable" %>' tabindex="<%= tabIndex.getValue() %>" type="checkbox" value="<%= repeatable %>" />
 				</td>
 				<td>
 

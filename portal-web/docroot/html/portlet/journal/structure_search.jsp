@@ -35,30 +35,19 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 	displayTerms="<%= displayTerms %>"
 	buttonLabel="search"
 >
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="id" />
-		</td>
-		<td>
-			<liferay-ui:message key="name" />
-		</td>
-		<td>
-			<liferay-ui:message key="description" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getStructureId()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getDescription()) %>" />
-		</td>
-	</tr>
-	</table>
+	<aui:fieldset>
+		<aui:column>
+			<aui:input label="id" name="<%= displayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= displayTerms.getStructureId() %>" />
+		</aui:column>
+
+		<aui:column>
+			<aui:input name="<%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
+		</aui:column>
+
+		<aui:column>
+			<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
+		</aui:column>
+	</aui:fieldset>
 </liferay-ui:search-toggle>
 
 <%
@@ -72,11 +61,9 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 %>
 
 <c:if test="<%= showAddStructureButton || showPermissionsButton %>">
-	<br />
-
-	<div>
+	<aui:button-row>
 		<c:if test="<%= showAddStructureButton %>">
-			<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="<portlet:namespace />addStructure();" />
+			<aui:button onClick='<%= renderResponse.getNamespace() + "addStructure();" %>' value="add-structure" />
 		</c:if>
 
 		<c:if test="<%= showPermissionsButton %>">
@@ -87,9 +74,9 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 				var="permissionsURL"
 			/>
 
-			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+			<aui:button onClick="<%= permissionsURL %>" value="permissions" />
 		</c:if>
-	</div>
+	</aui:button-row>
 </c:if>
 
 <aui:script>

@@ -32,56 +32,50 @@ String oldStructureId = ParamUtil.getString(request, "oldStructureId");
 String newStructureId = ParamUtil.getString(request, "newStructureId");
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/copy_structure" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.COPY %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />oldStructureId" type="hidden" value="<%= HtmlUtil.escapeAttribute(oldStructureId) %>" />
+<portlet:actionURL var="copyStructureURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/journal/copy_structure" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="structure"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+<aui:form action="<%= copyStructureURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.COPY %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="oldStructureId" type="hidden" value="<%= oldStructureId %>" />
 
-<liferay-ui:error exception="<%= DuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />
-<liferay-ui:error exception="<%= StructureIdException.class %>" message="please-enter-a-valid-id" />
+	<liferay-ui:tabs
+		names="structure"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="id" />
-	</td>
-	<td>
-		<%= oldStructureId %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="new-id" />
-	</td>
-	<td>
-		<c:choose>
-			<c:when test="<%= PropsValues.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
-				<liferay-ui:message key="autogenerate-id" />
+	<liferay-ui:error exception="<%= DuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />
+	<liferay-ui:error exception="<%= StructureIdException.class %>" message="please-enter-a-valid-id" />
 
-				<input name="<portlet:namespace />newStructureId" type="hidden" value="" />
-				<input name="<portlet:namespace />autoStructureId" type="hidden" value="true" />
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= null %>" field="structureId" fieldParam="newStructureId" defaultValue="<%= newStructureId %>" />
-			</c:otherwise>
-		</c:choose>
-	</td>
-</tr>
-</table>
+	<aui:fieldset>
+		<aui:field-wrapper label="id">
+			<%= oldStructureId %>
+		</aui:field-wrapper>
 
-<br />
+		<aui:field-wrapper label="new-id">
+			<c:choose>
+				<c:when test="<%= PropsValues.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
+					<liferay-ui:message key="autogenerate-id" />
 
-<input type="submit" value="<liferay-ui:message key="copy" />" />
+					<aui:input name="newStructureId" type="hidden" />
+					<aui:input name="autoStructureId" type="hidden" value="<%= true %>" />
+				</c:when>
+				<c:otherwise>
+					<aui:input bean="<%= null %>" cssClass="lfr-input-text-container" field="structureId" fieldParam="newStructureId" label="" model="<%= JournalStructure.class %>" name="newStructureId" value="<%= newStructureId %>" />
+				</c:otherwise>
+			</c:choose>
+		</aui:field-wrapper>
+	</aui:fieldset>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
+	<aui:button-row>
+		<aui:button type="submit" value="copy" />
 
-</form>
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>
