@@ -143,9 +143,7 @@ public class CASAutoLogin implements AutoLogin {
 	/**
 	 * @deprecated Use <code>importLDAPUser</code>.
 	 */
-	protected User addUser(long companyId, String screenName)
-		throws Exception {
-
+	protected User addUser(long companyId, String screenName) throws Exception {
 		return importLDAPUser(companyId, StringPool.BLANK, screenName);
 	}
 
