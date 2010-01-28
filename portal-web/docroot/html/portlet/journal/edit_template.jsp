@@ -244,8 +244,6 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 </aui:form>
 
 <aui:script>
-	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoTemplateIdCheckbox','<portlet:namespace />newTemplateId', true);
-
 	function <portlet:namespace />downloadTemplateContent() {
 		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_template_content";
 		document.<portlet:namespace />fm2.target = "_self";
@@ -297,6 +295,8 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 		document.getElementById("<portlet:namespace />removeStructureButton").disabled = false;
 	}
+
+	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoTemplateIdCheckbox','<portlet:namespace />newTemplateId', true);
 
 	Liferay.Util.inlineEditor(
 		{

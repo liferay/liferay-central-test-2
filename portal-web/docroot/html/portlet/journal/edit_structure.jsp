@@ -236,8 +236,6 @@ int tabIndex = 1;
 </aui:form>
 
 <aui:script>
-	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoStructureIdCheckbox','<portlet:namespace />newStructureId', true);
-
 	var xmlIndent = "<%= StringPool.DOUBLE_SPACE %>";
 
 	function <portlet:namespace />downloadStructureContent() {
@@ -423,6 +421,8 @@ int tabIndex = 1;
 
 		document.getElementById("<portlet:namespace />removeParentStructureButton").disabled = false;
 	}
+
+	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoStructureIdCheckbox','<portlet:namespace />newStructureId', true);
 
 	Liferay.Util.inlineEditor(
 		{
