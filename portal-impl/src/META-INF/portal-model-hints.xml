@@ -1241,7 +1241,7 @@
 		</field>
 		<field name="rendererTemplateId" type="String" />
 		<field name="delta" type="int">
-			<hint name="display-width">50</hint>	
+			<hint name="display-width">50</hint>
 		</field>
 		<field name="orderByCol" type="String" />
 		<field name="orderByType" type="String" />
