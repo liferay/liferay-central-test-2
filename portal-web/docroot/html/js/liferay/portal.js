@@ -7,7 +7,7 @@ Liferay.Portal.Tabs = {
 		var args = arguments;
 
 		AUI().use(
-			'node',
+			'aui-base',
 			function(A) {
 				instance.show = instance._show;
 
