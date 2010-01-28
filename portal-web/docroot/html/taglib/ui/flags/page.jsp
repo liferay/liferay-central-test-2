@@ -72,10 +72,12 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 						}
 					).render();
 
-					popup.plug(A.Plugin.IO, {
-						data: params,
-						uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
-					});
+					popup.plug(
+						A.Plugin.IO, {
+							data: params,
+							uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
+						}
+					);
 				},
 			'.<%= randomNamespace %>'
 			);
