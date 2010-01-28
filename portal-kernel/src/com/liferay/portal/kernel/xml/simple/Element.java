@@ -55,16 +55,26 @@ public class Element {
 	}
 
 	public Element(String name) {
-		this(name, null);
+		this(name, null, true);
+	}
+
+	public Element(String name, boolean withHeader) {
+		this(name, null, withHeader);
 	}
 
 	public Element(String name, String text) {
+		this(name, text, true);
+	}
+
+	public Element(String name, String text, boolean withHeader) {
 		_name = name;
 		_text = _formatText(text);
 		_elementStack = new LinkedList<Element>();
 		_stringBundler = new StringBundler();
 
-		_stringBundler.append(_XML_HEADER);
+		if (withHeader) {
+			_stringBundler.append(_XML_HEADER);
+		}
 
 		_openElement(this);
 	}
