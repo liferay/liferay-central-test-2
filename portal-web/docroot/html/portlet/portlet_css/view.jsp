@@ -124,6 +124,7 @@
 
 						if (linkableLayout != null) {
 					%>
+
 							<aui:option label="<%= name %>" selected="<%= (linkableLayout.getLayoutId() == linkToLayoutId) %>" value="<%= linkableLayout.getLayoutId() %>" />
 
 					<%
@@ -163,14 +164,16 @@
 							<aui:option label="" value="" />
 
 							<%
-								DecimalFormat decimalFormat = new DecimalFormat("#.##em");
+							DecimalFormat decimalFormat = new DecimalFormat("#.##em");
 
-								for (double i = 0.1; i <= 12; i += 0.1) {
-									String value = decimalFormat.format(i);
-								%>
-									<aui:option label="<%= value %>" value="<%= value %>" />
-								<%
-								}
+							for (double i = 0.1; i <= 12; i += 0.1) {
+								String value = decimalFormat.format(i);
+							%>
+
+								<aui:option label="<%= value %>" value="<%= value %>" />
+
+							<%
+							}
 							%>
 
 						</aui:select>
@@ -201,18 +204,20 @@
 							<aui:option label="" value="" />
 
 							<%
-								DecimalFormat decimalFormat = new DecimalFormat("#.##em");
+							DecimalFormat decimalFormat = new DecimalFormat("#.##em");
 
-								for (double i = -1; i <= 1; i += 0.05) {
-									String value = decimalFormat.format(i);
+							for (double i = -1; i <= 1; i += 0.05) {
+								String value = decimalFormat.format(i);
 
-									if (value.equals("0em")) {
-										value = "normal";
-									}
-								%>
-									<aui:option label="<%= value %>" value="<%= value %>" />
-								<%
+								if (value.equals("0em")) {
+									value = "normal";
 								}
+							%>
+
+								<aui:option label="<%= value %>" value="<%= value %>" />
+
+							<%
+							}
 							%>
 
 						</aui:select>
@@ -221,14 +226,16 @@
 							<aui:option label="" value="" />
 
 							<%
-								DecimalFormat decimalFormat = new DecimalFormat("#.##em");
+							DecimalFormat decimalFormat = new DecimalFormat("#.##em");
 
-								for (double i = 0.1; i <= 12; i += 0.1) {
-									String value = decimalFormat.format(i);
-								%>
-									<aui:option label="<%= value %>" value="<%= value %>" />
-								<%
-								}
+							for (double i = 0.1; i <= 12; i += 0.1) {
+								String value = decimalFormat.format(i);
+							%>
+
+								<aui:option label="<%= value %>" value="<%= value %>" />
+
+							<%
+							}
 							%>
 
 						</aui:select>
