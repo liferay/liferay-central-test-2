@@ -65,18 +65,17 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 							centered: true,
 							destroyOnClose: true,
 							draggable: true,
-							io:	{
-								cfg: {
-									data: params
-								},
-								uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
-							},
 							modal: true,
 							stack: true,
 							title: '<liferay-ui:message key="report-inappropriate-content" />',
 							width: 435
 						}
 					).render();
+
+					popup.plug(A.Plugin.IO, {
+						data: params,
+						uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
+					});
 				},
 			'.<%= randomNamespace %>'
 			);
