@@ -174,6 +174,10 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						canReset: false,
 						defaultSelected: <%= yourScore %>,
 						label: '<liferay-ui:message key="your-rating" />',
+						messages: {
+							ratedElementText: '<liferay-ui:message key="you-have-rated-this-x-stars-out-of-x" />',
+							ratingElementText: '<liferay-ui:message key="rate-this-x-stars-out-of-x" />',
+						},
 						on: {
 							click: function() {
 								var url = '<%= url %>';
@@ -194,6 +198,9 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						defaultSelected: <%= stats.getAverageScore() %>,
 						disabled: true,
 						label: getLabel('<liferay-ui:message key="average" />', <%= stats.getTotalEntries() %>),
+						messages: {
+							averageRatingElementText: '<liferay-ui:message key="the-average-rating-is-x-stars-out-of-x" />',
+						},
 						size: <%= numberOfStars %>
 					}
 				);
@@ -211,7 +218,15 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 				var ratingThumb = new A.ThumbRating(
 					{
 						boundingBox: '#<%= randomNamespace %>ratingThumb',
+						defaultSelected: <%= yourScore %>,
 						label: label,
+						messages: {
+							thumbsUpText: '<liferay-ui:message key="rate-this-as-good" />',
+							thumbedUpText: '<liferay-ui:message key="you-have-rated-this-as-good" />',
+							thumbsDownText: '<liferay-ui:message key="rate-this-as-bad" />',
+							thumbedDownText: '<liferay-ui:message key="you-have-rated-this-as-bad" />'
+						},
+
 						on: {
 							click: function() {
 								var instance = this;
