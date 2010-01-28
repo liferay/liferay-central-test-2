@@ -358,6 +358,37 @@ Liferay.Util = {
 		);
 	},
 
+	disableToggleBoxes: function(checkBoxId, toggleBoxId, checkDisabled) {
+		AUI().use(
+			'node',
+			function(A) {
+				var checkBox = A.one('#' + checkBoxId);
+				var toggleBox = A.one('#' + toggleBoxId);
+
+				if (checkBox && toggleBox) {
+					if (checkBox.get('checked') && checkDisabled) {
+						toggleBox.attr('disabled', 'disabled');
+					}
+					else {
+						toggleBox.attr('disabled', '');
+					}
+
+					checkBox.on(
+						'click',
+						function() {
+							if (toggleBox.attr('disabled')) {
+								toggleBox.attr('disabled', '');
+							}
+							else {
+								toggleBox.attr('disabled', 'disabled');
+							}
+						}
+					);
+				}
+			}
+		);
+	},
+
 	enableFormButtons: function(inputs, form) {
 		var instance = this;
 
