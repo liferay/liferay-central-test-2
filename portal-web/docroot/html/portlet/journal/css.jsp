@@ -91,6 +91,10 @@
 	padding: 10px;
 }
 
+.portlet-journal .lfr-panel-basic .lfr-tag-selector-input {
+	width: 100%;
+}
+
 .portlet-journal .journal-extras {
 	border-width: 0;
 }
