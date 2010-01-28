@@ -53,11 +53,9 @@
 
 <%
 Group group = null;
-String type = null;
 
 if (layout != null) {
 	group = layout.getGroup();
-	type = layout.getType();
 }
 %>
 
@@ -81,7 +79,7 @@ if (layout != null) {
 			};
 		}
 
-		<c:if test="<%= (type != null) && type.equals(LayoutConstants.TYPE_PORTLET) %>">
+		<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET %>">
 			Liferay.Layout.init(layoutOptions);
 		</c:if>
 
