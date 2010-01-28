@@ -131,6 +131,8 @@ if (feed != null) {
 	<liferay-ui:error exception="<%= FeedTargetLayoutFriendlyUrlException.class %>" message="please-enter-a-valid-target-layout-friendly-url" />
 	<liferay-ui:error exception="<%= FeedTargetPortletIdException.class %>" message="please-enter-a-valid-portlet-id" />
 
+	<aui:model-context bean="<%= feed %>" model="<%= JournalFeed.class %>" />
+
 	<aui:fieldset>
 		<aui:field-wrapper label="id">
 			<c:choose>
@@ -153,7 +155,7 @@ if (feed != null) {
 						<td>
 							<c:choose>
 								<c:when test="<%= feed == null %>">
-									<aui:input bean="<%= feed %>" cssClass="lfr-input-text-container" field="feedId" fieldParam="newFeedId" label="" model="<%= JournalFeed.class %>" name="newFeedId" value="<%= newFeedId %>" />
+									<aui:input cssClass="lfr-input-text-container" field="feedId" fieldParam="newFeedId" label="" name="newFeedId" value="<%= newFeedId %>" />
 								</c:when>
 								<c:otherwise>
 									<%= feedId %>
@@ -171,13 +173,13 @@ if (feed != null) {
 			</c:choose>
 		</aui:field-wrapper>
 
-		<aui:input bean="<%= feed %>" cssClass="lfr-input-text-container" model="<%= JournalFeed.class %>" name="name" />
+		<aui:input cssClass="lfr-input-text-container" name="name" />
 
-		<aui:input bean="<%= feed %>" cssClass="lfr-textarea-container" model="<%= JournalFeed.class %>" name="description" />
+		<aui:input cssClass="lfr-textarea-container" name="description" />
 
-		<aui:input bean="<%= feed %>" cssClass="lfr-input-text-container" helpMessage="journal-feed-target-layout-friendly-url-help" model="<%= JournalFeed.class %>" name="targetLayoutFriendlyUrl" />
+		<aui:input cssClass="lfr-input-text-container" helpMessage="journal-feed-target-layout-friendly-url-help" name="targetLayoutFriendlyUrl" />
 
-		<aui:input bean="<%= feed %>" cssClass="lfr-input-text-container" helpMessage="journal-feed-target-portlet-id-help" model="<%= JournalFeed.class %>" name="targetPortletId" />
+		<aui:input cssClass="lfr-input-text-container" helpMessage="journal-feed-target-portlet-id-help" name="targetPortletId" />
 
 		<c:choose>
 			<c:when test="<%= feed == null %>">
