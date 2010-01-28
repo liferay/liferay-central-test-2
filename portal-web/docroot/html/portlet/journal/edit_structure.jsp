@@ -113,45 +113,26 @@ int tabIndex = 1;
 	<aui:model-context bean="<%= structure %>" model="<%= JournalStructure.class %>" />
 
 	<aui:fieldset>
-		<aui:field-wrapper label="id">
-			<c:choose>
-				<c:when test="<%= PropsValues.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
-					<c:choose>
-						<c:when test="<%= structure == null %>">
-							<liferay-ui:message key="autogenerate-id" />
+		<c:choose>
+			<c:when test="<%= structure == null %>">
+				<c:choose>
+					<c:when test="<%= PropsValues.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
+						<aui:input name="newStructureId" type="hidden" />
+						<aui:input name="autoStructureId" type="hidden" value="<%= true %>" />
+					</c:when>
+					<c:otherwise>
+						<aui:input cssClass="lfr-input-text-container" field="structureId" fieldParam="newStructureId" label="id" name="newStructureId" value="<%= newStructureId %>" />
 
-							<aui:input name="newStructureId" type="hidden" />
-							<aui:input name="autoStructureId" type="hidden" value="<%= true %>" />
-						</c:when>
-						<c:otherwise>
-							<%= structureId %>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:otherwise>
-					<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td>
-							<c:choose>
-								<c:when test="<%= structure == null %>">
-									<aui:input cssClass="lfr-input-text-container" field="structureId" fieldParam="newStructureId" label="" name="newStructureId" value="<%= newStructureId %>" />
-								</c:when>
-								<c:otherwise>
-									<%= structureId %>
-								</c:otherwise>
-							</c:choose>
-						</td>
-						<td style="padding-left: 30px;"></td>
-						<td>
-							<c:if test="<%= structure == null %>">
-								<aui:input inlineLabel="right" label="autogenerate-id" name="autoStructureId" type="checkbox" />
-							</c:if>
-						</td>
-					</tr>
-					</table>
-				</c:otherwise>
-			</c:choose>
-		</aui:field-wrapper>
+						<aui:input label="autogenerate-id" name="autoStructureId" type="checkbox" />
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+				<aui:field-wrapper label="id">
+					<%= structureId %>
+				</aui:field-wrapper>
+			</c:otherwise>
+		</c:choose>
 
 		<aui:input name="name" />
 

@@ -126,44 +126,26 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<aui:model-context bean="<%= template %>" model="<%= JournalTemplate.class %>" />
 
 	<aui:fieldset>
-		<aui:field-wrapper label="id">
-			<c:choose>
-				<c:when test="<%= PropsValues.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID %>">
-					<c:choose>
-						<c:when test="<%= template == null %>">
-							<liferay-ui:message key="autogenerate-id" />
+		<c:choose>
+			<c:when test="<%= template == null %>">
+				<c:choose>
+					<c:when test="<%= PropsValues.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID %>">
+						<aui:input name="newTemplateId" type="hidden" />
+						<aui:input name="autoTemplateId" type="hidden" value="<%= true %>" />
+					</c:when>
+					<c:otherwise>
+						<aui:input cssClass="lfr-input-text-container" label="id" name="newTemplateId" field="templateId" fieldParam="newTemplateId" value="<%= newTemplateId %>" />
 
-							<aui:input name="newTemplateId" type="hidden" />
-							<aui:input name="autoTemplateId" type="hidden" value="<%= true %>" />
-						</c:when>
-						<c:otherwise>
-							<%= templateId %>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:otherwise>
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<c:choose>
-								<c:when test="<%= template == null %>">
-									<aui:input cssClass="lfr-input-text-container" label="" name="newTemplateId" field="templateId" fieldParam="newTemplateId" value="<%= newTemplateId %>" />
-								</c:when>
-								<c:otherwise>
-									<%= templateId %>
-								</c:otherwise>
-							</c:choose>
-						</td>
-						<td>
-							<c:if test="<%= template == null %>">
-								<aui:input inlineLabel="right" label="autogenerate-id" name="autoTemplateId" type="checkbox" />
-							</c:if>
-						</td>
-					</tr>
-					</table>
-				</c:otherwise>
-			</c:choose>
-		</aui:field-wrapper>
+						<aui:input label="autogenerate-id" name="autoTemplateId" type="checkbox" />
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+				<aui:field-wrapper label="id">
+					<%= templateId %>
+				</aui:field-wrapper>
+			</c:otherwise>
+		</c:choose>
 
 		<aui:input cssClass="lfr-input-text-container" name="name" />
 

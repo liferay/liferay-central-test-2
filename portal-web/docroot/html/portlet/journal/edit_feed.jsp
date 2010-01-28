@@ -133,44 +133,26 @@ if (feed != null) {
 	<aui:model-context bean="<%= feed %>" model="<%= JournalFeed.class %>" />
 
 	<aui:fieldset>
-		<aui:field-wrapper label="id">
-			<c:choose>
-				<c:when test="<%= PropsValues.JOURNAL_FEED_FORCE_AUTOGENERATE_ID %>">
-					<c:choose>
-						<c:when test="<%= feed == null %>">
-							<liferay-ui:message key="autogenerate-id" />
+		<c:choose>
+			<c:when test="<%= feed == null %>">
+				<c:choose>
+					<c:when test="<%= PropsValues.JOURNAL_FEED_FORCE_AUTOGENERATE_ID %>">
+						<aui:input name="newFeedId" type="hidden" />
+						<aui:input name="autoFeedId" type="hidden" value="<%= true %>" />
+					</c:when>
+					<c:otherwise>
+						<aui:input cssClass="lfr-input-text-container" field="feedId" fieldParam="newFeedId" label="id" name="newFeedId" value="<%= newFeedId %>" />
 
-							<aui:input name="newFeedId" type="hidden" />
-							<aui:input name="autoFeedId" type="hidden" value="<%= true %>" />
-						</c:when>
-						<c:otherwise>
-							<%= feedId %>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:otherwise>
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<c:choose>
-								<c:when test="<%= feed == null %>">
-									<aui:input cssClass="lfr-input-text-container" field="feedId" fieldParam="newFeedId" label="" name="newFeedId" value="<%= newFeedId %>" />
-								</c:when>
-								<c:otherwise>
-									<%= feedId %>
-								</c:otherwise>
-							</c:choose>
-						</td>
-						<td>
-							<c:if test="<%= feed == null %>">
-								<aui:input inlineLabel="right" label="autogenerate-id" name="autoFeedId" type="checkbox" />
-							</c:if>
-						</td>
-					</tr>
-					</table>
-				</c:otherwise>
-			</c:choose>
-		</aui:field-wrapper>
+						<aui:input label="autogenerate-id" name="autoFeedId" type="checkbox" />
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+				<aui:field-wrapper label="id">
+					<%= feedId %>
+				</aui:field-wrapper>
+			</c:otherwise>
+		</c:choose>
 
 		<aui:input cssClass="lfr-input-text-container" name="name" />
 
@@ -223,9 +205,9 @@ if (feed != null) {
 
 					<aui:a href="<%= structureURL %>" label="<%= structureName %>" id="structureName" />
 
-					<aui:button name="selectStructureButton" onClick='<%= renderResponse.getNamespace() + "openStructureSelector();" %>' type="button" value="select" />
+					<aui:button name="selectStructureButton" onClick='<%= renderResponse.getNamespace() + "openStructureSelector();" %>' value="select" />
 
-					<aui:button disabled="<%= Validator.isNull(structureId) %>" name="removeStructureButton" onClick='<%= renderResponse.getNamespace() + "removeStructure();" %>' type="button" value="remove" />
+					<aui:button disabled="<%= Validator.isNull(structureId) %>" name="removeStructureButton" onClick='<%= renderResponse.getNamespace() + "removeStructure();" %>' value="remove" />
 				</aui:field-wrapper>
 
 				<aui:field-wrapper label="template">
@@ -233,7 +215,7 @@ if (feed != null) {
 						<c:when test="<%= templates.isEmpty() %>">
 							<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
 
-							<aui:button name="selectTemplateButton" onClick='<%= renderResponse.getNamespace() + "openTemplateSelector();" %>' type="button" value="select" />
+							<aui:button name="selectTemplateButton" onClick='<%= renderResponse.getNamespace() + "openTemplateSelector();" %>' value="select" />
 						</c:when>
 						<c:otherwise>
 							<liferay-ui:table-iterator
