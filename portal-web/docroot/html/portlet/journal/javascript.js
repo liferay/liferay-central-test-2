@@ -1,6 +1,7 @@
 AUI().add(
 	'liferay-portlet-journal',
 	function(A) {
+		var D = A.DataType;
 		var Lang = A.Lang;
 
 		var TPL_FIELD_CONTAINER = '<div><li class="structure-field">' +
@@ -2659,7 +2660,7 @@ AUI().add(
 						setter: function(v) {
 							var instance = this;
 
-							return instance.setAttribute('displayAsTooltip', instance.parseBoolean(v));
+							return instance.setAttribute('displayAsTooltip', D.Boolean.parse(v));
 						},
 						valueFn: function() {
 							var instance = this;
@@ -2770,7 +2771,7 @@ AUI().add(
 						setter: function(v) {
 							var instance = this;
 
-							return instance.setRepeatable(instance.parseBoolean(v));
+							return instance.setRepeatable(D.Boolean.parse(v));
 						},
 						valueFn: function() {
 							var instance = this;
@@ -2783,7 +2784,7 @@ AUI().add(
 						setter: function(v) {
 							var instance = this;
 
-							return instance.setAttribute('required', instance.parseBoolean(v));
+							return instance.setAttribute('required', D.Boolean.parse(v));
 						},
 						valueFn: function() {
 							var instance = this;
@@ -3024,10 +3025,6 @@ AUI().add(
 					return Journal.prototype.getRepeatedSiblings.apply(instance, [instance]);
 				},
 
-				parseBoolean: function(value) {
-				    return (value == "false") ? false : !!value;
-				},
-
 				propagateAttr: function(event) {
 					var instance = this;
 
@@ -3244,6 +3241,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: [ 'aui-base', 'context-panel', 'data-set', 'dialog', 'json', 'nested-list', 'substitute' ]
+		requires: [ 'aui-base', 'context-panel', 'aui-datatype', 'data-set', 'dialog', 'json', 'nested-list', 'substitute' ]
 	}
 );
