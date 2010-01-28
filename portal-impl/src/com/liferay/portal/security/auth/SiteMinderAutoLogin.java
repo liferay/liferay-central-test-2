@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
@@ -73,7 +74,8 @@ public class SiteMinderAutoLogin extends CASAutoLogin {
 					PropsValues.SITEMINDER_IMPORT_FROM_LDAP)) {
 
 				try {
-					user = importLDAPUser(companyId, screenName);
+					user = importLDAPUser(
+							companyId, StringPool.BLANK, screenName);
 				}
 				catch (SystemException se) {
 				}

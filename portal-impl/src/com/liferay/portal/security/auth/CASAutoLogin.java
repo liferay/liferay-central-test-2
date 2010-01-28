@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -56,6 +57,7 @@ import javax.servlet.http.HttpSession;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Wesley Gong
+ * @author Daeyoung Song
  */
 public class CASAutoLogin implements AutoLogin {
 
@@ -76,12 +78,16 @@ public class CASAutoLogin implements AutoLogin {
 
 			HttpSession session = request.getSession();
 
-			String screenName = (String)session.getAttribute(
-				CASFilter.SCREEN_NAME);
+			String login = (String)session.getAttribute(
+				CASFilter.LOGIN);
 
-			if (Validator.isNull(screenName)) {
+			if (Validator.isNull(login)) {
 				return credentials;
 			}
+
+			String authType = PrefsPropsUtil.getString(
+					companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
+					PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 
 			User user = null;
 
@@ -90,15 +96,28 @@ public class CASAutoLogin implements AutoLogin {
 					PropsValues.CAS_IMPORT_FROM_LDAP)) {
 
 				try {
-					user = importLDAPUser(companyId, screenName);
+					if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+						user = importLDAPUser(
+							companyId, StringPool.BLANK, login);
+					}
+					else {
+						user = importLDAPUser(
+							companyId, login, StringPool.BLANK);
+					}
 				}
 				catch (SystemException se) {
 				}
 			}
 
 			if (user == null) {
-				user = UserLocalServiceUtil.getUserByScreenName(
-					companyId, screenName);
+				if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+					user = UserLocalServiceUtil.getUserByScreenName(
+						companyId, login);
+				}
+				else {
+					user = UserLocalServiceUtil.getUserByEmailAddress(
+						companyId, login);
+				}
 			}
 
 			String redirect = ParamUtil.getString(request, "redirect");
@@ -128,10 +147,11 @@ public class CASAutoLogin implements AutoLogin {
 	protected User addUser(long companyId, String screenName)
 		throws Exception {
 
-		return importLDAPUser(companyId, screenName);
+		return importLDAPUser(companyId, StringPool.BLANK, screenName);
 	}
 
-	protected User importLDAPUser(long companyId, String screenName)
+	protected User importLDAPUser(
+			long companyId, String emailAddress, String screenName)
 		throws Exception {
 
 		LdapContext ctx = null;
@@ -164,7 +184,7 @@ public class CASAutoLogin implements AutoLogin {
 					"@company_id@", "@email_address@", "@screen_name@"
 				},
 				new String[] {
-					String.valueOf(companyId), StringPool.BLANK, screenName
+					String.valueOf(companyId), emailAddress, screenName
 				});
 
 			if (_log.isDebugEnabled()) {

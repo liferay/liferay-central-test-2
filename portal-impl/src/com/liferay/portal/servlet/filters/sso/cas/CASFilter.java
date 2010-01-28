@@ -58,8 +58,8 @@ import org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter
  */
 public class CASFilter extends BasePortalFilter {
 
-	public static String SCREEN_NAME =
-		CASFilter.class.getName() + "SCREEN_NAME";
+	public static String LOGIN =
+		CASFilter.class.getName() + "LOGIN";
 
 	public static void reload(long companyId) {
 		_casAuthenticationFilters.remove(companyId);
@@ -187,9 +187,9 @@ public class CASFilter extends BasePortalFilter {
 					AttributePrincipal attributePrincipal =
 						assertion.getPrincipal();
 
-					String screenName = attributePrincipal.getName();
+					String loginName = attributePrincipal.getName();
 
-					session.setAttribute(SCREEN_NAME, screenName);
+					session.setAttribute(LOGIN, loginName);
 				}
 			}
 		}
