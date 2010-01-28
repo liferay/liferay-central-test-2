@@ -27,8 +27,8 @@
 <%
 boolean column = GetterUtil.getBoolean((String)request.getAttribute("aui:fieldset:column"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:fieldset:cssClass"));
-String label = GetterUtil.getString((String)request.getAttribute("aui:fieldset:label"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:fieldset:dynamicAttributes");
+String label = GetterUtil.getString((String)request.getAttribute("aui:fieldset:label"));
 %>
 
 <fieldset class="aui-fieldset <%= cssClass %> <%= column ? "aui-column aui-form-column" : StringPool.BLANK %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>

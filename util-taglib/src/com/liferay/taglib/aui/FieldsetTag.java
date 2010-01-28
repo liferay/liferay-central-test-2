@@ -137,10 +137,10 @@ public class FieldsetTag extends IncludeTag implements DynamicAttributes {
 
 	private boolean _column;
 	private String _cssClass;
-	private String _label;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _endPage;
+	private String _label;
 	private String _startPage;
 
 }
