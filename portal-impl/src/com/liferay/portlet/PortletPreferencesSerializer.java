@@ -23,11 +23,12 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.xml.simple.Element;
-import com.liferay.portal.kernel.xml.stax.StAXReaderUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -36,13 +37,6 @@ import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.EndElement;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
-
 /**
  * <a href="PortletPreferencesSerializer.java.html"><b><i>View Source</i></b>
  * </a>
@@ -50,7 +44,6 @@ import javax.xml.stream.events.XMLEvent;
  * @author Brian Wing Shun Chan
  * @author Jon Steer
  * @author Zongliang Li
- * @author Shuyang Zhou
  */
 public class PortletPreferencesSerializer {
 
@@ -64,75 +57,50 @@ public class PortletPreferencesSerializer {
 		}
 
 		Map<String, Preference> preferencesMap = preferences.getPreferences();
-		XMLEventReader xmlEventReader = null;
-		try {
-			xmlEventReader = _xmlInputFactory.createXMLEventReader(
-				new UnsyncStringReader(xml));
 
-			while (xmlEventReader.hasNext()) {
-				XMLEvent xmlEvent = xmlEventReader.nextEvent();
-				if (xmlEvent.isStartElement()) {
-					StartElement startElement = xmlEvent.asStartElement();
-					String elementName = startElement.getName().getLocalPart();
-					if ("preference".equals(elementName)) {
-						Preference preference = _readPreference(xmlEventReader);
-						preferencesMap.put(preference.getName(), preference);
+		try {
+			Document doc = SAXReaderUtil.read(xml);
+
+			Element root = doc.getRootElement();
+
+			Iterator<Element> itr1 = root.elements("preference").iterator();
+
+			while (itr1.hasNext()) {
+				Element prefEl = itr1.next();
+
+				String name = prefEl.elementTextTrim("name");
+
+				List<String> values = new ArrayList<String>();
+
+				Iterator<Element> itr2 = prefEl.elements("value").iterator();
+
+				while (itr2.hasNext()) {
+					Element valueEl = itr2.next();
+
+					/*if (valueEl.nodeCount() <= 0) {
+						values.add(valueEl.getText());
 					}
+					else {
+						values.add(valueEl.node(0).asXML());
+					}*/
+
+					values.add(valueEl.getTextTrim());
 				}
+
+				boolean readOnly = GetterUtil.getBoolean(
+					prefEl.elementText("read-only"));
+
+				Preference preference = new Preference(
+					name, values.toArray(new String[values.size()]), readOnly);
+
+				preferencesMap.put(name, preference);
 			}
 
 			return preferences;
 		}
-		catch (XMLStreamException xse) {
-			throw new SystemException(xse);
+		catch (DocumentException de) {
+			throw new SystemException(de);
 		}
-		finally {
-			if (xmlEventReader != null) {
-				try {
-					xmlEventReader.close();
-				}
-				catch (XMLStreamException e) {
-				}
-			}
-		}
-	}
-
-	private static Preference _readPreference(XMLEventReader xmlEventReader)
-		throws XMLStreamException {
-
-		String name = null;
-		List<String> values = new ArrayList<String>();
-		boolean readOnly = false;
-
-		while (xmlEventReader.hasNext()) {
-
-			XMLEvent xmlEvent = xmlEventReader.nextEvent();
-			if (xmlEvent.isStartElement()) {
-				StartElement startElement = xmlEvent.asStartElement();
-				String elementName = startElement.getName().getLocalPart();
-				if ("name".equals(elementName)) {
-					name = StAXReaderUtil.readCharactersIfExist(xmlEventReader);
-				}
-				else if ("value".equals(elementName)) {
-					String value =
-						StAXReaderUtil.readCharactersIfExist(xmlEventReader);
-					values.add(value);
-				}
-				else if ("read-only".equals(elementName)) {
-					String value =
-						StAXReaderUtil.readCharactersIfExist(xmlEventReader);
-					readOnly = GetterUtil.getBoolean(value);
-				}
-			}
-			else if (xmlEvent.isEndElement()){
-				EndElement endElement = xmlEvent.asEndElement();
-				if ("preference".equals(endElement.getName().getLocalPart())) {
-					break;
-				}
-			}
-		}
-		return new Preference(name, values.toArray(new String[values.size()]),
-			readOnly);
 	}
 
 	public static PortletPreferencesImpl fromXML(
@@ -158,7 +126,8 @@ public class PortletPreferencesSerializer {
 	public static String toXML(PortletPreferencesImpl preferences) {
 		Map<String, Preference> preferencesMap = preferences.getPreferences();
 
-		Element portletPreferences = new Element("portlet-preferences", false);
+		Element portletPreferences = SAXReaderUtil.createElement(
+			"portlet-preferences");
 
 		Iterator<Map.Entry<String, Preference>> itr =
 			preferencesMap.entrySet().iterator();
@@ -168,23 +137,36 @@ public class PortletPreferencesSerializer {
 
 			Preference preference = entry.getValue();
 
-			Element prefEl = portletPreferences.addElement("preference");
+			Element prefEl = SAXReaderUtil.createElement("preference");
 
-			prefEl.addElement("name", preference.getName());
+			Element nameEl = SAXReaderUtil.createElement("name");
 
-			for(String value: preference.getValues()) {
-				prefEl.addElement("value", value);
+			nameEl.addText(preference.getName());
+
+			prefEl.add(nameEl);
+
+			String[] values = preference.getValues();
+
+			for (int i = 0; i < values.length; i++) {
+				Element valueEl = SAXReaderUtil.createElement("value");
+
+				valueEl.addText(values[i]);
+
+				prefEl.add(valueEl);
 			}
 
 			if (preference.isReadOnly()) {
-				prefEl.addElement("read-only", "true");
+				Element valueEl = SAXReaderUtil.createElement("read-only");
+
+				valueEl.addText("true");
+
+				prefEl.add(valueEl);
 			}
+
+			portletPreferences.add(prefEl);
 		}
 
-		return portletPreferences.toXMLString();
+		return portletPreferences.asXML();
 	}
-
-	private static XMLInputFactory _xmlInputFactory =
-		XMLInputFactory.newInstance();
 
 }
