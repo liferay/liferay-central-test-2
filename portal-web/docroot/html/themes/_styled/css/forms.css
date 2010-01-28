@@ -11,6 +11,10 @@ fieldset {
 	border-width: 0;
 }
 
+.aui-field-content {
+	margin: 10px 0;
+}
+
 legend {
 	font-weight: bold;
 	padding: 0 6px;
