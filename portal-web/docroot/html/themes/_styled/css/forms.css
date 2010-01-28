@@ -11,7 +11,7 @@ fieldset {
 	border-width: 0;
 }
 
-.aui-field-content {
+.aui-fieldset .aui-field-content {
 	margin: 10px 0;
 }
 
