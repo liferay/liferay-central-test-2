@@ -29,13 +29,11 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -78,7 +76,6 @@ import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.social.WikiActivityKeys;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
-import com.liferay.portlet.wiki.util.WikiIndexer;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
@@ -235,7 +232,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Indexer
 
 		if (page.isApproved()) {
-			reindex(page);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(WikiPage.class);
+
+			indexer.reindex(page);
 		}
 
 		// Cache
@@ -407,13 +406,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			WikiIndexer.deletePage(
-				page.getCompanyId(), page.getNodeId(), page.getTitle());
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + page.getPrimaryKey(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(WikiPage.class);
+
+		indexer.delete(page);
 
 		// Attachments
 
@@ -876,62 +871,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			WikiIndexer.deletePage(
-				page.getCompanyId(), page.getGroupId(), title);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + newTitle, se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(WikiPage.class);
 
-		reindex(page);
-	}
+		indexer.delete(
+			new Object[] {page.getCompanyId(), page.getNodeId(), title});
 
-	public void reindex(long resourcePrimKey) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		WikiPage page = null;
-
-		try {
-			page = wikiPageFinder.findByResourcePrimKey(resourcePrimKey);
-		}
-		catch (NoSuchPageException nspe) {
-			return;
-		}
-
-		reindex(page);
-	}
-
-	public void reindex(WikiPage page) throws SystemException {
-		if (Validator.isNotNull(page.getRedirectTitle())) {
-			return;
-		}
-
-		long companyId = page.getCompanyId();
-		long groupId = page.getGroupId();
-		long resourcePrimKey = page.getResourcePrimKey();
-		long nodeId = page.getNodeId();
-		String title = page.getTitle();
-		String content = page.getContent();
-		Date modifiedDate = page.getModifiedDate();
-
-		long[] assetCategoryIds = assetCategoryLocalService.getCategoryIds(
-			WikiPage.class.getName(), resourcePrimKey);
-		String[] assetTagNames = assetTagLocalService.getTagNames(
-			WikiPage.class.getName(), resourcePrimKey);
-
-		ExpandoBridge expandoBridge = page.getExpandoBridge();
-
-		try {
-			WikiIndexer.updatePage(
-				companyId, groupId, resourcePrimKey, nodeId, title, content,
-				modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
-		}
-		catch (SearchException se) {
-			_log.error("Reindexing " + page.getPrimaryKey(), se);
-		}
+		indexer.reindex(page);
 	}
 
 	public WikiPage revertPage(
@@ -1149,7 +1094,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			// Indexer
 
-			reindex(page);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(WikiPage.class);
+
+			indexer.reindex(page);
 		}
 
 		return wikiPagePersistence.update(page, false);
@@ -1571,8 +1518,5 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		validate(nodeId, content, format);
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(WikiPageLocalServiceImpl.class);
 
 }

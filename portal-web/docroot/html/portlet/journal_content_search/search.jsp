@@ -54,12 +54,15 @@
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 		try {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(JournalArticle.class);
 
-			// We must use QueryUtil.ALL_POS or else pagination will break. We
-			// need to filter the results with ContentHits first and then make a
-			// subset of the filtered results.
+			SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-			Hits results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), 0, themeDisplay.getUserId(), keywords, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			searchContext.setAttribute("type", type);
+			searchContext.setGroupId(0);
+			searchContext.setKeywords(keywords);
+
+			Hits results = indexer.search(searchContext);
 
 			String[] queryTerms = results.getQueryTerms();
 

@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -35,7 +34,6 @@ import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalContentSearch;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import java.util.List;
@@ -54,13 +52,8 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Journal Search: ";
 
-	public Hits getHits(
-			long companyId, long groupId, long userId, String keywords,
-			int start, int end)
-		throws Exception {
-
-		return JournalArticleLocalServiceUtil.search(
-			companyId, groupId, userId, keywords, start, end);
+	public String getPortletId() {
+		return JournalIndexer.PORTLET_ID;
 	}
 
 	public String getSearchPath() {

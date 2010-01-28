@@ -22,12 +22,14 @@
 
 package com.liferay.portal.plugin;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.PluginPackageNameAndContextComparator;
 import com.liferay.portal.kernel.plugin.Version;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -120,16 +122,14 @@ public class LocalPluginPackageRepository {
 			pluginPackages, new PluginPackageNameAndContextComparator());
 	}
 
-	public void removePluginPackage(PluginPackage pluginPackage) {
+	public void removePluginPackage(PluginPackage pluginPackage)
+		throws PortalException {
+
 		_pluginPackages.remove(pluginPackage.getContext());
 
-		try {
-			PluginPackageIndexer.removePluginPackage(
-				pluginPackage.getModuleId());
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + pluginPackage.getModuleId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(PluginPackage.class);
+
+		indexer.delete(pluginPackage);
 	}
 
 	public void removePluginPackage(String context) {

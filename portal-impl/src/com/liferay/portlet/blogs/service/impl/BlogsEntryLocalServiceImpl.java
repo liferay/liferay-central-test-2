@@ -31,14 +31,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -67,10 +61,8 @@ import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
-import com.liferay.portlet.blogs.util.BlogsIndexer;
 import com.liferay.portlet.blogs.util.BlogsUtil;
 import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
 
@@ -273,12 +265,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			BlogsIndexer.deleteEntry(entry.getCompanyId(), entry.getEntryId());
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + entry.getEntryId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
+
+		indexer.delete(entry);
 	}
 
 	public void deleteEntry(long entryId)
@@ -454,120 +443,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			organizationId, new Date(), status);
 	}
 
-	public void reindex(BlogsEntry entry) throws SystemException {
-		if (!entry.isApproved()) {
-			return;
-		}
-
-		long companyId = entry.getCompanyId();
-		long groupId = entry.getGroupId();
-		long userId = entry.getUserId();
-		String userName = entry.getUserName();
-		long entryId = entry.getEntryId();
-		String title = entry.getTitle();
-		String content = entry.getContent();
-		Date displayDate = entry.getDisplayDate();
-
-		String[] assetTagNames = assetTagLocalService.getTagNames(
-			BlogsEntry.class.getName(), entryId);
-
-		ExpandoBridge expandoBridge = entry.getExpandoBridge();
-
-		try {
-			BlogsIndexer.updateEntry(
-				companyId, groupId, userId, userName, entryId, title, content,
-				displayDate, assetTagNames, expandoBridge);
-		}
-		catch (SearchException se) {
-			_log.error("Reindexing " + entryId, se);
-		}
-	}
-
-	public void reindex(long entryId) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		BlogsEntry entry = blogsEntryPersistence.fetchByPrimaryKey(entryId);
-
-		if (entry == null) {
-			return;
-		}
-
-		reindex(entry);
-	}
-
-	public void reindex(String[] ids) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			reindexEntries(companyId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, long ownerUserId,
-			String keywords, int start, int end)
-		throws SystemException {
-
-		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
-
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, BlogsIndexer.PORTLET_ID);
-
-			if (groupId > 0) {
-				Group group = groupLocalService.getGroup(groupId);
-
-				if (group.isLayout()) {
-					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
-
-					groupId = group.getParentGroupId();
-				}
-
-				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
-			}
-
-			if (ownerUserId > 0) {
-				contextQuery.addRequiredTerm(Field.USER_ID, ownerUserId);
-			}
-
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
-
-			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.USER_NAME, keywords);
-				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.CONTENT, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-			}
-
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
-
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
-
-			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			return SearchEngineUtil.search(
-				companyId, groupId, userId, BlogsEntry.class.getName(),
-				fullQuery, start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
 	public void updateAsset(
 			long userId, BlogsEntry entry, long[] assetCategoryIds,
 			String[] assetTagNames)
@@ -709,16 +584,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Indexer
 
+		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
+
 		if (entry.isApproved()) {
-			reindex(entry);
+			indexer.reindex(entry);
 		}
 		else {
-			try {
-				BlogsIndexer.deleteEntry(entry.getCompanyId(), entryId);
-			}
-			catch (SearchException se) {
-				_log.error("Deleting index " + entry.getEntryId(), se);
-			}
+			indexer.delete(entry);
 		}
 
 		// Subscriptions
@@ -1146,30 +1018,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			entry.setTrackbacks(newTrackbacks);
 
 			blogsEntryPersistence.update(entry, false);
-		}
-	}
-
-	protected void reindexEntries(long companyId) throws SystemException {
-		int count = blogsEntryPersistence.countByCompanyId(companyId);
-
-		int pages = count / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= pages; i++) {
-			int start = (i * Indexer.DEFAULT_INTERVAL);
-			int end = start + Indexer.DEFAULT_INTERVAL;
-
-			reindexEntries(companyId, start, end);
-		}
-	}
-
-	protected void reindexEntries(long companyId, int start, int end)
-		throws SystemException {
-
-		List<BlogsEntry> entries = blogsEntryPersistence.findByCompanyId(
-			companyId, start, end);
-
-		for (BlogsEntry entry : entries) {
-			reindex(entry);
 		}
 	}
 

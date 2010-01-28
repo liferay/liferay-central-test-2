@@ -104,7 +104,13 @@ portletURL.setParameter("tabs1", tabs1);
 		searchContainer.setOrderByCol(orderByCol);
 		searchContainer.setOrderByType(orderByType);
 
-		List results = SCProductEntryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, keywords, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS).toList();
+		Indexer indexer = IndexerRegistryUtil.getIndexer(SCProductEntry.class);
+
+		SearchContext searchContext = SearchContextFactory.getInstance(request);
+
+		searchContext.setKeywords(keywords);
+
+		List results = indexer.search(searchContext).toList();
 
 		DocumentComparator docComparator = null;
 

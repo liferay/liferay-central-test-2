@@ -24,10 +24,8 @@ package com.liferay.portlet.bookmarks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
@@ -39,9 +37,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
-import com.liferay.portlet.bookmarks.util.BookmarksIndexer;
 import com.liferay.portlet.bookmarks.util.comparator.EntryModifiedDateComparator;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -118,7 +114,10 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Indexer
 
-		reindex(entry);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(
+			BookmarksEntry.class);
+
+		indexer.reindex(entry);
 
 		return entry;
 	}
@@ -205,13 +204,9 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Indexer
 
-		try {
-			BookmarksIndexer.deleteEntry(
-				entry.getCompanyId(), entry.getEntryId());
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + entry.getEntryId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(BookmarksEntry.class);
+
+		indexer.delete(entry);
 	}
 
 	public void deleteEntry(long entryId)
@@ -318,46 +313,6 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
-	public void reindex(BookmarksEntry entry) throws SystemException {
-		long companyId = entry.getCompanyId();
-		long groupId = entry.getGroupId();
-		long folderId = entry.getFolderId();
-		long entryId = entry.getEntryId();
-		String name = entry.getName();
-		String url = entry.getUrl();
-		String comments = entry.getComments();
-		Date modifiedDate = entry.getModifiedDate();
-
-		String[] assetTagNames = assetTagLocalService.getTagNames(
-			BookmarksEntry.class.getName(), entryId);
-
-		ExpandoBridge expandoBridge = entry.getExpandoBridge();
-
-		try {
-			BookmarksIndexer.updateEntry(
-				companyId, groupId, folderId, entryId, name, url, comments,
-				modifiedDate, assetTagNames, expandoBridge);
-		}
-		catch (SearchException se) {
-			_log.error("Reindexing " + entryId, se);
-		}
-	}
-
-	public void reindex(long entryId) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		BookmarksEntry entry = bookmarksEntryPersistence.fetchByPrimaryKey(
-			entryId);
-
-		if (entry == null) {
-			return;
-		}
-
-		reindex(entry);
-	}
-
 	public void updateAsset(
 			long userId, BookmarksEntry entry, long[] assetCategoryIds,
 			String[] assetTagNames)
@@ -403,7 +358,10 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Indexer
 
-		reindex(entry);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(
+			BookmarksEntry.class);
+
+		indexer.reindex(entry);
 
 		return entry;
 	}
@@ -440,8 +398,5 @@ public class BookmarksEntryLocalServiceImpl
 			}
 		}
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(BookmarksEntryLocalServiceImpl.class);
 
 }

@@ -22,25 +22,33 @@
 
 package com.liferay.portlet.imagegallery.util;
 
-import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
+import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -53,45 +61,69 @@ import javax.portlet.PortletURL;
  */
 public class IGIndexer extends BaseIndexer {
 
+	public static final String[] CLASS_NAMES = {IGImage.class.getName()};
+
 	public static final String PORTLET_ID = PortletKeys.IMAGE_GALLERY;
 
-	public static void addImage(
-			long companyId, long groupId, long folderId, long imageId,
-			String name, String description, Date modifiedDate,
-			long[] assetCategoryIds, String[] assetTagNames,
-			ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getImageDocument(
-			companyId, groupId, folderId, imageId, name, description,
-			modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
-
-		SearchEngineUtil.addDocument(companyId, document);
+	public String[] getClassNames() {
+		return CLASS_NAMES;
 	}
 
-	public static void deleteImage(long companyId, long imageId)
-		throws SearchException {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
-		SearchEngineUtil.deleteDocument(companyId, getImageUID(imageId));
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
+		}
+
+		String imageId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter("struts_action", "/image_gallery/edit_image");
+		portletURL.setParameter("imageId", imageId);
+
+		return new Summary(title, content, portletURL);
 	}
 
-	public static Document getImageDocument(
-		long companyId, long groupId, long folderId, long imageId,
-		String name, String description, Date modifiedDate,
-		long[] assetCategoryIds, String[] assetTagNames,
-		ExpandoBridge expandoBridge) {
+	protected void checkSearchFolderId(
+			long folderId, SearchContext searchContext)
+		throws Exception {
 
-		long scopeGroupId = groupId;
+		IGFolderServiceUtil.getFolder(folderId);
+	}
 
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+	protected void doDelete(Object obj) throws Exception {
+		IGImage image = (IGImage)obj;
 
-			if (group.isLayout()) {
-				groupId = group.getParentGroupId();
-			}
-		}
-		catch (Exception e) {
-		}
+		Document document = new DocumentImpl();
+
+		document.addUID(PORTLET_ID, image.getImageId());
+
+		SearchEngineUtil.deleteDocument(
+			image.getCompanyId(), document.get(Field.UID));
+	}
+
+	protected Document doGetDocument(Object obj) throws Exception {
+		IGImage image = (IGImage)obj;
+
+		long companyId = image.getCompanyId();
+		long groupId = getParentGroupId(image.getGroupId());
+		long scopeGroupId = image.getGroupId();
+		long folderId = image.getFolderId();
+		long imageId = image.getImageId();
+		String name = image.getName();
+		String description = image.getDescription();
+		Date modifiedDate = image.getModifiedDate();
+
+		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			IGImage.class.getName(), imageId);
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			IGImage.class.getName(), imageId);
+
+		ExpandoBridge expandoBridge = image.getExpandoBridge();
 
 		Document document = new DocumentImpl();
 
@@ -118,78 +150,118 @@ public class IGIndexer extends BaseIndexer {
 		return document;
 	}
 
-	public static String getImageUID(long imageId) {
-		Document document = new DocumentImpl();
+	protected void doReindex(Object obj) throws Exception {
+		IGImage image = (IGImage)obj;
 
-		document.addUID(PORTLET_ID, imageId);
-
-		return document.get(Field.UID);
-	}
-
-	public static void updateImage(
-			long companyId, long groupId, long folderId, long imageId,
-			String name, String description, Date modifiedDate,
-			long[] assetCategoryIds, String[] assetTagNames,
-			ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getImageDocument(
-			companyId, groupId, folderId, imageId, name, description,
-			modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
+		Document document = getDocument(image);
 
 		SearchEngineUtil.updateDocument(
-			companyId, document.get(Field.UID), document);
+			image.getCompanyId(), document.get(Field.UID), document);
 	}
 
-	public String[] getClassNames() {
-		return _CLASS_NAMES;
+	protected void doReindex(String className, long classPK) throws Exception {
+		IGImage image = IGImageLocalServiceUtil.getImage(classPK);
+
+		doReindex(image);
 	}
 
-	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
+	protected void doReindex(String[] ids) throws Exception {
+		long companyId = GetterUtil.getLong(ids[0]);
 
-		// Title
-
-		String title = document.get(Field.TITLE);
-
-		// Content
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
-		}
-
-		// Portlet URL
-
-		String imageId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter("struts_action", "/image_gallery/edit_image");
-		portletURL.setParameter("imageId", imageId);
-
-		return new Summary(title, content, portletURL);
+		reindexFolders(companyId);
+		reindexRoot(companyId);
 	}
 
-	public void reindex(String className, long classPK) throws SearchException {
-		try {
-			IGImageLocalServiceUtil.reindex(classPK);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
+	}
+
+	protected void reindexFolders(long companyId) throws Exception {
+		int folderCount = IGFolderLocalServiceUtil.getCompanyFoldersCount(
+			companyId);
+
+		int folderPages = folderCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= folderPages; i++) {
+			int folderStart = (i * Indexer.DEFAULT_INTERVAL);
+			int folderEnd = folderStart + Indexer.DEFAULT_INTERVAL;
+
+			reindexFolders(companyId, folderStart, folderEnd);
 		}
 	}
 
-	public void reindex(String[] ids) throws SearchException {
-		try {
-			IGFolderLocalServiceUtil.reindex(ids);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected void reindexFolders(
+			long companyId, int folderStart, int folderEnd)
+		throws Exception {
+
+		List<IGFolder> folders = IGFolderLocalServiceUtil.getCompanyFolders(
+			companyId, folderStart, folderEnd);
+
+		for (IGFolder folder : folders) {
+			long groupId = folder.getGroupId();
+			long folderId = folder.getFolderId();
+
+			int entryCount = IGImageLocalServiceUtil.getImagesCount(
+				groupId, folderId);
+
+			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int i = 0; i <= entryPages; i++) {
+				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
+				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
+
+				reindexImages(groupId, folderId, entryStart, entryEnd);
+			}
 		}
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		IGImage.class.getName()
-	};
+	protected void reindexImages(
+			long groupId, long folderId, int entryStart, int entryEnd)
+		throws Exception {
+
+		List<IGImage> images = IGImageLocalServiceUtil.getImages(
+			groupId, folderId, entryStart, entryEnd);
+
+		for (IGImage image : images) {
+			reindex(image);
+		}
+	}
+
+	protected void reindexRoot(long companyId) throws Exception {
+		int groupCount = GroupLocalServiceUtil.getCompanyGroupsCount(companyId);
+
+		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= groupPages; i++) {
+			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
+			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
+
+			reindexRoot(companyId, groupStart, groupEnd);
+		}
+	}
+
+	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
+		throws Exception {
+
+		List<Group> groups = GroupLocalServiceUtil.getCompanyGroups(
+			companyId, groupStart, groupEnd);
+
+		for (Group group : groups) {
+			long groupId = group.getGroupId();
+			long folderId = IGFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+
+			int entryCount = IGImageLocalServiceUtil.getImagesCount(
+				groupId, folderId);
+
+			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int j = 0; j <= entryPages; j++) {
+				int entryStart = (j * Indexer.DEFAULT_INTERVAL);
+				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
+
+				reindexImages(groupId, folderId, entryStart, entryEnd);
+			}
+		}
+	}
 
 }

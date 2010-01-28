@@ -1075,9 +1075,7 @@ public class MainServlet extends ActionServlet {
 
 			Indexer indexer = (Indexer)InstancePool.get(indexerClass);
 
-			for (String modelClassName : indexer.getClassNames()) {
-				IndexerRegistryUtil.register(modelClassName, indexer);
-			}
+			IndexerRegistryUtil.register(indexer);
 		}
 	}
 

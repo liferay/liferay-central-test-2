@@ -25,25 +25,31 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
+import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
@@ -51,6 +57,7 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -64,77 +71,111 @@ import javax.portlet.PortletURL;
  */
 public class MBIndexer extends BaseIndexer {
 
+	public static final String[] CLASS_NAMES = {MBMessage.class.getName()};
+
 	public static final String PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
 
-	public static void addMessage(
-			long companyId, long groupId, long userId, String userName,
-			long categoryId, long threadId, long messageId, String title,
-			String content, boolean anonymous, Date modifiedDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getMessageDocument(
-			companyId, groupId, userId, userName, categoryId, threadId,
-			messageId, title, content, anonymous, modifiedDate, assetTagNames,
-			expandoBridge);
-
-		SearchEngineUtil.addDocument(companyId, document);
+	public String[] getClassNames() {
+		return CLASS_NAMES;
 	}
 
-	public static void deleteMessage(long companyId, long messageId)
-		throws SearchException {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
-		SearchEngineUtil.deleteDocument(companyId, getMessageUID(messageId));
-	}
+		String title = document.get(Field.TITLE);
 
-	public static void deleteMessages(long companyId, long threadId)
-		throws SearchException {
+		String content = snippet;
 
-		BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create();
-
-		booleanQuery.addRequiredTerm(Field.PORTLET_ID, PORTLET_ID);
-
-		booleanQuery.addRequiredTerm("threadId", threadId);
-
-		Hits hits = SearchEngineUtil.search(
-			companyId, booleanQuery, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-		for (int i = 0; i < hits.getLength(); i++) {
-			Document document = hits.doc(i);
-
-			SearchEngineUtil.deleteDocument(companyId, document.get(Field.UID));
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
 		}
+
+		String messageId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter(
+			"struts_action", "/message_boards/view_message");
+		portletURL.setParameter("messageId", messageId);
+
+		return new Summary(title, content, portletURL);
 	}
 
-	public static Document getMessageDocument(
-		long companyId, long groupId, long userId, String userName,
-		long categoryId, long threadId, long messageId, String title,
-		String content, boolean anonymous, Date modifiedDate,
-		String[] assetTagNames, ExpandoBridge expandoBridge) {
+	protected void doDelete(Object obj) throws Exception {
+		if (obj instanceof MBCategory) {
+			MBCategory category = (MBCategory)obj;
 
-		long scopeGroupId = groupId;
+			BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create();
 
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+			booleanQuery.addRequiredTerm(Field.PORTLET_ID, PORTLET_ID);
 
-			if (group.isLayout()) {
-				groupId = group.getParentGroupId();
+			booleanQuery.addRequiredTerm(
+				"categoryId", category.getCategoryId());
+
+			Hits hits = SearchEngineUtil.search(
+				category.getCompanyId(), booleanQuery, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+			for (int i = 0; i < hits.getLength(); i++) {
+				Document document = hits.doc(i);
+
+				SearchEngineUtil.deleteDocument(
+					category.getCompanyId(), document.get(Field.UID));
 			}
 		}
-		catch (Exception e) {
-		}
+		else if (obj instanceof MBMessage) {
+			MBMessage message = (MBMessage)obj;
 
-		userName = PortalUtil.getUserName(userId, userName);
+			Document document = new DocumentImpl();
 
-		try {
-			content = BBCodeUtil.getHTML(content);
-		}
-		catch (Exception e) {
-			_log.error(
-				"Could not parse message " + messageId + ": " + e.getMessage());
-		}
+			document.addUID(PORTLET_ID, message.getMessageId());
 
-		content = HtmlUtil.extractText(content);
+			SearchEngineUtil.deleteDocument(
+				message.getCompanyId(), document.get(Field.UID));
+		}
+		else if (obj instanceof MBThread) {
+			MBThread thread = (MBThread)obj;
+
+			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+				thread.getCategoryId());
+
+			BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create();
+
+			booleanQuery.addRequiredTerm(Field.PORTLET_ID, PORTLET_ID);
+
+			booleanQuery.addRequiredTerm("threadId", thread.getThreadId());
+
+			Hits hits = SearchEngineUtil.search(
+				category.getCompanyId(), booleanQuery, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+			for (int i = 0; i < hits.getLength(); i++) {
+				Document document = hits.doc(i);
+
+				SearchEngineUtil.deleteDocument(
+					category.getCompanyId(), document.get(Field.UID));
+			}
+		}
+	}
+
+	protected Document doGetDocument(Object obj) throws Exception {
+		MBMessage message = (MBMessage)obj;
+
+		long companyId = message.getCompanyId();
+		long groupId = getParentGroupId(message.getGroupId());
+		long scopeGroupId = message.getGroupId();
+		long userId = message.getUserId();
+		String userName = PortalUtil.getUserName(userId, message.getUserName());
+		long categoryId = message.getCategoryId();
+		long threadId = message.getThreadId();
+		long messageId = message.getMessageId();
+		String title = message.getSubject();
+		String content = processContent(messageId, message.getBody());
+		boolean anonymous = message.isAnonymous();
+		Date modifiedDate = message.getModifiedDate();
+
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			MBMessage.class.getName(), messageId);
+
+		ExpandoBridge expandoBridge = message.getExpandoBridge();
 
 		Document document = new DocumentImpl();
 
@@ -174,82 +215,167 @@ public class MBIndexer extends BaseIndexer {
 
 		return document;
 	}
+	protected void doReindex(Object obj) throws Exception {
+		MBMessage message = (MBMessage)obj;
 
-	public static String getMessageUID(long messageId) {
-		Document document = new DocumentImpl();
+		if (message.isDiscussion() ||
+			(message.getStatus() != StatusConstants.APPROVED)) {
 
-		document.addUID(PORTLET_ID, messageId);
+			return;
+		}
 
-		return document.get(Field.UID);
-	}
-
-	public static void updateMessage(
-			long companyId, long groupId, long userId, String userName,
-			long categoryId, long threadId, long messageId, String title,
-			String content, boolean anonymous, Date modifiedDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getMessageDocument(
-			companyId, groupId, userId, userName, categoryId, threadId,
-			messageId, title, content, anonymous, modifiedDate, assetTagNames,
-			expandoBridge);
+		Document document = getDocument(message);
 
 		SearchEngineUtil.updateDocument(
-			companyId, document.get(Field.UID), document);
+			message.getCompanyId(), document.get(Field.UID), document);
 	}
 
-	public String[] getClassNames() {
-		return _CLASS_NAMES;
-	}
+	protected void doReindex(String className, long classPK) throws Exception {
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
-	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
+		doReindex(message);
 
-		// Title
+		if (message.isRoot()) {
+			List<MBMessage> messages =
+				MBMessageLocalServiceUtil.getThreadMessages(
+					message.getThreadId(), StatusConstants.APPROVED);
 
-		String title = document.get(Field.TITLE);
-
-		// Content
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+			for (MBMessage curMessage : messages) {
+				reindex(curMessage);
+			}
 		}
-
-		// Portlet URL
-
-		String messageId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter(
-			"struts_action", "/message_boards/view_message");
-		portletURL.setParameter("messageId", messageId);
-
-		return new Summary(title, content, portletURL);
+		else {
+			reindex(message);
+		}
 	}
 
-	public void reindex(String className, long classPK) throws SearchException {
+	protected void doReindex(String[] ids) throws Exception {
+		long companyId = GetterUtil.getLong(ids[0]);
+
+		reindexCategories(companyId);
+		reindexRoot(companyId);
+	}
+
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
+	}
+
+	protected void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		Long threadId = (Long)searchContext.getAttribute("threadId");
+
+		if ((threadId != null) && (threadId.longValue() > 0)) {
+			contextQuery.addTerm("threadId", threadId.longValue());
+		}
+	}
+
+	protected String processContent(long messageId, String content) {
 		try {
-			MBMessageLocalServiceUtil.reindex(classPK);
+			content = BBCodeUtil.getHTML(content);
 		}
 		catch (Exception e) {
-			throw new SearchException(e);
+			_log.error(
+				"Could not parse message " + messageId + ": " + e.getMessage());
+		}
+
+		content = HtmlUtil.extractText(content);
+
+		return content;
+	}
+
+	protected void reindexCategories(long companyId) throws Exception {
+		int categoryCount =
+			MBCategoryLocalServiceUtil.getCompanyCategoriesCount(companyId);
+
+		int categoryPages = categoryCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= categoryPages; i++) {
+			int categoryStart = (i * Indexer.DEFAULT_INTERVAL);
+			int categoryEnd = categoryStart + Indexer.DEFAULT_INTERVAL;
+
+			reindexCategories(companyId, categoryStart, categoryEnd);
 		}
 	}
 
-	public void reindex(String[] ids) throws SearchException {
-		try {
-			MBCategoryLocalServiceUtil.reindex(ids);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected void reindexCategories(
+			long companyId, int categoryStart, int categoryEnd)
+		throws Exception {
+
+		List<MBCategory> categories =
+			MBCategoryLocalServiceUtil.getCompanyCategories(
+				companyId, categoryStart, categoryEnd);
+
+		for (MBCategory category : categories) {
+			long groupId = category.getGroupId();
+			long categoryId = category.getCategoryId();
+
+			int messageCount =
+				MBMessageLocalServiceUtil.getCategoryMessagesCount(
+					groupId, categoryId, StatusConstants.APPROVED);
+
+			int messagePages = messageCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int i = 0; i <= messagePages; i++) {
+				int messageStart = (i * Indexer.DEFAULT_INTERVAL);
+				int messageEnd = messageStart + Indexer.DEFAULT_INTERVAL;
+
+				reindexMessages(groupId, categoryId, messageStart, messageEnd);
+			}
 		}
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		MBMessage.class.getName()
-	};
+	protected void reindexMessages(
+			long groupId, long categoryId, int messageStart, int messageEnd)
+		throws Exception {
+
+		List<MBMessage> messages =
+			MBMessageLocalServiceUtil.getCategoryMessages(
+				groupId, categoryId, StatusConstants.APPROVED, messageStart,
+				messageEnd);
+
+		for (MBMessage message : messages) {
+			reindex(message);
+		}
+	}
+
+	protected void reindexRoot(long companyId) throws Exception {
+		int groupCount = GroupLocalServiceUtil.getCompanyGroupsCount(companyId);
+
+		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= groupPages; i++) {
+			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
+			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
+
+			reindexRoot(companyId, groupStart, groupEnd);
+		}
+	}
+
+	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
+		throws Exception {
+
+		List<Group> groups = GroupLocalServiceUtil.getCompanyGroups(
+			companyId, groupStart, groupEnd);
+
+		for (Group group : groups) {
+			long groupId = group.getGroupId();
+			long categoryId = MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
+
+			int entryCount = MBMessageLocalServiceUtil.getCategoryMessagesCount(
+				groupId, categoryId, StatusConstants.APPROVED);
+
+			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int i = 0; i <= entryPages; i++) {
+				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
+				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
+
+				reindexMessages(groupId, categoryId, entryStart, entryEnd);
+			}
+		}
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(MBIndexer.class);
 

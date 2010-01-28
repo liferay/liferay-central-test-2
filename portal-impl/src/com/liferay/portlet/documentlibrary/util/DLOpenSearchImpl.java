@@ -22,9 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.search.HitsOpenSearchImpl;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 /**
  * <a href="DLOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
@@ -37,13 +35,8 @@ public class DLOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Document Library Search: ";
 
-	public Hits getHits(
-			long companyId, long groupId, long userId, String keywords,
-			int start, int end)
-		throws Exception {
-
-		return DLFolderLocalServiceUtil.search(
-			companyId, groupId, userId, null, keywords, start, end);
+	public String getPortletId() {
+		return DLIndexer.PORTLET_ID;
 	}
 
 	public String getSearchPath() {

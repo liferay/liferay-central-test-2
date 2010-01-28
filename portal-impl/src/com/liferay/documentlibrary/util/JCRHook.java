@@ -26,6 +26,7 @@ import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
@@ -36,6 +37,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -152,18 +155,28 @@ public class JCRHook extends BaseHook {
 				contentNode.getVersionHistory().addVersionLabel(
 					version.getName(), String.valueOf(DEFAULT_VERSION), false);
 
-				DLIndexerUtil.addFile(
-					companyId, portletId, groupId, repositoryId, fileName,
-					fileEntryId, properties, modifiedDate,
-					serviceContext.getAssetCategoryIds(),
-					serviceContext.getAssetTagNames());
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					FileModel.class);
+
+				FileModel fileModel = new FileModel();
+
+				fileModel.setAssetCategoryIds(
+					serviceContext.getAssetCategoryIds());
+				fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
+				fileModel.setCompanyId(companyId);
+				fileModel.setFileEntryId(fileEntryId);
+				fileModel.setFileName(fileName);
+				fileModel.setGroupId(groupId);
+				fileModel.setModifiedDate(modifiedDate);
+				fileModel.setPortletId(portletId);
+				fileModel.setProperties(properties);
+				fileModel.setRepositoryId(repositoryId);
+
+				indexer.reindex(fileModel);
 			}
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {
@@ -194,7 +207,7 @@ public class JCRHook extends BaseHook {
 
 	public void deleteDirectory(
 			long companyId, String portletId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		Session session = null;
 
@@ -223,9 +236,6 @@ public class JCRHook extends BaseHook {
 			else {
 				throw new PortalException(re);
 			}
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {
@@ -332,8 +342,17 @@ public class JCRHook extends BaseHook {
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
 			Node fileNode = repositoryNode.getNode(fileName);
 
-			DLIndexerUtil.deleteFile(
-				companyId, portletId, repositoryId, fileName);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileName(fileName);
+			fileModel.setPortletId(portletId);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.delete(fileModel);
 
 			fileNode.remove();
 
@@ -344,9 +363,6 @@ public class JCRHook extends BaseHook {
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {
@@ -553,12 +569,21 @@ public class JCRHook extends BaseHook {
 						JCRConstants.NT_FILE)) {
 
 					try {
-						Document doc = DLIndexerUtil.getFileDocument(
-							companyId, portletId, groupId, repositoryId,
-							node.getName());
+						Indexer indexer = IndexerRegistryUtil.getIndexer(
+							FileModel.class);
+
+						FileModel fileModel = new FileModel();
+
+						fileModel.setCompanyId(companyId);
+						fileModel.setFileName(node.getName());
+						fileModel.setGroupId(groupId);
+						fileModel.setPortletId(portletId);
+						fileModel.setRepositoryId(repositoryId);
+
+						Document document = indexer.getDocument(fileModel);
 
 						SearchEngineUtil.updateDocument(
-							companyId, doc.get(Field.UID), doc);
+							companyId, document.get(Field.UID), document);
 					}
 					catch (Exception e2) {
 						_log.error("Reindexing " + node.getName(), e2);
@@ -647,15 +672,22 @@ public class JCRHook extends BaseHook {
 
 				session.save();
 
-				try {
-					DLIndexerUtil.deleteFile(
-						companyId, portletId, repositoryId, fileName);
-				}
-				catch (SearchException se) {
-				}
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					FileModel.class);
 
-				DLIndexerUtil.addFile(
-					companyId, portletId, groupId, newRepositoryId, fileName);
+				FileModel fileModel = new FileModel();
+
+				fileModel.setCompanyId(companyId);
+				fileModel.setFileName(fileName);
+				fileModel.setPortletId(portletId);
+				fileModel.setRepositoryId(repositoryId);
+
+				indexer.delete(fileModel);
+
+				fileModel.setRepositoryId(newRepositoryId);
+				fileModel.setGroupId(groupId);
+
+				indexer.reindex(fileModel);
 			}
 		}
 		catch (PathNotFoundException pnfe) {
@@ -663,9 +695,6 @@ public class JCRHook extends BaseHook {
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {
@@ -707,20 +736,29 @@ public class JCRHook extends BaseHook {
 			contentNode.getVersionHistory().addVersionLabel(
 				version.getName(), versionLabel, false);
 
-			DLIndexerUtil.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate,
-				serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setAssetCategoryIds(serviceContext.getAssetCategoryIds());
+			fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileEntryId(fileEntryId);
+			fileModel.setFileName(fileName);
+			fileModel.setGroupId(groupId);
+			fileModel.setModifiedDate(modifiedDate);
+			fileModel.setPortletId(portletId);
+			fileModel.setProperties(properties);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.reindex(fileModel);
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {
@@ -790,15 +828,22 @@ public class JCRHook extends BaseHook {
 			session.save();
 
 			if (reindex) {
-				try {
-					DLIndexerUtil.deleteFile(
-						companyId, portletId, repositoryId, fileName);
-				}
-				catch (SearchException se) {
-				}
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					FileModel.class);
 
-				DLIndexerUtil.addFile(
-					companyId, portletId, groupId, repositoryId, newFileName);
+				FileModel fileModel = new FileModel();
+
+				fileModel.setCompanyId(companyId);
+				fileModel.setFileName(fileName);
+				fileModel.setPortletId(portletId);
+				fileModel.setRepositoryId(repositoryId);
+
+				indexer.delete(fileModel);
+
+				fileModel.setFileName(newFileName);
+				fileModel.setGroupId(groupId);
+
+				indexer.reindex(fileModel);
 			}
 		}
 		catch (PathNotFoundException pnfe) {
@@ -806,9 +851,6 @@ public class JCRHook extends BaseHook {
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {
@@ -824,6 +866,14 @@ public class JCRHook extends BaseHook {
 		try {
 			NodeIterator itr = dirNode.getNodes();
 
+			FileModel fileModel = new FileModel();
+
+			fileModel.setCompanyId(companyId);
+			fileModel.setPortletId(portletId);
+			fileModel.setRepositoryId(repositoryId);
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
+
 			while (itr.hasNext()) {
 				Node node = (Node)itr.next();
 
@@ -834,13 +884,15 @@ public class JCRHook extends BaseHook {
 					deleteDirectory(companyId, portletId, repositoryId, node);
 				}
 				else if (primaryNodeTypeName.equals(JCRConstants.NT_FILE)) {
-					DLIndexerUtil.deleteFile(
-						companyId, portletId, repositoryId, node.getName());
+					fileModel.setFileName(node.getName());
+
+					indexer.delete(fileModel);
 				}
 			}
 
-			DLIndexerUtil.deleteFile(
-				companyId, portletId, repositoryId, dirNode.getName());
+			fileModel.setFileName(dirNode.getName());
+
+			indexer.delete(fileModel);
 		}
 		catch (RepositoryException e) {
 			_log.error(e);

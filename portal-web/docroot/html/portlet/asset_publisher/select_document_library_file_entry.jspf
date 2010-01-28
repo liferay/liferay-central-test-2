@@ -98,7 +98,17 @@ portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 		try {
-			Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), groupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+			Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
+
+			SearchContext searchContext = SearchContextFactory.getInstance(request);
+
+			searchContext.setEnd(searchContainer.getEnd());
+			searchContext.setFolderIds(folderIdsArray);
+			searchContext.setGroupId(groupId);
+			searchContext.setKeywords(keywords);
+			searchContext.setStart(searchContainer.getStart());
+
+			Hits results = indexer.search(searchContext);
 
 			int total = results.getLength();
 

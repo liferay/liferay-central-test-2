@@ -94,12 +94,14 @@ String keywords = ParamUtil.getString(request, "keywords");
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 	try {
+		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
 
-		// We must use QueryUtil.ALL_POS or else pagination will break. We need to
-		// filter the results with ThreadHits first and then make a subset of the
-		// filtered results.
+		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-		Hits results = MBCategoryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), categoryIdsArray, threadId, keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		searchContext.setCategoryIds(categoryIdsArray);
+		searchContext.setKeywords(keywords);
+
+		Hits results = indexer.search(searchContext);
 
 		ThreadHits threadHits = new ThreadHits();
 

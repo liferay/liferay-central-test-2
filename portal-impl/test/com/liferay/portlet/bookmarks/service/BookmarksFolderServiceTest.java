@@ -22,10 +22,12 @@
 
 package com.liferay.portlet.bookmarks.service;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -69,13 +71,19 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		long companyId = entry.getCompanyId();
 		long groupId = entry.getFolder().getGroupId();
-		long userId = 0;
 		long folderId = entry.getFolderId();
 		String keywords = "test";
 
-		Hits hits = BookmarksFolderLocalServiceUtil.search(
-			companyId, groupId, userId, new long[] {folderId}, keywords,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		SearchContext searchContext = new SearchContext();
+
+		searchContext.setCompanyId(companyId);
+		searchContext.setFolderIds(new long[] {folderId});
+		searchContext.setGroupId(groupId);
+		searchContext.setKeywords(keywords);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(BookmarksEntry.class);
+
+		Hits hits = indexer.search(searchContext);
 
 		assertEquals(1, hits.getLength());
 
@@ -102,9 +110,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		Thread.sleep(1000);
 
-		hits = BookmarksFolderLocalServiceUtil.search(
-			companyId, groupId, userId, new long[] {folderId}, keywords,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		hits = indexer.search(searchContext);
 
 		assertEquals(0, hits.getLength());
 
@@ -115,8 +121,11 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		Thread.sleep(1000);
 
-		hits = BookmarksFolderLocalServiceUtil.search(
-			companyId, groupId, userId, null, keywords, 1, 3);
+		searchContext.setEnd(3);
+		searchContext.setFolderIds(null);
+		searchContext.setStart(1);
+
+		hits = indexer.search(searchContext);
 
 		assertEquals(4, hits.getLength());
 		assertEquals(2, hits.getDocs().length);

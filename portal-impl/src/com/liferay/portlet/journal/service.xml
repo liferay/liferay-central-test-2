@@ -86,6 +86,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="urlTitle" />
 		</finder>
+		<finder name="C_S" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="status" />
+		</finder>
 		<finder name="G_A_V" return-type="JournalArticle" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />

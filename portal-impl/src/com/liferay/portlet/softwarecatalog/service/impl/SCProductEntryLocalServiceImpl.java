@@ -24,19 +24,10 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.Version;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -46,13 +37,11 @@ import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
@@ -67,7 +56,6 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServiceBaseImpl;
-import com.liferay.portlet.softwarecatalog.util.SCIndexer;
 import com.liferay.util.xml.DocUtil;
 
 import java.net.MalformedURLException;
@@ -167,7 +155,9 @@ public class SCProductEntryLocalServiceImpl
 
 		// Indexer
 
-		reindex(productEntry);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(SCProductEntry.class);
+
+		indexer.reindex(productEntry);
 
 		return productEntry;
 	}
@@ -276,14 +266,22 @@ public class SCProductEntryLocalServiceImpl
 
 		// Indexer
 
-		try {
-			SCIndexer.deleteProductEntry(
-				productEntry.getCompanyId(), productEntry.getProductEntryId());
-		}
-		catch (SearchException se) {
-			_log.error(
-				"Deleting index " + productEntry.getProductEntryId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(SCProductEntry.class);
+
+		indexer.delete(productEntry);
+	}
+
+	public List<SCProductEntry> getCompanyProductEntries(
+			long companyId, int start, int end)
+		throws SystemException {
+
+		return scProductEntryPersistence.findByCompanyId(companyId, start, end);
+	}
+
+	public int getCompanyProductEntriesCount(long companyId)
+		throws SystemException {
+
+		return scProductEntryPersistence.countByCompanyId(companyId);
 	}
 
 	public List<SCProductEntry> getProductEntries(
@@ -408,128 +406,6 @@ public class SCProductEntryLocalServiceImpl
 		return doc.asXML();
 	}
 
-	public void reindex(long productEntryId) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		SCProductEntry productEntry =
-			scProductEntryPersistence.fetchByPrimaryKey(productEntryId);
-
-		if (productEntry == null) {
-			return;
-		}
-
-		reindex(productEntry);
-	}
-
-	public void reindex(SCProductEntry productEntry) throws SystemException {
-		long companyId = productEntry.getCompanyId();
-		long groupId = productEntry.getGroupId();
-		long userId = productEntry.getUserId();
-		String userName = productEntry.getUserName();
-		long productEntryId = productEntry.getProductEntryId();
-		String name = productEntry.getName();
-		Date modifiedDate = productEntry.getModifiedDate();
-
-		String version = StringPool.BLANK;
-
-		SCProductVersion latestProductVersion = productEntry.getLatestVersion();
-
-		if (latestProductVersion != null) {
-			version = latestProductVersion.getVersion();
-		}
-
-		String type = productEntry.getType();
-		String shortDescription = productEntry.getShortDescription();
-		String longDescription = productEntry.getLongDescription();
-		String pageURL = productEntry.getPageURL();
-		String repoGroupId = productEntry.getRepoGroupId();
-		String repoArtifactId = productEntry.getRepoArtifactId();
-
-		ExpandoBridge expandoBridge = productEntry.getExpandoBridge();
-
-		try {
-			SCIndexer.updateProductEntry(
-				companyId, groupId, userId, userName, productEntryId, name,
-				modifiedDate, version, type, shortDescription, longDescription,
-				pageURL, repoGroupId, repoArtifactId, expandoBridge);
-		}
-		catch (SearchException se) {
-			_log.error("Reindexing " + productEntry.getProductEntryId(), se);
-		}
-	}
-
-	public void reindex(String[] ids) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			reindexProductEntries(companyId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public Hits search(
-			long companyId, long groupId, String keywords, String type,
-			int start, int end)
-		throws SystemException {
-
-		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
-
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, SCIndexer.PORTLET_ID);
-
-			if (groupId > 0) {
-				Group group = groupLocalService.getGroup(groupId);
-
-				if (group.isLayout()) {
-					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
-
-					groupId = group.getParentGroupId();
-				}
-
-				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
-			}
-
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
-
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
-
-			if (Validator.isNotNull(keywords)) {
-				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
-
-				searchQuery.addTerm(Field.USER_NAME, keywords);
-				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.CONTENT, keywords);
-
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			if (Validator.isNotNull(type)) {
-				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
-
-				searchQuery.addRequiredTerm("type", type);
-
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			return SearchEngineUtil.search(companyId, fullQuery, start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
 	public SCProductEntry updateProductEntry(
 			long productEntryId, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
@@ -580,7 +456,9 @@ public class SCProductEntryLocalServiceImpl
 
 		// Indexer
 
-		reindex(productEntry);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(SCProductEntry.class);
+
+		indexer.reindex(productEntry);
 
 		return productEntry;
 	}
@@ -714,32 +592,6 @@ public class SCProductEntryLocalServiceImpl
 		}
 	}
 
-	protected void reindexProductEntries(long companyId)
-		throws SystemException {
-
-		int count = scProductEntryPersistence.countByCompanyId(companyId);
-
-		int pages = count / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= pages; i++) {
-			int start = (i * Indexer.DEFAULT_INTERVAL);
-			int end = start + Indexer.DEFAULT_INTERVAL;
-
-			reindexProductEntries(companyId, start, end);
-		}
-	}
-
-	protected void reindexProductEntries(long companyId, int start, int end)
-		throws SystemException {
-
-		List<SCProductEntry> productEntries =
-			scProductEntryPersistence.findByCompanyId(companyId, start, end);
-
-		for (SCProductEntry productEntry : productEntries) {
-			reindex(productEntry);
-		}
-	}
-
 	protected void saveProductScreenshots(
 			SCProductEntry productEntry, List<byte[]> thumbnails,
 			List<byte[]> fullImages)
@@ -866,8 +718,5 @@ public class SCProductEntryLocalServiceImpl
 			}
 		}
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(SCProductEntryLocalServiceImpl.class);
 
 }

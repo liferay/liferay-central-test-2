@@ -22,20 +22,27 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -56,56 +63,72 @@ import javax.portlet.PortletURL;
  */
 public class JournalIndexer extends BaseIndexer {
 
+	public static final String[] CLASS_NAMES = {JournalArticle.class.getName()};
+
 	public static final String PORTLET_ID = PortletKeys.JOURNAL;
 
-	public static void addArticle(
-			long companyId, long groupId, long resourcePrimKey,
-			String articleId, double version, String title, String description,
-			String content, String type, Date displayDate,
-			long[] assetCategoryIds, String[] assetTagNames,
-			ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getArticleDocument(
-			companyId, groupId, resourcePrimKey, articleId, version, title,
-			description, content, type, displayDate, assetCategoryIds,
-			assetTagNames, expandoBridge);
-
-		SearchEngineUtil.addDocument(companyId, document);
+	public String[] getClassNames() {
+		return CLASS_NAMES;
 	}
 
-	public static void deleteArticle(
-			long companyId, long groupId, String articleId)
-		throws SearchException {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
-		SearchEngineUtil.deleteDocument(
-			companyId, getArticleUID(groupId, articleId));
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String groupId = document.get("groupId");
+		String articleId = document.get(Field.ENTRY_CLASS_PK);
+		String version = document.get("version");
+
+		portletURL.setParameter("struts_action", "/journal/edit_article");
+		portletURL.setParameter("groupId", groupId);
+		portletURL.setParameter("articleId", articleId);
+		portletURL.setParameter("version", version);
+
+		return new Summary(title, content, portletURL);
 	}
 
-	public static Document getArticleDocument(
-		long companyId, long groupId, long resourcePrimKey, String articleId,
-		double version, String title, String description, String content,
-		String type, Date displayDate, long[] assetCategoryIds,
-		String[] assetTagNames, ExpandoBridge expandoBridge) {
+	protected void doDelete(Object obj) throws Exception {
+		JournalArticle article = (JournalArticle)obj;
 
 		Document document = new DocumentImpl();
 
-		if ((content != null) &&
-			((content.indexOf("<dynamic-content") != -1) ||
-			 (content.indexOf("<static-content") != -1))) {
+		document.addUID(
+			PORTLET_ID, article.getGroupId(), article.getArticleId());
 
-			content = _getIndexableContent(document, content);
+		SearchEngineUtil.deleteDocument(
+			article.getCompanyId(), document.get(Field.UID));
+	}
 
-			content = StringUtil.replace(
-				content, "<![CDATA[", StringPool.BLANK);
-			content = StringUtil.replace(content, "]]>", StringPool.BLANK);
-		}
+	protected Document doGetDocument(Object obj) throws Exception {
+		JournalArticle article = (JournalArticle)obj;
 
-		content = StringUtil.replace(content, "&amp;", "&");
-		content = StringUtil.replace(content, "&lt;", "<");
-		content = StringUtil.replace(content, "&gt;", ">");
+		long companyId = article.getCompanyId();
+		long groupId = getParentGroupId(article.getGroupId());
+		long scopeGroupId = article.getGroupId();
+		long resourcePrimKey = article.getResourcePrimKey();
+		String articleId = article.getArticleId();
+		double version = article.getVersion();
+		String title = article.getTitle();
+		String description = article.getDescription();
+		String content = article.getContent();
+		String type = article.getType();
+		Date displayDate = article.getDisplayDate();
 
-		content = HtmlUtil.extractText(content);
+		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			JournalArticle.class.getName(), resourcePrimKey);
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			JournalArticle.class.getName(), resourcePrimKey);
+
+		ExpandoBridge expandoBridge = article.getExpandoBridge();
+
+		Document document = new DocumentImpl();
 
 		document.addUID(PORTLET_ID, groupId, articleId);
 
@@ -114,9 +137,10 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.COMPANY_ID, companyId);
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.GROUP_ID, groupId);
+		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 
 		document.addText(Field.TITLE, title);
-		document.addText(Field.CONTENT, content);
+		document.addText(Field.CONTENT, processContent(document, content));
 		document.addText(Field.DESCRIPTION, description);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
@@ -133,153 +157,110 @@ public class JournalIndexer extends BaseIndexer {
 		return document;
 	}
 
-	public static String getArticleUID(long groupId, String articleId) {
-		Document document = new DocumentImpl();
+	protected void doReindex(Object obj) throws Exception {
+		JournalArticle article = (JournalArticle)obj;
 
-		document.addUID(PORTLET_ID, groupId, articleId);
+		if (!article.isApproved() || !article.isIndexable()) {
+			return;
+		}
 
-		return document.get(Field.UID);
-	}
-
-	public static void updateArticle(
-			long companyId, long groupId, long resourcePrimKey,
-			String articleId, double version, String title, String description,
-			String content, String type, Date displayDate,
-			long[] assetCategoryIds, String[] assetTagNames,
-			ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getArticleDocument(
-			companyId, groupId, resourcePrimKey, articleId, version, title,
-			description, content, type, displayDate, assetCategoryIds,
-			assetTagNames, expandoBridge);
+		Document document = getDocument(article);
 
 		SearchEngineUtil.updateDocument(
-			companyId, document.get(Field.UID), document);
+			article.getCompanyId(), document.get(Field.UID), document);
 	}
 
-	public String[] getClassNames() {
-		return _CLASS_NAMES;
+	protected void doReindex(String className, long classPK) throws Exception {
+		JournalArticle article =
+			JournalArticleLocalServiceUtil.getLatestArticle(
+				classPK, StatusConstants.APPROVED);
+
+		doReindex(article);
 	}
 
-	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
+	protected void doReindex(String[] ids) throws Exception {
+		long companyId = GetterUtil.getLong(ids[0]);
 
-		// Title
-
-		String title = document.get(Field.TITLE);
-
-		// Content
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		// Portlet URL
-
-		String groupId = document.get("groupId");
-		String articleId = document.get(Field.ENTRY_CLASS_PK);
-		String version = document.get("version");
-
-		portletURL.setParameter("struts_action", "/journal/edit_article");
-		portletURL.setParameter("groupId", groupId);
-		portletURL.setParameter("articleId", articleId);
-		portletURL.setParameter("version", version);
-
-		return new Summary(title, content, portletURL);
+		reindexArticles(companyId);
 	}
 
-	public void reindex(String className, long classPK) throws SearchException {
-		try {
-			JournalArticleLocalServiceUtil.reindex(classPK);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
-	}
-
-	public void reindex(String[] ids) throws SearchException {
-		try {
-			JournalArticleLocalServiceUtil.reindex(ids);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
-	}
-
-	private static String _getIndexableContent(Document doc, String content) {
+	protected String getIndexableContent(Document document, String content) {
 		try {
 			StringBuilder sb = new StringBuilder();
 
-			com.liferay.portal.kernel.xml.Document contentDoc =
+			com.liferay.portal.kernel.xml.Document contentDocument =
 				SAXReaderUtil.read(content);
 
-			Element root = contentDoc.getRootElement();
+			Element rootElement = contentDocument.getRootElement();
 
-			_getIndexableContent(sb, doc, root);
+			getIndexableContent(sb, document, rootElement);
 
 			return sb.toString();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 
 			return content;
 		}
 	}
 
-	private static void _getIndexableContent(
-			StringBuilder sb, Document doc, Element root)
+	protected void getIndexableContent(
+			StringBuilder sb, Document document, Element rootElement)
 		throws Exception {
 
-		for (Element el : root.elements()) {
-			String elType = el.attributeValue("type", StringPool.BLANK);
-			String elIndexType = el.attributeValue(
+		for (Element element : rootElement.elements()) {
+			String elType = element.attributeValue("type", StringPool.BLANK);
+			String elIndexType = element.attributeValue(
 				"index-type", StringPool.BLANK);
 
-			_indexField(doc, el, elType, elIndexType);
+			indexField(document, element, elType, elIndexType);
 
 			if (elType.equals("text") || elType.equals("text_box") ||
 				elType.equals("text_area")) {
 
-				for (Element dynamicContent : el.elements("dynamic-content")) {
-					String text = dynamicContent.getText();
+				for (Element dynamicContentElement :
+						element.elements("dynamic-content")) {
+
+					String text = dynamicContentElement.getText();
 
 					sb.append(text);
 					sb.append(StringPool.SPACE);
 				}
 			}
-			else if (el.getName().equals("static-content")) {
-				String text = el.getText();
+			else if (element.getName().equals("static-content")) {
+				String text = element.getText();
 
 				sb.append(text);
 				sb.append(StringPool.SPACE);
 			}
 
-			_getIndexableContent(sb, doc, el);
+			getIndexableContent(sb, document, element);
 		}
 	}
 
-	private static void _indexField(
-		Document document, Element el, String elType, String elIndexType) {
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
+	}
+
+	protected void indexField(
+		Document document, Element element, String elType, String elIndexType) {
 
 		if (Validator.isNull(elIndexType)) {
 			return;
 		}
 
-		Element dynamicContent = el.element("dynamic-content");
+		Element dynamicContentElement = element.element("dynamic-content");
 
-		String name = el.attributeValue("name", StringPool.BLANK);
-		String[] value = new String[] {dynamicContent.getText()};
+		String name = element.attributeValue("name", StringPool.BLANK);
+		String[] value = new String[] {dynamicContentElement.getText()};
 
 		if (elType.equals("multi-list")) {
-			List<Element> options = dynamicContent.elements();
+			List<Element> optionElements = dynamicContentElement.elements();
 
-			value = new String[options.size()];
+			value = new String[optionElements.size()];
 
-			for (int i = 0; i < options.size(); i++) {
-				value[i] = options.get(i).getText();
+			for (int i = 0; i < optionElements.size(); i++) {
+				value[i] = optionElements.get(i).getText();
 			}
 		}
 
@@ -291,8 +272,53 @@ public class JournalIndexer extends BaseIndexer {
 		}
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		JournalArticle.class.getName()
-	};
+	protected String processContent(Document document, String content) {
+		if ((content != null) &&
+			((content.indexOf("<dynamic-content") != -1) ||
+			 (content.indexOf("<static-content") != -1))) {
+
+			content = getIndexableContent(document, content);
+
+			content = StringUtil.replace(
+				content, "<![CDATA[", StringPool.BLANK);
+			content = StringUtil.replace(content, "]]>", StringPool.BLANK);
+		}
+
+		content = StringUtil.replace(content, "&amp;", "&");
+		content = StringUtil.replace(content, "&lt;", "<");
+		content = StringUtil.replace(content, "&gt;", ">");
+
+		content = HtmlUtil.extractText(content);
+
+		return content;
+	}
+
+	protected void reindexArticles(long companyId) throws Exception {
+		int count = JournalArticleLocalServiceUtil.getCompanyArticlesCount(
+			companyId, StatusConstants.APPROVED);
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			reindexArticles(companyId, start, end);
+		}
+	}
+
+	protected void reindexArticles(long companyId, int start, int end)
+		throws Exception {
+
+		List<JournalArticle> articles =
+			JournalArticleLocalServiceUtil.getCompanyArticles(
+				companyId, StatusConstants.APPROVED, start, end);
+
+		for (JournalArticle article : articles) {
+			reindex(article);
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(JournalIndexer.class);
 
 }

@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -272,18 +271,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return lockLocalService.refresh(lockUuid, expirationTime);
-	}
-
-	public void reindexSearch(long companyId)
-		throws PortalException, SystemException {
-
-		if (!getPermissionChecker().isOmniadmin()) {
-			throw new PrincipalException();
-		}
-
-		String[] ids = new String[] {String.valueOf(companyId)};
-
-		dlFolderLocalService.reindex(ids);
 	}
 
 	public void unlockFolder(long groupId, long folderId, String lockUuid)

@@ -22,9 +22,7 @@
 
 package com.liferay.portlet.calendar.util;
 
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.search.HitsOpenSearchImpl;
-import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
 /**
  * <a href="CalendarOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
@@ -37,13 +35,8 @@ public class CalendarOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Calendar Search: ";
 
-	public Hits getHits(
-			long companyId, long groupId, long userId, String keywords,
-			int start, int end)
-		throws Exception {
-
-		return CalEventLocalServiceUtil.search(
-			companyId, groupId, userId, 0, keywords, start, end);
+	public String getPortletId() {
+		return CalIndexer.PORTLET_ID;
 	}
 
 	public String getSearchPath() {

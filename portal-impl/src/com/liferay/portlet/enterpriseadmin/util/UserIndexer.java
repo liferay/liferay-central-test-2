@@ -22,27 +22,38 @@
 
 package com.liferay.portlet.enterpriseadmin.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
+import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortletURL;
 
@@ -53,24 +64,140 @@ import javax.portlet.PortletURL;
  */
 public class UserIndexer extends BaseIndexer {
 
+	public static final String[] CLASS_NAMES = {User.class.getName()};
+
 	public static final String PORTLET_ID = PortletKeys.ENTERPRISE_ADMIN_USERS;
 
-	public static void deleteUser(long companyId, long userId)
-		throws SearchException {
-
-		SearchEngineUtil.deleteDocument(companyId, getUserUID(userId));
+	public String[] getClassNames() {
+		return CLASS_NAMES;
 	}
 
-	public static Document getUserDocument(
-		long companyId, long userId, String screenName, String emailAddress,
-		String firstName, String middleName, String lastName, String jobTitle,
-		boolean active, long[] groupIds, long[] organizationIds,
-		long[] roleIds, long[] userGroupIds, String[] assetTagNames,
-		ExpandoBridge expandoBridge) {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String firstName = document.get("firstName");
+		String middleName = document.get("middleName");
+		String lastName = document.get("lastName");
+
+		String title = ContactConstants.getFullName(
+			firstName, middleName, lastName);
+
+		String content = null;
+
+		String userId = document.get(Field.USER_ID);
+
+		portletURL.setParameter("struts_action", "/enterprise_admin/edit_user");
+		portletURL.setParameter("p_u_i_d", userId);
+
+		return new Summary(title, content, portletURL);
+	}
+
+	protected void addContextQueryParams(
+			BooleanQuery contextQuery, String key, Object value)
+		throws Exception {
+
+		if (key.equals("usersRoles")) {
+			contextQuery.addRequiredTerm("roleIds", String.valueOf(value));
+		}
+		else if (key.equals("usersUserGroups")) {
+			contextQuery.addRequiredTerm("userGroupIds", String.valueOf(value));
+		}
+		else if (key.equals("usersOrgs")) {
+			if (value instanceof Long[]) {
+				Long[] values = (Long[])value;
+
+				BooleanQuery usersOrgsQuery =
+					BooleanQueryFactoryUtil.create();
+
+				for (long organizationId : values) {
+					usersOrgsQuery.addTerm(
+						"organizationIds", organizationId);
+					usersOrgsQuery.addTerm(
+						"ancestorOrganizationIds", organizationId);
+				}
+
+				contextQuery.add(usersOrgsQuery, BooleanClauseOccur.MUST);
+			}
+			else {
+				contextQuery.addRequiredTerm(
+					"organizationIds", String.valueOf(value));
+			}
+		}
+	}
+
+	protected void addSearchQueryParams(
+			BooleanQuery searchQuery, ExpandoBridge expandoBridge,
+			Set<String> attributeNames, String key, Object value,
+			boolean andSearch)
+		throws Exception {
+
+		if (attributeNames.contains(key)) {
+			UnicodeProperties properties = expandoBridge.getAttributeProperties(
+				key);
+
+			if (GetterUtil.getBoolean(
+					properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
+
+				int type = expandoBridge.getAttributeType(key);
+
+				if ((type == ExpandoColumnConstants.STRING) &&
+					(Validator.isNotNull((String)value))) {
+
+					if (andSearch) {
+						searchQuery.addRequiredTerm(key, (String)value, true);
+					}
+					else {
+						searchQuery.addTerm(key, (String)value, true);
+					}
+				}
+			}
+		}
+		else if (Validator.isNotNull(key) && Validator.isNotNull(value)) {
+			if (andSearch) {
+				searchQuery.addRequiredTerm(key, String.valueOf(value));
+			}
+			else {
+				searchQuery.addTerm(key, String.valueOf(value));
+			}
+		}
+	}
+
+	protected void doDelete(Object obj) throws Exception {
+		User user = (User)obj;
 
 		Document document = new DocumentImpl();
 
-		document.addUID(PORTLET_ID, String.valueOf(userId));
+		document.addUID(PORTLET_ID, user.getUserId());
+
+		SearchEngineUtil.deleteDocument(
+			user.getCompanyId(), document.get(Field.UID));
+	}
+
+	protected Document doGetDocument(Object obj) throws Exception {
+		User user = (User)obj;
+
+		long companyId = user.getCompanyId();
+		long userId = user.getUserId();
+		String screenName = user.getScreenName();
+		String emailAddress = user.getEmailAddress();
+		String firstName = user.getFirstName();
+		String middleName = user.getMiddleName();
+		String lastName = user.getLastName();
+		String jobTitle = user.getJobTitle();
+		boolean active = user.isActive();
+		long[] groupIds = user.getGroupIds();
+		long[] organizationIds = user.getOrganizationIds();
+		long[] roleIds = user.getRoleIds();
+		long[] userGroupIds = user.getUserGroupIds();
+
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			User.class.getName(), userId);
+
+		ExpandoBridge expandoBridge = user.getExpandoBridge();
+
+		Document document = new DocumentImpl();
+
+		document.addUID(PORTLET_ID, userId);
 
 		document.addModifiedDate();
 
@@ -89,7 +216,7 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword("organizationIds", organizationIds);
 		document.addKeyword(
 			"ancestorOrganizationIds",
-			_getAncestorOrganizationIds(userId, organizationIds));
+			getAncestorOrganizationIds(userId, organizationIds));
 		document.addKeyword("roleIds", roleIds);
 		document.addKeyword("userGroupIds", userGroupIds);
 
@@ -100,123 +227,68 @@ public class UserIndexer extends BaseIndexer {
 		return document;
 	}
 
-	public static String getUserUID(long userId) {
-		Document document = new DocumentImpl();
+	protected void doReindex(Object obj) throws Exception {
+		if (obj instanceof List<?>) {
+			List<User> users = (List<User>)obj;
 
-		document.addUID(PORTLET_ID, String.valueOf(userId));
+			for (User user : users) {
+				doReindex(user);
+			}
+		}
+		else if (obj instanceof Long) {
+			long userId = (Long)obj;
 
-		return document.get(Field.UID);
-	}
+			User user = UserLocalServiceUtil.getUserById(userId);
 
-	public static void updateUser(User user) throws SearchException {
-		try {
+			doReindex(user);
+		}
+		else if (obj instanceof long[]) {
+			long[] userIds = (long[])obj;
+
+			for (long userId : userIds) {
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				doReindex(user);
+			}
+		}
+		else if (obj instanceof User) {
+			User user = (User)obj;
+
 			if (user.isDefaultUser()) {
 				return;
 			}
 
-			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-				User.class.getName(), user.getUserId());
-
-			Document document = getUserDocument(
-				user.getCompanyId(), user.getUserId(), user.getScreenName(),
-				user.getEmailAddress(), user.getFirstName(),
-				user.getMiddleName(), user.getLastName(), user.getJobTitle(),
-				user.getActive(), user.getGroupIds(), user.getOrganizationIds(),
-				user.getRoleIds(), user.getUserGroupIds(), assetTagNames,
-				user.getExpandoBridge());
+			Document document = getDocument(user);
 
 			SearchEngineUtil.updateDocument(
 				user.getCompanyId(), document.get(Field.UID), document);
 		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
 	}
 
-	public static void updateUsers(long[] userIds) throws SearchException {
-		for (long userId : userIds) {
-			try {
-				User user = UserLocalServiceUtil.getUserById(userId);
+	protected void doReindex(String className, long classPK) throws Exception {
+		User user = UserLocalServiceUtil.getUserById(classPK);
 
-				updateUser(user);
-			}
-			catch (Exception e) {
-				throw new SearchException(e);
-			}
-		}
+		doReindex(user);
 	}
 
-	public static void updateUsers(List<User> users) throws SearchException {
-		for (User user : users) {
-			updateUser(user);
-		}
+	protected void doReindex(String[] ids) throws Exception {
+		long companyId = GetterUtil.getLong(ids[0]);
+
+		reindexUsers(companyId);
 	}
 
-	public String[] getClassNames() {
-		return _CLASS_NAMES;
-	}
-
-	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		// Title
-
-		String firstName = document.get("firstName");
-		String middleName = document.get("middleName");
-		String lastName = document.get("lastName");
-
-		String title = ContactConstants.getFullName(
-			firstName, middleName, lastName);
-
-		// Content
-
-		String content = null;
-
-		// Portlet URL
-
-		String userId = document.get(Field.USER_ID);
-
-		portletURL.setParameter("struts_action", "/enterprise_admin/edit_user");
-		portletURL.setParameter("p_u_i_d", userId);
-
-		return new Summary(title, content, portletURL);
-	}
-
-	public void reindex(String className, long classPK) throws SearchException {
-		try {
-			UserLocalServiceUtil.reindex(classPK);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
-	}
-
-	public void reindex(String[] ids) throws SearchException {
-		try {
-			UserLocalServiceUtil.reindex(ids);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
-	}
-
-	private static long[] _getAncestorOrganizationIds(
-		long userId, long[] organizationIds) {
+	protected long[] getAncestorOrganizationIds(
+			long userId, long[] organizationIds)
+		throws Exception {
 
 		List<Organization> ancestorOrganizations =
 			new ArrayList<Organization>();
 
 		for (long organizationId : organizationIds) {
-			try {
-				Organization organization =
-					OrganizationLocalServiceUtil.getOrganization(
-						organizationId);
+			Organization organization =
+				OrganizationLocalServiceUtil.getOrganization(organizationId);
 
-				ancestorOrganizations.addAll(organization.getAncestors());
-			}
-			catch (Exception e) {
-				_log.error("Error while indexing user " + userId, e);
-			}
+			ancestorOrganizations.addAll(organization.getAncestors());
 		}
 
 		long[] ancestorOrganizationIds = new long[ancestorOrganizations.size()];
@@ -231,10 +303,153 @@ public class UserIndexer extends BaseIndexer {
 		return ancestorOrganizationIds;
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		User.class.getName()
-	};
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
+	}
 
-	private static Log _log = LogFactoryUtil.getLog(UserIndexer.class);
+	protected void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		Boolean active = (Boolean)searchContext.getAttribute("active");
+
+		if (active != null) {
+			contextQuery.addRequiredTerm("active", active);
+		}
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (params == null) {
+			return;
+		}
+
+		for (Map.Entry<String, Object> entry : params.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+
+			if (value == null) {
+				continue;
+			}
+
+			addContextQueryParams(contextQuery, key, value);
+		}
+	}
+
+	protected void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		Boolean andSearch = (Boolean)searchContext.getAttribute("andSearch");
+
+		if (andSearch == null) {
+			andSearch = Boolean.TRUE;
+		}
+
+		String firstName = (String)searchContext.getAttribute("firstName");
+
+		if (Validator.isNotNull(firstName)) {
+			if (andSearch) {
+				searchQuery.addRequiredTerm("firstName", firstName, true);
+			}
+			else {
+				searchQuery.addTerm("firstName", firstName, true);
+			}
+		}
+
+		String middleName = (String)searchContext.getAttribute("middleName");
+
+		if (Validator.isNotNull(middleName)) {
+			if (andSearch) {
+				searchQuery.addRequiredTerm("middleName", middleName, true);
+			}
+			else {
+				searchQuery.addTerm("middleName", middleName, true);
+			}
+		}
+
+		String lastName = (String)searchContext.getAttribute("lastName");
+
+		if (Validator.isNotNull(lastName)) {
+			if (andSearch) {
+				searchQuery.addRequiredTerm("lastName", lastName, true);
+			}
+			else {
+				searchQuery.addTerm("lastName", lastName, true);
+			}
+		}
+
+		String screenName = (String)searchContext.getAttribute("screenName");
+
+		if (Validator.isNotNull(screenName)) {
+			if (andSearch) {
+				searchQuery.addRequiredTerm("screenName", screenName, true);
+			}
+			else {
+				searchQuery.addTerm("screenName", screenName, true);
+			}
+		}
+
+		String emailAddress = (String)searchContext.getAttribute(
+			"emailAddress");
+
+		if (Validator.isNotNull(emailAddress)) {
+			if (andSearch) {
+				searchQuery.addRequiredTerm(
+					"emailAddress", emailAddress, true);
+			}
+			else {
+				searchQuery.addTerm("emailAddress", emailAddress, true);
+			}
+		}
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (params != null) {
+			ExpandoBridge expandoBridge =
+				ExpandoBridgeFactoryUtil.getExpandoBridge(User.class.getName());
+
+			Set<String> attributeNames = SetUtil.fromEnumeration(
+				expandoBridge.getAttributeNames());
+
+			for (Map.Entry<String, Object> entry : params.entrySet()) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
+
+				if (value == null) {
+					continue;
+				}
+
+				addSearchQueryParams(
+					searchQuery, expandoBridge, attributeNames, key, value,
+					andSearch);
+			}
+		}
+	}
+
+	protected void reindexUsers(long companyId) throws Exception {
+		int count = UserLocalServiceUtil.getCompanyUsersCount(companyId);
+
+		int pages = count / UserIndexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * UserIndexer.DEFAULT_INTERVAL);
+			int end = start + UserIndexer.DEFAULT_INTERVAL;
+
+			reindexUsers(companyId, start, end);
+		}
+	}
+
+	protected void reindexUsers(long companyId, int start, int end)
+		throws Exception {
+
+		List<User> users = UserLocalServiceUtil.getCompanyUsers(
+			companyId, start, end);
+
+		for (User user : users) {
+			reindex(user);
+		}
+	}
 
 }

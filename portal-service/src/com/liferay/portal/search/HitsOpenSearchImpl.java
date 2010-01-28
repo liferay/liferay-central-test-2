@@ -28,16 +28,17 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 
@@ -55,10 +56,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
-	public abstract Hits getHits(
-			long companyId, long groupId, long userId, String keywords,
-			int start, int end)
-		throws Exception;
+	public abstract String getPortletId();
 
 	public abstract String getSearchPath();
 
@@ -76,9 +74,22 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			int start = (startPage * itemsPerPage) - itemsPerPage;
 			int end = startPage * itemsPerPage;
 
-			Hits results = getHits(
-				themeDisplay.getCompanyId(), groupId, userId, keywords, start,
-				end);
+			SearchContext searchContext = SearchContextFactory.getInstance(
+				request);
+
+			searchContext.setGroupId(groupId);
+			searchContext.setEnd(end);
+			searchContext.setKeywords(keywords);
+			searchContext.setStart(start);
+			searchContext.setUserId(userId);
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				themeDisplay.getCompanyId(), getPortletId());
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				portlet.getIndexerClass());
+
+			Hits results = indexer.search(searchContext);
 
 			String[] queryTerms = results.getQueryTerms();
 
@@ -97,12 +108,6 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String portletId = result.get(Field.PORTLET_ID);
 
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					themeDisplay.getCompanyId(), portletId);
-
-				//String portletTitle = PortalUtil.getPortletTitle(
-				//	portletId, themeDisplay.getUser());
-
 				String snippet = results.snippet(i);
 
 				long resultGroupId = GetterUtil.getLong(
@@ -110,9 +115,6 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 				PortletURL portletURL = getPortletURL(
 					request, portletId, resultGroupId);
-
-				Indexer indexer = (Indexer)InstancePool.get(
-					portlet.getIndexerClass());
 
 				Summary summary = indexer.getSummary(
 					result, snippet, portletURL);

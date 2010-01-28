@@ -26,9 +26,8 @@ import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.StatusConstants;
@@ -43,7 +42,6 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.util.MBIndexer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,13 +71,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			MBIndexer.deleteMessages(
-				rootMessage.getCompanyId(), thread.getThreadId());
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + thread.getThreadId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
+
+		indexer.delete(thread);
 
 		// Attachments
 
@@ -392,20 +386,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			// Indexer
 
-			try {
-				if (!message.isDiscussion()) {
-					MBIndexer.updateMessage(
-						message.getCompanyId(), message.getGroupId(),
-						message.getUserId(), message.getUserName(),
-						category.getCategoryId(), message.getThreadId(),
-						message.getMessageId(), message.getSubject(),
-						message.getBody(), message.isAnonymous(),
-						message.getModifiedDate(), message.getAssetTagNames(),
-						message.getExpandoBridge());
-				}
-			}
-			catch (SearchException se) {
-				_log.error("Indexing " + message.getMessageId(), se);
+			if (!message.isDiscussion()) {
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					MBMessage.class);
+
+				indexer.reindex(message);
 			}
 		}
 
@@ -466,20 +451,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			if (!message.isDiscussion()) {
-				MBIndexer.updateMessage(
-					message.getCompanyId(), message.getGroupId(),
-					message.getUserId(), message.getUserName(),
-					category.getCategoryId(), message.getThreadId(),
-					message.getMessageId(), message.getSubject(),
-					message.getBody(), message.isAnonymous(),
-					message.getModifiedDate(), message.getAssetTagNames(),
-					message.getExpandoBridge());
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + message.getMessageId(), se);
+		if (!message.isDiscussion()) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
+
+			indexer.reindex(message);
 		}
 
 		// Update children
@@ -623,20 +598,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			moveAttachmentsFromOldThread(message, oldAttachmentsDir);
 
-			try {
-				if (!message.isDiscussion()) {
-					MBIndexer.updateMessage(
-						message.getCompanyId(), message.getGroupId(),
-						message.getUserId(), message.getUserName(),
-						category.getCategoryId(), message.getThreadId(),
-						message.getMessageId(), message.getSubject(),
-						message.getBody(), message.isAnonymous(),
-						message.getModifiedDate(), message.getAssetTagNames(),
-						message.getExpandoBridge());
-				}
-			}
-			catch (SearchException se) {
-				_log.error("Indexing " + message.getMessageId(), se);
+			if (!message.isDiscussion()) {
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					MBMessage.class);
+
+				indexer.reindex(message);
 			}
 
 			messagesMoved++;
@@ -647,8 +613,5 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		return messagesMoved;
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(MBThreadLocalServiceImpl.class);
 
 }

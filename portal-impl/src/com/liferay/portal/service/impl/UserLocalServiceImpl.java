@@ -61,11 +61,11 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.ParseException;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
@@ -73,7 +73,6 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -118,7 +117,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
-import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -130,6 +128,7 @@ import com.liferay.util.EncryptorException;
 import java.awt.image.RenderedImage;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 import java.security.MessageDigest;
@@ -137,6 +136,7 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -276,12 +276,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, groupId, new long[] {role.getRoleId()});
 		}
 
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + StringUtil.merge(userIds), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -306,12 +303,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, groupId, new long[] {role.getRoleId()});
 		}
 
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + StringUtil.merge(userIds), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -324,16 +318,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void addRoleUsers(long roleId, long[] userIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		rolePersistence.addUsers(roleId, userIds);
 
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + StringUtil.merge(userIds), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -345,12 +336,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userGroupPersistence.addUsers(userGroupId, userIds);
 
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + StringUtil.merge(userIds), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -578,12 +566,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			UserIndexer.updateUser(user);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + userId, se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(user);
 
 		return user;
 	}
@@ -948,12 +933,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			UserIndexer.deleteUser(user.getCompanyId(), user.getUserId());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + userId, se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.delete(user);
 
 		// Browser tracker
 
@@ -1071,6 +1053,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		catch (EncryptorException ee) {
 			throw new SystemException(ee);
 		}
+	}
+
+	public List<User> getCompanyUsers(long companyId, int start, int end)
+		throws SystemException {
+
+		return userPersistence.findByCompanyId(companyId, start, end);
+	}
+
+	public int getCompanyUsersCount(long companyId) throws SystemException {
+		return userPersistence.countByCompanyId(companyId);
 	}
 
 	public User getDefaultUser(long companyId)
@@ -1521,37 +1513,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return false;
 	}
 
-	public void reindex(long userId) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		try {
-			UserIndexer.updateUsers(new long[] {userId});
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
-	}
-
-	public void reindex(String[] ids) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			reindexUsers(companyId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
 	public Hits search(
 			long companyId, String keywords, Boolean active,
 			LinkedHashMap<String, Object> params, int start, int end, Sort sort)
@@ -1588,75 +1549,29 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
+			Map<String, Serializable> attributes =
+				new HashMap<String, Serializable>();
 
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, UserIndexer.PORTLET_ID);
+			attributes.put("active", active);
+			attributes.put("andSearch", andSearch);
+			attributes.put("emailAddress", emailAddress);
+			attributes.put("firstName", firstName);
+			attributes.put("lastName", lastName);
+			attributes.put("middleName", middleName);
+			attributes.put("params", params);
+			attributes.put("screenName", screenName);
 
-			if (active != null) {
-				contextQuery.addRequiredTerm("active", active);
-			}
+			SearchContext searchContext = new SearchContext();
 
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
+			searchContext.setAttributes(attributes);
+			searchContext.setCompanyId(companyId);
+			searchContext.setEnd(end);
+			searchContext.setSorts(new Sort[] {sort});
+			searchContext.setStart(start);
 
-			if (Validator.isNotNull(firstName)) {
-				if (andSearch) {
-					searchQuery.addRequiredTerm("firstName", firstName, true);
-				}
-				else {
-					searchQuery.addTerm("firstName", firstName, true);
-				}
-			}
+			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
-			if (Validator.isNotNull(middleName)) {
-				if (andSearch) {
-					searchQuery.addRequiredTerm("middleName", middleName, true);
-				}
-				else {
-					searchQuery.addTerm("middleName", middleName, true);
-				}
-			}
-
-			if (Validator.isNotNull(lastName)) {
-				if (andSearch) {
-					searchQuery.addRequiredTerm("lastName", lastName, true);
-				}
-				else {
-					searchQuery.addTerm("lastName", lastName, true);
-				}
-			}
-
-			if (Validator.isNotNull(screenName)) {
-				if (andSearch) {
-					searchQuery.addRequiredTerm("screenName", screenName, true);
-				}
-				else {
-					searchQuery.addTerm("screenName", screenName, true);
-				}
-			}
-
-			if (Validator.isNotNull(emailAddress)) {
-				if (andSearch) {
-					searchQuery.addRequiredTerm(
-						"emailAddress", emailAddress, true);
-				}
-				else {
-					searchQuery.addTerm("emailAddress", emailAddress, true);
-				}
-			}
-
-			populateQuery(contextQuery, searchQuery, params, andSearch);
-
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
-
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
-
-			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			return SearchEngineUtil.search(
-				companyId, fullQuery, sort, start, end);
+			return indexer.search(searchContext);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -1722,16 +1637,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void setRoleUsers(long roleId, long[] userIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		rolePersistence.setUsers(roleId, userIds);
 
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + StringUtil.merge(userIds), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1743,29 +1655,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userGroupPersistence.setUsers(userGroupId, userIds);
 
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + StringUtil.merge(userIds), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetGroupUsers(long groupId, long[] userIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		userGroupRoleLocalService.deleteUserGroupRoles(userIds, groupId);
 
 		groupPersistence.removeUsers(groupId, userIds);
 
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + StringUtil.merge(userIds), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1784,12 +1690,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		organizationPersistence.removeUsers(organizationId, userIds);
 
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + StringUtil.merge(userIds), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1813,12 +1716,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUsers(roleId, userIds);
 
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + StringUtil.merge(userIds), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1834,27 +1734,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUsers(roleId, users);
 
-		try {
-			UserIndexer.updateUsers(users);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + ListUtil.toString(users, "userId"), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(users);
 
 		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		userGroupPersistence.removeUsers(userGroupId, userIds);
 
-		try {
-			UserIndexer.updateUsers(userIds);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + StringUtil.merge(userIds), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1868,12 +1762,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userPersistence.update(user, false);
 
-		try {
-			UserIndexer.updateUsers(new long[] {userId});
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + userId, se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(user);
 
 		return user;
 	}
@@ -1983,12 +1874,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		try {
-			UserIndexer.updateUsers(new long[] {userId});
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + userId, se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(new long[] {userId});
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -2123,12 +2011,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		try {
-			UserIndexer.updateUsers(new long[] {userId});
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + userId, se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(new long[] {userId});
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -2543,12 +2428,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			UserIndexer.updateUser(user);
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + userId, se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(user);
 
 		// Permission cache
 
@@ -3031,35 +2913,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 			else {
 				searchQuery.addTerm(key, String.valueOf(value));
-			}
-		}
-	}
-
-	protected void reindexUsers(long companyId) throws SystemException {
-		int count = userPersistence.countByCompanyId(companyId);
-
-		int pages = count / UserIndexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= pages; i++) {
-			int start = (i * UserIndexer.DEFAULT_INTERVAL);
-			int end = start + UserIndexer.DEFAULT_INTERVAL;
-
-			reindexUsers(companyId, start, end);
-		}
-	}
-
-	protected void reindexUsers(long companyId, int start, int end)
-		throws SystemException {
-
-		List<User> users = userPersistence.findByCompanyId(
-			companyId, start, end);
-
-		for (User user : users) {
-			try {
-				UserIndexer.updateUser(user);
-			}
-			catch (SearchException se) {
-				_log.error("Reindexing " + user.getUserId(), se);
 			}
 		}
 	}

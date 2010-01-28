@@ -22,26 +22,32 @@
 
 package com.liferay.portlet.softwarecatalog.util;
 
-import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
+import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -56,57 +62,96 @@ import javax.portlet.PortletURL;
  */
 public class SCIndexer extends BaseIndexer {
 
+	public static final String[] CLASS_NAMES = {SCProductEntry.class.getName()};
+
 	public static final String PORTLET_ID = PortletKeys.SOFTWARE_CATALOG;
 
-	public static void addProductEntry(
-			long companyId, long groupId, long userId, String userName,
-			long productEntryId, String name, Date modifiedDate, String version,
-			String type, String shortDescription, String longDescription,
-			String pageURL, String repoGroupId, String repoArtifactId,
-			ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getProductEntryDocument(
-			companyId, groupId, userId, userName, productEntryId, name,
-			modifiedDate, version, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, expandoBridge);
-
-		SearchEngineUtil.addDocument(companyId, document);
+	public String[] getClassNames() {
+		return CLASS_NAMES;
 	}
 
-	public static void deleteProductEntry(long companyId, long productEntryId)
-		throws SearchException {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
-		SearchEngineUtil.deleteDocument(companyId, getEntryUID(productEntryId));
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String productEntryId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter(
+			"struts_action", "/software_catalog/view_product_entry");
+		portletURL.setParameter("productEntryId", productEntryId);
+
+		return new Summary(title, content, portletURL);
 	}
 
-	public static Document getProductEntryDocument(
-		long companyId, long groupId, long userId, String userName,
-		long productEntryId, String name, Date modifiedDate, String version,
-		String type, String shortDescription, String longDescription,
-		String pageURL, String repoGroupId, String repoArtifactId,
-		ExpandoBridge expandoBridge) {
+	protected void doDelete(Object obj) throws Exception {
+		SCProductEntry productEntry = (SCProductEntry)obj;
 
-		long scopeGroupId = groupId;
+		Document document = new DocumentImpl();
 
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+		document.addUID(PORTLET_ID, productEntry.getProductEntryId());
 
-			if (group.isLayout()) {
-				groupId = group.getParentGroupId();
-			}
+		SearchEngineUtil.deleteDocument(
+			productEntry.getCompanyId(), document.get(Field.UID));
+	}
+
+	protected Document doGetDocument(Object obj) throws Exception {
+		SCProductEntry productEntry = (SCProductEntry)obj;
+
+		long companyId = productEntry.getCompanyId();
+		long groupId = getParentGroupId(productEntry.getGroupId());
+		long scopeGroupId = productEntry.getGroupId();
+		long userId = productEntry.getUserId();
+		String userName = PortalUtil.getUserName(
+			userId, productEntry.getUserName());
+		long productEntryId = productEntry.getProductEntryId();
+		String name = productEntry.getName();
+		Date modifiedDate = productEntry.getModifiedDate();
+
+		String version = StringPool.BLANK;
+
+		SCProductVersion latestProductVersion = productEntry.getLatestVersion();
+
+		if (latestProductVersion != null) {
+			version = latestProductVersion.getVersion();
 		}
-		catch (Exception e) {
-		}
 
-		userName = PortalUtil.getUserName(userId, userName);
-		shortDescription = HtmlUtil.extractText(shortDescription);
-		longDescription = HtmlUtil.extractText(longDescription);
+		String type = productEntry.getType();
+		String shortDescription = HtmlUtil.extractText(
+			productEntry.getShortDescription());
+		String longDescription = HtmlUtil.extractText(
+			productEntry.getLongDescription());
+		String pageURL = productEntry.getPageURL();
+		String repoGroupId = productEntry.getRepoGroupId();
+		String repoArtifactId = productEntry.getRepoArtifactId();
 
-		String content =
-			userId + " " + userName + " " + type + " " + shortDescription +
-				" " + longDescription + " " + pageURL + repoGroupId + " " +
-					repoArtifactId;
+		ExpandoBridge expandoBridge = productEntry.getExpandoBridge();
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(userId);
+		sb.append(StringPool.SPACE);
+		sb.append(userName);
+		sb.append(StringPool.SPACE);
+		sb.append(type);
+		sb.append(StringPool.SPACE);
+		sb.append(shortDescription);
+		sb.append(StringPool.SPACE);
+		sb.append(longDescription);
+		sb.append(StringPool.SPACE);
+		sb.append(pageURL);
+		sb.append(StringPool.SPACE);
+		sb.append(repoGroupId);
+		sb.append(StringPool.SPACE);
+		sb.append(repoArtifactId);
+
+		String content = sb.toString();
 
 		Document document = new DocumentImpl();
 
@@ -140,81 +185,72 @@ public class SCIndexer extends BaseIndexer {
 		return document;
 	}
 
-	public static String getEntryUID(long productEntryId) {
-		Document document = new DocumentImpl();
+	protected void doReindex(Object obj) throws Exception {
+		SCProductEntry productEntry = (SCProductEntry)obj;
 
-		document.addUID(PORTLET_ID, productEntryId);
-
-		return document.get(Field.UID);
-	}
-
-	public static void updateProductEntry(
-			long companyId, long groupId, long userId, String userName,
-			long productEntryId, String name, Date modifiedDate, String version,
-			String type, String shortDescription, String longDescription,
-			String pageURL, String repoGroupId, String repoArtifactId,
-			ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getProductEntryDocument(
-			companyId, groupId, userId, userName, productEntryId, name,
-			modifiedDate, version, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, expandoBridge);
+		Document document = getDocument(productEntry);
 
 		SearchEngineUtil.updateDocument(
-			companyId, document.get(Field.UID), document);
+			productEntry.getCompanyId(), document.get(Field.UID), document);
 	}
 
-	public String[] getClassNames() {
-		return _CLASS_NAMES;
+	protected void doReindex(String className, long classPK) throws Exception {
+		SCProductEntry productEntry =
+			SCProductEntryLocalServiceUtil.getProductEntry(classPK);
+
+		doReindex(productEntry);
 	}
 
-	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
+	protected void doReindex(String[] ids) throws Exception {
+		long companyId = GetterUtil.getLong(ids[0]);
 
-		// Title
-
-		String title = document.get(Field.TITLE);
-
-		// Content
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		// Portlet URL
-
-		String productEntryId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter(
-			"struts_action", "/software_catalog/view_product_entry");
-		portletURL.setParameter("productEntryId", productEntryId);
-
-		return new Summary(title, content, portletURL);
+		reindexProductEntries(companyId);
 	}
 
-	public void reindex(String className, long classPK) throws SearchException {
-		try {
-			SCProductEntryLocalServiceUtil.reindex(classPK);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
+	}
+
+	protected void postProcessFullQuery(
+			BooleanQuery fullQuery, SearchContext searchContext)
+		throws Exception {
+
+		String type = (String)searchContext.getAttribute("type");
+
+		if (Validator.isNotNull(type)) {
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
+
+			searchQuery.addRequiredTerm("type", type);
+
+			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 		}
 	}
 
-	public void reindex(String[] ids) throws SearchException {
-		try {
-			SCProductEntryLocalServiceUtil.reindex(ids);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected void reindexProductEntries(long companyId) throws Exception {
+		int count =
+			SCProductEntryLocalServiceUtil.getCompanyProductEntriesCount(
+				companyId);
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			reindexProductEntries(companyId, start, end);
 		}
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		SCProductEntry.class.getName()
-	};
+	protected void reindexProductEntries(long companyId, int start, int end)
+		throws Exception {
+
+		List<SCProductEntry> productEntries =
+			SCProductEntryLocalServiceUtil.getCompanyProductEntries(
+				companyId, start, end);
+
+		for (SCProductEntry productEntry : productEntries) {
+			reindex(productEntry);
+		}
+	}
 
 }

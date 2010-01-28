@@ -22,20 +22,20 @@
 
 package com.liferay.documentlibrary.util;
 
+import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.documentlibrary.service.impl.DLServiceImpl;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -54,58 +54,61 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.portlet.PortletURL;
+
 /**
- * <a href="DLIndexerImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLIndexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
+ * @author Bruno Farache
+ * @author Raymond Augé
  */
-public class DLIndexerImpl implements DLIndexer {
+public class DLIndexer extends BaseIndexer {
 
-	public void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName)
-		throws SearchException {
+	public static final String[] CLASS_NAMES = {FileModel.class.getName()};
 
-		Document doc = getFileDocument(
-			companyId, portletId, groupId, repositoryId, fileName);
-
-		if (doc != null) {
-			SearchEngineUtil.addDocument(companyId, doc);
-		}
+	public String[] getClassNames() {
+		return CLASS_NAMES;
 	}
 
-	public void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, long[] assetCategoryIds, String[] assetTagNames)
-		throws SearchException {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
-		Document doc = getFileDocument(
-			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, assetCategoryIds, assetTagNames);
-
-		if (doc != null) {
-			SearchEngineUtil.addDocument(companyId, doc);
-		}
+		return null;
 	}
 
-	public void deleteFile(
-			long companyId, String portletId, long repositoryId,
-			String fileName)
-		throws SearchException {
+	protected void doDelete(Object obj) throws Exception {
+		FileModel fileModel = (FileModel)obj;
+
+		Document document = new DocumentImpl();
+
+		document.addUID(
+			fileModel.getPortletId(), fileModel.getRepositoryId(),
+			fileModel.getFileName());
 
 		SearchEngineUtil.deleteDocument(
-			companyId, getFileUID(portletId, repositoryId, fileName));
+			fileModel.getCompanyId(), document.get(Field.UID));
 	}
 
-	public Document getFileDocument(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName)
-		throws SearchException {
+	protected Document doGetDocument(Object obj) throws Exception {
+		FileModel fileModel = (FileModel)obj;
 
-		try {
-			DLFileEntry fileEntry = null;
+		long companyId = fileModel.getCompanyId();
+		String portletId = fileModel.getPortletId();
+		long groupId = getParentGroupId(fileModel.getGroupId());
+		long scopeGroupId = fileModel.getGroupId();
+		long repositoryId = fileModel.getRepositoryId();
+		String fileName = fileModel.getFileName();
+		long fileEntryId = fileModel.getFileEntryId();
+		String properties = fileModel.getProperties();
+		Date modifiedDate = fileModel.getModifiedDate();
+		long[] assetCategoryIds = fileModel.getAssetCategoryIds();
+		String[] assetTagNames = fileModel.getAssetTagNames();
 
+		DLFileEntry fileEntry = null;
+
+		if (fileEntryId <= 0) {
 			try {
 				long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
@@ -117,16 +120,18 @@ public class DLIndexerImpl implements DLIndexer {
 					groupId, folderId, fileName);
 			}
 			catch (NoSuchFileEntryException nsfe) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"File " + fileName + " in repository " +
-							repositoryId + " exists in the JCR but does " +
-								"not exist in the database");
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Not indexing document " + companyId + " " + portletId +
+							" " + scopeGroupId + " " + repositoryId + " " +
+								fileName + " " + fileEntryId);
 				}
 
 				return null;
 			}
+		}
 
+		if (properties == null) {
 			StringBuilder sb = new StringBuilder();
 
 			sb.append(fileEntry.getTitle());
@@ -148,52 +153,17 @@ public class DLIndexerImpl implements DLIndexer {
 				sb.append(value);
 			}
 
-			String properties = sb.toString();
+			properties = sb.toString();
+		}
 
-			long[] assetCategoryIds =
-				AssetCategoryLocalServiceUtil.getCategoryIds(
-					DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+		if (assetCategoryIds == null) {
+			assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-			return getFileDocument(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntry.getFileEntryId(), properties,
-				fileEntry.getModifiedDate(), assetCategoryIds, assetTagNames);
-		}
-		catch (PortalException pe) {
-			throw new SearchException(pe.getMessage());
-		}
-		catch (SystemException se) {
-			throw new SearchException(se.getMessage());
-		}
-	}
-
-	public Document getFileDocument(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, long[] assetCategoryIds, String[] assetTagNames)
-		throws SearchException {
-
-		long scopeGroupId = groupId;
-
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (group.isLayout()) {
-				groupId = group.getParentGroupId();
-			}
-		}
-		catch (Exception e) {
 		}
 
-		if (fileEntryId <= 0) {
-			_log.debug(
-				"Not indexing document " + companyId + " " + portletId + " " +
-					scopeGroupId + " " + repositoryId + " " + fileName + " " +
-						fileEntryId);
-
-			return null;
+		if (assetTagNames == null) {
+			assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -244,19 +214,19 @@ public class DLIndexerImpl implements DLIndexer {
 			return null;
 		}
 
-		Document doc = new DocumentImpl();
+		Document document = new DocumentImpl();
 
-		doc.addUID(portletId, repositoryId, fileName);
+		document.addUID(portletId, repositoryId, fileName);
 
-		doc.addModifiedDate(modifiedDate);
+		document.addModifiedDate(modifiedDate);
 
-		doc.addKeyword(Field.COMPANY_ID, companyId);
-		doc.addKeyword(Field.PORTLET_ID, portletId);
-		doc.addKeyword(Field.GROUP_ID, groupId);
-		doc.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
+		document.addKeyword(Field.COMPANY_ID, companyId);
+		document.addKeyword(Field.PORTLET_ID, portletId);
+		document.addKeyword(Field.GROUP_ID, groupId);
+		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 
 		try {
-			doc.addFile(Field.CONTENT, is, fileExt);
+			document.addFile(Field.CONTENT, is, fileExt);
 		}
 		catch (IOException ioe) {
 			throw new SearchException(
@@ -264,19 +234,20 @@ public class DLIndexerImpl implements DLIndexer {
 					" " + scopeGroupId + " " + repositoryId + " " + fileName);
 		}
 
-		doc.addText(Field.PROPERTIES, properties);
-		doc.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+		document.addText(Field.PROPERTIES, properties);
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		doc.addKeyword("repositoryId", repositoryId);
-		doc.addKeyword("path", fileName);
-		doc.addKeyword(Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
-		doc.addKeyword(Field.ENTRY_CLASS_PK, fileEntryId);
+		document.addKeyword("repositoryId", repositoryId);
+		document.addKeyword("path", fileName);
+		document.addKeyword(
+			Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, fileEntryId);
 
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
 			DLFileEntry.class.getName(), fileEntryId);
 
-		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
+		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -285,34 +256,33 @@ public class DLIndexerImpl implements DLIndexer {
 						fileEntryId + " indexed successfully");
 		}
 
-		return doc;
+		return document;
 	}
 
-	public String getFileUID(
-		String portletId, long repositoryId, String fileName) {
+	protected void doReindex(Object obj) throws Exception {
+		FileModel fileModel = (FileModel)obj;
 
-		Document doc = new DocumentImpl();
+		Document document = getDocument(fileModel);
 
-		doc.addUID(portletId, repositoryId, fileName);
-
-		return doc.get(Field.UID);
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, long[] assetCategoryIds, String[] assetTagNames)
-		throws SearchException {
-
-		Document doc = getFileDocument(
-			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, assetCategoryIds, assetTagNames);
-
-		if (doc != null) {
-			SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
+		if (document != null) {
+			SearchEngineUtil.updateDocument(
+				fileModel.getCompanyId(), document.get(Field.UID), document);
 		}
 	}
 
- 	private static Log _log = LogFactoryUtil.getLog(DLIndexerImpl.class);
+	protected void doReindex(String className, long classPK) throws Exception {
+	}
+
+	protected void doReindex(String[] ids) throws Exception {
+		Hook hook = HookFactory.getInstance();
+
+		hook.reindex(ids);
+	}
+
+	protected String getPortletId(SearchContext searchContext) {
+		return (String)searchContext.getAttribute("portletId");
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(DLIndexer.class);
 
 }

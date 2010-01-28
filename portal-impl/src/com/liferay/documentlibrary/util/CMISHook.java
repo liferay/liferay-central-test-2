@@ -24,8 +24,8 @@ package com.liferay.documentlibrary.util;
 
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.cmis.CMISException;
 import com.liferay.portal.cmis.CMISUtil;
 import com.liferay.portal.cmis.model.CMISConstants;
@@ -34,8 +34,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.service.ServiceContext;
 
@@ -119,7 +120,17 @@ public class CMISHook extends BaseHook {
 
 		CMISUtil.delete(versioningFolderEntry);
 
-		DLIndexerUtil.deleteFile(companyId, portletId, repositoryId, fileName);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(
+			FileModel.class);
+
+		FileModel fileModel = new FileModel();
+
+		fileModel.setCompanyId(companyId);
+		fileModel.setFileName(fileName);
+		fileModel.setPortletId(portletId);
+		fileModel.setRepositoryId(repositoryId);
+
+		indexer.delete(fileModel);
 	}
 
 	public void deleteFile(
@@ -132,7 +143,17 @@ public class CMISHook extends BaseHook {
 
 		CMISUtil.delete(fileEntry);
 
-		DLIndexerUtil.deleteFile(companyId, portletId, repositoryId, fileName);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(
+			FileModel.class);
+
+		FileModel fileModel = new FileModel();
+
+		fileModel.setCompanyId(companyId);
+		fileModel.setFileName(fileName);
+		fileModel.setPortletId(portletId);
+		fileModel.setRepositoryId(repositoryId);
+
+		indexer.delete(fileModel);
 	}
 
 	public InputStream getFileAsStream(
@@ -247,8 +268,18 @@ public class CMISHook extends BaseHook {
 
 			for (String fileName : fileNames) {
 				try {
-					Document document = DLIndexerUtil.getFileDocument(
-						companyId, portletId, groupId, repositoryId, fileName);
+					Indexer indexer = IndexerRegistryUtil.getIndexer(
+						FileModel.class);
+
+					FileModel fileModel = new FileModel();
+
+					fileModel.setCompanyId(companyId);
+					fileModel.setFileName(fileName);
+					fileModel.setGroupId(groupId);
+					fileModel.setPortletId(portletId);
+					fileModel.setRepositoryId(repositoryId);
+
+					Document document = indexer.getDocument(fileModel);
 
 					SearchEngineUtil.updateDocument(
 						companyId, document.get(Field.UID), document);
@@ -265,42 +296,41 @@ public class CMISHook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		try {
-			Entry oldVersioningFolderEntry = getVersioningFolderEntry(
-				companyId, repositoryId, fileName, true);
-			Entry newVersioningFolderEntry = getVersioningFolderEntry(
-				companyId, newRepositoryId, fileName, true);
+		Entry oldVersioningFolderEntry = getVersioningFolderEntry(
+			companyId, repositoryId, fileName, true);
+		Entry newVersioningFolderEntry = getVersioningFolderEntry(
+			companyId, newRepositoryId, fileName, true);
 
-			List<String> fileNames = CMISUtil.getFolders(
-				oldVersioningFolderEntry);
+		List<String> fileNames = CMISUtil.getFolders(oldVersioningFolderEntry);
 
-			for (String curFileName : fileNames) {
-				Entry entry = CMISUtil.getDocument(
-					oldVersioningFolderEntry, curFileName);
+		for (String curFileName : fileNames) {
+			Entry entry = CMISUtil.getDocument(
+				oldVersioningFolderEntry, curFileName);
 
-				InputStream is = CMISUtil.getInputStream(entry);
+			InputStream is = CMISUtil.getInputStream(entry);
 
-				CMISUtil.createDocument(
-					newVersioningFolderEntry, curFileName, is);
-			}
-
-			CMISUtil.delete(oldVersioningFolderEntry);
-
-			try {
-				DLIndexerUtil.deleteFile(
-					companyId, portletId, repositoryId, fileName);
-			}
-			catch (SearchException se) {
-			}
-
-			DLIndexerUtil.addFile(
-				companyId, portletId, groupId, newRepositoryId, fileName);
+			CMISUtil.createDocument(newVersioningFolderEntry, curFileName, is);
 		}
-		catch (SearchException se) {
-			throw new SystemException();
-		}
+
+		CMISUtil.delete(oldVersioningFolderEntry);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
+
+		FileModel fileModel = new FileModel();
+
+		fileModel.setCompanyId(companyId);
+		fileModel.setFileName(fileName);
+		fileModel.setPortletId(portletId);
+		fileModel.setRepositoryId(repositoryId);
+
+		indexer.delete(fileModel);
+
+		fileModel.setRepositoryId(newRepositoryId);
+		fileModel.setGroupId(groupId);
+
+		indexer.reindex(fileModel);
 	}
 
 	public void updateFile(
@@ -329,62 +359,63 @@ public class CMISHook extends BaseHook {
 
 		fileEntry = CMISUtil.createDocument(url, title, is);
 
-		if (sourceFileName == null) {
-			DLIndexerUtil.addFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate,
-				serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
-		}
-		else {
-			DLIndexerUtil.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate,
-				serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
+
+		FileModel fileModel = new FileModel();
+
+		fileModel.setAssetCategoryIds(serviceContext.getAssetCategoryIds());
+		fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
+		fileModel.setCompanyId(companyId);
+		fileModel.setFileEntryId(fileEntryId);
+		fileModel.setFileName(fileName);
+		fileModel.setGroupId(groupId);
+		fileModel.setModifiedDate(modifiedDate);
+		fileModel.setPortletId(portletId);
+		fileModel.setProperties(properties);
+		fileModel.setRepositoryId(repositoryId);
+
+		indexer.reindex(fileModel);
 	}
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String newFileName, boolean reindex)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		try {
-			Entry oldVersioningFolderEntry = getVersioningFolderEntry(
-				companyId, repositoryId, fileName, true);
-			Entry newVersioningFolderEntry = getVersioningFolderEntry(
-				companyId, repositoryId, newFileName, true);
+		Entry oldVersioningFolderEntry = getVersioningFolderEntry(
+			companyId, repositoryId, fileName, true);
+		Entry newVersioningFolderEntry = getVersioningFolderEntry(
+			companyId, repositoryId, newFileName, true);
 
-			List<String> fileNames = CMISUtil.getFolders(
-				oldVersioningFolderEntry);
+		List<String> fileNames = CMISUtil.getFolders(oldVersioningFolderEntry);
 
-			for (String curFileName : fileNames) {
-				Entry entry = CMISUtil.getDocument(
-					oldVersioningFolderEntry, curFileName);
+		for (String curFileName : fileNames) {
+			Entry entry = CMISUtil.getDocument(
+				oldVersioningFolderEntry, curFileName);
 
-				InputStream is = CMISUtil.getInputStream(entry);
+			InputStream is = CMISUtil.getInputStream(entry);
 
-				CMISUtil.createDocument(
-					newVersioningFolderEntry, curFileName, is);
-			}
-
-			CMISUtil.delete(oldVersioningFolderEntry);
-
-			if (reindex) {
-				try {
-					DLIndexerUtil.deleteFile(
-						companyId, portletId, repositoryId, fileName);
-				}
-				catch (SearchException se) {
-				}
-
-				DLIndexerUtil.addFile(
-					companyId, portletId, groupId, repositoryId, newFileName);
-			}
+			CMISUtil.createDocument(newVersioningFolderEntry, curFileName, is);
 		}
-		catch (SearchException se) {
-			throw new SystemException();
+
+		CMISUtil.delete(oldVersioningFolderEntry);
+
+		if (reindex) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileName(fileName);
+			fileModel.setPortletId(portletId);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.delete(fileModel);
+
+			fileModel.setFileName(newFileName);
+			fileModel.setGroupId(groupId);
+
+			indexer.reindex(fileModel);
 		}
 	}
 

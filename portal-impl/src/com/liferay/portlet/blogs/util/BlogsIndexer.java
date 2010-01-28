@@ -22,26 +22,29 @@
 
 package com.liferay.portlet.blogs.util;
 
-import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -55,46 +58,61 @@ import javax.portlet.PortletURL;
  */
 public class BlogsIndexer extends BaseIndexer {
 
+	public static final String[] CLASS_NAMES = {BlogsEntry.class.getName()};
+
 	public static final String PORTLET_ID = PortletKeys.BLOGS;
 
-	public static void addEntry(
-			long companyId, long groupId, long userId, String userName,
-			long entryId, String title, String content, Date displayDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getEntryDocument(
-			companyId, groupId, userId, userName, entryId, title, content,
-			displayDate, assetTagNames, expandoBridge);
-
-		SearchEngineUtil.addDocument(companyId, document);
+	public String[] getClassNames() {
+		return CLASS_NAMES;
 	}
 
-	public static void deleteEntry(long companyId, long entryId)
-		throws SearchException {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
-		SearchEngineUtil.deleteDocument(companyId, getEntryUID(entryId));
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String entryId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter("struts_action", "/blogs/view_entry");
+		portletURL.setParameter("entryId", entryId);
+
+		return new Summary(title, content, portletURL);
 	}
 
-	public static Document getEntryDocument(
-		long companyId, long groupId, long userId, String userName,
-		long entryId, String title, String content, Date displayDate,
-		String[] assetTagNames, ExpandoBridge expandoBridge) {
+	protected void doDelete(Object obj) throws Exception {
+		BlogsEntry entry = (BlogsEntry)obj;
 
-		long scopeGroupId = groupId;
+		Document document = new DocumentImpl();
 
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+		document.addUID(PORTLET_ID, entry.getEntryId());
 
-			if (group.isLayout()) {
-				groupId = group.getParentGroupId();
-			}
-		}
-		catch (Exception e) {
-		}
+		SearchEngineUtil.deleteDocument(
+			entry.getCompanyId(), document.get(Field.UID));
+	}
 
-		userName = PortalUtil.getUserName(userId, userName);
-		content = HtmlUtil.extractText(content);
+	protected Document doGetDocument(Object obj) throws Exception {
+		BlogsEntry entry = (BlogsEntry)obj;
+
+		long companyId = entry.getCompanyId();
+		long groupId = getParentGroupId(entry.getGroupId());
+		long scopeGroupId = entry.getGroupId();
+		long userId = entry.getUserId();
+		String userName = PortalUtil.getUserName(userId, entry.getUserName());
+		long entryId = entry.getEntryId();
+		String title = entry.getTitle();
+		String content = HtmlUtil.extractText(entry.getContent());
+		Date displayDate = entry.getDisplayDate();
+
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			BlogsEntry.class.getName(), entryId);
+
+		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
 		Document document = new DocumentImpl();
 
@@ -121,77 +139,58 @@ public class BlogsIndexer extends BaseIndexer {
 		return document;
 	}
 
-	public static String getEntryUID(long entryId) {
-		Document document = new DocumentImpl();
+	protected void doReindex(Object obj) throws Exception {
+		BlogsEntry entry = (BlogsEntry)obj;
 
-		document.addUID(PORTLET_ID, entryId);
+		if (!entry.isApproved()) {
+			return;
+		}
 
-		return document.get(Field.UID);
-	}
-
-	public static void updateEntry(
-			long companyId, long groupId, long userId, String userName,
-			long entryId, String title, String content, Date displayDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getEntryDocument(
-			companyId, groupId, userId, userName, entryId, title, content,
-			displayDate, assetTagNames, expandoBridge);
+		Document document = getDocument(entry);
 
 		SearchEngineUtil.updateDocument(
-			companyId, document.get(Field.UID), document);
+			entry.getCompanyId(), document.get(Field.UID), document);
 	}
 
-	public String[] getClassNames() {
-		return _CLASS_NAMES;
+	protected void doReindex(String className, long classPK) throws Exception {
+		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
+
+		doReindex(entry);
 	}
 
-	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
+	protected void doReindex(String[] ids) throws Exception {
+		long companyId = GetterUtil.getLong(ids[0]);
 
-		// Title
-
-		String title = document.get(Field.TITLE);
-
-		// Content
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		// Portlet URL
-
-		String entryId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter("struts_action", "/blogs/view_entry");
-		portletURL.setParameter("entryId", entryId);
-
-		return new Summary(title, content, portletURL);
+		reindexEntries(companyId);
 	}
 
-	public void reindex(String className, long classPK) throws SearchException {
-		try {
-			BlogsEntryLocalServiceUtil.reindex(classPK);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
+	}
+
+	protected void reindexEntries(long companyId) throws Exception {
+		int count = BlogsEntryLocalServiceUtil.getCompanyEntriesCount(
+			companyId, StatusConstants.APPROVED);
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			reindexEntries(companyId, start, end);
 		}
 	}
 
-	public void reindex(String[] ids) throws SearchException {
-		try {
-			BlogsEntryLocalServiceUtil.reindex(ids);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected void reindexEntries(long companyId, int start, int end)
+		throws Exception {
+
+		List<BlogsEntry> entries = BlogsEntryLocalServiceUtil.getCompanyEntries(
+			companyId, StatusConstants.APPROVED, start, end);
+
+		for (BlogsEntry entry : entries) {
+			reindex(entry);
 		}
 	}
-
-	private static final String[] _CLASS_NAMES = new String[] {
-		BlogsEntry.class.getName()
-	};
 
 }

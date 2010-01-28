@@ -131,10 +131,6 @@ public class DLServiceUtil {
 		return _service;
 	}
 
-	public static void reindex(String[] ids) throws SystemException {
-		getService().reindex(ids);
-	}
-
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)

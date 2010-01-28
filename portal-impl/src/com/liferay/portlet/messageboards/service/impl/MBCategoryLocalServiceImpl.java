@@ -24,22 +24,10 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.search.TermQuery;
-import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -52,7 +40,6 @@ import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.base.MBCategoryLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.util.MBIndexer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -167,6 +154,17 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public void addCategoryResources(
+			long categoryId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
+
+		addCategoryResources(category, communityPermissions, guestPermissions);
+	}
+
+	public void addCategoryResources(
 			MBCategory category, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -176,17 +174,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			category.getUserId(), MBCategory.class.getName(),
 			category.getCategoryId(), false, addCommunityPermissions,
 			addGuestPermissions);
-	}
-
-	public void addCategoryResources(
-			long categoryId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
-			categoryId);
-
-		addCategoryResources(category, communityPermissions, guestPermissions);
 	}
 
 	public void addCategoryResources(
@@ -234,13 +221,9 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			MBIndexer.deleteMessages(
-				category.getCompanyId(), category.getCategoryId());
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + category.getCategoryId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
+
+		indexer.delete(category);
 
 		// Threads
 
@@ -306,6 +289,19 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return mbCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
+	public List<MBCategory> getCompanyCategories(
+			long companyId, int start, int end)
+		throws SystemException {
+
+		return mbCategoryPersistence.findByCompanyId(companyId, start, end);
+	}
+
+	public int getCompanyCategoriesCount(long companyId)
+		throws SystemException {
+
+		return mbCategoryPersistence.countByCompanyId(companyId);
+	}
+
 	public void getSubcategoryIds(
 			List<Long> categoryIds, long groupId, long categoryId)
 		throws SystemException {
@@ -352,91 +348,26 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return category;
 	}
 
-	public void reindex(String[] ids) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
+	public void subscribeCategory(long userId, long groupId, long categoryId)
+		throws PortalException, SystemException {
+
+		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			categoryId = groupId;
 		}
 
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			reindexCategories(companyId);
-
-			reindexRoot(companyId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		subscriptionLocalService.addSubscription(
+			userId, MBCategory.class.getName(), categoryId);
 	}
 
-	public Hits search(
-			long companyId, long groupId, long userId, long[] categoryIds,
-			long threadId, String keywords, int start, int end)
-		throws SystemException {
+	public void unsubscribeCategory(long userId, long groupId, long categoryId)
+		throws PortalException, SystemException {
 
-		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
-
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, MBIndexer.PORTLET_ID);
-
-			if (groupId > 0) {
-				Group group = groupLocalService.getGroup(groupId);
-
-				if (group.isLayout()) {
-					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
-
-					groupId = group.getParentGroupId();
-				}
-
-				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
-			}
-
-			if ((categoryIds != null) && (categoryIds.length > 0)) {
-				BooleanQuery categoryIdsQuery =
-					BooleanQueryFactoryUtil.create();
-
-				for (long categoryId : categoryIds) {
-					TermQuery termQuery = TermQueryFactoryUtil.create(
-						"categoryId", categoryId);
-
-					categoryIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
-				}
-
-				contextQuery.add(categoryIdsQuery, BooleanClauseOccur.MUST);
-			}
-
-			if (threadId > 0) {
-				contextQuery.addTerm("threadId", threadId);
-			}
-
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
-
-			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.USER_NAME, keywords);
-				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.CONTENT, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-			}
-
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
-
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
-
-			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			return SearchEngineUtil.search(
-				companyId, groupId, userId, MBMessage.class.getName(),
-				fullQuery, start, end);
+		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			categoryId = groupId;
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+
+		subscriptionLocalService.deleteSubscription(
+			userId, MBCategory.class.getName(), categoryId);
 	}
 
 	public MBCategory updateCategory(
@@ -601,120 +532,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				// Indexer
 
-				mbMessageLocalService.reindex(message);
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					MBMessage.class);
+
+				indexer.reindex(message);
 			}
 		}
 
 		deleteCategory(fromCategory);
-	}
-
-	public void subscribeCategory(long userId, long groupId, long categoryId)
-		throws PortalException, SystemException {
-
-		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-			categoryId = groupId;
-		}
-
-		subscriptionLocalService.addSubscription(
-			userId, MBCategory.class.getName(), categoryId);
-	}
-
-	public void unsubscribeCategory(long userId, long groupId, long categoryId)
-		throws PortalException, SystemException {
-
-		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-			categoryId = groupId;
-		}
-
-		subscriptionLocalService.deleteSubscription(
-			userId, MBCategory.class.getName(), categoryId);
-	}
-
-	protected void reindexCategories(long companyId) throws SystemException {
-		int categoryCount = mbCategoryPersistence.countByCompanyId(companyId);
-
-		int categoryPages = categoryCount / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= categoryPages; i++) {
-			int categoryStart = (i * Indexer.DEFAULT_INTERVAL);
-			int categoryEnd = categoryStart + Indexer.DEFAULT_INTERVAL;
-
-			reindexCategories(companyId, categoryStart, categoryEnd);
-		}
-	}
-
-	protected void reindexCategories(
-			long companyId, int categoryStart, int categoryEnd)
-		throws SystemException {
-
-		List<MBCategory> categories = mbCategoryPersistence.findByCompanyId(
-			companyId, categoryStart, categoryEnd);
-
-		for (MBCategory category : categories) {
-			long groupId = category.getGroupId();
-			long categoryId = category.getCategoryId();
-
-			int messageCount = mbMessagePersistence.countByG_C(
-				groupId, categoryId);
-
-			int messagePages = messageCount / Indexer.DEFAULT_INTERVAL;
-
-			for (int i = 0; i <= messagePages; i++) {
-				int messageStart = (i * Indexer.DEFAULT_INTERVAL);
-				int messageEnd = messageStart + Indexer.DEFAULT_INTERVAL;
-
-				reindexMessages(groupId, categoryId, messageStart, messageEnd);
-			}
-		}
-	}
-
-	protected void reindexMessages(
-			long groupId, long categoryId, int messageStart, int messageEnd)
-		throws SystemException {
-
-		List<MBMessage> messages = mbMessagePersistence.findByG_C(
-			groupId, categoryId, messageStart, messageEnd);
-
-		for (MBMessage message : messages) {
-			mbMessageLocalService.reindex(message);
-		}
-	}
-
-	protected void reindexRoot(long companyId) throws SystemException {
-		int groupCount = groupPersistence.countByCompanyId(companyId);
-
-		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= groupPages; i++) {
-			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
-			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
-
-			reindexRoot(companyId, groupStart, groupEnd);
-		}
-	}
-
-	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
-		throws SystemException {
-
-		List<Group> groups = groupPersistence.findByCompanyId(
-			companyId, groupStart, groupEnd);
-
-		for (Group group : groups) {
-			long groupId = group.getGroupId();
-			long categoryId = MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
-
-			int entryCount = mbMessagePersistence.countByG_C(
-				groupId, categoryId);
-
-			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
-
-			for (int i = 0; i <= entryPages; i++) {
-				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
-				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
-
-				reindexMessages(groupId, categoryId, entryStart, entryEnd);
-			}
-		}
 	}
 
 	protected void validate(String name) throws PortalException {
@@ -722,8 +547,5 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			throw new CategoryNameException();
 		}
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(MBCategoryLocalServiceImpl.class);
 
 }

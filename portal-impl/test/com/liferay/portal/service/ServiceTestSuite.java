@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
@@ -48,9 +49,14 @@ import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
+import com.liferay.portlet.bookmarks.util.BookmarksIndexer;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceTest;
+import com.liferay.portlet.documentlibrary.util.DLIndexer;
+import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.imagegallery.service.IGImageServiceTest;
+import com.liferay.portlet.imagegallery.util.IGIndexer;
 import com.liferay.portlet.messageboards.service.MBMessageServiceTest;
+import com.liferay.portlet.messageboards.util.MBIndexer;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceTest;
 
 import java.util.HashMap;
@@ -136,6 +142,14 @@ public class ServiceTestSuite extends TestSuite {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		// Indexers
+
+		IndexerRegistryUtil.register(new UserIndexer());
+		IndexerRegistryUtil.register(new BookmarksIndexer());
+		IndexerRegistryUtil.register(new DLIndexer());
+		IndexerRegistryUtil.register(new IGIndexer());
+		IndexerRegistryUtil.register(new MBIndexer());
 
 		// Company
 

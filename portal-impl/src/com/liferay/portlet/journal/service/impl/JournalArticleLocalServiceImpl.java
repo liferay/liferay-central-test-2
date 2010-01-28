@@ -28,16 +28,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
-import com.liferay.portal.kernel.search.BooleanClause;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -97,7 +89,6 @@ import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl;
 import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
-import com.liferay.portlet.journal.util.JournalIndexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
@@ -450,15 +441,11 @@ public class JournalArticleLocalServiceImpl
 
 			journalArticlePersistence.update(article, false);
 
-			try {
-				if (article.isIndexable()) {
-					JournalIndexer.deleteArticle(
-						article.getCompanyId(), article.getGroupId(),
-						article.getArticleId());
-				}
-			}
-			catch (SearchException se) {
-				_log.error("Removing index " + article.getId(), se);
+			if (article.isIndexable()) {
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					JournalArticle.class);
+
+				indexer.delete(article);
 			}
 
 			JournalContentUtil.clearCache(
@@ -644,15 +631,11 @@ public class JournalArticleLocalServiceImpl
 
 		// Indexer
 
-		try {
-			if (article.isApproved() && article.isIndexable()) {
-				JournalIndexer.deleteArticle(
-					article.getCompanyId(), article.getGroupId(),
-					article.getArticleId());
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + article.getPrimaryKey(), se);
+		if (article.isApproved() && article.isIndexable()) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				JournalArticle.class);
+
+			indexer.delete(article);
 		}
 
 		// Email
@@ -1170,6 +1153,31 @@ public class JournalArticleLocalServiceImpl
 		return journalArticlePersistence.countByGroupId(groupId);
 	}
 
+	public List<JournalArticle> getCompanyArticles(
+			long companyId, int status, int start, int end)
+		throws SystemException {
+
+		if (status == StatusConstants.ANY) {
+			return journalArticlePersistence.findByCompanyId(
+				companyId, start, end);
+		}
+		else {
+			return journalArticlePersistence.findByC_S(
+				companyId, status, start, end);
+		}
+	}
+
+	public int getCompanyArticlesCount(long companyId, int status)
+		throws SystemException {
+
+		if (status == StatusConstants.ANY) {
+			return journalArticlePersistence.countByCompanyId(companyId);
+		}
+		else {
+			return journalArticlePersistence.countByC_S(companyId, status);
+		}
+	}
+
 	public JournalArticle getDisplayArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
@@ -1385,78 +1393,6 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	public void reindex(JournalArticle article) throws SystemException {
-		if (!article.isApproved() || !article.isIndexable()) {
-			return;
-		}
-
-		long companyId = article.getCompanyId();
-		long groupId = article.getGroupId();
-		long resourcePrimKey = article.getResourcePrimKey();
-		String articleId = article.getArticleId();
-		double version = article.getVersion();
-		String title = article.getTitle();
-		String description = article.getDescription();
-		String content = article.getContent();
-		String type = article.getType();
-		Date displayDate = article.getDisplayDate();
-
-		long[] assetCategoryIds = assetCategoryLocalService.getCategoryIds(
-			JournalArticle.class.getName(), resourcePrimKey);
-		String[] assetTagNames = assetTagLocalService.getTagNames(
-			JournalArticle.class.getName(), resourcePrimKey);
-
-		ExpandoBridge expandoBridge = article.getExpandoBridge();
-
-		try {
-			JournalIndexer.updateArticle(
-				companyId, groupId, resourcePrimKey, articleId, version, title,
-				description, content, type, displayDate, assetCategoryIds,
-				assetTagNames, expandoBridge);
-		}
-		catch (SearchException se) {
-			_log.error("Reindexing " + article.getId(), se);
-		}
-	}
-
-	public void reindex(long resourcePrimKey) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		JournalArticle article = null;
-
-		try {
-			article = getLatestArticle(
-				resourcePrimKey, StatusConstants.APPROVED);
-		}
-		catch (Exception e) {
-			if (e instanceof NoSuchArticleException) {
-				return;
-			}
-		}
-
-		reindex(article);
-	}
-
-	public void reindex(String[] ids) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			reindexArticles(companyId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
 	public JournalArticle removeArticleLocale(
 			long groupId, String articleId, double version, String languageId)
 		throws PortalException, SystemException {
@@ -1479,106 +1415,6 @@ public class JournalArticleLocalServiceImpl
 		journalArticlePersistence.update(article, false);
 
 		return article;
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, String keywords,
-			int start, int end)
-		throws SystemException {
-
-		return search(
-			companyId, groupId, userId, keywords, null, start, end);
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, String keywords,
-			String type, int start, int end)
-		throws SystemException {
-
-		Sort sort = new Sort("displayDate", Sort.LONG_TYPE, true);
-
-		return search(
-			companyId, groupId, userId, keywords, type, new Sort[] {sort},
-			start, end);
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, String keywords,
-			String type, List<BooleanClause> booleanClauses, Sort[] sorts,
-			int start, int end)
-		throws SystemException {
-
-		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
-
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, JournalIndexer.PORTLET_ID);
-
-			if (groupId > 0) {
-				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
-			}
-
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
-
-			if (Validator.isNotNull(type)) {
-				contextQuery.addRequiredTerm(Field.TYPE, type);
-			}
-			else {
-				searchQuery.addTerm(Field.TYPE, keywords);
-			}
-
-			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.CONTENT, keywords);
-				searchQuery.addTerm(Field.DESCRIPTION, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-			}
-
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
-
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
-
-			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			if (booleanClauses != null) {
-				for (BooleanClause booleanClause : booleanClauses) {
-					fullQuery.add(
-						booleanClause.getQuery(),
-						booleanClause.getBooleanClauseOccur());
-				}
-			}
-
-			return SearchEngineUtil.search(
-				companyId, groupId, userId, JournalArticle.class.getName(),
-				fullQuery, sorts, start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, String keywords,
-			String type, Sort sort, int start, int end)
-		throws SystemException {
-
-		return search(
-			companyId, groupId, userId, keywords, type, new Sort[] {sort},
-			start, end);
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, String keywords,
-			String type, Sort[] sorts, int start, int end)
-		throws SystemException {
-
-		List<BooleanClause> booleanClauses = null;
-
-		return search(
-			companyId, groupId, userId, keywords, type, booleanClauses, sorts,
-			start, end);
 	}
 
 	public List<JournalArticle> search(
@@ -1933,7 +1769,9 @@ public class JournalArticleLocalServiceImpl
 
 		// Indexer
 
-		reindex(article);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(JournalArticle.class);
+
+		indexer.reindex(article);
 
 		return article;
 	}
@@ -2036,7 +1874,10 @@ public class JournalArticleLocalServiceImpl
 
 				// Indexer
 
-				reindex(article);
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					JournalArticle.class);
+
+				indexer.reindex(article);
 			}
 			else {
 
@@ -2048,15 +1889,11 @@ public class JournalArticleLocalServiceImpl
 
 				// Indexer
 
-				try {
-					if (article.isIndexable()) {
-						JournalIndexer.deleteArticle(
-							article.getCompanyId(), article.getGroupId(),
-							article.getArticleId());
-					}
-				}
-				catch (SearchException se) {
-					_log.error("Removing index " + article.getId(), se);
+				if (article.isIndexable()) {
+					Indexer indexer = IndexerRegistryUtil.getIndexer(
+						JournalArticle.class);
+
+					indexer.delete(article);
 				}
 			}
 		}
@@ -2545,30 +2382,6 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return newUrlTitle;
-	}
-
-	protected void reindexArticles(long companyId) throws SystemException {
-		int count = journalArticlePersistence.countByCompanyId(companyId);
-
-		int pages = count / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= pages; i++) {
-			int start = (i * Indexer.DEFAULT_INTERVAL);
-			int end = start + Indexer.DEFAULT_INTERVAL;
-
-			reindexArticles(companyId, start, end);
-		}
-	}
-
-	protected void reindexArticles(long companyId, int start, int end)
-		throws SystemException {
-
-		List<JournalArticle> articles =
-			journalArticlePersistence.findByCompanyId(companyId, start, end);
-
-		for (JournalArticle article : articles) {
-			reindex(article);
-		}
 	}
 
 	protected void saveImages(

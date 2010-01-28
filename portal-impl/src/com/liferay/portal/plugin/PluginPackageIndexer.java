@@ -23,17 +23,24 @@
 package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.plugin.License;
-import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.search.BaseIndexer;
 
 import java.util.Date;
 import java.util.List;
@@ -50,46 +57,87 @@ import javax.portlet.PortletURL;
  */
 public class PluginPackageIndexer extends BaseIndexer {
 
+	public static final String[] CLASS_NAMES = {PluginPackage.class.getName()};
+
 	public static final String PORTLET_ID = "PluginPackageIndexer";
 
-	public static void addPluginPackage(
-			String moduleId, String name, String version, Date modifiedDate,
-			String author, List<String> types, List<String> tags,
-			List<License> licenses, List<String> liferayVersions,
-			String shortDescription, String longDescription, String changeLog,
-			String pageURL, String repositoryURL, String status,
-			String installedVersion)
-		throws SearchException {
-
-		Document document = getPluginPackageDocument(
-			moduleId, name, version, modifiedDate, author, types, tags,
-			licenses, liferayVersions, shortDescription, longDescription,
-			changeLog, pageURL, repositoryURL, status, installedVersion);
-
-		SearchEngineUtil.addDocument(CompanyConstants.SYSTEM, document);
+	public String[] getClassNames() {
+		return CLASS_NAMES;
 	}
 
-	public static void cleanIndex() throws SearchException {
-		SearchEngineUtil.deletePortletDocuments(
-			CompanyConstants.SYSTEM, PORTLET_ID);
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String moduleId = document.get("moduleId");
+		String repositoryURL = document.get("repositoryURL");
+
+		portletURL.setParameter(
+			"struts_action", "/admin/view");
+		portletURL.setParameter("tabs2", "repositories");
+		portletURL.setParameter("moduleId", moduleId);
+		portletURL.setParameter("repositoryURL", repositoryURL);
+
+		return new Summary(title, content, portletURL);
 	}
 
-	public static Document getPluginPackageDocument(
-		String moduleId, String name, String version, Date modifiedDate,
-		String author, List<String> types, List<String> tags,
-		List<License> licenses, List<String> liferayVersions,
-		String shortDescription, String longDescription, String changeLog,
-		String pageURL, String repositoryURL, String status,
-		String installedVersion) {
+	protected void doDelete(Object obj) throws Exception {
+		PluginPackage pluginPackage = (PluginPackage)obj;
+
+		Document document = new DocumentImpl();
+
+		document.addUID(PORTLET_ID, pluginPackage.getModuleId());
+
+		SearchEngineUtil.deleteDocument(
+			CompanyConstants.SYSTEM, document.get(Field.UID));
+	}
+
+	protected Document doGetDocument(Object obj) throws Exception {
+		PluginPackage pluginPackage = (PluginPackage)obj;
+
+		String moduleId = pluginPackage.getModuleId();
+		String name = pluginPackage.getName();
+		String version = pluginPackage.getVersion();
+		Date modifiedDate = pluginPackage.getModifiedDate();
+		String author = pluginPackage.getAuthor();
+		List<String> types = pluginPackage.getTypes();
+		List<String> tags = pluginPackage.getTags();
+		List<License> licenses = pluginPackage.getLicenses();
+		//List<String> liferayVersions = pluginPackage.getLiferayVersions();
+		String shortDescription = HtmlUtil.extractText(
+			pluginPackage.getShortDescription());
+		String longDescription = HtmlUtil.extractText(
+			pluginPackage.getLongDescription());
+		String changeLog = pluginPackage.getChangeLog();
+		String pageURL = pluginPackage.getPageURL();
+		String repositoryURL = pluginPackage.getRepositoryURL();
+
+		String[] statusAndInstalledVersion =
+			PluginPackageUtil.getStatusAndInstalledVersion(pluginPackage);
+
+		String status = statusAndInstalledVersion[0];
+		String installedVersion = statusAndInstalledVersion[1];
 
 		ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
 
-		shortDescription = HtmlUtil.extractText(shortDescription);
-		longDescription = HtmlUtil.extractText(longDescription);
+		StringBuilder sb = new StringBuilder();
 
-		String content =
-			name + " " + author + " " + shortDescription + " " +
-				longDescription;
+		sb.append(name);
+		sb.append(StringPool.SPACE);
+		sb.append(author);
+		sb.append(StringPool.SPACE);
+		sb.append(shortDescription);
+		sb.append(StringPool.SPACE);
+		sb.append(longDescription);
+
+		String content = sb.toString();
 
 		Document document = new DocumentImpl();
 
@@ -137,84 +185,101 @@ public class PluginPackageIndexer extends BaseIndexer {
 		return document;
 	}
 
-	public static String getPluginPackagerUID(String moduleId) {
-		Document document = new DocumentImpl();
+	protected void doReindex(Object obj) throws Exception {
+		PluginPackage pluginPackage = (PluginPackage)obj;
 
-		document.addUID(PORTLET_ID, moduleId);
-
-		return document.get(Field.UID);
-	}
-
-	public static void removePluginPackage(String moduleId)
-		throws SearchException {
-
-		SearchEngineUtil.deleteDocument(
-			CompanyConstants.SYSTEM, getPluginPackagerUID(moduleId));
-	}
-
-	public static void updatePluginPackage(
-			String moduleId, String name, String version, Date modifiedDate,
-			String author, List<String> types, List<String> tags,
-			List<License> licenses, List<String> liferayVersions,
-			String shortDescription, String longDescription, String changeLog,
-			String pageURL, String repositoryURL, String status,
-			String installedVersion)
-		throws SearchException {
-
-		Document document = getPluginPackageDocument(
-			moduleId, name, version, modifiedDate, author, types, tags,
-			licenses, liferayVersions, shortDescription, longDescription,
-			changeLog, pageURL, repositoryURL, status, installedVersion);
+		Document document = getDocument(pluginPackage);
 
 		SearchEngineUtil.updateDocument(
 			CompanyConstants.SYSTEM, document.get(Field.UID), document);
 	}
 
-	public String[] getClassNames() {
-		return _CLASS_NAMES;
+	protected void doReindex(String className, long classPK) throws Exception {
 	}
 
-	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
+	protected void doReindex(String[] ids) throws Exception {
+		SearchEngineUtil.deletePortletDocuments(
+			CompanyConstants.SYSTEM, PORTLET_ID);
 
-		// Title
+		for (PluginPackage pluginPackage :
+				PluginPackageUtil.getAllAvailablePluginPackages()) {
 
-		String title = document.get(Field.TITLE);
-
-		// Content
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		// Portlet URL
-
-		String moduleId = document.get("moduleId");
-		String repositoryURL = document.get("repositoryURL");
-
-		portletURL.setParameter(
-			"struts_action", "/admin/view");
-		portletURL.setParameter("tabs2", "repositories");
-		portletURL.setParameter("moduleId", moduleId);
-		portletURL.setParameter("repositoryURL", repositoryURL);
-
-		return new Summary(title, content, portletURL);
-	}
-
-	public void reindex(String className, long classPK) {
-	}
-
-	public void reindex(String[] ids) throws SearchException {
-		try {
-			PluginPackageUtil.reindex();
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+			doReindex(pluginPackage);
 		}
 	}
 
-	private static final String[] _CLASS_NAMES = new String[0];
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
+	}
+
+	protected void postProcessFullQuery(
+			BooleanQuery fullQuery, SearchContext searchContext)
+		throws Exception {
+
+		String type = (String)searchContext.getAttribute("type");
+
+		if (Validator.isNotNull(type)) {
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
+
+			searchQuery.addRequiredTerm("type", type);
+
+			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
+		}
+
+		String tag = (String)searchContext.getAttribute("tag");
+
+		if (Validator.isNotNull(tag)) {
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
+
+			searchQuery.addExactTerm("tag", tag);
+
+			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
+		}
+
+		String repositoryURL = (String)searchContext.getAttribute(
+			"repositoryURL");
+
+		if (Validator.isNotNull(repositoryURL)) {
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
+
+			Query query = TermQueryFactoryUtil.create(
+				"repositoryURL", repositoryURL);
+
+			searchQuery.add(query, BooleanClauseOccur.SHOULD);
+
+			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
+		}
+
+		String license = (String)searchContext.getAttribute("license");
+
+		if (Validator.isNotNull(license)) {
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
+
+			searchQuery.addExactTerm("license", license);
+
+			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
+		}
+
+		String status = (String)searchContext.getAttribute("status");
+
+		if (Validator.isNotNull(status) && !status.equals("all")) {
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
+
+			if (status.equals(
+					PluginPackageImpl.
+						STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED)) {
+
+				searchQuery.addExactTerm(
+					"status", PluginPackageImpl.STATUS_NOT_INSTALLED);
+				searchQuery.addExactTerm(
+					"status", PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED);
+			}
+			else {
+				searchQuery.addExactTerm("status", status);
+			}
+
+			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
+		}
+	}
 
 }

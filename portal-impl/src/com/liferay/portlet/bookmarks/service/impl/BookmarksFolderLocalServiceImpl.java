@@ -24,31 +24,17 @@ package com.liferay.portlet.bookmarks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.TermQuery;
-import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
-import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
-import com.liferay.portlet.bookmarks.util.BookmarksIndexer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -211,6 +197,18 @@ public class BookmarksFolderLocalServiceImpl
 		}
 	}
 
+	public List<BookmarksFolder> getCompanyFolders(
+			long companyId, int start, int end)
+		throws SystemException {
+
+		return bookmarksFolderPersistence.findByCompanyId(
+			companyId, start, end);
+	}
+
+	public int getCompanyFoldersCount(long companyId) throws SystemException {
+		return bookmarksFolderPersistence.countByCompanyId(companyId);
+	}
+
 	public BookmarksFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -255,102 +253,6 @@ public class BookmarksFolderLocalServiceImpl
 
 			getSubfolderIds(
 				folderIds, folder.getGroupId(), folder.getFolderId());
-		}
-	}
-
-	public void reindex(String[] ids) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			reindexFolders(companyId);
-
-			reindexRoot(companyId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, long[] folderIds,
-			String keywords, int start, int end)
-		throws SystemException {
-
-		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
-
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, BookmarksIndexer.PORTLET_ID);
-
-			if (groupId > 0) {
-				Group group = groupLocalService.getGroup(groupId);
-
-				if (group.isLayout()) {
-					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
-
-					groupId = group.getParentGroupId();
-				}
-
-				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
-			}
-
-			if ((folderIds != null) && (folderIds.length > 0)) {
-				BooleanQuery folderIdsQuery = BooleanQueryFactoryUtil.create();
-
-				for (long folderId : folderIds) {
-					if (userId > 0) {
-						try {
-							PermissionChecker permissionChecker =
-								PermissionThreadLocal.getPermissionChecker();
-
-							BookmarksFolderPermission.check(
-								permissionChecker, groupId, folderId,
-								ActionKeys.VIEW);
-						}
-						catch (Exception e) {
-							continue;
-						}
-					}
-
-					TermQuery termQuery = TermQueryFactoryUtil.create(
-						"folderId", folderId);
-
-					folderIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
-				}
-
-				contextQuery.add(folderIdsQuery, BooleanClauseOccur.MUST);
-			}
-
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
-
-			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-				searchQuery.addTerm(Field.URL, keywords);
-				searchQuery.addTerm(Field.COMMENTS, keywords);
-			}
-
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
-
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
-
-			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			return SearchEngineUtil.search(
-				companyId, groupId, userId, BookmarksEntry.class.getName(),
-				fullQuery, start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
 		}
 	}
 
@@ -462,99 +364,13 @@ public class BookmarksFolderLocalServiceImpl
 
 			bookmarksEntryPersistence.update(entry, false);
 
-			bookmarksEntryLocalService.reindex(entry);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				BookmarksEntry.class);
+
+			indexer.reindex(entry);
 		}
 
 		deleteFolder(fromFolder);
-	}
-
-	protected void reindexEntries(
-			long groupId, long folderId, int entryStart, int entryEnd)
-		throws SystemException {
-
-		List<BookmarksEntry> entries = bookmarksEntryPersistence.findByG_F(
-			groupId, folderId, entryStart, entryEnd);
-
-		for (BookmarksEntry entry : entries) {
-			bookmarksEntryLocalService.reindex(entry);
-		}
-	}
-
-	protected void reindexFolders(long companyId) throws SystemException {
-		int folderCount = bookmarksFolderPersistence.countByCompanyId(
-			companyId);
-
-		int folderPages = folderCount / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= folderPages; i++) {
-			int folderStart = (i * Indexer.DEFAULT_INTERVAL);
-			int folderEnd = folderStart + Indexer.DEFAULT_INTERVAL;
-
-			reindexFolders(companyId, folderStart, folderEnd);
-		}
-	}
-
-	protected void reindexFolders(
-			long companyId, int folderStart, int folderEnd)
-		throws SystemException {
-
-		List<BookmarksFolder> folders =
-			bookmarksFolderPersistence.findByCompanyId(
-				companyId, folderStart, folderEnd);
-
-		for (BookmarksFolder folder : folders) {
-			long groupId = folder.getGroupId();
-			long folderId = folder.getFolderId();
-
-			int entryCount = bookmarksEntryPersistence.countByG_F(
-				groupId, folderId);
-
-			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
-
-			for (int i = 0; i <= entryPages; i++) {
-				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
-				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
-
-				reindexEntries(groupId, folderId, entryStart, entryEnd);
-			}
-		}
-	}
-
-	protected void reindexRoot(long companyId) throws SystemException {
-		int groupCount = groupPersistence.countByCompanyId(companyId);
-
-		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= groupPages; i++) {
-			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
-			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
-
-			reindexRoot(companyId, groupStart, groupEnd);
-		}
-	}
-
-	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
-		throws SystemException {
-
-		List<Group> groups = groupPersistence.findByCompanyId(
-			companyId, groupStart, groupEnd);
-
-		for (Group group : groups) {
-			long groupId = group.getGroupId();
-			long folderId = BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-
-			int entryCount = bookmarksEntryPersistence.countByG_F(
-				groupId, folderId);
-
-			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
-
-			for (int i = 0; i <= entryPages; i++) {
-				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
-				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
-
-				reindexEntries(groupId, folderId, entryStart, entryEnd);
-			}
-		}
 	}
 
 	protected void validate(String name) throws PortalException {

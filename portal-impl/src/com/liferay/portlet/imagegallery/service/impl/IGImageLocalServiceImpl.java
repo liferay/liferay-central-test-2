@@ -26,10 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
@@ -44,7 +42,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
@@ -55,7 +52,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.social.IGActivityKeys;
-import com.liferay.portlet.imagegallery.util.IGIndexer;
 import com.liferay.portlet.imagegallery.util.comparator.ImageModifiedDateComparator;
 
 import java.awt.image.RenderedImage;
@@ -190,7 +186,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Indexer
 
-			reindex(image);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(IGImage.class);
+
+			indexer.reindex(image);
 
 			return image;
 		}
@@ -296,12 +294,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			IGIndexer.deleteImage(image.getCompanyId(), image.getImageId());
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + image.getImageId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(IGImage.class);
+
+		indexer.delete(image);
 	}
 
 	public void deleteImage(long imageId)
@@ -461,46 +456,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImageFinder.findByNoAssets();
 	}
 
-	public void reindex(IGImage image) throws SystemException {
-		long companyId = image.getCompanyId();
-		long groupId = image.getGroupId();
-		long folderId = image.getFolderId();
-		long imageId = image.getImageId();
-		String name = image.getName();
-		String description = image.getDescription();
-		Date modifiedDate = image.getModifiedDate();
-
-		long[] assetCategoryIds = assetCategoryLocalService.getCategoryIds(
-			IGImage.class.getName(), imageId);
-		String[] assetTagNames = assetTagLocalService.getTagNames(
-			IGImage.class.getName(), imageId);
-
-		ExpandoBridge expandoBridge = image.getExpandoBridge();
-
-		try {
-			IGIndexer.updateImage(
-				companyId, groupId, folderId, imageId, name, description,
-				modifiedDate, assetCategoryIds, assetTagNames, expandoBridge);
-		}
-		catch (SearchException se) {
-			_log.error("Reindexing " + imageId, se);
-		}
-	}
-
-	public void reindex(long imageId) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		IGImage image = igImagePersistence.fetchByPrimaryKey(imageId);
-
-		if (image == null) {
-			return;
-		}
-
-		reindex(image);
-	}
-
 	public void updateAsset(
 			long userId, IGImage image, long[] assetCategoryIds,
 			String[] assetTagNames, String contentType)
@@ -590,7 +545,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Indexer
 
-			reindex(image);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(IGImage.class);
+
+			indexer.reindex(image);
 
 			return image;
 		}
@@ -830,8 +787,5 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		validate(groupId, folderId, nameWithExtension);
 		validate(bytes);
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(IGImageLocalServiceImpl.class);
 
 }

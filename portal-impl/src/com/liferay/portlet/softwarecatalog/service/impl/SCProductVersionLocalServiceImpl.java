@@ -24,9 +24,8 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -41,7 +40,6 @@ import com.liferay.portlet.softwarecatalog.UnavailableProductVersionDirectDownlo
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductVersionLocalServiceBaseImpl;
-import com.liferay.portlet.softwarecatalog.util.SCIndexer;
 
 import java.util.Date;
 import java.util.List;
@@ -113,21 +111,9 @@ public class SCProductVersionLocalServiceImpl
 
 		// Indexer
 
-		try {
-			SCIndexer.updateProductEntry(
-				productEntry.getCompanyId(), productEntry.getGroupId(),
-				productEntry.getUserId(), productEntry.getUserName(),
-				productEntry.getProductEntryId(), productEntry.getName(), now,
-				productVersion.getVersion(), productEntry.getType(),
-				productEntry.getShortDescription(),
-				productEntry.getLongDescription(), productEntry.getPageURL(),
-				productEntry.getRepoGroupId(),
-				productEntry.getRepoArtifactId(),
-				productEntry.getExpandoBridge());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + productEntry.getProductEntryId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(SCProductEntry.class);
+
+		indexer.reindex(productEntry);
 
 		return productVersion;
 	}
@@ -232,21 +218,9 @@ public class SCProductVersionLocalServiceImpl
 
 		// Indexer
 
-		try {
-			SCIndexer.updateProductEntry(
-				productEntry.getCompanyId(), productEntry.getGroupId(),
-				productEntry.getUserId(), productEntry.getUserName(),
-				productEntry.getProductEntryId(), productEntry.getName(), now,
-				productVersion.getVersion(), productEntry.getType(),
-				productEntry.getShortDescription(),
-				productEntry.getLongDescription(), productEntry.getPageURL(),
-				productEntry.getRepoGroupId(),
-				productEntry.getRepoArtifactId(),
-				productEntry.getExpandoBridge());
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + productEntry.getProductEntryId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(SCProductEntry.class);
+
+		indexer.reindex(productEntry);
 
 		return productVersion;
 	}
@@ -312,8 +286,5 @@ public class SCProductVersionLocalServiceImpl
 			throw new ProductVersionFrameworkVersionException();
 		}
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(SCProductVersionLocalServiceImpl.class);
 
 }

@@ -27,21 +27,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.search.TermQuery;
-import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -52,7 +42,6 @@ import com.liferay.portlet.wiki.importers.WikiImporter;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.base.WikiNodeLocalServiceBaseImpl;
-import com.liferay.portlet.wiki.util.WikiIndexer;
 
 import java.io.File;
 
@@ -198,12 +187,9 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			WikiIndexer.deletePages(node.getCompanyId(), node.getNodeId());
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + node.getNodeId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(WikiPage.class);
+
+		indexer.delete(node);
 
 		// Subscriptions
 
@@ -236,6 +222,16 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 			deleteNode(node);
 		}
+	}
+
+	public List<WikiNode> getCompanyNodes(long companyId, int start, int end)
+		throws SystemException {
+
+		return wikiNodePersistence.findByCompanyId(companyId, start, end);
+	}
+
+	public int getCompanyNodesCount(long companyId) throws SystemException {
+		return wikiNodePersistence.countByCompanyId(companyId);
 	}
 
 	public WikiNode getNode(long nodeId)
@@ -272,94 +268,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		WikiNode node = getNode(nodeId);
 
 		getWikiImporter(importer).importPages(userId, node, files, options);
-	}
-
-	public void reindex(String[] ids) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			reindexNodes(companyId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, long[] nodeIds,
-			String keywords, int start, int end)
-		throws SystemException {
-
-		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
-
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, WikiIndexer.PORTLET_ID);
-
-			if (groupId > 0) {
-				Group group = groupLocalService.getGroup(groupId);
-
-				if (group.isLayout()) {
-					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
-
-					groupId = group.getParentGroupId();
-				}
-
-				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
-			}
-
-			if ((nodeIds != null) && (nodeIds.length > 0)) {
-				BooleanQuery nodeIdsQuery = BooleanQueryFactoryUtil.create();
-
-				for (long nodeId : nodeIds) {
-					if (userId > 0) {
-						try {
-							wikiNodeService.getNode(nodeId);
-						}
-						catch (Exception e) {
-							continue;
-						}
-					}
-
-					TermQuery termQuery = TermQueryFactoryUtil.create(
-						"nodeId", nodeId);
-
-					nodeIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
-				}
-
-				contextQuery.add(nodeIdsQuery, BooleanClauseOccur.MUST);
-			}
-
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
-
-			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.CONTENT, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-			}
-
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
-
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
-
-			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			return SearchEngineUtil.search(
-				companyId, groupId, userId, WikiPage.class.getName(), fullQuery,
-				start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
 	}
 
 	public void subscribeNode(long userId, long nodeId)
@@ -415,52 +323,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		}
 
 		return wikiImporter;
-	}
-
-	protected void reindexNodes(long companyId) throws SystemException {
-		int nodeCount = wikiNodePersistence.countByCompanyId(companyId);
-
-		int nodePages = nodeCount / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= nodePages; i++) {
-			int nodeStart = (i * Indexer.DEFAULT_INTERVAL);
-			int nodeEnd = nodeStart + Indexer.DEFAULT_INTERVAL;
-
-			reindexNodes(companyId, nodeStart, nodeEnd);
-		}
-	}
-
-	protected void reindexNodes(long companyId, int nodeStart, int nodeEnd)
-		throws SystemException {
-
-		List<WikiNode> nodes = wikiNodePersistence.findByCompanyId(
-			companyId, nodeStart, nodeEnd);
-
-		for (WikiNode node : nodes) {
-			long nodeId = node.getNodeId();
-
-			int pageCount = wikiPagePersistence.countByN_H(nodeId, true);
-
-			int pagePages = pageCount / Indexer.DEFAULT_INTERVAL;
-
-			for (int i = 0; i <= pagePages; i++) {
-				int pageStart = (i * Indexer.DEFAULT_INTERVAL);
-				int pageEnd = pageStart + Indexer.DEFAULT_INTERVAL;
-
-				reindexPages(nodeId, pageStart, pageEnd);
-			}
-		}
-	}
-
-	protected void reindexPages(long nodeId, int pageStart, int pageEnd)
-		throws SystemException {
-
-		List<WikiPage> pages = wikiPagePersistence.findByN_H(
-			nodeId, true, pageStart, pageEnd);
-
-		for (WikiPage page : pages) {
-			wikiPageLocalService.reindex(page);
-		}
 	}
 
 	protected void validate(long groupId, String name)

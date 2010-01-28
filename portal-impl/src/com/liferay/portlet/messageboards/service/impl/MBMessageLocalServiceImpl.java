@@ -37,8 +37,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -82,7 +82,6 @@ import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.social.MBActivityKeys;
-import com.liferay.portlet.messageboards.util.MBIndexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.MailingListThreadLocal;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
@@ -491,7 +490,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Indexer
 
-		reindex(message);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
+
+		indexer.reindex(message);
 
 		return message;
 	}
@@ -597,13 +598,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Indexer
 
-		try {
-			MBIndexer.deleteMessage(
-				message.getCompanyId(), message.getMessageId());
-		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + message.getMessageId(), se);
-		}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
+
+		indexer.delete(message);
 
 		// Attachments
 
@@ -823,7 +820,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long groupId, long categoryId, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.APPROVED) {
+		if (status == StatusConstants.ANY) {
 			return mbMessagePersistence.countByG_C(groupId, categoryId);
 		}
 		else {
@@ -836,7 +833,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long companyId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.APPROVED) {
+		if (status == StatusConstants.ANY) {
 			return mbMessagePersistence.findByCompanyId(companyId, start, end);
 		}
 		else {
@@ -1184,64 +1181,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 	}
 
-	public void reindex(long messageId) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		MBMessage message = mbMessagePersistence.fetchByPrimaryKey(messageId);
-
-		if (message == null) {
-			return;
-		}
-
-		if (message.isRoot()) {
-			List<MBMessage> messages = mbMessagePersistence.findByT_S(
-				message.getThreadId(), StatusConstants.APPROVED);
-
-			for (MBMessage curMessage : messages) {
-				reindex(curMessage);
-			}
-		}
-		else {
-			reindex(message);
-		}
-	}
-
-	public void reindex(MBMessage message) throws SystemException {
-		if (message.isDiscussion()
-			|| message.getStatus() != StatusConstants.APPROVED) {
-			return;
-		}
-
-		long companyId = message.getCompanyId();
-		long groupId = message.getGroupId();
-		long userId = message.getUserId();
-		String userName = message.getUserName();
-		long categoryId = message.getCategoryId();
-		long threadId = message.getThreadId();
-		long messageId = message.getMessageId();
-		String title = message.getSubject();
-		String content = message.getBody();
-		boolean anonymous = message.isAnonymous();
-		Date modifiedDate = message.getModifiedDate();
-
-		String[] assetTagNames = assetTagLocalService.getTagNames(
-			MBMessage.class.getName(), messageId);
-
-		ExpandoBridge expandoBridge = message.getExpandoBridge();
-
-		try {
-			MBIndexer.updateMessage(
-				companyId, groupId, userId, userName, categoryId, threadId,
-				messageId, title, content, anonymous, modifiedDate,
-				assetTagNames, expandoBridge);
-		}
-		catch (SearchException se) {
-			_log.error("Reindexing " + messageId, se);
-		}
-	}
-
 	public void subscribeMessage(long userId, long messageId)
 		throws PortalException, SystemException {
 
@@ -1444,7 +1383,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Indexer
 
-		reindex(message);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
+
+		indexer.reindex(message);
 
 		return message;
 	}
@@ -1600,7 +1541,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				MBMessage.class.getName(), message.getMessageId(), true);
 
 			if (reindex) {
-				reindex(message);
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					MBMessage.class);
+
+				indexer.reindex(message);
 			}
 		}
 

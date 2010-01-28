@@ -23,12 +23,15 @@
 package com.liferay.documentlibrary.util;
 
 import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -87,7 +90,7 @@ public class S3Hook extends BaseHook {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		try {
 			S3Object s3Object = new S3Object(
@@ -98,17 +101,26 @@ public class S3Hook extends BaseHook {
 
 			_s3Service.putObject(_s3Bucket, s3Object);
 
-			DLIndexerUtil.addFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate,
-				serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setAssetCategoryIds(serviceContext.getAssetCategoryIds());
+			fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileEntryId(fileEntryId);
+			fileModel.setFileName(fileName);
+			fileModel.setGroupId(groupId);
+			fileModel.setModifiedDate(modifiedDate);
+			fileModel.setPortletId(portletId);
+			fileModel.setProperties(properties);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.reindex(fileModel);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
 		}
 	}
 
@@ -137,7 +149,7 @@ public class S3Hook extends BaseHook {
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		try {
 			S3Object[] s3Objects = _s3Service.listObjects(
@@ -149,14 +161,19 @@ public class S3Hook extends BaseHook {
 				_s3Service.deleteObject(_s3Bucket, s3Object.getKey());
 			}
 
-			DLIndexerUtil.deleteFile(
-				companyId, portletId, repositoryId, fileName);
+			FileModel fileModel = new FileModel();
+
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileName(fileName);
+			fileModel.setPortletId(portletId);
+			fileModel.setRepositoryId(repositoryId);
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
+
+			indexer.delete(fileModel);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
 		}
 	}
 
@@ -301,11 +318,21 @@ public class S3Hook extends BaseHook {
 				String fileName = itr.next();
 
 				try {
-					Document doc = DLIndexerUtil.getFileDocument(
-						companyId, portletId, groupId, repositoryId, fileName);
+					Indexer indexer = IndexerRegistryUtil.getIndexer(
+						FileModel.class);
+
+					FileModel fileModel = new FileModel();
+
+					fileModel.setCompanyId(companyId);
+					fileModel.setFileName(fileName);
+					fileModel.setGroupId(groupId);
+					fileModel.setPortletId(portletId);
+					fileModel.setRepositoryId(repositoryId);
+
+					Document document = indexer.getDocument(fileModel);
 
 					SearchEngineUtil.updateDocument(
-						companyId, doc.get(Field.UID), doc);
+						companyId, document.get(Field.UID), document);
 				}
 				catch (Exception e) {
 					_log.error("Reindexing " + fileName, e);
@@ -361,11 +388,22 @@ public class S3Hook extends BaseHook {
 				FileUtil.delete(tempFile);
 			}
 
-			DLIndexerUtil.deleteFile(
-				companyId, portletId, repositoryId, fileName);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				FileModel.class);
 
-			DLIndexerUtil.addFile(
-				companyId, portletId, groupId, newRepositoryId, fileName);
+			FileModel fileModel = new FileModel();
+
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileName(fileName);
+			fileModel.setPortletId(portletId);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.delete(fileModel);
+
+			fileModel.setRepositoryId(newRepositoryId);
+			fileModel.setGroupId(groupId);
+
+			indexer.reindex(fileModel);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -380,7 +418,7 @@ public class S3Hook extends BaseHook {
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		try {
 			S3Object s3Object = new S3Object(
@@ -391,17 +429,26 @@ public class S3Hook extends BaseHook {
 
 			_s3Service.putObject(_s3Bucket, s3Object);
 
-			DLIndexerUtil.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate,
-				serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setAssetCategoryIds(serviceContext.getAssetCategoryIds());
+			fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileEntryId(fileEntryId);
+			fileModel.setFileName(fileName);
+			fileModel.setGroupId(groupId);
+			fileModel.setModifiedDate(modifiedDate);
+			fileModel.setPortletId(portletId);
+			fileModel.setProperties(properties);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.reindex(fileModel);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
 		}
 	}
 
@@ -452,11 +499,22 @@ public class S3Hook extends BaseHook {
 			}
 
 			if (reindex) {
-				DLIndexerUtil.deleteFile(
-					companyId, portletId, repositoryId, fileName);
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					FileModel.class);
 
-				DLIndexerUtil.addFile(
-					companyId, portletId, groupId, repositoryId, newFileName);
+				FileModel fileModel = new FileModel();
+
+				fileModel.setCompanyId(companyId);
+				fileModel.setFileName(fileName);
+				fileModel.setPortletId(portletId);
+				fileModel.setRepositoryId(repositoryId);
+
+				indexer.delete(fileModel);
+
+				fileModel.setFileName(newFileName);
+				fileModel.setGroupId(groupId);
+
+				indexer.reindex(fileModel);
 			}
 		}
 		catch (IOException ioe) {

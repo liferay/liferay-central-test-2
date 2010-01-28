@@ -25,15 +25,14 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.NoSuchFileException;
-import com.liferay.documentlibrary.util.DLIndexerUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
@@ -654,50 +653,6 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryFinder.findByNoAssets();
 	}
 
-	public void reindex(long fileEntryId) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		DLFileEntry fileEntry = dlFileEntryPersistence.fetchByPrimaryKey(
-			fileEntryId);
-
-		if (fileEntry == null) {
-			return;
-		}
-
-		DLFolder folder = fileEntry.getFolder();
-
-		long companyId = fileEntry.getCompanyId();
-		String portletId = PortletKeys.DOCUMENT_LIBRARY;
-		long groupId = folder.getGroupId();
-		long repositoryId = fileEntry.getRepositoryId();
-		String fileName = fileEntry.getName();
-		String properties = fileEntry.getLuceneProperties();
-		Date modifiedDate = fileEntry.getModifiedDate();
-
-		long[] assetCategoryIds = assetCategoryLocalService.getCategoryIds(
-			DLFileEntry.class.getName(), fileEntryId);
-		String[] assetTagNames = assetTagLocalService.getTagNames(
-			DLFileEntry.class.getName(), fileEntryId);
-
-		try {
-			if (fileEntry.getVersion() > 0) {
-				DLIndexerUtil.updateFile(
-					companyId, portletId, groupId, repositoryId, fileName,
-					fileEntryId, properties, modifiedDate, assetCategoryIds,
-					assetTagNames);
-			}
-			else {
-				DLIndexerUtil.deleteFile(
-					companyId, portletId, repositoryId, fileName);
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Reindexing " + fileEntryId, se);
-		}
-	}
-
 	public void updateAsset(
 			long userId, DLFileEntry fileEntry, long[] assetCategoryIds,
 			String[] assetTagNames)
@@ -1119,20 +1074,15 @@ public class DLFileEntryLocalServiceImpl
 
 		// Indexer
 
+		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
+
 		if (fileVersion.isApproved() &&
 			(fileEntry.getVersion() == fileVersion.getVersion())) {
 
-			reindex(fileEntry.getFileEntryId());
+			indexer.reindex(fileEntry);
 		}
 		else if (fileEntry.getVersion() == 0) {
-			try {
-				DLIndexerUtil.deleteFile(
-					fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-					fileEntry.getRepositoryId(), fileEntry.getName());
-			}
-			catch (SearchException se) {
-				_log.error("Deleting index " + fileEntry.getFileEntryId(), se);
-			}
+			indexer.delete(fileEntry);
 		}
 
 		return fileEntry;

@@ -35,19 +35,12 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StreamUtil;
@@ -60,7 +53,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -76,9 +68,7 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.CalEventConstants;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
 import com.liferay.portlet.calendar.social.CalendarActivityKeys;
-import com.liferay.portlet.calendar.util.CalIndexer;
 import com.liferay.portlet.calendar.util.CalUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.util.TimeZoneSensitive;
 
 import java.io.File;
@@ -254,7 +244,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Indexer
 
-		reindex(event);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(CalEvent.class);
+
+		indexer.reindex(event);
 
 		// Pool
 
@@ -398,6 +390,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		socialActivityLocalService.deleteActivities(
 			CalEvent.class.getName(), event.getEventId());
 
+		// Indexer
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(CalEvent.class);
+
+		indexer.delete(event);
+
 		// Pool
 
 		CalEventLocalUtil.clearEventsPool(event.getGroupId());
@@ -442,6 +440,16 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		List<CalEvent> events = calEventPersistence.findByGroupId(groupId);
 
 		return exportICal4j(toICalCalendar(userId, events), fileName);
+	}
+
+	public List<CalEvent> getCompanyEvents(long companyId, int start, int end)
+		throws SystemException {
+
+		return calEventPersistence.findByCompanyId(companyId, start, end);
+	}
+
+	public int getCompanyEventsCount(long companyId) throws SystemException {
+		return calEventPersistence.countByCompanyId(companyId);
 	}
 
 	public CalEvent getEvent(long eventId)
@@ -654,116 +662,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-	public void reindex(CalEvent event) throws SystemException {
-		long companyId = event.getCompanyId();
-		long groupId = event.getGroupId();
-		long userId = event.getUserId();
-		long eventId = event.getEventId();
-		String userName = event.getUserName();
-		String title = event.getTitle();
-		String description = event.getDescription();
-		Date modifiedDate = event.getModifiedDate();
-
-		String[] assetTagNames = assetTagLocalService.getTagNames(
-			CalEvent.class.getName(), eventId);
-
-		ExpandoBridge expandoBridge = event.getExpandoBridge();
-
-		try {
-			CalIndexer.updateEvent(
-				companyId, groupId, userId, userName, eventId, title,
-				description, modifiedDate, assetTagNames, expandoBridge);
-		}
-		catch (SearchException se) {
-			_log.error("Reindexing " + eventId, se);
-		}
-	}
-
-	public void reindex(long eventId) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		CalEvent event = calEventPersistence.fetchByPrimaryKey(eventId);
-
-		if (event == null) {
-			return;
-		}
-
-		reindex(event);
-	}
-
-	public void reindex(String[] ids) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			reindexEvents(companyId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, long ownerUserId,
-			String keywords, int start, int end)
-		throws SystemException {
-
-		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
-
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, CalIndexer.PORTLET_ID);
-
-			if (groupId > 0) {
-				Group group = groupLocalService.getGroup(groupId);
-
-				if (group.isLayout()) {
-					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
-
-					groupId = group.getParentGroupId();
-				}
-
-				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
-			}
-
-			if (ownerUserId > 0) {
-				contextQuery.addRequiredTerm(Field.USER_ID, ownerUserId);
-			}
-
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
-
-			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.USER_NAME, keywords);
-				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.DESCRIPTION, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-			}
-
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
-
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
-
-			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			return SearchEngineUtil.search(
-				companyId, groupId, userId, CalEvent.class.getName(), fullQuery,
-				start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
 	public CalEvent updateEvent(
 			long userId, long eventId, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
@@ -853,7 +751,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Indexer
 
-		reindex(event);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(CalEvent.class);
+
+		indexer.reindex(event);
 
 		// Pool
 
@@ -1135,30 +1035,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 
 		return false;
-	}
-
-	protected void reindexEvents(long companyId) throws SystemException {
-		int count = calEventPersistence.countByCompanyId(companyId);
-
-		int pages = count / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= pages; i++) {
-			int start = (i * Indexer.DEFAULT_INTERVAL);
-			int end = start + Indexer.DEFAULT_INTERVAL;
-
-			reindexEvents(companyId, start, end);
-		}
-	}
-
-	protected void reindexEvents(long companyId, int start, int end)
-		throws SystemException {
-
-		List<CalEvent> events = calEventPersistence.findByCompanyId(
-			companyId, start, end);
-
-		for (CalEvent event : events) {
-			reindex(event);
-		}
 	}
 
 	protected void remindUser(CalEvent event, User user, Calendar startDate) {

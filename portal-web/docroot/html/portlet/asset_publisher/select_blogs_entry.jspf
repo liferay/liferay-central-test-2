@@ -71,7 +71,18 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 		try {
-			Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), groupId, themeDisplay.getUserId(), userId, keywords, searchContainer.getStart(), searchContainer.getEnd());
+			Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
+
+			SearchContext searchContext = SearchContextFactory.getInstance(request);
+
+			searchContext.setEnd(searchContainer.getEnd());
+			searchContext.setGroupId(groupId);
+			searchContext.setKeywords(keywords);
+			searchContext.setOwnerUserId(userId);
+			searchContext.setStart(searchContainer.getStart());
+
+			Hits results = indexer.search(searchContext);
+
 			int total = results.getLength();
 
 			searchContainer.setTotal(total);

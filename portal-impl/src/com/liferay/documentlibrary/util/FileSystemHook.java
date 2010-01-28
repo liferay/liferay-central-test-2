@@ -26,14 +26,16 @@ import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -93,11 +95,23 @@ public class FileSystemHook extends BaseHook {
 
 			FileUtil.write(fileNameVersionFile, is);
 
-			DLIndexerUtil.addFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate,
-				serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setAssetCategoryIds(serviceContext.getAssetCategoryIds());
+			fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileEntryId(fileEntryId);
+			fileModel.setFileName(fileName);
+			fileModel.setGroupId(groupId);
+			fileModel.setModifiedDate(modifiedDate);
+			fileModel.setPortletId(portletId);
+			fileModel.setProperties(properties);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.reindex(fileModel);
 		}
 		catch (IOException ioe) {
 			throw new SystemException();
@@ -123,24 +137,27 @@ public class FileSystemHook extends BaseHook {
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		try {
-			File fileNameDir = getFileNameDir(
-				companyId, repositoryId, fileName);
+		File fileNameDir = getFileNameDir(
+			companyId, repositoryId, fileName);
 
-			if (!fileNameDir.exists()) {
-				throw new NoSuchFileException(fileNameDir.getPath());
-			}
-
-			FileUtil.deltree(fileNameDir);
-
-			DLIndexerUtil.deleteFile(
-				companyId, portletId, repositoryId, fileName);
+		if (!fileNameDir.exists()) {
+			throw new NoSuchFileException(fileNameDir.getPath());
 		}
-		catch (SearchException se) {
-			throw new SystemException();
-		}
+
+		FileUtil.deltree(fileNameDir);
+
+		FileModel fileModel = new FileModel();
+
+		fileModel.setCompanyId(companyId);
+		fileModel.setFileName(fileName);
+		fileModel.setPortletId(portletId);
+		fileModel.setRepositoryId(repositoryId);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
+
+		indexer.delete(fileModel);
 	}
 
 	public void deleteFile(
@@ -256,11 +273,21 @@ public class FileSystemHook extends BaseHook {
 			String fileName = fileNames[i];
 
 			try {
-				Document doc = DLIndexerUtil.getFileDocument(
-					companyId, portletId, groupId, repositoryId, fileName);
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					FileModel.class);
+
+				FileModel fileModel = new FileModel();
+
+				fileModel.setCompanyId(companyId);
+				fileModel.setFileName(fileName);
+				fileModel.setGroupId(groupId);
+				fileModel.setPortletId(portletId);
+				fileModel.setRepositoryId(repositoryId);
+
+				Document document = indexer.getDocument(fileModel);
 
 				SearchEngineUtil.updateDocument(
-					companyId, doc.get(Field.UID), doc);
+					companyId, document.get(Field.UID), document);
 			}
 			catch (Exception e) {
 				_log.error("Reindexing " + fileName, e);
@@ -271,31 +298,32 @@ public class FileSystemHook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
-		throws SystemException {
+		throws PortalException {
 
-		try {
-			File fileNameDir = getFileNameDir(
-				companyId, repositoryId, fileName);
-			File newFileNameDir = getFileNameDir(
-				companyId, newRepositoryId, fileName);
+		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
+		File newFileNameDir = getFileNameDir(
+			companyId, newRepositoryId, fileName);
 
-			FileUtil.copyDirectory(fileNameDir, newFileNameDir);
+		FileUtil.copyDirectory(fileNameDir, newFileNameDir);
 
-			FileUtil.deltree(fileNameDir);
+		FileUtil.deltree(fileNameDir);
 
-			try {
-				DLIndexerUtil.deleteFile(
-					companyId, portletId, repositoryId, fileName);
-			}
-			catch (SearchException se) {
-			}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(
+			FileModel.class);
 
-			DLIndexerUtil.addFile(
-				companyId, portletId, groupId, newRepositoryId, fileName);
-		}
-		catch (SearchException se) {
-			throw new SystemException();
-		}
+		FileModel fileModel = new FileModel();
+
+		fileModel.setCompanyId(companyId);
+		fileModel.setFileName(fileName);
+		fileModel.setPortletId(portletId);
+		fileModel.setRepositoryId(repositoryId);
+
+		indexer.delete(fileModel);
+
+		fileModel.setRepositoryId(newRepositoryId);
+		fileModel.setGroupId(groupId);
+
+		indexer.reindex(fileModel);
 	}
 
 	public void updateFile(
@@ -315,11 +343,23 @@ public class FileSystemHook extends BaseHook {
 
 			FileUtil.write(fileNameVersionFile, is);
 
-			DLIndexerUtil.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate,
-				serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setAssetCategoryIds(serviceContext.getAssetCategoryIds());
+			fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileEntryId(fileEntryId);
+			fileModel.setFileName(fileName);
+			fileModel.setGroupId(groupId);
+			fileModel.setModifiedDate(modifiedDate);
+			fileModel.setPortletId(portletId);
+			fileModel.setProperties(properties);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.reindex(fileModel);
 		}
 		catch (IOException ioe) {
 			throw new SystemException();
@@ -329,32 +369,32 @@ public class FileSystemHook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String newFileName, boolean reindex)
-		throws SystemException {
+		throws PortalException {
 
-		try {
-			File fileNameDir = getFileNameDir(
-				companyId, repositoryId, fileName);
-			File newFileNameDir = getFileNameDir(
-				companyId, repositoryId, newFileName);
+		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
+		File newFileNameDir = getFileNameDir(
+			companyId, repositoryId, newFileName);
 
-			FileUtil.copyDirectory(fileNameDir, newFileNameDir);
+		FileUtil.copyDirectory(fileNameDir, newFileNameDir);
 
-			FileUtil.deltree(fileNameDir);
+		FileUtil.deltree(fileNameDir);
 
-			if (reindex) {
-				try {
-					DLIndexerUtil.deleteFile(
-						companyId, portletId, repositoryId, fileName);
-				}
-				catch (SearchException se) {
-				}
+		if (reindex) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
 
-				DLIndexerUtil.addFile(
-					companyId, portletId, groupId, repositoryId, newFileName);
-			}
-		}
-		catch (SearchException se) {
-			throw new SystemException();
+			FileModel fileModel = new FileModel();
+
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileName(fileName);
+			fileModel.setPortletId(portletId);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.delete(fileModel);
+
+			fileModel.setFileName(newFileName);
+			fileModel.setGroupId(groupId);
+
+			indexer.reindex(fileModel);
 		}
 	}
 

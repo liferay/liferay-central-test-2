@@ -24,25 +24,12 @@ package com.liferay.portlet.imagegallery.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.TermQuery;
-import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
@@ -51,8 +38,6 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
-import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
-import com.liferay.portlet.imagegallery.util.IGIndexer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -208,6 +193,16 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		}
 	}
 
+	public List<IGFolder> getCompanyFolders(long companyId, int start, int end)
+		throws SystemException {
+
+		return igFolderPersistence.findByCompanyId(companyId, start, end);
+	}
+
+	public int getCompanyFoldersCount(long companyId) throws SystemException {
+		return igFolderPersistence.countByCompanyId(companyId);
+	}
+
 	public IGFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -256,101 +251,6 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 			getSubfolderIds(
 				folderIds, folder.getGroupId(), folder.getFolderId());
-		}
-	}
-
-	public void reindex(String[] ids) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			reindexFolders(companyId);
-
-			reindexRoot(companyId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, long[] folderIds,
-			String keywords, int start, int end)
-		throws SystemException {
-
-		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
-
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, IGIndexer.PORTLET_ID);
-
-			if (groupId > 0) {
-				Group group = groupLocalService.getGroup(groupId);
-
-				if (group.isLayout()) {
-					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
-
-					groupId = group.getParentGroupId();
-				}
-
-				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
-			}
-
-			if ((folderIds != null) && (folderIds.length > 0)) {
-				BooleanQuery folderIdsQuery = BooleanQueryFactoryUtil.create();
-
-				for (long folderId : folderIds) {
-					if (userId > 0) {
-						try {
-							PermissionChecker permissionChecker =
-								PermissionThreadLocal.getPermissionChecker();
-
-							IGFolderPermission.check(
-								permissionChecker, groupId, folderId,
-								ActionKeys.VIEW);
-						}
-						catch (Exception e) {
-							continue;
-						}
-					}
-
-					TermQuery termQuery = TermQueryFactoryUtil.create(
-						"folderId", folderId);
-
-					folderIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
-				}
-
-				contextQuery.add(folderIdsQuery, BooleanClauseOccur.MUST);
-			}
-
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
-
-			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.DESCRIPTION, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-			}
-
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
-
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
-
-			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			return SearchEngineUtil.search(
-				companyId, groupId, userId, IGImage.class.getName(), fullQuery,
-				start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
 		}
 	}
 
@@ -455,96 +355,12 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 			igImagePersistence.update(image, false);
 
-			igImageLocalService.reindex(image);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(IGImage.class);
+
+			indexer.reindex(image);
 		}
 
 		deleteFolder(fromFolder);
-	}
-
-	protected void reindexFolders(long companyId) throws SystemException {
-		int folderCount = igFolderPersistence.countByCompanyId(companyId);
-
-		int folderPages = folderCount / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= folderPages; i++) {
-			int folderStart = (i * Indexer.DEFAULT_INTERVAL);
-			int folderEnd = folderStart + Indexer.DEFAULT_INTERVAL;
-
-			reindexFolders(companyId, folderStart, folderEnd);
-		}
-	}
-
-	protected void reindexFolders(
-			long companyId, int folderStart, int folderEnd)
-		throws SystemException {
-
-		List<IGFolder> folders = igFolderPersistence.findByCompanyId(
-			companyId, folderStart, folderEnd);
-
-		for (IGFolder folder : folders) {
-			long groupId = folder.getGroupId();
-			long folderId = folder.getFolderId();
-
-			int entryCount = igImagePersistence.countByG_F(groupId, folderId);
-
-			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
-
-			for (int i = 0; i <= entryPages; i++) {
-				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
-				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
-
-				reindexImages(groupId, folderId, entryStart, entryEnd);
-			}
-		}
-	}
-
-	protected void reindexImages(
-			long groupId, long folderId, int entryStart, int entryEnd)
-		throws SystemException {
-
-		List<IGImage> images = igImagePersistence.findByG_F(
-			groupId, folderId, entryStart, entryEnd);
-
-		for (IGImage image : images) {
-			igImageLocalService.reindex(image);
-		}
-	}
-
-	protected void reindexRoot(long companyId) throws SystemException {
-		int groupCount = groupPersistence.countByCompanyId(companyId);
-
-		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= groupPages; i++) {
-			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
-			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
-
-			reindexRoot(companyId, groupStart, groupEnd);
-		}
-	}
-
-	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
-		throws SystemException {
-
-		List<Group> groups = groupPersistence.findByCompanyId(
-			companyId, groupStart, groupEnd);
-
-		for (Group group : groups) {
-			long groupId = group.getGroupId();
-			long folderId = IGFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-
-			int entryCount = igImagePersistence.countByG_F(
-				groupId, folderId);
-
-			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
-
-			for (int j = 0; j <= entryPages; j++) {
-				int entryStart = (j * Indexer.DEFAULT_INTERVAL);
-				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
-
-				reindexImages(groupId, folderId, entryStart, entryEnd);
-			}
-		}
 	}
 
 	protected void validate(

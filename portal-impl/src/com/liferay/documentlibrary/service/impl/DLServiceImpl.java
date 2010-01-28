@@ -26,11 +26,9 @@ import com.liferay.documentlibrary.DirectoryNameException;
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.util.Hook;
-import com.liferay.documentlibrary.util.Indexer;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.File;
@@ -150,17 +148,6 @@ public class DLServiceImpl implements DLService {
 		throws PortalException, SystemException {
 
 		return hook.getFileSize(companyId, repositoryId, fileName);
-	}
-
-	public void reindex(String[] ids) throws SystemException {
-		try {
-			Indexer indexer = new Indexer();
-
-			indexer.reindex(ids);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
 	}
 
 	public void updateFile(

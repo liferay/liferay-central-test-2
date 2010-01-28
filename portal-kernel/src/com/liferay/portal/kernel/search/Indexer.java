@@ -34,13 +34,21 @@ public interface Indexer {
 
 	public static final int DEFAULT_INTERVAL = 1000;
 
+	public void delete(Object obj) throws SearchException;
+
 	public String[] getClassNames();
+
+	public Document getDocument(Object obj) throws SearchException;
 
 	public Summary getSummary(
 		Document document, String snippet, PortletURL portletURL);
 
+	public void reindex(Object obj) throws SearchException;
+
 	public void reindex(String className, long classPK) throws SearchException;
 
 	public void reindex(String[] ids) throws SearchException;
+
+	public Hits search(SearchContext searchContext) throws SearchException;
 
 }

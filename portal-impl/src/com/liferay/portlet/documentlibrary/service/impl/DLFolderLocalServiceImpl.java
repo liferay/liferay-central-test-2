@@ -29,13 +29,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.ResourceConstants;
@@ -281,6 +278,16 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 	}
 
+	public List<DLFolder> getCompanyFolders(long companyId, int start, int end)
+		throws SystemException {
+
+		return dlFolderPersistence.findByCompanyId(companyId, start, end);
+	}
+
+	public int getCompanyFoldersCount(long companyId) throws SystemException {
+		return dlFolderPersistence.countByCompanyId(companyId);
+	}
+
 	public List<Object> getFileEntriesAndFileShortcuts(
 			long groupId, List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
@@ -409,32 +416,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 	}
 
-	public void reindex(String[] ids) throws SystemException {
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		try {
-			reindexFolders(companyId);
-
-			reindexRoot(companyId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, long[] folderIds,
-			String keywords, int start, int end)
-		throws SystemException {
-
-		return dlLocalService.search(
-			companyId, PortletKeys.DOCUMENT_LIBRARY, groupId, userId, folderIds,
-			keywords, start, end);
-	}
-
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name,
 			String description, ServiceContext serviceContext)
@@ -533,56 +514,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 
 		return parentFolderId;
-	}
-
-	protected void reindexFolders(long companyId) throws SystemException {
-		List<DLFolder> folders = getFolders(companyId);
-
-		for (DLFolder folder : folders) {
-			String portletId = PortletKeys.DOCUMENT_LIBRARY;
-			long groupId = folder.getGroupId();
-			long folderId = folder.getFolderId();
-
-			String[] newIds = {
-				String.valueOf(companyId), portletId,
-				String.valueOf(groupId), String.valueOf(folderId)
-			};
-
-			dlService.reindex(newIds);
-		}
-	}
-
-	protected void reindexRoot(long companyId) throws SystemException {
-		int groupCount = groupPersistence.countByCompanyId(companyId);
-
-		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= groupPages; i++) {
-			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
-			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
-
-			reindexRoot(companyId, groupStart, groupEnd);
-		}
-	}
-
-	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
-		throws SystemException {
-
-		List<Group> groups = groupPersistence.findByCompanyId(
-			companyId, groupStart, groupEnd);
-
-		for (Group group : groups) {
-			String portletId = PortletKeys.DOCUMENT_LIBRARY;
-			long groupId = group.getGroupId();
-			long folderId = groupId;
-
-			String[] newIds = {
-				String.valueOf(companyId), portletId,
-				String.valueOf(groupId), String.valueOf(folderId)
-			};
-
-			dlService.reindex(newIds);
-		}
 	}
 
 	protected void validate(

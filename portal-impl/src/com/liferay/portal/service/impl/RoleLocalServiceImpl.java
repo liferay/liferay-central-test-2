@@ -30,6 +30,8 @@ import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -39,6 +41,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -107,18 +110,22 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				companyId, 0, userId, Role.class.getName(), role.getRoleId(),
 				false, false, false);
 
-			userLocalService.reindex(userId);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+			indexer.reindex(userId);
 		}
 
 		return role;
 	}
 
 	public void addUserRoles(long userId, long[] roleIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		userPersistence.addRoles(userId, roleIds);
 
-		userLocalService.reindex(userId);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userId);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -409,7 +416,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		userPersistence.setRoles(userId, roleIds);
 
-		userLocalService.reindex(userId);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userId);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -421,7 +430,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		userPersistence.removeRoles(userId, roleIds);
 
-		userLocalService.reindex(userId);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userId);
 
 		PermissionCacheUtil.clearCache();
 	}

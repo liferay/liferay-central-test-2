@@ -22,23 +22,30 @@
 
 package com.liferay.portlet.bookmarks.util;
 
-import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -51,43 +58,64 @@ import javax.portlet.PortletURL;
  */
 public class BookmarksIndexer extends BaseIndexer {
 
+	public static final String[] CLASS_NAMES = {BookmarksEntry.class.getName()};
+
 	public static final String PORTLET_ID = PortletKeys.BOOKMARKS;
 
-	public static void addEntry(
-			long companyId, long groupId, long folderId, long entryId,
-			String name, String url, String comments, Date modifiedDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getEntryDocument(
-			companyId, groupId, folderId, entryId, name, url, comments,
-			modifiedDate, assetTagNames, expandoBridge);
-
-		SearchEngineUtil.addDocument(companyId, document);
+	public String[] getClassNames() {
+		return CLASS_NAMES;
 	}
 
-	public static void deleteEntry(long companyId, long entryId)
-		throws SearchException {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
-		SearchEngineUtil.deleteDocument(companyId, getEntryUID(entryId));
+		String title = document.get(Field.TITLE);
+
+		String url = document.get(Field.URL);
+
+		String entryId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter("struts_action", "/bookmarks/view_entry");
+		portletURL.setParameter("entryId", entryId);
+
+		return new Summary(title, url, portletURL);
 	}
 
-	public static Document getEntryDocument(
-		long companyId, long groupId, long folderId, long entryId, String name,
-		String url, String comments, Date modifiedDate, String[] assetTagNames,
-		ExpandoBridge expandoBridge) {
+	protected void checkSearchFolderId(
+			long folderId, SearchContext searchContext)
+		throws Exception {
 
-		long scopeGroupId = groupId;
+		BookmarksFolderServiceUtil.getFolder(folderId);
+	}
 
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+	protected void doDelete(Object obj) throws Exception {
+		BookmarksEntry entry = (BookmarksEntry)obj;
 
-			if (group.isLayout()) {
-				groupId = group.getParentGroupId();
-			}
-		}
-		catch (Exception e) {
-		}
+		Document document = new DocumentImpl();
+
+		document.addUID(PORTLET_ID, entry.getEntryId());
+
+		SearchEngineUtil.deleteDocument(
+			entry.getCompanyId(), document.get(Field.UID));
+	}
+
+	protected Document doGetDocument(Object obj) throws Exception {
+		BookmarksEntry entry = (BookmarksEntry)obj;
+
+		long companyId = entry.getCompanyId();
+		long groupId = getParentGroupId(entry.getGroupId());
+		long scopeGroupId = entry.getGroupId();
+		long folderId = entry.getFolderId();
+		long entryId = entry.getEntryId();
+		String name = entry.getName();
+		String url = entry.getUrl();
+		String comments = entry.getComments();
+		Date modifiedDate = entry.getModifiedDate();
+
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			BookmarksEntry.class.getName(), entryId);
+
+		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
 		Document document = new DocumentImpl();
 
@@ -115,73 +143,120 @@ public class BookmarksIndexer extends BaseIndexer {
 		return document;
 	}
 
-	public static String getEntryUID(long entryId) {
-		Document document = new DocumentImpl();
+	protected void doReindex(Object obj) throws Exception {
+		BookmarksEntry entry = (BookmarksEntry)obj;
 
-		document.addUID(PORTLET_ID, entryId);
-
-		return document.get(Field.UID);
-	}
-
-	public static void updateEntry(
-			long companyId, long groupId, long folderId, long entryId,
-			String name, String url, String comments, Date modifiedDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getEntryDocument(
-			companyId, groupId, folderId, entryId, name, url, comments,
-			modifiedDate, assetTagNames, expandoBridge);
+		Document document = getDocument(entry);
 
 		SearchEngineUtil.updateDocument(
-			companyId, document.get(Field.UID), document);
+			entry.getCompanyId(), document.get(Field.UID), document);
 	}
 
-	public String[] getClassNames() {
-		return _CLASS_NAMES;
+	protected void doReindex(String className, long classPK) throws Exception {
+		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
+
+		doReindex(entry);
 	}
 
-	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
+	protected void doReindex(String[] ids) throws Exception {
+		long companyId = GetterUtil.getLong(ids[0]);
 
-		// Title
-
-		String title = document.get(Field.TITLE);
-
-		// URL
-
-		String url = document.get(Field.URL);
-
-		// Portlet URL
-
-		String entryId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter("struts_action", "/bookmarks/view_entry");
-		portletURL.setParameter("entryId", entryId);
-
-		return new Summary(title, url, portletURL);
+		reindexFolders(companyId);
+		reindexRoot(companyId);
 	}
 
-	public void reindex(String className, long classPK) throws SearchException {
-		try {
-			BookmarksEntryLocalServiceUtil.reindex(classPK);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
+	}
+
+	protected void reindexEntries(
+			long groupId, long folderId, int entryStart, int entryEnd)
+		throws Exception {
+
+		List<BookmarksEntry> entries =
+			BookmarksEntryLocalServiceUtil.getEntries(
+				groupId, folderId, entryStart, entryEnd);
+
+		for (BookmarksEntry entry : entries) {
+			reindex(entry);
 		}
 	}
 
-	public void reindex(String[] ids) throws SearchException {
-		try {
-			BookmarksFolderLocalServiceUtil.reindex(ids);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected void reindexFolders(long companyId) throws Exception {
+		int folderCount =
+			BookmarksFolderLocalServiceUtil.getCompanyFoldersCount(companyId);
+
+		int folderPages = folderCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= folderPages; i++) {
+			int folderStart = (i * Indexer.DEFAULT_INTERVAL);
+			int folderEnd = folderStart + Indexer.DEFAULT_INTERVAL;
+
+			reindexFolders(companyId, folderStart, folderEnd);
 		}
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		BookmarksEntry.class.getName()
-	};
+	protected void reindexFolders(
+			long companyId, int folderStart, int folderEnd)
+		throws Exception {
+
+		List<BookmarksFolder> folders =
+			BookmarksFolderLocalServiceUtil.getCompanyFolders(
+				companyId, folderStart, folderEnd);
+
+		for (BookmarksFolder folder : folders) {
+			long groupId = folder.getGroupId();
+			long folderId = folder.getFolderId();
+
+			int entryCount = BookmarksEntryLocalServiceUtil.getEntriesCount(
+				groupId, folderId);
+
+			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int i = 0; i <= entryPages; i++) {
+				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
+				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
+
+				reindexEntries(groupId, folderId, entryStart, entryEnd);
+			}
+		}
+	}
+
+	protected void reindexRoot(long companyId) throws Exception {
+		int groupCount = GroupLocalServiceUtil.getCompanyGroupsCount(companyId);
+
+		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= groupPages; i++) {
+			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
+			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
+
+			reindexRoot(companyId, groupStart, groupEnd);
+		}
+	}
+
+	protected void reindexRoot(long companyId, int groupStart, int groupEnd)
+		throws Exception {
+
+		List<Group> groups = GroupLocalServiceUtil.getCompanyGroups(
+			companyId, groupStart, groupEnd);
+
+		for (Group group : groups) {
+			long groupId = group.getGroupId();
+			long folderId = BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+
+			int entryCount = BookmarksEntryLocalServiceUtil.getEntriesCount(
+				groupId, folderId);
+
+			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int i = 0; i <= entryPages; i++) {
+				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
+				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
+
+				reindexEntries(groupId, folderId, entryStart, entryEnd);
+			}
+		}
+	}
 
 }

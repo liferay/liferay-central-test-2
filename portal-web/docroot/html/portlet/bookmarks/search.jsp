@@ -89,7 +89,16 @@ String keywords = ParamUtil.getString(request, "keywords");
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 	try {
-		Hits results = BookmarksFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+		Indexer indexer = IndexerRegistryUtil.getIndexer(BookmarksEntry.class);
+
+		SearchContext searchContext = SearchContextFactory.getInstance(request);
+
+		searchContext.setEnd(searchContainer.getEnd());
+		searchContext.setFolderIds(folderIdsArray);
+		searchContext.setKeywords(keywords);
+		searchContext.setStart(searchContainer.getStart());
+
+		Hits results = indexer.search(searchContext);
 
 		int total = results.getLength();
 

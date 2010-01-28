@@ -22,26 +22,28 @@
 
 package com.liferay.portlet.calendar.util;
 
-import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -52,52 +54,67 @@ import javax.portlet.PortletURL;
  */
 public class CalIndexer extends BaseIndexer {
 
+	public static final String[] CLASS_NAMES = {CalEvent.class.getName()};
+
 	public static final String PORTLET_ID = PortletKeys.CALENDAR;
 
-	public static void addEvent(
-			long companyId, long groupId, long userId, String userName,
-			long eventId, String title, String description, Date displayDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getEventDocument(
-			companyId, groupId, userId, userName, eventId, title, description,
-			displayDate, assetTagNames, expandoBridge);
-
-		SearchEngineUtil.addDocument(companyId, document);
+	public String[] getClassNames() {
+		return CLASS_NAMES;
 	}
 
-	public static void deleteEvent(long companyId, long eventId)
-		throws SearchException {
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
 
-		SearchEngineUtil.deleteDocument(companyId, getEventUID(eventId));
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
+		}
+
+		String eventId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter("struts_action", "/calendar/view_event");
+		portletURL.setParameter("eventId", eventId);
+
+		return new Summary(title, content, portletURL);
 	}
 
-	public static Document getEventDocument(
-		long companyId, long groupId, long userId, String userName,
-		long eventId, String title, String description, Date displayDate,
-		String[] assetTagNames, ExpandoBridge expandoBridge) {
+	protected void doDelete(Object obj) throws Exception {
+		CalEvent event = (CalEvent)obj;
 
-		long scopeGroupId = groupId;
+		Document document = new DocumentImpl();
 
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+		document.addUID(PORTLET_ID, event.getEventId());
 
-			if (group.isLayout()) {
-				groupId = group.getParentGroupId();
-			}
-		}
-		catch (Exception e) {
-		}
+		SearchEngineUtil.deleteDocument(
+			event.getCompanyId(), document.get(Field.UID));
+	}
 
-		userName = PortalUtil.getUserName(userId, userName);
-		description = HtmlUtil.extractText(description);
+	protected Document doGetDocument(Object obj) throws Exception {
+		CalEvent event = (CalEvent)obj;
+
+		long companyId = event.getCompanyId();
+		long groupId = getParentGroupId(event.getGroupId());
+		long scopeGroupId = event.getGroupId();
+		long userId = event.getUserId();
+		long eventId = event.getEventId();
+		String userName = PortalUtil.getUserName(userId, event.getUserName());
+		String title = event.getTitle();
+		String description = HtmlUtil.extractText(event.getDescription());
+		Date modifiedDate = event.getModifiedDate();
+
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			CalEvent.class.getName(), eventId);
+
+		ExpandoBridge expandoBridge = event.getExpandoBridge();
 
 		Document document = new DocumentImpl();
 
 		document.addUID(PORTLET_ID, eventId);
 
-		document.addModifiedDate(displayDate);
+		document.addModifiedDate(modifiedDate);
 
 		document.addKeyword(Field.COMPANY_ID, companyId);
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
@@ -118,77 +135,53 @@ public class CalIndexer extends BaseIndexer {
 		return document;
 	}
 
-	public static String getEventUID(long eventId) {
-		Document document = new DocumentImpl();
+	protected void doReindex(Object obj) throws Exception {
+		CalEvent event = (CalEvent)obj;
 
-		document.addUID(PORTLET_ID, eventId);
-
-		return document.get(Field.UID);
-	}
-
-	public static void updateEvent(
-			long companyId, long groupId, long userId, String userName,
-			long eventId, String title, String description, Date displayDate,
-			String[] assetTagNames, ExpandoBridge expandoBridge)
-		throws SearchException {
-
-		Document document = getEventDocument(
-			companyId, groupId, userId, userName, eventId, title, description,
-			displayDate, assetTagNames, expandoBridge);
+		Document document = getDocument(event);
 
 		SearchEngineUtil.updateDocument(
-			companyId, document.get(Field.UID), document);
+			event.getCompanyId(), document.get(Field.UID), document);
 	}
 
-	public String[] getClassNames() {
-		return _CLASS_NAMES;
+	protected void doReindex(String className, long classPK) throws Exception {
+		CalEvent event = CalEventLocalServiceUtil.getEvent(classPK);
+
+		doReindex(event);
 	}
 
-	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
+	protected void doReindex(String[] ids) throws Exception {
+		long companyId = GetterUtil.getLong(ids[0]);
 
-		// Title
-
-		String title = document.get(Field.TITLE);
-
-		// Content
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
-		}
-
-		// Portlet URL
-
-		String eventId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter("struts_action", "/calendar/view_event");
-		portletURL.setParameter("eventId", eventId);
-
-		return new Summary(title, content, portletURL);
+		reindexEvents(companyId);
 	}
 
-	public void reindex(String className, long classPK) throws SearchException {
-		try {
-			CalEventLocalServiceUtil.reindex(classPK);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
+	}
+
+	protected void reindexEvents(long companyId) throws Exception {
+		int count = CalEventLocalServiceUtil.getCompanyEventsCount(companyId);
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			reindexEvents(companyId, start, end);
 		}
 	}
 
-	public void reindex(String[] ids) throws SearchException {
-		try {
-			CalEventLocalServiceUtil.reindex(ids);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
+	protected void reindexEvents(long companyId, int start, int end)
+		throws Exception {
+
+		List<CalEvent> events = CalEventLocalServiceUtil.getCompanyEvents(
+			companyId, start, end);
+
+		for (CalEvent event : events) {
+			reindex(event);
 		}
 	}
-
-	private static final String[] _CLASS_NAMES = new String[] {
-		CalEvent.class.getName()
-	};
 
 }
