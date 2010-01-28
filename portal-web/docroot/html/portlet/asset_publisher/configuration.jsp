@@ -260,9 +260,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 				<c:when test='<%= selectionStyle.equals("dynamic") %>'>
 					<liferay-ui:panel-container extended="<%= true %>" id='assetPublisherConfiguration' persistState="<%= true %>">
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherSources' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "source") %>'>
-							<aui:fieldset>
-								<aui:legend label="scope" />
-
+							<aui:fieldset label="scope">
 								<aui:select label="" name="defaultScope">
 									<aui:option label="<%= themeDisplay.getScopeGroup().getDescriptiveName() %>" selected="<%= defaultScope %>" value="<%= true %>" />
 									<aui:option label='<%= LanguageUtil.get(pageContext,"select") + "..." %>' selected="<%= !defaultScope %>" value="<%= false %>" />
@@ -321,9 +319,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								</div>
 							</aui:fieldset>
 
-							<aui:fieldset>
-								<aui:legend label="asset-entry-type" />
-
+							<aui:fieldset label="asset-entry-type">
 								<aui:select label="" name="anyAssetType">
 									<aui:option label="any" selected="<%= anyAssetType %>" value="<%= true %>" />
 									<aui:option label='<%= LanguageUtil.get(pageContext, "filter[action]") + "..." %>' selected="<%= !anyAssetType %>" value="<%= false %>" />
@@ -380,8 +376,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<liferay-ui:asset-tags-error />
 
 							<div id="<portlet:namespace />queryRules">
-								<aui:fieldset>
-									<aui:legend label="displayed-assets-must-match-these-rules" />
+								<aui:fieldset label="displayed-assets-must-match-these-rules">
 
 									<%
 									String queryLogicIndexesParam = ParamUtil.getString(request, "queryLogicIndexes");

@@ -111,9 +111,7 @@
 	<aui:input helpMessage="enable-tag-based-navigation-help" inlineLabel="left" label="enable-tag-based-navigation" name="enableTagBasedNavigation" type="checkbox" value="<%= enableTagBasedNavigation %>" />
 </c:if>
 
-<aui:fieldset>
-	<aui:legend label="show-metadata" />
-
+<aui:fieldset label="show-metadata">
 	<aui:input name="metadataFields" type="hidden" />
 
 	<%

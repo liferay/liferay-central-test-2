@@ -26,9 +26,7 @@
 
 <%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
 
-<aui:fieldset>
-	<aui:legend label="schedule-event" />
-
+<aui:fieldset label="schedule-event">
 	<aui:input name="description" type="text" />
 
 	<%

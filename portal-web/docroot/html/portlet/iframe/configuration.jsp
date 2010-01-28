@@ -53,17 +53,13 @@ String htmlAttributes =
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<aui:fieldset>
-		<aui:legend label="general" />
-
+	<aui:fieldset label="general">
 		<aui:input cssClass="lfr-input-text-container" label="source-url" name="src" prefix='<%= relative ? "..." : StringPool.BLANK %>' type="text" value="<%= src %>" />
 
 		<aui:input inlineLabel="left" label="relative-to-context-path" name="relative" type="checkbox" value="<%= relative %>" />
 	</aui:fieldset>
 
-	<aui:fieldset>
-		<aui:legend label="authentication" />
-
+	<aui:fieldset label="authentication">
 		<aui:input inlineLabel="left" label="authenticate" name="auth" type="checkbox" value="<%= auth %>" />
 
 		<div id="<portlet:namespace />authenticationOptions">
@@ -126,9 +122,7 @@ String htmlAttributes =
 		</div>
 	</aui:fieldset>
 
-	<aui:fieldset>
-		<aui:legend label="advanced" />
-
+	<aui:fieldset label="advanced">
 		<aui:input cssClass="lfr-textarea-container" name="htmlAttributes" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" value="<%= htmlAttributes %>" wrap="soft" />
 	</aui:fieldset>
 

@@ -140,8 +140,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 					<br />
 
-					<aui:fieldset>
-						<aui:legend label="incoming" />
+					<aui:fieldset label="incoming">
 
 						<%
 						String protocol = BeanParamUtil.getString(mailingList, request, "inProtocol", "pop3");
@@ -165,9 +164,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 						<aui:input label="read-interval-minutes" name="inReadInterval" value="5" />
 					</aui:fieldset>
 
-					<aui:fieldset>
-						<aui:legend label="outgoing" />
-
+					<aui:fieldset label="outgoing">
 						<aui:input label="email-address" name="outEmailAddress" />
 
 						<aui:input inlineLabel="left" label="use-custom-outgoing-server" name="outCustom" />

@@ -23,9 +23,7 @@
 %>
 
 <c:if test="<%= CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.EXPORT_ALL_EVENTS) %>">
-	<aui:fieldset>
-		<aui:legend label="export" />
-
+	<aui:fieldset label="export">
 		<aui:input cssClass="lfr-input-text-container" label="" name="exportFileName" type="text" value="liferay.ics" />
 	</aui:fieldset>
 
@@ -47,8 +45,7 @@
 		<br /><br />
 	</c:if>
 
-	<aui:fieldset>
-		<aui:legend label="import" />
+	<aui:fieldset label="import">
 		<aui:input cssClass="lfr-input-text-container" name="file" type="file" />
 	</aui:fieldset>
 

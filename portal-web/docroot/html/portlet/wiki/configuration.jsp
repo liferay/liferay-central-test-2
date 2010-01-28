@@ -377,8 +377,7 @@ else if (tabs2.equals("page-updated-email")) {
 				</c:if>
 			</aui:fieldset>
 
-			<aui:fieldset>
-				<aui:legend label="visible-wikis" />
+			<aui:fieldset label="visible-wikis">
 				<aui:input name="visibleNodes" type="hidden" />
 				<aui:input name="hiddenNodes" type="hidden" />
 

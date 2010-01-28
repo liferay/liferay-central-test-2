@@ -34,8 +34,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<aui:fieldset>
-		<aui:legend label="languages" />
+	<aui:fieldset label="languages">
 		<aui:input name="languageIds" type="hidden" />
 
 		<%

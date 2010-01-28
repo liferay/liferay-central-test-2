@@ -53,9 +53,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 	</div>
 
 	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
-		<aui:fieldset>
-			<aui:legend label="upload-files" />
-
+		<aui:fieldset label="upload-files">
 			<aui:input label='<%= LanguageUtil.get(pageContext, "file") + " 1" %>' name="file1" type="file" />
 
 			<aui:input label='<%= LanguageUtil.get(pageContext, "file") + " 2" %>' name="file2" type="file" />

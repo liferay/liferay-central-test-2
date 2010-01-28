@@ -155,9 +155,7 @@ String editorContent = emailEventReminderBody;
 			</table>
 		</c:when>
 		<c:when test='<%= tabs2.equals("display-settings") %>'>
-			<aui:fieldset>
-				<aui:legend label="default-tab" />
-
+			<aui:fieldset label="default-tab">
 				<aui:select label="default-tab" name="tabs1Default">
 
 					<%
@@ -173,9 +171,7 @@ String editorContent = emailEventReminderBody;
 				</aui:select>
 			</aui:fieldset>
 
-			<aui:fieldset>
-				<aui:legend label="summary-tab" />
-
+			<aui:fieldset label="summary-tab">
 				<aui:select label="summary-tab" name="summaryTabOrientation">
 					<aui:option label="horizontal" selected='<%= summaryTabOrientation.equals("horizontal") %>' />
 					<aui:option label="vertical" selected='<%= summaryTabOrientation.equals("vertical") %>' />

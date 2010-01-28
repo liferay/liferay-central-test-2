@@ -237,8 +237,7 @@ portletURL.setParameter("modelResource", modelResource);
 	</aui:fieldset>
 
 	<c:if test="<%= column != null %>">
-		<aui:fieldset>
-			<aui:legend label="properties" />
+		<aui:fieldset label="properties">
 			<aui:input type="hidden" name="PropertyName(hidden)" value="hidden" />
 
 			<aui:select helpMessage="custom-field-hidden-help" label="hidden" name="Property(hidden)">

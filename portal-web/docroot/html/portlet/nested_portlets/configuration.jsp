@@ -33,9 +33,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<aui:fieldset>
-		<aui:legend label="layout-template" />
-
+	<aui:fieldset label="layout-template">
 		<table border="0" cellpadding="0" cellspacing="10" style="margin-top: 10px;" width="100%">
 
 		<%
@@ -88,9 +86,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	boolean portletSetupShowBorders = GetterUtil.getBoolean(preferences.getValue("portlet-setup-show-borders", String.valueOf(portletDecorateDefault)));
 	%>
 
-	<aui:fieldset>
-		<aui:legend label="display-settings" />
-
+	<aui:fieldset label="display-settings">
 		<aui:input inlineLabel="left" label="show-borders" name="portletSetupShowBorders" type="checkbox" value="<%= portletSetupShowBorders %>" />
 	</aui:fieldset>
 

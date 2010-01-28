@@ -22,9 +22,7 @@
  */
 %>
 
-<aui:fieldset style='<%= (proposalId > 0) ? "display: none;" : "" %>'>
-	<aui:legend label="scope" />
-
+<aui:fieldset label="scope" style='<%= (proposalId > 0) ? "display: none;" : "" %>'>
 	<c:choose>
 		<c:when test="<%= !publish %>">
 

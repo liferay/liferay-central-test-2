@@ -64,9 +64,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 
 <br /><br />
 
-<aui:fieldset>
-	<aui:legend label="scheduled-events" />
-
+<aui:fieldset label="scheduled-events">
 	<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
 </aui:fieldset>
 

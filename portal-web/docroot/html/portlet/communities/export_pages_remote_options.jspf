@@ -26,9 +26,7 @@
 
 <br /><br />
 
-<aui:fieldset>
-	<aui:legend label="remote-options" />
-
+<aui:fieldset label="remote-options">
 	<aui:input label="remote-host-ip" name="remoteAddress" size="20" type="text" value="<%= PortalUtil.getHost(request) %>" />
 
 	<aui:input label="remote-port" name="remotePort" size="10" type="text" value="<%= PortalUtil.getPortalPort() %>" />
