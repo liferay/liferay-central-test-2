@@ -102,6 +102,7 @@
 
 .portlet-document-library .file-entry-download, .portlet-document-library .folder-icon {
 	margin-bottom: 2em;
+	overflow: hidden;
 	text-align: center;
 }
 
