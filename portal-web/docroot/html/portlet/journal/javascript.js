@@ -2659,7 +2659,7 @@ AUI().add(
 						setter: function(v) {
 							var instance = this;
 
-							return instance.setAttribute('displayAsTooltip', v);
+							return instance.setAttribute('displayAsTooltip', instance.parseBoolean(v));
 						},
 						valueFn: function() {
 							var instance = this;
@@ -2770,7 +2770,7 @@ AUI().add(
 						setter: function(v) {
 							var instance = this;
 
-							return instance.setRepeatable(v);
+							return instance.setRepeatable(instance.parseBoolean(v));
 						},
 						valueFn: function() {
 							var instance = this;
@@ -2783,7 +2783,7 @@ AUI().add(
 						setter: function(v) {
 							var instance = this;
 
-							return instance.setAttribute('required', v);
+							return instance.setAttribute('required', instance.parseBoolean(v));
 						},
 						valueFn: function() {
 							var instance = this;
@@ -3024,6 +3024,10 @@ AUI().add(
 					return Journal.prototype.getRepeatedSiblings.apply(instance, [instance]);
 				},
 
+				parseBoolean: function(value) {
+				    return (value == "false") ? false : !!value;
+				},
+
 				propagateAttr: function(event) {
 					var instance = this;
 
@@ -3055,6 +3059,8 @@ AUI().add(
 					fieldLabel.one('span').html(value);
 
 					instance.setAttribute('fieldLabel', value);
+
+					return value;
 				},
 
 				setInstanceId: function(value) {
@@ -3076,6 +3082,8 @@ AUI().add(
 
 						inputFile.attr('name', inputFileName);
 					}
+
+					return value;
 				},
 
 				setInstructions: function(value) {
@@ -3117,6 +3125,8 @@ AUI().add(
 							}
 						}
 					}
+
+					return value;
 				},
 
 				setRepeatable: function(value) {
@@ -3156,6 +3166,8 @@ AUI().add(
 							}
 						}
 					}
+
+					return value;
 				},
 
 				setVariableName: function(value) {
@@ -3167,6 +3179,8 @@ AUI().add(
 					fieldLabel.get('parentNode').one('input').attr('id', value);
 
 					instance.setAttribute('name', value);
+
+					return value;
 				},
 
 				setAttribute: function(key, value) {
