@@ -113,14 +113,10 @@ AUI().add(
 						{
 							zIndex: 9999
 						}
-					).render();
+					).render(backgroundColor.get('parentNode'));
 				}
 
 				var backgroundColorPicker = instance._backgroundColorPicker;
-
-				var trigger = backgroundColorPicker.get('trigger');
-
-				backgroundColor.placeAfter(trigger.item(0));
 
 				var afterColorChange = function() {
 					backgroundColor.val('#' + this.get('hex'));
@@ -366,14 +362,10 @@ AUI().add(
 								{
 									zIndex: 9999
 								}
-							).render();
+							).render(item.get('parentNode'));
 						}
 
 						var borderColorPicker = instance[borderLocation];
-
-						var trigger = borderColorPicker.get('trigger');
-
-						item.placeAfter(trigger.item(0));
 
 						var afterColorChange = function() {
 							item.val('#' + this.get('hex'));
@@ -1662,14 +1654,10 @@ AUI().add(
 						{
 							zIndex: 9999
 						}
-					).render();
+					).render(fontColor.get('parentNode'));
 				}
 
 				var fontColorPicker = instance._fontColorPicker;
-
-				var trigger = fontColorPicker.get('trigger');
-
-				fontColor.placeAfter(trigger.item(0));
 
 				var afterColorChange = function() {
 					fontColor.val('#' + this.get('hex'));
