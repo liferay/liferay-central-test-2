@@ -120,9 +120,10 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, StringPool.COMMA) %>.
 	</liferay-ui:error>
 
-
 	<liferay-ui:error exception="<%= TemplateSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 	<liferay-ui:error exception="<%= TemplateXslException.class %>" message="please-enter-a-valid-script-template" />
+
+	<aui:model-context bean="<%= template %>" model="<%= JournalTemplate.class %>" />
 
 	<aui:fieldset>
 		<aui:field-wrapper label="id">
@@ -146,7 +147,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 						<td>
 							<c:choose>
 								<c:when test="<%= template == null %>">
-									<aui:input bean="<%= template %>" cssClass="lfr-input-text-container" label="" model="<%= JournalTemplate.class %>" name="newTemplateId" field="templateId" fieldParam="newTemplateId" value="<%= newTemplateId %>" />
+									<aui:input cssClass="lfr-input-text-container" label="" name="newTemplateId" field="templateId" fieldParam="newTemplateId" value="<%= newTemplateId %>" />
 								</c:when>
 								<c:otherwise>
 									<%= templateId %>
@@ -164,11 +165,11 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 			</c:choose>
 		</aui:field-wrapper>
 
-		<aui:input bean="<%= template %>" cssClass="lfr-input-text-container" model="<%= JournalTemplate.class %>" name="name" />
+		<aui:input cssClass="lfr-input-text-container" name="name" />
 
-		<aui:input bean="<%= template %>" cssClass="lfr-textarea-container"  model="<%= JournalTemplate.class %>" name="description" />
+		<aui:input cssClass="lfr-textarea-container" name="description" />
 
-		<aui:input bean="<%= template %>" helpMessage="journal-template-cacheable-help" inlineLabel="right" model="<%= JournalTemplate.class %>" name="cacheable" value="<%= new Boolean(cacheable) %>" />
+		<aui:input helpMessage="journal-template-cacheable-help" inlineLabel="right" name="cacheable" value="<%= new Boolean(cacheable) %>" />
 
 		<c:if test="<%= template != null %>">
 			<aui:field-wrapper label="url">
@@ -234,13 +235,13 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 		<aui:input inlineLabel="right" label="format-script" name="formatXsl" type="checkbox" />
 
-		<aui:input bean="<%= template %>" cssClass="lfr-input-text-container" label="small-image-url" model="<%= JournalTemplate.class %>" name="smallImageURL" />
+		<aui:input cssClass="lfr-input-text-container" label="small-image-url" name="smallImageURL" />
 
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span>
 
 		<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" type="file" />
 
-		<aui:input bean="<%= template %>" inlineLabel="right" model="<%= JournalTemplate.class %>" name="smallImage"  />
+		<aui:input inlineLabel="right" name="smallImage"  />
 
 		<c:if test="<%= template == null %>">
 			<aui:field-wrapper label="permissions">
