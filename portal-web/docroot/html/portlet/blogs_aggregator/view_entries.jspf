@@ -54,11 +54,16 @@
 	sb.append(themeDisplay.getPathMain());
 	sb.append("/blogs/rss?");
 
-	if (organizationId > 0) {
-		sb.append("organizationId=" + organizationId);
+	if (selectionMethod.equals("users")) {
+		if (organizationId > 0) {
+			sb.append("organizationId=" + organizationId);
+		}
+		else {
+			sb.append("companyId=" + company.getCompanyId());
+		}
 	}
 	else {
-		sb.append("companyId=" + company.getCompanyId());
+		sb.append("groupId=" + themeDisplay.getScopeGroupId());
 	}
 
 	String rssURL = sb.toString();
