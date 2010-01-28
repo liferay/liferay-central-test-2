@@ -143,6 +143,8 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 		);
 	}
 
+	Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonContainer');
+
 	A.one('#<portlet:namespace />flagsSubmit').on(
 		'click',
 		function(event) {
@@ -151,6 +153,4 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 			event.halt();
 		}
 	);
-
-	Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonContainer');
 </aui:script>
