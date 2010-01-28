@@ -208,6 +208,7 @@ import org.apache.struts.Globals;
  * @author Jorge Ferrer
  * @author Raymond Augé
  * @author Eduardo Lundgren
+ * @author Wesley Gong
  */
 public class PortalImpl implements Portal {
 
@@ -3756,7 +3757,7 @@ public class PortalImpl implements Portal {
 
 				layoutType.addStateMaxPortletId(portletId);
 
-				updateLayout = false;
+				updateLayout = true;
 			}
 			else if (windowState.equals(WindowState.MINIMIZED) &&
 					 !layoutType.hasStateMinPortletId(portletId)) {
@@ -3771,6 +3772,12 @@ public class PortalImpl implements Portal {
 				layoutType.removeStatesPortletId(portletId);
 
 				updateLayout = true;
+			}
+
+			if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION) ||
+				portletId.equals(PortletKeys.LAYOUT_MANAGEMENT)) {
+
+				updateLayout = false;
 			}
 
 			if (updateLayout) {
