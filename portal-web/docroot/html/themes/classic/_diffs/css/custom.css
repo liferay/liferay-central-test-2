@@ -357,6 +357,12 @@ body.lfr-has-sidebar {
 	padding: 0;
 }
 
+/* ---------- Misc. ---------- */
+
+.lfr-panel-container {
+	background-color: transparent;
+}
+
 /* ---------- Extras ---------- */
 
 .portlet-borderless-bar {
