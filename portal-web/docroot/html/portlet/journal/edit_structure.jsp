@@ -236,6 +236,8 @@ int tabIndex = 1;
 </aui:form>
 
 <aui:script>
+	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoStructureIdCheckbox','<portlet:namespace />newStructureId', true);
+
 	var xmlIndent = "<%= StringPool.DOUBLE_SPACE %>";
 
 	function <portlet:namespace />downloadStructureContent() {
