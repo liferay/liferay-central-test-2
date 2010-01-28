@@ -12,6 +12,8 @@
 	<property name="codepress.file" value="codepress-v.0.9.6.zip" />
 
 	<property name="alloy.file" value="alloy-0.1a.zip" />
+	<property name="ckeditor.file" value="ckeditor_3.1.zip" />
+	<property name="ckeditor_filemanager.file" value="fckeditor_filemanager.zip" />
 	<property name="fckeditor.file" value="FCKeditor_2.6.3.zip" />
 	<property name="tinymce.file" value="tinymce_3_2_1.zip" />
 	<property name="vaadin.file" value="vaadin-6.2.1.zip" />
@@ -20,6 +22,7 @@
 		<delete dir="classes" />
 		<delete dir="docroot/dtd" />
 		<delete dir="docroot/html/js/aui" />
+		<delete dir="docroot/html/js/editor/ckeditor" />
 		<delete dir="docroot/html/js/editor/codepress" />
 		<delete dir="docroot/html/js/editor/fckeditor" />
 		<delete dir="docroot/html/js/editor/tinymce" />
@@ -311,6 +314,7 @@
 
 	<target name="war" depends="compile">
 		<antcall target="build-alloy" />
+		<antcall target="build-ckeditor" />
 		<antcall target="build-codepress" />
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
@@ -327,6 +331,7 @@
 
 	<target name="deploy">
 		<antcall target="build-alloy" />
+		<antcall target="build-ckeditor" />
 		<antcall target="build-codepress" />
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
@@ -584,7 +589,34 @@
 			</then>
 		</if>
 	</target>
+	
+	<target name="build-ckeditor">
+		<if>
+			<not>
+				<uptodate
+					srcfile="third-party/${ckeditor.file}"
+					targetfile="docroot/html/js/editor/ckeditor"
+				/>
+			</not>
+			<then>
+				<delete dir="docroot/html/js/editor/ckeditor" />
 
+				<unzip src="third-party/${ckeditor.file}" dest="docroot/html/js/editor" />
+
+				<unzip src="third-party/${ckeditor_filemanager.file}" dest="docroot/html/js/editor/ckeditor/editor" />
+				
+				<copy todir="docroot/html/js/editor/ckeditor" overwrite="yes">
+					<fileset dir="docroot/html/js/editor/_ckeditor" />
+				</copy>
+			</then>
+			<else>
+				<copy todir="docroot/html/js/editor/ckeditor" overwrite="no">
+					<fileset dir="docroot/html/js/editor/_ckeditor" />
+				</copy>
+			</else>
+		</if>
+	</target>
+	
 	<target name="build-codepress">
 		<if>
 			<not>
