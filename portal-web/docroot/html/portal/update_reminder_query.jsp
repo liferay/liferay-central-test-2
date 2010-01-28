@@ -39,7 +39,7 @@
 	</div>
 </c:if>
 
-<fieldset class="aui-block-labels">
+<fieldset class="aui-fieldset">
 	<legend><liferay-ui:message key="password-reminder" /></legend>
 
 	<span class="aui-field">

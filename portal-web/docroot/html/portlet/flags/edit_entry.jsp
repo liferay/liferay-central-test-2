@@ -39,7 +39,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 		width: 100%;
 	}
 
-	.portlet-flags .aui-form .aui-block-labels label {
+	.portlet-flags .aui-form .aui-fieldset label {
 		font-weight: bold;
 	}
 </style>
@@ -50,7 +50,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 			<%= LanguageUtil.format(pageContext, "you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential", themeDisplay.getPathMain() + "/portal/terms_of_use") %>
 		</p>
 
-		<fieldset class="aui-block-labels">
+		<fieldset class="aui-fieldset">
 			<span class="aui-field">
 				<span class="aui-field-content">
 					<label for="<portlet:namespace />reason"><liferay-ui:message key="reason-for-the-report" /></label>

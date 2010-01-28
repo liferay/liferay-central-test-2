@@ -7,6 +7,10 @@ fieldset {
 	padding-top: 0;
 }
 
+.aui-fieldset {
+	border-width: 0;
+}
+
 legend {
 	font-weight: bold;
 	padding: 0 6px;

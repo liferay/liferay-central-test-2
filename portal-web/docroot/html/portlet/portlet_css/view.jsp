@@ -55,7 +55,7 @@
 		<input type="hidden" name="portlet-boundary-id" id="portlet-boundary-id" />
 
 		<div class="aui-tabview-content">
-			<fieldset class="aui-block-labels" id="portlet-config">
+			<fieldset class="aui-fieldset" id="portlet-config">
 				<legend><liferay-ui:message key="portlet-configuration" /></legend>
 
 				<aui:input inlineField="<%= true %>" label="portlet-title" name="custom-title" />
@@ -140,7 +140,7 @@
 				</span>
 			</fieldset>
 
-			<fieldset class="aui-block-labels" id="text-styles">
+			<fieldset class="aui-fieldset" id="text-styles">
 				<legend><liferay-ui:message key="text-styles" /></legend>
 
 				<div class="common aui-column aui-form-column">
@@ -254,13 +254,13 @@
 				</div>
 			</fieldset>
 
-			<fieldset class="aui-block-labels" id="background-styles">
+			<fieldset class="aui-fieldset" id="background-styles">
 				<legend><liferay-ui:message key="background-styles" /></legend>
 
 				<aui:input label="background-color" name="lfr-bg-color" />
 			</fieldset>
 
-			<fieldset class="aui-block-labels" id="border-styles">
+			<fieldset class="aui-fieldset" id="border-styles">
 				<legend><liferay-ui:message key="border-styling" /></legend>
 
 				<fieldset class="aui-column aui-form-column" id="lfr-border-width">
@@ -388,7 +388,7 @@
 				</fieldset>
 			</fieldset>
 
-			<fieldset class="spacing aui-block-labels" id="spacing-styles">
+			<fieldset class="spacing aui-fieldset" id="spacing-styles">
 				<legend><liferay-ui:message key="spacing" /></legend>
 
 				<fieldset class="aui-column aui-form-column" id="lfr-padding">
@@ -488,13 +488,13 @@
 				</fieldset>
 			</fieldset>
 
-			<fieldset class="aui-block-labels" id="css-styling">
+			<fieldset class="aui-fieldset" id="css-styling">
 				<legend><liferay-ui:message key="advanced-css-styling" /></legend>
 
 				<aui:input label="enter-your-custom-css" name="lfr-custom-css" type="textarea" />
 			</fieldset>
 
-			<fieldset class="aui-block-labels" id="wap-styling">
+			<fieldset class="aui-fieldset" id="wap-styling">
 				<legend><liferay-ui:message key="wap-styling" /></legend>
 
 				<aui:input label="title" name="lfr-wap-title" />

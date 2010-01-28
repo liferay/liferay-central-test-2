@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-enterprise-admin .aui-form .aui-block-labels textarea {
+.portlet-enterprise-admin .aui-form .aui-fieldset textarea {
 	width: 90%;
 }
 
@@ -259,32 +259,32 @@
 	margin-bottom: 30px;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels table.org-labor-table td .aui-field {
+.portlet-enterprise-admin .aui-form .aui-fieldset table.org-labor-table td .aui-field {
 	margin-bottom: 0;
 	padding: 3px 1px;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels label, .portlet-enterprise-admin .aui-form .aui-block-labels .label {
+.portlet-enterprise-admin .aui-form .aui-fieldset label, .portlet-enterprise-admin .aui-form .aui-fieldset .label {
 	font-weight: bold;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels label input {
+.portlet-enterprise-admin .aui-form .aui-fieldset label input {
 	vertical-align: middle;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels .aui-field {
+.portlet-enterprise-admin .aui-form .aui-fieldset .aui-field {
 	margin-bottom: 10px;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels .aui-field.mailing-ctrl {
+.portlet-enterprise-admin .aui-form .aui-fieldset .aui-field.mailing-ctrl {
 	clear: both;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels .aui-field.mailing-ctrl span {
+.portlet-enterprise-admin .aui-form .aui-fieldset .aui-field.mailing-ctrl span {
 	margin-right: 0.5em;
 }
 
-.portlet-enterprise-admin .aui-form .aui-block-labels .aui-field.localized-language-selector {
+.portlet-enterprise-admin .aui-form .aui-fieldset .aui-field.localized-language-selector {
 	margin-bottom: 0;
 }
 

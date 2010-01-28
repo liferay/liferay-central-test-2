@@ -57,7 +57,7 @@ String emailAddress2 = ParamUtil.getString(request, "emailAddress2");
 	</c:otherwise>
 </c:choose>
 
-<fieldset class="aui-block-labels">
+<fieldset class="aui-fieldset">
 	<legend><liferay-ui:message key="email-address" /></legend>
 
 	<span class="aui-field">

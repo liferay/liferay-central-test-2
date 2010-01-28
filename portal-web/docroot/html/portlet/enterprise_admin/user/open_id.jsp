@@ -32,6 +32,6 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 <h3><liferay-ui:message key="open-id" /></h3>
 
-<aui:fieldset class="aui-block-labels">
+<aui:fieldset>
 	<aui:input label="" name="openId" />
 </aui:fieldset>

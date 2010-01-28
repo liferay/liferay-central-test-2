@@ -58,7 +58,7 @@
 
 <div class="journal-article-edit-field-wrapper aui-helper-hidden" id="<portlet:namespace />journalArticleEditFieldWrapper">
 	<form action="" class="aui-form" method="post">
-		<div class="journal-article-edit-field aui-block-labels" id="<portlet:namespace />journalArticleEditField">
+		<div class="journal-article-edit-field" id="<portlet:namespace />journalArticleEditField">
 			<div class="portlet-msg-success journal-message aui-helper-hidden" id="<portlet:namespace />journalMessage">
 				<liferay-ui:message key="your-request-processed-successfully" />
 			</div>
