@@ -3774,8 +3774,8 @@ public class PortalImpl implements Portal {
 				updateLayout = true;
 			}
 
-			if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION) ||
-				portletId.equals(PortletKeys.LAYOUT_MANAGEMENT)) {
+			if (portletId.equals(PortletKeys.LAYOUT_MANAGEMENT) ||
+				portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 
 				updateLayout = false;
 			}
