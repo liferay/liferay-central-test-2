@@ -605,8 +605,8 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 					continue;
 				}
 
-				name = _removePortletNamespace(
-					invokerPortlet.isFacesPortlet(), portletNamespace, name);
+				name = removePortletNamespace(
+					invokerPortlet, portletNamespace, name);
 
 				dynamicRequest.setParameterValues(name, values);
 			}
@@ -617,8 +617,8 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			for (String name : names) {
 				String[] values = renderParameters.get(name);
 
-				name = _removePortletNamespace(
-					invokerPortlet.isFacesPortlet(), portletNamespace, name);
+				name = removePortletNamespace(
+					invokerPortlet, portletNamespace, name);
 
 				dynamicRequest.setParameterValues(name, values);
 			}
@@ -726,10 +726,12 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		}
 	}
 
-	private String _removePortletNamespace(
-		boolean facesPortlet, String portletNamespace, String name) {
+	protected String removePortletNamespace(
+		InvokerPortlet invokerPortlet, String portletNamespace, String name) {
 
-		if (name.startsWith(portletNamespace) && !facesPortlet) {
+		if (name.startsWith(portletNamespace) &&
+			!invokerPortlet.isFacesPortlet()) {
+
 			name = name.substring(portletNamespace.length());
 		}
 
