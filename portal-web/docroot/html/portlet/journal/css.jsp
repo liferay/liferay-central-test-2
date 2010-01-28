@@ -99,7 +99,7 @@
 	margin-bottom: 1em;
 }
 
-.journal-article-container ul {
+.portlet-journal .journal-article-container ul {
 	margin: 0;
 }
 
