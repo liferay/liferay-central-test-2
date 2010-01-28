@@ -88,7 +88,6 @@ if (Validator.isNull(contentField) || ((structure == null) && !contentField.equa
 String feedType = BeanParamUtil.getString(feed, request, "feedType", RSSUtil.DEFAULT_TYPE);
 double feedVersion = BeanParamUtil.getDouble(feed, request, "feedVersion", RSSUtil.DEFAULT_VERSION);
 
-int delta = BeanParamUtil.getInteger(feed, request, "delta", 10);
 String orderByCol = BeanParamUtil.getString(feed, request, "orderByCol");
 String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 
@@ -379,7 +378,7 @@ if (feed != null) {
 					<%= sb.toString() %>
 				</aui:select>
 
-				<aui:input label="maximum-items-to-display" name="delta" style="width: 50px;" value="<%= delta %>" />
+				<aui:input label="maximum-items-to-display" name="delta" value="10" />
 
 				<aui:select label="order-by-column" name="orderByCol">
 					<aui:option label="modified-date" selected='<%=orderByCol.equals("modified-date") %>' />
