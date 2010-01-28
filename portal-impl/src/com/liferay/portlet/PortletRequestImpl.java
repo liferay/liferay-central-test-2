@@ -736,7 +736,6 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		return name;
 	}
 
-		
 	private static Log _log = LogFactoryUtil.getLog(PortletRequestImpl.class);
 
 	private HttpServletRequest _request;
