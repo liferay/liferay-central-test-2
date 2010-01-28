@@ -346,6 +346,36 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_S(
+		long companyId, int status) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_S(
+		long companyId, int status, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_S(
+		long companyId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalArticle findByC_S_First(
+		long companyId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	public com.liferay.portlet.journal.model.JournalArticle findByC_S_Last(
+		long companyId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	public com.liferay.portlet.journal.model.JournalArticle[] findByC_S_PrevAndNext(
+		long id, long companyId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
 	public com.liferay.portlet.journal.model.JournalArticle findByG_A_V(
 		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException,
@@ -462,6 +492,9 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	public void removeByG_UT(long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByC_S(long companyId, int status)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_A_V(long groupId, java.lang.String articleId,
 		double version)
 		throws com.liferay.portal.SystemException,
@@ -503,6 +536,9 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_UT(long groupId, java.lang.String urlTitle)
+		throws com.liferay.portal.SystemException;
+
+	public int countByC_S(long companyId, int status)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_A_V(long groupId, java.lang.String articleId,

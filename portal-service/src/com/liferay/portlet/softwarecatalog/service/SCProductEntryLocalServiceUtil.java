@@ -184,6 +184,17 @@ public class SCProductEntryLocalServiceUtil {
 		getService().deleteProductEntry(productEntry);
 	}
 
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getCompanyProductEntries(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyProductEntries(companyId, start, end);
+	}
+
+	public static int getCompanyProductEntriesCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyProductEntriesCount(companyId);
+	}
+
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
@@ -244,29 +255,6 @@ public class SCProductEntryLocalServiceUtil {
 		return getService()
 				   .getRepositoryXML(groupId, version, baseImageURL,
 			oldestDate, maxNumOfVersions, repoSettings);
-	}
-
-	public static void reindex(long productEntryId)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(productEntryId);
-	}
-
-	public static void reindex(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(productEntry);
-	}
-
-	public static void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(ids);
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords, java.lang.String type,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getService()
-				   .search(companyId, groupId, keywords, type, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateProductEntry(

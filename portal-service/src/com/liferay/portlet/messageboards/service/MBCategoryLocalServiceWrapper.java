@@ -158,15 +158,6 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addCategoryResources(
-		com.liferay.portlet.messageboards.model.MBCategory category,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_mbCategoryLocalService.addCategoryResources(category,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
 	public void addCategoryResources(long categoryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -174,6 +165,15 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 			com.liferay.portal.SystemException {
 		_mbCategoryLocalService.addCategoryResources(categoryId,
 			communityPermissions, guestPermissions);
+	}
+
+	public void addCategoryResources(
+		com.liferay.portlet.messageboards.model.MBCategory category,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_mbCategoryLocalService.addCategoryResources(category,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addCategoryResources(
@@ -241,6 +241,18 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		return _mbCategoryLocalService.getCategory(categoryId);
 	}
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCompanyCategories(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return _mbCategoryLocalService.getCompanyCategories(companyId, start,
+			end);
+	}
+
+	public int getCompanyCategoriesCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		return _mbCategoryLocalService.getCompanyCategoriesCount(companyId);
+	}
+
 	public void getSubcategoryIds(java.util.List<Long> categoryIds,
 		long groupId, long categoryId)
 		throws com.liferay.portal.SystemException {
@@ -266,17 +278,16 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		return _mbCategoryLocalService.getSystemCategory();
 	}
 
-	public void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		_mbCategoryLocalService.reindex(ids);
+	public void subscribeCategory(long userId, long groupId, long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_mbCategoryLocalService.subscribeCategory(userId, groupId, categoryId);
 	}
 
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long[] categoryIds, long threadId,
-		java.lang.String keywords, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return _mbCategoryLocalService.search(companyId, groupId, userId,
-			categoryIds, threadId, keywords, start, end);
+	public void unsubscribeCategory(long userId, long groupId, long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_mbCategoryLocalService.unsubscribeCategory(userId, groupId, categoryId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
@@ -298,18 +309,6 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 			inReadInterval, outEmailAddress, outCustom, outServerName,
 			outServerPort, outUseSSL, outUserName, outPassword,
 			mailingListActive, mergeWithParentCategory, serviceContext);
-	}
-
-	public void subscribeCategory(long userId, long groupId, long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_mbCategoryLocalService.subscribeCategory(userId, groupId, categoryId);
-	}
-
-	public void unsubscribeCategory(long userId, long groupId, long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_mbCategoryLocalService.unsubscribeCategory(userId, groupId, categoryId);
 	}
 
 	public MBCategoryLocalService getWrappedMBCategoryLocalService() {

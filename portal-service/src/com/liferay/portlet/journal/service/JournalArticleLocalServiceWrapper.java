@@ -487,6 +487,19 @@ public class JournalArticleLocalServiceWrapper
 		return _journalArticleLocalService.getArticlesCount(groupId);
 	}
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getCompanyArticles(
+		long companyId, int status, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return _journalArticleLocalService.getCompanyArticles(companyId,
+			status, start, end);
+	}
+
+	public int getCompanyArticlesCount(long companyId, int status)
+		throws com.liferay.portal.SystemException {
+		return _journalArticleLocalService.getCompanyArticlesCount(companyId,
+			status);
+	}
+
 	public com.liferay.portlet.journal.model.JournalArticle getDisplayArticle(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException,
@@ -609,22 +622,6 @@ public class JournalArticleLocalServiceWrapper
 			version, status);
 	}
 
-	public void reindex(
-		com.liferay.portlet.journal.model.JournalArticle article)
-		throws com.liferay.portal.SystemException {
-		_journalArticleLocalService.reindex(article);
-	}
-
-	public void reindex(long resourcePrimKey)
-		throws com.liferay.portal.SystemException {
-		_journalArticleLocalService.reindex(resourcePrimKey);
-	}
-
-	public void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		_journalArticleLocalService.reindex(ids);
-	}
-
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String languageId)
@@ -632,47 +629,6 @@ public class JournalArticleLocalServiceWrapper
 			com.liferay.portal.SystemException {
 		return _journalArticleLocalService.removeArticleLocale(groupId,
 			articleId, version, languageId);
-	}
-
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String keywords, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return _journalArticleLocalService.search(companyId, groupId, userId,
-			keywords, start, end);
-	}
-
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String keywords,
-		java.lang.String type, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return _journalArticleLocalService.search(companyId, groupId, userId,
-			keywords, type, start, end);
-	}
-
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String keywords,
-		java.lang.String type,
-		java.util.List<com.liferay.portal.kernel.search.BooleanClause> booleanClauses,
-		com.liferay.portal.kernel.search.Sort[] sorts, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return _journalArticleLocalService.search(companyId, groupId, userId,
-			keywords, type, booleanClauses, sorts, start, end);
-	}
-
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String keywords,
-		java.lang.String type, com.liferay.portal.kernel.search.Sort sort,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return _journalArticleLocalService.search(companyId, groupId, userId,
-			keywords, type, sort, start, end);
-	}
-
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String keywords,
-		java.lang.String type, com.liferay.portal.kernel.search.Sort[] sorts,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return _journalArticleLocalService.search(companyId, groupId, userId,
-			keywords, type, sorts, start, end);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(

@@ -274,27 +274,6 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 			status);
 	}
 
-	public void reindex(com.liferay.portlet.blogs.model.BlogsEntry entry)
-		throws com.liferay.portal.SystemException {
-		_blogsEntryLocalService.reindex(entry);
-	}
-
-	public void reindex(long entryId) throws com.liferay.portal.SystemException {
-		_blogsEntryLocalService.reindex(entryId);
-	}
-
-	public void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		_blogsEntryLocalService.reindex(ids);
-	}
-
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long ownerUserId, java.lang.String keywords,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return _blogsEntryLocalService.search(companyId, groupId, userId,
-			ownerUserId, keywords, start, end);
-	}
-
 	public void updateAsset(long userId,
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)

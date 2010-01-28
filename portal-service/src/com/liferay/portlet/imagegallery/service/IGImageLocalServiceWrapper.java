@@ -301,15 +301,6 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		return _igImageLocalService.getNoAssetImages();
 	}
 
-	public void reindex(com.liferay.portlet.imagegallery.model.IGImage image)
-		throws com.liferay.portal.SystemException {
-		_igImageLocalService.reindex(image);
-	}
-
-	public void reindex(long imageId) throws com.liferay.portal.SystemException {
-		_igImageLocalService.reindex(imageId);
-	}
-
 	public void updateAsset(long userId,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames,

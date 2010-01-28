@@ -357,16 +357,6 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 			serviceContext);
 	}
 
-	public void reindex(long resourcePrimKey)
-		throws com.liferay.portal.SystemException {
-		_wikiPageLocalService.reindex(resourcePrimKey);
-	}
-
-	public void reindex(com.liferay.portlet.wiki.model.WikiPage page)
-		throws com.liferay.portal.SystemException {
-		_wikiPageLocalService.reindex(page);
-	}
-
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,
 		long nodeId, java.lang.String title, double version,
 		com.liferay.portal.service.ServiceContext serviceContext)

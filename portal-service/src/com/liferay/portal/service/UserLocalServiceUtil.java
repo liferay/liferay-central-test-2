@@ -141,7 +141,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void addRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().addRoleUsers(roleId, userIds);
 	}
 
@@ -292,6 +293,17 @@ public class UserLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().encryptUserId(name);
+	}
+
+	public static java.util.List<com.liferay.portal.model.User> getCompanyUsers(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyUsers(companyId, start, end);
+	}
+
+	public static int getCompanyUsersCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyUsersCount(companyId);
 	}
 
 	public static com.liferay.portal.model.User getDefaultUser(long companyId)
@@ -578,16 +590,6 @@ public class UserLocalServiceUtil {
 		return getService().isPasswordExpiringSoon(user);
 	}
 
-	public static void reindex(long userId)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(userId);
-	}
-
-	public static void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(ids);
-	}
-
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String keywords, java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
@@ -662,7 +664,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void setRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().setRoleUsers(roleId, userIds);
 	}
 
@@ -673,7 +676,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void unsetGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().unsetGroupUsers(groupId, userIds);
 	}
 
@@ -703,7 +707,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().unsetUserGroupUsers(userGroupId, userIds);
 	}
 

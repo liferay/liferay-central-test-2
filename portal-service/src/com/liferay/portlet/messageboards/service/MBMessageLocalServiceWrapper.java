@@ -415,17 +415,6 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 			status, start, end);
 	}
 
-	public void reindex(long messageId)
-		throws com.liferay.portal.SystemException {
-		_mbMessageLocalService.reindex(messageId);
-	}
-
-	public void reindex(
-		com.liferay.portlet.messageboards.model.MBMessage message)
-		throws com.liferay.portal.SystemException {
-		_mbMessageLocalService.reindex(message);
-	}
-
 	public void subscribeMessage(long userId, long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

@@ -215,6 +215,7 @@ create unique index IX_E97342D9 on IGImage (uuid_, groupId);
 create index IX_6A925A4D on Image (size_);
 
 create index IX_DFF98523 on JournalArticle (companyId);
+create index IX_323DF109 on JournalArticle (companyId, status);
 create index IX_9356F865 on JournalArticle (groupId);
 create index IX_68C0F69C on JournalArticle (groupId, articleId);
 create index IX_4D5CD982 on JournalArticle (groupId, articleId, status);

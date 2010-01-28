@@ -145,6 +145,15 @@ public interface BookmarksFolderLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getCompanyFolders(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCompanyFoldersCount(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
@@ -171,15 +180,6 @@ public interface BookmarksFolderLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void getSubfolderIds(java.util.List<Long> folderIds, long groupId,
 		long folderId) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long[] folderIds, java.lang.String keywords,
-		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,

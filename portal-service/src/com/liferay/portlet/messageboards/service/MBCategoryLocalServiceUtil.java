@@ -160,16 +160,6 @@ public class MBCategoryLocalServiceUtil {
 			addGuestPermissions);
 	}
 
-	public static void addCategoryResources(
-		com.liferay.portlet.messageboards.model.MBCategory category,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.addCategoryResources(category, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
 	public static void addCategoryResources(long categoryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -178,6 +168,16 @@ public class MBCategoryLocalServiceUtil {
 		getService()
 			.addCategoryResources(categoryId, communityPermissions,
 			guestPermissions);
+	}
+
+	public static void addCategoryResources(
+		com.liferay.portlet.messageboards.model.MBCategory category,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addCategoryResources(category, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void addCategoryResources(
@@ -244,6 +244,17 @@ public class MBCategoryLocalServiceUtil {
 		return getService().getCategory(categoryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCompanyCategories(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyCategories(companyId, start, end);
+	}
+
+	public static int getCompanyCategoriesCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyCategoriesCount(companyId);
+	}
+
 	public static void getSubcategoryIds(java.util.List<Long> categoryIds,
 		long groupId, long categoryId)
 		throws com.liferay.portal.SystemException {
@@ -266,18 +277,18 @@ public class MBCategoryLocalServiceUtil {
 		return getService().getSystemCategory();
 	}
 
-	public static void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(ids);
+	public static void subscribeCategory(long userId, long groupId,
+		long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().subscribeCategory(userId, groupId, categoryId);
 	}
 
-	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long[] categoryIds, long threadId,
-		java.lang.String keywords, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getService()
-				   .search(companyId, groupId, userId, categoryIds, threadId,
-			keywords, start, end);
+	public static void unsubscribeCategory(long userId, long groupId,
+		long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().unsubscribeCategory(userId, groupId, categoryId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(
@@ -300,20 +311,6 @@ public class MBCategoryLocalServiceUtil {
 			outCustom, outServerName, outServerPort, outUseSSL, outUserName,
 			outPassword, mailingListActive, mergeWithParentCategory,
 			serviceContext);
-	}
-
-	public static void subscribeCategory(long userId, long groupId,
-		long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().subscribeCategory(userId, groupId, categoryId);
-	}
-
-	public static void unsubscribeCategory(long userId, long groupId,
-		long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().unsubscribeCategory(userId, groupId, categoryId);
 	}
 
 	public static MBCategoryLocalService getService() {

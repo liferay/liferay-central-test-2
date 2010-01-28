@@ -214,17 +214,6 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	public static void reindexSearch(long companyId) throws RemoteException {
-		try {
-			DLFolderServiceUtil.reindexSearch(companyId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void unlockFolder(long groupId, long folderId,
 		java.lang.String lockUuid) throws RemoteException {
 		try {

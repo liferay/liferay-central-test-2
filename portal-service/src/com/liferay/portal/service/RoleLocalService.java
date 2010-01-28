@@ -112,7 +112,8 @@ public interface RoleLocalService {
 			com.liferay.portal.SystemException;
 
 	public void addUserRoles(long userId, long[] roleIds)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void checkSystemRoles(long companyId)
 		throws com.liferay.portal.PortalException,

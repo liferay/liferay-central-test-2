@@ -144,6 +144,15 @@ public interface WikiNodeLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getCompanyNodes(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCompanyNodesCount(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -172,15 +181,6 @@ public interface WikiNodeLocalService {
 		java.util.Map<String, String[]> options)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long[] nodeIds, java.lang.String keywords,
-		int start, int end) throws com.liferay.portal.SystemException;
 
 	public void subscribeNode(long userId, long nodeId)
 		throws com.liferay.portal.PortalException,

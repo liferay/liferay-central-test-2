@@ -526,6 +526,48 @@ public class JournalArticleUtil {
 				   .findByG_UT_PrevAndNext(id, groupId, urlTitle, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_S(
+		long companyId, int status) throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_S(companyId, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_S(
+		long companyId, int status, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_S(companyId, status, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_S(
+		long companyId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_S(companyId, status, start, end, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findByC_S_First(
+		long companyId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findByC_S_First(companyId, status, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findByC_S_Last(
+		long companyId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findByC_S_Last(companyId, status, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByC_S_PrevAndNext(
+		long id, long companyId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findByC_S_PrevAndNext(id, companyId, status, obc);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle findByG_A_V(
 		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException,
@@ -707,6 +749,11 @@ public class JournalArticleUtil {
 		getPersistence().removeByG_UT(groupId, urlTitle);
 	}
 
+	public static void removeByC_S(long companyId, int status)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByC_S(companyId, status);
+	}
+
 	public static void removeByG_A_V(long groupId, java.lang.String articleId,
 		double version)
 		throws com.liferay.portal.SystemException,
@@ -776,6 +823,11 @@ public class JournalArticleUtil {
 	public static int countByG_UT(long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_UT(groupId, urlTitle);
+	}
+
+	public static int countByC_S(long companyId, int status)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_S(companyId, status);
 	}
 
 	public static int countByG_A_V(long groupId, java.lang.String articleId,

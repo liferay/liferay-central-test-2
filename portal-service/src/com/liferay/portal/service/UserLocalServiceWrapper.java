@@ -140,7 +140,8 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	}
 
 	public void addRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		_userLocalService.addRoleUsers(roleId, userIds);
 	}
 
@@ -287,6 +288,17 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _userLocalService.encryptUserId(name);
+	}
+
+	public java.util.List<com.liferay.portal.model.User> getCompanyUsers(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return _userLocalService.getCompanyUsers(companyId, start, end);
+	}
+
+	public int getCompanyUsersCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		return _userLocalService.getCompanyUsersCount(companyId);
 	}
 
 	public com.liferay.portal.model.User getDefaultUser(long companyId)
@@ -569,15 +581,6 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.isPasswordExpiringSoon(user);
 	}
 
-	public void reindex(long userId) throws com.liferay.portal.SystemException {
-		_userLocalService.reindex(userId);
-	}
-
-	public void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		_userLocalService.reindex(ids);
-	}
-
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String keywords, java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
@@ -649,7 +652,8 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	}
 
 	public void setRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		_userLocalService.setRoleUsers(roleId, userIds);
 	}
 
@@ -660,7 +664,8 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	}
 
 	public void unsetGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		_userLocalService.unsetGroupUsers(groupId, userIds);
 	}
 
@@ -689,7 +694,8 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	}
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		_userLocalService.unsetUserGroupUsers(userGroupId, userIds);
 	}
 

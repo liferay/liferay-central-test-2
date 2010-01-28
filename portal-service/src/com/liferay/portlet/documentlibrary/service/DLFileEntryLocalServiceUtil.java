@@ -362,11 +362,6 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().getNoAssetFileEntries();
 	}
 
-	public static void reindex(long fileEntryId)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(fileEntryId);
-	}
-
 	public static void updateAsset(long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)

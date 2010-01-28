@@ -285,10 +285,6 @@ public interface DLFileEntryLocalService {
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getNoAssetFileEntries()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(long fileEntryId)
-		throws com.liferay.portal.SystemException;
-
 	public void updateAsset(long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)

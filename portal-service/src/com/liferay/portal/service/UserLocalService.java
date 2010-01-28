@@ -120,7 +120,8 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void addRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
@@ -216,6 +217,15 @@ public interface UserLocalService {
 	public java.lang.String encryptUserId(java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.User> getCompanyUsers(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCompanyUsersCount(long companyId)
+		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.User getDefaultUser(long companyId)
@@ -448,13 +458,6 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(long userId) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String keywords, java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
@@ -509,14 +512,16 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void setRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void unsetGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void unsetOrganizationUsers(long organizationId, long[] userIds)
 		throws com.liferay.portal.PortalException,
@@ -535,7 +540,8 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User updateActive(long userId,
 		boolean active)

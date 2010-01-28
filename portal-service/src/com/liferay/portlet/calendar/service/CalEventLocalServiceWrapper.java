@@ -200,6 +200,17 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		return _calEventLocalService.exportGroupEvents(userId, groupId, fileName);
 	}
 
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getCompanyEvents(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return _calEventLocalService.getCompanyEvents(companyId, start, end);
+	}
+
+	public int getCompanyEventsCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		return _calEventLocalService.getCompanyEventsCount(companyId);
+	}
+
 	public com.liferay.portlet.calendar.model.CalEvent getEvent(long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -248,27 +259,6 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		_calEventLocalService.importICal4j(userId, groupId, file);
-	}
-
-	public void reindex(com.liferay.portlet.calendar.model.CalEvent event)
-		throws com.liferay.portal.SystemException {
-		_calEventLocalService.reindex(event);
-	}
-
-	public void reindex(long eventId) throws com.liferay.portal.SystemException {
-		_calEventLocalService.reindex(eventId);
-	}
-
-	public void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		_calEventLocalService.reindex(ids);
-	}
-
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long ownerUserId, java.lang.String keywords,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return _calEventLocalService.search(companyId, groupId, userId,
-			ownerUserId, keywords, start, end);
 	}
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(

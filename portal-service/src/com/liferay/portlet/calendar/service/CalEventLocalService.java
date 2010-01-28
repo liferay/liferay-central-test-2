@@ -161,6 +161,15 @@ public interface CalEventLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getCompanyEvents(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCompanyEventsCount(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.calendar.model.CalEvent getEvent(long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -199,22 +208,6 @@ public interface CalEventLocalService {
 	public void importICal4j(long userId, long groupId, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(com.liferay.portlet.calendar.model.CalEvent event)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(long eventId) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long ownerUserId, java.lang.String keywords,
-		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
 		long userId, long eventId, java.lang.String title,

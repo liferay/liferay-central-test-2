@@ -322,15 +322,6 @@ public interface MBMessageLocalService {
 		long threadId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(long messageId)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(
-		com.liferay.portlet.messageboards.model.MBMessage message)
-		throws com.liferay.portal.SystemException;
-
 	public void subscribeMessage(long userId, long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

@@ -274,29 +274,6 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getOrganizationEntriesCount(organizationId, status);
 	}
 
-	public static void reindex(com.liferay.portlet.blogs.model.BlogsEntry entry)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(entry);
-	}
-
-	public static void reindex(long entryId)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(entryId);
-	}
-
-	public static void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(ids);
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long ownerUserId, java.lang.String keywords,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getService()
-				   .search(companyId, groupId, userId, ownerUserId, keywords,
-			start, end);
-	}
-
 	public static void updateAsset(long userId,
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)

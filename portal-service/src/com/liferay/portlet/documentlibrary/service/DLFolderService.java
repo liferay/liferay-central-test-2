@@ -121,11 +121,6 @@ public interface DLFolderService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindexSearch(long companyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public void unlockFolder(long groupId, long folderId,
 		java.lang.String lockUuid)
 		throws com.liferay.portal.PortalException,

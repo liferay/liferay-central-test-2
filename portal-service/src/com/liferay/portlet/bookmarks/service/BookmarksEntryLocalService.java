@@ -197,14 +197,6 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(
-		com.liferay.portlet.bookmarks.model.BookmarksEntry entry)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void reindex(long entryId) throws com.liferay.portal.SystemException;
-
 	public void updateAsset(long userId,
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)

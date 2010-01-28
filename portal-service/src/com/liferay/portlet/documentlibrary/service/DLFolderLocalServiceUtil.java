@@ -177,6 +177,17 @@ public class DLFolderLocalServiceUtil {
 		getService().deleteFolders(groupId);
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getCompanyFolders(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyFolders(companyId, start, end);
+	}
+
+	public static int getCompanyFoldersCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyFoldersCount(companyId);
+	}
+
 	public static java.util.List<Object> getFileEntriesAndFileShortcuts(
 		long groupId, java.util.List<Long> folderIds, int status, int start,
 		int end) throws com.liferay.portal.SystemException {
@@ -279,19 +290,6 @@ public class DLFolderLocalServiceUtil {
 	public static void getSubfolderIds(java.util.List<Long> folderIds,
 		long groupId, long folderId) throws com.liferay.portal.SystemException {
 		getService().getSubfolderIds(folderIds, groupId, folderId);
-	}
-
-	public static void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(ids);
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long[] folderIds, java.lang.String keywords,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getService()
-				   .search(companyId, groupId, userId, folderIds, keywords,
-			start, end);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(

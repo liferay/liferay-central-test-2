@@ -182,6 +182,17 @@ public class WikiNodeLocalServiceUtil {
 		getService().deleteNodes(groupId);
 	}
 
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getCompanyNodes(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyNodes(companyId, start, end);
+	}
+
+	public static int getCompanyNodesCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyNodesCount(companyId);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -217,19 +228,6 @@ public class WikiNodeLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService().importPages(userId, nodeId, importer, files, options);
-	}
-
-	public static void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(ids);
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long[] nodeIds, java.lang.String keywords,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getService()
-				   .search(companyId, groupId, userId, nodeIds, keywords,
-			start, end);
 	}
 
 	public static void subscribeNode(long userId, long nodeId)

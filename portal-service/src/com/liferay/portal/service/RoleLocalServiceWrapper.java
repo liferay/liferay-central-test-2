@@ -126,7 +126,8 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 	}
 
 	public void addUserRoles(long userId, long[] roleIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		_roleLocalService.addUserRoles(userId, roleIds);
 	}
 

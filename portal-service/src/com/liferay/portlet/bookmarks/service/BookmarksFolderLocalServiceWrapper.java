@@ -177,6 +177,18 @@ public class BookmarksFolderLocalServiceWrapper
 		_bookmarksFolderLocalService.deleteFolders(groupId);
 	}
 
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getCompanyFolders(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return _bookmarksFolderLocalService.getCompanyFolders(companyId, start,
+			end);
+	}
+
+	public int getCompanyFoldersCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		return _bookmarksFolderLocalService.getCompanyFoldersCount(companyId);
+	}
+
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
@@ -212,18 +224,6 @@ public class BookmarksFolderLocalServiceWrapper
 		long folderId) throws com.liferay.portal.SystemException {
 		_bookmarksFolderLocalService.getSubfolderIds(folderIds, groupId,
 			folderId);
-	}
-
-	public void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		_bookmarksFolderLocalService.reindex(ids);
-	}
-
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long[] folderIds, java.lang.String keywords,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return _bookmarksFolderLocalService.search(companyId, groupId, userId,
-			folderIds, keywords, start, end);
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(

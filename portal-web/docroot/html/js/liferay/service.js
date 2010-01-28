@@ -589,7 +589,6 @@ Liferay.Service.registerClass(
 		hasInheritableLock: true,
 		lockFolder: true,
 		refreshFolderLock: true,
-		reindexSearch: true,
 		unlockFolder: true,
 		updateFolder: true,
 		verifyInheritableLock: true

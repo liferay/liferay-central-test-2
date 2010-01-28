@@ -237,6 +237,23 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByG_UT",
 			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_S",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByC_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_G_A_V = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByG_A_V",
@@ -3140,6 +3157,258 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	public List<JournalArticle> findByC_S(long companyId, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Integer(status)
+			};
+
+		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(4);
+
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+				query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+				query.append(_FINDER_COLUMN_C_S_STATUS_2);
+
+				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(status);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalArticle>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_S, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<JournalArticle> findByC_S(long companyId, int status,
+		int start, int end) throws SystemException {
+		return findByC_S(companyId, status, start, end, null);
+	}
+
+	public List<JournalArticle> findByC_S(long companyId, int status,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Integer(status),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
+
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+				query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+				query.append(_FINDER_COLUMN_C_S_STATUS_2);
+
+				if (obc != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				}
+
+				else {
+					query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(status);
+
+				list = (List<JournalArticle>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalArticle>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public JournalArticle findByC_S_First(long companyId, int status,
+		OrderByComparator obc) throws NoSuchArticleException, SystemException {
+		List<JournalArticle> list = findByC_S(companyId, status, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", status=");
+			msg.append(status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public JournalArticle findByC_S_Last(long companyId, int status,
+		OrderByComparator obc) throws NoSuchArticleException, SystemException {
+		int count = countByC_S(companyId, status);
+
+		List<JournalArticle> list = findByC_S(companyId, status, count - 1,
+				count, obc);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", status=");
+			msg.append(status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public JournalArticle[] findByC_S_PrevAndNext(long id, long companyId,
+		int status, OrderByComparator obc)
+		throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = findByPrimaryKey(id);
+
+		int count = countByC_S(companyId, status);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_S_STATUS_2);
+
+			if (obc != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			}
+
+			else {
+				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(status);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					journalArticle);
+
+			JournalArticle[] array = new JournalArticleImpl[3];
+
+			array[0] = (JournalArticle)objArray[0];
+			array[1] = (JournalArticle)objArray[1];
+			array[2] = (JournalArticle)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public JournalArticle findByG_A_V(long groupId, String articleId,
 		double version) throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = fetchByG_A_V(groupId, articleId, version);
@@ -4089,6 +4358,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	public void removeByC_S(long companyId, int status)
+		throws SystemException {
+		for (JournalArticle journalArticle : findByC_S(companyId, status)) {
+			remove(journalArticle);
+		}
+	}
+
 	public void removeByG_A_V(long groupId, String articleId, double version)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByG_A_V(groupId, articleId, version);
@@ -4682,6 +4958,58 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	public int countByC_S(long companyId, int status) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Integer(status)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_S,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
+
+				query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+				query.append(_FINDER_COLUMN_C_S_STATUS_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_S, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
 	public int countByG_A_V(long groupId, String articleId, double version)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -5021,6 +5349,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	private static final String _FINDER_COLUMN_G_UT_URLTITLE_1 = "journalArticle.urlTitle IS NULL";
 	private static final String _FINDER_COLUMN_G_UT_URLTITLE_2 = "journalArticle.urlTitle = ?";
 	private static final String _FINDER_COLUMN_G_UT_URLTITLE_3 = "(journalArticle.urlTitle IS NULL OR journalArticle.urlTitle = ?)";
+	private static final String _FINDER_COLUMN_C_S_COMPANYID_2 = "journalArticle.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_S_STATUS_2 = "journalArticle.status = ?";
 	private static final String _FINDER_COLUMN_G_A_V_GROUPID_2 = "journalArticle.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_A_V_ARTICLEID_1 = "journalArticle.articleId IS NULL AND ";
 	private static final String _FINDER_COLUMN_G_A_V_ARTICLEID_2 = "journalArticle.articleId = ? AND ";

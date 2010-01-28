@@ -177,6 +177,17 @@ public class IGFolderLocalServiceUtil {
 		getService().deleteFolders(groupId);
 	}
 
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getCompanyFolders(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyFolders(companyId, start, end);
+	}
+
+	public static int getCompanyFoldersCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getService().getCompanyFoldersCount(companyId);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
@@ -216,19 +227,6 @@ public class IGFolderLocalServiceUtil {
 	public static void getSubfolderIds(java.util.List<Long> folderIds,
 		long groupId, long folderId) throws com.liferay.portal.SystemException {
 		getService().getSubfolderIds(folderIds, groupId, folderId);
-	}
-
-	public static void reindex(java.lang.String[] ids)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(ids);
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, long[] folderIds, java.lang.String keywords,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getService()
-				   .search(companyId, groupId, userId, folderIds, keywords,
-			start, end);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(

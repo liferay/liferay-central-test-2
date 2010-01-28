@@ -415,17 +415,6 @@ public class MBMessageLocalServiceUtil {
 				   .getThreadRepliesMessages(threadId, status, start, end);
 	}
 
-	public static void reindex(long messageId)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(messageId);
-	}
-
-	public static void reindex(
-		com.liferay.portlet.messageboards.model.MBMessage message)
-		throws com.liferay.portal.SystemException {
-		getService().reindex(message);
-	}
-
 	public static void subscribeMessage(long userId, long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
