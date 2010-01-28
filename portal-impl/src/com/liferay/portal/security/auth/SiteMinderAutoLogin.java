@@ -75,7 +75,7 @@ public class SiteMinderAutoLogin extends CASAutoLogin {
 
 				try {
 					user = importLDAPUser(
-							companyId, StringPool.BLANK, screenName);
+						companyId, StringPool.BLANK, screenName);
 				}
 				catch (SystemException se) {
 				}

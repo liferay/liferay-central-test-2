@@ -78,16 +78,15 @@ public class CASAutoLogin implements AutoLogin {
 
 			HttpSession session = request.getSession();
 
-			String login = (String)session.getAttribute(
-				CASFilter.LOGIN);
+			String login = (String)session.getAttribute(CASFilter.LOGIN);
 
 			if (Validator.isNull(login)) {
 				return credentials;
 			}
 
 			String authType = PrefsPropsUtil.getString(
-					companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
-					PropsValues.COMPANY_SECURITY_AUTH_TYPE);
+				companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
+				PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 
 			User user = null;
 
