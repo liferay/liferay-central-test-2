@@ -110,6 +110,8 @@ int tabIndex = 1;
 	<liferay-ui:error exception="<%= StructureInheritanceException.class %>" message="this-structure-is-already-within-the-inheritance-path-of-the-selected-parent-please-select-another-parent-structure" />
 	<liferay-ui:error exception="<%= StructureNameException.class %>" message="please-enter-a-valid-name" />
 
+	<aui:model-context bean="<%= structure %>" model="<%= JournalStructure.class %>" />
+
 	<aui:fieldset>
 		<aui:field-wrapper label="id">
 			<c:choose>
@@ -132,7 +134,7 @@ int tabIndex = 1;
 						<td>
 							<c:choose>
 								<c:when test="<%= structure == null %>">
-									<aui:input bean="<%= structure %>" cssClass="lfr-input-text-container" field="structureId" fieldParam="newStructureId" label="" model="<%= JournalStructure.class %>" name="newStructureId" value="<%= newStructureId %>" />
+									<aui:input cssClass="lfr-input-text-container" field="structureId" fieldParam="newStructureId" label="" name="newStructureId" value="<%= newStructureId %>" />
 								</c:when>
 								<c:otherwise>
 									<%= structureId %>
@@ -151,9 +153,9 @@ int tabIndex = 1;
 			</c:choose>
 		</aui:field-wrapper>
 
-		<aui:input bean="<%= structure %>" model="<%= JournalStructure.class %>" name="name" />
+		<aui:input name="name" />
 
-		<aui:input bean="<%= structure %>" model="<%= JournalStructure.class %>" name="description" />
+		<aui:input name="description" />
 
 		<aui:field-wrapper label="parent-structure">
 			<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
