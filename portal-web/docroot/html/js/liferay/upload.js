@@ -505,7 +505,6 @@ AUI().add(
 							flashObj.setStyles(
 								{
 									left: left,
-									position: 'absolute',
 									top: top,
 									zIndex: 100000
 								}
@@ -618,7 +617,7 @@ AUI().add(
 
 				instance._buttonPlaceHolder = A.Node.create('<div id="' + instance._buttonPlaceHolderId + '"></div>');
 
-				A.getBody().append(instance._buttonPlaceHolder);
+				A.getBody().prepend(instance._buttonPlaceHolder);
 
 				instance._uploader = new SWFUpload(
 					{
@@ -660,6 +659,10 @@ AUI().add(
 				);
 
 				var movieElement = instance._uploader.getMovieElement();
+
+				if (movieElement) {
+					movieElement.style.position = 'absolute';
+				}
 
 				window[instance._swfUpload] = instance._uploader;
 			},
