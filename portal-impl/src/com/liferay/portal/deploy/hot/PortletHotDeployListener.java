@@ -172,7 +172,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		Indexer indexer = portlet.getIndexerInstance();
 
 		if (indexer != null) {
-			IndexerRegistryUtil.register(indexer);
+			for (String className : indexer.getClassNames()) {
+				IndexerRegistryUtil.unregister(className);
+			}
 		}
 
 		Scheduler scheduler = portlet.getSchedulerInstance();
