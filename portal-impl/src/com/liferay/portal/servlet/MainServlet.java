@@ -66,6 +66,7 @@ import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.User;
+import com.liferay.portal.plugin.PluginPackageIndexer;
 import com.liferay.portal.poller.PollerProcessorUtil;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -1062,6 +1063,8 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void initIndexers(List<Portlet> portlets) throws Exception {
+		IndexerRegistryUtil.register(new PluginPackageIndexer());
+
 		Iterator<Portlet> itr = portlets.iterator();
 
 		while (itr.hasNext()) {
