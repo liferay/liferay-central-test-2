@@ -661,7 +661,14 @@ AUI().add(
 				var movieElement = instance._uploader.getMovieElement();
 
 				if (movieElement) {
-					movieElement.style.position = 'absolute';
+					movieElement.style.position = 'fixed';
+
+					if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7) {
+						movieElement.style.position = 'absolute';
+					}
+
+					movieElement.style.top = '0';
+					movieElement.style.zIndex = '100000';
 				}
 
 				window[instance._swfUpload] = instance._uploader;
