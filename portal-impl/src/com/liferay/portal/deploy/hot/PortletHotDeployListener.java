@@ -172,9 +172,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		Indexer indexer = portlet.getIndexerInstance();
 
 		if (indexer != null) {
-			for (String className : indexer.getClassNames()) {
-				IndexerRegistryUtil.unregister(className);
-			}
+			IndexerRegistryUtil.unregister(indexer);
 		}
 
 		Scheduler scheduler = portlet.getSchedulerInstance();
@@ -510,9 +508,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				new ContextClassLoaderBeanHandler(
 					indexerInstance, portletClassLoader));
 
-			for (String className : indexerInstance.getClassNames()) {
-				IndexerRegistryUtil.register(className, indexerInstance);
-			}
+			IndexerRegistryUtil.register(indexerInstance);
 		}
 
 		OpenSearch openSearchInstance = null;
