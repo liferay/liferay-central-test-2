@@ -11,15 +11,7 @@ fieldset {
 	border-width: 0;
 }
 
-.aui-fieldset .aui-field-content {
-	margin: 10px 0;
-}
-
-.aui-button-holder {
-	margin: 10px 0;
-}
-
-.aui-field-content, .aui-field-row {
+.aui-fieldset .aui-field-content, .aui-field-row, .aui-button-holder {
 	margin: 10px 0;
 }
 
