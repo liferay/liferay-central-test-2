@@ -737,7 +737,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 					message.getCategoryId());
 
-				category.setMessageCount(count - 1);
+				category.setMessageCount(category.getMessageCount() - 1);
 
 				mbCategoryPersistence.update(category, false);
 			}
