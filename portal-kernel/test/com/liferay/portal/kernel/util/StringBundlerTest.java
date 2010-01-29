@@ -62,7 +62,7 @@ public class StringBundlerTest extends TestCase {
 
 		StringBundler sb = new StringBundler();
 
-		sb.append(null);
+		sb.append((String)null);
 
 		assertEquals(1, sb.index());
 		assertEquals(StringPool.NULL, sb.stringAt(0));
