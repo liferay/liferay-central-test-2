@@ -19,6 +19,15 @@ fieldset {
 	margin: 10px 0;
 }
 
+.aui-field-content, .aui-field-row {
+	margin: 10px 0;
+}
+
+.aui-field-inline .aui-field-content, .aui-field-row .aui-field-content {
+	margin: 0;
+	margin-left: 5px;
+}
+
 legend {
 	font-weight: bold;
 	padding: 0 6px;
