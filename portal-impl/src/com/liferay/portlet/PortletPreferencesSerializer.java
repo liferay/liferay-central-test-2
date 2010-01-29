@@ -64,18 +64,27 @@ public class PortletPreferencesSerializer {
 		}
 
 		Map<String, Preference> preferencesMap = preferences.getPreferences();
+
 		XMLEventReader xmlEventReader = null;
+
 		try {
-			xmlEventReader = _xmlInputFactory.createXMLEventReader(
+			XMLInputFactory xmlInputFactory =
+				StAXReaderUtil.getXMLInputFactory();
+
+			xmlEventReader = xmlInputFactory.createXMLEventReader(
 				new UnsyncStringReader(xml));
 
 			while (xmlEventReader.hasNext()) {
 				XMLEvent xmlEvent = xmlEventReader.nextEvent();
+
 				if (xmlEvent.isStartElement()) {
 					StartElement startElement = xmlEvent.asStartElement();
+
 					String elementName = startElement.getName().getLocalPart();
-					if ("preference".equals(elementName)) {
+
+					if (elementName.equals("preference")) {
 						Preference preference = _readPreference(xmlEventReader);
+
 						preferencesMap.put(preference.getName(), preference);
 					}
 				}
@@ -91,48 +100,10 @@ public class PortletPreferencesSerializer {
 				try {
 					xmlEventReader.close();
 				}
-				catch (XMLStreamException e) {
+				catch (XMLStreamException xse) {
 				}
 			}
 		}
-	}
-
-	private static Preference _readPreference(XMLEventReader xmlEventReader)
-		throws XMLStreamException {
-
-		String name = null;
-		List<String> values = new ArrayList<String>();
-		boolean readOnly = false;
-
-		while (xmlEventReader.hasNext()) {
-
-			XMLEvent xmlEvent = xmlEventReader.nextEvent();
-			if (xmlEvent.isStartElement()) {
-				StartElement startElement = xmlEvent.asStartElement();
-				String elementName = startElement.getName().getLocalPart();
-				if ("name".equals(elementName)) {
-					name = StAXReaderUtil.readCharactersIfExist(xmlEventReader);
-				}
-				else if ("value".equals(elementName)) {
-					String value =
-						StAXReaderUtil.readCharactersIfExist(xmlEventReader);
-					values.add(value);
-				}
-				else if ("read-only".equals(elementName)) {
-					String value =
-						StAXReaderUtil.readCharactersIfExist(xmlEventReader);
-					readOnly = GetterUtil.getBoolean(value);
-				}
-			}
-			else if (xmlEvent.isEndElement()){
-				EndElement endElement = xmlEvent.asEndElement();
-				if ("preference".equals(endElement.getName().getLocalPart())) {
-					break;
-				}
-			}
-		}
-		return new Preference(name, values.toArray(new String[values.size()]),
-			readOnly);
 	}
 
 	public static PortletPreferencesImpl fromXML(
@@ -158,7 +129,8 @@ public class PortletPreferencesSerializer {
 	public static String toXML(PortletPreferencesImpl preferences) {
 		Map<String, Preference> preferencesMap = preferences.getPreferences();
 
-		Element portletPreferences = new Element("portlet-preferences", false);
+		Element portletPreferencesElement = new Element(
+			"portlet-preferences", false);
 
 		Iterator<Map.Entry<String, Preference>> itr =
 			preferencesMap.entrySet().iterator();
@@ -168,23 +140,65 @@ public class PortletPreferencesSerializer {
 
 			Preference preference = entry.getValue();
 
-			Element prefEl = portletPreferences.addElement("preference");
+			Element preferenceElement = portletPreferencesElement.addElement(
+				"preference");
 
-			prefEl.addElement("name", preference.getName());
+			preferenceElement.addElement("name", preference.getName());
 
-			for(String value: preference.getValues()) {
-				prefEl.addElement("value", value);
+			for (String value : preference.getValues()) {
+				preferenceElement.addElement("value", value);
 			}
 
 			if (preference.isReadOnly()) {
-				prefEl.addElement("read-only", "true");
+				preferenceElement.addElement("read-only", Boolean.TRUE);
 			}
 		}
 
-		return portletPreferences.toXMLString();
+		return portletPreferencesElement.toXMLString();
 	}
 
-	private static XMLInputFactory _xmlInputFactory =
-		XMLInputFactory.newInstance();
+	private static Preference _readPreference(XMLEventReader xmlEventReader)
+		throws XMLStreamException {
+
+		String name = null;
+		List<String> values = new ArrayList<String>();
+		boolean readOnly = false;
+
+		while (xmlEventReader.hasNext()) {
+			XMLEvent xmlEvent = xmlEventReader.nextEvent();
+
+			if (xmlEvent.isStartElement()) {
+				StartElement startElement = xmlEvent.asStartElement();
+
+				String elementName = startElement.getName().getLocalPart();
+
+				if (elementName.equals("name")) {
+					name = StAXReaderUtil.read(xmlEventReader);
+				}
+				else if (elementName.equals("value")) {
+					String value = StAXReaderUtil.read(xmlEventReader);
+
+					values.add(value);
+				}
+				else if (elementName.equals("read-only")) {
+					String value = StAXReaderUtil.read(xmlEventReader);
+
+					readOnly = GetterUtil.getBoolean(value);
+				}
+			}
+			else if (xmlEvent.isEndElement()){
+				EndElement endElement = xmlEvent.asEndElement();
+
+				String elementName = endElement.getName().getLocalPart();
+
+				if (elementName.equals("preference")) {
+					break;
+				}
+			}
+		}
+
+		return new Preference(
+			name, values.toArray(new String[values.size()]), readOnly);
+	}
 
 }

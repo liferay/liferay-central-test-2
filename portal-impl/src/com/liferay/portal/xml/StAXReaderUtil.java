@@ -25,24 +25,38 @@ package com.liferay.portal.xml;
 import com.liferay.portal.kernel.util.StringPool;
 
 import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.XMLEvent;
 
 /**
  * <a href="StAXReaderUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class StAXReaderUtil {
 
-	public static String readCharactersIfExist(
-		XMLEventReader xmlEventReader) throws XMLStreamException {
+	public static XMLInputFactory getXMLInputFactory() {
+		return _xmlInputFactory;
+	}
 
-		if (xmlEventReader.peek().isCharacters()) {
-			return xmlEventReader.nextEvent().asCharacters().getData();
+	public static String read(XMLEventReader xmlEventReader)
+		throws XMLStreamException {
+
+		XMLEvent xmlEvent = xmlEventReader.peek();
+
+		if (xmlEvent.isCharacters()) {
+			xmlEvent = xmlEventReader.nextEvent();
+
+			return xmlEvent.asCharacters().getData();
 		}
 		else {
 			return StringPool.BLANK;
 		}
 	}
+
+	private static XMLInputFactory _xmlInputFactory =
+		XMLInputFactory.newInstance();
 
 }
