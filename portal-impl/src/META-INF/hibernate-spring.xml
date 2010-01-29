@@ -14,6 +14,11 @@
 		</property>
 		<property name="sessionFactoryImplementor" ref="liferayHibernateSessionFactory" />
 	</bean>
+	<bean id="liferayTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="dataSource" ref="liferayDataSource" />
+		<property name="globalRollbackOnParticipationFailure" value="false" />
+		<property name="sessionFactory" ref="liferayHibernateSessionFactory" />
+	</bean>
 	<bean id="hibernateStatisticsService" class="com.liferay.portal.dao.orm.hibernate.jmx.HibernateStatisticsService">
 		<property name="sessionFactory" ref="liferaySessionFactory" />
 	</bean>

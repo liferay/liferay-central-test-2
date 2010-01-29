@@ -11,11 +11,6 @@
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactory" ref="liferaySessionFactory" />
 	</bean>
-	<bean id="liferayTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="dataSource" ref="liferayDataSource" />
-		<property name="globalRollbackOnParticipationFailure" value="false" />
-		<property name="sessionFactory" ref="liferayHibernateSessionFactory" />
-	</bean>
 	<bean id="transactionAdvice" class="org.springframework.transaction.interceptor.TransactionInterceptor">
 		<property name="transactionManager" ref="liferayTransactionManager" />
 		<property name="transactionAttributeSource">
