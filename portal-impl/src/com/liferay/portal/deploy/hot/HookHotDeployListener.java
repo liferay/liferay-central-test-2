@@ -1019,6 +1019,7 @@ public class HookHotDeployListener
 			}
 
 			String modelName = key.substring(VALUE_OBJECT_LISTENER.length());
+
 			String[] modelListenerClassNames = StringUtil.split(
 				portalProperties.getProperty(key));
 
