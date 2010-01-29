@@ -1019,14 +1019,17 @@ public class HookHotDeployListener
 			}
 
 			String modelName = key.substring(VALUE_OBJECT_LISTENER.length());
-			String modelListenerClassName = portalProperties.getProperty(key);
+			String[] modelListenerClassNames = StringUtil.split(
+				portalProperties.getProperty(key));
 
-			ModelListener<BaseModel<?>> modelListener = initModelListener(
-				modelName, modelListenerClassName, portletClassLoader);
+			for (String modelListenerClassName : modelListenerClassNames) {
+				ModelListener<BaseModel<?>> modelListener = initModelListener(
+					modelName, modelListenerClassName, portletClassLoader);
 
-			if (modelListener != null) {
-				modelListenersContainer.registerModelListener(
-					modelName, modelListener);
+				if (modelListener != null) {
+					modelListenersContainer.registerModelListener(
+						modelName, modelListener);
+				}
 			}
 		}
 	}
