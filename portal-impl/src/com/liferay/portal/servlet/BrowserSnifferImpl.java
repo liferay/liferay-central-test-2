@@ -88,10 +88,8 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		Matcher matcher = _revisionPattern.matcher(userAgent);
 
-		while (matcher.find()) {
-			for (int i = 1; i <= matcher.groupCount(); i++) {
-				revision = matcher.group(i);
-			}
+		if (matcher.find()) {
+			revision = matcher.group(1);
 		}
 
 		return revision;
@@ -369,7 +367,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	private static Pattern _majorVersionPattern = Pattern.compile(
 		"(\\d+[.]\\d+)");
 	private static Pattern _revisionPattern = Pattern.compile(
-		".+(?:rv|it|ra|ie)[\\/: ]([\\d.]+)");
+		"(?:rv|it|ra|ie)[\\/: ]([\\d.]+)");
 	private static Pattern _versionChromePattern = Pattern.compile(
 		"(?:chrome)[\\/]([\\d.]+)");
 	private static Pattern _versionFirefoxPattern = Pattern.compile(
