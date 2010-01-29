@@ -63,6 +63,10 @@ public class StringBundler {
 		}
 	}
 
+	public StringBundler append(char c) {
+		return append(String.valueOf(c));
+	}
+
 	public StringBundler append(double d) {
 		return append(Double.toString(d));
 	}
@@ -77,6 +81,10 @@ public class StringBundler {
 
 	public StringBundler append(long l) {
 		return append(Long.toString(l));
+	}
+
+	public StringBundler append(char[] chars) {
+		return append(new String(chars));
 	}
 
 	public StringBundler append(Object obj) {
