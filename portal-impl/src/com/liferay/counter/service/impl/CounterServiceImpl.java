@@ -25,6 +25,8 @@ package com.liferay.counter.service.impl;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.persistence.CounterUtil;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,6 +37,7 @@ import java.util.List;
  */
 public class CounterServiceImpl implements CounterService {
 
+	@Transactional(propagation=Propagation.SUPPORTS)
 	public List<String> getNames() throws SystemException {
 		return CounterUtil.getNames();
 	}

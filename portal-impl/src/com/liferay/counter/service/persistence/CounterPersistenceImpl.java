@@ -257,7 +257,9 @@ public class CounterPersistenceImpl
 	protected Connection getConnection() throws SQLException {
 		Connection connection = getDataSource().getConnection();
 
-		connection.setAutoCommit(true);
+		if (!PropsValues.XA_ENABLED) {
+			connection.setAutoCommit(true);
+		}
 
 		return connection;
 	}
