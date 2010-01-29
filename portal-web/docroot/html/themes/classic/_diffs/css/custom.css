@@ -236,7 +236,11 @@ body #banner .logo a {
 
 .lfr-portlet-title-editable-content {
 	margin-left: 4px;
-	margin-top: 1px;
+	margin-top: 2px;
+}
+
+.ie .lfr-portlet-title-editable-content {
+	margin-top: 4px;
 }
 
 .portlet-icons {
@@ -363,6 +367,22 @@ body.lfr-has-sidebar {
 	background-color: transparent;
 }
 
+.aui-combobox .aui-field-input {
+	padding: 4px 3px 3px;
+	font-size: 11px;
+	height: 15px;
+}
+
+.aui-combobox .aui-field {
+	float: left;
+	line-height: 0;
+}
+
+.lfr-portlet-title-editable-content .aui-field {
+	float: none;
+	display: inline;
+}
+
 /* ---------- Extras ---------- */
 
 .portlet-borderless-bar {
@@ -396,4 +416,13 @@ body.lfr-has-sidebar {
 	-moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
 	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.aui-combobox .aui-toolset-first .aui-toolset-item-content {
+	-moz-border-radius-topleft: 0;
+	-moz-border-radius-bottomleft: 0;
+	-webkit-border-top-left-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 }
