@@ -15,6 +15,24 @@
 		<property name="allowCustomIsolationLevels" value="true" />
 		<property name="globalRollbackOnParticipationFailure" value="false" />
 	</bean>
+	<!-- Replace above with the following if using WebSphere:
+	<bean id="liferayTransactionManager" class="org.springframework.transaction.jta.WebSphereUowTransactionManager">
+		<property name="allowCustomIsolationLevels" value="true" />
+		<property name="globalRollbackOnParticipationFailure" value="false" />
+	</bean>
+	-->
+	<!-- Replace above with the following if using Weblogic:
+	<bean id="liferayTransactionManager" class="org.springframework.transaction.jta.WebLogicJtaTransactionManager">
+		<property name="allowCustomIsolationLevels" value="true" />
+		<property name="globalRollbackOnParticipationFailure" value="false" />
+	</bean>
+	-->
+	<!-- Replace above with the following if using Oracle OC4J:
+	<bean id="liferayTransactionManager" class="org.springframework.transaction.jta.OC4JJtaTransactionManager">
+		<property name="allowCustomIsolationLevels" value="true" />
+		<property name="globalRollbackOnParticipationFailure" value="false" />
+	</bean>
+	-->
 	<bean id="transactionAdvice" class="org.springframework.transaction.interceptor.TransactionInterceptor">
 		<property name="transactionManager" ref="liferayTransactionManager" />
 		<property name="transactionAttributeSource">
