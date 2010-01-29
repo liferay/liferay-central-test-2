@@ -27,6 +27,7 @@
 <%
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
 long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
+boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 
 String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
 
@@ -266,7 +267,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 						return {
 							groupId: <%= groupId %>,
-							privateLayout: false,
+							privateLayout: <%= privateLayout %>,
 							parentLayoutId: parentLayoutId
 						};
 					},
