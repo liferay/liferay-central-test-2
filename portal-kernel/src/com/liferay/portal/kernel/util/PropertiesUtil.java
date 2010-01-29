@@ -205,7 +205,7 @@ public class PropertiesUtil {
 
 		StringBundler sb = null;
 
-		if (p.size() == 0) {
+		if (p.isEmpty()) {
 			sb = new StringBundler();
 		}
 		else {

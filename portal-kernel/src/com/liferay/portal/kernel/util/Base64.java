@@ -89,14 +89,14 @@ public class Base64 {
 	public static String encode(byte raw[], int offset, int length) {
 		int lastIndex = Math.min(raw.length, offset + length);
 
-		int encodedLength = ((lastIndex - offset) / 3 + 1) * 4;
-		StringBuilder encoded = new StringBuilder(encodedLength);
+		StringBuilder sb = new StringBuilder(
+			((lastIndex - offset) / 3 + 1) * 4);
 
 		for (int i = offset; i < lastIndex; i += 3) {
-			encoded.append(encodeBlock(raw, i, lastIndex));
+			sb.append(encodeBlock(raw, i, lastIndex));
 		}
 
-		return encoded.toString();
+		return sb.toString();
 	}
 
 	protected static char[] encodeBlock(byte raw[], int offset, int lastIndex) {

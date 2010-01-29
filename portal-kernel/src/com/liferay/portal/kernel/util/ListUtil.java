@@ -70,7 +70,7 @@ public class ListUtil {
 	}
 
 	public static <E> void distinct(List<E> list, Comparator<E> comparator) {
-		if ((list == null) || (list.size() == 0)) {
+		if ((list == null) || list.isEmpty()) {
 			return;
 		}
 
@@ -111,7 +111,7 @@ public class ListUtil {
 			return (List)c;
 		}
 
-		if ((c == null) || (c.size() == 0)) {
+		if ((c == null) || c.isEmpty()) {
 			return new ArrayList<E>();
 		}
 
@@ -294,7 +294,7 @@ public class ListUtil {
 
 		StringBundler sb = null;
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			sb = new StringBundler();
 		}
 		else {

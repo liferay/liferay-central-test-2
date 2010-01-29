@@ -674,6 +674,7 @@ public class StringUtil {
 				int y = s.length();
 
 				String temp = s.substring(0, pos);
+
 				s = temp.concat(s.substring(x, y));
 			}
 		}
@@ -935,6 +936,7 @@ public class StringUtil {
 			}
 
 			String temp = s.substring(0, length);
+
 			s = temp.concat(suffix);
 		}
 

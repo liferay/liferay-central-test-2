@@ -329,15 +329,15 @@ public class DocumentImpl implements Document {
 
 		sb.append(StringPool.OPEN_CURLY_BRACE);
 
-		boolean flag = false;
+		boolean firstField = true;
 
 		for (Field field : _fields.values()) {
-			if (flag) {
+			if (!firstField) {
 				sb.append(StringPool.COMMA);
 				sb.append(StringPool.SPACE);
 			}
 			else {
-				flag = true;
+				firstField = false;
 			}
 
 			sb.append(field.getName());
