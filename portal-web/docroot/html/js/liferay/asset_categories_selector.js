@@ -9,6 +9,8 @@ AUI().add(
 
 		var CSS_HELPER_RESET = getClassName('helper', 'reset');
 
+		var CSS_NO_MATCHES = 'no-matches';
+
 		var TPL_CHECKED = ' checked="checked" ';
 
 		var TPL_INPUT = '<label title="{name}"><input {checked} data-title="{name}" type="checkbox" value="{categoryId}" />{name}</label>';
@@ -254,7 +256,7 @@ AUI().add(
 
 					var buffer = instance._buffer;
 
-					instance._buffer.push('<fieldset>');
+					instance._buffer.push('<fieldset class="' + (!data || !data.length ? CSS_NO_MATCHES : '') + '">');
 
 					if (name) {
 						buffer.push('<legend>');

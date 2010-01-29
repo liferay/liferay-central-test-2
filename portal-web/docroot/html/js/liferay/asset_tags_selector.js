@@ -440,7 +440,7 @@ AUI().add(
 
 					popup.searchField.resetValue();
 
-					instance._buffer = ['<fieldset>'];
+					instance._buffer = ['<fieldset class="' + (!data || !data.length ? CSS_NO_MATCHES : '') + '">'];
 
 					A.each(data, iterator, instance);
 
