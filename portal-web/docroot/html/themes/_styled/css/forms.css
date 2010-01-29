@@ -25,6 +25,20 @@ legend {
 	padding: 0 6px;
 }
 
+.aui-fieldset-legend {
+	color: #000;
+	font-size: 120%;
+	font-weight: bold;
+	padding: 0 0 1.5em;
+}
+
+.aui-legend {
+	border-bottom: 1px solid #CCC;
+	display: block;
+	position: absolute;
+	width: 90%;
+}
+
 input {
 	background: #FFF;
 }
