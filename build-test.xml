@@ -105,6 +105,12 @@ jdbc.default.numHelperThreads=1</echo>
 		<antcall target="prepare-common" />
 	</target>
 
+	<target name="prepare-sql-server-2005">
+		<echo file="test.${user.name}.properties">db.type=sql-server-2005</echo>
+
+		<antcall target="prepare-common" />
+	</target>
+
 	<target name="prepare-vh-hostname-properties">
 		<if>
 			<not>
@@ -123,12 +129,6 @@ jdbc.default.numHelperThreads=1</echo>
 				/>
 			</then>
 		</if>
-	</target>
-
-	<target name="prepare-sql-server-2005">
-		<echo file="test.${user.name}.properties">db.type=sql-server-2005</echo>
-
-		<antcall target="prepare-common" />
 	</target>
 
 	<target name="prepare-vm-server">
