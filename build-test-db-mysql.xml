@@ -95,8 +95,8 @@
 	</target>
 
 	<target name="test-db-mysql-5.0-latest">
-		<echo file="create-${db.mysql-5.0.schema}.sql"><![CDATA[drop database if exists lportal;
-create database lportal character set utf8;]]></echo>
+		<echo file="create-${db.mysql-5.0.schema}.sql">drop database if exists lportal;
+create database lportal character set utf8;</echo>
 
 		<antcall target="test-db-mysql-5.0-common">
 			<param name="sql.dir" value="" />

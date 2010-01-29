@@ -95,8 +95,8 @@
 	</target>
 
 	<target name="test-db-postgresql-8.3-latest">
-		<echo file="create-${db.postgresql-8.3.schema}.sql"><![CDATA[drop database lportal;
-create database lportal encoding = 'UNICODE';]]></echo>
+		<echo file="create-${db.postgresql-8.3.schema}.sql">drop database lportal;
+create database lportal encoding = 'UNICODE';</echo>
 
 		<antcall target="test-db-postgresql-8.3-common">
 			<param name="sql.dir" value="" />

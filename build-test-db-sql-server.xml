@@ -95,8 +95,8 @@
 	</target>
 
 	<target name="test-db-sql-server-2005-latest">
-		<echo file="create-${db.sql-server-2005.schema}.sql"><![CDATA[drop database lportal;
-create database lportal;]]></echo>
+		<echo file="create-${db.sql-server-2005.schema}.sql">drop database lportal;
+create database lportal;</echo>
 
 		<antcall target="test-db-sql-server-2005-common">
 			<param name="sql.dir" value="" />
