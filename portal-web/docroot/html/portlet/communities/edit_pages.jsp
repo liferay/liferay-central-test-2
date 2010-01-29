@@ -214,7 +214,8 @@ else if (liveGroup.isUserGroup()) {
 	rootNodeName = userGroup.getName();
 }
 else if (selGroup.isLayoutSetPrototype()) {
-	LayoutSetPrototype layoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(GetterUtil.getLong(selGroup.getName()));
+	LayoutSetPrototype layoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(selGroup.getGroupId());
+
 	rootNodeName = layoutSetPrototype.getName(user.getLanguageId());
 }
 
