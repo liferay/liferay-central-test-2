@@ -24,65 +24,52 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-<form action="<%= themeDisplay.getPathMain() %>/portal/update_reminder_query" class="aui-form" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
-<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
-<input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
+<aui:form action='<%= themeDisplay.getPathMain() + "/portal/update_reminder_query" %>' method="post" name="fm">
+	<aui:input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="<%= WebKeys.REFERER %>" type="hidden" value='<%= themeDisplay.getPathMain() + "?doAsUserId=" + themeDisplay.getDoAsUserId() %>' />
 
-<div class="portlet-msg-info">
-	<liferay-ui:message key="please-choose-a-reminder-query" />
-</div>
-
-<c:if test="<%= SessionErrors.contains(request, UserReminderQueryException.class.getName()) %>">
-	<div class="portlet-msg-error">
-		<liferay-ui:message key="reminder-query-and-answer-cannot-be-empty" />
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="please-choose-a-reminder-query" />
 	</div>
-</c:if>
 
-<fieldset class="aui-fieldset">
-	<legend><liferay-ui:message key="password-reminder" /></legend>
+	<c:if test="<%= SessionErrors.contains(request, UserReminderQueryException.class.getName()) %>">
+		<div class="portlet-msg-error">
+			<liferay-ui:message key="reminder-query-and-answer-cannot-be-empty" />
+		</div>
+	</c:if>
 
-	<span class="aui-field">
-		<span class="aui-field-content">
-			<label for="reminderQueryQuestion"><liferay-ui:message key="question" /></label>
+	<aui:fieldset label="password-reminder">
+		<aui:select label="question" name="reminderQueryQuestion">
 
-			<select id="reminderQueryQuestion" name="reminderQueryQuestion">
+			<%
+			for (String question : user.getReminderQueryQuestions()) {
+			%>
 
-				<%
-				for (String question : user.getReminderQueryQuestions()) {
-				%>
+				<aui:option label="<%= question %>" />
 
-					<option value="<%= question %>"><liferay-ui:message key="<%= question %>" /></option>
-
-				<%
-				}
-				%>
-
-				<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-					<option value="<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>"><liferay-ui:message key="write-my-own-question" /></option>
-				</c:if>
-			</select>
+			<%
+			}
+			%>
 
 			<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-				<div class="aui-helper-hidden" id="customQuestionContainer">
-					<liferay-ui:input-field model="<%= User.class %>" bean="<%= user %>" field="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
-				</div>
+				<aui:option label="<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>" />
 			</c:if>
-		</span>
-	</span>
+		</aui:select>
 
-	<span class="aui-field">
-		<span class="aui-field-content">
-			<label for="reminderQueryAnswer"><liferay-ui:message key="answer" /></label>
+		<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
+			<div class="aui-helper-hidden" id="customQuestionContainer">
+				<aui:input model="<%= User.class %>" bean="<%= user %>" label="" name="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
+			</div>
+		</c:if>
 
-			<input id="reminderQueryAnswer" name="reminderQueryAnswer" size="50" type="text" value="<%= HtmlUtil.escapeAttribute(user.getReminderQueryAnswer()) %>" />
-		</span>
-	</span>
-</fieldset>
+		<aui:input label="answer" name="reminderQueryAnswer" size="50" type="text" value="<%= user.getReminderQueryAnswer() %>" />
+	</aui:fieldset>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-</form>
+	<aui:button-row>
+		<aui:button type="submit" />
+	</aui:button-row>
+</aui:form>
 
 <aui:script use="event,node">
 	var reminderQueryQuestion = A.one('#reminderQueryQuestion');
