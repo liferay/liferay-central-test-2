@@ -48,7 +48,7 @@
 	</target>
 
 	<target name="prepare-portal-ext-properties">
-		<echo file="portal-impl/src/portal-ext.properties"><![CDATA[jdbc.default.jndi.name=
+		<echo file="portal-impl/src/portal-ext.properties">jdbc.default.jndi.name=
 
 jdbc.default.driverClassName=${db.driver}
 jdbc.default.url=${db.url}
@@ -63,17 +63,17 @@ mail.session.jndi.name=
 
 axis.servlet.hosts.allowed=
 
-tunnel.servlet.hosts.allowed=]]></echo>
+tunnel.servlet.hosts.allowed=</echo>
 
 		<if>
 			<equals arg1="${db.type}" arg2="oracle-10" />
 			<then>
-				<echo file="portal-impl/src/portal-ext.properties" append="true"><![CDATA[
+				<echo file="portal-impl/src/portal-ext.properties" append="true">
 
 jdbc.default.acquireIncrement=1
 jdbc.default.maxPoolSize=5
 jdbc.default.minPoolSize=1
-jdbc.default.numHelperThreads=1]]></echo>
+jdbc.default.numHelperThreads=1</echo>
 			</then>
 		</if>
 	</target>
@@ -103,6 +103,26 @@ jdbc.default.numHelperThreads=1]]></echo>
 		<echo file="test.${user.name}.properties">db.type=postgresql-8.3</echo>
 
 		<antcall target="prepare-common" />
+	</target>
+
+	<target name="prepare-vh-hostname-properties">
+		<if>
+			<not>
+				<equals arg1="${vh.hostname}" arg2="$${vh.hostname}" />
+			</not>
+			<then>
+				<replace
+					file="portal-impl/test/test-portal-impl.properties"
+					token="localhost:8080"
+					value="www.${vh.hostname}.com:8080"
+				/>
+				<replace
+					file="portal-web/test/test-portal-web.properties"
+					token="localhost:8080"
+					value="www.${vh.hostname}.com:8080"
+				/>
+			</then>
+		</if>
 	</target>
 
 	<target name="prepare-sql-server-2005">

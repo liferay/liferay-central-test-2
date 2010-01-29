@@ -82,9 +82,16 @@ web.server.display.node=true</echo>
 	</target>
 
 	<target name="run-selenium-tomcat-6.0">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+		<if>
+			<equals arg1="${build.app.server}" arg2="$${build.app.server}" />
+			<then>
+				<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+			</then>
+		</if>
 
 		<antcall target="revert-test-properties" />
+
+		<antcall target="prepare-vh-hostname-properties" />
 
 		<antcall target="start-selenium" />
 

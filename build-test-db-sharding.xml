@@ -9,16 +9,6 @@
 		</exec>
 	</target>
 
-	<target name="test-db-sharding">
-		<antcall target="prepare-mysql-5.0" />
-
-		<antcall target="prepare-db-sharding" />
-
-		<antcall target="prepare-sharding-properties" />
-
-		<antcall target="test-tomcat-6.0-localhost" />
-	</target>
-
 	<target name="prepare-sharding-properties">
 		<echo file="portal-impl/src/portal-ext.properties" append="true"><![CDATA[
 
@@ -36,66 +26,65 @@ shard.available.names=default,one,two
 
 spring.configs=\
 		META-INF/base-spring.xml,\
-        \
-        META-INF/hibernate-spring.xml,\
-        META-INF/infrastructure-spring.xml,\
-        META-INF/management-spring.xml,\
-        \
-        META-INF/util-spring.xml,\
-        \
-        META-INF/editor-spring.xml,\
-        META-INF/jcr-spring.xml,\
-        META-INF/messaging-core-spring.xml,\
-        META-INF/messaging-misc-spring.xml,\
-        META-INF/scheduler-spring.xml,\
-        META-INF/search-spring.xml,\
-        \
-        META-INF/counter-spring.xml,\
-        META-INF/document-library-spring.xml,\
-        META-INF/lock-spring.xml,\
-        META-INF/mail-spring.xml,\
-        META-INF/portal-spring.xml,\
-        META-INF/portlet-container-spring.xml,\
-        \
-        #META-INF/dynamic-data-source-spring.xml,\
-        META-INF/shard-data-source-spring.xml,\
-        #META-INF/monitoring-spring.xml,\
-        \
-        META-INF/ext-spring.xml]]></echo>
+		\
+		META-INF/hibernate-spring.xml,\
+		META-INF/infrastructure-spring.xml,\
+		META-INF/management-spring.xml,\
+		\
+		META-INF/util-spring.xml,\
+		\
+		META-INF/jpa-spring.xml,\
+		\
+		META-INF/cluster-spring.xml,\
+		META-INF/editor-spring.xml,\
+		META-INF/jcr-spring.xml,\
+		META-INF/messaging-core-spring.xml,\
+		META-INF/messaging-misc-spring.xml,\
+		META-INF/poller-spring.xml,\
+		META-INF/rules-spring.xml,\
+		META-INF/scheduler-spring.xml,\
+		META-INF/scripting-spring.xml,\
+		META-INF/search-spring.xml,\
+		META-INF/workflow-spring.xml,\
+		\
+		META-INF/counter-spring.xml,\
+		META-INF/document-library-spring.xml,\
+		META-INF/mail-spring.xml,\
+		META-INF/portal-spring.xml,\
+		META-INF/portlet-container-spring.xml,\
+		\
+		#META-INF/audit-spring.xml,\
+		META-INF/dynamic-data-source-spring.xml,\
+		META-INF/shard-data-source-spring.xml,\
+		#META-INF/monitoring-spring.xml,\
+		\
+		META-INF/ext-spring.xml]]></echo>
 	</target>
 
-	<target name="test-tomcat-6.0-localhost">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+	<target name="run-db-sharding-tomcat-6.0-mysql-5.0">
+		<antcall target="prepare-mysql-5.0" />
 
-		<antcall target="revert-test-properties" />
+		<antcall target="prepare-db-sharding" />
 
-		<!--<antcall target="start-selenium" />
+		<antcall target="prepare-sharding-properties" />
 
-		<antcall target="run-tomcat-6.0">
-			<param name="test.class" value="localhost" />
-		</antcall>
+		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+			<property name="skip.rebuild-database" value="true" />
+			<property name="test.name" value="DBShardingLocalhostTestSuite" />
+		</ant>
 
-		<antcall target="stop-selenium" />-->
+		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+			<property name="build.app.server" value="false" />
+			<property name="skip.rebuild-database" value="true" />
+			<property name="test.name" value="DBShardingAbleTestSuite" />
+			<property name="vh.hostname" value="able" />
+		</ant>
+
+		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+			<property name="build.app.server" value="false" />
+			<property name="skip.rebuild-database" value="true" />
+			<property name="test.name" value="DBShardingBakerTestSuite" />
+			<property name="vh.hostname" value="baker" />
+		</ant>
 	</target>
-
-	<!--<target name="test-tomcat-6.0-able">
-		<antcall target="start-selenium" />
-
-		<antcall target="run-tomcat-6.0">
-			<param name="test.class" value="able" />
-		</antcall>
-
-		<antcall target="stop-selenium" />
-	</target>
-
-	<target name="test-tomcat-6.0-baker">
-		<antcall target="start-selenium" />
-
-		<antcall target="run-tomcat-6.0">
-			<param name="test.class" value="baker" />
-		</antcall>
-
-		<antcall target="stop-selenium" />
-	</target>-->
-
 </project>
