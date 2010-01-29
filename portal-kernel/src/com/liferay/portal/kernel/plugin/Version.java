@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.plugin;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -281,7 +282,7 @@ public class Version implements Comparable<Version> {
 			_bugFix = st.nextToken();
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		while (st.hasMoreTokens()) {
 			sb.append(st.nextToken());
@@ -318,7 +319,7 @@ public class Version implements Comparable<Version> {
 	private static String _toString(
 		String major, String minor, String bugFix, String buildNumber) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(major);
 

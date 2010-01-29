@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.StagnantRowException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -47,7 +48,7 @@ public class IdReplacer {
 
 		char[] charArray = s.toCharArray();
 
-		StringBuilder sb = new StringBuilder(s.length());
+		StringBundler sb = new StringBundler();
 
 		int pos = 0;
 
@@ -103,7 +104,7 @@ public class IdReplacer {
 			return s;
 		}
 
-		StringBuilder sb = new StringBuilder(s.length());
+		StringBundler sb = new StringBundler();
 
 		int pos = 0;
 

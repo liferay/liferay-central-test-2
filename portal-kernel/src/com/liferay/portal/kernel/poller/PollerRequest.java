@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.poller;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Map;
@@ -117,7 +118,7 @@ public class PollerRequest {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{chunkId=");
 		sb.append(_chunkId);

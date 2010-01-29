@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -324,16 +325,19 @@ public class DocumentImpl implements Document {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(StringPool.OPEN_CURLY_BRACE);
 
-		int i = 0;
+		boolean flag = false;
 
 		for (Field field : _fields.values()) {
-			if (i > 0) {
+			if (flag) {
 				sb.append(StringPool.COMMA);
 				sb.append(StringPool.SPACE);
+			}
+			else {
+				flag = true;
 			}
 
 			sb.append(field.getName());

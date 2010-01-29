@@ -95,7 +95,7 @@ public class MethodKey implements Serializable {
 
 	private String _toString() {
 		if (_toString == null) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			sb.append(_className);
 			sb.append(_methodName);

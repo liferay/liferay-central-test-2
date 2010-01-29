@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.jsp.PageContext;
@@ -111,7 +112,7 @@ public class TextSearchEntry extends SearchEntry {
 			pageContext.getOut().print(_name);
 		}
 		else {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			sb.append("<a href=\"");
 			sb.append(_href);

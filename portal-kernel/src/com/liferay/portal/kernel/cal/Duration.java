@@ -52,6 +52,8 @@
 
 package com.liferay.portal.kernel.cal;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 import java.io.Serializable;
 
 /**
@@ -385,7 +387,7 @@ public class Duration implements Cloneable, Serializable {
 	 * @return String
 	 */
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(12);
 
 		sb.append(getClass().getName());
 		sb.append("[weeks=");

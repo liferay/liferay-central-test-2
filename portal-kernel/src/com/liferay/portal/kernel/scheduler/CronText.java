@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.scheduler;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Calendar;
@@ -130,7 +131,7 @@ public class CronText {
 			year += StringPool.FORWARD_SLASH + _interval;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append(second);
 		sb.append(StringPool.SPACE);

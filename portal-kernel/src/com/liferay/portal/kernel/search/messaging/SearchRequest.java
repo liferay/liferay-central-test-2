@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.search.messaging;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
@@ -158,7 +159,7 @@ public class SearchRequest implements Serializable {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{searchEngineCommand=");
 		sb.append(_searchEngineCommand);

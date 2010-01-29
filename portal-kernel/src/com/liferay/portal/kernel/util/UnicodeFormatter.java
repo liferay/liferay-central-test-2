@@ -80,7 +80,7 @@ public class UnicodeFormatter {
 	}
 
 	public static String toString(char[] array) {
-		StringBuilder sb = new StringBuilder(array.length * 5);
+		StringBuilder sb = new StringBuilder(array.length * 6);
 
 		char[] hexes = new char[4];
 
@@ -97,7 +97,7 @@ public class UnicodeFormatter {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder(s.length() * 5);
+		StringBuilder sb = new StringBuilder(s.length() * 6);
 
 		char[] hexes = new char[4];
 

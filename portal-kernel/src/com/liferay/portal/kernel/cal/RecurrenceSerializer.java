@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.cal;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Calendar;
@@ -144,7 +145,7 @@ public class RecurrenceSerializer {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append(startDateSecond);
 		sb.append(StringPool.SPACE);

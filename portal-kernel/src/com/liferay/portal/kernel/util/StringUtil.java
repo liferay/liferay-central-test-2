@@ -71,7 +71,7 @@ public class StringUtil {
 		}
 
 		if (allowDuplicates || !contains(s, add, delimiter)) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			sb.append(s);
 
@@ -117,34 +117,16 @@ public class StringUtil {
 			return false;
 		}
 
-		StringBuilder sb = null;
-
 		if (!s.endsWith(delimiter)) {
-			sb = new StringBuilder();
-
-			sb.append(s);
-			sb.append(delimiter);
-
-			s = sb.toString();
+			s = s.concat(delimiter);
 		}
 
-		sb = new StringBuilder();
-
-		sb.append(delimiter);
-		sb.append(text);
-		sb.append(delimiter);
-
-		String dtd = sb.toString();
+		String dtd = delimiter.concat(text).concat(delimiter);
 
 		int pos = s.indexOf(dtd);
 
 		if (pos == -1) {
-			sb = new StringBuilder();
-
-			sb.append(text);
-			sb.append(delimiter);
-
-			String td = sb.toString();
+			String td = text.concat(delimiter);
 
 			if (s.startsWith(td)) {
 				return true;
@@ -300,7 +282,14 @@ public class StringUtil {
 			return s;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = null;
+
+		if (queryTerms.length == 0) {
+			sb = new StringBundler();
+		}
+		else {
+			sb = new StringBundler(2 * queryTerms.length - 1);
+		}
 
 		for (int i = 0; i < queryTerms.length; i++) {
 			sb.append(Pattern.quote(queryTerms[i].trim()));
@@ -372,7 +361,14 @@ public class StringUtil {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = null;
+
+		if (array.length == 0) {
+			sb = new StringBundler();
+		}
+		else {
+			sb = new StringBundler(2 * array.length - 1);
+		}
 
 		for (int i = 0; i < array.length; i++) {
 			sb.append(String.valueOf(array[i]).trim());
@@ -394,7 +390,14 @@ public class StringUtil {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = null;
+
+		if (array.length == 0) {
+			sb = new StringBundler();
+		}
+		else {
+			sb = new StringBundler(2 * array.length - 1);
+		}
 
 		for (int i = 0; i < array.length; i++) {
 			sb.append(String.valueOf(array[i]).trim());
@@ -416,7 +419,14 @@ public class StringUtil {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = null;
+
+		if (array.length == 0) {
+			sb = new StringBundler();
+		}
+		else {
+			sb = new StringBundler(2 * array.length - 1);
+		}
 
 		for (int i = 0; i < array.length; i++) {
 			sb.append(String.valueOf(array[i]).trim());
@@ -438,7 +448,14 @@ public class StringUtil {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = null;
+
+		if (array.length == 0){
+			sb = new StringBundler();
+		}
+		else {
+			sb = new StringBundler(2 * array.length - 1);
+		}
 
 		for (int i = 0; i < array.length; i++) {
 			sb.append(String.valueOf(array[i]).trim());
@@ -460,7 +477,14 @@ public class StringUtil {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = null;
+
+		if (array.length == 0) {
+			sb = new StringBundler();
+		}
+		else {
+			sb = new StringBundler(2 * array.length - 1);
+		}
 
 		for (int i = 0; i < array.length; i++) {
 			sb.append(String.valueOf(array[i]).trim());
@@ -482,7 +506,14 @@ public class StringUtil {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = null;
+
+		if (array.length == 0) {
+			sb = new StringBundler();
+		}
+		else {
+			sb = new StringBundler(2 * array.length - 1);
+		}
 
 		for (int i = 0; i < array.length; i++) {
 			sb.append(String.valueOf(array[i]).trim());
@@ -516,7 +547,14 @@ public class StringUtil {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = null;
+
+		if (array.length == 0) {
+			sb = new StringBundler();
+		}
+		else {
+			sb = new StringBundler(2 * array.length - 1);
+		}
 
 		for (int i = 0; i < array.length; i++) {
 			sb.append(String.valueOf(array[i]).trim());
@@ -543,7 +581,7 @@ public class StringUtil {
 		throws IOException {
 
 		if (all) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			Enumeration<URL> enu = classLoader.getResources(name);
 
@@ -586,7 +624,7 @@ public class StringUtil {
 	}
 
 	public static String read(InputStream is) throws IOException {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new InputStreamReader(is));
@@ -616,20 +654,9 @@ public class StringUtil {
 			s += delimiter;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		String drd = delimiter.concat(remove).concat(delimiter);
 
-		sb.append(delimiter);
-		sb.append(remove);
-		sb.append(delimiter);
-
-		String drd = sb.toString();
-
-		sb = new StringBuilder();
-
-		sb.append(remove);
-		sb.append(delimiter);
-
-		String rd = sb.toString();
+		String rd = remove.concat(delimiter);
 
 		while (contains(s, remove, delimiter)) {
 			int pos = s.indexOf(drd);
@@ -646,12 +673,8 @@ public class StringUtil {
 				int x = pos + remove.length() + delimiter.length();
 				int y = s.length();
 
-				sb = new StringBuilder();
-
-				sb.append(s.substring(0, pos));
-				sb.append(s.substring(x, y));
-
-				s = sb.toString();
+				String temp = s.substring(0, pos);
+				s = temp.concat(s.substring(x, y));
 			}
 		}
 
@@ -911,12 +934,8 @@ public class StringUtil {
 				}
 			}
 
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(s.substring(0, length));
-			sb.append(suffix);
-
-			s =  sb.toString();
+			String temp = s.substring(0, length);
+			s = temp.concat(suffix);
 		}
 
 		return s;
@@ -1365,7 +1384,14 @@ public class StringUtil {
 
 		StringTokenizer st = new StringTokenizer(s);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = null;
+
+		if (st.countTokens() == 0) {
+			sb = new StringBundler();
+		}
+		else {
+			sb = new StringBundler(2 * st.countTokens() - 1);
+		}
 
 		while (st.hasMoreTokens()) {
 			String token = st.nextToken();
@@ -1409,7 +1435,7 @@ public class StringUtil {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(text));

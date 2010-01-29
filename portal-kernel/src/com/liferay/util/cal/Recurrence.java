@@ -53,6 +53,7 @@
 package com.liferay.util.cal;
 
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -1086,7 +1087,7 @@ public class Recurrence implements Serializable {
 	 * @return String
 	 */
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(getClass().getName());
 		sb.append("[dtStart=");
@@ -1146,7 +1147,7 @@ public class Recurrence implements Serializable {
 			return "null";
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(2 * a.length + 1);
 
 		sb.append("[");
 

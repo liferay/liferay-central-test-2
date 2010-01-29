@@ -121,7 +121,7 @@ public class CalendarUtil {
 			pattern = "EEEE";
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("days_");
 		sb.append(pattern);
@@ -263,7 +263,7 @@ public class CalendarUtil {
 			pattern = "MMMM";
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("months_");
 		sb.append(pattern);

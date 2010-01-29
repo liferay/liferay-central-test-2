@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.poller;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 /**
  * <a href="PollerHeader.java.html"><b><i>View Source</i></b></a>
  *
@@ -65,7 +67,7 @@ public class PollerHeader {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{_browserKey=");
 		sb.append(_browserKey);

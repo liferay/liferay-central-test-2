@@ -52,6 +52,8 @@
 
 package com.liferay.portal.kernel.cal;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 import java.io.Serializable;
 
 import java.util.Calendar;
@@ -223,7 +225,7 @@ public class DayAndPosition implements Cloneable, Serializable {
 	 * @return String
 	 */
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(getClass().getName());
 		sb.append("[day=");

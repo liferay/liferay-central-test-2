@@ -179,16 +179,14 @@ public class LocaleUtil {
 			locale = _locale;
 		}
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(locale.getLanguage());
+		String temp = locale.getLanguage();
 
 		if (Validator.isNotNull(locale.getCountry())) {
-			sb.append(StringPool.UNDERLINE);
-			sb.append(locale.getCountry());
+			temp = temp.concat(StringPool.UNDERLINE);
+			temp = temp.concat(locale.getCountry());
 		}
 
-		return sb.toString();
+		return temp;
 	}
 
 	private String[] _toLanguageIds(Locale[] locales) {

@@ -87,9 +87,10 @@ public class Base64 {
 	}
 
 	public static String encode(byte raw[], int offset, int length) {
-		StringBuilder encoded = new StringBuilder();
-
 		int lastIndex = Math.min(raw.length, offset + length);
+
+		int encodedLength = ((lastIndex - offset) / 3 + 1) * 4;
+		StringBuilder encoded = new StringBuilder(encodedLength);
 
 		for (int i = offset; i < lastIndex; i += 3) {
 			encoded.append(encodeBlock(raw, i, lastIndex));

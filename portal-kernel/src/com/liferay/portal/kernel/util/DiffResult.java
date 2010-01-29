@@ -86,7 +86,7 @@ public class DiffResult {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(2 * _changedLines.size() + 2);
 
 		sb.append("Line: ");
 		sb.append(_lineNumber);

@@ -203,7 +203,14 @@ public class PropertiesUtil {
 			safeProperties = (SafeProperties)p;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = null;
+
+		if (p.size() == 0) {
+			sb = new StringBundler();
+		}
+		else {
+			sb = new StringBundler(p.size() * 4);
+		}
 
 		Enumeration<String> enu = (Enumeration<String>)p.propertyNames();
 

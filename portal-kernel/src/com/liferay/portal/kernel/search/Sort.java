@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 import java.io.Serializable;
 
 /**
@@ -87,14 +89,15 @@ public class Sort implements Serializable {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{fieldName=");
 		sb.append(_fieldName);
 		sb.append(", type=");
 		sb.append(_type);
 		sb.append(", reverse=");
-		sb.append(_reverse + "}");
+		sb.append(_reverse);
+		sb.append("}");
 
 		return sb.toString();
 	}
