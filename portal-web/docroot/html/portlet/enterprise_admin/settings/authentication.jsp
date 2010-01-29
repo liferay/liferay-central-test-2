@@ -80,7 +80,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 
 			<aui:input inlineLabel="left" label="allow-strangers-to-create-accounts" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS + ")" %>' type="checkbox" value="<%= companySecurityStrangers %>" />
 
-			<aui:input inlineLabel="left" label="allow-strangers-to-create-accounts-with-a-company-email-address" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX + ")" %>' type="checkbox" value="<%= companySecurityStrangers %>" />
+			<aui:input inlineLabel="left" label="allow-strangers-to-create-accounts-with-a-company-email-address" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX + ")" %>' type="checkbox" value="<%= companySecurityStrangersWithMx %>" />
 
 			<aui:input inlineLabel="left" label="require-strangers-to-verify-their-email-address" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY + ")" %>' type="checkbox" value="<%= companySecurityStrangersVerify %>" />
 		</aui:fieldset>
