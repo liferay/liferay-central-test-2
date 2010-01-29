@@ -637,14 +637,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			companyId);
 
 		try {
-			for (String key : properties.keySet()) {
-				String value = properties.getProperty(key);
-
-				preferences.setValue(key, value);
-			}
-
-			preferences.store();
-
 			if (properties.containsKey(PropsKeys.LOCALES)) {
 				String oldLocales = preferences.getValue(
 					PropsKeys.LOCALES, StringPool.BLANK);
@@ -654,6 +646,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 					LanguageUtil.resetAvailableLocales(companyId);
 				}
 			}
+
+			for (String key : properties.keySet()) {
+				String value = properties.getProperty(key);
+
+				preferences.setValue(key, value);
+			}
+
+			preferences.store();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
