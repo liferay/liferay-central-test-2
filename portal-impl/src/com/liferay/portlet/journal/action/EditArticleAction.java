@@ -140,9 +140,11 @@ public class EditArticleAction extends PortletAction {
 					(ThemeDisplay)actionRequest.getAttribute(
 						WebKeys.THEME_DISPLAY);
 
-				String layoutType = themeDisplay.getLayout().getType();
+				Layout layout = themeDisplay.getLayout();
 
-				if (layoutType.equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+				if (layout.getType().equals(
+						LayoutConstants.TYPE_CONTROL_PANEL)) {
+
 					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {
