@@ -24,7 +24,7 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.taglib.aui.ScriptData" %>
+<%@ page import="com.liferay.portal.kernel.servlet.taglib.aui.ScriptData" %>
 <%@ page import="com.liferay.taglib.aui.ScriptTag" %>
 
 <%
