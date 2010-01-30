@@ -94,7 +94,7 @@ public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Creating data source " + dataSource.getClass().getName());
+				"Created data source " + dataSource.getClass().getName());
 
 			SortedProperties sortedProperties = new SortedProperties(
 				properties);
