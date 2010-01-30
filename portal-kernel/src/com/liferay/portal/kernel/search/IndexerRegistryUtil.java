@@ -51,6 +51,8 @@ public class IndexerRegistryUtil {
 		for (String className : indexer.getClassNames()) {
 			register(className, indexer);
 		}
+
+		register(indexer.getClass().getName(), indexer);
 	}
 
 	public static void register(
@@ -63,6 +65,8 @@ public class IndexerRegistryUtil {
 		for (String className : indexer.getClassNames()) {
 			unregister(className);
 		}
+
+		unregister(indexer.getClass().getName());
 	}
 
 	public static void unregister(String className) {
