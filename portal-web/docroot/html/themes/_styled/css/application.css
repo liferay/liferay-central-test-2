@@ -473,6 +473,47 @@
 	padding-bottom: 3px;
 }
 
+.aui-tagselector-content {
+	background: #fff;
+	border: 1px solid;
+	border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
+	margin-bottom: 30px;
+	padding: 5px;
+	position: relative;
+	overflow: visible;
+}
+
+.aui-tagselector .lfr-tag-selector-input {
+	background: none;
+	padding: 0;
+	width: auto;
+}
+
+.aui-tagselector-focused .aui-tagselector-content {
+	background: #FFC none;
+	border: 1px solid #FC0;
+}
+
+.aui-tagselector .aui-field .aui-field-content {
+	margin: 0;
+}
+
+.aui-tagselector .aui-toolset {
+	position: absolute;
+	top: 100%;
+	margin-top: 5px;
+	left: -1px;
+}
+
+.aui-tagselector .aui-textboxlist-input-container {
+	margin: 0;
+}
+
+.aui-categoriesselector-content {
+	border-width: 0;
+	padding: 0;
+}
+
 /* ---------- Tag cloud and tag list ---------- */
 
 .tag-cloud, .tag-list {

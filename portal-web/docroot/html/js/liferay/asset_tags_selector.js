@@ -295,6 +295,13 @@ AUI().add(
 						{
 							tools: [
 								{
+									icon: 'plus',
+									id: 'add',
+									handler: function(event) {
+										instance.entries.add(instance.inputNode.val(), {});
+									}
+								},
+								{
 									icon: 'search',
 									id: 'select',
 									handler: {
