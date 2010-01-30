@@ -154,11 +154,6 @@ public class CASAutoLogin implements AutoLogin {
 		LdapContext ctx = null;
 
 		try {
-			if (Validator.isNull(screenName)) {
-				screenName = UserLocalServiceUtil.getUserByEmailAddress(
-					companyId, emailAddress).getScreenName();
-			}
-
 			long ldapServerId = PortalLDAPUtil.getLdapServerId(
 				companyId, screenName);
 
@@ -216,17 +211,8 @@ public class CASAutoLogin implements AutoLogin {
 					true);
 			}
 			else {
-				String login = null;
-
-				if (Validator.isNotNull(emailAddress)) {
-					login = emailAddress;
-				}
-				else {
-					login = screenName;
-				}
-
 				throw new NoSuchUserException(
-					"User " + login + " was not found in the LDAP server");
+					"User " + screenName + " was not found in the LDAP server");
 			}
 		}
 		catch (Exception e) {
