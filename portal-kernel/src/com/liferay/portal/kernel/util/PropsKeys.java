@@ -1415,6 +1415,8 @@ public interface PropsKeys {
 
 	public static final String TRANSACTION_ISOLATION_PORTAL = "transaction.isolation.portal";
 
+	public static final String TRANSACTION_MANAGER_IMPL = "transaction.manager.impl";
+
 	public static final String TRANSLATOR_DEFAULT_LANGUAGES = "translator.default.languages";
 
 	public static final String UPGRADE_PROCESSES = "upgrade.processes";

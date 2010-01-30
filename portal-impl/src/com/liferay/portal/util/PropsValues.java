@@ -1615,6 +1615,9 @@ public class PropsValues {
 	public static int TRANSACTION_ISOLATION_PORTAL = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.TRANSACTION_ISOLATION_PORTAL));
 
+	public static final String TRANSACTION_MANAGER_IMPL = PropsUtil.get(
+		PropsKeys.TRANSACTION_MANAGER_IMPL);
+
 	public static final boolean USERS_DELETE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.USERS_DELETE));
 
