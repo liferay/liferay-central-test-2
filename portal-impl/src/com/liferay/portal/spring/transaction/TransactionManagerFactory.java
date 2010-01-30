@@ -49,8 +49,7 @@ import org.springframework.transaction.support.AbstractPlatformTransactionManage
 public class TransactionManagerFactory {
 
 	public static AbstractPlatformTransactionManager createTransactionManager(
-			DataSource dataSource, boolean globalRollbackOnParticipationFailure,
-			SessionFactory sessionFactory)
+			DataSource dataSource, SessionFactory sessionFactory)
 		throws Exception {
 
 		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
@@ -69,7 +68,7 @@ public class TransactionManagerFactory {
 			String key = enu.nextElement();
 
 			String value = properties.getProperty(key);
-System.out.println("## setting property " + key + " " + value);
+
 			BeanUtil.setProperty(
 				abstractPlatformTransactionManager, key, value);
 		}
@@ -84,7 +83,7 @@ System.out.println("## setting property " + key + " " + value);
 			hibernateTransactionManager.setSessionFactory(sessionFactory);
 		}
 
-		if (true || _log.isDebugEnabled()) {
+		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Created transaction manager " +
 					abstractPlatformTransactionManager.getClass().getName());
