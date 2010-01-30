@@ -40,7 +40,8 @@ import javax.naming.InitialContext;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.beanutils.BeanUtils;
+import jodd.bean.BeanUtil;
+
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 
 import org.springframework.beans.factory.config.AbstractFactoryBean;
@@ -151,7 +152,7 @@ public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 				key = "user";
 			}
 
-			BeanUtils.setProperty(comboPooledDataSource, key, value);
+			BeanUtil.setProperty(comboPooledDataSource, key, value);
 		}
 
 		return comboPooledDataSource;

@@ -1879,6 +1879,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/jodd.jar</file-name>
+		<version>3.0.7</version>
+		<project-name>Jodd</project-name>
+		<project-url>http://jodd.org</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/jrcs-diff.jar</file-name>
 		<version>0.3.0</version>
 		<project-name>JRCS diff utilities</project-name>
