@@ -20,6 +20,10 @@ fieldset {
 	margin-left: 5px;
 }
 
+.aui-field-date .aui-field-content {
+	overflow: hidden;
+}
+
 legend {
 	font-weight: bold;
 	padding: 0 6px;
