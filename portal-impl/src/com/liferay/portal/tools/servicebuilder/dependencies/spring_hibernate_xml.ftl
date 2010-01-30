@@ -12,9 +12,5 @@
 		<property name="sessionFactoryClassLoader" ref="portletClassLoader" />
 		<property name="sessionFactoryImplementor" ref="liferayHibernateSessionFactory" />
 	</bean>
-	<bean id="liferayTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="dataSource" ref="liferayDataSource" />
-		<property name="globalRollbackOnParticipationFailure" value="false" />
-		<property name="sessionFactory" ref="liferayHibernateSessionFactory" />
-	</bean>
+	<bean id="liferayTransactionManager" class="com.liferay.portal.kernel.util.InfrastructureUtil" factory-method="getTransactionManager" />
 </beans>

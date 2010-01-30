@@ -54,6 +54,10 @@ public class InfrastructureUtil {
 		return _shardSessionFactoryTargetSource;
 	}
 
+	public static Object getTransactionManager() {
+		return _transactionManager;
+	}
+
 	public void setDataSource(DataSource dataSource) {
 		_dataSource = dataSource;
 	}
@@ -80,10 +84,15 @@ public class InfrastructureUtil {
 		_shardSessionFactoryTargetSource = shardSessionFactoryTargetSource;
 	}
 
+	public void setTransactionManager(Object transactionManager) {
+		_transactionManager = transactionManager;
+	}
+
 	private static DataSource _dataSource;
 	private static Object _dynamicDataSourceTargetSource;
 	private static Session _mailSession;
 	private static Object _shardDataSourceTargetSource;
 	private static Object _shardSessionFactoryTargetSource;
+	private static Object _transactionManager;
 
 }

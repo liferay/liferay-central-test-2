@@ -18,5 +18,6 @@
 	<bean id="com.liferay.portal.kernel.util.InfrastructureUtil" class="com.liferay.portal.kernel.util.InfrastructureUtil">
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="mailSession" ref="mailSession" />
+		<property name="transactionManager" ref="liferayTransactionManager" />
 	</bean>
 </beans>
