@@ -121,7 +121,7 @@ Liferay.Portlet = {
 
 			instance.refreshLayout(portletBound);
 
-			Liferay.Util.addInputType(id);
+			Liferay.Util.addInputType(portletBound);
 
 			if (window.location.hash) {
 				window.location.hash = 'p_' + portletId;

@@ -77,6 +77,8 @@ Liferay.Util = {
 	addInputType: function(el) {
 		var instance = this;
 
+		var A = AUI();
+
 		instance.addInputType = function() {};
 
 		if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7) {
@@ -84,14 +86,10 @@ Liferay.Util = {
 				var item;
 
 				if (el) {
-					if (AUI().Lang.isString(el)) {
-						el = '#' + el;
-					}
-
-					el = AUI().one(el);
+					el = A.one(el);
 				}
 				else {
-					el = AUI().getBody();
+					el = A.one(document.body);
 				}
 
 				var defaultType = 'text';

@@ -30,7 +30,7 @@
 
 	Liferay.Portlet.ready(
 		function(portletId, node) {
-			Liferay.Util.addInputType(portletId, node);
+			Liferay.Util.addInputType(node);
 		}
 	);
 
