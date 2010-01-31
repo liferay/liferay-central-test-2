@@ -22,15 +22,24 @@
 
 package com.liferay.taglib.security;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.theme.PortletDisplay;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLFactoryUtil;
 
+import java.io.IOException;
+
+import javax.portlet.PortletException;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -46,53 +55,57 @@ public class PermissionsURLTag extends TagSupport {
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey, String var,
 			boolean writeOutput, PageContext pageContext)
-		throws Exception {
+		throws IOException, PortletException {
 
-		Object returnObj = null;
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		Thread currentThread = Thread.currentThread();
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
+		Layout layout = themeDisplay.getLayout();
 
-			Object redirectWrapper = redirect;
-
-			if (redirectWrapper == null) {
-				redirectWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object varWrapper = var;
-
-			if (varWrapper == null) {
-				varWrapper = new NullWrapper(String.class.getName());
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {
-					redirectWrapper, modelResource, modelResourceDescription,
-					resourcePrimKey, varWrapper,
-					new BooleanWrapper(writeOutput), pageContext
-				});
-
-			returnObj = MethodInvoker.invoke(methodWrapper);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+		if (Validator.isNull(redirect)) {
+			redirect = PortalUtil.getCurrentURL(request);
 		}
 
-		if (returnObj != null) {
-			return returnObj.toString();
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			request, PortletKeys.PORTLET_CONFIGURATION, layout.getPlid(),
+			PortletRequest.RENDER_PHASE);
+
+		if (themeDisplay.isStatePopUp()) {
+			portletURL.setWindowState(LiferayWindowState.POP_UP);
 		}
 		else {
-			return StringPool.BLANK;
+			portletURL.setWindowState(WindowState.MAXIMIZED);
 		}
+
+		portletURL.setParameter(
+			"struts_action", "/portlet_configuration/edit_permissions");
+		portletURL.setParameter("redirect", redirect);
+
+		if (!themeDisplay.isStateMaximized()) {
+			portletURL.setParameter("returnToFullPageURL", redirect);
+		}
+
+		portletURL.setParameter("portletResource", portletDisplay.getId());
+		portletURL.setParameter("modelResource", modelResource);
+		portletURL.setParameter(
+			"modelResourceDescription", modelResourceDescription);
+		portletURL.setParameter("resourcePrimKey", resourcePrimKey);
+
+		String portletURLToString = portletURL.toString();
+
+		if (Validator.isNotNull(var)) {
+			pageContext.setAttribute(var, portletURLToString);
+		}
+		else if (writeOutput) {
+			pageContext.getOut().print(portletURLToString);
+		}
+
+		return portletURL.toString();
 	}
 
 	public int doEndTag() throws JspException {
@@ -102,12 +115,7 @@ public class PermissionsURLTag extends TagSupport {
 				_resourcePrimKey, _var, true, pageContext);
 		}
 		catch (Exception e) {
-			if (e instanceof JspException) {
-				throw (JspException)e;
-			}
-			else {
-				throw new JspException(e);
-			}
+			throw new JspException(e);
 		}
 
 		return EVAL_PAGE;
@@ -132,13 +140,6 @@ public class PermissionsURLTag extends TagSupport {
 	public void setVar(String var) {
 		_var = var;
 	}
-
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.security.PermissionsURLTagUtil";
-
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
-
-	private static Log _log = LogFactoryUtil.getLog(PermissionsURLTag.class);
 
 	private String _redirect;
 	private String _modelResource;

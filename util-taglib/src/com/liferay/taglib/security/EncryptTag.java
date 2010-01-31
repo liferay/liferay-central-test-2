@@ -22,14 +22,25 @@
 
 package com.liferay.taglib.security;
 
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.Encryptor;
+import com.liferay.util.EncryptorException;
+
+import java.security.Key;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -41,55 +52,115 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class EncryptTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
 		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
+			StringBuilder sb = new StringBuilder();
 
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_START_METHOD,
-				new Object[] {
-					_className, _style, _protocol, _unencryptedParamsSet, _url,
-					_target, pageContext
-				});
+			// Open anchor
 
-			MethodInvoker.invoke(methodWrapper);
+			sb.append("<a ");
+
+			// Class
+
+			if (Validator.isNotNull(_className)) {
+				sb.append("class=\"");
+				sb.append(_className);
+				sb.append("\" ");
+			}
+
+			// HREF
+
+			sb.append("href=\"");
+			sb.append(_protocol);
+			sb.append(Http.PROTOCOL_DELIMITER);
+
+			int pos = _url.indexOf(StringPool.QUESTION);
+
+			if (pos == -1) {
+				sb.append(_url);
+			}
+			else {
+				sb.append(_url.substring(0, pos));
+				sb.append(StringPool.QUESTION);
+
+				Company company = PortalUtil.getCompany(
+					(HttpServletRequest)pageContext.getRequest());
+
+				Key key = company.getKeyObj();
+
+				StringTokenizer st = new StringTokenizer(
+					_url.substring(pos + 1, _url.length()),
+					StringPool.AMPERSAND);
+
+				while (st.hasMoreTokens()) {
+					String paramAndValue = st.nextToken();
+
+					int x = paramAndValue.indexOf(StringPool.EQUAL);
+
+					String param = paramAndValue.substring(0, x);
+					String value = paramAndValue.substring(
+						x + 1, paramAndValue.length());
+
+					sb.append(param).append(StringPool.EQUAL);
+
+					if (_unencryptedParamsSet.contains(param)) {
+						sb.append(HttpUtil.encodeURL(value));
+					}
+					else {
+						try {
+							sb.append(HttpUtil.encodeURL(
+								Encryptor.encrypt(key, value)));
+						}
+						catch (EncryptorException ee) {
+							_log.error(ee.getMessage());
+						}
+
+						if (st.hasMoreTokens()) {
+							sb.append(StringPool.AMPERSAND);
+						}
+					}
+				}
+
+				sb.append("&shuo=1");
+			}
+
+			sb.append("\" ");
+
+			// Style
+
+			if (Validator.isNotNull(_style)) {
+				sb.append("style=\"");
+				sb.append(_style);
+				sb.append("\" ");
+			}
+
+			// Target
+
+			if (Validator.isNotNull(_target)) {
+				sb.append("target=\"" + _target + "\"");
+			}
+
+			// Close anchor
+
+			sb.append(">");
+
+			pageContext.getOut().print(sb.toString());
+
+			return EVAL_BODY_INCLUDE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
-
-		return EVAL_BODY_INCLUDE;
 	}
 
 	public int doEndTag() throws JspException {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
 		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
+			pageContext.getOut().print("</a>");
 
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD, new Object[] {pageContext});
-
-			MethodInvoker.invoke(methodWrapper);
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
-
-		return EVAL_PAGE;
 	}
 
 	public void setClassName(String className) {
@@ -122,12 +193,7 @@ public class EncryptTag extends TagSupport {
 		_target = target;
 	}
 
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.security.EncryptTagUtil";
-
-	private static final String _TAG_DO_START_METHOD = "doStartTag";
-
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
+	private static Log _log = LogFactoryUtil.getLog(EncryptTag.class);
 
 	private String _className;
 	private String _style;

@@ -23,8 +23,6 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.configuration.Filter;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -144,8 +142,6 @@ public class SocialBookmarkTag extends IncludeTag {
 
 	private static final String _PAGE =
 		"/html/taglib/ui/social_bookmark/page.jsp";
-
-	private static Log _log = LogFactoryUtil.getLog(SocialBookmarkTag.class);
 
 	private String _type;
 	private String _url;

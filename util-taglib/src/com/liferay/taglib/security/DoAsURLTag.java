@@ -22,16 +22,18 @@
 
 package com.liferay.taglib.security;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.util.Encryptor;
+import com.liferay.util.EncryptorException;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -46,46 +48,40 @@ public class DoAsURLTag extends TagSupport {
 	public static String doTag(
 			long doAsUserId, String var, boolean writeOutput,
 			PageContext pageContext)
-		throws Exception {
+		throws EncryptorException, IOException {
 
-		Object returnObj = null;
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		Thread currentThread = Thread.currentThread();
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+		Company company = themeDisplay.getCompany();
 
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
+		String doAsURL = company.getHomeURL();
 
-			Object varWrapper = var;
-
-			if (varWrapper == null) {
-				varWrapper = new NullWrapper(String.class.getName());
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {
-					new LongWrapper(doAsUserId), varWrapper,
-					new BooleanWrapper(writeOutput), pageContext
-				});
-
-			returnObj = MethodInvoker.invoke(methodWrapper);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+		if (Validator.isNull(doAsURL)) {
+			doAsURL = PropsValues.COMPANY_DEFAULT_HOME_URL;
 		}
 
-		if (returnObj != null) {
-			return returnObj.toString();
+		if (doAsUserId <= 0) {
+			doAsUserId = company.getDefaultUser().getUserId();
 		}
-		else {
-			return StringPool.BLANK;
+
+		String encDoAsUserId = Encryptor.encrypt(
+			company.getKeyObj(), String.valueOf(doAsUserId));
+
+		doAsURL = HttpUtil.addParameter(
+			doAsURL, "doAsUserId", encDoAsUserId);
+
+		if (Validator.isNotNull(var)) {
+			pageContext.setAttribute(var, doAsURL);
 		}
+		else if (writeOutput) {
+			pageContext.getOut().print(doAsURL);
+		}
+
+		return doAsURL;
 	}
 
 	public int doEndTag() throws JspException {
@@ -93,12 +89,7 @@ public class DoAsURLTag extends TagSupport {
 			doTag(_doAsUserId, _var, true, pageContext);
 		}
 		catch (Exception e) {
-			if (e instanceof JspException) {
-				throw (JspException)e;
-			}
-			else {
-				throw new JspException(e);
-			}
+			throw new JspException(e);
 		}
 
 		return EVAL_PAGE;
@@ -111,13 +102,6 @@ public class DoAsURLTag extends TagSupport {
 	public void setVar(String var) {
 		_var = var;
 	}
-
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.security.DoAsURLTagUtil";
-
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
-
-	private static Log _log = LogFactoryUtil.getLog(DoAsURLTag.class);
 
 	private long _doAsUserId;
 	private String _var;

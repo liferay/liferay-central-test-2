@@ -22,8 +22,6 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -90,11 +88,7 @@ public class WebDAVTag extends IncludeTag {
 		return _PAGE;
 	}
 
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
-
 	private static final String _PAGE = "/html/taglib/ui/webdav/page.jsp";
-
-	private static Log _log = LogFactoryUtil.getLog(WebDAVTag.class);
 
 	private String _path;
 
