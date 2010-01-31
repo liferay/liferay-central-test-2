@@ -109,7 +109,7 @@
 	</category>
 
 	<category name="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
-		<priority value="ERROR" />
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.dao.orm.common.SQLTransformer">

@@ -152,7 +152,42 @@ public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 				key = "user";
 			}
 
-			BeanUtil.setProperty(comboPooledDataSource, key, value);
+			// Ignore Liferay properties
+
+			if (key.equalsIgnoreCase("jndi.name") ||
+				key.equalsIgnoreCase("liferay.pool.provider")) {
+
+				continue;
+			}
+
+			// Ignore DBCP properties
+
+			if (key.equalsIgnoreCase("defaultTransactionIsolation") ||
+				key.equalsIgnoreCase("maxActive") ||
+				key.equalsIgnoreCase("minIdle")) {
+
+				continue;
+			}
+
+			// Ignore Primrose properties
+
+			if (key.equalsIgnoreCase("base") ||
+				key.equalsIgnoreCase("connectionTransactionIsolation") ||
+				key.equalsIgnoreCase("idleTime") ||
+				key.equalsIgnoreCase("numberOfConnectionsToInitializeWith")) {
+
+				continue;
+			}
+
+			try {
+				BeanUtil.setProperty(comboPooledDataSource, key, value);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Property " + key + " is not a valid C3PO property");
+				}
+			}
 		}
 
 		return comboPooledDataSource;
