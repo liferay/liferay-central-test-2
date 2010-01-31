@@ -22,92 +22,92 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.taglib.util.IncludeTag;
 
+import java.io.IOException;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * <a href="SocialBookmarkTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author David Truong
  * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  */
 public class SocialBookmarkTag extends IncludeTag {
 
-	public static String doTag(
+	public static void doTag(
 			String type, String url, String title, String target,
-			PageContext pageContext)
-		throws Exception {
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException {
 
-		return doTag(_PAGE, type, url, title, target, pageContext);
+		doTag(
+			_PAGE, type, url, title, target, servletContext, request, response);
 	}
 
-	public static String doTag(
+	public static void doTag(
 			String page, String type, String url, String title, String target,
-			PageContext pageContext)
-		throws Exception {
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException {
 
-		Object returnObj = null;
+		request.setAttribute("liferay-ui:social-bookmark:type", type);
+		request.setAttribute("liferay-ui:social-bookmark:url", url);
+		request.setAttribute("liferay-ui:social-bookmark:title", title);
+		request.setAttribute("liferay-ui:social-bookmark:target", target);
 
-		Thread currentThread = Thread.currentThread();
+		String[] socialTypes = PropsUtil.getArray(
+			PropsKeys.SOCIAL_BOOKMARK_TYPES);
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			Object targetWrapper = target;
-
-			if (targetWrapper == null) {
-				targetWrapper = new NullWrapper(String.class.getName());
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {
-					page, type, url, title, targetWrapper, pageContext
-				});
-
-			returnObj = MethodInvoker.invoke(methodWrapper);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+		if (!ArrayUtil.contains(socialTypes, type)) {
+			return;
 		}
 
-		if (returnObj != null) {
-			return returnObj.toString();
-		}
-		else {
-			return StringPool.BLANK;
-		}
+		String postUrl = _getPostUrl(type, url, title);
+
+		request.setAttribute("liferay-ui:social-bookmark:postUrl", postUrl);
+
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
+
+		requestDispatcher.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			doTag(getPage(), _type, _url, _title, _target, pageContext);
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse stringResponse = getServletResponse();
+
+			doTag(
+				getPage(), _type, _url, _title, _target, servletContext,
+				request, stringResponse);
+
+			pageContext.getOut().print(stringResponse.getString());
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
-			if (e instanceof JspException) {
-				throw (JspException)e;
-			}
-			else {
-				throw new JspException(e);
-			}
+			throw new JspException(e);
 		}
-
-		return EVAL_PAGE;
 	}
 
 	public void setType(String type) {
@@ -130,10 +130,17 @@ public class SocialBookmarkTag extends IncludeTag {
 		return _PAGE;
 	}
 
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.ui.SocialBookmarkTagUtil";
+	private static String _getPostUrl(String type, String url, String title) {
+		Map<String, String> vars = new HashMap<String, String>();
 
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
+		vars.put("liferay:social-bookmark:url", url);
+		vars.put("liferay:social-bookmark:title", HttpUtil.encodeURL(title));
+
+		String postUrl = PropsUtil.get(
+			PropsKeys.SOCIAL_BOOKMARK_POST_URL, new Filter(type, vars));
+
+		return postUrl;
+	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/social_bookmark/page.jsp";

@@ -24,14 +24,18 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * <a href="WriteTag.java.html"><b><i>View Source</i></b></a>
@@ -40,62 +44,50 @@ import javax.servlet.jsp.PageContext;
  */
 public class WriteTag extends IncludeTag {
 
-	public static String doTag(
-			Object bean, String property, PageContext pageContext)
-		throws Exception {
+	public static void doTag(
+			Object bean, String property, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
 
-		return doTag(_PAGE, bean, property, pageContext);
+		doTag(_PAGE, bean, property, servletContext, request, response);
 	}
 
-	public static String doTag(
-			String page, Object bean, String property, PageContext pageContext)
-		throws Exception {
+	public static void doTag(
+			String page, Object bean, String property,
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException {
 
-		Object returnObj = null;
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {page, bean, property, pageContext});
-
-			returnObj = MethodInvoker.invoke(methodWrapper);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+		if ((bean == null) || Validator.isNull(property)) {
+			return;
 		}
 
-		if (returnObj != null) {
-			return returnObj.toString();
-		}
-		else {
-			return StringPool.BLANK;
-		}
+		request.setAttribute("liferay-ui:write:bean", bean);
+		request.setAttribute("liferay-ui:write:property", property);
+
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
+
+		requestDispatcher.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			doTag(getPage(), _bean, _property, pageContext);
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse stringResponse = getServletResponse();
+
+			doTag(
+				getPage(), _bean, _property, servletContext, request,
+				stringResponse);
+
+			pageContext.getOut().print(stringResponse.getString());
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
-			if (e instanceof JspException) {
-				throw (JspException)e;
-			}
-			else {
-				throw new JspException(e);
-			}
+			throw new JspException(e);
 		}
-
-		return EVAL_PAGE;
 	}
 
 	public void setBean(Object bean) {
@@ -109,11 +101,6 @@ public class WriteTag extends IncludeTag {
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
-
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.ui.WriteTagUtil";
-
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
 
 	private static final String _PAGE = "/html/taglib/ui/write/page.jsp";
 

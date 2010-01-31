@@ -24,77 +24,62 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.taglib.util.IncludeTag;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * <a href="WebDAVTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  */
 public class WebDAVTag extends IncludeTag {
 
-	public static String doTag(String path, PageContext pageContext)
-		throws Exception {
+	public static void doTag(
+			String path, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
 
-		return doTag(_PAGE, path, pageContext);
+		doTag(_PAGE, path, servletContext, request, response);
 	}
 
-	public static String doTag(
-			String page, String path, PageContext pageContext)
-		throws Exception {
+	public static void doTag(
+			String page, String path, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
 
-		Object returnObj = null;
+		request.setAttribute("liferay-ui:webdav:path", path);
 
-		Thread currentThread = Thread.currentThread();
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {page, path, pageContext});
-
-			returnObj = MethodInvoker.invoke(methodWrapper);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
-
-		if (returnObj != null) {
-			return returnObj.toString();
-		}
-		else {
-			return StringPool.BLANK;
-		}
+		requestDispatcher.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			doTag(getPage(), _path, pageContext);
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse stringResponse = getServletResponse();
+
+			doTag(getPage(), _path, servletContext, request, stringResponse);
+
+			pageContext.getOut().print(stringResponse.getString());
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
-			if (e instanceof JspException) {
-				throw (JspException)e;
-			}
-			else {
-				throw new JspException(e);
-			}
+			throw new JspException(e);
 		}
-
-		return EVAL_PAGE;
 	}
 
 	public void setPath(String path) {
@@ -104,9 +89,6 @@ public class WebDAVTag extends IncludeTag {
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
-
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.ui.WebDAVTagUtil";
 
 	private static final String _TAG_DO_END_METHOD = "doEndTag";
 
