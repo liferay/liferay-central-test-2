@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -40,6 +41,24 @@ public class PropsUtil {
 		try {
 			Object returnObj = PortalClassInvoker.invoke(
 				_CLASS, _METHOD_GET, key, false);
+
+			if (returnObj != null) {
+				value = (String)returnObj;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return value;
+	}
+
+	public static String get(String key, Filter filter) {
+		String value = null;
+
+		try {
+			Object returnObj = PortalClassInvoker.invoke(
+				_CLASS, _METHOD_GET, key, filter, false);
 
 			if (returnObj != null) {
 				value = (String)returnObj;
