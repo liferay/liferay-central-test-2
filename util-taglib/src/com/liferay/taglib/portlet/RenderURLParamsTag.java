@@ -22,13 +22,18 @@
 
 package com.liferay.taglib.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
+import java.util.StringTokenizer;
+
+import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -43,65 +48,83 @@ public class RenderURLParamsTag extends TagSupport {
 	public static String doTag(String varImpl, PageContext pageContext)
 		throws Exception {
 
-		Object returnObj = null;
+		PortletURL portletURL = (PortletURL)pageContext.getAttribute(varImpl);
 
-		Thread currentThread = Thread.currentThread();
+		String params = StringPool.BLANK;
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+		if (portletURL != null) {
+			params = _toParamsString(portletURL, pageContext);
 
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {varImpl, pageContext});
-
-			returnObj = MethodInvoker.invoke(methodWrapper);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw e;
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+			pageContext.getOut().print(params);
 		}
 
-		if (returnObj != null) {
-			return returnObj.toString();
-		}
-		else {
-			return StringPool.BLANK;
-		}
+		return params;
 	}
 
 	public int doEndTag() throws JspException {
 		try {
 			doTag(_varImpl, pageContext);
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
-			if (e instanceof JspException) {
-				throw (JspException)e;
-			}
-			else {
-				throw new JspException(e);
-			}
+			throw new JspException(e);
 		}
-
-		return EVAL_PAGE;
 	}
 
 	public void setVarImpl(String varImpl) {
 		_varImpl = varImpl;
 	}
 
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.portlet.RenderURLParamsTagUtil";
+	private static String _toParamsString(
+			PortletURL portletURL, PageContext pageContext)
+		throws Exception {
 
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
+		StringBuilder sb = new StringBuilder();
 
-	private static Log _log = LogFactoryUtil.getLog(RenderURLParamsTag.class);
+		String url = portletURL.toString();
+
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		if (ParamUtil.getBoolean(request, "wsrp")) {
+			int x = url.indexOf("/wsrp_rewrite");
+
+			url = url.substring(0, x);
+		}
+
+		String queryString = HttpUtil.getQueryString(url);
+
+		StringTokenizer st = new StringTokenizer(
+			queryString, StringPool.AMPERSAND);
+
+		while (st.hasMoreTokens()) {
+			String token = st.nextToken();
+
+			if (Validator.isNotNull(token)) {
+				String[] kvp = StringUtil.split(token, StringPool.EQUAL);
+
+				if ((kvp != null) && (kvp.length > 0)) {
+					String key = kvp[0];
+					String value = StringPool.BLANK;
+
+					if (kvp.length > 1) {
+						value = kvp[1];
+					}
+
+					value = HttpUtil.decodeURL(value);
+
+					sb.append("<input name=\"");
+					sb.append(key);
+					sb.append("\" type=\"hidden\" value=\"");
+					sb.append(HtmlUtil.escapeAttribute(value));
+					sb.append("\" />");
+				}
+			}
+		}
+
+		return sb.toString();
+	}
 
 	private String _varImpl;
 
