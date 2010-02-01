@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.IPDetector;
 import com.liferay.portal.kernel.util.OSDetector;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SocketUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -40,6 +41,9 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -246,13 +250,19 @@ public class ClusterLinkImpl implements ClusterLink {
 				autodetectAddress.substring(index + 1), port);
 		}
 
-		String bindAddress = SocketUtil.getHostAddress(host, port);
+		ObjectValuePair<NetworkInterface, InetAddress> bindInfo =
+			SocketUtil.getBindInfo(host, port);
 
-		System.setProperty("jgroups.bind_addr", bindAddress);
+		String interfaceName = bindInfo.getKey().getName();
+		String ipAddress = bindInfo.getValue().getHostAddress();
+		System.setProperty("jgroups.bind_interface", interfaceName);
+		System.setProperty("jgroups.bind_addr", ipAddress);
 
 		if (_log.isInfoEnabled()) {
+			_log.info("Use autodetect address " + host + ":" + port);
 			_log.info(
-				"Set JGroups outgoing IP address to " + bindAddress + "}");
+				"Set JGroups outgoing IP address to " +
+				interfaceName + "/" + ipAddress);
 		}
 	}
 

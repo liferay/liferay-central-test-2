@@ -24,6 +24,8 @@ package com.liferay.portal.kernel.util;
 
 import java.io.IOException;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.Socket;
 
 /**
@@ -33,7 +35,8 @@ import java.net.Socket;
  */
 public class SocketUtil {
 
-	public static String getHostAddress(String host, int port)
+	public static ObjectValuePair<NetworkInterface, InetAddress> getBindInfo(
+			String host, int port)
 		throws IOException {
 
 		Socket socket = null;
@@ -41,7 +44,11 @@ public class SocketUtil {
 		try {
 			socket = new Socket(host, port);
 
-			return socket.getLocalAddress().getHostAddress();
+			InetAddress ipAddress = socket.getLocalAddress();
+			NetworkInterface networkInterface =
+				NetworkInterface.getByInetAddress(ipAddress);
+			return new ObjectValuePair<NetworkInterface, InetAddress>(
+				networkInterface, ipAddress);
 		}
 		finally {
 			if (socket != null) {
