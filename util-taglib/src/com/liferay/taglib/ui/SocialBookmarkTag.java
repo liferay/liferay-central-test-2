@@ -30,14 +30,11 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.io.IOException;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -55,7 +52,7 @@ public class SocialBookmarkTag extends IncludeTag {
 			String type, String url, String title, String target,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(
 			_PAGE, type, url, title, target, servletContext, request, response);
@@ -65,7 +62,7 @@ public class SocialBookmarkTag extends IncludeTag {
 			String page, String type, String url, String title, String target,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		request.setAttribute("liferay-ui:social-bookmark:type", type);
 		request.setAttribute("liferay-ui:social-bookmark:url", url);

@@ -26,11 +26,8 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -45,7 +42,7 @@ public class WriteTag extends IncludeTag {
 	public static void doTag(
 			Object bean, String property, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(_PAGE, bean, property, servletContext, request, response);
 	}
@@ -54,7 +51,7 @@ public class WriteTag extends IncludeTag {
 			String page, Object bean, String property,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		if ((bean == null) || Validator.isNull(property)) {
 			return;

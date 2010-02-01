@@ -25,11 +25,8 @@ package com.liferay.taglib.portletext;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -45,7 +42,7 @@ public class PreviewTag extends IncludeTag {
 			String portletName, String queryString, String width,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(
 			_PAGE, portletName, queryString, width, servletContext, request,
@@ -56,7 +53,7 @@ public class PreviewTag extends IncludeTag {
 			String page, String portletName, String queryString, String width,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		request.setAttribute(
 			"liferay-portlet:preview:portletName", portletName);

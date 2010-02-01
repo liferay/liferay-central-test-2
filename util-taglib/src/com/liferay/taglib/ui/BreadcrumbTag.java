@@ -27,13 +27,10 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.io.IOException;
-
 import javax.portlet.PortletURL;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -50,7 +47,7 @@ public class BreadcrumbTag extends IncludeTag {
 			boolean showLayout, boolean showPortletBreadcrumb,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(
 			_PAGE, null, null, null, displayStyle, showGuestGroup,
@@ -61,7 +58,7 @@ public class BreadcrumbTag extends IncludeTag {
 	public static void doTag(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(
 			_PAGE, null, null, null, _DISPLAY_STYLE, _SHOW_GUEST_GROUP,
@@ -75,7 +72,7 @@ public class BreadcrumbTag extends IncludeTag {
 			boolean showParentGroups, boolean showLayout,
 			boolean showPortletBreadcrumb, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		request.setAttribute(
 			"liferay-ui:breadcrumb:displayStyle", String.valueOf(displayStyle));

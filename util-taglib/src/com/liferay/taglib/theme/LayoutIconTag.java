@@ -24,11 +24,8 @@ package com.liferay.taglib.theme;
 
 import com.liferay.portal.model.Layout;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,7 +39,7 @@ public class LayoutIconTag extends com.liferay.taglib.util.IncludeTag {
 	public static void doTag(
 			Layout layout, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(_PAGE, layout, servletContext, request, response);
 	}
@@ -50,7 +47,7 @@ public class LayoutIconTag extends com.liferay.taglib.util.IncludeTag {
 	public static void doTag(
 			String page, Layout layout, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		setRequestAttributes(request, layout);
 

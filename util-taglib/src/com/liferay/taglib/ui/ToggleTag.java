@@ -31,11 +31,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.SessionClicks;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -52,7 +49,7 @@ public class ToggleTag extends IncludeTag {
 			String hideMessage, boolean defaultShowContent, String stateVar,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(
 			_PAGE, id, showImage, hideImage, showMessage, hideMessage,
@@ -64,7 +61,7 @@ public class ToggleTag extends IncludeTag {
 			String showMessage, String hideMessage, boolean defaultShowContent,
 			String stateVar, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);

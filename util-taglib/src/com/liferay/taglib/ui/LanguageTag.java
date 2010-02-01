@@ -27,13 +27,10 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.io.IOException;
-
 import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -56,7 +53,7 @@ public class LanguageTag extends IncludeTag {
 	public static void doTag(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(
 			_PAGE, _FORM_NAME, _FORM_ACTION, _NAME, null, _DISPLAY_STYLE,
@@ -68,7 +65,7 @@ public class LanguageTag extends IncludeTag {
 			String[] languageIds, int displayStyle,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(
 			_PAGE, formName, formAction, name, languageIds, displayStyle,
@@ -80,7 +77,7 @@ public class LanguageTag extends IncludeTag {
 			String[] languageIds, int displayStyle,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		request.setAttribute("liferay-ui:language:formName", formName);
 		request.setAttribute("liferay-ui:language:formAction", formAction);

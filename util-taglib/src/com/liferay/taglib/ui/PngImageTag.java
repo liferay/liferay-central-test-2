@@ -25,11 +25,8 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -45,7 +42,7 @@ public class PngImageTag extends IncludeTag {
 			String image, String height, String width,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(_PAGE, image, height, width, servletContext, request, response);
 	}
@@ -54,7 +51,7 @@ public class PngImageTag extends IncludeTag {
 			String page, String image, String height, String width,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		request.setAttribute("liferay-ui:png_image:image", image);
 		request.setAttribute("liferay-ui:png_image:height", height);

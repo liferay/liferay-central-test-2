@@ -29,9 +29,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
-import com.liferay.util.EncryptorException;
-
-import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -48,7 +45,7 @@ public class DoAsURLTag extends TagSupport {
 	public static String doTag(
 			long doAsUserId, String var, boolean writeOutput,
 			PageContext pageContext)
-		throws EncryptorException, IOException {
+		throws Exception {
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();

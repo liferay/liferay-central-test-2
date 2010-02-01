@@ -22,11 +22,8 @@
 
 package com.liferay.taglib.theme;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -40,7 +37,7 @@ public class MetaTagsTag extends com.liferay.taglib.util.IncludeTag {
 	public static void doTag(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(_PAGE, servletContext, request, response);
 	}
@@ -48,7 +45,7 @@ public class MetaTagsTag extends com.liferay.taglib.util.IncludeTag {
 	public static void doTag(
 			String page, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);

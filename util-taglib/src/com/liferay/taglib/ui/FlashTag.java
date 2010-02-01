@@ -27,11 +27,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -50,7 +47,7 @@ public class FlashTag extends IncludeTag {
 			String salign, String scale, String swliveconnect, String version,
 			String width, String wmode, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(
 			_PAGE, align, allowScriptAccess, base, bgcolor, devicefont,
@@ -67,7 +64,7 @@ public class FlashTag extends IncludeTag {
 			String version, String width, String wmode,
 			ServletContext servletContext, HttpServletRequest reqquest,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		reqquest.setAttribute("liferay-ui:flash:align", align);
 		reqquest.setAttribute(

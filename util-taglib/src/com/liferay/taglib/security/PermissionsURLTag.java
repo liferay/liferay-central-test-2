@@ -32,9 +32,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
 
-import java.io.IOException;
-
-import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
@@ -55,7 +52,7 @@ public class PermissionsURLTag extends TagSupport {
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey, String var,
 			boolean writeOutput, PageContext pageContext)
-		throws IOException, PortletException {
+		throws Exception {
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();

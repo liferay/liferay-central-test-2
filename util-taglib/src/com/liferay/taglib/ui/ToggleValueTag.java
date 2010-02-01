@@ -25,8 +25,6 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.SessionClicks;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -40,7 +38,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class ToggleValueTag extends TagSupport {
 
 	public static void doTag(String id, PageContext pageContext)
-		throws IOException {
+		throws Exception {
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();

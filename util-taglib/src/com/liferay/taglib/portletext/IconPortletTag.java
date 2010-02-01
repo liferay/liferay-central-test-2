@@ -26,11 +26,8 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.model.Portlet;
 import com.liferay.taglib.ui.IconTag;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -45,7 +42,7 @@ public class IconPortletTag extends IconTag {
 	public static void doTag(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(_PAGE, null, servletContext, request, response);
 	}
@@ -53,7 +50,7 @@ public class IconPortletTag extends IconTag {
 	public static void doTag(
 			String page, Portlet portlet, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws Exception {
 
 		try {
 			request.setAttribute(
