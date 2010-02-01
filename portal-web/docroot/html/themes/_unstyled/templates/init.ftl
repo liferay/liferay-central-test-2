@@ -67,6 +67,7 @@
 <#assign is_female = user.isFemale()/>
 <#assign user_birthday = user.getBirthday()/>
 <#assign user_email_address = user.getEmailAddress()/>
+<#assign language = locale.getLanguage()/>
 <#assign language_id = user.getLanguageId()/>
 <#assign time_zone = user.getTimeZoneId()/>
 <#assign user_greeting = htmlUtil.escape(user.getGreeting())/>
