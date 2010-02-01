@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.servlet.taglib.aui;
+package com.liferay.portal.servlet.taglib.aui;
 
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
