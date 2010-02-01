@@ -496,6 +496,7 @@
 
 .aui-tagselector .aui-field .aui-field-content {
 	margin: 0;
+	line-height: 23px;
 }
 
 .aui-tagselector .aui-toolset {
