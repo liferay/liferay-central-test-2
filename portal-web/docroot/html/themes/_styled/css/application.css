@@ -647,25 +647,6 @@
 	background: #FFF;
 }
 
-.lfr-hudcrumbs {
-	position: fixed;
-	top: 0;
-	z-index: 200;
-}
-
-.lfr-hudcrumbs ul {
-	background: #414445;
-	background: rgba(0, 0, 0, 0.8);
-}
-
-.lfr-hudcrumbs .breadcrumbs li a, .lfr-hudcrumbs .breadcrumbs li span {
-	color: #FFF;
-}
-
-.lfr-hudcrumbs li span {
-	background-image: url(../images/common/breadcrumbs_hud.png);
-}
-
 .aui-dialog-content {
 	border: 1px solid #C8C9CA;
 	padding: 5px;

@@ -361,6 +361,25 @@ body.lfr-has-sidebar {
 	padding: 0;
 }
 
+.lfr-hudcrumbs {
+	position: fixed;
+	top: 0;
+	z-index: 200;
+}
+
+.lfr-hudcrumbs ul {
+	background: #414445;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.lfr-hudcrumbs .breadcrumbs li a, .lfr-hudcrumbs .breadcrumbs li span {
+	color: #FFF;
+}
+
+.lfr-hudcrumbs li span {
+	background-image: url(../images/common/breadcrumbs_hud.png);
+}
+
 /* ---------- Misc. ---------- */
 
 .lfr-panel-container {
