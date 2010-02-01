@@ -46,6 +46,7 @@ public class IconTag extends IncludeTag {
 			request.removeAttribute("liferay-ui:icon:image");
 			request.removeAttribute("liferay-ui:icon:imageHover");
 			request.removeAttribute("liferay-ui:icon:label");
+			request.removeAttribute("liferay-ui:icon:lang");
 			request.removeAttribute("liferay-ui:icon:message");
 			request.removeAttribute("liferay-ui:icon:method");
 			request.removeAttribute("liferay-ui:icon:src");
@@ -65,6 +66,7 @@ public class IconTag extends IncludeTag {
 				_image = null;
 				_imageHover = null;
 				_label = false;
+				_lang = null;
 				_message = null;
 				_method = null;
 				_src = null;
@@ -84,6 +86,7 @@ public class IconTag extends IncludeTag {
 		request.setAttribute("liferay-ui:icon:image", _image);
 		request.setAttribute("liferay-ui:icon:imageHover", _imageHover);
 		request.setAttribute("liferay-ui:icon:label", String.valueOf(_label));
+		request.setAttribute("liferay-ui:icon:lang", _lang);
 		request.setAttribute("liferay-ui:icon:message", _message);
 		request.setAttribute("liferay-ui:icon:method", _method);
 		request.setAttribute("liferay-ui:icon:src", _src);
@@ -110,6 +113,10 @@ public class IconTag extends IncludeTag {
 
 	public void setLabel(boolean label) {
 		_label = label;
+	}
+
+	public void setLang(String lang) {
+		_lang = lang;
 	}
 
 	public void setMessage(String message) {
@@ -150,6 +157,7 @@ public class IconTag extends IncludeTag {
 	private String _image;
 	private String _imageHover;
 	private boolean _label;
+	private String _lang;
 	private String _message;
 	private String _method;
 	private String _src;
