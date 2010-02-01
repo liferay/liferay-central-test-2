@@ -35,8 +35,7 @@ import java.net.Socket;
  */
 public class SocketUtil {
 
-	public static ObjectValuePair<NetworkInterface, InetAddress> getBindInfo(
-			String host, int port)
+	public static BindInfo getBindInfo(String host, int port)
 		throws IOException {
 
 		Socket socket = null;
@@ -44,11 +43,16 @@ public class SocketUtil {
 		try {
 			socket = new Socket(host, port);
 
-			InetAddress ipAddress = socket.getLocalAddress();
+			InetAddress inetAddress = socket.getLocalAddress();
 			NetworkInterface networkInterface =
-				NetworkInterface.getByInetAddress(ipAddress);
-			return new ObjectValuePair<NetworkInterface, InetAddress>(
-				networkInterface, ipAddress);
+				NetworkInterface.getByInetAddress(inetAddress);
+
+			BindInfo bindInfo = new BindInfo();
+
+			bindInfo.setInetAddress(inetAddress);
+			bindInfo.setNetworkInterface(networkInterface);
+
+			return bindInfo;
 		}
 		finally {
 			if (socket != null) {
@@ -59,6 +63,29 @@ public class SocketUtil {
 				}
 			}
 		}
+	}
+
+	public static class BindInfo {
+
+		public InetAddress getInetAddress() {
+			return _inetAddress;
+		}
+
+		public NetworkInterface getNetworkInterface() {
+			return _networkInterface;
+		}
+
+		public void setInetAddress(InetAddress inetAddress) {
+			_inetAddress = inetAddress;
+		}
+
+		public void setNetworkInterface(NetworkInterface networkInterface) {
+			_networkInterface = networkInterface;
+		}
+
+		private InetAddress _inetAddress;
+		private NetworkInterface _networkInterface;
+
 	}
 
 }
