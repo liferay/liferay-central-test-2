@@ -22,11 +22,15 @@
 
 package com.liferay.taglib.portlet;
 
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 
-import javax.servlet.jsp.JspException;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.PortletSession;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
@@ -36,25 +40,82 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class DefineObjectsTag extends TagSupport {
 
-	public int doStartTag() throws JspException {
-		Thread currentThread = Thread.currentThread();
+	public int doStartTag() {
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+		String lifecycle = (String)request.getAttribute(
+			PortletRequest.LIFECYCLE_PHASE);
 
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
+		PortletConfig portletConfig = (PortletConfig)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_START_METHOD, new Object[] {pageContext});
-
-			MethodInvoker.invoke(methodWrapper);
+		if (portletConfig != null) {
+			pageContext.setAttribute("portletConfig", portletConfig);
+			pageContext.setAttribute(
+				"portletName", portletConfig.getPortletName());
 		}
-		catch (Exception e) {
-			throw new JspException(e);
+
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		if (portletRequest != null) {
+			String portletRequestAttrName = null;
+
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+				portletRequestAttrName = "actionRequest";
+			}
+			else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+				portletRequestAttrName = "eventRequest";
+			}
+			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+				portletRequestAttrName = "renderRequest";
+			}
+			else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				portletRequestAttrName = "resourceRequest";
+			}
+
+			pageContext.setAttribute(portletRequestAttrName, portletRequest);
+
+			PortletPreferences portletPreferences =
+				portletRequest.getPreferences();
+
+			pageContext.setAttribute("portletPreferences", portletPreferences);
+			pageContext.setAttribute(
+				"portletPreferencesValues", portletPreferences.getMap());
+
+			PortletSession portletSession = portletRequest.getPortletSession();
+
+			pageContext.setAttribute("portletSession", portletSession);
+
+			try {
+				pageContext.setAttribute(
+					"portletSessionScope", portletSession.getAttributeMap());
+			}
+			catch (IllegalStateException ise) {
+			}
 		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+		if (portletResponse != null) {
+			String portletResponseAttrName = null;
+
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+				portletResponseAttrName = "actionResponse";
+			}
+			else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+				portletResponseAttrName = "eventResponse";
+			}
+			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+				portletResponseAttrName = "renderResponse";
+			}
+			else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				portletResponseAttrName = "resourceResponse";
+			}
+
+			pageContext.setAttribute(portletResponseAttrName, portletResponse);
 		}
 
 		return SKIP_BODY;
@@ -63,10 +124,5 @@ public class DefineObjectsTag extends TagSupport {
 	public int doEndTag() {
 		return EVAL_PAGE;
 	}
-
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.portlet.DefineObjectsTagUtil";
-
-	private static final String _TAG_DO_START_METHOD = "doStartTag";
 
 }
