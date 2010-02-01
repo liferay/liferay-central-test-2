@@ -110,13 +110,13 @@ public class ClusterLinkImpl implements ClusterLink {
 		}
 	}
 
-	public List<Address> getAddresses() {
+	public List<Address> getAddresses(Priority priority) {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
 			return Collections.EMPTY_LIST;
 		}
 
 		Vector<org.jgroups.Address> jGroupsAddresses =
-			_channels.get(0).getView().getMembers();
+			getChannel(priority).getView().getMembers();
 
 		if (jGroupsAddresses == null) {
 			return new ArrayList<Address>();

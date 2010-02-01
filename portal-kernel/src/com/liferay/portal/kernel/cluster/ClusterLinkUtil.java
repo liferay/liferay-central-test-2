@@ -40,7 +40,7 @@ public class ClusterLinkUtil {
 		return (Address)message.get(_ADDRESS);
 	}
 
-	public static List<Address> getAddresses() {
+	public static List<Address> getAddresses(Priority priority) {
 		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("ClusterLinkUtil has not been initialized");
@@ -49,7 +49,7 @@ public class ClusterLinkUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		return _clusterLink.getAddresses();
+		return _clusterLink.getAddresses(priority);
 	}
 
 	public static ClusterLink getClusterLink() {

@@ -33,7 +33,7 @@ import java.util.List;
  */
 public interface ClusterLink {
 
-	public List<Address> getAddresses();
+	public List<Address> getAddresses(Priority priority);
 
 	public boolean isEnabled();
 
