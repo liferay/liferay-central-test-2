@@ -22,14 +22,13 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.SessionClicks;
+
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -40,58 +39,45 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class ToggleValueTag extends TagSupport {
 
+	public static void doTag(String id, PageContext pageContext)
+		throws IOException {
+
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		String value = SessionClicks.get(request, id, StringPool.BLANK);
+
+		if (value.equals(StringPool.BLANK)) {
+			value = "block";
+		}
+
+		pageContext.getOut().print(value);
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public static void doTag(
 			String id, PageContext pageContext, HttpServletRequest request)
 		throws Exception {
 
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {id, pageContext, request});
-
-			MethodInvoker.invoke(methodWrapper);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw e;
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
+		doTag(id, pageContext);
 	}
 
-	public int doEndTag() throws JspTagException {
+	public int doEndTag() throws JspException {
 		try {
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
-
-			doTag(_id, pageContext, request);
+			doTag(_id, pageContext);
 
 			return EVAL_PAGE;
 		}
 		catch (Exception e) {
-			throw new JspTagException(e.getMessage());
+			throw new JspException(e);
 		}
 	}
 
 	public void setId(String id) {
 		_id = id;
 	}
-
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.ui.ToggleValueTagUtil";
-
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
-
-	private static Log _log = LogFactoryUtil.getLog(ToggleValueTag.class);
 
 	private String _id;
 

@@ -22,17 +22,20 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.DeterminateKeyGenerator;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.SessionClicks;
 import com.liferay.taglib.util.IncludeTag;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
@@ -49,7 +52,7 @@ public class ToggleTag extends IncludeTag {
 			String hideMessage, boolean defaultShowContent, String stateVar,
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
-		throws Exception {
+		throws IOException, ServletException {
 
 		doTag(
 			_PAGE, id, showImage, hideImage, showMessage, hideMessage,
@@ -61,71 +64,74 @@ public class ToggleTag extends IncludeTag {
 			String showMessage, String hideMessage, boolean defaultShowContent,
 			String stateVar, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
-		throws Exception {
+		throws IOException, ServletException {
 
-		Thread currentThread = Thread.currentThread();
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			Object idWrapper = id;
-
-			if (idWrapper == null) {
-				idWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object showImageWrapper = showImage;
-
-			if (showImageWrapper == null) {
-				showImageWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object hideImageWrapper = hideImage;
-
-			if (hideImageWrapper == null) {
-				hideImageWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object showMessageWrapper = showMessage;
-
-			if (showMessageWrapper == null) {
-				showMessageWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object hideMessageWrapper = hideMessage;
-
-			if (hideMessageWrapper == null) {
-				hideMessageWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object stateVarWrapper = stateVar;
-
-			if (stateVarWrapper == null) {
-				stateVarWrapper = new NullWrapper(String.class.getName());
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {
-					page, idWrapper, showImageWrapper, hideImageWrapper,
-					showMessageWrapper, hideMessageWrapper,
-					new BooleanWrapper(defaultShowContent), stateVarWrapper,
-					servletContext, request, response
-				});
-
-			MethodInvoker.invoke(methodWrapper);
+		if (Validator.isNull(showImage) && Validator.isNull(showMessage)) {
+			showImage =
+				themeDisplay.getPathThemeImages() + "/arrows/01_down.png";
 		}
-		catch (Exception e) {
-			_log.error(e, e);
 
-			throw e;
+		if (Validator.isNull(hideImage) && Validator.isNull(hideImage)) {
+			hideImage =
+				themeDisplay.getPathThemeImages() + "/arrows/01_right.png";
 		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+
+		String defaultStateValue =
+			defaultShowContent ? StringPool.BLANK : "none";
+		String defaultImage = defaultShowContent ? hideImage : showImage;
+		String defaultMessage = defaultShowContent ? hideMessage : showMessage;
+
+		String clickValue = SessionClicks.get(request, id, null);
+
+		if (defaultShowContent) {
+			if ((clickValue != null) && (clickValue.equals("none"))) {
+				defaultStateValue = "none";
+				defaultImage = showImage;
+				defaultMessage = showMessage;
+			}
+			else {
+				defaultStateValue = "";
+				defaultImage = hideImage;
+				defaultMessage = hideMessage;
+			}
 		}
+		else {
+			if ((clickValue == null) || (clickValue.equals("none"))) {
+				defaultStateValue = "none";
+				defaultImage = showImage;
+				defaultMessage = showMessage;
+			}
+			else {
+				defaultStateValue = "";
+				defaultImage = hideImage;
+				defaultMessage = hideMessage;
+			}
+		}
+
+		if (stateVar == null) {
+			stateVar = DeterminateKeyGenerator.generate(
+				ToggleTag.class.getName());
+		}
+
+		request.setAttribute("liferay-ui:toggle:id", id);
+		request.setAttribute("liferay-ui:toggle:showImage", showImage);
+		request.setAttribute("liferay-ui:toggle:hideImage", hideImage);
+		request.setAttribute("liferay-ui:toggle:showMessage", showMessage);
+		request.setAttribute("liferay-ui:toggle:hideMessage", hideMessage);
+		request.setAttribute("liferay-ui:toggle:stateVar", stateVar);
+		request.setAttribute(
+			"liferay-ui:toggle:defaultStateValue", defaultStateValue);
+		request.setAttribute("liferay-ui:toggle:defaultImage", defaultImage);
+		request.setAttribute(
+			"liferay-ui:toggle:defaultMessage", defaultMessage);
+
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
+
+		requestDispatcher.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {
@@ -180,14 +186,7 @@ public class ToggleTag extends IncludeTag {
 		return _PAGE;
 	}
 
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.ui.ToggleTagUtil";
-
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
-
 	private static final String _PAGE = "/html/taglib/ui/toggle/page.jsp";
-
-	private static Log _log = LogFactoryUtil.getLog(ToggleTag.class);
 
 	private String _id;
 	private String _showImage;
