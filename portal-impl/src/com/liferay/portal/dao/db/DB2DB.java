@@ -34,7 +34,6 @@ import java.io.IOException;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 
 import java.util.HashSet;
@@ -49,28 +48,6 @@ import java.util.Set;
  * @author Ganesh Ram
  */
 public class DB2DB extends BaseDB {
-
-	static {
-		Connection con = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			DatabaseMetaData metaData = con.getMetaData();
-
-			if ((metaData.getDatabaseMajorVersion() > 8) ||
-				((metaData.getDatabaseMajorVersion() == 8) &&
-				 (metaData.getDatabaseMinorVersion() >=2))) {
-
-				_SUPPORTS_SCROLLABLE_RESULTS = true;
-			}
-		}
-		catch (Exception e) {
-		}
-		finally {
-			DataAccess.cleanUp(con);
-		}
-	}
 
 	public static DB getInstance() {
 		return _instance;
