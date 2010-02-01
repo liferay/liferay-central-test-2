@@ -179,6 +179,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: []
+		requires: ['aui-base']
 	}
 );

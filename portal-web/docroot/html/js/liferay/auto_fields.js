@@ -574,6 +574,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['base', 'data-set', 'io-request', 'liferay-undo-manager', 'parse-content', 'sortable']
+		requires: ['aui-base', 'base', 'data-set', 'io-request', 'liferay-undo-manager', 'parse-content', 'sortable']
 	}
 );

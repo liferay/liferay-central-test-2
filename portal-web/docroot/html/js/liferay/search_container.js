@@ -211,6 +211,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['selector-css3']
+		requires: ['aui-base', 'selector-css3']
 	}
 );

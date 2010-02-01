@@ -697,6 +697,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['collection', 'substitute']
+		requires: ['aui-base', 'collection', 'substitute']
 	}
 );

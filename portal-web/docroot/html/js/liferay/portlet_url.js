@@ -249,6 +249,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['io-request', 'querystring-stringify-simple']
+		requires: ['aui-base', 'io-request', 'querystring-stringify-simple']
 	}
 );
