@@ -143,7 +143,7 @@ for (int i = 0; i < locales.length; i++) {
 				<c:otherwise>
 					<liferay-ui:icon
 						image='<%= "../language/" + LocaleUtil.toLanguageId(locales[i]) %>'
-						lang='<%= locales[i].getLanguage() %>'
+						lang="<%= locales[i].getLanguage() %>"
 						message="<%= locales[i].getDisplayName(locales[i]) %>"
 						url='<%= formAction + "&" + name + "=" + locales[i].getLanguage() + "_" + locales[i].getCountry() %>'
 					/>

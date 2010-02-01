@@ -51,7 +51,7 @@ String timeZoneId = BeanParamUtil.getString(selUser, request, "timeZoneId", user
 			}
 		%>
 
-			<aui:option label="<%= curLocale.getDisplayName(languageLocale) %>" selected="<%= (selLocale.getLanguage().equals(curLocale.getLanguage()) && selLocale.getCountry().equals(curLocale.getCountry())) %>" value='<%= curLocale.getLanguage() + "_" + curLocale.getCountry() %>' lang='<%= languageLocale.getLanguage() %>' />
+			<aui:option label="<%= curLocale.getDisplayName(languageLocale) %>" lang="<%= languageLocale.getLanguage() %>" selected="<%= (selLocale.getLanguage().equals(curLocale.getLanguage()) && selLocale.getCountry().equals(curLocale.getCountry())) %>" value='<%= curLocale.getLanguage() + "_" + curLocale.getCountry() %>' />
 
 		<%
 		}
