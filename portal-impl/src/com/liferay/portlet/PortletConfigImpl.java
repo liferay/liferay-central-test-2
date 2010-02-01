@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -48,7 +49,6 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 
 import javax.xml.namespace.QName;
@@ -59,13 +59,7 @@ import javax.xml.namespace.QName;
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
  */
-public class PortletConfigImpl implements PortletConfig {
-
-	public static final String RUNTIME_OPTION_ESCAPE_XML =
-		"javax.portlet.escapeXml";
-
-	public static final String RUNTIME_OPTION_PORTAL_CONTEXT =
-		"com.liferay.portal.portalContext";
+public class PortletConfigImpl implements LiferayPortletConfig {
 
 	public PortletConfigImpl(Portlet portlet, PortletContext portletContext) {
 		_portletApp = portlet.getPortletApp();

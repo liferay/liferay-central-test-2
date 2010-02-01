@@ -24,20 +24,25 @@ package com.liferay.taglib.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.portlet.PortletModeFactory;
+import com.liferay.portal.kernel.portlet.WindowStateFactory;
+import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.util.Map;
 
+import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
@@ -59,139 +64,109 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			PageContext pageContext)
 		throws Exception {
 
-		Object returnObj = null;
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			Object windowStateWrapper = windowState;
-
-			if (windowStateWrapper == null) {
-				windowStateWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object portletModeWrapper = portletMode;
-
-			if (portletModeWrapper == null) {
-				portletModeWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object varWrapper = var;
-
-			if (varWrapper == null) {
-				varWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object varImplWrapper = varImpl;
-
-			if (varImplWrapper == null) {
-				varImplWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object secureWrapper = secure;
-
-			if (secureWrapper == null) {
-				secureWrapper = new NullWrapper(Boolean.class.getName());
-			}
-
-			Object copyCurrentRenderParametersWrapper =
-				copyCurrentRenderParameters;
-
-			if (copyCurrentRenderParametersWrapper == null) {
-				copyCurrentRenderParametersWrapper = new NullWrapper(
-					Boolean.class.getName());
-			}
-
-			Object escapeXmlWrapper = escapeXml;
-
-			if (escapeXmlWrapper == null) {
-				escapeXmlWrapper = new NullWrapper(Boolean.class.getName());
-			}
-
-			Object nameWrapper = name;
-
-			if (nameWrapper == null) {
-				nameWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object resourceIDWrapper = resourceID;
-
-			if (resourceIDWrapper == null) {
-				resourceIDWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object cacheabilityWrapper = cacheability;
-
-			if (cacheabilityWrapper == null) {
-				cacheabilityWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object portletNameWrapper = portletName;
-
-			if (portletNameWrapper == null) {
-				portletNameWrapper = new NullWrapper(String.class.getName());
-			}
-
-			Object anchorWrapper = anchor;
-
-			if (anchorWrapper == null) {
-				anchorWrapper = new NullWrapper(Boolean.class.getName());
-			}
-
-			Object encryptWrapper = encrypt;
-
-			if (encryptWrapper == null) {
-				encryptWrapper = new NullWrapper(Boolean.class.getName());
-			}
-
-			Object portletConfigurationWrapper = portletConfiguration;
-
-			if (portletConfigurationWrapper == null) {
-				portletConfigurationWrapper = new NullWrapper(
-					Boolean.class.getName());
-			}
-
-			Object paramsWrapper = params;
-
-			if (paramsWrapper == null) {
-				paramsWrapper = new NullWrapper(Map.class.getName());
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {
-					lifecycle, windowStateWrapper, portletModeWrapper,
-					varWrapper, varImplWrapper, secureWrapper,
-					copyCurrentRenderParametersWrapper, escapeXmlWrapper,
-					nameWrapper, resourceIDWrapper, cacheabilityWrapper,
-					new LongWrapper(plid), portletNameWrapper, anchorWrapper,
-					encryptWrapper, new LongWrapper(doAsUserId),
-					portletConfigurationWrapper, paramsWrapper,
-					new BooleanWrapper(writeOutput), pageContext
-				});
-
-			returnObj = MethodInvoker.invoke(methodWrapper);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw e;
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+		if (portletName == null) {
+			portletName = _getPortletName(request);
 		}
 
-		if (returnObj != null) {
-			return returnObj.toString();
-		}
-		else {
+		LiferayPortletURL portletURL = _getLiferayPortletURL(
+			request, plid, portletName, lifecycle);
+
+		if (portletURL == null) {
+			_log.error(
+				"Render response is null because this tag is not being " +
+					"called within the context of a portlet");
+
 			return StringPool.BLANK;
 		}
+
+		if (Validator.isNotNull(windowState)) {
+			portletURL.setWindowState(
+				WindowStateFactory.getWindowState(windowState));
+		}
+
+		if (Validator.isNotNull(portletMode)) {
+			portletURL.setPortletMode(
+				PortletModeFactory.getPortletMode(portletMode));
+		}
+
+		if (secure != null) {
+			portletURL.setSecure(secure.booleanValue());
+		}
+		else {
+			portletURL.setSecure(request.isSecure());
+		}
+
+		if (copyCurrentRenderParameters != null) {
+			portletURL.setCopyCurrentRenderParameters(
+				copyCurrentRenderParameters.booleanValue());
+		}
+
+		if (escapeXml != null) {
+			portletURL.setEscapeXml(escapeXml.booleanValue());
+		}
+
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE) &&
+			Validator.isNotNull(name)) {
+
+			portletURL.setParameter(ActionRequest.ACTION_NAME, name);
+		}
+
+		if (resourceID != null) {
+			portletURL.setResourceID(resourceID);
+		}
+
+		if (cacheability != null) {
+			portletURL.setCacheability(cacheability);
+		}
+
+		if (anchor != null) {
+			portletURL.setAnchor(anchor.booleanValue());
+		}
+
+		if (encrypt != null) {
+			portletURL.setEncrypt(encrypt.booleanValue());
+		}
+
+		if (doAsUserId > 0) {
+			portletURL.setDoAsUserId(doAsUserId);
+		}
+
+		if ((portletConfiguration != null) &&
+			portletConfiguration.booleanValue()) {
+
+			String returnToFullPageURL = ParamUtil.getString(
+				request, "returnToFullPageURL");
+			String portletResource = ParamUtil.getString(
+				request, "portletResource");
+			String previewWidth = ParamUtil.getString(request, "previewWidth");
+
+			portletURL.setParameter(
+				"struts_action", "/portlet_configuration/edit_configuration");
+			portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+			portletURL.setParameter("portletResource", portletResource);
+			portletURL.setParameter("previewWidth", previewWidth);
+		}
+
+		if (params != null) {
+			MapUtil.merge(portletURL.getParameterMap(), params);
+
+			portletURL.setParameters(params);
+		}
+
+		if (Validator.isNotNull(var)) {
+			pageContext.setAttribute(var, portletURL.toString());
+		}
+		else if (Validator.isNotNull(varImpl)) {
+			pageContext.setAttribute(varImpl, portletURL);
+		}
+		else if (writeOutput) {
+			pageContext.getOut().print(portletURL.toString());
+		}
+
+		return portletURL.toString();
 	}
 
 	public int doEndTag() throws JspException {
@@ -202,14 +177,11 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 				_resourceID, _cacheability, _plid, _portletName, _anchor,
 				_encrypt, _doAsUserId, _portletConfiguration, getParams(), true,
 				pageContext);
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
-			if (e instanceof JspException) {
-				throw (JspException)e;
-			}
-			else {
-				throw new JspException(e);
-			}
+			throw new JspException(e);
 		}
 		finally {
 			clearParams();
@@ -217,8 +189,6 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 
 			_plid = LayoutConstants.DEFAULT_PLID;
 		}
-
-		return EVAL_PAGE;
 	}
 
 	public String getLifecycle() {
@@ -292,10 +262,39 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 		_portletConfiguration = Boolean.valueOf(portletConfiguration);
 	}
 
-	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.portlet.ActionURLTagUtil";
+	private static LiferayPortletURL _getLiferayPortletURL(
+		HttpServletRequest request, long plid, String portletName,
+		String lifecycle) {
 
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		if (portletRequest == null) {
+			return null;
+		}
+
+		LiferayPortletResponse portletResponse =
+			(LiferayPortletResponse)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+		return portletResponse.createLiferayPortletURL(
+			plid, portletName, lifecycle);
+	}
+
+	private static String _getPortletName(HttpServletRequest request) {
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		if (portletRequest == null) {
+			return null;
+		}
+
+		LiferayPortletConfig liferayPortletConfig =
+			(LiferayPortletConfig)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
+
+		return liferayPortletConfig.getPortletId();
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(ActionURLTag.class);
 

@@ -194,24 +194,25 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	}
 
 	public LiferayPortletURL createActionURL(String portletName) {
-		return createPortletURLImpl(portletName, PortletRequest.ACTION_PHASE);
+		return createLiferayPortletURL(
+			portletName, PortletRequest.ACTION_PHASE);
 	}
 
 	public Element createElement(String tagName) throws DOMException {
 		return null;
 	}
 
-	public PortletURLImpl createPortletURLImpl(String lifecycle) {
-		return createPortletURLImpl(_portletName, lifecycle);
+	public LiferayPortletURL createLiferayPortletURL(String lifecycle) {
+		return createLiferayPortletURL(_portletName, lifecycle);
 	}
 
-	public PortletURLImpl createPortletURLImpl(
+	public LiferayPortletURL createLiferayPortletURL(
 		String portletName, String lifecycle) {
 
-		return createPortletURLImpl(_plid, portletName, lifecycle);
+		return createLiferayPortletURL(_plid, portletName, lifecycle);
 	}
 
-	public PortletURLImpl createPortletURLImpl(
+	public LiferayPortletURL createLiferayPortletURL(
 		long plid, String portletName, String lifecycle) {
 
 		try {
@@ -344,7 +345,8 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	}
 
 	public LiferayPortletURL createRenderURL(String portletName) {
-		return createPortletURLImpl(portletName, PortletRequest.RENDER_PHASE);
+		return createLiferayPortletURL(
+			portletName, PortletRequest.RENDER_PHASE);
 	}
 
 	public ResourceURL createResourceURL() {
@@ -352,7 +354,8 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	}
 
 	public LiferayPortletURL createResourceURL(String portletName) {
-		return createPortletURLImpl(portletName, PortletRequest.RESOURCE_PHASE);
+		return createLiferayPortletURL(
+			portletName, PortletRequest.RESOURCE_PHASE);
 	}
 
 	public String encodeURL(String path) {

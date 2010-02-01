@@ -45,6 +45,14 @@ public interface LiferayPortletResponse extends PortletResponse {
 
 	public PortletURL createActionURL();
 
+	public LiferayPortletURL createLiferayPortletURL(String lifecycle);
+
+	public LiferayPortletURL createLiferayPortletURL(
+		String portletName, String lifecycle);
+
+	public LiferayPortletURL createLiferayPortletURL(
+		long plid, String portletName, String lifecycle);
+
 	public LiferayPortletURL createActionURL(String portletName);
 
 	public PortletURL createRenderURL();

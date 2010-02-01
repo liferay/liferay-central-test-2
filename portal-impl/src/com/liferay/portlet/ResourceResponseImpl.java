@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+
 import java.util.Locale;
 
 import javax.portlet.PortletRequest;
@@ -61,7 +63,7 @@ public class ResourceResponseImpl
 		return super.createActionURL();
 	}
 
-	public PortletURLImpl createPortletURLImpl(
+	public LiferayPortletURL createLiferayPortletURL(
 		String portletName, String lifecycle) {
 
 		ResourceRequest resourceRequest = (ResourceRequest)getPortletRequest();
@@ -81,7 +83,7 @@ public class ResourceResponseImpl
 					"the cacheability is not set to PAGE");
 		}
 
-		return super.createPortletURLImpl(portletName, lifecycle);
+		return super.createLiferayPortletURL(portletName, lifecycle);
 	}
 
 	public PortletURL createRenderURL() {
