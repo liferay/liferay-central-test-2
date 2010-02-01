@@ -50,7 +50,7 @@ if (queryLogicIndex >= 0) {
 }
 %>
 
-<div class="query-row">
+<div class="aui-field-row query-row">
 	<aui:select inlineField="<%= true %>" label="" name='<%= "queryContains" + index %>'>
 		<aui:option label="contains" selected="<%= queryContains %>" value="true" />
 		<aui:option label="does-not-contain" selected="<%= !queryContains %>" value="false" />
