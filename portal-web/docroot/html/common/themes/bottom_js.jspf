@@ -24,15 +24,18 @@
 
 <%@ include file="/html/portal/layout/view/portlet_js.jspf" %>
 
-<aui:script>
+<aui:script use="node">
 	Liferay.Util.addInputType();
-	Liferay.Util.addInputFocus();
 
 	Liferay.Portlet.ready(
 		function(portletId, node) {
 			Liferay.Util.addInputType(node);
 		}
 	);
+</aui:script>
+
+<aui:script>
+	Liferay.Util.addInputFocus();
 
 	<c:if test="<%= !themeDisplay.isStatePopUp() %>">
 
