@@ -257,8 +257,6 @@ public class CounterPersistenceImpl
 	protected Connection getConnection() throws SQLException {
 		Connection connection = getDataSource().getConnection();
 
-		connection.setAutoCommit(true);
-
 		return connection;
 	}
 

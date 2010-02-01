@@ -22,7 +22,11 @@
 
 package com.liferay.counter.service;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Isolation;
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,14 +35,19 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  */
+@Transactional(isolation = Isolation.PORTAL,
+	rollbackFor =  {PortalException.class, SystemException.class})
 public interface CounterLocalService {
 
 	public List<String> getNames() throws SystemException;
 
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public long increment() throws SystemException;
 
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public long increment(String name) throws SystemException;
 
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public long increment(String name, int size) throws SystemException;
 
 	public void rename(String oldName, String newName) throws SystemException;

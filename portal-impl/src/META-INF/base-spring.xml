@@ -23,9 +23,9 @@
 	</bean>
 	<bean id="serviceHookAdvice" class="com.liferay.portal.spring.aop.ServiceHookAdvice" />
 	<aop:config>
-		<aop:pointcut id="transactionOperation" expression="bean(*Service) &amp;&amp; !within(com.liferay.counter..*)" />
+		<aop:pointcut id="transactionOperation" expression="bean(*Service)" />
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionOperation" order="1" />
-		<aop:aspect ref="serviceHookAdvice" order="2">
+		<aop:aspect ref="serviceHookAdvice" order="3">
 			<aop:around pointcut="bean(*Service)" method="invoke" />
 		</aop:aspect>
 	</aop:config>
