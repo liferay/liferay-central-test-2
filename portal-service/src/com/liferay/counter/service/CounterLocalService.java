@@ -30,13 +30,14 @@ import com.liferay.portal.kernel.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class})
 /**
  * <a href="CounterLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-@Transactional(isolation = Isolation.PORTAL,
-	rollbackFor =  {PortalException.class, SystemException.class})
 public interface CounterLocalService {
 
 	public List<String> getNames() throws SystemException;
