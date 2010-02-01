@@ -80,17 +80,12 @@ public class InputPermissionsParamsTag extends TagSupport {
 	public int doEndTag() throws JspException {
 		try {
 			doTag(_modelName, pageContext);
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
-			if (e instanceof JspException) {
-				throw (JspException)e;
-			}
-			else {
-				throw new JspException(e);
-			}
+			throw new JspException(e);
 		}
-
-		return EVAL_PAGE;
 	}
 
 	public void setModelName(String modelName) {

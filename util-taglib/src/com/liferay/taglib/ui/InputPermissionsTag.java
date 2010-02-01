@@ -87,17 +87,12 @@ public class InputPermissionsTag extends IncludeTag {
 	public int doEndTag() throws JspException {
 		try {
 			doTag(getPage(), _formName, _modelName, pageContext);
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
-			if (e instanceof JspException) {
-				throw (JspException)e;
-			}
-			else {
-				throw new JspException(e);
-			}
+			throw new JspException(e);
 		}
-
-		return EVAL_PAGE;
 	}
 
 	public void setFormName(String formName) {
