@@ -210,6 +210,11 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 				text-indent: -9999em;
 				width: <%= themeDisplay.getCompanyLogoWidth() %>px;
 			}
+
+			#banner .logo .text {
+				font-size: 0;
+				text-indent: -9999em;
+			}
 		</c:if>
 
 		<c:if test="<%= BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) < 7) %>">
@@ -302,7 +307,6 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 
 	</style>
 </c:if>
-
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.common.themes.top_head.jsp");
 %>

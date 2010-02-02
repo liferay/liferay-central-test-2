@@ -19,11 +19,13 @@
 <div id="wrapper">
 	<div id="banner">
 		<h1 class="logo">
-			<a class="png" href="${company_url}">${the_title} - ${company_name}</a>
+			<span class="text">${the_title} - ${company_name}</span>
 
 			<span class="current-community">
 				${community_name}
 			</span>
+
+			<a class="png" href="${company_url}"><@liferay.language key="go-to-homepage"</a>
 		</h1>
 
 		<#if !is_signed_in>
