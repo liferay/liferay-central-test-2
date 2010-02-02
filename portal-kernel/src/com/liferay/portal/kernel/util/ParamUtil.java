@@ -226,6 +226,34 @@ public class ParamUtil {
 		return get(portletRequest, param, df, defaultValue);
 	}
 
+	public static Date[] getDateValues(
+		HttpServletRequest request, String param, DateFormat df) {
+
+		return getDateValues(request, param, df, new Date[0]);
+	}
+
+	public static Date[] getDateValues(
+		HttpServletRequest request, String param, DateFormat df,
+		Date[] defaultValue) {
+
+		return GetterUtil.getDateValues(
+			request.getParameterValues(param), df, defaultValue);
+	}
+
+	public static Date[] getDateValues(
+		PortletRequest portletRequest, String param, DateFormat df) {
+
+		return getDateValues(portletRequest, param, df, new Date[0]);
+	}
+
+	public static Date[] getDateValues(
+		PortletRequest portletRequest, String param, DateFormat df,
+		Date[] defaultValue) {
+
+		return GetterUtil.getDateValues(
+			portletRequest.getParameterValues(param), df, defaultValue);
+	}
+
 	public static double getDouble(HttpServletRequest request, String param) {
 		return GetterUtil.getDouble(request.getParameter(param));
 	}

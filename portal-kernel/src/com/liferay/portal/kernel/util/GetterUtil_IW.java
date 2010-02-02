@@ -93,6 +93,16 @@ public class GetterUtil_IW {
 		return GetterUtil.getDate(value, df, defaultValue);
 	}
 
+	public java.util.Date[] getDateValues(java.lang.String[] values,
+		java.text.DateFormat df) {
+		return GetterUtil.getDateValues(values, df);
+	}
+
+	public java.util.Date[] getDateValues(java.lang.String[] values,
+		java.text.DateFormat df, java.util.Date[] defaultValue) {
+		return GetterUtil.getDateValues(values, df, defaultValue);
+	}
+
 	public double getDouble(java.lang.String value) {
 		return GetterUtil.getDouble(value);
 	}

@@ -39,6 +39,8 @@ public class GetterUtil {
 
 	public static final boolean[] DEFAULT_BOOLEAN_VALUES = new boolean[0];
 
+	public static final Date[] DEFAULT_DATE_VALUES = new Date[0];
+
 	public static final double DEFAULT_DOUBLE = 0.0;
 
 	public static final double[] DEFAULT_DOUBLE_VALUES = new double[0];
@@ -198,6 +200,26 @@ public class GetterUtil {
 
 	public static Date getDate(String value, DateFormat df, Date defaultValue) {
 		return get(value, df, defaultValue);
+	}
+
+	public static Date[] getDateValues(String[] values, DateFormat df) {
+		return getDateValues(values, df, DEFAULT_DATE_VALUES);
+	}
+
+	public static Date[] getDateValues(
+		String[] values, DateFormat df, Date[] defaultValue) {
+
+		if (values == null) {
+			return defaultValue;
+		}
+
+		Date[] dateValues = new Date[values.length];
+
+		for (int i = 0; i < values.length; i++) {
+			dateValues[i] = getDate(values[i], df);
+		}
+
+		return dateValues;
 	}
 
 	public static double getDouble(String value) {

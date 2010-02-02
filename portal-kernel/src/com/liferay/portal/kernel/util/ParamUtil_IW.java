@@ -179,6 +179,30 @@ public class ParamUtil_IW {
 		return ParamUtil.getDate(portletRequest, param, df, defaultValue);
 	}
 
+	public java.util.Date[] getDateValues(
+		javax.servlet.http.HttpServletRequest request, java.lang.String param,
+		java.text.DateFormat df) {
+		return ParamUtil.getDateValues(request, param, df);
+	}
+
+	public java.util.Date[] getDateValues(
+		javax.servlet.http.HttpServletRequest request, java.lang.String param,
+		java.text.DateFormat df, java.util.Date[] defaultValue) {
+		return ParamUtil.getDateValues(request, param, df, defaultValue);
+	}
+
+	public java.util.Date[] getDateValues(
+		javax.portlet.PortletRequest portletRequest, java.lang.String param,
+		java.text.DateFormat df) {
+		return ParamUtil.getDateValues(portletRequest, param, df);
+	}
+
+	public java.util.Date[] getDateValues(
+		javax.portlet.PortletRequest portletRequest, java.lang.String param,
+		java.text.DateFormat df, java.util.Date[] defaultValue) {
+		return ParamUtil.getDateValues(portletRequest, param, df, defaultValue);
+	}
+
 	public double getDouble(javax.servlet.http.HttpServletRequest request,
 		java.lang.String param) {
 		return ParamUtil.getDouble(request, param);
