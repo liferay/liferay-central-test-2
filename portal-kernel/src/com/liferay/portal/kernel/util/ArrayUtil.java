@@ -24,8 +24,11 @@ package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.json.JSONArray;
 
+import java.text.DateFormat;
+
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -831,6 +834,16 @@ public class ArrayUtil {
 
 		for (int i = 0; i < array.length; i++) {
 			newArray[i] = String.valueOf(array[i]);
+		}
+
+		return newArray;
+	}
+
+	public static String[] toStringArray(Date[] array, DateFormat df) {
+		String[] newArray = new String[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = df.format(array[i]);
 		}
 
 		return newArray;

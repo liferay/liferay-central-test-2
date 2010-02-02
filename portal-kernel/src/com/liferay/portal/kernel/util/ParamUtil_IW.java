@@ -38,9 +38,9 @@ public class ParamUtil_IW {
 	}
 
 	public java.util.Date get(javax.servlet.http.HttpServletRequest request,
-		java.lang.String param, java.text.DateFormat df,
+		java.lang.String param, java.text.DateFormat dateFormat,
 		java.util.Date defaultValue) {
-		return ParamUtil.get(request, param, df, defaultValue);
+		return ParamUtil.get(request, param, dateFormat, defaultValue);
 	}
 
 	public double get(javax.servlet.http.HttpServletRequest request,
@@ -79,9 +79,9 @@ public class ParamUtil_IW {
 	}
 
 	public java.util.Date get(javax.portlet.PortletRequest portletRequest,
-		java.lang.String param, java.text.DateFormat df,
+		java.lang.String param, java.text.DateFormat dateFormat,
 		java.util.Date defaultValue) {
-		return ParamUtil.get(portletRequest, param, df, defaultValue);
+		return ParamUtil.get(portletRequest, param, dateFormat, defaultValue);
 	}
 
 	public double get(javax.portlet.PortletRequest portletRequest,
@@ -158,49 +158,50 @@ public class ParamUtil_IW {
 
 	public java.util.Date getDate(
 		javax.servlet.http.HttpServletRequest request, java.lang.String param,
-		java.text.DateFormat df) {
-		return ParamUtil.getDate(request, param, df);
+		java.text.DateFormat dateFormat) {
+		return ParamUtil.getDate(request, param, dateFormat);
 	}
 
 	public java.util.Date getDate(
 		javax.servlet.http.HttpServletRequest request, java.lang.String param,
-		java.text.DateFormat df, java.util.Date defaultValue) {
-		return ParamUtil.getDate(request, param, df, defaultValue);
+		java.text.DateFormat dateFormat, java.util.Date defaultValue) {
+		return ParamUtil.getDate(request, param, dateFormat, defaultValue);
 	}
 
 	public java.util.Date getDate(javax.portlet.PortletRequest portletRequest,
-		java.lang.String param, java.text.DateFormat df) {
-		return ParamUtil.getDate(portletRequest, param, df);
+		java.lang.String param, java.text.DateFormat dateFormat) {
+		return ParamUtil.getDate(portletRequest, param, dateFormat);
 	}
 
 	public java.util.Date getDate(javax.portlet.PortletRequest portletRequest,
-		java.lang.String param, java.text.DateFormat df,
+		java.lang.String param, java.text.DateFormat dateFormat,
 		java.util.Date defaultValue) {
-		return ParamUtil.getDate(portletRequest, param, df, defaultValue);
+		return ParamUtil.getDate(portletRequest, param, dateFormat, defaultValue);
 	}
 
 	public java.util.Date[] getDateValues(
 		javax.servlet.http.HttpServletRequest request, java.lang.String param,
-		java.text.DateFormat df) {
-		return ParamUtil.getDateValues(request, param, df);
+		java.text.DateFormat dateFormat) {
+		return ParamUtil.getDateValues(request, param, dateFormat);
 	}
 
 	public java.util.Date[] getDateValues(
 		javax.servlet.http.HttpServletRequest request, java.lang.String param,
-		java.text.DateFormat df, java.util.Date[] defaultValue) {
-		return ParamUtil.getDateValues(request, param, df, defaultValue);
+		java.text.DateFormat dateFormat, java.util.Date[] defaultValue) {
+		return ParamUtil.getDateValues(request, param, dateFormat, defaultValue);
 	}
 
 	public java.util.Date[] getDateValues(
 		javax.portlet.PortletRequest portletRequest, java.lang.String param,
-		java.text.DateFormat df) {
-		return ParamUtil.getDateValues(portletRequest, param, df);
+		java.text.DateFormat dateFormat) {
+		return ParamUtil.getDateValues(portletRequest, param, dateFormat);
 	}
 
 	public java.util.Date[] getDateValues(
 		javax.portlet.PortletRequest portletRequest, java.lang.String param,
-		java.text.DateFormat df, java.util.Date[] defaultValue) {
-		return ParamUtil.getDateValues(portletRequest, param, df, defaultValue);
+		java.text.DateFormat dateFormat, java.util.Date[] defaultValue) {
+		return ParamUtil.getDateValues(portletRequest, param, dateFormat,
+			defaultValue);
 	}
 
 	public double getDouble(javax.servlet.http.HttpServletRequest request,

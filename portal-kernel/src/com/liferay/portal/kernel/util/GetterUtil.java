@@ -89,13 +89,15 @@ public class GetterUtil {
 		return defaultValue;
 	}
 
-	public static Date get(String value, DateFormat df, Date defaultValue) {
+	public static Date get(
+		String value, DateFormat dateFormat, Date defaultValue) {
+
 		if (value == null) {
 			return defaultValue;
 		}
 
 		try {
-			Date date = df.parse(value.trim());
+			Date date = dateFormat.parse(value.trim());
 
 			if (date != null) {
 				return date;
@@ -194,20 +196,22 @@ public class GetterUtil {
 		return booleanValues;
 	}
 
-	public static Date getDate(String value, DateFormat df) {
-		return getDate(value, df, new Date());
+	public static Date getDate(String value, DateFormat dateFormat) {
+		return getDate(value, dateFormat, new Date());
 	}
 
-	public static Date getDate(String value, DateFormat df, Date defaultValue) {
-		return get(value, df, defaultValue);
+	public static Date getDate(
+		String value, DateFormat dateFormat, Date defaultValue) {
+
+		return get(value, dateFormat, defaultValue);
 	}
 
-	public static Date[] getDateValues(String[] values, DateFormat df) {
-		return getDateValues(values, df, DEFAULT_DATE_VALUES);
+	public static Date[] getDateValues(String[] values, DateFormat dateFormat) {
+		return getDateValues(values, dateFormat, DEFAULT_DATE_VALUES);
 	}
 
 	public static Date[] getDateValues(
-		String[] values, DateFormat df, Date[] defaultValue) {
+		String[] values, DateFormat dateFormat, Date[] defaultValue) {
 
 		if (values == null) {
 			return defaultValue;
@@ -216,7 +220,7 @@ public class GetterUtil {
 		Date[] dateValues = new Date[values.length];
 
 		for (int i = 0; i < values.length; i++) {
-			dateValues[i] = getDate(values[i], df);
+			dateValues[i] = getDate(values[i], dateFormat);
 		}
 
 		return dateValues;

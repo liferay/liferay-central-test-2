@@ -36,9 +36,9 @@ public class GetterUtil_IW {
 		return GetterUtil.get(value, defaultValue);
 	}
 
-	public java.util.Date get(java.lang.String value, java.text.DateFormat df,
-		java.util.Date defaultValue) {
-		return GetterUtil.get(value, df, defaultValue);
+	public java.util.Date get(java.lang.String value,
+		java.text.DateFormat dateFormat, java.util.Date defaultValue) {
+		return GetterUtil.get(value, dateFormat, defaultValue);
 	}
 
 	public double get(java.lang.String value, double defaultValue) {
@@ -84,23 +84,23 @@ public class GetterUtil_IW {
 	}
 
 	public java.util.Date getDate(java.lang.String value,
-		java.text.DateFormat df) {
-		return GetterUtil.getDate(value, df);
+		java.text.DateFormat dateFormat) {
+		return GetterUtil.getDate(value, dateFormat);
 	}
 
 	public java.util.Date getDate(java.lang.String value,
-		java.text.DateFormat df, java.util.Date defaultValue) {
-		return GetterUtil.getDate(value, df, defaultValue);
+		java.text.DateFormat dateFormat, java.util.Date defaultValue) {
+		return GetterUtil.getDate(value, dateFormat, defaultValue);
 	}
 
 	public java.util.Date[] getDateValues(java.lang.String[] values,
-		java.text.DateFormat df) {
-		return GetterUtil.getDateValues(values, df);
+		java.text.DateFormat dateFormat) {
+		return GetterUtil.getDateValues(values, dateFormat);
 	}
 
 	public java.util.Date[] getDateValues(java.lang.String[] values,
-		java.text.DateFormat df, java.util.Date[] defaultValue) {
-		return GetterUtil.getDateValues(values, df, defaultValue);
+		java.text.DateFormat dateFormat, java.util.Date[] defaultValue) {
+		return GetterUtil.getDateValues(values, dateFormat, defaultValue);
 	}
 
 	public double getDouble(java.lang.String value) {

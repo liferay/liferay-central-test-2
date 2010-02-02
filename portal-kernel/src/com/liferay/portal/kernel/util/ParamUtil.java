@@ -46,10 +46,11 @@ public class ParamUtil {
 	}
 
 	public static Date get(
-		HttpServletRequest request, String param, DateFormat df,
+		HttpServletRequest request, String param, DateFormat dateFormat,
 		Date defaultValue) {
 
-		return GetterUtil.get(request.getParameter(param), df, defaultValue);
+		return GetterUtil.get(
+			request.getParameter(param), dateFormat, defaultValue);
 	}
 
 	public static double get(
@@ -102,11 +103,11 @@ public class ParamUtil {
 	}
 
 	public static Date get(
-		PortletRequest portletRequest, String param, DateFormat df,
+		PortletRequest portletRequest, String param, DateFormat dateFormat,
 		Date defaultValue) {
 
 		return GetterUtil.get(
-			portletRequest.getParameter(param), df, defaultValue);
+			portletRequest.getParameter(param), dateFormat, defaultValue);
 	}
 
 	public static double get(
@@ -201,57 +202,58 @@ public class ParamUtil {
 	}
 
 	public static Date getDate(
-		HttpServletRequest request, String param, DateFormat df) {
+		HttpServletRequest request, String param, DateFormat dateFormat) {
 
-		return GetterUtil.getDate(request.getParameter(param), df);
+		return GetterUtil.getDate(request.getParameter(param), dateFormat);
 	}
 
 	public static Date getDate(
-		HttpServletRequest request, String param, DateFormat df,
+		HttpServletRequest request, String param, DateFormat dateFormat,
 		Date defaultValue) {
 
-		return get(request, param, df, defaultValue);
+		return get(request, param, dateFormat, defaultValue);
 	}
 
 	public static Date getDate(
-		PortletRequest portletRequest, String param, DateFormat df) {
+		PortletRequest portletRequest, String param, DateFormat dateFormat) {
 
-		return GetterUtil.getDate(portletRequest.getParameter(param), df);
+		return GetterUtil.getDate(
+			portletRequest.getParameter(param), dateFormat);
 	}
 
 	public static Date getDate(
-		PortletRequest portletRequest, String param, DateFormat df,
+		PortletRequest portletRequest, String param, DateFormat dateFormat,
 		Date defaultValue) {
 
-		return get(portletRequest, param, df, defaultValue);
+		return get(portletRequest, param, dateFormat, defaultValue);
 	}
 
 	public static Date[] getDateValues(
-		HttpServletRequest request, String param, DateFormat df) {
+		HttpServletRequest request, String param, DateFormat dateFormat) {
 
-		return getDateValues(request, param, df, new Date[0]);
+		return getDateValues(request, param, dateFormat, new Date[0]);
 	}
 
 	public static Date[] getDateValues(
-		HttpServletRequest request, String param, DateFormat df,
+		HttpServletRequest request, String param, DateFormat dateFormat,
 		Date[] defaultValue) {
 
 		return GetterUtil.getDateValues(
-			request.getParameterValues(param), df, defaultValue);
+			request.getParameterValues(param), dateFormat, defaultValue);
 	}
 
 	public static Date[] getDateValues(
-		PortletRequest portletRequest, String param, DateFormat df) {
+		PortletRequest portletRequest, String param, DateFormat dateFormat) {
 
-		return getDateValues(portletRequest, param, df, new Date[0]);
+		return getDateValues(portletRequest, param, dateFormat, new Date[0]);
 	}
 
 	public static Date[] getDateValues(
-		PortletRequest portletRequest, String param, DateFormat df,
+		PortletRequest portletRequest, String param, DateFormat dateFormat,
 		Date[] defaultValue) {
 
 		return GetterUtil.getDateValues(
-			portletRequest.getParameterValues(param), df, defaultValue);
+			portletRequest.getParameterValues(param), dateFormat, defaultValue);
 	}
 
 	public static double getDouble(HttpServletRequest request, String param) {

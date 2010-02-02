@@ -355,6 +355,11 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toStringArray(array);
 	}
 
+	public java.lang.String[] toStringArray(java.util.Date[] array,
+		java.text.DateFormat df) {
+		return ArrayUtil.toStringArray(array, df);
+	}
+
 	public java.lang.String[] toStringArray(double[] array) {
 		return ArrayUtil.toStringArray(array);
 	}
