@@ -29,7 +29,7 @@ String baseProviderURL = ParamUtil.getString(request, "baseProviderURL");
 String principal = ParamUtil.getString(request, "principal");
 String credentials = ParamUtil.getString(request, "credentials");
 
-LdapContext ldapContext = LDAPSettingsUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
+LdapContext ldapContext = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
 %>
 
 <c:choose>

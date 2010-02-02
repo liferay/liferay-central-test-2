@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@ package com.liferay.portal.security.ldap;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
@@ -32,13 +33,21 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.ldap.Modifications;
 
+import java.util.Properties;
+
 import javax.naming.Binding;
 import javax.naming.CompositeName;
 import javax.naming.Name;
 import javax.naming.directory.ModificationItem;
 import javax.naming.ldap.LdapContext;
-import java.util.Properties;
 
+/**
+ * <a href="PortalLDAPExporter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Edward Han
+ * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ */
 public class PortalLDAPExporter {
 
 	public static void exportToLDAP(Contact contact) throws Exception {
@@ -46,6 +55,7 @@ public class PortalLDAPExporter {
 
 		if (!LDAPSettingsUtil.isAuthEnabled(companyId) ||
 			!LDAPSettingsUtil.isExportEnabled(companyId)) {
+
 			return;
 		}
 
@@ -55,10 +65,11 @@ public class PortalLDAPExporter {
 		long ldapServerId = PortalLDAPUtil.getLdapServerId(
 			companyId, user.getScreenName());
 
-		LdapContext ctx = PortalLDAPUtil.getContext(ldapServerId, companyId);
+		LdapContext ldapContext = PortalLDAPUtil.getContext(
+			ldapServerId, companyId);
 
 		try {
-			if (ctx == null) {
+			if (ldapContext == null) {
 				return;
 			}
 
@@ -75,12 +86,12 @@ public class PortalLDAPExporter {
 				_getDNName(
 					ldapServerId, companyId, user, userMappings, name);
 
-				LDAPUser ldapUser = (LDAPUser) Class.forName(
+				LDAPUser ldapUser = (LDAPUser)Class.forName(
 					PropsValues.LDAP_USER_IMPL).newInstance();
 
 				ldapUser.setUser(user, ldapServerId);
 
-				ctx.bind(name, ldapUser);
+				ldapContext.bind(name, ldapUser);
 			}
 			else {
 
@@ -90,9 +101,9 @@ public class PortalLDAPExporter {
 					PortalLDAPUtil.getNameInNamespace(
 						ldapServerId, companyId, binding));
 
-				Modifications mods = Modifications.getInstance();
+				Modifications modifications = Modifications.getInstance();
 
-				mods.addItem(
+				modifications.addItem(
 					userMappings.getProperty("firstName"),
 					contact.getFirstName());
 
@@ -100,36 +111,39 @@ public class PortalLDAPExporter {
 					"middleName");
 
 				if (Validator.isNotNull(middleNameMapping)) {
-					mods.addItem(middleNameMapping, contact.getMiddleName());
+					modifications.addItem(
+						middleNameMapping, contact.getMiddleName());
 				}
 
-				mods.addItem(
+				modifications.addItem(
 					userMappings.getProperty("lastName"),
 					contact.getLastName());
 
 				String fullNameMapping = userMappings.getProperty("fullName");
 
 				if (Validator.isNotNull(fullNameMapping)) {
-					mods.addItem(fullNameMapping, contact.getFullName());
+					modifications.addItem(
+						fullNameMapping, contact.getFullName());
 				}
 
 				String jobTitleMapping = userMappings.getProperty("jobTitle");
 
 				if (Validator.isNotNull(jobTitleMapping)) {
-					mods.addItem(jobTitleMapping, contact.getJobTitle());
+					modifications.addItem(
+						jobTitleMapping, contact.getJobTitle());
 				}
 
-				ModificationItem[] modItems = mods.getItems();
+				ModificationItem[] modificationItems = modifications.getItems();
 
-				ctx.modifyAttributes(name, modItems);
+				ldapContext.modifyAttributes(name, modificationItems);
 			}
 		}
 		catch (Exception e) {
 			throw e;
 		}
 		finally {
-			if (ctx != null) {
-				ctx.close();
+			if (ldapContext != null) {
+				ldapContext.close();
 			}
 		}
 	}
@@ -139,16 +153,18 @@ public class PortalLDAPExporter {
 
 		if (!LDAPSettingsUtil.isAuthEnabled(companyId) ||
 			!LDAPSettingsUtil.isExportEnabled(companyId)) {
+
 			return;
 		}
 
 		long ldapServerId = PortalLDAPUtil.getLdapServerId(
 			companyId, user.getScreenName());
 
-		LdapContext ctx = PortalLDAPUtil.getContext(ldapServerId, companyId);
+		LdapContext ldapContext = PortalLDAPUtil.getContext(
+			ldapServerId, companyId);
 
 		try {
-			if (ctx == null) {
+			if (ldapContext == null) {
 				return;
 			}
 
@@ -170,11 +186,10 @@ public class PortalLDAPExporter {
 
 				ldapUser.setUser(user, ldapServerId);
 
-				ctx.bind(name, ldapUser);
+				ldapContext.bind(name, ldapUser);
 
 				binding = PortalLDAPUtil.getUser(
-					ldapServerId, user.getCompanyId(),
-					user.getScreenName());
+					ldapServerId, user.getCompanyId(), user.getScreenName());
 
 				name = new CompositeName();
 			}
@@ -185,37 +200,37 @@ public class PortalLDAPExporter {
 				PortalLDAPUtil.getNameInNamespace(
 					ldapServerId, companyId, binding));
 
-			Modifications mods = Modifications.getInstance();
+			Modifications modifications = Modifications.getInstance();
 
-			mods.addItem(
+			modifications.addItem(
 				userMappings.getProperty("firstName"), user.getFirstName());
 
 			String middleNameMapping = userMappings.getProperty(
 				"middleName");
 
 			if (Validator.isNotNull(middleNameMapping)) {
-				mods.addItem(middleNameMapping, user.getMiddleName());
+				modifications.addItem(middleNameMapping, user.getMiddleName());
 			}
 
-			mods.addItem(
+			modifications.addItem(
 				userMappings.getProperty("lastName"), user.getLastName());
 
 			String fullNameMapping = userMappings.getProperty("fullName");
 
 			if (Validator.isNotNull(fullNameMapping)) {
-				mods.addItem(fullNameMapping, user.getFullName());
+				modifications.addItem(fullNameMapping, user.getFullName());
 			}
 
 			if (user.isPasswordModified() &&
 				Validator.isNotNull(user.getPasswordUnencrypted())) {
 
-				mods.addItem(
+				modifications.addItem(
 					userMappings.getProperty("password"),
 					user.getPasswordUnencrypted());
 			}
 
 			if (Validator.isNotNull(user.getEmailAddress())) {
-				mods.addItem(
+				modifications.addItem(
 					userMappings.getProperty("emailAddress"),
 					user.getEmailAddress());
 			}
@@ -223,19 +238,19 @@ public class PortalLDAPExporter {
 			String jobTitleMapping = userMappings.getProperty("jobTitle");
 
 			if (Validator.isNotNull(jobTitleMapping)) {
-				mods.addItem(jobTitleMapping, user.getJobTitle());
+				modifications.addItem(jobTitleMapping, user.getJobTitle());
 			}
 
-			ModificationItem[] modItems = mods.getItems();
+			ModificationItem[] modificationItems = modifications.getItems();
 
-			ctx.modifyAttributes(name, modItems);
+			ldapContext.modifyAttributes(name, modificationItems);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 		finally {
-			if (ctx != null) {
-				ctx.close();
+			if (ldapContext != null) {
+				ldapContext.close();
 			}
 		}
 	}
@@ -247,7 +262,7 @@ public class PortalLDAPExporter {
 
 		// Generate full DN based on user DN
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(userMappings.getProperty("screenName"));
 		sb.append(StringPool.EQUAL);
@@ -259,6 +274,5 @@ public class PortalLDAPExporter {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortalLDAPExporter.class);
-
 
 }

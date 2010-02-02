@@ -51,13 +51,53 @@ public class LDAPUser extends DummyDirContext {
 		super();
 	}
 
+	public Attributes getAttributes() {
+		return _attributes;
+	}
+
+	public Attributes getAttributes(Name name) throws NamingException {
+		return getAttributes(name.toString());
+	}
+
+	public Attributes getAttributes(Name name, String[] ids)
+		throws NamingException {
+
+		return getAttributes(name.toString(), ids);
+	}
+
+	public Attributes getAttributes(String name) throws NamingException {
+		if (Validator.isNotNull(name)) {
+			throw new NameNotFoundException();
+		}
+
+		return (Attributes)_attributes.clone();
+	}
+
+	public Attributes getAttributes(String name, String[] ids)
+		throws NamingException {
+
+		if (Validator.isNotNull(name)) {
+			throw new NameNotFoundException();
+		}
+
+		Attributes attributes = new BasicAttributes(true);
+
+		for (int i = 0; i < ids.length; i++) {
+			Attribute attr = _attributes.get(ids[i]);
+
+			if (attr != null) {
+				attributes.put(attr);
+			}
+		}
+
+		return attributes;
+	}
+
 	public User getUser() {
 		return _user;
 	}
 
 	public void setUser(User user, long ldapServerId) throws Exception {
-		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-
 		_user = user;
 
 		Properties userMappings = LDAPSettingsUtil.getUserMappings(
@@ -68,6 +108,8 @@ public class LDAPUser extends DummyDirContext {
 		// Required attributes
 
 		Attribute objectClass = new BasicAttribute("objectclass");
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		String[] defaultObjectClasses = PrefsPropsUtil.getStringArray(
 			_user.getCompanyId(),
@@ -114,49 +156,7 @@ public class LDAPUser extends DummyDirContext {
 		}
 	}
 
-	public Attributes getAttributes() {
-		return _attributes;
-	}
-
-	public Attributes getAttributes(String name) throws NamingException {
-		if (Validator.isNotNull(name)) {
-			throw new NameNotFoundException();
-		}
-
-		return (Attributes)_attributes.clone();
-	}
-
-	public Attributes getAttributes(Name name) throws NamingException {
-		return getAttributes(name.toString());
-	}
-
-	public Attributes getAttributes(String name, String[] ids)
-		throws NamingException {
-
-		if (Validator.isNotNull(name)) {
-			throw new NameNotFoundException();
-		}
-
-		Attributes attributes = new BasicAttributes(true);
-
-		for (int i = 0; i < ids.length; i++) {
-			Attribute attr = _attributes.get(ids[i]);
-
-			if (attr != null) {
-				attributes.put(attr);
-			}
-		}
-
-		return attributes;
-	}
-
-	public Attributes getAttributes(Name name, String[] ids)
-		throws NamingException {
-
-		return getAttributes(name.toString(), ids);
-	}
-
-	private User _user;
 	private Attributes _attributes;
+	private User _user;
 
 }

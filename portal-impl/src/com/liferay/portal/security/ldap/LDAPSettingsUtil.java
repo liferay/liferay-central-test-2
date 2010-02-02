@@ -39,8 +39,78 @@ import java.util.Properties;
  * <a href="LDAPSettingsUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Edward Han
+ * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
 public class LDAPSettingsUtil {
+
+	public static String getAuthSearchFilter(
+			long ldapServerId, long companyId, String emailAddress,
+			String screenName, String userId)
+		throws SystemException {
+
+		String postfix = getPropertyPostfix(ldapServerId);
+
+		String filter = PrefsPropsUtil.getString(
+			companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER + postfix);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Search filter before transformation " + filter);
+		}
+
+		filter = StringUtil.replace(
+			filter,
+			new String[] {
+				"@company_id@", "@email_address@", "@screen_name@", "@user_id@"
+			},
+			new String[] {
+				String.valueOf(companyId), emailAddress, screenName,
+				userId
+			});
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Search filter after transformation " + filter);
+		}
+
+		return filter;
+	}
+
+	public static Properties getGroupMappings(long ldapServerId, long companyId)
+		throws Exception {
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		Properties groupMappings = PropertiesUtil.load(
+			PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_GROUP_MAPPINGS + postfix));
+
+		LogUtil.debug(_log, groupMappings);
+
+		return groupMappings;
+	}
+
+	public static String getPropertyPostfix(long ldapServerId) {
+		if (ldapServerId > 0) {
+			return StringPool.PERIOD + ldapServerId;
+		}
+
+		return StringPool.BLANK;
+	}
+
+	public static Properties getUserMappings(long ldapServerId, long companyId)
+			throws Exception {
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		Properties userMappings = PropertiesUtil.load(
+			PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_USER_MAPPINGS + postfix));
+
+		LogUtil.debug(_log, userMappings);
+
+		return userMappings;
+	}
+
 	public static boolean isAuthEnabled(long companyId) throws SystemException {
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.LDAP_AUTH_ENABLED,
@@ -144,72 +214,6 @@ public class LDAPSettingsUtil {
 		}
 	}
 
-	public static String getAuthSearchFilter(
-			long ldapServerId, long companyId, String emailAddress,
-			String screenName, String userId)
-		throws SystemException {
-
-		String postfix = getPropertyPostfix(ldapServerId);
-
-		String filter = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER + postfix);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Search filter before transformation " + filter);
-		}
-
-		filter = StringUtil.replace(
-			filter,
-			new String[] {
-				"@company_id@", "@email_address@", "@screen_name@", "@user_id@"
-			},
-			new String[] {
-				String.valueOf(companyId), emailAddress, screenName,
-				userId
-			});
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Search filter after transformation " + filter);
-		}
-
-		return filter;
-	}
-
-	public static Properties getGroupMappings(long ldapServerId, long companyId)
-		throws Exception {
-
-		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-
-		Properties groupMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(companyId,
-				PropsKeys.LDAP_GROUP_MAPPINGS + postfix));
-
-		LogUtil.debug(_log, groupMappings);
-
-		return groupMappings;
-	}
-
-	public static String getPropertyPostfix(long ldapServerId) {
-		if (ldapServerId > 0) {
-			return StringPool.PERIOD + ldapServerId;
-		}
-
-		return StringPool.BLANK;
-	}
-
-	public static Properties getUserMappings(long ldapServerId, long companyId)
-			throws Exception {
-
-		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-
-		Properties userMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(companyId,
-				PropsKeys.LDAP_USER_MAPPINGS + postfix));
-
-		LogUtil.debug(_log, userMappings);
-
-		return userMappings;
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(LDAPSettingsUtil.class);
+
 }
