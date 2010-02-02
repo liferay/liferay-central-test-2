@@ -23,17 +23,17 @@
 package com.liferay.portal.security.ldap;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Properties;
-import java.io.IOException;
 
 /**
  * <a href="LDAPSettingsUtil.java.html"><b><i>View Source</i></b></a>
@@ -51,7 +51,7 @@ public class LDAPSettingsUtil {
 		else {
 			return false;
 		}
-	}	
+	}
 
 	public static boolean isExportEnabled(long companyId)
 		throws SystemException {
@@ -94,7 +94,6 @@ public class LDAPSettingsUtil {
 		}
 	}
 
-
 	public static boolean isNtlmEnabled(long companyId)
 		throws SystemException {
 
@@ -112,7 +111,7 @@ public class LDAPSettingsUtil {
 			return false;
 		}
 	}
-	
+
 	public static boolean isPasswordPolicyEnabled(long companyId)
 		throws SystemException {
 
@@ -126,7 +125,6 @@ public class LDAPSettingsUtil {
 			return false;
 		}
 	}
-
 
 	public static boolean isSiteMinderEnabled(long companyId)
 		throws SystemException {
@@ -145,7 +143,6 @@ public class LDAPSettingsUtil {
 			return false;
 		}
 	}
-
 
 	public static String getAuthSearchFilter(
 			long ldapServerId, long companyId, String emailAddress,
@@ -178,22 +175,41 @@ public class LDAPSettingsUtil {
 		return filter;
 	}
 
+	public static Properties getGroupMappings(long ldapServerId, long companyId)
+		throws Exception {
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		Properties groupMappings = PropertiesUtil.load(
+			PrefsPropsUtil.getString(companyId,
+				PropsKeys.LDAP_GROUP_MAPPINGS + postfix));
+
+		LogUtil.debug(_log, groupMappings);
+
+		return groupMappings;
+	}
+
 	public static String getPropertyPostfix(long ldapServerId) {
 		if (ldapServerId > 0) {
 			return StringPool.PERIOD + ldapServerId;
 		}
 
 		return StringPool.BLANK;
-	}	
-
-	public static Properties getUserMappings(long companyId)
-		throws IOException, SystemException {
-
-		return PropertiesUtil.load(
-			PrefsPropsUtil.getString(companyId, PropsKeys.LDAP_USER_MAPPINGS));
 	}
 
+	public static Properties getUserMappings(long ldapServerId, long companyId)
+			throws Exception {
 
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		Properties userMappings = PropertiesUtil.load(
+			PrefsPropsUtil.getString(companyId,
+				PropsKeys.LDAP_USER_MAPPINGS + postfix));
+
+		LogUtil.debug(_log, userMappings);
+
+		return userMappings;
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(LDAPSettingsUtil.class);
 }

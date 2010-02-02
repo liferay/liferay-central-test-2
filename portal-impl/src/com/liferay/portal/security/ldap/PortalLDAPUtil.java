@@ -24,7 +24,6 @@ package com.liferay.portal.security.ldap;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
@@ -33,7 +32,6 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -120,7 +118,8 @@ public class PortalLDAPUtil {
 				return;
 			}
 
-			Properties userMappings = getUserMappings(ldapServerId, companyId);
+			Properties userMappings = LDAPSettingsUtil.getUserMappings(
+				ldapServerId, companyId);
 			Binding binding = getUser(
 				ldapServerId, contact.getCompanyId(), user.getScreenName());
 			Name name = new CompositeName();
@@ -205,7 +204,8 @@ public class PortalLDAPUtil {
 				return;
 			}
 
-			Properties userMappings = getUserMappings(ldapServerId, companyId);
+			Properties userMappings = LDAPSettingsUtil.getUserMappings(
+				ldapServerId, companyId);
 			Binding binding = getUser(
 				ldapServerId, user.getCompanyId(), user.getScreenName());
 			Name name = new CompositeName();
@@ -361,7 +361,8 @@ public class PortalLDAPUtil {
 			String fullDistinguishedName, boolean includeReferenceAttributes)
 		throws Exception {
 
-		Properties groupMappings = getGroupMappings(ldapServerId, companyId);
+		Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
+			ldapServerId, companyId);
 
 		List<String> mappedGroupAttributeIds = new ArrayList<String>();
 
@@ -375,20 +376,6 @@ public class PortalLDAPUtil {
 		return _getAttributes(
 			ctx, fullDistinguishedName,
 			mappedGroupAttributeIds.toArray(new String[0]));
-	}
-
-	public static Properties getGroupMappings(long ldapServerId, long companyId)
-		throws Exception {
-
-		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-
-		Properties groupMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(companyId,
-				PropsKeys.LDAP_GROUP_MAPPINGS + postfix));
-
-		LogUtil.debug(_log, groupMappings);
-
-		return groupMappings;
 	}
 
 	public static List<SearchResult> getGroups(
@@ -533,7 +520,8 @@ public class PortalLDAPUtil {
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
-			Properties userMappings = getUserMappings(ldapServerId, companyId);
+			Properties userMappings = LDAPSettingsUtil.getUserMappings(
+				ldapServerId, companyId);
 
 			StringBuilder filter = new StringBuilder();
 
@@ -574,7 +562,8 @@ public class PortalLDAPUtil {
 			String fullDistinguishedName)
 		throws Exception {
 
-		Properties userMappings = getUserMappings(ldapServerId, companyId);
+		Properties userMappings = LDAPSettingsUtil.getUserMappings(
+			ldapServerId, companyId);
 
 		String[] mappedUserAttributeIds = {
 			userMappings.getProperty("screenName"),
@@ -589,20 +578,6 @@ public class PortalLDAPUtil {
 
 		return _getAttributes(
 			ctx, fullDistinguishedName, mappedUserAttributeIds);
-	}
-
-	public static Properties getUserMappings(long ldapServerId, long companyId)
-		throws Exception {
-
-		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-
-		Properties userMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(companyId,
-				PropsKeys.LDAP_USER_MAPPINGS + postfix));
-
-		LogUtil.debug(_log, userMappings);
-
-		return userMappings;
 	}
 
 	public static List<SearchResult> getUsers(
@@ -742,7 +717,8 @@ public class PortalLDAPUtil {
 
 		attributes = attributesTransformer.transformGroup(attributes);
 
-		Properties groupMappings = getGroupMappings(ldapServerId, companyId);
+		Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
+			ldapServerId, companyId);
 
 		LogUtil.debug(_log, groupMappings);
 
@@ -1020,7 +996,8 @@ public class PortalLDAPUtil {
 
 		attributes = attributesTransformer.transformUser(attributes);
 
-		Properties userMappings = getUserMappings(ldapServerId, companyId);
+		Properties userMappings = LDAPSettingsUtil.getUserMappings(
+			ldapServerId, companyId);
 
 		LogUtil.debug(_log, userMappings);
 
@@ -1266,7 +1243,7 @@ public class PortalLDAPUtil {
 				if (attribute != null) {
 					attribute.clear();
 
-					Properties groupMappings = getGroupMappings(
+					Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
 						ldapServerId, companyId);
 
 					String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);

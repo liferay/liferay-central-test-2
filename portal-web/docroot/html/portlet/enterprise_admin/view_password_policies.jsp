@@ -27,7 +27,7 @@
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
-boolean passwordPolicyEnabled = PortalLDAPUtil.isPasswordPolicyEnabled(company.getCompanyId());
+boolean passwordPolicyEnabled = LDAPSettingsUtil.isPasswordPolicyEnabled(company.getCompanyId());
 %>
 
 <c:if test="<%= passwordPolicyEnabled %>">

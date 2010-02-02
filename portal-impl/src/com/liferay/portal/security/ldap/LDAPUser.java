@@ -56,11 +56,11 @@ public class LDAPUser extends DummyDirContext {
 	}
 
 	public void setUser(User user, long ldapServerId) throws Exception {
-		String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		_user = user;
 
-		Properties userMappings = PortalLDAPUtil.getUserMappings(
+		Properties userMappings = LDAPSettingsUtil.getUserMappings(
 			ldapServerId, _user.getCompanyId());
 
 		_attributes = new BasicAttributes(true);

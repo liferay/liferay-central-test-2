@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.sso.cas.CASFilter;
@@ -154,7 +155,7 @@ public class CASAutoLogin implements AutoLogin {
 		LdapContext ctx = null;
 
 		try {
-			String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
+			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_BASE_DN + postfix);

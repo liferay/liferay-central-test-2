@@ -73,6 +73,7 @@
 <%@ page import="com.liferay.portal.WebsiteURLException" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.liveusers.LiveUsers" %>
+<%@ page import="com.liferay.portal.security.ldap.LDAPSettingsUtil" %>
 <%@ page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>

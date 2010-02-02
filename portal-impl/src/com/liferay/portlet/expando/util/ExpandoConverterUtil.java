@@ -22,13 +22,15 @@
 
 package com.liferay.portlet.expando.util;
 
-import com.liferay.portlet.expando.model.ExpandoColumnConstants;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 
 import java.io.Serializable;
+
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 /**
@@ -48,19 +50,19 @@ public class ExpandoConverterUtil {
 			if (type == ExpandoColumnConstants.BOOLEAN) {
 				return Boolean.parseBoolean(attribute);
 			}
-			else if(type == ExpandoColumnConstants.DOUBLE) {
+			else if (type == ExpandoColumnConstants.DOUBLE) {
 				return Double.parseDouble(attribute);
 			}
-			else if(type == ExpandoColumnConstants.FLOAT) {
+			else if (type == ExpandoColumnConstants.FLOAT) {
 				return Float.parseFloat(attribute);
 			}
-			else if(type == ExpandoColumnConstants.INTEGER) {
+			else if (type == ExpandoColumnConstants.INTEGER) {
 				return Integer.parseInt(attribute);
 			}
-			else if(type == ExpandoColumnConstants.LONG) {
+			else if (type == ExpandoColumnConstants.LONG) {
 				return Long.parseLong(attribute);
 			}
-			else if(type == ExpandoColumnConstants.SHORT) {
+			else if (type == ExpandoColumnConstants.SHORT) {
 				return  Long.parseLong(attribute);
 			}
 			else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
@@ -73,7 +75,7 @@ public class ExpandoConverterUtil {
 
 				return parsed;
 			}
-			else if(type == ExpandoColumnConstants.DOUBLE_ARRAY) {
+			else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
 				String[] vals = attribute.split(StringPool.COMMA);
 				Double[] parsed = new Double[vals.length];
 
@@ -83,7 +85,7 @@ public class ExpandoConverterUtil {
 
 				return parsed;
 			}
-			else if(type == ExpandoColumnConstants.FLOAT_ARRAY) {
+			else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
 				String[] vals = attribute.split(StringPool.COMMA);
 				Float[] parsed = new Float[vals.length];
 
@@ -93,7 +95,7 @@ public class ExpandoConverterUtil {
 
 				return parsed;
 			}
-			else if(type == ExpandoColumnConstants.INTEGER_ARRAY) {
+			else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
 				String[] vals = attribute.split(StringPool.COMMA);
 				Integer[] parsed = new Integer[vals.length];
 
@@ -103,7 +105,7 @@ public class ExpandoConverterUtil {
 
 				return parsed;
 			}
-			else if(type == ExpandoColumnConstants.LONG_ARRAY) {
+			else if (type == ExpandoColumnConstants.LONG_ARRAY) {
 				String[] vals = attribute.split(StringPool.COMMA);
 				Long[] parsed = new Long[vals.length];
 
@@ -113,7 +115,7 @@ public class ExpandoConverterUtil {
 
 				return parsed;
 			}
-			else if(type == ExpandoColumnConstants.SHORT_ARRAY) {
+			else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
 				String[] vals = attribute.split(StringPool.COMMA);
 				Short[] parsed = new Short[vals.length];
 
@@ -123,7 +125,7 @@ public class ExpandoConverterUtil {
 
 				return parsed;
 			}
-			else if(type == ExpandoColumnConstants.STRING_ARRAY) {
+			else if (type == ExpandoColumnConstants.STRING_ARRAY) {
 				return attribute.split(StringPool.COMMA);
 			}
 			else if (type == ExpandoColumnConstants.DATE) {

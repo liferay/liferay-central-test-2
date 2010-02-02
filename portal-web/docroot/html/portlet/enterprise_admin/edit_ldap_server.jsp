@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long ldapServerId = ParamUtil.getLong(request, "ldapServerId", 0);
 
-String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
+String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 String ldapServerName = ParamUtil.getString(request, "settings(ldap.server.name"+ postfix + ")", PrefsPropsUtil.getString(company.getCompanyId(), "ldap.server.name" + postfix, StringPool.BLANK));
 String ldapBaseProviderUrl = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_BASE_PROVIDER_URL + postfix + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL + postfix));

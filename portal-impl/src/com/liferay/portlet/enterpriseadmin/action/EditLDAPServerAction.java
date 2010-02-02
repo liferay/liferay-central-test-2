@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -102,7 +102,7 @@ public class EditLDAPServerAction extends PortletAction {
 
 		long ldapServerId = CounterLocalServiceUtil.increment();
 
-		String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		String[] keys = properties.keySet().toArray(new String[0]);
 
@@ -138,7 +138,7 @@ public class EditLDAPServerAction extends PortletAction {
 
 		// Remove preferences
 
-		String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		String[] keys = new String[_KEYS.length];
 
