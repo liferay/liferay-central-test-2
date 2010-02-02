@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -36,7 +37,15 @@ public class MessageTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
 		try {
-			String value = LanguageUtil.get(pageContext, _key);
+			String value =  StringPool.BLANK;
+
+			if (_arguments == null) {
+				value = LanguageUtil.get(pageContext, _key);
+			}
+			else {
+				value = LanguageUtil.format(
+						pageContext, _key, _arguments,_translateArguments);
+			}
 
 			pageContext.getOut().print(value);
 		}
@@ -51,10 +60,24 @@ public class MessageTag extends TagSupport {
 		return EVAL_PAGE;
 	}
 
+	public void setArguments(Object[] arguments) {
+		_arguments = arguments;
+	}
+
+	public void setArguments(String argument) {
+		_arguments = new Object[] {argument};
+	}
+
 	public void setKey(String key) {
 		_key = key;
 	}
 
+	public void setTranslateArguments(boolean translateArguments) {
+		_translateArguments = translateArguments;
+	}
+
+	private Object[] _arguments;
 	private String _key;
+	private boolean _translateArguments;
 
 }
