@@ -251,13 +251,16 @@ public class CASAutoLogin implements AutoLogin {
 		}
 
 		if (_log.isDebugEnabled()) {
-			String login = emailAddress;
-
-			if (Validator.isNull(login)) {
-				login = screenName;
+			if (Validator.isNotNull(emailAddress)) {
+				_log.debug(
+					"User with the email address " + emailAddress +
+						" was not found in any LDAP servers");
 			}
-
-			_log.debug("User " + login + " was not found in any LDAP servers");
+			else {
+				_log.debug(
+					"User with the screen name " + screenName +
+						" was not found in any LDAP servers");
+			}
 		}
 
 		return null;
