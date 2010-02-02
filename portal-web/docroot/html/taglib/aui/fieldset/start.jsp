@@ -36,4 +36,4 @@ String label = GetterUtil.getString((String)request.getAttribute("aui:fieldset:l
 		<aui:legend label="<%= label %>" />
 	</c:if>
 
-	<div class="aui-column-content">
+	<div class="aui-fieldset-content <%= column ? "aui-column-content" : StringPool.BLANK %>">
