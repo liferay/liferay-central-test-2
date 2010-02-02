@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.LDAPSettingsUtil;
+import com.liferay.portal.security.ldap.PortalLDAPImporter;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.sso.cas.CASFilter;
@@ -204,7 +205,7 @@ public class CASAutoLogin implements AutoLogin {
 					PortalLDAPUtil.getNameInNamespace(
 						ldapServerId, companyId, binding));
 
-				return PortalLDAPUtil.importLDAPUser(
+				return PortalLDAPImporter.importLDAPUser(
 					ldapServerId, companyId, ctx, attrs, StringPool.BLANK,
 					true);
 			}

@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.security.ldap.PortalLDAPImporter;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -58,7 +58,7 @@ public class LDAPImportJob implements IntervalJob {
 
 	public void execute(JobExecutionContext context) {
 		try {
-			PortalLDAPUtil.importFromLDAP();
+			PortalLDAPImporter.importFromLDAP();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
