@@ -201,7 +201,7 @@ if (step == 1) {
 
 					<%
 					if (filterManageableRoles) {
-						List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_ORGANIZATION, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+						List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_ORGANIZATION, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
 						roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
 
