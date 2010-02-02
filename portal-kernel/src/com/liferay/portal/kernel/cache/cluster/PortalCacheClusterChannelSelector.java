@@ -32,10 +32,10 @@ import java.util.List;
  */
 public interface PortalCacheClusterChannelSelector {
 
+	public long getSelectedNumber();
+
 	public PortalCacheClusterChannel select(
 		List<PortalCacheClusterChannel> portalCacheClusterChannels,
 		PortalCacheClusterEvent portalCacheClusterEvent);
-
-	public long selectedNumber();
 
 }

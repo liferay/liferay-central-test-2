@@ -36,33 +36,38 @@ import org.hibernate.cache.CacheProvider;
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
+@SuppressWarnings("deprecation")
 public class EhCacheProvider extends CacheProviderWrapper {
-
-	public EhCacheProvider() {
-		super("net.sf.ehcache.hibernate.EhCacheProvider");
-		_CACHE_PRIVIDER = _cacheProvider;
-	}
 
 	public static CacheManager getCacheManager() throws SystemException {
 		try {
-			Class clazz =
-				Class.forName("net.sf.ehcache.hibernate.EhCacheProvider");
-			Field filed = clazz.getDeclaredField("manager");
-			filed.setAccessible(true);
-			CacheManager cacheManager =
-				(CacheManager) filed.get(_CACHE_PRIVIDER);
+			Class<?> clazz = Class.forName(
+				"net.sf.ehcache.hibernate.EhCacheProvider");
+
+			Field field = clazz.getDeclaredField("manager");
+
+			field.setAccessible(true);
+
+			CacheManager cacheManager = (CacheManager)field.get(
+				_cacheProvider);
+
 			if (cacheManager == null) {
-				throw new SystemException(
-					"Underline CacheManger has been initialized yet, " +
-					"make sure you are not calling this method too early.");
+				throw new SystemException("CacheManager has been initialized");
 			}
+
 			return cacheManager;
 		}
-		catch (Exception ex) {
-			throw new SystemException(ex);
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 
-	private static CacheProvider _CACHE_PRIVIDER;
+	public EhCacheProvider() {
+		super("net.sf.ehcache.hibernate.EhCacheProvider");
+
+		_cacheProvider = cacheProvider;
+	}
+
+	private static CacheProvider _cacheProvider;
 
 }

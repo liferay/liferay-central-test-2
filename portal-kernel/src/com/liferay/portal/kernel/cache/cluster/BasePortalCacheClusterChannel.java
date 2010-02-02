@@ -35,21 +35,21 @@ import java.util.concurrent.atomic.AtomicLong;
  *
  * @author Shuyang Zhou
  */
-public abstract class BasePortalCacheClusterChannel extends Thread implements
-	PortalCacheClusterChannel, Runnable {
+public abstract class BasePortalCacheClusterChannel
+	extends Thread implements PortalCacheClusterChannel, Runnable {
 
 	public BasePortalCacheClusterChannel() {
-		//Warning! Do not try to start the dispatch thread from constructor,
-		//it is not thread safe! This thread has to be lazy started!
-		_dispatchThread = new Thread(this,
+		_dispatchThread = new Thread(
+			this,
 			"PortalCacheClusterChannel dispatch thread-" +
-			_dispatchThreadCounter.getAndIncrement());
+				_dispatchThreadCounter.getAndIncrement());
 		_eventQueue = new CoalescedPipe<PortalCacheClusterEvent>(
-				new PortalCacheClusterEventCoalesceComparator());
+			new PortalCacheClusterEventCoalesceComparator());
 	}
 
 	public void destroy() {
 		_destroy = true;
+
 		_dispatchThread.interrupt();
 	}
 
@@ -71,60 +71,59 @@ public abstract class BasePortalCacheClusterChannel extends Thread implements
 		while (true) {
 			try {
 				if (_destroy) {
-					//Flush out all pending event, refuse to accept new event.
 					Object[] events = _eventQueue.takeSnapshot();
+
 					for (Object event : events) {
-						dispatchEvent((PortalCacheClusterEvent) event);
+						dispatchEvent((PortalCacheClusterEvent)event);
+
 						_sentEventCounter.incrementAndGet();
 					}
+
 					break;
 				}
 				else {
 					try {
-						PortalCacheClusterEvent event = _eventQueue.take();
-						dispatchEvent(event);
+						PortalCacheClusterEvent portalCacheClusterEvent =
+							_eventQueue.take();
+
+						dispatchEvent(portalCacheClusterEvent);
+
 						_sentEventCounter.incrementAndGet();
 					}
-					catch (InterruptedException ignore) {
-						//Normally you should only get this exception when
-						//stopping dispatch thread.
+					catch (InterruptedException ie) {
 					}
 				}
 			}
 			catch (Throwable t) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Caught a throwable from dispatch thread, " +
-						"has to swallow it to protect dispatch thread", t);
+					_log.warn("Please fix the unexpected throwable", t);
 				}
-				//This should never happen, just a protection, but if it does
-				//happen, you may need check your code to prevent unchecking
-				//throwable
 			}
 		}
 	}
 
-	public void sendEvent(PortalCacheClusterEvent event) {
-		//Double checking to lazy start dispatch thread
+	public void sendEvent(PortalCacheClusterEvent portalCacheClusterEvent) {
 		if (_started == false) {
 			synchronized (this) {
 				if (_started == false) {
 					_dispatchThread.start();
+
 					_started = true;
 				}
 			}
 		}
+
 		try {
-			_eventQueue.put(event);
+			_eventQueue.put(portalCacheClusterEvent);
 		}
-		catch (InterruptedException ignored) {
+		catch (InterruptedException ie) {
 		}
 	}
 
-	private static final Log _log =
+	private static Log _log =
 		LogFactoryUtil.getLog(BasePortalCacheClusterChannel.class);
 
-	private static final AtomicInteger _dispatchThreadCounter =
-		new AtomicInteger(0);
+	private static AtomicInteger _dispatchThreadCounter = new AtomicInteger(0);
 
 	private volatile boolean _destroy = false;
 	private final Thread _dispatchThread;

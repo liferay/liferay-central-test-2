@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.cache.cluster;
 
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -36,10 +37,36 @@ public class PortalCacheClusterEvent implements Serializable {
 
 	public PortalCacheClusterEvent(
 		String cacheName, Serializable elementKey,
-		PortalCacheClusterEventType eventType) {
+		PortalCacheClusterEventType portalCacheClusterEventType) {
+
 		_cacheName = cacheName;
 		_elementKey = elementKey;
-		_eventType = eventType;
+		_portalCacheClusterEventType = portalCacheClusterEventType;
+	}
+
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		if (!(obj instanceof PortalCacheClusterEvent)) {
+			return false;
+		}
+
+		PortalCacheClusterEvent portalCacheClusterEvent =
+			(PortalCacheClusterEvent)obj;
+
+		if (Validator.equals(_cacheName, portalCacheClusterEvent._cacheName) &&
+			Validator.equals(
+				_elementKey, portalCacheClusterEvent._elementKey) &&
+			Validator.equals(
+				_portalCacheClusterEventType,
+				portalCacheClusterEvent._portalCacheClusterEventType)) {
+
+			return true;
+		}
+
+		return true;
 	}
 
 	public String getCacheName() {
@@ -51,61 +78,27 @@ public class PortalCacheClusterEvent implements Serializable {
 	}
 
 	public PortalCacheClusterEventType getEventType() {
-		return _eventType;
+		return _portalCacheClusterEventType;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final PortalCacheClusterEvent other = (PortalCacheClusterEvent) obj;
-		if ((this._cacheName == null) ?
-			(other._cacheName != null) :
-			!this._cacheName.equals(other._cacheName)) {
-			return false;
-		}
-		if (this._elementKey != other._elementKey &&
-			(this._elementKey == null ||
-			!this._elementKey.equals(other._elementKey))) {
-			return false;
-		}
-		if (this._eventType != other._eventType &&
-			(this._eventType == null ||
-			!this._eventType.equals(other._eventType))) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
 	public int hashCode() {
-		int hash = 7;
-		hash = 41 * hash +
-			(this._cacheName != null ? this._cacheName.hashCode() : 0);
-		hash = 41 * hash +
-			(this._elementKey != null ? this._elementKey.hashCode() : 0);
-		hash = 41 * hash +
-			(this._eventType != null ? this._eventType.hashCode() : 0);
-		return hash;
+		return toString().hashCode();
 	}
 
-	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
+
 		sb.append(_cacheName);
 		sb.append(StringPool.COLON);
 		sb.append(_elementKey.toString());
 		sb.append(StringPool.COLON);
-		sb.append(_eventType.toString());
+		sb.append(_portalCacheClusterEventType.toString());
+
 		return sb.toString();
 	}
 
 	private String _cacheName;
 	private Serializable _elementKey;
-	private PortalCacheClusterEventType _eventType;
+	private PortalCacheClusterEventType _portalCacheClusterEventType;
 
 }

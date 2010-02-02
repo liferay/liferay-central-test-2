@@ -37,6 +37,6 @@ public interface PortalCacheClusterChannel {
 
 	public long getSentEventNumber();
 
-	public void sendEvent(PortalCacheClusterEvent event);
+	public void sendEvent(PortalCacheClusterEvent portalCacheClusterEvent);
 
 }

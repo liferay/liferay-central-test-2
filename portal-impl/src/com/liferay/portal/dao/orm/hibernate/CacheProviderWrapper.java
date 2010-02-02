@@ -39,44 +39,44 @@ import org.hibernate.cache.CacheProvider;
  */
 public class CacheProviderWrapper implements CacheProvider {
 
-	public CacheProviderWrapper(String cacheProvider) {
+	public CacheProviderWrapper(CacheProvider cacheProvider) {
+		this.cacheProvider = cacheProvider;
+	}
+
+	public CacheProviderWrapper(String cacheProviderClassName) {
 		try {
-			_cacheProvider = (CacheProvider)Class.forName(
-				cacheProvider).newInstance();
+			cacheProvider = (CacheProvider)Class.forName(
+				cacheProviderClassName).newInstance();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 	}
 
-	public CacheProviderWrapper(CacheProvider cacheProvider) {
-		_cacheProvider = cacheProvider;
-	}
-
 	public Cache buildCache(String regionName, Properties properties)
 		throws CacheException {
 
 		return new CacheWrapper(
-			_cacheProvider.buildCache(regionName, properties));
+			cacheProvider.buildCache(regionName, properties));
 	}
 
 	public boolean isMinimalPutsEnabledByDefault() {
-		return _cacheProvider.isMinimalPutsEnabledByDefault();
+		return cacheProvider.isMinimalPutsEnabledByDefault();
 	}
 
 	public long nextTimestamp() {
-		return _cacheProvider.nextTimestamp();
+		return cacheProvider.nextTimestamp();
 	}
 
 	public void start(Properties properties) throws CacheException {
-		_cacheProvider.start(properties);
+		cacheProvider.start(properties);
 	}
 
 	public void stop() {
-		_cacheProvider.stop();
+		cacheProvider.stop();
 	}
 
-	protected CacheProvider _cacheProvider;
+	protected CacheProvider cacheProvider;
 
 	private static Log _log = LogFactoryUtil.getLog(CacheProviderWrapper.class);
 

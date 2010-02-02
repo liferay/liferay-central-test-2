@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.cache.ehcache.EhcachePortalCacheManager;
 import com.liferay.portal.dao.orm.hibernate.EhCacheProvider;
 import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterEvent;
+import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterEventType;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
@@ -35,8 +36,8 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 
 /**
- * <a href="ClusterLinkPortalCacheClusterRemoveListener.java.html"><b><i>
- * View Source</i></b></a>
+ * <a href="ClusterLinkPortalCacheClusterRemoveListener.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
@@ -44,22 +45,26 @@ public class ClusterLinkPortalCacheClusterRemoveListener
 	implements MessageListener {
 
 	public ClusterLinkPortalCacheClusterRemoveListener(
-		EhcachePortalCacheManager ehcachePortalCacheManager)
+			EhcachePortalCacheManager ehcachePortalCacheManager)
 		throws SystemException {
-		_portalCacheManager = ehcachePortalCacheManager.getEhcacheManager();
+
 		_hibernateCacheManager = EhCacheProvider.getCacheManager();
+		_portalCacheManager = ehcachePortalCacheManager.getEhcacheManager();
 	}
 
 	public void receive(Message message) {
-		PortalCacheClusterEvent event =
-			(PortalCacheClusterEvent) message.getPayload();
-		if (event == null) {
+		PortalCacheClusterEvent portalCacheClusterEvent =
+			(PortalCacheClusterEvent)message.getPayload();
+
+		if (portalCacheClusterEvent == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Received a message without payload.");
+				_log.warn("Payload is null");
 			}
+
 			return;
 		}
-		String cacheName = event.getCacheName();
+
+		String cacheName = portalCacheClusterEvent.getCacheName();
 
 		Cache cache = _portalCacheManager.getCache(cacheName);
 
@@ -68,23 +73,24 @@ public class ClusterLinkPortalCacheClusterRemoveListener
 		}
 
 		if (cache != null) {
-			switch(event.getEventType()){
-				case REMOVEALL:
-					cache.removeAll(true);
-					break;
-				default:
-					cache.remove(event.getElementKey(), true);
-					break;
-			}
+			PortalCacheClusterEventType portalCacheClusterEventType =
+				portalCacheClusterEvent.getEventType();
 
+			if (portalCacheClusterEventType.equals(
+					PortalCacheClusterEventType.REMOVEALL)) {
+
+				cache.removeAll(true);
+			}
+			else {
+				cache.remove(portalCacheClusterEvent.getElementKey(), true);
+			}
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(
-			ClusterLinkPortalCacheClusterRemoveListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ClusterLinkPortalCacheClusterRemoveListener.class);
 
-	private CacheManager _portalCacheManager;
 	private CacheManager _hibernateCacheManager;
+	private CacheManager _portalCacheManager;
 
 }

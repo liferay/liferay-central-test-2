@@ -25,24 +25,29 @@ package com.liferay.portal.kernel.cache.cluster;
 import java.util.Comparator;
 
 /**
- * <a href="PortalCacheClusterEventCoalesceComparator.java.html"><b><i>
- * View Source</i></b></a>
+ * <a href="PortalCacheClusterEventCoalesceComparator.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
 public class PortalCacheClusterEventCoalesceComparator
 	implements Comparator<PortalCacheClusterEvent> {
 
-	public PortalCacheClusterEventCoalesceComparator() {
-	}
-
 	public int compare(
-		PortalCacheClusterEvent event1, PortalCacheClusterEvent event2) {
-		if (event1 == null || event2 == null) {
+		PortalCacheClusterEvent portalCacheClusterEvent1,
+		PortalCacheClusterEvent portalCacheClusterEvent2) {
+
+		if ((portalCacheClusterEvent1 == null) ||
+			(portalCacheClusterEvent2 == null)) {
+
 			return 1;
 		}
-		if (event1.getCacheName().equals(event2.getCacheName()) &&
-			event1.getElementKey().equals(event2.getElementKey())) {
+
+		if (portalCacheClusterEvent1.getCacheName().equals(
+				portalCacheClusterEvent2.getCacheName()) &&
+			portalCacheClusterEvent1.getElementKey().equals(
+				portalCacheClusterEvent2.getElementKey())) {
+
 			return 0;
 		}
 		else {

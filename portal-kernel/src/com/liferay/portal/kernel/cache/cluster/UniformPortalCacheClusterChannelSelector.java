@@ -26,28 +26,28 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * <a href="UniformPortalCacheClusterChannelSelector.java.html"><b><i>
- * View Source</i></b></a>
+ * <a href="UniformPortalCacheClusterChannelSelector.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
 public class UniformPortalCacheClusterChannelSelector
-	implements PortalCacheClusterChannelSelector{
+	implements PortalCacheClusterChannelSelector {
+
+	public long getSelectedNumber() {
+		return _eventCounter.get();
+	}
 
 	public PortalCacheClusterChannel select(
 		List<PortalCacheClusterChannel> portalCacheClusterChannels,
 		PortalCacheClusterEvent portalCacheClusterEvent) {
 
 		long count = _eventCounter.getAndIncrement();
-		int channelNumber = portalCacheClusterChannels.size();
+		int size = portalCacheClusterChannels.size();
 
-		return portalCacheClusterChannels.get((int) (count % channelNumber));
+		return portalCacheClusterChannels.get((int)(count % size));
 	}
 
-	public long selectedNumber() {
-		return _eventCounter.get();
-	}
-
-	private final AtomicLong _eventCounter = new AtomicLong(0);
+	private AtomicLong _eventCounter = new AtomicLong(0);
 
 }

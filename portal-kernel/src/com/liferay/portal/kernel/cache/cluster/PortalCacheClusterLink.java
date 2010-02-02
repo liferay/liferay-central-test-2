@@ -35,11 +35,13 @@ public class PortalCacheClusterLink {
 	public void afterPropertiesSet() {
 		_portalCacheClusterChannels =
 			new ArrayList<PortalCacheClusterChannel>(_channelNumber);
+
 		for (int i = 0; i < _channelNumber; i++) {
 			_portalCacheClusterChannels.add(
 				_portalCacheClusterChannelFactory.
 					createPortalCacheClusterChannel());
 		}
+
 		if (_portalCacheClusterChannelSelector == null) {
 			_portalCacheClusterChannelSelector =
 				new UniformPortalCacheClusterChannelSelector();
@@ -48,19 +50,22 @@ public class PortalCacheClusterLink {
 
 	public void destroy() {
 		for (PortalCacheClusterChannel portalCacheClusterChannel :
-			_portalCacheClusterChannels) {
+				_portalCacheClusterChannels) {
+
 			portalCacheClusterChannel.destroy();
 		}
 	}
 
 	public long getSubmittedEventNumber() {
-		return _portalCacheClusterChannelSelector.selectedNumber();
+		return _portalCacheClusterChannelSelector.getSelectedNumber();
 	}
 
-	public void sendEvent(PortalCacheClusterEvent event) {
-		PortalCacheClusterChannel channel = _portalCacheClusterChannelSelector
-			.select(_portalCacheClusterChannels, event);
-		channel.sendEvent(event);
+	public void sendEvent(PortalCacheClusterEvent portalCacheClusterEvent) {
+		PortalCacheClusterChannel portalCacheClusterChannel =
+			_portalCacheClusterChannelSelector.select(
+				_portalCacheClusterChannels, portalCacheClusterEvent);
+
+		portalCacheClusterChannel.sendEvent(portalCacheClusterEvent);
 	}
 
 	public void setChannelNumber(int channelNumber) {
@@ -69,11 +74,13 @@ public class PortalCacheClusterLink {
 
 	public void setPortalCacheClusterChannelFactory(
 		PortalCacheClusterChannelFactory portalCacheClusterChannelFactory) {
+
 		_portalCacheClusterChannelFactory = portalCacheClusterChannelFactory;
 	}
 
 	public void setPortalCacheClusterChannelSelector(
 		PortalCacheClusterChannelSelector portalCacheClusterChannelSelector) {
+
 		_portalCacheClusterChannelSelector = portalCacheClusterChannelSelector;
 	}
 
@@ -81,8 +88,8 @@ public class PortalCacheClusterLink {
 
 	private int _channelNumber = _DEFAULT_CHANNEL_NUMBER;
 	private PortalCacheClusterChannelFactory _portalCacheClusterChannelFactory;
+	private List<PortalCacheClusterChannel> _portalCacheClusterChannels;
 	private PortalCacheClusterChannelSelector
 		_portalCacheClusterChannelSelector;
-	private List<PortalCacheClusterChannel> _portalCacheClusterChannels;
 
 }

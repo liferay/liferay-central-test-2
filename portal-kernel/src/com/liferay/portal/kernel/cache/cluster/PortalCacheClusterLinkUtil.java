@@ -38,8 +38,10 @@ public class PortalCacheClusterLinkUtil {
 				_log.warn(
 					"PortalCacheClusterLinkUtil has not been initialized.");
 			}
+
 			return null;
 		}
+
 		return _portalCacheClusterLink;
 	}
 
@@ -49,29 +51,37 @@ public class PortalCacheClusterLinkUtil {
 				_log.warn(
 					"PortalCacheClusterLinkUtil has not been initialized.");
 			}
+
 			return -1;
 		}
+
 		return _portalCacheClusterLink.getSubmittedEventNumber();
 	}
 
-	public static void sendEvent(PortalCacheClusterEvent event) {
+	public static void sendEvent(
+		PortalCacheClusterEvent portalCacheClusterEvent) {
+
 		if (_portalCacheClusterLink == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"PortalCacheClusterLinkUtil has not been initialized.");
 			}
+
 			return;
 		}
-		_portalCacheClusterLink.sendEvent(event);
+
+		_portalCacheClusterLink.sendEvent(portalCacheClusterEvent);
 	}
 
 	public void setPortalCacheClusterLink(
 		PortalCacheClusterLink portalCacheClusterLink) {
+
 		_portalCacheClusterLink = portalCacheClusterLink;
 	}
 
 	private static final Log _log =
 		LogFactoryUtil.getLog(PortalCacheClusterLinkUtil.class);
+
 	private static PortalCacheClusterLink _portalCacheClusterLink;
 
 }

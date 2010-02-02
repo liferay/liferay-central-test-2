@@ -216,6 +216,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.kernel.cache.cluster.BasePortalCacheClusterChannel">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.kernel.dao.orm.QueryUtil">
 		<priority value="WARN" />
 	</category>

@@ -39,19 +39,21 @@ public class ClusterLinkPortalCacheClusterChannel
 
 	public ClusterLinkPortalCacheClusterChannel(
 		String destination, Priority priority) {
+
 		_destination = destination;
 		_priority = priority;
 	}
 
-	@Override
-	public void dispatchEvent(PortalCacheClusterEvent event) {
+	public void dispatchEvent(PortalCacheClusterEvent portalCacheClusterEvent) {
 		Message message = new Message();
-		message.setPayload(event);
+
 		message.setDestinationName(_destination);
+		message.setPayload(portalCacheClusterEvent);
+
 		ClusterLinkUtil.sendMulticastMessage(message, _priority);
 	}
 
-	private final String _destination;
-	private final Priority _priority;
+	private String _destination;
+	private Priority _priority;
 
 }

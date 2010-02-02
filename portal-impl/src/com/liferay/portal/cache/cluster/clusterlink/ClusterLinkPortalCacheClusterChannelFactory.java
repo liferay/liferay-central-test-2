@@ -32,19 +32,21 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * <a href="ClusterLinkPortalCacheClusterChannelFactory.java.html"><b><i>
- * View Source</i></b></a>
+ * <a href="ClusterLinkPortalCacheClusterChannelFactory.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class ClusterLinkPortalCacheClusterChannelFactory implements
-	PortalCacheClusterChannelFactory {
+public class ClusterLinkPortalCacheClusterChannelFactory
+	implements PortalCacheClusterChannelFactory {
 
 	public ClusterLinkPortalCacheClusterChannelFactory(
 		String destination, List<Priority> priorities) {
+
 		_counter = new AtomicInteger(0);
 		_destination = destination;
 		_priorities = priorities;
+
 		Collections.sort(priorities);
 	}
 
@@ -52,16 +54,18 @@ public class ClusterLinkPortalCacheClusterChannelFactory implements
 		throws PortalCacheClusterException {
 
 		int count = _counter.getAndIncrement();
+
 		if (count >= _priorities.size()) {
 			throw new IllegalStateException(
-				"Can't create more than " + _priorities.size() + " channels.");
+				"Cannot create more than " + _priorities.size() + " channels");
 		}
+
 		return new ClusterLinkPortalCacheClusterChannel(
 			_destination, _priorities.get(count));
 	}
 
-	private final AtomicInteger _counter;
-	private final String _destination;
-	private final List<Priority> _priorities;
+	private AtomicInteger _counter;
+	private String _destination;
+	private List<Priority> _priorities;
 
 }
