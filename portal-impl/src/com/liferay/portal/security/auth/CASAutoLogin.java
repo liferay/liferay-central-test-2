@@ -22,7 +22,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -148,15 +147,13 @@ public class CASAutoLogin implements AutoLogin {
 	}
 
 	protected User importLDAPUser(
-			long companyId, String emailAddress, String screenName)
+			long companyId, long ldapServerId, String emailAddress,
+			String screenName)
 		throws Exception {
 
 		LdapContext ctx = null;
 
 		try {
-			long ldapServerId = PortalLDAPUtil.getLdapServerId(
-				companyId, screenName);
-
 			String postfix = PortalLDAPUtil.getPropertyPostfix(ldapServerId);
 
 			String baseDN = PrefsPropsUtil.getString(
@@ -211,8 +208,7 @@ public class CASAutoLogin implements AutoLogin {
 					true);
 			}
 			else {
-				throw new NoSuchUserException(
-					"User " + screenName + " was not found in the LDAP server");
+				return null;
 			}
 		}
 		catch (Exception e) {
@@ -232,6 +228,39 @@ public class CASAutoLogin implements AutoLogin {
 				ctx.close();
 			}
 		}
+	}
+
+	protected User importLDAPUser(
+			long companyId, String emailAddress, String screenName)
+		throws Exception {
+
+		long[] ldapServerIds = StringUtil.split(
+			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+
+		if (ldapServerIds.length <= 0) {
+			ldapServerIds = new long[] {0};
+		}
+
+		for (long ldapServerId : ldapServerIds) {
+			User user = importLDAPUser(
+				companyId, ldapServerId, emailAddress, screenName);
+
+			if (user != null) {
+				return user;
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			String login = emailAddress;
+
+			if (Validator.isNull(login)) {
+				login = screenName;
+			}
+
+			_log.debug("User " + login + " was not found in any LDAP servers");
+		}
+
+		return null;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CASAutoLogin.class);
