@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -60,10 +61,13 @@ public class RequestHeaderAutoLogin extends CASAutoLogin {
 
 			User user = null;
 
-			try {
-				user = importLDAPUser(companyId, StringPool.BLANK, screenName);
-			}
-			catch (SystemException se) {
+			if (LDAPSettingsUtil.isImportEnabled(companyId)) {
+				try {
+					user = importLDAPUser(
+						companyId, StringPool.BLANK, screenName);
+				}
+				catch (SystemException se) {
+				}
 			}
 
 			if (user == null) {
