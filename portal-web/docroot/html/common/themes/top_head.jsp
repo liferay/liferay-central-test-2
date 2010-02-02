@@ -307,6 +307,7 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 
 	</style>
 </c:if>
+
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.common.themes.top_head.jsp");
 %>
