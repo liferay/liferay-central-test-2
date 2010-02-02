@@ -243,21 +243,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public void addUserGroups(long userId, long[] groupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		userPersistence.addGroups(userId, groupIds);
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		Role role = rolePersistence.findByC_N(
-			user.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
-
-		for (int i = 0; i < groupIds.length; i++) {
-			long groupId = groupIds[i];
-
-			userGroupRoleLocalService.addUserGroupRoles(
-				userId, groupId, new long[] {role.getRoleId()});
-		}
 
 		PermissionCacheUtil.clearCache();
 	}

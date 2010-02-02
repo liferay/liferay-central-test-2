@@ -28,9 +28,12 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserGroupRoleServiceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -83,6 +86,18 @@ public class EditUserRolesAction extends PortletAction {
 		try {
 			ActionUtil.getGroup(renderRequest);
 			ActionUtil.getRole(renderRequest);
+
+			Role role = (Role)renderRequest.getAttribute(WebKeys.ROLE);
+
+			if (role != null) {
+				String name = role.getName();
+
+				if (name.equals(RoleConstants.COMMUNITY_MEMBER) ||
+					name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
+
+					throw new NoSuchRoleException();
+				}
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||

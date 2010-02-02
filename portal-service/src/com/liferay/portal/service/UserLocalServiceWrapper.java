@@ -123,14 +123,12 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	}
 
 	public void addGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		_userLocalService.addGroupUsers(groupId, userIds);
 	}
 
 	public void addOrganizationUsers(long organizationId, long[] userIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		_userLocalService.addOrganizationUsers(organizationId, userIds);
 	}
 
@@ -739,8 +737,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	}
 
 	public void updateGroups(long userId, long[] newGroupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		_userLocalService.updateGroups(userId, newGroupIds);
 	}
 

@@ -38,8 +38,6 @@ import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.lar.UserIdStrategy;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
-import com.liferay.portal.model.Role;
-import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupConstants;
@@ -59,19 +57,9 @@ import java.util.Map;
 public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		groupPersistence.addUserGroups(groupId, userGroupIds);
-
-		Group group = groupPersistence.findByPrimaryKey(groupId);
-
-		Role role = rolePersistence.findByC_N(
-			group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
-
-		for (long userGroupId : userGroupIds) {
-			userGroupGroupRoleLocalService.addUserGroupGroupRoles(
-				userGroupId, groupId, new long[] {role.getRoleId()});
-		}
 
 		PermissionCacheUtil.clearCache();
 	}

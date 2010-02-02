@@ -252,17 +252,13 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			Role communityMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
 
-			if (!roles.contains(communityMemberRole)) {
-				roles.add(communityMemberRole);
-			}
+			roles.add(communityMemberRole);
 		}
 		else if (group.isOrganization()) {
 			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
 
-			if (!roles.contains(organizationMemberRole)) {
-				roles.add(organizationMemberRole);
-			}
+			roles.add(organizationMemberRole);
 		}
 	}
 

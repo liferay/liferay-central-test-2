@@ -80,14 +80,22 @@ RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 
 		ResultRow row = new ResultRow(curRole, curRole.getRoleId(), i);
 
-		PortletURL rowURL = renderResponse.createRenderURL();
+		PortletURL rowURL = null;
 
-		rowURL.setWindowState(WindowState.MAXIMIZED);
+		String name = curRole.getName();
 
-		rowURL.setParameter("struts_action", "/communities/edit_user_roles");
-		rowURL.setParameter("redirect", redirect);
-		rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-		rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));
+		if (!name.equals(RoleConstants.COMMUNITY_MEMBER) &&
+			!name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
+
+			rowURL = renderResponse.createRenderURL();
+
+			rowURL.setWindowState(WindowState.MAXIMIZED);
+
+			rowURL.setParameter("struts_action", "/communities/edit_user_roles");
+			rowURL.setParameter("redirect", redirect);
+			rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+			rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));
+		}
 
 		// Name
 

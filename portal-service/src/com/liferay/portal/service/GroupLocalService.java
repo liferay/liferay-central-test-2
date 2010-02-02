@@ -115,8 +115,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void addUserGroups(long userId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void checkCompanyGroup(long companyId)
 		throws com.liferay.portal.PortalException,

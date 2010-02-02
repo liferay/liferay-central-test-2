@@ -132,8 +132,7 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 	}
 
 	public void addUserGroups(long userId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		_groupLocalService.addUserGroups(userId, groupIds);
 	}
 

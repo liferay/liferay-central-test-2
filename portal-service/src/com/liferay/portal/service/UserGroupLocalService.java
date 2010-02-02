@@ -97,8 +97,7 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup addUserGroup(long userId,
 		long companyId, java.lang.String name, java.lang.String description)

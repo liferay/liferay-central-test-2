@@ -106,8 +106,7 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 	}
 
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		_userGroupLocalService.addGroupUserGroups(groupId, userGroupIds);
 	}
 

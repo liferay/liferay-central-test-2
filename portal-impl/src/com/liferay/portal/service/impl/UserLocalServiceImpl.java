@@ -262,19 +262,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void addGroupUsers(long groupId, long[] userIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		groupPersistence.addUsers(groupId, userIds);
-
-		Group group = groupPersistence.findByPrimaryKey(groupId);
-
-		Role role = rolePersistence.findByC_N(
-			group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
-
-		for (long userId : userIds) {
-			userGroupRoleLocalService.addUserGroupRoles(
-				userId, groupId, new long[] {role.getRoleId()});
-		}
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
@@ -284,24 +274,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void addOrganizationUsers(long organizationId, long[] userIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		organizationPersistence.addUsers(organizationId, userIds);
-
-		Organization organization = organizationPersistence.findByPrimaryKey(
-			organizationId);
-
-		Group group = organization.getGroup();
-
-		long groupId = group.getGroupId();
-
-		Role role = rolePersistence.findByC_N(
-			group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
-
-		for (long userId : userIds) {
-			userGroupRoleLocalService.addUserGroupRoles(
-				userId, groupId, new long[] {role.getRoleId()});
-		}
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
@@ -1848,7 +1823,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void updateGroups(long userId, long[] newGroupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (newGroupIds == null) {
 			return;
@@ -2383,17 +2358,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					userGroupRoles.remove(userGroupRole);
 				}
 				else {
-					Role role = roleLocalService.getRole(
-						userGroupRole.getRoleId());
-
-					String name = role.getName();
-
-					if (!name.equals(RoleConstants.COMMUNITY_MEMBER) &&
-						!name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
-
-						userGroupRoleLocalService.deleteUserGroupRole(
-							userGroupRole);
-					}
+					userGroupRoleLocalService.deleteUserGroupRole(
+						userGroupRole);
 				}
 			}
 

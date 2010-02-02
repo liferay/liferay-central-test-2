@@ -135,8 +135,7 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static void addUserGroups(long userId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		getService().addUserGroups(userId, groupIds);
 	}
 
