@@ -421,10 +421,26 @@ AUI().add(
 			ColumnPortletItem,
 			Liferay.Layout.ColumnPortlet,
 			{
+				dragItem: 0,
+
 				getCurrentPortletTitle: function() {
 					var instance = this;
 
 					return instance.get('currentPortletNode').attr('title');
+				},
+
+				_createDrag: function(node) {
+					var instance = this;
+
+					var delay = 30;
+					var dragDelay = (delay*instance.dragItem++);
+
+					setTimeout(
+						function() {
+							ColumnPortletItem.superclass._createDrag.apply(instance, [node]);
+						},
+						dragDelay
+					);
 				},
 
 				_addPortlet: function(portletNode, options) {
