@@ -111,6 +111,7 @@ if (step == 1) {
 						href="<%= rowHREF %>"
 						name="parent-organization"
 					>
+
 						<%
 						String parentOrganizationName = StringPool.BLANK;
 
@@ -126,6 +127,7 @@ if (step == 1) {
 
 						buffer.append(HtmlUtil.escape(parentOrganizationName));
 						%>
+
 					</liferay-ui:search-container-column-text>
 
 					<liferay-ui:search-container-column-text
