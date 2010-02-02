@@ -125,6 +125,13 @@ public class ResourcePermissionLocalServiceImpl
 		return resourcePermissionPersistence.findByRoleId(roleId);
 	}
 
+	public List<ResourcePermission> getRoleResourcePermissions(
+			long roleId, int[] scopes, int start, int end)
+		throws SystemException {
+
+		return resourcePermissionFinder.findByR_S(roleId, scopes, start, end);
+	}
+
 	public boolean hasActionId(
 		ResourcePermission resourcePermission, ResourceAction resourceAction) {
 
