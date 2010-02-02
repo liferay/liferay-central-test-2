@@ -245,6 +245,27 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 	}
 
+	protected void addRequiredMemberRole(Group group, List<Role> roles)
+		throws Exception {
+
+		if (group.isCommunity()) {
+			Role communityMemberRole = RoleLocalServiceUtil.getRole(
+				group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+
+			if (!roles.contains(communityMemberRole)) {
+				roles.add(communityMemberRole);
+			}
+		}
+		else if (group.isOrganization()) {
+			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
+				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
+
+			if (!roles.contains(organizationMemberRole)) {
+				roles.add(organizationMemberRole);
+			}
+		}
+	}
+
 	protected List<Resource> getResources(
 			long companyId, long groupId, String name, String primKey,
 			String actionId)
@@ -378,7 +399,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			groups.addAll(userOrgGroups);
 			groups.addAll(userUserGroupGroups);
 
-			List<Role> roles = new ArrayList<Role>(10);
+			List<Role> roles = new UniqueList<Role>();
 
 			if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 3) ||
 				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4) ||
@@ -406,6 +427,12 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 						userId, groupId);
 
 				roles.addAll(userGroupGroupRoles);
+
+				if (!userGroups.isEmpty()) {
+					Group group = userGroups.get(0);
+
+					addRequiredMemberRole(group, roles);
+				}
 			}
 			else {
 				roles = new ArrayList<Role>();
