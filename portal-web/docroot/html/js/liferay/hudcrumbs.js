@@ -57,7 +57,7 @@ AUI().add(
 
 					instance._calculateDimensions();
 
-					win.on('scroll', instance._toggleCrumbs, instance);
+					win.on('scroll', instance._onScroll, instance);
 					win.on('resize', instance._calculateDimensions, instance);
 
 					body.append(hudcrumbs);
@@ -93,7 +93,7 @@ AUI().add(
 					instance.set('hostMidpoint', midpoint);
 				},
 
-				_toggleCrumbs: function(event) {
+				_onScroll: function(event) {
 					var instance = this;
 
 					var scrollTop = event.currentTarget.get('scrollTop');
@@ -105,7 +105,11 @@ AUI().add(
 						action = 'show';
 					}
 
-					hudcrumbs[action]();
+					if (instance.lastAction != action) {
+						hudcrumbs[action]();
+					}
+
+					instance.lastAction = action;
 				}
 			}
 		);
