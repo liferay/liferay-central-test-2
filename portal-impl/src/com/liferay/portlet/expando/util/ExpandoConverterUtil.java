@@ -37,63 +37,8 @@ import java.util.Date;
  * @author Edward Han
  */
 public class ExpandoConverterUtil {
-	public static String getStringFromAttribute(
-			int type, Serializable attribute) {
-
-		if (attribute == null) {
-			return StringPool.BLANK;
-		}
-
-		if (type == ExpandoColumnConstants.BOOLEAN ||
-			type == ExpandoColumnConstants.DOUBLE ||
-			type == ExpandoColumnConstants.FLOAT ||
-			type == ExpandoColumnConstants.INTEGER ||
-			type == ExpandoColumnConstants.LONG ||
-			type == ExpandoColumnConstants.SHORT) {
-
-			return String.valueOf(attribute);
-		}
-		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY ||
-			type == ExpandoColumnConstants.DOUBLE_ARRAY ||
-			type == ExpandoColumnConstants.FLOAT_ARRAY ||
-			type == ExpandoColumnConstants.INTEGER_ARRAY ||
-			type == ExpandoColumnConstants.LONG_ARRAY ||
-			type == ExpandoColumnConstants.SHORT_ARRAY ||
-			type == ExpandoColumnConstants.STRING_ARRAY) {
-
-			return _convertToArray((Object[]) attribute);
-		}
-		else if (type == ExpandoColumnConstants.DATE) {
-			SimpleDateFormat dateFormatter = new SimpleDateFormat(
-				_DEFAULT_DATE_FORMAT);
-			return dateFormatter.format((Date) attribute);
-		}
-		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-			Date[] vals = (Date[]) attribute;
-
-			StringBuilder sb = new StringBuilder();
-
-			if (vals.length > 0) {
-				int i;
-				for (i = 0; i < vals.length - 1; i ++) {
-					SimpleDateFormat dateFormatter = new SimpleDateFormat(
-						_DEFAULT_DATE_FORMAT);
-					sb.append(dateFormatter.format(vals[i]));
-					sb.append(StringPool.COMMA);
-				}
-
-				sb.append(vals[i]);
-			}
-
-			return sb.toString();
-		}
-		else {
-			return attribute.toString();
-		}
-	}
-
 	public static Serializable getAttributeFromString(
-			int type, String attribute) {
+		int type, String attribute) {
 
 		if (attribute == null) {
 			return null;
@@ -205,6 +150,61 @@ public class ExpandoConverterUtil {
 			_log.warn(e);
 
 			return null;
+		}
+	}
+
+	public static String getStringFromAttribute(
+			int type, Serializable attribute) {
+
+		if (attribute == null) {
+			return StringPool.BLANK;
+		}
+
+		if (type == ExpandoColumnConstants.BOOLEAN ||
+			type == ExpandoColumnConstants.DOUBLE ||
+			type == ExpandoColumnConstants.FLOAT ||
+			type == ExpandoColumnConstants.INTEGER ||
+			type == ExpandoColumnConstants.LONG ||
+			type == ExpandoColumnConstants.SHORT) {
+
+			return String.valueOf(attribute);
+		}
+		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY ||
+			type == ExpandoColumnConstants.DOUBLE_ARRAY ||
+			type == ExpandoColumnConstants.FLOAT_ARRAY ||
+			type == ExpandoColumnConstants.INTEGER_ARRAY ||
+			type == ExpandoColumnConstants.LONG_ARRAY ||
+			type == ExpandoColumnConstants.SHORT_ARRAY ||
+			type == ExpandoColumnConstants.STRING_ARRAY) {
+
+			return _convertToArray((Object[]) attribute);
+		}
+		else if (type == ExpandoColumnConstants.DATE) {
+			SimpleDateFormat dateFormatter = new SimpleDateFormat(
+				_DEFAULT_DATE_FORMAT);
+			return dateFormatter.format((Date) attribute);
+		}
+		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
+			Date[] vals = (Date[]) attribute;
+
+			StringBuilder sb = new StringBuilder();
+
+			if (vals.length > 0) {
+				int i;
+				for (i = 0; i < vals.length - 1; i ++) {
+					SimpleDateFormat dateFormatter = new SimpleDateFormat(
+						_DEFAULT_DATE_FORMAT);
+					sb.append(dateFormatter.format(vals[i]));
+					sb.append(StringPool.COMMA);
+				}
+
+				sb.append(vals[i]);
+			}
+
+			return sb.toString();
+		}
+		else {
+			return attribute.toString();
 		}
 	}
 
