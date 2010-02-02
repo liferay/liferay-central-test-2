@@ -433,7 +433,7 @@ AUI().add(
 					var instance = this;
 
 					var delay = 30;
-					var dragDelay = (delay*instance.dragItem++);
+					var dragDelay = (delay * instance.dragItem++);
 
 					setTimeout(
 						function() {
