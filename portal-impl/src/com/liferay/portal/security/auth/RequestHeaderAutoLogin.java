@@ -22,7 +22,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -66,7 +65,7 @@ public class RequestHeaderAutoLogin extends CASAutoLogin {
 					user = importLDAPUser(
 						companyId, StringPool.BLANK, screenName);
 				}
-				catch (SystemException se) {
+				catch (Exception e) {
 				}
 			}
 
