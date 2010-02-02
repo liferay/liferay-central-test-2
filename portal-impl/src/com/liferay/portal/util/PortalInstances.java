@@ -37,6 +37,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -372,7 +373,7 @@ public class PortalInstances {
 		// LDAP Import
 
 		try {
-			if (PortalLDAPUtil.isImportOnStartup(companyId)) {
+			if (LDAPSettingsUtil.isImportOnStartup(companyId)) {
 				PortalLDAPUtil.importFromLDAP(companyId);
 			}
 		}

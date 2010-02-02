@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -54,7 +54,7 @@ public class SiteMinderAutoLogin extends CASAutoLogin {
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
 
-			if (!PortalLDAPUtil.isSiteMinderEnabled(companyId)) {
+			if (!LDAPSettingsUtil.isSiteMinderEnabled(companyId)) {
 				return credentials;
 			}
 

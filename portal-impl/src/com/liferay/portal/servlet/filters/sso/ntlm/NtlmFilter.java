@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -110,7 +110,7 @@ public class NtlmFilter extends BasePortalFilter {
 
 		long companyId = PortalInstances.getCompanyId(request);
 
-		if (PortalLDAPUtil.isNtlmEnabled(companyId)) {
+		if (LDAPSettingsUtil.isNtlmEnabled(companyId)) {
 			String domainController = _filterConfig.getInitParameter(
 				"jcifs.http.domainController");
 			String domain = _filterConfig.getInitParameter(

@@ -36,7 +36,7 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 
@@ -162,7 +162,7 @@ public class PasswordPolicyLocalServiceImpl
 	public PasswordPolicy getDefaultPasswordPolicy(long companyId)
 		throws PortalException, SystemException {
 
-		if (PortalLDAPUtil.isPasswordPolicyEnabled(companyId)) {
+		if (LDAPSettingsUtil.isPasswordPolicyEnabled(companyId)) {
 			return null;
 		}
 
@@ -190,7 +190,7 @@ public class PasswordPolicyLocalServiceImpl
 			long companyId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		if (PortalLDAPUtil.isPasswordPolicyEnabled(companyId)) {
+		if (LDAPSettingsUtil.isPasswordPolicyEnabled(companyId)) {
 			return null;
 		}
 
@@ -224,7 +224,7 @@ public class PasswordPolicyLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
+		if (LDAPSettingsUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
 			return null;
 		}
 

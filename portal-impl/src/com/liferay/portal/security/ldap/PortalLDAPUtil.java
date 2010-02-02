@@ -103,7 +103,8 @@ public class PortalLDAPUtil {
 	public static void exportToLDAP(Contact contact) throws Exception {
 		long companyId = contact.getCompanyId();
 
-		if (!isAuthEnabled(companyId) || !isExportEnabled(companyId)) {
+		if (!LDAPSettingsUtil.isAuthEnabled(companyId) ||
+			!LDAPSettingsUtil.isExportEnabled(companyId)) {
 			return;
 		}
 
@@ -190,7 +191,8 @@ public class PortalLDAPUtil {
 	public static void exportToLDAP(User user) throws Exception {
 		long companyId = user.getCompanyId();
 
-		if (!isAuthEnabled(companyId) || !isExportEnabled(companyId)) {
+		if (!LDAPSettingsUtil.isAuthEnabled(companyId) ||
+			!LDAPSettingsUtil.isExportEnabled(companyId)) {
 			return;
 		}
 
@@ -286,41 +288,10 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static String getAuthSearchFilter(
-			long ldapServerId, long companyId, String emailAddress,
-			String screenName, String userId)
-		throws SystemException {
-
-		String postfix = getPropertyPostfix(ldapServerId);
-
-		String filter = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER + postfix);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Search filter before transformation " + filter);
-		}
-
-		filter = StringUtil.replace(
-			filter,
-			new String[] {
-				"@company_id@", "@email_address@", "@screen_name@", "@user_id@"
-			},
-			new String[] {
-				String.valueOf(companyId), emailAddress, screenName,
-				userId
-			});
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Search filter after transformation " + filter);
-		}
-
-		return filter;
-	}
-
 	public static LdapContext getContext(long ldapServerId, long companyId)
 		throws Exception {
 
-		String postfix = getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		String baseProviderURL = PrefsPropsUtil.getString(
 			companyId, PropsKeys.LDAP_BASE_PROVIDER_URL + postfix);
@@ -409,7 +380,7 @@ public class PortalLDAPUtil {
 	public static Properties getGroupMappings(long ldapServerId, long companyId)
 		throws Exception {
 
-		String postfix = getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		Properties groupMappings = PropertiesUtil.load(
 			PrefsPropsUtil.getString(companyId,
@@ -433,7 +404,7 @@ public class PortalLDAPUtil {
 			long ldapServerId, long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
-		String postfix = getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		String baseDN = PrefsPropsUtil.getString(
 			companyId, PropsKeys.LDAP_BASE_DN + postfix);
@@ -517,7 +488,7 @@ public class PortalLDAPUtil {
 			long ldapServerId, long companyId, Binding binding)
 		throws Exception {
 
-		String postfix = getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		String baseDN = PrefsPropsUtil.getString(
 			companyId, PropsKeys.LDAP_BASE_DN + postfix);
@@ -544,19 +515,11 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static String getPropertyPostfix(long ldapServerId) {
-		if (ldapServerId > 0) {
-			return StringPool.PERIOD + ldapServerId;
-		}
-
-		return StringPool.BLANK;
-	}
-
 	public static Binding getUser(
 			long ldapServerId, long companyId, String screenName)
 		throws Exception {
 
-		String postfix = getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		LdapContext ctx = getContext(ldapServerId, companyId);
 
@@ -631,7 +594,7 @@ public class PortalLDAPUtil {
 	public static Properties getUserMappings(long ldapServerId, long companyId)
 		throws Exception {
 
-		String postfix = getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		Properties userMappings = PropertiesUtil.load(
 			PrefsPropsUtil.getString(companyId,
@@ -655,7 +618,7 @@ public class PortalLDAPUtil {
 			long ldapServerId, long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
-		String postfix = getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		String baseDN = PrefsPropsUtil.getString(
 			companyId, PropsKeys.LDAP_BASE_DN + postfix);
@@ -668,7 +631,7 @@ public class PortalLDAPUtil {
 	public static String getUsersDN(long ldapServerId, long companyId)
 		throws Exception {
 
-		String postfix = getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		return PrefsPropsUtil.getString(companyId,
 			PropsKeys.LDAP_USERS_DN + postfix);
@@ -695,7 +658,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static void importFromLDAP(long companyId) throws Exception {
-		if (!isImportEnabled(companyId)) {
+		if (!LDAPSettingsUtil.isImportEnabled(companyId)) {
 			return;
 		}
 
@@ -710,7 +673,7 @@ public class PortalLDAPUtil {
 	public static void importFromLDAP(long ldapServerId, long companyId)
 		throws Exception {
 
-		if (!isImportEnabled(companyId)) {
+		if (!LDAPSettingsUtil.isImportEnabled(companyId)) {
 			return;
 		}
 
@@ -772,7 +735,7 @@ public class PortalLDAPUtil {
 			Attributes attributes, boolean importGroupMembership)
 		throws Exception {
 
-		String postfix = getPropertyPostfix(ldapServerId);
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		AttributesTransformer attributesTransformer =
 			AttributesTransformerFactory.getInstance();
@@ -874,109 +837,6 @@ public class PortalLDAPUtil {
 		}
 		finally {
 			LDAPUserTransactionThreadLocal.setOriginatesFromLDAP(false);
-		}
-	}
-
-	public static boolean isAuthEnabled(long companyId) throws SystemException {
-		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.LDAP_AUTH_ENABLED,
-				PropsValues.LDAP_AUTH_ENABLED)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean isExportEnabled(long companyId)
-		throws SystemException {
-
-		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.LDAP_EXPORT_ENABLED,
-				PropsValues.LDAP_EXPORT_ENABLED)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean isImportEnabled(long companyId)
-		throws SystemException {
-
-		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.LDAP_IMPORT_ENABLED,
-				PropsValues.LDAP_IMPORT_ENABLED)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean isImportOnStartup(long companyId)
-		throws SystemException {
-
-		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.LDAP_IMPORT_ON_STARTUP)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean isNtlmEnabled(long companyId)
-		throws SystemException {
-
-		if (!isAuthEnabled(companyId)) {
-			return false;
-		}
-
-		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.NTLM_AUTH_ENABLED,
-				PropsValues.NTLM_AUTH_ENABLED)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean isPasswordPolicyEnabled(long companyId)
-		throws SystemException {
-
-		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.LDAP_PASSWORD_POLICY_ENABLED,
-				PropsValues.LDAP_PASSWORD_POLICY_ENABLED)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean isSiteMinderEnabled(long companyId)
-		throws SystemException {
-
-		if (!isAuthEnabled(companyId)) {
-			return false;
-		}
-
-		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.SITEMINDER_AUTH_ENABLED,
-				PropsValues.SITEMINDER_AUTH_ENABLED)) {
-
-			return true;
-		}
-		else {
-			return false;
 		}
 	}
 
@@ -1409,7 +1269,7 @@ public class PortalLDAPUtil {
 					Properties groupMappings = getGroupMappings(
 						ldapServerId, companyId);
 
-					String postfix = getPropertyPostfix(ldapServerId);
+					String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 					String baseDN = PrefsPropsUtil.getString(
 						companyId, PropsKeys.LDAP_BASE_DN + postfix);

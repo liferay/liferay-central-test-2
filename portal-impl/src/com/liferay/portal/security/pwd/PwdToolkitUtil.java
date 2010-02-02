@@ -28,7 +28,7 @@ import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.PasswordPolicy;
-import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.util.PropsUtil;
 
 /**
@@ -52,7 +52,7 @@ public class PwdToolkitUtil {
 				UserPasswordException.PASSWORDS_DO_NOT_MATCH);
 		}
 
-		if (!PortalLDAPUtil.isPasswordPolicyEnabled(companyId)) {
+		if (!LDAPSettingsUtil.isPasswordPolicyEnabled(companyId)) {
 			_instance._validate(userId, password1, password2, passwordPolicy);
 		}
 	}

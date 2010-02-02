@@ -105,7 +105,7 @@ import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
 import com.liferay.portal.security.auth.ScreenNameValidator;
 import com.liferay.portal.security.auth.ScreenNameValidatorFactory;
-import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
@@ -699,7 +699,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void checkLockout(User user)
 		throws PortalException, SystemException {
 
-		if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
+		if (LDAPSettingsUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
 			return;
 		}
 
@@ -787,7 +787,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void checkPasswordExpired(User user)
 		throws PortalException, SystemException {
 
-		if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
+		if (LDAPSettingsUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
 			return;
 		}
 
@@ -2070,7 +2070,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		catch (ModelListenerException mle) {
 			String msg = GetterUtil.getString(mle.getCause().getMessage());
 
-			if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
+			if (LDAPSettingsUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
 				String passwordHistory = PrefsPropsUtil.getString(
 					user.getCompanyId(), PropsKeys.LDAP_ERROR_PASSWORD_HISTORY);
 
@@ -2619,7 +2619,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 				// Let LDAP handle max failure event
 
-				if (!PortalLDAPUtil.isPasswordPolicyEnabled(
+				if (!LDAPSettingsUtil.isPasswordPolicyEnabled(
 						user.getCompanyId())) {
 
 					PasswordPolicy passwordPolicy = user.getPasswordPolicy();
