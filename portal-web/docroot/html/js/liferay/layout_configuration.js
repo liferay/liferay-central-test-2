@@ -429,6 +429,19 @@ AUI().add(
 					return instance.get('currentPortletNode').attr('title');
 				},
 
+				_addPortlet: function(portletNode, options) {
+					var instance = this;
+
+					options = A.merge(
+						{
+							item: instance.get('placeholder')
+						},
+						options
+					);
+
+					LayoutConfiguration._addPortlet(portletNode, options);
+				},
+
 				_createDrag: function(node) {
 					var instance = this;
 
@@ -441,19 +454,6 @@ AUI().add(
 						},
 						dragDelay
 					);
-				},
-
-				_addPortlet: function(portletNode, options) {
-					var instance = this;
-
-					options = A.merge(
-						{
-							item: instance.get('placeholder')
-						},
-						options
-					);
-
-					LayoutConfiguration._addPortlet(portletNode, options);
 				},
 
 				_onDragEnd: function(event) {
