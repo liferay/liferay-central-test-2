@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 
 import javax.servlet.jsp.JspException;
@@ -35,7 +36,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class MessageTag extends TagSupport {
 
-	public int doStartTag() throws JspException {
+	public int doEndTag() throws JspException {
 		try {
 			String value =  StringPool.BLANK;
 
@@ -44,28 +45,31 @@ public class MessageTag extends TagSupport {
 			}
 			else {
 				value = LanguageUtil.format(
-						pageContext, _key, _arguments,_translateArguments);
+					pageContext, _key, _arguments, _translateArguments);
 			}
 
 			pageContext.getOut().print(value);
+
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
-
-		return SKIP_BODY;
+		finally {
+			if (!ServerDetector.isResin()) {
+				_arguments = null;
+				_key = null;
+				_translateArguments = true;
+			}
+		}
 	}
 
-	public int doEndTag() {
-		return EVAL_PAGE;
+	public void setArguments(Object argument) {
+		_arguments = new Object[] {argument};
 	}
 
 	public void setArguments(Object[] arguments) {
 		_arguments = arguments;
-	}
-
-	public void setArguments(String argument) {
-		_arguments = new Object[] {argument};
 	}
 
 	public void setKey(String key) {
@@ -78,6 +82,6 @@ public class MessageTag extends TagSupport {
 
 	private Object[] _arguments;
 	private String _key;
-	private boolean _translateArguments;
+	private boolean _translateArguments = true;
 
 }
