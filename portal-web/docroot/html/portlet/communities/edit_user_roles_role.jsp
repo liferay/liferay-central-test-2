@@ -59,11 +59,15 @@ RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 	<%
 	RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-	int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType));
+	List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType), QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
+
+	roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+
+	int total = roles.size();
 
 	searchContainer.setTotal(total);
 
-	List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+	List results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 	%>
@@ -80,22 +84,14 @@ RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 
 		ResultRow row = new ResultRow(curRole, curRole.getRoleId(), i);
 
-		PortletURL rowURL = null;
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-		String name = curRole.getName();
+		rowURL.setWindowState(WindowState.MAXIMIZED);
 
-		if (!name.equals(RoleConstants.COMMUNITY_MEMBER) &&
-			!name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
-
-			rowURL = renderResponse.createRenderURL();
-
-			rowURL.setWindowState(WindowState.MAXIMIZED);
-
-			rowURL.setParameter("struts_action", "/communities/edit_user_roles");
-			rowURL.setParameter("redirect", redirect);
-			rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-			rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));
-		}
+		rowURL.setParameter("struts_action", "/communities/edit_user_roles");
+		rowURL.setParameter("redirect", redirect);
+		rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+		rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));
 
 		// Name
 
