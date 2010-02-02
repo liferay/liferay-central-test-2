@@ -123,6 +123,11 @@ public interface ResourcePermissionLocalService {
 		long roleId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.ResourcePermission> getRoleResourcePermissions(
+		long roleId, int[] scopes, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasActionId(
 		com.liferay.portal.model.ResourcePermission resourcePermission,
 		com.liferay.portal.model.ResourceAction resourceAction);

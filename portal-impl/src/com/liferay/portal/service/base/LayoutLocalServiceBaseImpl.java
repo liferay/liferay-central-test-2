@@ -157,6 +157,7 @@ import com.liferay.portal.service.persistence.ReleasePersistence;
 import com.liferay.portal.service.persistence.ResourceActionPersistence;
 import com.liferay.portal.service.persistence.ResourceCodePersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourcePermissionFinder;
 import com.liferay.portal.service.persistence.ResourcePermissionPersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.RoleFinder;
@@ -1144,6 +1145,15 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 		this.resourcePermissionPersistence = resourcePermissionPersistence;
 	}
 
+	public ResourcePermissionFinder getResourcePermissionFinder() {
+		return resourcePermissionFinder;
+	}
+
+	public void setResourcePermissionFinder(
+		ResourcePermissionFinder resourcePermissionFinder) {
+		this.resourcePermissionFinder = resourcePermissionFinder;
+	}
+
 	public RoleLocalService getRoleLocalService() {
 		return roleLocalService;
 	}
@@ -1903,6 +1913,8 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 	protected ResourcePermissionService resourcePermissionService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePermissionPersistence")
 	protected ResourcePermissionPersistence resourcePermissionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePermissionFinder")
+	protected ResourcePermissionFinder resourcePermissionFinder;
 	@BeanReference(name = "com.liferay.portal.service.RoleLocalService")
 	protected RoleLocalService roleLocalService;
 	@BeanReference(name = "com.liferay.portal.service.RoleService")

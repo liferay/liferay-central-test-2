@@ -92,6 +92,36 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.ResourcePermission> findByR_S(
+		long roleId, int scope) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ResourcePermission> findByR_S(
+		long roleId, int scope, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ResourcePermission> findByR_S(
+		long roleId, int scope, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.ResourcePermission findByR_S_First(
+		long roleId, int scope,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchResourcePermissionException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.ResourcePermission findByR_S_Last(
+		long roleId, int scope,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchResourcePermissionException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.ResourcePermission[] findByR_S_PrevAndNext(
+		long resourcePermissionId, long roleId, int scope,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchResourcePermissionException,
+			com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portal.model.ResourcePermission> findByC_N_S(
 		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException;
@@ -188,6 +218,9 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	public void removeByRoleId(long roleId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByR_S(long roleId, int scope)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByC_N_S(long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException;
 
@@ -203,6 +236,9 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByRoleId(long roleId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByR_S(long roleId, int scope)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_N_S(long companyId, java.lang.String name, int scope)

@@ -141,6 +141,13 @@ public class ResourcePermissionLocalServiceUtil {
 		return getService().getRoleResourcePermissions(roleId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.ResourcePermission> getRoleResourcePermissions(
+		long roleId, int[] scopes, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getRoleResourcePermissions(roleId, scopes, start, end);
+	}
+
 	public static boolean hasActionId(
 		com.liferay.portal.model.ResourcePermission resourcePermission,
 		com.liferay.portal.model.ResourceAction resourceAction) {

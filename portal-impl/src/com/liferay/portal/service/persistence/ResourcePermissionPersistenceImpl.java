@@ -90,6 +90,23 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByRoleId",
 			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_R_S = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
+			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByR_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_R_S = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
+			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByR_S",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_R_S = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
+			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByR_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_C_N_S = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByC_N_S",
@@ -665,6 +682,248 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(roleId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					resourcePermission);
+
+			ResourcePermission[] array = new ResourcePermissionImpl[3];
+
+			array[0] = (ResourcePermission)objArray[0];
+			array[1] = (ResourcePermission)objArray[1];
+			array[2] = (ResourcePermission)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<ResourcePermission> findByR_S(long roleId, int scope)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(roleId), new Integer(scope) };
+
+		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_R_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
+
+				query.append(_FINDER_COLUMN_R_S_ROLEID_2);
+
+				query.append(_FINDER_COLUMN_R_S_SCOPE_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(roleId);
+
+				qPos.add(scope);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ResourcePermission>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_S, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<ResourcePermission> findByR_S(long roleId, int scope,
+		int start, int end) throws SystemException {
+		return findByR_S(roleId, scope, start, end, null);
+	}
+
+	public List<ResourcePermission> findByR_S(long roleId, int scope,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(roleId), new Integer(scope),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_R_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
+
+				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
+
+				query.append(_FINDER_COLUMN_R_S_ROLEID_2);
+
+				query.append(_FINDER_COLUMN_R_S_SCOPE_2);
+
+				if (obc != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(roleId);
+
+				qPos.add(scope);
+
+				list = (List<ResourcePermission>)QueryUtil.list(q,
+						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ResourcePermission>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_R_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public ResourcePermission findByR_S_First(long roleId, int scope,
+		OrderByComparator obc)
+		throws NoSuchResourcePermissionException, SystemException {
+		List<ResourcePermission> list = findByR_S(roleId, scope, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("roleId=");
+			msg.append(roleId);
+
+			msg.append(", scope=");
+			msg.append(scope);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchResourcePermissionException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public ResourcePermission findByR_S_Last(long roleId, int scope,
+		OrderByComparator obc)
+		throws NoSuchResourcePermissionException, SystemException {
+		int count = countByR_S(roleId, scope);
+
+		List<ResourcePermission> list = findByR_S(roleId, scope, count - 1,
+				count, obc);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("roleId=");
+			msg.append(roleId);
+
+			msg.append(", scope=");
+			msg.append(scope);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchResourcePermissionException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public ResourcePermission[] findByR_S_PrevAndNext(
+		long resourcePermissionId, long roleId, int scope, OrderByComparator obc)
+		throws NoSuchResourcePermissionException, SystemException {
+		ResourcePermission resourcePermission = findByPrimaryKey(resourcePermissionId);
+
+		int count = countByR_S(roleId, scope);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_R_S_ROLEID_2);
+
+			query.append(_FINDER_COLUMN_R_S_SCOPE_2);
+
+			if (obc != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			}
+
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(roleId);
+
+			qPos.add(scope);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					resourcePermission);
@@ -1644,6 +1903,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		}
 	}
 
+	public void removeByR_S(long roleId, int scope) throws SystemException {
+		for (ResourcePermission resourcePermission : findByR_S(roleId, scope)) {
+			remove(resourcePermission);
+		}
+	}
+
 	public void removeByC_N_S(long companyId, String name, int scope)
 		throws SystemException {
 		for (ResourcePermission resourcePermission : findByC_N_S(companyId,
@@ -1713,6 +1978,56 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ROLEID,
 					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByR_S(long roleId, int scope) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(roleId), new Integer(scope) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_R_S,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
+
+				query.append(_FINDER_COLUMN_R_S_ROLEID_2);
+
+				query.append(_FINDER_COLUMN_R_S_SCOPE_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(roleId);
+
+				qPos.add(scope);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_R_S, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -2137,6 +2452,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	private static final String _SQL_COUNT_RESOURCEPERMISSION = "SELECT COUNT(resourcePermission) FROM ResourcePermission resourcePermission";
 	private static final String _SQL_COUNT_RESOURCEPERMISSION_WHERE = "SELECT COUNT(resourcePermission) FROM ResourcePermission resourcePermission WHERE ";
 	private static final String _FINDER_COLUMN_ROLEID_ROLEID_2 = "resourcePermission.roleId = ?";
+	private static final String _FINDER_COLUMN_R_S_ROLEID_2 = "resourcePermission.roleId = ? AND ";
+	private static final String _FINDER_COLUMN_R_S_SCOPE_2 = "resourcePermission.scope = ?";
 	private static final String _FINDER_COLUMN_C_N_S_COMPANYID_2 = "resourcePermission.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_N_S_NAME_1 = "resourcePermission.name IS NULL AND ";
 	private static final String _FINDER_COLUMN_C_N_S_NAME_2 = "resourcePermission.name = ? AND ";
