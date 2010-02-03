@@ -214,7 +214,7 @@ public class MinifierFilter extends BasePortalFilter {
 		}
 
 		String minifiedContent = null;
-		
+
 		if (fileNames.length == 0) {
 			minifiedContent = StringPool.BLANK;
 		}
@@ -228,8 +228,8 @@ public class MinifierFilter extends BasePortalFilter {
 				sb.append(content);
 				sb.append(StringPool.NEW_LINE);
 			}
-			
-			minifiedContent = minifyJavaScript(contents);
+
+			minifiedContent = minifyJavaScript(sb.toString());
 		}
 
 		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
