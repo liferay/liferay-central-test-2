@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,45 +20,21 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
-
-import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.security.ldap.LDAPUserTransactionThreadLocal;
-import com.liferay.portal.security.ldap.PortalLDAPExporterUtil;
+package com.liferay.portal.security.ldap;
 
 /**
- * <a href="UserListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="LDAPConverterKeys.java.html"><b><i>View Source</i></b></a>
  *
- * @author Scott Lee
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Edward Han
  */
-public class UserListener extends BaseModelListener<User> {
-
-	public void onAfterCreate(User user) throws ModelListenerException {
-		try {
-			if (!user.isDefaultUser() &&
-				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-
-				PortalLDAPExporterUtil.exportToLDAP(user);
-			}
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
-	}
-
-	public void onAfterUpdate(User user) throws ModelListenerException {
-		try {
-			if (!user.isDefaultUser() &&
-				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-
-				PortalLDAPExporterUtil.exportToLDAP(user);
-			}
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
-	}
-
+public interface LDAPConverterKeys {
+	public static final String USER_FIRST_NAME = "firstName";
+	public static final String USER_MIDDLE_NAME = "middleName";
+	public static final String USER_LAST_NAME = "lastName";
+	public static final String USER_FULL_NAME = "fullName";
+	public static final String USER_PASSWORD = "password";
+	public static final String USER_EMAIL_ADDRESS = "emailAddress";
+	public static final String USER_JOB_TITLE = "jobTitle";
+	public static final String USER_SCREEN_NAME = "screenName";
+	public static final String USER_GROUP = "group";
 }

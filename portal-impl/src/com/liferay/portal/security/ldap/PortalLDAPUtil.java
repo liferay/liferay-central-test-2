@@ -338,22 +338,21 @@ public class PortalLDAPUtil {
 			String fullDistinguishedName)
 		throws Exception {
 
-		Properties userMappings = LDAPSettingsUtil.getUserMappings(
+		Properties userMappings = LDAPSettingsUtil.getAllUserContactMappings(
 			ldapServerId, companyId);
 
-		String[] mappedUserAttributeIds = {
-			userMappings.getProperty("screenName"),
-			userMappings.getProperty("emailAddress"),
-			userMappings.getProperty("fullName"),
-			userMappings.getProperty("firstName"),
-			userMappings.getProperty("middleName"),
-			userMappings.getProperty("lastName"),
-			userMappings.getProperty("jobTitle"),
-			userMappings.getProperty("group")
-		};
+		List<String> mappedUserAttributeIds =
+			new ArrayList<String>(userMappings.size());
+
+		for (Object mapping : userMappings.keySet()) {
+			mappedUserAttributeIds.add(
+				userMappings.getProperty((String) mapping));
+		}
 
 		return _getAttributes(
-			ldapContext, fullDistinguishedName, mappedUserAttributeIds);
+			ldapContext, fullDistinguishedName,
+			mappedUserAttributeIds.toArray(
+				new String[mappedUserAttributeIds.size()]));
 	}
 
 	public static List<SearchResult> getUsers(

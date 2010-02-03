@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+/*
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,45 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.security.ldap.LDAPUserTransactionThreadLocal;
-import com.liferay.portal.security.ldap.PortalLDAPExporterUtil;
+import java.util.Collections;
+import java.util.Map;
 
 /**
- * <a href="UserListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="LDAPUserGroupHolder.java.html}"><b><i>View Source</i></b></a>
  *
- * @author Scott Lee
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Michael C. Han
  */
-public class UserListener extends BaseModelListener<User> {
+public class LDAPUserGroupHolder {
 
-	public void onAfterCreate(User user) throws ModelListenerException {
-		try {
-			if (!user.isDefaultUser() &&
-				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
+	public LDAPUserGroupHolder(
+		long companyId, String groupName, String description) {
 
-				PortalLDAPExporterUtil.exportToLDAP(user);
-			}
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
+		this(companyId, groupName, description, Collections.EMPTY_MAP);
 	}
 
-	public void onAfterUpdate(User user) throws ModelListenerException {
-		try {
-			if (!user.isDefaultUser() &&
-				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-
-				PortalLDAPExporterUtil.exportToLDAP(user);
-			}
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
+	public LDAPUserGroupHolder(
+		long companyId, String groupName, String description,
+		Map<String, String> groupExpandoData) {
+		_companyId = companyId;
+		_groupName = groupName;
+		_description = description;
+		_groupExpandoData = groupExpandoData;
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public String getGroupName() {
+		return _groupName;
+	}
+
+	public String getDescription() {
+		return _description;
+	}
+
+	private long _companyId;
+	private String _groupName;
+	private String _description;
+
+	private Map<String, String> _groupExpandoData;
 }

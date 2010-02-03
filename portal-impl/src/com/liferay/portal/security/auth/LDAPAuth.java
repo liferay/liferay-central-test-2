@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.LDAPSettingsUtil;
-import com.liferay.portal.security.ldap.PortalLDAPImporter;
+import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -287,7 +287,7 @@ public class LDAPAuth implements Authenticator {
 
 				// Get user or create from LDAP
 
-				User user = PortalLDAPImporter.importLDAPUser(
+				User user = PortalLDAPImporterUtil.importLDAPUser(
 					ldapServerId, companyId, ctx, attrs, password, true);
 
 				// Process LDAP success codes

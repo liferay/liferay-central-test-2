@@ -20,57 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.ldap;
+package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.naming.directory.BasicAttribute;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.ModificationItem;
+import javax.naming.directory.Attributes;
+import javax.naming.ldap.LdapContext;
 
 /**
- * <a href="Modifications.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalLDAPImporterUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Amos Fong
+ * @author Edward Han
+ * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public class Modifications {
+public class PortalLDAPImporterUtil {
 
-	public static Modifications getInstance() {
-		return new Modifications();
+	public static void importFromLDAP() throws Exception {
+		_portalLDAPImporter.importFromLDAP();
 	}
 
-	public ModificationItem addItem(String id, String value) {
-		return addItem(DirContext.REPLACE_ATTRIBUTE, id, value);
+	public static void importFromLDAP(long companyId) throws Exception {
+		_portalLDAPImporter.importFromLDAP(companyId);
 	}
 
-	public ModificationItem addItem(
-		int modificationOp, String id, String value) {
-
-		BasicAttribute basicAttribute = new BasicAttribute(id);
-
-		if (Validator.isNotNull(value)) {
-			basicAttribute.add(value);
-		}
-
-		ModificationItem item = new ModificationItem(
-			modificationOp, basicAttribute);
-
-		_items.add(item);
-
-		return item;
+	public static void importFromLDAP(long ldapServerId, long companyId)
+		throws Exception {
+		_portalLDAPImporter.importFromLDAP(ldapServerId, companyId);
 	}
 
-	public ModificationItem[] getItems() {
-		return _items.toArray(new ModificationItem[_items.size()]);
+	public static User importLDAPUser(
+		long ldapServerId, long companyId, LdapContext ldapContext,
+		Attributes attributes, String password,
+		boolean importGroupMembership)
+		throws Exception {
+
+		return _portalLDAPImporter.importLDAPUser(
+			ldapServerId, companyId, ldapContext,
+			attributes, password, importGroupMembership);
 	}
 
-	private Modifications() {
+	public void setPortalLDAPImporter(PortalLDAPImporter portalLDAPImporter) {
+		_portalLDAPImporter = portalLDAPImporter;
 	}
 
-	private List<ModificationItem> _items = new ArrayList<ModificationItem>();
-
+	private static PortalLDAPImporter _portalLDAPImporter;
 }

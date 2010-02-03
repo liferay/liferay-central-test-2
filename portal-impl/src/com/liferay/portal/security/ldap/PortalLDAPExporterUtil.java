@@ -20,45 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.security.ldap.LDAPUserTransactionThreadLocal;
-import com.liferay.portal.security.ldap.PortalLDAPExporterUtil;
+import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.User;
 
 /**
- * <a href="UserListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalLDAPExporterUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Scott Lee
+ * @author Edward Han
+ * @author Michael C. Han
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  */
-public class UserListener extends BaseModelListener<User> {
+public class PortalLDAPExporterUtil {
 
-	public void onAfterCreate(User user) throws ModelListenerException {
-		try {
-			if (!user.isDefaultUser() &&
-				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-
-				PortalLDAPExporterUtil.exportToLDAP(user);
-			}
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
+	public static void exportToLDAP(Contact contact) throws Exception {
+		_portalLDAPExporter.exportToLDAP(contact);
 	}
 
-	public void onAfterUpdate(User user) throws ModelListenerException {
-		try {
-			if (!user.isDefaultUser() &&
-				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-
-				PortalLDAPExporterUtil.exportToLDAP(user);
-			}
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
+	public static void exportToLDAP(User user) throws Exception {
+		_portalLDAPExporter.exportToLDAP(user);
 	}
 
+	public void setPortalLDAPExporter(PortalLDAPExporter portalLDAPExporter) {
+		_portalLDAPExporter = portalLDAPExporter;
+	}
+
+	private static PortalLDAPExporter _portalLDAPExporter;
 }

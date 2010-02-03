@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+/*
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,45 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.security.ldap.LDAPUserTransactionThreadLocal;
-import com.liferay.portal.security.ldap.PortalLDAPExporterUtil;
+import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.User;
 
 /**
- * <a href="UserListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalLDAPExporter.java.html}"><b><i>View Source</i></b></a>
  *
- * @author Scott Lee
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * Provides the ability to customize the user and contact export.
+ *
+ * @author Michael C. Han
  */
-public class UserListener extends BaseModelListener<User> {
-
-	public void onAfterCreate(User user) throws ModelListenerException {
-		try {
-			if (!user.isDefaultUser() &&
-				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-
-				PortalLDAPExporterUtil.exportToLDAP(user);
-			}
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
-	}
-
-	public void onAfterUpdate(User user) throws ModelListenerException {
-		try {
-			if (!user.isDefaultUser() &&
-				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-
-				PortalLDAPExporterUtil.exportToLDAP(user);
-			}
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
-	}
+public interface PortalLDAPExporter {
+	public void exportToLDAP(Contact contact) throws Exception;
+	public void exportToLDAP(User user) throws Exception;
 
 }

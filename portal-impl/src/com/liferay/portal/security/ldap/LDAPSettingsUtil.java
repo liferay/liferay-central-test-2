@@ -33,6 +33,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
+import java.io.IOException;
+
 import java.util.Properties;
 
 /**
@@ -43,6 +45,18 @@ import java.util.Properties;
  * @author Brian Wing Shun Chan
  */
 public class LDAPSettingsUtil {
+
+	public static Properties getAllUserContactMappings(
+		long ldapServerId, long companyId)
+			throws Exception {
+
+		Properties userMappings = getUserMappings(ldapServerId, companyId);
+		Properties contactMappings = getContactMappings(ldapServerId, companyId);
+
+		PropertiesUtil.merge(userMappings, contactMappings);
+
+		return userMappings;
+	}
 
 	public static String getAuthSearchFilter(
 			long ldapServerId, long companyId, String emailAddress,
@@ -73,6 +87,21 @@ public class LDAPSettingsUtil {
 		}
 
 		return filter;
+	}
+
+	public static Properties getContactMappings(
+		long ldapServerId, long companyId)
+		throws IOException, SystemException {
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		Properties contactMappings = PropertiesUtil.load(
+			PrefsPropsUtil.getString(companyId,
+				PropsKeys.LDAP_CONTACT_MAPPINGS + postfix));
+
+		LogUtil.debug(_log, contactMappings);
+
+		return contactMappings;
 	}
 
 	public static Properties getGroupMappings(long ldapServerId, long companyId)
