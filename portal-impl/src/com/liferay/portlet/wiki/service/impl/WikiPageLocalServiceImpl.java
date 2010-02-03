@@ -108,6 +108,7 @@ import javax.portlet.WindowState;
  * @author Julio Camarero
  * @author Wesley Gong
  * @author Marcellus Tavares
+ * @author Zsigmond Rab
  */
 public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
