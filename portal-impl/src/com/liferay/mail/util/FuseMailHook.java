@@ -199,13 +199,8 @@ public class FuseMailHook implements Hook {
 
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(company.getMx());
-		sb.append(StringPool.PERIOD);
-		sb.append(userId);
-
-		String mailUserId = sb.toString();
+		String mailUserId = company.getMx().concat(StringPool.PERIOD).concat(
+			String.valueOf(userId));
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Mail user id " + mailUserId + " for user id " + userId);

@@ -1596,17 +1596,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					try {
 						session = openSession();
 
-						StringBundler query = null;
 						String sql = null;
 
 						if (obc != null) {
-							query = new StringBundler(3);
-
-							query.append(_SQL_GET${tempEntity.names?upper_case});
-							query.append(ORDER_BY_CLAUSE);
-							query.append(obc.getOrderBy());
-
-							sql = query.toString();
+							sql = _SQL_GET${tempEntity.names?upper_case}.concat(ORDER_BY_CLAUSE).concat(obc.getOrderBy());
 						}
 
 						<#if tempEntity.getOrder()??>

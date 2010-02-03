@@ -61,13 +61,8 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 		while (_distinctTitles.contains(_getKey(newTitle, extension))) {
 			_counter++;
 
-			StringBundler sb = new StringBundler(3);
-
-			sb.append(newTitle);
-			sb.append(StringPool.SPACE);
-			sb.append(_counter);
-
-			newTitle = sb.toString();
+			newTitle = newTitle.concat(StringPool.SPACE).concat(
+				String.valueOf(_counter));
 		}
 
 		_distinctTitles.add(_getKey(newTitle, extension));

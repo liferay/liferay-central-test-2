@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -360,13 +359,8 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	private String _getPath() {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(PropsValues.LUCENE_DIR);
-		sb.append(_companyId);
-		sb.append(StringPool.SLASH);
-
-		return sb.toString();
+		return PropsValues.LUCENE_DIR.concat(String.valueOf(_companyId)).concat(
+			StringPool.SLASH);
 	}
 
 	private String _getTableName() {

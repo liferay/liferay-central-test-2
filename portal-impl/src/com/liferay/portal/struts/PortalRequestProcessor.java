@@ -273,7 +273,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		StrutsUtil.include(uri, getServletContext(), request, response);
 	}
 
-	protected StringBundler getFriendlyTrackerPath(
+	protected String getFriendlyTrackerPath(
 			String path, ThemeDisplay themeDisplay, HttpServletRequest request)
 		throws Exception {
 
@@ -292,14 +292,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		String layoutFriendlyURL = PortalUtil.getLayoutFriendlyURL(
 			layout, themeDisplay);
 
-		StringBundler sb = new StringBundler();
-
-		sb.append(layoutFriendlyURL);
-
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		if (Validator.isNull(portletId)) {
-			return sb;
+			return layoutFriendlyURL;
 		}
 
 		long companyId = PortalUtil.getCompanyId(request);
@@ -316,10 +312,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 
 		if ((portlet == null) || !portlet.isActive()) {
-			sb.append(StringPool.QUESTION);
-			sb.append(request.getQueryString());
-
-			return sb;
+			return layoutFriendlyURL.concat(StringPool.QUESTION).concat(
+				request.getQueryString());
 		}
 
 		String namespace = PortalUtil.getPortletNamespace(portletId);
@@ -328,10 +322,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			portlet.getFriendlyURLMapperInstance();
 
 		if (friendlyURLMapper == null) {
-			sb.append(StringPool.QUESTION);
-			sb.append(request.getQueryString());
-
-			return sb;
+			return layoutFriendlyURL.concat(StringPool.QUESTION).concat(
+				request.getQueryString());
 		}
 
 		PortletURLImpl portletURL = new PortletURLImpl(
@@ -355,14 +347,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		String portletFriendlyURL = friendlyURLMapper.buildPath(portletURL);
 
 		if (portletFriendlyURL != null) {
-			sb.append(portletFriendlyURL);
+			return layoutFriendlyURL.concat(portletFriendlyURL);
 		}
 		else {
-			sb.append(StringPool.QUESTION);
-			sb.append(request.getQueryString());
+			return layoutFriendlyURL.concat(StringPool.QUESTION).concat(
+				request.getQueryString());
 		}
-
-		return sb;
 	}
 
 	protected String getLastPath(HttpServletRequest request) {
@@ -518,29 +508,27 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			(path.indexOf(_PATH_PORTAL_PROTECTED) == -1) &&
 			(!_trackerIgnorePaths.contains(path))) {
 
-			StringBundler sb = null;
+			String fullPath = path;
 
 			try {
 				if (PropsValues.SESSION_TRACKER_FRIENDLY_PATHS_ENABLED) {
-					sb = getFriendlyTrackerPath(path, themeDisplay, request);
+					fullPath = getFriendlyTrackerPath(
+						path, themeDisplay, request);
 				}
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 
-			if (sb == null) {
-				sb = new StringBundler(3);
-
-				sb.append(path);
-				sb.append(StringPool.QUESTION);
-				sb.append(request.getQueryString());
+			if (fullPath == null) {
+				fullPath = path.concat(StringPool.QUESTION).concat(
+					request.getQueryString());
 			}
 
 			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(0);
 
 			userTrackerPath.setUserTrackerId(userTracker.getUserTrackerId());
-			userTrackerPath.setPath(sb.toString());
+			userTrackerPath.setPath(fullPath);
 			userTrackerPath.setPathDate(new Date());
 
 			userTracker.addPath(userTrackerPath);

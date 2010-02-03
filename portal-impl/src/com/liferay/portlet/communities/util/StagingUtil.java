@@ -309,13 +309,8 @@ public class StagingUtil {
 	public static String getSchedulerGroupName(
 		String destinationName, long groupId) {
 
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(destinationName);
-		sb.append(StringPool.SLASH);
-		sb.append(groupId);
-
-		return sb.toString();
+		return destinationName.concat(StringPool.SLASH).concat(
+			String.valueOf(groupId));
 	}
 
 	public static Map<String, String[]> getStagingParameters() {

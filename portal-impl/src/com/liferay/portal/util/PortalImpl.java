@@ -2148,13 +2148,10 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletDescription(String portletId, Locale locale) {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
-		sb.append(StringPool.PERIOD);
-		sb.append(portletId);
-
-		return LanguageUtil.get(locale, sb.toString());
+		return LanguageUtil.get(
+			locale,
+			JavaConstants.JAVAX_PORTLET_DESCRIPTION.concat(
+				StringPool.PERIOD).concat(portletId));
 	}
 
 	public String getPortletDescription(String portletId, String languageId) {
@@ -2164,13 +2161,10 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletDescription(String portletId, User user) {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
-		sb.append(StringPool.PERIOD);
-		sb.append(portletId);
-
-		return LanguageUtil.get(user.getLocale(), sb.toString());
+		return LanguageUtil.get(
+			user.getLocale(),
+			JavaConstants.JAVAX_PORTLET_DESCRIPTION.concat(
+				StringPool.PERIOD).concat(portletId));
 	}
 
 	public Object[] getPortletFriendlyURLMapper(
@@ -2405,13 +2399,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletNamespace(String portletId) {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(StringPool.UNDERLINE);
-		sb.append(portletId);
-		sb.append(StringPool.UNDERLINE);
-
-		return sb.toString();
+		return StringPool.UNDERLINE.concat(portletId).concat(
+			StringPool.UNDERLINE);
 	}
 
 	public String getPortletTitle(Portlet portlet, Locale locale) {
@@ -2438,13 +2427,10 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletTitle(String portletId, Locale locale) {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
-		sb.append(StringPool.PERIOD);
-		sb.append(portletId);
-
-		return LanguageUtil.get(locale, sb.toString());
+		return LanguageUtil.get(
+			locale,
+			JavaConstants.JAVAX_PORTLET_TITLE.concat(StringPool.PERIOD).concat(
+				portletId));
 	}
 
 	public String getPortletTitle(String portletId, String languageId) {
@@ -2454,13 +2440,10 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletTitle(String portletId, User user) {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
-		sb.append(StringPool.PERIOD);
-		sb.append(portletId);
-
-		return LanguageUtil.get(user.getLocale(), sb.toString());
+		return LanguageUtil.get(
+			user.getLocale(),
+			JavaConstants.JAVAX_PORTLET_TITLE.concat(StringPool.PERIOD).concat(
+				portletId));
 	}
 
 	public String getPortletXmlFileName() throws SystemException {

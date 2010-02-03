@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -204,13 +203,9 @@ public class MBMailingListLocalServiceImpl
 	}
 
 	protected String getSchedulerGroupName(MBMailingList mailingList) {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(DestinationNames.MESSAGE_BOARDS_MAILING_LIST);
-		sb.append(StringPool.SLASH);
-		sb.append(mailingList.getMailingListId());
-
-		return sb.toString();
+		return DestinationNames.MESSAGE_BOARDS_MAILING_LIST.concat(
+			StringPool.SLASH).concat(
+				String.valueOf(mailingList.getMailingListId()));
 	}
 
 	protected void scheduleMailingList(MBMailingList mailingList)

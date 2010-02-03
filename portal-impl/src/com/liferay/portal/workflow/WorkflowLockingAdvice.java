@@ -22,7 +22,6 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
@@ -94,13 +93,7 @@ public class WorkflowLockingAdvice {
 	}
 
 	private String _encodeKey(String name, int version) {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(name);
-		sb.append(StringPool.POUND);
-		sb.append(version);
-
-		return sb.toString();
+		return name.concat(StringPool.POUND).concat(String.valueOf(version));
 	}
 
 	private static final String _START_WORKFLOW_INSTANCE_METHOD_NAME =

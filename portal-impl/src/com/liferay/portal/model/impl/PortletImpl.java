@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
-import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
@@ -614,17 +613,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		}
 
 		return (Scheduler)InstancePool.get(getSchedulerClass());
-	}
-
-	public List<SchedulerEntry> getSchedulerEntries() {
-		return _schedulerEntries;
-	}
-
-	public void addSchedulerEntry(SchedulerEntry schedulerEntry) {
-		if (_schedulerEntries == null){
-			_schedulerEntries = new ArrayList<SchedulerEntry>();
-		}
-		_schedulerEntries.add(schedulerEntry);
 	}
 
 	/**
@@ -3122,11 +3110,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the scheduler class of the portlet.
 	 */
 	private String _schedulerClass;
-
-	/**
-	 * A list of scheduler entries belong to this portlet.
-	 */
-	private List<SchedulerEntry> _schedulerEntries;
 
 	/**
 	 * The name of the portlet URL class of the portlet.
