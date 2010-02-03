@@ -1044,6 +1044,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			notifySubscribers(node, page, serviceContext, true);
 		}
 
+		// Indexer
+
+		if (page.isApproved()) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(WikiPage.class);
+
+			indexer.reindex(page);
+		}
+
 		// Cache
 
 		clearPageCache(page);
