@@ -45,6 +45,17 @@
 	clear: right;
 }
 
+.portlet-journal-content .journal-content-article:after {
+	clear: both;
+	content: "";
+	display: block;
+	height: 0;
+}
+
+.ie .portlet-journal-content .journal-content-article {
+	zoom: 1;
+}
+
 .portlet-journal-content .taglib-discussion {
 	margin-top: 18px;
 }
