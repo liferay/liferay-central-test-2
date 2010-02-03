@@ -95,6 +95,7 @@ if ((iconListIconCount != null) || (iconListSingleIcon != null)) {
 if ((iconMenuIconCount != null) || (iconMenuSingleIcon != null)) {
 	label = true;
 }
+
 String details = null;
 
 if (label) {
