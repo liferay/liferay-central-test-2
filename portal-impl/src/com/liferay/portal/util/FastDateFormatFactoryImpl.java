@@ -141,8 +141,8 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 	}
 
 	protected String getKey(Locale locale, TimeZone timeZone) {
-		return String.valueOf(locale).concat(
-			StringPool.UNDERLINE).concat(String.valueOf(timeZone));
+		return String.valueOf(locale).concat(StringPool.UNDERLINE).concat(
+			String.valueOf(timeZone));
 	}
 
 	protected String getKey(String pattern, Locale locale, TimeZone timeZone) {

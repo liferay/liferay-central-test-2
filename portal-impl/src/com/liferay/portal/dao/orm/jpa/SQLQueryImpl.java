@@ -83,8 +83,9 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 				columnAliases = StringPool.BLANK;
 			}
 			else {
-				StringBundler sb = new StringBundler(columnNames.length * 4 - 1);
-			
+				StringBundler sb = new StringBundler(
+					columnNames.length * 4 - 1);
+
 				int i = 0;
 
 				for (String column : columnNames) {

@@ -52,7 +52,6 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 import javax.portlet.PortletURL;
 
@@ -187,12 +186,54 @@ public class JournalIndexer extends BaseIndexer {
 		reindexArticles(companyId);
 	}
 
+	protected String getIndexableContent(Document document, Element rootElement)
+		throws Exception {
+
+		StringBundler sb = new StringBundler();
+
+		LinkedList<Element> queue = new LinkedList<Element>(
+			rootElement.elements());
+
+		Element element = null;
+
+		while ((element = queue.poll()) != null) {
+			String elType = element.attributeValue("type", StringPool.BLANK);
+			String elIndexType = element.attributeValue(
+				"index-type", StringPool.BLANK);
+
+			indexField(document, element, elType, elIndexType);
+
+			if (elType.equals("text") || elType.equals("text_box") ||
+				elType.equals("text_area")) {
+
+				for (Element dynamicContentElement :
+						element.elements("dynamic-content")) {
+
+					String text = dynamicContentElement.getText();
+
+					sb.append(text);
+					sb.append(StringPool.SPACE);
+				}
+			}
+			else if (element.getName().equals("static-content")) {
+				String text = element.getText();
+
+				sb.append(text);
+				sb.append(StringPool.SPACE);
+			}
+
+			queue.addAll(element.elements());
+		}
+
+		return sb.toString();
+	}
+
 	protected String getIndexableContent(Document document, String content) {
 		try {
 			com.liferay.portal.kernel.xml.Document contentDocument =
 				SAXReaderUtil.read(content);
 
-			Element rootElement = contentDocument.getRootElement();			
+			Element rootElement = contentDocument.getRootElement();
 
 			return getIndexableContent(document, rootElement);
 		}
@@ -201,47 +242,6 @@ public class JournalIndexer extends BaseIndexer {
 
 			return content;
 		}
-	}
-
-	protected String getIndexableContent(
-		Document document, Element rootElement)
-		throws Exception {
-		StringBundler sb = new StringBundler ();
-
-		LinkedList<Element> queue = 
-			new LinkedList<Element>(rootElement.elements());
-
-		Element currentElement = null;
-		while ((currentElement = queue.poll()) != null) {
-
-			String elType = currentElement.attributeValue("type", StringPool.BLANK);
-			String elIndexType = currentElement.attributeValue(
-				"index-type", StringPool.BLANK);
-
-			indexField(document, currentElement, elType, elIndexType);
-
-			if (elType.equals("text") || elType.equals("text_box") ||
-				elType.equals("text_area")) {
-
-				for (Element dynamicContentElement :
-						currentElement.elements("dynamic-content")) {
-
-					String text = dynamicContentElement.getText();
-
-					sb.append(text);
-					sb.append(StringPool.SPACE);
-				}
-			}
-			else if (currentElement.getName().equals("static-content")) {
-				String text = currentElement.getText();
-
-				sb.append(text);
-				sb.append(StringPool.SPACE);
-			}
-			queue.addAll(currentElement.elements());
-		}
-
-		return sb.toString();
 	}
 
 	protected String getPortletId(SearchContext searchContext) {

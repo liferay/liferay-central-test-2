@@ -66,7 +66,7 @@ public class PluginsSummaryBuilder {
 		}
 	}
 
-	public void _createPluginsSummary(File pluginsDir) throws Exception {
+	private void _createPluginsSummary(File pluginsDir) throws Exception {
 		StringBundler sb = new StringBundler();
 
 		sb.append("<plugins-summary>\n");
@@ -194,12 +194,12 @@ public class PluginsSummaryBuilder {
 	}
 
 	private String _readList(Element parentEl, String name) {
-		if ((parentEl == null) || (parentEl.elements(name).isEmpty())) {
+		if ((parentEl == null) || parentEl.elements(name).isEmpty()) {
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb =
-			new StringBundler(parentEl.elements(name).size() * 2 - 1);
+		StringBundler sb = new StringBundler(
+			parentEl.elements(name).size() * 2 - 1);
 
 		Iterator<Element> itr = parentEl.elements(name).iterator();
 

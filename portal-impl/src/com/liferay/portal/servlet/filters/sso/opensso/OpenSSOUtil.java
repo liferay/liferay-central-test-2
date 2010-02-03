@@ -296,12 +296,13 @@ public class OpenSSOUtil {
 	private void _setCookieProperty(
 		HttpServletRequest request, HttpURLConnection urlc,
 		String[] cookieNames) {
+
 		if (cookieNames.length == 0) {
 			return;
 		}
 
 		StringBundler sb = new StringBundler(cookieNames.length * 4);
-		
+
 		for (String cookieName : cookieNames) {
 			String cookieValue = CookieUtil.get(request, cookieName);
 
@@ -312,7 +313,6 @@ public class OpenSSOUtil {
 		}
 
 		urlc.setRequestProperty("Cookie", sb.toString());
-
 	}
 
 	private static final String _GET_ATTRIBUTES = "/identity/attributes";

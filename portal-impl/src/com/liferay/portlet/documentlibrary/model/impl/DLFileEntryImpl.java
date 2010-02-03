@@ -131,7 +131,7 @@ public class DLFileEntryImpl
 			extraSettingsProps.entrySet().iterator();
 
 		StringBundler sb = new StringBundler(
-									extraSettingsProps.entrySet().size() + 4);
+			extraSettingsProps.entrySet().size() + 4);
 
 		sb.append(FileUtil.stripExtension(getTitle()));
 		sb.append(StringPool.SPACE);

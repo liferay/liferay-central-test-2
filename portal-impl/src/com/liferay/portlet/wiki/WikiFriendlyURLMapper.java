@@ -116,8 +116,6 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			else {
 				friendlyURLPath = StringPool.BLANK;
 			}
-
-			
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {

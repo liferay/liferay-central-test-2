@@ -26,6 +26,7 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.util.PropsValues;
@@ -104,16 +105,17 @@ public class FileSystemHook extends BaseHook {
 	}
 
 	protected String buildPath(String fileNameFragment) {
-		if (fileNameFragment.length() <= 2) {
+		int fileNameFragmentLength = fileNameFragment.length();
+
+		if (fileNameFragmentLength <= 2) {
 			return StringPool.BLANK;
 		}
 
-		int fragmentLength = fileNameFragment.length();
-		int sbLength = fragmentLength / 2 + fragmentLength;
-		StringBuilder sb = new StringBuilder(sbLength);
-		
-		for (int i = 0;i < fragmentLength;i += 2) {
-			if ((i + 2) < fragmentLength) {
+		StringBundler sb = new StringBundler(
+			fileNameFragmentLength / 2 + fileNameFragmentLength);
+
+		for (int i = 0; i < fileNameFragmentLength; i += 2) {
+			if ((i + 2) < fileNameFragmentLength) {
 				sb.append(StringPool.SLASH);
 				sb.append(fileNameFragment.substring(i, i + 2));
 			}
@@ -124,7 +126,7 @@ public class FileSystemHook extends BaseHook {
 
 	protected File getFile(long imageId, String type) {
 		String path = buildPath(String.valueOf(imageId));
-		
+
 		return new File(
 			_rootDir + StringPool.SLASH + path + StringPool.SLASH +
 				imageId + StringPool.PERIOD + type);

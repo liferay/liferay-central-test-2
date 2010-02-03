@@ -57,6 +57,7 @@ public class StrutsResourceBundle extends ResourceBundle {
 			 key.equals(JavaConstants.JAVAX_PORTLET_SHORT_TITLE) ||
 			 key.equals(JavaConstants.JAVAX_PORTLET_KEYWORDS) ||
 			 key.equals(JavaConstants.JAVAX_PORTLET_DESCRIPTION))) {
+
 			key = key.concat(StringPool.PERIOD).concat(_portletName);
 		}
 

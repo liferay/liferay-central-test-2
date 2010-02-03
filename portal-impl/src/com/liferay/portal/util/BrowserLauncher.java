@@ -97,7 +97,7 @@ public class BrowserLauncher implements Runnable {
 		}
 
 		StringBundler sb = new StringBundler(_BROWSERS.length * 5 - 1);
-		
+
 		for (int i = 0; i < _BROWSERS.length; i++) {
 			if (i != 0) {
 				sb.append(" || ");

@@ -110,9 +110,9 @@ public class ExportUsersAction extends Action {
 		if (total == 0) {
 			return StringPool.BLANK;
 		}
-		
+
 		StringBundler sb = new StringBundler(users.size() * 4);
-		
+
 		Iterator<User> itr = users.iterator();
 
 		for (int i = 0; itr.hasNext(); i++) {

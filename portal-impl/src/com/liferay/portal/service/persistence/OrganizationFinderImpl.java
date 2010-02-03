@@ -923,7 +923,7 @@ public class OrganizationFinderImpl
 	}
 
 	protected String getJoin(LinkedHashMap<String, Object> params) {
-		if ((params == null) || (params.isEmpty())) {
+		if ((params == null) || params.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
@@ -985,7 +985,7 @@ public class OrganizationFinderImpl
 	}
 
 	protected String getWhere(LinkedHashMap<String, Object> params) {
-		if ((params == null) || (params.isEmpty())) {
+		if ((params == null) || params.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
@@ -1056,7 +1056,7 @@ public class OrganizationFinderImpl
 
 			if (leftAndRightOrganizationIds.length > 0) {
 				StringBundler sb = new StringBundler(
-								leftAndRightOrganizationIds.length * 2 + 1);
+					leftAndRightOrganizationIds.length * 2 + 1);
 
 				sb.append("WHERE (");
 

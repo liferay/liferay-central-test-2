@@ -131,7 +131,8 @@ public class MySQLDB extends BaseDB {
 		sb.append("use ");
 		sb.append(databaseName);
 		sb.append(";\n\n");
-		sb.append(FileUtil.read(
+		sb.append(
+			FileUtil.read(
 				"../sql/portal" + suffix + "/portal" + suffix + "-mysql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));

@@ -57,7 +57,7 @@ public class SendmailHook implements Hook {
 
 				if (emailAddresses.size() > 0) {
 					StringBundler sb = new StringBundler(
-													emailAddresses.size() * 2);
+						emailAddresses.size() * 2);
 
 					for (int i = 0; i < emailAddresses.size(); i++) {
 						String emailAddress = emailAddresses.get(i);

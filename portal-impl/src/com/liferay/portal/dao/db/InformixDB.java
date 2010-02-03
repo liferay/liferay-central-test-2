@@ -83,7 +83,9 @@ public class InformixDB extends BaseDB {
 		sb.append("END IF\n");
 		sb.append("end procedure;\n");
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/portal" + suffix + "/portal" + suffix +
+		sb.append(
+			FileUtil.read(
+				"../sql/portal" + suffix + "/portal" + suffix +
 					"-informix.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-informix.sql"));

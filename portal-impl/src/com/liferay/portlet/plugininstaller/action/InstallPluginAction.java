@@ -241,14 +241,12 @@ public class InstallPluginAction extends PortletAction {
 		String oldPluginPackagesIgnored= PrefsPropsUtil.getString(
 			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
-		String temp =
-			oldPluginPackagesIgnored.concat(
-			StringPool.NEW_LINE).concat(pluginPackagesIgnored);
-
 		PortletPreferences preferences = PrefsPropsUtil.getPreferences();
 
 		preferences.setValue(
-			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, temp);
+			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
+			oldPluginPackagesIgnored.concat(StringPool.NEW_LINE).concat(
+				pluginPackagesIgnored));
 
 		preferences.store();
 

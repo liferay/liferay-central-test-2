@@ -213,10 +213,10 @@ public class MinifierFilter extends BasePortalFilter {
 			_log.info("Minifying JavaScript bundle " + minifierBundleId);
 		}
 
-		String contents;
-		
+		String content = null;
+
 		if (fileNames.length == 0) {
-			contents = StringPool.BLANK;
+			content = StringPool.BLANK;
 		}
 		else {
 			StringBundler sb = new StringBundler(fileNames.length * 2);
@@ -228,11 +228,11 @@ public class MinifierFilter extends BasePortalFilter {
 				sb.append(content);
 				sb.append(StringPool.NEW_LINE);
 			}
-			
-			contents = sb.toString();
+
+			content = sb.toString();
 		}
 
-		String minifiedContent = minifyJavaScript(contents);
+		String minifiedContent = minifyJavaScript(content);
 
 		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
@@ -110,6 +109,7 @@ public class WordPressImporter {
 
 	protected static String getWordPressPath(
 		PortletDataContext context, String fileName) {
+
 		return context.getSourcePortletPath(PortletKeys.BLOGS).concat(
 			StringPool.SLASH).concat(fileName);
 	}

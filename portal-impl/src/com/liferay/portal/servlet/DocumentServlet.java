@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -204,8 +203,7 @@ public class DocumentServlet extends HttpServlet {
 				id, is, sourceExtension, targetExtension);
 
 			if ((convertedIS != null) && (convertedIS != is)) {
-				fileName = 
-					FileUtil.stripExtension(fileName).concat(
+				fileName = FileUtil.stripExtension(fileName).concat(
 					StringPool.PERIOD).concat(targetExtension);
 
 				is = convertedIS;

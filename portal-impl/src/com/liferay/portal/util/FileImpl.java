@@ -295,25 +295,28 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 							textExtractor.getClass().getName());
 				}
 
-				Reader textReader = textExtractor.extractText(is, contentType, null);
 				StringBuilder sb = new StringBuilder();
+
+				Reader reader = textExtractor.extractText(
+					is, contentType, null);
 
 				try{
 					char[] buffer = new char[1024];
 
 					int result = -1;
-					while ((result = textReader.read(buffer)) != -1) {
+
+					while ((result = reader.read(buffer)) != -1) {
 						sb.append(buffer, 0, result);
 					}
 				}
 				finally {
 					try {
-						textReader.close();
+						reader.close();
 					}
-					catch(IOException ignore) {	
+					catch (IOException ioe) {
 					}
 				}
-				
+
 				text = sb.toString();
 			}
 			else {

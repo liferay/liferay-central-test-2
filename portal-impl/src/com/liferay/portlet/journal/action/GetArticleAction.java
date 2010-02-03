@@ -25,7 +25,6 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xml.Document;
@@ -140,8 +139,7 @@ public class GetArticleAction extends Action {
 		// Theme CSS
 
 		url = PortalUtil.getStaticResourceURL(
-				request, themeDisplay.getPathThemeCss() + "/main.css");
-
+			request, themeDisplay.getPathThemeCss() + "/main.css");
 
 		arguments.clear();
 

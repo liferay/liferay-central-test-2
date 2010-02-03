@@ -311,6 +311,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			}
 			else {
 				link.append(entryURL);
+
 				if (!entryURL.endsWith(StringPool.QUESTION)) {
 					link.append(StringPool.AMPERSAND);
 				}

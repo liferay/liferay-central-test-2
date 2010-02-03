@@ -74,12 +74,13 @@ public class RepositoryReport {
 
 	public String toString() {
 		Iterator<String> itr = getRepositoryURLs().iterator();
+
 		if (getRepositoryURLs().isEmpty()) {
 			return StringPool.BLANK;
 		}
-		
+
 		StringBundler sb = new StringBundler(getRepositoryURLs().size() * 3);
-		
+
 		while (itr.hasNext()) {
 			String repositoryURL = itr.next();
 

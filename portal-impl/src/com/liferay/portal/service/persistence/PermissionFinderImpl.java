@@ -937,12 +937,13 @@ public class PermissionFinderImpl
 
 	protected String getPermissionIds(
 		List<Permission> permissions, String table) {
+
 		if (permissions.isEmpty()) {
 			return StringPool.BLANK;
 		}
-		
+
 		StringBundler sb = new StringBundler(permissions.size() * 3 - 1);
-		
+
 		for (int i = 0; i < permissions.size(); i++) {
 			sb.append(table);
 			sb.append(".permissionId = ?");
@@ -959,7 +960,7 @@ public class PermissionFinderImpl
 		if (resourceIds.length == 0) {
 			return StringPool.BLANK;
 		}
-		
+
 		StringBundler sb = new StringBundler(resourceIds.length * 2 - 1);
 
 		for (int i = 0; i < resourceIds.length; i++) {

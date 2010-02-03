@@ -22,7 +22,6 @@
 
 package com.liferay.portal.language;
 
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Locale;

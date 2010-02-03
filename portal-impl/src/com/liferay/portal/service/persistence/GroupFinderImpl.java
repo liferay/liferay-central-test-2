@@ -533,7 +533,7 @@ public class GroupFinderImpl
 	}
 
 	protected String getJoin(LinkedHashMap<String, Object> params) {
-		if ((params == null) || (params.isEmpty())) {
+		if ((params == null) || params.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
@@ -595,7 +595,7 @@ public class GroupFinderImpl
 	}
 
 	protected String getWhere(LinkedHashMap<String, Object> params) {
-		if ((params == null) || (params.isEmpty())) {
+		if ((params == null) || params.isEmpty()) {
 			return StringPool.BLANK;
 		}
 

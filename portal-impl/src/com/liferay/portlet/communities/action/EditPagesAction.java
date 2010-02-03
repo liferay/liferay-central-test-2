@@ -774,7 +774,7 @@ public class EditPagesAction extends PortletAction {
 					sb.append(",");
 				}
 			}
-			
+
 			workflowRoleNames = sb.toString();
 		}
 

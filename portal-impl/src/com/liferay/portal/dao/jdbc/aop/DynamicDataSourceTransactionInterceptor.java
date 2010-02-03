@@ -23,7 +23,6 @@
 package com.liferay.portal.dao.jdbc.aop;
 
 import com.liferay.portal.kernel.util.InfrastructureUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.lang.reflect.Method;
@@ -79,12 +78,10 @@ public class DynamicDataSourceTransactionInterceptor
 		else {
 			_dynamicDataSourceTargetSource.setOperation(Operation.WRITE);
 		}
-		
-		String target =
-			targetClass.getName().concat(StringPool.PERIOD).concat(
-			targetMethod.getName());
 
-		_dynamicDataSourceTargetSource.pushMethod(target);
+		_dynamicDataSourceTargetSource.pushMethod(
+			targetClass.getName().concat(StringPool.PERIOD).concat(
+				targetMethod.getName()));
 
 		Object returnValue = null;
 

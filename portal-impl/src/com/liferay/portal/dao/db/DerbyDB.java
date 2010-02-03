@@ -86,7 +86,8 @@ public class DerbyDB extends BaseDB {
 		sb.append("connect to ");
 		sb.append(databaseName);
 		sb.append(";\n");
-		sb.append(FileUtil.read(
+		sb.append(
+			FileUtil.read(
 				"../sql/portal" + suffix + "/portal" + suffix + "-derby.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));

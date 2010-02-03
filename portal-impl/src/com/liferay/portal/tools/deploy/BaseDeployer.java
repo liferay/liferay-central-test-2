@@ -968,7 +968,7 @@ public class BaseDeployer {
 		if (licenses.isEmpty()) {
 			return StringPool.BLANK;
 		}
-		
+
 		StringBundler sb = new StringBundler(5 * licenses.size() + 2);
 
 		for (int i = 0; i < licenses.size(); i++) {
@@ -994,6 +994,7 @@ public class BaseDeployer {
 
 	protected String getPluginPackageLiferayVersionsXml(
 		List<String> liferayVersions) {
+
 		if (liferayVersions.isEmpty()) {
 			return StringPool.BLANK;
 		}

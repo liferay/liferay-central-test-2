@@ -359,7 +359,7 @@ public class AnnouncementsEntryFinderImpl
 	}
 
 	protected String getClassPKs(LinkedHashMap<Long, long[]> scopes) {
-		if ((scopes == null) || (scopes.isEmpty())) {
+		if ((scopes == null) || scopes.isEmpty()) {
 			return StringPool.BLANK;
 		}
 

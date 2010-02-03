@@ -379,8 +379,8 @@ public class DLFolderFinderImpl
 		if (folderIds.isEmpty()) {
 			return StringPool.BLANK;
 		}
-	
-		StringBundler sb = new StringBundler(folderIds.size() * 5 - 1);	
+
+		StringBundler sb = new StringBundler(folderIds.size() * 5 - 1);
 
 		for (int i = 0; i < folderIds.size(); i++) {
 			sb.append(table);

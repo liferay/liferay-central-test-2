@@ -22,7 +22,6 @@
 
 package com.liferay.portal.sharepoint;
 
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**

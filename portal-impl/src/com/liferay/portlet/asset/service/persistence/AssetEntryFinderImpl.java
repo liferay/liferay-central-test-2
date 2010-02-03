@@ -445,7 +445,7 @@ public class AssetEntryFinderImpl
 		if (groupIds.length == 0) {
 			return StringPool.BLANK;
 		}
-		
+
 		StringBundler sb = new StringBundler(groupIds.length + 2);
 
 		sb.append(" AND (AssetEntry.groupId = ? ");
@@ -455,7 +455,6 @@ public class AssetEntryFinderImpl
 		}
 
 		sb.append(")");
-
 
 		return sb.toString();
 	}
@@ -504,7 +503,7 @@ public class AssetEntryFinderImpl
 		if (tagIds.length == 0) {
 			return "(1 = 1)";
 		}
-		
+
 		StringBundler sb = new StringBundler(tagIds.length * 4 - 1);
 
 		for (int i = 0; i < tagIds.length; i++) {

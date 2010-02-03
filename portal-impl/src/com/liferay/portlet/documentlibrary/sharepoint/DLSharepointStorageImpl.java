@@ -71,12 +71,11 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			DLFileEntryLocalServiceUtil.getFileEntries(groupId, parentFolderId);
 
 		for (DLFileEntry fileEntry : fileEntries) {
-			String path =
-				parentFolderPath.concat(
+			String documentPath = parentFolderPath.concat(
 				StringPool.SLASH).concat(fileEntry.getTitle());
 
 			addDocumentElement(
-				element, path, fileEntry.getCreateDate(),
+				element, documentPath, fileEntry.getCreateDate(),
 				fileEntry.getModifiedDate(), fileEntry.getUserName());
 		}
 	}
@@ -423,11 +422,11 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 	}
 
 	protected Tree getFolderTree(DLFolder folder, String parentFolderPath) {
-		String path =
-			parentFolderPath.concat(StringPool.SLASH).concat(folder.getName());
+		String folderPath = parentFolderPath.concat(StringPool.SLASH).concat(
+			folder.getName());
 
 		return getFolderTree(
-			path, folder.getCreateDate(), folder.getModifiedDate(),
+			folderPath, folder.getCreateDate(), folder.getModifiedDate(),
 			folder.getLastPostDate());
 	}
 
@@ -449,12 +448,12 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 	protected Tree getFileEntryTree(
 		DLFileEntry fileEntry, String parentFolderPath) {
-		String path =
-			parentFolderPath.concat(
-			StringPool.SLASH).concat(fileEntry.getTitle());
+
+		String documentPath = parentFolderPath.concat(StringPool.SLASH).concat(
+			fileEntry.getTitle());
 
 		return getDocumentTree(
-			path, fileEntry.getCreateDate(),
+			documentPath, fileEntry.getCreateDate(),
 			fileEntry.getModifiedDate(), fileEntry.getSize(),
 			fileEntry.getUserName(), fileEntry.getVersion());
 	}

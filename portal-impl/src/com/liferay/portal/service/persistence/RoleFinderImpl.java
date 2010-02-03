@@ -551,9 +551,9 @@ public class RoleFinderImpl
 		if (groupIds.length == 0) {
 			return StringPool.BLANK;
 		}
-		
+
 		StringBundler sb = new StringBundler(groupIds.length * 3 - 1);
-		
+
 		for (int i = 0; i < groupIds.length; i++) {
 			sb.append(table);
 			sb.append(".groupId = ?");
@@ -573,7 +573,7 @@ public class RoleFinderImpl
 	}
 
 	protected String getJoin(LinkedHashMap<String, Object> params) {
-		if ((params == null) || (params.isEmpty())) {
+		if ((params == null) || params.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
@@ -617,7 +617,7 @@ public class RoleFinderImpl
 	}
 
 	protected String getWhere(LinkedHashMap<String, Object> params) {
-		if ((params == null) || (params.isEmpty())) {
+		if ((params == null) || params.isEmpty()) {
 			return StringPool.BLANK;
 		}
 

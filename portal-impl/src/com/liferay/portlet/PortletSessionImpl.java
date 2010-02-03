@@ -60,6 +60,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 
 	public static final String getPortletScopeName(
 		String portletName, long plid, String name) {
+
 		return getPortletScope(portletName, plid).concat(
 			StringPool.QUESTION).concat(name);
 	}

@@ -212,11 +212,13 @@ public class ShoppingPreferences {
 
 	public void setAlternativeShipping(String[][] alternativeShipping)
 		throws ReadOnlyException {
+
 		if (alternativeShipping.length == 0) {
 			_preferences.setValue("alternative-shipping", StringPool.BLANK);
 		}
 
-		StringBundler sb = new StringBundler(alternativeShipping.length * 2 - 1);
+		StringBundler sb = new StringBundler(
+			alternativeShipping.length * 2 - 1);
 
 		for (int i = 0; i < alternativeShipping.length; i++) {
 			sb.append(StringUtil.merge(alternativeShipping[i]));

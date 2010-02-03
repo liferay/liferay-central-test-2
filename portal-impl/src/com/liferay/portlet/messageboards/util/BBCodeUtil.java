@@ -193,6 +193,7 @@ public class BBCodeUtil {
 			String postTag = html.substring(tag.getEndPos());
 
 			sb.setIndex(0);
+
 			sb.append(preTag);
 
 			if (tag.hasParameter()) {
@@ -233,6 +234,7 @@ public class BBCodeUtil {
 			String postTag = html.substring(tag.getEndPos());
 
 			sb.setIndex(0);
+
 			sb.append(preTag);
 
 			if (tag.hasParameter()) {
@@ -254,6 +256,7 @@ public class BBCodeUtil {
 			String postTag = html.substring(tag.getEndPos());
 
 			sb.setIndex(0);
+
 			sb.append(preTag);
 
 			sb.append(preTag);
@@ -310,6 +313,7 @@ public class BBCodeUtil {
 			String postTag = html.substring(tag.getEndPos());
 
 			sb.setIndex(0);
+
 			sb.append(preTag);
 
 			if (tag.hasParameter()) {
@@ -331,6 +335,7 @@ public class BBCodeUtil {
 			String postTag = html.substring(tag.getEndPos());
 
 			sb.setIndex(0);
+
 			sb.append(preTag);
 
 			if (tag.hasParameter()) {
@@ -366,6 +371,7 @@ public class BBCodeUtil {
 				tag.getParameter(), tag.getElement().trim());
 
 			sb.setIndex(0);
+
 			sb.append(preTag);
 
 			sb.append(preTag);
