@@ -3757,7 +3757,9 @@ public class PortalImpl implements Portal {
 
 				layoutType.addStateMaxPortletId(portletId);
 
-				updateLayout = true;
+				if (!PropsValues.LAYOUT_DEFAULT_MAX_WINDOW_STATE_RESET) {
+					updateLayout = true;
+				}
 			}
 			else if (windowState.equals(WindowState.MINIMIZED) &&
 					 !layoutType.hasStateMinPortletId(portletId)) {

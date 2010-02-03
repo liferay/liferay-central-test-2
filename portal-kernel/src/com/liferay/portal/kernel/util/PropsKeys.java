@@ -727,6 +727,8 @@ public interface PropsKeys {
 
 	public static final String LAYOUT_CONFIGURATION_ACTION_UPDATE = "layout.configuration.action.update";
 
+	public static final String LAYOUT_DEFAULT_MAX_WINDOW_STATE_RESET = "layout.default.max.window.state.reset";
+
 	public static final String LAYOUT_DEFAULT_P_L_RESET = "layout.default.p_l_reset";
 
 	public static final String LAYOUT_DEFAULT_TEMPLATE_ID = "layout.default.template.id";

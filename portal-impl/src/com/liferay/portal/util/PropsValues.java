@@ -828,6 +828,10 @@ public class PropsValues {
 	public static final boolean LAYOUT_COMMENTS_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LAYOUT_COMMENTS_ENABLED));
 
+	public static final boolean LAYOUT_DEFAULT_MAX_WINDOW_STATE_RESET =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.LAYOUT_DEFAULT_MAX_WINDOW_STATE_RESET));
+
 	public static final boolean LAYOUT_DEFAULT_P_L_RESET =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LAYOUT_DEFAULT_P_L_RESET));
