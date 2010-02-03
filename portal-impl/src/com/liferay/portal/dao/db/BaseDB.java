@@ -601,8 +601,6 @@ public abstract class BaseDB implements DB {
 
 		DB db = DBFactoryUtil.getDB();
 
-		String type = db.getType();
-
 		String tablesSQLLowerCase = tablesSQL.toLowerCase();
 		String indexesSQLLowerCase = indexesSQL.toLowerCase();
 
