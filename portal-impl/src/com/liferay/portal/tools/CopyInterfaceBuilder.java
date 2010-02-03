@@ -22,8 +22,6 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.comparator.JavaMethodComparator;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
@@ -81,13 +79,11 @@ public class CopyInterfaceBuilder {
 
 		Arrays.sort(methods, new JavaMethodComparator());
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		// Package
 
-		sb.append("package ");
-		sb.append(javaClass.getPackage().getName());
-		sb.append(";");
+		sb.append("package " + javaClass.getPackage().getName() + ";");
 
 		// Imports
 
@@ -95,11 +91,7 @@ public class CopyInterfaceBuilder {
 
 		// Class declaration
 
-		sb.append("public class Copy");
-		sb.append(javaClass.getName());
-		sb.append(" implements ");
-		sb.append(javaClass.getName());
-		sb.append(" {");
+		sb.append("public class Copy" + javaClass.getName() + " implements " + javaClass.getName() + " {");
 
 		String varName = "_" + TextFormatter.format(javaClass.getName(), TextFormatter.I);
 
@@ -117,22 +109,14 @@ public class CopyInterfaceBuilder {
 
 				imports.add(returnValueName);
 
-				sb.append("public ");
-				sb.append(javaMethod.getReturns().getJavaClass().getName());
-				sb.append(_getDimensions(javaMethod.getReturns()));
-				sb.append( " ");
-				sb.append(methodName);
-				sb.append("(");
+				sb.append("public " + javaMethod.getReturns().getJavaClass().getName() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sb.append(javaParameter.getType().getJavaClass().getName());
-					sb.append(_getDimensions(javaParameter.getType()));
-					sb.append(" ");
-					sb.append(javaParameter.getName());
+					sb.append(javaParameter.getType().getJavaClass().getName() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
 					imports.add(javaParameter.getType().getValue());
 
@@ -175,10 +159,7 @@ public class CopyInterfaceBuilder {
 					sb.append("return ");
 				}
 
-				sb.append(varName);
-				sb.append(".");
-				sb.append(methodName);
-				sb.append("(");
+				sb.append(varName + "." + methodName + "(");
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
@@ -197,11 +178,7 @@ public class CopyInterfaceBuilder {
 
 		// Fields
 
-		sb.append("private ");
-		sb.append(javaClass.getName());
-		sb.append(" ");
-		sb.append(varName);
-		sb.append(";");
+		sb.append("private " + javaClass.getName() + " " + varName + ";");
 
 		// Class close brace
 
@@ -211,27 +188,19 @@ public class CopyInterfaceBuilder {
 
 		String content = sb.toString();
 
-		if (imports.isEmpty()) {
-			content =
-				StringUtil.replace(content, "[$IMPORTS$]", StringPool.BLANK);
-		}
-		else {
-			sb.setIndex(0);
+		sb = new StringBuilder();
 
-			Iterator<String> itr = imports.iterator();
+		Iterator<String> itr = imports.iterator();
 
-			while (itr.hasNext()) {
-				String importClass = itr.next();
+		while (itr.hasNext()) {
+			String importClass = itr.next();
 
-				if (!importClass.equals("boolean") && !importClass.equals("double") && !importClass.equals("int") && !importClass.equals("long") && !importClass.equals("short") && !importClass.equals("void")) {
-					sb.append("import ");
-					sb.append(importClass);
-					sb.append(";");
-				}
+			if (!importClass.equals("boolean") && !importClass.equals("double") && !importClass.equals("int") && !importClass.equals("long") && !importClass.equals("short") && !importClass.equals("void")) {
+				sb.append("import " + importClass + ";");
 			}
-			
-			content = StringUtil.replace(content, "[$IMPORTS$]", sb.toString());
 		}
+
+		content = StringUtil.replace(content, "[$IMPORTS$]", sb.toString());
 
 		// Write file
 

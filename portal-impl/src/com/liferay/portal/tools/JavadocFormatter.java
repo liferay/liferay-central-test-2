@@ -24,7 +24,6 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -188,7 +187,7 @@ public class JavadocFormatter {
 	private String _addDocletTags(
 		Element parentElement, String[] names, String indent) {
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		int maxNameLength = 0;
 
@@ -564,7 +563,7 @@ public class JavadocFormatter {
 	private String _getJavaClassComment(
 		Element rootElement, JavaClass javaClass) {
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		String indent = StringPool.BLANK;
 
@@ -678,7 +677,7 @@ public class JavadocFormatter {
 			}
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append(indent);
 		sb.append("/**\n");
@@ -740,7 +739,7 @@ public class JavadocFormatter {
 			}
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append(indent);
 		sb.append("/**\n");
@@ -782,12 +781,12 @@ public class JavadocFormatter {
 	}
 
 	private String _getMethodKey(Element methodElement) {
-		List<Element> paramElements = methodElement.elements("param");
-
-		StringBundler sb = new StringBundler(paramElements.size() * 4 + 3);
+		StringBuilder sb = new StringBuilder();
 
 		sb.append(methodElement.elementText("name"));
 		sb.append("(");
+
+		List<Element> paramElements = methodElement.elements("param");
 
 		for (Element paramElement : paramElements) {
 			sb.append(paramElement.elementText("name"));
@@ -802,11 +801,12 @@ public class JavadocFormatter {
 	}
 
 	private String _getMethodKey(JavaMethod javaMethod) {
-		JavaParameter[] javaParameters = javaMethod.getParameters();
-		StringBundler sb = new StringBundler(javaParameters.length * 4 + 3);
+		StringBuilder sb = new StringBuilder();
 
 		sb.append(javaMethod.getName());
 		sb.append("(");
+
+		JavaParameter[] javaParameters = javaMethod.getParameters();
 
 		for (JavaParameter javaParameter : javaParameters) {
 			sb.append(javaParameter.getName());
@@ -868,11 +868,7 @@ public class JavadocFormatter {
 			}
 		}
 
-		if (lines.length == 0) {
-			return StringPool.BLANK;
-		}
-
-		StringBundler sb = new StringBundler(lines.length * 2);
+		StringBuilder sb = new StringBuilder(content.length());
 
 		for (String line : lines) {
 			if (line != null) {
@@ -976,29 +972,22 @@ public class JavadocFormatter {
 				_getJavaFieldComment(lines, fieldElementsMap, javaField));
 		}
 
-		String formattedContent;
+		StringBuilder sb = new StringBuilder(javadocLessContent.length());
 
-		if (lines.length == 0) {
-			formattedContent = StringPool.BLANK;
-		}
-		else {
-			StringBundler sb = new StringBundler(lines.length * 3);
+		for (int lineNumber = 1; lineNumber <= lines.length; lineNumber++) {
+			String line = lines[lineNumber - 1];
 
-			for (int lineNumber = 1; lineNumber <= lines.length; lineNumber++) {
-				String line = lines[lineNumber - 1];
+			String comments = commentsMap.get(lineNumber);
 
-				String comments = commentsMap.get(lineNumber);
-
-				if (comments != null) {
-					sb.append(comments);
-				}
-
-				sb.append(line);
-				sb.append("\n");
+			if (comments != null) {
+				sb.append(comments);
 			}
 
-			formattedContent = sb.toString().trim();
+			sb.append(line);
+			sb.append("\n");
 		}
+
+		String formattedContent = sb.toString().trim();
 
 		if (!originalContent.equals(formattedContent)) {
 			File file = new File(_basedir + fileName);

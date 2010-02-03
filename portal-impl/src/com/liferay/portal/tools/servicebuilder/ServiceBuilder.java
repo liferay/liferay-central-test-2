@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SetUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringUtil_IW;
@@ -180,7 +179,7 @@ public class ServiceBuilder {
 				springFileName,	springBaseFileName,
 				springDynamicDataSourceFileName, springHibernateFileName,
 				springInfrastructureFileName, springShardDataSourceFileName,
-				apiDir, implDir, jsonFileName, remotingFileName, sqlDir, 
+				apiDir, implDir, jsonFileName, remotingFileName, sqlDir,
 				sqlFileName, sqlIndexesFileName, sqlIndexesPropertiesFileName,
 				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
 				propsUtil, pluginName, testDir);
@@ -409,30 +408,30 @@ public class ServiceBuilder {
 		String springHibernateFileName,	String springInfrastructureFileName,
 		String springShardDataSourceFileName, String apiDir, String implDir,
 		String jsonFileName, String remotingFileName, String sqlDir,
-		String sqlFileName, String sqlIndexesFileName, 
-		String sqlIndexesPropertiesFileName, String sqlSequencesFileName, 
-		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil, 
+		String sqlFileName, String sqlIndexesFileName,
+		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
+		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
 		String pluginName, String testDir) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, ormFileName, modelHintsFileName,
 			springFileName, springBaseFileName, springDynamicDataSourceFileName,
 			springHibernateFileName, springInfrastructureFileName,
-			springShardDataSourceFileName, apiDir, implDir, jsonFileName, 
+			springShardDataSourceFileName, apiDir, implDir, jsonFileName,
 			remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
-			sqlIndexesPropertiesFileName, sqlSequencesFileName, 
-			autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName, 
+			sqlIndexesPropertiesFileName, sqlSequencesFileName,
+			autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName,
 			testDir, true);
 	}
 
 	public ServiceBuilder(
-		String fileName, String hbmFileName, String ormFileName, 
+		String fileName, String hbmFileName, String ormFileName,
 		String modelHintsFileName, String springFileName,
 		String springBaseFileName, String springDynamicDataSourceFileName,
 		String springHibernateFileName,	String springInfrastructureFileName,
-		String springShardDataSourceFileName, String apiDir, String implDir, 
+		String springShardDataSourceFileName, String apiDir, String implDir,
 		String jsonFileName, String remotingFileName, String sqlDir,
-		String sqlFileName, String sqlIndexesFileName, 
+		String sqlFileName, String sqlIndexesFileName,
 		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
 		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
 		String pluginName, String testDir, boolean build) {
@@ -1117,7 +1116,7 @@ public class ServiceBuilder {
 		String name = type.getValue();
 
 		if (dimensions > 0) {
-			StringBundler sb = new StringBundler(dimensions);
+			StringBuilder sb = new StringBuilder();
 
 			for (int i = 0; i < dimensions; i++) {
 				sb.append("[");
@@ -1155,7 +1154,7 @@ public class ServiceBuilder {
 		return name;
 	}
 
-	public String getCreateMappingTableSQL(EntityMapping entityMapping) 
+	public String getCreateMappingTableSQL(EntityMapping entityMapping)
 		throws IOException {
 
 		String createMappingTableSQL = _getCreateMappingTableSQL(entityMapping);
@@ -1248,8 +1247,8 @@ public class ServiceBuilder {
 				refFileName, _hbmFileName, _ormFileName, _modelHintsFileName,
 				_springFileName, _springBaseFileName,
 				_springDynamicDataSourceFileName, _springHibernateFileName,
-				_springInfrastructureFileName, _springShardDataSourceFileName, 
-				_apiDir, _implDir, _jsonFileName, _remotingFileName, _sqlDir, 
+				_springInfrastructureFileName, _springShardDataSourceFileName,
+				_apiDir, _implDir, _jsonFileName, _remotingFileName, _sqlDir,
 				_sqlFileName, _sqlIndexesFileName,
 				_sqlIndexesPropertiesFileName, _sqlSequencesFileName,
 				_autoNamespaceTables, _beanLocatorUtil, _propsUtil, _pluginName,
@@ -1307,7 +1306,7 @@ public class ServiceBuilder {
 		return idType;
 	}
 
-	public List<EntityColumn> getMappingEntities(String mappingTable) 
+	public List<EntityColumn> getMappingEntities(String mappingTable)
 		throws IOException {
 
 		List<EntityColumn> mappingEntitiesPKList =
@@ -1345,10 +1344,15 @@ public class ServiceBuilder {
 	}
 
 	public String getParameterType(JavaParameter parameter) {
+		StringBuilder sb = new StringBuilder();
+
 		Type returnType = parameter.getType();
 
-		return returnType.getValue().concat(parameter.getGenericsName()).concat(
-			getDimensions(returnType.getDimensions()));
+		sb.append(returnType.getValue());
+		sb.append(parameter.getGenericsName());
+		sb.append(getDimensions(returnType.getDimensions()));
+
+		return sb.toString();
 	}
 
 	public String getPrimitiveObj(String type) {
@@ -1399,12 +1403,15 @@ public class ServiceBuilder {
 	}
 
 	public String getReturnType(JavaMethod method) {
+		StringBuilder sb = new StringBuilder();
+
 		Type returnType = method.getReturns();
 
-		return 
-			returnType.getValue().concat(
-			method.getReturnsGenericsName()).concat(
-			getDimensions(returnType.getDimensions()));
+		sb.append(returnType.getValue());
+		sb.append(method.getReturnsGenericsName());
+		sb.append(getDimensions(returnType.getDimensions()));
+
+		return sb.toString();
 	}
 
 	public String getServiceBaseThrowsExceptions(
@@ -1662,9 +1669,8 @@ public class ServiceBuilder {
 
 	public boolean isDuplicateMethod(
 		JavaMethod method, Map<String, Object> tempMap) {
-		JavaParameter[] parameters = method.getParameters();
 
-		StringBundler sb = new StringBundler(4 * parameters.length + 7);
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("isDuplicateMethod ");
 		sb.append(method.getReturns().getValue());
@@ -1674,7 +1680,7 @@ public class ServiceBuilder {
 		sb.append(method.getName());
 		sb.append(StringPool.OPEN_PARENTHESIS);
 
-		
+		JavaParameter[] parameters = method.getParameters();
 
 		for (int i = 0; i < parameters.length; i++) {
 			JavaParameter javaParameter = parameters[i];
@@ -2119,7 +2125,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createJsonJs() throws Exception {
-		StringBundler content = new StringBundler();
+		StringBuilder content = new StringBuilder();
 
 		if (_ejbList.size() > 0) {
 			content.append(_processTemplate(_tplJsonJs));
@@ -2652,7 +2658,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createRemotingXml() throws Exception {
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		Document doc = SAXReaderUtil.read(new File(_springFileName));
 
@@ -3333,10 +3339,9 @@ public class ServiceBuilder {
 				EntityFinder finder = finderList.get(j);
 
 				if (finder.isDBIndex()) {
-					StringBundler sb = new StringBundler();
+					StringBuilder sb = new StringBuilder();
 
-					sb.append(entity.getTable());
-					sb.append(" (");
+					sb.append(entity.getTable() + " (");
 
 					List<EntityColumn> finderColsList = finder.getColumns();
 
@@ -3359,7 +3364,7 @@ public class ServiceBuilder {
 
 					String indexName = "IX_" + indexHash;
 
-					sb.setIndex(0);
+					sb = new StringBuilder();
 
 					sb.append("create ");
 
@@ -3367,9 +3372,7 @@ public class ServiceBuilder {
 						sb.append("unique ");
 					}
 
-					sb.append("index ");
-					sb.append(indexName);
-					sb.append(" on ");
+					sb.append("index " + indexName + " on ");
 					sb.append(indexSpec);
 
 					indexSQLs.put(indexSpec, sb.toString());
@@ -3391,7 +3394,7 @@ public class ServiceBuilder {
 			_getCreateMappingTableIndex(entityMapping, indexSQLs, indexProps);
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<String> itr = indexSQLs.values().iterator();
 
@@ -3425,7 +3428,7 @@ public class ServiceBuilder {
 
 		// indexes.properties
 
-		sb.setIndex(0);
+		sb = new StringBuilder();
 
 		itr = indexProps.keySet().iterator();
 
@@ -3483,7 +3486,7 @@ public class ServiceBuilder {
 			}
 		}
 		else if (addMissingTables) {
-			StringBundler sb = new StringBundler();
+			StringBuilder sb = new StringBuilder();
 
 			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(content));
@@ -3499,8 +3502,7 @@ public class ServiceBuilder {
 					String tableName = line.substring(x, y);
 
 					if (tableName.compareTo(entityMapping.getTable()) > 0) {
-						sb.append(newCreateTableString);
-						sb.append("\n\n");
+						sb.append(newCreateTableString + "\n\n");
 
 						appendNewTable = false;
 					}
@@ -3511,8 +3513,7 @@ public class ServiceBuilder {
 			}
 
 			if (appendNewTable) {
-				sb.append("\n");
-				sb.append(newCreateTableString);
+				sb.append("\n" + newCreateTableString);
 			}
 
 			unsyncBufferedReader.close();
@@ -3564,14 +3565,17 @@ public class ServiceBuilder {
 				EntityColumn column = columnList.get(j);
 
 				if ("sequence".equals(column.getIdType())) {
+					StringBuilder sb = new StringBuilder();
+
 					String sequenceName = column.getIdParam();
 
 					if (sequenceName.length() > 30) {
 						sequenceName = sequenceName.substring(0, 30);
 					}
 
-					String sequenceSQL = "create sequence ".concat(sequenceName
-						).concat(";");
+					sb.append("create sequence " + sequenceName + ";");
+
+					String sequenceSQL = sb.toString();
 
 					if (!sequenceSQLs.contains(sequenceSQL)) {
 						sequenceSQLs.add(sequenceSQL);
@@ -3580,26 +3584,21 @@ public class ServiceBuilder {
 			}
 		}
 
-		if (sequenceSQLs.isEmpty()) {
-			FileUtil.write(sqlFile, StringPool.BLANK, true);
-		}
-		else {
-			StringBundler sb = new StringBundler(sequenceSQLs.size() * 2 - 1);
+		StringBuilder sb = new StringBuilder();
 
-			Iterator<String> itr = sequenceSQLs.iterator();
+		Iterator<String> itr = sequenceSQLs.iterator();
 
-			while (itr.hasNext()) {
-				String sequenceSQL = itr.next();
+		while (itr.hasNext()) {
+			String sequenceSQL = itr.next();
 
-				sb.append(sequenceSQL);
+			sb.append(sequenceSQL);
 
-				if (itr.hasNext()) {
-					sb.append("\n");
-				}
+			if (itr.hasNext()) {
+				sb.append("\n");
 			}
-
-			FileUtil.write(sqlFile, sb.toString(), true);
 		}
+
+		FileUtil.write(sqlFile, sb.toString(), true);
 	}
 
 	private void _createSQLTables() throws IOException {
@@ -3676,7 +3675,7 @@ public class ServiceBuilder {
 			}
 		}
 		else if (addMissingTables) {
-			StringBundler sb = new StringBundler();
+			StringBuilder sb = new StringBuilder();
 
 			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(content));
@@ -3692,8 +3691,7 @@ public class ServiceBuilder {
 					String tableName = line.substring(x, y);
 
 					if (tableName.compareTo(entity.getTable()) > 0) {
-						sb.append(newCreateTableString);
-						sb.append("\n\n");
+						sb.append(newCreateTableString + "\n\n");
 
 						appendNewTable = false;
 					}
@@ -3704,8 +3702,7 @@ public class ServiceBuilder {
 			}
 
 			if (appendNewTable) {
-				sb.append("\n");
-				sb.append(newCreateTableString);
+				sb.append("\n" + newCreateTableString);
 			}
 
 			unsyncBufferedReader.close();
@@ -3715,7 +3712,7 @@ public class ServiceBuilder {
 	}
 
 	private String _fixHbmXml(String content) throws IOException {
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
@@ -3865,11 +3862,9 @@ public class ServiceBuilder {
 
 				String indexName = "IX_" + indexHash;
 
-				StringBundler sb = new StringBundler(4);
+				StringBuilder sb = new StringBuilder();
 
-				sb.append("create index ");
-				sb.append(indexName);
-				sb.append(" on ");
+				sb.append("create index " + indexName + " on ");
 				sb.append(indexSpec);
 
 				indexSQLs.put(indexSpec, sb.toString());
@@ -3895,11 +3890,9 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
-		sb.append(_SQL_CREATE_TABLE);
-		sb.append(entityMapping.getTable());
-		sb.append(" (\n");
+		sb.append(_SQL_CREATE_TABLE + entityMapping.getTable() + " (\n");
 
 		for (Entity entity : entities) {
 			List<EntityColumn> pkList = entity.getPKList();
@@ -3910,8 +3903,7 @@ public class ServiceBuilder {
 				String colName = col.getName();
 				String colType = col.getType();
 
-				sb.append("\t");
-				sb.append(col.getDBName());
+				sb.append("\t" + col.getDBName());
 				sb.append(" ");
 
 				if (colType.equalsIgnoreCase("boolean")) {
@@ -3947,9 +3939,7 @@ public class ServiceBuilder {
 					}
 
 					if (maxLength < 4000) {
-						sb.append("VARCHAR(");
-						sb.append(maxLength);
-						sb.append(")");
+						sb.append("VARCHAR(" + maxLength + ")");
 					}
 					else if (maxLength == 4000) {
 						sb.append("STRING");
@@ -4007,11 +3997,9 @@ public class ServiceBuilder {
 			return null;
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
-		sb.append(_SQL_CREATE_TABLE);
-		sb.append(entity.getTable());
-		sb.append(" (\n");
+		sb.append(_SQL_CREATE_TABLE + entity.getTable() + " (\n");
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = regularColList.get(i);
@@ -4020,8 +4008,7 @@ public class ServiceBuilder {
 			String colType = col.getType();
 			String colIdType = col.getIdType();
 
-			sb.append("\t");
-			sb.append(col.getDBName());
+			sb.append("\t" + col.getDBName());
 			sb.append(" ");
 
 			if (colType.equalsIgnoreCase("boolean")) {
@@ -4057,9 +4044,7 @@ public class ServiceBuilder {
 				}
 
 				if (maxLength < 4000) {
-					sb.append("VARCHAR(");
-					sb.append(maxLength);
-					sb.append(")");
+					sb.append("VARCHAR(" + maxLength + ")");
 				}
 				else if (maxLength == 4000) {
 					sb.append("STRING");

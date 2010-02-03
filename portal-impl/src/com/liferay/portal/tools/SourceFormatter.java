@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
@@ -127,7 +126,7 @@ public class SourceFormatter {
 
 		imports = content.substring(x, y);
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(imports));
@@ -225,24 +224,14 @@ public class SourceFormatter {
 				urlPatterns.add(locale);
 			}
 
-			String temp;
+			StringBuilder sb = new StringBuilder();
 
-			if (urlPatterns.isEmpty()) {
-				temp = StringPool.BLANK;
-			}
-			else {
-				StringBundler sb = new StringBundler(urlPatterns.size() * 6);
-
-				for (String urlPattern : urlPatterns) {
-					sb.append("\t<servlet-mapping>\n");
-					sb.append("\t\t<servlet-name>I18n Servlet</servlet-name>\n");
-					sb.append("\t\t<url-pattern>/");
-					sb.append(urlPattern);
-					sb.append("/*</url-pattern>\n");
-					sb.append("\t</servlet-mapping>\n");
-				}
-				
-				temp = sb.toString();
+			for (String urlPattern : urlPatterns) {
+				sb.append("\t<servlet-mapping>\n");
+				sb.append("\t\t<servlet-name>I18n Servlet</servlet-name>\n");
+				sb.append(
+					"\t\t<url-pattern>/" + urlPattern +"/*</url-pattern>\n");
+				sb.append("\t</servlet-mapping>\n");
 			}
 
 			File file = new File(
@@ -262,7 +251,7 @@ public class SourceFormatter {
 			y = content.indexOf("</servlet-mapping>", y) + 19;
 
 			String newContent =
-				content.substring(0, x) + temp + content.substring(y);
+				content.substring(0, x) + sb.toString() + content.substring(y);
 
 			if ((newContent != null) && !content.equals(newContent)) {
 				_fileUtil.write(file, newContent);
@@ -376,7 +365,7 @@ public class SourceFormatter {
 
 		importsList = ListUtil.sort(importsList);
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		String temp = null;
 
@@ -560,7 +549,7 @@ public class SourceFormatter {
 
 		boolean longLogFactoryUtil = false;
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
@@ -761,7 +750,7 @@ public class SourceFormatter {
 	private static String _formatJSPContent(String fileName, String content)
 		throws IOException {
 
-		StringBundler sb = new StringBundler();
+		StringBuilder sb = new StringBuilder();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
@@ -825,7 +814,7 @@ public class SourceFormatter {
 					}
 
 					if (result.indexOf(quoteFix) == -1) {
-						StringBundler sb = new StringBundler(5);
+						StringBuilder sb = new StringBuilder();
 
 						sb.append(content.substring(0, x));
 						sb.append(quoteFix);
@@ -979,18 +968,16 @@ public class SourceFormatter {
 	}
 
 	private static String _getTaglibRegex(String quoteType) {
-		StringBundler sb = new StringBundler(_TAG_LIBRARIES.length * 2 + 7);
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("<(");
 
 		for (int i = 0; i < _TAG_LIBRARIES.length; i++) {
 			sb.append(_TAG_LIBRARIES[i]);
-
-			if ((i + 1) != _TAG_LIBRARIES.length) {
-				sb.append(StringPool.PIPE);
-			}
+			sb.append(StringPool.PIPE);
 		}
 
+		sb.deleteCharAt(sb.length() - 1);
 		sb.append("):([^>]|%>)*");
 		sb.append(quoteType);
 		sb.append("<%=.*");
