@@ -124,7 +124,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			value = value.toLowerCase();
 
 			Term term = new Term(
-				field, StringPool.STAR.concat(value).concat(StringPool.STAR)));
+				field, StringPool.STAR.concat(value).concat(StringPool.STAR));
 
 			WildcardQuery wildcardQuery = new WildcardQuery(term);
 
