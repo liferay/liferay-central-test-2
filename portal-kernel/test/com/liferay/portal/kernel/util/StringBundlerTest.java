@@ -58,7 +58,7 @@ public class StringBundlerTest extends TestCase {
 
 	public void testAppend() {
 
-		// Append null 1
+		// Append null String
 
 		StringBundler sb = new StringBundler();
 
@@ -67,10 +67,12 @@ public class StringBundlerTest extends TestCase {
 		assertEquals(1, sb.index());
 		assertEquals(StringPool.NULL, sb.stringAt(0));
 
-		// Append null 2
+		// Append null StringBundler
 
 		sb = new StringBundler();
+
 		sb.append((StringBundler)null);
+
 		assertEquals(0, sb.index());
 
 		// Append without growing
@@ -98,7 +100,7 @@ public class StringBundlerTest extends TestCase {
 		assertEquals("test2", sb.stringAt(1));
 		assertEquals("test3", sb.stringAt(2));
 
-		// Append with growth
+		// Append String with growth
 
 		sb = new StringBundler(2);
 
@@ -125,30 +127,36 @@ public class StringBundlerTest extends TestCase {
 		assertEquals("test3", sb.stringAt(2));
 
 		// Append StringBundler with growth
-		sb = new StringBundler(2);
-		StringBundler sbtest = new StringBundler();
-		sbtest.append("test1");
-		sbtest.append("test2");
-		sbtest.append("test3");
 
-		sb.append(sbtest);
+		sb = new StringBundler(2);
+
+		StringBundler testSB = new StringBundler();
+
+		testSB.append("test1");
+		testSB.append("test2");
+		testSB.append("test3");
+
+		sb.append(testSB);
 
 		assertEquals(3, sb.index());
 		assertEquals(10, sb.capacity());
 		assertEquals("test3", sb.stringAt(2));
 
 		// Append StringBundler without growth
+
 		sb = new StringBundler();
-		sbtest = new StringBundler();
-		sbtest.append("test1");
-		sbtest.append("test2");
-		sbtest.append("test3");
-		sb.append(sbtest);
+
+		testSB = new StringBundler();
+
+		testSB.append("test1");
+		testSB.append("test2");
+		testSB.append("test3");
+
+		sb.append(testSB);
 
 		assertEquals(3, sb.index());
 		assertEquals(16, sb.capacity());
 		assertEquals("test3", sb.stringAt(2));
-
 	}
 
 	public void testToString() {
