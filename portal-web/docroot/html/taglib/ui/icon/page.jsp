@@ -134,13 +134,51 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 
 <c:choose>
 	<c:when test="<%= (iconListIconCount != null) && ((iconListSingleIcon == null) || iconListShowWhenSingleIcon) %>">
-		<li <%= cssClassHtml %>><c:if test="<%= urlIsNotNull %>"><a href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>></c:if><img class="<%= imgClass %>" src="<%= src %>" <%= details %> /><c:if test="<%= urlIsNotNull %>"></a></c:if> <c:if test="<%= urlIsNotNull %>"><a href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= urlIsNotNull %>"></a></c:if></li>
+		<li <%= cssClassHtml %>>
+			<c:if test="<%= urlIsNotNull %>">
+				<a class="taglib-icon" href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>>
+			</c:if>
+
+			<img class="<%= imgClass %>" src="<%= src %>" <%= details %> />
+
+			<span class="taglib-text"><liferay-ui:message key="<%= message %>" /></span>
+
+			<c:if test="<%= urlIsNotNull %>">
+				</a>
+			</c:if>
+		</li>
 	</c:when>
 	<c:when test="<%= (iconMenuIconCount != null) && ((iconMenuSingleIcon == null) || iconMenuShowWhenSingleIcon) %>">
-		<li <%= cssClassHtml %>><c:if test="<%= urlIsNotNull %>"><a href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>></c:if><img class="<%= imgClass %>" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /><c:if test="<%= urlIsNotNull %>"></a></c:if></li>
+		<li <%= cssClassHtml %>>
+			<c:if test="<%= urlIsNotNull %>">
+				<a href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>>
+			</c:if>
+
+			<img class="<%= imgClass %>" src="<%= src %>" <%= details %> />
+
+			<liferay-ui:message key="<%= message %>" />
+
+			<c:if test="<%= urlIsNotNull %>">
+				</a>
+			</c:if>
+		</li>
 	</c:when>
 	<c:otherwise>
-		<span <%= cssClassHtml %> <%= idHtml %>><c:if test="<%= urlIsNotNull %>"><a href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>></c:if><img class="<%= imgClass %>" src="<%= src %>" <%= details %> /><c:if test="<%= urlIsNotNull %>"></a></c:if><c:if test="<%= label %>"> <c:if test="<%= urlIsNotNull %>"><a href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= urlIsNotNull %>"></a></c:if></c:if></span>
+		<span <%= cssClassHtml %> <%= idHtml %>>
+			<c:if test="<%= urlIsNotNull %>">
+				<a class="taglib-icon" href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>>
+			</c:if>
+
+			<img class="<%= imgClass %>" src="<%= src %>" <%= details %> />
+
+			<c:if test="<%= label %>">
+				<span class="taglib-text"><liferay-ui:message key="<%= message %>" /></span>
+			</c:if>
+
+			<c:if test="<%= urlIsNotNull %>">
+				</a>
+			</c:if>
+		</span>
 	</c:otherwise>
 </c:choose>
 

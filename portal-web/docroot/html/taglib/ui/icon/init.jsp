@@ -95,10 +95,14 @@ if ((iconListIconCount != null) || (iconListSingleIcon != null)) {
 if ((iconMenuIconCount != null) || (iconMenuSingleIcon != null)) {
 	label = true;
 }
+String details = null;
 
-String details = " alt=\"" + LanguageUtil.get(pageContext, message) + "\"";
+if (label) {
+	details = " alt=\"\"";
+}
+else {
+	details = " alt=\"" + LanguageUtil.get(pageContext, message) + "\"";
 
-if (!label) {
 	if (toolTip) {
 		details += " onmouseover=\"Liferay.Portal.ToolTip.show(this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
 	}
