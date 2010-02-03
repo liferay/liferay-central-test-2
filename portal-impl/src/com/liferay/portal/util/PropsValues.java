@@ -828,10 +828,6 @@ public class PropsValues {
 	public static final boolean LAYOUT_COMMENTS_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LAYOUT_COMMENTS_ENABLED));
 
-	public static final boolean LAYOUT_DEFAULT_MAX_WINDOW_STATE_RESET =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.LAYOUT_DEFAULT_MAX_WINDOW_STATE_RESET));
-
 	public static final boolean LAYOUT_DEFAULT_P_L_RESET =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LAYOUT_DEFAULT_P_L_RESET));
@@ -864,6 +860,10 @@ public class PropsValues {
 	public static final boolean LAYOUT_PARALLEL_RENDER_ENABLE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LAYOUT_PARALLEL_RENDER_ENABLE));
+
+	public static final boolean LAYOUT_REMEMBER_MAXIMIZED_WINDOW_STATE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.LAYOUT_REMEMBER_MAXIMIZED_WINDOW_STATE));
 
 	public static final boolean LAYOUT_SHOW_HTTP_STATUS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LAYOUT_SHOW_HTTP_STATUS));

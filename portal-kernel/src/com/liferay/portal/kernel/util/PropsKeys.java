@@ -727,8 +727,6 @@ public interface PropsKeys {
 
 	public static final String LAYOUT_CONFIGURATION_ACTION_UPDATE = "layout.configuration.action.update";
 
-	public static final String LAYOUT_DEFAULT_MAX_WINDOW_STATE_RESET = "layout.default.max.window.state.reset";
-
 	public static final String LAYOUT_DEFAULT_P_L_RESET = "layout.default.p_l_reset";
 
 	public static final String LAYOUT_DEFAULT_TEMPLATE_ID = "layout.default.template.id";
@@ -754,6 +752,8 @@ public interface PropsKeys {
 	public static final String LAYOUT_PARALLEL_RENDER_ENABLE = "layout.parallel.render.enable";
 
 	public static final String LAYOUT_PARENTABLE = "layout.parentable";
+
+	public static final String LAYOUT_REMEMBER_MAXIMIZED_WINDOW_STATE = "layout.remember.maximized.window.state";
 
 	public static final String LAYOUT_SHOW_HTTP_STATUS = "layout.show.http.status";
 
