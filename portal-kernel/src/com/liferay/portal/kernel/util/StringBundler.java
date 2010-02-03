@@ -97,10 +97,26 @@ public class StringBundler {
 		}
 
 		if (_arrayIndex >= _array.length) {
-			expandCapacity();
+			expandCapacity(_array.length * 2);
 		}
 
 		_array[_arrayIndex++] = s;
+
+		return this;
+	}
+
+	public StringBundler append(StringBundler sb) {
+		if (sb == null) {
+			return this;
+		}
+
+		if ((_array.length - _arrayIndex) < sb._arrayIndex) {
+			expandCapacity((_array.length + sb._arrayIndex) * 2);
+		}
+
+		System.arraycopy(sb._array, 0, _array, _arrayIndex, sb._arrayIndex);
+
+		_arrayIndex += sb._arrayIndex;
 
 		return this;
 	}
@@ -111,6 +127,16 @@ public class StringBundler {
 
 	public int index() {
 		return _arrayIndex;
+	}
+
+	public int length() {
+		int length = 0;
+
+		for (int i = 0; i < _arrayIndex; i++) {
+			length += _array[i].length();
+		}
+
+		return length;
 	}
 
 	public void setIndex(int newIndex) {
@@ -182,8 +208,8 @@ public class StringBundler {
 		return s;
 	}
 
-	protected void expandCapacity() {
-		String[] newArray = new String[_array.length << 1];
+	protected void expandCapacity(int newCapacity) {
+		String[] newArray = new String[newCapacity];
 
 		System.arraycopy(_array, 0, newArray, 0, _arrayIndex);
 
