@@ -254,7 +254,7 @@ public class ClusterLinkImpl implements ClusterLink {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Autodetect JGroups outgoing IP address and interface for " +
+				"Autodetecting JGroups outgoing IP address and interface for " +
 					host + ":" + port);
 		}
 
@@ -269,7 +269,7 @@ public class ClusterLinkImpl implements ClusterLink {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Set JGroups outgoing IP address to " +
+				"Setting JGroups outgoing IP address to " +
 					inetAddress.getHostAddress() + " and interface to " +
 						networkInterface.getName());
 		}
