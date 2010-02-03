@@ -123,6 +123,12 @@ public class InformixDB extends BaseDB {
 					"alter table @table@ modify (@old-column@ @type@);",
 					REWORD_TEMPLATE, template);
 			}
+			else if (line.indexOf(DROP_INDEX) != -1) {
+				String[] tokens = StringUtil.split(line, " ");
+
+				line = StringUtil.replace(
+					"drop index @index@;", "@index@", tokens[2]);
+			}
 			else if (line.indexOf("typeSettings text") > 0) {
 				line = StringUtil.replace(
 					line, "typeSettings text", "typeSettings lvarchar(4096)");

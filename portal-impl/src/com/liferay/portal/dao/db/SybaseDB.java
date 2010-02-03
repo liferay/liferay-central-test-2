@@ -130,6 +130,13 @@ public class SybaseDB extends BaseDB {
 					"alter table @table@ alter column @old-column@ @type@;",
 					REWORD_TEMPLATE, template);
 			}
+			else if (line.indexOf(DROP_INDEX) != -1) {
+				String[] tokens = StringUtil.split(line, " ");
+
+				line = StringUtil.replace(
+					"drop index @table@.@index@;", "@table@", tokens[4]);
+				line = StringUtil.replace(line, "@index@", tokens[2]);
+			}
 
 			sb.append(line);
 			sb.append("\n");

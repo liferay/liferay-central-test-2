@@ -653,17 +653,7 @@ public abstract class BaseDB implements DB {
 
 			validIndexNames.remove(indexNameUpperCase);
 
-			String sql = "drop index " + indexNameUpperCase;
-
-			if (type.equals(DB.TYPE_MYSQL) || type.equals(DB.TYPE_SQLSERVER)) {
-				sql += " on " + tableName;
-			}
-
-			if (_log.isInfoEnabled()) {
-				_log.info(sql);
-			}
-
-			db.runSQL(sql);
+			db.runSQL("drop index " + indexNameUpperCase + " on " + tableName);
 		}
 
 		return validIndexNames;
@@ -884,6 +874,8 @@ public abstract class BaseDB implements DB {
 	protected static String ALTER_COLUMN_TYPE = "alter_column_type ";
 
 	protected static String ALTER_COLUMN_NAME = "alter_column_name ";
+
+	protected static String DROP_INDEX = "drop index";
 
 	protected static String DROP_PRIMARY_KEY = "drop primary key";
 

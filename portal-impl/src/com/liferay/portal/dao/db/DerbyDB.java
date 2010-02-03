@@ -117,6 +117,12 @@ public class DerbyDB extends BaseDB {
 						"This statement is not supported by Derby: " + line);
 				}
 			}
+			else if (line.indexOf(DROP_INDEX) != -1) {
+				String[] tokens = StringUtil.split(line, " ");
+
+				line = StringUtil.replace(
+					"drop index @index@;", "@index@", tokens[2]);
+			}
 
 			sb.append(line);
 			sb.append("\n");
