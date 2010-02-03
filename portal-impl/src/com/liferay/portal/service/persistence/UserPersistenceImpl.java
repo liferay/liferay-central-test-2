@@ -3010,17 +3010,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBundler query = null;
 				String sql = null;
 
 				if (obc != null) {
-					query = new StringBundler(3);
-
-					query.append(_SQL_GETGROUPS);
-					query.append(ORDER_BY_CLAUSE);
-					query.append(obc.getOrderBy());
-
-					sql = query.toString();
+					sql = _SQL_GETGROUPS.concat(ORDER_BY_CLAUSE)
+										.concat(obc.getOrderBy());
 				}
 
 				else {
@@ -3349,17 +3343,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBundler query = null;
 				String sql = null;
 
 				if (obc != null) {
-					query = new StringBundler(3);
-
-					query.append(_SQL_GETORGANIZATIONS);
-					query.append(ORDER_BY_CLAUSE);
-					query.append(obc.getOrderBy());
-
-					sql = query.toString();
+					sql = _SQL_GETORGANIZATIONS.concat(ORDER_BY_CLAUSE)
+											   .concat(obc.getOrderBy());
 				}
 
 				else {
@@ -3703,17 +3691,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBundler query = null;
 				String sql = null;
 
 				if (obc != null) {
-					query = new StringBundler(3);
-
-					query.append(_SQL_GETPERMISSIONS);
-					query.append(ORDER_BY_CLAUSE);
-					query.append(obc.getOrderBy());
-
-					sql = query.toString();
+					sql = _SQL_GETPERMISSIONS.concat(ORDER_BY_CLAUSE)
+											 .concat(obc.getOrderBy());
 				}
 
 				sql = _SQL_GETPERMISSIONS;
@@ -4050,17 +4032,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBundler query = null;
 				String sql = null;
 
 				if (obc != null) {
-					query = new StringBundler(3);
-
-					query.append(_SQL_GETROLES);
-					query.append(ORDER_BY_CLAUSE);
-					query.append(obc.getOrderBy());
-
-					sql = query.toString();
+					sql = _SQL_GETROLES.concat(ORDER_BY_CLAUSE)
+									   .concat(obc.getOrderBy());
 				}
 
 				else {
@@ -4386,17 +4362,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBundler query = null;
 				String sql = null;
 
 				if (obc != null) {
-					query = new StringBundler(3);
-
-					query.append(_SQL_GETUSERGROUPS);
-					query.append(ORDER_BY_CLAUSE);
-					query.append(obc.getOrderBy());
-
-					sql = query.toString();
+					sql = _SQL_GETUSERGROUPS.concat(ORDER_BY_CLAUSE)
+											.concat(obc.getOrderBy());
 				}
 
 				else {

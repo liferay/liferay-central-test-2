@@ -1048,17 +1048,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBundler query = null;
 				String sql = null;
 
 				if (obc != null) {
-					query = new StringBundler(3);
-
-					query.append(_SQL_GETASSETCATEGORIES);
-					query.append(ORDER_BY_CLAUSE);
-					query.append(obc.getOrderBy());
-
-					sql = query.toString();
+					sql = _SQL_GETASSETCATEGORIES.concat(ORDER_BY_CLAUSE)
+												 .concat(obc.getOrderBy());
 				}
 
 				else {
@@ -1403,17 +1397,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBundler query = null;
 				String sql = null;
 
 				if (obc != null) {
-					query = new StringBundler(3);
-
-					query.append(_SQL_GETASSETTAGS);
-					query.append(ORDER_BY_CLAUSE);
-					query.append(obc.getOrderBy());
-
-					sql = query.toString();
+					sql = _SQL_GETASSETTAGS.concat(ORDER_BY_CLAUSE)
+										   .concat(obc.getOrderBy());
 				}
 
 				else {

@@ -1684,17 +1684,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBundler query = null;
 				String sql = null;
 
 				if (obc != null) {
-					query = new StringBundler(3);
-
-					query.append(_SQL_GETSHOPPINGITEMPRICES);
-					query.append(ORDER_BY_CLAUSE);
-					query.append(obc.getOrderBy());
-
-					sql = query.toString();
+					sql = _SQL_GETSHOPPINGITEMPRICES.concat(ORDER_BY_CLAUSE)
+													.concat(obc.getOrderBy());
 				}
 
 				else {
