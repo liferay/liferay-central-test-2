@@ -77,7 +77,8 @@ public class DocumentConversionUtil {
 	}
 
 	public static String getTempFileId(long id, double version) {
-		return String.valueOf(id).concat(String.valueOf(version));
+		return String.valueOf(id).concat(StringPool.PERIOD).concat(
+			String.valueOf(version));
 	}
 
 	private DocumentConversionUtil() {
