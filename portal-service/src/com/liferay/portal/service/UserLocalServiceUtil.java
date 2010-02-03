@@ -124,12 +124,14 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void addGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().addGroupUsers(groupId, userIds);
 	}
 
 	public static void addOrganizationUsers(long organizationId, long[] userIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().addOrganizationUsers(organizationId, userIds);
 	}
 
@@ -750,7 +752,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void updateGroups(long userId, long[] newGroupIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().updateGroups(userId, newGroupIds);
 	}
 

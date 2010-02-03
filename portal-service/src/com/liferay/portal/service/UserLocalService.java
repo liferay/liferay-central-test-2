@@ -109,10 +109,12 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void addGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addOrganizationUsers(long organizationId, long[] userIds)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws com.liferay.portal.SystemException;
@@ -568,7 +570,8 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void updateGroups(long userId, long[] newGroupIds)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User updateLastLogin(long userId,
 		java.lang.String loginIP)

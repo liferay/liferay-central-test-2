@@ -262,7 +262,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void addGroupUsers(long groupId, long[] userIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		groupPersistence.addUsers(groupId, userIds);
 
@@ -274,7 +274,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void addOrganizationUsers(long organizationId, long[] userIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		organizationPersistence.addUsers(organizationId, userIds);
 
@@ -1823,7 +1823,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void updateGroups(long userId, long[] newGroupIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (newGroupIds == null) {
 			return;
