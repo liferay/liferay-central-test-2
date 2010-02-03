@@ -57,7 +57,16 @@ List<Permission> permissions = null;
 if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 	permissions = new ArrayList<Permission>();
 
-	List<ResourcePermission> resourcePermissions = ResourcePermissionLocalServiceUtil.getRoleResourcePermissions(role.getRoleId(), new int[] {ResourceConstants.SCOPE_COMPANY, ResourceConstants.SCOPE_GROUP, ResourceConstants.SCOPE_GROUP_TEMPLATE}, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	int[] scopes = new int[0];
+
+	if (role.getType() == RoleConstants.TYPE_REGULAR) {
+		scopes = new int[] {ResourceConstants.SCOPE_COMPANY, ResourceConstants.SCOPE_GROUP};
+	}
+	else if ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+		scopes = new int[] {ResourceConstants.SCOPE_GROUP_TEMPLATE};
+	}
+
+	List<ResourcePermission> resourcePermissions = ResourcePermissionLocalServiceUtil.getRoleResourcePermissions(role.getRoleId(), scopes, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 	for (ResourcePermission resourcePermission : resourcePermissions) {
 		List<ResourceAction> resourceActions = ResourceActionLocalServiceUtil.getResourceActions(resourcePermission.getName());
