@@ -92,6 +92,7 @@ public class DocumentConversionUtil {
 
 		_conversionsMap.put("odp", _PRESENTATION_CONVERSIONS);
 		_conversionsMap.put("ppt", _PRESENTATION_CONVERSIONS);
+		_conversionsMap.put("pptx", _PRESENTATION_CONVERSIONS);
 		_conversionsMap.put("sxi", _PRESENTATION_CONVERSIONS);
 
 		_conversionsMap.put("csv", _SPREADSHEET_CONVERSIONS);
@@ -99,8 +100,10 @@ public class DocumentConversionUtil {
 		_conversionsMap.put("sxc", _SPREADSHEET_CONVERSIONS);
 		_conversionsMap.put("tsv", _SPREADSHEET_CONVERSIONS);
 		_conversionsMap.put("xls", _SPREADSHEET_CONVERSIONS);
+		_conversionsMap.put("xlsx", _SPREADSHEET_CONVERSIONS);
 
 		_conversionsMap.put("doc", _TEXT_CONVERSIONS);
+		_conversionsMap.put("docx", _TEXT_CONVERSIONS);
 		_conversionsMap.put("htm", _TEXT_CONVERSIONS);
 		_conversionsMap.put("html", _TEXT_CONVERSIONS);
 		_conversionsMap.put("odt", _TEXT_CONVERSIONS);
