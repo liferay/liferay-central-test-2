@@ -20,44 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.scheduler;
+package com.liferay.portal.kernel.scheduler.messaging;
 
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-
-import java.util.List;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 
 /**
- * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="SchedulerEventMessageListenerWrapper.java.html"><b><i>View Source
+ * </i></b></a>
  *
- * @author Michael C. Han
- * @author Bruno Farache
  * @author Shuyang Zhou
  */
-public interface SchedulerEngine {
+public class SchedulerEventMessageListenerWrapper implements MessageListener {
 
-	public static final String DESCRIPTION = "description";
+	public SchedulerEventMessageListenerWrapper(
+		MessageListener messageListener) {
+		_messageListener = messageListener;
+		String className = messageListener.getClass().getName();
+		_key = className.concat(":").concat(className);
+	}
 
-	public static final String DESTINATION = "destination";
+	public void receive(Message message) {
+		String receiverKey=message.getString(SchedulerEngine.RECEIVER_KEY);
+		if (receiverKey != null && receiverKey.equals(_key)){
+			try{
+				_messageListener.receive(message);
+			} finally {
+				if (message.getBoolean(SchedulerEngine.POISON_MESSAGE)) {
+					String destination = message.getDestinationName();
+					MessageBusUtil.unregisterMessageListener(destination, this);
+				}
+			}
+		}
+	}
 
-	public static final String MESSAGE = "message";
-
-	public static final String POISON_MESSAGE = "poison_message";
-
-	public static final String RECEIVER_KEY = "receiver_key";
-
-	public List<SchedulerRequest> getScheduledJobs(String groupName)
-		throws SchedulerException;
-
-	public void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message)
-		throws SchedulerException;
-
-	public void shutdown() throws SchedulerException;
-
-	public void start() throws SchedulerException;
-
-	public void unschedule(Trigger trigger) throws SchedulerException;
+	private final String _key;
+	private final MessageListener _messageListener;
 
 }

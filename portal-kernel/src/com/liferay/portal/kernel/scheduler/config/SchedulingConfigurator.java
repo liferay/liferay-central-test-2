@@ -20,44 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.scheduler;
+package com.liferay.portal.kernel.scheduler.config;
 
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
+import com.liferay.portal.kernel.messaging.MessageBus;
+import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="SchedulingConfigurator.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
- * @author Bruno Farache
  * @author Shuyang Zhou
  */
-public interface SchedulerEngine {
+public interface SchedulingConfigurator {
 
-	public static final String DESCRIPTION = "description";
+	public void destroy();
 
-	public static final String DESTINATION = "destination";
+	public void init();
 
-	public static final String MESSAGE = "message";
+	public void setMessageBus(MessageBus messageBus);
 
-	public static final String POISON_MESSAGE = "poison_message";
+	public void setSchedulerEngine(SchedulerEngine schedulerEngine);
 
-	public static final String RECEIVER_KEY = "receiver_key";
-
-	public List<SchedulerRequest> getScheduledJobs(String groupName)
-		throws SchedulerException;
-
-	public void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message)
-		throws SchedulerException;
-
-	public void shutdown() throws SchedulerException;
-
-	public void start() throws SchedulerException;
-
-	public void unschedule(Trigger trigger) throws SchedulerException;
+	public void setSchedulers(
+		Map<String, List<SchedulerEntry>> schedulerEntries);
 
 }

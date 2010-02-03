@@ -32,9 +32,13 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
@@ -990,6 +994,35 @@ public class MainServlet extends ActionServlet {
 				scheduler.unschedule();
 			}
 		}
+
+		for(Portlet portlet : portlets) {
+			if (!portlet.isActive()) {
+				continue;
+			}
+
+			List<SchedulerEntry> schedulerEntries =
+				portlet.getSchedulerEntries();
+			if (schedulerEntries == null || schedulerEntries.size() == 0) {
+				continue;
+			}
+
+			for(SchedulerEntry schedulerEntry : schedulerEntries) {
+				com.liferay.portal.kernel.messaging.MessageListener
+					schedulerEventListener = schedulerEntry.getEventListener();
+				if (schedulerEventListener == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to create scheduler listener from class:" +
+							schedulerEntry.getEventListenerClass());
+					}
+					continue;
+				}
+				MessageBusUtil.unregisterMessageListener(
+					DestinationNames.SCHEDULER_DISPATCH,
+					schedulerEventListener);
+				SchedulerEngineUtil.unschedule(schedulerEntry.getTrigger());
+			}
+		}
 	}
 
 	protected synchronized RequestProcessor getRequestProcessor(
@@ -1304,6 +1337,38 @@ public class MainServlet extends ActionServlet {
 			Scheduler scheduler = (Scheduler)InstancePool.get(className);
 
 			scheduler.schedule();
+		}
+
+		for(Portlet portlet : portlets) {
+			if (!portlet.isActive()) {
+				continue;
+			}
+
+			List<SchedulerEntry> schedulerEntries =
+				portlet.getSchedulerEntries();
+			if (schedulerEntries == null || schedulerEntries.size() == 0) {
+				continue;
+			}
+
+			for(SchedulerEntry schedulerEntry : schedulerEntries) {
+				com.liferay.portal.kernel.messaging.MessageListener
+					schedulerEventListener = schedulerEntry.getEventListener();
+				if (schedulerEventListener == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to create scheduler listener from class:" +
+							schedulerEntry.getEventListenerClass());
+					}
+					continue;
+				}
+				MessageBusUtil.registerMessageListener(
+					DestinationNames.SCHEDULER_DISPATCH,
+					schedulerEventListener);
+				SchedulerEngineUtil.schedule(
+					schedulerEntry.getTrigger(),
+					schedulerEntry.getDescription(),
+					DestinationNames.SCHEDULER_DISPATCH, null);
+			}
 		}
 	}
 

@@ -25,6 +25,9 @@
 
 	<!-- Messaging -->
 
+	<bean id="destination.scheduler_dispatch" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/scheduler_dispatch" />
+	</bean>
 	<bean id="destination.scheduler_engine" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/scheduler_engine" />
 	</bean>
@@ -38,6 +41,7 @@
 	<bean id="messagingConfigurator.scheduler" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">
 			<list>
+				<ref bean="destination.scheduler_dispatch" />
 				<ref bean="destination.scheduler_engine" />
 				<ref bean="destination.scheduler_engine.response" />
 			</list>

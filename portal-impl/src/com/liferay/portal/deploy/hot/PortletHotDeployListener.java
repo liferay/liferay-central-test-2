@@ -22,6 +22,7 @@
 
 package com.liferay.portal.deploy.hot;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
 import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -33,6 +34,8 @@ import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
@@ -40,6 +43,8 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.OpenSearch;
@@ -179,6 +184,38 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		if (scheduler != null) {
 			scheduler.unschedule();
+		}
+
+		List<SchedulerEntry> schedulerEntries =
+			portlet.getSchedulerEntries();
+
+		if (schedulerEntries != null && schedulerEntries.size() > 0) {
+			for (SchedulerEntry schedulerEntry : schedulerEntries) {
+				try {
+					com.liferay.portal.kernel.messaging.MessageListener
+						schedulerEventListener =
+							schedulerEntry.getEventListener();
+					if (schedulerEventListener == null) {
+						throw new SystemException(
+							"Unable to create scheduler listener " +
+							"from class:" +
+							schedulerEntry.getEventListenerClass());
+					}
+
+					MessageBusUtil.unregisterMessageListener(
+						DestinationNames.SCHEDULER_DISPATCH,
+						schedulerEventListener);
+					SchedulerEngineUtil.unschedule(schedulerEntry.getTrigger());
+				}
+				catch (Exception ex) {
+					if (_log.isErrorEnabled()) {
+						_log.error(
+							"Failed to remove scheduler for " +
+							"portlet:" + portlet.getPortletName(), ex);
+					}
+					continue;
+				}
+			}
 		}
 
 		PollerProcessorUtil.deletePollerProcessor(portlet.getPortletId());
@@ -527,6 +564,44 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portlet.getSchedulerClass()).newInstance();
 
 			schedulerInstance.schedule();
+		}
+
+		if (PropsValues.SCHEDULER_ENABLED){
+			List<SchedulerEntry> schedulerEntries =
+				portlet.getSchedulerEntries();
+
+			if (schedulerEntries != null && schedulerEntries.size() > 0) {
+				for (SchedulerEntry schedulerEntry : schedulerEntries) {
+					try {
+						com.liferay.portal.kernel.messaging.MessageListener
+							schedulerEventListener =
+								schedulerEntry.getEventListener();
+						if (schedulerEventListener == null) {
+							throw new SystemException(
+								"Unable to create scheduler listener " +
+								"from class:" +
+								schedulerEntry.getEventListenerClass());
+						}
+
+						MessageBusUtil.registerMessageListener(
+							DestinationNames.SCHEDULER_DISPATCH,
+							schedulerEventListener);
+						SchedulerEngineUtil.schedule(
+							schedulerEntry.getTrigger(),
+							schedulerEntry.getDescription(),
+							DestinationNames.SCHEDULER_DISPATCH, null);
+
+					}
+					catch (Exception ex) {
+						if (_log.isErrorEnabled()) {
+							_log.error(
+								"Failed to create scheduler for portlet:" +
+								portlet.getPortletName(), ex);
+						}
+						continue;
+					}
+				}
+			}
 		}
 
 		FriendlyURLMapper friendlyURLMapperInstance = null;

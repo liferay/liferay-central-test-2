@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -60,6 +62,7 @@ import com.liferay.portal.model.impl.PortletFilterImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
+import com.liferay.portal.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
@@ -1111,6 +1114,63 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setSchedulerClass(GetterUtil.getString(
 					portlet.elementText("scheduler-class"),
 					portletModel.getSchedulerClass()));
+				Iterator<Element> schedulerEntryElementIterator =
+					portlet.elementIterator("scheduler-entry");
+				while (schedulerEntryElementIterator.hasNext()){
+					Element schedulerEntryElement =
+						schedulerEntryElementIterator.next();
+
+					SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
+
+					String schedulerDescription =
+						schedulerEntryElement.elementText(
+							"scheduler-description");
+					schedulerEntry.setDescription(GetterUtil.getString(
+						schedulerDescription, StringPool.BLANK));
+
+					schedulerEntry.setListenerClass(GetterUtil.getString(
+						schedulerEntryElement.elementText(
+							"scheduler-event-listener-class"),
+						schedulerEntry.getEventListenerClass()));
+
+					Element triggerElement =
+						schedulerEntryElement.element("trigger");
+
+					Element realTriggerElement =
+						triggerElement.elementIterator().next();
+
+					schedulerEntry.setTriggerType(
+						TriggerType.valueOf(
+							realTriggerElement.getName().toUpperCase()));
+
+					Element triggerValueElement =
+						realTriggerElement.elementIterator().next();
+
+					String triggerValueElementName =
+						triggerValueElement.getName();
+
+					schedulerEntry.setReadProperty(
+						triggerValueElementName.equals("property-key"));
+
+					if (schedulerEntry.getTriggerType() == TriggerType.SIMPLE &&
+						triggerValueElementName.equals("simple-trigger-value"))
+					{
+						String timeUnit =
+							triggerValueElement.attributeValue(
+								"time-unit", "sec");
+						long timeValue =
+							Long.parseLong(triggerValueElement.getTextTrim());
+						schedulerEntry.setTriggerValue(
+							Long.toString(
+								_timeUnitMap.get(timeUnit) * timeValue));
+					}
+					else {
+						schedulerEntry.setTriggerValue(
+							triggerValueElement.getTextTrim());
+					}
+
+					portletModel.addSchedulerEntry(schedulerEntry);
+				}
 				portletModel.setPortletURLClass(GetterUtil.getString(
 					portlet.elementText("portlet-url-class"),
 					portletModel.getPortletURLClass()));
@@ -1983,5 +2043,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		new ConcurrentHashMap<String, Portlet>();
 	private static Map<String, Portlet> _friendlyURLMapperPortlets =
 		new ConcurrentHashMap<String, Portlet>();
+
+	private static Map<String, Integer> _timeUnitMap =
+		new HashMap<String, Integer>();
+	static {
+		_timeUnitMap.put("WEEK", 7 * 24 * 60 * 60);
+		_timeUnitMap.put("DAY", 24 * 60 * 60);
+		_timeUnitMap.put("HOUR", 60 * 60);
+		_timeUnitMap.put("MIN", 60);
+		_timeUnitMap.put("SEC", 1);
+	}
 
 }

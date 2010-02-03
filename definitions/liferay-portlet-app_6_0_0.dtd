@@ -18,7 +18,7 @@ The portlet element contains the declarative data of a portlet.
 -->
 <!ELEMENT portlet (portlet-name, icon?, virtual-path?, struts-path?,
 configuration-path?, configuration-action-class?, indexer-class?,
-open-search-class?, scheduler-class?, portlet-url-class?,
+open-search-class?, scheduler-class?, scheduler-entry*, portlet-url-class?,
 friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
 portlet-layout-listener-class?, poller-processor-class?,
 pop-message-listener-class?, social-activity-interpreter-class?,
@@ -124,6 +124,61 @@ http://docs.liferay.com/portal/5.3/javadocs/portal-kernel/com/liferay/portal/ker
 http://www.opensymphony.com/quartz
 -->
 <!ELEMENT scheduler-class (#PCDATA)>
+
+<!--
+The scheduler-entry element contains the declarative data of a portlet scheduler.
+-->
+<!ELEMENT scheduler-entry (scheduler-description?, scheduler-event-listener-class, trigger)>
+
+<!--
+The scheduler-description value is a description String data for this scheduler.
+-->
+<!ELEMENT scheduler-description (#PCDATA)>
+
+<!--
+The scheduler-event-listener-class value must be a class that implements
+com.liferay.portal.kernel.messaging.MessageListener.
+-->
+<!ELEMENT scheduler-event-listener-class (#PCDATA)>
+
+<!--
+The trigger element contains configuration data to direct SchedulerEngine when
+to trigger the scheduler-event-listener-class defined above
+-->
+<!ELEMENT trigger (cron|simple)>
+
+<!--
+The cron element defines a cron style trigger for the scheduler.
+-->
+<!ELEMENT cron (property-key|cron-trigger-value)>
+
+<!--
+The property-key value is the key name in the properties file whose value will
+use to create the trigger. For cron trigger, the value should be a cron text,
+for simple trigger, the value should be a long number, represent interval time
+in second.
+-->
+<!ELEMENT property-key (#PCDATA)>
+
+<!--
+This value should be a cron text.
+-->
+<!ELEMENT cron-trigger-value (#PCDATA)>
+
+<!--
+The simple element defines a interval repeated style trigger for the scheduler.
+-->
+<!ELEMENT simple (property-key|simple-trigger-value)>
+
+<!--
+This value should be a time number.
+-->
+<!ELEMENT simple-trigger-value (#PCDATA)>
+
+<!--
+The time unit for the time number. Default to second.
+-->
+<!ATTLIST simple-trigger-value time-unit (WEEK|DAY|HOUR|MIN|SEC) "SEC">
 
 <!--
 The portlet-url-class value must be a class that extends

@@ -20,44 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.scheduler;
-
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-
-import java.util.List;
+package com.liferay.portal.kernel.scheduler.config;
 
 /**
- * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultSchedulingConfigurator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Michael C. Han
- * @author Bruno Farache
  * @author Shuyang Zhou
  */
-public interface SchedulerEngine {
+public class DefaultSchedulingConfigurator
+	extends AbstractSchedulingConfigurator{
 
-	public static final String DESCRIPTION = "description";
-
-	public static final String DESTINATION = "destination";
-
-	public static final String MESSAGE = "message";
-
-	public static final String POISON_MESSAGE = "poison_message";
-
-	public static final String RECEIVER_KEY = "receiver_key";
-
-	public List<SchedulerRequest> getScheduledJobs(String groupName)
-		throws SchedulerException;
-
-	public void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message)
-		throws SchedulerException;
-
-	public void shutdown() throws SchedulerException;
-
-	public void start() throws SchedulerException;
-
-	public void unschedule(Trigger trigger) throws SchedulerException;
+	protected ClassLoader getOperatingClassloader() {
+		return Thread.currentThread().getContextClassLoader();
+	}
 
 }

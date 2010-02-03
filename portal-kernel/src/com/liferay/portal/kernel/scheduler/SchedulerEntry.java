@@ -22,42 +22,38 @@
 
 package com.liferay.portal.kernel.scheduler;
 
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-
-import java.util.List;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
- * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="SchedulerEntry.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
- * @author Bruno Farache
  * @author Shuyang Zhou
  */
-public interface SchedulerEngine {
+public interface SchedulerEntry {
 
-	public static final String DESCRIPTION = "description";
+	String getDescription();
 
-	public static final String DESTINATION = "destination";
+	MessageListener getEventListener();
 
-	public static final String MESSAGE = "message";
+	String getEventListenerClass();
 
-	public static final String POISON_MESSAGE = "poison_message";
+	Trigger getTrigger() throws SystemException;
 
-	public static final String RECEIVER_KEY = "receiver_key";
+	TriggerType getTriggerType();
 
-	public List<SchedulerRequest> getScheduledJobs(String groupName)
-		throws SchedulerException;
+	String getTriggerValue();
 
-	public void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message)
-		throws SchedulerException;
+	boolean isReadProperty();
 
-	public void shutdown() throws SchedulerException;
+	void setDescription(String description);
 
-	public void start() throws SchedulerException;
+	void setReadProperty(boolean readProperty);
 
-	public void unschedule(Trigger trigger) throws SchedulerException;
+	void setListenerClass(String listenerClass);
+
+	void setTriggerType(TriggerType triggerType);
+
+	void setTriggerValue(String triggerValue);
 
 }
