@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.velocity.VelocityContext;
@@ -318,6 +319,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 		WikiPage latestPage = null;
 
+		StringBundler link = new StringBundler(7);
+
 		for (WikiPage page : pages) {
 			String author = PortalUtil.getUserName(
 				page.getUserId(), page.getUserName());
@@ -332,7 +335,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 							StringPool.CLOSE_PARENTHESIS;
 			}
 
-			StringBuilder link = new StringBuilder();
+			link.setIndex(0);
 
 			link.append(entryURL);
 			link.append(StringPool.AMPERSAND);

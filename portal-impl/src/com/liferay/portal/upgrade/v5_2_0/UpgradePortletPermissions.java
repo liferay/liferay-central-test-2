@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
@@ -134,7 +135,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(7);
 
 			sb.append("select count(*) from Permission_ ");
 			sb.append("inner join Resource_ on Resource_.resourceId = ");
@@ -211,7 +212,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(4 * actionIds.length + 6);
 
 			sb.append("select Permission_.permissionId, ");
 			sb.append("Permission_.actionId, Resource_.primKey, ");

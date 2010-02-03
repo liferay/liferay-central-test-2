@@ -23,6 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -141,7 +142,7 @@ public class JavadocBuilder {
 	}
 
 	private void _addDocletTags(
-		Element parentElement, String name, String indent, StringBuilder sb) {
+		Element parentElement, String name, String indent, StringBundler sb) {
 
 		List<Element> elements = parentElement.elements(name);
 
@@ -377,7 +378,7 @@ public class JavadocBuilder {
 	private String _getJavaClassComment(
 		Element rootElement, JavaClass javaClass) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append("/**\n");
 		sb.append(" * <a href=\"");
@@ -459,7 +460,7 @@ public class JavadocBuilder {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(indent);
 		sb.append("/**\n");
@@ -506,7 +507,7 @@ public class JavadocBuilder {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(indent);
 		sb.append("/**\n");
@@ -532,12 +533,12 @@ public class JavadocBuilder {
 	}
 
 	private String _getMethodKey(Element methodElement) {
-		StringBuilder sb = new StringBuilder();
+		List<Element> paramElements = methodElement.elements("param");
+
+		StringBundler sb = new StringBundler(paramElements.size() * 4 + 3);
 
 		sb.append(methodElement.elementText("name"));
 		sb.append("(");
-
-		List<Element> paramElements = methodElement.elements("param");
 
 		for (Element paramElement : paramElements) {
 			sb.append(paramElement.elementText("name"));
@@ -552,12 +553,12 @@ public class JavadocBuilder {
 	}
 
 	private String _getMethodKey(JavaMethod javaMethod) {
-		StringBuilder sb = new StringBuilder();
+		JavaParameter[] javaParameters = javaMethod.getParameters();
+
+		StringBundler sb = new StringBundler(javaParameters.length * 4 + 3);
 
 		sb.append(javaMethod.getName());
 		sb.append("(");
-
-		JavaParameter[] javaParameters = javaMethod.getParameters();
 
 		for (JavaParameter javaParameter : javaParameters) {
 			sb.append(javaParameter.getName());
@@ -723,16 +724,23 @@ public class JavadocBuilder {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder(oldContent.length());
+		String newContent;
 
-		for (String line : lines) {
-			if (line != null) {
-				sb.append(line);
-				sb.append("\n");
-			}
+		if (lines.length == 0) {
+			newContent = StringPool.BLANK;
 		}
+		else {
+			StringBundler sb = new StringBundler(lines.length * 2);
 
-		String newContent = sb.toString().trim();
+			for (String line : lines) {
+				if (line != null) {
+					sb.append(line);
+					sb.append("\n");
+				}
+			}
+			
+			newContent = sb.toString().trim();
+		}
 
 		if ((oldContent == null) || !oldContent.equals(newContent)) {
 			_fileUtil.write(file, newContent);
@@ -843,22 +851,29 @@ public class JavadocBuilder {
 				_getJavaFieldComment(lines, fieldElementsMap, javaField));
 		}
 
-		StringBuilder sb = new StringBuilder(oldContent.length());
+		String newContent;
 
-		for (int lineNumber = 1; lineNumber <= lines.length; lineNumber++) {
-			String line = lines[lineNumber - 1];
-
-			String comments = commentsMap.get(lineNumber);
-
-			if (comments != null) {
-				sb.append(comments);
-			}
-
-			sb.append(line);
-			sb.append("\n");
+		if (lines.length == 0) {
+			newContent = StringPool.BLANK;
 		}
+		else {
+			StringBundler sb = new StringBundler(lines.length * 3);
 
-		String newContent = sb.toString().trim();
+			for (int lineNumber = 1; lineNumber <= lines.length; lineNumber++) {
+				String line = lines[lineNumber - 1];
+
+				String comments = commentsMap.get(lineNumber);
+
+				if (comments != null) {
+					sb.append(comments);
+				}
+
+				sb.append(line);
+				sb.append("\n");
+			}
+			
+			newContent = sb.toString().trim();
+		}
 
 		if ((oldContent == null) || !oldContent.equals(newContent)) {
 			_fileUtil.write(file, newContent);

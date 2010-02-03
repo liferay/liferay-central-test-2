@@ -22,6 +22,7 @@
 
 package com.liferay.portal.language;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Locale;
@@ -67,12 +68,7 @@ public class LanguageResources {
 	}
 
 	private String _getCacheKey(Locale locale, String key) {
-		StringBuilder sb = new StringBuilder(String.valueOf(locale));
-
-		sb.append(StringPool.POUND);
-		sb.append(key);
-
-		return sb.toString();
+		return String.valueOf(locale).concat(StringPool.POUND).concat(key);
 	}
 
 	private String _getMessage(Locale locale, String key) {

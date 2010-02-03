@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.v5_2_3;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.upgrade.v5_2_3.util.BookmarksEntryTable;
 
 /**
@@ -57,7 +58,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 	}
 
 	protected void updateGroupId() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append("update BookmarksEntry set groupId = (select groupId from ");
 		sb.append("BookmarksFolder where BookmarksFolder.folderId = ");

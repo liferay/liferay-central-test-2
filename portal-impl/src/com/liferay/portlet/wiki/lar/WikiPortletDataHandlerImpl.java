@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -476,7 +477,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getNodePath(
 		PortletDataContext context, WikiNode node) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.WIKI));
 		sb.append("/nodes/");
@@ -489,7 +490,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getPageAttachementBinPath(
 		PortletDataContext context, WikiPage page, String attachment) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(context.getPortletPath(PortletKeys.WIKI));
 		sb.append("/bin/");
@@ -503,7 +504,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getPagePath(
 		PortletDataContext context, WikiPage page) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.WIKI));
 		sb.append("/pages/");

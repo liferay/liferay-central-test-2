@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.CalendarUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -112,7 +113,7 @@ public class AssetEntryFinderImpl
 	}
 
 	protected void buildAllCategoriesSQL(
-		String sqlId, long[] categoryIds, StringBuilder sb) {
+		String sqlId, long[] categoryIds, StringBundler sb) {
 
 		sb.append(" AND AssetEntry.entryId IN (");
 
@@ -133,7 +134,7 @@ public class AssetEntryFinderImpl
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 	}
 
-	protected void buildAllTagsSQL(long[] tagIds, StringBuilder sb) {
+	protected void buildAllTagsSQL(long[] tagIds, StringBundler sb) {
 		sb.append(" AND AssetEntry.entryId IN (");
 
 		for (int i = 0; i < tagIds.length; i++) {
@@ -156,7 +157,7 @@ public class AssetEntryFinderImpl
 	protected SQLQuery buildAssetQuerySQL(
 		AssetEntryQuery entryQuery, boolean count, Session session) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		if (count) {
 			sb.append("SELECT COUNT(AssetEntry.entryId) AS COUNT_VALUE ");
@@ -346,7 +347,7 @@ public class AssetEntryFinderImpl
 	}
 
 	protected void buildNotAnyCategoriesSQL(
-		String sqlId, long[] categoryIds, StringBuilder sb) {
+		String sqlId, long[] categoryIds, StringBundler sb) {
 
 		sb.append(" AND (");
 
@@ -363,7 +364,7 @@ public class AssetEntryFinderImpl
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 	}
 
-	protected void buildNotAnyTagsSQL(long[] tagIds, StringBuilder sb) {
+	protected void buildNotAnyTagsSQL(long[] tagIds, StringBundler sb) {
 		sb.append(" AND (");
 
 		for (int i = 0; i < tagIds.length; i++) {
@@ -380,7 +381,7 @@ public class AssetEntryFinderImpl
 	}
 
 	protected String getCategoryIds(long[] categoryIds, String operator) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		for (int i = 0; i < categoryIds.length; i++) {
 			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
@@ -405,17 +406,19 @@ public class AssetEntryFinderImpl
 	}
 
 	protected String getClassNameIds(long[] classNameIds) {
-		StringBuilder sb = new StringBuilder();
-
-		if (classNameIds.length > 0) {
-			sb.append(" AND (classNameId = ?");
-
-			for (int i = 1; i < classNameIds.length; i++) {
-				sb.append(" OR classNameId = ? ");
-			}
-
-			sb.append(") ");
+		if (classNameIds.length == 0) {
+			return StringPool.BLANK;
 		}
+
+		StringBundler sb = new StringBundler(classNameIds.length + 2);
+
+		sb.append(" AND (classNameId = ?");
+
+		for (int i = 1; i < classNameIds.length; i++) {
+			sb.append(" OR classNameId = ? ");
+		}
+
+		sb.append(") ");
 
 		return sb.toString();
 	}
@@ -423,7 +426,7 @@ public class AssetEntryFinderImpl
 	protected String getDates(
 		String sql, Date publishDate, Date expirationDate) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(1);
 
 		if (publishDate != null) {
 			sb.append(" AND (publishDate IS NULL OR publishDate < ?)");
@@ -439,23 +442,30 @@ public class AssetEntryFinderImpl
 	}
 
 	protected String getGroupIds(long[] groupIds) {
-		StringBuilder sb = new StringBuilder();
-
-		if (groupIds.length > 0) {
-			sb.append(" AND (AssetEntry.groupId = ? ");
-
-			for (int i = 1; i < groupIds.length; i++) {
-				sb.append(" OR AssetEntry.groupId = ? ");
-			}
-
-			sb.append(")");
+		if (groupIds.length == 0) {
+			return StringPool.BLANK;
 		}
+		
+		StringBundler sb = new StringBundler(groupIds.length + 2);
+
+		sb.append(" AND (AssetEntry.groupId = ? ");
+
+		for (int i = 1; i < groupIds.length; i++) {
+			sb.append(" OR AssetEntry.groupId = ? ");
+		}
+
+		sb.append(")");
+
 
 		return sb.toString();
 	}
 
 	protected String getNotCategoryIds(String sqlId, long[] notCategoryIds) {
-		StringBuilder sb = new StringBuilder();
+		if (notCategoryIds.length == 0) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(notCategoryIds.length * 4 - 1);
 
 		for (int i = 0; i < notCategoryIds.length; i++) {
 			sb.append("AssetEntry.entryId NOT IN (");
@@ -471,7 +481,11 @@ public class AssetEntryFinderImpl
 	}
 
 	protected String getNotTagIds(long[] notTagIds) {
-		StringBuilder sb = new StringBuilder();
+		if (notTagIds.length == 0) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(notTagIds.length * 4 - 1);
 
 		for (int i = 0; i < notTagIds.length; i++) {
 			sb.append("AssetEntry.entryId NOT IN (");
@@ -487,7 +501,11 @@ public class AssetEntryFinderImpl
 	}
 
 	protected String getTagIds(long[] tagIds, String operator) {
-		StringBuilder sb = new StringBuilder();
+		if (tagIds.length == 0) {
+			return "(1 = 1)";
+		}
+		
+		StringBundler sb = new StringBundler(tagIds.length * 4 - 1);
 
 		for (int i = 0; i < tagIds.length; i++) {
 			sb.append("AssetTag.tagId ");
@@ -497,10 +515,6 @@ public class AssetEntryFinderImpl
 			if ((i + 1) != tagIds.length) {
 				sb.append("OR ");
 			}
-		}
-
-		if (sb.length() == 0) {
-			sb.append("(1 = 1)");
 		}
 
 		return sb.toString();

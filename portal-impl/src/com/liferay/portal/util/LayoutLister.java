@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -78,10 +79,12 @@ public class LayoutLister {
 				}
 			}
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(13);
 
-			sb.append(++_nodeId).append("|");
-			sb.append(parentId).append("|");
+			sb.append(++_nodeId);
+			sb.append("|");
+			sb.append(parentId);
+			sb.append("|");
 
 			if ((i + 1) == layouts.size()) {
 				sb.append("1");
@@ -91,8 +94,10 @@ public class LayoutLister {
 			}
 
 			sb.append("|");
-			sb.append(layout.getPlid()).append("|");
-			sb.append(layout.getName(_locale)).append("|");
+			sb.append(layout.getPlid());
+			sb.append("|");
+			sb.append(layout.getName(_locale));
+			sb.append("|");
 			//sb.append("9");
 			sb.append("11");
 			sb.append("|");

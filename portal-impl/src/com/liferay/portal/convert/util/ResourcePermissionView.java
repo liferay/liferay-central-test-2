@@ -22,6 +22,7 @@
 
 package com.liferay.portal.convert.util;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.util.Table;
 
@@ -74,7 +75,7 @@ public class ResourcePermissionView extends Table {
 	}
 
 	public String getSelectSQL() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(_SELECT_SQL);
 		sb.append(StringPool.APOSTROPHE);

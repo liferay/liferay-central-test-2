@@ -22,6 +22,7 @@
 
 package com.liferay.portal.monitoring.statistics;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.monitoring.RequestStatus;
 
 import java.io.Serializable;
@@ -112,7 +113,7 @@ public class BaseDataSample implements DataSample, Serializable {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{attributes=");
 		sb.append(_attributes);

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -74,13 +75,18 @@ public class DerbyDB extends BaseDB {
 
 		String suffix = getSuffix(population);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(14);
 
-		sb.append("drop database " + databaseName + ";\n");
-		sb.append("create database " + databaseName + ";\n");
-		sb.append("connect to " + databaseName + ";\n");
-		sb.append(
-			FileUtil.read(
+		sb.append("drop database ");
+		sb.append(databaseName);
+		sb.append(";\n");
+		sb.append("create database ");
+		sb.append(databaseName);
+		sb.append(";\n");
+		sb.append("connect to ");
+		sb.append(databaseName);
+		sb.append(";\n");
+		sb.append(FileUtil.read(
 				"../sql/portal" + suffix + "/portal" + suffix + "-derby.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
@@ -102,7 +108,7 @@ public class DerbyDB extends BaseDB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 

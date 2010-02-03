@@ -22,6 +22,7 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
@@ -39,13 +40,9 @@ public class GroupSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String rootPath = sharepointRequest.getRootPath();
 
 		for (String token : SharepointUtil.getStorageTokens()) {
-			StringBuilder sb = new StringBuilder();
+			String path = rootPath.concat(StringPool.SLASH).concat(token);
 
-			sb.append(rootPath);
-			sb.append(StringPool.SLASH);
-			sb.append(token);
-
-			foldersTree.addChild(getFolderTree(sb.toString()));
+			foldersTree.addChild(getFolderTree(path));
 		}
 
 		foldersTree.addChild(getFolderTree(rootPath));

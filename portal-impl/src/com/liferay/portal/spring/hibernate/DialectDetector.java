@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -80,7 +81,7 @@ public class DialectDetector {
 
 			if (dbName.startsWith("HSQL")) {
 				if (_log.isWarnEnabled()) {
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(6);
 
 					sb.append("Liferay is configured to use Hypersonic as ");
 					sb.append("its database. Do NOT use Hypersonic in ");

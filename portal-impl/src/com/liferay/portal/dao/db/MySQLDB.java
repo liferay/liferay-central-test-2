@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -74,7 +75,7 @@ public class MySQLDB extends BaseDB {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(4);
 
 			sb.append("select distinct(index_name), table_name, non_unique ");
 			sb.append("from information_schema.statistics where ");
@@ -119,15 +120,18 @@ public class MySQLDB extends BaseDB {
 
 		String suffix = getSuffix(population);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(14);
 
-		sb.append("drop database if exists " + databaseName + ";\n");
-		sb.append("create database " + databaseName + " character set utf8;\n");
+		sb.append("drop database if exists ");
+		sb.append(databaseName);
+		sb.append(";\n");
+		sb.append("create database ");
+		sb.append(databaseName);
+		sb.append(" character set utf8;\n");
 		sb.append("use ");
 		sb.append(databaseName);
 		sb.append(";\n\n");
-		sb.append(
-			FileUtil.read(
+		sb.append(FileUtil.read(
 				"../sql/portal" + suffix + "/portal" + suffix + "-mysql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
@@ -151,7 +155,7 @@ public class MySQLDB extends BaseDB {
 
 		boolean createTable = false;
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 

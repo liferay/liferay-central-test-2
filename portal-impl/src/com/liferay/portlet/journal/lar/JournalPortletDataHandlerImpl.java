@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -1579,7 +1580,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getArticlePath(
 		PortletDataContext context, JournalArticle article) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(8);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
@@ -1596,7 +1597,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getArticleImagePath(
 		PortletDataContext context, JournalArticle article) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
@@ -1612,7 +1613,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		PortletDataContext context, JournalArticle article,
 		JournalArticleImage articleImage, Image image) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
@@ -1639,7 +1640,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, JournalArticle article)
 		throws PortalException, SystemException {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
@@ -1654,7 +1655,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getFeedPath(
 		PortletDataContext context, JournalFeed feed) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/feeds/");
@@ -1667,7 +1668,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getImportStructurePath(
 		PortletDataContext context, String structureId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getSourcePortletPath(PortletKeys.JOURNAL));
 		sb.append("/structures/");
@@ -1680,7 +1681,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getImportTemplatePath(
 		PortletDataContext context, String templateId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getSourcePortletPath(PortletKeys.JOURNAL));
 		sb.append("/templates/");
@@ -1693,7 +1694,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getImportTemplateSmallImagePath(
 		PortletDataContext context, String templateId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getSourcePortletPath(PortletKeys.JOURNAL));
 		sb.append("/templates/thumbnail-");
@@ -1706,7 +1707,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getTemplatePath(
 		PortletDataContext context, JournalTemplate template) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/templates/");
@@ -1720,7 +1721,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, JournalTemplate template)
 		throws PortalException, SystemException {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/templates/thumbnail-");
@@ -1734,7 +1735,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getStructurePath(
 		PortletDataContext context, JournalStructure structure) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/structures/");

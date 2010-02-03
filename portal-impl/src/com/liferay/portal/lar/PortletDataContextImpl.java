@@ -664,13 +664,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	protected String getPrimaryKeyString(String className, String primaryKey) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(className);
-		sb.append(StringPool.POUND);
-		sb.append(primaryKey);
-
-		return sb.toString();
+		return className.concat(StringPool.POUND).concat(primaryKey);
 	}
 
 	protected void initXStream() {

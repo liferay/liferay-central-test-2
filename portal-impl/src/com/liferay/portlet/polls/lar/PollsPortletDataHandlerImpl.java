@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -431,7 +432,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getChoicePath(
 		PortletDataContext context, PollsChoice choice) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(context.getPortletPath(PortletKeys.POLLS));
 		sb.append("/questions/");
@@ -446,7 +447,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getQuestionPath(
 		PortletDataContext context, PollsQuestion question) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.POLLS));
 		sb.append("/questions/");
@@ -459,7 +460,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getVotePath(
 		PortletDataContext context, PollsVote vote) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(context.getPortletPath(PortletKeys.POLLS));
 		sb.append("/questions/");

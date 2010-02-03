@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -140,7 +141,7 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 			ResourceBundle bundle = _bundlePool.get(poolId);
 
 			if (bundle == null) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(16);
 
 				try {
 					PortletInfo portletInfo = _portlet.getPortletInfo();

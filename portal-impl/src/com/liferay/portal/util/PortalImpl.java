@@ -66,6 +66,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -699,7 +700,7 @@ public class PortalImpl implements Portal {
 		String modelName = className.substring(
 			pos + 12, className.length() - 9);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(packagePath);
 		sb.append(".service.persistence.");
@@ -1157,7 +1158,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getFirstPageLayoutTypes(PageContext pageContext) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 			String type = PropsValues.LAYOUT_TYPES[i];
@@ -1170,7 +1171,11 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		return sb.substring(0, sb.length() - 2);
+		if (sb.index() >= 2) {
+			sb.setIndex(sb.index() - 2);
+		}
+
+		return sb.toString();
 	}
 
 	public String getGlobalLibDir() {
@@ -1613,7 +1618,7 @@ public class PortalImpl implements Portal {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -1936,7 +1941,7 @@ public class PortalImpl implements Portal {
 
 		long plid = LayoutConstants.DEFAULT_PLID;
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(groupId);
 		sb.append(StringPool.SPACE);
@@ -2039,7 +2044,7 @@ public class PortalImpl implements Portal {
 	public String getPortalURL(
 		String serverName, int serverPort, boolean secure) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		if (secure || Http.HTTPS.equals(PropsValues.WEB_SERVER_PROTOCOL)) {
 			sb.append(Http.HTTPS_WITH_SLASH);
@@ -2143,7 +2148,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletDescription(String portletId, Locale locale) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
 		sb.append(StringPool.PERIOD);
@@ -2159,7 +2164,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletDescription(String portletId, User user) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
 		sb.append(StringPool.PERIOD);
@@ -2400,7 +2405,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletNamespace(String portletId) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(StringPool.UNDERLINE);
 		sb.append(portletId);
@@ -2433,7 +2438,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletTitle(String portletId, Locale locale) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
 		sb.append(StringPool.PERIOD);
@@ -2449,7 +2454,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletTitle(String portletId, User user) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
 		sb.append(StringPool.PERIOD);
@@ -2667,11 +2672,6 @@ public class PortalImpl implements Portal {
 
 		String packagePath = className.substring(0, pos);
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(packagePath);
-		sb.append(".service.ClpSerializer");
-
 		try {
 			ClassLoader classLoader = baseModelClass.getClassLoader();
 
@@ -2730,7 +2730,7 @@ public class PortalImpl implements Portal {
 			parameterMap = HttpUtil.getParameterMap(queryString);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		// URI
 
@@ -2951,7 +2951,7 @@ public class PortalImpl implements Portal {
 		x = url.indexOf(StringPool.QUESTION);
 
 		if (x != -1) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(4);
 
 			sb.append(url.substring(0, x));
 			sb.append(_JSESSIONID);
@@ -2966,7 +2966,7 @@ public class PortalImpl implements Portal {
 
 		x = url.indexOf(StringPool.DOUBLE_SLASH);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(url);
 
@@ -3440,7 +3440,7 @@ public class PortalImpl implements Portal {
 			ActionResponse actionResponse)
 		throws IOException {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(_pathMain);
 		sb.append("/portal/status?status=");
@@ -4022,7 +4022,7 @@ public class PortalImpl implements Portal {
 
 		Layout layout = themeDisplay.getLayout();
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		if (HttpUtil.hasDomain(layoutURL)) {
 			String protocol = HttpUtil.getProtocol(layoutURL);

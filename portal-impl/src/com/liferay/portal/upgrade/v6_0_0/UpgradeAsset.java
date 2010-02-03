@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade.v6_0_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
@@ -59,7 +60,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(4);
 
 			sb.append("insert into AssetCategory (uuid_, categoryId, ");
 			sb.append("groupId, companyId, userId, userName, createDate, ");
@@ -105,7 +106,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(7);
 
 			sb.append("insert into AssetEntry (entryId, groupId, companyId, ");
 			sb.append("userId, userName, createDate, modifiedDate, ");
@@ -162,7 +163,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(7);
 
 			sb.append("insert into ");
 			sb.append(tableName);
@@ -205,7 +206,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(3);
 
 			sb.append("insert into AssetTag (tagId, groupId, companyId, ");
 			sb.append("userId, userName, createDate, modifiedDate, name) ");
@@ -243,7 +244,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(4);
 
 			sb.append("insert into AssetVocabulary (uuid_, vocabularyId, ");
 			sb.append("groupId, companyId, userId, userName, createDate, ");

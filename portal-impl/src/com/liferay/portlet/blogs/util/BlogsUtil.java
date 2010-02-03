@@ -24,6 +24,7 @@ package com.liferay.portlet.blogs.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.ContentUtil;
@@ -147,7 +148,7 @@ public class BlogsUtil {
 	}
 
 	public static String getMailId(String mx, long entryId) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(8);
 
 		sb.append(StringPool.LESS_THAN);
 		sb.append(POP_PORTLET_PREFIX);

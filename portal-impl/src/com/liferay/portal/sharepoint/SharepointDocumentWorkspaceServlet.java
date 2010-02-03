@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -73,7 +74,7 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(12);
 
 		sb.append("<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"");
 		sb.append("http://schemas.xmlsoap.org/soap/envelope/\">");

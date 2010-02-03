@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -322,7 +323,7 @@ public class LanguageImpl implements Language {
 			if ((portletConfig != null) && (key != null) &&
 				(!key.endsWith(StringPool.CLOSE_BRACKET))) {
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(4);
 
 				sb.append(key);
 				sb.append(StringPool.OPEN_BRACKET);

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools.deploy;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.util.InitUtil;
 
 import java.io.File;
@@ -65,7 +66,7 @@ public class LayoutTemplateDeployer extends BaseDeployer {
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		String extraContent = super.getExtraContent(
 			webXmlVersion, srcFile, displayName);

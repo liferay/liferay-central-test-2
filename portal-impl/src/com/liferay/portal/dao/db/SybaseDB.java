@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -68,23 +69,24 @@ public class SybaseDB extends BaseDB {
 
 		String suffix = getSuffix(population);
 
-		StringBuilder sb = new StringBuilder();
-
-		sb = new StringBuilder();
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("use master\n");
-		sb.append(
-			"exec sp_dboption '" + databaseName + "', " +
-				"'allow nulls by default' , true\n");
+		sb.append("exec sp_dboption '");
+		sb.append(databaseName);
+		sb.append("', ");
+		sb.append("'allow nulls by default' , true\n");
 		sb.append("go\n\n");
-		sb.append(
-			"exec sp_dboption '" + databaseName + "', " +
-				"'select into/bulkcopy/pllsort' , true\n");
+		sb.append("exec sp_dboption '");
+		sb.append(databaseName);
+		sb.append("', ");
+		sb.append("'select into/bulkcopy/pllsort' , true\n");
 		sb.append("go\n\n");
 
-		sb.append("use " + databaseName + "\n\n");
-		sb.append(
-			FileUtil.read(
+		sb.append("use ");
+		sb.append(databaseName);
+		sb.append("\n\n");
+		sb.append(FileUtil.read(
 				"../sql/portal" + suffix + "/portal" + suffix + "-sybase.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
@@ -106,7 +108,7 @@ public class SybaseDB extends BaseDB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 

@@ -25,6 +25,7 @@ package com.liferay.portal.servlet.filters.virtualhost;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -256,7 +257,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 				request.setAttribute(WebKeys.LAST_PATH, lastPath);
 
-				StringBuilder prefix = new StringBuilder();
+				StringBundler prefix = new StringBundler(2);
 
 				Group group = GroupLocalServiceUtil.getGroup(
 					layoutSet.getGroupId());
@@ -275,7 +276,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 				prefix.append(group.getFriendlyURL());
 
-				StringBuilder forwardURL = new StringBuilder();
+				StringBundler forwardURL = new StringBundler(6);
 
 				if (i18nLanguageId != null) {
 					forwardURL.append(i18nLanguageId);

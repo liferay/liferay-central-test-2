@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -716,7 +717,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getCategoryPath(
 		PortletDataContext context, MBCategory category) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
 		sb.append("/categories/");
@@ -729,7 +730,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getImportCategoryPath(
 		PortletDataContext context, long categoryId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getSourcePortletPath(PortletKeys.MESSAGE_BOARDS));
 		sb.append("/categories/");
@@ -742,7 +743,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getMessageAttachementBinPath(
 		PortletDataContext context, MBMessage message, String attachment) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
 		sb.append("/bin/");
@@ -756,7 +757,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getMessageFlagPath(
 		PortletDataContext context, MBMessageFlag messageFlag) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
 		sb.append("/message-flags/");
@@ -769,7 +770,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getMessagePath(
 		PortletDataContext context, MBMessage message) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
 		sb.append("/messages/");
@@ -780,7 +781,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected String getUserBanPath(PortletDataContext context, MBBan ban) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
 		sb.append("/user-bans/");

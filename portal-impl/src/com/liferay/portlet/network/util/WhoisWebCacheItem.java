@@ -23,6 +23,7 @@
 package com.liferay.portlet.network.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
@@ -63,7 +64,7 @@ public class WhoisWebCacheItem implements WebCacheItem {
 
 			out.println(_domain);
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 			String line = null;
 
 			while ((line = unsyncBufferedReader.readLine()) != null) {

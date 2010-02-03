@@ -23,6 +23,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
@@ -39,7 +40,7 @@ import java.sql.ResultSet;
 public class VerifySocial extends VerifyProcess {
 
 	protected void deleteDuplicateActivities() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(14);
 
 		sb.append("select distinct sa1.* from SocialActivity sa1 ");
 		sb.append("inner join SocialActivity sa2 on ");
@@ -113,7 +114,7 @@ public class VerifySocial extends VerifyProcess {
 	}
 
 	protected void deleteDuplicateRequests() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("select distinct sr1.* from SocialRequest sr1 ");
 		sb.append("inner join SocialRequest sr2 on ");

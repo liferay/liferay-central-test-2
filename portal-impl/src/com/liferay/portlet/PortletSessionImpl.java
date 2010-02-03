@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletSession;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ import javax.servlet.http.HttpSession;
 public class PortletSessionImpl implements LiferayPortletSession {
 
 	public static final String getPortletScope(String portletName, long plid) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(PORTLET_SCOPE_NAMESPACE);
 		sb.append(portletName);
@@ -59,14 +60,8 @@ public class PortletSessionImpl implements LiferayPortletSession {
 
 	public static final String getPortletScopeName(
 		String portletName, long plid, String name) {
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(getPortletScope(portletName, plid));
-		sb.append(StringPool.QUESTION);
-		sb.append(name);
-
-		return sb.toString();
+		return getPortletScope(portletName, plid).concat(
+			StringPool.QUESTION).concat(name);
 	}
 
 	public PortletSessionImpl(

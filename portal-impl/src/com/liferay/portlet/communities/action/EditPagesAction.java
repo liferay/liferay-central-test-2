@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -755,20 +756,27 @@ public class EditPagesAction extends PortletAction {
 		int workflowStages = ParamUtil.getInteger(
 			actionRequest, "workflowStages");
 
-		StringBuilder sb = new StringBuilder();
+		String workflowRoleNames;
 
-		for (int i = 1; i <= workflowStages; i++) {
-			String workflowRoleName = ParamUtil.getString(
-				actionRequest, "workflowRoleName_" + i);
-
-			sb.append(workflowRoleName);
-
-			if ((i + 1) <= workflowStages) {
-				sb.append(",");
-			}
+		if (workflowStages == 0) {
+			workflowRoleNames = StringPool.BLANK;
 		}
+		else {
+			StringBundler sb = new StringBundler(workflowStages * 2 - 1);
 
-		String workflowRoleNames = sb.toString();
+			for (int i = 1; i <= workflowStages; i++) {
+				String workflowRoleName = ParamUtil.getString(
+					actionRequest, "workflowRoleName_" + i);
+
+				sb.append(workflowRoleName);
+
+				if ((i + 1) <= workflowStages) {
+					sb.append(",");
+				}
+			}
+			
+			workflowRoleNames = sb.toString();
+		}
 
 		GroupServiceUtil.updateWorkflow(
 			liveGroupId, workflowEnabled, workflowStages, workflowRoleNames);

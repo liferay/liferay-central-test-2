@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -138,11 +139,13 @@ public class PluginsEnvironmentBuilder {
 
 		// .project
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
 		sb.append("<projectDescription>\n");
-		sb.append("\t<name>" + projectName + "</name>\n");
+		sb.append("\t<name>");
+		sb.append(projectName);
+		sb.append("</name>\n");
 		sb.append("\t<comment></comment>\n");
 		sb.append("\t<projects></projects>\n");
 		sb.append("\t<buildSpec>\n");
@@ -193,7 +196,7 @@ public class PluginsEnvironmentBuilder {
 			customJars = new ArrayList<String>();
 		}
 
-		sb = new StringBuilder();
+		sb = new StringBundler();
 
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
 		sb.append("<classpath>\n");
@@ -307,13 +310,19 @@ public class PluginsEnvironmentBuilder {
 
 			_exec(_SVN_DEL_IGNORES + libDirName);
 
-			StringBuilder sb = new StringBuilder();
-
-			for (String jar : jars) {
-				sb.append(jar + "\n");
+			if (jars.length == 0) {
+				FileUtil.write(tempFile, StringPool.BLANK);
 			}
+			else {
+				StringBundler sb = new StringBundler(jars.length * 2);
 
-			FileUtil.write(tempFile, sb.toString());
+				for (String jar : jars) {
+					sb.append(jar);
+					sb.append("\n");
+				}
+
+				FileUtil.write(tempFile, sb.toString());
+			}
 
 			_exec(
 				_SVN_SET_IGNORES + "-F \"" + tempFile.getCanonicalPath() +
@@ -333,7 +342,7 @@ public class PluginsEnvironmentBuilder {
 		}
 	}
 
-	private void _addClasspathEntry(StringBuilder sb, String jar)
+	private void _addClasspathEntry(StringBundler sb, String jar)
 		throws Exception {
 
 		sb.append("\t<classpathentry kind=\"lib\" path=\"");
@@ -348,12 +357,16 @@ public class PluginsEnvironmentBuilder {
 		String[] stderr = _getExecOutput(process.getErrorStream());
 
 		if (stderr.length > 0) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(stderr.length * 3 + 3);
 
-			sb.append("Received errors in executing '" + cmd + "'\n");
+			sb.append("Received errors in executing '");
+			sb.append(cmd);
+			sb.append("'\n");
 
 			for (String err : stderr) {
-				sb.append("\t" + err + "\n");
+				sb.append("\t");
+				sb.append(err);
+				sb.append("\n");
 			}
 
 			throw new Exception(sb.toString());

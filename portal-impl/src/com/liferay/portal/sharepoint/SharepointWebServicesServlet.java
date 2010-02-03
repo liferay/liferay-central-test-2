@@ -25,6 +25,7 @@ package com.liferay.portal.sharepoint;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServlet;
@@ -58,7 +59,7 @@ public class SharepointWebServicesServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(12);
 
 		String url =
 			"http://" + request.getLocalAddr() + ":" + request.getServerPort() +

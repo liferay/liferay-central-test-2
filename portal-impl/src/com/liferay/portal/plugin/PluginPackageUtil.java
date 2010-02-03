@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -598,7 +599,7 @@ public class PluginPackageUtil {
 
 		RemotePluginPackageRepository repository = null;
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		if (!repositoryURL.startsWith(Http.HTTP_WITH_SLASH) &&
 			!repositoryURL.startsWith(Http.HTTPS_WITH_SLASH)) {
@@ -640,7 +641,7 @@ public class PluginPackageUtil {
 									"Checking general repository");
 					}
 
-					sb = new StringBuilder();
+					sb.setIndex(0);
 
 					sb.append(repositoryURL);
 					sb.append(StringPool.SLASH);

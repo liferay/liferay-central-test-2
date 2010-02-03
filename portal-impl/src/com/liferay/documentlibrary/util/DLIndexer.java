@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -132,18 +133,19 @@ public class DLIndexer extends BaseIndexer {
 		}
 
 		if (properties == null) {
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(fileEntry.getTitle());
-			sb.append(StringPool.SPACE);
-			sb.append(fileEntry.getDescription());
-			sb.append(StringPool.SPACE);
-
 			Properties extraSettingsProps =
 				fileEntry.getExtraSettingsProperties();
 
 			Iterator<Map.Entry<Object, Object>> itr =
 				extraSettingsProps.entrySet().iterator();
+
+			StringBundler sb = new StringBundler(
+				extraSettingsProps.entrySet().size() + 4);
+
+			sb.append(fileEntry.getTitle());
+			sb.append(StringPool.SPACE);
+			sb.append(fileEntry.getDescription());
+			sb.append(StringPool.SPACE);
 
 			while (itr.hasNext()) {
 				Map.Entry<Object, Object> entry = itr.next();

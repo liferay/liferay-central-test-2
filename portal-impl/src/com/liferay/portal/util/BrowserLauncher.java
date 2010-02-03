@@ -22,6 +22,8 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.net.HttpURLConnection;
@@ -90,8 +92,12 @@ public class BrowserLauncher implements Runnable {
 	}
 
 	protected void launchBrowserUnix(Runtime runtime) throws Exception {
-		StringBuilder sb = new StringBuilder();
+		if (_BROWSERS.length == 0) {
+			runtime.exec(new String[] {"sh", "-c", StringPool.BLANK});
+		}
 
+		StringBundler sb = new StringBundler(_BROWSERS.length * 5 - 1);
+		
 		for (int i = 0; i < _BROWSERS.length; i++) {
 			if (i != 0) {
 				sb.append(" || ");

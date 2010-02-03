@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
@@ -576,7 +577,7 @@ public class S3Hook extends BaseHook {
 	}
 
 	protected String getKey(long companyId, long repositoryId) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(companyId);
 		sb.append(StringPool.SLASH);
@@ -589,7 +590,7 @@ public class S3Hook extends BaseHook {
 	protected String getKey(
 		long companyId, long repositoryId, String fileName) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(companyId);
 		sb.append(StringPool.SLASH);
@@ -605,7 +606,7 @@ public class S3Hook extends BaseHook {
 		long companyId, long repositoryId, String fileName,
 		double versionNumber) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(companyId);
 		sb.append(StringPool.SLASH);

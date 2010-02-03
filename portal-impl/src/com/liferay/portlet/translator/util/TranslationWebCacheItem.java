@@ -23,6 +23,7 @@
 package com.liferay.portlet.translator.util;
 
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
@@ -47,14 +48,16 @@ public class TranslationWebCacheItem implements WebCacheItem {
 		Translation translation = new Translation(_translationId, _fromText);
 
 		try {
-			StringBuilder url = new StringBuilder();
+			StringBundler sb = new StringBundler(6);
 
-			url.append("http://babelfish.yahoo.com/translate_txt?");
-			url.append("ei=UTF-8&doit=done&fr=bf-res&intl=1&tt=urltext");
-			url.append("&trtext=").append(HttpUtil.encodeURL(_fromText));
-			url.append("&lp=").append(_translationId);
+			sb.append("http://babelfish.yahoo.com/translate_txt?");
+			sb.append("ei=UTF-8&doit=done&fr=bf-res&intl=1&tt=urltext");
+			sb.append("&trtext=");
+			sb.append(HttpUtil.encodeURL(_fromText));
+			sb.append("&lp=");
+			sb.append(_translationId);
 
-			String text = HttpUtil.URLtoString(new URL(url.toString()));
+			String text = HttpUtil.URLtoString(new URL(sb.toString()));
 
 			int x = text.indexOf("<div id=\"result\">");
 

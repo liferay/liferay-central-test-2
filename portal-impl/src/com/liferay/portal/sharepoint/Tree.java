@@ -22,6 +22,7 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class Tree implements ResponseElement {
 	}
 
 	public String parse() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(_children.size() * 4 + 4);
 
 		sb.append(OPEN_UL);
 		sb.append(StringPool.NEW_LINE);

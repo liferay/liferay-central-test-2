@@ -317,12 +317,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 
 		if (isWARFile()) {
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(StringPool.SLASH);
-			sb.append(getServletContextName());
-
-			return sb.toString();
+			return StringPool.SLASH.concat(getServletContextName());
 		}
 		else {
 			return PortalUtil.getPathContext();

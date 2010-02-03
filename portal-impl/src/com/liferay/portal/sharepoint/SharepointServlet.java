@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.sharepoint.methods.Method;
@@ -146,7 +147,7 @@ public class SharepointServlet extends HttpServlet {
 	}
 
 	protected void vtiInfHtml(HttpServletResponse response) throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<!-- FrontPage Configuration Information");
 		sb.append(StringPool.NEW_LINE);

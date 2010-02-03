@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.liveusers.LiveUsers;
@@ -272,7 +273,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		StrutsUtil.include(uri, getServletContext(), request, response);
 	}
 
-	protected StringBuilder getFriendlyTrackerPath(
+	protected StringBundler getFriendlyTrackerPath(
 			String path, ThemeDisplay themeDisplay, HttpServletRequest request)
 		throws Exception {
 
@@ -291,7 +292,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		String layoutFriendlyURL = PortalUtil.getLayoutFriendlyURL(
 			layout, themeDisplay);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(layoutFriendlyURL);
 
@@ -384,7 +385,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			portalURL = PortalUtil.getPortalURL(request);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(portalURL);
 		sb.append(themeDisplay.getPathMain());
@@ -427,7 +428,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			}
 		}
 
-		StringBuilder lastPathSB = new StringBuilder();
+		StringBundler lastPathSB = new StringBundler(4);
 
 		lastPathSB.append(portalURL);
 		lastPathSB.append(lastPath.getContextPath());
@@ -517,7 +518,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			(path.indexOf(_PATH_PORTAL_PROTECTED) == -1) &&
 			(!_trackerIgnorePaths.contains(path))) {
 
-			StringBuilder sb = null;
+			StringBundler sb = null;
 
 			try {
 				if (PropsValues.SESSION_TRACKER_FRIENDLY_PATHS_ENABLED) {
@@ -529,7 +530,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			}
 
 			if (sb == null) {
-				sb = new StringBuilder();
+				sb = new StringBundler(3);
 
 				sb.append(path);
 				sb.append(StringPool.QUESTION);

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.plugin;
 
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Iterator;
@@ -43,7 +45,7 @@ public class RepositoryReport {
 	}
 
 	public void addError(String repositoryURL, PluginPackageException ppe) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		if (Validator.isNotNull(ppe.getMessage())) {
 			sb.append(ppe.getMessage());
@@ -71,10 +73,13 @@ public class RepositoryReport {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-
 		Iterator<String> itr = getRepositoryURLs().iterator();
-
+		if (getRepositoryURLs().isEmpty()) {
+			return StringPool.BLANK;
+		}
+		
+		StringBundler sb = new StringBundler(getRepositoryURLs().size() * 3);
+		
 		while (itr.hasNext()) {
 			String repositoryURL = itr.next();
 

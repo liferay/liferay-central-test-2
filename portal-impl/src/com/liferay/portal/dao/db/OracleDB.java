@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -68,10 +69,10 @@ public class OracleDB extends BaseDB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(oracle));
 
-		StringBuilder imageSB = new StringBuilder();
-		StringBuilder journalArticleSB = new StringBuilder();
-		StringBuilder journalStructureSB = new StringBuilder();
-		StringBuilder journalTemplateSB = new StringBuilder();
+		StringBundler imageSB = new StringBundler();
+		StringBundler journalArticleSB = new StringBundler();
+		StringBundler journalStructureSB = new StringBundler();
+		StringBundler journalTemplateSB = new StringBundler();
 
 		String line = null;
 
@@ -135,7 +136,7 @@ public class OracleDB extends BaseDB {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(3);
 
 			sb.append("select index_name, table_name, uniqueness from ");
 			sb.append("user_indexes where index_name like 'LIFERAY_%' or ");
@@ -177,7 +178,7 @@ public class OracleDB extends BaseDB {
 
 		String suffix = getSuffix(population);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("drop user &1 cascade;\n");
 		sb.append("create user &1 identified by &2;\n");
@@ -210,7 +211,7 @@ public class OracleDB extends BaseDB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 
@@ -246,7 +247,7 @@ public class OracleDB extends BaseDB {
 		return sb.toString();
 	}
 
-	private void _convertToOracleCSV(String line, StringBuilder sb) {
+	private void _convertToOracleCSV(String line, StringBundler sb) {
 		int x = line.indexOf("values (");
 		int y = line.lastIndexOf(");");
 

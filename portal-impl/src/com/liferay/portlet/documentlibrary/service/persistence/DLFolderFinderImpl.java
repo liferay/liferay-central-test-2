@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -374,7 +376,11 @@ public class DLFolderFinderImpl
 	}
 
 	protected String getFolderIds(List<Long> folderIds, String table) {
-		StringBuilder sb = new StringBuilder();
+		if (folderIds.isEmpty()) {
+			return StringPool.BLANK;
+		}
+	
+		StringBundler sb = new StringBundler(folderIds.size() * 5 - 1);	
 
 		for (int i = 0; i < folderIds.size(); i++) {
 			sb.append(table);

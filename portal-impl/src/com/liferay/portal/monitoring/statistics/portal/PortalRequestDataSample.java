@@ -41,6 +41,7 @@
 
 package com.liferay.portal.monitoring.statistics.portal;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.monitoring.MonitorNames;
 import com.liferay.portal.monitoring.statistics.BaseDataSample;
 
@@ -68,7 +69,7 @@ public class PortalRequestDataSample extends BaseDataSample {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("{requestURL=");
 		sb.append(_requestURL);

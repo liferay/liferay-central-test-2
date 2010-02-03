@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.upgrade.v5_2_3.util.CountryDependencyManager;
 import com.liferay.portal.upgrade.v5_2_3.util.DependencyManager;
 import com.liferay.portal.upgrade.v5_2_3.util.ExpandoColumnDependencyManager;
@@ -344,7 +345,7 @@ public class UpgradeDuplicates extends UpgradeProcess {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(2 * columns.length + 3);
 
 			sb.append("Checking for duplicate data from ");
 			sb.append(tableName);
@@ -377,7 +378,7 @@ public class UpgradeDuplicates extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			sb.append("select ");
 			sb.append(primaryKeyName);
@@ -475,7 +476,7 @@ public class UpgradeDuplicates extends UpgradeProcess {
 
 					if (dependencyManager != null) {
 						if (_log.isInfoEnabled()) {
-							sb = new StringBuilder();
+							sb.setIndex(0);
 
 							sb.append("Resolving duplicate data from ");
 							sb.append(tableName);

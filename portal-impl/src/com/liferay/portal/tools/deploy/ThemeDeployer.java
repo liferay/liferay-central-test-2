@@ -23,6 +23,7 @@
 package com.liferay.portal.tools.deploy;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Plugin;
@@ -87,7 +88,7 @@ public class ThemeDeployer extends BaseDeployer {
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		String extraContent = super.getExtraContent(
 			webXmlVersion, srcFile, displayName);

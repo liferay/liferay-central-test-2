@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.servlet.WebDirDetector;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.tools.WebXMLBuilder;
@@ -161,7 +162,7 @@ public class ExtHotDeployListener extends BaseHotDeployListener {
 			servletContext);
 
 		if (!conflicts.isEmpty()) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			sb.append(
 				"Extension environment for " + servletContextName +

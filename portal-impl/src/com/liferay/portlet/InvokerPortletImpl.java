@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
@@ -103,7 +104,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	public static String encodeResponseKey(
 		long plid, String portletId, String languageId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(plid);
 		sb.append(StringPool.UNDERLINE);

@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade.v5_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,7 +47,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected long getMessageIdsCount() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("select count(*) from ");
 		sb.append("MBMessage childMessage ");
@@ -80,7 +81,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected void updateMessage() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("select childMessage.messageId, parentMessage.categoryId, ");
 		sb.append("parentMessage.threadId ");

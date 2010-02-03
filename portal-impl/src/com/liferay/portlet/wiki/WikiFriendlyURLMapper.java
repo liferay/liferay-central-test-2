@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -58,7 +59,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String nodeName = portletURL.getParameter("nodeName");
 
 			if (Validator.isNotNull(nodeId) || Validator.isNotNull(nodeName)) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(StringPool.SLASH);
 				sb.append(_MAPPING);
@@ -96,9 +97,9 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		else if (strutsAction.equals("/wiki/view_tagged_pages")) {
 			String tag = portletURL.getParameter("tag");
 
-			StringBuilder sb = new StringBuilder();
-
 			if (Validator.isNotNull(tag)) {
+				StringBundler sb = new StringBundler(6);
+
 				sb.append(StringPool.SLASH);
 				sb.append(_MAPPING);
 				sb.append(StringPool.SLASH);
@@ -109,9 +110,14 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 				portletURL.addParameterIncludedInPath("nodeId");
 				portletURL.addParameterIncludedInPath("nodeName");
 				portletURL.addParameterIncludedInPath("tag");
+
+				friendlyURLPath = sb.toString();
+			}
+			else {
+				friendlyURLPath = StringPool.BLANK;
 			}
 
-			friendlyURLPath = sb.toString();
+			
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {

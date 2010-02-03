@@ -23,6 +23,7 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class ShutdownHook implements Runnable {
 	}
 
 	protected void printFullThreadDump() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append("Full thread dump ");
 		sb.append(System.getProperty("java.vm.name"));

@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -372,7 +373,7 @@ public class JournalArticleFinderImpl
 			List<JournalArticle> list = q.list();
 
 			if (list.size() == 0) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(6);
 
 				sb.append("No JournalArticle exists with the key ");
 				sb.append("{resourcePrimKey=");

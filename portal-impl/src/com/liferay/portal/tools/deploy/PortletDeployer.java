@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -124,7 +125,7 @@ public class PortletDeployer extends BaseDeployer {
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String extraContent = super.getExtraContent(
 			webXmlVersion, srcFile, displayName);
@@ -182,7 +183,7 @@ public class PortletDeployer extends BaseDeployer {
 	protected String getServletContent(File portletXML, File webXML)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		// Add wrappers for portlets
 

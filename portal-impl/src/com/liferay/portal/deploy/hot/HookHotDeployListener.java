@@ -53,6 +53,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -392,7 +393,7 @@ public class HookHotDeployListener
 					customJspDir, customJsps);
 
 				if (_log.isDebugEnabled()) {
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(customJsps.size() * 2);
 
 					sb.append("Custom JSP files:\n");
 

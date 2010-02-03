@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -276,7 +277,7 @@ public abstract class BaseDB implements DB {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(template));
@@ -327,7 +328,7 @@ public abstract class BaseDB implements DB {
 					if (line.endsWith(";")) {
 						String sql = sb.toString();
 
-						sb = new StringBuilder();
+						sb.setIndex(0);
 
 						try {
 							if (!sql.equals("COMMIT_TRANSACTION;")) {
@@ -518,7 +519,7 @@ public abstract class BaseDB implements DB {
 			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(template));
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			String line = null;
 
@@ -671,7 +672,7 @@ public abstract class BaseDB implements DB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(template));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 
@@ -712,7 +713,7 @@ public abstract class BaseDB implements DB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new FileReader(new File(fileName)));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 
@@ -744,7 +745,7 @@ public abstract class BaseDB implements DB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 
@@ -794,7 +795,7 @@ public abstract class BaseDB implements DB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 
@@ -816,7 +817,7 @@ public abstract class BaseDB implements DB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 

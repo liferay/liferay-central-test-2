@@ -23,6 +23,7 @@
 package com.liferay.portal.sharepoint;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -81,7 +82,7 @@ public class CompanySharepointStorageImpl extends BaseSharepointStorageImpl {
 	}
 
 	protected String getGroupPath(Group group) throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		String name = group.getName();
 

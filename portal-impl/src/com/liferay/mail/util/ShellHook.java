@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -145,7 +146,7 @@ public class ShellHook implements Hook {
 			int exitValue = p.exitValue();
 
 			if (exitValue != 0) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(cmdLine.length * 2);
 
 				for (int i = 0; i < cmdLine.length; i++) {
 					sb.append(cmdLine[i]);

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.portal.util.FileImpl;
@@ -163,23 +164,29 @@ public class UpgradeTableBuilder {
 			content = StringUtil.replace(content, "\n\n", "\n");
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(_fileUtil.read("../copyright.txt"));
 
-		sb.append("\n\npackage " + packagePath + ";\n\n");
+		sb.append("\n\npackage ");
+		sb.append(packagePath);
+		sb.append(";\n\n");
 
 		sb.append("import java.sql.Types;\n\n");
 
 		sb.append("/**\n");
-		sb.append(
-			" * <a href=\"" + className +
-				".java.html\"><b><i>View Source</i></b></a>\n");
+		sb.append(" * <a href=\"");
+		sb.append(className);
+		sb.append(".java.html\"><b><i>View Source</i></b></a>\n");
 		sb.append(" *\n");
-		sb.append(" * @author\t  " + author + "\n");
+		sb.append(" * @author\t  ");
+		sb.append(author);
+		sb.append("\n");
 		sb.append(" * @generated\n");
 		sb.append(" */\n");
-		sb.append("public class " + className + " {\n\n");
+		sb.append("public class ");
+		sb.append(className);
+		sb.append(" {\n\n");
 
 		String[] lines = StringUtil.split(content, "\n");
 

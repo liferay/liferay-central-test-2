@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 import com.liferay.portal.kernel.scripting.UnsupportedLanguageException;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -182,7 +183,7 @@ public class ScriptingImpl implements Scripting {
 	}
 
 	protected String getErrorMessage(String script, Exception e) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(getErrorMessage(e));
 		sb.append(StringPool.NEW_LINE);
@@ -206,7 +207,7 @@ public class ScriptingImpl implements Scripting {
 			}
 		}
 		catch (IOException ioe) {
-			sb = new StringBuilder();
+			sb.setIndex(0);
 
 			sb.append(getErrorMessage(e));
 			sb.append(StringPool.NEW_LINE);

@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
@@ -61,7 +62,7 @@ public class CyrusHook implements Hook {
 				if ((filters.size() > 0) || (emailAddresses.size() > 0) ||
 					(leaveCopy)) {
 
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler();
 
 					for (int i = 0; i < filters.size(); i++) {
 						Filter filter = filters.get(i);
@@ -256,14 +257,16 @@ public class CyrusHook implements Hook {
 			return;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(blocked.size() * 9);
 
 		for (int i = 0; i < blocked.size(); i++) {
 			String emailAddress = blocked.get(i);
 
 			sb.append("\n");
 			sb.append(":0\n");
-			sb.append("* ^From.*").append(emailAddress).append("\n");
+			sb.append("* ^From.*");
+			sb.append(emailAddress);
+			sb.append("\n");
 			sb.append("{\n");
 			sb.append(":0\n");
 			sb.append("/dev/null\n");

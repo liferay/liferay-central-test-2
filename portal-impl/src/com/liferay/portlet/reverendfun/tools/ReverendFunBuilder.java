@@ -23,6 +23,7 @@
 package com.liferay.portlet.reverendfun.tools;
 
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
@@ -60,7 +61,7 @@ public class ReverendFunBuilder {
 			Set<String> moreDates = (Set<String>)wci.convert(StringPool.BLANK);
 
 			if (moreDates.size() > 0) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				Set<String> datesSet = new HashSet<String>();
 

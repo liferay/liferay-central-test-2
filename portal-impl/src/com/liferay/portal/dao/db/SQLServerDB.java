@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -84,7 +85,7 @@ public class SQLServerDB extends BaseDB {
 				return null;
 			}
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(6);
 
 			sb.append("select sys.tables.name as table_name, ");
 			sb.append("sys.indexes.name as index_name, is_unique from ");
@@ -127,17 +128,21 @@ public class SQLServerDB extends BaseDB {
 
 		String suffix = getSuffix(population);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(17);
 
-		sb.append("drop database " + databaseName + ";\n");
-		sb.append("create database " + databaseName + ";\n");
+		sb.append("drop database ");
+		sb.append(databaseName);
+		sb.append(";\n");
+		sb.append("create database ");
+		sb.append(databaseName);
+		sb.append(";\n");
 		sb.append("\n");
 		sb.append("go\n");
 		sb.append("\n");
-		sb.append("use " + databaseName + ";\n\n");
-		sb.append(
-			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
+		sb.append("use ");
+		sb.append(databaseName);
+		sb.append(";\n\n");
+		sb.append(FileUtil.read("../sql/portal" + suffix + "/portal" + suffix +
 					"-sql-server.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
@@ -159,7 +164,7 @@ public class SQLServerDB extends BaseDB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 

@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
 
@@ -94,7 +95,7 @@ public class DatabaseDetector {
 			}
 			else if (dbName.equals("HSQL Database Engine")) {
 				if (_log.isWarnEnabled()) {
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(6);
 
 					sb.append("Liferay is configured to use Hypersonic as ");
 					sb.append("its database. Do NOT use Hypersonic in ");

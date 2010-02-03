@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 
 /**
  * <a href="UpgradeMessageBoards.java.html"><b><i>View Source</i></b></a>
@@ -39,7 +40,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected void updateGroupId() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append("update MBCategory set threadCount = (select count(*) from ");
 		sb.append("MBThread where MBThread.categoryId = ");
@@ -47,7 +48,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		runSQL(sb.toString());
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		sb.append("update MBCategory set messageCount = (select count(*) ");
 		sb.append("from MBMessage where MBMessage.categoryId = ");
@@ -55,7 +56,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		runSQL(sb.toString());
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		sb.append("update MBMessage set groupId = (select groupId from ");
 		sb.append("MBCategory where MBCategory.categoryId = ");
@@ -63,7 +64,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		runSQL(sb.toString());
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		sb.append("update MBThread set groupId = (select groupId from ");
 		sb.append("MBCategory where MBCategory.categoryId = ");
@@ -73,7 +74,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected void updateMessageClassNameId() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("update MBMessage set classNameId = (select classNameId ");
 		sb.append("from MBDiscussion where MBDiscussion.threadId = ");
@@ -85,7 +86,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected void updateMessageFlagThreadId() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append("update MBMessageFlag set threadId = (select threadId from ");
 		sb.append("MBMessage where MBMessage.messageId = ");
@@ -95,7 +96,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected void updateMessagePriority() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(2);
 
 		sb.append("update MBMessage set priority = (select priority from ");
 		sb.append("MBThread where MBThread.threadId = MBMessage.threadId)");

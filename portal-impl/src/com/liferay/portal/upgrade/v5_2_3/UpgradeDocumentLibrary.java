@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileEntryTable;
@@ -158,21 +159,21 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void updateGroupId() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append("update DLFileEntry set groupId = (select groupId from ");
 		sb.append("DLFolder where DLFolder.folderId = DLFileEntry.folderId)");
 
 		runSQL(sb.toString());
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		sb.append("update DLFileRank set groupId = (select groupId from ");
 		sb.append("DLFolder where DLFolder.folderId = DLFileRank.folderId)");
 
 		runSQL(sb.toString());
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		sb.append("update DLFileShortcut set groupId = (select groupId from ");
 		sb.append("DLFolder where DLFolder.folderId = ");
@@ -180,7 +181,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		runSQL(sb.toString());
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		sb.append("update DLFileVersion set groupId = (select groupId from ");
 		sb.append("DLFolder where DLFolder.folderId = DLFileVersion.folderId)");

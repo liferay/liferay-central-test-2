@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -269,7 +270,7 @@ public class MediaWikiImporter implements WikiImporter {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(4);
 
 					sb.append("Could not move ");
 					sb.append(WikiPageConstants.FRONT_PAGE);
@@ -459,7 +460,7 @@ public class MediaWikiImporter implements WikiImporter {
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
-						StringBuilder sb = new StringBuilder();
+						StringBundler sb = new StringBundler(3);
 
 						sb.append("Page with title ");
 						sb.append(title);

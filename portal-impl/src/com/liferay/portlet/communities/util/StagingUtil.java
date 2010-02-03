@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
@@ -161,7 +162,7 @@ public class StagingUtil {
 
 		User user = UserLocalServiceUtil.getUser(permissionChecker.getUserId());
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		if (secureConnection) {
 			sb.append(Http.HTTPS_WITH_SLASH);
@@ -308,7 +309,7 @@ public class StagingUtil {
 	public static String getSchedulerGroupName(
 		String destinationName, long groupId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(destinationName);
 		sb.append(StringPool.SLASH);

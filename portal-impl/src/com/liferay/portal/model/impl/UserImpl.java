@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -142,7 +143,7 @@ public class UserImpl extends UserModelImpl implements User {
 				int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
 
 				if (publicLayoutsPageCount > 0) {
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(5);
 
 					sb.append(portalURL);
 					sb.append(mainPath);

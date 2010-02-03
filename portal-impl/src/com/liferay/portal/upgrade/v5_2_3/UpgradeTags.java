@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.v5_2_3;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.upgrade.v5_2_3.util.TagsAssetTable;
 import com.liferay.portal.upgrade.v5_2_3.util.TagsPropertyTable;
 import com.liferay.portal.upgrade.v5_2_3.util.TagsPropertyValueUpgradeColumnImpl;
@@ -86,7 +87,7 @@ public class UpgradeTags extends UpgradeProcess {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(12);
 
 		sb.append("update TagsAsset set viewCount = (select ");
 		sb.append(tableName);

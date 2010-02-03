@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.NotificationThreadLocal;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -1281,7 +1282,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 						HttpUtil.encodeURL(page.getTitle());
 
 			if (previousVersionPage != null) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(16);
 
 				sb.append(layoutFullURL);
 				sb.append("?p_p_id=");

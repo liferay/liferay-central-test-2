@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -847,7 +848,7 @@ public class BaseDeployer {
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append("<display-name>");
 		sb.append(displayName);
@@ -964,7 +965,11 @@ public class BaseDeployer {
 	}
 
 	protected String getPluginPackageLicensesXml(List<License> licenses) {
-		StringBuilder sb = new StringBuilder();
+		if (licenses.isEmpty()) {
+			return StringPool.BLANK;
+		}
+		
+		StringBundler sb = new StringBundler(5 * licenses.size() + 2);
 
 		for (int i = 0; i < licenses.size(); i++) {
 			License license = licenses.get(i);
@@ -989,8 +994,11 @@ public class BaseDeployer {
 
 	protected String getPluginPackageLiferayVersionsXml(
 		List<String> liferayVersions) {
+		if (liferayVersions.isEmpty()) {
+			return StringPool.BLANK;
+		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(liferayVersions.size() * 3 + 2);
 
 		for (int i = 0; i < liferayVersions.size(); i++) {
 			String liferayVersion = liferayVersions.get(i);
@@ -1027,7 +1035,11 @@ public class BaseDeployer {
 	}
 
 	protected String getPluginPackageTagsXml(List<String> tags) {
-		StringBuilder sb = new StringBuilder();
+		if (tags.isEmpty()) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(tags.size() * 3 + 2);
 
 		for (int i = 0; i < tags.size(); i++) {
 			String tag = tags.get(i);

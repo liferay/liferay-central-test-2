@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.ActionConstants;
@@ -112,7 +113,9 @@ public class ExportArticleAction extends PortletAction {
 				JournalContentUtil.getDisplay(
 					groupId, articleId, null, languageId, themeDisplay);
 
-			StringBuilder sb = new StringBuilder();
+			int pages = articleDisplay.getNumberOfPages();
+
+			StringBundler sb = new StringBundler(pages + 13);
 
 			sb.append("<html>");
 
@@ -128,8 +131,6 @@ public class ExportArticleAction extends PortletAction {
 			sb.append("<body>");
 
 			sb.append(articleDisplay.getContent());
-
-			int pages = articleDisplay.getNumberOfPages();
 
 			for (int i = 2; i <= pages; i++) {
 				articleDisplay = JournalContentUtil.getDisplay(
@@ -147,13 +148,8 @@ public class ExportArticleAction extends PortletAction {
 			String title = articleDisplay.getTitle();
 			String sourceExtension = "html";
 
-			sb = new StringBuilder();
-
-			sb.append(title);
-			sb.append(StringPool.PERIOD);
-			sb.append(sourceExtension);
-
-			String fileName = sb.toString();
+			String fileName = title.concat(StringPool.PERIOD).concat(
+				sourceExtension);
 
 			if (Validator.isNotNull(targetExtension) &&
 				ArrayUtil.contains(allowedExtensions, targetExtension)) {
@@ -165,13 +161,8 @@ public class ExportArticleAction extends PortletAction {
 					id, is, sourceExtension, targetExtension);
 
 				if ((convertedIS != null) && (convertedIS != is)) {
-					sb = new StringBuilder();
-
-					sb.append(title);
-					sb.append(StringPool.PERIOD);
-					sb.append(targetExtension);
-
-					fileName = sb.toString();
+					fileName = title.concat(StringPool.PERIOD).concat(
+						targetExtension);
 
 					is = convertedIS;
 				}

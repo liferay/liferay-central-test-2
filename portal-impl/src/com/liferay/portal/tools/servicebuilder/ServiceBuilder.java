@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringUtil_IW;
@@ -1116,7 +1117,7 @@ public class ServiceBuilder {
 		String name = type.getValue();
 
 		if (dimensions > 0) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(dimensions);
 
 			for (int i = 0; i < dimensions; i++) {
 				sb.append("[");
@@ -1344,15 +1345,10 @@ public class ServiceBuilder {
 	}
 
 	public String getParameterType(JavaParameter parameter) {
-		StringBuilder sb = new StringBuilder();
-
 		Type returnType = parameter.getType();
 
-		sb.append(returnType.getValue());
-		sb.append(parameter.getGenericsName());
-		sb.append(getDimensions(returnType.getDimensions()));
-
-		return sb.toString();
+		return returnType.getValue().concat(parameter.getGenericsName()).concat(
+			getDimensions(returnType.getDimensions()));
 	}
 
 	public String getPrimitiveObj(String type) {
@@ -1403,15 +1399,12 @@ public class ServiceBuilder {
 	}
 
 	public String getReturnType(JavaMethod method) {
-		StringBuilder sb = new StringBuilder();
-
 		Type returnType = method.getReturns();
 
-		sb.append(returnType.getValue());
-		sb.append(method.getReturnsGenericsName());
-		sb.append(getDimensions(returnType.getDimensions()));
-
-		return sb.toString();
+		return 
+			returnType.getValue().concat(
+			method.getReturnsGenericsName()).concat(
+			getDimensions(returnType.getDimensions()));
 	}
 
 	public String getServiceBaseThrowsExceptions(
@@ -1669,8 +1662,9 @@ public class ServiceBuilder {
 
 	public boolean isDuplicateMethod(
 		JavaMethod method, Map<String, Object> tempMap) {
+		JavaParameter[] parameters = method.getParameters();
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4 * parameters.length + 7);
 
 		sb.append("isDuplicateMethod ");
 		sb.append(method.getReturns().getValue());
@@ -1680,7 +1674,7 @@ public class ServiceBuilder {
 		sb.append(method.getName());
 		sb.append(StringPool.OPEN_PARENTHESIS);
 
-		JavaParameter[] parameters = method.getParameters();
+		
 
 		for (int i = 0; i < parameters.length; i++) {
 			JavaParameter javaParameter = parameters[i];
@@ -2125,7 +2119,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createJsonJs() throws Exception {
-		StringBuilder content = new StringBuilder();
+		StringBundler content = new StringBundler();
 
 		if (_ejbList.size() > 0) {
 			content.append(_processTemplate(_tplJsonJs));
@@ -2658,7 +2652,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createRemotingXml() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		Document doc = SAXReaderUtil.read(new File(_springFileName));
 
@@ -3339,9 +3333,10 @@ public class ServiceBuilder {
 				EntityFinder finder = finderList.get(j);
 
 				if (finder.isDBIndex()) {
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler();
 
-					sb.append(entity.getTable() + " (");
+					sb.append(entity.getTable());
+					sb.append(" (");
 
 					List<EntityColumn> finderColsList = finder.getColumns();
 
@@ -3364,7 +3359,7 @@ public class ServiceBuilder {
 
 					String indexName = "IX_" + indexHash;
 
-					sb = new StringBuilder();
+					sb.setIndex(0);
 
 					sb.append("create ");
 
@@ -3372,7 +3367,9 @@ public class ServiceBuilder {
 						sb.append("unique ");
 					}
 
-					sb.append("index " + indexName + " on ");
+					sb.append("index ");
+					sb.append(indexName);
+					sb.append(" on ");
 					sb.append(indexSpec);
 
 					indexSQLs.put(indexSpec, sb.toString());
@@ -3394,7 +3391,7 @@ public class ServiceBuilder {
 			_getCreateMappingTableIndex(entityMapping, indexSQLs, indexProps);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		Iterator<String> itr = indexSQLs.values().iterator();
 
@@ -3428,7 +3425,7 @@ public class ServiceBuilder {
 
 		// indexes.properties
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		itr = indexProps.keySet().iterator();
 
@@ -3486,7 +3483,7 @@ public class ServiceBuilder {
 			}
 		}
 		else if (addMissingTables) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(content));
@@ -3502,7 +3499,8 @@ public class ServiceBuilder {
 					String tableName = line.substring(x, y);
 
 					if (tableName.compareTo(entityMapping.getTable()) > 0) {
-						sb.append(newCreateTableString + "\n\n");
+						sb.append(newCreateTableString);
+						sb.append("\n\n");
 
 						appendNewTable = false;
 					}
@@ -3513,7 +3511,8 @@ public class ServiceBuilder {
 			}
 
 			if (appendNewTable) {
-				sb.append("\n" + newCreateTableString);
+				sb.append("\n");
+				sb.append(newCreateTableString);
 			}
 
 			unsyncBufferedReader.close();
@@ -3565,17 +3564,14 @@ public class ServiceBuilder {
 				EntityColumn column = columnList.get(j);
 
 				if ("sequence".equals(column.getIdType())) {
-					StringBuilder sb = new StringBuilder();
-
 					String sequenceName = column.getIdParam();
 
 					if (sequenceName.length() > 30) {
 						sequenceName = sequenceName.substring(0, 30);
 					}
 
-					sb.append("create sequence " + sequenceName + ";");
-
-					String sequenceSQL = sb.toString();
+					String sequenceSQL = "create sequence ".concat(sequenceName
+						).concat(";");
 
 					if (!sequenceSQLs.contains(sequenceSQL)) {
 						sequenceSQLs.add(sequenceSQL);
@@ -3584,21 +3580,26 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
-
-		Iterator<String> itr = sequenceSQLs.iterator();
-
-		while (itr.hasNext()) {
-			String sequenceSQL = itr.next();
-
-			sb.append(sequenceSQL);
-
-			if (itr.hasNext()) {
-				sb.append("\n");
-			}
+		if (sequenceSQLs.isEmpty()) {
+			FileUtil.write(sqlFile, StringPool.BLANK, true);
 		}
+		else {
+			StringBundler sb = new StringBundler(sequenceSQLs.size() * 2 - 1);
 
-		FileUtil.write(sqlFile, sb.toString(), true);
+			Iterator<String> itr = sequenceSQLs.iterator();
+
+			while (itr.hasNext()) {
+				String sequenceSQL = itr.next();
+
+				sb.append(sequenceSQL);
+
+				if (itr.hasNext()) {
+					sb.append("\n");
+				}
+			}
+
+			FileUtil.write(sqlFile, sb.toString(), true);
+		}
 	}
 
 	private void _createSQLTables() throws IOException {
@@ -3675,7 +3676,7 @@ public class ServiceBuilder {
 			}
 		}
 		else if (addMissingTables) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(content));
@@ -3691,7 +3692,8 @@ public class ServiceBuilder {
 					String tableName = line.substring(x, y);
 
 					if (tableName.compareTo(entity.getTable()) > 0) {
-						sb.append(newCreateTableString + "\n\n");
+						sb.append(newCreateTableString);
+						sb.append("\n\n");
 
 						appendNewTable = false;
 					}
@@ -3702,7 +3704,8 @@ public class ServiceBuilder {
 			}
 
 			if (appendNewTable) {
-				sb.append("\n" + newCreateTableString);
+				sb.append("\n");
+				sb.append(newCreateTableString);
 			}
 
 			unsyncBufferedReader.close();
@@ -3712,7 +3715,7 @@ public class ServiceBuilder {
 	}
 
 	private String _fixHbmXml(String content) throws IOException {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
@@ -3862,9 +3865,11 @@ public class ServiceBuilder {
 
 				String indexName = "IX_" + indexHash;
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(4);
 
-				sb.append("create index " + indexName + " on ");
+				sb.append("create index ");
+				sb.append(indexName);
+				sb.append(" on ");
 				sb.append(indexSpec);
 
 				indexSQLs.put(indexSpec, sb.toString());
@@ -3890,9 +3895,11 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
-		sb.append(_SQL_CREATE_TABLE + entityMapping.getTable() + " (\n");
+		sb.append(_SQL_CREATE_TABLE);
+		sb.append(entityMapping.getTable());
+		sb.append(" (\n");
 
 		for (Entity entity : entities) {
 			List<EntityColumn> pkList = entity.getPKList();
@@ -3903,7 +3910,8 @@ public class ServiceBuilder {
 				String colName = col.getName();
 				String colType = col.getType();
 
-				sb.append("\t" + col.getDBName());
+				sb.append("\t");
+				sb.append(col.getDBName());
 				sb.append(" ");
 
 				if (colType.equalsIgnoreCase("boolean")) {
@@ -3939,7 +3947,9 @@ public class ServiceBuilder {
 					}
 
 					if (maxLength < 4000) {
-						sb.append("VARCHAR(" + maxLength + ")");
+						sb.append("VARCHAR(");
+						sb.append(maxLength);
+						sb.append(")");
 					}
 					else if (maxLength == 4000) {
 						sb.append("STRING");
@@ -3997,9 +4007,11 @@ public class ServiceBuilder {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
-		sb.append(_SQL_CREATE_TABLE + entity.getTable() + " (\n");
+		sb.append(_SQL_CREATE_TABLE);
+		sb.append(entity.getTable());
+		sb.append(" (\n");
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = regularColList.get(i);
@@ -4008,7 +4020,8 @@ public class ServiceBuilder {
 			String colType = col.getType();
 			String colIdType = col.getIdType();
 
-			sb.append("\t" + col.getDBName());
+			sb.append("\t");
+			sb.append(col.getDBName());
 			sb.append(" ");
 
 			if (colType.equalsIgnoreCase("boolean")) {
@@ -4044,7 +4057,9 @@ public class ServiceBuilder {
 				}
 
 				if (maxLength < 4000) {
-					sb.append("VARCHAR(" + maxLength + ")");
+					sb.append("VARCHAR(");
+					sb.append(maxLength);
+					sb.append(")");
 				}
 				else if (maxLength == 4000) {
 					sb.append("STRING");

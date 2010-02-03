@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
@@ -279,7 +280,7 @@ public class Table {
 					UnsyncBufferedReader unsyncBufferedReader =
 						new UnsyncBufferedReader(clob.getCharacterStream());
 
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler();
 
 					String line = null;
 

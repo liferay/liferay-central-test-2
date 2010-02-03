@@ -1067,7 +1067,7 @@ public class PortletURLImpl
 	}
 
 	protected String generateWSRPToString() {
-		StringBuilder sb = new StringBuilder("wsrp_rewrite?");
+		StringBundler sb = new StringBundler("wsrp_rewrite?");
 
 		Portlet portlet = getPortlet();
 
@@ -1164,7 +1164,7 @@ public class PortletURLImpl
 			}
 		}
 
-		StringBuilder parameterSb = new StringBuilder();
+		StringBundler parameterSb = new StringBundler();
 
 		Iterator<Map.Entry<String, String[]>> itr =
 			_params.entrySet().iterator();

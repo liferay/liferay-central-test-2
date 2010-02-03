@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Namespace;
@@ -50,13 +51,7 @@ public class PortletQNameImpl implements PortletQName {
 	}
 
 	public String getKey(String uri, String localPart) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(uri);
-		sb.append(_KEY_SEPARATOR);
-		sb.append(localPart);
-
-		return sb.toString();
+		return uri.concat(_KEY_SEPARATOR).concat(localPart);
 	}
 
 	public String getPublicRenderParameterIdentifier(
@@ -74,7 +69,7 @@ public class PortletQNameImpl implements PortletQName {
 	}
 
 	public String getPublicRenderParameterName(QName qName) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(PUBLIC_RENDER_PARAMETER_NAMESPACE);
 		sb.append(qName.getNamespaceURI().hashCode());
@@ -148,7 +143,7 @@ public class PortletQNameImpl implements PortletQName {
 	}
 
 	public String getRemovePublicRenderParameterName(QName qName) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(REMOVE_PUBLIC_RENDER_PARAMETER_NAMESPACE);
 		sb.append(qName.getNamespaceURI().hashCode());

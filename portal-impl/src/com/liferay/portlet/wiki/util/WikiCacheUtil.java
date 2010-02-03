@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -108,7 +109,7 @@ public class WikiCacheUtil {
 	private static String _encodeKey(
 		long nodeId, String title, String postfix) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(CACHE_NAME);
 		sb.append(StringPool.POUND);

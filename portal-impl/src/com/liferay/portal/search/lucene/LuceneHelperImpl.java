@@ -123,14 +123,10 @@ public class LuceneHelperImpl implements LuceneHelper {
 		if (like) {
 			value = value.toLowerCase();
 
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(StringPool.STAR);
-			sb.append(value);
-			sb.append(StringPool.STAR);
+			String temp = StringPool.STAR.concat(value).concat(StringPool.STAR);
 
 			WildcardQuery wildcardQuery = new WildcardQuery(
-				new Term(field, sb.toString()));
+				new Term(field, temp));
 
 			booleanQuery.add(wildcardQuery, BooleanClause.Occur.SHOULD);
 		}

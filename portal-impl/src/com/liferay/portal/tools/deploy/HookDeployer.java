@@ -24,6 +24,7 @@ package com.liferay.portal.tools.deploy;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.util.InitUtil;
 
 import java.io.File;
@@ -78,7 +79,7 @@ public class HookDeployer extends BaseDeployer {
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		String extraContent = super.getExtraContent(
 			webXmlVersion, srcFile, displayName);

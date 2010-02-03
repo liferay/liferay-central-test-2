@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -351,7 +352,7 @@ public class EditServerAction extends PortletAction {
 			System.getProperty("java.vm.name") + " " +
 				System.getProperty("java.vm.version");
 
-		StringBuilder sb = new StringBuilder(
+		StringBundler sb = new StringBundler(
 			"Full thread dump " + jvm + "\n\n");
 
 		Map<Thread, StackTraceElement[]> stackTraces =
@@ -371,13 +372,18 @@ public class EditServerAction extends PortletAction {
 				sb.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
-			sb.append(", priority=" + thread.getPriority());
-			sb.append(", id=" + thread.getId());
-			sb.append(", state=" + thread.getState());
+			sb.append(", priority=");
+			sb.append(thread.getPriority());
+			sb.append(", id=");
+			sb.append(thread.getId());
+			sb.append(", state=");
+			sb.append(thread.getState());
 			sb.append("\n");
 
 			for (int i = 0; i < elements.length; i++) {
-				sb.append("\t" + elements[i] + "\n");
+				sb.append("\t");
+				sb.append(elements[i]);
+				sb.append("\n");
 			}
 
 			sb.append("\n");

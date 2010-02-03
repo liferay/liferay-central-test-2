@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -49,7 +50,9 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 import javax.portlet.PortletURL;
 
@@ -186,16 +189,12 @@ public class JournalIndexer extends BaseIndexer {
 
 	protected String getIndexableContent(Document document, String content) {
 		try {
-			StringBuilder sb = new StringBuilder();
-
 			com.liferay.portal.kernel.xml.Document contentDocument =
 				SAXReaderUtil.read(content);
 
-			Element rootElement = contentDocument.getRootElement();
+			Element rootElement = contentDocument.getRootElement();			
 
-			getIndexableContent(sb, document, rootElement);
-
-			return sb.toString();
+			return getIndexableContent(document, rootElement);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -204,22 +203,28 @@ public class JournalIndexer extends BaseIndexer {
 		}
 	}
 
-	protected void getIndexableContent(
-			StringBuilder sb, Document document, Element rootElement)
+	protected String getIndexableContent(
+		Document document, Element rootElement)
 		throws Exception {
+		StringBundler sb = new StringBundler ();
 
-		for (Element element : rootElement.elements()) {
-			String elType = element.attributeValue("type", StringPool.BLANK);
-			String elIndexType = element.attributeValue(
+		LinkedList<Element> queue = 
+			new LinkedList<Element>(rootElement.elements());
+
+		Element currentElement = null;
+		while ((currentElement = queue.poll()) != null) {
+
+			String elType = currentElement.attributeValue("type", StringPool.BLANK);
+			String elIndexType = currentElement.attributeValue(
 				"index-type", StringPool.BLANK);
 
-			indexField(document, element, elType, elIndexType);
+			indexField(document, currentElement, elType, elIndexType);
 
 			if (elType.equals("text") || elType.equals("text_box") ||
 				elType.equals("text_area")) {
 
 				for (Element dynamicContentElement :
-						element.elements("dynamic-content")) {
+						currentElement.elements("dynamic-content")) {
 
 					String text = dynamicContentElement.getText();
 
@@ -227,15 +232,16 @@ public class JournalIndexer extends BaseIndexer {
 					sb.append(StringPool.SPACE);
 				}
 			}
-			else if (element.getName().equals("static-content")) {
-				String text = element.getText();
+			else if (currentElement.getName().equals("static-content")) {
+				String text = currentElement.getText();
 
 				sb.append(text);
 				sb.append(StringPool.SPACE);
 			}
-
-			getIndexableContent(sb, document, element);
+			queue.addAll(currentElement.elements());
 		}
+
+		return sb.toString();
 	}
 
 	protected String getPortletId(SearchContext searchContext) {

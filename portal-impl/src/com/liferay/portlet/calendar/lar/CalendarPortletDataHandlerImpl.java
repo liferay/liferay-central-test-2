@@ -24,6 +24,7 @@ package com.liferay.portlet.calendar.lar;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -161,7 +162,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected String getEventPath(PortletDataContext context, CalEvent event) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.CALENDAR));
 		sb.append("/events/");

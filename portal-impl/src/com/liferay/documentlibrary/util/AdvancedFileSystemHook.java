@@ -24,6 +24,7 @@ package com.liferay.documentlibrary.util;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -40,7 +41,7 @@ import java.io.File;
  */
 public class AdvancedFileSystemHook extends FileSystemHook {
 
-	protected void buildPath(StringBuilder sb, String fileNameFragment) {
+	protected void buildPath(StringBundler sb, String fileNameFragment) {
 		if (fileNameFragment.length() <= 2) {
 			return;
 		}
@@ -49,9 +50,18 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 			return;
 		}
 
-		sb.append(fileNameFragment.substring(0, 2) + StringPool.SLASH);
+		for (int i = 0;i < fileNameFragment.length();i += 2) {
+			if ((i + 2) < fileNameFragment.length()) {
+				sb.append(fileNameFragment.substring(i, i + 2));
+				sb.append(StringPool.SLASH);
 
-		buildPath(sb, fileNameFragment.substring(2));
+				if (getDepth(sb.toString()) > 3) {
+					return;
+				}
+			}
+		}
+
+		return;
 	}
 
 	protected int getDepth(String path) {
@@ -73,7 +83,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 
 		String ext = StringPool.PERIOD + FileUtil.getExtension(fileName);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String fileNameFragment = FileUtil.stripExtension(fileName);
 
@@ -102,7 +112,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		int pos = fileName.lastIndexOf(StringPool.SLASH);
 
 		if (pos == -1) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			String fileNameFragment = FileUtil.stripExtension(fileName);
 

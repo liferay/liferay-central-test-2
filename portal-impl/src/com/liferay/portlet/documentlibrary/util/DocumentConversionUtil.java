@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -76,7 +77,7 @@ public class DocumentConversionUtil {
 	}
 
 	public static String getTempFileId(long id, double version) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(id);
 		sb.append(StringPool.PERIOD);
@@ -121,7 +122,7 @@ public class DocumentConversionUtil {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(SystemProperties.get(SystemProperties.TMP_DIR));
 		sb.append("/liferay/document_conversion/");

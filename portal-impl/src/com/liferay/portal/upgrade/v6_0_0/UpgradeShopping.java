@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.v6_0_0;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.upgrade.v6_0_0.util.ShoppingItemTable;
 
 /**
@@ -35,7 +36,7 @@ import com.liferay.portal.upgrade.v6_0_0.util.ShoppingItemTable;
 public class UpgradeShopping extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append("update ShoppingItem set groupId = (select groupId from ");
 		sb.append("ShoppingCategory where ShoppingCategory.categoryId = ");

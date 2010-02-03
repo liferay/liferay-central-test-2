@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
@@ -123,7 +125,7 @@ public class PermissionFinderImpl
 
 			String sql = null;
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			if (groups.size() > 0) {
 				sb.append("(");
@@ -138,7 +140,7 @@ public class PermissionFinderImpl
 				sql = StringUtil.replace(
 					sql, "[$GROUP_IDS$]", getGroupIds(groups, "Groups_Roles"));
 
-				sb = new StringBuilder();
+				sb.setIndex(0);
 
 				sb.append(sql);
 
@@ -155,7 +157,7 @@ public class PermissionFinderImpl
 					sql, "[$GROUP_IDS$]",
 					getGroupIds(groups, "Groups_Permissions"));
 
-				sb = new StringBuilder();
+				sb.setIndex(0);
 
 				sb.append(sql);
 
@@ -172,7 +174,7 @@ public class PermissionFinderImpl
 				sql, "[$PERMISSION_IDS$]",
 				getPermissionIds(permissions, "Roles_Permissions"));
 
-			sb = new StringBuilder();
+			sb.setIndex(0);
 
 			sb.append(sql);
 
@@ -186,7 +188,7 @@ public class PermissionFinderImpl
 				sql, "[$PERMISSION_IDS$]",
 				getPermissionIds(permissions, "Roles_Permissions"));
 
-			sb = new StringBuilder();
+			sb.setIndex(0);
 
 			sb.append(sql);
 
@@ -255,7 +257,7 @@ public class PermissionFinderImpl
 
 			String sql = null;
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			if (groups.size() > 0) {
 				sb.append("(");
@@ -271,7 +273,7 @@ public class PermissionFinderImpl
 					sql, "[$GROUP_IDS$]",
 					getGroupIds(groups, "Groups_Permissions"));
 
-				sb = new StringBuilder();
+				sb.setIndex(0);
 
 				sb.append(sql);
 
@@ -292,7 +294,7 @@ public class PermissionFinderImpl
 					sql, "[$ROLE_IDS$]",
 					getRoleIds(roles, "Roles_Permissions"));
 
-				sb = new StringBuilder();
+				sb.setIndex(0);
 
 				sb.append(sql);
 
@@ -897,7 +899,11 @@ public class PermissionFinderImpl
 	}
 
 	protected String getActionIds(String[] actionIds) {
-		StringBuilder sb = new StringBuilder();
+		if (actionIds.length == 0) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(actionIds.length * 2 - 1);
 
 		for (int i = 0; i < actionIds.length; i++) {
 			sb.append("Permission_.actionId = ?");
@@ -911,7 +917,11 @@ public class PermissionFinderImpl
 	}
 
 	protected String getGroupIds(List<Group> groups, String table) {
-		StringBuilder sb = new StringBuilder();
+		if (groups.isEmpty()) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(groups.size() * 3 - 1);
 
 		for (int i = 0; i < groups.size(); i++) {
 			sb.append(table);
@@ -927,9 +937,12 @@ public class PermissionFinderImpl
 
 	protected String getPermissionIds(
 		List<Permission> permissions, String table) {
-
-		StringBuilder sb = new StringBuilder();
-
+		if (permissions.isEmpty()) {
+			return StringPool.BLANK;
+		}
+		
+		StringBundler sb = new StringBundler(permissions.size() * 3 - 1);
+		
 		for (int i = 0; i < permissions.size(); i++) {
 			sb.append(table);
 			sb.append(".permissionId = ?");
@@ -943,7 +956,11 @@ public class PermissionFinderImpl
 	}
 
 	protected String getResourceIds(long[] resourceIds) {
-		StringBuilder sb = new StringBuilder();
+		if (resourceIds.length == 0) {
+			return StringPool.BLANK;
+		}
+		
+		StringBundler sb = new StringBundler(resourceIds.length * 2 - 1);
 
 		for (int i = 0; i < resourceIds.length; i++) {
 			sb.append("resourceId = ?");
@@ -957,7 +974,11 @@ public class PermissionFinderImpl
 	}
 
 	protected String getRoleIds(List<Role> roles, String table) {
-		StringBuilder sb = new StringBuilder();
+		if (roles.isEmpty()) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(roles.size() * 3 - 1);
 
 		for (int i = 0; i < roles.size(); i++) {
 			sb.append(table);

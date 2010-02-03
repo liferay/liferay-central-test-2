@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -118,7 +119,7 @@ public class NetvibesServlet extends HttpServlet {
 			PropsValues.NETVIBES_SERVLET_MAPPING,
 			PropsValues.WIDGET_SERVLET_MAPPING);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		sb.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 ");
@@ -127,19 +128,31 @@ public class NetvibesServlet extends HttpServlet {
 		sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" ");
 		sb.append("xmlns:widget=\"http://www.netvibes.com/ns/\">");
 		sb.append("<head>");
-		sb.append("<link href=\"" + _NETVIBES_CSS + "\" rel=\"stylesheet\" ");
+		sb.append("<link href=\"");
+		sb.append(_NETVIBES_CSS);
+		sb.append("\" rel=\"stylesheet\" ");
 		sb.append("type=\"text/css\" />");
-		sb.append("<script src=\"" + _NETVIBES_JS + "\" ");
+		sb.append("<script src=\"");
+		sb.append(_NETVIBES_JS);
+		sb.append("\" ");
 		sb.append("type=\"text/javascript\"></script>");
-		sb.append("<title>" + title + "</title>");
-		sb.append("<link href=\"" + iconURL + "\" rel=\"icon\" ");
+		sb.append("<title>");
+		sb.append(title);
+		sb.append("</title>");
+		sb.append("<link href=\"");
+		sb.append(iconURL);
+		sb.append("\" rel=\"icon\" ");
 		sb.append("type=\"image/png\" />");
 		sb.append("</head>");
 		sb.append("<body>");
-		sb.append("<script src=\"" + widgetJsURL + "\" ");
+		sb.append("<script src=\"");
+		sb.append(widgetJsURL);
+		sb.append("\" ");
 		sb.append("type=\"text/javascript\"></script>");
 		sb.append("<script type=\"text/javascript\">");
-		sb.append("Liferay.Widget({url:\"" + widgetURL + "\"});");
+		sb.append("Liferay.Widget({url:\"");
+		sb.append(widgetURL);
+		sb.append("\"});");
 		sb.append("</script>");
 		sb.append("</body>");
 		sb.append("</html>");

@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.FastDateFormatFactory;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.text.Format;
@@ -140,18 +141,14 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 	}
 
 	protected String getKey(Locale locale, TimeZone timeZone) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(String.valueOf(locale));
-		sb.append(StringPool.UNDERLINE);
-		sb.append(String.valueOf(timeZone));
-
-		return sb.toString();
+		return String.valueOf(locale).concat(
+			StringPool.UNDERLINE).concat(String.valueOf(timeZone));
 	}
 
 	protected String getKey(String pattern, Locale locale, TimeZone timeZone) {
-		StringBuilder sb = new StringBuilder(pattern);
+		StringBundler sb = new StringBundler(5);
 
+		sb.append(pattern);
 		sb.append(StringPool.UNDERLINE);
 		sb.append(String.valueOf(locale));
 		sb.append(StringPool.UNDERLINE);

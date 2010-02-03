@@ -2811,12 +2811,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		}
 
 		if (_portletApp.isWARFile()) {
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(StringPool.SLASH);
-			sb.append(_portletApp.getServletContextName());
-
-			return sb.toString();
+			return StringPool.SLASH.concat(_portletApp.getServletContextName());
 		}
 		else {
 			return PortalUtil.getPathContext();

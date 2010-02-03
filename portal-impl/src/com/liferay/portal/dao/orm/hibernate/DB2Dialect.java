@@ -22,6 +22,8 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 /**
  * <a href="DB2Dialect.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,7 +37,7 @@ public class DB2Dialect extends org.hibernate.dialect.DB2Dialect {
 			return super.getLimitString(sql, hasOffset);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("select cursor1.* from (");
 		sb.append("select rownumber() over() as rownumber_, cursor2.* from (");

@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -267,7 +268,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getEntryPath(
 		PortletDataContext context, BookmarksEntry entry) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.BOOKMARKS));
 		sb.append("/entries/");
@@ -280,7 +281,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getFolderPath(
 		PortletDataContext context, BookmarksFolder folder) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.BOOKMARKS));
 		sb.append("/folders/");
@@ -293,7 +294,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getImportFolderPath(
 		PortletDataContext context, long folderId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getSourcePortletPath(PortletKeys.BOOKMARKS));
 		sb.append("/folders/");

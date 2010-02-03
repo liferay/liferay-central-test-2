@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.filters;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.regex.Matcher;
@@ -37,7 +38,7 @@ import org.stringtree.factory.AbstractStringFetcher;
 public class CodeBlock extends AbstractStringFetcher {
 
 	public Object getObject(String content) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		Matcher matcher = _pattern.matcher(content);
 

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
@@ -220,7 +221,7 @@ public class TrackbackAction extends PortletAction {
 			ActionResponse actionResponse, String msg, boolean success)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 		sb.append("<response>");
@@ -230,7 +231,9 @@ public class TrackbackAction extends PortletAction {
 		}
 		else {
 			sb.append("<error>1</error>");
-			sb.append("<message>" + msg + "</message>");
+			sb.append("<message>");
+			sb.append(msg);
+			sb.append("</message>");
 		}
 
 		sb.append("</response>");

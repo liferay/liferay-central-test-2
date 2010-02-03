@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 
 /**
  * <a href="UpgradeImageGallery.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 public class UpgradeImageGallery extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(2);
 
 		sb.append("update IGImage set groupId = (select groupId from ");
 		sb.append("IGFolder where IGFolder.folderId = IGImage.folderId)");

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -93,7 +94,7 @@ public class DBLoader {
 	private void _loadDerby(Connection con, String fileName)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(_fileUtil.read(fileName)));
@@ -127,7 +128,7 @@ public class DBLoader {
 
 					sql = sql.substring(0, sql.length() - 1);
 
-					sb = new StringBuilder();
+					sb.setIndex(0);
 
 					if (sql.startsWith("commit")) {
 						continue;
@@ -186,7 +187,7 @@ public class DBLoader {
 	private void _loadHypersonic(Connection con, String fileName)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(_fileUtil.read(fileName)));
@@ -216,7 +217,7 @@ public class DBLoader {
 								"\\u000a"
 							});
 
-					sb = new StringBuilder();
+					sb.setIndex(0);
 
 					PreparedStatement ps = con.prepareStatement(sql);
 

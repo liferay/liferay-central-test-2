@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ProgressTracker;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
@@ -106,8 +107,12 @@ public class ExportUsersAction extends Action {
 
 		progressTracker.updateProgress(percentage);
 
-		StringBuilder sb = new StringBuilder(users.size() * 50);
-
+		if (total == 0) {
+			return StringPool.BLANK;
+		}
+		
+		StringBundler sb = new StringBundler(users.size() * 4);
+		
 		Iterator<User> itr = users.iterator();
 
 		for (int i = 0; itr.hasNext(); i++) {

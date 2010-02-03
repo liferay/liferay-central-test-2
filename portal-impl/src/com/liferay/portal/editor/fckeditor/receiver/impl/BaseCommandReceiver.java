@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
@@ -373,7 +374,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		String returnValue, HttpServletResponse response) {
 
 		try {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(7);
 
 			String newName = StringPool.BLANK;
 

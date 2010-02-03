@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -676,7 +677,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getFileEntryBinPath(
 		PortletDataContext context, DLFileEntry fileEntry) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
 		sb.append("/bin/");
@@ -692,7 +693,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getFileEntryPath(
 		PortletDataContext context, DLFileEntry fileEntry) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
 		sb.append("/file-entries/");
@@ -722,7 +723,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			name = name.substring(0, pos);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(name);
 		sb.append(StringPool.SPACE);
@@ -738,7 +739,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getFolderPath(
 		PortletDataContext context, DLFolder folder) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
 		sb.append("/folders/");
@@ -751,7 +752,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getFileRankPath(
 		PortletDataContext context, DLFileRank fileRank) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
 		sb.append("/ranks/");
@@ -764,7 +765,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getFileShortcutPath(
 		PortletDataContext context, DLFileShortcut fileShortcut) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
 		sb.append("/shortcuts/");
@@ -777,7 +778,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getImportFolderPath(
 		PortletDataContext context, long folderId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getSourcePortletPath(PortletKeys.DOCUMENT_LIBRARY));
 		sb.append("/folders/");

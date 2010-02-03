@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
@@ -209,7 +210,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			String author = PortalUtil.getUserName(
 				entry.getUserId(), entry.getUserName());
 
-			StringBuilder link = new StringBuilder();
+			StringBundler link = new StringBundler(3);
 
 			link.append(tagURL);
 			link.append("entryId=");

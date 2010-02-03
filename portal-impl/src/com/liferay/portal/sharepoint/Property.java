@@ -22,6 +22,7 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
@@ -48,7 +49,7 @@ public class Property implements ResponseElement {
 	}
 
 	public String parse() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(OPEN_PARAGRAPH);
 		sb.append(_key);

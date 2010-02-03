@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.CalendarUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -335,7 +336,11 @@ public class AnnouncementsEntryFinderImpl
 	}
 
 	protected String getClassPKs(long classNameId, long[] classPKs) {
-		StringBuilder sb = new StringBuilder();
+		if (classPKs.length == 0) {
+			return "(AnnouncementsEntry.classNameId = ?) AND (";
+		}
+
+		StringBundler sb = new StringBundler(classPKs.length * 2 + 1);
 
 		sb.append("(AnnouncementsEntry.classNameId = ?) AND (");
 
@@ -354,11 +359,11 @@ public class AnnouncementsEntryFinderImpl
 	}
 
 	protected String getClassPKs(LinkedHashMap<Long, long[]> scopes) {
-		if (scopes == null) {
+		if ((scopes == null) || (scopes.isEmpty())) {
 			return StringPool.BLANK;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(scopes.size() * 4 - 1);
 
 		Iterator<Map.Entry<Long, long[]>> itr = scopes.entrySet().iterator();
 

@@ -25,6 +25,7 @@ package com.liferay.portlet.tasks.social;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -131,7 +132,7 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 		TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(
 			activity.getClassPK());
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append("<b>");
 		sb.append(HtmlUtil.escape(proposal.getName()));

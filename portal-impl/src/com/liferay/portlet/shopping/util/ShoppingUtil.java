@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -919,7 +920,7 @@ public class ShoppingUtil {
 
 		String currencyCode = preferences.getCurrencyId();
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("https://www.paypal.com/cgi-bin/webscr?");
 		sb.append("cmd=_xclick&");

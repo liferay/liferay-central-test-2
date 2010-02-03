@@ -23,6 +23,7 @@
 package com.liferay.portal.sharepoint;
 
 import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
 
@@ -123,7 +124,7 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 			return StringPool.BLANK;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(2);
 
 		if (xml) {
 			sb.append(

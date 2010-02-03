@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -112,17 +113,23 @@ public class GoogleGadgetServlet extends HttpServlet {
 			PropsValues.GOOGLE_GADGET_SERVLET_MAPPING,
 			PropsValues.WIDGET_SERVLET_MAPPING);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		sb.append("<Module>");
-		sb.append("<ModulePrefs title=\"" + title + "\"/>");
+		sb.append("<ModulePrefs title=\"");
+		sb.append(title);
+		sb.append("\"/>");
 		sb.append("<Content type=\"html\">");
 		sb.append("<![CDATA[");
-		sb.append("<script src=\"" + widgetJsURL + "\" ");
+		sb.append("<script src=\"");
+		sb.append(widgetJsURL);
+		sb.append("\" ");
 		sb.append("type=\"text/javascript\"></script>");
 		sb.append("<script type=\"text/javascript\">");
-		sb.append("window.Liferay.Widget({url:'" + widgetURL + "'});");
+		sb.append("window.Liferay.Widget({url:'");
+		sb.append(widgetURL);
+		sb.append("'});");
 		sb.append("</script>");
 		sb.append("]]>");
 		sb.append("</Content>");

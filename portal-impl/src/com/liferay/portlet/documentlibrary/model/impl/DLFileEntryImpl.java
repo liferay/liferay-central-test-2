@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.LockLocalServiceUtil;
@@ -124,17 +125,18 @@ public class DLFileEntryImpl
 	}
 
 	public String getLuceneProperties() {
-		StringBuilder sb = new StringBuilder();
+		Properties extraSettingsProps = getExtraSettingsProperties();
+
+		Iterator<Map.Entry<Object, Object>> itr =
+			extraSettingsProps.entrySet().iterator();
+
+		StringBundler sb = new StringBundler(
+									extraSettingsProps.entrySet().size() + 4);
 
 		sb.append(FileUtil.stripExtension(getTitle()));
 		sb.append(StringPool.SPACE);
 		sb.append(getDescription());
 		sb.append(StringPool.SPACE);
-
-		Properties extraSettingsProps = getExtraSettingsProperties();
-
-		Iterator<Map.Entry<Object, Object>> itr =
-			extraSettingsProps.entrySet().iterator();
 
 		while (itr.hasNext()) {
 			Map.Entry<Object, Object> entry = itr.next();

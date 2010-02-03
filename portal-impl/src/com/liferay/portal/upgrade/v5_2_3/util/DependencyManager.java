@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v5_2_3.util;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -76,7 +77,7 @@ public abstract class DependencyManager {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(5);
 
 			sb.append("delete from ");
 			sb.append(tableName);
@@ -116,7 +117,7 @@ public abstract class DependencyManager {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(7);
 
 			sb.append("update ");
 			sb.append(tableName);

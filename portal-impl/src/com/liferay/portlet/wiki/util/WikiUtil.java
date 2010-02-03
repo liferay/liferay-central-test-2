@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -259,7 +260,7 @@ public class WikiUtil {
 	}
 
 	public static String getMailId(String mx, long nodeId, long pageId) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(10);
 
 		sb.append(StringPool.LESS_THAN);
 		sb.append(POP_PORTLET_PREFIX);

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -461,7 +462,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			name = name.substring(0, pos);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(name);
 		sb.append(StringPool.SPACE);
@@ -477,7 +478,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getFolderPath(
 		PortletDataContext context, long folderId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
 		sb.append("/folders/");
@@ -490,7 +491,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getImageBinPath(
 		PortletDataContext context, IGImage image) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
 		sb.append("/bin/");
@@ -504,7 +505,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getImagePath(
 		PortletDataContext context, IGImage image) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
 		sb.append("/images/");
@@ -517,7 +518,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getImportFolderPath(
 		PortletDataContext context, long folderId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getSourcePortletPath(PortletKeys.IMAGE_GALLERY));
 		sb.append("/folders/");

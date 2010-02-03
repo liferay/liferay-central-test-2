@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -709,7 +710,7 @@ public class PortletExporter {
 
 		// Zip
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(portletId));
 		sb.append(StringPool.SLASH);
@@ -784,7 +785,7 @@ public class PortletExporter {
 			return;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(portletId));
 
@@ -1186,7 +1187,7 @@ public class PortletExporter {
 	protected String getCommentsPath(
 		PortletDataContext context, String className, String classPK) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(context.getRootPath());
 		sb.append("/comments/");
@@ -1202,7 +1203,7 @@ public class PortletExporter {
 		PortletDataContext context, String className, String classPK,
 		MBMessage message) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(8);
 
 		sb.append(context.getRootPath());
 		sb.append("/comments/");
@@ -1226,7 +1227,7 @@ public class PortletExporter {
 		PortletDataContext context, String portletId, long ownerId,
 		int ownerType, long plid) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(8);
 
 		sb.append(context.getPortletPath(portletId));
 		sb.append("/preferences/");
@@ -1259,7 +1260,7 @@ public class PortletExporter {
 	protected String getRatingsPath(
 		PortletDataContext context, String className, String classPK) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(context.getRootPath());
 		sb.append("/ratings/");
@@ -1275,7 +1276,7 @@ public class PortletExporter {
 		PortletDataContext context, String className, String classPK,
 		RatingsEntry rating) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(8);
 
 		sb.append(context.getRootPath());
 		sb.append("/ratings/");

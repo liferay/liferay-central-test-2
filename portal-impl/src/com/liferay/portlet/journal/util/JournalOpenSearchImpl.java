@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -136,7 +137,7 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 			return layoutURL;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(themeDisplay.getPathMain());
 		sb.append("/journal/view_article_content?groupId=");

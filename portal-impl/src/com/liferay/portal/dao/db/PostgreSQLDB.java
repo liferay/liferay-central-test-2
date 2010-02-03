@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -72,7 +73,7 @@ public class PostgreSQLDB extends BaseDB {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(3);
 
 			sb.append("select indexname, tablename, indexdef from pg_indexes ");
 			sb.append("where indexname like 'liferay_%' or indexname like ");
@@ -114,15 +115,18 @@ public class PostgreSQLDB extends BaseDB {
 
 		String suffix = getSuffix(population);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(14);
 
-		sb.append("drop database " + databaseName + ";\n");
-		sb.append(
-			"create database " + databaseName + " encoding = 'UNICODE';\n");
-		sb.append("\\c " + databaseName + ";\n\n");
-		sb.append(
-			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
+		sb.append("drop database ");
+		sb.append(databaseName);
+		sb.append(";\n");
+		sb.append("create database ");
+		sb.append(databaseName);
+		sb.append(" encoding = 'UNICODE';\n");
+		sb.append("\\c ");
+		sb.append(databaseName);
+		sb.append(";\n\n");
+		sb.append(FileUtil.read("../sql/portal" + suffix + "/portal" + suffix +
 					"-postgresql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
@@ -144,7 +148,7 @@ public class PostgreSQLDB extends BaseDB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 

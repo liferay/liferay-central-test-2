@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -321,7 +322,7 @@ public class GroupFinderImpl
 			closeSession(session);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("No Group exists with the key {companyId=");
 		sb.append(companyId);
@@ -369,7 +370,7 @@ public class GroupFinderImpl
 			params3.put("groupsUserGroups", userId);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append("(");
 
@@ -380,7 +381,7 @@ public class GroupFinderImpl
 		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params1));
 		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params1));
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		sb.append(sql);
 
@@ -396,7 +397,7 @@ public class GroupFinderImpl
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params2));
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params2));
 
-			sb = new StringBuilder();
+			sb.setIndex(0);
 
 			sb.append(sql);
 
@@ -409,7 +410,7 @@ public class GroupFinderImpl
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params3));
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params3));
 
-			sb = new StringBuilder();
+			sb.setIndex(0);
 
 			sb.append(sql);
 
@@ -532,11 +533,11 @@ public class GroupFinderImpl
 	}
 
 	protected String getJoin(LinkedHashMap<String, Object> params) {
-		if (params == null) {
+		if ((params == null) || (params.isEmpty())) {
 			return StringPool.BLANK;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(params.size());
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -594,11 +595,11 @@ public class GroupFinderImpl
 	}
 
 	protected String getWhere(LinkedHashMap<String, Object> params) {
-		if (params == null) {
+		if ((params == null) || (params.isEmpty())) {
 			return StringPool.BLANK;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(params.size());
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -650,7 +651,7 @@ public class GroupFinderImpl
 			List<Integer> types = (List<Integer>)value;
 
 			if (!types.isEmpty()) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(types.size() * 2 + 1);
 
 				sb.append("WHERE (");
 
@@ -678,12 +679,7 @@ public class GroupFinderImpl
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				StringBuilder sb = new StringBuilder();
-
-				sb.append(join.substring(pos + 5, join.length()));
-				sb.append(" AND ");
-
-				join = sb.toString();
+				join = join.substring(pos + 5, join.length()).concat(" AND ");
 			}
 			else {
 				join = StringPool.BLANK;

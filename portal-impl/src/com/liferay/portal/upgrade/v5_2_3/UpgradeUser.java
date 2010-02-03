@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.v5_2_3;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.upgrade.v5_2_3.util.UserTable;
 
 /**
@@ -50,7 +51,7 @@ public class UpgradeUser extends UpgradeProcess {
 			upgradeTable.updateTable();
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("update User_ set firstName = (select Contact_.firstName ");
 		sb.append("from Contact_ where Contact_.contactId = ");

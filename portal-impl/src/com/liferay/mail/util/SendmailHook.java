@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsUtil;
 
@@ -55,7 +56,8 @@ public class SendmailHook implements Hook {
 				File file = new File(home + "/" + userId + "/.forward");
 
 				if (emailAddresses.size() > 0) {
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(
+													emailAddresses.size() * 2);
 
 					for (int i = 0; i < emailAddresses.size(); i++) {
 						String emailAddress = emailAddresses.get(i);
@@ -152,7 +154,7 @@ public class SendmailHook implements Hook {
 			return;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(blocked.size() * 9 + 3);
 
 		sb.append("ORGMAIL /var/spool/mail/$LOGNAME\n");
 		sb.append("MAILDIR $HOME/\n");
@@ -191,7 +193,7 @@ public class SendmailHook implements Hook {
 			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(fileReader);
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			for (String s = unsyncBufferedReader.readLine(); s != null;
 					s = unsyncBufferedReader.readLine()) {

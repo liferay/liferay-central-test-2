@@ -26,6 +26,7 @@ import com.liferay.mail.model.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
@@ -173,7 +174,7 @@ public class FuseMailHook implements Hook {
 			NameValuePair[] pairs = method.getParameters();
 
 			if (pairs.length > 0) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(pairs.length * 3 + 1);
 
 				sb.append("With parameters:\n");
 
@@ -198,7 +199,7 @@ public class FuseMailHook implements Hook {
 
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(company.getMx());
 		sb.append(StringPool.PERIOD);

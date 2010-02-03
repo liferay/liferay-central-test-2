@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.v4_4_0.util;
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -60,7 +61,7 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 		while (_distinctTitles.contains(_getKey(newTitle, extension))) {
 			_counter++;
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(3);
 
 			sb.append(newTitle);
 			sb.append(StringPool.SPACE);
@@ -75,7 +76,7 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private String _getKey(String title, String extension) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(_groupIdColumn.getOldValue());
 		sb.append(StringPool.UNDERLINE);

@@ -25,6 +25,7 @@ package com.liferay.portal.dao.db;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -66,14 +67,14 @@ public class FirebirdDB extends BaseDB {
 
 		String suffix = getSuffix(population);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
-		sb.append(
-			"create database '" + databaseName +
-				".gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
-		sb.append(
-			"connect '" + databaseName +
-				".gdb' user 'sysdba' password 'masterkey';\n");
+		sb.append("create database '");
+		sb.append(databaseName);
+		sb.append(".gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
+		sb.append("connect '");
+		sb.append(databaseName);
+		sb.append(".gdb' user 'sysdba' password 'masterkey';\n");
 		sb.append(
 			readSQL(
 				"../sql/portal" + suffix + "/portal" + suffix + "-firebird.sql",
@@ -94,7 +95,7 @@ public class FirebirdDB extends BaseDB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 

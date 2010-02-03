@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -365,7 +366,7 @@ public class MBUtil {
 	}
 
 	public static String getMailId(String mx, long categoryId, long messageId) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(10);
 
 		sb.append(StringPool.LESS_THAN);
 		sb.append(POP_PORTLET_PREFIX);
@@ -407,7 +408,7 @@ public class MBUtil {
 			return mailingListAddress;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(8);
 
 		sb.append(POP_PORTLET_PREFIX);
 		sb.append(categoryId);

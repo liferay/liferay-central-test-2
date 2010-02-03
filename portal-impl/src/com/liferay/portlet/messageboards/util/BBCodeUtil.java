@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -143,7 +144,7 @@ public class BBCodeUtil {
 
 		BBCodeTag tag = null;
 
-		StringBuilder sb = null;
+		StringBundler sb = null;
 
 		while ((tag = getFirstTag(html, "code")) != null) {
 			String preTag = html.substring(0, tag.getStartPos());
@@ -154,7 +155,7 @@ public class BBCodeUtil {
 			String[] lines = code.split("\\n");
 			int digits = String.valueOf(lines.length + 1).length();
 
-			sb = new StringBuilder(preTag);
+			sb = new StringBundler(preTag);
 
 			sb.append("<div class='code'>");
 
@@ -191,7 +192,8 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb = new StringBuilder(preTag);
+			sb.setIndex(0);
+			sb.append(preTag);
 
 			if (tag.hasParameter()) {
 				sb.append("<span style='color: ");
@@ -214,9 +216,12 @@ public class BBCodeUtil {
 			String mailto = GetterUtil.getString(
 				tag.getParameter(), tag.getElement().trim());
 
-			sb = new StringBuilder(preTag);
+			sb.setIndex(0);
 
-			sb.append("<a href='mailto: " + mailto + "'>");
+			sb.append(preTag);
+			sb.append("<a href='mailto: ");
+			sb.append(mailto);
+			sb.append("'>");
 			sb.append(tag.getElement() + "</a>");
 			sb.append(postTag);
 
@@ -227,7 +232,8 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb = new StringBuilder(preTag);
+			sb.setIndex(0);
+			sb.append(preTag);
 
 			if (tag.hasParameter()) {
 				sb.append("<span style='font-family: ");
@@ -247,9 +253,13 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb = new StringBuilder(preTag);
+			sb.setIndex(0);
+			sb.append(preTag);
 
-			sb.append("<img alt='' src='" + tag.getElement().trim() + "' />");
+			sb.append(preTag);
+			sb.append("<img alt='' src='");
+			sb.append(tag.getElement().trim());
+			sb.append("' />");
 			sb.append(postTag);
 
 			html = sb.toString();
@@ -261,7 +271,9 @@ public class BBCodeUtil {
 
 			String[] items = _getListItems(tag.getElement());
 
-			sb = new StringBuilder(preTag);
+			sb.setIndex(0);
+
+			sb.append(preTag);
 
 			if (tag.hasParameter() &&
 				listStyles.containsKey(tag.getParameter())) {
@@ -297,7 +309,8 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb = new StringBuilder(preTag);
+			sb.setIndex(0);
+			sb.append(preTag);
 
 			if (tag.hasParameter()) {
 				sb.append("<div class='quote-title'>");
@@ -317,7 +330,8 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb = new StringBuilder(preTag);
+			sb.setIndex(0);
+			sb.append(preTag);
 
 			if (tag.hasParameter()) {
 				Integer size = new Integer(
@@ -351,10 +365,15 @@ public class BBCodeUtil {
 			String url = GetterUtil.getString(
 				tag.getParameter(), tag.getElement().trim());
 
-			sb = new StringBuilder(preTag);
+			sb.setIndex(0);
+			sb.append(preTag);
 
-			sb.append("<a href='" + url + "'>");
-			sb.append(tag.getElement() + "</a>");
+			sb.append(preTag);
+			sb.append("<a href='");
+			sb.append(url);
+			sb.append("'>");
+			sb.append(tag.getElement());
+			sb.append("</a>");
 			sb.append(postTag);
 
 			html = sb.toString();
@@ -438,7 +457,7 @@ public class BBCodeUtil {
 	private static String[] _getListItems(String tagElement) {
 		List<String> items = new ArrayList<String>();
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		int nestLevel = 0;
 
@@ -474,7 +493,7 @@ public class BBCodeUtil {
 
 					items.add(sb.toString());
 
-					sb.delete(0, sb.length());
+					sb.setIndex(0);
 				}
 			}
 			else {

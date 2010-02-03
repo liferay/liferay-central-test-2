@@ -25,6 +25,7 @@ package com.liferay.portal.servlet.filters.sso.opensso;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.CookieUtil;
@@ -295,9 +296,12 @@ public class OpenSSOUtil {
 	private void _setCookieProperty(
 		HttpServletRequest request, HttpURLConnection urlc,
 		String[] cookieNames) {
+		if (cookieNames.length == 0) {
+			return;
+		}
 
-		StringBuilder sb = new StringBuilder();
-
+		StringBundler sb = new StringBundler(cookieNames.length * 4);
+		
 		for (String cookieName : cookieNames) {
 			String cookieValue = CookieUtil.get(request, cookieName);
 
@@ -307,9 +311,8 @@ public class OpenSSOUtil {
 			sb.append(StringPool.SEMICOLON);
 		}
 
-		if (sb.length() > 0) {
-			urlc.setRequestProperty("Cookie", sb.toString());
-		}
+		urlc.setRequestProperty("Cookie", sb.toString());
+
 	}
 
 	private static final String _GET_ATTRIBUTES = "/identity/attributes";

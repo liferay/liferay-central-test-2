@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 
@@ -122,7 +123,7 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 				layoutId = layoutId.substring(0, pos);
 			}
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(5);
 
 			if (layoutLink.endsWith("@public")) {
 				sb.append(PortalUtil.getPathFriendlyURLPublic());

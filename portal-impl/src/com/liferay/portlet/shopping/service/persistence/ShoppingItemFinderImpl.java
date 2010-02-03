@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.shopping.model.ShoppingItem;
@@ -103,7 +105,7 @@ public class ShoppingItemFinderImpl
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
 			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
 			query.append("WHERE ");
@@ -170,7 +172,7 @@ public class ShoppingItemFinderImpl
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
 			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
 			query.append("WHERE ");
@@ -240,7 +242,7 @@ public class ShoppingItemFinderImpl
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
 			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
 			query.append("WHERE ");
@@ -309,7 +311,7 @@ public class ShoppingItemFinderImpl
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
 			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
 			query.append("WHERE ");
@@ -368,7 +370,7 @@ public class ShoppingItemFinderImpl
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
 			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
 			query.append("WHERE ");
@@ -432,7 +434,7 @@ public class ShoppingItemFinderImpl
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
 			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
 			query.append("WHERE ");
@@ -482,7 +484,11 @@ public class ShoppingItemFinderImpl
 	}
 
 	protected String getCategoryIds(List<Long> categoryIds) {
-		StringBuilder sb = new StringBuilder();
+		if (categoryIds.isEmpty()) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(categoryIds.size() * 2 - 1);
 
 		for (int i = 0; i < categoryIds.size(); i++) {
 			sb.append("categoryId = ? ");

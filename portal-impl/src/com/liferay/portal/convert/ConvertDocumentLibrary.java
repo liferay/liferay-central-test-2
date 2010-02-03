@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.CompanyConstants;
@@ -69,13 +70,15 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	}
 
 	public String[] getParameterNames() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
-		sb.append(PropsKeys.DL_HOOK_IMPL + StringPool.EQUAL);
+		sb.append(PropsKeys.DL_HOOK_IMPL);
+		sb.append(StringPool.EQUAL);
 
 		for (String hook : _HOOKS) {
 			if (!hook.equals(PropsValues.DL_HOOK_IMPL)) {
-				sb.append(hook + StringPool.SEMICOLON);
+				sb.append(hook);
+				sb.append(StringPool.SEMICOLON);
 			}
 		}
 

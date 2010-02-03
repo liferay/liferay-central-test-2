@@ -103,24 +103,30 @@ public class FileSystemHook extends BaseHook {
 		}
 	}
 
-	protected void buildPath(StringBuilder sb, String fileNameFragment) {
+	protected String buildPath(String fileNameFragment) {
 		if (fileNameFragment.length() <= 2) {
-			return;
+			return StringPool.BLANK;
 		}
 
-		sb.append(StringPool.SLASH);
-		sb.append(fileNameFragment.substring(0, 2));
+		int fragmentLength = fileNameFragment.length();
+		int sbLength = fragmentLength / 2 + fragmentLength;
+		StringBuilder sb = new StringBuilder(sbLength);
+		
+		for (int i = 0;i < fragmentLength;i += 2) {
+			if ((i + 2) < fragmentLength) {
+				sb.append(StringPool.SLASH);
+				sb.append(fileNameFragment.substring(i, i + 2));
+			}
+		}
 
-		buildPath(sb, fileNameFragment.substring(2));
+		return sb.toString();
 	}
 
 	protected File getFile(long imageId, String type) {
-		StringBuilder sb = new StringBuilder();
-
-		buildPath(sb, String.valueOf(imageId));
-
+		String path = buildPath(String.valueOf(imageId));
+		
 		return new File(
-			_rootDir + StringPool.SLASH + sb.toString() + StringPool.SLASH +
+			_rootDir + StringPool.SLASH + path + StringPool.SLASH +
 				imageId + StringPool.PERIOD + type);
 	}
 

@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 
@@ -78,23 +79,28 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 		try {
 			String[] columnNames = _getColumns(entityClass);
 
-			StringBuilder sb = new StringBuilder();
+			if (columnNames.length == 0) {
+				columnAliases = StringPool.BLANK;
+			}
+			else {
+				StringBundler sb = new StringBundler(columnNames.length * 4 - 1);
+			
+				int i = 0;
 
-			int i = 0;
+				for (String column : columnNames) {
+					sb.append(alias);
+					sb.append(StringPool.PERIOD);
+					sb.append(column);
 
-			for (String column : columnNames) {
-				sb.append(alias);
-				sb.append(StringPool.PERIOD);
-				sb.append(column);
+					if ((i + 1) < columnNames.length) {
+						sb.append(StringPool.COMMA_AND_SPACE);
+					}
 
-				if ((i + 1) < columnNames.length) {
-					sb.append(StringPool.COMMA_AND_SPACE);
+					i++;
 				}
 
-				i++;
+				columnAliases = sb.toString();
 			}
-
-			columnAliases = sb.toString();
 		}
 		catch (Exception e) {
 			throw new ORMException(e.getMessage());

@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
@@ -302,15 +303,14 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			String author = PortalUtil.getUserName(
 				entry.getUserId(), entry.getUserName());
 
-			StringBuilder link = new StringBuilder();
-
-			link.append(entryURL);
+			StringBundler link = new StringBundler(4);
 
 			if (entryURL.endsWith("/blogs/rss")) {
-				link.delete(link.length() - 3, link.length());
+				link.append(entryURL.substring(0, entryURL.length() - 3));
 				link.append(entry.getUrlTitle());
 			}
 			else {
+				link.append(entryURL);
 				if (!entryURL.endsWith(StringPool.QUESTION)) {
 					link.append(StringPool.AMPERSAND);
 				}

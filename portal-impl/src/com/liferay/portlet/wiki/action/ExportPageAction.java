@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.ActionConstants;
@@ -148,7 +149,7 @@ public class ExportPageAction extends PortletAction {
 					" with the format " + page.getFormat(), e);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<html>");
 
@@ -176,13 +177,8 @@ public class ExportPageAction extends PortletAction {
 
 		String sourceExtension = "html";
 
-		sb = new StringBuilder();
-
-		sb.append(title);
-		sb.append(StringPool.PERIOD);
-		sb.append(sourceExtension);
-
-		String fileName = sb.toString();
+		String fileName = title.concat(StringPool.PERIOD).concat(
+			sourceExtension);
 
 		if (Validator.isNotNull(targetExtension)) {
 			String id = page.getUuid();
@@ -191,13 +187,8 @@ public class ExportPageAction extends PortletAction {
 				id, is, sourceExtension, targetExtension);
 
 			if ((convertedIS != null) && (convertedIS != is)) {
-				sb = new StringBuilder();
-
-				sb.append(title);
-				sb.append(StringPool.PERIOD);
-				sb.append(targetExtension);
-
-				fileName = sb.toString();
+				fileName = title.concat(StringPool.PERIOD).concat(
+					targetExtension);
 
 				is = convertedIS;
 			}

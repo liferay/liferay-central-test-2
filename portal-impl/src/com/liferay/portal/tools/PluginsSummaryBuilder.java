@@ -25,6 +25,7 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -66,7 +67,7 @@ public class PluginsSummaryBuilder {
 	}
 
 	public void _createPluginsSummary(File pluginsDir) throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append("<plugins-summary>\n");
 
@@ -107,7 +108,7 @@ public class PluginsSummaryBuilder {
 			pluginsDir + File.separator + "summary.xml", sb.toString());
 	}
 
-	public void _createPluginSummary(String file, StringBuilder sb)
+	private void _createPluginSummary(String file, StringBundler sb)
 		throws Exception {
 
 		String content = FileUtil.read(file);
@@ -193,21 +194,24 @@ public class PluginsSummaryBuilder {
 	}
 
 	private String _readList(Element parentEl, String name) {
-		StringBuilder sb = new StringBuilder();
+		if ((parentEl == null) || (parentEl.elements(name).isEmpty())) {
+			return StringPool.BLANK;
+		}
 
-		if (parentEl != null) {
-			Iterator<Element> itr = parentEl.elements(name).iterator();
+		StringBundler sb =
+			new StringBundler(parentEl.elements(name).size() * 2 - 1);
 
-			while (itr.hasNext()) {
-				Element el = itr.next();
+		Iterator<Element> itr = parentEl.elements(name).iterator();
 
-				String text = el.getText().trim();
+		while (itr.hasNext()) {
+			Element el = itr.next();
 
-				sb.append(text);
+			String text = el.getText().trim();
 
-				if (itr.hasNext()) {
-					sb.append(", ");
-				}
+			sb.append(text);
+
+			if (itr.hasNext()) {
+				sb.append(", ");
 			}
 		}
 

@@ -25,6 +25,7 @@ package com.liferay.portlet.calendar.util;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
@@ -147,7 +148,7 @@ public class CalUtil {
 	}
 
 	public static String toString(Calendar cal) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(cal.get(Calendar.YEAR));
 		sb.append(StringPool.PERIOD);

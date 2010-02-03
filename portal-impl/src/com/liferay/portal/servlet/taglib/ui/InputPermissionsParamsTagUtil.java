@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -79,7 +80,7 @@ public class InputPermissionsParamsTagUtil {
 				ResourceActionsUtil.getModelResourceGuestUnsupportedActions(
 					modelName);
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			for (int i = 0; i < supportedActions.size(); i++) {
 				String action = supportedActions.get(i);

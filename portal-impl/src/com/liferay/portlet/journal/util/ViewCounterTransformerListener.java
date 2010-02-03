@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -73,7 +74,7 @@ public class ViewCounterTransformerListener extends TransformerListener {
 
 		String counterToken = StringPool.AT + "view_counter" + StringPool.AT;
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(8);
 
 		sb.append("<script type=\"text/javascript\">");
 		sb.append("Liferay.Service.Tags.TagsAsset.incrementViewCounter");

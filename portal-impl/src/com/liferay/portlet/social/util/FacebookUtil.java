@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.Portal;
@@ -49,7 +50,7 @@ public class FacebookUtil {
 		int pos = fbmlPortletURL.indexOf(
 			StringPool.SLASH, Http.HTTPS_WITH_SLASH.length());
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(fbmlPortletURL.substring(0, pos));
 		sb.append(FACEBOOK_SERVLET_PATH);

@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.social;
 
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -106,7 +107,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Body
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		String fileEntryLink =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +

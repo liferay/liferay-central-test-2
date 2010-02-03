@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -212,17 +213,26 @@ public class MinifierFilter extends BasePortalFilter {
 			_log.info("Minifying JavaScript bundle " + minifierBundleId);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		String contents;
+		
+		if (fileNames.length == 0) {
+			contents = StringPool.BLANK;
+		}
+		else {
+			StringBundler sb = new StringBundler(fileNames.length * 2);
 
-		for (String fileName : fileNames) {
-			String content = FileUtil.read(
-				bundleDirRealPath + StringPool.SLASH + fileName);
+			for (String fileName : fileNames) {
+				String content = FileUtil.read(
+					bundleDirRealPath + StringPool.SLASH + fileName);
 
-			sb.append(content);
-			sb.append(StringPool.NEW_LINE);
+				sb.append(content);
+				sb.append(StringPool.NEW_LINE);
+			}
+			
+			contents = sb.toString();
 		}
 
-		String minifiedContent = minifyJavaScript(sb.toString());
+		String minifiedContent = minifyJavaScript(contents);
 
 		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 

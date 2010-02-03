@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -204,7 +205,7 @@ public class AssetCategoryFinderImpl
 			List<AssetCategory> list = q.list();
 
 			if (list.size() == 0) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(6);
 
 				sb.append("No AssetCategory exists with the key ");
 				sb.append("{groupId=");
@@ -311,7 +312,8 @@ public class AssetCategoryFinderImpl
 			return StringPool.BLANK;
 		}
 		else {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(
+				categoryProperties.length * 3 + 2);
 
 			sb.append(" INNER JOIN AssetCategoryProperty ON ");
 			sb.append(" (AssetCategoryProperty.categoryId = ");

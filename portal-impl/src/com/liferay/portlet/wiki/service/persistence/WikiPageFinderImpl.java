@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -140,7 +141,7 @@ public class WikiPageFinderImpl
 			List<WikiPage> list = q.list();
 
 			if (list.size() == 0) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(3);
 
 				sb.append("No WikiPage exists with the key {resourcePrimKey");
 				sb.append(resourcePrimKey);

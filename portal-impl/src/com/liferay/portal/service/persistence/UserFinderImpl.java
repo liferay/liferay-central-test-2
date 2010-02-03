@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -473,7 +474,7 @@ public class UserFinderImpl
 			return StringPool.BLANK;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -559,7 +560,7 @@ public class UserFinderImpl
 			return StringPool.BLANK;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -599,8 +600,12 @@ public class UserFinderImpl
 			else if (value instanceof Long[]) {
 				Long[] organizationIds = (Long[])value;
 
-				if (organizationIds.length > 0) {
-					StringBuilder sb = new StringBuilder();
+				if (organizationIds.length == 0) {
+					join = "WHERE ((Users_Orgs.organizationId = -1) ))";
+				}
+				else {
+					StringBundler sb = new StringBundler(
+						organizationIds.length * 2 + 1);
 
 					sb.append("WHERE (");
 
@@ -612,10 +617,6 @@ public class UserFinderImpl
 						}
 					}
 
-					if (organizationIds.length == 0) {
-						sb.append("(Users_Orgs.organizationId = -1) ");
-					}
-
 					sb.append(")");
 
 					join = sb.toString();
@@ -625,9 +626,10 @@ public class UserFinderImpl
 		else if (key.equals("usersOrgsTree")) {
 			Long[][] leftAndRightOrganizationIds = (Long[][])value;
 
-			StringBuilder sb = new StringBuilder();
-
 			if (leftAndRightOrganizationIds.length > 0) {
+				StringBundler sb = new StringBundler(
+					leftAndRightOrganizationIds.length * 2 + 1);
+
 				sb.append("WHERE (");
 
 				for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
@@ -679,12 +681,7 @@ public class UserFinderImpl
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				StringBuilder sb = new StringBuilder();
-
-				sb.append(join.substring(pos + 5, join.length()));
-				sb.append(" AND ");
-
-				join = sb.toString();
+				join = join.substring(pos + 5, join.length()).concat(" AND ");
 			}
 			else {
 				join = StringPool.BLANK;

@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.IPDetector;
 import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SocketUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
@@ -70,7 +71,7 @@ public class ClusterLinkImpl implements ClusterLink {
 		if (OSDetector.isUnix() && IPDetector.isSupportsV6() &&
 			!IPDetector.isPrefersV4() && _log.isWarnEnabled()) {
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(4);
 
 			sb.append("You are on an Unix server with IPv6 enabled. JGroups ");
 			sb.append("may not work with IPv6. If you see a multicast ");

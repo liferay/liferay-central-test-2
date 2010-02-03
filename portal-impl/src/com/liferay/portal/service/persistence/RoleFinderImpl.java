@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -111,7 +112,7 @@ public class RoleFinderImpl
 		try {
 			session = openSession();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(13);
 
 			sb.append("(");
 			sb.append(CustomSQLUtil.get(COUNT_BY_COMMUNITY));
@@ -377,7 +378,7 @@ public class RoleFinderImpl
 			closeSession(session);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("No Role exists with the key {companyId=");
 		sb.append(companyId);
@@ -547,8 +548,12 @@ public class RoleFinderImpl
 	}
 
 	protected String getGroupIds(long[] groupIds, String table) {
-		StringBuilder sb = new StringBuilder();
-
+		if (groupIds.length == 0) {
+			return StringPool.BLANK;
+		}
+		
+		StringBundler sb = new StringBundler(groupIds.length * 3 - 1);
+		
 		for (int i = 0; i < groupIds.length; i++) {
 			sb.append(table);
 			sb.append(".groupId = ?");
@@ -568,11 +573,11 @@ public class RoleFinderImpl
 	}
 
 	protected String getJoin(LinkedHashMap<String, Object> params) {
-		if (params == null) {
+		if ((params == null) || (params.isEmpty())) {
 			return StringPool.BLANK;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(params.size());
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -612,11 +617,11 @@ public class RoleFinderImpl
 	}
 
 	protected String getWhere(LinkedHashMap<String, Object> params) {
-		if (params == null) {
+		if ((params == null) || (params.isEmpty())) {
 			return StringPool.BLANK;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(params.size());
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -648,12 +653,7 @@ public class RoleFinderImpl
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				StringBuilder sb = new StringBuilder();
-
-				sb.append(join.substring(pos + 5, join.length()));
-				sb.append(" AND ");
-
-				join = sb.toString();
+				join = join.substring(pos + 5, join.length()).concat(" AND ");
 			}
 			else {
 				join = StringPool.BLANK;

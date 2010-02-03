@@ -24,6 +24,7 @@ package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
@@ -48,10 +49,11 @@ public class MoveMethodImpl implements Method {
 		String destination = WebDAVUtil.getDestination(
 			request, storage.getRootPath());
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		if (_log.isInfoEnabled()) {
-			sb.append("Destination is " + destination);
+			sb.append("Destination is ");
+			sb.append(destination);
 		}
 
 		int status = HttpServletResponse.SC_FORBIDDEN;
@@ -69,7 +71,8 @@ public class MoveMethodImpl implements Method {
 				boolean overwrite = WebDAVUtil.isOverwrite(request);
 
 				if (_log.isInfoEnabled()) {
-					sb.append(", overwrite is " + overwrite);
+					sb.append(", overwrite is ");
+					sb.append(overwrite);
 
 					_log.info(sb.toString());
 				}

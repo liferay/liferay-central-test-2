@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade.v4_4_0.util;
 
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.HashSet;
@@ -64,7 +65,7 @@ public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private String _getKey(String name) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(_groupIdColumn.getOldValue());
 		sb.append(StringPool.UNDERLINE);

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -167,7 +168,7 @@ public class EditScopeAction extends EditConfigurationAction {
 					layout.getGroupId(), layout.isPrivateLayout(),
 					oldScopeLayoutId);
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(4);
 
 				sb.append(StringPool.SPACE);
 				sb.append(StringPool.OPEN_PARENTHESIS);
@@ -199,7 +200,7 @@ public class EditScopeAction extends EditConfigurationAction {
 					scopeLayout.getPlid(), name, null, 0, null, true, null);
 			}
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(5);
 
 			sb.append(newTitle);
 			sb.append(StringPool.SPACE);

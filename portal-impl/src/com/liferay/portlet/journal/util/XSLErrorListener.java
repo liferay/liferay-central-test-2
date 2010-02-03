@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Locale;
@@ -112,7 +113,7 @@ public class XSLErrorListener implements ErrorListener {
 			_lineNumber = locator.getLineNumber();
 			_columnNumber = locator.getColumnNumber();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(8);
 
 			sb.append(LanguageUtil.get(_locale, "line"));
 			sb.append(" #");

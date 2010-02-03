@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -121,7 +123,11 @@ public class BookmarksEntryFinderImpl
 	}
 
 	protected String getFolderIds(List<Long> folderIds) {
-		StringBuilder sb = new StringBuilder();
+		if (folderIds.isEmpty()) {
+			return StringPool.BLANK;
+		}
+			
+		StringBundler sb = new StringBundler(folderIds.size() * 2 - 1);
 
 		for (int i = 0; i < folderIds.size(); i++) {
 			sb.append("folderId = ? ");

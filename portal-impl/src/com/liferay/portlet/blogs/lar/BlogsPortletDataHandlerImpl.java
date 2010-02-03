@@ -24,6 +24,7 @@ package com.liferay.portlet.blogs.lar;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -184,7 +185,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getEntryPath(
 		PortletDataContext context, BlogsEntry entry) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(context.getPortletPath(PortletKeys.BLOGS));
 		sb.append("/entries/");

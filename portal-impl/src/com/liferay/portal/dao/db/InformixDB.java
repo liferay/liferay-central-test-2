@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -63,11 +64,15 @@ public class InformixDB extends BaseDB {
 
 		String suffix = getSuffix(population);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("database sysmaster;\n");
-		sb.append("drop database " + databaseName + ";\n");
-		sb.append("create database " + databaseName + " WITH LOG;\n");
+		sb.append("drop database ");
+		sb.append(databaseName);
+		sb.append(";\n");
+		sb.append("create database ");
+		sb.append(databaseName);
+		sb.append(" WITH LOG;\n");
 		sb.append("\n");
 		sb.append("create procedure 'lportal'.isnull(test_string varchar)\n");
 		sb.append("returning boolean;\n");
@@ -78,9 +83,7 @@ public class InformixDB extends BaseDB {
 		sb.append("END IF\n");
 		sb.append("end procedure;\n");
 		sb.append("\n\n");
-		sb.append(
-			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
+		sb.append(FileUtil.read("../sql/portal" + suffix + "/portal" + suffix +
 					"-informix.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-informix.sql"));
@@ -102,7 +105,7 @@ public class InformixDB extends BaseDB {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String line = null;
 

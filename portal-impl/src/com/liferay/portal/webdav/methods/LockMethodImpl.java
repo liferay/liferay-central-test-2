@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
@@ -187,7 +188,7 @@ public class LockMethodImpl implements Method {
 	}
 
 	protected String getResponseXML(Lock lock, long depth) throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(20);
 
 		long timeoutSecs = lock.getExpirationTime() / Time.SECOND;
 
@@ -202,11 +203,16 @@ public class LockMethodImpl implements Method {
 			sb.append("<D:depth>Infinity</D:depth>");
 		}
 
-		sb.append("<D:owner>" + lock.getOwner() + "</D:owner>");
-		sb.append("<D:timeout>Second-" + timeoutSecs + "</D:timeout>");
-		sb.append(
-			"<D:locktoken><D:href>" + WebDAVUtil.TOKEN_PREFIX + lock.getUuid() +
-			"</D:href></D:locktoken>");
+		sb.append("<D:owner>");
+		sb.append(lock.getOwner());
+		sb.append("</D:owner>");
+		sb.append("<D:timeout>Second-");
+		sb.append(timeoutSecs);
+		sb.append("</D:timeout>");
+		sb.append("<D:locktoken><D:href>");
+		sb.append(WebDAVUtil.TOKEN_PREFIX);
+		sb.append(lock.getUuid());
+		sb.append("</D:href></D:locktoken>");
 		sb.append("</D:activelock>");
 		sb.append("</D:lockdiscovery>");
 		sb.append("</D:prop>");

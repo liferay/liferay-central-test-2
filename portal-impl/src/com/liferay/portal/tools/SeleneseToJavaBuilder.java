@@ -24,6 +24,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeFormatter;
@@ -146,9 +147,11 @@ public class SeleneseToJavaBuilder {
 			"test" + testName.substring(0, testName.length() - 4);
 		String testFileName = basedir + "/" + file.substring(0, y) + ".java";
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
-		sb.append("package " + testPackagePath + ";\n\n");
+		sb.append("package ");
+		sb.append(testPackagePath);
+		sb.append(";\n\n");
 
 		sb.append("import com.liferay.portal.kernel.util.FileUtil;\n");
 		sb.append("import com.liferay.portal.kernel.util.StringPool;\n");
@@ -156,9 +159,13 @@ public class SeleneseToJavaBuilder {
 		sb.append(
 			"import com.liferay.portalweb.portal.util.RuntimeVariables;\n\n");
 
-		sb.append("public class " + testName + " extends BaseTestCase {");
+		sb.append("public class ");
+		sb.append(testName);
+		sb.append(" extends BaseTestCase {");
 
-		sb.append("public void " + testMethodName + "() throws Exception {");
+		sb.append("public void ");
+		sb.append(testMethodName);
+		sb.append("() throws Exception {");
 
 		String xml = FileUtil.read(basedir + "/" + file);
 

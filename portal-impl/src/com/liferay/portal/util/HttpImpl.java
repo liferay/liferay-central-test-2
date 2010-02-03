@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -513,7 +514,7 @@ public class HttpImpl implements Http {
 	public String parameterMapToString(
 		Map<String, String[]> parameterMap, boolean addQuestion) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		if (parameterMap.size() > 0) {
 			if (addQuestion) {
@@ -532,7 +533,9 @@ public class HttpImpl implements Http {
 				}
 			}
 
-			sb.deleteCharAt(sb.length() - 1);
+			if (sb.index() > 1) {
+				sb.setIndex(sb.index() - 1);
+			}
 		}
 
 		return sb.toString();
@@ -596,7 +599,7 @@ public class HttpImpl implements Http {
 			url = url.substring(0, anchorPos);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(url.substring(0, pos + 1));
 

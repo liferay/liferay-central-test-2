@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileComparator;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -208,7 +209,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String createTempFileName(String extension) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(SystemProperties.get(SystemProperties.TMP_DIR));
 		sb.append(StringPool.SLASH);
@@ -294,20 +295,25 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 							textExtractor.getClass().getName());
 				}
 
+				Reader textReader = textExtractor.extractText(is, contentType, null);
 				StringBuilder sb = new StringBuilder();
 
-				UnsyncBufferedReader unsyncBufferedReader =
-					new UnsyncBufferedReader(
-						textExtractor.extractText(is, contentType, null));
+				try{
+					char[] buffer = new char[1024];
 
-				int i = 0;
-
-				while ((i = unsyncBufferedReader.read()) != -1) {
-					sb.append((char)i);
+					int result = -1;
+					while ((result = textReader.read(buffer)) != -1) {
+						sb.append(buffer, 0, result);
+					}
 				}
-
-				unsyncBufferedReader.close();
-
+				finally {
+					try {
+						textReader.close();
+					}
+					catch(IOException ignore) {	
+					}
+				}
+				
 				text = sb.toString();
 			}
 			else {

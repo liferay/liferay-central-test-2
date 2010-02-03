@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -133,7 +134,7 @@ public class SCIndexer extends BaseIndexer {
 
 		ExpandoBridge expandoBridge = productEntry.getExpandoBridge();
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(15);
 
 		sb.append(userId);
 		sb.append(StringPool.SPACE);

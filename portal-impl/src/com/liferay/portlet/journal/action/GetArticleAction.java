@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xml.Document;
@@ -121,15 +122,11 @@ public class GetArticleAction extends Action {
 
 		// Portal CSS
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(
+		String url =
 			PortalUtil.getStaticResourceURL(
 				request,
 				themeDisplay.getCDNHost() + themeDisplay.getPathContext() +
-					"/html/portal/css.jsp"));
-
-		String url = sb.toString();
+					"/html/portal/css.jsp");
 
 		Map<String, String> arguments = new LinkedHashMap<String, String>();
 
@@ -142,13 +139,9 @@ public class GetArticleAction extends Action {
 
 		// Theme CSS
 
-		sb = new StringBuilder();
+		url = PortalUtil.getStaticResourceURL(
+				request, themeDisplay.getPathThemeCss() + "/main.css");
 
-		sb.append(
-			PortalUtil.getStaticResourceURL(
-				request, themeDisplay.getPathThemeCss() + "/main.css"));
-
-		url = sb.toString();
 
 		arguments.clear();
 
