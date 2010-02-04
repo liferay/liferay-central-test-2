@@ -186,11 +186,11 @@ public class StringUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		char[] c = s.toCharArray();
+		char[] charArray = s.toCharArray();
 
-		for (int i = 0; i < c.length; i++) {
-			if (Validator.isChar(c[i])) {
-				sb.append(c[i]);
+		for (int i = 0; i < charArray.length; i++) {
+			if (Validator.isChar(charArray[i])) {
+				sb.append(charArray[i]);
 			}
 		}
 
@@ -204,11 +204,11 @@ public class StringUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		char[] c = s.toCharArray();
+		char[] charArray = s.toCharArray();
 
-		for (int i = 0; i < c.length; i++) {
-			if (Validator.isDigit(c[i])) {
-				sb.append(c[i]);
+		for (int i = 0; i < charArray.length; i++) {
+			if (Validator.isDigit(charArray[i])) {
+				sb.append(charArray[i]);
 			}
 		}
 
@@ -895,11 +895,11 @@ public class StringUtil {
 			return null;
 		}
 
-		char[] c = s.toCharArray();
-		char[] reverse = new char[c.length];
+		char[] charArray = s.toCharArray();
+		char[] reverse = new char[charArray.length];
 
-		for (int i = 0; i < c.length; i++) {
-			reverse[i] = c[c.length - i - 1];
+		for (int i = 0; i < charArray.length; i++) {
+			reverse[i] = charArray[charArray.length - i - 1];
 		}
 
 		return new String(reverse);
@@ -1353,13 +1353,13 @@ public class StringUtil {
 	}
 
 	public static String upperCaseFirstLetter(String s) {
-		char[] chars = s.toCharArray();
+		char[] charArray = s.toCharArray();
 
-		if ((chars[0] >= 97) && (chars[0] <= 122)) {
-			chars[0] = (char)(chars[0] - 32);
+		if ((charArray[0] >= 97) && (charArray[0] <= 122)) {
+			charArray[0] = (char)(charArray[0] - 32);
 		}
 
-		return new String(chars);
+		return new String(charArray);
 	}
 
 	public static String valueOf(Object obj) {
