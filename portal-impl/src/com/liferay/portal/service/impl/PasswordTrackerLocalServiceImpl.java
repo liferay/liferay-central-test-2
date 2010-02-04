@@ -93,7 +93,7 @@ public class PasswordTrackerLocalServiceImpl
 			userId).iterator();
 
 		while (itr.hasNext()) {
-			if (historyCount > passwordPolicy.getHistoryCount()) {
+			if (historyCount >= passwordPolicy.getHistoryCount()) {
 				break;
 			}
 
