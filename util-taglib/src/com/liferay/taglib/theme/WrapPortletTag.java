@@ -23,7 +23,6 @@
 package com.liferay.taglib.theme;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.PortletDisplay;
@@ -73,15 +72,8 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 		String content = ThemeUtil.includeVM(
 			servletContext, request, pageContext, wrapPage, theme, false);
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(content.length());
-		sb.append(_CONTENT_WRAPPER_LENGTH);
-		sb.append(_CONTENT_WRAPPER_PRE);
-		sb.append(content);
-		sb.append(_CONTENT_WRAPPER_POST);
-
-		return sb.toString();
+		return _CONTENT_WRAPPER_PRE.concat(content).concat(
+			_CONTENT_WRAPPER_POST);
 	}
 
 	public int doStartTag() {
@@ -141,9 +133,6 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 		"<div id=\"content-wrapper\" class=\"column-1\">";
 
 	private static final String _CONTENT_WRAPPER_POST = "</div>";
-
-	private static final int _CONTENT_WRAPPER_LENGTH =
-		_CONTENT_WRAPPER_PRE.length() + _CONTENT_WRAPPER_POST.length();
 
 	private String _page;
 	private String _bodyContentString = StringPool.BLANK;
