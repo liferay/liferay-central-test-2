@@ -658,9 +658,9 @@ Liferay.Util = {
 		var select = AUI().one(box);
 
 		if (select) {
-			var opts = select.all('option');
+			var options = select.all('option');
 
-			opts.each(
+			options.each(
 				function(item, index, collection) {
 					var val = item.val();
 
@@ -1013,6 +1013,7 @@ Liferay.Util = {
 			'node',
 			function(A) {
 				var newBox = [];
+
 				var options = box.all('option');
 
 				for (var i = 0; i < options.size(); i++) {
