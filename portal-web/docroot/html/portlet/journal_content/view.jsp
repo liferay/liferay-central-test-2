@@ -75,7 +75,12 @@ if (articleDisplay != null) {
 							<c:choose>
 								<c:when test="<%= print %>">
 									<div class="print-action">
-										<liferay-ui:icon image="print" url="javascript:print();" label="<%= true %>" />
+										<liferay-ui:icon
+											image="print"
+											message='<%=LanguageUtil.format(pageContext, "print-x-x", new Object[] {"aui-helper-hidden", articleDisplay.getTitle()}) %>'
+											url="javascript:print();"
+											label="<%= true %>"
+										/>
 									</div>
 
 									<aui:script>
@@ -96,7 +101,12 @@ if (articleDisplay != null) {
 									%>
 
 									<div class="print-action">
-										<liferay-ui:icon image="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' label="<%= true %>" />
+										<liferay-ui:icon
+											image="print"
+											message='<%=LanguageUtil.format(pageContext, "print-x-x", new Object[] {"aui-helper-hidden", articleDisplay.getTitle()}) %>'
+											url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>'
+											label="<%= true %>"
+										/>
 									</div>
 
 									<aui:script>
@@ -130,7 +140,7 @@ if (articleDisplay != null) {
 
 										<liferay-ui:icon
 											image='<%= "../file_system/small/" + extension %>'
-											message="<%= extension.toUpperCase() %>"
+											message='<%=LanguageUtil.format(pageContext, "x-convert-x-to-x", new Object[] {"aui-helper-hidden", articleDisplay.getTitle() ,extension.toUpperCase()}) %>'
 											url="<%= exportArticleURL.toString() %>"
 											method="get"
 											label="<%= true %>"
