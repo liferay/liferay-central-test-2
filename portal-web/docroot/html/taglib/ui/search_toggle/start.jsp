@@ -48,10 +48,10 @@
 
 	<div class="<%= !clickValue.equals("basic") ? "" : "aui-helper-hidden" %>" id="<%= id %>advanced">
 		<liferay-util:buffer var="andOperator">
-			<aui:select cssClass="inline-control" label="" name="<%= displayTerms.AND_OPERATOR %>">
+			<aui:select cssClass="inline-control" inlineField="<%= true %>" label="" name="<%= displayTerms.AND_OPERATOR %>">
 				<aui:option label="all" selected="<%= displayTerms.isAndOperator() %>" value="1" />
 				<aui:option label="any" selected="<%= !displayTerms.isAndOperator() %>" value="0" />
 			</aui:select>
 		</liferay-util:buffer>
 
-		<%= LanguageUtil.format(pageContext, "match-x-of-the-following-fields", andOperator) %>
+		<liferay-ui:message key="match-x-of-the-following-fields" arguments="<%= andOperator %>"/>

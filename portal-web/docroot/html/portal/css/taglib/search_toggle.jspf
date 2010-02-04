@@ -23,7 +23,7 @@
 %>
 
 .taglib-search-toggle .inline-control {
-	display: inline;
+	float: none;
 }
 
 .taglib-search-toggle .toggle-link {
