@@ -23,6 +23,7 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.awt.Color;
 
@@ -61,7 +62,7 @@ public class ColorUtil {
 	}
 
 	public static String getHex(int[] rgb) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("#");
 

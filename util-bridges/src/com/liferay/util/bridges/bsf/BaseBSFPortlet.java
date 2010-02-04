@@ -25,6 +25,7 @@ package com.liferay.util.bridges.bsf;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -141,12 +142,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 			PortletResponse portletResponse)
 		throws BSFException, IOException {
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(getGlobalScript());
-		sb.append(code);
-
-		String script = sb.toString();
+		String script = getGlobalScript().concat(code);
 
 		PortletConfig portletConfig = getPortletConfig();
 		PortletContext portletContext = getPortletContext();
@@ -193,7 +189,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 	}
 
 	protected String getGlobalScript() throws IOException {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		for (int i = 0; i < globalFiles.length; i++) {
 			InputStream is = getPortletContext().getResourceAsStream(

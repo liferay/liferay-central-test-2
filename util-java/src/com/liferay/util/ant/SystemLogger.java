@@ -24,6 +24,7 @@ package com.liferay.util.ant;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.IOException;
 
@@ -43,7 +44,7 @@ public class SystemLogger extends DefaultLogger {
 		int priority = event.getPriority();
 
 		if (priority <= msgOutputLevel) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			try {
 				UnsyncBufferedReader unsyncBufferedReader =

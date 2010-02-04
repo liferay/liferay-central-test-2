@@ -23,6 +23,7 @@
 package com.liferay.util.bridges.php;
 
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Enumeration;
@@ -55,7 +56,7 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 		_renderResponse = renderResponse;
 		_portletConfig = portletConfig;
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		int pos = phpURI.indexOf(StringPool.QUESTION);
 

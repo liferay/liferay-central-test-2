@@ -239,9 +239,9 @@ public class TextFormatter {
 	}
 
 	private static String _formatH(String s) {
-		StringBuilder sb = new StringBuilder();
-
 		char[] c = s.toCharArray();
+
+		StringBuilder sb = new StringBuilder(c.length * 2);
 
 		for (int i = 0; i < c.length; i++) {
 			if (Character.isUpperCase(c[i])) {
@@ -268,9 +268,9 @@ public class TextFormatter {
 				s.substring(1, s.length());
 		}
 
-		StringBuilder sb = new StringBuilder();
-
 		char[] c = s.toCharArray();
+
+		StringBuilder sb = new StringBuilder(c.length);
 
 		for (int i = 0; i < c.length; i++) {
 			if ((i + 1 != c.length) &&
@@ -289,12 +289,12 @@ public class TextFormatter {
 	}
 
 	private static String _formatJ(String s) {
-		StringBuilder sb = new StringBuilder();
-
 		s = StringUtil.replace(s, StringPool.DASH, StringPool.SPACE);
 		s = StringUtil.replace(s, StringPool.UNDERLINE, StringPool.SPACE);
 
 		char[] c = s.toCharArray();
+
+		StringBuilder sb = new StringBuilder(c.length);
 
 		for (int i = 0; i < c.length; i++) {
 			if ((i == 0) || (c[i - 1] == ' ')) {
@@ -330,9 +330,9 @@ public class TextFormatter {
 	}
 
 	private static String _formatM(String s) {
-		StringBuilder sb = new StringBuilder();
-
 		char[] c = s.toCharArray();
+
+		StringBuilder sb = new StringBuilder(c.length);
 
 		for (int i = 0; i < c.length; i++) {
 			if (c[i] == '-') {

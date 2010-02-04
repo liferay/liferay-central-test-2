@@ -24,6 +24,7 @@ package com.liferay.util.bridges.mvc;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class ActionCommandCache {
 				actionCommandName);
 
 			if (actionCommand == null) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(4);
 
 				sb.append(_packagePrefix);
 				sb.append(Character.toUpperCase(actionCommandName.charAt(0)));

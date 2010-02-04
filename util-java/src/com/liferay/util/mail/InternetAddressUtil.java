@@ -22,6 +22,7 @@
 
 package com.liferay.util.mail;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -82,13 +83,14 @@ public class InternetAddressUtil {
 		InternetAddress internetAddress = (InternetAddress)address;
 
 		if (internetAddress != null) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(5);
 
 			String personal = internetAddress.getPersonal();
 			String emailAddress = internetAddress.getAddress();
 
 			if (Validator.isNotNull(personal)) {
-				sb.append(personal + StringPool.SPACE);
+				sb.append(personal);
+				sb.append(StringPool.SPACE);
 				sb.append(StringPool.LESS_THAN);
 				sb.append(emailAddress);
 				sb.append(StringPool.GREATER_THAN);
@@ -104,7 +106,11 @@ public class InternetAddressUtil {
 	}
 
 	public static String toString(Address[] addresses) {
-		StringBuilder sb = new StringBuilder();
+		if ((addresses == null) || (addresses.length == 0)) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(addresses.length * 3 - 2);
 
 		if (addresses != null) {
 			for (int i = 0; i < addresses.length; i++) {

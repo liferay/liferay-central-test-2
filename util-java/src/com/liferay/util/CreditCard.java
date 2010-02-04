@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -45,7 +46,7 @@ public class CreditCard {
 		int numberLen = number.length();
 
 		if (numberLen > 4) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(numberLen - 3);
 
 			for (int i = 0; i < numberLen - 4; i++) {
 				sb.append(x);

@@ -24,6 +24,7 @@ package com.liferay.util.transport;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.InputStream;
 
@@ -71,7 +72,7 @@ public class MulticastDatagramHandler implements DatagramHandler {
 			bytes = temp;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append("[");
 		sb.append(packet.getSocketAddress());

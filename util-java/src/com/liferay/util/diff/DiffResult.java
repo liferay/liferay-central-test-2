@@ -22,6 +22,8 @@
 
 package com.liferay.util.diff;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -88,7 +90,7 @@ public class DiffResult {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(_changedLines.size() * 2 + 3);
 
 		sb.append("Line: ");
 		sb.append(_lineNumber);

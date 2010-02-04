@@ -24,6 +24,7 @@ package com.liferay.util.poi;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.InputStream;
 
@@ -43,7 +44,7 @@ public class XLSTextStripper {
 
 	public XLSTextStripper(InputStream is) {
 		try {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			HSSFWorkbook workbook = new HSSFWorkbook(is);
 

@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -361,7 +362,7 @@ public class CustomSQL {
 			return sql;
 		}
 
-		StringBuilder oldSql = new StringBuilder();
+		StringBundler oldSql = new StringBundler(6);
 
 		oldSql.append("(");
 		oldSql.append(field);
@@ -373,7 +374,7 @@ public class CustomSQL {
 			oldSql.append(" [$AND_OR_CONNECTOR$]");
 		}
 
-		StringBuilder newSql = new StringBuilder();
+		StringBundler newSql = new StringBundler(values.length * 6 + 3);
 
 		newSql.append("(");
 
@@ -413,13 +414,7 @@ public class CustomSQL {
 			return sql;
 		}
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(removeOrderBy(sql));
-		sb.append(" ORDER BY ");
-		sb.append(obc.getOrderBy());
-
-		return sb.toString();
+		return removeOrderBy(sql).concat(" ORDER BY ").concat(obc.getOrderBy());
 	}
 
 	protected String[] getConfigs() {
@@ -484,7 +479,7 @@ public class CustomSQL {
 	protected String transform(String sql) {
 		sql = PortalUtil.transformCustomSQL(sql);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		try {
 			UnsyncBufferedReader unsyncBufferedReader =

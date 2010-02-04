@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -209,7 +210,7 @@ public class ScriptingPortlet extends GenericPortlet {
 			return globalScript;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		for (String globalFile : globalFiles) {
 			InputStream is = getPortletContext().getResourceAsStream(
@@ -274,7 +275,7 @@ public class ScriptingPortlet extends GenericPortlet {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("<div class=\"portlet-msg-error\">");
 		sb.append(themeDisplay.translate("an-unexpected-error-occurred"));

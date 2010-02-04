@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeFormatter;
@@ -105,7 +106,7 @@ public class JS {
 	}
 
 	public static String toScript(String[] array) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(array.length * 4 + 2);
 
 		sb.append(StringPool.OPEN_BRACKET);
 

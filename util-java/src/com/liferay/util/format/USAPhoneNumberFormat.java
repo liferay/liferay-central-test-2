@@ -22,6 +22,7 @@
 
 package com.liferay.util.format;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -38,7 +39,7 @@ public class USAPhoneNumberFormat implements PhoneNumberFormat {
 		}
 
 		if (phoneNumber.length() > 10) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(8);
 
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(phoneNumber.substring(0, 3));
@@ -52,7 +53,7 @@ public class USAPhoneNumberFormat implements PhoneNumberFormat {
 			return sb.toString();
 		}
 		else if (phoneNumber.length() == 10) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(6);
 
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(phoneNumber.substring(0, 3));
@@ -64,7 +65,7 @@ public class USAPhoneNumberFormat implements PhoneNumberFormat {
 			return sb.toString();
 		}
 		else if (phoneNumber.length() == 7) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(3);
 
 			sb.append(phoneNumber.substring(0, 3));
 			sb.append(StringPool.DASH);

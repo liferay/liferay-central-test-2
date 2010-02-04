@@ -69,8 +69,8 @@ public class PhoneNumberConverter implements Converter, StateHolder {
 		FacesContext facesContext, UIComponent uiComponent, String value) {
 
 		if (value != null) {
-			StringBuilder integerChars = new StringBuilder();
-			StringBuilder invalidChars = new StringBuilder();
+			StringBuilder integerChars = new StringBuilder(value.length());
+			StringBuilder invalidChars = new StringBuilder(value.length());
 
 			for (int i = 0; i < value.length(); i++) {
 				char curChar = value.charAt(i);
@@ -103,7 +103,8 @@ public class PhoneNumberConverter implements Converter, StateHolder {
 				throw new ConverterException(facesMessage);
 			}
 			else if ((integerChars.length() == 10)) {
-				StringBuilder unitedStatesPhoneNumber = new StringBuilder();
+				StringBuilder unitedStatesPhoneNumber =
+					new StringBuilder(_unitedStatesFormat.length());
 
 				int integerDigitIndex = 0;
 

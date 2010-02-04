@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -53,7 +54,7 @@ public class EncryptTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
 		try {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			// Open anchor
 

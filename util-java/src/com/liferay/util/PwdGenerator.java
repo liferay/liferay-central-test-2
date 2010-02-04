@@ -64,7 +64,7 @@ public class PwdGenerator {
 	private static String _getPassword(
 		String key, int length, boolean useAllKeys) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder(length);
 
 		for (int i = 0; i < length; i++) {
 			sb.append(key.charAt((int)(Math.random() * key.length())));

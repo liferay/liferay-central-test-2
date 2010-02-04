@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.List;
@@ -73,7 +74,7 @@ public class Autocomplete {
 			max = array.length;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(max * 8 + 3);
 
 		sb.append("<?xml version=\"1.0\"?>");
 

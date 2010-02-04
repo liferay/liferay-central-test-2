@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
@@ -108,7 +109,7 @@ public class ThemeUtil {
 
 		int pos = page.lastIndexOf(StringPool.PERIOD);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(ctxName);
 		sb.append(theme.getFreeMarkerTemplateLoader());
@@ -271,7 +272,7 @@ public class ThemeUtil {
 
 		int pos = page.lastIndexOf(StringPool.PERIOD);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(ctxName);
 		sb.append(theme.getVelocityResourceListener());

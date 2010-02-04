@@ -48,7 +48,7 @@ public class WriterWrapper extends Writer {
 	}
 
 	public void write(char[] cbuf, int off, int len) throws IOException {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder(len);
 
 		sb.append(cbuf, off, len);
 

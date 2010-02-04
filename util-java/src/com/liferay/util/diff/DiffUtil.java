@@ -23,6 +23,7 @@
 package com.liferay.util.diff;
 
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Reader;
@@ -554,7 +555,11 @@ public class DiffUtil {
 	}
 
 	private static String _toString(List<String> line) {
-		StringBuilder sb = new StringBuilder();
+		if (line.isEmpty()) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(line.size());
 
 		Iterator<String> itr = line.iterator();
 

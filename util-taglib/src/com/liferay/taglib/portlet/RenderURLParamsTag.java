@@ -25,6 +25,7 @@ package com.liferay.taglib.portlet;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -80,7 +81,7 @@ public class RenderURLParamsTag extends TagSupport {
 			PortletURL portletURL, PageContext pageContext)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		String url = portletURL.toString();
 

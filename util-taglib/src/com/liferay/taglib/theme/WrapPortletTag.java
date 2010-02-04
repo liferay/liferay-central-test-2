@@ -23,6 +23,7 @@
 package com.liferay.taglib.theme;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.PortletDisplay;
@@ -72,9 +73,10 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 		String content = ThemeUtil.includeVM(
 			servletContext, request, pageContext, wrapPage, theme, false);
 
-		StringBuilder sb = new StringBuilder(
-			content.length() + _CONTENT_WRAPPER_LENGTH);
+		StringBundler sb = new StringBundler(5);
 
+		sb.append(content.length());
+		sb.append(_CONTENT_WRAPPER_LENGTH);
 		sb.append(_CONTENT_WRAPPER_PRE);
 		sb.append(content);
 		sb.append(_CONTENT_WRAPPER_POST);

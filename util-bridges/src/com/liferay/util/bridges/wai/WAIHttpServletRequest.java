@@ -22,6 +22,7 @@
 
 package com.liferay.util.bridges.wai;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Collections;
@@ -63,7 +64,7 @@ public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getRequestURI() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(getContextPath());
 		sb.append(_pathInfo);

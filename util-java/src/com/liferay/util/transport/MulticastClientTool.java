@@ -22,6 +22,8 @@
 
 package com.liferay.util.transport;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +47,7 @@ public class MulticastClientTool {
 		catch (Exception e) {
 			e.printStackTrace();
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(4);
 
 			sb.append("Usage: java -classpath ");
 			sb.append("commons-logging.jar:util-java.jar ");
