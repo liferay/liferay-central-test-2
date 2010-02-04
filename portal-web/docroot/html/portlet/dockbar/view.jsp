@@ -45,7 +45,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 <div class="dockbar" id="dockbar" rel="<portlet:namespace />">
 	<ul class="aui-toolbar">
 		<li class="pin-dockbar">
-			<a href="javascript:;"><img alt="" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
+			<a href="javascript:;"><img alt='<liferay-ui:message key="pin-the-dockbar" />' src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>
 		</li>
 
 		<c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
