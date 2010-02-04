@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,46 +22,29 @@
 
 package com.liferay.portal.security.ldap;
 
-import java.util.Collections;
-import java.util.Map;
-
 /**
- * <a href="LDAPUserGroupHolder.java.html}"><b><i>View Source</i></b></a>
+ * <a href="UserConverterKeys.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
+ * @author Edward Han
  */
-public class LDAPUserGroupHolder {
+public interface UserConverterKeys {
 
-	public LDAPUserGroupHolder(
-		long companyId, String groupName, String description) {
+	public static final String EMAIL_ADDRESS = "emailAddress";
 
-		this(companyId, groupName, description, Collections.EMPTY_MAP);
-	}
+	public static final String FIRST_NAME = "firstName";
 
-	public LDAPUserGroupHolder(
-		long companyId, String groupName, String description,
-		Map<String, String> groupExpandoData) {
-		_companyId = companyId;
-		_groupName = groupName;
-		_description = description;
-		_groupExpandoData = groupExpandoData;
-	}
+	public static final String FULL_NAME = "fullName";
 
-	public long getCompanyId() {
-		return _companyId;
-	}
+	public static final String GROUP = "group";
 
-	public String getGroupName() {
-		return _groupName;
-	}
+	public static final String JOB_TITLE = "jobTitle";
 
-	public String getDescription() {
-		return _description;
-	}
+	public static final String LAST_NAME = "lastName";
 
-	private long _companyId;
-	private String _groupName;
-	private String _description;
+	public static final String MIDDLE_NAME = "middleName";
 
-	private Map<String, String> _groupExpandoData;
+	public static final String PASSWORD = "password";
+
+	public static final String SCREEN_NAME = "screenName";
+
 }

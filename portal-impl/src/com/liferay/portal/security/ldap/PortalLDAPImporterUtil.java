@@ -46,18 +46,19 @@ public class PortalLDAPImporterUtil {
 
 	public static void importFromLDAP(long ldapServerId, long companyId)
 		throws Exception {
+
 		_portalLDAPImporter.importFromLDAP(ldapServerId, companyId);
 	}
 
 	public static User importLDAPUser(
-		long ldapServerId, long companyId, LdapContext ldapContext,
-		Attributes attributes, String password,
-		boolean importGroupMembership)
+			long ldapServerId, long companyId, LdapContext ldapContext,
+			Attributes attributes, String password,
+			boolean importGroupMembership)
 		throws Exception {
 
 		return _portalLDAPImporter.importLDAPUser(
-			ldapServerId, companyId, ldapContext,
-			attributes, password, importGroupMembership);
+			ldapServerId, companyId, ldapContext, attributes, password,
+			importGroupMembership);
 	}
 
 	public void setPortalLDAPImporter(PortalLDAPImporter portalLDAPImporter) {
@@ -65,4 +66,5 @@ public class PortalLDAPImporterUtil {
 	}
 
 	private static PortalLDAPImporter _portalLDAPImporter;
+
 }

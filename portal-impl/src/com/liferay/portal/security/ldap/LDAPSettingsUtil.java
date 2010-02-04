@@ -46,18 +46,6 @@ import java.util.Properties;
  */
 public class LDAPSettingsUtil {
 
-	public static Properties getAllUserContactMappings(
-		long ldapServerId, long companyId)
-			throws Exception {
-
-		Properties userMappings = getUserMappings(ldapServerId, companyId);
-		Properties contactMappings = getContactMappings(ldapServerId, companyId);
-
-		PropertiesUtil.merge(userMappings, contactMappings);
-
-		return userMappings;
-	}
-
 	public static String getAuthSearchFilter(
 			long ldapServerId, long companyId, String emailAddress,
 			String screenName, String userId)

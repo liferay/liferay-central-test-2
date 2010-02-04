@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,6 @@ import javax.naming.ldap.LdapContext;
 
 /**
  * <a href="PortalLDAPImporter.java.html}"><b><i>View Source</i></b></a>
- *
- * Provides the ability to customize the user and group import process.
  *
  * @author Michael C. Han
  */

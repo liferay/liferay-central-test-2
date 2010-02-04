@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.Properties;
+
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
@@ -36,23 +38,43 @@ import javax.naming.directory.Attributes;
  *
  * @author Toma Bedolla
  * @author Michael Young
+ * @author Brian Wing Shun Chan
  */
 public class LDAPUtil {
 
-	public static String getAttributeValue(Attributes attrs, String id)
+	public static String getAttributeValue(
+			Attributes attributes, Properties properties, String key)
 		throws NamingException {
 
-		return getAttributeValue(attrs, id, StringPool.BLANK);
+		String id = properties.getProperty(key);
+
+		return getAttributeValue(attributes, id);
 	}
 
 	public static String getAttributeValue(
-			Attributes attrs, String id, String defaultValue)
+			Attributes attributes, Properties properties, String key,
+			String defaultValue)
+		throws NamingException {
+
+		String id = properties.getProperty(key);
+
+		return getAttributeValue(attributes, id, defaultValue);
+	}
+
+	public static String getAttributeValue(Attributes attributes, String id)
+		throws NamingException {
+
+		return getAttributeValue(attributes, id, StringPool.BLANK);
+	}
+
+	public static String getAttributeValue(
+			Attributes attributes, String id, String defaultValue)
 		throws NamingException {
 
 		try {
-			Attribute attr = attrs.get(id);
+			Attribute attribute = attributes.get(id);
 
-			Object obj = attr.get();
+			Object obj = attribute.get();
 
 			return obj.toString();
 		}

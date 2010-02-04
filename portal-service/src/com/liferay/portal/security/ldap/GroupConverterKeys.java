@@ -20,57 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util.ldap;
-
-import com.liferay.portal.kernel.util.Validator;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.naming.directory.BasicAttribute;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.ModificationItem;
+package com.liferay.portal.security.ldap;
 
 /**
- * <a href="Modifications.java.html"><b><i>View Source</i></b></a>
+ * <a href="GroupConverterKeys.java.html"><b><i>View Source</i></b></a>
  *
- * @author Amos Fong
  * @author Brian Wing Shun Chan
  */
-public class Modifications {
+public interface GroupConverterKeys {
 
-	public static Modifications getInstance() {
-		return new Modifications();
-	}
+	public static final String DESCRIPTION = "description";
 
-	public ModificationItem addItem(String id, String value) {
-		return addItem(DirContext.REPLACE_ATTRIBUTE, id, value);
-	}
-
-	public ModificationItem addItem(
-		int modificationOp, String id, String value) {
-
-		BasicAttribute basicAttribute = new BasicAttribute(id);
-
-		if (Validator.isNotNull(value)) {
-			basicAttribute.add(value);
-		}
-
-		ModificationItem item = new ModificationItem(
-			modificationOp, basicAttribute);
-
-		_items.add(item);
-
-		return item;
-	}
-
-	public ModificationItem[] getItems() {
-		return _items.toArray(new ModificationItem[_items.size()]);
-	}
-
-	private Modifications() {
-	}
-
-	private List<ModificationItem> _items = new ArrayList<ModificationItem>();
+	public static final String GROUP_NAME = "groupName";
 
 }

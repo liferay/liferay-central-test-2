@@ -33,19 +33,18 @@ import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttributes;
 
 /**
- * <a href="LDAPContext.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalLDAPContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Edward Han
  */
-public class LDAPContext extends DummyDirContext {
-	public LDAPContext(boolean ignoreCase) {
-		super();
+public class PortalLDAPContext extends DummyDirContext {
 
-		_attributes = new BasicAttributes(ignoreCase);
+	public PortalLDAPContext(Attributes attributes) {
+		_attributes = attributes;
 	}
 
-	public LDAPContext(Attributes attributes) {
-		_attributes = attributes;
+	public PortalLDAPContext(boolean ignoreCase) {
+		_attributes = new BasicAttributes(ignoreCase);
 	}
 
 	public void addAttribute(String name, Object object) {
@@ -56,8 +55,14 @@ public class LDAPContext extends DummyDirContext {
 		return _attributes;
 	}
 
-	public void setAttributes(Attributes attributes) {
-		_attributes = attributes;
+	public Attributes getAttributes(Name name) throws NamingException {
+		return getAttributes(name.toString());
+	}
+
+	public Attributes getAttributes(Name name, String[] ids)
+		throws NamingException {
+
+		return getAttributes(name.toString(), ids);
 	}
 
 	public Attributes getAttributes(String name) throws NamingException {
@@ -65,11 +70,7 @@ public class LDAPContext extends DummyDirContext {
 			throw new NameNotFoundException();
 		}
 
-		return (Attributes) _attributes.clone();
-	}
-
-	public Attributes getAttributes(Name name) throws NamingException {
-		return getAttributes(name.toString());
+		return (Attributes)_attributes.clone();
 	}
 
 	public Attributes getAttributes(String name, String[] ids)
@@ -79,24 +80,23 @@ public class LDAPContext extends DummyDirContext {
 			throw new NameNotFoundException();
 		}
 
-		Attributes attrs = new BasicAttributes(true);
+		Attributes attributes = new BasicAttributes(true);
 
 		for (int i = 0; i < ids.length; i++) {
-			Attribute attr = _attributes.get(ids[i]);
+			Attribute attribute = _attributes.get(ids[i]);
 
-			if (attr != null) {
-				attrs.put(attr);
+			if (attribute != null) {
+				attributes.put(attribute);
 			}
 		}
 
-		return attrs;
+		return attributes;
 	}
 
-	public Attributes getAttributes(Name name, String[] ids)
-		throws NamingException {
-
-		return getAttributes(name.toString(), ids);
+	public void setAttributes(Attributes attributes) {
+		_attributes = attributes;
 	}
 
 	private Attributes _attributes;
+
 }

@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,14 +26,14 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 
 /**
- * <a href="PortalLDAPExporter.java.html}"><b><i>View Source</i></b></a>
- *
- * Provides the ability to customize the user and contact export.
+ * <a href="PortalLDAPExporter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
 public interface PortalLDAPExporter {
+
 	public void exportToLDAP(Contact contact) throws Exception;
+
 	public void exportToLDAP(User user) throws Exception;
 
 }

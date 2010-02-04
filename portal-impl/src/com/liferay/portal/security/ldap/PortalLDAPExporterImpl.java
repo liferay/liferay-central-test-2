@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.ldap.Modifications;
 
 import java.util.Properties;
 
@@ -42,14 +41,10 @@ import javax.naming.ldap.LdapContext;
  * <a href="PortalLDAPExporterImpl.java.html}"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
 public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
-	/**
-	 * Export contact information to LDAP.
-	 * @param contact
-	 * @throws Exception
-	 */
 	public void exportToLDAP(Contact contact) throws Exception {
 		long companyId = contact.getCompanyId();
 
@@ -83,8 +78,8 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 				Properties userMappings = LDAPSettingsUtil.getUserMappings(
 					ldapServerId, companyId);
 
-				binding = _createLDAPUser(
-					companyId, user, userMappings, ldapServerId, ldapContext);
+				binding = createLDAPUser(
+					ldapServerId, ldapContext, user, userMappings);
 			}
 
 			Name name = new CompositeName();
@@ -95,7 +90,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 			Modifications modifications =
 				_portalToLDAPConverter.getLDAPContactModifications(
-					name, contactMappings, contact, binding);
+					contact, contactMappings);
 
 			ModificationItem[] modificationItems = modifications.getItems();
 
@@ -133,26 +128,24 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 			Properties userMappings = LDAPSettingsUtil.getUserMappings(
 				ldapServerId, companyId);
+
 			Binding binding = PortalLDAPUtil.getUser(
 				ldapServerId, user.getCompanyId(), user.getScreenName());
 
 			if (binding == null) {
-
-				// Create new user in LDAP
-				binding = _createLDAPUser(
-					companyId, user, userMappings, ldapServerId, ldapContext);
+				binding = createLDAPUser(
+					ldapServerId, ldapContext, user, userMappings);
 			}
 
 			Name name = new CompositeName();
 
-			// Modify existing LDAP user record
 			name.add(
 				PortalLDAPUtil.getNameInNamespace(
 					ldapServerId, companyId, binding));
 
 			Modifications modifications =
 				_portalToLDAPConverter.getLDAPUserModifications(
-					name, userMappings, user, binding);
+					user, userMappings);
 
 			ModificationItem[] modificationItems = modifications.getItems();
 
@@ -174,21 +167,21 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		_portalToLDAPConverter = portalToLDAPConverter;
 	}
 
-	private Binding _createLDAPUser(
-			long companyId, User user, Properties userMappings,
-			long ldapServerId, LdapContext ldapContext)
+	protected Binding createLDAPUser(
+			long ldapServerId, LdapContext ldapContext, User user,
+			Properties userMappings)
 		throws Exception {
 
 		Name name = new CompositeName();
 
-		String dnName = _portalToLDAPConverter.getUserDNName(
-			ldapServerId, companyId, user, userMappings);
-		name.add(dnName);
+		name.add(
+			_portalToLDAPConverter.getUserDNName(
+				ldapServerId, user, userMappings));
 
-		Attributes ldapUser = _portalToLDAPConverter.getLDAPUserAttributes(
-			name, userMappings, user, ldapServerId);
+		Attributes attributes = _portalToLDAPConverter.getLDAPUserAttributes(
+			ldapServerId, user, userMappings);
 
-		ldapContext.bind(name, new LDAPContext(ldapUser));
+		ldapContext.bind(name, new PortalLDAPContext(attributes));
 
 		Binding binding = PortalLDAPUtil.getUser(
 			ldapServerId, user.getCompanyId(), user.getScreenName());
@@ -198,6 +191,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 	private static Log _log =
 		LogFactoryUtil.getLog(PortalLDAPExporterImpl.class);
+
 	private PortalToLDAPConverter _portalToLDAPConverter;
 
 }

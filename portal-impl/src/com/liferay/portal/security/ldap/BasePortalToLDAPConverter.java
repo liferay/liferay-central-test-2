@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,15 +33,12 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.ldap.Modifications;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.naming.Binding;
-import javax.naming.Name;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
@@ -50,64 +47,41 @@ import javax.naming.directory.BasicAttributes;
 import org.apache.commons.beanutils.PropertyUtils;
 
 /**
- * <a href="BasicPortalToLDAPConverter.java.html}"><b><i>View Source</i></b></a>
+ * <a href="BasePortalToLDAPConverter.java.html}"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
-public class BasicPortalToLDAPConverter implements PortalToLDAPConverter {
+public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 
-	public BasicPortalToLDAPConverter() {
-		//always reserve the screenName and password attributes for special
-		//handling
-		_reservedUserFields.put(
-			LDAPConverterKeys.USER_SCREEN_NAME,
-			LDAPConverterKeys.USER_SCREEN_NAME);
-		_reservedUserFields.put(
-			LDAPConverterKeys.USER_PASSWORD,
-			LDAPConverterKeys.USER_PASSWORD);
-		_reservedUserFields.put("group", "group");
-
-		//set the default mapping for a user's DN to be the screenName
-		//this can be overriden from Spring.
-		_userDNFieldName = LDAPConverterKeys.USER_SCREEN_NAME;
+	public BasePortalToLDAPConverter() {
+		_reservedUserFieldNames.put(
+			UserConverterKeys.GROUP, UserConverterKeys.GROUP);
+		_reservedUserFieldNames.put(
+			UserConverterKeys.PASSWORD, UserConverterKeys.PASSWORD);
+		_reservedUserFieldNames.put(
+			UserConverterKeys.SCREEN_NAME, UserConverterKeys.SCREEN_NAME);
 	}
 
 	public Modifications getLDAPContactModifications(
-			Name name, Properties contactMappings,
-			Contact contact, Binding existing)
+			Contact contact, Properties contactMappings)
 		throws Exception {
 
 		if (contactMappings.isEmpty()) {
 			return null;
 		}
 
-		Modifications modifications = getModifications(
-			contact, contactMappings, _reservedContactFields);
-
-		return modifications;
+		return getModifications(
+			contact, contactMappings, _reservedContactFieldNames);
 	}
 
-	/**
-	 * Creates the LDAP Attributes necessary to initially create user.
-	 * This method does not update all the attributes of the user.
-	 * It requires the caller to update additional attributes via an
-	 * invocation of getLDAPUserModifications method.
-	 *
-	 * @param name
-	 * @param userMappings
-	 * @param user
-	 * @param ldapServerId
-	 * @return
-	 * @throws com.liferay.portal.SystemException
-	 */
 	public Attributes getLDAPUserAttributes(
-			Name name, Properties userMappings, User user, long ldapServerId)
+			long ldapServerId, User user, Properties userMappings)
 		throws SystemException {
 
-		Attributes attrs = new BasicAttributes(true);
+		Attributes attributes = new BasicAttributes(true);
 
-		//	objectClass
-        Attribute objectClass = new BasicAttribute(_USER_OBJECT_CLASS);
+		Attribute objectClass = new BasicAttribute(_USER_OBJECT_CLASS);
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
@@ -120,49 +94,43 @@ public class BasicPortalToLDAPConverter implements PortalToLDAPConverter {
 			objectClass.add(defaultObjectClasses[i]);
 		}
 
-		attrs.put(objectClass);
-
-		//	standard attributes
-		addAttributeMapping(
-				userMappings.getProperty(LDAPConverterKeys.USER_FIRST_NAME),
-				user.getFirstName(), attrs);
+		attributes.put(objectClass);
 
 		addAttributeMapping(
-				userMappings.getProperty(LDAPConverterKeys.USER_LAST_NAME),
-				user.getLastName(), attrs);
-
+			userMappings.getProperty(UserConverterKeys.FIRST_NAME),
+			user.getFirstName(), attributes);
 		addAttributeMapping(
-				userMappings.getProperty(LDAPConverterKeys.USER_PASSWORD),
-				user.getPasswordUnencrypted(), attrs);
-
+			userMappings.getProperty(UserConverterKeys.LAST_NAME),
+			user.getLastName(), attributes);
 		addAttributeMapping(
-				userMappings.getProperty(LDAPConverterKeys.USER_EMAIL_ADDRESS),
-				user.getEmailAddress(), attrs);
+			userMappings.getProperty(UserConverterKeys.PASSWORD),
+			user.getPasswordUnencrypted(), attributes);
+		addAttributeMapping(
+			userMappings.getProperty(UserConverterKeys.EMAIL_ADDRESS),
+			user.getEmailAddress(), attributes);
 
-		return attrs;
+		return attributes;
 	}
-
 	public Modifications getLDAPUserModifications(
-		Name name, Properties userMappings, User user, Binding existing)
+			User user, Properties userMappings)
 		throws Exception {
 
 		Modifications modifications = getModifications(
-			user, userMappings, _reservedUserFields);
+			user, userMappings, _reservedUserFieldNames);
 
 		if (user.isPasswordModified() &&
 			Validator.isNotNull(user.getPasswordUnencrypted())) {
 
 			addModificationItem(
-					userMappings.getProperty(LDAPConverterKeys.USER_PASSWORD),
-					user.getPasswordUnencrypted(), modifications);
+				userMappings.getProperty(UserConverterKeys.PASSWORD),
+				user.getPasswordUnencrypted(), modifications);
 		}
 
 		return modifications;
 	}
 
 	public String getUserDNName(
-			long ldapServerId, long companyId,
-			User user, Properties userMappings)
+			long ldapServerId, User user, Properties userMappings)
 		throws Exception {
 
 		StringBundler sb = new StringBundler(5);
@@ -173,63 +141,47 @@ public class BasicPortalToLDAPConverter implements PortalToLDAPConverter {
 		sb.append(StringPool.EQUAL);
 		sb.append(PropertyUtils.getProperty(user, _userDNFieldName));
 		sb.append(StringPool.COMMA);
-		sb.append(PortalLDAPUtil.getUsersDN(ldapServerId, companyId));
+		sb.append(PortalLDAPUtil.getUsersDN(ldapServerId, user.getCompanyId()));
 
 		return sb.toString();
 	}
 
-	/**
-	 * Configure additional reserved fields on the Contact object that will
-	 * not be synchronized from LDAP.  This value may be modified via the
-	 * ldap-spring.xml configuration file.
-	 *
-	 * @param fieldNames
-	 */
-	public void setContactReservedFields(List<String> fieldNames) {
-		for (String fieldName : fieldNames) {
-			_reservedContactFields.put(fieldName, fieldName);
+	public void setContactReservedFieldNames(
+		List<String> reservedContactFieldNames) {
+
+		for (String reservedContactFieldName : reservedContactFieldNames) {
+			_reservedContactFieldNames.put(
+				reservedContactFieldName, reservedContactFieldName);
 		}
 	}
 
-	/**
-	 * Configure the User attribute to be used as the User's DN field.  This
-	 * is "screenName" by default.  This value may be modified via the
-	 * ldap-spring.xml configuration file.
-	 *
-	 * @param
-	 */
-	public void setUserDNFieldName(String fieldName) {
-		_userDNFieldName = fieldName;
+	public void setUserDNFieldName(String userDNFieldName) {
+		_userDNFieldName = userDNFieldName;
 	}
 
-	/**
-	 * Configure additional reserved fields on the User object that will
-	 * not be synchronized from LDAP.This value may be modified via the
-	 * ldap-spring.xml configuration file.
-	 *
-	 * @param fieldNames
-	 */
-	public void setUserReservedFields(List<String> fieldNames) {
-		for (String fieldName : fieldNames) {
-			_reservedUserFields.put(fieldName, fieldName);
+	public void setUserReservedFieldNames(List<String> reservedUserFieldNames) {
+		for (String reservedUserFieldName : reservedUserFieldNames) {
+			_reservedUserFieldNames.put(
+				reservedUserFieldName, reservedUserFieldName);
 		}
 	}
 
 	protected void addAttributeMapping(
-			String attributeName, String attributeValue, Attributes attrs) {
+		String attributeName, String attributeValue, Attributes attributes) {
 
 		if (Validator.isNotNull(attributeName) &&
-				Validator.isNotNull(attributeValue)) {
-			attrs.put(attributeName, attributeValue);
+			Validator.isNotNull(attributeValue)) {
+
+			attributes.put(attributeName, attributeValue);
 		}
 	}
-
 	protected void addModificationItem(
-			String attributeName, String attributeValue,
-			Modifications modifications) {
+		String attributeName, String attributeValue,
+		Modifications modifications) {
 
 		if (Validator.isNotNull(attributeName) &&
-				Validator.isNotNull(attributeValue)) {
+			Validator.isNotNull(attributeValue)) {
+
 			modifications.addItem(attributeName, attributeValue);
 		}
 	}
@@ -241,7 +193,6 @@ public class BasicPortalToLDAPConverter implements PortalToLDAPConverter {
 		Modifications modifications = Modifications.getInstance();
 
 		for (Map.Entry<Object, Object> entry : objectMappings.entrySet()) {
-
 			String fieldName = (String)entry.getKey();
 
 			if (reservedFieldNames.containsKey(fieldName)) {
@@ -263,8 +214,9 @@ public class BasicPortalToLDAPConverter implements PortalToLDAPConverter {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to map field: " + fieldName +
-						" of class " + object.getClass(), e);
+						"Unable to map field " + fieldName + " to class " +
+							object.getClass(),
+						e);
 				}
 			}
 		}
@@ -273,16 +225,17 @@ public class BasicPortalToLDAPConverter implements PortalToLDAPConverter {
 	}
 
 	private static final String _DEFAULT_DN = "cn";
+
 	private static final String _USER_OBJECT_CLASS = "objectclass";
 
-	private static Log _log = LogFactoryUtil.getLog(
-		BasicLDAPToPortalConverter.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(BasePortalToLDAPConverter.class);
 
-	private Map<String, String> _reservedContactFields =
+	private Map<String, String> _reservedContactFieldNames =
+		new HashMap<String, String>();
+	private Map<String, String> _reservedUserFieldNames =
 		new HashMap<String, String>();
 
-	private Map<String, String> _reservedUserFields =
-		new HashMap<String, String>();
+	private String _userDNFieldName = UserConverterKeys.SCREEN_NAME;
 
-	private String _userDNFieldName;
 }

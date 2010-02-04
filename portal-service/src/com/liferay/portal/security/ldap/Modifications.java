@@ -22,25 +22,55 @@
 
 package com.liferay.portal.security.ldap;
 
-import java.util.Properties;
+import com.liferay.portal.kernel.util.Validator;
 
-import javax.naming.directory.Attributes;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.directory.BasicAttribute;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.ModificationItem;
 
 /**
- * <a href="LDAPToPortalConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="Modifications.java.html"><b><i>View Source</i></b></a>
  *
- * @author Edward Han
+ * @author Amos Fong
  * @author Brian Wing Shun Chan
  */
-public interface LDAPToPortalConverter {
+public class Modifications {
 
-	public LDAPGroup importLDAPGroup(
-			long companyId, Attributes attributes, Properties groupMappings)
-		throws Exception;
+	public static Modifications getInstance() {
+		return new Modifications();
+	}
 
-	public LDAPUser importLDAPUser(
-			long companyId, Attributes attributes, Properties userMappings,
-			Properties contactMappings, String password)
-		throws Exception;
+	public ModificationItem addItem(
+		int modificationOp, String id, String value) {
+
+		BasicAttribute basicAttribute = new BasicAttribute(id);
+
+		if (Validator.isNotNull(value)) {
+			basicAttribute.add(value);
+		}
+
+		ModificationItem item = new ModificationItem(
+			modificationOp, basicAttribute);
+
+		_items.add(item);
+
+		return item;
+	}
+
+	public ModificationItem addItem(String id, String value) {
+		return addItem(DirContext.REPLACE_ATTRIBUTE, id, value);
+	}
+
+	public ModificationItem[] getItems() {
+		return _items.toArray(new ModificationItem[_items.size()]);
+	}
+
+	private Modifications() {
+	}
+
+	private List<ModificationItem> _items = new ArrayList<ModificationItem>();
 
 }

@@ -47,4 +47,5 @@ public class PortalLDAPExporterUtil {
 	}
 
 	private static PortalLDAPExporter _portalLDAPExporter;
+
 }

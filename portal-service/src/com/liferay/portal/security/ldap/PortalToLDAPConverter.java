@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,39 +25,33 @@ package com.liferay.portal.security.ldap;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.ldap.Modifications;
 
 import java.util.Properties;
 
-import javax.naming.Binding;
-import javax.naming.Name;
 import javax.naming.directory.Attributes;
 
 /**
- * <a href="PortalToLDAPConverter.java.html}"><b><i>View Source</i></b></a>
- *
- * Provides the ability to customize what attributes are retrieved from
- * User and Contacts and synchronized with LDAP
+ * <a href="PortalToLDAPConverter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
 public interface PortalToLDAPConverter {
-	public String getUserDNName(
-			long ldapServerId, long companyId, User user,
-			Properties userMappings)
+
+	public Modifications getLDAPContactModifications(
+			Contact contact, Properties contactMappings)
 		throws Exception;
 
 	public Attributes getLDAPUserAttributes(
-			Name name, Properties userMappings, User user, long ldapServerId)
+			long ldapServerId, User user, Properties userMappings)
 		throws SystemException;
 
 	public Modifications getLDAPUserModifications(
-			Name name, Properties userMappings,
-			User user, Binding existing)
+			User user, Properties userMappings)
 		throws Exception;
 
-	public Modifications getLDAPContactModifications(
-			Name name, Properties contactMappings, Contact contact,
-			Binding existing)
+	public String getUserDNName(
+			long ldapServerId, User user, Properties userMappings)
 		throws Exception;
+
 }

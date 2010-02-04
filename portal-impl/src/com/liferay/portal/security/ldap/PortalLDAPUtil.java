@@ -25,7 +25,9 @@ package com.liferay.portal.security.ldap;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -338,21 +340,18 @@ public class PortalLDAPUtil {
 			String fullDistinguishedName)
 		throws Exception {
 
-		Properties userMappings = LDAPSettingsUtil.getAllUserContactMappings(
+		Properties userMappings = LDAPSettingsUtil.getUserMappings(
+			ldapServerId, companyId);
+		Properties contactMappings = LDAPSettingsUtil.getContactMappings(
 			ldapServerId, companyId);
 
-		List<String> mappedUserAttributeIds =
-			new ArrayList<String>(userMappings.size());
+		PropertiesUtil.merge(userMappings, contactMappings);
 
-		for (Object mapping : userMappings.keySet()) {
-			mappedUserAttributeIds.add(
-				userMappings.getProperty((String) mapping));
-		}
+		String[] mappedUserAttributeIds = ArrayUtil.toStringArray(
+			userMappings.values().toArray(new Object[userMappings.size()]));
 
 		return _getAttributes(
-			ldapContext, fullDistinguishedName,
-			mappedUserAttributeIds.toArray(
-				new String[mappedUserAttributeIds.size()]));
+			ldapContext, fullDistinguishedName, mappedUserAttributeIds);
 	}
 
 	public static List<SearchResult> getUsers(

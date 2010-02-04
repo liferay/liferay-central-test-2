@@ -44,30 +44,35 @@ import java.util.Properties;
 import javax.naming.directory.Attributes;
 
 /**
- * <a href="BasicLDAPToPortalConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseLDAPToPortalConverter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Edward Han
+ * @author Brian Wing Shun Chan
  */
-public class BasicLDAPToPortalConverter implements LDAPToPortalConverter {
+public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 
-	public LDAPUserGroupHolder importLDAPGroup(
-		Attributes attributes, Properties groupMappings, long companyId)
+	public LDAPGroup importLDAPGroup(
+			long companyId, Attributes attributes, Properties groupMappings)
 		throws Exception {
 
 		String groupName = LDAPUtil.getAttributeValue(
-			attributes, groupMappings.getProperty("groupName")).toLowerCase();
+			attributes, groupMappings, GroupConverterKeys.GROUP_NAME).
+				toLowerCase();
 		String description = LDAPUtil.getAttributeValue(
-			attributes, groupMappings.getProperty("description"));
+			attributes, groupMappings, GroupConverterKeys.DESCRIPTION);
 
-		LDAPUserGroupHolder userGroupHolder = new LDAPUserGroupHolder(
-			companyId, groupName, description);
+		LDAPGroup ldapGroup = new LDAPGroup();
 
-		return userGroupHolder;
+		ldapGroup.setCompanyId(companyId);
+		ldapGroup.setDescription(description);
+		ldapGroup.setGroupName(groupName);
+
+		return ldapGroup;
 	}
 
-	public LDAPUserHolder importLDAPUser(
-		Attributes attributes, Properties userMappings,
-		Properties contactMappings, long companyId, String password)
+	public LDAPUser importLDAPUser(
+			long companyId, Attributes attributes, Properties userMappings,
+			Properties contactMappings, String password)
 		throws Exception {
 
 		boolean autoPassword = false;
@@ -83,28 +88,22 @@ public class BasicLDAPToPortalConverter implements LDAPToPortalConverter {
 		boolean autoScreenName = false;
 
 		String screenName = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty(
-					LDAPConverterKeys.USER_SCREEN_NAME)).toLowerCase();
+			attributes, userMappings, UserConverterKeys.SCREEN_NAME).
+				toLowerCase();
 		String emailAddress = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty(
-				LDAPConverterKeys.USER_EMAIL_ADDRESS));
+			attributes, userMappings, UserConverterKeys.EMAIL_ADDRESS);
 		String openId = StringPool.BLANK;
 		Locale locale = LocaleUtil.getDefault();
-
 		String firstName = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty(
-				LDAPConverterKeys.USER_FIRST_NAME));
+			attributes, userMappings, UserConverterKeys.FIRST_NAME);
 		String middleName = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty(
-				LDAPConverterKeys.USER_MIDDLE_NAME));
+			attributes, userMappings, UserConverterKeys.MIDDLE_NAME);
 		String lastName = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty(
-				LDAPConverterKeys.USER_LAST_NAME));
+			attributes, userMappings, UserConverterKeys.LAST_NAME);
 
 		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
 			String fullName = LDAPUtil.getAttributeValue(
-				attributes,
-					userMappings.getProperty(LDAPConverterKeys.USER_FULL_NAME));
+				attributes, userMappings, UserConverterKeys.FULL_NAME);
 
 			String[] names = LDAPUtil.splitFullName(fullName);
 
@@ -120,8 +119,7 @@ public class BasicLDAPToPortalConverter implements LDAPToPortalConverter {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = LDAPUtil.getAttributeValue(
-			attributes,
-				userMappings.getProperty(LDAPConverterKeys.USER_JOB_TITLE));
+			attributes, userMappings, UserConverterKeys.JOB_TITLE);
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
@@ -148,36 +146,48 @@ public class BasicLDAPToPortalConverter implements LDAPToPortalConverter {
 		}
 
 		User user = new UserImpl();
-		Contact contact = new ContactImpl();
 
-		// TBD Need to retrieve other mapped attributes.....
-		//	Mapped attributes
 		user.setCompanyId(companyId);
+		user.setEmailAddress(emailAddress);
+		user.setFirstName(firstName);
+		user.setJobTitle(jobTitle);
+		user.setLanguageId(locale.getLanguage());
+		user.setLastName(lastName);
+		user.setMiddleName(middleName);
+		user.setOpenId(openId);
 		user.setPasswordUnencrypted(password);
 		user.setScreenName(screenName);
-		user.setEmailAddress(emailAddress);
-		user.setOpenId(openId);
-		user.setLanguageId(locale.getLanguage());
-		user.setFirstName(firstName);
-		user.setMiddleName(middleName);
-		user.setLastName(lastName);
-		user.setJobTitle(jobTitle);
 
-		//	Contact values
-		contact.setMale(male);
+		Contact contact = new ContactImpl();
+
 		contact.setBirthday(
 			CalendarFactoryUtil.getCalendar(
 				birthdayYear, birthdayMonth, birthdayDay).getTime());
-		contact.setSuffixId(suffixId);
+		contact.setMale(male);
 		contact.setPrefixId(prefixId);
+		contact.setSuffixId(suffixId);
 
-		return new LDAPUserHolder(
-			user, contact, serviceContext, autoPassword,
-			updatePassword, creatorUserId,
-			passwordReset, autoScreenName, groupIds, organizationIds, roleIds,
-			userGroupRoles, userGroupIds, sendEmail);
+		LDAPUser ldapUser = new LDAPUser();
+
+		ldapUser.setAutoPassword(autoPassword);
+		ldapUser.setAutoScreenName(autoScreenName);
+		ldapUser.setContact(contact);
+		ldapUser.setCreatorUserId(creatorUserId);
+		ldapUser.setGroupIds(groupIds);
+		ldapUser.setOrganizationIds(organizationIds);
+		ldapUser.setPasswordReset(passwordReset);
+		ldapUser.setRoleIds(roleIds);
+		ldapUser.setSendEmail(sendEmail);
+		ldapUser.setServiceContext(serviceContext);
+		ldapUser.setUpdatePassword(updatePassword);
+		ldapUser.setUser(user);
+		ldapUser.setUserGroupIds(userGroupIds);
+		ldapUser.setUserGroupRoles(userGroupRoles);
+
+		return ldapUser;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		BasicPortalToLDAPConverter.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(BaseLDAPToPortalConverter.class);
+
 }
