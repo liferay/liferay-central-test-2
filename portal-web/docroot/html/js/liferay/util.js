@@ -1013,9 +1013,10 @@ Liferay.Util = {
 			'node',
 			function(A) {
 				var newBox = [];
+				var options = box.all('option');
 
-				for (var i = 0; i < box.length; i++) {
-					newBox[i] = [box[i].value, box[i].text];
+				for (var i = 0; i < options.size(); i++) {
+					newBox[i] = [options.item(i).val(), options.item(i).text()];
 				}
 
 				newBox.sort(Liferay.Util.sortByAscending);
