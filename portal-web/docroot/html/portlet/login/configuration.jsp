@@ -115,6 +115,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 							<aui:input name="<%= editorParam %>" type="hidden" />
 						</aui:field-wrapper>
 					</aui:fieldset>
+
 					<div class="definition-of-terms">
 						<h4><liferay-ui:message key="definition-of-terms" /></h4>
 

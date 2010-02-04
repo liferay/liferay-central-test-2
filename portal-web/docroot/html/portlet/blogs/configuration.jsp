@@ -86,7 +86,6 @@ else if (tabs2.equals("entry-updated-email")) {
 				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" value="<%= emailFromAddress %>" />
 			</aui:fieldset>
 
-
 			<div class="definition-of-terms">
 				<h4><liferay-ui:message key="definition-of-terms" /></h4>
 

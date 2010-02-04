@@ -143,7 +143,6 @@ else if (tabs2.equals("page-updated-email")) {
 					</dd>
 				</dl>
 			</div>
-
 		</c:when>
 		<c:when test='<%= tabs2.startsWith("page-") %>'>
 			<aui:fieldset>
