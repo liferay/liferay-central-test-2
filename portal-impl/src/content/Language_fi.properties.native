@@ -1341,6 +1341,7 @@ edit-vocabulary-permissions=Muokkaa sanaston oikeuksia
 edit-web-content=Muokkaa web artikkelia
 edit-wikis-for-group=Muokka Wikejä ryhmälle:
 edit-wikis=Muokkaa Wikejä
+edit-x-x=Edit <span class="{0}">{1}</span> (Automatic Copy)
 edit-xsd=Muokkaa XML-skeema määritystä
 edit-xsl-template=Muokkaa XSL-pohjaa
 edit=Muokkaa
@@ -2699,6 +2700,7 @@ primary-email=Ensisijainen sähköpostiosoite
 primary=Ensisijainen
 primitives=Primitiivit
 principal=Prinsipaali
+print-x-x=Print <span class="{0}">{1}</span> (Automatic Copy)
 print=Tulosta
 priority=Prioriteetti
 private-node=Yksityinen solmu
@@ -3898,7 +3900,6 @@ version=Versio
 vertical-banner=Pysty banneri
 vertical-bar=Pystypalkki
 vertical=Pystysuunta
-view-album=Katso albumi
 view-all=Katso kaikki
 view-blog=Katso blogi
 view-blogs=Katso blogit
@@ -4057,6 +4058,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> ei voitu poistaa täst
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> ei voitu poistaa tästä sijainnista.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> ei voitu poistaa tästä organisaatiosta.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
+x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
 x-days={0} päivää
 x-disables-the-minimum-order-requirement={0} kytkee pois minimitilauksen vaatimuksen.
 x-does-not-have-any-commits-to-the-svn-repository={0}:lla ei ole yhtään committia SVN:ään.

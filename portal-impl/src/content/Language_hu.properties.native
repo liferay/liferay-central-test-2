@@ -1340,6 +1340,7 @@ edit-vocabulary-permissions=Szótár jogosultságok szerkesztése
 edit-web-content=Webes tartalom szerkesztése
 edit-wikis-for-group=Wikik szerkesztése a csoporthoz:
 edit-wikis=Wikik szerkesztése
+edit-x-x=Edit <span class="{0}">{1}</span> (Automatic Copy)
 edit-xsd=XML séma definíció szerkesztése
 edit-xsl-template=XSL sablon szerkesztése
 edit=Szerkesztés
@@ -2700,6 +2701,7 @@ primary-email=Elsődleges e-mail
 primary=Elsődleges
 primitives=Primitívek
 principal=Elöljáró
+print-x-x=Print <span class="{0}">{1}</span> (Automatic Copy)
 print=Nyomtatás
 priority=Prioritás
 private-node=Privát csomópont
@@ -3900,7 +3902,6 @@ version=Verzió
 vertical-banner=Függőleges banner
 vertical-bar=Függőleges vonal
 vertical=Függőleges
-view-album=Album megjelenítése
 view-all=Összes megjelenítése
 view-blog=Blog megjelenítése
 view-blogs=Blogok megjelenítése
@@ -4059,6 +4060,7 @@ x-cannot-be-unassociated-from-this-community=<i>{0}</i> nem távolítható el a 
 x-cannot-be-unassociated-from-this-location=<i>{0}</i> nem távolítható el a helyről.
 x-cannot-be-unassociated-from-this-organization=<i>{0}</i> nem távolítható el a szervezetből.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
+x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
 x-days={0} nap
 x-disables-the-minimum-order-requirement={0} megszünteti a minimális rendelési követelményt.
 x-does-not-have-any-commits-to-the-svn-repository={0} nem végzett változtatást az SVN adattáron.

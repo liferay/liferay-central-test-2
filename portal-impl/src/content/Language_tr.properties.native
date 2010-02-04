@@ -1350,6 +1350,7 @@ edit-vocabulary-permissions=Sözcük İzinleri Düzenle
 edit-web-content=Gündem İçeriği Düzenle
 edit-wikis-for-group=Gruba Göre Wikileri Düzenle:
 edit-wikis=Wikileri Düzenle
+edit-x-x=Edit <span class="{0}">{1}</span> (Automatic Copy)
 edit-xsd=XML Şema Tanımını Düzenle
 edit-xsl-template=XSL Şablonunu Düzenle
 edit=Düzenle
@@ -2735,6 +2736,7 @@ primary-email=Birincil e-posta
 primary=Birincil
 primitives=Temel
 principal=Başlıca/Temel
+print-x-x=Print <span class="{0}">{1}</span> (Automatic Copy)
 print=Baskıya yolla
 priority=Öncelik
 private-node=Özel Düğüm
@@ -3946,7 +3948,6 @@ version=Sürüm
 vertical-banner=Düşey Manşet
 vertical-bar=Düşey Çubuk
 vertical=Düşey
-view-album=Albüm Görüntüle
 view-all=Hepsini Görüntüle
 view-blog=Blog Görüntüle
 view-blogs=Blogları Görüntüle
@@ -4107,6 +4108,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> bu topluluktan çıkar
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> bu yerden çıkarılamaz.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> bu organizasyondan çıkarılamaz.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
+x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
 x-days={0} gün
 x-disables-the-minimum-order-requirement={0} disables the minimum order requirement.
 x-does-not-have-any-commits-to-the-svn-repository={0}'ın SVN deposuna herhangi bir gönderimi yok..

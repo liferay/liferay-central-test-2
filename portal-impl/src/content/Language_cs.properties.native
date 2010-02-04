@@ -1435,6 +1435,7 @@ edit-vocabulary-permissions=Upravit práva slovníku
 edit-web-content=Upravit Webový obsah
 edit-wikis-for-group=Změna wiki pro skupinu:
 edit-wikis=Změna wiki
+edit-x-x=Edit <span class="{0}">{1}</span> (Automatic Copy)
 edit-xsd=Změna definice XML schématu
 edit-xsl-template=Změna XSL šablony
 edit=Upravit
@@ -2900,6 +2901,7 @@ primary-email=Hlavní e-mail
 primary=Primární
 primitives=Primitiva
 principal=Principy
+print-x-x=Print <span class="{0}">{1}</span> (Automatic Copy)
 print=Tisk
 priority=Priorita
 private-node=Privátní uzel
@@ -4184,7 +4186,6 @@ version=Verze
 vertical-banner=Svislý banner
 vertical-bar=Vertikální stupnice
 vertical=Vertikální
-view-album=Zobrazit album
 view-all=Zobrazit vše
 view-blog=Zobrazit blog
 view-blogs=Zobrazit blogy
@@ -4353,6 +4354,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> nelze odstranit z tét
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> nelze odstranit z tohoto umístění.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> nelze odstranit z této organizace.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
+x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
 x-days={0} dní
 x-disables-the-minimum-order-requirement={0} vypni požadavek minimální objednávky.
 x-does-not-have-any-commits-to-the-svn-repository={0} nemá žádné commity do repozitáře SVN.

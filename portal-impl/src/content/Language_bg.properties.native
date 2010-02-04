@@ -1304,6 +1304,7 @@ edit-vocabulary-permissions=Редактиране на права за речн
 edit-web-content=Редактиране на уеб съдържание
 edit-wikis-for-group=Редактиране на Wiki за група
 edit-wikis=Редактиране на Wiki
+edit-x-x=Edit <span class="{0}">{1}</span> (Automatic Copy)
 edit-xsd=Редактиране на XML дефиниции
 edit-xsl-template=Редактиране на XSL шаблон
 edit=Редактиране
@@ -2608,6 +2609,7 @@ primary-email=Основна електронна поща
 primary=Основен
 primitives=Примитиви
 principal=Основен
+print-x-x=Print <span class="{0}">{1}</span> (Automatic Copy)
 print=Печат
 priority=Приоритет
 private-node=Частен възел
@@ -3773,7 +3775,6 @@ version=Версия
 vertical-banner=Вертикален банер
 vertical-bar=Вертикална лента
 vertical=Вертикален
-view-album=Показване на албум
 view-all=Показване на всички
 view-blog=Показване на блог
 view-blogs=Показване на блогове
@@ -3929,6 +3930,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> не може да б�
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> не може да бъде деасоцииран от това местоположение.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> не може да бъде деасоцииран от тази организация.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
+x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
 x-days={0} дена
 x-disables-the-minimum-order-requirement={0} отменя минималното изискване за поръчка.
 x-does-not-have-any-commits-to-the-svn-repository={0} няма никакви качвания в SVN хранилището.

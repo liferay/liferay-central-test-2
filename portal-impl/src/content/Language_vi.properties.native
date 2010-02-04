@@ -552,6 +552,7 @@ edit-users-for-task=Thay đổi người dùng cho công việc:
 edit-users=Thay đổi người dùng
 edit-wikis-for-group=Thay đổi Wikis cho nhóm:
 edit-wikis=Thay đổi Wikis
+edit-x-x=Edit <span class="{0}">{1}</span> (Automatic Copy)
 edit-xsl-template=Thay đổi mẫu XSL
 edit=Thay đổ
 educational=Giáo dục
@@ -1112,6 +1113,7 @@ prices=Các giá
 primary-address=Địa chỉ  chính
 primary-contact=Liên lạc chính
 primary-email=Hòm thư chính
+print-x-x=Print <span class="{0}">{1}</span> (Automatic Copy)
 print=In
 priority=Ưu tiên
 private-node=Nút riêng tư
@@ -1646,6 +1648,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> cannot be unassociated
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> cannot be unassociated from this location.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> cannot be unassociated from this organization.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
+x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
 x-days={0} Days
 x-disables-the-minimum-order-requirement={0} tắt yêu cầu đặt hàng nhỏ nhất .
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.

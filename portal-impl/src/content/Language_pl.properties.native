@@ -1337,6 +1337,7 @@ edit-vocabulary-permissions=Edytuj uprawnienia słownika
 edit-web-content=Edytuj zawartość stron
 edit-wikis-for-group=Edytuj wiki dla grupy:
 edit-wikis=Edytuj wiki
+edit-x-x=Edit <span class="{0}">{1}</span> (Automatic Copy)
 edit-xsd=Edytuj definicję XML schematu
 edit-xsl-template=Edytuj szablon XSL
 edit=Edycja
@@ -2691,6 +2692,7 @@ primary-email=Główny email
 primary=Główny
 primitives=Podstawowa
 principal=DN administratora
+print-x-x=Print <span class="{0}">{1}</span> (Automatic Copy)
 print=Drukuj
 priority=Priorytet
 private-node=Węzeł prywatny
@@ -4024,6 +4026,7 @@ x-cannot-be-unassociated-from-this-community=Skojarzenie <em>{0}</em> ze tą spo
 x-cannot-be-unassociated-from-this-location=Skojarzenie <em>{0}</em> z tą lokalizacją nie może zostać usunięte.
 x-cannot-be-unassociated-from-this-organization=Skojarzenie <em>{0}</em> z tą organizacją nie może zostać usunięte.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
+x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
 x-days={0} dni
 x-disables-the-minimum-order-requirement={0} wyłącza wymóg minimalnego zamówienia.
 x-does-not-have-any-commits-to-the-svn-repository={0} Nie ma żadnych zatwierdzeń w repozytorium SVN.

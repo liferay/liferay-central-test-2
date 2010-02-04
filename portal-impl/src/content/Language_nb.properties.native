@@ -1051,6 +1051,7 @@ edit-users-for-task=Redigere brukere for oppgave:
 edit-users=Redigere brukere
 edit-wikis-for-group=Redigere Wikis for gruppe:
 edit-wikis=Redigere Wikis
+edit-x-x=Edit <span class="{0}">{1}</span> (Automatic Copy)
 edit-xsd=Redigere XML definisjon
 edit-xsl-template=Redigere XSL mal
 edit=Redigere
@@ -2122,6 +2123,7 @@ primary-contact=Primær kontakt
 primary-email=Primær e-post
 primary=Primær
 principal=Systembruker
+print-x-x=Print <span class="{0}">{1}</span> (Automatic Copy)
 print=Skriv ut
 priority=Prioritet
 private-node=Personlig "node"
@@ -3088,6 +3090,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> kan ikke være uten ti
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> kan ikke være uten tilknyttelse fra dette stedet
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> kan ikke være uten tilknyttelse fra denne organisasjonen
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
+x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
 x-days={0} Days
 x-disables-the-minimum-order-requirement={0} tar bort det minimale bestillingskravet
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.

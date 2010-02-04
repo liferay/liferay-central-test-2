@@ -1329,6 +1329,7 @@ edit-users=Изменить пользователей
 edit-vocabulary-permissions=Редактировать разрешения для словаря
 edit-wikis-for-group=Изменить Wikis для группы:
 edit-wikis=Изменить  Wikis
+edit-x-x=Edit <span class="{0}">{1}</span> (Automatic Copy)
 edit-xsd=Изменить XML Schema Definition
 edit-xsl-template=Изменить XSL Template
 edit=Изменить
@@ -2672,6 +2673,7 @@ primary-email=Основной email
 primary=Основной
 primitives=Примитивы
 principal=Доверитель
+print-x-x=Print <span class="{0}">{1}</span> (Automatic Copy)
 print=Печать
 priority=Приоритет
 private-node=Частный узел
@@ -3978,6 +3980,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> не может быт
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> не может быть выведен из этого местоположения.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> не может быть выведен из этой организации.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
+x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
 x-days={0} дня(дней)
 x-disables-the-minimum-order-requirement={0} отменяет требование минимального заказа.
 x-does-not-have-any-commits-to-the-svn-repository=У {0} нет фиксация в репозитарий SVN.
