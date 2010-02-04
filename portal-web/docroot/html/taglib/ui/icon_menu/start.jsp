@@ -39,7 +39,7 @@ boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("lifer
 		<ul class="lfr-component lfr-actions <%= align %> <%= cssClass %>">
 
 			<li class="lfr-trigger">
-				<strong><span><liferay-ui:message key="<%= message %>" /></span></strong>
+				<strong><a href="javascript:;"><liferay-ui:message key="<%= message %>" /></a></strong>
 	</c:otherwise>
 </c:choose>
 

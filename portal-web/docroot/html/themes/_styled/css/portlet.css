@@ -484,11 +484,11 @@ body.portlet {
 	background: none;
 }
 
-.lfr-actions .lfr-trigger strong span {
+.lfr-actions .lfr-trigger strong a {
 	background: url(../images/common/action.png) no-repeat 5px 50%;
 }
 
-.lfr-actions.left .lfr-trigger strong span {
+.lfr-actions.left .lfr-trigger strong a {
 	background: url(../images/common/action_right.png) no-repeat 98% 50%;
 }
 
@@ -531,7 +531,7 @@ body.portlet {
 	padding: 1px;
 }
 
-.lfr-actions.portlet-options .lfr-trigger strong span {
+.lfr-actions.portlet-options .lfr-trigger strong a {
 	background-image: url(../images/portlet/options.png);
 	background-position: 0 0;
 	display: block;
@@ -541,7 +541,7 @@ body.portlet {
 	width: 16px;
 }
 
-.visible.portlet-options .lfr-trigger strong span {
+.visible.portlet-options .lfr-trigger strong a {
 	background-image: url(../images/portlet/options_selected.png);
 }
 
