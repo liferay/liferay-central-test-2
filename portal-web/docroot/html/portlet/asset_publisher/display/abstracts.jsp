@@ -62,9 +62,9 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 
 <c:if test="<%= show %>">
 	<div class="asset-abstract">
-		<h3 class="asset-title <%= assetRendererFactory.getType() %>">
-			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+		<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
+		<h3 class="asset-title <%= assetRendererFactory.getType() %>">
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(viewURL) %>">
 					<a href="<%= viewURL %>"><%= title %></a>
