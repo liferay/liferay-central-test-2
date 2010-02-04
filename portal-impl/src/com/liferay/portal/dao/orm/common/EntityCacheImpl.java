@@ -198,8 +198,9 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 					if (result == null) {
 						result = StringPool.BLANK;
 					}
-
-					result = _objectToResult(result);
+					else {
+						result = _objectToResult(result);
+					}
 
 					portalCache.put(cacheKey, result);
 
