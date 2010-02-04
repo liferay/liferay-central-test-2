@@ -280,102 +280,78 @@ else if (tabs3.equals("shipping-email")) {
 							<aui:input name="<%= editorParam %>" type="hidden" value="" />
 						</aui:field-wrapper>
 
-						<br />
+						<div class="definition-of-terms">
+							<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-						<strong><liferay-ui:message key="definition-of-terms" /></strong>
-
-						<br /><br />
-
-						<table class="lfr-table">
-						<tr>
-							<td>
-								<strong>[$FROM_ADDRESS$]</strong>
-							</td>
-							<td>
-								<%= emailFromAddress %>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$FROM_NAME$]</strong>
-							</td>
-							<td>
-								<%= emailFromName %>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$ORDER_BILLING_ADDRESS$]</strong>
-							</td>
-							<td>
-								The order billing address
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$ORDER_CURRENCY$]</strong>
-							</td>
-							<td>
-								The order currency
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$ORDER_NUMBER$]</strong>
-							</td>
-							<td>
-								The order ID
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$ORDER_SHIPPING_ADDRESS$]</strong>
-							</td>
-							<td>
-								The order shipping address
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$ORDER_TOTAL$]</strong>
-							</td>
-							<td>
-								The order total
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$PORTAL_URL$]</strong>
-							</td>
-							<td>
-								<%= company.getVirtualHost() %>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$PORTLET_NAME$]</strong>
-							</td>
-							<td>
-								<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$TO_ADDRESS$]</strong>
-							</td>
-							<td>
-								The address of the email recipient
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$TO_NAME$]</strong>
-							</td>
-							<td>
-								The name of the email recipient
-							</td>
-						</tr>
-						</table>
+							<dl>
+								<dt>
+									[$FROM_ADDRESS$]
+								</dt>
+								<dd>
+									<%= emailFromAddress %>
+								</dd>
+								<dt>
+									[$FROM_NAME$]
+								</dt>
+								<dd>
+									<%= emailFromName %>
+								</dd>
+								<dt>
+									[$ORDER_BILLING_ADDRESS$]
+								</dt>
+								<dd>
+									<liferay-ui:message key="the-order-billing-address" />
+								</dd>
+								<dt>
+									[$ORDER_CURRENCY$]
+								</dt>
+								<dd>
+									<liferay-ui:message key="the-order-currency" />
+								</dd>
+								<dt>
+									[$ORDER_NUMBER$]
+								</dt>
+								<dd>
+									<liferay-ui:message key="the-order-id" />
+								</dd>
+								<dt>
+									[$ORDER_SHIPPING_ADDRESS$]
+								</dt>
+								<dd>
+									<liferay-ui:message key="the-order-shipping-address" />
+								</dd>
+								<dt>
+									[$ORDER_TOTAL$]
+								</dt>
+								<dd>
+									<liferay-ui:message key="the-order-total" />
+								</dd>
+								<dt>
+									[$PORTAL_URL$]
+								</dt>
+								<dd>
+									<%= company.getVirtualHost() %>
+								</dd>
+								<dt>
+									[$PORTLET_NAME$]
+								</dt>
+								<dd>
+									<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+								</dd>
+								<dt>
+									[$TO_ADDRESS$]
+								</dt>
+								<dd>
+									<liferay-ui:message key="the-address-of-the-email-recipient" />
+								</dd>
+								<dt>
+									[$TO_NAME$]
+								</dt>
+								<dd>
+									<liferay-ui:message key="the-name-of-the-email-recipient" />
+								</dd>
+							</dl>
+						</div>
 					</aui:fieldset>
 				</c:when>
 				<c:otherwise>

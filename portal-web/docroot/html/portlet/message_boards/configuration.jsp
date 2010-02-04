@@ -105,78 +105,61 @@ else if (tabs2.equals("message-updated-email")) {
 				<aui:input inlineLabel="left" label="html-format" name="emailHtmlFormat" type="checkbox" value="<%= MBUtil.getEmailHtmlFormat(preferences) %>" />
 			</aui:fieldset>
 
-			<strong><liferay-ui:message key="definition-of-terms" /></strong>
+			<div class="definition-of-terms">
+				<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-			<br /><br />
+				<dl>
+					<dt>
+						[$COMPANY_ID$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-id-associated-with-the-message-board" />
+					</dd>
+					<dt>
+						[$COMPANY_MX$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-mx-associated-with-the-message-board" />
+					</dd>
+					<dt>
+						[$COMPANY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-name-associated-with-the-message-board" />
+					</dd>
+					<dt>
+						[$COMMUNITY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-community-name-associated-with-the-message-board" />
+					</dd>
+					<dt>
+						[$MAILING_LIST_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-email-address-of-the-mailing-list" />
+					</dd>
+					<dt>
+						[$MESSAGE_USER_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-email-address-of-the-user-who-added-the-message" />
+					</dd>
+					<dt>
+						[$MESSAGE_USER_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-user-who-added-the-message" />
+					</dd>
+					<dt>
+						[$PORTLET_NAME$]
+					</dt>
+					<dd>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+					</dd>
+				</dl>
+			</div>
 
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<strong>[$COMPANY_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-id-associated-with-the-message-board" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_MX$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-mx-associated-with-the-message-board" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-name-associated-with-the-message-board" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMMUNITY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-community-name-associated-with-the-message-board" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$MAILING_LIST_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-email-address-of-the-mailing-list" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$MESSAGE_USER_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-message" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$MESSAGE_USER_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-user-who-added-the-message" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTLET_NAME$]</strong>
-				</td>
-				<td>
-					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-				</td>
-			</tr>
-			</table>
-
-			<br />
 		</c:when>
 		<c:when test='<%= tabs2.startsWith("message-") %>'>
 			<aui:fieldset>
@@ -203,150 +186,114 @@ else if (tabs2.equals("message-updated-email")) {
 				<aui:input cssClass="lfr-textarea-container" label="signature" name="<%= signatureEditorParam %>" type="textarea" value="<%= signatureEditorContent %>" wrap="soft" />
 			</aui:fieldset>
 
-			<strong><liferay-ui:message key="definition-of-terms" /></strong>
+			<div class="definition-of-terms">
+				<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-			<br /><br />
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<strong>[$CATEGORY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-category-in-which-the-message-has-been-posted" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-id-associated-with-the-message-board" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_MX$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-mx-associated-with-the-message-board" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-name-associated-with-the-message-board" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMMUNITY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-community-name-associated-with-the-message-board" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_ADDRESS$]</strong>
-				</td>
-				<td>
-					<%= emailFromAddress %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_NAME$]</strong>
-				</td>
-				<td>
-					<%= emailFromName %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$MAILING_LIST_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-email-address-of-the-mailing-list" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$MESSAGE_BODY$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-message-body" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$MESSAGE_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-message-id" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$MESSAGE_SUBJECT$]</strong>
-				</td>
-				<td>
-					The message subject
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$MESSAGE_USER_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-message" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$MESSAGE_USER_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-user-who-added-the-message" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTAL_URL$]</strong>
-				</td>
-				<td>
-					<%= company.getVirtualHost() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTLET_NAME$]</strong>
-				</td>
-				<td>
-					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-address-of-the-email-recipient" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-name-of-the-email-recipient" />
-				</td>
-			</tr>
-			</table>
-
-			<br />
+				<dl>
+					<dt>
+						[$CATEGORY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-category-in-which-the-message-has-been-posted" />
+					</dd>
+					<dt>
+						[$COMPANY_ID$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-id-associated-with-the-message-board" />
+					</dd>
+					<dt>
+						[$COMPANY_MX$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-mx-associated-with-the-message-board" />
+					</dd>
+					<dt>
+						[$COMPANY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-name-associated-with-the-message-board" />
+					</dd>
+					<dt>
+						[$COMMUNITY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-community-name-associated-with-the-message-board" />
+					</dd>
+					<dt>
+						[$FROM_ADDRESS$]
+					</dt>
+					<dd>
+						<%= emailFromAddress %>
+					</dd>
+					<dt>
+						[$FROM_NAME$]
+					</dt>
+					<dd>
+						<%= emailFromName %>
+					</dd>
+					<dt>
+						[$MAILING_LIST_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-email-address-of-the-mailing-list" />
+					</dd>
+					<dt>
+						[$MESSAGE_BODY$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-message-body" />
+					</dd>
+					<dt>
+						[$MESSAGE_ID$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-message-id" />
+					</dd>
+					<dt>
+						[$MESSAGE_SUBJECT$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-message-subject" />
+					</dd>
+					<dt>
+						[$MESSAGE_USER_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-email-address-of-the-user-who-added-the-message" />
+					</dd>
+					<dt>
+						[$MESSAGE_USER_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-user-who-added-the-message" />
+					</dd>
+					<dt>
+						[$PORTAL_URL$]
+					</dt>
+					<dd>
+						<%= company.getVirtualHost() %>
+					</dd>
+					<dt>
+						[$PORTLET_NAME$]
+					</dt>
+					<dd>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+					</dd>
+					<dt>
+						[$TO_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-address-of-the-email-recipient" />
+					</dd>
+					<dt>
+						[$TO_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-name-of-the-email-recipient" />
+					</dd>
+				</dl>
+			</div>
 		</c:when>
 		<c:when test='<%= tabs2.equals("thread-priorities") %>'>
 			<div class="portlet-msg-info">

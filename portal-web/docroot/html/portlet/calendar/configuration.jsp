@@ -83,76 +83,60 @@ String editorContent = emailEventReminderBody;
 				</aui:field-wrapper>
 			</aui:fieldset>
 
-			<strong><liferay-ui:message key="definition-of-terms" /></strong>
+			<div class="definition-of-terms">
+				<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-			<br /><br />
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<strong>[$EVENT_START_DATE$]</strong>
-				</td>
-				<td>
-					The event start date
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$EVENT_TITLE$]</strong>
-				</td>
-				<td>
-					The event title
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_ADDRESS$]</strong>
-				</td>
-				<td>
-					<%= HtmlUtil.escape(emailFromAddress) %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_NAME$]</strong>
-				</td>
-				<td>
-					<%= HtmlUtil.escape(emailFromName) %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTAL_URL$]</strong>
-				</td>
-				<td>
-					<%= company.getVirtualHost() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTLET_NAME$]</strong>
-				</td>
-				<td>
-					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_ADDRESS$]</strong>
-				</td>
-				<td>
-					The address of the email recipient
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_NAME$]</strong>
-				</td>
-				<td>
-					The name of the email recipient
-				</td>
-			</tr>
-			</table>
+				<dl>
+					<dt>
+						[$EVENT_START_DATE$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-event-start-date" />
+					</dd>
+					<dt>
+						[$EVENT_TITLE$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-event-title" />
+					</dd>
+					<dt>
+						[$FROM_ADDRESS$]
+					</dt>
+					<dd>
+						<%= HtmlUtil.escape(emailFromAddress) %>
+					</dd>
+					<dt>
+						[$FROM_NAME$]
+					</dt>
+					<dd>
+						<%= HtmlUtil.escape(emailFromName) %>
+					</dd>
+					<dt>
+						[$PORTAL_URL$]
+					</dt>
+					<dd>
+						<%= company.getVirtualHost() %>
+					</dd>
+					<dt>
+						[$PORTLET_NAME$]
+					</dt>
+					<dd>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+					</dd>
+					<dt>
+						[$TO_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-address-of-the-email-recipient" />
+					</dd>
+					<dt>
+						[$TO_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-name-of-the-email-recipient" />
+					</dd>
+				</dl>
+			</div>
 		</c:when>
 		<c:when test='<%= tabs2.equals("display-settings") %>'>
 			<aui:fieldset label="default-tab">

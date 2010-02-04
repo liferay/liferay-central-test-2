@@ -145,96 +145,76 @@ else if (tabs2.equals("web-content-review-email")) {
 				</aui:field-wrapper>
 			</aui:fieldset>
 
-			<strong><liferay-ui:message key="definition-of-terms" /></strong>
+			<div class="definition-of-terms">
+				<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-			<br /><br />
+				<dl>
+					<dt>
+						[$ARTICLE_ID$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-web-content-id" />
+					</dd>
+					<dt>
+						[$ARTICLE_TITLE$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-web-content-title" />
+					</dd>
 
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<strong>[$ARTICLE_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-web-content-id" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$ARTICLE_TITLE$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-web-content-title" />
-				</td>
-			</tr>
+					<c:if test='<%= tabs2.startsWith("web-content-approval-") %>'>
+						<dt>
+							[$ARTICLE_URL$]
+						</dt>
+						<dd>
+							<liferay-ui:message key="the-web-content-url" />
+						</dd>
+					</c:if>
 
-			<c:if test='<%= tabs2.startsWith("web-content-approval-") %>'>
-				<tr>
-					<td>
-						<strong>[$ARTICLE_URL$]</strong>
-					</td>
-					<td>
-						<liferay-ui:message key="the-web-content-url" />
-					</td>
-				</tr>
-			</c:if>
-
-			<tr>
-				<td>
-					<strong>[$ARTICLE_VERSION$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-web-content-version" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_ADDRESS$]</strong>
-				</td>
-				<td>
-					<%= emailFromAddress %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_NAME$]</strong>
-				</td>
-				<td>
-					<%= emailFromName %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTAL_URL$]</strong>
-				</td>
-				<td>
-					<%= company.getVirtualHost() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTLET_NAME$]</strong>
-				</td>
-				<td>
-					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-address-of-the-email-recipient" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-name-of-the-email-recipient" />
-				</td>
-			</tr>
-			</table>
+					<dt>
+						[$ARTICLE_VERSION$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-web-content-version" />
+					</dd>
+					<dt>
+						[$FROM_ADDRESS$]
+					</dt>
+					<dd>
+						<%= emailFromAddress %>
+					</dd>
+					<dt>
+						[$FROM_NAME$]
+					</dt>
+					<dd>
+						<%= emailFromName %>
+					</dd>
+					<dt>
+						[$PORTAL_URL$]
+					</dt>
+					<dd>
+						<%= company.getVirtualHost() %>
+					</dd>
+					<dt>
+						[$PORTLET_NAME$]
+					</dt>
+					<dd>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+					</dd>
+					<dt>
+						[$TO_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-address-of-the-email-recipient" />
+					</dd>
+					<dt>
+						[$TO_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-name-of-the-email-recipient" />
+					</dd>
+				</dl>
+			</div>
 		</c:when>
 	</c:choose>
 

@@ -1,92 +1,70 @@
-<strong><liferay-ui:message key="definition-of-terms" /></strong>
+<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<strong>[$FROM_ADDRESS$]</strong>
-	</td>
-	<td>
+<dl>
+	<dt>
+		[$FROM_ADDRESS$]
+	</dt>
+	<dd>
 		<%= adminEmailFromAddress %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<strong>[$FROM_NAME$]</strong>
-	</td>
-	<td>
+	</dd>
+	<dt>
+		[$FROM_NAME$]
+	</dt>
+	<dd>
 		<%= adminEmailFromName %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<strong>[$PORTAL_URL$]</strong>
-	</td>
-	<td>
+	</dd>
+	<dt>
+		[$PORTAL_URL$]
+	</dt>
+	<dd>
 		<%= company.getVirtualHost() %>
-	</td>
-</tr>
-<tr class="password-changed-notification">
-	<td>
-		<strong>[$REMOTE_ADDRESS$]</strong>
-	</td>
-	<td>
+	</dd>
+	<dt class="password-changed-notification">
+		[$REMOTE_ADDRESS$]
+	</dt>
+	<dd class="password-changed-notification">
 		<liferay-ui:message key="the-browser's-remote-address" />
-	</td>
-</tr>
-<tr class="password-changed-notification">
-	<td>
-		<strong>[$REMOTE_HOST$]</strong>
-	</td>
-	<td>
+	</dd>
+	<dt class="password-changed-notification">
+		[$REMOTE_HOST$]
+	</dt>
+	<dd class="password-changed-notification">
 		<liferay-ui:message key="the-browser's-remote-host" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<strong>[$TO_ADDRESS$]</strong>
-	</td>
-	<td>
+	</dd>
+	<dt>
+		[$TO_ADDRESS$]
+	</dt>
+	<dd>
 		<liferay-ui:message key="the-address-of-the-email-recipient" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<strong>[$TO_NAME$]</strong>
-	</td>
-	<td>
+	</dd>
+	<dt>
+		[$TO_NAME$]
+	</dt>
+	<dd>
 		<liferay-ui:message key="the-name-of-the-email-recipient" />
-	</td>
-</tr>
-<tr class="password-changed-notification">
-	<td>
-		<strong>[$USER_AGENT$]</strong>
-	</td>
-	<td>
+	</dd>
+	<dt class="password-changed-notification">
+		[$USER_AGENT$]
+	</dt>
+	<dd class="password-changed-notification">
 		<liferay-ui:message key="the-browser's-user-agent" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<strong>[$USER_ID$]</strong>
-	</td>
-	<td>
+	</dd>
+	<dt>
+		[$USER_ID$]
+	</dt>
+	<dd>
 		<liferay-ui:message key="the-user-id" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<strong>[$USER_PASSWORD$]</strong>
-	</td>
-	<td>
+	</dd>
+	<dt>
+		[$USER_PASSWORD$]
+	</dt>
+	<dd>
 		<liferay-ui:message key="the-user-password" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<strong>[$USER_SCREENNAME$]</strong>
-	</td>
-	<td>
+	</dd>
+	<dt>
+		[$USER_SCREENNAME$]
+	</dt>
+	<dd>
 		<liferay-ui:message key="the-user-screen-name" />
-	</td>
-</tr>
-</table>
+	</dd>
+</dl>

@@ -55,46 +55,36 @@ String editorContent = emailMessageBody;
 		</aui:field-wrapper>
 	</aui:fieldset>
 
-	<strong><liferay-ui:message key="definition-of-terms" /></strong>
+	<div class="definition-of-terms">
+		<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-	<br /><br />
-
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<strong>[$FROM_ADDRESS$]</strong>
-		</td>
-		<td>
-			The address of the email sender
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<strong>[$FROM_NAME$]</strong>
-		</td>
-		<td>
-			The name of the email sender
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<strong>[$PAGE_URL$]</strong>
-		</td>
-		<td>
-			<%= PortalUtil.getLayoutFullURL(layout, themeDisplay) %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<strong>[$PORTAL_URL$]</strong>
-		</td>
-		<td>
-			<%= company.getVirtualHost() %>
-		</td>
-	</tr>
-	</table>
-
-	<br />
+		<dl>
+			<dt>
+				[$FROM_ADDRESS$]
+			</dt>
+			<dd>
+				<liferay-ui:message key="the-address-of-the-email-sender" />
+			</dd>
+			<dt>
+				[$FROM_NAME$]
+			</dt>
+			<dd>
+				<liferay-ui:message key="the-name-of-the-email-sender" />
+			</dd>
+			<dt>
+				[$PAGE_URL$]
+			</dt>
+			<dd>
+				<%= PortalUtil.getLayoutFullURL(layout, themeDisplay) %>
+			</dd>
+			<dt>
+				  [$PORTAL_URL$]
+			</dt>
+			<dd>
+				<%= company.getVirtualHost() %>
+			</dd>
+		</dl>
+	</div>
 
 	<aui:button-row>
 		<aui:button type="submit" />

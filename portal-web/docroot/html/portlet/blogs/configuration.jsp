@@ -86,70 +86,55 @@ else if (tabs2.equals("entry-updated-email")) {
 				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" value="<%= emailFromAddress %>" />
 			</aui:fieldset>
 
-			<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
-			<br /><br />
+			<div class="definition-of-terms">
+				<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<strong>[$COMPANY_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-id-associated-with-the-blog" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_MX$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-mx-associated-with-the-blog" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-name-associated-with-the-blog" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMMUNITY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-community-name-associated-with-the-blog" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$BLOGS_ENTRY_USER_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-blog-entry" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$BLOGS_ENTRY_USER_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-user-who-added-the-blog-entry" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTLET_NAME$]</strong>
-				</td>
-				<td>
-					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-				</td>
-			</tr>
-			</table>
-
-			<br />
+				<dl>
+					<dt>
+						[$COMPANY_ID$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-id-associated-with-the-blog" />
+					</dd>
+					<dt>
+						[$COMPANY_MX$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-mx-associated-with-the-blog" />
+					</dd>
+					<dt>
+						[$COMPANY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-name-associated-with-the-blog" />
+					</dd>
+					<dt>
+						[$COMMUNITY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-community-name-associated-with-the-blog" />
+					</dd>
+					<dt>
+						[$BLOGS_ENTRY_USER_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-email-address-of-the-user-who-added-the-blog-entry" />
+					</dd>
+					<dt>
+						[$BLOGS_ENTRY_USER_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-user-who-added-the-blog-entry" />
+					</dd>
+					<dt>
+						[$PORTLET_NAME$]
+					</dt>
+					<dd>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+					</dd>
+				</dl>
+			</div>
 		</c:when>
 		<c:when test='<%= tabs2.startsWith("entry-") %>'>
 			<aui:fieldset>
@@ -174,118 +159,91 @@ else if (tabs2.equals("entry-updated-email")) {
 				<aui:input cssClass="lfr-textarea-container" label="body" name="<%= bodyEditorParam %>" type="textarea" value="<%= bodyEditorBody %>" />
 			</aui:fieldset>
 
-			<strong><liferay-ui:message key="definition-of-terms" /></strong>
+			<div class="definition-of-terms">
+				<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-			<br /><br />
+				<dl>
+					<dt>
+						[$COMPANY_ID$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-id-associated-with-the-blog" />
+					</dd>
+					<dt>
+						[$COMPANY_MX$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-mx-associated-with-the-blog" />
+					</dd>
+					<dt>
+						[$COMPANY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-name-associated-with-the-blog" />
+					</dd>
+					<dt>
+						[$COMMUNITY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-community-name-associated-with-the-blog" />
+					</dd>
+					<dt>
+						[$BLOGS_ENTRY_USER_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-email-address-of-the-user-who-added-the-blog-entry" />
+					</dd>
+					<dt>
+						[$BLOGS_ENTRY_USER_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-user-who-added-the-blog-entry" />
+					</dd>
+					<dt>
+						[$BLOGS_ENTRY_URL$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-blog-entry-url" />
+					</dd>
+					<dt>
+						[$FROM_ADDRESS$]
+					</dt>
+					<dd>
+						<%= emailFromAddress %>
+					</dd>
+					<dt>
+						[$FROM_NAME$]
+					</dt>
+					<dd>
+						<%= emailFromName %>
+					</dd>
+					<dt>
+						[$PORTAL_URL$]
+					</dt>
+					<dd>
+						<%= company.getVirtualHost() %>
+					</dd>
+					<dt>
+						[$PORTLET_NAME$]
+					</dt>
+					<dd>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+					</dd>
+					<dt>
+						[$TO_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-address-of-the-email-recipient" />
+					</dd>
+					<dt>
+						[$TO_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-name-of-the-email-recipient" />
+					</dd>
+				</dl>
+			</div>
 
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<strong>[$COMPANY_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-id-associated-with-the-blog" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_MX$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-mx-associated-with-the-blog" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-name-associated-with-the-blog" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMMUNITY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-community-name-associated-with-the-blog" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$BLOGS_ENTRY_USER_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-blog-entry" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$BLOGS_ENTRY_USER_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-user-who-added-the-blog-entry" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$BLOGS_ENTRY_URL$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-blog-entry-url" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_ADDRESS$]</strong>
-				</td>
-				<td>
-					<%= emailFromAddress %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_NAME$]</strong>
-				</td>
-				<td>
-					<%= emailFromName %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTAL_URL$]</strong>
-				</td>
-				<td>
-					<%= company.getVirtualHost() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTLET_NAME$]</strong>
-				</td>
-				<td>
-					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-address-of-the-email-recipient" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-name-of-the-email-recipient" />
-				</td>
-			</tr>
-			</table>
-
-			<br />
 		</c:when>
 		<c:when test='<%= tabs2.equals("display-settings") %>'>
 			<div class="portlet-msg-info">

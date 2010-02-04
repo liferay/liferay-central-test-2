@@ -73,7 +73,7 @@ String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordS
 				<aui:input name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY + ")" %>' type="hidden" value="<%= adminEmailUserAddedBody %>" />
 			</aui:field-wrapper>
 
-			<div class="terms email-user-add">
+			<div class="terms email-user-add definition-of-terms">
 				<%@ include file="/html/portlet/enterprise_admin/settings/definition_of_terms.jspf" %>
 			</div>
 		</aui:fieldset>
@@ -95,7 +95,7 @@ String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordS
 				<aui:input name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY + ")" %>' type="hidden" value="<%= adminEmailPasswordSentBody %>" />
 			</aui:field-wrapper>
 
-			<div class="terms email-password-sent">
+			<div class="terms email-password-sent definition-of-terms">
 				<%@ include file="/html/portlet/enterprise_admin/settings/definition_of_terms.jspf" %>
 			</div>
 		</aui:fieldset>

@@ -95,70 +95,55 @@ else if (tabs2.equals("page-updated-email")) {
 				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" value="<%= emailFromAddress %>" />
 			</aui:fieldset>
 
-			<strong><liferay-ui:message key="definition-of-terms" /></strong>
+			<div class="definition-of-terms">
+				<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-			<br /><br />
+				<dl>
+					<dt>
+						[$COMPANY_ID$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-id-associated-with-the-wiki" />
+					</dd>
+					<dt>
+						[$COMPANY_MX$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-mx-associated-with-the-wiki" />
+					</dd>
+					<dt>
+						[$COMPANY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
+					</dd>
+					<dt>
+						[$COMMUNITY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
+					</dd>
+					<dt>
+						[$PAGE_USER_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-email-address-of-the-user-who-added-the-page" />
+					</dd>
+					<dt>
+						[$PAGE_USER_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-user-who-added-the-page" />
+					</dd>
+					<dt>
+						[$PORTLET_NAME$]
+					</dt>
+					<dd>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+					</dd>
+				</dl>
+			</div>
 
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<strong>[$COMPANY_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-id-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_MX$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-mx-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMMUNITY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_USER_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-page" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_USER_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-user-who-added-the-page" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTLET_NAME$]</strong>
-				</td>
-				<td>
-					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-				</td>
-			</tr>
-			</table>
-
-			<br />
 		</c:when>
 		<c:when test='<%= tabs2.startsWith("page-") %>'>
 			<aui:fieldset>
@@ -185,182 +170,138 @@ else if (tabs2.equals("page-updated-email")) {
 				<aui:input cssClass="lfr-textarea-container" label="signature" name="<%= signatureEditorParam %>" type="textarea" value="<%= signatureEditorBody %>" wrap="soft" />
 			</aui:fieldset>
 
-			<strong><liferay-ui:message key="definition-of-terms" /></strong>
+			<div class="definition-of-terms">
+				<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-			<br /><br />
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<strong>[$COMPANY_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-id-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_MX$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-mx-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMMUNITY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$DIFFS_URL$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-url-of-the-page-comparing-this-page-content-with-the-previous-version" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_ADDRESS$]</strong>
-				</td>
-				<td>
-					<%= emailFromAddress %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_NAME$]</strong>
-				</td>
-				<td>
-					<%= emailFromName %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$NODE_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-node-in-which-the-page-was-added" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_CONTENT$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-page-content" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_DATE_UPDATE$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-date-of-the-modifications" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_DIFFS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-page-content-compared-with-the-previous-version-page-content" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-page-id" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_SUMMARY$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-summary-of-the-page-or-the-modifications" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_TITLE$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-page-title" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_URL$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-page-url" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_USER_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-page" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_USER_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-user-who-added-the-page" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTAL_URL$]</strong>
-				</td>
-				<td>
-					<%= company.getVirtualHost() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTLET_NAME$]</strong>
-				</td>
-				<td>
-					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-address-of-the-email-recipient" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-name-of-the-email-recipient" />
-				</td>
-			</tr>
-			</table>
-
-			<br />
+				<dl>
+					<dt>
+						[$COMPANY_ID$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-id-associated-with-the-wiki" />
+					</dd>
+					<dt>
+						[$COMPANY_MX$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-mx-associated-with-the-wiki" />
+					</dd>
+					<dt>
+						[$COMPANY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
+					</dd>
+					<dt>
+						[$COMMUNITY_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
+					</dd>
+					<dt>
+						[$DIFFS_URL$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-url-of-the-page-comparing-this-page-content-with-the-previous-version" />
+					</dd>
+					<dt>
+						[$FROM_ADDRESS$]
+					</dt>
+					<dd>
+						<%= emailFromAddress %>
+					</dd>
+					<dt>
+						[$FROM_NAME$]
+					</dt>
+					<dd>
+						<%= emailFromName %>
+					</dd>
+					<dt>
+						[$NODE_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-node-in-which-the-page-was-added" />
+					</dd>
+					<dt>
+						[$PAGE_CONTENT$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-page-content" />
+					</dd>
+					<dt>
+						[$PAGE_DATE_UPDATE$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-date-of-the-modifications" />
+					</dd>
+					<dt>
+						[$PAGE_DIFFS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-page-content-compared-with-the-previous-version-page-content" />
+					</dd>
+					<dt>
+						[$PAGE_ID$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-page-id" />
+					</dd>
+					<dt>
+						[$PAGE_SUMMARY$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-summary-of-the-page-or-the-modifications" />
+					</dd>
+					<dt>
+						[$PAGE_TITLE$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-page-title" />
+					</dd>
+					<dt>
+						[$PAGE_URL$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-page-url" />
+					</dd>
+					<dt>
+						[$PAGE_USER_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-email-address-of-the-user-who-added-the-page" />
+					</dd>
+					<dt>
+						[$PAGE_USER_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-user-who-added-the-page" />
+					</dd>
+					<dt>
+						[$PORTAL_URL$]
+					</dt>
+					<dd>
+						<%= company.getVirtualHost() %>
+					</dd>
+					<dt>
+						[$PORTLET_NAME$]
+					</dt>
+					<dd>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+					</dd>
+					<dt>
+						[$TO_ADDRESS$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-address-of-the-email-recipient" />
+					</dd>
+					<dt>
+						[$TO_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-name-of-the-email-recipient" />
+					</dd>
+				</dl>
+			</div>
 		</c:when>
 		<c:when test='<%= tabs2.equals("display-settings") %>'>
 			<aui:fieldset>

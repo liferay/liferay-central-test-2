@@ -115,104 +115,81 @@ String redirect = ParamUtil.getString(request, "redirect");
 							<aui:input name="<%= editorParam %>" type="hidden" />
 						</aui:field-wrapper>
 					</aui:fieldset>
+					<div class="definition-of-terms">
+						<h4><liferay-ui:message key="definition-of-terms" /></h4>
 
-					<strong><liferay-ui:message key="definition-of-terms" /></strong>
+						<dl>
+							<dt>
+								[$FROM_ADDRESS$]
+							</dt>
+							<dd>
+								<%= preferences.getValue("emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS)) %>
+							</dd>
+							<dt>
+								[$FROM_NAME$]
+							</dt>
+							<dd>
+								<%= preferences.getValue("emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME)) %>
+							</dd>
+							<dt>
+								[$PORTAL_URL$]
+							</dt>
+							<dd>
+								<%= company.getVirtualHost() %>
+							</dd>
+							<dt>
+								[$REMOTE_ADDRESS$]
+							</dt>
+							<dd>
+								<liferay-ui:message key="the-browser's-remote-address" />
+							</dd>
+							<dt>
+								[$REMOTE_HOST$]
+							</dt>
+							<dd>
+								<liferay-ui:message key="the-browser's-remote-host" />
+							</dd>
 
-					<br /><br />
+							<dt>
+								[$TO_ADDRESS$]
+							</dt>
+							<dd>
+								<liferay-ui:message key="the-address-of-the-email-recipient" />
+							</dd>
+							<dt>
+								[$TO_NAME$]
+							</dt>
+							<dd>
+								<liferay-ui:message key="the-name-of-the-email-recipient" />
+							</dd>
 
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<strong>[$FROM_ADDRESS$]</strong>
-						</td>
-						<td>
-							<%= preferences.getValue("emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS)) %>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$FROM_NAME$]</strong>
-						</td>
-						<td>
-							<%= preferences.getValue("emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME)) %>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$PORTAL_URL$]</strong>
-						</td>
-						<td>
-							<%= company.getVirtualHost() %>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$REMOTE_ADDRESS$]</strong>
-						</td>
-						<td>
-							The browser's remote address
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$REMOTE_HOST$]</strong>
-						</td>
-						<td>
-							The browser's remote host
-						</td>
-					</tr>
+							<dt>
+								[$USER_AGENT$]
+							</dt>
+							<dd>
+								<liferay-ui:message key="the-browser's-user-agent" />
+							</dd>
 
-					<tr>
-						<td>
-							<strong>[$TO_ADDRESS$]</strong>
-						</td>
-						<td>
-							The address of the email recipient
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$TO_NAME$]</strong>
-						</td>
-						<td>
-							The name of the email recipient
-						</td>
-					</tr>
-
-					<tr>
-						<td>
-							<strong>[$USER_AGENT$]</strong>
-						</td>
-						<td>
-							The browser's user agent
-						</td>
-					</tr>
-
-					<tr>
-						<td>
-							<strong>[$USER_ID$]</strong>
-						</td>
-						<td>
-							The user ID
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$USER_PASSWORD$]</strong>
-						</td>
-						<td>
-							The user password
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$USER_SCREENNAME$]</strong>
-						</td>
-						<td>
-							The user screen name
-						</td>
-					</tr>
-					</table>
+							<dt>
+								[$USER_ID$]
+							</dt>
+							<dd>
+								<liferay-ui:message key="the-user-id" />
+							</dd>
+							<dt>
+								[$USER_PASSWORD$]
+							</dt>
+							<dd>
+								<liferay-ui:message key="the-user-password" />
+							</dd>
+							<dt>
+								[$USER_SCREENNAME$]
+							</dt>
+							<dd>
+								<liferay-ui:message key="the-user-screen-name" />
+							</dd>
+						</dl>
+					</div>
 				</c:when>
 				<c:otherwise>
 					<aui:fieldset>
