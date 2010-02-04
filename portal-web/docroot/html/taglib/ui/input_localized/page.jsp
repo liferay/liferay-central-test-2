@@ -232,9 +232,11 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 		}
 	);
 
-	var languageSelector = A.one('#<%= randomNamespace %>languageSelector select');
-
-	if (languageSelector) {
-		languageSelector.on('change', updateLanguageFlag);
-	}
+	A.all('#<%= randomNamespace %>languageSelector select').each(
+		function(item) {
+			if (item) {
+				item.on('change', updateLanguageFlag);
+			}
+		}
+	);
 </aui:script>
