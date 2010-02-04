@@ -2,8 +2,8 @@
 This is the DTD for the Look and Feel parameters for Liferay Portal.
 
 <!DOCTYPE look-and-feel PUBLIC
-	"-//Liferay//DTD Look and Feel 5.3.0//EN"
-	"http://www.liferay.com/dtd/liferay-look-and-feel_5_3_0.dtd">
+	"-//Liferay//DTD Look and Feel 6.0.0//EN"
+	"http://www.liferay.com/dtd/liferay-look-and-feel_6_0_0.dtd">
 -->
 
 <!--
@@ -306,22 +306,22 @@ The default value is "${root-path}/images/color_schemes/${css-class}".
 <!ELEMENT color-scheme-images-path (#PCDATA)>
 
 <!--
-See liferay-layout-templates_5_3_0.dtd.
+See liferay-layout-templates_6_0_0.dtd.
 -->
 <!ELEMENT layout-templates (standard?, custom?)>
 
 <!--
-See liferay-layout-templates_5_3_0.dtd.
+See liferay-layout-templates_6_0_0.dtd.
 -->
 <!ELEMENT standard (layout-template*)>
 
 <!--
-See liferay-layout-templates_5_3_0.dtd.
+See liferay-layout-templates_6_0_0.dtd.
 -->
 <!ELEMENT layout-template (template-path, wap-template-path, thumbnail-path?)>
 
 <!--
-See liferay-layout-templates_5_3_0.dtd.
+See liferay-layout-templates_6_0_0.dtd.
 -->
 <!ATTLIST layout-template
 	id CDATA #REQUIRED
@@ -329,21 +329,21 @@ See liferay-layout-templates_5_3_0.dtd.
 >
 
 <!--
-See liferay-layout-templates_5_3_0.dtd.
+See liferay-layout-templates_6_0_0.dtd.
 -->
 <!ELEMENT template-path (#PCDATA)>
 
 <!--
-See liferay-layout-templates_5_3_0.dtd.
+See liferay-layout-templates_6_0_0.dtd.
 -->
 <!ELEMENT wap-template-path (#PCDATA)>
 
 <!--
-See liferay-layout-templates_5_3_0.dtd.
+See liferay-layout-templates_6_0_0.dtd.
 -->
 <!ELEMENT thumbnail-path (#PCDATA)>
 
 <!--
-See liferay-layout-templates_5_3_0.dtd.
+See liferay-layout-templates_6_0_0.dtd.
 -->
 <!ELEMENT custom (layout-template*)>

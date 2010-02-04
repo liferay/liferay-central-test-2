@@ -3,8 +3,8 @@ This is the DTD for the Liferay Plugins XML file that lists the plugins
 available in a plugin repository
 
 <!DOCTYPE plugin-package PUBLIC
-	"-//Liferay//DTD Plugin Package 5.3.0//EN"
-	"http://www.liferay.com/dtd/liferay-plugin-package_5_3_0.dtd">
+	"-//Liferay//DTD Plugin Package 6.0.0//EN"
+	"http://www.liferay.com/dtd/liferay-plugin-package_6_0_0.dtd">
 -->
 
 <!--
@@ -30,7 +30,7 @@ users.
 The module-id element contains the full identifier of the plugin using the
 Maven based syntax: groupId/artifactId/version/file-type.
 
-Example: liferay-samples/sample-struts-portlet/5.3.0/war
+Example: liferay-samples/sample-struts-portlet/6.0.0/war
 -->
 <!ELEMENT module-id (#PCDATA)>
 
