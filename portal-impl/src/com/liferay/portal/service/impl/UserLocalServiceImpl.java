@@ -2363,8 +2363,25 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				}
 			}
 
+			List<Organization> userOrganizations = user.getOrganizations();
+
+			int indexId = 0;
 			for (UserGroupRole userGroupRole : userGroupRoles) {
-				userGroupRoleLocalService.addUserGroupRole(userGroupRole);
+				for (indexId = 0; indexId < groupIds.length; indexId++) {
+					if (userGroupRole.getGroupId() == groupIds[indexId]) {
+						userGroupRoleLocalService.addUserGroupRole(userGroupRole);
+						break;
+					}
+				}
+				if (indexId >= groupIds.length) {
+					for (Organization userOrganization : userOrganizations) {
+						if (userGroupRole.getGroupId() ==
+							userOrganization.getGroup().getGroupId()) {
+							userGroupRoleLocalService.addUserGroupRole(userGroupRole);
+							break;
+						}
+					}
+				}
 			}
 		}
 
