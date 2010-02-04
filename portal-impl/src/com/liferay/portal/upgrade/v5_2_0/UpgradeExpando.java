@@ -22,12 +22,8 @@
 
 package com.liferay.portal.upgrade.v5_2_0;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.liferay.portal.util.PortalInstances;
 
 /**
  * <a href="UpgradeExpando.java.html"><b><i>View Source</i></b></a>
@@ -37,37 +33,21 @@ import java.sql.ResultSet;
 public class UpgradeExpando extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(_GET_COMPANY_IDS);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
-
-				runSQL("update ExpandoColumn set companyId = " + companyId);
-
-				runSQL("update ExpandoRow set companyId = " + companyId);
-
-				runSQL("update ExpandoTable set companyId = " + companyId);
-
-				runSQL("update ExpandoValue set companyId = " + companyId);
-
-				break;
-			}
+		if (companyIds.length == 0) {
+			return;
 		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+
+		long companyId = companyIds[0];
+
+		runSQL("update ExpandoColumn set companyId = " + companyId);
+
+		runSQL("update ExpandoRow set companyId = " + companyId);
+
+		runSQL("update ExpandoTable set companyId = " + companyId);
+
+		runSQL("update ExpandoValue set companyId = " + companyId);
 	}
-
-	private static final String _GET_COMPANY_IDS =
-		"select companyId from Company";
 
 }

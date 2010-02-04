@@ -23,14 +23,10 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.NoSuchRoleException;
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.service.RoleLocalServiceUtil;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.liferay.portal.util.PortalInstances;
 
 /**
  * <a href="VerifyRole.java.html"><b><i>View Source</i></b></a>
@@ -40,41 +36,26 @@ import java.sql.ResultSet;
 public class VerifyRole extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
-		try {
-			con = DataAccess.getConnection();
+		for (long companyId : companyIds) {
+			try {
+				Role communityMemberRole = RoleLocalServiceUtil.getRole(
+					companyId, RoleConstants.COMMUNITY_MEMBER);
 
-			ps = con.prepareStatement(_GET_COMPANY_IDS);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
-
-				try {
-					Role communityMemberRole = RoleLocalServiceUtil.getRole(
-						companyId, RoleConstants.COMMUNITY_MEMBER);
-
-					deleteImplicitAssociations(communityMemberRole);
-				}
-				catch (NoSuchRoleException nsre) {
-				}
-
-				try {
-					Role organizationMemberRole = RoleLocalServiceUtil.getRole(
-						companyId, RoleConstants.ORGANIZATION_MEMBER);
-
-					deleteImplicitAssociations(organizationMemberRole);
-				}
-				catch (NoSuchRoleException nsre) {
-				}
+				deleteImplicitAssociations(communityMemberRole);
 			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
+			catch (NoSuchRoleException nsre) {
+			}
+
+			try {
+				Role organizationMemberRole = RoleLocalServiceUtil.getRole(
+					companyId, RoleConstants.ORGANIZATION_MEMBER);
+
+				deleteImplicitAssociations(organizationMemberRole);
+			}
+			catch (NoSuchRoleException nsre) {
+			}
 		}
 	}
 
@@ -85,8 +66,5 @@ public class VerifyRole extends VerifyProcess {
 		runSQL(
 			"delete from UserGroupRole where roleId = " + role.getRoleId());
 	}
-
-	private static final String _GET_COMPANY_IDS =
-		"select companyId from Company";
 
 }

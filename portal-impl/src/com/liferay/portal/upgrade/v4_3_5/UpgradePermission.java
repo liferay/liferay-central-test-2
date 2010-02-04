@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -220,28 +221,13 @@ public class UpgradePermission extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
-		try {
-			con = DataAccess.getConnection();
+		for (long companyId : companyIds) {
+			long defaultUserId = getDefaultUserId(companyId);
+			long guestGroupId = getGuestGroupId(companyId);
 
-			ps = con.prepareStatement(_GET_COMPANY_IDS);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
-
-				long defaultUserId = getDefaultUserId(companyId);
-				long guestGroupId = getGuestGroupId(companyId);
-
-				copyPermissions(defaultUserId, guestGroupId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
+			copyPermissions(defaultUserId, guestGroupId);
 		}
 	}
 
@@ -465,9 +451,6 @@ public class UpgradePermission extends UpgradeProcess {
 
 		return plids;
 	}
-
-	private static final String _GET_COMPANY_IDS =
-		"select companyId from Company";
 
 	private static final String _GET_DEFAULT_USER_ID =
 		"select userId from User_ where companyId = ? and defaultUser = ?";

@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -44,6 +45,11 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +78,10 @@ public class PortalInstances {
 
 	public static long[] getCompanyIds() {
 		return _instance._getCompanyIds();
+	}
+
+	public static long[] getCompanyIdsBySQL() throws SQLException {
+		return _instance._getCompanyIdsBySQL();
 	}
 
 	public static long getDefaultCompanyId() {
@@ -245,6 +255,34 @@ public class PortalInstances {
 
 	private long[] _getCompanyIds() {
 		return _companyIds;
+	}
+
+	private long[] _getCompanyIdsBySQL() throws SQLException {
+		List<Long> companyIds = new ArrayList<Long>();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_COMPANY_IDS);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
+
+				companyIds.add(companyId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return ArrayUtil.toArray(
+			companyIds.toArray(new Long[companyIds.size()]));
 	}
 
 	private long _getDefaultCompanyId() {
@@ -425,6 +463,9 @@ public class PortalInstances {
 	private boolean _isVirtualHostsIgnorePath(String path) {
 		return _virtualHostsIgnorePaths.contains(path);
 	}
+
+	private static final String _GET_COMPANY_IDS =
+		"select companyId from Company";
 
 	private static Log _log = LogFactoryUtil.getLog(PortalInstances.class);
 

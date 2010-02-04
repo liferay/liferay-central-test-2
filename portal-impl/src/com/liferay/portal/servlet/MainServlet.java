@@ -1289,7 +1289,7 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void initResourceCodes(List<Portlet> portlets) throws Exception {
-		long[] companyIds = PortalInstances.getCompanyIds();
+		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
 		Iterator<Portlet> itr = portlets.iterator();
 

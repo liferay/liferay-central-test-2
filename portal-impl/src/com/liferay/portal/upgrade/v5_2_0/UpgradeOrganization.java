@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.upgrade.v5_2_0.util.OrganizationTable;
 import com.liferay.portal.upgrade.v5_2_0.util.OrganizationTypeUpgradeColumnImpl;
+import com.liferay.portal.util.PortalInstances;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -117,31 +118,13 @@ public class UpgradeOrganization extends UpgradeProcess {
 	}
 
 	protected void updateLocationResources() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(_GET_COMPANY_IDS);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
-
-				for (int scope : ResourceConstants.SCOPES) {
-					updateCodeId(companyId, scope);
-				}
+		for (long companyId : companyIds) {
+			for (int scope : ResourceConstants.SCOPES) {
+				updateCodeId(companyId, scope);
 			}
 		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
 	}
-
-	private static final String _GET_COMPANY_IDS =
-		"select companyId from Company";
 
 }

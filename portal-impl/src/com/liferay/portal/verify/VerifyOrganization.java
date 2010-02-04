@@ -22,12 +22,8 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.liferay.portal.util.PortalInstances;
 
 /**
  * <a href="VerifyOrganization.java.html"><b><i>View Source</i></b></a>
@@ -37,29 +33,11 @@ import java.sql.ResultSet;
 public class VerifyOrganization extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(_GET_COMPANY_IDS);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
-
-				OrganizationLocalServiceUtil.rebuildTree(companyId, false);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
+		for (long companyId : companyIds) {
+			OrganizationLocalServiceUtil.rebuildTree(companyId, false);
 		}
 	}
-
-	private static final String _GET_COMPANY_IDS =
-		"select companyId from Company";
 
 }
