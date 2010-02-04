@@ -271,11 +271,16 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 					currentGroupTemplateActions = new ArrayList();
 				}
 
-				Resource companyResource = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, String.valueOf(resource.getCompanyId()));
+				try {
+					Resource companyResource = ResourceLocalServiceUtil.getResource(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, String.valueOf(resource.getCompanyId()));
 
-				permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), companyResource.getResourceId());
+					permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), companyResource.getResourceId());
 
-				currentCompanyActions = ResourceActionsUtil.getActions(permissions);
+					currentCompanyActions = ResourceActionsUtil.getActions(permissions);
+				}
+				catch (NoSuchResourceException nsre) {
+					currentCompanyActions = new ArrayList();
+				}
 			}
 
 			List<String> currentActions = new ArrayList<String>();
