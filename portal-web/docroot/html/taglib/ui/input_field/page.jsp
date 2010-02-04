@@ -73,7 +73,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			<%
 			Calendar now = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
-			String timeFormatPattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT))).toPattern();
+			String timeFormatPattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT, locale))).toPattern();
 
 			boolean timeFormatAmPm = true;
 
