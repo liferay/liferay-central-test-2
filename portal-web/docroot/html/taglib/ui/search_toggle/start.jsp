@@ -54,4 +54,4 @@
 			</aui:select>
 		</liferay-util:buffer>
 
-		<liferay-ui:message key="match-x-of-the-following-fields" arguments="<%= andOperator %>"/>
+		<liferay-ui:message key="match-x-of-the-following-fields" arguments="<%= andOperator %>" />
