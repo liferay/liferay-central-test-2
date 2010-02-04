@@ -149,7 +149,7 @@ public class CASAutoLogin implements AutoLogin {
 	}
 
 	protected User importLDAPUser(
-			long companyId, long ldapServerId, String emailAddress,
+			long ldapServerId, long companyId, String emailAddress,
 			String screenName)
 		throws Exception {
 
@@ -245,7 +245,7 @@ public class CASAutoLogin implements AutoLogin {
 
 		for (long ldapServerId : ldapServerIds) {
 			User user = importLDAPUser(
-				companyId, ldapServerId, emailAddress, screenName);
+				ldapServerId, companyId, emailAddress, screenName);
 
 			if (user != null) {
 				return user;
