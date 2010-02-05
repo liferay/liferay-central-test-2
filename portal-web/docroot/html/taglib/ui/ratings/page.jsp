@@ -66,15 +66,15 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			<c:when test='<%= type.equals("stars") %>'>
 				<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar">
 
-				<%
-				for (int i = 1; i <= numberOfStars; i++) {
-				%>
+					<%
+					for (int i = 1; i <= numberOfStars; i++) {
+					%>
 
-					<aui:input checked="<%= i == yourScore %>" type="radio" name="rating" label='<%= i == yourScore ? LanguageUtil.format(pageContext, "you-have-rated-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) : LanguageUtil.format(pageContext, "rate-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) %>' value="<%= i %>" />
+						<aui:input checked="<%= i == yourScore %>" label='<%= (yourScore == i) ? LanguageUtil.format(pageContext, "you-have-rated-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) : LanguageUtil.format(pageContext, "rate-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) %>' name="rating" type="radio" value="<%= i %>" />
 
-				<%
-				}
-				%>
+					<%
+					}
+					%>
 
 				</div>
 
@@ -84,9 +84,9 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 				<c:choose>
 					<c:when test='<%= themeDisplay.isSignedIn() %>'>
 						<div id="<%= randomNamespace %>ratingThumb">
-							<aui:input label='<%= yourScore == 1 ? "you-have-rated-this-as-good" : "rate-this-as-good" %>' name="ratingThumb" type="radio" value="up" />
+							<aui:input label='<%= (yourScore == 1) ? "you-have-rated-this-as-good" : "rate-this-as-good" %>' name="ratingThumb" type="radio" value="up" />
 
-							<aui:input label='<%= yourScore == -1 ? "you-have-rated-this-as-bad" : "rate-this-as-bad" %>' name="ratingThumb" type="radio" value="down" />
+							<aui:input label='<%= (yourScore == -1) ? "you-have-rated-this-as-bad" : "rate-this-as-bad" %>' name="ratingThumb" type="radio" value="down" />
 						</div>
 					</c:when>
 					<c:otherwise>
