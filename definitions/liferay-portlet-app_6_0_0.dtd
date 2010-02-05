@@ -126,57 +126,61 @@ http://www.opensymphony.com/quartz
 <!ELEMENT scheduler-class (#PCDATA)>
 
 <!--
-The scheduler-entry element contains the declarative data of a portlet scheduler.
+The scheduler-entry element contains the declarative data of a scheduler.
 -->
-<!ELEMENT scheduler-entry (scheduler-description?, scheduler-event-listener-class, trigger)>
+<!ELEMENT scheduler-entry (scheduler-description?,
+scheduler-event-listener-class, trigger)>
 
 <!--
-The scheduler-description value is a description String data for this scheduler.
+The scheduler-description value describes a scheduler.
 -->
 <!ELEMENT scheduler-description (#PCDATA)>
 
 <!--
 The scheduler-event-listener-class value must be a class that implements
-com.liferay.portal.kernel.messaging.MessageListener.
+com.liferay.portal.kernel.messaging.MessageListener. This class will receive
+a message at a regular interval specified by the trigger element.
 -->
 <!ELEMENT scheduler-event-listener-class (#PCDATA)>
 
 <!--
-The trigger element contains configuration data to direct SchedulerEngine when
-to trigger the scheduler-event-listener-class defined above
+The trigger element contains configuration data to indictate when to trigger the
+class specified in scheduler-event-listener-class.
 -->
 <!ELEMENT trigger (cron|simple)>
 
 <!--
-The cron element defines a cron style trigger for the scheduler.
+The cron element specifies a cron style trigger for a scheduler.
 -->
 <!ELEMENT cron (property-key|cron-trigger-value)>
 
 <!--
-The property-key value is the key name in the properties file whose value will
-use to create the trigger. For cron trigger, the value should be a cron text,
-for simple trigger, the value should be a long number, represent interval time
-in second.
+The property-key value specifies a property key that will be queried from
+portal.properties to create a trigger. For a cron trigger, the queried value
+should be a cron text. For a simple trigger, the queried value should be a
+number that represents a time interval in seconds.
 -->
 <!ELEMENT property-key (#PCDATA)>
 
 <!--
-This value should be a cron text.
+The cron-trigger-value value should be a cron text.
 -->
 <!ELEMENT cron-trigger-value (#PCDATA)>
 
 <!--
-The simple element defines a interval repeated style trigger for the scheduler.
+The simple element specifies an interval trigger for a scheduler.
 -->
 <!ELEMENT simple (property-key|simple-trigger-value)>
 
 <!--
-This value should be a time number.
+The simple-trigger-value value is a number that represents how often to trigger
+a scheduler.
 -->
 <!ELEMENT simple-trigger-value (#PCDATA)>
 
 <!--
-The time unit for the time number. Default to second.
+The simple-trigger-value value is the unit of measure for the time specified in
+simple-trigger-value. The default measure is in seconds.
 -->
 <!ATTLIST simple-trigger-value time-unit (WEEK|DAY|HOUR|MIN|SEC) "SEC">
 

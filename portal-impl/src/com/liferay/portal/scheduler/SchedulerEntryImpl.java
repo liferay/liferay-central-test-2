@@ -29,8 +29,7 @@ import com.liferay.portal.kernel.scheduler.IntervalTrigger;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.TriggerType;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper;
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -47,46 +46,37 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 	}
 
 	public MessageListener getEventListener() {
-		MessageListener messageListener =
-			(MessageListener) InstancePool.get(_listenerClass);
-		return new SchedulerEventMessageListenerWrapper(messageListener);
+		return _eventListener;
 	}
 
 	public String getEventListenerClass() {
-		return _listenerClass;
+		return _eventListenerClass;
 	}
 
 	public Trigger getTrigger() throws SystemException {
+		if (_trigger != null) {
+			return _trigger;
+		}
 
-		if (_trigger == null) {
-			String triggerValue = _triggerValue;
-			if (_readProperty) {
-				triggerValue = PrefsPropsUtil.getString(triggerValue);
-			}
+		String triggerValue = _triggerValue;
 
-			if (_triggerType == TriggerType.CRON) {
-				_trigger = new CronTrigger(
-					_listenerClass, _listenerClass, triggerValue);
-			}
-			else if (_triggerType == TriggerType.SIMPLE) {
+		if (_readProperty) {
+			triggerValue = PrefsPropsUtil.getString(triggerValue);
+		}
 
-				long intervalTime = -1;
-				try {
-					intervalTime = Long.parseLong(triggerValue);
-				}
-				catch (NumberFormatException ex) {
-					throw new SystemException(
-						"Unable to parse interval time from String:" +
-						triggerValue);
-				}
-				_trigger = new IntervalTrigger(
-					_listenerClass, _listenerClass,
-					TimeUnit.SECONDS.toMillis(intervalTime));
-			}
-			else {
-				throw new SystemException(
-					"Unsupport Trigger type:" + _triggerType);
-			}
+		if (_triggerType == TriggerType.CRON) {
+			_trigger = new CronTrigger(
+				_eventListenerClass, _eventListenerClass, triggerValue);
+		}
+		else if (_triggerType == TriggerType.SIMPLE) {
+			long intervalTime = GetterUtil.getLong(triggerValue);
+
+			_trigger = new IntervalTrigger(
+				_eventListenerClass, _eventListenerClass,
+				TimeUnit.SECONDS.toMillis(intervalTime));
+		}
+		else {
+			throw new SystemException("Unsupport trigger type " + _triggerType);
 		}
 
 		return _trigger;
@@ -108,12 +98,16 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		_description = description;
 	}
 
-	public void setReadProperty(boolean readProperty) {
-		_readProperty = readProperty;
+	public void setEventListener(MessageListener eventListener) {
+		_eventListener = eventListener;
 	}
 
-	public void setListenerClass(String listenerClass) {
-		_listenerClass = listenerClass;
+	public void setEventListenerClass(String eventListenerClass) {
+		_eventListenerClass = eventListenerClass;
+	}
+
+	public void setReadProperty(boolean readProperty) {
+		_readProperty = readProperty;
 	}
 
 	public void setTriggerType(TriggerType triggerType) {
@@ -125,18 +119,31 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 	}
 
 	public String toString() {
-		return "SchedulerImpl[" +
-			"decription:" + _description +
-			", listenerClass:" + _listenerClass +
-			", triggerType:" + _triggerType +
-			", triggerValue:" + _triggerValue +
-			", propertyKey:" + _readProperty +
-			"]";
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{description=");
+		sb.append(_description);
+		sb.append(", eventListener=");
+		sb.append(_eventListener);
+		sb.append(", eventListenerClass=");
+		sb.append(_eventListenerClass);
+		sb.append(", readProperty=");
+		sb.append(_readProperty);
+		sb.append(", trigger=");
+		sb.append(_trigger);
+		sb.append(", triggerType=");
+		sb.append(_triggerType);
+		sb.append(", triggerValue=");
+		sb.append(_triggerValue);
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private String _description;
+	private MessageListener _eventListener;
+	private String _eventListenerClass;
 	private boolean _readProperty;
-	private String _listenerClass;
 	private Trigger _trigger;
 	private TriggerType _triggerType;
 	private String _triggerValue;

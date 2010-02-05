@@ -44,7 +44,7 @@ public interface SchedulingConfigurator {
 
 	public void setSchedulerEngine(SchedulerEngine schedulerEngine);
 
-	public void setSchedulers(
+	public void setSchedulerEntries(
 		Map<String, List<SchedulerEntry>> schedulerEntries);
 
 }

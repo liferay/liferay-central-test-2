@@ -32,28 +32,30 @@ import com.liferay.portal.kernel.messaging.MessageListener;
  */
 public interface SchedulerEntry {
 
-	String getDescription();
+	public String getDescription();
 
-	MessageListener getEventListener();
+	public MessageListener getEventListener();
 
-	String getEventListenerClass();
+	public String getEventListenerClass();
 
-	Trigger getTrigger() throws SystemException;
+	public Trigger getTrigger() throws SystemException;
 
-	TriggerType getTriggerType();
+	public TriggerType getTriggerType();
 
-	String getTriggerValue();
+	public String getTriggerValue();
 
-	boolean isReadProperty();
+	public boolean isReadProperty();
 
-	void setDescription(String description);
+	public void setDescription(String description);
 
-	void setReadProperty(boolean readProperty);
+	public void setEventListener(MessageListener eventListener);
 
-	void setListenerClass(String listenerClass);
+	public void setEventListenerClass(String eventListenerClass);
 
-	void setTriggerType(TriggerType triggerType);
+	public void setReadProperty(boolean readProperty);
 
-	void setTriggerValue(String triggerValue);
+	public void setTriggerType(TriggerType triggerType);
+
+	public void setTriggerValue(String triggerValue);
 
 }

@@ -107,6 +107,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setPortletId(portletId);
 		setStrutsPath(portletId);
 		setActive(true);
+		_schedulerEntries = new ArrayList<SchedulerEntry>();
 		_assetRendererFactoryClasses = new ArrayList<String>();
 		_customAttributesDisplayClasses = new ArrayList<String>();
 		_workflowHandlerClasses = new ArrayList<String>();
@@ -139,7 +140,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String icon, String virtualPath, String strutsPath, String portletName,
 		String displayName, String portletClass,
 		String configurationActionClass, String indexerClass,
-		String openSearchClass, String schedulerClass, String portletURLClass,
+		String openSearchClass, String schedulerClass,
+		List<SchedulerEntry> schedulerEntries, String portletURLClass,
 		String friendlyURLMapperClass, String urlEncoderClass,
 		String portletDataHandlerClass, String portletLayoutListenerClass,
 		String pollerProcessorClass, String popMessageListenerClass,
@@ -190,6 +192,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_indexerClass = indexerClass;
 		_openSearchClass = openSearchClass;
 		_schedulerClass = schedulerClass;
+		_schedulerEntries = schedulerEntries;
 		_portletURLClass = portletURLClass;
 		_friendlyURLMapperClass = friendlyURLMapperClass;
 		_urlEncoderClass = urlEncoderClass;
@@ -616,15 +619,31 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		return (Scheduler)InstancePool.get(getSchedulerClass());
 	}
 
+	/**
+	 * Adds a scheduler entry.
+	 */
+	public void addSchedulerEntry(SchedulerEntry schedulerEntry) {
+		_schedulerEntries.add(schedulerEntry);
+	}
+
+	/**
+	 * Gets the scheduler entries of the portlet.
+	 *
+	 * @return the scheduler entries of the portlet
+	 */
 	public List<SchedulerEntry> getSchedulerEntries() {
 		return _schedulerEntries;
 	}
 
-	public void addSchedulerEntry(SchedulerEntry schedulerEntry) {
-		if (_schedulerEntries == null){
-			_schedulerEntries = new ArrayList<SchedulerEntry>();
+	/**
+	 * Sets the scheduler entries of the portlet.
+	 *
+	 * @param schedulerEntries the scheduler entries of the portlet
+	 */
+	public void setSchedulerEntries(List<SchedulerEntry> schedulerEntries) {
+		for (SchedulerEntry schedulerEntry : schedulerEntries) {
+			addSchedulerEntry(schedulerEntry);
 		}
-		_schedulerEntries.add(schedulerEntry);
 	}
 
 	/**
@@ -2992,11 +3011,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getCompanyId(), getTimestamp(), getIcon(), getVirtualPath(),
 			getStrutsPath(), getPortletName(), getDisplayName(),
 			getPortletClass(), getConfigurationActionClass(), getIndexerClass(),
-			getOpenSearchClass(), getSchedulerClass(), getPortletURLClass(),
-			getFriendlyURLMapperClass(), getURLEncoderClass(),
-			getPortletDataHandlerClass(), getPortletLayoutListenerClass(),
-			getPollerProcessorClass(), getPopMessageListenerClass(),
-			getSocialActivityInterpreterClass(),
+			getOpenSearchClass(), getSchedulerClass(), getSchedulerEntries(),
+			getPortletURLClass(), getFriendlyURLMapperClass(),
+			getURLEncoderClass(), getPortletDataHandlerClass(),
+			getPortletLayoutListenerClass(), getPollerProcessorClass(),
+			getPopMessageListenerClass(), getSocialActivityInterpreterClass(),
 			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
 			getWebDAVStorageClass(), getControlPanelEntryCategory(),
 			getControlPanelEntryWeight(), getControlPanelEntryClass(),
@@ -3124,7 +3143,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private String _schedulerClass;
 
 	/**
-	 * A list of scheduler entries belong to this portlet.
+	 * The scheduler entries of the portlet.
 	 */
 	private List<SchedulerEntry> _schedulerEntries;
 

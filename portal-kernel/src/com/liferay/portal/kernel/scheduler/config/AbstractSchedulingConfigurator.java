@@ -42,17 +42,19 @@ public abstract class AbstractSchedulingConfigurator
 	implements SchedulingConfigurator {
 
 	public void destroy() {
-		for (Map.Entry<String, List<SchedulerEntry>> schedulers :
+		for (Map.Entry<String, List<SchedulerEntry>> schedulerEntries :
 				_schedulerEntries.entrySet()) {
-			for (SchedulerEntry schedulerEntry : schedulers.getValue()) {
+
+			for (SchedulerEntry schedulerEntry : schedulerEntries.getValue()) {
 				try {
-					_schedulerEngine.unschedule(schedulerEntry.getTrigger());
+					destroySchedulerEntry(schedulerEntry);
 				}
-				catch (Exception ex) {
-					_log.error("Failed to unschedule:" + schedulerEntry, ex);
+				catch (Exception e) {
+					_log.error("Unable to unschedule " + schedulerEntry, e);
 				}
 			}
 		}
+
 		_schedulerEntries.clear();
 	}
 
@@ -65,22 +67,19 @@ public abstract class AbstractSchedulingConfigurator
 
 			Thread.currentThread().setContextClassLoader(operatingClassLoader);
 
-			for (Map.Entry<String, List<SchedulerEntry>> schedulers :
-				_schedulerEntries.entrySet()) {
+			for (Map.Entry<String, List<SchedulerEntry>> schedulerEntries :
+					_schedulerEntries.entrySet()) {
 
-				String destinationName = schedulers.getKey();
+				String destinationName = schedulerEntries.getKey();
 
-				for (SchedulerEntry schedulerEntry : schedulers.getValue()) {
+				for (SchedulerEntry schedulerEntry :
+						schedulerEntries.getValue()) {
+
 					try {
-						_messageBus.registerMessageListener(
-							destinationName, schedulerEntry.getEventListener());
-						_schedulerEngine.schedule(
-							schedulerEntry.getTrigger(),
-							schedulerEntry.getDescription(),
-							destinationName, null);
+						initSchedulerEntry(destinationName, schedulerEntry);
 					}
-					catch (Exception ex) {
-						_log.error("Failed to schedule:" + schedulerEntry, ex);
+					catch (Exception e) {
+						_log.error("Unable to schedule " + schedulerEntry, e);
 					}
 				}
 			}
@@ -98,20 +97,37 @@ public abstract class AbstractSchedulingConfigurator
 		_schedulerEngine = schedulerEngine;
 	}
 
-	public void setSchedulers(
+	public void setSchedulerEntries(
 		Map<String, List<SchedulerEntry>> schedulerEntries) {
+
 		_schedulerEntries = schedulerEntries;
+	}
+
+	protected abstract ClassLoader getOperatingClassloader();
+
+	protected void destroySchedulerEntry(SchedulerEntry schedulerEntry)
+		throws Exception {
+
+		_schedulerEngine.unschedule(schedulerEntry.getTrigger());
+	}
+
+	protected void initSchedulerEntry(
+			String destinationName, SchedulerEntry schedulerEntry)
+		throws Exception {
+
+		_messageBus.registerMessageListener(
+			destinationName, schedulerEntry.getEventListener());
+
+		_schedulerEngine.schedule(
+			schedulerEntry.getTrigger(), schedulerEntry.getDescription(),
+			destinationName, null);
 	}
 
 	private static Log _log =
 		LogFactoryUtil.getLog(AbstractSchedulingConfigurator.class);
 
-	protected abstract ClassLoader getOperatingClassloader();
-
 	private MessageBus _messageBus;
-
 	private SchedulerEngine _schedulerEngine;
-
 	private Map<String, List<SchedulerEntry>> _schedulerEntries =
 		new HashMap<String, List<SchedulerEntry>>();
 

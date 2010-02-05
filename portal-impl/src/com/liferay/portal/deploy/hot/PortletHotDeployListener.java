@@ -22,7 +22,6 @@
 
 package com.liferay.portal.deploy.hot;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
 import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -36,8 +35,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.poller.PollerProcessor;
-import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletBag;
@@ -45,6 +44,7 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.OpenSearch;
@@ -156,6 +156,18 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
+	protected void destroySchedulerEntry(SchedulerEntry schedulerEntry)
+		throws Exception {
+
+		MessageListener schedulerEventListener =
+			schedulerEntry.getEventListener();
+
+		MessageBusUtil.unregisterMessageListener(
+			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
+
+		SchedulerEngineUtil.unschedule(schedulerEntry.getTrigger());
+	}
+
 	protected void destroyPortlet(Portlet portlet, Set<String> portletIds)
 		throws Exception {
 
@@ -180,40 +192,19 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			IndexerRegistryUtil.unregister(indexer);
 		}
 
-		Scheduler scheduler = portlet.getSchedulerInstance();
+		if (PropsValues.SCHEDULER_ENABLED){
+			Scheduler scheduler = portlet.getSchedulerInstance();
 
-		if (scheduler != null) {
-			scheduler.unschedule();
-		}
+			if (scheduler != null) {
+				scheduler.unschedule();
+			}
 
-		List<SchedulerEntry> schedulerEntries =
-			portlet.getSchedulerEntries();
+			List<SchedulerEntry> schedulerEntries =
+				portlet.getSchedulerEntries();
 
-		if (schedulerEntries != null && schedulerEntries.size() > 0) {
-			for (SchedulerEntry schedulerEntry : schedulerEntries) {
-				try {
-					com.liferay.portal.kernel.messaging.MessageListener
-						schedulerEventListener =
-							schedulerEntry.getEventListener();
-					if (schedulerEventListener == null) {
-						throw new SystemException(
-							"Unable to create scheduler listener " +
-							"from class:" +
-							schedulerEntry.getEventListenerClass());
-					}
-
-					MessageBusUtil.unregisterMessageListener(
-						DestinationNames.SCHEDULER_DISPATCH,
-						schedulerEventListener);
-					SchedulerEngineUtil.unschedule(schedulerEntry.getTrigger());
-				}
-				catch (Exception ex) {
-					if (_log.isErrorEnabled()) {
-						_log.error(
-							"Failed to remove scheduler for " +
-							"portlet:" + portlet.getPortletName(), ex);
-					}
-					continue;
+			if ((schedulerEntries != null) && !schedulerEntries.isEmpty()) {
+				for (SchedulerEntry schedulerEntry : schedulerEntries) {
+					destroySchedulerEntry(schedulerEntry);
 				}
 			}
 		}
@@ -570,36 +561,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			List<SchedulerEntry> schedulerEntries =
 				portlet.getSchedulerEntries();
 
-			if (schedulerEntries != null && schedulerEntries.size() > 0) {
+			if ((schedulerEntries != null) && !schedulerEntries.isEmpty()) {
 				for (SchedulerEntry schedulerEntry : schedulerEntries) {
-					try {
-						com.liferay.portal.kernel.messaging.MessageListener
-							schedulerEventListener =
-								schedulerEntry.getEventListener();
-						if (schedulerEventListener == null) {
-							throw new SystemException(
-								"Unable to create scheduler listener " +
-								"from class:" +
-								schedulerEntry.getEventListenerClass());
-						}
-
-						MessageBusUtil.registerMessageListener(
-							DestinationNames.SCHEDULER_DISPATCH,
-							schedulerEventListener);
-						SchedulerEngineUtil.schedule(
-							schedulerEntry.getTrigger(),
-							schedulerEntry.getDescription(),
-							DestinationNames.SCHEDULER_DISPATCH, null);
-
-					}
-					catch (Exception ex) {
-						if (_log.isErrorEnabled()) {
-							_log.error(
-								"Failed to create scheduler for portlet:" +
-								portlet.getPortletName(), ex);
-						}
-						continue;
-					}
+					initSchedulerEntry(schedulerEntry, portletClassLoader);
 				}
 			}
 		}
@@ -657,12 +621,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portlet.getPortletId(), pollerProcessorInstance);
 		}
 
-		MessageListener popMessageListenerInstance = null;
+		com.liferay.portal.kernel.pop.MessageListener
+			popMessageListenerInstance = null;
 
 		if (Validator.isNotNull(portlet.getPopMessageListenerClass())) {
 			popMessageListenerInstance =
-				(MessageListener)portletClassLoader.loadClass(
-					portlet.getPopMessageListenerClass()).newInstance();
+				(com.liferay.portal.kernel.pop.MessageListener)
+					portletClassLoader.loadClass(
+						portlet.getPopMessageListenerClass()).newInstance();
 
 			POPServerUtil.addListener(popMessageListenerInstance);
 		}
@@ -862,6 +828,27 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	protected void initSchedulerEntry(
+			SchedulerEntry schedulerEntry, ClassLoader portletClassLoader)
+		throws Exception {
+
+		MessageListener schedulerEventListener =
+			(MessageListener)portletClassLoader.loadClass(
+				schedulerEntry.getEventListenerClass()).newInstance();
+
+		schedulerEventListener = new SchedulerEventMessageListenerWrapper(
+			schedulerEventListener);
+
+		schedulerEntry.setEventListener(schedulerEventListener);
+
+		MessageBusUtil.registerMessageListener(
+			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
+
+		SchedulerEngineUtil.schedule(
+			schedulerEntry.getTrigger(), schedulerEntry.getDescription(),
+			DestinationNames.SCHEDULER_DISPATCH, null);
 	}
 
 	protected void initPortletApp(

@@ -296,13 +296,18 @@ public class PortletWrapper implements Portlet {
 		return _portlet.getSchedulerInstance();
 	}
 
+	public void addSchedulerEntry(
+		com.liferay.portal.kernel.scheduler.SchedulerEntry schedulerEntry) {
+		_portlet.addSchedulerEntry(schedulerEntry);
+	}
+
 	public java.util.List<com.liferay.portal.kernel.scheduler.SchedulerEntry> getSchedulerEntries() {
 		return _portlet.getSchedulerEntries();
 	}
 
-	public void addSchedulerEntry(
-		com.liferay.portal.kernel.scheduler.SchedulerEntry schedulerEntry) {
-		_portlet.addSchedulerEntry(schedulerEntry);
+	public void setSchedulerEntries(
+		java.util.List<com.liferay.portal.kernel.scheduler.SchedulerEntry> schedulerEntries) {
+		_portlet.setSchedulerEntries(schedulerEntries);
 	}
 
 	public java.lang.String getPortletURLClass() {

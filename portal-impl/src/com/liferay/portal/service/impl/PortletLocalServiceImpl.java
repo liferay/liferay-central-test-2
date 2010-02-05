@@ -1114,63 +1114,90 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setSchedulerClass(GetterUtil.getString(
 					portlet.elementText("scheduler-class"),
 					portletModel.getSchedulerClass()));
-				Iterator<Element> schedulerEntryElementIterator =
-					portlet.elementIterator("scheduler-entry");
-				while (schedulerEntryElementIterator.hasNext()){
-					Element schedulerEntryElement =
-						schedulerEntryElementIterator.next();
+
+				Iterator<Element> itr2 = portlet.elementIterator(
+					"scheduler-entry");
+
+				while (itr2.hasNext()){
+					Element schedulerEntryEl = itr2.next();
 
 					SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
 
-					String schedulerDescription =
-						schedulerEntryElement.elementText(
-							"scheduler-description");
-					schedulerEntry.setDescription(GetterUtil.getString(
-						schedulerDescription, StringPool.BLANK));
+					String schedulerDescription = schedulerEntryEl.elementText(
+						"scheduler-description");
 
-					schedulerEntry.setListenerClass(GetterUtil.getString(
-						schedulerEntryElement.elementText(
+					schedulerEntry.setDescription(GetterUtil.getString(
+						schedulerDescription));
+					schedulerEntry.setEventListenerClass(GetterUtil.getString(
+						schedulerEntryEl.elementText(
 							"scheduler-event-listener-class"),
 						schedulerEntry.getEventListenerClass()));
 
-					Element triggerElement =
-						schedulerEntryElement.element("trigger");
+					Element triggerEl = schedulerEntryEl.element("trigger");
 
-					Element realTriggerElement =
-						triggerElement.elementIterator().next();
+					Element cronEl = triggerEl.element("cron");
+					Element simpleEl = triggerEl.element("simple");
 
-					schedulerEntry.setTriggerType(
-						TriggerType.valueOf(
-							realTriggerElement.getName().toUpperCase()));
+					if (cronEl != null) {
+						schedulerEntry.setTriggerType(TriggerType.CRON);
 
-					Element triggerValueElement =
-						realTriggerElement.elementIterator().next();
+						Element propertyKeyEl = cronEl.element("property-key");
 
-					String triggerValueElementName =
-						triggerValueElement.getName();
+						if (propertyKeyEl != null) {
+							schedulerEntry.setReadProperty(true);
 
-					schedulerEntry.setReadProperty(
-						triggerValueElementName.equals("property-key"));
-
-					if (schedulerEntry.getTriggerType() == TriggerType.SIMPLE &&
-						triggerValueElementName.equals("simple-trigger-value"))
-					{
-						String timeUnit =
-							triggerValueElement.attributeValue(
-								"time-unit", "sec");
-						long timeValue =
-							Long.parseLong(triggerValueElement.getTextTrim());
-						schedulerEntry.setTriggerValue(
-							Long.toString(
-								_timeUnitMap.get(timeUnit) * timeValue));
+							schedulerEntry.setTriggerValue(
+								propertyKeyEl.getTextTrim());
+						}
+						else {
+							schedulerEntry.setTriggerValue(
+								cronEl.elementText("cron-trigger-value"));
+						}
 					}
-					else {
-						schedulerEntry.setTriggerValue(
-							triggerValueElement.getTextTrim());
+					else if (simpleEl != null) {
+						schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+
+						Element propertyKeyEl = simpleEl.element(
+							"property-key");
+
+						if (propertyKeyEl != null) {
+							schedulerEntry.setReadProperty(true);
+
+							schedulerEntry.setTriggerValue(
+								propertyKeyEl.getTextTrim());
+						}
+						else {
+							Element simpleTriggerValueEl = triggerEl.element(
+								"simple-trigger-value");
+
+							String timeUnit =
+								simpleTriggerValueEl.attributeValue(
+									"time-unit", "SEC");
+
+							long timeValue = GetterUtil.getLong(
+								simpleTriggerValueEl.getTextTrim());
+
+							if (timeUnit.equalsIgnoreCase("DAY")) {
+								timeValue = timeValue * 60 * 60 * 24;
+							}
+							else if (timeUnit.equalsIgnoreCase("HOUR")) {
+								timeValue = timeValue * 60 * 60;
+							}
+							else if (timeUnit.equalsIgnoreCase("MIN")) {
+								timeValue = timeValue * 60;
+							}
+							else if (timeUnit.equalsIgnoreCase("WEEK")) {
+								timeValue = timeValue * 60 * 60 * 24 * 7;
+							}
+
+							schedulerEntry.setTriggerValue(
+								String.valueOf(timeValue));
+						}
 					}
 
 					portletModel.addSchedulerEntry(schedulerEntry);
 				}
+
 				portletModel.setPortletURLClass(GetterUtil.getString(
 					portlet.elementText("portlet-url-class"),
 					portletModel.getPortletURLClass()));
@@ -1232,8 +1259,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> assetRendererFactoryClasses =
 					portletModel.getAssetRendererFactoryClasses();
 
-				Iterator<Element> itr2 = portlet.elements(
-					"asset-renderer-factory").iterator();
+				itr2 = portlet.elements("asset-renderer-factory").iterator();
 
 				while (itr2.hasNext()) {
 					Element assetRendererFactoryClassEl = itr2.next();
@@ -2043,15 +2069,5 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		new ConcurrentHashMap<String, Portlet>();
 	private static Map<String, Portlet> _friendlyURLMapperPortlets =
 		new ConcurrentHashMap<String, Portlet>();
-
-	private static Map<String, Integer> _timeUnitMap =
-		new HashMap<String, Integer>();
-	static {
-		_timeUnitMap.put("WEEK", 7 * 24 * 60 * 60);
-		_timeUnitMap.put("DAY", 24 * 60 * 60);
-		_timeUnitMap.put("HOUR", 60 * 60);
-		_timeUnitMap.put("MIN", 60);
-		_timeUnitMap.put("SEC", 1);
-	}
 
 }

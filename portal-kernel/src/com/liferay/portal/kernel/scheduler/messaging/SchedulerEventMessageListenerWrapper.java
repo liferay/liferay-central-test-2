@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * <a href="SchedulerEventMessageListenerWrapper.java.html"><b><i>View Source
@@ -37,26 +39,34 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 
 	public SchedulerEventMessageListenerWrapper(
 		MessageListener messageListener) {
+
 		_messageListener = messageListener;
+
 		String className = messageListener.getClass().getName();
-		_key = className.concat(":").concat(className);
+
+		_key = className.concat(StringPool.COLON).concat(className);
 	}
 
 	public void receive(Message message) {
-		String receiverKey=message.getString(SchedulerEngine.RECEIVER_KEY);
-		if (receiverKey != null && receiverKey.equals(_key)){
+		String receiverKey = GetterUtil.getString(
+			message.getString(SchedulerEngine.RECEIVER_KEY));
+
+		if (receiverKey.equals(_key)) {
 			try{
 				_messageListener.receive(message);
-			} finally {
-				if (message.getBoolean(SchedulerEngine.POISON_MESSAGE)) {
-					String destination = message.getDestinationName();
-					MessageBusUtil.unregisterMessageListener(destination, this);
+			}
+			finally {
+				if (message.getBoolean(SchedulerEngine.DISABLE)) {
+					String destinationName = message.getDestinationName();
+
+					MessageBusUtil.unregisterMessageListener(
+						destinationName, this);
 				}
 			}
 		}
 	}
 
-	private final String _key;
-	private final MessageListener _messageListener;
+	private String _key;
+	private MessageListener _messageListener;
 
 }

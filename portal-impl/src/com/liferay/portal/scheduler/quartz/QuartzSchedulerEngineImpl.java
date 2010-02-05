@@ -165,7 +165,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			String jobName = trigger.getJobName();
 			String groupName = trigger.getGroupName();
 
-			String receiverKey = jobName + StringPool.COLON + groupName;
 			if (jobName.length() > _JOB_NAME_MAX_LENGTH) {
 				jobName = jobName.substring(0, _JOB_NAME_MAX_LENGTH);
 			}
@@ -236,7 +235,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				message = new Message();
 			}
 
-			message.put(RECEIVER_KEY, receiverKey);
+			message.put(
+				RECEIVER_KEY,
+				jobName.concat(StringPool.COLON).concat(groupName));
 
 			schedule(quartzTrigger, description, destination, message);
 		}
