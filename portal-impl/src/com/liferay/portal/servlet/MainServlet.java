@@ -475,288 +475,6 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-	protected boolean processShutdownRequest(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
-
-		if (!ShutdownUtil.isShutdown()) {
-			return false;
-		}
-
-		response.setContentType(ContentTypes.TEXT_HTML_UTF8);
-
-		String html = ContentUtil.get(
-			"com/liferay/portal/dependencies/shutdown.html");
-
-		response.getOutputStream().print(html);
-
-		return true;
-	}
-
-	protected boolean processMaintenanceRequest(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
-
-		if (!MaintenanceUtil.isMaintaining()) {
-			return false;
-		}
-
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
-			"/html/portal/maintenance.jsp");
-
-		requestDispatcher.include(request, response);
-
-		return true;
-	}
-
-	protected HttpServletRequest protectRequest(
-		HttpServletRequest request, String remoteUser) {
-
-		// WebSphere will not return the remote user unless you are
-		// authenticated AND accessing a protected path. Other servers will
-		// return the remote user for all threads associated with an
-		// authenticated user. We use ProtectedServletRequest to ensure we get
-		// similar behavior across all servers.
-
-		return new ProtectedServletRequest(request, remoteUser);
-	}
-
-	protected HttpServletRequest encryptRequest(
-		HttpServletRequest request, long companyId) {
-
-		boolean encryptRequest = ParamUtil.getBoolean(request, WebKeys.ENCRYPT);
-
-		if (!encryptRequest) {
-			return request;
-		}
-
-		try {
-			Company company = CompanyLocalServiceUtil.getCompanyById(
-				companyId);
-
-			request = new EncryptedServletRequest(
-				request, company.getKeyObj());
-		}
-		catch (Exception e) {
-		}
-
-		return request;
-	}
-
-	protected long getUserId(HttpServletRequest request) {
-		return PortalUtil.getUserId(request);
-	}
-
-	protected String getRemoteUser(
-		HttpServletRequest request, long userId) {
-
-		String remoteUser = request.getRemoteUser();
-
-		if (!PropsValues.PORTAL_JAAS_ENABLE) {
-			HttpSession session = request.getSession();
-
-			String jRemoteUser = (String)session.getAttribute("j_remoteuser");
-
-			if (jRemoteUser != null) {
-				remoteUser = jRemoteUser;
-
-				session.removeAttribute("j_remoteuser");
-			}
-		}
-
-		if ((userId > 0) && (remoteUser == null)) {
-			remoteUser = String.valueOf(userId);
-		}
-
-		return remoteUser;
-	}
-
-	protected void setPrincipalName(long userId, String remoteUser) {
-		if ((userId == 0) && (remoteUser == null)) {
-			return;
-		}
-
-		String name = String.valueOf(userId);
-
-		if (remoteUser != null) {
-			name = remoteUser;
-		}
-
-		PrincipalThreadLocal.setName(name);
-	}
-
-	protected long getCompanyId(HttpServletRequest request) {
-		return PortalInstances.getCompanyId(request);
-	}
-
-	protected long loginUser(
-			HttpServletRequest request, HttpServletResponse response,
-			long userId, String remoteUser)
-		throws PortalException, SystemException {
-
-		if ((userId > 0) || (remoteUser == null)) {
-			return userId;
-		}
-
-		userId = GetterUtil.getLong(remoteUser);
-
-		EventsProcessorUtil.process(
-			PropsKeys.LOGIN_EVENTS_PRE, PropsValues.LOGIN_EVENTS_PRE, request,
-			response);
-
-		User user = UserLocalServiceUtil.getUserById(userId);
-
-		if (PropsValues.USERS_UPDATE_LAST_LOGIN) {
-			UserLocalServiceUtil.updateLastLogin(
-				userId, request.getRemoteAddr());
-		}
-
-		HttpSession session = request.getSession();
-
-		session.setAttribute(WebKeys.USER_ID, new Long(userId));
-		session.setAttribute(Globals.LOCALE_KEY, user.getLocale());
-
-		EventsProcessorUtil.process(
-			PropsKeys.LOGIN_EVENTS_POST, PropsValues.LOGIN_EVENTS_POST,
-			request, response);
-
-		return userId;
-	}
-
-	protected void checkPortletSessionTracker(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-
-		if (session.getAttribute(WebKeys.PORTLET_SESSION_TRACKER) != null) {
-			return;
-		}
-
-		session.setAttribute(
-			WebKeys.PORTLET_SESSION_TRACKER,
-			PortletSessionTracker.getInstance());
-	}
-
-	protected void checkPortletRequestProcessor(HttpServletRequest request)
-		throws ServletException {
-
-		ServletContext servletContext = getServletContext();
-
-		PortletRequestProcessor portletReqProcessor =
-			(PortletRequestProcessor)servletContext.getAttribute(
-				WebKeys.PORTLET_STRUTS_PROCESSOR);
-
-		if (portletReqProcessor == null) {
-			ModuleConfig moduleConfig = getModuleConfig(request);
-
-			portletReqProcessor =
-				PortletRequestProcessor.getInstance(this, moduleConfig);
-
-			servletContext.setAttribute(
-				WebKeys.PORTLET_STRUTS_PROCESSOR, portletReqProcessor);
-		}
-	}
-
-	protected void checkTilesDefinitionsFactory() {
-		ServletContext servletContext = getServletContext();
-
-		if (servletContext.getAttribute(
-				TilesUtilImpl.DEFINITIONS_FACTORY) != null) {
-
-			return;
-		}
-
-		servletContext.setAttribute(
-			TilesUtilImpl.DEFINITIONS_FACTORY,
-			servletContext.getAttribute(TilesUtilImpl.DEFINITIONS_FACTORY));
-	}
-
-	protected boolean processServicePre(
-			HttpServletRequest request, HttpServletResponse response,
-			long userId)
-		throws IOException, ServletException {
-
-		try {
-			EventsProcessorUtil.process(
-				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,
-				PropsValues.SERVLET_SERVICE_EVENTS_PRE, request, response);
-		}
-		catch (Exception e) {
-			Throwable cause = e.getCause();
-
-			if (cause instanceof NoSuchLayoutException) {
-				sendError(
-					HttpServletResponse.SC_NOT_FOUND, cause, request, response);
-
-				return true;
-			}
-			else if (cause instanceof PrincipalException) {
-				processServicePrePrincipalException(
-					cause, userId, request, response);
-
-				return true;
-			}
-
-			_log.error(e, e);
-
-			request.setAttribute(PageContext.EXCEPTION, e);
-
-			ServletContext servletContext = getServletContext();
-
-			StrutsUtil.forward(
-				PropsValues.SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE,
-				servletContext, request, response);
-
-			return true;
-		}
-
-		return false;
-	}
-
-	protected void processServicePost(
-		HttpServletRequest request, HttpServletResponse response) {
-
-		try {
-			EventsProcessorUtil.process(
-				PropsKeys.SERVLET_SERVICE_EVENTS_POST,
-				PropsValues.SERVLET_SERVICE_EVENTS_POST, request, response);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		response.addHeader(
-			_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
-	}
-
-	protected void checkServletContext(HttpServletRequest request) {
-		ServletContext servletContext = getServletContext();
-
-		request.setAttribute(WebKeys.CTX, servletContext);
-	}
-
-	protected boolean hasThemeDisplay(HttpServletRequest request) {
-		if (request.getAttribute(WebKeys.THEME_DISPLAY) == null) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	protected boolean hasAbsoluteRedirect(HttpServletRequest request) {
-		if (request.getAttribute(
-				AbsoluteRedirectsResponse.class.getName()) == null) {
-
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	protected void setPortalPort(HttpServletRequest request) {
-		PortalUtil.setPortalPort(request);
-	}
-
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -906,6 +624,58 @@ public class MainServlet extends ActionServlet {
 		super.service(request, response);
 	}
 
+	protected void checkPortletRequestProcessor(HttpServletRequest request)
+		throws ServletException {
+
+		ServletContext servletContext = getServletContext();
+
+		PortletRequestProcessor portletReqProcessor =
+			(PortletRequestProcessor)servletContext.getAttribute(
+				WebKeys.PORTLET_STRUTS_PROCESSOR);
+
+		if (portletReqProcessor == null) {
+			ModuleConfig moduleConfig = getModuleConfig(request);
+
+			portletReqProcessor =
+				PortletRequestProcessor.getInstance(this, moduleConfig);
+
+			servletContext.setAttribute(
+				WebKeys.PORTLET_STRUTS_PROCESSOR, portletReqProcessor);
+		}
+	}
+
+	protected void checkPortletSessionTracker(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		if (session.getAttribute(WebKeys.PORTLET_SESSION_TRACKER) != null) {
+			return;
+		}
+
+		session.setAttribute(
+			WebKeys.PORTLET_SESSION_TRACKER,
+			PortletSessionTracker.getInstance());
+	}
+
+	protected void checkServletContext(HttpServletRequest request) {
+		ServletContext servletContext = getServletContext();
+
+		request.setAttribute(WebKeys.CTX, servletContext);
+	}
+
+	protected void checkTilesDefinitionsFactory() {
+		ServletContext servletContext = getServletContext();
+
+		if (servletContext.getAttribute(
+				TilesUtilImpl.DEFINITIONS_FACTORY) != null) {
+
+			return;
+		}
+
+		servletContext.setAttribute(
+			TilesUtilImpl.DEFINITIONS_FACTORY,
+			servletContext.getAttribute(TilesUtilImpl.DEFINITIONS_FACTORY));
+	}
+
 	protected void checkWebSettings(String xml) throws DocumentException {
 		Document doc = SAXReaderUtil.read(xml);
 
@@ -1025,6 +795,56 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
+	protected HttpServletRequest encryptRequest(
+		HttpServletRequest request, long companyId) {
+
+		boolean encryptRequest = ParamUtil.getBoolean(request, WebKeys.ENCRYPT);
+
+		if (!encryptRequest) {
+			return request;
+		}
+
+		try {
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				companyId);
+
+			request = new EncryptedServletRequest(
+				request, company.getKeyObj());
+		}
+		catch (Exception e) {
+		}
+
+		return request;
+	}
+
+	protected long getCompanyId(HttpServletRequest request) {
+		return PortalInstances.getCompanyId(request);
+	}
+
+	protected String getRemoteUser(
+		HttpServletRequest request, long userId) {
+
+		String remoteUser = request.getRemoteUser();
+
+		if (!PropsValues.PORTAL_JAAS_ENABLE) {
+			HttpSession session = request.getSession();
+
+			String jRemoteUser = (String)session.getAttribute("j_remoteuser");
+
+			if (jRemoteUser != null) {
+				remoteUser = jRemoteUser;
+
+				session.removeAttribute("j_remoteuser");
+			}
+		}
+
+		if ((userId > 0) && (remoteUser == null)) {
+			remoteUser = String.valueOf(userId);
+		}
+
+		return remoteUser;
+	}
+
 	protected synchronized RequestProcessor getRequestProcessor(
 			ModuleConfig moduleConfig)
 		throws ServletException {
@@ -1058,6 +878,30 @@ public class MainServlet extends ActionServlet {
 		}
 
 		return processor;
+	}
+
+	protected long getUserId(HttpServletRequest request) {
+		return PortalUtil.getUserId(request);
+	}
+
+	protected boolean hasAbsoluteRedirect(HttpServletRequest request) {
+		if (request.getAttribute(
+				AbsoluteRedirectsResponse.class.getName()) == null) {
+
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	protected boolean hasThemeDisplay(HttpServletRequest request) {
+		if (request.getAttribute(WebKeys.THEME_DISPLAY) == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	protected void initAssetRendererFactories(List<Portlet> portlets)
@@ -1493,6 +1337,40 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
+	protected long loginUser(
+			HttpServletRequest request, HttpServletResponse response,
+			long userId, String remoteUser)
+		throws PortalException, SystemException {
+
+		if ((userId > 0) || (remoteUser == null)) {
+			return userId;
+		}
+
+		userId = GetterUtil.getLong(remoteUser);
+
+		EventsProcessorUtil.process(
+			PropsKeys.LOGIN_EVENTS_PRE, PropsValues.LOGIN_EVENTS_PRE, request,
+			response);
+
+		User user = UserLocalServiceUtil.getUserById(userId);
+
+		if (PropsValues.USERS_UPDATE_LAST_LOGIN) {
+			UserLocalServiceUtil.updateLastLogin(
+				userId, request.getRemoteAddr());
+		}
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute(WebKeys.USER_ID, new Long(userId));
+		session.setAttribute(Globals.LOCALE_KEY, user.getLocale());
+
+		EventsProcessorUtil.process(
+			PropsKeys.LOGIN_EVENTS_POST, PropsValues.LOGIN_EVENTS_POST,
+			request, response);
+
+		return userId;
+	}
+
 	protected void processGlobalShutdownEvents() throws Exception {
 		EventsProcessorUtil.process(
 			PropsKeys.GLOBAL_SHUTDOWN_EVENTS,
@@ -1504,6 +1382,80 @@ public class MainServlet extends ActionServlet {
 	protected void processGlobalStartupEvents() throws Exception {
 		EventsProcessorUtil.process(
 			PropsKeys.GLOBAL_STARTUP_EVENTS, PropsValues.GLOBAL_STARTUP_EVENTS);
+	}
+
+	protected boolean processMaintenanceRequest(
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
+
+		if (!MaintenanceUtil.isMaintaining()) {
+			return false;
+		}
+
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
+			"/html/portal/maintenance.jsp");
+
+		requestDispatcher.include(request, response);
+
+		return true;
+	}
+
+	protected void processServicePost(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+			EventsProcessorUtil.process(
+				PropsKeys.SERVLET_SERVICE_EVENTS_POST,
+				PropsValues.SERVLET_SERVICE_EVENTS_POST, request, response);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		response.addHeader(
+			_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
+	}
+
+	protected boolean processServicePre(
+			HttpServletRequest request, HttpServletResponse response,
+			long userId)
+		throws IOException, ServletException {
+
+		try {
+			EventsProcessorUtil.process(
+				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,
+				PropsValues.SERVLET_SERVICE_EVENTS_PRE, request, response);
+		}
+		catch (Exception e) {
+			Throwable cause = e.getCause();
+
+			if (cause instanceof NoSuchLayoutException) {
+				sendError(
+					HttpServletResponse.SC_NOT_FOUND, cause, request, response);
+
+				return true;
+			}
+			else if (cause instanceof PrincipalException) {
+				processServicePrePrincipalException(
+					cause, userId, request, response);
+
+				return true;
+			}
+
+			_log.error(e, e);
+
+			request.setAttribute(PageContext.EXCEPTION, e);
+
+			ServletContext servletContext = getServletContext();
+
+			StrutsUtil.forward(
+				PropsValues.SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE,
+				servletContext, request, response);
+
+			return true;
+		}
+
+		return false;
 	}
 
 	protected void processServicePrePrincipalException(
@@ -1551,10 +1503,40 @@ public class MainServlet extends ActionServlet {
 		response.sendRedirect(redirect);
 	}
 
+	protected boolean processShutdownRequest(
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException {
+
+		if (!ShutdownUtil.isShutdown()) {
+			return false;
+		}
+
+		response.setContentType(ContentTypes.TEXT_HTML_UTF8);
+
+		String html = ContentUtil.get(
+			"com/liferay/portal/dependencies/shutdown.html");
+
+		response.getOutputStream().print(html);
+
+		return true;
+	}
+
 	protected void processStartupEvents() throws Exception {
 		StartupAction startupAction = new StartupAction();
 
 		startupAction.run(null);
+	}
+
+	protected HttpServletRequest protectRequest(
+		HttpServletRequest request, String remoteUser) {
+
+		// WebSphere will not return the remote user unless you are
+		// authenticated AND accessing a protected path. Other servers will
+		// return the remote user for all threads associated with an
+		// authenticated user. We use ProtectedServletRequest to ensure we get
+		// similar behavior across all servers.
+
+		return new ProtectedServletRequest(request, remoteUser);
 	}
 
 	protected void sendError(
@@ -1572,6 +1554,24 @@ public class MainServlet extends ActionServlet {
 		PortalUtil.sendError(status, (Exception)t, dynamicRequest, response);
 	}
 
+	protected void setPortalPort(HttpServletRequest request) {
+		PortalUtil.setPortalPort(request);
+	}
+
+	protected void setPrincipalName(long userId, String remoteUser) {
+		if ((userId == 0) && (remoteUser == null)) {
+			return;
+		}
+
+		String name = String.valueOf(userId);
+
+		if (remoteUser != null) {
+			name = remoteUser;
+		}
+
+		PrincipalThreadLocal.setName(name);
+	}
+ 
 	private static final String _LIFERAY_PORTAL_REQUEST_HEADER =
 		"Liferay-Portal";
 
