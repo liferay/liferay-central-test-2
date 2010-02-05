@@ -2393,7 +2393,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			for (UserGroupRole userGroupRole : userGroupRoles) {
 				if (Arrays.binarySearch(
-						validGroupIds, userGroupRole.getGroupId()) == -1) {
+						validGroupIds, userGroupRole.getGroupId()) >= 0) {
 
 					userGroupRoleLocalService.addUserGroupRole(userGroupRole);
 				}
