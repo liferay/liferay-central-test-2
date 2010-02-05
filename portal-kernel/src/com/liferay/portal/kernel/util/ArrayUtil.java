@@ -363,6 +363,142 @@ public class ArrayUtil {
 		return newArray;
 	}
 
+	public static boolean[] clone(boolean[] array) {
+		boolean[] newArray = new boolean[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static Boolean[] clone(Boolean[] array) {
+		Boolean[] newArray = new Boolean[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static byte[] clone(byte[] array) {
+		byte[] newArray = new byte[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static double[] clone(double[] array) {
+		double[] newArray = new double[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static Double[] clone(Double[] array) {
+		Double[] newArray = new Double[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static float[] clone(float[] array) {
+		float[] newArray = new float[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static Float[] clone(Float[] array) {
+		Float[] newArray = new Float[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static int[] clone(int[] array) {
+		int[] newArray = new int[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static Integer[] clone(Integer[] array) {
+		Integer[] newArray = new Integer[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static long[] clone(long[] array) {
+		long[] newArray = new long[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static Long[] clone(Long[] array) {
+		Long[] newArray = new Long[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static Object[] clone(Object[] array) {
+		Object[] newArray = new Object[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static Object[][] clone(Object[][] array) {
+		Object[][] newArray = new Object[array.length][];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static short[] clone(short[] array) {
+		short[] newArray = new short[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static Short[] clone(Short[] array) {
+		Short[] newArray = new Short[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static String[] clone(String[] array) {
+		String[] newArray = new String[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static String[][] clone(String[][] array) {
+		String[][] newArray = new String[array.length][];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
 	public static void combine(
 		Object[] array1, Object[] array2, Object[] combinedArray) {
 

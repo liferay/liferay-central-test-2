@@ -187,6 +187,74 @@ public class ArrayUtil_IW {
 		return ArrayUtil.append(array1, array2);
 	}
 
+	public boolean[] clone(boolean[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.Boolean[] clone(java.lang.Boolean[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public byte[] clone(byte[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public double[] clone(double[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.Double[] clone(java.lang.Double[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public float[] clone(float[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.Float[] clone(java.lang.Float[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public int[] clone(int[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.Integer[] clone(java.lang.Integer[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public long[] clone(long[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.Long[] clone(java.lang.Long[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.Object[] clone(java.lang.Object[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.Object[][] clone(java.lang.Object[][] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public short[] clone(short[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.Short[] clone(java.lang.Short[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.String[] clone(java.lang.String[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.String[][] clone(java.lang.String[][] array) {
+		return ArrayUtil.clone(array);
+	}
+
 	public void combine(java.lang.Object[] array1, java.lang.Object[] array2,
 		java.lang.Object[] combinedArray) {
 		ArrayUtil.combine(array1, array2, combinedArray);
