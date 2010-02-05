@@ -200,10 +200,10 @@ AUI().add(
 					instance.entryHolder.placeAfter(toolsetBoundingBox);
 				},
 
-				_showSelectPopup: function() {
+				_showSelectPopup: function(event) {
 					var instance = this;
 
-					instance._showPopup();
+					instance._showPopup(event);
 
 					var popup = instance._popup;
 

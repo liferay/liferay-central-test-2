@@ -150,8 +150,8 @@ AUI().add(
 						var popup = new A.Dialog(
 							{
 								bodyContent: TPL_LOADING,
-								centered: true,
 								draggable: true,
+								hideClass: 'aui-helper-hidden-accessible',
 								stack: true,
 								title: '',
 								width: 320,
@@ -347,20 +347,26 @@ AUI().add(
 					);
 				},
 
-				_showPopup: function() {
+				_showPopup: function(event) {
 					var instance = this;
 
 					var popup = instance._getPopup();
+
+					if (event && event.currentTarget) {
+						var toolItem = event.currentTarget.get('boundingBox');
+
+						popup.align(toolItem, ['bl', 'tl']);
+					}
 
 					popup.entriesNode.html(TPL_LOADING);
 
 					popup.show();
 				},
 
-				_showSelectPopup: function() {
+				_showSelectPopup: function(event) {
 					var instance = this;
 
-					instance._showPopup();
+					instance._showPopup(event);
 
 					instance._popup.set('title', Liferay.Language.get('tags'));
 
@@ -374,7 +380,7 @@ AUI().add(
 				_showSuggestionsPopup: function(event) {
 					var instance = this;
 
-					instance._showPopup();
+					instance._showPopup(event);
 
 					instance._popup.set('title', Liferay.Language.get('suggestions'));
 
