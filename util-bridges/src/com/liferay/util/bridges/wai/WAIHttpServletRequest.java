@@ -64,7 +64,7 @@ public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getRequestURI() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(getContextPath());
 		sb.append(_pathInfo);

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -123,11 +122,9 @@ public class WAIPortlet extends GenericPortlet {
 
 		int pos = friendlyURL.indexOf(_MAPPING);
 
-		StringBundler contextPath = new StringBundler(3);
-
-		contextPath.append(friendlyURL.substring(0, pos + _MAPPING.length()));
-		contextPath.append(StringPool.SLASH);
-		contextPath.append(portletName);
+		String contextPath =
+			friendlyURL.substring(0, pos + _MAPPING.length()).concat(
+			StringPool.SLASH).concat(portletName);
 
 		pos = friendlyURL.indexOf(portletName);
 
@@ -159,7 +156,7 @@ public class WAIPortlet extends GenericPortlet {
 		}
 		else if (_connector.equals(CONNECTOR_INCLUDE)) {
 			HttpServletRequest waiRequest = new WAIHttpServletRequest(
-				request, contextPath.toString(), pathInfo, queryString, params);
+				request, contextPath, pathInfo, queryString, params);
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(
 				appUrl);

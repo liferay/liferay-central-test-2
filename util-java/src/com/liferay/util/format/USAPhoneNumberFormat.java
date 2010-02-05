@@ -65,13 +65,9 @@ public class USAPhoneNumberFormat implements PhoneNumberFormat {
 			return sb.toString();
 		}
 		else if (phoneNumber.length() == 7) {
-			StringBundler sb = new StringBundler(3);
-
-			sb.append(phoneNumber.substring(0, 3));
-			sb.append(StringPool.DASH);
-			sb.append(phoneNumber.substring(3));
-
-			return sb.toString();
+			return 
+				phoneNumber.substring(0, 3).concat(
+				StringPool.DASH).concat(phoneNumber.substring(3));
 		}
 		else {
 			return phoneNumber;
