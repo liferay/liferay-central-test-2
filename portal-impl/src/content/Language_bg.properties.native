@@ -2676,8 +2676,10 @@ radio-buttons=Радио бутони
 range=Обхват
 rank=Ранг
 ranks=Рангове
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
 ratings=Рейтинги
 read-interval-minutes=Интервал на прочитане (Минути)
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=Прочети повече
 read-roles=Прочети ролите
 read=Прочети
@@ -3290,6 +3292,7 @@ the-above-results-include-groups-which-are-missing-the-required-attributes-(grou
 the-above-results-include-users-which-are-missing-the-required-attributes-(screen-name,-password,-email-address,-first-name,-and-last-name).-these-users-will-not-be-imported-until-these-attributes-are-filled-in=Предходните резултати включват потребители, за които липсват необходимите атрибути (потребителско име, парола, адрес на електронна поща, име и фамилия). Тези потребители няма да бъдат импортирани докато не се попълнят атрибутите.
 the-address-of-the-email-recipient=Адрес на получателя на електронна поща
 the-array-of-all-form-values-indexed-by-name=Масив от всички стойности на формата, индексирани по име
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-browser's-remote-address=Отдалечен адрес на браузъра
 the-browser's-remote-host=Отдалечен хост на браузъра
 the-browser's-user-agent=Отдалечен потребителски агент на браузъра
@@ -3930,7 +3933,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> не може да б�
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> не може да бъде деасоцииран от това местоположение.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> не може да бъде деасоцииран от тази организация.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} дена
 x-disables-the-minimum-order-requirement={0} отменя минималното изискване за поръчка.
 x-does-not-have-any-commits-to-the-svn-repository={0} няма никакви качвания в SVN хранилището.
@@ -4037,6 +4040,7 @@ you-have-no-comics-selected=Нямате избрани комикси.
 you-have-no-personalized-pages=Нямате персонализирани страници. Моля, създайте страница.
 you-have-not-configured-any-community-tags=Не сте конфигурирали никакви маркери в общността.
 you-have-not-configured-any-global-tags=Не сте конфигурирали никакви глобални маркери.
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=Беше изпратена поща на {0} за доставката на тази поръчка.
 you-have-sent-an-email-to-x-about-this-order=Беше изпратена поща на {0} относно тази поръчка.
 you-have-successfully-added-a-new-email-account=Вие успешно добавихте нов пощенски акаунт. Вашият акаунт ще бъде готов за ползване след няколко минути.

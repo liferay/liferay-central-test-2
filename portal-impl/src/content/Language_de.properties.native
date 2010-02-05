@@ -1793,6 +1793,7 @@ global-tags-are-injected-to-all-pages-that-you-visit=Globale Tags werden allen S
 global=Global
 go-to-category=Zur Kategorie gehen
 go-to-folder=Zum Ordner gehen
+go-to-homepage=Gehen Sie zu homepage (Automatic Translation)
 go-to-paypal-and-set-up-ipn-to-post-to-x=Bei PayPal einrichten dass der IPN zu {0} postet.
 go-to-the-latest-version=Zur neuesten Version.
 go-to=Nach ... gehen
@@ -3072,8 +3073,12 @@ radio-buttons=Radiokn√∂pfe
 range=Strecke
 rank=Rang
 ranks=Rank
+rate-this-as-bad=Veranschlagen Sie dieses als Schlechtes. (Automatic Translation)
+rate-this-as-good=Veranschlagen Sie dieses, wie gut. (Automatic Translation)
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
 ratings=Bewertungen
 read-interval-minutes=Aktualisierungsinterval (Minuten)
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=Weiterlesen
 read-roles=Rollen lesen
 read=Gelesen
@@ -3758,6 +3763,7 @@ the-above-results-include-users-which-are-missing-the-required-attributes-(scree
 the-address-of-the-email-recipient=Die Adresse des E-Mail Empf√§ngers
 the-address-of-the-email-sender=Die Adresse des eMail-Absenders (Automatic Translation)
 the-array-of-all-form-values-indexed-by-name=Alle Formwerte als Array, indiziert durch Namen
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-blog-entry-url=Die URL des Blogeintrags
 the-browser's-remote-address=Adresse des Browsers
 the-browser's-remote-host=Hostname des Browsers
@@ -4502,7 +4508,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> kann nicht aus dieser 
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> kann nicht aus diesem Standort entfernt werden.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> kann nicht aus dieser Organisation entfernt werden.
 x-changed-the-state-from-x-to-x={0} aktualisiert von {1} auf {2}.
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} Tage
 x-disables-the-minimum-order-requirement={0} deaktiviert die minimale Reihenfolge-Anforderungen.
 x-does-not-have-any-commits-to-the-svn-repository={0} hat noch keine Beitr√§ge zum SVN-Repository eingereicht.
@@ -4613,6 +4619,9 @@ you-have-no-personalized-pages=Sie haben keine angepassten Seiten. Bitte eine Se
 you-have-not-configured-a-reminder-query=Sie haben keine Erinnerungsfrage konfiguriert. Bitte kontaktieren Sie den Administrator.
 you-have-not-configured-any-community-tags=Sie haben keine Community-Tags konfiguriert.
 you-have-not-configured-any-global-tags=Sie haben keine globalen Tags konfiguriert.
+you-have-rated-this-as-bad=Sie haben dieses als Schlechtes veranschlagen. (Automatic Translation)
+you-have-rated-this-as-good=Sie haben dieses veranschlagen, wie gut. (Automatic Translation)
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=Sie haben eine E-Mail an {0} bez√ºglich Versand der Bestellung geschickt.
 you-have-sent-an-email-to-x-about-this-order=Sie haben eine E-Mail an {0} bez√ºglich der Bestellung geschickt.
 you-have-successfully-added-a-new-email-account=Sie haben erfolgreich ein neues E-Mail-Konto hinzugef√ºgt. Ihr Konto ist zum Gebrauch in einigen Minuten bereit.

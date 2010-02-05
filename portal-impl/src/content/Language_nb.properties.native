@@ -2170,7 +2170,9 @@ quote=Sitere
 range=Utvalg
 rank=Stilling
 ranks=Stillinger
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
 ratings=Betydning
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=Les mer
 read-roles=Les roller
 receiver-email-address=Mottkerens e-postadresse
@@ -2644,6 +2646,7 @@ that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between
 that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters=Passordet inneholder vanlige ord. Vennligst velg et passord som er vanskeligere å gjennomskue, for eksempel et som inneholder en blanding av tall og bokstaver
 that-tag-already-exists=Taggen finnes allerede
 the-address-of-the-email-recipient=Adressen til e-post mottakeren
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-category-could-not-be-found=Kategorien kunne ikke finnes
 the-category-in-which-the-message-has-been-posted=Kategorien der meldingen ble postet
 the-combination-of-first-name-last-name-and-email-address-is-already-taken=Kombinasjonen av fornavn, etternavn og e-postadresse finnes allerede
@@ -3090,7 +3093,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> kan ikke være uten ti
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> kan ikke være uten tilknyttelse fra dette stedet
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> kan ikke være uten tilknyttelse fra denne organisasjonen
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} Days
 x-disables-the-minimum-order-requirement={0} tar bort det minimale bestillingskravet
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.
@@ -3183,6 +3186,7 @@ you-have-no-comics-selected=Du har ikke valgt noen tegneserier
 you-have-no-personalized-pages=Du har ingen personlige sider. Vennligst lag en side
 you-have-not-configured-any-community-tags=Du har ikke angitt noen gruppe-tags 
 you-have-not-configured-any-global-tags=Du har ikke angitt noen globale tags
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=Du har sendt en e-post til {0} angående transporten av denne bestillingen
 you-have-sent-an-email-to-x-about-this-order=Du har sendt en e-post til {0} angående denne bestillingen
 you-have-successfully-reset-your-preferences=Du har lykkes med å nullstille dine innstillinger

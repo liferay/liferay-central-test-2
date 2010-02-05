@@ -1134,6 +1134,8 @@ public=Quảng bá
 quantity=Số lượng
 question=Câu hỏi
 quick-add=Thêm nhanh
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=Đọc tiếp
 read-roles=Quyền đọc
 receiver-email-address=Điạ chỉ nhận mail
@@ -1378,6 +1380,7 @@ thank-you-for-signing-our-guestbook=Cảm ơn đã viết lưu niệm.
 thank-you-for-your-purchase=Cảm ơn đã mua hàng.
 thank-you-for-your-vote=Cảm ơn đã bầu chọn.
 that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters=That password is too short (or too long). Please make sure your password is between {0} and 512 characters.
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-category-could-not-be-found=Chuyên mục không tìm thấy.
 the-combination-of-first-name-last-name-and-email-address-is-already-taken=Tổ hợp tên, họ và địa chỉ mail đã sử dụng.
 the-comments-could-not-be-found=Lời bình không tìm thấy.
@@ -1648,7 +1651,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> cannot be unassociated
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> cannot be unassociated from this location.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> cannot be unassociated from this organization.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} Days
 x-disables-the-minimum-order-requirement={0} tắt yêu cầu đặt hàng nhỏ nhất .
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.
@@ -1715,6 +1718,7 @@ you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-differe
 you-have-entered-invalid-data=Bạn nhập không đúng dữ liệu,Xin thử lại.
 you-have-invited-x-friend=You have invited {0} friend.
 you-have-invited-x-friends=You have invited {0} friends.
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=Bạn đã gửi một email tới  {0} về vận chuyển đặt hàng.
 you-have-sent-an-email-to-x-about-this-order=Bạn đã gửi email tới  {0} về đặt hàng.
 you-have-successfully-updated-your-preferences=Cập nhật thành công cấu hình của bạn

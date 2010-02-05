@@ -2635,8 +2635,10 @@ quote=Cita
 range=Gama
 rank=Ranking
 ranks=Rangos
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
 ratings=Valoracións
 read-interval-minutes=Lea o intervalo (os minutos)
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=Ler máis
 read-roles=Roles de lectura
 read=Lido
@@ -3229,6 +3231,7 @@ that-tag-already-exists=Esa etiqueta xa existe.
 the-above-results-include-groups-which-are-missing-the-required-attributes-(group-name-and-user).-these-groups-will-not-be-imported-until-these-attributes-are-filled-in=Os resultados antedichos inclúen os grupos que están faltando as calidades requeridas (nome e usuario de grupo). Non importarán a estes grupos ata que se completen estas calidades.
 the-above-results-include-users-which-are-missing-the-required-attributes-(screen-name,-password,-email-address,-first-name,-and-last-name).-these-users-will-not-be-imported-until-these-attributes-are-filled-in=Os resultados antedichos inclúen aos usuarios que están faltando as calidades requeridas (nome de pantalla, contraseña, email address, nome, e apelido). Non importarán a estes usuarios ata que se completen estas calidades.
 the-address-of-the-email-recipient=A dirección do receptor do correo electrónico
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-category-could-not-be-found=A categoría non foi atopada.
 the-category-in-which-the-message-has-been-posted=A categoría na cal publicouse a mensaxe
 the-combination-of-first-name-last-name-and-email-address-is-already-taken=A combinación de nome, apelido e dirección de correo xa están sendo usadas.
@@ -3815,7 +3818,7 @@ x-cannot-be-unassociated-from-this-community=<i>{0}</i> non pode ser desasociado
 x-cannot-be-unassociated-from-this-location=<i>{0}</i> non pode ser desasociado desde esta localización.
 x-cannot-be-unassociated-from-this-organization=<i>{0}</i> non pode ser desasociado desde esta organización.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} días
 x-disables-the-minimum-order-requirement={0} deshabilita a obligatoriedad de realizar un pedido mínimo.
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository. (Automatic Copy)
@@ -3923,6 +3926,7 @@ you-have-no-comics-selected=Non ten ningún comic seleccionado.
 you-have-no-personalized-pages=Non ten ningunha páxina personalizada. Cre por favor unha páxina.
 you-have-not-configured-any-community-tags=Vostede non configurou ningunha etiqueta da comunidade.
 you-have-not-configured-any-global-tags=Vostede non configurou ningunha etiqueta global.
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=enviou un correo electrónico a {0} con información do envío deste pedido.
 you-have-sent-an-email-to-x-about-this-order=enviou un correo electrónico a {0} con información deste pedido.
 you-have-successfully-added-a-new-email-account=Vostede agregou con éxito unha nova conta de correo electrónico. A súa conta será pronta para usar nalgúns minutos.

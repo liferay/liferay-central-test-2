@@ -1793,6 +1793,7 @@ global-tags-are-injected-to-all-pages-that-you-visit=全球性標記被注射對
 global=全球性
 go-to-category=去類別
 go-to-folder=去文件夾
+go-to-homepage=去主頁 (Automatic Translation)
 go-to-paypal-and-set-up-ipn-to-post-to-x=到 PayPal 設定 IPN 貼入 {0}.
 go-to-the-latest-version=去最新的版本。
 go-to=去
@@ -3072,8 +3073,12 @@ radio-buttons=单选按钮
 range=範圍
 rank=等級
 ranks=等級
+rate-this-as-bad=對此估計作為壞。 (Automatic Translation)
+rate-this-as-good=對此估計如好。 (Automatic Translation)
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
 ratings=規定值
 read-interval-minutes=讀間隔時間(分鐘)
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=讀取更多
 read-roles=讀取角色
 read=讀
@@ -3758,6 +3763,7 @@ the-above-results-include-users-which-are-missing-the-required-attributes-(scree
 the-address-of-the-email-recipient=電子郵件接收者的地址
 the-address-of-the-email-sender=電子郵件發令者的地址 (Automatic Translation)
 the-array-of-all-form-values-indexed-by-name=所有形式價值名義上標註了
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-blog-entry-url=博克詞條URL (Automatic Translation)
 the-browser's-remote-address=browser&#039; s远程地址
 the-browser's-remote-host=browser&#039; s远程主机
@@ -4502,7 +4508,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> cannot be unassociated
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> cannot be unassociated from this location.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> cannot be unassociated from this organization.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} Days
 x-disables-the-minimum-order-requirement={0} 關閉最小訂貨量要求.
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.
@@ -4613,6 +4619,9 @@ you-have-no-personalized-pages=您沒有個人化的頁。請創造頁。
 you-have-not-configured-a-reminder-query=您未配置一次提示詢問。 請与管理員联系。 (Automatic Translation)
 you-have-not-configured-any-community-tags=您未配置任何社區標記。
 you-have-not-configured-any-global-tags=您未配置任何全球性標記。
+you-have-rated-this-as-bad=您對此估計作為壞。 (Automatic Translation)
+you-have-rated-this-as-good=您對此估計如好。 (Automatic Translation)
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=出貨此訂單您已郵寄給 {0} .
 you-have-sent-an-email-to-x-about-this-order=此訂單您已郵寄給 {0} .
 you-have-successfully-added-a-new-email-account=您順利地增加了一個新的电子邮件。 您的帳戶在幾分鐘之內即可用。

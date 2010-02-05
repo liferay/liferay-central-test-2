@@ -1793,6 +1793,7 @@ global-tags-are-injected-to-all-pages-that-you-visit=グローバルタグはあ
 global=全体的
 go-to-category=カテゴリを参照する
 go-to-folder=フォルダを参照する
+go-to-homepage=ホームページに行きなさい (Automatic Translation)
 go-to-paypal-and-set-up-ipn-to-post-to-x=PayPalへ移動し、{0}へポストするIPNを設定してください。
 go-to-the-latest-version=最新バージョンに移動
 go-to=に行きなさい
@@ -3072,8 +3073,12 @@ radio-buttons=ラジオボタン
 range=範囲
 rank=ランク
 ranks=ランク
+rate-this-as-bad=悪い状態としてこれを評価しなさい。 (Automatic Translation)
+rate-this-as-good=よいようにこれを評価しなさい。 (Automatic Translation)
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
 ratings=おすすめ度
 read-interval-minutes=読み込み間隔(分)
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=続きを読む
 read-roles=ロールを読む
 read=読む
@@ -3758,6 +3763,7 @@ the-above-results-include-users-which-are-missing-the-required-attributes-(scree
 the-address-of-the-email-recipient=受信者のメールアドレス
 the-address-of-the-email-sender=電子メールの送り主の住所 (Automatic Translation)
 the-array-of-all-form-values-indexed-by-name=名前によって指定された全てのフォーム値の配列
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-blog-entry-url=ブログの記入項目URL (Automatic Translation)
 the-browser's-remote-address=browser&#039; sのリモートアドレス
 the-browser's-remote-host=browser&#039; sのリモートホスト
@@ -4502,7 +4508,7 @@ x-cannot-be-unassociated-from-this-community=<i>{0}</i> cannot be unassociated f
 x-cannot-be-unassociated-from-this-location=<i>{0}</i> さんは、この場所から関連を解消することはできません。
 x-cannot-be-unassociated-from-this-organization=<i>{0}</i> さんは、この組織から関連を解消することはできません。
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} 日
 x-disables-the-minimum-order-requirement={0}は最少注文要求が無効です。
 x-does-not-have-any-commits-to-the-svn-repository={0} さんは、 SVN リポジトリへコミットをしていません。
@@ -4613,6 +4619,9 @@ you-have-no-personalized-pages=パーソナライズページがありません�
 you-have-not-configured-a-reminder-query=メモの問い合わせを形成しなかった。 管理者に連絡しなさい。 (Automatic Translation)
 you-have-not-configured-any-community-tags=コミュニティタグがありません。
 you-have-not-configured-any-global-tags=グローバルタグがありません。
+you-have-rated-this-as-bad=悪い状態としてこれを評価した。 (Automatic Translation)
+you-have-rated-this-as-good=よいようにこれを評価した。 (Automatic Translation)
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=この注文の出荷について{0}へメールを送信しました。
 you-have-sent-an-email-to-x-about-this-order=この注文について{0}へメール送信しました。
 you-have-successfully-added-a-new-email-account=新しい電子メールアカウントの追加に成功しました。あなたのアカウントは、数分内に使用可能になります。

@@ -1824,6 +1824,8 @@ quick-add=إضافة سريعة
 quote=إقتباس
 range=المدى
 rank=الترتيب
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=إقرأ المزيد
 read-roles=إقرأ القواعد
 receiver-email-address=عنوان البريد الإلكتروني للمستقبل
@@ -2206,6 +2208,7 @@ thank-you-for-your-purchase=شكرا لك على عملية الشراء.
 thank-you-for-your-vote=شكرا لك على التصويت.
 that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters=That password is too short (or too long). Please make sure your password is between {0} and 512 characters.
 the-address-of-the-email-recipient=عنوان البريد الإلكتروني للمستقبل
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-category-could-not-be-found=لم يتم العثور على التصنيف.
 the-category-in-which-the-message-has-been-posted=التصنيف الذي أضيفت إلية الرسالة
 the-combination-of-first-name-last-name-and-email-address-is-already-taken=هذه التركيبة من الإسم الأول، الإسم الأخير و عنوان البريد الإلكتروني مأخوذة.
@@ -2569,7 +2572,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> cannot be unassociated
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> cannot be unassociated from this location.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> cannot be unassociated from this organization.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} Days
 x-disables-the-minimum-order-requirement={0} يعطل الحد الأدنى للطلبية.
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.
@@ -2651,6 +2654,7 @@ you-have-no-comics-selected=لم تقم باختيار أية كرتون.
 you-have-no-personalized-pages=لا تملك أي صفحة شخصية. يرجى إنشاء صفحة.
 you-have-not-configured-any-community-tags=لا يوجد لديك أي تصنيفات للمجتمع
 you-have-not-configured-any-global-tags=لا يوجد لديك أي تصنيفات عامة
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=لقد قمت بإرسال رسالة إلكترونية الى {0} بخصوص شحن هذه الطلبية.
 you-have-sent-an-email-to-x-about-this-order=لقد قمت بإرسال رسالة إلكترونية الى {0} بخصوص هذه الطلبية.
 you-have-successfully-sent-a-sms-message=لقد أرسلت رسالة نصية قصيرة بنجاح.

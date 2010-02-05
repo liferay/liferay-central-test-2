@@ -2977,8 +2977,10 @@ radio-buttons=Radio buttons
 range=Rozsah
 rank=Pořadí
 ranks=Pořadí
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
 ratings=Hodnocení
 read-interval-minutes=Interval čtení (v minutách)
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=Zobrazit více...
 read-roles=Role pro čtení
 read=Číst
@@ -3653,6 +3655,7 @@ the-above-results-include-groups-which-are-missing-the-required-attributes-(grou
 the-above-results-include-users-which-are-missing-the-required-attributes-(screen-name,-password,-email-address,-first-name,-and-last-name).-these-users-will-not-be-imported-until-these-attributes-are-filled-in=Níže uvedené výsledky zahrnují uživatele, kterým chybí potřebné atributy (uživatelské jméno, heslo, e-mailová adresa, křestní jméno, příjmení). Tito uživatelé nebudou importováni, dokud nebudou chybějící atributy doplněny.
 the-address-of-the-email-recipient=Adresa příjemce e-mailu
 the-array-of-all-form-values-indexed-by-name=Pole všech formulářových hodnot indexovaných podle jména
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-browser's-remote-address=Vzdálená adresa prohlížeče
 the-browser's-remote-host=Remote host prohlížeče
 the-browser's-user-agent=User agent prohlížeče
@@ -4354,7 +4357,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> nelze odstranit z tét
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> nelze odstranit z tohoto umístění.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> nelze odstranit z této organizace.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} dní
 x-disables-the-minimum-order-requirement={0} vypni požadavek minimální objednávky.
 x-does-not-have-any-commits-to-the-svn-repository={0} nemá žádné commity do repozitáře SVN.
@@ -4464,6 +4467,7 @@ you-have-no-personalized-pages=Nemáte vytvořeny žádné osobní personalizova
 you-have-not-configured-a-reminder-query=Nemáte nastavenou ověřovací otázku pro případnou ztrátu hesla. Prosím, kontaktujte správce webu.
 you-have-not-configured-any-community-tags=Nemáte nakonfigurovány žádné komunitní štítky.
 you-have-not-configured-any-global-tags=Nemáte nakonfigurovány žádné globální štítky.
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=Odeslal(a) jste e-mail pro {0} o odeslání objednávky zákazníkovi.
 you-have-sent-an-email-to-x-about-this-order=E-mail o této objednávce pro {0} byl odeslán.
 you-have-successfully-added-a-new-email-account=Nový e-mailový účet byl úspěšně přidán. Váš účet budete moci použít za několik minut.

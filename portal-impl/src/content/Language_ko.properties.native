@@ -1793,6 +1793,7 @@ global-tags-are-injected-to-all-pages-that-you-visit=세계적인 꼬리표는 �
 global=세계
 go-to-category=종류에 가십시오
 go-to-folder=폴더에 가십시오
+go-to-homepage=홈페이지에 가십시오 (Automatic Translation)
 go-to-paypal-and-set-up-ipn-to-post-to-x=Go to PayPal and set up IPN to post to {0}.
 go-to-the-latest-version=최신 버전에 가십시요.
 go-to=에 가십시오
@@ -3072,8 +3073,12 @@ radio-buttons=라디오 버튼
 range=범위
 rank=계급
 ranks=계급
+rate-this-as-bad=악으로 이것을 평가하십시오. (Automatic Translation)
+rate-this-as-good=좋은 것과 같이 이것을 평가하십시오. (Automatic Translation)
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
 ratings=등급
 read-interval-minutes=읽으십시오 간격 (분)를
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=더를 읽으십시요
 read-roles=역할을 읽으십시요
 read=읽는
@@ -3758,6 +3763,7 @@ the-above-results-include-users-which-are-missing-the-required-attributes-(scree
 the-address-of-the-email-recipient=전자 우편 수령인의 주소
 the-address-of-the-email-sender=전자 우편 발송인의 주소 (Automatic Translation)
 the-array-of-all-form-values-indexed-by-name=모든 형성 가치의 배열은 이름으로 색인을 붙였다
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-blog-entry-url=블로그 입장 URL (Automatic Translation)
 the-browser's-remote-address=browser&#039; s 원격 주소
 the-browser's-remote-host=browser&#039; s 원격 호스트
@@ -4502,7 +4508,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> cannot be unassociated
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> cannot be unassociated from this location.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> cannot be unassociated from this organization.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} Days
 x-disables-the-minimum-order-requirement={0} disables the minimum order requirement.
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.
@@ -4613,6 +4619,9 @@ you-have-no-personalized-pages=너는 개인화한 페이지가 있지 않는다
 you-have-not-configured-a-reminder-query=당신은 신호 질문을 형성하지 않았다. 행정관에게 연락하십시오. (Automatic Translation)
 you-have-not-configured-any-community-tags=너는 어떤 지역 사회 꼬리표를 형성하지 않았다.
 you-have-not-configured-any-global-tags=너는 어떤 세계적인 꼬리표를 형성하지 않았다.
+you-have-rated-this-as-bad=당신은 악으로 이것을 평가했다. (Automatic Translation)
+you-have-rated-this-as-good=당신은 좋았던 것과 같이 이것을 평가했다. (Automatic Translation)
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=You have sent an email to {0} about shipping this order.
 you-have-sent-an-email-to-x-about-this-order=You have sent an email to {0} about this order.
 you-have-successfully-added-a-new-email-account=당신은 성공적으로 새로운 전자 우편 계정을 추가했다. 당신의 계정은 즉시 즉시 사용 가능할 것이다.

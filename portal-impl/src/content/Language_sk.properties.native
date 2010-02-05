@@ -2535,7 +2535,9 @@ quote=Citovať
 range=Rozsah
 rank=Hodnosť
 ranks=Hodnosti
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
 ratings=Hodnotenia
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=Čítať ďalej
 read-roles=Roly na čítanie
 read=Čítať
@@ -3102,6 +3104,7 @@ that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between
 that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters=Toto heslo obsahuje často používané slová. Zadajte prosím heslo, ktoré nie je také ľahké uhádnuť (také, ktoré pozostáva z číslic a písmen).
 that-tag-already-exists=Značka už existuje.
 the-address-of-the-email-recipient=E-mail adresa adresáta.
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-category-could-not-be-found=Kategória sa nenašla.
 the-category-in-which-the-message-has-been-posted=Kategória, v ktorej bola správa zaslaná.
 the-combination-of-first-name-last-name-and-email-address-is-already-taken=Takáto kombinácia mena, priezviska a e-mailovej adresy už bola použitá.
@@ -3665,7 +3668,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> nemôže byť odasocio
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> nemôže byť odasociovaný z tejto lokácie.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> nemôže byť odasociovaný z tejto organizácie.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} dní
 x-disables-the-minimum-order-requirement={0} disables the minimum order requirement.
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.
@@ -3771,6 +3774,7 @@ you-have-no-comics-selected=Nemáte vybraný žiadny komiks.
 you-have-no-personalized-pages=Nemáte žiadnu personalizovanú stránku. Vytvorte si stránku prosím.
 you-have-not-configured-any-community-tags=Nemáte nakonfigurovanú žiadnu komunitnú značku.
 you-have-not-configured-any-global-tags=Nemáte nakonfigurovanú žiadnu globálnu značku.
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=Poslali ste e-mail pre {0} o vybavení tejto objednávky.
 you-have-sent-an-email-to-x-about-this-order=Poslali ste e-mail pre {0} o tejto objednávke.
 you-have-successfully-added-a-new-email-account=Úspešne ste pridali nový e-mailový účet. Váš účet sa bude dať používať do niekoľkých minút.

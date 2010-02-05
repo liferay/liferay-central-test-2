@@ -1793,6 +1793,7 @@ global-tags-are-injected-to-all-pages-that-you-visit=全局标记注入到了您
 global=全球性
 go-to-category=去类别
 go-to-folder=去文件夹
+go-to-homepage=去主页 (Automatic Translation)
 go-to-paypal-and-set-up-ipn-to-post-to-x=到 PayPal 设置 IPN 提交到 {0}。
 go-to-the-latest-version=转至最新版本。
 go-to=去
@@ -3072,8 +3073,12 @@ radio-buttons=单选按钮
 range=范围
 rank=等级
 ranks=级别
+rate-this-as-bad=对此估计作为坏。 (Automatic Translation)
+rate-this-as-good=对此估计如好。 (Automatic Translation)
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
 ratings=评级
 read-interval-minutes=读取间隔时间（分钟）
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=读取更多
 read-roles=读取角色
 read=读取
@@ -3758,6 +3763,7 @@ the-above-results-include-users-which-are-missing-the-required-attributes-(scree
 the-address-of-the-email-recipient=电子邮件收件人的地址
 the-address-of-the-email-sender=电子邮件发令者的地址 (Automatic Translation)
 the-array-of-all-form-values-indexed-by-name=按名称索引的所有表单值的数组
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-blog-entry-url=博克词条URL (Automatic Translation)
 the-browser's-remote-address=browser&#039; s远程地址
 the-browser's-remote-host=browser&#039; s远程主机
@@ -4502,7 +4508,7 @@ x-cannot-be-unassociated-from-this-community=<strong>{0}</strong> 不能从本�
 x-cannot-be-unassociated-from-this-location=<strong>{0}</strong> 不能从本区域解除关联。
 x-cannot-be-unassociated-from-this-organization=<strong>{0}</strong> 不能从本组织解除关联。
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} 天
 x-disables-the-minimum-order-requirement={0} 禁用了最小订货量要求。
 x-does-not-have-any-commits-to-the-svn-repository={0} 没有任何进入 SVN 信息库的提交。
@@ -4613,6 +4619,9 @@ you-have-no-personalized-pages=您没有个性化的页面。请创建页面。
 you-have-not-configured-a-reminder-query=您未配置一次提示询问。 请与管理员联系。 (Automatic Translation)
 you-have-not-configured-any-community-tags=您未配置任何社区标签。
 you-have-not-configured-any-global-tags=您未配置任何全局标签。
+you-have-rated-this-as-bad=您对此估计作为坏。 (Automatic Translation)
+you-have-rated-this-as-good=您对此估计如好。 (Automatic Translation)
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=您已经给 {0} 发送了关于此订单货运的电子邮件。
 you-have-sent-an-email-to-x-about-this-order=您已经给 {0} 发送了关于此订单的电子邮件。
 you-have-successfully-added-a-new-email-account=您已成功添加添加了新的电子邮件帐户。您的帐户在几分钟之内即可用。

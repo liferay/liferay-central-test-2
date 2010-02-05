@@ -1541,6 +1541,8 @@ question=سوال
 questions=سوالات
 quick-add=اضافه کردن سريع
 rank=رتبه
+rate-this-x-stars-out-of-x=Rate this {0} stars out of {1}. (Automatic Copy)
+read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=خواندن ادامه
 read-roles=نقش های خواندن
 receiver-email-address=آدرس ايميل دريافت کننده
@@ -1866,6 +1868,7 @@ thank-you-for-signing-our-guestbook=از امضای شما متشکر هستيم
 thank-you-for-your-purchase=از خريد شما سپاسگزاريم.
 thank-you-for-your-vote=از رای شما ممنون.
 that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters=That password is too short (or too long). Please make sure your password is between {0} and 512 characters.
+the-average-rating-is-x-stars-out-of-x=The average rating is {0} stars out of {1}. (Automatic Copy)
 the-category-could-not-be-found=طبقه بندی يافت نشد.
 the-combination-of-first-name-last-name-and-email-address-is-already-taken=اين ترکيب نام، نام خانوادگی و ايميل قبلا ثبت شده است.
 the-comic-could-not-be-found=کاميک يافت نشد.
@@ -2180,7 +2183,7 @@ x-cannot-be-unassociated-from-this-community=<em>{0}</em> cannot be unassociated
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> cannot be unassociated from this location.
 x-cannot-be-unassociated-from-this-organization=<em>{0}</em> cannot be unassociated from this organization.
 x-changed-the-state-from-x-to-x={0} changed the state from {1} to {2}. (Automatic Copy)
-x-convert-x-to-x=Convert <span class="{0}">{1}</span> to {2} (Automatic Copy)
+x-convert-x-to-x=<span class="{0}">Convert {1} to</span> {2} (Automatic Copy)
 x-days={0} Days
 x-disables-the-minimum-order-requirement={0} باعث حذف حداقل مورد نياز می شود
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.
@@ -2253,6 +2256,7 @@ you-have-invited-x-friend=You have invited {0} friend.
 you-have-invited-x-friends=You have invited {0} friends.
 you-have-no-comics-selected=هيچ کميکی انتخاب نشده است
 you-have-no-personalized-pages=هيچ صفحه ای برای خود ايجاد نکرده ايد، لطفا يک صفحه بسازيد
+you-have-rated-this-x-stars-out-of-x=You have rated this {0} stars out of {1}. (Automatic Copy)
 you-have-sent-an-email-to-x-about-shipping-this-order=شما در مورد ارسال اين سفارش يک ايميل به {0} فرستاديد.
 you-have-sent-an-email-to-x-about-this-order=در مورد اين سفارش به {0} يک ايميل فرستاديد.
 you-have-successfully-sent-a-sms-message=يک پيام کوتا با موفقيت ارسال شده به
