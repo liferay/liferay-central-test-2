@@ -91,7 +91,7 @@
 						<a href="<%= viewAllEntriesURL %>">
 							&quot;<%= StringUtil.shorten(StringUtil.trim(HtmlUtil.stripHtml(entry.getContent())), 100, StringPool.BLANK) %> ...&quot;
 
-							<span class="nobreak"><liferay-ui:message key="read-more" /> &raquo;</span>
+							<span class="nobreak"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", entry.getTitle()} %>' key="read-more-x-about-x" /> &raquo;</span>
 						</a>
 					</span>
 				</c:when>
@@ -104,7 +104,7 @@
 		<div class="comments">
 			<c:choose>
 				<c:when test='<%= displayStyle.startsWith("abstract") %>'>
-					<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</a>
+					<a href="<%= viewEntryURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", entry.getTitle()} %>' key="read-more-x-about-x" /> &raquo;</a>
 				</c:when>
 				<c:when test='<%= !displayStyle.startsWith("quote") %>'>
 

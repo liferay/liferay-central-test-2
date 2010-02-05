@@ -55,7 +55,7 @@ if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
 
 String summary = StringUtil.shorten(assetRenderer.getSummary(), abstractLength);
 String viewURL = viewInContext ? assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) : viewFullContentURL.toString();
-String viewURLMessage = viewInContext ? assetRenderer.getViewInContextMessage() : "read-more";
+String viewURLMessage = viewInContext ? assetRenderer.getViewInContextMessage() : "read-more-x-about-x";
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 %>
@@ -97,7 +97,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 
 			<c:if test="<%= Validator.isNotNull(viewURL) %>">
 				<div class="asset-more">
-					<a href="<%= viewURL %>"><liferay-ui:message key="<%= viewURLMessage %>" /> &raquo; </a>
+					<a href="<%= viewURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle()} %>' key="<%=viewURLMessage%>" /> &raquo; </a>
 				</div>
 			</c:if>
 		</div>

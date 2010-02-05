@@ -117,7 +117,7 @@
 
 					<br />
 
-					 <aui:a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</aui:a>
+					 <aui:a href="<%= viewEntryURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", entry.getTitle()} %>' key="read-more-x-about-x" /> &raquo;</aui:a>
 				</c:when>
 				<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>">
 					<%= entry.getContent() %>
@@ -134,7 +134,7 @@
 					</liferay-ui:custom-attributes-available>
 				</c:when>
 				<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>">
-					<aui:a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</aui:a>
+					<aui:a href="<%= viewEntryURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", entry.getTitle()} %>' key="read-more-x-about-x" /> &raquo;</aui:a>
 				</c:when>
 			</c:choose>
 		</div>
