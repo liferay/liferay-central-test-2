@@ -782,3 +782,13 @@
 	vertical-align: middle;
 	width: 4px;
 }
+
+/* ---------- Loading Mask ---------- */
+
+.aui-loadingmask-content {
+	background: #CCC;
+}
+
+.aui-loadingmask-message {
+	background: #D4D4D4 url(../images/portlet/header_bg.png) repeat-x 0 0;
+}
