@@ -818,6 +818,11 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
+		<action path="/enterprise_admin_user_groups/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
+			<forward name="portlet.enterprise_admin.edit_user" path="portlet.enterprise_admin.edit_user" />
+			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
 		<action path="/enterprise_admin_user_groups/edit_user_group" type="com.liferay.portlet.enterpriseadmin.action.EditUserGroupAction">
 			<forward name="portlet.enterprise_admin.edit_user_group" path="portlet.enterprise_admin.edit_user_group" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
