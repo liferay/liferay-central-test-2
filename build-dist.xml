@@ -720,6 +720,8 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 			<substring beginindex="${zip.executable.dir.beginindex}" />
 		</antelope:stringutil>
 
+		<mkdir dir="dist" />
+
 		<zip destfile="dist/${zip.executable.file}-${lp.version}.zip">
 			<zipfileset
 				dir="${zip.executable.dir}"
