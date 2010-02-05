@@ -124,7 +124,7 @@ public class WAIPortlet extends GenericPortlet {
 
 		String contextPath =
 			friendlyURL.substring(0, pos + _MAPPING.length()).concat(
-			StringPool.SLASH).concat(portletName);
+				StringPool.SLASH).concat(portletName);
 
 		pos = friendlyURL.indexOf(portletName);
 
