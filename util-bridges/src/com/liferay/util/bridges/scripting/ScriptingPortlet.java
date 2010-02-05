@@ -209,7 +209,7 @@ public class ScriptingPortlet extends GenericPortlet {
 		if (globalScript != null) {
 			return globalScript;
 		}
-		
+
 		if (globalFiles.length == 0) {
 			globalScript = StringPool.BLANK;
 

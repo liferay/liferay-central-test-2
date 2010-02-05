@@ -192,7 +192,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		if (globalFiles.length == 0) {
 			return StringPool.BLANK;
 		}
-		
+
 		StringBundler sb = new StringBundler();
 
 		for (int i = 0; i < globalFiles.length; i++) {
