@@ -2350,55 +2350,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// User group roles
 
-		if (userGroupRoles != null) {
-			List<UserGroupRole> previousUserGroupRoles =
-				userGroupRolePersistence.findByUserId(userId);
-
-			for (UserGroupRole userGroupRole : previousUserGroupRoles) {
-				if (userGroupRoles.contains(userGroupRole)) {
-					userGroupRoles.remove(userGroupRole);
-				}
-				else {
-					userGroupRoleLocalService.deleteUserGroupRole(
-						userGroupRole);
-				}
-			}
-
-			long[] validGroupIds = new long[0];
-
-			if (groupIds != null) {
-				validGroupIds = ArrayUtil.append(validGroupIds, groupIds);
-			}
-
-			if (organizationIds != null) {
-				long[] organizationGroupIds = new long[organizationIds.length];
-
-				for (int i = 0; i < organizationIds.length; i++) {
-					long organizationId = organizationIds[i];
-
-					Organization organization =
-						organizationPersistence.findByPrimaryKey(
-							organizationId);
-
-					Group organizationGroup = organization.getGroup();
-
-					organizationGroupIds[i] = organizationGroup.getGroupId();
-				}
-
-				validGroupIds = ArrayUtil.append(
-					validGroupIds, organizationGroupIds);
-			}
-
-			Arrays.sort(validGroupIds);
-
-			for (UserGroupRole userGroupRole : userGroupRoles) {
-				if (Arrays.binarySearch(
-						validGroupIds, userGroupRole.getGroupId()) >= 0) {
-
-					userGroupRoleLocalService.addUserGroupRole(userGroupRole);
-				}
-			}
-		}
+		updateUserGroupRoles(user, groupIds, organizationIds, userGroupRoles);
 
 		// User groups
 
@@ -3029,6 +2981,68 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		user.setEmailAddress(emailAddress);
+	}
+
+	protected void updateUserGroupRoles(
+			User user, long[] groupIds, long[] organizationIds,
+			List<UserGroupRole> userGroupRoles)
+		throws PortalException, SystemException {
+
+		if (userGroupRoles == null) {
+			return;
+		}
+
+		List<UserGroupRole> previousUserGroupRoles =
+			userGroupRolePersistence.findByUserId(user.getUserId());
+
+		for (UserGroupRole userGroupRole : previousUserGroupRoles) {
+			if (userGroupRoles.contains(userGroupRole)) {
+				userGroupRoles.remove(userGroupRole);
+			}
+			else {
+				userGroupRoleLocalService.deleteUserGroupRole(
+					userGroupRole);
+			}
+		}
+
+		long[] validGroupIds = null;
+
+		if (groupIds != null) {
+			validGroupIds = ArrayUtil.clone(groupIds);
+		}
+		else {
+			validGroupIds = user.getGroupIds();
+		}
+
+		if (organizationIds == null) {
+			organizationIds = user.getOrganizationIds();
+		}
+
+		long[] organizationGroupIds = new long[organizationIds.length];
+
+		for (int i = 0; i < organizationIds.length; i++) {
+			long organizationId = organizationIds[i];
+
+			Organization organization =
+				organizationPersistence.findByPrimaryKey(
+					organizationId);
+
+			Group organizationGroup = organization.getGroup();
+
+			organizationGroupIds[i] = organizationGroup.getGroupId();
+		}
+
+		validGroupIds = ArrayUtil.append(validGroupIds, organizationGroupIds);
+
+		Arrays.sort(validGroupIds);
+
+		for (UserGroupRole userGroupRole : userGroupRoles) {
+			if (Arrays.binarySearch(
+					validGroupIds, userGroupRole.getGroupId()) >= 0) {
+
+				userGroupRoleLocalService.addUserGroupRole(userGroupRole);
+			}
+		}
 	}
 
 	protected void validate(
