@@ -905,8 +905,19 @@
 	</library>
 	<library>
 		<file-name>portal/asm.jar</file-name>
-		<version>3.2</version>
+		<version>3.0</version>
 		<project-name>ASM</project-name>
+		<project-url>http://asm.objectweb.org</project-url>
+		<licenses>
+			<license>
+				<license-name>ASM License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/asm-attrs.jar</file-name>
+		<version>3.0</version>
+		<project-name>ASM Attrs</project-name>
 		<project-url>http://asm.objectweb.org</project-url>
 		<licenses>
 			<license>
