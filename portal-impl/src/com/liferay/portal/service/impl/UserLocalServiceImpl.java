@@ -135,6 +135,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -2363,24 +2364,38 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				}
 			}
 
-			List<Organization> userOrganizations = user.getOrganizations();
+			long[] validGroupIds = new long[0];
 
-			int indexId = 0;
-			for (UserGroupRole userGroupRole : userGroupRoles) {
-				for (indexId = 0; indexId < groupIds.length; indexId++) {
-					if (userGroupRole.getGroupId() == groupIds[indexId]) {
-						userGroupRoleLocalService.addUserGroupRole(userGroupRole);
-						break;
-					}
+			if (groupIds != null) {
+				validGroupIds = ArrayUtil.append(validGroupIds, groupIds);
+			}
+
+			if (organizationIds != null) {
+				long[] organizationGroupIds = new long[organizationIds.length];
+
+				for (int i = 0; i < organizationIds.length; i++) {
+					long organizationId = organizationIds[i];
+
+					Organization organization =
+						organizationPersistence.findByPrimaryKey(
+							organizationId);
+
+					Group organizationGroup = organization.getGroup();
+
+					organizationGroupIds[i] = organizationGroup.getGroupId();
 				}
-				if (indexId >= groupIds.length) {
-					for (Organization userOrganization : userOrganizations) {
-						if (userGroupRole.getGroupId() ==
-							userOrganization.getGroup().getGroupId()) {
-							userGroupRoleLocalService.addUserGroupRole(userGroupRole);
-							break;
-						}
-					}
+
+				validGroupIds = ArrayUtil.append(
+					validGroupIds, organizationGroupIds);
+			}
+
+			Arrays.sort(validGroupIds);
+
+			for (UserGroupRole userGroupRole : userGroupRoles) {
+				if (Arrays.binarySearch(
+						validGroupIds, userGroupRole.getGroupId()) == -1) {
+
+					userGroupRoleLocalService.addUserGroupRole(userGroupRole);
 				}
 			}
 		}
