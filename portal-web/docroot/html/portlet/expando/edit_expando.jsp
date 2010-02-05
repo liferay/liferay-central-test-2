@@ -120,7 +120,7 @@ portletURL.setParameter("modelResource", modelResource);
 		<c:choose>
 			<c:when test="<%= column != null %>">
 				<aui:field-wrapper label="type">
-					<aui:input name="ype" type="hidden" value="<%= type %>" />
+					<aui:input name="type" type="hidden" value="<%= type %>" />
 
 					<liferay-ui:message key="<%= ExpandoColumnConstants.getTypeLabel(type) %>" />
 				</aui:field-wrapper>
