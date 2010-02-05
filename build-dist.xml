@@ -1081,7 +1081,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		<ant dir="${lp.plugins.dir}/hooks/sevencogs-hook" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/portlets/chat-portlet" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/portlets/google-maps-portlet" target="all" inheritAll="false" />
-		<ant dir="${lp.plugins.dir}/portlets/mail-portlet" target="all" inheritAll="false" />
+		<!--<ant dir="${lp.plugins.dir}/portlets/mail-portlet" target="all" inheritAll="false" />-->
 		<ant dir="${lp.plugins.dir}/portlets/sn-portlet" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/portlets/web-form-portlet" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/themes/sevencogs-theme" target="all" inheritAll="false" />
