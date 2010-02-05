@@ -64,7 +64,19 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 	<div class="taglib-ratings <%= type %>">
 		<c:choose>
 			<c:when test='<%= type.equals("stars") %>'>
-				<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar"></div>
+				<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar">
+
+				<%
+				for (int i = 1; i <= numberOfStars; i++) {
+				%>
+
+					<aui:input checked="<%= i == yourScore %>" type="radio" name="rating" label='<%= i == yourScore ? LanguageUtil.format(pageContext, "you-have-rated-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) : LanguageUtil.format(pageContext, "rate-this-x-stars-out-of-x", new Object[] {i, numberOfStars}) %>' value="<%= i %>" />
+
+				<%
+				}
+				%>
+
+				</div>
 
 				<div class="liferay-rating-score" id="<%= randomNamespace %>ratingScore"></div>
 			</c:when>
@@ -72,8 +84,9 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 				<c:choose>
 					<c:when test='<%= themeDisplay.isSignedIn() %>'>
 						<div id="<%= randomNamespace %>ratingThumb">
-							<input name="<%= randomNamespace %>ratingThumb" title="Good" type="hidden" value="up" />
-							<input name="<%= randomNamespace %>ratingThumb" title="Bad" type="hidden" value="down" />
+							<aui:input label='<%= yourScore == 1 ? "you-have-rated-this-as-good" : "rate-this-as-good" %>' name="ratingThumb" type="radio" value="up" />
+
+							<aui:input label='<%= yourScore == -1 ? "you-have-rated-this-as-bad" : "rate-this-as-bad" %>' name="ratingThumb" type="radio" value="down" />
 						</div>
 					</c:when>
 					<c:otherwise>
@@ -85,8 +98,21 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 	</div>
 
 	<aui:script use="io-request,rating,substitute">
-		var getLabel = function(desc, totalEntries) {
-			var labelScoreTpl = '{desc} ({totalEntries} {voteLabel})';
+		var getLabel = function(desc, totalEntries, ratingScore) {
+			var labelScoreTpl = '{desc} ({totalEntries} {voteLabel}) {ratingScoreLabel}';
+
+			var ratingScoreLabel = '';
+
+			if (ratingScore || ratingScore == 0) {
+				ratingScoreLabelMessage = A.substitute(
+					'<%= LanguageUtil.format(pageContext, "the-average-rating-is-x-stars-out-of-x", new Object[] {"{ratingScore}", numberOfStars}) %>',
+					{
+						ratingScore: ratingScore
+					}
+				);
+
+				ratingScoreLabel = A.Node.create('<div><span class="aui-helper-hidden-accessible">' + ratingScoreLabelMessage + '</span></div>').html();
+			}
 
 			var voteLabel = '<%= UnicodeLanguageUtil.get(pageContext, "votes") %>';
 
@@ -98,6 +124,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 				labelScoreTpl,
 				{
 					desc: desc,
+					ratingScoreLabel: ratingScoreLabel,
 					totalEntries: totalEntries,
 					voteLabel: voteLabel
 				}
@@ -160,7 +187,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			<c:when test='<%= type.equals("stars") %>'>
 				var saveCallback = function(event, id, obj) {
 					var json = this.get('responseData');
-					var label = getLabel('<liferay-ui:message key="average" />', json.totalEntries);
+					var label = getLabel('<liferay-ui:message key="average" />', json.totalEntries, json.averageScore);
 					var averageIndex = json.averageScore - 1;
 
 					ratingScore.set('label', label);
@@ -181,8 +208,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 								sendVoteRequest(url, score, saveCallback);
 							}
-						},
-						size: <%= numberOfStars %>
+						}
 					}
 				);
 
@@ -193,7 +219,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						canReset: false,
 						defaultSelected: <%= stats.getAverageScore() %>,
 						disabled: true,
-						label: getLabel('<liferay-ui:message key="average" />', <%= stats.getTotalEntries() %>),
+						label: getLabel('<liferay-ui:message key="average" />', <%= stats.getTotalEntries() %>, <%= stats.getAverageScore() %>),
 						size: <%= numberOfStars %>
 					}
 				);
