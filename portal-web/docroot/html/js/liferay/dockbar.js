@@ -399,6 +399,10 @@ AUI().use(
 						underlay.render('#dockbar');
 
 						if (options.io) {
+							options.io.loadingMask = {
+								background: 'transparent'
+							};
+
 							underlay.plug(A.Plugin.IO, options.io);
 						}
 
@@ -467,6 +471,9 @@ AUI().use(
 		Underlay.NAME = 'underlay';
 
 		Underlay.ATTRS = {
+			bodyContent: {
+				value: A.Node.create('<div style="height: 100px"></div>')
+			},
 			className: {
 				value: null,
 				lazyAdd: false,
@@ -480,7 +487,7 @@ AUI().use(
 
 		A.extend(
 			Underlay,
-			A.Overlay,
+			A.ComponentOverlay,
 			{
 				initializer: function() {
 					var instance = this;
@@ -490,6 +497,8 @@ AUI().use(
 
 				renderUI: function() {
 					var instance = this;
+
+					Underlay.superclass.renderUI.apply(instance, arguments);
 
 					var closeTool = new A.ToolItem('close');
 
@@ -504,6 +513,8 @@ AUI().use(
 
 				bindUI: function() {
 					var instance = this;
+
+					Underlay.superclass.bindUI.apply(instance, arguments);
 
 					instance.closeTool.on('click', instance.hide, instance);
 				}

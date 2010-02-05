@@ -123,7 +123,7 @@ html > .lfr-dockbar-pinned {
 }
 
 .add-application .aui-widget-bd {
-	padding: 10px;
+	padding: 0 10px 10px;
 }
 
 .add-application {

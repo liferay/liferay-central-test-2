@@ -954,7 +954,7 @@ else {
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 
 		<%
-		String modules = "dialog";
+		String modules = "dialog,loading-mask";
 
 		if (showConfigurationIcon) {
 			modules += ",editable";

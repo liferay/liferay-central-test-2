@@ -484,7 +484,6 @@ Liferay.Portlet = {
 
 			var bodyContent = A.Node.create('<div></div>');
 
-			bodyContent.append(loading);
 			bodyContent.append(iframe);
 
 			var fixSize = function(number) {
@@ -492,13 +491,14 @@ Liferay.Portlet = {
 			};
 
 			var updateIframeSize = function(event) {
-				var bodyNode = event.currentTarget.bodyNode;
 
 				setTimeout(
 					function() {
 						var bodyHeight = bodyNode.getStyle('height');
 
 						iframe.setStyle('height', fixSize(bodyHeight));
+
+						bodyNode.loadingmask.refreshMask();
 					},
 					50
 				);
@@ -507,17 +507,21 @@ Liferay.Portlet = {
 			var dialog = new A.Dialog(
 				{
 					after: {
-						heightChange: updateIframeSize
+						heightChange: updateIframeSize,
+						widthChange: updateIframeSize
 					},
 					bodyContent: bodyContent,
 					centered: true,
-					constrain2view: true,
 					destroyOnClose: true,
 					draggable: true,
 					title: title.html() + ' - ' + Liferay.Language.get('configuration'),
 					width: 820
 				}
 			).render();
+
+			var bodyNode = dialog.bodyNode;
+
+			bodyNode.plug(A.LoadingMask).loadingmask.show();
 
 			iframe.on(
 				'load',
@@ -543,6 +547,8 @@ Liferay.Portlet = {
 					if (closeButton) {
 						closeButton.on('click', dialog.close, dialog);
 					}
+
+					bodyNode.loadingmask.hide();
 				}
 			);
 		}
