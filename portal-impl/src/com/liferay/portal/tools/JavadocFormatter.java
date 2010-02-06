@@ -136,7 +136,7 @@ public class JavadocFormatter {
 
 		String comment = _getCDATA(javaClass);
 
-		if (comment.startsWith("Copyright (c) 2000-2009 Liferay, Inc.")) {
+		if (comment.startsWith("Copyright (c) 2000-2010 Liferay, Inc.")) {
 			comment = StringPool.BLANK;
 		}
 
