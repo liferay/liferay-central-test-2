@@ -45,7 +45,7 @@ import com.liferay.portal.kernel.util.UnicodeFormatter_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.Validator_IW;
 import com.liferay.portal.kernel.velocity.VelocityContext;
-import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.kernel.xml.SAXReader;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.permission.AccountPermissionUtil;
@@ -257,8 +257,7 @@ public class VelocityVariables {
 		UtilLocator utilLocator = UtilLocator.getInstance();
 
 		velocityContext.put(
-			"saxReaderUtil",
-			utilLocator.findUtil(SAXReaderUtil.class.getName()));
+			"saxReaderUtil", utilLocator.findUtil(SAXReader.class.getName()));
 
 		// Service locator
 
