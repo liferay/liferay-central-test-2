@@ -570,12 +570,10 @@ public class SourceFormatter {
 			line = StringUtil.replace(
 				line,
 				new String[] {
-					"* Copyright (c) 2000-2008 Liferay, Inc.",
-					"* Copyright 2008 Sun Microsystems Inc."
+					"* Copyright (c) 2000-2009 Liferay, Inc."
 				},
 				new String[] {
-					"* Copyright (c) 2000-2009 Liferay, Inc.",
-					"* Copyright 2009 Sun Microsystems Inc."
+					"* Copyright (c) 2000-2010 Liferay, Inc."
 				});
 
 			sb.append(line);
@@ -693,12 +691,10 @@ public class SourceFormatter {
 			newContent = StringUtil.replace(
 				newContent,
 				new String[] {
-					"* Copyright (c) 2000-2008 Liferay, Inc.",
-					"* Copyright 2008 Sun Microsystems Inc."
+					"* Copyright (c) 2000-2009 Liferay, Inc."
 				},
 				new String[] {
-					"* Copyright (c) 2000-2009 Liferay, Inc.",
-					"* Copyright 2009 Sun Microsystems Inc."
+					"* Copyright (c) 2000-2010 Liferay, Inc."
 				});
 
 			if (files[i].endsWith(".jsp")) {
