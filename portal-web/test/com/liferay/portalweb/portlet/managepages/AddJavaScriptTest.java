@@ -37,13 +37,13 @@ public class AddJavaScriptTest extends BaseTestCase {
 		selenium.type("_88_title_en_US", RuntimeVariables.replace("Home"));
 		selenium.type("TypeSettingsProperties(javascript-1)",
 			RuntimeVariables.replace(
-				"&lt;script type=\"text/javascript\"&gt; \n$layout.getTypeSettingsProperties().getProperty(\"javascript-1\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-2\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-3\") \n&lt;/script&gt;"));
+				"<script type=\"text/javascript\"> \n$layout.getTypeSettingsProperties().getProperty(\"javascript-1\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-2\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-3\") \n</script>"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent(
-				"&lt;script type=\"text/javascript\"&gt; $layout.getTypeSettingsProperties().getProperty(\"javascript-1\") $layout.getTypeSettingsProperties().getProperty(\"javascript-2\") $layout.getTypeSettingsProperties().getProperty(\"javascript-3\") &lt;/script&gt;"));
+				"<script type=\"text/javascript\"> $layout.getTypeSettingsProperties().getProperty(\"javascript-1\") $layout.getTypeSettingsProperties().getProperty(\"javascript-2\") $layout.getTypeSettingsProperties().getProperty(\"javascript-3\") </script>"));
 		selenium.clickAt("link=Return to Full Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

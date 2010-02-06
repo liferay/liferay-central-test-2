@@ -167,7 +167,7 @@ public class AddSymbolShippingEmailAddressTest extends BaseTestCase {
 		selenium.type("_34_billingPhone",
 			RuntimeVariables.replace("626-589-1453"));
 		selenium.type("_34_shippingEmailAddress",
-			RuntimeVariables.replace("&lt;@liferay.com"));
+			RuntimeVariables.replace("<@liferay.com"));
 		selenium.type("_34_shippingStreet",
 			RuntimeVariables.replace("1234 Sesame Street"));
 		selenium.type("_34_shippingCity",

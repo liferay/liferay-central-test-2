@@ -109,8 +109,7 @@ public class AddAnonymousNameUserSNTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid screen name."));
-		selenium.type("_125_screenName",
-			RuntimeVariables.replace("&lt;anonymous&gt;"));
+		selenium.type("_125_screenName", RuntimeVariables.replace("<anonymous>"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
