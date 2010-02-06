@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ package com.liferay.util;
  * <a href="MapUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author	   Brian Wing Shun Chan
- * @author	   Raymond Augé
+ * @author	   Raymond Augï¿½
  * @deprecated This class has been repackaged at
  *			   <code>com.liferay.portal.kernel.util</code>.
  */
