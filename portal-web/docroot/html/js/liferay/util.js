@@ -725,7 +725,7 @@ Liferay.Util = {
 		var portletId = options.portletId;
 		var url = options.url;
 
-		var title = obj.one('.portlet-title');
+		var title = obj.one('.portlet-title-text');
 
 		var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
 
@@ -748,28 +748,9 @@ Liferay.Util = {
 									}
 								);
 							}
-						},
-
-						startEditing: function(event) {
-							var instance = this;
-
-							var value = instance.get('node').get('innerHTML');
-
-							instance._LFR_cruft = value.match(re);
 						}
 					},
 					cssClass: 'lfr-portlet-title-editable',
-					formatOutput: function(value) {
-						var instance = this;
-
-						value = instance._toHTML(value);
-
-						var cruft = instance._LFR_cruft || [];
-
-						cruft = cruft.join('');
-
-						return cruft + value;
-					},
 					node: title
 				}
 			);

@@ -231,12 +231,16 @@ body #banner .logo a {
 }
 
 .lfr-portlet-title-editable {
+	margin-top: -4px;
 	z-index: 9999;
 }
 
+.ie .lfr-portlet-title-editable {
+	margin-top: -6px;
+}
+
 .lfr-portlet-title-editable-content {
-	margin-left: 4px;
-	margin-top: 2px;
+	padding: 0;
 }
 
 .ie .lfr-portlet-title-editable-content {
