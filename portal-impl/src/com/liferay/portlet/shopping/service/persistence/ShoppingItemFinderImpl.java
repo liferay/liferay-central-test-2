@@ -484,16 +484,18 @@ public class ShoppingItemFinderImpl
 	}
 
 	protected String getCategoryIds(List<Long> categoryIds) {
+		int categoryIdsSize = categoryIds.size();
+
 		if (categoryIds.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler(categoryIds.size() * 2 - 1);
+		StringBundler sb = new StringBundler(categoryIdsSize * 2 - 1);
 
-		for (int i = 0; i < categoryIds.size(); i++) {
+		for (int i = 0; i < categoryIdsSize; i++) {
 			sb.append("categoryId = ? ");
 
-			if ((i + 1) != categoryIds.size()) {
+			if ((i + 1) != categoryIdsSize) {
 				sb.append("OR ");
 			}
 		}

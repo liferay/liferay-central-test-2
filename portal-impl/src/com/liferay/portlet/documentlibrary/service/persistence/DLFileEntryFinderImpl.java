@@ -128,16 +128,18 @@ public class DLFileEntryFinderImpl
 	}
 
 	protected String getFolderIds(List<Long> folderIds) {
+		int folderIdsSize = folderIds.size();
+
 		if (folderIds.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler(folderIds.size() * 2 - 1);
+		StringBundler sb = new StringBundler(folderIdsSize * 2 - 1);
 
-		for (int i = 0; i < folderIds.size(); i++) {
+		for (int i = 0; i < folderIdsSize; i++) {
 			sb.append("folderId = ? ");
 
-			if ((i + 1) != folderIds.size()) {
+			if ((i + 1) != folderIdsSize) {
 				sb.append("OR ");
 			}
 		}

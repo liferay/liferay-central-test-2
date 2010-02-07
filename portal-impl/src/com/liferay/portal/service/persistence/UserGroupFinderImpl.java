@@ -214,11 +214,11 @@ public class UserGroupFinderImpl
 	}
 
 	protected String getJoin(LinkedHashMap<String, Object> params) {
-		if (params == null) {
+		if ((params == null) || params.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(params.size());
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -264,11 +264,11 @@ public class UserGroupFinderImpl
 	}
 
 	protected String getWhere(LinkedHashMap<String, Object> params) {
-		if (params == null) {
+		if ((params == null) || params.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(params.size());
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 

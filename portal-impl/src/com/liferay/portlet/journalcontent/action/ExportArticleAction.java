@@ -115,7 +115,7 @@ public class ExportArticleAction extends PortletAction {
 
 			int pages = articleDisplay.getNumberOfPages();
 
-			StringBundler sb = new StringBundler(pages + 13);
+			StringBundler sb = new StringBundler(pages + 12);
 
 			sb.append("<html>");
 

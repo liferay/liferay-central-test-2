@@ -345,7 +345,7 @@ public class UpgradeDuplicates extends UpgradeProcess {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			StringBundler sb = new StringBundler(2 * columns.length + 3);
+			StringBundler sb = new StringBundler(2 * columns.length + 4);
 
 			sb.append("Checking for duplicate data from ");
 			sb.append(tableName);

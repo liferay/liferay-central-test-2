@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
@@ -210,11 +209,9 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			String author = PortalUtil.getUserName(
 				entry.getUserId(), entry.getUserName());
 
-			StringBundler link = new StringBundler(3);
-
-			link.append(tagURL);
-			link.append("entryId=");
-			link.append(entry.getEntryId());
+			String link =
+				tagURL.concat("entryId=").concat(
+				String.valueOf(entry.getEntryId()));
 
 			String value = entry.getSummary();
 
@@ -222,7 +219,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 			syndEntry.setAuthor(author);
 			syndEntry.setTitle(entry.getTitle());
-			syndEntry.setLink(link.toString());
+			syndEntry.setLink(link);
 			syndEntry.setUri(syndEntry.getLink());
 			syndEntry.setPublishedDate(entry.getCreateDate());
 			syndEntry.setUpdatedDate(entry.getModifiedDate());

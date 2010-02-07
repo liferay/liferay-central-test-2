@@ -599,7 +599,7 @@ public class PluginPackageUtil {
 
 		RemotePluginPackageRepository repository = null;
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(8);
 
 		if (!repositoryURL.startsWith(Http.HTTP_WITH_SLASH) &&
 			!repositoryURL.startsWith(Http.HTTPS_WITH_SLASH)) {

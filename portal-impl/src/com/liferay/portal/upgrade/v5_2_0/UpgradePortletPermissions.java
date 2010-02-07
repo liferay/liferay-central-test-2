@@ -212,7 +212,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(4 * actionIds.length + 6);
+			StringBundler sb = new StringBundler(4 * actionIds.length + 7);
 
 			sb.append("select Permission_.permissionId, ");
 			sb.append("Permission_.actionId, Resource_.primKey, ");

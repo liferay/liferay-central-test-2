@@ -42,16 +42,14 @@ import java.io.File;
 public class AdvancedFileSystemHook extends FileSystemHook {
 
 	protected void buildPath(StringBundler sb, String fileNameFragment) {
-		if (fileNameFragment.length() <= 2) {
+		int fileNameFragmentLength = fileNameFragment.length();
+
+		if ((fileNameFragmentLength <= 2) || (getDepth(sb.toString()) > 3)) {
 			return;
 		}
 
-		if (getDepth(sb.toString()) > 3) {
-			return;
-		}
-
-		for (int i = 0;i < fileNameFragment.length();i += 2) {
-			if ((i + 2) < fileNameFragment.length()) {
+		for (int i = 0;i < fileNameFragmentLength;i += 2) {
+			if ((i + 2) < fileNameFragmentLength) {
 				sb.append(fileNameFragment.substring(i, i + 2));
 				sb.append(StringPool.SLASH);
 

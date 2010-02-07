@@ -70,7 +70,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	}
 
 	public String[] getParameterNames() {
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(_HOOKS.length * 2 + 2);
 
 		sb.append(PropsKeys.DL_HOOK_IMPL);
 		sb.append(StringPool.EQUAL);

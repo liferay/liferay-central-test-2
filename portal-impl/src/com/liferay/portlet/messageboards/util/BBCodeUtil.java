@@ -258,8 +258,6 @@ public class BBCodeUtil {
 			sb.setIndex(0);
 
 			sb.append(preTag);
-
-			sb.append(preTag);
 			sb.append("<img alt='' src='");
 			sb.append(tag.getElement().trim());
 			sb.append("' />");
@@ -371,8 +369,6 @@ public class BBCodeUtil {
 				tag.getParameter(), tag.getElement().trim());
 
 			sb.setIndex(0);
-
-			sb.append(preTag);
 
 			sb.append(preTag);
 			sb.append("<a href='");
