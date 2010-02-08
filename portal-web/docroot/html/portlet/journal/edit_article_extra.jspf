@@ -67,7 +67,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 
 			<div id="<portlet:namespace />structureMessage" class="portlet-msg-alert structure-message aui-helper-hidden">
 				<aui:field-wrapper label="this-structure-has-not-been-saved">
-					<%= LanguageUtil.format(pageContext, "click-here-to-save-it-now", new Object[] {"journal-save-structure-trigger", "#"}) %>
+					<liferay-ui:message key="click-here-to-save-it-now" arguments='<%= new Object[] {"journal-save-structure-trigger", "#"} %>' />
 				</aui:field-wrapper>
 			</div>
 

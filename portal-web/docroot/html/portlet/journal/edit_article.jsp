@@ -327,7 +327,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			</tr>
 			<tr>
 				<td>
-					<aui:input bean="<%= article %>" field="title" model="<%= JournalArticle.class %>" label="name" name="title" />
+					<aui:input bean="<%= article %>" model="<%= JournalArticle.class %>" label="name" name="title" />
 				</td>
 			</tr>
 			<tr>
