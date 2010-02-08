@@ -2,7 +2,7 @@
 
 <#include init/>
 
-<html dir="<@liferay.language key="lang.dir"/>" lang="$language">
+<html dir="<@liferay.language key="lang.dir" />" lang="$language">
 
 <head>
 	<title>${the_title} - ${company_name}</title>
@@ -12,7 +12,7 @@
 
 <body class="${css_class}">
 
-<a class="aui-helper-hidden-accessible" href="#mainContent"><@liferay.language key="go-to-content"/></a>
+<a class="aui-helper-hidden-accessible" href="#mainContent"><@liferay.language key="go-to-content" /></a>
 
 <#if is_signed_in>
 	<@liferay.dockbar/>
@@ -36,13 +36,13 @@
 
 		<#if update_available_url??>
 			<div class="popup-alert-notice">
-				<a class="update-available" href="${update_available_url}"><@liferay.language key="updates-are-available-for-liferay"/></a>
+				<a class="update-available" href="${update_available_url}"><@liferay.language key="updates-are-available-for-liferay" /></a>
 			</div>
 		</#if>
 	</div>
 
 	<#if has_navigation>
-		<#include "${full_templates_path}/navigation.ftl"/>
+		<#include "${full_templates_path}/navigation.ftl" />
 	</#if>
 
 	<#if selectable>

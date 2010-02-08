@@ -12,9 +12,9 @@
 	<#assign page_group = layout.getGroup()/>
 
 	<#if page_group.isStagingGroup()>
-		<#assign css_class = css_class + " staging"/>
+		<#assign css_class = css_class + " staging" />
 	<#elseif theme_display.isShowStagingIcon() && page_group.hasStagingGroup()>
-		<#assign css_class = css_class + " live-view"/>
+		<#assign css_class = css_class + " live-view" />
 	</#if>
 </#if>
 
@@ -22,17 +22,17 @@
 <#assign liferay_dockbar_pinned = sessionClicks.get(request, "liferay_dockbar_pinned", "")/>
 
 <#if liferay_toggle_controls = "visible">
-	<#assign css_class = css_class + " controls-visible"/>
+	<#assign css_class = css_class + " controls-visible" />
 <#else>
-	<#assign css_class = css_class + " controls-hidden"/>
+	<#assign css_class = css_class + " controls-hidden" />
 </#if>
 
 <#if liferay_dockbar_pinned = "true">
-	<#assign css_class = css_class + " lfr-dockbar-pinned"/>
+	<#assign css_class = css_class + " lfr-dockbar-pinned" />
 </#if>
 
 <#if layoutTypePortlet.hasStateMax()>
-	<#assign css_class = css_class + " page-maximized"/>
+	<#assign css_class = css_class + " page-maximized" />
 </#if>
 
 <#assign css_folder = theme_display.getPathThemeCss()/>
@@ -143,7 +143,7 @@
 
 <#if show_toggle_controls>
 	<#assign toggle_controls_text = languageUtil.get(locale, "toggle-edit-controls")/>
-	<#assign toggle_controls_url = "javascript:;"/>
+	<#assign toggle_controls_url = "javascript:;" />
 </#if>
 
 <#if permissionChecker.isOmniadmin() && portalUtil.isUpdateAvailable()>
@@ -152,14 +152,14 @@
 
 <#-- ---------- Page ---------- -->
 
-<#assign the_title = ""/>
+<#assign the_title = "" />
 <#assign selectable = theme_display.isTilesSelectable()/>
 <#assign is_maximized = layoutTypePortlet.hasStateMax()/>
 <#assign is_freeform = themeDisplay.isFreeformLayout()/>
 
-<#assign page_javascript_1 = ""/>
-<#assign page_javascript_2 = ""/>
-<#assign page_javascript_3 = ""/>
+<#assign page_javascript_1 = "" />
+<#assign page_javascript_2 = "" />
+<#assign page_javascript_3 = "" />
 
 <#if layout??>
 	<#assign page = layout/>
@@ -197,13 +197,13 @@
 	<#assign community_name = htmlUtil.escape(page_group.getDescriptiveName())/>
 
 	<#if page_group.getName() = "Guest">
-		<#assign css_class = css_class + " guest-community"/>
+		<#assign css_class = css_class + " guest-community" />
 	</#if>
 
 	<#if layout.isPublicLayout()>
-		<#assign css_class = css_class + " public-page"/>
+		<#assign css_class = css_class + " public-page" />
 	<#else>
-		<#assign css_class = css_class + " private-page"/>
+		<#assign css_class = css_class + " private-page" />
 	</#if>
 
 	<#if page_group.isUser() && layout.isPrivateLayout()>
@@ -226,7 +226,7 @@
 	<#assign community_default_private_url = htmlUtil.escape(my_places_portlet_url.toString())/>
 </#if>
 
-<#assign the_title = ""/>
+<#assign the_title = "" />
 
 <#if layout.getHTMLTitle(locale)??>
 	<#assign the_title = layout.getHTMLTitle(locale)/>
@@ -276,16 +276,16 @@
 <#-- ---------- Includes ---------- -->
 
 <#if is_portlet_page && theme_display.isWapTheme()>
-	<#assign dir_include = "/wap"/>
+	<#assign dir_include = "/wap" />
 <#else>
-	<#assign dir_include = "/html"/>
+	<#assign dir_include = "/html" />
 </#if>
 
-<#assign bottom_include = "${dir_include}/common/themes/bottom.jsp"/>
+<#assign bottom_include = "${dir_include}/common/themes/bottom.jsp" />
 <#assign bottom_ext_include = bottom_include/>
-<#assign content_include = "${dir_include}${tilesContent}"/>
-<#assign top_head_include = "${dir_include}/common/themes/top_head.jsp"/>
-<#assign top_messages_include = "${dir_include}/common/themes/top_messages.jsp"/>
+<#assign content_include = "${dir_include}${tilesContent}" />
+<#assign top_head_include = "${dir_include}/common/themes/top_head.jsp" />
+<#assign top_messages_include = "${dir_include}/common/themes/top_messages.jsp" />
 
 <#-- ---------- Date ---------- -->
 
@@ -295,4 +295,4 @@
 
 <#-- ---------- Custom init ---------- -->
 
-<#include "${full_templates_path}/init_custom.ftl"/>
+<#include "${full_templates_path}/init_custom.ftl" />

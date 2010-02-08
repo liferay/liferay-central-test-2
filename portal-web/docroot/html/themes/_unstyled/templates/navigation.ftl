@@ -2,9 +2,9 @@
 	<ul>
 		<#list nav_items as nav_item>
 			<#if nav_item.isSelected()>
-				<#assign nav_item_class = "selected"/>
+				<#assign nav_item_class = "selected" />
 			<#else>
-				<#assign nav_item_class = ""/>
+				<#assign nav_item_class = "" />
 			</#if>
 
 			<li class="${nav_item_class}">
@@ -14,9 +14,9 @@
 					<ul class="child-menu">
 						<#list nav_item.getChildren() as nav_child>
 							<#if nav_child.isSelected()>
-								<#assign nav_child_class = "selected"/>
+								<#assign nav_child_class = "selected" />
 							<#else>
-								<#assign nav_child_class = ""/>
+								<#assign nav_child_class = "" />
 							</#if>
 
 							<li class="${nav_child_class}">

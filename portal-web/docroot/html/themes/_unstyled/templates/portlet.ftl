@@ -13,7 +13,7 @@
 
 		<div class="portlet-icons" id="portlet-small-icon-bar_${portlet_id}">
 			<#if portlet_display.isShowBackIcon()>
-				<a href="${portlet_back_url}" class="portlet-icon-back"><@liferay.language key="return-to-full-page"/></a>
+				<a href="${portlet_back_url}" class="portlet-icon-back"><@liferay.language key="return-to-full-page" /></a>
 			<#else>
 				${theme.iconOptions()}
 				${theme.iconMinimize()}
