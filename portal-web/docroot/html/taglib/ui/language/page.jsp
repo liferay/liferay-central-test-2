@@ -83,7 +83,7 @@ for (int i = 0; i < locales.length; i++) {
 				for (int i = 0; i < locales.length; i++) {
 				%>
 
-					<aui:option cssClass="taglib-language-option" label="<%= locales[i].getDisplayName(locales[i]) %>" lang="<%= locales[i].getLanguage() %>" selected="<%= (locale.getLanguage().equals(locales[i].getLanguage()) && locale.getCountry().equals(locales[i].getCountry())) %>" value='<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>' />
+					<aui:option cssClass="taglib-language-option" label="<%= locales[i].getDisplayName(locales[i]) %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>" selected="<%= (locale.getLanguage().equals(locales[i].getLanguage()) && locale.getCountry().equals(locales[i].getCountry())) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
 
 				<%
 				}

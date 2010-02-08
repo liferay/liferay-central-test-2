@@ -53,7 +53,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 		for (int i = 0; i < locales.length; i++) {
 		%>
 
-			<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= (locale2.getLanguage().equals(locales[i].getLanguage()) && locale2.getCountry().equals(locales[i].getCountry())) %>" value='<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>' />
+			<aui:option label="<%= locales[i].getDisplayName(locale) %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>" selected="<%= (locale2.getLanguage().equals(locales[i].getLanguage()) && locale2.getCountry().equals(locales[i].getCountry())) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
 
 		<%
 		}
