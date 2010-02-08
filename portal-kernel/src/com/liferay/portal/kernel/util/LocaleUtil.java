@@ -67,6 +67,22 @@ public class LocaleUtil {
 		return _instance._toLanguageIds(locales);
 	}
 
+	public static String toW3cLanguageId(Locale locale) {
+		return _instance._toW3cLanguageId(locale);
+	}
+
+	public static String toW3cLanguageId(String languageId) {
+		return _instance._toW3cLanguageId(languageId);
+	}
+
+	public static String[] toW3cLanguageIds(Locale[] locales) {
+		return _instance._toW3cLanguageIds(locales);
+	}
+
+	public static String[] toW3cLanguageIds(String[] languageIds) {
+		return _instance._toW3cLanguageIds(languageIds);
+	}
+
 	private LocaleUtil() {
 		_locale = new Locale("en", "US");
 
@@ -197,6 +213,29 @@ public class LocaleUtil {
 		}
 
 		return languageIds;
+	}
+
+	private String _toW3cLanguageId(Locale locale) {
+		return _toW3cLanguageId(_toLanguageId(locale));
+	}
+
+	private String _toW3cLanguageId(String languageId) {
+		return StringUtil.replace(
+			languageId, StringPool.UNDERLINE, StringPool.MINUS);
+	}
+
+	private String[] _toW3cLanguageIds(Locale[] locales) {
+		return _toW3cLanguageIds(_toLanguageIds(locales));
+	}
+
+	private String[] _toW3cLanguageIds(String[] languageIds) {
+		String[] w3cLanguageIds = new String[languageIds.length];
+
+		for (int i = 0; i < languageIds.length; i++) {
+			w3cLanguageIds[i] = _toW3cLanguageId(languageIds[i]);
+		}
+
+		return w3cLanguageIds;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LocaleUtil.class);

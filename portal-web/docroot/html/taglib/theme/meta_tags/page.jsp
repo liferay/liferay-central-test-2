@@ -31,8 +31,8 @@
 	Locale defaultLocale = LocaleUtil.getDefault();
 	String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
-	String w3cCurrentLanguageId = StringUtil.replace(currentLanguageId, StringPool.UNDERLINE, StringPool.MINUS);
-	String w3cDefaultLanguageId = StringUtil.replace(defaultLanguageId, StringPool.UNDERLINE, StringPool.MINUS);
+	String w3cCurrentLanguageId = LocaleUtil.toW3cLanguageId(currentLanguageId);
+	String w3cDefaultLanguageId = LocaleUtil.toW3cLanguageId(defaultLanguageId);
 
 	String metaRobots = layout.getTypeSettingsProperties().getProperty("meta-robots_" + currentLanguageId);
 	String metaRobotsLanguageId = w3cCurrentLanguageId;
