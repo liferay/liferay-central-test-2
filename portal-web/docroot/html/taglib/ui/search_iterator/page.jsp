@@ -30,6 +30,7 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay
 boolean paginate = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search-iterator:paginate"));
 
 String id = searchContainer.getId();
+String randomId = randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 int start = searchContainer.getStart();
 int end = searchContainer.getEnd();
 int total = searchContainer.getTotal();
@@ -115,7 +116,7 @@ List<String> primaryKeys = new ArrayList<String>();
 				}
 			%>
 
-				<th class="col-<%= i + 1 %> <%= cssClass %>"
+				<th class="col-<%= i + 1 %> <%= cssClass %>" id="<%=randomId%>_col-<%= i + 1 %>"
 
 					<%--
 
@@ -260,7 +261,7 @@ List<String> primaryKeys = new ArrayList<String>();
 				}
 			%>
 
-				<td align="<%= entry.getAlign() %>" class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %><%= columnClassName %>" colspan="<%= entry.getColspan() %>" valign="<%= entry.getValign() %>">
+				<td align="<%= entry.getAlign() %>" class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %><%= columnClassName %>" colspan="<%= entry.getColspan() %>" headers="<%=randomId%>_col-<%= j + 1 %>" valign="<%= entry.getValign() %>">
 
 					<%
 					entry.print(pageContext);
