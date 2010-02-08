@@ -285,44 +285,26 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			<table class="lfr-table" id="<portlet:namespace />articleHeaderEdit">
 			<tr>
 				<td>
-					<aui:field-wrapper label="id">
-						<c:choose>
-							<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
-								<c:choose>
-									<c:when test="<%= article == null %>">
-										<liferay-ui:message key="autogenerate-id" />
+					<c:choose>
+						<c:when test="<%= article == null %>">
+							<c:choose>
+								<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
+									<aui:input name="newArticleId" type="hidden" />
+									<aui:input name="autoArticleId" type="hidden" value="<%= true %>" />
+								</c:when>
+								<c:otherwise>
+									<aui:input cssClass="lfr-input-text-container" field="articleId" fieldParam="newArticleId" label="id" name="newArticleId" value="<%= newArticleId %>" />
 
-										<aui:input name="newArticleId" type="hidden" />
-										<aui:input name="autoArticleId" type="hidden" value="<%= true %>" />
-									</c:when>
-									<c:otherwise>
-										<%= articleId %>
-									</c:otherwise>
-								</c:choose>
-							</c:when>
-							<c:otherwise>
-								<table class="lfr-table">
-								<tr>
-									<td>
-										<c:choose>
-											<c:when test="<%= article == null %>">
-												<aui:input bean="<%= article %>" cssClass="lfr-input-text-container" field="articleId" fieldParam="newArticleId" label="" name="newArticleId" value="<%= newArticleId %>" />
-											</c:when>
-											<c:otherwise>
-												<%= articleId %>
-											</c:otherwise>
-										</c:choose>
-									</td>
-									<td>
-										<c:if test="<%= article == null %>">
-											<aui:input inlineLabel="right" name="autogenerateId" type="checkbox" value="autoArticleId" />
-										</c:if>
-									</td>
-								</tr>
-								</table>
-							</c:otherwise>
-						</c:choose>
-					</aui:field-wrapper>
+									<aui:input label="autogenerate-id" name="autoArticleId" type="checkbox" />
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<aui:field-wrapper label="id">
+								<%= articleId %>
+							</aui:field-wrapper>
+						</c:otherwise>
+					</c:choose>
 				</td>
 			</tr>
 			<tr>
@@ -737,6 +719,8 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
 		submitForm(document.<portlet:namespace />fm1);
 	}
+
+	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoArticleIdCheckbox','<portlet:namespace />newArticleId', true);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		<c:choose>
