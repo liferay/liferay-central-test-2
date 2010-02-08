@@ -63,7 +63,13 @@ if (iteratorURL != null) {
 List<String> primaryKeys = new ArrayList<String>();
 %>
 
-<c:if test="<%= !resultRows.isEmpty() || ((headerNames != null) && !headerNames.isEmpty()) || (emptyResultsMessage != null) %>">
+<c:if test="<%= resultRows.isEmpty() && (emptyResultsMessage != null) %>">
+	<div class="portlet-msg-info">
+		<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
+	</div>
+</c:if>
+
+<c:if test="<%= !resultRows.isEmpty() %>">
 	<c:if test="<%= (resultRows.size() > 10) && paginate %>">
 		<div class="taglib-search-iterator-page-iterator-top">
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
