@@ -12,6 +12,8 @@
 
 <body class="${css_class}">
 
+<a class="aui-helper-hidden-accessible" href="#mainContent"><@liferay.language key="go-to-content"/></a>
+
 <#if is_signed_in>
 	<@liferay.dockbar/>
 </#if>

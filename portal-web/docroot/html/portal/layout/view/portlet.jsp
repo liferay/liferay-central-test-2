@@ -24,6 +24,8 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
+<span id="mainContent"></span>
+
 <%
 if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || themeDisplay.isWidget() || layoutTypePortlet.hasStateMax()) {
 	String ppid = ParamUtil.getString(request, "p_p_id");

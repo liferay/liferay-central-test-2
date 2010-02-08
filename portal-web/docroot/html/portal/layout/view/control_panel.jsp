@@ -133,6 +133,8 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 				<aui:column columnWidth="<%= 75 %>" cssClass="<%= panelBodyCssClass %>" last="<%= true %>">
 					<aui:layout cssClass="panel-page-body-menu">
 						<aui:column columnWidth="<%= 75 %>" first="<%= true %>">
+							<span id="mainContent"></span>
+
 							<c:choose>
 								<c:when test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
 

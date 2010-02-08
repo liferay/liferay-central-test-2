@@ -31,6 +31,7 @@
 				<liferay-portlet:runtime portletName="87" />
 			</td>
 			<td class="panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>" valign="top">
+				<span id="mainContent"></span>
 </c:if>
 
 <%

@@ -12,6 +12,8 @@
 
 <body class="$css_class">
 
+<a class="aui-helper-hidden-accessible" href="#mainContent">#language ("go-to-content")</a>
+
 $theme.include($top_messages_include)
 
 <div id="wrapper">

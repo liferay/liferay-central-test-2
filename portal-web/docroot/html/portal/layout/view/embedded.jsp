@@ -26,6 +26,8 @@
 
 <%@ include file="/html/portal/layout/view/embedded_js.jspf" %>
 
+<span id="mainContent"></span>
+
 <div id="iframe">
 	<iframe frameborder="0" height="100%" src="<%= layout.getTypeSettingsProperties().getProperty("url") %>" width="100%" onLoad="resizeIframe();"></iframe>
 </div>
