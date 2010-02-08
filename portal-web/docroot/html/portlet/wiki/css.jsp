@@ -241,14 +241,6 @@
 	margin-top: 0;
 }
 
-.portlet-wiki .page-title .page-actions a {
-	text-decoration: none;
-}
-
-.portlet-wiki .page-actions a:hover {
-	text-decoration: underline;
-}
-
 .portlet-wiki .page-title .page-actions {
 	font-size: 11px;
 	font-weight: normal;
