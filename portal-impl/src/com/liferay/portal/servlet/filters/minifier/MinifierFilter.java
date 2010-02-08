@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -186,7 +185,7 @@ public class MinifierFilter extends BasePortalFilter {
 
 		if (queryString != null) {
 			sb.append(_QUESTION_SEPARATOR);
-			sb.append(DigesterUtil.digest(queryString));
+			sb.append(sterilizeQueryString(queryString));
 		}
 
 		String cacheFileName = sb.toString();
@@ -301,7 +300,7 @@ public class MinifierFilter extends BasePortalFilter {
 
 		if (queryString != null) {
 			sb.append(_QUESTION_SEPARATOR);
-			sb.append(DigesterUtil.digest(queryString));
+			sb.append(sterilizeQueryString(queryString));
 		}
 
 		String cacheCommonFileName = sb.toString();
@@ -437,6 +436,13 @@ public class MinifierFilter extends BasePortalFilter {
 				ServletResponseUtil.write(response, minifiedContent);
 			}
 		}
+	}
+
+	protected String sterilizeQueryString(String queryString) {
+		return StringUtil.replace(
+			queryString,
+			new String[] {StringPool.SLASH, StringPool.BACK_SLASH},
+			new String[] {StringPool.UNDERLINE, StringPool.UNDERLINE});
 	}
 
 	private static final String _CSS_IMPORT_BEGIN = "@import url(";
