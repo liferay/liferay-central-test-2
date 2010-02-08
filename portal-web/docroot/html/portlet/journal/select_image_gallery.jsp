@@ -47,8 +47,8 @@ if (folder != null) {
 
 	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
-<%
-List<String> headerNames = new ArrayList<String>();
+	<%
+	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("folder");
 	headerNames.add("num-of-folders");

@@ -344,7 +344,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							<table class="lfr-table">
 							<tr>
 								<td>
-									<aui:select label="default-language" disabled="<%= article == null %>" name="defaultLanguageIdSelect">
+									<aui:select disabled="<%= article == null %>" label="default-language" name="defaultLanguageIdSelect">
 
 										<%
 										if ((availableLocales != null) && (availableLocales.length > 0)) {
