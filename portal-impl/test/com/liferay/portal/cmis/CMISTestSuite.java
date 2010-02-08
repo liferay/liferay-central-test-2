@@ -22,6 +22,8 @@
 
 package com.liferay.portal.cmis;
 
+import com.liferay.portal.util.InitUtil;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -33,6 +35,8 @@ import junit.framework.TestSuite;
 public class CMISTestSuite extends TestSuite {
 
 	public static Test suite() {
+		InitUtil.initWithSpring();
+
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ParserTest.class);
