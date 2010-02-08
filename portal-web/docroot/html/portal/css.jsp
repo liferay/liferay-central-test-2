@@ -64,6 +64,7 @@
 <%@ include file="/html/portal/css/taglib/input_localized.jspf" %>
 <%@ include file="/html/portal/css/taglib/input_move_boxes.jspf" %>
 <%@ include file="/html/portal/css/taglib/input_repeat.jspf" %>
+<%@ include file="/html/portal/css/taglib/language.jspf" %>
 <%@ include file="/html/portal/css/taglib/ratings.jspf" %>
 <%@ include file="/html/portal/css/taglib/search_iterator.jspf" %>
 <%@ include file="/html/portal/css/taglib/search_toggle.jspf" %>

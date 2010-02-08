@@ -27,7 +27,7 @@
 <%@ page import="com.liferay.taglib.ui.LanguageTag" %>
 
 <%
-String formName = namespace + request.getAttribute("liferay-ui:language:formName");
+String formName = (String)request.getAttribute("liferay-ui:language:formName");
 
 String formAction = (String)request.getAttribute("liferay-ui:language:formAction");
 
@@ -76,23 +76,21 @@ for (int i = 0; i < locales.length; i++) {
 
 <c:choose>
 	<c:when test="<%= displayStyle == LanguageTag.SELECT_BOX %>">
-		<form action="<%= formAction %>" method="post" name="<%= formName %>">
+		<aui:form action="<%= formAction %>" method="post" name="<%= formName %>">
+			<aui:select label="" name="<%= name %>" onChange='<%= "submitForm(document." + namespace + formName + ");" %>'>
 
-		<select name="<%= namespace + name %>" onChange="submitForm(document.<%= formName %>);">
+				<%
+				for (int i = 0; i < locales.length; i++) {
+				%>
 
-			<%
-			for (int i = 0; i < locales.length; i++) {
-			%>
+					<aui:option cssClass="taglib-language-option" label="<%= locales[i].getDisplayName(locales[i]) %>" selected="<%= (locale.getLanguage().equals(locales[i].getLanguage()) && locale.getCountry().equals(locales[i].getCountry())) %>" value='<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>' />
 
-				<option <%= (locale.getLanguage().equals(locales[i].getLanguage()) && locale.getCountry().equals(locales[i].getCountry())) ? "selected" : "" %> style="padding-left: 26px; margin: 1px 1px 1px 1px;" value="<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+				<%
+				}
+				%>
 
-			<%
-			}
-			%>
-
-		</select>
-
-		</form>
+			</aui:select>
+		</aui:form>
 
 		<aui:script>
 
@@ -100,9 +98,7 @@ for (int i = 0; i < locales.length; i++) {
 			for (int i = 0; i < locales.length; i++) {
 			%>
 
-				document.<%= formName %>.<%= namespace + name %>.options[<%= i %>].style.backgroundImage = "url(<%= themeDisplay.getPathThemeImages() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png)";
-				document.<%= formName %>.<%= namespace + name %>.options[<%= i %>].style.backgroundRepeat = "no-repeat";
-				document.<%= formName %>.<%= namespace + name %>.options[<%= i %>].style.backgroundPosition = "center left";
+				document.<%= namespace + formName %>.<%= namespace + name %>.options[<%= i %>].style.backgroundImage = "url(<%= themeDisplay.getPathThemeImages() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png)";
 
 			<%
 			}
