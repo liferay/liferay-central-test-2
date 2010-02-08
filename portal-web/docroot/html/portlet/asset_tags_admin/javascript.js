@@ -499,7 +499,7 @@ AUI().add(
 						function(item, index, collection) {
 							var dd = new A.DD.Drag(
 								{
-									bubbles: instance,
+									bubbleTargets: instance,
 									node: item,
 									target: true
 								}

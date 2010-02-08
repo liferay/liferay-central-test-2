@@ -152,7 +152,7 @@ AUI().add(
 
 					var row = new AutoRow(
 						{
-							bubbles: instance,
+							bubbleTargets: instance,
 							contentBox: item,
 							guid: (++instance._guid),
 							reset: false,

@@ -345,7 +345,7 @@ AUI().add(
 					listLinks.plug(
 						A.Plugin.Drop,
 						{
-							bubbles: instance
+							bubbleTargets: instance
 						}
 					);
 
