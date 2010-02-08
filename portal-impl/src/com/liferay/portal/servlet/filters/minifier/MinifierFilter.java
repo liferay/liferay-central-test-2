@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -176,13 +177,19 @@ public class MinifierFilter extends BasePortalFilter {
 			return null;
 		}
 
-		String cacheFileName = _tempDir + request.getRequestURI();
+		StringBundler sb = new StringBundler(4);
 
-		String queryString = _sterilizeQueryString(request.getQueryString());
+		sb.append(_tempDir);
+		sb.append(request.getRequestURI());
+
+		String queryString = request.getQueryString();
 
 		if (queryString != null) {
-			cacheFileName += _QUESTION_SEPARATOR + queryString;
+			sb.append(_QUESTION_SEPARATOR);
+			sb.append(DigesterUtil.digest(queryString));
 		}
+
+		String cacheFileName = sb.toString();
 
 		String[] fileNames = PropsUtil.getArray(minifierBundleId);
 
@@ -219,7 +226,7 @@ public class MinifierFilter extends BasePortalFilter {
 			minifiedContent = StringPool.BLANK;
 		}
 		else {
-			StringBundler sb = new StringBundler(fileNames.length * 2);
+			sb = new StringBundler(fileNames.length * 2);
 
 			for (String fileName : fileNames) {
 				String content = FileUtil.read(
@@ -285,13 +292,19 @@ public class MinifierFilter extends BasePortalFilter {
 
 		String minifiedContent = null;
 
-		String cacheCommonFileName = _tempDir + requestURI;
+		StringBundler sb = new StringBundler(4);
 
-		String queryString = _sterilizeQueryString(request.getQueryString());
+		sb.append(_tempDir);
+		sb.append(requestURI);
+
+		String queryString = request.getQueryString();
 
 		if (queryString != null) {
-			cacheCommonFileName += _QUESTION_SEPARATOR + queryString;
+			sb.append(_QUESTION_SEPARATOR);
+			sb.append(DigesterUtil.digest(queryString));
 		}
+
+		String cacheCommonFileName = sb.toString();
 
 		File cacheContentTypeFile = new File(
 			cacheCommonFileName + "_E_CONTENT_TYPE");
@@ -424,13 +437,6 @@ public class MinifierFilter extends BasePortalFilter {
 				ServletResponseUtil.write(response, minifiedContent);
 			}
 		}
-	}
-
-	private String _sterilizeQueryString(String queryString) {
-		return StringUtil.replace(
-			queryString,
-			new String[] {StringPool.SLASH, StringPool.BACK_SLASH},
-			new String[] {StringPool.UNDERLINE, StringPool.UNDERLINE});
 	}
 
 	private static final String _CSS_IMPORT_BEGIN = "@import url(";
