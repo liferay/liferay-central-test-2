@@ -376,15 +376,13 @@ public class DLFolderFinderImpl
 	}
 
 	protected String getFolderIds(List<Long> folderIds, String table) {
-		int folderIdsSize = folderIds.size();
-
 		if (folderIds.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler(folderIdsSize * 5 - 1);
+		StringBundler sb = new StringBundler(folderIds.size() * 5 - 1);
 
-		for (int i = 0; i < folderIdsSize; i++) {
+		for (int i = 0; i < folderIds.size(); i++) {
 			sb.append(table);
 			sb.append(".");
 
@@ -397,7 +395,7 @@ public class DLFolderFinderImpl
 
 			sb.append("= ? ");
 
-			if ((i + 1) != folderIdsSize) {
+			if ((i + 1) != folderIds.size()) {
 				sb.append("OR ");
 			}
 		}

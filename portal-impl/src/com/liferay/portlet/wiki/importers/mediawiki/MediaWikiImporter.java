@@ -460,10 +460,13 @@ public class MediaWikiImporter implements WikiImporter {
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Page with title ".concat(
-							title).concat(
-							" could not be imported"), e);
+						StringBundler sb = new StringBundler(3);
+
+						sb.append("Page with title ");
+						sb.append(title);
+						sb.append(" could not be imported");
+
+						_log.warn(sb.toString(), e);
 					}
 				}
 			}

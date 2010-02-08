@@ -969,11 +969,9 @@ public class BaseDeployer {
 			return StringPool.BLANK;
 		}
 
-		int licensesSize = licenses.size();
+		StringBundler sb = new StringBundler(5 * licenses.size() + 2);
 
-		StringBundler sb = new StringBundler(5 * licensesSize + 2);
-
-		for (int i = 0; i < licensesSize; i++) {
+		for (int i = 0; i < licenses.size(); i++) {
 			License license = licenses.get(i);
 
 			if (i == 0) {
@@ -986,7 +984,7 @@ public class BaseDeployer {
 			sb.append(license.getName());
 			sb.append("</license>\r\n");
 
-			if ((i + 1) == licensesSize) {
+			if ((i + 1) == licenses.size()) {
 				sb.append("\t");
 			}
 		}
@@ -1001,9 +999,7 @@ public class BaseDeployer {
 			return StringPool.BLANK;
 		}
 
-		int liferayVersionsSize = liferayVersions.size();
-
-		StringBundler sb = new StringBundler(liferayVersionsSize * 3 + 2);
+		StringBundler sb = new StringBundler(liferayVersions.size() * 3 + 2);
 
 		for (int i = 0; i < liferayVersions.size(); i++) {
 			String liferayVersion = liferayVersions.get(i);
@@ -1016,7 +1012,7 @@ public class BaseDeployer {
 			sb.append(liferayVersion);
 			sb.append("</liferay-version>\r\n");
 
-			if ((i + 1) == liferayVersionsSize) {
+			if ((i + 1) == liferayVersions.size()) {
 				sb.append("\t");
 			}
 		}
@@ -1044,11 +1040,9 @@ public class BaseDeployer {
 			return StringPool.BLANK;
 		}
 
-		int tagsSize = tags.size();
+		StringBundler sb = new StringBundler(tags.size() * 3 + 2);
 
-		StringBundler sb = new StringBundler(tagsSize * 3 + 2);
-
-		for (int i = 0; i < tagsSize; i++) {
+		for (int i = 0; i < tags.size(); i++) {
 			String tag = tags.get(i);
 
 			if (i == 0) {
@@ -1059,7 +1053,7 @@ public class BaseDeployer {
 			sb.append(tag);
 			sb.append("</tag>\r\n");
 
-			if ((i + 1) == tagsSize) {
+			if ((i + 1) == tags.size()) {
 				sb.append("\t");
 			}
 		}

@@ -164,18 +164,16 @@ public class BlogsStatsUserFinderImpl
 	}
 
 	protected String getOrganizationIds(List<Long> organizationIds) {
-		int organizationIdsSize = organizationIds.size();
-
 		if (organizationIds.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler(organizationIdsSize * 2 - 1);
+		StringBundler sb = new StringBundler(organizationIds.size() * 2 - 1);
 
-		for (int i = 0; i < organizationIdsSize; i++) {
+		for (int i = 0; i < organizationIds.size(); i++) {
 			sb.append("Users_Orgs.organizationId = ? ");
 
-			if ((i + 1) != organizationIdsSize) {
+			if ((i + 1) != organizationIds.size()) {
 				sb.append("OR ");
 			}
 		}

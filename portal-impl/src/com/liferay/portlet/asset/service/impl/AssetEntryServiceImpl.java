@@ -209,8 +209,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			String author = PortalUtil.getUserName(
 				entry.getUserId(), entry.getUserName());
 
-			String link =
-				tagURL.concat("entryId=").concat(
+			String link = tagURL.concat("entryId=").concat(
 				String.valueOf(entry.getEntryId()));
 
 			String value = entry.getSummary();
