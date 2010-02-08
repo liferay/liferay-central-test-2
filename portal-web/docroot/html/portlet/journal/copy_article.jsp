@@ -33,57 +33,51 @@ String newArticleId = ParamUtil.getString(request, "newArticleId");
 double version = ParamUtil.getDouble(request, "version");
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/copy_article" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.COPY %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />oldArticleId" type="hidden" value="<%= HtmlUtil.escapeAttribute(oldArticleId) %>" />
-<input name="<portlet:namespace />version" type="hidden" value="<%= version %>" />
+<portlet:actionURL var="copyArticleURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/journal/copy_article" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="web-content"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+<aui:form action="<%= copyArticleURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.COPY %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="oldArticleId" type="hidden" value="<%= oldArticleId %>" />
+	<aui:input name="version" type="hidden" value="<%= version %>" />
 
-<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
-<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
+	<liferay-ui:tabs
+		names="web-content"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="id" />
-	</td>
-	<td>
-		<%= oldArticleId %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="new-id" />
-	</td>
-	<td>
-		<c:choose>
-			<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
-				<liferay-ui:message key="autogenerate-id" />
+	<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
+	<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
 
-				<input name="<portlet:namespace />newArticleId" type="hidden" value="" />
-				<input name="<portlet:namespace />autoArticleId" type="hidden" value="true" />
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= null %>" field="articleId" fieldParam="newArticleId" defaultValue="<%= newArticleId %>" />
-			</c:otherwise>
-		</c:choose>
-	</td>
-</tr>
-</table>
+	<aui:fieldset>
+		<aui:field-wrapper label="id">
+			<%= oldArticleId %>
+		</aui:field-wrapper>
 
-<br />
+		<aui:field-wrapper label="new-id">
+			<c:choose>
+				<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
+					<liferay-ui:message key="autogenerate-id" />
 
-<input type="submit" value="<liferay-ui:message key="copy" />" />
+					<aui:input name="newArticleId" type="hidden" />
+					<aui:input name="autoArticleId" type="hidden" value="<%= true %>" />
+				</c:when>
+				<c:otherwise>
+					<aui:input bean="<%= null %>" cssClass="lfr-input-text-container" label="" field="articleId" fieldParam="newArticleId" model="<%= JournalArticle.class %>" name="newArticleId" value="<%= newArticleId %>" />
+				</c:otherwise>
+			</c:choose>
+		</aui:field-wrapper>
+	</aui:fieldset>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
+	<aui:button-row>
+		<aui:button type="submit" value="copy" />
 
-</form>
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>

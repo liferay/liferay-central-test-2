@@ -24,98 +24,97 @@
 
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
-<form method="post" name="<portlet:namespace />fm">
+<aui:form method="post" name="fm">
 
-<%
-String tabs1 = ParamUtil.getString(request, "tabs1", "structures");
+	<%
+	String tabs1 = ParamUtil.getString(request, "tabs1", "structures");
 
-PortletURL portletURL = renderResponse.createRenderURL();
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/journal/select_structure");
-portletURL.setParameter("tabs1", tabs1);
+	portletURL.setParameter("struts_action", "/journal/select_structure");
+	portletURL.setParameter("tabs1", tabs1);
 
-StructureSearch searchContainer = new StructureSearch(renderRequest, portletURL);
+	StructureSearch searchContainer = new StructureSearch(renderRequest, portletURL);
 
-searchContainer.setDelta(10);
+	searchContainer.setDelta(10);
 
-String tabs1Names = "shared-structures";
+	String tabs1Names = "shared-structures";
 
-if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
-	tabs1Names = "structures," + tabs1Names;
-}
-%>
-
-<liferay-ui:tabs
-	names="<%= tabs1Names %>"
-	url="<%= portletURL.toString() %>"
-/>
-
-<liferay-ui:search-form
-	page="/html/portlet/journal/structure_search.jsp"
-	searchContainer="<%= searchContainer %>"
-/>
-
-<%
-StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
-
-if (tabs1.equals("shared-structures")) {
-	long companyGroupId = themeDisplay.getCompanyGroupId();
-
-	searchTerms.setGroupId(companyGroupId);
-}
-%>
-
-<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
-
-<div class="separator"><!-- --></div>
-
-<%
-
-List resultRows = searchContainer.getResultRows();
-
-for (int i = 0; i < results.size(); i++) {
-	JournalStructure structure = (JournalStructure)results.get(i);
-
-	ResultRow row = new ResultRow(structure, structure.getId(), i);
-
-	StringBuilder sb = new StringBuilder();
-
-	sb.append("javascript:opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectStructure('");
-	sb.append(structure.getStructureId());
-	sb.append("', '");
-	sb.append(structure.getName());
-	sb.append("'); window.close();");
-
-	String rowHREF = sb.toString();
-
-	// Structure id
-
-	row.addText(structure.getStructureId(), rowHREF);
-
-	// Name and description
-
-	sb = new StringBuilder();
-
-	sb.append(structure.getName());
-
-	if (Validator.isNotNull(structure.getDescription())) {
-		sb.append("<br />");
-		sb.append(structure.getDescription());
+	if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
+		tabs1Names = "structures," + tabs1Names;
 	}
+	%>
 
-	row.addText(sb.toString(), rowHREF);
+	<liferay-ui:tabs
+		names="<%= tabs1Names %>"
+		url="<%= portletURL.toString() %>"
+	/>
 
-	// Add result row
+	<liferay-ui:search-form
+		page="/html/portlet/journal/structure_search.jsp"
+		searchContainer="<%= searchContainer %>"
+	/>
 
-	resultRows.add(row);
-}
-%>
+	<%
+	StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	if (tabs1.equals("shared-structures")) {
+		long companyGroupId = themeDisplay.getCompanyGroupId();
 
-</form>
+		searchTerms.setGroupId(companyGroupId);
+	}
+	%>
+
+	<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
+
+	<div class="separator"><!-- --></div>
+
+	<%
+
+	List resultRows = searchContainer.getResultRows();
+
+	for (int i = 0; i < results.size(); i++) {
+		JournalStructure structure = (JournalStructure)results.get(i);
+
+		ResultRow row = new ResultRow(structure, structure.getId(), i);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("javascript:opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectStructure('");
+		sb.append(structure.getStructureId());
+		sb.append("', '");
+		sb.append(structure.getName());
+		sb.append("'); window.close();");
+
+		String rowHREF = sb.toString();
+
+		// Structure id
+
+		row.addText(structure.getStructureId(), rowHREF);
+
+		// Name and description
+
+		sb = new StringBuilder();
+
+		sb.append(structure.getName());
+
+		if (Validator.isNotNull(structure.getDescription())) {
+			sb.append("<br />");
+			sb.append(structure.getDescription());
+		}
+
+		row.addText(sb.toString(), rowHREF);
+
+		// Add result row
+
+		resultRows.add(row);
+	}
+	%>
+
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>
 
 <aui:script>
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />searchStructureId);

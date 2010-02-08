@@ -112,11 +112,11 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 			<div class="journal-article-component-container">
 				<c:if test='<%= elType.equals("text") %>'>
-					<input class="principal-field-element lfr-input-text" size="55" type="text" value="<%= elContent %>" />
+					<aui:input cssClass="principal-field-element lfr-input-text-container" label="" name="text" size="55" type="text" value="<%= elContent %>" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_box") %>'>
-					<textarea class="principal-field-element lfr-textarea" cols="60" rows="10"><%= elContent %></textarea>
+					<aui:input cssClass="principal-field-element lfr-textarea-container" cols="60" label="" name="textArea" rows="10" type="textarea" value="<%= elContent %>" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_area") %>'>
@@ -138,21 +138,21 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 
 				<c:if test='<%= elType.equals("image") %>'>
-					<input class="principal-field-element lfr-input-text flexible" class="journal-image-field" size="40" type="file" />
+					<aui:input cssClass="journal-image-field principal-field-element lfr-input-text-container flexible" label="" name="image"  size="40" type="file" />
 
 					<br />
 
 					<c:if test="<%= Validator.isNotNull(elContent) %>">
 						<span class="journal-image-show-hide">
-							[ <a class="journal-image-link" href="javascript:void(0);"><span class="show-label"><liferay-ui:message key="show" /></span><span class="hide-label aui-helper-hidden"><liferay-ui:message key="hide" /></span></a> ]
+							[ <aui:a cssClass="journal-image-link" href="javascript:void(0);"><span class="show-label"><liferay-ui:message key="show" /></span><span class="hide-label aui-helper-hidden"><liferay-ui:message key="hide" /></span></aui:a> ]
 						</span>
 
 						<div class="journal-image-preview aui-helper-hidden">
-							<input class="journal-image-content" type="hidden" value="<%= elContent %>" />
+							<aui:input cssClass="journal-image-content" name="journalImageContent" type="hidden" value="<%= elContent %>" />
 
-							<input class="journal-image-delete" type="hidden" value="" />
+							<aui:input cssClass="journal-image-delete" name="journalImageDelete" type="hidden" value="<%= elContent %>" />
 
-							<input class="journal-image-delete-btn" type="button" value="<liferay-ui:message key="delete" />" />
+							<aui:input cssClass="journal-image-delete-btn" name="journalImageDeleteButton" type="button" value="delete" />
 
 							<br /><br />
 
@@ -164,20 +164,20 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 
 				<c:if test='<%= elType.equals("image_gallery") %>'>
-					<input class="principal-field-element lfr-input-text journal-imagegallery-text" size="55" type="text" value="<%= elContent %>" />
+					<aui:input cssClass="principal-field-element lfr-input-text-container journal-imagegallery-text" label="" name="journalImagegallery" size="55" type="text" value="<%= elContent %>" />
 
 					<input class="journal-imagegallery-button" dataImagegalleryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("document_library") %>'>
-					<input class="principal-field-element lfr-input-text journal-documentlibrary-text" size="55" type="text" value="<%= elContent %>" />
+					<aui:input cssClass="principal-field-element lfr-input-text-container journal-documentlibrary-text" label="" name="journalDocumentlibrary" size="55" type="text" value="<%= elContent %>" />
 
 					<input class="journal-documentlibrary-button" dataDocumentlibraryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("boolean") %>'>
 					<div class="journal-subfield">
-						<input <%= elContent.equals("true") ? "checked" : "" %> class="principal-field-element" id="<%= elName %>" type="checkbox" />
+						<aui:input cssClass="principal-field-element" label="" name="<%= elName %>" type="checkbox" value='<%= elContent.equals("true") %>' />
 
 						<label class="journal-article-field-label" for="<%= elName %>">
 							<span><%= elLabel %></span>
@@ -187,7 +187,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 				<c:if test='<%= elType.equals("list") %>'>
 					<div class="journal-list-subfield">
-						<select class="principal-field-element">
+						<aui:select cssClass="principal-field-element" label="" name="list">
 
 							<%
 							Iterator<Element> itr = el.elements().iterator();
@@ -203,13 +203,13 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 								}
 							%>
 
-								<option <%= elContent.equals(listElName) ? "selected" : "" %> value="<%= listElName %>"><%= listElValue %></option>
+								<aui:option label="<%= listElValue %>" name="<%= listElValue %>" selected="<%= elContent.equals(listElName) %>" />
 
 							<%
 							}
 							%>
 
-						</select>
+						</aui:select>
 
 						<span class="journal-icon-button journal-delete-field">
 							<liferay-ui:icon image="delete" /><liferay-ui:message key="delete-selected-value" />
@@ -231,7 +231,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 				<c:if test='<%= elType.equals("multi-list") %>'>
 					<div class="journal-list-subfield">
-						<select class="principal-field-element" multiple="true">
+						<aui:select cssClass="principal-field-element" label="" multiple="true" name="multiList">
 
 							<%
 							Iterator<Element> itr = el.elements().iterator();
@@ -263,13 +263,13 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 								}
 							%>
 
-								<option <%= contains ? "selected" : "" %> value="<%= listElValue %>"><%= listElName %></option>
+								<aui:option label="<%= listElName %>" selected="contains" value="<%= listElValue %>" />
 
 							<%
 							}
 							%>
 
-						</select>
+						</aui:select>
 
 						<span class="journal-icon-button journal-delete-field">
 							<liferay-ui:icon image="delete" /><liferay-ui:message key="delete-selected-value" />
@@ -291,8 +291,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 
 				<c:if test='<%= elType.equals("link_to_layout") %>'>
-					<select class="principal-field-element" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" onChange="<portlet:namespace />contentChanged();">
-						<option value=""></option>
+					<aui:select cssClass="principal-field-element" label="" name='<%= "structure_el" + count.getValue() + "_content" %>' onChange='<%= renderResponse.getNamespace() + "contentChanged();" %>' showEmptyOption="<%= true %>">
 
 						<%
 						boolean privateLayout = false;
@@ -311,7 +310,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						%>
 
 						<%@ include file="/html/portlet/journal/edit_article_content_xsd_el_link_to_layout.jspf" %>
-					</select>
+					</aui:select>
 				</c:if>
 			</div>
 

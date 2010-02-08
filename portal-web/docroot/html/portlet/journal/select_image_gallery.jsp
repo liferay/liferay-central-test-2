@@ -42,137 +42,135 @@ if (folder != null) {
 }
 %>
 
-<form method="post" name="<portlet:namespace />">
+<aui:form method="post">
+	<liferay-ui:tabs names="folders" />
 
-<liferay-ui:tabs names="folders" />
-
-<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
+	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
 <%
 List<String> headerNames = new ArrayList<String>();
 
-headerNames.add("folder");
-headerNames.add("num-of-folders");
-headerNames.add("num-of-images");
+	headerNames.add("folder");
+	headerNames.add("num-of-folders");
+	headerNames.add("num-of-images");
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-int total = IGFolderLocalServiceUtil.getFoldersCount(groupId, folderId);
+	int total = IGFolderLocalServiceUtil.getFoldersCount(groupId, folderId);
 
-searchContainer.setTotal(total);
+	searchContainer.setTotal(total);
 
-List results = IGFolderLocalServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+	List results = IGFolderLocalServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
-searchContainer.setResults(results);
+	searchContainer.setResults(results);
 
-List resultRows = searchContainer.getResultRows();
+	List resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < results.size(); i++) {
-	IGFolder curFolder = (IGFolder)results.get(i);
+	for (int i = 0; i < results.size(); i++) {
+		IGFolder curFolder = (IGFolder)results.get(i);
 
-	ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
+		ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setParameter("struts_action", "/journal/select_image_gallery");
-	rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-	rowURL.setParameter("groupId", String.valueOf(groupId));
+		rowURL.setParameter("struts_action", "/journal/select_image_gallery");
+		rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+		rowURL.setParameter("groupId", String.valueOf(groupId));
 
-	// Name
+		// Name
 
-	row.addText(curFolder.getName(), rowURL);
+		row.addText(curFolder.getName(), rowURL);
 
-	// Statistics
+		// Statistics
 
-	List subfolderIds = new ArrayList();
+		List subfolderIds = new ArrayList();
 
-	subfolderIds.add(new Long(curFolder.getFolderId()));
+		subfolderIds.add(new Long(curFolder.getFolderId()));
 
-	IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
+		IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
-	int foldersCount = subfolderIds.size() - 1;
-	int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(groupId, subfolderIds);
+		int foldersCount = subfolderIds.size() - 1;
+		int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(groupId, subfolderIds);
 
 	row.addText(String.valueOf(foldersCount), rowURL);
 	row.addText(String.valueOf(imagesCount), rowURL);
 
-	// Add result row
+		// Add result row
 
-	resultRows.add(row);
-}
-%>
+		resultRows.add(row);
+	}
+	%>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<liferay-ui:tabs names="images" />
+	<liferay-ui:tabs names="images" />
 
-<%
-headerNames.clear();
+	<%
+	headerNames.clear();
 
-headerNames.add("thumbnail");
-headerNames.add("name");
-headerNames.add("height");
-headerNames.add("width");
-headerNames.add("size");
-headerNames.add(StringPool.BLANK);
+	headerNames.add("thumbnail");
+	headerNames.add("name");
+	headerNames.add("height");
+	headerNames.add("width");
+	headerNames.add("size");
+	headerNames.add(StringPool.BLANK);
 
-searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-total = IGImageLocalServiceUtil.getImagesCount(groupId, folderId);
+	total = IGImageLocalServiceUtil.getImagesCount(groupId, folderId);
 
-searchContainer.setTotal(total);
+	searchContainer.setTotal(total);
 
-results = IGImageLocalServiceUtil.getImages(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+	results = IGImageLocalServiceUtil.getImages(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
-searchContainer.setResults(results);
+	searchContainer.setResults(results);
 
-resultRows = searchContainer.getResultRows();
+	resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < results.size(); i++) {
-	IGImage image = (IGImage)results.get(i);
+	for (int i = 0; i < results.size(); i++) {
+		IGImage image = (IGImage)results.get(i);
 
-	Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
+		Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 
-	ResultRow row = new ResultRow(image, image.getImageId(), i);
+		ResultRow row = new ResultRow(image, image.getImageId(), i);
 
-	// Thumbnail
+		// Thumbnail
 
-	row.addJSP("/html/portlet/image_gallery/image_thumbnail.jsp");
+		row.addJSP("/html/portlet/image_gallery/image_thumbnail.jsp");
 
-	// Name
+		// Name
 
-	row.addText(image.getNameWithExtension());
+		row.addText(image.getNameWithExtension());
 
-	// Statistics
+		// Statistics
 
-	row.addText(String.valueOf(largeImage.getHeight()));
-	row.addText(String.valueOf(largeImage.getWidth()));
-	row.addText(TextFormatter.formatKB(largeImage.getSize(), locale) + "k");
+		row.addText(String.valueOf(largeImage.getHeight()));
+		row.addText(String.valueOf(largeImage.getWidth()));
+		row.addText(TextFormatter.formatKB(largeImage.getSize(), locale) + "k");
 
-	// Action
+		// Action
 
-	StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-	sb.append("opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectImageGallery('");
-	sb.append(themeDisplay.getPathImage());
-	sb.append("/image_gallery?uuid=");
-	sb.append(image.getUuid());
-	sb.append("&groupId=");
-	sb.append(image.getGroupId());
-	sb.append("&t=");
-	sb.append(ImageServletTokenUtil.getToken(image.getLargeImageId()));
-	sb.append("'); window.close();");
+		sb.append("opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectImageGallery('");
+		sb.append(themeDisplay.getPathImage());
+		sb.append("/image_gallery?uuid=");
+		sb.append(image.getUuid());
+		sb.append("&groupId=");
+		sb.append(image.getGroupId());
+		sb.append("&t=");
+		sb.append(ImageServletTokenUtil.getToken(image.getLargeImageId()));
+		sb.append("'); window.close();");
 
-	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
+		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
 
-	// Add result row
+		// Add result row
 
-	resultRows.add(row);
-}
-%>
+		resultRows.add(row);
+	}
+	%>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-</form>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>

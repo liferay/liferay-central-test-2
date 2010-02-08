@@ -285,68 +285,59 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			<table class="lfr-table" id="<portlet:namespace />articleHeaderEdit">
 			<tr>
 				<td>
-					<liferay-ui:message key="id" />
-				</td>
-				<td>
-					<c:choose>
-						<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
-							<c:choose>
-								<c:when test="<%= article == null %>">
-									<liferay-ui:message key="autogenerate-id" />
-
-									<input name="<portlet:namespace />newArticleId" type="hidden" value="" />
-									<input name="<portlet:namespace />autoArticleId" type="hidden" value="true" />
-								</c:when>
-								<c:otherwise>
-									<%= articleId %>
-								</c:otherwise>
-							</c:choose>
-						</c:when>
-						<c:otherwise>
-							<table class="lfr-table">
-							<tr>
-								<td>
-									<c:choose>
-										<c:when test="<%= article == null %>">
-											<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="articleId" fieldParam="newArticleId" defaultValue="<%= newArticleId %>" />
-										</c:when>
-										<c:otherwise>
-											<%= articleId %>
-										</c:otherwise>
-									</c:choose>
-								</td>
-								<td>
-									<c:if test="<%= article == null %>">
-										<liferay-ui:input-checkbox param="autoArticleId" />
-
+					<aui:field-wrapper label="id">
+						<c:choose>
+							<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
+								<c:choose>
+									<c:when test="<%= article == null %>">
 										<liferay-ui:message key="autogenerate-id" />
-									</c:if>
-								</td>
-							</tr>
-							</table>
-						</c:otherwise>
-					</c:choose>
+
+										<aui:input name="newArticleId" type="hidden" />
+										<aui:input name="autoArticleId" type="hidden" value="<%= true %>" />
+									</c:when>
+									<c:otherwise>
+										<%= articleId %>
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+							<c:otherwise>
+								<table class="lfr-table">
+								<tr>
+									<td>
+										<c:choose>
+											<c:when test="<%= article == null %>">
+												<aui:input bean="<%= article %>" cssClass="lfr-input-text-container" field="articleId" fieldParam="newArticleId" label="" name="newArticleId" value="<%= newArticleId %>" />
+											</c:when>
+											<c:otherwise>
+												<%= articleId %>
+											</c:otherwise>
+										</c:choose>
+									</td>
+									<td>
+										<c:if test="<%= article == null %>">
+											<aui:input inlineLabel="right" name="autogenerateId" type="checkbox" value="autoArticleId" />
+										</c:if>
+									</td>
+								</tr>
+								</table>
+							</c:otherwise>
+						</c:choose>
+					</aui:field-wrapper>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<liferay-ui:message key="name" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="title" />
+					<aui:input bean="<%= article %>" field="title" model="<%= JournalArticle.class %>" label="name" name="title" />
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<liferay-ui:message key="language" />
-				</td>
 				<td>
 					<input name="<portlet:namespace />lastLanguageId" type="hidden" value="<%= languageId %>" />
 
 					<table class="lfr-table">
 					<tr>
 						<td>
-							<select <%= (article == null) ? "disabled" : "" %> id="<portlet:namespace />languageIdSelect" name="<portlet:namespace />languageId">
+							<aui:select disabled="<%= article == null %>" id="languageIdSelect" label="language" name="languageId">
 
 								<%
 								Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -354,36 +345,24 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 								for (int i = 0; i < locales.length; i++) {
 								%>
 
-									<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
+									<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= languageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
 
 								<%
 								}
 								%>
 
-							</select>
-
+							</aui:select>
+						</td>
+						<td>
 							<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
-								<input name="<portlet:namespace />removeArticleLocaleButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();" />
+								<aui:button name="removeArticleLocaleButton" onClick='<%= renderResponse.getNamespace() + "removeArticleLocale();" %>' type="button" value="remove" />
 							</c:if>
 						</td>
 						<td>
 							<table class="lfr-table">
 							<tr>
 								<td>
-									<liferay-ui:message key="default-language" />
-								</td>
-								<td>
-									<select
-										<c:choose>
-											<c:when test="<%= article == null %>">
-												disabled
-											</c:when>
-											<c:otherwise>
-												name="<portlet:namespace />defaultLanguageId"
-											</c:otherwise>
-										</c:choose>
-										id="<portlet:namespace />defaultLanguageIdSelect"
-									>
+									<aui:select label="default-language" disabled="<%= article == null %>" name="defaultLanguageIdSelect">
 
 										<%
 										if ((availableLocales != null) && (availableLocales.length > 0)) {
@@ -397,7 +376,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 												Locale availableLocale = LocaleUtil.fromLanguageId(availableLocales[i]);
 										%>
 
-												<option <%= (availableLocales[i].equals(defaultLanguageId)) ? "selected" : "" %> value="<%= availableLocales[i] %>"><%= availableLocale.getDisplayName(availableLocale) %></option>
+												<aui:option label="<%= availableLocale.getDisplayName(availableLocale) %>" selected="<%= availableLocales[i].equals(defaultLanguageId) %>" value="<%= availableLocales[i] %>" />
 
 										<%
 											}
@@ -406,7 +385,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 												Locale languageLocale = LocaleUtil.fromLanguageId(languageId);
 										%>
 
-												<option value="<%= languageId %>"><%= languageLocale.getDisplayName(languageLocale) %></option>
+												<aui:option label="<%= languageLocale.getDisplayName(languageLocale) %>" value="<%= languageId %>" />
 
 										<%
 											}
@@ -414,16 +393,16 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 										else {
 										%>
 
-											<option value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
+											<aui:option label="<%= defaultLocale.getDisplayName(defaultLocale) %>" value="<%= defaultLanguageId %>" />
 
 										<%
 										}
 										%>
 
-									</select>
+									</aui:select>
 
 									<c:if test="<%= article == null %>">
-										<input name="<portlet:namespace />defaultLanguageId" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
+										<aui:input name="defaultLanguageId" type="hidden" value="<%= defaultLanguageId %>" />
 									</c:if>
 								</td>
 							</tr>

@@ -1088,7 +1088,7 @@ AUI().add(
 
 				var componentContainer = source.one('div.journal-article-component-container');
 
-				return componentContainer.one('.principal-field-element');
+				return (componentContainer.one('.principal-field-element .aui-field-input') || componentContainer.one('.principal-field-element'));
 			},
 
 			getPrincipalForm: function(formName) {
@@ -2893,7 +2893,7 @@ AUI().add(
 					var fieldInstance = fieldsDataSet.item(id);
 					var componentContainer = source.one('div.journal-article-component-container');
 
-					var principalElement = componentContainer.one('.principal-field-element');
+					var principalElement = componentContainer.one('.principal-field-element .aui-field-input') || componentContainer.one('.principal-field-element');
 
 					if (type == 'boolean') {
 						content = principalElement.attr('checked');

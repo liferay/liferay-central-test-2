@@ -37,13 +37,13 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 >
 	<aui:fieldset>
 		<aui:column>
-			<aui:input label="id" name="<%= displayTerms.ARTICLE_ID %>" size="20" value="<%= HtmlUtil.escape(displayTerms.getArticleId()) %>" />
+			<aui:input label="id" name="<%= displayTerms.ARTICLE_ID %>" size="20" value="<%= displayTerms.getArticleId() %>" />
 
-			<aui:input name="<%= displayTerms.CONTENT %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getContent()) %>" />
+			<aui:input name="<%= displayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>" />
 		</aui:column>
 
 		<aui:column>
-			<aui:input name="<%= displayTerms.VERSION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getVersionString()) %>" />
+			<aui:input name="<%= displayTerms.VERSION %>" size="20" type="text" value="<%= displayTerms.getVersionString() %>" />
 
 			<aui:select name="<%= displayTerms.TYPE %>">
 				<aui:option value=""></aui:option>
@@ -62,7 +62,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 		</aui:column>
 
 		<aui:column>
-			<aui:input label="name" name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getTitle()) %>" />
+			<aui:input label="name" name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
 
 			<c:choose>
 				<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
@@ -101,7 +101,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 		</aui:column>
 
 		<aui:column>
-			<aui:input label="description" name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getDescription()) %>" />
+			<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 		</aui:column>
 	</aui:fieldset>
 </liferay-ui:search-toggle>
