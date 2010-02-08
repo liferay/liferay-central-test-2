@@ -1791,6 +1791,7 @@ give-x-permission-to-guest-members=Dar permiso de {0} a los usuarios anónimos
 global-tags-are-injected-to-all-pages-that-you-visit=Las etiquetas globales se inyectan a todas las páginas que usted visite. Se utilizan para personalizar el contenido para recuperar el contenido marcado con etiqueta que usted cuida alrededor automáticamente para usted.
 global=Global
 go-to-category=Ir a la categoría
+go-to-content=Vaya a contentar (Automatic Translation)
 go-to-folder=Ir a la carpeta
 go-to-homepage=Vaya al homepage (Automatic Translation)
 go-to-paypal-and-set-up-ipn-to-post-to-x=Vaya a PayPal y configure IPN para enviar a {0}.

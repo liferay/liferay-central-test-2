@@ -1792,6 +1792,7 @@ give-x-permission-to-guest-members=Give {0} permission to Guest Members
 global-tags-are-injected-to-all-pages-that-you-visit=세계적인 꼬리표는 너가 방문하는 모든 페이지에 주사된다. 너가 걱정하는 표를 붙인 내용이 너를 위해 대략 자동으로 만회된다 하기 위하여 내용을 개인화하기 위하여 그들은 이용한다.
 global=세계
 go-to-category=종류에 가십시오
+go-to-content=만족하게 하기 위하여 가십시오 (Automatic Translation)
 go-to-folder=폴더에 가십시오
 go-to-homepage=홈페이지에 가십시오 (Automatic Translation)
 go-to-paypal-and-set-up-ipn-to-post-to-x=Go to PayPal and set up IPN to post to {0}.

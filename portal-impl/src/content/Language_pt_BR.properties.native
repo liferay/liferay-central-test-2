@@ -1792,6 +1792,7 @@ give-x-permission-to-guest-members=Dar {0} permissão para membros visitantes
 global-tags-are-injected-to-all-pages-that-you-visit=Tags globais são injetados a todas as páginas que você visita. Elas são usadas para personalizadas conteúdo, assim, conteúdo marcado que lhe interessa será automaticamente recuperado para você.
 global=Global
 go-to-category=Ir para categoria
+go-to-content=Vá satisfazer (Automatic Translation)
 go-to-folder=Ir para pasta
 go-to-homepage=Vá ao homepage (Automatic Translation)
 go-to-paypal-and-set-up-ipn-to-post-to-x=Ir para PayPal e configure um IPN para postar para {0}.

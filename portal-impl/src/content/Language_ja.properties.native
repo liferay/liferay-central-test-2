@@ -1792,6 +1792,7 @@ give-x-permission-to-guest-members=Give {0} permission to Guest Members
 global-tags-are-injected-to-all-pages-that-you-visit=グローバルタグはあなたがアクセスするすべてのページに挿入されます。それらを利用してデータにタグ付けすると、動的にデータ配信の一覧に表示されます。
 global=全体的
 go-to-category=カテゴリを参照する
+go-to-content=満足することを行きなさい (Automatic Translation)
 go-to-folder=フォルダを参照する
 go-to-homepage=ホームページに行きなさい (Automatic Translation)
 go-to-paypal-and-set-up-ipn-to-post-to-x=PayPalへ移動し、{0}へポストするIPNを設定してください。

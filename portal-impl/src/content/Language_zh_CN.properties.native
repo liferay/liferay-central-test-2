@@ -1792,6 +1792,7 @@ give-x-permission-to-guest-members=Give {0} permission to Guest Members
 global-tags-are-injected-to-all-pages-that-you-visit=全局标记注入到了您访问的每一个页面。它们用于个性化内容以便自动地为您检索您关心的标记内容。
 global=全球性
 go-to-category=去类别
+go-to-content=去满意 (Automatic Translation)
 go-to-folder=去文件夹
 go-to-homepage=去主页 (Automatic Translation)
 go-to-paypal-and-set-up-ipn-to-post-to-x=到 PayPal 设置 IPN 提交到 {0}。
