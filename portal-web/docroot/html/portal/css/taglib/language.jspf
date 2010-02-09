@@ -23,8 +23,8 @@
 %>
 
 .taglib-language-option {
-	background-position:left center;
-	background-repeat:no-repeat;
+	background-position: 0 50%;
+	background-repeat: no-repeat;
 	padding-left: 26px;
-	margin: 1px 1px 1px 1px;
+	margin: 1px;
 }
