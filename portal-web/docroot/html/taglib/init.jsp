@@ -148,7 +148,7 @@ private static String _buildLabel(String inlineLabel, boolean showForLabel, Stri
 	sb.append("\"");
 
 	if (showForLabel) {
-		sb.append("for=\"" + forLabel + "\"");
+		sb.append(" for=\"" + forLabel + "\"");
 	}
 
 	return sb.toString();
