@@ -1167,7 +1167,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 								propertyKeyEl.getTextTrim());
 						}
 						else {
-							Element simpleTriggerValueEl = triggerEl.element(
+							Element simpleTriggerValueEl = simpleEl.element(
 								"simple-trigger-value");
 
 							String timeUnit =
