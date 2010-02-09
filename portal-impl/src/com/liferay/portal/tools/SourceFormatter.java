@@ -447,7 +447,8 @@ public class SourceFormatter {
 				}
 			}
 
-			String newContent = _formatJavaContent(files[i], content);
+			String newContent = _formatJavaContent(
+				files[i], className, content);
 
 			if (newContent.indexOf("$\n */") != -1) {
 				System.out.println("*: " + files[i]);
@@ -544,7 +545,8 @@ public class SourceFormatter {
 		}
 	}
 
-	private static String _formatJavaContent(String fileName, String content)
+	private static String _formatJavaContent(
+			String fileName, String className, String content)
 		throws IOException {
 
 		boolean longLogFactoryUtil = false;
@@ -604,6 +606,10 @@ public class SourceFormatter {
 
 			line = lineSB.toString();
 
+			if (line.endsWith("private static Log _log =")) {
+				longLogFactoryUtil = true;
+			}
+
 			String excluded = _exclusions.getProperty(
 				StringUtil.replace(fileName, "\\", "/") + StringPool.AT +
 					lineCount);
@@ -615,12 +621,6 @@ public class SourceFormatter {
 
 			if ((excluded == null) && (line.length() > 80) &&
 				!line.startsWith("import ") && !line.startsWith("package ")) {
-
-				if (line.contains(
-						"private static Log _log = LogFactoryUtil.getLog(")) {
-
-					longLogFactoryUtil = true;
-				}
 
 				if (fileName.endsWith("Table.java") &&
 					line.contains("String TABLE_SQL_CREATE = ")) {
@@ -641,8 +641,9 @@ public class SourceFormatter {
 
 		if (longLogFactoryUtil) {
 			newContent = StringUtil.replace(
-				newContent, "private static Log _log = ",
-				"private static Log _log =\n\t\t");
+				newContent,
+				"private static Log _log =\n\t\tLogFactoryUtil.getLog(",
+				"private static Log _log = LogFactoryUtil.getLog(\n\t\t");
 		}
 
 		return newContent;
