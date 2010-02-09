@@ -11,14 +11,6 @@
 		</ant>
 	</target>
 
-	<target name="run-permissions-tomcat-5.5-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
-
-		<ant antfile="build-test-tomcat-5.5.xml" target="run-selenium-tomcat-5.5">
-			<property name="test.name" value="PermissionsTestSuite" />
-		</ant>
-	</target>
-
 	<target name="run-permissions-tomcat-6.0-mysql-5.0">
 		<antcall target="prepare-mysql-5.0" />
 

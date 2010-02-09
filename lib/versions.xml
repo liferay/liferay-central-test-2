@@ -61,7 +61,7 @@
 	</library>
 	<library>
 		<file-name>development/catalina.jar</file-name>
-		<version>6.0.18</version>
+		<version>6.0.24</version>
 		<project-name>Tomcat</project-name>
 		<project-url>http://tomcat.apache.org</project-url>
 		<licenses>
@@ -587,17 +587,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/naming-factory.jar</file-name>
-		<version>5.5.26</version>
-		<project-name>Apache Tomcat</project-name>
-		<project-url>http://tomcat.apache.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/objenesis.jar</file-name>
 		<version>1.0</version>
 		<project-name>Objenesis</project-name>
@@ -808,7 +797,7 @@
 	</library>
 	<library>
 		<file-name>development/tomcat-coyote.jar</file-name>
-		<version>6.0.18</version>
+		<version>6.0.24</version>
 		<project-name>Tomcat</project-name>
 		<project-url>http://tomcat.apache.org</project-url>
 		<licenses>

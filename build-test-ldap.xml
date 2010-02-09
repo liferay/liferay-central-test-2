@@ -114,7 +114,7 @@ userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09</echo>
 		/>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.18\bin\startup.bat" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.24\bin\startup.bat" />
 		</exec>
 
 		<sleep seconds="30" />

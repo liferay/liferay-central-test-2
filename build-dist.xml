@@ -500,42 +500,15 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 	</target>
 
 	<target name="build-dist-tomcat">
-		<antcall target="build-dist-tomcat-5.5" />
 		<antcall target="build-dist-tomcat-6.0" />
 	</target>
 
-	<target name="build-dist-tomcat-5.5">
-		<delete dir="${app.server.tomcat.dir}" />
-
-		<unzip src="${app.server.parent.dir}/tomcat-5.5.27.zip" dest="${app.server.parent.dir}" />
-
-		<echo file="app.server.${user.name}.properties">app.server.type=tomcat
-
-app.server.tomcat.version=5.5
-app.server.tomcat.dir=${app.server.parent.dir}/tomcat-5.5.27
-app.server.tomcat.classes.global.dir=$${app.server.tomcat.dir}/common/classes
-app.server.tomcat.lib.endorsed.dir=$${app.server.tomcat.dir}/common/endorsed
-app.server.tomcat.lib.global.dir=$${app.server.tomcat.dir}/common/lib/ext
-app.server.tomcat.lib.support.dir=$${app.server.tomcat.dir}/server/lib
-app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</echo>
-
-		<delete dir="${project.dir}/portal-web/classes" />
-
-		<ant target="deploy" inheritAll="false" />
-
-		<delete file="app.server.${user.name}.properties" />
-
-		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${app.server.tomcat.deploy.dir}" />
-			<param name="deployer.app.server.type" value="tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.tomcat.lib.portal.dir}" />
-		</antcall>
-	</target>
-
 	<target name="build-dist-tomcat-6.0">
-		<delete dir="${app.server.parent.dir}/tomcat-6.0.18" />
+		<delete dir="${app.server.parent.dir}/tomcat-6.0.24" />
 
-		<unzip src="${app.server.parent.dir}/tomcat-6.0.18.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/apache-tomcat-6.0.24.zip" dest="${app.server.parent.dir}">
+			<mapper type="glob" from="apache-tomcat-6.0.24/*" to="tomcat-6.0.24/*"/>
+		</unzip>
 
 		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
 
@@ -546,9 +519,9 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		<delete file="app.server.${user.name}.properties" />
 
 		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.18/webapps" />
+			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.24/webapps" />
 			<param name="deployer.app.server.type" value="tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.parent.dir}/tomcat-6.0.18/webapps/ROOT/WEB-INF/lib" />
+			<param name="deployer.app.server.lib.portal.dir" value="${app.server.parent.dir}/tomcat-6.0.24/webapps/ROOT/WEB-INF/lib" />
 		</antcall>
 	</target>
 
@@ -1041,17 +1014,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 	</target>
 
 	<target name="zip-tomcat">
-		<antcall target="zip-tomcat-5.5" />
 		<antcall target="zip-tomcat-6.0" />
-	</target>
-
-	<target name="zip-tomcat-5.5">
-		<delete file="dist/liferay-portal-tomcat-5.5-${lp.version}.zip" failonerror="false" />
-
-		<antcall target="zip-executable">
-			<param name="zip.executable.file" value="liferay-portal-tomcat-5.5" />
-			<param name="zip.executable.dir" value="${app.server.parent.dir}/tomcat-5.5.27" />
-		</antcall>
 	</target>
 
 	<target name="zip-tomcat-6.0">

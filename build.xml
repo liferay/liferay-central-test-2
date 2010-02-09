@@ -94,37 +94,12 @@
 				<then>
 					<ant dir="support-tomcat" target="clean" inheritAll="false" />
 
-					<if>
-						<equals arg1="${app.server.version}" arg2="5.5" />
-						<then>
-							<delete includeemptydirs="true" failonerror="false">
-								<fileset
-									dir="${app.server.deploy.dir}"
-									includes="balancer/**,jsp-examples/**,servlets-examples/**,tomcat-docs/**,webdav/**"
-								/>
-								<fileset
-									dir="${app.server.dir}/conf/Catalina/localhost"
-									includes="host-manager.xml,manager.xml"
-								/>
-								<fileset
-									dir="${app.server.dir}/server/webapps"
-									includes="host-manager/**,manager/**"
-								/>
-							</delete>
-						</then>
-					</if>
-
-					<if>
-						<equals arg1="${app.server.version}" arg2="6.0" />
-						<then>
-							<delete includeemptydirs="true" failonerror="false">
-								<fileset
-									dir="${app.server.deploy.dir}"
-									includes="docs/**,examples/**,host-manager/**,manager/**"
-								/>
-							</delete>
-						</then>
-					</if>
+					<delete includeemptydirs="true" failonerror="false">
+						<fileset
+							dir="${app.server.deploy.dir}"
+							includes="docs/**,examples/**,host-manager/**,manager/**"
+						/>
+					</delete>
 				</then>
 			</elseif>
 		</if>
@@ -434,29 +409,42 @@
 					/>
 				</copy>
 
-				<if>
-					<equals arg1="${app.server.version}" arg2="5.5" />
-					<then>
-
-						<!--
-						LEP-2981
-						-->
-
-						<copy todir="${app.server.dir}/common/lib">
-							<fileset
-								dir="lib/development"
-								includes="naming-factory.jar"
-							/>
-						</copy>
-					</then>
-				</if>
-
 				<copy todir="${app.server.temp.dir}/liferay/com/liferay/portal/deploy/dependencies">
 					<fileset
 						dir="lib/development"
 						includes="quercus.jar,resin-util.jar,script-10.jar"
 					/>
 				</copy>
+
+				<if>
+					<not>
+						<available file="${app.server.dir}/bin/setevn.bat" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/tomcat/bin/setenv.bat"
+							tofile="${app.server.dir}/bin/setenv.bat"
+							overwrite="yes"
+						>
+							<filterset>
+								<filter token="java.version" value="${java.version}" />
+							</filterset>
+						</copy>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<available file="${app.server.dir}/bin/setevn.sh" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/tomcat/bin/setenv.sh"
+							tofile="${app.server.dir}/bin/setenv.sh"
+							overwrite="yes"
+						/>
+					</then>
+				</if>
 
 				<if>
 					<not>
@@ -471,16 +459,33 @@
 					</then>
 				</if>
 
-				<copy
-					file="tools/servers/tomcat/conf/catalina.properties.${app.server.version}"
-					tofile="${app.server.dir}/conf/catalina.properties"
-					overwrite="yes"
-				/>
+				<replace file="${app.server.dir}/conf/catalina.properties">
+					<replacetoken><![CDATA[common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar
+
+#]]></replacetoken>
+					<replacevalue><![CDATA[common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar,${catalina.home}/lib/ext/*.jar
+
+#]]></replacevalue>
+				</replace>
 
 				<copy
 					file="tools/servers/tomcat/conf/jaas.config"
 					tofile="${app.server.dir}/conf/jaas.config"
 				/>
+
+				<if>
+					<and>
+						<available file="${env.JAVA_HOME}/jre/bin/java.exe" />
+						<not>
+							<available file="${app.server.dir}/jre" />
+						</not>
+					</and>
+					<then>
+						<copy todir="${app.server.dir}/jre${java.version}/win">
+							<fileset dir="${env.JAVA_HOME}/jre" />
+						</copy>
+					</then>
+				</if>
 			</then>
 		</if>
 

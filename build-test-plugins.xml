@@ -35,15 +35,6 @@ plugins.includes=${plugins.includes}</echo>
 		</ant>
 	</target>
 
-	<target name="run-plugins1-tomcat-5.5-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
-
-		<ant antfile="build-test-tomcat-5.5.xml" target="run-selenium-tomcat-5.5">
-			<property name="test.name" value="Plugins1TestSuite" />
-			<property name="portlet.plugins.includes" value="alfresco-content-portlet,alfresco-portlet,analog-clock-portlet,bible-gateway-portlet,chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,gospel-for-asia-portlet,ip-geocoder-portlet,journal-police-portlet,mail-portlet,novell-collaboration-portlet,random-bible-verse-portlet,release-tools-portlet,ruby-console-portlet,sample-dao-portlet,sample-groovy-portlet,sample-hibernate-portlet,sample-icefaces-ipc-ajax-push-portlet,sample-icefaces-jsf-1.1-myfaces-jsp-portlet,sample-icefaces-jsf-1.1-sun-facelets-portlet,sample-icefaces-jsf-1.1-sun-jsp-portlet,sample-icefaces-jsf-1.2-sun-facelets-portlet,sample-javascript-portlet,sample-jsf-1.1-myfaces-facelets-portlet,sample-jsf-1.1-myfaces-jsp-portlet,sample-jsf-1.1-sun-facelets-portlet,sample-jsf-1.1-sun-jsp-portlet,sample-jsf-1.2-sun-facelets-portlet,sample-jsf-1.2-sun-jsp-portlet,sample-json-portlet,sample-jsp-portlet,sample-lar-portlet,sample-laszlo-portlet,sample-localized-portlet" />
-		</ant>
-	</target>
-
 	<target name="run-plugins1-tomcat-6.0-mysql-5.0">
 		<antcall target="prepare-mysql-5.0" />
 
@@ -108,15 +99,6 @@ plugins.includes=${plugins.includes}</echo>
 		<antcall target="prepare-mysql-5.0" />
 
 		<ant antfile="build-test-jboss-tomcat-5.0.xml" target="run-selenium-jboss-tomcat-5.0">
-			<property name="test.name" value="Plugins2TestSuite" />
-			<property name="portlet.plugins.includes" value="sample-orbeon-forms-portlet,sample-permissions-portlet,sample-php-portlet,sample-portal-client-portlet,sample-portal-service-portlet,sample-python-portlet,sample-ruby-portlet,sample-search-container-portlet,sample-service-builder-portlet,sample-sign-in-portlet,sample-spring-portlet,sample-struts-portlet,sample-tapestry-portlet,sample-test-dependency-able-portlet,sample-test-dependency-baker-portlet,sample-test-dependency-charlie-portlet,sample-test-dependency-dog-portlet,sample-test-dependency-easy-portlet,sample-test-dependency-fox-portlet,sample-test-hook-portlet,sample-test-portlet,sample-ui-taglibs-portlet,sample-wap-portlet,stocks-portlet,sun-bookmark-portlet,sun-elluminate-portlet,sun-flickr-portlet,sun-iframe-portlet,sun-mashup-portlet,sun-notepad-portlet,sun-photoshow-ajax-portlet,sun-privacy-guard-portlet,sun-rss-portlet,sun-showtime-portlet,sun-tour-ipc-portlet,sun-video-portlet,sun-weather-portlet,tich-portlet,twitter-portlet,weather-portlet,web-form-portlet,westminster-catechism-portlet,widget-consumer-portlet,wol-portlet,workflow-portlet" />
-		</ant>
-	</target>
-
-	<target name="run-plugins2-tomcat-5.5-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
-
-		<ant antfile="build-test-tomcat-5.5.xml" target="run-selenium-tomcat-5.5">
 			<property name="test.name" value="Plugins2TestSuite" />
 			<property name="portlet.plugins.includes" value="sample-orbeon-forms-portlet,sample-permissions-portlet,sample-php-portlet,sample-portal-client-portlet,sample-portal-service-portlet,sample-python-portlet,sample-ruby-portlet,sample-search-container-portlet,sample-service-builder-portlet,sample-sign-in-portlet,sample-spring-portlet,sample-struts-portlet,sample-tapestry-portlet,sample-test-dependency-able-portlet,sample-test-dependency-baker-portlet,sample-test-dependency-charlie-portlet,sample-test-dependency-dog-portlet,sample-test-dependency-easy-portlet,sample-test-dependency-fox-portlet,sample-test-hook-portlet,sample-test-portlet,sample-ui-taglibs-portlet,sample-wap-portlet,stocks-portlet,sun-bookmark-portlet,sun-elluminate-portlet,sun-flickr-portlet,sun-iframe-portlet,sun-mashup-portlet,sun-notepad-portlet,sun-photoshow-ajax-portlet,sun-privacy-guard-portlet,sun-rss-portlet,sun-showtime-portlet,sun-tour-ipc-portlet,sun-video-portlet,sun-weather-portlet,tich-portlet,twitter-portlet,weather-portlet,web-form-portlet,westminster-catechism-portlet,widget-consumer-portlet,wol-portlet,workflow-portlet" />
 		</ant>

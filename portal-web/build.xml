@@ -264,44 +264,20 @@
 	</target>
 
 	<target name="compile-tomcat">
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
+		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jasper.jar;${app.server.dir}/lib/jasper-el.jar;${app.server.dir}/lib/jasper-jdt.jar;${app.server.bin.dir}/tomcat-juli.jar" />
+
 		<if>
-			<equals arg1="${app.server.version}" arg2="5.5" />
+			<not>
+				<available file="${classpath.jsp}" />
+			</not>
 			<then>
-				<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-				<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/common/lib/commons-el.jar;${app.server.dir}/common/lib/jasper-compiler.jar;${app.server.dir}/common/lib/jasper-runtime.jar" />
+				<antcall target="compile-common-lib" />
 
-				<if>
-					<not>
-						<available file="${classpath.jsp}" />
-					</not>
-					<then>
-						<antcall target="compile-common-lib" />
-
-						<unjar src="${app.server.dir}/common/lib/jsp-api.jar" dest="${classpath.jsp}" />
-						<unjar src="${app.server.dir}/common/lib/servlet-api.jar" dest="${classpath.jsp}" />
-					</then>
-				</if>
+				<unjar src="${app.server.dir}/lib/el-api.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.dir}/lib/jsp-api.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.dir}/lib/servlet-api.jar" dest="${classpath.jsp}" />
 			</then>
-			<elseif>
-				<equals arg1="${app.server.version}" arg2="6.0" />
-				<then>
-					<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-					<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jasper.jar;${app.server.dir}/lib/jasper-el.jar;${app.server.dir}/lib/jasper-jdt.jar;${app.server.bin.dir}/tomcat-juli.jar" />
-
-					<if>
-						<not>
-							<available file="${classpath.jsp}" />
-						</not>
-						<then>
-							<antcall target="compile-common-lib" />
-
-							<unjar src="${app.server.dir}/lib/el-api.jar" dest="${classpath.jsp}" />
-							<unjar src="${app.server.dir}/lib/jsp-api.jar" dest="${classpath.jsp}" />
-							<unjar src="${app.server.dir}/lib/servlet-api.jar" dest="${classpath.jsp}" />
-						</then>
-					</if>
-				</then>
-			</elseif>
 		</if>
 
 		<antcall target="compile-common-jsp">
