@@ -19,6 +19,10 @@ body.portlet {
 	display: block;
 }
 
+.portlet-title-text {
+	cursor: text;
+}
+
 .portlet-title img {
 	vertical-align: middle;
 }
