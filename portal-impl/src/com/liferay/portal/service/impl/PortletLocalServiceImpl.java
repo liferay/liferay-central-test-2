@@ -1170,29 +1170,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 							Element simpleTriggerValueEl = simpleEl.element(
 								"simple-trigger-value");
 
-							String timeUnit =
-								simpleTriggerValueEl.attributeValue(
-									"time-unit", "SEC");
-
-							long timeValue = GetterUtil.getLong(
-								simpleTriggerValueEl.getTextTrim());
-
-							if (timeUnit.equalsIgnoreCase("DAY")) {
-								timeValue = timeValue * 60 * 60 * 24;
-							}
-							else if (timeUnit.equalsIgnoreCase("HOUR")) {
-								timeValue = timeValue * 60 * 60;
-							}
-							else if (timeUnit.equalsIgnoreCase("MIN")) {
-								timeValue = timeValue * 60;
-							}
-							else if (timeUnit.equalsIgnoreCase("WEEK")) {
-								timeValue = timeValue * 60 * 60 * 24 * 7;
-							}
-
 							schedulerEntry.setTriggerValue(
-								String.valueOf(timeValue));
+								simpleTriggerValueEl.getTextTrim());
 						}
+
+						String timeUnit = GetterUtil.getString(
+							simpleEl.elementText("time-unit"), "SECOND");
+
+						schedulerEntry.setTimeUnit(timeUnit);
 					}
 
 					portletModel.addSchedulerEntry(schedulerEntry);

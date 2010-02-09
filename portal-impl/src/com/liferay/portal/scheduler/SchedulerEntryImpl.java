@@ -30,9 +30,8 @@ import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PrefsPropsUtil;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * <a href="SchedulerEntryImpl.java.html"><b><i>View Source</i></b></a>
@@ -53,6 +52,10 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		return _eventListenerClass;
 	}
 
+	public String getTimeUnit() {
+		return _timeUnit;
+	}
+
 	public Trigger getTrigger() throws SystemException {
 		if (_trigger != null) {
 			return _trigger;
@@ -71,9 +74,24 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		else if (_triggerType == TriggerType.SIMPLE) {
 			long intervalTime = GetterUtil.getLong(triggerValue);
 
+			if (_timeUnit.equalsIgnoreCase("DAY")) {
+				intervalTime = intervalTime * Time.DAY;
+			}
+			else if (_timeUnit.equalsIgnoreCase("HOUR")) {
+				intervalTime = intervalTime * Time.HOUR;
+			}
+			else if (_timeUnit.equalsIgnoreCase("MINUTE")) {
+				intervalTime = intervalTime * Time.MINUTE;
+			}
+			else if (_timeUnit.equalsIgnoreCase("WEEK")) {
+				intervalTime = intervalTime * Time.WEEK;
+			}
+			else {
+				intervalTime = intervalTime * Time.SECOND;
+			}
+
 			_trigger = new IntervalTrigger(
-				_eventListenerClass, _eventListenerClass,
-				TimeUnit.SECONDS.toMillis(intervalTime));
+				_eventListenerClass, _eventListenerClass, intervalTime);
 		}
 		else {
 			throw new SystemException("Unsupport trigger type " + _triggerType);
@@ -110,6 +128,10 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		_readProperty = readProperty;
 	}
 
+	public void setTimeUnit(String timeUnit) {
+		_timeUnit = timeUnit;
+	}
+
 	public void setTriggerType(TriggerType triggerType) {
 		_triggerType = triggerType;
 	}
@@ -129,6 +151,8 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		sb.append(_eventListenerClass);
 		sb.append(", readProperty=");
 		sb.append(_readProperty);
+		sb.append(", timeUnit=");
+		sb.append(_timeUnit);
 		sb.append(", trigger=");
 		sb.append(_trigger);
 		sb.append(", triggerType=");
@@ -144,6 +168,7 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 	private MessageListener _eventListener;
 	private String _eventListenerClass;
 	private boolean _readProperty;
+	private String _timeUnit;
 	private Trigger _trigger;
 	private TriggerType _triggerType;
 	private String _triggerValue;

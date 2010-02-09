@@ -38,6 +38,8 @@ public interface SchedulerEntry {
 
 	public String getEventListenerClass();
 
+	public String getTimeUnit();
+
 	public Trigger getTrigger() throws SystemException;
 
 	public TriggerType getTriggerType();
@@ -53,6 +55,8 @@ public interface SchedulerEntry {
 	public void setEventListenerClass(String eventListenerClass);
 
 	public void setReadProperty(boolean readProperty);
+
+	public void setTimeUnit(String timeUnit);
 
 	public void setTriggerType(TriggerType triggerType);
 

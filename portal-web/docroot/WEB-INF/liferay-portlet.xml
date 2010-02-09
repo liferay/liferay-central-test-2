@@ -75,20 +75,20 @@
 		<icon>/html/icons/default.png</icon>
 		<struts-path>admin</struts-path>
 		<scheduler-entry>
-			<scheduler-description>Check remote repositories</scheduler-description>
-			<scheduler-event-listener-class>com.liferay.portlet.admin.messaging.CheckRemoteRepositoriesSchedulerMessageListener</scheduler-event-listener-class>
+			<scheduler-event-listener-class>com.liferay.portlet.admin.messaging.PluginRepositoriesMessageListener</scheduler-event-listener-class>
 			<trigger>
 				<simple>
-					<simple-trigger-value time-unit="DAY">1</simple-trigger-value>
+					<simple-trigger-value>1</simple-trigger-value>
+					<time-unit>DAY</time-unit>
 				</simple>
 			</trigger>
 		</scheduler-entry>
 		<scheduler-entry>
-			<scheduler-description>Import LDAP</scheduler-description>
-			<scheduler-event-listener-class>com.liferay.portlet.admin.messaging.LDAPImportSchedulerMessageListener</scheduler-event-listener-class>
+			<scheduler-event-listener-class>com.liferay.portlet.admin.messaging.LDAPImportMessageListener</scheduler-event-listener-class>
 			<trigger>
 				<simple>
-					<simple-trigger-value time-unit="MIN">10</simple-trigger-value>
+					<property-key>ldap.import.interval</property-key>
+					<time-unit>MINUTE</time-unit>
 				</simple>
 			</trigger>
 		</scheduler-entry>

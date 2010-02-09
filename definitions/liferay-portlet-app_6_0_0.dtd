@@ -147,18 +147,21 @@ a message at a regular interval specified by the trigger element.
 The trigger element contains configuration data to indictate when to trigger the
 class specified in scheduler-event-listener-class.
 -->
-<!ELEMENT trigger (cron|simple)>
+<!ELEMENT trigger (cron | simple)>
 
 <!--
 The cron element specifies a cron style trigger for a scheduler.
 -->
-<!ELEMENT cron (property-key|cron-trigger-value)>
+<!ELEMENT cron (property-key | cron-trigger-value)>
 
 <!--
 The property-key value specifies a property key that will be queried from
-portal.properties to create a trigger. For a cron trigger, the queried value
-should be a cron text. For a simple trigger, the queried value should be a
-number that represents a time interval in seconds.
+portal.properties to create a trigger.
+
+For a cron trigger, the queried value should be a cron text.
+
+For a simple trigger, the queried value should be a number that represents a
+time interval. The unit of measure is based on the value of time-unit element.
 -->
 <!ELEMENT property-key (#PCDATA)>
 
@@ -170,7 +173,7 @@ The cron-trigger-value value should be a cron text.
 <!--
 The simple element specifies an interval trigger for a scheduler.
 -->
-<!ELEMENT simple (property-key|simple-trigger-value)>
+<!ELEMENT simple ((property-key | simple-trigger-value), time-unit)>
 
 <!--
 The simple-trigger-value value is a number that represents how often to trigger
@@ -179,10 +182,11 @@ a scheduler.
 <!ELEMENT simple-trigger-value (#PCDATA)>
 
 <!--
-The simple-trigger-value value is the unit of measure for the time specified in
-simple-trigger-value. The default measure is in seconds.
+The time-unit value is the unit of measure for the time specified in
+property-key or simple-trigger-value. Valid values for this element are "DAY",
+"HOUR", "MINUTE", "SECOND", or "WEEK". The default value is "SECOND".
 -->
-<!ATTLIST simple-trigger-value time-unit (WEEK|DAY|HOUR|MIN|SEC) "SEC">
+<!ELEMENT time-unit (#PCDATA)>
 
 <!--
 The portlet-url-class value must be a class that extends

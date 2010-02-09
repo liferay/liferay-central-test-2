@@ -26,19 +26,19 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
+import com.liferay.portal.plugin.PluginPackageUtil;
 
 /**
- * <a href="LDAPImportSchedulerMessageListener.java.html"><b><i>View Source</i>
+ * <a href="PluginRepositoriesMessageListener.java.html"><b><i>View Source</i>
  * </b></a>
  *
  * @author Shuyang Zhou
  */
-public class LDAPImportSchedulerMessageListener implements MessageListener{
+public class PluginRepositoriesMessageListener implements MessageListener {
 
 	public void receive(Message message) {
 		try {
-			PortalLDAPImporterUtil.importFromLDAP();
+			PluginPackageUtil.reloadRepositories();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -46,6 +46,6 @@ public class LDAPImportSchedulerMessageListener implements MessageListener{
 	}
 
 	private static Log _log =
-		LogFactoryUtil.getLog(LDAPImportSchedulerMessageListener.class);
+		LogFactoryUtil.getLog(PluginRepositoriesMessageListener.class);
 
 }

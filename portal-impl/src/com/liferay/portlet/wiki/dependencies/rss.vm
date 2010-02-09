@@ -30,10 +30,10 @@
 		#set ($targetResult = $targetResults.get($count))
 
 		<tr>
-			<td style="vertical-align: top" width="50%">
+			<td style="vertical-align: top;" width="50%">
 				$languageUtil.get($locale, "line") $sourceResult.getLineNumber()
 			</td>
-			<td style="vertical-align: top" width="50%">
+			<td style="vertical-align: top;" width="50%">
 				$languageUtil.get($locale, "line") $targetResult.getLineNumber()
 			</td>
 		</tr>
@@ -42,7 +42,7 @@
 				<table style="border-collapse: separate; border-spacing: 5pt; width: 100%;">
 
 				#foreach ($changedLine in $sourceResult.getChangedLines())
-					<tr style="vertical-align: top">
+					<tr style="vertical-align: top;">
 						#processColumn($changedLine)
 					</tr>
 				#end
@@ -53,7 +53,7 @@
 				<table style="border-collapse: separate; border-spacing: 5pt; width: 100%;">
 
 				#foreach ($changedLine in $targetResult.getChangedLines())
-					<tr style="vertical-align: top">
+					<tr style="vertical-align: top;">
 						#processColumn($changedLine)
 					</tr>
 				#end
