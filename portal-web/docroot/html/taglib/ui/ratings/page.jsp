@@ -238,8 +238,8 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					{
 						boundingBox: '#<%= randomNamespace %>ratingThumb',
 						label: label,
-						on: {
-							click: function() {
+						after: {
+							itemSelect: function() {
 								var instance = this;
 
 								var saveCallback = function(event, id, obj) {
