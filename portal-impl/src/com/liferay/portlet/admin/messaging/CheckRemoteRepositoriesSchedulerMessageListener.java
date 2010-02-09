@@ -20,57 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.admin.job;
+package com.liferay.portlet.admin.messaging;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
-import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.plugin.PluginPackageUtil;
 
 /**
- * <a href="LDAPImportJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="CheckRemoteRepositoriesSchedulerMessageListener.java.html"><b><i>
+ * View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Shuyang Zhou
  */
-public class LDAPImportJob implements IntervalJob {
+public class CheckRemoteRepositoriesSchedulerMessageListener
+	implements MessageListener {
 
-	public LDAPImportJob() {
+	public void receive(Message message) {
 		try {
-			long rawInterval = PrefsPropsUtil.getLong(
-				PropsKeys.LDAP_IMPORT_INTERVAL,
-				PropsValues.LDAP_IMPORT_INTERVAL);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Interval " + rawInterval + " minutes");
-			}
-
-			_interval =  rawInterval * Time.MINUTE;
+			PluginPackageUtil.reloadRepositories();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 	}
 
-	public void execute(JobExecutionContext context) {
-		try {
-			PortalLDAPImporterUtil.importFromLDAP();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	public long getInterval() {
-		return _interval;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(LDAPImportJob.class);
-
-	private long _interval;
+	private static Log _log =
+		LogFactoryUtil.getLog(
+			CheckRemoteRepositoriesSchedulerMessageListener.class);
 
 }

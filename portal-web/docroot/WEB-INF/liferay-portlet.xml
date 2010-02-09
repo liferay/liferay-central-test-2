@@ -74,7 +74,24 @@
 		<portlet-name>9</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>admin</struts-path>
-		<scheduler-class>com.liferay.portlet.admin.job.AdminScheduler</scheduler-class>
+		<scheduler-entry>
+			<scheduler-description>Check remote repositories</scheduler-description>
+			<scheduler-event-listener-class>com.liferay.portlet.admin.messaging.CheckRemoteRepositoriesSchedulerMessageListener</scheduler-event-listener-class>
+			<trigger>
+				<simple>
+					<simple-trigger-value time-unit="DAY">1</simple-trigger-value>
+				</simple>
+			</trigger>
+		</scheduler-entry>
+		<scheduler-entry>
+			<scheduler-description>Import LDAP</scheduler-description>
+			<scheduler-event-listener-class>com.liferay.portlet.admin.messaging.LDAPImportSchedulerMessageListener</scheduler-event-listener-class>
+			<trigger>
+				<simple>
+					<simple-trigger-value time-unit="MIN">10</simple-trigger-value>
+				</simple>
+			</trigger>
+		</scheduler-entry>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>

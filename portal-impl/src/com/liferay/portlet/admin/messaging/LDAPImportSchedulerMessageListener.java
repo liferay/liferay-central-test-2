@@ -20,34 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.admin.job;
+package com.liferay.portlet.admin.messaging;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobExecutionContext;
-import com.liferay.portal.kernel.job.JobExecutionException;
-import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
 
 /**
- * <a href="CheckRemoteRepositoriesJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="LDAPImportSchedulerMessageListener.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Jorge Ferrer
+ * @author Shuyang Zhou
  */
-public class CheckRemoteRepositoriesJob implements IntervalJob {
+public class LDAPImportSchedulerMessageListener implements MessageListener{
 
-	public void execute(JobExecutionContext jobExecutionContext)
-		throws JobExecutionException {
-
+	public void receive(Message message) {
 		try {
-			PluginPackageUtil.reloadRepositories();
+			PortalLDAPImporterUtil.importFromLDAP();
 		}
 		catch (Exception e) {
-			throw new JobExecutionException(e);
+			_log.error(e, e);
 		}
 	}
 
-	public long getInterval() {
-		return Time.DAY;
-	}
+	private static Log _log =
+		LogFactoryUtil.getLog(LDAPImportSchedulerMessageListener.class);
 
 }
