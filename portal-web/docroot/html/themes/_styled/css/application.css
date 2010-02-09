@@ -135,8 +135,21 @@
 }
 
 .portlet-boundary.yui-dd-dragging {
-	background: #000;
-	visibility: hidden;
+	-ms-filter: alpha(opacity=60);
+	filter: alpha(opacity=60);
+	opacity: .6;
+}
+
+.portlet-boundary.yui-dd-dragging .portlet {
+	border: 2px dashed #ccc;
+}
+
+.aui-portal-layout-proxy {
+	opacity: 1 !important;
+}
+
+.aui-portal-layout-proxy .portlet-topper {
+	background-image: none;
 }
 
 .aui-proxy {
@@ -182,6 +195,14 @@
 .aui-sortable-proxy {
 	background: #727C81;
 	margin-top: 1px;
+}
+
+.lfr-freeform-layout-drag-indicator {
+	visibility: hidden;
+}
+
+.aui-portal-layout-drag-target-indicator  {
+	margin: 2px 0;
 }
 
 /* ---------- Resizables ---------- */

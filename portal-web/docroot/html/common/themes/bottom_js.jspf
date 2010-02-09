@@ -65,20 +65,26 @@ if (layout != null) {
 <c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
 	<aui:script use="liferay-layout,liferay-navigation">
 		var layoutOptions = {};
-
 		if (!themeDisplay.isFreeformLayout()) {
 			layoutOptions = {
-				boxSelector: '.portlet-boundary',
-				columnSelector: '.lfr-portlet-column',
-				handleSelector: '.portlet-title, .portlet-title-default'
+				dragNodes: '#content-wrapper .portlet-boundary',
+				dropContainer: '.lfr-portlet-column',
+				dropNodes: '.lfr-column',
+				emptyColumnClass: 'empty',
+				handles: '.portlet-title, .portlet-title-default',
+				portletBoundary: '.portlet-boundary'
 			};
 		}
 		else {
 			layoutOptions = {
-				boxSelector: '.portlet-boundary',
-				columnSelector: '.lfr-portlet-column',
-				handleSelector: '.portlet-header-bar, .portlet-title-default, .portlet-topper',
-				freeForm: true
+				dragNodes: '#content-wrapper .portlet-boundary',
+				dropContainer: '.lfr-portlet-column',
+				dropNodes: '.lfr-column',
+				emptyColumnClass: 'empty',
+				freeForm: true,
+				freeformPlaceholderClass: 'lfr-freeform-layout-drag-indicator',
+				handles: '.portlet-header-bar,.portlet-title-default,.portlet-topper',
+				portletBoundary: '.portlet-boundary'
 			};
 		}
 

@@ -11,14 +11,14 @@
 
 /* ---------- Column widths ---------- */
 
+.portlet-nested-portlets .lfr-portlet-column.empty {
+	padding: 50px;
+}
+
 .lfr-grid.dragging .lfr-column {
 	border: 3px double #828F95;
 	height: 100px;
 	min-height: 100px;
-}
-
-.portlet-nested-portlets .lfr-portlet-column.empty {
-	padding: 50px;
 }
 
 .lfr-column.ten {
@@ -118,5 +118,6 @@
 /* ---------- Freeform ---------- */
 
 .freeform .lfr-column {
+	height: 50px;
 	position: relative;
 }

@@ -1,7 +1,5 @@
 Liferay.LayoutConfiguration = {
 	showTemplates: function() {
-		var instance = this;
-
 		var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
 
 		AUI().use(
@@ -114,8 +112,6 @@ AUI().add(
 							},
 							data: data,
 							hide: function(node) {
-								var instance = this;
-
 								var children = node.all('.lfr-content-category > div');
 
 								var action = 'hide';
@@ -149,23 +145,21 @@ AUI().add(
 						instance._lockDrag(portlet);
 					}
 
-					var placeHolder = A.Node.create('<div class="loading-animation" />');
-					var onComplete = null;
 					var beforePortletLoaded = null;
+					var onComplete = null;
+					var placeHolder = A.Node.create('<div class="loading-animation" />');
+
 
 					if (options) {
 						var item = options.item;
 
-						options.placeHolder = placeHolder;
-						onComplete = options.onComplete;
-						beforePortletLoaded = options.beforePortletLoaded;
-
 						item.placeAfter(placeHolder);
 						item.remove();
+
+						beforePortletLoaded = options.beforePortletLoaded;
 					}
 					else {
-						var columnSelector = Liferay.Layout.layoutHandler.get('columnSelector');
-						var firstColumn = A.one(columnSelector);
+						var firstColumn = A.one(Liferay.Layout.options.dropNodes);
 
 						if (firstColumn) {
 							firstColumn.prepend(placeHolder);
@@ -175,14 +169,7 @@ AUI().add(
 					var portletOptions = {
 						beforePortletLoaded: beforePortletLoaded,
 						onComplete: function(portletBoundary) {
-							var layoutHandler = Liferay.Layout.layoutHandler;
-							var portletHandler = layoutHandler.get('portletHandler');
-
-							if (portletHandler) {
-								portletHandler.registerPortlet(portletBoundary);
-							}
-
-							layoutHandler._bindDropColumns();
+							Liferay.Layout.updatePortletDropZones(portletBoundary);
 
 							if (onComplete) {
 								onComplete.apply(this, arguments);
@@ -191,17 +178,15 @@ AUI().add(
 						plid: plid,
 						portletId: portletId,
 						placeHolder: placeHolder
-					}
+					};
 
-					var portletPosition = Liferay.Portlet.add(portletOptions);
+					Liferay.Portlet.add(portletOptions);
 
 					instance._loadPortletFiles(portletMetaData);
 				}
 			},
 
 			_getPortletMetaData: function(portlet) {
-				var instance = this;
-
 				var portletMetaData = portlet._LFR_portletMetaData;
 
 				if (!portletMetaData) {
@@ -227,7 +212,7 @@ AUI().add(
 							header: headerPortalCssPaths
 						},
 						portletUsed: portletUsed
-					}
+					};
 
 					portlet._LFR_portletMetaData = portletMetaData;
 				}
@@ -250,7 +235,7 @@ AUI().add(
 				var usedPortlets = portlets.filter('.lfr-portlet-used');
 
 				instance._dialogBody.delegate(
-					'click',
+					'mousedown',
 					function(event) {
 						var link = event.currentTarget;
 						var portlet = link.ancestor('.lfr-portlet-item');
@@ -261,20 +246,20 @@ AUI().add(
 				);
 
 				var portletItem = null;
-				var layoutHandler = Liferay.Layout.layoutHandler;
+				var layoutOptions = Liferay.Layout.options;
 
 				var portletItemOptions = {
-					dd: {
-						handles: null
-					},
-					nodes: portlets
+					dragNodes: portlets,
+					dropContainer: function(dropNode) {
+						return dropNode.one(layoutOptions.dropContainer);
+					}
 				};
 
-				if (Liferay.Layout.isFreeForm) {
-					portletItem = new FreeFormPortletItem(portletItemOptions);
+				if (layoutOptions.freeForm) {
+					portletItem = new Liferay.Layout.FreeFormPortletItem(portletItemOptions);
 				}
 				else {
-					portletItem = new ColumnPortletItem(portletItemOptions);
+					portletItem = new Liferay.Layout.PortletItem(portletItemOptions);
 				}
 
 				usedPortlets.each(
@@ -302,7 +287,7 @@ AUI().add(
 				}
 
 				instance._dialogBody.delegate(
-					'click',
+					'mousedown',
 					function(event) {
 						var heading = event.currentTarget.get('parentNode');
 						var category = heading.one('> .lfr-content-category');
@@ -322,8 +307,6 @@ AUI().add(
 			},
 
 			_loadPortletFiles: function(portletMetaData) {
-				var instance = this;
-
 				var headerPortalCssPaths = portletMetaData.portalPaths.header;
 				var footerPortalCssPaths = portletMetaData.portalPaths.footer;
 				var headerPortletCssPaths = portletMetaData.portletPaths.header;
@@ -365,8 +348,6 @@ AUI().add(
 			},
 
 			_lockDrag: function(node) {
-				var instance = this;
-
 				var draggable = DDM.getDrag(node);
 
 				if (draggable) {
@@ -391,8 +372,6 @@ AUI().add(
 			},
 
 			_onPortletDrop: function(event) {
-				var instance = this;
-
 				var drag = event.drag;
 
 				if ((drag instanceof columnPortletItem)) {
@@ -401,8 +380,6 @@ AUI().add(
 			},
 
 			_unlockDrag: function(node) {
-				var instance = this;
-
 				var draggable = DDM.getDrag(node);
 
 				if (draggable) {
@@ -411,113 +388,84 @@ AUI().add(
 			}
 		};
 
-		var ColumnPortletItem = function() {
-			ColumnPortletItem.superclass.constructor.apply(this, arguments);
+		var PROXY_NODE_ITEM = Liferay.Layout.PROXY_NODE_ITEM;
+
+		var PortletItem = function() {
+			PortletItem.superclass.constructor.apply(this, arguments);
 		};
 
-		ColumnPortletItem.NAME = 'ColumnPortletItem';
+		PortletItem.NAME = 'PortletItem';
+
+		PortletItem.ATTRS = {
+			dd: {
+				value: {
+					clickPixelThresh: 0,
+					clickTimeThresh: 0,
+					target: false
+				}
+			},
+
+			lazyStart: {
+				value: true
+			},
+
+			proxyNode: {
+				value: PROXY_NODE_ITEM
+			}
+		};
 
 		A.extend(
-			ColumnPortletItem,
-			Liferay.Layout.ColumnPortlet,
+			PortletItem,
+			Liferay.Layout.ColumnLayout,
 			{
-				dragItem: 0,
-
-				getCurrentPortletTitle: function() {
-					var instance = this;
-
-					return instance.get('currentPortletNode').attr('title');
-				},
+				PROXY_TITLE: PROXY_NODE_ITEM.one('.portlet-title'),
 
 				_addPortlet: function(portletNode, options) {
-					var instance = this;
-
-					options = A.merge(
-						{
-							item: instance.get('placeholder')
-						},
-						options
-					);
-
 					LayoutConfiguration._addPortlet(portletNode, options);
 				},
 
-				_createDrag: function(node) {
+				_getAppendNode: function() {
 					var instance = this;
 
-					var delay = 30;
-					var dragDelay = (delay * instance.dragItem++);
+					instance.appendNode = DDM.activeDrag.get('node').cloneNode(true);
 
-					setTimeout(
-						function() {
-							ColumnPortletItem.superclass._createDrag.apply(instance, [node]);
-						},
-						dragDelay
-					);
+					return instance.appendNode;
 				},
 
 				_onDragEnd: function(event) {
 					var instance = this;
 
-					var drag = event.target;
-					var portletNode = drag.get('node');
-					var placeholder = instance.get('placeholder');
+					PortletItem.superclass._onDragEnd.apply(this, arguments);
 
-					instance.set('dragging', false);
+					var appendNode = instance.appendNode;
 
-					if (placeholder) {
-						placeholder.hide();
+					if (appendNode && appendNode.inDoc()) {
+						var portletNode = event.target.get('node');
+
+						instance._addPortlet(
+							portletNode,
+							{
+								item: instance.appendNode
+							}
+						);
 					}
-
-					var isColumn = placeholder.get('parentNode').hasClass('lfr-portlet-column');
-
-					if (isColumn) {
-						instance._addPortlet(portletNode);
-					}
-
-					Liferay.Layout.layoutHandler._onPortletDragEnd(event);
 				},
 
-				_onDragStart: function(event) {
+				_onDragStart: function() {
 					var instance = this;
 
-					var drag = event.target;
-					var portletNode = drag.get('node');
+					PortletItem.superclass._onDragStart.apply(this, arguments);
 
-					ColumnPortletItem.superclass._onDragStart.apply(this, arguments);
-
-					portletNode.show();
+					instance._syncProxyTitle();
 				},
 
-				_syncHelperSizeUI: function(drag) {
+				_syncProxyTitle: function() {
 					var instance = this;
 
-					var helper = instance.get('helper');
+					var node = DDM.activeDrag.get('node');
+					var title = node.attr('title');
 
-					instance._updateDefHeight(helper);
-					instance._updateDefWidth(helper);
-				},
-
-				_updateDefHeight: function(elem) {
-					var instance = this;
-
-					elem.set('offsetHeight', 100);
-				},
-
-				_updateDefWidth: function(elem) {
-					var instance = this;
-
-					elem.set('offsetWidth', 350);
-				},
-
-				_updatePlaceholder: function(event, cancelAppend) {
-					var instance = this;
-
-					var placeholder = instance.get('placeholder');
-
-					instance._updateDefHeight(placeholder);
-
-					ColumnPortletItem.superclass._updatePlaceholder.apply(this, arguments);
+					instance.PROXY_TITLE.html(title);
 				}
 			}
 		);
@@ -530,58 +478,22 @@ AUI().add(
 
 		A.extend(
 			FreeFormPortletItem,
-			ColumnPortletItem,
+			PortletItem,
 			{
 				initializer: function() {
 					var instance = this;
 
-					instance.after('drag:start', instance._afterDragStart);
-				},
-
-				_addPortlet: function(portletNode, options) {
-					var instance = this;
-
-					options = {
-						onComplete: A.bind(instance._onAddPortlet, instance)
-					};
-
-					FreeFormPortletItem.superclass._addPortlet.apply(this, [portletNode, options]);
-				},
-
-				_afterDragStart: function(event) {
-					var instance = this;
-
 					var placeholder = instance.get('placeholder');
-					var columnSelector = Liferay.Layout.layoutHandler.get('columnSelector');
-					var dropColumn = A.one(columnSelector);
 
-					if (dropColumn) {
-						dropColumn.append(placeholder);
+					if (placeholder) {
+						placeholder.addClass(Liferay.Layout.options.freeformPlaceholderClass);
 					}
-
-					Liferay.Layout.placeholder.hide();
-				},
-
-				_onAddPortlet: function(portletNode, portletId) {
-					var instance = this;
-
-					var layoutHandler = Liferay.Layout.layoutHandler;
-					var currentDrag = instance.get('currentDrag');
-					var helper = currentDrag.get('dragNode');
-
-					if (helper) {
-						helper.setStyle('display', 'block');
-
-						layoutHandler.alignPortlet(portletNode, helper);
-
-						helper.setStyle('display', 'none');
-					}
-
-					layoutHandler._setupNodeResize(portletNode);
-					layoutHandler._setupNodeStack(portletNode);
 				}
 			}
 		);
+
+		Liferay.Layout.FreeFormPortletItem = FreeFormPortletItem;
+		Liferay.Layout.PortletItem = PortletItem;
 
 		A.mix(Liferay.LayoutConfiguration, LayoutConfiguration);
 	},
