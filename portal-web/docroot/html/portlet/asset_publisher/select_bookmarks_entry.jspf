@@ -97,7 +97,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and description
 
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler(8);
 
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());
@@ -168,7 +168,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BookmarksEntry.class.getName(), entry.getEntryId());
 
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler(11);
 
 	sb.append("javascript:");
 	sb.append(renderResponse.getNamespace());
