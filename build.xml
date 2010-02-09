@@ -473,6 +473,11 @@
 					tofile="${app.server.dir}/conf/jaas.config"
 				/>
 
+				<replace file="${app.server.dir}/conf/server.xml">
+					<replacetoken><![CDATA[redirectPort="8443" />]]></replacetoken>
+					<replacevalue><![CDATA[redirectPort="8443" URIEncoding="UTF-8" />]]></replacevalue>
+				</replace>
+
 				<if>
 					<and>
 						<available file="${env.JAVA_HOME}/jre/bin/java.exe" />
