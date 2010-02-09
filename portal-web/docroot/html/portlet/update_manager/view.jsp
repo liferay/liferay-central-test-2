@@ -129,7 +129,7 @@ List updatablePackageIds = new ArrayList();
 
 						// Name
 
-						StringBundler sb = new StringBundler(10);
+						StringBuilder sb = new StringBuilder();
 
 						sb.append("<strong>");
 						sb.append(pluginPackageName);
@@ -169,7 +169,7 @@ List updatablePackageIds = new ArrayList();
 							rowURL.setParameter("moduleId", availablePluginPackage.getModuleId());
 							rowURL.setParameter("repositoryURL", availablePluginPackage.getRepositoryURL());
 
-							sb.setIndex(0);
+							sb = new StringBuilder();
 
 							sb.append("<a href=\"");
 							sb.append(rowURL.toString());

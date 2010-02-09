@@ -78,7 +78,7 @@
 
 		ResultRow row = new ResultRow(structure, structure.getId(), i);
 
-		StringBundler sb = new StringBundler(7);
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("javascript:opener.");
 		sb.append(renderResponse.getNamespace());
@@ -96,12 +96,16 @@
 
 		// Name and description
 
+		sb = new StringBuilder();
+
+		sb.append(structure.getName());
+
 		if (Validator.isNotNull(structure.getDescription())) {
-			row.addText(structure.getName().concat("<br />").concat(structure.getDescription()), rowHREF);
+			sb.append("<br />");
+			sb.append(structure.getDescription());
 		}
-		else {
-			row.addText(structure.getName(), rowHREF);
-		}
+
+		row.addText(sb.toString(), rowHREF);
 
 		// Add result row
 

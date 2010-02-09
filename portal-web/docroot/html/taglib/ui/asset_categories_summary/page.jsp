@@ -88,15 +88,11 @@ for (AssetVocabulary vocabulary : vocabularies) {
 
 <%!
 private String _buildCategoryPath(AssetCategory category) throws PortalException, SystemException {
+	StringBuilder sb = new StringBuilder();
+
 	List<AssetCategory> ancestorCategories = category.getAncestors();
 
-	if (ancestorCategories.isEmpty()) {
-		return category.getName();
-	}
-
 	Collections.reverse(ancestorCategories);
-
-	StringBundler sb = new StringBundler(ancestorCategories.size() * 2 + 1);
 
 	for (AssetCategory ancestorCategory : ancestorCategories) {
 		sb.append(ancestorCategory.getName());

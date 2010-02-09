@@ -59,19 +59,17 @@
 	String dynamicMetaDescription = (String)request.getAttribute(WebKeys.PAGE_DESCRIPTION);
 
 	if (Validator.isNotNull(dynamicMetaDescription)) {
-		if (Validator.isNotNull(metaDescription)) {
-			StringBundler sb = new StringBundler(4);
+		StringBuilder sb = new StringBuilder();
 
-			sb.append(dynamicMetaDescription);
+		sb.append(dynamicMetaDescription);
+
+		if (Validator.isNotNull(metaDescription)) {
 			sb.append(StringPool.PERIOD);
 			sb.append(StringPool.SPACE);
 			sb.append(metaDescription);
+		}
 
-			metaDescription = sb.toString();
-		}
-		else {
-			metaDescription = dynamicMetaDescription;
-		}
+		metaDescription = sb.toString();
 	}
 	%>
 
@@ -91,20 +89,17 @@
 	List<String> dynamicMetaKeywords = (List<String>)request.getAttribute(WebKeys.PAGE_KEYWORDS);
 
 	if (dynamicMetaKeywords != null) {
-		if (Validator.isNotNull(metaKeywords)) {
-			StringBundler sb = new StringBundler(4);
+		StringBuilder sb = new StringBuilder();
 
-			sb.append(StringUtil.merge(dynamicMetaKeywords));
+		sb.append(StringUtil.merge(dynamicMetaKeywords));
+
+		if (Validator.isNotNull(metaKeywords)) {
 			sb.append(StringPool.COMMA);
 			sb.append(StringPool.SPACE);
 			sb.append(metaKeywords);
-
-			metaKeywords = sb.toString();
-		}
-		else {
-			metaKeywords = StringUtil.merge(dynamicMetaKeywords);
 		}
 
+		metaKeywords = sb.toString();
 	}
 	%>
 

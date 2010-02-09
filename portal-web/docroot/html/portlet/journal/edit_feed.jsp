@@ -318,7 +318,7 @@ if (feed != null) {
 				<aui:select label="feed-type" name="feedTypeAndVersion">
 
 					<%
-					StringBundler sb = new StringBundler();
+					StringBuilder sb = new StringBuilder();
 
 					for (int i = 4; i < RSSUtil.RSS_VERSIONS.length; i++) {
 						sb.append("<option ");

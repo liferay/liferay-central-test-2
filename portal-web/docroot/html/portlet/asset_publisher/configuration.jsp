@@ -213,7 +213,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 										image = image.toEscapedModel();
 
-										StringBundler sb = new StringBundler(9);
+										StringBuilder sb = new StringBuilder();
 
 										sb.append("<img border=\"1\" src=\"");
 										sb.append(themeDisplay.getPathImage());

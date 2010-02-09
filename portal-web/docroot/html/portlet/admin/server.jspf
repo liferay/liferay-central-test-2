@@ -153,7 +153,7 @@ numberFormat.setMinimumIntegerDigits(2);
 
 							// Logger
 
-							StringBundler sb = new StringBundler(Levels.ALL_LEVELS.length * 6 + 7);
+							StringBuilder sb = new StringBuilder();
 
 							sb.append("<select name=\"");
 							sb.append(renderResponse.getNamespace());

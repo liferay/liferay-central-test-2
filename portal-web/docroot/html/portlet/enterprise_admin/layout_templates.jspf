@@ -78,7 +78,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and thumbnail
 
-	StringBundler sb = new StringBundler();
+	StringBuilder sb = new StringBuilder();
 
 	if (showEditPluginHREF) {
 		sb.append("<a href=\"");

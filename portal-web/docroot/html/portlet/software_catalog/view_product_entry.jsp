@@ -304,7 +304,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 
 			// Name and description
 
-			StringBundler sb = new StringBundler(6);
+			StringBuilder sb = new StringBuilder();
 
 			sb.append("<strong>");
 			sb.append(curProductVersion.getVersion());
@@ -354,13 +354,9 @@ PortalUtil.addPortletBreadcrumbEntry(request, productEntry.getName(), portletURL
 
 <%!
 public String _getFrameworkVersions(List frameworkVersions) {
-	if (frameworkVersions.isEmpty()) {
-		return StringPool.BLANK;
-	}
-
 	Iterator itr = frameworkVersions.iterator();
 
-	StringBundler sb = new StringBundler(frameworkVersions.size() * 6);
+	StringBuilder sb = new StringBuilder();
 
 	while (itr.hasNext()) {
 		SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)itr.next();

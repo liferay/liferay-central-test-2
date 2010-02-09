@@ -293,7 +293,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 
 				ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, conversions, portletURL, isLocked, hasLock}, fileVersion.getFileVersionId(), i);
 
-				StringBundler sb = new StringBundler(6);
+				StringBuilder sb = new StringBuilder();
 
 				sb.append(themeDisplay.getPortalURL());
 				sb.append(themeDisplay.getPathContext());

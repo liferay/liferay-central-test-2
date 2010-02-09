@@ -94,7 +94,7 @@ if (folder != null) {
 
 		// Action
 
-		StringBundler sb = new StringBundler(7);
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("opener.");
 		sb.append(renderResponse.getNamespace());

@@ -115,11 +115,11 @@ private static String _buildCss(String prefix, String baseTypeCss, boolean inlin
 }
 
 private static String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
-	if ((dynamicAttributes == null) || dynamicAttributes.isEmpty()) {
+	if (dynamicAttributes == null) {
 		return StringPool.BLANK;
 	}
 
-	StringBundler sb = new StringBundler(dynamicAttributes.size() * 4);
+	StringBuilder sb = new StringBuilder();
 
 	for (Map.Entry<String, Object> entry : dynamicAttributes.entrySet()) {
 		String key = entry.getKey();

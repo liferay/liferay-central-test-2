@@ -255,7 +255,11 @@ Format dateFormatMonthAndDay = FastDateFormatFactoryUtil.getSimpleDateFormat("M/
 <%
 cal.add(Calendar.DATE, -7);
 
-String pageSubtitle = LanguageUtil.get(pageContext, "week-of").concat(StringPool.SPACE).concat(dateFormatDate.format(Time.getDate(cal)));
+StringBuilder sb = new StringBuilder();
 
-PortalUtil.setPageSubtitle(pageSubtitle, request);
+sb.append(LanguageUtil.get(pageContext, "week-of"));
+sb.append(StringPool.SPACE);
+sb.append(dateFormatDate.format(Time.getDate(cal)));
+
+PortalUtil.setPageSubtitle(sb.toString(), request);
 %>

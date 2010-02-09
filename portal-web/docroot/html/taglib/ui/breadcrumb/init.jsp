@@ -47,7 +47,7 @@ boolean showPortletBreadcrumb = GetterUtil.getBoolean((String)request.getAttribu
 %>
 
 <%!
-private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBundler sb) throws Exception {
+private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
 	Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), GroupConstants.GUEST);
 
 	if (group.getPublicLayoutsPageCount() > 0) {
@@ -63,7 +63,7 @@ private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBundler
 	}
 }
 
-private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portletURL, ThemeDisplay themeDisplay, StringBundler sb) throws Exception {
+private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portletURL, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
 	Group group = layoutSet.getGroup();
 
 	if (group.isOrganization()) {
@@ -115,7 +115,7 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 	}
 }
 
-private void _buildPortletBreadcrumb(HttpServletRequest request, StringBundler sb) throws Exception {
+private void _buildPortletBreadcrumb(HttpServletRequest request, StringBuilder sb) throws Exception {
 	List<KeyValuePair> portletBreadcrumbList = PortalUtil.getPortletBreadcrumbList(request);
 
 	if (portletBreadcrumbList == null) {

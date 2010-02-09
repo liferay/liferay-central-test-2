@@ -95,36 +95,32 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			}
 		}
 
-		String content;
+		StringBuilder sb = new StringBuilder();
 
-		if (pagesIteratorEnd < pagesIteratorBegin) {
-			content = StringPool.BLANK;
-		}
-		else {
-			StringBundler sb = new StringBundler((pagesIteratorEnd - pagesIteratorBegin + 1) * 6);
-
-			for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
-				if (i == cur) {
-					sb.append("<strong class='journal-article-page-number'>");
-					sb.append(i);
-					sb.append("</strong>");
-				}
-				else {
-					sb.append("<a class='journal-article-page-number' href='");
-					sb.append(_getHREF(formName, curParam, i, jsCall, url, urlAnchor));
-					sb.append("'>");
-					sb.append(i);
-					sb.append("</a>");
-				}
-
-				sb.append("&nbsp;&nbsp;");
+		for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
+			if (i == cur) {
+				sb.append("<strong class='journal-article-page-number'>");
+			}
+			else {
+				sb.append("<a class='journal-article-page-number' href='");
+				sb.append(_getHREF(formName, curParam, i, jsCall, url, urlAnchor));
+				sb.append("'>");
 			}
 
-			content = sb.toString();
+			sb.append(i);
+
+			if (i == cur) {
+				sb.append("</strong>");
+			}
+			else {
+				sb.append("</a>");
+			}
+
+			sb.append("&nbsp;&nbsp;");
 		}
 		%>
 
-		<%= content %>
+		<%= sb.toString() %>
 	</div>
 </c:if>
 

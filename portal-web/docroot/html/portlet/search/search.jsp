@@ -205,7 +205,7 @@ for (int i = 0; i < portlets.size(); i++) {
 				}
 			}
 
-			StringBundler rowSB = new StringBundler();
+			StringBuilder rowSB = new StringBuilder();
 
 			if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
 				rowSB.append("<a class=\"entry-title\" href=\"");

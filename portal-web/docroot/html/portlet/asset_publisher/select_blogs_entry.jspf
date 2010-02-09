@@ -102,7 +102,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
 
-				StringBundler sb = new StringBundler(11);
+				StringBuilder sb = new StringBuilder();
 
 				sb.append("javascript:");
 				sb.append(renderResponse.getNamespace());
@@ -175,7 +175,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 			AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
 
-			StringBundler sb = new StringBundler(11);
+			StringBuilder sb = new StringBuilder();
 
 			sb.append("javascript:");
 			sb.append(renderResponse.getNamespace());

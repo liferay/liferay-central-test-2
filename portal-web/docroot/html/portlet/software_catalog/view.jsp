@@ -183,7 +183,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Name and short description
 
-			StringBundler sb = new StringBundler(5);
+			StringBuilder sb = new StringBuilder();
 
 			sb.append("<strong>");
 			sb.append(productEntry.getName());
@@ -214,29 +214,24 @@ portletURL.setParameter("tabs1", tabs1);
 			row.addText(LanguageUtil.get(pageContext, productEntry.getTags()), rowURL);
 
 			// Licenses
-			List licenses = productEntry.getLicenses();
 
-			if (licenses.isEmpty()) {
-				row.addText(StringPool.BLANK, rowURL);
-			}
-			else {
-				sb = new StringBundler(licenses.size() * 2 - 1);
-				Iterator itr = licenses.iterator();
+			sb = new StringBuilder();
 
-				while (itr.hasNext()) {
-					SCLicense license = (SCLicense)itr.next();
+			Iterator itr = productEntry.getLicenses().iterator();
 
-					license = license.toEscapedModel();
+			while (itr.hasNext()) {
+				SCLicense license = (SCLicense)itr.next();
 
-					sb.append(license.getName());
+				license = license.toEscapedModel();
 
-					if (itr.hasNext()) {
-						sb.append(", ");
-					}
+				sb.append(license.getName());
+
+				if (itr.hasNext()) {
+					sb.append(", ");
 				}
-
-				row.addText(sb.toString(), rowURL);
 			}
+
+			row.addText(sb.toString(), rowURL);
 
 			// Modified date
 
@@ -385,7 +380,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Name and short description
 
-			StringBundler sb = new StringBundler(5);
+			StringBuilder sb = new StringBuilder();
 
 			sb.append("<strong>");
 			sb.append(productEntry.getName());
@@ -417,29 +412,23 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Licenses
 
-			List licenses = productEntry.getLicenses();
+			sb = new StringBuilder();
 
-			if (licenses.isEmpty()) {
-				row.addText(StringPool.BLANK, rowURL);
-			}
-			else {
-				sb = new StringBundler(licenses.size() * 2 - 1);
-				Iterator itr = licenses.iterator();
+			Iterator itr = productEntry.getLicenses().iterator();
 
-				while (itr.hasNext()) {
-					SCLicense license = (SCLicense)itr.next();
+			while (itr.hasNext()) {
+				SCLicense license = (SCLicense)itr.next();
 
-					license = license.toEscapedModel();
+				license = license.toEscapedModel();
 
-					sb.append(license.getName());
+				sb.append(license.getName());
 
-					if (itr.hasNext()) {
-						sb.append(", ");
-					}
+				if (itr.hasNext()) {
+					sb.append(", ");
 				}
-
-				row.addText(sb.toString(), rowURL);
 			}
+
+			row.addText(sb.toString(), rowURL);
 
 			// Modified date
 

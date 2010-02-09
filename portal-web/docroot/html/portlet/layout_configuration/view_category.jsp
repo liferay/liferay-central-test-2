@@ -35,7 +35,7 @@ Pattern pattern = Pattern.compile("[:,a-z,A-Z,0-9]+");
 
 Matcher matcher = pattern.matcher(newCategoryPath);
 
-StringBundler divId = new StringBundler();
+StringBuilder divId = new StringBuilder();
 
 while (matcher.find()) {
 	divId.append(matcher.group());
@@ -112,7 +112,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 			while (itr.hasNext()) {
 				Portlet portlet = (Portlet)itr.next();
 
-				divId.setIndex(0);
+				divId = new StringBuilder();
 
 				divId.append(newCategoryPath);
 				divId.append(":");

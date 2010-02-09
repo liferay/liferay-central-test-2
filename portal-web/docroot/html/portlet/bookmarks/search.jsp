@@ -136,9 +136,13 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			BookmarksFolder folder = entry.getFolder();
 
-			String rowHREF = themeDisplay.getPathMain().concat(
-							"/bookmarks/open_entry?entryId=").concat(
-							String.valueOf(entry.getEntryId()));
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(themeDisplay.getPathMain());
+			sb.append("/bookmarks/open_entry?entryId=");
+			sb.append(entry.getEntryId());
+
+			String rowHREF = sb.toString();
 
 			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, folder.getName(), rowHREF, "_blank", entry.getComments());
 

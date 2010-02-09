@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/ui/breadcrumb/init.jsp" %>
 
 <%
-StringBundler sb = new StringBundler();
+StringBuilder sb = new StringBuilder();
 
 if (showGuestGroup) {
 	_buildGuestGroupBreadcrumb(themeDisplay, sb);
@@ -47,12 +47,12 @@ if (showPortletBreadcrumb) {
 <%= sb.toString() %>
 
 <%!
-private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBundler sb) throws Exception {
+private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBuilder sb) throws Exception {
 	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
 	String target = PortalUtil.getLayoutTarget(selLayout);
 	long layoutParentId = selLayout.getParentLayoutId();
 
-	StringBundler breadCrumbSB = new StringBundler(7);
+	StringBuilder breadCrumbSB = new StringBuilder();
 
 	if (selectedLayout) {
 		if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {

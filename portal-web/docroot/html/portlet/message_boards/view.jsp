@@ -74,7 +74,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 		<c:if test="<%= category == null %>">
 			<div class="category-subscriptions">
 				<div class="category-subscription-types">
-					<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + scopeGroupId + rssURLParams.toString() %>' label="<%= true %>" method="get" target="_blank" />
+					<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + scopeGroupId + rssURLParams %>' label="<%= true %>" method="get" target="_blank" />
 
 					<c:if test="<%= MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.SUBSCRIBE) %>">
 						<c:choose>
@@ -207,7 +207,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 				// Name and description
 
-				StringBundler sb = new StringBundler();
+				StringBuilder sb = new StringBuilder();
 
 				if (!restricted) {
 					sb.append("<a href=\"");
@@ -345,7 +345,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 				// Thread
 
-				StringBundler sb = new StringBundler();
+				StringBuilder sb = new StringBuilder();
 
 				String[] threadPriority = MBUtil.getThreadPriority(preferences, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
 
@@ -375,12 +375,16 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 				// Status
 
+				sb = new StringBuilder();
+
 				if (MBMessageFlagLocalServiceUtil.hasQuestionFlag(message.getMessageId())) {
-					row.addText(LanguageUtil.get(pageContext, "waiting-for-an-answer"), rowURL);
+					sb.append(LanguageUtil.get(pageContext, "waiting-for-an-answer"));
 				}
 				if (MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId())) {
-					row.addText(LanguageUtil.get(pageContext, "resolved"), rowURL);
+					sb.append(LanguageUtil.get(pageContext, "resolved"));
 				}
+
+				row.addText(sb.toString(), rowURL);
 
 				// Started by
 
@@ -405,7 +409,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
 				}
 				else {
-					sb.setIndex(0);
+					sb = new StringBuilder();
 
 					sb.append(LanguageUtil.get(pageContext, "date"));
 					sb.append(": ");
@@ -515,7 +519,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 				// Name and description
 
-				StringBundler sb = new StringBundler(8);
+				StringBuilder sb = new StringBuilder();
 
 				if (!restricted) {
 					sb.append("<a href=\"");
@@ -638,7 +642,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 			// Thread
 
-			StringBundler sb = new StringBundler();
+			StringBuilder sb = new StringBuilder();
 
 			String[] threadPriority = MBUtil.getThreadPriority(preferences, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
 
@@ -679,7 +683,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
 			}
 			else {
-				sb.setIndex(0);
+				sb = new StringBuilder();
 
 				sb.append(LanguageUtil.get(pageContext, "date"));
 				sb.append(": ");
@@ -722,7 +726,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				rssURL += "&userId=" + groupThreadsUserId;
 			}
 
-			rssURL += rssURLParams.toString();
+			rssURL += rssURLParams;
 			%>
 
 			<br />

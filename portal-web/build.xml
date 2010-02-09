@@ -118,7 +118,6 @@
 
 		<javac
 			classpath="${jspc.classpath}"
-			fork="true" memoryMaximumsize="500M"
 			compiler="${javac.compiler}"
 			deprecation="${javac.deprecation}"
 			destdir="${jspc.classes.dir}"

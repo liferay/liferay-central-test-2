@@ -77,7 +77,7 @@
 			<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
 
 			<%
-			StringBundler sb = new StringBundler(10);
+			StringBuilder sb = new StringBuilder();
 
 			sb.append("javascript:opener.");
 			sb.append(renderResponse.getNamespace());

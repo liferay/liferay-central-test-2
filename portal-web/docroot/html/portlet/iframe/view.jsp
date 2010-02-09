@@ -34,12 +34,20 @@ if (relative) {
 iframeSrc += (String)request.getAttribute(WebKeys.IFRAME_SRC);
 
 if (Validator.isNotNull(iframeVariables)) {
+	StringBuilder sb = new StringBuilder();
+
+	sb.append(iframeSrc);
+
 	if (iframeSrc.indexOf(StringPool.QUESTION) != -1) {
-		iframeSrc = iframeSrc.concat(StringPool.AMPERSAND).concat(StringUtil.merge(iframeVariables, StringPool.AMPERSAND));
+		sb.append(StringPool.AMPERSAND);
 	}
 	else {
-		iframeSrc = iframeSrc.concat(StringPool.QUESTION).concat(StringUtil.merge(iframeVariables, StringPool.AMPERSAND));
+		sb.append(StringPool.QUESTION);
 	}
+
+	sb.append(StringUtil.merge(iframeVariables, StringPool.AMPERSAND));
+
+	iframeSrc = sb.toString();
 }
 
 String baseSrc = iframeSrc;

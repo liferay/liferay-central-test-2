@@ -49,24 +49,18 @@ if (curCategoryIdsParam != null) {
 }
 
 if (Validator.isNotNull(curCategoryIds)) {
+	StringBuilder sb = new StringBuilder();
+
 	long[] curCategoryIdsArray = GetterUtil.getLongValues(StringUtil.split(curCategoryIds));
 
-	if(curCategoryIdsArray.length == 0) {
-		curCategoryNames = StringPool.BLANK;
+	for (long curCategoryId : curCategoryIdsArray) {
+		AssetCategory category = AssetCategoryServiceUtil.getCategory(curCategoryId);
+
+		sb.append(category.getName());
+		sb.append(StringPool.COMMA);
 	}
-	else {
-		StringBundler sb = new StringBundler(curCategoryIdsArray.length * 2);
-		for (long curCategoryId : curCategoryIdsArray) {
-			AssetCategory category = AssetCategoryServiceUtil.getCategory(curCategoryId);
 
-			sb.append(category.getName());
-			sb.append(StringPool.COMMA);
-		}
-
-		sb.setIndex(sb.index() - 1);
-
-		curCategoryNames = sb.toString();
-	}
+	curCategoryNames = sb.substring(0, Math.max(0, sb.length() - 1));
 }
 %>
 

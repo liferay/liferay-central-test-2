@@ -91,7 +91,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// File name
 
-	StringBundler sb = new StringBundler(6);
+	StringBuilder sb = new StringBuilder();
 
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());

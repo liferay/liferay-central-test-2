@@ -355,7 +355,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 
 				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, conversions, portletURL, isLocked, hasLock}, String.valueOf(fileVersion.getVersion()), i);
 
-				StringBundler sb = new StringBundler(10);
+				StringBuilder sb = new StringBuilder();
 
 				sb.append(themeDisplay.getPortalURL());
 				sb.append(themeDisplay.getPathContext());

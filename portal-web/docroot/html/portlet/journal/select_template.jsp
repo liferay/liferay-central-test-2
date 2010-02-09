@@ -81,7 +81,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(template, template.getId(), i);
 
-	StringBundler sb = new StringBundler(7);
+	StringBuilder sb = new StringBuilder();
 
 	sb.append("javascript:opener.");
 	sb.append(renderResponse.getNamespace());

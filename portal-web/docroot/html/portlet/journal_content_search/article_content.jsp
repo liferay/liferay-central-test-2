@@ -85,7 +85,7 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 		<span style="font-size: xx-small;">
 
 		<%
-		StringBundler sb = new StringBundler(8);
+		StringBuilder sb = new StringBuilder();
 
 		sb.append(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
 		sb.append(Portal.FRIENDLY_URL_SEPARATOR);

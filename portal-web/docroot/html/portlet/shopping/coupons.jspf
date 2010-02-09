@@ -94,12 +94,16 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 		// Name and description
 
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(coupon.getName());
+
 		if (Validator.isNotNull(coupon.getDescription())) {
-			row.addText(coupon.getName().concat("<br />").concat(coupon.getDescription()), rowURL);
+			sb.append("<br />");
+			sb.append(coupon.getDescription());
 		}
-		else {
-			row.addText(coupon.getName(), rowURL);
-		}
+
+		row.addText(sb.toString(), rowURL);
 
 		// Start date
 

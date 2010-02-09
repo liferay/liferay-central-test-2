@@ -791,7 +791,7 @@ if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equ
 	String cssClasses = StringPool.BLANK;
 
 	if (themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax()) {
-		StringBundler sb = new StringBundler(10);
+		StringBuilder sb = new StringBuilder();
 
 		Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
 

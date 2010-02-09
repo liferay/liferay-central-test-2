@@ -49,24 +49,21 @@
 <c:if test="<%= enableRssSubscription %>">
 
 	<%
-	StringBundler sb = new StringBundler(4);
+	StringBuilder sb = new StringBuilder();
 
 	sb.append(themeDisplay.getPathMain());
 	sb.append("/blogs/rss?");
 
 	if (selectionMethod.equals("users")) {
 		if (organizationId > 0) {
-			sb.append("organizationId=");
-			sb.append(String.valueOf(organizationId));
+			sb.append("organizationId=" + organizationId);
 		}
 		else {
-			sb.append("companyId=");
-			sb.append(String.valueOf(company.getCompanyId()));
+			sb.append("companyId=" + company.getCompanyId());
 		}
 	}
 	else {
-		sb.append("groupId=");
-		sb.append(String.valueOf(themeDisplay.getScopeGroupId()));
+		sb.append("groupId=" + themeDisplay.getScopeGroupId());
 	}
 
 	String rssURL = sb.toString();

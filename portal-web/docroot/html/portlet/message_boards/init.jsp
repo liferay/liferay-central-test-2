@@ -127,7 +127,7 @@ else if (rssFormat.equals("atom10")) {
 	rssFormatVersion = 1.0;
 }
 
-StringBundler rssURLParams = new StringBundler();
+StringBuilder rssURLParams = new StringBuilder();
 
 if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil.DEFAULT_TYPE) || (rssFormatVersion != RSSUtil.DEFAULT_VERSION) || !rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
 	if (rssDelta != SearchContainer.DEFAULT_DELTA) {
