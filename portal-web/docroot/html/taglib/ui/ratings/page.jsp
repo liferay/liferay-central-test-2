@@ -196,11 +196,6 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 				var rating = new A.StarRating(
 					{
-						autoRender: false,
-						boundingBox: '#<%= randomNamespace %>ratingStar',
-						canReset: false,
-						defaultSelected: <%= yourScore %>,
-						label: '<liferay-ui:message key="your-rating" />',
 						after: {
 							itemSelect: function() {
 								var url = '<%= url %>';
@@ -208,7 +203,12 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 								sendVoteRequest(url, score, saveCallback);
 							}
-						}
+						},
+						autoRender: false,
+						boundingBox: '#<%= randomNamespace %>ratingStar',
+						canReset: false,
+						defaultSelected: <%= yourScore %>,
+						label: '<liferay-ui:message key="your-rating" />'
 					}
 				);
 
