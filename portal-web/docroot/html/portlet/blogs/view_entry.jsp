@@ -49,6 +49,12 @@ AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.get
 AssetEntryLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry.getEntryId());
 
 AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(BlogsEntry.class.getName(), entry.getEntryId()));
+
+request.setAttribute("view_entry_content.jsp-redirect", redirect);
+
+request.setAttribute("view_entry_content.jsp-entry", entry);
+
+request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 %>
 
 <portlet:actionURL var="editEntryURL">
@@ -59,8 +65,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(BlogsEntry.cla
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="entryId" type="hidden" value="<%= String.valueOf(entryId) %>" />
 
-	<%@ include file="/html/portlet/blogs/view_entry_content.jspf" %>
-
+	<liferay-util:include page="/html/portlet/blogs/view_entry_content.jsp" />
 </aui:form>
 
 <div class="entry-navigation">

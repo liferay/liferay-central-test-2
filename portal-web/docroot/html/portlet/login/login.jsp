@@ -119,7 +119,7 @@
 			</aui:button-row>
 		</aui:form>
 
-		<%@ include file="/html/portlet/login/navigation.jspf" %>
+		<liferay-util:include page="/html/portlet/login/navigation.jsp" />
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 			<aui:script>

@@ -22,6 +22,8 @@
  */
 %>
 
+<%@ include file="/html/portlet/login/init.jsp" %>
+
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
 
@@ -85,7 +87,7 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 				/>
 			</c:if>
 
-			<c:if test='<%= showForgotPasswordIcon %>'>
+			<c:if test="<%= showForgotPasswordIcon %>">
 				<portlet:renderURL var="forgotPasswordURL">
 					<portlet:param name="struts_action" value="/login/forgot_password" />
 				</portlet:renderURL>

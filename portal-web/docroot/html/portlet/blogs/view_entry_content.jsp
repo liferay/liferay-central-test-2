@@ -22,6 +22,16 @@
  */
 %>
 
+<%@ include file="/html/portlet/blogs/init.jsp" %>
+
+<%
+String redirect = (String)request.getAttribute("view_entry_content.jsp-redirect");
+
+BlogsEntry entry = (BlogsEntry)request.getAttribute("view_entry_content.jsp-entry");
+
+AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp-assetEntry");
+%>
+
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) && ((entry.getStatus() == StatusConstants.APPROVED) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE)) %>">
 	<div class="entry <%= (entry.getStatus() == StatusConstants.APPROVED) ? "" : "draft" %>">
 		<div class="entry-content">
