@@ -141,7 +141,7 @@
 }
 
 .portlet-boundary.yui-dd-dragging .portlet {
-	border: 1px dashed #ccc;
+	border: 2px dashed #ccc;
 }
 
 .aui-portal-layout-proxy {
