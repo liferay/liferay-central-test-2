@@ -205,25 +205,3 @@
 .portlet-document-library .taglib-webdav {
 	margin-top: 3em;
 }
-
-.portlet-document-library .top-links-container {
-	clear: both;
-	overflow: hidden;
-}
-
-.portlet-document-library .top-links {
-	float: right;
-}
-
-.portlet-document-library .top-links .top-link {
-	border-right: 1px solid #bbb;
-	padding-right: 0.5em;
-}
-
-.portlet-document-library .top-links .top-link.last {
-	border-width: 0;
-}
-
-.portlet-document-library .top-links .top-links-navigation {
-	float: left;
-}

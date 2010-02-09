@@ -242,25 +242,3 @@ td.user-info {
 	float: right;
 	margin: 0 0 0.5em 0.5em;
 }
-
-.portlet-message-boards .top-links-container {
-	clear: both;
-	overflow: hidden;
-}
-
-.portlet-message-boards .top-links {
-	float: right;
-}
-
-.portlet-message-boards .top-links .top-link {
-	border-right: 1px solid #bbb;
-	padding-right: 0.5em;
-}
-
-.portlet-message-boards .top-links .top-link.last {
-	border-width: 0;
-}
-
-.portlet-message-boards .top-links .top-links-navigation {
-	float: left;
-}

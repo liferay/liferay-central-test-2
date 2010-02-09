@@ -309,20 +309,6 @@
 	padding-bottom: 10px;
 }
 
-.portlet-wiki .top-links {
-	float: right;
-}
-
-.portlet-wiki .top-links .top-link {
-	padding-right: 0.5em;
-	border-right: 1px solid #bbb;
-}
-
-.portlet-wiki .top-links-container {
-	clear: both;
-	overflow: hidden;
-}
-
 .portlet-wiki .top-links-nodes {
 	border: 1px solid #ddd;
 	float: left;
@@ -335,12 +321,7 @@
 	margin: 0 0 0.5em 0.5em;
 }
 
-
-.portlet-wiki .top-links .top-link.last {
-	border: none;
-}
-
-.portlet-wiki .top-links .top-links-navigation, .portlet-wiki .top-links-configuration {
+.portlet-wiki .top-links-configuration {
 	float: left;
 }
 
