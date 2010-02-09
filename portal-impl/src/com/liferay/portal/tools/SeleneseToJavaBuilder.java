@@ -657,12 +657,14 @@ public class SeleneseToJavaBuilder {
 					 param1.equals("waitForNotPartialText") ||
 					 param1.equals("waitForNotTable") ||
 					 param1.equals("waitForNotText") ||
+					 param1.equals("waitForNotValue") ||
 					 param1.equals("waitForNotVisible") ||
 					 param1.equals("waitForPartialText") ||
 					 param1.equals("waitForTable") ||
 					 param1.equals("waitForText") ||
 					 param1.equals("waitForTextNotPresent") ||
 					 param1.equals("waitForTextPresent") ||
+					 param1.equals("waitForValue") ||
 					 param1.equals("waitForVisible")) {
 
 				sb.append("for (int second = 0;; second++) {");
@@ -677,6 +679,7 @@ public class SeleneseToJavaBuilder {
 					param1.equals("waitForNotPartialText") ||
 					param1.equals("waitForNotTable") ||
 					param1.equals("waitForNotText") ||
+					param1.equals("waitForNotValue") ||
 					param1.equals("waitForNotVisible") ||
 					param1.equals("waitForTextNotPresent")) {
 
@@ -727,6 +730,15 @@ public class SeleneseToJavaBuilder {
 					sb.append("RuntimeVariables.replace(\"");
 					sb.append(param3);
 					sb.append("\").equals(selenium.getText(\"");
+					sb.append(param2);
+					sb.append("\"))");
+				}
+				else if (param1.equals("waitForNotValue") ||
+						 param1.equals("waitForValue")) {
+
+					sb.append("RuntimeVariables.replace(\"");
+					sb.append(param3);
+					sb.append("\").equals(selenium.getValue(\"");
 					sb.append(param2);
 					sb.append("\"))");
 				}
