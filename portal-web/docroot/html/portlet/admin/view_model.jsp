@@ -33,34 +33,41 @@ String modelString = StringPool.BLANK;
 String resourceTitle = resourcePermission.getName();
 
 try {
-	StringBuilder sb = new StringBuilder();
-
-	sb.append("<table class=\"lfr-table\">\n");
-
 	BaseModel model = PortalUtil.getBaseModel(resourcePermission);
 
 	Document doc = SAXReaderUtil.read(new UnsyncStringReader(model.toXmlString()));
 
 	Element root = doc.getRootElement();
 
-	Iterator<Element> itr = root.elements("column").iterator();
+	List<Element> elements = root.elements("column");
 
-	while (itr.hasNext()) {
-		Element column = itr.next();
-
-		String name = column.elementText("column-name");
-		String value = column.elementText("column-value");
-
-		sb.append("<tr><td align=\"right\" valign=\"top\"><strong>");
-		sb.append(name);
-		sb.append("</strong></td><td>");
-		sb.append(value);
-		sb.append("</td></tr>");
+	if (elements.isEmpty()) {
+		modelString = "<table class=\"lfr-table\">\n</table>";
 	}
+	else {
+		Iterator<Element> itr = elements.iterator();
 
-	sb.append("</table>");
+		StringBundler sb = new StringBundler(elements.size() * 5 + 2);
 
-	modelString = sb.toString();
+		sb.append("<table class=\"lfr-table\">\n");
+
+		while (itr.hasNext()) {
+			Element column = itr.next();
+
+			String name = column.elementText("column-name");
+			String value = column.elementText("column-value");
+
+			sb.append("<tr><td align=\"right\" valign=\"top\"><strong>");
+			sb.append(name);
+			sb.append("</strong></td><td>");
+			sb.append(value);
+			sb.append("</td></tr>");
+		}
+
+		sb.append("</table>");
+
+		modelString = sb.toString();
+	}
 
 	String[] parts = StringUtil.split(resourcePermission.getName(), StringPool.PERIOD);
 
