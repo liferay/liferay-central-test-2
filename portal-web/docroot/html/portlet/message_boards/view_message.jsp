@@ -105,7 +105,11 @@ String threadView = messageDisplay.getThreadView();
 		html = '<div class="answer" id="<portlet:namespace />deleteAnswerFlag_' + messageId + '">' + html + '</div>';
 		html = html.replace(/@MESSAGE_ID@/g, messageId);
 
-		AUI().one('#<portlet:namespace />message_' + messageId).one('div.tags').html(html);
+		var tags = AUI().one('#<portlet:namespace />message_' + messageId).one('div.tags');
+
+		if (tags) {
+			tags.html(html);
+		}
 
 		AUI().one('#<portlet:namespace />addAnswerFlag_' + messageId).remove();
 	}
@@ -124,7 +128,11 @@ String threadView = messageDisplay.getThreadView();
 		html = '<li id="<portlet:namespace />addAnswerFlag_' + messageId + '">' + html + '</li>';
 		html = html.replace(/@MESSAGE_ID@/g, messageId);
 
-		AUI().one('#<portlet:namespace />message_' + messageId).one('ul.edit-controls').prepend(html);
+		var editControls = AUI().one('#<portlet:namespace />message_' + messageId).one('ul.edit-controls');
+
+		if (editControls) {
+			editControls.prepend(html);
+		}
 
 		AUI().one('#<portlet:namespace />deleteAnswerFlag_' + messageId).remove();
 	}
