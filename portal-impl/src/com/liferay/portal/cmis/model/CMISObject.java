@@ -252,7 +252,7 @@ public class CMISObject extends ExtensibleElementWrapper {
 
 		for (Element propertyElement : propertiesElement.getElements()) {
 			String curPropertyName = propertyElement.getAttributeValue(
-				_cmisConstants.PROPERTY_NAME);
+				_cmisConstants.PROPERTY_DEFINITION_ID);
 
 			if (propertyName.equals(curPropertyName)) {
 				Element propertyValueElement = propertyElement.getFirstChild(
