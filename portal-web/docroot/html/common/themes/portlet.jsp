@@ -99,9 +99,8 @@ String containerStyles = StringPool.BLANK;
 
 if (freeformPortlet) {
 	Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
-	containerStyles =
-	"style=\"height: ".concat(GetterUtil.getString(freeformStyleProps.getProperty("height"), "300px")).concat(";overflow: auto;\"");
 
+	containerStyles = "style=\"height: ".concat(GetterUtil.getString(freeformStyleProps.getProperty("height"), "300px")).concat("; overflow: auto;\"");
 }
 else {
 	containerStyles = "style=\"\"";

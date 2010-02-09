@@ -791,19 +791,16 @@ if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equ
 	String cssClasses = StringPool.BLANK;
 
 	if (themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax()) {
-		StringBundler sb = new StringBundler(10);
+		StringBundler sb = new StringBundler(7);
 
 		Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
 
-		sb.append("style=\"position: absolute; ");
-		sb.append("width: ");
-		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("width"), "400px"));
-		sb.append("; ");
-		sb.append("top: ");
-		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("top"), "0"));
-		sb.append("; ");
-		sb.append("left: ");
+		sb.append("style=\"left: ");
 		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("left"), "0"));
+		sb.append("; position: absolute; top: ");
+		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("top"), "0"));
+		sb.append("; width: ");
+		sb.append(GetterUtil.getString(freeformStyleProps.getProperty("width"), "400px"));
 		sb.append(";\"");
 
 		freeformStyles = sb.toString();
