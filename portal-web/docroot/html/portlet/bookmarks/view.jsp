@@ -279,13 +279,9 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 									rowHREF = rowURL.toString();
 								}
 								else {
-									StringBuilder sb = new StringBuilder();
-
-									sb.append(themeDisplay.getPathMain());
-									sb.append("/bookmarks/open_entry?entryId=");
-									sb.append(entry.getEntryId());
-
-									rowHREF = sb.toString();
+									rowHREF = themeDisplay.getPathMain().concat(
+											"/bookmarks/open_entry?entryId=").concat(
+											String.valueOf(entry.getEntryId()));
 
 									target = "_blank";
 								}
@@ -403,13 +399,9 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 				>
 
 					<%
-					StringBuilder sb = new StringBuilder();
-
-					sb.append(themeDisplay.getPathMain());
-					sb.append("/bookmarks/open_entry?entryId=");
-					sb.append(entry.getEntryId());
-
-					String rowHREF = sb.toString();
+					String rowHREF = themeDisplay.getPathMain().concat(
+									"/bookmarks/open_entry?entryId=").concat(
+									String.valueOf(entry.getEntryId()));
 					%>
 
 					<liferay-ui:search-container-column-text
