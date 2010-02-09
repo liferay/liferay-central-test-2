@@ -23,10 +23,8 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.servlet.SharedSessionServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -37,40 +35,22 @@ import javax.servlet.http.HttpSession;
 public class SessionLayoutClone implements LayoutClone {
 
 	public String get(HttpServletRequest request, long plid) {
-		HttpSession session = getPortalSession(request);
+		HttpSession session = request.getSession();
 
-		return (String) session.getAttribute(encodeKey(plid));
+		return (String)session.getAttribute(_encodeKey(plid));
 	}
 
-	public void update(HttpServletRequest request, long plid,
-			String typeSettings) {
+	public void update(
+		HttpServletRequest request, long plid, String typeSettings) {
 
-		HttpSession session = getPortalSession(request);
+		HttpSession session = request.getSession();
 
-		session.setAttribute(encodeKey(plid), typeSettings);
+		session.setAttribute(_encodeKey(plid), typeSettings);
 	}
 
-	protected String encodeKey(long plid) {
+	private String _encodeKey(long plid) {
 		return SessionLayoutClone.class.getName().concat(
 			StringPool.POUND).concat(String.valueOf(plid));
-	}
-
-	protected HttpSession getPortalSession(HttpServletRequest request) {
-		HttpServletRequest originalRequest = request;
-
-		while (originalRequest instanceof HttpServletRequestWrapper) {
-			if (originalRequest instanceof SharedSessionServletRequest) {
-				SharedSessionServletRequest sharedSessionServletRequest =
-					(SharedSessionServletRequest)originalRequest;
-
-				return sharedSessionServletRequest.getSession();
-			}
-
-			originalRequest = (HttpServletRequest)
-				((HttpServletRequestWrapper)originalRequest).getRequest();
-		}
-
-		return request.getSession();
 	}
 
 }
