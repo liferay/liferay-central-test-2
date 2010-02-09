@@ -97,22 +97,15 @@ boolean freeformPortlet = themeDisplay.isFreeformLayout() && !runtimePortlet && 
 
 String containerStyles = StringPool.BLANK;
 
-StringBuilder sb = new StringBuilder();
-
-sb.append("style=\"");
-
 if (freeformPortlet) {
 	Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
+	containerStyles =
+	"style=\"height: ".concat(GetterUtil.getString(freeformStyleProps.getProperty("height"), "300px")).concat(";overflow: auto;\"");
 
-	sb.append("height: ");
-	sb.append(GetterUtil.getString(freeformStyleProps.getProperty("height"), "300px"));
-	sb.append(";");
-	sb.append("overflow: auto;");
 }
-
-sb.append("\"");
-
-containerStyles = sb.toString();
+else {
+	containerStyles = "style=\"\"";
+}
 %>
 
 <c:choose>
