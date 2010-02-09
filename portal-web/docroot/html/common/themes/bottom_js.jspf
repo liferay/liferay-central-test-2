@@ -65,6 +65,7 @@ if (layout != null) {
 <c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
 	<aui:script use="liferay-layout,liferay-navigation">
 		var layoutOptions = {};
+
 		if (!themeDisplay.isFreeformLayout()) {
 			layoutOptions = {
 				dragNodes: '#content-wrapper .portlet-boundary',
