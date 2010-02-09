@@ -77,16 +77,12 @@ MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, cate
 
 		// Name and description
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(curCategory.getName());
-
 		if (Validator.isNotNull(curCategory.getDescription())) {
-			sb.append("<br />");
-			sb.append(curCategory.getDescription());
+			row.addText(curCategory.getName().concat("<br />").concat(curCategory.getDescription()), rowURL);
 		}
-
-		row.addText(sb.toString(), rowURL);
+		else {
+			row.addText(curCategory.getName(), rowURL);
+		}
 
 		// Statistics
 
@@ -100,7 +96,7 @@ MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, cate
 
 		// Action
 
-		sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("opener.");
 		sb.append(renderResponse.getNamespace());

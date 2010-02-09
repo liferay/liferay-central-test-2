@@ -88,7 +88,7 @@ if (step == 1) {
 				>
 
 					<%
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(5);
 
 					sb.append("javascript:");
 					sb.append(renderResponse.getNamespace());
@@ -229,7 +229,7 @@ if (step == 1) {
 					<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
 
 					<%
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(14);
 
 					sb.append("javascript:opener.");
 					sb.append(renderResponse.getNamespace());

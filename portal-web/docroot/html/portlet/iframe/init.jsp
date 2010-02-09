@@ -67,13 +67,9 @@ while (enu.hasMoreElements()) {
 	String name = enu.nextElement();
 
 	if (name.startsWith(_IFRAME_PREFIX)) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(name.substring(_IFRAME_PREFIX.length()));
-		sb.append(StringPool.EQUAL);
-		sb.append(request.getParameter(name));
-
-		iframeVariables.add(sb.toString());
+		iframeVariables.add(
+			name.substring(_IFRAME_PREFIX.length()).concat(
+			StringPool.EQUAL).concat(request.getParameter(name)));
 	}
 }
 %>

@@ -83,7 +83,7 @@
 
 		<%
 		if (!hidden) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			_buildNavigation(rootLayout, layout, selBranch, themeDisplay, 1, includedLayouts, nestedChildren, sb);
 
@@ -105,7 +105,7 @@
 </c:if>
 
 <%!
-private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranch, ThemeDisplay themeDisplay, int layoutLevel, String includedLayouts, boolean nestedChildren, StringBuilder sb) throws Exception {
+private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranch, ThemeDisplay themeDisplay, int layoutLevel, String includedLayouts, boolean nestedChildren, StringBundler sb) throws Exception {
 	List layoutChildren = null;
 
 	if (rootLayout != null) {
@@ -116,10 +116,10 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 	}
 
 	if (!layoutChildren.isEmpty()) {
-		StringBuilder tailSB = null;
+		StringBundler tailSB = null;
 
 		if (!nestedChildren) {
-			tailSB = new StringBuilder();
+			tailSB = new StringBundler();
 		}
 
 		sb.append("<ul class=\"layouts level-");
@@ -143,7 +143,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 					open = true;
 				}
 
-				StringBuilder className = new StringBuilder();
+				StringBundler className = new StringBundler(2);
 
 				if (open) {
 					className.append("open ");
@@ -179,7 +179,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 				sb.append("</a>");
 
 				if (open) {
-					StringBuilder layoutChildSB = null;
+					StringBundler layoutChildSB = null;
 
 					if (nestedChildren) {
 						layoutChildSB = sb;

@@ -172,7 +172,7 @@ type = ParamUtil.getString(request, "type", type);
 
 		ResultRow row = new ResultRow(null, curArticle.getArticleId() + EditArticleAction.VERSION_SEPARATOR + curArticle.getVersion(), i);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("javascript:");
 		sb.append(renderResponse.getNamespace());

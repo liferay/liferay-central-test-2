@@ -198,7 +198,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// SKU and small image
 
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler();
 
 	if (item.isSmallImage()) {
 		sb.append("<br />");
@@ -227,7 +227,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// Description
 
-	sb = new StringBuilder();
+	sb = new StringBundler();
 
 	sb.append(item.getName());
 
@@ -340,7 +340,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// Quantity
 
-	sb = new StringBuilder();
+	sb.setIndex(0);
 
 	if (minQuantityMultiple && (item.getMinQuantity() > 0)) {
 		sb.append("<select name=\"");

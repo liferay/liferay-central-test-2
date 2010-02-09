@@ -70,7 +70,7 @@
 			groupName = LanguageUtil.get(pageContext, "my-community");
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("javascript:opener.");
 		sb.append(renderResponse.getNamespace());

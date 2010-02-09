@@ -139,7 +139,7 @@ if (type.equals("html")) {
 				<c:when test="<%= intermediatePages.size() > 1%>">
 
 					<%
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(intermediatePages.size() * 7);
 
 					for (WikiPage wikiPage: intermediatePages) {
 						sb.append(wikiPage.getUserName());
@@ -151,7 +151,7 @@ if (type.equals("html")) {
 						sb.append(StringPool.SPACE);
 					}
 
-					sb.deleteCharAt(sb.lastIndexOf(StringPool.COMMA));
+					sb.setIndex(sb.index() - 2);
 					%>
 
 					<liferay-ui:icon

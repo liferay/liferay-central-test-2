@@ -257,7 +257,7 @@ for (int i = 0; i < results.size(); i++) {
 	else if (scope == ResourceConstants.SCOPE_GROUP_TEMPLATE) {
 	}
 	else if (scope == ResourceConstants.SCOPE_GROUP) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(groups.size() * 3 - 2);
 
 		for (int j = 0; j < groups.size(); j++) {
 			Group group = (Group)groups.get(j);

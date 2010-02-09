@@ -325,7 +325,7 @@ order = order.toEscapedModel();
 <%
 boolean showAvailability = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SHOPPING_ITEM_SHOW_AVAILABILITY);
 
-StringBuilder itemIds = new StringBuilder();
+StringBundler itemIds = new StringBundler();
 
 SearchContainer searchContainer = new SearchContainer();
 
@@ -385,34 +385,34 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// Description
 
-	StringBuilder sb = new StringBuilder();
 
-	sb.append(item.getName());
 
 	if (item.isFields()) {
+		StringBundler sb = new StringBundler(4);
+		sb.append(item.getName());
 		sb.append(" (");
 		sb.append(StringUtil.replace(StringUtil.merge(cartItem.getFieldsArray(), ", "), "=", ": "));
 		sb.append(")");
+		row.addText(sb.toString(), rowURL);
+	}
+	else {
+		row.addText(item.getName(), rowURL);
 	}
 
-	row.addText(sb.toString(), rowURL);
+
 
 	// Availability
 
-	sb = new StringBuilder();
-
 	if (ShoppingUtil.isInStock(item, itemFields, fieldsArray, count)) {
-		sb.append("<div class=\"portlet-msg-success\">");
-		sb.append(LanguageUtil.get(pageContext, "in-stock"));
-		sb.append("</div>");
+		row.addText("<div class=\"portlet-msg-success\">".concat(
+				LanguageUtil.get(pageContext, "in-stock")).concat(
+				"</div>"), rowURL);
 	}
 	else {
-		sb.append("<div class=\"portlet-msg-error\">");
-		sb.append(LanguageUtil.get(pageContext, "out-of-stock"));
-		sb.append("</div>");
+		row.addText("<div class=\"portlet-msg-error\">".concat(
+			LanguageUtil.get(pageContext, "out-of-stock")).concat(
+			"</div>"), rowURL);
 	}
-
-	row.addText(sb.toString(), rowURL);
 
 	// Quantity
 
@@ -434,7 +434,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<input name="<portlet:namespace />itemIds" type="hidden" value="<%= itemIds %>" />
+<input name="<portlet:namespace />itemIds" type="hidden" value="<%= itemIds.toString() %>" />
 <input name="<portlet:namespace />couponCodes" type="hidden" value="<%= cart.getCouponCodes() %>" />
 
 <br />

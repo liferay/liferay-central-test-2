@@ -55,7 +55,7 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)objArray[1];
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + category.getCategoryId() + rssURLParams %>' method="get" target="_blank" />
+	<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + category.getCategoryId() + rssURLParams.toString() %>' method="get" target="_blank" />
 
 	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>

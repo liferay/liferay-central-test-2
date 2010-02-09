@@ -62,7 +62,7 @@ WikiNode node = (WikiNode)row.getObject();
 		<liferay-ui:icon image="post" message="import-pages" url="<%= importURL %>" />
 	</c:if>
 
-	<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParams %>' target="_blank" />
+	<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParams.toString() %>' target="_blank" />
 
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>

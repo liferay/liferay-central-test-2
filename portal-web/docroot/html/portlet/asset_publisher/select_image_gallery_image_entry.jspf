@@ -97,7 +97,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and description
 
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler(8);
 
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());
@@ -170,7 +170,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(IGImage.class.getName(), image.getImageId());
 
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler(11);
 
 	sb.append("javascript:");
 	sb.append(renderResponse.getNamespace());
@@ -188,7 +188,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Thumbnail
 
-	sb = new StringBuilder();
+	sb.setIndex(0);
 
 	sb.append("<img border=\"1\" src=\"");
 	sb.append(themeDisplay.getPathImage());

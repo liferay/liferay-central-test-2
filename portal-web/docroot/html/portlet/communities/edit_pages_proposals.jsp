@@ -80,13 +80,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name
 
-	StringBuilder sb = new StringBuilder();
-
-	sb.append(proposal.getName());
-	sb.append("<br />");
-	sb.append(proposal.getDescription());
-
-	row.addText(sb.toString(), rowURL);
+	row.addText(proposal.getName().concat("<br />").concat(proposal.getDescription()), rowURL);
 
 	// Type
 

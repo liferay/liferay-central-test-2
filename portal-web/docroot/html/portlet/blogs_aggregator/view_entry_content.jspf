@@ -31,7 +31,7 @@
 		showBlogEntryURL.setParameter("struts_action", "/blogs_aggregator/view_entry");
 		showBlogEntryURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(8);
 
 		sb.append(themeDisplay.getPathMain());
 		sb.append("/blogs/find_entry?redirect=");

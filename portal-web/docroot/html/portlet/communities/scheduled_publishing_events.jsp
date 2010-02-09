@@ -71,7 +71,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler(4);
 
 	sb.append(portletDisplay.getNamespace());
 	sb.append("unschedulePublishEvent('");

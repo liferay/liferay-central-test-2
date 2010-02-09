@@ -377,7 +377,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(classNam
 			<c:otherwise>
 
 				<%
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				if (type == ExpandoColumnConstants.BOOLEAN) {
 					sb.append((Boolean)value);

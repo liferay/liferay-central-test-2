@@ -78,7 +78,7 @@
 		>
 
 			<%
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(10);
 
 			sb.append("javascript:opener.");
 			sb.append(renderResponse.getNamespace());

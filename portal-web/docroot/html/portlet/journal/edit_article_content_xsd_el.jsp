@@ -66,7 +66,7 @@ if (Validator.isNull(elPredefinedValue)) {
 	elPredefinedValue = StringPool.BLANK;
 }
 
-StringBuilder css = new StringBuilder();
+StringBundler css = new StringBundler(3);
 
 if (Validator.isNull(elParentStructureId)) {
 	css.append("structure-field");
@@ -76,14 +76,15 @@ if (elRepeatable && !elRepeatablePrototype) {
 	css.append(" repeated-field ");
 }
 
-StringBuilder parentStructureData = new StringBuilder();
+String parentStructureData;
 
 if (Validator.isNotNull(elParentStructureId)) {
-	parentStructureData.append("dataParentStructureId='");
-	parentStructureData.append(elParentStructureId);
-	parentStructureData.append("'");
+	parentStructureData = "dataParentStructureId='".concat(elParentStructureId).concat("'");
 
 	css.append(" parent-structure-field ");
+}
+else {
+	parentStructureData = StringPool.BLANK;
 }
 
 if (Validator.isNull(elContent) && Validator.isNotNull(elPredefinedValue)) {
@@ -93,7 +94,7 @@ if (Validator.isNull(elContent) && Validator.isNotNull(elPredefinedValue)) {
 Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL);
 %>
 
-<li class="<%= css.toString().trim() %>" <%= parentStructureData.toString() %> dataInstanceId='<%= elInstanceId %>' dataName='<%= elName %>' dataRepeatable='<%= elRepeatable %>' dataType='<%= elType %>' dataIndexType='<%= elIndexType %>' <%= metaData %>>
+<li class="<%= css.toString().trim() %>" <%= parentStructureData %> dataInstanceId='<%= elInstanceId %>' dataName='<%= elName %>' dataRepeatable='<%= elRepeatable %>' dataType='<%= elType %>' dataIndexType='<%= elIndexType %>' <%= metaData %>>
 	<span class="journal-article-close"></span>
 
 	<span class="folder">
@@ -339,7 +340,11 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content_xsd_el.jsp";
 
 private String _buildMetaDataHTMLAttributes(Map<String, String> elMetaData, String elName) {
-	StringBuilder sb = new StringBuilder();
+	if (elMetaData.isEmpty()) {
+		return StringPool.BLANK;
+	}
+
+	StringBundler sb = new StringBundler(elMetaData.size() * 5);
 
 	Iterator<String> keys = elMetaData.keySet().iterator();
 
