@@ -42,7 +42,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 	<c:if test="<%= displayStyle == 1 %>">
 		<table class="lfr-table">
 		<tr>
-			<td valign="top">
+			<td class="lfr-top">
 	</c:if>
 
 	<c:if test="<%= displayStyle == 2 %>">
@@ -65,7 +65,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 
 	<c:if test="<%= displayStyle == 1 %>">
 		</td>
-		<td valign="top">
+		<td class="lfr-top">
 	</c:if>
 
 	<c:if test="<%= displayStyle == 2 %>">

@@ -163,13 +163,13 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 <table class="lfr-table" width="100%">
 <tr>
 	<c:if test="<%= !group.isLayoutPrototype() %>">
-		<td valign="top">
+		<td class="lfr-top">
 			<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
 				<liferay-util:param name="treeId" value="layoutsTree" />
 			</liferay-util:include>
 		</td>
 	</c:if>
-	<td valign="top" width="75%">
+	<td class="lfr-top" width="75%">
 
 		<%
 		PortletURL breadcrumbURL = PortletURLUtil.clone(portletURL, renderResponse);

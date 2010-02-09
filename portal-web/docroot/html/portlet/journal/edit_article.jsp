@@ -275,7 +275,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 	<table class="lfr-table" width="100%">
 	<tr>
-		<td valign="top">
+		<td class="lfr-top">
 			<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
 			<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
 			<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
@@ -610,7 +610,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			</aui:button-row>
 		</td>
 
-		<td valign="top">
+		<td class="lfr-top">
 			<%@ include file="edit_article_extra.jspf" %>
 		</td>
 	</tr>

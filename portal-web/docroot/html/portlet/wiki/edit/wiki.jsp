@@ -39,7 +39,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageCon
 
 <table class="lfr-table" width="100%">
 <tr>
-	<td width="70%" valign="top">
+	<td class="lfr-top" width="70%">
 		<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />
 	</td>
 	<td class="syntax-help" id="toggle_id_wiki_edit_wiki_syntax_help" style="display: <liferay-ui:toggle-value id="toggle_id_wiki_edit_wiki_syntax_help" />" valign="top">

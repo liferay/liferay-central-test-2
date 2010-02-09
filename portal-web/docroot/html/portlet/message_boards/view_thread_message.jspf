@@ -27,7 +27,7 @@
 
 	<table cellpadding="0" cellspacing="0" class="<%= className %>" id="<portlet:namespace />message_<%= message.getMessageId() %>" width="100%">
 	<tr>
-		<td class="user-info" rowspan="2" valign="top">
+		<td class="user-info lfr-top" rowspan="2">
 			<c:choose>
 				<c:when test="<%= message.isAnonymous() %>">
 					<liferay-ui:message key="anonymous" />
@@ -113,7 +113,7 @@
 				</c:otherwise>
 			</c:choose>
 		</td>
-		<td valign="top">
+		<td class="lfr-top">
 			<div class="thread-top float-container">
 				<div class="subject">
 					<a href="#<portlet:namespace />message_<%= message.getMessageId() %>" title="<liferay-ui:message key="permanent-link-to-this-item" />"><strong><%= HtmlUtil.escape(message.getSubject()) %></strong></a><br />
@@ -406,7 +406,7 @@
 
 					<table class="lfr-table">
 					<tr>
-						<td valign="top">
+						<td class="lfr-top">
 							<strong><liferay-ui:message key="attachments" />:</strong>
 						</td>
 						<td>

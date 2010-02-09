@@ -123,10 +123,10 @@ userTracker = userTracker.toEscapedModel();
 							%>
 
 								<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-									<td valign="top">
+									<td class="lfr-top">
 										<%= StringUtil.replace(userTrackerPath.getPath(), "&", "& ") %>
 									</td>
-									<td nowrap valign="top">
+									<td nowrap class="lfr-top">
 										<%= dateFormatDateTime.format(userTrackerPath.getPathDate()) %>
 									</td>
 								</tr>
@@ -175,7 +175,7 @@ userTracker = userTracker.toEscapedModel();
 							%>
 
 										<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-											<td valign="top">
+											<td class="lfr-top">
 												<%= attrName %>
 											</td>
 										</tr>

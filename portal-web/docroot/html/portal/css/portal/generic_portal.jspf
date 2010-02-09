@@ -22,6 +22,14 @@
  */
 %>
 
+td.lfr-top {
+	vertical-align: top;
+}
+
+td.lfr-middle {
+	vertical-align: middle;
+}
+
 .definition-of-terms {
 	margin-bottom: 2em;
 }

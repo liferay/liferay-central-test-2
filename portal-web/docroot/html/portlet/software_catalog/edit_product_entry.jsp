@@ -262,7 +262,7 @@ for (int i = 0; i < screenshotsCount; i++) {
 		</td>
 
 		<c:if test="<%= productScreenshot != null %>">
-			<td rowspan="3" valign="top">
+			<td class="lfr-top" rowspan="3">
 				<table class="lfr-table">
 				<tr>
 					<td>

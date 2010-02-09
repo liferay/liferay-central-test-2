@@ -103,7 +103,7 @@ decimalFormat.setMinimumFractionDigits(2);
 				String symbol = symbols[i];
 			%>
 
-				<td valign="top">
+				<td class="lfr-top">
 					<liferay-ui:message key='<%= "currency." + symbol %>' /><br />
 					(<%= symbol %>)
 				</td>

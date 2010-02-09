@@ -410,7 +410,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<table class="lfr-table" width="100%">
 			<tr>
-				<td valign="top" width="33%">
+				<td class="lfr-top" width="33%">
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 					<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 						<td colspan="2">
@@ -460,7 +460,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 					</table>
 				</td>
-				<td valign="top" width="33%">
+				<td class="lfr-top" width="33%">
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 					<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 						<td colspan="2">
@@ -509,7 +509,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 					</table>
 				</td>
-				<td valign="top" width="33%">
+				<td class="lfr-top" width="33%">
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 					<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 						<td colspan="2">

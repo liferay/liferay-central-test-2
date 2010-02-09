@@ -159,7 +159,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		</table>
 	</td>
-	<td valign="top">
+	<td class="lfr-top">
 		<table class="lfr-table">
 		<tr>
 			<td>
@@ -320,7 +320,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		</table>
 	</td>
-	<td valign="top">
+	<td class="lfr-top">
 		<table class="lfr-table">
 		<tr>
 			<td>

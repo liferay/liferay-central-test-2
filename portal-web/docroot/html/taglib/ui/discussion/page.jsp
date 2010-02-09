@@ -222,14 +222,14 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					</td>
 				</tr>
 				<tr>
-					<td align="center" valign="top">
+					<td align="center" class="lfr-top">
 						<liferay-ui:user-display
 							userId="<%= message.getUserId() %>"
 							userName="<%= message.getUserName() %>"
 							displayStyle="<%= 2 %>"
 						/>
 					</td>
-					<td class="stretch" valign="top">
+					<td class="stretch lfr-top">
 						<div>
 
 							<%

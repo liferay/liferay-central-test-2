@@ -32,4 +32,4 @@
 
 >
 <tr>
-	<td valign="<%= rowValign %>">
+	<td class="lrf-<%= rowValign %>">

@@ -164,7 +164,7 @@ order = order.toEscapedModel();
 		</tr>
 		</table>
 	</td>
-	<td valign="top">
+	<td class="lfr-top">
 		<strong><liferay-ui:message key="shipping-address" /></strong>
 
 		<br /><br />

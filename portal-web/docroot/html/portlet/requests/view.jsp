@@ -47,13 +47,13 @@ List<SocialRequest> requests = (List<SocialRequest>)request.getAttribute(WebKeys
 	%>
 
 		<tr>
-			<td align="center" valign="top">
+			<td align="center" class="lfr-top">
 				<liferay-ui:user-display
 					userId="<%= socialRequest.getUserId() %>"
 					displayStyle="<%= 2 %>"
 				/>
 			</td>
-			<td valign="top" width="99%">
+			<td class="lfr-top" width="99%">
 				<c:choose>
 					<c:when test="<%= requestFeedEntry == null %>">
 						<div class="portlet-msg-error">

@@ -66,7 +66,7 @@ List targetResults = diffResults[1];
 				</th>
 			</tr>
 			<tr>
-				<td width="50%" valign="top">
+				<td class="lfr-top" width="50%">
 					<table class="taglib-diff-table">
 
 					<%
@@ -76,7 +76,7 @@ List targetResults = diffResults[1];
 						String changedLine = itr.next();
 					%>
 
-						<tr valign="top">
+						<tr class="lfr-top">
 							<%= _processColumn(changedLine) %>
 						</tr>
 
@@ -86,7 +86,7 @@ List targetResults = diffResults[1];
 
 					</table>
 				</td>
-				<td width="50%" valign="top">
+				<td class="lfr-top" width="50%">
 					<table class="taglib-diff-table">
 
 					<%
@@ -96,7 +96,7 @@ List targetResults = diffResults[1];
 						String changedLine = itr.next();
 					%>
 
-						<tr valign="top">
+						<tr class="lfr-top">
 							<%= _processColumn(changedLine) %>
 						</tr>
 
