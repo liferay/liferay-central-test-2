@@ -201,8 +201,8 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						canReset: false,
 						defaultSelected: <%= yourScore %>,
 						label: '<liferay-ui:message key="your-rating" />',
-						on: {
-							click: function() {
+						after: {
+							itemSelect: function() {
 								var url = '<%= url %>';
 								var score = this.get('selectedIndex') + 1;
 
