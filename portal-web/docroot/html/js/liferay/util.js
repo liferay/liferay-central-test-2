@@ -748,6 +748,25 @@ Liferay.Util = {
 									}
 								);
 							}
+						},
+						startEditing: function(event) {
+							var instance = this;
+
+							if (Liferay.Layout) {
+								instance._dragListener = Liferay.Layout.layoutHandler.on(
+									'drag:start',
+									function(event) {
+										instance.fire('save');
+									}
+								);
+							}
+						},
+						stopEditing: function(event) {
+							var instance = this;
+
+							if (instance._dragListener) {
+								instance._dragListener.detach();
+							}
 						}
 					},
 					cssClass: 'lfr-portlet-title-editable',
