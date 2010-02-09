@@ -236,8 +236,6 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 				var ratingThumb = new A.ThumbRating(
 					{
-						boundingBox: '#<%= randomNamespace %>ratingThumb',
-						label: label,
 						after: {
 							itemSelect: function() {
 								var instance = this;
@@ -261,7 +259,9 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 								sendVoteRequest(url, translate[value], saveCallback);
 							}
-						}
+						},
+						boundingBox: '#<%= randomNamespace %>ratingThumb',
+						label: label
 					}
 				);
 
