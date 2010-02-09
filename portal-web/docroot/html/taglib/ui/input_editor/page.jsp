@@ -43,7 +43,7 @@ String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:on
 String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "400");
 String width = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:width"), "640");
 
-StringBuilder sb = new StringBuilder();
+StringBundler sb = new StringBundler();
 
 sb.append(themeDisplay.getPathContext());
 sb.append("/html/js/editor/editor.jsp?p_l_id=");

@@ -68,7 +68,7 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 		return null;
 	}
 
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler();
 
 	sb.append("<ul class=\"");
 

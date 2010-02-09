@@ -104,7 +104,7 @@ if (hidePortletWhenEmpty) {
 </aui:script>
 
 <%!
-private void _buildCategoriesNavigation(List<AssetCategory> categories, long curCategoryId, PortletURL portletURL, StringBuilder sb) throws Exception {
+private void _buildCategoriesNavigation(List<AssetCategory> categories, long curCategoryId, PortletURL portletURL, StringBundler sb) throws Exception {
 	for (AssetCategory category : categories) {
 		long categoryId = category.getCategoryId();
 		String name = category.getName();
@@ -149,7 +149,7 @@ private String _buildVocabularyNavigation(AssetVocabulary vocabulary, long categ
 		return null;
 	}
 
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler();
 
 	sb.append("<div class=\"lfr-asset-category-list-container\"><ul class=\"lfr-asset-category-list\">");
 

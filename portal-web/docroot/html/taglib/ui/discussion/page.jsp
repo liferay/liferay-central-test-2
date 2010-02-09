@@ -253,7 +253,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									<%
 									MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
 
-									StringBuilder sb = new StringBuilder();
+									StringBundler sb = new StringBundler(7);
 
 									sb.append("<a href=\"#");
 									sb.append(namespace);
