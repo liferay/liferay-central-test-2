@@ -226,9 +226,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			}
 
 			if ((description != null) &&
-				(description.length() > _DESCRIPTION_MAX_LENGTH)) {
+				(description.length() > DESCRIPTION_MAX_LENGTH)) {
 
-				description = description.substring(0, _DESCRIPTION_MAX_LENGTH);
+				description = description.substring(0, DESCRIPTION_MAX_LENGTH);
 			}
 
 			if (message == null){
@@ -332,8 +332,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	@BeanReference(name = "com.liferay.portal.service.QuartzLocalService")
 	protected QuartzLocalService quartzLocalService;
-
-	private static final int _DESCRIPTION_MAX_LENGTH = 120;
 
 	private Log _log = LogFactoryUtil.getLog(QuartzSchedulerEngineImpl.class);
 

@@ -43,18 +43,21 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 		_messageListener = messageListener;
 
 		String className = messageListener.getClass().getName();
+
 		String jobName = className;
+
+		if (className.length() > SchedulerEngine.JOB_NAME_MAX_LENGTH) {
+			jobName = className.substring(
+				0, SchedulerEngine.JOB_NAME_MAX_LENGTH);
+		}
+
 		String groupName = className;
 
-		int classNameLength = className.length();
-		if (classNameLength > SchedulerEngine.JOB_NAME_MAX_LENGTH) {
-			jobName =
-				className.substring(0, SchedulerEngine.JOB_NAME_MAX_LENGTH);
+		if (className.length() > SchedulerEngine.GROUP_NAME_MAX_LENGTH) {
+			groupName = className.substring(
+				0, SchedulerEngine.GROUP_NAME_MAX_LENGTH);
 		}
-		if (classNameLength > SchedulerEngine.GROUP_NAME_MAX_LENGTH) {
-			groupName =
-				className.substring(0, SchedulerEngine.GROUP_NAME_MAX_LENGTH);
-		}
+
 		_key = jobName.concat(StringPool.COLON).concat(groupName);
 	}
 
