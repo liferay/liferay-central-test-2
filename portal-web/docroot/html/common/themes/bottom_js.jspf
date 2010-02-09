@@ -72,7 +72,7 @@ if (layout != null) {
 				dropContainer: '.lfr-portlet-column',
 				dropNodes: '.lfr-column',
 				emptyColumnClass: 'empty',
-				handles: '.portlet-title, .portlet-title-default',
+				handles: '.portlet-title,.portlet-title-default,.portlet-title-text',
 				portletBoundary: '.portlet-boundary'
 			};
 		}
@@ -84,7 +84,7 @@ if (layout != null) {
 				emptyColumnClass: 'empty',
 				freeForm: true,
 				freeformPlaceholderClass: 'lfr-freeform-layout-drag-indicator',
-				handles: '.portlet-header-bar,.portlet-title-default,.portlet-topper',
+				handles: '.portlet-header-bar,.portlet-title-default,.portlet-title-text,.portlet-topper',
 				portletBoundary: '.portlet-boundary'
 			};
 		}
