@@ -149,7 +149,6 @@ AUI().add(
 					var onComplete = null;
 					var placeHolder = A.Node.create('<div class="loading-animation" />');
 
-
 					if (options) {
 						var item = options.item;
 
@@ -187,6 +186,8 @@ AUI().add(
 			},
 
 			_getPortletMetaData: function(portlet) {
+				var instance = this;
+
 				var portletMetaData = portlet._LFR_portletMetaData;
 
 				if (!portletMetaData) {
@@ -307,6 +308,8 @@ AUI().add(
 			},
 
 			_loadPortletFiles: function(portletMetaData) {
+				var instance = this;
+
 				var headerPortalCssPaths = portletMetaData.portalPaths.header;
 				var footerPortalCssPaths = portletMetaData.portalPaths.footer;
 				var headerPortletCssPaths = portletMetaData.portletPaths.header;
@@ -348,6 +351,8 @@ AUI().add(
 			},
 
 			_lockDrag: function(node) {
+				var instance = this;
+
 				var draggable = DDM.getDrag(node);
 
 				if (draggable) {
@@ -372,6 +377,8 @@ AUI().add(
 			},
 
 			_onPortletDrop: function(event) {
+				var instance = this;
+
 				var drag = event.drag;
 
 				if ((drag instanceof columnPortletItem)) {
@@ -380,6 +387,8 @@ AUI().add(
 			},
 
 			_unlockDrag: function(node) {
+				var instance = this;
+
 				var draggable = DDM.getDrag(node);
 
 				if (draggable) {
@@ -421,6 +430,8 @@ AUI().add(
 				PROXY_TITLE: PROXY_NODE_ITEM.one('.portlet-title'),
 
 				_addPortlet: function(portletNode, options) {
+					var instance = this;
+
 					LayoutConfiguration._addPortlet(portletNode, options);
 				},
 

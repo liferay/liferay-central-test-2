@@ -345,6 +345,7 @@ AUI().add(
 
 				_syncProxyNodeSize: function() {
 					var instance = this;
+
 					var dragNode = DDM.activeDrag.get('dragNode');
 					var proxyNode = instance.get('proxyNode');
 
@@ -483,6 +484,7 @@ AUI().add(
 
 				_syncProxyNodeSize: function() {
 					var instance = this;
+
 					var node = DDM.activeDrag.get('node');
 					var proxyNode = instance.get('proxyNode');
 
