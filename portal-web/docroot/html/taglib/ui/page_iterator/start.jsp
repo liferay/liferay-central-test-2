@@ -95,7 +95,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			}
 		}
 
-		String content;
+		String content = null;
 
 		if (pagesIteratorEnd < pagesIteratorBegin) {
 			content = StringPool.BLANK;
