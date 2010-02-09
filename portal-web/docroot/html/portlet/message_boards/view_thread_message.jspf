@@ -27,7 +27,7 @@
 
 	<table cellpadding="0" cellspacing="0" class="<%= className %>" id="<portlet:namespace />message_<%= message.getMessageId() %>" width="100%">
 	<tr>
-		<td class="user-info lfr-top" rowspan="2">
+		<td class="lfr-top user-info" rowspan="2">
 			<c:choose>
 				<c:when test="<%= message.isAnonymous() %>">
 					<liferay-ui:message key="anonymous" />

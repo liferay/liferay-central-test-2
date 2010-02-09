@@ -27,10 +27,10 @@
 	<div id="content-wrapper">
 		<table class="lfr-panel-page">
 		<tr>
-			<td class="panel-page-menu lfr-top" width="200">
+			<td class="lfr-top panel-page-menu" width="200">
 				<liferay-portlet:runtime portletName="87" />
 			</td>
-			<td class="panel-page-content lfr-top <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>">
+			<td class="lfr-top panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>">
 				<span id="mainContent"></span>
 </c:if>
 

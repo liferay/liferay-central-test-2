@@ -229,7 +229,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							displayStyle="<%= 2 %>"
 						/>
 					</td>
-					<td class="stretch lfr-top">
+					<td class="lfr-top stretch">
 						<div>
 
 							<%

@@ -126,7 +126,7 @@ userTracker = userTracker.toEscapedModel();
 									<td class="lfr-top">
 										<%= StringUtil.replace(userTrackerPath.getPath(), "&", "& ") %>
 									</td>
-									<td nowrap class="lfr-top">
+									<td class="lfr-top" nowrap>
 										<%= dateFormatDateTime.format(userTrackerPath.getPathDate()) %>
 									</td>
 								</tr>
