@@ -68,6 +68,10 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	public HttpSession getSharedSession() {
+		return _session;
+	}
+
 	protected HttpSession getSharedSessionWrapper(HttpSession session) {
 		if (!ServerDetector.isJOnAS() && ServerDetector.isJetty()) {
 			return new JettySharedSessionWrapper(
