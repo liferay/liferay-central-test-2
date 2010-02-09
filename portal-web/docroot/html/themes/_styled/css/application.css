@@ -135,9 +135,12 @@
 }
 
 .portlet-boundary.yui-dd-dragging {
+	opacity: .6;
+}
+
+.ie .portlet-boundary.yui-dd-dragging {
 	-ms-filter: alpha(opacity=60);
 	filter: alpha(opacity=60);
-	opacity: .6;
 }
 
 .portlet-boundary.yui-dd-dragging .portlet {
