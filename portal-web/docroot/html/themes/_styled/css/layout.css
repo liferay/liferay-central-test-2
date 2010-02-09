@@ -1,5 +1,9 @@
 /* ---------- Wrapper ---------- */
 
+td.lfr-column {
+	vertical-align: top;	
+}
+
 .lfr-grid {
 	border-collapse: collapse;
 	width: 100%;
