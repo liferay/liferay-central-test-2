@@ -233,8 +233,8 @@ public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 		return genericDataSourceFactory.loadPool(_propertyPrefix, properties);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DataSourceFactoryBean.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DataSourceFactoryBean.class);
 
 	private Properties _properties;
 	private String _propertyPrefix;

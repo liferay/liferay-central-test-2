@@ -689,7 +689,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entryDisplays;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(AssetEntryLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		AssetEntryLocalServiceImpl.class);
 
 }

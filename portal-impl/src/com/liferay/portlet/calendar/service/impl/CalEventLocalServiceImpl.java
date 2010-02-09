@@ -1606,7 +1606,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(CalEventLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CalEventLocalServiceImpl.class);
 
 }

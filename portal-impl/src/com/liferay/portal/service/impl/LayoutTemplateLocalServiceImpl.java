@@ -615,8 +615,8 @@ public class LayoutTemplateLocalServiceImpl
 		return layoutTemplates;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LayoutTemplateLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LayoutTemplateLocalServiceImpl.class);
 
 	private static Map<String, LayoutTemplate> _portalStandard =
 		new LinkedHashMap<String, LayoutTemplate>();

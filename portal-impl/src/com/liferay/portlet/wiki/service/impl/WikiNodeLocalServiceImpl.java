@@ -349,8 +349,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(WikiNodeLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		WikiNodeLocalServiceImpl.class);
 
 	private Map<String, WikiImporter> _wikiImporters =
 		new HashMap<String, WikiImporter>();

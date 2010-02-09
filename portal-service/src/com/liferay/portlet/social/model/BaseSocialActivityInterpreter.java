@@ -154,7 +154,7 @@ public abstract class BaseSocialActivityInterpreter
 		return wrapLink(link, themeDisplay.translate(key));
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(BaseSocialActivityInterpreter.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		BaseSocialActivityInterpreter.class);
 
 }

@@ -89,7 +89,7 @@ public class RequestHeaderAutoLogin extends CASAutoLogin {
 		return credentials;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(RequestHeaderAutoLogin.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		RequestHeaderAutoLogin.class);
 
 }

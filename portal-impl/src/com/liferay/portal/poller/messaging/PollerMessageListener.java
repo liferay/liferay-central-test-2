@@ -95,7 +95,7 @@ public class PollerMessageListener implements MessageListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PollerMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PollerMessageListener.class);
 
 }

@@ -140,8 +140,8 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		_registerCacheStatistics = registerCacheStatistics;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(EhcachePortalCacheManager.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		EhcachePortalCacheManager.class);
 
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;

@@ -114,8 +114,8 @@ public class SchedulerMessageListener implements MessageListener {
 			responseMessage.getDestinationName(), responseMessage);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(SchedulerMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		SchedulerMessageListener.class);
 
 	private MessageSender _messageSender;
 	private SchedulerEngine _schedulerEngine;

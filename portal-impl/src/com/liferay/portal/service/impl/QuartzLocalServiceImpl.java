@@ -77,7 +77,7 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(QuartzLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		QuartzLocalServiceImpl.class);
 
 }

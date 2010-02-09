@@ -482,7 +482,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static final PortletDataHandlerBoolean _votes =
 		new PortletDataHandlerBoolean(_NAMESPACE, "votes");
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PollsPortletDataHandlerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PollsPortletDataHandlerImpl.class);
 
 }

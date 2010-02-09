@@ -90,7 +90,7 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 		return is;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ServletVelocityResourceListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ServletVelocityResourceListener.class);
 
 }

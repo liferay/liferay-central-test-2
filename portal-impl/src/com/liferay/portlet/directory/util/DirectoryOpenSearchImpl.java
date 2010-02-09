@@ -125,7 +125,7 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 		return doc.asXML();
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DirectoryOpenSearchImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DirectoryOpenSearchImpl.class);
 
 }

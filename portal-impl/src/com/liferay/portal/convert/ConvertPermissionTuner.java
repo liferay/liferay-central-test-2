@@ -65,7 +65,7 @@ public class ConvertPermissionTuner extends ConvertProcess {
 	protected void doConvert() throws Exception {
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ConvertPermissionTuner.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ConvertPermissionTuner.class);
 
 }

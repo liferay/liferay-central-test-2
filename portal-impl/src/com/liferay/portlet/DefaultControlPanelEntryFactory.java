@@ -71,8 +71,8 @@ public class DefaultControlPanelEntryFactory {
 		_controlPanelEntry = controlPanelEntryFactory;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DefaultControlPanelEntryFactory.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DefaultControlPanelEntryFactory.class);
 
 	private static ControlPanelEntry _controlPanelEntry = null;
 

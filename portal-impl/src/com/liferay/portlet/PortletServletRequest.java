@@ -434,8 +434,8 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletServletRequest.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletServletRequest.class);
 
 	private HttpServletRequest _request;
 	private PortletRequestImpl _portletRequestImpl;

@@ -90,7 +90,7 @@ public class ThemeLoaderVelocityResourceListener
 		return is;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ThemeLoaderVelocityResourceListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ThemeLoaderVelocityResourceListener.class);
 
 }

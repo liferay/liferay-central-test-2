@@ -119,7 +119,7 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 				PropsKeys.SPRING_CONFIGS));
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletApplicationContext.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletApplicationContext.class);
 
 }

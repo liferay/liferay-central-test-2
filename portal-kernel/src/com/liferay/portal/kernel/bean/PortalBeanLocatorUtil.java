@@ -73,8 +73,8 @@ public class PortalBeanLocatorUtil {
 		_beanLocator = beanLocator;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalBeanLocatorUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalBeanLocatorUtil.class);
 
 	private static BeanLocator _beanLocator;
 

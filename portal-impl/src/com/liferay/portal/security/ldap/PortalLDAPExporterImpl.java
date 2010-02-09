@@ -189,8 +189,8 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		return binding;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalLDAPExporterImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalLDAPExporterImpl.class);
 
 	private PortalToLDAPConverter _portalToLDAPConverter;
 

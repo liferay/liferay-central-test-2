@@ -82,7 +82,7 @@ public class SiteMinderLogoutAction extends Action {
 
 	private static final String _SMIDENTITY = "SMIDENTITY";
 
-	private static Log _log =
-		LogFactoryUtil.getLog(SiteMinderLogoutAction.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		SiteMinderLogoutAction.class);
 
 }

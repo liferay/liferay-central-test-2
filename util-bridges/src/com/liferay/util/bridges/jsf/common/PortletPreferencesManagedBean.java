@@ -153,8 +153,8 @@ public class PortletPreferencesManagedBean {
 		FacesMessageUtil.info(facesContext, key);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletPreferencesManagedBean.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletPreferencesManagedBean.class);
 
 	private PortletPreferences _portletPreferences;
 	private Map<String, String> _preferences;

@@ -58,7 +58,7 @@ public class ConvertProcessMessageListener implements MessageListener {
 		convertProcess.convert();
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ConvertProcessMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ConvertProcessMessageListener.class);
 
 }

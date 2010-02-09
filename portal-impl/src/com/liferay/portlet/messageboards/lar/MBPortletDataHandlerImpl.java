@@ -812,7 +812,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MBPortletDataHandlerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		MBPortletDataHandlerImpl.class);
 
 }

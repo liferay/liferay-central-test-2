@@ -142,7 +142,7 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 		return false;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(BaseAutoDeployListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		BaseAutoDeployListener.class);
 
 }

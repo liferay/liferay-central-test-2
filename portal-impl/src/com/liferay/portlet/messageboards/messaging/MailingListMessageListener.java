@@ -245,7 +245,7 @@ public class MailingListMessageListener implements MessageListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MailingListMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		MailingListMessageListener.class);
 
 }

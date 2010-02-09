@@ -98,8 +98,8 @@ public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 		return clazz;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DynamicQueryFactoryImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DynamicQueryFactoryImpl.class);
 
 	private Map<String, Class<?>> _classMap = new HashMap<String, Class<?>>();
 

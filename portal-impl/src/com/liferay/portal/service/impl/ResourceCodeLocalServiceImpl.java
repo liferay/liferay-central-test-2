@@ -159,8 +159,8 @@ public class ResourceCodeLocalServiceImpl
 		return sb.toString();
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ResourceCodeLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ResourceCodeLocalServiceImpl.class);
 
 	private static Map<String, ResourceCode> _resourceCodes =
 		new ConcurrentHashMap<String, ResourceCode>();

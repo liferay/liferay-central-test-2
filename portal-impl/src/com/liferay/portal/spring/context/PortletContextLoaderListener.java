@@ -115,7 +115,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 		return new PortletContextLoader();
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletContextLoaderListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletContextLoaderListener.class);
 
 }

@@ -74,7 +74,7 @@ public class VerifyBlogsTrackbacks extends VerifyProcess {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(VerifyBlogsTrackbacks.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		VerifyBlogsTrackbacks.class);
 
 }

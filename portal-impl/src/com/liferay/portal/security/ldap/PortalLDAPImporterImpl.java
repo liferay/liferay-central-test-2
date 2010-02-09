@@ -657,8 +657,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 	private static final String _IMPORT_BY_USER = "user";
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalLDAPImporterImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalLDAPImporterImpl.class);
 
 	private LDAPToPortalConverter _ldapToPortalConverter;
 

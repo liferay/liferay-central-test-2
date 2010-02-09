@@ -1775,7 +1775,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		_structuresTemplatesAndFeeds = new PortletDataHandlerBoolean(
 			_NAMESPACE, "structures-templates-and-feeds", true, true);
 
-	private static Log _log =
-		LogFactoryUtil.getLog(JournalPortletDataHandlerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalPortletDataHandlerImpl.class);
 
 }

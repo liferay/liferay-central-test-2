@@ -151,8 +151,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		_string = string;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(StringServletResponse.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		StringServletResponse.class);
 
 	private int _bufferSize;
 	private boolean _callGetOutputStream;

@@ -686,7 +686,7 @@ public class JournalTemplateLocalServiceImpl
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(JournalTemplateLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalTemplateLocalServiceImpl.class);
 
 }

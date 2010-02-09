@@ -64,8 +64,8 @@ public class PortletBeanLocatorUtil {
 		_beanLocators.put(servletContextName, beanLocator);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletBeanLocatorUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletBeanLocatorUtil.class);
 
 	private static Map<String, BeanLocator> _beanLocators =
 		new HashMap<String, BeanLocator>();

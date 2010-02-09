@@ -82,8 +82,8 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 		return attachments;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MBMessageAttachmentsUpgradeColumnImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		MBMessageAttachmentsUpgradeColumnImpl.class);
 
 	private UpgradeColumn _messageIdColumn;
 	private UpgradeColumn _companyIdColumn;

@@ -81,7 +81,7 @@ public class ThemeLoaderTemplateLoader extends URLTemplateLoader {
 		return null;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ThemeLoaderTemplateLoader.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ThemeLoaderTemplateLoader.class);
 
 }

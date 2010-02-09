@@ -178,8 +178,8 @@ public class LocalPluginPackageRepository {
 		_pendingPackages.remove(context);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LocalPluginPackageRepository.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LocalPluginPackageRepository.class);
 
 	private Map<String, PluginPackage> _pluginPackages =
 		new HashMap<String, PluginPackage>();

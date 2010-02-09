@@ -125,7 +125,7 @@ public class FileCacheOutputStream extends OutputStream {
 	protected File _tempFile;
 	protected UnsyncBufferedOutputStream _ubos;
 
-	private static Log _log =
-		LogFactoryUtil.getLog(FileCacheOutputStream.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		FileCacheOutputStream.class);
 
 }

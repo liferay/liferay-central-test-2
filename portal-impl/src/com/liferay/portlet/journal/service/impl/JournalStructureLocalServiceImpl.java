@@ -614,7 +614,7 @@ public class JournalStructureLocalServiceImpl
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(JournalStructureLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalStructureLocalServiceImpl.class);
 
 }

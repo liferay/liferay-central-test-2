@@ -218,7 +218,7 @@ public class PortletPermissionImpl implements PortletPermission {
 		return layoutManagerActions.contains(actionId);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletPermissionImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletPermissionImpl.class);
 
 }

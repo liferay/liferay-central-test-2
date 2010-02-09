@@ -60,8 +60,8 @@ public class UserPasswordPolicyChecker extends RowChecker {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(UserPasswordPolicyChecker.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		UserPasswordPolicyChecker.class);
 
 	private PasswordPolicy _passwordPolicy;
 

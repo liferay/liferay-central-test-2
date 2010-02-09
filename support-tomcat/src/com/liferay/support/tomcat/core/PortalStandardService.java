@@ -52,7 +52,7 @@ public class PortalStandardService extends StandardService {
 		super.addConnector(connector);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalStandardService.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalStandardService.class);
 
 }

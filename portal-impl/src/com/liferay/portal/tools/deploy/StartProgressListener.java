@@ -55,8 +55,8 @@ public class StartProgressListener implements ProgressListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(StartProgressListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		StartProgressListener.class);
 
 	private DeploymentHandler _deploymentHandler;
 

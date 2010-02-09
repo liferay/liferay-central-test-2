@@ -215,7 +215,7 @@ public class LocalContainerEntityManagerFactoryBean extends
 		return null;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LocalContainerEntityManagerFactoryBean.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LocalContainerEntityManagerFactoryBean.class);
 
 }

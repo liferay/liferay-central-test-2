@@ -160,8 +160,8 @@ public class FileUploadManagedBean implements Renderable {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(FileUploadManagedBean.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		FileUploadManagedBean.class);
 
 	private PersistentFacesState _state;
 	private RenderManager _renderManager;

@@ -2039,7 +2039,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MBMessageLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		MBMessageLocalServiceImpl.class);
 
 }

@@ -103,7 +103,7 @@ public class BrowserTrackerLocalServiceImpl
 		return browserTracker;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(BrowserTrackerLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		BrowserTrackerLocalServiceImpl.class);
 
 }

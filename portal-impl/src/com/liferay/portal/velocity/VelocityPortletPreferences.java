@@ -66,8 +66,8 @@ public class VelocityPortletPreferences {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(VelocityPortletPreferences.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		VelocityPortletPreferences.class);
 
 	private PortletPreferencesImpl _preferencesImpl;
 

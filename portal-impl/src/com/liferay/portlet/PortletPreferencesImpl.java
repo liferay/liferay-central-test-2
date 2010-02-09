@@ -388,8 +388,8 @@ public class PortletPreferencesImpl
 
 	private static final String _NULL_VALUE = "NULL_VALUE";
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletPreferencesImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletPreferencesImpl.class);
 
 	private long _companyId;
 	private PortletPreferences _defaultPreferences;

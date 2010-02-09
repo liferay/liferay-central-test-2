@@ -174,8 +174,8 @@ public class PortletContextListener
 	private static final String _JNDI_JDBC_LIFERAY_POOL =
 		_JNDI_JDBC + "/LiferayPool";
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletContextListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletContextListener.class);
 
 	private ServletContext _servletContext;
 	private ClassLoader _classLoader;

@@ -180,8 +180,8 @@ public class PortletResourceBundles {
 		_contexts.remove(servletContextName);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletResourceBundles.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletResourceBundles.class);
 
 	private static PortletResourceBundles _instance =
 		new PortletResourceBundles();

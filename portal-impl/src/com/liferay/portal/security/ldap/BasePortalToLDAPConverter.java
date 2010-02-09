@@ -228,8 +228,8 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 
 	private static final String _USER_OBJECT_CLASS = "objectclass";
 
-	private static Log _log =
-		LogFactoryUtil.getLog(BasePortalToLDAPConverter.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		BasePortalToLDAPConverter.class);
 
 	private Map<String, String> _reservedContactFieldNames =
 		new HashMap<String, String>();

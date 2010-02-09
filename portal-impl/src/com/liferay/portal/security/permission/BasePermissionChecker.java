@@ -128,7 +128,7 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 	protected Boolean omniadmin;
 	protected Role ownerRole;
 
-	private static Log _log =
-		LogFactoryUtil.getLog(BasePermissionChecker.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		BasePermissionChecker.class);
 
 }

@@ -90,7 +90,7 @@ public class ViewCounterTransformerListener extends TransformerListener {
 		return s;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ViewCounterTransformerListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ViewCounterTransformerListener.class);
 
 }

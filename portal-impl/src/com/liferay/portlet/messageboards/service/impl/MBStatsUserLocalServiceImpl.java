@@ -158,7 +158,7 @@ public class MBStatsUserLocalServiceImpl
 		return statsUser;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MBStatsUserLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		MBStatsUserLocalServiceImpl.class);
 
 }

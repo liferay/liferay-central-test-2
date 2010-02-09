@@ -142,7 +142,7 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(BaseExplodedTomcatListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		BaseExplodedTomcatListener.class);
 
 }

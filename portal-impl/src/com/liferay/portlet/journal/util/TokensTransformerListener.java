@@ -138,7 +138,7 @@ public class TokensTransformerListener extends TransformerListener {
 		return s;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(TokensTransformerListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		TokensTransformerListener.class);
 
 }

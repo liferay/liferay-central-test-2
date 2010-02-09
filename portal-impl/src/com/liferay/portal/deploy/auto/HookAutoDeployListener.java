@@ -62,8 +62,8 @@ public class HookAutoDeployListener extends BaseAutoDeployListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(HookAutoDeployListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		HookAutoDeployListener.class);
 
 	private AutoDeployer _deployer;
 

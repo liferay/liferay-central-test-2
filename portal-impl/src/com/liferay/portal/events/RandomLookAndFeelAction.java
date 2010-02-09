@@ -115,7 +115,7 @@ public class RandomLookAndFeelAction extends Action {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(RandomLookAndFeelAction.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		RandomLookAndFeelAction.class);
 
 }

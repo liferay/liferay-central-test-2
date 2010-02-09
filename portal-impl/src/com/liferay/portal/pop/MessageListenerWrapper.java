@@ -92,8 +92,8 @@ public class MessageListenerWrapper implements MessageListener {
 		return getId().equals(id);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MessageListenerWrapper.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		MessageListenerWrapper.class);
 
 	private MessageListener _listener;
 

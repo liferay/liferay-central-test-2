@@ -187,7 +187,7 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 		return ldapUser;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(BaseLDAPToPortalConverter.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		BaseLDAPToPortalConverter.class);
 
 }

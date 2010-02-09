@@ -122,8 +122,8 @@ public class TrackbackVerifierUtil {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(TrackbackVerifierUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		TrackbackVerifierUtil.class);
 
 	private static List<Tuple> _trackbacks =
 		Collections.synchronizedList(new ArrayList<Tuple>());

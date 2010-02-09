@@ -1478,8 +1478,8 @@ public class HookHotDeployListener
 		"session.phishing.protected.attributes"
 	};
 
-	private static Log _log =
-		LogFactoryUtil.getLog(HookHotDeployListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		HookHotDeployListener.class);
 
 	private Map<String, AuthenticatorsContainer> _authenticatorsContainerMap =
 		new HashMap<String, AuthenticatorsContainer>();

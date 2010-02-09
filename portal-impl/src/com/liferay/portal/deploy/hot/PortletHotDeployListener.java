@@ -982,8 +982,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletHotDeployListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletHotDeployListener.class);
 
 	private static Map<String, ObjectValuePair<long[], List<Portlet>>> _vars =
 		new HashMap<String, ObjectValuePair<long[], List<Portlet>>>();

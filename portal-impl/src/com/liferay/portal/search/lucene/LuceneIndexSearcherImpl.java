@@ -262,7 +262,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		return subset;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LuceneIndexSearcherImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LuceneIndexSearcherImpl.class);
 
 }

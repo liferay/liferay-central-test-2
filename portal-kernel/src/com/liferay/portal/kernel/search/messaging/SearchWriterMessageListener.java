@@ -79,7 +79,7 @@ public class SearchWriterMessageListener
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(SearchWriterMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		SearchWriterMessageListener.class);
 
 }

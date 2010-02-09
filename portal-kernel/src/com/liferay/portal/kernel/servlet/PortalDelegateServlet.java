@@ -71,8 +71,8 @@ public class PortalDelegateServlet extends HttpServlet {
 		PortalDelegatorServlet.removeDelegate(_subContext);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalDelegateServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalDelegateServlet.class);
 
 	private String _subContext;
 

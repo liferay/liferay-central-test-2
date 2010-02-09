@@ -133,8 +133,8 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 		return !methodStack.empty();
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DynamicDataSourceTargetSource.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DynamicDataSourceTargetSource.class);
 
 	private static ThreadLocal<Stack<String>> _methodStack =
 		new ThreadLocal<Stack<String>>();

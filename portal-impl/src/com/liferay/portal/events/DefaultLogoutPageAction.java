@@ -95,7 +95,7 @@ public class DefaultLogoutPageAction extends Action {
 		session.setAttribute(WebKeys.LAST_PATH, lastPath);*/
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DefaultLogoutPageAction.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DefaultLogoutPageAction.class);
 
 }

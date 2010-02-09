@@ -92,7 +92,7 @@ public class RMICacheManagerPeerProviderFactory
 		return super.createCachePeerProvider(cacheManager, portalProperties);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(RMICacheManagerPeerProviderFactory.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		RMICacheManagerPeerProviderFactory.class);
 
 }

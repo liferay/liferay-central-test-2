@@ -110,7 +110,7 @@ public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 		return null;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(JournalTemplateLoader.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalTemplateLoader.class);
 
 }

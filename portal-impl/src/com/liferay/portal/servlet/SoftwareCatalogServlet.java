@@ -240,7 +240,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		return version;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(SoftwareCatalogServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		SoftwareCatalogServlet.class);
 
 }

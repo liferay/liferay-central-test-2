@@ -433,7 +433,7 @@ public class JournalContentPortletDataHandlerImpl
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
-	private static Log _log =
-		LogFactoryUtil.getLog(JournalContentPortletDataHandlerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalContentPortletDataHandlerImpl.class);
 
 }

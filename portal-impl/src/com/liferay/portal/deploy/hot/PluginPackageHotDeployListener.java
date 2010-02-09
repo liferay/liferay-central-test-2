@@ -310,7 +310,7 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			buildDate, buildAutoUpgrade);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PluginPackageHotDeployListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PluginPackageHotDeployListener.class);
 
 }

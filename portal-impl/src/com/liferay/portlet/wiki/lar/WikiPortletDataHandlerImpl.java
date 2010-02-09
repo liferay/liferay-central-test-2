@@ -532,7 +532,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
-	private static Log _log =
-		LogFactoryUtil.getLog(WikiPortletDataHandlerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		WikiPortletDataHandlerImpl.class);
 
 }

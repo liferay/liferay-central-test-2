@@ -65,7 +65,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(VerifyDocumentLibrary.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		VerifyDocumentLibrary.class);
 
 }

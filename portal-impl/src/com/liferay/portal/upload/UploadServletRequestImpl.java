@@ -265,8 +265,8 @@ public class UploadServletRequestImpl
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(UploadServletRequestImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		UploadServletRequestImpl.class);
 
 	private LiferayServletRequest _lsr;
 	private Map<String, LiferayFileItem[]> _params;

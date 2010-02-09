@@ -231,7 +231,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static final PortletDataHandlerBoolean _votes =
 		new PortletDataHandlerBoolean(_NAMESPACE, "votes");
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PollsDisplayPortletDataHandlerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PollsDisplayPortletDataHandlerImpl.class);
 
 }

@@ -110,7 +110,7 @@ public class RatingsStatsLocalServiceImpl
 		return stats;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(RatingsStatsLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		RatingsStatsLocalServiceImpl.class);
 
 }

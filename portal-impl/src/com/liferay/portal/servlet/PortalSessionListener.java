@@ -159,7 +159,7 @@ public class PortalSessionListener implements HttpSessionListener {
 		return companyId;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalSessionListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalSessionListener.class);
 
 }

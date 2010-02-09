@@ -119,7 +119,7 @@ public class EditUserPortraitAction extends PortletAction {
 		UserServiceUtil.updatePortrait(user.getUserId(), bytes);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(EditUserPortraitAction.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		EditUserPortraitAction.class);
 
 }

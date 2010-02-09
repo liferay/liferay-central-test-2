@@ -128,8 +128,8 @@ public class PortletContextFactory {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletContextFactory.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletContextFactory.class);
 
 	private static PortletContextFactory _instance =
 		new PortletContextFactory();

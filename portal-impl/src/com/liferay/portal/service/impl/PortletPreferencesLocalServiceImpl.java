@@ -289,7 +289,7 @@ public class PortletPreferencesLocalServiceImpl
 		return String.valueOf(plid).concat(StringPool.POUND).concat(portletId);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletPreferencesLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletPreferencesLocalServiceImpl.class);
 
 }

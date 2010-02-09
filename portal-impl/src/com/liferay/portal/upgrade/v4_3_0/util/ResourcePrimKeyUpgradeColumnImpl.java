@@ -138,8 +138,8 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return newPrimKey;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ResourcePrimKeyUpgradeColumnImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ResourcePrimKeyUpgradeColumnImpl.class);
 
 	private UpgradeColumn _nameColumn;
 	private ResourceCodeIdUpgradeColumnImpl _codeIdColumn;

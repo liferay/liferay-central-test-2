@@ -69,8 +69,8 @@ public class LayoutTemplateExplodedTomcatListener
 		copyContextFile(file);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LayoutTemplateExplodedTomcatListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LayoutTemplateExplodedTomcatListener.class);
 
 	private ExplodedTomcatDeployer _deployer;
 

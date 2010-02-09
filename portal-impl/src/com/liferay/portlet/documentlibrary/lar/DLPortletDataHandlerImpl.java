@@ -896,7 +896,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DLPortletDataHandlerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DLPortletDataHandlerImpl.class);
 
 }

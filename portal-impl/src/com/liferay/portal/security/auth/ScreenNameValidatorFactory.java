@@ -68,8 +68,8 @@ public class ScreenNameValidatorFactory {
 		_screenNameValidator = screenNameValidator;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ScreenNameValidatorFactory.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ScreenNameValidatorFactory.class);
 
 	private static ScreenNameValidator _screenNameValidator = null;
 

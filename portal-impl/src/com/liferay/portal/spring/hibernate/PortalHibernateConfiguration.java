@@ -140,8 +140,8 @@ public class PortalHibernateConfiguration
 		is.close();
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalHibernateConfiguration.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalHibernateConfiguration.class);
 
 	private Converter<String> _hibernateConfigurationConverter;
 

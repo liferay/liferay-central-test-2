@@ -146,7 +146,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		return fileRank;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DLFileRankLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DLFileRankLocalServiceImpl.class);
 
 }

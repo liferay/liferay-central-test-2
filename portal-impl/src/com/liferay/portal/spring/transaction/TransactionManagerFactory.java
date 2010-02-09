@@ -97,7 +97,7 @@ public class TransactionManagerFactory {
 		return abstractPlatformTransactionManager;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(TransactionManagerFactory.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		TransactionManagerFactory.class);
 
 }

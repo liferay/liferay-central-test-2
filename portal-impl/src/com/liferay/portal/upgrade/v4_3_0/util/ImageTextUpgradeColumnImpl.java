@@ -98,8 +98,8 @@ public class ImageTextUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return _size;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ImageTextUpgradeColumnImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ImageTextUpgradeColumnImpl.class);
 
 	private UpgradeColumn _imageIdColumn;
 	private String _type;

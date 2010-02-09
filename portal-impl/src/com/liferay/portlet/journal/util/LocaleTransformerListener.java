@@ -136,8 +136,8 @@ public class LocaleTransformerListener extends TransformerListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LocaleTransformerListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LocaleTransformerListener.class);
 
 	private String _requestedLocale = StringPool.BLANK;
 

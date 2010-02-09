@@ -118,8 +118,8 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 		return _waiDeployer;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletAutoDeployListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletAutoDeployListener.class);
 
 	private AutoDeployer _deployer;
 	private MVCPortletAutoDeployer _mvcDeployer;

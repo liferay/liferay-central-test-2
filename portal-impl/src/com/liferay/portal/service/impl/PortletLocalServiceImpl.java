@@ -2039,8 +2039,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	private static final String _WSRP_CATEGORY = "category.wsrp";
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletLocalServiceImpl.class);
 
 	private static Map<String, PortletApp> _portletAppsPool =
 		new ConcurrentHashMap<String, PortletApp>();

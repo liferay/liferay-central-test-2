@@ -60,8 +60,8 @@ public class MonitoringMessageListener implements MessageListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MonitoringMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		MonitoringMessageListener.class);
 
 	private DataSampleProcessor<DataSample> _dataSampleProcessor;
 

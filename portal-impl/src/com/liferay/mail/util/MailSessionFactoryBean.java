@@ -83,8 +83,8 @@ public class MailSessionFactoryBean extends AbstractFactoryBean<Session> {
 		return session;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MailSessionFactoryBean.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		MailSessionFactoryBean.class);
 
 	private String _propertyPrefix;
 

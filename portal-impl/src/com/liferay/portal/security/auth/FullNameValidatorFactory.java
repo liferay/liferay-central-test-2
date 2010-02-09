@@ -67,8 +67,8 @@ public class FullNameValidatorFactory {
 		_fullNameValidator = fullNameValidator;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(FullNameValidatorFactory.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		FullNameValidatorFactory.class);
 
 	private static FullNameValidator _fullNameValidator = null;
 

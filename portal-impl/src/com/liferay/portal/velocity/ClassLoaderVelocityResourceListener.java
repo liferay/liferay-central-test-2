@@ -66,7 +66,7 @@ public class ClassLoaderVelocityResourceListener
 		return is;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ClassLoaderVelocityResourceListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ClassLoaderVelocityResourceListener.class);
 
 }

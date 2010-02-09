@@ -1033,7 +1033,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(BlogsEntryLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		BlogsEntryLocalServiceImpl.class);
 
 }

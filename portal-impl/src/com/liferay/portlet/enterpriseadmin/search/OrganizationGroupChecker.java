@@ -60,8 +60,8 @@ public class OrganizationGroupChecker extends RowChecker {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(OrganizationGroupChecker.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		OrganizationGroupChecker.class);
 
 	private Group _group;
 

@@ -66,8 +66,8 @@ public class ThemeExplodedTomcatListener extends BaseExplodedTomcatListener {
 		copyContextFile(file);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ThemeExplodedTomcatListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ThemeExplodedTomcatListener.class);
 
 	private ExplodedTomcatDeployer _deployer;
 

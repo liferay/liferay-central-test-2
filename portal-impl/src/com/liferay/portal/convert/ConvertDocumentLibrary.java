@@ -290,8 +290,8 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		"com.liferay.documentlibrary.util.S3Hook"
 	};
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ConvertDocumentLibrary.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ConvertDocumentLibrary.class);
 
 	private ServiceContext _serviceContext = new ServiceContext();
 	private Hook _sourceHook;

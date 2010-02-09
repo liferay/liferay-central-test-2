@@ -45,7 +45,7 @@ public class PluginRepositoriesMessageListener implements MessageListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PluginRepositoriesMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PluginRepositoriesMessageListener.class);
 
 }

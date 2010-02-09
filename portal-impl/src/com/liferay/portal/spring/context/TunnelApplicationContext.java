@@ -77,7 +77,7 @@ public class TunnelApplicationContext extends XmlWebApplicationContext {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(TunnelApplicationContext.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		TunnelApplicationContext.class);
 
 }

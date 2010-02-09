@@ -1428,7 +1428,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LayoutLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LayoutLocalServiceImpl.class);
 
 }

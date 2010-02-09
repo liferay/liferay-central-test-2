@@ -549,7 +549,7 @@ public class AnnouncementsEntryLocalServiceImpl
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(AnnouncementsEntryLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		AnnouncementsEntryLocalServiceImpl.class);
 
 }

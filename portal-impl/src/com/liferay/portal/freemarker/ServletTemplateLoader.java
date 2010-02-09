@@ -95,7 +95,7 @@ public class ServletTemplateLoader extends URLTemplateLoader {
 		return url;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ServletTemplateLoader.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ServletTemplateLoader.class);
 
 }

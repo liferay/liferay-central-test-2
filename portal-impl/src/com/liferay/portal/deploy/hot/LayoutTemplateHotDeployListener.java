@@ -164,8 +164,8 @@ public class LayoutTemplateHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LayoutTemplateHotDeployListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LayoutTemplateHotDeployListener.class);
 
 	private static Map<String, List<ObjectValuePair<String, Boolean>>> _vars =
 		new HashMap<String, List<ObjectValuePair<String, Boolean>>>();

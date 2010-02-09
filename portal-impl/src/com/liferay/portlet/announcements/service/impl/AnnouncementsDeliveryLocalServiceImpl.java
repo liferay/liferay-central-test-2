@@ -152,7 +152,7 @@ public class AnnouncementsDeliveryLocalServiceImpl
 		return delivery;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(AnnouncementsDeliveryLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		AnnouncementsDeliveryLocalServiceImpl.class);
 
 }

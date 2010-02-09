@@ -205,7 +205,7 @@ public class PayPalNotificationAction extends Action {
 		return true;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PayPalNotificationAction.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PayPalNotificationAction.class);
 
 }

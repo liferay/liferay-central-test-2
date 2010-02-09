@@ -113,7 +113,7 @@ public class AssetTagStatsLocalServiceImpl
 		return tagStats;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(AssetTagStatsLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		AssetTagStatsLocalServiceImpl.class);
 
 }

@@ -122,8 +122,8 @@ public class LiferayTemplateLoader implements TemplateLoader {
 			new FreeMarkerTemplateLoader[freeMarkerTemplateLoaders.size()]);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LiferayTemplateLoader.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LiferayTemplateLoader.class);
 
 	private FreeMarkerTemplateLoader[] _freeMarkerTemplateLoaders;
 	private Map<String, FreeMarkerTemplateLoader>

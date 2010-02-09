@@ -1181,8 +1181,8 @@ public class LayoutTypePortletImpl
 	private static final String _NESTED_PORTLETS_NAMESPACE =
 		PortalUtil.getPortletNamespace(PortletKeys.NESTED_PORTLETS);
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LayoutTypePortletImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LayoutTypePortletImpl.class);
 
 	private boolean _enablePortletLayoutListener = true;
 

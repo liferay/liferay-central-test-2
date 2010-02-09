@@ -1189,7 +1189,7 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DLFileEntryLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DLFileEntryLocalServiceImpl.class);
 
 }

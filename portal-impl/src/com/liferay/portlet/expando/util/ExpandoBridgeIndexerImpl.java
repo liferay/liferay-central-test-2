@@ -117,7 +117,7 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ExpandoBridgeIndexerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ExpandoBridgeIndexerImpl.class);
 
 }

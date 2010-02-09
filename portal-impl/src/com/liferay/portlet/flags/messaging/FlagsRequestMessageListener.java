@@ -341,7 +341,7 @@ public class FlagsRequestMessageListener implements MessageListener {
 		MailServiceUtil.sendEmail(message);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(FlagsRequestMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		FlagsRequestMessageListener.class);
 
 }

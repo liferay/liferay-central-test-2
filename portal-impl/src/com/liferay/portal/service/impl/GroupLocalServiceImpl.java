@@ -1299,8 +1299,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	protected File publicLARFile;
 
-	private static Log _log =
-		LogFactoryUtil.getLog(GroupLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		GroupLocalServiceImpl.class);
 
 	private Map<String, Group> _systemGroupsMap = new HashMap<String, Group>();
 

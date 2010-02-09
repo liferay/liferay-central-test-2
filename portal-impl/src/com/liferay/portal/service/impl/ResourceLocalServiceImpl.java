@@ -930,7 +930,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ResourceLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ResourceLocalServiceImpl.class);
 
 }

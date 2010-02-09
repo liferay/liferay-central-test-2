@@ -90,8 +90,8 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		return _dlFileEntryIdMapper;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DLFileEntryIdUpgradeColumnImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DLFileEntryIdUpgradeColumnImpl.class);
 
 	private UpgradeColumn _companyIdColumn;
 	private UpgradeColumn _folderIdColumn;

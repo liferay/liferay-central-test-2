@@ -71,8 +71,8 @@ public class PermissionsListFilterFactory {
 		_permissionsListFilter = permissionsListFilter;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PermissionsListFilterFactory.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PermissionsListFilterFactory.class);
 
 	private static PermissionsListFilter _permissionsListFilter;
 

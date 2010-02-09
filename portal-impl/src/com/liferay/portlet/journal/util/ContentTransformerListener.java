@@ -170,7 +170,7 @@ public class ContentTransformerListener extends TransformerListener {
 		return GetterUtil.getString(content);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ContentTransformerListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ContentTransformerListener.class);
 
 }

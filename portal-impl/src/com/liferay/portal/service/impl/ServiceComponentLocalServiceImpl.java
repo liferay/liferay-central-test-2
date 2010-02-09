@@ -409,7 +409,7 @@ public class ServiceComponentLocalServiceImpl
 
 	private static final int _MAX_SERVICE_COMPONENTS = 10;
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ServiceComponentLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ServiceComponentLocalServiceImpl.class);
 
 }

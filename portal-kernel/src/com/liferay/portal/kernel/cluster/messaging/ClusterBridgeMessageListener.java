@@ -70,8 +70,8 @@ public class ClusterBridgeMessageListener implements MessageListener {
 		_priority = priority;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ClusterBridgeMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ClusterBridgeMessageListener.class);
 
 	private Priority _priority;
 

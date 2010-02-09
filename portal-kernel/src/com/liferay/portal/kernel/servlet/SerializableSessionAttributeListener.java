@@ -78,8 +78,8 @@ public class SerializableSessionAttributeListener
 		attributeAdded(event);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(SerializableSessionAttributeListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		SerializableSessionAttributeListener.class);
 
 	private Boolean _requiresSerializable;
 

@@ -44,7 +44,7 @@ public class LDAPImportMessageListener implements MessageListener{
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LDAPImportMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LDAPImportMessageListener.class);
 
 }

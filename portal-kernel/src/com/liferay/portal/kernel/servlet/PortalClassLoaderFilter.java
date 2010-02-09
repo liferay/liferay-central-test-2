@@ -108,8 +108,8 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalClassLoaderFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalClassLoaderFilter.class);
 
 	private Filter _filter;
 	private FilterConfig _filterConfig;

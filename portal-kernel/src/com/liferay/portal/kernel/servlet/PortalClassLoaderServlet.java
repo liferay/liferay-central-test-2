@@ -111,8 +111,8 @@ public class PortalClassLoaderServlet
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalClassLoaderServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalClassLoaderServlet.class);
 
 	private HttpServlet _servlet;
 	private ServletConfig _servletConfig;

@@ -71,8 +71,8 @@ public class AttributesTransformerFactory {
 		_attributesTransformer = attributesTransformer;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(AttributesTransformerFactory.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		AttributesTransformerFactory.class);
 
 	private static AttributesTransformer _attributesTransformer;
 

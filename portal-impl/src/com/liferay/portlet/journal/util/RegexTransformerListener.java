@@ -84,7 +84,7 @@ public class RegexTransformerListener extends TransformerListener {
 		return s;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(RegexTransformerListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		RegexTransformerListener.class);
 
 }

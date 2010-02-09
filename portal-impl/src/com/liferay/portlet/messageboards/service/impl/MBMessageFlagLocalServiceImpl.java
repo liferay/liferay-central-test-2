@@ -232,7 +232,7 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MBMessageFlagLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		MBMessageFlagLocalServiceImpl.class);
 
 }

@@ -249,8 +249,8 @@ public class JournalArticleContentUpgradeColumnImpl
 	private static final String _IMG_ID_PATH =
 		"/image/journal/article?img_id=";
 
-	private static Log _log =
-		LogFactoryUtil.getLog(JournalArticleContentUpgradeColumnImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalArticleContentUpgradeColumnImpl.class);
 
 	private UpgradeColumn _companyIdColumn;
 	private UpgradeColumn _groupIdColumn;

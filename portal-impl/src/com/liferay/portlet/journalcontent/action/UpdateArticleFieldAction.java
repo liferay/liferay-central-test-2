@@ -140,7 +140,7 @@ public class UpdateArticleFieldAction extends Action {
 		ServletResponseUtil.write(response, fieldData);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(UpdateArticleFieldAction.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		UpdateArticleFieldAction.class);
 
 }

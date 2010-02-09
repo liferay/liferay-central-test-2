@@ -115,8 +115,8 @@ public class DeploymentProgressListener implements ProgressListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DeploymentProgressListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DeploymentProgressListener.class);
 
 	private DeploymentHandler _deploymentHandler;
 	private String _warContext;

@@ -89,7 +89,7 @@ public class LayoutTemplateAutoDeployer
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LayoutTemplateAutoDeployer.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LayoutTemplateAutoDeployer.class);
 
 }

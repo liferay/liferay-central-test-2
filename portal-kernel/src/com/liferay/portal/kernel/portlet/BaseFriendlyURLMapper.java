@@ -148,7 +148,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	private static final String _METHOD_ISRESERVEDPARAMETER =
 		"isReservedParameter";
 
-	private static Log _log =
-		LogFactoryUtil.getLog(BaseFriendlyURLMapper.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		BaseFriendlyURLMapper.class);
 
 }

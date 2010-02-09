@@ -549,7 +549,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		validate(folderId, groupId, parentFolderId, name);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(DLFolderLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		DLFolderLocalServiceImpl.class);
 
 }

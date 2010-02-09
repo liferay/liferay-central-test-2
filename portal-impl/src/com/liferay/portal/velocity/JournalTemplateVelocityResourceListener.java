@@ -87,7 +87,7 @@ public class JournalTemplateVelocityResourceListener
 		return is;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(JournalTemplateVelocityResourceListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalTemplateVelocityResourceListener.class);
 
 }

@@ -61,7 +61,7 @@ public class LiferayPersistenceUnitPostProcessor
 		mutablePersistenceUnitInfo.setProperties(properties);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LiferayPersistenceUnitPostProcessor.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LiferayPersistenceUnitPostProcessor.class);
 
 }

@@ -87,8 +87,8 @@ public class HibernateConfigurationConverter implements Converter<String> {
 		return document.asXML();
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(HibernateConfigurationConverter.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		HibernateConfigurationConverter.class);
 
 	private Map<String, String> _classNames;
 

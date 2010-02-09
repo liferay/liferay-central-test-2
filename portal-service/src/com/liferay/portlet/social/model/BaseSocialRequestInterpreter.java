@@ -164,7 +164,7 @@ public abstract class BaseSocialRequestInterpreter
 		return true;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(BaseSocialRequestInterpreter.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		BaseSocialRequestInterpreter.class);
 
 }

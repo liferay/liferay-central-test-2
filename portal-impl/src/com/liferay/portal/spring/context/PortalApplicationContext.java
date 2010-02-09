@@ -94,7 +94,7 @@ public class PortalApplicationContext extends XmlWebApplicationContext {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalApplicationContext.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalApplicationContext.class);
 
 }

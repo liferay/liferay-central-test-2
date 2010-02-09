@@ -114,7 +114,7 @@ public class ThemeLoaderHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ThemeLoaderHotDeployListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ThemeLoaderHotDeployListener.class);
 
 }

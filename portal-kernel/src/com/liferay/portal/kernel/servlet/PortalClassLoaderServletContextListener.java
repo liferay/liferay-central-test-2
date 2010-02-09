@@ -98,8 +98,8 @@ public abstract class PortalClassLoaderServletContextListener
 
 	protected abstract ServletContextListener getInstance() throws Exception;
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortalClassLoaderServletContextListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalClassLoaderServletContextListener.class);
 
 	private ServletContextEvent _event;
 	private ServletContextListener _servletContextListener;

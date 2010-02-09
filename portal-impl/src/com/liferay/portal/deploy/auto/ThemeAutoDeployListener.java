@@ -63,8 +63,8 @@ public class ThemeAutoDeployListener extends BaseAutoDeployListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ThemeAutoDeployListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ThemeAutoDeployListener.class);
 
 	private AutoDeployer _deployer;
 

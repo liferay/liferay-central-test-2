@@ -123,8 +123,8 @@ public abstract class AbstractSchedulingConfigurator
 			destinationName, null);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(AbstractSchedulingConfigurator.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		AbstractSchedulingConfigurator.class);
 
 	private MessageBus _messageBus;
 	private SchedulerEngine _schedulerEngine;

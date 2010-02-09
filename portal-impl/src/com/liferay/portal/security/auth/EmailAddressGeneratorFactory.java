@@ -72,8 +72,8 @@ public class EmailAddressGeneratorFactory {
 		_emailAddressGenerator = emailAddressGenerator;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(EmailAddressGeneratorFactory.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		EmailAddressGeneratorFactory.class);
 
 	private static EmailAddressGenerator _emailAddressGenerator = null;
 

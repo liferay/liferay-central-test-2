@@ -60,7 +60,7 @@ public class ClusterForwardMessageListener implements ClusterMessageListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ClusterForwardMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ClusterForwardMessageListener.class);
 
 }

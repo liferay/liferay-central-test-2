@@ -63,8 +63,8 @@ public class ExtAutoDeployListener extends BaseAutoDeployListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ExtAutoDeployListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ExtAutoDeployListener.class);
 
 	private AutoDeployer _deployer;
 

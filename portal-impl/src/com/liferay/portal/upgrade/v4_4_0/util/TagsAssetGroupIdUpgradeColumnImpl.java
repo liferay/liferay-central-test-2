@@ -142,8 +142,8 @@ public class TagsAssetGroupIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(TagsAssetGroupIdUpgradeColumnImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		TagsAssetGroupIdUpgradeColumnImpl.class);
 
 	private UpgradeColumn _classNameIdColumn;
 	private UpgradeColumn _classPKColumn;

@@ -314,8 +314,8 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		pageContext.setAttribute(_rowVar, _row);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(SearchContainerRowTag.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		SearchContainerRowTag.class);
 
 	private boolean _bold;
 	private String _className;

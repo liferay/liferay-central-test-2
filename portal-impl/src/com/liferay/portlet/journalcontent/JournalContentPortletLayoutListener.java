@@ -100,7 +100,7 @@ public class JournalContentPortletLayoutListener
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(JournalContentPortletLayoutListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalContentPortletLayoutListener.class);
 
 }

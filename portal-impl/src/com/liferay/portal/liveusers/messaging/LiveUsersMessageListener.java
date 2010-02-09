@@ -78,7 +78,7 @@ public class LiveUsersMessageListener implements MessageListener {
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(LiveUsersMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		LiveUsersMessageListener.class);
 
 }

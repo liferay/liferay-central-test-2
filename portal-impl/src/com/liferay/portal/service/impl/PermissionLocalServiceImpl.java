@@ -994,7 +994,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 					stopWatch.getTime() + " ms");
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PermissionLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PermissionLocalServiceImpl.class);
 
 }

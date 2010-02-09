@@ -93,8 +93,8 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 		return _phpDeployer;
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(PortletExplodedTomcatListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletExplodedTomcatListener.class);
 
 	private ExplodedTomcatDeployer _deployer;
 	private PHPPortletExplodedTomcatDeployer _phpDeployer;

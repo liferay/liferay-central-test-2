@@ -47,7 +47,7 @@ public class JndiObjectFactoryBean
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(JndiObjectFactoryBean.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JndiObjectFactoryBean.class);
 
 }
