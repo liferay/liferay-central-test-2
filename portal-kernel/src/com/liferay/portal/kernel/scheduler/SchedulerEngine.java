@@ -42,6 +42,10 @@ public interface SchedulerEngine {
 
 	public static final String DISABLE = "disable";
 
+	public static final int GROUP_NAME_MAX_LENGTH = 80;
+
+	public static final int JOB_NAME_MAX_LENGTH = 80;
+
 	public static final String MESSAGE = "message";
 
 	public static final String RECEIVER_KEY = "receiver_key";

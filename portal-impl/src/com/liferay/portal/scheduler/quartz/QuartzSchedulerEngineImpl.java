@@ -165,12 +165,12 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			String jobName = trigger.getJobName();
 			String groupName = trigger.getGroupName();
 
-			if (jobName.length() > _JOB_NAME_MAX_LENGTH) {
-				jobName = jobName.substring(0, _JOB_NAME_MAX_LENGTH);
+			if (jobName.length() > JOB_NAME_MAX_LENGTH) {
+				jobName = jobName.substring(0, JOB_NAME_MAX_LENGTH);
 			}
 
-			if (groupName.length() > _GROUP_NAME_MAX_LENGTH) {
-				groupName = groupName.substring(0, _GROUP_NAME_MAX_LENGTH);
+			if (groupName.length() > GROUP_NAME_MAX_LENGTH) {
+				groupName = groupName.substring(0, GROUP_NAME_MAX_LENGTH);
 			}
 
 			Trigger quartzTrigger = null;
@@ -334,10 +334,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	protected QuartzLocalService quartzLocalService;
 
 	private static final int _DESCRIPTION_MAX_LENGTH = 120;
-
-	private static final int _GROUP_NAME_MAX_LENGTH = 80;
-
-	private static final int _JOB_NAME_MAX_LENGTH = 80;
 
 	private Log _log = LogFactoryUtil.getLog(QuartzSchedulerEngineImpl.class);
 
