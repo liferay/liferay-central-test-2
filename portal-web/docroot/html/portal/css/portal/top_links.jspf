@@ -9,6 +9,7 @@
 
 .portlet-boundary .top-links .top-link {
 	border-right: 1px solid #bbb;
+	margin-right: 0.5em;
 	padding-right: 0.5em;
 }
 
