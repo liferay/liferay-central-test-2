@@ -90,7 +90,7 @@ for (SearchResult result : results) {
 	}
 
 	if (attribute != null) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("(&");
 		sb.append(groupFilter);

@@ -83,7 +83,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and description
 
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler();
 
 	String displayName = portlet.getDisplayName();
 	String title = PortalUtil.getPortletTitle(portlet, application, locale);
@@ -133,9 +133,8 @@ for (int i = 0; i < results.size(); i++) {
 	// Search index
 
 	if (showReindexButton) {
-		sb = new StringBuilder();
-
 		if (Validator.isNotNull(portlet.getIndexerClass())) {
+			sb.setIndex(0);
 			sb.append("<input onclick=\"");
 			sb.append(renderResponse.getNamespace());
 			sb.append("reindexPortlet('");
@@ -143,9 +142,11 @@ for (int i = 0; i < results.size(); i++) {
 			sb.append("');\" type=\"button\" value=\"");
 			sb.append(LanguageUtil.get(pageContext, "reindex"));
 			sb.append("\" />");
+			row.addText(sb.toString());
 		}
-
-		row.addText(sb.toString());
+		else {
+			row.addText(StringPool.BLANK);
+		}
 	}
 
 	// Add result row
