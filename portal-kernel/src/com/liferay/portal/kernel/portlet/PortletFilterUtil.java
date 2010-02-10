@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.util.ParamUtil;
+
 import java.io.IOException;
 
 import javax.portlet.ActionRequest;
@@ -36,8 +38,6 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.filter.FilterChain;
-
-import com.liferay.portal.kernel.util.ParamUtil;
 
 /**
  * <a href="PortletFilterUtil.java.html"><b><i>View Source</i></b></a>
