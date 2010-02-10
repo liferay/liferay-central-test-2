@@ -57,6 +57,7 @@ response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 %>
 
 <html>
+
 <head>
 	<title></title>
 	<meta content="1; url=<%= redirect %>" http-equiv="refresh" />
