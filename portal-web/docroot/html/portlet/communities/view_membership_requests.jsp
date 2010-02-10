@@ -106,6 +106,7 @@ for (int i = 0; i < results.size(); i++) {
 	// User
 
 	StringBundler sb = new StringBundler(4);
+
 	sb.append(user2.getFullName());
 	sb.append(" (");
 	sb.append(user2.getEmailAddress());
