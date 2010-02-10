@@ -34,7 +34,7 @@ AUI().add(
 
 		var TPL_PLACEHOLDER = '<div class="aui-tree-placeholder aui-tree-sub-placeholder"></div>';
 
-		var TPL_STRUCTURE_FIELD_INPUT = '<input class="principal-field-element lfr-input-text" type="text" value="" size="40"/>';
+		var TPL_STRUCTURE_FIELD_INPUT = '<input class="aui-field-input lfr-input-text" type="text" value="" size="40"/>';
 
 		var TPL_TOOLTIP_IMAGE = '<img align="top" class="journal-article-instructions-container" src="' + themeDisplay.getPathThemeImages() + '/portlet/help.png" />';
 
@@ -479,10 +479,6 @@ AUI().add(
 			closeEditFieldOptions: function() {
 				var instance = this;
 
-				var fieldsContainer = instance.getById('#journalArticleContainer');
-				var editContainerWrapper = instance.getById('#journalArticleEditFieldWrapper');
-				var structureTree = instance.getById('#structureTree')
-
 				instance.editContainerContextPanel.hide();
 
 				instance.unselectFields();
@@ -621,7 +617,6 @@ AUI().add(
 
 				var downloadAction = themeDisplay.getPathMain() + '/journal/get_article_content';
 				var auxForm = instance.getPrincipalForm('fm2');
-				var form = instance.getPrincipalForm();
 
 				var articleContent = instance.getArticleContentXML();
 				var xmlInput = instance.getByName(auxForm, 'xml', true);
@@ -662,7 +657,7 @@ AUI().add(
 			enableEditMode: function() {
 				var instance = this;
 
-				var articleHeaderEdit = instance.getById('articleHeaderEdit')
+				var articleHeaderEdit = instance.getById('articleHeaderEdit');
 				var editStructureBtn = instance.getById('editStructureBtn');
 				var fieldsContainer = instance.getById('#journalArticleContainer');
 				var journalComponentList = instance.getById('#journalComponentList');
@@ -835,7 +830,7 @@ AUI().add(
 
 				var structureTreeId = instance._guid('#structureTree');
 
-				return A.all(structureTreeId + ' li');
+				return A.all(structureTreeId + ' li:not(.parent-structure-field)');
 			},
 
 			getParentStructureId: function() {
@@ -890,7 +885,7 @@ AUI().add(
 						var structureId = structureIdInput.val();
 
 						if (!structureId) {
-							var autoGenerateId = dialogFields.saveStructureAutogenerateId.get('checked');
+							var autoGenerateId = dialogFields.saveStructureAutogenerateIdCheckbox.get('checked');
 
 							instance.addStructure(
 								dialogFields.dialogStructureId.val(),
@@ -936,8 +931,6 @@ AUI().add(
 					)
 					.render();
 
-					var dialogBody = A.Node.getDOMNode(instance._saveDialog.get('contentBox'));
-
 					instance._saveDialog.fields = {
 						autoGenerateIdMessage: Liferay.Language.get('autogenerate-id'),
 						contentXSD: '',
@@ -948,6 +941,7 @@ AUI().add(
 						loadDefaultStructure: instance.getById('loadDefaultStructure'),
 						messageElement: instance.getById('saveStructureMessage'),
 						saveStructureAutogenerateId: instance.getById('saveStructureAutogenerateId'),
+						saveStructureAutogenerateIdCheckbox: instance.getById('saveStructureAutogenerateIdCheckbox'),
 						showStructureIdContainer: instance.getById('showStructureIdContainer'),
 						structureIdContainer: instance.getById('structureIdContainer'),
 						structureNameLabel: instance.getById('structureNameLabel')
@@ -968,7 +962,7 @@ AUI().add(
 							dialogFields.dialogStructureName.val(message.name);
 							dialogFields.dialogDescription.val(message.description);
 							dialogFields.structureNameLabel.html(message.name);
-							dialogFields.saveStructureAutogenerateId.hide();
+							dialogFields.saveStructureAutogenerateIdCheckbox.hide();
 
 							if (dialogFields.loadDefaultStructure) {
 								dialogFields.loadDefaultStructure.show();
@@ -997,13 +991,15 @@ AUI().add(
 						}
 					};
 
-					dialogFields.saveStructureAutogenerateId.on(
+					dialogFields.saveStructureAutogenerateIdCheckbox.on(
 						'click',
 						function(event) {
 							var checkbox = event.target;
-							var isChecked = checkbox.attr('checked');
+							var value = checkbox.get('checked');
 
-							if (isChecked) {
+							dialogFields.saveStructureAutogenerateId.val(value);
+
+							if (value) {
 								dialogFields.dialogStructureId.attr('disabled', 'disabled').val(dialogFields.autoGenerateIdMessage);
 							}
 							else {
@@ -1015,14 +1011,7 @@ AUI().add(
 					dialogFields.showStructureIdContainer.on(
 						'click',
 						function(event) {
-							var isHidden = dialogFields.structureIdContainer.hasClass('aui-helper-hidden');
-
-							if (!isHidden) {
-								dialogFields.structureIdContainer.hide();
-							}
-							else {
-								dialogFields.structureIdContainer.show();
-							}
+							dialogFields.structureIdContainer.toggle();
 
 							event.halt();
 						}
@@ -1088,7 +1077,7 @@ AUI().add(
 
 				var componentContainer = source.one('div.journal-article-component-container');
 
-				return (componentContainer.one('.principal-field-element .aui-field-input') || componentContainer.one('.principal-field-element'));
+				return componentContainer.one('.aui-field-input');
 			},
 
 			getPrincipalForm: function(formName) {
@@ -1166,8 +1155,17 @@ AUI().add(
 				var id = source.get('id');
 				var fieldInstance = fieldsDataSet.item(id);
 
-				var check = function(checked) {
-					return checked ? 'checked' : '';
+				var check = function(hiddenField, checked) {
+					var id = hiddenField.get('id');
+					var checkbox = A.one('#' + id + 'Checkbox');
+
+					var value = A.DataType.Boolean.parse(checked);
+
+					hiddenField.val(value);
+
+					if (checkbox) {
+						checkbox.set('checked', value);
+					}
 				};
 
 				if (fieldInstance) {
@@ -1188,14 +1186,15 @@ AUI().add(
 						fieldTypeEl.attr('selected', 'selected');
 					}
 
-					displayAsTooltip.attr('checked', check(fieldInstance.get('displayAsTooltip')));
-					repeatable.attr('checked', check(fieldInstance.get('repeatable')));
-					localizedCheckbox.attr('checked', check(fieldInstance.get('localized')));
+					check(displayAsTooltip, fieldInstance.get('displayAsTooltip'));
+					check(localizedCheckbox, fieldInstance.get('localized'));
+					check(repeatable, fieldInstance.get('repeatable'));
+					check(required, fieldInstance.get('required'));
+
+					fieldLabel.val(fieldInstance.get('fieldLabel'));
 					instructions.val(fieldInstance.get('instructions'));
 					predefinedValue.val(fieldInstance.get('predefinedValue'));
-					required.attr('checked', check(fieldInstance.get('required')));
 					variableName.val(fieldInstance.get('variableName'));
-					fieldLabel.val(fieldInstance.get('fieldLabel'));
 
 					var elements = editContainerWrapper.all('input[type=text], textarea, input[type=checkbox]');
 
@@ -1238,7 +1237,6 @@ AUI().add(
 				var structureDescriptionInput = instance.getByName(form, 'structureDescription');
 
 				var structureId = structureIdInput.val();
-				var structureName = structureNameInput.val();
 
 				instance.getSaveDialog(
 					function(dialog) {
@@ -1256,6 +1254,8 @@ AUI().add(
 						}
 
 						dialog.show();
+
+						dialog._setAlignCenter(true);
 					}
 				);
 			},
@@ -1449,15 +1449,17 @@ AUI().add(
 
 				if (fieldInstance) {
 					var displayAsTooltip = instance.getById('displayAsTooltip');
+					var displayAsTooltipCheckbox = instance.getById('displayAsTooltipCheckbox');
 					var repeatable = instance.getById('repeatable');
+					var repeatableCheckbox = instance.getById('repeatableCheckbox');
 					var fieldType = instance.getById('fieldType');
-					var localized = instance.getById('localized');
 					var instructions = instance.getById('instructions');
 					var predefinedValue = instance.getById('predefinedValue');
 					var required = instance.getById('required');
+					var requiredCheckbox = instance.getById('requiredCheckbox');
 					var variableName = instance.getById('variableName');
 					var fieldLabel = instance.getById('fieldLabel');
-					var localizedCheckbox = instance.getById('localized');
+					var localizedCheckbox = instance.getById('localizedCheckbox');
 					var localized = source.one('.journal-article-localized');
 
 					if (localized) {
@@ -1492,14 +1494,14 @@ AUI().add(
 					if (canSave) {
 						A.each(
 							{
-								displayAsTooltip: displayAsTooltip.attr('checked'),
+								displayAsTooltip: displayAsTooltipCheckbox.attr('checked'),
 								fieldType: fieldType.val(),
 								instructions: instructions.val(),
 								localized: localizedCheckbox ? localizedCheckbox.attr('checked') : false,
 								localizedValue: localizedValue,
 								predefinedValue: predefinedValue.val(),
-								repeatable: repeatable.attr('checked'),
-								required: required.attr('checked')
+								repeatable: repeatableCheckbox.attr('checked'),
+								required: requiredCheckbox.attr('checked')
 							},
 							function(item, index, collection) {
 								fieldInstance.set(index, item);
@@ -1530,12 +1532,6 @@ AUI().add(
 
 			showMessage: function(selector, type, message, delay) {
 				var instance = this;
-
-				var journalMessage = selector;
-
-				if (!selector) {
-					journalMessage = instance._guid('journalMessage');
-				}
 
 				var journalMessage = A.one(selector);
 				var className = 'portlet-msg-' + (type || 'success');
@@ -1904,9 +1900,9 @@ AUI().add(
 				var editContainerCheckboxes = editContainerWrapper.all('input[type=checkbox]');
 				var editContainerInputs = editContainerWrapper.all('input[type=text]');
 				var editContainerTextareas = editContainerWrapper.all('textarea');
-				var editFieldCancelButton = editContainerWrapper.one('.cancel-button');
-				var editFieldCloseButton = editContainerWrapper.one('.close-button');
-				var editFieldSaveButton = editContainerWrapper.one('.save-button');
+				var editFieldCancelButton = editContainerWrapper.one('.cancel-button .aui-button-input');
+				var editFieldCloseButton = editContainerWrapper.one('.close-button .aui-button-input');
+				var editFieldSaveButton = editContainerWrapper.one('.save-button .aui-button-input');
 				var languageIdSelect = instance.getById('languageIdSelect');
 				var localizedCheckbox = instance.getById('localized');
 
@@ -1973,7 +1969,7 @@ AUI().add(
 			_attachDelegatedEvents: function() {
 				var instance = this;
 
-				var journalArticleContainerId = instance._guid('#journalArticleContainer')
+				var journalArticleContainerId = instance._guid('#journalArticleContainer');
 
 				var addListItem = function(event) {
 					var icon = event.currentTarget;
@@ -1989,7 +1985,10 @@ AUI().add(
 
 						options.each(
 							function(item, index, collection) {
-								if (item.text().toLowerCase() == key.toLowerCase()) {
+								var keyText = Lang.trim(key);
+								var itemText = Lang.trim(item.text());
+
+								if (itemText.toLowerCase() == keyText.toLowerCase()) {
 									item.remove();
 								}
 							}
@@ -2073,27 +2072,27 @@ AUI().add(
 					'click',
 					function(event) {
 						var button = event.currentTarget;
-						var imageWrapper = button.get('parentNode').one('.journal-image-wrapper');
-						var imageDelete = button.get('parentNode').one('.journal-image-delete');
+						var buttonValue = null;
+						var imagePreview = button.ancestor('.journal-image-preview');
+						var imageWrapper = imagePreview.one('.journal-image-wrapper');
+						var imageDelete = instance.getByName(imagePreview, 'journalImageDelete');
 
 						if (imageDelete.val() == '') {
 							imageDelete.val('delete');
 							imageWrapper.hide();
 
-							var buttonValue = Liferay.Language.get('cancel');
-
-							button.val(buttonValue);
+							buttonValue = Liferay.Language.get('cancel');
 						}
 						else {
 							imageDelete.val('');
 							imageWrapper.show();
 
-							var buttonValue = Liferay.Language.get('delete');
-
-							button.val(buttonValue);
+							buttonValue = Liferay.Language.get('delete');
 						}
+
+						button.val(buttonValue);
 					},
-					'.journal-image-delete-btn'
+					'[name="' + instance.portletNamespace + 'journalImageDeleteButton"]'
 				);
 
 				container.delegate(
@@ -2122,14 +2121,13 @@ AUI().add(
 				);
 
 				var _attachButtonInputSelector = function(id, title, handlerName) {
-					var buttonId = 'input.journal-' + id + '-button';
-					var textId = 'input.journal-' + id + '-text';
+					var buttonId = '.journal-' + id + '-button .aui-button-input';
 
 					container.delegate(
 						'click',
 						function(event) {
 							var button = event.currentTarget;
-							var input = button.get('parentNode').one(textId);
+							var input = button.ancestor('.journal-article-component-container').one('.aui-field-input');
 							var imageGalleryUrl = button.attr('data' + id + 'Url');
 
 							window[instance.portletNamespace + handlerName] = function(url) {
@@ -2327,7 +2325,7 @@ AUI().add(
 						else {
 							var content = fieldInstance.getContent(source) || '';
 
-							buffer.push('<![CDATA[' + content + ']]>')
+							buffer.push('<![CDATA[' + content + ']]>');
 						}
 
 						buffer.push(typeContent.closeTag);
@@ -2345,7 +2343,7 @@ AUI().add(
 				var type = fieldInstance.get('fieldType');
 				var optionsList = source.all('> .folder > .field-container > .journal-article-component-container > .journal-list-subfield option');
 
-		 		if (optionsList) {
+				if (optionsList) {
 					A.each(
 						optionsList,
 						function(item, index, collection) {
@@ -2554,8 +2552,6 @@ AUI().add(
 								}
 							);
 						}
-
-						var id = item.get('id');
 
 						fieldsDataSet.add(id, fieldInstance);
 					}
@@ -2841,6 +2837,12 @@ AUI().add(
 					);
 				},
 
+				canDrop: function() {
+					var instance = this;
+
+					return Journal.prototype.canDrop.apply(instance, arguments);
+				},
+
 				clone: function() {
 					var instance = this;
 
@@ -2884,16 +2886,26 @@ AUI().add(
 					return value;
 				},
 
+				getByName: function() {
+					var instance = this;
+
+					return Journal.prototype.getByName.apply(instance, arguments);
+				},
+
+				getComponentType: function() {
+					var instance = this;
+
+					return Journal.prototype.getComponentType.apply(instance, arguments);
+				},
+
 				getContent: function(source) {
 					var instance = this;
 
 					var content;
 					var type = instance.get('fieldType');
-					var id = source.get('id');
-					var fieldInstance = fieldsDataSet.item(id);
 					var componentContainer = source.one('div.journal-article-component-container');
 
-					var principalElement = componentContainer.one('.principal-field-element .aui-field-input') || componentContainer.one('.principal-field-element');
+					var principalElement = componentContainer.one('.aui-field-input');
 
 					if (type == 'boolean') {
 						content = principalElement.attr('checked');
@@ -2924,7 +2936,7 @@ AUI().add(
 					}
 					else if (type == 'image') {
 						var imageContent = componentContainer.one('.journal-image-content');
-						var imageDelete = componentContainer.one('.journal-image-delete');
+						var imageDelete = instance.getByName(componentContainer, 'journalImageDelete');
 
 						if (imageDelete && imageDelete.val() == 'delete') {
 							content = 'delete';
@@ -2977,9 +2989,13 @@ AUI().add(
 						var required = instance.get('required');
 						var variableName = instance.get('variableName');
 
-						source.attr('dataName', variableName);
-						source.attr('dataRequired', required);
-						source.attr('dataType', fieldType);
+						source.setAttribute('dataName', variableName);
+						source.setAttribute('dataRequired', required);
+						source.setAttribute('dataType', fieldType);
+
+						if (!instance.canDrop(source)) {
+							instance.fieldContainer.one('.folder-droppable').remove();
+						}
 					}
 
 					return instance.fieldContainer;

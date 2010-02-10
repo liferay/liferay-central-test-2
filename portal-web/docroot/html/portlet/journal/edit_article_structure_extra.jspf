@@ -29,9 +29,9 @@
 				<liferay-ui:message key="your-request-processed-successfully" />
 			</div>
 
-			<aui:input cssClass="save-structure-name lfr-input-text-container" label="structure-name" name="saveStructureStructureName" type="text" />
+			<aui:input cssClass="save-structure-name lfr-input-text-container" label="structure-name" name="saveStructureStructureName" size="50" type="text" />
 
-			<aui:input cssClass="save-structure-description" label="description" name="saveStructureStructureDescription" type="textarea" />
+			<aui:input cssClass="save-structure-description" cols="80" label="description" name="saveStructureStructureDescription" rows="6" type="textarea" />
 
 			<aui:a href="#" id="showStructureIdContainer"><liferay-ui:message key="change-structure-id" /> &raquo;</aui:a>
 
@@ -69,17 +69,17 @@
 				<aui:option label="selection-break" value="selection_break" />
 			</aui:select>
 
-			<aui:input cssClass="journal-edit-label" name="fieldLabel" type="text" />
+			<aui:input name="fieldLabel" type="text" />
 
-			<aui:input cssClass="text-input" name="predefinedValue" type="text" />
+			<aui:input name="predefinedValue" type="text" />
 
 			<fieldset class="user-instructions">
-				<aui:input cssClass="journal-edit-label" label="instructions-for-the-user" name="instructions" type="textarea" />
+				<aui:input label="instructions-for-the-user" name="instructions" type="textarea" />
 
 				<aui:input name="displayAsTooltip" type="checkbox" value="<%= true %>" />
 			</fieldset>
 
-			<aui:input cssClass="journal-edit-label" name="variableName" type="text" />
+			<aui:input name="variableName" type="text" />
 
 			<aui:input name="repeatable" type="checkbox" value="<%= true %>" />
 
@@ -101,23 +101,23 @@
 <div class="journal-fieldmodel-container" id="journalFieldModelContainer">
 	<aui:fieldset>
 		<div dataType="text">
-			<aui:input cssClass="principal-field-element lfr-input-text-container" label="" name="text" size="55" type="text" />
+			<aui:input cssClass="lfr-input-text-container" label="" name="text" size="55" type="text" />
 		</div>
 
 		<div dataType="text_area">
-			<aui:input cssClass="principal-field-element lfr-input-text-container" label="" name="textArea" size="55" type="text" />
+			<aui:input cssClass="lfr-input-text-container" label="" name="textArea" size="55" type="text" />
 		</div>
 
 		<div dataType="text_box">
-			<aui:input cols="60" cssClass="principal-field-element lfr-textarea-container" label="" name="textBox" rows="10" size="55" type="textarea" />
+			<aui:input cols="60" cssClass="lfr-textarea-container" label="" name="textBox" rows="10" size="55" type="textarea" />
 		</div>
 
 		<div dataType="image">
-			<aui:input cssClass="principal-field-element lfr-input-text-container flexible" label="" name="text" size="40" type="file" />
+			<aui:input cssClass="journal-image-field lfr-input-text-container flexible" label="" name="text"  size="40" type="file" />
 		</div>
 
 		<div dataType="image_gallery">
-			<aui:input cssClass="principal-field-element lfr-input-text-container journal-imagegallery-text" inlineField="<%= true %>" label="" name="text" size="55" type="text" />
+			<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="text" size="55" type="text" />
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectIGURL">
 				<portlet:param name="struts_action" value="/journal/select_image_gallery" />
@@ -128,7 +128,7 @@
 		</div>
 
 		<div dataType="document_library">
-			<aui:input cssClass="principal-field-element lfr-input-text-container journal-documentlibrary-text" inlineField="<%= true %>" label="" name="text" size="55" type="text" />
+			<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="text" size="55" type="text" />
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectDLURL">
 				<portlet:param name="struts_action" value="/journal/select_document_library" />
@@ -140,17 +140,17 @@
 
 		<div dataType="boolean">
 			<div class="journal-subfield">
-				<aui:input cssClass="journal-article-field-label principal-field-element" name="booleanField" type="checkbox" />
+				<aui:input cssClass="journal-article-field-label" name="booleanField" type="checkbox" />
 			</div>
 		</div>
 
 		<div dataType="selection_break">
-			<div class="principal-field-element separator"></div>
+			<div class="separator"></div>
 		</div>
 
 		<div dataType="list">
 			<div class="journal-list-subfield">
-				<aui:select cssClass="principal-field-element" inlineField="" label="" name="list" />
+				<aui:select inlineField="" label="" name="list" />
 
 				<span class="journal-icon-button journal-delete-field">
 					<liferay-ui:icon image="delete" /><liferay-ui:message key="delete-selected-value" />
@@ -172,7 +172,7 @@
 
 		<div dataType="multi-list">
 			<div class="journal-list-subfield">
-				<aui:select cssClass="principal-field-element" label="" multiple="true" name="multiList" />
+				<aui:select label="" multiple="true" name="multiList" />
 
 				<span class="journal-icon-button journal-delete-field">
 					<liferay-ui:icon image="delete" /><liferay-ui:message key="delete-selected-value" />
@@ -193,7 +193,7 @@
 		</div>
 
 		<div dataType="link_to_layout">
-			<aui:select cssClass="principal-field-element" label="" name="linkToLayout" showEmptyOption="<%= true %>">
+			<aui:select label="" name="linkToLayout" showEmptyOption="<%= true %>">
 
 				<%
 				LayoutLister layoutLister = new LayoutLister();

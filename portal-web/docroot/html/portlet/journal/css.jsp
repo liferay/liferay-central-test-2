@@ -510,10 +510,6 @@
 	margin-top: 10px;
 }
 
-.journal-article-edit-field .aui-field .text-input, .journal-article-edit-field .aui-field .textarea {
-	width: 98%;
-}
-
 .journal-article-edit-field .aui-field .textarea {
 	height: 6em;
 }
