@@ -698,7 +698,7 @@ else if (portletDisplay.isStateMax()) {
 	//}
 
 	if (portletDisplay.getId().startsWith("WSRP_")) {
-		urlBack = PortalUtil.getLayoutURL(themeDisplay);
+		urlBack = portletDisplay.getURLBack();
 	}
 	else {
 		urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
