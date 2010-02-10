@@ -160,7 +160,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 <%!
 private static final String _getFileEntryImage(DLFileEntry fileEntry, ThemeDisplay themeDisplay) {
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler(5);
 
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());

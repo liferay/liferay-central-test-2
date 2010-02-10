@@ -81,7 +81,7 @@ if (folder != null) {
 
 		// Name
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append("<img align=\"left\" border=\"0\" src=\"");
 		sb.append(themeDisplay.getPathThemeImages());
@@ -145,7 +145,7 @@ if (folder != null) {
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("javascript:opener.");
 		sb.append(renderResponse.getNamespace());
@@ -161,7 +161,7 @@ if (folder != null) {
 
 		// Title and description
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		sb.append(_getFileEntryImage(fileEntry, themeDisplay));
 		sb.append(fileEntry.getTitle());
