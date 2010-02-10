@@ -92,8 +92,8 @@ if (folder != null) {
 		int foldersCount = subfolderIds.size() - 1;
 		int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(groupId, subfolderIds);
 
-	row.addText(String.valueOf(foldersCount), rowURL);
-	row.addText(String.valueOf(imagesCount), rowURL);
+		row.addText(String.valueOf(foldersCount), rowURL);
+		row.addText(String.valueOf(imagesCount), rowURL);
 
 		// Add result row
 
@@ -150,7 +150,7 @@ if (folder != null) {
 
 		// Action
 
-	StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("opener.");
 		sb.append(renderResponse.getNamespace());

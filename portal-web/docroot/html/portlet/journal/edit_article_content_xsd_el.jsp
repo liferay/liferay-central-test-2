@@ -76,15 +76,12 @@ if (elRepeatable && !elRepeatablePrototype) {
 	css.append(" repeated-field ");
 }
 
-String parentStructureData = null;
+String parentStructureData = StringPool.BLANK;
 
 if (Validator.isNotNull(elParentStructureId)) {
 	parentStructureData = "dataParentStructureId='".concat(elParentStructureId).concat("'");
 
 	css.append(" parent-structure-field ");
-}
-else {
-	parentStructureData = StringPool.BLANK;
 }
 
 if (Validator.isNull(elContent) && Validator.isNotNull(elPredefinedValue)) {

@@ -135,6 +135,7 @@ for (int i = 0; i < results.size(); i++) {
 	if (showReindexButton) {
 		if (Validator.isNotNull(portlet.getIndexerClass())) {
 			sb.setIndex(0);
+
 			sb.append("<input onclick=\"");
 			sb.append(renderResponse.getNamespace());
 			sb.append("reindexPortlet('");
@@ -142,6 +143,7 @@ for (int i = 0; i < results.size(); i++) {
 			sb.append("');\" type=\"button\" value=\"");
 			sb.append(LanguageUtil.get(pageContext, "reindex"));
 			sb.append("\" />");
+
 			row.addText(sb.toString());
 		}
 		else {
