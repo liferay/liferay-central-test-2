@@ -275,7 +275,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 							userId, groupId, existingFileEntry.getFolderId(),
 							folderId, existingFileEntry.getName(),
 							fileEntry.getTitle(), fileEntry.getTitle(),
-							fileEntry.getDescription(),
+							fileEntry.getDescription(), null,
 							fileEntry.getExtraSettings(), is,
 							fileEntry.getSize(), serviceContext);
 				}
@@ -284,7 +284,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 						DLFileEntryLocalServiceUtil.addFileEntry(
 							fileEntry.getUuid(), userId, groupId, folderId,
 							fileEntry.getName(), fileEntry.getTitle(),
-							fileEntry.getDescription(),
+							fileEntry.getDescription(), null,
 							fileEntry.getExtraSettings(), is,
 							fileEntry.getSize(), serviceContext);
 				}
@@ -292,7 +292,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			else {
 				existingFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
 					null, userId, groupId, folderId, fileEntry.getName(),
-					fileEntry.getTitle(), fileEntry.getDescription(),
+					fileEntry.getTitle(), fileEntry.getDescription(), null,
 					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
 					serviceContext);
 			}

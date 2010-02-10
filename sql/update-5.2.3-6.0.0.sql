@@ -129,6 +129,7 @@ alter table DLFileShortcut add statusByUserId LONG;
 alter table DLFileShortcut add statusByUserName VARCHAR(75);
 alter table DLFileShortcut add statusDate DATE;
 
+alter table DLFileVersion add description STRING null;
 alter table DLFileVersion add status INTEGER;
 alter table DLFileVersion add statusByUserId LONG;
 alter table DLFileVersion add statusByUserName VARCHAR(75);

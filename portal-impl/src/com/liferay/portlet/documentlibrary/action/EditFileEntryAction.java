@@ -215,6 +215,8 @@ public class EditFileEntryAction extends PortletAction {
 
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String description = ParamUtil.getString(uploadRequest, "description");
+		String versionDescription = ParamUtil.getString(
+			uploadRequest, "versionDescription");
 
 		String extraSettings = PropertiesUtil.toString(
 			fileEntryForm.getExtraSettingsProperties());
@@ -234,7 +236,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
 				groupId, newFolderId, sourceFileName, title, description,
-				extraSettings, file, serviceContext);
+				versionDescription, extraSettings, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),
@@ -246,7 +248,8 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				groupId, folderId, newFolderId, name, sourceFileName, title,
-				description, extraSettings, file, serviceContext);
+				description, versionDescription, extraSettings, file,
+				serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

@@ -92,8 +92,8 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			String uuid, long userId, long groupId, long folderId, String name,
-			String title, String description, String extraSettings,
-			byte[] bytes, ServiceContext serviceContext)
+			String title, String description, String versionDescription,
+			String extraSettings, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (!PropsValues.WEBDAV_LITMUS) {
@@ -106,13 +106,14 @@ public class DLFileEntryLocalServiceImpl
 
 		return addFileEntry(
 			uuid, userId, groupId, folderId, name, title, description,
-			extraSettings, is, bytes.length, serviceContext);
+			versionDescription, extraSettings, is, bytes.length,
+			serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
 			String uuid, long userId, long groupId, long folderId, String name,
-			String title, String description, String extraSettings, File file,
-			ServiceContext serviceContext)
+			String title, String description, String versionDescription,
+			String extraSettings, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (!PropsValues.WEBDAV_LITMUS) {
@@ -127,7 +128,8 @@ public class DLFileEntryLocalServiceImpl
 
 			return addFileEntry(
 				uuid, userId, groupId, folderId, name, title, description,
-				extraSettings, is, file.length(), serviceContext);
+				versionDescription, extraSettings, is, file.length(),
+				serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
@@ -136,8 +138,9 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			String uuid, long userId, long groupId, long folderId, String name,
-			String title, String description, String extraSettings,
-			InputStream is, long size, ServiceContext serviceContext)
+			String title, String description, String versionDescription,
+			String extraSettings, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -205,7 +208,7 @@ public class DLFileEntryLocalServiceImpl
 		// File version
 
 		addFileVersion(
-			user, fileEntry, fileEntry.getVersion(),
+			user, fileEntry, fileEntry.getVersion(), null,
 			serviceContext.getStatus());
 
 		// Folder
@@ -306,7 +309,8 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry addOrOverwriteFileEntry(
 			long userId, long groupId, long folderId, String name,
 			String sourceName, String title, String description,
-			String extraSettings, File file, ServiceContext serviceContext)
+			String versionDescription, String extraSettings, File file,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -314,12 +318,13 @@ public class DLFileEntryLocalServiceImpl
 
 			return updateFileEntry(
 				userId, groupId, folderId, folderId, name, sourceName, title,
-				description, extraSettings, file, serviceContext);
+				description, versionDescription, extraSettings, file,
+				serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			return addFileEntry(
 				null, userId, groupId, folderId, name, title, description,
-				extraSettings, file, serviceContext);
+				versionDescription, extraSettings, file, serviceContext);
 		}
 	}
 
@@ -685,8 +690,8 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry updateFileEntry(
 			long userId, long groupId, long folderId, long newFolderId,
 			String name, String sourceFileName, String title,
-			String description, String extraSettings, byte[] bytes,
-			ServiceContext serviceContext)
+			String description, String versionDescription, String extraSettings,
+			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -699,14 +704,15 @@ public class DLFileEntryLocalServiceImpl
 
 		return updateFileEntry(
 			userId, groupId, folderId, newFolderId, name, sourceFileName, title,
-			description, extraSettings, is, size, serviceContext);
+			description, versionDescription, extraSettings, is, size,
+			serviceContext);
 	}
 
 	public DLFileEntry updateFileEntry(
 			long userId, long groupId, long folderId, long newFolderId,
 			String name, String sourceFileName, String title,
-			String description, String extraSettings, File file,
-			ServiceContext serviceContext)
+			String description, String versionDescription, String extraSettings,
+			File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -720,7 +726,8 @@ public class DLFileEntryLocalServiceImpl
 
 			return updateFileEntry(
 				userId, groupId, folderId, newFolderId, name, sourceFileName,
-				title, description, extraSettings, is, size, serviceContext);
+				title, description, versionDescription, extraSettings, is, size,
+				serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
@@ -730,8 +737,8 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry updateFileEntry(
 			long userId, long groupId, long folderId, long newFolderId,
 			String name, String sourceFileName, String title,
-			String description, String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			String description, String versionDescription, String extraSettings,
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -940,7 +947,9 @@ public class DLFileEntryLocalServiceImpl
 			return fileEntry;
 		}
 
-		addFileVersion(user, fileEntry, newVersion, serviceContext.getStatus());
+		addFileVersion(
+			user, fileEntry, newVersion, versionDescription,
+			serviceContext.getStatus());
 
 		// File entry
 
@@ -1089,7 +1098,8 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void addFileVersion(
-			User user, DLFileEntry fileEntry, double version, int status)
+			User user, DLFileEntry fileEntry, double version,
+			String description, int status)
 		throws SystemException {
 
 		long fileVersionId = counterLocalService.increment();
@@ -1113,6 +1123,7 @@ public class DLFileEntryLocalServiceImpl
 		fileVersion.setCreateDate(fileEntry.getModifiedDate());
 		fileVersion.setFolderId(fileEntry.getFolderId());
 		fileVersion.setName(fileEntry.getName());
+		fileVersion.setDescription(description);
 		fileVersion.setVersion(version);
 		fileVersion.setSize(fileEntry.getSize());
 		fileVersion.setStatus(status);

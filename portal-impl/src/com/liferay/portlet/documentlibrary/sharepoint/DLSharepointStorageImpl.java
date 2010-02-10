@@ -260,6 +260,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			long folderId = fileEntry.getFolderId();
 			String name = fileEntry.getName();
 			String description = fileEntry.getDescription();
+			String versionDescription = StringPool.BLANK;
 			String extraSettings = fileEntry.getExtraSettings();
 
 			InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
@@ -276,7 +277,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			fileEntry = DLFileEntryServiceUtil.updateFileEntry(
 				groupId, folderId, newParentFolderId, name, newName, newName,
-				description, extraSettings, bytes, serviceContext);
+				description, versionDescription, extraSettings, bytes,
+				serviceContext);
 
 			Tree documentTree = getFileEntryTree(
 				fileEntry, newParentFolderPath);
@@ -312,6 +314,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String name = getResourceName(documentPath);
 		String title = name;
 		String description = StringPool.BLANK;
+		String versionDescription = StringPool.BLANK;
 		String extraSettings = StringPool.BLANK;
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -333,8 +336,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				groupId, parentFolderId, parentFolderId, name, title, title,
-				description, extraSettings, sharepointRequest.getBytes(),
-				serviceContext);
+				description, versionDescription, extraSettings,
+				sharepointRequest.getBytes(), serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			File file = FileUtil.createTempFile(FileUtil.getExtension(name));
@@ -343,7 +346,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			DLFileEntryServiceUtil.addFileEntry(
 				groupId, parentFolderId, name, title, description,
-				extraSettings, file, serviceContext);
+				versionDescription, extraSettings, file, serviceContext);
 		}
 	}
 

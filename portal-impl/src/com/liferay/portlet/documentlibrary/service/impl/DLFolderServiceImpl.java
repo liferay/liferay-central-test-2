@@ -412,7 +412,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 			dlFileEntryService.addFileEntry(
 				destFolder.getGroupId(), destFolder.getFolderId(), name, title,
-				description, extraSettings, file, serviceContext);
+				description, null, extraSettings, file, serviceContext);
 
 			file.delete();
 		}

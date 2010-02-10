@@ -219,6 +219,7 @@
 
 		<column name="folderId" type="long" />
 		<column name="name" type="String" />
+		<column name="description" type="String" />
 		<column name="version" type="double" />
 		<column name="size" type="int" />
 		<column name="status" type="int" />
