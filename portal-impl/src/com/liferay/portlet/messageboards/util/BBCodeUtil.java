@@ -192,9 +192,14 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb.setIndex(0);
+			if (sb == null) {
+				sb = new StringBundler(preTag);
+			}
+			else {
+				sb.setIndex(0);
 
-			sb.append(preTag);
+				sb.append(preTag);
+			}
 
 			if (tag.hasParameter()) {
 				sb.append("<span style='color: ");
@@ -217,7 +222,14 @@ public class BBCodeUtil {
 			String mailto = GetterUtil.getString(
 				tag.getParameter(), tag.getElement().trim());
 
-			sb.setIndex(0);
+			if (sb == null) {
+				sb = new StringBundler(preTag);
+			}
+			else {
+				sb.setIndex(0);
+
+				sb.append(preTag);
+			}
 
 			sb.append(preTag);
 			sb.append("<a href='mailto: ");
@@ -233,9 +245,14 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb.setIndex(0);
+			if (sb == null) {
+				sb = new StringBundler(preTag);
+			}
+			else {
+				sb.setIndex(0);
 
-			sb.append(preTag);
+				sb.append(preTag);
+			}
 
 			if (tag.hasParameter()) {
 				sb.append("<span style='font-family: ");
@@ -255,9 +272,15 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb.setIndex(0);
+			if (sb == null) {
+				sb = new StringBundler(preTag);
+			}
+			else {
+				sb.setIndex(0);
 
-			sb.append(preTag);
+				sb.append(preTag);
+			}
+
 			sb.append("<img alt='' src='");
 			sb.append(tag.getElement().trim());
 			sb.append("' />");
@@ -272,9 +295,14 @@ public class BBCodeUtil {
 
 			String[] items = _getListItems(tag.getElement());
 
-			sb.setIndex(0);
+			if (sb == null) {
+				sb = new StringBundler(preTag);
+			}
+			else {
+				sb.setIndex(0);
 
-			sb.append(preTag);
+				sb.append(preTag);
+			}
 
 			if (tag.hasParameter() &&
 				listStyles.containsKey(tag.getParameter())) {
@@ -310,9 +338,14 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb.setIndex(0);
+			if (sb == null) {
+				sb = new StringBundler(preTag);
+			}
+			else {
+				sb.setIndex(0);
 
-			sb.append(preTag);
+				sb.append(preTag);
+			}
 
 			if (tag.hasParameter()) {
 				sb.append("<div class='quote-title'>");
@@ -332,9 +365,14 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			sb.setIndex(0);
+			if (sb == null) {
+				sb = new StringBundler(preTag);
+			}
+			else {
+				sb.setIndex(0);
 
-			sb.append(preTag);
+				sb.append(preTag);
+			}
 
 			if (tag.hasParameter()) {
 				Integer size = new Integer(
@@ -368,9 +406,15 @@ public class BBCodeUtil {
 			String url = GetterUtil.getString(
 				tag.getParameter(), tag.getElement().trim());
 
-			sb.setIndex(0);
+			if (sb == null) {
+				sb = new StringBundler(preTag);
+			}
+			else {
+				sb.setIndex(0);
 
-			sb.append(preTag);
+				sb.append(preTag);
+			}
+
 			sb.append("<a href='");
 			sb.append(url);
 			sb.append("'>");
