@@ -1,6 +1,6 @@
 <%
 /**
- * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@
 <%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.util.TextFormatter" %>
 
 <%
 long plid = ParamUtil.getLong(request, "p_l_id");
@@ -38,54 +39,56 @@ String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 %>
 
+<html>
 
-<%@ page import="com.liferay.util.TextFormatter" %><html>
-	<head>
-		<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<head>
+	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
-		<script type="text/javascript">
-			window.onload = function() {
-				initCkArea();
-			}
+	<script type="text/javascript">
+		function initCkArea(){
+			var textArea = document.getElementById("CKEditor1");
+			var ckEditor = CKEDITOR.instances.CKEditor1;
 
-			function initCkArea(){
-				var textArea = document.getElementById("CKEditor1");
-				var ckEditor = CKEDITOR.instances.CKEditor1;
+			textArea.value = parent.<%= HtmlUtil.escape(initMethod) %>();
 
-				textArea.value = parent.<%= HtmlUtil.escape(initMethod) %>();
+			CKEDITOR.config.toolbar = '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>';
+		}
 
-				<%
-				String formatedToolbar = TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M);
-				%>
+		function getHTML() {
+			return CKEDITOR.instances.CKEditor1.getData();
+		}
 
-				CKEDITOR.config.toolbar = '<%= formatedToolbar %>';
-			}
+		function getText() {
+			return CKEDITOR.instances.CKEditor1.getData();
+		}
 
-			function getHTML() {
-				return CKEDITOR.instances.CKEditor1.getData();
-			}
+		window.onload = function() {
+			initCkArea();
+		}
+	</script>
+</head>
 
-			function getText() {
-				return CKEDITOR.instances.CKEditor1.getData();
-			}
-		</script>
-	</head>
+<body>
 
-	<body>
-		<textarea id="CKEditor1" name="CKEditor1"></textarea>
+<textarea id="CKEditor1" name="CKEditor1"></textarea>
 
-		<script type="text/javascript">
+<script type="text/javascript">
 
-			<%
-			String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId));
-			%>
+	<%
+	String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId));
+	%>
 
-			CKEDITOR.replace('CKEditor1',{
-				filebrowserBrowseUrl : '/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
-				filebrowserUploadUrl : '/html/js/editor/ckeditor/editor/filemanager/browser/liferay/frmupload.html?Connector=<%= connectorURL %>'
-				})
-		</script>
-	</body>
+	CKEDITOR.replace(
+		'CKEditor1',
+		{
+			filebrowserBrowseUrl: '/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
+			filebrowserUploadUrl: '/html/js/editor/ckeditor/editor/filemanager/browser/liferay/frmupload.html?Connector=<%= connectorURL %>'
+		}
+	);
+</script>
+
+</body>
+
 </html>
 
 <%!
