@@ -196,7 +196,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 			// Name
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			sb.append(group.getName());
 
