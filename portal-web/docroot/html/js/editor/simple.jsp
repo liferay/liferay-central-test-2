@@ -35,6 +35,7 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 
 <head>
 	<title>Editor</title>
+
 	<script type="text/javascript">
 		function getHTML() {
 			return document.getElementById("textArea").value;

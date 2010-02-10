@@ -35,7 +35,9 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 
 <head>
 	<title>Editor</title>
+
 	<script src="tiny_mce/tiny_mce.js" type="text/javascript"></script>
+
 	<script type="text/javascript">
 		var onChangeCallbackCounter = 0;
 

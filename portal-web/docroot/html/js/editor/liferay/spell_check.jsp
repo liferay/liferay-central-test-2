@@ -42,6 +42,7 @@ List invalidWords = WordsUtil.checkSpelling(text);
 
 <head>
 	<title>Spell Check</title>
+
 	<style type="text/css">
 		.button { width: 100px; }
 	</style>

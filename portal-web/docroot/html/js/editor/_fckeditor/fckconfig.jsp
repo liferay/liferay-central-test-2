@@ -44,54 +44,54 @@ response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 FCKConfig.IncludeLatinEntities	= false ;
 
 FCKConfig.ToolbarSets["liferay"] = [
-	['Style','FontSize','-','TextColor','BGColor'],
-	['Bold','Italic','Underline','StrikeThrough'],
-	['Subscript','Superscript'],
+	['Style', 'FontSize', '-', 'TextColor', 'BGColor'],
+	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
+	['Subscript', 'Superscript'],
 	'/',
-	['Undo','Redo','-','Cut','Copy','Paste','PasteText','PasteWord','-','SelectAll','RemoveFormat'],
-	['Find','Replace','SpellCheck'],
-	['OrderedList','UnorderedList','-','Outdent','Indent'],
-	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteWord', '-', 'SelectAll', 'RemoveFormat'],
+	['Find', 'Replace', 'SpellCheck'],
+	['OrderedList', 'UnorderedList', '-', 'Outdent', 'Indent'],
+	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'],
 	'/',
 	['Source'],
-	['Link','Unlink','Anchor'],
-	['Image','Flash','Table','-','Smiley','SpecialChar']
-] ;
+	['Link', 'Unlink', 'Anchor'],
+	['Image', 'Flash', 'Table', '-', 'Smiley', 'SpecialChar']
+];
 
 FCKConfig.ToolbarSets["liferay-article"] = [
-	['Style','FontSize','-','TextColor','BGColor'],
-	['Bold','Italic','Underline','StrikeThrough'],
-	['Subscript','Superscript'],
+	['Style', 'FontSize', '-', 'TextColor', 'BGColor'],
+	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
+	['Subscript', 'Superscript'],
 	'/',
-	['Undo','Redo','-','Cut','Copy','Paste','PasteText','PasteWord','-','SelectAll','RemoveFormat'],
-	['Find','Replace','SpellCheck'],
-	['OrderedList','UnorderedList','-','Outdent','Indent'],
-	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteWord', '-', 'SelectAll', 'RemoveFormat'],
+	['Find', 'Replace', 'SpellCheck'],
+	['OrderedList', 'UnorderedList', '-', 'Outdent', 'Indent'],
+	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'],
 	'/',
 	['Source'],
-	['Link','Unlink','Anchor'],
-	['Image','Flash','Table','-','Smiley','SpecialChar','LiferayPageBreak']
-] ;
+	['Link', 'Unlink', 'Anchor'],
+	['Image', 'Flash', 'Table', '-', 'Smiley', 'SpecialChar', 'LiferayPageBreak']
+];
 
 FCKConfig.ToolbarSets["edit-in-place"] = [
 	['Style'],
-	['Bold','Italic','Underline','StrikeThrough'],
-	['Subscript','Superscript','SpecialChar'],
-	['Undo','Redo'],
+	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
+	['Subscript', 'Superscript', 'SpecialChar'],
+	['Undo', 'Redo'],
 	['SpellCheck'],
-	['OrderedList','UnorderedList','-','Outdent','Indent'],['Source','RemoveFormat'],
-] ;
+	['OrderedList', 'UnorderedList', '-', 'Outdent', 'Indent'], ['Source', 'RemoveFormat'],
+];
 
 FCKConfig.ToolbarSets["email"] = [
-	['FontSize','TextColor','BGColor','-','Bold','Italic','Underline','StrikeThrough'],
-	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+	['FontSize', 'TextColor', 'BGColor', '-', 'Bold', 'Italic', 'Underline', 'StrikeThrough'],
+	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'],
 	['SpellCheck'],
 	'/',
-	['Undo','Redo','-','Cut','Copy','Paste','PasteText','PasteWord','-','SelectAll','RemoveFormat'],
+	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteWord', '-', 'SelectAll', 'RemoveFormat'],
 	['Source'],
-	['Link','Unlink'],
+	['Link', 'Unlink'],
 	['Image']
-] ;
+];
 
 FCKConfig.BackgroundBlockerColor = '#000' ;
 FCKConfig.BackgroundBlockerOpacity = 0.70 ;

@@ -44,6 +44,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 
 <head>
 	<title>Editor</title>
+
 	<style type="text/css">
 		.button {
 			border-bottom: #E5E4E8 1px solid;

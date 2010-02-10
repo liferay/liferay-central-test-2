@@ -26,6 +26,7 @@
 
 <head>
 	<title>Emotion</title>
+
 	<script type="text/javascript">
 		function insertEmotion(emotion) {
 			opener.insertHTML("<img align=\"absmiddle\" border=\"0\" src=\"../js/editor/liferay/images/emotion_" + emotion + ".gif\">");
