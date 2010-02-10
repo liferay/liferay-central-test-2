@@ -37,6 +37,8 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.filter.FilterChain;
 
+import com.liferay.portal.kernel.util.ParamUtil;
+
 /**
  * <a href="PortletFilterUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -54,6 +56,10 @@ public class PortletFilterUtil {
 			ActionResponse actionResponse = (ActionResponse)portletResponse;
 
 			filterChain.doFilter(actionRequest, actionResponse);
+
+			if (ParamUtil.getBoolean(actionRequest, "wsrp")) {
+				actionResponse.setRenderParameter("wsrp", "1");
+			}
 		}
 		else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
 			EventRequest eventRequest = (EventRequest)portletRequest;
