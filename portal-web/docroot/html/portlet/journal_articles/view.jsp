@@ -97,7 +97,7 @@ double version = ParamUtil.getDouble(request, "version");
 			String rowHREF = null;
 
 			if (pageURL.equals("popUp")) {
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler(7);
 
 				sb.append(themeDisplay.getPathMain());
 				sb.append("/journal_articles/view_article_content?groupId=");
