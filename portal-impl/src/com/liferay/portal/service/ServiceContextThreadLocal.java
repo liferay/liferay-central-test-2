@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,7 +25,7 @@ package com.liferay.portal.service;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
- * <a href="ServiceContextThreadLocal.java.html}"><b><i>View Source</i></b></a>
+ * <a href="ServiceContextThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
@@ -35,18 +35,11 @@ public class ServiceContextThreadLocal {
 		return _serviceContextThreadLocal.get();
 	}
 
-	public static void setServiceContext(
-		ServiceContext serviceContext) {
-
+	public static void setServiceContext(ServiceContext serviceContext) {
 		_serviceContextThreadLocal.set(serviceContext);
 	}
 
-	public static void reset() {
-		_serviceContextThreadLocal.remove();
-	}
-
-	private static ThreadLocal<ServiceContext>
-		_serviceContextThreadLocal =
-			new AutoResetThreadLocal<ServiceContext>();
+	private static ThreadLocal<ServiceContext> _serviceContextThreadLocal =
+		new AutoResetThreadLocal<ServiceContext>();
 
 }

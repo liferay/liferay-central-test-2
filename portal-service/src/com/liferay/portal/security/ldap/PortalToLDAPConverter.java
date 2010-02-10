@@ -43,8 +43,7 @@ public interface PortalToLDAPConverter {
 
 	public Modifications getLDAPContactModifications(
 			Contact contact, Map<String, Serializable> contactExpandoAttributes,
-			Properties contactMappings,
-			Properties contactExpandoMappings)
+			Properties contactMappings, Properties contactExpandoMappings)
 		throws Exception;
 
 	public Attributes getLDAPUserAttributes(
@@ -53,8 +52,7 @@ public interface PortalToLDAPConverter {
 
 	public Modifications getLDAPUserModifications(
 			User user, Map<String, Serializable> userExpandoAttributes,
-			Properties userMappings,
-			Properties userExpandoMappings)
+			Properties userMappings, Properties userExpandoMappings)
 		throws Exception;
 
 	public String getUserDNName(

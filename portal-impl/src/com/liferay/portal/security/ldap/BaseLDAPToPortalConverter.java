@@ -162,8 +162,7 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 		user.setPasswordUnencrypted(password);
 		user.setScreenName(screenName);
 
-		//	Custom attributes
-		Map<String, String> userExpandoData = getExpandoData(
+		Map<String, String> userExpandoAttributes = getExpandoAttributes(
 			attributes, userExpandoMappings);
 
 		Contact contact = new ContactImpl();
@@ -175,8 +174,7 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 		contact.setPrefixId(prefixId);
 		contact.setSuffixId(suffixId);
 
-		//	Custom attributes
-		Map<String, String> contactExpandoData = getExpandoData(
+		Map<String, String> contactExpandoAttributes = getExpandoAttributes(
 			attributes, contactExpandoMappings);
 
 		LDAPUser ldapUser = new LDAPUser();
@@ -184,7 +182,7 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 		ldapUser.setAutoPassword(autoPassword);
 		ldapUser.setAutoScreenName(autoScreenName);
 		ldapUser.setContact(contact);
-		ldapUser.setContactExpandoData(contactExpandoData);
+		ldapUser.setContactExpandoAttributes(contactExpandoAttributes);
 		ldapUser.setCreatorUserId(creatorUserId);
 		ldapUser.setGroupIds(groupIds);
 		ldapUser.setOrganizationIds(organizationIds);
@@ -194,31 +192,31 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 		ldapUser.setServiceContext(serviceContext);
 		ldapUser.setUpdatePassword(updatePassword);
 		ldapUser.setUser(user);
-		ldapUser.setUserExpandoData(userExpandoData);
+		ldapUser.setUserExpandoAttributes(userExpandoAttributes);
 		ldapUser.setUserGroupIds(userGroupIds);
 		ldapUser.setUserGroupRoles(userGroupRoles);
 
 		return ldapUser;
 	}
 
-	protected Map<String, String> getExpandoData(
+	protected Map<String, String> getExpandoAttributes(
 			Attributes attributes, Properties expandoMappings)
 		throws NamingException {
 
-		Map<String, String> expandoData =
-			new HashMap<String, String>();
+		Map<String, String> expandoAttributes = new HashMap<String, String>();
 
-		for (Object expandoMappingName : expandoMappings.keySet()) {
-			String attribute =
-				LDAPUtil.getAttributeValue(
-					attributes,	expandoMappings.getProperty(
-						(String) expandoMappingName));
+		for (Object key : expandoMappings.keySet()) {
+			String name = (String)key;
 
-			if (Validator.isNotNull(attribute)) {
-				expandoData.put((String) expandoMappingName, attribute);
+			String value = LDAPUtil.getAttributeValue(
+				attributes,	expandoMappings, name);
+
+			if (Validator.isNotNull(value)) {
+				expandoAttributes.put(name, value);
 			}
 		}
-		return expandoData;
+
+		return expandoAttributes;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

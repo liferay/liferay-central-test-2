@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
@@ -241,14 +242,11 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		Properties userMappings = LDAPSettingsUtil.getUserMappings(
 			ldapServerId, companyId);
-
-		Properties contactMappings = LDAPSettingsUtil.getContactMappings(
-			ldapServerId, companyId);
-
 		Properties userExpandoMappings =
 			LDAPSettingsUtil.getUserExpandoMappings(
 				ldapServerId, companyId);
-
+		Properties contactMappings = LDAPSettingsUtil.getContactMappings(
+			ldapServerId, companyId);
 		Properties contactExpandoMappings =
 			LDAPSettingsUtil.getContactExpandoMappings(ldapServerId, companyId);
 
@@ -553,23 +551,23 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 	}
 
 	protected void populateExpandoAttributes(
-		ExpandoBridge expandoBridge, Map<String, String> expandoData) {
+		ExpandoBridge expandoBridge, Map<String, String> expandoAttributes) {
 
 		for (Map.Entry<String, String> expandoAttribute :
-			expandoData.entrySet()) {
+				expandoAttributes.entrySet()) {
 
-			if (expandoBridge.hasAttribute(expandoAttribute.getKey())) {
-				int type = expandoBridge.getAttributeType(
-					expandoAttribute.getKey());
+			String name = expandoAttribute.getKey();
 
-				Serializable expandoValue =
-					ExpandoConverterUtil.
-						getAttributeFromString(
-							type, expandoAttribute.getValue());
-
-				expandoBridge.setAttribute(
-					expandoAttribute.getKey(), expandoValue);
+			if (!expandoBridge.hasAttribute(name)) {
+				continue;
 			}
+
+			int type = expandoBridge.getAttributeType(name);
+
+			Serializable value = ExpandoConverterUtil.getAttributeFromString(
+				type, expandoAttribute.getValue());
+
+			expandoBridge.setAttribute(name, value);
 		}
 	}
 
@@ -577,13 +575,14 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		ExpandoBridge userExpandoBridge = user.getExpandoBridge();
 
 		populateExpandoAttributes(
-			userExpandoBridge, ldapUser.getUserExpandoData());
+			userExpandoBridge, ldapUser.getUserExpandoAttributes());
 
-		ExpandoBridge contactExpandoBridge =
-			user.getContact().getExpandoBridge();
+		Contact contact = user.getContact();
+
+		ExpandoBridge contactExpandoBridge = contact.getExpandoBridge();
 
 		populateExpandoAttributes(
-			contactExpandoBridge , ldapUser.getContactExpandoData());
+			contactExpandoBridge , ldapUser.getContactExpandoAttributes());
 	}
 
 	protected User updateLiferayUser(

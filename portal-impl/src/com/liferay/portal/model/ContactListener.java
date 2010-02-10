@@ -60,19 +60,21 @@ public class ContactListener extends BaseModelListener<Contact> {
 	}
 
 	protected void exportToLDAP(Contact contact) throws Exception {
-		if (!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-			ServiceContext context =
-				ServiceContextThreadLocal.getServiceContext();
-
-			Map<String, Serializable> expandoBridgeAttributes = null;
-			if (context != null) {
-				expandoBridgeAttributes =
-					context.getExpandoBridgeAttributes();
-			}
-
-			PortalLDAPExporterUtil.exportToLDAP(
-				contact, expandoBridgeAttributes);
+		if (LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
+			return;
 		}
+
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		Map<String, Serializable> expandoBridgeAttributes = null;
+
+		if (serviceContext != null) {
+			expandoBridgeAttributes =
+				serviceContext.getExpandoBridgeAttributes();
+		}
+
+		PortalLDAPExporterUtil.exportToLDAP(contact, expandoBridgeAttributes);
 	}
 
 }

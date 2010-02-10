@@ -37,11 +37,11 @@ import java.util.Map;
 public interface PortalLDAPExporter {
 
 	public void exportToLDAP(
-		Contact contact, Map<String, Serializable> contactExpandoAttributes)
+			Contact contact, Map<String, Serializable> contactExpandoAttributes)
 		throws Exception;
 
 	public void exportToLDAP(
-		User user, Map<String, Serializable> userExpandoAttributes)
+			User user, Map<String, Serializable> userExpandoAttributes)
 		throws Exception;
 
 }

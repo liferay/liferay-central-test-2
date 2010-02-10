@@ -813,9 +813,9 @@ public interface PropsKeys {
 
 	public static final String LDAP_BASE_PROVIDER_URL = "ldap.base.provider.url";
 
-	public static final String LDAP_CONTACT_MAPPINGS = "ldap.contact.mappings";
+	public static final String LDAP_CONTACT_CUSTOM_MAPPINGS = "ldap.contact.custom.mappings";
 
-	public static final String LDAP_CONTACT_CUSTOM_ATTRIBUTE_MAPPINGS = "ldap.contact.custom.attribute.mappings";
+	public static final String LDAP_CONTACT_MAPPINGS = "ldap.contact.mappings";
 
 	public static final String LDAP_ERROR_PASSWORD_AGE = "ldap.error.password.age";
 
@@ -865,13 +865,13 @@ public interface PropsKeys {
 
 	public static final String LDAP_SERVER_NAME = "ldap.server.name";
 
+	public static final String LDAP_USER_CUSTOM_MAPPINGS = "ldap.user.custom.mappings";
+
 	public static final String LDAP_USER_DEFAULT_OBJECT_CLASSES = "ldap.user.default.object.classes";
 
 	public static final String LDAP_USER_IMPL = "ldap.user.impl";
 
 	public static final String LDAP_USER_MAPPINGS = "ldap.user.mappings";
-
-	public static final String LDAP_USER_CUSTOM_ATTRIBUTE_MAPPINGS = "ldap.user.custom.attribute.mappings";
 
 	public static final String LDAP_USERS_DN = "ldap.users.dn";
 
@@ -1218,7 +1218,7 @@ public interface PropsKeys {
 	public static final String RELEASE_INFO_BUILD_NUMBER = "release.info.build.number";
 
 	public static final String RELEASE_INFO_PREVIOUS_BUILD_NUMBER = "release.info.previous.build.number";
-	
+
 	public static final String REQUEST_SHARED_ATTRIBUTES = "request.shared.attributes";
 
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";

@@ -77,6 +77,21 @@ public class LDAPSettingsUtil {
 		return filter;
 	}
 
+	public static Properties getContactExpandoMappings(
+			long ldapServerId, long companyId)
+		throws Exception {
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		Properties contactExpandoMappings = PropertiesUtil.load(
+			PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_CONTACT_CUSTOM_MAPPINGS + postfix));
+
+		LogUtil.debug(_log, contactExpandoMappings);
+
+		return contactExpandoMappings;
+	}
+
 	public static Properties getContactMappings(
 		long ldapServerId, long companyId)
 		throws IOException, SystemException {
@@ -90,22 +105,6 @@ public class LDAPSettingsUtil {
 		LogUtil.debug(_log, contactMappings);
 
 		return contactMappings;
-	}
-
-	public static Properties getContactExpandoMappings(
-			long ldapServerId, long companyId)
-		throws Exception {
-
-		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-
-		Properties contactExpandoMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(
-				companyId,
-				PropsKeys.LDAP_CONTACT_CUSTOM_ATTRIBUTE_MAPPINGS + postfix));
-
-		LogUtil.debug(_log, contactExpandoMappings);
-
-		return contactExpandoMappings;
 	}
 
 	public static Properties getGroupMappings(long ldapServerId, long companyId)
@@ -131,15 +130,14 @@ public class LDAPSettingsUtil {
 	}
 
 	public static Properties getUserExpandoMappings(
-		long ldapServerId, long companyId)
+			long ldapServerId, long companyId)
 		throws Exception {
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		Properties userExpandoMappings = PropertiesUtil.load(
 			PrefsPropsUtil.getString(
-				companyId,
-				PropsKeys.LDAP_USER_CUSTOM_ATTRIBUTE_MAPPINGS + postfix));
+				companyId, PropsKeys.LDAP_USER_CUSTOM_MAPPINGS + postfix));
 
 		LogUtil.debug(_log, userExpandoMappings);
 

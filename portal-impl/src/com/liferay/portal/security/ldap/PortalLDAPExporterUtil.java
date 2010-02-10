@@ -41,12 +41,14 @@ public class PortalLDAPExporterUtil {
 	public static void exportToLDAP(
 			Contact contact, Map<String, Serializable> contactExpandoAttributes)
 		throws Exception {
+
 		_portalLDAPExporter.exportToLDAP(contact, contactExpandoAttributes);
 	}
 
 	public static void exportToLDAP(
 			User user, Map<String, Serializable> userExpandoAttributes)
 		throws Exception {
+
 		_portalLDAPExporter.exportToLDAP(user, userExpandoAttributes);
 	}
 

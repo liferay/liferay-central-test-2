@@ -80,9 +80,8 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 			contact, contactMappings, _reservedContactFieldNames);
 
 		populateCustomAttributeModifications(
-			contact, contact.getExpandoBridge(),
-			contactExpandoAttributes, contactExpandoMappings,
-			modifications);
+			contact, contact.getExpandoBridge(), contactExpandoAttributes,
+			contactExpandoMappings, modifications);
 
 		return modifications;
 	}
@@ -247,13 +246,12 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 		Map<String, Serializable> expandoAttributes,
 		Properties expandoMappings, Modifications modifications) {
 
-		if ((expandoAttributes == null) || (expandoAttributes.isEmpty())) {
+		if ((expandoAttributes == null) || expandoAttributes.isEmpty()) {
 			return;
 		}
 
 		for (Map.Entry<Object, Object> entry : expandoMappings.entrySet()) {
 			String fieldName = (String)entry.getKey();
-
 			String ldapAttributeName = (String)entry.getValue();
 
 			Serializable fieldValue = expandoAttributes.get(fieldName);
@@ -265,12 +263,10 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 			try {
 				int type = expandoBridge.getAttributeType(fieldName);
 
-				String value =
-					ExpandoConverterUtil.getStringFromAttribute(
-						type, fieldValue);
+				String value = ExpandoConverterUtil.getStringFromAttribute(
+					type, fieldValue);
 
-				addModificationItem(
-					ldapAttributeName, value, modifications);
+				addModificationItem(ldapAttributeName, value, modifications);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

@@ -60,20 +60,23 @@ public class UserListener extends BaseModelListener<User> {
 	}
 
 	protected void exportToLDAP(User user) throws Exception {
-		if (!user.isDefaultUser() &&
-			!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
+		if (user.isDefaultUser() ||
+			LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
 
-			ServiceContext context =
-				ServiceContextThreadLocal.getServiceContext();
-
-			Map<String, Serializable> expandoBridgeAttributes = null;
-			if (context != null) {
-				expandoBridgeAttributes =
-					context.getExpandoBridgeAttributes();
-			}
-
-			PortalLDAPExporterUtil.exportToLDAP(user, expandoBridgeAttributes);
+			return;
 		}
+
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		Map<String, Serializable> expandoBridgeAttributes = null;
+
+		if (serviceContext != null) {
+			expandoBridgeAttributes =
+				serviceContext.getExpandoBridgeAttributes();
+		}
+
+		PortalLDAPExporterUtil.exportToLDAP(user, expandoBridgeAttributes);
 	}
 
 }

@@ -49,8 +49,9 @@ import javax.naming.ldap.LdapContext;
 public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 	public void exportToLDAP(
-		Contact contact, Map<String, Serializable> contactExpandoAttributes)
+			Contact contact, Map<String, Serializable> contactExpandoAttributes)
 		throws Exception {
+
 		long companyId = contact.getCompanyId();
 
 		if (!LDAPSettingsUtil.isAuthEnabled(companyId) ||
@@ -75,7 +76,6 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 			Properties contactMappings = LDAPSettingsUtil.getContactMappings(
 				ldapServerId, companyId);
-
 			Properties contactExpandoMappings =
 				LDAPSettingsUtil.getContactExpandoMappings(
 					ldapServerId, companyId);
@@ -117,7 +117,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 	}
 
 	public void exportToLDAP(
-		User user, Map<String, Serializable> userExpandoAttributes)
+			User user, Map<String, Serializable> userExpandoAttributes)
 		throws Exception {
 
 		long companyId = user.getCompanyId();
@@ -141,7 +141,6 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 			Properties userMappings = LDAPSettingsUtil.getUserMappings(
 				ldapServerId, companyId);
-
 			Properties userExpandoMappings =
 				LDAPSettingsUtil.getUserExpandoMappings(
 					ldapServerId, companyId);
@@ -162,8 +161,8 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 			Modifications modifications =
 				_portalToLDAPConverter.getLDAPUserModifications(
-					user, userExpandoAttributes,
-					userMappings, userExpandoMappings);
+					user, userExpandoAttributes, userMappings,
+					userExpandoMappings);
 
 			ModificationItem[] modificationItems = modifications.getItems();
 
