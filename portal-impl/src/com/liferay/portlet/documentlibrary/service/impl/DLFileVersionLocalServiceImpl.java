@@ -79,12 +79,11 @@ public class DLFileVersionLocalServiceImpl
 	}
 
 	public DLFileVersion updateDescription(
-			long groupId, long folderId, String name, double version,
-			String description)
+			long fileVersionId, String description)
 		throws PortalException, SystemException {
 
-		DLFileVersion fileVersion = dlFileVersionPersistence.findByG_F_N_V(
-			groupId, folderId, name, version);
+		DLFileVersion fileVersion = dlFileVersionPersistence.findByPrimaryKey(
+			fileVersionId);
 
 		fileVersion.setDescription(description);
 

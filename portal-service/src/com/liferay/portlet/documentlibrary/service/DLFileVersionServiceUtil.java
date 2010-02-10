@@ -46,13 +46,10 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class DLFileVersionServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateDescription(
-		long groupId, long folderId, java.lang.String name, double version,
-		java.lang.String description)
+		long fileVersionId, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-				   .updateDescription(groupId, folderId, name, version,
-			description);
+		return getService().updateDescription(fileVersionId, description);
 	}
 
 	public static DLFileVersionService getService() {

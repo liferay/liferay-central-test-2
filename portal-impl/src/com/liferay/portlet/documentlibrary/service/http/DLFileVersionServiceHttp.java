@@ -24,7 +24,6 @@ package com.liferay.portlet.documentlibrary.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.DoubleWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -72,34 +71,21 @@ import com.liferay.portlet.documentlibrary.service.DLFileVersionServiceUtil;
  */
 public class DLFileVersionServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateDescription(
-		HttpPrincipal httpPrincipal, long groupId, long folderId,
-		java.lang.String name, double version, java.lang.String description)
+		HttpPrincipal httpPrincipal, long fileVersionId,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = new LongWrapper(fileVersionId);
 
-			Object paramObj1 = new LongWrapper(folderId);
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new DoubleWrapper(version);
-
-			Object paramObj4 = description;
+			Object paramObj1 = description;
 
 			if (description == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileVersionServiceUtil.class.getName(),
-					"updateDescription",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					"updateDescription", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 

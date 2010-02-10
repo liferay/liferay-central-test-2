@@ -37,15 +37,19 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermiss
 public class DLFileVersionServiceImpl extends DLFileVersionServiceBaseImpl {
 
 	public DLFileVersion updateDescription(
-			long groupId, long folderId, String name, double version,
-			String description)
+			long fileVersionId, String description)
 		throws PortalException, SystemException {
 
+		DLFileVersion fileVersion = dlFileVersionPersistence.findByPrimaryKey(
+			fileVersionId);
+
 		DLFileEntryPermission.check(
-			getPermissionChecker(), groupId, folderId, name, ActionKeys.UPDATE);
+			getPermissionChecker(), fileVersion.getGroupId(),
+			fileVersion.getFolderId(), fileVersion.getName(),
+			ActionKeys.UPDATE);
 
 		return dlFileVersionLocalService.updateDescription(
-			groupId, folderId, name, version, description);
+			fileVersionId, description);
 	}
 
 }

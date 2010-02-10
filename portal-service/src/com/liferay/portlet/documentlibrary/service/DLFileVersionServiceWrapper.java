@@ -46,12 +46,11 @@ public class DLFileVersionServiceWrapper implements DLFileVersionService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion updateDescription(
-		long groupId, long folderId, java.lang.String name, double version,
-		java.lang.String description)
+		long fileVersionId, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _dlFileVersionService.updateDescription(groupId, folderId, name,
-			version, description);
+		return _dlFileVersionService.updateDescription(fileVersionId,
+			description);
 	}
 
 	public DLFileVersionService getWrappedDLFileVersionService() {

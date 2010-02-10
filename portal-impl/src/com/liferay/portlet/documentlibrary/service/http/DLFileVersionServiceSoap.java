@@ -81,11 +81,11 @@ import java.rmi.RemoteException;
  */
 public class DLFileVersionServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersionSoap updateDescription(
-		long groupId, long folderId, java.lang.String name, double version,
-		java.lang.String description) throws RemoteException {
+		long fileVersionId, java.lang.String description)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileVersion returnValue = DLFileVersionServiceUtil.updateDescription(groupId,
-					folderId, name, version, description);
+			com.liferay.portlet.documentlibrary.model.DLFileVersion returnValue = DLFileVersionServiceUtil.updateDescription(fileVersionId,
+					description);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileVersionSoap.toSoapModel(returnValue);
 		}
