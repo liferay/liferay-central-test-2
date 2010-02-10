@@ -83,16 +83,10 @@ public class ServerDetector {
 				if (_serverId == null) {
 					_serverId = JETTY_ID;
 				}
-				else {
-					_serverId += "-" + JETTY_ID;
-				}
 			}
 			else if (isTomcat()) {
 				if (_serverId == null) {
 					_serverId = TOMCAT_ID;
-				}
-				else {
-					_serverId += "-" + TOMCAT_ID;
 				}
 			}
 
