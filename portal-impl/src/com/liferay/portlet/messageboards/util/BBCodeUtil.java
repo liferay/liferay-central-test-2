@@ -144,7 +144,7 @@ public class BBCodeUtil {
 
 		BBCodeTag tag = null;
 
-		StringBundler sb = new StringBundler(html.length());
+		StringBundler sb = null;
 
 		while ((tag = getFirstTag(html, "code")) != null) {
 			String preTag = html.substring(0, tag.getStartPos());
@@ -155,9 +155,7 @@ public class BBCodeUtil {
 			String[] lines = code.split("\\n");
 			int digits = String.valueOf(lines.length + 1).length();
 
-			sb.setIndex(0);
-
-			sb.append(preTag);
+			sb = new StringBundler(preTag);
 
 			sb.append("<div class='code'>");
 
