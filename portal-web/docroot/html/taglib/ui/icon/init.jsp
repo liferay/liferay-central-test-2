@@ -65,6 +65,7 @@ if (Validator.isNull(src)) {
 	}
 	else {
 		src = themeDisplay.getPathThemeImages() + "/common/" + image + ".png";
+		src = StringUtil.replace(src, "common/../", "");
 	}
 }
 
