@@ -1373,6 +1373,7 @@
 			</basic>
 			<basic name="folderId" />
 			<basic name="name" />
+			<basic name="description" />
 			<basic name="version" />
 			<basic name="size">
 				<column name="SIZE_" />

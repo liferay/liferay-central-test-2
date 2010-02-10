@@ -76,6 +76,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.DOUBLE) },
 			{ "size_", new Integer(Types.INTEGER) },
 			{ "status", new Integer(Types.INTEGER) },
@@ -83,7 +84,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,version DOUBLE,size_ INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,description STRING null,version DOUBLE,size_ INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileVersion.folderId DESC, dlFileVersion.name DESC, dlFileVersion.version DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileVersion.folderId DESC, DLFileVersion.name DESC, DLFileVersion.version DESC";
@@ -108,6 +109,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setFolderId(soapModel.getFolderId());
 		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
 		model.setVersion(soapModel.getVersion());
 		model.setSize(soapModel.getSize());
 		model.setStatus(soapModel.getStatus());
@@ -246,6 +248,14 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		return GetterUtil.getString(_originalName);
 	}
 
+	public String getDescription() {
+		return GetterUtil.getString(_description);
+	}
+
+	public void setDescription(String description) {
+		_description = description;
+	}
+
 	public double getVersion() {
 		return _version;
 	}
@@ -331,6 +341,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			model.setCreateDate(getCreateDate());
 			model.setFolderId(getFolderId());
 			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setVersion(getVersion());
 			model.setSize(getSize());
 			model.setStatus(getStatus());
@@ -370,6 +381,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		clone.setCreateDate(getCreateDate());
 		clone.setFolderId(getFolderId());
 		clone.setName(getName());
+		clone.setDescription(getDescription());
 		clone.setVersion(getVersion());
 		clone.setSize(getSize());
 		clone.setStatus(getStatus());
@@ -455,7 +467,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{fileVersionId=");
 		sb.append(getFileVersionId());
@@ -473,6 +485,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		sb.append(getFolderId());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", description=");
+		sb.append(getDescription());
 		sb.append(", version=");
 		sb.append(getVersion());
 		sb.append(", size=");
@@ -491,7 +505,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFileVersion");
@@ -528,6 +542,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>version</column-name><column-value><![CDATA[");
@@ -573,6 +591,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	private boolean _setOriginalFolderId;
 	private String _name;
 	private String _originalName;
+	private String _description;
 	private double _version;
 	private double _originalVersion;
 	private boolean _setOriginalVersion;

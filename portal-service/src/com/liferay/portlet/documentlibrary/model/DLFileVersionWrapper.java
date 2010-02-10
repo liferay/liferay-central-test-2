@@ -125,6 +125,14 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		_dlFileVersion.setName(name);
 	}
 
+	public java.lang.String getDescription() {
+		return _dlFileVersion.getDescription();
+	}
+
+	public void setDescription(java.lang.String description) {
+		_dlFileVersion.setDescription(description);
+	}
+
 	public double getVersion() {
 		return _dlFileVersion.getVersion();
 	}

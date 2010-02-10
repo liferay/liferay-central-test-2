@@ -112,39 +112,40 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String description, java.lang.String versionDescription,
+		java.lang.String extraSettings, byte[] bytes,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _dlFileEntryLocalService.addFileEntry(uuid, userId, groupId,
-			folderId, name, title, description, extraSettings, bytes,
-			serviceContext);
+			folderId, name, title, description, versionDescription,
+			extraSettings, bytes, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		java.io.File file,
+		java.lang.String description, java.lang.String versionDescription,
+		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _dlFileEntryLocalService.addFileEntry(uuid, userId, groupId,
-			folderId, name, title, description, extraSettings, file,
-			serviceContext);
+			folderId, name, title, description, versionDescription,
+			extraSettings, file, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		java.io.InputStream is, long size,
+		java.lang.String description, java.lang.String versionDescription,
+		java.lang.String extraSettings, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _dlFileEntryLocalService.addFileEntry(uuid, userId, groupId,
-			folderId, name, title, description, extraSettings, is, size,
-			serviceContext);
+			folderId, name, title, description, versionDescription,
+			extraSettings, is, size, serviceContext);
 	}
 
 	public void addFileEntryResources(
@@ -186,14 +187,14 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addOrOverwriteFileEntry(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceName, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		java.io.File file,
+		java.lang.String description, java.lang.String versionDescription,
+		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _dlFileEntryLocalService.addOrOverwriteFileEntry(userId,
 			groupId, folderId, name, sourceName, title, description,
-			extraSettings, file, serviceContext);
+			versionDescription, extraSettings, file, serviceContext);
 	}
 
 	public void deleteFileEntries(long groupId, long folderId)
@@ -379,39 +380,41 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 		long userId, long groupId, long folderId, long newFolderId,
 		java.lang.String name, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
-		java.lang.String extraSettings, byte[] bytes,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String versionDescription, java.lang.String extraSettings,
+		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _dlFileEntryLocalService.updateFileEntry(userId, groupId,
 			folderId, newFolderId, name, sourceFileName, title, description,
-			extraSettings, bytes, serviceContext);
+			versionDescription, extraSettings, bytes, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long groupId, long folderId, long newFolderId,
 		java.lang.String name, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
-		java.lang.String extraSettings, java.io.File file,
+		java.lang.String versionDescription, java.lang.String extraSettings,
+		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _dlFileEntryLocalService.updateFileEntry(userId, groupId,
 			folderId, newFolderId, name, sourceFileName, title, description,
-			extraSettings, file, serviceContext);
+			versionDescription, extraSettings, file, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long groupId, long folderId, long newFolderId,
 		java.lang.String name, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
-		java.lang.String extraSettings, java.io.InputStream is, long size,
+		java.lang.String versionDescription, java.lang.String extraSettings,
+		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _dlFileEntryLocalService.updateFileEntry(userId, groupId,
 			folderId, newFolderId, name, sourceFileName, title, description,
-			extraSettings, is, size, serviceContext);
+			versionDescription, extraSettings, is, size, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateWorkflowStatus(

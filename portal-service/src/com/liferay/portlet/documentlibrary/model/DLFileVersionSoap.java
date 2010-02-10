@@ -57,6 +57,7 @@ public class DLFileVersionSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setFolderId(model.getFolderId());
 		soapModel.setName(model.getName());
+		soapModel.setDescription(model.getDescription());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setSize(model.getSize());
 		soapModel.setStatus(model.getStatus());
@@ -179,6 +180,14 @@ public class DLFileVersionSoap implements Serializable {
 		_name = name;
 	}
 
+	public String getDescription() {
+		return _description;
+	}
+
+	public void setDescription(String description) {
+		_description = description;
+	}
+
 	public double getVersion() {
 		return _version;
 	}
@@ -235,6 +244,7 @@ public class DLFileVersionSoap implements Serializable {
 	private Date _createDate;
 	private long _folderId;
 	private String _name;
+	private String _description;
 	private double _version;
 	private int _size;
 	private int _status;

@@ -416,6 +416,7 @@ create table DLFileVersion (
 	createDate DATE null,
 	folderId LONG,
 	name VARCHAR(255) null,
+	description STRING null,
 	version DOUBLE,
 	size_ INTEGER,
 	status INTEGER,
