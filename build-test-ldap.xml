@@ -86,8 +86,8 @@ userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09</echo>
 		</exec>
 	</target>
 
-	<target name="run-ldap-tomcat-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-ldap-tomcat-mysql">
+		<antcall target="prepare-mysql" />
 
 		<antcall target="prepare-vm-server">
 			<param name="vm.vmdk.suffix" value="generic" />

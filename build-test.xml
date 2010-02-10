@@ -35,14 +35,14 @@
 		<antcall target="start" />
 	</target>
 
-	<target name="prepare-mysql-5.0">
-		<echo file="test.${user.name}.properties">db.type=mysql-5.0</echo>
+	<target name="prepare-mysql">
+		<echo file="test.${user.name}.properties">db.type=mysql</echo>
 
 		<antcall target="prepare-common" />
 	</target>
 
-	<target name="prepare-oracle-10">
-		<echo file="test.${user.name}.properties">db.type=oracle-10</echo>
+	<target name="prepare-oracle">
+		<echo file="test.${user.name}.properties">db.type=oracle</echo>
 
 		<antcall target="prepare-common" />
 	</target>
@@ -66,7 +66,7 @@ axis.servlet.hosts.allowed=
 tunnel.servlet.hosts.allowed=</echo>
 
 		<if>
-			<equals arg1="${db.type}" arg2="oracle-10" />
+			<equals arg1="${db.type}" arg2="oracle" />
 			<then>
 				<echo file="portal-impl/src/portal-ext.properties" append="true">
 
@@ -99,14 +99,14 @@ jdbc.default.numHelperThreads=1</echo>
 		</replace>
 	</target>
 
-	<target name="prepare-postgresql-8.3">
-		<echo file="test.${user.name}.properties">db.type=postgresql-8.3</echo>
+	<target name="prepare-postgresql">
+		<echo file="test.${user.name}.properties">db.type=postgresql</echo>
 
 		<antcall target="prepare-common" />
 	</target>
 
-	<target name="prepare-sql-server-2005">
-		<echo file="test.${user.name}.properties">db.type=sql-server-2005</echo>
+	<target name="prepare-sql-server">
+		<echo file="test.${user.name}.properties">db.type=sql-server</echo>
 
 		<antcall target="prepare-common" />
 	</target>
@@ -212,26 +212,26 @@ file.
 					<equals arg1="${skip.rebuild-database}" arg2="$${skip.rebuild-database}" />
 					<then>
 						<if>
-							<equals arg1="${db.type}" arg2="mysql-5.0" />
+							<equals arg1="${db.type}" arg2="mysql" />
 							<then>
-								<antcall target="rebuild-database-mysql-5.0" />
+								<antcall target="rebuild-database-mysql" />
 							</then>
 							<elseif>
-								<equals arg1="${db.type}" arg2="oracle-10" />
+								<equals arg1="${db.type}" arg2="oracle" />
 								<then>
-									<antcall target="rebuild-database-oracle-10" />
+									<antcall target="rebuild-database-oracle" />
 								</then>
 							</elseif>
 							<elseif>
-								<equals arg1="${db.type}" arg2="postgresql-8.3" />
+								<equals arg1="${db.type}" arg2="postgresql" />
 								<then>
-									<antcall target="rebuild-database-postgresql-8.3" />
+									<antcall target="rebuild-database-postgresql" />
 								</then>
 							</elseif>
 							<elseif>
-								<equals arg1="${db.type}" arg2="sql-server-2005" />
+								<equals arg1="${db.type}" arg2="sql-server" />
 								<then>
-									<antcall target="rebuild-database-sql-server-2005" />
+									<antcall target="rebuild-database-sql-server" />
 								</then>
 							</elseif>
 						</if>
@@ -241,7 +241,7 @@ file.
 		</if>
 	</target>
 
-	<target name="rebuild-database-mysql-5.0">
+	<target name="rebuild-database-mysql">
 		<if>
 			<or>
 				<equals arg1="${sql.dir}" arg2="$${sql.dir}" />
@@ -260,7 +260,7 @@ file.
 		</if>
 	</target>
 
-	<target name="rebuild-database-oracle-10">
+	<target name="rebuild-database-oracle">
 		<if>
 			<or>
 				<equals arg1="${sql.dir}" arg2="$${sql.dir}" />
@@ -276,26 +276,26 @@ file.
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<property name="temp.dir" value="temp\${db.oracle-10.username}\${tstamp.value}" />
+		<property name="temp.dir" value="temp\${db.oracle.username}\${tstamp.value}" />
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle-10.host} cmd.exe /c mkdir C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle.host} cmd.exe /c mkdir C:\${temp.dir}" />
 		</exec>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.dir}${sql.file} ${vm.username}@${db.oracle-10.host}:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${sql.dir}${sql.file} ${vm.username}@${db.oracle.host}:\${temp.dir}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle-10.host} sqlplus system/password @C:\${temp.dir}\${sql.file} ${db.oracle-10.username} ${db.oracle-10.password}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle.host} sqlplus system/password @C:\${temp.dir}\${sql.file} ${db.oracle.username} ${db.oracle.password}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle-10.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
 		</exec>
 	</target>
 
-	<target name="rebuild-database-postgresql-8.3">
+	<target name="rebuild-database-postgresql">
 		<if>
 			<or>
 				<equals arg1="${sql.dir}" arg2="$${sql.dir}" />
@@ -311,36 +311,36 @@ file.
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<property name="temp.dir" value="temp\${db.postgresql-8.3.schema}\${tstamp.value}\" />
+		<property name="temp.dir" value="temp\${db.postgresql.schema}\${tstamp.value}\" />
 
 		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
 
 		<replace file="${sql.file}">
-			<replacefilter token="drop database lportal;" value="drop database ${db.postgresql-8.3.schema};"/>
-			<replacefilter token="create database lportal encoding = 'UNICODE';" value="create database ${db.postgresql-8.3.schema} encoding = 'UNICODE';"/>
-			<replacefilter token="\c lportal;" value="\c ${db.postgresql-8.3.schema};"/>
+			<replacefilter token="drop database lportal;" value="drop database ${db.postgresql.schema};"/>
+			<replacefilter token="create database lportal encoding = 'UNICODE';" value="create database ${db.postgresql.schema} encoding = 'UNICODE';"/>
+			<replacefilter token="\c lportal;" value="\c ${db.postgresql.schema};"/>
 		</replace>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql-8.3.host} cmd.exe /c mkdir C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} cmd.exe /c mkdir C:\${temp.dir}" />
 		</exec>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.postgresql-8.3.host}:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.postgresql.host}:\${temp.dir}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql-8.3.host} C:\Progra~1\PostgreSQL\8.3\bin\psql.exe -U ${db.postgresql-8.3.username} -f C:\${temp.dir}\${sql.file}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} C:\Progra~1\PostgreSQL\8.3\bin\psql.exe -U ${db.postgresql.username} -f C:\${temp.dir}\${sql.file}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql-8.3.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
 		</exec>
 
 		<delete file="${sql.file}" />
 	</target>
 
-	<target name="rebuild-database-sql-server-2005">
+	<target name="rebuild-database-sql-server">
 		<if>
 			<or>
 				<equals arg1="${sql.dir}" arg2="$${sql.dir}" />
@@ -356,30 +356,30 @@ file.
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<property name="temp.dir" value="temp\${db.sql-server-2005.schema}\${tstamp.value}\" />
+		<property name="temp.dir" value="temp\${db.sql-server.schema}\${tstamp.value}\" />
 
 		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
 
 		<replace file="${sql.file}">
-			<replacefilter token="drop database lportal;" value="drop database ${db.sql-server-2005.schema};"/>
-			<replacefilter token="create database lportal;" value="create database ${db.sql-server-2005.schema};"/>
-			<replacefilter token="use lportal;" value="use ${db.sql-server-2005.schema};"/>
+			<replacefilter token="drop database lportal;" value="drop database ${db.sql-server.schema};"/>
+			<replacefilter token="create database lportal;" value="create database ${db.sql-server.schema};"/>
+			<replacefilter token="use lportal;" value="use ${db.sql-server.schema};"/>
 		</replace>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server-2005.host} cmd.exe /c mkdir C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server.host} cmd.exe /c mkdir C:\${temp.dir}" />
 		</exec>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.sql-server-2005.host}:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.sql-server.host}:\${temp.dir}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server-2005.host} osql -n -U ${db.sql-server-2005.username} -P ${db.sql-server-2005.password} -i C:\${temp.dir}\${sql.file}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server.host} osql -n -U ${db.sql-server.username} -P ${db.sql-server.password} -i C:\${temp.dir}\${sql.file}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server-2005.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
 		</exec>
 
 		<delete file="${sql.file}" />
@@ -514,7 +514,7 @@ file.
 	</target>
 
 	<target name="test">
-		<antcall target="prepare-mysql-5.0" />
+		<antcall target="prepare-mysql" />
 
 		<antcall target="rebuild-database" inheritAll="false" />
 

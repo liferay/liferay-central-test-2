@@ -3,65 +3,65 @@
 <project name="portal-test-db-postgresql" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="test-db-postgresql-8.3">
-		<antcall target="prepare-postgresql-8.3" />
+	<target name="test-db-postgresql">
+		<antcall target="prepare-postgresql" />
 
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
-		<antcall target="test-db-postgresql-8.3-latest" />
-		<!--<antcall target="test-db-postgresql-8.3-5.1.0" />-->
-		<antcall target="test-db-postgresql-8.3-5.1.1" />
-		<antcall target="test-db-postgresql-8.3-5.1.2" />
-		<antcall target="test-db-postgresql-8.3-5.2.0" />
-		<antcall target="test-db-postgresql-8.3-5.2.1" />
-		<antcall target="test-db-postgresql-8.3-5.2.2" />
-		<antcall target="test-db-postgresql-8.3-5.2.3" />
+		<antcall target="test-db-postgresql-latest" />
+		<!--<antcall target="test-db-postgresql-5.1.0" />-->
+		<antcall target="test-db-postgresql-5.1.1" />
+		<antcall target="test-db-postgresql-5.1.2" />
+		<antcall target="test-db-postgresql-5.2.0" />
+		<antcall target="test-db-postgresql-5.2.1" />
+		<antcall target="test-db-postgresql-5.2.2" />
+		<antcall target="test-db-postgresql-5.2.3" />
 	</target>
 
-	<target name="test-db-postgresql-8.3-5.1.0">
-		<antcall target="test-db-postgresql-8.3-common">
+	<target name="test-db-postgresql-5.1.0">
+		<antcall target="test-db-postgresql-common">
 			<param name="sql.version" value="5.1.0" />
 		</antcall>
 	</target>
 
-	<target name="test-db-postgresql-8.3-5.1.1">
-		<antcall target="test-db-postgresql-8.3-common">
+	<target name="test-db-postgresql-5.1.1">
+		<antcall target="test-db-postgresql-common">
 			<param name="sql.version" value="5.1.1" />
 		</antcall>
 	</target>
 
-	<target name="test-db-postgresql-8.3-5.1.2">
-		<antcall target="test-db-postgresql-8.3-common">
+	<target name="test-db-postgresql-5.1.2">
+		<antcall target="test-db-postgresql-common">
 			<param name="sql.version" value="5.1.2" />
 		</antcall>
 	</target>
 
-	<target name="test-db-postgresql-8.3-5.2.0">
-		<antcall target="test-db-postgresql-8.3-common">
+	<target name="test-db-postgresql-5.2.0">
+		<antcall target="test-db-postgresql-common">
 			<param name="sql.version" value="5.2.0" />
 		</antcall>
 	</target>
 
-	<target name="test-db-postgresql-8.3-5.2.1">
-		<antcall target="test-db-postgresql-8.3-common">
+	<target name="test-db-postgresql-5.2.1">
+		<antcall target="test-db-postgresql-common">
 			<param name="sql.version" value="5.2.1" />
 		</antcall>
 	</target>
 
-	<target name="test-db-postgresql-8.3-5.2.2">
-		<antcall target="test-db-postgresql-8.3-common">
+	<target name="test-db-postgresql-5.2.2">
+		<antcall target="test-db-postgresql-common">
 			<param name="sql.version" value="5.2.2" />
 		</antcall>
 	</target>
 
-	<target name="test-db-postgresql-8.3-5.2.3">
-		<antcall target="test-db-postgresql-8.3-common">
+	<target name="test-db-postgresql-5.2.3">
+		<antcall target="test-db-postgresql-common">
 			<param name="sql.version" value="5.2.3" />
 		</antcall>
 	</target>
 
-	<target name="test-db-postgresql-8.3-common">
-		<echo file="test.${user.name}.properties">db.type=postgresql-8.3</echo>
+	<target name="test-db-postgresql-common">
+		<echo file="test.${user.name}.properties">db.type=postgresql</echo>
 
 		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
 
@@ -94,13 +94,13 @@
 		<delete file="test.${user.name}.properties" />
 	</target>
 
-	<target name="test-db-postgresql-8.3-latest">
-		<echo file="create-${db.postgresql-8.3.schema}.sql">drop database lportal;
+	<target name="test-db-postgresql-latest">
+		<echo file="create-${db.postgresql.schema}.sql">drop database lportal;
 create database lportal encoding = 'UNICODE';</echo>
 
-		<antcall target="test-db-postgresql-8.3-common">
+		<antcall target="test-db-postgresql-common">
 			<param name="sql.dir" value="" />
-			<param name="sql.file" value="create-${db.postgresql-8.3.schema}.sql" />
+			<param name="sql.file" value="create-${db.postgresql.schema}.sql" />
 		</antcall>
 	</target>
 </project>

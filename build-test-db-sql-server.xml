@@ -3,65 +3,65 @@
 <project name="portal-test-db-sql-server" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="test-db-sql-server-2005">
-		<antcall target="prepare-sql-server-2005" />
+	<target name="test-db-sql-server">
+		<antcall target="prepare-sql-server" />
 
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
-		<antcall target="test-db-sql-server-2005-latest" />
-		<antcall target="test-db-sql-server-2005-5.1.0" />
-		<antcall target="test-db-sql-server-2005-5.1.1" />
-		<antcall target="test-db-sql-server-2005-5.1.2" />
-		<antcall target="test-db-sql-server-2005-5.2.0" />
-		<antcall target="test-db-sql-server-2005-5.2.1" />
-		<antcall target="test-db-sql-server-2005-5.2.2" />
-		<antcall target="test-db-sql-server-2005-5.2.3" />
+		<antcall target="test-db-sql-server-latest" />
+		<antcall target="test-db-sql-server-5.1.0" />
+		<antcall target="test-db-sql-server-5.1.1" />
+		<antcall target="test-db-sql-server-5.1.2" />
+		<antcall target="test-db-sql-server-5.2.0" />
+		<antcall target="test-db-sql-server-5.2.1" />
+		<antcall target="test-db-sql-server-5.2.2" />
+		<antcall target="test-db-sql-server-5.2.3" />
 	</target>
 
-	<target name="test-db-sql-server-2005-5.1.0">
-		<antcall target="test-db-sql-server-2005-common">
+	<target name="test-db-sql-server-5.1.0">
+		<antcall target="test-db-sql-server-common">
 			<param name="sql.version" value="5.1.0" />
 		</antcall>
 	</target>
 
-	<target name="test-db-sql-server-2005-5.1.1">
-		<antcall target="test-db-sql-server-2005-common">
+	<target name="test-db-sql-server-5.1.1">
+		<antcall target="test-db-sql-server-common">
 			<param name="sql.version" value="5.1.1" />
 		</antcall>
 	</target>
 
-	<target name="test-db-sql-server-2005-5.1.2">
-		<antcall target="test-db-sql-server-2005-common">
+	<target name="test-db-sql-server-5.1.2">
+		<antcall target="test-db-sql-server-common">
 			<param name="sql.version" value="5.1.2" />
 		</antcall>
 	</target>
 
-	<target name="test-db-sql-server-2005-5.2.0">
-		<antcall target="test-db-sql-server-2005-common">
+	<target name="test-db-sql-server-5.2.0">
+		<antcall target="test-db-sql-server-common">
 			<param name="sql.version" value="5.2.0" />
 		</antcall>
 	</target>
 
-	<target name="test-db-sql-server-2005-5.2.1">
-		<antcall target="test-db-sql-server-2005-common">
+	<target name="test-db-sql-server-5.2.1">
+		<antcall target="test-db-sql-server-common">
 			<param name="sql.version" value="5.2.1" />
 		</antcall>
 	</target>
 
-	<target name="test-db-sql-server-2005-5.2.2">
-		<antcall target="test-db-sql-server-2005-common">
+	<target name="test-db-sql-server-5.2.2">
+		<antcall target="test-db-sql-server-common">
 			<param name="sql.version" value="5.2.2" />
 		</antcall>
 	</target>
 
-	<target name="test-db-sql-server-2005-5.2.3">
-		<antcall target="test-db-sql-server-2005-common">
+	<target name="test-db-sql-server-5.2.3">
+		<antcall target="test-db-sql-server-common">
 			<param name="sql.version" value="5.2.3" />
 		</antcall>
 	</target>
 
-	<target name="test-db-sql-server-2005-common">
-		<echo file="test.${user.name}.properties">db.type=sql-server-2005</echo>
+	<target name="test-db-sql-server-common">
+		<echo file="test.${user.name}.properties">db.type=sql-server</echo>
 
 		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
 
@@ -94,13 +94,13 @@
 		<delete file="test.${user.name}.properties" />
 	</target>
 
-	<target name="test-db-sql-server-2005-latest">
-		<echo file="create-${db.sql-server-2005.schema}.sql">drop database lportal;
+	<target name="test-db-sql-server-latest">
+		<echo file="create-${db.sql-server.schema}.sql">drop database lportal;
 create database lportal;</echo>
 
-		<antcall target="test-db-sql-server-2005-common">
+		<antcall target="test-db-sql-server-common">
 			<param name="sql.dir" value="" />
-			<param name="sql.file" value="create-${db.sql-server-2005.schema}.sql" />
+			<param name="sql.file" value="create-${db.sql-server.schema}.sql" />
 		</antcall>
 	</target>
 </project>

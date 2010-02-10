@@ -492,11 +492,11 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-9-${lp.version}.dmp" />
 	</target>
 
-	<target name="build-dist-sql-oracle-10">
+	<target name="build-dist-sql-oracle">
 		<ant dir="sql" target="rebuild-oracle" inheritAll="false" />
 		<ant dir="sql" target="export-oracle" inheritAll="false" />
 
-		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-10-${lp.version}.dmp" />
+		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-${lp.version}.dmp" />
 	</target>
 
 	<target name="build-dist-tomcat">
@@ -1084,7 +1084,7 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 
 		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version}.war" />
 
-		<antcall target="build-dist-sql-oracle-10" />
+		<antcall target="build-dist-sql-oracle" />
 
 		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
 

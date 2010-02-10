@@ -62,8 +62,8 @@ spring.configs=\
 		META-INF/ext-spring.xml]]></echo>
 	</target>
 
-	<target name="run-db-sharding-tomcat-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-db-sharding-tomcat-mysql">
+		<antcall target="prepare-mysql" />
 
 		<antcall target="prepare-db-sharding" />
 

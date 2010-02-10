@@ -3,65 +3,65 @@
 <project name="portal-test-db-oracle" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="test-db-oracle-10">
-		<antcall target="prepare-oracle-10" />
+	<target name="test-db-oracle">
+		<antcall target="prepare-oracle" />
 
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
-		<antcall target="test-db-oracle-10-latest" />
-		<antcall target="test-db-oracle-10-5.1.0" />
-		<antcall target="test-db-oracle-10-5.1.1" />
-		<antcall target="test-db-oracle-10-5.1.2" />
-		<antcall target="test-db-oracle-10-5.2.0" />
-		<antcall target="test-db-oracle-10-5.2.1" />
-		<antcall target="test-db-oracle-10-5.2.2" />
-		<antcall target="test-db-oracle-10-5.2.3" />
+		<antcall target="test-db-oracle-latest" />
+		<antcall target="test-db-oracle-5.1.0" />
+		<antcall target="test-db-oracle-5.1.1" />
+		<antcall target="test-db-oracle-5.1.2" />
+		<antcall target="test-db-oracle-5.2.0" />
+		<antcall target="test-db-oracle-5.2.1" />
+		<antcall target="test-db-oracle-5.2.2" />
+		<antcall target="test-db-oracle-5.2.3" />
 	</target>
 
-	<target name="test-db-oracle-10-5.1.0">
-		<antcall target="test-db-oracle-10-common">
+	<target name="test-db-oracle-5.1.0">
+		<antcall target="test-db-oracle-common">
 			<param name="sql.version" value="5.1.0" />
 		</antcall>
 	</target>
 
-	<target name="test-db-oracle-10-5.1.1">
-		<antcall target="test-db-oracle-10-common">
+	<target name="test-db-oracle-5.1.1">
+		<antcall target="test-db-oracle-common">
 			<param name="sql.version" value="5.1.1" />
 		</antcall>
 	</target>
 
-	<target name="test-db-oracle-10-5.1.2">
-		<antcall target="test-db-oracle-10-common">
+	<target name="test-db-oracle-5.1.2">
+		<antcall target="test-db-oracle-common">
 			<param name="sql.version" value="5.1.2" />
 		</antcall>
 	</target>
 
-	<target name="test-db-oracle-10-5.2.0">
-		<antcall target="test-db-oracle-10-common">
+	<target name="test-db-oracle-5.2.0">
+		<antcall target="test-db-oracle-common">
 			<param name="sql.version" value="5.2.0" />
 		</antcall>
 	</target>
 
-	<target name="test-db-oracle-10-5.2.1">
-		<antcall target="test-db-oracle-10-common">
+	<target name="test-db-oracle-5.2.1">
+		<antcall target="test-db-oracle-common">
 			<param name="sql.version" value="5.2.1" />
 		</antcall>
 	</target>
 
-	<target name="test-db-oracle-10-5.2.2">
-		<antcall target="test-db-oracle-10-common">
+	<target name="test-db-oracle-5.2.2">
+		<antcall target="test-db-oracle-common">
 			<param name="sql.version" value="5.2.2" />
 		</antcall>
 	</target>
 
-	<target name="test-db-oracle-10-5.2.3">
-		<antcall target="test-db-oracle-10-common">
+	<target name="test-db-oracle-5.2.3">
+		<antcall target="test-db-oracle-common">
 			<param name="sql.version" value="5.2.3" />
 		</antcall>
 	</target>
 
-	<target name="test-db-oracle-10-common">
-		<echo file="test.${user.name}.properties">db.type=oracle-10</echo>
+	<target name="test-db-oracle-common">
+		<echo file="test.${user.name}.properties">db.type=oracle</echo>
 
 		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
 
@@ -94,17 +94,17 @@
 		<delete file="test.${user.name}.properties" />
 	</target>
 
-	<target name="test-db-oracle-10-latest">
-		<echo file="create-${db.oracle-10.username}.sql"><![CDATA[drop user &1 cascade;
+	<target name="test-db-oracle-latest">
+		<echo file="create-${db.oracle.username}.sql"><![CDATA[drop user &1 cascade;
 create user &1 identified by &2;
 grant connect,resource to &1;
 exit;]]></echo>
 
-		<antcall target="test-db-oracle-10-common">
+		<antcall target="test-db-oracle-common">
 			<param name="sql.dir" value="" />
-			<param name="sql.file" value="create-${db.oracle-10.username}.sql" />
+			<param name="sql.file" value="create-${db.oracle.username}.sql" />
 		</antcall>
 
-		<delete file="create-${db.oracle-10.username}.sql" />
+		<delete file="create-${db.oracle.username}.sql" />
 	</target>
 </project>

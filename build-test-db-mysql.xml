@@ -3,65 +3,65 @@
 <project name="portal-test-db-mysql" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="test-db-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="test-db-mysql">
+		<antcall target="prepare-mysql" />
 
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
-		<antcall target="test-db-mysql-5.0-latest" />
-		<antcall target="test-db-mysql-5.0-5.1.0" />
-		<antcall target="test-db-mysql-5.0-5.1.1" />
-		<antcall target="test-db-mysql-5.0-5.1.2" />
-		<antcall target="test-db-mysql-5.0-5.2.0" />
-		<antcall target="test-db-mysql-5.0-5.2.1" />
-		<antcall target="test-db-mysql-5.0-5.2.2" />
-		<antcall target="test-db-mysql-5.0-5.2.3" />
+		<antcall target="test-db-mysql-latest" />
+		<antcall target="test-db-mysql-5.1.0" />
+		<antcall target="test-db-mysql-5.1.1" />
+		<antcall target="test-db-mysql-5.1.2" />
+		<antcall target="test-db-mysql-5.2.0" />
+		<antcall target="test-db-mysql-5.2.1" />
+		<antcall target="test-db-mysql-5.2.2" />
+		<antcall target="test-db-mysql-5.2.3" />
 	</target>
 
-	<target name="test-db-mysql-5.0-5.1.0">
-		<antcall target="test-db-mysql-5.0-common">
+	<target name="test-db-mysql-5.1.0">
+		<antcall target="test-db-mysql-common">
 			<param name="sql.version" value="5.1.0" />
 		</antcall>
 	</target>
 
-	<target name="test-db-mysql-5.0-5.1.1">
-		<antcall target="test-db-mysql-5.0-common">
+	<target name="test-db-mysql-5.1.1">
+		<antcall target="test-db-mysql-common">
 			<param name="sql.version" value="5.1.1" />
 		</antcall>
 	</target>
 
-	<target name="test-db-mysql-5.0-5.1.2">
-		<antcall target="test-db-mysql-5.0-common">
+	<target name="test-db-mysql-5.1.2">
+		<antcall target="test-db-mysql-common">
 			<param name="sql.version" value="5.1.2" />
 		</antcall>
 	</target>
 
-	<target name="test-db-mysql-5.0-5.2.0">
-		<antcall target="test-db-mysql-5.0-common">
+	<target name="test-db-mysql-5.2.0">
+		<antcall target="test-db-mysql-common">
 			<param name="sql.version" value="5.2.0" />
 		</antcall>
 	</target>
 
-	<target name="test-db-mysql-5.0-5.2.1">
-		<antcall target="test-db-mysql-5.0-common">
+	<target name="test-db-mysql-5.2.1">
+		<antcall target="test-db-mysql-common">
 			<param name="sql.version" value="5.2.1" />
 		</antcall>
 	</target>
 
-	<target name="test-db-mysql-5.0-5.2.2">
-		<antcall target="test-db-mysql-5.0-common">
+	<target name="test-db-mysql-5.2.2">
+		<antcall target="test-db-mysql-common">
 			<param name="sql.version" value="5.2.2" />
 		</antcall>
 	</target>
 
-	<target name="test-db-mysql-5.0-5.2.3">
-		<antcall target="test-db-mysql-5.0-common">
+	<target name="test-db-mysql-5.2.3">
+		<antcall target="test-db-mysql-common">
 			<param name="sql.version" value="5.2.3" />
 		</antcall>
 	</target>
 
-	<target name="test-db-mysql-5.0-common">
-		<echo file="test.${user.name}.properties">db.type=mysql-5.0</echo>
+	<target name="test-db-mysql-common">
+		<echo file="test.${user.name}.properties">db.type=mysql</echo>
 
 		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
 
@@ -94,13 +94,13 @@
 		<delete file="test.${user.name}.properties" />
 	</target>
 
-	<target name="test-db-mysql-5.0-latest">
-		<echo file="create-${db.mysql-5.0.schema}.sql">drop database if exists lportal;
+	<target name="test-db-mysql-latest">
+		<echo file="create-${db.mysql.schema}.sql">drop database if exists lportal;
 create database lportal character set utf8;</echo>
 
-		<antcall target="test-db-mysql-5.0-common">
+		<antcall target="test-db-mysql-common">
 			<param name="sql.dir" value="" />
-			<param name="sql.file" value="create-${db.mysql-5.0.schema}.sql" />
+			<param name="sql.file" value="create-${db.mysql.schema}.sql" />
 		</antcall>
 	</target>
 </project>

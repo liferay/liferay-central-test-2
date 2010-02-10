@@ -3,8 +3,8 @@
 <project name="portal-test-db-failover" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="run-db-failover-tomcat-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-db-failover-tomcat-mysql">
+		<antcall target="prepare-mysql" />
 
 		<antcall target="prepare-vm-server">
 			<param name="vm.vmdk.suffix" value="generic" />

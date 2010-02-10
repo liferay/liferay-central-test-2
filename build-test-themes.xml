@@ -3,8 +3,8 @@
 <project name="portal-test-themes" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="run-themes-jboss-tomcat-5.0-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-themes-jboss-tomcat-5.0-mysql">
+		<antcall target="prepare-mysql" />
 
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
 			<arg line="/c svn update" />
@@ -16,8 +16,8 @@
 		</ant>
 	</target>
 
-	<target name="run-themes-tomcat-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-themes-tomcat-mysql">
+		<antcall target="prepare-mysql" />
 
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
 			<arg line="/c svn update" />

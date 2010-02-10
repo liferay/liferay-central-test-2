@@ -3,64 +3,64 @@
 <project name="portal-test-portal-web" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="run-portal-web-jboss-tomcat-5.0-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-portal-web-jboss-tomcat-5.0-mysql">
+		<antcall target="prepare-mysql" />
 
 		<ant antfile="build-test-jboss-tomcat-5.0.xml" target="run-selenium-jboss-tomcat-5.0">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>
 
-	<target name="run-portal-web-tomcat-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-portal-web-tomcat-mysql">
+		<antcall target="prepare-mysql" />
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>
 
-	<target name="run-portal-web-tomcat-oracle-10">
-		<antcall target="prepare-oracle-10" />
+	<target name="run-portal-web-tomcat-oracle">
+		<antcall target="prepare-oracle" />
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>
 
-	<target name="run-portal-web-tomcat-postgresql-8.3">
-		<antcall target="prepare-postgresql-8.3" />
+	<target name="run-portal-web-tomcat-postgresql">
+		<antcall target="prepare-postgresql" />
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>
 
-	<target name="run-portal-web-tomcat-sql-server-2005">
-		<antcall target="prepare-sql-server-2005" />
+	<target name="run-portal-web-tomcat-sql-server">
+		<antcall target="prepare-sql-server" />
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>
 
-	<target name="run-portal-web-weblogic-10.3-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-portal-web-weblogic-10.3-mysql">
+		<antcall target="prepare-mysql" />
 
 		<ant antfile="build-test-weblogic-10.3.xml" target="run-selenium-weblogic-10.3">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>
 
-	<target name="run-portal-web-websphere-6.1-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-portal-web-websphere-6.1-mysql">
+		<antcall target="prepare-mysql" />
 
 		<ant antfile="build-test-websphere-6.1.xml" target="run-selenium-websphere-6.1">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>
 
-	<target name="run-portal-web-websphere-7.0-mysql-5.0">
-		<antcall target="prepare-mysql-5.0" />
+	<target name="run-portal-web-websphere-7.0-mysql">
+		<antcall target="prepare-mysql" />
 
 		<ant antfile="build-test-websphere-7.0.xml" target="run-selenium-websphere-7.0">
 			<property name="test.name" value="PortalWebTestSuite" />
