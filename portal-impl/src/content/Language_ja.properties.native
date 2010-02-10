@@ -1691,6 +1691,7 @@ filter-by-organization=Organization著フィルタ
 filter-by-structure=右記の構成に所属する記事を表示します。
 filter-by-template=右記のテンプレートに所属する記事を表示します。
 filter-by-user-group=ユーザ・グループによるフィルタ
+filter-by-user=User著フィルター (Automatic Translation)
 filter-settings=フィルタの設定
 filter-web-content-list-by-structure-x=構成 {0} によりWebコンテンツをフィルタリングして下さい。
 filter=フィルター

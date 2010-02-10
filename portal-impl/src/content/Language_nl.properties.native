@@ -1691,6 +1691,7 @@ filter-by-organization=Filter door Organisatie
 filter-by-structure=Filter op structuur
 filter-by-template=Filter op sjabloon
 filter-by-user-group=Filter door Gebruikersgroep
+filter-by-user=Filter door Gebruiker (Automatic Translation)
 filter-settings=Filter instellingen
 filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 filter=Filter

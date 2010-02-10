@@ -1691,6 +1691,7 @@ filter-by-organization=Nach Organization filtern
 filter-by-structure=Nach Struktur filtern
 filter-by-template=Nach Vorlage filtern
 filter-by-user-group=Nach Benutzergruppe filtern
+filter-by-user=Filter durch User (Automatic Translation)
 filter-settings=Filter Einstellungen
 filter-web-content-list-by-structure-x=Web Content für Struktur {0} filtern.
 filter=Filter

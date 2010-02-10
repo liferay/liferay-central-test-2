@@ -1691,6 +1691,7 @@ filter-by-organization=過濾器Organization
 filter-by-structure=過濾器由Structure
 filter-by-template=過濾器由Template
 filter-by-user-group=由用户群的過濾器
+filter-by-user=過濾器User (Automatic Translation)
 filter-settings=過濾器設定
 filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 filter=過濾器

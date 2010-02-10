@@ -1691,6 +1691,7 @@ filter-by-organization=organization의 여과기
 filter-by-structure=Structure에의한 여과기
 filter-by-template=Template에의한 여과기
 filter-by-user-group=사용자 그룹 에의한 여과기
+filter-by-user=user의 여과기 (Automatic Translation)
 filter-settings=여과기 조정
 filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 filter=여과기

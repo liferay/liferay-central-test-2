@@ -1690,6 +1690,7 @@ filter-by-organization=Filtrar por Organization
 filter-by-structure=Filtrar por estructura
 filter-by-template=Filtrar por plantilla
 filter-by-user-group=Filtrar por grupo de usuario
+filter-by-user=Filtro de User (Automatic Translation)
 filter-settings=Preferencias de filtrado
 filter-web-content-list-by-structure-x=Filtrar la lista de contenidos web por estructura {0}.
 filter=Filtro
