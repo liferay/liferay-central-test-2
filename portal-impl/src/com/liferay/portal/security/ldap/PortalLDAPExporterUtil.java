@@ -25,6 +25,10 @@ package com.liferay.portal.security.ldap;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 
+import java.io.Serializable;
+
+import java.util.Map;
+
 /**
  * <a href="PortalLDAPExporterUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -34,12 +38,16 @@ import com.liferay.portal.model.User;
  */
 public class PortalLDAPExporterUtil {
 
-	public static void exportToLDAP(Contact contact) throws Exception {
-		_portalLDAPExporter.exportToLDAP(contact);
+	public static void exportToLDAP(
+			Contact contact, Map<String, Serializable> contactExpandoAttributes)
+		throws Exception {
+		_portalLDAPExporter.exportToLDAP(contact, contactExpandoAttributes);
 	}
 
-	public static void exportToLDAP(User user) throws Exception {
-		_portalLDAPExporter.exportToLDAP(user);
+	public static void exportToLDAP(
+			User user, Map<String, Serializable> userExpandoAttributes)
+		throws Exception {
+		_portalLDAPExporter.exportToLDAP(user, userExpandoAttributes);
 	}
 
 	public void setPortalLDAPExporter(PortalLDAPExporter portalLDAPExporter) {

@@ -31,6 +31,7 @@ import com.liferay.portal.service.ServiceContext;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="LDAPUser.java.html"><b><i>View Source</i></b></a>
@@ -54,6 +55,10 @@ public class LDAPUser {
 
 	public Contact getContact() {
 		return _contact;
+	}
+
+	public Map<String, String> getContactExpandoData() {
+		return _contactExpandoData;
 	}
 
 	public long getCreatorUserId() {
@@ -172,6 +177,10 @@ public class LDAPUser {
 		return _user;
 	}
 
+	public Map<String, String> getUserExpandoData() {
+		return _userExpandoData;
+	}
+
 	public long[] getUserGroupIds() {
 		return _userGroupIds;
 	}
@@ -234,6 +243,10 @@ public class LDAPUser {
 
 	public void setContact(Contact contact) {
 		_contact = contact;
+	}
+
+	public void setContactExpandoData(Map<String, String> contactExpandoData) {
+		_contactExpandoData = contactExpandoData;
 	}
 
 	public void setCreatorUserId(long creatorUserId) {
@@ -364,6 +377,10 @@ public class LDAPUser {
 		_user = user;
 	}
 
+	public void setUserExpandoData(Map<String, String> userExpandoData) {
+		_userExpandoData = userExpandoData;
+	}
+
 	public void setUserGroupIds(long[] userGroupIds) {
 		_userGroupIds = userGroupIds;
 	}
@@ -391,4 +408,6 @@ public class LDAPUser {
 	private long[] _userGroupIds;
 	private List<UserGroupRole> _userGroupRoles;
 
+	private Map<String, String> _userExpandoData;
+	private Map<String, String> _contactExpandoData;
 }

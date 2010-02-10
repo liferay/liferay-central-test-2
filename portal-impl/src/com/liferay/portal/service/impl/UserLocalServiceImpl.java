@@ -110,6 +110,7 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -395,158 +396,164 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		String greeting = LanguageUtil.format(
 			locale, "welcome-x", " " + fullName, false);
 
-		User user = userPersistence.create(userId);
+		try {
+			ServiceContextThreadLocal.setServiceContext(serviceContext);
+			User user = userPersistence.create(userId);
 
-		user.setCompanyId(companyId);
-		user.setCreateDate(now);
-		user.setModifiedDate(now);
-		user.setDefaultUser(false);
-		user.setContactId(counterLocalService.increment());
-		user.setPassword(PwdEncryptor.encrypt(password1));
-		user.setPasswordUnencrypted(password1);
-		user.setPasswordEncrypted(true);
-		user.setPasswordReset(false);
-		user.setScreenName(screenName);
-		user.setEmailAddress(emailAddress);
-		user.setOpenId(openId);
-		user.setLanguageId(locale.toString());
-		user.setTimeZoneId(defaultUser.getTimeZoneId());
-		user.setGreeting(greeting);
-		user.setFirstName(firstName);
-		user.setMiddleName(middleName);
-		user.setLastName(lastName);
-		user.setJobTitle(jobTitle);
-		user.setActive(true);
+			user.setCompanyId(companyId);
+			user.setCreateDate(now);
+			user.setModifiedDate(now);
+			user.setDefaultUser(false);
+			user.setContactId(counterLocalService.increment());
+			user.setPassword(PwdEncryptor.encrypt(password1));
+			user.setPasswordUnencrypted(password1);
+			user.setPasswordEncrypted(true);
+			user.setPasswordReset(false);
+			user.setScreenName(screenName);
+			user.setEmailAddress(emailAddress);
+			user.setOpenId(openId);
+			user.setLanguageId(locale.toString());
+			user.setTimeZoneId(defaultUser.getTimeZoneId());
+			user.setGreeting(greeting);
+			user.setFirstName(firstName);
+			user.setMiddleName(middleName);
+			user.setLastName(lastName);
+			user.setJobTitle(jobTitle);
+			user.setActive(true);
 
-		userPersistence.update(user, false);
+			userPersistence.update(user, false);
 
-		// Resources
+			// Resources
 
-		String creatorUserName = StringPool.BLANK;
+			String creatorUserName = StringPool.BLANK;
 
-		if (creatorUserId <= 0) {
-			creatorUserId = user.getUserId();
+			if (creatorUserId <= 0) {
+				creatorUserId = user.getUserId();
 
-			// Don't grab the full name from the User object because it doesn't
-			// have a corresponding Contact object yet
+				// Don't grab the full name from the User object because it doesn't
+				// have a corresponding Contact object yet
 
-			//creatorUserName = user.getFullName();
-		}
-		else {
-			User creatorUser = userPersistence.findByPrimaryKey(creatorUserId);
+				//creatorUserName = user.getFullName();
+			}
+			else {
+				User creatorUser = userPersistence.findByPrimaryKey(creatorUserId);
 
-			creatorUserName = creatorUser.getFullName();
-		}
-
-		resourceLocalService.addResources(
-			companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
-			false, false, false);
-
-		// Mail
-
-		if (user.hasCompanyMx()) {
-			mailService.addUser(
-				companyId, userId, password1, firstName, middleName, lastName,
-				emailAddress);
-		}
-
-		// Contact
-
-		Date birthday = PortalUtil.getDate(
-			birthdayMonth, birthdayDay, birthdayYear,
-			new ContactBirthdayException());
-
-		Contact contact = contactPersistence.create(user.getContactId());
-
-		contact.setCompanyId(user.getCompanyId());
-		contact.setUserId(creatorUserId);
-		contact.setUserName(creatorUserName);
-		contact.setCreateDate(now);
-		contact.setModifiedDate(now);
-		contact.setAccountId(company.getAccountId());
-		contact.setParentContactId(ContactConstants.DEFAULT_PARENT_CONTACT_ID);
-		contact.setFirstName(firstName);
-		contact.setMiddleName(middleName);
-		contact.setLastName(lastName);
-		contact.setPrefixId(prefixId);
-		contact.setSuffixId(suffixId);
-		contact.setMale(male);
-		contact.setBirthday(birthday);
-		contact.setJobTitle(jobTitle);
-
-		contactPersistence.update(contact, false);
-
-		// Group
-
-		groupLocalService.addGroup(
-			user.getUserId(), User.class.getName(), user.getUserId(), null,
-			null, 0, StringPool.SLASH + screenName, true, null);
-
-		// Groups
-
-		if (groupIds != null) {
-			groupLocalService.addUserGroups(userId, groupIds);
-		}
-
-		addDefaultGroups(userId);
-
-		// Organizations
-
-		updateOrganizations(userId, organizationIds);
-
-		// Roles
-
-		if (roleIds != null) {
-			roleIds = EnterpriseAdminUtil.addRequiredRoles(user, roleIds);
-
-			userPersistence.setRoles(userId, roleIds);
-		}
-
-		addDefaultRoles(userId);
-
-		// User groups
-
-		if (userGroupIds != null) {
-			for (long userGroupId : userGroupIds) {
-				userGroupLocalService.copyUserGroupLayouts(
-					userGroupId, new long[] {userId});
+				creatorUserName = creatorUser.getFullName();
 			}
 
-			userPersistence.setUserGroups(userId, userGroupIds);
-		}
+			resourceLocalService.addResources(
+				companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
+				false, false, false);
 
-		addDefaultUserGroups(userId);
+			// Mail
 
-		// Asset
-
-		if (serviceContext != null) {
-			updateAsset(
-				creatorUserId, user, serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
-		}
-
-		// Expando
-
-		user.setExpandoBridgeAttributes(serviceContext);
-
-		// Email
-
-		if (sendEmail) {
-			try {
-				sendEmail(user, password1);
+			if (user.hasCompanyMx()) {
+				mailService.addUser(
+					companyId, userId, password1, firstName, middleName, lastName,
+					emailAddress);
 			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
+
+			// Contact
+
+			Date birthday = PortalUtil.getDate(
+				birthdayMonth, birthdayDay, birthdayYear,
+				new ContactBirthdayException());
+
+			Contact contact = contactPersistence.create(user.getContactId());
+
+			contact.setCompanyId(user.getCompanyId());
+			contact.setUserId(creatorUserId);
+			contact.setUserName(creatorUserName);
+			contact.setCreateDate(now);
+			contact.setModifiedDate(now);
+			contact.setAccountId(company.getAccountId());
+			contact.setParentContactId(ContactConstants.DEFAULT_PARENT_CONTACT_ID);
+			contact.setFirstName(firstName);
+			contact.setMiddleName(middleName);
+			contact.setLastName(lastName);
+			contact.setPrefixId(prefixId);
+			contact.setSuffixId(suffixId);
+			contact.setMale(male);
+			contact.setBirthday(birthday);
+			contact.setJobTitle(jobTitle);
+
+			contactPersistence.update(contact, false);
+
+			// Group
+
+			groupLocalService.addGroup(
+				user.getUserId(), User.class.getName(), user.getUserId(), null,
+				null, 0, StringPool.SLASH + screenName, true, null);
+
+			// Groups
+
+			if (groupIds != null) {
+				groupLocalService.addUserGroups(userId, groupIds);
 			}
+
+			addDefaultGroups(userId);
+
+			// Organizations
+
+			updateOrganizations(userId, organizationIds);
+
+			// Roles
+
+			if (roleIds != null) {
+				roleIds = EnterpriseAdminUtil.addRequiredRoles(user, roleIds);
+
+				userPersistence.setRoles(userId, roleIds);
+			}
+
+			addDefaultRoles(userId);
+
+			// User groups
+
+			if (userGroupIds != null) {
+				for (long userGroupId : userGroupIds) {
+					userGroupLocalService.copyUserGroupLayouts(
+						userGroupId, new long[] {userId});
+				}
+
+				userPersistence.setUserGroups(userId, userGroupIds);
+			}
+
+			addDefaultUserGroups(userId);
+
+			// Asset
+
+			if (serviceContext != null) {
+				updateAsset(
+					creatorUserId, user, serviceContext.getAssetCategoryIds(),
+					serviceContext.getAssetTagNames());
+			}
+
+			// Expando
+
+			user.setExpandoBridgeAttributes(serviceContext);
+
+			// Email
+
+			if (sendEmail) {
+				try {
+					sendEmail(user, password1);
+				}
+				catch (IOException ioe) {
+					throw new SystemException(ioe);
+				}
+			}
+
+			// Indexer
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+			indexer.reindex(user);
+
+			return user;
 		}
-
-		// Indexer
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
-
-		indexer.reindex(user);
-
-		return user;
+		finally {
+			ServiceContextThreadLocal.reset();
+		}
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -2202,191 +2209,197 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		// User
+		try {
+			ServiceContextThreadLocal.setServiceContext(serviceContext);
 
-		User user = userPersistence.findByPrimaryKey(userId);
-		Company company = companyPersistence.findByPrimaryKey(
-			user.getCompanyId());
-		String password = oldPassword;
-		screenName = getScreenName(screenName);
-		emailAddress = emailAddress.trim().toLowerCase();
-		openId = openId.trim();
-		aimSn = aimSn.trim().toLowerCase();
-		facebookSn = facebookSn.trim().toLowerCase();
-		icqSn = icqSn.trim().toLowerCase();
-		jabberSn = jabberSn.trim().toLowerCase();
-		msnSn = msnSn.trim().toLowerCase();
-		mySpaceSn = mySpaceSn.trim().toLowerCase();
-		skypeSn = skypeSn.trim().toLowerCase();
-		twitterSn = twitterSn.trim().toLowerCase();
-		ymSn = ymSn.trim().toLowerCase();
-		Date now = new Date();
+			User user = userPersistence.findByPrimaryKey(userId);
+			Company company = companyPersistence.findByPrimaryKey(
+				user.getCompanyId());
+			String password = oldPassword;
+			screenName = getScreenName(screenName);
+			emailAddress = emailAddress.trim().toLowerCase();
+			openId = openId.trim();
+			aimSn = aimSn.trim().toLowerCase();
+			facebookSn = facebookSn.trim().toLowerCase();
+			icqSn = icqSn.trim().toLowerCase();
+			jabberSn = jabberSn.trim().toLowerCase();
+			msnSn = msnSn.trim().toLowerCase();
+			mySpaceSn = mySpaceSn.trim().toLowerCase();
+			skypeSn = skypeSn.trim().toLowerCase();
+			twitterSn = twitterSn.trim().toLowerCase();
+			ymSn = ymSn.trim().toLowerCase();
+			Date now = new Date();
 
-		EmailAddressGenerator emailAddressGenerator =
-			EmailAddressGeneratorFactory.getInstance();
+			EmailAddressGenerator emailAddressGenerator =
+				EmailAddressGeneratorFactory.getInstance();
 
-		if (emailAddressGenerator.isGenerated(emailAddress)) {
-			emailAddress = StringPool.BLANK;
-		}
+			if (emailAddressGenerator.isGenerated(emailAddress)) {
+				emailAddress = StringPool.BLANK;
+			}
 
-		if (!PropsValues.USERS_EMAIL_ADDRESS_REQUIRED &&
-			Validator.isNull(emailAddress)) {
+			if (!PropsValues.USERS_EMAIL_ADDRESS_REQUIRED &&
+				Validator.isNull(emailAddress)) {
 
-			emailAddress = emailAddressGenerator.generate(
+				emailAddress = emailAddressGenerator.generate(
+					user.getCompanyId(), userId);
+			}
+
+			validate(
+				userId, screenName, emailAddress, firstName, middleName, lastName,
+				smsSn);
+
+			if (Validator.isNotNull(newPassword1) ||
+				Validator.isNotNull(newPassword2)) {
+
+				user = updatePassword(
+					userId, newPassword1, newPassword2, passwordReset);
+
+				password = newPassword1;
+			}
+
+			user.setModifiedDate(now);
+
+			if (user.getContactId() <= 0) {
+				user.setContactId(counterLocalService.increment());
+			}
+
+			user.setPasswordReset(passwordReset);
+
+			if (Validator.isNotNull(reminderQueryQuestion) &&
+				Validator.isNotNull(reminderQueryAnswer)) {
+
+				user.setReminderQueryQuestion(reminderQueryQuestion);
+				user.setReminderQueryAnswer(reminderQueryAnswer);
+			}
+
+			user.setScreenName(screenName);
+
+			setEmailAddress(
+				user, password, firstName, middleName, lastName, emailAddress);
+
+			user.setOpenId(openId);
+			user.setLanguageId(languageId);
+			user.setTimeZoneId(timeZoneId);
+			user.setGreeting(greeting);
+			user.setComments(comments);
+			user.setFirstName(firstName);
+			user.setMiddleName(middleName);
+			user.setLastName(lastName);
+			user.setJobTitle(jobTitle);
+
+			userPersistence.update(user, false);
+
+			// Contact
+
+			Date birthday = PortalUtil.getDate(
+				birthdayMonth, birthdayDay, birthdayYear,
+				new ContactBirthdayException());
+
+			long contactId = user.getContactId();
+
+			Contact contact = contactPersistence.fetchByPrimaryKey(contactId);
+
+			if (contact == null) {
+				contact = contactPersistence.create(contactId);
+
+				contact.setCompanyId(user.getCompanyId());
+				contact.setUserName(StringPool.BLANK);
+				contact.setCreateDate(now);
+				contact.setAccountId(company.getAccountId());
+				contact.setParentContactId(
+					ContactConstants.DEFAULT_PARENT_CONTACT_ID);
+			}
+
+			contact.setModifiedDate(now);
+			contact.setFirstName(firstName);
+			contact.setMiddleName(middleName);
+			contact.setLastName(lastName);
+			contact.setPrefixId(prefixId);
+			contact.setSuffixId(suffixId);
+			contact.setMale(male);
+			contact.setBirthday(birthday);
+			contact.setSmsSn(smsSn);
+			contact.setAimSn(aimSn);
+			contact.setFacebookSn(facebookSn);
+			contact.setIcqSn(icqSn);
+			contact.setJabberSn(jabberSn);
+			contact.setMsnSn(msnSn);
+			contact.setMySpaceSn(mySpaceSn);
+			contact.setSkypeSn(skypeSn);
+			contact.setTwitterSn(twitterSn);
+			contact.setYmSn(ymSn);
+			contact.setJobTitle(jobTitle);
+
+			contactPersistence.update(contact, false);
+
+			// Group
+
+			Group group = groupLocalService.getUserGroup(
 				user.getCompanyId(), userId);
+
+			group.setFriendlyURL(StringPool.SLASH + screenName);
+
+			groupPersistence.update(group, false);
+
+			// Groups
+
+			updateGroups(userId, groupIds);
+
+			// Organizations
+
+			updateOrganizations(userId, organizationIds);
+
+			// Roles
+
+			if (roleIds != null) {
+				roleIds = EnterpriseAdminUtil.addRequiredRoles(user, roleIds);
+
+				userPersistence.setRoles(userId, roleIds);
+			}
+
+			// User group roles
+
+			updateUserGroupRoles(user, groupIds, organizationIds, userGroupRoles);
+
+			// User groups
+
+			if (userGroupIds != null) {
+				userGroupLocalService.copyUserGroupLayouts(userGroupIds, userId);
+
+				userPersistence.setUserGroups(userId, userGroupIds);
+			}
+
+			// Announcements
+
+			announcementsDeliveryLocalService.getUserDeliveries(user.getUserId());
+
+			// Asset
+
+			if (serviceContext != null) {
+				updateAsset(
+					userId, user, serviceContext.getAssetCategoryIds(),
+					serviceContext.getAssetTagNames());
+			}
+
+			// Expando
+
+			user.setExpandoBridgeAttributes(serviceContext);
+
+			// Indexer
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+			indexer.reindex(user);
+
+			// Permission cache
+
+			PermissionCacheUtil.clearCache();
+
+			return user;
 		}
-
-		validate(
-			userId, screenName, emailAddress, firstName, middleName, lastName,
-			smsSn);
-
-		if (Validator.isNotNull(newPassword1) ||
-			Validator.isNotNull(newPassword2)) {
-
-			user = updatePassword(
-				userId, newPassword1, newPassword2, passwordReset);
-
-			password = newPassword1;
+		finally {
+			ServiceContextThreadLocal.reset();
 		}
-
-		user.setModifiedDate(now);
-
-		if (user.getContactId() <= 0) {
-			user.setContactId(counterLocalService.increment());
-		}
-
-		user.setPasswordReset(passwordReset);
-
-		if (Validator.isNotNull(reminderQueryQuestion) &&
-			Validator.isNotNull(reminderQueryAnswer)) {
-
-			user.setReminderQueryQuestion(reminderQueryQuestion);
-			user.setReminderQueryAnswer(reminderQueryAnswer);
-		}
-
-		user.setScreenName(screenName);
-
-		setEmailAddress(
-			user, password, firstName, middleName, lastName, emailAddress);
-
-		user.setOpenId(openId);
-		user.setLanguageId(languageId);
-		user.setTimeZoneId(timeZoneId);
-		user.setGreeting(greeting);
-		user.setComments(comments);
-		user.setFirstName(firstName);
-		user.setMiddleName(middleName);
-		user.setLastName(lastName);
-		user.setJobTitle(jobTitle);
-
-		userPersistence.update(user, false);
-
-		// Contact
-
-		Date birthday = PortalUtil.getDate(
-			birthdayMonth, birthdayDay, birthdayYear,
-			new ContactBirthdayException());
-
-		long contactId = user.getContactId();
-
-		Contact contact = contactPersistence.fetchByPrimaryKey(contactId);
-
-		if (contact == null) {
-			contact = contactPersistence.create(contactId);
-
-			contact.setCompanyId(user.getCompanyId());
-			contact.setUserName(StringPool.BLANK);
-			contact.setCreateDate(now);
-			contact.setAccountId(company.getAccountId());
-			contact.setParentContactId(
-				ContactConstants.DEFAULT_PARENT_CONTACT_ID);
-		}
-
-		contact.setModifiedDate(now);
-		contact.setFirstName(firstName);
-		contact.setMiddleName(middleName);
-		contact.setLastName(lastName);
-		contact.setPrefixId(prefixId);
-		contact.setSuffixId(suffixId);
-		contact.setMale(male);
-		contact.setBirthday(birthday);
-		contact.setSmsSn(smsSn);
-		contact.setAimSn(aimSn);
-		contact.setFacebookSn(facebookSn);
-		contact.setIcqSn(icqSn);
-		contact.setJabberSn(jabberSn);
-		contact.setMsnSn(msnSn);
-		contact.setMySpaceSn(mySpaceSn);
-		contact.setSkypeSn(skypeSn);
-		contact.setTwitterSn(twitterSn);
-		contact.setYmSn(ymSn);
-		contact.setJobTitle(jobTitle);
-
-		contactPersistence.update(contact, false);
-
-		// Group
-
-		Group group = groupLocalService.getUserGroup(
-			user.getCompanyId(), userId);
-
-		group.setFriendlyURL(StringPool.SLASH + screenName);
-
-		groupPersistence.update(group, false);
-
-		// Groups
-
-		updateGroups(userId, groupIds);
-
-		// Organizations
-
-		updateOrganizations(userId, organizationIds);
-
-		// Roles
-
-		if (roleIds != null) {
-			roleIds = EnterpriseAdminUtil.addRequiredRoles(user, roleIds);
-
-			userPersistence.setRoles(userId, roleIds);
-		}
-
-		// User group roles
-
-		updateUserGroupRoles(user, groupIds, organizationIds, userGroupRoles);
-
-		// User groups
-
-		if (userGroupIds != null) {
-			userGroupLocalService.copyUserGroupLayouts(userGroupIds, userId);
-
-			userPersistence.setUserGroups(userId, userGroupIds);
-		}
-
-		// Announcements
-
-		announcementsDeliveryLocalService.getUserDeliveries(user.getUserId());
-
-		// Asset
-
-		if (serviceContext != null) {
-			updateAsset(
-				userId, user, serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames());
-		}
-
-		// Expando
-
-		user.setExpandoBridgeAttributes(serviceContext);
-
-		// Indexer
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
-
-		indexer.reindex(user);
-
-		// Permission cache
-
-		PermissionCacheUtil.clearCache();
-
-		return user;
 	}
 
 	protected int authenticate(

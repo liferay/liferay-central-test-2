@@ -40,7 +40,8 @@ public interface LDAPToPortalConverter {
 
 	public LDAPUser importLDAPUser(
 			long companyId, Attributes attributes, Properties userMappings,
-			Properties contactMappings, String password)
+			Properties userExpandoMappings, Properties contactMappings,
+			Properties contactExpandoMappings, String password)
 		throws Exception;
 
 }

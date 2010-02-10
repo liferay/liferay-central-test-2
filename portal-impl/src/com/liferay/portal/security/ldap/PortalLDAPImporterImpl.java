@@ -46,7 +46,11 @@ import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 import com.liferay.util.ldap.LDAPUtil;
+
+import java.io.Serializable;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -55,6 +59,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.naming.Binding;
@@ -237,15 +242,19 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		Properties userMappings = LDAPSettingsUtil.getUserMappings(
 			ldapServerId, companyId);
 
-		LogUtil.debug(_log, userMappings);
-
 		Properties contactMappings = LDAPSettingsUtil.getContactMappings(
 			ldapServerId, companyId);
 
-		LogUtil.debug(_log, contactMappings);
+		Properties userExpandoMappings =
+			LDAPSettingsUtil.getUserExpandoMappings(
+				ldapServerId, companyId);
+
+		Properties contactExpandoMappings =
+			LDAPSettingsUtil.getContactExpandoMappings(ldapServerId, companyId);
 
 		LDAPUser ldapUser = _ldapToPortalConverter.importLDAPUser(
-			companyId, attributes, userMappings, contactMappings, password);
+			companyId, attributes, userMappings, userExpandoMappings,
+			contactMappings, contactExpandoMappings, password);
 
 		User user = findLiferayUser(companyId, ldapUser);
 
@@ -268,6 +277,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		else {
 			user = createLiferayUser(companyId, ldapUser, password);
 		}
+
+		updateExpandoAttributes(user, ldapUser);
 
 		if (!importGroupMembership || (user == null)) {
 			return user;
@@ -539,6 +550,40 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		UserLocalServiceUtil.setUserGroupUsers(
 			userGroupId,
 			ArrayUtil.toArray(newUserIds.toArray(new Long[newUserIds.size()])));
+	}
+
+	protected void populateExpandoAttributes(
+		ExpandoBridge expandoBridge, Map<String, String> expandoData) {
+
+		for (Map.Entry<String, String> expandoAttribute :
+			expandoData.entrySet()) {
+
+			if (expandoBridge.hasAttribute(expandoAttribute.getKey())) {
+				int type = expandoBridge.getAttributeType(
+					expandoAttribute.getKey());
+
+				Serializable expandoValue =
+					ExpandoConverterUtil.
+						getAttributeFromString(
+							type, expandoAttribute.getValue());
+
+				expandoBridge.setAttribute(
+					expandoAttribute.getKey(), expandoValue);
+			}
+		}
+	}
+
+	protected void updateExpandoAttributes(User user, LDAPUser ldapUser) {
+		ExpandoBridge userExpandoBridge = user.getExpandoBridge();
+
+		populateExpandoAttributes(
+			userExpandoBridge, ldapUser.getUserExpandoData());
+
+		ExpandoBridge contactExpandoBridge =
+			user.getContact().getExpandoBridge();
+
+		populateExpandoAttributes(
+			contactExpandoBridge , ldapUser.getContactExpandoData());
 	}
 
 	protected User updateLiferayUser(

@@ -28,6 +28,9 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
+import java.io.Serializable;
+
+import java.util.Map;
 import java.util.Properties;
 
 import javax.naming.Binding;
@@ -45,7 +48,9 @@ import javax.naming.ldap.LdapContext;
  */
 public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
-	public void exportToLDAP(Contact contact) throws Exception {
+	public void exportToLDAP(
+		Contact contact, Map<String, Serializable> contactExpandoAttributes)
+		throws Exception {
 		long companyId = contact.getCompanyId();
 
 		if (!LDAPSettingsUtil.isAuthEnabled(companyId) ||
@@ -71,6 +76,10 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 			Properties contactMappings = LDAPSettingsUtil.getContactMappings(
 				ldapServerId, companyId);
 
+			Properties contactExpandoMappings =
+				LDAPSettingsUtil.getContactExpandoMappings(
+					ldapServerId, companyId);
+
 			Binding binding = PortalLDAPUtil.getUser(
 				ldapServerId, contact.getCompanyId(), user.getScreenName());
 
@@ -90,7 +99,8 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 			Modifications modifications =
 				_portalToLDAPConverter.getLDAPContactModifications(
-					contact, contactMappings);
+					contact, contactExpandoAttributes,
+					contactMappings, contactExpandoMappings);
 
 			ModificationItem[] modificationItems = modifications.getItems();
 
@@ -106,7 +116,10 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		}
 	}
 
-	public void exportToLDAP(User user) throws Exception {
+	public void exportToLDAP(
+		User user, Map<String, Serializable> userExpandoAttributes)
+		throws Exception {
+
 		long companyId = user.getCompanyId();
 
 		if (!LDAPSettingsUtil.isAuthEnabled(companyId) ||
@@ -129,6 +142,10 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 			Properties userMappings = LDAPSettingsUtil.getUserMappings(
 				ldapServerId, companyId);
 
+			Properties userExpandoMappings =
+				LDAPSettingsUtil.getUserExpandoMappings(
+					ldapServerId, companyId);
+
 			Binding binding = PortalLDAPUtil.getUser(
 				ldapServerId, user.getCompanyId(), user.getScreenName());
 
@@ -145,7 +162,8 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 			Modifications modifications =
 				_portalToLDAPConverter.getLDAPUserModifications(
-					user, userMappings);
+					user, userExpandoAttributes,
+					userMappings, userExpandoMappings);
 
 			ModificationItem[] modificationItems = modifications.getItems();
 

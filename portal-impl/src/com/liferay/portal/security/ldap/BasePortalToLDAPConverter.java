@@ -33,6 +33,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoConverterUtil;
+
+import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -64,15 +68,23 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 	}
 
 	public Modifications getLDAPContactModifications(
-			Contact contact, Properties contactMappings)
+			Contact contact, Map<String, Serializable> contactExpandoAttributes,
+			Properties contactMappings, Properties contactExpandoMappings)
 		throws Exception {
 
-		if (contactMappings.isEmpty()) {
+		if (contactMappings.isEmpty() && contactExpandoMappings.isEmpty()) {
 			return null;
 		}
 
-		return getModifications(
+		Modifications modifications = getModifications(
 			contact, contactMappings, _reservedContactFieldNames);
+
+		populateCustomAttributeModifications(
+			contact, contact.getExpandoBridge(),
+			contactExpandoAttributes, contactExpandoMappings,
+			modifications);
+
+		return modifications;
 	}
 
 	public Attributes getLDAPUserAttributes(
@@ -111,8 +123,10 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 
 		return attributes;
 	}
+
 	public Modifications getLDAPUserModifications(
-			User user, Properties userMappings)
+			User user, Map<String, Serializable> userExpandoAttributes,
+			Properties userMappings, Properties userExpandoMappings)
 		throws Exception {
 
 		Modifications modifications = getModifications(
@@ -125,6 +139,10 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 				userMappings.getProperty(UserConverterKeys.PASSWORD),
 				user.getPasswordUnencrypted(), modifications);
 		}
+
+		populateCustomAttributeModifications(
+			user, user.getExpandoBridge(), userExpandoAttributes,
+			userExpandoMappings, modifications);
 
 		return modifications;
 	}
@@ -222,6 +240,47 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 		}
 
 		return modifications;
+	}
+
+	protected void populateCustomAttributeModifications(
+		Object object, ExpandoBridge expandoBridge,
+		Map<String, Serializable> expandoAttributes,
+		Properties expandoMappings, Modifications modifications) {
+
+		if ((expandoAttributes == null) || (expandoAttributes.isEmpty())) {
+			return;
+		}
+
+		for (Map.Entry<Object, Object> entry : expandoMappings.entrySet()) {
+			String fieldName = (String)entry.getKey();
+
+			String ldapAttributeName = (String)entry.getValue();
+
+			Serializable fieldValue = expandoAttributes.get(fieldName);
+
+			if (fieldValue == null) {
+				continue;
+			}
+
+			try {
+				int type = expandoBridge.getAttributeType(fieldName);
+
+				String value =
+					ExpandoConverterUtil.getStringFromAttribute(
+						type, fieldValue);
+
+				addModificationItem(
+					ldapAttributeName, value, modifications);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to map field " + fieldName + " to class " +
+							object.getClass(),
+						e);
+				}
+			}
+		}
 	}
 
 	private static final String _DEFAULT_DN = "cn";

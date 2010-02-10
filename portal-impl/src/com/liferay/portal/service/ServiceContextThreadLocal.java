@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,45 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.ldap;
+package com.liferay.portal.service;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.User;
-
-import java.io.Serializable;
-
-import java.util.Map;
-import java.util.Properties;
-
-import javax.naming.directory.Attributes;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
- * <a href="PortalToLDAPConverter.java.html"><b><i>View Source</i></b></a>
+ * <a href="ServiceContextThreadLocal.java.html}"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
- * @author Brian Wing Shun Chan
  */
-public interface PortalToLDAPConverter {
+public class ServiceContextThreadLocal {
 
-	public Modifications getLDAPContactModifications(
-			Contact contact, Map<String, Serializable> contactExpandoAttributes,
-			Properties contactMappings,
-			Properties contactExpandoMappings)
-		throws Exception;
+	public static ServiceContext getServiceContext() {
+		return _serviceContextThreadLocal.get();
+	}
 
-	public Attributes getLDAPUserAttributes(
-			long ldapServerId, User user, Properties userMappings)
-		throws SystemException;
+	public static void setServiceContext(
+		ServiceContext serviceContext) {
 
-	public Modifications getLDAPUserModifications(
-			User user, Map<String, Serializable> userExpandoAttributes,
-			Properties userMappings,
-			Properties userExpandoMappings)
-		throws Exception;
+		_serviceContextThreadLocal.set(serviceContext);
+	}
 
-	public String getUserDNName(
-			long ldapServerId, User user, Properties userMappings)
-		throws Exception;
+	public static void reset() {
+		_serviceContextThreadLocal.remove();
+	}
+
+	private static ThreadLocal<ServiceContext>
+		_serviceContextThreadLocal =
+			new AutoResetThreadLocal<ServiceContext>();
 
 }

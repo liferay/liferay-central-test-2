@@ -25,6 +25,12 @@ package com.liferay.portal.model;
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.security.ldap.LDAPUserTransactionThreadLocal;
 import com.liferay.portal.security.ldap.PortalLDAPExporterUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextThreadLocal;
+
+import java.io.Serializable;
+
+import java.util.Map;
 
 /**
  * <a href="ContactListener.java.html"><b><i>View Source</i></b></a>
@@ -37,9 +43,7 @@ public class ContactListener extends BaseModelListener<Contact> {
 
 	public void onAfterCreate(Contact contact) throws ModelListenerException {
 		try {
-			if (!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-				PortalLDAPExporterUtil.exportToLDAP(contact);
-			}
+			exportToLDAP(contact);
 		}
 		catch (Exception e) {
 			throw new ModelListenerException(e);
@@ -48,12 +52,26 @@ public class ContactListener extends BaseModelListener<Contact> {
 
 	public void onAfterUpdate(Contact contact) throws ModelListenerException {
 		try {
-			if (!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-				PortalLDAPExporterUtil.exportToLDAP(contact);
-			}
+			exportToLDAP(contact);
 		}
 		catch (Exception e) {
 			throw new ModelListenerException(e);
+		}
+	}
+
+	protected void exportToLDAP(Contact contact) throws Exception {
+		if (!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
+			ServiceContext context =
+				ServiceContextThreadLocal.getServiceContext();
+
+			Map<String, Serializable> expandoBridgeAttributes = null;
+			if (context != null) {
+				expandoBridgeAttributes =
+					context.getExpandoBridgeAttributes();
+			}
+
+			PortalLDAPExporterUtil.exportToLDAP(
+				contact, expandoBridgeAttributes);
 		}
 	}
 

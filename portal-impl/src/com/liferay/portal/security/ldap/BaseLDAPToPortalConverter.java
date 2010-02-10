@@ -37,10 +37,13 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.util.ldap.LDAPUtil;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
+import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
 
 /**
@@ -72,7 +75,8 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 
 	public LDAPUser importLDAPUser(
 			long companyId, Attributes attributes, Properties userMappings,
-			Properties contactMappings, String password)
+			Properties userExpandoMappings, Properties contactMappings,
+			Properties contactExpandoMappings, String password)
 		throws Exception {
 
 		boolean autoPassword = false;
@@ -158,6 +162,10 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 		user.setPasswordUnencrypted(password);
 		user.setScreenName(screenName);
 
+		//	Custom attributes
+		Map<String, String> userExpandoData = getExpandoData(
+			attributes, userExpandoMappings);
+
 		Contact contact = new ContactImpl();
 
 		contact.setBirthday(
@@ -167,11 +175,16 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 		contact.setPrefixId(prefixId);
 		contact.setSuffixId(suffixId);
 
+		//	Custom attributes
+		Map<String, String> contactExpandoData = getExpandoData(
+			attributes, contactExpandoMappings);
+
 		LDAPUser ldapUser = new LDAPUser();
 
 		ldapUser.setAutoPassword(autoPassword);
 		ldapUser.setAutoScreenName(autoScreenName);
 		ldapUser.setContact(contact);
+		ldapUser.setContactExpandoData(contactExpandoData);
 		ldapUser.setCreatorUserId(creatorUserId);
 		ldapUser.setGroupIds(groupIds);
 		ldapUser.setOrganizationIds(organizationIds);
@@ -181,10 +194,31 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 		ldapUser.setServiceContext(serviceContext);
 		ldapUser.setUpdatePassword(updatePassword);
 		ldapUser.setUser(user);
+		ldapUser.setUserExpandoData(userExpandoData);
 		ldapUser.setUserGroupIds(userGroupIds);
 		ldapUser.setUserGroupRoles(userGroupRoles);
 
 		return ldapUser;
+	}
+
+	protected Map<String, String> getExpandoData(
+			Attributes attributes, Properties expandoMappings)
+		throws NamingException {
+
+		Map<String, String> expandoData =
+			new HashMap<String, String>();
+
+		for (Object expandoMappingName : expandoMappings.keySet()) {
+			String attribute =
+				LDAPUtil.getAttributeValue(
+					attributes,	expandoMappings.getProperty(
+						(String) expandoMappingName));
+
+			if (Validator.isNotNull(attribute)) {
+				expandoData.put((String) expandoMappingName, attribute);
+			}
+		}
+		return expandoData;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

@@ -25,6 +25,12 @@ package com.liferay.portal.model;
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.security.ldap.LDAPUserTransactionThreadLocal;
 import com.liferay.portal.security.ldap.PortalLDAPExporterUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextThreadLocal;
+
+import java.io.Serializable;
+
+import java.util.Map;
 
 /**
  * <a href="UserListener.java.html"><b><i>View Source</i></b></a>
@@ -37,11 +43,7 @@ public class UserListener extends BaseModelListener<User> {
 
 	public void onAfterCreate(User user) throws ModelListenerException {
 		try {
-			if (!user.isDefaultUser() &&
-				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-
-				PortalLDAPExporterUtil.exportToLDAP(user);
-			}
+			exportToLDAP(user);
 		}
 		catch (Exception e) {
 			throw new ModelListenerException(e);
@@ -50,14 +52,27 @@ public class UserListener extends BaseModelListener<User> {
 
 	public void onAfterUpdate(User user) throws ModelListenerException {
 		try {
-			if (!user.isDefaultUser() &&
-				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
-
-				PortalLDAPExporterUtil.exportToLDAP(user);
-			}
+			exportToLDAP(user);
 		}
 		catch (Exception e) {
 			throw new ModelListenerException(e);
+		}
+	}
+
+	protected void exportToLDAP(User user) throws Exception {
+		if (!user.isDefaultUser() &&
+			!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
+
+			ServiceContext context =
+				ServiceContextThreadLocal.getServiceContext();
+
+			Map<String, Serializable> expandoBridgeAttributes = null;
+			if (context != null) {
+				expandoBridgeAttributes =
+					context.getExpandoBridgeAttributes();
+			}
+
+			PortalLDAPExporterUtil.exportToLDAP(user, expandoBridgeAttributes);
 		}
 	}
 
