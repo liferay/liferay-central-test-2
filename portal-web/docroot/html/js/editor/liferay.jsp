@@ -41,7 +41,6 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 %>
 
 <html>
-
 <head>
 	<title>Editor</title>
 	<style type="text/css">
