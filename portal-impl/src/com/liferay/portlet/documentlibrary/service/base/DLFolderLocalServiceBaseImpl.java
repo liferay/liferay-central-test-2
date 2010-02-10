@@ -62,6 +62,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
@@ -227,6 +228,15 @@ public abstract class DLFolderLocalServiceBaseImpl
 	public void setDLFileVersionLocalService(
 		DLFileVersionLocalService dlFileVersionLocalService) {
 		this.dlFileVersionLocalService = dlFileVersionLocalService;
+	}
+
+	public DLFileVersionService getDLFileVersionService() {
+		return dlFileVersionService;
+	}
+
+	public void setDLFileVersionService(
+		DLFileVersionService dlFileVersionService) {
+		this.dlFileVersionService = dlFileVersionService;
 	}
 
 	public DLFileVersionPersistence getDLFileVersionPersistence() {
@@ -523,6 +533,8 @@ public abstract class DLFolderLocalServiceBaseImpl
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService")
 	protected DLFileVersionLocalService dlFileVersionLocalService;
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileVersionService")
+	protected DLFileVersionService dlFileVersionService;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence")
 	protected DLFileVersionPersistence dlFileVersionPersistence;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderLocalService")

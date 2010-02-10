@@ -78,4 +78,19 @@ public class DLFileVersionLocalServiceImpl
 		return fileVersions.get(0);
 	}
 
+	public DLFileVersion updateDescription(
+			long groupId, long folderId, String name, double version,
+			String description)
+		throws PortalException, SystemException {
+
+		DLFileVersion fileVersion = dlFileVersionPersistence.findByG_F_N_V(
+			groupId, folderId, name, version);
+
+		fileVersion.setDescription(description);
+
+		dlFileVersionPersistence.update(fileVersion, false);
+
+		return fileVersion;
+	}
+
 }

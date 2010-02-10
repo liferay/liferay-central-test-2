@@ -578,6 +578,13 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.DL, "DLFileVersion",
+	{
+		updateDescription: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.DL, "DLFolder",
 	{
 		addFolder: true,
