@@ -131,7 +131,9 @@ public class UpgradeTags extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select * from TagsEntry where entryId = ?");
+				"select * from TagsEntry where entryId = ?",
+				ResultSet.TYPE_SCROLL_INSENSITIVE,
+				ResultSet.CONCUR_READ_ONLY);
 
 			ps.setLong(1, entryId);
 
@@ -178,7 +180,9 @@ public class UpgradeTags extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select * from TagsProperty where entryId = ?");
+				"select * from TagsProperty where entryId = ?",
+				ResultSet.TYPE_SCROLL_INSENSITIVE,
+				ResultSet.CONCUR_READ_ONLY);
 
 			ps.setLong(1, entryId);
 
@@ -280,7 +284,9 @@ public class UpgradeTags extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"select TA.assetId, TA.groupId, TA_TE.entryId from " +
 					"TagsAssets_TagsEntries TA_TE inner join TagsAsset TA on " +
-						"TA.assetId = TA_TE.assetId");
+						"TA.assetId = TA_TE.assetId",
+				ResultSet.TYPE_SCROLL_INSENSITIVE,
+				ResultSet.CONCUR_READ_ONLY);
 
 			rs = ps.executeQuery();
 
