@@ -34,7 +34,7 @@ String licenseId = String.valueOf(license.getLicenseId());
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= SCLicensePermission.contains(permissionChecker, license.getLicenseId(), ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/software_catalog/edit_license" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="licenseId" value="<%= licenseId %>" />
@@ -44,7 +44,7 @@ String licenseId = String.valueOf(license.getLicenseId());
 	</c:if>
 
 	<c:if test="<%= SCLicensePermission.contains(permissionChecker, license.getLicenseId(), ActionKeys.UPDATE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/software_catalog/edit_license" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

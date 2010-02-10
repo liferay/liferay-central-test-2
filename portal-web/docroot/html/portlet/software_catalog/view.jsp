@@ -48,8 +48,6 @@ String type = ParamUtil.getString(request, "type");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/software_catalog/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
@@ -174,8 +172,6 @@ portletURL.setParameter("tabs1", tabs1);
 			ResultRow row = new ResultRow(productEntry, productEntryId, i);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
-
-			rowURL.setWindowState(WindowState.MAXIMIZED);
 
 			rowURL.setParameter("struts_action", "/software_catalog/view_product_entry");
 			rowURL.setParameter("redirect", currentURL);
@@ -372,8 +368,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
-			rowURL.setWindowState(WindowState.MAXIMIZED);
-
 			rowURL.setParameter("struts_action", "/software_catalog/view_product_entry");
 			rowURL.setParameter("redirect", currentURL);
 			rowURL.setParameter("productEntryId", String.valueOf(productEntryId));
@@ -448,7 +442,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<c:if test="<%= showAddProductEntryButton %>">
 			<div>
-				<input type="button" value="<liferay-ui:message key="add-product" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="add-product" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</div>
 
 			<br />
@@ -527,7 +521,7 @@ portletURL.setParameter("tabs1", tabs1);
 		<c:if test="<%= showAddFrameworkVersionButton || showPermissionsButton %>">
 			<div>
 				<c:if test="<%= showAddFrameworkVersionButton %>">
-					<input type="button" value="<liferay-ui:message key="add-framework-version" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_framework_version" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+					<input type="button" value="<liferay-ui:message key="add-framework-version" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/software_catalog/edit_framework_version" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 				</c:if>
 
 				<c:if test="<%= showPermissionsButton %>">
@@ -630,7 +624,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LICENSE) %>">
 			<div>
-				<input type="button" value="<liferay-ui:message key="add-license" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_license" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="add-license" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/software_catalog/edit_license" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</div>
 
 			<br />
@@ -644,7 +638,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 <aui:script>
 	function <portlet:namespace />addProduct() {
-		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
+		var url = '<portlet:renderURL><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
 
 		if (document.<portlet:namespace />fm.<portlet:namespace />keywords) {
 			url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />keywords.value;

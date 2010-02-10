@@ -39,8 +39,6 @@ SCProductVersion latestProductVersion = productEntry.getLatestVersion();
 
 PortletURL addProductVersionURL = renderResponse.createRenderURL();
 
-addProductVersionURL.setWindowState(WindowState.MAXIMIZED);
-
 addProductVersionURL.setParameter("struts_action", "/software_catalog/edit_product_version");
 addProductVersionURL.setParameter(Constants.CMD, Constants.ADD);
 addProductVersionURL.setParameter("tabs2", tabs2);
@@ -49,16 +47,12 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 
 PortletURL editProductEntryURL = renderResponse.createRenderURL();
 
-editProductEntryURL.setWindowState(WindowState.MAXIMIZED);
-
 editProductEntryURL.setParameter("struts_action", "/software_catalog/edit_product_entry");
 editProductEntryURL.setParameter("tabs2", tabs2);
 editProductEntryURL.setParameter("redirect", currentURL);
 editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId));
 
 PortletURL viewProductEntryURL = renderResponse.createRenderURL();
-
-viewProductEntryURL.setWindowState(WindowState.MAXIMIZED);
 
 viewProductEntryURL.setParameter("struts_action", "/software_catalog/view_product_entry");
 viewProductEntryURL.setParameter("tabs2", tabs2);
@@ -271,8 +265,6 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 		<%
 		PortletURL viewProductVersionURL = renderResponse.createRenderURL();
 
-		viewProductVersionURL.setWindowState(WindowState.MAXIMIZED);
-
 		viewProductVersionURL.setParameter("struts_action", "/software_catalog/view_product_entry");
 		viewProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryId));
 
@@ -342,8 +334,6 @@ PortalUtil.setPageDescription(productEntry.getShortDescription(), request);
 PortalUtil.setPageKeywords(productEntry.getTags(), request);
 
 PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/software_catalog/view_product");
 portletURL.setParameter("redirect", currentURL);

@@ -24,6 +24,7 @@ package com.liferay.portlet.softwarecatalog;
 
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -95,9 +96,7 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 					productEntryId + "/versions/new";
 			}
 		}
-		else if (action.equals(
-					"/software_catalog/edit_framework_version")) {
-
+		else if (action.equals("/software_catalog/edit_framework_version")) {
 			String frameworkVersionId = portletURL.getParameter(
 				"frameworkVersionId");
 
@@ -111,9 +110,7 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 				friendlyURL = "/software_catalog/framework_versions/new";
 			}
 		}
-		else if (action.equals(
-					"/software_catalog/edit_license")) {
-
+		else if (action.equals("/software_catalog/edit_license")) {
 			String licenseId = portletURL.getParameter("licenseId");
 
 			if (Validator.isNotNull(licenseId)) {
@@ -126,9 +123,7 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 				friendlyURL = "/software_catalog/licenses/new";
 			}
 		}
-		else if (action.equals(
-					"/software_catalog/search")) {
-
+		else if (action.equals("/software_catalog/search")) {
 			friendlyURL = "/software_catalog/search";
 		}
 
@@ -137,6 +132,12 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 			portletURL.addParameterIncludedInPath("struts_action");
 			portletURL.addParameterIncludedInPath("tabs1");
+
+			WindowState windowState = portletURL.getWindowState();
+
+			if (!windowState.equals(WindowState.NORMAL)) {
+				friendlyURL += StringPool.SLASH + windowState;
+			}
 		}
 
 		return friendlyURL;
@@ -159,13 +160,18 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 			addParam(params, "p_p_lifecycle", "0");
 		}
 
-		addParam(params, "p_p_state", WindowState.MAXIMIZED);
 		addParam(params, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 
 		String[] urlFragments = StringUtil.split(
 			friendlyURLPath.substring(x + 1), StringPool.SLASH);
+
+		if (friendlyURLPath.indexOf("maximized", x) != -1) {
+			urlFragments = ArrayUtil.remove(urlFragments, "maximized");
+
+			addParam(params, "p_p_state", WindowState.MAXIMIZED);
+		}
 
 		String resourceIdParam = getResourceIdParam(urlFragments[0]);
 
