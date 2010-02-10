@@ -75,6 +75,7 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 	public void testAddFileEntryWithDuplicateName() throws Exception {
 		String fileName = "helloworld.txt";
 		String description = StringPool.BLANK;
+		String versionDescription = StringPool.BLANK;
 		String extraSettings = StringPool.BLANK;
 
 		String content = "Hello World!";
@@ -88,12 +89,14 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
 		DLFileEntryServiceUtil.addFileEntry(
 			_folder.getGroupId(), _folder.getFolderId(), fileName, fileName,
-			description, extraSettings, bytes, serviceContext);
+			description, versionDescription, extraSettings, bytes,
+			serviceContext);
 
 		try {
 			DLFileEntryServiceUtil.addFileEntry(
 				_folder.getGroupId(), _folder.getFolderId(), fileName, fileName,
-				description, extraSettings, bytes, serviceContext);
+				description, versionDescription, extraSettings, bytes,
+				serviceContext);
 
 			fail("Able to add two files of the name " + fileName);
 		}
