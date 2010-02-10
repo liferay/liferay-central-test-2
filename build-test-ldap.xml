@@ -86,14 +86,14 @@ userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09</echo>
 		</exec>
 	</target>
 
-	<target name="run-ldap-tomcat-6.0-mysql-5.0">
+	<target name="run-ldap-tomcat-mysql-5.0">
 		<antcall target="prepare-mysql-5.0" />
 
 		<antcall target="prepare-vm-server">
 			<param name="vm.vmdk.suffix" value="generic" />
 		 </antcall>
 
-		<ant antfile="build-test-tomcat-6.0.xml" target="prepare-vm-tomcat-6.0"> </ant>
+		<ant antfile="build-test-tomcat.xml" target="prepare-vm-tomcat"> </ant>
 
 		<antcall target="prepare-ldap-apache" />
 

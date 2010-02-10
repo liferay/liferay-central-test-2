@@ -132,7 +132,7 @@ jdbc.default.numHelperThreads=1</echo>
 	</target>
 
 	<target name="prepare-vm-server">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<delete dir="dist" />
 		<mkdir dir="dist" />

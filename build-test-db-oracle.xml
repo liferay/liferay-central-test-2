@@ -6,7 +6,7 @@
 	<target name="test-db-oracle-10">
 		<antcall target="prepare-oracle-10" />
 
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="test-db-oracle-10-latest" />
 		<antcall target="test-db-oracle-10-5.1.0" />
@@ -84,7 +84,7 @@
 
 		<antcall target="start-selenium" />
 
-		<ant antfile="build-test-tomcat-6.0.xml" target="run-tomcat-6.0">
+		<ant antfile="build-test-tomcat.xml" target="run-tomcat">
 			<property name="skip.rebuild-database" value="true" />
 			<property name="test.class" value="SmokeTestSuite" />
 		</ant>

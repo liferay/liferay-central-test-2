@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 
-<project name="portal-test-tomcat-6.0" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+<project name="portal-test-tomcat" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="prepare-cluster-tomcat-6.0-node">
+	<target name="prepare-cluster-tomcat-node">
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-6.0-${lp.version}.zip ${vm.username}@${cluster-node.host}:/" />
+			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-${lp.version}.zip ${vm.username}@${cluster-node.host}:/" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${cluster-node.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-6.0-${lp.version}.zip -oC:\" />
+			<arg line="-pw ${vm.password} ${vm.username}@${cluster-node.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-${lp.version}.zip -oC:\" />
 		</exec>
 
 		<antcall target="replace-remote-file">
@@ -52,15 +52,15 @@ web.server.display.node=true</echo>
 		<delete file="portal-impl/src/portal-ext.properties" />
 	</target>
 
-	<target name="prepare-vm-tomcat-6.0">
-		<antcall target="prepare-zip-tomcat-6.0" />
+	<target name="prepare-vm-tomcat">
+		<antcall target="prepare-zip-tomcat" />
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-6.0-${lp.version}.zip ${vm.username}@${vm.host}:/" />
+			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-${lp.version}.zip ${vm.username}@${vm.host}:/" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-6.0-${lp.version}.zip -oC:\" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-${lp.version}.zip -oC:\" />
 		</exec>
 
 		<antcall target="replace-remote-file">
@@ -71,21 +71,21 @@ web.server.display.node=true</echo>
 		</antcall>
 	</target>
 
-	<target name="prepare-zip-tomcat-6.0">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+	<target name="prepare-zip-tomcat">
+		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="revert-test-properties" />
 
 		<mkdir dir="dist" />
 
-		<ant antfile="build-dist.xml" target="zip-tomcat-6.0" />
+		<ant antfile="build-dist.xml" target="zip-tomcat" />
 	</target>
 
-	<target name="run-selenium-tomcat-6.0">
+	<target name="run-selenium-tomcat">
 		<if>
 			<equals arg1="${build.app.server}" arg2="$${build.app.server}" />
 			<then>
-				<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+				<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 			</then>
 		</if>
 
@@ -95,7 +95,7 @@ web.server.display.node=true</echo>
 
 		<antcall target="start-selenium" />
 
-		<antcall target="run-tomcat-6.0">
+		<antcall target="run-tomcat">
 			<param name="portlet.plugins.includes" value="${portlet.plugins.includes}" />
 			<param name="test.class" value="${test.name}" />
 			<param name="theme.plugins.includes" value="${theme.plugins.includes}" />
@@ -104,7 +104,7 @@ web.server.display.node=true</echo>
 		<antcall target="stop-selenium" />
 	</target>
 
-	<target name="run-tomcat-6.0">
+	<target name="run-tomcat">
 		<antcall target="run-simple-server">
 			<param name="simple.server.dir" value="${app.server.tomcat.dir}" />
 			<param name="simple.server.bin.dir" value="${app.server.tomcat.bin.dir}" />

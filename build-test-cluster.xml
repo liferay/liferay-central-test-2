@@ -111,23 +111,23 @@ JkShmFile logs/jk-runtime-status</echo>
 		</exec>
 	</target>
 
-	<target name="prepare-cluster-tomcat-6.0-node-1">
-		<ant antfile="build-test-tomcat-6.0.xml" target="prepare-cluster-tomcat-6.0-node">
+	<target name="prepare-cluster-tomcat-node-1">
+		<ant antfile="build-test-tomcat.xml" target="prepare-cluster-tomcat-node">
 			<property name="cluster-node.host" value="${vm.host.cluster-node-1}" />
 			<property name="cluster-node.value" value="node-1" />
 		</ant>
 	</target>
 
-	<target name="prepare-cluster-tomcat-6.0-node-2">
-		<ant antfile="build-test-tomcat-6.0.xml" target="prepare-cluster-tomcat-6.0-node">
+	<target name="prepare-cluster-tomcat-node-2">
+		<ant antfile="build-test-tomcat.xml" target="prepare-cluster-tomcat-node">
 			<property name="cluster-node.host" value="${vm.host.cluster-node-2}" />
 			<property name="cluster-node.value" value="node-2" />
 		</ant>
 	</target>
 
-	<target name="prepare-cluster-tomcat-6.0">
-		<antcall target="prepare-cluster-tomcat-6.0-node-1" />
-		<antcall target="prepare-cluster-tomcat-6.0-node-2" />
+	<target name="prepare-cluster-tomcat">
+		<antcall target="prepare-cluster-tomcat-node-1" />
+		<antcall target="prepare-cluster-tomcat-node-2" />
 	</target>
 
 	<target name="prepare-cluster-vm-node">
@@ -163,16 +163,16 @@ JkShmFile logs/jk-runtime-status</echo>
 		<antcall target="prepare-cluster-vm-node-2" />
 	</target>
 
-	<target name="run-cluster-tomcat-6.0-mysql-5.0">
+	<target name="run-cluster-tomcat-mysql-5.0">
 		<antcall target="prepare-mysql-5.0" />
 
 		<antcall target="prepare-cluster-vms" />
 
-		<ant antfile="build-test-tomcat-6.0.xml" target="prepare-zip-tomcat-6.0"> </ant>
+		<ant antfile="build-test-tomcat.xml" target="prepare-zip-tomcat"> </ant>
 
 		<antcall target="prepare-cluster-apache-node-1" />
 
-		<antcall target="prepare-cluster-tomcat-6.0" />
+		<antcall target="prepare-cluster-tomcat" />
 
 		<antcall target="rebuild-database" inheritAll="false" />
 

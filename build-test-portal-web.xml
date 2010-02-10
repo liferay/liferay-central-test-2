@@ -11,34 +11,34 @@
 		</ant>
 	</target>
 
-	<target name="run-portal-web-tomcat-6.0-mysql-5.0">
+	<target name="run-portal-web-tomcat-mysql-5.0">
 		<antcall target="prepare-mysql-5.0" />
 
-		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>
 
-	<target name="run-portal-web-tomcat-6.0-oracle-10">
+	<target name="run-portal-web-tomcat-oracle-10">
 		<antcall target="prepare-oracle-10" />
 
-		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>
 
-	<target name="run-portal-web-tomcat-6.0-postgresql-8.3">
+	<target name="run-portal-web-tomcat-postgresql-8.3">
 		<antcall target="prepare-postgresql-8.3" />
 
-		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>
 
-	<target name="run-portal-web-tomcat-6.0-sql-server-2005">
+	<target name="run-portal-web-tomcat-sql-server-2005">
 		<antcall target="prepare-sql-server-2005" />
 
-		<ant antfile="build-test-tomcat-6.0.xml" target="run-selenium-tomcat-6.0">
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			<property name="test.name" value="PortalWebTestSuite" />
 		</ant>
 	</target>

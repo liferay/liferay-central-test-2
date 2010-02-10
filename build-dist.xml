@@ -500,10 +500,6 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 	</target>
 
 	<target name="build-dist-tomcat">
-		<antcall target="build-dist-tomcat-6.0" />
-	</target>
-
-	<target name="build-dist-tomcat-6.0">
 		<delete dir="${app.server.parent.dir}/tomcat-6.0.24" />
 
 		<unzip src="${app.server.parent.dir}/apache-tomcat-6.0.24.zip" dest="${app.server.parent.dir}">
@@ -1014,14 +1010,10 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 	</target>
 
 	<target name="zip-tomcat">
-		<antcall target="zip-tomcat-6.0" />
-	</target>
-
-	<target name="zip-tomcat-6.0">
-		<delete file="dist/liferay-portal-tomcat-6.0-${lp.version}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-tomcat-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="zip-executable">
-			<param name="zip.executable.file" value="liferay-portal-tomcat-6.0" />
+			<param name="zip.executable.file" value="liferay-portal-tomcat" />
 			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
 		</antcall>
 	</target>

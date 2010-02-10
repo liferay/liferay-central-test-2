@@ -17,7 +17,7 @@ tck.url=true</echo>
 		<antcall target="clean" />
 		<antcall target="start" />
 
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-6.0" />
+		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<delete dir="tools/tck" />
 

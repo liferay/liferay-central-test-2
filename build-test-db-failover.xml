@@ -3,14 +3,14 @@
 <project name="portal-test-db-failover" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="run-db-failover-tomcat-6.0-mysql-5.0">
+	<target name="run-db-failover-tomcat-mysql-5.0">
 		<antcall target="prepare-mysql-5.0" />
 
 		<antcall target="prepare-vm-server">
 			<param name="vm.vmdk.suffix" value="generic" />
 		 </antcall>
 
-		<ant antfile="build-test-tomcat-6.0.xml" target="prepare-vm-tomcat-6.0"> </ant>
+		<ant antfile="build-test-tomcat.xml" target="prepare-vm-tomcat"> </ant>
 
 		<echo file="portal-impl/src/portal-ext.properties" append="true">
 
