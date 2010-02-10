@@ -78,7 +78,7 @@ if (folder != null) {
 
 		// Name
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("<img align=\"left\" border=\"0\" src=\"");
 		sb.append(themeDisplay.getPathThemeImages());
@@ -103,7 +103,7 @@ if (folder != null) {
 
 		// Action
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		sb.append("opener.");
 		sb.append(renderResponse.getNamespace());
