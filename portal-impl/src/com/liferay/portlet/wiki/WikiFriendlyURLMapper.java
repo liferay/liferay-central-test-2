@@ -119,15 +119,15 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
-			portletURL.addParameterIncludedInPath("p_p_id");
-
-			portletURL.addParameterIncludedInPath("struts_action");
-
 			WindowState windowState = portletURL.getWindowState();
 
 			if (!windowState.equals(WindowState.NORMAL)) {
 				friendlyURLPath += StringPool.SLASH + windowState;
 			}
+
+			portletURL.addParameterIncludedInPath("p_p_id");
+
+			portletURL.addParameterIncludedInPath("struts_action");
 		}
 
 		return friendlyURLPath;

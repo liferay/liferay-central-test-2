@@ -128,16 +128,16 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		if (Validator.isNotNull(friendlyURL)) {
-			portletURL.addParameterIncludedInPath("p_p_id");
-
-			portletURL.addParameterIncludedInPath("struts_action");
-			portletURL.addParameterIncludedInPath("tabs1");
-
 			WindowState windowState = portletURL.getWindowState();
 
 			if (!windowState.equals(WindowState.NORMAL)) {
 				friendlyURL += StringPool.SLASH + windowState;
 			}
+
+			portletURL.addParameterIncludedInPath("p_p_id");
+
+			portletURL.addParameterIncludedInPath("struts_action");
+			portletURL.addParameterIncludedInPath("tabs1");
 		}
 
 		return friendlyURL;
