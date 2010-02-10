@@ -57,7 +57,7 @@ JournalArticle article = (JournalArticle)row.getObject();
 	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.VIEW) %>">
 
 		<%
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(themeDisplay.getPathMain());
 		sb.append("/journal/view_article_content?groupId=");
