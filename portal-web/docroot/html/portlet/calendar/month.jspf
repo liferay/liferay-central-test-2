@@ -44,7 +44,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("h:mma", local
 		String taglibOnChange = "location.href = '" + portletURL + "&" + renderResponse.getNamespace() + "month=" + selMonth + "&" + renderResponse.getNamespace() + "day=" + selDay + "&" + renderResponse.getNamespace() + "year=" + selYear + "&" + renderResponse.getNamespace() + "eventType=' + this.value;";
 		%>
 
-		<aui:select label="" name="eventType" onChange="<%= taglibOnChange %>">
+		<aui:select changesContext="<%= true %>" label="" name="eventType" onChange="<%= taglibOnChange %>" title="events">
 			<aui:option label="all-events" value="" />
 
 			<%

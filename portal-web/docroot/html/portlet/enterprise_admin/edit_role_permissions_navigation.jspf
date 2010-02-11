@@ -30,7 +30,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 
 <aui:form action="<%= currentURL %>" name="resourceSelection">
 	<aui:fieldset>
-		<aui:select name="add-permissions" onchange='<%= renderResponse.getNamespace() + "addPermissions(this);" %>'>
+		<aui:select changesContext="<%= true %>" name="add-permissions" onchange='<%= renderResponse.getNamespace() + "addPermissions(this);" %>'>
 			<aui:option label="" />
 
 			<c:choose>

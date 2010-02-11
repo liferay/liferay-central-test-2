@@ -29,7 +29,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 <c:if test="<%= !addPortletURLs.isEmpty() %>">
 	<aui:form name="fm">
 		<div class="lfr-meta-actions edit-controls">
-			<aui:select label="" name="assetURL" onChange='<%= renderResponse.getNamespace() + "addNewAsset();" %>'>
+			<aui:select changesContext="<%= true %>" label="" name="assetURL" onChange='<%= renderResponse.getNamespace() + "addNewAsset();" %>' title="add-asset">
 				<aui:option label='<%= LanguageUtil.get(pageContext, "add-new") + "..." %>' value="" />
 
 				<%

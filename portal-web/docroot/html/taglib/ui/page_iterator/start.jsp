@@ -133,14 +133,14 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 		<c:if test='<%= type.equals("regular") %>'>
 			<c:if test="<%= PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES.length > 0 %>">
 				<div class="delta-selector">
-					<liferay-ui:message key="items-per-page" />
-
 					<c:choose>
 						<c:when test="<%= !deltaConfigurable || themeDisplay.isFacebook() %>">
+							<liferay-ui:message key="items-per-page" />
+
 							<%= delta %>
 						</c:when>
 						<c:otherwise>
-							<select onchange="<%= namespace %><%= deltaParam %>updateDelta(this);">
+							<aui:select changesContext="<%= true %>" inlineLabel="left" name="itemsPerPage" onchange='<%= namespace + deltaParam + "updateDelta(this);" %>'>
 
 								<%
 								for (int curDelta : PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES) {
@@ -149,27 +149,27 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 									}
 								%>
 
-									<option <%= ((delta == curDelta) ? "selected=\"selected\"" : "") %> value="<%= curDelta %>"><%= curDelta %></option>
+									<aui:option label="<%= curDelta %>" selected="<%= delta == curDelta %>"  />
 
 								<%
 								}
 								%>
 
-							</select>
+							</aui:select>
 						</c:otherwise>
 					</c:choose>
 				</div>
 			</c:if>
 
 			<div class="page-selector">
-				<liferay-ui:message key="page" />
-
 				<c:choose>
 					<c:when test="<%= themeDisplay.isFacebook() %>">
+						<liferay-ui:message key="page" />
+
 						<%= cur %>
 					</c:when>
 					<c:otherwise>
-						<select onchange="<%= namespace %><%= curParam %>updateCur(this);">
+						<aui:select changesContext="<%= true %>" inlineLabel="left" name="page" onchange='<%= namespace + curParam + "updateCur(this);" %>' suffix='<%= LanguageUtil.get(pageContext, "of") + StringPool.SPACE + numberFormat.format(pages) %>'>
 
 							<%
 							int pagesIteratorMax = maxPages;
@@ -192,19 +192,15 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 							for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
 							%>
 
-								<option <%= (i == cur) ? "selected=\"selected\"" : "" %> value="<%= i %>"><%= i %></option>
+								<aui:option label="<%= i %>" selected="<%= (i == cur) %>" />
 
 							<%
 							}
 							%>
 
-						</select>
+						</aui:select>
 					</c:otherwise>
 				</c:choose>
-
-				<liferay-ui:message key="of" />
-
-				<%= numberFormat.format(pages) %>
 			</div>
 		</c:if>
 

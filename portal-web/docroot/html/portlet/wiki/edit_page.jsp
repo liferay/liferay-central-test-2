@@ -229,7 +229,7 @@ if (Validator.isNull(redirect)) {
 
 			<c:choose>
 				<c:when test="<%= (WikiPageConstants.FORMATS.length > 1) %>">
-					<aui:select name="format" onChange='<%= renderResponse.getNamespace() + "changeFormat(this);" %>'>
+					<aui:select changesContext="<%= true %>" name="format" onChange='<%= renderResponse.getNamespace() + "changeFormat(this);" %>'>
 
 						<%
 						for (int i = 0; i < WikiPageConstants.FORMATS.length; i++) {

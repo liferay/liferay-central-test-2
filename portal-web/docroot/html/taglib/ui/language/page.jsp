@@ -77,7 +77,7 @@ for (int i = 0; i < locales.length; i++) {
 <c:choose>
 	<c:when test="<%= displayStyle == LanguageTag.SELECT_BOX %>">
 		<aui:form action="<%= formAction %>" method="post" name="<%= formName %>">
-			<aui:select label="" name="<%= name %>" onChange='<%= "submitForm(document." + namespace + formName + ");" %>'>
+			<aui:select changesContext="<%= true %>" label="" name="<%= name %>" onChange='<%= "submitForm(document." + namespace + formName + ");" %>' title="language">
 
 				<%
 				for (int i = 0; i < locales.length; i++) {
