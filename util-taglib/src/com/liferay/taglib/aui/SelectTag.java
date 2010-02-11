@@ -234,8 +234,8 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		"/html/taglib/aui/select/start.jsp";
 
 	private Object _bean;
-	private String _cssClass;
 	private boolean _changesContext;
+	private String _cssClass;
 	private boolean _disabled;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
