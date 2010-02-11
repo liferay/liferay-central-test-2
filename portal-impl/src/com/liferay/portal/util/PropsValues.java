@@ -84,6 +84,10 @@ public class PropsValues {
 	public static final String ANNOUNCEMENTS_EMAIL_TO_NAME =
 		PropsUtil.get(PropsKeys.ANNOUNCEMENTS_EMAIL_TO_NAME);
 
+	public static final int ANNOUNCEMENTS_ENTRY_CHECK_INTERVAL =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.ANNOUNCEMENTS_ENTRY_CHECK_INTERVAL));
+
 	public static final String[] APPLICATION_SHUTDOWN_EVENTS =
 		PropsUtil.getArray(PropsKeys.APPLICATION_SHUTDOWN_EVENTS);
 
