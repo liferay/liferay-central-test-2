@@ -31,4 +31,7 @@ public interface CalEventFinder {
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD(
 		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
 		boolean timeZoneSensitive) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNoAssets()
+		throws com.liferay.portal.SystemException;
 }

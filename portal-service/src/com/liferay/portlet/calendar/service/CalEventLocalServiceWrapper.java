@@ -240,6 +240,11 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		return _calEventLocalService.getEventsCount(groupId, type);
 	}
 
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getNoAssetEvents()
+		throws com.liferay.portal.SystemException {
+		return _calEventLocalService.getNoAssetEvents();
+	}
+
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getRepeatingEvents(
 		long groupId) throws com.liferay.portal.SystemException {
 		return _calEventLocalService.getRepeatingEvents(groupId);

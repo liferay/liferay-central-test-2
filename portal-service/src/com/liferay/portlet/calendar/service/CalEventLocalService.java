@@ -194,6 +194,10 @@ public interface CalEventLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getNoAssetEvents()
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getRepeatingEvents(
 		long groupId) throws com.liferay.portal.SystemException;
 

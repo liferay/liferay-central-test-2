@@ -246,6 +246,11 @@ public class CalEventLocalServiceUtil {
 		return getService().getEventsCount(groupId, type);
 	}
 
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getNoAssetEvents()
+		throws com.liferay.portal.SystemException {
+		return getService().getNoAssetEvents();
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getRepeatingEvents(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getService().getRepeatingEvents(groupId);
