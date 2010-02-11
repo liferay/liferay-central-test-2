@@ -43,6 +43,10 @@ String prefix = GetterUtil.getString((String)request.getAttribute("aui:select:pr
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 String title = GetterUtil.getString((String)request.getAttribute("aui:select:title"));
 
+if (Validator.isNull(label) && changesContext) {
+	title = LanguageUtil.get(pageContext,title) + StringPool.SPACE + StringPool.OPEN_PARENTHESIS + LanguageUtil.get(pageContext, "changing-the-value-of-this-field-will-reload-the-page") + StringPool.CLOSE_PARENTHESIS;
+}
+
 String fieldCss = _buildCss(FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass);
 String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, false, null);
 %>
@@ -58,7 +62,7 @@ String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, 
 				</c:if>
 
 				<c:if test="<%= changesContext %>">
-					<span class="aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
+					(<span class="aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
 				</c:if>
 			</label>
 		</c:if>
@@ -70,7 +74,7 @@ String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, 
 		</c:if>
 
 		<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
-			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" title="<%= title %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" title='<liferay-ui:message key="<%= title %>" />' <%= _buildDynamicAttributes(dynamicAttributes) %>>
 				<c:if test="<%= showEmptyOption %>">
 					<aui:option />
 				</c:if>

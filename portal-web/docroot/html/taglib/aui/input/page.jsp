@@ -50,7 +50,7 @@ String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"
 Object value = request.getAttribute("aui:input:value");
 
 if (Validator.isNull(label) && changesContext) {
-	title = title + StringPool.SPACE + LanguageUtil.get(pageContext, "changing-the-value-of-this-field-will-reload-the-page");
+	title = LanguageUtil.get(pageContext,title) + StringPool.SPACE + StringPool.OPEN_PARENTHESIS + LanguageUtil.get(pageContext, "changing-the-value-of-this-field-will-reload-the-page") + StringPool.CLOSE_PARENTHESIS;
 }
 
 String baseType = type;
