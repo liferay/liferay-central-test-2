@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
@@ -19,41 +20,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portlet.calendar.service.persistence;
+<%@ include file="/html/portlet/calendar/init.jsp" %>
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+<%
+CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
+%>
 
-/**
- * <a href="CalEventFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- */
-public class CalEventFinderUtil {
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD(
-		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
-		boolean timeZoneSensitive) throws com.liferay.portal.SystemException {
-		return getFinder()
-				   .findByG_SD(groupId, startDateGT, startDateLT,
-			timeZoneSensitive);
-	}
-
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNoAssets()
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByNoAssets();
-	}
-
-	public static CalEventFinder getFinder() {
-		if (_finder == null) {
-			_finder = (CalEventFinder)PortalBeanLocatorUtil.locate(CalEventFinder.class.getName());
-		}
-
-		return _finder;
-	}
-
-	public void setFinder(CalEventFinder finder) {
-		_finder = finder;
-	}
-
-	private static CalEventFinder _finder;
-}
+<%= event.getDescription() %>

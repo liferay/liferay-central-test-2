@@ -20,40 +20,59 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.calendar.service.persistence;
+package com.liferay.portlet.calendar.asset;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.asset.model.BaseAssetRenderer;
+import com.liferay.portlet.calendar.model.CalEvent;
+
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 /**
- * <a href="CalEventFinderUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CalEventAssetRenderer.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Juan Fernández
  */
-public class CalEventFinderUtil {
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD(
-		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
-		boolean timeZoneSensitive) throws com.liferay.portal.SystemException {
-		return getFinder()
-				   .findByG_SD(groupId, startDateGT, startDateLT,
-			timeZoneSensitive);
+public class CalEventAssetRenderer extends BaseAssetRenderer {
+
+	public CalEventAssetRenderer(CalEvent event){
+		_event = event;
 	}
 
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNoAssets()
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByNoAssets();
+	public long getClassPK() {
+		return _event.getEventId();
 	}
 
-	public static CalEventFinder getFinder() {
-		if (_finder == null) {
-			_finder = (CalEventFinder)PortalBeanLocatorUtil.locate(CalEventFinder.class.getName());
+	public long getGroupId() {
+		return _event.getGroupId();
+	}
+
+	public String getSummary() {
+		return _event.getTitle();
+	}
+
+	public String getTitle() {
+		return _event.getTitle();
+	}
+
+	public long getUserId() {
+		return _event.getUserId();
+	}
+
+	public String render(RenderRequest renderRequest,
+		RenderResponse renderResponse, String template) throws Exception {
+
+		if (template.equals(TEMPLATE_FULL_CONTENT)) {
+			renderRequest.setAttribute(WebKeys.CALENDAR_EVENT, _event);
+
+			return "/html/portlet/calendar/asset/" + template + ".jsp";
 		}
-
-		return _finder;
+		else {
+			return null;
+		}
 	}
 
-	public void setFinder(CalEventFinder finder) {
-		_finder = finder;
-	}
+	private CalEvent _event;
 
-	private static CalEventFinder _finder;
 }

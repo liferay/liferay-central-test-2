@@ -191,6 +191,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 				/>
 			</aui:field-wrapper>
 		</c:if>
+
+		<aui:input name="categories" type="assetCategories" />
+
+		<aui:input name="tags" type="assetTags" />
 	</aui:fieldset>
 
 	<br />

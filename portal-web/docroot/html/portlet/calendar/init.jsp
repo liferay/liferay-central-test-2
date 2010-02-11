@@ -25,6 +25,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.kernel.cal.DayAndPosition" %>
+<%@ page import="com.liferay.portal.util.WebKeys" %>
 <%@ page import="com.liferay.portlet.calendar.EventDurationException" %>
 <%@ page import="com.liferay.portlet.calendar.EventEndDateException" %>
 <%@ page import="com.liferay.portlet.calendar.EventStartDateException" %>

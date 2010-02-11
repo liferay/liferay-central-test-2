@@ -135,6 +135,7 @@ import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.UserAttributes;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.expando.action.EditExpandoAction;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -847,6 +848,9 @@ public class PortalImpl implements Portal {
 		}
 		else if (className.startsWith("com.liferay.portlet.bookmarks")) {
 			portletId = PortletKeys.BOOKMARKS;
+		}
+		else if (className.startsWith("com.liferay.portlet.calendar")) {
+			portletId = PortletKeys.CALENDAR;
 		}
 		else if (className.startsWith("com.liferay.portlet.documentlibrary")) {
 			portletId = PortletKeys.DOCUMENT_LIBRARY;
@@ -4083,6 +4087,7 @@ public class PortalImpl implements Portal {
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BLOGS.MODEL.BLOGSENTRY$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BOOKMARKS.MODEL." +
 				"BOOKMARKSENTRY$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.CALENDAR.MODEL.CALEVENT$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.DOCUMENTLIBRARY.MODEL." +
 				"DLFILEENTRY$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.IMAGEGALLERY.MODEL.IGIMAGE$]",
@@ -4103,6 +4108,7 @@ public class PortalImpl implements Portal {
 			String.valueOf(PortalUtil.getClassNameId(UserGroup.class)),
 			String.valueOf(PortalUtil.getClassNameId(BlogsEntry.class)),
 			String.valueOf(PortalUtil.getClassNameId(BookmarksEntry.class)),
+			String.valueOf(PortalUtil.getClassNameId(CalEvent.class)),
 			String.valueOf(PortalUtil.getClassNameId(DLFileEntry.class)),
 			String.valueOf(PortalUtil.getClassNameId(IGImage.class)),
 			String.valueOf(PortalUtil.getClassNameId(MBMessage.class)),

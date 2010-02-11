@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
@@ -236,6 +237,15 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				serviceContext.getGuestPermissions());
 		}
 
+		// Asset
+
+		assetEntryLocalService.updateEntry(
+			userId, groupId, CalEvent.class.getName(),event.getEventId(),
+			serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames(), true, null, null, null, null,
+			ContentTypes.TEXT_HTML, event.getTitle(), event.getDescription(),
+			null, null,	0, 0, null, false);
+
 		// Social
 
 		socialActivityLocalService.addActivity(
@@ -379,6 +389,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		resourceLocalService.deleteResource(
 			event.getCompanyId(), CalEvent.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, event.getEventId());
+
+		// Asset
+
+		assetEntryLocalService.deleteEntry(
+			CalEvent.class.getName(), event.getEventId());
 
 		// Expando
 
@@ -586,6 +601,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
+	public List<CalEvent> getNoAssetEvents() throws SystemException {
+		return calEventFinder.findByNoAssets();
+	}
+
 	public List<CalEvent> getRepeatingEvents(long groupId)
 		throws SystemException {
 
@@ -742,6 +761,15 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setExpandoBridgeAttributes(serviceContext);
 
 		calEventPersistence.update(event, false);
+
+		// Asset
+
+		assetEntryLocalService.updateEntry(
+			userId, event.getGroupId(), CalEvent.class.getName(),
+			event.getEventId(), serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames(), true, null, null, null, null,
+			ContentTypes.TEXT_HTML, event.getTitle(), event.getDescription(),
+			null, null, 0, 0, null, false);
 
 		// Social
 
