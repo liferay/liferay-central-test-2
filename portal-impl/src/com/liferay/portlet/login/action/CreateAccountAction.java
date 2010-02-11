@@ -285,7 +285,8 @@ public class CreateAccountAction extends PortletAction {
 		}
 
 		sendRedirect(
-			actionRequest, actionResponse, themeDisplay, login, password1);
+			actionRequest, actionResponse, themeDisplay, login,
+			user.getPasswordUnencrypted());
 	}
 
 	protected boolean isAutoScreenName() {
