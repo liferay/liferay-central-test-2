@@ -20,27 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.announcements.job;
+package com.liferay.portlet.announcements.messaging;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobSchedulerUtil;
-import com.liferay.portal.kernel.job.Scheduler;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil;
 
 /**
- * <a href="AnnouncementsScheduler.java.html"><b><i>View Source</i></b></a>
+ * <a href="CheckEntryMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
+ * @author Tina Tian
  */
-public class AnnouncementsScheduler implements Scheduler {
+public class CheckEntryMessageListener implements MessageListener {
 
-	public void schedule() {
-		JobSchedulerUtil.schedule(_checkEntryJob);
+	public void receive(Message message) {
+		try {
+			AnnouncementsEntryLocalServiceUtil.checkEntries();
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 	}
 
-	public void unschedule() {
-		JobSchedulerUtil.unschedule(_checkEntryJob);
-	}
-
-	private IntervalJob _checkEntryJob = new CheckEntryJob();
+	private static Log _log = LogFactoryUtil.getLog(
+		CheckEntryMessageListener.class);
 
 }
