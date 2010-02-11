@@ -41,10 +41,8 @@ file.
 		</exec>
 
 		<replace file="${tstamp.value}">
-			<replacetoken><![CDATA[ServerAdmin 
-]]></replacetoken>
-			<replacevalue><![CDATA[ServerAdmin admin@localhost
-]]></replacevalue>
+			<replacetoken><![CDATA[ServerAdmin ]]></replacetoken>
+			<replacevalue><![CDATA[ServerAdmin admin@localhost]]></replacevalue>
 		</replace>
 
 		<echo file="${tstamp.value}" append="true">${line.separator}Include conf.d/*.conf</echo>
