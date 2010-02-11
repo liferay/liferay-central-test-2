@@ -41,6 +41,7 @@ String listType = GetterUtil.getString((String)request.getAttribute("aui:select:
 String name = GetterUtil.getString((String)request.getAttribute("aui:select:name"));
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:select:prefix"));
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
+String title = GetterUtil.getString((String)request.getAttribute("aui:select:title"));
 
 String fieldCss = _buildCss(FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass);
 String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, false, null);
@@ -69,7 +70,7 @@ String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, 
 		</c:if>
 
 		<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
-			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" title="<%= title %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 				<c:if test="<%= showEmptyOption %>">
 					<aui:option />
 				</c:if>

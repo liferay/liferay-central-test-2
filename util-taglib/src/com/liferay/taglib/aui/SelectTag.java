@@ -73,6 +73,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 				_showEmptyOption = false;
 				_startPage = null;
 				_suffix = null;
+				_title = null;
 			}
 		}
 	}
@@ -116,6 +117,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 			request.setAttribute(
 				"aui:select:showEmptyOption", String.valueOf(_showEmptyOption));
 			request.setAttribute("aui:select:suffix", _suffix);
+			request.setAttribute("aui:select:title", _title);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -218,6 +220,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		_startPage = startPage;
 	}
 
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	public void setSuffix(String suffix) {
 		_suffix = suffix;
 	}
@@ -247,5 +253,6 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 	private boolean _showEmptyOption;
 	private String _startPage;
 	private String _suffix;
+	private String _title;
 
 }

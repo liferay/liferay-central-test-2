@@ -71,6 +71,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 				_name = null;
 				_prefix = null;
 				_suffix = null;
+				_title = null;
 				_type = null;
 				_value = null;
 			}
@@ -126,6 +127,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		request.setAttribute("aui:input:name", _name);
 		request.setAttribute("aui:input:prefix", _prefix);
 		request.setAttribute("aui:input:suffix", _suffix);
+		request.setAttribute("aui:input:title", _title);
 		request.setAttribute("aui:input:type", _type);
 		request.setAttribute("aui:input:value", _value);
 
@@ -208,6 +210,10 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		_suffix = suffix;
 	}
 
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	public void setType(String type) {
 		_type = type;
 	}
@@ -241,6 +247,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 	private String _name;
 	private String _prefix;
 	private String _suffix;
+	private String _title;
 	private String _type;
 	private Object _value;
 

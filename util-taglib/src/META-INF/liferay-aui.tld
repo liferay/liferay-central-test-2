@@ -356,6 +356,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -581,6 +586,11 @@
 		</attribute>
 		<attribute>
 			<name>suffix</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>title</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

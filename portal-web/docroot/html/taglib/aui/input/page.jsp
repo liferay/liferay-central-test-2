@@ -45,8 +45,13 @@ Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
 String name = GetterUtil.getString((String)request.getAttribute("aui:input:name"));
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:input:prefix"));
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:input:suffix"));
+String title = GetterUtil.getString((String)request.getAttribute("aui:input:title"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
 Object value = request.getAttribute("aui:input:value");
+
+if (Validator.isNull(label) && changesContext) {
+	title = title + StringPool.SPACE + LanguageUtil.get(pageContext, "changing-the-value-of-this-field-will-reload-the-page");
+}
 
 String baseType = type;
 String forLabel = id;
@@ -175,7 +180,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 
 		<input id="<%= id %>" name="<%= namespace + name %>" type="hidden" value="<%= value %>" />
 
-		<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%= namespace + name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+		<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%= namespace + name %>Checkbox" onclick="<%= onClick %>" title="<%= title %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 	</c:when>
 	<c:when test='<%= type.equals("radio") %>'>
 
@@ -187,7 +192,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		}
 		%>
 
-		<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+		<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" title="<%= title %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 	</c:when>
 	<c:when test='<%= type.equals("timeZone") %>'>
 		<span class="<%= fieldCss %>">
@@ -231,10 +236,10 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 
 		<c:choose>
 			<c:when test='<%= type.equals("textarea") %>'>
-				<textarea class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
+				<textarea class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" title="<%= title %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
 			</c:when>
 			<c:otherwise>
-				<input class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" type="<%= Validator.isNull(type) ? "text" : type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				<input class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" title="<%= title %>" type="<%= Validator.isNull(type) ? "text" : type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
