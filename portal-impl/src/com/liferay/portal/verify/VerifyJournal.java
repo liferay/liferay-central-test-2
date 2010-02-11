@@ -71,7 +71,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Permissions verified for Journal structures");
+			_log.debug("Permissions verified for structures");
 		}
 
 		// Templates
@@ -87,7 +87,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Permissions verified for Journal templates");
+			_log.debug("Permissions verified for templates");
 		}
 
 		// Articles
@@ -124,7 +124,7 @@ public class VerifyJournal extends VerifyProcess {
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Unable to update tags asset for article " +
+							"Unable to update asset for article " +
 								article.getId() + ": " + e.getMessage());
 					}
 				}
@@ -153,8 +153,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Permissions and Tags assets verified for Journal articles");
+			_log.debug("Permissions and assets verified for articles");
 		}
 	}
 

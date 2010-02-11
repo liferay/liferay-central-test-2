@@ -40,8 +40,7 @@ public class VerifyImageGallery extends VerifyProcess {
 		List<IGImage> images = IGImageLocalServiceUtil.getNoAssetImages();
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Processing " + images.size() + " images with no tags assets");
+			_log.debug("Processing " + images.size() + " images with no asset");
 		}
 
 		for (IGImage image : images) {
@@ -52,14 +51,14 @@ public class VerifyImageGallery extends VerifyProcess {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to update tags asset for image " +
+						"Unable to update asset for image " +
 							image.getImageId() + ": " + e.getMessage());
 				}
 			}
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Tags assets verified for images");
+			_log.debug("Assets verified for images");
 		}
 	}
 

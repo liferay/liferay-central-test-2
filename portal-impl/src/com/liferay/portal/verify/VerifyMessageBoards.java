@@ -105,8 +105,7 @@ public class VerifyMessageBoards extends VerifyProcess {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Processing " + messages.size() +
-					" messages with no tags assets");
+				"Processing " + messages.size() + " messages with no asset");
 		}
 
 		for (MBMessage message : messages) {
@@ -117,14 +116,14 @@ public class VerifyMessageBoards extends VerifyProcess {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to update tags asset for message " +
+						"Unable to update asset for message " +
 							message.getMessageId() + ": " + e.getMessage());
 				}
 			}
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Tags assets verified for messages");
+			_log.debug("Assets verified for messages");
 		}
 	}
 

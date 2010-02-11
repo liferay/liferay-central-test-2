@@ -42,8 +42,7 @@ public class VerifyBlogs extends VerifyProcess {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Processing " + entries.size() +
-					" entries with no tags assets");
+				"Processing " + entries.size() + " entries with no asset");
 		}
 
 		for (BlogsEntry entry : entries) {
@@ -54,14 +53,14 @@ public class VerifyBlogs extends VerifyProcess {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to update tags asset for entry " +
+						"Unable to update asset for entry " +
 							entry.getEntryId() + ": " + e.getMessage());
 				}
 			}
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Tags assets verified for entries");
+			_log.debug("Assets verified for entries");
 		}
 	}
 

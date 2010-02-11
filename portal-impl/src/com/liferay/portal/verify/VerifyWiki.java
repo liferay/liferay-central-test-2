@@ -40,8 +40,7 @@ public class VerifyWiki extends VerifyProcess {
 		List<WikiPage> pages = WikiPageLocalServiceUtil.getNoAssetPages();
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Processing " + pages.size() + " pages with no tags assets");
+			_log.debug("Processing " + pages.size() + " pages with no asset");
 		}
 
 		for (WikiPage page : pages) {
@@ -52,14 +51,14 @@ public class VerifyWiki extends VerifyProcess {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to update tags asset for page " +
-							page.getPageId() + ": " + e.getMessage());
+						"Unable to update asset for page " + page.getPageId() +
+							": " + e.getMessage());
 				}
 			}
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Tags assets verified for pages");
+			_log.debug("Assets verified for pages");
 		}
 	}
 

@@ -43,7 +43,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Processing " + fileEntries.size() +
-					" file entries with no tags assets");
+					" file entries with no asset");
 		}
 
 		for (DLFileEntry fileEntry : fileEntries) {
@@ -54,14 +54,14 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to update tags asset for file entry " +
+						"Unable to update asset for file entry " +
 							fileEntry.getFileEntryId() + ": " + e.getMessage());
 				}
 			}
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Tags assets verified for file entries");
+			_log.debug("Assets verified for file entries");
 		}
 	}
 
