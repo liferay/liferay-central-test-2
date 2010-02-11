@@ -713,7 +713,15 @@
 		<portlet-name>84</portlet-name>
 		<icon>/html/icons/announcements.png</icon>
 		<struts-path>announcements</struts-path>
-		<scheduler-class>com.liferay.portlet.announcements.job.AnnouncementsScheduler</scheduler-class>
+		<scheduler-entry>
+			<scheduler-event-listener-class>com.liferay.portlet.announcements.messaging.CheckEntryMessageListener</scheduler-event-listener-class>
+			<trigger>
+				<simple>
+					<property-key>announcements.entry.check.interval</property-key>
+					<time-unit>MINUTE</time-unit>
+				</simple>
+			</trigger>
+		</scheduler-entry>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<preferences-company-wide>true</preferences-company-wide>
 		<use-default-template>false</use-default-template>
