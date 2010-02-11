@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.util.SystemProperties;
 
+import de.schlichtherle.io.ArchiveDetector;
 import de.schlichtherle.io.ArchiveException;
 import de.schlichtherle.io.DefaultArchiveDetector;
 import de.schlichtherle.io.File;
@@ -53,7 +54,8 @@ public class ZipWriterImpl implements ZipWriter {
 	static {
 		File.setDefaultArchiveDetector(
 			new DefaultArchiveDetector(
-			DefaultArchiveDetector.DEFAULT, "lar", new ZipDriver()));
+				ArchiveDetector.ALL, "lar|" + ArchiveDetector.ALL.getSuffixes(),
+				new ZipDriver()));
 	}
 
 	public ZipWriterImpl() {

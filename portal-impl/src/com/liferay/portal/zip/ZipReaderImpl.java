@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 
+import de.schlichtherle.io.ArchiveDetector;
 import de.schlichtherle.io.DefaultArchiveDetector;
 import de.schlichtherle.io.File;
 import de.schlichtherle.io.FileInputStream;
@@ -52,7 +53,7 @@ public class ZipReaderImpl implements ZipReader {
 	static {
 		File.setDefaultArchiveDetector(
 			new DefaultArchiveDetector(
-				DefaultArchiveDetector.DEFAULT, "lar|war|zip",
+				ArchiveDetector.ALL, "lar|" + ArchiveDetector.ALL.getSuffixes(),
 				new ZipDriver()));
 	}
 
