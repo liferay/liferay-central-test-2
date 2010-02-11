@@ -37,28 +37,30 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 %>
 
-<aui:form method="post" name="fm">
-	<liferay-ui:tabs
-		names="merge-redundant-roles,reassign-to-system-role"
-		param="tabs1"
-		url="<%= portletURL.toString() %>"
-	/>
+<form method="post" name="<portlet:namespace />fm">
 
-	<liferay-ui:tabs
-		names="organizations,communities,users"
-		param="tabs2"
-		url="<%= portletURL.toString() %>"
-	/>
+<liferay-ui:tabs
+	names="merge-redundant-roles,reassign-to-system-role"
+	param="tabs1"
+	url="<%= portletURL.toString() %>"
+/>
 
-	<c:choose>
-		<c:when test='<%= tabs1.equals("merge-redundant-roles") %>'>
-			<%@ include file="/html/portlet/admin/edit_permissions_merge.jspf" %>
-		</c:when>
-		<c:otherwise>
-			<%@ include file="/html/portlet/admin/edit_permissions_reassign.jspf" %>
-		</c:otherwise>
-	</c:choose>
-</aui:form>
+<liferay-ui:tabs
+	names="organizations,communities,users"
+	param="tabs2"
+	url="<%= portletURL.toString() %>"
+/>
+
+<c:choose>
+	<c:when test='<%= tabs1.equals("merge-redundant-roles") %>'>
+		<%@ include file="/html/portlet/admin/edit_permissions_merge.jspf" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="/html/portlet/admin/edit_permissions_reassign.jspf" %>
+	</c:otherwise>
+</c:choose>
+
+</form>
 
 <aui:script>
 	function <portlet:namespace />invoke(link) {

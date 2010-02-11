@@ -66,60 +66,53 @@
 		portletURL.setParameter("tabs3", tabs3);
 		%>
 
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="tabsURL">
-			<portlet:param name="struts_action" value="/admin/view" />
-			<portlet:param name="tabs1" value="<%= tabs1 %>" />
-			<portlet:param name="tabs2" value="<%= tabs2 %>" />
-			<portlet:param name="tabs3" value="<%= tabs3 %>" />
-			<portlet:param name="cur" value="<%= cur %>" />
-		</portlet:renderURL>
+		<form method="post" name="<portlet:namespace />fm">
+		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+		<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
+		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
+		<input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs3) %>" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" />portlet:param name="cur" value="<%= cur %>" /></portlet:renderURL>" />
+		<input name="<portlet:namespace />portletId" type="hidden" value="" />
 
-		<aui:form method="post" name="fm">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" />
-			<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
-			<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
-			<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
-			<aui:input name="redirect" type="hidden" value="<%= tabsURL %>" />
-			<aui:input name="portletId" type="hidden" />
+		<c:if test="<%= showTabs1 %>">
+			<liferay-ui:tabs
+				names="server,instances,plugins"
+				url="<%= portletURL.toString() %>"
+			/>
+		</c:if>
 
-			<c:if test="<%= showTabs1 %>">
-				<liferay-ui:tabs
-					names="server,instances,plugins"
-					url="<%= portletURL.toString() %>"
-				/>
-			</c:if>
+		<c:choose>
+			<c:when test='<%= tabs1.equals("server") %>'>
+				<%@ include file="/html/portlet/admin/server.jspf" %>
+			</c:when>
+			<c:when test='<%= tabs1.equals("instances") %>'>
+				<%@ include file="/html/portlet/admin/instances.jspf" %>
+			</c:when>
+			<c:when test='<%= tabs1.equals("plugins") %>'>
 
-			<c:choose>
-				<c:when test='<%= tabs1.equals("server") %>'>
-					<%@ include file="/html/portlet/admin/server.jspf" %>
-				</c:when>
-				<c:when test='<%= tabs1.equals("instances") %>'>
-					<%@ include file="/html/portlet/admin/instances.jspf" %>
-				</c:when>
-				<c:when test='<%= tabs1.equals("plugins") %>'>
+				<%
+				PortletURL installPluginsURL = null;
 
-					<%
-					PortletURL installPluginsURL = null;
+				if (PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED)) {
+					installPluginsURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
-					if (PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED)) {
-						installPluginsURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+					installPluginsURL.setWindowState(WindowState.MAXIMIZED);
 
-						installPluginsURL.setWindowState(WindowState.MAXIMIZED);
+					installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
+					installPluginsURL.setParameter("backURL", currentURL);
+					installPluginsURL.setParameter("tabs1", tabs1);
+					installPluginsURL.setParameter("tabs2", tabs2);
+				}
 
-						installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
-						installPluginsURL.setParameter("backURL", currentURL);
-						installPluginsURL.setParameter("tabs1", tabs1);
-						installPluginsURL.setParameter("tabs2", tabs2);
-					}
+				boolean showEditPluginHREF = false;
+				boolean showReindexButton = true;
+				%>
 
-					boolean showEditPluginHREF = false;
-					boolean showReindexButton = true;
-					%>
+				<%@ include file="/html/portlet/enterprise_admin/plugins.jspf" %>
+			</c:when>
+		</c:choose>
 
-					<%@ include file="/html/portlet/enterprise_admin/plugins.jspf" %>
-				</c:when>
-			</c:choose>
-		</aui:form>
+		</form>
 
 		<aui:script>
 			function <portlet:namespace />saveServer(cmd) {
