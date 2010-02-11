@@ -60,8 +60,10 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		return _event.getUserId();
 	}
 
-	public String render(RenderRequest renderRequest,
-		RenderResponse renderResponse, String template) throws Exception {
+	public String render(
+			RenderRequest renderRequest, RenderResponse renderResponse,
+			String template)
+		throws Exception {
 
 		if (template.equals(TEMPLATE_FULL_CONTENT)) {
 			renderRequest.setAttribute(WebKeys.CALENDAR_EVENT, _event);

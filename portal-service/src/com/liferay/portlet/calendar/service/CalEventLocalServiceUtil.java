@@ -272,6 +272,14 @@ public class CalEventLocalServiceUtil {
 		getService().importICal4j(userId, groupId, file);
 	}
 
+	public static void updateAsset(long userId,
+		com.liferay.portlet.calendar.model.CalEvent event,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateAsset(userId, event, assetCategoryIds, assetTagNames);
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
 		long userId, long eventId, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,

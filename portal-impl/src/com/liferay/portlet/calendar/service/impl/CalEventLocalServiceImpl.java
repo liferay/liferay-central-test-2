@@ -239,12 +239,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Asset
 
-		assetEntryLocalService.updateEntry(
-			userId, groupId, CalEvent.class.getName(),event.getEventId(),
-			serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames(), true, null, null, null, null,
-			ContentTypes.TEXT_HTML, event.getTitle(), event.getDescription(),
-			null, null,	0, 0, null, false);
+		updateAsset(
+			userId, event, serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames());
 
 		// Social
 
@@ -681,6 +678,18 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
+	public void updateAsset(
+			long userId, CalEvent event, long[] assetCategoryIds,
+			String[] assetTagNames)
+		throws PortalException, SystemException {
+
+		assetEntryLocalService.updateEntry(
+			userId, event.getGroupId(), CalEvent.class.getName(),
+			event.getEventId(), assetCategoryIds, assetTagNames, true, null,
+			null, null, null, ContentTypes.TEXT_HTML, event.getTitle(),
+			event.getDescription(), null, null,	0, 0, null, false);
+	}
+
 	public CalEvent updateEvent(
 			long userId, long eventId, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
@@ -764,12 +773,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Asset
 
-		assetEntryLocalService.updateEntry(
-			userId, event.getGroupId(), CalEvent.class.getName(),
-			event.getEventId(), serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames(), true, null, null, null, null,
-			ContentTypes.TEXT_HTML, event.getTitle(), event.getDescription(),
-			null, null, 0, 0, null, false);
+		updateAsset(
+			userId, event, serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames());
 
 		// Social
 

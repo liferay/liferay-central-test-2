@@ -37,8 +37,8 @@ import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="CalEventAssetRendererFactory.java.html">
- * <b><i>View Source</i></b></a>
+ * <a href="CalEventAssetRendererFactory.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Juan Fernández
  */

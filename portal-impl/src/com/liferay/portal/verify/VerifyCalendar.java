@@ -22,11 +22,8 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
@@ -40,7 +37,6 @@ import java.util.List;
 public class VerifyCalendar extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
-
 		List<CalEvent> events = CalEventLocalServiceUtil.getNoAssetEvents();
 
 		if (_log.isDebugEnabled()) {
@@ -49,19 +45,21 @@ public class VerifyCalendar extends VerifyProcess {
 		}
 
 		for (CalEvent event : events) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Creating asset for event " + event.getEventId());
+			try {
+				CalEventLocalServiceUtil.updateAsset(
+					event.getUserId(), event, null, null);
 			}
-
-			AssetEntryLocalServiceUtil.updateEntry(event.getUserId(),
-				event.getGroupId(), CalEvent.class.getName(),
-				event.getEventId(), null, null, true, null, null, null, null,
-				ContentTypes.TEXT_HTML, event.getTitle(),
-				event.getDescription(), null, null, 0, 0, null, false);
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to update asset for event " +
+							event.getEventId() + ": " + e.getMessage());
+				}
+			}
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Calendar event's assets verified");
+			_log.debug("Assets verified for events");
 		}
 
 	}

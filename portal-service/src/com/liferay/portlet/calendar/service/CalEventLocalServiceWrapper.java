@@ -266,6 +266,15 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		_calEventLocalService.importICal4j(userId, groupId, file);
 	}
 
+	public void updateAsset(long userId,
+		com.liferay.portlet.calendar.model.CalEvent event,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_calEventLocalService.updateAsset(userId, event, assetCategoryIds,
+			assetTagNames);
+	}
+
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
 		long userId, long eventId, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,

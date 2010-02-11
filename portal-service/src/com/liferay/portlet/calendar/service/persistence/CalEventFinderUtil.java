@@ -30,17 +30,17 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class CalEventFinderUtil {
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNoAssets()
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByNoAssets();
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD(
 		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
 		boolean timeZoneSensitive) throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByG_SD(groupId, startDateGT, startDateLT,
 			timeZoneSensitive);
-	}
-
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNoAssets()
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByNoAssets();
 	}
 
 	public static CalEventFinder getFinder() {
