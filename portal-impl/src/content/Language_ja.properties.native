@@ -1013,6 +1013,7 @@ changeable=変更可能
 changed-lines=変更した線
 changed-parent-from-x="{0}" から親を変更しました。
 changing-from-rich-text-format-to-plain-text-requires-removing-all-current-formatting=リッチテキスト形式からシンプルなテキスト形式に変更すると現在の形式がすべて無効になります。実行してもよろしいですか？
+changing-the-value-of-this-field-will-reload-the-page=この分野の価値を変えることはページを再積載する。 (Automatic Translation)
 chapter=章
 chapters=章
 characters-maximum=文字まで

@@ -1013,6 +1013,7 @@ changeable=변하기 쉬원
 changed-lines=변경된 선
 changed-parent-from-x=Changed parent from "{0}."
 changing-from-rich-text-format-to-plain-text-requires-removing-all-current-formatting=부유한 원본 체재에서 보통 원본에 변경은 모든 현재
+changing-the-value-of-this-field-will-reload-the-page=이 분야의 가치를 바꾸는 것은 페이지에 다시 탄약을 잴 것이다. (Automatic Translation)
 chapter=지부
 chapters=지부
 characters-maximum=최대 특성

@@ -1012,6 +1012,7 @@ changeable=Cambiable
 changed-lines=líneas cambiadas
 changed-parent-from-x=Cambiada la página padre de "{0}."
 changing-from-rich-text-format-to-plain-text-requires-removing-all-current-formatting=Cambiar de formato de texto enriquecido a texto plano implica eliminar todo el formato actual. ¿Está seguro que desea hacer esto?
+changing-the-value-of-this-field-will-reload-the-page=El cambio del valor de este campo recargará la página. (Automatic Translation)
 chapter=Capítulo
 chapters=Capítulos
 characters-maximum=Número máximo de caracteres

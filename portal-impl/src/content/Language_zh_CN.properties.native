@@ -1013,6 +1013,7 @@ changeable=可更改
 changed-lines=更改的行
 changed-parent-from-x=已从 "{0}" 更改父项。
 changing-from-rich-text-format-to-plain-text-requires-removing-all-current-formatting=从多格式文本更改为纯文本要求取消所有当前的格式。确定要这样做吗？
+changing-the-value-of-this-field-will-reload-the-page=改变这个领域的价值将再装页。 (Automatic Translation)
 chapter=章节
 chapters=章节
 characters-maximum=最多字符

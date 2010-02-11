@@ -1013,6 +1013,7 @@ changeable=Alteravel
 changed-lines=Linhas alteradas
 changed-parent-from-x=Pai alterado de "{0}".
 changing-from-rich-text-format-to-plain-text-requires-removing-all-current-formatting=Alterar o formato de texto rico para texto plano requer a remoção de toda a formatação atual. Tem certeza que deseja fazer isso? 
+changing-the-value-of-this-field-will-reload-the-page=Mudar o valor deste campo recarregará a página. (Automatic Translation)
 chapter=Capítulo
 chapters=Capítulos
 characters-maximum=Máximo de caractéres

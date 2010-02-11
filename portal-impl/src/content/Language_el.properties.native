@@ -1013,6 +1013,7 @@ changeable=Μεταβλητός
 changed-lines=αλλαγμένες γραμμές
 changed-parent-from-x=Changed parent from "{0}."
 changing-from-rich-text-format-to-plain-text-requires-removing-all-current-formatting=Η Αλλαγή από εμπλουτισμένο κείμενο (rtf) σε απλό κείμενο απαιτεί τη διαγραφή της τρέχουσας μορφοποίησης. Θέλετε να το κάνετε;
+changing-the-value-of-this-field-will-reload-the-page=Η αλλαγή της αξίας αυτού του τομέα θα ξαναφορτώσει τη σελίδα. (Automatic Translation)
 chapter=Κεφάλαιο
 chapters=Κεφάλαια
 characters-maximum=Χαρακτήρες το πολύ
