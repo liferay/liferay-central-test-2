@@ -24,6 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.image.SpriteProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -38,6 +40,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -103,6 +106,7 @@ import javax.servlet.ServletContext;
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  * @author Eduardo Lundgren
+ * @author Wesley Gong
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
@@ -499,7 +503,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		_portletAppsPool.clear();
 		_portletsPool.clear();
-		_companyPortletsPool.clear();
+		_companyPortletsPool.removeAll();
 		_portletIdsByStrutsPath.clear();
 		_friendlyURLMapperPortlets.clear();
 
@@ -701,6 +705,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		portlet.setRoles(roles);
 		portlet.setActive(active);
 
+		_updateCompanyPortletsPool(companyId);
+
 		return portlet;
 	}
 
@@ -712,7 +718,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		// Refresh company portlets
 
-		_companyPortletsPool.clear();
+		_companyPortletsPool.removeAll();
+	}
+
+	private String _encodeKey(long companyId) {
+		StringBundler sb = new StringBundler();
+
+		sb.append(Portlet.class.getName());
+		sb.append(StringPool.POUND);
+		sb.append(companyId);
+
+		return sb.toString();
 	}
 
 	private PortletApp _getPortletApp(String servletContextName) {
@@ -836,7 +852,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	private Map<String, Portlet> _getPortletsPool(long companyId)
 		throws SystemException {
 
-		Map<String, Portlet> portletsPool = _companyPortletsPool.get(companyId);
+		String key = _encodeKey(companyId);
+
+		Map<String, Portlet> portletsPool =
+			(Map<String, Portlet>)_companyPortletsPool.get(key);
 
 		if (portletsPool == null) {
 			portletsPool = new ConcurrentHashMap<String, Portlet>();
@@ -883,7 +902,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				}
 			}
 
-			_companyPortletsPool.put(companyId, portletsPool);
+			_companyPortletsPool.put(key, portletsPool);
 		}
 
 		return portletsPool;
@@ -2037,6 +2056,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		portletApp.setSpriteImages(spriteFileName, spriteProperties);
 	}
 
+	private void _updateCompanyPortletsPool(long companyId)
+		throws SystemException {
+
+		String key = _encodeKey(companyId);
+
+		Map<String, Portlet> portletsPool =
+			(Map<String, Portlet>)_companyPortletsPool.get(key);
+
+		_companyPortletsPool.put(key, portletsPool);
+	}
+
 	private static final String _WSRP_CATEGORY = "category.wsrp";
 
 	private static Log _log = LogFactoryUtil.getLog(
@@ -2046,8 +2076,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		new ConcurrentHashMap<String, PortletApp>();
 	private static Map<String, Portlet> _portletsPool =
 		new ConcurrentHashMap<String, Portlet>();
-	private static Map<Long, Map<String, Portlet>> _companyPortletsPool =
-		new ConcurrentHashMap<Long, Map<String, Portlet>>();
+	private static PortalCache _companyPortletsPool =
+		MultiVMPoolUtil.getCache(Portlet.class.getName());
 	private static Map<String, String> _portletIdsByStrutsPath =
 		new ConcurrentHashMap<String, String>();
 	private static Map<String, Portlet> _customAttributesDisplayPortlets =

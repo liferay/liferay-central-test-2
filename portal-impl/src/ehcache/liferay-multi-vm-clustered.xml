@@ -70,6 +70,20 @@
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
 	</cache>
 	<cache
+		name="com.liferay.portal.service.impl.PortletLocalServiceImpl"
+		maxElementsInMemory="1000"
+		eternal="true"
+		timeToIdleSeconds="0"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
+	<cache
 		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
 		maxElementsInMemory="10000"
 		eternal="false"

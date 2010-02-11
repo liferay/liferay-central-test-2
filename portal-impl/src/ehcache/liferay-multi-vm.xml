@@ -20,6 +20,13 @@
 		overflowToDisk="false"
 	/>
 	<cache
+		name="com.liferay.portal.service.impl.PortletLocalServiceImpl"
+		maxElementsInMemory="1000"
+		eternal="true"
+		timeToIdleSeconds="0"
+		overflowToDisk="false"
+	/>
+	<cache
 		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
