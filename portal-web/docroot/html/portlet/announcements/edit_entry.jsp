@@ -54,23 +54,28 @@ if (entry != null) {
 int priority = BeanParamUtil.getInteger(entry, request, "priority");
 %>
 
-<aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEntry(); return false;" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
-	<aui:input name="alert" type="hidden" value="<%= portletName.equals(PortletKeys.ALERTS) %>" />
+<form method="post" name="<portlet:namespace/>fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
+<input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
+<input name="<portlet:namespace />alert" type="hidden" value="<%= portletName.equals(PortletKeys.ALERTS) %>" />
 
-	<liferay-ui:tabs
-		names="entry"
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-	/>
+<liferay-ui:tabs
+	names="entry"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+/>
 
-	<liferay-ui:error exception="<%= EntryContentException.class %>" message="please-enter-valid-content" />
-	<liferay-ui:error exception="<%= EntryDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
-	<liferay-ui:error exception="<%= EntryExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
-	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
+<liferay-ui:error exception="<%= EntryContentException.class %>" message="please-enter-valid-content" />
+<liferay-ui:error exception="<%= EntryDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
+<liferay-ui:error exception="<%= EntryExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
+<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 
-	<aui:fieldset>
+<table class="lfr-table">
+<tr>
+	<td class="lfr-label">
+		<liferay-ui:message key="distribution-scope" />
+	</td>
+	<td>
 		<c:choose>
 			<c:when test="<%= entry != null %>">
 
@@ -103,45 +108,110 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 
 			</c:otherwise>
 		</c:choose>
-
-		<aui:input bean="<%= entry %>" field="title" model="<%= AnnouncementsEntry.class %>" name="title" />
-
-		<aui:input bean="<%= entry %>" field="url" model="<%= AnnouncementsEntry.class %>" name="url" />
-
-		<aui:input bean="<%= entry %>" field="content" model="<%= AnnouncementsEntry.class %>" name="content" />
-
-		<aui:select name="type">
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
+	<td class="lfr-label">
+		<liferay-ui:message key="title" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="title" />
+	</td>
+</tr>
+<tr>
+	<td class="lfr-label">
+		<liferay-ui:message key="url" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="url" />
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
+	<td class="lfr-label">
+		<liferay-ui:message key="content" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="content" />
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
+	<td class="lfr-label">
+		<liferay-ui:message key="type" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />type">
 
 			<%
 			for (String curType : AnnouncementsEntryConstants.TYPES) {
 			%>
 
-				<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
+				<option <%= type.equals(curType) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
 
 			<%
 			}
 			%>
 
-		</aui:select>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="lfr-label">
+		<liferay-ui:message key="priority" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />priority">
+			<option value="0" <%= (priority == 0) ? "selected" : "" %>><liferay-ui:message key="normal" /></option>
+			<option value="1" <%= (priority == 1) ? "selected" : "" %>><liferay-ui:message key="important" /></option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
+	<td class="lfr-label">
+		<liferay-ui:message key="display-date" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="displayDate" defaultValue="<%= displayDate %>" />
+	</td>
+</tr>
+<tr>
+	<td class="lfr-label">
+		<liferay-ui:message key="expiration-date" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="expirationDate" defaultValue="<%= expirationDate %>" />
+	</td>
+</tr>
+</table>
 
-		<aui:select name="priority">
-			<aui:option label="normal" selected="<%= priority == 0 %>" value="0" />
-			<aui:option label="important" selected="<%= priority == 1 %>" value="1" />
-		</aui:select>
+<br />
 
-		<aui:input bean="<%= entry %>" field="displayDate" model="<%= AnnouncementsEntry.class %>" name="displayDate" value="<%= displayDate %>" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-		<aui:input bean="<%= entry %>" field="expirationDate" model="<%= AnnouncementsEntry.class %>" name="expirationDate" value="<%= expirationDate %>" />
-	</aui:fieldset>
+<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewEntry();" />
 
-	<aui:button-row>
-		<aui:button type="submit" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
-		<aui:button type="button" value="preview" onClick='<%= renderResponse.getNamespace() + "previewEntry();" %>' />
-
-		<aui:button onClick="<%= redirect %>" type="cancel" />
-	</aui:button-row>
-</aui:form>
+</form>
 
 <aui:script>
 	function <portlet:namespace />previewEntry() {

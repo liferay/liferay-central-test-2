@@ -40,8 +40,14 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 }
 %>
 
-<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
-	<aui:fieldset>
+<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;" />
+
+<table class="lfr-table">
+<tr>
+	<td class="lfr-label">
+		<liferay-ui:message key="distribution-scope" />
+	</td>
+	<td>
 
 		<%
 		boolean submitOnChange = true;
@@ -49,93 +55,94 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 
 		<%@ include file="/html/portlet/announcements/entry_select_scope.jspf" %>
 
-	</aui:fieldset>
+	</td>
+</tr>
+</table>
 
-	<aui:button type="button" value="add-entry" onClick='<%= renderResponse.getNamespace() + "addEntry()" %>' />
+<br />
 
-	<c:if test="<%= Validator.isNotNull(distributionScope) %>">
-		<div class="separator"><!-- --></div>
+<input type="button" value='<liferay-ui:message key="add-entry" />' onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="distributionScope" value="<%= distributionScope %>" /></portlet:renderURL>'" />
 
-		<%
-		portletURL.setParameter("distributionScope", distributionScope);
+<c:if test="<%= Validator.isNotNull(distributionScope) %>">
+	<div class="separator"><!-- --></div>
 
-		List<String> headerNames = new ArrayList<String>();
+	<%
+	portletURL.setParameter("distributionScope", distributionScope);
 
-		headerNames.add("title");
-		headerNames.add("type");
-		headerNames.add("modified-date");
-		headerNames.add("display-date");
-		headerNames.add("expiration-date");
-		headerNames.add(StringPool.BLANK);
+	List<String> headerNames = new ArrayList<String>();
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "no-entries-were-found");
+	headerNames.add("title");
+	headerNames.add("type");
+	headerNames.add("modified-date");
+	headerNames.add("display-date");
+	headerNames.add("expiration-date");
+	headerNames.add(StringPool.BLANK);
 
-		int total = AnnouncementsEntryLocalServiceUtil.getEntriesCount(classNameId, classPK, portletName.equals(PortletKeys.ALERTS));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "no-entries-were-found");
 
-		searchContainer.setTotal(total);
+	int total = AnnouncementsEntryLocalServiceUtil.getEntriesCount(classNameId, classPK, portletName.equals(PortletKeys.ALERTS));
 
-		List<AnnouncementsEntry> results = AnnouncementsEntryLocalServiceUtil.getEntries(classNameId, classPK, portletName.equals(PortletKeys.ALERTS), searchContainer.getStart(), searchContainer.getEnd());
+	searchContainer.setTotal(total);
 
-		searchContainer.setResults(results);
+	List<AnnouncementsEntry> results = AnnouncementsEntryLocalServiceUtil.getEntries(classNameId, classPK, portletName.equals(PortletKeys.ALERTS), searchContainer.getStart(), searchContainer.getEnd());
 
-		List resultRows = searchContainer.getResultRows();
+	searchContainer.setResults(results);
 
-		for (int i = 0; i < results.size(); i++) {
-			AnnouncementsEntry entry = results.get(i);
+	List resultRows = searchContainer.getResultRows();
 
-			entry = entry.toEscapedModel();
+	for (int i = 0; i < results.size(); i++) {
+		AnnouncementsEntry entry = results.get(i);
 
-			ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
+		entry = entry.toEscapedModel();
 
-			PortletURL rowURL = renderResponse.createRenderURL();
+		ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
-			rowURL.setWindowState(WindowState.MAXIMIZED);
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-			rowURL.setParameter("struts_action", "/announcements/edit_entry");
-			rowURL.setParameter("redirect", currentURL);
-			rowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
+		rowURL.setWindowState(WindowState.MAXIMIZED);
 
-			// Title
+		rowURL.setParameter("struts_action", "/announcements/edit_entry");
+		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 
-			row.addText(entry.getTitle(), rowURL);
+		// Title
 
-			// Type
+		row.addText(entry.getTitle(), rowURL);
 
-			row.addText(LanguageUtil.get(pageContext, entry.getType()), rowURL);
+		// Type
 
-			// Modified date
+		row.addText(LanguageUtil.get(pageContext, entry.getType()), rowURL);
 
-			row.addText(dateFormatDate.format(entry.getModifiedDate()), rowURL);
+		// Modified date
 
-			// Display date
+		row.addText(dateFormatDate.format(entry.getModifiedDate()), rowURL);
 
-			row.addText(dateFormatDate.format(entry.getDisplayDate()), rowURL);
+		// Display date
 
-			// Expiration date
+		row.addText(dateFormatDate.format(entry.getDisplayDate()), rowURL);
 
-			row.addText(dateFormatDate.format(entry.getExpirationDate()), rowURL);
+		// Expiration date
 
-			// Action
+		row.addText(dateFormatDate.format(entry.getExpirationDate()), rowURL);
 
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/announcements/view_manage_entries_entry_action.jsp");
+		// Action
 
-			// Add result row
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/announcements/view_manage_entries_entry_action.jsp");
 
-			resultRows.add(row);
-		}
-		%>
+		// Add result row
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-	</c:if>
-</aui:form>
+		resultRows.add(row);
+	}
+	%>
+
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</c:if>
+
+</form>
 
 <aui:script>
 	function <portlet:namespace />selectDistributionScope(distributionScope) {
 		var url = "<%= portletURL.toString() %>&<portlet:namespace />distributionScope=" + distributionScope;
 		submitForm(document.<portlet:namespace />fm, url);
-	}
-
-	function <portlet:namespace />addEntry() {
-		location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="distributionScope" value="<%= distributionScope %>" /></portlet:renderURL>';
 	}
 </aui:script>
