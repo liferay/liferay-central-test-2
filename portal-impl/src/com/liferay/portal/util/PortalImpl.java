@@ -28,8 +28,6 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
@@ -111,7 +109,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.i18n.I18nFilter;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -152,7 +149,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import java.net.InetAddress;
@@ -682,41 +678,6 @@ public class PortalImpl implements Portal {
 			else {
 				throw new SystemException(cause);
 			}
-		}
-	}
-
-	public BasePersistence<?> getBasePersistence(BaseModel<?> baseModel) {
-		String servletContextName = getServletContextName(baseModel);
-		String className = baseModel.getClass().getName();
-
-		return getBasePersistence(servletContextName, className);
-	}
-
-	public BasePersistence<?> getBasePersistence(
-		String servletContextName, String className) {
-
-		int pos = className.indexOf(".model.impl.");
-
-		String packagePath = className.substring(0, pos);
-		String modelName = className.substring(
-			pos + 12, className.length() - 9);
-
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(packagePath);
-		sb.append(".service.persistence.");
-		sb.append(modelName);
-		sb.append("Persistence");
-
-		String beanName = sb.toString();
-
-		if (Validator.isNull(servletContextName)) {
-			return (BasePersistence<?>)PortalBeanLocatorUtil.locate(
-				beanName);
-		}
-		else {
-			return (BasePersistence<?>)PortletBeanLocatorUtil.locate(
-				servletContextName, beanName);
 		}
 	}
 
@@ -2648,35 +2609,6 @@ public class PortalImpl implements Portal {
 
 		return getSelectedUser(
 			getHttpServletRequest(portletRequest), checkPermission);
-	}
-
-	public String getServletContextName(BaseModel<?> baseModel) {
-		Class<?> baseModelClass = baseModel.getClass();
-
-		String className = baseModelClass.getName();
-
-		int pos = className.indexOf(".model.impl.");
-
-		String packagePath = className.substring(0, pos);
-
-		try {
-			ClassLoader classLoader = baseModelClass.getClassLoader();
-
-			Class<?> clpSerializerClass = classLoader.loadClass(
-				className.toString());
-
-			Field field = clpSerializerClass.getField(
-				"SERVLET_CONTEXT_NAME");
-
-			return (String)field.get(null);
-		}
-		catch (ClassNotFoundException cnfe) {
-			return null;
-		}
-		catch (Exception e) {
-			throw new IllegalArgumentException(
-				"Cannot retrieve the servlet context name from ClpSerializer");
-		}
 	}
 
 	public String getStaticResourceURL(

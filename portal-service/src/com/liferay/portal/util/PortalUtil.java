@@ -37,7 +37,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -152,18 +151,6 @@ public class PortalUtil {
 		throws PortalException, SystemException {
 
 		return getPortal().getBaseModel(modelName, primKey);
-	}
-
-	public static BasePersistence<?> getBasePersistence(
-		BaseModel<?> baseModel) {
-
-		return getPortal().getBasePersistence(baseModel);
-	}
-
-	public static BasePersistence<?> getBasePersistence(
-		String servletContextName, String className) {
-
-		return getPortal().getBasePersistence(servletContextName, className);
 	}
 
 	public static long getBasicAuthUserId(HttpServletRequest request)
@@ -822,10 +809,6 @@ public class PortalUtil {
 		throws PortalException, SystemException {
 
 		return getPortal().getSelectedUser(portletRequest, checkPermission);
-	}
-
-	public static String getServletContextName(BaseModel<?> baseModel) {
-		return getPortal().getServletContextName(baseModel);
 	}
 
 	public static String getStaticResourceURL(
