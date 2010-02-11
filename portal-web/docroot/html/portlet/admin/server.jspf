@@ -31,6 +31,8 @@ long hours = (uptimeDiff / Time.HOUR) % 24;
 long minutes = (uptimeDiff / Time.MINUTE) % 60;
 long seconds = (uptimeDiff / Time.SECOND) % 60;
 
+String saveServerBtn;
+
 NumberFormat numberFormat = NumberFormat.getInstance();
 
 numberFormat.setMaximumIntegerDigits(2);
@@ -68,29 +70,31 @@ numberFormat.setMinimumIntegerDigits(2);
 
 				<c:choose>
 					<c:when test='<%= tabs3.equals("add-category") %>'>
-						<table class="lfr-table">
-						<tr>
-							<td>
-								<input class="lfr-input-text" name="<portlet:namespace />loggerName" type="text" />
+						<aui:fieldset>
+							<aui:input cssClass="lfr-input-text-container" label="" name="loggerName" type="text" />
 
-								<select name="<portlet:namespace />priority">
+							<aui:select label="" name="priority">
 
-									<%
-									for (int i = 0; i < Levels.ALL_LEVELS.length; i++) {
-									%>
+								<%
+								for (int i = 0; i < Levels.ALL_LEVELS.length; i++) {
+								%>
 
-										<option <%= Level.INFO.equals(Levels.ALL_LEVELS[i]) ? "selected" : "" %> value="<%= Levels.ALL_LEVELS[i] %>"><%= Levels.ALL_LEVELS[i] %></option>
+									<aui:option label="<%= Levels.ALL_LEVELS[i] %>" selected="<%= Level.INFO.equals(Levels.ALL_LEVELS[i]) %>" />
 
-									<%
-									}
-									%>
+								<%
+								}
+								%>
+							</aui:select>
+						</aui:fieldset>
 
-								</select>
+						<aui:button-row>
 
-								<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('addLogLevel');" />
-							</td>
-						</tr>
-						</table>
+							<%
+							saveServerBtn = renderResponse.getNamespace() + "saveServer('addLogLevel');";
+							%>
+
+							<aui:button type="button" value="save" onClick="<%= saveServerBtn %>" />
+						</aui:button-row>
 					</c:when>
 					<c:otherwise>
 
@@ -189,7 +193,14 @@ numberFormat.setMinimumIntegerDigits(2);
 
 						<br />
 
-						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateLogLevels');" />
+						<aui:button-row>
+
+							<%
+							String saveServerBtn = renderResponse.getNamespace() + "saveServer('updateLogLevels');";
+							%>
+
+							<aui:button type="button" value="save" onClick="<%= saveServerBtn %>" />
+						</aui:button-row>
 					</c:otherwise>
 				</c:choose>
 			</c:when>
@@ -325,94 +336,69 @@ numberFormat.setMinimumIntegerDigits(2);
 						for (ConvertProcess convertProcess : convertProcesses) {
 						%>
 
-							<fieldset>
-								<legend>
-									<liferay-ui:message key="<%= convertProcess.getDescription() %>" />
-								</legend>
+							<liferay-ui:panel-container extended="<%= true %>" id="dataMigration" persistState="<%= true %>">
+								<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="dataMigration" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, convertProcess.getDescription()) %>' >
+									<c:if test="<%= convertProcess.getParameterNames() != null %>">
+										<aui:fieldset label='<%= Validator.isNotNull(convertProcess.getParameterDescription()) ? convertProcess.getParameterDescription() : "" %>'>
 
-								<c:choose>
-									<c:when test="<%= convertProcess.getParameterNames() != null %>">
-										<table class="lfr-table">
+											<%
+											for (String parameter : convertProcess.getParameterNames()) {
+												if (parameter.contains(StringPool.EQUAL) && parameter.contains(StringPool.SEMICOLON)) {
+													String[] parameterPair = StringUtil.split(parameter, StringPool.EQUAL);
+													String[] parameterSelectEntries = StringUtil.split(parameterPair[1], StringPool.SEMICOLON);
+											%>
 
-										<c:if test="<%= Validator.isNotNull(convertProcess.getParameterDescription()) %>">
-											<tr>
-												<td colspan="2">
-													<liferay-ui:message key="<%= convertProcess.getParameterDescription() %>" />
-												</td>
-											</tr>
-										</c:if>
+												<aui:select label="<%= parameterPair[0] %>" name="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterPair[0] %>">
 
-										<%
-										for (String parameter : convertProcess.getParameterNames()) {
-											if (parameter.contains(StringPool.EQUAL) && parameter.contains(StringPool.SEMICOLON)) {
-												String[] parameterPair = StringUtil.split(parameter, StringPool.EQUAL);
-												String[] parameterSelectEntries = StringUtil.split(parameterPair[1], StringPool.SEMICOLON);
-										%>
+												<%
+												for (String parameterSelectEntry : parameterSelectEntries) {
+												%>
 
-												<tr>
-													<td>
-														<liferay-ui:message key="<%= parameterPair[0] %>" />
-													</td>
-													<td>
-														<select id="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterPair[0] %>" name="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterPair[0] %>">
+													<aui:option label="<%= parameterSelectEntry %>" />
 
-															<%
-															for (String parameterSelectEntry : parameterSelectEntries) {
-															%>
+												<%
+												}
+												%>
 
-																<option value="<%= parameterSelectEntry %>"><%= parameterSelectEntry %></option>
+											</aui:select>
 
-															<%
-															}
-															%>
-
-														</select>
-													</td>
-												</tr>
-
-										<%
-											}
-											else {
-												String[] parameterPair = StringUtil.split(parameter, StringPool.EQUAL);
-
-												String parameterName = null;
-												String parameterType = null;
-
-												if (parameterPair.length > 1) {
-													parameterName = parameterPair[0];
-													parameterType = parameterPair[1];
+											<%
 												}
 												else {
-													parameterName = parameter;
-												}
-										%>
+													String[] parameterPair = StringUtil.split(parameter, StringPool.EQUAL);
 
-												<tr>
-													<td>
-														<liferay-ui:message key="<%= parameterName %>" />
-													</td>
-													<td>
-														<input name="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterName %>" <%= (parameterType != null) ? "type=\"" + parameterType + "\"" : "" %> />
-													</td>
-												</tr>
+													String parameterName = null;
+													String parameterType = null;
+
+													if (parameterPair.length > 1) {
+														parameterName = parameterPair[0];
+														parameterType = parameterPair[1];
+													}
+													else {
+														parameterName = parameter;
+													}
+											%>
+
+												<aui:input cssClass="lfr-input-text-container" label="<%= parameterName %>" name="<%= convertProcess.getClass().getName() + StringPool.PERIOD + parameterName %>" type='<%= parameterType != null ? parameterType : "" %>' />
+
+											<%
+												}
+											}
+											%>
+
+										</aui:fieldset>
+									</c:if>
+
+									<aui:button-row>
 
 										<%
-											}
-										}
+										saveServerBtn = renderResponse.getNamespace() + "saveServer('convertProcess." + convertProcess.getClass().getName() + "');";
 										%>
 
-										<tr>
-											<td colspan="2">
-												<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcess.getClass().getName() %>');" />
-											</td>
-										</tr>
-										</table>
-									</c:when>
-									<c:otherwise>
-										<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcess.getClass().getName() %>');" />
-									</c:otherwise>
-								</c:choose>
-							</fieldset>
+										<aui:button type="button" value="execute" onClick='<%= saveServerBtn %>' />
+									</aui:button-row>
+								</liferay-ui:panel>
+							</liferay-ui:panel-container>
 
 							<br />
 
@@ -424,359 +410,137 @@ numberFormat.setMinimumIntegerDigits(2);
 				</c:choose>
 			</c:when>
 			<c:when test='<%= tabs2.equals("file-uploads") %>'>
-				<liferay-ui:message key="configure-the-file-upload-settings" />
+				<aui:fieldset label="configure-the-file-upload-settings">
+					<liferay-ui:panel-container extended="<%= true %>" id="general" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="general" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "general") %>' >
+							<aui:input cssClass="lfr-input-text-container" label="overall-maximum-file-size" name="uploadServletRequestImplMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE) %>" />
 
-				<br /><br />
+							<aui:input cssClass="lfr-input-text-container" label="temporary-storage-directory" name="uploadServletRequestImplTempDir" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR, StringPool.BLANK) %>" />
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
 
-				<table class="lfr-table">
-				<tr>
-					<td colspan="2">
-						<strong><liferay-ui:message key="general" /></strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="overall-maximum-file-size" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />uploadServletRequestImplMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="temporary-storage-directory" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />uploadServletRequestImplTempDir" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR, StringPool.BLANK) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<strong><liferay-ui:message key="document-library" /></strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-file-size" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />dlFileMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="allowed-file-extensions" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />dlFileExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.DL_FILE_EXTENSIONS) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<strong><liferay-ui:message key="image-gallery" /></strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-file-size" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />igImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="allowed-file-extensions" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />igImageExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.IG_IMAGE_EXTENSIONS) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-thumbnail-dimensions" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />igImageThumbnailMaxDimensions" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<strong><liferay-ui:message key="web-content-images" /></strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-file-size" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />journalImageSmallMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="allowed-file-extensions" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />journalImageExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.JOURNAL_IMAGE_EXTENSIONS) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<strong><liferay-ui:message key="shopping-cart-images" /></strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-file-size" /> (<liferay-ui:message key="large-image" />)
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />shoppingImageLargeMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-file-size" /> (<liferay-ui:message key="medium-image" />)
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />shoppingImageMediumMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-file-size" /> (<liferay-ui:message key="small-image" />)
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />shoppingImageSmallMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_SMALL_MAX_SIZE) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="allowed-file-extensions" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />journalImageExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.JOURNAL_IMAGE_EXTENSIONS) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<strong><liferay-ui:message key="software-catalog-images" /></strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-file-size" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />scImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_MAX_SIZE) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-thumbnail-height" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />scImageThumbnailMaxHeight" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_HEIGHT) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-thumbnail-width" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />scImageThumbnailMaxWidth" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_WIDTH) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<strong><liferay-ui:message key="user-images" /></strong>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-file-size" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />usersImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.USERS_IMAGE_MAX_SIZE) %>" />
-					</td>
-				</tr>
-				</table>
+					<liferay-ui:panel-container extended="<%= true %>" id="documentIibrary" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documentIibrary" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "document-library") %>' >
+							<aui:input cssClass="lfr-input-text-container" label="maximum-file-size" name="dlFileMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %>" />
 
-				<br />
+							<aui:input cssClass="lfr-input-text-container" label="allowed-file-extensions" name="dlFileExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.DL_FILE_EXTENSIONS) %>" />
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
 
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateFileUploads');" />
+					<liferay-ui:panel-container extended="<%= true %>" id="imageGallery" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="imageGallery" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "image-gallery") %>' >
+							<aui:input cssClass="lfr-input-text-container" label="maximum-file-size" name="igImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) %>" />
+
+							<aui:input cssClass="lfr-input-text-container" label="allowed-file-extensions" name="igImageExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.IG_IMAGE_EXTENSIONS) %>" />
+
+							<aui:input cssClass="lfr-input-text-container" label="maximum-thumbnail-dimensions" name="igImageThumbnailMaxDimensions" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>" />
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
+
+					<liferay-ui:panel-container extended="<%= true %>" id="webContentImages" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="webContentImages" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "web-content-images") %>' >
+							<aui:input cssClass="lfr-input-text-container" label="maximum-file-size" name="journalImageSmallMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE) %>" />
+
+							<aui:input cssClass="lfr-input-text-container" label="allowed-file-extensions" name="journalImageExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.JOURNAL_IMAGE_EXTENSIONS) %>" />
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
+
+					<liferay-ui:panel-container extended="<%= true %>" id="shoppingCartImages" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="shoppingCartImages" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "shopping-cart-images") %>' >
+
+							<aui:input cssClass="lfr-input-text-container" label='<%= LanguageUtil.get(pageContext, "maximum-file-size") + "(" + LanguageUtil.get(pageContext,"large-image") + ")" %>' name="shoppingImageLargeMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE) %>" />
+
+							<aui:input cssClass="lfr-input-text-container" label='<%= LanguageUtil.get(pageContext, "maximum-file-size") + "(" + LanguageUtil.get(pageContext,"medium-image") + ")" %>' name="shoppingImageMediumMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE) %>" />
+
+							<aui:input cssClass="lfr-input-text-container" label='<%= LanguageUtil.get(pageContext, "maximum-file-size") + "(" + LanguageUtil.get(pageContext,"small-image") + ")" %>' name="shoppingImageSmallMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_SMALL_MAX_SIZE) %>" />
+
+							<aui:input cssClass="lfr-input-text-container" label="allowed-file-extensions" name="journalImageExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.JOURNAL_IMAGE_EXTENSIONS) %>" />
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
+
+					<liferay-ui:panel-container extended="<%= true %>" id="softwareCatalogImages" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="softwareCatalogImages" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "software-catalog-images") %>' >
+							<aui:input cssClass="lfr-input-text-container" label="maximum-file-size" name="scImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_MAX_SIZE) %>" />
+
+							<aui:input cssClass="lfr-input-text-container" label="maximum-thumbnail-height" name="scImageThumbnailMaxHeight" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_HEIGHT) %>" />
+
+							<aui:input cssClass="lfr-input-text-container" label="maximum-thumbnail-width" name="scImageThumbnailMaxWidth" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_WIDTH) %>" />
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
+
+					<liferay-ui:panel-container extended="<%= true %>" id="userImages" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="userImages" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "user-images") %>' >
+							<aui:input cssClass="lfr-input-text-container" label="maximum-file-size" name="usersImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.USERS_IMAGE_MAX_SIZE) %>" />
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
+				</aui:fieldset>
+
+				<aui:button-row>
+
+					<%
+					saveServerBtn = renderResponse.getNamespace() + "saveServer('updateFileUploads');";
+					%>
+
+					<aui:button type="button" value="save" onClick="<%= saveServerBtn %>" />
+				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("mail") %>'>
-				<liferay-ui:message key="configure-the-mail-server-settings" />
+				<aui:fieldset>
+					<liferay-ui:panel-container extended="<%= true %>" id="configureTheMailServerSettings" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="configureTheMailServerSettings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "configure-the-mail-server-settings") %>' >
+							<aui:input cssClass="lfr-input-text-container" label="incoming-pop-server" name="pop3Host" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_HOST) %>" />
 
-				<br /><br />
+							<aui:input cssClass="lfr-input-text-container" label="incoming-port" name="pop3Port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_PORT) %>" />
 
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="incoming-pop-server" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />pop3Host" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_HOST) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="incoming-port" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />pop3Port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_PORT) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="use-a-secure-network-connection" />
-					</td>
-					<td>
-						<liferay-ui:input-checkbox param="pop3Secure" defaultValue='<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_STORE_PROTOCOL).equals("pop3s") %>' />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="user-name" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />pop3User" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_USER) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="password" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />pop3Password" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_PASSWORD) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="outgoing-smtp-server" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />smtpHost" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="outgoing-port" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />smtpPort" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="use-a-secure-network-connection" />
-					</td>
-					<td>
-						<liferay-ui:input-checkbox param="smtpSecure" defaultValue='<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL).equals("smtps") %>' />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="user-name" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />smtpUser" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_USER) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="password" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />smtpPassword" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD) %>" />
-					</td>
-				</tr>
-				</table>
+							<aui:input inlineLabel="right" label="use-a-secure-network-connection" name="pop3Secure" type="checkbox" value='<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_STORE_PROTOCOL).equals("pop3s") %>' />
 
-				<br />
+							<aui:input cssClass="lfr-input-text-container" label="user-name" name="pop3User" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_USER) %>" />
 
-				<liferay-ui:message key="manually-specify-additional-javamail-properties-to-override-the-above-configuration" />
+							<aui:input cssClass="lfr-input-text-container" label="password" name="pop3Password" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_PASSWORD) %>" />
 
-				<br /><br />
+							<aui:input cssClass="lfr-input-text-container" label="outgoing-smtp-server" name="smtpHost" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST) %>" />
 
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="advanced-properties" />
-					</td>
-					<td>
-						<textarea class="lfr-textarea" name="<portlet:namespace />advancedProperties"><%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_ADVANCED_PROPERTIES, StringPool.BLANK) %></textarea>
-					</td>
-				</tr>
-				</table>
+							<aui:input cssClass="lfr-input-text-container" label="outgoing-port" name="smtpPort" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT) %>" />
 
-				<br />
+							<aui:input inlineLabel="right" label="use-a-secure-network-connection" name="smtpSecure" type="checkbox" value='<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL).equals("smtps") %>' />
 
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateMail');" />
+							<aui:input cssClass="lfr-input-text-container" label="user-name" name="smtpUser" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_USER) %>" />
+
+							<aui:input cssClass="lfr-input-text-container" label="password" name="smtpPassword" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD) %>" />
+
+							<aui:input cssClass="lfr-textarea-container" label="manually-specify-additional-javamail-properties-to-override-the-above-configuration" name='<%= "advancedProperties" + PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_ADVANCED_PROPERTIES, StringPool.BLANK) %>' type="textarea" />
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
+				</aui:fieldset>
+
+				<aui:button-row>
+
+					<%
+					saveServerBtn = renderResponse.getNamespace() + "saveServer('updateMail');";
+					%>
+
+					<aui:button type="button" value="save" onClick="<%= saveServerBtn %>" />
+				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("OpenOffice") %>'>
-				<liferay-ui:message key="enabling-openoffice-integration-provides-document-conversion-functionality" />
+				<aui:fieldset>
+					<liferay-ui:panel-container extended="<%= true %>" id="OpenOffice" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="OpenOffice" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "enabling-openoffice-integration-provides-document-conversion-functionality") %>' >
+							<aui:input inlineLabel="right" name="enabled" type="checkbox" value="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED) %>" />
 
-				<br /><br />
+							<aui:input cssClass="lfr-input-text-container" name="port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.OPENOFFICE_SERVER_PORT) %>" />
+						</liferay-ui:panel>
+					</liferay-ui:panel-container>
+				</aui:fieldset>
 
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="enabled" />
-					</td>
-					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="port" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.OPENOFFICE_SERVER_PORT) %>" />
-					</td>
-				</tr>
-				</table>
+				<aui:button-row>
 
-				<br />
+					<%
+					saveServerBtn = renderResponse.getNamespace() + "saveServer('updateOpenOffice');";
+					%>
 
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateOpenOffice');" />
+					<aui:button type="button" value="save" onClick="<%= saveServerBtn %>" />
+				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("script") %>'>
 
@@ -787,38 +551,23 @@ numberFormat.setMinimumIntegerDigits(2);
 				String scriptOutput = (String)SessionMessages.get(renderRequest, "script_output");
 				%>
 
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="language" />
-					</td>
-					<td>
-						<select id="<portlet:namespace />language" name="<portlet:namespace />language">
+				<aui:fieldset>
+					<aui:select name="language">
 
-							<%
-							for (String supportedLanguage: ScriptingUtil.getSupportedLanguages()) {
-							%>
+						<%
+						for (String supportedLanguage: ScriptingUtil.getSupportedLanguages()) {
+						%>
 
-								<option <%= supportedLanguage.equals(language) ? "selected" : "" %> value="<%= supportedLanguage %>"><%= TextFormatter.format(supportedLanguage, TextFormatter.J) %></option>
+							<aui:option label="<%= TextFormatter.format(supportedLanguage, TextFormatter.J) %>" selected="<%= supportedLanguage.equals(language) %>" value="<%= supportedLanguage %>" />
 
-							<%
-							}
-							%>
+						<%
+						}
+						%>
+					</aui:select>
 
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="script" />
-					</td>
-					<td>
-						<textarea class="lfr-textarea" id="<portlet:namespace />script" name="<portlet:namespace />script"><%= script %></textarea>
-					</td>
-				</tr>
-				</table>
+					<aui:input cssClass="lfr-textarea-container" name="script" type="textarea" value="<%= script %>" />
+				</aui:fieldset>
 
-				<br />
 
 				<c:if test="<%= Validator.isNotNull(scriptOutput) %>">
 					<b><liferay-ui:message key="output" /></b>
@@ -828,35 +577,39 @@ numberFormat.setMinimumIntegerDigits(2);
 					<br /><br />
 				</c:if>
 
-				<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('runScript');" />
+				<aui:button-row>
+
+					<%
+					saveServerBtn = renderResponse.getNamespace() + "saveServer('runScript');";
+					%>
+
+					<aui:button type="button" value="execute" onClick="<%= saveServerBtn %>" />
+				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("shutdown") %>'>
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="number-of-minutes" />
-					</td>
-					<td>
-						<input name="<portlet:namespace />minutes" size="3" type="text" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="custom-message" />
-					</td>
-					<td>
-						<textarea class="lfr-textarea" name="<portlet:namespace />message"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
-					</td>
-				</tr>
-				</table>
+				<aui:fieldset>
+					<aui:input label="number-of-minutes" name="minutes" size="3" type="text" />
 
-				<br />
+					<aui:input cssClass="lfr-textarea-container" label="custom-message" name='<%= "message" + GetterUtil.getString(ShutdownUtil.getMessage()) %>' type="textarea" />
+				</aui:fieldset>
 
-				<input type="button" value="<liferay-ui:message key="shutdown" />" onClick="<portlet:namespace />saveServer('shutdown');" />
+				<aui:button-row>
 
-				<c:if test="<%= ShutdownUtil.isInProcess() %>">
-					<input type="button" value="<liferay-ui:message key="cancel-shutdown" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />minutes.value = 0; <portlet:namespace />saveServer('shutdown');" />
-				</c:if>
+					<%
+					saveServerBtn = renderResponse.getNamespace() + "saveServer('shutdown');";
+					%>
+
+					<aui:button type="button" value="shutdown" onClick="<%= saveServerBtn %>" />
+
+					<c:if test="<%= ShutdownUtil.isInProcess() %>">
+
+						<%
+						saveServerBtn = "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "minutes.value = 0;" + renderResponse.getNamespace() + "saveServer('shutdown');";
+						%>
+
+						<aui:button type="button" value="cancel-shutdown" onClick="<%= saveServerBtn %>" />
+					</c:if>
+				</aui:button-row>
 			</c:when>
 			<c:otherwise>
 
@@ -922,66 +675,68 @@ numberFormat.setMinimumIntegerDigits(2);
 
 				<br />
 
-				<liferay-ui:tabs names="actions" />
-
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />
-					</td>
-					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('gc');" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="clear-content-cached-by-this-vm" />
-					</td>
-					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="clear-content-cached-across-the-cluster" />
-					</td>
-					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheMulti');" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="clear-the-database-cache" />
-					</td>
-					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheDb');" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="reindex-all-search-indexes" />
-					</td>
-					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('reindex');" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="generate-thread-dump" />
-					</td>
-					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('threadDump');" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="verify-database-tables-of-all-plugins" />
-					</td>
-					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('verifyPluginTables');" />
-					</td>
-				</tr>
-				</table>
+				<liferay-ui:panel-container extended="<%= true %>" id="actions" persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="actions" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "actions") %>' >
+						<table class="lfr-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />
+							</td>
+							<td>
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('gc');" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="clear-content-cached-by-this-vm" />
+							</td>
+							<td>
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="clear-content-cached-across-the-cluster" />
+							</td>
+							<td>
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheMulti');" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="clear-the-database-cache" />
+							</td>
+							<td>
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheDb');" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="reindex-all-search-indexes" />
+							</td>
+							<td>
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('reindex');" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="generate-thread-dump" />
+							</td>
+							<td>
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('threadDump');" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="verify-database-tables-of-all-plugins" />
+							</td>
+							<td>
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('verifyPluginTables');" />
+							</td>
+						</tr>
+						</table>
+					</liferay-ui:panel>
+				</liferay-ui:panel-container>
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>

@@ -32,108 +32,73 @@ Company company2 = (Company)request.getAttribute(WebKeys.SEL_COMPANY);
 long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_instance" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCompany(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />companyId" type="hidden" value="<%= companyId %>" />
+<portlet:actionURL var="editInstanceURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/admin/edit_instance" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="instance"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+<aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveCompany(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="companyId" type="hidden" value="<%= companyId %>" />
 
-<liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
-<liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
-<liferay-ui:error exception="<%= CompanyWebIdException.class %>" message="please-enter-a-valid-web-id" />
+	<liferay-ui:tabs
+		names="instance"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-<table class="lfr-table">
+	<liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
+	<liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
+	<liferay-ui:error exception="<%= CompanyWebIdException.class %>" message="please-enter-a-valid-web-id" />
 
-<c:if test="<%= company2 != null %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="id" />
-		</td>
-		<td>
-			<%= companyId %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="web-id" />
-		</td>
-		<td>
-			<%= company2.getWebId() %>
-		</td>
-	</tr>
-</c:if>
+	<aui:fieldset>
+		<c:if test="<%= company2 != null %>">
+			<aui:field-wrapper label="id">
+				<%= companyId %>
+			</aui:field-wrapper>
 
-<c:if test="<%= company2 == null %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="web-id" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company2 %>" field="webId" />
-		</td>
-	</tr>
-</c:if>
+			<aui:field-wrapper label="web-id">
+				<%= company2.getWebId() %>
+			</aui:field-wrapper>
+		</c:if>
 
-<tr>
-	<td>
-		<liferay-ui:message key="virtual-host" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company2 %>" field="virtualHost" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="mail-domain" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company2 %>" field="mx" />
-	</td>
-</tr>
+		<c:if test="<%= company2 == null %>">
+			<aui:input bean="<%= company2 %>" cssClass="lfr-input-text-container" field="webId" model="<%= Company.class %>" name="webId" type="text" />
+		</c:if>
 
-<c:if test="<%= showShardSelector %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="shard" />
-		</td>
-		<td>
+		<aui:input bean="<%= company2 %>" cssClass="lfr-input-text-container" field="virtualHost" model="<%= Company.class %>" name="virtualHost" type="text" />
+
+		<aui:input bean="<%= company2 %>" cssClass="lfr-input-text-container" field="mx" model="<%= Company.class %>" name="mailDomain" type="text" />
+
+		<c:if test="<%= showShardSelector %>">
 			<c:choose>
 				<c:when test="<%= company2 != null %>">
 					<%= company2.getShardName() %>
 				</c:when>
 				<c:otherwise>
-					<select name="<portlet:namespace />shardName">
+					<aui:select name="shardName">
 
 						<%
 						for (String shardName : PropsValues.SHARD_AVAILABLE_NAMES) {
 						%>
 
-							<option <%= shardName.equals(PropsValues.SHARD_DEFAULT_NAME) ? "selected" : "" %> value="<%= shardName %>"><liferay-ui:message key="<%= shardName %>" /></option>
+							<aui:option label="<%= shardName %>" selected="<%= shardName.equals(PropsValues.SHARD_DEFAULT_NAME) %>" />
 
 						<%
 						}
 						%>
 
-					</select>
+					</aui:select>
 				</c:otherwise>
 			</c:choose>
-		</td>
-	</tr>
-</c:if>
+		</c:if>
+	</aui:fieldset>
 
-</table>
+	<aui:button-row>
+		<aui:button type="submit" />
 
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
-
-</form>
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />saveCompany() {
