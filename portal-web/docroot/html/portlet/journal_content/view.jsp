@@ -230,6 +230,7 @@ if (articleDisplay != null) {
 										<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 											<portlet:param name="struts_action" value="/journal/edit_article" />
 											<portlet:param name="redirect" value="<%= currentURL %>" />
+											<portlet:param name="referringPortletResource" value="56" />
 											<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
 											<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
 											<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
@@ -290,6 +291,7 @@ if (articleDisplay != null) {
 						<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 							<portlet:param name="struts_action" value="/journal/edit_article" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="referringPortletResource" value="56" />
 							<portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
 							<portlet:param name="articleId" value="<%= articleDisplay.getArticleId() %>" />
 							<portlet:param name="version" value="<%= String.valueOf(articleDisplay.getVersion()) %>" />
@@ -302,6 +304,7 @@ if (articleDisplay != null) {
 						<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editTemplateURL" portletName="<%= PortletKeys.JOURNAL %>">
 							<portlet:param name="struts_action" value="/journal/edit_template" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="referringPortletResource" value="56" />
 							<portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
 							<portlet:param name="templateId" value="<%= articleDisplay.getTemplateId() %>" />
 						</liferay-portlet:renderURL>
@@ -318,6 +321,7 @@ if (articleDisplay != null) {
 							<portlet:param name="struts_action" value="/journal/edit_article" />
 							<portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="referringPortletResource" value="56" />
 						</liferay-portlet:renderURL>
 
 						<liferay-ui:icon image="add_article" message="add-web-content" url="<%= addArticleURL %>" />

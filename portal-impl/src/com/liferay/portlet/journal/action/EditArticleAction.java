@@ -40,6 +40,7 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -136,19 +137,16 @@ public class EditArticleAction extends PortletAction {
 					}
 				}
 
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)actionRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
+				String referringPortletResource = ParamUtil.getString(
+					actionRequest, "referringPortletResource");
 
-				Layout layout = themeDisplay.getLayout();
+				if (referringPortletResource.equals(
+						PortletKeys.JOURNAL_CONTENT)) {
 
-				if (layout.getType().equals(
-						LayoutConstants.TYPE_CONTROL_PANEL)) {
-
-					sendRedirect(actionRequest, actionResponse, redirect);
+					actionResponse.sendRedirect(redirect);
 				}
 				else {
-					actionResponse.sendRedirect(redirect);
+					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 			}
 		}
