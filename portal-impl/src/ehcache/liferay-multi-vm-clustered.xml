@@ -71,7 +71,7 @@
 	</cache>
 	<cache
 		name="com.liferay.portal.service.impl.PortletLocalServiceImpl"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="0"
 		eternal="true"
 		timeToIdleSeconds="0"
 		overflowToDisk="false"

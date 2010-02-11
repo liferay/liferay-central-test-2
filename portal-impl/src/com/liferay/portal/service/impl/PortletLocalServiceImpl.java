@@ -2056,9 +2056,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		portletApp.setSpriteImages(spriteFileName, spriteProperties);
 	}
 
-	private void _updateCompanyPortletsPool(long companyId)
-		throws SystemException {
-
+	private void _updateCompanyPortletsPool(long companyId) {
 		String key = _encodeKey(companyId);
 
 		Map<String, Portlet> portletsPool =
