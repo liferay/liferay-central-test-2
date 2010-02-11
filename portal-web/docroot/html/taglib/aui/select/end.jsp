@@ -25,6 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+boolean changesContext = GetterUtil.getBoolean((String)request.getAttribute("aui:select:changesContext"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:id"));
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:select:inlineLabel"));
@@ -47,6 +48,10 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 					<liferay-ui:icon-help message="<%= helpMessage %>" />
+				</c:if>
+
+				<c:if test="<%= changesContext %>">
+					<span class="aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
 				</c:if>
 			</label>
 		</c:if>

@@ -26,6 +26,7 @@
 
 <%
 Object bean = request.getAttribute("aui:select:bean");
+boolean changesContext = GetterUtil.getBoolean((String)request.getAttribute("aui:select:changesContext"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:select:cssClass"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:select:disabled"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:select:dynamicAttributes");
@@ -53,6 +54,10 @@ String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, 
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 					<liferay-ui:icon-help message="<%= helpMessage %>" />
+				</c:if>
+
+				<c:if test="<%= changesContext %>">
+					<span class="aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
 				</c:if>
 			</label>
 		</c:if>

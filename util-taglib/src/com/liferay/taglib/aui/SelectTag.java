@@ -56,6 +56,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		finally {
 			if (!ServerDetector.isResin()) {
 				_bean = null;
+				_changesContext = false;
 				_cssClass = null;
 				_dynamicAttributes.clear();
 				_endPage = null;
@@ -94,6 +95,8 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 			}
 
 			request.setAttribute("aui:select:bean", _bean);
+			request.setAttribute(
+				"aui:select:changesContext", String.valueOf(_changesContext));
 			request.setAttribute("aui:select:cssClass", _cssClass);
 			request.setAttribute(
 				"aui:select:disabled", String.valueOf(_disabled));
@@ -143,6 +146,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 
 	public void setBean(Object bean) {
 		_bean = bean;
+	}
+
+	public void setChangesContext(boolean changesContext) {
+		_changesContext = changesContext;
 	}
 
 	public void setCssClass(String cssClass) {
@@ -222,6 +229,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 
 	private Object _bean;
 	private String _cssClass;
+	private boolean _changesContext;
 	private boolean _disabled;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();

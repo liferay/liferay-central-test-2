@@ -28,6 +28,7 @@
 
 <%
 BaseModel bean = (BaseModel)request.getAttribute("aui:input:bean");
+boolean changesContext = GetterUtil.getBoolean((String)request.getAttribute("aui:input:changesContext"));
 boolean checked = GetterUtil.getBoolean((String)request.getAttribute("aui:input:checked"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:input:cssClass"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:input:disabled"));
@@ -104,6 +105,10 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 						<liferay-ui:icon-help message="<%= helpMessage %>" />
+					</c:if>
+
+					<c:if test="<%= changesContext %>">
+						<span class="aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
 					</c:if>
 				</label>
 			</c:if>
@@ -248,6 +253,10 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 						<liferay-ui:icon-help message="<%= helpMessage %>" />
+					</c:if>
+
+					<c:if test="<%= changesContext %>">
+						<span class="aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
 					</c:if>
 				</label>
 			</c:if>
