@@ -20,29 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.breadcrumb;
+package com.liferay.portalweb.portlet.breadcrumb.lar.importlar;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.breadcrumb.lar.LARTests;
-import com.liferay.portalweb.portlet.breadcrumb.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="BreadcrumbTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertConfigurePortletDisplayStyle2Test.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BreadcrumbTests extends BaseTests {
+public class AssertConfigurePortletDisplayStyle2Test extends BaseTestCase {
+	public void testAssertConfigurePortletDisplayStyle2()
+		throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Breadcrumb Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Breadcrumb Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Liferay"),
+			selenium.getText("//div[@class='portlet-body']/li/span/a"));
+		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),
+			selenium.getText("//div[@class='portlet-body']/div"));
 	}
-
 }

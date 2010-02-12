@@ -20,27 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.breadcrumb;
+package com.liferay.portalweb.portlet.breadcrumb.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.breadcrumb.lar.LARTests;
-import com.liferay.portalweb.portlet.breadcrumb.portlet.PortletTests;
+import com.liferay.portalweb.portlet.breadcrumb.portlet.addportlet.AddPortletTests;
+import com.liferay.portalweb.portlet.breadcrumb.portlet.addportletmultiple.AddPortletMultipleTests;
+import com.liferay.portalweb.portlet.breadcrumb.portlet.addportletpagechild.AddPortletPageChildTests;
+import com.liferay.portalweb.portlet.breadcrumb.portlet.configureportletdisplaystyle1.ConfigurePortletDisplayStyle1Tests;
+import com.liferay.portalweb.portlet.breadcrumb.portlet.configureportletdisplaystyle2.ConfigurePortletDisplayStyle2Tests;
+import com.liferay.portalweb.portlet.breadcrumb.portlet.removeportlet.RemovePortletTests;
+import com.liferay.portalweb.portlet.breadcrumb.portlet.viewportletbreadcrumb.ViewPortletBreadcrumbTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="BreadcrumbTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BreadcrumbTests extends BaseTests {
+public class PortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(AddPortletTests.suite());
+		testSuite.addTest(AddPortletMultipleTests.suite());
+		testSuite.addTest(AddPortletPageChildTests.suite());
+		testSuite.addTest(ConfigurePortletDisplayStyle1Tests.suite());
+		testSuite.addTest(ConfigurePortletDisplayStyle2Tests.suite());
+		testSuite.addTest(RemovePortletTests.suite());
+		testSuite.addTest(ViewPortletBreadcrumbTests.suite());
 
 		return testSuite;
 	}

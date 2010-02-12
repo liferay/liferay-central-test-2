@@ -20,27 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.breadcrumb;
+package com.liferay.portalweb.portlet.breadcrumb.portlet.configureportletdisplaystyle1;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.breadcrumb.lar.LARTests;
-import com.liferay.portalweb.portlet.breadcrumb.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="BreadcrumbTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurePortletDisplayStyle1Tests.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BreadcrumbTests extends BaseTests {
+public class ConfigurePortletDisplayStyle1Tests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(ConfigurePortletDisplayStyle1Test.class);
+		testSuite.addTestSuite(AssertConfigurePortletDisplayStyle1Test.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
