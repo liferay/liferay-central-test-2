@@ -190,14 +190,11 @@ public class OpenIdAction extends PortletAction {
 			return null;
 		}
 
-		PortletURL portletURL = actionResponseImpl.createActionURL();
-
-		portletURL.setParameter("struts_action", "/login/open_id");
-		portletURL.setParameter(Constants.CMD, Constants.READ);
-		portletURL.setParameter("saveLastPath", "0");
+		String receivingUrl = ParamUtil.getString(
+			actionRequest, "openid.return_to");
 
 		VerificationResult verification = manager.verify(
-			portletURL.toString(), params, discovered);
+			receivingUrl, params, discovered);
 
 		Identifier verified = verification.getVerifiedId();
 
