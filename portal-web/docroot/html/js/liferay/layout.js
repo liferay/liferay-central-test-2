@@ -12,6 +12,8 @@ AUI().add(
 		var Layout = {
 			EMPTY_COLUMNS: {},
 
+			OVER_NESTED_PORTLET: false,
+
 			PROXY_NODE: A.Node.create('<div class="lfr-portlet-proxy aui-portal-layout-proxy"></div>'),
 
 			PROXY_NODE_ITEM: A.Node.create(
@@ -32,8 +34,8 @@ AUI().add(
 
 				Layout.DEFAULT_LAYOUT_OPTIONS = {
 					dd: {
-						clickPixelThresh: 1,
-						clickTimeThresh: 300,
+						clickPixelThresh: 0,
+						clickTimeThresh: 250,
 						handles: [options.handles],
 						plugins: [
 							{
@@ -121,6 +123,7 @@ AUI().add(
 
 			initColumnLayoutHandler: function() {
 				var columnLayoutDefaults = A.merge(
+					Layout.DEFAULT_LAYOUT_OPTIONS,
 					{
 						after: {
 							'drag:start': function(event) {
@@ -131,34 +134,57 @@ AUI().add(
 							}
 						},
 						on: {
+							'drop:enter': function(event) {
+								Layout.updateOverNestedPortletInfo();
+							},
+
+							'drop:exit': function(event) {
+								Layout.updateOverNestedPortletInfo();
+							},
+
 							placeholderAlign: function(event) {
 								var portalLayout = event.currentTarget;
-								var activeDrop = A.DD.DDM.activeDrop;
+								var activeDrop = portalLayout.activeDrop;
 								var lastActiveDrop = portalLayout.lastActiveDrop;
 
 								if (lastActiveDrop) {
-									var curPortletInfo = Layout.curPortletInfo;
 									var activeDropNode = activeDrop.get('node');
 									var lastActiveDropNode = lastActiveDrop.get('node');
 
-									var emptyColumn = false;
-									var isColumn = !activeDropNode.dd;
-									var hasSiblingsPortlets = (curPortletInfo.siblingsPortlets.size() > 0);
+									var isOverColumn = !activeDropNode.dd;
 
-									if (isColumn) {
-										var dropZoneId = activeDropNode.get('id');
+									if (!Layout.OVER_NESTED_PORTLET && isOverColumn) {
+										var activeDropNodeId = activeDropNode.get('id');
+										var emptyColumn = Layout.EMPTY_COLUMNS[activeDropNodeId];
 
-										emptyColumn = Layout.EMPTY_COLUMNS[dropZoneId];
+										if (!emptyColumn) {
+											if (activeDropNode != lastActiveDropNode) {
+												var portlets = activeDropNode.all(Layout.options.portletBoundary);
+												var lastIndex = portlets.size() - 1;
+												var lastPortlet = portlets.item(lastIndex);
+
+												var drop = DDM.getDrop(lastPortlet);
+
+												if (drop) {
+													portalLayout.quadrant = 4;
+													portalLayout.activeDrop = drop;
+													portalLayout.lastAlignDrop = drop;
+												}
+
+												portalLayout._syncPlaceholderUI();
+											}
+
+											event.halt();
+										}
 									}
 
-									if (hasSiblingsPortlets && !emptyColumn && (activeDropNode == lastActiveDropNode)) {
+									if (Layout.OVER_NESTED_PORTLET && (activeDropNode == lastActiveDropNode)) {
 										event.halt();
 									}
 								}
 							}
 						}
-					},
-					Layout.DEFAULT_LAYOUT_OPTIONS
+					}
 				);
 
 				Layout.layoutHandler = new Layout.ColumnLayout(columnLayoutDefaults);
@@ -166,6 +192,7 @@ AUI().add(
 
 			initFreeFormLayoutHandler: function() {
 				var freeformLayoutDefaults = A.merge(
+					Layout.DEFAULT_LAYOUT_OPTIONS,
 					{
 						after: {
 							'drag:start': function(event) {
@@ -177,9 +204,12 @@ AUI().add(
 
 								proxyNode.one('.portlet-topper').html(getTitle(nodeId));
 							}
-						}
-					},
-					Layout.DEFAULT_LAYOUT_OPTIONS
+						},
+						dd: {
+							startCentered: false
+						},
+						lazyStart: false
+					}
 				);
 
 				freeformLayoutDefaults.dd.plugins = null;
@@ -249,6 +279,18 @@ AUI().add(
 						Layout.EMPTY_COLUMNS[columnId] = !Layout.hasPortlets(item);
 					}
 				);
+			},
+
+			updateOverNestedPortletInfo: function() {
+				var activeDrop = DDM.activeDrop;
+				var nestedPortletId = Layout.options.nestedPortletId;
+
+				if (activeDrop) {
+					var activeDropNode = activeDrop.get('node');
+					var activeDropNodeId = activeDropNode.get('id');
+
+					Layout.OVER_NESTED_PORTLET = (activeDropNodeId.indexOf(nestedPortletId) > -1);
+				}
 			},
 
 			updatePortletDropZones: function(portletBoundary) {

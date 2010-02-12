@@ -376,16 +376,6 @@ AUI().add(
 				}
 			},
 
-			_onPortletDrop: function(event) {
-				var instance = this;
-
-				var drag = event.drag;
-
-				if ((drag instanceof columnPortletItem)) {
-					event.preventDefault();
-				}
-			},
-
 			_unlockDrag: function(node) {
 				var instance = this;
 
@@ -486,6 +476,12 @@ AUI().add(
 		};
 
 		FreeFormPortletItem.NAME = 'FreeFormPortletItem';
+
+		FreeFormPortletItem.ATTRS = {
+			lazyStart: {
+				value: false
+			}
+		};
 
 		A.extend(
 			FreeFormPortletItem,
