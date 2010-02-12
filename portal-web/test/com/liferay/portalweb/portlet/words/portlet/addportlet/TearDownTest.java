@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.words;
+package com.liferay.portalweb.portlet.words.portlet.addportlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -38,7 +38,6 @@ public class TearDownTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -46,7 +45,8 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[3]/div/ul/li[1]/a")) {
+						if (selenium.isElementPresent(
+									"//li[@class='first manage-page']/a")) {
 							break;
 						}
 					}
@@ -56,8 +56,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//li[@class='first manage-page']/a"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -76,7 +76,24 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[@id='_88_treeExpandAll']/a",
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//a[@class='lfr-tree-controls-label']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("//a[@class='lfr-tree-controls-label']",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -85,7 +102,8 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//li/ul/li[1]/div/div[3]/a")) {
+						if (selenium.isVisible(
+									"//ul[@class='aui-tree-container']")) {
 							break;
 						}
 					}
@@ -124,7 +142,8 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//li/ul/li[1]/div/div[3]/a")) {
+						if (selenium.isVisible(
+									"//ul[@class='aui-tree-container']")) {
 							break;
 						}
 					}
@@ -163,7 +182,8 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//li/ul/li[1]/div/div[3]/a")) {
+						if (selenium.isVisible(
+									"//ul[@class='aui-tree-container']")) {
 							break;
 						}
 					}
@@ -202,7 +222,8 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//li/ul/li[1]/div/div[3]/a")) {
+						if (selenium.isVisible(
+									"//ul[@class='aui-tree-container']")) {
 							break;
 						}
 					}
@@ -241,7 +262,8 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//li/ul/li[1]/div/div[3]/a")) {
+						if (selenium.isVisible(
+									"//ul[@class='aui-tree-container']")) {
 							break;
 						}
 					}

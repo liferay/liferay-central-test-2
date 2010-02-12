@@ -20,25 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.words;
+package com.liferay.portalweb.portlet.words.portlet.addportletduplicate;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.words.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="WordsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletDuplicateTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WordsTests extends BaseTests {
+public class AddPortletDuplicateTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPortletDuplicateTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
