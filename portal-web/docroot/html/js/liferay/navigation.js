@@ -271,7 +271,7 @@ AUI().add(
 					comboContentBox.swallowEvent('click');
 					overlayContentBox.swallowEvent('click');
 
-					comboField.get('node').focus();
+					Liferay.Util.focusFormField(comboField.get('node'));
 
 					var realign = A.bind(optionsOverlay.fire, optionsOverlay, 'align');
 
