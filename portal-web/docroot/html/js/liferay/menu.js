@@ -155,13 +155,9 @@ AUI().add(
 						offset.top -= (menuHeight - triggerHeight);
 					}
 
-					menu.setStyles(
-						{
-							left: offset.left + 'px',
-							position: 'absolute',
-							top: offset.top + 'px'
-						}
-					);
+					menu.setStyle('position', 'absolute');
+
+					menu.setXY([offset.left, offset.top]);
 
 					menu.show();
 
