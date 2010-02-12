@@ -272,14 +272,14 @@ AUI().add(
 			active: {
 				value: true
 			},
-			bubbles: {
+			bubbleTargets: {
 				value: null
 			},
 			guid: {
 				getter: function(value) {
 					var instance = this;
 
-					return instance.get('bubbles')._guid;
+					return instance.get('bubbleTargets')._guid;
 				},
 				lazyAdd: false,
 				value: 0
@@ -495,10 +495,10 @@ AUI().add(
 				_createEvents: function() {
 					var instance = this;
 
-					var bubbles = instance.get('bubbles');
+					var bubbleTargets = instance.get('bubbleTargets');
 
-					if (bubbles) {
-						instance.addTarget(bubbles);
+					if (bubbleTargets) {
+						instance.addTarget(bubbleTargets);
 					}
 
 					var eventConfig = {
