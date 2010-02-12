@@ -20,57 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webproxy;
+package com.liferay.portalweb.portlet.webproxy.portlet.addportletmultiple;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortlet3Test.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
+public class AddPortlet3Test extends BaseTestCase {
+	public void testAddPortlet3() throws Exception {
 		selenium.open("/web/guest/home/");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("addPage")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("addPage", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("//input", RuntimeVariables.replace("Web Proxy Test Page"));
-		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -91,5 +53,99 @@ public class AddPageTest extends BaseTestCase {
 		selenium.clickAt("link=Web Proxy Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//input[@id='layout_configuration_content']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace(""));
+		selenium.typeKeys("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace("w"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div[@id=\"Sample-WebProxy\"]/p/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@id=\"Sample-WebProxy\"]/p/a",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//td[1]/div[2]/div[2]/div")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//td[1]/div[2]/div")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//td[1]/div[1]/div")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isElementPresent("//td[1]/div[2]/div[2]/div"));
+		assertTrue(selenium.isElementPresent("//td[1]/div[2]/div"));
+		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
 	}
 }

@@ -20,25 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webproxy;
+package com.liferay.portalweb.portlet.webproxy.portlet.addportletmultiple;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.webproxy.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="WebProxyTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletMultipleTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WebProxyTests extends BaseTests {
+public class AddPortletMultipleTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortlet1Test.class);
+		testSuite.addTestSuite(AddPortlet2Test.class);
+		testSuite.addTestSuite(AddPortlet3Test.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
