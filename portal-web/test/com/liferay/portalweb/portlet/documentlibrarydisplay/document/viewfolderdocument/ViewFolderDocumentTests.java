@@ -20,30 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.documentlibrarydisplay;
+package com.liferay.portalweb.portlet.documentlibrarydisplay.document.viewfolderdocument;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.document.DocumentTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.folder.FolderTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="DocumentLibraryDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewFolderDocumentTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
-public class DocumentLibraryDisplayTests extends BaseTests {
+public class ViewFolderDocumentTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(DocumentTests.suite());
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageDLTest.class);
+		testSuite.addTestSuite(AddPortletDLTest.class);
+		testSuite.addTestSuite(AddPageDLDTest.class);
+		testSuite.addTestSuite(AddPortletDLDTest.class);
+		testSuite.addTestSuite(AddFolderTest.class);
+		testSuite.addTestSuite(AddFolderDocumentTest.class);
+		testSuite.addTestSuite(ViewFolderDocumentTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

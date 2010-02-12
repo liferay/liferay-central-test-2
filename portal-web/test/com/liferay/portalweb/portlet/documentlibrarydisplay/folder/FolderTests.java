@@ -20,30 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.documentlibrarydisplay;
+package com.liferay.portalweb.portlet.documentlibrarydisplay.folder;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.document.DocumentTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.folder.FolderTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.PortletTests;
+import com.liferay.portalweb.portlet.documentlibrarydisplay.folder.viewfolder.ViewFolderTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="DocumentLibraryDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="FolderTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
-public class DocumentLibraryDisplayTests extends BaseTests {
+public class FolderTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(DocumentTests.suite());
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(ViewFolderTests.suite());
 
 		return testSuite;
 	}

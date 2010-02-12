@@ -20,30 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.documentlibrarydisplay;
+package com.liferay.portalweb.portlet.documentlibrarydisplay.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.document.DocumentTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.folder.FolderTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.PortletTests;
+import com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.addportlet.AddPortletTests;
+import com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.addportletmultiple.AddPortletMultipleTests;
+import com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.configureportletshowfoldersearch.ConfigurePortletShowFolderSearchTests;
+import com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.removeportlet.RemovePortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="DocumentLibraryDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
-public class DocumentLibraryDisplayTests extends BaseTests {
+public class PortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(DocumentTests.suite());
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(AddPortletTests.suite());
+		testSuite.addTest(AddPortletMultipleTests.suite());
+		testSuite.addTest(ConfigurePortletShowFolderSearchTests.suite());
+		testSuite.addTest(RemovePortletTests.suite());
 
 		return testSuite;
 	}

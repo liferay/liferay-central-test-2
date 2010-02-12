@@ -20,32 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.documentlibrarydisplay;
+package com.liferay.portalweb.portlet.documentlibrarydisplay.document.searchfolderdocument;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.document.DocumentTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.folder.FolderTests;
-import com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DocumentLibraryDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchFolderDocumentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
-public class DocumentLibraryDisplayTests extends BaseTests {
+public class SearchFolderDocumentTest extends BaseTestCase {
+	public void testSearchFolderDocument() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(DocumentTests.suite());
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Display Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Document Library Display Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("//div/input[1]", RuntimeVariables.replace("Test1"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test1 Document1"));
 	}
-
 }
