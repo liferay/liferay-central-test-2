@@ -20,25 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.invitation;
+package com.liferay.portalweb.portlet.invitation.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.invitation.portlet.PortletTests;
+import com.liferay.portalweb.portlet.invitation.portlet.addportlet.AddPortletTests;
+import com.liferay.portalweb.portlet.invitation.portlet.addportletduplicate.AddPortletDuplicateTests;
+import com.liferay.portalweb.portlet.invitation.portlet.removeportlet.RemovePortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="InvitationTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class InvitationTests extends BaseTests {
+public class PortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(AddPortletTests.suite());
+		testSuite.addTest(AddPortletDuplicateTests.suite());
+		testSuite.addTest(RemovePortletTests.suite());
 
 		return testSuite;
 	}
