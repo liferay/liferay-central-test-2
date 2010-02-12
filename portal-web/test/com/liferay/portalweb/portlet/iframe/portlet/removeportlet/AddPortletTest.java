@@ -20,18 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.iframe;
+package com.liferay.portalweb.portlet.iframe.portlet.removeportlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddIFrameSourceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddIFrameSourceTest extends BaseTestCase {
-	public void testAddIFrameSource() throws Exception {
+public class AddPortletTest extends BaseTestCase {
+	public void testAddPortlet() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -52,8 +52,7 @@ public class AddIFrameSourceTest extends BaseTestCase {
 
 		selenium.clickAt("link=IFrame Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,7 +60,8 @@ public class AddIFrameSourceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Configuration")) {
+				if (selenium.isVisible(
+							"//input[@id='layout_configuration_content']")) {
 					break;
 				}
 			}
@@ -71,15 +71,10 @@ public class AddIFrameSourceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		selenium.type("_86_src", RuntimeVariables.replace("www.liferay.com"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace(
-				"You have successfully updated the setup."),
-			selenium.getText("//div[5]/div/div/div/div"));
+		selenium.type("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace(""));
+		selenium.typeKeys("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace("i"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,7 +82,7 @@ public class AddIFrameSourceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Liferay")) {
+				if (selenium.isVisible("//div[@id=\"Sample-IFrame\"]/p/a")) {
 					break;
 				}
 			}
@@ -97,6 +92,25 @@ public class AddIFrameSourceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("link=Liferay"));
+		selenium.clickAt("//div[@id=\"Sample-IFrame\"]/p/a",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//td[1]/div[1]/div")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
 	}
 }

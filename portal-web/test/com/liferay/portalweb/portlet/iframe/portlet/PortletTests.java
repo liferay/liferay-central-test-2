@@ -20,25 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.iframe;
+package com.liferay.portalweb.portlet.iframe.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.iframe.portlet.PortletTests;
+import com.liferay.portalweb.portlet.iframe.portlet.addportlet.AddPortletTests;
+import com.liferay.portalweb.portlet.iframe.portlet.addportletmultiple.AddPortletMultipleTests;
+import com.liferay.portalweb.portlet.iframe.portlet.configureportletsourceurl.ConfigurePortletSourceURLTests;
+import com.liferay.portalweb.portlet.iframe.portlet.removeportlet.RemovePortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="IFrameTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class IFrameTests extends BaseTests {
+public class PortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(AddPortletTests.suite());
+		testSuite.addTest(AddPortletMultipleTests.suite());
+		testSuite.addTest(ConfigurePortletSourceURLTests.suite());
+		testSuite.addTest(RemovePortletTests.suite());
 
 		return testSuite;
 	}
