@@ -20,27 +20,58 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.quicknote;
+package com.liferay.portalweb.portlet.quicknote.portlet.removeportlet;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.quicknote.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="QuickNoteTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="RemovePortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class QuickNoteTests extends BaseTests {
+public class RemovePortletTest extends BaseTestCase {
+	public void testRemovePortlet() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Quick Note Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Quick Note Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Close']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//td[1]/div[1]/div")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertFalse(selenium.isElementPresent("//td[1]/div[1]/div"));
 	}
-
 }
