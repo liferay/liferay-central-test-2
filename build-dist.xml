@@ -3,105 +3,6 @@
 <project name="portal-dist" basedir="." default="dist" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build.xml" />
 
-	<target name="deploy-plugins">
-		<delete includeemptydirs="true" failonerror="false">
-			<fileset
-				dir="${deployer.dest.dir}"
-				includes="*-hook/**,*-portlet/**,*-theme/**"
-			/>
-		</delete>
-
-		<java
-			classname="com.liferay.portal.tools.deploy.HookDeployer"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-
-			<!-- Required Arguments -->
-
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dliferay.lib.portal.dir=${deployer.app.server.lib.portal.dir}" />
-			<jvmarg value="-Ddeployer.base.dir=${lp.plugins.dir}/dist" />
-			<jvmarg value="-Ddeployer.dest.dir=${deployer.dest.dir}" />
-			<jvmarg value="-Ddeployer.app.server.type=${deployer.app.server.type}" />
-			<jvmarg value="-Ddeployer.unpack.war=true" />
-			<jvmarg value="-Ddeployer.file.pattern=*-hook-*.war" />
-
-			<!-- Optional Arguments -->
-
-			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
-
-			<!-- Dependent Libraries -->
-
-			<arg value="util-java/util-java.jar" />
-		</java>
-
-		<java
-			classname="com.liferay.portal.tools.deploy.PortletDeployer"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-
-			<!-- Required Arguments -->
-
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dliferay.lib.portal.dir=${deployer.app.server.lib.portal.dir}" />
-			<jvmarg value="-Ddeployer.base.dir=${lp.plugins.dir}/dist" />
-			<jvmarg value="-Ddeployer.dest.dir=${deployer.dest.dir}" />
-			<jvmarg value="-Ddeployer.app.server.type=${deployer.app.server.type}" />
-			<jvmarg value="-Ddeployer.aui.taglib.dtd=util-taglib/classes/META-INF/liferay-aui.tld" />
-			<jvmarg value="-Ddeployer.portlet.taglib.dtd=util-taglib/classes/META-INF/liferay-portlet.tld" />
-			<jvmarg value="-Ddeployer.portlet-ext.taglib.dtd=util-taglib/classes/META-INF/liferay-portlet-ext.tld" />
-			<jvmarg value="-Ddeployer.security.taglib.dtd=util-taglib/classes/META-INF/liferay-security.tld" />
-			<jvmarg value="-Ddeployer.theme.taglib.dtd=util-taglib/classes/META-INF/liferay-theme.tld" />
-			<jvmarg value="-Ddeployer.ui.taglib.dtd=util-taglib/classes/META-INF/liferay-ui.tld" />
-			<jvmarg value="-Ddeployer.util.taglib.dtd=util-taglib/classes/META-INF/liferay-util.tld" />
-			<jvmarg value="-Ddeployer.unpack.war=true" />
-			<jvmarg value="-Ddeployer.file.pattern=*-portlet-*.war" />
-
-			<!-- Optional Arguments -->
-
-			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
-
-			<!-- Dependent Libraries -->
-
-			<arg value="util-bridges/util-bridges.jar" />
-			<arg value="util-java/util-java.jar" />
-			<arg value="util-taglib/util-taglib.jar" />
-		</java>
-
-		<java
-			classname="com.liferay.portal.tools.deploy.ThemeDeployer"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-
-			<!-- Required Arguments -->
-
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dliferay.lib.portal.dir=${deployer.app.server.lib.portal.dir}" />
-			<jvmarg value="-Ddeployer.base.dir=${lp.plugins.dir}/dist" />
-			<jvmarg value="-Ddeployer.dest.dir=${deployer.dest.dir}" />
-			<jvmarg value="-Ddeployer.app.server.type=${deployer.app.server.type}" />
-			<jvmarg value="-Ddeployer.theme.taglib.dtd=util-taglib/classes/META-INF/liferay-theme.tld" />
-			<jvmarg value="-Ddeployer.util.taglib.dtd=util-taglib/classes/META-INF/liferay-util.tld" />
-			<jvmarg value="-Ddeployer.unpack.war=true" />
-			<jvmarg value="-Ddeployer.file.pattern=*-theme-*.war" />
-
-			<!-- Optional Arguments -->
-
-			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
-
-			<!-- Dependent Libraries -->
-
-			<arg value="util-java/util-java.jar" />
-			<arg value="util-taglib/util-taglib.jar" />
-		</java>
-	</target>
-
 	<target name="build-dist-geronimo-tomcat">
 		<delete dir="${app.server.geronimo-tomcat.dir}" />
 
@@ -539,6 +440,189 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<exec dir="${shelf.drive}\vanilla\liferay.public\portal\${shelf.branch}" executable="cmd.exe" os="${os.windows}">
 			<arg line="/c svn switch ${shelf.path}/${shelf.version}" />
 		</exec>
+	</target>
+
+	<target name="deploy-plugins">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset
+				dir="${deployer.dest.dir}"
+				includes="*-hook/**,*-portlet/**,*-theme/**"
+			/>
+		</delete>
+
+		<java
+			classname="com.liferay.portal.tools.deploy.HookDeployer"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+
+			<!-- Required Arguments -->
+
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Dliferay.lib.portal.dir=${deployer.app.server.lib.portal.dir}" />
+			<jvmarg value="-Ddeployer.base.dir=${lp.plugins.dir}/dist" />
+			<jvmarg value="-Ddeployer.dest.dir=${deployer.dest.dir}" />
+			<jvmarg value="-Ddeployer.app.server.type=${deployer.app.server.type}" />
+			<jvmarg value="-Ddeployer.unpack.war=true" />
+			<jvmarg value="-Ddeployer.file.pattern=*-hook-*.war" />
+
+			<!-- Optional Arguments -->
+
+			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
+
+			<!-- Dependent Libraries -->
+
+			<arg value="util-java/util-java.jar" />
+		</java>
+
+		<java
+			classname="com.liferay.portal.tools.deploy.PortletDeployer"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+
+			<!-- Required Arguments -->
+
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Dliferay.lib.portal.dir=${deployer.app.server.lib.portal.dir}" />
+			<jvmarg value="-Ddeployer.base.dir=${lp.plugins.dir}/dist" />
+			<jvmarg value="-Ddeployer.dest.dir=${deployer.dest.dir}" />
+			<jvmarg value="-Ddeployer.app.server.type=${deployer.app.server.type}" />
+			<jvmarg value="-Ddeployer.aui.taglib.dtd=util-taglib/classes/META-INF/liferay-aui.tld" />
+			<jvmarg value="-Ddeployer.portlet.taglib.dtd=util-taglib/classes/META-INF/liferay-portlet.tld" />
+			<jvmarg value="-Ddeployer.portlet-ext.taglib.dtd=util-taglib/classes/META-INF/liferay-portlet-ext.tld" />
+			<jvmarg value="-Ddeployer.security.taglib.dtd=util-taglib/classes/META-INF/liferay-security.tld" />
+			<jvmarg value="-Ddeployer.theme.taglib.dtd=util-taglib/classes/META-INF/liferay-theme.tld" />
+			<jvmarg value="-Ddeployer.ui.taglib.dtd=util-taglib/classes/META-INF/liferay-ui.tld" />
+			<jvmarg value="-Ddeployer.util.taglib.dtd=util-taglib/classes/META-INF/liferay-util.tld" />
+			<jvmarg value="-Ddeployer.unpack.war=true" />
+			<jvmarg value="-Ddeployer.file.pattern=*-portlet-*.war" />
+
+			<!-- Optional Arguments -->
+
+			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
+
+			<!-- Dependent Libraries -->
+
+			<arg value="util-bridges/util-bridges.jar" />
+			<arg value="util-java/util-java.jar" />
+			<arg value="util-taglib/util-taglib.jar" />
+		</java>
+
+		<java
+			classname="com.liferay.portal.tools.deploy.ThemeDeployer"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+
+			<!-- Required Arguments -->
+
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Dliferay.lib.portal.dir=${deployer.app.server.lib.portal.dir}" />
+			<jvmarg value="-Ddeployer.base.dir=${lp.plugins.dir}/dist" />
+			<jvmarg value="-Ddeployer.dest.dir=${deployer.dest.dir}" />
+			<jvmarg value="-Ddeployer.app.server.type=${deployer.app.server.type}" />
+			<jvmarg value="-Ddeployer.theme.taglib.dtd=util-taglib/classes/META-INF/liferay-theme.tld" />
+			<jvmarg value="-Ddeployer.util.taglib.dtd=util-taglib/classes/META-INF/liferay-util.tld" />
+			<jvmarg value="-Ddeployer.unpack.war=true" />
+			<jvmarg value="-Ddeployer.file.pattern=*-theme-*.war" />
+
+			<!-- Optional Arguments -->
+
+			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
+
+			<!-- Dependent Libraries -->
+
+			<arg value="util-java/util-java.jar" />
+			<arg value="util-taglib/util-taglib.jar" />
+		</java>
+	</target>
+
+	<target name="dist">
+		<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update -r ${svn.revision}" />
+		</exec>
+
+		<exec dir="${lp.source.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update -r ${svn.revision}" />
+		</exec>
+
+		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update -r ${svn.revision}" />
+		</exec>
+
+		<antcall target="all" />
+
+		<delete dir="${lp.plugins.dir}/dist" />
+
+		<ant dir="${lp.plugins.dir}/hooks/sevencogs-hook" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/chat-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/google-maps-portlet" target="all" inheritAll="false" />
+		<!--<ant dir="${lp.plugins.dir}/portlets/mail-portlet" target="all" inheritAll="false" />-->
+		<ant dir="${lp.plugins.dir}/portlets/sn-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/web-form-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/sevencogs-theme" target="all" inheritAll="false" />
+
+		<delete dir="${liferay.home}/data" />
+		<delete dir="${liferay.home}/deploy" />
+
+		<antcall target="java2html" />
+		<antcall target="dtddoc" />
+
+		<delete dir="dist" />
+		<mkdir dir="dist" />
+
+		<delete dir="tools/zip_tmpl/license" />
+		<mkdir dir="tools/zip_tmpl/license" />
+
+		<copy file="copyright.txt" todir="tools/zip_tmpl/license" />
+		<copy file="lib/versions.html" todir="tools/zip_tmpl/license" />
+
+		<antcall target="zip-portal-war" />
+
+		<antcall target="build-dist-geronimo-tomcat" />
+		<antcall target="build-dist-glassfish" />
+		<antcall target="build-dist-jboss" />
+		<antcall target="build-dist-jetty" />
+		<antcall target="build-dist-jonas-jetty" />
+		<antcall target="build-dist-jonas-tomcat" />
+		<antcall target="build-dist-resin" />
+		<antcall target="build-dist-tomcat" />
+
+		<antcall target="zip-api" />
+		<antcall target="zip-geronimo-tomcat" />
+		<antcall target="zip-glassfish" />
+		<antcall target="zip-jboss" />
+		<antcall target="zip-jetty" />
+		<antcall target="zip-jonas" />
+		<antcall target="zip-portal-client" />
+		<antcall target="zip-portal-dependencies" />
+		<antcall target="zip-resin" />
+		<antcall target="zip-sql" />
+		<antcall target="zip-src" />
+		<antcall target="zip-tomcat" />
+
+		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version}.war" />
+
+		<antcall target="build-dist-sql-oracle" />
+
+		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
+
+		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" tofile="dist/liferay-plugins-sdk-${lp.version}.zip" />
+
+		<if>
+			<not>
+				<equals arg1="${dist.username}" arg2="$${dist.username}" />
+			</not>
+			<then>
+				<scp todir="${dist.username}:${dist.password}@${dist.host}:/home/${dist.username}" trust="yes">
+					<fileset dir="dist" />
+				</scp>
+			</then>
+		</if>
 	</target>
 
 	<target name="prepare-generated-files">
@@ -999,89 +1083,5 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		</unzip>
 
 		<mkdir dir="${app.server.parent.dir}/tomcat-6.0.24/webapps" />
-	</target>
-
-	<target name="dist">
-		<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn update -r ${svn.revision}" />
-		</exec>
-
-		<exec dir="${lp.source.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn update -r ${svn.revision}" />
-		</exec>
-
-		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn update -r ${svn.revision}" />
-		</exec>
-
-		<antcall target="all" />
-
-		<delete dir="${lp.plugins.dir}/dist" />
-
-		<ant dir="${lp.plugins.dir}/hooks/sevencogs-hook" target="all" inheritAll="false" />
-		<ant dir="${lp.plugins.dir}/portlets/chat-portlet" target="all" inheritAll="false" />
-		<ant dir="${lp.plugins.dir}/portlets/google-maps-portlet" target="all" inheritAll="false" />
-		<!--<ant dir="${lp.plugins.dir}/portlets/mail-portlet" target="all" inheritAll="false" />-->
-		<ant dir="${lp.plugins.dir}/portlets/sn-portlet" target="all" inheritAll="false" />
-		<ant dir="${lp.plugins.dir}/portlets/web-form-portlet" target="all" inheritAll="false" />
-		<ant dir="${lp.plugins.dir}/themes/sevencogs-theme" target="all" inheritAll="false" />
-
-		<delete dir="${liferay.home}/data" />
-		<delete dir="${liferay.home}/deploy" />
-
-		<antcall target="java2html" />
-		<antcall target="dtddoc" />
-
-		<delete dir="dist" />
-		<mkdir dir="dist" />
-
-		<delete dir="tools/zip_tmpl/license" />
-		<mkdir dir="tools/zip_tmpl/license" />
-
-		<copy file="copyright.txt" todir="tools/zip_tmpl/license" />
-		<copy file="lib/versions.html" todir="tools/zip_tmpl/license" />
-
-		<antcall target="zip-portal-war" />
-
-		<antcall target="build-dist-geronimo-tomcat" />
-		<antcall target="build-dist-glassfish" />
-		<antcall target="build-dist-jboss" />
-		<antcall target="build-dist-jetty" />
-		<antcall target="build-dist-jonas-jetty" />
-		<antcall target="build-dist-jonas-tomcat" />
-		<antcall target="build-dist-resin" />
-		<antcall target="build-dist-tomcat" />
-
-		<antcall target="zip-api" />
-		<antcall target="zip-geronimo-tomcat" />
-		<antcall target="zip-glassfish" />
-		<antcall target="zip-jboss" />
-		<antcall target="zip-jetty" />
-		<antcall target="zip-jonas" />
-		<antcall target="zip-portal-client" />
-		<antcall target="zip-portal-dependencies" />
-		<antcall target="zip-resin" />
-		<antcall target="zip-sql" />
-		<antcall target="zip-src" />
-		<antcall target="zip-tomcat" />
-
-		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version}.war" />
-
-		<antcall target="build-dist-sql-oracle" />
-
-		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
-
-		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" tofile="dist/liferay-plugins-sdk-${lp.version}.zip" />
-
-		<if>
-			<not>
-				<equals arg1="${dist.username}" arg2="$${dist.username}" />
-			</not>
-			<then>
-				<scp todir="${dist.username}:${dist.password}@${dist.host}:/home/${dist.username}" trust="yes">
-					<fileset dir="dist" />
-				</scp>
-			</then>
-		</if>
 	</target>
 </project>
