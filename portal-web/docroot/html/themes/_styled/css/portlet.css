@@ -20,7 +20,7 @@ body.portlet {
 }
 
 .portlet-title-text {
-	cursor: text;
+	cursor: pointer;
 }
 
 .portlet-title img {
