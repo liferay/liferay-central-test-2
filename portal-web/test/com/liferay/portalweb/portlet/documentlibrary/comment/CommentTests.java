@@ -20,34 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.documentlibrary;
+package com.liferay.portalweb.portlet.documentlibrary.comment;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.documentlibrary.comment.CommentTests;
-import com.liferay.portalweb.portlet.documentlibrary.document.DocumentTests;
-import com.liferay.portalweb.portlet.documentlibrary.folder.FolderTests;
-import com.liferay.portalweb.portlet.documentlibrary.lar.LARTests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.PortletTests;
+import com.liferay.portalweb.portlet.documentlibrary.comment.addfolderdocumentcomment.AddFolderDocumentCommentTests;
+import com.liferay.portalweb.portlet.documentlibrary.comment.movefolderdocumentcommenttofolder.MoveFolderDocumentCommentToFolderTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="CommentTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
-public class DocumentLibraryTests extends BaseTests {
+public class CommentTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(DocumentTests.suite());
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(AddFolderDocumentCommentTests.suite());
+		testSuite.addTest(MoveFolderDocumentCommentToFolderTests.suite());
 
 		return testSuite;
 	}

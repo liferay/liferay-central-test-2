@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddFolderDocumentDocumentInvalidTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddFolderDocumentDocumentInvalidTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Document Library Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Document Library Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//a/strong</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list right ']/ul/li[5]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Use the classic uploader.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Use the classic uploader.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_20_file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_20_file</td>
+	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\documentlibrary\document\addfolderdocumentdocumentinvalid\dependencies\test_document.invalid</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Document names must end with one of the following extensions: .bmp, .css, .doc, .docx, .dot, .gif, .gz, .htm, .html, .jpg, .js, .lar, .odb, .odf, .odg, .odp, .ods, .odt, .pdf, .png, .ppt, .pptx, .rtf, .swf, .sxc, .sxi, .sxw, .tar, .tiff, .tgz, .txt, .vsd, .xls, .xlsx, .xml, .zip, .jrxml</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

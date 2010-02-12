@@ -20,34 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.documentlibrary;
+package com.liferay.portalweb.portlet.documentlibrary.document.addfolderdocumentmultiple;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.documentlibrary.comment.CommentTests;
-import com.liferay.portalweb.portlet.documentlibrary.document.DocumentTests;
-import com.liferay.portalweb.portlet.documentlibrary.folder.FolderTests;
-import com.liferay.portalweb.portlet.documentlibrary.lar.LARTests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddFolderDocumentMultipleTests.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
- *
  */
-public class DocumentLibraryTests extends BaseTests {
+public class AddFolderDocumentMultipleTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(DocumentTests.suite());
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddFolderTest.class);
+		testSuite.addTestSuite(AddFolderDocument1Test.class);
+		testSuite.addTestSuite(AddFolderDocument2Test.class);
+		testSuite.addTestSuite(AddFolderDocument3Test.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

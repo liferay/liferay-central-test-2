@@ -20,36 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.documentlibrary;
+package com.liferay.portalweb.portlet.documentlibrary.portlet.configureportlethidefoldersearch;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.documentlibrary.comment.CommentTests;
-import com.liferay.portalweb.portlet.documentlibrary.document.DocumentTests;
-import com.liferay.portalweb.portlet.documentlibrary.folder.FolderTests;
-import com.liferay.portalweb.portlet.documentlibrary.lar.LARTests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertShowFolderSearchTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
-public class DocumentLibraryTests extends BaseTests {
+public class AssertShowFolderSearchTest extends BaseTestCase {
+	public void testAssertShowFolderSearch() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(DocumentTests.suite());
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("_20_keywords1"));
+		assertTrue(selenium.isElementPresent("//input[@value='Search Folders']"));
 	}
-
 }
