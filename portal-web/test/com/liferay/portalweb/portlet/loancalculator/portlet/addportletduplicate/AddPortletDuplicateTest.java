@@ -20,58 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.loancalculator;
+package com.liferay.portalweb.portlet.loancalculator.portlet.addportletduplicate;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletDuplicateTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
+public class AddPortletDuplicateTest extends BaseTestCase {
+	public void testAddPortletDuplicate() throws Exception {
 		selenium.open("/web/guest/home/");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("addPage")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("addPage", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("//input",
-			RuntimeVariables.replace("Loan Calculator Test Page"));
-		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -92,5 +53,67 @@ public class AddPageTest extends BaseTestCase {
 		selenium.clickAt("link=Loan Calculator Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//input[@id='layout_configuration_content']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace(""));
+		selenium.typeKeys("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace("c"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div[@id=\"Finance-LoanCalculator\"]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@id=\"Finance-LoanCalculator\"]/p/a",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//td[1]/div[1]/div")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
+		Thread.sleep(5000);
+		assertFalse(selenium.isElementPresent("//td[1]/div[2]/div"));
 	}
 }

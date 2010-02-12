@@ -20,27 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.loancalculator;
+package com.liferay.portalweb.portlet.loancalculator.loan;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.loancalculator.loan.LoanTests;
-import com.liferay.portalweb.portlet.loancalculator.portlet.PortletTests;
+import com.liferay.portalweb.portlet.loancalculator.loan.calculateloan.CalculateLoanTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="LoanCalculatorTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="LoanTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class LoanCalculatorTests extends BaseTests {
+public class LoanTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LoanTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(CalculateLoanTests.suite());
 
 		return testSuite;
 	}
