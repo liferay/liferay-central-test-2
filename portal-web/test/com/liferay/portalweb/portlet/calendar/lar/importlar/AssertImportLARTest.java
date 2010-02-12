@@ -20,31 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.calendar;
+package com.liferay.portalweb.portlet.calendar.lar.importlar;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.calendar.event.EventTests;
-import com.liferay.portalweb.portlet.calendar.lar.LARTests;
-import com.liferay.portalweb.portlet.calendar.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CalendarTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CalendarTests extends BaseTests {
+public class AssertImportLARTest extends BaseTestCase {
+	public void testAssertImportLAR() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(EventTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Caedmon's Call Concert."),
+			selenium.getText("//tr[3]/td[3]/a"));
+		assertEquals(RuntimeVariables.replace("Edited Test Event"),
+			selenium.getText("//tr[4]/td[3]/a"));
+		assertEquals(RuntimeVariables.replace("Off to Yosemite."),
+			selenium.getText("//tr[5]/td[3]/a"));
 	}
-
 }

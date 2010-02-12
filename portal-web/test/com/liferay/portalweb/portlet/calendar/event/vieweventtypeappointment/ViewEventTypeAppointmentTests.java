@@ -20,29 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.calendar;
+package com.liferay.portalweb.portlet.calendar.event.vieweventtypeappointment;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.calendar.event.EventTests;
-import com.liferay.portalweb.portlet.calendar.lar.LARTests;
-import com.liferay.portalweb.portlet.calendar.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="CalendarTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewEventTypeAppointmentTests.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CalendarTests extends BaseTests {
+public class ViewEventTypeAppointmentTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EventTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddEventTypeAppointmentTest.class);
+		testSuite.addTestSuite(ViewEventTypeAppointmentTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
