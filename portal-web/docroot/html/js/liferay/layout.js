@@ -5,7 +5,25 @@ AUI().add(
 
 		var getTitle = A.cached(
 			function(id) {
-				return A.one('#' + id).one('.portlet-title').outerHTML();
+				var portletBoundary = A.one('#' + id);
+
+				var portletTitle = portletBoundary.one('.portlet-title');
+
+				if (!portletTitle) {
+					portletTitle = Liferay.Layout.PROXY_NODE_ITEM.one('.portlet-title');
+
+					var title = portletBoundary.one('.portlet-title-default');
+
+					var titleText = '';
+
+					if (title) {
+						titleText = title.html();
+					}
+
+					portletTitle.html(titleText);
+				}
+
+				return portletTitle.outerHTML();
 			}
 		);
 

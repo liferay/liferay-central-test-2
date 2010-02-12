@@ -72,7 +72,7 @@ if (layout != null) {
 				dropContainer: '.lfr-portlet-column',
 				dropNodes: '.lfr-column',
 				emptyColumnClass: 'empty',
-				handles: '.portlet-title,.portlet-title-default,.portlet-title-text',
+				handles: ['.portlet-title', '.portlet-title-default', '.portlet-title-text'],
 				nestedPortletId: '_<%= PortletKeys.NESTED_PORTLETS %>_INSTANCE',
 				portletBoundary: '.portlet-boundary'
 			};
@@ -85,7 +85,7 @@ if (layout != null) {
 				emptyColumnClass: 'empty',
 				freeForm: true,
 				freeformPlaceholderClass: 'lfr-freeform-layout-drag-indicator',
-				handles: '.portlet-header-bar,.portlet-title-default,.portlet-title-text,.portlet-topper',
+				handles: ['.portlet-header-bar', '.portlet-title-default', '.portlet-title-text', '.portlet-topper'],
 				nestedPortletId: '_<%= PortletKeys.NESTED_PORTLETS %>_INSTANCE',
 				portletBoundary: '.portlet-boundary'
 			};
