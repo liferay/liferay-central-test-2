@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.sql.Connection;
@@ -84,7 +85,7 @@ public class VerifyMySQL extends VerifyProcess {
 
 			while (rs.next()) {
 				String tableName = rs.getString("Name");
-				String engine = rs.getString("Engine");
+				String engine = GetterUtil.getString(rs.getString("Engine"));
 
 				if (!engine.equalsIgnoreCase(
 						PropsValues.DATABASE_MYSQL_ENGINE)) {
