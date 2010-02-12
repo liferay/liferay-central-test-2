@@ -20,33 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.bookmarks;
+package com.liferay.portalweb.portlet.bookmarks.entry.searchfolderentry;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.bookmarks.entry.EntryTests;
-import com.liferay.portalweb.portlet.bookmarks.folder.FolderTests;
-import com.liferay.portalweb.portlet.bookmarks.lar.LARTests;
-import com.liferay.portalweb.portlet.bookmarks.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="BookmarksTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchNullFolderEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BookmarksTests extends BaseTests {
+public class SearchNullFolderEntryTest extends BaseTestCase {
+	public void testSearchNullFolderEntry() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Bookmarks Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_28_keywords1", RuntimeVariables.replace("Test1"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"No entries were found that matched the keywords: Test1."));
 	}
-
 }

@@ -20,31 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.bookmarks;
+package com.liferay.portalweb.portlet.bookmarks.lar.importlar;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.bookmarks.entry.EntryTests;
-import com.liferay.portalweb.portlet.bookmarks.folder.FolderTests;
-import com.liferay.portalweb.portlet.bookmarks.lar.LARTests;
-import com.liferay.portalweb.portlet.bookmarks.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="BookmarksTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImportLARTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BookmarksTests extends BaseTests {
+public class ImportLARTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

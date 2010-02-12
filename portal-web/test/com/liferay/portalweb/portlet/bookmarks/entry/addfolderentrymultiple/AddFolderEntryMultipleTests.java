@@ -20,31 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.bookmarks;
+package com.liferay.portalweb.portlet.bookmarks.entry.addfolderentrymultiple;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.bookmarks.entry.EntryTests;
-import com.liferay.portalweb.portlet.bookmarks.folder.FolderTests;
-import com.liferay.portalweb.portlet.bookmarks.lar.LARTests;
-import com.liferay.portalweb.portlet.bookmarks.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="BookmarksTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddFolderEntryMultipleTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BookmarksTests extends BaseTests {
+public class AddFolderEntryMultipleTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddFolderTest.class);
+		testSuite.addTestSuite(AddFolderEntry1Test.class);
+		testSuite.addTestSuite(AddFolderEntry2Test.class);
+		testSuite.addTestSuite(AddFolderEntry3Test.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
