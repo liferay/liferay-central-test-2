@@ -20,31 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.directory;
+package com.liferay.portalweb.portlet.directory.usergroup.viewusergroupuser;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.directory.organizations.OrganizationsTests;
-import com.liferay.portalweb.portlet.directory.usergroup.UserGroupTests;
-import com.liferay.portalweb.portlet.directory.users.UsersTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DirectoryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewUserGroupUserTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DirectoryTests extends BaseTests {
+public class ViewUserGroupUserTest extends BaseTestCase {
+	public void testViewUserGroupUser() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(UsersTests.suite());
-		testSuite.addTest(OrganizationsTests.suite());
-		testSuite.addTest(UserGroupTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Directory Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Directory Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=User Groups", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=View Users", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=TestFirst1"));
 	}
-
 }

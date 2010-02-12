@@ -20,29 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.directory;
+package com.liferay.portalweb.portlet.directory.users;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.directory.organizations.OrganizationsTests;
-import com.liferay.portalweb.portlet.directory.usergroup.UserGroupTests;
-import com.liferay.portalweb.portlet.directory.users.UsersTests;
+import com.liferay.portalweb.portlet.directory.users.advancedsearchusers.AdvancedSearchUsersTests;
+import com.liferay.portalweb.portlet.directory.users.searchusers.SearchUsersTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="DirectoryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="UsersTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DirectoryTests extends BaseTests {
+public class UsersTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(UsersTests.suite());
-		testSuite.addTest(OrganizationsTests.suite());
-		testSuite.addTest(UserGroupTests.suite());
+		testSuite.addTest(SearchUsersTests.suite());
+		testSuite.addTest(AdvancedSearchUsersTests.suite());
 
 		return testSuite;
 	}

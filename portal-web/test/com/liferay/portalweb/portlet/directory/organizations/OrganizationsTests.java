@@ -20,29 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.directory;
+package com.liferay.portalweb.portlet.directory.organizations;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.directory.organizations.OrganizationsTests;
-import com.liferay.portalweb.portlet.directory.usergroup.UserGroupTests;
-import com.liferay.portalweb.portlet.directory.users.UsersTests;
+import com.liferay.portalweb.portlet.directory.organizations.advancedsearchorganizations.AdvancedSearchOrganizationsTests;
+import com.liferay.portalweb.portlet.directory.organizations.searchorganizations.SearchOrganizationsTests;
+import com.liferay.portalweb.portlet.directory.organizations.vieworganizationuser.ViewOrganizationUserTests;
+import com.liferay.portalweb.portlet.directory.organizations.viewsuborganization.ViewSuborganizationTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="DirectoryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationsTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DirectoryTests extends BaseTests {
+public class OrganizationsTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(UsersTests.suite());
-		testSuite.addTest(OrganizationsTests.suite());
-		testSuite.addTest(UserGroupTests.suite());
+		testSuite.addTest(SearchOrganizationsTests.suite());
+		testSuite.addTest(AdvancedSearchOrganizationsTests.suite());
+		testSuite.addTest(ViewOrganizationUserTests.suite());
+		testSuite.addTest(ViewSuborganizationTests.suite());
 
 		return testSuite;
 	}
