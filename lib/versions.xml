@@ -2122,13 +2122,12 @@
 	</library>
 	<library>
 		<file-name>portal/nekohtml.jar</file-name>
-		<version>0.9.5</version>
-		<project-name>NekoHTML</project-name>
-		<project-url>http://people.apache.org/~andyc/neko/doc/html</project-url>
+		<version>1.9.14</version>
+		<project-name>CyberNeko HTML Parser</project-name>
+		<project-url>http://sourceforge.net/projects/nekohtml</project-url>
 		<licenses>
 			<license>
-				<license-name>CyperNeko Software License 1.0</license-name>
-				<copyright-notice>Copyright (c) 2002-2005, Andy Clark. All rights reserved.</copyright-notice>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
