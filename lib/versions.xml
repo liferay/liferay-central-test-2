@@ -935,6 +935,9 @@
 				<license-name>Eclipse Public License 1.0</license-name>
 			</license>
 		</licenses>
+		<comments>
+			Removed testdata.* because it conflicts with JBoss 5.1.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/axiom-api.jar</file-name>
