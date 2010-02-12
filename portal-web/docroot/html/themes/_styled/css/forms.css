@@ -10,6 +10,7 @@ fieldset {
 .aui-fieldset {
 	border-width: 0;
 	padding: 0;
+	position: relative;
 }
 
 .aui-fieldset .aui-field-content, .aui-field-row, .aui-button-holder {
