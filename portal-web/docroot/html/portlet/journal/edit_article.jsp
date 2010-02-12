@@ -677,15 +677,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		return "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=<%= version %>&<portlet:namespace />languageId=" + languageId;
 	}
 
-	function <portlet:namespace />getSuggestionsContent() {
-		var content = '';
-
-		content += document.<portlet:namespace />fm1.<portlet:namespace/>title.value + ' ';
-		content += window.<portlet:namespace />editor.getHTML();
-
-		return content;
-	}
-
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}

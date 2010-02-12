@@ -301,6 +301,7 @@ AUI().add(
 
 			A.ContextOverlayManager.remove(instance.editContainerContextPanel);
 
+			instance._initializeTagsSuggestionContent();
 			instance._initializePageLoadFieldInstances();
 			instance._attachEvents();
 			instance._attachEditContainerEvents();
@@ -2556,6 +2557,26 @@ AUI().add(
 						fieldsDataSet.add(id, fieldInstance);
 					}
 				);
+			},
+
+			_initializeTagsSuggestionContent: function() {
+				var instance = this;
+
+				window[instance.portletNamespace + 'getSuggestionsContent'] = function() {
+					var content = [];
+
+					instance.getFields().each(
+						function(item, index, collection) {
+							var id = item.get('id');
+							var fieldInstance = fieldsDataSet.item(id);
+							var fieldContent = fieldInstance.getContent(item);
+
+							content.push(fieldContent);
+						}
+					);
+
+					return content.join(' ');
+				};
 			},
 
 			_stripComponentType: function(type) {
