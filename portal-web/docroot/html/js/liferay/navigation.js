@@ -197,11 +197,6 @@ AUI().add(
 								points: ['tl', 'bl']
 							},
 							on: {
-								align: function(event) {
-									var instance = this;
-
-									instance._syncUIPosExtras();
-								},
 								visibleChange: function(event) {
 									var instance = this;
 
