@@ -420,7 +420,7 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.j
 			<then>
 				<if>
 					<not>
-						<available file="${app.server.bin.dir}/setevn.bat" />
+						<available file="${app.server.bin.dir}/setenv.bat" />
 					</not>
 					<then>
 						<copy
@@ -437,7 +437,7 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.j
 
 				<if>
 					<not>
-						<available file="${app.server.bin.dir}/setevn.sh" />
+						<available file="${app.server.bin.dir}/setenv.sh" />
 					</not>
 					<then>
 						<copy
