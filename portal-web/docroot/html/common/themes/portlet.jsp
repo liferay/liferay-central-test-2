@@ -139,11 +139,16 @@ else {
 				<liferay-theme:wrap-portlet page="portlet.jsp">
 					<c:if test='<%= ParamUtil.getBoolean(request, "wsrp") %>'>
 						<div id="wsrp-configuration-url"><%= portletDisplay.getURLConfiguration() %></div>
+						<liferay:wsrp-portlet>
 					</c:if>
 
 					<div class="<%= portletDisplay.isStateMin() ? "aui-helper-hidden" : "" %> portlet-content-container" <%= containerStyles %>>
 						<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 					</div>
+
+					<c:if test='<%= ParamUtil.getBoolean(request, "wsrp") %>'>
+						</liferay:wsrp-portlet>
+					</c:if>
 				</liferay-theme:wrap-portlet>
 
 				<c:if test="<%= freeformPortlet && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
