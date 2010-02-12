@@ -311,7 +311,7 @@ body.lfr-has-sidebar {
 /* ---------- Site breadcrumbs ---------- */
 
 .site-breadcrumbs {
-	margin: 0;
+	margin: 0 0 5px;
 	width: auto;
 }
 
@@ -385,6 +385,10 @@ body.lfr-has-sidebar {
 }
 
 /* ---------- Misc. ---------- */
+
+.lfr-grid .lfr-column, .columns-max .lfr-column {
+	padding: 0 5px;
+}
 
 .lfr-panel-container {
 	background-color: transparent;
