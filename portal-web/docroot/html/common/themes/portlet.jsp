@@ -137,7 +137,12 @@ else {
 		<c:choose>
 			<c:when test="<%= portletDecorate %>">
 				<liferay-theme:wrap-portlet page="portlet.jsp">
-					<c:if test='<%= ParamUtil.getBoolean(request, "wsrp") %>'>
+
+					<%
+					boolean wsrp = ParamUtil.getBoolean(request, "wsrp");
+					%>
+
+					<c:if test="<%= wsrp %>">
 						<div id="wsrp-configuration-url"><%= portletDisplay.getURLConfiguration() %></div>
 
 						<liferay-wsrp-portlet>
@@ -147,7 +152,7 @@ else {
 						<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 					</div>
 
-					<c:if test='<%= ParamUtil.getBoolean(request, "wsrp") %>'>
+					<c:if test="<%= wsrp %>">
 						</liferay-wsrp-portlet>
 					</c:if>
 				</liferay-theme:wrap-portlet>
