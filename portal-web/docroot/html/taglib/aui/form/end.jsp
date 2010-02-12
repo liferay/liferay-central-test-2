@@ -37,12 +37,12 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 	if (form) {
 		form.on(
 			'submit',
-			function() {
+			function(event) {
+				event.preventDefault();
+	
 				<c:choose>
 					<c:when test="<%= Validator.isNull(onSubmit) %>">
 						submitForm(document.<%= namespace + name %>);
-
-						return false;
 					</c:when>
 					<c:otherwise>
 						<%= onSubmit %>
