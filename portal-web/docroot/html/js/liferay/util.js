@@ -334,8 +334,6 @@ Liferay.Util = {
 			[inputs, form]
 		);
 
-		document.body.style.cursor = 'wait';
-
 		inputs.set('disabled', true);
 		inputs.setStyle('opacity', 0.5);
 	},
