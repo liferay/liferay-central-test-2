@@ -354,17 +354,10 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		</antcall>
 	</target>
 
-	<target name="build-dist-jboss-tomcat">
-		<antcall target="build-dist-jboss-tomcat-4.2" />
-		<antcall target="build-dist-jboss-tomcat-5.0" />
-	</target>
+	<target name="build-dist-jboss">
+		<antcall target="unzip-jboss" />
 
-	<target name="build-dist-jboss-tomcat-4.2">
-		<delete dir="${app.server.parent.dir}/jboss-tomcat-4.2.3" />
-
-		<unzip src="${app.server.parent.dir}/jboss-tomcat-4.2.3.zip" dest="${app.server.parent.dir}" />
-
-		<echo file="app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
+		<echo file="app.server.${user.name}.properties">app.server.type=jboss</echo>
 
 		<delete dir="${project.dir}/portal-web/classes" />
 
@@ -373,35 +366,9 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<delete file="app.server.${user.name}.properties" />
 
 		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${app.server.jboss-tomcat.deploy.dir}" />
-			<param name="deployer.app.server.type" value="jboss-tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.jboss-tomcat.lib.portal.dir}" />
-		</antcall>
-	</target>
-
-	<target name="build-dist-jboss-tomcat-5.0">
-		<delete dir="${app.server.parent.dir}/jboss-tomcat-5.0.0" />
-
-		<unzip src="${app.server.parent.dir}/jboss-tomcat-5.0.0.zip" dest="${app.server.parent.dir}" />
-
-		<echo file="app.server.${user.name}.properties">app.server.type=jboss-tomcat
-
-app.server.jboss-tomcat.version=5.0
-app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-5.0.0
-app.server.jboss-tomcat.classes.global.dir=$${app.server.jboss-tomcat.instance.dir}/lib
-app.server.jboss-tomcat.instance.dir=$${app.server.jboss-tomcat.dir}/server/default
-app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/lib</echo>
-
-		<delete dir="${project.dir}/portal-web/classes" />
-
-		<ant target="deploy" inheritAll="false" />
-
-		<delete file="app.server.${user.name}.properties" />
-
-		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0/server/default/deploy" />
-			<param name="deployer.app.server.type" value="jboss-tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0/server/default/deploy/ROOT.war/WEB-INF/lib" />
+			<param name="deployer.dest.dir" value="${app.server.parent.dir}/jboss-5.1.0/server/default/deploy" />
+			<param name="deployer.app.server.type" value="jboss" />
+			<param name="deployer.app.server.lib.portal.dir" value="${app.server.parent.dir}/jboss-5.1.0/server/default/deploy/ROOT.war/WEB-INF/lib" />
 		</antcall>
 	</target>
 
@@ -500,11 +467,7 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 	</target>
 
 	<target name="build-dist-tomcat">
-		<delete dir="${app.server.parent.dir}/tomcat-6.0.24" />
-
-		<unzip src="${app.server.parent.dir}/apache-tomcat-6.0.24.zip" dest="${app.server.parent.dir}">
-			<mapper type="glob" from="apache-tomcat-6.0.24/*" to="tomcat-6.0.24/*"/>
-		</unzip>
+		<antcall target="unzip-tomcat" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
 
@@ -740,26 +703,12 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 		</antcall>
 	</target>
 
-	<target name="zip-jboss-tomcat">
-		<antcall target="zip-jboss-tomcat-4.2" />
-		<antcall target="zip-jboss-tomcat-5.0" />
-	</target>
-
-	<target name="zip-jboss-tomcat-4.2">
-		<delete file="dist/liferay-portal-jboss-tomcat-4.2-${lp.version}.zip" failonerror="false" />
+	<target name="zip-jboss">
+		<delete file="dist/liferay-portal-jboss-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="zip-executable">
-			<param name="zip.executable.file" value="liferay-portal-jboss-tomcat-4.2" />
-			<param name="zip.executable.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.3" />
-		</antcall>
-	</target>
-
-	<target name="zip-jboss-tomcat-5.0">
-		<delete file="dist/liferay-portal-jboss-tomcat-5.0-${lp.version}.zip" failonerror="false" />
-
-		<antcall target="zip-executable">
-			<param name="zip.executable.file" value="liferay-portal-jboss-tomcat-5.0" />
-			<param name="zip.executable.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0" />
+			<param name="zip.executable.file" value="liferay-portal-jboss" />
+			<param name="zip.executable.dir" value="${app.server.parent.dir}/jboss-5.1.0" />
 		</antcall>
 	</target>
 
@@ -1018,6 +967,40 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 		</antcall>
 	</target>
 
+	<target name="unzip-jboss">
+		<delete dir="${app.server.parent.dir}/jboss-5.1.0" />
+
+		<unzip src="${app.server.parent.dir}/jboss-5.1.0.GA.zip" dest="${app.server.parent.dir}">
+			<patternset
+				excludes="jboss-5.1.0.GA/server/all/**,jboss-5.1.0.GA/server/default/**,jboss-5.1.0.GA/server/minimal/**,jboss-5.1.0.GA/server/standard/**"
+			/>
+			<mapper
+				type="glob"
+				from="jboss-5.1.0.GA/*"
+				to="jboss-5.1.0/*"
+			/>
+		</unzip>
+
+		<move file="${app.server.parent.dir}/jboss-5.1.0/server/web" tofile="${app.server.parent.dir}/jboss-5.1.0/server/default" />
+	</target>
+
+	<target name="unzip-tomcat">
+		<delete dir="${app.server.parent.dir}/tomcat-6.0.24" />
+
+		<unzip src="${app.server.parent.dir}/apache-tomcat-6.0.24.zip" dest="${app.server.parent.dir}">
+			<patternset
+				excludes="apache-tomcat-6.0.24/webapps/**"
+			/>
+			<mapper
+				type="glob"
+				from="apache-tomcat-6.0.24/*"
+				to="tomcat-6.0.24/*"
+			/>
+		</unzip>
+
+		<mkdir dir="${app.server.parent.dir}/tomcat-6.0.24/webapps" />
+	</target>
+
 	<target name="dist">
 		<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}">
 			<arg line="/c svn update -r ${svn.revision}" />
@@ -1062,7 +1045,7 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 
 		<antcall target="build-dist-geronimo-tomcat" />
 		<antcall target="build-dist-glassfish" />
-		<antcall target="build-dist-jboss-tomcat" />
+		<antcall target="build-dist-jboss" />
 		<antcall target="build-dist-jetty" />
 		<antcall target="build-dist-jonas-jetty" />
 		<antcall target="build-dist-jonas-tomcat" />
@@ -1072,7 +1055,7 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 		<antcall target="zip-api" />
 		<antcall target="zip-geronimo-tomcat" />
 		<antcall target="zip-glassfish" />
-		<antcall target="zip-jboss-tomcat" />
+		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
 		<antcall target="zip-jonas" />
 		<antcall target="zip-portal-client" />

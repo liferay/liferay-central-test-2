@@ -3,10 +3,10 @@
 <project name="portal-test-staging" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="run-staging-jboss-tomcat-5.0-mysql">
+	<target name="run-staging-jboss-mysql">
 		<antcall target="prepare-mysql" />
 
-		<ant antfile="build-test-jboss-tomcat-5.0.xml" target="run-selenium-jboss-tomcat-5.0">
+		<ant antfile="build-test-jboss.xml" target="run-selenium-jboss">
 			<property name="test.name" value="StagingTestSuite" />
 		</ant>
 	</target>

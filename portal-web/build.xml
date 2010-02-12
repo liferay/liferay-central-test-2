@@ -129,46 +129,21 @@
 		/>
 	</target>
 
-	<target name="compile-jboss-tomcat">
+	<target name="compile-jboss">
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
+		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jboss-logging-spi.jar;${app.server.deploy.dir}/jbossweb.sar/jasper-jdt.jar;${app.server.deploy.dir}/jbossweb.sar/jbossweb.jar;${app.server.dir}/common/lib/el-api.jar" />
+
 		<if>
-			<equals arg1="${app.server.version}" arg2="4.2" />
+			<not>
+				<available file="${classpath.jsp}" />
+			</not>
 			<then>
-				<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-				<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jboss-common.jar;${app.server.deploy.dir}/jboss-web.deployer/jasper-jdt.jar;${app.server.deploy.dir}/jboss-web.deployer/jbossweb.jar;${app.server.instance.dir}/lib/el-api.jar" />
+				<antcall target="compile-common-lib" />
 
-				<if>
-					<not>
-						<available file="${classpath.jsp}" />
-					</not>
-					<then>
-						<antcall target="compile-common-lib" />
-
-						<unjar src="${app.server.instance.dir}/lib/jsp-api.jar" dest="${classpath.jsp}" />
-						<unjar src="${app.server.instance.dir}/lib/servlet-api.jar" dest="${classpath.jsp}" />
-						<unjar src="${app.server.deploy.dir}/jboss-web.deployer/jstl.jar" dest="${classpath.jsp}" />
-					</then>
-				</if>
+				<unjar src="${app.server.dir}/common/lib/jsp-api.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.dir}/common/lib/servlet-api.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.deploy.dir}/jbossweb.sar/jstl.jar" dest="${classpath.jsp}" />
 			</then>
-			<elseif>
-				<equals arg1="${app.server.version}" arg2="5.0" />
-				<then>
-					<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-					<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jboss-logging-spi.jar;${app.server.deploy.dir}/jbossweb.sar/jasper-jdt.jar;${app.server.deploy.dir}/jbossweb.sar/jbossweb.jar;${app.server.dir}/common/lib/el-api.jar" />
-
-					<if>
-						<not>
-							<available file="${classpath.jsp}" />
-						</not>
-						<then>
-							<antcall target="compile-common-lib" />
-
-							<unjar src="${app.server.dir}/common/lib/jsp-api.jar" dest="${classpath.jsp}" />
-							<unjar src="${app.server.dir}/common/lib/servlet-api.jar" dest="${classpath.jsp}" />
-							<unjar src="${app.server.deploy.dir}/jbossweb.sar/jstl.jar" dest="${classpath.jsp}" />
-						</then>
-					</if>
-				</then>
-			</elseif>
 		</if>
 
 		<antcall target="compile-common-jsp">
@@ -322,9 +297,9 @@
 			<equals arg1="${jsp.precompile}" arg2="on" />
 			<then>
 				<if>
-					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+					<equals arg1="${app.server.type}" arg2="jboss" />
 					<then>
-						<antcall target="compile-jboss-tomcat" />
+						<antcall target="compile-jboss" />
 
 						<copy todir="${app.server.instance.dir}/work/jboss.web/localhost/_">
 							<fileset dir="classes/${app.server.type}">

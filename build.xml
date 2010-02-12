@@ -93,13 +93,6 @@
 				<equals arg1="${app.server.type}" arg2="tomcat" />
 				<then>
 					<ant dir="support-tomcat" target="clean" inheritAll="false" />
-
-					<delete includeemptydirs="true" failonerror="false">
-						<fileset
-							dir="${app.server.deploy.dir}"
-							includes="docs/**,examples/**,host-manager/**,manager/**"
-						/>
-					</delete>
 				</then>
 			</elseif>
 		</if>
@@ -323,12 +316,54 @@
 		</if>
 
 		<if>
-			<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+			<equals arg1="${app.server.type}" arg2="jboss" />
 			<then>
+				<loadfile property="run.conf.content" srcFile="${app.server.bin.dir}/run.conf" />
+
+				<antelope:stringutil string="${run.conf.content}" property="run.conf.content.index">
+					<indexof string="-Xmx1024m" fromindex="0" />
+				</antelope:stringutil>
+
+				<if>
+					<equals arg1="${run.conf.content.index}" arg2="-1" />
+					<then>
+						<echo file="${app.server.bin.dir}/run.conf" append="true">
+JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.jboss.logging.Log4jService.catchSystemOut=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"</echo>
+					</then>
+				</if>
+
+				<loadfile property="run.conf.bat.content" srcFile="${app.server.bin.dir}/run.conf.bat" />
+
+				<antelope:stringutil string="${run.conf.bat.content}" property="run.conf.bat.content.index">
+					<indexof string="-Xmx1024m" fromindex="0" />
+				</antelope:stringutil>
+
+				<if>
+					<equals arg1="${run.conf.bat.content.index}" arg2="-1" />
+					<then>
+						<replace file="${app.server.bin.dir}/run.conf.bat">
+							<replacetoken><![CDATA[:JAVA_OPTS_SET]]></replacetoken>
+							<replacevalue><![CDATA[set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.jboss.logging.Log4jService.catchSystemOut=false -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+
+:JAVA_OPTS_SET]]></replacevalue>
+						</replace>
+					</then>
+				</if>
+
+				<replace file="${app.server.deploy.dir}/jbossweb.sar/server.xml">
+					<replacetoken><![CDATA[redirectPort="8443" />]]></replacetoken>
+					<replacevalue><![CDATA[redirectPort="8443" URIEncoding="UTF-8" />]]></replacevalue>
+				</replace>
+
+				<move
+					file="${app.server.dir}/common/lib/slf4j-jboss-logging.jar"
+					tofile="${app.server.dir}/common/lib/slf4j-jboss-logging.jar.bak"
+				/>
+
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="jaxrpc.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
+						includes="jaxrpc.jar,log4j.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
 					/>
 				</delete>
 			</then>
@@ -383,6 +418,89 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
+				<if>
+					<not>
+						<available file="${app.server.bin.dir}/setevn.bat" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/tomcat/bin/setenv.bat"
+							tofile="${app.server.bin.dir}/setenv.bat"
+							overwrite="yes"
+						>
+							<filterset>
+								<filter token="java.version" value="${java.version}" />
+							</filterset>
+						</copy>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<available file="${app.server.bin.dir}/setevn.sh" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/tomcat/bin/setenv.sh"
+							tofile="${app.server.bin.dir}/setenv.sh"
+							overwrite="yes"
+						/>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<available file="${app.server.dir}/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/tomcat/conf/Catalina/localhost/ROOT.xml"
+							tofile="${app.server.dir}/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml"
+							overwrite="yes"
+						/>
+					</then>
+				</if>
+
+				<loadfile property="catalina.properties.content" srcFile="${app.server.dir}/conf/catalina.properties" />
+
+				<antelope:stringutil string="${catalina.properties.content}" property="catalina.properties.content.index">
+					<indexof string=",${catalina.home}/lib/ext/*.jar" fromindex="0" />
+				</antelope:stringutil>
+
+				<if>
+					<equals arg1="${catalina.properties.content.index}" arg2="-1" />
+					<then>
+						<replace file="${app.server.dir}/conf/catalina.properties">
+							<replacetoken><![CDATA[common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar]]></replacetoken>
+							<replacevalue><![CDATA[common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar,${catalina.home}/lib/ext/*.jar]]></replacevalue>
+						</replace>
+					</then>
+				</if>
+
+				<copy
+					file="tools/servers/tomcat/conf/jaas.config"
+					tofile="${app.server.dir}/conf/jaas.config"
+				/>
+
+				<replace file="${app.server.dir}/conf/server.xml">
+					<replacetoken><![CDATA[redirectPort="8443" />]]></replacetoken>
+					<replacevalue><![CDATA[redirectPort="8443" URIEncoding="UTF-8" />]]></replacevalue>
+				</replace>
+
+				<if>
+					<and>
+						<available file="${env.JAVA_HOME}/jre/bin/java.exe" />
+						<not>
+							<available file="${app.server.dir}/jre" />
+						</not>
+					</and>
+					<then>
+						<copy todir="${app.server.dir}/jre${java.version}/win">
+							<fileset dir="${env.JAVA_HOME}/jre" />
+						</copy>
+					</then>
+				</if>
+
 				<copy file="classes/log4j.properties" todir="${app.server.classes.portal.dir}" />
 				<copy file="classes/logging.properties" todir="${app.server.classes.portal.dir}" />
 
@@ -415,82 +533,6 @@
 						includes="quercus.jar,resin-util.jar,script-10.jar"
 					/>
 				</copy>
-
-				<if>
-					<not>
-						<available file="${app.server.dir}/bin/setevn.bat" />
-					</not>
-					<then>
-						<copy
-							file="tools/servers/tomcat/bin/setenv.bat"
-							tofile="${app.server.dir}/bin/setenv.bat"
-							overwrite="yes"
-						>
-							<filterset>
-								<filter token="java.version" value="${java.version}" />
-							</filterset>
-						</copy>
-					</then>
-				</if>
-
-				<if>
-					<not>
-						<available file="${app.server.dir}/bin/setevn.sh" />
-					</not>
-					<then>
-						<copy
-							file="tools/servers/tomcat/bin/setenv.sh"
-							tofile="${app.server.dir}/bin/setenv.sh"
-							overwrite="yes"
-						/>
-					</then>
-				</if>
-
-				<if>
-					<not>
-						<available file="${app.server.dir}/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml" />
-					</not>
-					<then>
-						<copy
-							file="tools/servers/tomcat/conf/Catalina/localhost/ROOT.xml"
-							tofile="${app.server.dir}/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml"
-							overwrite="yes"
-						/>
-					</then>
-				</if>
-
-				<replace file="${app.server.dir}/conf/catalina.properties">
-					<replacetoken><![CDATA[common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar
-
-#]]></replacetoken>
-					<replacevalue><![CDATA[common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar,${catalina.home}/lib/ext/*.jar
-
-#]]></replacevalue>
-				</replace>
-
-				<copy
-					file="tools/servers/tomcat/conf/jaas.config"
-					tofile="${app.server.dir}/conf/jaas.config"
-				/>
-
-				<replace file="${app.server.dir}/conf/server.xml">
-					<replacetoken><![CDATA[redirectPort="8443" />]]></replacetoken>
-					<replacevalue><![CDATA[redirectPort="8443" URIEncoding="UTF-8" />]]></replacevalue>
-				</replace>
-
-				<if>
-					<and>
-						<available file="${env.JAVA_HOME}/jre/bin/java.exe" />
-						<not>
-							<available file="${app.server.dir}/jre" />
-						</not>
-					</and>
-					<then>
-						<copy todir="${app.server.dir}/jre${java.version}/win">
-							<fileset dir="${env.JAVA_HOME}/jre" />
-						</copy>
-					</then>
-				</if>
 			</then>
 		</if>
 

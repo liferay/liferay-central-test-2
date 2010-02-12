@@ -3,14 +3,14 @@
 <project name="portal-test-themes" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="run-themes-jboss-tomcat-5.0-mysql">
+	<target name="run-themes-jboss-mysql">
 		<antcall target="prepare-mysql" />
 
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
 			<arg line="/c svn update" />
 		</exec>
 
-		<ant antfile="build-test-jboss-tomcat-5.0.xml" target="run-selenium-jboss-tomcat-5.0">
+		<ant antfile="build-test-jboss.xml" target="run-selenium-jboss">
 			<property name="test.name" value="ThemesTestSuite" />
 			<property name="theme.plugins.includes" value="08-gulona-theme,liferay-jedi-theme" />
 		</ant>

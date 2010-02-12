@@ -72,7 +72,7 @@
 					<or>
 						<equals arg1="${app.server.type}" arg2="geronimo-tomcat" />
 						<equals arg1="${app.server.type}" arg2="glassfish" />
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+						<equals arg1="${app.server.type}" arg2="jboss" />
 						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 					</or>
