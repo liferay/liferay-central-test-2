@@ -39,7 +39,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	<portlet:param name="struts_action" value="/communities/edit_community" />
 </portlet:actionURL>
 
-<aui:form action="<%= editCommunityURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveGroup(); return false;" %>'>
+<aui:form action="<%= editCommunityURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveGroup();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />

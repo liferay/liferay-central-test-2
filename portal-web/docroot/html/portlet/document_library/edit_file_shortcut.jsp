@@ -98,7 +98,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 </portlet:actionURL>
 
-<aui:form action="<%= editFileShortcutURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveFileShortcut(); return false;" %>'>
+<aui:form action="<%= editFileShortcutURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFileShortcut();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />

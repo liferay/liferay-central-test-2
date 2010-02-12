@@ -169,7 +169,7 @@ if (Validator.isNull(redirect)) {
 	<portlet:param name="struts_action" value="/wiki/edit_page" />
 </portlet:actionURL>
 
-<aui:form action="<%= editPageActionURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "savePage(); return false;" %>'>
+<aui:form action="<%= editPageActionURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "savePage();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />

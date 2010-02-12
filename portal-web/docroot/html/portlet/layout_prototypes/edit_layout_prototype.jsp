@@ -48,7 +48,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	<liferay-util:param name="toolbarItem" value='<%= layoutPrototype.isNew() ? "add" : "view-all" %>' />
 </liferay-util:include>
 
-<aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveLayoutPrototype(); return false;" %>'>
+<aui:form method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayoutPrototype();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="layoutPrototypeId" type="hidden" value="<%= layoutPrototypeId %>" />

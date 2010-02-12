@@ -301,7 +301,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	<portlet:param name="struts_action" value="/communities/edit_pages" />
 </portlet:actionURL>
 
-<aui:form action="<%= editPagesURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "savePage(); return false;" %>'>
+<aui:form action="<%= editPagesURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "savePage();" %>'>
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />

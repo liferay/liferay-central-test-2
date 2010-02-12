@@ -88,7 +88,7 @@ int tabIndex = 1;
 	<portlet:param name="struts_action" value="/journal/edit_structure" />
 </portlet:actionURL>
 
-<aui:form action="<%= editStructureURL %>" method="post" name="fm1" onSubmit='<%= renderResponse.getNamespace() + "saveStructure(); return false;" %>'>
+<aui:form action="<%= editStructureURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
 	<input name="scroll" type="hidden" value="" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />

@@ -245,7 +245,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<portlet:param name="struts_action" value="/journal/edit_article" />
 </portlet:renderURL>
 
-<aui:form action="<%= editArticleActionURL %>" enctype="multipart/form-data" method="post" name="fm1" onSubmit='<%= renderResponse.getNamespace() + "saveArticle(); return false;" %>'>
+<aui:form action="<%= editArticleActionURL %>" enctype="multipart/form-data" method="post" name="fm1">
 	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />

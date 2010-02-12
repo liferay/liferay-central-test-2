@@ -411,7 +411,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 				<portlet:param name="struts_action" value="/document_library/compare_versions" />
 			</portlet:actionURL>
 
-			<aui:form action="<%= compareVersionsURL %>" method="post" name="fm1" onSubmit='<%= renderResponse.getNamespace() + "compare(); return false;" %>'>
+			<aui:form action="<%= compareVersionsURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "compare();" %>'>
 				<aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
 				<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />
 				<aui:input name="folderId" type="hidden" value="<%= folderId %>" />

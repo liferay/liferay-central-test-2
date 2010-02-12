@@ -105,7 +105,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<portlet:param name="struts_action" value="/calendar/edit_event" />
 </portlet:actionURL>
 
-<aui:form action="<%= editEventURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEvent(); return false;" %>'>
+<aui:form action="<%= editEventURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEvent();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="eventId" type="hidden" value="<%= eventId %>" />

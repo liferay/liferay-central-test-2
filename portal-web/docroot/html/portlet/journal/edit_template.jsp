@@ -92,7 +92,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<portlet:param name="struts_action" value="/journal/edit_template" />
 </portlet:actionURL>
 
-<aui:form action="<%= editTemplateURL %>" enctype="multipart/form-data" method="post" name="fm1" onSubmit='<%= renderResponse.getNamespace() + "saveTemplate(); return false;" %>'>
+<aui:form action="<%= editTemplateURL %>" enctype="multipart/form-data" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveTemplate();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />

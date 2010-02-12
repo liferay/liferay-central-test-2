@@ -54,7 +54,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	</liferay-util:include>
 </c:if>
 
-<aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveRole(); return false;" %>'>
+<aui:form method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveRole();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="roleId" type="hidden" value="<%= roleId %>" />

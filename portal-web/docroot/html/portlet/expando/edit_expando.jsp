@@ -63,7 +63,7 @@ portletURL.setParameter("modelResource", modelResource);
 	<portlet:param name="struts_action" value="/expando/edit_expando" />
 </portlet:actionURL>
 
-<aui:form action="<%= editExpandoURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveExpando(); return false;" %>'>
+<aui:form action="<%= editExpandoURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveExpando();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="columnId" type="hidden" value="<%= columnId %>" />

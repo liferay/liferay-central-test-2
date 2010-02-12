@@ -49,7 +49,7 @@ boolean quote = false;
 	<portlet:param name="struts_action" value="/message_boards/split_thread" />
 </portlet:actionURL>
 
-<aui:form action="<%= splitThreadURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "splitThread(); return false;" %>'>
+<aui:form action="<%= splitThreadURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "splitThread();" %>'>
 	<aui:input name="messageId" type="hidden" value="<%= messageId %>" />
 	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
 

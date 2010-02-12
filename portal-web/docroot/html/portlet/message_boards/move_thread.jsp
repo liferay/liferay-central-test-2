@@ -45,7 +45,7 @@ boolean quote = false;
 	<portlet:param name="struts_action" value="/message_boards/move_thread" />
 </portlet:actionURL>
 
-<aui:form action="<%= moveThreadURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "moveThread(); return false;" %>'>
+<aui:form action="<%= moveThreadURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "moveThread();" %>'>
 	<aui:input name="threadId" type="hidden" value="<%= threadId %>" />
 	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
 

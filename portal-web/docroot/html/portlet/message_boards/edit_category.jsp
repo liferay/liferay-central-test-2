@@ -50,7 +50,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 	<portlet:param name="struts_action" value="/message_boards/edit_category" />
 </portlet:actionURL>
 
-<aui:form action="<%= editCategoryURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveCategory(); return false;" %>'>
+<aui:form action="<%= editCategoryURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCategory();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />

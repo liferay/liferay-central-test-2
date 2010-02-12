@@ -60,7 +60,7 @@ String curSection = mainSections[0];
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 </portlet:actionURL>
 
-<aui:form action="<%= editOrganizationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveOrganization(); return false;" %>'>
+<aui:form action="<%= editOrganizationURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveOrganization();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />

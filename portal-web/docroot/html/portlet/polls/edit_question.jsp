@@ -74,7 +74,7 @@ if (choiceName > 0) {
 	<portlet:param name="struts_action" value="/polls/edit_question" />
 </portlet:actionURL>
 
-<aui:form action="<%= editQuestionURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveQuestion(); return false;" %>'>
+<aui:form action="<%= editQuestionURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveQuestion();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="questionId" type="hidden" value="<%= questionId %>" />

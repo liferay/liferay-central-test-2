@@ -53,7 +53,7 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 	<portlet:param name="struts_action" value="/wiki/import_pages" />
 </portlet:actionURL>
 
-<aui:form action="<%= importPagesURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "importPages(); return false;" %>'>
+<aui:form action="<%= importPagesURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "importPages();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="importProgressId" type="hidden" value="<%= importProgressId %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />

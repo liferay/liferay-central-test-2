@@ -36,7 +36,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 	<portlet:param name="struts_action" value="/wiki/edit_node" />
 </portlet:actionURL>
 
-<aui:form action="<%= editNodeURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveNode(); return false;" %>'>
+<aui:form action="<%= editNodeURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveNode();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />

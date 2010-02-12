@@ -134,7 +134,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 	<portlet:param name="struts_action" value="/enterprise_admin_settings/edit_ldap_server" />
 </portlet:actionURL>
 
-<aui:form action="<%= editLDAPServerURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEntry(false); return false;" %>'>
+<aui:form action="<%= editLDAPServerURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEntry(false);" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="ldapServerId" type="hidden" value="<%= ldapServerId %>" />

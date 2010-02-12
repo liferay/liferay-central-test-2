@@ -33,7 +33,7 @@ UserGroup userGroup = (UserGroup)request.getAttribute(WebKeys.USER_GROUP);
 long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 %>
 
-<aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveUserGroup(); return false;" %>'>
+<aui:form method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveUserGroup();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="userGroupId" type="hidden" value="<%= userGroupId %>" />

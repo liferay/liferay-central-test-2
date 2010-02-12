@@ -74,7 +74,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	<portlet:param name="struts_action" value="/communities/edit_proposal" />
 </portlet:actionURL>
 
-<aui:form action="<%= editProposalURL %>" method="post" name="fm1" onSubmit='<%= renderResponse.getNamespace() + "saveProposal(); return false;" %>'>
+<aui:form action="<%= editProposalURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveProposal();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />

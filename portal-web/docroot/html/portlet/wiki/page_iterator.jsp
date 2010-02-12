@@ -312,7 +312,7 @@ for (int i = 0; i < results.size(); i++) {
 		<portlet:param name="struts_action" value="/wiki/compare_versions" />
 	</portlet:renderURL>
 
-	<aui:form action="<%= compareVersionsURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "compare(); return false;" %>'>
+	<aui:form action="<%= compareVersionsURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "compare();" %>'>
 		<aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
 		<aui:input name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 		<aui:input name="title" type="hidden" value="<%= wikiPage.getTitle() %>" />

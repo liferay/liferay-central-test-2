@@ -129,7 +129,7 @@ if ((message != null) && message.isAttachments()) {
 	<portlet:param name="struts_action" value="/message_boards/edit_message" />
 </portlet:actionURL>
 
-<aui:form action="<%= editMessageURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveMessage(); return false;" %>'>
+<aui:form action="<%= editMessageURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveMessage();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="messageId" type="hidden" value="<%= messageId %>" />

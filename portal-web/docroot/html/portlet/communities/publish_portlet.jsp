@@ -67,7 +67,7 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 %>
 
-<aui:form action="<%= portletURL.toString() %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "publish(); return false;" %>'>
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "publish();" %>'>
 	<aui:input name="pagesRedirect" type="hidden" value="<%= pagesRedirect %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 

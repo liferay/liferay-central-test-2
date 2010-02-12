@@ -40,7 +40,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 	<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
 </portlet:actionURL>
 
-<aui:form action="<%= editFolderURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveFolder(); return false;" %>'>
+<aui:form action="<%= editFolderURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFolder();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
