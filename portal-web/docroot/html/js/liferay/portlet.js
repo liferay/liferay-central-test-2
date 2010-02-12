@@ -510,14 +510,19 @@ Liferay.Portlet = {
 						heightChange: updateIframeSize,
 						widthChange: updateIframeSize
 					},
+					align: {
+						node: null,
+						points: ['tc', 'tc']
+					},
 					bodyContent: bodyContent,
-					centered: true,
 					destroyOnClose: true,
 					draggable: true,
 					title: title.html() + ' - ' + Liferay.Language.get('configuration'),
 					width: 820
 				}
 			).render();
+
+			dialog.move(dialog.get('x'), dialog.get('y') + 100);
 
 			var bodyNode = dialog.bodyNode;
 
