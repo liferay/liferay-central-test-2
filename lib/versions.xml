@@ -2157,30 +2157,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/openxri-client.jar</file-name>
-		<version>1.2.0</version>
-		<project-name>OpenXRI</project-name>
-		<project-url>http://www.openxri.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2003-2005 Epok Inc.</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/openxri-syntax.jar</file-name>
-		<version>1.2.0</version>
-		<project-name>OpenXRI</project-name>
-		<project-url>http://www.openxri.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2003-2005 Epok Inc.</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/oro.jar</file-name>
 		<version>2.0.8</version>
 		<project-name>ORO</project-name>
