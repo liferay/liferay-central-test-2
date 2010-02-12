@@ -20,27 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.unitconverter;
+package com.liferay.portalweb.portlet.unitconverter.portlet.addportlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.unitconverter.portlet.PortletTests;
-import com.liferay.portalweb.portlet.unitconverter.unit.UnitTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="UnitConverterTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class UnitConverterTests extends BaseTests {
+public class AddPortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(UnitTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
