@@ -20,29 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.pollsdisplay;
+package com.liferay.portalweb.portlet.pollsdisplay.question.votequestionnull;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.pollsdisplay.archivedsetup.ArchivedSetupTests;
-import com.liferay.portalweb.portlet.pollsdisplay.portlet.PortletTests;
-import com.liferay.portalweb.portlet.pollsdisplay.question.QuestionTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="PollsDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="VoteQuestionNullTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PollsDisplayTests extends BaseTests {
+public class VoteQuestionNullTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ArchivedSetupTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(QuestionTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddQuestionTest.class);
+		testSuite.addTestSuite(SelectQuestionTest.class);
+		testSuite.addTestSuite(VoteQuestionNullTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

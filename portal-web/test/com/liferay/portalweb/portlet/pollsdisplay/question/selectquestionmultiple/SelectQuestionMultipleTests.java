@@ -20,29 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.pollsdisplay;
+package com.liferay.portalweb.portlet.pollsdisplay.question.selectquestionmultiple;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.pollsdisplay.archivedsetup.ArchivedSetupTests;
-import com.liferay.portalweb.portlet.pollsdisplay.portlet.PortletTests;
-import com.liferay.portalweb.portlet.pollsdisplay.question.QuestionTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="PollsDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SelectQuestionMultipleTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PollsDisplayTests extends BaseTests {
+public class SelectQuestionMultipleTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ArchivedSetupTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(QuestionTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddQuestion1Test.class);
+		testSuite.addTestSuite(AddQuestion2Test.class);
+		testSuite.addTestSuite(AddQuestion3Test.class);
+		testSuite.addTestSuite(SelectQuestion1Test.class);
+		testSuite.addTestSuite(SelectQuestion2Test.class);
+		testSuite.addTestSuite(SelectQuestion3Test.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

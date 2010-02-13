@@ -20,29 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.pollsdisplay;
+package com.liferay.portalweb.portlet.pollsdisplay.archivedsetup.savearchivedsetup;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.pollsdisplay.archivedsetup.ArchivedSetupTests;
-import com.liferay.portalweb.portlet.pollsdisplay.portlet.PortletTests;
-import com.liferay.portalweb.portlet.pollsdisplay.question.QuestionTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="PollsDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SaveArchivedSetupTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PollsDisplayTests extends BaseTests {
+public class SaveArchivedSetupTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ArchivedSetupTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(QuestionTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(SaveArchivedSetupTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

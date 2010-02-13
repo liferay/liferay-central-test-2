@@ -20,31 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.pollsdisplay;
+package com.liferay.portalweb.portlet.pollsdisplay.question.votequestionnull;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.pollsdisplay.archivedsetup.ArchivedSetupTests;
-import com.liferay.portalweb.portlet.pollsdisplay.portlet.PortletTests;
-import com.liferay.portalweb.portlet.pollsdisplay.question.QuestionTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PollsDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="VoteQuestionNullTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PollsDisplayTests extends BaseTests {
+public class VoteQuestionNullTest extends BaseTestCase {
+	public void testVoteQuestionNull() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(ArchivedSetupTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(QuestionTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Polls Display Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Polls Display Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//input[@value='Vote']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Please select an option."));
 	}
-
 }
