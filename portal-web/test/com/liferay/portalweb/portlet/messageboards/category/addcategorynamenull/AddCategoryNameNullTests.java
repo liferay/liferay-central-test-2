@@ -20,31 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.messageboards;
+package com.liferay.portalweb.portlet.messageboards.category.addcategorynamenull;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.messageboards.category.CategoryTests;
-import com.liferay.portalweb.portlet.messageboards.lar.LARTests;
-import com.liferay.portalweb.portlet.messageboards.message.MessageTests;
-import com.liferay.portalweb.portlet.messageboards.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="MessageBoardsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddCategoryNameNullTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class MessageBoardsTests extends BaseTests {
+public class AddCategoryNameNullTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(CategoryTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(MessageTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddCategoryNameNullTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

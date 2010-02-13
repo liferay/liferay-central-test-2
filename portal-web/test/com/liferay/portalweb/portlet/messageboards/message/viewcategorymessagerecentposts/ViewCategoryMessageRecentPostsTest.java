@@ -20,33 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.messageboards;
+package com.liferay.portalweb.portlet.messageboards.message.viewcategorymessagerecentposts;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.messageboards.category.CategoryTests;
-import com.liferay.portalweb.portlet.messageboards.lar.LARTests;
-import com.liferay.portalweb.portlet.messageboards.message.MessageTests;
-import com.liferay.portalweb.portlet.messageboards.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="MessageBoardsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewCategoryMessageRecentPostsTest.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class MessageBoardsTests extends BaseTests {
+public class ViewCategoryMessageRecentPostsTest extends BaseTestCase {
+	public void testViewCategoryMessageRecentPosts() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(CategoryTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(MessageTests.suite());
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent(
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Recent Posts", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
 	}
-
 }
