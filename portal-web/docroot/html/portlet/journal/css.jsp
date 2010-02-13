@@ -214,7 +214,7 @@
 	display: none;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree li.structure-field .journal-article-move-handler {
+.portlet-journal .journal-edit-mode .structure-tree li.structure-field.yui-dd-draggable .journal-article-move-handler {
 	background: transparent url(<%= themeImagesPath %>/application/handle_sort_vertical.png) no-repeat scroll right 50%;
 	cursor: move;
 	display: block;
@@ -380,7 +380,7 @@
 	z-index: 420;
 }
 
-.journal-article-close {
+.journal-edit-mode .structure-tree li.parent-structure-field .journal-article-close {
 	display: none;
 }
 
@@ -438,6 +438,14 @@
 }
 
 .portlet-journal .journal-edit-mode .structure-tree li.parent-structure-field .journal-delete-field {
+	display: none;
+}
+
+.portlet-journal .journal-edit-mode .structure-tree li.repeated-field .journal-edit-field-control {
+	display: none;
+}
+
+.portlet-journal .journal-edit-mode .structure-tree li.repeated-field .journal-delete-field {
 	display: none;
 }
 

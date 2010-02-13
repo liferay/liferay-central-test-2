@@ -501,7 +501,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 						<div class="structure-tree-wrapper" id="<portlet:namespace />structureTreeWrapper">
 							<ul class="structure-tree" id="<portlet:namespace />structureTree">
-								<% _format(groupId, contentDoc.getRootElement(), xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), pageContext, request); %>
+								<% _format(groupId, contentDoc.getRootElement(), xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), true, pageContext, request); %>
 							</ul>
 						</div>
 					</c:otherwise>
@@ -738,16 +738,17 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	Liferay.Portlet.Journal.PROXY = {};
 	Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= HttpUtil.encodeURL(doAsUserId) %>';
 	Liferay.Portlet.Journal.PROXY.editorImpl = '<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>';
+	Liferay.Portlet.Journal.PROXY.instanceIdKey = '<%= instanceIdKey %>';
 	Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
 	Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
 
-	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>', '<%= instanceIdKey %>');
+	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>');
 </aui:script>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content.jsp";
 
-private void _format(long groupId, Element contentParentElement, Element xsdParentElement, IntegerWrapper count, Integer depth, PageContext pageContext, HttpServletRequest request) throws Exception {
+private void _format(long groupId, Element contentParentElement, Element xsdParentElement, IntegerWrapper count, Integer depth, boolean repeatablePrototype, PageContext pageContext, HttpServletRequest request) throws Exception {
 	depth = new Integer(depth.intValue() + 1);
 
 	String languageId = LanguageUtil.getLanguageId(request);
@@ -797,8 +798,8 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 			elSiblings.add(contentElement);
 		}
 
-		for (int i = 0; i < elSiblings.size(); i++) {
-			Element contentElement = elSiblings.get(i);
+		for (int siblingIndex = 0; siblingIndex < elSiblings.size(); siblingIndex++) {
+			Element contentElement = elSiblings.get(siblingIndex);
 
 			String elInstanceId = contentElement.attributeValue("instance-id");
 
@@ -819,6 +820,10 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 				elLanguageId = languageId;
 			}
 
+			if (repeatablePrototype) {
+				repeatablePrototype = (siblingIndex == 0);
+			}
+
 			request.setAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID, String.valueOf(groupId));
 
 			request.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL, contentElement);
@@ -832,7 +837,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_NAME, elName);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_PARENT_ID, elParentStructureId);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE, String.valueOf(elRepeatable));
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE, (i == 0) ? "1" : "0");
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE, String.valueOf(repeatablePrototype));
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_TYPE, elType);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INDEX_TYPE, elIndexType);
 
@@ -843,7 +848,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 			if (!elType.equals("list") && !elType.equals("multi-list") && !contentElement.elements().isEmpty()) {
 				pageContext.include("/html/portlet/journal/edit_article_content_xsd_el_top.jsp");
 
-				_format(groupId, contentElement, xsdElement, count, depth, pageContext, request);
+				_format(groupId, contentElement, xsdElement, count, depth, repeatablePrototype, pageContext, request);
 
 				request.setAttribute(WebKeys.JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG, Boolean.TRUE.toString());
 

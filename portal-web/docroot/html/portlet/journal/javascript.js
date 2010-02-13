@@ -40,11 +40,10 @@ AUI().add(
 
 		var fieldsDataSet = new A.DataSet();
 
-		var Journal = function(portletNamespace, articleId, instanceIdKey) {
+		var Journal = function(portletNamespace, articleId) {
 			var instance = this;
 
 			instance.articleId = articleId;
-			instance.instanceIdKey = instanceIdKey;
 			instance.timers = {};
 			instance.portletNamespace = portletNamespace;
 
@@ -123,7 +122,7 @@ AUI().add(
 			};
 
 			instance.createNestedList(
-				fields,
+				fields.filter(':not(.repeated-field)').filter(':not(.parent-structure-field)'),
 				instance.nestedListOptions,
 				instance.nestedListEvents
 			);
@@ -285,7 +284,10 @@ AUI().add(
 								0,
 								instance,
 								function() {
-									fieldLabel.focus();
+									try {
+										fieldLabel.focus();
+									}
+									catch(e) {}
 								}
 							);
 						}
@@ -368,7 +370,8 @@ AUI().add(
 			buildHTMLEditor: function(fieldInstance) {
 				var instance = this;
 
-				var name = instance.portletNamespace + 'structure_el_' + instance._getUID() + '_content';
+				var instanceId = fieldInstance.get('instanceId');
+				var name = instance.portletNamespace + 'structure_el_' + instanceId + '_content';
 				var url = instance.buildHTMLEditorURL(fieldInstance);
 
 				var iframeHTML = A.substitute(
@@ -422,7 +425,7 @@ AUI().add(
 				if ((componentType == 'multi-list') || (componentType == 'list')) {
 					canDrop = false;
 				}
-				else if (source.hasClass('repeated-field')) {
+				else if (source.hasClass('repeated-field') || source.hasClass('parent-structure-field')) {
 					canDrop = false;
 				}
 
@@ -508,7 +511,7 @@ AUI().add(
 				var id = source.get('id');
 				var fieldInstance = fieldsDataSet.item(id);
 
-				if (fieldInstance.get('repeatable')) {
+				if (!fieldInstance.get('repeated')) {
 					var repeatedFields = instance.getRepeatedSiblings(fieldInstance);
 
 					if (repeatedFields) {
@@ -703,7 +706,7 @@ AUI().add(
 
 				var instanceId = '';
 
-				var key = instance.instanceIdKey;
+				var key = Liferay.Portlet.Journal.PROXY.instanceIdKey;
 
 				for (var i = 0; i < 8; i++) {
 					var pos = Math.floor(Math.random() * key.length);
@@ -839,7 +842,7 @@ AUI().add(
 
 				var structureTreeId = instance._guid('#structureTree');
 
-				return A.all(structureTreeId + ' li:not(.parent-structure-field)');
+				return A.all(structureTreeId + ' li');
 			},
 
 			getParentStructureId: function() {
@@ -1055,7 +1058,7 @@ AUI().add(
 
 				var buffer = [];
 				var structureTreeId = instance._guid('#structureTree');
-				var sourceRoots = A.all(structureTreeId + ' > li.structure-field:not(.repeated-field)');
+				var sourceRoots = A.all(structureTreeId + ' > li.structure-field:not(.repeated-field)').filter(':not(.parent-structure-field)');
 
 				var root = instance._createDynamicNode('root');
 
@@ -1199,7 +1202,7 @@ AUI().add(
 
 					var elements = editContainerWrapper.all('input[type=text], textarea, input[type=checkbox]');
 
-					if (source.hasClass('repeated-field')) {
+					if (fieldInstance.get('repeated') || fieldInstance.get('parentStructureId')) {
 						elements.attr('disabled', 'disabled');
 
 						if (localizedCheckbox) {
@@ -1323,38 +1326,50 @@ AUI().add(
 			repeatField: function(source) {
 				var instance = this;
 
-				var id = source.get('id');
-				var fieldInstance = fieldsDataSet.item(id).clone();
+				var _cloneFieldInstance = function(originalSource, newSource) {
+					var id = originalSource.get('id');
+					var fieldInstance = fieldsDataSet.item(id).clone();
+					var instanceId = instance.generateInstanceId();
 
-				if (fieldInstance.get('fieldType') == 'text_area') {
-					var html = instance.buildHTMLEditor(fieldInstance);
+					newSource.addClass('repeated-field');
+					newSource.removeClass('yui-dd-drop yui-dd-draggable');
 
-					fieldInstance.set('innerHTML', html);
-				}
+					var newId = newSource.resetId().get('id');
 
-				var htmlTemplate = instance._createFieldHTMLTemplate(fieldInstance);
-				var newComponent = A.Node.create(htmlTemplate);
-				var newId = newComponent.guid();
-				var instanceId = instance.generateInstanceId();
+					fieldsDataSet.add(newId, fieldInstance);
+					fieldInstance.set('source', newSource);
+					fieldInstance.set('instanceId', instanceId);
 
-				fieldInstance.set('instanceId', instanceId);
+					var fieldType = fieldInstance.get('fieldType');
 
-				fieldsDataSet.add(newId, fieldInstance);
+					if (fieldType == 'text_area') {
+						var html = instance.buildHTMLEditor(fieldInstance);
 
-				fieldInstance.set('source', newComponent);
-				source.placeAfter(newComponent);
+						fieldInstance.set('innerHTML', html);
 
-				newComponent.addClass('repeated-field');
+						var componentContainer = newSource.one('.journal-article-component-container');
 
-				instance.closeEditFieldOptions();
+						componentContainer.html(html);
+					}
+					else if (fieldType == 'image') {
+						newSource.all('.journal-image-show-hide,.journal-image-preview').remove();
+					}
 
-				instance.loadEditFieldOptions(newComponent);
-				instance.saveEditFieldOptions(newComponent);
+					return fieldInstance;
+				};
 
-				instance.createNestedList(
-					newComponent,
-					instance.nestedListOptions,
-					instance.nestedListEvents
+				var newSource = source.cloneNode(true);
+
+				source.placeAfter(newSource);
+
+				_cloneFieldInstance(source, newSource);
+
+				var children = newSource.all('.structure-field');
+
+				children.each(
+					function(item) {
+						var fieldInstance = _cloneFieldInstance(item, item);
+					}
 				);
 
 				instance._attachEvents();
@@ -1709,7 +1724,7 @@ AUI().add(
 					selector += '.structure-field:not(.repeated-field)';
 				}
 
-				var children = source.all(selector);
+				var children = source.all(selector).filter(':not(.parent-structure-field)');
 
 				A.each(
 					children,
@@ -2750,7 +2765,9 @@ AUI().add(
 						valueFn: function() {
 							var instance = this;
 
-							return instance.getAttribute('instanceId', '');
+							var randomInstanceId = instance.generateInstanceId();
+
+							return instance.getAttribute('instanceId', randomInstanceId);
 						}
 					},
 
@@ -2790,6 +2807,14 @@ AUI().add(
 							var instance = this;
 
 							return instance.getAttribute('repeatable', false);
+						}
+					},
+
+					repeated: {
+						getter: function() {
+							var instance = this;
+
+							return instance.get('source').hasClass('repeated-field');
 						}
 					},
 
@@ -2888,6 +2913,12 @@ AUI().add(
 
 				createTooltipImage: function() {
 					return A.Node.create(TPL_TOOLTIP_IMAGE);
+				},
+
+				generateInstanceId: function() {
+					var instance = this;
+
+					return Journal.prototype.generateInstanceId.apply(instance, arguments);
 				},
 
 				getAttribute: function(key, defaultValue) {

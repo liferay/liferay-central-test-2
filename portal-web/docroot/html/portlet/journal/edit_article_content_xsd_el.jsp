@@ -66,13 +66,9 @@ if (Validator.isNull(elPredefinedValue)) {
 	elPredefinedValue = StringPool.BLANK;
 }
 
-StringBundler css = new StringBundler(3);
+StringBundler css = new StringBundler(2);
 
-if (Validator.isNull(elParentStructureId)) {
-	css.append("structure-field");
-}
-
-if (elRepeatable && !elRepeatablePrototype) {
+if (!elRepeatablePrototype) {
 	css.append(" repeated-field ");
 }
 
@@ -91,7 +87,7 @@ if (Validator.isNull(elContent) && Validator.isNotNull(elPredefinedValue)) {
 Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL);
 %>
 
-<li class="<%= css.toString().trim() %>" <%= parentStructureData %> dataInstanceId='<%= elInstanceId %>' dataName='<%= elName %>' dataRepeatable='<%= elRepeatable %>' dataType='<%= elType %>' dataIndexType='<%= elIndexType %>' <%= metaData %>>
+<li class="structure-field <%= css.toString().trim() %>" <%= parentStructureData %> dataInstanceId='<%= elInstanceId %>' dataName='<%= elName %>' dataRepeatable='<%= elRepeatable %>' dataType='<%= elType %>' dataIndexType='<%= elIndexType %>' <%= metaData %>>
 	<span class="journal-article-close"></span>
 
 	<span class="folder">
@@ -119,17 +115,17 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 				<c:if test='<%= elType.equals("text_area") %>'>
 					<liferay-ui:input-editor
-						name='<%= renderResponse.getNamespace() + "structure_el_" + elName + "_content" %>'
+						name='<%= renderResponse.getNamespace() + "structure_el_" + elInstanceId + "_content" %>'
 						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
 						toolbarSet="liferay-article"
-						initMethod='<%= renderResponse.getNamespace() + "initEditor" + elName %>'
+						initMethod='<%= renderResponse.getNamespace() + "initEditor" + elInstanceId %>'
 						onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>'
 						height="250"
 						width="500"
 					/>
 
 					<aui:script>
-						function <portlet:namespace />initEditor<%= elName %>() {
+						function <portlet:namespace />initEditor<%= elInstanceId %>() {
 							return "<%= UnicodeFormatter.toString(elContent) %>";
 						}
 					</aui:script>
