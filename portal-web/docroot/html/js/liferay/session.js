@@ -169,8 +169,8 @@ AUI().add(
 
 				instance.banner = new Liferay.Notice(
 					{
-						content: instance._warningText,
 						closeText: instance._extendText,
+						content: instance._warningText,
 						onClose: function() {
 							instance.extend();
 						},

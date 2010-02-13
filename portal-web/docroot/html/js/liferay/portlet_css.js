@@ -27,7 +27,7 @@ AUI().add(
 						var content = instance._newPanel;
 
 						if (!content) {
-							content = A.Node.create('<div class="loading-animation" />')
+							content = A.Node.create('<div class="loading-animation" />');
 						}
 
 						if (!instance._currentPopup) {
@@ -748,55 +748,55 @@ AUI().add(
 					bgData: {
 						backgroundColor: '',
 						backgroundImage: '',
-						useBgImage: false,
-						backgroundRepeat: '',
 						backgroundPosition: {
 							left: {
-								value: '',
-								unit: 'px'
+								unit: 'px',
+								value: ''
 							},
 							top: {
-								value: '',
-								unit: 'px'
+								unit: 'px',
+								value: ''
 							}
-						}
+						},
+						backgroundRepeat: '',
+						useBgImage: false
 					},
 
 					borderData: {
-						borderWidth: {
-							bottom: {
-								value: '',
-								unit: 'px'
-							},
-							left: {
-								value: '',
-								unit: 'px'
-							},
-							right: {
-								value: '',
-								unit: 'px'
-							},
-							top: {
-								value: '',
-								unit: 'px'
-							},
-							sameForAll: true
+						borderColor: {
+							bottom: '',
+							left: '',
+							right: '',
+							sameForAll: true,
+							top: ''
 						},
 
 						borderStyle: {
 							bottom: '',
 							left: '',
 							right: '',
-							top: '',
-							sameForAll: true
+							sameForAll: true,
+							top: ''
 						},
 
-						borderColor: {
-							bottom: '',
-							left: '',
-							right: '',
-							top: '',
-							sameForAll: true
+						borderWidth: {
+							bottom: {
+								unit: 'px',
+								value: ''
+							},
+							left: {
+								unit: 'px',
+								value: ''
+							},
+							right: {
+								unit: 'px',
+								value: ''
+							},
+							sameForAll: true,
+							top: {
+								unit: 'px',
+								value: ''
+							}
 						}
 					},
 
@@ -812,47 +812,46 @@ AUI().add(
 					spacingData: {
 						margin: {
 							bottom: {
-								value: '',
-								unit: 'px'
+								unit: 'px',
+								value: ''
 							},
 							left: {
-								value: '',
-								unit: 'px'
+								unit: 'px',
+								value: ''
 							},
 							right: {
-								value: '',
-								unit: 'px'
+								unit: 'px',
+								value: ''
 							},
+							sameForAll: true,
 							top: {
-								value: '',
-								unit: 'px'
-							},
-							sameForAll: true
+								unit: 'px',
+								value: ''
+							}
 						},
 						padding: {
 							bottom: {
-								value: '',
-								unit: 'px'
+								unit: 'px',
+								value: ''
 							},
 							left: {
-								value: '',
-								unit: 'px'
+								unit: 'px',
+								value: ''
 							},
 							right: {
-								value: '',
-								unit: 'px'
+								unit: 'px',
+								value: ''
 							},
+							sameForAll: true,
 							top: {
-								value: '',
-								unit: 'px'
-							},
-							sameForAll: true
+								unit: 'px',
+								value: ''
+							}
 						}
 
 					},
 
 					textData: {
-						textAlign: '',
 						color: '',
 						fontFamily: '',
 						fontSize: '',
@@ -860,13 +859,14 @@ AUI().add(
 						fontWeight: '',
 						letterSpacing: '',
 						lineHeight: '',
+						textAlign: '',
 						textDecoration: '',
 						wordSpacing: ''
 					},
 
 					wapData: {
-						title: '',
-						initialWindowState: 'NORMAL'
+						initialWindowState: 'NORMAL',
+						title: ''
 					}
 				};
 
@@ -972,10 +972,10 @@ AUI().add(
 								themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
 								{
 									data: {
-										p_l_id: themeDisplay.getPlid(),
+										css: A.JSON.stringify(instance._objData),
 										doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-										portletId: instance._portletId,
-										css: A.JSON.stringify(instance._objData)
+										p_l_id: themeDisplay.getPlid(),
+										portletId: instance._portletId
 									},
 									method: 'POST',
 									on: {
@@ -993,7 +993,7 @@ AUI().add(
 						function() {
 							instance._curPortlet.attr('style', '');
 
-							var customStyle = A.one('#lfr-custom-css-block-' + instance._curPortletWrapperId)
+							var customStyle = A.one('#lfr-custom-css-block-' + instance._curPortletWrapperId);
 
 							if (customStyle) {
 								customStyle.remove();
@@ -1011,8 +1011,8 @@ AUI().add(
 					themeDisplay.getPathMain() + '/portlet_configuration/get_look_and_feel',
 					{
 						data: {
-							p_l_id: themeDisplay.getPlid(),
 							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+							p_l_id: themeDisplay.getPlid(),
 							portletId: instance._portletId
 						},
 						dataType: 'json',
@@ -1207,8 +1207,8 @@ AUI().add(
 
 				if (wapData == null) {
 					wapData = {
-						title: '',
-						initialWindowState: 'NORMAL'
+						initialWindowState: 'NORMAL',
+						title: ''
 					};
 
 					objData.wapData = wapData;

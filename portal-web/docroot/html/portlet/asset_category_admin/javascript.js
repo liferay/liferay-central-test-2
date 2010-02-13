@@ -47,22 +47,22 @@ AUI().add(
 
 					instance._toolbarCategoryPanel = new A.ContextPanel(
 						{
-							bodyContent: addCategoryLayer,
-							trigger: '.add-category-button',
 							align: {
 								points: ['tr', 'br']
-							}
+							},
+							bodyContent: addCategoryLayer,
+							trigger: '.add-category-button'
 						}
 					)
 					.render();
 
 					instance._vocabularyCategoryPanel = new A.ContextPanel(
 						{
-							bodyContent: addVocabularyLayer,
-							trigger: '.add-vocabulary-button',
 							align: {
 								points: ['tr', 'br']
-							}
+							},
+							bodyContent: addVocabularyLayer,
+							trigger: '.add-vocabulary-button'
 						}
 					)
 					.render();

@@ -50,11 +50,11 @@ AUI().add(
 
 					instance._addTagOverlay = new A.ContextPanel(
 						{
-							bodyContent: addTagLayer,
-							trigger: '.add-tag-button',
 							align: {
 								points: ['tr', 'br']
-							}
+							},
+							bodyContent: addTagLayer,
+							trigger: '.add-tag-button'
 						}
 					)
 					.render();

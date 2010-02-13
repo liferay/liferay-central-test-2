@@ -61,9 +61,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 	var TreeUtil = {
 		DEFAULT_PARENT_LAYOUT_ID: <%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>,
 		OPEN_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId) %>'.split(','),
-		SELECTED_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId + "SelectedNode") %>'.split(','),
 		PREFIX_LAYOUT_ID: '_layoutId_',
 		PREFIX_PLID: '_plid_',
+		SELECTED_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId + "SelectedNode") %>'.split(','),
 
 		afterRenderTree: function(event) {
 			var treeInstance = event.target;
@@ -171,8 +171,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			A.io.request(
 				updateURL,
 				{
-					method: 'POST',
-					data: data
+					data: data,
+					method: 'POST'
 				}
 			);
 		},
@@ -209,8 +209,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			A.io.request(
 				sessionClickURL,
 				{
-					method: 'POST',
-					data: data
+					data: data,
+					method: 'POST'
 				}
 			);
 		}

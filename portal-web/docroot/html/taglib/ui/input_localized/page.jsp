@@ -228,7 +228,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 				}
 			},
 			trigger: '#<%= randomNamespace %>languageSelectorTrigger',
-			width: 500,
+			width: 500
 		}
 	);
 

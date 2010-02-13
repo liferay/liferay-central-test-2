@@ -31,8 +31,8 @@
 	<aui:script use="liferay-panel">
 		var panel = new Liferay.Panel(
 			{
-				panel: '#<%= id %>',
 				collapsible: <%= collapsible %>,
+				panel: '#<%= id %>',
 				persistState: <%= persistState %>
 			}
 		);

@@ -29,15 +29,15 @@ AUI().add(
 					var instance = this;
 
 					var defaults = {
-						container: null,
-						panel: '.lfr-panel',
-						panelContent: '.lfr-panel-content',
-						header: '.lfr-panel-header',
-						titles: '.lfr-panel-titlebar',
-						footer: '.lfr-panel-footer',
 						accordion: false,
 						collapsible: true,
-						persistState: false
+						container: null,
+						footer: '.lfr-panel-footer',
+						header: '.lfr-panel-header',
+						panel: '.lfr-panel',
+						panelContent: '.lfr-panel-content',
+						persistState: false,
+						titles: '.lfr-panel-titlebar'
 					};
 
 					config = A.merge(defaults, config);

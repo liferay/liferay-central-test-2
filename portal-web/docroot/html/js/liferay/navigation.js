@@ -30,23 +30,23 @@ AUI().add(
 			},
 
 			isModifiable: {
-				value: false,
 				getter: function(value) {
 					var instance = this;
 
 					return instance.get('hasPermission') &&
 							instance.get('navBlock').hasClass('modify-pages');
-				}
+				},
+				value: false
 			},
 
 			isSortable: {
-				value: false,
 				getter: function(value) {
 					var instance = this;
 
 					return instance.get('hasPermission') &&
 							instance.get('navBlock').hasClass('sort-pages');
-				}
+				},
+				value: false
 			},
 
 			layoutIds: {
@@ -55,7 +55,6 @@ AUI().add(
 
 			navBlock: {
 				lazyAdd: false,
-				value: null,
 				setter: function(value) {
 					var instance = this;
 
@@ -66,7 +65,8 @@ AUI().add(
 					}
 
 					return value;
-				}
+				},
+				value: null
 			}
 		};
 
@@ -158,11 +158,11 @@ AUI().add(
 
 					var tools = [
 						{
-							icon: 'check',
-							id: 'save',
 							handler: function(event) {
 								comboBox.fire('savePage', options);
-							}
+							},
+							icon: 'check',
+							id: 'save'
 						}
 					];
 
@@ -170,8 +170,6 @@ AUI().add(
 						tools.unshift(
 							{
 								activeState: true,
-								icon: 'gear',
-								id: 'options',
 								handler: function(event) {
 									var toolItem = this;
 
@@ -184,7 +182,9 @@ AUI().add(
 									}
 
 									comboBox._optionsOverlay[action]();
-								}
+								},
+								icon: 'gear',
+								id: 'options'
 							}
 						);
 					}
@@ -500,11 +500,11 @@ AUI().add(
 
 					if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-page'))) {
 						var data = {
-							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 							cmd: 'delete',
+							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 							groupId: themeDisplay.getScopeGroupId(),
-							privateLayout: themeDisplay.isPrivateLayout(),
-							layoutId: tab._LFR_layoutId
+							layoutId: tab._LFR_layoutId,
+							privateLayout: themeDisplay.isPrivateLayout()
 						};
 
 						A.io.request(
@@ -549,13 +549,13 @@ AUI().add(
 						if (actionNode) {
 							if (field.isDirty()) {
 								data = {
-									doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 									cmd: 'name',
+									doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 									groupId: themeDisplay.getScopeGroupId(),
-									privateLayout: themeDisplay.isPrivateLayout(),
+									languageId: themeDisplay.getLanguageId(),
 									layoutId: themeDisplay.getLayoutId(),
 									name: pageTitle,
-									languageId: themeDisplay.getLanguageId()
+									privateLayout: themeDisplay.isPrivateLayout()
 								};
 
 								onSuccess = function(event, id, obj) {
@@ -589,14 +589,14 @@ AUI().add(
 							var layoutPrototypeId = selectedInput && selectedInput.val();
 
 							data = {
-								mainPath: themeDisplay.getPathMain(),
-								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 								cmd: 'add',
+								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 								groupId: themeDisplay.getScopeGroupId(),
-								privateLayout: themeDisplay.isPrivateLayout(),
-								parentLayoutId: themeDisplay.getParentLayoutId(),
+								layoutPrototypeId: layoutPrototypeId,
+								mainPath: themeDisplay.getPathMain(),
 								name: pageTitle,
-								layoutPrototypeId: layoutPrototypeId
+								parentLayoutId: themeDisplay.getParentLayoutId(),
+								privateLayout: themeDisplay.isPrivateLayout()
 							};
 
 							onSuccess = function(event, id, obj) {
@@ -632,7 +632,7 @@ AUI().add(
 										type: 'add'
 									}
 								);
-							}
+							};
 						}
 
 						if (data) {
@@ -657,12 +657,12 @@ AUI().add(
 					var priority = instance.get('navBlock').queryAll('li').indexOf(node);
 
 					var data = {
-						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 						cmd: 'priority',
+						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 						groupId: themeDisplay.getScopeGroupId(),
-						privateLayout: themeDisplay.isPrivateLayout(),
 						layoutId: node._LFR_layoutId,
-						priority: priority
+						priority: priority,
+						privateLayout: themeDisplay.isPrivateLayout()
 					};
 
 					A.io.request(

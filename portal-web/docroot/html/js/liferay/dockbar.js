@@ -62,14 +62,14 @@ AUI().use(
 
 					instance.addUnderlay(
 						{
-							boundingBox: '#' + instance._namespace + 'dockbarMessages',
 							align: {
 								node: '#dockbar',
 								points: ['tc', 'bc']
 							},
+							boundingBox: '#' + instance._namespace + 'dockbarMessages',
+							header: 'My messages',
 							name: 'messages',
-							visible: false,
-							header: 'My messages'
+							visible: false
 						}
 					);
 
@@ -92,24 +92,24 @@ AUI().use(
 					instance.addMenu(
 						{
 							boundingBox: '#' + instance._namespace + 'addContentContainer',
-							trigger: '#' + instance._namespace + 'addContent',
-							name: 'addContent'
+							name: 'addContent',
+							trigger: '#' + instance._namespace + 'addContent'
 						}
 					);
 
 					instance.addMenu(
 						{
 							boundingBox: '#' + instance._namespace + 'manageContentContainer',
-							trigger: '#' + instance._namespace + 'manageContent',
-							name: 'manageContent'
+							name: 'manageContent',
+							trigger: '#' + instance._namespace + 'manageContent'
 						}
 					);
 
 					instance.addMenu(
 						{
 							boundingBox: '#' + instance._namespace + 'myPlacesContainer',
-							trigger: '#' + instance._namespace + 'myPlaces',
-							name: 'myPlaces'
+							name: 'myPlaces',
+							trigger: '#' + instance._namespace + 'myPlaces'
 						}
 					);
 
@@ -119,8 +119,8 @@ AUI().use(
 						instance.addMenu(
 							{
 								boundingBox: userOptionsContainer,
-								trigger: '#' + instance._namespace + 'userAvatar',
-								name: 'userOptions'
+								name: 'userOptions',
+								trigger: '#' + instance._namespace + 'userAvatar'
 							}
 						);
 					}
@@ -136,15 +136,13 @@ AUI().use(
 								if (!Liferay.Dockbar.addApplication) {
 									instance.addUnderlay(
 										{
-											width: '255px',
-											name: 'addApplication',
 											className: 'add-application',
 											io: {
 												data: {
+													doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 													p_l_id: themeDisplay.getPlid(),
 													p_p_id: 87,
-													p_p_state: 'exclusive',
-													doAsUserId: themeDisplay.getDoAsUserIdEncoded()
+													p_p_state: 'exclusive'
 												},
 												on: {
 													success: function(event, id, obj) {
@@ -164,6 +162,7 @@ AUI().use(
 												},
 												uri: themeDisplay.getPathMain() + '/portal/render_portlet'
 											},
+											name: 'addApplication',
 											on: {
 												visibleChange: function(event) {
 													var action = 'addClass';
@@ -179,7 +178,8 @@ AUI().use(
 
 													body[action]('lfr-has-sidebar');
 												}
-											}
+											},
+											width: '255px'
 										}
 									);
 								}
@@ -203,15 +203,15 @@ AUI().use(
 								if (!Liferay.Dockbar.manageLayouts) {
 									instance.addUnderlay(
 										{
+											className: 'manage-layouts',
 											io: {
 												data: {
-													p_l_id: themeDisplay.getPlid(),
 													doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+													p_l_id: themeDisplay.getPlid(),
 													redirect: Liferay.currentURL
 												},
 												uri: themeDisplay.getPathMain() + '/layout_configuration/templates'
 											},
-											className: 'manage-layouts',
 											name: 'manageLayouts',
 											width: '700px'
 										}
@@ -233,8 +233,8 @@ AUI().use(
 						instance.addMenu(
 							{
 								boundingBox: '#' + instance._namespace + 'stagingContainer',
-								trigger: '#' + instance._namespace + 'staging',
-								name: 'staging'
+								name: 'staging',
+								trigger: '#' + instance._namespace + 'staging'
 							}
 						);
 					}
@@ -475,13 +475,13 @@ AUI().use(
 				value: A.Node.create('<div style="height: 100px"></div>')
 			},
 			className: {
-				value: null,
 				lazyAdd: false,
 				setter: function(value) {
 					var instance = this;
 
 					instance.get('boundingBox').addClass(value);
-				}
+				},
+				value: null
 			}
 		};
 

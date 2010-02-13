@@ -49,8 +49,8 @@ Liferay.Portlet = {
 			p_l_id: plid,
 			p_p_col_id: currentColumnId,
 			p_p_col_pos: portletPosition,
-			p_p_isolated: true,
-			p_p_id: portletId
+			p_p_id: portletId,
+			p_p_isolated: true
 		};
 
 		var firstPortlet = container.one('.portlet-boundary');
@@ -339,9 +339,9 @@ Liferay.Portlet = {
 			if (canEditTitle) {
 				Liferay.Util.portletTitleEdit(
 					{
+						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 						obj: portlet,
 						plid: themeDisplay.getPlid(),
-						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 						portletId: portletId
 					}
 				);
@@ -575,11 +575,11 @@ Liferay.Portlet = {
 
 			instance.addHTML(
 				{
-					url: url,
-					placeHolder: placeHolder,
 					onComplete: function(portlet, portletId) {
 						portlet.refreshURL = url;
-					}
+					},
+					placeHolder: placeHolder,
+					url: url
 				}
 			);
 		}

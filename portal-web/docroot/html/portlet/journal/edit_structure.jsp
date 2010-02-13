@@ -426,9 +426,9 @@ int tabIndex = 1;
 
 	Liferay.Util.inlineEditor(
 		{
-			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>',
 			button: '#<portlet:namespace />editorButton',
-			textarea: '<portlet:namespace />xsdContent'
+			textarea: '<portlet:namespace />xsdContent',
+			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>'
 		}
 	);
 

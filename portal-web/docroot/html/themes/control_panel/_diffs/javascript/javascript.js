@@ -20,10 +20,10 @@ AUI().use(
 
 			var contextPanel = new A.ContextPanel(
 				{
-					trigger: portletInformationIcon,
+					align: {
+						points: [ 'tl', 'br' ]
+					},
 					bodyContent: portletInformationEl,
-					align: { points: [ 'tl', 'br' ] },
-					visible: false,
 					on: {
 						hide: function() {
 							A.io.request(
@@ -33,7 +33,9 @@ AUI().use(
 								}
 							);
 						}
-					}
+					},
+					trigger: portletInformationIcon,
+					visible: false
 				}
 			).render();
 

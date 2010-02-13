@@ -68,8 +68,8 @@
 						{
 							data: {
 								color: bgColor,
-								portletId: '<%= portletDisplay.getId() %>',
-								p_l_id: '<%= plid %>'
+								p_l_id: '<%= plid %>',
+								portletId: '<%= portletDisplay.getId() %>'
 							},
 							method: 'POST'
 						}
@@ -80,8 +80,8 @@
 
 		new A.Editable(
 			{
-				node: '#<portlet:namespace />note',
 				inputType: 'textarea',
+				node: '#<portlet:namespace />note',
 				on: {
 					contentTextChange: function(event) {
 						var instance = this;
@@ -95,9 +95,9 @@
 								'<%= themeDisplay.getPathMain() %>/quick_note/save',
 								{
 									data: {
+										data: newValue,
 										p_l_id: '<%= plid %>',
-										portletId: '<%= portletDisplay.getId() %>',
-										data: newValue
+										portletId: '<%= portletDisplay.getId() %>'
 									},
 									method: 'POST'
 								}

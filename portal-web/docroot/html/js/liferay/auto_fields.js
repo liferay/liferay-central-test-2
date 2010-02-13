@@ -33,7 +33,6 @@ AUI().add(
 
 		AutoFields.ATTRS = {
 			baseRows: {
-				value: '.lfr-form-row',
 				setter: function(value) {
 					var instance = this;
 
@@ -46,7 +45,8 @@ AUI().add(
 					}
 
 					return value;
-				}
+				},
+				value: '.lfr-form-row'
 			},
 			fieldIndexes: {
 				value: ''
@@ -312,20 +312,20 @@ AUI().add(
 						{
 							tools: [
 								{
-									id: 'add',
-									icon: 'plus',
 									handler: {
-										fn: instance.clone,
-										context: instance
-									}
+										context: instance,
+										fn: instance.clone
+									},
+									icon: 'plus',
+									id: 'add'
 								},
 								{
-									id: 'delete',
-									icon: 'minus',
 									handler: {
-										fn: instance.remove,
-										context: instance
-									}
+										context: instance,
+										fn: instance.remove
+									},
+									icon: 'minus',
+									id: 'delete'
 								}
 							]
 						}
@@ -424,8 +424,8 @@ AUI().add(
 					instance.fire(
 						'delete',
 						{
-							guid: instance.get('guid'),
-							deletedRow: instance
+							deletedRow: instance,
+							guid: instance.get('guid')
 						}
 					);
 				},
@@ -502,8 +502,8 @@ AUI().add(
 					}
 
 					var eventConfig = {
-						emitsFacade: true,
-						bubbles: true
+						bubbles: true,
+						emitsFacade: true
 					};
 
 					instance.publish('clone', eventConfig);

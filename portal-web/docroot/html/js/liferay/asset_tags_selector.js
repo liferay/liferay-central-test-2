@@ -61,7 +61,6 @@ AUI().add(
 				value: null
 			},
 			curEntries: {
-				value: '',
 				setter: function(value) {
 					var instance = this;
 
@@ -70,7 +69,8 @@ AUI().add(
 					}
 
 					return value;
-				}
+				},
+				value: ''
 			},
 			dataSource: {
 				valueFn: function() {
@@ -407,8 +407,8 @@ AUI().add(
 					var checked = instance.entries.indexOfKey(item) > -1 ? TPL_CHECKED : '';
 
 					var tag = {
-						name: item,
-						checked: checked
+						checked: checked,
+						name: item
 					};
 
 					instance._formatEntry(tag);

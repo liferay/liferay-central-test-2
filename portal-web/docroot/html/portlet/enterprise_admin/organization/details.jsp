@@ -345,18 +345,18 @@ if (parentOrganization != null) {
 	new Liferay.DynamicSelect(
 		[
 			{
-				select: "<portlet:namespace />countryId",
-				selectId: "countryId",
-				selectDesc: "name",
-				selectVal: "<%= countryId %>",
-				selectData: Liferay.Address.getCountries
+				select: '<portlet:namespace />countryId',
+				selectData: Liferay.Address.getCountries,
+				selectDesc: 'name',
+				selectId: 'countryId',
+				selectVal: '<%= countryId %>'
 			},
 			{
-				select: "<portlet:namespace />regionId",
-				selectId: "regionId",
-				selectDesc: "name",
-				selectVal: "<%= regionId %>",
-				selectData: Liferay.Address.getRegions
+				select: '<portlet:namespace />regionId',
+				selectData: Liferay.Address.getRegions,
+				selectDesc: 'name',
+				selectId: 'regionId',
+				selectVal: '<%= regionId %>'
 			}
 		]
 	);

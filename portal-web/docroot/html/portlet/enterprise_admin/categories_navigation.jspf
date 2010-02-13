@@ -106,8 +106,8 @@ for (int i = 0; i < categoryNames.length; i++) {
 	var <portlet:namespace />formNavigator = new Liferay.EnterpriseAdmin.FormNavigator(
 		{
 			container: '#<portlet:namespace />sectionsContainer',
-			modifiedSections: '<portlet:namespace />modifiedSections',
-			defaultModifiedSections: <%= JS.toScript(modifiedSections) %>
+			defaultModifiedSections: <%= JS.toScript(modifiedSections) %>,
+			modifiedSections: '<portlet:namespace />modifiedSections'
 		}
 	);
 

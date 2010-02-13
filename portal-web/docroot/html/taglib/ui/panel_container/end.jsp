@@ -29,8 +29,8 @@
 <aui:script use="liferay-panel">
 	var panel = new Liferay.Panel(
 		{
-			container: '#<%= id %>',
 			accordion: <%= accordion %>,
+			container: '#<%= id %>',
 			persistState: <%= persistState %>
 		}
 	);

@@ -29,13 +29,13 @@
 <aui:script use="liferay-panel-floating">
 	var panel = new Liferay.PanelFloating(
 		{
-			container: '#<%= id %>',
-			trigger: '<%= trigger %>',
 			accordion: <%= accordion %>,
-			persistState: <%= persistState %>,
+			container: '#<%= id %>',
 			paging: <%= paging %>,
 			pagingElements: '<%= pagingElements %>',
+			persistState: <%= persistState %>,
 			resultsPerPage: <%= resultsPerPage %>,
+			trigger: '<%= trigger %>',
 			width: <%= width %>
 		}
 	);

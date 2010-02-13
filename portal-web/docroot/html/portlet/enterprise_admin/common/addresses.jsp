@@ -126,18 +126,18 @@ else {
 			new Liferay.DynamicSelect(
 				[
 					{
-						select: "<portlet:namespace />addressCountryId<%= addressesIndex %>",
-						selectId: "countryId",
-						selectDesc: "name",
-						selectVal: "<%= address.getCountryId() %>",
-						selectData: Liferay.Address.getCountries
+						select: '<portlet:namespace />addressCountryId<%= addressesIndex %>',
+						selectData: Liferay.Address.getCountries,
+						selectDesc: 'name',
+						selectId: 'countryId',
+						selectVal: '<%= address.getCountryId() %>'
 					},
 					{
-						select: "<portlet:namespace />addressRegionId<%= addressesIndex %>",
-						selectId: "regionId",
-						selectDesc: "name",
-						selectVal: "<%= address.getRegionId() %>",
-						selectData: Liferay.Address.getRegions
+						select: '<portlet:namespace />addressRegionId<%= addressesIndex %>',
+						selectData: Liferay.Address.getRegions,
+						selectDesc: 'name',
+						selectId: 'regionId',
+						selectVal: '<%= address.getRegionId() %>'
 					}
 				]
 			);
@@ -168,18 +168,18 @@ else {
 					new Liferay.DynamicSelect(
 						[
 							{
-								select: "<portlet:namespace />addressCountryId" + guid,
-								selectId: "countryId",
-								selectDesc: "name",
-								selectVal: '',
-								selectData: Liferay.Address.getCountries
+								select: '<portlet:namespace />addressCountryId' + guid,
+								selectData: Liferay.Address.getCountries,
+								selectDesc: 'name',
+								selectId: 'countryId',
+								selectVal: ''
 							},
 							{
-								select: "<portlet:namespace />addressRegionId" + guid,
-								selectId: "regionId",
-								selectDesc: "name",
-								selectVal: '',
-								selectData: Liferay.Address.getRegions
+								select: '<portlet:namespace />addressRegionId' + guid,
+								selectData: Liferay.Address.getRegions,
+								selectDesc: 'name',
+								selectId: 'regionId',
+								selectVal: ''
 							}
 						]
 					);

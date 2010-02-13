@@ -7,10 +7,10 @@ Liferay.LayoutConfiguration = {
 			function(A) {
 				var dialog = new A.Dialog(
 					{
-						title: Liferay.Language.get('layout'),
+						centered: true,
 						modal: true,
-						width: 700,
-						centered: true
+						title: Liferay.Language.get('layout'),
+						width: 700
 					}
 				)
 				.render();
@@ -19,8 +19,8 @@ Liferay.LayoutConfiguration = {
 					A.Plugin.IO,
 					{
 						data: {
-							p_l_id: themeDisplay.getPlid(),
 							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+							p_l_id: themeDisplay.getPlid(),
 							redirect: Liferay.currentURL
 						},
 						uri: url

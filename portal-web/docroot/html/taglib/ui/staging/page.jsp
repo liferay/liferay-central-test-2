@@ -148,13 +148,13 @@
 								%>
 
 								<li class="page-settings">
-									<a href="javascript:Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});"><liferay-ui:message key="propose-publication" /></a>
+									<a href="javascript:Liferay.LayoutExporter.proposeLayout({namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />', url: '<%= proposePublicationURL.toString() %>'});"><liferay-ui:message key="propose-publication" /></a>
 								</li>
 							</c:if>
 						</c:when>
 						<c:when test="<%= themeDisplay.getURLPublishToLive() != null %>">
 							<li class="page-settings">
-								<a href="javascript:Liferay.LayoutExporter.publishToLive({url: '<%= themeDisplay.getURLPublishToLive().toString() %>', title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-live") %>'});"><liferay-ui:message key="publish-to-live" /></a>
+								<a href="javascript:Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-live") %>', url: '<%= themeDisplay.getURLPublishToLive().toString() %>'});"><liferay-ui:message key="publish-to-live" /></a>
 							</li>
 						</c:when>
 					</c:choose>

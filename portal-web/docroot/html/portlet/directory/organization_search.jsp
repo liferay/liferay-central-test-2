@@ -108,17 +108,17 @@ if (displayTerms.getParentOrganizationId() > 0) {
 		[
 			{
 				select: '<portlet:namespace /><%= displayTerms.COUNTRY_ID %>',
-				selectId: 'countryId',
+				selectData: Liferay.Address.getCountries,
 				selectDesc: 'name',
-				selectVal: '<%= displayTerms.getCountryId() %>',
-				selectData: Liferay.Address.getCountries
+				selectId: 'countryId',
+				selectVal: '<%= displayTerms.getCountryId() %>'
 			},
 			{
 				select: '<portlet:namespace /><%= displayTerms.REGION_ID %>',
-				selectId: 'regionId',
+				selectData: Liferay.Address.getRegions,
 				selectDesc: 'name',
-				selectVal: '<%= displayTerms.getRegionId() %>',
-				selectData: Liferay.Address.getRegions
+				selectId: 'regionId',
+				selectVal: '<%= displayTerms.getRegionId() %>'
 			}
 		]
 	);

@@ -43,7 +43,6 @@ AUI().add(
 
 		AssetCategoriesSelector.ATTRS = {
 			curEntryIds: {
-				value: '',
 				setter: function(value) {
 					var instance = this;
 
@@ -52,7 +51,8 @@ AUI().add(
 					}
 
 					return value;
-				}
+				},
+				value: ''
 			}
 		};
 
@@ -75,7 +75,7 @@ AUI().add(
 
 					AssetCategoriesSelector.superclass.constructor.superclass.syncUI.apply(instance, arguments);
 
-					var matchKey = instance.get('matchKey')
+					var matchKey = instance.get('matchKey');
 
 					instance.entries.getKey = function(obj) {
 						return obj.categoryId;
@@ -187,8 +187,8 @@ AUI().add(
 									icon: 'search',
 									id: 'select',
 									handler: {
-										fn: instance._showSelectPopup,
-										context: instance
+										context: instance,
+										fn: instance._showSelectPopup
 									}
 								}
 							]

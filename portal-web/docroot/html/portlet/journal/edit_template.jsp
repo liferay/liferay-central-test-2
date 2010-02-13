@@ -300,9 +300,9 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 	Liferay.Util.inlineEditor(
 		{
-			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm1.<portlet:namespace />langType.value,
 			button: '#<portlet:namespace />editorButton',
-			textarea: '<portlet:namespace />xslContent'
+			textarea: '<portlet:namespace />xslContent',
+			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm1.<portlet:namespace />langType.value
 		}
 	);
 

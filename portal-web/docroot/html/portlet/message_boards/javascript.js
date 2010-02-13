@@ -134,7 +134,6 @@ AUI().add(
 
 				instance._buttons = {
 					fontType: {
-						options: [Liferay.Language.get('font'), 'Arial', 'Comic Sans', 'Courier New', 'Tahoma', 'Times New Roman', 'Verdana', 'Wingdings'],
 						onChange: function(event) {
 							var target = event.target;
 							var value = target.val();
@@ -144,11 +143,12 @@ AUI().add(
 
 								target.set('selectedIndex', 0);
 							}
-						}
+						},
+						options: [Liferay.Language.get('font'), 'Arial', 'Comic Sans', 'Courier New', 'Tahoma', 'Times New Roman', 'Verdana', 'Wingdings']
 					},
 
 					fontSize: {
-						options: [Liferay.Language.get('size'), 1, 2, 3, 4, 5, 6, 7],
+						groupEnd: true,
 						onChange: function(event) {
 							var target = event.target;
 							var value = target.val();
@@ -159,110 +159,110 @@ AUI().add(
 								target.set('selectedIndex', 0);
 							}
 						},
-						groupEnd: true
+						options: [Liferay.Language.get('size'), 1, 2, 3, 4, 5, 6, 7]
 					},
 
 					b: {
-						text: Liferay.Language.get('bold'),
 						image: 'message_boards/bold.png',
 						onClick: function(event) {
 							instance.insertTag('b');
-						}
+						},
+						text: Liferay.Language.get('bold')
 					},
 
 					i: {
-						text: Liferay.Language.get('italic'),
 						image: 'message_boards/italic.png',
 						onClick: function(event) {
 							instance.insertTag('i');
-						}
+						},
+						text: Liferay.Language.get('italic')
 					},
 
 					u: {
-						text: Liferay.Language.get('underline'),
 						image: 'message_boards/underline.png',
 						onClick: function(event) {
 							instance.insertTag('u');
-						}
+						},
+						text: Liferay.Language.get('underline')
 					},
 
 					s: {
-						text: Liferay.Language.get('strikethrough'),
 						image: 'message_boards/strike.png',
 						onClick: function(event) {
 							instance.insertTag('s');
-						}
+						},
+						text: Liferay.Language.get('strikethrough')
 					},
 
 					fontColor: {
 						className: 'use-colorpicker',
-						text: Liferay.Language.get('font-color'),
+						groupEnd: true,
 						image: 'message_boards/color.png',
-						groupEnd: true
+						text: Liferay.Language.get('font-color')
 					},
 
 					url: {
-						text: Liferay.Language.get('url'),
 						image: 'message_boards/hyperlink.png',
 						onClick: function(event) {
 							instance._insertURL();
-						}
+						},
+						text: Liferay.Language.get('url')
 					},
 
 					email: {
-						text: Liferay.Language.get('email-address'),
 						image: 'message_boards/email.png',
 						onClick: function(event) {
 							instance._insertEmail();
-						}
+						},
+						text: Liferay.Language.get('email-address')
 					},
 
 					image: {
-						text: Liferay.Language.get('image'),
 						image: 'message_boards/image.png',
 						onClick: function(event) {
 							instance._insertImage();
-						}
+						},
+						text: Liferay.Language.get('image')
 					},
 
 					ol: {
-						text: Liferay.Language.get('ordered-list'),
 						image: 'message_boards/ordered_list.png',
 						onClick: function(event) {
 							instance._insertList('1');
-						}
+						},
+						text: Liferay.Language.get('ordered-list')
 					},
 
 					ul: {
-						text: Liferay.Language.get('unordered-list'),
 						image: 'message_boards/unordered_list.png',
 						onClick: function(event) {
 							instance._insertList('');
-						}
+						},
+						text: Liferay.Language.get('unordered-list')
 					},
 
 					left: {
-						text: Liferay.Language.get('left'),
 						image: 'message_boards/justify_left.png',
 						onClick: function(event) {
 							instance.insertTag('left');
-						}
+						},
+						text: Liferay.Language.get('left')
 					},
 
 					center: {
-						text: Liferay.Language.get('center'),
 						image: 'message_boards/justify_center.png',
 						onClick: function(event) {
 							instance.insertTag('center');
-						}
+						},
+						text: Liferay.Language.get('center')
 					},
 
 					right: {
-						text: Liferay.Language.get('right'),
 						image: 'message_boards/justify_right.png',
 						onClick: function(event) {
 							instance.insertTag('right');
-						}
+						},
+						text: Liferay.Language.get('right')
 					},
 
 					indent: {
@@ -274,24 +274,24 @@ AUI().add(
 					},
 
 					quote: {
-						text: Liferay.Language.get('quote'),
 						image: 'message_boards/quote.png',
 						onClick: function(event) {
 							instance.insertTag('quote');
-						}
+						},
+						text: Liferay.Language.get('quote')
 					},
 
 					code: {
-						text: Liferay.Language.get('code'),
 						image: 'message_boards/code.png',
 						onClick: function(event) {
 							instance.insertTag('code');
-						}
+						},
+						text: Liferay.Language.get('code')
 					},
 
 					emoticons: {
-						text: Liferay.Language.get('emoticons'),
-						image: 'emoticons/smile.gif'
+						image: 'emoticons/smile.gif',
+						text: Liferay.Language.get('emoticons')
 					}
 				};
 
@@ -344,12 +344,12 @@ AUI().add(
 
 				var emoticonOverlay = new A.ContextOverlay(
 					{
-						trigger: emoticonButton.item(0),
-						contentBox: instance._emoticons.item(0),
-						hideDelay: 500,
 						align: {
 							 points: ['tr', 'br']
-						}
+						},
+						contentBox: instance._emoticons.item(0),
+						hideDelay: 500,
+						trigger: emoticonButton.item(0)
 					}
 				);
 

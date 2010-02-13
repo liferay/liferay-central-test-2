@@ -573,8 +573,8 @@ Liferay.Util = {
 								if (!clicked) {
 									popup = new A.Dialog(
 										{
-											title: Liferay.Language.get('editor'),
 											height: 640,
+											title: Liferay.Language.get('editor'),
 											width: 680
 										}
 									).render();
@@ -739,8 +739,8 @@ Liferay.Util = {
 							if (!event.initial) {
 								Liferay.Util.savePortletTitle(
 									{
-										plid: plid,
 										doAsUserId: doAsUserId,
+										plid: plid,
 										portletId: portletId,
 										title: event.newVal
 									}
@@ -937,8 +937,8 @@ Liferay.Util = {
 				A.mix(
 					params,
 					{
-						plid: 0,
 						doAsUserId: 0,
+						plid: 0,
 						portletId: 0,
 						title: '',
 						url: themeDisplay.getPathMain() + '/portlet_configuration/update_title'
@@ -950,8 +950,8 @@ Liferay.Util = {
 					{
 						data: {
 							doAsUserId: params.doAsUserId,
-							portletId: params.portletId,
 							p_l_id: params.plid,
+							portletId: params.portletId,
 							title: params.title
 						},
 						method: 'POST'
