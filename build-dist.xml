@@ -274,9 +274,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 	</target>
 
 	<target name="build-dist-jetty">
-		<delete dir="${app.server.jetty.dir}" />
-
-		<unzip src="${app.server.parent.dir}/jetty-6.1.14.zip" dest="${app.server.parent.dir}" />
+		<antcall target="unzip-jetty" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jetty</echo>
 
@@ -1066,6 +1064,20 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		</unzip>
 
 		<move file="${app.server.parent.dir}/jboss-5.1.0/server/web" tofile="${app.server.parent.dir}/jboss-5.1.0/server/default" />
+	</target>
+
+	<target name="unzip-jetty">
+		<delete dir="${app.server.jetty.dir}" />
+
+		<unzip src="${app.server.parent.dir}/jetty-6.1.22.zip" dest="${app.server.parent.dir}">
+			<patternset
+				excludes="jetty-6.1.22/bin/**,jetty-6.1.22/contexts/**,jetty-6.1.22/contrib/**,jetty-6.1.22/distribution/**,jetty-6.1.22/examples/**,jetty-6.1.22/extras/**,jetty-6.1.22/javadoc/**,jetty-6.1.22/jxr/**,jetty-6.1.22/modules/**,jetty-6.1.22/patches/**,jetty-6.1.22/patches/**,jetty-6.1.22/project-website/**,jetty-6.1.22/webapps/**"
+			/>
+		</unzip>
+
+		<mkdir dir="${app.server.parent.dir}/jetty-6.1.22/bin" />
+		<mkdir dir="${app.server.parent.dir}/jetty-6.1.22/contexts" />
+		<mkdir dir="${app.server.parent.dir}/jetty-6.1.22/webapps" />
 	</target>
 
 	<target name="unzip-tomcat">

@@ -330,7 +330,7 @@
 	</library>
 	<library>
 		<file-name>development/jetty.jar</file-name>
-		<version>6.1.14</version>
+		<version>6.1.22</version>
 		<project-name>Jetty</project-name>
 		<project-url>http://www.mortbay.org/jetty</project-url>
 		<licenses>
@@ -341,7 +341,7 @@
 	</library>
 	<library>
 		<file-name>development/jetty-util.jar</file-name>
-		<version>6.1.14</version>
+		<version>6.1.22</version>
 		<project-name>Jetty</project-name>
 		<project-url>http://www.mortbay.org/jetty</project-url>
 		<licenses>

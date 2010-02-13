@@ -372,6 +372,51 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.j
 		<if>
 			<equals arg1="${app.server.type}" arg2="jetty" />
 			<then>
+				<if>
+					<not>
+						<available file="${app.server.bin.dir}/run.bat" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/jetty/bin/run.bat"
+							tofile="${app.server.bin.dir}/run.bat"
+						/>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<available file="${app.server.bin.dir}/run.sh" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/jetty/bin/run.sh"
+							tofile="${app.server.bin.dir}/run.sh"
+						/>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<available file="${app.server.dir}/etc/start.config" />
+					</not>
+					<then>
+						<unjar src="${app.server.dir}/start.jar" dest="${app.server.dir}">
+							<patternset>
+								<include name="**/start.config" />
+							</patternset>
+							<mapper
+								type="glob"
+								from="org/mortbay/start/*"
+								to="etc/*"
+							/>
+						</unjar>
+
+						<echo file="${app.server.dir}/etc/start.config" append="true">
+$(jetty.home)/lib/liferay/*</echo>
+					</then>
+				</if>
+
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/development"
@@ -426,7 +471,6 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.j
 						<copy
 							file="tools/servers/tomcat/bin/setenv.bat"
 							tofile="${app.server.bin.dir}/setenv.bat"
-							overwrite="yes"
 						>
 							<filterset>
 								<filter token="java.version" value="${java.version}" />
@@ -443,7 +487,6 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.j
 						<copy
 							file="tools/servers/tomcat/bin/setenv.sh"
 							tofile="${app.server.bin.dir}/setenv.sh"
-							overwrite="yes"
 						/>
 					</then>
 				</if>
