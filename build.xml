@@ -520,11 +520,6 @@ $(jetty.home)/lib/liferay/*</echo>
 					</then>
 				</if>
 
-				<copy
-					file="tools/servers/tomcat/conf/jaas.config"
-					tofile="${app.server.dir}/conf/jaas.config"
-				/>
-
 				<replace file="${app.server.dir}/conf/server.xml">
 					<replacetoken><![CDATA[redirectPort="8443" />]]></replacetoken>
 					<replacevalue><![CDATA[redirectPort="8443" URIEncoding="UTF-8" />]]></replacevalue>

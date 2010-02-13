@@ -2,12 +2,12 @@
 
 	<!-- JAAS -->
 
-	<Realm
+	<!--<Realm
 		className="org.apache.catalina.realm.JAASRealm"
 		appName="PortalRealm"
 		userClassNames="com.liferay.portal.kernel.security.jaas.PortalPrincipal"
 		roleClassNames="com.liferay.portal.kernel.security.jaas.PortalRole"
-	/>
+	/>-->
 
 	<!--
 	Uncomment the following to disable persistent sessions across reboots.
