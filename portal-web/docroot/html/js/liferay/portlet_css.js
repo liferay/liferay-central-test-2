@@ -31,18 +31,20 @@ AUI().add(
 						}
 
 						if (!instance._currentPopup) {
+							var viewportRegion = A.getBody().get('viewportRegion');
+
 							instance._currentPopup = new A.Dialog(
 								{
-									title: Liferay.Language.get('look-and-feel'),
-									width: 820,
-									xy: [100, 100],
 									on: {
 										close: function() {
 											if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
 												window.location.reload(true);
 											}
 										}
-									}
+									},
+									title: Liferay.Language.get('look-and-feel'),
+									width: 820,
+									xy: [viewportRegion.left + 20, viewportRegion.top + 20]
 								}
 							).render();
 
