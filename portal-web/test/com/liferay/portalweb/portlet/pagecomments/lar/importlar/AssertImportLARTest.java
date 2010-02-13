@@ -20,31 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.pagecomments;
+package com.liferay.portalweb.portlet.pagecomments.lar.importlar;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.pagecomments.comment.CommentTests;
-import com.liferay.portalweb.portlet.pagecomments.lar.LARTests;
-import com.liferay.portalweb.portlet.pagecomments.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PageCommentsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PageCommentsTests extends BaseTests {
+public class AssertImportLARTest extends BaseTestCase {
+	public void testAssertImportLAR() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Page Comments Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Page Comments Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"This is a edited test page comment!"),
+			selenium.getText("//td[2]/div[1]"));
+		assertEquals(RuntimeVariables.replace("This is a test page comment 2!"),
+			selenium.getText("//tr[5]/td[2]/div[1]"));
 	}
-
 }

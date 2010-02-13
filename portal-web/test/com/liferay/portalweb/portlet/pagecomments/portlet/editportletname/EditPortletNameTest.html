@@ -1,0 +1,129 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EditPortletNameTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">EditPortletNameTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Page Comments Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Page Comments Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@class='portlet-topper']/span/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//span/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//span/input</td>
+	<td>Tést Name</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@class='aui-icon-circle-check aui-icon']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//span[@class='aui-icon-circle-check aui-icon']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Page Comments Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Page Comments Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='portlet-topper']/span</td>
+	<td>Tést Name</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Page Comments Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Page Comments Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@class='portlet-topper']/span/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//span/input</td>
+	<td>Page Comments</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[@class='aui-icon-circle-check aui-icon']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//span[@class='aui-icon-circle-check aui-icon']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Page Comments Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Page Comments Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='portlet-topper']/span</td>
+	<td>Page Comments</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

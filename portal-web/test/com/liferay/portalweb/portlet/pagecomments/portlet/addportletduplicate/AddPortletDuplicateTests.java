@@ -20,29 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.pagecomments;
+package com.liferay.portalweb.portlet.pagecomments.portlet.addportletduplicate;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.pagecomments.comment.CommentTests;
-import com.liferay.portalweb.portlet.pagecomments.lar.LARTests;
-import com.liferay.portalweb.portlet.pagecomments.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="PageCommentsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletDuplicateTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PageCommentsTests extends BaseTests {
+public class AddPortletDuplicateTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPortletDuplicateTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
