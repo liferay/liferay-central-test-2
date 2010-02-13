@@ -472,7 +472,8 @@ public class ServicePreAction extends Action {
 				}
 			}
 		}
-		else {
+
+		if (layout == null) {
 
 			// Check the guest community
 
