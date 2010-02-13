@@ -20,33 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.imagegallery;
+package com.liferay.portalweb.portlet.imagegallery.image.viewfolderimagerecentimages;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.imagegallery.folder.FolderTests;
-import com.liferay.portalweb.portlet.imagegallery.image.ImageTests;
-import com.liferay.portalweb.portlet.imagegallery.lar.LARTests;
-import com.liferay.portalweb.portlet.imagegallery.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ImageGalleryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewFolderImageRecentImagesTest.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ImageGalleryTests extends BaseTests {
+public class ViewFolderImageRecentImagesTest extends BaseTestCase {
+	public void testViewFolderImageRecentImages() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(ImageTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Image Gallery Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Recent Images", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Test1 Image1 - This is Test1 Image1.']"));
+		assertEquals(RuntimeVariables.replace("Test1 Image1"),
+			selenium.getText("//span[@class='image-title']"));
 	}
-
 }

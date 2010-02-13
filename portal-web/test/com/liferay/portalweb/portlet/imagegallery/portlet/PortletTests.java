@@ -20,31 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.imagegallery;
+package com.liferay.portalweb.portlet.imagegallery.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.imagegallery.folder.FolderTests;
-import com.liferay.portalweb.portlet.imagegallery.image.ImageTests;
-import com.liferay.portalweb.portlet.imagegallery.lar.LARTests;
-import com.liferay.portalweb.portlet.imagegallery.portlet.PortletTests;
+import com.liferay.portalweb.portlet.imagegallery.portlet.addportlet.AddPortletTests;
+import com.liferay.portalweb.portlet.imagegallery.portlet.addportletduplicate.AddPortletDuplicateTests;
+import com.liferay.portalweb.portlet.imagegallery.portlet.removeportlet.RemovePortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="ImageGalleryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ImageGalleryTests extends BaseTests {
+public class PortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(ImageTests.suite());
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(AddPortletTests.suite());
+		testSuite.addTest(AddPortletDuplicateTests.suite());
+		testSuite.addTest(RemovePortletTests.suite());
 
 		return testSuite;
 	}
