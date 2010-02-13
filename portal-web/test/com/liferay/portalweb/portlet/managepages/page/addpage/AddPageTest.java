@@ -20,40 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.managepages;
+package com.liferay.portalweb.portlet.managepages.page.addpage;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddChildPagesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddChildPagesTest extends BaseTestCase {
-	public void testAddChildPages() throws Exception {
+public class AddPageTest extends BaseTestCase {
+	public void testAddPage() throws Exception {
 		selenium.open("/web/guest/home/");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Manage Pages Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Manage Pages Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,8 +51,8 @@ public class AddChildPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//li[@class='first manage-page']/a",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//li[@class='first manage-page']/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -82,7 +61,7 @@ public class AddChildPagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Children")) {
+				if (selenium.isVisible("link=Guest")) {
 					break;
 				}
 			}
@@ -92,9 +71,8 @@ public class AddChildPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Children", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Guest", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -102,7 +80,7 @@ public class AddChildPagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_88_name_en_US")) {
+				if (selenium.isVisible("//ul[@class='aui-tree-container']")) {
 					break;
 				}
 			}
@@ -111,16 +89,6 @@ public class AddChildPagesTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("Child Test Page"));
-		selenium.clickAt("_88_inheritFromParentLayoutIdCheckbox",
-			RuntimeVariables.replace(""));
-		selenium.clickAt("_88_hiddenCheckbox", RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -139,21 +107,33 @@ public class AddChildPagesTest extends BaseTestCase {
 		}
 
 		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("Child Test Page 2"));
-		selenium.clickAt("_88_hiddenCheckbox", RuntimeVariables.replace(""));
-		selenium.clickAt("_88_inheritFromParentLayoutIdCheckbox",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Manage Pages Test Page"));
 		selenium.clickAt("//input[@value='Add Page']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Display Order", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_88_layoutIdsBox",
-			RuntimeVariables.replace("label=Child Test Page"));
-		assertTrue(selenium.isTextPresent("Child Test Page"));
-		assertTrue(selenium.isTextPresent("Child Test Page 2"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Manage Pages Test Page"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//ul[@class='aui-tree-container']/li[2]/div/div[3]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Manage Pages Test Page"),
+			selenium.getText(
+				"//ul[@class='aui-tree-container']/li[2]/div/div[3]/a"));
 	}
 }

@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>DisplayOrderTest</title>
+<title>SetDisplayOrderTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">DisplayOrderTest</td></tr>
+<tr><td rowspan="1" colspan="3">SetDisplayOrderTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -24,9 +24,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[2]/ul/li[2]/ul/li[1]/a</td>
+	<td>Child1 Test1 Page1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/ul/li[2]/ul/li[2]/a</td>
+	<td>Child2 Test2 Page2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/ul/li[2]/ul/li[3]/a</td>
+	<td>Child3 Test3 Page3</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -34,18 +44,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
+	<td>clickAndWait</td>
 	<td>//li[@class='first manage-page']/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>link=Children</td>
+	<td>link=Guest</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Children</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//ul[@class='aui-tree-container']</td>
 	<td></td>
 </tr>
 <tr>
@@ -54,18 +69,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>//ul[@class='aui-tree-container']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>_88_layoutIdsBox</td>
-	<td>label=Child Test Page 2</td>
+	<td>label=Child2 Test2 Page2</td>
 </tr>
 <tr>
 	<td>clickAt</td>
 	<td>//td[2]/a[1]/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//a[3]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -79,14 +94,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>Child Test Page 2</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Return to Full Page</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[2]/ul/li[2]/ul/li[1]/a</td>
+	<td>Child2 Test2 Page2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/ul/li[2]/ul/li[2]/a</td>
+	<td>Child1 Test1 Page1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/ul/li[2]/ul/li[3]/a</td>
+	<td>Child3 Test3 Page3</td>
 </tr>
 
 </tbody></table>

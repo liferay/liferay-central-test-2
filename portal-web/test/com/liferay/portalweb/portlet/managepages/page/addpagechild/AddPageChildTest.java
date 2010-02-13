@@ -20,20 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.managepages;
+package com.liferay.portalweb.portlet.managepages.page.addpagechild;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPageChildTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
+public class AddPageChildTest extends BaseTestCase {
+	public void testAddPageChild() throws Exception {
 		selenium.open("/web/guest/home/");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -41,8 +40,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//li[@class='first manage-page']/a")) {
+				if (selenium.isElementPresent("link=Manage Pages Test Page")) {
 					break;
 				}
 			}
@@ -52,38 +50,54 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//li[@class='first manage-page']/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@class='aui-tree-label aui-helper-unselectable']/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//div[@class='aui-tree-label aui-helper-unselectable']/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("Manage Pages Test Page"));
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Manage Pages Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//li[@class='first manage-page']/a"));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Children", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//ul[@class='aui-tree-container']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_88_name_en_US")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_88_name_en_US",
+			RuntimeVariables.replace("Child Test Page"));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Child Test Page"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

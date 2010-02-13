@@ -20,32 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.managepages;
+package com.liferay.portalweb.portlet.managepages.page;
 
-import com.liferay.portalweb.portal.BaseTestCase;
-import com.liferay.portalweb.portal.util.RuntimeVariables;
+import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portlet.managepages.page.addpage.AddPageTests;
+import com.liferay.portalweb.portlet.managepages.page.addpagechild.AddPageChildTests;
+import com.liferay.portalweb.portlet.managepages.page.addpagechildmultiple.AddPageChildMultipleTests;
+import com.liferay.portalweb.portlet.managepages.page.addpagemultiple.AddPageMultipleTests;
+import com.liferay.portalweb.portlet.managepages.page.setdisplayorder.SetDisplayOrderTests;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
- * <a href="DeletePageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="PageTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DeletePageTest extends BaseTestCase {
-	public void testDeletePage() throws Exception {
-		selenium.clickAt("//div[2]/ul/li[1]/a", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//li[2]/ul/li[3]/a/span", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Page", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+public class PageTests extends BaseTests {
+
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTest(AddPageTests.suite());
+		testSuite.addTest(AddPageChildTests.suite());
+		testSuite.addTest(AddPageChildMultipleTests.suite());
+		testSuite.addTest(AddPageMultipleTests.suite());
+		testSuite.addTest(SetDisplayOrderTests.suite());
+
+		return testSuite;
 	}
+
 }

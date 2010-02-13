@@ -20,25 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.managepages;
+package com.liferay.portalweb.portlet.managepages.page.addpagechildmultiple;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.managepages.page.PageTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="ManagePagesTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPageChildMultipleTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ManagePagesTests extends BaseTests {
+public class AddPageChildMultipleTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PageTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPageChild1Test.class);
+		testSuite.addTestSuite(AddPageChild2Test.class);
+		testSuite.addTestSuite(AddPageChild3Test.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

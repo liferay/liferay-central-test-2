@@ -14,33 +14,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//li[@class='first manage-page']/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
+	<td>clickAndWait</td>
 	<td>//li[@class='first manage-page']/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@class='aui-tree-label aui-helper-unselectable']/a</td>
+	<td>waitForVisible</td>
+	<td>link=Guest</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[@class='aui-tree-label aui-helper-unselectable']/a</td>
+	<td>link=Guest</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>waitForVisible</td>
+	<td>//ul[@class='aui-tree-container']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_88_name_en_US</td>
 	<td></td>
 </tr>
 <tr>
@@ -54,9 +54,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
+	<td>assertElementPresent</td>
 	<td>link=Manage Pages Test Page</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//ul[@class='aui-tree-container']/li[2]/div/div[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//ul[@class='aui-tree-container']/li[2]/div/div[3]/a</td>
+	<td>Manage Pages Test Page</td>
 </tr>
 
 </tbody></table>
