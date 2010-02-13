@@ -20,27 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.recentbloggers;
+package com.liferay.portalweb.portlet.recentbloggers.entry.viewusernameandimage;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.recentbloggers.entry.EntryTests;
-import com.liferay.portalweb.portlet.recentbloggers.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="RecentBloggersTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewUserNameAndImageTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class RecentBloggersTests extends BaseTests {
+public class ViewUserNameAndImageTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageBlogsTest.class);
+		testSuite.addTestSuite(AddPortletBlogsTest.class);
+		testSuite.addTestSuite(AddPageRBTest.class);
+		testSuite.addTestSuite(AddPortletRBTest.class);
+		testSuite.addTestSuite(AddEntryTest.class);
+		testSuite.addTestSuite(
+			ConfigurePortletDisplayStyleUserNameAndImageTest.class);
+		testSuite.addTestSuite(ViewUserNameAndImageTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

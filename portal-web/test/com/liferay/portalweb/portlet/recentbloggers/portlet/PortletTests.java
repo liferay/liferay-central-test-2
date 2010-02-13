@@ -20,27 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.recentbloggers;
+package com.liferay.portalweb.portlet.recentbloggers.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.recentbloggers.entry.EntryTests;
-import com.liferay.portalweb.portlet.recentbloggers.portlet.PortletTests;
+import com.liferay.portalweb.portlet.recentbloggers.portlet.addportlet.AddPortletTests;
+import com.liferay.portalweb.portlet.recentbloggers.portlet.addportletduplicate.AddPortletDuplicateTests;
+import com.liferay.portalweb.portlet.recentbloggers.portlet.configureportletdisplaystyleusername.ConfigurePortletDisplayStyleUserNameTests;
+import com.liferay.portalweb.portlet.recentbloggers.portlet.configureportletdisplaystyleusernameandimage.ConfigurePortletDisplayStyleUserNameAndImageTests;
+import com.liferay.portalweb.portlet.recentbloggers.portlet.removeportlet.RemovePortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="RecentBloggersTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class RecentBloggersTests extends BaseTests {
+public class PortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(AddPortletTests.suite());
+		testSuite.addTest(AddPortletDuplicateTests.suite());
+		testSuite.addTest(ConfigurePortletDisplayStyleUserNameTests.suite());
+		testSuite.addTest(
+			ConfigurePortletDisplayStyleUserNameAndImageTests.suite());
+		testSuite.addTest(RemovePortletTests.suite());
 
 		return testSuite;
 	}
