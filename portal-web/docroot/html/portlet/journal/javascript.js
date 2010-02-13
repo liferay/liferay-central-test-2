@@ -284,10 +284,7 @@ AUI().add(
 								0,
 								instance,
 								function() {
-									try {
-										fieldLabel.focus();
-									}
-									catch(e) {}
+									Liferay.Util.focusFormField(fieldLabel);
 								}
 							);
 						}
