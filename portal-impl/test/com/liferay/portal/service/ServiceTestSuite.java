@@ -38,15 +38,13 @@ import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.webdav.WebDAVLitmusBasicTest;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
 import com.liferay.portlet.bookmarks.util.BookmarksIndexer;
@@ -63,6 +61,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -180,6 +179,8 @@ public class ServiceTestSuite extends TestSuite {
 		testSuite.addTestSuite(MBMessageServiceTest.class);
 
 		testSuite.addTestSuite(SocialRelationLocalServiceTest.class);
+
+		testSuite.addTest(new JUnit4TestAdapter(WebDAVLitmusBasicTest.class));
 
 		return testSuite;
 	}

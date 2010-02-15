@@ -447,6 +447,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		catch (DuplicateFolderNameException dfne) {
 			return new Status(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 		}
+		catch (DuplicateFileException dfe) {
+			return new Status(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+		}
 		catch (NoSuchFolderException nsfe) {
 			return new Status(HttpServletResponse.SC_CONFLICT);
 		}
@@ -668,6 +671,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 		catch (PrincipalException pe) {
 			return HttpServletResponse.SC_FORBIDDEN;
+		}
+		catch (NoSuchFolderException nsfe) {
+			return HttpServletResponse.SC_CONFLICT;
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {

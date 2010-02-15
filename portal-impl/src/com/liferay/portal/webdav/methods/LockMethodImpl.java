@@ -22,6 +22,7 @@
 
 package com.liferay.portal.webdav.methods;
 
+import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -142,13 +143,22 @@ public class LockMethodImpl implements Method {
 			lock = (Lock)status.getObject();
 		}
 		else {
+			try {
+				// Refresh existing lock
 
-			// Refresh existing lock
+				lock = storage.refreshResourceLock(
+					webDavRequest, lockUuid, timeout);
 
-			lock = storage.refreshResourceLock(
-				webDavRequest, lockUuid, timeout);
-
-			status = new Status(HttpServletResponse.SC_OK);
+				status = new Status(HttpServletResponse.SC_OK);
+			}
+			catch (WebDAVException wde) {
+				if (wde.getCause() instanceof NoSuchLockException) {
+					return HttpServletResponse.SC_PRECONDITION_FAILED;
+				}
+				else {
+					throw wde;
+				}
+			}
 		}
 
 		// Return lock details

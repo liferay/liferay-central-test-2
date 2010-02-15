@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -99,10 +100,19 @@ public class WebDAVServlet extends HttpServlet {
 
 			// Process the method
 
-			WebDAVRequest webDavRequest = new WebDAVRequestImpl(
-				storage, request, response, userAgent, permissionChecker);
+			try {
+				WebDAVRequest webDavRequest = new WebDAVRequestImpl(
+					storage, request, response, userAgent, permissionChecker);
 
-			status = method.process(webDavRequest);
+				status = method.process(webDavRequest);
+			}
+			catch (WebDAVException wde) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(wde, wde);
+				}
+
+				status = HttpServletResponse.SC_PRECONDITION_FAILED;
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -111,9 +121,16 @@ public class WebDAVServlet extends HttpServlet {
 			response.setStatus(status);
 
 			if (_log.isInfoEnabled()) {
+				String xLitmus =
+					GetterUtil.getString(request.getHeader("X-Litmus"));
+
+				if (Validator.isNotNull(xLitmus)) {
+					xLitmus += " ";
+				}
+
 				_log.info(
-					request.getMethod() + " " + request.getRequestURI() + " " +
-						status);
+					xLitmus + request.getMethod() + " " +
+						request.getRequestURI() + " " + status);
 			}
 		}
 	}
