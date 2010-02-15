@@ -796,6 +796,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/spring-test.jar</file-name>
+		<version>3.0.0</version>
+		<project-name>Spring</project-name>
+		<project-url>http://www.springframework.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/tomcat-coyote.jar</file-name>
 		<version>6.0.24</version>
 		<project-name>Tomcat</project-name>
