@@ -46,7 +46,7 @@ import org.junit.Test;
 public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 
 	@Test
-	public void testOptions() {
+	public void test2Options() {
 		Tuple tuple = service(Method.OPTIONS, StringPool.BLANK, null, null);
 
 		assertEquals(HttpServletResponse.SC_OK, getStatusCode(tuple));
@@ -63,17 +63,17 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 	}
 
 	@Test
-	public void testPutGet() {
+	public void test3PutGet() {
 		_putGet("res");
 	}
 
 	@Test
-	public void testPutGetUTF8() {
+	public void test4PutGetUTF8() {
 		_putGet("res-\u20AC");
 	}
 
 	@Test
-	public void testPutNoParent() {
+	public void test5PutNoParent() {
 		Tuple tuple = service(
 			Method.MKCOL, "409me/noparent", null, null);
 
@@ -86,7 +86,7 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 	}
 
 	@Test
-	public void testMkcolOverPlain() {
+	public void test6MkcolOverPlain() {
 		Tuple tuple = service(
 			Method.MKCOL, "res-\u20AC", null, null);
 
@@ -95,7 +95,7 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 	}
 
 	@Test
-	public void testDelete() {
+	public void test7Delete() {
 		Tuple tuple = service(Method.DELETE, "res-\u20AC", null, null);
 
 		assertEquals(
@@ -103,7 +103,7 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 	}
 
 	@Test
-	public void testDeleteNull() {
+	public void test8DeleteNull() {
 		Tuple tuple = service(Method.DELETE, "404me", null, null);
 
 		assertEquals(
@@ -111,7 +111,7 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 	}
 
 	@Test
-	public void testDeleteFragment() {
+	public void test9DeleteFragment() {
 		Tuple tuple = service(Method.MKCOL, "frag", null, null);
 
 		assertEquals(
@@ -129,7 +129,7 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 	}
 
 	@Test
-	public void testMkcol() {
+	public void test10Mkcol() {
 		Tuple tuple = service(Method.MKCOL, "col", null, null);
 
 		assertEquals(
@@ -137,7 +137,7 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 	}
 
 	@Test
-	public void testMkcolAgain() {
+	public void test11MkcolAgain() {
 		Tuple tuple = service(Method.MKCOL, "col", null, null);
 
 		assertEquals(
@@ -145,7 +145,7 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 	}
 
 	@Test
-	public void testDeleteColl() {
+	public void test12DeleteColl() {
 		Tuple tuple = service(Method.DELETE, "col", null, null);
 
 		assertEquals(
@@ -153,7 +153,7 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 	}
 
 	@Test
-	public void testMkcolNoParent() {
+	public void test13MkcolNoParent() {
 		Tuple tuple = service(Method.MKCOL, "409me/col", null, null);
 
 		assertEquals(
@@ -161,7 +161,7 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTest {
 	}
 
 	@Test
-	public void testMkcolWithBody() {
+	public void test14MkcolWithBody() {
 		Map<String, String> headers = new HashMap<String, String>();
 
 		headers.put(HttpHeaders.CONTENT_TYPE, "xyz-foo/bar-512");
