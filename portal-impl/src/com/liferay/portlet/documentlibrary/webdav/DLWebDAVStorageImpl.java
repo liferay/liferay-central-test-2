@@ -198,10 +198,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			return status;
 		}
-		catch (DuplicateFolderNameException dfne) {
+		catch (DuplicateFileException dfe) {
 			return HttpServletResponse.SC_PRECONDITION_FAILED;
 		}
-		catch (DuplicateFileException dfe) {
+		catch (DuplicateFolderNameException dfne) {
 			return HttpServletResponse.SC_PRECONDITION_FAILED;
 		}
 		catch (LockException le) {

@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
-import com.liferay.portal.service.BaseServiceJUnit4TestCase;
 import com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl;
 
 import java.util.HashMap;
@@ -35,69 +34,78 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import junit.framework.TestCase;
 
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 /**
- * <a href="BaseWebDAVTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseWebDAVTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  */
-public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
+public class BaseWebDAVTestCase extends TestCase {
 
-	public enum Method {
-		COPY, DELETE, GET, HEAD, LOCK, MKCOL, MOVE, OPTIONS, PROPFIND,
-		PROPPATCH, PUT, UNLOCK
-	}
-
-	@BeforeClass
-	public static void setUpOnce() {
-		Tuple tuple = service(
-			Method.MKCOL, "", null, null);
+	public void setUp() throws Exception {
+		Tuple tuple = service(Method.MKCOL, "", null, null);
 
 		if (getStatusCode(tuple) == HttpServletResponse.SC_METHOD_NOT_ALLOWED) {
 			service(Method.DELETE, "", null, null);
 
-			tuple = service(
-				Method.MKCOL, "", null, null);
+			tuple = service(Method.MKCOL, "", null, null);
 
 			assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
 		}
 	}
 
-	@AfterClass
-	public static void tearDownOnce() {
+	public void tearDown() throws Exception {
 		service(Method.DELETE, "", null, null);
 	}
 
-	protected static Map<String, String> getHeaders(Tuple tuple) {
+	protected String getDepth(int depth) {
+		String depthString = "infinity";
+
+		if (depth == 0) {
+			depthString = "0";
+		}
+
+		return depthString;
+	}
+
+	protected Map<String, String> getHeaders(Tuple tuple) {
 		return (Map<String, String>)tuple.getObject(2);
 	}
 
-	protected static int getStatusCode(Tuple tuple) {
-		return (Integer)tuple.getObject(0);
+	protected String getOverwrite(boolean overwrite) {
+		String overwriteString = "F";
+
+		if (overwrite) {
+			overwriteString = "T";
+		}
+
+		return overwriteString;
 	}
 
-	protected static byte[] getResponseBody(Tuple tuple) {
+	protected byte[] getResponseBody(Tuple tuple) {
 		return (byte[])tuple.getObject(1);
 	}
 
-	protected static String getResponseBodyString(Tuple tuple) {
+	protected String getResponseBodyString(Tuple tuple) {
 		byte[] data = getResponseBody(tuple);
 
 		return new String(data);
 	}
 
-	protected static String getUserAgent() {
+	protected int getStatusCode(Tuple tuple) {
+		return (Integer)tuple.getObject(0);
+	}
+
+	protected String getUserAgent() {
 		return _DEFAULT_USER_AGENT;
 	}
 
-	protected static Tuple service(
-			Method method, String path, Map<String, String> headers,
-			byte[] data) {
+	protected Tuple service(
+		Method method, String path, Map<String, String> headers, byte[] data) {
 
 		if (headers == null) {
 			headers = new HashMap<String, String>();
@@ -109,26 +117,27 @@ public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
 			throw new Exception();
 		}
 		catch (Exception e) {
-			StackTraceElement[] stackTrace = e.getStackTrace();
+			StackTraceElement[] stackTraceElements = e.getStackTrace();
 
-			for (StackTraceElement element : stackTrace) {
-				String methodName = element.getMethodName();
+			for (StackTraceElement stackTraceElement : stackTraceElements) {
+				String methodName = stackTraceElement.getMethodName();
 
-				if (methodName.equals("setUpOnce") ||
-					methodName.equals("tearDownOnce") ||
+				if (methodName.equals("setUp") ||
+					methodName.equals("tearDown") ||
 					methodName.startsWith("test")) {
 
 					String testName = StringUtil.extractLast(
-						element.getClassName(), StringPool.PERIOD);
+						stackTraceElement.getClassName(), StringPool.PERIOD);
 
 					testName = StringUtil.replace(
 						testName,
-						new String[] { "WebDAV", "Test" },
+						new String[] {"WebDAV", "Test"},
 						new String[] {"", ""});
 
 					headers.put(
 						"X-Litmus",
-						testName + ": (" + element.getMethodName() + ")");
+						testName + ": (" + stackTraceElement.getMethodName() +
+							")");
 
 					break;
 				}
@@ -167,12 +176,16 @@ public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
 			DLWebDAVStorageImpl storage = new DLWebDAVStorageImpl();
 
 			storage.setToken("document_library");
+
 			WebDAVUtil.addStorage(storage);
+
 			WebDAVServlet servlet = new WebDAVServlet();
+
 			servlet.service(request, response);
 
 			int statusCode = response.getStatus();
 			byte[] responseBody = response.getContentAsByteArray();
+
 			Map<String, String> responseHeaders = new HashMap<String, String>();
 
 			for (String name : response.getHeaderNames()) {
@@ -188,7 +201,7 @@ public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
 		return null;
 	}
 
-	protected static Tuple serviceCopyOrMove(
+	protected Tuple serviceCopyOrMove(
 		Method method, String path, Map<String, String> headers,
 		String destination, int depth, boolean overwrite) {
 
@@ -196,14 +209,14 @@ public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
 			headers = new HashMap<String, String>();
 		}
 
+		headers.put("Depth", getDepth(depth));
 		headers.put("Destination", _PATH_INFO_PREFACE + destination);
-		headers.put("Depth", _getDepth(depth));
-		headers.put("Overwrite", _getOverwrite(overwrite));
+		headers.put("Overwrite", getOverwrite(overwrite));
 
 		return service(method, path, headers, null);
 	}
 
-	protected static Tuple serviceLock(
+	protected Tuple serviceLock(
 		String path, Map<String, String> headers, byte[] data, int depth,
 		int timeout, boolean overwrite) {
 
@@ -211,14 +224,14 @@ public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
 			headers = new HashMap<String, String>();
 		}
 
+		headers.put("Depth", getDepth(depth));
+		headers.put("Overwrite", getOverwrite(overwrite));
 		headers.put("Timeout", "Second-" + timeout);
-		headers.put("Depth", _getDepth(depth));
-		headers.put("Overwrite", _getOverwrite(overwrite));
 
 		return service(Method.LOCK, path, headers, data);
 	}
 
-	protected static Tuple serviceUnlock(
+	protected Tuple serviceUnlock(
 		String path, Map<String, String> headers, String lockToken) {
 
 		if (headers == null) {
@@ -230,33 +243,13 @@ public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
 		return service(Method.UNLOCK, path, headers, null);
 	}
 
-	private static String _getDepth(int depth) {
-		String depthString = "infinity";
-
-		if (depth == 0) {
-			depthString = "0";
-		}
-
-		return depthString;
-	}
-
-	private static String _getOverwrite(boolean overwrite) {
-		String overwriteString = "F";
-
-		if (overwrite) {
-			overwriteString = "T";
-		}
-
-		return overwriteString;
-	}
+	private static String _CONTEXT_PATH = "/webdav";
 
 	private static String _DEFAULT_USER_AGENT = "Liferay-litmus";
 
-	private static String _CONTEXT_PATH = "/webdav";
-
-	private static String _SERVLET_PATH = "";
-
 	private static String _PATH_INFO_PREFACE =
 		"/liferay.com/guest/document_library/WebDAVTest/";
+
+	private static String _SERVLET_PATH = "";
 
 }

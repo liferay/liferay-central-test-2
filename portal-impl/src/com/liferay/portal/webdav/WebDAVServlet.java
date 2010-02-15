@@ -112,7 +112,7 @@ public class WebDAVServlet extends HttpServlet {
 
 					logger.setLevel(Level.toLevel(Level.INFO_INT));
 				}
-				
+
 				status = method.process(webDavRequest);
 			}
 			catch (WebDAVException wde) {
@@ -130,8 +130,8 @@ public class WebDAVServlet extends HttpServlet {
 			response.setStatus(status);
 
 			if (_log.isInfoEnabled()) {
-				String xLitmus =
-					GetterUtil.getString(request.getHeader("X-Litmus"));
+				String xLitmus = GetterUtil.getString(
+					request.getHeader("X-Litmus"));
 
 				if (Validator.isNotNull(xLitmus)) {
 					xLitmus += " ";
