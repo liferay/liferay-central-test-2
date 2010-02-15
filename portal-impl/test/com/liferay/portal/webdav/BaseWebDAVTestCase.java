@@ -33,8 +33,6 @@ import com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-
 import junit.framework.TestCase;
 
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -47,65 +45,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
  */
 public class BaseWebDAVTestCase extends TestCase {
 
-	public void setUp() throws Exception {
-		Tuple tuple = service(Method.MKCOL, "", null, null);
-
-		if (getStatusCode(tuple) == HttpServletResponse.SC_METHOD_NOT_ALLOWED) {
-			service(Method.DELETE, "", null, null);
-
-			tuple = service(Method.MKCOL, "", null, null);
-
-			assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-		}
-	}
-
-	public void tearDown() throws Exception {
-		service(Method.DELETE, "", null, null);
-	}
-
-	protected String getDepth(int depth) {
-		String depthString = "infinity";
-
-		if (depth == 0) {
-			depthString = "0";
-		}
-
-		return depthString;
-	}
-
-	protected Map<String, String> getHeaders(Tuple tuple) {
-		return (Map<String, String>)tuple.getObject(2);
-	}
-
-	protected String getOverwrite(boolean overwrite) {
-		String overwriteString = "F";
-
-		if (overwrite) {
-			overwriteString = "T";
-		}
-
-		return overwriteString;
-	}
-
-	protected byte[] getResponseBody(Tuple tuple) {
-		return (byte[])tuple.getObject(1);
-	}
-
-	protected String getResponseBodyString(Tuple tuple) {
-		byte[] data = getResponseBody(tuple);
-
-		return new String(data);
-	}
-
-	protected int getStatusCode(Tuple tuple) {
-		return (Integer)tuple.getObject(0);
-	}
-
-	protected String getUserAgent() {
-		return _DEFAULT_USER_AGENT;
-	}
-
-	protected Tuple service(
+	public Tuple service(
 		String method, String path, Map<String, String> headers, byte[] data) {
 
 		if (headers == null) {
@@ -202,7 +142,7 @@ public class BaseWebDAVTestCase extends TestCase {
 		return null;
 	}
 
-	protected Tuple serviceCopyOrMove(
+	public Tuple serviceCopyOrMove(
 		String method, String path, Map<String, String> headers,
 		String destination, int depth, boolean overwrite) {
 
@@ -217,7 +157,7 @@ public class BaseWebDAVTestCase extends TestCase {
 		return service(method, path, headers, null);
 	}
 
-	protected Tuple serviceLock(
+	public Tuple serviceLock(
 		String path, Map<String, String> headers, byte[] data, int depth,
 		int timeout, boolean overwrite) {
 
@@ -232,7 +172,7 @@ public class BaseWebDAVTestCase extends TestCase {
 		return service(Method.LOCK, path, headers, data);
 	}
 
-	protected Tuple serviceUnlock(
+	public Tuple serviceUnlock(
 		String path, Map<String, String> headers, String lockToken) {
 
 		if (headers == null) {
@@ -242,6 +182,48 @@ public class BaseWebDAVTestCase extends TestCase {
 		headers.put("Lock-Token", lockToken);
 
 		return service(Method.UNLOCK, path, headers, null);
+	}
+
+	protected String getDepth(int depth) {
+		String depthString = "infinity";
+
+		if (depth == 0) {
+			depthString = "0";
+		}
+
+		return depthString;
+	}
+
+	protected Map<String, String> getHeaders(Tuple tuple) {
+		return (Map<String, String>)tuple.getObject(2);
+	}
+
+	protected String getOverwrite(boolean overwrite) {
+		String overwriteString = "F";
+
+		if (overwrite) {
+			overwriteString = "T";
+		}
+
+		return overwriteString;
+	}
+
+	protected byte[] getResponseBody(Tuple tuple) {
+		return (byte[])tuple.getObject(1);
+	}
+
+	protected String getResponseBodyString(Tuple tuple) {
+		byte[] data = getResponseBody(tuple);
+
+		return new String(data);
+	}
+
+	protected int getStatusCode(Tuple tuple) {
+		return (Integer)tuple.getObject(0);
+	}
+
+	protected String getUserAgent() {
+		return _DEFAULT_USER_AGENT;
 	}
 
 	private static String _CONTEXT_PATH = "/webdav";

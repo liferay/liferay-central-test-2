@@ -44,6 +44,73 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 
+	public void test02Options() {
+		Tuple tuple = service(Method.OPTIONS, StringPool.BLANK, null, null);
+
+		assertEquals(HttpServletResponse.SC_OK, getStatusCode(tuple));
+
+		Map<String, String> headers = getHeaders(tuple);
+
+		String allowMethods = headers.get("Allow");
+
+		for (String method : Method.SUPPORTED_METHODS_ARRAY) {
+			assertTrue(
+				"Does not allow " + method, allowMethods.contains(method));
+		}
+	}
+
+	public void test03PutGet() {
+		putGet("res");
+	}
+
+	public void test04PutGetUTF8() {
+		putGet("res-\u20AC");
+	}
+
+	public void test05PutNoParent() {
+		Tuple tuple = service(Method.MKCOL, "409me/noparent", null, null);
+
+		assertEquals(HttpServletResponse.SC_CONFLICT, getStatusCode(tuple));
+
+		tuple = service(
+			Method.PUT, "409me/noparent.txt", null, _TEST_CONTENT.getBytes());
+
+		assertEquals(HttpServletResponse.SC_CONFLICT, getStatusCode(tuple));
+	}
+
+	public void test06MkcolOverPlain() {
+		Tuple tuple = service(Method.MKCOL, "res-\u20AC", null, null);
+
+		assertEquals(
+			HttpServletResponse.SC_METHOD_NOT_ALLOWED, getStatusCode(tuple));
+	}
+
+	public void test07Delete() {
+		Tuple tuple = service(Method.DELETE, "res-\u20AC", null, null);
+
+		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+	}
+
+	public void test08DeleteNull() {
+		Tuple tuple = service(Method.DELETE, "404me", null, null);
+
+		assertEquals(HttpServletResponse.SC_NOT_FOUND, getStatusCode(tuple));
+	}
+
+	public void test09DeleteFragment() {
+		Tuple tuple = service(Method.MKCOL, "frag", null, null);
+
+		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+
+		tuple = service(Method.DELETE, "frag/#ment", null, null);
+
+		assertEquals(HttpServletResponse.SC_NOT_FOUND, getStatusCode(tuple));
+
+		tuple = service(Method.DELETE, "frag", null, null);
+
+		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+	}
+
 	public void test10Mkcol() {
 		Tuple tuple = service(Method.MKCOL, "col", null, null);
 
@@ -80,73 +147,6 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 		assertEquals(
 			HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE,
 			getStatusCode(tuple));
-	}
-
-	public void test2Options() {
-		Tuple tuple = service(Method.OPTIONS, StringPool.BLANK, null, null);
-
-		assertEquals(HttpServletResponse.SC_OK, getStatusCode(tuple));
-
-		Map<String, String> headers = getHeaders(tuple);
-
-		String allowMethods = headers.get("Allow");
-
-		for (String method : Method.SUPPORTED_METHODS_ARRAY) {
-			assertTrue(
-				"Does not allow " + method, allowMethods.contains(method));
-		}
-	}
-
-	public void test3PutGet() {
-		putGet("res");
-	}
-
-	public void test4PutGetUTF8() {
-		putGet("res-\u20AC");
-	}
-
-	public void test5PutNoParent() {
-		Tuple tuple = service(Method.MKCOL, "409me/noparent", null, null);
-
-		assertEquals(HttpServletResponse.SC_CONFLICT, getStatusCode(tuple));
-
-		tuple = service(
-			Method.PUT, "409me/noparent.txt", null, _TEST_CONTENT.getBytes());
-
-		assertEquals(HttpServletResponse.SC_CONFLICT, getStatusCode(tuple));
-	}
-
-	public void test6MkcolOverPlain() {
-		Tuple tuple = service(Method.MKCOL, "res-\u20AC", null, null);
-
-		assertEquals(
-			HttpServletResponse.SC_METHOD_NOT_ALLOWED, getStatusCode(tuple));
-	}
-
-	public void test7Delete() {
-		Tuple tuple = service(Method.DELETE, "res-\u20AC", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
-	}
-
-	public void test8DeleteNull() {
-		Tuple tuple = service(Method.DELETE, "404me", null, null);
-
-		assertEquals(HttpServletResponse.SC_NOT_FOUND, getStatusCode(tuple));
-	}
-
-	public void test9DeleteFragment() {
-		Tuple tuple = service(Method.MKCOL, "frag", null, null);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = service(Method.DELETE, "frag/#ment", null, null);
-
-		assertEquals(HttpServletResponse.SC_NOT_FOUND, getStatusCode(tuple));
-
-		tuple = service(Method.DELETE, "frag", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
 	}
 
 	protected void putGet(String fileName) {

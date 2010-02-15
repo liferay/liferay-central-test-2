@@ -20,27 +20,51 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service;
+package com.liferay.portal.webdav;
 
-import com.liferay.portal.util.BaseTestCase;
+import com.liferay.portal.kernel.util.Tuple;
+import com.liferay.portal.service.ServiceTestUtil;
+import com.liferay.portal.webdav.methods.Method;
 
-import java.net.URL;
+import javax.servlet.http.HttpServletResponse;
+
+import junit.extensions.TestSetup;
+
+import junit.framework.Test;
 
 /**
- * <a href="BaseServiceTestCase.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebDAVTestSetup.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Alexander Chow
  */
-public class BaseServiceTestCase extends BaseTestCase {
+public class WebDAVTestSetup extends TestSetup {
 
-	public void setUp() throws Exception {
-		super.setUp();
+	public WebDAVTestSetup(Test test) {
+		super(test);
 
 		ServiceTestUtil.initPermissions();
 	}
 
-	protected URL getClassResource(String name) {
-		return getClass().getClassLoader().getResource(name);
+	public void setUp() {
+		Tuple tuple = _testCase.service(Method.MKCOL, "", null, null);
+
+		int statusCode = _testCase.getStatusCode(tuple);
+
+		if (statusCode == HttpServletResponse.SC_METHOD_NOT_ALLOWED) {
+			_testCase.service(Method.DELETE, "", null, null);
+
+			tuple = _testCase.service(Method.MKCOL, "", null, null);
+
+			statusCode = _testCase.getStatusCode(tuple);
+
+			assertEquals(HttpServletResponse.SC_CREATED, statusCode);
+		}
 	}
+
+	public void tearDown() {
+		_testCase.service(Method.DELETE, "", null, null);
+	}
+
+	private BaseWebDAVTestCase _testCase = new BaseWebDAVTestCase();
 
 }
