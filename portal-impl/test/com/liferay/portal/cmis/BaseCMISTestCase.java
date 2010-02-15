@@ -35,7 +35,7 @@ import org.apache.abdera.model.Workspace;
  *
  * @author Alexander Chow
  */
-public abstract class BaseCMISTest extends TestCase {
+public abstract class BaseCMISTestCase extends TestCase {
 
 	public void testService() throws Exception {
 		Service service = getService();

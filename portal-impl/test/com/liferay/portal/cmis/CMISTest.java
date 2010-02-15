@@ -39,7 +39,7 @@ import org.apache.abdera.model.Workspace;
  *
  * @author Alexander Chow
  */
-public class CMISTest extends BaseCMISTest {
+public class CMISTest extends BaseCMISTestCase {
 
 	public void testCRUD() throws Exception {
 		String rootChildrenUrl = null;

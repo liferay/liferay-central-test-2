@@ -40,7 +40,7 @@ import org.apache.abdera.parser.Parser;
  *
  * @author Alexander Chow
  */
-public class ParserTest extends BaseCMISTest {
+public class ParserTest extends BaseCMISTestCase {
 
 	public void setUp() throws Exception {
 		_abdera = Abdera.getInstance();
