@@ -80,8 +80,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			searchContext.setGroupId(groupId);
 			searchContext.setEnd(end);
 			searchContext.setKeywords(keywords);
-			searchContext.setStart(start);
 			searchContext.setScopeStrict(false);
+			searchContext.setStart(start);
 			searchContext.setUserId(userId);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
