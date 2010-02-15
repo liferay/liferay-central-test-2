@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
+import com.liferay.portal.webdav.methods.Method;
 import com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl;
 
 import java.util.HashMap;
@@ -105,7 +106,7 @@ public class BaseWebDAVTestCase extends TestCase {
 	}
 
 	protected Tuple service(
-		Method method, String path, Map<String, String> headers, byte[] data) {
+		String method, String path, Map<String, String> headers, byte[] data) {
 
 		if (headers == null) {
 			headers = new HashMap<String, String>();
@@ -148,7 +149,7 @@ public class BaseWebDAVTestCase extends TestCase {
 			_CONTEXT_PATH + _SERVLET_PATH + _PATH_INFO_PREFACE + path;
 
 		MockHttpServletRequest request = new MockHttpServletRequest(
-			method.toString(), requestURI);
+			method, requestURI);
 
 		MockHttpServletResponse response = new MockHttpServletResponse();
 
@@ -202,7 +203,7 @@ public class BaseWebDAVTestCase extends TestCase {
 	}
 
 	protected Tuple serviceCopyOrMove(
-		Method method, String path, Map<String, String> headers,
+		String method, String path, Map<String, String> headers,
 		String destination, int depth, boolean overwrite) {
 
 		if (headers == null) {

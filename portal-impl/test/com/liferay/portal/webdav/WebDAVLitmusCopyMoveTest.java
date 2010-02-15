@@ -23,6 +23,7 @@
 package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.Tuple;
+import com.liferay.portal.webdav.methods.Method;
 
 import javax.servlet.http.HttpServletResponse;
 

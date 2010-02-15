@@ -25,6 +25,7 @@ package com.liferay.portal.webdav;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
+import com.liferay.portal.webdav.methods.Method;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,10 +91,9 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 
 		String allowMethods = headers.get("Allow");
 
-		for (Method method : Method.values()) {
+		for (String method : Method.SUPPORTED_METHODS_ARRAY) {
 			assertTrue(
-				"Does not allow " + method,
-				allowMethods.contains(method.toString()));
+				"Does not allow " + method, allowMethods.contains(method));
 		}
 	}
 
