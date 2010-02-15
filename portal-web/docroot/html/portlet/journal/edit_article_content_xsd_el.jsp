@@ -66,10 +66,10 @@ if (Validator.isNull(elPredefinedValue)) {
 	elPredefinedValue = StringPool.BLANK;
 }
 
-StringBundler css = new StringBundler(2);
+String css = StringPool.BLANK;
 
 if (!elRepeatablePrototype) {
-	css.append(" repeated-field ");
+	css = " repeated-field ";
 }
 
 String parentStructureData = StringPool.BLANK;
@@ -77,7 +77,7 @@ String parentStructureData = StringPool.BLANK;
 if (Validator.isNotNull(elParentStructureId)) {
 	parentStructureData = "dataParentStructureId='".concat(elParentStructureId).concat("'");
 
-	css.append(" parent-structure-field ");
+	css = css.concat(" parent-structure-field ");
 }
 
 if (Validator.isNull(elContent) && Validator.isNotNull(elPredefinedValue)) {
@@ -87,7 +87,7 @@ if (Validator.isNull(elContent) && Validator.isNotNull(elPredefinedValue)) {
 Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL);
 %>
 
-<li class="structure-field <%= css.toString().trim() %>" <%= parentStructureData %> dataInstanceId='<%= elInstanceId %>' dataName='<%= elName %>' dataRepeatable='<%= elRepeatable %>' dataType='<%= elType %>' dataIndexType='<%= elIndexType %>' <%= metaData %>>
+<li class="structure-field <%= css.trim() %>" <%= parentStructureData %> dataInstanceId='<%= elInstanceId %>' dataName='<%= elName %>' dataRepeatable='<%= elRepeatable %>' dataType='<%= elType %>' dataIndexType='<%= elIndexType %>' <%= metaData %>>
 	<span class="journal-article-close"></span>
 
 	<span class="folder">
