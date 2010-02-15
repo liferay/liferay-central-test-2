@@ -241,6 +241,7 @@ public interface Http {
 	public enum Method {
 
 		DELETE, GET, POST, PUT
+
 	}
 
 	public class Options {
