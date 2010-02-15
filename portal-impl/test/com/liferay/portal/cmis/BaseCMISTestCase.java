@@ -31,7 +31,7 @@ import org.apache.abdera.model.Service;
 import org.apache.abdera.model.Workspace;
 
 /**
- * <a href="BaseCMISTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseCMISTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  */
