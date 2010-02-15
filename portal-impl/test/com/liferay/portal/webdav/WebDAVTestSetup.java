@@ -46,25 +46,25 @@ public class WebDAVTestSetup extends TestSetup {
 	}
 
 	public void setUp() {
-		Tuple tuple = _testCase.service(Method.MKCOL, "", null, null);
+		Tuple tuple = _baseWebDAVTestCase.service(Method.MKCOL, "", null, null);
 
-		int statusCode = _testCase.getStatusCode(tuple);
+		int statusCode = _baseWebDAVTestCase.getStatusCode(tuple);
 
 		if (statusCode == HttpServletResponse.SC_METHOD_NOT_ALLOWED) {
-			_testCase.service(Method.DELETE, "", null, null);
+			_baseWebDAVTestCase.service(Method.DELETE, "", null, null);
 
-			tuple = _testCase.service(Method.MKCOL, "", null, null);
+			tuple = _baseWebDAVTestCase.service(Method.MKCOL, "", null, null);
 
-			statusCode = _testCase.getStatusCode(tuple);
+			statusCode = _baseWebDAVTestCase.getStatusCode(tuple);
 
 			assertEquals(HttpServletResponse.SC_CREATED, statusCode);
 		}
 	}
 
 	public void tearDown() {
-		_testCase.service(Method.DELETE, "", null, null);
+		_baseWebDAVTestCase.service(Method.DELETE, "", null, null);
 	}
 
-	private BaseWebDAVTestCase _testCase = new BaseWebDAVTestCase();
+	private BaseWebDAVTestCase _baseWebDAVTestCase = new BaseWebDAVTestCase();
 
 }

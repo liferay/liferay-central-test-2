@@ -80,8 +80,8 @@ public class ServiceTestUtil {
 		PrincipalThreadLocal.setName(TestPropsValues.USER_ID);
 
 		try {
-			User user =
-				UserLocalServiceUtil.getUserById(TestPropsValues.USER_ID);
+			User user = UserLocalServiceUtil.getUserById(
+				TestPropsValues.USER_ID);
 
 			PermissionChecker permissionChecker =
 				PermissionCheckerFactoryUtil.create(user, true);
