@@ -175,9 +175,6 @@ public class OpenIdAction extends PortletAction {
 			actionRequest);
 		HttpSession session = request.getSession();
 
-		ActionResponseImpl actionResponseImpl =
-			(ActionResponseImpl)actionResponse;
-
 		ConsumerManager manager = OpenIdUtil.getConsumerManager();
 
 		ParameterList params = new ParameterList(
