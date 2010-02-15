@@ -91,6 +91,10 @@ public class SearchContext implements Serializable {
 		return _userId;
 	}
 
+	public boolean isScopeStrict() {
+		return _scopeStrict;
+	}
+
 	public void setAttribute(String name, Serializable value) {
 		_attributes.put(name, value);
 	}
@@ -135,6 +139,10 @@ public class SearchContext implements Serializable {
 		_ownerUserId = ownerUserId;
 	}
 
+	public void setScopeStrict(boolean scopeStrict) {
+		_scopeStrict = scopeStrict;
+	}
+
 	public void setSorts(Sort[] sorts) {
 		_sorts = sorts;
 	}
@@ -157,6 +165,7 @@ public class SearchContext implements Serializable {
 	private String _keywords;
 	private long[] _nodeIds;
 	private long _ownerUserId;
+	private boolean _scopeStrict = true;
 	private Sort[] _sorts;
 	private int _start = QueryUtil.ALL_POS;
 	private long _userId;

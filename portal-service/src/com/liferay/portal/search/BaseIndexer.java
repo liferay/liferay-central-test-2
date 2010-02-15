@@ -234,9 +234,11 @@ public abstract class BaseIndexer implements Indexer {
 
 		long parentGroupId = groupId;
 
-		if (group.isLayout()) {
+		if (group.isLayout() || searchContext.isScopeStrict()) {
 			contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
+		}
 
+		if (group.isLayout()) {
 			parentGroupId = group.getParentGroupId();
 		}
 
