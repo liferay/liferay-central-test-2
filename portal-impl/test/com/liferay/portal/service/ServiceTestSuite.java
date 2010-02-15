@@ -45,6 +45,7 @@ import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.webdav.WebDAVLitmusBasicTest;
+import com.liferay.portal.webdav.WebDAVLitmusCopyMoveTest;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
 import com.liferay.portlet.bookmarks.util.BookmarksIndexer;
@@ -181,6 +182,8 @@ public class ServiceTestSuite extends TestSuite {
 		testSuite.addTestSuite(SocialRelationLocalServiceTest.class);
 
 		testSuite.addTest(new JUnit4TestAdapter(WebDAVLitmusBasicTest.class));
+		testSuite.addTest(
+			new JUnit4TestAdapter(WebDAVLitmusCopyMoveTest.class));
 
 		return testSuite;
 	}

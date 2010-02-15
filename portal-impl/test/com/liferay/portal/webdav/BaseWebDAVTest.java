@@ -190,13 +190,14 @@ public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
 
 	protected static Tuple serviceCopyOrMove(
 		Method method, String path, Map<String, String> headers,
-		String destination, boolean overwrite) {
+		String destination, int depth, boolean overwrite) {
 
 		if (headers == null) {
 			headers = new HashMap<String, String>();
 		}
 
-		headers.put("Destination", destination);
+		headers.put("Destination", _PATH_INFO_PREFACE + destination);
+		headers.put("Depth", _getDepth(depth));
 		headers.put("Overwrite", _getOverwrite(overwrite));
 
 		return service(method, path, headers, null);
@@ -235,6 +236,7 @@ public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
 		if (depth == 0) {
 			depthString = "0";
 		}
+
 		return depthString;
 	}
 
@@ -244,6 +246,7 @@ public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
 		if (overwrite) {
 			overwriteString = "T";
 		}
+
 		return overwriteString;
 	}
 
@@ -254,6 +257,6 @@ public class BaseWebDAVTest extends BaseServiceJUnit4TestCase {
 	private static String _SERVLET_PATH = "";
 
 	private static String _PATH_INFO_PREFACE =
-		"/liferay.com/guest/document_library/webdav-test/";
+		"/liferay.com/guest/document_library/WebDAVTest/";
 
 }
