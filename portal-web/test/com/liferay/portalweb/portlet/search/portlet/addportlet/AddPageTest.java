@@ -20,19 +20,56 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.search;
+package com.liferay.portalweb.portlet.search.portlet.addportlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SearchTest extends BaseTestCase {
-	public void testSearch() throws Exception {
+public class AddPageTest extends BaseTestCase {
+	public void testAddPage() throws Exception {
 		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//a[@id='addPage']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//a[@id='addPage']", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("//input", RuntimeVariables.replace("Search Test Page"));
+		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,43 +89,5 @@ public class SearchTest extends BaseTestCase {
 
 		selenium.clickAt("link=Search Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_3_keywords")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_3_keywords", RuntimeVariables.replace("Test"));
-		selenium.clickAt("//input[@type='image']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Joe Bloggs")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent("link=Joe Bloggs"));
 	}
 }

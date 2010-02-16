@@ -20,27 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.search;
+package com.liferay.portalweb.portlet.search.user.searchuser;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.search.portlet.PortletTests;
-import com.liferay.portalweb.portlet.search.user.UserTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="SearchTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchUserTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SearchTests extends BaseTests {
+public class SearchUserTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(UserTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddUserTest.class);
+		testSuite.addTestSuite(SearchUserTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
