@@ -4,7 +4,7 @@ package ${packagePath}.model;
 	import ${packagePath}.service.persistence.${entity.name}PK;
 </#if>
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;

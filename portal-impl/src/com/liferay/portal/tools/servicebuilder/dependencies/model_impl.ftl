@@ -15,8 +15,8 @@ package ${packagePath}.model.impl;
 import ${packagePath}.model.${entity.name};
 import ${packagePath}.model.${entity.name}Soap;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;

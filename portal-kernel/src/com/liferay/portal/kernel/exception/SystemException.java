@@ -20,16 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal;
+package com.liferay.portal.kernel.exception;
 
 /**
  * <a href="SystemException.java.html"><b><i>View Source</i></b></a>
  *
- * @author	   Brian Wing Shun Chan
- * @deprecated {@link com.liferay.portal.kernel.exception.SystemException}
+ * @author Brian Wing Shun Chan
  */
-public class SystemException
-	extends com.liferay.portal.kernel.exception.SystemException {
+public class SystemException extends NestableException {
 
 	public SystemException() {
 		super();

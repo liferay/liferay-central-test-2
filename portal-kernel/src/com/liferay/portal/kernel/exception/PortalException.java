@@ -20,30 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal;
+package com.liferay.portal.kernel.exception;
 
 /**
- * <a href="SystemException.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalException.java.html"><b><i>View Source</i></b></a>
  *
- * @author	   Brian Wing Shun Chan
- * @deprecated {@link com.liferay.portal.kernel.exception.SystemException}
+ * @author Brian Wing Shun Chan
  */
-public class SystemException
-	extends com.liferay.portal.kernel.exception.SystemException {
+public class PortalException extends NestableException {
 
-	public SystemException() {
+	public PortalException() {
 		super();
 	}
 
-	public SystemException(String msg) {
+	public PortalException(String msg) {
 		super(msg);
 	}
 
-	public SystemException(String msg, Throwable cause) {
+	public PortalException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public SystemException(Throwable cause) {
+	public PortalException(Throwable cause) {
 		super(cause);
 	}
 

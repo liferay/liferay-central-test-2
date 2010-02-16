@@ -52,8 +52,6 @@
 
 <%@ page import="com.liferay.counter.service.CounterLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.NoSuchUserException" %>
-<%@ page import="com.liferay.portal.PortalException" %>
-<%@ page import="com.liferay.portal.SystemException" %>
 <%@ page import="com.liferay.portal.kernel.captcha.CaptchaTextException" %>
 <%@ page import="com.liferay.portal.kernel.bean.BeanParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.bean.BeanPropertiesUtil" %>
@@ -68,6 +66,8 @@
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchEntry" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.TextSearchEntry" %>
+<%@ page import="com.liferay.portal.kernel.exception.PortalException" %>
+<%@ page import="com.liferay.portal.kernel.exception.SystemException" %>
 <%@ page import="com.liferay.portal.kernel.io.unsync.UnsyncStringReader" %>
 <%@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 <%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %>

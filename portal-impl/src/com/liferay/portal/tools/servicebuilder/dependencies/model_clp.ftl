@@ -4,8 +4,8 @@ package ${packagePath}.model;
 	import ${packagePath}.service.persistence.${entity.name}PK;
 </#if>
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;

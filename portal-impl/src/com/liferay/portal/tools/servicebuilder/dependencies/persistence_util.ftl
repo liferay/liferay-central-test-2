@@ -2,10 +2,10 @@ package ${packagePath}.service.persistence;
 
 import ${packagePath}.model.${entity.name};
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.Date;
 import java.util.List;

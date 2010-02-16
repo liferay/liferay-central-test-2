@@ -474,6 +474,18 @@ public class SourceFormatter {
 				System.out.println("UTF-8: " + files[i]);
 			}
 
+			if (newContent.contains("com.liferay.portal.PortalException")) {
+				newContent = StringUtil.replace(
+					newContent, "com.liferay.portal.PortalException",
+					"com.liferay.portal.kernel.exception.PortalException");
+			}
+
+			if (newContent.contains("com.liferay.portal.SystemException")) {
+				newContent = StringUtil.replace(
+					newContent, "com.liferay.portal.SystemException",
+					"com.liferay.portal.kernel.exception.SystemException");
+			}
+
 			newContent = stripImports(newContent, packagePath, className);
 
 			if (newContent.indexOf(";\n/**") != -1) {

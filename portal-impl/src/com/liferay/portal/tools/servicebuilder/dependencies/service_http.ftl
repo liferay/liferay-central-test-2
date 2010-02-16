@@ -74,8 +74,8 @@ public class ${entity.name}ServiceHttp {
 			)
 			throws
 
-			<#if !method.exceptions?seq_contains("com.liferay.portal.SystemException")>
-				com.liferay.portal.SystemException
+			<#if !method.exceptions?seq_contains("com.liferay.portal.kernel.exception.SystemException")>
+				com.liferay.portal.kernel.exception.SystemException
 
 				<#if method.exceptions?size gt 0>
 					,
@@ -154,7 +154,7 @@ public class ${entity.name}ServiceHttp {
 							}
 						</#list>
 
-						throw new com.liferay.portal.SystemException(e);
+						throw new com.liferay.portal.kernel.exception.SystemException(e);
 					}
 
 					<#if returnTypeName != "void">
@@ -177,7 +177,7 @@ public class ${entity.name}ServiceHttp {
 						</#if>
 					</#if>
 				}
-				catch (com.liferay.portal.SystemException se) {
+				catch (com.liferay.portal.kernel.exception.SystemException se) {
 					_log.error(se, se);
 
 					throw se;

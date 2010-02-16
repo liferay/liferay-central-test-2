@@ -22,14 +22,14 @@
 
 package com.liferay.portal;
 
-import com.liferay.portal.kernel.exception.NestableException;
-
 /**
  * <a href="PortalException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
+ * @deprecated {@link com.liferay.portal.kernel.exception.PortalException}
  */
-public class PortalException extends NestableException {
+public class PortalException
+	extends com.liferay.portal.kernel.exception.PortalException {
 
 	public PortalException() {
 		super();
