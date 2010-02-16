@@ -20,29 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.rss;
+package com.liferay.portalweb.portlet.rss.feed;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.rss.feed.FeedTests;
-import com.liferay.portalweb.portlet.rss.portlet.PortletTests;
-import com.liferay.portalweb.portlet.rss.webcontent.WebContentTests;
+import com.liferay.portalweb.portlet.rss.feed.addfeed.AddFeedTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="RSSTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="FeedTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class RSSTests extends BaseTests {
+public class FeedTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(FeedTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(WebContentTests.suite());
+		testSuite.addTest(AddFeedTests.suite());
 
 		return testSuite;
 	}

@@ -20,29 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.rss;
+package com.liferay.portalweb.portlet.rss.webcontent;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.rss.feed.FeedTests;
-import com.liferay.portalweb.portlet.rss.portlet.PortletTests;
-import com.liferay.portalweb.portlet.rss.webcontent.WebContentTests;
+import com.liferay.portalweb.portlet.rss.webcontent.removewebcontentfooter.RemoveWebContentFooterTests;
+import com.liferay.portalweb.portlet.rss.webcontent.removewebcontentheader.RemoveWebContentHeaderTests;
+import com.liferay.portalweb.portlet.rss.webcontent.selectwebcontentfooter.SelectWebContentFooterTests;
+import com.liferay.portalweb.portlet.rss.webcontent.selectwebcontentheader.SelectWebContentHeaderTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="RSSTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebContentTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class RSSTests extends BaseTests {
+public class WebContentTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(FeedTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(WebContentTests.suite());
+		testSuite.addTest(RemoveWebContentFooterTests.suite());
+		testSuite.addTest(RemoveWebContentHeaderTests.suite());
+		testSuite.addTest(SelectWebContentFooterTests.suite());
+		testSuite.addTest(SelectWebContentHeaderTests.suite());
 
 		return testSuite;
 	}
