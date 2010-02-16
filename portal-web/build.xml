@@ -16,7 +16,7 @@
 
 	<property name="fckeditor.file" value="FCKeditor_2.6.3.zip" />
 	<property name="tinymce.file" value="tinymce_3_2_1.zip" />
-	<property name="vaadin.file" value="vaadin-6.2.1.zip" />
+	<property name="vaadin.file" value="vaadin-6.2.4.zip" />
 
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="classes" />

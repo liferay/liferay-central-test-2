@@ -2710,13 +2710,13 @@
 	</library>
 	<library>
 		<file-name>portal/vaadin.jar</file-name>
-		<version>6.2.1</version>
+		<version>6.2.4</version>
 		<project-name>Vaadin</project-name>
 		<project-url>http://vaadin.com</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2009 IT Mill Ltd</copyright-notice>
+				<copyright-notice>Copyright (c) 2010 IT Mill Ltd</copyright-notice>
 			</license>
 		</licenses>
 	</library>
