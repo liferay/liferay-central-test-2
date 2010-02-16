@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.html;
+package com.liferay.portal.servlet.filters.validhtml;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -46,8 +46,9 @@ public class ValidHtmlFilter extends BasePortalFilter {
 		ValidHtmlFilter.class.getName() + "SKIP_FILTER";
 
 	protected String getContent(HttpServletRequest request, String content) {
-		content = StringUtil.replace(content, _CLOSE_BODY, StringPool.BLANK);
-		content = StringUtil.replace(
+		content = StringUtil.replaceLast(
+			content, _CLOSE_BODY, StringPool.BLANK);
+		content = StringUtil.replaceLast(
 			content, _CLOSE_HTML, _CLOSE_BODY + _CLOSE_HTML);
 
 		return content;
@@ -68,7 +69,8 @@ public class ValidHtmlFilter extends BasePortalFilter {
 		throws Exception {
 
 		if (isAlreadyFiltered(request)) {
-			processFilter(ValidHtmlFilter.class, request, response, filterChain);
+			processFilter(
+				ValidHtmlFilter.class, request, response, filterChain);
 
 			return;
 		}
@@ -78,20 +80,18 @@ public class ValidHtmlFilter extends BasePortalFilter {
 		if (_log.isDebugEnabled()) {
 			String completeURL = HttpUtil.getCompleteURL(request);
 
-			_log.debug("Moving javascript inside the body " + completeURL);
+			_log.debug("Ensuring valid HTML " + completeURL);
 		}
 
-		StringServletResponse stringServerResponse =
-			new StringServletResponse(response);
+		StringServletResponse stringServerResponse = new StringServletResponse(
+			response);
 
 		processFilter(
 			ValidHtmlFilter.class, request, stringServerResponse, filterChain);
 
-		String content = getContent(
-			request, stringServerResponse.getString());
+		String content = getContent(request, stringServerResponse.getString());
 
 		ServletResponseUtil.write(response, content);
-
 	}
 
 	private static final String _CLOSE_BODY = "</body>";

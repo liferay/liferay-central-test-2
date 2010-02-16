@@ -138,6 +138,15 @@ public class StringUtil_IW {
 		return StringUtil.merge(array, delimiter);
 	}
 
+	public java.lang.String merge(java.util.Collection<?> col) {
+		return StringUtil.merge(col);
+	}
+
+	public java.lang.String merge(java.util.Collection<?> col,
+		java.lang.String delimiter) {
+		return StringUtil.merge(col, delimiter);
+	}
+
 	public java.lang.String merge(double[] array) {
 		return StringUtil.merge(array);
 	}
@@ -170,29 +179,20 @@ public class StringUtil_IW {
 		return StringUtil.merge(array, delimiter);
 	}
 
-	public java.lang.String merge(short[] array) {
-		return StringUtil.merge(array);
-	}
-
-	public java.lang.String merge(short[] array, java.lang.String delimiter) {
-		return StringUtil.merge(array, delimiter);
-	}
-
-	public java.lang.String merge(java.util.Collection<?> col) {
-		return StringUtil.merge(col);
-	}
-
-	public java.lang.String merge(java.util.Collection<?> col,
-		java.lang.String delimiter) {
-		return StringUtil.merge(col, delimiter);
-	}
-
 	public java.lang.String merge(java.lang.Object[] array) {
 		return StringUtil.merge(array);
 	}
 
 	public java.lang.String merge(java.lang.Object[] array,
 		java.lang.String delimiter) {
+		return StringUtil.merge(array, delimiter);
+	}
+
+	public java.lang.String merge(short[] array) {
+		return StringUtil.merge(array);
+	}
+
+	public java.lang.String merge(short[] array, java.lang.String delimiter) {
 		return StringUtil.merge(array, delimiter);
 	}
 
@@ -274,6 +274,26 @@ public class StringUtil_IW {
 		return StringUtil.replaceFirst(s, oldSubs, newSubs);
 	}
 
+	public java.lang.String replaceLast(java.lang.String s, char oldSub,
+		char newSub) {
+		return StringUtil.replaceLast(s, oldSub, newSub);
+	}
+
+	public java.lang.String replaceLast(java.lang.String s, char oldSub,
+		java.lang.String newSub) {
+		return StringUtil.replaceLast(s, oldSub, newSub);
+	}
+
+	public java.lang.String replaceLast(java.lang.String s,
+		java.lang.String oldSub, java.lang.String newSub) {
+		return StringUtil.replaceLast(s, oldSub, newSub);
+	}
+
+	public java.lang.String replaceLast(java.lang.String s,
+		java.lang.String[] oldSubs, java.lang.String[] newSubs) {
+		return StringUtil.replaceLast(s, oldSubs, newSubs);
+	}
+
 	public java.lang.String replaceValues(java.lang.String s,
 		java.lang.String begin, java.lang.String end,
 		java.util.Map<String, String> values) {
@@ -296,17 +316,41 @@ public class StringUtil_IW {
 		return StringUtil.shorten(s, length);
 	}
 
-	public java.lang.String shorten(java.lang.String s, java.lang.String suffix) {
-		return StringUtil.shorten(s, suffix);
-	}
-
 	public java.lang.String shorten(java.lang.String s, int length,
 		java.lang.String suffix) {
 		return StringUtil.shorten(s, length, suffix);
 	}
 
+	public java.lang.String shorten(java.lang.String s, java.lang.String suffix) {
+		return StringUtil.shorten(s, suffix);
+	}
+
 	public java.lang.String[] split(java.lang.String s) {
 		return StringUtil.split(s);
+	}
+
+	public boolean[] split(java.lang.String s, boolean x) {
+		return StringUtil.split(s, x);
+	}
+
+	public double[] split(java.lang.String s, double x) {
+		return StringUtil.split(s, x);
+	}
+
+	public float[] split(java.lang.String s, float x) {
+		return StringUtil.split(s, x);
+	}
+
+	public int[] split(java.lang.String s, int x) {
+		return StringUtil.split(s, x);
+	}
+
+	public long[] split(java.lang.String s, long x) {
+		return StringUtil.split(s, x);
+	}
+
+	public short[] split(java.lang.String s, short x) {
+		return StringUtil.split(s, x);
 	}
 
 	public java.lang.String[] split(java.lang.String s,
@@ -314,17 +358,9 @@ public class StringUtil_IW {
 		return StringUtil.split(s, delimiter);
 	}
 
-	public boolean[] split(java.lang.String s, boolean x) {
-		return StringUtil.split(s, x);
-	}
-
 	public boolean[] split(java.lang.String s, java.lang.String delimiter,
 		boolean x) {
 		return StringUtil.split(s, delimiter, x);
-	}
-
-	public double[] split(java.lang.String s, double x) {
-		return StringUtil.split(s, x);
 	}
 
 	public double[] split(java.lang.String s, java.lang.String delimiter,
@@ -332,32 +368,16 @@ public class StringUtil_IW {
 		return StringUtil.split(s, delimiter, x);
 	}
 
-	public float[] split(java.lang.String s, float x) {
-		return StringUtil.split(s, x);
-	}
-
 	public float[] split(java.lang.String s, java.lang.String delimiter, float x) {
 		return StringUtil.split(s, delimiter, x);
-	}
-
-	public int[] split(java.lang.String s, int x) {
-		return StringUtil.split(s, x);
 	}
 
 	public int[] split(java.lang.String s, java.lang.String delimiter, int x) {
 		return StringUtil.split(s, delimiter, x);
 	}
 
-	public long[] split(java.lang.String s, long x) {
-		return StringUtil.split(s, x);
-	}
-
 	public long[] split(java.lang.String s, java.lang.String delimiter, long x) {
 		return StringUtil.split(s, delimiter, x);
-	}
-
-	public short[] split(java.lang.String s, short x) {
-		return StringUtil.split(s, x);
 	}
 
 	public short[] split(java.lang.String s, java.lang.String delimiter, short x) {

@@ -381,6 +381,18 @@ public class StringUtil {
 		return sb.toString();
 	}
 
+	public static String merge(Collection<?> col) {
+		return merge(col, StringPool.COMMA);
+	}
+
+	public static String merge(Collection<?> col, String delimiter) {
+		if (col == null) {
+			return null;
+		}
+
+		return merge(col.toArray(new Object[col.size()]), delimiter);
+	}
+
 	public static String merge(double[] array) {
 		return merge(array, StringPool.COMMA);
 	}
@@ -497,11 +509,11 @@ public class StringUtil {
 		return sb.toString();
 	}
 
-	public static String merge(short[] array) {
+	public static String merge(Object[] array) {
 		return merge(array, StringPool.COMMA);
 	}
 
-	public static String merge(short[] array, String delimiter) {
+	public static String merge(Object[] array, String delimiter) {
 		if (array == null) {
 			return null;
 		}
@@ -526,23 +538,11 @@ public class StringUtil {
 		return sb.toString();
 	}
 
-	public static String merge(Collection<?> col) {
-		return merge(col, StringPool.COMMA);
-	}
-
-	public static String merge(Collection<?> col, String delimiter) {
-		if (col == null) {
-			return null;
-		}
-
-		return merge(col.toArray(new Object[col.size()]), delimiter);
-	}
-
-	public static String merge(Object[] array) {
+	public static String merge(short[] array) {
 		return merge(array, StringPool.COMMA);
 	}
 
-	public static String merge(Object[] array, String delimiter) {
+	public static String merge(short[] array, String delimiter) {
 		if (array == null) {
 			return null;
 		}
@@ -836,6 +836,75 @@ public class StringUtil {
 		return s;
 	}
 
+	public static String replaceLast(String s, char oldSub, char newSub) {
+		if (s == null) {
+			return null;
+		}
+
+		return replaceLast(s, String.valueOf(oldSub), String.valueOf(newSub));
+	}
+
+	public static String replaceLast(String s, char oldSub, String newSub) {
+		if ((s == null) || (newSub == null)) {
+			return null;
+		}
+
+		return replaceLast(s, String.valueOf(oldSub), newSub);
+	}
+
+	public static String replaceLast(String s, String oldSub, String newSub) {
+		if ((s == null) || (oldSub == null) || (newSub == null)) {
+			return null;
+		}
+
+		int y = s.lastIndexOf(oldSub);
+
+		if (y >= 0) {
+
+			// The number 5 is arbitrary and is used as extra padding to reduce
+			// buffer expansion
+
+			StringBuilder sb = new StringBuilder(
+				s.length() + 5 * newSub.length());
+
+			int length = oldSub.length();
+			int x = 0;
+
+			while (x <= y) {
+				sb.append(s.substring(x, y));
+				sb.append(newSub);
+
+				x = y + length;
+				y = s.indexOf(oldSub, x);
+			}
+
+			sb.append(s.substring(x));
+
+			return sb.toString();
+		}
+		else {
+			return s;
+		}
+	}
+
+	public static String replaceLast(
+		String s, String[] oldSubs, String[] newSubs) {
+
+		if ((s == null) || (oldSubs == null) || (newSubs == null)) {
+			return null;
+		}
+
+		if (oldSubs.length != newSubs.length) {
+			return s;
+		}
+
+		for (int i = 0; i < oldSubs.length; i++) {
+			s = replaceLast(s, oldSubs[i], newSubs[i]);
+		}
+
+		return s;
+	}
+
 	/**
 	 * Returns a string with replaced values. This method will replace all text
 	 * in the given string, between the beginning and ending delimiter, with new
@@ -917,10 +986,6 @@ public class StringUtil {
 		return shorten(s, length, "...");
 	}
 
-	public static String shorten(String s, String suffix) {
-		return shorten(s, 20, suffix);
-	}
-
 	public static String shorten(String s, int length, String suffix) {
 		if ((s == null) || (suffix == null)) {
 			return null;
@@ -943,8 +1008,36 @@ public class StringUtil {
 		return s;
 	}
 
+	public static String shorten(String s, String suffix) {
+		return shorten(s, 20, suffix);
+	}
+
 	public static String[] split(String s) {
 		return split(s, StringPool.COMMA);
+	}
+
+	public static boolean[] split(String s, boolean x) {
+		return split(s, StringPool.COMMA, x);
+	}
+
+	public static double[] split(String s, double x) {
+		return split(s, StringPool.COMMA, x);
+	}
+
+	public static float[] split(String s, float x) {
+		return split(s, StringPool.COMMA, x);
+	}
+
+	public static int[] split(String s, int x) {
+		return split(s, StringPool.COMMA, x);
+	}
+
+	public static long[] split(String s, long x) {
+		return split(s, StringPool.COMMA, x);
+	}
+
+	public static short[] split(String s, short x) {
+		return split(s, StringPool.COMMA, x);
 	}
 
 	public static String[] split(String s, String delimiter) {
@@ -1000,10 +1093,6 @@ public class StringUtil {
 		return nodeValues.toArray(new String[nodeValues.size()]);
 	}
 
-	public static boolean[] split(String s, boolean x) {
-		return split(s, StringPool.COMMA, x);
-	}
-
 	public static boolean[] split(String s, String delimiter, boolean x) {
 		String[] array = split(s, delimiter);
 		boolean[] newArray = new boolean[array.length];
@@ -1021,10 +1110,6 @@ public class StringUtil {
 		}
 
 		return newArray;
-	}
-
-	public static double[] split(String s, double x) {
-		return split(s, StringPool.COMMA, x);
 	}
 
 	public static double[] split(String s, String delimiter, double x) {
@@ -1046,10 +1131,6 @@ public class StringUtil {
 		return newArray;
 	}
 
-	public static float[] split(String s, float x) {
-		return split(s, StringPool.COMMA, x);
-	}
-
 	public static float[] split(String s, String delimiter, float x) {
 		String[] array = split(s, delimiter);
 		float[] newArray = new float[array.length];
@@ -1067,10 +1148,6 @@ public class StringUtil {
 		}
 
 		return newArray;
-	}
-
-	public static int[] split(String s, int x) {
-		return split(s, StringPool.COMMA, x);
 	}
 
 	public static int[] split(String s, String delimiter, int x) {
@@ -1092,10 +1169,6 @@ public class StringUtil {
 		return newArray;
 	}
 
-	public static long[] split(String s, long x) {
-		return split(s, StringPool.COMMA, x);
-	}
-
 	public static long[] split(String s, String delimiter, long x) {
 		String[] array = split(s, delimiter);
 		long[] newArray = new long[array.length];
@@ -1113,10 +1186,6 @@ public class StringUtil {
 		}
 
 		return newArray;
-	}
-
-	public static short[] split(String s, short x) {
-		return split(s, StringPool.COMMA, x);
 	}
 
 	public static short[] split(String s, String delimiter, short x) {
