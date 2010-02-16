@@ -39,6 +39,8 @@
 <portlet:defineObjects />
 
 <%
+String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_discussion_page") + StringPool.UNDERLINE;
+
 String formName = namespace + request.getAttribute("liferay-ui:discussion:formName");
 String formAction = (String)request.getAttribute("liferay-ui:discussion:formAction");
 String className = (String)request.getAttribute("liferay-ui:discussion:className");
@@ -46,8 +48,6 @@ long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discu
 long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:userId"));
 String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");
 boolean ratingsEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:discussion:ratingsEnabled"));
-
-String uniqueNamespace = namespace + classPK + StringPool.UNDERLINE;
 
 String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
 
@@ -92,9 +92,9 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		%>
 
 		<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
-			<table border="0" cellpadding="0" cellspacing="0" id="<%= uniqueNamespace %>messageScroll0" width="100%">
+			<table border="0" cellpadding="0" cellspacing="0" id="<%= randomNamespace %>messageScroll0" width="100%">
 			<tr>
-				<td id="<%= uniqueNamespace %>messageScroll<%= message.getMessageId() %>">
+				<td id="<%= randomNamespace %>messageScroll<%= message.getMessageId() %>">
 					<input name="<%= namespace %>messageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
 					<input name="<%= namespace %>parentMessageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
 				</td>
@@ -103,7 +103,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				<td>
 
 					<%
-					String taglibPostReplyURL = "javascript:" + uniqueNamespace + "showForm('" + uniqueNamespace + "postReplyForm" + i + "', '" + uniqueNamespace + "postReplyBody" + i + "');";
+					String taglibPostReplyURL = "javascript:" + randomNamespace + "showForm('" + randomNamespace + "postReplyForm" + i + "', '" + randomNamespace + "postReplyBody" + i + "');";
 					%>
 
 					<c:choose>
@@ -116,19 +116,19 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					</c:choose>
 				</td>
 			</tr>
-			<tr id="<%= uniqueNamespace %>postReplyForm<%= i %>" style="display: none;">
+			<tr id="<%= randomNamespace %>postReplyForm<%= i %>" style="display: none;">
 				<td>
 					<br />
 
 					<div>
-						<textarea id="<%= uniqueNamespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
+						<textarea id="<%= randomNamespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
 					</div>
 
 					<br />
 
-					<input disabled="disabled" id="<%= uniqueNamespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= uniqueNamespace %>postReply(<%= i %>);" />
+					<input disabled="disabled" id="<%= randomNamespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= randomNamespace %>postReply(<%= i %>);" />
 
-					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= uniqueNamespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
+					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= randomNamespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
 				</td>
 			</tr>
 			</table>
@@ -139,7 +139,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				<br />
 			</c:if>
 
-			<a name="<%= uniqueNamespace %>messages_top"></a>
+			<a name="<%= randomNamespace %>messages_top"></a>
 
 			<c:if test="<%= treeWalker != null %>">
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
@@ -216,8 +216,8 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			%>
 
 				<tr>
-					<td colspan="2" id="<%= uniqueNamespace %>messageScroll<%= message.getMessageId() %>">
-						<a name="<%= uniqueNamespace %>message_<%= message.getMessageId() %>"></a>
+					<td colspan="2" id="<%= randomNamespace %>messageScroll<%= message.getMessageId() %>">
+						<a name="<%= randomNamespace %>message_<%= message.getMessageId() %>"></a>
 
 						<input name="<%= namespace %>messageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
 						<input name="<%= namespace %>parentMessageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
@@ -258,7 +258,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									StringBundler sb = new StringBundler(7);
 
 									sb.append("<a href=\"#");
-									sb.append(uniqueNamespace);
+									sb.append(randomNamespace);
 									sb.append("message_");
 									sb.append(parentMessage.getMessageId());
 									sb.append("\">");
@@ -294,7 +294,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 								<td>
 
 									<%
-									String taglibPostReplyURL = "javascript:" + uniqueNamespace + "showForm('" + uniqueNamespace + "postReplyForm" + i + "', '" + uniqueNamespace + "postReplyBody" + i + "');";
+									String taglibPostReplyURL = "javascript:" + randomNamespace + "showForm('" + randomNamespace + "postReplyForm" + i + "', '" + randomNamespace + "postReplyBody" + i + "');";
 									%>
 
 									<liferay-ui:icon image="reply" message="post-reply" url="<%= taglibPostReplyURL %>" label="<%= true %>" />
@@ -304,7 +304,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							<c:if test="<%= i > 0 %>">
 
 								<%
-								String taglibTopURL = "#" + uniqueNamespace + "messages_top";
+								String taglibTopURL = "#" + randomNamespace + "messages_top";
 								%>
 
 								<td>
@@ -314,7 +314,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.UPDATE_DISCUSSION) %>">
 
 									<%
-									String taglibEditURL = "javascript:" + uniqueNamespace + "showForm('" + uniqueNamespace + "editForm" + i + "', '" + uniqueNamespace + "editReplyBody" + i + "');";
+									String taglibEditURL = "javascript:" + randomNamespace + "showForm('" + randomNamespace + "editForm" + i + "', '" + randomNamespace + "editReplyBody" + i + "');";
 									%>
 
 									<td>
@@ -325,7 +325,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.DELETE_DISCUSSION) %>">
 
 									<%
-									String taglibDeleteURL = "javascript:" + uniqueNamespace + "deleteMessage(" + i + ");";
+									String taglibDeleteURL = "javascript:" + randomNamespace + "deleteMessage(" + i + ");";
 									%>
 
 									<td>
@@ -337,36 +337,36 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 						</table>
 
 						<table class="lfr-table">
-						<tr id="<%= uniqueNamespace %>postReplyForm<%= i %>" style="display: none;">
+						<tr id="<%= randomNamespace %>postReplyForm<%= i %>" style="display: none;">
 							<td>
 								<br />
 
 								<div>
-									<textarea id="<%= uniqueNamespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
+									<textarea id="<%= randomNamespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
 								</div>
 
 								<br />
 
-								<input disabled="disabled" id="<%= uniqueNamespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= uniqueNamespace %>postReply(<%= i %>);" />
+								<input disabled="disabled" id="<%= randomNamespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= randomNamespace %>postReply(<%= i %>);" />
 
-								<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= uniqueNamespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
+								<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= randomNamespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
 							</td>
 						</tr>
 
 						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.UPDATE_DISCUSSION) %>">
-							<tr id="<%= uniqueNamespace %>editForm<%= i %>" style="display: none;">
+							<tr id="<%= randomNamespace %>editForm<%= i %>" style="display: none;">
 								<td>
 									<br />
 
 									<div>
-										<textarea id="<%= uniqueNamespace %>editReplyBody<%= i %>" name="<%= namespace %>editReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= HtmlUtil.escape(message.getBody()) %></textarea>
+										<textarea id="<%= randomNamespace %>editReplyBody<%= i %>" name="<%= namespace %>editReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= HtmlUtil.escape(message.getBody()) %></textarea>
 									</div>
 
 									<br />
 
-									<input id="<%= uniqueNamespace %>editReplyButton<%= i %>" type="button" value="<liferay-ui:message key="update" />" onClick="<%= uniqueNamespace %>updateMessage(<%= i %>);" />
+									<input id="<%= randomNamespace %>editReplyButton<%= i %>" type="button" value="<liferay-ui:message key="update" />" onClick="<%= randomNamespace %>updateMessage(<%= i %>);" />
 
-									<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= uniqueNamespace %>editForm<%= i %>').style.display = 'none'; void('');" />
+									<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= randomNamespace %>editForm<%= i %>').style.display = 'none'; void('');" />
 								</td>
 							</tr>
 						</c:if>
@@ -398,7 +398,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 	</div>
 
 	<aui:script>
-		function <%= uniqueNamespace %>deleteMessage(i) {
+		function <%= randomNamespace %>deleteMessage(i) {
 			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
 
 			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
@@ -406,7 +406,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			submitForm(document.<%= formName %>);
 		}
 
-		function <%= uniqueNamespace %>postReply(i) {
+		function <%= randomNamespace %>postReply(i) {
 			eval("var parentMessageId = document.<%= formName %>.<%= namespace %>parentMessageId" + i + ".value;");
 			eval("var body = document.<%= formName %>.<%= namespace %>postReplyBody" + i + ".value;");
 
@@ -416,16 +416,16 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			submitForm(document.<%= formName %>);
 		}
 
-		function <%= uniqueNamespace %>scrollIntoView(messageId) {
+		function <%= randomNamespace %>scrollIntoView(messageId) {
 			document.getElementById("<%= namespace %>messageScroll" + messageId).scrollIntoView();
 		}
 
-		function <%= uniqueNamespace %>showForm(rowId, textAreaId) {
+		function <%= randomNamespace %>showForm(rowId, textAreaId) {
 			document.getElementById(rowId).style.display = "";
 			document.getElementById(textAreaId).focus();
 		}
 
-		function <%= uniqueNamespace %>updateMessage(i) {
+		function <%= randomNamespace %>updateMessage(i) {
 			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
 			eval("var body = document.<%= formName %>.<%= namespace %>editReplyBody" + i + ".value;");
 
