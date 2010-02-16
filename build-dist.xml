@@ -1015,7 +1015,20 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 	<target name="unzip-jboss">
 		<delete dir="${app.server.parent.dir}/jboss-5.1.0" />
 
-		<unzip src="${app.server.parent.dir}/jboss-5.1.0.GA.zip" dest="${app.server.parent.dir}">
+		<if>
+			<not>
+				<available file="${app.server.parent.dir}/${app.server.jboss.zip.name}" />
+			</not>
+			<then>
+				<get
+					dest="${app.server.parent.dir}/${app.server.jboss.zip.name}"
+					src="${app.server.jboss.zip.url}"
+					verbose="true"
+				/>
+			</then>
+		</if>
+
+		<unzip src="${app.server.parent.dir}/${app.server.jboss.zip.name}" dest="${app.server.parent.dir}">
 			<patternset
 				excludes="jboss-5.1.0.GA/server/all/**,jboss-5.1.0.GA/server/default/**,jboss-5.1.0.GA/server/minimal/**,jboss-5.1.0.GA/server/standard/**"
 			/>
@@ -1032,7 +1045,20 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 	<target name="unzip-jetty">
 		<delete dir="${app.server.jetty.dir}" />
 
-		<unzip src="${app.server.parent.dir}/jetty-6.1.22.zip" dest="${app.server.parent.dir}">
+		<if>
+			<not>
+				<available file="${app.server.parent.dir}/${app.server.jetty.zip.name}" />
+			</not>
+			<then>
+				<get
+					dest="${app.server.parent.dir}/${app.server.jetty.zip.name}"
+					src="${app.server.jetty.zip.url}"
+					verbose="true"
+				/>
+			</then>
+		</if>
+
+		<unzip src="${app.server.parent.dir}/${app.server.jetty.zip.name}" dest="${app.server.parent.dir}">
 			<patternset
 				excludes="jetty-6.1.22/bin/**,jetty-6.1.22/contexts/**,jetty-6.1.22/contrib/**,jetty-6.1.22/distribution/**,jetty-6.1.22/examples/**,jetty-6.1.22/extras/**,jetty-6.1.22/javadoc/**,jetty-6.1.22/jxr/**,jetty-6.1.22/modules/**,jetty-6.1.22/patches/**,jetty-6.1.22/patches/**,jetty-6.1.22/project-website/**,jetty-6.1.22/webapps/**"
 			/>
@@ -1046,7 +1072,20 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 	<target name="unzip-jonas">
 		<delete dir="${app.server.jonas.dir}" />
 
-		<unzip src="${app.server.parent.dir}/jonas-full-5.1.1-bin.zip" dest="${app.server.parent.dir}">
+		<if>
+			<not>
+				<available file="${app.server.parent.dir}/${app.server.jonas.zip.name}" />
+			</not>
+			<then>
+				<get
+					dest="${app.server.parent.dir}/${app.server.jonas.zip.name}"
+					src="${app.server.jonas.zip.url}"
+					verbose="true"
+				/>
+			</then>
+		</if>
+
+		<unzip src="${app.server.parent.dir}/${app.server.jonas.zip.name}" dest="${app.server.parent.dir}">
 			<patternset
 				excludes="jonas-full-5.1.1/examples/**,jonas-full-5.1.1/tutorial/**"
 			/>
@@ -1088,7 +1127,20 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 	<target name="unzip-tomcat">
 		<delete dir="${app.server.parent.dir}/tomcat-6.0.24" />
 
-		<unzip src="${app.server.parent.dir}/apache-tomcat-6.0.24.zip" dest="${app.server.parent.dir}">
+		<if>
+			<not>
+				<available file="${app.server.parent.dir}/${app.server.tomcat.zip.name}" />
+			</not>
+			<then>
+				<get
+					dest="${app.server.parent.dir}/${app.server.tomcat.zip.name}"
+					src="${app.server.tomcat.zip.url}"
+					verbose="true"
+				/>
+			</then>
+		</if>
+
+		<unzip src="${app.server.parent.dir}/${app.server.tomcat.zip.name}" dest="${app.server.parent.dir}">
 			<patternset
 				excludes="apache-tomcat-6.0.24/webapps/**"
 			/>
