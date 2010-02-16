@@ -218,10 +218,10 @@ public class PluginsEnvironmentBuilder {
 		}
 
 		_addClasspathEntry(sb, "/portal/lib/development/activation.jar");
+		_addClasspathEntry(sb, "/portal/lib/development/annotations.jar");
 		_addClasspathEntry(sb, "/portal/lib/development/jsp-api.jar");
 		_addClasspathEntry(sb, "/portal/lib/development/mail.jar");
 		_addClasspathEntry(sb, "/portal/lib/development/servlet-api.jar");
-		_addClasspathEntry(sb, "/portal/lib/global/annotations.jar");
 		_addClasspathEntry(sb, "/portal/lib/global/portlet.jar");
 
 		for (String jar : portalJars) {
