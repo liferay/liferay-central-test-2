@@ -61,40 +61,10 @@
 		</delete>
 
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-			</or>
+			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
-				<delete includeemptydirs="true" failonerror="false">
-					<fileset
-						dir="${app.server.dir}"
-						includes="demoserver/**,examples/**,"
-					/>
-					<fileset
-						dir="${app.server.dir}/apps"
-						includes="*.ear,autoload/*.ear"
-					/>
-					<fileset
-						dir="${app.server.dir}/conf"
-						includes="db2.properties,FirebirdSQL.properties,HSQL1.properties,InstantDB1.properties,InterBase1.properties,MailMimePartDS1.properties,MailSession1.properties,McKoi1.properties,MySQL.properties,Oracle1.properties,PostgreSQL1.properties,spy.properties,Sybase1.properties"
-					/>
-					<fileset
-						dir="${app.server.dir}/ejbjars"
-						includes="*.jar,autoload/*.jar"
-					/>
-					<fileset
-						dir="${app.server.dir}/webapps"
-						includes="*.war,autoload/*.war,autoload/jonas-doc-en/**,autoload/jonas-javadoc/**"
-					/>
-				</delete>
+				<ant dir="support-tomcat" target="clean" inheritAll="false" />
 			</then>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<then>
-					<ant dir="support-tomcat" target="clean" inheritAll="false" />
-				</then>
-			</elseif>
 		</if>
 
 		<delete failonerror="false">
@@ -278,7 +248,7 @@
 					/>
 				</copy>
 			</then>
-		</if>
+		</if><!---->
 
 		<copy todir="${app.server.lib.portal.dir}">
 			<fileset dir="lib/portal" />
@@ -321,7 +291,7 @@
 				<loadfile property="run.conf.content" srcFile="${app.server.bin.dir}/run.conf" />
 
 				<antelope:stringutil string="${run.conf.content}" property="run.conf.content.index">
-					<indexof string="-Xmx1024m" fromindex="0" />
+					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
 				</antelope:stringutil>
 
 				<if>
@@ -335,7 +305,7 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.j
 				<loadfile property="run.conf.bat.content" srcFile="${app.server.bin.dir}/run.conf.bat" />
 
 				<antelope:stringutil string="${run.conf.bat.content}" property="run.conf.bat.content.index">
-					<indexof string="-Xmx1024m" fromindex="0" />
+					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
 				</antelope:stringutil>
 
 				<if>
@@ -427,17 +397,86 @@ $(jetty.home)/lib/liferay/*</echo>
 		</if>
 
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-			</or>
+			<equals arg1="${app.server.type}" arg2="jonas" />
 			<then>
-				<copy todir="${app.server.lib.portal.dir}">
+				<loadfile property="setenv.content" srcFile="${app.server.bin.dir}/setenv" />
+
+				<antelope:stringutil string="${setenv.content}" property="setenv.content.index">
+					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
+				</antelope:stringutil>
+
+				<if>
+					<equals arg1="${setenv.content.index}" arg2="-1" />
+					<then>
+						<replace file="${app.server.bin.dir}/setenv">
+							<replacetoken><![CDATA[export JAVA_OPTS]]></replacetoken>
+							<replacevalue><![CDATA[JAVA_OPTS=-Dfile.encoding=UTF8 -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m
+export JAVA_OPTS]]></replacevalue>
+						</replace>
+					</then>
+				</if>
+
+				<loadfile property="setenv.bat.content" srcFile="${app.server.bin.dir}/setenv.bat" />
+
+				<antelope:stringutil string="${setenv.bat.content}" property="setenv.bat.content.index">
+					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
+				</antelope:stringutil>
+
+				<if>
+					<equals arg1="${setenv.bat.content.index}" arg2="-1" />
+					<then>
+						<replace file="${app.server.bin.dir}/setenv.bat">
+							<replacetoken><![CDATA[set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%]]></replacetoken>
+							<replacevalue><![CDATA[set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%
+set JAVA_OPTS=-Dfile.encoding=UTF8 -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
+						</replace>
+					</then>
+				</if>
+
+				<loadfile property="classloader-default-filtering.xml.content" srcFile="${app.server.dir}/conf/classloader-default-filtering.xml" />
+
+				<antelope:stringutil string="${classloader-default-filtering.xml.content}" property="classloader-default-filtering.xml.content.index">
+					<indexof string="net.sf.cglib.*" fromindex="0" />
+				</antelope:stringutil>
+
+				<if>
+					<equals arg1="${classloader-default-filtering.xml.content.index}" arg2="-1" />
+					<then>
+						<replace file="${app.server.dir}/conf/classloader-default-filtering.xml">
+							<replacetoken><![CDATA[<filter-name>org.apache.commons.digester.*</filter-name>]]></replacetoken>
+							<replacevalue><![CDATA[<filter-name>antlr.*</filter-name>
+	<filter-name>EDU.oswego.*</filter-name>
+	<filter-name>javassist.*</filter-name>
+	<filter-name>net.sf.cglib.*</filter-name>
+	<filter-name>net.sf.ehcache.*</filter-name>
+	<filter-name>org.apache.commons.*</filter-name>
+	<filter-name>org.dom4j.*</filter-name>
+	<filter-name>org.hibernate.*</filter-name>
+	<filter-name>org.jboss.*</filter-name>
+	<filter-name>org.objectweb.asm.*</filter-name>
+	<filter-name>org.objectweb.jotm.*</filter-name>
+	<filter-name>org.quartz.*</filter-name>
+	<filter-name>org.springframework.*</filter-name>]]></replacevalue>
+						</replace>
+					</then>
+				</if>
+
+				<replace file="${app.server.dir}/conf/tomcat6-server.xml">
+					<replacetoken><![CDATA[redirectPort="8443" />]]></replacetoken>
+					<replacevalue><![CDATA[redirectPort="8443" URIEncoding="UTF-8" />]]></replacevalue>
+				</replace>
+
+				<replace file="${app.server.dir}/conf/tomcat6-server.xml">
+					<replacetoken><![CDATA[redirectPort="9043" />]]></replacetoken>
+					<replacevalue><![CDATA[redirectPort="9043" URIEncoding="UTF-8" />]]></replacevalue>
+				</replace>
+
+				<!--<copy todir="${app.server.lib.portal.dir}">
 					<fileset
 						dir="lib/development"
 						includes="mail.jar"
 					/>
-				</copy>
+				</copy>-->
 			</then>
 		</if>
 

@@ -291,12 +291,10 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		</antcall>
 	</target>
 
-	<target name="build-dist-jonas-jetty">
-		<delete dir="${app.server.jonas-jetty.dir}" />
+	<target name="build-dist-jonas">
+		<antcall target="unzip-jonas" />
 
-		<unzip src="${app.server.parent.dir}/jonas-jetty-4.10.3.zip" dest="${app.server.parent.dir}" />
-
-		<echo file="app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
+		<echo file="app.server.${user.name}.properties">app.server.type=jonas</echo>
 
 		<delete dir="${project.dir}/portal-web/classes" />
 
@@ -305,29 +303,9 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<delete file="app.server.${user.name}.properties" />
 
 		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${app.server.jonas-jetty.deploy.dir}" />
-			<param name="deployer.app.server.type" value="jonas-jetty" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.jonas-jetty.lib.portal.dir}" />
-		</antcall>
-	</target>
-
-	<target name="build-dist-jonas-tomcat">
-		<delete dir="${app.server.jonas-tomcat.dir}" />
-
-		<unzip src="${app.server.parent.dir}/jonas-tomcat-4.10.3.zip" dest="${app.server.parent.dir}" />
-
-		<echo file="app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
-
-		<delete dir="${project.dir}/portal-web/classes" />
-
-		<ant target="deploy" inheritAll="false" />
-
-		<delete file="app.server.${user.name}.properties" />
-
-		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${app.server.jonas-tomcat.deploy.dir}" />
-			<param name="deployer.app.server.type" value="jonas-tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.jonas-tomcat.lib.portal.dir}" />
+			<param name="deployer.dest.dir" value="${app.server.jonas.deploy.dir}" />
+			<param name="deployer.app.server.type" value="jonas" />
+			<param name="deployer.app.server.lib.portal.dir" value="${app.server.jonas.lib.portal.dir}" />
 		</antcall>
 	</target>
 
@@ -585,8 +563,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<antcall target="build-dist-glassfish" />
 		<antcall target="build-dist-jboss" />
 		<antcall target="build-dist-jetty" />
-		<antcall target="build-dist-jonas-jetty" />
-		<antcall target="build-dist-jonas-tomcat" />
+		<antcall target="build-dist-jonas" />
 		<antcall target="build-dist-resin" />
 		<antcall target="build-dist-tomcat" />
 
@@ -804,25 +781,11 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 	</target>
 
 	<target name="zip-jonas">
-		<antcall target="zip-jonas-jetty" />
-		<antcall target="zip-jonas-tomcat" />
-	</target>
-
-	<target name="zip-jonas-jetty">
-		<delete file="dist/liferay-portal-jonas-jetty-${lp.version}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jonas-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="zip-executable">
-			<param name="zip.executable.file" value="liferay-portal-jonas-jetty" />
-			<param name="zip.executable.dir" value="${app.server.jonas-jetty.dir}" />
-		</antcall>
-	</target>
-
-	<target name="zip-jonas-tomcat">
-		<delete file="dist/liferay-portal-jonas-tomcat-${lp.version}.zip" failonerror="false" />
-
-		<antcall target="zip-executable">
-			<param name="zip.executable.file" value="liferay-portal-jonas-tomcat" />
-			<param name="zip.executable.dir" value="${app.server.jonas-tomcat.dir}" />
+			<param name="zip.executable.file" value="liferay-portal-jonas" />
+			<param name="zip.executable.dir" value="${app.server.jonas.dir}" />
 		</antcall>
 	</target>
 
@@ -1078,6 +1041,48 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<mkdir dir="${app.server.parent.dir}/jetty-6.1.22/bin" />
 		<mkdir dir="${app.server.parent.dir}/jetty-6.1.22/contexts" />
 		<mkdir dir="${app.server.parent.dir}/jetty-6.1.22/webapps" />
+	</target>
+
+	<target name="unzip-jonas">
+		<delete dir="${app.server.jonas.dir}" />
+
+		<unzip src="${app.server.parent.dir}/jonas-full-5.1.1-bin.zip" dest="${app.server.parent.dir}">
+			<patternset
+				excludes="jonas-full-5.1.1/examples/**,jonas-full-5.1.1/tutorial/**"
+			/>
+			<mapper
+				type="glob"
+				from="jonas-full-5.1.1/*"
+				to="jonas-5.1.1/*"
+			/>
+		</unzip>
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset
+				dir="${app.server.parent.dir}/jonas-5.1.1/conf"
+				includes="db2.properties,FirebirdSQL.properties,HSQL1.properties,jetty*.xml,InstantDB1.properties,InterBase1.properties,MailMimePartDS1.properties,MailSession1.properties,McKoi1.properties,MySQL.properties,Oracle1.properties,PostgreSQL1.properties,spy.properties,Sybase1.properties"
+			/>
+			<fileset
+				dir="${app.server.parent.dir}/jonas-5.1.1/deploy"
+				includes="ctxroot.xml,doc.xml,jonasAdmin.xml"
+			/>
+			<fileset
+				dir="${app.server.parent.dir}/jonas-5.1.1/repositories/maven2-internal"
+				includes="org/mortbay/**,org/ow2/jonas/documentation/**,org/ow2/jonas/jonas-admin/**,org/ow2/jonas/jonas-ctxroot/**"
+			/>
+		</delete>
+
+		<replace
+			file="${app.server.parent.dir}/jonas-5.1.1/conf/jonas.properties"
+			token="HSQL1"
+			value=""
+		/>
+
+		<replace file="${app.server.parent.dir}/jonas-5.1.1/conf/tomcat6-server.xml">
+			<replacefilter token="9000" value="8080" />
+			<replacefilter token="9009" value="8009" />
+			<replacefilter token="9043" value="8443" />
+		</replace>
 	</target>
 
 	<target name="unzip-tomcat">

@@ -73,8 +73,7 @@
 						<equals arg1="${app.server.type}" arg2="geronimo-tomcat" />
 						<equals arg1="${app.server.type}" arg2="glassfish" />
 						<equals arg1="${app.server.type}" arg2="jboss" />
-						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+						<equals arg1="${app.server.type}" arg2="jonas" />
 					</or>
 					<then>
 						<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}.war" />
@@ -149,19 +148,7 @@
 		</if>
 
 		<if>
-			<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-			<then>
-				<copy
-					file="${war.file.dest}/WEB-INF/web-jetty.xml.jonas-jetty"
-					tofile="${war.file.dest}/WEB-INF/web-jetty.xml"
-					overwrite="yes"
-					failonerror="false"
-				/>
-			</then>
-		</if>
-
-		<if>
-			<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			<equals arg1="${app.server.type}" arg2="jonas" />
 			<then>
 				<delete file="${war.file.dest}/META-INF/context.xml" />
 			</then>

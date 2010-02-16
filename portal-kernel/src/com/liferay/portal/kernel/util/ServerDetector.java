@@ -183,6 +183,10 @@ public class ServerDetector {
 	public static boolean isJOnAS() {
 		if (_jonas == null) {
 			_jonas = _detect("/org/objectweb/jonas/server/Server.class");
+
+			if (!_jonas && (System.getProperty("jonas.root") != null)) {
+				_jonas = Boolean.TRUE;
+			}
 		}
 
 		return _jonas.booleanValue();
