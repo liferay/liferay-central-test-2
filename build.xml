@@ -248,7 +248,7 @@
 					/>
 				</copy>
 			</then>
-		</if><!---->
+		</if>
 
 		<copy todir="${app.server.lib.portal.dir}">
 			<fileset dir="lib/portal" />
@@ -470,13 +470,6 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize
 					<replacetoken><![CDATA[redirectPort="9043" />]]></replacetoken>
 					<replacevalue><![CDATA[redirectPort="9043" URIEncoding="UTF-8" />]]></replacevalue>
 				</replace>
-
-				<!--<copy todir="${app.server.lib.portal.dir}">
-					<fileset
-						dir="lib/development"
-						includes="mail.jar"
-					/>
-				</copy>-->
 			</then>
 		</if>
 
