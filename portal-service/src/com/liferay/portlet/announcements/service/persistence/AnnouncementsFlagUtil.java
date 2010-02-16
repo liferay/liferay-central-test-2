@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 
@@ -101,57 +101,59 @@ public class AnnouncementsFlagUtil {
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag remove(
 		long flagId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
 		return getPersistence().remove(flagId);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(announcementsFlag, merge);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByPrimaryKey(
 		long flagId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
 		return getPersistence().findByPrimaryKey(flagId);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag fetchByPrimaryKey(
-		long flagId) throws com.liferay.portal.SystemException {
+		long flagId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(flagId);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findByEntryId(
-		long entryId) throws com.liferay.portal.SystemException {
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByEntryId(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findByEntryId(
 		long entryId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByEntryId(entryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findByEntryId(
 		long entryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByEntryId(entryId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByEntryId_First(
 		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
 		return getPersistence().findByEntryId_First(entryId, obc);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByEntryId_Last(
 		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
 		return getPersistence().findByEntryId_Last(entryId, obc);
 	}
@@ -159,73 +161,76 @@ public class AnnouncementsFlagUtil {
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag[] findByEntryId_PrevAndNext(
 		long flagId, long entryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
 		return getPersistence().findByEntryId_PrevAndNext(flagId, entryId, obc);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByU_E_V(
 		long userId, long entryId, int value)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
 		return getPersistence().findByU_E_V(userId, entryId, value);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag fetchByU_E_V(
 		long userId, long entryId, int value)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByU_E_V(userId, entryId, value);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag fetchByU_E_V(
 		long userId, long entryId, int value, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByU_E_V(userId, entryId, value, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByEntryId(long entryId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByEntryId(entryId);
 	}
 
 	public static void removeByU_E_V(long userId, long entryId, int value)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
 		getPersistence().removeByU_E_V(userId, entryId, value);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByEntryId(long entryId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByEntryId(entryId);
 	}
 
 	public static int countByU_E_V(long userId, long entryId, int value)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByU_E_V(userId, entryId, value);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

@@ -85,7 +85,7 @@ public class TasksReviewWrapper implements TasksReview {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksReview.getUserUuid();
 	}
 
@@ -134,7 +134,7 @@ public class TasksReviewWrapper implements TasksReview {
 	}
 
 	public java.lang.String getAssignedByUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksReview.getAssignedByUserUuid();
 	}
 

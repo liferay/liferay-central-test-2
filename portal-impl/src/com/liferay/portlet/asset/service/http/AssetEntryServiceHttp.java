@@ -74,8 +74,8 @@ import com.liferay.portlet.asset.service.AssetEntryServiceUtil;
  */
 public class AssetEntryServiceHttp {
 	public static void deleteEntry(HttpPrincipal httpPrincipal, long entryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
 
@@ -86,18 +86,18 @@ public class AssetEntryServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -106,7 +106,7 @@ public class AssetEntryServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getCompanyEntries(
 		HttpPrincipal httpPrincipal, long companyId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -124,16 +124,16 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (java.util.List<com.liferay.portlet.asset.model.AssetEntry>)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -141,7 +141,8 @@ public class AssetEntryServiceHttp {
 	}
 
 	public static int getCompanyEntriesCount(HttpPrincipal httpPrincipal,
-		long companyId) throws com.liferay.portal.SystemException {
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -154,16 +155,16 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return ((Integer)returnObj).intValue();
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -174,8 +175,8 @@ public class AssetEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -220,20 +221,20 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (java.lang.String)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -242,7 +243,8 @@ public class AssetEntryServiceHttp {
 
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] getCompanyEntryDisplays(
 		HttpPrincipal httpPrincipal, long companyId, int start, int end,
-		java.lang.String languageId) throws com.liferay.portal.SystemException {
+		java.lang.String languageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -266,16 +268,16 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (com.liferay.portlet.asset.model.AssetEntryDisplay[])returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -285,8 +287,8 @@ public class AssetEntryServiceHttp {
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
 		HttpPrincipal httpPrincipal,
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = entryQuery;
 
@@ -304,20 +306,20 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (java.util.List<com.liferay.portlet.asset.model.AssetEntry>)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -326,8 +328,8 @@ public class AssetEntryServiceHttp {
 
 	public static int getEntriesCount(HttpPrincipal httpPrincipal,
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = entryQuery;
 
@@ -345,20 +347,20 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return ((Integer)returnObj).intValue();
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -369,8 +371,8 @@ public class AssetEntryServiceHttp {
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = entryQuery;
 
@@ -418,20 +420,20 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (java.lang.String)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -440,8 +442,8 @@ public class AssetEntryServiceHttp {
 
 	public static com.liferay.portlet.asset.model.AssetEntry getEntry(
 		HttpPrincipal httpPrincipal, long entryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
 
@@ -454,20 +456,20 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (com.liferay.portlet.asset.model.AssetEntry)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -476,7 +478,7 @@ public class AssetEntryServiceHttp {
 
 	public static com.liferay.portlet.asset.model.AssetEntry incrementViewCounter(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = className;
 
@@ -496,16 +498,16 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (com.liferay.portlet.asset.model.AssetEntry)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -516,7 +518,7 @@ public class AssetEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -555,16 +557,16 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (com.liferay.portlet.asset.model.AssetEntryDisplay[])returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -573,7 +575,8 @@ public class AssetEntryServiceHttp {
 
 	public static int searchEntryDisplaysCount(HttpPrincipal httpPrincipal,
 		long companyId, java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId) throws com.liferay.portal.SystemException {
+		java.lang.String languageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -605,16 +608,16 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return ((Integer)returnObj).intValue();
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -630,8 +633,8 @@ public class AssetEntryServiceHttp {
 		java.lang.String description, java.lang.String summary,
 		java.lang.String url, int height, int width,
 		java.lang.Integer priority, boolean sync)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
@@ -739,20 +742,20 @@ public class AssetEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (com.liferay.portlet.asset.model.AssetEntry)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;

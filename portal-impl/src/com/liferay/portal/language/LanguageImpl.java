@@ -22,7 +22,7 @@
 
 package com.liferay.portal.language;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.log.Log;

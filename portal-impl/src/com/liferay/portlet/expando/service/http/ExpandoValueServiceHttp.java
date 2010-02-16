@@ -74,8 +74,8 @@ public class ExpandoValueServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		java.lang.Object data)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = className;
 
@@ -115,20 +115,20 @@ public class ExpandoValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (com.liferay.portlet.expando.model.ExpandoValue)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -138,8 +138,8 @@ public class ExpandoValueServiceHttp {
 	public static java.io.Serializable getData(HttpPrincipal httpPrincipal,
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = className;
 
@@ -171,20 +171,20 @@ public class ExpandoValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (java.io.Serializable)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;

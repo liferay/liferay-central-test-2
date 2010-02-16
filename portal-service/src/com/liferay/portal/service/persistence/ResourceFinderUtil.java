@@ -31,13 +31,14 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class ResourceFinderUtil {
 	public static java.util.List<com.liferay.portal.model.Resource> findByName(
-		java.lang.String name) throws com.liferay.portal.SystemException {
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByName(name);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> findByC_P(
 		long companyId, java.lang.String primKey)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByC_P(companyId, primKey);
 	}
 

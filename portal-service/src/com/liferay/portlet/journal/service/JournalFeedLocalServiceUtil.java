@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class JournalFeedLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalFeed addJournalFeed(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addJournalFeed(journalFeed);
 	}
 
@@ -57,55 +57,56 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static void deleteJournalFeed(long id)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteJournalFeed(id);
 	}
 
 	public static void deleteJournalFeed(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteJournalFeed(journalFeed);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed getJournalFeed(
 		long id)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getJournalFeed(id);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> getJournalFeeds(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getJournalFeeds(start, end);
 	}
 
 	public static int getJournalFeedsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getJournalFeedsCount();
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed updateJournalFeed(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateJournalFeed(journalFeed);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed updateJournalFeed(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateJournalFeed(journalFeed, merge);
 	}
 
@@ -119,8 +120,8 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addFeed(userId, groupId, feedId, autoFeedId, name,
 			description, type, structureId, templateId, rendererTemplateId,
@@ -139,8 +140,8 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addFeed(uuid, userId, groupId, feedId, autoFeedId, name,
 			description, type, structureId, templateId, rendererTemplateId,
@@ -150,8 +151,8 @@ public class JournalFeedLocalServiceUtil {
 
 	public static void addFeedResources(long feedId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addFeedResources(feedId, addCommunityPermissions,
 			addGuestPermissions);
@@ -160,8 +161,8 @@ public class JournalFeedLocalServiceUtil {
 	public static void addFeedResources(
 		com.liferay.portlet.journal.model.JournalFeed feed,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addFeedResources(feed, addCommunityPermissions, addGuestPermissions);
 	}
@@ -169,8 +170,8 @@ public class JournalFeedLocalServiceUtil {
 	public static void addFeedResources(long feedId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addFeedResources(feedId, communityPermissions, guestPermissions);
 	}
@@ -179,70 +180,71 @@ public class JournalFeedLocalServiceUtil {
 		com.liferay.portlet.journal.model.JournalFeed feed,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addFeedResources(feed, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteFeed(long feedId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFeed(feedId);
 	}
 
 	public static void deleteFeed(long groupId, java.lang.String feedId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFeed(groupId, feedId);
 	}
 
 	public static void deleteFeed(
 		com.liferay.portlet.journal.model.JournalFeed feed)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFeed(feed);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed getFeed(
 		long feedId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFeed(feedId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed getFeed(
 		long groupId, java.lang.String feedId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFeed(groupId, feedId);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> getFeeds()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFeeds();
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> getFeeds(
-		long groupId) throws com.liferay.portal.SystemException {
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFeeds(groupId);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> getFeeds(
 		long groupId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFeeds(groupId, start, end);
 	}
 
 	public static int getFeedsCount(long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFeedsCount(groupId);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> search(
 		long companyId, long groupId, java.lang.String keywords, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().search(companyId, groupId, keywords, start, end, obc);
 	}
 
@@ -251,21 +253,22 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String name, java.lang.String description,
 		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .search(companyId, groupId, feedId, name, description,
 			andOperator, start, end, obc);
 	}
 
 	public static int searchCount(long companyId, long groupId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+		java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().searchCount(companyId, groupId, keywords);
 	}
 
 	public static int searchCount(long companyId, long groupId,
 		java.lang.String feedId, java.lang.String name,
 		java.lang.String description, boolean andOperator)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .searchCount(companyId, groupId, feedId, name, description,
 			andOperator);
@@ -281,8 +284,8 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateFeed(groupId, feedId, name, description, type,
 			structureId, templateId, rendererTemplateId, delta, orderByCol,

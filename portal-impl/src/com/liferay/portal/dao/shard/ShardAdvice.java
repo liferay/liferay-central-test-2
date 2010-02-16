@@ -24,8 +24,8 @@ package com.liferay.portal.dao.shard;
 
 import com.liferay.counter.service.persistence.CounterPersistence;
 import com.liferay.portal.NoSuchCompanyException;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;

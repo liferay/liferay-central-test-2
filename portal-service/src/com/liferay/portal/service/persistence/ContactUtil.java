@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Contact;
 
 import java.util.List;
@@ -96,57 +96,59 @@ public class ContactUtil {
 
 	public static com.liferay.portal.model.Contact remove(long contactId)
 		throws com.liferay.portal.NoSuchContactException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(contactId);
 	}
 
 	public static com.liferay.portal.model.Contact updateImpl(
 		com.liferay.portal.model.Contact contact, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(contact, merge);
 	}
 
 	public static com.liferay.portal.model.Contact findByPrimaryKey(
 		long contactId)
 		throws com.liferay.portal.NoSuchContactException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(contactId);
 	}
 
 	public static com.liferay.portal.model.Contact fetchByPrimaryKey(
-		long contactId) throws com.liferay.portal.SystemException {
+		long contactId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(contactId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> findByCompanyId(
-		long companyId) throws com.liferay.portal.SystemException {
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> findByCompanyId(
 		long companyId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.Contact findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchContactException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Contact findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchContactException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
@@ -154,42 +156,45 @@ public class ContactUtil {
 		long contactId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchContactException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByCompanyId_PrevAndNext(contactId, companyId, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

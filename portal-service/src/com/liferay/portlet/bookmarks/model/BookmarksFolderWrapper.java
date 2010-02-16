@@ -93,7 +93,7 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _bookmarksFolder.getUserUuid();
 	}
 
@@ -204,14 +204,14 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 	}
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getAncestors()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _bookmarksFolder.getAncestors();
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder getParentFolder()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _bookmarksFolder.getParentFolder();
 	}
 

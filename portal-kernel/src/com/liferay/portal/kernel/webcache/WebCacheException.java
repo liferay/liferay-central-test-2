@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.webcache;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="WebCacheException.java.html"><b><i>View Source</i></b></a>

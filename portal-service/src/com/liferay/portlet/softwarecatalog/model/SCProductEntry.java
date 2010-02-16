@@ -49,11 +49,11 @@ package com.liferay.portlet.softwarecatalog.model;
  */
 public interface SCProductEntry extends SCProductEntryModel {
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getLatestVersion()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getScreenshots()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -47,43 +47,44 @@ public class CountryServiceWrapper implements CountryService {
 	public com.liferay.portal.model.Country addCountry(java.lang.String name,
 		java.lang.String a2, java.lang.String a3, java.lang.String number,
 		java.lang.String idd, boolean active)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _countryService.addCountry(name, a2, a3, number, idd, active);
 	}
 
 	public java.util.List<com.liferay.portal.model.Country> getCountries()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _countryService.getCountries();
 	}
 
 	public java.util.List<com.liferay.portal.model.Country> getCountries(
-		boolean active) throws com.liferay.portal.SystemException {
+		boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _countryService.getCountries(active);
 	}
 
 	public com.liferay.portal.model.Country getCountry(long countryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _countryService.getCountry(countryId);
 	}
 
 	public com.liferay.portal.model.Country getCountryByA2(java.lang.String a2)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _countryService.getCountryByA2(a2);
 	}
 
 	public com.liferay.portal.model.Country getCountryByA3(java.lang.String a3)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _countryService.getCountryByA3(a3);
 	}
 
 	public com.liferay.portal.model.Country getCountryByName(
 		java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _countryService.getCountryByName(name);
 	}
 

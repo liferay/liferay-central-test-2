@@ -76,7 +76,7 @@ public class FlagsEntryServiceHttp {
 		java.lang.String contentTitle, java.lang.String contentURL,
 		java.lang.String reason,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = className;
 
@@ -130,10 +130,10 @@ public class FlagsEntryServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;

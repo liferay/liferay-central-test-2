@@ -47,244 +47,258 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 
 	public com.liferay.portal.model.Permission remove(long permissionId)
 		throws com.liferay.portal.NoSuchPermissionException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission updateImpl(
 		com.liferay.portal.model.Permission permission, boolean merge)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission findByPrimaryKey(
 		long permissionId)
 		throws com.liferay.portal.NoSuchPermissionException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission fetchByPrimaryKey(
-		long permissionId) throws com.liferay.portal.SystemException;
+		long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> findByResourceId(
-		long resourceId) throws com.liferay.portal.SystemException;
+		long resourceId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> findByResourceId(
 		long resourceId, int start, int end)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> findByResourceId(
 		long resourceId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission findByResourceId_First(
 		long resourceId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchPermissionException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission findByResourceId_Last(
 		long resourceId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchPermissionException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission[] findByResourceId_PrevAndNext(
 		long permissionId, long resourceId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchPermissionException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission findByA_R(
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.NoSuchPermissionException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission fetchByA_R(
 		java.lang.String actionId, long resourceId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission fetchByA_R(
 		java.lang.String actionId, long resourceId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> findAll()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> findAll(
-		int start, int end) throws com.liferay.portal.SystemException;
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByResourceId(long resourceId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByA_R(java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.NoSuchPermissionException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeAll() throws com.liferay.portal.SystemException;
+	public void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByResourceId(long resourceId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByA_R(java.lang.String actionId, long resourceId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countAll() throws com.liferay.portal.SystemException;
+	public int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
-		int start, int end) throws com.liferay.portal.SystemException;
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int getGroupsSize(long pk) throws com.liferay.portal.SystemException;
+	public int getGroupsSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean containsGroup(long pk, long groupPK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean containsGroups(long pk)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addGroup(long pk, long groupPK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addGroup(long pk, com.liferay.portal.model.Group group)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addGroups(long pk, long[] groupPKs)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addGroups(long pk,
 		java.util.List<com.liferay.portal.model.Group> groups)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void clearGroups(long pk) throws com.liferay.portal.SystemException;
+	public void clearGroups(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeGroup(long pk, long groupPK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeGroup(long pk, com.liferay.portal.model.Group group)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeGroups(long pk, long[] groupPKs)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeGroups(long pk,
 		java.util.List<com.liferay.portal.model.Group> groups)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void setGroups(long pk, long[] groupPKs)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void setGroups(long pk,
 		java.util.List<com.liferay.portal.model.Group> groups)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
-		int start, int end) throws com.liferay.portal.SystemException;
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int getRolesSize(long pk) throws com.liferay.portal.SystemException;
+	public int getRolesSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean containsRole(long pk, long rolePK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean containsRoles(long pk)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addRole(long pk, long rolePK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addRole(long pk, com.liferay.portal.model.Role role)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addRoles(long pk, long[] rolePKs)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addRoles(long pk,
 		java.util.List<com.liferay.portal.model.Role> roles)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void clearRoles(long pk) throws com.liferay.portal.SystemException;
+	public void clearRoles(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeRole(long pk, long rolePK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeRole(long pk, com.liferay.portal.model.Role role)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeRoles(long pk, long[] rolePKs)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeRoles(long pk,
 		java.util.List<com.liferay.portal.model.Role> roles)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void setRoles(long pk, long[] rolePKs)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void setRoles(long pk,
 		java.util.List<com.liferay.portal.model.Role> roles)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
-		int start, int end) throws com.liferay.portal.SystemException;
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int getUsersSize(long pk) throws com.liferay.portal.SystemException;
+	public int getUsersSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean containsUser(long pk, long userPK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean containsUsers(long pk)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addUser(long pk, long userPK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addUser(long pk, com.liferay.portal.model.User user)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addUsers(long pk, long[] userPKs)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void clearUsers(long pk) throws com.liferay.portal.SystemException;
+	public void clearUsers(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeUser(long pk, long userPK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeUser(long pk, com.liferay.portal.model.User user)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeUsers(long pk, long[] userPKs)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void setUsers(long pk, long[] userPKs)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

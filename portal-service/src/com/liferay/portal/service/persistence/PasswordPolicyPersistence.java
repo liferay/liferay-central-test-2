@@ -48,69 +48,75 @@ public interface PasswordPolicyPersistence extends BasePersistence<PasswordPolic
 
 	public com.liferay.portal.model.PasswordPolicy remove(long passwordPolicyId)
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy updateImpl(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy, boolean merge)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy findByPrimaryKey(
 		long passwordPolicyId)
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy fetchByPrimaryKey(
-		long passwordPolicyId) throws com.liferay.portal.SystemException;
+		long passwordPolicyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy findByC_DP(long companyId,
 		boolean defaultPolicy)
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy fetchByC_DP(long companyId,
-		boolean defaultPolicy) throws com.liferay.portal.SystemException;
+		boolean defaultPolicy)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy fetchByC_DP(long companyId,
 		boolean defaultPolicy, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy fetchByC_N(long companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException;
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy fetchByC_N(long companyId,
 		java.lang.String name, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PasswordPolicy> findAll()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PasswordPolicy> findAll(
-		int start, int end) throws com.liferay.portal.SystemException;
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PasswordPolicy> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByC_DP(long companyId, boolean defaultPolicy)
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeAll() throws com.liferay.portal.SystemException;
+	public void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_DP(long companyId, boolean defaultPolicy)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countAll() throws com.liferay.portal.SystemException;
+	public int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

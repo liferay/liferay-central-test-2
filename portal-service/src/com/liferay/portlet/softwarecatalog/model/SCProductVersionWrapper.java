@@ -77,7 +77,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductVersion.getUserUuid();
 	}
 
@@ -224,7 +224,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductVersion.getFrameworkVersions();
 	}
 

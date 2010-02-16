@@ -47,7 +47,7 @@ public class UserTrackerLocalServiceWrapper implements UserTrackerLocalService {
 
 	public com.liferay.portal.model.UserTracker addUserTracker(
 		com.liferay.portal.model.UserTracker userTracker)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userTrackerLocalService.addUserTracker(userTracker);
 	}
 
@@ -57,54 +57,56 @@ public class UserTrackerLocalServiceWrapper implements UserTrackerLocalService {
 	}
 
 	public void deleteUserTracker(long userTrackerId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_userTrackerLocalService.deleteUserTracker(userTrackerId);
 	}
 
 	public void deleteUserTracker(
 		com.liferay.portal.model.UserTracker userTracker)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_userTrackerLocalService.deleteUserTracker(userTracker);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userTrackerLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _userTrackerLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.UserTracker getUserTracker(
 		long userTrackerId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userTrackerLocalService.getUserTracker(userTrackerId);
 	}
 
 	public java.util.List<com.liferay.portal.model.UserTracker> getUserTrackers(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userTrackerLocalService.getUserTrackers(start, end);
 	}
 
-	public int getUserTrackersCount() throws com.liferay.portal.SystemException {
+	public int getUserTrackersCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userTrackerLocalService.getUserTrackersCount();
 	}
 
 	public com.liferay.portal.model.UserTracker updateUserTracker(
 		com.liferay.portal.model.UserTracker userTracker)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userTrackerLocalService.updateUserTracker(userTracker);
 	}
 
 	public com.liferay.portal.model.UserTracker updateUserTracker(
 		com.liferay.portal.model.UserTracker userTracker, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userTrackerLocalService.updateUserTracker(userTracker, merge);
 	}
 
@@ -113,7 +115,7 @@ public class UserTrackerLocalServiceWrapper implements UserTrackerLocalService {
 		java.lang.String remoteAddr, java.lang.String remoteHost,
 		java.lang.String userAgent,
 		java.util.List<com.liferay.portal.model.UserTrackerPath> userTrackerPaths)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userTrackerLocalService.addUserTracker(companyId, userId,
 			modifiedDate, sessionId, remoteAddr, remoteHost, userAgent,
 			userTrackerPaths);
@@ -121,7 +123,7 @@ public class UserTrackerLocalServiceWrapper implements UserTrackerLocalService {
 
 	public java.util.List<com.liferay.portal.model.UserTracker> getUserTrackers(
 		long companyId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userTrackerLocalService.getUserTrackers(companyId, start, end);
 	}
 

@@ -47,7 +47,7 @@ public class UserIdMapperLocalServiceWrapper implements UserIdMapperLocalService
 
 	public com.liferay.portal.model.UserIdMapper addUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.addUserIdMapper(userIdMapper);
 	}
 
@@ -57,87 +57,88 @@ public class UserIdMapperLocalServiceWrapper implements UserIdMapperLocalService
 	}
 
 	public void deleteUserIdMapper(long userIdMapperId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_userIdMapperLocalService.deleteUserIdMapper(userIdMapperId);
 	}
 
 	public void deleteUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_userIdMapperLocalService.deleteUserIdMapper(userIdMapper);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(
 		long userIdMapperId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.getUserIdMapper(userIdMapperId);
 	}
 
 	public java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.getUserIdMappers(start, end);
 	}
 
 	public int getUserIdMappersCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.getUserIdMappersCount();
 	}
 
 	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.updateUserIdMapper(userIdMapper);
 	}
 
 	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.updateUserIdMapper(userIdMapper, merge);
 	}
 
 	public void deleteUserIdMappers(long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_userIdMapperLocalService.deleteUserIdMappers(userId);
 	}
 
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(long userId,
 		java.lang.String type)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.getUserIdMapper(userId, type);
 	}
 
 	public com.liferay.portal.model.UserIdMapper getUserIdMapperByExternalUserId(
 		java.lang.String type, java.lang.String externalUserId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.getUserIdMapperByExternalUserId(type,
 			externalUserId);
 	}
 
 	public java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(
-		long userId) throws com.liferay.portal.SystemException {
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.getUserIdMappers(userId);
 	}
 
 	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		long userId, java.lang.String type, java.lang.String description,
 		java.lang.String externalUserId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapperLocalService.updateUserIdMapper(userId, type,
 			description, externalUserId);
 	}

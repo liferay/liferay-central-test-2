@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class DLFileShortcutLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addDLFileShortcut(dlFileShortcut);
 	}
 
@@ -57,55 +57,57 @@ public class DLFileShortcutLocalServiceUtil {
 	}
 
 	public static void deleteDLFileShortcut(long fileShortcutId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteDLFileShortcut(fileShortcutId);
 	}
 
 	public static void deleteDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteDLFileShortcut(dlFileShortcut);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getDLFileShortcut(
 		long fileShortcutId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getDLFileShortcut(fileShortcutId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getDLFileShortcuts(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getDLFileShortcuts(start, end);
 	}
 
 	public static int getDLFileShortcutsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getDLFileShortcutsCount();
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateDLFileShortcut(dlFileShortcut);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateDLFileShortcut(dlFileShortcut, merge);
 	}
 
@@ -113,8 +115,8 @@ public class DLFileShortcutLocalServiceUtil {
 		java.lang.String uuid, long userId, long groupId, long folderId,
 		long toFolderId, java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addFileShortcut(uuid, userId, groupId, folderId,
 			toFolderId, toName, serviceContext);
@@ -123,8 +125,8 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void addFileShortcutResources(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addFileShortcutResources(fileShortcut, addCommunityPermissions,
 			addGuestPermissions);
@@ -134,8 +136,8 @@ public class DLFileShortcutLocalServiceUtil {
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addFileShortcutResources(fileShortcut, communityPermissions,
 			guestPermissions);
@@ -143,8 +145,8 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static void addFileShortcutResources(long fileShortcutId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addFileShortcutResources(fileShortcutId, addCommunityPermissions,
 			addGuestPermissions);
@@ -153,8 +155,8 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void addFileShortcutResources(long fileShortcutId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addFileShortcutResources(fileShortcutId, communityPermissions,
 			guestPermissions);
@@ -162,36 +164,36 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static void deleteFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFileShortcut(fileShortcut);
 	}
 
 	public static void deleteFileShortcut(long fileShortcutId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFileShortcut(fileShortcutId);
 	}
 
 	public static void deleteFileShortcuts(long groupId, long toFolderId,
 		java.lang.String toName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFileShortcuts(groupId, toFolderId, toName);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
 		long fileShortcutId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileShortcut(fileShortcutId);
 	}
 
 	public static void updateAsset(long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.updateAsset(userId, fileShortcut, assetCategoryIds, assetTagNames);
 	}
@@ -200,8 +202,8 @@ public class DLFileShortcutLocalServiceUtil {
 		long userId, long fileShortcutId, long folderId, long toFolderId,
 		java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateFileShortcut(userId, fileShortcutId, folderId,
 			toFolderId, toName, serviceContext);
@@ -209,7 +211,8 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static void updateFileShortcuts(long groupId, long oldToFolderId,
 		java.lang.String oldToName, long newToFolderId,
-		java.lang.String newToName) throws com.liferay.portal.SystemException {
+		java.lang.String newToName)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.updateFileShortcuts(groupId, oldToFolderId, oldToName,
 			newToFolderId, newToName);

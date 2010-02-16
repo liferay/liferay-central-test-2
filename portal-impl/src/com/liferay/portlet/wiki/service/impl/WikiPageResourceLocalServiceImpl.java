@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.wiki.service.impl;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.base.WikiPageResourceLocalServiceBaseImpl;
 

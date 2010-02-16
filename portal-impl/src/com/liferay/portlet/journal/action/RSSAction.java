@@ -23,7 +23,7 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

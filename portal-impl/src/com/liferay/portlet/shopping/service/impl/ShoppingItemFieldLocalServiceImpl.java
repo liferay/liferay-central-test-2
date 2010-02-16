@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.service.base.ShoppingItemFieldLocalServiceBaseImpl;
 

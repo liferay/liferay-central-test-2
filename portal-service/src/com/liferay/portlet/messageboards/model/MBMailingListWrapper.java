@@ -93,7 +93,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMailingList.getUserUuid();
 	}
 

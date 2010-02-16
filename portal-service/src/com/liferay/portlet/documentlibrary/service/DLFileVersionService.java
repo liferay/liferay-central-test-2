@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * <a href="DLFileVersionService.java.html"><b><i>View Source</i></b></a>
@@ -56,6 +56,6 @@ import com.liferay.portal.kernel.annotation.Transactional;
 public interface DLFileVersionService {
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion updateDescription(
 		long fileVersionId, java.lang.String description)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

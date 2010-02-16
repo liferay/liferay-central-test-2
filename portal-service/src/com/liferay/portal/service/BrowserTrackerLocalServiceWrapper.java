@@ -48,7 +48,7 @@ public class BrowserTrackerLocalServiceWrapper
 
 	public com.liferay.portal.model.BrowserTracker addBrowserTracker(
 		com.liferay.portal.model.BrowserTracker browserTracker)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _browserTrackerLocalService.addBrowserTracker(browserTracker);
 	}
 
@@ -58,71 +58,74 @@ public class BrowserTrackerLocalServiceWrapper
 	}
 
 	public void deleteBrowserTracker(long browserTrackerId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_browserTrackerLocalService.deleteBrowserTracker(browserTrackerId);
 	}
 
 	public void deleteBrowserTracker(
 		com.liferay.portal.model.BrowserTracker browserTracker)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_browserTrackerLocalService.deleteBrowserTracker(browserTracker);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _browserTrackerLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _browserTrackerLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.BrowserTracker getBrowserTracker(
 		long browserTrackerId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _browserTrackerLocalService.getBrowserTracker(browserTrackerId);
 	}
 
 	public java.util.List<com.liferay.portal.model.BrowserTracker> getBrowserTrackers(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _browserTrackerLocalService.getBrowserTrackers(start, end);
 	}
 
 	public int getBrowserTrackersCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _browserTrackerLocalService.getBrowserTrackersCount();
 	}
 
 	public com.liferay.portal.model.BrowserTracker updateBrowserTracker(
 		com.liferay.portal.model.BrowserTracker browserTracker)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _browserTrackerLocalService.updateBrowserTracker(browserTracker);
 	}
 
 	public com.liferay.portal.model.BrowserTracker updateBrowserTracker(
 		com.liferay.portal.model.BrowserTracker browserTracker, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _browserTrackerLocalService.updateBrowserTracker(browserTracker,
 			merge);
 	}
 
 	public void deleteUserBrowserTracker(long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_browserTrackerLocalService.deleteUserBrowserTracker(userId);
 	}
 
 	public com.liferay.portal.model.BrowserTracker getBrowserTracker(
-		long userId, long browserKey) throws com.liferay.portal.SystemException {
+		long userId, long browserKey)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _browserTrackerLocalService.getBrowserTracker(userId, browserKey);
 	}
 
 	public com.liferay.portal.model.BrowserTracker updateBrowserTracker(
-		long userId, long browserKey) throws com.liferay.portal.SystemException {
+		long userId, long browserKey)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _browserTrackerLocalService.updateBrowserTracker(userId,
 			browserKey);
 	}

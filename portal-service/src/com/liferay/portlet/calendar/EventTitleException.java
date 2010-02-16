@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.calendar;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="EventTitleException.java.html"><b><i>View Source</i></b></a>

@@ -49,21 +49,21 @@ package com.liferay.portlet.messageboards.model;
  */
 public interface MBMessage extends MBMessageModel {
 	public java.lang.String[] getAssetTagNames()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getAttachmentsDir();
 
 	public java.lang.String[] getAttachmentsFiles()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getBody(boolean translate);
 
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory();
 
 	public com.liferay.portlet.messageboards.model.MBThread getThread()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getThreadAttachmentsDir();
 

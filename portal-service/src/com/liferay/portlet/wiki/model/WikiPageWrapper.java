@@ -101,7 +101,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPage.getUserUuid();
 	}
 
@@ -194,7 +194,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPage.getStatusByUserUuid();
 	}
 
@@ -328,8 +328,8 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	public java.lang.String[] getAttachmentsFiles()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPage.getAttachmentsFiles();
 	}
 

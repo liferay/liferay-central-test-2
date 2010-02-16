@@ -234,12 +234,12 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	public com.liferay.portal.model.Theme getTheme()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSet.getTheme();
 	}
 
 	public com.liferay.portal.model.ColorScheme getColorScheme()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSet.getColorScheme();
 	}
 
@@ -248,12 +248,12 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	public com.liferay.portal.model.Theme getWapTheme()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSet.getWapTheme();
 	}
 
 	public com.liferay.portal.model.ColorScheme getWapColorScheme()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSet.getWapColorScheme();
 	}
 

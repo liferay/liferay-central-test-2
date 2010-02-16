@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.freemarker.JournalTemplateLoader;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;

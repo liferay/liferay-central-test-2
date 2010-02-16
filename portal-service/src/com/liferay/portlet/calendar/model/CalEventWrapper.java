@@ -93,7 +93,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEvent.getUserUuid();
 	}
 

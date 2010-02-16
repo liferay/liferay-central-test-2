@@ -22,7 +22,7 @@
 
 package com.liferay.counter.service;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.PortalServiceUtil;
 

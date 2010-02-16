@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.audit;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="AuditException.java.html"><b><i>View Source</i></b></a>

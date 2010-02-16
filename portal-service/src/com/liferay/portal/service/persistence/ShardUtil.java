@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Shard;
 
 import java.util.List;
@@ -96,107 +96,112 @@ public class ShardUtil {
 
 	public static com.liferay.portal.model.Shard remove(long shardId)
 		throws com.liferay.portal.NoSuchShardException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(shardId);
 	}
 
 	public static com.liferay.portal.model.Shard updateImpl(
 		com.liferay.portal.model.Shard shard, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(shard, merge);
 	}
 
 	public static com.liferay.portal.model.Shard findByPrimaryKey(long shardId)
 		throws com.liferay.portal.NoSuchShardException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(shardId);
 	}
 
 	public static com.liferay.portal.model.Shard fetchByPrimaryKey(long shardId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(shardId);
 	}
 
 	public static com.liferay.portal.model.Shard findByName(
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchShardException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByName(name);
 	}
 
 	public static com.liferay.portal.model.Shard fetchByName(
-		java.lang.String name) throws com.liferay.portal.SystemException {
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByName(name);
 	}
 
 	public static com.liferay.portal.model.Shard fetchByName(
 		java.lang.String name, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByName(name, retrieveFromCache);
 	}
 
 	public static com.liferay.portal.model.Shard findByC_C(long classNameId,
 		long classPK)
 		throws com.liferay.portal.NoSuchShardException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_C(classNameId, classPK);
 	}
 
 	public static com.liferay.portal.model.Shard fetchByC_C(long classNameId,
-		long classPK) throws com.liferay.portal.SystemException {
+		long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
 	public static com.liferay.portal.model.Shard fetchByC_C(long classNameId,
 		long classPK, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByC_C(classNameId, classPK, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Shard> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Shard> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Shard> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByName(java.lang.String name)
 		throws com.liferay.portal.NoSuchShardException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByName(name);
 	}
 
 	public static void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchShardException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByName(java.lang.String name)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByName(name);
 	}
 
 	public static int countByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

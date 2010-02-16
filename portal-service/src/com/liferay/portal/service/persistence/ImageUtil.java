@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Image;
 
 import java.util.List;
@@ -96,55 +96,56 @@ public class ImageUtil {
 
 	public static com.liferay.portal.model.Image remove(long imageId)
 		throws com.liferay.portal.NoSuchImageException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(imageId);
 	}
 
 	public static com.liferay.portal.model.Image updateImpl(
 		com.liferay.portal.model.Image image, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(image, merge);
 	}
 
 	public static com.liferay.portal.model.Image findByPrimaryKey(long imageId)
 		throws com.liferay.portal.NoSuchImageException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(imageId);
 	}
 
 	public static com.liferay.portal.model.Image fetchByPrimaryKey(long imageId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(imageId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> findBySize(
-		int size) throws com.liferay.portal.SystemException {
+		int size) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findBySize(size);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> findBySize(
-		int size, int start, int end) throws com.liferay.portal.SystemException {
+		int size, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findBySize(size, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> findBySize(
 		int size, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findBySize(size, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.Image findBySize_First(int size,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchImageException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findBySize_First(size, obc);
 	}
 
 	public static com.liferay.portal.model.Image findBySize_Last(int size,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchImageException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findBySize_Last(size, obc);
 	}
 
@@ -152,41 +153,44 @@ public class ImageUtil {
 		long imageId, int size,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchImageException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findBySize_PrevAndNext(imageId, size, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeBySize(int size)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeBySize(size);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countBySize(int size)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countBySize(size);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

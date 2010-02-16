@@ -85,7 +85,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingOrder.getUserUuid();
 	}
 

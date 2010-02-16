@@ -49,6 +49,6 @@ package com.liferay.portlet.tasks.model;
  */
 public interface TasksProposal extends TasksProposalModel {
 	public java.lang.String getStatus(java.util.Locale locale)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

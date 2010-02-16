@@ -31,27 +31,27 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class BlogsStatsUserFinderUtil {
 	public static int countByOrganizationId(long organizationId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByOrganizationId(organizationId);
 	}
 
 	public static int countByOrganizationIds(
 		java.util.List<Long> organizationIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByOrganizationIds(organizationIds);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationId(
 		long organizationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByOrganizationId(organizationId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationIds(
 		java.util.List<Long> organizationIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByOrganizationIds(organizationIds, start, end, obc);
 	}

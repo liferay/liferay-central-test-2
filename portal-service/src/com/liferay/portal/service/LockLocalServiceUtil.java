@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class LockLocalServiceUtil {
 	public static com.liferay.portal.model.Lock addLock(
 		com.liferay.portal.model.Lock lock)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addLock(lock);
 	}
 
@@ -56,105 +56,108 @@ public class LockLocalServiceUtil {
 	}
 
 	public static void deleteLock(long lockId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteLock(lockId);
 	}
 
 	public static void deleteLock(com.liferay.portal.model.Lock lock)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteLock(lock);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Lock getLock(long lockId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLock(lockId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Lock> getLocks(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLocks(start, end);
 	}
 
-	public static int getLocksCount() throws com.liferay.portal.SystemException {
+	public static int getLocksCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLocksCount();
 	}
 
 	public static com.liferay.portal.model.Lock updateLock(
 		com.liferay.portal.model.Lock lock)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateLock(lock);
 	}
 
 	public static com.liferay.portal.model.Lock updateLock(
 		com.liferay.portal.model.Lock lock, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateLock(lock, merge);
 	}
 
-	public static void clear() throws com.liferay.portal.SystemException {
+	public static void clear()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().clear();
 	}
 
 	public static com.liferay.portal.model.Lock getLock(
 		java.lang.String className, long key)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLock(className, key);
 	}
 
 	public static com.liferay.portal.model.Lock getLock(
 		java.lang.String className, java.lang.String key)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLock(className, key);
 	}
 
 	public static boolean hasLock(long userId, java.lang.String className,
 		long key)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().hasLock(userId, className, key);
 	}
 
 	public static boolean hasLock(long userId, java.lang.String className,
 		java.lang.String key)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().hasLock(userId, className, key);
 	}
 
 	public static boolean isLocked(java.lang.String className, long key)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().isLocked(className, key);
 	}
 
 	public static boolean isLocked(java.lang.String className,
 		java.lang.String key)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().isLocked(className, key);
 	}
 
 	public static com.liferay.portal.model.Lock lock(long userId,
 		java.lang.String className, long key, java.lang.String owner,
 		boolean inheritable, long expirationTime)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .lock(userId, className, key, owner, inheritable,
 			expirationTime);
@@ -163,8 +166,8 @@ public class LockLocalServiceUtil {
 	public static com.liferay.portal.model.Lock lock(long userId,
 		java.lang.String className, java.lang.String key,
 		java.lang.String owner, boolean inheritable, long expirationTime)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .lock(userId, className, key, owner, inheritable,
 			expirationTime);
@@ -172,18 +175,18 @@ public class LockLocalServiceUtil {
 
 	public static com.liferay.portal.model.Lock refresh(java.lang.String uuid,
 		long expirationTime)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().refresh(uuid, expirationTime);
 	}
 
 	public static void unlock(java.lang.String className, long key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().unlock(className, key);
 	}
 
 	public static void unlock(java.lang.String className, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().unlock(className, key);
 	}
 

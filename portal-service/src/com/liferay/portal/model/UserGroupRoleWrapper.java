@@ -62,7 +62,7 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupRole.getUserUuid();
 	}
 
@@ -148,20 +148,20 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 	}
 
 	public com.liferay.portal.model.Group getGroup()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupRole.getGroup();
 	}
 
 	public com.liferay.portal.model.Role getRole()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupRole.getRole();
 	}
 
 	public com.liferay.portal.model.User getUser()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupRole.getUser();
 	}
 

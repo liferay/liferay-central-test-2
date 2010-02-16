@@ -55,8 +55,8 @@ public class MBCategoryServiceWrapper implements MBCategoryService {
 		java.lang.String outUserName, java.lang.String outPassword,
 		boolean mailingListActive,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryService.addCategory(parentCategoryId, name,
 			description, emailAddress, inProtocol, inServerName, inServerPort,
 			inUseSSL, inUserName, inPassword, inReadInterval, outEmailAddress,
@@ -65,40 +65,40 @@ public class MBCategoryServiceWrapper implements MBCategoryService {
 	}
 
 	public void deleteCategory(long groupId, long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_mbCategoryService.deleteCategory(groupId, categoryId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory(
 		long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryService.getCategory(categoryId);
 	}
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
 		long groupId, long parentCategoryId, int start, int end)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryService.getCategories(groupId, parentCategoryId,
 			start, end);
 	}
 
 	public int getCategoriesCount(long groupId, long parentCategoryId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryService.getCategoriesCount(groupId, parentCategoryId);
 	}
 
 	public void subscribeCategory(long groupId, long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_mbCategoryService.subscribeCategory(groupId, categoryId);
 	}
 
 	public void unsubscribeCategory(long groupId, long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_mbCategoryService.unsubscribeCategory(groupId, categoryId);
 	}
 
@@ -113,8 +113,8 @@ public class MBCategoryServiceWrapper implements MBCategoryService {
 		java.lang.String outUserName, java.lang.String outPassword,
 		boolean mailingListActive, boolean mergeWithParentCategory,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryService.updateCategory(categoryId, parentCategoryId,
 			name, description, emailAddress, inProtocol, inServerName,
 			inServerPort, inUseSSL, inUserName, inPassword, inReadInterval,

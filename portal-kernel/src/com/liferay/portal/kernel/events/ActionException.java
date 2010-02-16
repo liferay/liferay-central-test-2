@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.events;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="ActionException.java.html"><b><i>View Source</i></b></a>

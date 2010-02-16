@@ -85,7 +85,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsEntry.getUserUuid();
 	}
 
@@ -268,8 +268,8 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	public long getGroupId()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsEntry.getGroupId();
 	}
 

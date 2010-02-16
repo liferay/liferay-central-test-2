@@ -31,13 +31,13 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class MBThreadFinderUtil {
 	public static int countByS_G_U_S(long groupId, long userId, int status)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByS_G_U_S(groupId, userId, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U_S(
 		long groupId, long userId, int status, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByS_G_U_S(groupId, userId, status, start, end);
 	}
 

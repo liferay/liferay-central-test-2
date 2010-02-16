@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class ResourceActionLocalServiceUtil {
 	public static com.liferay.portal.model.ResourceAction addResourceAction(
 		com.liferay.portal.model.ResourceAction resourceAction)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addResourceAction(resourceAction);
 	}
 
@@ -57,77 +57,79 @@ public class ResourceActionLocalServiceUtil {
 	}
 
 	public static void deleteResourceAction(long resourceActionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteResourceAction(resourceActionId);
 	}
 
 	public static void deleteResourceAction(
 		com.liferay.portal.model.ResourceAction resourceAction)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteResourceAction(resourceAction);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.ResourceAction getResourceAction(
 		long resourceActionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResourceAction(resourceActionId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceAction> getResourceActions(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResourceActions(start, end);
 	}
 
 	public static int getResourceActionsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResourceActionsCount();
 	}
 
 	public static com.liferay.portal.model.ResourceAction updateResourceAction(
 		com.liferay.portal.model.ResourceAction resourceAction)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateResourceAction(resourceAction);
 	}
 
 	public static com.liferay.portal.model.ResourceAction updateResourceAction(
 		com.liferay.portal.model.ResourceAction resourceAction, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateResourceAction(resourceAction, merge);
 	}
 
 	public static void checkResourceActions()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().checkResourceActions();
 	}
 
 	public static void checkResourceActions(java.lang.String name,
 		java.util.List<String> actionIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().checkResourceActions(name, actionIds);
 	}
 
 	public static com.liferay.portal.model.ResourceAction getResourceAction(
 		java.lang.String name, java.lang.String actionId)
-		throws com.liferay.portal.PortalException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getResourceAction(name, actionId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceAction> getResourceActions(
-		java.lang.String name) throws com.liferay.portal.SystemException {
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResourceActions(name);
 	}
 

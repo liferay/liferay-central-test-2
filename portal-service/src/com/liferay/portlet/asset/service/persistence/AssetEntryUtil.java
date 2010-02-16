@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import com.liferay.portlet.asset.model.AssetEntry;
 
@@ -100,57 +100,59 @@ public class AssetEntryUtil {
 
 	public static com.liferay.portlet.asset.model.AssetEntry remove(
 		long entryId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException {
 		return getPersistence().remove(entryId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry updateImpl(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(assetEntry, merge);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry findByPrimaryKey(
 		long entryId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException {
 		return getPersistence().findByPrimaryKey(entryId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry fetchByPrimaryKey(
-		long entryId) throws com.liferay.portal.SystemException {
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findByCompanyId(
-		long companyId) throws com.liferay.portal.SystemException {
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findByCompanyId(
 		long companyId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
@@ -158,7 +160,7 @@ public class AssetEntryUtil {
 	public static com.liferay.portlet.asset.model.AssetEntry[] findByCompanyId_PrevAndNext(
 		long entryId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException {
 		return getPersistence()
 				   .findByCompanyId_PrevAndNext(entryId, companyId, obc);
@@ -166,250 +168,255 @@ public class AssetEntryUtil {
 
 	public static com.liferay.portlet.asset.model.AssetEntry findByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException {
 		return getPersistence().findByC_C(classNameId, classPK);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry fetchByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry fetchByC_C(
 		long classNameId, long classPK, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByC_C(classNameId, classPK, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
 	public static void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
 	public static int countByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
-		long pk) throws com.liferay.portal.SystemException {
+		long pk) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getAssetCategories(pk);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
-		long pk, int start, int end) throws com.liferay.portal.SystemException {
+		long pk, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getAssetCategories(pk, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getAssetCategories(pk, start, end, obc);
 	}
 
 	public static int getAssetCategoriesSize(long pk)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getAssetCategoriesSize(pk);
 	}
 
 	public static boolean containsAssetCategory(long pk, long assetCategoryPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().containsAssetCategory(pk, assetCategoryPK);
 	}
 
 	public static boolean containsAssetCategories(long pk)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().containsAssetCategories(pk);
 	}
 
 	public static void addAssetCategory(long pk, long assetCategoryPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().addAssetCategory(pk, assetCategoryPK);
 	}
 
 	public static void addAssetCategory(long pk,
 		com.liferay.portlet.asset.model.AssetCategory assetCategory)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().addAssetCategory(pk, assetCategory);
 	}
 
 	public static void addAssetCategories(long pk, long[] assetCategoryPKs)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().addAssetCategories(pk, assetCategoryPKs);
 	}
 
 	public static void addAssetCategories(long pk,
 		java.util.List<com.liferay.portlet.asset.model.AssetCategory> assetCategories)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().addAssetCategories(pk, assetCategories);
 	}
 
 	public static void clearAssetCategories(long pk)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().clearAssetCategories(pk);
 	}
 
 	public static void removeAssetCategory(long pk, long assetCategoryPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAssetCategory(pk, assetCategoryPK);
 	}
 
 	public static void removeAssetCategory(long pk,
 		com.liferay.portlet.asset.model.AssetCategory assetCategory)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAssetCategory(pk, assetCategory);
 	}
 
 	public static void removeAssetCategories(long pk, long[] assetCategoryPKs)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAssetCategories(pk, assetCategoryPKs);
 	}
 
 	public static void removeAssetCategories(long pk,
 		java.util.List<com.liferay.portlet.asset.model.AssetCategory> assetCategories)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAssetCategories(pk, assetCategories);
 	}
 
 	public static void setAssetCategories(long pk, long[] assetCategoryPKs)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().setAssetCategories(pk, assetCategoryPKs);
 	}
 
 	public static void setAssetCategories(long pk,
 		java.util.List<com.liferay.portlet.asset.model.AssetCategory> assetCategories)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().setAssetCategories(pk, assetCategories);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getAssetTags(
-		long pk) throws com.liferay.portal.SystemException {
+		long pk) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getAssetTags(pk);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getAssetTags(
-		long pk, int start, int end) throws com.liferay.portal.SystemException {
+		long pk, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getAssetTags(pk, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getAssetTags(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getAssetTags(pk, start, end, obc);
 	}
 
 	public static int getAssetTagsSize(long pk)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getAssetTagsSize(pk);
 	}
 
 	public static boolean containsAssetTag(long pk, long assetTagPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().containsAssetTag(pk, assetTagPK);
 	}
 
 	public static boolean containsAssetTags(long pk)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().containsAssetTags(pk);
 	}
 
 	public static void addAssetTag(long pk, long assetTagPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().addAssetTag(pk, assetTagPK);
 	}
 
 	public static void addAssetTag(long pk,
 		com.liferay.portlet.asset.model.AssetTag assetTag)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().addAssetTag(pk, assetTag);
 	}
 
 	public static void addAssetTags(long pk, long[] assetTagPKs)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().addAssetTags(pk, assetTagPKs);
 	}
 
 	public static void addAssetTags(long pk,
 		java.util.List<com.liferay.portlet.asset.model.AssetTag> assetTags)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().addAssetTags(pk, assetTags);
 	}
 
 	public static void clearAssetTags(long pk)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().clearAssetTags(pk);
 	}
 
 	public static void removeAssetTag(long pk, long assetTagPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAssetTag(pk, assetTagPK);
 	}
 
 	public static void removeAssetTag(long pk,
 		com.liferay.portlet.asset.model.AssetTag assetTag)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAssetTag(pk, assetTag);
 	}
 
 	public static void removeAssetTags(long pk, long[] assetTagPKs)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAssetTags(pk, assetTagPKs);
 	}
 
 	public static void removeAssetTags(long pk,
 		java.util.List<com.liferay.portlet.asset.model.AssetTag> assetTags)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAssetTags(pk, assetTags);
 	}
 
 	public static void setAssetTags(long pk, long[] assetTagPKs)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().setAssetTags(pk, assetTagPKs);
 	}
 
 	public static void setAssetTags(long pk,
 		java.util.List<com.liferay.portlet.asset.model.AssetTag> assetTags)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().setAssetTags(pk, assetTags);
 	}
 

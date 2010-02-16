@@ -85,7 +85,7 @@ public class ShoppingCartWrapper implements ShoppingCart {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCart.getUserUuid();
 	}
 
@@ -220,13 +220,13 @@ public class ShoppingCartWrapper implements ShoppingCart {
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCart.getCoupon();
 	}
 
 	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCart.getItems();
 	}
 

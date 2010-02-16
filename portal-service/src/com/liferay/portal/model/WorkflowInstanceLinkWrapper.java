@@ -86,7 +86,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _workflowInstanceLink.getUserUuid();
 	}
 

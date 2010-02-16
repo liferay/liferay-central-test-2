@@ -48,7 +48,7 @@ public class SocialRelationLocalServiceWrapper
 
 	public com.liferay.portlet.social.model.SocialRelation addSocialRelation(
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.addSocialRelation(socialRelation);
 	}
 
@@ -58,122 +58,124 @@ public class SocialRelationLocalServiceWrapper
 	}
 
 	public void deleteSocialRelation(long relationId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_socialRelationLocalService.deleteSocialRelation(relationId);
 	}
 
 	public void deleteSocialRelation(
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialRelationLocalService.deleteSocialRelation(socialRelation);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portlet.social.model.SocialRelation getSocialRelation(
 		long relationId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.getSocialRelation(relationId);
 	}
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> getSocialRelations(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.getSocialRelations(start, end);
 	}
 
 	public int getSocialRelationsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.getSocialRelationsCount();
 	}
 
 	public com.liferay.portlet.social.model.SocialRelation updateSocialRelation(
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.updateSocialRelation(socialRelation);
 	}
 
 	public com.liferay.portlet.social.model.SocialRelation updateSocialRelation(
 		com.liferay.portlet.social.model.SocialRelation socialRelation,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.updateSocialRelation(socialRelation,
 			merge);
 	}
 
 	public com.liferay.portlet.social.model.SocialRelation addRelation(
 		long userId1, long userId2, int type)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.addRelation(userId1, userId2, type);
 	}
 
 	public void deleteRelation(long relationId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_socialRelationLocalService.deleteRelation(relationId);
 	}
 
 	public void deleteRelation(long userId1, long userId2, int type)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_socialRelationLocalService.deleteRelation(userId1, userId2, type);
 	}
 
 	public void deleteRelation(
 		com.liferay.portlet.social.model.SocialRelation relation)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_socialRelationLocalService.deleteRelation(relation);
 	}
 
 	public void deleteRelations(long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialRelationLocalService.deleteRelations(userId);
 	}
 
 	public com.liferay.portlet.social.model.SocialRelation getRelation(
 		long relationId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.getRelation(relationId);
 	}
 
 	public com.liferay.portlet.social.model.SocialRelation getRelation(
 		long userId1, long userId2, int type)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.getRelation(userId1, userId2, type);
 	}
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> getRelations(
 		long userId, int type, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.getRelations(userId, type, start, end);
 	}
 
 	public int getRelationsCount(long userId, int type)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.getRelationsCount(userId, type);
 	}
 
 	public boolean hasRelation(long userId1, long userId2, int type)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.hasRelation(userId1, userId2, type);
 	}
 
 	public boolean isRelatable(long userId1, long userId2, int type)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.isRelatable(userId1, userId2, type);
 	}
 

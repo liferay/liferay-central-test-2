@@ -48,7 +48,7 @@ public class JournalArticleResourceLocalServiceWrapper
 
 	public com.liferay.portlet.journal.model.JournalArticleResource addJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.addJournalArticleResource(journalArticleResource);
 	}
 
@@ -58,83 +58,87 @@ public class JournalArticleResourceLocalServiceWrapper
 	}
 
 	public void deleteJournalArticleResource(long resourcePrimKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleResourceLocalService.deleteJournalArticleResource(resourcePrimKey);
 	}
 
 	public void deleteJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleResourceLocalService.deleteJournalArticleResource(journalArticleResource);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.dynamicQuery(dynamicQuery,
 			start, end);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleResource getJournalArticleResource(
 		long resourcePrimKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.getJournalArticleResource(resourcePrimKey);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getJournalArticleResources(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.getJournalArticleResources(start,
 			end);
 	}
 
 	public int getJournalArticleResourcesCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.getJournalArticleResourcesCount();
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.updateJournalArticleResource(journalArticleResource);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.updateJournalArticleResource(journalArticleResource,
 			merge);
 	}
 
 	public void deleteArticleResource(long groupId, java.lang.String articleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleResourceLocalService.deleteArticleResource(groupId,
 			articleId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleResource getArticleResource(
 		long articleResourcePrimKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.getArticleResource(articleResourcePrimKey);
 	}
 
 	public long getArticleResourcePrimKey(long groupId,
-		java.lang.String articleId) throws com.liferay.portal.SystemException {
+		java.lang.String articleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.getArticleResourcePrimKey(groupId,
 			articleId);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getArticleResources(
-		long groupId) throws com.liferay.portal.SystemException {
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.getArticleResources(groupId);
 	}
 

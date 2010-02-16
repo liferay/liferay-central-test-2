@@ -101,7 +101,7 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticle.getUserUuid();
 	}
 
@@ -230,7 +230,7 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticle.getStatusByUserUuid();
 	}
 
@@ -385,8 +385,8 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	public java.lang.String getSmallImageType()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticle.getSmallImageType();
 	}
 

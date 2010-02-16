@@ -23,8 +23,8 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 

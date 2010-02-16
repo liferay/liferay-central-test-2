@@ -49,58 +49,58 @@ public class IGImageServiceWrapper implements IGImageService {
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.addImage(groupId, folderId, name, description,
 			file, contentType, serviceContext);
 	}
 
 	public void deleteImage(long imageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_igImageService.deleteImage(imageId);
 	}
 
 	public void deleteImageByFolderIdAndNameWithExtension(long groupId,
 		long folderId, java.lang.String nameWithExtension)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_igImageService.deleteImageByFolderIdAndNameWithExtension(groupId,
 			folderId, nameWithExtension);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.getImage(imageId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
 		long groupId, long folderId, java.lang.String nameWithExtension)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.getImageByFolderIdAndNameWithExtension(groupId,
 			folderId, nameWithExtension);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByLargeImageId(
 		long largeImageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.getImageByLargeImageId(largeImageId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImageBySmallImageId(
 		long smallImageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.getImageBySmallImageId(smallImageId);
 	}
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
 		long groupId, long folderId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.getImages(groupId, folderId);
 	}
 
@@ -109,8 +109,8 @@ public class IGImageServiceWrapper implements IGImageService {
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.updateImage(imageId, groupId, folderId, name,
 			description, file, contentType, serviceContext);
 	}

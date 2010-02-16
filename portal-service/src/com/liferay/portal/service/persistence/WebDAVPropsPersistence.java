@@ -47,50 +47,55 @@ public interface WebDAVPropsPersistence extends BasePersistence<WebDAVProps> {
 
 	public com.liferay.portal.model.WebDAVProps remove(long webDavPropsId)
 		throws com.liferay.portal.NoSuchWebDAVPropsException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WebDAVProps updateImpl(
 		com.liferay.portal.model.WebDAVProps webDAVProps, boolean merge)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WebDAVProps findByPrimaryKey(
 		long webDavPropsId)
 		throws com.liferay.portal.NoSuchWebDAVPropsException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WebDAVProps fetchByPrimaryKey(
-		long webDavPropsId) throws com.liferay.portal.SystemException;
+		long webDavPropsId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WebDAVProps findByC_C(long classNameId,
 		long classPK)
 		throws com.liferay.portal.NoSuchWebDAVPropsException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WebDAVProps fetchByC_C(long classNameId,
-		long classPK) throws com.liferay.portal.SystemException;
+		long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WebDAVProps fetchByC_C(long classNameId,
 		long classPK, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.WebDAVProps> findAll()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.WebDAVProps> findAll(
-		int start, int end) throws com.liferay.portal.SystemException;
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.WebDAVProps> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchWebDAVPropsException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeAll() throws com.liferay.portal.SystemException;
+	public void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countAll() throws com.liferay.portal.SystemException;
+	public int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

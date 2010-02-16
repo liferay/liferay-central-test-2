@@ -46,14 +46,14 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class MBMessageFlagServiceUtil {
 	public static void addAnswerFlag(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().addAnswerFlag(messageId);
 	}
 
 	public static void deleteAnswerFlag(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAnswerFlag(messageId);
 	}
 

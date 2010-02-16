@@ -61,7 +61,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	public java.lang.String getStatsUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _blogsStatsUser.getStatsUserUuid();
 	}
 
@@ -94,7 +94,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _blogsStatsUser.getUserUuid();
 	}
 

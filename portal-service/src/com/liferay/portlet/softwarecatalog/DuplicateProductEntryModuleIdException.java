@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="DuplicateProductEntryModuleIdException.java.html"><b><i>View Source

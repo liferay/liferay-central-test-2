@@ -47,49 +47,54 @@ public interface ClassNamePersistence extends BasePersistence<ClassName> {
 
 	public com.liferay.portal.model.ClassName remove(long classNameId)
 		throws com.liferay.portal.NoSuchClassNameException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ClassName updateImpl(
 		com.liferay.portal.model.ClassName className, boolean merge)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ClassName findByPrimaryKey(long classNameId)
 		throws com.liferay.portal.NoSuchClassNameException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ClassName fetchByPrimaryKey(
-		long classNameId) throws com.liferay.portal.SystemException;
+		long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ClassName findByValue(
 		java.lang.String value)
 		throws com.liferay.portal.NoSuchClassNameException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ClassName fetchByValue(
-		java.lang.String value) throws com.liferay.portal.SystemException;
+		java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ClassName fetchByValue(
 		java.lang.String value, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ClassName> findAll()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ClassName> findAll(
-		int start, int end) throws com.liferay.portal.SystemException;
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ClassName> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByValue(java.lang.String value)
 		throws com.liferay.portal.NoSuchClassNameException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeAll() throws com.liferay.portal.SystemException;
+	public void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByValue(java.lang.String value)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countAll() throws com.liferay.portal.SystemException;
+	public int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

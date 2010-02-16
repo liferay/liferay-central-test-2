@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import com.liferay.portlet.asset.model.AssetTagProperty;
 
@@ -100,57 +100,60 @@ public class AssetTagPropertyUtil {
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty remove(
 		long tagPropertyId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence().remove(tagPropertyId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty updateImpl(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(assetTagProperty, merge);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty findByPrimaryKey(
 		long tagPropertyId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence().findByPrimaryKey(tagPropertyId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty fetchByPrimaryKey(
-		long tagPropertyId) throws com.liferay.portal.SystemException {
+		long tagPropertyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(tagPropertyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByCompanyId(
-		long companyId) throws com.liferay.portal.SystemException {
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByCompanyId(
 		long companyId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
@@ -158,40 +161,40 @@ public class AssetTagPropertyUtil {
 	public static com.liferay.portlet.asset.model.AssetTagProperty[] findByCompanyId_PrevAndNext(
 		long tagPropertyId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence()
 				   .findByCompanyId_PrevAndNext(tagPropertyId, companyId, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByTagId(
-		long tagId) throws com.liferay.portal.SystemException {
+		long tagId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByTagId(tagId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByTagId(
 		long tagId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByTagId(tagId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByTagId(
 		long tagId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByTagId(tagId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty findByTagId_First(
 		long tagId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence().findByTagId_First(tagId, obc);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty findByTagId_Last(
 		long tagId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence().findByTagId_Last(tagId, obc);
 	}
@@ -199,7 +202,7 @@ public class AssetTagPropertyUtil {
 	public static com.liferay.portlet.asset.model.AssetTagProperty[] findByTagId_PrevAndNext(
 		long tagPropertyId, long tagId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence()
 				   .findByTagId_PrevAndNext(tagPropertyId, tagId, obc);
@@ -207,27 +210,27 @@ public class AssetTagPropertyUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByC_K(
 		long companyId, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_K(companyId, key);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByC_K(
 		long companyId, java.lang.String key, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_K(companyId, key, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByC_K(
 		long companyId, java.lang.String key, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_K(companyId, key, start, end, obc);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty findByC_K_First(
 		long companyId, java.lang.String key,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence().findByC_K_First(companyId, key, obc);
 	}
@@ -235,7 +238,7 @@ public class AssetTagPropertyUtil {
 	public static com.liferay.portlet.asset.model.AssetTagProperty findByC_K_Last(
 		long companyId, java.lang.String key,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence().findByC_K_Last(companyId, key, obc);
 	}
@@ -243,7 +246,7 @@ public class AssetTagPropertyUtil {
 	public static com.liferay.portlet.asset.model.AssetTagProperty[] findByC_K_PrevAndNext(
 		long tagPropertyId, long companyId, java.lang.String key,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence()
 				   .findByC_K_PrevAndNext(tagPropertyId, companyId, key, obc);
@@ -251,85 +254,88 @@ public class AssetTagPropertyUtil {
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty findByT_K(
 		long tagId, java.lang.String key)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence().findByT_K(tagId, key);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty fetchByT_K(
 		long tagId, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByT_K(tagId, key);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty fetchByT_K(
 		long tagId, java.lang.String key, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByT_K(tagId, key, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
 	public static void removeByTagId(long tagId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByTagId(tagId);
 	}
 
 	public static void removeByC_K(long companyId, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_K(companyId, key);
 	}
 
 	public static void removeByT_K(long tagId, java.lang.String key)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		getPersistence().removeByT_K(tagId, key);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
 	public static int countByTagId(long tagId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByTagId(tagId);
 	}
 
 	public static int countByC_K(long companyId, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_K(companyId, key);
 	}
 
 	public static int countByT_K(long tagId, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByT_K(tagId, key);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

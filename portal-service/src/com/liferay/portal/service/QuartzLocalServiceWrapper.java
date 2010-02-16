@@ -44,7 +44,8 @@ public class QuartzLocalServiceWrapper implements QuartzLocalService {
 		_quartzLocalService = quartzLocalService;
 	}
 
-	public void checkQuartzTables() throws com.liferay.portal.SystemException {
+	public void checkQuartzTables()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_quartzLocalService.checkQuartzTables();
 	}
 

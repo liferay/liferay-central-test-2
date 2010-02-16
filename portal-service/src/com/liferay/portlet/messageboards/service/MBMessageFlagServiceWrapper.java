@@ -46,14 +46,14 @@ public class MBMessageFlagServiceWrapper implements MBMessageFlagService {
 	}
 
 	public void addAnswerFlag(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_mbMessageFlagService.addAnswerFlag(messageId);
 	}
 
 	public void deleteAnswerFlag(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_mbMessageFlagService.deleteAnswerFlag(messageId);
 	}
 

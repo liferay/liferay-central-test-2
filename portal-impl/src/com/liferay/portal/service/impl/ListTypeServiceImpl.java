@@ -23,8 +23,8 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.NoSuchListTypeException;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.service.base.ListTypeServiceBaseImpl;

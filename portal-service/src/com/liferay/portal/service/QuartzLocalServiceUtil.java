@@ -46,7 +46,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class QuartzLocalServiceUtil {
 	public static void checkQuartzTables()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().checkQuartzTables();
 	}
 

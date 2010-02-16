@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import com.liferay.portlet.shopping.model.ShoppingItem;
 
@@ -100,109 +100,113 @@ public class ShoppingItemUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem remove(
 		long itemId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().remove(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(shoppingItem, merge);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByPrimaryKey(
 		long itemId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().findByPrimaryKey(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByPrimaryKey(
-		long itemId) throws com.liferay.portal.SystemException {
+		long itemId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findBySmallImageId(
 		long smallImageId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().findBySmallImageId(smallImageId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchBySmallImageId(
-		long smallImageId) throws com.liferay.portal.SystemException {
+		long smallImageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchBySmallImageId(smallImageId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchBySmallImageId(
 		long smallImageId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchBySmallImageId(smallImageId, retrieveFromCache);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByMediumImageId(
 		long mediumImageId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().findByMediumImageId(mediumImageId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByMediumImageId(
-		long mediumImageId) throws com.liferay.portal.SystemException {
+		long mediumImageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByMediumImageId(mediumImageId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByMediumImageId(
 		long mediumImageId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByMediumImageId(mediumImageId, retrieveFromCache);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByLargeImageId(
 		long largeImageId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().findByLargeImageId(largeImageId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByLargeImageId(
-		long largeImageId) throws com.liferay.portal.SystemException {
+		long largeImageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByLargeImageId(largeImageId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByLargeImageId(
 		long largeImageId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByLargeImageId(largeImageId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByG_C(
 		long groupId, long categoryId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_C(groupId, categoryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByG_C(
 		long groupId, long categoryId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_C(groupId, categoryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByG_C(
 		long groupId, long categoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_C(groupId, categoryId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByG_C_First(
 		long groupId, long categoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().findByG_C_First(groupId, categoryId, obc);
 	}
@@ -210,7 +214,7 @@ public class ShoppingItemUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByG_C_Last(
 		long groupId, long categoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().findByG_C_Last(groupId, categoryId, obc);
 	}
@@ -218,7 +222,7 @@ public class ShoppingItemUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItem[] findByG_C_PrevAndNext(
 		long itemId, long groupId, long categoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence()
 				   .findByG_C_PrevAndNext(itemId, groupId, categoryId, obc);
@@ -226,131 +230,136 @@ public class ShoppingItemUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
 		long companyId, java.lang.String sku)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().findByC_S(companyId, sku);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByC_S(
 		long companyId, java.lang.String sku)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByC_S(companyId, sku);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByC_S(
 		long companyId, java.lang.String sku, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByC_S(companyId, sku, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeBySmallImageId(long smallImageId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		getPersistence().removeBySmallImageId(smallImageId);
 	}
 
 	public static void removeByMediumImageId(long mediumImageId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		getPersistence().removeByMediumImageId(mediumImageId);
 	}
 
 	public static void removeByLargeImageId(long largeImageId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		getPersistence().removeByLargeImageId(largeImageId);
 	}
 
 	public static void removeByG_C(long groupId, long categoryId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_C(groupId, categoryId);
 	}
 
 	public static void removeByC_S(long companyId, java.lang.String sku)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		getPersistence().removeByC_S(companyId, sku);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countBySmallImageId(long smallImageId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countBySmallImageId(smallImageId);
 	}
 
 	public static int countByMediumImageId(long mediumImageId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByMediumImageId(mediumImageId);
 	}
 
 	public static int countByLargeImageId(long largeImageId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByLargeImageId(largeImageId);
 	}
 
 	public static int countByG_C(long groupId, long categoryId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_C(groupId, categoryId);
 	}
 
 	public static int countByC_S(long companyId, java.lang.String sku)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_S(companyId, sku);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
-		long pk) throws com.liferay.portal.SystemException {
+		long pk) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getShoppingItemPrices(pk);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
-		long pk, int start, int end) throws com.liferay.portal.SystemException {
+		long pk, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getShoppingItemPrices(pk, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getShoppingItemPrices(pk, start, end, obc);
 	}
 
 	public static int getShoppingItemPricesSize(long pk)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getShoppingItemPricesSize(pk);
 	}
 
 	public static boolean containsShoppingItemPrice(long pk,
-		long shoppingItemPricePK) throws com.liferay.portal.SystemException {
+		long shoppingItemPricePK)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .containsShoppingItemPrice(pk, shoppingItemPricePK);
 	}
 
 	public static boolean containsShoppingItemPrices(long pk)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().containsShoppingItemPrices(pk);
 	}
 

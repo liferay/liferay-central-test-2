@@ -45,34 +45,34 @@ public class MBThreadServiceWrapper implements MBThreadService {
 	}
 
 	public void deleteThread(long threadId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_mbThreadService.deleteThread(threadId);
 	}
 
 	public com.liferay.portal.model.Lock lockThread(long threadId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbThreadService.lockThread(threadId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbThreadService.moveThread(categoryId, threadId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBThread splitThread(
 		long messageId, com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbThreadService.splitThread(messageId, serviceContext);
 	}
 
 	public void unlockThread(long threadId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_mbThreadService.unlockThread(threadId);
 	}
 

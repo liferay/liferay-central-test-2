@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class ImageLocalServiceUtil {
 	public static com.liferay.portal.model.Image addImage(
 		com.liferay.portal.model.Image image)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addImage(image);
 	}
 
@@ -56,53 +56,54 @@ public class ImageLocalServiceUtil {
 	}
 
 	public static void deleteImage(long imageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteImage(imageId);
 	}
 
 	public static void deleteImage(com.liferay.portal.model.Image image)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteImage(image);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Image getImage(long imageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImage(imageId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImages(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImages(start, end);
 	}
 
 	public static int getImagesCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImagesCount();
 	}
 
 	public static com.liferay.portal.model.Image updateImage(
 		com.liferay.portal.model.Image image)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateImage(image);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(
 		com.liferay.portal.model.Image image, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateImage(image, merge);
 	}
 
@@ -150,12 +151,12 @@ public class ImageLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImages()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImages();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImagesBySize(
-		int size) throws com.liferay.portal.SystemException {
+		int size) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImagesBySize(size);
 	}
 
@@ -165,29 +166,29 @@ public class ImageLocalServiceUtil {
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateImage(imageId, bytes);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		java.io.File file)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateImage(imageId, file);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		java.io.InputStream is)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateImage(imageId, is);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes, java.lang.String type, int height, int width, int size)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateImage(imageId, bytes, type, height, width, size);
 	}

@@ -47,28 +47,28 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class MembershipRequestServiceUtil {
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long groupId, java.lang.String comments)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().addMembershipRequest(groupId, comments);
 	}
 
 	public static void deleteMembershipRequests(long groupId, int statusId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteMembershipRequests(groupId, statusId);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getMembershipRequest(membershipRequestId);
 	}
 
 	public static void updateStatus(long membershipRequestId,
 		java.lang.String reviewComments, int statusId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().updateStatus(membershipRequestId, reviewComments, statusId);
 	}
 

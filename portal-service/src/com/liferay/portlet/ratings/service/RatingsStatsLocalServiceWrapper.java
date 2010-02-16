@@ -47,7 +47,7 @@ public class RatingsStatsLocalServiceWrapper implements RatingsStatsLocalService
 
 	public com.liferay.portlet.ratings.model.RatingsStats addRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.addRatingsStats(ratingsStats);
 	}
 
@@ -57,78 +57,80 @@ public class RatingsStatsLocalServiceWrapper implements RatingsStatsLocalService
 	}
 
 	public void deleteRatingsStats(long statsId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_ratingsStatsLocalService.deleteRatingsStats(statsId);
 	}
 
 	public void deleteRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_ratingsStatsLocalService.deleteRatingsStats(ratingsStats);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsStats getRatingsStats(
 		long statsId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.getRatingsStats(statsId);
 	}
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getRatingsStatses(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.getRatingsStatses(start, end);
 	}
 
 	public int getRatingsStatsesCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.getRatingsStatsesCount();
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.updateRatingsStats(ratingsStats);
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.updateRatingsStats(ratingsStats, merge);
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsStats addStats(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.addStats(classNameId, classPK);
 	}
 
 	public void deleteStats(java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_ratingsStatsLocalService.deleteStats(className, classPK);
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsStats getStats(long statsId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.getStats(statsId);
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsStats getStats(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.getStats(className, classPK);
 	}
 

@@ -50,52 +50,59 @@ public interface WorkflowInstanceLinkPersistence extends BasePersistence<Workflo
 	public com.liferay.portal.model.WorkflowInstanceLink remove(
 		long workflowInstanceLinkId)
 		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WorkflowInstanceLink updateImpl(
 		com.liferay.portal.model.WorkflowInstanceLink workflowInstanceLink,
-		boolean merge) throws com.liferay.portal.SystemException;
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WorkflowInstanceLink findByPrimaryKey(
 		long workflowInstanceLinkId)
 		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WorkflowInstanceLink fetchByPrimaryKey(
-		long workflowInstanceLinkId) throws com.liferay.portal.SystemException;
+		long workflowInstanceLinkId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WorkflowInstanceLink findByG_C_C_C(
 		long groupId, long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WorkflowInstanceLink fetchByG_C_C_C(
 		long groupId, long companyId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WorkflowInstanceLink fetchByG_C_C_C(
 		long groupId, long companyId, long classNameId, long classPK,
-		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.WorkflowInstanceLink> findAll()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.WorkflowInstanceLink> findAll(
-		int start, int end) throws com.liferay.portal.SystemException;
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.WorkflowInstanceLink> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByG_C_C_C(long groupId, long companyId, long classNameId,
 		long classPK)
 		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
-			com.liferay.portal.SystemException;
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeAll() throws com.liferay.portal.SystemException;
+	public void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_C_C_C(long groupId, long companyId, long classNameId,
-		long classPK) throws com.liferay.portal.SystemException;
+		long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countAll() throws com.liferay.portal.SystemException;
+	public int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

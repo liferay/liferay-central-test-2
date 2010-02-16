@@ -93,7 +93,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolder.getUserUuid();
 	}
 
@@ -220,26 +220,26 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getAncestors()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolder.getAncestors();
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getParentFolder()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolder.getParentFolder();
 	}
 
 	public java.lang.String getPath()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolder.getPath();
 	}
 
 	public java.lang.String[] getPathArray()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolder.getPathArray();
 	}
 

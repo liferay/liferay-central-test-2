@@ -22,6 +22,8 @@
 
 package com.liferay.portal;
 
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
  * <a href="CountryA3Exception.java.html"><b><i>View Source</i></b></a>
  *

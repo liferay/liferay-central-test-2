@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 
@@ -100,51 +100,54 @@ public class DLFileShortcutUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut remove(
 		long fileShortcutId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().remove(fileShortcutId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(dlFileShortcut, merge);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByPrimaryKey(
 		long fileShortcutId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().findByPrimaryKey(fileShortcutId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchByPrimaryKey(
-		long fileShortcutId) throws com.liferay.portal.SystemException {
+		long fileShortcutId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(fileShortcutId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByUuid(
-		java.lang.String uuid) throws com.liferay.portal.SystemException {
+		java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByUuid(
 		java.lang.String uuid, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByUuid(
 		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid, start, end, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().findByUuid_First(uuid, obc);
 	}
@@ -152,7 +155,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().findByUuid_Last(uuid, obc);
 	}
@@ -160,52 +163,53 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByUuid_PrevAndNext(
 		long fileShortcutId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().findByUuid_PrevAndNext(fileShortcutId, uuid, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUUID_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().findByUUID_G(uuid, groupId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchByUUID_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchByUUID_G(
 		java.lang.String uuid, long groupId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F(
-		long groupId, long folderId) throws com.liferay.portal.SystemException {
+		long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_F(groupId, folderId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F(
 		long groupId, long folderId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_F(groupId, folderId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F(
 		long groupId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_F(groupId, folderId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_First(
 		long groupId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().findByG_F_First(groupId, folderId, obc);
 	}
@@ -213,7 +217,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_Last(
 		long groupId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().findByG_F_Last(groupId, folderId, obc);
 	}
@@ -221,7 +225,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByG_F_PrevAndNext(
 		long fileShortcutId, long groupId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_F_PrevAndNext(fileShortcutId, groupId, folderId, obc);
@@ -229,13 +233,13 @@ public class DLFileShortcutUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_S(
 		long groupId, long folderId, int status)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_F_S(groupId, folderId, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_S(
 		long groupId, long folderId, int status, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_F_S(groupId, folderId, status, start, end);
 	}
@@ -243,7 +247,7 @@ public class DLFileShortcutUtil {
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_S(
 		long groupId, long folderId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_F_S(groupId, folderId, status, start, end, obc);
 	}
@@ -251,7 +255,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_S_First(
 		long groupId, long folderId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().findByG_F_S_First(groupId, folderId, status, obc);
 	}
@@ -259,7 +263,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_S_Last(
 		long groupId, long folderId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().findByG_F_S_Last(groupId, folderId, status, obc);
 	}
@@ -267,7 +271,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByG_F_S_PrevAndNext(
 		long fileShortcutId, long groupId, long folderId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_F_S_PrevAndNext(fileShortcutId, groupId, folderId,
@@ -276,13 +280,13 @@ public class DLFileShortcutUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_TF_TN(
 		long groupId, long toFolderId, java.lang.String toName)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_TF_TN(groupId, toFolderId, toName);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_TF_TN(
 		long groupId, long toFolderId, java.lang.String toName, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_TF_TN(groupId, toFolderId, toName, start, end);
 	}
@@ -290,7 +294,7 @@ public class DLFileShortcutUtil {
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_TF_TN(
 		long groupId, long toFolderId, java.lang.String toName, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_TF_TN(groupId, toFolderId, toName, start, end, obc);
 	}
@@ -298,7 +302,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_TF_TN_First(
 		long groupId, long toFolderId, java.lang.String toName,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_TF_TN_First(groupId, toFolderId, toName, obc);
@@ -307,7 +311,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_TF_TN_Last(
 		long groupId, long toFolderId, java.lang.String toName,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_TF_TN_Last(groupId, toFolderId, toName, obc);
@@ -317,7 +321,7 @@ public class DLFileShortcutUtil {
 		long fileShortcutId, long groupId, long toFolderId,
 		java.lang.String toName,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_TF_TN_PrevAndNext(fileShortcutId, groupId,
@@ -326,14 +330,15 @@ public class DLFileShortcutUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_TF_TN_S(
 		long groupId, long toFolderId, java.lang.String toName, int status)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_TF_TN_S(groupId, toFolderId, toName, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_TF_TN_S(
 		long groupId, long toFolderId, java.lang.String toName, int status,
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_TF_TN_S(groupId, toFolderId, toName, status, start,
 			end);
@@ -342,7 +347,7 @@ public class DLFileShortcutUtil {
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_TF_TN_S(
 		long groupId, long toFolderId, java.lang.String toName, int status,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_TF_TN_S(groupId, toFolderId, toName, status, start,
 			end, obc);
@@ -351,7 +356,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_TF_TN_S_First(
 		long groupId, long toFolderId, java.lang.String toName, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_TF_TN_S_First(groupId, toFolderId, toName, status,
@@ -361,7 +366,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_TF_TN_S_Last(
 		long groupId, long toFolderId, java.lang.String toName, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_TF_TN_S_Last(groupId, toFolderId, toName, status,
@@ -372,7 +377,7 @@ public class DLFileShortcutUtil {
 		long fileShortcutId, long groupId, long toFolderId,
 		java.lang.String toName, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_TF_TN_S_PrevAndNext(fileShortcutId, groupId,
@@ -380,90 +385,95 @@ public class DLFileShortcutUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUuid(uuid);
 	}
 
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		getPersistence().removeByUUID_G(uuid, groupId);
 	}
 
 	public static void removeByG_F(long groupId, long folderId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_F(groupId, folderId);
 	}
 
 	public static void removeByG_F_S(long groupId, long folderId, int status)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_F_S(groupId, folderId, status);
 	}
 
 	public static void removeByG_TF_TN(long groupId, long toFolderId,
-		java.lang.String toName) throws com.liferay.portal.SystemException {
+		java.lang.String toName)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_TF_TN(groupId, toFolderId, toName);
 	}
 
 	public static void removeByG_TF_TN_S(long groupId, long toFolderId,
 		java.lang.String toName, int status)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_TF_TN_S(groupId, toFolderId, toName, status);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUuid(uuid);
 	}
 
 	public static int countByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
 	public static int countByG_F(long groupId, long folderId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_F(groupId, folderId);
 	}
 
 	public static int countByG_F_S(long groupId, long folderId, int status)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_F_S(groupId, folderId, status);
 	}
 
 	public static int countByG_TF_TN(long groupId, long toFolderId,
-		java.lang.String toName) throws com.liferay.portal.SystemException {
+		java.lang.String toName)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_TF_TN(groupId, toFolderId, toName);
 	}
 
 	public static int countByG_TF_TN_S(long groupId, long toFolderId,
 		java.lang.String toName, int status)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .countByG_TF_TN_S(groupId, toFolderId, toName, status);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

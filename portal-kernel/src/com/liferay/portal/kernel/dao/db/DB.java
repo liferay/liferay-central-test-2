@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.dao.db;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import java.io.IOException;
 

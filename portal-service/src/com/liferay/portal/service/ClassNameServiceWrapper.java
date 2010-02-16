@@ -45,13 +45,14 @@ public class ClassNameServiceWrapper implements ClassNameService {
 	}
 
 	public com.liferay.portal.model.ClassName getClassName(long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _classNameService.getClassName(classNameId);
 	}
 
 	public com.liferay.portal.model.ClassName getClassName(
-		java.lang.String value) throws com.liferay.portal.SystemException {
+		java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameService.getClassName(value);
 	}
 

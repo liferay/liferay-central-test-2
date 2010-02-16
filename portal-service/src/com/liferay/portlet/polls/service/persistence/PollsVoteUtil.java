@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import com.liferay.portlet.polls.model.PollsVote;
 
@@ -98,57 +98,58 @@ public class PollsVoteUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote remove(long voteId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchVoteException {
 		return getPersistence().remove(voteId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote updateImpl(
 		com.liferay.portlet.polls.model.PollsVote pollsVote, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(pollsVote, merge);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote findByPrimaryKey(
 		long voteId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchVoteException {
 		return getPersistence().findByPrimaryKey(voteId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote fetchByPrimaryKey(
-		long voteId) throws com.liferay.portal.SystemException {
+		long voteId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(voteId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByQuestionId(
-		long questionId) throws com.liferay.portal.SystemException {
+		long questionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByQuestionId(questionId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByQuestionId(
 		long questionId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByQuestionId(questionId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByQuestionId(
 		long questionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByQuestionId(questionId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote findByQuestionId_First(
 		long questionId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchVoteException {
 		return getPersistence().findByQuestionId_First(questionId, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote findByQuestionId_Last(
 		long questionId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchVoteException {
 		return getPersistence().findByQuestionId_Last(questionId, obc);
 	}
@@ -156,40 +157,41 @@ public class PollsVoteUtil {
 	public static com.liferay.portlet.polls.model.PollsVote[] findByQuestionId_PrevAndNext(
 		long voteId, long questionId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchVoteException {
 		return getPersistence()
 				   .findByQuestionId_PrevAndNext(voteId, questionId, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByChoiceId(
-		long choiceId) throws com.liferay.portal.SystemException {
+		long choiceId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByChoiceId(choiceId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByChoiceId(
 		long choiceId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByChoiceId(choiceId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByChoiceId(
 		long choiceId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByChoiceId(choiceId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote findByChoiceId_First(
 		long choiceId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchVoteException {
 		return getPersistence().findByChoiceId_First(choiceId, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote findByChoiceId_Last(
 		long choiceId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchVoteException {
 		return getPersistence().findByChoiceId_Last(choiceId, obc);
 	}
@@ -197,81 +199,85 @@ public class PollsVoteUtil {
 	public static com.liferay.portlet.polls.model.PollsVote[] findByChoiceId_PrevAndNext(
 		long voteId, long choiceId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchVoteException {
 		return getPersistence().findByChoiceId_PrevAndNext(voteId, choiceId, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote findByQ_U(
 		long questionId, long userId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchVoteException {
 		return getPersistence().findByQ_U(questionId, userId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote fetchByQ_U(
-		long questionId, long userId) throws com.liferay.portal.SystemException {
+		long questionId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByQ_U(questionId, userId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote fetchByQ_U(
 		long questionId, long userId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByQ_U(questionId, userId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByQuestionId(long questionId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByQuestionId(questionId);
 	}
 
 	public static void removeByChoiceId(long choiceId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByChoiceId(choiceId);
 	}
 
 	public static void removeByQ_U(long questionId, long userId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchVoteException {
 		getPersistence().removeByQ_U(questionId, userId);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByQuestionId(long questionId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByQuestionId(questionId);
 	}
 
 	public static int countByChoiceId(long choiceId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByChoiceId(choiceId);
 	}
 
 	public static int countByQ_U(long questionId, long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByQ_U(questionId, userId);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

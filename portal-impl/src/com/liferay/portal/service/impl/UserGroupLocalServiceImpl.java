@@ -24,10 +24,10 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.DuplicateUserGroupException;
 import com.liferay.portal.NoSuchUserGroupException;
-import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserGroupException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.UserGroupNameException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;

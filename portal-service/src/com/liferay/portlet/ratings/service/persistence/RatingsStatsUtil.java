@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import com.liferay.portlet.ratings.model.RatingsStats;
 
@@ -100,81 +100,86 @@ public class RatingsStatsUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsStats remove(
 		long statsId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException {
 		return getPersistence().remove(statsId);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats updateImpl(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(ratingsStats, merge);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats findByPrimaryKey(
 		long statsId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException {
 		return getPersistence().findByPrimaryKey(statsId);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats fetchByPrimaryKey(
-		long statsId) throws com.liferay.portal.SystemException {
+		long statsId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(statsId);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats findByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException {
 		return getPersistence().findByC_C(classNameId, classPK);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats fetchByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats fetchByC_C(
 		long classNameId, long classPK, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByC_C(classNameId, classPK, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

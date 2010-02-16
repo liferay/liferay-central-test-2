@@ -85,7 +85,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileVersion.getUserUuid();
 	}
 
@@ -166,7 +166,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileVersion.getStatusByUserUuid();
 	}
 

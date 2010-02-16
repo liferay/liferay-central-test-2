@@ -47,13 +47,14 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class ClassNameServiceUtil {
 	public static com.liferay.portal.model.ClassName getClassName(
 		long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getClassName(classNameId);
 	}
 
 	public static com.liferay.portal.model.ClassName getClassName(
-		java.lang.String value) throws com.liferay.portal.SystemException {
+		java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getClassName(value);
 	}
 

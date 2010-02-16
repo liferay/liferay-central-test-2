@@ -47,7 +47,7 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 
 	public com.liferay.portlet.shopping.model.ShoppingCart addShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.addShoppingCart(shoppingCart);
 	}
 
@@ -57,86 +57,88 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 	}
 
 	public void deleteShoppingCart(long cartId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_shoppingCartLocalService.deleteShoppingCart(cartId);
 	}
 
 	public void deleteShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_shoppingCartLocalService.deleteShoppingCart(shoppingCart);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCart getShoppingCart(
 		long cartId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.getShoppingCart(cartId);
 	}
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> getShoppingCarts(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.getShoppingCarts(start, end);
 	}
 
 	public int getShoppingCartsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.getShoppingCartsCount();
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCart updateShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.updateShoppingCart(shoppingCart);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCart updateShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.updateShoppingCart(shoppingCart, merge);
 	}
 
 	public void deleteGroupCarts(long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_shoppingCartLocalService.deleteGroupCarts(groupId);
 	}
 
 	public void deleteUserCarts(long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_shoppingCartLocalService.deleteUserCarts(userId);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCart getCart(
 		long userId, long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.getCart(userId, groupId);
 	}
 
 	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems(
 		long groupId, java.lang.String itemIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.getItems(groupId, itemIds);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCart updateCart(
 		long userId, long groupId, java.lang.String itemIds,
 		java.lang.String couponCodes, int altShipping, boolean insure)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.updateCart(userId, groupId, itemIds,
 			couponCodes, altShipping, insure);
 	}

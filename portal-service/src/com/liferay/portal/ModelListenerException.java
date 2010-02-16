@@ -22,6 +22,8 @@
 
 package com.liferay.portal;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 /**
  * <a href="ModelListenerException.java.html"><b><i>View Source</i></b></a>
  *

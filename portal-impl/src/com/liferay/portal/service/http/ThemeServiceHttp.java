@@ -69,7 +69,7 @@ import com.liferay.portal.service.ThemeServiceUtil;
 public class ThemeServiceHttp {
 	public static java.util.List<com.liferay.portal.model.Theme> getThemes(
 		HttpPrincipal httpPrincipal, long companyId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -82,12 +82,12 @@ public class ThemeServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (java.util.List<com.liferay.portal.model.Theme>)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -95,7 +95,8 @@ public class ThemeServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray getWARThemes(
-		HttpPrincipal httpPrincipal) throws com.liferay.portal.SystemException {
+		HttpPrincipal httpPrincipal)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(ThemeServiceUtil.class.getName(),
 					"getWARThemes", new Object[0]);
@@ -106,12 +107,12 @@ public class ThemeServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (com.liferay.portal.kernel.json.JSONArray)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;

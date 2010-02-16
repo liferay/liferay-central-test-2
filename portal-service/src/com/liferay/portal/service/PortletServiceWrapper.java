@@ -50,8 +50,8 @@ public class PortletServiceWrapper implements PortletService {
 
 	public com.liferay.portal.model.Portlet updatePortlet(long companyId,
 		java.lang.String portletId, java.lang.String roles, boolean active)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _portletService.updatePortlet(companyId, portletId, roles, active);
 	}
 

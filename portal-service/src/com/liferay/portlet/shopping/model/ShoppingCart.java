@@ -51,11 +51,11 @@ public interface ShoppingCart extends ShoppingCartModel {
 	public void addItemId(long itemId, java.lang.String fields);
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getItemsSize();
 }

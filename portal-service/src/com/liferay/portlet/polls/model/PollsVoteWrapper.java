@@ -69,7 +69,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pollsVote.getUserUuid();
 	}
 
@@ -163,8 +163,8 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	public com.liferay.portlet.polls.model.PollsChoice getChoice()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _pollsVote.getChoice();
 	}
 

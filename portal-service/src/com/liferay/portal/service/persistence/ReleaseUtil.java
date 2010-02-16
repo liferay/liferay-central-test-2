@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Release;
 
 import java.util.List;
@@ -96,83 +96,87 @@ public class ReleaseUtil {
 
 	public static com.liferay.portal.model.Release remove(long releaseId)
 		throws com.liferay.portal.NoSuchReleaseException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(releaseId);
 	}
 
 	public static com.liferay.portal.model.Release updateImpl(
 		com.liferay.portal.model.Release release, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(release, merge);
 	}
 
 	public static com.liferay.portal.model.Release findByPrimaryKey(
 		long releaseId)
 		throws com.liferay.portal.NoSuchReleaseException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(releaseId);
 	}
 
 	public static com.liferay.portal.model.Release fetchByPrimaryKey(
-		long releaseId) throws com.liferay.portal.SystemException {
+		long releaseId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(releaseId);
 	}
 
 	public static com.liferay.portal.model.Release findByServletContextName(
 		java.lang.String servletContextName)
 		throws com.liferay.portal.NoSuchReleaseException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByServletContextName(servletContextName);
 	}
 
 	public static com.liferay.portal.model.Release fetchByServletContextName(
 		java.lang.String servletContextName)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByServletContextName(servletContextName);
 	}
 
 	public static com.liferay.portal.model.Release fetchByServletContextName(
 		java.lang.String servletContextName, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByServletContextName(servletContextName,
 			retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Release> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Release> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Release> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByServletContextName(
 		java.lang.String servletContextName)
 		throws com.liferay.portal.NoSuchReleaseException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByServletContextName(servletContextName);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByServletContextName(
 		java.lang.String servletContextName)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByServletContextName(servletContextName);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

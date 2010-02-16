@@ -48,7 +48,7 @@ public class ServiceComponentLocalServiceWrapper
 
 	public com.liferay.portal.model.ServiceComponent addServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.addServiceComponent(serviceComponent);
 	}
 
@@ -58,56 +58,58 @@ public class ServiceComponentLocalServiceWrapper
 	}
 
 	public void deleteServiceComponent(long serviceComponentId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_serviceComponentLocalService.deleteServiceComponent(serviceComponentId);
 	}
 
 	public void deleteServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_serviceComponentLocalService.deleteServiceComponent(serviceComponent);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.dynamicQuery(dynamicQuery, start,
 			end);
 	}
 
 	public com.liferay.portal.model.ServiceComponent getServiceComponent(
 		long serviceComponentId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.getServiceComponent(serviceComponentId);
 	}
 
 	public java.util.List<com.liferay.portal.model.ServiceComponent> getServiceComponents(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.getServiceComponents(start, end);
 	}
 
 	public int getServiceComponentsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.getServiceComponentsCount();
 	}
 
 	public com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.updateServiceComponent(serviceComponent);
 	}
 
 	public com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.updateServiceComponent(serviceComponent,
 			merge);
 	}
@@ -115,7 +117,7 @@ public class ServiceComponentLocalServiceWrapper
 	public void destroyServiceComponent(
 		javax.servlet.ServletContext servletContext,
 		java.lang.ClassLoader classLoader)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_serviceComponentLocalService.destroyServiceComponent(servletContext,
 			classLoader);
 	}
@@ -124,8 +126,8 @@ public class ServiceComponentLocalServiceWrapper
 		javax.servlet.ServletContext servletContext,
 		java.lang.ClassLoader classLoader, java.lang.String buildNamespace,
 		long buildNumber, long buildDate, boolean buildAutoUpgrade)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.initServiceComponent(servletContext,
 			classLoader, buildNamespace, buildNumber, buildDate,
 			buildAutoUpgrade);
@@ -143,8 +145,8 @@ public class ServiceComponentLocalServiceWrapper
 	}
 
 	public void verifyDB()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_serviceComponentLocalService.verifyDB();
 	}
 

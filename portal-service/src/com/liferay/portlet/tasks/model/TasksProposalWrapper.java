@@ -85,7 +85,7 @@ public class TasksProposalWrapper implements TasksProposal {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposal.getUserUuid();
 	}
 
@@ -232,8 +232,8 @@ public class TasksProposalWrapper implements TasksProposal {
 	}
 
 	public java.lang.String getStatus(java.util.Locale locale)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposal.getStatus(locale);
 	}
 

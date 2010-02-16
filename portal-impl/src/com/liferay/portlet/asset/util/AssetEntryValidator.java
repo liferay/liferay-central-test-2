@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.asset.util;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="AssetEntryValidator.java.html"><b><i>View Source</i></b></a>

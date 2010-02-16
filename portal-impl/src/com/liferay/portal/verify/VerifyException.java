@@ -22,7 +22,7 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="VerifyException.java.html"><b><i>View Source</i></b></a>

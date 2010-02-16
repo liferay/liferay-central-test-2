@@ -109,7 +109,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	public java.lang.String getLastPostByUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbThread.getLastPostByUserUuid();
 	}
 
@@ -150,7 +150,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbThread.getStatusByUserUuid();
 	}
 

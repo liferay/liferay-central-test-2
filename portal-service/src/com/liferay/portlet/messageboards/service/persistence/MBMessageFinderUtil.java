@@ -31,35 +31,35 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class MBMessageFinderUtil {
 	public static int countByC_T(java.util.Date createDate, long threadId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByC_T(createDate, threadId);
 	}
 
 	public static int countByG_U_S(long groupId, long userId, int status)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByG_U_S(groupId, userId, status);
 	}
 
 	public static int countByG_U_A_S(long groupId, long userId,
 		boolean anonymous, int status)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByG_U_A_S(groupId, userId, anonymous, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByNoAssets();
 	}
 
 	public static java.util.List<Long> findByG_U_S(long groupId, long userId,
 		int status, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByG_U_S(groupId, userId, status, start, end);
 	}
 
 	public static java.util.List<Long> findByG_U_A_S(long groupId, long userId,
 		boolean anonymous, int status, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByG_U_A_S(groupId, userId, anonymous, status, start, end);
 	}

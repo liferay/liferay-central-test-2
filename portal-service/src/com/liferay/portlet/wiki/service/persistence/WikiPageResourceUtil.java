@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import com.liferay.portlet.wiki.model.WikiPageResource;
 
@@ -100,80 +100,85 @@ public class WikiPageResourceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource remove(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
 		return getPersistence().remove(resourcePrimKey);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource updateImpl(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(wikiPageResource, merge);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource findByPrimaryKey(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
 		return getPersistence().findByPrimaryKey(resourcePrimKey);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByPrimaryKey(
-		long resourcePrimKey) throws com.liferay.portal.SystemException {
+		long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(resourcePrimKey);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource findByN_T(
 		long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
 		return getPersistence().findByN_T(nodeId, title);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByN_T(
 		long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByN_T(nodeId, title);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByN_T(
 		long nodeId, java.lang.String title, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByN_T(nodeId, title, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByN_T(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
 		getPersistence().removeByN_T(nodeId, title);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByN_T(long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByN_T(nodeId, title);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

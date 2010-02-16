@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import com.liferay.portlet.expando.model.ExpandoRow;
 
@@ -100,57 +100,58 @@ public class ExpandoRowUtil {
 
 	public static com.liferay.portlet.expando.model.ExpandoRow remove(
 		long rowId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
 		return getPersistence().remove(rowId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow updateImpl(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(expandoRow, merge);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow findByPrimaryKey(
 		long rowId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
 		return getPersistence().findByPrimaryKey(rowId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow fetchByPrimaryKey(
-		long rowId) throws com.liferay.portal.SystemException {
+		long rowId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(rowId);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTableId(
-		long tableId) throws com.liferay.portal.SystemException {
+		long tableId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByTableId(tableId);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTableId(
 		long tableId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByTableId(tableId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTableId(
 		long tableId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByTableId(tableId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow findByTableId_First(
 		long tableId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
 		return getPersistence().findByTableId_First(tableId, obc);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow findByTableId_Last(
 		long tableId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
 		return getPersistence().findByTableId_Last(tableId, obc);
 	}
@@ -158,71 +159,75 @@ public class ExpandoRowUtil {
 	public static com.liferay.portlet.expando.model.ExpandoRow[] findByTableId_PrevAndNext(
 		long rowId, long tableId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
 		return getPersistence().findByTableId_PrevAndNext(rowId, tableId, obc);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow findByT_C(
 		long tableId, long classPK)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
 		return getPersistence().findByT_C(tableId, classPK);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow fetchByT_C(
-		long tableId, long classPK) throws com.liferay.portal.SystemException {
+		long tableId, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByT_C(tableId, classPK);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow fetchByT_C(
 		long tableId, long classPK, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByT_C(tableId, classPK, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByTableId(long tableId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByTableId(tableId);
 	}
 
 	public static void removeByT_C(long tableId, long classPK)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
 		getPersistence().removeByT_C(tableId, classPK);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByTableId(long tableId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByTableId(tableId);
 	}
 
 	public static int countByT_C(long tableId, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByT_C(tableId, classPK);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

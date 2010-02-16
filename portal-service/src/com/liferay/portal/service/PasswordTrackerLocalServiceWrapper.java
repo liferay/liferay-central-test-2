@@ -48,7 +48,7 @@ public class PasswordTrackerLocalServiceWrapper
 
 	public com.liferay.portal.model.PasswordTracker addPasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.addPasswordTracker(passwordTracker);
 	}
 
@@ -58,83 +58,84 @@ public class PasswordTrackerLocalServiceWrapper
 	}
 
 	public void deletePasswordTracker(long passwordTrackerId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_passwordTrackerLocalService.deletePasswordTracker(passwordTrackerId);
 	}
 
 	public void deletePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_passwordTrackerLocalService.deletePasswordTracker(passwordTracker);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.dynamicQuery(dynamicQuery, start,
 			end);
 	}
 
 	public com.liferay.portal.model.PasswordTracker getPasswordTracker(
 		long passwordTrackerId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.getPasswordTracker(passwordTrackerId);
 	}
 
 	public java.util.List<com.liferay.portal.model.PasswordTracker> getPasswordTrackers(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.getPasswordTrackers(start, end);
 	}
 
 	public int getPasswordTrackersCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.getPasswordTrackersCount();
 	}
 
 	public com.liferay.portal.model.PasswordTracker updatePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.updatePasswordTracker(passwordTracker);
 	}
 
 	public com.liferay.portal.model.PasswordTracker updatePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.updatePasswordTracker(passwordTracker,
 			merge);
 	}
 
 	public void deletePasswordTrackers(long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_passwordTrackerLocalService.deletePasswordTrackers(userId);
 	}
 
 	public boolean isSameAsCurrentPassword(long userId,
 		java.lang.String newClearTextPwd)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.isSameAsCurrentPassword(userId,
 			newClearTextPwd);
 	}
 
 	public boolean isValidPassword(long userId, java.lang.String newClearTextPwd)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.isValidPassword(userId,
 			newClearTextPwd);
 	}
 
 	public void trackPassword(long userId, java.lang.String encPassword)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_passwordTrackerLocalService.trackPassword(userId, encPassword);
 	}
 

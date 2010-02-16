@@ -93,7 +93,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _blogsEntry.getUserUuid();
 	}
 
@@ -194,7 +194,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _blogsEntry.getStatusByUserUuid();
 	}
 

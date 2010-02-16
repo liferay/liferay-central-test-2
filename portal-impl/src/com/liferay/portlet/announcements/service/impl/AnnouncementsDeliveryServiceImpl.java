@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.announcements.service.impl;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;

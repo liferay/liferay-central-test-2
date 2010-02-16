@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.upgrade.util;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * <a href="UpgradeColumn.java.html"><b><i>View Source</i></b></a>

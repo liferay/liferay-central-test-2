@@ -46,21 +46,21 @@ public class AnnouncementsFlagServiceWrapper implements AnnouncementsFlagService
 	}
 
 	public void addFlag(long entryId, int value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_announcementsFlagService.addFlag(entryId, value);
 	}
 
 	public void deleteFlag(long flagId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_announcementsFlagService.deleteFlag(flagId);
 	}
 
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		long entryId, int value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsFlagService.getFlag(entryId, value);
 	}
 

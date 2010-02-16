@@ -47,8 +47,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class DLFileVersionServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateDescription(
 		long fileVersionId, java.lang.String description)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateDescription(fileVersionId, description);
 	}
 

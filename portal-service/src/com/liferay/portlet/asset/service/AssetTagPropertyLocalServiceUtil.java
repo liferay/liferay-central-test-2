@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class AssetTagPropertyLocalServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetTagProperty addAssetTagProperty(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addAssetTagProperty(assetTagProperty);
 	}
 
@@ -57,121 +57,123 @@ public class AssetTagPropertyLocalServiceUtil {
 	}
 
 	public static void deleteAssetTagProperty(long tagPropertyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAssetTagProperty(tagPropertyId);
 	}
 
 	public static void deleteAssetTagProperty(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAssetTagProperty(assetTagProperty);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty getAssetTagProperty(
 		long tagPropertyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAssetTagProperty(tagPropertyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> getAssetTagProperties(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAssetTagProperties(start, end);
 	}
 
 	public static int getAssetTagPropertiesCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAssetTagPropertiesCount();
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty updateAssetTagProperty(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateAssetTagProperty(assetTagProperty);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty updateAssetTagProperty(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateAssetTagProperty(assetTagProperty, merge);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty addTagProperty(
 		long userId, long tagId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().addTagProperty(userId, tagId, key, value);
 	}
 
 	public static void deleteTagProperties(long tagId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTagProperties(tagId);
 	}
 
 	public static void deleteTagProperty(
 		com.liferay.portlet.asset.model.AssetTagProperty tagProperty)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTagProperty(tagProperty);
 	}
 
 	public static void deleteTagProperty(long tagPropertyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTagProperty(tagPropertyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> getTagProperties()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTagProperties();
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> getTagProperties(
-		long tagId) throws com.liferay.portal.SystemException {
+		long tagId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTagProperties(tagId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty getTagProperty(
 		long tagPropertyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTagProperty(tagPropertyId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty getTagProperty(
 		long tagId, java.lang.String key)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTagProperty(tagId, key);
 	}
 
 	public static java.lang.String[] getTagPropertyKeys(long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTagPropertyKeys(groupId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> getTagPropertyValues(
 		long groupId, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTagPropertyValues(groupId, key);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty updateTagProperty(
 		long tagPropertyId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateTagProperty(tagPropertyId, key, value);
 	}
 

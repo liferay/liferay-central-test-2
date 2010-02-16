@@ -31,13 +31,13 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class MBCategoryFinderUtil {
 	public static int countByS_G_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByS_G_U(groupId, userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByS_G_U(
 		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByS_G_U(groupId, userId, start, end);
 	}
 

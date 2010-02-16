@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class ResourceCodeLocalServiceUtil {
 	public static com.liferay.portal.model.ResourceCode addResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addResourceCode(resourceCode);
 	}
 
@@ -57,77 +57,78 @@ public class ResourceCodeLocalServiceUtil {
 	}
 
 	public static void deleteResourceCode(long codeId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteResourceCode(codeId);
 	}
 
 	public static void deleteResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteResourceCode(resourceCode);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long codeId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResourceCode(codeId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceCode> getResourceCodes(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResourceCodes(start, end);
 	}
 
 	public static int getResourceCodesCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResourceCodesCount();
 	}
 
 	public static com.liferay.portal.model.ResourceCode updateResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateResourceCode(resourceCode);
 	}
 
 	public static com.liferay.portal.model.ResourceCode updateResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateResourceCode(resourceCode, merge);
 	}
 
 	public static com.liferay.portal.model.ResourceCode addResourceCode(
 		long companyId, java.lang.String name, int scope)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addResourceCode(companyId, name, scope);
 	}
 
 	public static void checkResourceCodes()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().checkResourceCodes();
 	}
 
 	public static void checkResourceCodes(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().checkResourceCodes(companyId, name);
 	}
 
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long companyId, java.lang.String name, int scope)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResourceCode(companyId, name, scope);
 	}
 

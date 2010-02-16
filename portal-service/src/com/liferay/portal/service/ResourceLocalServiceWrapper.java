@@ -47,7 +47,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 
 	public com.liferay.portal.model.Resource addResource(
 		com.liferay.portal.model.Resource resource)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.addResource(resource);
 	}
 
@@ -56,52 +56,54 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 	}
 
 	public void deleteResource(long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.deleteResource(resourceId);
 	}
 
 	public void deleteResource(com.liferay.portal.model.Resource resource)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.deleteResource(resource);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.Resource getResource(long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.getResource(resourceId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Resource> getResources(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.getResources(start, end);
 	}
 
-	public int getResourcesCount() throws com.liferay.portal.SystemException {
+	public int getResourcesCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.getResourcesCount();
 	}
 
 	public com.liferay.portal.model.Resource updateResource(
 		com.liferay.portal.model.Resource resource)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.updateResource(resource);
 	}
 
 	public com.liferay.portal.model.Resource updateResource(
 		com.liferay.portal.model.Resource resource, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.updateResource(resource, merge);
 	}
 
@@ -109,8 +111,8 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.addModelResources(companyId, groupId, userId,
 			name, primKey, communityPermissions, guestPermissions);
 	}
@@ -119,22 +121,22 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		java.lang.String name, java.lang.String primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.addModelResources(companyId, groupId, userId,
 			name, primKey, communityPermissions, guestPermissions);
 	}
 
 	public com.liferay.portal.model.Resource addResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.addResource(companyId, name, scope, primKey);
 	}
 
 	public void addResources(long companyId, long groupId,
 		java.lang.String name, boolean portletActions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.addResources(companyId, groupId, name,
 			portletActions);
 	}
@@ -142,8 +144,8 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 	public void addResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey, boolean portletActions,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.addResources(companyId, groupId, userId, name,
 			primKey, portletActions, addCommunityPermissions,
 			addGuestPermissions);
@@ -153,8 +155,8 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		java.lang.String name, java.lang.String primKey,
 		boolean portletActions, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.addResources(companyId, groupId, userId, name,
 			primKey, portletActions, addCommunityPermissions,
 			addGuestPermissions);
@@ -162,36 +164,37 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 
 	public void deleteResource(long companyId, java.lang.String name,
 		int scope, long primKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.deleteResource(companyId, name, scope, primKey);
 	}
 
 	public void deleteResource(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.deleteResource(companyId, name, scope, primKey);
 	}
 
 	public void deleteResources(java.lang.String name)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.deleteResources(name);
 	}
 
-	public long getLatestResourceId() throws com.liferay.portal.SystemException {
+	public long getLatestResourceId()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.getLatestResourceId();
 	}
 
 	public com.liferay.portal.model.Resource getResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.getResource(companyId, name, scope, primKey);
 	}
 
 	public java.util.List<com.liferay.portal.model.Resource> getResources()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.getResources();
 	}
 
@@ -199,8 +202,8 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.updateResources(companyId, groupId, name,
 			primKey, communityPermissions, guestPermissions);
 	}
@@ -209,8 +212,8 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		java.lang.String name, java.lang.String primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.updateResources(companyId, groupId, name,
 			primKey, communityPermissions, guestPermissions);
 	}

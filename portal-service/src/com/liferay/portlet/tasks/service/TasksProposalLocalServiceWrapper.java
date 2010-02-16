@@ -48,7 +48,7 @@ public class TasksProposalLocalServiceWrapper
 
 	public com.liferay.portlet.tasks.model.TasksProposal addTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.addTasksProposal(tasksProposal);
 	}
 
@@ -58,55 +58,57 @@ public class TasksProposalLocalServiceWrapper
 	}
 
 	public void deleteTasksProposal(long proposalId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.deleteTasksProposal(proposalId);
 	}
 
 	public void deleteTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.deleteTasksProposal(tasksProposal);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portlet.tasks.model.TasksProposal getTasksProposal(
 		long proposalId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getTasksProposal(proposalId);
 	}
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getTasksProposals(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getTasksProposals(start, end);
 	}
 
 	public int getTasksProposalsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getTasksProposalsCount();
 	}
 
 	public com.liferay.portlet.tasks.model.TasksProposal updateTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.updateTasksProposal(tasksProposal);
 	}
 
 	public com.liferay.portlet.tasks.model.TasksProposal updateTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.updateTasksProposal(tasksProposal,
 			merge);
 	}
@@ -116,8 +118,8 @@ public class TasksProposalLocalServiceWrapper
 		java.lang.String classPK, java.lang.String name,
 		java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.addProposal(userId, groupId,
 			className, classPK, name, description, reviewUserId,
 			addCommunityPermissions, addGuestPermissions);
@@ -131,8 +133,8 @@ public class TasksProposalLocalServiceWrapper
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.addProposal(userId, groupId,
 			className, classPK, name, description, reviewUserId,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
@@ -145,8 +147,8 @@ public class TasksProposalLocalServiceWrapper
 		java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.addProposal(userId, groupId,
 			className, classPK, name, description, reviewUserId,
 			communityPermissions, guestPermissions);
@@ -154,8 +156,8 @@ public class TasksProposalLocalServiceWrapper
 
 	public void addProposalResources(long proposalId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.addProposalResources(proposalId,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -163,8 +165,8 @@ public class TasksProposalLocalServiceWrapper
 	public void addProposalResources(long proposalId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.addProposalResources(proposalId,
 			communityPermissions, guestPermissions);
 	}
@@ -172,8 +174,8 @@ public class TasksProposalLocalServiceWrapper
 	public void addProposalResources(
 		com.liferay.portlet.tasks.model.TasksProposal proposal,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.addProposalResources(proposal,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -182,98 +184,98 @@ public class TasksProposalLocalServiceWrapper
 		com.liferay.portlet.tasks.model.TasksProposal proposal,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.addProposalResources(proposal,
 			communityPermissions, guestPermissions);
 	}
 
 	public void deleteProposal(long proposalId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.deleteProposal(proposalId);
 	}
 
 	public void deleteProposal(long classNameId, java.lang.String classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.deleteProposal(classNameId, classPK);
 	}
 
 	public void deleteProposal(java.lang.String className,
 		java.lang.String classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.deleteProposal(className, classPK);
 	}
 
 	public void deleteProposal(
 		com.liferay.portlet.tasks.model.TasksProposal proposal)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.deleteProposal(proposal);
 	}
 
 	public void deleteProposals(long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.deleteProposals(groupId);
 	}
 
 	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
 		long proposalId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getProposal(proposalId);
 	}
 
 	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
 		long classNameId, java.lang.String classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getProposal(classNameId, classPK);
 	}
 
 	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
 		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getProposal(className, classPK);
 	}
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getProposals(
 		long groupId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getProposals(groupId, start, end);
 	}
 
 	public int getProposalsCount(long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getProposalsCount(groupId);
 	}
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getReviewProposals(
 		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getReviewProposals(groupId, userId,
 			start, end);
 	}
 
 	public int getReviewProposalsCount(long groupId, long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getReviewProposalsCount(groupId,
 			userId);
 	}
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getUserProposals(
 		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getUserProposals(groupId, userId,
 			start, end);
 	}
 
 	public int getUserProposalsCount(long groupId, long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getUserProposalsCount(groupId, userId);
 	}
 
@@ -281,8 +283,8 @@ public class TasksProposalLocalServiceWrapper
 		long userId, long proposalId, java.lang.String description,
 		int dueDateMonth, int dueDateDay, int dueDateYear, int dueDateHour,
 		int dueDateMinute)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.updateProposal(userId, proposalId,
 			description, dueDateMonth, dueDateDay, dueDateYear, dueDateHour,
 			dueDateMinute);

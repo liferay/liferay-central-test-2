@@ -22,7 +22,7 @@
 
 package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 

@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ResourceAction;
 
 import java.util.List;
@@ -100,43 +100,45 @@ public class ResourceActionUtil {
 	public static com.liferay.portal.model.ResourceAction remove(
 		long resourceActionId)
 		throws com.liferay.portal.NoSuchResourceActionException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(resourceActionId);
 	}
 
 	public static com.liferay.portal.model.ResourceAction updateImpl(
 		com.liferay.portal.model.ResourceAction resourceAction, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(resourceAction, merge);
 	}
 
 	public static com.liferay.portal.model.ResourceAction findByPrimaryKey(
 		long resourceActionId)
 		throws com.liferay.portal.NoSuchResourceActionException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(resourceActionId);
 	}
 
 	public static com.liferay.portal.model.ResourceAction fetchByPrimaryKey(
-		long resourceActionId) throws com.liferay.portal.SystemException {
+		long resourceActionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(resourceActionId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceAction> findByName(
-		java.lang.String name) throws com.liferay.portal.SystemException {
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByName(name);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceAction> findByName(
 		java.lang.String name, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByName(name, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceAction> findByName(
 		java.lang.String name, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByName(name, start, end, obc);
 	}
 
@@ -144,7 +146,7 @@ public class ResourceActionUtil {
 		java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchResourceActionException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByName_First(name, obc);
 	}
 
@@ -152,7 +154,7 @@ public class ResourceActionUtil {
 		java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchResourceActionException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByName_Last(name, obc);
 	}
 
@@ -160,7 +162,7 @@ public class ResourceActionUtil {
 		long resourceActionId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchResourceActionException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByName_PrevAndNext(resourceActionId, name, obc);
 	}
@@ -168,65 +170,70 @@ public class ResourceActionUtil {
 	public static com.liferay.portal.model.ResourceAction findByN_A(
 		java.lang.String name, java.lang.String actionId)
 		throws com.liferay.portal.NoSuchResourceActionException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByN_A(name, actionId);
 	}
 
 	public static com.liferay.portal.model.ResourceAction fetchByN_A(
 		java.lang.String name, java.lang.String actionId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByN_A(name, actionId);
 	}
 
 	public static com.liferay.portal.model.ResourceAction fetchByN_A(
 		java.lang.String name, java.lang.String actionId,
-		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByN_A(name, actionId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceAction> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceAction> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceAction> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByName(java.lang.String name)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByName(name);
 	}
 
 	public static void removeByN_A(java.lang.String name,
 		java.lang.String actionId)
 		throws com.liferay.portal.NoSuchResourceActionException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByN_A(name, actionId);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByName(java.lang.String name)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByName(name);
 	}
 
 	public static int countByN_A(java.lang.String name,
-		java.lang.String actionId) throws com.liferay.portal.SystemException {
+		java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByN_A(name, actionId);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

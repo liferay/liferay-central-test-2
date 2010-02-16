@@ -22,7 +22,7 @@
 
 package com.liferay.portal.lar;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;

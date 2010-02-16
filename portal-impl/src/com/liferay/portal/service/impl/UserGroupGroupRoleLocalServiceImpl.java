@@ -23,8 +23,8 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.NoSuchUserGroupGroupRoleException;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;

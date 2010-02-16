@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.wiki.importers;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portlet.wiki.model.WikiNode;
 
 import java.io.File;

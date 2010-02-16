@@ -46,7 +46,7 @@ public class ContactLocalServiceWrapper implements ContactLocalService {
 
 	public com.liferay.portal.model.Contact addContact(
 		com.liferay.portal.model.Contact contact)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _contactLocalService.addContact(contact);
 	}
 
@@ -55,52 +55,54 @@ public class ContactLocalServiceWrapper implements ContactLocalService {
 	}
 
 	public void deleteContact(long contactId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_contactLocalService.deleteContact(contactId);
 	}
 
 	public void deleteContact(com.liferay.portal.model.Contact contact)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_contactLocalService.deleteContact(contact);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _contactLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _contactLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.Contact getContact(long contactId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _contactLocalService.getContact(contactId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Contact> getContacts(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _contactLocalService.getContacts(start, end);
 	}
 
-	public int getContactsCount() throws com.liferay.portal.SystemException {
+	public int getContactsCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _contactLocalService.getContactsCount();
 	}
 
 	public com.liferay.portal.model.Contact updateContact(
 		com.liferay.portal.model.Contact contact)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _contactLocalService.updateContact(contact);
 	}
 
 	public com.liferay.portal.model.Contact updateContact(
 		com.liferay.portal.model.Contact contact, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _contactLocalService.updateContact(contact, merge);
 	}
 

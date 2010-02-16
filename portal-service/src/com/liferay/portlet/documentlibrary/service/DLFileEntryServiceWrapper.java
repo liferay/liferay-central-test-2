@@ -49,8 +49,8 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		java.lang.String title, java.lang.String description,
 		java.lang.String versionDescription, java.lang.String extraSettings,
 		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.addFileEntry(groupId, folderId, name, title,
 			description, versionDescription, extraSettings, bytes,
 			serviceContext);
@@ -62,95 +62,96 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		java.lang.String versionDescription, java.lang.String extraSettings,
 		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.addFileEntry(groupId, folderId, name, title,
 			description, versionDescription, extraSettings, file, serviceContext);
 	}
 
 	public void deleteFileEntry(long groupId, long folderId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryService.deleteFileEntry(groupId, folderId, name);
 	}
 
 	public void deleteFileEntry(long groupId, long folderId,
 		java.lang.String name, double version)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryService.deleteFileEntry(groupId, folderId, name, version);
 	}
 
 	public void deleteFileEntryByTitle(long groupId, long folderId,
 		java.lang.String titleWithExtension)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryService.deleteFileEntryByTitle(groupId, folderId,
 			titleWithExtension);
 	}
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		long groupId, long folderId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.getFileEntries(groupId, folderId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long groupId, long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.getFileEntry(groupId, folderId, name);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
 		long groupId, long folderId, java.lang.String titleWithExtension)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.getFileEntryByTitle(groupId, folderId,
 			titleWithExtension);
 	}
 
 	public boolean hasFileEntryLock(long groupId, long folderId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.hasFileEntryLock(groupId, folderId, name);
 	}
 
 	public com.liferay.portal.model.Lock lockFileEntry(long groupId,
 		long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.lockFileEntry(groupId, folderId, name);
 	}
 
 	public com.liferay.portal.model.Lock lockFileEntry(long groupId,
 		long folderId, java.lang.String name, java.lang.String owner,
 		long expirationTime)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.lockFileEntry(groupId, folderId, name,
 			owner, expirationTime);
 	}
 
 	public com.liferay.portal.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.refreshFileEntryLock(lockUuid, expirationTime);
 	}
 
 	public void unlockFileEntry(long groupId, long folderId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryService.unlockFileEntry(groupId, folderId, name);
 	}
 
 	public void unlockFileEntry(long groupId, long folderId,
 		java.lang.String name, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryService.unlockFileEntry(groupId, folderId, name, lockUuid);
 	}
 
@@ -160,8 +161,8 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		java.lang.String description, java.lang.String versionDescription,
 		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.updateFileEntry(groupId, folderId,
 			newFolderId, name, sourceFileName, title, description,
 			versionDescription, extraSettings, bytes, serviceContext);
@@ -173,8 +174,8 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		java.lang.String description, java.lang.String versionDescription,
 		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.updateFileEntry(groupId, folderId,
 			newFolderId, name, sourceFileName, title, description,
 			versionDescription, extraSettings, file, serviceContext);
@@ -182,8 +183,8 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 
 	public boolean verifyFileEntryLock(long groupId, long folderId,
 		java.lang.String name, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.verifyFileEntryLock(groupId, folderId, name,
 			lockUuid);
 	}

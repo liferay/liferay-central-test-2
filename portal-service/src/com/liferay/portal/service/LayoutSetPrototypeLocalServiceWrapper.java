@@ -48,7 +48,7 @@ public class LayoutSetPrototypeLocalServiceWrapper
 
 	public com.liferay.portal.model.LayoutSetPrototype addLayoutSetPrototype(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.addLayoutSetPrototype(layoutSetPrototype);
 	}
 
@@ -58,56 +58,58 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	}
 
 	public void deleteLayoutSetPrototype(long layoutSetPrototypeId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_layoutSetPrototypeLocalService.deleteLayoutSetPrototype(layoutSetPrototypeId);
 	}
 
 	public void deleteLayoutSetPrototype(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_layoutSetPrototypeLocalService.deleteLayoutSetPrototype(layoutSetPrototype);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.dynamicQuery(dynamicQuery,
 			start, end);
 	}
 
 	public com.liferay.portal.model.LayoutSetPrototype getLayoutSetPrototype(
 		long layoutSetPrototypeId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.getLayoutSetPrototype(layoutSetPrototypeId);
 	}
 
 	public java.util.List<com.liferay.portal.model.LayoutSetPrototype> getLayoutSetPrototypes(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.getLayoutSetPrototypes(start, end);
 	}
 
 	public int getLayoutSetPrototypesCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.getLayoutSetPrototypesCount();
 	}
 
 	public com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.updateLayoutSetPrototype(layoutSetPrototype);
 	}
 
 	public com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.updateLayoutSetPrototype(layoutSetPrototype,
 			merge);
 	}
@@ -116,8 +118,8 @@ public class LayoutSetPrototypeLocalServiceWrapper
 		long userId, long companyId,
 		java.util.Map<java.util.Locale, String> nameMap,
 		java.lang.String description, boolean active)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.addLayoutSetPrototype(userId,
 			companyId, nameMap, description, active);
 	}
@@ -125,13 +127,13 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	public java.util.List<com.liferay.portal.model.LayoutSetPrototype> search(
 		long companyId, java.lang.Boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.search(companyId, active, start,
 			end, obc);
 	}
 
 	public int searchCount(long companyId, java.lang.Boolean active)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.searchCount(companyId, active);
 	}
 
@@ -139,8 +141,8 @@ public class LayoutSetPrototypeLocalServiceWrapper
 		long layoutSetPrototypeId,
 		java.util.Map<java.util.Locale, String> nameMap,
 		java.lang.String description, boolean active)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.updateLayoutSetPrototype(layoutSetPrototypeId,
 			nameMap, description, active);
 	}

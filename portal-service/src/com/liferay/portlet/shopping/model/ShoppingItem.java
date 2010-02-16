@@ -55,8 +55,8 @@ public interface ShoppingItem extends ShoppingItemModel {
 	public java.lang.String[] getFieldsQuantitiesArray();
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void setFieldsQuantities(java.lang.String fieldsQuantities);
 

@@ -53,23 +53,23 @@ public class SCProductEntryServiceWrapper implements SCProductEntryService {
 		long[] licenseIds, java.util.List<byte[]> thumbnails,
 		java.util.List<byte[]> fullImages,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryService.addProductEntry(name, type, tags,
 			shortDescription, longDescription, pageURL, author, repoGroupId,
 			repoArtifactId, licenseIds, thumbnails, fullImages, serviceContext);
 	}
 
 	public void deleteProductEntry(long productEntryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_scProductEntryService.deleteProductEntry(productEntryId);
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
 		long productEntryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryService.getProductEntry(productEntryId);
 	}
 
@@ -80,8 +80,8 @@ public class SCProductEntryServiceWrapper implements SCProductEntryService {
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
 		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryService.updateProductEntry(productEntryId, name,
 			type, tags, shortDescription, longDescription, pageURL, author,
 			repoGroupId, repoArtifactId, licenseIds, thumbnails, fullImages);

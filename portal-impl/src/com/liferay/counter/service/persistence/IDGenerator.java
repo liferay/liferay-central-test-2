@@ -23,7 +23,7 @@
 package com.liferay.counter.service.persistence;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import java.io.Serializable;
 

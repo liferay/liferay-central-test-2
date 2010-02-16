@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class TasksReviewLocalServiceUtil {
 	public static com.liferay.portlet.tasks.model.TasksReview addTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addTasksReview(tasksReview);
 	}
 
@@ -57,137 +57,140 @@ public class TasksReviewLocalServiceUtil {
 	}
 
 	public static void deleteTasksReview(long reviewId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTasksReview(reviewId);
 	}
 
 	public static void deleteTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTasksReview(tasksReview);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview getTasksReview(
 		long reviewId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTasksReview(reviewId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getTasksReviews(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTasksReviews(start, end);
 	}
 
 	public static int getTasksReviewsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTasksReviewsCount();
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateTasksReview(tasksReview);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateTasksReview(tasksReview, merge);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview addReview(
 		long userId, long proposalId, long assignedByUserId, int stage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addReview(userId, proposalId, assignedByUserId, stage);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview approveReview(
 		long userId, long proposalId, int stage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().approveReview(userId, proposalId, stage);
 	}
 
 	public static void deleteReview(long reviewId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteReview(reviewId);
 	}
 
 	public static void deleteReview(
 		com.liferay.portlet.tasks.model.TasksReview review)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteReview(review);
 	}
 
 	public static void deleteReviews(long proposalId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteReviews(proposalId);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview getReview(
 		long reviewId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getReview(reviewId);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview getReview(
 		long userId, long proposalId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getReview(userId, proposalId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
-		long proposalId) throws com.liferay.portal.SystemException {
+		long proposalId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getReviews(proposalId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
-		long proposalId, int stage) throws com.liferay.portal.SystemException {
+		long proposalId, int stage)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getReviews(proposalId, stage);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId, int stage, boolean completed)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getReviews(proposalId, stage, completed);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId, int stage, boolean completed, boolean rejected)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getReviews(proposalId, stage, completed, rejected);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview rejectReview(
 		long userId, long proposalId, int stage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().rejectReview(userId, proposalId, stage);
 	}
 
 	public static void updateReviews(long proposalId, long assignedByUserId,
 		long[][] userIdsPerStage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().updateReviews(proposalId, assignedByUserId, userIdsPerStage);
 	}
 

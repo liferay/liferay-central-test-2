@@ -49,52 +49,57 @@ public interface RatingsStatsPersistence extends BasePersistence<RatingsStats> {
 	public com.liferay.portlet.ratings.model.RatingsStats create(long statsId);
 
 	public com.liferay.portlet.ratings.model.RatingsStats remove(long statsId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats updateImpl(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
-		boolean merge) throws com.liferay.portal.SystemException;
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats findByPrimaryKey(
 		long statsId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats fetchByPrimaryKey(
-		long statsId) throws com.liferay.portal.SystemException;
+		long statsId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats findByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats fetchByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats fetchByC_C(
 		long classNameId, long classPK, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> findAll()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> findAll(
-		int start, int end) throws com.liferay.portal.SystemException;
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.ratings.NoSuchStatsException;
 
-	public void removeAll() throws com.liferay.portal.SystemException;
+	public void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countAll() throws com.liferay.portal.SystemException;
+	public int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

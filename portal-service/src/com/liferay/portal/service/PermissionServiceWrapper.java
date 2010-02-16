@@ -45,33 +45,35 @@ public class PermissionServiceWrapper implements PermissionService {
 	}
 
 	public void checkPermission(long groupId, long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.checkPermission(groupId, resourceId);
 	}
 
 	public void checkPermission(long groupId, java.lang.String name,
 		long primKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.checkPermission(groupId, name, primKey);
 	}
 
 	public void checkPermission(long groupId, java.lang.String name,
 		java.lang.String primKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.checkPermission(groupId, name, primKey);
 	}
 
 	public boolean hasGroupPermission(long groupId, java.lang.String actionId,
-		long resourceId) throws com.liferay.portal.SystemException {
+		long resourceId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _permissionService.hasGroupPermission(groupId, actionId,
 			resourceId);
 	}
 
 	public boolean hasUserPermission(long userId, java.lang.String actionId,
-		long resourceId) throws com.liferay.portal.SystemException {
+		long resourceId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _permissionService.hasUserPermission(userId, actionId, resourceId);
 	}
 
@@ -79,32 +81,32 @@ public class PermissionServiceWrapper implements PermissionService {
 		java.util.List<com.liferay.portal.model.Resource> resources,
 		java.lang.String actionId,
 		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _permissionService.hasUserPermissions(userId, groupId,
 			resources, actionId, permissionCheckerBag);
 	}
 
 	public void setGroupPermissions(long groupId, java.lang.String[] actionIds,
 		long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.setGroupPermissions(groupId, actionIds, resourceId);
 	}
 
 	public void setGroupPermissions(java.lang.String className,
 		java.lang.String classPK, long groupId, java.lang.String[] actionIds,
 		long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.setGroupPermissions(className, classPK, groupId,
 			actionIds, resourceId);
 	}
 
 	public void setOrgGroupPermissions(long organizationId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.setOrgGroupPermissions(organizationId, groupId,
 			actionIds, resourceId);
 	}
@@ -112,55 +114,55 @@ public class PermissionServiceWrapper implements PermissionService {
 	public void setRolePermission(long roleId, long groupId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.setRolePermission(roleId, groupId, name, scope,
 			primKey, actionId);
 	}
 
 	public void setRolePermissions(long roleId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.setRolePermissions(roleId, groupId, actionIds,
 			resourceId);
 	}
 
 	public void setUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.setUserPermissions(userId, groupId, actionIds,
 			resourceId);
 	}
 
 	public void unsetRolePermission(long roleId, long groupId, long permissionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.unsetRolePermission(roleId, groupId, permissionId);
 	}
 
 	public void unsetRolePermission(long roleId, long groupId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.unsetRolePermission(roleId, groupId, name, scope,
 			primKey, actionId);
 	}
 
 	public void unsetRolePermissions(long roleId, long groupId,
 		java.lang.String name, int scope, java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.unsetRolePermissions(roleId, groupId, name, scope,
 			actionId);
 	}
 
 	public void unsetUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_permissionService.unsetUserPermissions(userId, groupId, actionIds,
 			resourceId);
 	}

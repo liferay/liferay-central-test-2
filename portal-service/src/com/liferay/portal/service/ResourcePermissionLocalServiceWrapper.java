@@ -48,7 +48,7 @@ public class ResourcePermissionLocalServiceWrapper
 
 	public com.liferay.portal.model.ResourcePermission addResourcePermission(
 		com.liferay.portal.model.ResourcePermission resourcePermission)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.addResourcePermission(resourcePermission);
 	}
 
@@ -58,56 +58,58 @@ public class ResourcePermissionLocalServiceWrapper
 	}
 
 	public void deleteResourcePermission(long resourcePermissionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourcePermissionLocalService.deleteResourcePermission(resourcePermissionId);
 	}
 
 	public void deleteResourcePermission(
 		com.liferay.portal.model.ResourcePermission resourcePermission)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourcePermissionLocalService.deleteResourcePermission(resourcePermission);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.dynamicQuery(dynamicQuery,
 			start, end);
 	}
 
 	public com.liferay.portal.model.ResourcePermission getResourcePermission(
 		long resourcePermissionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.getResourcePermission(resourcePermissionId);
 	}
 
 	public java.util.List<com.liferay.portal.model.ResourcePermission> getResourcePermissions(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.getResourcePermissions(start, end);
 	}
 
 	public int getResourcePermissionsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.getResourcePermissionsCount();
 	}
 
 	public com.liferay.portal.model.ResourcePermission updateResourcePermission(
 		com.liferay.portal.model.ResourcePermission resourcePermission)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.updateResourcePermission(resourcePermission);
 	}
 
 	public com.liferay.portal.model.ResourcePermission updateResourcePermission(
 		com.liferay.portal.model.ResourcePermission resourcePermission,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.updateResourcePermission(resourcePermission,
 			merge);
 	}
@@ -115,8 +117,8 @@ public class ResourcePermissionLocalServiceWrapper
 	public void addResourcePermission(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long roleId,
 		java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourcePermissionLocalService.addResourcePermission(companyId, name,
 			scope, primKey, roleId, actionId);
 	}
@@ -124,27 +126,27 @@ public class ResourcePermissionLocalServiceWrapper
 	public java.util.List<String> getAvailableResourcePermissionActionIds(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey, long roleId, java.util.List<String> actionIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.getAvailableResourcePermissionActionIds(companyId,
 			name, scope, primKey, roleId, actionIds);
 	}
 
 	public int getResourcePermissionsCount(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.getResourcePermissionsCount(companyId,
 			name, scope, primKey);
 	}
 
 	public java.util.List<com.liferay.portal.model.ResourcePermission> getRoleResourcePermissions(
-		long roleId) throws com.liferay.portal.SystemException {
+		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.getRoleResourcePermissions(roleId);
 	}
 
 	public java.util.List<com.liferay.portal.model.ResourcePermission> getRoleResourcePermissions(
 		long roleId, int[] scopes, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.getRoleResourcePermissions(roleId,
 			scopes, start, end);
 	}
@@ -159,29 +161,29 @@ public class ResourcePermissionLocalServiceWrapper
 	public boolean hasResourcePermission(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long roleId,
 		java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.hasResourcePermission(companyId,
 			name, scope, primKey, roleId, actionId);
 	}
 
 	public boolean hasScopeResourcePermission(long companyId,
 		java.lang.String name, int scope, long roleId, java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.hasScopeResourcePermission(companyId,
 			name, scope, roleId, actionId);
 	}
 
 	public void mergePermissions(long fromRoleId, long toRoleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourcePermissionLocalService.mergePermissions(fromRoleId, toRoleId);
 	}
 
 	public void reassignPermissions(long resourcePermissionId, long toRoleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourcePermissionLocalService.reassignPermissions(resourcePermissionId,
 			toRoleId);
 	}
@@ -189,16 +191,16 @@ public class ResourcePermissionLocalServiceWrapper
 	public void removeResourcePermission(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long roleId,
 		java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourcePermissionLocalService.removeResourcePermission(companyId,
 			name, scope, primKey, roleId, actionId);
 	}
 
 	public void removeResourcePermissions(long companyId,
 		java.lang.String name, int scope, long roleId, java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourcePermissionLocalService.removeResourcePermissions(companyId,
 			name, scope, roleId, actionId);
 	}
@@ -206,8 +208,8 @@ public class ResourcePermissionLocalServiceWrapper
 	public void setResourcePermissions(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long roleId,
 		java.lang.String[] actionIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourcePermissionLocalService.setResourcePermissions(companyId, name,
 			scope, primKey, roleId, actionIds);
 	}

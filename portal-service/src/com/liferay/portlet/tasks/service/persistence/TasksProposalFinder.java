@@ -29,9 +29,9 @@ package com.liferay.portlet.tasks.service.persistence;
  */
 public interface TasksProposalFinder {
 	public int countByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
 		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

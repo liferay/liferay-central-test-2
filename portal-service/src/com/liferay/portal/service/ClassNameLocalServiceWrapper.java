@@ -47,7 +47,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService {
 
 	public com.liferay.portal.model.ClassName addClassName(
 		com.liferay.portal.model.ClassName className)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.addClassName(className);
 	}
 
@@ -56,66 +56,71 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService {
 	}
 
 	public void deleteClassName(long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_classNameLocalService.deleteClassName(classNameId);
 	}
 
 	public void deleteClassName(com.liferay.portal.model.ClassName className)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_classNameLocalService.deleteClassName(className);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.ClassName getClassName(long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.getClassName(classNameId);
 	}
 
 	public java.util.List<com.liferay.portal.model.ClassName> getClassNames(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.getClassNames(start, end);
 	}
 
-	public int getClassNamesCount() throws com.liferay.portal.SystemException {
+	public int getClassNamesCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.getClassNamesCount();
 	}
 
 	public com.liferay.portal.model.ClassName updateClassName(
 		com.liferay.portal.model.ClassName className)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.updateClassName(className);
 	}
 
 	public com.liferay.portal.model.ClassName updateClassName(
 		com.liferay.portal.model.ClassName className, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.updateClassName(className, merge);
 	}
 
 	public com.liferay.portal.model.ClassName addClassName(
-		java.lang.String value) throws com.liferay.portal.SystemException {
+		java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.addClassName(value);
 	}
 
-	public void checkClassNames() throws com.liferay.portal.SystemException {
+	public void checkClassNames()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_classNameLocalService.checkClassNames();
 	}
 
 	public com.liferay.portal.model.ClassName getClassName(
-		java.lang.String value) throws com.liferay.portal.SystemException {
+		java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.getClassName(value);
 	}
 

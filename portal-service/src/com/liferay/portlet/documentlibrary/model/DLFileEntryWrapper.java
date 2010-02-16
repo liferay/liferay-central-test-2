@@ -93,7 +93,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntry.getUserUuid();
 	}
 
@@ -118,7 +118,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	public java.lang.String getVersionUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntry.getVersionUserUuid();
 	}
 

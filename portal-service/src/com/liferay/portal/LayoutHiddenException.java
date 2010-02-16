@@ -22,6 +22,8 @@
 
 package com.liferay.portal;
 
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
  * <a href="LayoutHiddenException.java.html"><b><i>View Source</i></b></a>
  *

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.List;
 

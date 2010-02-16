@@ -46,26 +46,27 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class ListTypeServiceUtil {
 	public static com.liferay.portal.model.ListType getListType(int listTypeId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getListType(listTypeId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ListType> getListTypes(
-		java.lang.String type) throws com.liferay.portal.SystemException {
+		java.lang.String type)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getListTypes(type);
 	}
 
 	public static void validate(int listTypeId, java.lang.String type)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().validate(listTypeId, type);
 	}
 
 	public static void validate(int listTypeId, long classNameId,
 		java.lang.String type)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().validate(listTypeId, classNameId, type);
 	}
 

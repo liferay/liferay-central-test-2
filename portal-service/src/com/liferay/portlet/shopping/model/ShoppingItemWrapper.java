@@ -85,7 +85,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItem.getUserUuid();
 	}
 
@@ -440,8 +440,8 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItem.getItemPrices();
 	}
 

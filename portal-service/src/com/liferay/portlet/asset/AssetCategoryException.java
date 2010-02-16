@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.asset;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="AssetCategoryException.java.html"><b><i>View Source</i></b></a>

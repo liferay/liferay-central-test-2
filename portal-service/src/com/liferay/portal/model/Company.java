@@ -55,7 +55,7 @@ public interface Company extends CompanyModel {
 	public java.lang.String getAdminName();
 
 	public java.lang.String getAuthType()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User getDefaultUser();
 
@@ -79,19 +79,23 @@ public interface Company extends CompanyModel {
 
 	public boolean hasCompanyMx(java.lang.String emailAddress);
 
-	public boolean isAutoLogin() throws com.liferay.portal.SystemException;
+	public boolean isAutoLogin()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean isCommunityLogo() throws com.liferay.portal.SystemException;
+	public boolean isCommunityLogo()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean isSendPassword() throws com.liferay.portal.SystemException;
+	public boolean isSendPassword()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean isStrangers() throws com.liferay.portal.SystemException;
+	public boolean isStrangers()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isStrangersVerify()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isStrangersWithMx()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void setKey(java.lang.String key);
 

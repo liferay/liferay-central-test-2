@@ -32,12 +32,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class DLFileEntryFinderUtil {
 	public static int countByG_F_S(long groupId,
 		java.util.List<Long> folderIds, int status)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByG_F_S(groupId, folderIds, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByNoAssets()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByNoAssets();
 	}
 

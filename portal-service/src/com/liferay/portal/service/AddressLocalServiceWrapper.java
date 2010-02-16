@@ -46,7 +46,7 @@ public class AddressLocalServiceWrapper implements AddressLocalService {
 
 	public com.liferay.portal.model.Address addAddress(
 		com.liferay.portal.model.Address address)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.addAddress(address);
 	}
 
@@ -55,52 +55,54 @@ public class AddressLocalServiceWrapper implements AddressLocalService {
 	}
 
 	public void deleteAddress(long addressId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_addressLocalService.deleteAddress(addressId);
 	}
 
 	public void deleteAddress(com.liferay.portal.model.Address address)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_addressLocalService.deleteAddress(address);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.Address getAddress(long addressId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.getAddress(addressId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Address> getAddresses(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.getAddresses(start, end);
 	}
 
-	public int getAddressesCount() throws com.liferay.portal.SystemException {
+	public int getAddressesCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.getAddressesCount();
 	}
 
 	public com.liferay.portal.model.Address updateAddress(
 		com.liferay.portal.model.Address address)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.updateAddress(address);
 	}
 
 	public com.liferay.portal.model.Address updateAddress(
 		com.liferay.portal.model.Address address, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.updateAddress(address, merge);
 	}
 
@@ -109,26 +111,27 @@ public class AddressLocalServiceWrapper implements AddressLocalService {
 		java.lang.String street2, java.lang.String street3,
 		java.lang.String city, java.lang.String zip, long regionId,
 		long countryId, int typeId, boolean mailing, boolean primary)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.addAddress(userId, className, classPK,
 			street1, street2, street3, city, zip, regionId, countryId, typeId,
 			mailing, primary);
 	}
 
 	public void deleteAddresses(long companyId, java.lang.String className,
-		long classPK) throws com.liferay.portal.SystemException {
+		long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_addressLocalService.deleteAddresses(companyId, className, classPK);
 	}
 
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.getAddresses();
 	}
 
 	public java.util.List<com.liferay.portal.model.Address> getAddresses(
 		long companyId, java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.getAddresses(companyId, className, classPK);
 	}
 
@@ -137,8 +140,8 @@ public class AddressLocalServiceWrapper implements AddressLocalService {
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
 		long regionId, long countryId, int typeId, boolean mailing,
 		boolean primary)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _addressLocalService.updateAddress(addressId, street1, street2,
 			street3, city, zip, regionId, countryId, typeId, mailing, primary);
 	}

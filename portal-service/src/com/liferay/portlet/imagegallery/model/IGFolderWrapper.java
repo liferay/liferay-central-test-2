@@ -93,7 +93,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igFolder.getUserUuid();
 	}
 
@@ -204,14 +204,14 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getAncestors()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _igFolder.getAncestors();
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder getParentFolder()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _igFolder.getParentFolder();
 	}
 

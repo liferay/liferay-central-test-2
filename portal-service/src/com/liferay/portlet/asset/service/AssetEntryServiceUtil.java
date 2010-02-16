@@ -46,19 +46,19 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class AssetEntryServiceUtil {
 	public static void deleteEntry(long entryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteEntry(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getCompanyEntries(
 		long companyId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getCompanyEntries(companyId, start, end);
 	}
 
 	public static int getCompanyEntriesCount(long companyId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getCompanyEntriesCount(companyId);
 	}
 
@@ -66,8 +66,8 @@ public class AssetEntryServiceUtil {
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String tagURL)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getCompanyEntriesRSS(companyId, max, type, version,
 			displayStyle, feedURL, tagURL);
@@ -75,22 +75,22 @@ public class AssetEntryServiceUtil {
 
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] getCompanyEntryDisplays(
 		long companyId, int start, int end, java.lang.String languageId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getCompanyEntryDisplays(companyId, start, end, languageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getEntries(entryQuery);
 	}
 
 	public static int getEntriesCount(
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getEntriesCount(entryQuery);
 	}
 
@@ -98,8 +98,8 @@ public class AssetEntryServiceUtil {
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getEntriesRSS(entryQuery, type, version, displayStyle,
 			feedURL, tagURL);
@@ -107,21 +107,21 @@ public class AssetEntryServiceUtil {
 
 	public static com.liferay.portlet.asset.model.AssetEntry getEntry(
 		long entryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry incrementViewCounter(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().incrementViewCounter(className, classPK);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .searchEntryDisplays(companyId, portletId, keywords,
 			languageId, start, end);
@@ -129,7 +129,8 @@ public class AssetEntryServiceUtil {
 
 	public static int searchEntryDisplaysCount(long companyId,
 		java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId) throws com.liferay.portal.SystemException {
+		java.lang.String languageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .searchEntryDisplaysCount(companyId, portletId, keywords,
 			languageId);
@@ -144,8 +145,8 @@ public class AssetEntryServiceUtil {
 		java.lang.String description, java.lang.String summary,
 		java.lang.String url, int height, int width,
 		java.lang.Integer priority, boolean sync)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateEntry(groupId, className, classPK, categoryIds,
 			tagNames, visible, startDate, endDate, publishDate, expirationDate,

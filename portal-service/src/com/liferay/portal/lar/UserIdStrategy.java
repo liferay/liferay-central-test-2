@@ -22,7 +22,7 @@
 
 package com.liferay.portal.lar;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * <a href="UserIdStrategy.java.html"><b><i>View Source</i></b></a>

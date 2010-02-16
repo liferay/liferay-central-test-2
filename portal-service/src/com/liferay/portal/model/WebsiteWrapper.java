@@ -77,7 +77,7 @@ public class WebsiteWrapper implements Website {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _website.getUserUuid();
 	}
 

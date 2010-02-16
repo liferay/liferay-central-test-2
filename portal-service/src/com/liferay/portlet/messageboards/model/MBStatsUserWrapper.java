@@ -61,7 +61,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	public java.lang.String getStatsUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUser.getStatsUserUuid();
 	}
 
@@ -86,7 +86,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUser.getUserUuid();
 	}
 

@@ -22,8 +22,8 @@
 
 package com.liferay.portal.security.pwd;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;

@@ -49,8 +49,8 @@ package com.liferay.portlet.journal.model;
  */
 public interface JournalTemplate extends JournalTemplateModel {
 	public java.lang.String getSmallImageType()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void setSmallImageType(java.lang.String smallImageType);
 }

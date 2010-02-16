@@ -24,8 +24,8 @@ package com.liferay.documentlibrary.util;
 
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.model.FileModel;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;

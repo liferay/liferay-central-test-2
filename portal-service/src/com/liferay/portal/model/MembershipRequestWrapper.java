@@ -77,7 +77,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _membershipRequest.getUserUuid();
 	}
 
@@ -134,7 +134,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	public java.lang.String getReplierUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _membershipRequest.getReplierUserUuid();
 	}
 

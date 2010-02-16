@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.poller;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="PollerException.java.html"><b><i>View Source</i></b></a>

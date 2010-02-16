@@ -31,7 +31,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class UserGroupRoleFinderUtil {
 	public static java.util.List<com.liferay.portal.model.UserGroupRole> findByUserUserGroupGroupRole(
-		long userId, long groupId) throws com.liferay.portal.SystemException {
+		long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByUserUserGroupGroupRole(userId, groupId);
 	}
 

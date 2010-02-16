@@ -314,14 +314,14 @@ public class LayoutWrapper implements Layout {
 	}
 
 	public com.liferay.portal.model.Group getScopeGroup()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getScopeGroup();
 	}
 
 	public boolean hasScopeGroup()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.hasScopeGroup();
 	}
 
@@ -338,14 +338,14 @@ public class LayoutWrapper implements Layout {
 	}
 
 	public java.util.List<com.liferay.portal.model.Layout> getAncestors()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getAncestors();
 	}
 
 	public boolean hasAncestor(long layoutId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.hasAncestor(layoutId);
 	}
 
@@ -362,23 +362,24 @@ public class LayoutWrapper implements Layout {
 	}
 
 	public java.util.List<com.liferay.portal.model.Layout> getChildren()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getChildren();
 	}
 
-	public boolean hasChildren() throws com.liferay.portal.SystemException {
+	public boolean hasChildren()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.hasChildren();
 	}
 
 	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getAllChildren();
 	}
 
 	public java.util.List<com.liferay.portal.model.Layout> getChildren(
 		com.liferay.portal.security.permission.PermissionChecker permissionChecker)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getChildren(permissionChecker);
 	}
 
@@ -454,12 +455,12 @@ public class LayoutWrapper implements Layout {
 	}
 
 	public com.liferay.portal.model.Theme getTheme()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getTheme();
 	}
 
 	public com.liferay.portal.model.ColorScheme getColorScheme()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getColorScheme();
 	}
 
@@ -468,12 +469,12 @@ public class LayoutWrapper implements Layout {
 	}
 
 	public com.liferay.portal.model.Theme getWapTheme()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getWapTheme();
 	}
 
 	public com.liferay.portal.model.ColorScheme getWapColorScheme()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getWapColorScheme();
 	}
 
@@ -483,19 +484,19 @@ public class LayoutWrapper implements Layout {
 
 	public java.lang.String getRegularURL(
 		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getRegularURL(request);
 	}
 
 	public java.lang.String getResetMaxStateURL(
 		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getResetMaxStateURL(request);
 	}
 
 	public java.lang.String getResetLayoutURL(
 		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getResetLayoutURL(request);
 	}
 

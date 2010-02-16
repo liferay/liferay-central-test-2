@@ -49,16 +49,16 @@ package com.liferay.portal.model;
  */
 public interface LayoutSet extends LayoutSetModel {
 	public com.liferay.portal.model.Theme getTheme()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ColorScheme getColorScheme()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Group getGroup();
 
 	public com.liferay.portal.model.Theme getWapTheme()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ColorScheme getWapColorScheme()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

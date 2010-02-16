@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.social;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="RequestUserIdException.java.html"><b><i>View Source</i></b></a>

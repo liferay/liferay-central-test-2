@@ -31,14 +31,14 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class PasswordPolicyFinderUtil {
 	public static int countByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByC_N(companyId, name);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicy> findByC_N(
 		long companyId, java.lang.String name, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByC_N(companyId, name, start, end, obc);
 	}
 

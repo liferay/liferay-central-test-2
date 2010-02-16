@@ -47,7 +47,7 @@ public class ResourceCodeLocalServiceWrapper implements ResourceCodeLocalService
 
 	public com.liferay.portal.model.ResourceCode addResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceCodeLocalService.addResourceCode(resourceCode);
 	}
 
@@ -56,75 +56,77 @@ public class ResourceCodeLocalServiceWrapper implements ResourceCodeLocalService
 	}
 
 	public void deleteResourceCode(long codeId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceCodeLocalService.deleteResourceCode(codeId);
 	}
 
 	public void deleteResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourceCodeLocalService.deleteResourceCode(resourceCode);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceCodeLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceCodeLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.ResourceCode getResourceCode(long codeId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _resourceCodeLocalService.getResourceCode(codeId);
 	}
 
 	public java.util.List<com.liferay.portal.model.ResourceCode> getResourceCodes(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceCodeLocalService.getResourceCodes(start, end);
 	}
 
 	public int getResourceCodesCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceCodeLocalService.getResourceCodesCount();
 	}
 
 	public com.liferay.portal.model.ResourceCode updateResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceCodeLocalService.updateResourceCode(resourceCode);
 	}
 
 	public com.liferay.portal.model.ResourceCode updateResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceCodeLocalService.updateResourceCode(resourceCode, merge);
 	}
 
 	public com.liferay.portal.model.ResourceCode addResourceCode(
 		long companyId, java.lang.String name, int scope)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceCodeLocalService.addResourceCode(companyId, name, scope);
 	}
 
-	public void checkResourceCodes() throws com.liferay.portal.SystemException {
+	public void checkResourceCodes()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourceCodeLocalService.checkResourceCodes();
 	}
 
 	public void checkResourceCodes(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourceCodeLocalService.checkResourceCodes(companyId, name);
 	}
 
 	public com.liferay.portal.model.ResourceCode getResourceCode(
 		long companyId, java.lang.String name, int scope)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceCodeLocalService.getResourceCode(companyId, name, scope);
 	}
 

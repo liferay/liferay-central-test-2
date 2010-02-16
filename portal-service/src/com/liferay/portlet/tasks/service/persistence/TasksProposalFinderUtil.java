@@ -31,13 +31,13 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class TasksProposalFinderUtil {
 	public static int countByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByG_U(groupId, userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
 		long groupId, long userId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByG_U(groupId, userId, start, end);
 	}
 

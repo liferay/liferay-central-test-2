@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ClassName;
 
 import java.util.List;
@@ -97,78 +97,83 @@ public class ClassNameUtil {
 
 	public static com.liferay.portal.model.ClassName remove(long classNameId)
 		throws com.liferay.portal.NoSuchClassNameException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(classNameId);
 	}
 
 	public static com.liferay.portal.model.ClassName updateImpl(
 		com.liferay.portal.model.ClassName className, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(className, merge);
 	}
 
 	public static com.liferay.portal.model.ClassName findByPrimaryKey(
 		long classNameId)
 		throws com.liferay.portal.NoSuchClassNameException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(classNameId);
 	}
 
 	public static com.liferay.portal.model.ClassName fetchByPrimaryKey(
-		long classNameId) throws com.liferay.portal.SystemException {
+		long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(classNameId);
 	}
 
 	public static com.liferay.portal.model.ClassName findByValue(
 		java.lang.String value)
 		throws com.liferay.portal.NoSuchClassNameException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByValue(value);
 	}
 
 	public static com.liferay.portal.model.ClassName fetchByValue(
-		java.lang.String value) throws com.liferay.portal.SystemException {
+		java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByValue(value);
 	}
 
 	public static com.liferay.portal.model.ClassName fetchByValue(
 		java.lang.String value, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByValue(value, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ClassName> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.ClassName> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ClassName> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByValue(java.lang.String value)
 		throws com.liferay.portal.NoSuchClassNameException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByValue(value);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByValue(java.lang.String value)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByValue(value);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

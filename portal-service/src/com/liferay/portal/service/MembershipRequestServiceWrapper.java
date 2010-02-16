@@ -47,28 +47,28 @@ public class MembershipRequestServiceWrapper implements MembershipRequestService
 
 	public com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long groupId, java.lang.String comments)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _membershipRequestService.addMembershipRequest(groupId, comments);
 	}
 
 	public void deleteMembershipRequests(long groupId, int statusId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_membershipRequestService.deleteMembershipRequests(groupId, statusId);
 	}
 
 	public com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _membershipRequestService.getMembershipRequest(membershipRequestId);
 	}
 
 	public void updateStatus(long membershipRequestId,
 		java.lang.String reviewComments, int statusId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_membershipRequestService.updateStatus(membershipRequestId,
 			reviewComments, statusId);
 	}

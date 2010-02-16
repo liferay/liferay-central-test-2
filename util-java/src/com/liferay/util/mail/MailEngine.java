@@ -23,7 +23,7 @@
 package com.liferay.util.mail;
 
 import com.liferay.mail.service.MailServiceUtil;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

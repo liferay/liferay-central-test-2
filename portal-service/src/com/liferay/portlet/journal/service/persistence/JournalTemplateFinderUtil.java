@@ -33,7 +33,7 @@ public class JournalTemplateFinderUtil {
 	public static int countByKeywords(long companyId, long groupId,
 		java.lang.String keywords, java.lang.String structureId,
 		java.lang.String structureIdComparator)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .countByKeywords(companyId, groupId, keywords, structureId,
 			structureIdComparator);
@@ -43,7 +43,7 @@ public class JournalTemplateFinderUtil {
 		java.lang.String templateId, java.lang.String structureId,
 		java.lang.String structureIdComparator, java.lang.String name,
 		java.lang.String description, boolean andOperator)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .countByC_G_T_S_N_D(companyId, groupId, templateId,
 			structureId, structureIdComparator, name, description, andOperator);
@@ -53,7 +53,7 @@ public class JournalTemplateFinderUtil {
 		java.lang.String[] templateIds, java.lang.String structureId,
 		java.lang.String structureIdComparator, java.lang.String[] names,
 		java.lang.String[] descriptions, boolean andOperator)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .countByC_G_T_S_N_D(companyId, groupId, templateIds,
 			structureId, structureIdComparator, names, descriptions, andOperator);
@@ -63,7 +63,7 @@ public class JournalTemplateFinderUtil {
 		long companyId, long groupId, java.lang.String keywords,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByKeywords(companyId, groupId, keywords, structureId,
 			structureIdComparator, start, end, obc);
@@ -75,7 +75,7 @@ public class JournalTemplateFinderUtil {
 		java.lang.String name, java.lang.String description,
 		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByC_G_T_S_N_D(companyId, groupId, templateId,
 			structureId, structureIdComparator, name, description, andOperator,
@@ -88,7 +88,7 @@ public class JournalTemplateFinderUtil {
 		java.lang.String[] names, java.lang.String[] descriptions,
 		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByC_G_T_S_N_D(companyId, groupId, templateIds,
 			structureId, structureIdComparator, names, descriptions,

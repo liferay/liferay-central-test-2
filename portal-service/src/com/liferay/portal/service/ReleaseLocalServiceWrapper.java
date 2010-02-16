@@ -46,7 +46,7 @@ public class ReleaseLocalServiceWrapper implements ReleaseLocalService {
 
 	public com.liferay.portal.model.Release addRelease(
 		com.liferay.portal.model.Release release)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.addRelease(release);
 	}
 
@@ -55,83 +55,85 @@ public class ReleaseLocalServiceWrapper implements ReleaseLocalService {
 	}
 
 	public void deleteRelease(long releaseId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_releaseLocalService.deleteRelease(releaseId);
 	}
 
 	public void deleteRelease(com.liferay.portal.model.Release release)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_releaseLocalService.deleteRelease(release);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.Release getRelease(long releaseId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.getRelease(releaseId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Release> getReleases(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.getReleases(start, end);
 	}
 
-	public int getReleasesCount() throws com.liferay.portal.SystemException {
+	public int getReleasesCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.getReleasesCount();
 	}
 
 	public com.liferay.portal.model.Release updateRelease(
 		com.liferay.portal.model.Release release)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.updateRelease(release);
 	}
 
 	public com.liferay.portal.model.Release updateRelease(
 		com.liferay.portal.model.Release release, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.updateRelease(release, merge);
 	}
 
 	public com.liferay.portal.model.Release addRelease(
 		java.lang.String servletContextName, int buildNumber)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.addRelease(servletContextName, buildNumber);
 	}
 
 	public void createTablesAndPopulate()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_releaseLocalService.createTablesAndPopulate();
 	}
 
 	public int getBuildNumberOrCreate()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.getBuildNumberOrCreate();
 	}
 
 	public com.liferay.portal.model.Release getRelease(
 		java.lang.String servletContextName, int buildNumber)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.getRelease(servletContextName, buildNumber);
 	}
 
 	public com.liferay.portal.model.Release updateRelease(long releaseId,
 		int buildNumber, java.util.Date buildDate, boolean verified)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _releaseLocalService.updateRelease(releaseId, buildNumber,
 			buildDate, verified);
 	}

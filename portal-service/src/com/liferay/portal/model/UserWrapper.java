@@ -69,7 +69,7 @@ public class UserWrapper implements User {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _user.getUserUuid();
 	}
 
@@ -485,8 +485,8 @@ public class UserWrapper implements User {
 	}
 
 	public java.lang.String getLogin()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getLogin();
 	}
 
@@ -515,8 +515,8 @@ public class UserWrapper implements User {
 	}
 
 	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getPasswordPolicy();
 	}
 
@@ -533,8 +533,8 @@ public class UserWrapper implements User {
 	}
 
 	public java.util.Set<String> getReminderQueryQuestions()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getReminderQueryQuestions();
 	}
 

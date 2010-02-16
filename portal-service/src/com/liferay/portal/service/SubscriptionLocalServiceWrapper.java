@@ -47,7 +47,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 
 	public com.liferay.portal.model.Subscription addSubscription(
 		com.liferay.portal.model.Subscription subscription)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.addSubscription(subscription);
 	}
 
@@ -57,116 +57,118 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	}
 
 	public void deleteSubscription(long subscriptionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_subscriptionLocalService.deleteSubscription(subscriptionId);
 	}
 
 	public void deleteSubscription(
 		com.liferay.portal.model.Subscription subscription)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_subscriptionLocalService.deleteSubscription(subscription);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.Subscription getSubscription(
 		long subscriptionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.getSubscription(subscriptionId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.getSubscriptions(start, end);
 	}
 
 	public int getSubscriptionsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.getSubscriptionsCount();
 	}
 
 	public com.liferay.portal.model.Subscription updateSubscription(
 		com.liferay.portal.model.Subscription subscription)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.updateSubscription(subscription);
 	}
 
 	public com.liferay.portal.model.Subscription updateSubscription(
 		com.liferay.portal.model.Subscription subscription, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.updateSubscription(subscription, merge);
 	}
 
 	public com.liferay.portal.model.Subscription addSubscription(long userId,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.addSubscription(userId, className,
 			classPK);
 	}
 
 	public com.liferay.portal.model.Subscription addSubscription(long userId,
 		java.lang.String className, long classPK, java.lang.String frequency)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.addSubscription(userId, className,
 			classPK, frequency);
 	}
 
 	public void deleteSubscription(long userId, java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_subscriptionLocalService.deleteSubscription(userId, className, classPK);
 	}
 
 	public void deleteSubscriptions(long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_subscriptionLocalService.deleteSubscriptions(userId);
 	}
 
 	public void deleteSubscriptions(long companyId, java.lang.String className,
-		long classPK) throws com.liferay.portal.SystemException {
+		long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_subscriptionLocalService.deleteSubscriptions(companyId, className,
 			classPK);
 	}
 
 	public com.liferay.portal.model.Subscription getSubscription(
 		long companyId, long userId, java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.getSubscription(companyId, userId,
 			className, classPK);
 	}
 
 	public java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(
 		long companyId, java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.getSubscriptions(companyId, className,
 			classPK);
 	}
 
 	public java.util.List<com.liferay.portal.model.Subscription> getUserSubscriptions(
 		long userId, java.lang.String className)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.getUserSubscriptions(userId, className);
 	}
 
 	public boolean isSubscribed(long companyId, long userId,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.isSubscribed(companyId, userId,
 			className, classPK);
 	}

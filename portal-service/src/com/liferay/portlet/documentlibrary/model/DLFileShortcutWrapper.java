@@ -93,7 +93,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileShortcut.getUserUuid();
 	}
 
@@ -166,7 +166,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileShortcut.getStatusByUserUuid();
 	}
 

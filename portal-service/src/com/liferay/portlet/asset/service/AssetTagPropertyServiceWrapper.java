@@ -47,32 +47,32 @@ public class AssetTagPropertyServiceWrapper implements AssetTagPropertyService {
 
 	public com.liferay.portlet.asset.model.AssetTagProperty addTagProperty(
 		long tagId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagPropertyService.addTagProperty(tagId, key, value);
 	}
 
 	public void deleteTagProperty(long tagPropertyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_assetTagPropertyService.deleteTagProperty(tagPropertyId);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> getTagProperties(
-		long tagId) throws com.liferay.portal.SystemException {
+		long tagId) throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagPropertyService.getTagProperties(tagId);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> getTagPropertyValues(
 		long companyId, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagPropertyService.getTagPropertyValues(companyId, key);
 	}
 
 	public com.liferay.portlet.asset.model.AssetTagProperty updateTagProperty(
 		long tagPropertyId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagPropertyService.updateTagProperty(tagPropertyId, key,
 			value);
 	}

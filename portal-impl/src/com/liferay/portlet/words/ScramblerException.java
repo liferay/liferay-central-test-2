@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.words;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="ScramblerException.java.html"><b><i>View Source</i></b></a>

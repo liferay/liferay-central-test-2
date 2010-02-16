@@ -49,33 +49,34 @@ public class SCFrameworkVersionServiceWrapper
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
 		java.lang.String name, java.lang.String url, boolean active,
 		int priority, com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _scFrameworkVersionService.addFrameworkVersion(name, url,
 			active, priority, serviceContext);
 	}
 
 	public void deleteFrameworkVersion(long frameworkVersionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_scFrameworkVersionService.deleteFrameworkVersion(frameworkVersionId);
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getFrameworkVersion(
 		long frameworkVersionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _scFrameworkVersionService.getFrameworkVersion(frameworkVersionId);
 	}
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
-		long groupId, boolean active) throws com.liferay.portal.SystemException {
+		long groupId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scFrameworkVersionService.getFrameworkVersions(groupId, active);
 	}
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
 		long groupId, boolean active, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scFrameworkVersionService.getFrameworkVersions(groupId, active,
 			start, end);
 	}
@@ -83,8 +84,8 @@ public class SCFrameworkVersionServiceWrapper
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateFrameworkVersion(
 		long frameworkVersionId, java.lang.String name, java.lang.String url,
 		boolean active, int priority)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _scFrameworkVersionService.updateFrameworkVersion(frameworkVersionId,
 			name, url, active, priority);
 	}

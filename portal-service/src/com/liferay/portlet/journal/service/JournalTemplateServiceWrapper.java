@@ -51,8 +51,8 @@ public class JournalTemplateServiceWrapper implements JournalTemplateService {
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateService.addTemplate(groupId, templateId,
 			autoTemplateId, structureId, name, description, xsl, formatXsl,
 			langType, cacheable, serviceContext);
@@ -65,8 +65,8 @@ public class JournalTemplateServiceWrapper implements JournalTemplateService {
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateService.addTemplate(groupId, templateId,
 			autoTemplateId, structureId, name, description, xsl, formatXsl,
 			langType, cacheable, smallImage, smallImageURL, smallFile,
@@ -76,30 +76,30 @@ public class JournalTemplateServiceWrapper implements JournalTemplateService {
 	public com.liferay.portlet.journal.model.JournalTemplate copyTemplate(
 		long groupId, java.lang.String oldTemplateId,
 		java.lang.String newTemplateId, boolean autoTemplateId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateService.copyTemplate(groupId, oldTemplateId,
 			newTemplateId, autoTemplateId);
 	}
 
 	public void deleteTemplate(long groupId, java.lang.String templateId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_journalTemplateService.deleteTemplate(groupId, templateId);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getStructureTemplates(
 		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateService.getStructureTemplates(groupId,
 			structureId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		long groupId, java.lang.String templateId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateService.getTemplate(groupId, templateId);
 	}
 
@@ -109,8 +109,8 @@ public class JournalTemplateServiceWrapper implements JournalTemplateService {
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateService.updateTemplate(groupId, templateId,
 			structureId, name, description, xsl, formatXsl, langType,
 			cacheable, serviceContext);
@@ -123,8 +123,8 @@ public class JournalTemplateServiceWrapper implements JournalTemplateService {
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateService.updateTemplate(groupId, templateId,
 			structureId, name, description, xsl, formatXsl, langType,
 			cacheable, smallImage, smallImageURL, smallFile, serviceContext);

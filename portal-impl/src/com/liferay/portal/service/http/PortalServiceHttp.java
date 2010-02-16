@@ -67,7 +67,8 @@ import com.liferay.portal.service.PortalServiceUtil;
  */
 public class PortalServiceHttp {
 	public static java.lang.String getAutoDeployDirectory(
-		HttpPrincipal httpPrincipal) throws com.liferay.portal.SystemException {
+		HttpPrincipal httpPrincipal)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
 					"getAutoDeployDirectory", new Object[0]);
@@ -78,16 +79,16 @@ public class PortalServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return (java.lang.String)returnObj;
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -95,7 +96,7 @@ public class PortalServiceHttp {
 	}
 
 	public static int getBuildNumber(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
 					"getBuildNumber", new Object[0]);
@@ -106,12 +107,12 @@ public class PortalServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return ((Integer)returnObj).intValue();
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -119,7 +120,7 @@ public class PortalServiceHttp {
 	}
 
 	public static void test(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
 					"test", new Object[0]);
@@ -128,10 +129,10 @@ public class PortalServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;
@@ -139,7 +140,7 @@ public class PortalServiceHttp {
 	}
 
 	public static void testCounterRollback(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
 					"testCounterRollback", new Object[0]);
@@ -148,14 +149,14 @@ public class PortalServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
-				throw new com.liferay.portal.SystemException(e);
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 		}
-		catch (com.liferay.portal.SystemException se) {
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
 
 			throw se;

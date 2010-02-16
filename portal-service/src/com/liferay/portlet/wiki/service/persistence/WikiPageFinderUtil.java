@@ -31,39 +31,40 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class WikiPageFinderUtil {
 	public static int countByCreateDate(long nodeId, java.util.Date createDate,
-		boolean before) throws com.liferay.portal.SystemException {
+		boolean before)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByCreateDate(nodeId, createDate, before);
 	}
 
 	public static int countByCreateDate(long nodeId,
 		java.sql.Timestamp createDate, boolean before)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByCreateDate(nodeId, createDate, before);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByResourcePrimKey(
 		long resourcePrimKey)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
 		return getFinder().findByResourcePrimKey(resourcePrimKey);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByCreateDate(
 		long nodeId, java.util.Date createDate, boolean before, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByCreateDate(nodeId, createDate, before, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByCreateDate(
 		long nodeId, java.sql.Timestamp createDate, boolean before, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByCreateDate(nodeId, createDate, before, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByNoAssets()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByNoAssets();
 	}
 

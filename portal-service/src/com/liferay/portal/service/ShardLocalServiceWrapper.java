@@ -46,7 +46,7 @@ public class ShardLocalServiceWrapper implements ShardLocalService {
 
 	public com.liferay.portal.model.Shard addShard(
 		com.liferay.portal.model.Shard shard)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shardLocalService.addShard(shard);
 	}
 
@@ -55,65 +55,66 @@ public class ShardLocalServiceWrapper implements ShardLocalService {
 	}
 
 	public void deleteShard(long shardId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_shardLocalService.deleteShard(shardId);
 	}
 
 	public void deleteShard(com.liferay.portal.model.Shard shard)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_shardLocalService.deleteShard(shard);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shardLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _shardLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.Shard getShard(long shardId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _shardLocalService.getShard(shardId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Shard> getShards(int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _shardLocalService.getShards(start, end);
 	}
 
-	public int getShardsCount() throws com.liferay.portal.SystemException {
+	public int getShardsCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shardLocalService.getShardsCount();
 	}
 
 	public com.liferay.portal.model.Shard updateShard(
 		com.liferay.portal.model.Shard shard)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shardLocalService.updateShard(shard);
 	}
 
 	public com.liferay.portal.model.Shard updateShard(
 		com.liferay.portal.model.Shard shard, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shardLocalService.updateShard(shard, merge);
 	}
 
 	public com.liferay.portal.model.Shard addShard(java.lang.String className,
 		long classPK, java.lang.String name)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shardLocalService.addShard(className, classPK, name);
 	}
 
 	public com.liferay.portal.model.Shard getShard(java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _shardLocalService.getShard(className, classPK);
 	}
 

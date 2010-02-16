@@ -46,7 +46,7 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 
 	public com.liferay.portal.model.Portlet addPortlet(
 		com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.addPortlet(portlet);
 	}
 
@@ -55,70 +55,72 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 	}
 
 	public void deletePortlet(long id)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_portletLocalService.deletePortlet(id);
 	}
 
 	public void deletePortlet(com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_portletLocalService.deletePortlet(portlet);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.Portlet getPortlet(long id)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getPortlet(id);
 	}
 
 	public java.util.List<com.liferay.portal.model.Portlet> getPortlets(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getPortlets(start, end);
 	}
 
-	public int getPortletsCount() throws com.liferay.portal.SystemException {
+	public int getPortletsCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getPortletsCount();
 	}
 
 	public com.liferay.portal.model.Portlet updatePortlet(
 		com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.updatePortlet(portlet);
 	}
 
 	public com.liferay.portal.model.Portlet updatePortlet(
 		com.liferay.portal.model.Portlet portlet, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.updatePortlet(portlet, merge);
 	}
 
 	public void checkPortlet(com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_portletLocalService.checkPortlet(portlet);
 	}
 
 	public void checkPortlets(long companyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_portletLocalService.checkPortlets(companyId);
 	}
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.deployRemotePortlet(portlet);
 	}
 
@@ -135,7 +137,8 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 	}
 
 	public com.liferay.portal.model.PortletCategory getEARDisplay(
-		java.lang.String xml) throws com.liferay.portal.SystemException {
+		java.lang.String xml)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getEARDisplay(xml);
 	}
 
@@ -146,7 +149,7 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 
 	public com.liferay.portal.model.PortletCategory getWARDisplay(
 		java.lang.String servletContextName, java.lang.String xml)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getWARDisplay(servletContextName, xml);
 	}
 
@@ -164,13 +167,14 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 	}
 
 	public com.liferay.portal.model.Portlet getPortletById(long companyId,
-		java.lang.String portletId) throws com.liferay.portal.SystemException {
+		java.lang.String portletId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getPortletById(companyId, portletId);
 	}
 
 	public com.liferay.portal.model.Portlet getPortletByStrutsPath(
 		long companyId, java.lang.String strutsPath)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getPortletByStrutsPath(companyId, strutsPath);
 	}
 
@@ -179,19 +183,20 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 	}
 
 	public java.util.List<com.liferay.portal.model.Portlet> getPortlets(
-		long companyId) throws com.liferay.portal.SystemException {
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getPortlets(companyId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Portlet> getPortlets(
 		long companyId, boolean showSystem, boolean showPortal)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getPortlets(companyId, showSystem,
 			showPortal);
 	}
 
 	public boolean hasPortlet(long companyId, java.lang.String portletId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.hasPortlet(companyId, portletId);
 	}
 
@@ -216,7 +221,7 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 
 	public com.liferay.portal.model.Portlet updatePortlet(long companyId,
 		java.lang.String portletId, java.lang.String roles, boolean active)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.updatePortlet(companyId, portletId, roles,
 			active);
 	}

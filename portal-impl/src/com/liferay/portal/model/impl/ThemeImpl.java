@@ -22,8 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.freemarker.FreeMarkerTemplateLoader;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;

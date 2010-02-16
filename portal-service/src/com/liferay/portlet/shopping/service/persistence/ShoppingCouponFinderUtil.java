@@ -32,7 +32,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class ShoppingCouponFinderUtil {
 	public static int countByG_C_C_A_DT(long groupId, long companyId,
 		java.lang.String code, boolean active, java.lang.String discountType,
-		boolean andOperator) throws com.liferay.portal.SystemException {
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .countByG_C_C_A_DT(groupId, companyId, code, active,
 			discountType, andOperator);
@@ -41,7 +42,7 @@ public class ShoppingCouponFinderUtil {
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> findByG_C_C_A_DT(
 		long groupId, long companyId, java.lang.String code, boolean active,
 		java.lang.String discountType, boolean andOperator, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByG_C_C_A_DT(groupId, companyId, code, active,
 			discountType, andOperator, start, end);

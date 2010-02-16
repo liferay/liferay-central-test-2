@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 

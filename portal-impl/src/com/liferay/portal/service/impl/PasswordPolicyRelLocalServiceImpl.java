@@ -23,8 +23,8 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.NoSuchPasswordPolicyRelException;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.service.base.PasswordPolicyRelLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;

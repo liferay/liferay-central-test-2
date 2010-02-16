@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.scheduler;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**

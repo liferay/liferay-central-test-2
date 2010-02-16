@@ -31,19 +31,19 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class AssetTagPropertyFinderUtil {
 	public static int countByG_K(long groupId, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByG_K(groupId, key);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByG_K(
 		long groupId, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByG_K(groupId, key);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findByG_K(
 		long groupId, java.lang.String key, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByG_K(groupId, key, start, end);
 	}
 

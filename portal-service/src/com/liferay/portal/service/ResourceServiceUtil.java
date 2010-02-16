@@ -48,8 +48,8 @@ public class ResourceServiceUtil {
 	public static com.liferay.portal.model.Resource getResource(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResource(companyId, name, scope, primKey);
 	}
 

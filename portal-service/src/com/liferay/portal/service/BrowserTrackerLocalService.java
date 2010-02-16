@@ -22,11 +22,11 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * <a href="BrowserTrackerLocalService.java.html"><b><i>View Source</i></b></a>
@@ -57,56 +57,59 @@ import com.liferay.portal.kernel.annotation.Transactional;
 public interface BrowserTrackerLocalService {
 	public com.liferay.portal.model.BrowserTracker addBrowserTracker(
 		com.liferay.portal.model.BrowserTracker browserTracker)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.BrowserTracker createBrowserTracker(
 		long browserTrackerId);
 
 	public void deleteBrowserTracker(long browserTrackerId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteBrowserTracker(
 		com.liferay.portal.model.BrowserTracker browserTracker)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.BrowserTracker getBrowserTracker(
 		long browserTrackerId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.BrowserTracker> getBrowserTrackers(
-		int start, int end) throws com.liferay.portal.SystemException;
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getBrowserTrackersCount()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.BrowserTracker updateBrowserTracker(
 		com.liferay.portal.model.BrowserTracker browserTracker)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.BrowserTracker updateBrowserTracker(
 		com.liferay.portal.model.BrowserTracker browserTracker, boolean merge)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteUserBrowserTracker(long userId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.BrowserTracker getBrowserTracker(
-		long userId, long browserKey) throws com.liferay.portal.SystemException;
+		long userId, long browserKey)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.BrowserTracker updateBrowserTracker(
-		long userId, long browserKey) throws com.liferay.portal.SystemException;
+		long userId, long browserKey)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

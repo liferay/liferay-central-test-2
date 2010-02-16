@@ -93,7 +93,7 @@ public class AssetCategoryWrapper implements AssetCategory {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategory.getUserUuid();
 	}
 
@@ -265,8 +265,8 @@ public class AssetCategoryWrapper implements AssetCategory {
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAncestors()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategory.getAncestors();
 	}
 

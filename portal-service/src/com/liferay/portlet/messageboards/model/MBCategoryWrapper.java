@@ -93,7 +93,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategory.getUserUuid();
 	}
 
@@ -236,14 +236,14 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	public java.util.List<Long> getAncestorCategoryIds()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategory.getAncestorCategoryIds();
 	}
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getAncestors()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategory.getAncestors();
 	}
 

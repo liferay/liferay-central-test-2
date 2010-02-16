@@ -32,7 +32,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class PortletPreferencesFinderUtil {
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByPortletId(
-		java.lang.String portletId) throws com.liferay.portal.SystemException {
+		java.lang.String portletId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByPortletId(portletId);
 	}
 

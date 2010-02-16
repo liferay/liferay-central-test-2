@@ -198,7 +198,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	public java.lang.String getAuthType()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _company.getAuthType();
 	}
 
@@ -246,29 +246,33 @@ public class CompanyWrapper implements Company {
 		return _company.hasCompanyMx(emailAddress);
 	}
 
-	public boolean isAutoLogin() throws com.liferay.portal.SystemException {
+	public boolean isAutoLogin()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _company.isAutoLogin();
 	}
 
-	public boolean isCommunityLogo() throws com.liferay.portal.SystemException {
+	public boolean isCommunityLogo()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _company.isCommunityLogo();
 	}
 
-	public boolean isSendPassword() throws com.liferay.portal.SystemException {
+	public boolean isSendPassword()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _company.isSendPassword();
 	}
 
-	public boolean isStrangers() throws com.liferay.portal.SystemException {
+	public boolean isStrangers()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _company.isStrangers();
 	}
 
 	public boolean isStrangersVerify()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _company.isStrangersVerify();
 	}
 
 	public boolean isStrangersWithMx()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _company.isStrangersWithMx();
 	}
 

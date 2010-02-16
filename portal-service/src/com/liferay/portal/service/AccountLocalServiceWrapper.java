@@ -46,7 +46,7 @@ public class AccountLocalServiceWrapper implements AccountLocalService {
 
 	public com.liferay.portal.model.Account addAccount(
 		com.liferay.portal.model.Account account)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _accountLocalService.addAccount(account);
 	}
 
@@ -55,59 +55,61 @@ public class AccountLocalServiceWrapper implements AccountLocalService {
 	}
 
 	public void deleteAccount(long accountId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_accountLocalService.deleteAccount(accountId);
 	}
 
 	public void deleteAccount(com.liferay.portal.model.Account account)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_accountLocalService.deleteAccount(account);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _accountLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _accountLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.Account getAccount(long accountId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _accountLocalService.getAccount(accountId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Account> getAccounts(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _accountLocalService.getAccounts(start, end);
 	}
 
-	public int getAccountsCount() throws com.liferay.portal.SystemException {
+	public int getAccountsCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _accountLocalService.getAccountsCount();
 	}
 
 	public com.liferay.portal.model.Account updateAccount(
 		com.liferay.portal.model.Account account)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _accountLocalService.updateAccount(account);
 	}
 
 	public com.liferay.portal.model.Account updateAccount(
 		com.liferay.portal.model.Account account, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _accountLocalService.updateAccount(account, merge);
 	}
 
 	public com.liferay.portal.model.Account getAccount(long companyId,
 		long accountId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _accountLocalService.getAccount(companyId, accountId);
 	}
 

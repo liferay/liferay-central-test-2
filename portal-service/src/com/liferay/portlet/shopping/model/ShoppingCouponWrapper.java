@@ -85,7 +85,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCoupon.getUserUuid();
 	}
 

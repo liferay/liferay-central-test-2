@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class PollsChoiceFinderUtil {
 	public static com.liferay.portlet.polls.model.PollsChoice findByUuid_G(
 		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.SystemException,
+		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchChoiceException {
 		return getFinder().findByUuid_G(uuid, groupId);
 	}

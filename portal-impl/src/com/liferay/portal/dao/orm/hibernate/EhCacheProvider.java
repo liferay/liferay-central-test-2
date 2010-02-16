@@ -22,7 +22,7 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import java.lang.reflect.Field;
 

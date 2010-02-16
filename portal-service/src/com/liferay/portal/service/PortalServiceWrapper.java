@@ -45,7 +45,7 @@ public class PortalServiceWrapper implements PortalService {
 	}
 
 	public java.lang.String getAutoDeployDirectory()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portalService.getAutoDeployDirectory();
 	}
 
@@ -57,7 +57,8 @@ public class PortalServiceWrapper implements PortalService {
 		_portalService.test();
 	}
 
-	public void testCounterRollback() throws com.liferay.portal.SystemException {
+	public void testCounterRollback()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_portalService.testCounterRollback();
 	}
 

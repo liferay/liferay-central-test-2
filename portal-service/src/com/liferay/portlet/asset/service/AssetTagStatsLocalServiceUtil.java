@@ -47,7 +47,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class AssetTagStatsLocalServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetTagStats addAssetTagStats(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addAssetTagStats(assetTagStats);
 	}
 
@@ -57,82 +57,86 @@ public class AssetTagStatsLocalServiceUtil {
 	}
 
 	public static void deleteAssetTagStats(long tagStatsId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAssetTagStats(tagStatsId);
 	}
 
 	public static void deleteAssetTagStats(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAssetTagStats(assetTagStats);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagStats getAssetTagStats(
 		long tagStatsId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAssetTagStats(tagStatsId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagStats> getAssetTagStatses(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAssetTagStatses(start, end);
 	}
 
 	public static int getAssetTagStatsesCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAssetTagStatsesCount();
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagStats updateAssetTagStats(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateAssetTagStats(assetTagStats);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagStats updateAssetTagStats(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateAssetTagStats(assetTagStats, merge);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagStats addTagStats(
-		long tagId, long classNameId) throws com.liferay.portal.SystemException {
+		long tagId, long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addTagStats(tagId, classNameId);
 	}
 
 	public static void deleteTagStatsByClassNameId(long classNameId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTagStatsByClassNameId(classNameId);
 	}
 
 	public static void deleteTagStatsByTagId(long tagId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTagStatsByTagId(tagId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagStats getTagStats(
-		long tagId, long classNameId) throws com.liferay.portal.SystemException {
+		long tagId, long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTagStats(tagId, classNameId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagStats updateTagStats(
 		long tagId, long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateTagStats(tagId, classNameId);
 	}
 

@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.tasks.service;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * <a href="TasksReviewService.java.html"><b><i>View Source</i></b></a>
@@ -56,15 +56,15 @@ import com.liferay.portal.kernel.annotation.Transactional;
 public interface TasksReviewService {
 	public com.liferay.portlet.tasks.model.TasksReview approveReview(
 		long proposalId, int stage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksReview rejectReview(
 		long proposalId, int stage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateReviews(long proposalId, long[][] userIdsPerStage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Lock;
 
 import java.util.List;
@@ -96,42 +96,43 @@ public class LockUtil {
 
 	public static com.liferay.portal.model.Lock remove(long lockId)
 		throws com.liferay.portal.NoSuchLockException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(lockId);
 	}
 
 	public static com.liferay.portal.model.Lock updateImpl(
 		com.liferay.portal.model.Lock lock, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(lock, merge);
 	}
 
 	public static com.liferay.portal.model.Lock findByPrimaryKey(long lockId)
 		throws com.liferay.portal.NoSuchLockException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(lockId);
 	}
 
 	public static com.liferay.portal.model.Lock fetchByPrimaryKey(long lockId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(lockId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Lock> findByUuid(
-		java.lang.String uuid) throws com.liferay.portal.SystemException {
+		java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Lock> findByUuid(
 		java.lang.String uuid, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Lock> findByUuid(
 		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid, start, end, obc);
 	}
 
@@ -139,7 +140,7 @@ public class LockUtil {
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLockException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid_First(uuid, obc);
 	}
 
@@ -147,7 +148,7 @@ public class LockUtil {
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLockException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid_Last(uuid, obc);
 	}
 
@@ -155,26 +156,26 @@ public class LockUtil {
 		long lockId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLockException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid_PrevAndNext(lockId, uuid, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Lock> findByExpirationDate(
 		java.util.Date expirationDate)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByExpirationDate(expirationDate);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Lock> findByExpirationDate(
 		java.util.Date expirationDate, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByExpirationDate(expirationDate, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Lock> findByExpirationDate(
 		java.util.Date expirationDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByExpirationDate(expirationDate, start, end, obc);
 	}
@@ -183,7 +184,7 @@ public class LockUtil {
 		java.util.Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLockException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByExpirationDate_First(expirationDate, obc);
 	}
 
@@ -191,7 +192,7 @@ public class LockUtil {
 		java.util.Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLockException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByExpirationDate_Last(expirationDate, obc);
 	}
 
@@ -199,7 +200,7 @@ public class LockUtil {
 		long lockId, java.util.Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLockException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByExpirationDate_PrevAndNext(lockId, expirationDate, obc);
 	}
@@ -207,75 +208,80 @@ public class LockUtil {
 	public static com.liferay.portal.model.Lock findByC_K(
 		java.lang.String className, java.lang.String key)
 		throws com.liferay.portal.NoSuchLockException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_K(className, key);
 	}
 
 	public static com.liferay.portal.model.Lock fetchByC_K(
 		java.lang.String className, java.lang.String key)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByC_K(className, key);
 	}
 
 	public static com.liferay.portal.model.Lock fetchByC_K(
 		java.lang.String className, java.lang.String key,
-		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByC_K(className, key, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Lock> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Lock> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Lock> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUuid(uuid);
 	}
 
 	public static void removeByExpirationDate(java.util.Date expirationDate)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByExpirationDate(expirationDate);
 	}
 
 	public static void removeByC_K(java.lang.String className,
 		java.lang.String key)
 		throws com.liferay.portal.NoSuchLockException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_K(className, key);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUuid(uuid);
 	}
 
 	public static int countByExpirationDate(java.util.Date expirationDate)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByExpirationDate(expirationDate);
 	}
 
 	public static int countByC_K(java.lang.String className,
-		java.lang.String key) throws com.liferay.portal.SystemException {
+		java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_K(className, key);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

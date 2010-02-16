@@ -75,8 +75,8 @@ public interface User extends UserModel {
 	public java.util.Locale getLocale();
 
 	public java.lang.String getLogin()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean getMale();
 
@@ -91,8 +91,8 @@ public interface User extends UserModel {
 	public boolean getPasswordModified();
 
 	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getPasswordUnencrypted();
 
@@ -101,8 +101,8 @@ public interface User extends UserModel {
 	public int getPublicLayoutsPageCount();
 
 	public java.util.Set<String> getReminderQueryQuestions()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public long[] getRoleIds();
 

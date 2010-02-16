@@ -29,22 +29,22 @@ package com.liferay.portlet.messageboards.service.persistence;
  */
 public interface MBMessageFinder {
 	public int countByC_T(java.util.Date createDate, long threadId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_U_S(long groupId, long userId, int status)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_U_A_S(long groupId, long userId, boolean anonymous,
-		int status) throws com.liferay.portal.SystemException;
+		int status) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<Long> findByG_U_S(long groupId, long userId,
 		int status, int start, int end)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<Long> findByG_U_A_S(long groupId, long userId,
 		boolean anonymous, int status, int start, int end)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

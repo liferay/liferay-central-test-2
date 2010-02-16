@@ -32,17 +32,17 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class AssetTagPropertyKeyFinderUtil {
 	public static int countByGroupId(long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByGroupId(groupId);
 	}
 
 	public static java.lang.String[] findByGroupId(long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByGroupId(groupId);
 	}
 
 	public static java.lang.String[] findByGroupId(long groupId, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByGroupId(groupId, start, end);
 	}
 

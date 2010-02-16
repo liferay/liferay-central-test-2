@@ -48,7 +48,7 @@ public class LayoutTemplateLocalServiceWrapper
 
 	public java.lang.String getContent(java.lang.String layoutTemplateId,
 		boolean standard, java.lang.String themeId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutTemplateLocalService.getContent(layoutTemplateId,
 			standard, themeId);
 	}
@@ -71,7 +71,7 @@ public class LayoutTemplateLocalServiceWrapper
 
 	public java.lang.String getWapContent(java.lang.String layoutTemplateId,
 		boolean standard, java.lang.String themeId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutTemplateLocalService.getWapContent(layoutTemplateId,
 			standard, themeId);
 	}

@@ -47,7 +47,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class LayoutTemplateLocalServiceUtil {
 	public static java.lang.String getContent(
 		java.lang.String layoutTemplateId, boolean standard,
-		java.lang.String themeId) throws com.liferay.portal.SystemException {
+		java.lang.String themeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getContent(layoutTemplateId, standard, themeId);
 	}
 
@@ -69,7 +70,8 @@ public class LayoutTemplateLocalServiceUtil {
 
 	public static java.lang.String getWapContent(
 		java.lang.String layoutTemplateId, boolean standard,
-		java.lang.String themeId) throws com.liferay.portal.SystemException {
+		java.lang.String themeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getWapContent(layoutTemplateId, standard, themeId);
 	}
 

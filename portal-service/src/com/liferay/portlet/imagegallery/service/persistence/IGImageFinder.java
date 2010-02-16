@@ -29,8 +29,8 @@ package com.liferay.portlet.imagegallery.service.persistence;
  */
 public interface IGImageFinder {
 	public int countByG_F(long groupId, java.util.List<Long> folderIds)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByNoAssets()
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

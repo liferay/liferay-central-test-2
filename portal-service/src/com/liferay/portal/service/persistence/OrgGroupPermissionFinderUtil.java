@@ -32,7 +32,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class OrgGroupPermissionFinderUtil {
 	public static void removeByO_G_R(long organizationId, long groupId,
-		long resourceId) throws com.liferay.portal.SystemException {
+		long resourceId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getFinder().removeByO_G_R(organizationId, groupId, resourceId);
 	}
 

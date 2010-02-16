@@ -47,15 +47,15 @@ public class PortletPreferencesServiceWrapper
 	}
 
 	public void deleteArchivedPreferences(long portletItemId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_portletPreferencesService.deleteArchivedPreferences(portletItemId);
 	}
 
 	public void restoreArchivedPreferences(long groupId, java.lang.String name,
 		java.lang.String portletId, javax.portlet.PortletPreferences preferences)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_portletPreferencesService.restoreArchivedPreferences(groupId, name,
 			portletId, preferences);
 	}
@@ -63,8 +63,8 @@ public class PortletPreferencesServiceWrapper
 	public void updateArchivePreferences(long userId, long groupId,
 		java.lang.String name, java.lang.String portletId,
 		javax.portlet.PortletPreferences preferences)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_portletPreferencesService.updateArchivePreferences(userId, groupId,
 			name, portletId, preferences);
 	}

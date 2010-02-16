@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ServiceComponent;
 
 import java.util.List;
@@ -100,44 +100,46 @@ public class ServiceComponentUtil {
 	public static com.liferay.portal.model.ServiceComponent remove(
 		long serviceComponentId)
 		throws com.liferay.portal.NoSuchServiceComponentException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(serviceComponentId);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent updateImpl(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(serviceComponent, merge);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent findByPrimaryKey(
 		long serviceComponentId)
 		throws com.liferay.portal.NoSuchServiceComponentException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(serviceComponentId);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent fetchByPrimaryKey(
-		long serviceComponentId) throws com.liferay.portal.SystemException {
+		long serviceComponentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(serviceComponentId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ServiceComponent> findByBuildNamespace(
 		java.lang.String buildNamespace)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByBuildNamespace(buildNamespace);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ServiceComponent> findByBuildNamespace(
 		java.lang.String buildNamespace, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByBuildNamespace(buildNamespace, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ServiceComponent> findByBuildNamespace(
 		java.lang.String buildNamespace, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByBuildNamespace(buildNamespace, start, end, obc);
 	}
@@ -146,7 +148,7 @@ public class ServiceComponentUtil {
 		java.lang.String buildNamespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchServiceComponentException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByBuildNamespace_First(buildNamespace, obc);
 	}
 
@@ -154,7 +156,7 @@ public class ServiceComponentUtil {
 		java.lang.String buildNamespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchServiceComponentException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByBuildNamespace_Last(buildNamespace, obc);
 	}
 
@@ -162,7 +164,7 @@ public class ServiceComponentUtil {
 		long serviceComponentId, java.lang.String buildNamespace,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchServiceComponentException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByBuildNamespace_PrevAndNext(serviceComponentId,
 			buildNamespace, obc);
@@ -171,67 +173,72 @@ public class ServiceComponentUtil {
 	public static com.liferay.portal.model.ServiceComponent findByBNS_BNU(
 		java.lang.String buildNamespace, long buildNumber)
 		throws com.liferay.portal.NoSuchServiceComponentException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByBNS_BNU(buildNamespace, buildNumber);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent fetchByBNS_BNU(
 		java.lang.String buildNamespace, long buildNumber)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByBNS_BNU(buildNamespace, buildNumber);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent fetchByBNS_BNU(
 		java.lang.String buildNamespace, long buildNumber,
-		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByBNS_BNU(buildNamespace, buildNumber,
 			retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ServiceComponent> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.ServiceComponent> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ServiceComponent> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByBuildNamespace(java.lang.String buildNamespace)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByBuildNamespace(buildNamespace);
 	}
 
 	public static void removeByBNS_BNU(java.lang.String buildNamespace,
 		long buildNumber)
 		throws com.liferay.portal.NoSuchServiceComponentException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByBNS_BNU(buildNamespace, buildNumber);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByBuildNamespace(java.lang.String buildNamespace)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByBuildNamespace(buildNamespace);
 	}
 
 	public static int countByBNS_BNU(java.lang.String buildNamespace,
-		long buildNumber) throws com.liferay.portal.SystemException {
+		long buildNumber)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByBNS_BNU(buildNamespace, buildNumber);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

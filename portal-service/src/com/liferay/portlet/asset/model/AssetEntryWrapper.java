@@ -85,7 +85,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getUserUuid();
 	}
 
@@ -315,12 +315,12 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getCategories();
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getTags();
 	}
 

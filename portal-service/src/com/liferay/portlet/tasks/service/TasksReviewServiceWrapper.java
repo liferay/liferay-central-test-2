@@ -46,21 +46,21 @@ public class TasksReviewServiceWrapper implements TasksReviewService {
 
 	public com.liferay.portlet.tasks.model.TasksReview approveReview(
 		long proposalId, int stage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksReviewService.approveReview(proposalId, stage);
 	}
 
 	public com.liferay.portlet.tasks.model.TasksReview rejectReview(
 		long proposalId, int stage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _tasksReviewService.rejectReview(proposalId, stage);
 	}
 
 	public void updateReviews(long proposalId, long[][] userIdsPerStage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_tasksReviewService.updateReviews(proposalId, userIdsPerStage);
 	}
 

@@ -48,7 +48,7 @@ public class PluginSettingLocalServiceWrapper
 
 	public com.liferay.portal.model.PluginSetting addPluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pluginSettingLocalService.addPluginSetting(pluginSetting);
 	}
 
@@ -58,61 +58,63 @@ public class PluginSettingLocalServiceWrapper
 	}
 
 	public void deletePluginSetting(long pluginSettingId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_pluginSettingLocalService.deletePluginSetting(pluginSettingId);
 	}
 
 	public void deletePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_pluginSettingLocalService.deletePluginSetting(pluginSetting);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pluginSettingLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _pluginSettingLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portal.model.PluginSetting getPluginSetting(
 		long pluginSettingId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _pluginSettingLocalService.getPluginSetting(pluginSettingId);
 	}
 
 	public java.util.List<com.liferay.portal.model.PluginSetting> getPluginSettings(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pluginSettingLocalService.getPluginSettings(start, end);
 	}
 
 	public int getPluginSettingsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pluginSettingLocalService.getPluginSettingsCount();
 	}
 
 	public com.liferay.portal.model.PluginSetting updatePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pluginSettingLocalService.updatePluginSetting(pluginSetting);
 	}
 
 	public com.liferay.portal.model.PluginSetting updatePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pluginSettingLocalService.updatePluginSetting(pluginSetting,
 			merge);
 	}
 
 	public void checkPermission(long userId, java.lang.String pluginId,
-		java.lang.String pluginType) throws com.liferay.portal.PortalException {
+		java.lang.String pluginType)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		_pluginSettingLocalService.checkPermission(userId, pluginId, pluginType);
 	}
 
@@ -122,7 +124,7 @@ public class PluginSettingLocalServiceWrapper
 
 	public com.liferay.portal.model.PluginSetting getPluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pluginSettingLocalService.getPluginSetting(companyId, pluginId,
 			pluginType);
 	}
@@ -136,7 +138,7 @@ public class PluginSettingLocalServiceWrapper
 	public com.liferay.portal.model.PluginSetting updatePluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType,
 		java.lang.String roles, boolean active)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pluginSettingLocalService.updatePluginSetting(companyId,
 			pluginId, pluginType, roles, active);
 	}

@@ -60,8 +60,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.addArticle(groupId, articleId,
 			autoArticleId, title, description, content, type, structureId,
 			templateId, displayDateMonth, displayDateDay, displayDateYear,
@@ -86,8 +86,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		int reviewDateMinute, boolean neverReview, boolean indexable,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.addArticle(groupId, articleId,
 			autoArticleId, title, description, content, type, structureId,
 			templateId, displayDateMonth, displayDateDay, displayDateYear,
@@ -101,8 +101,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 	public com.liferay.portlet.journal.model.JournalArticle copyArticle(
 		long groupId, java.lang.String oldArticleId,
 		java.lang.String newArticleId, boolean autoArticleId, double version)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.copyArticle(groupId, oldArticleId,
 			newArticleId, autoArticleId, version);
 	}
@@ -110,30 +110,30 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 	public void deleteArticle(long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleService.deleteArticle(groupId, articleId, version,
 			articleURL, serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.getArticle(groupId, articleId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId, double version)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.getArticle(groupId, articleId, version);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticleByUrlTitle(
 		long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.getArticleByUrlTitle(groupId, urlTitle);
 	}
 
@@ -141,8 +141,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		java.lang.String articleId, double version,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.getArticleContent(groupId, articleId,
 			version, languageId, themeDisplay);
 	}
@@ -150,23 +150,23 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 	public java.lang.String getArticleContent(long groupId,
 		java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.getArticleContent(groupId, articleId,
 			languageId, themeDisplay);
 	}
 
 	public void removeArticleLocale(long companyId, java.lang.String languageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleService.removeArticleLocale(companyId, languageId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String languageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.removeArticleLocale(groupId, articleId,
 			version, languageId);
 	}
@@ -174,8 +174,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long groupId, java.lang.String articleId, double version,
 		boolean incrementVersion, java.lang.String content)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.updateArticle(groupId, articleId,
 			version, incrementVersion, content);
 	}
@@ -195,8 +195,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.updateArticle(groupId, articleId,
 			version, incrementVersion, title, description, content, type,
 			structureId, templateId, displayDateMonth, displayDateDay,
@@ -211,8 +211,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String content)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.updateContent(groupId, articleId,
 			version, content);
 	}
@@ -221,8 +221,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		long groupId, java.lang.String articleId, double version, int status,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.updateStatus(groupId, articleId, version,
 			status, articleURL, serviceContext);
 	}

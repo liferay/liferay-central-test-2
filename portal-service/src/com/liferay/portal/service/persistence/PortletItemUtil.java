@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.PortletItem;
 
 import java.util.List;
@@ -100,44 +100,45 @@ public class PortletItemUtil {
 	public static com.liferay.portal.model.PortletItem remove(
 		long portletItemId)
 		throws com.liferay.portal.NoSuchPortletItemException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(portletItemId);
 	}
 
 	public static com.liferay.portal.model.PortletItem updateImpl(
 		com.liferay.portal.model.PortletItem portletItem, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(portletItem, merge);
 	}
 
 	public static com.liferay.portal.model.PortletItem findByPrimaryKey(
 		long portletItemId)
 		throws com.liferay.portal.NoSuchPortletItemException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(portletItemId);
 	}
 
 	public static com.liferay.portal.model.PortletItem fetchByPrimaryKey(
-		long portletItemId) throws com.liferay.portal.SystemException {
+		long portletItemId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(portletItemId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findByG_C(
 		long groupId, long classNameId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_C(groupId, classNameId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findByG_C(
 		long groupId, long classNameId, int start, int end)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_C(groupId, classNameId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findByG_C(
 		long groupId, long classNameId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_C(groupId, classNameId, start, end, obc);
 	}
 
@@ -145,7 +146,7 @@ public class PortletItemUtil {
 		long groupId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchPortletItemException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_C_First(groupId, classNameId, obc);
 	}
 
@@ -153,7 +154,7 @@ public class PortletItemUtil {
 		long groupId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchPortletItemException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_C_Last(groupId, classNameId, obc);
 	}
 
@@ -161,7 +162,7 @@ public class PortletItemUtil {
 		long portletItemId, long groupId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchPortletItemException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_C_PrevAndNext(portletItemId, groupId, classNameId,
 			obc);
@@ -169,13 +170,13 @@ public class PortletItemUtil {
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findByG_P_C(
 		long groupId, java.lang.String portletId, long classNameId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_P_C(groupId, portletId, classNameId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findByG_P_C(
 		long groupId, java.lang.String portletId, long classNameId, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_P_C(groupId, portletId, classNameId, start, end);
 	}
@@ -183,7 +184,7 @@ public class PortletItemUtil {
 	public static java.util.List<com.liferay.portal.model.PortletItem> findByG_P_C(
 		long groupId, java.lang.String portletId, long classNameId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_P_C(groupId, portletId, classNameId, start, end, obc);
 	}
@@ -192,7 +193,7 @@ public class PortletItemUtil {
 		long groupId, java.lang.String portletId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchPortletItemException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_P_C_First(groupId, portletId, classNameId, obc);
 	}
@@ -201,7 +202,7 @@ public class PortletItemUtil {
 		long groupId, java.lang.String portletId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchPortletItemException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_P_C_Last(groupId, portletId, classNameId, obc);
 	}
@@ -210,7 +211,7 @@ public class PortletItemUtil {
 		long portletItemId, long groupId, java.lang.String portletId,
 		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchPortletItemException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_P_C_PrevAndNext(portletItemId, groupId, portletId,
 			classNameId, obc);
@@ -220,14 +221,15 @@ public class PortletItemUtil {
 		long groupId, java.lang.String name, java.lang.String portletId,
 		long classNameId)
 		throws com.liferay.portal.NoSuchPortletItemException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_N_P_C(groupId, name, portletId, classNameId);
 	}
 
 	public static com.liferay.portal.model.PortletItem fetchByG_N_P_C(
 		long groupId, java.lang.String name, java.lang.String portletId,
-		long classNameId) throws com.liferay.portal.SystemException {
+		long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByG_N_P_C(groupId, name, portletId, classNameId);
 	}
@@ -235,67 +237,72 @@ public class PortletItemUtil {
 	public static com.liferay.portal.model.PortletItem fetchByG_N_P_C(
 		long groupId, java.lang.String name, java.lang.String portletId,
 		long classNameId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByG_N_P_C(groupId, name, portletId, classNameId,
 			retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByG_C(long groupId, long classNameId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_C(groupId, classNameId);
 	}
 
 	public static void removeByG_P_C(long groupId, java.lang.String portletId,
-		long classNameId) throws com.liferay.portal.SystemException {
+		long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_P_C(groupId, portletId, classNameId);
 	}
 
 	public static void removeByG_N_P_C(long groupId, java.lang.String name,
 		java.lang.String portletId, long classNameId)
 		throws com.liferay.portal.NoSuchPortletItemException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_N_P_C(groupId, name, portletId, classNameId);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByG_C(long groupId, long classNameId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_C(groupId, classNameId);
 	}
 
 	public static int countByG_P_C(long groupId, java.lang.String portletId,
-		long classNameId) throws com.liferay.portal.SystemException {
+		long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_P_C(groupId, portletId, classNameId);
 	}
 
 	public static int countByG_N_P_C(long groupId, java.lang.String name,
 		java.lang.String portletId, long classNameId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .countByG_N_P_C(groupId, name, portletId, classNameId);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

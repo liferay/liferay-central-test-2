@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.messageboards;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="MailingListInServerNameException.java.html"><b><i>View Source</i>

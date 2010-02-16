@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BrowserTracker;
 
 import java.util.List;
@@ -100,78 +100,82 @@ public class BrowserTrackerUtil {
 	public static com.liferay.portal.model.BrowserTracker remove(
 		long browserTrackerId)
 		throws com.liferay.portal.NoSuchBrowserTrackerException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(browserTrackerId);
 	}
 
 	public static com.liferay.portal.model.BrowserTracker updateImpl(
 		com.liferay.portal.model.BrowserTracker browserTracker, boolean merge)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(browserTracker, merge);
 	}
 
 	public static com.liferay.portal.model.BrowserTracker findByPrimaryKey(
 		long browserTrackerId)
 		throws com.liferay.portal.NoSuchBrowserTrackerException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(browserTrackerId);
 	}
 
 	public static com.liferay.portal.model.BrowserTracker fetchByPrimaryKey(
-		long browserTrackerId) throws com.liferay.portal.SystemException {
+		long browserTrackerId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(browserTrackerId);
 	}
 
 	public static com.liferay.portal.model.BrowserTracker findByUserId(
 		long userId)
 		throws com.liferay.portal.NoSuchBrowserTrackerException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
 	public static com.liferay.portal.model.BrowserTracker fetchByUserId(
-		long userId) throws com.liferay.portal.SystemException {
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByUserId(userId);
 	}
 
 	public static com.liferay.portal.model.BrowserTracker fetchByUserId(
 		long userId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByUserId(userId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.BrowserTracker> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.BrowserTracker> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.BrowserTracker> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByUserId(long userId)
 		throws com.liferay.portal.NoSuchBrowserTrackerException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUserId(userId);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByUserId(long userId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUserId(userId);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

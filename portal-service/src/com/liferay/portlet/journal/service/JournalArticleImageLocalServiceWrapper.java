@@ -48,7 +48,7 @@ public class JournalArticleImageLocalServiceWrapper
 
 	public com.liferay.portlet.journal.model.JournalArticleImage addJournalArticleImage(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.addJournalArticleImage(journalArticleImage);
 	}
 
@@ -58,57 +58,59 @@ public class JournalArticleImageLocalServiceWrapper
 	}
 
 	public void deleteJournalArticleImage(long articleImageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleImageLocalService.deleteJournalArticleImage(articleImageId);
 	}
 
 	public void deleteJournalArticleImage(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleImageLocalService.deleteJournalArticleImage(journalArticleImage);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.dynamicQuery(dynamicQuery,
 			start, end);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleImage getJournalArticleImage(
 		long articleImageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.getJournalArticleImage(articleImageId);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> getJournalArticleImages(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.getJournalArticleImages(start,
 			end);
 	}
 
 	public int getJournalArticleImagesCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.getJournalArticleImagesCount();
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleImage updateJournalArticleImage(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.updateJournalArticleImage(journalArticleImage);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleImage updateJournalArticleImage(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.updateJournalArticleImage(journalArticleImage,
 			merge);
 	}
@@ -117,46 +119,49 @@ public class JournalArticleImageLocalServiceWrapper
 		java.lang.String articleId, double version,
 		java.lang.String elInstanceId, java.lang.String elName,
 		java.lang.String languageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleImageLocalService.addArticleImageId(articleImageId,
 			groupId, articleId, version, elInstanceId, elName, languageId);
 	}
 
 	public void deleteArticleImage(long articleImageId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleImageLocalService.deleteArticleImage(articleImageId);
 	}
 
 	public void deleteArticleImage(
 		com.liferay.portlet.journal.model.JournalArticleImage articleImage)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleImageLocalService.deleteArticleImage(articleImage);
 	}
 
 	public void deleteArticleImage(long groupId, java.lang.String articleId,
 		double version, java.lang.String elInstanceId, java.lang.String elName,
-		java.lang.String languageId) throws com.liferay.portal.SystemException {
+		java.lang.String languageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleImageLocalService.deleteArticleImage(groupId, articleId,
 			version, elInstanceId, elName, languageId);
 	}
 
 	public void deleteImages(long groupId, java.lang.String articleId,
-		double version) throws com.liferay.portal.SystemException {
+		double version)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleImageLocalService.deleteImages(groupId, articleId,
 			version);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleImage getArticleImage(
 		long articleImageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.getArticleImage(articleImageId);
 	}
 
 	public long getArticleImageId(long groupId, java.lang.String articleId,
 		double version, java.lang.String elInstanceId, java.lang.String elName,
-		java.lang.String languageId) throws com.liferay.portal.SystemException {
+		java.lang.String languageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.getArticleImageId(groupId,
 			articleId, version, elInstanceId, elName, languageId);
 	}
@@ -164,13 +169,14 @@ public class JournalArticleImageLocalServiceWrapper
 	public long getArticleImageId(long groupId, java.lang.String articleId,
 		double version, java.lang.String elInstanceId, java.lang.String elName,
 		java.lang.String languageId, boolean tempImage)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.getArticleImageId(groupId,
 			articleId, version, elInstanceId, elName, languageId, tempImage);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> getArticleImages(
-		long groupId) throws com.liferay.portal.SystemException {
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleImageLocalService.getArticleImages(groupId);
 	}
 

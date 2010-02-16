@@ -48,8 +48,8 @@ public class ResourcePermissionServiceUtil {
 	public static void addResourcePermission(long groupId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		long roleId, java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addResourcePermission(groupId, companyId, name, scope, primKey,
 			roleId, actionId);
@@ -58,8 +58,8 @@ public class ResourcePermissionServiceUtil {
 	public static void setIndividualResourcePermissions(long groupId,
 		long companyId, java.lang.String name, java.lang.String primKey,
 		long roleId, java.lang.String[] actionIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.setIndividualResourcePermissions(groupId, companyId, name,
 			primKey, roleId, actionIds);
@@ -68,8 +68,8 @@ public class ResourcePermissionServiceUtil {
 	public static void removeResourcePermission(long groupId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		long roleId, java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.removeResourcePermission(groupId, companyId, name, scope, primKey,
 			roleId, actionId);
@@ -77,8 +77,8 @@ public class ResourcePermissionServiceUtil {
 
 	public static void removeResourcePermissions(long groupId, long companyId,
 		java.lang.String name, int scope, long roleId, java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.removeResourcePermissions(groupId, companyId, name, scope, roleId,
 			actionId);

@@ -50,8 +50,8 @@ public class JournalStructureServiceUtil {
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addStructure(groupId, structureId, autoStructureId,
 			parentStructureId, name, description, xsd, serviceContext);
@@ -60,8 +60,8 @@ public class JournalStructureServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure copyStructure(
 		long groupId, java.lang.String oldStructureId,
 		java.lang.String newStructureId, boolean autoStructureId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .copyStructure(groupId, oldStructureId, newStructureId,
 			autoStructureId);
@@ -69,15 +69,15 @@ public class JournalStructureServiceUtil {
 
 	public static void deleteStructure(long groupId,
 		java.lang.String structureId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteStructure(groupId, structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
 		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getStructure(groupId, structureId);
 	}
 
@@ -86,8 +86,8 @@ public class JournalStructureServiceUtil {
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateStructure(groupId, structureId, parentStructureId,
 			name, description, xsd, serviceContext);

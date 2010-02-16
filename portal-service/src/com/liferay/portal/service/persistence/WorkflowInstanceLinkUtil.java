@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.WorkflowInstanceLink;
 
 import java.util.List;
@@ -101,87 +101,93 @@ public class WorkflowInstanceLinkUtil {
 	public static com.liferay.portal.model.WorkflowInstanceLink remove(
 		long workflowInstanceLinkId)
 		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(workflowInstanceLinkId);
 	}
 
 	public static com.liferay.portal.model.WorkflowInstanceLink updateImpl(
 		com.liferay.portal.model.WorkflowInstanceLink workflowInstanceLink,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().updateImpl(workflowInstanceLink, merge);
 	}
 
 	public static com.liferay.portal.model.WorkflowInstanceLink findByPrimaryKey(
 		long workflowInstanceLinkId)
 		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(workflowInstanceLinkId);
 	}
 
 	public static com.liferay.portal.model.WorkflowInstanceLink fetchByPrimaryKey(
-		long workflowInstanceLinkId) throws com.liferay.portal.SystemException {
+		long workflowInstanceLinkId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(workflowInstanceLinkId);
 	}
 
 	public static com.liferay.portal.model.WorkflowInstanceLink findByG_C_C_C(
 		long groupId, long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_C_C_C(groupId, companyId, classNameId, classPK);
 	}
 
 	public static com.liferay.portal.model.WorkflowInstanceLink fetchByG_C_C_C(
 		long groupId, long companyId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByG_C_C_C(groupId, companyId, classNameId, classPK);
 	}
 
 	public static com.liferay.portal.model.WorkflowInstanceLink fetchByG_C_C_C(
 		long groupId, long companyId, long classNameId, long classPK,
-		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByG_C_C_C(groupId, companyId, classNameId, classPK,
 			retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.WorkflowInstanceLink> findAll()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	public static java.util.List<com.liferay.portal.model.WorkflowInstanceLink> findAll(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.WorkflowInstanceLink> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByG_C_C_C(long groupId, long companyId,
 		long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
-			com.liferay.portal.SystemException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence()
 			.removeByG_C_C_C(groupId, companyId, classNameId, classPK);
 	}
 
-	public static void removeAll() throws com.liferay.portal.SystemException {
+	public static void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
 	public static int countByG_C_C_C(long groupId, long companyId,
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .countByG_C_C_C(groupId, companyId, classNameId, classPK);
 	}
 
-	public static int countAll() throws com.liferay.portal.SystemException {
+	public static int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();
 	}
 

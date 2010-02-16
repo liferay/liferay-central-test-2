@@ -69,7 +69,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsFlag.getUserUuid();
 	}
 

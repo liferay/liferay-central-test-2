@@ -22,8 +22,8 @@
 
 package com.liferay.counter.service;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.List;
 

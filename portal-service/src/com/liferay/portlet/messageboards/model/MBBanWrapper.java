@@ -85,7 +85,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbBan.getUserUuid();
 	}
 
@@ -126,7 +126,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	public java.lang.String getBanUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbBan.getBanUserUuid();
 	}
 

@@ -186,7 +186,8 @@ public class PollsChoiceWrapper implements PollsChoice {
 		return _pollsChoice.toXmlString();
 	}
 
-	public int getVotesCount() throws com.liferay.portal.SystemException {
+	public int getVotesCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pollsChoice.getVotesCount();
 	}
 

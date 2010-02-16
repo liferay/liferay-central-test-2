@@ -46,7 +46,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class PortalServiceUtil {
 	public static java.lang.String getAutoDeployDirectory()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAutoDeployDirectory();
 	}
 
@@ -59,7 +59,7 @@ public class PortalServiceUtil {
 	}
 
 	public static void testCounterRollback()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().testCounterRollback();
 	}
 

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.monitoring;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * <a href="MonitoringException.java.html"><b><i>View Source</i></b></a>

@@ -45,15 +45,15 @@ public class RatingsEntryServiceWrapper implements RatingsEntryService {
 	}
 
 	public void deleteEntry(java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_ratingsEntryService.deleteEntry(className, classPK);
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
 		java.lang.String className, long classPK, double score)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsEntryService.updateEntry(className, classPK, score);
 	}
 

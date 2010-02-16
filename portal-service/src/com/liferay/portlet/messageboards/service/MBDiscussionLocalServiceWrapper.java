@@ -47,7 +47,7 @@ public class MBDiscussionLocalServiceWrapper implements MBDiscussionLocalService
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion addMBDiscussion(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.addMBDiscussion(mbDiscussion);
 	}
 
@@ -57,83 +57,85 @@ public class MBDiscussionLocalServiceWrapper implements MBDiscussionLocalService
 	}
 
 	public void deleteMBDiscussion(long discussionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_mbDiscussionLocalService.deleteMBDiscussion(discussionId);
 	}
 
 	public void deleteMBDiscussion(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_mbDiscussionLocalService.deleteMBDiscussion(mbDiscussion);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion getMBDiscussion(
 		long discussionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.getMBDiscussion(discussionId);
 	}
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> getMBDiscussions(
-		int start, int end) throws com.liferay.portal.SystemException {
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.getMBDiscussions(start, end);
 	}
 
 	public int getMBDiscussionsCount()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.getMBDiscussionsCount();
 	}
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion updateMBDiscussion(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.updateMBDiscussion(mbDiscussion);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion updateMBDiscussion(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
-		boolean merge) throws com.liferay.portal.SystemException {
+		boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.updateMBDiscussion(mbDiscussion, merge);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion addDiscussion(
 		long classNameId, long classPK, long threadId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.addDiscussion(classNameId, classPK,
 			threadId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion getDiscussion(
 		long discussionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.getDiscussion(discussionId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion getDiscussion(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.getDiscussion(className, classPK);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion getThreadDiscussion(
 		long threadId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbDiscussionLocalService.getThreadDiscussion(threadId);
 	}
 

@@ -48,32 +48,32 @@ public class UserGroupGroupRoleServiceWrapper
 
 	public void addUserGroupGroupRoles(long userGroupId, long groupId,
 		long[] roleIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_userGroupGroupRoleService.addUserGroupGroupRoles(userGroupId, groupId,
 			roleIds);
 	}
 
 	public void addUserGroupGroupRoles(long[] userGroupIds, long groupId,
 		long roleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_userGroupGroupRoleService.addUserGroupGroupRoles(userGroupIds,
 			groupId, roleId);
 	}
 
 	public void deleteUserGroupGroupRoles(long userGroupId, long groupId,
 		long[] roleIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_userGroupGroupRoleService.deleteUserGroupGroupRoles(userGroupId,
 			groupId, roleIds);
 	}
 
 	public void deleteUserGroupGroupRoles(long[] userGroupIds, long groupId,
 		long roleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_userGroupGroupRoleService.deleteUserGroupGroupRoles(userGroupIds,
 			groupId, roleId);
 	}

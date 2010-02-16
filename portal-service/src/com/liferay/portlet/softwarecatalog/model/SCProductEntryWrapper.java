@@ -85,7 +85,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntry.getUserUuid();
 	}
 
@@ -252,17 +252,17 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getLatestVersion()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntry.getLatestVersion();
 	}
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntry.getLicenses();
 	}
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getScreenshots()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntry.getScreenshots();
 	}
 

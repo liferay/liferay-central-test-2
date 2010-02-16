@@ -93,7 +93,7 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessage.getUserUuid();
 	}
 
@@ -234,7 +234,7 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessage.getStatusByUserUuid();
 	}
 
@@ -321,7 +321,7 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	public java.lang.String[] getAssetTagNames()
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessage.getAssetTagNames();
 	}
 
@@ -330,8 +330,8 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	public java.lang.String[] getAttachmentsFiles()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessage.getAttachmentsFiles();
 	}
 
@@ -344,8 +344,8 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBThread getThread()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessage.getThread();
 	}
 

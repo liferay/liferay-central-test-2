@@ -49,8 +49,8 @@ package com.liferay.portlet.asset.model;
  */
 public interface AssetCategory extends AssetCategoryModel {
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAncestors()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isRootCategory();
 }
