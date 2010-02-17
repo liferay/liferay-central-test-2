@@ -885,17 +885,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					existingArticle.getArticleId(),
 					existingArticle.getVersion(), incrementVersion,
 					article.getTitle(), article.getDescription(),
-					article.getContent(), article.getType(),
-					existingArticle.getStructureId(),
-					existingArticle.getTemplateId(), displayDateMonth,
-					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, expirationDateMonth, expirationDateDay,
-					expirationDateYear, expirationDateHour,
-					expirationDateMinute, neverExpire, reviewDateMonth,
-					reviewDateDay, reviewDateYear, reviewDateHour,
-					reviewDateMinute, neverReview, article.getIndexable(),
-					article.getSmallImage(), article.getSmallImageURL(),
-					smallFile, images, articleURL, serviceContext);
+					article.getContent(), article.getType(), parentStructureId,
+					parentTemplateId, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					expirationDateMonth, expirationDateDay, expirationDateYear,
+					expirationDateHour, expirationDateMinute, neverExpire,
+					reviewDateMonth, reviewDateDay, reviewDateYear,
+					reviewDateHour,	reviewDateMinute, neverReview,
+					article.getIndexable(),	article.getSmallImage(),
+					article.getSmallImageURL(), smallFile, images, articleURL,
+					serviceContext);
 			}
 		}
 		else {
