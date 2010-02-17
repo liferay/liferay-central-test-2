@@ -83,7 +83,7 @@ Liferay.Portal.ToolTip = {
 		var newElement = (trigger.indexOf(obj) == -1);
 		var bodyContent = cached.get('bodyContent');
 
-		if (newElement || bodyContent != text) {
+		if (newElement || (bodyContent != text)) {
 			cached.set('trigger', obj);
 			cached.set('bodyContent', text);
 			cached.show();
