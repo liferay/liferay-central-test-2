@@ -3306,6 +3306,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: [ 'aui-base', 'aui-datatype', 'context-panel', 'data-set', 'dialog', 'json', 'nested-list', 'substitute' ]
+		requires: [ 'aui-base', 'aui-datatype', 'aui-context-panel', 'aui-data-set', 'aui-dialog', 'aui-nested-list', 'substitute', 'json' ]
 	}
 );

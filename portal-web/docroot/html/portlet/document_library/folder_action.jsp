@@ -192,7 +192,7 @@ if (row == null) {
 	</div>
 </div>
 
-<aui:script use="dialog">
+<aui:script use="aui-dialog">
 	A.on(
 		'click',
 		function(event) {

@@ -359,7 +359,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				</c:otherwise>
 			</c:choose>
 
-			<aui:script use="char-counter">
+			<aui:script use="aui-char-counter">
 				new A.CharCounter(
 					{
 						input: '#<%= namespace %><%= fieldParam %>',

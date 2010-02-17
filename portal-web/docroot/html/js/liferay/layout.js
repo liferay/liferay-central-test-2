@@ -565,7 +565,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['dd', 'io-request', 'portal-layout', 'resize'],
+		requires: ['aui-io-request', 'aui-portal-layout', 'aui-resize', 'dd'],
 		use: []
 	}
 );

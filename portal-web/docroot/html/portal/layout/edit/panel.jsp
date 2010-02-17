@@ -64,7 +64,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 
 <div id="<portlet:namespace />panelSelectPortletsOutput" style="margin: 4px;"></div>
 
-<aui:script use="tree-view">
+<aui:script use="aui-tree-view">
 	var panelSelectedPortletsEl = A.get('#<portlet:namespace />panelSelectedPortlets');
 	var selectedPortlets = panelSelectedPortletsEl.val().split(',');
 

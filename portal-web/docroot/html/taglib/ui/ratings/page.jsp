@@ -97,7 +97,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		</c:choose>
 	</div>
 
-	<aui:script use="io-request,rating,substitute">
+	<aui:script use="aui-io-request,aui-rating,substitute">
 		var getLabel = function(desc, totalEntries, ratingScore) {
 			var labelScoreTpl = '{desc} ({totalEntries} {voteLabel}) {ratingScoreLabel}';
 

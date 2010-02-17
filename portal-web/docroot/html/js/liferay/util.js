@@ -199,7 +199,7 @@ Liferay.Util = {
 
 	createFlyouts: function(options) {
 		AUI().use(
-			'delayed-task',
+			'aui-delayed-task',
 			'event',
 			'node',
 			function(A) {
@@ -552,8 +552,8 @@ Liferay.Util = {
 		var instance = this;
 
 		AUI().ready(
-			'dialog',
-			'io-plugin',
+			'aui-dialog',
+			'aui-io-plugin',
 			function(A) {
 				if (options.url && options.button) {
 					var url = options.url;
@@ -728,47 +728,51 @@ Liferay.Util = {
 		var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
 
 		if (title && !title.hasClass('not-editable')) {
-			var A = AUI();
+			AUI().use(
+				'aui-editable',
+				'event',
+				function(A) {
+					var editableTitle = new A.Editable(
+						{
+							after: {
+								contentTextChange: function(event) {
+									var instance = this;
 
-			var editableTitle = new A.Editable(
-				{
-					after: {
-						contentTextChange: function(event) {
-							var instance = this;
-
-							if (!event.initial) {
-								Liferay.Util.savePortletTitle(
-									{
-										doAsUserId: doAsUserId,
-										plid: plid,
-										portletId: portletId,
-										title: event.newVal
+									if (!event.initial) {
+										Liferay.Util.savePortletTitle(
+											{
+												doAsUserId: doAsUserId,
+												plid: plid,
+												portletId: portletId,
+												title: event.newVal
+											}
+										);
 									}
-								);
-							}
-						},
-						startEditing: function(event) {
-							var instance = this;
+								},
+								startEditing: function(event) {
+									var instance = this;
 
-							if (Liferay.Layout) {
-								instance._dragListener = Liferay.Layout.layoutHandler.on(
-									'drag:start',
-									function(event) {
-										instance.fire('save');
+									if (Liferay.Layout) {
+										instance._dragListener = Liferay.Layout.layoutHandler.on(
+											'drag:start',
+											function(event) {
+												instance.fire('save');
+											}
+										);
 									}
-								);
-							}
-						},
-						stopEditing: function(event) {
-							var instance = this;
+								},
+								stopEditing: function(event) {
+									var instance = this;
 
-							if (instance._dragListener) {
-								instance._dragListener.detach();
-							}
+									if (instance._dragListener) {
+										instance._dragListener.detach();
+									}
+								}
+							},
+							cssClass: 'lfr-portlet-title-editable',
+							node: title
 						}
-					},
-					cssClass: 'lfr-portlet-title-editable',
-					node: title
+					);
 				}
 			);
 		}
@@ -1073,7 +1077,7 @@ Liferay.Util = {
 	switchEditor: function(options) {
 		if (options.url && options.popup) {
 			AUI().use(
-				'io-plugin',
+				'aui-io-plugin',
 				function(A) {
 					var url = options.url;
 					var popup = A.one(options.popup);
@@ -1156,8 +1160,8 @@ Liferay.Util = {
 
 	toggleControls: function() {
 		AUI().use(
+			'aui-io-request',
 			'event',
-			'io-request',
 			'node',
 			function(A) {
 				var trigger = A.one('.toggle-controls');

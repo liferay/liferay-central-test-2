@@ -191,7 +191,7 @@ if (row == null) {
 	<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 </portlet:renderURL>
 
-<aui:script use="dialog">
+<aui:script use="aui-dialog">
 	A.on(
 		'click',
 		function(event) {

@@ -891,6 +891,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['base', 'context-panel', 'dd', 'json', 'liferay-portlet-url', 'live-search', 'substitute']
+		requires: ['aui-context-panel', 'aui-live-search', 'base', 'dd', 'json', 'liferay-portlet-url', 'substitute']
 	}
 );

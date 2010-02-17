@@ -478,6 +478,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['autocomplete', 'dialog', 'io-request', 'live-search', 'substitute', 'textboxlist', 'textfield']
+		requires: ['aui-autocomplete', 'aui-dialog', 'aui-io-request', 'aui-live-search', 'aui-textboxlist', 'aui-textfield', 'substitute']
 	}
 );

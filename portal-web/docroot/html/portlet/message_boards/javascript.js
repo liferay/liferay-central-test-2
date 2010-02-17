@@ -554,6 +554,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['color-picker', 'context-overlay', 'io-request']
+		requires: ['aui-color-picker', 'aui-context-overlay', 'aui-io-request']
 	}
 );

@@ -187,6 +187,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'io-request']
+		requires: ['aui-base', 'aui-io-request']
 	}
 );

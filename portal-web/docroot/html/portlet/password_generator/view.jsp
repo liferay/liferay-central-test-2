@@ -115,7 +115,7 @@ catch (Exception e) {
 
 </form>
 
-<aui:script use="io-request,parse-content">
+<aui:script use="aui-io-request,aui-parse-content">
 	var form = A.get('#<portlet:namespace />fm');
 	var parentNode = form.get('parentNode');
 

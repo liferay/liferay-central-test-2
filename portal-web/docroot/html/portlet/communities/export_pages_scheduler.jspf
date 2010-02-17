@@ -81,7 +81,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 		}
 
 		AUI().use(
-			'io-request',
+			'aui-io-request',
 			function(A) {
 				var form = A.get(document.<portlet:namespace />exportPagesFm);
 
@@ -115,7 +115,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 			document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
 
 			AUI().use(
-				'io-request',
+				'aui-io-request',
 				function(A) {
 					var form = A.get(document.<portlet:namespace />exportPagesFm);
 
@@ -144,7 +144,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 
 	function <portlet:namespace />updateScheduledPublishEventsDiv() {
 		AUI().use(
-			'io-request',
+			'aui-io-request',
 			function(A) {
 				var form = A.get(document.<portlet:namespace />exportPagesFm);
 

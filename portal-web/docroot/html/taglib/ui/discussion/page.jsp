@@ -436,7 +436,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		}
 	</aui:script>
 
-	<aui:script use="input-handler">
+	<aui:script use="aui-input-handler">
 		var form = A.one(document.<%= formName %>);
 
 		if (form) {

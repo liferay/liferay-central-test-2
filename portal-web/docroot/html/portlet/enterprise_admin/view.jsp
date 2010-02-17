@@ -235,7 +235,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 	function <portlet:namespace />getUsersCount(className, ids, active, callback) {
 		AUI().use(
-			'io-request',
+			'aui-io-request',
 			function(A) {
 				A.io.request(
 					'<%= themeDisplay.getPathMain() %>/enterprise_admin/get_users_count',

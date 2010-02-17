@@ -44,7 +44,7 @@ String scoreString = numberFormat.format(score);
 	<c:otherwise>
 		<div class="taglib-ratings score" id="<%= randomNamespace %>averageRating"></div>
 
-		<aui:script use="rating">
+		<aui:script use="aui-rating">
 			var ratingScore = new A.Rating(
 				{
 					boundingBox: '#<%= randomNamespace %>averageRating',

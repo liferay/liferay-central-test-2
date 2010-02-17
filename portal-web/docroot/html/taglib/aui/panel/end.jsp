@@ -35,7 +35,7 @@ List<ToolTag> toolTags = (List<ToolTag>)request.getAttribute("aui:panel:toolTags
 
 </div>
 
-<aui:script use="anim,panel">
+<aui:script use="anim,aui-panel">
 	var container = new A.Panel(
 		{
 			bodyContent: A.one('#<%= id %>bodyContent'),

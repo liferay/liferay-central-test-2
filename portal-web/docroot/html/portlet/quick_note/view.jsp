@@ -50,7 +50,7 @@
 </div>
 
 <c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
-	<aui:script use="editable,io-request">
+	<aui:script use="aui-editable,aui-io-request">
 		var quickNotePad = A.one('#<portlet:namespace />pad');
 
 		if (quickNotePad) {

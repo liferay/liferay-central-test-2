@@ -97,7 +97,7 @@ Liferay.LayoutExporter = {
 			"</div>";
 
 		AUI().use(
-			'dialog',
+			'aui-dialog',
 			function(A) {
 				new A.Dialog(
 					{
@@ -124,7 +124,7 @@ Liferay.LayoutExporter = {
 
 	publishToLive: function(options) {
 		AUI().use(
-			'dialog',
+			'aui-dialog',
 			function(A) {
 				options = options || {};
 

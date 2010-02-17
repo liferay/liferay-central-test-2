@@ -1,7 +1,7 @@
 Liferay.PortletSharing = {
 	showNetvibesInfo: function(netvibesURL) {
 		AUI().use(
-			'dialog',
+			'aui-dialog',
 			'liferay-portlet-url',
 			function(A) {
 				var portletURL = Liferay.PortletURL.createResourceURL();
@@ -32,7 +32,7 @@ Liferay.PortletSharing = {
 	},
 	showWidgetInfo: function(widgetURL) {
 		AUI().use(
-			'dialog',
+			'aui-dialog',
 			'liferay-portlet-url',
 			function(A) {
 				var portletURL = Liferay.PortletURL.createResourceURL();

@@ -1356,6 +1356,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['context-panel', 'dd', 'editable', 'json', 'liferay-portlet-url', 'live-search', 'tree-view']
+		requires: ['aui-context-panel', 'aui-editable', 'aui-live-search', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url']
 	}
 );

@@ -234,7 +234,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 		html += "</div>"
 
 		AUI().use(
-			'dialog',
+			'aui-dialog',
 			function(A) {
 				var popup = new A.Dialog(
 					{

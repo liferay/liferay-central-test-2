@@ -48,7 +48,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 
 <c:choose>
 	<c:when test="<%= PropsValues.FLAGS_GUEST_USERS_ENABLED || themeDisplay.isSignedIn() %>">
-		<aui:script use="dialog">
+		<aui:script use="aui-dialog">
 			var params = {
 				className: '<%= className %>',
 				classPK: '<%= classPK %>',
@@ -88,7 +88,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 			<liferay-ui:message key="please-sign-in-to-flag-this-as-inappropriate" />
 		</div>
 
-		<aui:script use="dialog">
+		<aui:script use="aui-dialog">
 			A.on(
 				'click',
 				function(event) {

@@ -86,7 +86,7 @@ if (hidePortletWhenEmpty) {
 }
 %>
 
-<aui:script use="tree-view">
+<aui:script use="aui-tree-view">
 	var treeViews = A.all('#<%= namespace %>taglibAssetCategoriesNavigation .lfr-asset-category-list-container');
 
 	treeViews.each(

@@ -207,6 +207,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['base', 'data-set', 'substitute']
+		requires: ['aui-data-set', 'base', 'substitute']
 	}
 );

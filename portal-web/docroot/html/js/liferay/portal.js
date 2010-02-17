@@ -57,7 +57,7 @@ Liferay.Portal.ToolTip = {
 			var args = arguments;
 
 			AUI().use(
-				'tooltip',
+				'aui-tooltip',
 				function(A) {
 					instance._cached = new A.Tooltip(
 						{

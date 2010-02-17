@@ -1765,7 +1765,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['color-picker', 'dialog', 'io-request', 'tabs'],
+		requires: ['aui-color-picker', 'aui-dialog', 'aui-io-request', 'aui-tabs'],
 		use: []
 	}
 );

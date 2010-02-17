@@ -3,7 +3,7 @@ Liferay.LayoutConfiguration = {
 		var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
 
 		AUI().use(
-			'dialog',
+			'aui-dialog',
 			function(A) {
 				var dialog = new A.Dialog(
 					{
@@ -506,7 +506,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['dd', 'liferay-layout', 'live-search'],
+		requires: ['aui-live-search', 'dd', 'liferay-layout'],
 		use: []
 	}
 );

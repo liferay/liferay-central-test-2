@@ -35,7 +35,7 @@ String value = ParamUtil.getString(request, param, defaultValue);
 
 <textarea class="lfr-textarea <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" wrap="soft" onKeyDown="Liferay.Util.disableEsc();"><%= value %></textarea>
 
-<aui:script use="char-counter">
+<aui:script use="aui-char-counter">
 	new A.CharCounter(
 		{
 			input: '#<%= namespace %><%= param %>',

@@ -38,7 +38,7 @@
 	var <%= id %>curClickValue = "<%= clickValue %>";
 </aui:script>
 
-<aui:script use="io-request">
+<aui:script use="aui-io-request">
 	var basicForm = A.one("#<%= id %>basic");
 	var advancedForm = A.one("#<%= id %>advanced");
 

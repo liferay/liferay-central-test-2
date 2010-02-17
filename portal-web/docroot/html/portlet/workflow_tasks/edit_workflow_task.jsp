@@ -223,7 +223,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 <aui:script>
 	function <portlet:namespace />updateWorkflowTask(cmd, transitionName) {
 		AUI().use(
-			'dialog',
+			'aui-dialog',
 			function(A) {
 				var dialog = new A.Dialog(
 					{

@@ -1,9 +1,9 @@
 AUI().use(
-	'context-overlay',
-	'io-plugin',
-	'io-request',
-	'overlay-manager',
-	'tool-item',
+	'aui-context-overlay',
+	'aui-io-plugin',
+	'aui-io-request',
+	'aui-overlay-manager',
+	'aui-tool-item',
 	function(A) {
 		Liferay.Dockbar = {
 			init: function() {
