@@ -247,6 +247,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['liferay-panel', 'aui-paginator', 'selector-css3']
+		requires: ['aui-paginator', 'liferay-panel', 'selector-css3']
 	}
 );

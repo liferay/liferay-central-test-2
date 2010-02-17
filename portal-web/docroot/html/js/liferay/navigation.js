@@ -693,6 +693,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-combobox', 'aui-io-request', 'aui-sortable', 'overlay', 'selector-css3', 'node-event-simulate', 'substitute', 'json-parse']
+		requires: ['aui-combobox', 'aui-io-request', 'aui-sortable', 'json-parse', 'node-event-simulate', 'overlay', 'selector-css3', 'substitute']
 	}
 );
