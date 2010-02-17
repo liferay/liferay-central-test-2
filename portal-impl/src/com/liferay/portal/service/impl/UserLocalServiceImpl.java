@@ -158,6 +158,7 @@ import javax.mail.internet.InternetAddress;
  * @author Jorge Ferrer
  * @author Julio Camarero
  * @author Wesley Gong
+ * @author Zsigmond Rab
  */
 public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
