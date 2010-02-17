@@ -107,7 +107,7 @@ public interface PortletLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
-		com.liferay.portal.model.Portlet portlet)
+		com.liferay.portal.model.Portlet portlet, java.lang.String category)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void destroyRemotePortlet(com.liferay.portal.model.Portlet portlet);

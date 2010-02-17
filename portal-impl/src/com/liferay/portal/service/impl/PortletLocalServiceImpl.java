@@ -164,7 +164,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
-	public Portlet deployRemotePortlet(Portlet portlet)
+	public Portlet deployRemotePortlet(Portlet portlet, String category)
 		throws SystemException {
 
 		Map<String, Portlet> portletsPool = _getPortletsPool();
@@ -175,7 +175,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		PortletCategory newPortletCategory = new PortletCategory();
 
-		PortletCategory wsrpCategory = new PortletCategory(_WSRP_CATEGORY);
+		PortletCategory wsrpCategory = new PortletCategory(category);
 
 		newPortletCategory.addCategory(wsrpCategory);
 
@@ -2062,8 +2062,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		_companyPortletsPool.put(key, portletsPool);
 	}
-
-	private static final String _WSRP_CATEGORY = "category.wsrp";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletLocalServiceImpl.class);

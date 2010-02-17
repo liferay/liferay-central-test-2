@@ -119,9 +119,9 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 	}
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
-		com.liferay.portal.model.Portlet portlet)
+		com.liferay.portal.model.Portlet portlet, java.lang.String category)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _portletLocalService.deployRemotePortlet(portlet);
+		return _portletLocalService.deployRemotePortlet(portlet, category);
 	}
 
 	public void destroyRemotePortlet(com.liferay.portal.model.Portlet portlet) {
