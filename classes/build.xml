@@ -15,6 +15,7 @@
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
+			includeAntRuntime="false"
 			includes="*.java"
 			nowarn="${javac.nowarn}"
 			srcdir="."

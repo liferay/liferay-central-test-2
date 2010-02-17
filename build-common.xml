@@ -242,6 +242,7 @@ ECJ was automatically installed. Please rerun your task.
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			destdir="test-classes"
+			includeAntRuntime="false"
 			nowarn="${javac.nowarn}"
 			srcdir="test"
 		/>

@@ -855,7 +855,7 @@
 	</library>
 	<library>
 		<file-name>portal/ant.jar</file-name>
-		<version>1.7.0</version>
+		<version>1.8.0</version>
 		<project-name>Ant</project-name>
 		<project-url>http://ant.apache.org</project-url>
 		<licenses>

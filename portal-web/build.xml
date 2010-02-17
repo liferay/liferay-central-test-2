@@ -124,6 +124,7 @@
 			compiler="${javac.compiler}"
 			deprecation="${javac.deprecation}"
 			destdir="${jspc.classes.dir}"
+			includeAntRuntime="false"
 			nowarn="on"
 			srcdir="${jspc.classes.dir}"
 		/>

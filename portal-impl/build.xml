@@ -117,6 +117,7 @@ ${exception.message}
 							deprecation="${javac.deprecation}"
 							destdir="${app.server.classes.portal.dir}"
 							fork="${javac.fork}"
+							includeAntRuntime="false"
 							memoryMaximumSize="${javac.memoryMaximumSize}"
 							nowarn="${javac.nowarn}"
 							srcdir="src"
@@ -129,6 +130,7 @@ ${exception.message}
 							debug="${javac.debug}"
 							deprecation="${javac.deprecation}"
 							destdir="${app.server.classes.portal.dir}"
+							includeAntRuntime="false"
 							nowarn="${javac.nowarn}"
 							srcdir="src"
 						/>
@@ -147,6 +149,7 @@ ${exception.message}
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			destdir="${portal-impl.classes.dir}"
+			includeAntRuntime="false"
 			includes="**/portal/tools/**"
 			nowarn="${javac.nowarn}"
 			srcdir="src"

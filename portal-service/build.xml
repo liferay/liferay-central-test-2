@@ -23,6 +23,7 @@
 					deprecation="${javac.deprecation}"
 					destdir="classes"
 					fork="${javac.fork}"
+					includeAntRuntime="false"
 					memoryMaximumSize="${javac.memoryMaximumSize}"
 					nowarn="${javac.nowarn}"
 					srcdir="src"
@@ -35,6 +36,7 @@
 					debug="${javac.debug}"
 					deprecation="${javac.deprecation}"
 					destdir="classes"
+					includeAntRuntime="false"
 					nowarn="${javac.nowarn}"
 					srcdir="src"
 				/>
