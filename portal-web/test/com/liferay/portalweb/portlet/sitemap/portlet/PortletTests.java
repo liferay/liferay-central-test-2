@@ -20,27 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.sitemap;
+package com.liferay.portalweb.portlet.sitemap.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.sitemap.lar.LARTests;
-import com.liferay.portalweb.portlet.sitemap.portlet.PortletTests;
+import com.liferay.portalweb.portlet.sitemap.portlet.addportlet.AddPortletTests;
+import com.liferay.portalweb.portlet.sitemap.portlet.addportletmultiple.AddPortletMultipleTests;
+import com.liferay.portalweb.portlet.sitemap.portlet.addportletpagechild.AddPortletPageChildTests;
+import com.liferay.portalweb.portlet.sitemap.portlet.configureportletrootlayout.ConfigurePortletRootLayoutTests;
+import com.liferay.portalweb.portlet.sitemap.portlet.removeportlet.RemovePortletTests;
+import com.liferay.portalweb.portlet.sitemap.portlet.viewportletsitemap.ViewPortletSiteMapTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="SiteMapTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SiteMapTests extends BaseTests {
+public class PortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(AddPortletTests.suite());
+		testSuite.addTest(AddPortletMultipleTests.suite());
+		testSuite.addTest(AddPortletPageChildTests.suite());
+		testSuite.addTest(ConfigurePortletRootLayoutTests.suite());
+		testSuite.addTest(RemovePortletTests.suite());
+		testSuite.addTest(ViewPortletSiteMapTests.suite());
 
 		return testSuite;
 	}

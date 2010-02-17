@@ -20,29 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.sitemap;
+package com.liferay.portalweb.portlet.sitemap.lar.importlar;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.sitemap.lar.LARTests;
-import com.liferay.portalweb.portlet.sitemap.portlet.PortletTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SiteMapTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SiteMapTests extends BaseTests {
+public class AssertImportLARTest extends BaseTestCase {
+	public void testAssertImportLAR() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Site Map Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Welcome"),
+			selenium.getText("//div[2]/div/div/ul/li[1]/a"));
+		assertEquals(RuntimeVariables.replace("Site Map Test Page"),
+			selenium.getText("//div[2]/div/div/ul/li[2]/a"));
+		assertEquals(RuntimeVariables.replace("Child Test Page"),
+			selenium.getText("//div[2]/div/div/ul/li[2]/ul/li/a"));
 	}
-
 }

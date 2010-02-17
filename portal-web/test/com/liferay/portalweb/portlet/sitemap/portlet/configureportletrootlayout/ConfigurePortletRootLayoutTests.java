@@ -20,27 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.sitemap;
+package com.liferay.portalweb.portlet.sitemap.portlet.configureportletrootlayout;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.sitemap.lar.LARTests;
-import com.liferay.portalweb.portlet.sitemap.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="SiteMapTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurePortletRootLayoutTests.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SiteMapTests extends BaseTests {
+public class ConfigurePortletRootLayoutTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LARTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageChildTest.class);
+		testSuite.addTestSuite(ConfigurePortletRootLayoutTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
