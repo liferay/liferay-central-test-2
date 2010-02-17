@@ -24,6 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
+import com.liferay.portal.UserEmailAddressException;
+import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -579,20 +581,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		long curUserId = getUserId();
 
 		if (curUserId == userId) {
-			emailAddress = emailAddress.trim().toLowerCase();
-
-			User user = userPersistence.findByPrimaryKey(userId);
-
-			if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
-				if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
-					Company company = companyPersistence.findByPrimaryKey(
-						user.getCompanyId());
-
-					if (!company.isStrangersWithMx()) {
-						throw new ReservedUserEmailAddressException();
-					}
-				}
-			}
+			checkUserPermission(userId, screenName, emailAddress);
 		}
 
 		if (groupIds != null) {
@@ -773,6 +762,30 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return roleIds;
 	}
 
+	protected void checkUserEmailAddressPermission(
+			User user, String emailAddress)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		boolean adminEditiableEmailAddress =
+			PropsValues.
+				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN;
+
+		if (adminEditiableEmailAddress && !permissionChecker.isCompanyAdmin()) {
+			throw new UserEmailAddressException();
+		}
+
+		if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
+			Company company = companyPersistence.findByPrimaryKey(
+				user.getCompanyId());
+
+			if (!company.isStrangersWithMx()) {
+				throw new ReservedUserEmailAddressException();
+			}
+		}
+	}
+
 	protected List<UserGroupRole> checkUserGroupRoles(
 			long userId, List<UserGroupRole> userGroupRoles)
 		throws PortalException, SystemException {
@@ -812,6 +825,38 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 
 		return userGroupRoles;
+	}
+
+	protected void checkUserPermission(
+			long userId, String screenName, String emailAddress)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		screenName = screenName.trim().toLowerCase();
+		emailAddress = emailAddress.trim().toLowerCase();
+
+		if (!screenName.equalsIgnoreCase(user.getScreenName())) {
+			checkUserScreenNamePermission(user, screenName);
+		}
+
+		if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
+			checkUserEmailAddressPermission(user, emailAddress);
+		}
+	}
+
+	protected void checkUserScreenNamePermission(User user, String screenName)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		boolean adminEditiableScreenName =
+			PropsValues.
+				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN;
+
+		if (adminEditiableScreenName && !permissionChecker.isCompanyAdmin()) {
+			throw new UserScreenNameException();
+		}
 	}
 
 	protected void updateAnnouncementsDeliveries(
