@@ -260,7 +260,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			userGroupLocalService.copyUserGroupLayouts(userGroupId, userId);
 		}
 
-		userPersistence.setUserGroups(userId, userGroupIds);
+		userPersistence.addUserGroups(userId, userGroupIds);
 	}
 
 	public void addGroupUsers(long groupId, long[] userIds)

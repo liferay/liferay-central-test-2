@@ -417,7 +417,9 @@ public class UserIndexer extends BaseIndexer {
 				String key = entry.getKey();
 				Object value = entry.getValue();
 
-				if (value == null) {
+				if (key.equals("usersRoles") ||
+						key.equals("usersUserGroups") ||
+						key.equals("usersOrgs") || (value == null)) {
 					continue;
 				}
 
