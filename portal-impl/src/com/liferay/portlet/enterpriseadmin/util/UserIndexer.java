@@ -97,13 +97,7 @@ public class UserIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, String key, Object value)
 		throws Exception {
 
-		if (key.equals("usersRoles")) {
-			contextQuery.addRequiredTerm("roleIds", String.valueOf(value));
-		}
-		else if (key.equals("usersUserGroups")) {
-			contextQuery.addRequiredTerm("userGroupIds", String.valueOf(value));
-		}
-		else if (key.equals("usersOrgs")) {
+		if (key.equals("usersOrgs")) {
 			if (value instanceof Long[]) {
 				Long[] values = (Long[])value;
 
@@ -123,6 +117,12 @@ public class UserIndexer extends BaseIndexer {
 				contextQuery.addRequiredTerm(
 					"organizationIds", String.valueOf(value));
 			}
+		}
+		else if (key.equals("usersRoles")) {
+			contextQuery.addRequiredTerm("roleIds", String.valueOf(value));
+		}
+		else if (key.equals("usersUserGroups")) {
+			contextQuery.addRequiredTerm("userGroupIds", String.valueOf(value));
 		}
 	}
 
@@ -418,9 +418,9 @@ public class UserIndexer extends BaseIndexer {
 				String key = entry.getKey();
 				Object value = entry.getValue();
 
-				if (key.equals("usersRoles") ||
-						key.equals("usersUserGroups") ||
-						key.equals("usersOrgs") || (value == null)) {
+				if (key.equals("usersOrgs") || key.equals("usersRoles") ||
+					key.equals("usersUserGroups") || (value == null)) {
+
 					continue;
 				}
 

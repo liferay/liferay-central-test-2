@@ -39,17 +39,19 @@ String backURL = ParamUtil.getString(request, "backURL");
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) %>">
+
 		<%
 		String organizationId = ParamUtil.getString(request, "organizationId");
 		String roleId = ParamUtil.getString(request, "roleId");
 		String userGroupId = ParamUtil.getString(request, "userGroupId");
 		%>
+
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="<%= UserDisplayTerms.ORGANIZATION_ID %>" value="<%= organizationId %>" />
-			<portlet:param name="<%= UserDisplayTerms.ROLE_ID %>" value="<%= roleId %>" />
-			<portlet:param name="<%= UserDisplayTerms.USER_GROUP_ID %>" value="<%= userGroupId %>" />
+			<portlet:param name="organizationId" value="<%= organizationId %>" />
+			<portlet:param name="roleId" value="<%= roleId %>" />
+			<portlet:param name="userGroupId" value="<%= userGroupId %>" />
 		</portlet:renderURL>
 
 		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>"><a href="<%= addUserURL %>"><liferay-ui:message key="add" /></a></span>
