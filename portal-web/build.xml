@@ -387,119 +387,77 @@
 
 				<!-- JavaScript -->
 
-				<replaceregexp match="(\s*)var PATH_BASE ?= ?[^;]+;" replace="" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="(var PATH_JAVASCRIPT ?= ?)[^;]+;|\s+javascript: PATH_JAVASCRIPT," replace="" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="PATH_JAVASCRIPT \+ ('[\w-]+.js')" replace="getFilePath(\1)" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="(var PATH_THEME_IMAGES ?= ?)[^;]+;" replace="\1Liferay.ThemeDisplay.getPathThemeImages() + '/aui/';" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="(var PATH_THEME_ROOT ?= ?)[^;]+;" replace="\1Liferay.ThemeDisplay.getPathThemeRoot() + '/css/';" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="(\n)(\t+)(window.AUI = \{)" replace="\1\2var getFilePath = Liferay.AUI.getFilePath;\1\1\2\3" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="(\n)(\t)(\t?)(defaults: \{)" replace="\1\2\3\4\1\2\3\2base: Liferay.AUI.getBasePath() + '/lib/yui/',\1\1\2\3\2fetchCSS: false,\1\1\2\3\2combine: false,\1" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="(filter: ?)'[\w-]+'" replace="\1Liferay.AUI.getFilter()" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="[\t\n]+'(?:\w+|-)+-css': \{[^}]+\},?|(, +)?'(?:\w+|-)+-css'" replace="" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="\},([\s\t\n]+)}" replace="}\1}" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						includes="defaults.js"
-					/>
-				</replaceregexp>
-
-				<!-- Copy files -->
-
-				<copy todir="docroot/html/js/aui">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						excludes="alloy.js,*-min.js"
-						includes="*.js"
-					/>
+				<copy todir="docroot/html/js/aui" overwrite="yes">
+					<fileset dir="docroot/html/ALLOY_ZIP/build/" />
 				</copy>
 
-				<copy todir="docroot/html/js/aui/lib/yui">
+				<replaceregexp match="defaults: \{" replace="defaults: {fetchCSS:false,combine:false," flags="g" byline="false">
 					<fileset
-						dir="docroot/html/ALLOY_ZIP/lib/yui/build"
-						excludes="*.zip"
+						dir="docroot/html/js/aui/aui-base/"
+						includes="aui-base.js"
 					/>
-				</copy>
+				</replaceregexp>
 
 				<!-- CSS -->
 
-				<property name="alloy.core.css" value="reset.css,base.css,layout.css,forms.css,icons.css,tool-item.css,widget.css,extras.css" />
+				<property name="alloy.core.css" value="reset.css,base.css,layout.css,form.css,icons.css,tool-item.css,widget.css,overlay.css,extras.css" />
 
-				<concat destfile="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css">
+				<concat destfile="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
 					<filelist
-						dir="docroot/html/ALLOY_ZIP/themes/base/css/"
+						dir="docroot/html/ALLOY_ZIP/build/aui-skins/core/css"
 						files="${alloy.core.css}"
 					/>
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/themes/base/css/"
-						excludes="${alloy.core.css},custom.css,main.css,*-min.css"
-						includes="*.css"
-					/>
 					<filelist
-						dir="docroot/html/ALLOY_ZIP/themes/base/css/"
+						dir="docroot/html/ALLOY_ZIP/build/aui-skins/core/css"
 						files="custom.css"
 					/>
 				</concat>
 
-				<replace file="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css">
-					<replacefilter token="../images/" value="&lt;%= themeImagesPath %&gt;/aui/" />
+				<for param="dir">
+					<path>
+						<dirset
+							dir="docroot/html/ALLOY_ZIP/build/"
+							includes="aui-*/"
+						/>
+					</path>
+					<sequential>
+						<basename property="dir.name" file="@{dir}"/>
+						<if>
+							<available file="docroot/html/js/aui/${dir.name}/assets/skins/sam/${dir.name}.css"/>
+							<then>
+								<concat append="true" destfile="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
+									<filelist
+										dir="docroot/html/js/aui/${dir.name}/assets/skins/sam/"
+										files="${dir.name}.css"
+									/>
+								</concat>
+							</then>
+						</if>
+						<if>
+							<available file="docroot/html/js/aui/${dir.name}/assets/skins/sam/"/>
+							<then>
+								<copy todir="docroot/html/themes/_unstyled/images/aui/">
+									<fileset dir="docroot/html/js/aui/${dir.name}/assets/skins/sam/" includes="**/*.png,**/*.jpg,**/*.gif" />
+								</copy>
+							</then>
+						</if>
+						<var name="dir.name" unset="true" />
+					</sequential>
+				</for>
+
+				<replaceregexp match="url\(([^)]+)\)" replace="url(&lt;%= themeImagesPath %&gt;/aui/\1)" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/"
+						includes="alloy.css"
+					/>
+				</replaceregexp>
+
+				<replace file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
+					<replacefilter token="../images/" value="" />
 				</replace>
 
 				<copy
-					file="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css"
+					file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css"
 					tofile="docroot/html/portal/aui/css.jspf"
 					overwrite="yes"
 				/>
@@ -507,7 +465,7 @@
 				<!-- Images -->
 
 				<copy todir="docroot/html/themes/_unstyled/images/aui/">
-					<fileset dir="docroot/html/ALLOY_ZIP/themes/base/images/" />
+					<fileset dir="docroot/html/ALLOY_ZIP/build/aui-skins/core/images/" />
 				</copy>
 
 				<!-- Clean up -->
