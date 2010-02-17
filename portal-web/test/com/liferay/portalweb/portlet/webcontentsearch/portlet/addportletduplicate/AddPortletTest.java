@@ -20,18 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webcontentsearch;
+package com.liferay.portalweb.portlet.webcontentsearch.portlet.addportletduplicate;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SearchNullPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SearchNullPortletTest extends BaseTestCase {
-	public void testSearchNullPortlet() throws Exception {
+public class AddPortletTest extends BaseTestCase {
+	public void testAddPortlet() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,6 +54,7 @@ public class SearchNullPortletTest extends BaseTestCase {
 		selenium.clickAt("link=Web Content Search Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +62,8 @@ public class SearchNullPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Configuration")) {
+				if (selenium.isVisible(
+							"//input[@id='layout_configuration_content']")) {
 					break;
 				}
 			}
@@ -69,67 +73,10 @@ public class SearchNullPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_86_type")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.select("_86_type", RuntimeVariables.replace("label=Blogs"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Return to Full Page",
+		selenium.type("//input[@id='layout_configuration_content']",
 			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace("w"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -137,7 +84,8 @@ public class SearchNullPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_77_keywords")) {
+				if (selenium.isVisible(
+							"//div[@id=\"ContentManagement-WebContentSearch\"]/p/a")) {
 					break;
 				}
 			}
@@ -147,8 +95,8 @@ public class SearchNullPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_77_keywords", RuntimeVariables.replace("test"));
-		selenium.type("_77_keywords", RuntimeVariables.replace("test"));
+		selenium.clickAt("//div[@id=\"ContentManagement-WebContentSearch\"]/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -156,7 +104,7 @@ public class SearchNullPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@type='image']")) {
+				if (selenium.isVisible("//td[1]/div[1]/div")) {
 					break;
 				}
 			}
@@ -166,8 +114,6 @@ public class SearchNullPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//input[@type='image']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("JCS Setup Test Article"));
+		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
 	}
 }

@@ -20,27 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webcontentsearch;
+package com.liferay.portalweb.portlet.webcontentsearch.webcontent.searchwcdwebcontent;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.webcontentsearch.portlet.PortletTests;
-import com.liferay.portalweb.portlet.webcontentsearch.webcontent.WebContentTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="WebContentSearchTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchWCDWebContentTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WebContentSearchTests extends BaseTests {
+public class SearchWCDWebContentTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(WebContentTests.suite());
+		testSuite.addTestSuite(AddPageWCDTest.class);
+		testSuite.addTestSuite(AddPortletWCDTest.class);
+		testSuite.addTestSuite(AddPageWCSTest.class);
+		testSuite.addTestSuite(AddPortletWCSTest.class);
+		testSuite.addTestSuite(AddWCDWebContentTest.class);
+		testSuite.addTestSuite(SearchWCDWebContentTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
