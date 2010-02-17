@@ -122,6 +122,7 @@ import org.apache.commons.lang.time.StopWatch;
  * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Bruno Farache
+ * @author Wesley Gong
  */
 public class LayoutImporter {
 
@@ -809,13 +810,18 @@ public class LayoutImporter {
 					int y = url.indexOf(StringPool.SLASH, x + 1);
 
 					if (y > x) {
-						String fixedUrl = url.substring(0, x) +
+						String friendlyURL = url.substring(x, y);
 
-						layout.getGroup().getFriendlyURL() +
+						if (Validator.equals(
+								friendlyURL, _SAME_COMMUNITY_FRIENDLY_URL)) {
 
-						url.substring(y);
+							String fixedUrl =
+								url.substring(0, x) +
+									layout.getGroup().getFriendlyURL() +
+									url.substring(y);
 
-						typeSettings.setProperty("url", fixedUrl);
+							typeSettings.setProperty("url", fixedUrl);
+						}
 					}
 				}
 			}
@@ -1720,6 +1726,9 @@ public class LayoutImporter {
 
 		return portletIds;
 	}
+
+	private static final String _SAME_COMMUNITY_FRIENDLY_URL =
+		"/[$SAME_COMMUNITY_FRIENDLY_URL$]";
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutImporter.class);
 
