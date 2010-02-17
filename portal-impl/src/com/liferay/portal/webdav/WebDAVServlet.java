@@ -42,9 +42,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
 /**
  * <a href="WebDAVServlet.java.html"><b><i>View Source</i></b></a>
  *
@@ -106,12 +103,6 @@ public class WebDAVServlet extends HttpServlet {
 			try {
 				WebDAVRequest webDavRequest = new WebDAVRequestImpl(
 					storage, request, response, userAgent, permissionChecker);
-
-				if (webDavRequest.isLitmus() && !_log.isInfoEnabled()) {
-					Logger logger = Logger.getLogger(WebDAVServlet.class);
-
-					logger.setLevel(Level.toLevel(Level.INFO_INT));
-				}
 
 				status = method.process(webDavRequest);
 			}

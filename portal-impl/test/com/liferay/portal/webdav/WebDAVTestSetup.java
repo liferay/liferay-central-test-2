@@ -32,6 +32,9 @@ import junit.extensions.TestSetup;
 
 import junit.framework.Test;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 /**
  * <a href="WebDAVTestSetup.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,6 +49,10 @@ public class WebDAVTestSetup extends TestSetup {
 	}
 
 	public void setUp() {
+		Logger logger = Logger.getLogger(WebDAVServlet.class);
+
+		logger.setLevel(Level.toLevel(Level.INFO_INT));
+
 		Tuple tuple = _baseWebDAVTestCase.service(Method.MKCOL, "", null, null);
 
 		int statusCode = _baseWebDAVTestCase.getStatusCode(tuple);
