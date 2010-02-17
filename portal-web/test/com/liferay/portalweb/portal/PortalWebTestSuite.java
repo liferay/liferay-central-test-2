@@ -63,7 +63,6 @@ import com.liferay.portalweb.portlet.shopping.ShoppingTests;
 import com.liferay.portalweb.portlet.sitemap.SiteMapTests;
 import com.liferay.portalweb.portlet.smstextmessenger.SMSTextMessengerTests;
 import com.liferay.portalweb.portlet.softwarecatalog.SoftwareCatalogTests;
-import com.liferay.portalweb.portlet.tagsadmin.TagsAdminTests;
 import com.liferay.portalweb.portlet.translator.TranslatorTests;
 import com.liferay.portalweb.portlet.unitconverter.UnitConverterTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.WebContentDisplayTests;
