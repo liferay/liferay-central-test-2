@@ -20,33 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.wikidisplay;
+package com.liferay.portalweb.portlet.wikidisplay.comment;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.wikidisplay.attachment.AttachmentTests;
-import com.liferay.portalweb.portlet.wikidisplay.comment.CommentTests;
-import com.liferay.portalweb.portlet.wikidisplay.portlet.PortletTests;
-import com.liferay.portalweb.portlet.wikidisplay.wikinode.WikiNodeTests;
-import com.liferay.portalweb.portlet.wikidisplay.wikipage.WikiPageTests;
+import com.liferay.portalweb.portlet.wikidisplay.comment.addwdfrontpagecomment.AddWDFrontPageCommentTests;
+import com.liferay.portalweb.portlet.wikidisplay.comment.addwdfrontpagecommentbodynull.AddWDFrontPageCommentBodyNullTests;
+import com.liferay.portalweb.portlet.wikidisplay.comment.addwdfrontpagecommentmultiple.AddWDFrontPageCommentMultipleTests;
+import com.liferay.portalweb.portlet.wikidisplay.comment.deletewdfrontpagecomment.DeleteWDFrontPageCommentTests;
+import com.liferay.portalweb.portlet.wikidisplay.comment.editwdfrontpagecommentbody.EditWDFrontPageCommentBodyTests;
+import com.liferay.portalweb.portlet.wikidisplay.comment.ratewdfrontpagecomment.RateWDFrontPageCommentTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="WikiDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="CommentTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WikiDisplayTests extends BaseTests {
+public class CommentTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AttachmentTests.suite());
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(WikiNodeTests.suite());
-		testSuite.addTest(WikiPageTests.suite());
+		testSuite.addTest(AddWDFrontPageCommentTests.suite());
+		testSuite.addTest(AddWDFrontPageCommentBodyNullTests.suite());
+		testSuite.addTest(AddWDFrontPageCommentMultipleTests.suite());
+		testSuite.addTest(DeleteWDFrontPageCommentTests.suite());
+		testSuite.addTest(EditWDFrontPageCommentBodyTests.suite());
+		testSuite.addTest(RateWDFrontPageCommentTests.suite());
 
 		return testSuite;
 	}

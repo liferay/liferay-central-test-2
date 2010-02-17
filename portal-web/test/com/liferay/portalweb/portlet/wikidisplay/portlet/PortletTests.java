@@ -20,33 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.wikidisplay;
+package com.liferay.portalweb.portlet.wikidisplay.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.wikidisplay.attachment.AttachmentTests;
-import com.liferay.portalweb.portlet.wikidisplay.comment.CommentTests;
-import com.liferay.portalweb.portlet.wikidisplay.portlet.PortletTests;
-import com.liferay.portalweb.portlet.wikidisplay.wikinode.WikiNodeTests;
-import com.liferay.portalweb.portlet.wikidisplay.wikipage.WikiPageTests;
+import com.liferay.portalweb.portlet.wikidisplay.portlet.addportlet.AddPortletTests;
+import com.liferay.portalweb.portlet.wikidisplay.portlet.addportletmultiple.AddPortletMultipleTests;
+import com.liferay.portalweb.portlet.wikidisplay.portlet.removeportlet.RemovePortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="WikiDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WikiDisplayTests extends BaseTests {
+public class PortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AttachmentTests.suite());
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(WikiNodeTests.suite());
-		testSuite.addTest(WikiPageTests.suite());
+		testSuite.addTest(AddPortletTests.suite());
+		testSuite.addTest(AddPortletMultipleTests.suite());
+		testSuite.addTest(RemovePortletTests.suite());
 
 		return testSuite;
 	}

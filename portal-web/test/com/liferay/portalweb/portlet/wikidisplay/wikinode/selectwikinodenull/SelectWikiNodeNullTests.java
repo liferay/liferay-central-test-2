@@ -20,33 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.wikidisplay;
+package com.liferay.portalweb.portlet.wikidisplay.wikinode.selectwikinodenull;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.wikidisplay.attachment.AttachmentTests;
-import com.liferay.portalweb.portlet.wikidisplay.comment.CommentTests;
-import com.liferay.portalweb.portlet.wikidisplay.portlet.PortletTests;
-import com.liferay.portalweb.portlet.wikidisplay.wikinode.WikiNodeTests;
-import com.liferay.portalweb.portlet.wikidisplay.wikipage.WikiPageTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="WikiDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SelectWikiNodeNullTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WikiDisplayTests extends BaseTests {
+public class SelectWikiNodeNullTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AttachmentTests.suite());
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(WikiNodeTests.suite());
-		testSuite.addTest(WikiPageTests.suite());
+		testSuite.addTestSuite(AddPageWDTest.class);
+		testSuite.addTestSuite(AddPortletWDTest.class);
+		testSuite.addTestSuite(AddPageWikiTest.class);
+		testSuite.addTestSuite(AddPortletWikiTest.class);
+		testSuite.addTestSuite(SelectWikiNodeNullTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}
