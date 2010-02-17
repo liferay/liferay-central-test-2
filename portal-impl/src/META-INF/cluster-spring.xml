@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
+	default-destroy-method="destroy"
 	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
-	<bean id="com.liferay.portal.kernel.cluster.ClusterLink" class="com.liferay.portal.cluster.ClusterLinkImpl" destroy-method="destroy">
+	<bean id="com.liferay.portal.kernel.cluster.ClusterLink" class="com.liferay.portal.cluster.ClusterLinkImpl">
 		<property name="clusterForwardMessageListener">
 			<bean class="com.liferay.portal.kernel.cluster.messaging.ClusterForwardMessageListener" />
 		</property>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
+	default-destroy-method="destroy"
 	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:util="http://www.springframework.org/schema/util"
@@ -78,7 +79,7 @@
 			<util:constant static-field="com.liferay.portal.kernel.cluster.Priority.LEVEL5" />
 		</property>
 	</bean>
-	<bean id="messagingConfigurator.search" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+	<bean id="messagingConfigurator.search" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="specificDestinationEventListener">
 			<map>
 				<entry key="liferay/search_reader">

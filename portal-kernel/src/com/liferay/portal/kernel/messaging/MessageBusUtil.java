@@ -142,6 +142,14 @@ public class MessageBusUtil {
 			destinationName, payload, responseDestinationName, timeout);
 	}
 
+	public static void shutdown() {
+		_instance._shutdown();
+	}
+
+	public static void shutdown(boolean force) {
+		_instance._shutdown(force);
+	}
+
 	public static boolean unregisterMessageListener(
 		String destinationName, MessageListener messageListener) {
 
@@ -230,6 +238,14 @@ public class MessageBusUtil {
 		message.setPayload(payload);
 
 		return _sendSynchronousMessage(destinationName, message, timeout);
+	}
+
+	private void _shutdown() {
+		_messageBus.shutdown();
+	}
+
+	private void _shutdown(boolean force) {
+		_messageBus.shutdown(force);
 	}
 
 	private boolean _unregisterMessageListener(

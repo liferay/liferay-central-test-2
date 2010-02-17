@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
+	default-destroy-method="destroy"
 	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:aop="http://www.springframework.org/schema/aop"
@@ -49,7 +50,7 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="messagingConfigurator.document_library" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+	<bean id="messagingConfigurator.document_library" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinations">
 			<list>
 				<ref bean="destination.document_library_hook" />

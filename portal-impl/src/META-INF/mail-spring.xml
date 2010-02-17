@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
+	default-destroy-method="destroy"
 	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -16,7 +17,7 @@
 		<property name="name" value="liferay/mail" />
 	</bean>
 	<bean id="messageListener.mail" class="com.liferay.mail.messaging.MailMessageListener" />
-	<bean id="messagingConfigurator.mail" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+	<bean id="messagingConfigurator.mail" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinations">
 			<list>
 				<ref bean="destination.mail" />

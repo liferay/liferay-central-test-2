@@ -42,6 +42,40 @@ import javax.management.ObjectName;
  */
 public class JMXMessageListener extends BaseDestinationEventListener {
 
+	public void afterPropertiesSet() throws Exception {
+		if ((_mBeanServer == null) || (_messageBus == null)) {
+			throw new IllegalStateException(
+				"MBean server and message bus are not configured");
+		}
+
+		try {
+			_replaceMBeanRegistration(
+				new MessageBusManager(_messageBus),
+				MessageBusManager.createObjectName());
+		}
+		catch (Exception e) {
+			if (log.isWarnEnabled()) {
+				log.warn("Unable to register message bus manager", e);
+			}
+		}
+
+		Collection<Destination> destinations = _messageBus.getDestinations();
+
+		for (Destination destination : destinations) {
+			try {
+				registerDestination(destination);
+			}
+			catch (Exception e) {
+				if (log.isWarnEnabled()) {
+					log.warn(
+						"Unable to register destination " +
+							destination.getName(),
+					e);
+				}
+			}
+		}
+	}
+
 	public void destinationAdded(Destination destination) {
 		try {
 			registerDestination(destination);
@@ -90,38 +124,11 @@ public class JMXMessageListener extends BaseDestinationEventListener {
 		}
 	}
 
+	/**
+	 * @deprecated {@link #afterPropertiesSet}
+	 */
 	public void init() throws Exception {
-		if ((_mBeanServer == null) || (_messageBus == null)) {
-			throw new IllegalStateException(
-				"MBean server and message bus are not configured");
-		}
-
-		try {
-			_replaceMBeanRegistration(
-				new MessageBusManager(_messageBus),
-				MessageBusManager.createObjectName());
-		}
-		catch (Exception e) {
-			if (log.isWarnEnabled()) {
-				log.warn("Unable to register message bus manager", e);
-			}
-		}
-
-		Collection<Destination> destinations = _messageBus.getDestinations();
-
-		for (Destination destination : destinations) {
-			try {
-				registerDestination(destination);
-			}
-			catch (Exception e) {
-				if (log.isWarnEnabled()) {
-					log.warn(
-						"Unable to register destination " +
-							destination.getName(),
-					e);
-				}
-			}
-		}
+		afterPropertiesSet();
 	}
 
 	public void setMBeanServer(MBeanServer mBeanServer) {

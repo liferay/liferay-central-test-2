@@ -43,34 +43,7 @@ import java.util.Map;
 public abstract class AbstractMessagingConfigurator
 	implements MessagingConfigurator {
 
-	public void destroy() {
-		MessageBus messageBus = getMessageBus();
-
-		for (Map.Entry<String, List<MessageListener>> messageListeners :
-				_messageListeners.entrySet()) {
-
-			String destinationName = messageListeners.getKey();
-
-			for (MessageListener messageListener :
-					messageListeners.getValue()) {
-
-				messageBus.unregisterMessageListener(
-					destinationName, messageListener);
-			}
-		}
-
-		for (Destination destination : _destinations) {
-			messageBus.removeDestination(destination.getName());
-		}
-
-		for (DestinationEventListener destinationEventListener :
-				_globalDestinationEventListeners) {
-
-			messageBus.removeDestinationEventListener(destinationEventListener);
-		}
-	}
-
-	public void init() {
+	public void afterPropertiesSet() {
 		MessageBus messageBus = getMessageBus();
 
 		for (DestinationEventListener destinationEventListener :
@@ -125,6 +98,40 @@ public abstract class AbstractMessagingConfigurator
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);
 		}
+	}
+
+	public void destroy() {
+		MessageBus messageBus = getMessageBus();
+
+		for (Map.Entry<String, List<MessageListener>> messageListeners :
+				_messageListeners.entrySet()) {
+
+			String destinationName = messageListeners.getKey();
+
+			for (MessageListener messageListener :
+					messageListeners.getValue()) {
+
+				messageBus.unregisterMessageListener(
+					destinationName, messageListener);
+			}
+		}
+
+		for (Destination destination : _destinations) {
+			messageBus.removeDestination(destination.getName());
+		}
+
+		for (DestinationEventListener destinationEventListener :
+				_globalDestinationEventListeners) {
+
+			messageBus.removeDestinationEventListener(destinationEventListener);
+		}
+	}
+
+	/**
+	 * @deprecated {@link #afterPropertiesSet}
+	 */
+	public void init() {
+		afterPropertiesSet();
 	}
 
 	public void setDestinations(List<Destination> destinations) {

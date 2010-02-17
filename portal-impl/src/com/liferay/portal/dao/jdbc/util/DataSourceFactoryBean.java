@@ -108,6 +108,15 @@ public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 		return dataSource;
 	}
 
+	public void destroyInstance(DataSource dataSource) throws Exception {
+		if (dataSource instanceof ComboPooledDataSource) {
+			ComboPooledDataSource comboPooledDataSource =
+				(ComboPooledDataSource)dataSource;
+
+			comboPooledDataSource.close();
+		}
+	}
+
 	public Class<DataSource> getObjectType() {
 		return DataSource.class;
 	}
