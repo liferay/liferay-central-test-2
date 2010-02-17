@@ -875,8 +875,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					expirationDateDay, expirationDateYear, expirationDateHour,
 					expirationDateMinute, neverExpire, reviewDateMonth,
 					reviewDateDay, reviewDateYear, reviewDateHour,
-					reviewDateMinute, neverReview, article.getIndexable(),
-					article.getSmallImage(), article.getSmallImageURL(),
+					reviewDateMinute, neverReview, article.isIndexable(),
+					article.isSmallImage(), article.getSmallImageURL(),
 					smallFile, images, articleURL, serviceContext);
 			}
 			else {
@@ -892,7 +892,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					expirationDateHour, expirationDateMinute, neverExpire,
 					reviewDateMonth, reviewDateDay, reviewDateYear,
 					reviewDateHour,	reviewDateMinute, neverReview,
-					article.getIndexable(),	article.getSmallImage(),
+					article.isIndexable(),	article.isSmallImage(),
 					article.getSmallImageURL(), smallFile, images, articleURL,
 					serviceContext);
 			}
@@ -907,8 +907,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				expirationDateMonth, expirationDateDay, expirationDateYear,
 				expirationDateHour, expirationDateMinute, neverExpire,
 				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, neverReview, article.getIndexable(),
-				article.getSmallImage(), article.getSmallImageURL(), smallFile,
+				reviewDateMinute, neverReview, article.isIndexable(),
+				article.isSmallImage(), article.getSmallImageURL(), smallFile,
 				images, articleURL, serviceContext);
 		}
 
