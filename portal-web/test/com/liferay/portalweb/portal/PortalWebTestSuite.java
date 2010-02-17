@@ -114,11 +114,9 @@ public class PortalWebTestSuite extends BaseTests {
 		testSuite.addTest(NavigationTests.suite());
 		testSuite.addTest(NestedPortletsTests.suite());
 		testSuite.addTest(NetworkUtilitiesTests.suite());
-		//testSuite.addTest(OrganizationAdminTests.suite());
 		testSuite.addTest(PageCommentsTests.suite());
 		testSuite.addTest(PageRatingsTests.suite());
 		testSuite.addTest(PasswordGeneratorTests.suite());
-		//testSuite.addTest(PluginInstallerTests.suite());
 		testSuite.addTest(PollsDisplayTests.suite());
 		testSuite.addTest(QuickNoteTests.suite());
 		testSuite.addTest(RecentBloggersTests.suite());
@@ -131,7 +129,6 @@ public class PortalWebTestSuite extends BaseTests {
 		testSuite.addTest(SiteMapTests.suite());
 		testSuite.addTest(SMSTextMessengerTests.suite());
 		testSuite.addTest(SoftwareCatalogTests.suite());
-		testSuite.addTest(TagsAdminTests.suite());
 		testSuite.addTest(TranslatorTests.suite());
 		testSuite.addTest(UnitConverterTests.suite());
 		testSuite.addTest(WebContentDisplayTests.suite());
