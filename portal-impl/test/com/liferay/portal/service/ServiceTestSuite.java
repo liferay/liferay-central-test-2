@@ -41,10 +41,6 @@ import junit.framework.TestSuite;
 public class ServiceTestSuite extends TestSuite {
 
 	public static Test suite() {
-		ServiceTestUtil.initServices();
-
-		// Tests
-
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(CounterServiceTest.class);
@@ -63,7 +59,7 @@ public class ServiceTestSuite extends TestSuite {
 
 		testSuite.addTestSuite(SocialRelationLocalServiceTest.class);
 
-		return testSuite;
+		return new ServiceTestSetup(testSuite);
 	}
 
 }

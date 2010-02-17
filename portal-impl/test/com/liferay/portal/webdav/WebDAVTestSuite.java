@@ -23,7 +23,6 @@
 package com.liferay.portal.webdav;
 
 import com.liferay.portal.service.ServiceTestSuite;
-import com.liferay.portal.service.ServiceTestUtil;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -36,8 +35,6 @@ import junit.framework.TestSuite;
 public class WebDAVTestSuite extends ServiceTestSuite {
 
 	public static Test suite() {
-		ServiceTestUtil.initServices();
-
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(WebDAVLitmusBasicTest.class);

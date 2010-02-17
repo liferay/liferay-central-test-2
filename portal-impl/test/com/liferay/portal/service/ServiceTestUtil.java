@@ -37,6 +37,7 @@ import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
+import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
@@ -67,6 +68,12 @@ import java.util.Set;
  * @author Alexander Chow
  */
 public class ServiceTestUtil {
+
+	public static void destroyServices() {
+		LuceneHelperUtil.shutdown();
+
+		FileUtil.deltree(PropsValues.LIFERAY_HOME + "/data");
+	}
 
 	public static void initPermissions() {
 		if (System.getProperty("external-properties") == null) {
