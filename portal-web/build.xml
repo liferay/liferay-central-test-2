@@ -456,6 +456,10 @@
 					<replacefilter token="../images/" value="" />
 				</replace>
 
+				<replace file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
+					<replacefilter token="../../../../../src/aui-skins/core/images/" value="" />
+				</replace>
+
 				<copy
 					file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css"
 					tofile="docroot/html/portal/aui/css.jspf"
