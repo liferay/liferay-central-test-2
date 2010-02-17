@@ -30,10 +30,16 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String title = wikiPage.getTitle();
 
+PortletURL viewPageURL = renderResponse.createRenderURL();
+
+viewPageURL.setParameter("struts_action", "/wiki/view");
+viewPageURL.setParameter("nodeName", node.getName());
+viewPageURL.setParameter("title", wikiPage.getTitle());
+
 PortletURL editPageURL = renderResponse.createRenderURL();
 
 editPageURL.setParameter("struts_action", "/wiki/edit_page");
-editPageURL.setParameter("redirect", currentURL);
+editPageURL.setParameter("redirect", viewPageURL.toString());
 editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 editPageURL.setParameter("title", title);
 
@@ -58,12 +64,6 @@ viewPageOutgoingLinksURL.setParameter("struts_action", "/wiki/view_page_outgoing
 PortletURL attachmentsURL = PortletURLUtil.clone(viewPageDetailsURL, renderResponse);
 
 attachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
-
-PortletURL viewPageURL = renderResponse.createRenderURL();
-
-viewPageURL.setParameter("struts_action", "/wiki/view");
-viewPageURL.setParameter("nodeName", node.getName());
-viewPageURL.setParameter("title", wikiPage.getTitle());
 %>
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
