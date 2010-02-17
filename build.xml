@@ -476,6 +476,49 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize
 		<if>
 			<equals arg1="${app.server.type}" arg2="resin" />
 			<then>
+				<if>
+					<not>
+						<available file="${app.server.bin.dir}/run.bat" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/resin/bin/run.bat"
+							tofile="${app.server.bin.dir}/run.bat"
+						/>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<available file="${app.server.bin.dir}/run.sh" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/resin/bin/run.sh"
+							tofile="${app.server.bin.dir}/run.sh"
+						/>
+					</then>
+				</if>
+
+				<loadfile property="resin.conf.content" srcFile="${app.server.dir}/conf/resin.conf" />
+
+				<antelope:stringutil string="${resin.conf.content}" property="resin.conf.content.index">
+					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
+				</antelope:stringutil>
+
+				<if>
+					<equals arg1="${resin.conf.content.index}" arg2="-1" />
+					<then>
+						<replace file="${app.server.dir}/conf/resin.conf">
+							<replacetoken><![CDATA[<jvm-arg>-Xmx256m</jvm-arg>]]></replacetoken>
+							<replacevalue><![CDATA[<jvm-arg>-Dfile.encoding=UTF-8</jvm-arg>
+	<jvm-arg>-Duser.timezone=GMT</jvm-arg>
+	<jvm-arg>-Xmx1024m</jvm-arg>
+	<jvm-arg>-XX:MaxPermSize=256m</jvm-arg>]]></replacevalue>
+						</replace>
+					</then>
+				</if>
+
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/development"

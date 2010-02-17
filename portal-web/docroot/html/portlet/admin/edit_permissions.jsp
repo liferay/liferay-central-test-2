@@ -35,6 +35,10 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/admin_server/edit_permissions");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
+
+request.setAttribute("edit_permissions.jsp-tabs2", tabs2);
+
+request.setAttribute("edit_permissions.jsp-portletURL", portletURL);
 %>
 
 <form method="post" name="<portlet:namespace />fm">
@@ -53,10 +57,10 @@ portletURL.setParameter("tabs2", tabs2);
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("merge-redundant-roles") %>'>
-		<%@ include file="/html/portlet/admin/edit_permissions_merge.jspf" %>
+		<liferay-util:include page="/html/portlet/admin/edit_permissions_merge.jsp" />
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/admin/edit_permissions_reassign.jspf" %>
+		<liferay-util:include page="/html/portlet/admin/edit_permissions_reassign.jsp" />
 	</c:otherwise>
 </c:choose>
 

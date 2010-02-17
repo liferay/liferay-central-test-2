@@ -22,7 +22,13 @@
  */
 %>
 
+<%@ include file="/html/portlet/admin/init.jsp" %>
+
 <%
+String tabs2 = (String)request.getAttribute("edit_permissions.jsp-tabs2");
+
+PortletURL portletURL = (PortletURL)request.getAttribute("edit_permissions.jsp-portletURL");
+
 MultiValueMap mvp = new MultiValueMap();
 
 int roleType = RoleConstants.TYPE_REGULAR;

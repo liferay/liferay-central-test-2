@@ -186,9 +186,18 @@
 				<unjar src="${project.dir}/lib/portal/commons-beanutils.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/commons-digester.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/commons-httpclient.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/pdfbox.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/poi.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/poi-scratchpad.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/portletbridge-core.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/portletbridge-portlet.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/simplecaptcha.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/slf4j-api.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/slf4j-log4j12.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/spring-beans.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/spring-context.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/spring-core.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/spring-web.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/struts-el.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/urlrewrite.jar" dest="${classpath.jsp}" />
 			</then>
@@ -330,7 +339,11 @@
 
 	<target name="deploy-fast">
 		<if>
-			<equals arg1="${app.server.type}" arg2="tomcat" />
+			<or>
+				<equals arg1="${app.server.type}" arg2="jetty" />
+				<equals arg1="${app.server.type}" arg2="resin" />
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+			</or>
 			<then>
 				<copy todir="${app.server.portal.dir}" preservelastmodified="true">
 					<fileset dir="docroot">

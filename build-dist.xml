@@ -310,9 +310,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 	</target>
 
 	<target name="build-dist-resin">
-		<delete dir="${app.server.resin.dir}" />
-
-		<unzip src="${app.server.parent.dir}/resin-3.1.8.zip" dest="${app.server.parent.dir}" />
+		<antcall target="unzip-resin" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=resin</echo>
 
@@ -1122,6 +1120,29 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 			<replacefilter token="9009" value="8009" />
 			<replacefilter token="9043" value="8443" />
 		</replace>
+	</target>
+
+	<target name="unzip-resin">
+		<delete dir="${app.server.parent.dir}/resin-3.1.9" />
+
+		<if>
+			<not>
+				<available file="${app.server.parent.dir}/${app.server.resin.zip.name}" />
+			</not>
+			<then>
+				<get
+					dest="${app.server.parent.dir}/${app.server.resin.zip.name}"
+					src="${app.server.resin.zip.url}"
+					verbose="true"
+				/>
+			</then>
+		</if>
+
+		<unzip src="${app.server.parent.dir}/${app.server.resin.zip.name}" dest="${app.server.parent.dir}">
+			<patternset
+				excludes="resin-3.1.9/php/**,resin-3.1.9/webapps/ROOT/**"
+			/>
+		</unzip>
 	</target>
 
 	<target name="unzip-tomcat">

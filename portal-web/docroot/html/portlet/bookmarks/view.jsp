@@ -270,13 +270,13 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 								String target = null;
 
 								if (BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW)) {
-									PortletURL rowURL = renderResponse.createRenderURL();
+									PortletURL tempRowURL = renderResponse.createRenderURL();
 
-									rowURL.setParameter("struts_action", "/bookmarks/view_entry");
-									rowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
-									rowURL.setParameter("redirect", currentURL);
+									tempRowURL.setParameter("struts_action", "/bookmarks/view_entry");
+									tempRowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
+									tempRowURL.setParameter("redirect", currentURL);
 
-									rowHREF = rowURL.toString();
+									rowHREF = tempRowURL.toString();
 								}
 								else {
 									rowHREF = themeDisplay.getPathMain().concat("/bookmarks/open_entry?entryId=").concat(String.valueOf(entry.getEntryId()));

@@ -85,7 +85,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 		String workflowRoleName = workflowRoleNames[i - 1];
 	%>
 
-		<aui:input name="reviewUserIds_<%= i %>" type="hidden" />
+		<aui:input name='<%= "reviewUserIds_" + i %>' type="hidden" />
 
 	<%
 	}
@@ -285,9 +285,11 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 		proposedLayout = LayoutLocalServiceUtil.getLayout(proposedLayoutPlid);
 	}
+
+	String tagligPreviewURL = "window.open('" + PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay) + "');";
 	%>
 
-	<aui:button onClick="window.open('<%= PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay) %>');" value="preview" />
+	<aui:button onClick="<%= tagligPreviewURL %>" value="preview" />
 
 	<c:choose>
 		<c:when test="<%= review != null %>">

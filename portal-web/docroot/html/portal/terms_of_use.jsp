@@ -205,10 +205,10 @@
 			<aui:button type="submit" value="i-agree" />
 
 			<%
-			String taglibMessage = UnicodeLanguageUtil.get(pageContext, "you-must-agree-with-the-terms-of-use-to-continue");
+			String taglibOnClick = "alert('" + UnicodeLanguageUtil.get(pageContext, "you-must-agree-with-the-terms-of-use-to-continue") + "');";
 			%>
 
-			<aui:button onClick="alert('<%= taglibMessage %>');" type="cancel" value="i-disagree" />
+			<aui:button onClick="<%= taglibOnClick %>" type="cancel" value="i-disagree" />
 		</aui:button-row>
 	</c:if>
 </aui:form>

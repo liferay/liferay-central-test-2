@@ -22,15 +22,13 @@
  */
 %>
 
-<style type="text/css">
-	.model-details {
-		background: none;
-		border: 0px;
-		color: none;
-	}
-</style>
+<%@ include file="/html/portlet/admin/init.jsp" %>
 
 <%
+String tabs2 = (String)request.getAttribute("edit_permissions.jsp-tabs2");
+
+PortletURL portletURL = (PortletURL)request.getAttribute("edit_permissions.jsp-portletURL");
+
 String systemRoleName = RoleConstants.OWNER;
 
 if (tabs2.equals("communities")) {
@@ -40,6 +38,14 @@ else if (tabs2.equals("organizations")) {
 	systemRoleName = RoleConstants.ORGANIZATION_MEMBER;
 }
 %>
+
+<style type="text/css">
+	.model-details {
+		background: none;
+		border: 0px;
+		color: none;
+	}
+</style>
 
 <div class="portlet-msg-info">
 	<%= LanguageUtil.format(pageContext, "by-choosing-to-reassign-the-resource,-all-actions-will-be-removed-from-the-role-and-the-default-actions-will-be-enabled-for-the-system-role-x", systemRoleName) %>

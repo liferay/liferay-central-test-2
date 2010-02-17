@@ -658,7 +658,7 @@
 	</library>
 	<library>
 		<file-name>development/quercus.jar</file-name>
-		<version>3.1.3</version>
+		<version>3.1.9</version>
 		<project-name>Quercus</project-name>
 		<project-url>http://www.caucho.com/resin-3.1/doc/quercus.xtp</project-url>
 		<licenses>
@@ -672,7 +672,7 @@
 	</library>
 	<library>
 		<file-name>development/resin-util.jar</file-name>
-		<version>3.1.3</version>
+		<version>3.1.9</version>
 		<project-name>Resin</project-name>
 		<project-url>http://www.caucho.com/resin-3.1</project-url>
 		<licenses>
@@ -705,7 +705,7 @@
 	</library>
 	<library>
 		<file-name>development/script-10.jar</file-name>
-		<version>3.1.3</version>
+		<version>3.1.9</version>
 		<project-name>Resin</project-name>
 		<project-url>http://www.caucho.com/resin-3.1</project-url>
 		<licenses>
@@ -1536,7 +1536,7 @@
 	</library>
 	<library>
 		<file-name>portal/hessian.jar</file-name>
-		<version>4.0.2</version>
+		<version>4.0.3</version>
 		<project-name>Hessian</project-name>
 		<project-url>http://www.caucho.com/hessian</project-url>
 		<licenses>
