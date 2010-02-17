@@ -20,29 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webcontentlist;
+package com.liferay.portalweb.portlet.webcontentlist.webcontent.viewwebcontent;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.webcontentlist.portlet.PortletTests;
-import com.liferay.portalweb.portlet.webcontentlist.webcontent.WebContentTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="WebContentListTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewWebContentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WebContentListTests extends BaseTests {
+public class ViewWebContentTest extends BaseTestCase {
+	public void testViewWebContent() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(WebContentTests.suite());
+			try {
+				if (selenium.isElementPresent("link=Web Content List Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Web Content List Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Web Content Test", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("This is a test web content."));
 	}
-
 }

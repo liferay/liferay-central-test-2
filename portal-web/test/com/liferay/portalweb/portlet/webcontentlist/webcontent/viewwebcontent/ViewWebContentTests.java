@@ -20,41 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webcontentlist;
+package com.liferay.portalweb.portlet.webcontentlist.webcontent.viewwebcontent;
 
-import com.liferay.portalweb.portal.BaseTestCase;
-import com.liferay.portalweb.portal.util.RuntimeVariables;
+import com.liferay.portalweb.portal.BaseTests;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /**
- * <a href="ViewArticleTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewWebContentTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ViewArticleTest extends BaseTestCase {
-	public void testViewArticle() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+public class ViewWebContentTests extends BaseTests {
 
-			try {
-				if (selenium.isElementPresent("link=Web Content List Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-			Thread.sleep(1000);
-		}
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddWebContentTest.class);
+		testSuite.addTestSuite(ConfigurePortletDisplayGuestTest.class);
+		testSuite.addTestSuite(ViewWebContentTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
-		selenium.clickAt("link=Web Content List Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=WCL Setup Test Article"));
-		selenium.clickAt("link=WCL Setup Test Article",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a WCL setup test article!"));
+		return testSuite;
 	}
+
 }

@@ -20,18 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webcontentlist;
+package com.liferay.portalweb.portlet.webcontentlist.portlet.configureportletdisplayguest;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="TearDownTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddWebContentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TearDownTest extends BaseTestCase {
-	public void testTearDown() throws Exception {
+public class AddWebContentTest extends BaseTestCase {
+	public void testAddWebContent() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,25 +52,13 @@ public class TearDownTest extends BaseTestCase {
 
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Web Content")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//input[@value='Add Web Content']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_15_title", RuntimeVariables.replace("Web Content Test"));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,7 +66,8 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_15_allRowIds")) {
+				if (selenium.isElementPresent(
+							"_15_structure_el_TextAreaField_content")) {
 					break;
 				}
 			}
@@ -86,33 +77,13 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
-		selenium.clickAt("link=Back to My Community",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Web Content List Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Remove']");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-		selenium.clickAt("link=Home", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span")) {
+				if (selenium.isElementPresent("FCKeditor1___Frame")) {
 					break;
 				}
 			}
@@ -122,18 +93,38 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span",
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//textarea")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.selectFrame(
+			"//iframe[@id=\"_15_structure_el_TextAreaField_content\"]");
+		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
+		selenium.selectFrame("//iframe");
+		selenium.type("//body",
+			RuntimeVariables.replace("This is a test web content."));
+		selenium.selectFrame("relative=top");
+		selenium.select("_15_type",
+			RuntimeVariables.replace("label=Announcements"));
+		selenium.type("_15_description",
+			RuntimeVariables.replace("Test Description."));
+		selenium.clickAt("//input[@value='Save and Approve']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Web Content Test"));
 	}
 }

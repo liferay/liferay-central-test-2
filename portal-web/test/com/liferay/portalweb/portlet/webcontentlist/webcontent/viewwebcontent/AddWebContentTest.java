@@ -20,26 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webcontentlist;
+package com.liferay.portalweb.portlet.webcontentlist.webcontent.viewwebcontent;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SetupTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddWebContentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SetupTest extends BaseTestCase {
-	public void testSetup() throws Exception {
+public class AddWebContentTest extends BaseTestCase {
+	public void testAddWebContent() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -49,71 +50,14 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Web Content")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//input[@value='Add Web Content']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("//input[@value='Add Web Content']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_15_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_15_title",
-			RuntimeVariables.replace("WCL Setup Test Article"));
-		selenium.type("_15_title",
-			RuntimeVariables.replace("WCL Setup Test Article"));
+		selenium.type("_15_title", RuntimeVariables.replace("Web Content Test"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -169,17 +113,18 @@ public class SetupTest extends BaseTestCase {
 			"//iframe[@id=\"_15_structure_el_TextAreaField_content\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a WCL setup test article!"));
 		selenium.type("//body",
-			RuntimeVariables.replace("This is a WCL setup test article!"));
+			RuntimeVariables.replace("This is a test web content."));
 		selenium.selectFrame("relative=top");
-		selenium.select("_15_type", RuntimeVariables.replace("label=Test"));
+		selenium.select("_15_type",
+			RuntimeVariables.replace("label=Announcements"));
+		selenium.type("_15_description",
+			RuntimeVariables.replace("Test Description."));
 		selenium.clickAt("//input[@value='Save and Approve']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Back to My Community",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Web Content Test"));
 	}
 }

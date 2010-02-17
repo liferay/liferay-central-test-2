@@ -20,18 +20,21 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webcontentlist;
+package com.liferay.portalweb.portlet.webcontentlist.webcontent.viewwebcontent;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DisplayArticleTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurePortletDisplayGuestTest.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DisplayArticleTest extends BaseTestCase {
-	public void testDisplayArticle() throws Exception {
+public class ConfigurePortletDisplayGuestTest extends BaseTestCase {
+	public void testConfigurePortletDisplayGuest() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,20 +54,42 @@ public class DisplayArticleTest extends BaseTestCase {
 		selenium.clickAt("link=Web Content List Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//img[@alt='Configuration']",
-			RuntimeVariables.replace(""));
+		assertTrue(selenium.isTextPresent(
+				"Please configure this portlet to make it visible to all users."));
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_groupId",
-			RuntimeVariables.replace("label=My Community"));
-		selenium.select("_86_type", RuntimeVariables.replace("label=Test"));
+		Thread.sleep(5000);
+		selenium.select("_86_groupId", RuntimeVariables.replace("label=Guest"));
+		selenium.select("_86_type", RuntimeVariables.replace("label=General"));
 		selenium.select("_86_pageURL", RuntimeVariables.replace("label=Normal"));
 		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=10"));
 		selenium.select("_86_orderByCol",
 			RuntimeVariables.replace("label=Display Date"));
 		selenium.select("_86_orderByType",
 			RuntimeVariables.replace("label=Ascending"));
-		selenium.clickAt("link=Return to Full Page",
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Web Content List Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Web Content List Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Web Content Test"));
 	}
 }
