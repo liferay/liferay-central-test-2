@@ -20,29 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webcontentdisplay;
+package com.liferay.portalweb.portlet.webcontentdisplay.comment;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.webcontentdisplay.comment.CommentTests;
-import com.liferay.portalweb.portlet.webcontentdisplay.portlet.PortletTests;
-import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.WebContentTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.comment.addwcdwebcontentcomment.AddWCDWebContentCommentTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.comment.deletewcdwebcontentcomment.DeleteWCDWebContentCommentTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.comment.editwcdwebcontentcomment.EditWCDWebContentCommentTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="WebContentDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="CommentTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WebContentDisplayTests extends BaseTests {
+public class CommentTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(WebContentTests.suite());
+		testSuite.addTest(AddWCDWebContentCommentTests.suite());
+		testSuite.addTest(DeleteWCDWebContentCommentTests.suite());
+		testSuite.addTest(EditWCDWebContentCommentTests.suite());
 
 		return testSuite;
 	}

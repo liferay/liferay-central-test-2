@@ -20,29 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webcontentdisplay;
+package com.liferay.portalweb.portlet.webcontentdisplay.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.webcontentdisplay.comment.CommentTests;
-import com.liferay.portalweb.portlet.webcontentdisplay.portlet.PortletTests;
-import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.WebContentTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletenablecommentratings.ConfigurePortletEnableCommentRatingsTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletenablecomments.ConfigurePortletEnableCommentsTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletenableratings.ConfigurePortletEnableRatingsTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletshowavailablelocales.ConfigurePortletShowAvailableLocalesTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="WebContentDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WebContentDisplayTests extends BaseTests {
+public class PortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(WebContentTests.suite());
+		testSuite.addTest(ConfigurePortletEnableCommentRatingsTests.suite());
+		testSuite.addTest(ConfigurePortletEnableCommentsTests.suite());
+		testSuite.addTest(ConfigurePortletEnableRatingsTests.suite());
+		testSuite.addTest(ConfigurePortletShowAvailableLocalesTests.suite());
 
 		return testSuite;
 	}

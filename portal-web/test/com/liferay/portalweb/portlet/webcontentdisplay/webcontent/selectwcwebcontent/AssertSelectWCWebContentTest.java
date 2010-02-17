@@ -20,31 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.webcontentdisplay;
+package com.liferay.portalweb.portlet.webcontentdisplay.webcontent.selectwcwebcontent;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.webcontentdisplay.comment.CommentTests;
-import com.liferay.portalweb.portlet.webcontentdisplay.portlet.PortletTests;
-import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.WebContentTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="WebContentDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertSelectWCWebContentTest.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WebContentDisplayTests extends BaseTests {
+public class AssertSelectWCWebContentTest extends BaseTestCase {
+	public void testAssertSelectWCWebContent() throws Exception {
+		selenium.open("/web/guest/home/");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(CommentTests.suite());
-		testSuite.addTest(WebContentTests.suite());
+			try {
+				if (selenium.isElementPresent(
+							"link=Web Content Display Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Web Content Display Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("This is a test wc web content."));
 	}
-
 }
