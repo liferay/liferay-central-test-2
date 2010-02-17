@@ -232,6 +232,8 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 		}
 	);
 
+	panel._positionHelper.appendTo(document.<portlet:namespace />fm);
+
 	A.all('#<%= randomNamespace %>languageSelector select').each(
 		function(item) {
 			if (item) {
@@ -239,6 +241,4 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 			}
 		}
 	);
-
-	panel._positionHelper.appendTo(document.<portlet:namespace />fm);
 </aui:script>
