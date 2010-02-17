@@ -392,7 +392,7 @@
 					<fileset dir="docroot/html/ALLOY_ZIP/build/" />
 				</copy>
 
-				<replaceregexp match="defaults: \{" replace="defaults: {fetchCSS:false,combine:false," flags="g" byline="false">
+				<replaceregexp match="[\n\s\t]+filter: 'raw'," replace="" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/js/aui/aui-base/"
 						includes="aui-base.js"

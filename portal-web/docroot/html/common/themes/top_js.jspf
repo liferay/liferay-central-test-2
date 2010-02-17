@@ -221,6 +221,13 @@
 			}
 		};
 
+		window.YUI_config = {
+			base: Liferay.AUI.getBasePath(),
+			combine: false,
+			fetchCSS: false,
+			filter: Liferay.AUI.getFilter()
+		};
+
 		<%
 		String currentURL = PortalUtil.getCurrentURL(request);
 		%>
