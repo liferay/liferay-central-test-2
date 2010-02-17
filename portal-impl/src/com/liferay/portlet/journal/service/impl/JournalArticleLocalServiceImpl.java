@@ -90,6 +90,7 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl;
 import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
 import com.liferay.portlet.journal.util.JournalUtil;
+import com.liferay.portlet.journal.util.comparator.ArticleIDComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.LocalizationUtil;
@@ -1159,11 +1160,11 @@ public class JournalArticleLocalServiceImpl
 
 		if (status == StatusConstants.ANY) {
 			return journalArticlePersistence.findByCompanyId(
-				companyId, start, end);
+				companyId, start, end, new ArticleIDComparator(true));
 		}
 		else {
 			return journalArticlePersistence.findByC_S(
-				companyId, status, start, end);
+				companyId, status, start, end, new ArticleIDComparator(true));
 		}
 	}
 
