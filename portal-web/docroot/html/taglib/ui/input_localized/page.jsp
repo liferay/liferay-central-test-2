@@ -239,4 +239,6 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 			}
 		}
 	);
+
+	panel._positionHelper.appendTo(document.<portlet:namespace />fm);
 </aui:script>
