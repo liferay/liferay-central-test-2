@@ -1852,6 +1852,9 @@ public class ServiceBuilder {
 				if (exception.startsWith("NoSuch")) {
 					content = StringUtil.replace(
 						content, "PortalException", "NoSuchModelException");
+					content = StringUtil.replace(
+						content, "kernel.exception.NoSuchModelException",
+						"NoSuchModelException");
 				}
 
 				content = StringUtil.replace(content, "\r\n", "\n");
@@ -1865,6 +1868,9 @@ public class ServiceBuilder {
 				if (!content.contains("NoSuchModelException")) {
 					content = StringUtil.replace(
 						content, "PortalException", "NoSuchModelException");
+					content = StringUtil.replace(
+						content, "kernel.exception.NoSuchModelException",
+						"NoSuchModelException");
 
 					FileUtil.write(exceptionFile, content);
 				}
