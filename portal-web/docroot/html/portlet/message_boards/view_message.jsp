@@ -34,15 +34,6 @@ MBMessage message = messageDisplay.getMessage();
 MBCategory category = messageDisplay.getCategory();
 
 MBThread thread = messageDisplay.getThread();
-
-MBThread previousThread = messageDisplay.getPreviousThread();
-MBThread nextThread = messageDisplay.getNextThread();
-
-MBMessageFlag messageFlag = MBMessageFlagLocalServiceUtil.getReadFlag(themeDisplay.getUserId(), thread);
-
-PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
-
-String threadView = messageDisplay.getThreadView();
 %>
 
 <liferay-util:include page="/html/portlet/message_boards/top_links.jsp" />
@@ -82,11 +73,11 @@ String threadView = messageDisplay.getThreadView();
 			<aui:input name="breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>" />
 			<aui:input name="threadId" type="hidden" value="<%= message.getThreadId() %>" />
 
-			<%@ include file="/html/portlet/message_boards/view_message_content.jspf" %>
+			<liferay-util:include page="/html/portlet/message_boards/view_message_content.jsp" />
 		</aui:form>
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/message_boards/view_message_content.jspf" %>
+		<liferay-util:include page="/html/portlet/message_boards/view_message_content.jsp" />
 	</c:otherwise>
 </c:choose>
 

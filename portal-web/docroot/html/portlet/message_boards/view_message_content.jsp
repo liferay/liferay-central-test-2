@@ -22,6 +22,25 @@
  */
 %>
 
+<%@ include file="/html/portlet/message_boards/init.jsp" %>
+
+<%
+MBMessageDisplay messageDisplay = (MBMessageDisplay)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
+
+MBMessage message = messageDisplay.getMessage();
+
+MBCategory category = messageDisplay.getCategory();
+
+MBThread thread = messageDisplay.getThread();
+
+MBThread previousThread = messageDisplay.getPreviousThread();
+MBThread nextThread = messageDisplay.getNextThread();
+
+MBMessageFlag messageFlag = MBMessageFlagLocalServiceUtil.getReadFlag(themeDisplay.getUserId(), thread);
+
+String threadView = messageDisplay.getThreadView();
+%>
+
 <table cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td class="stretch"></td>
