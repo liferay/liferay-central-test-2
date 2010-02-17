@@ -336,6 +336,14 @@ public class PollsQuestionLocalServiceImpl
 		if ((choices != null) && (choices.size() < 2)) {
 			throw new QuestionChoiceException();
 		}
+
+		for (PollsChoice choice : choices) {
+			String choiceDescription = choice.getDescription(locale);
+
+			if (Validator.isNull(choiceDescription)) {
+				throw new QuestionChoiceException();
+			}
+		}
 	}
 
 }
