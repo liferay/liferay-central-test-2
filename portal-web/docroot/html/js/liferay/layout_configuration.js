@@ -58,7 +58,7 @@ AUI().add(
 					var data = function(node) {
 						var value = node.attr('id');
 
-						return Liferay.Util.uncamelize(value).toLowerCase();
+						return [ Liferay.Util.uncamelize(value), value ].join(' ').toLowerCase();
 					};
 
 					var isVisible = function(item, index, collection) {

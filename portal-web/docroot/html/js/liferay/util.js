@@ -1231,7 +1231,7 @@ Liferay.Util = {
 	uncamelize: function(value, separator) {
 		separator = separator || ' ';
 
-		value = value.replace(/([a-z])([A-Z])([a-z])/g, '$1' + separator + '$2$3');
+		value = value.replace(/([a-zA-Z][a-zA-Z])([A-Z])([a-z])/g, '$1' + separator + '$2$3');
 		value = value.replace(/([a-z])([A-Z])/g, '$1' + separator + '$2');
 
 		return value;
