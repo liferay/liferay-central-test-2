@@ -1463,6 +1463,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SEARCH_CONTAINER_SHOW_PAGINATION_TOP));
 
+	public static final boolean SEARCH_CONTAINER_SHOW_PAGINATION_BOTTOM =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SEARCH_CONTAINER_SHOW_PAGINATION_BOTTOM));
+
 	public static final String[] SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES =
 		PropsUtil.getArray(
 			PropsKeys.SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES);

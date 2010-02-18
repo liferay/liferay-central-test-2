@@ -288,7 +288,7 @@ List<String> primaryKeys = new ArrayList<String>();
 		</table>
 	</div>
 
-	<c:if test="<%= paginate %>">
+	<c:if test="<%= PropsValues.SEARCH_CONTAINER_SHOW_PAGINATION_BOTTOM && paginate %>">
 		<div class="taglib-search-iterator-page-iterator-bottom">
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</div>
