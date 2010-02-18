@@ -581,7 +581,19 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		long curUserId = getUserId();
 
 		if (curUserId == userId) {
-			checkUserPermission(userId, screenName, emailAddress);
+			User user = userPersistence.findByPrimaryKey(userId);
+
+			screenName = screenName.trim().toLowerCase();
+
+			if (!screenName.equalsIgnoreCase(user.getScreenName())) {
+				validateScreenName(user, screenName);
+			}
+
+			emailAddress = emailAddress.trim().toLowerCase();
+
+			if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
+				validateEmailAddress(user, emailAddress);
+			}
 		}
 
 		if (groupIds != null) {
@@ -762,30 +774,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return roleIds;
 	}
 
-	protected void checkUserEmailAddressPermission(
-			User user, String emailAddress)
-		throws PortalException, SystemException {
-
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		boolean adminEditiableEmailAddress =
-			PropsValues.
-				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN;
-
-		if (adminEditiableEmailAddress && !permissionChecker.isCompanyAdmin()) {
-			throw new UserEmailAddressException();
-		}
-
-		if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
-			Company company = companyPersistence.findByPrimaryKey(
-				user.getCompanyId());
-
-			if (!company.isStrangersWithMx()) {
-				throw new ReservedUserEmailAddressException();
-			}
-		}
-	}
-
 	protected List<UserGroupRole> checkUserGroupRoles(
 			long userId, List<UserGroupRole> userGroupRoles)
 		throws PortalException, SystemException {
@@ -827,38 +815,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return userGroupRoles;
 	}
 
-	protected void checkUserPermission(
-			long userId, String screenName, String emailAddress)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		screenName = screenName.trim().toLowerCase();
-		emailAddress = emailAddress.trim().toLowerCase();
-
-		if (!screenName.equalsIgnoreCase(user.getScreenName())) {
-			checkUserScreenNamePermission(user, screenName);
-		}
-
-		if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
-			checkUserEmailAddressPermission(user, emailAddress);
-		}
-	}
-
-	protected void checkUserScreenNamePermission(User user, String screenName)
-		throws PortalException, SystemException {
-
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		boolean adminEditiableScreenName =
-			PropsValues.
-				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN;
-
-		if (adminEditiableScreenName && !permissionChecker.isCompanyAdmin()) {
-			throw new UserScreenNameException();
-		}
-	}
-
 	protected void updateAnnouncementsDeliveries(
 			long userId, List<AnnouncementsDelivery> announcementsDeliveries)
 		throws PortalException, SystemException {
@@ -871,6 +827,47 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 				announcementsDelivery.getEmail(),
 				announcementsDelivery.getSms(),
 				announcementsDelivery.getWebsite());
+		}
+	}
+
+	protected void validateEmailAddress(User user, String emailAddress)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		boolean fieldEditiableUserEmailAddressAdmin =
+			PropsValues.
+				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN;
+
+		if (fieldEditiableUserEmailAddressAdmin &&
+			!permissionChecker.isCompanyAdmin()) {
+
+			throw new UserEmailAddressException();
+		}
+
+		if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
+			Company company = companyPersistence.findByPrimaryKey(
+				user.getCompanyId());
+
+			if (!company.isStrangersWithMx()) {
+				throw new ReservedUserEmailAddressException();
+			}
+		}
+	}
+
+	protected void validateScreenName(User user, String screenName)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		boolean fieldEditiableUserScreenNameAdmin =
+			PropsValues.
+				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN;
+
+		if (fieldEditiableUserScreenNameAdmin &&
+			!permissionChecker.isCompanyAdmin()) {
+
+			throw new UserScreenNameException();
 		}
 	}
 
