@@ -56,9 +56,12 @@ AUI().add(
 					instance.categoryContainers = menu.all('.lfr-add-content');
 
 					var data = function(node) {
-						var value = node.attr('id');
+						var value = node.attr('title');
+						var contentParent = node.ancestor('.lfr-add-content');
 
-						return Liferay.Util.uncamelize(value).toLowerCase();
+						value = contentParent != null ? contentParent.attr('title') + '-' + value : value;
+
+						return value.toLowerCase();
 					};
 
 					var isVisible = function(item, index, collection) {

@@ -86,7 +86,8 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 if (!categories.isEmpty() || !portlets.isEmpty()) {
 %>
 
-	<div class="lfr-add-content <%= (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) ? "collapsed" : "" %>" id="<%= newCategoryPath.replace(':', '-') %>">
+	<div class="lfr-add-content <%= (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) ? "collapsed" : "" %>" id="<%= newCategoryPath.replace(':', '-') %>"
+		title="<%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %>">
 		<h2>
 			<span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span>
 		</h2>
