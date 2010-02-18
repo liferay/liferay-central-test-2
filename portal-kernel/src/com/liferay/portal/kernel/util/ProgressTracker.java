@@ -48,6 +48,20 @@ public class ProgressTracker {
 		_progressId = progressId;
 	}
 
+	public int getProgress() {
+		if (_request != null) {
+			HttpSession session = _request.getSession(true);
+
+			return (Integer)session.getAttribute(PERCENT + _progressId);
+		}
+		else {
+			PortletSession portletSession = _portletRequest.getPortletSession(
+				true);
+
+			return (Integer)portletSession.getAttribute(PERCENT + _progressId);
+		}
+	}
+
 	public void start() {
 		updateProgress(1);
 	}
