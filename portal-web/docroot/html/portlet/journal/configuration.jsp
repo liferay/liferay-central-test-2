@@ -231,7 +231,7 @@ else if (tabs2.equals("web-content-review-email")) {
 	}
 
 	function <portlet:namespace />saveConfiguration() {
-		<c:if test='<%= tabs2.startsWith("article-approval-") || tabs2.startsWith("article-review-") %>'>
+		<c:if test='<%= tabs2.startsWith("web-content-approval-") || tabs2.startsWith("web-content-review-") %>'>
 			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
 		</c:if>
 
