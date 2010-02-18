@@ -788,44 +788,50 @@ public class LayoutImporter {
 	}
 
 	protected void fixTypeSettings(Layout layout) {
-		if (layout.getType().equals(LayoutConstants.TYPE_URL)) {
-			UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
-
-			String url = GetterUtil.getString(typeSettings.getProperty("url"));
-
-			String friendlyURLPrivateGroupPath =
-				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
-			String friendlyURLPrivateUserPath =
-				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
-			String friendlyURLPublicPath =
-				PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
-
-			if (url.startsWith(friendlyURLPrivateGroupPath) ||
-				url.startsWith(friendlyURLPrivateUserPath) ||
-				url.startsWith(friendlyURLPublicPath)) {
-
-				int x = url.indexOf(StringPool.SLASH, 1);
-
-				if (x > 0) {
-					int y = url.indexOf(StringPool.SLASH, x + 1);
-
-					if (y > x) {
-						String friendlyURL = url.substring(x, y);
-
-						if (Validator.equals(
-								friendlyURL, _SAME_COMMUNITY_FRIENDLY_URL)) {
-
-							String fixedUrl =
-								url.substring(0, x) +
-									layout.getGroup().getFriendlyURL() +
-									url.substring(y);
-
-							typeSettings.setProperty("url", fixedUrl);
-						}
-					}
-				}
-			}
+		if (!layout.getType().equals(LayoutConstants.TYPE_URL)) {
+			return;
 		}
+
+		UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
+
+		String url = GetterUtil.getString(typeSettings.getProperty("url"));
+
+		String friendlyURLPrivateGroupPath =
+			PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
+		String friendlyURLPrivateUserPath =
+			PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
+		String friendlyURLPublicPath =
+			PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
+
+		if (!url.startsWith(friendlyURLPrivateGroupPath) &&
+			!url.startsWith(friendlyURLPrivateUserPath) &&
+			!url.startsWith(friendlyURLPublicPath)) {
+
+			return;
+		}
+
+		int x = url.indexOf(StringPool.SLASH, 1);
+
+		if (x == -1) {
+			return;
+		}
+
+		int y = url.indexOf(StringPool.SLASH, x + 1);
+
+		if (y == -1) {
+			return;
+		}
+
+		String friendlyURL = url.substring(x, y);
+
+		if (!friendlyURL.equals(LayoutExporter.SAME_GROUP_FRIENDLY_URL)) {
+			return;
+		}
+
+		typeSettings.setProperty(
+			"url",
+			url.substring(0, x) + layout.getGroup().getFriendlyURL() +
+				url.substring(y));
 	}
 
 	protected List<String> getActions(Element el) {
@@ -1726,9 +1732,6 @@ public class LayoutImporter {
 
 		return portletIds;
 	}
-
-	private static final String _SAME_COMMUNITY_FRIENDLY_URL =
-		"/[$SAME_COMMUNITY_FRIENDLY_URL$]";
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutImporter.class);
 

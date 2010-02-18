@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -102,6 +101,9 @@ import org.apache.commons.lang.time.StopWatch;
  * @author Karthik Sudarshan
  */
 public class LayoutExporter {
+
+	public static final String SAME_GROUP_FRIENDLY_URL =
+		"/[$SAME_GROUP_FRIENDLY_URL$]";
 
 	public static List<Portlet> getAlwaysExportablePortlets(long companyId)
 		throws SystemException {
@@ -752,44 +754,50 @@ public class LayoutExporter {
 	}
 
 	protected void fixTypeSettings(Layout layout) {
-		if (layout.getType().equals(LayoutConstants.TYPE_URL)) {
-			UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
-
-			String url = GetterUtil.getString(typeSettings.getProperty("url"));
-
-			String friendlyURLPrivateGroupPath =
-				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
-			String friendlyURLPrivateUserPath =
-				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
-			String friendlyURLPublicPath =
-				PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
-
-			if (url.startsWith(friendlyURLPrivateGroupPath) ||
-				url.startsWith(friendlyURLPrivateUserPath) ||
-				url.startsWith(friendlyURLPublicPath)) {
-
-				int x = url.indexOf(StringPool.SLASH, 1);
-
-				if (x > 0) {
-					int y = url.indexOf(StringPool.SLASH, x + 1);
-
-					if (y > x) {
-						String friendlyURL = url.substring(x, y);
-						String groupFriendlyURL =
-							layout.getGroup().getFriendlyURL();
-
-						if (Validator.equals(friendlyURL, groupFriendlyURL)) {
-							String fixedUrl =
-								url.substring(0, x) +
-									_SAME_COMMUNITY_FRIENDLY_URL +
-									url.substring(y);
-
-							typeSettings.setProperty("url", fixedUrl);
-						}
-					}
-				}
-			}
+		if (!layout.getType().equals(LayoutConstants.TYPE_URL)) {
+			return;
 		}
+
+		UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
+
+		String url = GetterUtil.getString(typeSettings.getProperty("url"));
+
+		String friendlyURLPrivateGroupPath =
+			PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
+		String friendlyURLPrivateUserPath =
+			PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
+		String friendlyURLPublicPath =
+			PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
+
+		if (!url.startsWith(friendlyURLPrivateGroupPath) &&
+			!url.startsWith(friendlyURLPrivateUserPath) &&
+			!url.startsWith(friendlyURLPublicPath)) {
+
+			return;
+		}
+
+		int x = url.indexOf(StringPool.SLASH, 1);
+
+		if (x == -1) {
+			return;
+		}
+
+		int y = url.indexOf(StringPool.SLASH, x + 1);
+
+		if (y == -1) {
+			return;
+		}
+
+		String friendlyURL = url.substring(x, y);
+		String groupFriendlyURL = layout.getGroup().getFriendlyURL();
+
+		if (!friendlyURL.equals(groupFriendlyURL)) {
+			return;
+		}
+
+		typeSettings.setProperty(
+			"url",
+			url.substring(0, x) + SAME_GROUP_FRIENDLY_URL + url.substring(y));
 	}
 
 	protected boolean[] getExportPortletControls(
@@ -918,9 +926,6 @@ public class LayoutExporter {
 				assetCategories, parentEl, parentCategory.getCategoryId());
 		}
 	}
-
-	private static final String _SAME_COMMUNITY_FRIENDLY_URL =
-		"/[$SAME_COMMUNITY_FRIENDLY_URL$]";
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutExporter.class);
 
