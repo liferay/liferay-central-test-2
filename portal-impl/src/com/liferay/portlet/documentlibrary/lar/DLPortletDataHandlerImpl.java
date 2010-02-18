@@ -270,7 +270,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					existingFileEntry = DLFileEntryUtil.findByUUID_G(
 						fileEntry.getUuid(), groupId);
 
-					if (!isSameFile(fileEntry, existingFileEntry)) {
+					if (!isDuplicateFileEntry(fileEntry, existingFileEntry)) {
 						existingFileEntry =
 							DLFileEntryLocalServiceUtil.updateFileEntry(
 								userId, groupId,
@@ -875,19 +875,26 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
-	protected static boolean isSameFile(
+	protected static boolean isDuplicateFileEntry(
 		DLFileEntry fileEntry1, DLFileEntry fileEntry2) {
 
 		try {
-			return
-				fileEntry1.getFolder().getUuid().equals(
-					fileEntry2.getFolder().getUuid()) &&
-				fileEntry1.getSize() == fileEntry2.getSize() &&
-				fileEntry1.getVersion() == fileEntry2.getVersion() &&
-				fileEntry1.getVersionUserUuid().equals(
-					fileEntry2.getVersionUserUuid());
+			DLFolder folder1 = fileEntry1.getFolder();
+			DLFolder folder2 = fileEntry2.getFolder();
+
+			if ((folder1.equals(folder2.getUuid())) &&
+				(fileEntry1.getSize() == fileEntry2.getSize()) &&
+				(fileEntry1.getVersion() == fileEntry2.getVersion()) &&
+				(fileEntry1.getVersionUserUuid().equals(
+					fileEntry2.getVersionUserUuid())) {
+
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-		catch (SystemException e) {
+		catch (SystemException se) {
 			return false;
 		}
 	}
