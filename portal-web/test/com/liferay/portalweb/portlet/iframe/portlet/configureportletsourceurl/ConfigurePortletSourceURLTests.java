@@ -24,8 +24,6 @@ package com.liferay.portalweb.portlet.iframe.portlet.configureportletsourceurl;
 
 import com.liferay.portalweb.portal.BaseTests;
 
-import java.util.*;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
