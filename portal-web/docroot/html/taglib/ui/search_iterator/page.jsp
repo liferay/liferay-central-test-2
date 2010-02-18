@@ -70,7 +70,7 @@ List<String> primaryKeys = new ArrayList<String>();
 </c:if>
 
 <c:if test="<%= !resultRows.isEmpty() %>">
-	<c:if test="<%= (resultRows.size() > 10) && paginate %>">
+	<c:if test="<%= PropsValues.SEARCH_CONTAINER_SHOW_PAGINATION_TOP && (resultRows.size() > 10) && paginate %>">
 		<div class="taglib-search-iterator-page-iterator-top">
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</div>
