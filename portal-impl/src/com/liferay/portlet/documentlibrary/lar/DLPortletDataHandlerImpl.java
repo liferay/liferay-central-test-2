@@ -270,14 +270,17 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					existingFileEntry = DLFileEntryUtil.findByUUID_G(
 						fileEntry.getUuid(), groupId);
 
-					existingFileEntry =
-						DLFileEntryLocalServiceUtil.updateFileEntry(
-							userId, groupId, existingFileEntry.getFolderId(),
-							folderId, existingFileEntry.getName(),
-							fileEntry.getTitle(), fileEntry.getTitle(),
-							fileEntry.getDescription(), null,
-							fileEntry.getExtraSettings(), is,
-							fileEntry.getSize(), serviceContext);
+					if (!isSameFile(fileEntry, existingFileEntry)) {
+						existingFileEntry =
+							DLFileEntryLocalServiceUtil.updateFileEntry(
+								userId, groupId,
+								existingFileEntry.getFolderId(), folderId,
+								existingFileEntry.getName(),
+								fileEntry.getTitle(), fileEntry.getTitle(),
+								fileEntry.getDescription(), null,
+								fileEntry.getExtraSettings(), is,
+								fileEntry.getSize(), serviceContext);
+					}
 				}
 				catch (NoSuchFileEntryException nsfee) {
 					existingFileEntry =
@@ -869,6 +872,23 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			_log.error(
 				"Could not find the folder for shortcut " +
 					fileShortcut.getFileShortcutId());
+		}
+	}
+
+	protected static boolean isSameFile(
+		DLFileEntry fileEntry1, DLFileEntry fileEntry2) {
+
+		try {
+			return
+				fileEntry1.getFolder().getUuid().equals(
+					fileEntry2.getFolder().getUuid()) &&
+				fileEntry1.getSize() == fileEntry2.getSize() &&
+				fileEntry1.getVersion() == fileEntry2.getVersion() &&
+				fileEntry1.getVersionUserUuid().equals(
+					fileEntry2.getVersionUserUuid());
+		}
+		catch (SystemException e) {
+			return false;
 		}
 	}
 
