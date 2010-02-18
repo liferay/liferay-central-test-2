@@ -1459,13 +1459,13 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_ITERATOR_MAX_PAGES));
 
-	public static final boolean SEARCH_CONTAINER_SHOW_PAGINATION_TOP =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.SEARCH_CONTAINER_SHOW_PAGINATION_TOP));
-
 	public static final boolean SEARCH_CONTAINER_SHOW_PAGINATION_BOTTOM =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SEARCH_CONTAINER_SHOW_PAGINATION_BOTTOM));
+
+	public static final boolean SEARCH_CONTAINER_SHOW_PAGINATION_TOP =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SEARCH_CONTAINER_SHOW_PAGINATION_TOP));
 
 	public static final String[] SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES =
 		PropsUtil.getArray(
