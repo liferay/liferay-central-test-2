@@ -59,7 +59,9 @@ AUI().add(
 						var value = node.attr('title');
 						var contentParent = node.ancestor('.lfr-add-content');
 
-						value = contentParent != null ? contentParent.attr('title') + '-' + value : value;
+						if (contentParent != null) {
+							value = contentParent.attr('title') + '-' + value;
+						}
 
 						return value.toLowerCase();
 					};
