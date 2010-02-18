@@ -886,7 +886,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				(fileEntry1.getSize() == fileEntry2.getSize()) &&
 				(fileEntry1.getVersion() == fileEntry2.getVersion()) &&
 				(fileEntry1.getVersionUserUuid().equals(
-					fileEntry2.getVersionUserUuid())) {
+					fileEntry2.getVersionUserUuid()))) {
 
 				return true;
 			}
