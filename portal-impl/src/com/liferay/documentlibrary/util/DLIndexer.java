@@ -33,8 +33,6 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -51,9 +49,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Properties;
 
 import javax.portlet.PortletURL;
 
@@ -133,29 +128,7 @@ public class DLIndexer extends BaseIndexer {
 		}
 
 		if (properties == null) {
-			Properties extraSettingsProps =
-				fileEntry.getExtraSettingsProperties();
-
-			Iterator<Map.Entry<Object, Object>> itr =
-				extraSettingsProps.entrySet().iterator();
-
-			StringBundler sb = new StringBundler(
-				extraSettingsProps.entrySet().size() + 4);
-
-			sb.append(fileEntry.getTitle());
-			sb.append(StringPool.SPACE);
-			sb.append(fileEntry.getDescription());
-			sb.append(StringPool.SPACE);
-
-			while (itr.hasNext()) {
-				Map.Entry<Object, Object> entry = itr.next();
-
-				String value = GetterUtil.getString((String)entry.getValue());
-
-				sb.append(value);
-			}
-
-			properties = sb.toString();
+			properties = fileEntry.getLuceneProperties();
 		}
 
 		if (assetCategoryIds == null) {

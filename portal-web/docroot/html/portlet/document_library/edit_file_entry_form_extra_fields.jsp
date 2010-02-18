@@ -28,12 +28,20 @@
 
 --%>
 
+<%--
+UnicodeProperties extraSettingsProperties = new UnicodeProperties();
+
+if (fileEntry != null) {
+	extraSettingsProperties = fileEntry.getExtraSettingsProperties();
+}
+--%>
+
 <%--<tr>
 	<td class="lfr-label">
 		<liferay-ui:message key="author" />
 	</td>
 	<td>
-		<input name="ExtraSettingsProperties(author)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(author)" />" />
+		<input name="extraSettingsProperties(author)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= GetterUtil.getString(extraSettingsProperties.getProperty("author")) %>" />
 	</td>
 </tr>
 <tr>
@@ -41,6 +49,6 @@
 		<liferay-ui:message key="type" />
 	</td>
 	<td>
-		<input name="ExtraSettingsProperties(type)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(type)" />" />
+		<input name="extraSettingsProperties(type)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= GetterUtil.getString(extraSettingsProperties.getProperty("type")) %>" />
 	</td>
 </tr>--%>

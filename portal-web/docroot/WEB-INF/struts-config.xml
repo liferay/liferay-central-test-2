@@ -6,7 +6,6 @@
 	<!-- Forms Beans -->
 
 	<form-beans>
-		<form-bean name="documentLibraryFileEntryForm" type="com.liferay.portlet.documentlibrary.form.FileEntryForm" />
 		<form-bean name="mapsMapsForm" type="com.liferay.portlet.maps.form.MapsForm" />
 	</form-beans>
 
@@ -398,7 +397,7 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
-		<action path="/document_library/edit_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction" name="documentLibraryFileEntryForm">
+		<action path="/document_library/edit_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction">
 			<forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.edit_file_entry" />
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>

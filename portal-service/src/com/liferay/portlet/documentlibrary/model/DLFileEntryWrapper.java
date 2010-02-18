@@ -284,7 +284,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.toXmlString();
 	}
 
-	public java.util.Properties getExtraSettingsProperties() {
+	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties() {
 		return _dlFileEntry.getExtraSettingsProperties();
 	}
 
@@ -313,7 +313,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	public void setExtraSettingsProperties(
-		java.util.Properties extraSettingsProperties) {
+		com.liferay.portal.kernel.util.UnicodeProperties extraSettingsProperties) {
 		_dlFileEntry.setExtraSettingsProperties(extraSettingsProperties);
 	}
 

@@ -50,7 +50,7 @@ package com.liferay.portlet.documentlibrary.model;
 public interface DLFileEntry extends DLFileEntryModel {
 	public java.lang.String getExtraSettings();
 
-	public java.util.Properties getExtraSettingsProperties();
+	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties();
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
 
@@ -67,5 +67,5 @@ public interface DLFileEntry extends DLFileEntryModel {
 	public void setExtraSettings(java.lang.String extraSettings);
 
 	public void setExtraSettingsProperties(
-		java.util.Properties extraSettingsProperties);
+		com.liferay.portal.kernel.util.UnicodeProperties extraSettingsProperties);
 }

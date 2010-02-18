@@ -26,10 +26,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -42,7 +41,6 @@ import java.io.IOException;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * <a href="DLFileEntryImpl.java.html"><b><i>View Source</i></b></a>
@@ -70,17 +68,16 @@ public class DLFileEntryImpl
 			return super.getExtraSettings();
 		}
 		else {
-			return PropertiesUtil.toString(_extraSettingsProperties);
+			return _extraSettingsProperties.toString();
 		}
 	}
 
-	public Properties getExtraSettingsProperties() {
+	public UnicodeProperties getExtraSettingsProperties() {
 		if (_extraSettingsProperties == null) {
-			_extraSettingsProperties = new SafeProperties();
+			_extraSettingsProperties = new UnicodeProperties(true);
 
 			try {
-				PropertiesUtil.load(
-					_extraSettingsProperties, super.getExtraSettings());
+				_extraSettingsProperties.load(super.getExtraSettings());
 			}
 			catch (IOException ioe) {
 				_log.error(ioe);
@@ -125,9 +122,9 @@ public class DLFileEntryImpl
 	}
 
 	public String getLuceneProperties() {
-		Properties extraSettingsProps = getExtraSettingsProperties();
+		UnicodeProperties extraSettingsProps = getExtraSettingsProperties();
 
-		Iterator<Map.Entry<Object, Object>> itr =
+		Iterator<Map.Entry<String, String>> itr =
 			extraSettingsProps.entrySet().iterator();
 
 		StringBundler sb = new StringBundler(
@@ -139,9 +136,9 @@ public class DLFileEntryImpl
 		sb.append(StringPool.SPACE);
 
 		while (itr.hasNext()) {
-			Map.Entry<Object, Object> entry = itr.next();
+			Map.Entry<String, String> entry = itr.next();
 
-			String value = GetterUtil.getString((String)entry.getValue());
+			String value = GetterUtil.getString(entry.getValue());
 
 			sb.append(value);
 		}
@@ -187,15 +184,16 @@ public class DLFileEntryImpl
 		super.setExtraSettings(extraSettings);
 	}
 
-	public void setExtraSettingsProperties(Properties extraSettingsProperties) {
+	public void setExtraSettingsProperties(
+		UnicodeProperties extraSettingsProperties) {
+
 		_extraSettingsProperties = extraSettingsProperties;
 
-		super.setExtraSettings(
-			PropertiesUtil.toString(_extraSettingsProperties));
+		super.setExtraSettings(_extraSettingsProperties.toString());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLFileEntryImpl.class);
 
-	private Properties _extraSettingsProperties = null;
+	private UnicodeProperties _extraSettingsProperties = null;
 
 }

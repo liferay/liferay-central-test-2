@@ -31,7 +31,8 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.PropertiesParamUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -45,7 +46,6 @@ import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
-import com.liferay.portlet.documentlibrary.form.FileEntryForm;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 
@@ -74,13 +74,11 @@ public class EditFileEntryAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		FileEntryForm fileEntryForm = (FileEntryForm)form;
-
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateFileEntry(fileEntryForm, actionRequest, actionResponse);
+				updateFileEntry(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFileEntry(actionRequest);
@@ -195,8 +193,7 @@ public class EditFileEntryAction extends PortletAction {
 	}
 
 	protected void updateFileEntry(
-			FileEntryForm fileEntryForm, ActionRequest actionRequest,
-			ActionResponse actionResponse)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
@@ -218,8 +215,11 @@ public class EditFileEntryAction extends PortletAction {
 		String versionDescription = ParamUtil.getString(
 			uploadRequest, "versionDescription");
 
-		String extraSettings = PropertiesUtil.toString(
-			fileEntryForm.getExtraSettingsProperties());
+		UnicodeProperties extraSettingsProperties =
+			PropertiesParamUtil.getProperties(
+				actionRequest, "extraSettingsProperties(");
+
+		String extraSettings = extraSettingsProperties.toString();
 
 		File file = uploadRequest.getFile("file");
 
