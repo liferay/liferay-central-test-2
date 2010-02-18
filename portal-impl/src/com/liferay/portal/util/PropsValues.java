@@ -404,14 +404,6 @@ public class PropsValues {
 	public static final String[] COMPANY_SETTINGS_FORM_MISCELLANEOUS =
 		PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_MISCELLANEOUS);
 
-	public static final boolean COMPANY_USERS_EMAIL_ADDRESS_EDITABLE =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.COMPANY_USERS_EMAIL_ADDRESS_EDITABLE));
-
-	public static final boolean COMPANY_USERS_SCREEN_NAME_EDITABLE =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.COMPANY_USERS_SCREEN_NAME_EDITABLE));
-
 	public static final String CONTROL_PANEL_DEFAULT_ENTRY_CLASS =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS);
 
@@ -628,6 +620,11 @@ public class PropsValues {
 			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS.equals(
 				"administrator");
 
+	public static final boolean
+		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_USER_MX =
+			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS.equals(
+				"user-mx");
+
 	public static final String
 		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME =
 			PropsUtil.get(PropsKeys.
@@ -637,6 +634,11 @@ public class PropsValues {
 		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN =
 			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME.equals(
 				"administrator");
+
+	public static final boolean
+		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_USER_MX =
+			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME.equals(
+				"user-mx");
 
 	public static boolean
 		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY =

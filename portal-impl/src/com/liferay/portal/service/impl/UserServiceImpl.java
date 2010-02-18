@@ -835,9 +835,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		boolean fieldEditiableUserEmailAddressAdmin =
-			PropsValues.
-				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN;
+		boolean fieldEditiableUserEmailAddressAdmin = PropsValues.
+			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN;
 
 		if (fieldEditiableUserEmailAddressAdmin &&
 			!permissionChecker.isCompanyAdmin()) {
@@ -845,8 +844,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			throw new UserEmailAddressException();
 		}
 
-		if (user.hasCompanyMx() &&
-			!PropsValues.COMPANY_USERS_EMAIL_ADDRESS_EDITABLE) {
+		boolean fieldEditiableUserEmailAddressUserWithMX = PropsValues.
+			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_USER_MX;
+
+		if (fieldEditiableUserEmailAddressUserWithMX &&
+			!user.hasCompanyMx()) {
 
 			throw new UserEmailAddressException();
 		}
@@ -866,9 +868,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		boolean fieldEditiableUserScreenNameAdmin =
-			PropsValues.
-				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN;
+		boolean fieldEditiableUserScreenNameAdmin = PropsValues.
+			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN;
 
 		if (fieldEditiableUserScreenNameAdmin &&
 			!permissionChecker.isCompanyAdmin()) {
@@ -876,8 +877,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			throw new UserScreenNameException();
 		}
 
-		if (user.hasCompanyMx() &&
-			!PropsValues.COMPANY_USERS_SCREEN_NAME_EDITABLE) {
+		boolean fieldEditiableUserScreenNameUserWithMX = PropsValues.
+			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_USER_MX;
+
+		if (fieldEditiableUserScreenNameUserWithMX &&
+			!user.hasCompanyMx()) {
 
 			throw new UserScreenNameException();
 		}

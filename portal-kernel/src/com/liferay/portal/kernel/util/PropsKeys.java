@@ -337,10 +337,6 @@ public interface PropsKeys {
 
 	public static final String COMPANY_SETTINGS_FORM_MISCELLANEOUS = "company.settings.form.miscellaneous";
 
-	public static final String COMPANY_USERS_EMAIL_ADDRESS_EDITABLE = "company.users.email.address.editable";
-
-	public static final String COMPANY_USERS_SCREEN_NAME_EDITABLE = "company.users.screen.name.editable";
-
 	public static final String CONTROL_PANEL_DEFAULT_ENTRY_CLASS = "control.panel.default.entry.class";
 
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL = "control.panel.layout.friendly.url";
