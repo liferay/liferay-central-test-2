@@ -845,6 +845,12 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			throw new UserEmailAddressException();
 		}
 
+		if (user.hasCompanyMx() &&
+			!PropsValues.COMPANY_USERS_EMAIL_ADDRESS_EDITABLE) {
+
+			throw new UserEmailAddressException();
+		}
+
 		if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
 			Company company = companyPersistence.findByPrimaryKey(
 				user.getCompanyId());
@@ -866,6 +872,12 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		if (fieldEditiableUserScreenNameAdmin &&
 			!permissionChecker.isCompanyAdmin()) {
+
+			throw new UserScreenNameException();
+		}
+
+		if (user.hasCompanyMx() &&
+			!PropsValues.COMPANY_USERS_SCREEN_NAME_EDITABLE) {
 
 			throw new UserScreenNameException();
 		}

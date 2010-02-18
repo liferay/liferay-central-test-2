@@ -66,7 +66,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">
 		<c:choose>
-			<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN && !permissionChecker.isCompanyAdmin()) %>">
+			<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN && !permissionChecker.isCompanyAdmin()) || (selUser.hasCompanyMx() && !PropsValues.COMPANY_USERS_SCREEN_NAME_EDITABLE) %>">
 				<aui:field-wrapper name="screenName">
 					<%= selUser.getScreenName() %>
 
@@ -84,7 +84,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 
 	<c:choose>
-		<c:when test="<%= (selUser != null) && (PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN && !permissionChecker.isCompanyAdmin()) %>">
+		<c:when test="<%= (selUser != null) && ((PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN && !permissionChecker.isCompanyAdmin()) || (selUser.hasCompanyMx() && !PropsValues.COMPANY_USERS_EMAIL_ADDRESS_EDITABLE)) %>">
 			<aui:field-wrapper name="emailAddress">
 				<%= displayEmailAddress %>
 

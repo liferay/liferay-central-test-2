@@ -404,6 +404,14 @@ public class PropsValues {
 	public static final String[] COMPANY_SETTINGS_FORM_MISCELLANEOUS =
 		PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_MISCELLANEOUS);
 
+	public static final boolean COMPANY_USERS_EMAIL_ADDRESS_EDITABLE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.COMPANY_USERS_EMAIL_ADDRESS_EDITABLE));
+
+	public static final boolean COMPANY_USERS_SCREEN_NAME_EDITABLE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.COMPANY_USERS_SCREEN_NAME_EDITABLE));
+
 	public static final String CONTROL_PANEL_DEFAULT_ENTRY_CLASS =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS);
 
