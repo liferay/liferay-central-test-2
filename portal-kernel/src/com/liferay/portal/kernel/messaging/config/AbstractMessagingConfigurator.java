@@ -118,6 +118,8 @@ public abstract class AbstractMessagingConfigurator
 
 		for (Destination destination : _destinations) {
 			messageBus.removeDestination(destination.getName());
+
+			destination.close();
 		}
 
 		for (DestinationEventListener destinationEventListener :
