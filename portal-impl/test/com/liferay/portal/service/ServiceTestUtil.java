@@ -207,7 +207,8 @@ public class ServiceTestUtil {
 			portlet.setCompanyId(TestPropsValues.COMPANY_ID);
 			portlet.setPortletModes(new HashMap<String, Set<String>>());
 
-			PortletLocalServiceUtil.deployRemotePortlet(portlet);
+			PortletLocalServiceUtil.deployRemotePortlet(
+				portlet, "category.test");
 
 			List<String> portletActions =
 				ResourceActionsUtil.getPortletResourceActions(portletId);
