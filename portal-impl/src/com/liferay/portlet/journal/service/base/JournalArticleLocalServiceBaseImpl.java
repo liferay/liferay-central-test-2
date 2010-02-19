@@ -35,20 +35,26 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.PortletPreferencesService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
@@ -412,6 +418,38 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		this.companyPersistence = companyPersistence;
 	}
 
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
+	}
+
 	public ImageLocalService getImageLocalService() {
 		return imageLocalService;
 	}
@@ -495,6 +533,24 @@ public abstract class JournalArticleLocalServiceBaseImpl
 
 	public void setResourceFinder(ResourceFinder resourceFinder) {
 		this.resourceFinder = resourceFinder;
+	}
+
+	public SubscriptionLocalService getSubscriptionLocalService() {
+		return subscriptionLocalService;
+	}
+
+	public void setSubscriptionLocalService(
+		SubscriptionLocalService subscriptionLocalService) {
+		this.subscriptionLocalService = subscriptionLocalService;
+	}
+
+	public SubscriptionPersistence getSubscriptionPersistence() {
+		return subscriptionPersistence;
+	}
+
+	public void setSubscriptionPersistence(
+		SubscriptionPersistence subscriptionPersistence) {
+		this.subscriptionPersistence = subscriptionPersistence;
 	}
 
 	public UserLocalService getUserLocalService() {
@@ -794,6 +850,14 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	protected CompanyService companyService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence")
 	protected CompanyPersistence companyPersistence;
+	@BeanReference(name = "com.liferay.portal.service.GroupLocalService")
+	protected GroupLocalService groupLocalService;
+	@BeanReference(name = "com.liferay.portal.service.GroupService")
+	protected GroupService groupService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
+	protected GroupPersistence groupPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder")
+	protected GroupFinder groupFinder;
 	@BeanReference(name = "com.liferay.portal.service.ImageLocalService")
 	protected ImageLocalService imageLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
@@ -814,6 +878,10 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
 	protected ResourceFinder resourceFinder;
+	@BeanReference(name = "com.liferay.portal.service.SubscriptionLocalService")
+	protected SubscriptionLocalService subscriptionLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence")
+	protected SubscriptionPersistence subscriptionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
 	protected UserLocalService userLocalService;
 	@BeanReference(name = "com.liferay.portal.service.UserService")
