@@ -104,7 +104,7 @@ String[] hiddenNodes = StringUtil.split(preferences.getValue("hidden-nodes", nul
 int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
-StringBuilder rssURLParams = new StringBuilder();
+StringBundler rssURLParams = new StringBundler(4);
 
 if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
 	if (rssDelta != SearchContainer.DEFAULT_DELTA) {
@@ -117,21 +117,25 @@ if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssDisplayStyle.equals(RSSUt
 		rssURLParams.append(rssDisplayStyle);
 	}
 }
+String rssURLParam = rssURLParams.toString();
 
-StringBuilder rssURLAtomParams = new StringBuilder(rssURLParams.toString());
+StringBundler rssURLAtomParams = new StringBundler(4);
 
+rssURLAtomParams.append(rssURLParam);
 rssURLAtomParams.append("&type=");
 rssURLAtomParams.append(RSSUtil.ATOM);
 rssURLAtomParams.append("&version=1.0");
 
-StringBuilder rssURLRSS10Params = new StringBuilder(rssURLParams.toString());
+StringBundler rssURLRSS10Params = new StringBundler(4);
 
+rssURLRSS10Params.append(rssURLParam);
 rssURLRSS10Params.append("&type=");
 rssURLRSS10Params.append(RSSUtil.RSS);
 rssURLRSS10Params.append("&version=1.0");
 
-StringBuilder rssURLRSS20Params = new StringBuilder(rssURLParams.toString());
+StringBundler rssURLRSS20Params = new StringBundler(4);
 
+rssURLRSS20Params.append(rssURLParam);
 rssURLRSS20Params.append("&type=");
 rssURLRSS20Params.append(RSSUtil.RSS);
 rssURLRSS20Params.append("&version=2.0");
