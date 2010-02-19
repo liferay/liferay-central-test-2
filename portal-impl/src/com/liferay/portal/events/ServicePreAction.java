@@ -1529,7 +1529,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowStagingIcon(false);
 
 		String urlControlPanel = friendlyURLPrivateGroupPath.concat(
-			"/control_panel");
+			StringPool.SLASH + GroupConstants.CONTROL_PANEL_GROUP_NAME);
 
 		if (Validator.isNotNull(doAsUserId)) {
 			urlControlPanel = HttpUtil.addParameter(

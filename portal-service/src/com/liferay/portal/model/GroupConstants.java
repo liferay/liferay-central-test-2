@@ -35,6 +35,8 @@ public class GroupConstants {
 
 	public static final String CONTROL_PANEL = "Control Panel";
 
+	public static final String CONTROL_PANEL_GROUP_NAME = "control_panel";
+
 	public static final String GUEST = "Guest";
 
 	public static final String[] SYSTEM_GROUPS = {
