@@ -20,27 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.calendar.job;
+package com.liferay.portlet.calendar.messaging;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobSchedulerUtil;
-import com.liferay.portal.kernel.job.Scheduler;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
 /**
- * <a href="CalendarScheduler.java.html"><b><i>View Source</i></b></a>
+ * <a href="CheckEventMessageListener.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Tina Tian
  */
-public class CalendarScheduler implements Scheduler {
+public class CheckEventMessageListener implements MessageListener {
 
-	public void schedule() {
-		JobSchedulerUtil.schedule(_checkEventJob);
+	public void receive(Message message) {
+		try {
+			CalEventLocalServiceUtil.checkEvents();
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 	}
 
-	public void unschedule() {
-		JobSchedulerUtil.unschedule(_checkEventJob);
-	}
-
-	private IntervalJob _checkEventJob = new CheckEventJob();
+	private static Log _log = LogFactoryUtil.getLog(
+		CheckEventMessageListener.class);
 
 }

@@ -60,11 +60,11 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.calendar.EventDurationException;
 import com.liferay.portlet.calendar.EventEndDateException;
 import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
-import com.liferay.portlet.calendar.job.CheckEventJob;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.CalEventConstants;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
@@ -1202,11 +1202,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		long diff =
 			(startDate.getTime().getTime() - now.getTime().getTime()) /
-			CheckEventJob.INTERVAL;
+			_eventCheckInterval;
 
-		if ((diff == (event.getFirstReminder() / CheckEventJob.INTERVAL)) ||
+		if ((diff == (event.getFirstReminder() / _eventCheckInterval)) ||
 			(diff ==
-				(event.getSecondReminder() / CheckEventJob.INTERVAL))) {
+				(event.getSecondReminder() / _eventCheckInterval))) {
 
 			remindUser(event, user, startDate);
 		}
@@ -1642,5 +1642,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		CalEventLocalServiceImpl.class);
+
+	private long _eventCheckInterval =
+		PropsValues.CALENDAR_EVENT_CHECK_INTERVAL * Time.MINUTE;
 
 }

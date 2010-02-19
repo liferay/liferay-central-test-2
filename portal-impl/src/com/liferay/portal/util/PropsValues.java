@@ -223,6 +223,10 @@ public class PropsValues {
 	public static final String BROWSER_LAUNCHER_URL =
 		PropsUtil.get(PropsKeys.BROWSER_LAUNCHER_URL);
 
+	public static final int CALENDAR_EVENT_CHECK_INTERVAL =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.CALENDAR_EVENT_CHECK_INTERVAL));
+
 	public static boolean CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT));

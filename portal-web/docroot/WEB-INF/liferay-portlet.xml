@@ -52,7 +52,15 @@
 		<configuration-action-class>com.liferay.portlet.calendar.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.calendar.util.CalIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.calendar.util.CalendarOpenSearchImpl</open-search-class>
-		<scheduler-class>com.liferay.portlet.calendar.job.CalendarScheduler</scheduler-class>
+		<scheduler-entry>
+			<scheduler-event-listener-class>com.liferay.portlet.calendar.messaging.CheckEventMessageListener</scheduler-event-listener-class>
+			<trigger>
+				<simple>
+					<property-key>calendar.event.check.interval</property-key>
+					<time-unit>MINUTE</time-unit>
+				</simple>
+			</trigger>
+		</scheduler-entry>
 		<portlet-data-handler-class>com.liferay.portlet.calendar.lar.CalendarPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.calendar.social.CalendarActivityInterpreter</social-activity-interpreter-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
