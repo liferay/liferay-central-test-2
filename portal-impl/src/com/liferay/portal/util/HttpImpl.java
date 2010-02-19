@@ -111,10 +111,10 @@ public class HttpImpl implements Http {
 			_nonProxyHostsPattern = Pattern.compile(nonProxyHostsRegEx);
 		}
 
-		MultiThreadedHttpConnectionManager connectionManager =
+		MultiThreadedHttpConnectionManager httpConnectionManager =
 			new MultiThreadedHttpConnectionManager();
 
-		HttpConnectionParams params = connectionManager.getParams();
+		HttpConnectionParams params = httpConnectionManager.getParams();
 
 		params.setParameter(
 			"maxConnectionsPerHost", new Integer(_MAX_CONNECTIONS_PER_HOST));
@@ -123,8 +123,8 @@ public class HttpImpl implements Http {
 		params.setConnectionTimeout(_TIMEOUT);
 		params.setSoTimeout(_TIMEOUT);
 
-		_client.setHttpConnectionManager(connectionManager);
-		_proxyClient.setHttpConnectionManager(connectionManager);
+		_client.setHttpConnectionManager(httpConnectionManager);
+		_proxyClient.setHttpConnectionManager(httpConnectionManager);
 
 		if (hasProxyConfig() && Validator.isNotNull(_PROXY_USERNAME)) {
 			if (_PROXY_AUTH_TYPE.equals("username-password")) {
@@ -218,6 +218,10 @@ public class HttpImpl implements Http {
 
 			return StringPool.BLANK;
 		}
+	}
+
+	public void destroy() {
+		MultiThreadedHttpConnectionManager.shutdownAll();
 	}
 
 	public String encodeURL(String url) {
