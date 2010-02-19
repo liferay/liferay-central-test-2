@@ -57,9 +57,15 @@ public class PortletKeys {
 
 	public static final String COMMUNITIES = "29";
 
+	public static final String CURRENCY_CONVERTER = "16";
+
 	public static final String DOCKBAR = "145";
 
 	public static final String DOCUMENT_LIBRARY = "20";
+
+	public static final String DOCUMENT_LIBRARY_DISPLAY = "110";
+
+	public static final String DICTIONARY = "23";
 
 	public static final String DIRECTORY = "11";
 
@@ -131,6 +137,8 @@ public class PortletKeys {
 
 	public static final String POLLS = "25";
 
+	public static final String POLLS_DISPLAY = "59";
+
 	public static final String PORTAL = "90";
 
 	public static final String PORTLET_CONFIGURATION = "86";
@@ -159,9 +167,13 @@ public class PortletKeys {
 
 	public static final String REQUESTS = "121";
 
+	public static final String RSS = "39";
+
 	public static final String SEARCH = "3";
 
 	public static final String SHOPPING = "34";
+
+	public static final String SMS_TEXT_MESSENGER = "24";
 
 	public static final String SOFTWARE_CATALOG = "98";
 
@@ -173,9 +185,15 @@ public class PortletKeys {
 
 	public static final String TAGS_COMPILER = "103";
 
+	public static final String TAGS_CLOUD = "148";
+
 	public static final String TAGS_ENTRIES_NAVIGATION = "141";
 
 	public static final String TASKS = "122";
+
+	public static final String TRANSLATOR = "26";
+
+	public static final String UNIT_CONVERTER = "27";
 
 	public static final String UPDATE_MANAGER = "104";
 
