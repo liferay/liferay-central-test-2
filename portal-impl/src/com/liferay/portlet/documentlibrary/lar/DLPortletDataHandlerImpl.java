@@ -882,7 +882,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			DLFolder folder1 = fileEntry1.getFolder();
 			DLFolder folder2 = fileEntry2.getFolder();
 
-			if ((folder1.equals(folder2.getUuid())) &&
+			if ((folder1.getUuid().equals(folder2.getUuid())) &&
 				(fileEntry1.getSize() == fileEntry2.getSize()) &&
 				(fileEntry1.getVersion() == fileEntry2.getVersion()) &&
 				(fileEntry1.getVersionUserUuid().equals(
