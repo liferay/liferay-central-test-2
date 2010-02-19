@@ -939,6 +939,42 @@ public class PortalImpl implements Portal {
 		return StringPool.BLANK;
 	}
 
+	public String getControlPanelFullURL(
+			long scopeGroupId, String ppid, Map<String, String[]> params)
+		throws PortalException, SystemException {
+
+		StringBundler sb = new StringBundler(6);
+
+		Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
+
+		Company company = CompanyLocalServiceUtil.getCompany(
+			group.getCompanyId());
+
+		sb.append(
+			getPortalURL(company.getVirtualHost(), getPortalPort(), false));
+		sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
+		sb.append(StringPool.SLASH);
+		sb.append(GroupConstants.CONTROL_PANEL_GROUP_NAME);
+		sb.append(PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
+
+		if (params != null) {
+			params = new HashMap<String, String[]>(params);
+		}
+		else {
+			params = new HashMap<String, String[]>();
+		}
+
+		params.put("p_p_id", new String[] {ppid});
+		params.put("p_p_lifecycle", new String[] {"0"});
+		params.put(
+			"p_p_state", new String[] {WindowState.MAXIMIZED.toString()});
+		params.put("p_p_mode", new String[] {PortletMode.VIEW.toString()});
+
+		sb.append(HttpUtil.parameterMapToString(params, true));
+
+		return sb.toString();
+	}
+
 	public List<Portlet> getControlPanelPortlets(
 			String category, ThemeDisplay themeDisplay)
 		throws SystemException {
@@ -956,45 +992,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return filterControlPanelPortlets(portletsSet, category, themeDisplay);
-	}
-
-	public String getControlPanelFullURL(
-			long scopeGroupId, String ppid, Map<String, String[]> params)
-		throws PortalException, SystemException {
-
-		StringBundler sb = new StringBundler();
-
-		Map<String, String[]> actualParams = null;
-
-		Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
-
-		Company company = CompanyLocalServiceUtil.getCompany(
-				group.getCompanyId());
-
-		sb.append(getPortalURL(
-			company.getVirtualHost(), getPortalPort(), false));
-		sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
-		sb.append(StringPool.SLASH);
-		sb.append(GroupConstants.CONTROL_PANEL_GROUP_NAME);
-		sb.append(PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
-
-		if (params != null) {
-			actualParams = new HashMap<String, String[]>(params);
-		}
-		else {
-			actualParams = new HashMap<String, String[]>();
-		}
-
-		actualParams.put("p_p_id", new String[] {ppid});
-		actualParams.put("p_p_lifecycle", new String[] {"0"});
-		actualParams.put(
-			"p_p_state", new String[] {WindowState.MAXIMIZED.toString()});
-		actualParams.put(
-			"p_p_mode", new String[] {PortletMode.VIEW.toString()});
-
-		sb.append(HttpUtil.parameterMapToString(actualParams, true));
-
-		return sb.toString();
 	}
 
 	public String getCurrentCompleteURL(HttpServletRequest request) {

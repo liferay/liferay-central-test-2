@@ -181,13 +181,13 @@ public interface Portal {
 			String portletId, ThemeDisplay themeDisplay)
 		throws SystemException;
 
-	public List<Portlet> getControlPanelPortlets(
-			String category, ThemeDisplay themeDisplay)
-		throws SystemException;
-
 	public String getControlPanelFullURL(
 			long scopeGroupId, String ppid, Map<String, String[]> params)
 		throws PortalException, SystemException;
+
+	public List<Portlet> getControlPanelPortlets(
+			String category, ThemeDisplay themeDisplay)
+		throws SystemException;
 
 	public String getCurrentCompleteURL(HttpServletRequest request);
 
