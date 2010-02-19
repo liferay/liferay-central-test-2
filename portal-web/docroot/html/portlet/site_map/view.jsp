@@ -27,7 +27,7 @@
 <%
 List<Layout> rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout(), rootLayoutId);
 
-StringBuilder sb = new StringBuilder();
+StringBundler sb = new StringBundler();
 
 _buildSiteMap(layout, rootLayouts, rootLayoutId, includeRootInTree, displayDepth, showCurrentPage, useHtmlTitle, showHiddenPages, 1, themeDisplay, sb);
 %>
@@ -35,7 +35,7 @@ _buildSiteMap(layout, rootLayouts, rootLayoutId, includeRootInTree, displayDepth
 <%= sb.toString() %>
 
 <%!
-private void _buildLayoutView(Layout layout, String cssClass, boolean useHtmlTitle, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
+private void _buildLayoutView(Layout layout, String cssClass, boolean useHtmlTitle, ThemeDisplay themeDisplay, StringBundler sb) throws Exception {
 	String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 	String target = PortalUtil.getLayoutTarget(layout);
 
@@ -62,7 +62,7 @@ private void _buildLayoutView(Layout layout, String cssClass, boolean useHtmlTit
 	sb.append("</a>");
 }
 
-private void _buildSiteMap(Layout layout, List<Layout> layouts, long rootLayoutId, boolean includeRootInTree, int displayDepth, boolean showCurrentPage, boolean useHtmlTitle, boolean showHiddenPages, int curDepth, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
+private void _buildSiteMap(Layout layout, List<Layout> layouts, long rootLayoutId, boolean includeRootInTree, int displayDepth, boolean showCurrentPage, boolean useHtmlTitle, boolean showHiddenPages, int curDepth, ThemeDisplay themeDisplay, StringBundler sb) throws Exception {
 	if (layouts.isEmpty()) {
 		return;
 	}
