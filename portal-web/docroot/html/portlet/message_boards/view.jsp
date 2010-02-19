@@ -74,7 +74,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 		<c:if test="<%= category == null %>">
 			<div class="category-subscriptions">
 				<div class="category-subscription-types">
-					<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + scopeGroupId + rssURLParams.toString() %>' label="<%= true %>" method="get" target="_blank" />
+					<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + scopeGroupId + rssURLParams %>' label="<%= true %>" method="get" target="_blank" />
 
 					<c:if test="<%= MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.SUBSCRIBE) %>">
 						<c:choose>
@@ -726,7 +726,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				rssURL += "&userId=" + groupThreadsUserId;
 			}
 
-			rssURL += rssURLParams.toString();
+			rssURL += rssURLParams;
 			%>
 
 			<br />

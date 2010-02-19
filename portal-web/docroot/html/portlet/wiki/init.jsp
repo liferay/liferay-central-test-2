@@ -117,6 +117,7 @@ if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssDisplayStyle.equals(RSSUt
 		rssURLParams.append(rssDisplayStyle);
 	}
 }
+
 String rssURLParam = rssURLParams.toString();
 
 StringBundler rssURLAtomParams = new StringBundler(4);

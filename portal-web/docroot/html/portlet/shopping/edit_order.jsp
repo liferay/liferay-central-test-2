@@ -478,17 +478,17 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	if (fieldsArray.length > 0) {
 		StringBundler sb = new StringBundler(4);
+
 		sb.append(orderItem.getName());
 		sb.append(" (");
 		sb.append(StringUtil.replace(StringUtil.merge(fieldsArray, ", "), "=", ": "));
 		sb.append(")");
+
 		row.addText(sb.toString(), rowURL);
 	}
 	else {
 		row.addText(orderItem.getName(), rowURL);
 	}
-
-
 
 	// Quantity
 

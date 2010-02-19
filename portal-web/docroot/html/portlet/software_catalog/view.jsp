@@ -210,6 +210,7 @@ portletURL.setParameter("tabs1", tabs1);
 			row.addText(LanguageUtil.get(pageContext, productEntry.getTags()), rowURL);
 
 			// Licenses
+
 			List licenses = productEntry.getLicenses();
 
 			if (licenses.isEmpty()) {
@@ -217,6 +218,7 @@ portletURL.setParameter("tabs1", tabs1);
 			}
 			else {
 				sb = new StringBundler(licenses.size() * 2 - 1);
+
 				Iterator itr = licenses.iterator();
 
 				while (itr.hasNext()) {
@@ -418,6 +420,7 @@ portletURL.setParameter("tabs1", tabs1);
 			}
 			else {
 				sb = new StringBundler(licenses.size() * 2 - 1);
+
 				Iterator itr = licenses.iterator();
 
 				while (itr.hasNext()) {

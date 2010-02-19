@@ -152,6 +152,7 @@ if (type.equals("html")) {
 					}
 
 					sb.setIndex(sb.index() - 2);
+
 					sb.append(StringPool.SPACE);
 					%>
 
