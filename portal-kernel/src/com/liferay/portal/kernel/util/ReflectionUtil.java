@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 
 /**
  * <a href="ReflectionUtil.java.html"><b><i>View Source</i></b></a>
@@ -33,6 +34,21 @@ import java.lang.reflect.Constructor;
  * @author Brian Wing Shun Chan
  */
 public class ReflectionUtil {
+
+	public static Object getFieldValue(Class<?> classObj, String fieldName) {
+		try {
+			Field field = classObj.getDeclaredField(fieldName);
+
+			field.setAccessible(true);
+
+			return field.get(null);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return null;
+		}
+	}
 
 	public static Object newInstance(String className, String p1) {
 		try {

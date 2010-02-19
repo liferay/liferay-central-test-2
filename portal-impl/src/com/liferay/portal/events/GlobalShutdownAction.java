@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.ThreadLocalRegistry;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.search.lucene.LuceneHelperUtil;
@@ -49,6 +50,8 @@ import com.liferay.util.ThirdPartyThreadLocalRegistry;
 
 import java.sql.Connection;
 import java.sql.Statement;
+
+import org.apache.axis.utils.XMLUtils;
 
 /**
  * <a href="GlobalShutdownAction.java.html"><b><i>View Source</i></b></a>
@@ -155,6 +158,11 @@ public class GlobalShutdownAction extends SimpleAction {
 
 		ThirdPartyThreadLocalRegistry.resetThreadLocals();
 		ThreadLocalRegistry.resetThreadLocals();
+
+		ThreadLocal threadLocal = (ThreadLocal)ReflectionUtil.getFieldValue(
+			XMLUtils.class, "documentBuilder");
+
+		threadLocal.remove();
 
 		// Hypersonic
 
