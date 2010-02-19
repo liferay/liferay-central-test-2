@@ -159,8 +159,9 @@ public class GlobalShutdownAction extends SimpleAction {
 		ThirdPartyThreadLocalRegistry.resetThreadLocals();
 		ThreadLocalRegistry.resetThreadLocals();
 
-		ThreadLocal threadLocal = (ThreadLocal)ReflectionUtil.getFieldValue(
-			XMLUtils.class, "documentBuilder");
+		ThreadLocal<?> threadLocal =
+			(ThreadLocal<?>)ReflectionUtil.getFieldValue(
+				XMLUtils.class, "documentBuilder");
 
 		threadLocal.remove();
 
