@@ -183,14 +183,23 @@ public class GlobalShutdownAction extends SimpleAction {
 		catch (Exception e) {
 		}
 
+		// Wait 1 second so Quartz threads can cleanly shutdown
+
+		try {
+			Thread.sleep(1000);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		// Programmatically exit
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.SHUTDOWN_PROGRAMMATICALLY_EXIT))) {
 
-			Thread thread = Thread.currentThread();
+			Thread currentThread = Thread.currentThread();
 
-			ThreadGroup threadGroup = thread.getThreadGroup();
+			ThreadGroup threadGroup = currentThread.getThreadGroup();
 
 			for (int i = 0; i < 10; i++) {
 				if (threadGroup.getParent() == null) {
@@ -201,21 +210,19 @@ public class GlobalShutdownAction extends SimpleAction {
 				}
 			}
 
-			//threadGroup.list();
-
 			Thread[] threads = new Thread[threadGroup.activeCount() * 2];
 
 			threadGroup.enumerate(threads);
 
-			for (int i = 0; i < threads.length; i++) {
-				Thread curThread = threads[i];
+			for (Thread thread : threads) {
+				if ((thread == null) || (thread == currentThread)) {
+					continue;
+				}
 
-				if ((curThread != null) && (curThread != thread)) {
-					try {
-						curThread.interrupt();
-					}
-					catch (Exception e) {
-					}
+				try {
+					thread.interrupt();
+				}
+				catch (Exception e) {
 				}
 			}
 
