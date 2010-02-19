@@ -27,6 +27,7 @@ import com.liferay.portal.im.ICQConnector;
 import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.concurrent.ThreadLocalRegistry;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
@@ -148,6 +149,10 @@ public class GlobalShutdownAction extends SimpleAction {
 		}
 		catch (Exception e) {
 		}
+
+		// Thread local registry
+
+		ThreadLocalRegistry.resetThreadLocals();
 
 		// Hypersonic
 
