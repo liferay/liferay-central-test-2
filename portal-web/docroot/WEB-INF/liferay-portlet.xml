@@ -142,7 +142,15 @@
 		<configuration-action-class>com.liferay.portlet.journal.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.journal.util.JournalIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.journal.util.JournalOpenSearchImpl</open-search-class>
-		<scheduler-class>com.liferay.portlet.journal.job.JournalScheduler</scheduler-class>
+		<scheduler-entry>
+			<scheduler-event-listener-class>com.liferay.portlet.journal.messaging.CheckArticleMessageListener</scheduler-event-listener-class>
+			<trigger>
+				<simple>
+					<property-key>journal.article.check.interval</property-key>
+					<time-unit>MINUTE</time-unit>
+				</simple>
+			</trigger>
+		</scheduler-entry>
 		<friendly-url-mapper-class>com.liferay.portlet.journal.JournalFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl</portlet-data-handler-class>
 		<webdav-storage-token>journal</webdav-storage-token>

@@ -20,30 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.job;
+package com.liferay.portlet.journal.messaging;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 /**
- * <a href="CheckArticleJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="CheckArticleMessageListener.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Tina Tian
  */
-public class CheckArticleJob implements IntervalJob {
+public class CheckArticleMessageListener implements MessageListener {
 
-	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(
-		PropsKeys.JOURNAL_ARTICLE_CHECK_INTERVAL)) * Time.MINUTE;
-
-	public void execute(JobExecutionContext context) {
+	public void receive(Message message) {
 		try {
 			JournalArticleLocalServiceUtil.checkArticles();
 		}
@@ -52,10 +47,7 @@ public class CheckArticleJob implements IntervalJob {
 		}
 	}
 
-	public long getInterval() {
-		return INTERVAL;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(CheckArticleJob.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		CheckArticleMessageListener.class);
 
 }

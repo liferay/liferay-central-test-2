@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -81,7 +82,6 @@ import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchArticleResourceException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.StructureXsdException;
-import com.liferay.portlet.journal.job.CheckArticleJob;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
@@ -429,7 +429,7 @@ public class JournalArticleLocalServiceImpl
 		List<JournalArticle> articles =
 			journalArticleFinder.findByExpirationDate(
 				StatusConstants.APPROVED, now,
-				new Date(now.getTime() - CheckArticleJob.INTERVAL));
+				new Date(now.getTime() - _journalArticleCheckInterval));
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Expiring " + articles.size() + " articles");
@@ -461,7 +461,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		articles = journalArticleFinder.findByReviewDate(
-			now, new Date(now.getTime() - CheckArticleJob.INTERVAL));
+			now, new Date(now.getTime() - _journalArticleCheckInterval));
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -2663,5 +2663,8 @@ public class JournalArticleLocalServiceImpl
 
 	private static Log _log = LogFactoryUtil.getLog(
 		JournalArticleLocalServiceImpl.class);
+
+	private long _journalArticleCheckInterval =
+		PropsValues.JOURNAL_ARTICLE_CHECK_INTERVAL * Time.MINUTE;
 
 }

@@ -769,6 +769,10 @@ public class PropsValues {
 	public static final String JDBC_DEFAULT_LIFERAY_POOL_PROVIDER =
 		PropsUtil.get(PropsKeys.JDBC_DEFAULT_LIFERAY_POOL_PROVIDER);
 
+	public static final int JOURNAL_ARTICLE_CHECK_INTERVAL =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_CHECK_INTERVAL));
+
 	public static final boolean JOURNAL_ARTICLE_COMMENTS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_COMMENTS_ENABLED));
