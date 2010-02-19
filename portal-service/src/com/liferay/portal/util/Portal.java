@@ -185,6 +185,10 @@ public interface Portal {
 			String category, ThemeDisplay themeDisplay)
 		throws SystemException;
 
+	public String getControlPanelFullURL(
+			long scopeGroupId, String ppid, Map<String, String[]> params)
+		throws PortalException, SystemException;
+
 	public String getCurrentCompleteURL(HttpServletRequest request);
 
 	public String getCurrentURL(HttpServletRequest request);

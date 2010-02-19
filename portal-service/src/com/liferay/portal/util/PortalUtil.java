@@ -256,6 +256,13 @@ public class PortalUtil {
 		return getPortal().getControlPanelCategory(portletId, themeDisplay);
 	}
 
+	public static String getControlPanelFullURL(
+			long scopeGroupId, String ppid, Map<String, String[]> params)
+		throws PortalException, SystemException {
+
+		return getPortal().getControlPanelFullURL(scopeGroupId, ppid, params);
+	}
+
 	public static List<Portlet> getControlPanelPortlets(
 			String category, ThemeDisplay themeDisplay)
 		throws SystemException {
