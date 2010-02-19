@@ -188,9 +188,21 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				}
 			}
 			else if (trigger.getTriggerType() == TriggerType.SIMPLE) {
+				long interval = (Long)trigger.getTriggerContent();
+
+				if (interval <= 0) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Not scheduling " + trigger.getJobName() +
+								" because interval is less than or equal to 0");
+					}
+
+					return;
+				}
+
 				quartzTrigger = new SimpleTrigger(
 					jobName, groupName, SimpleTrigger.REPEAT_INDEFINITELY,
-					(Long)trigger.getTriggerContent());
+					interval);
 			}
 			else {
 				throw new SchedulerException(

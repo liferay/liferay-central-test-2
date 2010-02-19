@@ -38,11 +38,15 @@ public class CheckEntryMessageListener implements MessageListener {
 
 	public void receive(Message message) {
 		try {
-			AnnouncementsEntryLocalServiceUtil.checkEntries();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to process message " + message, e);
 		}
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		AnnouncementsEntryLocalServiceUtil.checkEntries();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

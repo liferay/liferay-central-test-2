@@ -37,11 +37,15 @@ public class LDAPImportMessageListener implements MessageListener{
 
 	public void receive(Message message) {
 		try {
-			PortalLDAPImporterUtil.importFromLDAP();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			_log.error("Unable to process message " + message, e);
 		}
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		PortalLDAPImporterUtil.importFromLDAP();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

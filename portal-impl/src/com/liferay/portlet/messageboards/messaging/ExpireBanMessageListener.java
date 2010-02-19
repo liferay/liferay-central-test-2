@@ -26,12 +26,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 
 /**
- * <a href="ExpireBanMessageListener.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ExpireBanMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  * @author Tina Tian
@@ -39,21 +37,16 @@ import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 public class ExpireBanMessageListener implements MessageListener {
 
 	public void receive(Message message) {
-		if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL <= 0) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Auto expire of banned message board users is disabled");
-			}
-
-			return;
-		}
-
 		try {
-			MBBanLocalServiceUtil.expireBans();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			_log.error("Unable to process message " + message, e);
 		}
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		MBBanLocalServiceUtil.expireBans();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

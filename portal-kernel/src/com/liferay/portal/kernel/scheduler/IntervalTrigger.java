@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.scheduler;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 import java.util.Date;
 
 /**
@@ -52,6 +54,18 @@ public class IntervalTrigger extends BaseTrigger {
 
 	public Long getTriggerContent() {
 		return _interval;
+	}
+
+	public String toString() {
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("{interval=");
+		sb.append(_interval);
+		sb.append(", ");
+		sb.append(super.toString());
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private Long _interval;

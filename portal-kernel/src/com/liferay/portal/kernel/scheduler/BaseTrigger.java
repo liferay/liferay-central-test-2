@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.scheduler;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 import java.util.Date;
 
 /**
@@ -80,6 +82,24 @@ public abstract class BaseTrigger implements Trigger {
 
 	public void setTriggerType(TriggerType triggerType) {
 		_triggerType = triggerType;
+	}
+
+	public String toString() {
+		StringBundler sb = new StringBundler(11);
+
+		sb.append("{endDate=");
+		sb.append(_endDate);
+		sb.append(", groupName=");
+		sb.append(_groupName);
+		sb.append(", jobName=");
+		sb.append(_jobName);
+		sb.append(", startDate=");
+		sb.append(_startDate);
+		sb.append(", triggerType=");
+		sb.append(_triggerType);
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private Date _endDate;

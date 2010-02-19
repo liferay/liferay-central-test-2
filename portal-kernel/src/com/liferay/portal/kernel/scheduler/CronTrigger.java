@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.scheduler;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 import java.util.Date;
 
 /**
@@ -52,6 +54,18 @@ public class CronTrigger extends BaseTrigger {
 
 	public String getTriggerContent() {
 		return _cronText;
+	}
+
+	public String toString() {
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("{cronText=");
+		sb.append(_cronText);
+		sb.append(", ");
+		sb.append(super.toString());
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private String _cronText;

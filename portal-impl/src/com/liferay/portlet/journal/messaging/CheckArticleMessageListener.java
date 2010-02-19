@@ -29,8 +29,7 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 /**
- * <a href="CheckArticleMessageListener.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="CheckArticleMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
@@ -40,11 +39,15 @@ public class CheckArticleMessageListener implements MessageListener {
 
 	public void receive(Message message) {
 		try {
-			JournalArticleLocalServiceUtil.checkArticles();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to process message " + message, e);
 		}
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		JournalArticleLocalServiceUtil.checkArticles();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

@@ -1202,11 +1202,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		long diff =
 			(startDate.getTime().getTime() - now.getTime().getTime()) /
-			_eventCheckInterval;
+				_eventCheckInterval;
 
 		if ((diff == (event.getFirstReminder() / _eventCheckInterval)) ||
-			(diff ==
-				(event.getSecondReminder() / _eventCheckInterval))) {
+			(diff == (event.getSecondReminder() / _eventCheckInterval))) {
 
 			remindUser(event, user, startDate);
 		}

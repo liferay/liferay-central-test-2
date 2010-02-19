@@ -38,11 +38,15 @@ public class PluginRepositoriesMessageListener implements MessageListener {
 
 	public void receive(Message message) {
 		try {
-			PluginPackageUtil.reloadRepositories();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			_log.error("Unable to process message " + message, e);
 		}
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		PluginPackageUtil.reloadRepositories();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

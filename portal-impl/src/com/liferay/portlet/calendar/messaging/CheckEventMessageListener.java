@@ -29,8 +29,7 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
 /**
- * <a href="CheckEventMessageListener.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="CheckEventMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Tina Tian
@@ -39,11 +38,15 @@ public class CheckEventMessageListener implements MessageListener {
 
 	public void receive(Message message) {
 		try {
-			CalEventLocalServiceUtil.checkEvents();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to process message " + message, e);
 		}
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		CalEventLocalServiceUtil.checkEvents();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
