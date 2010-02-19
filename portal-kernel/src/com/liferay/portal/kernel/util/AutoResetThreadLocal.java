@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.concurrent.ThreadLocalRegistry;
-
 /**
  * <a href="AutoResetThreadLocal.java.html"><b><i>View Source</i></b></a>
  *

@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.concurrent;
-
-import com.liferay.portal.kernel.util.InitialThreadLocal;
+package com.liferay.portal.kernel.util;
 
 import java.util.HashSet;
 import java.util.Set;

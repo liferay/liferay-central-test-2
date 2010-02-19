@@ -22,7 +22,7 @@
 
 package com.liferay.portal.servlet.filters.threadlocalcache;
 
-import com.liferay.portal.kernel.concurrent.ThreadLocalRegistry;
+import com.liferay.portal.kernel.util.ThreadLocalRegistry;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import javax.servlet.FilterChain;

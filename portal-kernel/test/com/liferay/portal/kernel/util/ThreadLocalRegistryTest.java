@@ -20,10 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.concurrent;
+package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.test.TestCase;
-import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 import java.util.concurrent.CyclicBarrier;
 
