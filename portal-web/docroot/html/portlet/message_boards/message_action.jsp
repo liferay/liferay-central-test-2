@@ -58,7 +58,7 @@ MBThread thread = message.getThread();
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&threadId=" + message.getThreadId() + rssURLParams %>' method="get" target="_blank" />
+	<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&threadId=" + message.getThreadId() + rssURLParams.toString() %>' method="get" target="_blank" />
 
 	<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>
