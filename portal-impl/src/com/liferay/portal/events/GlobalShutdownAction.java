@@ -45,6 +45,7 @@ import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
+import com.liferay.util.ThirdPartyThreadLocalRegistry;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -152,6 +153,7 @@ public class GlobalShutdownAction extends SimpleAction {
 
 		// Thread local registry
 
+		ThirdPartyThreadLocalRegistry.resetThreadLocals();
 		ThreadLocalRegistry.resetThreadLocals();
 
 		// Hypersonic
