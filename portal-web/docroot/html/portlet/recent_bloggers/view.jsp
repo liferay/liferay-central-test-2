@@ -87,7 +87,7 @@ else {
 				if (entries.size() == 1) {
 					BlogsEntry entry = (BlogsEntry)entries.get(0);
 
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(4);
 
 					sb.append(themeDisplay.getPathMain());
 					sb.append("/blogs/find_entry?entryId=");
