@@ -179,7 +179,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Name and short description
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(5);
 
 			sb.append("<strong>");
 			sb.append(productEntry.getName());
@@ -210,24 +210,29 @@ portletURL.setParameter("tabs1", tabs1);
 			row.addText(LanguageUtil.get(pageContext, productEntry.getTags()), rowURL);
 
 			// Licenses
+			List licenses = productEntry.getLicenses();
 
-			sb = new StringBuilder();
-
-			Iterator itr = productEntry.getLicenses().iterator();
-
-			while (itr.hasNext()) {
-				SCLicense license = (SCLicense)itr.next();
-
-				license = license.toEscapedModel();
-
-				sb.append(license.getName());
-
-				if (itr.hasNext()) {
-					sb.append(", ");
-				}
+			if (licenses.isEmpty()) {
+				row.addText(StringPool.BLANK, rowURL);
 			}
+			else {
+				sb = new StringBundler(licenses.size() * 2 - 1);
+				Iterator itr = licenses.iterator();
 
-			row.addText(sb.toString(), rowURL);
+				while (itr.hasNext()) {
+					SCLicense license = (SCLicense)itr.next();
+
+					license = license.toEscapedModel();
+
+					sb.append(license.getName());
+
+					if (itr.hasNext()) {
+						sb.append(", ");
+					}
+				}
+
+				row.addText(sb.toString(), rowURL);
+			}
 
 			// Modified date
 
@@ -374,7 +379,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Name and short description
 
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(5);
 
 			sb.append("<strong>");
 			sb.append(productEntry.getName());
@@ -406,23 +411,29 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Licenses
 
-			sb = new StringBuilder();
+			List licenses = productEntry.getLicenses();
 
-			Iterator itr = productEntry.getLicenses().iterator();
-
-			while (itr.hasNext()) {
-				SCLicense license = (SCLicense)itr.next();
-
-				license = license.toEscapedModel();
-
-				sb.append(license.getName());
-
-				if (itr.hasNext()) {
-					sb.append(", ");
-				}
+			if (licenses.isEmpty()) {
+				row.addText(StringPool.BLANK, rowURL);
 			}
+			else {
+				sb = new StringBundler(licenses.size() * 2 - 1);
+				Iterator itr = licenses.iterator();
 
-			row.addText(sb.toString(), rowURL);
+				while (itr.hasNext()) {
+					SCLicense license = (SCLicense)itr.next();
+
+					license = license.toEscapedModel();
+
+					sb.append(license.getName());
+
+					if (itr.hasNext()) {
+						sb.append(", ");
+					}
+				}
+
+				row.addText(sb.toString(), rowURL);
+			}
 
 			// Modified date
 
