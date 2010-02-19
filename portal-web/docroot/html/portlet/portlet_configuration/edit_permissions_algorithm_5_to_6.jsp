@@ -315,7 +315,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 					disabled = true;
 				}
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append("<input ");
 
