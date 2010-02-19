@@ -458,7 +458,7 @@
 				</replace>
 
 				<replace file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
-					<replacefilter token="../../../../../src/aui-skins/core/images/" value="" />
+					<replacefilter token="../../../../../build/aui-skins/core/images/" value="" />
 				</replace>
 
 				<copy
