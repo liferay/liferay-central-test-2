@@ -34,8 +34,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -63,6 +66,7 @@ import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
+import com.liferay.portlet.journal.service.permission.JournalPermission;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.LocalizationUtil;
 
@@ -117,6 +121,12 @@ public class EditArticleAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.EXPIRE)) {
 				expireArticles(actionRequest);
+			}
+			else if (cmd.equals(Constants.SUBSCRIBE)) {
+				subscribeArticles(actionRequest);
+			}
+			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
+				unsubscribeArticles(actionRequest);
 			}
 			else if (cmd.equals("removeArticlesLocale")) {
 				removeArticlesLocale(actionRequest);
@@ -366,6 +376,44 @@ public class EditArticleAction extends PortletAction {
 
 			JournalArticleServiceUtil.removeArticleLocale(
 				groupId, articleId, version, languageId);
+		}
+	}
+
+	protected void subscribeArticles(ActionRequest actionRequest)
+			throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		if (JournalPermission.contains(
+				permissionChecker, themeDisplay.getScopeGroupId(),
+				ActionKeys.SUBSCRIBE)) {
+
+			SubscriptionLocalServiceUtil.addSubscription(
+				themeDisplay.getUserId(), JournalArticle.class.getName(),
+				themeDisplay.getScopeGroupId());
+		}
+	}
+
+	protected void unsubscribeArticles(ActionRequest actionRequest)
+			throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		if (JournalPermission.contains(
+				permissionChecker, themeDisplay.getScopeGroupId(),
+				ActionKeys.SUBSCRIBE)) {
+
+			SubscriptionLocalServiceUtil.deleteSubscription(
+				themeDisplay.getUserId(), JournalArticle.class.getName(),
+				themeDisplay.getScopeGroupId());
 		}
 	}
 

@@ -36,6 +36,9 @@ PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(
 String emailFromName = ParamUtil.getString(request, "emailFromName", JournalUtil.getEmailFromName(portletSetup));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", JournalUtil.getEmailFromAddress(portletSetup));
 
+String emailArticleAddedSubject = ParamUtil.getString(request, "emailArticleAddedSubject", JournalUtil.getEmailArticleAddedSubject(portletSetup));
+String emailArticleAddedBody = ParamUtil.getString(request, "emailArticleAddedBody", JournalUtil.getEmailArticleAddedBody(portletSetup));
+
 String emailArticleApprovalDeniedSubject = ParamUtil.getString(request, "emailArticleApprovalDeniedSubject", JournalUtil.getEmailArticleApprovalDeniedSubject(portletSetup));
 String emailArticleApprovalDeniedBody = ParamUtil.getString(request, "emailArticleApprovalDeniedBody", JournalUtil.getEmailArticleApprovalDeniedBody(portletSetup));
 
@@ -48,10 +51,17 @@ String emailArticleApprovalRequestedBody = ParamUtil.getString(request, "emailAr
 String emailArticleReviewSubject = ParamUtil.getString(request, "emailArticleReviewSubject", JournalUtil.getEmailArticleReviewSubject(portletSetup));
 String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReviewBody", JournalUtil.getEmailArticleReviewBody(portletSetup));
 
+String emailArticleUpdatedSubject = ParamUtil.getString(request, "emailArticleUpdatedSubject", JournalUtil.getEmailArticleUpdatedSubject(portletSetup));
+String emailArticleUpdatedBody = ParamUtil.getString(request, "emailArticleUpdatedBody", JournalUtil.getEmailArticleUpdatedBody(portletSetup));
+
 String editorParam = StringPool.BLANK;
 String editorContent = StringPool.BLANK;
 
-if (tabs2.equals("web-content-approval-denied-email")) {
+if (tabs2.equals("web-content-added-email")) {
+	editorParam = "emailArticleAddedBody";
+	editorContent = emailArticleAddedBody;
+}
+else if (tabs2.equals("web-content-approval-denied-email")) {
 	editorParam = "emailArticleApprovalDeniedBody";
 	editorContent = emailArticleApprovalDeniedBody;
 }
@@ -66,6 +76,10 @@ else if (tabs2.equals("web-content-approval-requested-email")) {
 else if (tabs2.equals("web-content-review-email")) {
 	editorParam = "emailArticleReviewBody";
 	editorContent = emailArticleReviewBody;
+}
+else if (tabs2.equals("web-content-updated-email")) {
+	editorParam = "emailArticleUpdatedBody";
+	editorContent = emailArticleUpdatedBody;
 }
 %>
 
@@ -82,13 +96,15 @@ else if (tabs2.equals("web-content-review-email")) {
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<liferay-ui:tabs
-		names="email-from,web-content-approval-denied-email,web-content-approval-granted-email,web-content-approval-requested-email,web-content-review-email"
+		names="email-from,web-content-added-email,web-content-approval-denied-email,web-content-approval-granted-email,web-content-approval-requested-email,web-content-review-email,web-content-updated-email"
 		param="tabs2"
 		url="<%= portletURL %>"
 	/>
 
 	<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
 	<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
+	<liferay-ui:error key="emailArticleAddedBody" message="please-enter-a-valid-body" />
+	<liferay-ui:error key="emailArticleAddedSubject" message="please-enter-a-valid-subject" />
 	<liferay-ui:error key="emailArticleApprovalDeniedBody" message="please-enter-a-valid-body" />
 	<liferay-ui:error key="emailArticleApprovalDeniedSubject" message="please-enter-a-valid-subject" />
 	<liferay-ui:error key="emailArticleApprovalGrantedBody" message="please-enter-a-valid-body" />
@@ -97,6 +113,8 @@ else if (tabs2.equals("web-content-review-email")) {
 	<liferay-ui:error key="emailArticleApprovalRequestedSubject" message="please-enter-a-valid-subject" />
 	<liferay-ui:error key="emailArticleReviewBody" message="please-enter-a-valid-body" />
 	<liferay-ui:error key="emailArticleReviewSubject" message="please-enter-a-valid-subject" />
+	<liferay-ui:error key="emailArticleUpdatedBody" message="please-enter-a-valid-body" />
+	<liferay-ui:error key="emailArticleUpdatedSubject" message="please-enter-a-valid-subject" />
 
 	<c:choose>
 		<c:when test='<%= tabs2.equals("email-from") %>'>
@@ -106,9 +124,12 @@ else if (tabs2.equals("web-content-review-email")) {
 				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 			</aui:fieldset>
 		</c:when>
-		<c:when test='<%= tabs2.startsWith("web-content-approval-") || tabs2.startsWith("web-content-review-") %>'>
+		<c:when test='<%= tabs2.startsWith("web-content-approval-") || tabs2.startsWith("web-content-review-") || tabs2.startsWith("web-content-added-") || tabs2.startsWith("web-content-updated-") %>'>
 			<aui:fieldset>
 				<c:choose>
+					<c:when test='<%= tabs2.equals("web-content-added-email") %>'>
+						<aui:input inlineLabel="left" label="enabled" name="emailArticleAddedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleAddedEnabled(portletSetup) %>" />
+					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-denied-email") %>'>
 						<aui:input inlineLabel="left" label="enabled" name="emailArticleApprovalDeniedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleApprovalDeniedEnabled(portletSetup) %>" />
 					</c:when>
@@ -121,9 +142,15 @@ else if (tabs2.equals("web-content-review-email")) {
 					<c:when test='<%= tabs2.equals("web-content-review-email") %>'>
 						<aui:input inlineLabel="left" label="enabled" name="emailArticleReviewEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleReviewEnabled(portletSetup) %>" />
 					</c:when>
+					<c:when test='<%= tabs2.equals("web-content-updated-email") %>'>
+						<aui:input inlineLabel="left" label="enabled" name="emailArticleUpdatedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleUpdatedEnabled(portletSetup) %>" />
+					</c:when>
 				</c:choose>
 
 				<c:choose>
+					<c:when test='<%= tabs2.equals("web-content-added-email") %>'>
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleAddedSubject" type="text" value="<%= emailArticleAddedSubject %>" />
+					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-denied-email") %>'>
 						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleApprovalDeniedSubject" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
 					</c:when>
@@ -135,6 +162,9 @@ else if (tabs2.equals("web-content-review-email")) {
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-review-email") %>'>
 						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleReviewSubject" type="text" value="<%= emailArticleReviewSubject %>" />
+					</c:when>
+					<c:when test='<%= tabs2.equals("web-content-updated-email") %>'>
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleUpdatedSubject" type="text" value="<%= emailArticleUpdatedSubject %>" />
 					</c:when>
 				</c:choose>
 
@@ -162,7 +192,7 @@ else if (tabs2.equals("web-content-review-email")) {
 						<liferay-ui:message key="the-web-content-title" />
 					</dd>
 
-					<c:if test='<%= tabs2.startsWith("web-content-approval-") %>'>
+					<c:if test='<%= tabs2.startsWith("web-content-approval-") || tabs2.startsWith("web-content-added-") || tabs2.startsWith("web-content-updated-") %>'>
 						<dt>
 							[$ARTICLE_URL$]
 						</dt>
@@ -231,7 +261,7 @@ else if (tabs2.equals("web-content-review-email")) {
 	}
 
 	function <portlet:namespace />saveConfiguration() {
-		<c:if test='<%= tabs2.startsWith("web-content-approval-") || tabs2.startsWith("web-content-review-") %>'>
+		<c:if test='<%= tabs2.startsWith("web-content-added-") || tabs2.startsWith("web-content-approval-") || tabs2.startsWith("web-content-review-") || tabs2.startsWith("web-content-updated-") %>'>
 			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
 		</c:if>
 

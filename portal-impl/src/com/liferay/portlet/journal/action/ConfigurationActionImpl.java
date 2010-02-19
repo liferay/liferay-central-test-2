@@ -67,6 +67,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		if (tabs2.equals("email-from")) {
 			updateEmailFrom(actionRequest, preferences);
 		}
+		else if (tabs2.equals("web-content-added-email")) {
+			updateEmailArticleAdded(actionRequest, preferences);
+		}
 		else if (tabs2.equals("web-content-approval-denied-email")) {
 			updateEmailArticleApprovalDenied(actionRequest, preferences);
 		}
@@ -78,6 +81,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		}
 		else if (tabs2.equals("web-content-review-email")) {
 			updateEmailArticleReview(actionRequest, preferences);
+		}
+		else if (tabs2.equals("web-content-updated-email")) {
+			updateEmailArticleUpdated(actionRequest, preferences);
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
@@ -114,6 +120,37 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		else {
 			preferences.setValue("email-from-name", emailFromName);
 			preferences.setValue("email-from-address", emailFromAddress);
+		}
+	}
+
+	protected void updateEmailArticleAdded(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		boolean emailArticleAddedEnabled = ParamUtil.getBoolean(
+			actionRequest, "emailArticleAddedEnabled");
+		String emailArticleAddedSubject = ParamUtil.getString(
+			actionRequest, "emailArticleAddedSubject");
+		String emailArticleAddedBody = ParamUtil.getString(
+			actionRequest, "emailArticleAddedBody");
+
+		if (Validator.isNull(emailArticleAddedSubject)) {
+			SessionErrors.add(
+				actionRequest, "emailArticleAddedSubject");
+		}
+		else if (Validator.isNull(emailArticleAddedBody)) {
+			SessionErrors.add(actionRequest, "emailArticleAddedBody");
+		}
+		else {
+			preferences.setValue(
+				"email-article-added-enabled",
+				String.valueOf(emailArticleAddedEnabled));
+			preferences.setValue(
+				"email-article-added-subject",
+				emailArticleAddedSubject);
+			preferences.setValue(
+				"email-article-added-body",
+				emailArticleAddedBody);
 		}
 	}
 
@@ -236,6 +273,37 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				"email-article-review-subject", emailArticleReviewSubject);
 			preferences.setValue(
 				"email-article-review-body", emailArticleReviewBody);
+		}
+	}
+
+	protected void updateEmailArticleUpdated(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		boolean emailArticleUpdatedEnabled = ParamUtil.getBoolean(
+			actionRequest, "emailArticleUpdatedEnabled");
+		String emailArticleUpdatedSubject = ParamUtil.getString(
+			actionRequest, "emailArticleUpdatedSubject");
+		String emailArticleUpdatedBody = ParamUtil.getString(
+			actionRequest, "emailArticleUpdatedBody");
+
+		if (Validator.isNull(emailArticleUpdatedSubject)) {
+			SessionErrors.add(
+				actionRequest, "emailArticleUpdatedSubject");
+		}
+		else if (Validator.isNull(emailArticleUpdatedBody)) {
+			SessionErrors.add(actionRequest, "emailArticleUpdatedBody");
+		}
+		else {
+			preferences.setValue(
+				"email-article-updated-enabled",
+				String.valueOf(emailArticleUpdatedEnabled));
+			preferences.setValue(
+				"email-article-updated-subject",
+				emailArticleUpdatedSubject);
+			preferences.setValue(
+				"email-article-updated-body",
+				emailArticleUpdatedBody);
 		}
 	}
 

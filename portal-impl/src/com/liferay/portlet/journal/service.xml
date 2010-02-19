@@ -110,8 +110,10 @@
 
 		<reference package-path="com.liferay.mail" entity="Mail" />
 		<reference package-path="com.liferay.portal" entity="Company" />
+		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Image" />
 		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
+		<reference package-path="com.liferay.portal" entity="Subscription" />
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetCategory" />

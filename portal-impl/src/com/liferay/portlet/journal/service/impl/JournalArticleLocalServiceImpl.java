@@ -23,11 +23,15 @@
 package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.NoSuchImageException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
@@ -54,6 +58,7 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.ResourceConstants;
@@ -354,6 +359,204 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return article;
+	}
+
+	protected void notifySubscribers(
+			JournalArticle article, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		if (!article.isApproved()) {
+			return;
+		}
+
+		String articleURL = PortalUtil.getControlPanelFullURL(
+				serviceContext.getScopeGroupId(),  PortletKeys.JOURNAL, null);
+
+		if (Validator.isNull(articleURL)) {
+			return;
+		}
+
+		PortletPreferences preferences =
+			ServiceContextUtil.getPortletPreferences(serviceContext);
+
+		if (preferences == null) {
+			long ownerId = article.getGroupId();
+			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+			long plid = PortletKeys.PREFS_PLID_SHARED;
+			String portletId = PortletKeys.JOURNAL;
+			String defaultPreferences = null;
+
+			preferences = portletPreferencesLocalService.getPreferences(
+				article.getCompanyId(), ownerId, ownerType, plid, portletId,
+				defaultPreferences);
+		}
+
+		if ((article.getVersion() == 1.0) &&
+			JournalUtil.getEmailArticleAddedEnabled(preferences)) {
+		}
+		else if (article.getVersion() != 1.0 &&
+			JournalUtil.getEmailArticleUpdatedEnabled(preferences)) {
+		}
+		else {
+			return;
+		}
+
+		Company company = companyPersistence.findByPrimaryKey(
+			article.getCompanyId());
+
+		Group group = groupPersistence.findByPrimaryKey(
+			serviceContext.getScopeGroupId());
+
+		String emailAddress = StringPool.BLANK;
+		String fullName = article.getUserName();
+
+		try {
+			User user = userPersistence.findByPrimaryKey(article.getUserId());
+
+			emailAddress = user.getEmailAddress();
+			fullName = user.getFullName();
+		}
+		catch (NoSuchUserException nsue) {
+		}
+
+		String portletName = PortalUtil.getPortletTitle(
+			PortletKeys.JOURNAL, LocaleUtil.getDefault());
+
+		String fromName = JournalUtil.getEmailFromName(preferences);
+		String fromAddress = JournalUtil.getEmailFromAddress(preferences);
+
+		fromName = StringUtil.replace(
+			fromName,
+			new String[] {
+				"[$ARTICLE_ID$]",
+				"[$ARTICLE_TITLE$]",
+				"[$ARTICLE_USER_ADDRESS$]",
+				"[$ARTICLE_USER_NAME$]",
+				"[$ARTICLE_VERSION$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]",
+			},
+			new String[] {
+				article.getArticleId(),
+				article.getTitle(),
+				emailAddress,
+				fullName,
+				String.valueOf(article.getVersion()),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				portletName,
+			});
+
+		fromAddress = StringUtil.replace(
+			fromAddress,
+			new String[] {
+				"[$ARTICLE_ID$]",
+				"[$ARTICLE_TITLE$]",
+				"[$ARTICLE_USER_ADDRESS$]",
+				"[$ARTICLE_USER_NAME$]",
+				"[$ARTICLE_VERSION$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]",
+			},
+			new String[] {
+				article.getArticleId(),
+				article.getTitle(),
+				emailAddress,
+				fullName,
+				String.valueOf(article.getVersion()),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				portletName,
+			});
+
+		String subject = null;
+		String body = null;
+
+		if (article.getVersion() == 1.0) {
+			subject = JournalUtil.getEmailArticleAddedSubject(preferences);
+			body = JournalUtil.getEmailArticleAddedBody(preferences);
+		}
+		else {
+			subject = JournalUtil.getEmailArticleUpdatedSubject(preferences);
+			body = JournalUtil.getEmailArticleUpdatedBody(preferences);
+		}
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$ARTICLE_ID$]",
+				"[$ARTICLE_TITLE$]",
+				"[$ARTICLE_URL$]",
+				"[$ARTICLE_USER_ADDRESS$]",
+				"[$ARTICLE_USER_NAME$]",
+				"[$ARTICLE_VERSION$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]",
+			},
+			new String[] {
+				article.getArticleId(),
+				article.getTitle(),
+				articleURL,
+				emailAddress,
+				fullName,
+				String.valueOf(article.getVersion()),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				portletName,
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$ARTICLE_ID$]",
+				"[$ARTICLE_TITLE$]",
+				"[$ARTICLE_URL$]",
+				"[$ARTICLE_USER_ADDRESS$]",
+				"[$ARTICLE_USER_NAME$]",
+				"[$ARTICLE_VERSION$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]",
+			},
+			new String[] {
+				article.getArticleId(),
+				article.getTitle(),
+				articleURL,
+				emailAddress,
+				fullName,
+				String.valueOf(article.getVersion()),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				portletName,
+			});
+
+		Message message = new Message();
+
+		message.put("companyId", article.getCompanyId());
+		message.put("userId", article.getUserId());
+		message.put("groupId", article.getGroupId());
+		message.put("articleId", article.getArticleId());
+		message.put("fromName", fromName);
+		message.put("fromAddress", fromAddress);
+		message.put("subject", subject);
+		message.put("body", body);
+		message.put("replyToAddress", fromAddress);
+		message.put("mailId", JournalUtil.getMailId(company.getMx(),
+						GetterUtil.getLong(article.getArticleId())));
+		message.put("htmlFormat", Boolean.TRUE);
+
+		MessageBusUtil.sendMessage(DestinationNames.JOURNALS, message);
 	}
 
 	public void addArticleResources(
@@ -1498,6 +1701,20 @@ public class JournalArticleLocalServiceImpl
 			status, reviewDate, andOperator);
 	}
 
+	public void subscribeGroup(long userId, long groupId)
+		throws PortalException, SystemException {
+
+		subscriptionLocalService.addSubscription(
+			userId, JournalArticle.class.getName(), groupId);
+	}
+
+	public void unsubscribeGroup(long userId, long groupId)
+		throws PortalException, SystemException {
+
+		subscriptionLocalService.deleteSubscription(
+			userId, JournalArticle.class.getName(), groupId);
+	}
+
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
 			boolean incrementVersion, String content)
@@ -1921,6 +2138,8 @@ public class JournalArticleLocalServiceImpl
 				throw new SystemException(ioe);
 			}
 		}
+
+		notifySubscribers(article, serviceContext);
 
 		return article;
 	}
@@ -2488,6 +2707,7 @@ public class JournalArticleLocalServiceImpl
 				"[$ARTICLE_ID$]",
 				"[$ARTICLE_TITLE$]",
 				"[$ARTICLE_URL$]",
+				"[$ARTICLE_USER_NAME$]",
 				"[$ARTICLE_VERSION$]",
 				"[$FROM_ADDRESS$]",
 				"[$FROM_NAME$]",
@@ -2500,6 +2720,7 @@ public class JournalArticleLocalServiceImpl
 				article.getArticleId(),
 				article.getTitle(),
 				articleURL,
+				article.getUserName(),
 				String.valueOf(article.getVersion()),
 				fromAddress,
 				fromName,
@@ -2515,6 +2736,7 @@ public class JournalArticleLocalServiceImpl
 				"[$ARTICLE_ID$]",
 				"[$ARTICLE_TITLE$]",
 				"[$ARTICLE_URL$]",
+				"[$ARTICLE_USER_NAME$]",
 				"[$ARTICLE_VERSION$]",
 				"[$FROM_ADDRESS$]",
 				"[$FROM_NAME$]",
@@ -2527,6 +2749,7 @@ public class JournalArticleLocalServiceImpl
 				article.getArticleId(),
 				article.getTitle(),
 				articleURL,
+				article.getUserName(),
 				String.valueOf(article.getVersion()),
 				fromAddress,
 				fromName,

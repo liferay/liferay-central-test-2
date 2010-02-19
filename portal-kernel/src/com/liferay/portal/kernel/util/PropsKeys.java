@@ -645,6 +645,12 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_CONTENT_SEARCH_SHOW_LISTED = "journal.content.search.show.listed";
 
+	public static final String JOURNAL_EMAIL_ARTICLE_ADDED_BODY = "journal.email.article.added.body";
+
+	public static final String JOURNAL_EMAIL_ARTICLE_ADDED_ENABLED = "journal.email.article.added.enabled";
+
+	public static final String JOURNAL_EMAIL_ARTICLE_ADDED_SUBJECT = "journal.email.article.added.subject";
+
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_BODY = "journal.email.article.approval.denied.body";
 
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_ENABLED = "journal.email.article.approval.denied.enabled";
@@ -668,6 +674,12 @@ public interface PropsKeys {
 	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_ENABLED = "journal.email.article.review.enabled";
 
 	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_SUBJECT = "journal.email.article.review.subject";
+
+	public static final String JOURNAL_EMAIL_ARTICLE_UPDATED_BODY = "journal.email.article.updated.body";
+
+	public static final String JOURNAL_EMAIL_ARTICLE_UPDATED_ENABLED = "journal.email.article.updated.enabled";
+
+	public static final String JOURNAL_EMAIL_ARTICLE_UPDATED_SUBJECT = "journal.email.article.updated.subject";
 
 	public static final String JOURNAL_EMAIL_FROM_ADDRESS = "journal.email.from.address";
 

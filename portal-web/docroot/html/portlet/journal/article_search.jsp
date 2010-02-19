@@ -109,15 +109,17 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <%
 boolean showAddArticleButtonButton = false;
 boolean showPermissionsButton = false;
+boolean showSubscribeLink = false;
 
 if (portletName.equals(PortletKeys.JOURNAL)) {
 	showAddArticleButtonButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE);
 	showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+	showSubscribeLink = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.SUBSCRIBE);
 }
 %>
 
 <c:if test="<%= showAddArticleButtonButton || showPermissionsButton %>">
-	<aui:button-row>
+	<aui:button-row cssClass="add-permission-button-row">
 		<c:if test="<%= showAddArticleButtonButton %>">
 			<aui:button onClick='<%= renderResponse.getNamespace() + "addArticle();" %>' value="add-web-content" />
 		</c:if>
@@ -133,6 +135,29 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 			<aui:button onClick="<%= permissionsURL %>" value="permissions" />
 		</c:if>
 	</aui:button-row>
+</c:if>
+
+<c:if test="<%= showSubscribeLink %>">
+	<c:choose>
+		<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(company.getCompanyId(), user.getUserId(), JournalArticle.class.getName(), scopeGroupId) %>">
+			<portlet:actionURL var="unsubscribeURL">
+				<portlet:param name="struts_action" value="/journal/edit_article" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon cssClass="subscribe-link" image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
+		</c:when>
+		<c:otherwise>
+			<portlet:actionURL var="subscribeURL">
+				<portlet:param name="struts_action" value="/journal/edit_article" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon cssClass="subscribe-link" image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
+		</c:otherwise>
+	</c:choose>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">

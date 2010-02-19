@@ -28,6 +28,14 @@
 	margin: 10px 0 0 0;
 }
 
+.portlet-journal .add-permission-button-row {
+	float: left;
+}
+
+.portlet-journal .article-separator {
+	clear: both;
+}
+
 .portlet-journal .journal-article-status-approved {
 	color: green;
 }
@@ -38,6 +46,12 @@
 
 .portlet-journal .journal-article-status-not-approved {
 	color: orange;
+}
+
+.portlet-journal .subscribe-link {
+	float: right;
+	margin-bottom: 1em;
+	margin-top: 2em;
 }
 
 .journal-template-error .scroll-pane {

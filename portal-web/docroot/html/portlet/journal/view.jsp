@@ -73,7 +73,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
 
-				<div class="separator"><!-- --></div>
+				<div class="separator article-separator"><!-- --></div>
 
 				<aui:button-row>
 					<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticles();" %>' value="expire" />

@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -55,6 +56,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.journal.TransformException;
@@ -99,6 +101,8 @@ import javax.portlet.PortletSession;
 public class JournalUtil {
 
 	public static final int MAX_STACK_SIZE = 20;
+
+	public static final String POP_PORTLET_PREFIX = "journals.";
 
 	public static final String XML_INDENT = "  ";
 
@@ -358,6 +362,51 @@ public class JournalUtil {
 		return preferences.getValue("email-from-name", emailFromName);
 	}
 
+	public static String getEmailArticleAddedBody(
+		PortletPreferences preferences) {
+
+		String emailArticleAddedBody = preferences.getValue(
+			"email-article-added-body", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailArticleAddedBody)) {
+			return emailArticleAddedBody;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_ADDED_BODY));
+		}
+	}
+
+	public static boolean getEmailArticleAddedEnabled(
+		PortletPreferences preferences) {
+
+		String emailArticleAddedEnabled = preferences.getValue(
+			"email-article-added-enabled", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailArticleAddedEnabled)) {
+			return GetterUtil.getBoolean(emailArticleAddedEnabled);
+		}
+		else {
+			return GetterUtil.getBoolean(PropsUtil.get(
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_ADDED_ENABLED));
+		}
+	}
+
+	public static String getEmailArticleAddedSubject(
+		PortletPreferences preferences) {
+
+		String emailArticleAddedSubject = preferences.getValue(
+			"email-article-added-subject", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailArticleAddedSubject)) {
+			return emailArticleAddedSubject;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_ADDED_SUBJECT));
+		}
+	}
+
 	public static boolean getEmailArticleApprovalDeniedEnabled(
 		PortletPreferences preferences) {
 
@@ -536,6 +585,66 @@ public class JournalUtil {
 			return ContentUtil.get(PropsUtil.get(
 				PropsKeys.JOURNAL_EMAIL_ARTICLE_REVIEW_SUBJECT));
 		}
+	}
+
+	public static String getEmailArticleUpdatedBody(
+		PortletPreferences preferences) {
+
+		String emailArticleUpdatedBody = preferences.getValue(
+			"email-article-updated-body", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailArticleUpdatedBody)) {
+			return emailArticleUpdatedBody;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_BODY));
+		}
+	}
+
+	public static boolean getEmailArticleUpdatedEnabled(
+		PortletPreferences preferences) {
+
+		String emailArticleUpdatedEnabled = preferences.getValue(
+			"email-article-updated-enabled", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailArticleUpdatedEnabled)) {
+			return GetterUtil.getBoolean(emailArticleUpdatedEnabled);
+		}
+		else {
+			return GetterUtil.getBoolean(PropsUtil.get(
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_ENABLED));
+		}
+	}
+
+	public static String getEmailArticleUpdatedSubject(
+		PortletPreferences preferences) {
+
+		String emailArticleUpdatedSubject = preferences.getValue(
+			"email-article-updated-subject", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailArticleUpdatedSubject)) {
+			return emailArticleUpdatedSubject;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_SUBJECT));
+		}
+	}
+
+	public static String getMailId(String mx, long entryId) {
+		StringBundler sb = new StringBundler(8);
+
+		sb.append(StringPool.LESS_THAN);
+		sb.append(POP_PORTLET_PREFIX);
+		sb.append(entryId);
+		sb.append(StringPool.AT);
+		sb.append(PropsValues.POP_SERVER_SUBDOMAIN);
+		sb.append(StringPool.PERIOD);
+		sb.append(mx);
+		sb.append(StringPool.GREATER_THAN);
+
+		return sb.toString();
 	}
 
 	public static Stack<JournalArticle> getRecentArticles(
