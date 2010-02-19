@@ -43,24 +43,17 @@ catch (Exception e) {
 		<div class="feed">
 
 			<%
-			StringBuilder sb = new StringBuilder();
+			String baseURL = null;
 
 			String feedLink = feed.getLink();
 
 			if ((feedLink == null) || (!HttpUtil.hasDomain(feedLink))) {
-				sb.append(HttpUtil.getProtocol(url));
-				sb.append(Http.PROTOCOL_DELIMITER);
-				sb.append(HttpUtil.getDomain(url));
-
-				feedLink = sb.toString() + feed.getLink();
+				baseURL = HttpUtil.getProtocol(url).concat(Http.PROTOCOL_DELIMITER).concat(HttpUtil.getDomain(url));
+				feedLink = baseURL.concat(feedLink);
 			}
 			else {
-				sb.append(HttpUtil.getProtocol(feedLink));
-				sb.append(Http.PROTOCOL_DELIMITER);
-				sb.append(HttpUtil.getDomain(feedLink));
+				baseURL = HttpUtil.getProtocol(feedLink).concat(Http.PROTOCOL_DELIMITER).concat(HttpUtil.getDomain(feedLink));
 			}
-
-			String baseURL = sb.toString();
 
 			Date publishedDate = feed.getPublishedDate();
 			String description = feed.getDescription();
