@@ -14,6 +14,16 @@
 	<propertycopy name="db.username" from="db.${db.type}.username" silent="true" />
 	<propertycopy name="db.password" from="db.${db.type}.password" silent="true" />
 
+	<target name="clean-up-bundles">
+		<delete file="test.${user.name}.properties" />
+
+		<delete dir="${user.home}/liferay"/>
+
+		<delete includeemptydirs="true">
+			<fileset dir="${app.server.parent.dir}" excludes="*.zip"/>
+		</delete>
+	</target>
+
 	<target name="prepare-common">
 		<antcall target="prepare-portal-properties" inheritAll="false" />
 
@@ -31,8 +41,16 @@
 			value="session-timeout&gt;2&lt;"
 		/>
 
-		<antcall target="clean" />
-		<antcall target="start" />
+		<if>
+			<not>
+				<equals arg1="${skip.prepare-bundle}" arg2="true" />
+			</not>
+			<then>
+				<antcall target="clean" />
+
+				<antcall target="start" />
+			</then>
+		</if>
 	</target>
 
 	<target name="prepare-mysql">
@@ -76,6 +94,17 @@ jdbc.default.minPoolSize=1
 jdbc.default.numHelperThreads=1</echo>
 			</then>
 		</if>
+
+		<if>
+			<not>
+				<equals arg1="${custom.properties}" arg2="$${custom.properties}" />
+			</not>
+			<then>
+				<echo file="portal-impl/src/portal-ext.properties" append="true">
+
+${custom.properties}</echo>
+			</then>
+		</if>
 	</target>
 
 	<target name="prepare-portal-properties">
@@ -103,6 +132,22 @@ jdbc.default.numHelperThreads=1</echo>
 		<echo file="test.${user.name}.properties">db.type=postgresql</echo>
 
 		<antcall target="prepare-common" />
+	</target>
+
+	<target name="prepare-root-xml">
+		<echo file="${app.server.tomcat.dir}/conf/Catalina/localhost/ROOT.xml"><![CDATA[<Context path="" crossContext="true">
+
+<Resource
+	name="jdbc/LiferayPool"
+	auth="Container"
+	type="javax.sql.DataSource"
+	driverClassName="${db.driver}"
+	url="${db.url}"
+	username="${db.username}"
+	password="${db.password}"
+	maxActive="20"
+/>
+</Context>]]></echo>
 	</target>
 
 	<target name="prepare-sql-server">

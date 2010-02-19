@@ -3,64 +3,7 @@
 <project name="portal-test-db-postgresql" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="test-db-postgresql">
-		<antcall target="prepare-postgresql" />
-
-		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
-
-		<antcall target="test-db-postgresql-latest" />
-		<!--<antcall target="test-db-postgresql-5.1.0" />-->
-		<antcall target="test-db-postgresql-5.1.1" />
-		<antcall target="test-db-postgresql-5.1.2" />
-		<antcall target="test-db-postgresql-5.2.0" />
-		<antcall target="test-db-postgresql-5.2.1" />
-		<antcall target="test-db-postgresql-5.2.2" />
-		<antcall target="test-db-postgresql-5.2.3" />
-	</target>
-
-	<target name="test-db-postgresql-5.1.0">
-		<antcall target="test-db-postgresql-common">
-			<param name="sql.version" value="5.1.0" />
-		</antcall>
-	</target>
-
-	<target name="test-db-postgresql-5.1.1">
-		<antcall target="test-db-postgresql-common">
-			<param name="sql.version" value="5.1.1" />
-		</antcall>
-	</target>
-
-	<target name="test-db-postgresql-5.1.2">
-		<antcall target="test-db-postgresql-common">
-			<param name="sql.version" value="5.1.2" />
-		</antcall>
-	</target>
-
-	<target name="test-db-postgresql-5.2.0">
-		<antcall target="test-db-postgresql-common">
-			<param name="sql.version" value="5.2.0" />
-		</antcall>
-	</target>
-
-	<target name="test-db-postgresql-5.2.1">
-		<antcall target="test-db-postgresql-common">
-			<param name="sql.version" value="5.2.1" />
-		</antcall>
-	</target>
-
-	<target name="test-db-postgresql-5.2.2">
-		<antcall target="test-db-postgresql-common">
-			<param name="sql.version" value="5.2.2" />
-		</antcall>
-	</target>
-
-	<target name="test-db-postgresql-5.2.3">
-		<antcall target="test-db-postgresql-common">
-			<param name="sql.version" value="5.2.3" />
-		</antcall>
-	</target>
-
-	<target name="test-db-postgresql-common">
+	<target name="prepare-db-postgresql-common">
 		<echo file="test.${user.name}.properties">db.type=postgresql</echo>
 
 		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
@@ -81,26 +24,269 @@
 			<param name="sql.dir" value="${sql.dir}" />
 			<param name="sql.file" value="${sql.file}" />
 		</antcall>
-
-		<antcall target="start-selenium" />
-
-		<ant antfile="build-test-tomcat.xml" target="run-tomcat">
-			<property name="skip.rebuild-database" value="true" />
-			<property name="test.class" value="SmokeTestSuite" />
-		</ant>
-
-		<antcall target="stop-selenium" />
-
-		<delete file="test.${user.name}.properties" />
 	</target>
 
-	<target name="test-db-postgresql-latest">
+	<target name="run-latest-upgrade-test">
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat" inheritAll="false">
+			<property name="skip.rebuild-database" value="true" />
+		</ant>
+	</target>
+
+	<target name="run-smoke-test">
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat" inheritAll="false">
+			<property name="skip.rebuild-database" value="true" />
+			<property name="test.name" value="SmokeTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-versioned-upgrade-test">
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-versioned-tomcat" inheritAll="false">
+			<property name="skip.rebuild-database" value="true" />
+		</ant>
+
+		<antcall target="clean-up-bundles" />
+	</target>
+
+	<target name="test-db-postgresql-5.1.0-data-upgrade-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.1.0" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.0.zip" />
+			<param name="legacy.config" value="true" />
+			<param name="license.type" value="ce" />
+			<param name="lp.version" value="5.1.0" />
+			<param name="test.name" value="SmokeTestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.0" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="test.name" value="SmokeTestSuite" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.1.0-smoke-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.1.0" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.1.1-data-upgrade-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.1.1" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.1.zip" />
+			<param name="legacy.config" value="true" />
+			<param name="license.type" value="ce" />
+			<param name="lp.version" value="5.1.1" />
+			<param name="test.name" value="SmokeTestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.1" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="test.name" value="SmokeTestSuite" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.1.1-smoke-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.1.1" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.1.2-data-upgrade-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.1.2" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.2.zip" />
+			<param name="legacy.config" value="true" />
+			<param name="license.type" value="ce" />
+			<param name="lp.version" value="5.1.2" />
+			<param name="test.name" value="SmokeTestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.2" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="test.name" value="SmokeTestSuite" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.1.2-smoke-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.1.2" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.2.0-data-upgrade-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.2.0" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.0.zip" />
+			<param name="license.type" value="ce" />
+			<param name="lp.version" value="5.2.0" />
+			<param name="test.name" value="SmokeTestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-5.2.0/tomcat-6.0.18" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="test.name" value="SmokeTestSuite" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.2.0-smoke-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.2.0" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.2.1-data-upgrade-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.2.1" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.1.zip" />
+			<param name="license.type" value="ce" />
+			<param name="lp.version" value="5.2.1" />
+			<param name="test.name" value="SmokeTestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-5.2.1/tomcat-6.0.18" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="test.name" value="SmokeTestSuite" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.2.1-smoke-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.2.1" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.2.2-data-upgrade-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.2.2" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.2.zip" />
+			<param name="license.type" value="ce" />
+			<param name="lp.version" value="5.2.2" />
+			<param name="test.name" value="SmokeTestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-5.2.2/tomcat-6.0.18" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="test.name" value="SmokeTestSuite" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.2.2-smoke-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.2.2" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.2.3-data-upgrade-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.2.3" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.3.zip" />
+			<param name="license.type" value="ce" />
+			<param name="lp.version" value="5.2.3" />
+			<param name="test.name" value="SmokeTestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-5.2.3/tomcat-6.0.18" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="test.name" value="SmokeTestSuite" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.2.3-smoke-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.2.3" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-latest-smoke-test">
 		<echo file="create-${db.postgresql.schema}.sql">drop database lportal;
 create database lportal encoding = 'UNICODE';</echo>
 
-		<antcall target="test-db-postgresql-common">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.dir" value="" />
 			<param name="sql.file" value="create-${db.postgresql.schema}.sql" />
 		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-smoke-test">
+		<antcall target="prepare-postgresql" />
+
+		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
+
+		<antcall target="test-db-postgresql-latest-smoke-test" />
+		<!--<antcall target="test-db-postgresql-5.1.0-smoke-test" />-->
+		<antcall target="test-db-postgresql-5.1.1-smoke-test" />
+		<antcall target="test-db-postgresql-5.1.2-smoke-test" />
+		<antcall target="test-db-postgresql-5.2.0-smoke-test" />
+		<antcall target="test-db-postgresql-5.2.1-smoke-test" />
+		<antcall target="test-db-postgresql-5.2.2-smoke-test" />
+		<antcall target="test-db-postgresql-5.2.3-smoke-test" />
 	</target>
 </project>

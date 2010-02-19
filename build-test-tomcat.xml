@@ -3,6 +3,28 @@
 <project name="portal-test-tomcat" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
+ 	<target name="copy-5.1.7-5.2.7-upgrade-dependencies">
+		<copy
+			file="${hudson.dependencies.dir}${lp.version}_${license.type}/lpe2005.7-ee5207-portal-impl-jdk5.jar"
+			todir="${app.server.tomcat.lib.portal.dir}"
+		/>
+
+		<copy
+			file="${hudson.dependencies.dir}${lp.version}_${license.type}/lpe2005-ee5207-hook-5.2.7.1.war"
+			todir="${app.server.parent.dir}/${ee.deploy.dir}"
+		/>
+	</target>
+
+	<target name="copy-optional-jars">
+		<copy
+			todir="${app.server.lib.global.dir}">
+				<fileset
+					dir="${jdbc.drivers.optional.dir}"
+					includes="*.jar"
+			/>
+		</copy>
+	</target>
+
 	<target name="prepare-cluster-tomcat-node">
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-${lp.version}.zip ${vm.username}@${cluster-node.host}:/" />
@@ -95,10 +117,81 @@ web.server.display.node=true</echo>
 
 		<antcall target="start-selenium" />
 
-		<antcall target="run-tomcat">
+		<antcall target="run-tomcat" inheritAll="false">
 			<param name="portlet.plugins.includes" value="${portlet.plugins.includes}" />
 			<param name="test.class" value="${test.name}" />
 			<param name="theme.plugins.includes" value="${theme.plugins.includes}" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+	</target>
+
+	<target name="run-selenium-versioned-tomcat">
+		<unzip src="${hudson.dependencies.dir}/${lp.version}_${license.type}/${file.name}" dest="${app.server.parent.dir}" />
+
+		<echo file="app.server.${user.name}.properties">app.server.tomcat.dir=${app.server.parent.dir}/${tomcat.folder.dir}</echo>
+
+		<if>
+			<not>
+				<equals arg1="${jdbc.drivers.optional.dir}" arg2="$${jdbc.drivers.optional.dir}" />
+			</not>
+			<then>
+				<antcall target="copy-optional-jars" inheritAll="false" />
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${legacy.config}" arg2="true" />
+			<then>
+				<if>
+					<equals arg1="${db.type}" arg2="mysql" />
+					<then>
+						<antcall target="prepare-root-xml" inheritAll="false">
+							<param name="db.url" value="jdbc:mysql://${db.mysql.host}/lportal?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;useFastDateParsing=false" />
+						</antcall>
+					</then>
+					<else>
+						<antcall target="prepare-root-xml" inheritAll="false"/>
+					</else>
+				</if>
+			</then>
+		</if>
+
+		<antcall target="deploy-properties" inheritAll="false"/>
+
+		<if>
+			<contains string="${custom.properties}" substring="upgrade.processes=com.liferay.portal.upgrade.UpgradeProcess_5_1_7_to_5_2_7" />
+			<then>
+				<antcall target="copy-5.1.7-5.2.7-upgrade-dependencies" inheritAll="false" />
+			</then>
+		</if>
+
+		<if>
+			<and>
+				<equals arg1="${license.type}" arg2="ee" />
+				<equals arg1="${lp.version}" arg2="5.1.7" />
+			</and>
+				<then>
+					<copy
+						file="${hudson.dependencies.dir}${lp.version}_${license.type}/license"
+						todir="${user.home}/liferay/ee"
+					/>
+				</then>
+			<elseif>
+				<equals arg1="${license.type}" arg2="ee" />
+				<then>
+					<copy
+						file="${hudson.dependencies.dir}${lp.version}_${license.type}/license"
+						todir="${app.server.parent.dir}/${ee.license.dir}"
+					/>
+				</then>
+			</elseif>
+		</if>
+
+		<antcall target="start-selenium" />
+
+		<antcall target="run-tomcat" inheritAll="false">
+			<param name="test.class" value="${test.name}" />
 		</antcall>
 
 		<antcall target="stop-selenium" />
