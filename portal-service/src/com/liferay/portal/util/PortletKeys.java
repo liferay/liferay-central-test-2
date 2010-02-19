@@ -45,11 +45,11 @@ public class PortletKeys {
 
 	public static final String ASSET_PUBLISHER = "101";
 
-	public static final String BOOKMARKS = "28";
-
 	public static final String BLOGS = "33";
 
 	public static final String BLOGS_AGGREGATOR = "115";
+
+	public static final String BOOKMARKS = "28";
 
 	public static final String CALENDAR = "8";
 
@@ -59,21 +59,23 @@ public class PortletKeys {
 
 	public static final String CURRENCY_CONVERTER = "16";
 
+	public static final String DICTIONARY = "23";
+
+	public static final String DIRECTORY = "11";
+
 	public static final String DOCKBAR = "145";
 
 	public static final String DOCUMENT_LIBRARY = "20";
 
 	public static final String DOCUMENT_LIBRARY_DISPLAY = "110";
 
-	public static final String DICTIONARY = "23";
-
-	public static final String DIRECTORY = "11";
-
 	public static final String ENTERPRISE_ADMIN = "79";
 
 	public static final String ENTERPRISE_ADMIN_COMMUNITIES = "134";
 
 	public static final String ENTERPRISE_ADMIN_MONITORING = "131";
+
+	public static final String ENTERPRISE_ADMIN_ORGANIZATIONS = "126";
 
 	public static final String ENTERPRISE_ADMIN_PASSWORD_POLICIES = "129";
 
@@ -82,8 +84,6 @@ public class PortletKeys {
 	public static final String ENTERPRISE_ADMIN_ROLES = "128";
 
 	public static final String ENTERPRISE_ADMIN_SETTINGS = "130";
-
-	public static final String ENTERPRISE_ADMIN_ORGANIZATIONS = "126";
 
 	public static final String ENTERPRISE_ADMIN_USER_GROUPS = "127";
 
@@ -147,17 +147,17 @@ public class PortletKeys {
 
 	public static final long PREFS_OWNER_ID_DEFAULT = 0;
 
+	public static final int PREFS_OWNER_TYPE_ARCHIVED = 5;
+
 	public static final int PREFS_OWNER_TYPE_COMPANY = 1;
 
 	public static final int PREFS_OWNER_TYPE_GROUP = 2;
 
 	public static final int PREFS_OWNER_TYPE_LAYOUT = 3;
 
-	public static final int PREFS_OWNER_TYPE_USER = 4;
-
-	public static final int PREFS_OWNER_TYPE_ARCHIVED = 5;
-
 	public static final int PREFS_OWNER_TYPE_ORGANIZATION  = 6;
+
+	public static final int PREFS_OWNER_TYPE_USER = 4;
 
 	public static final long PREFS_PLID_SHARED = 0;
 
@@ -183,9 +183,9 @@ public class PortletKeys {
 
 	public static final String TAGS_CATEGORIES_NAVIGATION = "122";
 
-	public static final String TAGS_COMPILER = "103";
-
 	public static final String TAGS_CLOUD = "148";
+
+	public static final String TAGS_COMPILER = "103";
 
 	public static final String TAGS_ENTRIES_NAVIGATION = "141";
 
