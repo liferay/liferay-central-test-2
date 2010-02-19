@@ -64,8 +64,6 @@ else if (selUser != null) {
 	}
 }
 
-String organizationId = ParamUtil.getString(request, "organizationId");
-
 String organizationIds = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
 
 List<Organization> organizations = Collections.EMPTY_LIST;
@@ -84,8 +82,6 @@ else {
 		organizations = EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);
 	}
 }
-
-String roleId = ParamUtil.getString(request, "roleId");
 
 String roleIds = ParamUtil.getString(request, "rolesSearchContainerPrimaryKeys");
 
@@ -127,8 +123,6 @@ for (UserGroupRole userGroupRole : userGroupRoles) {
 		organizationRoles.add(userGroupRole);
 	}
 }
-
-String userGroupId = ParamUtil.getString(request, "userGroupId");
 
 String userGroupIds = ParamUtil.getString(request, "userGroupsSearchContainerPrimaryKeys");
 
@@ -187,9 +181,6 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 	<aui:input name="redirect" type="hidden" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="p_u_i_d" type="hidden" value="<%= (selUser != null) ? selUser.getUserId() : 0 %>" />
-	<aui:input name="organizationsSearchContainerPrimaryKeys" type="hidden" value="<%= organizationId %>" />
-	<aui:input name="rolesSearchContainerPrimaryKeys" type="hidden" value="<%= roleId %>" />
-	<aui:input name="userGroupsSearchContainerPrimaryKeys" type="hidden" value="<%= userGroupId %>" />
 
 	<div id="<portlet:namespace />sectionsContainer">
 		<table class="user-table" width="100%">
