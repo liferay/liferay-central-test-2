@@ -20,40 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.blogs.job;
+package com.liferay.portlet.blogs.messaging;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobSchedulerUtil;
-import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
 
 /**
- * <a href="BlogsScheduler.java.html"><b><i>View Source</i></b></a>
+ * <a href="TrackbackVerifierMessageListener.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Alexander Chow
+ * @author Tina Tian
  */
-public class BlogsScheduler implements Scheduler {
+public class TrackbackVerifierMessageListener implements MessageListener {
 
-	public void schedule() {
-		if (PropsValues.BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL <= 0) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Verification of blogs trackbacks is disabled");
-			}
-
-			_trackbackVerifier = null;
+	public void receive(Message message) {
+		try {
+			TrackbackVerifierUtil.verifyNewPosts();
 		}
-
-		JobSchedulerUtil.schedule(_trackbackVerifier);
+		catch (Exception e) {
+			_log.error(e);
+		}
 	}
 
-	public void unschedule() {
-		JobSchedulerUtil.unschedule(_trackbackVerifier);
-	}
-
-	private IntervalJob _trackbackVerifier = new TrackbackVerifierJob();
-
-	private static Log _log = LogFactoryUtil.getLog(Scheduler.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		TrackbackVerifierMessageListener.class);
 
 }
