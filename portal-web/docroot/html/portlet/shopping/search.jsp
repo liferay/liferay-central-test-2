@@ -113,7 +113,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// SKU and small image
 
-	StringBuilder sb = new StringBuilder();
+	StringBundler sb = new StringBundler();
 
 	if (item.isSmallImage()) {
 		sb.append("<br />");
@@ -142,7 +142,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Description
 
-	sb = new StringBuilder();
+	sb = new StringBundler();
 
 	sb.append(item.getName());
 
