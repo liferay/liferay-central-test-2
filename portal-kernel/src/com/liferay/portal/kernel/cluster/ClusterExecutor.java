@@ -34,10 +34,10 @@ import java.util.concurrent.Future;
  */
 public interface ClusterExecutor {
 
-	public Future<?> executeUnicastCall(
-			Address address, MethodWrapper methodWrapper);
-
 	public Map<Address, Future<?>> executeMulicastCall(
-			MethodWrapper methodWrapper);
+		MethodWrapper methodWrapper);
+
+	public Future<?> executeUnicastCall(
+		Address address, MethodWrapper methodWrapper);
 
 }
