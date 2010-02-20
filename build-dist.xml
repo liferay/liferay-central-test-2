@@ -841,6 +841,9 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 			 src="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
 			 dest="${app.server.parent.dir}"
 		>
+			<patternset
+				includes="glassfishv3/glassfish/**"
+			/>
 			<mapper
 				type="glob"
 				from="glassfishv3/glassfish/*"
