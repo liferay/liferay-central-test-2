@@ -58,7 +58,7 @@ public class ClusterLinkUtil {
 				_log.warn("ClusterLinkUtil has not been initialized");
 			}
 
-			return Collections.emptyList();
+			return Collections.EMPTY_LIST;
 		}
 
 		return _clusterLink.getControlAddresses();
@@ -82,7 +82,7 @@ public class ClusterLinkUtil {
 				_log.warn("ClusterLinkUtil has not been initialized");
 			}
 
-			return Collections.emptyList();
+			return Collections.EMPTY_LIST;
 		}
 
 		return _clusterLink.getLocalTransportAddresses();
@@ -94,7 +94,7 @@ public class ClusterLinkUtil {
 				_log.warn("ClusterLinkUtil has not been initialized");
 			}
 
-			return Collections.emptyList();
+			return Collections.EMPTY_LIST;
 		}
 
 		return _clusterLink.getTransportAddresses(priority);
@@ -161,8 +161,7 @@ public class ClusterLinkUtil {
 	private static final String _CLUSTER_FORWARD_MESSAGE =
 		"CLUSTER_FORWARD_MESSAGE";
 
-	private static final Log _log =
-		LogFactoryUtil.getLog(ClusterLinkUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(ClusterLinkUtil.class);
 
 	private static ClusterLink _clusterLink;
 

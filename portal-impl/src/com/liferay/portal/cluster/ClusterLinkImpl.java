@@ -112,7 +112,7 @@ public class ClusterLinkImpl implements ClusterLink {
 
 	public List<Address> getControlAddresses() {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
-			return Collections.emptyList();
+			return Collections.EMPTY_LIST;
 		}
 
 		return getAddresses(_controlChannel);
@@ -128,13 +128,13 @@ public class ClusterLinkImpl implements ClusterLink {
 
 	public List<Address> getLocalTransportAddresses() {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
-			return Collections.emptyList();
+			return Collections.EMPTY_LIST;
 		}
 
 		List<Address> addresses = new ArrayList<Address>(
-				_localTransportAddresses.size());
+			_localTransportAddresses.size());
 
-		for(org.jgroups.Address address : _localTransportAddresses) {
+		for (org.jgroups.Address address : _localTransportAddresses) {
 			addresses.add(new AddressImpl(address));
 		}
 
@@ -143,7 +143,7 @@ public class ClusterLinkImpl implements ClusterLink {
 
 	public List<Address> getTransportAddresses(Priority priority) {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
-			return Collections.emptyList();
+			return Collections.EMPTY_LIST;
 		}
 
 		JChannel channel = getChannel(priority);
@@ -205,8 +205,9 @@ public class ClusterLinkImpl implements ClusterLink {
 			new ReceiverAdapter() {
 
 				public void receive(org.jgroups.Message message) {
-					if ((!_localTransportAddresses.contains(message.getSrc()))
-						|| (message.getDest() != null)) {
+					if ((!_localTransportAddresses.contains(
+							message.getSrc())) ||
+						(message.getDest() != null)) {
 
 						_clusterForwardMessageListener.receive(
 							(Message)message.getObject());
@@ -242,7 +243,7 @@ public class ClusterLinkImpl implements ClusterLink {
 		Vector<org.jgroups.Address> jGroupsAddresses = view.getMembers();
 
 		if (jGroupsAddresses == null) {
-			return Collections.emptyList();
+			return Collections.EMPTY_LIST;
 		}
 
 		List<Address> addresses = new ArrayList<Address>(
@@ -310,12 +311,13 @@ public class ClusterLinkImpl implements ClusterLink {
 	}
 
 	protected void initChannels() throws ChannelException {
-		Properties controlProperty =
-			PropsUtil.getProperties(
-				PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL, false);
+		Properties controlProperty = PropsUtil.getProperties(
+			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL, false);
 
-		_controlChannel = createChannel(controlProperty.getProperty(
+		_controlChannel = createChannel(
+			controlProperty.getProperty(
 				PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL));
+
 		_controlChannel.connect(_LIFERAY_CONTROL_CHANNEL);
 
 		Properties transportProperties = PropsUtil.getProperties(
@@ -328,8 +330,8 @@ public class ClusterLinkImpl implements ClusterLink {
 				"Channel count must be between 1 and " + _MAX_CHANNEL_COUNT);
 		}
 
-		_localTransportAddresses =
-				new ArrayList<org.jgroups.Address>(_channelCount);
+		_localTransportAddresses = new ArrayList<org.jgroups.Address>(
+			_channelCount);
 		_transportChannels = new ArrayList<JChannel>(_channelCount);
 
 		List<String> keys = new ArrayList<String>(_channelCount);
@@ -346,6 +348,7 @@ public class ClusterLinkImpl implements ClusterLink {
 			String value = transportProperties.getProperty(customName);
 
 			JChannel channel = createChannel(value);
+
 			channel.connect(_LIFERAY_TRANSPORT_CHANNEL + i);
 
 			_localTransportAddresses.add(channel.getLocalAddress());
@@ -384,8 +387,7 @@ public class ClusterLinkImpl implements ClusterLink {
 
 	private static final int _MAX_CHANNEL_COUNT = Priority.values().length;
 
-	private static final Log _log =
-		LogFactoryUtil.getLog(ClusterLinkImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(ClusterLinkImpl.class);
 
 	private int _channelCount;
 	private ClusterForwardMessageListener _clusterForwardMessageListener;
