@@ -257,12 +257,24 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
-				<copy todir="${app.server.lib.global.dir}">
-					<fileset
-						dir="lib/portal"
-						includes="ccpp.jar,log4j.jar"
-					/>
-				</copy>
+				<loadfile property="domain.xml.content" srcFile="${app.server.glassfish.instance.dir}/config/domain.xml" />
+
+				<antelope:stringutil string="${domain.xml.content}" property="domain.xml.content.index">
+					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
+				</antelope:stringutil>
+
+				<if>
+					<equals arg1="${domain.xml.content.index}" arg2="-1" />
+					<then>
+						<replace file="${app.server.glassfish.instance.dir}/config/domain.xml">
+							<replacetoken><![CDATA[<jvm-options>-Xmx512m</jvm-options>]]></replacetoken>
+							<replacevalue><![CDATA[<jvm-options>-Dfile.encoding=UTF8</jvm-options>
+	<jvm-options>-Duser.timezone=GMT</jvm-options>
+	<jvm-options>-Xmx1024m</jvm-options>
+	<jvm-options>-XX:MaxPermSize=256m</jvm-options>]]></replacevalue>
+						</replace>
+					</then>
+				</if>
 			</then>
 		</if>
 

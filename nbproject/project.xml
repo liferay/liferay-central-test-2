@@ -52,12 +52,6 @@
                     <encoding>UTF-8</encoding>
                 </source-folder>
                 <source-folder>
-                    <label>support-glassfish\src</label>
-                    <type>java</type>
-                    <location>support-glassfish/src</location>
-                    <encoding>UTF-8</encoding>
-                </source-folder>
-                <source-folder>
                     <label>support-tomcat\src</label>
                     <type>java</type>
                     <location>support-tomcat/src</location>
@@ -136,10 +130,6 @@
                         <location>portal-web/test</location>
                     </source-folder>
                     <source-folder style="packages">
-                        <label>support-glassfish\src</label>
-                        <location>support-glassfish/src</location>
-                    </source-folder>
-                    <source-folder style="packages">
                         <label>support-tomcat\src</label>
                         <location>support-tomcat/src</location>
                     </source-folder>
@@ -180,7 +170,6 @@
                 <package-root>portal-kernel/test</package-root>
                 <package-root>portal-service/src</package-root>
                 <package-root>portal-web/test</package-root>
-                <package-root>support-glassfish/src</package-root>
                 <package-root>support-tomcat/src</package-root>
                 <package-root>util-bridges/src</package-root>
                 <package-root>util-java/src</package-root>

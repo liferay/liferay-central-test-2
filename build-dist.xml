@@ -55,177 +55,7 @@
 	</target>
 
 	<target name="build-dist-glassfish">
-		<antcall target="build-dist-glassfish-2" />
-		<antcall target="build-dist-glassfish-3" />
-	</target>
-
-	<target name="build-dist-glassfish-2">
-		<antcall target="build-dist-glassfish-2-configurator" />
-
-		<antcall target="build-dist-glassfish-2-aix" />
-		<antcall target="build-dist-glassfish-2-darwin" />
-		<antcall target="build-dist-glassfish-2-linux" />
-  		<antcall target="build-dist-glassfish-2-sunos" />
-		<antcall target="build-dist-glassfish-2-sunos_x86" />
-		<antcall target="build-dist-glassfish-2-windows" />
-
-		<delete file="liferay_configurator.jar" />
-	</target>
-
-	<target name="build-dist-glassfish-2-cmd">
-		<delete dir="${app.server.glassfish.installer.dir}" />
-
-		<java
-			dir="${app.server.parent.dir}"
-			fork="true"
-			input="tools/servers/glassfish/input.txt"
-			jar="${app.server.parent.dir}/glassfish-installer-v2.1-b60c-${glassfish.os}.jar"
-			maxmemory="256m"
-		>
-			<arg value="-console" />
-		</java>
-
-		<copy file="liferay_configurator.jar" todir="${app.server.glassfish.addons.dir}" />
-
-		<replace
-			file="${app.server.glassfish.dir}/registry.properties"
-			token="source=Glassfish"
-			value="source=Liferay ${lp.version} on Glassfish 2"
-		/>
-
-		<replace
-			file="${app.server.glassfish.dir}/lib/install/templates/default-domain.xml.template"
-			token="&lt;jvm-options&gt;-Xmx512m&lt;/jvm-options&gt;"
-			value="&lt;jvm-options&gt;-Xmx1024m&lt;/jvm-options&gt;&lt;jvm-options&gt;-XX:MaxPermSize=256m&lt;/jvm-options&gt;"
-		/>
-
-		<ant antfile="setup.xml" dir="${app.server.glassfish.installer.dir}" target="build-jarinstaller-pe">
-			<property name="glassfish.class" value="glassfish.class" />
-		</ant>
-
-		<move
-			file="${app.server.parent.dir}/glassfish-pe-installer.jar"
-			tofile="dist/liferay-portal-glassfish-${glassfish.os}-${lp.version}.jar"
-		/>
-	</target>
-
-	<target name="build-dist-glassfish-2-configurator">
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<copy
-			file="dist/liferay-portal-${lp.version}.war"
-			tofile="${tstamp.value}/liferay-portal.war"
-		/>
-
-		<ant dir="support-glassfish" target="clean" inheritAll="false" />
-		<ant dir="support-glassfish" target="compile" inheritAll="false" />
-
-		<mkdir dir="${tstamp.value}/META-INF/services" />
-
-		<echo file="${tstamp.value}/META-INF/services/com.sun.appserv.addons.Configurator" append="false">com.liferay.support.glassfish.LiferayAddonConfigurator</echo>
-
-		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${tstamp.value}" />
-			<param name="deployer.app.server.type" value="glassfish-tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="lib/portal" />
-		</antcall>
-
-		<zip destfile="liferay_configurator.jar">
-			<zipfileset
-				dir="${tstamp.value}"
-			/>
-			<zipfileset
-				dir="portal-kernel"
-				includes="portal-kernel.jar"
-			/>
-			<zipfileset
-				dir="portal-service"
-				includes="portal-service.jar"
-			/>
-			<zipfileset
-				dir="lib/development"
-				includes="hsql.jar,jtds.jar,mysql.jar,postgresql.jar"
-			/>
-			<zipfileset
-				dir="lib/global"
-				includes="annotations.jar,portlet.jar"
-			/>
-			<zipfileset
-				dir="lib/portal"
-				includes="log4j.jar,xercesImpl.jar"
-			/>
-			<zipfileset
-				dir="sql"
-				includes="lportal.properties,lportal.script"
-			/>
-			<zipfileset
-				dir="tools/servers/glassfish"
-				includes="update-domain.xml"
-			/>
-			<zipfileset
-				dir="tunnel-web"
-				includes="tunnel-web.war"
-			/>
-			<zipfileset
-				dir="support-glassfish/classes"
-			/>
-		</zip>
-
-		<delete dir="${tstamp.value}" />
-	</target>
-
-	<target name="build-dist-glassfish-2-aix">
-		<antcall target="build-dist-glassfish-2-cmd">
-			<param name="glassfish.os" value="aix" />
-		</antcall>
-	</target>
-
-	<target name="build-dist-glassfish-2-darwin">
-		<antcall target="build-dist-glassfish-2-cmd">
-			<param name="glassfish.os" value="darwin" />
-		</antcall>
-	</target>
-
-	<target name="build-dist-glassfish-2-linux">
-		<antcall target="build-dist-glassfish-2-cmd">
-			<param name="glassfish.os" value="linux" />
-		</antcall>
-	</target>
-
-	<target name="build-dist-glassfish-2-sunos">
-		<antcall target="build-dist-glassfish-2-cmd">
-			<param name="glassfish.os" value="sunos" />
-		</antcall>
-	</target>
-
-	<target name="build-dist-glassfish-2-sunos_x86">
-		<antcall target="build-dist-glassfish-2-cmd">
-			<param name="glassfish.os" value="sunos_x86" />
-		</antcall>
-	</target>
-
-	<target name="build-dist-glassfish-2-windows">
-		<antcall target="build-dist-glassfish-2-cmd">
-			<param name="glassfish.os" value="windows" />
-		</antcall>
-	</target>
-
-	<target name="build-dist-glassfish-3">
-		<delete dir="${app.server.glassfish.dir}" />
-
-		<unzip
-			 src="${app.server.parent.dir}/glassfish-v3-prelude.zip"
-			 dest="${app.server.parent.dir}"
-		/>
-
-		<move
-			file="${app.server.parent.dir}/glassfishv3-prelude/glassfish"
-			todir="${app.server.parent.dir}"
-		/>
-
-		<delete dir="${app.server.parent.dir}/glassfishv3-prelude" />
+		<antcall target="unzip-glassfish" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=glassfish
 
@@ -237,20 +67,9 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 
 		<delete file="app.server.${user.name}.properties" />
 
-		<replace
-			file="${app.server.glassfish.instance.dir}/config/domain.xml"
-			token="&lt;jvm-options&gt;-Xmx512m&lt;/jvm-options&gt;"
-			value="&lt;jvm-options&gt;-Xmx1024m&lt;/jvm-options&gt;&lt;jvm-options&gt;-XX:MaxPermSize=256m&lt;/jvm-options&gt;"
-		/>
-
-		<replace
-			file="${app.server.glassfish.dir}/lib/registration/servicetag-registry.xml"
-			token="GlassFish V3" value="Liferay ${lp.version} on GlassFish 3" summary="true"
-		/>
-
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.glassfish.deploy.dir}" />
-			<param name="deployer.app.server.type" value="glassfish-tomcat" />
+			<param name="deployer.app.server.type" value="glassfish" />
 			<param name="deployer.app.server.lib.portal.dir" value="lib/portal" />
 		</antcall>
 	</target>
@@ -744,14 +563,6 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 	</target>
 
 	<target name="zip-glassfish">
-		<antcall target="zip-glassfish-2" />
-		<antcall target="zip-glassfish-3" />
-	</target>
-
-	<target name="zip-glassfish-2">
-	</target>
-
-	<target name="zip-glassfish-3">
 		<delete file="dist/liferay-portal-glassfish-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="zip-executable">
@@ -765,7 +576,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-jboss" />
-			<param name="zip.executable.dir" value="${app.server.parent.dir}/jboss-5.1.0" />
+			<param name="zip.executable.dir" value="${app.server.jboss.dir}" />
 		</antcall>
 	</target>
 
@@ -1008,6 +819,34 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 			<param name="zip.executable.file" value="liferay-portal-tomcat" />
 			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
 		</antcall>
+	</target>
+
+	<target name="unzip-glassfish">
+		<delete dir="${app.server.glassfish.dir}" />
+
+		<if>
+			<not>
+				<available file="${app.server.parent.dir}/${app.server.glassfish.zip.name}" />
+			</not>
+			<then>
+				<get
+					dest="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
+					src="${app.server.glassfish.zip.url}"
+					verbose="true"
+				/>
+			</then>
+		</if>
+
+		<unzip
+			 src="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
+			 dest="${app.server.parent.dir}"
+		>
+			<mapper
+				type="glob"
+				from="glassfishv3/glassfish/*"
+				to="glassfish-3.0.0/*"
+			/>
+		</unzip>
 	</target>
 
 	<target name="unzip-jboss">
