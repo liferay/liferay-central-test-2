@@ -292,8 +292,6 @@ public class ClusterLinkImpl implements ClusterLink {
 		Properties controlProperty = PropsUtil.getProperties(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL, false);
 
-		_controlChannel = createChannel(
-			controlProperty.getProperty(
 		_controlChannel = createChannel(controlProperty.getProperty(
 				PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL),
 				new ClusterInvokeReceiver(_controlChannel),
