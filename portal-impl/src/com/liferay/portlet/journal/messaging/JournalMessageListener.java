@@ -62,7 +62,7 @@ public class JournalMessageListener implements MessageListener {
 		long companyId = message.getLong("companyId");
 		long userId = message.getLong("userId");
 		long groupId = message.getLong("groupId");
-		long entryId = message.getLong("entryId");
+		String articleId = message.getString("articleId");
 		String fromName = message.getString("fromName");
 		String fromAddress = message.getString("fromAddress");
 		String subject = message.getString("subject");
@@ -75,11 +75,11 @@ public class JournalMessageListener implements MessageListener {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Sending notifications for {mailId=" + mailId + ", entryId=" +
-					entryId + "}");
+				"Sending notifications for {mailId=" + mailId + ", articleId=" +
+					articleId + "}");
 		}
 
-		// Entries
+		// Articles
 
 		List<Subscription> subscriptions =
 			SubscriptionLocalServiceUtil.getSubscriptions(
@@ -192,6 +192,6 @@ public class JournalMessageListener implements MessageListener {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-			JournalMessageListener.class);
+		JournalMessageListener.class);
 
 }

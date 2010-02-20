@@ -53,7 +53,7 @@ public interface DestinationNames {
 	public static final String IP_GEOCODER_RESPONSE =
 		"liferay/ip_geocoder/response";
 
-	public static final String JOURNALS = "liferay/journals";
+	public static final String JOURNAL = "liferay/journal";
 
 	public static final String LAYOUTS_LOCAL_PUBLISHER =
 		"liferay/layouts_local_publisher";

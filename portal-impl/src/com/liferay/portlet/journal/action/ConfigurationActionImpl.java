@@ -102,27 +102,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		return "/html/portlet/journal/configuration.jsp";
 	}
 
-	protected void updateEmailFrom(
-			ActionRequest actionRequest, PortletPreferences preferences)
-		throws Exception {
-
-		String emailFromName = ParamUtil.getString(
-			actionRequest, "emailFromName");
-		String emailFromAddress = ParamUtil.getString(
-			actionRequest, "emailFromAddress");
-
-		if (Validator.isNull(emailFromName)) {
-			SessionErrors.add(actionRequest, "emailFromName");
-		}
-		else if (!Validator.isEmailAddress(emailFromAddress)) {
-			SessionErrors.add(actionRequest, "emailFromAddress");
-		}
-		else {
-			preferences.setValue("email-from-name", emailFromName);
-			preferences.setValue("email-from-address", emailFromAddress);
-		}
-	}
-
 	protected void updateEmailArticleAdded(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
@@ -135,8 +114,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "emailArticleAddedBody");
 
 		if (Validator.isNull(emailArticleAddedSubject)) {
-			SessionErrors.add(
-				actionRequest, "emailArticleAddedSubject");
+			SessionErrors.add(actionRequest, "emailArticleAddedSubject");
 		}
 		else if (Validator.isNull(emailArticleAddedBody)) {
 			SessionErrors.add(actionRequest, "emailArticleAddedBody");
@@ -146,11 +124,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				"email-article-added-enabled",
 				String.valueOf(emailArticleAddedEnabled));
 			preferences.setValue(
-				"email-article-added-subject",
-				emailArticleAddedSubject);
+				"email-article-added-subject", emailArticleAddedSubject);
 			preferences.setValue(
-				"email-article-added-body",
-				emailArticleAddedBody);
+				"email-article-added-body", emailArticleAddedBody);
 		}
 	}
 
@@ -288,8 +264,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "emailArticleUpdatedBody");
 
 		if (Validator.isNull(emailArticleUpdatedSubject)) {
-			SessionErrors.add(
-				actionRequest, "emailArticleUpdatedSubject");
+			SessionErrors.add(actionRequest, "emailArticleUpdatedSubject");
 		}
 		else if (Validator.isNull(emailArticleUpdatedBody)) {
 			SessionErrors.add(actionRequest, "emailArticleUpdatedBody");
@@ -299,11 +274,30 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				"email-article-updated-enabled",
 				String.valueOf(emailArticleUpdatedEnabled));
 			preferences.setValue(
-				"email-article-updated-subject",
-				emailArticleUpdatedSubject);
+				"email-article-updated-subject", emailArticleUpdatedSubject);
 			preferences.setValue(
-				"email-article-updated-body",
-				emailArticleUpdatedBody);
+				"email-article-updated-body", emailArticleUpdatedBody);
+		}
+	}
+
+	protected void updateEmailFrom(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		String emailFromName = ParamUtil.getString(
+			actionRequest, "emailFromName");
+		String emailFromAddress = ParamUtil.getString(
+			actionRequest, "emailFromAddress");
+
+		if (Validator.isNull(emailFromName)) {
+			SessionErrors.add(actionRequest, "emailFromName");
+		}
+		else if (!Validator.isEmailAddress(emailFromAddress)) {
+			SessionErrors.add(actionRequest, "emailFromAddress");
+		}
+		else {
+			preferences.setValue("email-from-name", emailFromName);
+			preferences.setValue("email-from-address", emailFromAddress);
 		}
 	}
 

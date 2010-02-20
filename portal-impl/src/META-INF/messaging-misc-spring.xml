@@ -22,8 +22,8 @@
 	<bean id="destination.hot_deploy" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/hot_deploy" />
 	</bean>
-	<bean id="destination.journals" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/journals" />
+	<bean id="destination.journal" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/journal" />
 	</bean>
 	<bean id="destination.layouts_local_publisher" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/layouts_local_publisher" />
@@ -49,7 +49,7 @@
 	<bean id="messageListener.blogs" class="com.liferay.portlet.blogs.messaging.BlogsMessageListener" />
 	<bean id="messageListener.convert_process" class="com.liferay.portal.convert.messaging.ConvertProcessMessageListener" />
 	<bean id="messageListener.flags" class="com.liferay.portlet.flags.messaging.FlagsRequestMessageListener" />
-	<bean id="messageListener.journals" class="com.liferay.portlet.journal.messaging.JournalMessageListener" />
+	<bean id="messageListener.journal" class="com.liferay.portlet.journal.messaging.JournalMessageListener" />
 	<bean id="messageListener.layouts_local_publisher" class="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener">
 		<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 		<property name="statusSender" ref="messageSender.service_request_status" />
@@ -71,7 +71,7 @@
 				<ref bean="destination.blogs" />
 				<ref bean="destination.convert_process" />
 				<ref bean="destination.flags" />
-				<ref bean="destination.journals" />
+				<ref bean="destination.journal" />
 				<ref bean="destination.hot_deploy" />
 				<ref bean="destination.layouts_local_publisher" />
 				<ref bean="destination.layouts_remote_publisher" />
@@ -101,9 +101,9 @@
 						<ref bean="messageListener.flags" />
 					</list>
 				</entry>
-				<entry key="liferay/journals">
+				<entry key="liferay/journal">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.journals" />
+						<ref bean="messageListener.journal" />
 					</list>
 				</entry>
 				<entry key="liferay/layouts_local_publisher">

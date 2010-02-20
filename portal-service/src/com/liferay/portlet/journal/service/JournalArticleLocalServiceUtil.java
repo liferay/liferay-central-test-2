@@ -728,18 +728,6 @@ public class JournalArticleLocalServiceUtil {
 			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
-	public static void subscribeGroup(long userId, long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().subscribeGroup(userId, groupId);
-	}
-
-	public static void unsubscribeGroup(long userId, long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().unsubscribeGroup(userId, groupId);
-	}
-
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long userId, long groupId, java.lang.String articleId, double version,
 		boolean incrementVersion, java.lang.String content)

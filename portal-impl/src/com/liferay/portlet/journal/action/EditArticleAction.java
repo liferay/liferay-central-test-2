@@ -380,7 +380,7 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	protected void subscribeArticles(ActionRequest actionRequest)
-			throws Exception {
+		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -399,7 +399,7 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	protected void unsubscribeArticles(ActionRequest actionRequest)
-			throws Exception {
+		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
