@@ -40,18 +40,6 @@ public class ClusterLinkUtil {
 		return (Address)message.get(_ADDRESS);
 	}
 
-	public static List<Address> getAddresses(Priority priority) {
-		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("ClusterLinkUtil has not been initialized");
-			}
-
-			return Collections.EMPTY_LIST;
-		}
-
-		return _clusterLink.getAddresses(priority);
-	}
-
 	public static ClusterLink getClusterLink() {
 		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
 			if (_log.isWarnEnabled()) {
@@ -62,6 +50,54 @@ public class ClusterLinkUtil {
 		}
 
 		return _clusterLink;
+	}
+
+	public static List<Address> getControlAddresses() {
+		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterLinkUtil has not been initialized");
+			}
+
+			return Collections.emptyList();
+		}
+
+		return _clusterLink.getControlAddresses();
+	}
+
+	public static Address getLocalControlAddress() {
+		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterLinkUtil has not been initialized");
+			}
+
+			return null;
+		}
+
+		return _clusterLink.getLocalControlAddress();
+	}
+
+	public static List<Address> getLocalTransportAddresses() {
+		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterLinkUtil has not been initialized");
+			}
+
+			return Collections.emptyList();
+		}
+
+		return _clusterLink.getLocalTransportAddresses();
+	}
+
+	public static List<Address> getTransportAddresses(Priority priority) {
+		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterLinkUtil has not been initialized");
+			}
+
+			return Collections.emptyList();
+		}
+
+		return _clusterLink.getTransportAddresses(priority);
 	}
 
 	public static boolean isForwardMessage(Message message) {

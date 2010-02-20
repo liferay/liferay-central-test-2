@@ -105,34 +105,50 @@ public class ClusterLinkImpl implements ClusterLink {
 			return;
 		}
 
-		for (JChannel channel : _channels) {
+		for (JChannel channel : _transportChannels) {
 			channel.close();
 		}
 	}
 
-	public List<Address> getAddresses(Priority priority) {
+	public List<Address> getControlAddresses() {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
-		JChannel channel = getChannel(priority);
+		return getAddresses(_controlChannel);
+	}
 
-		View view = channel.getView();
+	public Address getLocalControlAddress() {
+		if (!PropsValues.CLUSTER_LINK_ENABLED) {
+			return null;
+		}
 
-		Vector<org.jgroups.Address> jGroupsAddresses = view.getMembers();
+		return new AddressImpl(_controlChannel.getLocalAddress());
+	}
 
-		if (jGroupsAddresses == null) {
-			return new ArrayList<Address>();
+	public List<Address> getLocalTransportAddresses() {
+		if (!PropsValues.CLUSTER_LINK_ENABLED) {
+			return Collections.emptyList();
 		}
 
 		List<Address> addresses = new ArrayList<Address>(
-			jGroupsAddresses.size());
+				_localTransportAddresses.size());
 
-		for (org.jgroups.Address address : jGroupsAddresses) {
+		for(org.jgroups.Address address : _localTransportAddresses) {
 			addresses.add(new AddressImpl(address));
 		}
 
 		return addresses;
+	}
+
+	public List<Address> getTransportAddresses(Priority priority) {
+		if (!PropsValues.CLUSTER_LINK_ENABLED) {
+			return Collections.emptyList();
+		}
+
+		JChannel channel = getChannel(priority);
+
+		return getAddresses(channel);
 	}
 
 	public boolean isEnabled() {
@@ -180,7 +196,7 @@ public class ClusterLinkImpl implements ClusterLink {
 		_clusterForwardMessageListener = clusterForwardMessageListener;
 	}
 
-	protected JChannel createChannel(int index, String properties)
+	protected JChannel createChannel(String properties)
 		throws ChannelException {
 
 		JChannel channel = new JChannel(properties);
@@ -189,8 +205,8 @@ public class ClusterLinkImpl implements ClusterLink {
 			new ReceiverAdapter() {
 
 				public void receive(org.jgroups.Message message) {
-					if ((!_addresses.contains(message.getSrc())) ||
-						(message.getDest() != null)) {
+					if ((!_localTransportAddresses.contains(message.getSrc()))
+						|| (message.getDest() != null)) {
 
 						_clusterForwardMessageListener.receive(
 							(Message)message.getObject());
@@ -211,8 +227,6 @@ public class ClusterLinkImpl implements ClusterLink {
 			}
 		);
 
-		channel.connect(_LIFERAY_CHANNEL + index);
-
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Create a new channel with properties " +
@@ -220,6 +234,25 @@ public class ClusterLinkImpl implements ClusterLink {
 		}
 
 		return channel;
+	}
+
+	protected List<Address> getAddresses(JChannel channel) {
+		View view = channel.getView();
+
+		Vector<org.jgroups.Address> jGroupsAddresses = view.getMembers();
+
+		if (jGroupsAddresses == null) {
+			return Collections.emptyList();
+		}
+
+		List<Address> addresses = new ArrayList<Address>(
+			jGroupsAddresses.size());
+
+		for (org.jgroups.Address address : jGroupsAddresses) {
+			addresses.add(new AddressImpl(address));
+		}
+
+		return addresses;
 	}
 
 	protected JChannel getChannel(Priority priority) {
@@ -232,7 +265,7 @@ public class ClusterLinkImpl implements ClusterLink {
 					priority);
 		}
 
-		return _channels.get(channelIndex);
+		return _transportChannels.get(channelIndex);
 	}
 
 	protected void initBindAddress() throws IOException {
@@ -277,22 +310,31 @@ public class ClusterLinkImpl implements ClusterLink {
 	}
 
 	protected void initChannels() throws ChannelException {
-		Properties properties = PropsUtil.getProperties(
-			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES, true);
+		Properties controlProperty =
+			PropsUtil.getProperties(
+				PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL, false);
 
-		_channelCount = properties.size();
+		_controlChannel = createChannel(controlProperty.getProperty(
+				PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL));
+		_controlChannel.connect(_LIFERAY_CONTROL_CHANNEL);
+
+		Properties transportProperties = PropsUtil.getProperties(
+			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_TRANSPORT, true);
+
+		_channelCount = transportProperties.size();
 
 		if ((_channelCount <= 0) || (_channelCount > _MAX_CHANNEL_COUNT)) {
 			throw new IllegalArgumentException(
 				"Channel count must be between 1 and " + _MAX_CHANNEL_COUNT);
 		}
 
-		_addresses = new ArrayList<org.jgroups.Address>(_channelCount);
-		_channels = new ArrayList<JChannel>(_channelCount);
+		_localTransportAddresses =
+				new ArrayList<org.jgroups.Address>(_channelCount);
+		_transportChannels = new ArrayList<JChannel>(_channelCount);
 
 		List<String> keys = new ArrayList<String>(_channelCount);
 
-		for (Object key : properties.keySet()) {
+		for (Object key : transportProperties.keySet()) {
 			keys.add((String)key);
 		}
 
@@ -301,12 +343,13 @@ public class ClusterLinkImpl implements ClusterLink {
 		for (int i = 0; i < keys.size(); i++) {
 			String customName = keys.get(i);
 
-			String value = properties.getProperty(customName);
+			String value = transportProperties.getProperty(customName);
 
-			JChannel channel = createChannel(i, value);
+			JChannel channel = createChannel(value);
+			channel.connect(_LIFERAY_TRANSPORT_CHANNEL + i);
 
-			_addresses.add(channel.getLocalAddress());
-			_channels.add(channel);
+			_localTransportAddresses.add(channel.getLocalAddress());
+			_transportChannels.add(channel);
 		}
 	}
 
@@ -333,16 +376,21 @@ public class ClusterLinkImpl implements ClusterLink {
 		}
 	}
 
-	private static final String _LIFERAY_CHANNEL = "LIFERAY-CHANNEL-";
+	private static final String _LIFERAY_CONTROL_CHANNEL =
+		"LIFERAY-CONTROL-CHANNEL";
+
+	private static final String _LIFERAY_TRANSPORT_CHANNEL =
+		"LIFERAY-TRANSPORT-CHANNEL-";
 
 	private static final int _MAX_CHANNEL_COUNT = Priority.values().length;
 
 	private static final Log _log =
 		LogFactoryUtil.getLog(ClusterLinkImpl.class);
 
-	private List<org.jgroups.Address> _addresses;
 	private int _channelCount;
-	private List<JChannel> _channels;
 	private ClusterForwardMessageListener _clusterForwardMessageListener;
+	private JChannel _controlChannel;
+	private List<org.jgroups.Address> _localTransportAddresses;
+	private List<JChannel> _transportChannels;
 
 }
