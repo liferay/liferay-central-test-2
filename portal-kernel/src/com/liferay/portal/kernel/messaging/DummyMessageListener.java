@@ -38,7 +38,6 @@ public class DummyMessageListener implements MessageListener {
 		}
 	}
 
-	private static final Log _log =
-		LogFactoryUtil.getLog(DummyMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(DummyMessageListener.class);
 
 }

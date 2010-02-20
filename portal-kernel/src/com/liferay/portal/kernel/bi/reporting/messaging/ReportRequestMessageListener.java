@@ -77,8 +77,8 @@ public class ReportRequestMessageListener implements MessageListener {
 		}
 	}
 
-	private static final Log _log =
-		LogFactoryUtil.getLog(ReportRequestMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ReportRequestMessageListener.class);
 
 	private ReportEngine _reportEngine;
 	private ReportResultContainer _reportResultContainer;

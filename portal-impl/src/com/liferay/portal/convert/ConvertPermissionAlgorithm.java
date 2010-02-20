@@ -783,8 +783,8 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 	private static final String _UPDATED = ".updated";
 
-	private static final Log _log =
-		LogFactoryUtil.getLog(ConvertPermissionAlgorithm.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ConvertPermissionAlgorithm.class);
 
 	private Map<Long, Role[]> _defaultRolesMap = new HashMap<Long, Role[]>();
 	private Map<Long, Group> _groupsMap = new HashMap<Long, Group>();

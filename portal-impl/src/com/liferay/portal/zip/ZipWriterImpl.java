@@ -153,8 +153,8 @@ public class ZipWriterImpl implements ZipWriter {
 		return _file.getPath();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(ZipWriter.class);
+	private static Log _log = LogFactoryUtil.getLog(ZipWriter.class);
 
-	private final File _file;
+	private File _file;
 
 }

@@ -152,8 +152,7 @@ public class ActionCommandCache {
 
 	private static final String _ACTION_COMMAND_POSTFIX = "ActionCommand";
 
-	private static final Log _log =
-		LogFactoryUtil.getLog(ActionCommandCache.class);
+	private static Log _log = LogFactoryUtil.getLog(ActionCommandCache.class);
 
 	private Map<String, ActionCommand> _actionCommandCache =
 		new ConcurrentHashMap<String, ActionCommand>();
