@@ -49,47 +49,50 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 	}
 
 	public void receive(Message message) {
-
 		Address sourceAddress = message.getSrc();
 		Address localAddress = _channel.getLocalAddress();
-		if ((!localAddress.equals(sourceAddress))
-			|| (message.getDest() != null)) {
+
+		if ((!localAddress.equals(sourceAddress)) ||
+			(message.getDest() != null)) {
 
 			Message responseMessage = new Message();
-			responseMessage.setSrc(localAddress);
+
 			responseMessage.setDest(sourceAddress);
+			responseMessage.setSrc(localAddress);
 
 			Object payload = message.getObject();
-			if (payload instanceof MethodWrapper) {
 
-				MethodWrapper methodWrapper = (MethodWrapper) payload;
+			if (payload instanceof MethodWrapper) {
+				MethodWrapper methodWrapper = (MethodWrapper)payload;
+
 				try {
-					Object result = MethodInvoker.invoke(methodWrapper);
-					if (result instanceof Serializable) {
-						responseMessage.setObject((Serializable) result);
+					Object returnValue = MethodInvoker.invoke(methodWrapper);
+
+					if (returnValue instanceof Serializable) {
+						responseMessage.setObject((Serializable)returnValue);
 					}
 					else {
 						responseMessage.setObject(
 							new ClusterException(
-								"Invoke result is not Serializable"));
+								"Return value is not Serializable"));
 					}
 				}
-				catch (Exception ex) {
-					responseMessage.setObject(ex);
+				catch (Exception e) {
+					responseMessage.setObject(e);
 				}
 			}
 			else {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Receive a bad invoke message, "
-						+ "the message payload has to be MethodWrapper.");
+					_log.warn("Payload is not a MethodWrapper");
 				}
 			}
+
 			try {
 				_channel.send(responseMessage);
 			}
 			catch (ChannelException ce) {
-				_log.error("Unable to send response message:"
-					+ responseMessage, ce);
+				_log.error(
+					"Unable to send response message " + responseMessage, ce);
 			}
 		}
 		else {
@@ -101,12 +104,12 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 
 	public void viewAccepted(View view) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("ClusterInvokerReceiver accepted view " + view);
+			_log.debug("Accepted view " + view);
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ClusterInvokeReceiver.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ClusterInvokeReceiver.class);
 
 	private JChannel _channel;
 

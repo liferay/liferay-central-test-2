@@ -292,10 +292,11 @@ public class ClusterLinkImpl implements ClusterLink {
 		Properties controlProperty = PropsUtil.getProperties(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL, false);
 
-		_controlChannel = createChannel(controlProperty.getProperty(
+		_controlChannel = createChannel(
+			controlProperty.getProperty(
 				PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL),
-				new ClusterInvokeReceiver(_controlChannel),
-				_LIFERAY_CONTROL_CHANNEL);
+			new ClusterInvokeReceiver(_controlChannel),
+			_LIFERAY_CONTROL_CHANNEL);
 
 		Properties transportProperties = PropsUtil.getProperties(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_TRANSPORT, true);
@@ -325,7 +326,8 @@ public class ClusterLinkImpl implements ClusterLink {
 			String value = transportProperties.getProperty(customName);
 
 			JChannel channel = createChannel(
-				value, new ClusterForwardReceiver(
+				value,
+				new ClusterForwardReceiver(
 					_localTransportAddresses, _clusterForwardMessageListener),
 					_LIFERAY_TRANSPORT_CHANNEL + i);
 

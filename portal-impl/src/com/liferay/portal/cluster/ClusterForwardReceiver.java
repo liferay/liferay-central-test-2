@@ -25,11 +25,11 @@ package com.liferay.portal.cluster;
 import com.liferay.portal.kernel.cluster.messaging.ClusterForwardMessageListener;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.Message;
 
 import java.util.List;
 
 import org.jgroups.Address;
+import org.jgroups.Message;
 import org.jgroups.ReceiverAdapter;
 import org.jgroups.View;
 
@@ -48,12 +48,13 @@ public class ClusterForwardReceiver extends ReceiverAdapter {
 		_clusterForwardMessageListener = clusterForwardMessageListener;
 	}
 
-	public void receive(org.jgroups.Message message) {
-		if ((!_localTransportAddresses.contains(message.getSrc()))
-			|| (message.getDest() != null)) {
+	public void receive(Message message) {
+		if ((!_localTransportAddresses.contains(message.getSrc())) ||
+			(message.getDest() != null)) {
 
 			_clusterForwardMessageListener.receive(
-				(Message) message.getObject());
+				(com.liferay.portal.kernel.messaging.Message)
+					message.getObject());
 		}
 		else {
 			if (_log.isDebugEnabled()) {
@@ -64,12 +65,12 @@ public class ClusterForwardReceiver extends ReceiverAdapter {
 
 	public void viewAccepted(View view) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("ClusterForwardReceiver accepted view " + view);
+			_log.debug("Accepted view " + view);
 		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(ClusterForwardReceiver.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		ClusterForwardReceiver.class);
 
 	private List<org.jgroups.Address> _localTransportAddresses;
 	private ClusterForwardMessageListener _clusterForwardMessageListener;
