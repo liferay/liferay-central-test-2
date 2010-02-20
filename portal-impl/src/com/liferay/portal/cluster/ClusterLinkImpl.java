@@ -53,7 +53,7 @@ import java.util.Vector;
 
 import org.jgroups.ChannelException;
 import org.jgroups.JChannel;
-import org.jgroups.ReceiverAdapter;
+import org.jgroups.Receiver;
 import org.jgroups.View;
 
 /**
@@ -196,37 +196,15 @@ public class ClusterLinkImpl implements ClusterLink {
 		_clusterForwardMessageListener = clusterForwardMessageListener;
 	}
 
-	protected JChannel createChannel(String properties)
+	protected JChannel createChannel(
+			String properties, Receiver receiver, String clusterName)
 		throws ChannelException {
 
 		JChannel channel = new JChannel(properties);
 
-		channel.setReceiver(
-			new ReceiverAdapter() {
+		channel.setReceiver(receiver);
 
-				public void receive(org.jgroups.Message message) {
-					if ((!_localTransportAddresses.contains(
-							message.getSrc())) ||
-						(message.getDest() != null)) {
-
-						_clusterForwardMessageListener.receive(
-							(Message)message.getObject());
-					}
-					else {
-						if (_log.isDebugEnabled()) {
-							_log.debug("Block received message " + message);
-						}
-					}
-				}
-
-				public void viewAccepted(View view) {
-					if (_log.isDebugEnabled()) {
-						_log.debug("Cluster link accepted view " + view);
-					}
-				}
-
-			}
-		);
+		channel.connect(clusterName);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -316,9 +294,10 @@ public class ClusterLinkImpl implements ClusterLink {
 
 		_controlChannel = createChannel(
 			controlProperty.getProperty(
-				PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL));
-
-		_controlChannel.connect(_LIFERAY_CONTROL_CHANNEL);
+		_controlChannel = createChannel(controlProperty.getProperty(
+				PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL),
+				new ClusterInvokeReceiver(_controlChannel),
+				_LIFERAY_CONTROL_CHANNEL);
 
 		Properties transportProperties = PropsUtil.getProperties(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_TRANSPORT, true);
@@ -347,9 +326,10 @@ public class ClusterLinkImpl implements ClusterLink {
 
 			String value = transportProperties.getProperty(customName);
 
-			JChannel channel = createChannel(value);
-
-			channel.connect(_LIFERAY_TRANSPORT_CHANNEL + i);
+			JChannel channel = createChannel(
+				value, new ClusterForwardReceiver(
+					_localTransportAddresses, _clusterForwardMessageListener),
+					_LIFERAY_TRANSPORT_CHANNEL + i);
 
 			_localTransportAddresses.add(channel.getLocalAddress());
 			_transportChannels.add(channel);
