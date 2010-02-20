@@ -78,14 +78,14 @@ spring.configs=\
 			<property name="build.app.server" value="false" />
 			<property name="skip.rebuild-database" value="true" />
 			<property name="test.name" value="DBShardingAbleTestSuite" />
-			<property name="vh.hostname" value="able" />
+			<property name="virtual.host.name" value="able" />
 		</ant>
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			<property name="build.app.server" value="false" />
 			<property name="skip.rebuild-database" value="true" />
 			<property name="test.name" value="DBShardingBakerTestSuite" />
-			<property name="vh.hostname" value="baker" />
+			<property name="virtual.host.name" value="baker" />
 		</ant>
 	</target>
 </project>

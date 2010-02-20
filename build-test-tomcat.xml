@@ -113,7 +113,7 @@ web.server.display.node=true</echo>
 
 		<antcall target="revert-test-properties" />
 
-		<antcall target="prepare-vh-hostname-properties" />
+		<antcall target="prepare-virtual-host-name-properties" />
 
 		<antcall target="start-selenium" />
 

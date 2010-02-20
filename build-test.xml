@@ -156,21 +156,21 @@ ${custom.properties}</echo>
 		<antcall target="prepare-common" />
 	</target>
 
-	<target name="prepare-vh-hostname-properties">
+	<target name="prepare-virtual-host-name-properties">
 		<if>
 			<not>
-				<equals arg1="${vh.hostname}" arg2="$${vh.hostname}" />
+				<equals arg1="${virtual.host.name}" arg2="$${virtual.host.name}" />
 			</not>
 			<then>
 				<replace
 					file="portal-impl/test/test-portal-impl.properties"
 					token="localhost:8080"
-					value="www.${vh.hostname}.com:8080"
+					value="www.${virtual.host.name}.com:8080"
 				/>
 				<replace
 					file="portal-web/test/test-portal-web.properties"
 					token="localhost:8080"
-					value="www.${vh.hostname}.com:8080"
+					value="www.${virtual.host.name}.com:8080"
 				/>
 			</then>
 		</if>
