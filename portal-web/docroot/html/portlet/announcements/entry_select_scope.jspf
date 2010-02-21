@@ -22,11 +22,10 @@
  */
 %>
 
-<select name="<portlet:namespace />distributionScope" <%= submitOnChange ? "onChange=\"" + renderResponse.getNamespace() + "selectDistributionScope(this.value);\"" : "" %>>
-	<option value=""></option>
+<aui:select name="distributionScope" onChange='<%= submitOnChange ? renderResponse.getNamespace() + "selectDistributionScope(this.value);" : "" %>' showEmptyOption="<%= true %>">
 
 	<c:if test="<%= permissionChecker.isOmniadmin() %>">
-		<option <%= ((classNameId == 0) && (classPK == 0)) ? "selected" : "" %> value="0,0"><liferay-ui:message key="general" /></option>
+		<aui:option label="general" selected="<%= (classNameId == 0) && (classPK == 0) %>" value="0,0" />
 	</c:if>
 
 	<%
@@ -41,7 +40,7 @@
 				if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 			%>
 
-					<option <%= (classPK == group.getGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
+					<aui:option label="<%= group.getName() %>" selected="<%= classPK == group.getGroupId() %>" value="<%= PortalUtil.getClassNameId(Group.class) + StringPool.COMMA + group.getGroupId() %>" />
 
 			<%
 				}
@@ -63,7 +62,7 @@
 				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 			%>
 
-					<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= HtmlUtil.escape(organization.getName()) %></option>
+					<aui:option label="<%= organization.getName() %>" selected="<%= classPK == organization.getOrganizationId() %>" value="<%= PortalUtil.getClassNameId(Organization.class) + StringPool.COMMA + organization.getOrganizationId() %>" />
 
 			<%
 				}
@@ -85,7 +84,7 @@
 				if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 			%>
 
-					<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= HtmlUtil.escape(role.getTitle(locale)) %></option>
+					<aui:option label="<%= role.getTitle(locale) %>" selected="<%= classPK == role.getRoleId() %>" value="<%= PortalUtil.getClassNameId(Role.class) + StringPool.COMMA + role.getRoleId() %>" />
 
 			<%
 				}
@@ -107,7 +106,7 @@
 				if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 			%>
 
-					<option <%= (classPK == userGroup.getUserGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>
+					<aui:option label="<%= userGroup.getName() %>" selected="<%= classPK == userGroup.getUserGroupId() %>" value="<%= PortalUtil.getClassNameId(UserGroup.class) + StringPool.COMMA + userGroup.getUserGroupId() %>" />
 
 			<%
 				}
@@ -116,4 +115,4 @@
 
 		</optgroup>
 	</c:if>
-</select>
+</aui:select>
