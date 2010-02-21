@@ -3,55 +3,20 @@
 <project name="portal-dist" basedir="." default="dist" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build.xml" />
 
-	<target name="build-dist-geronimo-tomcat">
-		<delete dir="${app.server.geronimo-tomcat.dir}" />
+	<target name="build-dist-geronimo">
+		<antcall target="unzip-geronimo" />
 
-		<unzip src="${app.server.parent.dir}/geronimo-tomcat-2.1.3.zip" dest="${app.server.parent.dir}" />
-
-		<ant dir="sql" target="rebuild-derby" inheritAll="false" />
-
-		<parallel>
-			<exec dir="${app.server.geronimo-tomcat.bin.dir}" executable="startup.bat" resolveexecutable="true" />
-
-			<sequential>
-				<sleep seconds="20" />
-
-				<ant dir="sql" target="deploy-geronimo-tomcat-derby" inheritAll="false" />
-
-				<sleep seconds="10" />
-
-				<!--<java
-					fork="true"
-					jar="${app.server.geronimo-tomcat.dir}/bin/deployer.jar"
-				>
-					<arg line="${app.server.geronimo-tomcat.credentials} deploy dist/liferay-portal-${lp.version}-with-dependencies.war" />
-				</java>
-
-				<sleep seconds="60" />-->
-
-				<exec dir="${app.server.geronimo-tomcat.bin.dir}" executable="shutdown.bat" resolveexecutable="true">
-					<arg line="${app.server.geronimo-tomcat.credentials}" />
-				</exec>
-
-				<sleep seconds="10" />
-			</sequential>
-		</parallel>
-
-		<echo file="app.server.${user.name}.properties">app.server.type=geronimo-tomcat</echo>
+		<echo file="app.server.${user.name}.properties">app.server.type=geronimo</echo>
 
 		<antcall target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
 
 		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${app.server.geronimo-tomcat.deploy.dir}" />
-			<param name="deployer.app.server.type" value="geronimo-tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.geronimo-tomcat.lib.portal.dir}" />
+			<param name="deployer.dest.dir" value="${app.server.geronimo.deploy.dir}" />
+			<param name="deployer.app.server.type" value="geronimo" />
+			<param name="deployer.app.server.lib.portal.dir" value="${app.server.geronimo.lib.portal.dir}" />
 		</antcall>
-
-		<delete>
-			<fileset dir="${app.server.geronimo-tomcat.dir}/var/log" includes="*.log" />
-		</delete>
 	</target>
 
 	<target name="build-dist-glassfish">
@@ -376,7 +341,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 
 		<antcall target="zip-portal-war" />
 
-		<antcall target="build-dist-geronimo-tomcat" />
+		<antcall target="build-dist-geronimo" />
 		<antcall target="build-dist-glassfish" />
 		<antcall target="build-dist-jboss" />
 		<antcall target="build-dist-jetty" />
@@ -385,7 +350,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<antcall target="build-dist-tomcat" />
 
 		<antcall target="zip-api" />
-		<antcall target="zip-geronimo-tomcat" />
+		<antcall target="zip-geronimo" />
 		<antcall target="zip-glassfish" />
 		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
@@ -553,12 +518,12 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		</zip>
 	</target>
 
-	<target name="zip-geronimo-tomcat">
-		<delete file="dist/liferay-portal-geronimo-tomcat-${lp.version}.zip" failonerror="false" />
+	<target name="zip-geronimo">
+		<delete file="dist/liferay-portal-geronimo-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="zip-executable">
-			<param name="zip.executable.file" value="liferay-portal-geronimo-tomcat" />
-			<param name="zip.executable.dir" value="${app.server.geronimo-tomcat.dir}" />
+			<param name="zip.executable.file" value="liferay-portal-geronimo" />
+			<param name="zip.executable.dir" value="${app.server.geronimo.dir}" />
 		</antcall>
 	</target>
 
@@ -819,6 +784,34 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 			<param name="zip.executable.file" value="liferay-portal-tomcat" />
 			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
 		</antcall>
+	</target>
+
+	<target name="unzip-geronimo">
+		<delete dir="${app.server.geronimo.dir}" />
+
+		<if>
+			<not>
+				<available file="${app.server.parent.dir}/${app.server.geronimo.zip.name}" />
+			</not>
+			<then>
+				<get
+					dest="${app.server.parent.dir}/${app.server.geronimo.zip.name}"
+					src="${app.server.geronimo.zip.url}"
+					verbose="true"
+				/>
+			</then>
+		</if>
+
+		<unzip
+			src="${app.server.parent.dir}/${app.server.geronimo.zip.name}"
+			dest="${app.server.parent.dir}"
+		>
+			<mapper
+				type="glob"
+				from="geronimo-tomcat6-minimal-2.2/*"
+				to="geronimo-2.2.0/*"
+			/>
+		</unzip>
 	</target>
 
 	<target name="unzip-glassfish">

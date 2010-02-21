@@ -14,11 +14,11 @@
 			</dependency>
 			<dependency>
 				<groupId>liferay</groupId>
-				<artifactId>liferay-portal-tomcat</artifactId>
+				<artifactId>liferay-portal</artifactId>
 				<type>car</type>
 			</dependency>
 		</dependencies>
-		<inverse-classloading />
+		<!--<inverse-classloading />-->
 	</environment>
 	<security-realm-name>PortalRealm</security-realm-name>
 	<security>

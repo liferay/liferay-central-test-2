@@ -171,7 +171,7 @@ public class PropsUtil {
 
 		if (ServerDetector.isGeronimo()) {
 			defaultLiferayHome =
-				SystemProperties.get("org.apache.geronimo.base.dir") + "/..";
+				SystemProperties.get("org.apache.geronimo.home.dir") + "/..";
 		}
 		else if (ServerDetector.isGlassfish()) {
 			defaultLiferayHome =

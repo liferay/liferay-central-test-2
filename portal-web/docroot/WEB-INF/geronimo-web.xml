@@ -4,7 +4,7 @@
 	<environment>
 		<moduleId>
 			<groupId>liferay</groupId>
-			<artifactId>liferay-portal-tomcat</artifactId>
+			<artifactId>liferay-portal</artifactId>
 			<version>6.0.0</version>
 			<type>car</type>
 		</moduleId>
@@ -29,34 +29,8 @@
 				<artifactId>rmi-naming</artifactId>
 				<type>car</type>
 			</dependency>
-			<dependency>
-				<groupId>liferay</groupId>
-				<artifactId>liferay-pool</artifactId>
-				<type>car</type>
-			</dependency>
-			<!--<dependency>
-				<groupId>liferay</groupId>
-				<artifactId>portal-kernel</artifactId>
-				<type>jar</type>
-				<import>classes</import>
-			</dependency>
-			<dependency>
-				<groupId>liferay</groupId>
-				<artifactId>portal-service</artifactId>
-				<type>jar</type>
-				<import>classes</import>
-			</dependency>
-			<dependency>
-				<groupId>portlet-api</groupId>
-				<artifactId>portlet-api</artifactId>
-				<type>jar</type>
-				<import>classes</import>
-			</dependency>-->
 		</dependencies>
-		<hidden-classes>
-			<filter>javax.xml.bind</filter>
-		</hidden-classes>
-		<inverse-classloading />
+		<!--<inverse-classloading />-->
 	</environment>
 	<context-root>/</context-root>
 	<security-realm-name>PortalRealm</security-realm-name>

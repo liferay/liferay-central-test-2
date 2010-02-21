@@ -21,15 +21,6 @@
 		<delete file="velocity.log" quiet="true" />
 	</target>
 
-	<target name="deploy-geronimo-tomcat-derby">
-		<java
-			fork="true"
-			jar="${app.server.geronimo-tomcat.dir}/bin/deployer.jar"
-		>
-			<arg line="${geronimo.deploy.derby}" />
-		</java>
-	</target>
-
 	<target name="export-oracle">
 		<exec executable="${oracle.export.executable}">
 			<arg line="${oracle.export.arg.line}" />
@@ -38,7 +29,6 @@
 
 	<target name="rebuild-all">
 		<antcall target="rebuild-db2" />
-		<antcall target="rebuild-derby" />
 		<antcall target="rebuild-firebird" />
 		<antcall target="rebuild-hypersonic" />
 		<antcall target="rebuild-mysql" />
@@ -60,83 +50,6 @@
 			<param name="arg.line" value="${db2.arg.line}" />
 			<param name="log" value="${db2.log}" />
 		</antcall>
-	</target>
-
-	<target name="rebuild-derby">
-		<delete dir="${database.name}" failonerror="false" />
-
-		<java
-			classname="com.liferay.portal.tools.DBLoader"
-			classpathref="project.classpath"
-			fork="true"
-			maxmemory="256m"
-			newenvironment="true"
-		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dfile.encoding=UTF-8" />
-			<arg value="derby" />
-			<arg value="${database.name}" />
-			<arg value="portal${minimal.suffix}/portal${minimal.suffix}-derby.sql" />
-		</java>
-
-		<java
-			classname="com.liferay.portal.tools.DBLoader"
-			classpathref="project.classpath"
-			fork="true"
-			maxmemory="256m"
-			newenvironment="true"
-		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dfile.encoding=UTF-8" />
-			<arg value="derby" />
-			<arg value="${database.name}" />
-			<arg value="indexes.sql" />
-		</java>
-
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<mkdir dir="${tstamp.value}/geronimo/var/derby/lportal" />
-
-		<move todir="${tstamp.value}/geronimo/var/derby/lportal">
-			<fileset dir="${database.name}" />
-		</move>
-
-		<jar
-			basedir="${tstamp.value}"
-			jarfile="${database.name}.jar"
-		/>
-
-		<mkdir dir="${database.name}" />
-
-		<move todir="${database.name}">
-			<fileset dir="${tstamp.value}/geronimo/var/derby/lportal" />
-		</move>
-
-		<delete dir="${tstamp.value}" />
-
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<mkdir dir="${tstamp.value}" />
-
-		<unzip
-			src="${app.server.geronimo-tomcat.dir}/repository/org/tranql/tranql-connector-derby-embed-local/1.4/tranql-connector-derby-embed-local-1.4.rar"
-			dest="${tstamp.value}"
-		/>
-
-		<copy file="${database.name}.jar" todir="${tstamp.value}" />
-
-		<delete file="geronimo/derby/tranql-connector-derby-embed-local-1.4.rar" />
-
-		<jar
-			basedir="${tstamp.value}"
-			jarfile="geronimo/derby/tranql-connector-derby-embed-local-1.4.rar"
-		/>
-
-		<delete dir="${tstamp.value}" />
 	</target>
 
 	<target name="rebuild-firebird">

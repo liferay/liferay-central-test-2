@@ -279,9 +279,37 @@
 		</if>
 
 		<if>
-			<equals arg1="${app.server.type}" arg2="geronimo-tomcat" />
+			<equals arg1="${app.server.type}" arg2="geronimo" />
 			<then>
-				<copy todir="${app.server.lib.portal.dir}">
+				<if>
+					<not>
+						<available file="${app.server.bin.dir}/setenv.bat" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/geronimo/bin/setenv.bat"
+							tofile="${app.server.bin.dir}/setenv.bat"
+						>
+							<filterset>
+								<filter token="java.version" value="${java.version}" />
+							</filterset>
+						</copy>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<available file="${app.server.bin.dir}/setenv.sh" />
+					</not>
+					<then>
+						<copy
+							file="tools/servers/geronimo/bin/setenv.sh"
+							tofile="${app.server.bin.dir}/setenv.sh"
+						/>
+					</then>
+				</if>
+
+				<!--<copy todir="${app.server.lib.portal.dir}">
 					<fileset
 						dir="lib/development"
 						includes="saxpath.jar"
@@ -293,7 +321,7 @@
 						dir="${app.server.lib.portal.dir}"
 						includes="commons-logging.jar"
 					/>
-				</delete>
+				</delete>-->
 			</then>
 		</if>
 
