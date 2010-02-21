@@ -294,7 +294,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 				if (name.equals(GroupConstants.CONTROL_PANEL)) {
 					type = GroupConstants.TYPE_COMMUNITY_PRIVATE;
-					friendlyURL = "/control_panel";
+					friendlyURL = GroupConstants.CONTROL_PANEL_FRIENDLY_URL;
 				}
 				else if (name.equals(GroupConstants.GUEST)) {
 					friendlyURL = "/guest";

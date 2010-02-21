@@ -953,8 +953,7 @@ public class PortalImpl implements Portal {
 		sb.append(
 			getPortalURL(company.getVirtualHost(), getPortalPort(), false));
 		sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
-		sb.append(StringPool.SLASH);
-		sb.append(GroupConstants.CONTROL_PANEL_GROUP_NAME);
+		sb.append(GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 		sb.append(PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
 
 		if (params != null) {
