@@ -2302,6 +2302,7 @@
 		<name>search-container-results</name>
 		<tag-class>com.liferay.taglib.ui.SearchContainerResultsTag</tag-class>
 		<tei-class>com.liferay.taglib.ui.SearchContainerResultsTei</tei-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>results</name>
 			<required>false</required>
@@ -2377,6 +2378,7 @@
 	<tag>
 		<name>search-container-row-parameter</name>
 		<tag-class>com.liferay.taglib.ui.SearchContainerRowParameterTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
