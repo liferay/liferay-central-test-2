@@ -12,23 +12,7 @@
 			<dependency>
 				<artifactId>sharedlib</artifactId>
 			</dependency>
-			<dependency>
-				<groupId>liferay</groupId>
-				<artifactId>liferay-portal</artifactId>
-				<type>car</type>
-			</dependency>
 		</dependencies>
 		<!--<inverse-classloading />-->
 	</environment>
-	<security-realm-name>PortalRealm</security-realm-name>
-	<security>
-		<default-principal>
-			<principal name="anonymous" class="com.liferay.portal.kernel.security.jaas.PortalPrincipal" />
-		</default-principal>
-		<role-mappings>
-			<role role-name="users">
-				<principal class="com.liferay.portal.kernel.security.jaas.PortalRole" name="users" />
-			</role>
-		</role-mappings>
-	</security>
 </web-app>
