@@ -41,30 +41,28 @@ request.setAttribute("edit_permissions.jsp-tabs2", tabs2);
 request.setAttribute("edit_permissions.jsp-portletURL", portletURL);
 %>
 
-<form method="post" name="<portlet:namespace />fm">
+<aui:form method="post" name="fm">
+	<liferay-ui:tabs
+		names="merge-redundant-roles,reassign-to-system-role"
+		param="tabs1"
+		url="<%= portletURL.toString() %>"
+	/>
 
-<liferay-ui:tabs
-	names="merge-redundant-roles,reassign-to-system-role"
-	param="tabs1"
-	url="<%= portletURL.toString() %>"
-/>
+	<liferay-ui:tabs
+		names="organizations,communities,users"
+		param="tabs2"
+		url="<%= portletURL.toString() %>"
+	/>
 
-<liferay-ui:tabs
-	names="organizations,communities,users"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-/>
-
-<c:choose>
-	<c:when test='<%= tabs1.equals("merge-redundant-roles") %>'>
-		<liferay-util:include page="/html/portlet/admin/edit_permissions_merge.jsp" />
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/html/portlet/admin/edit_permissions_reassign.jsp" />
-	</c:otherwise>
-</c:choose>
-
-</form>
+	<c:choose>
+		<c:when test='<%= tabs1.equals("merge-redundant-roles") %>'>
+			<liferay-util:include page="/html/portlet/admin/edit_permissions_merge.jsp" />
+		</c:when>
+		<c:otherwise>
+			<liferay-util:include page="/html/portlet/admin/edit_permissions_reassign.jsp" />
+		</c:otherwise>
+	</c:choose>
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />invoke(link) {
