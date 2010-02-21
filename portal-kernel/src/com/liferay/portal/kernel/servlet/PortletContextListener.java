@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 
 import java.lang.reflect.Method;
 
@@ -113,10 +112,6 @@ public class PortletContextListener
 			new HotDeployEvent(_servletContext, _classLoader));
 
 		try {
-			if (ServerDetector.isGlassfish2()) {
-				return;
-			}
-
 			if (_log.isDebugEnabled()) {
 				_log.debug("Dynamically binding the Liferay data source");
 			}

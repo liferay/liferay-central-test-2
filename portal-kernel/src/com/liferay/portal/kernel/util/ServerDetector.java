@@ -131,39 +131,6 @@ public class ServerDetector {
 		return _glassfish.booleanValue();
 	}
 
-	public static boolean isGlassfish2() {
-		if (_glassfish2 == null) {
-			if (isGlassfish() && !isGlassfish3()) {
-				_glassfish2 = Boolean.TRUE;
-			}
-			else {
-				_glassfish2 = Boolean.FALSE;
-			}
-		}
-
-		return _glassfish2.booleanValue();
-	}
-
-	public static boolean isGlassfish3() {
-		if (_glassfish3 == null) {
-			String value = StringPool.BLANK;
-
-			if (isGlassfish()) {
-				value = GetterUtil.getString(
-					System.getProperty("product.name"));
-			}
-
-			if (value.equals("GlassFish/v3")) {
-				_glassfish3 = Boolean.TRUE;
-			}
-			else {
-				_glassfish3 = Boolean.FALSE;
-			}
-		}
-
-		return _glassfish3.booleanValue();
-	}
-
 	public static boolean isJBoss() {
 		if (_jBoss == null) {
 			_jBoss = _detect("/org/jboss/Main.class");
@@ -269,8 +236,6 @@ public class ServerDetector {
 	private static String _serverId;
 	private static Boolean _geronimo;
 	private static Boolean _glassfish;
-	private static Boolean _glassfish2;
-	private static Boolean _glassfish3;
 	private static Boolean _jBoss;
 	private static Boolean _jetty;
 	private static Boolean _jonas;
