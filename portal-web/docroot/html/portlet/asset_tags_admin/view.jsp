@@ -37,15 +37,15 @@
 			</span>
 
 			<span class="tags-admin-actions">
-				<c:if test="<%= AssetPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_TAG) %>">
+				<c:if test="<%= AssetPermission.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.ADD_TAG) %>">
 					<input class="add-tag-button" id="add-tag-button" name="add-tag-button" type="button" value="<liferay-ui:message key="add-tag" />">
 				</c:if>
 
-				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS) %>">
+				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.PERMISSIONS) %>">
 					<liferay-security:permissionsURL
 						modelResource="com.liferay.portlet.asset"
-						modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getScopeGroupName()) %>"
-						resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+						modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getParentGroupName()) %>"
+						resourcePrimKey="<%= String.valueOf(themeDisplay.getParentGroupId()) %>"
 						var="permissionsURL"
 					/>
 

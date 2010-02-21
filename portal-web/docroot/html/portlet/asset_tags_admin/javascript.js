@@ -175,7 +175,7 @@ AUI().add(
 								{
 									communityPermissions: communityPermission,
 									guestPermissions: guestPermission,
-									scopeGroupId: themeDisplay.getScopeGroupId()
+									scopeGroupId: themeDisplay.getParentGroupId()
 								}
 							),
 							serviceParameterTypes: A.JSON.stringify(serviceParameterTypes)
@@ -605,7 +605,7 @@ AUI().add(
 
 					Liferay.Service.Asset.AssetTag.getGroupTags(
 						{
-							groupId: themeDisplay.getScopeGroupId()
+							groupId: themeDisplay.getParentGroupId()
 						},
 						callback
 					);

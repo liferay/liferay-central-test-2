@@ -1849,6 +1849,24 @@ public class PortalImpl implements Portal {
 		return originalRequest;
 	}
 
+	public long getParentGroupId(long groupId)
+		throws PortalException, SystemException {
+
+		if (groupId <= 0) {
+			return 0;
+		}
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		long parentGroupId = groupId;
+
+		if (group.isLayout()) {
+			parentGroupId = group.getParentGroupId();
+		}
+
+		return parentGroupId;
+	}
+
 	public String getPathContext() {
 		return _pathContext;
 	}

@@ -145,7 +145,7 @@ AUI().add(
 
 					Liferay.Service.Asset.AssetVocabulary.getGroupsVocabularies(
 						{
-							groupIds: [themeDisplay.getScopeGroupId(), themeDisplay.getCompanyGroupId()]
+							groupIds: [themeDisplay.getParentGroupId(), themeDisplay.getCompanyGroupId()]
 						},
 						callback
 					);

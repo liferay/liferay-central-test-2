@@ -303,6 +303,9 @@ public interface Portal {
 	public HttpServletRequest getOriginalServletRequest(
 		HttpServletRequest request);
 
+	public long getParentGroupId(long scopeGroupId)
+		throws SystemException, PortalException;
+
 	public String getPathContext();
 
 	public String getPathFriendlyURLPrivateGroup();

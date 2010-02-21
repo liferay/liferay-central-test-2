@@ -532,7 +532,7 @@ AUI().add(
 								{
 									communityPermissions: communityPermission,
 									guestPermissions: guestPermission,
-									scopeGroupId: themeDisplay.getScopeGroupId()
+									scopeGroupId: themeDisplay.getParentGroupId()
 								}
 							)
 						},
@@ -632,7 +632,7 @@ AUI().add(
 								{
 									communityPermissions: communityPermission,
 									guestPermissions: guestPermission,
-									scopeGroupId: themeDisplay.getScopeGroupId()
+									scopeGroupId: themeDisplay.getParentGroupId()
 								}
 							)
 						},
@@ -920,7 +920,7 @@ AUI().add(
 
 					Liferay.Service.Asset.AssetVocabulary.getGroupVocabularies(
 						{
-							groupId: themeDisplay.getScopeGroupId()
+							groupId: themeDisplay.getParentGroupId()
 						},
 						callback
 					);

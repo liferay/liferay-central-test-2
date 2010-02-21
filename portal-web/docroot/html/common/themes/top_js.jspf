@@ -136,6 +136,9 @@
 					},
 				</c:if>
 
+				getParentGroupId: function() {
+					return "<%= themeDisplay.getParentGroupId() %>";
+				},
 				getScopeGroupId: function() {
 					return "<%= themeDisplay.getScopeGroupId() %>";
 				},

@@ -532,6 +532,12 @@ public class PortalUtil {
 		return getPortal().getOriginalServletRequest(request);
 	}
 
+	public static long getParentGroupId(long scopeGroupId)
+		throws PortalException, SystemException {
+
+		return getPortal().getParentGroupId(scopeGroupId);
+	}
+
 	public static String getPathContext() {
 		return getPortal().getPathContext();
 	}

@@ -98,7 +98,7 @@ public class AssetEntryQuery {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		_groupIds = new long[] {themeDisplay.getScopeGroupId()};
+		_groupIds = new long[] {themeDisplay.getParentGroupId()};
 
 		long categoryId = ParamUtil.getLong(portletRequest, "categoryId");
 

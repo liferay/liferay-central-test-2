@@ -221,7 +221,7 @@ AUI().add(
 
 					Liferay.Service.Asset.AssetTag.getGroupTags(
 						{
-							groupId: themeDisplay.getScopeGroupId()
+							groupId: themeDisplay.getParentGroupId()
 						},
 						callback
 					);
@@ -338,7 +338,7 @@ AUI().add(
 
 					return Liferay.Service.Asset.AssetTag.search(
 						{
-							groupId: themeDisplay.getScopeGroupId(),
+							groupId: themeDisplay.getParentGroupId(),
 							name: '%' + term + '%',
 							properties: '',
 							begin: beginning,
