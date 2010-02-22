@@ -136,11 +136,11 @@
 					},
 				</c:if>
 
-				getParentGroupId: function() {
-					return "<%= themeDisplay.getParentGroupId() %>";
-				},
 				getScopeGroupId: function() {
 					return "<%= themeDisplay.getScopeGroupId() %>";
+				},
+				getParentGroupId: function() {
+					return "<%= themeDisplay.getParentGroupId() %>";
 				},
 				isSignedIn: function() {
 					return <%= themeDisplay.isSignedIn() %>;

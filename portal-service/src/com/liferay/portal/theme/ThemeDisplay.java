@@ -265,32 +265,6 @@ public class ThemeDisplay implements Serializable {
 		_layoutTypePortlet = layoutTypePortlet;
 	}
 
-	public long getParentGroupId() {
-		return _parentGroupId;
-	}
-
-	public void setParentGroupId(long parentGroupId) {
-		_parentGroupId = parentGroupId;
-
-		if (_parentGroupId > 0) {
-			try {
-				_parentGroup = GroupLocalServiceUtil.getGroup(_parentGroupId);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
-	}
-
-	public String getParentGroupName() {
-		if (_parentGroup == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _parentGroup.getDescriptiveName();
-		}
-	}
-
 	public Group getScopeGroup() {
 		return _scopeGroup;
 	}
@@ -325,6 +299,32 @@ public class ThemeDisplay implements Serializable {
 		}
 		else {
 			return _scopeGroup.getDescriptiveName();
+		}
+	}
+
+	public long getParentGroupId() {
+		return _parentGroupId;
+	}
+
+	public void setParentGroupId(long parentGroupId) {
+		_parentGroupId = parentGroupId;
+
+		if (_parentGroupId > 0) {
+			try {
+				_parentGroup = GroupLocalServiceUtil.getGroup(_parentGroupId);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+	}
+
+	public String getParentGroupName() {
+		if (_parentGroup == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _parentGroup.getDescriptiveName();
 		}
 	}
 
@@ -1174,10 +1174,10 @@ public class ThemeDisplay implements Serializable {
 	private List<Layout> _layouts;
 	private long _plid;
 	private LayoutTypePortlet _layoutTypePortlet;
-	private Group _parentGroup;
-	private long _parentGroupId;
 	private Group _scopeGroup;
 	private long _scopeGroupId;
+	private Group _parentGroup;
+	private long _parentGroupId;
 	private boolean _signedIn;
 	private transient PermissionChecker _permissionChecker;
 	private Locale _locale;
