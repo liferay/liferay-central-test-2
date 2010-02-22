@@ -104,11 +104,13 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 			</c:otherwise>
 		</c:choose>
 
-		<aui:input bean="<%= entry %>" field="title" model="<%= AnnouncementsEntry.class %>" name="title" />
+		<aui:model-context bean="<%= entry %>" model="<%= AnnouncementsEntry.class %>" />
 
-		<aui:input bean="<%= entry %>" field="url" model="<%= AnnouncementsEntry.class %>" name="url" />
+		<aui:input name="title" />
 
-		<aui:input bean="<%= entry %>" field="content" model="<%= AnnouncementsEntry.class %>" name="content" />
+		<aui:input name="url" />
+
+		<aui:input name="content" />
 
 		<aui:select name="type">
 
@@ -129,9 +131,9 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 			<aui:option label="important" selected="<%= priority == 1 %>" value="1" />
 		</aui:select>
 
-		<aui:input bean="<%= entry %>" field="displayDate" model="<%= AnnouncementsEntry.class %>" name="displayDate" value="<%= displayDate %>" />
+		<aui:input name="displayDate" value="<%= displayDate %>" />
 
-		<aui:input bean="<%= entry %>" field="expirationDate" model="<%= AnnouncementsEntry.class %>" name="expirationDate" value="<%= expirationDate %>" />
+		<aui:input name="expirationDate" value="<%= expirationDate %>" />
 	</aui:fieldset>
 
 	<aui:button-row>
