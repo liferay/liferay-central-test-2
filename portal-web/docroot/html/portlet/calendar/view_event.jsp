@@ -408,6 +408,21 @@ request.setAttribute("view_event.jsp-event", event);
 		<p>
 			<%= event.getDescription() %>
 		</p>
+
+		<span class="entry-categories">
+			<liferay-ui:asset-categories-summary
+				className="<%= CalEvent.class.getName() %>"
+				classPK="<%= event.getEventId() %>"
+			/>
+		</span>
+
+		<span class="entry-tags">
+			<liferay-ui:asset-tags-summary
+				className="<%= CalEvent.class.getName() %>"
+				classPK="<%= event.getEventId() %>"
+				message="tags"
+			/>
+		</span>
 	</aui:column>
 
 	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
