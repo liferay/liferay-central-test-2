@@ -53,21 +53,21 @@ public class DLFileEntryPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, DLFileEntry fileEntry,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, fileEntry, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, long fileEntryId,
 			String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, fileEntryId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
+			PermissionChecker permissionChecker, DLFileEntry fileEntry,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, fileEntry, actionId)) {
 			throw new PrincipalException();
 		}
 	}
