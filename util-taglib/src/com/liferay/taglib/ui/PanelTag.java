@@ -25,6 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.util.PwdGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -41,6 +42,10 @@ public class PanelTag extends BodyTagSupport {
 	public int doStartTag() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
+
+		if (Validator.isNull(_id)) {
+			_id = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+		}
 
  		request.setAttribute("liferay-ui:panel:id", _id);
  		request.setAttribute("liferay-ui:panel:title", _title);

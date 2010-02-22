@@ -28,7 +28,7 @@
 boolean accordion = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:accordion"));
 String cssClass = (String)request.getAttribute("liferay-ui:panel-floating-container:cssClass");
 Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel-floating-container:extended");
-String id = request.getAttribute("liferay-ui:panel-floating-container:id") + "PanelFloatingContainer";
+String id = (String)request.getAttribute("liferay-ui:panel-floating-container:id");
 boolean paging = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:paging"));
 String pagingElements = (String)request.getAttribute("liferay-ui:panel-floating-container:pagingElements");
 boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:persistState"));
