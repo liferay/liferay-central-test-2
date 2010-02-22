@@ -50,6 +50,8 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 	<liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
 	<liferay-ui:error exception="<%= CompanyWebIdException.class %>" message="please-enter-a-valid-web-id" />
 
+	<aui:model-context bean="<%= company2 %>" model="<%= Company.class %>" />
+
 	<aui:fieldset>
 		<c:if test="<%= company2 != null %>">
 			<aui:field-wrapper label="id">
@@ -62,12 +64,12 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 		</c:if>
 
 		<c:if test="<%= company2 == null %>">
-			<aui:input bean="<%= company2 %>" cssClass="lfr-input-text-container" field="webId" model="<%= Company.class %>" name="webId" type="text" />
+			<aui:input name="webId" />
 		</c:if>
 
-		<aui:input bean="<%= company2 %>" cssClass="lfr-input-text-container" field="virtualHost" model="<%= Company.class %>" name="virtualHost" type="text" />
+		<aui:input name="virtualHost" />
 
-		<aui:input bean="<%= company2 %>" cssClass="lfr-input-text-container" field="mx" model="<%= Company.class %>" name="mailDomain" type="text" />
+		<aui:input label="mail-domain" name="mx" />
 
 		<c:if test="<%= showShardSelector %>">
 			<c:choose>

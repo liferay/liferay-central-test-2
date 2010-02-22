@@ -66,7 +66,7 @@
 		portletURL.setParameter("tabs3", tabs3);
 		%>
 
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="tabsURL">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="redirectURL">
 			<portlet:param name="struts_action" value="/admin/view" />
 			<portlet:param name="tabs1" value="<%= tabs1 %>" />
 			<portlet:param name="tabs2" value="<%= tabs2 %>" />
@@ -79,7 +79,7 @@
 			<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 			<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 			<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
-			<aui:input name="redirect" type="hidden" value="<%= tabsURL %>" />
+			<aui:input name="redirect" type="hidden" value="<%= redirectURL %>" />
 			<aui:input name="portletId" type="hidden" />
 
 			<c:if test="<%= showTabs1 %>">
