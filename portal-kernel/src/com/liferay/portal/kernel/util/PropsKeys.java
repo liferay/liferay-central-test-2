@@ -219,6 +219,8 @@ public interface PropsKeys {
 
 	public static final String CALENDAR_EVENT_TYPES = "calendar.event.types";
 
+	public static final String CALENDAR_EVENT_COMMENTS_ENABLED = "calendar.event.comments.enabled";
+
 	public static final String CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT = "captcha.check.portal.create_account";
 
 	public static final String CAPTCHA_CHECK_PORTAL_SEND_PASSWORD = "captcha.check.portal.send_password";

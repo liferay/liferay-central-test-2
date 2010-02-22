@@ -211,11 +211,66 @@
 	padding-top: .5em;
 }
 
+.portlet-calendar .detail-column-last {
+	background-color: #D7F1FF;
+	overflow: visible;
+}
+
+.portlet-calendar .detail-column-last .detail-column-content {
+	border: 1px solid #88C5D9;
+	padding: 0.7em;
+}
+
+.portlet-calendar dl.property-list {
+	margin-top: 0;
+	overflow: hidden;
+	padding: 0;
+}
+
 .portlet-calendar .event-duration-hour {
 	float: left;
+}
+
+.portlet-calendar .folder-icon {
+	margin-bottom: 2em;
+	overflow: hidden;
+	text-align: center;
+}
+
+.portlet-calendar h3.event-title, .portlet-calendar h3.event-title {
+	border-bottom: 1px solid #000;
+	font-size: 14px;
+	font-weight: 700;
+	margin-top: 0;
+}
+
+.portlet-calendar .property-list dd img {
+	vertical-align: middle;
+}
+
+.portlet-calendar .property-list dd, .portlet-calendar .property-list dd {
+	padding-left: 5px;
+}
+
+.portlet-calendar .property-list dt {
+	clear: left;
+	font-weight: bold;
+	min-width: 5em;
+}
+
+.portlet-calendar .property-list dt, .portlet-calendar .property-list dd {
+	float: left;
+	line-height: 1.5;
+	margin: 0;
 }
 
 .portlet-calendar .reminders {
 	clear: both;
 	padding-left: 1em;
 }
+
+
+.portlet-calendar ul.property-list li {
+	margin-bottom: 5px;
+}
+

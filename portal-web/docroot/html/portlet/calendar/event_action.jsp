@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
 <%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -27,10 +28,19 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-CalEvent event = (CalEvent)row.getObject();
+CalEvent event = null;
+boolean view = false;
+
+if (row != null) {
+	event = (CalEvent)row.getObject();
+}
+else {
+	event = (CalEvent)request.getAttribute("view_event.jsp-event");
+	view = true;
+}
 %>
 
-<liferay-ui:icon-menu>
+<liferay-ui:icon-menu showExpanded="<%= view %>">
 	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
@@ -62,7 +72,7 @@ CalEvent event = (CalEvent)row.getObject();
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.DELETE) %>">
+	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.DELETE) && !view %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

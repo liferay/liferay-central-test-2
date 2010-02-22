@@ -95,6 +95,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
+		boolean enableComments = ParamUtil.getBoolean(
+			actionRequest, "enableComments");
 		String tabs1Default = ParamUtil.getString(
 			actionRequest, "tabs1Default");
 		String summaryTabOrientation = ParamUtil.getString(
@@ -104,6 +106,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		String summaryTabShowTodaysEvents = ParamUtil.getString(
 			actionRequest, "summaryTabShowTodaysEvents");
 
+		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue("tabs1-default", tabs1Default);
 		preferences.setValue("summary-tab-orientation", summaryTabOrientation);
 		preferences.setValue(
