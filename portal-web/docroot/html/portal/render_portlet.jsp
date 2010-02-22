@@ -128,6 +128,10 @@ catch (NoSuchResourceException nsre) {
 
 boolean access = PortletPermissionUtil.contains(permissionChecker, plid, portlet, ActionKeys.VIEW);
 
+if (portlet.isUndeployedPortlet()) {
+	access = true;
+}
+
 boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
 boolean stateMin = layoutTypePortlet.hasStateMinPortletId(portletId);
 
