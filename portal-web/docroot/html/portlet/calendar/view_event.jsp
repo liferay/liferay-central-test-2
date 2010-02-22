@@ -175,6 +175,8 @@ if ((event.getRepeating()) && (recurrence != null)) {
 		endDateType = 1;
 	}
 }
+
+request.setAttribute("view_event.jsp-event", event);
 %>
 
 <liferay-ui:tabs
@@ -182,209 +184,188 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
-<div class="vevent">
-	<table class="lfr-table">
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="from" />:
-		</td>
-		<td>
-			<c:choose>
-				<c:when test="<%= event.isTimeZoneSensitive() %>">
-					<%= dateFormatDate.format(Time.getDate(event.getStartDate(), timeZone)) %>
-				</c:when>
-				<c:otherwise>
-					<%= dateFormatDate.format(event.getStartDate()) %>
-				</c:otherwise>
-			</c:choose>
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="duration" />:
-		</td>
-		<td>
+<aui:layout cssClass="vevent">
+	<h3 class="event-title"><%= event.getTitle() %></h3>
 
-			<%
-			boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
-			%>
+	<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
+		<dl class="property-list">
+			<dt>
+				<liferay-ui:icon image='<%= "../common/calendar" %>'/>
+				<liferay-ui:message key="start-date" />:
+			</dt>
+			<dd>
+				<c:choose>
+					<c:when test="<%= event.isTimeZoneSensitive() %>">
+						<%= dateFormatDate.format(Time.getDate(event.getStartDate(), timeZone)) %>
+					</c:when>
+					<c:otherwise>
+						<%= dateFormatDate.format(event.getStartDate()) %>
+					</c:otherwise>
+				</c:choose>
+			</dd>
 
-			<c:choose>
-				<c:when test="<%= allDay %>">
-					<abbr class="duration" title="P1D">
-						<liferay-ui:message key="all-day" />:
+			<dt>
+				<c:choose>
+					<c:when test="<%= (endDateType == 0) || (endDateType == 2) %>">
+						<liferay-ui:icon image='<%= "../common/calendar" %>'/>
+						<liferay-ui:message key="end-date" />:
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message key="ocurrence-s" />:
+					</c:otherwise>
+				</c:choose>
+			</dt>
+			<dd>
+				<c:if test="<%= (endDateType == 0) %>">
+					<liferay-ui:message key="none" />
+				</c:if>
+
+				<c:if test="<%= (endDateType == 1) %>">
+					<%= recurrence.getOccurrence() %>
+				</c:if>
+
+				<c:if test="<%= (endDateType == 2) %>">
+					<%= event.isTimeZoneSensitive() ? dateFormatDate.format(Time.getDate(event.getEndDate(), timeZone)) : dateFormatDate.format(event.getEndDate()) %>
+				</c:if>
+			</dd>
+
+			<dt>
+				<liferay-ui:icon image='<%= "../common/time" %>'/>
+				<liferay-ui:message key="duration" />:
+			</dt>
+			<dd>
+
+				<%
+				boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
+				%>
+
+				<c:choose>
+					<c:when test="<%= allDay %>">
+						<abbr class="duration" title="P1D">
+							<liferay-ui:message key="all-day" />:
+						</abbr>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="<%= event.isTimeZoneSensitive() %>">
+								<abbr class="dtstart" title="<%= dateFormatISO8601.format(Time.getDate(event.getStartDate(), timeZone)) %>">
+									<%= dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) %>
+								</abbr>
+							</c:when>
+							<c:otherwise>
+								<abbr class="dtstart" title="<%= dateFormatISO8601.format(event.getStartDate()) %>">
+									<%= dateFormatTime.format(event.getStartDate()) %>
+								</abbr>
+							</c:otherwise>
+						</c:choose>
+						&#150;
+						<c:choose>
+							<c:when test="<%= event.isTimeZoneSensitive() %>">
+								<%= dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), timeZone)) %>
+							</c:when>
+							<c:otherwise>
+								<%= dateFormatTime.format(CalUtil.getEndTime(event)) %>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
+
+				<c:if test="<%= allDay %>">
+					<liferay-ui:message key="all-day" />
+				</c:if>
+
+				<c:if test="<%= event.isTimeZoneSensitive() %>">
+					(<liferay-ui:message key="time-zone-sensitive" />)
+				</c:if>
+			</dd>
+			<dt>
+				<liferay-ui:icon image='<%= "../common/attributes" %>'/>
+				<liferay-ui:message key="type" />:
+			</dt>
+			<dd>
+				<span class="categories"><%= LanguageUtil.get(pageContext, event.getType()) %></span>
+			</dd>
+
+			<c:if test="<%= (recurrenceType == Recurrence.DAILY) %>">
+				<dt>
+					<liferay-ui:icon image='<%= "../common/undo" %>'/>
+					<liferay-ui:message key="repeat-daily" />:
+				</dt>
+				<dd>
+					<c:if test="<%= (dailyType == 0) %>">
+						<%= dailyInterval %> <liferay-ui:message key="day-s" />
+					</c:if>
+
+					<c:if test="<%= (dailyType == 1) %>">
+						<liferay-ui:message key="every-weekday" />
+					</c:if>
+				</dd>
+			</c:if>
+
+			<c:if test="<%= (recurrenceType == Recurrence.WEEKLY) %>">
+				<dt>
+					<liferay-ui:icon image='<%= "../common/undo" %>'/>
+					<liferay-ui:message key="repeat-weekly" />:
+				</dt>
+				<dd>
+					<abbr class="rrule" title="FREQ=WEEKLY">
+						<liferay-ui:message key="recur-every" />
+						<%= dailyInterval %>
+						<liferay-ui:message key="weeks-on" />
+
+						<%= weeklyPosSu ? (days[0] + ",") : "" %>
+						<%= weeklyPosMo ? (days[1] + ",") : "" %>
+						<%= weeklyPosTu ? (days[2] + ",") : "" %>
+						<%= weeklyPosWe ? (days[3] + ",") : "" %>
+						<%= weeklyPosTh ? (days[4] + ",") : "" %>
+						<%= weeklyPosFr ? (days[5] + ",") : "" %>
+						<%= weeklyPosSa ? days[6] : "" %>
 					</abbr>
-				</c:when>
-				<c:otherwise>
-					<c:choose>
-						<c:when test="<%= event.isTimeZoneSensitive() %>">
-							<abbr class="dtstart" title="<%= dateFormatISO8601.format(Time.getDate(event.getStartDate(), timeZone)) %>">
-								<%= dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) %>
-							</abbr>
-						</c:when>
-						<c:otherwise>
-							<abbr class="dtstart" title="<%= dateFormatISO8601.format(event.getStartDate()) %>">
-								<%= dateFormatTime.format(event.getStartDate()) %>
-							</abbr>
-						</c:otherwise>
-					</c:choose>
-
-					&#150;
-
-					<c:choose>
-						<c:when test="<%= event.isTimeZoneSensitive() %>">
-							<%= dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), timeZone)) %>
-						</c:when>
-						<c:otherwise>
-							<%= dateFormatTime.format(CalUtil.getEndTime(event)) %>
-						</c:otherwise>
-					</c:choose>
-				</c:otherwise>
-			</c:choose>
-
-			<c:if test="<%= allDay %>">
-				<liferay-ui:message key="all-day" />
+				</dd>
 			</c:if>
 
-			<c:if test="<%= event.isTimeZoneSensitive() %>">
-				(<liferay-ui:message key="time-zone-sensitive" />)
+			<c:if test="<%= (recurrenceType == Recurrence.MONTHLY) %>">
+				<dt>
+					<liferay-ui:icon image='<%= "../common/undo" %>'/>
+					<liferay-ui:message key="repeat-monthly" />:
+				</dt>
+				<dd>
+					<c:if test="<%= (monthlyType == 0) %>">
+						<liferay-ui:message key="day" /> <%= monthlyDay0 %> <liferay-ui:message key="of-every" /> <%= monthlyInterval0 %> <liferay-ui:message key="month-s" />
+					</c:if>
+
+					<c:if test="<%= (monthlyType == 1) %>">
+						<liferay-ui:message key="the" />
+
+						<%= (monthlyPos == 1) ? LanguageUtil.get(pageContext, "first") : "" %>
+						<%= (monthlyPos == 2) ? LanguageUtil.get(pageContext, "second") : "" %>
+						<%= (monthlyPos == 3) ? LanguageUtil.get(pageContext, "third") : "" %>
+						<%= (monthlyPos == 4) ? LanguageUtil.get(pageContext, "fourth") : "" %>
+						<%= (monthlyPos == -1) ? LanguageUtil.get(pageContext, "last") : "" %>
+
+						<%= (monthlyDay1 == Calendar.MONDAY) ? LanguageUtil.get(pageContext, "weekday") : "" %>
+						<%= (monthlyDay1 == Calendar.SATURDAY) ? LanguageUtil.get(pageContext, "weekend-day") : "" %>
+						<%= (monthlyDay1 == Calendar.SUNDAY) ? days[0] : "" %>
+						<%= (monthlyDay1 == Calendar.MONDAY) ? days[1] : "" %>
+						<%= (monthlyDay1 == Calendar.TUESDAY) ? days[2] : "" %>
+						<%= (monthlyDay1 == Calendar.WEDNESDAY) ? days[3] : "" %>
+						<%= (monthlyDay1 == Calendar.THURSDAY) ? days[4] : "" %>
+						<%= (monthlyDay1 == Calendar.FRIDAY) ? days[5] : "" %>
+						<%= (monthlyDay1 == Calendar.SATURDAY) ? days[6] : "" %>
+
+						<liferay-ui:message key="of-every" /> <%= monthlyInterval1 %> <liferay-ui:message key="month-s" />
+					</c:if>
+				</dd>
 			</c:if>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="title" />
-		</td>
-		<td>
-			<span class="summary"><%= event.getTitle() %></span>
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="description" />:
-		</td>
-		<td>
-			<%= event.getDescription() %>
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="type" />:
-		</td>
-		<td>
-			<span class="categories"><%= LanguageUtil.get(pageContext, event.getType()) %></span>
-		</td>
-	</tr>
 
-	<liferay-ui:custom-attributes-available className="<%= CalEvent.class.getName() %>">
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<liferay-ui:custom-attribute-list
-					className="<%= CalEvent.class.getName() %>"
-					classPK="<%= (event != null) ? event.getEventId() : 0 %>"
-					editable="<%= false %>"
-					label="<%= true %>"
-				/>
-			</td>
-		</tr>
-	</liferay-ui:custom-attributes-available>
+			<c:if test="<%= (recurrenceType == Recurrence.YEARLY) %>">
+				<dt>
+					<liferay-ui:icon image='<%= "../common/undo" %>'/>
+					<liferay-ui:message key="repeat-yearly" />:
+				</dt>
+				<dd>
+					<abbr class="rrule" title="FREQ=YEARLY">
 
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-
-	<c:if test="<%= (recurrenceType == Recurrence.DAILY) %>">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="repeat-daily" />:
-			</td>
-			<td>
-				<c:if test="<%= (dailyType == 0) %>">
-					<%= dailyInterval %> <liferay-ui:message key="day-s" />
-				</c:if>
-
-				<c:if test="<%= (dailyType == 1) %>">
-					<liferay-ui:message key="every-weekday" />
-				</c:if>
-			</td>
-		</tr>
-	</c:if>
-
-	<c:if test="<%= (recurrenceType == Recurrence.WEEKLY) %>">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="repeat-weekly" />:
-			</td>
-			<td>
-				<abbr class="rrule" title="FREQ=WEEKLY">
-					<liferay-ui:message key="recur-every" /> <%= dailyInterval %> <liferay-ui:message key="weeks-on" />
-
-					<%= weeklyPosSu ? (days[0] + ",") : "" %>
-					<%= weeklyPosMo ? (days[1] + ",") : "" %>
-					<%= weeklyPosTu ? (days[2] + ",") : "" %>
-					<%= weeklyPosWe ? (days[3] + ",") : "" %>
-					<%= weeklyPosTh ? (days[4] + ",") : "" %>
-					<%= weeklyPosFr ? (days[5] + ",") : "" %>
-					<%= weeklyPosSa ? days[6] : "" %>
-				</abbr>
-			</td>
-		</tr>
-	</c:if>
-
-	<c:if test="<%= (recurrenceType == Recurrence.MONTHLY) %>">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="repeat-monthly" />:
-			</td>
-			<td>
-				<c:if test="<%= (monthlyType == 0) %>">
-					<liferay-ui:message key="day" /> <%= monthlyDay0 %> <liferay-ui:message key="of-every" /> <%= monthlyInterval0 %> <liferay-ui:message key="month-s" />
-				</c:if>
-
-				<c:if test="<%= (monthlyType == 1) %>">
-					<liferay-ui:message key="the" />
-
-					<%= (monthlyPos == 1) ? LanguageUtil.get(pageContext, "first") : "" %>
-					<%= (monthlyPos == 2) ? LanguageUtil.get(pageContext, "second") : "" %>
-					<%= (monthlyPos == 3) ? LanguageUtil.get(pageContext, "third") : "" %>
-					<%= (monthlyPos == 4) ? LanguageUtil.get(pageContext, "fourth") : "" %>
-					<%= (monthlyPos == -1) ? LanguageUtil.get(pageContext, "last") : "" %>
-
-					<%= (monthlyDay1 == Calendar.MONDAY) ? LanguageUtil.get(pageContext, "weekday") : "" %>
-					<%= (monthlyDay1 == Calendar.SATURDAY) ? LanguageUtil.get(pageContext, "weekend-day") : "" %>
-					<%= (monthlyDay1 == Calendar.SUNDAY) ? days[0] : "" %>
-					<%= (monthlyDay1 == Calendar.MONDAY) ? days[1] : "" %>
-					<%= (monthlyDay1 == Calendar.TUESDAY) ? days[2] : "" %>
-					<%= (monthlyDay1 == Calendar.WEDNESDAY) ? days[3] : "" %>
-					<%= (monthlyDay1 == Calendar.THURSDAY) ? days[4] : "" %>
-					<%= (monthlyDay1 == Calendar.FRIDAY) ? days[5] : "" %>
-					<%= (monthlyDay1 == Calendar.SATURDAY) ? days[6] : "" %>
-
-					<liferay-ui:message key="of-every" /> <%= monthlyInterval1 %> <liferay-ui:message key="month-s" />
-				</c:if>
-			</td>
-		</tr>
-	</c:if>
-
-	<c:if test="<%= (recurrenceType == Recurrence.YEARLY) %>">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="repeat-yearly" />:
-			</td>
-			<td>
-				<abbr class="rrule" title="FREQ=YEARLY">
 					<c:if test="<%= (yearlyType == 0) %>">
 						<liferay-ui:message key="every" /> <%= months[yearlyMonth0] %> <liferay-ui:message key="of-every" /> <%= yearlyInterval0 %> <liferay-ui:message key="year-s" />
 					</c:if>
@@ -410,38 +391,44 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 						<liferay-ui:message key="of" /> <%= months[yearlyMonth1] %> <liferay-ui:message key="of-every" /> <%= yearlyInterval1 %> <liferay-ui:message key="year-s" />
 					</c:if>
-				</abbr>
-			</td>
-		</tr>
-	</c:if>
-
-	<tr>
-		<td class="lfr-label">
-			<c:choose>
-				<c:when test="<%= (endDateType == 0) || (endDateType == 2) %>">
-					<liferay-ui:message key="end-date" />:
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:message key="ocurrence-s" />:
-				</c:otherwise>
-			</c:choose>
-		</td>
-		<td>
-			<c:if test="<%= (endDateType == 0) %>">
-				<liferay-ui:message key="none" />
+					</abbr>
+				</dd>
 			</c:if>
+		</dl>
 
-			<c:if test="<%= (endDateType == 1) %>">
-				<%= recurrence.getOccurrence() %>
-			</c:if>
+		<liferay-ui:custom-attributes-available className="<%= CalEvent.class.getName() %>">
+			<liferay-ui:custom-attribute-list
+				className="<%= CalEvent.class.getName() %>"
+				classPK="<%= (event != null) ? event.getEventId() : 0 %>"
+				editable="<%= false %>"
+				label="<%= true %>"
+			/>
+		</liferay-ui:custom-attributes-available>
 
-			<c:if test="<%= (endDateType == 2) %>">
-				<%= event.isTimeZoneSensitive() ? dateFormatDate.format(Time.getDate(event.getEndDate(), timeZone)) : dateFormatDate.format(event.getEndDate()) %>
-			</c:if>
-		</td>
-	</tr>
-	</table>
-</div>
+		<p>
+			<%= event.getDescription() %>
+		</p>
+	</aui:column>
+
+	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
+		<div class="folder-icon">
+			<liferay-ui:icon
+				image='<%= "../file_system/large/calendar" %>'
+				cssClass="folder-avatar"
+			/>
+
+			<div class="event-name">
+				<h4><%= event.getTitle() %></h4>
+			</div>
+		</div>
+
+		<%
+		request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+		%>
+
+		<liferay-util:include page="/html/portlet/calendar/event_action.jsp" />
+	</aui:column>
+</aui:layout>
 
 <%
 PortalUtil.setPageSubtitle(event.getTitle(), request);

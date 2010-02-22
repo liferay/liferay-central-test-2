@@ -27,10 +27,19 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-CalEvent event = (CalEvent)row.getObject();
+CalEvent event = null;
+boolean view = false;
+
+if (row != null) {
+	event = (CalEvent)row.getObject();
+}
+else {
+	event = (CalEvent)request.getAttribute("view_event.jsp-event");
+	view = true;
+}
 %>
 
-<liferay-ui:icon-menu>
+<liferay-ui:icon-menu showExpanded="<%= view %>">
 	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
