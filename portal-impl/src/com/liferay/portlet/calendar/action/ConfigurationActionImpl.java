@@ -97,22 +97,22 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		String tabs1Default = ParamUtil.getString(
 			actionRequest, "tabs1Default");
-		boolean enableComments = ParamUtil.getBoolean(
-			actionRequest, "enableComments");
 		String summaryTabOrientation = ParamUtil.getString(
 			actionRequest, "summaryTabOrientation");
 		String summaryTabShowMiniMonth = ParamUtil.getString(
 			actionRequest, "summaryTabShowMiniMonth");
 		String summaryTabShowTodaysEvents = ParamUtil.getString(
 			actionRequest, "summaryTabShowTodaysEvents");
+		boolean enableComments = ParamUtil.getBoolean(
+			actionRequest, "enableComments");
 
 		preferences.setValue("tabs1-default", tabs1Default);
-		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue("summary-tab-orientation", summaryTabOrientation);
 		preferences.setValue(
 			"summary-tab-show-mini-month", summaryTabShowMiniMonth);
 		preferences.setValue(
 			"summary-tab-show-todays-events", summaryTabShowTodaysEvents);
+		preferences.setValue("enable-comments", String.valueOf(enableComments));
 	}
 
 	protected void updateEmailFrom(

@@ -161,12 +161,13 @@ String editorContent = emailEventReminderBody;
 					<aui:option label="vertical" selected='<%= summaryTabOrientation.equals("vertical") %>' />
 				</aui:select>
 
+				<aui:input inlineLabel="left" label="show-mini-month" name="summaryTabShowMiniMonth" type="checkbox" value="<%= summaryTabShowMiniMonth %>" />
+
+				<aui:input inlineLabel="left" label="show-todays-events" name="summaryTabShowTodaysEvents" type="checkbox" value="<%= summaryTabShowTodaysEvents %>" />
+
 				<c:if test="<%= PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED %>">
 					<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
 				</c:if>
-
-				<aui:input inlineLabel="left" label="show-mini-month" name="summaryTabShowMiniMonth" type="checkbox" value="<%= summaryTabShowMiniMonth %>" />
-				<aui:input inlineLabel="left" label="show-todays-events" name="summaryTabShowTodaysEvents" type="checkbox" value="<%= summaryTabShowTodaysEvents %>" />
 			</aui:fieldset>
 		</c:when>
 	</c:choose>

@@ -28,6 +28,7 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CalEvent event = null;
+
 boolean view = false;
 
 if (row != null) {
@@ -35,6 +36,7 @@ if (row != null) {
 }
 else {
 	event = (CalEvent)request.getAttribute("view_event.jsp-event");
+
 	view = true;
 }
 %>

@@ -184,13 +184,14 @@ request.setAttribute("view_event.jsp-event", event);
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
-<aui:layout cssClass="vevent">
+<aui:layout cssClass="event">
 	<h3 class="event-title"><%= event.getTitle() %></h3>
 
 	<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
 		<dl class="property-list">
 			<dt>
-				<liferay-ui:icon image='<%= "../common/calendar" %>'/>
+				<liferay-ui:icon image="../common/calendar" />
+
 				<liferay-ui:message key="start-date" />:
 			</dt>
 			<dd>
@@ -203,11 +204,11 @@ request.setAttribute("view_event.jsp-event", event);
 					</c:otherwise>
 				</c:choose>
 			</dd>
-
 			<dt>
 				<c:choose>
 					<c:when test="<%= (endDateType == 0) || (endDateType == 2) %>">
-						<liferay-ui:icon image='<%= "../common/calendar" %>'/>
+						<liferay-ui:icon image="../common/calendar" />
+
 						<liferay-ui:message key="end-date" />:
 					</c:when>
 					<c:otherwise>
@@ -228,9 +229,9 @@ request.setAttribute("view_event.jsp-event", event);
 					<%= event.isTimeZoneSensitive() ? dateFormatDate.format(Time.getDate(event.getEndDate(), timeZone)) : dateFormatDate.format(event.getEndDate()) %>
 				</c:if>
 			</dd>
-
 			<dt>
-				<liferay-ui:icon image='<%= "../common/time" %>'/>
+				<liferay-ui:icon image="../common/time" />
+
 				<liferay-ui:message key="duration" />:
 			</dt>
 			<dd>
@@ -279,7 +280,8 @@ request.setAttribute("view_event.jsp-event", event);
 				</c:if>
 			</dd>
 			<dt>
-				<liferay-ui:icon image='<%= "../common/attributes" %>'/>
+				<liferay-ui:icon image="../common/attributes" />
+
 				<liferay-ui:message key="type" />:
 			</dt>
 			<dd>
@@ -288,7 +290,8 @@ request.setAttribute("view_event.jsp-event", event);
 
 			<c:if test="<%= (recurrenceType == Recurrence.DAILY) %>">
 				<dt>
-					<liferay-ui:icon image='<%= "../common/undo" %>'/>
+					<liferay-ui:icon image="../common/undo" />
+
 					<liferay-ui:message key="repeat-daily" />:
 				</dt>
 				<dd>
@@ -304,14 +307,13 @@ request.setAttribute("view_event.jsp-event", event);
 
 			<c:if test="<%= (recurrenceType == Recurrence.WEEKLY) %>">
 				<dt>
-					<liferay-ui:icon image='<%= "../common/undo" %>'/>
+					<liferay-ui:icon image="../common/undo" />
+
 					<liferay-ui:message key="repeat-weekly" />:
 				</dt>
 				<dd>
 					<abbr class="rrule" title="FREQ=WEEKLY">
-						<liferay-ui:message key="recur-every" />
-						<%= dailyInterval %>
-						<liferay-ui:message key="weeks-on" />
+						<liferay-ui:message key="recur-every" /> <%= dailyInterval %> <liferay-ui:message key="weeks-on" />
 
 						<%= weeklyPosSu ? (days[0] + ",") : "" %>
 						<%= weeklyPosMo ? (days[1] + ",") : "" %>
@@ -326,7 +328,8 @@ request.setAttribute("view_event.jsp-event", event);
 
 			<c:if test="<%= (recurrenceType == Recurrence.MONTHLY) %>">
 				<dt>
-					<liferay-ui:icon image='<%= "../common/undo" %>'/>
+					<liferay-ui:icon image="../common/undo" />
+
 					<liferay-ui:message key="repeat-monthly" />:
 				</dt>
 				<dd>
@@ -360,37 +363,37 @@ request.setAttribute("view_event.jsp-event", event);
 
 			<c:if test="<%= (recurrenceType == Recurrence.YEARLY) %>">
 				<dt>
-					<liferay-ui:icon image='<%= "../common/undo" %>'/>
+					<liferay-ui:icon image="../common/undo" />
+
 					<liferay-ui:message key="repeat-yearly" />:
 				</dt>
 				<dd>
 					<abbr class="rrule" title="FREQ=YEARLY">
+						<c:if test="<%= (yearlyType == 0) %>">
+							<liferay-ui:message key="every" /> <%= months[yearlyMonth0] %> <liferay-ui:message key="of-every" /> <%= yearlyInterval0 %> <liferay-ui:message key="year-s" />
+						</c:if>
 
-					<c:if test="<%= (yearlyType == 0) %>">
-						<liferay-ui:message key="every" /> <%= months[yearlyMonth0] %> <liferay-ui:message key="of-every" /> <%= yearlyInterval0 %> <liferay-ui:message key="year-s" />
-					</c:if>
+						<c:if test="<%= (yearlyType == 1) %>">
+							<liferay-ui:message key="the" />
 
-					<c:if test="<%= (yearlyType == 1) %>">
-						<liferay-ui:message key="the" />
+							<%= (yearlyPos == 1) ? LanguageUtil.get(pageContext, "first") : "" %>
+							<%= (yearlyPos == 2) ? LanguageUtil.get(pageContext, "second") : "" %>
+							<%= (yearlyPos == 3) ? LanguageUtil.get(pageContext, "third") : "" %>
+							<%= (yearlyPos == 4) ? LanguageUtil.get(pageContext, "fourth") : "" %>
+							<%= (yearlyPos == -1) ? LanguageUtil.get(pageContext, "last") : "" %>
 
-						<%= (yearlyPos == 1) ? LanguageUtil.get(pageContext, "first") : "" %>
-						<%= (yearlyPos == 2) ? LanguageUtil.get(pageContext, "second") : "" %>
-						<%= (yearlyPos == 3) ? LanguageUtil.get(pageContext, "third") : "" %>
-						<%= (yearlyPos == 4) ? LanguageUtil.get(pageContext, "fourth") : "" %>
-						<%= (yearlyPos == -1) ? LanguageUtil.get(pageContext, "last") : "" %>
+							<%= (yearlyDay1 == Calendar.MONDAY) ? LanguageUtil.get(pageContext, "weekday") : "" %>
+							<%= (yearlyDay1 == Calendar.SATURDAY) ? LanguageUtil.get(pageContext, "weekend-day") : "" %>
+							<%= (yearlyDay1 == Calendar.SUNDAY) ? days[0] : "" %>
+							<%= (yearlyDay1 == Calendar.MONDAY) ? days[1] : "" %>
+							<%= (yearlyDay1 == Calendar.TUESDAY) ? days[2] : "" %>
+							<%= (yearlyDay1 == Calendar.WEDNESDAY) ? days[3] : "" %>
+							<%= (yearlyDay1 == Calendar.THURSDAY) ? days[4] : "" %>
+							<%= (yearlyDay1 == Calendar.FRIDAY) ? days[5] : "" %>
+							<%= (yearlyDay1 == Calendar.SATURDAY) ? days[6] : "" %>
 
-						<%= (yearlyDay1 == Calendar.MONDAY) ? LanguageUtil.get(pageContext, "weekday") : "" %>
-						<%= (yearlyDay1 == Calendar.SATURDAY) ? LanguageUtil.get(pageContext, "weekend-day") : "" %>
-						<%= (yearlyDay1 == Calendar.SUNDAY) ? days[0] : "" %>
-						<%= (yearlyDay1 == Calendar.MONDAY) ? days[1] : "" %>
-						<%= (yearlyDay1 == Calendar.TUESDAY) ? days[2] : "" %>
-						<%= (yearlyDay1 == Calendar.WEDNESDAY) ? days[3] : "" %>
-						<%= (yearlyDay1 == Calendar.THURSDAY) ? days[4] : "" %>
-						<%= (yearlyDay1 == Calendar.FRIDAY) ? days[5] : "" %>
-						<%= (yearlyDay1 == Calendar.SATURDAY) ? days[6] : "" %>
-
-						<liferay-ui:message key="of" /> <%= months[yearlyMonth1] %> <liferay-ui:message key="of-every" /> <%= yearlyInterval1 %> <liferay-ui:message key="year-s" />
-					</c:if>
+							<liferay-ui:message key="of" /> <%= months[yearlyMonth1] %> <liferay-ui:message key="of-every" /> <%= yearlyInterval1 %> <liferay-ui:message key="year-s" />
+						</c:if>
 					</abbr>
 				</dd>
 			</c:if>
@@ -428,7 +431,7 @@ request.setAttribute("view_event.jsp-event", event);
 	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
 		<div class="folder-icon">
 			<liferay-ui:icon
-				image='<%= "../file_system/large/calendar" %>'
+				image="../file_system/large/calendar"
 				cssClass="folder-avatar"
 			/>
 
@@ -444,6 +447,29 @@ request.setAttribute("view_event.jsp-event", event);
 		<liferay-util:include page="/html/portlet/calendar/event_action.jsp" />
 	</aui:column>
 </aui:layout>
+
+<c:if test="<%= enableComments %>">
+	<br />
+
+	<liferay-ui:tabs names="comments" />
+
+	<br /><br />
+
+	<portlet:actionURL var="discussionURL">
+		<portlet:param name="struts_action" value="/calendar/edit_event_discussion" />
+	</portlet:actionURL>
+
+	<liferay-ui:discussion
+		formName="fm2"
+		formAction="<%= discussionURL %>"
+		className="<%= CalEvent.class.getName() %>"
+		classPK="<%= event.getEventId() %>"
+		userId="<%= event.getUserId() %>"
+		subject="<%= event.getTitle() %>"
+		redirect="<%= currentURL %>"
+		ratingsEnabled="true"
+	/>
+</c:if>
 
 <%
 PortalUtil.setPageSubtitle(event.getTitle(), request);
@@ -475,23 +501,3 @@ private boolean _getWeeklyDayPos(HttpServletRequest req, int day, CalEvent event
 	return weeklyPos;
 }
 %>
-
-<c:if test="<%= enableComments %>">
-	<br>
-	<liferay-ui:tabs names="comments" />
-	<br>
-	<portlet:actionURL var="discussionURL">
-		<portlet:param name="struts_action" value="/calendar/edit_event_discussion" />
-	</portlet:actionURL>
-
-	<liferay-ui:discussion
-		formName="fm2"
-		formAction="<%= discussionURL %>"
-		className="<%= CalEvent.class.getName() %>"
-		classPK="<%= event.getEventId() %>"
-		userId="<%= event.getUserId() %>"
-		subject="<%= event.getTitle() %>"
-		redirect="<%= currentURL %>"
-		ratingsEnabled="true"
-	/>
-</c:if>
