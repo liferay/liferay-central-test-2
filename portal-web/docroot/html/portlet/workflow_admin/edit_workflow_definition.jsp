@@ -58,6 +58,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 <portlet:actionURL var="editWorkflowDefinitionURL">
 	<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:actionURL>
 
 <aui:form action="<%= editWorkflowDefinitionURL %>" enctype="multipart/form-data" method="post">
