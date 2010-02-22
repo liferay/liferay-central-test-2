@@ -84,10 +84,12 @@ public class DLFileEntryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long fileEntryId, String actionId)
+			PermissionChecker permissionChecker, long fileEntryId,
+			String actionId)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileEntryId);
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			fileEntryId);
 
 		return contains(permissionChecker, fileEntry, actionId);
 	}
