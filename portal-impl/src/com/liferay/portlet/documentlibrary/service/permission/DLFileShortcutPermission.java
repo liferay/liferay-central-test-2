@@ -37,16 +37,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUti
 public class DLFileShortcutPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long fileShortcutId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, fileShortcutId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, DLFileShortcut fileShortcut,
 			String actionId)
 		throws PortalException {
@@ -56,15 +46,14 @@ public class DLFileShortcutPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long fileShortcutId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		DLFileShortcut fileShortcut =
-			DLFileShortcutLocalServiceUtil.getFileShortcut(fileShortcutId);
-
-		return contains(permissionChecker, fileShortcut, actionId);
+		if (!contains(permissionChecker, fileShortcutId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public static boolean contains(
@@ -82,6 +71,17 @@ public class DLFileShortcutPermission {
 		return permissionChecker.hasPermission(
 			fileShortcut.getGroupId(), DLFileShortcut.class.getName(),
 			fileShortcut.getFileShortcutId(), actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long fileShortcutId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		DLFileShortcut fileShortcut =
+			DLFileShortcutLocalServiceUtil.getFileShortcut(fileShortcutId);
+
+		return contains(permissionChecker, fileShortcut, actionId);
 	}
 
 }

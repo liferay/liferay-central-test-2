@@ -40,16 +40,6 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 public class DLFolderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long groupId, long folderId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, groupId, folderId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, DLFolder folder,
 			String actionId)
 		throws PortalException, SystemException {
@@ -59,18 +49,13 @@ public class DLFolderPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long groupId, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			return DLPermission.contains(permissionChecker, groupId, actionId);
-		}
-		else {
-			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
-
-			return contains(permissionChecker, folder, actionId);
+		if (!contains(permissionChecker, groupId, folderId, actionId)) {
+			throw new PrincipalException();
 		}
 	}
 
@@ -130,6 +115,21 @@ public class DLFolderPermission {
 			}
 
 			return false;
+		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, long folderId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return DLPermission.contains(permissionChecker, groupId, actionId);
+		}
+		else {
+			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+
+			return contains(permissionChecker, folder, actionId);
 		}
 	}
 

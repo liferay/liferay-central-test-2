@@ -43,6 +43,16 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 public class DLFileEntryPermission {
 
 	public static void check(
+			PermissionChecker permissionChecker, DLFileEntry fileEntry,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, fileEntry, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, long groupId, long folderId,
 			String name, String actionId)
 		throws PortalException, SystemException {
@@ -60,38 +70,6 @@ public class DLFileEntryPermission {
 		if (!contains(permissionChecker, fileEntryId, actionId)) {
 			throw new PrincipalException();
 		}
-	}
-
-	public static void check(
-			PermissionChecker permissionChecker, DLFileEntry fileEntry,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, fileEntry, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, long folderId,
-			String name, String actionId)
-		throws PortalException, SystemException {
-
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-			groupId, folderId, name);
-
-		return contains(permissionChecker, fileEntry, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long fileEntryId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-			fileEntryId);
-
-		return contains(permissionChecker, fileEntry, actionId);
 	}
 
 	public static boolean contains(
@@ -126,6 +104,28 @@ public class DLFileEntryPermission {
 		return permissionChecker.hasPermission(
 			fileEntry.getGroupId(), DLFileEntry.class.getName(),
 			fileEntry.getFileEntryId(), actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, long folderId,
+			String name, String actionId)
+		throws PortalException, SystemException {
+
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			groupId, folderId, name);
+
+		return contains(permissionChecker, fileEntry, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long fileEntryId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			fileEntryId);
+
+		return contains(permissionChecker, fileEntry, actionId);
 	}
 
 }
