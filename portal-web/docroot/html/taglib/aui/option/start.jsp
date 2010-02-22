@@ -35,10 +35,5 @@ String value = GetterUtil.getString((String)request.getAttribute("aui:option:val
 <option <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= selected ? "selected" : StringPool.BLANK %> value="<%= value %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 
 <c:if test="<%= Validator.isNotNull(label) %>">
-
-	<%
-	label = HtmlUtil.escapeAttribute(label);
-	%>
-
-	<liferay-ui:message key="<%= label %>" />
+	<liferay-ui:message key="<%= HtmlUtil.escape(label) %>" />
 </c:if>
