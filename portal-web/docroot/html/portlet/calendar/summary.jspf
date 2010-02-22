@@ -78,6 +78,6 @@ for (int i = 1; i <= maxDayOfMonth; i++) {
 
 <aui:script>
 	function <portlet:namespace />updateCalendar(month, day, year) {
-		location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="tabs1" value="day" /><portlet:param name="eventType" value="<%= eventType %>" /></portlet:renderURL>&<portlet:namespace />month=' + month + '&<portlet:namespace />day=' + day + '&<portlet:namespace />year=' + year;
+		location.href = '<portlet:renderURL><portlet:param name="tabs1" value="day" /><portlet:param name="eventType" value="<%= eventType %>" /></portlet:renderURL>&<portlet:namespace />month=' + month + '&<portlet:namespace />day=' + day + '&<portlet:namespace />year=' + year;
 	}
 </aui:script>

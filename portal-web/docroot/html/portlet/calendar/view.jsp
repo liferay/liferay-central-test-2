@@ -31,8 +31,6 @@ String eventType = ParamUtil.getString(request, "eventType");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/calendar/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
