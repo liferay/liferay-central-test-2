@@ -51,7 +51,7 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 
 	</aui:fieldset>
 
-	<aui:button type="button" value="add-entry" onClick='<%= renderResponse.getNamespace() + "addEntry()" %>' />
+	<aui:button type="button" onClick='<%= renderResponse.getNamespace() + "addEntry()" %>' value="add-entry" />
 
 	<c:if test="<%= Validator.isNotNull(distributionScope) %>">
 		<div class="separator"><!-- --></div>
@@ -130,12 +130,12 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 </aui:form>
 
 <aui:script>
+	function <portlet:namespace />addEntry() {
+		location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="distributionScope" value="<%= distributionScope %>" /></portlet:renderURL>';
+	}
+
 	function <portlet:namespace />selectDistributionScope(distributionScope) {
 		var url = "<%= portletURL.toString() %>&<portlet:namespace />distributionScope=" + distributionScope;
 		submitForm(document.<portlet:namespace />fm, url);
-	}
-
-	function <portlet:namespace />addEntry() {
-		location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="distributionScope" value="<%= distributionScope %>" /></portlet:renderURL>';
 	}
 </aui:script>

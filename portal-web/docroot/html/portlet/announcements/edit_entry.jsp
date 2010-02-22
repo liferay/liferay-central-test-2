@@ -70,6 +70,8 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	<liferay-ui:error exception="<%= EntryExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 
+	<aui:model-context bean="<%= entry %>" model="<%= AnnouncementsEntry.class %>" />
+
 	<aui:fieldset>
 		<c:choose>
 			<c:when test="<%= entry != null %>">
@@ -104,8 +106,6 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 			</c:otherwise>
 		</c:choose>
 
-		<aui:model-context bean="<%= entry %>" model="<%= AnnouncementsEntry.class %>" />
-
 		<aui:input name="title" />
 
 		<aui:input name="url" />
@@ -139,7 +139,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button type="button" value="preview" onClick='<%= renderResponse.getNamespace() + "previewEntry();" %>' />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "previewEntry();" %>' type="button" value="preview" />
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
