@@ -57,6 +57,8 @@ String[] tabs1NamesArray = StringUtil.split(tabs1Names);
 
 String tabs1Default = preferences.getValue("tabs1-default", tabs1NamesArray[0]);
 
+boolean enableComments = PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
+
 String summaryTabOrientation = preferences.getValue("summary-tab-orientation", "horizontal");
 boolean summaryTabShowMiniMonth = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-mini-month", "true"));
 boolean summaryTabShowTodaysEvents = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-todays-events", "true"));

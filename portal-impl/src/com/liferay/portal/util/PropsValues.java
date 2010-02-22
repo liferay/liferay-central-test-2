@@ -227,6 +227,10 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.CALENDAR_EVENT_CHECK_INTERVAL));
 
+	public static final boolean CALENDAR_EVENT_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.CALENDAR_EVENT_COMMENTS_ENABLED));
+
 	public static boolean CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT));

@@ -460,3 +460,23 @@ private boolean _getWeeklyDayPos(HttpServletRequest req, int day, CalEvent event
 	return weeklyPos;
 }
 %>
+
+<c:if test="<%= enableComments %>">
+	<br>
+	<liferay-ui:tabs names="comments" />
+	<br>
+	<portlet:actionURL var="discussionURL">
+		<portlet:param name="struts_action" value="/calendar/edit_event_discussion" />
+	</portlet:actionURL>
+
+	<liferay-ui:discussion
+		formName="fm2"
+		formAction="<%= discussionURL %>"
+		className="<%= CalEvent.class.getName() %>"
+		classPK="<%= event.getEventId() %>"
+		userId="<%= event.getUserId() %>"
+		subject="<%= event.getTitle() %>"
+		redirect="<%= currentURL %>"
+		ratingsEnabled="true"
+	/>
+</c:if>
