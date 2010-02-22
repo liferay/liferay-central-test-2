@@ -275,14 +275,14 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
-		else if (name.equals(DLFolder.class.getName())) {
-			DLFolderPermission.check(
-				permissionChecker, groupId, GetterUtil.getLong(primKey),
-				ActionKeys.PERMISSIONS);
-		}
 		else if (name.equals(DLFileEntry.class.getName())) {
 			DLFileEntryPermission.check(
 				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(DLFolder.class.getName())) {
+			DLFolderPermission.check(
+				permissionChecker, groupId, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(Group.class.getName())) {
