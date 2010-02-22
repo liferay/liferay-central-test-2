@@ -64,6 +64,7 @@ import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
 import com.liferay.portal.util.comparator.GroupTypeComparator;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
@@ -866,6 +867,68 @@ public class EnterpriseAdminUtil {
 		}
 
 		return websites;
+	}
+
+	public static boolean hasUpdateEmailAddress(
+			PermissionChecker permissionChecker, User user) {
+
+		String[] fieldEditiableUserEmailAddress =
+			PropsValues.
+				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS;
+	
+		if (ArrayUtil.contains(
+				fieldEditiableUserEmailAddress, "administrator") &&
+			permissionChecker.isCompanyAdmin()) {
+	
+			return true;
+		}
+	
+		if (ArrayUtil.contains(
+				fieldEditiableUserEmailAddress, "user-with-mx") &&
+			user.hasCompanyMx()) {
+	
+			return true;
+		}
+	
+		if (ArrayUtil.contains(
+				fieldEditiableUserEmailAddress, "user-without-mx") &&
+			!user.hasCompanyMx()) {
+	
+			return true;
+		}
+		
+		return false;
+	}
+
+	public static boolean hasUpdateScreenName(
+		PermissionChecker permissionChecker, User user) {
+
+		String[] fieldEditiableUserScreenName =
+			PropsValues.
+				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME;
+	
+		if (ArrayUtil.contains(
+				fieldEditiableUserScreenName, "administrator") &&
+			permissionChecker.isCompanyAdmin()) {
+	
+			return true;
+		}
+	
+		if (ArrayUtil.contains(
+				fieldEditiableUserScreenName, "user-with-mx") &&
+			user.hasCompanyMx()) {
+	
+			return true;
+		}
+	
+		if (ArrayUtil.contains(
+				fieldEditiableUserScreenName, "user-without-mx") &&
+			!user.hasCompanyMx()) {
+	
+			return true;
+		}
+		
+		return false;
 	}
 
 	public static long[] removeRequiredRoles(long userId, long[] roleIds)

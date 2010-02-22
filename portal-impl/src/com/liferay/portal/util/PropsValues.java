@@ -618,35 +618,15 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED));
 
-	public static final String
+	public static final String[]
 		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS =
-			PropsUtil.get(PropsKeys.
+			PropsUtil.getArray(PropsKeys.
 				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS);
 
-	public static final boolean
-		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN =
-			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS.equals(
-				"administrator");
-
-	public static final boolean
-		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_USER_MX =
-			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS.equals(
-				"user-mx");
-
-	public static final String
+	public static final String[]
 		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME =
-			PropsUtil.get(PropsKeys.
+			PropsUtil.getArray(PropsKeys.
 				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME);
-
-	public static final boolean
-		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN =
-			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME.equals(
-				"administrator");
-
-	public static final boolean
-		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_USER_MX =
-			FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME.equals(
-				"user-mx");
 
 	public static boolean
 		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY =
