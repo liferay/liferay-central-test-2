@@ -29,7 +29,7 @@
 </h1>
 
 <div class="portal-add-content">
-	<liferay-ui:panel-container extended="<%= true %>" id="panel-manage-container" persistState="<%= true %>">
+	<liferay-ui:panel-container extended="<%= true %>" id="addContent" persistState="<%= true %>">
 
 		<%
 		String ppid = GetterUtil.getString((String)request.getAttribute("control_panel.jsp-ppid"), layoutTypePortlet.getStateMaxPortletId());
