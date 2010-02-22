@@ -22,7 +22,7 @@
 
 package com.liferay.util.lucene;
 
-import au.id.jericho.lib.html.Source;
+import net.htmlparser.jericho.Source;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 

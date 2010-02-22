@@ -1820,7 +1820,7 @@
 	</library>
 	<library>
 		<file-name>portal/jericho-html.jar</file-name>
-		<version>2.5</version>
+		<version>3.1</version>
 		<project-name>Jericho HTML Parser</project-name>
 		<project-url>http://jerichohtml.sourceforge.net</project-url>
 		<licenses>

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.util;
 
-import au.id.jericho.lib.html.Source;
+import net.htmlparser.jericho.Source;
 
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Html;
