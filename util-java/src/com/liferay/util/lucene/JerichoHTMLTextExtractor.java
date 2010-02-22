@@ -22,13 +22,13 @@
 
 package com.liferay.util.lucene;
 
-import net.htmlparser.jericho.Source;
-
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+
+import net.htmlparser.jericho.Source;
 
 import org.apache.jackrabbit.extractor.HTMLTextExtractor;
 

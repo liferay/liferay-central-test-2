@@ -22,13 +22,13 @@
 
 package com.liferay.portal.util;
 
-import net.htmlparser.jericho.Source;
-
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Html;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+
+import net.htmlparser.jericho.Source;
 
 /**
  * <a href="HtmlImpl.java.html"><b><i>View Source</i></b></a>
