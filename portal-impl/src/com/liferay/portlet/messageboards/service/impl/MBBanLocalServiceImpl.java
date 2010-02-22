@@ -107,6 +107,10 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 	}
 
 	public void expireBans() throws SystemException {
+		if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL <= 0) {
+			return;
+		}
+
 		long now = System.currentTimeMillis();
 
 		List<MBBan> bans = mbBanPersistence.findAll();
