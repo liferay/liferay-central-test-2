@@ -28,6 +28,6 @@
 boolean accordion = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-container:accordion"));
 String cssClass = (String)request.getAttribute("liferay-ui:panel-container:cssClass");
 Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
-String id = (String)request.getAttribute("liferay-ui:panel-container:id") + "PanelContainer";
+String id = request.getAttribute("liferay-ui:panel-container:id") + "PanelContainer";
 boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-container:persistState"));
 %>
