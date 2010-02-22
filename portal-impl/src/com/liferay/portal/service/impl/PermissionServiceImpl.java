@@ -45,7 +45,9 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.permission.CalEventPermission;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
@@ -276,6 +278,11 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		else if (name.equals(DLFolder.class.getName())) {
 			DLFolderPermission.check(
 				permissionChecker, groupId, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(DLFileEntry.class.getName())) {
+			DLFileEntryPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(Group.class.getName())) {
