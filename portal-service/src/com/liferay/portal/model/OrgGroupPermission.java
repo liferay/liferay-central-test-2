@@ -48,9 +48,9 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface OrgGroupPermission extends OrgGroupPermissionModel {
-	public boolean containsOrganization(
-		java.util.List<com.liferay.portal.model.Organization> organizations);
-
 	public boolean containsGroup(
 		java.util.List<com.liferay.portal.model.Group> groups);
+
+	public boolean containsOrganization(
+		java.util.List<com.liferay.portal.model.Organization> organizations);
 }

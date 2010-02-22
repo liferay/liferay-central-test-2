@@ -41,16 +41,6 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 public class BookmarksEntryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long entryId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, entryId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, BookmarksEntry entry,
 			String actionId)
 		throws PortalException, SystemException {
@@ -60,14 +50,14 @@ public class BookmarksEntryPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long entryId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
-
-		return contains(permissionChecker, entry, actionId);
+		if (!contains(permissionChecker, entryId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public static boolean contains(
@@ -101,6 +91,16 @@ public class BookmarksEntryPermission {
 		return permissionChecker.hasPermission(
 			entry.getGroupId(), BookmarksEntry.class.getName(),
 			entry.getEntryId(), actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long entryId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
+
+		return contains(permissionChecker, entry, actionId);
 	}
 
 }

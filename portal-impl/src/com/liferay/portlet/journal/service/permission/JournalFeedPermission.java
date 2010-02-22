@@ -37,6 +37,16 @@ import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 public class JournalFeedPermission {
 
 	public static void check(
+			PermissionChecker permissionChecker, JournalFeed feed,
+			String actionId)
+		throws PortalException {
+
+		if (!contains(permissionChecker, feed, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, long id, String actionId)
 		throws PortalException, SystemException {
 
@@ -55,14 +65,20 @@ public class JournalFeedPermission {
 		}
 	}
 
-	public static void check(
-			PermissionChecker permissionChecker, JournalFeed feed,
-			String actionId)
-		throws PortalException {
+	public static boolean contains(
+		PermissionChecker permissionChecker, JournalFeed feed,
+		String actionId) {
 
-		if (!contains(permissionChecker, feed, actionId)) {
-			throw new PrincipalException();
+		if (permissionChecker.hasOwnerPermission(
+				feed.getCompanyId(), JournalFeed.class.getName(),
+				feed.getId(), feed.getUserId(), actionId)) {
+
+			return true;
 		}
+
+		return permissionChecker.hasPermission(
+			feed.getGroupId(), JournalFeed.class.getName(), feed.getId(),
+			actionId);
 	}
 
 	public static boolean contains(
@@ -82,22 +98,6 @@ public class JournalFeedPermission {
 		JournalFeed feed = JournalFeedLocalServiceUtil.getFeed(groupId, feedId);
 
 		return contains(permissionChecker, feed, actionId);
-	}
-
-	public static boolean contains(
-		PermissionChecker permissionChecker, JournalFeed feed,
-		String actionId) {
-
-		if (permissionChecker.hasOwnerPermission(
-				feed.getCompanyId(), JournalFeed.class.getName(),
-				feed.getId(), feed.getUserId(), actionId)) {
-
-			return true;
-		}
-
-		return permissionChecker.hasPermission(
-			feed.getGroupId(), JournalFeed.class.getName(), feed.getId(),
-			actionId);
 	}
 
 }

@@ -40,15 +40,6 @@ import com.liferay.portal.util.PropsValues;
  */
 public class UserPermissionImpl implements UserPermission {
 
-	public void check(
-			PermissionChecker permissionChecker, long userId, String actionId)
-		throws PrincipalException {
-
-		if (!contains(permissionChecker, userId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
 	/**
 	 * @deprecated
 	 */
@@ -74,10 +65,13 @@ public class UserPermissionImpl implements UserPermission {
 		}
 	}
 
-	public boolean contains(
-		PermissionChecker permissionChecker, long userId, String actionId) {
+	public void check(
+			PermissionChecker permissionChecker, long userId, String actionId)
+		throws PrincipalException {
 
-		return contains(permissionChecker, userId, null, actionId);
+		if (!contains(permissionChecker, userId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	/**
@@ -135,6 +129,12 @@ public class UserPermissionImpl implements UserPermission {
 		}
 
 		return false;
+	}
+
+	public boolean contains(
+		PermissionChecker permissionChecker, long userId, String actionId) {
+
+		return contains(permissionChecker, userId, null, actionId);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UserPermissionImpl.class);

@@ -38,15 +38,6 @@ import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceU
 public class AnnouncementsEntryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long entryId, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, entryId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, AnnouncementsEntry entry,
 			String actionId)
 		throws PortalException {
@@ -56,14 +47,13 @@ public class AnnouncementsEntryPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long entryId, String actionId)
 		throws PortalException, SystemException {
 
-		AnnouncementsEntry entry = AnnouncementsEntryLocalServiceUtil.getEntry(
-			entryId);
-
-		return contains(permissionChecker, entry, actionId);
+		if (!contains(permissionChecker, entryId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public static boolean contains(
@@ -80,6 +70,16 @@ public class AnnouncementsEntryPermission {
 		return permissionChecker.hasPermission(
 			0, AnnouncementsEntry.class.getName(), entry.getEntryId(),
 			actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long entryId, String actionId)
+		throws PortalException, SystemException {
+
+		AnnouncementsEntry entry = AnnouncementsEntryLocalServiceUtil.getEntry(
+			entryId);
+
+		return contains(permissionChecker, entry, actionId);
 	}
 
 }

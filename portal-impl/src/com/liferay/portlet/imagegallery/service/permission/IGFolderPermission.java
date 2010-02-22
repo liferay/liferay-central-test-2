@@ -40,16 +40,6 @@ import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 public class IGFolderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long groupId, long folderId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, groupId, folderId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, IGFolder folder,
 			String actionId)
 		throws PortalException, SystemException {
@@ -59,18 +49,13 @@ public class IGFolderPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long groupId, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (folderId == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			return IGPermission.contains(permissionChecker, groupId, actionId);
-		}
-		else {
-			IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
-
-			return contains(permissionChecker, folder, actionId);
+		if (!contains(permissionChecker, groupId, folderId, actionId)) {
+			throw new PrincipalException();
 		}
 	}
 
@@ -134,6 +119,21 @@ public class IGFolderPermission {
 			}
 
 			return false;
+		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, long folderId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (folderId == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return IGPermission.contains(permissionChecker, groupId, actionId);
+		}
+		else {
+			IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
+
+			return contains(permissionChecker, folder, actionId);
 		}
 	}
 

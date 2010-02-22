@@ -37,15 +37,6 @@ import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 public class CalEventPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long eventId, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, eventId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, CalEvent event,
 			String actionId)
 		throws PortalException {
@@ -55,13 +46,13 @@ public class CalEventPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long eventId, String actionId)
 		throws PortalException, SystemException {
 
-		CalEvent event = CalEventLocalServiceUtil.getEvent(eventId);
-
-		return contains(permissionChecker, event, actionId);
+		if (!contains(permissionChecker, eventId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public static boolean contains(
@@ -78,6 +69,15 @@ public class CalEventPermission {
 		return permissionChecker.hasPermission(
 			event.getGroupId(), CalEvent.class.getName(), event.getEventId(),
 			actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long eventId, String actionId)
+		throws PortalException, SystemException {
+
+		CalEvent event = CalEventLocalServiceUtil.getEvent(eventId);
+
+		return contains(permissionChecker, event, actionId);
 	}
 
 }

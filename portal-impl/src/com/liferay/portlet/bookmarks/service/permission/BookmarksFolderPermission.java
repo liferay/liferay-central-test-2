@@ -41,16 +41,6 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 public class BookmarksFolderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long groupId, long folderId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, groupId, folderId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, BookmarksFolder folder,
 			String actionId)
 		throws PortalException, SystemException {
@@ -60,20 +50,13 @@ public class BookmarksFolderPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long groupId, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (folderId == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			return BookmarksPermission.contains(
-				permissionChecker, groupId, actionId);
-		}
-		else {
-			BookmarksFolder folder =
-				BookmarksFolderLocalServiceUtil.getBookmarksFolder(folderId);
-
-			return contains(permissionChecker, folder, actionId);
+		if (!contains(permissionChecker, groupId, folderId, actionId)) {
+			throw new PrincipalException();
 		}
 	}
 
@@ -141,6 +124,23 @@ public class BookmarksFolderPermission {
 			}
 
 			return false;
+		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, long folderId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (folderId == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return BookmarksPermission.contains(
+				permissionChecker, groupId, actionId);
+		}
+		else {
+			BookmarksFolder folder =
+				BookmarksFolderLocalServiceUtil.getBookmarksFolder(folderId);
+
+			return contains(permissionChecker, folder, actionId);
 		}
 	}
 

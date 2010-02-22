@@ -47,10 +47,10 @@ import com.liferay.portal.util.PropsValues;
 public class LayoutPermissionImpl implements LayoutPermission {
 
 	public void check(
-			PermissionChecker permissionChecker, long plid, String actionId)
+			PermissionChecker permissionChecker, Layout layout, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, plid, actionId)) {
+		if (!contains(permissionChecker, layout, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -69,43 +69,11 @@ public class LayoutPermissionImpl implements LayoutPermission {
 	}
 
 	public void check(
-			PermissionChecker permissionChecker, Layout layout, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, layout, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public boolean contains(
 			PermissionChecker permissionChecker, long plid, String actionId)
 		throws PortalException, SystemException {
 
-		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
-		return contains(permissionChecker, layout, actionId);
-	}
-
-	public boolean contains(
-			PermissionChecker permissionChecker, long groupId,
-			boolean privateLayout, long layoutId, String actionId)
-		throws PortalException, SystemException {
-
-		if (layoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-			if (GroupPermissionUtil.contains(
-					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
-
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		else {
-			Layout layout = LayoutLocalServiceUtil.getLayout(
-				groupId, privateLayout, layoutId);
-
-			return contains(permissionChecker, layout, actionId);
+		if (!contains(permissionChecker, plid, actionId)) {
+			throw new PrincipalException();
 		}
 	}
 
@@ -170,6 +138,38 @@ public class LayoutPermissionImpl implements LayoutPermission {
 		return permissionChecker.hasPermission(
 			layout.getGroupId(), Layout.class.getName(), layout.getPlid(),
 			actionId);
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long groupId,
+			boolean privateLayout, long layoutId, String actionId)
+		throws PortalException, SystemException {
+
+		if (layoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+			if (GroupPermissionUtil.contains(
+					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			Layout layout = LayoutLocalServiceUtil.getLayout(
+				groupId, privateLayout, layoutId);
+
+			return contains(permissionChecker, layout, actionId);
+		}
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long plid, String actionId)
+		throws PortalException, SystemException {
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		return contains(permissionChecker, layout, actionId);
 	}
 
 }

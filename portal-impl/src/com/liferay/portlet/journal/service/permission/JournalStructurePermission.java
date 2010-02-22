@@ -38,6 +38,16 @@ import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 public class JournalStructurePermission {
 
 	public static void check(
+			PermissionChecker permissionChecker, JournalStructure structure,
+			String actionId)
+		throws PortalException {
+
+		if (!contains(permissionChecker, structure, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, long id, String actionId)
 		throws PortalException, SystemException {
 
@@ -56,14 +66,20 @@ public class JournalStructurePermission {
 		}
 	}
 
-	public static void check(
-			PermissionChecker permissionChecker, JournalStructure structure,
-			String actionId)
-		throws PortalException {
+	public static boolean contains(
+		PermissionChecker permissionChecker, JournalStructure structure,
+		String actionId) {
 
-		if (!contains(permissionChecker, structure, actionId)) {
-			throw new PrincipalException();
+		if (permissionChecker.hasOwnerPermission(
+				structure.getCompanyId(), JournalStructure.class.getName(),
+				structure.getId(), structure.getUserId(), actionId)) {
+
+			return true;
 		}
+
+		return permissionChecker.hasPermission(
+			structure.getGroupId(), JournalStructure.class.getName(),
+			structure.getId(), actionId);
 	}
 
 	public static boolean contains(
@@ -85,22 +101,6 @@ public class JournalStructurePermission {
 			JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
 
 		return contains(permissionChecker, structure, actionId);
-	}
-
-	public static boolean contains(
-		PermissionChecker permissionChecker, JournalStructure structure,
-		String actionId) {
-
-		if (permissionChecker.hasOwnerPermission(
-				structure.getCompanyId(), JournalStructure.class.getName(),
-				structure.getId(), structure.getUserId(), actionId)) {
-
-			return true;
-		}
-
-		return permissionChecker.hasPermission(
-			structure.getGroupId(), JournalStructure.class.getName(),
-			structure.getId(), actionId);
 	}
 
 }

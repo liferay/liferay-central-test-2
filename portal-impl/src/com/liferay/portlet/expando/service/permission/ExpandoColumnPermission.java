@@ -37,14 +37,11 @@ import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 public class ExpandoColumnPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String className,
-			String tableName, String columnName, String actionId)
-		throws PortalException, SystemException {
+			PermissionChecker permissionChecker, ExpandoColumn column,
+			String actionId)
+		throws PortalException {
 
-		if (!contains(
-				permissionChecker, className, tableName, columnName,
-				actionId)) {
-
+		if (!contains(permissionChecker, column, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -59,24 +56,24 @@ public class ExpandoColumnPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, ExpandoColumn column,
-			String actionId)
-		throws PortalException {
+			PermissionChecker permissionChecker, String className,
+			String tableName, String columnName, String actionId)
+		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, column, actionId)) {
+		if (!contains(
+				permissionChecker, className, tableName, columnName,
+				actionId)) {
+
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String className,
-			String tableName, String columnName, String actionId)
-		throws SystemException {
+		PermissionChecker permissionChecker, ExpandoColumn column,
+		String actionId) {
 
-		ExpandoColumn column = ExpandoColumnLocalServiceUtil.getColumn(
-			className, tableName, columnName);
-
-		return contains(permissionChecker, column, actionId);
+		return permissionChecker.hasPermission(
+			0, ExpandoColumn.class.getName(), column.getColumnId(), actionId);
 	}
 
 	public static boolean contains(
@@ -90,11 +87,14 @@ public class ExpandoColumnPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, ExpandoColumn column,
-		String actionId) {
+			PermissionChecker permissionChecker, String className,
+			String tableName, String columnName, String actionId)
+		throws SystemException {
 
-		return permissionChecker.hasPermission(
-			0, ExpandoColumn.class.getName(), column.getColumnId(), actionId);
+		ExpandoColumn column = ExpandoColumnLocalServiceUtil.getColumn(
+			className, tableName, columnName);
+
+		return contains(permissionChecker, column, actionId);
 	}
 
 }

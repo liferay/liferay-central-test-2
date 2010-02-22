@@ -36,7 +36,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public interface LayoutPermission {
 
 	public void check(
-			PermissionChecker permissionChecker, long plid, String actionId)
+			PermissionChecker permissionChecker, Layout layout, String actionId)
 		throws PortalException, SystemException;
 
 	public void check(
@@ -45,11 +45,11 @@ public interface LayoutPermission {
 		throws PortalException, SystemException;
 
 	public void check(
-			PermissionChecker permissionChecker, Layout layout, String actionId)
+			PermissionChecker permissionChecker, long plid, String actionId)
 		throws PortalException, SystemException;
 
 	public boolean contains(
-			PermissionChecker permissionChecker, long plid, String actionId)
+			PermissionChecker permissionChecker, Layout layout, String actionId)
 		throws PortalException, SystemException;
 
 	public boolean contains(
@@ -58,7 +58,7 @@ public interface LayoutPermission {
 		throws PortalException, SystemException;
 
 	public boolean contains(
-			PermissionChecker permissionChecker, Layout layout, String actionId)
+			PermissionChecker permissionChecker, long plid, String actionId)
 		throws PortalException, SystemException;
 
 }

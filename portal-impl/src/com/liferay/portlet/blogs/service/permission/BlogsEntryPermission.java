@@ -37,15 +37,6 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 public class BlogsEntryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long entryId, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, entryId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, BlogsEntry entry,
 			String actionId)
 		throws PortalException {
@@ -55,13 +46,13 @@ public class BlogsEntryPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long entryId, String actionId)
 		throws PortalException, SystemException {
 
-		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
-
-		return contains(permissionChecker, entry, actionId);
+		if (!contains(permissionChecker, entryId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public static boolean contains(
@@ -78,6 +69,15 @@ public class BlogsEntryPermission {
 		return permissionChecker.hasPermission(
 			entry.getGroupId(), BlogsEntry.class.getName(), entry.getEntryId(),
 			actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long entryId, String actionId)
+		throws PortalException, SystemException {
+
+		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+
+		return contains(permissionChecker, entry, actionId);
 	}
 
 }

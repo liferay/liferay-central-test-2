@@ -38,16 +38,6 @@ import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 public class AssetVocabularyPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long vocabularyId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, vocabularyId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, AssetVocabulary vocabulary,
 			String actionId)
 		throws PortalException {
@@ -57,15 +47,14 @@ public class AssetVocabularyPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long vocabularyId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		AssetVocabulary vocabulary =
-			AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
-
-		return contains(permissionChecker, vocabulary, actionId);
+		if (!contains(permissionChecker, vocabularyId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public static boolean contains(
@@ -83,6 +72,17 @@ public class AssetVocabularyPermission {
 		return permissionChecker.hasPermission(
 			vocabulary.getGroupId(), AssetVocabulary.class.getName(),
 			vocabulary.getVocabularyId(), actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long vocabularyId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		AssetVocabulary vocabulary =
+			AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
+
+		return contains(permissionChecker, vocabulary, actionId);
 	}
 
 }

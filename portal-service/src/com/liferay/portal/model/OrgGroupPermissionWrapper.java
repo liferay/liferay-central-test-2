@@ -139,14 +139,14 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 		return _orgGroupPermission.toXmlString();
 	}
 
-	public boolean containsOrganization(
-		java.util.List<com.liferay.portal.model.Organization> organizations) {
-		return _orgGroupPermission.containsOrganization(organizations);
-	}
-
 	public boolean containsGroup(
 		java.util.List<com.liferay.portal.model.Group> groups) {
 		return _orgGroupPermission.containsGroup(groups);
+	}
+
+	public boolean containsOrganization(
+		java.util.List<com.liferay.portal.model.Organization> organizations) {
+		return _orgGroupPermission.containsOrganization(organizations);
 	}
 
 	public OrgGroupPermission getWrappedOrgGroupPermission() {

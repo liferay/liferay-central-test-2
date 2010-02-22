@@ -38,6 +38,16 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 public class AssetCategoryPermission {
 
 	public static void check(
+			PermissionChecker permissionChecker, AssetCategory category,
+			String actionId)
+		throws PortalException {
+
+		if (!contains(permissionChecker, category, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, long groupId, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
@@ -57,14 +67,20 @@ public class AssetCategoryPermission {
 		}
 	}
 
-	public static void check(
-			PermissionChecker permissionChecker, AssetCategory category,
-			String actionId)
-		throws PortalException {
+	public static boolean contains(
+		PermissionChecker permissionChecker, AssetCategory category,
+		String actionId) {
 
-		if (!contains(permissionChecker, category, actionId)) {
-			throw new PrincipalException();
+		if (permissionChecker.hasOwnerPermission(
+				category.getCompanyId(), AssetCategory.class.getName(),
+				category.getCategoryId(), category.getUserId(), actionId)) {
+
+			return true;
 		}
+
+		return permissionChecker.hasPermission(
+			category.getGroupId(), AssetCategory.class.getName(),
+			category.getCategoryId(), actionId);
 	}
 
 	public static boolean contains(
@@ -90,22 +106,6 @@ public class AssetCategoryPermission {
 			categoryId);
 
 		return contains(permissionChecker, category, actionId);
-	}
-
-	public static boolean contains(
-		PermissionChecker permissionChecker, AssetCategory category,
-		String actionId) {
-
-		if (permissionChecker.hasOwnerPermission(
-				category.getCompanyId(), AssetCategory.class.getName(),
-				category.getCategoryId(), category.getUserId(), actionId)) {
-
-			return true;
-		}
-
-		return permissionChecker.hasPermission(
-			category.getGroupId(), AssetCategory.class.getName(),
-			category.getCategoryId(), actionId);
 	}
 
 }

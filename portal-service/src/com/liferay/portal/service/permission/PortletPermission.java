@@ -35,11 +35,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public interface PortletPermission {
 
 	public void check(
-			PermissionChecker permissionChecker, String portletId,
-			String actionId)
-		throws PortalException, SystemException;
-
-	public void check(
 			PermissionChecker permissionChecker, long plid, String portletId,
 			String actionId)
 		throws PortalException, SystemException;
@@ -49,19 +44,9 @@ public interface PortletPermission {
 			String actionId, boolean strict)
 		throws PortalException, SystemException;
 
-	public boolean contains(
+	public void check(
 			PermissionChecker permissionChecker, String portletId,
 			String actionId)
-		throws PortalException, SystemException;
-
-	public boolean contains(
-			PermissionChecker permissionChecker, long plid, String portletId,
-			String actionId)
-		throws PortalException, SystemException;
-
-	public boolean contains(
-			PermissionChecker permissionChecker, long plid, String portletId,
-			String actionId, boolean strict)
 		throws PortalException, SystemException;
 
 	public boolean contains(
@@ -72,6 +57,21 @@ public interface PortletPermission {
 	public boolean contains(
 			PermissionChecker permissionChecker, long plid, Portlet portlet,
 			String actionId, boolean strict)
+		throws PortalException, SystemException;
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long plid, String portletId,
+			String actionId)
+		throws PortalException, SystemException;
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long plid, String portletId,
+			String actionId, boolean strict)
+		throws PortalException, SystemException;
+
+	public boolean contains(
+			PermissionChecker permissionChecker, String portletId,
+			String actionId)
 		throws PortalException, SystemException;
 
 	public String getPrimaryKey(long plid, String portletId);

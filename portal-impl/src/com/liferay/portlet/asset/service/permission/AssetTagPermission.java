@@ -37,15 +37,6 @@ import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 public class AssetTagPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long tagId, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, tagId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, AssetTag tag, String actionId)
 		throws PortalException {
 
@@ -54,13 +45,13 @@ public class AssetTagPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long tagId, String actionId)
 		throws PortalException, SystemException {
 
-		AssetTag tag = AssetTagLocalServiceUtil.getTag(tagId);
-
-		return contains(permissionChecker, tag, actionId);
+		if (!contains(permissionChecker, tagId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public static boolean contains(
@@ -76,6 +67,15 @@ public class AssetTagPermission {
 		return permissionChecker.hasPermission(
 			tag.getGroupId(), AssetTag.class.getName(), tag.getTagId(),
 			actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long tagId, String actionId)
+		throws PortalException, SystemException {
+
+		AssetTag tag = AssetTagLocalServiceUtil.getTag(tagId);
+
+		return contains(permissionChecker, tag, actionId);
 	}
 
 }

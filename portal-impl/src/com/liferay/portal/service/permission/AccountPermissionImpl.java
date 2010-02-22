@@ -37,16 +37,6 @@ import com.liferay.portal.service.AccountLocalServiceUtil;
 public class AccountPermissionImpl implements AccountPermission {
 
 	public void check(
-			PermissionChecker permissionChecker, long accountId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, accountId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public void check(
 			PermissionChecker permissionChecker, Account account,
 			String actionId)
 		throws PortalException {
@@ -56,14 +46,14 @@ public class AccountPermissionImpl implements AccountPermission {
 		}
 	}
 
-	public boolean contains(
+	public void check(
 			PermissionChecker permissionChecker, long accountId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		Account account = AccountLocalServiceUtil.getAccount(accountId);
-
-		return contains(permissionChecker, account, actionId);
+		if (!contains(permissionChecker, accountId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public boolean contains(
@@ -75,6 +65,16 @@ public class AccountPermissionImpl implements AccountPermission {
 		return permissionChecker.hasPermission(
 			groupId, Account.class.getName(), account.getAccountId(),
 			actionId);
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long accountId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		Account account = AccountLocalServiceUtil.getAccount(accountId);
+
+		return contains(permissionChecker, account, actionId);
 	}
 
 }

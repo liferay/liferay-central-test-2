@@ -42,19 +42,6 @@ public class MBDiscussionPermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, long companyId, long groupId,
-			String className, long classPK, long ownerId, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(
-				permissionChecker, companyId, groupId, className, classPK,
-				ownerId, actionId)) {
-
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
-			PermissionChecker permissionChecker, long companyId, long groupId,
 			String className, long classPK, long messageId, long ownerId,
 			String actionId)
 		throws PortalException, SystemException {
@@ -67,25 +54,17 @@ public class MBDiscussionPermission {
 		}
 	}
 
-	public static boolean contains(
+	public static void check(
 			PermissionChecker permissionChecker, long companyId, long groupId,
 			String className, long classPK, long ownerId, String actionId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		if (MBBanLocalServiceUtil.hasBan(
-				groupId, permissionChecker.getUserId())) {
+		if (!contains(
+				permissionChecker, companyId, groupId, className, classPK,
+				ownerId, actionId)) {
 
-			return false;
+			throw new PrincipalException();
 		}
-
-		if (permissionChecker.hasOwnerPermission(
-				companyId, className, classPK, ownerId, actionId)) {
-
-			return true;
-		}
-
-		return permissionChecker.hasPermission(
-			groupId, className, classPK, actionId);
 	}
 
 	public static boolean contains(
@@ -117,6 +96,27 @@ public class MBDiscussionPermission {
 		}
 
 		return false;
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long companyId, long groupId,
+			String className, long classPK, long ownerId, String actionId)
+		throws SystemException {
+
+		if (MBBanLocalServiceUtil.hasBan(
+				groupId, permissionChecker.getUserId())) {
+
+			return false;
+		}
+
+		if (permissionChecker.hasOwnerPermission(
+				companyId, className, classPK, ownerId, actionId)) {
+
+			return true;
+		}
+
+		return permissionChecker.hasPermission(
+			groupId, className, classPK, actionId);
 	}
 
 }

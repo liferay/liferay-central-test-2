@@ -35,22 +35,22 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public interface AccountPermission {
 
 	public void check(
-			PermissionChecker permissionChecker, long accountId,
+			PermissionChecker permissionChecker, Account account,
 			String actionId)
 		throws PortalException, SystemException;
 
 	public void check(
-			PermissionChecker permissionChecker, Account account,
-			String actionId)
-		throws PortalException, SystemException;
-
-	public boolean contains(
 			PermissionChecker permissionChecker, long accountId,
 			String actionId)
 		throws PortalException, SystemException;
 
 	public boolean contains(
 			PermissionChecker permissionChecker, Account account,
+			String actionId)
+		throws PortalException, SystemException;
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long accountId,
 			String actionId)
 		throws PortalException, SystemException;
 

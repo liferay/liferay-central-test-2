@@ -51,16 +51,6 @@ public class PortletPermissionImpl implements PortletPermission {
 	public static final boolean DEFAULT_STRICT = false;
 
 	public void check(
-			PermissionChecker permissionChecker, String portletId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, portletId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public void check(
 			PermissionChecker permissionChecker, long plid, String portletId,
 			String actionId)
 		throws PortalException, SystemException {
@@ -78,12 +68,48 @@ public class PortletPermissionImpl implements PortletPermission {
 		}
 	}
 
-	public boolean contains(
+	public void check(
 			PermissionChecker permissionChecker, String portletId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		return contains(permissionChecker, 0, portletId, actionId);
+		if (!contains(permissionChecker, portletId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long plid, Portlet portlet,
+			String actionId)
+		throws PortalException, SystemException {
+
+		return contains(
+			permissionChecker, plid, portlet, actionId, DEFAULT_STRICT);
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long plid, Portlet portlet,
+			String actionId, boolean strict)
+		throws PortalException, SystemException {
+
+		if (portlet.isUndeployedPortlet()) {
+			return false;
+		}
+
+		boolean value = contains(
+			permissionChecker, plid, portlet.getPortletId(), actionId, strict);
+
+		if (value) {
+			return true;
+		}
+		else {
+			if (portlet.isSystem() && actionId.equals(ActionKeys.VIEW)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 	}
 
 	public boolean contains(
@@ -155,37 +181,11 @@ public class PortletPermissionImpl implements PortletPermission {
 	}
 
 	public boolean contains(
-			PermissionChecker permissionChecker, long plid, Portlet portlet,
+			PermissionChecker permissionChecker, String portletId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		return contains(
-			permissionChecker, plid, portlet, actionId, DEFAULT_STRICT);
-	}
-
-	public boolean contains(
-			PermissionChecker permissionChecker, long plid, Portlet portlet,
-			String actionId, boolean strict)
-		throws PortalException, SystemException {
-
-		if (portlet.isUndeployedPortlet()) {
-			return false;
-		}
-
-		boolean value = contains(
-			permissionChecker, plid, portlet.getPortletId(), actionId, strict);
-
-		if (value) {
-			return true;
-		}
-		else {
-			if (portlet.isSystem() && actionId.equals(ActionKeys.VIEW)) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
+		return contains(permissionChecker, 0, portletId, actionId);
 	}
 
 	public String getPrimaryKey(long plid, String portletId) {

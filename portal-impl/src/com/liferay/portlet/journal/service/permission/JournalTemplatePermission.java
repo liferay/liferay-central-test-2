@@ -38,6 +38,16 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 public class JournalTemplatePermission {
 
 	public static void check(
+			PermissionChecker permissionChecker, JournalTemplate template,
+			String actionId)
+		throws PortalException {
+
+		if (!contains(permissionChecker, template, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, long id, String actionId)
 		throws PortalException, SystemException {
 
@@ -56,14 +66,20 @@ public class JournalTemplatePermission {
 		}
 	}
 
-	public static void check(
-			PermissionChecker permissionChecker, JournalTemplate template,
-			String actionId)
-		throws PortalException {
+	public static boolean contains(
+		PermissionChecker permissionChecker, JournalTemplate template,
+		String actionId) {
 
-		if (!contains(permissionChecker, template, actionId)) {
-			throw new PrincipalException();
+		if (permissionChecker.hasOwnerPermission(
+				template.getCompanyId(), JournalTemplate.class.getName(),
+				template.getId(), template.getUserId(), actionId)) {
+
+			return true;
 		}
+
+		return permissionChecker.hasPermission(
+			template.getGroupId(), JournalTemplate.class.getName(),
+			template.getId(), actionId);
 	}
 
 	public static boolean contains(
@@ -85,22 +101,6 @@ public class JournalTemplatePermission {
 			JournalTemplateLocalServiceUtil.getTemplate(groupId, templateId);
 
 		return contains(permissionChecker, template, actionId);
-	}
-
-	public static boolean contains(
-		PermissionChecker permissionChecker, JournalTemplate template,
-		String actionId) {
-
-		if (permissionChecker.hasOwnerPermission(
-				template.getCompanyId(), JournalTemplate.class.getName(),
-				template.getId(), template.getUserId(), actionId)) {
-
-			return true;
-		}
-
-		return permissionChecker.hasPermission(
-			template.getGroupId(), JournalTemplate.class.getName(),
-			template.getId(), actionId);
 	}
 
 }

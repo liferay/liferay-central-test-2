@@ -38,21 +38,21 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 public class JournalArticlePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long resourcePrimKey,
+			PermissionChecker permissionChecker, JournalArticle article,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		if (!contains(permissionChecker, resourcePrimKey, actionId)) {
+		if (!contains(permissionChecker, article, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long groupId, String articleId,
+			PermissionChecker permissionChecker, long resourcePrimKey,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, groupId, articleId, actionId)) {
+		if (!contains(permissionChecker, resourcePrimKey, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -70,46 +70,13 @@ public class JournalArticlePermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, JournalArticle article,
+			PermissionChecker permissionChecker, long groupId, String articleId,
 			String actionId)
-		throws PortalException {
+		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, article, actionId)) {
+		if (!contains(permissionChecker, groupId, articleId, actionId)) {
 			throw new PrincipalException();
 		}
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long resourcePrimKey,
-			String actionId)
-		throws PortalException, SystemException {
-
-		JournalArticle article =
-			JournalArticleLocalServiceUtil.getLatestArticle(resourcePrimKey);
-
-		return contains(permissionChecker, article, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, String articleId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
-			groupId, articleId);
-
-		return contains(permissionChecker, article, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, String articleId,
-			double version, String actionId)
-		throws PortalException, SystemException {
-
-		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
-			groupId, articleId, version);
-
-		return contains(permissionChecker, article, actionId);
 	}
 
 	public static boolean contains(
@@ -126,6 +93,39 @@ public class JournalArticlePermission {
 		return permissionChecker.hasPermission(
 			article.getGroupId(), JournalArticle.class.getName(),
 			article.getResourcePrimKey(), actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long resourcePrimKey,
+			String actionId)
+		throws PortalException, SystemException {
+
+		JournalArticle article =
+			JournalArticleLocalServiceUtil.getLatestArticle(resourcePrimKey);
+
+		return contains(permissionChecker, article, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, String articleId,
+			double version, String actionId)
+		throws PortalException, SystemException {
+
+		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+			groupId, articleId, version);
+
+		return contains(permissionChecker, article, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, String articleId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+			groupId, articleId);
+
+		return contains(permissionChecker, article, actionId);
 	}
 
 }
