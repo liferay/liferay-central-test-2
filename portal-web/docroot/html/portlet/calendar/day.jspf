@@ -283,7 +283,7 @@ if (!partDayResults.isEmpty()) {
 					</div>
 
 					<div class="event-title">
-						<a href="<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>"><portlet:param name="struts_action" value="/calendar/view_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" /></portlet:renderURL>">
+						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" /></portlet:renderURL>">
 						<%= StringUtil.shorten(event.getTitle(), 65) %>
 						</a>
 					</div>

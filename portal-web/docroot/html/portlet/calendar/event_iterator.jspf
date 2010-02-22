@@ -53,7 +53,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setWindowState(WindowState.NORMAL);
+	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/calendar/view_event");
 	rowURL.setParameter("redirect", currentURL);

@@ -29,7 +29,7 @@ String tabs1 = ParamUtil.getString(request, "tabs1", tabs1Default);
 
 PortletURL tabs1URL = renderResponse.createRenderURL();
 
-tabs1URL.setWindowState(WindowState.NORMAL);
+tabs1URL.setWindowState(WindowState.MAXIMIZED);
 
 tabs1URL.setParameter("struts_action", "/calendar/view");
 tabs1URL.setParameter("month", String.valueOf(selMonth));

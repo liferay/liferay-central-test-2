@@ -136,7 +136,7 @@ Format dateFormatMonthAndDay = FastDateFormatFactoryUtil.getSimpleDateFormat("M/
 		%>
 
 			<td align="center" height="25" width="<%= (i == 0 || i == 6) ? "15" : "14" %>%">
-				<a href="<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="day" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="day" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
 				<%= LanguageUtil.get(pageContext, days[daysIndex]) %>
 				</a>
 			</td>
@@ -175,7 +175,7 @@ Format dateFormatMonthAndDay = FastDateFormatFactoryUtil.getSimpleDateFormat("M/
 				<table border="0" cellpadding="8" cellspacing="0" width="100%">
 				<tr>
 					<td>
-						<a href="<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="day" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
+						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="day" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
 						<%= dateFormatMonthAndDay.format(Time.getDate(cal)) %>
 						</a>
 					</td>
@@ -230,7 +230,7 @@ Format dateFormatMonthAndDay = FastDateFormatFactoryUtil.getSimpleDateFormat("M/
 								</c:otherwise>
 							</c:choose>
 
-							<a href="<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>"><portlet:param name="struts_action" value="/calendar/view_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" /></portlet:renderURL>">
+							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" /></portlet:renderURL>">
 							<%= event.getTitle() %>
 							</a>
 						</td>
