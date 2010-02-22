@@ -102,9 +102,14 @@ public class CommunitiesUtil {
 			sourceLayoutSet.getGroupId(), sourceLayoutSet.isPrivateLayout(),
 			null, parameterMap, null, null);
 
-		LayoutServiceUtil.importLayouts(
-			targetLayoutSet.getGroupId(), targetLayoutSet.isPrivateLayout(),
-			parameterMap, file);
+		try {
+			LayoutServiceUtil.importLayouts(
+				targetLayoutSet.getGroupId(), targetLayoutSet.isPrivateLayout(),
+				parameterMap, file);
+		}
+		finally {
+			file.delete();
+		}
 	}
 
 	public static void deleteLayout(
