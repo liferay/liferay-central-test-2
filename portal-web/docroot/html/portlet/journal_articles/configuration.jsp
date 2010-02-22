@@ -56,8 +56,8 @@ if (Validator.isNotNull(structureId)) {
 	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur %>' />
 	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
 
-	<liferay-ui:panel-container extended="<%= true %>" id="journalArticlesConfiguration" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="filter" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter") %>' >
+	<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter") %>' >
 			<aui:fieldset>
 				<aui:select label="community" name="groupId">
 
@@ -138,7 +138,7 @@ if (Validator.isNotNull(structureId)) {
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="displaySettings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
 			<aui:fieldset>
 				<aui:select label="display-url" name="pageURL">
 					<aui:option label="maximized" selected='<%= pageURL.equals("maximized") %>' />

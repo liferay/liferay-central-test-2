@@ -22,30 +22,14 @@
  */
 %>
 
-<%
-String workflowId = portletDisplay.getNamespace() + "workflow";
-String workflowTitle = LanguageUtil.get(pageContext, "workflow");
-
-String formStructureId = portletDisplay.getNamespace() + "formStructure";
-String formStructureTitle = LanguageUtil.get(pageContext, "structure");
-String formTemplateId = portletDisplay.getNamespace() + "formTemplate";
-String formTemplateTitle = LanguageUtil.get(pageContext, "template");
-
-String categorizationId = portletDisplay.getNamespace() + "categorization";
-String categorizationTitle = LanguageUtil.get(pageContext, "categorization");
-
-String scheduleId = portletDisplay.getNamespace() + "schedule";
-String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
-%>
-
 <liferay-ui:toggle-area
 	id="toggle_id_journal_edit_article_extra"
 	showMessage='<%= LanguageUtil.get(pageContext, "advanced") + " &raquo;" %>'
 	hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "basic") %>'
 	align="right"
 >
-	<liferay-ui:panel-container cssClass="journal-extras" extended="<%= false %>" id='<%= portletDisplay.getNamespace() + "journalExtras" %>' persistState="<%= true %>">
-		<liferay-ui:panel defaultState="open" extended="<%= false %>" id="<%= formStructureId %>" persistState="<%= true %>" title="<%= formStructureTitle %>">
+	<liferay-ui:panel-container cssClass="journal-extras" extended="<%= false %>" persistState="<%= true %>">
+		<liferay-ui:panel defaultState="open" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "structure") %>'>
 			<aui:fieldset>
 				<div class="journal-form-presentation-label">
 					<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
@@ -154,7 +138,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			</div>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel defaultState="open" extended="<%= false %>" id="<%= formTemplateId %>" persistState="<%= true %>" title="<%= formTemplateTitle %>">
+		<liferay-ui:panel defaultState="open" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "template") %>'>
 			<aui:fieldset>
 				<div class="journal-form-presentation-label">
 					<c:choose>
@@ -215,7 +199,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="<%= workflowId %>" persistState="<%= true %>" title="<%= workflowTitle %>">
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "workflow") %>'>
 			<aui:fieldset>
 				<c:if test="<%= article != null %>">
 					<aui:select name="version" onChange='<%= renderResponse.getNamespace() + "changeVersionView(this.value);" %>'>
@@ -301,7 +285,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="<%= categorizationId %>" persistState="<%= true %>" title="<%= categorizationTitle %>">
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "categorization") %>'>
 			<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 
 			<aui:fieldset>
@@ -327,7 +311,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="<%= scheduleId %>" persistState="<%= true %>" title="<%= scheduleTitle %>">
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "schedule") %>'>
 			<liferay-ui:error exception="<%= ArticleDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
 			<liferay-ui:error exception="<%= ArticleExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 

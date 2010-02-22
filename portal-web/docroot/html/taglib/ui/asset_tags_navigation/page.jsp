@@ -40,7 +40,7 @@ String tagsNavigation = _buildTagsNavigation(scopeGroupId, tag, portletURL, clas
 if (Validator.isNotNull(tagsNavigation)) {
 %>
 
-	<liferay-ui:panel-container cssClass="taglib-asset-tags-navigation" extended="<%= true %>" id='<%= namespace + "taglibAssetTagsNavigation" %>' persistState="<%= true %>">
+	<liferay-ui:panel-container cssClass="taglib-asset-tags-navigation" extended="<%= true %>" persistState="<%= true %>">
 		<%= tagsNavigation %>
 	</liferay-ui:panel-container>
 

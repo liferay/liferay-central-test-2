@@ -24,21 +24,8 @@
 
 <br />
 
-<%
-String userSettingsId = portletDisplay.getNamespace() + "userSettings";
-
-String metaTagsId = portletDisplay.getNamespace() + "metaTags";
-String metaTagsTitle = LanguageUtil.get(pageContext, "meta-tags");
-
-String javascriptId = portletDisplay.getNamespace() + "javascript";
-String javascriptTitle = LanguageUtil.get(pageContext, "javascript");
-
-String robotsId = portletDisplay.getNamespace() + "robots";
-String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
-%>
-
-<liferay-ui:panel-container cssClass="page-extra-settings" extended="<%= true %>" id="<%= userSettingsId %>" persistState="<%= true %>">
-	<liferay-ui:panel defaultState="closed" id="<%= metaTagsId %>" title="<%= metaTagsTitle %>">
+<liferay-ui:panel-container cssClass="page-extra-settings" extended="<%= true %>" persistState="<%= true %>">
+	<liferay-ui:panel defaultState="closed" title='<%= LanguageUtil.get(pageContext, "meta-tags") %>'>
 		<table class="lfr-table">
 		<tr>
 			<td></td>
@@ -184,7 +171,7 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 		</table>
 	</liferay-ui:panel>
 
-	<liferay-ui:panel defaultState="closed" extended="<%= true %>" id="<%= javascriptId %>" persistState="<%= true %>" title="<%= javascriptTitle %>">
+	<liferay-ui:panel defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "javascript") %>'>
 		<table class="lfr-table">
 		<tr>
 			<td>
@@ -224,13 +211,7 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 	</liferay-ui:panel>
 
 	<c:if test="<%= PortalUtil.isLayoutSitemapable(selLayout) %>">
-
-		<%
-		String sitemapId = portletDisplay.getNamespace() + "sitemap";
-		String sitemapTitle = LanguageUtil.get(pageContext, "sitemap-protocol");
-		%>
-
-		<liferay-ui:panel defaultState="closed" extended="<%= true %>" id="<%= robotsId %>" persistState="<%= true %>" title="<%= robotsTitle %>">
+		<liferay-ui:panel defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "robots") %>'>
 
 			<%
 			boolean include = GetterUtil.getBoolean(selLayout.getTypeSettingsProperties().getProperty("sitemap-include"), true);

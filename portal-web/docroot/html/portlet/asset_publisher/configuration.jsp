@@ -104,8 +104,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 			<c:choose>
 				<c:when test='<%= selectionStyle.equals("manual") %>'>
-					<liferay-ui:panel-container extended="<%= true %>" id='assetPublisherConfiguration' persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherSelection' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "selection") %>' >
+					<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "selection") %>' >
 							<aui:fieldset>
 
 								<%
@@ -246,7 +246,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 							</aui:fieldset>
 						</liferay-ui:panel>
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherDisplaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
 							<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
@@ -258,8 +258,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					</aui:button-row>
 				</c:when>
 				<c:when test='<%= selectionStyle.equals("dynamic") %>'>
-					<liferay-ui:panel-container extended="<%= true %>" id='assetPublisherConfiguration' persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherSources' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "source") %>'>
+					<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "source") %>'>
 							<aui:fieldset label="scope">
 								<aui:select label="" name="defaultScope">
 									<aui:option label="<%= themeDisplay.getScopeGroup().getDescriptiveName() %>" selected="<%= defaultScope %>" value="<%= true %>" />
@@ -372,7 +372,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							</aui:fieldset>
 						</liferay-ui:panel>
 
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherQueryLogic' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter[action]") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter[action]") %>'>
 							<liferay-ui:asset-tags-error />
 
 							<div id="<portlet:namespace />queryRules">
@@ -447,7 +447,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 							</aui:script>
 						</liferay-ui:panel>
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherGroupBy' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>'>
 							<aui:fieldset>
 								<aui:select inlineField="<%= true %>" inlineLabel="left" label="order-by" name="orderByColumn1">
 									<aui:option label="title" selected='<%= orderByColumn2.equals("title") %>' />
@@ -510,7 +510,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								</aui:select>
 							</aui:fieldset>
 						</liferay-ui:panel>
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherDisplaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
 							<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>

@@ -79,8 +79,8 @@ catch (Exception e) {
 %>
 
 <div style="overflow: auto; vertical-align: top;">
-	<liferay-ui:panel-container cssClass="model-details" id='<%= renderResponse.getNamespace() + "resource" + resourcePermission.getResourcePermissionId() %>'>
-		<liferay-ui:panel defaultState="closed" id='<%= renderResponse.getNamespace() + "resourcePanel" + resourcePermission.getResourcePermissionId() %>' title="<%= resourceTitle %>">
+	<liferay-ui:panel-container cssClass="model-details">
+		<liferay-ui:panel defaultState="closed" title="<%= resourceTitle %>">
 			<div style="height: 100px; width: 350px;"><%= modelString %></div>
 		</liferay-ui:panel>
 	</liferay-ui:panel-container>

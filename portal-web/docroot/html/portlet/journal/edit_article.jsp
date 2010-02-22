@@ -518,12 +518,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 			<br />
 
-			<%
-			String abstractId = portletDisplay.getNamespace() + "abstract";
-			String abstractTitle = LanguageUtil.get(pageContext, "abstract");
-			%>
-
-			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="<%= abstractId %>" persistState="<%= true %>" title="<%= abstractTitle %>">
+			<liferay-ui:panel defaultState="closed" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "abstract") %>'>
 				<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
 
 				<%

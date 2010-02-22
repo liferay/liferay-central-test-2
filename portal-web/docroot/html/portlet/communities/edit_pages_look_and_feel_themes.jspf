@@ -61,12 +61,7 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 			</dl>
 
 			<c:if test="<%= !colorSchemes.isEmpty() %>">
-
-				<%
-				String panelId = renderResponse.getNamespace() + "colorSchemes";
-				%>
-
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="<%= panelId %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>'>
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>'>
 					<ul class="lfr-component lfr-theme-list">
 
 						<%

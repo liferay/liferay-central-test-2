@@ -45,7 +45,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 	<liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
 
-	<liferay-ui:panel-container extended="<%= true %>" id="configurationPanel" persistState="<%= true %>">
+	<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="folders" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "folders-listing") %>'>
 			<aui:fieldset>
 				<aui:field-wrapper label="root-folder">
@@ -117,7 +117,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documents" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "documents-listing") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "documents-listing") %>'>
 			<aui:fieldset>
 				<aui:input inlineLabel="left" label="show-search" name="showFileEntriesSearch" type="checkbox" value="<%= showFileEntriesSearch %>" />
 
@@ -171,7 +171,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="ratings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ratings") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ratings") %>'>
 			<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
 		</liferay-ui:panel>
 	</liferay-ui:panel-container>

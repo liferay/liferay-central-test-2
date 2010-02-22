@@ -50,7 +50,7 @@ else {
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
-<liferay-ui:panel-container cssClass="taglib-asset-categories-navigation" extended="<%= true %>" id='<%= namespace + "taglibAssetCategoriesNavigation" %>' persistState="<%= true %>">
+<liferay-ui:panel-container cssClass="taglib-asset-categories-navigation" extended="<%= true %>" persistState="<%= true %>">
 
 	<%
 	for (int i = 0; i < vocabularies.size(); i++) {
@@ -62,7 +62,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			hidePortletWhenEmpty = false;
 	%>
 
-			<liferay-ui:panel collapsible="<%= false %>" extended="<%= true %>" id='<%= namespace + "taglibAssetCategoriesNavigation" + i %>' persistState="<%= true %>" title="<%= vocabulary.getName() %>">
+			<liferay-ui:panel collapsible="<%= false %>" extended="<%= true %>" persistState="<%= true %>" title="<%= vocabulary.getName() %>">
 				<%= vocabularyNavigation %>
 			</liferay-ui:panel>
 

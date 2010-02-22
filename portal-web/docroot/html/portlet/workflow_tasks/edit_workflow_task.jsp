@@ -67,7 +67,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<%
 	WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
-	PortletURL editPortletURL =  workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+	PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 	%>
 
 	<c:if test="<%= editPortletURL != null %>">
@@ -124,10 +124,10 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 
 	<br />
 
-	<liferay-ui:panel defaultState="closed" id='<%= renderResponse.getNamespace() + "activitiesPanel" %>'  title='<%= LanguageUtil.get(pageContext, "activities") %>'>
+	<liferay-ui:panel defaultState="closed" title='<%= LanguageUtil.get(pageContext, "activities") %>'>
 
 		<%
-		List<WorkflowLog> workflowLogs =  WorkflowLogManagerUtil.getWorkflowLogs(workflowTask.getWorkflowTaskId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, new WorkflowLogCreateDateComparator(true));
+		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(workflowTask.getWorkflowTaskId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, new WorkflowLogCreateDateComparator(true));
 
 		for (WorkflowLog workflowLog : workflowLogs) {
 			User curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());

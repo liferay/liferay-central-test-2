@@ -187,9 +187,9 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 										</c:if>
 									</h2>
 
-									<liferay-ui:panel-floating-container id="groupSelectorPanel" paging="<%= true %>" trigger=".lfr-group-selector">
+									<liferay-ui:panel-floating-container paging="<%= true %>" trigger=".lfr-group-selector">
 										<c:if test="<%= permissionChecker.isCompanyAdmin() %>">
-											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="globalPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "shared") %>'>
+											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "shared") %>'>
 												<ul>
 													<li>
 														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>"><liferay-ui:message key="global" /></a>
@@ -204,7 +204,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 										%>
 
 										<c:if test="<%= !manageableGroups.isEmpty() %>">
-											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="communityPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "communities") %>'>
+											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "communities") %>'>
 												<ul>
 
 													<%
@@ -230,7 +230,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 										</c:if>
 
 										<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="organizationsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "organizations") %>'>
+											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "organizations") %>'>
 												<ul>
 
 													<%
@@ -257,8 +257,8 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 									</liferay-ui:panel-floating-container>
 
 									<c:if test="<%= !scopeLayouts.isEmpty() %>">
-										<liferay-ui:panel-floating-container id="scopePanel" trigger=".lfr-scope-selector">
-											<liferay-ui:panel id="" title="">
+										<liferay-ui:panel-floating-container trigger=".lfr-scope-selector">
+											<liferay-ui:panel title="">
 												<ul>
 													<li>
 														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>"><liferay-ui:message key="default" /></a>
