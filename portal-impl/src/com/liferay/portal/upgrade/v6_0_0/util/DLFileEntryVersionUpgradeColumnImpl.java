@@ -24,6 +24,8 @@ package com.liferay.portal.upgrade.v6_0_0.util;
 
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 
+import java.text.NumberFormat;
+
 /**
  * <a href="DLFileEntryVersionUpgradeColumnImpl.java.html"><b><i>View Source</i>
  * </b></a>
@@ -32,12 +34,23 @@ import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
  */
 public class DLFileEntryVersionUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
+	public static String getNewVersion(double version) {
+		NumberFormat nf = NumberFormat.getInstance();
+
+		nf.setMaximumFractionDigits(1);
+		nf.setMinimumFractionDigits(1);
+
+		return nf.format(version);
+	}
+
 	public DLFileEntryVersionUpgradeColumnImpl(String name) {
 		super(name);
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		return String.valueOf(oldValue);
+		double version = (Double)oldValue.doubleValue();
+
+		return getNewVersion(version);
 	}
 
 }
