@@ -473,6 +473,16 @@
 			<forward name="portlet.document_library.view" path="portlet.document_library.view" />
 		</action>
 
+		<action path="/document_library_display/view_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction">
+			<forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.view_file_entry" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
+		<action path="/document_library_display/view_file_shortcut" type="com.liferay.portlet.documentlibrary.action.EditFileShortcutAction">
+			<forward name="portlet.document_library.edit_file_shortcut" path="portlet.document_library.view_file_shortcut" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
 		<!-- Enterprise Admin -->
 
 		<action path="/enterprise_admin/edit_company" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyAction">

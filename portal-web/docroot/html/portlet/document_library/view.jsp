@@ -75,7 +75,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 				<h3 class="folder-title"><%= folder.getName() %></h3>
 			</c:if>
 
-			<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
+			<aui:column columnWidth="<%= showFolderMenu ? 75 : 100 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
 				<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
 					<c:if test="<%= showSubfolders %>">
 						<c:if test="<%= folder != null %>">
@@ -155,25 +155,27 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 				</liferay-ui:panel-container>
 			</aui:column>
 
-			<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
-				<div class="folder-icon">
-					<liferay-ui:icon
-						image='<%= "../file_system/large/" + (((foldersCount + fileEntriesCount) > 0) ? "folder_full_document" : "folder_empty") %>'
-						cssClass="folder-avatar"
-						message='<%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "document-home") %>'
-					/>
+			<c:if test="<%= showFolderMenu %>">
+				<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
+					<div class="folder-icon">
+						<liferay-ui:icon
+							image='<%= "../file_system/large/" + (((foldersCount + fileEntriesCount) > 0) ? "folder_full_document" : "folder_empty") %>'
+							cssClass="folder-avatar"
+							message='<%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "document-home") %>'
+						/>
 
-					<div class="folder-name">
-						<h4><%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "document-home") %></h4>
+						<div class="folder-name">
+							<h4><%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "document-home") %></h4>
+						</div>
 					</div>
-				</div>
 
-				<%
-				request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-				%>
+					<%
+					request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+					%>
 
-				<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
-			</aui:column>
+					<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
+				</aui:column>
+			</c:if>
 		</aui:layout>
 
 		<%

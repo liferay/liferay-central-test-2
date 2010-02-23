@@ -144,12 +144,16 @@ boolean mergedView = false;
 boolean showAddFileEntryButton = false;
 boolean showAddFileShortcutButton = false;
 boolean showAddFolderButton = false;
+boolean showDeleteFileEntryButton = false;
+boolean showFolderMenu = false;
 boolean showTabs = false;
 
 if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	showAddFileEntryButton = true;
 	showAddFileShortcutButton = true;
 	showAddFolderButton = true;
+	showDeleteFileEntryButton = true;
+	showFolderMenu = true;
 	showTabs = true;
 }
 
