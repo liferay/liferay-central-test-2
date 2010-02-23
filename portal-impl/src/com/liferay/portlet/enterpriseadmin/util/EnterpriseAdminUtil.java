@@ -870,33 +870,33 @@ public class EnterpriseAdminUtil {
 	}
 
 	public static boolean hasUpdateEmailAddress(
-			PermissionChecker permissionChecker, User user) {
+		PermissionChecker permissionChecker, User user) {
 
 		String[] fieldEditiableUserEmailAddress =
 			PropsValues.
 				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS;
-	
+
 		if (ArrayUtil.contains(
 				fieldEditiableUserEmailAddress, "administrator") &&
 			permissionChecker.isCompanyAdmin()) {
-	
+
 			return true;
 		}
-	
+
 		if (ArrayUtil.contains(
 				fieldEditiableUserEmailAddress, "user-with-mx") &&
 			user.hasCompanyMx()) {
-	
+
 			return true;
 		}
-	
+
 		if (ArrayUtil.contains(
 				fieldEditiableUserEmailAddress, "user-without-mx") &&
 			!user.hasCompanyMx()) {
-	
+
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -906,28 +906,28 @@ public class EnterpriseAdminUtil {
 		String[] fieldEditiableUserScreenName =
 			PropsValues.
 				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME;
-	
+
 		if (ArrayUtil.contains(
 				fieldEditiableUserScreenName, "administrator") &&
 			permissionChecker.isCompanyAdmin()) {
-	
+
 			return true;
 		}
-	
+
 		if (ArrayUtil.contains(
 				fieldEditiableUserScreenName, "user-with-mx") &&
 			user.hasCompanyMx()) {
-	
+
 			return true;
 		}
-	
+
 		if (ArrayUtil.contains(
 				fieldEditiableUserScreenName, "user-without-mx") &&
 			!user.hasCompanyMx()) {
-	
+
 			return true;
 		}
-		
+
 		return false;
 	}
 
