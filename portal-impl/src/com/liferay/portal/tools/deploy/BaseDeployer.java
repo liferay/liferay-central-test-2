@@ -508,7 +508,7 @@ public class BaseDeployer {
 
 		updateDeployDirectory(srcFile);
 
-		String excludes = "**/WEB-INF/ext-lib/global";
+		String excludes = StringPool.BLANK;
 
 		if (appServerType.startsWith("jboss")) {
 			excludes += "**/WEB-INF/lib/log4j.jar,";
@@ -580,6 +580,16 @@ public class BaseDeployer {
 			}
 		}
 		else {
+			File extLibGlobalDir = new File(
+				srcFile.getAbsolutePath() + "/WEB-INF/ext-lib/global");
+
+			if (extLibGlobalDir.exists()) {
+				File globalLibDir = new File(PortalUtil.getGlobalLibDir());
+
+				CopyTask.copyDirectory(
+					extLibGlobalDir, globalLibDir, "*.jar", StringPool.BLANK,
+					overwrite, true);
+			}
 
 			// The deployer might only copy files that have been modified.
 			// However, the deployer always copies and overwrites web.xml after
@@ -592,17 +602,6 @@ public class BaseDeployer {
 			CopyTask.copyDirectory(
 				srcFile, deployDir, StringPool.BLANK, excludes, overwrite,
 				true);
-
-			File extLibGlobalDir = new File(
-				srcFile.getAbsolutePath() + "/WEB-INF/ext-lib/global");
-
-			if (extLibGlobalDir.exists()) {
-				File globalLibDir = new File(PortalUtil.getGlobalLibDir());
-
-				CopyTask.copyDirectory(
-					extLibGlobalDir, globalLibDir, "*.jar", StringPool.BLANK,
-					overwrite, true);
-			}
 
 			CopyTask.copyDirectory(
 				srcFile, deployDir, "**/WEB-INF/web.xml", StringPool.BLANK,
