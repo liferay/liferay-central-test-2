@@ -48,9 +48,9 @@ public class DLFileEntryVersionUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		double version = (Double)oldValue.doubleValue();
+		Double version = (Double)oldValue;
 
-		return getNewVersion(version);
+		return getNewVersion(version.doubleValue());
 	}
 
 }
