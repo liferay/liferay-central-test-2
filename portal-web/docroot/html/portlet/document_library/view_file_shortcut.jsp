@@ -118,7 +118,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 		<%
 		String versionText = LanguageUtil.format(pageContext, "version-x", toFileEntry.getVersion());
 
-		if (toFileEntry.getVersion() == 0) {
+		if (Validator.isNull(toFileEntry.getVersion())) {
 			versionText = LanguageUtil.get(pageContext, "not-approved");
 		}
 		%>
