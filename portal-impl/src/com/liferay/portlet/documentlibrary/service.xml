@@ -29,8 +29,8 @@
 		<column name="name" type="String" />
 		<column name="title" type="String" />
 		<column name="description" type="String" />
-		<column name="version" type="double" />
-		<column name="pendingVersion" type="double" />
+		<column name="version" type="String" />
+		<column name="pendingVersion" type="String" />
 		<column name="size" type="int" />
 		<column name="readCount" type="int" />
 		<column name="extraSettings" type="String" />
@@ -220,7 +220,7 @@
 		<column name="folderId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
-		<column name="version" type="double" />
+		<column name="version" type="String" />
 		<column name="size" type="int" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
@@ -232,7 +232,7 @@
 		<order by="desc">
 			<order-column name="folderId" />
 			<order-column name="name" />
-			<order-column name="version" />
+			<order-column name="createDate" />
 		</order>
 
 		<!-- Finders -->

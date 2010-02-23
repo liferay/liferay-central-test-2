@@ -57,6 +57,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -277,7 +278,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 								existingFileEntry.getFolderId(), folderId,
 								existingFileEntry.getName(),
 								fileEntry.getTitle(), fileEntry.getTitle(),
-								fileEntry.getDescription(), null,
+								fileEntry.getDescription(), null, true,
 								fileEntry.getExtraSettings(), is,
 								fileEntry.getSize(), serviceContext);
 					}
@@ -884,7 +885,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if ((folder1.getUuid().equals(folder2.getUuid())) &&
 				(fileEntry1.getSize() == fileEntry2.getSize()) &&
-				(fileEntry1.getVersion() == fileEntry2.getVersion()) &&
+				(DLUtil.compareVersions(
+					fileEntry1.getVersion(), fileEntry2.getVersion()) == 0) &&
 				(fileEntry1.getVersionUserUuid().equals(
 					fileEntry2.getVersionUserUuid()))) {
 

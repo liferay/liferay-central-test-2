@@ -112,9 +112,9 @@ public class CompareVersionsAction extends PortletAction {
 		String titleWithExtension = ParamUtil.getString(
 			renderRequest, "titleWithExtension");
 
-		double sourceVersion = ParamUtil.getDouble(
+		String sourceVersion = ParamUtil.getString(
 			renderRequest, "sourceVersion");
-		double targetVersion = ParamUtil.getDouble(
+		String targetVersion = ParamUtil.getString(
 			renderRequest, "targetVersion");
 
 		InputStream sourceIs = DLFileEntryLocalServiceUtil.getFileAsStream(

@@ -115,7 +115,7 @@ public class DLServiceImpl implements DLService {
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
+			String fileName, String versionNumber)
 		throws PortalException, SystemException {
 
 		hook.deleteFile(
@@ -130,7 +130,7 @@ public class DLServiceImpl implements DLService {
 
 	public byte[] getFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		return hook.getFile(companyId, repositoryId, fileName, versionNumber);
@@ -162,7 +162,7 @@ public class DLServiceImpl implements DLService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
@@ -177,7 +177,7 @@ public class DLServiceImpl implements DLService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {

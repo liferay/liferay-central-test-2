@@ -162,7 +162,7 @@ public class EditFileEntryAction extends PortletAction {
 		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		String name = ParamUtil.getString(actionRequest, "name");
-		double version = ParamUtil.getDouble(actionRequest, "version");
+		String version = ParamUtil.getString(actionRequest, "version");
 
 		DLFileEntryServiceUtil.deleteFileEntry(
 			groupId, folderId, name, version);
@@ -214,6 +214,8 @@ public class EditFileEntryAction extends PortletAction {
 		String description = ParamUtil.getString(uploadRequest, "description");
 		String versionDescription = ParamUtil.getString(
 			uploadRequest, "versionDescription");
+		boolean majorVersion = ParamUtil.getBoolean(
+			uploadRequest, "majorVersion");
 
 		UnicodeProperties extraSettingsProperties =
 			PropertiesParamUtil.getProperties(
@@ -248,8 +250,8 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				groupId, folderId, newFolderId, name, sourceFileName, title,
-				description, versionDescription, extraSettings, file,
-				serviceContext);
+				description, versionDescription, majorVersion, extraSettings,
+				file, serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

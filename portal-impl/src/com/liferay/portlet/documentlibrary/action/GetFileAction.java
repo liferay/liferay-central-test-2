@@ -41,6 +41,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -76,7 +77,7 @@ public class GetFileAction extends PortletAction {
 			long folderId = ParamUtil.getLong(request, "folderId");
 			String name = ParamUtil.getString(request, "name");
 			String title = ParamUtil.getString(request, "title");
-			double version = ParamUtil.getDouble(request, "version");
+			String version = ParamUtil.getString(request, "version");
 
 			long fileShortcutId = ParamUtil.getLong(request, "fileShortcutId");
 
@@ -113,7 +114,7 @@ public class GetFileAction extends PortletAction {
 			long folderId = ParamUtil.getLong(actionRequest, "folderId");
 			String name = ParamUtil.getString(actionRequest, "name");
 			String title = ParamUtil.getString(actionRequest, "title");
-			double version = ParamUtil.getDouble(actionRequest, "version");
+			String version = ParamUtil.getString(actionRequest, "version");
 
 			long fileShortcutId = ParamUtil.getLong(
 				actionRequest, "fileShortcutId");
@@ -151,7 +152,7 @@ public class GetFileAction extends PortletAction {
 	}
 
 	protected void getFile(
-			long folderId, String name, String title, double version,
+			long folderId, String name, String title, String version,
 			long fileShortcutId, String uuid, long groupId,
 			String targetExtension, ThemeDisplay themeDisplay,
 			HttpServletRequest request, HttpServletResponse response)
@@ -210,8 +211,8 @@ public class GetFileAction extends PortletAction {
 				groupId, folderId, name);
 		}
 
-		if (version == 0) {
-			if (fileEntry.getVersion() > 0) {
+		if (Validator.isNull(version)) {
+			if (Validator.isNotNull(fileEntry.getVersion())) {
 				version = fileEntry.getVersion();
 			}
 			else {
@@ -249,7 +250,7 @@ public class GetFileAction extends PortletAction {
 		int contentLength = 0;
 
 		if (!converted) {
-			if (version >= fileEntry.getVersion()) {
+			if (DLUtil.compareVersions(version, fileEntry.getVersion()) >= 0) {
 				contentLength = fileEntry.getSize();
 			}
 			else {

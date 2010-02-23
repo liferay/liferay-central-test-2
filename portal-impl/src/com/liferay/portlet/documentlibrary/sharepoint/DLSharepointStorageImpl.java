@@ -277,7 +277,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			fileEntry = DLFileEntryServiceUtil.updateFileEntry(
 				groupId, folderId, newParentFolderId, name, newName, newName,
-				description, versionDescription, extraSettings, bytes,
+				description, versionDescription, false, extraSettings, bytes,
 				serviceContext);
 
 			Tree documentTree = getFileEntryTree(
@@ -336,7 +336,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				groupId, parentFolderId, parentFolderId, name, title, title,
-				description, versionDescription, extraSettings,
+				description, versionDescription, false, extraSettings,
 				sharepointRequest.getBytes(), serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {

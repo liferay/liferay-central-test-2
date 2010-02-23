@@ -43,7 +43,7 @@ public class DLFileVersionLocalServiceImpl
 	extends DLFileVersionLocalServiceBaseImpl {
 
 	public DLFileVersion getFileVersion(
-			long groupId, long folderId, String name, double version)
+			long groupId, long folderId, String name, String version)
 		throws PortalException, SystemException {
 
 		return dlFileVersionPersistence.findByG_F_N_V(

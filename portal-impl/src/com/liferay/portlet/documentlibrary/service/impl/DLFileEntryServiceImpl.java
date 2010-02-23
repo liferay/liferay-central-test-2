@@ -109,7 +109,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public void deleteFileEntry(
-			long groupId, long folderId, String name, double version)
+			long groupId, long folderId, String name, String version)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
@@ -281,8 +281,8 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	public DLFileEntry updateFileEntry(
 			long groupId, long folderId, long newFolderId, String name,
 			String sourceFileName, String title, String description,
-			String versionDescription, String extraSettings, byte[] bytes,
-			ServiceContext serviceContext)
+			String versionDescription, boolean majorVersion,
+			String extraSettings, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
@@ -303,7 +303,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			fileEntry = dlFileEntryLocalService.updateFileEntry(
 				getUserId(), groupId, folderId, newFolderId, name,
 				sourceFileName, title, description, versionDescription,
-				extraSettings, bytes, serviceContext);
+				majorVersion, extraSettings, bytes, serviceContext);
 		}
 		finally {
 			if (!hasLock) {
@@ -320,8 +320,8 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	public DLFileEntry updateFileEntry(
 			long groupId, long folderId, long newFolderId, String name,
 			String sourceFileName, String title, String description,
-			String versionDescription, String extraSettings, File file,
-			ServiceContext serviceContext)
+			String versionDescription, boolean majorVersion,
+			String extraSettings, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
@@ -342,7 +342,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			fileEntry = dlFileEntryLocalService.updateFileEntry(
 				getUserId(), groupId, folderId, newFolderId, name,
 				sourceFileName, title, description, versionDescription,
-				extraSettings, file, serviceContext);
+				majorVersion, extraSettings, file, serviceContext);
 		}
 		finally {
 			if (!hasLock) {

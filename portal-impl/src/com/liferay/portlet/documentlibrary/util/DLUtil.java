@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -163,6 +164,36 @@ public class DLUtil {
 
 		PortalUtil.addPortletBreadcrumbEntry(
 			request, folder.getName(), portletURL.toString());
+	}
+
+	public static int compareVersions(String version1, String version2) {
+		int[] splitVersion1 = StringUtil.split(version1, StringPool.PERIOD, 0);
+		int[] splitVersion2 = StringUtil.split(version2, StringPool.PERIOD, 0);
+
+		if ((splitVersion1.length != 2) && (splitVersion2.length != 2)) {
+			return 0;
+		}
+		else if ((splitVersion1.length != 2)) {
+			return -1;
+		}
+		else if ((splitVersion2.length != 2)) {
+			return 1;
+		}
+
+		if (splitVersion1[0] > splitVersion2[0]) {
+			return 1;
+		}
+		else if (splitVersion1[0] < splitVersion2[0]) {
+			return -1;
+		}
+		else if (splitVersion1[1] > splitVersion2[1]) {
+			return 1;
+		}
+		else if (splitVersion1[1] < splitVersion2[1]) {
+			return -1;
+		}
+
+		return 0;
 	}
 
 	public static String getFileIcon(String title) {

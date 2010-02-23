@@ -145,7 +145,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		<%
 		String versionText = LanguageUtil.format(pageContext, "version-x", fileEntry.getVersion());
 
-		if (fileEntry.getVersion() == 0) {
+		if (Validator.isNull(fileEntry.getVersion())) {
 			versionText = LanguageUtil.get(pageContext, "not-approved");
 		}
 		%>
