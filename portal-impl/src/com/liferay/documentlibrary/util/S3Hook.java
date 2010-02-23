@@ -568,8 +568,7 @@ public class S3Hook extends BaseHook {
 
 			int x = headKey.lastIndexOf(StringPool.SLASH);
 
-			return GetterUtil.getString(
-				headKey.substring(x + 1, headKey.length()));
+			return headKey.substring(x + 1, headKey.length());
 		}
 		else {
 			throw new NoSuchFileException(fileName);

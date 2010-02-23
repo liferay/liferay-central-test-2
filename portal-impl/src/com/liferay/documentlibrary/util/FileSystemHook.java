@@ -451,9 +451,7 @@ public class FileSystemHook extends BaseHook {
 
 		String headVersionNumber = DEFAULT_VERSION;
 
-		for (int i = 0; i < versionNumbers.length; i++) {
-			String versionNumber = GetterUtil.getString(versionNumbers[i]);
-
+		for (String versionNumber : versionNumbers) {
 			if (DLUtil.compareVersions(versionNumber, headVersionNumber) > 0) {
 				headVersionNumber = versionNumber;
 			}

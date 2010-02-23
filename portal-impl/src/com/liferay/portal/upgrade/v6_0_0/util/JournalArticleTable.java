@@ -27,7 +27,7 @@ import java.sql.Types;
 /**
  * <a href="JournalArticleTable.java.html"><b><i>View Source</i></b></a>
  *
- * @author	  Zsigmond Rab
+ * @author	  Brian Wing Shun Chan
  * @generated
  */
 public class JournalArticleTable {

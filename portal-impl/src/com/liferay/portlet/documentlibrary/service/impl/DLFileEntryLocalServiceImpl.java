@@ -483,8 +483,8 @@ public class DLFileEntryLocalServiceImpl
 			String name)
 		throws PortalException, SystemException {
 
-		return getFileAsStream(companyId, userId, groupId, folderId, name,
-			StringPool.BLANK);
+		return getFileAsStream(
+			companyId, userId, groupId, folderId, name, StringPool.BLANK);
 	}
 
 	public InputStream getFileAsStream(
@@ -1071,7 +1071,7 @@ public class DLFileEntryLocalServiceImpl
 				fileEntry.getVersion(), fileVersion.getVersion()) == 0)) {
 
 			if (fileVersion.getVersion().equals(
-				DLFileEntryConstants.DEFAULT_VERSION)) {
+					DLFileEntryConstants.DEFAULT_VERSION)) {
 
 				socialActivityLocalService.addUniqueActivity(
 					fileVersion.getUserId(), fileVersion.getGroupId(),

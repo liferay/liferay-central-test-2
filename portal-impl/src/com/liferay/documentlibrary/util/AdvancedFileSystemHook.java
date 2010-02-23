@@ -23,7 +23,6 @@
 package com.liferay.documentlibrary.util;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -166,7 +165,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 					pos + 1);
 			}
 
-			String versionNumber = GetterUtil.getString(versionNumberFragment);
+			String versionNumber = versionNumberFragment;
 
 			if (DLUtil.compareVersions(versionNumber, headVersionNumber) > 0) {
 				headVersionNumber = versionNumber;

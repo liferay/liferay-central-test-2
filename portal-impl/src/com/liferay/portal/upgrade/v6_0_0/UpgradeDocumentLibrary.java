@@ -31,13 +31,14 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryNameUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryTable;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryTitleUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryVersionUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v6_0_0.util.DLFileRankTable;
+import com.liferay.portal.upgrade.v6_0_0.util.DLFileShortcutTable;
+import com.liferay.portal.upgrade.v6_0_0.util.DLFileVersionTable;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -153,18 +154,24 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		UpgradeColumn nameColumn = new DLFileEntryNameUpgradeColumnImpl("name");
 		UpgradeColumn titleColumn = new DLFileEntryTitleUpgradeColumnImpl(
 			nameColumn, "title");
+		UpgradeColumn versionColumn = new DLFileEntryVersionUpgradeColumnImpl(
+			"version");
 
 		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-			DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS,
-			nameColumn, titleColumn);
+			DLFileEntryTable.TABLE_NAME, DLFileEntryTable.TABLE_COLUMNS,
+			nameColumn, titleColumn, versionColumn);
+
+		upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// DLFileRank
 
 		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-			DLFileRankImpl.TABLE_NAME, DLFileRankImpl.TABLE_COLUMNS,
+			DLFileRankTable.TABLE_NAME, DLFileRankTable.TABLE_COLUMNS,
 			nameColumn);
+
+		upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -174,16 +181,20 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			"toName");
 
 		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS,
+			DLFileShortcutTable.TABLE_NAME, DLFileShortcutTable.TABLE_COLUMNS,
 			toNameColumn);
+
+		upgradeTable.setCreateSQL(DLFileShortcutTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// DLFileVersion
 
 		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-			DLFileVersionImpl.TABLE_NAME, DLFileVersionImpl.TABLE_COLUMNS,
-			nameColumn);
+			DLFileVersionTable.TABLE_NAME, DLFileVersionTable.TABLE_COLUMNS,
+			nameColumn, versionColumn);
+
+		upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

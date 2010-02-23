@@ -25,38 +25,35 @@ package com.liferay.portal.upgrade.v6_0_0.util;
 import java.sql.Types;
 
 /**
- * <a href="JournalTemplateTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFileVersionTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author	  Brian Wing Shun Chan
  * @generated
  */
-public class JournalTemplateTable {
+public class DLFileVersionTable {
 
-	public static final String TABLE_NAME = "JournalTemplate";
+	public static final String TABLE_NAME = "DLFileVersion";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"uuid_", new Integer(Types.VARCHAR)},
-		{"id_", new Integer(Types.BIGINT)},
+		{"fileVersionId", new Integer(Types.BIGINT)},
 		{"groupId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.BIGINT)},
 		{"userName", new Integer(Types.VARCHAR)},
 		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"templateId", new Integer(Types.VARCHAR)},
-		{"structureId", new Integer(Types.VARCHAR)},
+		{"folderId", new Integer(Types.BIGINT)},
 		{"name", new Integer(Types.VARCHAR)},
 		{"description", new Integer(Types.VARCHAR)},
-		{"xsl", new Integer(Types.CLOB)},
-		{"langType", new Integer(Types.VARCHAR)},
-		{"cacheable", new Integer(Types.BOOLEAN)},
-		{"smallImage", new Integer(Types.BOOLEAN)},
-		{"smallImageId", new Integer(Types.BIGINT)},
-		{"smallImageURL", new Integer(Types.VARCHAR)}
+		{"version", new Integer(Types.VARCHAR)},
+		{"size_", new Integer(Types.INTEGER)},
+		{"status", new Integer(Types.INTEGER)},
+		{"statusByUserId", new Integer(Types.BIGINT)},
+		{"statusByUserName", new Integer(Types.VARCHAR)},
+		{"statusDate", new Integer(Types.TIMESTAMP)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table JournalTemplate (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,templateId VARCHAR(75) null,structureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsl TEXT null,langType VARCHAR(75) null,cacheable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,description STRING null,version VARCHAR(75) null,size_ INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 
-	public static final String TABLE_SQL_DROP = "drop table JournalTemplate";
+	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 
 }

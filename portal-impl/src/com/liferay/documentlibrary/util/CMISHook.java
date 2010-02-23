@@ -217,9 +217,7 @@ public class CMISHook extends BaseHook {
 
 		String headVersionNumber = DEFAULT_VERSION;
 
-		for (int i = 0; i < versionNumbers.size(); i++) {
-			String versionNumber = GetterUtil.getString(versionNumbers.get(i));
-
+		for (String versionNumber : versionNumbers) {
 			if (DLUtil.compareVersions(versionNumber, headVersionNumber) > 0) {
 				headVersionNumber = versionNumber;
 			}
