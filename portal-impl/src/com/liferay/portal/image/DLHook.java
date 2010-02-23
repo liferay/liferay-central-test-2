@@ -119,6 +119,6 @@ public class DLHook extends BaseHook {
 	private static final String _PORTLET_ID = PortletKeys.PORTAL;
 	private static final String _PROPERTIES = StringPool.BLANK;
 	private static final long _REPOSITORY_ID = 0;
-	private static final double _VERSION_NUMBER = 1.0;
+	private static final String _VERSION_NUMBER = "1.0";
 
 }

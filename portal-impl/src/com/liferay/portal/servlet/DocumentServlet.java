@@ -48,6 +48,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -173,13 +174,13 @@ public class DocumentServlet extends HttpServlet {
 		DLFileEntryPermission.check(
 			permissionChecker, fileEntry, ActionKeys.VIEW);
 
-		double version = ParamUtil.getDouble(request, "version");
+		String version = ParamUtil.getString(request, "version");
 
 		String targetExtension = ParamUtil.getString(
 			request, "targetExtension");
 
-		if (version == 0) {
-			if (fileEntry.getVersion() > 0) {
+		if (Validator.isNull(version)) {
+			if (Validator.isNotNull(fileEntry.getVersion())) {
 				version = fileEntry.getVersion();
 			}
 			else {
@@ -215,7 +216,7 @@ public class DocumentServlet extends HttpServlet {
 		int contentLength = 0;
 
 		if (!converted) {
-			if (version >= fileEntry.getVersion()) {
+			if (DLUtil.compareVersions(version, fileEntry.getVersion()) >= 0) {
 				contentLength = fileEntry.getSize();
 			}
 			else {

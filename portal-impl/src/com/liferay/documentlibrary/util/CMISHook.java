@@ -38,7 +38,9 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.InputStream;
 
@@ -135,7 +137,7 @@ public class CMISHook extends BaseHook {
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
+			String fileName, String versionNumber)
 		throws PortalException {
 
 		Entry fileEntry = getVersionedFileEntry(
@@ -158,10 +160,10 @@ public class CMISHook extends BaseHook {
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException {
 
-		if (versionNumber == 0) {
+		if (Validator.isNull(versionNumber)) {
 			versionNumber = getHeadVersionNumber(
 				companyId, repositoryId, fileName);
 		}
@@ -188,7 +190,7 @@ public class CMISHook extends BaseHook {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException {
 
-		double versionNumber = getHeadVersionNumber(
+		String versionNumber = getHeadVersionNumber(
 			companyId, repositoryId, fileName);
 
 		Entry fileEntry = getVersionedFileEntry(
@@ -199,7 +201,7 @@ public class CMISHook extends BaseHook {
 		return cmisObject.getContentStreamLength();
 	}
 
-	public double getHeadVersionNumber(
+	public String getHeadVersionNumber(
 			long companyId, long repositoryId, String dirName)
 		throws CMISException, NoSuchFileException {
 
@@ -213,12 +215,12 @@ public class CMISHook extends BaseHook {
 		List<String> versionNumbers = CMISUtil.getFolders(
 			versioningFolderEntry);
 
-		double headVersionNumber = DEFAULT_VERSION;
+		String headVersionNumber = DEFAULT_VERSION;
 
 		for (int i = 0; i < versionNumbers.size(); i++) {
-			double versionNumber = GetterUtil.getDouble(versionNumbers.get(i));
+			String versionNumber = GetterUtil.getString(versionNumbers.get(i));
 
-			if (versionNumber > headVersionNumber) {
+			if (DLUtil.compareVersions(versionNumber, headVersionNumber) > 0) {
 				headVersionNumber = versionNumber;
 			}
 		}
@@ -228,7 +230,7 @@ public class CMISHook extends BaseHook {
 
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException {
 
 		Entry versioningFolderEntry = getVersioningFolderEntry(
@@ -240,8 +242,7 @@ public class CMISHook extends BaseHook {
 		String url = link.getHref().toString();
 
 		Entry fileEntry = CMISUtil.getEntry(
-			url, String.valueOf(versionNumber),
-			_cmisConstants.BASE_TYPE_DOCUMENT);
+			url, versionNumber, _cmisConstants.BASE_TYPE_DOCUMENT);
 
 		if (fileEntry == null) {
 			return false;
@@ -335,7 +336,7 @@ public class CMISHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException {
@@ -453,7 +454,7 @@ public class CMISHook extends BaseHook {
 
 	protected Entry getVersionedFileEntry(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws CMISException, NoSuchFileException {
 
 		Entry versioningFolderEntry = getVersioningFolderEntry(

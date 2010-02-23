@@ -66,7 +66,7 @@ public class DLLocalServiceUtil {
 
 	public static InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		return getService().getFileAsStream(
@@ -84,7 +84,7 @@ public class DLLocalServiceUtil {
 
 	public static boolean hasFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		return getService().hasFile(
@@ -111,7 +111,7 @@ public class DLLocalServiceUtil {
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, boolean validateFileExtension,
-			double versionNumber, String sourceFileName, long fileEntryId,
+			String versionNumber, String sourceFileName, long fileEntryId,
 			String properties, Date modifiedDate, ServiceContext serviceContext,
 			InputStream is)
 		throws PortalException, SystemException {

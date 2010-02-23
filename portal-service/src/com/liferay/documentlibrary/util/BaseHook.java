@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.File;
@@ -124,7 +125,7 @@ public abstract class BaseHook implements Hook {
 
 	public abstract void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
+			String fileName, String versionNumber)
 		throws PortalException, SystemException;
 
 	public byte[] getFile(long companyId, long repositoryId, String fileName)
@@ -146,7 +147,7 @@ public abstract class BaseHook implements Hook {
 
 	public byte[] getFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		byte[] bytes = null;
@@ -168,12 +169,13 @@ public abstract class BaseHook implements Hook {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		return getFileAsStream(companyId, repositoryId, fileName, 0);
+		return getFileAsStream(companyId, repositoryId, fileName,
+			StringPool.BLANK);
 	}
 
 	public abstract InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException;
 
 	public abstract String[] getFileNames(
@@ -186,7 +188,7 @@ public abstract class BaseHook implements Hook {
 
 	public abstract boolean hasFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException;
 
 	public abstract void move(String srcDir, String destDir)
@@ -201,7 +203,7 @@ public abstract class BaseHook implements Hook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
@@ -226,7 +228,7 @@ public abstract class BaseHook implements Hook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
@@ -258,7 +260,7 @@ public abstract class BaseHook implements Hook {
 
 	public abstract void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException;

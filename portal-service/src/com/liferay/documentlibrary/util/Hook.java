@@ -42,7 +42,7 @@ import java.util.Date;
  */
 public interface Hook {
 
-	public static final double DEFAULT_VERSION = 1.0;
+	public static final String DEFAULT_VERSION = "1.0";
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException;
@@ -81,7 +81,7 @@ public interface Hook {
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
+			String fileName, String versionNumber)
 		throws PortalException, SystemException;
 
 	public byte[] getFile(long companyId, long repositoryId, String fileName)
@@ -89,7 +89,7 @@ public interface Hook {
 
 	public byte[] getFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException;
 
 	public InputStream getFileAsStream(
@@ -98,7 +98,7 @@ public interface Hook {
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException;
 
 	public String[] getFileNames(
@@ -111,7 +111,7 @@ public interface Hook {
 
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException;
 
 	public void move(String srcDir, String destDir) throws SystemException;
@@ -127,7 +127,7 @@ public interface Hook {
 	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException;
@@ -135,7 +135,7 @@ public interface Hook {
 	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException;
@@ -143,7 +143,7 @@ public interface Hook {
 	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException;

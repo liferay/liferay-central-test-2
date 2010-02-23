@@ -153,7 +153,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 				groupId, repositoryId, fileName, StatusConstants.ANY);
 
 		if (dlFileVersions.isEmpty()) {
-			double versionNumber = Hook.DEFAULT_VERSION;
+			String versionNumber = Hook.DEFAULT_VERSION;
 			Date modifiedDate = fileEntry.getModifiedDate();
 
 			migrateFile(
@@ -164,7 +164,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		}
 
 		for (DLFileVersion dlFileVersion : dlFileVersions) {
-			double versionNumber = dlFileVersion.getVersion();
+			String versionNumber = dlFileVersion.getVersion();
 			Date modifiedDate = dlFileVersion.getCreateDate();
 
 			migrateFile(
@@ -175,14 +175,14 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 
 	protected void migrateFile(
 		long companyId, String portletId, long groupId, long repositoryId,
-		String fileName, double versionNumber, long fileEntryId,
+		String fileName, String versionNumber, long fileEntryId,
 		String properties, Date modifiedDate) {
 
 		try {
 			InputStream is = _sourceHook.getFileAsStream(
 				companyId, repositoryId, fileName, versionNumber);
 
-			if (versionNumber == Hook.DEFAULT_VERSION) {
+			if (versionNumber.equals(Hook.DEFAULT_VERSION)) {
 				_targetHook.addFile(
 					companyId, portletId, groupId, repositoryId, fileName,
 					fileEntryId, properties, modifiedDate, _serviceContext,
@@ -206,7 +206,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		String portletId = CompanyConstants.SYSTEM_STRING;
 		long groupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 		long repositoryId = CompanyConstants.SYSTEM;
-		double versionNumber = Hook.DEFAULT_VERSION;
+		String versionNumber = Hook.DEFAULT_VERSION;
 		long fileEntryId = 0;
 		String properties = StringPool.BLANK;
 		Date modifiedDate = new Date();

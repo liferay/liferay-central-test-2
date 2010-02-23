@@ -85,7 +85,7 @@ public class HookProxyBean extends BaseProxyBean implements Hook {
 
 	public void deleteFile(
 		long companyId, String portletId, long repositoryId, String fileName,
-		double versionNumber) {
+		String versionNumber) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -96,7 +96,7 @@ public class HookProxyBean extends BaseProxyBean implements Hook {
 
 	public byte[] getFile(
 		long companyId, long repositoryId, String fileName,
-		double versionNumber) {
+		String versionNumber) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -109,7 +109,7 @@ public class HookProxyBean extends BaseProxyBean implements Hook {
 
 	public InputStream getFileAsStream(
 		long companyId, long repositoryId, String fileName,
-		double versionNumber) {
+		String versionNumber) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -128,7 +128,7 @@ public class HookProxyBean extends BaseProxyBean implements Hook {
 
 	public boolean hasFile(
 		long companyId, long repositoryId, String fileName,
-		double versionNumber) {
+		String versionNumber) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -150,7 +150,7 @@ public class HookProxyBean extends BaseProxyBean implements Hook {
 
 	public void updateFile(
 		long companyId, String portletId, long groupId, long repositoryId,
-		String fileName, double versionNumber, String sourceFileName,
+		String fileName, String versionNumber, String sourceFileName,
 		long fileEntryId, String properties, Date modifiedDate,
 		ServiceContext serviceContext, byte[] bytes) {
 
@@ -159,7 +159,7 @@ public class HookProxyBean extends BaseProxyBean implements Hook {
 
 	public void updateFile(
 		long companyId, String portletId, long groupId, long repositoryId,
-		String fileName, double versionNumber, String sourceFileName,
+		String fileName, String versionNumber, String sourceFileName,
 		long fileEntryId, String properties, Date modifiedDate,
 		ServiceContext serviceContext, File file) {
 
@@ -168,7 +168,7 @@ public class HookProxyBean extends BaseProxyBean implements Hook {
 
 	public void updateFile(
 		long companyId, String portletId, long groupId, long repositoryId,
-		String fileName, double versionNumber, String sourceFileName,
+		String fileName, String versionNumber, String sourceFileName,
 		long fileEntryId, String properties, Date modifiedDate,
 		ServiceContext serviceContext, InputStream is) {
 

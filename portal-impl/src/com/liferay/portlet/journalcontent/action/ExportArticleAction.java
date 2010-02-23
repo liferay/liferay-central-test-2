@@ -155,7 +155,8 @@ public class ExportArticleAction extends PortletAction {
 				ArrayUtil.contains(allowedExtensions, targetExtension)) {
 
 				String id = DocumentConversionUtil.getTempFileId(
-					articleDisplay.getId(), articleDisplay.getVersion());
+					articleDisplay.getId(),
+					String.valueOf(articleDisplay.getVersion()));
 
 				InputStream convertedIS = DocumentConversionUtil.convert(
 					id, is, sourceExtension, targetExtension);

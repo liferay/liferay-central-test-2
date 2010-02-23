@@ -56,12 +56,12 @@ public interface DLLocalService {
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException;
 
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException;
 
 	public void move(String srcDir, String destDir) throws SystemException;
@@ -75,7 +75,7 @@ public interface DLLocalService {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, boolean validateFileExtension,
-			double versionNumber, String sourceFileName, long fileEntryId,
+			String versionNumber, String sourceFileName, long fileEntryId,
 			String properties, Date modifiedDate, ServiceContext serviceContext,
 			InputStream is)
 		throws PortalException, SystemException;

@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
@@ -153,7 +154,7 @@ public class JCRHook extends BaseHook {
 				Version version = contentNode.checkin();
 
 				contentNode.getVersionHistory().addVersionLabel(
-					version.getName(), String.valueOf(DEFAULT_VERSION), false);
+					version.getName(), DEFAULT_VERSION, false);
 
 				Indexer indexer = IndexerRegistryUtil.getIndexer(
 					FileModel.class);
@@ -373,10 +374,10 @@ public class JCRHook extends BaseHook {
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
+			String fileName, String versionNumber)
 		throws PortalException, SystemException {
 
-		String versionLabel = String.valueOf(versionNumber);
+		String versionLabel = versionNumber;
 
 		Session session = null;
 
@@ -411,7 +412,7 @@ public class JCRHook extends BaseHook {
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -494,7 +495,7 @@ public class JCRHook extends BaseHook {
 			session = JCRFactoryUtil.createSession();
 
 			Node contentNode = getFileContentNode(
-				session, companyId, repositoryId, fileName, 0);
+				session, companyId, repositoryId, fileName, StringPool.BLANK);
 
 			size = contentNode.getProperty(JCRConstants.JCR_DATA).getLength();
 		}
@@ -512,7 +513,7 @@ public class JCRHook extends BaseHook {
 
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		try {
@@ -705,12 +706,12 @@ public class JCRHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
-		String versionLabel = String.valueOf(versionNumber);
+		String versionLabel = versionNumber;
 
 		Session session = null;
 
@@ -901,7 +902,7 @@ public class JCRHook extends BaseHook {
 
 	protected Node getFileContentNode(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		Node contentNode = null;
@@ -928,10 +929,10 @@ public class JCRHook extends BaseHook {
 
 	protected Node getFileContentNode(
 			Session session, long companyId, long repositoryId,
-			String fileName, double versionNumber)
+			String fileName, String versionNumber)
 		throws PortalException, SystemException {
 
-		String versionLabel = String.valueOf(versionNumber);
+		String versionLabel = versionNumber;
 
 		Node contentNode = null;
 
@@ -941,7 +942,7 @@ public class JCRHook extends BaseHook {
 			Node fileNode = repositoryNode.getNode(fileName);
 			contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
 
-			if (versionNumber > 0) {
+			if (Validator.isNotNull(versionNumber)) {
 				VersionHistory versionHistory =
 					contentNode.getVersionHistory();
 

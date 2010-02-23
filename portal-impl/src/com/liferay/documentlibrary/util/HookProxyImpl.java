@@ -113,7 +113,7 @@ public class HookProxyImpl implements Hook {
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
+			String fileName, String versionNumber)
 		throws PortalException, SystemException {
 
 		Hook hook = HookFactory.getInstance();
@@ -132,7 +132,7 @@ public class HookProxyImpl implements Hook {
 
 	public byte[] getFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		Hook hook = HookFactory.getInstance();
@@ -151,7 +151,7 @@ public class HookProxyImpl implements Hook {
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		Hook hook = HookFactory.getInstance();
@@ -180,7 +180,7 @@ public class HookProxyImpl implements Hook {
 
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		Hook hook = HookFactory.getInstance();
@@ -214,7 +214,7 @@ public class HookProxyImpl implements Hook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
@@ -229,7 +229,7 @@ public class HookProxyImpl implements Hook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
@@ -244,7 +244,7 @@ public class HookProxyImpl implements Hook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {

@@ -180,7 +180,7 @@ public class S3Hook extends BaseHook {
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
+			String fileName, String versionNumber)
 		throws SystemException {
 
 		try {
@@ -195,11 +195,11 @@ public class S3Hook extends BaseHook {
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		try {
-			if (versionNumber == 0) {
+			if (Validator.isNull(versionNumber)) {
 				versionNumber = getHeadVersionNumber(
 					companyId, repositoryId, fileName);
 			}
@@ -254,7 +254,7 @@ public class S3Hook extends BaseHook {
 		throws PortalException, SystemException {
 
 		try {
-			double versionNumber = getHeadVersionNumber(
+			String versionNumber = getHeadVersionNumber(
 				companyId, repositoryId, fileName);
 
 			S3Object objectDetails = _s3Service.getObjectDetails(
@@ -270,7 +270,7 @@ public class S3Hook extends BaseHook {
 
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws SystemException {
 
 		try {
@@ -416,7 +416,7 @@ public class S3Hook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
@@ -546,7 +546,7 @@ public class S3Hook extends BaseHook {
 		return key.substring(x + 1, y);
 	}
 
-	protected double getHeadVersionNumber(
+	protected String getHeadVersionNumber(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, S3ServiceException {
 
@@ -568,7 +568,7 @@ public class S3Hook extends BaseHook {
 
 			int x = headKey.lastIndexOf(StringPool.SLASH);
 
-			return GetterUtil.getDouble(
+			return GetterUtil.getString(
 				headKey.substring(x + 1, headKey.length()));
 		}
 		else {
@@ -604,7 +604,7 @@ public class S3Hook extends BaseHook {
 
 	protected String getKey(
 		long companyId, long repositoryId, String fileName,
-		double versionNumber) {
+		String versionNumber) {
 
 		StringBundler sb = new StringBundler(7);
 

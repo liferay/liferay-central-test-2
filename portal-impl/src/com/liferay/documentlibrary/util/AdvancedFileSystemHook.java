@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.File;
 
@@ -103,7 +104,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 	}
 
 	protected File getFileNameVersionFile(
-		long companyId, long repositoryId, String fileName, double version) {
+		long companyId, long repositoryId, String fileName, String version) {
 
 		String ext = StringPool.PERIOD + FileUtil.getExtension(fileName);
 
@@ -142,7 +143,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		}
 	}
 
-	protected double getHeadVersionNumber(
+	protected String getHeadVersionNumber(
 		long companyId, long repositoryId, String fileName) {
 
 		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
@@ -153,7 +154,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 
 		String[] versionNumbers = FileUtil.listFiles(fileNameDir);
 
-		double headVersionNumber = DEFAULT_VERSION;
+		String headVersionNumber = DEFAULT_VERSION;
 
 		for (int i = 0; i < versionNumbers.length; i++) {
 			String versionNumberFragment = versionNumbers[i];
@@ -165,9 +166,9 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 					pos + 1);
 			}
 
-			double versionNumber = GetterUtil.getDouble(versionNumberFragment);
+			String versionNumber = GetterUtil.getString(versionNumberFragment);
 
-			if (versionNumber > headVersionNumber) {
+			if (DLUtil.compareVersions(versionNumber, headVersionNumber) > 0) {
 				headVersionNumber = versionNumber;
 			}
 		}

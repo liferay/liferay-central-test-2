@@ -141,7 +141,7 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 
 	protected Tree getDocumentTree(
 		String documentName, Date createDate, Date modifiedDate, int size,
-		String userName, double version) {
+		String userName, String version) {
 
 		Tree documentTree = new Tree();
 

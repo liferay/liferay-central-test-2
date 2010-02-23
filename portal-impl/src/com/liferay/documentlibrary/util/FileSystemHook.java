@@ -40,8 +40,10 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -162,7 +164,7 @@ public class FileSystemHook extends BaseHook {
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
+			String fileName, String versionNumber)
 		throws PortalException {
 
 		File fileNameVersionFile = getFileNameVersionFile(
@@ -177,11 +179,11 @@ public class FileSystemHook extends BaseHook {
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
-			double versionNumber)
+			String versionNumber)
 		throws PortalException, SystemException {
 
 		try {
-			if (versionNumber == 0) {
+			if (Validator.isNull(versionNumber)) {
 				versionNumber = getHeadVersionNumber(
 					companyId, repositoryId, fileName);
 			}
@@ -228,7 +230,7 @@ public class FileSystemHook extends BaseHook {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException {
 
-		double versionNumber = getHeadVersionNumber(
+		String versionNumber = getHeadVersionNumber(
 			companyId, repositoryId, fileName);
 
 		File fileNameVersionFile = getFileNameVersionFile(
@@ -243,7 +245,7 @@ public class FileSystemHook extends BaseHook {
 
 	public boolean hasFile(
 		long companyId, long repositoryId, String fileName,
-		double versionNumber) {
+		String versionNumber) {
 
 		File fileNameVersionFile = getFileNameVersionFile(
 			companyId, repositoryId, fileName, versionNumber);
@@ -328,7 +330,7 @@ public class FileSystemHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
+			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
@@ -426,7 +428,7 @@ public class FileSystemHook extends BaseHook {
 	}
 
 	protected File getFileNameVersionFile(
-		long companyId, long repositoryId, String fileName, double version) {
+		long companyId, long repositoryId, String fileName, String version) {
 
 		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
 
@@ -436,7 +438,7 @@ public class FileSystemHook extends BaseHook {
 		return fileNameVersionFile;
 	}
 
-	protected double getHeadVersionNumber(
+	protected String getHeadVersionNumber(
 		long companyId, long repositoryId, String fileName) {
 
 		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
@@ -447,12 +449,12 @@ public class FileSystemHook extends BaseHook {
 
 		String[] versionNumbers = FileUtil.listFiles(fileNameDir);
 
-		double headVersionNumber = DEFAULT_VERSION;
+		String headVersionNumber = DEFAULT_VERSION;
 
 		for (int i = 0; i < versionNumbers.length; i++) {
-			double versionNumber = GetterUtil.getDouble(versionNumbers[i]);
+			String versionNumber = GetterUtil.getString(versionNumbers[i]);
 
-			if (versionNumber > headVersionNumber) {
+			if (DLUtil.compareVersions(versionNumber, headVersionNumber) > 0) {
 				headVersionNumber = versionNumber;
 			}
 		}
