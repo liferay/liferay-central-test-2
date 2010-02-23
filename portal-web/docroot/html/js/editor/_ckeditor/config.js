@@ -1,6 +1,6 @@
 CKEDITOR.editorConfig = function(config) {	
 	CKEDITOR.config.toolbar_liferay = [
-		['Style', 'FontSize', '-', 'TextColor', 'BGColor'],
+		['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
 		['Bold', 'Italic', 'Underline', 'StrikeThrough'],
 		['Subscript', 'Superscript'],
 		'/',
@@ -15,7 +15,7 @@ CKEDITOR.editorConfig = function(config) {
 	];
 
 	CKEDITOR.config.toolbar_liferayArticle = [
-		['Style', 'FontSize', '-', 'TextColor', 'BGColor'],
+		['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
 		['Subscript', 'Superscript'],
 		'/',
 		['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteWord', '-', 'SelectAll', 'RemoveFormat'],
@@ -29,7 +29,7 @@ CKEDITOR.editorConfig = function(config) {
 	];
 
 	CKEDITOR.config.toolbar_editInPlace = [
-		['Style'],
+		['Styles'],
 		['Bold', 'Italic', 'Underline', 'StrikeThrough'],
 		['Subscript', 'Superscript', 'SpecialChar'],
 		['Undo', 'Redo'],
