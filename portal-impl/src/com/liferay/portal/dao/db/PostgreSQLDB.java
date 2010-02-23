@@ -110,7 +110,8 @@ public class PostgreSQLDB extends BaseDB {
 		super(TYPE_POSTGRESQL);
 	}
 
-	protected String buildCreateFileContent(String databaseName, int population)
+	protected String buildCreateFileContent(
+			String databaseName, int population, String sqlDir)
 		throws IOException {
 
 		String suffix = getSuffix(population);
@@ -128,12 +129,13 @@ public class PostgreSQLDB extends BaseDB {
 		sb.append(";\n\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
+				sqlDir + "/portal" + suffix + "/portal" + suffix +
 					"-postgresql.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
+		sb.append(FileUtil.read(sqlDir + "/indexes/indexes-postgresql.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
+		sb.append(
+			FileUtil.read(sqlDir + "/sequences/sequences-postgresql.sql"));
 
 		return sb.toString();
 	}

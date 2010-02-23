@@ -62,7 +62,7 @@ public class IngresDB extends BaseDB {
 	}
 
 	protected String buildCreateFileContent(
-		String databaseName, int population) {
+		String databaseName, int population, String sqlDir) {
 
 		return null;
 	}

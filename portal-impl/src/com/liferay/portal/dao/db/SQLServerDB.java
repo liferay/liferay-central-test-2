@@ -123,7 +123,8 @@ public class SQLServerDB extends BaseDB {
 		super(TYPE_SQLSERVER);
 	}
 
-	protected String buildCreateFileContent(String databaseName, int population)
+	protected String buildCreateFileContent(
+			String databaseName, int population, String sqlDir)
 		throws IOException {
 
 		String suffix = getSuffix(population);
@@ -144,12 +145,13 @@ public class SQLServerDB extends BaseDB {
 		sb.append(";\n\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
+				sqlDir + "/portal" + suffix + "/portal" + suffix +
 					"-sql-server.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
+		sb.append(FileUtil.read(sqlDir + "/indexes/indexes-sql-server.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
+		sb.append(
+			FileUtil.read(sqlDir + "/sequences/sequences-sql-server.sql"));
 
 		return sb.toString();
 	}

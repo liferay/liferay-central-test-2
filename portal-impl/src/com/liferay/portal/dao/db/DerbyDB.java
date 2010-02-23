@@ -70,7 +70,8 @@ public class DerbyDB extends BaseDB {
 		super(TYPE_DERBY);
 	}
 
-	protected String buildCreateFileContent(String databaseName, int population)
+	protected String buildCreateFileContent(
+			String databaseName, int population, String sqlDir)
 		throws IOException {
 
 		String suffix = getSuffix(population);
@@ -88,11 +89,12 @@ public class DerbyDB extends BaseDB {
 		sb.append(";\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix + "-derby.sql"));
+				sqlDir + "/portal" + suffix + "/portal" + suffix +
+					"-derby.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
+		sb.append(FileUtil.read(sqlDir + "/indexes/indexes-derby.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
+		sb.append(FileUtil.read(sqlDir + "/sequences/sequences-derby.sql"));
 
 		return sb.toString();
 	}

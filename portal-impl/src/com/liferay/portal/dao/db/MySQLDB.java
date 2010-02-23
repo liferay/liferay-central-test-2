@@ -115,7 +115,8 @@ public class MySQLDB extends BaseDB {
 		super(TYPE_MYSQL);
 	}
 
-	protected String buildCreateFileContent(String databaseName, int population)
+	protected String buildCreateFileContent(
+			String databaseName, int population, String sqlDir)
 		throws IOException {
 
 		String suffix = getSuffix(population);
@@ -133,11 +134,12 @@ public class MySQLDB extends BaseDB {
 		sb.append(";\n\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix + "-mysql.sql"));
+				sqlDir + "/portal" + suffix + "/portal" + suffix +
+					"-mysql.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
+		sb.append(FileUtil.read(sqlDir + "/indexes/indexes-mysql.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-mysql.sql"));
+		sb.append(FileUtil.read(sqlDir + "/sequences/sequences-mysql.sql"));
 
 		return sb.toString();
 	}

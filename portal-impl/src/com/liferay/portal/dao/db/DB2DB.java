@@ -103,7 +103,8 @@ public class DB2DB extends BaseDB {
 		super(TYPE_DB2);
 	}
 
-	protected String buildCreateFileContent(String databaseName, int population)
+	protected String buildCreateFileContent(
+			String databaseName, int population, String sqlDir)
 		throws IOException {
 
 		String suffix = getSuffix(population);
@@ -120,12 +121,12 @@ public class DB2DB extends BaseDB {
 		sb.append(databaseName);
 		sb.append(";\n");
 		sb.append(
-			FileUtil.read("../sql/portal" + suffix + "/portal" + suffix +
+			FileUtil.read(sqlDir + "/portal" + suffix + "/portal" + suffix +
 				"-db2.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
+		sb.append(FileUtil.read(sqlDir + "/indexes/indexes-db2.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
+		sb.append(FileUtil.read(sqlDir + "/sequences/sequences-db2.sql"));
 
 		return sb.toString();
 	}

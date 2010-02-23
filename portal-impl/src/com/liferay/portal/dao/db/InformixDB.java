@@ -59,7 +59,8 @@ public class InformixDB extends BaseDB {
 		super(TYPE_INFORMIX);
 	}
 
-	protected String buildCreateFileContent(String databaseName, int population)
+	protected String buildCreateFileContent(
+			String databaseName, int population, String sqlDir)
 		throws IOException {
 
 		String suffix = getSuffix(population);
@@ -85,12 +86,12 @@ public class InformixDB extends BaseDB {
 		sb.append("\n\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
+				sqlDir + "/portal" + suffix + "/portal" + suffix +
 					"-informix.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-informix.sql"));
+		sb.append(FileUtil.read(sqlDir + "/indexes/indexes-informix.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-informix.sql"));
+		sb.append(FileUtil.read(sqlDir + "/sequences/sequences-informix.sql"));
 
 		return sb.toString();
 	}

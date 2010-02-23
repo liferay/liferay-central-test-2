@@ -64,7 +64,8 @@ public class SybaseDB extends BaseDB {
 		super(TYPE_SYBASE);
 	}
 
-	protected String buildCreateFileContent(String databaseName, int population)
+	protected String buildCreateFileContent(
+			String databaseName, int population, String sqlDir)
 		throws IOException {
 
 		String suffix = getSuffix(population);
@@ -88,11 +89,12 @@ public class SybaseDB extends BaseDB {
 		sb.append("\n\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix + "-sybase.sql"));
+				sqlDir + "/portal" + suffix + "/portal" + suffix +
+					"-sybase.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
+		sb.append(FileUtil.read(sqlDir + "/indexes/indexes-sybase.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
+		sb.append(FileUtil.read(sqlDir + "/sequences/sequences-sybase.sql"));
 
 		return sb.toString();
 	}

@@ -62,7 +62,8 @@ public class FirebirdDB extends BaseDB {
 		super(type);
 	}
 
-	protected String buildCreateFileContent(String databaseName, int population)
+	protected String buildCreateFileContent(
+			String databaseName, int population, String sqlDir)
 		throws IOException {
 
 		String suffix = getSuffix(population);
@@ -77,7 +78,8 @@ public class FirebirdDB extends BaseDB {
 		sb.append(".gdb' user 'sysdba' password 'masterkey';\n");
 		sb.append(
 			readSQL(
-				"../sql/portal" + suffix + "/portal" + suffix + "-firebird.sql",
+				sqlDir + "/portal" + suffix + "/portal" + suffix +
+					"-firebird.sql",
 				_FIREBIRD[0], ";\n"));
 
 		return sb.toString();

@@ -14,6 +14,7 @@
 			newenvironment="true"
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Dsql.dir=../sql" />
 			<arg value="${database.name}" />
 			<arg value="${database.types}" />
 		</java>

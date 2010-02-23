@@ -61,8 +61,10 @@ public class OracleDB extends BaseDB {
 		return template;
 	}
 
-	public void buildSQLFile(String fileName) throws IOException {
-		String oracle = buildTemplate(fileName);
+	public void buildSQLFile(String fileName, String sqlDir)
+		throws IOException {
+
+		String oracle = buildTemplate(fileName, sqlDir);
 
 		oracle = _preBuildSQL(oracle);
 
@@ -95,27 +97,27 @@ public class OracleDB extends BaseDB {
 
 		if (imageSB.length() > 0) {
 			FileUtil.write(
-				"../sql/" + fileName + "/" + fileName + "-oracle-image.csv",
+				sqlDir + "/" + fileName + "/" + fileName + "-oracle-image.csv",
 				imageSB.toString());
 		}
 
 		if (journalArticleSB.length() > 0) {
 			FileUtil.write(
-				"../sql/" + fileName + "/" + fileName +
+				sqlDir + "/" + fileName + "/" + fileName +
 					"-oracle-journalarticle.csv",
 				journalArticleSB.toString());
 		}
 
 		if (journalStructureSB.length() > 0) {
 			FileUtil.write(
-				"../sql/" + fileName + "/" + fileName +
+				sqlDir + "/" + fileName + "/" + fileName +
 					"-oracle-journalstructure.csv",
 				journalStructureSB.toString());
 		}
 
 		if (journalTemplateSB.length() > 0) {
 			FileUtil.write(
-				"../sql/" + fileName + "/" + fileName +
+				sqlDir + "/" + fileName + "/" + fileName +
 					"-oracle-journaltemplate.csv",
 				journalTemplateSB.toString());
 		}
@@ -123,7 +125,7 @@ public class OracleDB extends BaseDB {
 		oracle = _postBuildSQL(oracle);
 
 		FileUtil.write(
-			"../sql/" + fileName + "/" + fileName + "-oracle.sql", oracle);
+			sqlDir + "/" + fileName + "/" + fileName + "-oracle.sql", oracle);
 	}
 
 	public List<Index> getIndexes() throws SQLException {
@@ -173,7 +175,8 @@ public class OracleDB extends BaseDB {
 		super(TYPE_ORACLE);
 	}
 
-	protected String buildCreateFileContent(String databaseName, int population)
+	protected String buildCreateFileContent(
+			String databaseName, int population, String sqlDir)
 		throws IOException {
 
 		String suffix = getSuffix(population);
@@ -188,11 +191,12 @@ public class OracleDB extends BaseDB {
 		sb.append("\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix + "-oracle.sql"));
+				sqlDir + "/portal" + suffix + "/portal" + suffix +
+					"-oracle.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-oracle.sql"));
+		sb.append(FileUtil.read(sqlDir + "/indexes/indexes-oracle.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-oracle.sql"));
+		sb.append(FileUtil.read(sqlDir + "/sequences/sequences-oracle.sql"));
 		sb.append("\n");
 		sb.append("quit");
 

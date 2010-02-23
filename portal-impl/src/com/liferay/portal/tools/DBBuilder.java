@@ -58,32 +58,34 @@ public class DBBuilder {
 			_databaseName = databaseName;
 			_databaseTypes = databaseTypes;
 
-			_buildSQLFile("portal");
-			_buildSQLFile("portal-minimal");
-			_buildSQLFile("indexes");
-			_buildSQLFile("sequences");
-			_buildSQLFile("update-4.2.0-4.3.0");
-			_buildSQLFile("update-4.3.0-4.3.1");
-			_buildSQLFile("update-4.3.1-4.3.2");
-			_buildSQLFile("update-4.3.2-4.3.3");
-			_buildSQLFile("update-4.3.3-4.3.4");
-			_buildSQLFile("update-4.3.6-4.4.0");
-			_buildSQLFile("update-4.4.0-5.0.0");
-			_buildSQLFile("update-5.0.1-5.1.0");
-			_buildSQLFile("update-5.1.1-5.1.2");
-			_buildSQLFile("update-5.1.2-5.2.0");
-			_buildSQLFile("update-5.2.0-5.2.1");
-			_buildSQLFile("update-5.2.2-5.2.3");
-			_buildSQLFile("update-5.2.3-6.0.0");
+			String sqlDir = System.getProperty("sql.dir");
 
-			_buildCreateFile();
+			_buildSQLFile("portal", sqlDir);
+			_buildSQLFile("portal-minimal", sqlDir);
+			_buildSQLFile("indexes", sqlDir);
+			_buildSQLFile("sequences", sqlDir);
+			_buildSQLFile("update-4.2.0-4.3.0", sqlDir);
+			_buildSQLFile("update-4.3.0-4.3.1", sqlDir);
+			_buildSQLFile("update-4.3.1-4.3.2", sqlDir);
+			_buildSQLFile("update-4.3.2-4.3.3", sqlDir);
+			_buildSQLFile("update-4.3.3-4.3.4", sqlDir);
+			_buildSQLFile("update-4.3.6-4.4.0", sqlDir);
+			_buildSQLFile("update-4.4.0-5.0.0", sqlDir);
+			_buildSQLFile("update-5.0.1-5.1.0", sqlDir);
+			_buildSQLFile("update-5.1.1-5.1.2", sqlDir);
+			_buildSQLFile("update-5.1.2-5.2.0", sqlDir);
+			_buildSQLFile("update-5.2.0-5.2.1", sqlDir);
+			_buildSQLFile("update-5.2.2-5.2.3", sqlDir);
+			_buildSQLFile("update-5.2.3-6.0.0", sqlDir);
+
+			_buildCreateFile(sqlDir);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void _buildCreateFile() throws IOException {
+	private void _buildCreateFile(String sqlDir) throws IOException {
 		for (int i = 0; i < _databaseTypes.length; i++) {
 			String databaseType = _databaseTypes[i];
 
@@ -98,13 +100,15 @@ public class DBBuilder {
 			DB db = DBFactoryUtil.getDB(_databaseTypes[i]);
 
 			if (db != null) {
-				db.buildCreateFile(_databaseName);
+				db.buildCreateFile(_databaseName, sqlDir);
 			}
 		}
 	}
 
-	private void _buildSQLFile(String fileName) throws IOException {
-		if (!FileUtil.exists("../sql/" + fileName + ".sql")) {
+	private void _buildSQLFile(String fileName, String sqlDir)
+		throws IOException {
+
+		if (!FileUtil.exists(sqlDir + "/" + fileName + ".sql")) {
 			return;
 		}
 
@@ -112,7 +116,7 @@ public class DBBuilder {
 			DB db = DBFactoryUtil.getDB(_databaseTypes[i]);
 
 			if (db != null) {
-				db.buildSQLFile(fileName);
+				db.buildSQLFile(fileName, sqlDir);
 			}
 		}
 	}
