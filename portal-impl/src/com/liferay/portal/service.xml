@@ -1955,6 +1955,7 @@
 		<exception>GroupName</exception>
 		<exception>EmailAddress</exception>
 		<exception>ExpiredLock</exception>
+		<exception>ImageType</exception>
 		<exception>InvalidLock</exception>
 		<exception>LARFile</exception>
 		<exception>LARType</exception>

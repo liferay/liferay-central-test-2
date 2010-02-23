@@ -133,20 +133,20 @@ public class ImageLocalServiceUtil {
 
 	public static com.liferay.portal.model.Image getImage(byte[] bytes)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			java.io.IOException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImage(bytes);
 	}
 
 	public static com.liferay.portal.model.Image getImage(java.io.File file)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			java.io.IOException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImage(file);
 	}
 
 	public static com.liferay.portal.model.Image getImage(
 		java.io.InputStream is)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			java.io.IOException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImage(is);
 	}
 

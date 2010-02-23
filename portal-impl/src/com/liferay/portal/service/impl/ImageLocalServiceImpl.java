@@ -206,15 +206,24 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return null;
 	}
 
-	public Image getImage(byte[] bytes) throws IOException, PortalException {
+	public Image getImage(byte[] bytes)
+		throws PortalException, SystemException {
+
 		return getImage(null, bytes);
 	}
 
-	public Image getImage(File file) throws IOException, PortalException {
-		return getImage(new FileInputStream(file));
+	public Image getImage(File file) throws PortalException, SystemException {
+		try {
+			return getImage(new FileInputStream(file));
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
-	public Image getImage(InputStream is) throws IOException, PortalException {
+	public Image getImage(InputStream is)
+		throws PortalException, SystemException {
+
 		return getImage(is, null);
 	}
 
@@ -254,46 +263,31 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	public Image updateImage(long imageId, byte[] bytes)
 		throws PortalException, SystemException {
 
-		try {
-			Image image = getImage(bytes);
+		Image image = getImage(bytes);
 
-			return updateImage(
-				imageId, image.getTextObj(), image.getType(), image.getHeight(),
-				image.getWidth(), image.getSize());
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		return updateImage(
+			imageId, image.getTextObj(), image.getType(), image.getHeight(),
+			image.getWidth(), image.getSize());
 	}
 
 	public Image updateImage(long imageId, File file)
 		throws PortalException, SystemException {
 
-		try {
-			Image image = getImage(file);
+		Image image = getImage(file);
 
-			return updateImage(
-				imageId, image.getTextObj(), image.getType(), image.getHeight(),
-				image.getWidth(), image.getSize());
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		return updateImage(
+			imageId, image.getTextObj(), image.getType(), image.getHeight(),
+			image.getWidth(), image.getSize());
 	}
 
 	public Image updateImage(long imageId, InputStream is)
 		throws PortalException, SystemException {
 
-		try {
-			Image image = getImage(is);
+		Image image = getImage(is);
 
-			return updateImage(
-				imageId, image.getTextObj(), image.getType(), image.getHeight(),
-				image.getWidth(), image.getSize());
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		return updateImage(
+			imageId, image.getTextObj(), image.getType(), image.getHeight(),
+			image.getWidth(), image.getSize());
 	}
 
 	public Image updateImage(
@@ -324,8 +318,9 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return image;
 	}
 
-	protected Image getImage(InputStream is, byte[] bytes) 
-		throws IOException, PortalException {
+	protected Image getImage(InputStream is, byte[] bytes)
+		throws PortalException, SystemException {
+
 		try {
 			if (is != null) {
 				bytes = FileUtil.getBytes(is);
@@ -353,6 +348,9 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 			image.setSize(size);
 
 			return image;
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
 		}
 		finally {
 			if (is != null) {

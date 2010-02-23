@@ -69,6 +69,7 @@ public class EditCompanyLogoAction extends PortletAction {
 			}
 			else if (e instanceof ImageTypeException ||
 					 e instanceof UploadException) {
+
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
