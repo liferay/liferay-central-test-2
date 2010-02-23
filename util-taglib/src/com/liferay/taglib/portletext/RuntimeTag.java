@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 

@@ -32,11 +32,11 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.velocity.VelocityVariables;
 

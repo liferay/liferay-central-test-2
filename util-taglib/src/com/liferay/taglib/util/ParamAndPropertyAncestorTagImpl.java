@@ -23,7 +23,7 @@
 package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import java.io.IOException;

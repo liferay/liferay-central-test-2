@@ -24,10 +24,10 @@ package com.liferay.taglib.security;
 
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
 
 import javax.servlet.http.HttpServletRequest;

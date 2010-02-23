@@ -28,12 +28,12 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletContextImpl;
 
@@ -168,7 +168,7 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 		}
 
 		PortletConfig portletConfig = PortletConfigFactory.create(
-				portlet, servletContext);
+			portlet, servletContext);
 		PortletContextImpl portletContextImpl =
 			(PortletContextImpl)portletConfig.getPortletContext();
 

@@ -35,6 +35,10 @@ public interface WebKeys {
 
 	public static final String CTX = "CTX";
 
+	public static final String CURRENT_COMPLETE_URL = "CURRENT_COMPLETE_URL";
+
+	public static final String CURRENT_URL = "CURRENT_URL";
+
 	public static final String LAYOUT = "LAYOUT";
 
 	public static final String LAYOUTS = "LAYOUTS";
@@ -65,6 +69,18 @@ public interface WebKeys {
 
 	public static final String PORTLET_ID = "PORTLET_ID";
 
+	public static final String RENDER_PORTLET = "RENDER_PORTLET";
+
+	public static final String RENDER_PORTLET_COLUMN_COUNT = "RENDER_PORTLET_COLUMN_COUNT";
+
+	public static final String RENDER_PORTLET_COLUMN_ID = "RENDER_PORTLET_COLUMN_ID";
+
+	public static final String RENDER_PORTLET_COLUMN_POS = "RENDER_PORTLET_COLUMN_POS";
+
+	public static final String RENDER_PORTLET_QUERY_STRING = "RENDER_PORTLET_QUERY_STRING";
+
+	public static final String RENDER_PORTLET_RESOURCE = "RENDER_PORTLET_RESOURCE";
+
 	public static final String SEARCH_CONTAINER = "SEARCH_CONTAINER";
 
 	public static final String SEARCH_CONTAINER_RESULT_ROW = "SEARCH_CONTAINER_RESULT_ROW";
@@ -72,6 +88,8 @@ public interface WebKeys {
 	public static final String SEARCH_CONTAINER_RESULT_ROW_ENTRY = "SEARCH_CONTAINER_RESULT_ROW_ENTRY";
 
 	public static final String SEARCH_SEARCH_RESULTS = "SEARCH_SEARCH_RESULTS";
+
+	public static final String THEME = "THEME";
 
 	public static final String THEME_DISPLAY = "THEME_DISPLAY";
 

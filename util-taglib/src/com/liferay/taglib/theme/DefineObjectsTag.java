@@ -22,8 +22,8 @@
 
 package com.liferay.taglib.theme;
 
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.TagSupport;

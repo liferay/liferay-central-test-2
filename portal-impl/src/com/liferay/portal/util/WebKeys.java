@@ -70,10 +70,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String CONFIGURATION_ACTION_PATH = "CONFIGURATION_ACTION_PATH";
 
-	public static final String CURRENT_COMPLETE_URL = "CURRENT_COMPLETE_URL";
-
-	public static final String CURRENT_URL = "CURRENT_URL";
-
 	public static final String DIFF_HTML_RESULTS = "DIFF_HTML_RESULTS";
 
 	public static final String DIFF_RESULTS = "DIFF_RESULTS";
@@ -308,18 +304,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String REFERER = "referer";
 
-	public static final String RENDER_PORTLET = "RENDER_PORTLET";
-
-	public static final String RENDER_PORTLET_COLUMN_COUNT = "RENDER_PORTLET_COLUMN_COUNT";
-
-	public static final String RENDER_PORTLET_COLUMN_ID = "RENDER_PORTLET_COLUMN_ID";
-
-	public static final String RENDER_PORTLET_COLUMN_POS = "RENDER_PORTLET_COLUMN_POS";
-
-	public static final String RENDER_PORTLET_QUERY_STRING = "RENDER_PORTLET_QUERY_STRING";
-
-	public static final String RENDER_PORTLET_RESOURCE = "RENDER_PORTLET_RESOURCE";
-
 	public static final String REQUESTED_LAYOUT = "REQUESTED_LAYOUT";
 
 	public static final String ROLE = "ROLE";
@@ -373,8 +357,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String TASK_LIST = "TASK_LIST";
 
 	public static final String TASKS_PROPOSAL = "TASKS_PROPOSAL";
-
-	public static final String THEME = "THEME";
 
 	public static final String TITLE = "TITLE";
 
