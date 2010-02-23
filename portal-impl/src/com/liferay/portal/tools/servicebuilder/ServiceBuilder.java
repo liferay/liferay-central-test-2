@@ -2683,7 +2683,7 @@ public class ServiceBuilder {
 
 				entityName = StringUtil.replace(entityName, ".service.", ".");
 
-				int pos = entityName.indexOf("Service");
+				int pos = entityName.lastIndexOf("Service");
 
 				entityName = entityName.substring(0, pos);
 
