@@ -203,6 +203,7 @@ create table BlogsEntry (
 	content TEXT null,
 	displayDate DATE null,
 	allowTrackbacks BOOLEAN,
+	allowPingbacks BOOLEAN,
 	trackbacks TEXT null,
 	status INTEGER,
 	statusByUserId LONG,

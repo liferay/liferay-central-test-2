@@ -44,6 +44,7 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
@@ -214,6 +215,20 @@ public class EditEntryAction extends PortletAction {
 
 		try {
 			ActionUtil.getEntry(renderRequest);
+
+			if (PropsValues.BLOGS_PINGBACK_ENABLED) {
+				BlogsEntry entry = (BlogsEntry)renderRequest.getAttribute(
+					WebKeys.BLOGS_ENTRY);
+
+				if (entry != null && entry.isAllowPingbacks()) {
+					HttpServletResponse response =
+						PortalUtil.getHttpServletResponse(renderResponse);
+
+					response.addHeader(
+						"X-Pingback",
+						PortalUtil.getPortalURL(renderRequest) + "/pingback");
+				}
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchEntryException ||
@@ -297,6 +312,8 @@ public class EditEntryAction extends PortletAction {
 			displayDateHour += 12;
 		}
 
+		boolean allowPingbacks = ParamUtil.getBoolean(
+			actionRequest, "allowPingbacks");
 		boolean allowTrackbacks = ParamUtil.getBoolean(
 			actionRequest, "allowTrackbacks");
 		String[] trackbacks = StringUtil.split(
@@ -315,7 +332,7 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryServiceUtil.addEntry(
 				title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
-				allowTrackbacks, trackbacks, serviceContext);
+				allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
 
 			if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 				AssetPublisherUtil.addAndStoreSelection(
@@ -335,7 +352,7 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryServiceUtil.updateEntry(
 				entryId, title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
-				allowTrackbacks, trackbacks, serviceContext);
+				allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;

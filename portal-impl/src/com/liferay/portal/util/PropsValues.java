@@ -197,20 +197,19 @@ public class PropsValues {
 	public static final int BLOGS_PAGE_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.BLOGS_PAGE_ABSTRACT_LENGTH));
 
+	public static final int BLOGS_LINKBACK_EXCERPT_LENGTH =
+		GetterUtil.getInteger(PropsUtil.get(
+			PropsKeys.BLOGS_LINKBACK_EXCERPT_LENGTH));
+
 	public static final boolean BLOGS_PING_GOOGLE_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.BLOGS_PING_GOOGLE_ENABLED));
 
+	public static final boolean BLOGS_PINGBACK_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.BLOGS_PINGBACK_ENABLED));
+
 	public static final boolean BLOGS_TRACKBACK_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.BLOGS_TRACKBACK_ENABLED));
-
-	public static final int BLOGS_TRACKBACK_EXCERPT_LENGTH =
-		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
-			BLOGS_TRACKBACK_EXCERPT_LENGTH));
-
-	public static final int BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL =
-		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
-			BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL));
 
 	public static final boolean BREADCRUMB_SHOW_GUEST_GROUP =
 		GetterUtil.getBoolean(PropsUtil.get(

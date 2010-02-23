@@ -26,20 +26,23 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
+import com.liferay.portlet.blogs.util.LinkbackConsumerUtil;
+import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
 
 /**
- * <a href="TrackbackVerifierMessageListener.java.html"><b><i>View Source</i>
+ * <a href="LinkbackMessageListener.java.html"><b><i>View Source</i>
  * </b></a>
  *
  * @author Alexander Chow
  * @author Tina Tian
  */
-public class TrackbackVerifierMessageListener implements MessageListener {
+public class LinkbackMessageListener implements MessageListener {
 
 	public void receive(Message message) {
 		try {
-			TrackbackVerifierUtil.verifyNewPosts();
+			LinkbackConsumerUtil.verifyNewTrackbacks();
+
+			LinkbackProducerUtil.sendQueuedPingbacks();
 		}
 		catch (Exception e) {
 			_log.error(e);
@@ -47,6 +50,6 @@ public class TrackbackVerifierMessageListener implements MessageListener {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		TrackbackVerifierMessageListener.class);
+		LinkbackMessageListener.class);
 
 }

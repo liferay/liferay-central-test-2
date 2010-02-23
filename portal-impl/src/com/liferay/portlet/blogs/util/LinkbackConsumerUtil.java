@@ -38,19 +38,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="TrackbackVerifierUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="LinkbackConsumerUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  */
-public class TrackbackVerifierUtil {
+public class LinkbackConsumerUtil {
 
-	public static void addNewPost(
+	public static void addNewTrackback(
 		long messageId, String url, String entryUrl) {
 
 		_trackbacks.add(new Tuple(messageId, url, entryUrl));
 	}
 
-	public static void verifyNewPosts() {
+	public static void verifyNewTrackbacks() {
 		Tuple tuple = null;
 
 		while (!_trackbacks.isEmpty()) {
@@ -62,7 +62,7 @@ public class TrackbackVerifierUtil {
 			String url = (String)tuple.getObject(1);
 			String entryUrl = (String)tuple.getObject(2);
 
-			_verifyPost(messageId, url, entryUrl);
+			_verifyTrackback(messageId, url, entryUrl);
 		}
 	}
 
@@ -94,12 +94,12 @@ public class TrackbackVerifierUtil {
 				companyId);
 
 			if (userId == defaultUserId) {
-				_verifyPost(messageId, url, entryURL);
+				_verifyTrackback(messageId, url, entryURL);
 			}
 		}
 	}
 
-	private static void _verifyPost(
+	private static void _verifyTrackback(
 		long messageId, String url, String entryURL) {
 
 		try {
@@ -122,8 +122,7 @@ public class TrackbackVerifierUtil {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		TrackbackVerifierUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(LinkbackConsumerUtil.class);
 
 	private static List<Tuple> _trackbacks =
 		Collections.synchronizedList(new ArrayList<Tuple>());

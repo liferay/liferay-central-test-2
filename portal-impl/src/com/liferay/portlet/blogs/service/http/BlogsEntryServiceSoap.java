@@ -83,15 +83,15 @@ public class BlogsEntryServiceSoap {
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap addEntry(
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean allowTrackbacks,
+		int displayDateMinute, boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(title,
 					content, displayDateMonth, displayDateDay, displayDateYear,
-					displayDateHour, displayDateMinute, allowTrackbacks,
-					trackbacks, serviceContext);
+					displayDateHour, displayDateMinute, allowPingbacks,
+					allowTrackbacks, trackbacks, serviceContext);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}
@@ -191,15 +191,15 @@ public class BlogsEntryServiceSoap {
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap updateEntry(
 		long entryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
-		java.lang.String[] trackbacks,
+		int displayDateHour, int displayDateMinute, boolean allowPingbacks,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.updateEntry(entryId,
 					title, content, displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					allowTrackbacks, trackbacks, serviceContext);
+					allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}

@@ -821,6 +821,19 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>Pingback Servlet</servlet-name>
+		<servlet-class>com.liferay.portal.xmlrpc.XmlRpcServlet</servlet-class>
+		<init-param>
+			<param-name>methodName0</param-name>
+			<param-value>pingback.ping</param-value>
+		</init-param>
+		<init-param>
+			<param-name>className0</param-name>
+			<param-value>com.liferay.portlet.blogs.util.PingbackMethodImpl</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>Portal Delegator Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalDelegatorServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
@@ -1159,6 +1172,10 @@
 	<servlet-mapping>
 		<servlet-name>Netvibes Servlet</servlet-name>
 		<url-pattern>/netvibes/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Pingback Servlet</servlet-name>
+		<url-pattern>/pingback/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Poller Servlet</servlet-name>

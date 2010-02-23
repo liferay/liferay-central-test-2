@@ -43,6 +43,7 @@ if (entry != null) {
 	}
 }
 
+boolean allowPingbacks = PropsValues.BLOGS_PINGBACK_ENABLED && BeanParamUtil.getBoolean(entry, request, "allowPingbacks", true);
 boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true);
 %>
 
@@ -85,6 +86,10 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				label="<%= true %>"
 			/>
 		</liferay-ui:custom-attributes-available>
+
+		<c:if test="<%= PropsValues.BLOGS_PINGBACK_ENABLED %>">
+			<aui:input defaultValue="<%= allowPingbacks %>" helpMessage="to-allow-pingbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" inlineLabel="left" label="allow-incoming-pingbacks" name="allowPingbacks" />
+		</c:if>
 
 		<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
 			<aui:input defaultValue="<%= allowTrackbacks %>" helpMessage="to-allow-trackbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" inlineLabel="left" label="allow-incoming-trackbacks" name="allowTrackbacks" />

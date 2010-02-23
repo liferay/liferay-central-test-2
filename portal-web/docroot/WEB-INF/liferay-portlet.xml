@@ -383,10 +383,10 @@
 		<indexer-class>com.liferay.portlet.blogs.util.BlogsIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.blogs.util.BlogsOpenSearchImpl</open-search-class>
 		<scheduler-entry>
-			<scheduler-event-listener-class>com.liferay.portlet.blogs.messaging.TrackbackVerifierMessageListener</scheduler-event-listener-class>
+			<scheduler-event-listener-class>com.liferay.portlet.blogs.messaging.LinkbackMessageListener</scheduler-event-listener-class>
 			<trigger>
 				<simple>
-					<property-key>blogs.trackback.verifier.job.interval</property-key>
+					<property-key>blogs.linkback.job.interval</property-key>
 					<time-unit>MINUTE</time-unit>
 				</simple>
 			</trigger>

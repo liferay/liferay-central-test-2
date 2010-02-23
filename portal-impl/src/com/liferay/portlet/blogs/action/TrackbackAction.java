@@ -45,7 +45,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
+import com.liferay.portlet.blogs.util.LinkbackConsumerUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -184,7 +184,7 @@ public class TrackbackAction extends PortletAction {
 				Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
 					entry.getUrlTitle();
 
-		TrackbackVerifierUtil.addNewPost(
+		LinkbackConsumerUtil.addNewTrackback(
 			message.getMessageId(), url, entryURL);
 
 		sendSuccess(actionResponse);

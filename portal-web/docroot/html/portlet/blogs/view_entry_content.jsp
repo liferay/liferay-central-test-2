@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/blogs/init.jsp" %>
 
 <%
+response.addHeader("X-Pingback", "http://localhost:8081/pingback");
+
 String redirect = (String)request.getAttribute("view_entry_content.jsp-redirect");
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute("view_entry_content.jsp-entry");

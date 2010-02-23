@@ -890,6 +890,7 @@
 		</field>
 		<field name="displayDate" type="Date" />
 		<field name="allowTrackbacks" type="boolean" />
+		<field name="allowPingbacks" type="boolean" />
 		<field name="trackbacks" type="String">
 			<hint-collection name="CLOB" />
 		</field>

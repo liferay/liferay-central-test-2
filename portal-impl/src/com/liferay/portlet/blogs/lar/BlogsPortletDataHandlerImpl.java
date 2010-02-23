@@ -215,6 +215,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		int status = entry.getStatus();
+		boolean allowPingbacks = entry.isAllowPingbacks();
 		boolean allowTrackbacks = entry.isAllowTrackbacks();
 		String[] trackbacks = StringUtil.split(entry.getTrackbacks());
 
@@ -246,22 +247,24 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 					entry.getUuid(), userId, entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					allowTrackbacks, trackbacks, serviceContext);
+					allowPingbacks, allowTrackbacks, trackbacks,
+					serviceContext);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
 					userId, existingEntry.getEntryId(), entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					allowTrackbacks, trackbacks, serviceContext);
+					allowPingbacks, allowTrackbacks, trackbacks,
+					serviceContext);
 			}
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
 				null, userId, entry.getTitle(), entry.getContent(),
 				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, allowTrackbacks, trackbacks,
-				serviceContext);
+				displayDateHour, displayDateMinute, allowPingbacks,
+				allowTrackbacks, trackbacks, serviceContext);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {

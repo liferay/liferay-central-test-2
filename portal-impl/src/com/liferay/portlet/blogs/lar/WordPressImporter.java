@@ -277,7 +277,8 @@ public class WordPressImporter {
 		String pingStatusText = entryEl.elementTextTrim(
 			SAXReaderUtil.createQName("ping_status", _NS_WP));
 
-		boolean allowTrackbacks = pingStatusText.equalsIgnoreCase("open");
+		boolean allowPingbacks = pingStatusText.equalsIgnoreCase("open");
+		boolean allowTrackbacks = allowPingbacks;
 
 		String[] assetTagNames = null;
 
@@ -301,7 +302,7 @@ public class WordPressImporter {
 			entry = BlogsEntryLocalServiceUtil.addEntry(
 				null, userId, title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
-				allowTrackbacks, null, serviceContext);
+				allowPingbacks, allowTrackbacks, null, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error("Add entry " + title, e);

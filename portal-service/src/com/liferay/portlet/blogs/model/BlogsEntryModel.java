@@ -114,6 +114,12 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 
 	public void setAllowTrackbacks(boolean allowTrackbacks);
 
+	public boolean getAllowPingbacks();
+
+	public boolean isAllowPingbacks();
+
+	public void setAllowPingbacks(boolean allowPingbacks);
+
 	public String getTrackbacks();
 
 	public void setTrackbacks(String trackbacks);

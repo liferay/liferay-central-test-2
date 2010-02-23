@@ -28,6 +28,7 @@
 		<column name="content" type="String" />
 		<column name="displayDate" type="Date" />
 		<column name="allowTrackbacks" type="boolean" />
+		<column name="allowPingbacks" type="boolean" />
 		<column name="trackbacks" type="String" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />

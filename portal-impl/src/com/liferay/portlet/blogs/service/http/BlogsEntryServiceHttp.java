@@ -77,7 +77,8 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean allowTrackbacks, java.lang.String[] trackbacks,
+		boolean allowPingbacks, boolean allowTrackbacks,
+		java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -104,18 +105,20 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj6 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj7 = new BooleanWrapper(allowTrackbacks);
+			Object paramObj7 = new BooleanWrapper(allowPingbacks);
 
-			Object paramObj8 = trackbacks;
+			Object paramObj8 = new BooleanWrapper(allowTrackbacks);
+
+			Object paramObj9 = trackbacks;
 
 			if (trackbacks == null) {
-				paramObj8 = new NullWrapper("[Ljava.lang.String;");
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj9 = serviceContext;
+			Object paramObj10 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj9 = new NullWrapper(
+				paramObj10 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -123,7 +126,8 @@ public class BlogsEntryServiceHttp {
 					"addEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
 					});
 
 			Object returnObj = null;
@@ -628,7 +632,8 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean allowTrackbacks, java.lang.String[] trackbacks,
+		boolean allowPingbacks, boolean allowTrackbacks,
+		java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -657,18 +662,20 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj7 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj8 = new BooleanWrapper(allowTrackbacks);
+			Object paramObj8 = new BooleanWrapper(allowPingbacks);
 
-			Object paramObj9 = trackbacks;
+			Object paramObj9 = new BooleanWrapper(allowTrackbacks);
+
+			Object paramObj10 = trackbacks;
 
 			if (trackbacks == null) {
-				paramObj9 = new NullWrapper("[Ljava.lang.String;");
+				paramObj10 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj10 = serviceContext;
+			Object paramObj11 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj10 = new NullWrapper(
+				paramObj11 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -677,7 +684,7 @@ public class BlogsEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj10, paramObj11
 					});
 
 			Object returnObj = null;

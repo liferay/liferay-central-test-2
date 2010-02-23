@@ -193,11 +193,13 @@ public interface PropsKeys {
 
 	public static final String BLOGS_RSS_ABSTRACT_LENGTH = "blogs.rss.abstract.length";
 
+	public static final String BLOGS_LINKBACK_EXCERPT_LENGTH = "blogs.linkback.excerpt.length";
+
+	public static final String BLOGS_LINKBACK_JOB_INTERVAL = "blogs.linkback.job.interval";
+
+	public static final String BLOGS_PINGBACK_ENABLED = "blogs.pingback.enabled";
+
 	public static final String BLOGS_TRACKBACK_ENABLED = "blogs.trackback.enabled";
-
-	public static final String BLOGS_TRACKBACK_EXCERPT_LENGTH = "blogs.trackback.excerpt.length";
-
-	public static final String BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL = "blogs.trackback.verifier.job.interval";
 
 	public static final String BREADCRUMB_SHOW_GUEST_GROUP = "breadcrumb.show.guest.group";
 

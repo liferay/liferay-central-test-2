@@ -169,6 +169,18 @@ public class BlogsEntryWrapper implements BlogsEntry {
 		_blogsEntry.setAllowTrackbacks(allowTrackbacks);
 	}
 
+	public boolean getAllowPingbacks() {
+		return _blogsEntry.getAllowPingbacks();
+	}
+
+	public boolean isAllowPingbacks() {
+		return _blogsEntry.isAllowPingbacks();
+	}
+
+	public void setAllowPingbacks(boolean allowPingbacks) {
+		_blogsEntry.setAllowPingbacks(allowPingbacks);
+	}
+
 	public java.lang.String getTrackbacks() {
 		return _blogsEntry.getTrackbacks();
 	}
