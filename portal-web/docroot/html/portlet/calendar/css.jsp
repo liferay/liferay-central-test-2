@@ -208,7 +208,7 @@
 
 .portlet-calendar .day-grid .event-description {
 	border-top: 1px solid #AEB8BC;
-	padding-top: .5em;
+	padding-top: 0.5em;
 }
 
 .portlet-calendar .detail-column-last {
@@ -234,7 +234,7 @@
 .portlet-calendar h3.event-title, .portlet-calendar h3.event-title {
 	border-bottom: 1px solid #000;
 	font-size: 14px;
-	font-weight: 700;
+	font-weight: bold;
 	margin-top: 0;
 }
 
