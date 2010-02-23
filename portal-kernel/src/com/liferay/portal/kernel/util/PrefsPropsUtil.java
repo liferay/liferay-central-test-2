@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.util;
 
+import javax.portlet.PortletPreferences;
+
 /**
  * <a href="PrefsPropsUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -43,9 +45,108 @@ public class PrefsPropsUtil {
 		}
 	}
 
+	public static String[] getStringArray(
+			long companyId, String name, String delimiter)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GET_STRING_ARRAY, new LongWrapper(companyId), name,
+			delimiter, false);
+
+		if (returnObj != null) {
+			return (String[])returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String[] getStringArray(
+			long companyId, String name, String delimiter,
+			String[] defaultValue)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GET_STRING_ARRAY, new LongWrapper(companyId), name,
+			delimiter, defaultValue, false);
+
+		if (returnObj != null) {
+			return (String[])returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String[] getStringArray(
+			PortletPreferences preferences, long companyId, String name,
+			String delimiter)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GET_STRING_ARRAY, preferences,
+			new LongWrapper(companyId), name, delimiter, false);
+
+		if (returnObj != null) {
+			return (String[])returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String[] getStringArray(
+			PortletPreferences preferences, long companyId, String name,
+			String delimiter, String[] defaultValue)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GET_STRING_ARRAY, preferences,
+			new LongWrapper(companyId), name, delimiter, defaultValue, false);
+
+		if (returnObj != null) {
+			return (String[])returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String[] getStringArray(String name, String delimiter)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GET_STRING_ARRAY, name, delimiter, false);
+
+		if (returnObj != null) {
+			return (String[])returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String[] getStringArray(
+			String name, String delimiter, String[] defaultValue)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GET_STRING_ARRAY, name, delimiter, defaultValue,
+			false);
+
+		if (returnObj != null) {
+			return (String[])returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
 	private static final String _CLASS =
 		"com.liferay.portal.util.PrefsPropsUtil";
 
 	private static final String _METHOD_GET_STRING = "getString";
+
+	private static final String _METHOD_GET_STRING_ARRAY = "getStringArray";
 
 }
