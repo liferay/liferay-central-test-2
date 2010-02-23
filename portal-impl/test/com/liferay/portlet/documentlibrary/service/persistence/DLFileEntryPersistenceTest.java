@@ -88,8 +88,8 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		newDLFileEntry.setName(randomString());
 		newDLFileEntry.setTitle(randomString());
 		newDLFileEntry.setDescription(randomString());
-		newDLFileEntry.setVersion(nextDouble());
-		newDLFileEntry.setPendingVersion(nextDouble());
+		newDLFileEntry.setVersion(randomString());
+		newDLFileEntry.setPendingVersion(randomString());
 		newDLFileEntry.setSize(nextInt());
 		newDLFileEntry.setReadCount(nextInt());
 		newDLFileEntry.setExtraSettings(randomString());
@@ -218,8 +218,8 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		dlFileEntry.setName(randomString());
 		dlFileEntry.setTitle(randomString());
 		dlFileEntry.setDescription(randomString());
-		dlFileEntry.setVersion(nextDouble());
-		dlFileEntry.setPendingVersion(nextDouble());
+		dlFileEntry.setVersion(randomString());
+		dlFileEntry.setPendingVersion(randomString());
 		dlFileEntry.setSize(nextInt());
 		dlFileEntry.setReadCount(nextInt());
 		dlFileEntry.setExtraSettings(randomString());

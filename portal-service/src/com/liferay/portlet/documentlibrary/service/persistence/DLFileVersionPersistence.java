@@ -100,17 +100,19 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 			com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByG_F_N_V(
-		long groupId, long folderId, java.lang.String name, double version)
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String version)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByG_F_N_V(
-		long groupId, long folderId, java.lang.String name, double version)
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String version)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByG_F_N_V(
-		long groupId, long folderId, java.lang.String name, double version,
-		boolean retrieveFromCache)
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String version, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByG_F_N_S(
@@ -160,7 +162,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByG_F_N_V(long groupId, long folderId,
-		java.lang.String name, double version)
+		java.lang.String name, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 
@@ -175,7 +177,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_F_N_V(long groupId, long folderId,
-		java.lang.String name, double version)
+		java.lang.String name, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_F_N_S(long groupId, long folderId,

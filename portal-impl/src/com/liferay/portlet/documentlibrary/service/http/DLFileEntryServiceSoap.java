@@ -113,7 +113,8 @@ public class DLFileEntryServiceSoap {
 	}
 
 	public static void deleteFileEntry(long groupId, long folderId,
-		java.lang.String name, double version) throws RemoteException {
+		java.lang.String name, java.lang.String version)
+		throws RemoteException {
 		try {
 			DLFileEntryServiceUtil.deleteFileEntry(groupId, folderId, name,
 				version);
@@ -230,14 +231,14 @@ public class DLFileEntryServiceSoap {
 		long groupId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, byte[] bytes,
+		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.updateFileEntry(groupId,
 					folderId, newFolderId, name, sourceFileName, title,
-					description, versionDescription, extraSettings, bytes,
-					serviceContext);
+					description, versionDescription, majorVersion,
+					extraSettings, bytes, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}

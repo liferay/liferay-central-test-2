@@ -82,13 +82,13 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
-			{ "version", new Integer(Types.DOUBLE) },
-			{ "pendingVersion", new Integer(Types.DOUBLE) },
+			{ "version", new Integer(Types.VARCHAR) },
+			{ "pendingVersion", new Integer(Types.VARCHAR) },
 			{ "size_", new Integer(Types.INTEGER) },
 			{ "readCount", new Integer(Types.INTEGER) },
 			{ "extraSettings", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version DOUBLE,pendingVersion DOUBLE,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version VARCHAR(75) null,pendingVersion VARCHAR(75) null,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileEntry.folderId ASC, dlFileEntry.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileEntry.folderId ASC, DLFileEntry.name ASC";
@@ -329,19 +329,19 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		_description = description;
 	}
 
-	public double getVersion() {
-		return _version;
+	public String getVersion() {
+		return GetterUtil.getString(_version);
 	}
 
-	public void setVersion(double version) {
+	public void setVersion(String version) {
 		_version = version;
 	}
 
-	public double getPendingVersion() {
-		return _pendingVersion;
+	public String getPendingVersion() {
+		return GetterUtil.getString(_pendingVersion);
 	}
 
-	public void setPendingVersion(double pendingVersion) {
+	public void setPendingVersion(String pendingVersion) {
 		_pendingVersion = pendingVersion;
 	}
 
@@ -393,8 +393,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			model.setName(HtmlUtil.escape(getName()));
 			model.setTitle(HtmlUtil.escape(getTitle()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setVersion(getVersion());
-			model.setPendingVersion(getPendingVersion());
+			model.setVersion(HtmlUtil.escape(getVersion()));
+			model.setPendingVersion(HtmlUtil.escape(getPendingVersion()));
 			model.setSize(getSize());
 			model.setReadCount(getReadCount());
 			model.setExtraSettings(HtmlUtil.escape(getExtraSettings()));
@@ -658,8 +658,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	private String _title;
 	private String _originalTitle;
 	private String _description;
-	private double _version;
-	private double _pendingVersion;
+	private String _version;
+	private String _pendingVersion;
 	private int _size;
 	private int _readCount;
 	private String _extraSettings;

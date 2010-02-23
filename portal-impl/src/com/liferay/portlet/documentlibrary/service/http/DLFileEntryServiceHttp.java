@@ -24,7 +24,7 @@ package com.liferay.portlet.documentlibrary.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.DoubleWrapper;
+import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -291,7 +291,8 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
-		long groupId, long folderId, java.lang.String name, double version)
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String version)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -305,7 +306,11 @@ public class DLFileEntryServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new DoubleWrapper(version);
+			Object paramObj3 = version;
+
+			if (version == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"deleteFileEntry",
@@ -784,7 +789,7 @@ public class DLFileEntryServiceHttp {
 		long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, byte[] bytes,
+		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -825,22 +830,24 @@ public class DLFileEntryServiceHttp {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = extraSettings;
+			Object paramObj8 = new BooleanWrapper(majorVersion);
+
+			Object paramObj9 = extraSettings;
 
 			if (extraSettings == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
+				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = bytes;
+			Object paramObj10 = bytes;
 
 			if (bytes == null) {
-				paramObj9 = new NullWrapper("[B");
+				paramObj10 = new NullWrapper("[B");
 			}
 
-			Object paramObj10 = serviceContext;
+			Object paramObj11 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj10 = new NullWrapper(
+				paramObj11 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -849,7 +856,7 @@ public class DLFileEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj10, paramObj11
 					});
 
 			Object returnObj = null;
@@ -883,7 +890,8 @@ public class DLFileEntryServiceHttp {
 		long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, java.io.File file,
+		boolean majorVersion, java.lang.String extraSettings,
+		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -924,22 +932,24 @@ public class DLFileEntryServiceHttp {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = extraSettings;
+			Object paramObj8 = new BooleanWrapper(majorVersion);
+
+			Object paramObj9 = extraSettings;
 
 			if (extraSettings == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
+				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = file;
+			Object paramObj10 = file;
 
 			if (file == null) {
-				paramObj9 = new NullWrapper("java.io.File");
+				paramObj10 = new NullWrapper("java.io.File");
 			}
 
-			Object paramObj10 = serviceContext;
+			Object paramObj11 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj10 = new NullWrapper(
+				paramObj11 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -948,7 +958,7 @@ public class DLFileEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj10, paramObj11
 					});
 
 			Object returnObj = null;

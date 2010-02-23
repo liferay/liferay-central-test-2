@@ -996,8 +996,8 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
-		<field name="version" type="double" />
-		<field name="pendingVersion" type="double" />
+		<field name="version" type="String" />
+		<field name="pendingVersion" type="String" />
 		<field name="size" type="int" />
 		<field name="readCount" type="int" />
 		<field name="extraSettings" type="String">
@@ -1048,7 +1048,7 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
-		<field name="version" type="double" />
+		<field name="version" type="String" />
 		<field name="size" type="int" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />

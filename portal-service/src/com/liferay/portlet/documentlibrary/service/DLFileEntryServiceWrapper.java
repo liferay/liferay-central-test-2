@@ -76,7 +76,7 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 	}
 
 	public void deleteFileEntry(long groupId, long folderId,
-		java.lang.String name, double version)
+		java.lang.String name, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryService.deleteFileEntry(groupId, folderId, name, version);
@@ -159,26 +159,29 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		long groupId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, byte[] bytes,
+		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.updateFileEntry(groupId, folderId,
 			newFolderId, name, sourceFileName, title, description,
-			versionDescription, extraSettings, bytes, serviceContext);
+			versionDescription, majorVersion, extraSettings, bytes,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long groupId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, java.io.File file,
+		boolean majorVersion, java.lang.String extraSettings,
+		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.updateFileEntry(groupId, folderId,
 			newFolderId, name, sourceFileName, title, description,
-			versionDescription, extraSettings, file, serviceContext);
+			versionDescription, majorVersion, extraSettings, file,
+			serviceContext);
 	}
 
 	public boolean verifyFileEntryLock(long groupId, long folderId,

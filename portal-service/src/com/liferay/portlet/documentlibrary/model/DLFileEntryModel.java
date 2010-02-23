@@ -120,13 +120,13 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 
 	public void setDescription(String description);
 
-	public double getVersion();
+	public String getVersion();
 
-	public void setVersion(double version);
+	public void setVersion(String version);
 
-	public double getPendingVersion();
+	public String getPendingVersion();
 
-	public void setPendingVersion(double pendingVersion);
+	public void setPendingVersion(String pendingVersion);
 
 	public int getSize();
 

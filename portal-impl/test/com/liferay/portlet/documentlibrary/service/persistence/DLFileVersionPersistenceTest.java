@@ -84,7 +84,7 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		newDLFileVersion.setFolderId(nextLong());
 		newDLFileVersion.setName(randomString());
 		newDLFileVersion.setDescription(randomString());
-		newDLFileVersion.setVersion(nextDouble());
+		newDLFileVersion.setVersion(randomString());
 		newDLFileVersion.setSize(nextInt());
 		newDLFileVersion.setStatus(nextInt());
 		newDLFileVersion.setStatusByUserId(nextLong());
@@ -206,7 +206,7 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		dlFileVersion.setFolderId(nextLong());
 		dlFileVersion.setName(randomString());
 		dlFileVersion.setDescription(randomString());
-		dlFileVersion.setVersion(nextDouble());
+		dlFileVersion.setVersion(randomString());
 		dlFileVersion.setSize(nextInt());
 		dlFileVersion.setStatus(nextInt());
 		dlFileVersion.setStatusByUserId(nextLong());

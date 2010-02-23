@@ -78,7 +78,7 @@ public interface DLFileEntryService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteFileEntry(long groupId, long folderId,
-		java.lang.String name, double version)
+		java.lang.String name, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -140,7 +140,7 @@ public interface DLFileEntryService {
 		long groupId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, byte[] bytes,
+		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -149,7 +149,8 @@ public interface DLFileEntryService {
 		long groupId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
-		java.lang.String extraSettings, java.io.File file,
+		boolean majorVersion, java.lang.String extraSettings,
+		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

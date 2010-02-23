@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -77,17 +78,17 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
-			{ "version", new Integer(Types.DOUBLE) },
+			{ "version", new Integer(Types.VARCHAR) },
 			{ "size_", new Integer(Types.INTEGER) },
 			{ "status", new Integer(Types.INTEGER) },
 			{ "statusByUserId", new Integer(Types.BIGINT) },
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,description STRING null,version DOUBLE,size_ INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,description STRING null,version VARCHAR(75) null,size_ INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
-	public static final String ORDER_BY_JPQL = " ORDER BY dlFileVersion.folderId DESC, dlFileVersion.name DESC, dlFileVersion.version DESC";
-	public static final String ORDER_BY_SQL = " ORDER BY DLFileVersion.folderId DESC, DLFileVersion.name DESC, DLFileVersion.version DESC";
+	public static final String ORDER_BY_JPQL = " ORDER BY dlFileVersion.folderId DESC, dlFileVersion.name DESC, dlFileVersion.createDate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY DLFileVersion.folderId DESC, DLFileVersion.name DESC, DLFileVersion.createDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -256,22 +257,20 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		_description = description;
 	}
 
-	public double getVersion() {
-		return _version;
+	public String getVersion() {
+		return GetterUtil.getString(_version);
 	}
 
-	public void setVersion(double version) {
+	public void setVersion(String version) {
 		_version = version;
 
-		if (!_setOriginalVersion) {
-			_setOriginalVersion = true;
-
+		if (_originalVersion == null) {
 			_originalVersion = version;
 		}
 	}
 
-	public double getOriginalVersion() {
-		return _originalVersion;
+	public String getOriginalVersion() {
+		return GetterUtil.getString(_originalVersion);
 	}
 
 	public int getSize() {
@@ -342,7 +341,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			model.setFolderId(getFolderId());
 			model.setName(HtmlUtil.escape(getName()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setVersion(getVersion());
+			model.setVersion(HtmlUtil.escape(getVersion()));
 			model.setSize(getSize());
 			model.setStatus(getStatus());
 			model.setStatusByUserId(getStatusByUserId());
@@ -419,15 +418,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			return value;
 		}
 
-		if (getVersion() < dlFileVersion.getVersion()) {
-			value = -1;
-		}
-		else if (getVersion() > dlFileVersion.getVersion()) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
+		value = DateUtil.compareTo(getCreateDate(),
+				dlFileVersion.getCreateDate());
 
 		value = value * -1;
 
@@ -592,9 +584,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	private String _name;
 	private String _originalName;
 	private String _description;
-	private double _version;
-	private double _originalVersion;
-	private boolean _setOriginalVersion;
+	private String _version;
+	private String _originalVersion;
 	private int _size;
 	private int _status;
 	private long _statusByUserId;

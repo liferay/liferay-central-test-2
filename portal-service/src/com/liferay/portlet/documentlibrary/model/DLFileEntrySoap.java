@@ -232,19 +232,19 @@ public class DLFileEntrySoap implements Serializable {
 		_description = description;
 	}
 
-	public double getVersion() {
+	public String getVersion() {
 		return _version;
 	}
 
-	public void setVersion(double version) {
+	public void setVersion(String version) {
 		_version = version;
 	}
 
-	public double getPendingVersion() {
+	public String getPendingVersion() {
 		return _pendingVersion;
 	}
 
-	public void setPendingVersion(double pendingVersion) {
+	public void setPendingVersion(String pendingVersion) {
 		_pendingVersion = pendingVersion;
 	}
 
@@ -286,8 +286,8 @@ public class DLFileEntrySoap implements Serializable {
 	private String _name;
 	private String _title;
 	private String _description;
-	private double _version;
-	private double _pendingVersion;
+	private String _version;
+	private String _pendingVersion;
 	private int _size;
 	private int _readCount;
 	private String _extraSettings;

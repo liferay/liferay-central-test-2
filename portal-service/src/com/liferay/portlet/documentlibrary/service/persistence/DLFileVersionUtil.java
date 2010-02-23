@@ -172,21 +172,23 @@ public class DLFileVersionUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByG_F_N_V(
-		long groupId, long folderId, java.lang.String name, double version)
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String version)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
 		return getPersistence().findByG_F_N_V(groupId, folderId, name, version);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByG_F_N_V(
-		long groupId, long folderId, java.lang.String name, double version)
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String version)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByG_F_N_V(groupId, folderId, name, version);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByG_F_N_V(
-		long groupId, long folderId, java.lang.String name, double version,
-		boolean retrieveFromCache)
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String version, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByG_F_N_V(groupId, folderId, name, version,
@@ -268,7 +270,7 @@ public class DLFileVersionUtil {
 	}
 
 	public static void removeByG_F_N_V(long groupId, long folderId,
-		java.lang.String name, double version)
+		java.lang.String name, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
 		getPersistence().removeByG_F_N_V(groupId, folderId, name, version);
@@ -292,7 +294,7 @@ public class DLFileVersionUtil {
 	}
 
 	public static int countByG_F_N_V(long groupId, long folderId,
-		java.lang.String name, double version)
+		java.lang.String name, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_F_N_V(groupId, folderId, name, version);
 	}

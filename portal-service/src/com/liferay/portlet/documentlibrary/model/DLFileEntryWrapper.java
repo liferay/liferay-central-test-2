@@ -182,19 +182,19 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		_dlFileEntry.setDescription(description);
 	}
 
-	public double getVersion() {
+	public java.lang.String getVersion() {
 		return _dlFileEntry.getVersion();
 	}
 
-	public void setVersion(double version) {
+	public void setVersion(java.lang.String version) {
 		_dlFileEntry.setVersion(version);
 	}
 
-	public double getPendingVersion() {
+	public java.lang.String getPendingVersion() {
 		return _dlFileEntry.getPendingVersion();
 	}
 
-	public void setPendingVersion(double pendingVersion) {
+	public void setPendingVersion(java.lang.String pendingVersion) {
 		_dlFileEntry.setPendingVersion(pendingVersion);
 	}
 
