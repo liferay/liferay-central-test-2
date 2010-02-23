@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.util.JCRHook;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
@@ -935,8 +936,31 @@ public class DLFileEntryLocalServiceImpl
 
 			dlFileEntryPersistence.update(fileEntry, false);
 
-			is = dlLocalService.getFileAsStream(
-				user.getCompanyId(), fileEntry.getRepositoryId(), name);
+			int failedFetches = 0;
+
+			while (is == null) {
+				try {
+					is = dlLocalService.getFileAsStream(
+						user.getCompanyId(), fileEntry.getRepositoryId(), name);
+				}
+				catch (NoSuchFileException nsfe) {
+					failedFetches++;
+
+					if (PropsValues.DL_HOOK_IMPL.equals(
+							JCRHook.class.getName()) &&
+						(failedFetches < JCRHook.MAX_FAILED_FETCHES)) {
+
+						try {
+							Thread.sleep(JCRHook.FETCH_DELAY);
+						}
+						catch (InterruptedException ie) {
+						}
+					}
+					else {
+						throw nsfe;
+					}
+				}
+			}
 
 			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
