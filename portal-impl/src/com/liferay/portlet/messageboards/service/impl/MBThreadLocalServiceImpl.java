@@ -137,10 +137,13 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Category
 
-		category.setThreadCount(category.getThreadCount() - 1);
-		category.setMessageCount(category.getMessageCount() - messages.size());
+		if (!rootMessage.isDiscussion()) {
+			category.setThreadCount(category.getThreadCount() - 1);
+			category.setMessageCount(
+				category.getMessageCount() - messages.size());
 
-		mbCategoryPersistence.update(category, false);
+			mbCategoryPersistence.update(category, false);
+		}
 
 		// Thread
 
