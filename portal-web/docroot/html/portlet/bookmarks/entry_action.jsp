@@ -63,7 +63,7 @@ else {
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
+	<c:if test="<%= !view && BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

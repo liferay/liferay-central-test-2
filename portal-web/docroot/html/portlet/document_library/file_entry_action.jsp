@@ -107,7 +107,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 			</c:if>
 
-			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
+			<c:if test="<%= !view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
 				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

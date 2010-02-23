@@ -73,7 +73,7 @@ else {
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.DELETE) %>">
+	<c:if test="<%= !view && CalEventPermission.contains(permissionChecker, event, ActionKeys.DELETE) %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

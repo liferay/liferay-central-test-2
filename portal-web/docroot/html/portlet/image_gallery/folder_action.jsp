@@ -96,7 +96,7 @@ if (row == null) {
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= (folder != null) && IGFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
+	<c:if test="<%= !view && (folder != null) && IGFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 			<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
