@@ -56,6 +56,7 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 			<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 			<aui:input name="publicLayoutSetId" type="hidden" value="<%= publicLayoutSetId %>" />
 
+			<liferay-ui:error exception="<%= ImageTypeException.class %>" message="please-enter-a-file-with-a-valid-file-type" />
 			<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
 			<aui:fieldset>

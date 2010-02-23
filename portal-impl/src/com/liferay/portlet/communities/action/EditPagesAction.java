@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutNameException;
@@ -234,7 +235,8 @@ public class EditPagesAction extends PortletAction {
 
 				sendRedirect(actionRequest, actionResponse, redirect);
 			}
-			else if (e instanceof LayoutFriendlyURLException ||
+			else if (e instanceof ImageTypeException ||
+					 e instanceof LayoutFriendlyURLException ||
 					 e instanceof LayoutHiddenException ||
 					 e instanceof LayoutNameException ||
 					 e instanceof LayoutParentLayoutIdException ||

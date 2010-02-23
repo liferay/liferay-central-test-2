@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.image.Hook;
 import com.liferay.portal.image.HookFactory;
@@ -71,7 +72,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 			_defaultSpacer = getImage(is);
 		}
-		catch (IOException ioe) {
+		catch (Exception ioe) {
 			_log.error(
 				"Unable to configure the default spacer: " + ioe.getMessage());
 		}
@@ -86,7 +87,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 			_defaultCompanyLogo = getImage(is);
 		}
-		catch (IOException ioe) {
+		catch (Exception ioe) {
 			_log.error(
 				"Unable to configure the default company logo: " +
 					ioe.getMessage());
@@ -102,7 +103,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 			_defaultOrganizationLogo = getImage(is);
 		}
-		catch (IOException ioe) {
+		catch (Exception ioe) {
 			_log.error(
 				"Unable to configure the default organization logo: " +
 					ioe.getMessage());
@@ -118,7 +119,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 			_defaultUserFemalePortrait = getImage(is);
 		}
-		catch (IOException ioe) {
+		catch (Exception ioe) {
 			_log.error(
 				"Unable to configure the default user female portrait: " +
 					ioe.getMessage());
@@ -134,7 +135,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 			_defaultUserMalePortrait = getImage(is);
 		}
-		catch (IOException ioe) {
+		catch (Exception ioe) {
 			_log.error(
 				"Unable to configure the default user male portrait: " +
 					ioe.getMessage());
@@ -205,15 +206,15 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return null;
 	}
 
-	public Image getImage(byte[] bytes) throws IOException {
+	public Image getImage(byte[] bytes) throws IOException, PortalException {
 		return getImage(null, bytes);
 	}
 
-	public Image getImage(File file) throws IOException {
+	public Image getImage(File file) throws IOException, PortalException {
 		return getImage(new FileInputStream(file));
 	}
 
-	public Image getImage(InputStream is) throws IOException {
+	public Image getImage(InputStream is) throws IOException, PortalException {
 		return getImage(is, null);
 	}
 
@@ -323,7 +324,8 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return image;
 	}
 
-	protected Image getImage(InputStream is, byte[] bytes) throws IOException {
+	protected Image getImage(InputStream is, byte[] bytes) 
+		throws IOException, PortalException {
 		try {
 			if (is != null) {
 				bytes = FileUtil.getBytes(is);
@@ -335,9 +337,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 			String type = imageBag.getType();
 
 			if (renderedImage == null) {
-				throw new IOException(
-					"Unable to retreive rendered image from input stream " +
-						"with type " + type);
+				throw new ImageTypeException();
 			}
 
 			int height = renderedImage.getHeight();

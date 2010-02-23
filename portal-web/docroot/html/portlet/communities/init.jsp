@@ -26,6 +26,7 @@
 
 <%@ page import="com.liferay.portal.DuplicateGroupException" %>
 <%@ page import="com.liferay.portal.GroupNameException" %>
+<%@ page import="com.liferay.portal.ImageTypeException" %>
 <%@ page import="com.liferay.portal.LARFileException" %>
 <%@ page import="com.liferay.portal.LARTypeException" %>
 <%@ page import="com.liferay.portal.LayoutFriendlyURLException" %>

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -64,7 +65,8 @@ public class EditOrganizationLogoAction extends PortletAction {
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchOrganizationException ||
+			if (e instanceof ImageTypeException ||
+				e instanceof NoSuchOrganizationException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());

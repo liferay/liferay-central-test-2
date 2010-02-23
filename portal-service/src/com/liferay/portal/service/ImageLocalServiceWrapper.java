@@ -130,17 +130,20 @@ public class ImageLocalServiceWrapper implements ImageLocalService {
 	}
 
 	public com.liferay.portal.model.Image getImage(byte[] bytes)
-		throws java.io.IOException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			java.io.IOException {
 		return _imageLocalService.getImage(bytes);
 	}
 
 	public com.liferay.portal.model.Image getImage(java.io.File file)
-		throws java.io.IOException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			java.io.IOException {
 		return _imageLocalService.getImage(file);
 	}
 
 	public com.liferay.portal.model.Image getImage(java.io.InputStream is)
-		throws java.io.IOException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			java.io.IOException {
 		return _imageLocalService.getImage(is);
 	}
 

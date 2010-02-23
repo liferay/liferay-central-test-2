@@ -24,6 +24,8 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
+<liferay-ui:error exception="<%= ImageTypeException.class %>" message="please-enter-a-file-with-a-valid-file-type" />
+
 <c:choose>
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
 		<aui:script>

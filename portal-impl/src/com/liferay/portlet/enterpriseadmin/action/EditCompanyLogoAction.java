@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -66,7 +67,8 @@ public class EditCompanyLogoAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
-			else if (e instanceof UploadException) {
+			else if (e instanceof ImageTypeException ||
+					 e instanceof UploadException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
