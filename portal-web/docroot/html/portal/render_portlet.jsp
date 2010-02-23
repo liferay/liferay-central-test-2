@@ -112,10 +112,11 @@ catch (NoSuchResourceException nsre) {
 				addDefaultResource = true;
 			}
 		}
-	}
-
-	if (!layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL) && !portlet.hasAddPortletPermission(user.getUserId())) {
-		addDefaultResource = false;
+		else {
+			if (portlet.hasAddPortletPermission(user.getUserId())) {
+				addDefaultResource = true;
+			}
+		}
 	}
 
 	if (addDefaultResource) {
