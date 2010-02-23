@@ -508,7 +508,7 @@ public class BaseDeployer {
 
 		updateDeployDirectory(srcFile);
 
-		String excludes = StringPool.BLANK;
+		String excludes = "**/WEB-INF/ext-lib/global";
 
 		if (appServerType.startsWith("jboss")) {
 			excludes += "**/WEB-INF/lib/log4j.jar,";
@@ -544,7 +544,7 @@ public class BaseDeployer {
 			}
 		}
 
-		if (!unpackWar || appServerType.equals("websphere")) {
+		if (!unpackWar || appServerType.equals(ServerDetector.WEBSPHERE_ID)) {
 			File tempDir = new File(
 				SystemProperties.get(SystemProperties.TMP_DIR) +
 					File.separator + Time.getTimestamp());
@@ -592,6 +592,17 @@ public class BaseDeployer {
 			CopyTask.copyDirectory(
 				srcFile, deployDir, StringPool.BLANK, excludes, overwrite,
 				true);
+
+			File extLibGlobalDir = new File(
+				srcFile.getAbsolutePath() + "/WEB-INF/ext-lib/global");
+
+			if (extLibGlobalDir.exists()) {
+				File globalLibDir = new File(PortalUtil.getGlobalLibDir());
+
+				CopyTask.copyDirectory(
+					extLibGlobalDir, globalLibDir, "*.jar", StringPool.BLANK,
+					overwrite, true);
+			}
 
 			CopyTask.copyDirectory(
 				srcFile, deployDir, "**/WEB-INF/web.xml", StringPool.BLANK,
