@@ -197,10 +197,10 @@ public class BaseDeployer {
 				"The system property deployer.app.server.type is not set");
 		}
 
-		if (!appServerType.startsWith(ServerDetector.GERONIMO_ID) &&
-			!appServerType.startsWith(ServerDetector.GLASSFISH_ID) &&
-			!appServerType.startsWith(ServerDetector.JBOSS_ID) &&
-			!appServerType.startsWith(ServerDetector.JONAS_ID) &&
+		if (!appServerType.equals(ServerDetector.GERONIMO_ID) &&
+			!appServerType.equals(ServerDetector.GLASSFISH_ID) &&
+			!appServerType.equals(ServerDetector.JBOSS_ID) &&
+			!appServerType.equals(ServerDetector.JONAS_ID) &&
 			!appServerType.equals(ServerDetector.JETTY_ID) &&
 			!appServerType.equals(ServerDetector.OC4J_ID) &&
 			!appServerType.equals(ServerDetector.RESIN_ID) &&
@@ -212,7 +212,7 @@ public class BaseDeployer {
 				appServerType + " is not a valid application server type");
 		}
 
-		if (appServerType.startsWith(ServerDetector.GLASSFISH_ID) ||
+		if (appServerType.equals(ServerDetector.GLASSFISH_ID) ||
 			appServerType.equals(ServerDetector.WEBLOGIC_ID)) {
 
 			unpackWar = false;
@@ -413,7 +413,7 @@ public class BaseDeployer {
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
-		if (appServerType.startsWith(ServerDetector.GERONIMO_ID)) {
+		if (appServerType.equals(ServerDetector.GERONIMO_ID)) {
 			copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
 		}
 		else if (appServerType.equals(ServerDetector.WEBLOGIC_ID)) {
@@ -510,7 +510,7 @@ public class BaseDeployer {
 
 		String excludes = StringPool.BLANK;
 
-		if (appServerType.startsWith("jboss")) {
+		if (appServerType.equals(ServerDetector.JBOSS_ID)) {
 			excludes += "**/WEB-INF/lib/log4j.jar,";
 		}
 		else if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
@@ -679,7 +679,7 @@ public class BaseDeployer {
 			displayName = getDisplayName(srcFile);
 		}
 
-		if (appServerType.startsWith(ServerDetector.JBOSS_ID)) {
+		if (appServerType.equals(ServerDetector.JBOSS_ID)) {
 			deployDir = jbossPrefix + deployDir;
 		}
 		else if (appServerType.equals(ServerDetector.JETTY_ID) ||
@@ -833,7 +833,7 @@ public class BaseDeployer {
 			displayName = displayName.substring(0, displayName.length() - 4);
 		}
 
-		if (appServerType.startsWith("jboss") &&
+		if (appServerType.equals(ServerDetector.JBOSS_ID) &&
 			Validator.isNotNull(jbossPrefix) &&
 			displayName.startsWith(jbossPrefix)) {
 
@@ -1301,7 +1301,7 @@ public class BaseDeployer {
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
-		if (!appServerType.startsWith(ServerDetector.GERONIMO_ID)) {
+		if (!appServerType.equals(ServerDetector.GERONIMO_ID)) {
 			return;
 		}
 
