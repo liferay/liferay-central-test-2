@@ -58,7 +58,7 @@
 			<param name="legacy.config" value="true" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.1.0" />
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.0" />
 		</antcall>
 
@@ -89,12 +89,12 @@
 			<param name="legacy.config" value="true" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.1.1" />
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.1" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 		</antcall>
 	</target>
 
@@ -120,12 +120,12 @@
 			<param name="legacy.config" value="true" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.1.2" />
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.2" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 		</antcall>
 	</target>
 
@@ -150,12 +150,12 @@
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.0.zip" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.0" />
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-5.2.0/tomcat-6.0.18" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 		</antcall>
 	</target>
 
@@ -180,12 +180,12 @@
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.1.zip" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.1" />
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-5.2.1/tomcat-6.0.18" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 		</antcall>
 	</target>
 
@@ -215,7 +215,7 @@
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 		</antcall>
 	</target>
 
@@ -240,12 +240,12 @@
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.3.zip" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.3" />
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-5.2.3/tomcat-6.0.18" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="" />
+			<param name="test.name" value="SmokeTestSuite" />
 		</antcall>
 	</target>
 
