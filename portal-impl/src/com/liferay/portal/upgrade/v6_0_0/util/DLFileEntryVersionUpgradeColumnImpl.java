@@ -35,12 +35,12 @@ import java.text.NumberFormat;
 public class DLFileEntryVersionUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public static String getNewVersion(double version) {
-		NumberFormat nf = NumberFormat.getInstance();
+		NumberFormat numberFormat = NumberFormat.getInstance();
 
-		nf.setMaximumFractionDigits(1);
-		nf.setMinimumFractionDigits(1);
+		numberFormat.setMaximumFractionDigits(1);
+		numberFormat.setMinimumFractionDigits(1);
 
-		return nf.format(version);
+		return numberFormat.format(version);
 	}
 
 	public DLFileEntryVersionUpgradeColumnImpl(String name) {
