@@ -80,16 +80,16 @@ public interface DB {
 		TYPE_POSTGRESQL, TYPE_SAP, TYPE_SQLSERVER, TYPE_SYBASE
 	};
 
-	public void buildCreateFile(String databaseName, String sqlDir)
+	public void buildCreateFile(String sqlDir, String databaseName)
 		throws IOException;
 
 	public void buildCreateFile(
-			String databaseName, int population, String sqlDir)
+			String sqlDir, String databaseName, int population)
 		throws IOException;
 
 	public String buildSQL(String template) throws IOException;
 
-	public void buildSQLFile(String fileName, String sqlDir)
+	public void buildSQLFile(String sqlDir, String fileName)
 		throws IOException;
 
 	public List<Index> getIndexes() throws SQLException;

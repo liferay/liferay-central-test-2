@@ -57,7 +57,7 @@ public class SAPDB extends BaseDB {
 	}
 
 	protected String buildCreateFileContent(
-		String databaseName, int population, String sqlDir) {
+		String sqlDir, String databaseName, int population) {
 
 		return null;
 	}

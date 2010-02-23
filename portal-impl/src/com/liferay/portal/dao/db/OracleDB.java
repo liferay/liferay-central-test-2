@@ -61,10 +61,10 @@ public class OracleDB extends BaseDB {
 		return template;
 	}
 
-	public void buildSQLFile(String fileName, String sqlDir)
+	public void buildSQLFile(String sqlDir, String fileName)
 		throws IOException {
 
-		String oracle = buildTemplate(fileName, sqlDir);
+		String oracle = buildTemplate(sqlDir, fileName);
 
 		oracle = _preBuildSQL(oracle);
 
@@ -176,7 +176,7 @@ public class OracleDB extends BaseDB {
 	}
 
 	protected String buildCreateFileContent(
-			String databaseName, int population, String sqlDir)
+			String sqlDir, String databaseName, int population)
 		throws IOException {
 
 		String suffix = getSuffix(population);

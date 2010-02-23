@@ -104,7 +104,7 @@ public class DB2DB extends BaseDB {
 	}
 
 	protected String buildCreateFileContent(
-			String databaseName, int population, String sqlDir)
+			String sqlDir, String databaseName, int population)
 		throws IOException {
 
 		String suffix = getSuffix(population);

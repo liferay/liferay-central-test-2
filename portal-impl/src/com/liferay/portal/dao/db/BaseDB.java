@@ -71,16 +71,16 @@ import javax.naming.NamingException;
  */
 public abstract class BaseDB implements DB {
 
-	public void buildCreateFile(String databaseName, String sqlDir)
+	public void buildCreateFile(String sqlDir, String databaseName)
 		throws IOException {
 
-		buildCreateFile(databaseName, POPULATED, sqlDir);
-		buildCreateFile(databaseName, MINIMAL, sqlDir);
-		buildCreateFile(databaseName, SHARDED, sqlDir);
+		buildCreateFile(sqlDir, databaseName, POPULATED);
+		buildCreateFile(sqlDir, databaseName, MINIMAL);
+		buildCreateFile(sqlDir, databaseName, SHARDED);
 	}
 
 	public void buildCreateFile(
-			String databaseName, int population, String sqlDir)
+			String sqlDir, String databaseName, int population)
 		throws IOException {
 
 		String suffix = getSuffix(population);
@@ -91,7 +91,7 @@ public abstract class BaseDB implements DB {
 
 		if (population != SHARDED) {
 			String content = buildCreateFileContent(
-				databaseName, population, sqlDir);
+				sqlDir, databaseName, population);
 
 			if (content != null) {
 				FileUtil.write(file, content);
@@ -99,21 +99,21 @@ public abstract class BaseDB implements DB {
 		}
 		else {
 			String content = buildCreateFileContent(
-				databaseName, MINIMAL, sqlDir);
+				sqlDir, databaseName, MINIMAL);
 
 			if (content != null) {
 				FileUtil.write(file, content);
 			}
 
 			content = buildCreateFileContent(
-				databaseName + "1", MINIMAL, sqlDir);
+				sqlDir, databaseName + "1", MINIMAL);
 
 			if (content != null) {
 				FileUtil.write(file, content, false, true);
 			}
 
 			content = buildCreateFileContent(
-				databaseName + "2", MINIMAL, sqlDir);
+				sqlDir, databaseName + "2", MINIMAL);
 
 			if (content != null) {
 				FileUtil.write(file, content, false, true);
@@ -123,10 +123,10 @@ public abstract class BaseDB implements DB {
 
 	public abstract String buildSQL(String template) throws IOException;
 
-	public void buildSQLFile(String fileName, String sqlDir)
+	public void buildSQLFile(String sqlDir, String fileName)
 		throws IOException {
 
-		String template = buildTemplate(fileName, sqlDir);
+		String template = buildTemplate(sqlDir, fileName);
 
 		template = buildSQL(template);
 
@@ -474,7 +474,7 @@ public abstract class BaseDB implements DB {
 	}
 
 	protected abstract String buildCreateFileContent(
-			String databaseName, int population, String sqlDir)
+			String sqlDir, String databaseName, int population)
 		throws IOException;
 
 	protected String[] buildColumnNameTokens(String line) {
@@ -517,7 +517,7 @@ public abstract class BaseDB implements DB {
 		return template;
 	}
 
-	protected String buildTemplate(String fileName, String sqlDir)
+	protected String buildTemplate(String sqlDir, String fileName)
 		throws IOException {
 
 		File file = new File(sqlDir + "/" + fileName + ".sql");
@@ -576,7 +576,7 @@ public abstract class BaseDB implements DB {
 		}
 
 		if (fileName.equals("indexes") && (this instanceof SybaseDB)) {
-			template = removeBooleanIndexes(template, sqlDir);
+			template = removeBooleanIndexes(sqlDir, template);
 		}
 
 		return template;
@@ -749,7 +749,7 @@ public abstract class BaseDB implements DB {
 		return sb.toString();
 	}
 
-	protected String removeBooleanIndexes(String data, String sqlDir)
+	protected String removeBooleanIndexes(String sqlDir, String data)
 		throws IOException {
 
 		String portalData = FileUtil.read(sqlDir + "/portal-tables.sql");
