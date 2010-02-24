@@ -24,7 +24,7 @@
 
 
 <liferay-ui:search-container
-	headerNames="name,asset-title,due-date,state"
+	headerNames="name,asset-title,last-activity-date,due-date,state"
 	iteratorURL="<%= portletURL %>"
 >
 
@@ -155,6 +155,25 @@
 			WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
 			buffer.append(workflowHandler.getTitle(classPK));
+			%>
+
+		</liferay-ui:search-container-column-text>
+
+		<liferay-ui:search-container-column-text
+			buffer="buffer"
+			name="last-activity-date"
+			href="<%= rowURL %>"
+		>
+
+			<%
+			List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(workflowTask.getWorkflowTaskId(), 0, 1, new WorkflowLogCreateDateComparator(false));
+
+			if (workflowLogs.size() == 0) {
+				buffer.append(LanguageUtil.get(pageContext, "never"));
+			}
+			else {
+				buffer.append(dateFormatDateTime.format(workflowLogs.get(0).getCreateDate()));
+			}
 			%>
 
 		</liferay-ui:search-container-column-text>
