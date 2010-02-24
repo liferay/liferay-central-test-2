@@ -26,10 +26,12 @@ import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xmlrpc.Response;
@@ -120,6 +122,7 @@ public class LinkbackProducerUtil {
 
 		Http.Options options = new Http.Options();
 
+		options.addHeader(HttpHeaders.USER_AGENT, ReleaseInfo.getServerInfo());
 		options.setLocation(trackback);
 		options.setParts(parts);
 		options.setPost(true);
