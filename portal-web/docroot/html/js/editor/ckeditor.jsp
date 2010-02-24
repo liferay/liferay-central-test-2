@@ -52,6 +52,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			textArea.value = parent.<%= HtmlUtil.escape(initMethod) %>();
 
 			CKEDITOR.config.toolbar = '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>';
+			CKEDITOR.config.customConfig = '<%= request.getContextPath() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>';
 		}
 
 		function getHTML() {
