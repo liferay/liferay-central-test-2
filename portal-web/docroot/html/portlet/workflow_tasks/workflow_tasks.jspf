@@ -168,11 +168,13 @@
 			<%
 			List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(workflowTask.getWorkflowTaskId(), 0, 1, new WorkflowLogCreateDateComparator(false));
 
-			if (workflowLogs.size() == 0) {
+			if (workflowLogs.isEmpty()) {
 				buffer.append(LanguageUtil.get(pageContext, "never"));
 			}
 			else {
-				buffer.append(dateFormatDateTime.format(workflowLogs.get(0).getCreateDate()));
+				WorkflowLog workflowLog = workflowLogs.get(0);
+
+				buffer.append(dateFormatDateTime.format(workflowLog.getCreateDate()));
 			}
 			%>
 
