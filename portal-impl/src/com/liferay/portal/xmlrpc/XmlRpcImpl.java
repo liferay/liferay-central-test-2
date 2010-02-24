@@ -24,9 +24,11 @@ package com.liferay.portal.xmlrpc;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xmlrpc.Fault;
@@ -89,6 +91,7 @@ public class XmlRpcImpl implements XmlRpc {
 
 		Http.Options options = new Http.Options();
 
+		options.addHeader(HttpHeaders.USER_AGENT, ReleaseInfo.getServerInfo());
 		options.setBody(requestXML, ContentTypes.TEXT_XML, StringPool.UTF8);
 		options.setLocation(url);
 		options.setPost(true);

@@ -188,6 +188,8 @@ public class LinkbackProducerUtil {
 		try {
 			Http.Options options = new Http.Options();
 
+			options.addHeader(
+				HttpHeaders.USER_AGENT, ReleaseInfo.getServerInfo());
 			options.setLocation(targetUri);
 			options.setHead(true);
 
