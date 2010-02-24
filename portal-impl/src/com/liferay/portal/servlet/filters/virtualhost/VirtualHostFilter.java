@@ -345,7 +345,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 	private static final String _PATH_PBHS = "/pbhs/";
 
-	private static final String _PATH_PINGBACK = "/pingback/";
+	private static final String _PATH_PINGBACK = "/pingback";
 
 	private static final String _PATH_POLLER = "/poller/";
 
