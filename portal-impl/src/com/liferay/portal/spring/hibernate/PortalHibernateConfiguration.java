@@ -22,6 +22,8 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -88,6 +90,12 @@ public class PortalHibernateConfiguration
 			}
 
 			configuration.setProperties(PropsUtil.getProperties());
+
+			DB db = DBFactoryUtil.getDB();
+
+			if (db.getType().equals(DB.TYPE_HYPERSONIC)) {
+				configuration.setProperty("hibernate.jdbc.batch_size", "0");
+			}
 		}
 		catch (Exception e1) {
 			_log.error(e1, e1);
