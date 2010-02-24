@@ -305,6 +305,7 @@ action.PERMISSIONS_USER=Benutzer-Rechte
 action.PREFERENCES=Einstellungen
 action.PRINT=Drucken
 action.PUBLISH_STAGING=Staging veröffentlichen
+action.PUBLISH_TO_REMOTE=Veröffentlichen Sie zur Direktübertragung (Automatic Translation)
 action.REPLY_TO_MESSAGE=Auf Nachricht antworten
 action.SIGNAL=Signalisieren
 action.SUBSCRIBE=Abonnieren

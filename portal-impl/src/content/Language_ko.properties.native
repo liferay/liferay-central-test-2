@@ -305,6 +305,7 @@ action.PERMISSIONS_USER=허가 사용자
 action.PREFERENCES=특혜
 action.PRINT=인쇄
 action.PUBLISH_STAGING=발판을 간행하십시요
+action.PUBLISH_TO_REMOTE=리모트에 간행하십시오 (Automatic Translation)
 action.REPLY_TO_MESSAGE=메시지에 대답
 action.SIGNAL=신호
 action.SUBSCRIBE=구독하십시요

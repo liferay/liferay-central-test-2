@@ -151,7 +151,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 		<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup()) && (pagesCount > 0) %>">
 			<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
 
-			<c:if test="<%= !selGroup.isLayoutSetPrototype() %>">
+			<c:if test="<%= !selGroup.isLayoutSetPrototype() && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_TO_REMOTE)%>">
 				<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL %>', title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote") %>'});" />
 			</c:if>
 

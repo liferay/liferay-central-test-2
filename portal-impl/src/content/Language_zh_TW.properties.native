@@ -305,6 +305,7 @@ action.PERMISSIONS_USER=允許用戶
 action.PREFERENCES=特選
 action.PRINT=印刷品
 action.PUBLISH_STAGING=出版分級法
+action.PUBLISH_TO_REMOTE=出版到遙控 (Automatic Translation)
 action.REPLY_TO_MESSAGE=給消息的回復
 action.SIGNAL=信號
 action.SUBSCRIBE=訂閱

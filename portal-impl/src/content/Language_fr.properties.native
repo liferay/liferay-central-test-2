@@ -305,6 +305,7 @@ action.PERMISSIONS_USER=Permissions de l'utilisateur
 action.PREFERENCES=Préférences
 action.PRINT=Imprimer
 action.PUBLISH_STAGING=Éditez la pré-publication
+action.PUBLISH_TO_REMOTE=Éditez à l'extérieur (Automatic Translation)
 action.REPLY_TO_MESSAGE=Répondre au message
 action.SIGNAL=Signaler
 action.SUBSCRIBE=Souscrire

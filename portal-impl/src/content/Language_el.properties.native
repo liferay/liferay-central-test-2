@@ -305,6 +305,7 @@ action.PERMISSIONS_USER=Χρήστης αδειών
 action.PREFERENCES=Προτιμήσεις
 action.PRINT=Τυπωμένη ύλη
 action.PUBLISH_STAGING=Δημοσιεύστε την οργάνωση
+action.PUBLISH_TO_REMOTE=Δημοσιεύστε σε μακρινό (Automatic Translation)
 action.REPLY_TO_MESSAGE=Απάντηση στο μήνυμα
 action.SIGNAL=Σήμα
 action.SUBSCRIBE=Προσυπογράψτε

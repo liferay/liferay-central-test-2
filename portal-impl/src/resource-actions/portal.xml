@@ -296,6 +296,7 @@
 			<action-key>MANAGE_STAGING</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>PUBLISH_STAGING</action-key>
+			<action-key>PUBLISH_TO_REMOTE</action-key>
 			<action-key>UPDATE</action-key>
 		</supports>
 		<community-defaults />
@@ -312,6 +313,7 @@
 			<action-key>MANAGE_STAGING</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>PUBLISH_STAGING</action-key>
+			<action-key>PUBLISH_TO_REMOTE</action-key>
 			<action-key>UPDATE</action-key>
 		</guest-unsupported>
 	</model-resource>

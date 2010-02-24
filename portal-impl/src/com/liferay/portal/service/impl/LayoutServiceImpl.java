@@ -340,7 +340,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		}
 		else {
 			GroupPermissionUtil.check(
-				permissionChecker, sourceGroupId, ActionKeys.MANAGE_LAYOUTS);
+				permissionChecker, sourceGroupId, ActionKeys.PUBLISH_TO_REMOTE);
 		}
 
 		LayoutsRemotePublisherRequest publisherRequest =

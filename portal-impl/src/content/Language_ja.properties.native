@@ -305,6 +305,7 @@ action.PERMISSIONS_USER=ユーザの承認
 action.PREFERENCES=設定
 action.PRINT=印刷
 action.PUBLISH_STAGING=ステージングの公開
+action.PUBLISH_TO_REMOTE=リモートに出版しなさい (Automatic Translation)
 action.REPLY_TO_MESSAGE=コメントへの返信
 action.SIGNAL=シグナル送信
 action.SUBSCRIBE=メール通知

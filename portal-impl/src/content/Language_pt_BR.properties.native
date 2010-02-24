@@ -305,6 +305,7 @@ action.PERMISSIONS_USER=Permissões de usuário
 action.PREFERENCES=Preferências
 action.PRINT=Imprimir
 action.PUBLISH_STAGING=Publicar staging
+action.PUBLISH_TO_REMOTE=Publique ao telecontrole (Automatic Translation)
 action.REPLY_TO_MESSAGE=Responder mensagem
 action.SIGNAL=Sinalizar
 action.SUBSCRIBE=Subscrever
