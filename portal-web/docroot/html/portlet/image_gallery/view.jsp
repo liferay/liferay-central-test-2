@@ -72,7 +72,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 			</c:if>
 
 			<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
-				<liferay-ui:panel-container id="imageGalleryPanelContainer" extended="<%= false %>" persistState="<%= true %>">
+				<liferay-ui:panel-container extended="<%= false %>" id="imageGalleryPanelContainer" persistState="<%= true %>">
 					<c:if test="<%= folder != null %>">
 						<div class="folder-description">
 							<%= folder.getDescription() %>
