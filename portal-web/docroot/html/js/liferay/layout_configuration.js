@@ -159,6 +159,7 @@ AUI().add(
 					}
 					else {
 						var layoutOptions = Liferay.Layout.options;
+
 						var firstColumn = A.one(layoutOptions.dropNodes);
 
 						if (firstColumn) {
