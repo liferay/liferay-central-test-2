@@ -62,9 +62,15 @@ if (curTagsParam != null) {
 		{
 			allowSuggestions: true,
 			contentBox: '#<%= namespace + randomNamespace %>assetTagsSelector',
-			contentCallback: function() {
-				return <%= contentCallback %>();
-			},
+
+			<c:if test="<%= suggestible %>">
+				contentCallback: function() {
+					if (window.<%= contentCallback %>) {
+						return <%= contentCallback %>();
+					}
+				},
+			</c:if>
+
 			curEntries: '<%= HtmlUtil.escapeJS(curTags) %>',
 			focused: <%= focus %>,
 			hiddenInput: '#<%= namespace + hiddenInput %>',

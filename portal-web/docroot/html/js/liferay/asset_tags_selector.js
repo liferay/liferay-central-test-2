@@ -291,33 +291,40 @@ AUI().add(
 
 					var contentBox = instance.get('contentBox');
 
+					var toolSet = [
+						{
+							icon: 'plus',
+							id: 'add',
+							handler: function(event) {
+								instance.entries.add(instance.inputNode.val(), {});
+							}
+						},
+						{
+							icon: 'search',
+							id: 'select',
+							handler: {
+								fn: instance._showSelectPopup,
+								context: instance
+							}
+						}
+					];
+
+					if (instance.get('contentCallback')) {
+						toolSet.push(
+							{
+								icon: 'comment',
+								id: 'suggest',
+								handler: {
+									fn: instance._showSuggestionsPopup,
+									context: instance
+								}
+							}
+						);
+					}
+
 					instance.toolset = new A.ToolSet(
 						{
-							tools: [
-								{
-									icon: 'plus',
-									id: 'add',
-									handler: function(event) {
-										instance.entries.add(instance.inputNode.val(), {});
-									}
-								},
-								{
-									icon: 'search',
-									id: 'select',
-									handler: {
-										fn: instance._showSelectPopup,
-										context: instance
-									}
-								},
-								{
-									icon: 'comment',
-									id: 'suggest',
-									handler: {
-										fn: instance._showSuggestionsPopup,
-										context: instance
-									}
-								}
-							]
+							tools: toolSet
 						}
 					).render(contentBox);
 
