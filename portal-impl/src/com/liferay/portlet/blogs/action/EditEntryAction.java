@@ -220,7 +220,7 @@ public class EditEntryAction extends PortletAction {
 				BlogsEntry entry = (BlogsEntry)renderRequest.getAttribute(
 					WebKeys.BLOGS_ENTRY);
 
-				if (entry != null && entry.isAllowPingbacks()) {
+				if ((entry != null) && entry.isAllowPingbacks()) {
 					HttpServletResponse response =
 						PortalUtil.getHttpServletResponse(renderResponse);
 

@@ -81,15 +81,15 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 			{ "urlTitle", new Integer(Types.VARCHAR) },
 			{ "content", new Integer(Types.CLOB) },
 			{ "displayDate", new Integer(Types.TIMESTAMP) },
-			{ "allowTrackbacks", new Integer(Types.BOOLEAN) },
 			{ "allowPingbacks", new Integer(Types.BOOLEAN) },
+			{ "allowTrackbacks", new Integer(Types.BOOLEAN) },
 			{ "trackbacks", new Integer(Types.CLOB) },
 			{ "status", new Integer(Types.INTEGER) },
 			{ "statusByUserId", new Integer(Types.BIGINT) },
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null,allowTrackbacks BOOLEAN,allowPingbacks BOOLEAN,trackbacks TEXT null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null,allowPingbacks BOOLEAN,allowTrackbacks BOOLEAN,trackbacks TEXT null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table BlogsEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY blogsEntry.displayDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY BlogsEntry.displayDate DESC";
@@ -118,8 +118,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		model.setUrlTitle(soapModel.getUrlTitle());
 		model.setContent(soapModel.getContent());
 		model.setDisplayDate(soapModel.getDisplayDate());
-		model.setAllowTrackbacks(soapModel.getAllowTrackbacks());
 		model.setAllowPingbacks(soapModel.getAllowPingbacks());
+		model.setAllowTrackbacks(soapModel.getAllowTrackbacks());
 		model.setTrackbacks(soapModel.getTrackbacks());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
@@ -287,18 +287,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		_displayDate = displayDate;
 	}
 
-	public boolean getAllowTrackbacks() {
-		return _allowTrackbacks;
-	}
-
-	public boolean isAllowTrackbacks() {
-		return _allowTrackbacks;
-	}
-
-	public void setAllowTrackbacks(boolean allowTrackbacks) {
-		_allowTrackbacks = allowTrackbacks;
-	}
-
 	public boolean getAllowPingbacks() {
 		return _allowPingbacks;
 	}
@@ -309,6 +297,18 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 
 	public void setAllowPingbacks(boolean allowPingbacks) {
 		_allowPingbacks = allowPingbacks;
+	}
+
+	public boolean getAllowTrackbacks() {
+		return _allowTrackbacks;
+	}
+
+	public boolean isAllowTrackbacks() {
+		return _allowTrackbacks;
+	}
+
+	public void setAllowTrackbacks(boolean allowTrackbacks) {
+		_allowTrackbacks = allowTrackbacks;
 	}
 
 	public String getTrackbacks() {
@@ -382,8 +382,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 			model.setUrlTitle(HtmlUtil.escape(getUrlTitle()));
 			model.setContent(HtmlUtil.escape(getContent()));
 			model.setDisplayDate(getDisplayDate());
-			model.setAllowTrackbacks(getAllowTrackbacks());
 			model.setAllowPingbacks(getAllowPingbacks());
+			model.setAllowTrackbacks(getAllowTrackbacks());
 			model.setTrackbacks(HtmlUtil.escape(getTrackbacks()));
 			model.setStatus(getStatus());
 			model.setStatusByUserId(getStatusByUserId());
@@ -426,8 +426,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		clone.setUrlTitle(getUrlTitle());
 		clone.setContent(getContent());
 		clone.setDisplayDate(getDisplayDate());
-		clone.setAllowTrackbacks(getAllowTrackbacks());
 		clone.setAllowPingbacks(getAllowPingbacks());
+		clone.setAllowTrackbacks(getAllowTrackbacks());
 		clone.setTrackbacks(getTrackbacks());
 		clone.setStatus(getStatus());
 		clone.setStatusByUserId(getStatusByUserId());
@@ -506,10 +506,10 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		sb.append(getContent());
 		sb.append(", displayDate=");
 		sb.append(getDisplayDate());
-		sb.append(", allowTrackbacks=");
-		sb.append(getAllowTrackbacks());
 		sb.append(", allowPingbacks=");
 		sb.append(getAllowPingbacks());
+		sb.append(", allowTrackbacks=");
+		sb.append(getAllowTrackbacks());
 		sb.append(", trackbacks=");
 		sb.append(getTrackbacks());
 		sb.append(", status=");
@@ -581,12 +581,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		sb.append(getDisplayDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>allowTrackbacks</column-name><column-value><![CDATA[");
-		sb.append(getAllowTrackbacks());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>allowPingbacks</column-name><column-value><![CDATA[");
 		sb.append(getAllowPingbacks());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>allowTrackbacks</column-name><column-value><![CDATA[");
+		sb.append(getAllowTrackbacks());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>trackbacks</column-name><column-value><![CDATA[");
@@ -631,8 +631,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	private String _originalUrlTitle;
 	private String _content;
 	private Date _displayDate;
-	private boolean _allowTrackbacks;
 	private boolean _allowPingbacks;
+	private boolean _allowTrackbacks;
 	private String _trackbacks;
 	private int _status;
 	private long _statusByUserId;

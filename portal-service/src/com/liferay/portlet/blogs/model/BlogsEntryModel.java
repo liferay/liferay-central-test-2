@@ -108,17 +108,17 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 
 	public void setDisplayDate(Date displayDate);
 
-	public boolean getAllowTrackbacks();
-
-	public boolean isAllowTrackbacks();
-
-	public void setAllowTrackbacks(boolean allowTrackbacks);
-
 	public boolean getAllowPingbacks();
 
 	public boolean isAllowPingbacks();
 
 	public void setAllowPingbacks(boolean allowPingbacks);
+
+	public boolean getAllowTrackbacks();
+
+	public boolean isAllowTrackbacks();
+
+	public void setAllowTrackbacks(boolean allowTrackbacks);
 
 	public String getTrackbacks();
 

@@ -25,13 +25,13 @@
 <%@ include file="/html/portlet/blogs/init.jsp" %>
 
 <%
-response.addHeader("X-Pingback", "http://localhost:8081/pingback");
-
 String redirect = (String)request.getAttribute("view_entry_content.jsp-redirect");
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute("view_entry_content.jsp-entry");
 
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp-assetEntry");
+
+response.addHeader("X-Pingback", "http://localhost:8080/pingback");
 %>
 
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) && ((entry.getStatus() == StatusConstants.APPROVED) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE)) %>">

@@ -40,13 +40,16 @@ public class LinkbackMessageListener implements MessageListener {
 
 	public void receive(Message message) {
 		try {
-			LinkbackConsumerUtil.verifyNewTrackbacks();
-
-			LinkbackProducerUtil.sendQueuedPingbacks();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to process message " + message, e);
 		}
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		LinkbackConsumerUtil.verifyNewTrackbacks();
+		LinkbackProducerUtil.sendQueuedPingbacks();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

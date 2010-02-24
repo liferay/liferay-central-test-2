@@ -600,13 +600,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		notifySubscribers(entry, serviceContext);
 
-		// Linkbacks
+		// Ping
 
-		if (entry.isApproved()) {
-			pingGoogle(entry, serviceContext);
-			pingPingback(entry, serviceContext);
-			pingTrackbacks(entry, trackbacks, pingOldTrackbaks, serviceContext);
-		}
+		pingGoogle(entry, serviceContext);
+		pingPingback(entry, serviceContext);
+		pingTrackbacks(entry, trackbacks, pingOldTrackbaks, serviceContext);
 
 		return entry;
 	}
@@ -835,7 +833,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	protected void pingGoogle(BlogsEntry entry, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.BLOGS_PING_GOOGLE_ENABLED) {
+		if (!PropsValues.BLOGS_PING_GOOGLE_ENABLED || !entry.isApproved()) {
 			return;
 		}
 
@@ -880,11 +878,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 	}
 
-	protected void pingPingback(BlogsEntry entry, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+	protected void pingPingback(
+		BlogsEntry entry, ServiceContext serviceContext) {
 
 		if (!PropsValues.BLOGS_PINGBACK_ENABLED ||
-			!entry.isAllowPingbacks()) {
+			!entry.isAllowPingbacks() || !entry.isApproved()) {
 
 			return;
 		}
@@ -923,7 +921,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (!PropsValues.BLOGS_TRACKBACK_ENABLED ||
-			!entry.isAllowTrackbacks()) {
+			!entry.isAllowTrackbacks() || !entry.isApproved()) {
 
 			return;
 		}

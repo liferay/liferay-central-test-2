@@ -1164,8 +1164,8 @@
 			<basic name="displayDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="allowTrackbacks" />
 			<basic name="allowPingbacks" />
+			<basic name="allowTrackbacks" />
 			<basic name="trackbacks" />
 			<basic name="status" />
 			<basic name="statusByUserId" />

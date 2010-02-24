@@ -86,8 +86,8 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		newBlogsEntry.setUrlTitle(randomString());
 		newBlogsEntry.setContent(randomString());
 		newBlogsEntry.setDisplayDate(nextDate());
-		newBlogsEntry.setAllowTrackbacks(randomBoolean());
 		newBlogsEntry.setAllowPingbacks(randomBoolean());
+		newBlogsEntry.setAllowTrackbacks(randomBoolean());
 		newBlogsEntry.setTrackbacks(randomString());
 		newBlogsEntry.setStatus(nextInt());
 		newBlogsEntry.setStatusByUserId(nextLong());
@@ -117,10 +117,10 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingBlogsEntry.getContent(), newBlogsEntry.getContent());
 		assertEquals(Time.getShortTimestamp(existingBlogsEntry.getDisplayDate()),
 			Time.getShortTimestamp(newBlogsEntry.getDisplayDate()));
-		assertEquals(existingBlogsEntry.getAllowTrackbacks(),
-			newBlogsEntry.getAllowTrackbacks());
 		assertEquals(existingBlogsEntry.getAllowPingbacks(),
 			newBlogsEntry.getAllowPingbacks());
+		assertEquals(existingBlogsEntry.getAllowTrackbacks(),
+			newBlogsEntry.getAllowTrackbacks());
 		assertEquals(existingBlogsEntry.getTrackbacks(),
 			newBlogsEntry.getTrackbacks());
 		assertEquals(existingBlogsEntry.getStatus(), newBlogsEntry.getStatus());
@@ -214,8 +214,8 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		blogsEntry.setUrlTitle(randomString());
 		blogsEntry.setContent(randomString());
 		blogsEntry.setDisplayDate(nextDate());
-		blogsEntry.setAllowTrackbacks(randomBoolean());
 		blogsEntry.setAllowPingbacks(randomBoolean());
+		blogsEntry.setAllowTrackbacks(randomBoolean());
 		blogsEntry.setTrackbacks(randomString());
 		blogsEntry.setStatus(nextInt());
 		blogsEntry.setStatusByUserId(nextLong());

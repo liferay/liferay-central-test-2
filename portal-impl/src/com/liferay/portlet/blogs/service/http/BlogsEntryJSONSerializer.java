@@ -91,8 +91,8 @@ public class BlogsEntryJSONSerializer {
 		}
 
 		jsonObj.put("displayDate", displayDateJSON);
-		jsonObj.put("allowTrackbacks", model.getAllowTrackbacks());
 		jsonObj.put("allowPingbacks", model.getAllowPingbacks());
+		jsonObj.put("allowTrackbacks", model.getAllowTrackbacks());
 		jsonObj.put("trackbacks", model.getTrackbacks());
 		jsonObj.put("status", model.getStatus());
 		jsonObj.put("statusByUserId", model.getStatusByUserId());

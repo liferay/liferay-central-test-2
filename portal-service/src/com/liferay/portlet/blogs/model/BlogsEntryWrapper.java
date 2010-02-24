@@ -157,18 +157,6 @@ public class BlogsEntryWrapper implements BlogsEntry {
 		_blogsEntry.setDisplayDate(displayDate);
 	}
 
-	public boolean getAllowTrackbacks() {
-		return _blogsEntry.getAllowTrackbacks();
-	}
-
-	public boolean isAllowTrackbacks() {
-		return _blogsEntry.isAllowTrackbacks();
-	}
-
-	public void setAllowTrackbacks(boolean allowTrackbacks) {
-		_blogsEntry.setAllowTrackbacks(allowTrackbacks);
-	}
-
 	public boolean getAllowPingbacks() {
 		return _blogsEntry.getAllowPingbacks();
 	}
@@ -179,6 +167,18 @@ public class BlogsEntryWrapper implements BlogsEntry {
 
 	public void setAllowPingbacks(boolean allowPingbacks) {
 		_blogsEntry.setAllowPingbacks(allowPingbacks);
+	}
+
+	public boolean getAllowTrackbacks() {
+		return _blogsEntry.getAllowTrackbacks();
+	}
+
+	public boolean isAllowTrackbacks() {
+		return _blogsEntry.isAllowTrackbacks();
+	}
+
+	public void setAllowTrackbacks(boolean allowTrackbacks) {
+		_blogsEntry.setAllowTrackbacks(allowTrackbacks);
 	}
 
 	public java.lang.String getTrackbacks() {

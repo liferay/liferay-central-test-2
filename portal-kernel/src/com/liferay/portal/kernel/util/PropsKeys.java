@@ -187,17 +187,17 @@ public interface PropsKeys {
 
 	public static final String BLOGS_ENTRY_COMMENTS_ENABLED = "blogs.entry.comments.enabled";
 
-	public static final String BLOGS_PAGE_ABSTRACT_LENGTH = "blogs.page.abstract.length";
-
-	public static final String BLOGS_PING_GOOGLE_ENABLED = "blogs.ping.google.enabled";
-
-	public static final String BLOGS_RSS_ABSTRACT_LENGTH = "blogs.rss.abstract.length";
-
 	public static final String BLOGS_LINKBACK_EXCERPT_LENGTH = "blogs.linkback.excerpt.length";
 
 	public static final String BLOGS_LINKBACK_JOB_INTERVAL = "blogs.linkback.job.interval";
 
+	public static final String BLOGS_PAGE_ABSTRACT_LENGTH = "blogs.page.abstract.length";
+
+	public static final String BLOGS_PING_GOOGLE_ENABLED = "blogs.ping.google.enabled";
+
 	public static final String BLOGS_PINGBACK_ENABLED = "blogs.pingback.enabled";
+
+	public static final String BLOGS_RSS_ABSTRACT_LENGTH = "blogs.rss.abstract.length";
 
 	public static final String BLOGS_TRACKBACK_ENABLED = "blogs.trackback.enabled";
 
