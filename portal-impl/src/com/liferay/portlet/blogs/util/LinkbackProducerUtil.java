@@ -129,8 +129,8 @@ public class LinkbackProducerUtil {
 
 		String xml = HttpUtil.URLtoString(options);
 
-		if (_log.isInfoEnabled()) {
-			_log.info(xml);
+		if (_log.isDebugEnabled()) {
+			_log.debug(xml);
 		}
 
 		String error = xml;
@@ -154,6 +154,10 @@ public class LinkbackProducerUtil {
 					xmlStreamReader.getElementText(), 1);
 
 				if (status == 0) {
+					if (_log.isInfoEnabled()) {
+						_log.info("Trackback accepted");
+					}
+
 					return true;
 				}
 
