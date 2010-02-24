@@ -49,11 +49,6 @@ import javax.xml.stream.XMLStreamReader;
 import net.htmlparser.jericho.Source;
 import net.htmlparser.jericho.StartTag;
 
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.methods.HeadMethod;
-
 /**
  * <a href="LinkbackProducerUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -188,17 +183,16 @@ public class LinkbackProducerUtil {
 		String serverUri = null;
 
 		try {
-			HttpClient httpClient = new HttpClient();
+			Http.Options options = new Http.Options();
 
-			HttpMethodBase method = new HeadMethod(targetUri);
+			options.setLocation(targetUri);
+			options.setHead(true);
 
-			httpClient.executeMethod(method);
+			HttpUtil.URLtoString(targetUri);
 
-			Header header = method.getResponseHeader("X-Pingback");
+			Http.Response response = options.getResponse();
 
-			if (header != null) {
-				serverUri = header.getValue();
-			}
+			serverUri = response.getHeader("X-Pingback");
 		}
 		catch (Exception e) {
 			_log.error("Unable to call HEAD of " + targetUri, e);
