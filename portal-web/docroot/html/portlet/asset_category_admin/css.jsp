@@ -140,12 +140,6 @@
 	background: #D3DADD;
 }
 
-.portlet-asset-category-admin .ui-asset-categories .nowrap {
-	empty-cells: show;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
 .portlet-asset-category-admin .vocabulary-search-bar {
 	background: #F0F2F4;
 	border: 1px solid #D3D7DB;

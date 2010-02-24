@@ -110,12 +110,6 @@
 	background: #D3DADD;
 }
 
-.portlet-asset-tags-admin .ui-tags .nowrap {
-	empty-cells: show;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
 .portlet-asset-tags-admin .tags-admin-search-bar {
 	background: #F0F2F4;
 	border: 1px solid #D3D7DB;
