@@ -639,6 +639,7 @@ allow-anonymous-posting=Permitir a usuarios anónimos escribir mensajes
 allow-community-administrators-to-use-their-own-logo=Permitir que los administradores de comunidades utilicen su propio logo
 allow-dictionary-words-help=Si se activa esta opción, se permitirán palabras del diccionario como contraseñas del usuario.
 allow-dictionary-words=Permitir palabras del diccionario
+allow-incoming-pingbacks=Permita Pingbacks entrante (Automatic Translation)
 allow-incoming-trackbacks=Permitir trackbacks entrantes
 allow-strangers-to-create-accounts-with-a-company-email-address=Permitir que usuarios anónimos creen cuentas con una dirección de correo del portal
 allow-strangers-to-create-accounts=Permitir que usuarios anónimos creen cuentas
