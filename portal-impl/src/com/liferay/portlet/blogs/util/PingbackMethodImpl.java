@@ -22,12 +22,14 @@
 
 package com.liferay.portlet.blogs.util;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapperThreadLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -40,8 +42,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -72,7 +72,13 @@ import net.htmlparser.jericho.TextExtractor;
  */
 public class PingbackMethodImpl implements Method {
 
+	public static int ACCESS_DENIED = 49;
+
 	public static int GENERIC_FAULT = 0;
+
+	public static int PINGBACK_ALREADY_REGISTERED = 48;
+
+	public static int SERVER_ERROR = 50;
 
 	public static int SOURCE_URI_DOES_NOT_EXIST = 16;
 
@@ -81,12 +87,6 @@ public class PingbackMethodImpl implements Method {
 	public static int TARGET_URI_DOES_NOT_EXIST = 32;
 
 	public static int TARGET_URI_INVALID = 33;
-
-	public static int PINGBACK_ALREADY_REGISTERED = 48;
-
-	public static int ACCESS_DENIED = 49;
-
-	public static int SERVER_ERROR = 50;
 
 	public Response execute(long companyId) {
 		if (!PropsValues.BLOGS_PINGBACK_ENABLED) {
@@ -118,21 +118,20 @@ public class PingbackMethodImpl implements Method {
 				MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
 					userId, className, classPK, StatusConstants.APPROVED);
 
-			ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
-
 			MBThread thread = messageDisplay.getThread();
 
 			long threadId = thread.getThreadId();
 			long parentMessageId = thread.getRootMessageId();
 			String body =
 				"[...] " + getExcerpt() + " [...] [url=" + _sourceUri + "]" +
-					themeDisplay.translate("read-more") + "[/url]";
+					LanguageUtil.get(LocaleUtil.getDefault(), "read-more") +
+						"[/url]";
 
 			MBMessageLocalServiceUtil.addDiscussionMessage(
-				userId, "", className, classPK, threadId, parentMessageId,
-				"", body, new ServiceContext());
+				userId, StringPool.BLANK, className, classPK, threadId,
+				parentMessageId, StringPool.BLANK, body, new ServiceContext());
 
-			response = XmlRpcUtil.createSuccess("Pingback accepted");
+			return XmlRpcUtil.createSuccess("Pingback accepted");
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
@@ -142,23 +141,18 @@ public class PingbackMethodImpl implements Method {
 			return XmlRpcUtil.createFault(
 				TARGET_URI_INVALID, "Error parsing target URI");
 		}
-
-		return response;
 	}
 
-	public boolean setArguments(Object[] args) {
-		boolean result = false;
-
+	public boolean setArguments(Object[] arguments) {
 		try {
-			_sourceUri = (String)args[0];
-			_targetUri = (String)args[1];
+			_sourceUri = (String)arguments[0];
+			_targetUri = (String)arguments[1];
 
-			result = true;
+			return true;
 		}
 		catch (Exception e) {
+			return false;
 		}
-
-		return result;
 	}
 
 	protected BlogsEntry getBlogsEntry(long companyId) throws Exception {
@@ -185,7 +179,8 @@ public class PingbackMethodImpl implements Method {
 		Portlet portlet =
 			PortletLocalServiceUtil.getPortletById(PortletKeys.BLOGS);
 
-		FriendlyURLMapper mapper = portlet.getFriendlyURLMapperInstance();
+		FriendlyURLMapper friendlyURLMapper =
+			portlet.getFriendlyURLMapperInstance();
 
 		friendlyURL = url.getPath();
 
@@ -196,12 +191,12 @@ public class PingbackMethodImpl implements Method {
 				end + Portal.FRIENDLY_URL_SEPARATOR.length() - 1);
 		}
 
-		mapper.populateParams(friendlyURL, params);
+		friendlyURLMapper.populateParams(friendlyURL, params);
 
 		String param = getParam(params, "entryId");
 
 		if (Validator.isNotNull(param)) {
-			long entryId = Long.parseLong(param);
+			long entryId = GetterUtil.getLong(param);
 
 			entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
 		}
@@ -224,8 +219,8 @@ public class PingbackMethodImpl implements Method {
 		List<Element> elements = source.getAllElements("a");
 
 		for (Element element : elements) {
-			String href =
-				GetterUtil.getString(element.getAttributeValue("href"));
+			String href = GetterUtil.getString(
+				element.getAttributeValue("href"));
 
 			if (href.equals(_targetUri)) {
 				element = element.getParentElement();
@@ -256,13 +251,13 @@ public class PingbackMethodImpl implements Method {
 		String[] paramArray = params.get(name);
 
 		if (paramArray == null) {
-			String namesapce =
-				PortalUtil.getPortletNamespace(PortletKeys.BLOGS);
+			String namespace = PortalUtil.getPortletNamespace(
+				PortletKeys.BLOGS);
 
-			paramArray = params.get(namesapce + name);
+			paramArray = params.get(namespace + name);
 		}
 
-		if (paramArray != null && paramArray.length > 0) {
+		if ((paramArray != null) && (paramArray.length > 0)) {
 			return paramArray[0];
 		}
 		else {
@@ -283,10 +278,11 @@ public class PingbackMethodImpl implements Method {
 				SOURCE_URI_DOES_NOT_EXIST, "Error accessing source URI");
 		}
 
-		List<StartTag> tags = source.getAllStartTags("a");
+		List<StartTag> startTags = source.getAllStartTags("a");
 
-		for (StartTag tag : tags) {
-			String href = GetterUtil.getString(tag.getAttributeValue("href"));
+		for (StartTag startTag : startTags) {
+			String href = GetterUtil.getString(
+				startTag.getAttributeValue("href"));
 
 			if (href.equals(_targetUri)) {
 				return null;
@@ -297,9 +293,9 @@ public class PingbackMethodImpl implements Method {
 			SOURCE_URI_INVALID, "Could not find target URI in source");
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(PingbackMethodImpl.class);
+
 	private String _sourceUri;
 	private String _targetUri;
-
-	private static Log _log = LogFactoryUtil.getLog(PingbackMethodImpl.class);
 
 }

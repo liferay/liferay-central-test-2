@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xmlrpc.Response;
 import com.liferay.portal.kernel.xmlrpc.XmlRpcException;
 import com.liferay.portal.kernel.xmlrpc.XmlRpcUtil;
+import com.liferay.portal.xml.StAXReaderUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,7 +52,6 @@ import net.htmlparser.jericho.StartTag;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.HeadMethod;
 
 /**
@@ -135,14 +135,17 @@ public class LinkbackProducerUtil {
 			_log.info(xml);
 		}
 
-		XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-
-		XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(
-			new UnsyncStringReader(xml));
-
 		String error = xml;
 
+		XMLStreamReader xmlStreamReader = null;
+
 		try {
+			XMLInputFactory xmlInputFactory =
+				StAXReaderUtil.getXMLInputFactory();
+
+			xmlStreamReader = xmlInputFactory.createXMLStreamReader(
+				new UnsyncStringReader(xml));
+
 			xmlStreamReader.nextTag();
 			xmlStreamReader.nextTag();
 
@@ -185,11 +188,11 @@ public class LinkbackProducerUtil {
 		String serverUri = null;
 
 		try {
-			HttpClient client = new HttpClient();
+			HttpClient httpClient = new HttpClient();
 
 			HttpMethodBase method = new HeadMethod(targetUri);
 
-			client.executeMethod(method);
+			httpClient.executeMethod(method);
 
 			Header header = method.getResponseHeader("X-Pingback");
 
@@ -203,22 +206,16 @@ public class LinkbackProducerUtil {
 
 		if (Validator.isNull(serverUri)) {
 			try {
-				HttpClient client = new HttpClient();
+				Source clientSource = new Source(
+					HttpUtil.URLtoString(targetUri));
 
-				HttpMethodBase method = new GetMethod(targetUri);
+				List<StartTag> startTags = clientSource.getAllStartTags("link");
 
-				client.executeMethod(method);
-
-				Source clientSource =
-					new Source(method.getResponseBodyAsString());
-
-				List<StartTag> tags = clientSource.getAllStartTags("link");
-
-				for (StartTag tag : tags) {
-					String rel = tag.getAttributeValue("rel");
+				for (StartTag startTag : startTags) {
+					String rel = startTag.getAttributeValue("rel");
 
 					if (rel.equalsIgnoreCase("pingback")) {
-						String href = tag.getAttributeValue("href");
+						String href = startTag.getAttributeValue("href");
 
 						serverUri = HtmlUtil.escape(href);
 
@@ -234,9 +231,9 @@ public class LinkbackProducerUtil {
 		return serverUri;
 	}
 
-	private static List<Tuple> _pingbackQueue =
-		Collections.synchronizedList(new ArrayList<Tuple>());
-
 	private static Log _log = LogFactoryUtil.getLog(LinkbackProducerUtil.class);
+
+	private static List<Tuple> _pingbackQueue = Collections.synchronizedList(
+		new ArrayList<Tuple>());
 
 }
