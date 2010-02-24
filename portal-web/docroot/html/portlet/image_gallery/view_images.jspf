@@ -116,7 +116,7 @@
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 </div>
 
-<aui:script use="image-gallery">
+<aui:script use="aui-image-gallery">
 	var imageGallery = new A.ImageGallery(
 		{
 			after: {
@@ -151,7 +151,7 @@
 				}
 			},
 			delay: 5000,
-			links: '#imageGalleryPanels .image-thumbnail',
+			links: '#imageGalleryPanelContainer .image-thumbnail',
 			playingLabel: '(<liferay-ui:message key="playing" />)'
 		}
 	).render();
