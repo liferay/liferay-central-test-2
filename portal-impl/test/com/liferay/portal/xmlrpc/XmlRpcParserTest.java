@@ -185,20 +185,20 @@ public class XmlRpcParserTest extends BaseTestCase {
 		"</methodCall>";
 
 	private static String[] _SUCCESS_RESPONSES = new String[] {
-		"<?xmlversion=\"1.0\"?>" +
+		"<?xml version=\"1.0\"?>" +
 		"<methodResponse>" +
 		"<params>" +
 		"<param>" +
-		"<value><string>SouthDakota</string></value>" +
+		"<value><string>South Dakota</string></value>" +
 		"</param>" +
 		"</params>" +
 		"</methodResponse>"
 		,
-		"<?xmlversion=\"1.0\"?>" +
+		"<?xml version=\"1.0\"?>" +
 		"<methodResponse>" +
 		"<params>" +
 		"<param>" +
-		"<value>SouthDakota</value>" +
+		"<value>South Dakota</value>" +
 		"</param>" +
 		"</params>" +
 		"</methodResponse>"
