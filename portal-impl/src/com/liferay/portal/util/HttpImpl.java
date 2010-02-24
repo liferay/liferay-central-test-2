@@ -77,6 +77,7 @@ import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.DeleteMethod;
 import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.HeadMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
@@ -934,6 +935,9 @@ public class HttpImpl implements Http {
 			else if (method == Http.Method.DELETE) {
 				httpMethod = new DeleteMethod(location);
 			}
+			else if (method == Http.Method.HEAD) {
+				httpMethod = new HeadMethod(location);
+			}
 			else {
 				httpMethod = new GetMethod(location);
 			}
@@ -1024,6 +1028,10 @@ public class HttpImpl implements Http {
 				bytes = FileUtil.getBytes(is);
 
 				is.close();
+			}
+
+			for (Header header : httpMethod.getResponseHeaders()) {
+				response.addHeader(header.getName(), header.getValue());
 			}
 
 			return bytes;

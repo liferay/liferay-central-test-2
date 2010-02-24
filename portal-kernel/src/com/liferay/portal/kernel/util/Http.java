@@ -240,7 +240,7 @@ public interface Http {
 
 	public enum Method {
 
-		DELETE, GET, POST, PUT
+		DELETE, GET, HEAD, POST, PUT
 
 	}
 
@@ -321,6 +321,15 @@ public interface Http {
 			}
 		}
 
+		public boolean isHead() {
+			if (_method == Method.HEAD) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
 		public boolean isPost() {
 			if (_method == Method.POST) {
 				return true;
@@ -385,6 +394,15 @@ public interface Http {
 			_followRedirects = followRedirects;
 		}
 
+		public void setHead(boolean head) {
+			if (head) {
+				_method = Method.HEAD;
+			}
+			else {
+				_method = Method.GET;
+			}
+		}
+
 		public void setHeaders(Map<String, String> headers) {
 			_headers = headers;
 		}
@@ -433,12 +451,33 @@ public interface Http {
 
 	public class Response {
 
+		public void addHeader(String name, String value) {
+			if (_headers == null) {
+				_headers = new HashMap<String, String>();
+			}
+
+			_headers.put(name, value);
+		}
+
 		public int getContentLength() {
 			return _contentLength;
 		}
 
 		public String getContentType() {
 			return _contentType;
+		}
+
+		public String getHeader(String name) {
+			if (_headers == null) {
+				return null;
+			}
+			else {
+				return _headers.get(name);
+			}
+		}
+
+		public Map<String, String> getHeaders() {
+			return _headers;
 		}
 
 		public String getRedirect() {
@@ -453,12 +492,17 @@ public interface Http {
 			_contentType = contentType;
 		}
 
+		public void setHeaders(Map<String, String> headers) {
+			_headers = headers;
+		}
+
 		public void setRedirect(String redirect) {
 			_redirect = redirect;
 		}
 
 		private int _contentLength = -1;
 		private String _contentType;
+		private Map<String, String> _headers;
 		private String _redirect;
 
 	}
