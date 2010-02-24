@@ -76,6 +76,7 @@ CKEDITOR.config.toolbar_liferay = [
 
 CKEDITOR.config.toolbar_liferayArticle = [
 	['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
+	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
 	['Subscript', 'Superscript'],
 	'/',
 	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteWord', '-', 'SelectAll', 'RemoveFormat'],
