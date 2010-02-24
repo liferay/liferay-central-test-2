@@ -88,11 +88,11 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		</liferay-ui:custom-attributes-available>
 
 		<c:if test="<%= PropsValues.BLOGS_PINGBACK_ENABLED %>">
-			<aui:input value="<%= allowPingbacks %>" helpMessage="to-allow-pingbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" inlineLabel="left" label="allow-pingbacks" name="allowPingbacks" />
+			<aui:input helpMessage="to-allow-pingbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" inlineLabel="left" label="allow-pingbacks" name="allowPingbacks" value="<%= allowPingbacks %>" />
 		</c:if>
 
 		<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
-			<aui:input value="<%= allowTrackbacks %>" helpMessage="to-allow-trackbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" inlineLabel="left" label="allow-trackbacks" name="allowTrackbacks" />
+			<aui:input helpMessage="to-allow-trackbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" inlineLabel="left" label="allow-trackbacks" name="allowTrackbacks" value="<%= allowTrackbacks %>" />
 
 			<aui:input label="trackbacks-to-send" name="trackbacks" />
 
