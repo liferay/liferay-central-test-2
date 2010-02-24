@@ -942,6 +942,13 @@ public class HttpImpl implements Http {
 				httpMethod = new GetMethod(location);
 			}
 
+			if (headers != null) {
+				for (Map.Entry<String, String> header : headers.entrySet()) {
+					httpMethod.addRequestHeader(
+						header.getKey(), header.getValue());
+				}
+			}
+
 			if ((method == Http.Method.POST) || (method == Http.Method.PUT) &&
 				(body != null)) {
 			}
@@ -954,13 +961,6 @@ public class HttpImpl implements Http {
 			if (!_hasRequestHeader(httpMethod, HttpHeaders.USER_AGENT)) {
 				httpMethod.addRequestHeader(
 					HttpHeaders.USER_AGENT, _DEFAULT_USER_AGENT);
-			}
-
-			if (headers != null) {
-				for (Map.Entry<String, String> header : headers.entrySet()) {
-					httpMethod.addRequestHeader(
-						header.getKey(), header.getValue());
-				}
 			}
 
 			httpMethod.getParams().setIntParameter(
