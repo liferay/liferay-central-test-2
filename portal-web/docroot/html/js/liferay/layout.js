@@ -348,8 +348,8 @@ AUI().add(
 					var columnHasPortlets = Layout.hasPortlets(columnNode);
 					var originalColumnHasPortlets = Layout.hasPortlets(originalParent);
 
-					var dropZoneId = columnNode.get('parentNode').get('id');
-					var originalDropZoneId = originalParent.get('parentNode').get('id');
+					var dropZoneId = columnNode.ancestor(Layout.options.dropNodes).get('id');
+					var originalDropZoneId = originalParent.ancestor(Layout.options.dropNodes).get('id');
 
 					Layout.EMPTY_COLUMNS[dropZoneId] = !columnHasPortlets;
 					Layout.EMPTY_COLUMNS[originalDropZoneId] = !originalColumnHasPortlets;

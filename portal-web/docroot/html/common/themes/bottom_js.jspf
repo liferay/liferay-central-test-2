@@ -70,7 +70,7 @@ if (layout != null) {
 			layoutOptions = {
 				dragNodes: '#content-wrapper .portlet-boundary',
 				dropContainer: '.lfr-portlet-column',
-				dropNodes: '.lfr-column',
+				dropNodes: '.aui-column,.lfr-column',
 				emptyColumnClass: 'empty',
 				handles: ['.portlet-title', '.portlet-title-default', '.portlet-title-text'],
 				nestedPortletId: '_<%= PortletKeys.NESTED_PORTLETS %>_INSTANCE',
@@ -81,7 +81,7 @@ if (layout != null) {
 			layoutOptions = {
 				dragNodes: '#content-wrapper .portlet-boundary',
 				dropContainer: '.lfr-portlet-column',
-				dropNodes: '.lfr-column',
+				dropNodes: '.aui-column,.lfr-column',
 				emptyColumnClass: 'empty',
 				freeForm: true,
 				freeformPlaceholderClass: 'lfr-freeform-layout-drag-indicator',
@@ -129,3 +129,9 @@ if (layout != null) {
 		);
 	</c:if>
 </aui:script>
+
+<style type="text/css">
+.lfr-portlet-column.empty {
+	height: 52px;
+}
+</style>
