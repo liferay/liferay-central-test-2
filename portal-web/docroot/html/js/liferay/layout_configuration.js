@@ -158,10 +158,15 @@ AUI().add(
 						beforePortletLoaded = options.beforePortletLoaded;
 					}
 					else {
-						var firstColumn = A.one(Liferay.Layout.options.dropNodes);
+						var layoutOptions = Liferay.Layout.options;
+						var firstColumn = A.one(layoutOptions.dropNodes);
 
 						if (firstColumn) {
-							firstColumn.prepend(placeHolder);
+							var dropColumn = firstColumn.one(layoutOptions.dropContainer);
+
+							if (dropColumn) {
+								dropColumn.prepend(placeHolder);
+							}
 						}
 					}
 
