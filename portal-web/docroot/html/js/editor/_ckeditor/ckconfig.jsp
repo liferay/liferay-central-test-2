@@ -81,7 +81,7 @@ CKEDITOR.config.toolbar_liferayArticle = [
 	'/',
 	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteWord', '-', 'SelectAll', 'RemoveFormat'],
 	['Find', 'Replace', 'SpellCheck'],
-	['OrderedList', 'UnorderedList', '-', 'Outdent', 'Indent'],
+	['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
 	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'],
 	'/',
 	['Source'],
