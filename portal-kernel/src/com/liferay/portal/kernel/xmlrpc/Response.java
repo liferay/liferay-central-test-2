@@ -20,19 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.xmlrpc;
-
-import com.liferay.portal.xmlrpc.response.Response;
+package com.liferay.portal.kernel.xmlrpc;
 
 /**
- * <a href="Method.java.html"><b><i>View Source</i></b></a>
+ * <a href="Response.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public interface Method {
+public interface Response {
 
-	public Response execute(long companyId) throws XmlRpcException;
+	public String getDescription();
 
-	public boolean setArguments(Object[] args);
+	public String toXml() throws XmlRpcException;
 
 }

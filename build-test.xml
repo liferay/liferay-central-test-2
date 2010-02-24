@@ -582,10 +582,6 @@ file.
 		</ant>
 
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
-			<property name="class" value="XmlRpcTestSuite" />
-		</ant>
-
-		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="MiscTestSuite" />
 		</ant>
 

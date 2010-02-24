@@ -32,6 +32,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.xmlrpc.Method;
+import com.liferay.portal.kernel.xmlrpc.Response;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcConstants;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -42,12 +46,6 @@ import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.xmlrpc.Method;
-import com.liferay.portal.xmlrpc.XmlRpcConstants;
-import com.liferay.portal.xmlrpc.XmlRpcException;
-import com.liferay.portal.xmlrpc.response.Fault;
-import com.liferay.portal.xmlrpc.response.Response;
-import com.liferay.portal.xmlrpc.response.Success;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
@@ -90,9 +88,9 @@ public class PingbackMethodImpl implements Method {
 
 	public static int SERVER_ERROR = 50;
 
-	public Response execute(long companyId) throws XmlRpcException {
+	public Response execute(long companyId) {
 		if (!PropsValues.BLOGS_PINGBACK_ENABLED) {
-			return new Fault(
+			return XmlRpcUtil.createFault(
 				XmlRpcConstants.REQUESTED_METHOD_NOT_FOUND,
 				"Pingbacks are disabled");
 		}
@@ -107,7 +105,7 @@ public class PingbackMethodImpl implements Method {
 			BlogsEntry entry = getBlogsEntry(companyId);
 
 			if (!entry.isAllowPingbacks()) {
-				return new Fault(
+				return XmlRpcUtil.createFault(
 					XmlRpcConstants.REQUESTED_METHOD_NOT_FOUND,
 					"Pingbacks are disabled");
 			}
@@ -134,14 +132,15 @@ public class PingbackMethodImpl implements Method {
 				userId, "", className, classPK, threadId, parentMessageId,
 				"", body, new ServiceContext());
 
-			response = new Success("Pingback accepted");
+			response = XmlRpcUtil.createSuccess("Pingback accepted");
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(e, e);
 			}
 
-			return new Fault(TARGET_URI_INVALID, "Error parsing target URI");
+			return XmlRpcUtil.createFault(
+				TARGET_URI_INVALID, "Error parsing target URI");
 		}
 
 		return response;
@@ -280,7 +279,7 @@ public class PingbackMethodImpl implements Method {
 			source = new Source(html);
 		}
 		catch (Exception e) {
-			return new Fault(
+			return XmlRpcUtil.createFault(
 				SOURCE_URI_DOES_NOT_EXIST, "Error accessing source URI");
 		}
 
@@ -294,7 +293,7 @@ public class PingbackMethodImpl implements Method {
 			}
 		}
 
-		return new Fault(
+		return XmlRpcUtil.createFault(
 			SOURCE_URI_INVALID, "Could not find target URI in source");
 	}
 

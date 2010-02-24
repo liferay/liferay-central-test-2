@@ -20,31 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.xmlrpc;
-
-import com.liferay.portal.kernel.exception.PortalException;
+package com.liferay.portal.kernel.xmlrpc;
 
 /**
- * <a href="XmlRpcException.java.html"><b><i>View Source</i></b></a>
+ * <a href="XmlRpcUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class XmlRpcException extends PortalException {
+public class XmlRpcUtil {
 
-	public XmlRpcException() {
-		super();
+	public static Fault createFault(int code, String description) {
+		return getXmlRpc().createFault(code, description);
 	}
 
-	public XmlRpcException(String msg) {
-		super(msg);
+	public static Success createSuccess(String description) {
+		return getXmlRpc().createSuccess(description);
 	}
 
-	public XmlRpcException(String msg, Throwable cause) {
-		super(msg, cause);
+	public static Response executeMethod(
+			String url, String methodName, Object[] arguments)
+		throws XmlRpcException {
+
+		return getXmlRpc().executeMethod(url, methodName, arguments);
 	}
 
-	public XmlRpcException(Throwable cause) {
-		super(cause);
+	public static XmlRpc getXmlRpc() {
+		return _xmlRpc;
 	}
+
+	public void setXmlRpc(XmlRpc xmlRpc) {
+		_xmlRpc = xmlRpc;
+	}
+
+	private static XmlRpc _xmlRpc;
 
 }

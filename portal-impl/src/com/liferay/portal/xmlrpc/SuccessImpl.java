@@ -20,26 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.xmlrpc.response;
+package com.liferay.portal.xmlrpc;
 
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.xmlrpc.XmlRpcException;
-import com.liferay.portal.xmlrpc.XmlRpcUtil;
+import com.liferay.portal.kernel.xmlrpc.Success;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcException;
 
 /**
- * <a href="Fault.java.html"><b><i>View Source</i></b></a>
+ * <a href="SuccessImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class Fault extends Response {
+public class SuccessImpl implements Success {
 
-	public Fault(int code, String description) {
-		_code = code;
+	public SuccessImpl(String description) {
 		_description = description;
-	}
-
-	public int getCode() {
-		return _code;
 	}
 
 	public String getDescription() {
@@ -47,34 +43,25 @@ public class Fault extends Response {
 	}
 
 	public String toString() {
-		return "XML-RPC fault " + _code + " " + _description;
+		return "XML-RPC success " + _description;
 	}
 
 	public String toXml() throws XmlRpcException {
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(8);
 
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		sb.append("<methodResponse>\n");
-		sb.append("<fault>\n");
-		sb.append("<value>\n");
-		sb.append("<struct>\n");
-		sb.append("<member>\n");
-		sb.append("<name>faultCode</name>\n");
-		sb.append(XmlRpcUtil.wrapValue(_code) + "\n");
-		sb.append("</member>\n");
-		sb.append("<member>\n");
-		sb.append("<name>faultString</name>\n");
-		sb.append(XmlRpcUtil.wrapValue(_description) + "\n");
-		sb.append("</member>\n");
-		sb.append("</struct>\n");
-		sb.append("</value>\n");
-		sb.append("</fault>\n");
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+
+		sb.append("<methodResponse>");
+		sb.append("<params>");
+		sb.append("<param>");
+		sb.append(XmlRpcParser.wrapValue(_description));
+		sb.append("</param>");
+		sb.append("</params>");
 		sb.append("</methodResponse>");
 
 		return sb.toString();
 	}
 
-	private int _code;
 	private String _description;
 
 }

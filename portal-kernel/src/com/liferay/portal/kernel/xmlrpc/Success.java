@@ -20,30 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
-
-import com.liferay.portal.image.ImageProcessorImplTest;
-import com.liferay.portal.xmlrpc.XmlRpcParserTest;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+package com.liferay.portal.kernel.xmlrpc;
 
 /**
- * <a href="MiscTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="Success.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */
-public class MiscTestSuite extends TestSuite {
-
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
-
-		testSuite.addTestSuite(FileMultiValueMapTest.class);
-		testSuite.addTestSuite(ImageProcessorImplTest.class);
-		testSuite.addTestSuite(MemoryMultiValueMapTest.class);
-		testSuite.addTestSuite(XmlRpcParserTest.class);
-
-		return testSuite;
-	}
-
+public interface Success extends Response {
 }

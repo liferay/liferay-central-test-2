@@ -29,9 +29,12 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
+import com.liferay.portal.kernel.xmlrpc.Method;
+import com.liferay.portal.kernel.xmlrpc.Response;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcConstants;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcException;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.xmlrpc.response.Fault;
-import com.liferay.portal.xmlrpc.response.Response;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
@@ -51,23 +54,24 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="XmlRpcServlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
 public class XmlRpcServlet extends HttpServlet {
 
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
 
-		Enumeration<String> paramNames = servletConfig.getInitParameterNames();
+		Enumeration<String> enu = servletConfig.getInitParameterNames();
 
-		while (paramNames.hasMoreElements()) {
-			String paramName = paramNames.nextElement();
+		while (enu.hasMoreElements()) {
+			String paramName = enu.nextElement();
 
 			if (paramName.startsWith("methodName")) {
 				String suffix = paramName.substring("methodName".length());
 
 				String methodName = servletConfig.getInitParameter(paramName);
-				String className =
-					servletConfig.getInitParameter("className" + suffix);
+				String className = servletConfig.getInitParameter(
+					"className" + suffix);
 
 				_methodRegistry.put(
 					methodName, (Method)InstancePool.get(className));
@@ -76,10 +80,9 @@ public class XmlRpcServlet extends HttpServlet {
 	}
 
 	protected void doPost(
-			HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
+		HttpServletRequest request, HttpServletResponse response) {
 
-		Response rpcResponse = null;
+		Response xmlRpcResponse = null;
 
 		try {
 			long companyId = PortalInstances.getCompanyId(request);
@@ -88,27 +91,27 @@ public class XmlRpcServlet extends HttpServlet {
 
 			String xml = StringUtil.read(is);
 
-			Tuple parsedMethod = XmlRpcUtil.parseMethod(xml);
+			Tuple methodTuple = XmlRpcParser.parseMethod(xml);
 
-			String methodName = (String)parsedMethod.getObject(0);
-			Object[] args = (Object[])parsedMethod.getObject(1);
+			String methodName = (String)methodTuple.getObject(0);
+			Object[] args = (Object[])methodTuple.getObject(1);
 
-			rpcResponse = invokeMethod(companyId, methodName, args);
+			xmlRpcResponse = invokeMethod(companyId, methodName, args);
 		}
 		catch (IOException ioe) {
-			rpcResponse = new Fault(
+			xmlRpcResponse = XmlRpcUtil.createFault(
 				XmlRpcConstants.NOT_WELL_FORMED, "XML is not well formed");
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(ioe, ioe);
 			}
 		}
-		catch (XmlRpcException xre) {
-			_log.error(xre, xre);
+		catch (XmlRpcException xmlrpce) {
+			_log.error(xmlrpce, xmlrpce);
 		}
 
-		if (rpcResponse == null) {
-			rpcResponse = new Fault(
+		if (xmlRpcResponse == null) {
+			xmlRpcResponse = XmlRpcUtil.createFault(
 				XmlRpcConstants.SYSTEM_ERROR, "Unknown error occurred");
 		}
 
@@ -117,11 +120,11 @@ public class XmlRpcServlet extends HttpServlet {
 		response.setStatus(HttpServletResponse.SC_OK);
 
 		try {
-			ServletResponseUtil.write(response, rpcResponse.toXml());
+			ServletResponseUtil.write(response, xmlRpcResponse.toXml());
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e);
+				_log.warn(e, e);
 			}
 
 			response.setStatus(HttpServletResponse.SC_PRECONDITION_FAILED);
@@ -129,19 +132,19 @@ public class XmlRpcServlet extends HttpServlet {
 	}
 
 	protected Response invokeMethod(
-			long companyId, String methodName, Object[] args)
+			long companyId, String methodName, Object[] arguments)
 		throws XmlRpcException {
 
 		Method method = _methodRegistry.get(methodName);
 
 		if (method == null) {
-			return new Fault(
+			return XmlRpcUtil.createFault(
 				XmlRpcConstants.REQUESTED_METHOD_NOT_FOUND,
 				"Requested method not found");
 		}
 
-		if (!method.setArguments(args)) {
-			return new Fault(
+		if (!method.setArguments(arguments)) {
+			return XmlRpcUtil.createFault(
 				XmlRpcConstants.INVALID_METHOD_PARAMETERS,
 				"Method arguments are invalid");
 		}
@@ -149,8 +152,8 @@ public class XmlRpcServlet extends HttpServlet {
 		return method.execute(companyId);
 	}
 
-	private Map<String, Method> _methodRegistry = new HashMap<String, Method>();
-
 	private static Log _log = LogFactoryUtil.getLog(XmlRpcServlet.class);
+
+	private Map<String, Method> _methodRegistry = new HashMap<String, Method>();
 
 }

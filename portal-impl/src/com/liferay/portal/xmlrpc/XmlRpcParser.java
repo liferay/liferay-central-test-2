@@ -23,11 +23,15 @@
 package com.liferay.portal.xmlrpc;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
-import com.liferay.portal.xmlrpc.response.Fault;
-import com.liferay.portal.xmlrpc.response.Response;
-import com.liferay.portal.xmlrpc.response.Success;
+import com.liferay.portal.kernel.xmlrpc.Response;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcException;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcUtil;
+import com.liferay.portal.xml.StAXReaderUtil;
 
 import java.io.IOException;
 
@@ -39,29 +43,33 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
 
 /**
- * <a href="XmlRpcUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="XmlRpcParser.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class XmlRpcUtil {
+public class XmlRpcParser {
 
-	public static String buildMethod(String methodName, Object[] args)
+	public static String buildMethod(String methodName, Object[] arguments)
 		throws XmlRpcException {
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(arguments.length * 3 + 8);
 
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		sb.append("<methodCall>\n");
-		sb.append("<methodName>" + methodName + "</methodName>\n");
-		sb.append("<params>\n");
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
-		if (args != null) {
-			for (Object arg : args) {
-				sb.append("<param>" + wrapValue(arg) + "</param>\n");
-			}
+		sb.append("<methodCall>");
+		sb.append("<methodName>");
+		sb.append(methodName);
+		sb.append("</methodName>");
+		sb.append("<params>");
+
+		for (Object argument : arguments) {
+			sb.append("<param>");
+			sb.append(wrapValue(argument));
+			sb.append("</param>");
 		}
 
-		sb.append("</params>\n");
+		sb.append("</params>");
 		sb.append("</methodCall>");
 
 		return sb.toString();
@@ -70,11 +78,9 @@ public class XmlRpcUtil {
 	public static Tuple parseMethod(String xml) throws IOException {
 		XMLStreamReader xmlStreamReader = null;
 
-		String methodName = null;
-		List<Object> args = new ArrayList<Object>();
-
 		try {
-			XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+			XMLInputFactory xmlInputFactory =
+				StAXReaderUtil.getXMLInputFactory();
 
 			xmlStreamReader = xmlInputFactory.createXMLStreamReader(
 				new UnsyncStringReader(xml));
@@ -83,13 +89,14 @@ public class XmlRpcUtil {
 			xmlStreamReader.nextTag();
 			xmlStreamReader.next();
 
-			methodName = xmlStreamReader.getText();
+			String methodName = xmlStreamReader.getText();
+			List<Object> arguments = new ArrayList<Object>();
 
 			xmlStreamReader.nextTag();
 
 			String name = xmlStreamReader.getLocalName();
 
-			while (name != "methodCall") {
+			while (!name.equals("methodCall")) {
 				xmlStreamReader.nextTag();
 
 				name = xmlStreamReader.getLocalName();
@@ -109,16 +116,16 @@ public class XmlRpcUtil {
 						String text = xmlStreamReader.getText();
 
 						if (name.equals("string")) {
-							args.add(text);
+							arguments.add(text);
 						}
 						else if (name.equals("int") || name.equals("i4")) {
-							args.add(Integer.parseInt(text));
+							arguments.add(GetterUtil.getInteger(text));
 						}
 						else if (name.equals("double")) {
-							args.add(Double.parseDouble(text));
+							arguments.add(GetterUtil.getDouble(text));
 						}
 						else if (name.equals("boolean")) {
-							args.add(Boolean.parseBoolean(text));
+							arguments.add(GetterUtil.getBoolean(text));
 						}
 						else {
 							throw new IOException(
@@ -132,7 +139,7 @@ public class XmlRpcUtil {
 					else {
 						String text = xmlStreamReader.getText();
 
-						args.add(text);
+						arguments.add(text);
 
 						xmlStreamReader.nextTag();
 						xmlStreamReader.nextTag();
@@ -141,9 +148,11 @@ public class XmlRpcUtil {
 					name = xmlStreamReader.getLocalName();
 				}
 			}
+
+			return new Tuple(methodName, arguments.toArray());
 		}
 		catch (Exception e) {
-			throw new IOException(e);
+			throw new IOException(e.getMessage());
 		}
 		finally {
 			if (xmlStreamReader != null) {
@@ -154,17 +163,14 @@ public class XmlRpcUtil {
 				}
 			}
 		}
-
-		return new Tuple(methodName, args.toArray());
 	}
 
 	public static Response parseResponse(String xml) throws XmlRpcException {
-		Response response = null;
-
 		XMLStreamReader xmlStreamReader = null;
 
 		try {
-			XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+			XMLInputFactory xmlInputFactory =
+				StAXReaderUtil.getXMLInputFactory();
 
 			xmlStreamReader = xmlInputFactory.createXMLStreamReader(
 				new UnsyncStringReader(xml));
@@ -191,7 +197,7 @@ public class XmlRpcUtil {
 					description = xmlStreamReader.getText();
 				}
 
-				return new Success(description);
+				return XmlRpcUtil.createSuccess(description);
 			}
 			else if (name.equals("fault")) {
 				int code = 0;
@@ -218,7 +224,8 @@ public class XmlRpcUtil {
 						if (name.equals("int") || name.equals("i4")) {
 							xmlStreamReader.next();
 
-							code = Integer.parseInt(xmlStreamReader.getText());
+							code = GetterUtil.getInteger(
+								xmlStreamReader.getText());
 						}
 
 						xmlStreamReader.nextTag();
@@ -247,8 +254,10 @@ public class XmlRpcUtil {
 					}
 				}
 
-				return new Fault(code, description);
+				return XmlRpcUtil.createFault(code, description);
 			}
+
+			return null;
 		}
 		catch (Exception e) {
 			throw new XmlRpcException(xml, e);
@@ -262,36 +271,43 @@ public class XmlRpcUtil {
 				}
 			}
 		}
-
-		return response;
 	}
 
 	public static String wrapValue(Object value) throws XmlRpcException {
 		if (value == null) {
-			return "";
+			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("<value>");
 
 		if (value instanceof String) {
-			sb.append("<string>" + value.toString() + "</string>");
+			sb.append("<string>");
+			sb.append(value.toString());
+			sb.append("</string>");
 		}
 		else if ((value instanceof Integer) || (value instanceof Short)) {
-			sb.append("<i4>" + value.toString() + "</i4>");
+			sb.append("<i4>");
+			sb.append(value.toString());
+			sb.append("</i4>");
 		}
 		else if ((value instanceof Double) || (value instanceof Float)) {
-			sb.append("<double>" + value.toString() + "</double>");
+			sb.append("<double>");
+			sb.append(value.toString());
+			sb.append("</double>");
 		}
 		else if (value instanceof Boolean) {
-			String strValue = "0";
+			sb.append("<boolean>");
 
 			if ((Boolean)value) {
-				strValue = "1";
+				sb.append(CharPool.NUMBER_1);
+			}
+			else {
+				sb.append(CharPool.NUMBER_0);
 			}
 
-			sb.append("<boolean>" + strValue + "</boolean>");
+			sb.append("</boolean>");
 		}
 		else {
 			throw new XmlRpcException("Unsupported type " + value.getClass());

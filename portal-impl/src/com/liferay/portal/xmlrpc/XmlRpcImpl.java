@@ -24,50 +24,59 @@ package com.liferay.portal.xmlrpc;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.xmlrpc.response.Response;
-
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.RequestEntity;
-import org.apache.commons.httpclient.methods.StringRequestEntity;
+import com.liferay.portal.kernel.xmlrpc.Fault;
+import com.liferay.portal.kernel.xmlrpc.Response;
+import com.liferay.portal.kernel.xmlrpc.Success;
+import com.liferay.portal.kernel.xmlrpc.XmlRpc;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcException;
 
 /**
- * <a href="XmlRpcClient.java.html"><b><i>View Source</i></b></a>
+ * <a href="XmlRpcImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class XmlRpcClient {
+public class XmlRpcImpl implements XmlRpc {
 
-	public XmlRpcClient(String url) {
-		_url = url;
+	public Fault createFault(int code, String description) {
+		return new FaultImpl(code, description);
 	}
 
-	public Response executeMethod(String methodName, Object [] args)
-		throws XmlRpcException {
-
-		String xml = invoke(methodName, args);
-
-		return XmlRpcUtil.parseResponse(xml);
+	public Success createSuccess(String description) {
+		return new SuccessImpl(description);
 	}
 
-	protected String invoke(String methodName, Object[] args)
+	public Response executeMethod(
+			String url, String methodName, Object[] arguments)
 		throws XmlRpcException {
+
+		try {
+			return doExecuteMethod(url, methodName, arguments);
+		}
+		catch (Exception e) {
+			throw new XmlRpcException(e);
+		}
+	}
+
+	protected Response doExecuteMethod(
+			String url, String methodName, Object[] arguments)
+		throws Exception {
 
 		if (_log.isDebugEnabled()) {
 			StringBundler sb = new StringBundler();
 
 			sb.append("XML-RPC invoking " + methodName + " ");
 
-			if (args != null) {
-				for (int i = 0; i < args.length; i++) {
-					sb.append(args[i]);
+			if (arguments != null) {
+				for (int i = 0; i < arguments.length; i++) {
+					sb.append(arguments[i]);
 
-					if (i < args.length - 1) {
+					if (i < arguments.length - 1) {
 						sb.append(", ");
 					}
 				}
@@ -76,37 +85,19 @@ public class XmlRpcClient {
 			_log.debug(sb.toString());
 		}
 
-		String methodXml = XmlRpcUtil.buildMethod(methodName, args);
+		String requestXML = XmlRpcParser.buildMethod(methodName, arguments);
 
-		try {
-			HttpClient client = new HttpClient();
+		Http.Options options = new Http.Options();
 
-			PostMethod method = new PostMethod(_url);
+		options.setBody(requestXML, ContentTypes.TEXT_XML, StringPool.UTF8);
+		options.setLocation(url);
+		options.setPost(true);
 
-			RequestEntity requestEntity = new StringRequestEntity(
-				methodXml, ContentTypes.TEXT_XML, StringPool.UTF8);
+		String responseXML = HttpUtil.URLtoString(options);
 
-			method.addRequestHeader(
-				HttpHeaders.USER_AGENT, ReleaseInfo.getServerInfo());
-			method.setRequestEntity(requestEntity);
-
-			client.executeMethod(method);
-
-			String xml = method.getResponseBodyAsString();
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("XML-RPC result " + xml);
-			}
-
-			return xml;
-		}
-		catch (Exception e) {
-			throw new XmlRpcException(e);
-		}
+		return XmlRpcParser.parseResponse(responseXML);
 	}
 
-	private String _url;
-
-	private static Log _log = LogFactoryUtil.getLog(XmlRpcClient.class);
+	private static Log _log = LogFactoryUtil.getLog(XmlRpcImpl.class);
 
 }

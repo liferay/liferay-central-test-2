@@ -20,24 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.xmlrpc;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+package com.liferay.portal.kernel.xmlrpc;
 
 /**
- * <a href="XmlRpcTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="XmlRpc.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class XmlRpcTestSuite extends TestSuite {
+public interface XmlRpc {
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+	public Fault createFault(int code, String description);
 
-		testSuite.addTestSuite(XmlRpcTestCase.class);
+	public Success createSuccess(String description);
 
-		return testSuite;
-	}
+	public Response executeMethod(
+			String url, String methodName, Object[] arguments)
+		throws XmlRpcException;
 
 }

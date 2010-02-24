@@ -32,9 +32,9 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.xmlrpc.XmlRpcClient;
-import com.liferay.portal.xmlrpc.XmlRpcException;
-import com.liferay.portal.xmlrpc.response.Response;
+import com.liferay.portal.kernel.xmlrpc.Response;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcException;
+import com.liferay.portal.kernel.xmlrpc.XmlRpcUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -101,10 +101,9 @@ public class LinkbackProducerUtil {
 							sourceUri + ", target " + targetUri);
 				}
 
-				XmlRpcClient client = new XmlRpcClient(serverUri);
-
-				Response response = client.executeMethod(
-					"pingback.ping", new Object[] { sourceUri, targetUri });
+				Response response = XmlRpcUtil.executeMethod(
+					serverUri, "pingback.ping",
+					new Object[] {sourceUri, targetUri});
 
 				if (_log.isInfoEnabled()) {
 					_log.info(response.toString());

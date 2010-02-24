@@ -20,46 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.xmlrpc.response;
-
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.xmlrpc.XmlRpcException;
-import com.liferay.portal.xmlrpc.XmlRpcUtil;
+package com.liferay.portal.kernel.xmlrpc;
 
 /**
- * <a href="Success.java.html"><b><i>View Source</i></b></a>
+ * <a href="Fault.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class Success extends Response {
+public interface Fault extends Response {
 
-	public Success(String description) {
-		_description = description;
-	}
-
-	public String getDescription() {
-		return _description;
-	}
-
-	public String toString() {
-		return "XML-RPC success " + _description;
-	}
-
-	public String toXml() throws XmlRpcException {
-		StringBundler sb = new StringBundler();
-
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		sb.append("<methodResponse>\n");
-		sb.append("<params>\n");
-		sb.append("<param>\n");
-		sb.append(XmlRpcUtil.wrapValue(_description) + "\n");
-		sb.append("</param>\n");
-		sb.append("</params>\n");
-		sb.append("</methodResponse>");
-
-		return sb.toString();
-	}
-
-	private String _description;
+	public int getCode();
 
 }
