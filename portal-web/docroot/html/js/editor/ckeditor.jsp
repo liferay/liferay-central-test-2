@@ -62,7 +62,6 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 		function getText() {
 			return CKEDITOR.instances.CKEditor1.getData();
 		}
-
 	</script>
 </head>
 
