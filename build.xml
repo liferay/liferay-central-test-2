@@ -63,6 +63,13 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
+				<delete failonerror="false">
+					<fileset
+						dir="${app.server.dir}/conf/Catalina/localhost"
+						includes="*-hook.xml,*-portlet.xml"
+					/>
+				</delete>
+
 				<ant dir="support-tomcat" target="clean" inheritAll="false" />
 			</then>
 		</if>
