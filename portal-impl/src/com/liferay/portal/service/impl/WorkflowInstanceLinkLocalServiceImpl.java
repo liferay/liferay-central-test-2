@@ -86,10 +86,10 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
 				companyId, groupId, className, classPK);
 
+			deleteWorkflowInstanceLink(workflowInstanceLink);
+
 			WorkflowInstanceManagerUtil.deleteWorkflowInstance(
 				workflowInstanceLink.getWorkflowInstanceId());
-
-			deleteWorkflowInstanceLink(workflowInstanceLink);
 		}
 		catch (NoSuchWorkflowInstanceLinkException nswile) {
 		}
