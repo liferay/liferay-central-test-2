@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.util.JCRHook;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
