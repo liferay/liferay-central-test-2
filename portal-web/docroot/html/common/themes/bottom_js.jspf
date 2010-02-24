@@ -129,9 +129,3 @@ if (layout != null) {
 		);
 	</c:if>
 </aui:script>
-
-<style type="text/css">
-.lfr-portlet-column.empty {
-	height: 52px;
-}
-</style>
