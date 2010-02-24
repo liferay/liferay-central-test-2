@@ -156,10 +156,6 @@ else {
 						</liferay-wsrp-portlet>
 					</c:if>
 				</liferay-theme:wrap-portlet>
-
-				<c:if test="<%= freeformPortlet && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
-					<div class="ui-resizable-handle ui-resizable-se"></div>
-				</c:if>
 			</c:when>
 			<c:otherwise>
 				<div class="portlet-borderless-container" <%= containerStyles %>>
