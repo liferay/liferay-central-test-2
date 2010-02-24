@@ -2140,7 +2140,7 @@ AUI().add(
 				var editFieldCloseButton = editContainerWrapper.one('.close-button .aui-button-input');
 				var editFieldSaveButton = editContainerWrapper.one('.save-button .aui-button-input');
 				var languageIdSelect = instance.getById('languageIdSelect');
-				var localizedCheckbox = instance.getById('localized');
+				var localizedCheckbox = instance.getById('localizedCheckbox');
 
 				editContainerCheckboxes.detach('click');
 				editContainerInputs.detach('change');
