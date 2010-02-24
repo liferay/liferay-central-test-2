@@ -579,7 +579,6 @@ allow-anonymous-posting=Разрешить анонимное отправлен
 allow-community-administrators-to-use-their-own-logo=Позволить администраторам сообществ использовать свой логотип?
 allow-dictionary-words-help=Если это отмечено, то слова из простого словаря разрешены в качестве паролей пользователей.
 allow-dictionary-words=Разрешить использование слов из словарей
-allow-incoming-trackbacks=Разрешить входящие Trackbacks
 allow-strangers-to-create-accounts-with-a-company-email-address=Позволить посторонним создавать учетные записи с использованием email адреса компании?
 allow-strangers-to-create-accounts=Позволить посторонним создавать учетные записи?
 allow-users-to-add-x-to-any-website=Позволить пользователям добавлять <strong>{0}</strong> на другой сайт.

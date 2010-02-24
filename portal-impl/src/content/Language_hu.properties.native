@@ -583,7 +583,6 @@ allow-anonymous-posting=Névtelen hozzászólások engedélyezése
 allow-community-administrators-to-use-their-own-logo=Engeded a közösségi adminisztrátornak, hogy saját logóját használja?
 allow-dictionary-words-help=Ha ez be van kapcsolva, a közönséges szótári szavak megengedettek a felhasználói jelszavakban.
 allow-dictionary-words=Szótári szavak engedélyezése
-allow-incoming-trackbacks=Bejövő visszahivatkozások engedélyezése
 allow-strangers-to-create-accounts-with-a-company-email-address=Engeded a külsősöknek saját fiók létrehozását céges e-mail címmel?
 allow-strangers-to-create-accounts=Engeded a külsősöknek saját fiók létrehozását?
 allow-users-to-add-x-to-any-website=Felhasználók hozzáadhatnak <b>{0}</b>-t bármelyik weboldalhoz.

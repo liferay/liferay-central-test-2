@@ -587,7 +587,6 @@ allow-anonymous-posting=Tillåt anonyma inlägg
 allow-community-administrators-to-use-their-own-logo=Tillåta community-administratörer att använda egen logo?
 allow-dictionary-words-help=Kryssa i för att tillåta att ord ur ordlistan förekommer i lösenord.
 allow-dictionary-words=Tillåt ord i ordlistan
-allow-incoming-trackbacks=Tillåt inkommande trackbacks
 allow-strangers-to-create-accounts-with-a-company-email-address=Tillåt okända att skapa konton med företags-epost?
 allow-strangers-to-create-accounts=Tillåt andra personer att skapa konto?
 allow-users-to-add-x-to-any-website=Tillåt användare att lägga till <strong>{0}</strong> till valfri webbsajt.

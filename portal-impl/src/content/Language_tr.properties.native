@@ -589,7 +589,6 @@ allow-anonymous-posting=Adsız Postalara İzin Ver
 allow-community-administrators-to-use-their-own-logo=Topluluk yöneticilerinin kendi logolarını kullanmasına izin ver.
 allow-dictionary-words-help=İşaretlendiğinde, yaygın sözlük kelimeleri kullanıcı şifrelerinde kullanılabilecektir.
 allow-dictionary-words=Sözlük Kelimelerine İzin Ver
-allow-incoming-trackbacks=Geri İzlemelere İzin Ver
 allow-strangers-to-create-accounts-with-a-company-email-address=Yabancıların şirket e-posta adresleriyle hesap oluşturmasına izin ver?
 allow-strangers-to-create-accounts=Yabancıların hesap oluşturmasına izin ver?
 allow-users-to-add-x-to-any-website=Kullanıcıların herhangi bir web sitesine <strong>{0}</strong>yi eklemesine izin ver.

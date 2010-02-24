@@ -582,7 +582,6 @@ allow-anonymous-posting=Zezwól na umieszczanie anonimowych postów
 allow-community-administrators-to-use-their-own-logo=Pozwól administratorom społeczności do użycia ich własnego logo.
 allow-dictionary-words-help=Jeśli ta opcja jest zaznaczona, to zwykłe wyrazy słownikowe są dozwolone w hasłach użytkowników.
 allow-dictionary-words=Zezwól na wyrazy słownikowe
-allow-incoming-trackbacks=Zezwól na przychodzące trackback'i (odniesienia)
 allow-strangers-to-create-accounts-with-a-company-email-address=Zezwolić obcym na tworzenie kont z firmowym adresem email?
 allow-strangers-to-create-accounts=Zezwolić obcym na zakładanie kont?
 allow-users-to-add-x-to-any-website=Zezwól użytkownikom na dodawanie <strong>{0}</strong> do dowolnej witryny.

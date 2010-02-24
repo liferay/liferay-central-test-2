@@ -526,7 +526,6 @@ allow-anonymous-posting=Povoliť anonymné prispievanie
 allow-community-administrators-to-use-their-own-logo=Povoliť komunitným administrátorom používanie vlastného loga?
 allow-dictionary-words-help=Ak je zaškrtnuté toto políčko, používateľské heslá môžu používať bežné často používané slová.
 allow-dictionary-words=Povoliť často používané slová
-allow-incoming-trackbacks=Povoliť prichádzajúce trackback-y
 allow-strangers-to-create-accounts-with-a-company-email-address=Povoliť cudzincom vytváranie účtov s firemnou e-mailovou adresou?
 allow-strangers-to-create-accounts=Povoliť cudzincom vytváranie účtov?
 allow-users-to-add-x-to-any-website=Povoliť používateľom pridať <strong>{0}</strong> na akékoľvek webové sídlo.

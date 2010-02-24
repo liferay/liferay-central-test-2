@@ -617,7 +617,6 @@ allow-anonymous-posting=Povolit anonymní příspěvky
 allow-community-administrators-to-use-their-own-logo=Umožnit administrátorům komunit použít jejich vlastní logo?
 allow-dictionary-words-help=Povolit slova ze slovníku v heslech uživatelů.
 allow-dictionary-words=Povolit slova ze slovníku
-allow-incoming-trackbacks=Povolit příchozí Trackbacky
 allow-strangers-to-create-accounts-with-a-company-email-address=Povolit neznámým uživatelům vytvořit si vlastní účet s e-mailem vztaženým k doméně instance
 allow-strangers-to-create-accounts=Povolit neznámým uživatelům vytvořit si vlastní účet
 allow-users-to-add-x-to-any-website=Povolit uživatelům umístit portlet <strong>{0}</strong> na libovolný web.

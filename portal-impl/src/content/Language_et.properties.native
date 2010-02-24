@@ -591,7 +591,6 @@ allow-anonymous-posting=Luba anonüümne postitamine
 allow-community-administrators-to-use-their-own-logo=Kas lubad kommuuniadmistraatoritel oma logo kasutada? 
 allow-dictionary-words-help=Kui märgitud, on tavalised sõnaraamatus esinevad sõnad kasutajate salasõnades lubatud.
 allow-dictionary-words=Luba sõnaraamatus esinevad sõnad 
-allow-incoming-trackbacks=Luba sissetulevad tagasiviited 
 allow-strangers-to-create-accounts-with-a-company-email-address=Kas lubad võõrastel ettevõtte meiliaadressiga kontosid luua? 
 allow-strangers-to-create-accounts=Kas lubad võõrastel kontosid luua? 
 allow-users-to-add-x-to-any-website=Luba kasutajatel <b>{0}</b> ükskõik  millisele veebilehele lisada.

@@ -584,7 +584,6 @@ allow-anonymous-posting=Salli anonyymi kirjoittaminen
 allow-community-administrators-to-use-their-own-logo=Salli yhteisö ylläpitäjien käyttää omaa logoa?
 allow-dictionary-words-help=Jos tämä on valittu niin yleiset sanakirja sanat ovat sallittuja käyttäjän salasanassa.
 allow-dictionary-words=Salli sanakirja sanat
-allow-incoming-trackbacks=Salli sisääntulevat Trackbackit
 allow-strangers-to-create-accounts-with-a-company-email-address=Salli tuntemattomien luoda tilejä yrityksen sähköpostiosoitteella?
 allow-strangers-to-create-accounts=Salli tuntemattomien luoda tilejä?
 allow-users-to-add-x-to-any-website=Salli käyttäjien lisätä <strong>{0}</strong> mihin tahansa websivuun.

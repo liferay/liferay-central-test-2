@@ -542,7 +542,6 @@ allow-anonymous-posting=Permitir a usuarios anónimos escribir mensaxes
 allow-community-administrators-to-use-their-own-logo=¿Permitir que os administradores de comunidades utilicen o seu propio logo?
 allow-dictionary-words-help=Se se comproba isto, despois as palabras comúns do dicionario permítense nas contrasinais do usuario.
 allow-dictionary-words=Permitir palabras do dicionario
-allow-incoming-trackbacks=Permiira trackbacks entrantes
 allow-strangers-to-create-accounts-with-a-company-email-address=¿Permitir que usuarios anónimos cren contas cunha dirección de correo do portal?
 allow-strangers-to-create-accounts=¿Permitir que usuarios anónimos cren contas?
 allow-users-to-add-x-to-any-website=Permitir aos usuarios engadir este portlet <b>{0}</b> a calquera sitio web.
