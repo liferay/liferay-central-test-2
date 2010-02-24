@@ -469,94 +469,97 @@ Liferay.Portlet = {
 	openConfiguration: function(portlet, portletId, configurationURL, namespacedId) {
 		var instance = this;
 
-		var A = AUI();
+		AUI().use(
+			'aui-dialog',
+			function(A) {
+				portlet = A.one(portlet);
 
-		portlet = A.one(portlet);
+				if (portlet && configurationURL) {
+					var title = portlet.one('.portlet-title') || portlet.one('.portlet-title-default');
+					var loading = '<div class="aui-icon-loading"></div>';
 
-		if (portlet && configurationURL) {
-			var title = portlet.one('.portlet-title') || portlet.one('.portlet-title-default');
-			var loading = '<div class="aui-icon-loading"></div>';
+					var iframeId = namespacedId + 'configurationIframe';
 
-			var iframeId = namespacedId + 'configurationIframe';
+					var iframeTPL = '<iframe class="configuration-frame" frameborder="0" id="' + iframeId + '" name="' + iframeId + '" src="' + configurationURL + '"></iframe>';
+					var iframe = A.Node.create(iframeTPL);
 
-			var iframeTPL = '<iframe class="configuration-frame" frameborder="0" id="' + iframeId + '" name="' + iframeId + '" src="' + configurationURL + '"></iframe>';
-			var iframe = A.Node.create(iframeTPL);
+					var bodyContent = A.Node.create('<div></div>');
 
-			var bodyContent = A.Node.create('<div></div>');
+					bodyContent.append(iframe);
 
-			bodyContent.append(iframe);
+					var fixSize = function(number) {
+						return ((parseInt(number, 10) || 0) - 5) + 'px';
+					};
 
-			var fixSize = function(number) {
-				return ((parseInt(number, 10) || 0) - 5) + 'px';
-			};
+					var updateIframeSize = function(event) {
 
-			var updateIframeSize = function(event) {
+						setTimeout(
+							function() {
+								var bodyHeight = bodyNode.getStyle('height');
 
-				setTimeout(
-					function() {
-						var bodyHeight = bodyNode.getStyle('height');
+								iframe.setStyle('height', fixSize(bodyHeight));
 
-						iframe.setStyle('height', fixSize(bodyHeight));
+								bodyNode.loadingmask.refreshMask();
+							},
+							50
+						);
+					};
 
-						bodyNode.loadingmask.refreshMask();
-					},
-					50
-				);
-			};
+					var dialog = new A.Dialog(
+						{
+							after: {
+								heightChange: updateIframeSize,
+								widthChange: updateIframeSize
+							},
+							align: {
+								node: null,
+								points: ['tc', 'tc']
+							},
+							bodyContent: bodyContent,
+							destroyOnClose: true,
+							draggable: true,
+							title: title.html() + ' - ' + Liferay.Language.get('configuration'),
+							width: 820
+						}
+					).render();
 
-			var dialog = new A.Dialog(
-				{
-					after: {
-						heightChange: updateIframeSize,
-						widthChange: updateIframeSize
-					},
-					align: {
-						node: null,
-						points: ['tc', 'tc']
-					},
-					bodyContent: bodyContent,
-					destroyOnClose: true,
-					draggable: true,
-					title: title.html() + ' - ' + Liferay.Language.get('configuration'),
-					width: 820
+					dialog.move(dialog.get('x'), dialog.get('y') + 100);
+
+					var bodyNode = dialog.bodyNode;
+
+					bodyNode.plug(A.LoadingMask).loadingmask.show();
+
+					iframe.on(
+						'load',
+						function(){
+							iframe.get('contentDocument.documentElement').setStyle('overflow', 'visible');
+
+							if (iframe.get('contentWindow.location.search').indexOf('p_p_id=86') == -1) {
+								dialog.close();
+							}
+
+							loading = dialog.get('contentBox').one('.aui-icon-loading');
+
+							if (loading) {
+								loading.hide();
+							}
+
+							var iframeBody = iframe.get('contentWindow.document.body');
+
+							iframe.set('height', iframeBody.get('scrollHeight'));
+
+							var closeButton = iframeBody.one('.aui-button-input-cancel');
+
+							if (closeButton) {
+								closeButton.on('click', dialog.close, dialog);
+							}
+
+							bodyNode.loadingmask.hide();
+						}
+					);
 				}
-			).render();
-
-			dialog.move(dialog.get('x'), dialog.get('y') + 100);
-
-			var bodyNode = dialog.bodyNode;
-
-			bodyNode.plug(A.LoadingMask).loadingmask.show();
-
-			iframe.on(
-				'load',
-				function(){
-					iframe.get('contentDocument.documentElement').setStyle('overflow', 'visible');
-
-					if (iframe.get('contentWindow.location.search').indexOf('p_p_id=86') == -1) {
-						dialog.close();
-					}
-
-					loading = dialog.get('contentBox').one('.aui-icon-loading');
-
-					if (loading) {
-						loading.hide();
-					}
-
-					var iframeBody = iframe.get('contentWindow.document.body');
-
-					iframe.set('height', iframeBody.get('scrollHeight'));
-
-					var closeButton = iframeBody.one('.aui-button-input-cancel');
-
-					if (closeButton) {
-						closeButton.on('click', dialog.close, dialog);
-					}
-
-					bodyNode.loadingmask.hide();
-				}
-			);
-		}
+			}
+		);
 	},
 
 	refresh: function(portlet) {
