@@ -10,6 +10,15 @@
 .ie6 .dockbar, .ie6 .lfr-dockbar-pinned .dockbar {
 }
 
+.dockbar a {
+}
+
+.dockbar .menu-button-active {
+}
+
+.dockbar .menu-button-active a {
+}
+
 .dockbar .user-avatar .sign-out {
 }
 
@@ -46,11 +55,7 @@ html > .lfr-dockbar-pinned {
 .dockbar .impersonating-user .user-links a {
 }
 
-.dockbar .menu-container .notice-message {
-}
-
-.dockbar .menu-container {
-}
+/* ---------- Menus ---------- */
 
 .aui-dockbarmenu-hidden {
 }
@@ -61,37 +66,10 @@ html > .lfr-dockbar-pinned {
 .dockbar .user-toolbar {
 }
 
-.aui-toolbar li {
-}
-
-.ie6 .aui-toolbar li, .ie7 .aui-toolbar li {
-}
-
-.aui-toolbar .has-submenu.selected {
-}
-
-.aui-toolbar-separator {
-}
-
-.aui-underlay {
-}
-
-.aui-underlay-hidden {
-}
-
-.aui-underlay-content {
-}
-
-.aui-underlay .aui-widget-hd {
-}
-
-.aui-underlay-close {
-}
-
 .aui-underlay .portal-add-content {
 }
 
-.aui-underlay .lfr-portlet-item {
+.aui-underlay .portal-add-content .portlet-dd-placeholder {
 }
 
 .add-application .aui-widget-bd {
@@ -103,67 +81,61 @@ html > .lfr-dockbar-pinned {
 .manage-layouts {
 }
 
-.dockbar .menu-container {
+.my-places-menu {
 }
 
-.dockbar .menu-container h4 {
+.my-places-menu ul {
 }
 
-.dockbar .menu-container ul {
+.my-places-menu ul, .my-places-menu li {
 }
 
-.dockbar .menu-container li {
+.my-places-menu a {
 }
 
-.dockbar .menu-container li.last {
+.my-places-menu .current-site {
 }
 
-.dockbar .menu-container li ul {
+.my-places-menu .current-site a {
 }
 
-.dockbar .menu-container li a {
+.my-places-menu .current-site .site-type {
 }
 
-.dockbar .menu-container li a:hover {
+.my-places-menu .current-site a:hover, .my-places-menu a:hover .site-type {
 }
 
-.dockbar .my-places-container {
+.my-places-menu .site-name {
 }
 
-.ie6 .dockbar .my-places-container {
+.my-places-menu .site-type {
 }
 
-.my-places-container ul, .my-places-container li {
+.ie7 .my-places-menu .site-type {
 }
 
-.dockbar .my-places-container a {
+.my-places-menu a:hover .site-type {
 }
 
-.ie6 .dockbar .my-places-container a {
+.ie7 .my-places-menu a {
 }
 
-.dockbar .my-places-container .current-site a {
+.ie7 .my-places-menu .site-name {
 }
 
-.dockbar .my-places-container .site-name {
+.ie7 .my-places-menu .site-type {
 }
 
-.dockbar .my-places-container .site-type {
+.ie6 .my-places-menu {
 }
 
-.dockbar .my-places-container a:hover .site-type {
-}
-
-.ie7 .dockbar .my-places-container .site-type {
+.ie6 .my-places-menu a {
 }
 
 .dockbar .toggle-controls a {
 }
 
 .controls-hidden .toggle-controls a {
-}
-
-.dockbar .control-panel {
 }
 
 .dockbar .menu-button {
@@ -197,4 +169,28 @@ html > .lfr-dockbar-pinned {
 }
 
 .multiple-messages .first {
+}
+
+.add-content-menu .add-page a {
+}
+
+.add-content-menu .add-application a {
+}
+
+.manage-content-menu li a {
+}
+
+.manage-content-menu .manage-page a {
+}
+
+.manage-content-menu .page-layout a {
+}
+
+.manage-content-menu .sitemap a {
+}
+
+.manage-content-menu .settings a {
+}
+
+.manage-content-menu .control-panel a {
 }

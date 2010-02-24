@@ -1,5 +1,3 @@
-/* This CSS sets the default styles for the base components. */
-
 /* ---------- Browser normalization ---------- */
 
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
@@ -12,9 +10,6 @@ fieldset, img {
 }
 
 address, caption, cite, code, dfn, em, strong, th, var {
-}
-
-ol, ul {
 }
 
 caption, th {
@@ -47,16 +42,16 @@ blockquote, ul, ol, dl {
 ol, ul, dl {
 }
 
-ol li, ul ol li {
+ol {
 }
 
-ul li, ol ul li {
+ul {
 }
 
-ul ul li {
+ul ul {
 }
 
-ol ol li {
+ol ol {
 }
 
 dl dd {

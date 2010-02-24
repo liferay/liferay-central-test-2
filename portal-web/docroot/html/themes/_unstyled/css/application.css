@@ -1,18 +1,18 @@
 /* ---------- Main ---------- */
 
-.ui-wrapper {
+.aui-state-default {
 }
 
-.ui-wrapper input, .ui-wrapper textarea {
+.aui-state-hover {
+}
+
+.aui-state-active {
 }
 
 .results-header {
 }
 
 .results-header th, .results-header td {
-}
-
-.results-header th a, .results-header td a {
 }
 
 .results-header .sort-column .result-column-name {
@@ -30,84 +30,9 @@
 .results-row.hover td {
 }
 
-/* ---------- Asset Categories ---------- */
-
-.ui-asset-categories {
-}
-
-.ui-asset-categories:after {
-}
-
-.ie .ui-asset-categories {
-}
-
-.ui-asset-categories.empty {
-}
-
-.ui-asset-categories .ui-asset-category {
-}
-
-.ui-asset-categories .ui-asset-category:hover {
-}
-
-.ui-asset-categories .ui-asset-category-delete {
-}
-
-.ui-asset-categories .ui-asset-category-delete span {
-}
-
-.ui-asset-categories .ui-asset-category-delete:hover span {
-}
-
-.ui-asset-categories-input {
-}
-
-.tags-vocabulary-name span {
-}
-
-/* ---------- Breadcrumbs ---------- */
-
-.breadcrumbs {
-}
-
-.breadcrumbs li {
-}
-
-.breadcrumbs .last {
-}
-
-.breadcrumbs .last a {
-}
-
-/* ---------- Site breadcrumbs ---------- */
-
-.site-breadcrumbs {
-}
-
-.site-breadcrumbs ul {
-}
-
-.site-breadcrumbs li {
-}
-
-.site-breadcrumbs li span {
-}
-
-.site-breadcrumbs li span a {
-}
-
-.site-breadcrumbs .last {
-}
-
-.site-breadcrumbs .last span {
-}
-
 /* ---------- Dragging/sorting indicators ---------- */
 
 .lfr-grid.dragging {
-}
-
-.lfr-grid.dragging .lfr-column {
 }
 
 .drop-area {
@@ -117,6 +42,18 @@
 }
 
 .portlet-boundary.yui-dd-dragging {
+}
+
+.ie .portlet-boundary.yui-dd-dragging {
+}
+
+.portlet-boundary.yui-dd-dragging .portlet {
+}
+
+.aui-portal-layout-proxy {
+}
+
+.aui-portal-layout-proxy .portlet-topper {
 }
 
 .aui-proxy {
@@ -143,231 +80,10 @@
 .aui-sortable-proxy {
 }
 
-.portlet-sort-helper {
+.lfr-freeform-layout-drag-indicator {
 }
 
-/* ---------- Resizables ---------- */
-
-.aui-resizable {
-}
-
-.ie6 .aui-resizable {
-}
-
-.ie6 .aui-resizable-wrap {
-}
-
-.aui-resizable-handle {
-}
-
-.aui-resizable .aui-resizable-handle {
-}
-
-.aui-resizable-handle-t, .aui-resizable-handle-b {
-}
-
-.aui-resizable-handle-t {
-}
-
-.aui-resizable-handle-b {
-}
-
-.ie6 .aui-resizable-handle-t, .ie6 .aui-resizable-handle-b {
-}
-
-.aui-resizable-handle-l, .aui-resizable-handle-r {
-}
-
-.aui-resizable-handle-r {
-}
-
-.aui-resizable-handle-l {
-}
-
-.aui-resizable-handle-tr, .aui-resizable-handle-tr {
-}
-
-.aui-resizable-handle-tr {
-}
-
-.aui-resizable-handle-tl {
-}
-
-.aui-resizable-handle-bl, .aui-resizable-handle-br {
-}
-
-.aui-resizable-handle-br {
-}
-
-.aui-resizable-handle-bl {
-}
-
-.aui-resizable-hover .aui-resizable-handle, .aui-resizable-hidden .aui-resizable-handle {
-}
-
-.ie .aui-resizable-hover .aui-resizable-handle, .ie .aui-resizable-hidden .aui-resizable-handle {
-}
-
-.aui-resizable-ghost {
-}
-
-.ie .aui-resizable-ghost {
-}
-
-.aui-resizable-knob .aui-resizable-handle {
-}
-
-.aui-resizable-knob .aui-resizable-handle-t {
-}
-
-.aui-resizable-knob .aui-resizable-handle-r {
-}
-
-.aui-resizable-knob .aui-resizable-handle-b {
-}
-
-.aui-resizable-knob .aui-resizable-handle-l {
-}
-
-.aui-resizable-knob .aui-resizable-handle-tr {
-}
-
-.aui-resizable-knob .aui-resizable-handle-tl {
-}
-
-.aui-resizable-knob .aui-resizable-handle-bl {
-}
-
-.aui-resizable-knob .aui-resizable-handle-br {
-}
-
-.aui-resizable-status {
-}
-
-.aui-resizable-status strong, .aui-resizable-status em {
-}
-
-.ie6 .aui-resizable-status, .ie6 .aui-resizable-status strong, .ie6 .aui-resizable-status em {
-}
-
-.freeform .portlet-boundary .aui-resizable-handle {
-}
-
-/* ---------- Slider ---------- */
-
-.ui-slider {
-}
-
-.ui-slider-handle {
-}
-
-.ui-slider-disabled .ui-slider-handle {
-}
-
-.ie .ui-slider-disabled .ui-slider-handle {
-}
-
-.ui-slider-range {
-}
-
-.ie .ui-slider-range {
-}
-
-/* ---------- Container ---------- */
-
-.aui-panel-container {
-}
-
-.aui-overlay-content {
-}
-
-.aui-panel {
-}
-
-.aui-panel .aui-header {
-}
-
-.ie6 .aui-panel .aui-header {
-}
-
-.aui-overlay .container-close {
-}
-
-.aui-panel .aui-body {
-}
-
-.aui-panel.aui-resizable .aui-body {
-}
-
-.ie6 body.masked select {
-}
-
-.ie6 div.aui-panel-container select {
-}
-
-.ie6 div.drag select {
-}
-
-.ie6 div.hide-select select {
-}
-
-.aui-mask {
-}
-
-.ie .aui-mask {
-}
-
-.hide-scrollbars, .hide-scrollbars * {
-}
-
-.hide-scrollbars select {
-}
-
-.show-scrollbars {
-}
-
-.aui-panel-container.show-scrollbars {
-}
-
-.aui-panel-container.show-scrollbars .underlay {
-}
-
-/* ---------- Context Panel ---------- */
-
-.aui-context-panel-container {
-}
-
-.aui-context-panel {
-}
-
-.aui-context-panel .container-close {
-}
-
-.aui-context-panel .aui-context-panel-pointer, .aui-context-panel .aui-context-panel-pointer-inner {
-}
-
-.aui-context-panel-arrow-tl .aui-context-panel-pointer {
-}
-
-.aui-context-panel-arrow-tl .aui-context-panel-pointer {
-}
-
-.aui-context-panel-arrow-tl .aui-context-panel-pointer-inner {
-}
-
-.aui-context-panel-arrow-tl .aui-context-panel-pointer-inner {
-}
-
-.aui-context-panel-arrow-rt .aui-context-panel-pointer {
-}
-
-.aui-context-panel-arrow-rt .aui-context-panel-pointer {
-}
-
-.aui-context-panel-arrow-rt .aui-context-panel-pointer-inner {
-}
-
-.aui-context-panel-arrow-rt .aui-context-panel-pointer-inner {
+.aui-portal-layout-drag-target-indicator  {
 }
 
 /* ---------- Portal tool tips ---------- */
@@ -377,37 +93,25 @@
 
 /* ---------- Tags ---------- */
 
-.ui-tags {
+.aui-tagselector-content {
 }
 
-.ui-tags:after {
+.aui-tagselector .lfr-tag-selector-input {
 }
 
-.ie .ui-tags {
+.aui-tagselector-focused .aui-tagselector-content {
 }
 
-.ui-tags.empty {
+.aui-tagselector .aui-field .aui-field-content {
 }
 
-.ui-tags .ui-tag {
+.aui-tagselector .aui-toolset {
 }
 
-.ui-tags .ui-tag:hover {
+.aui-tagselector .aui-textboxlist-input-container {
 }
 
-.ui-tags .ui-tag-delete {
-}
-
-.ui-tags .ui-tag-delete span {
-}
-
-.ui-tags .ui-tag-delete:hover span {
-}
-
-.ui-tags-input {
-}
-
-.tags-vocabulary-name span {
+.aui-categoriesselector-content {
 }
 
 /* ---------- Tag cloud and tag list ---------- */
@@ -445,12 +149,134 @@
 .tag-cloud .tag-popularity-6 {
 }
 
-/* ---------- Rounded corners ---------- */
+/* ---------- Underlay ---------- */
 
-.aui-context-panel {
+.aui-underlay {
 }
 
-/* ---------- Drop shadows ---------- */
+.aui-underlay-hidden {
+}
 
-.aui-context-panel {
+.aui-underlay-content {
+}
+
+.aui-underlay .aui-widget-hd {
+}
+
+.aui-underlay-close {
+}
+
+.aui-underlay .lfr-portlet-item {
+}
+
+/* ---------- Tabs ---------- */
+
+.aui-tabview-list {
+}
+
+.ie7 .aui-tabview-list {
+}
+
+.aui-tab {
+}
+
+.aui-tab-content {
+}
+
+.aui-tab-active {
+}
+
+.aui-tab-active, .aui-tab-active a {
+}
+
+.aui-tabview-list .toggle {
+}
+
+/* ---------- Misc. ---------- */
+
+.lfr-panel-container {
+}
+
+.lfr-panel-container {
+}
+
+.aui-dialog-bd {
+}
+
+.aui-dialog-content {
+}
+
+.aui-panel-hd {
+}
+
+/* ---------- Menus ---------- */
+
+.lfr-actions.portlet-options .lfr-trigger strong span, .visible.portlet-options .lfr-trigger strong span {
+}
+
+.lfr-actions.portlet-options:hover, .lfr-actions.portlet-options:hover ul {
+}
+
+.lfr-menu-list {
+}
+
+.aui-menu .notice-message {
+}
+
+.aui-menu {
+}
+
+.aui-menu-content {
+}
+
+.aui-menu-content li {
+}
+
+.aui-menu-content, .lfr-menu-list ul {
+}
+
+.aui-menugroup-content h4 {
+}
+
+.aui-menugroup-content ul, .lfr-menu-list ul ul {
+}
+
+.aui-menu-content li, .lfr-menu-list ul li {
+}
+
+.ie7 .aui-menu-content li {
+}
+
+.aui-menu-content li.first, .lfr-menu-list ul li.first {
+}
+
+.aui-menu-content li.last, .lfr-menu-list ul li.last {
+}
+
+.aui-menu-content li a, .lfr-menu-list ul li a {
+}
+
+.aui-menu-content li a:hover, .lfr-menu-list ul a:hover {
+}
+
+.aui-menu-content a, .lfr-menu-list li a, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
+}
+
+/* ---------- Toolbar ---------- */
+
+.aui-toolbar li {
+}
+
+.ie6 .aui-toolbar li, .ie7 .aui-toolbar li {
+}
+
+.aui-toolbar-separator {
+}
+
+/* ---------- Loading Mask ---------- */
+
+.aui-loadingmask-content {
+}
+
+.aui-loadingmask-message {
 }

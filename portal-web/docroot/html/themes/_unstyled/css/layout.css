@@ -1,6 +1,7 @@
-/* This CSS controls the column layout. It is not recommended that you change this file. */
-
 /* ---------- Wrapper ---------- */
+
+td.lfr-column {
+}
 
 .lfr-grid {
 }
@@ -9,6 +10,9 @@
 }
 
 /* ---------- Column widths ---------- */
+
+.portlet-nested-portlets .lfr-portlet-column.empty {
+}
 
 .lfr-grid.dragging .lfr-column {
 }
@@ -86,7 +90,4 @@
 /* ---------- Freeform ---------- */
 
 .freeform .lfr-column {
-}
-
-.columns-2-2 #column-4 {
 }
