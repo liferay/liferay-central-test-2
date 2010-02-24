@@ -180,7 +180,7 @@ request.setAttribute("view_event.jsp-event", event);
 %>
 
 <liferay-ui:tabs
-	names="vevent"
+	names="event"
 	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
