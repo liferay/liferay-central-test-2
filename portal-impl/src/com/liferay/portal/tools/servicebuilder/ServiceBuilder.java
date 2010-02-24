@@ -937,15 +937,13 @@ public class ServiceBuilder {
 							referencePackage + "." + referenceEntity);
 					}
 
-					if (Validator.isNull(_pluginName)) {
-						if (!_packagePath.equals("com.liferay.counter")) {
-							referenceSet.add("com.liferay.counter.Counter");
-						}
+					if (!_packagePath.equals("com.liferay.counter")) {
+						referenceSet.add("com.liferay.counter.Counter");
+					}
 
-						if (!_packagePath.equals("com.liferay.portal")) {
-							referenceSet.add("com.liferay.portal.Resource");
-							referenceSet.add("com.liferay.portal.User");
-						}
+					if (!_packagePath.equals("com.liferay.portal")) {
+						referenceSet.add("com.liferay.portal.Resource");
+						referenceSet.add("com.liferay.portal.User");
 					}
 
 					for (String referenceName : referenceSet) {
