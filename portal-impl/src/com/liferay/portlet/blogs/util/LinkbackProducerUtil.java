@@ -188,7 +188,7 @@ public class LinkbackProducerUtil {
 			options.setLocation(targetUri);
 			options.setHead(true);
 
-			HttpUtil.URLtoString(targetUri);
+			HttpUtil.URLtoByteArray(options);
 
 			Http.Response response = options.getResponse();
 

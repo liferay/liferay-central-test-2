@@ -226,7 +226,7 @@ public class EditEntryAction extends PortletAction {
 
 					response.addHeader(
 						"X-Pingback",
-						PortalUtil.getPortalURL(renderRequest) + "/pingback");
+						PortalUtil.getPortalURL(renderRequest) + "/pingback/");
 				}
 			}
 		}
