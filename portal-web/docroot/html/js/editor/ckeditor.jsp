@@ -63,9 +63,6 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			return CKEDITOR.instances.CKEditor1.getData();
 		}
 
-		window.onload = function() {
-			initCkArea();
-		}
 	</script>
 </head>
 
@@ -86,6 +83,8 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			filebrowserUploadUrl: '/html/js/editor/ckeditor/editor/filemanager/browser/liferay/frmupload.html?Connector=<%= connectorURL %>'
 		}
 	);
+
+	initCkArea();
 </script>
 
 </body>
