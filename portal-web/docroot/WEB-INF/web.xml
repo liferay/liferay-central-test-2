@@ -818,7 +818,7 @@
 	<servlet>
 		<servlet-name>Netvibes Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.NetvibesServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>Pingback Servlet</servlet-name>
