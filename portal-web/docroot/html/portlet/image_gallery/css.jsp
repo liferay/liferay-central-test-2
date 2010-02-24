@@ -32,7 +32,7 @@
 </liferay-util:buffer>
 
 <%
-html = StringUtil.replace(html, "documentLibraryPanels", "imageGalleryPanels");
+html = StringUtil.replace(html, "documentLibraryPanelContainer", "imageGalleryPanelContainer");
 html = StringUtil.replace(html, "file-entries", "images");
 html = StringUtil.replace(html, "file-entry", "image");
 html = StringUtil.replace(html, "portlet-document-library", "portlet-image-gallery");

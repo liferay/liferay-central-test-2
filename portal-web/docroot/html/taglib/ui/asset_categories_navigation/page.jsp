@@ -50,7 +50,7 @@ else {
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
-<liferay-ui:panel-container cssClass="taglib-asset-categories-navigation" extended="<%= true %>" persistState="<%= true %>">
+<liferay-ui:panel-container cssClass="taglib-asset-categories-navigation" extended="<%= true %>" id='<%= namespace + "taglibAssetCategoriesNavigationPanel" %>' persistState="<%= true %>">
 
 	<%
 	for (int i = 0; i < vocabularies.size(); i++) {
@@ -87,7 +87,7 @@ if (hidePortletWhenEmpty) {
 %>
 
 <aui:script use="aui-tree-view">
-	var treeViews = A.all('#<%= namespace %>taglibAssetCategoriesNavigation .lfr-asset-category-list-container');
+	var treeViews = A.all('#<%= namespace %>taglibAssetCategoriesNavigationPanel .lfr-asset-category-list-container');
 
 	treeViews.each(
 		function(treeEl) {

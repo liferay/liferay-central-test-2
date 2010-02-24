@@ -80,7 +80,7 @@
 	padding: 5px;
 }
 
-.portlet-message-boards #MessageBoardsPanels {
+.portlet-message-boards #messageBoardsPanelContainer {
 	border-width: 0;
 }
 

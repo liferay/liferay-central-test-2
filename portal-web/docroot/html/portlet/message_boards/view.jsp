@@ -164,7 +164,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			</div>
 		</c:if>
 
-		<liferay-ui:panel-container cssClass="message-boards-panels" extended="<%= false %>" persistState="<%= true %>">
+		<liferay-ui:panel-container cssClass="message-boards-panels" extended="<%= false %>" id="messageBoardsPanelContainer" persistState="<%= true %>">
 
 			<%
 			List<String> headerNames = new ArrayList<String>();
