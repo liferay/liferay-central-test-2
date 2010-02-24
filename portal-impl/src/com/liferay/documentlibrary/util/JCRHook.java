@@ -74,10 +74,6 @@ import org.apache.commons.lang.StringUtils;
  */
 public class JCRHook extends BaseHook {
 
-	public static final int FETCH_DELAY = 500;
-
-	public static final int MAX_FAILED_FETCHES = 5;
-
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 

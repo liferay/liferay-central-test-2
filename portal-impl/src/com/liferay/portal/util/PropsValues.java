@@ -600,6 +600,13 @@ public class PropsValues {
 
 	public static String DL_HOOK_IMPL = PropsUtil.get(PropsKeys.DL_HOOK_IMPL);
 
+	public static final int DL_HOOK_JCR_FETCH_DELAY = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.DL_HOOK_JCR_FETCH_DELAY));
+
+	public static final int DL_HOOK_JCR_FETCH_MAX_FAILURES =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.DL_HOOK_JCR_FETCH_MAX_FAILURES));
+
 	public static final boolean DL_LAYOUTS_SYNC_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_ENABLED));
 
