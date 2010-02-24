@@ -1,6 +1,3 @@
-alter table BlogsEntry add allowPingbacks BOOLEAN;
-update BlogsEntry set allowPingbacks = TRUE;
-
 alter table BookmarksEntry add groupId LONG;
 
 create table BrowserTracker (

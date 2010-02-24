@@ -1,4 +1,3 @@
-
 create table AssetCategory (
 	uuid_ VARCHAR(75) null,
 	categoryId LONG not null primary key,
@@ -112,6 +111,7 @@ create table AssetVocabulary (
 	settings_ STRING null
 );
 
+alter table BlogsEntry add allowPingbacks BOOLEAN;
 alter table BlogsEntry add status INTEGER;
 alter table BlogsEntry add statusByUserId LONG;
 alter table BlogsEntry add statusByUserName VARCHAR(75);
@@ -119,6 +119,7 @@ alter table BlogsEntry add statusDate DATE;
 
 COMMIT_TRANSACTION;
 
+update BlogsEntry set allowPingbacks = TRUE;
 update BlogsEntry set status = 0 where draft = FALSE;
 update BlogsEntry set status = 2 where draft = TRUE;
 
