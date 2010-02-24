@@ -113,7 +113,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		if (_headers.containsKey(name)) {
 			Long[] values = (Long[])_headers.get(name);
 
-			ArrayUtil.append(values, new Long(date));
+			values = ArrayUtil.append(values, new Long(date));
 
 			_headers.put(name, values);
 		}
@@ -130,7 +130,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		if (_headers.containsKey(name)) {
 			String[] values = (String[])_headers.get(name);
 
-			ArrayUtil.append(values, value);
+			values = ArrayUtil.append(values, value);
 
 			_headers.put(name, values);
 		}
@@ -147,7 +147,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		if (_headers.containsKey(name)) {
 			Integer[] values = (Integer[])_headers.get(name);
 
-			ArrayUtil.append(values, new Integer(value));
+			values = ArrayUtil.append(values, new Integer(value));
 
 			_headers.put(name, values);
 		}
@@ -164,7 +164,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		if (_headers.containsKey("cookies")) {
 			Cookie[] cookies = (Cookie[])_headers.get("cookies");
 
-			ArrayUtil.append(cookies, cookie);
+			cookies = (Cookie[])ArrayUtil.append(cookies, cookie);
 
 			_headers.put("cookies", cookies);
 		}
