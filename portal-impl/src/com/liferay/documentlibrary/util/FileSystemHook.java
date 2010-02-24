@@ -116,7 +116,7 @@ public class FileSystemHook extends BaseHook {
 			indexer.reindex(fileModel);
 		}
 		catch (IOException ioe) {
-			throw new SystemException();
+			throw new SystemException(ioe);
 		}
 	}
 
@@ -198,7 +198,7 @@ public class FileSystemHook extends BaseHook {
 			return new FileInputStream(fileNameVersionFile);
 		}
 		catch (IOException ioe) {
-			throw new SystemException();
+			throw new SystemException(ioe);
 		}
 	}
 
@@ -364,7 +364,7 @@ public class FileSystemHook extends BaseHook {
 			indexer.reindex(fileModel);
 		}
 		catch (IOException ioe) {
-			throw new SystemException();
+			throw new SystemException(ioe);
 		}
 	}
 
