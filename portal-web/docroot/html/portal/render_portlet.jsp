@@ -956,10 +956,10 @@ else {
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 
 		<%
-		String modules = "dialog,loading-mask";
+		String modules = "aui-dialog,aui-loading-mask";
 
 		if (showConfigurationIcon) {
-			modules += ",editable";
+			modules += ",aui-editable";
 		}
 		%>
 
