@@ -48,6 +48,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
@@ -126,6 +127,18 @@ public class PingbackMethodImpl implements Method {
 				"[...] " + getExcerpt() + " [...] [url=" + _sourceUri + "]" +
 					LanguageUtil.get(LocaleUtil.getDefault(), "read-more") +
 						"[/url]";
+
+			List<MBMessage> messages =
+				MBMessageLocalServiceUtil.getThreadMessages(
+					threadId, StatusConstants.APPROVED);
+
+			for (MBMessage message : messages) {
+				if (message.getBody().equals(body)) {
+					return XmlRpcUtil.createFault(
+						PINGBACK_ALREADY_REGISTERED,
+						"Pingback previously registered");
+				}
+			}
 
 			MBMessageLocalServiceUtil.addDiscussionMessage(
 				userId, StringPool.BLANK, className, classPK, threadId,
