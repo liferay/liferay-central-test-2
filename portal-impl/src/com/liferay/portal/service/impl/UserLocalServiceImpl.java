@@ -58,13 +58,9 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -75,10 +71,8 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
@@ -118,10 +112,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.ExpandoColumnConstants;
-import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
@@ -2844,97 +2834,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		return userIds;
-	}
-
-	protected void populateQuery(
-			BooleanQuery contextQuery, BooleanQuery searchQuery,
-			ExpandoBridge expandoBridge, Set<String> attributeNames,
-			String key, Object value, boolean andSearch)
-		throws ParseException {
-
-		if (key.equals("usersRoles")) {
-			contextQuery.addRequiredTerm("roleIds", String.valueOf(value));
-		}
-		else if (key.equals("usersUserGroups")) {
-			contextQuery.addRequiredTerm("userGroupIds", String.valueOf(value));
-		}
-		else if (key.equals("usersOrgs")) {
-			if (value instanceof Long[]) {
-				Long[] values = (Long[])value;
-
-				BooleanQuery usersOrgsQuery = BooleanQueryFactoryUtil.create();
-
-				for (long organizationId : values) {
-					usersOrgsQuery.addTerm("organizationIds", organizationId);
-					usersOrgsQuery.addTerm(
-						"ancestorOrganizationIds", organizationId);
-				}
-
-				contextQuery.add(usersOrgsQuery, BooleanClauseOccur.MUST);
-			}
-			else {
-				contextQuery.addRequiredTerm(
-					"organizationIds", String.valueOf(value));
-			}
-		}
-		else if (attributeNames.contains(key)) {
-			UnicodeProperties properties = expandoBridge.getAttributeProperties(
-				key);
-
-			if (GetterUtil.getBoolean(
-					properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
-
-				int type = expandoBridge.getAttributeType(key);
-
-				if ((type == ExpandoColumnConstants.STRING) &&
-					(Validator.isNotNull((String)value))) {
-
-					if (andSearch) {
-						searchQuery.addRequiredTerm(key, (String)value, true);
-					}
-					else {
-						searchQuery.addTerm(key, (String)value, true);
-					}
-				}
-			}
-		}
-		else if (Validator.isNotNull(key) && Validator.isNotNull(value)) {
-			if (andSearch) {
-				searchQuery.addRequiredTerm(key, String.valueOf(value));
-			}
-			else {
-				searchQuery.addTerm(key, String.valueOf(value));
-			}
-		}
-	}
-
-	protected void populateQuery(
-			BooleanQuery contextQuery, BooleanQuery searchQuery,
-			LinkedHashMap<String, Object> params, boolean andSearch)
-		throws ParseException {
-
-		if (params == null) {
-			return;
-		}
-
-		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-			User.class.getName());
-
-		Set<String> attributeNames = SetUtil.fromEnumeration(
-			expandoBridge.getAttributeNames());
-
-		for (Map.Entry<String, Object> entry : params.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
-
-			if (value == null) {
-				continue;
-			}
-
-			populateQuery(
-				contextQuery, searchQuery, expandoBridge, attributeNames,
-				key, value, andSearch);
-		}
 	}
 
 	protected void sendEmail(User user, String password)
