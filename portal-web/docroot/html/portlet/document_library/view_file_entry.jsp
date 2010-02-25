@@ -419,6 +419,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 		</liferay-ui:panel>
+
 		<c:if test="<%= PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION) %>">
 			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
 				<portlet:actionURL var="discussionURL">

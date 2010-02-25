@@ -312,6 +312,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 		</liferay-ui:panel>
+
 		<c:if test="<%= PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.ADD_DISCUSSION) %>">
 			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
 				<portlet:actionURL var="discussionURL">
