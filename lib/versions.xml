@@ -188,17 +188,17 @@
 	</library>
 	<library>
 		<file-name>development/hsql.jar</file-name>
-		<version>1.8.1.1</version>
+		<version>1.8.0.10</version>
 		<project-name>HSQL Database Engine</project-name>
 		<project-url>http://hsqldb.org</project-url>
 		<licenses>
 			<license>
-				<license-name>Original Hypersonic License</license-name>
-			</license>
-			<license>
-				<license-name>HSQL Development Group License</license-name>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
+		<comments>
+			See LPS-7314.
+		</comments>
 	</library>
 	<library>
 		<file-name>development/icefaces-comps.jar</file-name>
