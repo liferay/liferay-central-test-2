@@ -198,6 +198,12 @@
 		#set ($css_class = $css_class + " guest-community")
 	#end
 
+	#if	($is_signed_in)
+		#set ($css_class = $css_class + " signed-in")
+	#else
+		#set ($css_class = $css_class + " signed-out")
+	#end
+
 	#if	($layout.isPublicLayout())
 		#set ($css_class = $css_class + " public-page")
 	#else
