@@ -136,6 +136,22 @@ AUI().use(
 								if (!Liferay.Dockbar.addApplication) {
 									instance.addUnderlay(
 										{
+											after: {
+												visibleChange: function(event) {
+													var action = 'addClass';
+
+													if (!event.newVal) {
+														action = 'removeClass';
+													}
+													else {
+														Liferay.Util.focusFormField('#layout_configuration_content');
+													}
+
+													var body = A.getBody();
+
+													body[action]('lfr-has-sidebar');
+												}
+											},
 											className: 'add-application',
 											io: {
 												data: {
@@ -163,22 +179,6 @@ AUI().use(
 												uri: themeDisplay.getPathMain() + '/portal/render_portlet'
 											},
 											name: 'addApplication',
-											on: {
-												visibleChange: function(event) {
-													var action = 'addClass';
-
-													if (!event.newVal) {
-														action = 'removeClass';
-													}
-													else {
-														Liferay.Util.focusFormField('#layout_configuration_content');
-													}
-
-													var body = A.getBody();
-
-													body[action]('lfr-has-sidebar');
-												}
-											},
 											width: '255px'
 										}
 									);
