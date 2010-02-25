@@ -134,22 +134,24 @@ AUI().use(
 								Liferay.Dockbar.addContent.hide();
 
 								if (!Liferay.Dockbar.addApplication) {
+									var _setAddApplicationUI = function(visible) {
+										var body = A.getBody();
+
+										body.toggleClass('lfr-has-sidebar', visible);
+									};
+
 									instance.addUnderlay(
 										{
 											after: {
+												render: function(event) {
+													_setAddApplicationUI(true);
+												},
 												visibleChange: function(event) {
-													var action = 'addClass';
-
-													if (!event.newVal) {
-														action = 'removeClass';
-													}
-													else {
+													if (event.newVal) {
 														Liferay.Util.focusFormField('#layout_configuration_content');
 													}
 
-													var body = A.getBody();
-
-													body[action]('lfr-has-sidebar');
+													_setAddApplicationUI(event.newVal);
 												}
 											},
 											className: 'add-application',
