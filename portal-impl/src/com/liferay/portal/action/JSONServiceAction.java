@@ -22,6 +22,10 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.counter.service.CounterServiceUtil;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -50,8 +54,10 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -112,6 +118,13 @@ public class JSONServiceAction extends JSONAction {
 		jsonObj.put("portletTitle", assetEntryType.getPortletTitle());
 
 		return jsonObj;
+	}
+
+	public JSONServiceAction() {
+		_invalidClassNames.add(CounterServiceUtil.class.getName());
+		_invalidClassNames.add(DLLocalServiceUtil.class.getName());
+		_invalidClassNames.add(DLServiceUtil.class.getName());
+		_invalidClassNames.add(MailServiceUtil.class.getName());
 	}
 
 	public String getJSON(
@@ -732,7 +745,8 @@ public class JSONServiceAction extends JSONAction {
 
 		if (className.contains(".service.") &&
 			className.endsWith("ServiceUtil") &&
-			!className.endsWith("LocalServiceUtil")) {
+			!className.endsWith("LocalServiceUtil") &&
+			!_invalidClassNames.contains(className)) {
 
 			return true;
 		}
@@ -743,6 +757,7 @@ public class JSONServiceAction extends JSONAction {
 
 	private static Log _log = LogFactoryUtil.getLog(JSONServiceAction.class);
 
+	private Set<String> _invalidClassNames = new HashSet<String>();
 	private Map<String, Object[]> _methodCache =
 		new HashMap<String, Object[]>();
 
