@@ -29,7 +29,7 @@
 </h1>
 
 <div class="portal-add-content">
-	<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
+	<liferay-ui:panel-container extended="<%= true %>" id="addContentPanelContainer" persistState="<%= true %>">
 
 		<%
 		String ppid = GetterUtil.getString((String)request.getAttribute("control_panel.jsp-ppid"), layoutTypePortlet.getStateMaxPortletId());
@@ -52,7 +52,7 @@
 				}
 		%>
 
-				<liferay-ui:panel collapsible="<%= true %>" cssClass="<%= cssClass %>" extended="<%= true %>" persistState="<%= true %>" title="<%= title %>">
+				<liferay-ui:panel collapsible="<%= true %>" cssClass="<%= cssClass %>" extended="<%= true %>" id="<%= panelCategory %>" persistState="<%= true %>" title="<%= title %>">
 					<ul class="category-portlets">
 
 						<%

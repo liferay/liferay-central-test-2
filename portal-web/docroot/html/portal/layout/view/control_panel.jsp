@@ -189,7 +189,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 
 									<liferay-ui:panel-floating-container paging="<%= true %>" trigger=".lfr-group-selector">
 										<c:if test="<%= permissionChecker.isCompanyAdmin() %>">
-											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "shared") %>'>
+											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="sharedPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "shared") %>'>
 												<ul>
 													<li>
 														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>"><liferay-ui:message key="global" /></a>
@@ -204,7 +204,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 										%>
 
 										<c:if test="<%= !manageableGroups.isEmpty() %>">
-											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "communities") %>'>
+											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="communitiesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "communities") %>'>
 												<ul>
 
 													<%
@@ -230,7 +230,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 										</c:if>
 
 										<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "organizations") %>'>
+											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="communitiesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "organizations") %>'>
 												<ul>
 
 													<%
