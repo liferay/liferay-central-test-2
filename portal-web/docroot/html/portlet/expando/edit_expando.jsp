@@ -35,7 +35,7 @@ ExpandoColumn column = (ExpandoColumn)request.getAttribute(WebKeys.EXPANDO_COLUM
 long columnId = BeanParamUtil.getLong(column, request, "columnId");
 int type = BeanParamUtil.getInteger(column, request, "type");
 
-ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(modelResource);
+ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.getCompanyId(), modelResource);
 
 UnicodeProperties properties = new UnicodeProperties(true);
 Serializable defaultValue = null;

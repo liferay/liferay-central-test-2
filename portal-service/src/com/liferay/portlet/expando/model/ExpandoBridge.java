@@ -61,6 +61,8 @@ public interface ExpandoBridge {
 
 	public long getClassPK();
 
+	public long getCompanyId();
+
 	public boolean hasAttribute(String name);
 
 	public boolean isIndexEnabled();
@@ -75,6 +77,12 @@ public interface ExpandoBridge {
 	public void setAttributes(Map<String, Serializable> attributes);
 
 	public void setAttributes(ServiceContext serviceContext);
+
+	public void setClassName(String className);
+
+	public void setClassPK(long classPK);
+
+	public void setCompanyId(long companyId);
 
 	public void setIndexEnabled(boolean indexEnabled);
 

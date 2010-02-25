@@ -409,7 +409,8 @@ public class UserIndexer extends BaseIndexer {
 
 		if (params != null) {
 			ExpandoBridge expandoBridge =
-				ExpandoBridgeFactoryUtil.getExpandoBridge(User.class.getName());
+				ExpandoBridgeFactoryUtil.getExpandoBridge(
+					searchContext.getCompanyId(), User.class.getName());
 
 			Set<String> attributeNames = SetUtil.fromEnumeration(
 				expandoBridge.getAttributeNames());

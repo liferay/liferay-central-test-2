@@ -64,7 +64,7 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 
 		List<ExpandoColumn> expandoColumns =
 			ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
-				expandoBridge.getClassName());
+				expandoBridge.getCompanyId(), expandoBridge.getClassName());
 
 		if ((expandoColumns == null) || expandoColumns.isEmpty()) {
 			return;
@@ -90,7 +90,7 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 
 		List<ExpandoValue> expandoValues =
 			ExpandoValueLocalServiceUtil.getRowValues(
-				expandoBridge.getClassName(),
+				expandoBridge.getCompanyId(), expandoBridge.getClassName(),
 				ExpandoTableConstants.DEFAULT_TABLE_NAME,
 				expandoBridge.getClassPK(), QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);

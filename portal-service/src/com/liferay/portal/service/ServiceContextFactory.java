@@ -111,7 +111,8 @@ public class ServiceContextFactory {
 
 		Map<String, Serializable> expandoBridgeAttributes =
 			PortalUtil.getExpandoBridgeAttributes(
-				ExpandoBridgeFactoryUtil.getExpandoBridge(className),
+				ExpandoBridgeFactoryUtil.getExpandoBridge(
+					themeDisplay.getCompanyId(), className),
 				portletRequest);
 
 		serviceContext.setExpandoBridgeAttributes(expandoBridgeAttributes);

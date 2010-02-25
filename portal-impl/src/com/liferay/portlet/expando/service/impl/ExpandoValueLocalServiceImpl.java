@@ -55,9 +55,9 @@ public class ExpandoValueLocalServiceImpl
 	public ExpandoValue addValue(
 			long classNameId, long tableId, long columnId, long classPK,
 			String data)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		long companyId = CompanyThreadLocal.getCompanyId();
+		ExpandoTable table = expandoTablePersistence.findByPrimaryKey(tableId);
 
 		ExpandoRow row = expandoRowPersistence.fetchByT_C(tableId, classPK);
 
@@ -66,7 +66,7 @@ public class ExpandoValueLocalServiceImpl
 
 			row = expandoRowPersistence.create(rowId);
 
-			row.setCompanyId(companyId);
+			row.setCompanyId(table.getCompanyId());
 			row.setTableId(tableId);
 			row.setClassPK(classPK);
 
@@ -81,7 +81,7 @@ public class ExpandoValueLocalServiceImpl
 
 			value = expandoValuePersistence.create(valueId);
 
-			value.setCompanyId(companyId);
+			value.setCompanyId(table.getCompanyId());
 			value.setTableId(tableId);
 			value.setColumnId(columnId);
 			value.setRowId(row.getRowId());
@@ -97,12 +97,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			boolean data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, boolean data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -119,12 +119,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			boolean[] data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, boolean[] data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -141,12 +141,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			Date data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, Date data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -163,12 +163,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			Date[] data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, Date[] data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -185,12 +185,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			double data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, double data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -207,12 +207,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			double[] data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, double[] data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -229,12 +229,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			float data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, float data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -251,12 +251,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			float[] data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, float[] data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -273,12 +273,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			int data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, int data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -295,12 +295,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			int[] data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, int[] data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -317,12 +317,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			long data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, long data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -339,12 +339,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			long[] data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, long[] data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -361,94 +361,104 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			Object data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, Object data)
 		throws PortalException, SystemException {
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
-			className, tableName, columnName);
+			companyId, className, tableName, columnName);
 
 		int type = column.getType();
 
 		if (type == ExpandoColumnConstants.BOOLEAN) {
 			return addValue(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				((Boolean)data).booleanValue());
 		}
 		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
 			return addValue(
-				className, tableName, columnName, classPK, (boolean[])data);
+				companyId, className, tableName, columnName, classPK,
+				(boolean[])data);
 		}
 		else if (type == ExpandoColumnConstants.DATE) {
 			return addValue(
-				className, tableName, columnName, classPK, (Date)data);
+				companyId, className, tableName, columnName, classPK,
+				(Date)data);
 		}
 		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
 			return addValue(
-				className, tableName, columnName, classPK, (Date[])data);
+				companyId, className, tableName, columnName, classPK,
+				(Date[])data);
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE) {
 			return addValue(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				((Double)data).doubleValue());
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
 			return addValue(
-				className, tableName, columnName, classPK, (double[])data);
+				companyId, className, tableName, columnName, classPK,
+				(double[])data);
 		}
 		else if (type == ExpandoColumnConstants.FLOAT) {
 			return addValue(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				((Float)data).floatValue());
 		}
 		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
 			return addValue(
-				className, tableName, columnName, classPK, (float[])data);
+				companyId, className, tableName, columnName, classPK,
+				(float[])data);
 		}
 		else if (type == ExpandoColumnConstants.INTEGER) {
 			return addValue(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				((Integer)data).intValue());
 		}
 		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
 			return addValue(
-				className, tableName, columnName, classPK, (int[])data);
+				companyId, className, tableName, columnName, classPK,
+				(int[])data);
 		}
 		else if (type == ExpandoColumnConstants.LONG) {
 			return addValue(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				((Long)data).longValue());
 		}
 		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
 			return addValue(
-				className, tableName, columnName, classPK, (long[])data);
+				companyId, className, tableName, columnName, classPK,
+				(long[])data);
 		}
 		else if (type == ExpandoColumnConstants.SHORT) {
 			return addValue(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				((Short)data).shortValue());
 		}
 		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
 			return addValue(
-				className, tableName, columnName, classPK, (short[])data);
+				companyId, className, tableName, columnName, classPK,
+				(short[])data);
 		}
 		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
 			return addValue(
-				className, tableName, columnName, classPK, (String[])data);
+				companyId, className, tableName, columnName, classPK,
+				(String[])data);
 		}
 		else {
 			return addValue(
-				className, tableName, columnName, classPK, (String)data);
+				companyId, className, tableName, columnName, classPK,
+				(String)data);
 		}
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			short data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, short data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -465,12 +475,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			short[] data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, short[] data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -487,12 +497,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			String data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, String data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -509,12 +519,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			String[] data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, String[] data)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			className, tableName);
+			companyId, className, tableName);
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
@@ -530,12 +540,260 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long,
+	 *			   boolean[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			boolean data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long,
+	 *			   boolean[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			boolean[] data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long, Date[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			Date data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long, Date[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			Date[] data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long,
+	 *			   double[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			double data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long,
+	 *			   double[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			double[] data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long,
+	 *			   float[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			float data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long,
+	 *			   float[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			float[] data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long, int[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			int data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long, int[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			int[] data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long, long[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			long data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long, long[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			long[] data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long, Object)}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			Object data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long,
+	 *			   short[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			short data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long,
+	 *			   short[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			short[] data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long,
+	 *			   String[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			String data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
+	/**
+	 * @deprecated {@link #addValue(long, String, String, String, long,
+	 *			   String[])}
+	 */
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			String[] data)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return addValue(
+			companyId, className, tableName, columnName, classPK, data);
+	}
+
 	public void addValues(
 			long classNameId, long tableId, List<ExpandoColumn> columns,
 			long classPK, Map<String, String> data)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		long companyId = CompanyThreadLocal.getCompanyId();
+		ExpandoTable table = expandoTablePersistence.findByPrimaryKey(tableId);
 
 		ExpandoRow row = expandoRowPersistence.fetchByT_C(tableId, classPK);
 
@@ -544,7 +802,7 @@ public class ExpandoValueLocalServiceImpl
 
 			row = expandoRowPersistence.create(rowId);
 
-			row.setCompanyId(companyId);
+			row.setCompanyId(table.getCompanyId());
 			row.setTableId(tableId);
 			row.setClassPK(classPK);
 
@@ -561,7 +819,7 @@ public class ExpandoValueLocalServiceImpl
 
 					value = expandoValuePersistence.create(valueId);
 
-					value.setCompanyId(companyId);
+					value.setCompanyId(table.getCompanyId());
 					value.setTableId(tableId);
 					value.setColumnId(column.getColumnId());
 					value.setRowId(row.getRowId());
@@ -601,10 +859,9 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public void deleteValue(
-			long classNameId, String tableName, String columnName, long classPK)
+			long companyId, long classNameId, String tableName,
+			String columnName, long classPK)
 		throws PortalException, SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -629,12 +886,13 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public void deleteValue(
-			String className, String tableName, String columnName, long classPK)
+			long companyId, String className, String tableName,
+			String columnName, long classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		deleteValue(classNameId, tableName, columnName, classPK);
+		deleteValue(companyId, classNameId, tableName, columnName, classPK);
 	}
 
 	public void deleteValues(long classNameId, long classPK)
@@ -658,11 +916,9 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public List<ExpandoValue> getColumnValues(
-			long classNameId, String tableName, String columnName, int start,
-			int end)
+			long companyId, long classNameId, String tableName,
+			String columnName, int start, int end)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -683,11 +939,9 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public List<ExpandoValue> getColumnValues(
-			long classNameId, String tableName, String columnName, String data,
-			int start, int end)
+			long companyId, long classNameId, String tableName,
+			String columnName, String data, int start, int end)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -708,13 +962,14 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public List<ExpandoValue> getColumnValues(
-			String className, String tableName, String columnName, int start,
-			int end)
+			long companyId, String className, String tableName,
+			String columnName, int start, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getColumnValues(classNameId, tableName, columnName, start, end);
+		return getColumnValues(
+			companyId, classNameId, tableName, columnName, start, end);
 	}
 
 	public List<ExpandoValue> getColumnValues(
@@ -733,10 +988,9 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public int getColumnValuesCount(
-			long classNameId, String tableName, String columnName)
+			long companyId, long classNameId, String tableName,
+			String columnName)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -757,10 +1011,9 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public int getColumnValuesCount(
-			long classNameId, String tableName, String columnName, String data)
+			long companyId, long classNameId, String tableName,
+			String columnName, String data)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -781,12 +1034,14 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public int getColumnValuesCount(
-			String className, String tableName, String columnName)
+			long companyId, String className, String tableName,
+			String columnName)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getColumnValuesCount(classNameId, tableName, columnName);
+		return getColumnValuesCount(
+			companyId, classNameId, tableName, columnName);
 	}
 
 	public int getColumnValuesCount(
@@ -799,11 +1054,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public Serializable getData(
-			String className, String tableName, String columnName, long classPK)
+			long companyId, String className, String tableName,
+			String columnName, long classPK)
 		throws PortalException, SystemException {
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
-			className, tableName, columnName);
+			companyId, className, tableName, columnName);
 
 		ExpandoValue value = new ExpandoValueImpl();
 
@@ -814,85 +1070,93 @@ public class ExpandoValueLocalServiceImpl
 
 		if (type == ExpandoColumnConstants.BOOLEAN) {
 			return getData(
-				className, tableName, columnName, classPK, value.getBoolean());
+				companyId, className, tableName, columnName, classPK,
+				value.getBoolean());
 		}
 		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
 			return getData(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				value.getBooleanArray());
 		}
 		else if (type == ExpandoColumnConstants.DATE) {
 			return getData(
-				className, tableName, columnName, classPK, value.getDate());
+				companyId, className, tableName, columnName, classPK,
+				value.getDate());
 		}
 		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
 			return getData(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				value.getDateArray());
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE) {
 			return getData(
-				className, tableName, columnName, classPK, value.getDouble());
+				companyId, className, tableName, columnName, classPK,
+				value.getDouble());
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
 			return getData(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				value.getDoubleArray());
 		}
 		else if (type == ExpandoColumnConstants.FLOAT) {
 			return getData(
-				className, tableName, columnName, classPK, value.getFloat());
+				companyId, className, tableName, columnName, classPK,
+				value.getFloat());
 		}
 		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
 			return getData(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				value.getFloatArray());
 		}
 		else if (type == ExpandoColumnConstants.INTEGER) {
 			return getData(
-				className, tableName, columnName, classPK, value.getInteger());
+				companyId, className, tableName, columnName, classPK,
+				value.getInteger());
 		}
 		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
 			return getData(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				value.getIntegerArray());
 		}
 		else if (type == ExpandoColumnConstants.LONG) {
 			return getData(
-				className, tableName, columnName, classPK, value.getLong());
+				companyId, className, tableName, columnName, classPK,
+				value.getLong());
 		}
 		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
 			return getData(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				value.getLongArray());
 		}
 		else if (type == ExpandoColumnConstants.SHORT) {
 			return getData(
-				className, tableName, columnName, classPK, value.getShort());
+				companyId, className, tableName, columnName, classPK,
+				value.getShort());
 		}
 		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
 			return getData(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				value.getShortArray());
 		}
 		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
 			return getData(
-				className, tableName, columnName, classPK,
+				companyId, className, tableName, columnName, classPK,
 				value.getStringArray());
 		}
 		else {
 			return getData(
-				className, tableName, columnName, classPK, value.getString());
+				companyId, className, tableName, columnName, classPK,
+				value.getString());
 		}
 	}
 
 	public boolean getData(
-			String className, String tableName, String columnName, long classPK,
-			boolean defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, boolean defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -903,12 +1167,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public boolean[] getData(
-			String className, String tableName, String columnName, long classPK,
-			boolean[] defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, boolean[] defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -919,12 +1183,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public Date getData(
-			String className, String tableName, String columnName, long classPK,
-			Date defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, Date defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -935,12 +1199,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public Date[] getData(
-			String className, String tableName, String columnName, long classPK,
-			Date[] defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, Date[] defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -951,12 +1215,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public double getData(
-			String className, String tableName, String columnName, long classPK,
-			double defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, double defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -967,12 +1231,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public double[] getData(
-			String className, String tableName, String columnName, long classPK,
-			double[] defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, double[] defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -983,12 +1247,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public float getData(
-			String className, String tableName, String columnName, long classPK,
-			float defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, float defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -999,12 +1263,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public float[] getData(
-			String className, String tableName, String columnName, long classPK,
-			float[] defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, float[] defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -1015,12 +1279,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public int getData(
-			String className, String tableName, String columnName, long classPK,
-			int defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, int defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -1031,12 +1295,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public int[] getData(
-			String className, String tableName, String columnName, long classPK,
-			int[] defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, int[] defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -1047,12 +1311,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public long getData(
-			String className, String tableName, String columnName, long classPK,
-			long defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, long defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -1063,12 +1327,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public long[] getData(
-			String className, String tableName, String columnName, long classPK,
-			long[] defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, long[] defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -1079,12 +1343,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public short getData(
-			String className, String tableName, String columnName, long classPK,
-			short defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, short defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -1095,12 +1359,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public short[] getData(
-			String className, String tableName, String columnName, long classPK,
-			short[] defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, short[] defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -1111,12 +1375,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public String getData(
-			String className, String tableName, String columnName, long classPK,
-			String defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, String defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -1127,12 +1391,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public String[] getData(
-			String className, String tableName, String columnName, long classPK,
-			String[] defaultData)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, String[] defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = getValue(
-			className, tableName, columnName, classPK);
+			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
 			return defaultData;
@@ -1142,39 +1406,286 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long)}
+	 */
+	public Serializable getData(
+			String className, String tableName, String columnName, long classPK)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(companyId, className, tableName, columnName, classPK);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long,
+	 *			   boolean[])}
+	 */
+	public boolean getData(
+			String className, String tableName, String columnName, long classPK,
+			boolean defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long,
+	 *			   boolean[])}
+	 */
+	public boolean[] getData(
+			String className, String tableName, String columnName, long classPK,
+			boolean[] defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long, Date[])}
+	 */
+	public Date getData(
+			String className, String tableName, String columnName, long classPK,
+			Date defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long, Date[])}
+	 */
+	public Date[] getData(
+			String className, String tableName, String columnName, long classPK,
+			Date[] defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long,
+	 *			   double[])}
+	 */
+	public double getData(
+			String className, String tableName, String columnName, long classPK,
+			double defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long,
+	 *			   double[])}
+	 */
+	public double[] getData(
+			String className, String tableName, String columnName, long classPK,
+			double[] defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long, float[])}
+	 */
+	public float getData(
+			String className, String tableName, String columnName, long classPK,
+			float defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long, float[])}
+	 */
+	public float[] getData(
+			String className, String tableName, String columnName, long classPK,
+			float[] defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long, int[])}
+	 */
+	public int getData(
+			String className, String tableName, String columnName, long classPK,
+			int defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long, int[])}
+	 */
+	public int[] getData(
+			String className, String tableName, String columnName, long classPK,
+			int[] defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long, long[])}
+	 */
+	public long getData(
+			String className, String tableName, String columnName, long classPK,
+			long defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long, long[])}
+	 */
+	public long[] getData(
+			String className, String tableName, String columnName, long classPK,
+			long[] defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long, short[])}
+	 */
+	public short getData(
+			String className, String tableName, String columnName, long classPK,
+			short defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long, short[])}
+	 */
+	public short[] getData(
+			String className, String tableName, String columnName, long classPK,
+			short[] defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long,
+	 *			   String[])}
+	 */
+	public String getData(
+			String className, String tableName, String columnName, long classPK,
+			String defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
+	/**
+	 * @deprecated {@link #getData(long, String, String, String, long,
+	 *			   String[])}
+	 */
+	public String[] getData(
+			String className, String tableName, String columnName, long classPK,
+			String[] defaultData)
+		throws PortalException, SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getData(
+			companyId, className, tableName, columnName, classPK, defaultData);
+	}
+
 	public List<ExpandoValue> getDefaultTableColumnValues(
-			long classNameId, String columnName, int start, int end)
+			long companyId, long classNameId, String columnName, int start,
+			int end)
 		throws SystemException {
 
 		return getColumnValues(
-			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, columnName,
-			start, end);
+			companyId, classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME,
+			columnName, start, end);
 	}
 
 	public List<ExpandoValue> getDefaultTableColumnValues(
-			String className, String columnName, int start, int end)
+			long companyId, String className, String columnName, int start,
+			int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getDefaultTableColumnValues(classNameId, columnName, start, end);
+		return getDefaultTableColumnValues(
+			companyId, classNameId, columnName, start, end);
 	}
 
 	public int getDefaultTableColumnValuesCount(
-			long classNameId, String columnName)
+			long companyId, long classNameId, String columnName)
 		throws SystemException {
 
 		return getColumnValuesCount(
-			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, columnName);
+			companyId, classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME,
+			columnName);
 	}
 
 	public int getDefaultTableColumnValuesCount(
-			String className, String columnName)
+			long companyId, String className, String columnName)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getDefaultTableColumnValuesCount(classNameId, columnName);
+		return getDefaultTableColumnValuesCount(
+			companyId, classNameId, columnName);
 	}
 
 	public List<ExpandoValue> getRowValues(long rowId) throws SystemException {
@@ -1188,11 +1699,9 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public List<ExpandoValue> getRowValues(
-			long classNameId, String tableName, long classPK, int start,
-			int end)
+			long companyId, long classNameId, String tableName, long classPK,
+			int start, int end)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -1206,13 +1715,14 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public List<ExpandoValue> getRowValues(
-			String className, String tableName, long classPK, int start,
-			int end)
+			long companyId, String className, String tableName, long classPK,
+			int start, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getRowValues(classNameId, tableName, classPK, start, end);
+		return getRowValues(
+			companyId, classNameId, tableName, classPK, start, end);
 	}
 
 	public int getRowValuesCount(long rowId) throws SystemException {
@@ -1220,10 +1730,8 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public int getRowValuesCount(
-			long classNameId, String tableName, long classPK)
+			long companyId, long classNameId, String tableName, long classPK)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -1237,12 +1745,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public int getRowValuesCount(
-			String className, String tableName, long classPK)
+			long companyId, String className, String tableName, long classPK)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getRowValuesCount(classNameId, tableName, classPK);
+		return getRowValuesCount(companyId, classNameId, tableName, classPK);
 	}
 
 	public ExpandoValue getValue(long valueId)
@@ -1265,10 +1773,9 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue getValue(
-			long classNameId, String tableName, String columnName, long classPK)
+			long companyId, long classNameId, String tableName,
+			String columnName, long classPK)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -1289,12 +1796,13 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue getValue(
-			String className, String tableName, String columnName, long classPK)
+			long companyId, String className, String tableName,
+			String columnName, long classPK)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getValue(classNameId, tableName, columnName, classPK);
+		return getValue(companyId, classNameId, tableName, columnName, classPK);
 	}
 
 }

@@ -31,9 +31,11 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.ColumnNameException;
 import com.liferay.portlet.expando.ColumnTypeException;
@@ -231,6 +233,9 @@ public class EditExpandoAction extends PortletAction {
 	}
 
 	protected void addExpando(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String modelResource = ParamUtil.getString(
 			actionRequest, "modelResource");
 		long resourcePrimKey = ParamUtil.getLong(
@@ -240,7 +245,7 @@ public class EditExpandoAction extends PortletAction {
 		String preset = ParamUtil.getString(actionRequest, "type");
 
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-			modelResource, resourcePrimKey);
+			themeDisplay.getCompanyId(), modelResource, resourcePrimKey);
 
 		if (preset.startsWith("Preset")) {
 			addPresetExpando(actionRequest, expandoBridge, preset, name);
@@ -321,6 +326,9 @@ public class EditExpandoAction extends PortletAction {
 	}
 
 	protected void updateExpando(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String modelResource = ParamUtil.getString(
 			actionRequest, "modelResource");
 		long resourcePrimKey = ParamUtil.getLong(
@@ -333,7 +341,7 @@ public class EditExpandoAction extends PortletAction {
 			actionRequest, "defaultValue", type);
 
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-			modelResource, resourcePrimKey);
+			themeDisplay.getCompanyId(), modelResource, resourcePrimKey);
 
 		expandoBridge.setAttributeDefault(name, defaultValue);
 

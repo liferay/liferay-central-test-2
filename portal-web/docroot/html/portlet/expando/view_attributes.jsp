@@ -49,7 +49,7 @@ portletURL.setParameter("modelResource", modelResource);
 />
 
 <%
-ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(modelResource);
+ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.getCompanyId(), modelResource);
 
 List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
 %>
@@ -72,7 +72,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 		<%
 		int type = expandoBridge.getAttributeType(name);
 
-		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(modelResource, name);
+		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(company.getCompanyId(), modelResource, name);
 		%>
 
 		<portlet:renderURL var="rowURL">

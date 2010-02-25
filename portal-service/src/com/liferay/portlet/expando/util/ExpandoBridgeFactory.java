@@ -31,8 +31,9 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
  */
 public interface ExpandoBridgeFactory {
 
-	public ExpandoBridge getExpandoBridge(String className);
+	public ExpandoBridge getExpandoBridge(long companyId, String className);
 
-	public ExpandoBridge getExpandoBridge(String className, long classPK);
+	public ExpandoBridge getExpandoBridge(
+		long companyId, String className, long classPK);
 
 }

@@ -84,7 +84,7 @@ List<CustomAttributesDisplay> customAttributesDisplays = PortletLocalServiceUtil
 		>
 
 			<%
-			ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(customAttributesDisplay.getClassName());
+			ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.getCompanyId(), customAttributesDisplay.getClassName());
 
 			List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
 

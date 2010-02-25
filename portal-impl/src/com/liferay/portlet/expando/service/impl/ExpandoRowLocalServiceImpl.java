@@ -24,7 +24,6 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -79,28 +78,28 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		deleteRow(row.getRowId());
 	}
 
-	public void deleteRow(long classNameId, String tableName, long classPK)
+	public void deleteRow(
+			long companyId, long classNameId, String tableName, long classPK)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
-			classNameId, tableName);
+			companyId, classNameId, tableName);
 
 		deleteRow(table.getTableId(), classPK);
 	}
 
-	public void deleteRow(String className, String tableName, long classPK)
+	public void deleteRow(
+			long companyId, String className, String tableName, long classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		deleteRow(classNameId, tableName, classPK);
+		deleteRow(companyId, classNameId, tableName, classPK);
 	}
 
 	public List<ExpandoRow> getDefaultTableRows(
-			long classNameId, int start, int end)
+			long companyId, long classNameId, int start, int end)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
@@ -114,18 +113,16 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 	}
 
 	public List<ExpandoRow> getDefaultTableRows(
-			String className, int start, int end)
+			long companyId, String className, int start, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getDefaultTableRows(classNameId, start, end);
+		return getDefaultTableRows(companyId, classNameId, start, end);
 	}
 
-	public int getDefaultTableRowsCount(long classNameId)
+	public int getDefaultTableRowsCount(long companyId, long classNameId)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
@@ -137,12 +134,12 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		return expandoRowPersistence.countByTableId(table.getTableId());
 	}
 
-	public int getDefaultTableRowsCount(String className)
+	public int getDefaultTableRowsCount(long companyId, String className)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getDefaultTableRowsCount(classNameId);
+		return getDefaultTableRowsCount(companyId, classNameId);
 	}
 
 	public ExpandoRow getRow(long rowId)
@@ -157,10 +154,9 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		return expandoRowPersistence.findByT_C(tableId, classPK);
 	}
 
-	public ExpandoRow getRow(long classNameId, String tableName, long classPK)
+	public ExpandoRow getRow(
+			long companyId, long classNameId, String tableName, long classPK)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -172,12 +168,13 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		return expandoRowPersistence.fetchByT_C(table.getTableId(), classPK);
 	}
 
-	public ExpandoRow getRow(String className, String tableName, long classPK)
+	public ExpandoRow getRow(
+			long companyId, String className, String tableName, long classPK)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getRow(classNameId, tableName, classPK);
+		return getRow(companyId, classNameId, tableName, classPK);
 	}
 
 	public List<ExpandoRow> getRows(long tableId, int start, int end)
@@ -187,10 +184,9 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 	}
 
 	public List<ExpandoRow> getRows(
-			long classNameId, String tableName, int start, int end)
+			long companyId, long classNameId, String tableName, int start,
+			int end)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -204,22 +200,21 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 	}
 
 	public List<ExpandoRow> getRows(
-			String className, String tableName, int start, int end)
+			long companyId, String className, String tableName, int start,
+			int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getRows(classNameId, tableName, start, end);
+		return getRows(companyId, classNameId, tableName, start, end);
 	}
 
 	public int getRowsCount(long tableId) throws SystemException {
 		return expandoRowPersistence.countByTableId(tableId);
 	}
 
-	public int getRowsCount(long classNameId, String tableName)
+	public int getRowsCount(long companyId, long classNameId, String tableName)
 		throws SystemException {
-
-		long companyId = CompanyThreadLocal.getCompanyId();
 
 		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
 			companyId, classNameId, tableName);
@@ -231,12 +226,12 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		return expandoRowPersistence.countByTableId(table.getTableId());
 	}
 
-	public int getRowsCount(String className, String tableName)
+	public int getRowsCount(long companyId, String className, String tableName)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getRowsCount(classNameId, tableName);
+		return getRowsCount(companyId, classNameId, tableName);
 	}
 
 }

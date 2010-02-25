@@ -56,12 +56,13 @@ public class ExpandoColumnPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, String className,
-			String tableName, String columnName, String actionId)
+			PermissionChecker permissionChecker, long companyId,
+			String className, String tableName, String columnName,
+			String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
-				permissionChecker, className, tableName, columnName,
+				permissionChecker, companyId, className, tableName, columnName,
 				actionId)) {
 
 			throw new PrincipalException();
@@ -87,12 +88,13 @@ public class ExpandoColumnPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String className,
-			String tableName, String columnName, String actionId)
+			PermissionChecker permissionChecker, long companyId,
+			String className, String tableName, String columnName,
+			String actionId)
 		throws SystemException {
 
 		ExpandoColumn column = ExpandoColumnLocalServiceUtil.getColumn(
-			className, tableName, columnName);
+			companyId, className, tableName, columnName);
 
 		return contains(permissionChecker, column, actionId);
 	}

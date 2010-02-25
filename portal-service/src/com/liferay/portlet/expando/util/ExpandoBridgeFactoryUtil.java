@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.util;
 
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 /**
@@ -31,14 +32,37 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
  */
 public class ExpandoBridgeFactoryUtil {
 
-	public static ExpandoBridge getExpandoBridge(String className) {
-		return getExpandoBridgeFactory().getExpandoBridge(className);
+	public static ExpandoBridge getExpandoBridge(
+		long companyId, String className) {
+
+		return getExpandoBridgeFactory().getExpandoBridge(companyId, className);
 	}
 
 	public static ExpandoBridge getExpandoBridge(
+		long companyId, String className, long classPK) {
+
+		return getExpandoBridgeFactory().getExpandoBridge(
+			companyId, className, classPK);
+	}
+
+	/**
+	 * @deprecated {@link #getExpandoBridge(long, String)}
+	 */
+	public static ExpandoBridge getExpandoBridge(String className) {
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getExpandoBridge(companyId, className);
+	}
+
+	/**
+	 * @deprecated {@link #getExpandoBridge(long, String, long)}
+	 */
+	public static ExpandoBridge getExpandoBridge(
 		String className, long classPK) {
 
-		return getExpandoBridgeFactory().getExpandoBridge(className, classPK);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getExpandoBridge(companyId, className, classPK);
 	}
 
 	public static ExpandoBridgeFactory getExpandoBridgeFactory() {

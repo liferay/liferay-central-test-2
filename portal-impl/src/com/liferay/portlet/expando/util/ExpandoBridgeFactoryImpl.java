@@ -32,12 +32,14 @@ import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
  */
 public class ExpandoBridgeFactoryImpl implements ExpandoBridgeFactory {
 
-	public ExpandoBridge getExpandoBridge(String className) {
-		return new ExpandoBridgeImpl(className);
+	public ExpandoBridge getExpandoBridge(long companyId, String className) {
+		return new ExpandoBridgeImpl(companyId, className);
 	}
 
-	public ExpandoBridge getExpandoBridge(String className, long classPK) {
-		return new ExpandoBridgeImpl(className, classPK);
+	public ExpandoBridge getExpandoBridge(
+		long companyId, String className, long classPK) {
+
+		return new ExpandoBridgeImpl(companyId, className, classPK);
 	}
 
 }

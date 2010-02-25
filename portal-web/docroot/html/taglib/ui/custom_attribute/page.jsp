@@ -40,7 +40,7 @@ boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute:label"));
 String name = (String)request.getAttribute("liferay-ui:custom-attribute:name");
 
-ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(className, classPK);
+ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.getCompanyId(), className, classPK);
 %>
 
 <c:if test="<%= expandoBridge.hasAttribute(name) %>">
@@ -67,7 +67,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(classNam
 	Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 	%>
 
-	<c:if test="<%= !propertyHidden && ExpandoColumnPermission.contains(permissionChecker, className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.VIEW) %>">
+	<c:if test="<%= !propertyHidden && ExpandoColumnPermission.contains(permissionChecker, company.getCompanyId(), className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.VIEW) %>">
 
 		<%
 		String escapedName = HtmlUtil.escape(name);
@@ -78,7 +78,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(classNam
 		</c:if>
 
 		<c:choose>
-			<c:when test="<%= editable && ExpandoColumnPermission.contains(permissionChecker, className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.UPDATE) %>">
+			<c:when test="<%= editable && ExpandoColumnPermission.contains(permissionChecker, company.getCompanyId(), className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.UPDATE) %>">
 				<input type="hidden" name="<portlet:namespace />ExpandoAttributeName(<%= escapedName %>)" value="<%= escapedName %>" />
 
 				<c:choose>

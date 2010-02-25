@@ -40,32 +40,33 @@ import java.io.Serializable;
 public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 
 	public ExpandoValue addValue(
-			String className, String tableName, String columnName, long classPK,
-			Object data)
+			long companyId, String className, String tableName,
+			String columnName, long classPK, Object data)
 		throws PortalException, SystemException {
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
-			className, tableName, columnName);
+			companyId, className, tableName, columnName);
 
 		ExpandoColumnPermission.check(
 			getPermissionChecker(), column, ActionKeys.UPDATE);
 
 		return expandoValueLocalService.addValue(
-			className, tableName, columnName, classPK, data);
+			companyId, className, tableName, columnName, classPK, data);
 	}
 
 	public Serializable getData(
-			String className, String tableName, String columnName, long classPK)
+			long companyId, String className, String tableName,
+			String columnName, long classPK)
 		throws PortalException, SystemException {
 
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
-			className, tableName, columnName);
+			companyId, className, tableName, columnName);
 
 		if (ExpandoColumnPermission.contains(
 				getPermissionChecker(), column, ActionKeys.VIEW)) {
 
 			return expandoValueLocalService.getData(
-				className, tableName, columnName, classPK);
+				companyId, className, tableName, columnName, classPK);
 		}
 		else {
 			return null;
