@@ -584,10 +584,10 @@ public class ResourceActionsUtil {
 			}
 		}
 		else {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to obtain resource actions for unknown " +
-						"portlet " + name);
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Unable to obtain resource actions for unknown portlet " +
+						name);
 			}
 		}
 
