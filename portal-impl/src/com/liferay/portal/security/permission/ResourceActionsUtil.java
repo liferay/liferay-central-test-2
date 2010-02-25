@@ -557,43 +557,6 @@ public class ResourceActionsUtil {
 		return _getActions(_modelResourceOwnerDefaultActions, name);
 	}
 
-	private List<String> _getPortletMimeTypeActions(String name) {
-		List<String> actions = new UniqueList<String>();
-
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(name);
-
-		if (portlet != null) {
-			Map<String, Set<String>> portletModes =
-				portlet.getPortletModes();
-
-			Set<String> mimeTypePortletModes = portletModes.get(
-				ContentTypes.TEXT_HTML);
-
-			if (mimeTypePortletModes != null) {
-				for (String actionId : mimeTypePortletModes) {
-					if (actionId.equalsIgnoreCase("edit")) {
-						actions.add(ActionKeys.PREFERENCES);
-					}
-					else if (actionId.equalsIgnoreCase("edit_guest")) {
-						actions.add(ActionKeys.GUEST_PREFERENCES);
-					}
-					else {
-						actions.add(actionId.toUpperCase());
-					}
-				}
-			}
-		}
-		else {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to obtain resource actions for unknown " +
-						"portlet " + name);
-			}
-		}
-
-		return actions;
-	}
-
 	private List<String> _getPortletModelResources(String portletName) {
 		portletName = PortletConstants.getRootPortletId(portletName);
 
@@ -618,11 +581,38 @@ public class ResourceActionsUtil {
 
 		if (actions.size() == 0) {
 			synchronized (this) {
-				actions = _getPortletMimeTypeActions(name);
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(name);
 
-				if (!name.equals(PortletKeys.PORTAL)) {
-					_checkPortletActions(actions);
+				if (portlet != null) {
+					Map<String, Set<String>> portletModes =
+						portlet.getPortletModes();
+
+					Set<String> mimeTypePortletModes = portletModes.get(
+						ContentTypes.TEXT_HTML);
+
+					if (mimeTypePortletModes != null) {
+						for (String actionId : mimeTypePortletModes) {
+							if (actionId.equalsIgnoreCase("edit")) {
+								actions.add(ActionKeys.PREFERENCES);
+							}
+							else if (actionId.equalsIgnoreCase("edit_guest")) {
+								actions.add(ActionKeys.GUEST_PREFERENCES);
+							}
+							else {
+								actions.add(actionId.toUpperCase());
+							}
+						}
+					}
 				}
+				else {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to obtain resource actions for unknown " +
+								"portlet " + name);
+					}
+				}
+
+				_checkPortletActions(actions);
 
 				List<String> communityDefaultActions =
 					_portletResourceCommunityDefaultActions.get(name);
@@ -813,8 +803,6 @@ public class ResourceActionsUtil {
 					actions.add(actionKeyText);
 				}
 			}
-
-			actions.addAll(_getPortletMimeTypeActions(name));
 
 			if (!name.equals(PortletKeys.PORTAL)) {
 				_checkPortletActions(actions);
