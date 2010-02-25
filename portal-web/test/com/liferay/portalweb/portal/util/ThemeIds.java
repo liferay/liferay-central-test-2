@@ -51,21 +51,26 @@ public class ThemeIds {
 
 	private ThemeIds() {
 		try {
-			HttpPrincipal httpPrincipal = new HttpPrincipal(
-				TestPropsValues.PORTAL_URL);
-
-			List<String> themeIds = new ArrayList<String>();
-
-			List<Theme> themes = ThemeServiceHttp.getThemes(
-				httpPrincipal, TestPropsValues.COMPANY_ID);
-
-			for (Theme theme : themes) {
-				if (!theme.isWapTheme()) {
-					themeIds.add(theme.getThemeId());
-				}
+			if (TestPropsValues.THEME_IDS.length > 0) {
+				_themeIds = TestPropsValues.THEME_IDS;
 			}
+			else {
+				HttpPrincipal httpPrincipal = new HttpPrincipal(
+					TestPropsValues.PORTAL_URL);
 
-			_themeIds = themeIds.toArray(new String[themeIds.size()]);
+				List<String> themeIds = new ArrayList<String>();
+
+				List<Theme> themes = ThemeServiceHttp.getThemes(
+					httpPrincipal, TestPropsValues.COMPANY_ID);
+
+				for (Theme theme : themes) {
+					if (!theme.isWapTheme()) {
+						themeIds.add(theme.getThemeId());
+					}
+				}
+
+				_themeIds = themeIds.toArray(new String[themeIds.size()]);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
