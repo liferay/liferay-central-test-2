@@ -220,8 +220,15 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) {
+
+			throw new PrincipalException();
+		}
 
 		layoutLocalService.importLayouts(
 			getUserId(), groupId, privateLayout, parameterMap, file);

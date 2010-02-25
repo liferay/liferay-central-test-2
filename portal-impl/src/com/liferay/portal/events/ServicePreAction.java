@@ -1642,30 +1642,6 @@ public class ServicePreAction extends Action {
 				pageSettingsURL.setParameter("selPlid", String.valueOf(plid));
 
 				themeDisplay.setURLPageSettings(pageSettingsURL);
-
-				PortletURL publishToLiveURL = new PortletURLImpl(
-					request, PortletKeys.LAYOUT_MANAGEMENT, plid,
-					PortletRequest.RENDER_PHASE);
-
-				publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-				publishToLiveURL.setPortletMode(PortletMode.VIEW);
-
-				publishToLiveURL.setParameter(
-					"struts_action", "/layout_management/export_pages");
-
-				if (layout.isPrivateLayout()) {
-					publishToLiveURL.setParameter("tabs1", "private-pages");
-				}
-				else {
-					publishToLiveURL.setParameter("tabs1", "public-pages");
-				}
-
-				publishToLiveURL.setParameter("pagesRedirect", currentURL);
-				publishToLiveURL.setParameter(
-					"groupId", String.valueOf(scopeGroupId));
-				publishToLiveURL.setParameter("selPlid", String.valueOf(plid));
-
-				themeDisplay.setURLPublishToLive(publishToLiveURL);
 			}
 
 			if (group.hasStagingGroup() && !group.isStagingGroup()) {
@@ -1688,20 +1664,46 @@ public class ServicePreAction extends Action {
 						permissionChecker, scopeGroupId,
 						ActionKeys.APPROVE_PROPOSAL);
 
-				boolean hasUpdateLayoutPermission =
-					LayoutPermissionUtil.contains(
-						permissionChecker, layout.getGroupId(),
-						layout.isPrivateLayout(), layout.getLayoutId(),
-						ActionKeys.UPDATE);
+				boolean hasManageStagingPermission =
+					GroupPermissionUtil.contains(
+						permissionChecker, scopeGroupId,
+						ActionKeys.MANAGE_STAGING);
 
-				if (hasManageLayoutsPermission) {
+				boolean hasPublishStagingPermission =
+					GroupPermissionUtil.contains(
+						permissionChecker, scopeGroupId,
+						ActionKeys.PUBLISH_STAGING);
+
+				if (hasApproveProposalPermission || 
+					hasManageStagingPermission || hasPublishStagingPermission) {
+
 					themeDisplay.setShowStagingIcon(true);
 				}
-				else if (hasApproveProposalPermission) {
-					themeDisplay.setShowStagingIcon(true);
-				}
-				else if (hasUpdateLayoutPermission) {
-					themeDisplay.setShowStagingIcon(true);
+
+				if (hasPublishStagingPermission) {
+					PortletURL publishToLiveURL = new PortletURLImpl(
+						request, PortletKeys.LAYOUT_MANAGEMENT, plid,
+						PortletRequest.RENDER_PHASE);
+
+					publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+					publishToLiveURL.setPortletMode(PortletMode.VIEW);
+
+					publishToLiveURL.setParameter(
+						"struts_action", "/layout_management/export_pages");
+
+					if (layout.isPrivateLayout()) {
+						publishToLiveURL.setParameter("tabs1", "private-pages");
+					}
+					else {
+						publishToLiveURL.setParameter("tabs1", "public-pages");
+					}
+
+					publishToLiveURL.setParameter("pagesRedirect", currentURL);
+					publishToLiveURL.setParameter(
+						"groupId", String.valueOf(scopeGroupId));
+					publishToLiveURL.setParameter("selPlid", String.valueOf(plid));
+
+					themeDisplay.setURLPublishToLive(publishToLiveURL);
 				}
 			}
 
