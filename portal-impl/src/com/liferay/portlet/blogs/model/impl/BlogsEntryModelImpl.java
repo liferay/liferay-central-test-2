@@ -400,8 +400,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(BlogsEntry.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					BlogsEntry.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

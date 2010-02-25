@@ -328,8 +328,8 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(TasksReview.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					TasksReview.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

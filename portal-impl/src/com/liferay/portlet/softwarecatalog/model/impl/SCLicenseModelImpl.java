@@ -226,8 +226,8 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(SCLicense.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					SCLicense.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

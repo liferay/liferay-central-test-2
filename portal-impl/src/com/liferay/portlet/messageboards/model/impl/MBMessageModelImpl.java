@@ -434,8 +434,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MBMessage.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					MBMessage.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

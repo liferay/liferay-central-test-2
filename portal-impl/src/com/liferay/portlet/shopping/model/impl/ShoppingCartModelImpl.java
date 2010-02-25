@@ -290,8 +290,8 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(ShoppingCart.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					ShoppingCart.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

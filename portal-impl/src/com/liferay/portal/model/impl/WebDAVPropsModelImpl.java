@@ -241,8 +241,8 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(WebDAVProps.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					WebDAVProps.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

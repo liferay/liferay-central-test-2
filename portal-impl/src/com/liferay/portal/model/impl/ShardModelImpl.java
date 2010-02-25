@@ -214,8 +214,8 @@ public class ShardModelImpl extends BaseModelImpl<Shard> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Shard.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					Shard.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

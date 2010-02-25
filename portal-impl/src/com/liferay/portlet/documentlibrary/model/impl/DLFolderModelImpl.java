@@ -315,8 +315,8 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(DLFolder.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					DLFolder.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

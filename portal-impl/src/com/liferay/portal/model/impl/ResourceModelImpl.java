@@ -184,8 +184,8 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Resource.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					Resource.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

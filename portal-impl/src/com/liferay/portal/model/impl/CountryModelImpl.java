@@ -240,8 +240,8 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Country.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					Country.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

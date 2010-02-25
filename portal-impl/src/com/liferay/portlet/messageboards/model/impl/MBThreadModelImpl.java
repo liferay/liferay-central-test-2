@@ -301,8 +301,8 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MBThread.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					MBThread.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

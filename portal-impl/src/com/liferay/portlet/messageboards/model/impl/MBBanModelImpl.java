@@ -260,8 +260,8 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MBBan.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					MBBan.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

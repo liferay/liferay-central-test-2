@@ -283,8 +283,8 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(RatingsEntry.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					RatingsEntry.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

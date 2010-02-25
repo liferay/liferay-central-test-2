@@ -276,8 +276,8 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(BookmarksFolder.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					BookmarksFolder.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

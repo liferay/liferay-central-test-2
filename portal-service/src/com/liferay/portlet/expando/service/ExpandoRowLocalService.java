@@ -114,32 +114,33 @@ public interface ExpandoRowLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteRow(long classNameId, java.lang.String tableName,
-		long classPK)
+	public void deleteRow(long companyId, long classNameId,
+		java.lang.String tableName, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteRow(java.lang.String className,
+	public void deleteRow(long companyId, java.lang.String className,
 		java.lang.String tableName, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
-		long classNameId, int start, int end)
+		long companyId, long classNameId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
-		java.lang.String className, int start, int end)
+		long companyId, java.lang.String className, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDefaultTableRowsCount(long classNameId)
+	public int getDefaultTableRowsCount(long companyId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDefaultTableRowsCount(java.lang.String className)
+	public int getDefaultTableRowsCount(long companyId,
+		java.lang.String className)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -154,12 +155,12 @@ public interface ExpandoRowLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.expando.model.ExpandoRow getRow(
+	public com.liferay.portlet.expando.model.ExpandoRow getRow(long companyId,
 		long classNameId, java.lang.String tableName, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.expando.model.ExpandoRow getRow(
+	public com.liferay.portlet.expando.model.ExpandoRow getRow(long companyId,
 		java.lang.String className, java.lang.String tableName, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -170,24 +171,27 @@ public interface ExpandoRowLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
-		long classNameId, java.lang.String tableName, int start, int end)
+		long companyId, long classNameId, java.lang.String tableName,
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
-		java.lang.String className, java.lang.String tableName, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException;
+		long companyId, java.lang.String className, java.lang.String tableName,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRowsCount(long tableId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getRowsCount(long classNameId, java.lang.String tableName)
+	public int getRowsCount(long companyId, long classNameId,
+		java.lang.String tableName)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getRowsCount(java.lang.String className,
+	public int getRowsCount(long companyId, java.lang.String className,
 		java.lang.String tableName)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

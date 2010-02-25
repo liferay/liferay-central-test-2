@@ -358,8 +358,8 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(ShoppingCoupon.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					ShoppingCoupon.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

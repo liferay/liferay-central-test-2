@@ -297,8 +297,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(SCProductVersion.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					SCProductVersion.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

@@ -238,8 +238,8 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PortletPreferences.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					PortletPreferences.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

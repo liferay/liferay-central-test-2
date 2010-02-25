@@ -605,8 +605,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(ShoppingItem.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					ShoppingItem.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

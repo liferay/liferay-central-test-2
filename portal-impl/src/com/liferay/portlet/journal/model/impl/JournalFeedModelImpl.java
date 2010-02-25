@@ -427,8 +427,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(JournalFeed.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					JournalFeed.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

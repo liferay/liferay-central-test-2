@@ -71,42 +71,45 @@ import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
  */
 public class ExpandoValueServiceHttp {
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
-		HttpPrincipal httpPrincipal, java.lang.String className,
-		java.lang.String tableName, java.lang.String columnName, long classPK,
-		java.lang.Object data)
+		HttpPrincipal httpPrincipal, long companyId,
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK, java.lang.Object data)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = className;
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = className;
 
 			if (className == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = tableName;
-
-			if (tableName == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = columnName;
+			Object paramObj2 = tableName;
 
-			if (columnName == null) {
+			if (tableName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new LongWrapper(classPK);
+			Object paramObj3 = columnName;
 
-			Object paramObj4 = data;
+			if (columnName == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new LongWrapper(classPK);
+
+			Object paramObj5 = data;
 
 			if (data == null) {
-				paramObj4 = new NullWrapper("java.lang.Object");
+				paramObj5 = new NullWrapper("java.lang.Object");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
 					"addValue",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 
 			Object returnObj = null;
@@ -136,34 +139,38 @@ public class ExpandoValueServiceHttp {
 	}
 
 	public static java.io.Serializable getData(HttpPrincipal httpPrincipal,
-		java.lang.String className, java.lang.String tableName,
+		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = className;
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = className;
 
 			if (className == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = tableName;
-
-			if (tableName == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = columnName;
+			Object paramObj2 = tableName;
 
-			if (columnName == null) {
+			if (tableName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new LongWrapper(classPK);
+			Object paramObj3 = columnName;
+
+			if (columnName == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new LongWrapper(classPK);
 
 			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
 					"getData",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 

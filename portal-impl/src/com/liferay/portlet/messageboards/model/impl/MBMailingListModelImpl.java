@@ -464,8 +464,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MBMailingList.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					MBMailingList.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

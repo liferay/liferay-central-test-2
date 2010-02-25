@@ -232,8 +232,8 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(UserTracker.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					UserTracker.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

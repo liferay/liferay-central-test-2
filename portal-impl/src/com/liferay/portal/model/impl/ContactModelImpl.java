@@ -478,8 +478,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Contact.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					Contact.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

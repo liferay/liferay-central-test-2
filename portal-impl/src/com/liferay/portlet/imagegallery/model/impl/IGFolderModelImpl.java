@@ -293,8 +293,8 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(IGFolder.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					IGFolder.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

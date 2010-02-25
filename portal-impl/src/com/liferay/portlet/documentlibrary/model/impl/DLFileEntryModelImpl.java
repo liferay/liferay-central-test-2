@@ -409,8 +409,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(DLFileEntry.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					DLFileEntry.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

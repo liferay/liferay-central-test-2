@@ -279,8 +279,8 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(JournalArticleImage.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					JournalArticleImage.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

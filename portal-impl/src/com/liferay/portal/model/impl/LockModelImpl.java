@@ -284,8 +284,8 @@ public class LockModelImpl extends BaseModelImpl<Lock> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Lock.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					Lock.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

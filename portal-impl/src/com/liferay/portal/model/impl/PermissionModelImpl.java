@@ -201,8 +201,8 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Permission.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					Permission.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

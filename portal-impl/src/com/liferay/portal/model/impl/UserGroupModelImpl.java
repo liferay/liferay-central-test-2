@@ -210,8 +210,8 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(UserGroup.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					UserGroup.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

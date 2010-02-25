@@ -229,8 +229,8 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MBStatsUser.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					MBStatsUser.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

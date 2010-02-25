@@ -273,8 +273,8 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(BlogsStatsUser.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					BlogsStatsUser.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

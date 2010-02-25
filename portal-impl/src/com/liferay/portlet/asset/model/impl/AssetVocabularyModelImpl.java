@@ -446,8 +446,8 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(AssetVocabulary.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					AssetVocabulary.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

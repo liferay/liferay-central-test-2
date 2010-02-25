@@ -257,8 +257,8 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(ResourcePermission.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					ResourcePermission.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

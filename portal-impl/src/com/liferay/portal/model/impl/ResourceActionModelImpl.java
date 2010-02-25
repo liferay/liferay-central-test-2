@@ -195,8 +195,8 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(ResourceAction.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					ResourceAction.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

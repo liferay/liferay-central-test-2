@@ -405,8 +405,8 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(AssetCategory.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					AssetCategory.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

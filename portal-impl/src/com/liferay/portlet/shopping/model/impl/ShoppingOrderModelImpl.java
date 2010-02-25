@@ -747,8 +747,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(ShoppingOrder.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					ShoppingOrder.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

@@ -321,8 +321,8 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(OrgLabor.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					OrgLabor.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

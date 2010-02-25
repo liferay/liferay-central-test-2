@@ -294,8 +294,8 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(WikiNode.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					WikiNode.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

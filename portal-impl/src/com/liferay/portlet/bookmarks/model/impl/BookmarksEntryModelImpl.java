@@ -308,8 +308,8 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(BookmarksEntry.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					BookmarksEntry.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

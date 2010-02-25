@@ -241,8 +241,8 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(SocialRelation.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					SocialRelation.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

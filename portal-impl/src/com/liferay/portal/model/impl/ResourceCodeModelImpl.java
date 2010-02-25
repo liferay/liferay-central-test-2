@@ -205,8 +205,8 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(ResourceCode.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					ResourceCode.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

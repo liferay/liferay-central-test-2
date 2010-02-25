@@ -457,8 +457,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Layout.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					Layout.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

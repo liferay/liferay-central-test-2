@@ -452,8 +452,8 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(AssetEntry.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					AssetEntry.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

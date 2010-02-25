@@ -343,8 +343,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(SCProductEntry.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					SCProductEntry.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

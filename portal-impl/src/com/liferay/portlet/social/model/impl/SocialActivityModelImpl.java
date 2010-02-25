@@ -365,8 +365,8 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(SocialActivity.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					SocialActivity.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

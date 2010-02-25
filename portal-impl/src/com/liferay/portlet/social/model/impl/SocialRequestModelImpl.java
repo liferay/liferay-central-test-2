@@ -375,8 +375,8 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(SocialRequest.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					SocialRequest.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

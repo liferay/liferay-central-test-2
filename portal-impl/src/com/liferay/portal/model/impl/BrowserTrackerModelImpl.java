@@ -185,8 +185,8 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(BrowserTracker.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					BrowserTracker.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

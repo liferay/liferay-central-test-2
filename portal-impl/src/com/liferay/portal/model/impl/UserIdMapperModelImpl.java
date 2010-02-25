@@ -224,8 +224,8 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(UserIdMapper.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					UserIdMapper.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

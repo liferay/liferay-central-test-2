@@ -438,8 +438,8 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PollsQuestion.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					PollsQuestion.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

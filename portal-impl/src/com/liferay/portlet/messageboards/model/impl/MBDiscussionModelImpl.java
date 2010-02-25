@@ -217,8 +217,8 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MBDiscussion.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					MBDiscussion.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

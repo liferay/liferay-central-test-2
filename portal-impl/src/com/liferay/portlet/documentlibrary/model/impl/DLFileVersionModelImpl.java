@@ -358,8 +358,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(DLFileVersion.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					DLFileVersion.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

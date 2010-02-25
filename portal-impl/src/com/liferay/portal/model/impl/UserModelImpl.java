@@ -679,8 +679,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(User.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					User.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

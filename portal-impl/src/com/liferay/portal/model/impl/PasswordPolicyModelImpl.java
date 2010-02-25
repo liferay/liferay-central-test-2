@@ -494,8 +494,8 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PasswordPolicy.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					PasswordPolicy.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

@@ -319,8 +319,8 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MBCategory.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					MBCategory.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

@@ -320,8 +320,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Account.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					Account.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

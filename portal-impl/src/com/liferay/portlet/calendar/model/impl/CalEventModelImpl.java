@@ -420,8 +420,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(CalEvent.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					CalEvent.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

@@ -359,8 +359,8 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(IGImage.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					IGImage.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

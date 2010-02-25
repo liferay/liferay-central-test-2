@@ -263,8 +263,8 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(JournalContentSearch.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					JournalContentSearch.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

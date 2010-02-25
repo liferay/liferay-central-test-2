@@ -81,12 +81,12 @@ import java.rmi.RemoteException;
  */
 public class ExpandoValueServiceSoap {
 	public static com.liferay.portlet.expando.model.ExpandoValueSoap addValue(
-		java.lang.String className, java.lang.String tableName,
+		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.lang.Object data)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.addValue(className,
-					tableName, columnName, classPK, data);
+			com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.addValue(companyId,
+					className, tableName, columnName, classPK, data);
 
 			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModel(returnValue);
 		}

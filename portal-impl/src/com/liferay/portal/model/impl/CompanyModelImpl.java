@@ -270,8 +270,8 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Company.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					Company.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

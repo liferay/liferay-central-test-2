@@ -299,8 +299,8 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PortletItem.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					PortletItem.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

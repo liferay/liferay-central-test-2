@@ -391,8 +391,8 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Group.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					Group.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

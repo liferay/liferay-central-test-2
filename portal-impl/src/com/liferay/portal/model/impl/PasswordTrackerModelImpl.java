@@ -192,8 +192,8 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PasswordTracker.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					PasswordTracker.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

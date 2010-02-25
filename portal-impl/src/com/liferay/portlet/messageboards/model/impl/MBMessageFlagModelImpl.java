@@ -240,8 +240,8 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MBMessageFlag.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+					MBMessageFlag.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

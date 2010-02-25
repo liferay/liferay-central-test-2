@@ -281,8 +281,8 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Website.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					Website.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

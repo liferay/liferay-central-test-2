@@ -281,8 +281,8 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(EmailAddress.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					EmailAddress.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

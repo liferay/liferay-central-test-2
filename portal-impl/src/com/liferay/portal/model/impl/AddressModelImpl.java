@@ -362,8 +362,8 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Address.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					Address.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

@@ -317,8 +317,8 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(JournalStructure.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					JournalStructure.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

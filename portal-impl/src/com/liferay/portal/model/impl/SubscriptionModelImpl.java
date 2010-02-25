@@ -292,8 +292,8 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Subscription.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					Subscription.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

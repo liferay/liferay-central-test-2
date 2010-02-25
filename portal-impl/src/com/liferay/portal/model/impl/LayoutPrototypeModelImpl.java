@@ -277,8 +277,8 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(LayoutPrototype.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					LayoutPrototype.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

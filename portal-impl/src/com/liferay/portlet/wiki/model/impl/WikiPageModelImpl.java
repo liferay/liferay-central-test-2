@@ -463,8 +463,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(WikiPage.class.getName(),
-					getResourcePrimKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					WikiPage.class.getName(), getResourcePrimKey());
 		}
 
 		return _expandoBridge;

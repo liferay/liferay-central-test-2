@@ -265,8 +265,8 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(AssetTagProperty.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					AssetTagProperty.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

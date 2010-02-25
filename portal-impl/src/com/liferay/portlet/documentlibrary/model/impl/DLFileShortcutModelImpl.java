@@ -337,8 +337,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(DLFileShortcut.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					DLFileShortcut.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

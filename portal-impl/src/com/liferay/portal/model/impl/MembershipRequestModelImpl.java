@@ -267,8 +267,8 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MembershipRequest.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					MembershipRequest.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

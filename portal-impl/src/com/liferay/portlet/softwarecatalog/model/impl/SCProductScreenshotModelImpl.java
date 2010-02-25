@@ -253,8 +253,8 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(SCProductScreenshot.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					SCProductScreenshot.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;

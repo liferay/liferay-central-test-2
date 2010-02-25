@@ -229,8 +229,8 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PluginSetting.class.getName(),
-					getPrimaryKey());
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					PluginSetting.class.getName(), getPrimaryKey());
 		}
 
 		return _expandoBridge;
