@@ -279,23 +279,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</aui:column>
 </aui:layout>
 
-<%
-String tabs2Names = "version-history,comments";
-
-if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION)) {
-	tabs2Names = "version-history";
-}
-%>
-
 <div class="file-entry-panels">
-	<liferay-ui:tabs
-		names="<%= tabs2Names %>"
-		param="tabs2"
-		url="<%= portletURL.toString() %>"
-	/>
-
-	<c:choose>
-		<c:when test='<%= tabs2.equals("version-history") %>'>
+	<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" cssClass="version-history" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "version-history") %>'>
 
 			<%
 			boolean comparableFileEntry = false;
@@ -432,9 +418,9 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 			%>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-		</c:when>
-		<c:when test='<%= tabs2.equals("comments") %>'>
-			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION) %>">
+		</liferay-ui:panel>
+		<c:if test="<%= PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION) %>">
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
 				<portlet:actionURL var="discussionURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
 				</portlet:actionURL>
@@ -449,9 +435,9 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 					redirect="<%= currentURL %>"
 					ratingsEnabled="<%= enableCommentRatings %>"
 				/>
-			</c:if>
-		</c:when>
-	</c:choose>
+			</liferay-ui:panel>
+		</c:if>
+	</liferay-ui:panel-container>
 </div>
 
 <aui:script>
