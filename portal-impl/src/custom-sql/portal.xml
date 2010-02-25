@@ -769,6 +769,28 @@
 				(Resource_.primKey LIKE ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.ResourcePermissionFinder.countByR_S">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				ResourcePermission
+			WHERE
+				(ResourcePermission.roleId = ?) AND
+				[$SCOPE$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.ResourcePermissionFinder.findByR_S">
+		<![CDATA[
+			SELECT
+				{ResourcePermission.*}
+			FROM
+				ResourcePermission
+			WHERE
+				(ResourcePermission.roleId = ?) AND
+				[$SCOPE$]
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByCommunity">
 		<![CDATA[
 			SELECT
