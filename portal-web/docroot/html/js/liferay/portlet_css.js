@@ -633,11 +633,11 @@ AUI().add(
 
 					// Portlet config
 
-					instance._customTitleInput = instance._getNodeById('custom-title');
-
 					var portletTitle = instance._curPortlet.one('.portlet-title');
 
-					instance._defaultPortletTitle = (portletTitle && portletTitle.text()) || '';
+					instance._defaultPortletTitle = Lang.trim(portletTitle ? portletTitle.text() : '');
+
+					instance._customTitleInput = instance._getNodeById('custom-title');
 					instance._customTitleCheckbox = instance._getNodeById('use-custom-titleCheckbox');
 					instance._showBorders = instance._getNodeById('show-bordersCheckbox');
 					instance._borderNote = A.one('#border-note');
@@ -1214,9 +1214,6 @@ AUI().add(
 					objData.wapData = wapData;
 				}
 
-				var portletTitles = portletData.titles;
-				var portletTitle = instance._portletTitles(portletData.language);
-
 				var fontStyle = false;
 				var fontWeight = false;
 
@@ -1230,11 +1227,19 @@ AUI().add(
 
 				// Portlet config
 
-				instance._setInput(instance._customTitleInput, portletTitle);
 				instance._setCheckbox(instance._customTitleCheckbox, portletData.useCustomTitle);
 				instance._setCheckbox(instance._showBorders, portletData.showBorders);
 				instance._setSelect(instance._portletLanguage, instance._currentLanguage);
 				instance._setSelect(instance._portletLinksTarget, portletData.portletLinksTarget);
+
+				var portletTitles = portletData.titles;
+				var portletTitle = instance._portletTitles(portletData.language);
+
+				if (!portletTitle) {
+					portletTitle = instance._defaultPortletTitle;
+				}
+
+				instance._setInput(instance._customTitleInput, portletTitle);
 
 				if (!portletData.useCustomTitle) {
 					instance._customTitleInput.set('disabled', true);
