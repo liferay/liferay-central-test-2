@@ -1943,12 +1943,13 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle updateStatus(
-			long userId, long resourcePrimKey, int status)
+			long userId, long resourcePrimKey, int status,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JournalArticle article = getLatestArticle(resourcePrimKey);
 
-		return updateStatus(userId, article, status, null, null);
+		return updateStatus(userId, article, status, null, serviceContext);
 	}
 
 	public JournalArticle updateStatus(

@@ -1036,6 +1036,14 @@ public class DLFileEntryLocalServiceImpl
 		fileVersion.setStatusByUserName(user.getFullName());
 		fileVersion.setStatusDate(new Date());
 
+		if (fileVersion.isApproved() &&
+			(DLUtil.compareVersions(
+				fileVersion.getVersion(),
+				DLFileEntryConstants.DEFAULT_VERSION) < 0)) {
+
+			fileVersion.setVersion(DLFileEntryConstants.DEFAULT_VERSION);
+		}
+
 		dlFileVersionPersistence.update(fileVersion, false);
 
 		// File entry

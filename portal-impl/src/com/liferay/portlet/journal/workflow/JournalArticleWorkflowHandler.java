@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.workflow;
 
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.workflow.BaseWorkflowHandler;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -49,8 +50,12 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 			long companyId, long groupId, long userId, long classPK, int status)
 		throws Exception {
 
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(groupId);
+
 		return JournalArticleLocalServiceUtil.updateStatus(
-			userId, classPK, status);
+			userId, classPK, status, serviceContext);
 	}
 
 }

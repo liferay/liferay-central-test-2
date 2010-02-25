@@ -796,10 +796,12 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateStatus(
-		long userId, long resourcePrimKey, int status)
+		long userId, long resourcePrimKey, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateStatus(userId, resourcePrimKey, status);
+		return getService()
+				   .updateStatus(userId, resourcePrimKey, status, serviceContext);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateStatus(

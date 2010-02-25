@@ -787,11 +787,12 @@ public class JournalArticleLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateStatus(
-		long userId, long resourcePrimKey, int status)
+		long userId, long resourcePrimKey, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleLocalService.updateStatus(userId,
-			resourcePrimKey, status);
+			resourcePrimKey, status, serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateStatus(
