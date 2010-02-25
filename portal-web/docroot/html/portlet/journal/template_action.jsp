@@ -32,7 +32,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= JournalTemplatePermission.contains(permissionChecker, template, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editeTemplateURL">
+		<portlet:renderURL var="editeTemplateURL">
 			<portlet:param name="struts_action" value="/journal/edit_template" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
@@ -66,7 +66,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 
 	<c:if test="<%= Validator.isNotNull(template.getStructureId()) %>">
 		<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) %>">
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL">
+			<portlet:renderURL var="addArticleURL">
 				<portlet:param name="struts_action" value="/journal/edit_article" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
@@ -77,7 +77,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 			<liferay-ui:icon image="add_article" message="add-web-content" url="<%= addArticleURL %>" />
 		</c:if>
 
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewArticlesURL">
+		<portlet:renderURL var="viewArticlesURL">
 			<portlet:param name="struts_action" value="/journal/view" />
 			<portlet:param name="tabs1" value="web-content" />
 			<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
@@ -86,7 +86,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 
 		<liferay-ui:icon image="view_articles" message="view-web-content" url="<%= viewArticlesURL %>" />
 
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editStructureURL">
+		<portlet:renderURL var="editStructureURL">
 			<portlet:param name="struts_action" value="/journal/edit_structure" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
@@ -97,7 +97,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 	</c:if>
 
 	<c:if test="<%= JournalTemplatePermission.contains(permissionChecker, template, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteTemplateURL">
+		<portlet:actionURL var="deleteTemplateURL">
 			<portlet:param name="struts_action" value="/journal/edit_template" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

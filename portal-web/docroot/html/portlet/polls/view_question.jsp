@@ -42,12 +42,12 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 }
 %>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewQuestionActionURL">
+<portlet:actionURL var="viewQuestionActionURL">
 	<portlet:param name="struts_action" value="/polls/view_question" />
 </portlet:actionURL>
 
 <aui:form action="<%= viewQuestionActionURL %>" method="post" name="fm">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewQuestionRenderURL">
+	<portlet:renderURL var="viewQuestionRenderURL">
 		<portlet:param name="struts_action" value="/polls/view_question" />
 		<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
 	</portlet:renderURL>
@@ -92,7 +92,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 				</aui:field-wrapper>
 
 				<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
-					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewResultsURL">
+					<portlet:renderURL var="viewResultsURL">
 						<portlet:param name="struts_action" value="/polls/view_question" />
 						<portlet:param name="redirect" value="<%= redirect %>" />
 						<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
@@ -116,7 +116,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 			<c:otherwise>
 				<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
 
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewQuestionURL">
+				<portlet:renderURL var="viewQuestionURL">
 					<portlet:param name="struts_action" value="/polls/view_question" />
 					<portlet:param name="redirect" value="<%= redirect %>" />
 					<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />

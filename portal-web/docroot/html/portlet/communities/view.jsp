@@ -42,8 +42,6 @@ if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES)) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/communities/view");
 portletURL.setParameter("tabs1", tabs1);
 

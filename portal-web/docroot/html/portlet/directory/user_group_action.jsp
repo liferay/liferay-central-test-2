@@ -35,7 +35,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
+	<portlet:renderURL var="viewUsersURL">
 		<portlet:param name="struts_action" value="/directory/view" />
 		<portlet:param name="tabs1" value="users" />
 		<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />

@@ -38,7 +38,7 @@
 				currentCal.setTime(dateFormat.parse(currentDate));
 				%>
 
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />"><img border="0" src="http://rev-fun.gospelcom.net/<%= currentCal.get(Calendar.YEAR) %>/<%= decimalFormat.format(currentCal.get(Calendar.MONTH) + 1) %>/<%= currentDate %>_sm.gif" width="72" /></a>
+				<a href="<portlet:renderURL />"><img border="0" src="http://rev-fun.gospelcom.net/<%= currentCal.get(Calendar.YEAR) %>/<%= decimalFormat.format(currentCal.get(Calendar.MONTH) + 1) %>/<%= currentDate %>_sm.gif" width="72" /></a>
 			</td>
 			<td>
 				Reverend Fun, daily humor for daily people!
@@ -66,7 +66,7 @@
 			</td>
 			<td align="right">
 				<c:if test="<%= previousDate != null %>">
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="date" value="<%= previousDate %>" /></portlet:renderURL>"><liferay-ui:message key="previous" /></a>
+					<a href="<portlet:renderURL><portlet:param name="date" value="<%= previousDate %>" /></portlet:renderURL>"><liferay-ui:message key="previous" /></a>
 				</c:if>
 
 				<c:if test="<%= previousDate != null && nextDate != null %>">
@@ -74,7 +74,7 @@
 				</c:if>
 
 				<c:if test="<%= nextDate != null %>">
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="date" value="<%= nextDate %>" /></portlet:renderURL>"><liferay-ui:message key="next" /></a>
+					<a href="<portlet:renderURL><portlet:param name="date" value="<%= nextDate %>" /></portlet:renderURL>"><liferay-ui:message key="next" /></a>
 				</c:if>
 			</td>
 		</tr>

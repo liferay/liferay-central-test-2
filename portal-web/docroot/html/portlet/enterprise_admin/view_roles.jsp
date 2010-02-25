@@ -82,8 +82,6 @@ headerNames.add(StringPool.BLANK);
 		if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE)) {
 			rowURL = renderResponse.createRenderURL();
 
-			rowURL.setWindowState(WindowState.MAXIMIZED);
-
 			rowURL.setParameter("struts_action", "/enterprise_admin/edit_role");
 			rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
 			rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));

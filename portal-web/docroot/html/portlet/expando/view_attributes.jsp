@@ -75,7 +75,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(modelResource, name);
 		%>
 
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
+		<portlet:renderURL var="rowURL">
 			<portlet:param name="struts_action" value="/expando/edit_expando" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="columnId" value="<%= String.valueOf(expandoColumn.getColumnId()) %>" />
@@ -208,7 +208,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 
 <aui:script>
 	function <portlet:namespace />addExpando() {
-		submitForm(document.hrefFm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/expando/edit_expando" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="modelResource" value="<%= modelResource %>" /></portlet:renderURL>');
+		submitForm(document.hrefFm, '<portlet:renderURL><portlet:param name="struts_action" value="/expando/edit_expando" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="modelResource" value="<%= modelResource %>" /></portlet:renderURL>');
 	}
 </aui:script>
 

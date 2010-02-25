@@ -33,7 +33,7 @@ String newArticleId = ParamUtil.getString(request, "newArticleId");
 double version = ParamUtil.getDouble(request, "version");
 %>
 
-<portlet:actionURL var="copyArticleURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="copyArticleURL">
 	<portlet:param name="struts_action" value="/journal/copy_article" />
 </portlet:actionURL>
 

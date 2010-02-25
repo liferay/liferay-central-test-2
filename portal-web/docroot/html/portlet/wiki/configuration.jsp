@@ -59,7 +59,7 @@ else if (tabs2.equals("page-updated-email")) {
 }
 %>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
+<liferay-portlet:renderURL var="portletURL" portletConfiguration="true">
 	<portlet:param name="tabs2" value="<%= tabs2 %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>

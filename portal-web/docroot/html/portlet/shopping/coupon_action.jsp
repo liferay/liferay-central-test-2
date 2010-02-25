@@ -31,7 +31,7 @@ ShoppingCoupon coupon = (ShoppingCoupon)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+	<portlet:renderURL var="editURL">
 		<portlet:param name="struts_action" value="/shopping/edit_coupon" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" />
@@ -39,7 +39,7 @@ ShoppingCoupon coupon = (ShoppingCoupon)row.getObject();
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+	<portlet:actionURL var="deleteURL">
 		<portlet:param name="struts_action" value="/shopping/edit_coupon" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />

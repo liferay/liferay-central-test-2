@@ -30,8 +30,6 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "organizations");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/admin_server/edit_permissions");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);

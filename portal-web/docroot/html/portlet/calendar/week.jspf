@@ -100,7 +100,7 @@ Format dateFormatMonthAndDay = FastDateFormatFactoryUtil.getSimpleDateFormat("M/
 
 <div>
 	<c:if test="<%= CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_EVENT) %>">
-		<portlet:renderURL var="editEventURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+		<portlet:renderURL var="editEventURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="month" value="<%= String.valueOf(selMonth) %>" />
@@ -181,7 +181,7 @@ Format dateFormatMonthAndDay = FastDateFormatFactoryUtil.getSimpleDateFormat("M/
 					</td>
 					<td align="right">
 						<c:if test="<%= CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_EVENT) %>">
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
+							<a href="<portlet:renderURL><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
 							<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<liferay-ui:message key="add" />" />
 							</a>
 						</c:if>

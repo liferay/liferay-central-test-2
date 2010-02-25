@@ -137,7 +137,7 @@ if (image != null) {
 					}
 					%>
 
-					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
+					<portlet:renderURL var="viewFolderURL">
 						<portlet:param name="struts_action" value="/image_gallery/view" />
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 					</portlet:renderURL>
@@ -226,7 +226,7 @@ if (image != null) {
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
 
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId;
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/image_gallery/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId;
 		nameEl.innerHTML = folderName + "&nbsp;";
 	}
 

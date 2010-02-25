@@ -49,7 +49,7 @@
 		<aui:input cssClass="lfr-input-text-container" name="file" type="file" />
 	</aui:fieldset>
 
-	<portlet:actionURL var="importEventsURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:actionURL var="importEventsURL">
 		<portlet:param name="struts_action" value="/calendar/import_events" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 	</portlet:actionURL>

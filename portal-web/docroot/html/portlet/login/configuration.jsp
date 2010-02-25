@@ -31,7 +31,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
+<liferay-portlet:renderURL var="portletURL" portletConfiguration="true">
 	<portlet:param name="tabs1" value="<%= tabs1 %>" />
 	<portlet:param name="tabs2" value="<%= tabs2 %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />

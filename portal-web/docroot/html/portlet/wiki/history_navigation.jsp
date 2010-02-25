@@ -69,7 +69,7 @@ if (type.equals("html")) {
 }
 %>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="changeMode">
+<portlet:renderURL var="changeMode">
 	<portlet:param name="struts_action" value="/wiki/compare_versions" />
 	<portlet:param name="nodeId" value="<%= String.valueOf(nodeId) %>" />
 	<portlet:param name="title" value="<%= title %>" />
@@ -78,7 +78,7 @@ if (type.equals("html")) {
 	<portlet:param name="type" value='<%= htmlMode ? "text" : "html" %>' />
 </portlet:renderURL>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="previousChange">
+<portlet:renderURL var="previousChange">
 	<portlet:param name="struts_action" value="/wiki/compare_versions" />
 	<portlet:param name="nodeId" value="<%= String.valueOf(nodeId) %>" />
 	<portlet:param name="title" value="<%= title %>" />
@@ -87,7 +87,7 @@ if (type.equals("html")) {
 	<portlet:param name="type" value="<%= type %>" />
 </portlet:renderURL>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="nextChange">
+<portlet:renderURL var="nextChange">
 	<portlet:param name="struts_action" value="/wiki/compare_versions" />
 	<portlet:param name="nodeId" value="<%= String.valueOf(nodeId) %>" />
 	<portlet:param name="title" value="<%= title %>" />

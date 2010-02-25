@@ -84,7 +84,7 @@ int tabIndex = 1;
 	<input name="xml" type="hidden" value="" />
 </aui:form>
 
-<portlet:actionURL var="editStructureURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="editStructureURL">
 	<portlet:param name="struts_action" value="/journal/edit_structure" />
 </portlet:actionURL>
 
@@ -143,7 +143,7 @@ int tabIndex = 1;
 
 			<c:choose>
 				<c:when test="<%= (structure == null) || (Validator.isNotNull(parentStructureId)) %>">
-					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="parentStructureURL">
+					<portlet:renderURL var="parentStructureURL">
 						<portlet:param name="struts_action" value="/journal/edit_structure" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
@@ -416,7 +416,7 @@ int tabIndex = 1;
 
 		var nameEl = document.getElementById("<portlet:namespace />parentStructureName");
 
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>&<portlet:namespace />parentStructureId=" + parentStructureId;
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>&<portlet:namespace />parentStructureId=" + parentStructureId;
 		nameEl.innerHTML = parentStructureName + "&nbsp;";
 
 		document.getElementById("<portlet:namespace />removeParentStructureButton").disabled = false;

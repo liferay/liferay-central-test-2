@@ -44,7 +44,7 @@ if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
@@ -65,7 +65,7 @@ if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name
 	</c:if>
 
 	<c:if test="<%= !name.equals(RoleConstants.ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_OWNER) && !name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_OWNER) && !name.equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRolePermissionsURL">
+		<portlet:renderURL var="editRolePermissionsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
@@ -76,7 +76,7 @@ if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name
 	</c:if>
 
 	<c:if test="<%= !unassignableRole && (role.getType() == RoleConstants.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
+		<portlet:renderURL var="assignMembersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
@@ -86,7 +86,7 @@ if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name
 	</c:if>
 
 	<c:if test="<%= !unassignableRole && (role.getType() == RoleConstants.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.VIEW) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
+		<portlet:renderURL var="viewUsersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
 			<portlet:param name="tabs1" value="users" />
 			<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
@@ -97,7 +97,7 @@ if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name
 	</c:if>
 
 	<c:if test="<%= !PortalUtil.isSystemRole(name) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />

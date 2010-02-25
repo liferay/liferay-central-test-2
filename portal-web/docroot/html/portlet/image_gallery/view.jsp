@@ -47,8 +47,6 @@ int imagesCount = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId)
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/image_gallery/view");
 portletURL.setParameter("topLink", topLink);
 portletURL.setParameter("folderId", String.valueOf(folderId));

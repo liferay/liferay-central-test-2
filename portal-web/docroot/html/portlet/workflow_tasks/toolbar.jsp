@@ -31,7 +31,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 
 <div class="lfr-portlet-toolbar">
 	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.VIEW_ALL_TASKS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewAllURL">
+		<portlet:renderURL var="viewAllURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/view" />
 			<portlet:param name="toolbarItem" value="all" />
 		</portlet:renderURL>
@@ -41,7 +41,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 		</span>
 	</c:if>
 
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignedToMeURL">
+	<portlet:renderURL var="assignedToMeURL">
 		<portlet:param name="struts_action" value="/workflow_tasks/view" />
 		<portlet:param name="toolbarItem" value="assigned-to-me" />
 	</portlet:renderURL>
@@ -50,7 +50,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 		<a href="<%= assignedToMeURL %>"><liferay-ui:message key="assigned-to-me" /></a>
 	</span>
 
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignedToMyRolesURL">
+	<portlet:renderURL var="assignedToMyRolesURL">
 		<portlet:param name="struts_action" value="/workflow_tasks/view" />
 		<portlet:param name="toolbarItem" value="assigned-to-my-roles" />
 	</portlet:renderURL>
@@ -59,7 +59,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 		<a href="<%= assignedToMyRolesURL %>"><liferay-ui:message key="assigned-to-my-roles" /></a>
 	</span>
 
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="completedURL">
+	<portlet:renderURL var="completedURL">
 		<portlet:param name="struts_action" value="/workflow_tasks/view" />
 		<portlet:param name="toolbarItem" value="my-completed-tasks" />
 	</portlet:renderURL>

@@ -53,8 +53,6 @@ if (group.isOrganization()) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/communities/edit_user_roles");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("redirect", redirect);
@@ -120,6 +118,6 @@ request.setAttribute("edit_user_roles.jsp-portletURL", portletURL);
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_user_roles" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_user_roles" /></portlet:actionURL>");
 	}
 </aui:script>

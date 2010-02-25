@@ -1,6 +1,6 @@
 <liferay-ui:icon-menu>
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, curFolder, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/document_library/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />

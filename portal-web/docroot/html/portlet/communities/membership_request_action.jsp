@@ -36,7 +36,7 @@ MembershipRequest membershipRequest = (MembershipRequest)objArray[2];
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= (membershipRequest.getStatusId() == MembershipRequestConstants.STATUS_PENDING) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyRequestURL">
+		<portlet:renderURL var="replyRequestURL">
 			<portlet:param name="struts_action" value="/communities/reply_membership_request" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />

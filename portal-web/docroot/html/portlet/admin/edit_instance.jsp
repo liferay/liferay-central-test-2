@@ -32,7 +32,7 @@ Company company2 = (Company)request.getAttribute(WebKeys.SEL_COMPANY);
 long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 %>
 
-<portlet:actionURL var="editInstanceURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="editInstanceURL">
 	<portlet:param name="struts_action" value="/admin/edit_instance" />
 </portlet:actionURL>
 

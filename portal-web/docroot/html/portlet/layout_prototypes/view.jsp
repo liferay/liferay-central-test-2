@@ -29,8 +29,6 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/layout_prototypes/view");
 %>
 
@@ -60,7 +58,7 @@ portletURL.setParameter("struts_action", "/layout_prototypes/view");
 			keyProperty="layoutPrototypeId"
 			modelVar="layoutPrototype"
 		>
-			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
+			<liferay-portlet:renderURL varImpl="rowURL">
 				<portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" />
 				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 				<portlet:param name="backURL" value="<%= searchContainer.getIteratorURL().toString() %>" />

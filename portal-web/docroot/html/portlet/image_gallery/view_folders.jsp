@@ -46,7 +46,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		keyProperty="folderId"
 		modelVar="curFolder"
 	>
-		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
+		<liferay-portlet:renderURL varImpl="rowURL">
 			<portlet:param name="struts_action" value="/image_gallery/view" />
 			<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
 		</liferay-portlet:renderURL>

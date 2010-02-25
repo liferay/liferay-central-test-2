@@ -106,7 +106,7 @@ if (feed != null) {
 }
 %>
 
-<portlet:actionURL var="editFeedURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="editFeedURL">
 	<portlet:param name="struts_action" value="/journal/edit_feed" />
 </portlet:actionURL>
 
@@ -196,7 +196,7 @@ if (feed != null) {
 				<aui:field-wrapper label="structure">
 					<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
 
-					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="structureURL">
+					<portlet:renderURL var="structureURL">
 						<portlet:param name="struts_action" value="/journal/edit_structure" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
@@ -235,7 +235,7 @@ if (feed != null) {
 
 								<aui:input checked="<%= templateChecked %>" name="templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" />
 
-								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="templateURL">
+								<portlet:renderURL var="templateURL">
 									<portlet:param name="struts_action" value="/journal/edit_template" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
 									<portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" />

@@ -109,8 +109,6 @@ List<Group> groups = new ArrayList<Group>(mvp.keySet());
 
 		PortletURL editGroupURL = renderResponse.createRenderURL();
 
-		editGroupURL.setWindowState(WindowState.MAXIMIZED);
-
 		editGroupURL.setParameter("redirect", currentURL);
 
 		if (group.isCommunity()) {
@@ -143,8 +141,6 @@ List<Group> groups = new ArrayList<Group>(mvp.keySet());
 			<%
 			PortletURL editRoleURL = renderResponse.createRenderURL();
 
-			editRoleURL.setWindowState(WindowState.MAXIMIZED);
-
 			editRoleURL.setParameter("struts_action", "/admin_server/edit_role_permissions");
 			editRoleURL.setParameter(Constants.CMD, Constants.VIEW);
 			editRoleURL.setParameter("redirect", currentURL);
@@ -162,7 +158,7 @@ List<Group> groups = new ArrayList<Group>(mvp.keySet());
 
 		</liferay-ui:search-container-column-text>
 
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="mergeURL">
+		<portlet:actionURL var="mergeURL">
 			<portlet:param name="struts_action" value="/admin_server/edit_permissions" />
 			<portlet:param name="<%= Constants.CMD %>" value="merge" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

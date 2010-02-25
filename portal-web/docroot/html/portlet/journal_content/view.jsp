@@ -227,7 +227,7 @@ if (articleDisplay != null) {
 
 								<c:choose>
 									<c:when test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>">
-										<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
+										<liferay-portlet:renderURL var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 											<portlet:param name="struts_action" value="/journal/edit_article" />
 											<portlet:param name="redirect" value="<%= currentURL %>" />
 											<portlet:param name="referringPortletResource" value="<%= PortletKeys.JOURNAL_CONTENT %>" />
@@ -288,7 +288,7 @@ if (articleDisplay != null) {
 			<div class="lfr-meta-actions icons-container">
 				<div class="icon-actions">
 					<c:if test="<%= showEditArticleIcon %>">
-						<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
+						<liferay-portlet:renderURL var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 							<portlet:param name="struts_action" value="/journal/edit_article" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="referringPortletResource" value="<%= PortletKeys.JOURNAL_CONTENT %>" />
@@ -301,7 +301,7 @@ if (articleDisplay != null) {
 					</c:if>
 
 					<c:if test="<%= showEditTemplateIcon %>">
-						<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editTemplateURL" portletName="<%= PortletKeys.JOURNAL %>">
+						<liferay-portlet:renderURL var="editTemplateURL" portletName="<%= PortletKeys.JOURNAL %>">
 							<portlet:param name="struts_action" value="/journal/edit_template" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="referringPortletResource" value="<%= PortletKeys.JOURNAL_CONTENT %>" />
@@ -317,7 +317,7 @@ if (articleDisplay != null) {
 					</c:if>
 
 					<c:if test="<%= showAddArticleIcon %>">
-						<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL" portletName="<%= PortletKeys.JOURNAL %>">
+						<liferay-portlet:renderURL var="addArticleURL" portletName="<%= PortletKeys.JOURNAL %>">
 							<portlet:param name="struts_action" value="/journal/edit_article" />
 							<portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />

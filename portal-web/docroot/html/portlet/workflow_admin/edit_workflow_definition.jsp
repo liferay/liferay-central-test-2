@@ -41,8 +41,6 @@ if (workflowDefinition != null) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/workflow_admin/view");
 portletURL.setParameter("tabs1", tabs1);
 %>

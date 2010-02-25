@@ -84,8 +84,6 @@ Boolean hasLock = Boolean.FALSE;
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
@@ -94,7 +92,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFileShortcutURL">
+<portlet:actionURL var="editFileShortcutURL">
 	<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 </portlet:actionURL>
 

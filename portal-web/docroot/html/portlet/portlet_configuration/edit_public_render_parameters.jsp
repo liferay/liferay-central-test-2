@@ -35,8 +35,6 @@ Set<PublicRenderParameter> publicRenderParameters = (Set<PublicRenderParameter>)
 
 PortletURL editPublicRenderParameterURL = renderResponse.createRenderURL();
 
-editPublicRenderParameterURL.setWindowState(WindowState.MAXIMIZED);
-
 editPublicRenderParameterURL.setParameter("struts_action", "/portlet_configuration/edit_public_render_parameters");
 editPublicRenderParameterURL.setParameter("redirect", redirect);
 editPublicRenderParameterURL.setParameter("returnToFullPageURL", returnToFullPageURL);
@@ -49,7 +47,7 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 
 <liferay-ui:error key="duplicateMapping" message="several-shared-parameters-are-mapped-to-the-same-parameter" />
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPRPURL">
+<portlet:actionURL var="editPRPURL">
 	<portlet:param name="struts_action" value="/portlet_configuration/edit_public_render_parameters" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
 </portlet:actionURL>

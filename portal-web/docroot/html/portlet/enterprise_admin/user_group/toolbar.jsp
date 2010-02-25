@@ -30,7 +30,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <div class="lfr-portlet-toolbar">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUserGroupsURL">
+	<portlet:renderURL var="viewUserGroupsURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
 	</portlet:renderURL>
 
@@ -39,7 +39,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserGroupURL">
+		<portlet:renderURL var="addUserGroupURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>

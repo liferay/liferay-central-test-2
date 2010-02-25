@@ -43,7 +43,7 @@ else {
 
 <liferay-ui:icon-menu showExpanded="<%= view %>">
 	<c:if test="<%= BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
@@ -64,7 +64,7 @@ else {
 	</c:if>
 
 	<c:if test="<%= !view && BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

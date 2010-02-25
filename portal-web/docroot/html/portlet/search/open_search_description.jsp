@@ -29,8 +29,6 @@ long groupId = ParamUtil.getLong(request, "groupId");
 
 PortletURLImpl searchURL = new PortletURLImpl(request, PortletKeys.SEARCH, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-searchURL.setWindowState(WindowState.MAXIMIZED);
-
 searchURL.setEscapeXml(true);
 
 searchURL.setParameter("struts_action", "/search/search");

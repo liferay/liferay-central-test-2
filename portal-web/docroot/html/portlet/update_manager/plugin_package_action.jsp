@@ -44,7 +44,7 @@ if (availablePluginPackage != null) {
 
 <liferay-ui:icon-menu>
 	<c:if test='<%= pluginPackageStatus.equals("update-available") || pluginPackageStatus.equals("update-ignored") %>'>
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateURL">
+		<portlet:actionURL var="updateURL">
 			<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 			<portlet:param name="<%= Constants.CMD %>" value="remoteDeploy" />
 			<portlet:param name="<%= Constants.PROGRESS_ID %>" value="<%= uploadProgressId %>" />
@@ -64,7 +64,7 @@ if (availablePluginPackage != null) {
 
 		<c:choose>
 			<c:when test="<%= !PluginPackageUtil.isIgnored(pluginPackage) %>">
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="ignoreURL">
+				<portlet:actionURL var="ignoreURL">
 					<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 					<portlet:param name="<%= Constants.CMD %>" value="ignorePackages" />
 					<portlet:param name="redirect" value="<%= redirect %>" />
@@ -82,7 +82,7 @@ if (availablePluginPackage != null) {
 				/>
 			</c:when>
 			<c:otherwise>
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unignoreURL">
+				<portlet:actionURL var="unignoreURL">
 					<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 					<portlet:param name="<%= Constants.CMD %>" value="unignorePackages" />
 					<portlet:param name="redirect" value="<%= redirect %>" />
@@ -103,7 +103,7 @@ if (availablePluginPackage != null) {
 	</c:if>
 
 	<c:if test="<%= PrefsPropsUtil.getBoolean(PropsKeys.HOT_UNDEPLOY_ENABLED, PropsValues.HOT_UNDEPLOY_ENABLED) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="uninstallURL">
+		<portlet:actionURL var="uninstallURL">
 			<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 			<portlet:param name="<%= Constants.CMD %>" value="uninstall" />
 			<portlet:param name="redirect" value="<%= redirect %>" />

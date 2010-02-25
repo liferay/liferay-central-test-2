@@ -101,7 +101,7 @@ int firstReminder = BeanParamUtil.getInteger(event, request, "firstReminder", (i
 int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", (int)Time.MINUTE * 5);
 %>
 
-<portlet:actionURL var="editEventURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="editEventURL">
 	<portlet:param name="struts_action" value="/calendar/edit_event" />
 </portlet:actionURL>
 
@@ -318,8 +318,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <%
 if (event != null) {
 	PortletURL portletURL = renderResponse.createRenderURL();
-
-	portletURL.setWindowState(WindowState.MAXIMIZED);
 
 	portletURL.setParameter("struts_action", "/calendar/view_event");
 	portletURL.setParameter("redirect", currentURL);

@@ -210,8 +210,6 @@ try {
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setWindowState(WindowState.MAXIMIZED);
-
 		rowURL.setParameter("struts_action", "/plugin_installer/view");
 		rowURL.setParameter("tabs1", tabs1);
 		rowURL.setParameter("tabs2", tabs2);

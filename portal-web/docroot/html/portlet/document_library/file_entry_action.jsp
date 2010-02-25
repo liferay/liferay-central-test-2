@@ -64,8 +64,6 @@ else if (fileShortcut != null) {
 
 PortletURL viewFolderURL = renderResponse.createRenderURL();
 
-viewFolderURL.setWindowState(WindowState.MAXIMIZED);
-
 viewFolderURL.setParameter("struts_action", "/document_library/view");
 viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 %>
@@ -84,7 +82,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 			<%@ include file="/html/portlet/document_library/file_entry_action_open_document.jspf" %>
 
 			<c:if test="<%= !view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+				<portlet:renderURL var="editURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
@@ -110,7 +108,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 
 			<c:if test="<%= !view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+				<portlet:actionURL var="deleteURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 					<portlet:param name="redirect" value="<%= viewFolderURL.toString() %>" />
@@ -138,7 +136,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 			<%@ include file="/html/portlet/document_library/file_entry_action_open_document.jspf" %>
 
 			<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewShortcutURL">
+				<portlet:renderURL var="viewShortcutURL">
 					<portlet:param name="struts_action" value="/document_library/view_file_shortcut" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="fileShortcutId" value="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>" />
@@ -148,7 +146,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 
 			<c:if test="<%= view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewOriginalFileURL">
+				<portlet:renderURL var="viewOriginalFileURL">
 					<portlet:param name="struts_action" value="/document_library/view_file_entry" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="folderId" value="<%= String.valueOf(fileShortcut.getToFolderId()) %>" />
@@ -163,7 +161,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 
 			<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editShortcutURL">
+				<portlet:renderURL var="editShortcutURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="fileShortcutId" value="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>" />
@@ -184,7 +182,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 
 			<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.DELETE) %>">
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteShortcutURL">
+				<portlet:actionURL var="deleteShortcutURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />

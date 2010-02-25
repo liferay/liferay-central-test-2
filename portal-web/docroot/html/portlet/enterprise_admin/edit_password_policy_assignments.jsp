@@ -36,8 +36,6 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute(WebKeys.PAS
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/enterprise_admin/edit_password_policy_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("redirect", redirect);
@@ -53,7 +51,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs
 portletURL.setParameter("tabs3", tabs3);
 %>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
+<portlet:actionURL var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy_assignments" />
 </portlet:actionURL>
 

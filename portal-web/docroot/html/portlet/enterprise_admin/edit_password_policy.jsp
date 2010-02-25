@@ -47,7 +47,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPasswordPolicyURL">
+<portlet:actionURL var="editPasswordPolicyURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
 </portlet:actionURL>
 

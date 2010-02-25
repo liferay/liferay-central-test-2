@@ -87,8 +87,6 @@ String curSection = configurationSections[0];
 
 					<%
 					PortletURL portletURL = new PortletURLImpl(request, PortletKeys.ENTERPRISE_ADMIN_SETTINGS, plid, PortletRequest.RENDER_PHASE);
-
-					portletURL.setWindowState(WindowState.MAXIMIZED);
 					%>
 
 					<aui:button onClick="<%= portletURL.toString() %>" type="cancel" />

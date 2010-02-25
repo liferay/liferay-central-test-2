@@ -81,7 +81,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 
 <aui:script>
 	function <portlet:namespace />addStructure() {
-		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
+		var url = '<portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
 
 		if (toggle_id_journal_structure_searchcurClickValue == 'basic') {
 			url += '&<portlet:namespace /><%= displayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;

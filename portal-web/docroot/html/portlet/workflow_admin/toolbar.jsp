@@ -30,7 +30,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <div class="lfr-portlet-toolbar">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewDefinitionsURL">
+	<portlet:renderURL var="viewDefinitionsURL">
 		<portlet:param name="struts_action" value="/workflow_admin/view" />
 		<portlet:param name="tabs1" value="workflow-definitions" />
 	</portlet:renderURL>
@@ -39,7 +39,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 		<a href="<%= viewDefinitionsURL %>"><liferay-ui:message key="view-all" /></a>
 	</span>
 
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addWorkflowDefinitionURL">
+	<portlet:renderURL var="addWorkflowDefinitionURL">
 		<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
 		<portlet:param name="tabs1" value="workflow-definitions" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />

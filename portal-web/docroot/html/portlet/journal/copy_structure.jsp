@@ -32,7 +32,7 @@ String oldStructureId = ParamUtil.getString(request, "oldStructureId");
 String newStructureId = ParamUtil.getString(request, "newStructureId");
 %>
 
-<portlet:actionURL var="copyStructureURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="copyStructureURL">
 	<portlet:param name="struts_action" value="/journal/copy_structure" />
 </portlet:actionURL>
 

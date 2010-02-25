@@ -70,7 +70,7 @@ if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP))
 			keyProperty="userGroupId"
 			modelVar="userGroup"
 		>
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
+			<portlet:renderURL var="rowURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
 				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 				<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />

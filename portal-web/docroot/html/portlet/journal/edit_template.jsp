@@ -88,7 +88,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<input name="langType" type="hidden" value="" />
 </aui:form>
 
-<portlet:actionURL var="editTemplateURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="editTemplateURL">
 	<portlet:param name="struts_action" value="/journal/edit_template" />
 </portlet:actionURL>
 
@@ -170,7 +170,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 			<c:choose>
 				<c:when test="<%= (template == null) || (Validator.isNotNull(structureId)) %>">
-					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editStructureURL">
+					<portlet:renderURL var="editStructureURL">
 						<portlet:param name="struts_action" value="/journal/edit_structure" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
@@ -290,7 +290,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 		var nameEl = document.getElementById("<portlet:namespace />structureName");
 
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>&<portlet:namespace />structureId=" + structureId;
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>&<portlet:namespace />structureId=" + structureId;
 		nameEl.innerHTML = structureName + "&nbsp;";
 
 		document.getElementById("<portlet:namespace />removeStructureButton").disabled = false;

@@ -74,8 +74,6 @@ searchContainer.setRowChecker(new UserGroupRoleRoleChecker(renderResponse, selUs
 
 	PortletURL updateRoleAssignmentsURL = renderResponse.createRenderURL();
 
-	updateRoleAssignmentsURL.setWindowState(WindowState.MAXIMIZED);
-
 	updateRoleAssignmentsURL.setParameter("struts_action", "/communities/edit_community_assignments");
 	updateRoleAssignmentsURL.setParameter("tabs1", tabs1);
 	updateRoleAssignmentsURL.setParameter("tabs2", tabs2);

@@ -297,7 +297,7 @@ request.setAttribute("edit_pages.jsp-workflowRoleNames", workflowRoleNames);
 request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 %>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPagesURL">
+<portlet:actionURL var="editPagesURL">
 	<portlet:param name="struts_action" value="/communities/edit_pages" />
 </portlet:actionURL>
 
@@ -349,8 +349,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 		if (liveGroup.isUser()) {
 			PortletURL userTabs1URL = renderResponse.createRenderURL();
-
-			userTabs1URL.setWindowState(WindowState.MAXIMIZED);
 
 			userTabs1URL.setParameter("struts_action", "/my_pages/edit_pages");
 			userTabs1URL.setParameter("tabs1", tabs1);

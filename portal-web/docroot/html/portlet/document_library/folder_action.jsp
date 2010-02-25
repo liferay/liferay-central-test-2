@@ -76,7 +76,7 @@ if (row == null) {
 
 <liferay-ui:icon-menu showExpanded="<%= view %>">
 	<c:if test="<%= (folder != null) && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/document_library/edit_folder" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
@@ -97,7 +97,7 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= !view && (folder != null) && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/document_library/edit_folder" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
@@ -108,7 +108,7 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addFolderURL">
+		<portlet:renderURL var="addFolderURL">
 			<portlet:param name="struts_action" value="/document_library/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
@@ -118,7 +118,7 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFileEntryURL">
+		<portlet:renderURL var="editFileEntryURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
@@ -128,7 +128,7 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_SHORTCUT) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFileShortcutURL">
+		<portlet:renderURL var="editFileShortcutURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />

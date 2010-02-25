@@ -73,7 +73,6 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<c:if test="<%= editPortletURL != null %>">
 
 		<%
-		editPortletURL.setWindowState(WindowState.MAXIMIZED);
 		editPortletURL.setPortletMode(PortletMode.VIEW);
 
 		editPortletURL.setParameter("redirect", currentURL);

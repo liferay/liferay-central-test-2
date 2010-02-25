@@ -89,7 +89,7 @@ dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("MMMMM d, yyyy", 
 
 <div>
 	<c:if test="<%= CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_EVENT) %>">
-		<portlet:renderURL var="editEventURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+		<portlet:renderURL var="editEventURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="month" value="<%= String.valueOf(selMonth) %>" />
@@ -189,7 +189,7 @@ if (!partDayResults.isEmpty()) {
 				<div class="event-box">
 					<div class="event-edit" style="float: right;">
 						<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.UPDATE) %>">
-							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+							<portlet:renderURL var="editURL">
 								<portlet:param name="struts_action" value="/calendar/edit_event" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
@@ -200,7 +200,7 @@ if (!partDayResults.isEmpty()) {
 					</div>
 
 					<div class="event-title">
-						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" /></portlet:renderURL>"><%= StringUtil.shorten(event.getTitle(), 65) %></a>
+						<a href="<portlet:renderURL><portlet:param name="struts_action" value="/calendar/view_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" /></portlet:renderURL>"><%= StringUtil.shorten(event.getTitle(), 65) %></a>
 					</div>
 				</div>
 			</div>
@@ -257,7 +257,7 @@ if (!partDayResults.isEmpty()) {
 				<div class="event-box" style="height: 100%;">
 					<div class="event-edit" style="float: right;">
 						<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.UPDATE) %>">
-							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+							<portlet:renderURL var="editURL">
 								<portlet:param name="struts_action" value="/calendar/edit_event" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />

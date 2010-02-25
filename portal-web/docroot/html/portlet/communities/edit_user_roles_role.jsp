@@ -86,8 +86,6 @@ RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setWindowState(WindowState.MAXIMIZED);
-
 		rowURL.setParameter("struts_action", "/communities/edit_user_roles");
 		rowURL.setParameter("redirect", redirect);
 		rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));

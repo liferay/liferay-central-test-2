@@ -194,7 +194,7 @@ int count = 0;
 								<liferay-ui:message key="you-are-subscribed-to-this-page" />
 							</td>
 							<td>
-								<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unsubscribeURL">
+								<portlet:actionURL var="unsubscribeURL">
 									<portlet:param name="struts_action" value="/wiki/edit_page" />
 									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -210,7 +210,7 @@ int count = 0;
 								<liferay-ui:message key="you-are-not-subscribed-to-this-page" />
 							</td>
 							<td>
-								<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
+								<portlet:actionURL var="subscribeURL">
 									<portlet:param name="struts_action" value="/wiki/edit_page" />
 									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -233,7 +233,7 @@ int count = 0;
 								<liferay-ui:message key="you-are-subscribed-to-this-wiki" />
 							</td>
 							<td>
-								<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unsubscribeURL">
+								<portlet:actionURL var="unsubscribeURL">
 									<portlet:param name="struts_action" value="/wiki/edit_node" />
 									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -248,7 +248,7 @@ int count = 0;
 								<liferay-ui:message key="you-are-not-subscribed-to-this-wiki" />
 							</td>
 							<td>
-								<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
+								<portlet:actionURL var="subscribeURL">
 									<portlet:param name="struts_action" value="/wiki/edit_node" />
 									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />

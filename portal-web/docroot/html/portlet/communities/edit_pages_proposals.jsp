@@ -71,8 +71,6 @@ for (int i = 0; i < results.size(); i++) {
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setWindowState(WindowState.MAXIMIZED);
-
 	rowURL.setParameter("struts_action", "/communities/edit_proposal");
 	rowURL.setParameter("redirect", currentURL);
 	rowURL.setParameter("groupId", String.valueOf(proposal.getGroupId()));

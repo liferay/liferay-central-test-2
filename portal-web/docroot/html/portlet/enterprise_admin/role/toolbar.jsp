@@ -30,7 +30,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <div class="lfr-portlet-toolbar">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewRolesURL">
+	<portlet:renderURL var="viewRolesURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
 	</portlet:renderURL>
 
@@ -39,7 +39,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addRoleURL">
+		<portlet:renderURL var="addRoleURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>

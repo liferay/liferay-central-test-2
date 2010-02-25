@@ -56,7 +56,7 @@ String curSection = mainSections[0];
 	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
+<portlet:actionURL var="editOrganizationURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 </portlet:actionURL>
 
@@ -136,7 +136,7 @@ String curSection = mainSections[0];
 	function <portlet:namespace />saveOrganization() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (organization == null) ? Constants.ADD : Constants.UPDATE %>";
 
-		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>"></portlet:param></portlet:renderURL>";
+		var redirect = "<portlet:renderURL><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>"></portlet:param></portlet:renderURL>";
 
 		if (location.hash) {
 			redirect += location.hash;

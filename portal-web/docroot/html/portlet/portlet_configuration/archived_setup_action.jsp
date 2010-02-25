@@ -34,7 +34,7 @@ String portletResource = (String)objects[1];
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="restoreURL">
+	<portlet:actionURL var="restoreURL">
 		<portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -44,7 +44,7 @@ String portletResource = (String)objects[1];
 
 	<liferay-ui:icon image="undo" message="restore" url="<%= restoreURL %>" />
 
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+	<portlet:actionURL var="deleteURL">
 		<portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />

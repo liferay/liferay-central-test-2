@@ -31,7 +31,7 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+	<portlet:renderURL var="editURL">
 		<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -41,7 +41,7 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+	<portlet:actionURL var="deleteURL">
 		<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />

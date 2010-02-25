@@ -34,8 +34,6 @@ Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/portlet_configuration/edit_archived_setups");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
@@ -53,7 +51,7 @@ portletURL.setParameter("portletResource", portletResource);
 <liferay-ui:error exception="<%= NoSuchPortletItemException.class %>" message="the-setup-could-not-be-found" />
 <liferay-ui:error exception="<%= PortletItemNameException.class %>" message="please-enter-a-valid-setup-name" />
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editArchivedSetupsURL">
+<portlet:actionURL var="editArchivedSetupsURL">
 	<portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
 </portlet:actionURL>

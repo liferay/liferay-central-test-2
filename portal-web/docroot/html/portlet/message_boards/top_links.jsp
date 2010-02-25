@@ -34,8 +34,6 @@ long categoryId = BeanParamUtil.getLong(category, request, "mbCategoryId", MBCat
 boolean viewCategory = GetterUtil.getBoolean((String)request.getAttribute("view.jsp-viewCategory"));
 
 PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setWindowState(WindowState.MAXIMIZED);
 %>
 
 <div class="top-links-container">
@@ -86,7 +84,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 		</div>
 
 		<c:if test="<%= showSearch %>">
-			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
+			<liferay-portlet:renderURL varImpl="searchURL">
 				<portlet:param name="struts_action" value="/message_boards/search" />
 			</liferay-portlet:renderURL>
 

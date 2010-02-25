@@ -48,8 +48,6 @@ if (Validator.isNotNull(portletResource)) {
 
 PortletURL editRoleURL = renderResponse.createRenderURL();
 
-editRoleURL.setWindowState(WindowState.MAXIMIZED);
-
 editRoleURL.setParameter("struts_action", "/enterprise_admin/edit_role");
 editRoleURL.setParameter("redirect", backURL);
 editRoleURL.setParameter(Constants.CMD, Constants.VIEW);
@@ -59,8 +57,6 @@ editRoleURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 PortletURL definePermissionsURL = renderResponse.createRenderURL();
 
-definePermissionsURL.setWindowState(WindowState.MAXIMIZED);
-
 definePermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
 definePermissionsURL.setParameter("redirect", backURL);
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
@@ -69,8 +65,6 @@ definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 // Assign members
 
 PortletURL assignMembersURL = renderResponse.createRenderURL();
-
-assignMembersURL.setWindowState(WindowState.MAXIMIZED);
 
 assignMembersURL.setParameter("struts_action", "/enterprise_admin/edit_role_assignments");
 assignMembersURL.setParameter("redirect", backURL);

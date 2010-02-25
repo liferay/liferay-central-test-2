@@ -49,7 +49,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="folders" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "folders-listing") %>'>
 			<aui:fieldset>
 				<aui:field-wrapper label="root-folder">
-					<portlet:renderURL var="viewFolderURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+					<portlet:renderURL var="viewFolderURL">
 						<portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' />
 						<portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" />
 					</portlet:renderURL>
@@ -211,7 +211,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		var nameEl = document.getElementById("<portlet:namespace />rootFolderName");
 
-		nameEl.href = "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
+		nameEl.href = "<liferay-portlet:renderURL portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
 		nameEl.innerHTML = rootFolderName + "&nbsp;";
 	}
 </aui:script>

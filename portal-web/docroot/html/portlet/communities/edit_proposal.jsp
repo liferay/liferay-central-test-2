@@ -62,15 +62,13 @@ catch (NoSuchReviewException nsre) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/communities/edit_proposal");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(groupId));
 portletURL.setParameter("proposalId", String.valueOf(proposalId));
 %>
 
-<portlet:actionURL var="editProposalURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="editProposalURL">
 	<portlet:param name="struts_action" value="/communities/edit_proposal" />
 </portlet:actionURL>
 

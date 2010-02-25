@@ -50,7 +50,7 @@ else {
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/shopping/search" /></liferay-portlet:renderURL>
+<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/shopping/search" /></liferay-portlet:renderURL>
 
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <liferay-portlet:renderURLParams varImpl="searchURL" />
@@ -66,8 +66,6 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/shopping/search");
 portletURL.setParameter("redirect", redirect);
@@ -104,8 +102,6 @@ for (int i = 0; i < results.size(); i++) {
 	ResultRow row = new ResultRow(item, item.getItemId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/shopping/view_item");
 	rowURL.setParameter("redirect", currentURL);

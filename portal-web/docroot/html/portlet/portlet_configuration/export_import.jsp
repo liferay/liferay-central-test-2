@@ -40,8 +40,6 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/portlet_configuration/export_import");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
@@ -86,7 +84,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 		<liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="an-error-occurred-because-the-live-group-does-not-have-the-current-page" />
 		<liferay-ui:error exception="<%= PortletIdException.class %>" message="please-import-a-lar-file-for-the-current-portlet" />
 
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="exportImportPagesURL">
+		<portlet:actionURL var="exportImportPagesURL">
 			<portlet:param name="struts_action" value="/portlet_configuration/export_import" />
 		</portlet:actionURL>
 
@@ -184,7 +182,6 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 											<%
 											PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
 
-											proposePublicationURL.setWindowState(WindowState.MAXIMIZED);
 											proposePublicationURL.setPortletMode(PortletMode.VIEW);
 
 											proposePublicationURL.setParameter("struts_action", "/layout_management/edit_proposal");

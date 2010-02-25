@@ -41,15 +41,11 @@ if (ShoppingPermission.contains(permissionChecker, scopeGroupId, ActionKeys.MANA
 
 PortletURL viewURL = renderResponse.createRenderURL();
 
-viewURL.setWindowState(WindowState.MAXIMIZED);
-
 viewURL.setParameter("struts_action", "/shopping/view");
 
 // Cart
 
 PortletURL cartURL = renderResponse.createRenderURL();
-
-cartURL.setWindowState(WindowState.MAXIMIZED);
 
 cartURL.setParameter("struts_action", "/shopping/cart");
 

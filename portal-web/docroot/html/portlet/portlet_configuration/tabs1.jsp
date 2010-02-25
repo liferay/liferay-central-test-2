@@ -36,8 +36,6 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 
 PortletURL configurationURL = renderResponse.createRenderURL();
 
-configurationURL.setWindowState(WindowState.MAXIMIZED);
-
 configurationURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
 configurationURL.setParameter("redirect", redirect);
 configurationURL.setParameter("returnToFullPageURL", returnToFullPageURL);
@@ -47,8 +45,6 @@ configurationURL.setParameter("portletResource", portletResource);
 
 PortletURL supportedClientsURL = renderResponse.createRenderURL();
 
-supportedClientsURL.setWindowState(WindowState.MAXIMIZED);
-
 supportedClientsURL.setParameter("struts_action", "/portlet_configuration/edit_supported_clients");
 supportedClientsURL.setParameter("redirect", redirect);
 supportedClientsURL.setParameter("returnToFullPageURL", returnToFullPageURL);
@@ -57,8 +53,6 @@ supportedClientsURL.setParameter("portletResource", portletResource);
 // Permissions
 
 PortletURL permissionsURL = renderResponse.createRenderURL();
-
-permissionsURL.setWindowState(WindowState.MAXIMIZED);
 
 permissionsURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
 permissionsURL.setParameter("redirect", redirect);
@@ -70,8 +64,6 @@ permissionsURL.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryK
 
 PortletURL publicRenderParametersURL = renderResponse.createRenderURL();
 
-publicRenderParametersURL.setWindowState(WindowState.MAXIMIZED);
-
 publicRenderParametersURL.setParameter("struts_action", "/portlet_configuration/edit_public_render_parameters");
 publicRenderParametersURL.setParameter("redirect", redirect);
 publicRenderParametersURL.setParameter("returnToFullPageURL", returnToFullPageURL);
@@ -81,8 +73,6 @@ publicRenderParametersURL.setParameter("portletResource", portletResource);
 
 PortletURL sharingURL = renderResponse.createRenderURL();
 
-sharingURL.setWindowState(WindowState.MAXIMIZED);
-
 sharingURL.setParameter("struts_action", "/portlet_configuration/edit_sharing");
 sharingURL.setParameter("redirect", redirect);
 sharingURL.setParameter("returnToFullPageURL", returnToFullPageURL);
@@ -91,8 +81,6 @@ sharingURL.setParameter("portletResource", portletResource);
 // Scope
 
 PortletURL scopeURL = renderResponse.createRenderURL();
-
-scopeURL.setWindowState(WindowState.MAXIMIZED);
 
 scopeURL.setParameter("struts_action", "/portlet_configuration/edit_scope");
 scopeURL.setParameter("redirect", redirect);

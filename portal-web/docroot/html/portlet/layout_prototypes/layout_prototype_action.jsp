@@ -38,7 +38,7 @@ long layoutPrototypeId = layoutPrototype.getLayoutPrototypeId();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="layoutPrototypeId" value="<%= String.valueOf(layoutPrototypeId) %>" />
@@ -59,7 +59,7 @@ long layoutPrototypeId = layoutPrototype.getLayoutPrototypeId();
 	</c:if>
 
 	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />

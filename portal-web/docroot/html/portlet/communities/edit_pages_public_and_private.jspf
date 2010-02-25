@@ -69,7 +69,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 			<c:choose>
 				<c:when test="<%= workflowEnabled %>">
 					<c:if test="<%= (selPlid > 0) && (proposal == null) %>">
-						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="proposalURL">
+						<portlet:actionURL var="proposalURL">
 							<portlet:param name="struts_action" value="/communities/edit_proposal" />
 							<portlet:param name="tabs1" value="<%= tabs1 %>" />
 							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />

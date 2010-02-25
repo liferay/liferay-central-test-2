@@ -115,7 +115,7 @@ if (folder != null) {
 	%>
 
 	<c:if test="<%= showAddFolderButton %>">
-		<portlet:renderURL var="editFolderURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+		<portlet:renderURL var="editFolderURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />

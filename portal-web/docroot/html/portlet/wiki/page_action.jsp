@@ -78,7 +78,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>
 			<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), WikiPage.class.getName(), wikiPage.getResourcePrimKey()) %>">
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unsubscribeURL">
+				<portlet:actionURL var="unsubscribeURL">
 					<portlet:param name="struts_action" value="/wiki/edit_page" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -89,7 +89,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
 			</c:when>
 			<c:otherwise>
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
+				<portlet:actionURL var="subscribeURL">
 					<portlet:param name="struts_action" value="/wiki/edit_page" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -103,7 +103,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 	</c:if>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/wiki/edit_page" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

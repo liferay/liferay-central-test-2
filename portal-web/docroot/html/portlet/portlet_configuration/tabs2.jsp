@@ -36,8 +36,6 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 
 PortletURL configurationURL = renderResponse.createRenderURL();
 
-configurationURL.setWindowState(WindowState.MAXIMIZED);
-
 configurationURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
 configurationURL.setParameter("redirect", redirect);
 configurationURL.setParameter("returnToFullPageURL", returnToFullPageURL);
@@ -46,8 +44,6 @@ configurationURL.setParameter("portletResource", portletResource);
 // Archived setups
 
 PortletURL archivedSetupsURL = renderResponse.createRenderURL();
-
-archivedSetupsURL.setWindowState(WindowState.MAXIMIZED);
 
 archivedSetupsURL.setParameter("struts_action", "/portlet_configuration/edit_archived_setups");
 archivedSetupsURL.setParameter("redirect", redirect);

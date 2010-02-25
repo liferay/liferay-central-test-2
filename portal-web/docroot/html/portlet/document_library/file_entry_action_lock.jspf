@@ -24,7 +24,7 @@
 
 <c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 	<c:if test="<%= !fileEntry.isLocked() %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var ="lockURL">
+		<portlet:actionURL var ="lockURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -36,7 +36,7 @@
 	</c:if>
 
 	<c:if test="<%= fileEntry.hasLock(user.getUserId()) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var ="unlockURL">
+		<portlet:actionURL var ="unlockURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

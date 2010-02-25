@@ -36,8 +36,6 @@ Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/enterprise_admin/edit_role_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
@@ -63,7 +61,7 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 	<liferay-util:param name="tabs1" value="assign-members" />
 </liferay-util:include>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
+<portlet:actionURL var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" />
 </portlet:actionURL>
 
@@ -117,8 +115,6 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 
 <%
 PortletURL assignMembersURL = renderResponse.createRenderURL();
-
-assignMembersURL.setWindowState(WindowState.MAXIMIZED);
 
 assignMembersURL.setParameter("struts_action", "/enterprise_admin/edit_role_assignments");
 assignMembersURL.setParameter("redirect", redirect);

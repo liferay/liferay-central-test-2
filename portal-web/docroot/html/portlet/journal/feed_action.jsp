@@ -32,7 +32,7 @@ JournalFeed feed = (JournalFeed)row.getObject();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= JournalFeedPermission.contains(permissionChecker, feed, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editeFeedURL">
+		<portlet:renderURL var="editeFeedURL">
 			<portlet:param name="struts_action" value="/journal/edit_feed" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(feed.getGroupId()) %>" />
@@ -54,7 +54,7 @@ JournalFeed feed = (JournalFeed)row.getObject();
 	</c:if>
 
 	<c:if test="<%= JournalFeedPermission.contains(permissionChecker, feed, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteFeedURL">
+		<portlet:actionURL var="deleteFeedURL">
 			<portlet:param name="struts_action" value="/journal/edit_feed" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

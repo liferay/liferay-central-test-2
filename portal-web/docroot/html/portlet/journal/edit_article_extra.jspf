@@ -173,7 +173,7 @@
 									<aui:input name='<%= "template" + tableIteratorObj.getTemplateId() + "_xsl" %>' type="hidden" value="<%= JS.encodeURIComponent(tableIteratorObj.getXsl()) %>" />
 
 									<liferay-util:buffer var="templateLabel">
-										<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="templateURL">
+										<portlet:renderURL var="templateURL">
 											<portlet:param name="struts_action" value="/journal/edit_template" />
 											<portlet:param name="redirect" value="<%= currentURL %>" />
 											<portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" />

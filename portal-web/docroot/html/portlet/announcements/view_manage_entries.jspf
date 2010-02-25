@@ -89,8 +89,6 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
-			rowURL.setWindowState(WindowState.MAXIMIZED);
-
 			rowURL.setParameter("struts_action", "/announcements/edit_entry");
 			rowURL.setParameter("redirect", currentURL);
 			rowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
@@ -131,7 +129,7 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 
 <aui:script>
 	function <portlet:namespace />addEntry() {
-		location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="distributionScope" value="<%= distributionScope %>" /></portlet:renderURL>';
+		location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="distributionScope" value="<%= distributionScope %>" /></portlet:renderURL>';
 	}
 
 	function <portlet:namespace />selectDistributionScope(distributionScope) {

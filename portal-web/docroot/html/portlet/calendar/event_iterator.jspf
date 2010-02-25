@@ -95,7 +95,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 
 <c:if test="<%= showAddEventButtonButton || showPermissionsButton %>">
 	<c:if test="<%= showAddEventButtonButton %>">
-		<portlet:renderURL var="editEventURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+		<portlet:renderURL var="editEventURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="month" value="<%= String.valueOf(selMonth) %>" />

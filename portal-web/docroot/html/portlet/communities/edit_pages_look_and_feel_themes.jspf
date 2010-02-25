@@ -108,8 +108,6 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 				<%
 				PortletURL installPluginsURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
-				installPluginsURL.setWindowState(WindowState.MAXIMIZED);
-
 				installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
 				installPluginsURL.setParameter("backURL", currentURL);
 				installPluginsURL.setParameter("tabs2", "theme-plugins");

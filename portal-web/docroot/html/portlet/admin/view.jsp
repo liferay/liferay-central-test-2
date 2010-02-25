@@ -58,15 +58,13 @@
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
-		portletURL.setWindowState(WindowState.MAXIMIZED);
-
 		portletURL.setParameter("struts_action", "/admin/view");
 		portletURL.setParameter("tabs1", tabs1);
 		portletURL.setParameter("tabs2", tabs2);
 		portletURL.setParameter("tabs3", tabs3);
 		%>
 
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="redirectURL">
+		<portlet:renderURL var="redirectURL">
 			<portlet:param name="struts_action" value="/admin/view" />
 			<portlet:param name="tabs1" value="<%= tabs1 %>" />
 			<portlet:param name="tabs2" value="<%= tabs2 %>" />
@@ -104,8 +102,6 @@
 					if (PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED)) {
 						installPluginsURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
-						installPluginsURL.setWindowState(WindowState.MAXIMIZED);
-
 						installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
 						installPluginsURL.setParameter("backURL", currentURL);
 						installPluginsURL.setParameter("tabs1", tabs1);
@@ -124,8 +120,8 @@
 		<aui:script>
 			function <portlet:namespace />saveServer(cmd) {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /><portlet:param name="cur" value="<%= cur %>" /></portlet:renderURL>";
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_server" /></portlet:actionURL>");
+				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /><portlet:param name="cur" value="<%= cur %>" /></portlet:renderURL>";
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/admin/edit_server" /></portlet:actionURL>");
 			}
 		</aui:script>
 	</c:when>

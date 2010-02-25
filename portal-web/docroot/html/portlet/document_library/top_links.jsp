@@ -35,8 +35,6 @@
 		boolean viewFolder = GetterUtil.getBoolean((String)request.getAttribute("view.jsp-viewFolder"));
 
 		PortletURL portletURL = renderResponse.createRenderURL();
-
-		portletURL.setWindowState(WindowState.MAXIMIZED);
 		%>
 
 		<div class="top-links-container">
@@ -65,7 +63,7 @@
 					</c:if>
 				</div>
 
-				<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
+				<liferay-portlet:renderURL varImpl="searchURL">
 					<portlet:param name="struts_action" value="/document_library/search" />
 				</liferay-portlet:renderURL>
 

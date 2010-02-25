@@ -85,7 +85,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 <aui:script>
 	function <portlet:namespace />saveLayoutPrototype() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= layoutPrototype == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" /></portlet:actionURL>");
 	}
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

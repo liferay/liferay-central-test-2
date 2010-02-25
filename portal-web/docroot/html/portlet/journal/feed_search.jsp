@@ -76,7 +76,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 
 <aui:script>
 	function <portlet:namespace />addFeed() {
-		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
+		var url = '<portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_feed" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
 
 		if (toggle_id_journal_feed_searchcurClickValue == 'basic') {
 			url += '&<portlet:namespace /><%= displayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;

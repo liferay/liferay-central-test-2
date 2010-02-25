@@ -30,7 +30,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <div class="lfr-portlet-toolbar">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewRolesURL">
+	<portlet:renderURL var="viewRolesURL">
 		<portlet:param name="struts_action" value="/layout_set_prototypes/view" />
 	</portlet:renderURL>
 
@@ -39,7 +39,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LAYOUT_SET_PROTOTYPE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addLayoutSetPrototypeURL">
+		<portlet:renderURL var="addLayoutSetPrototypeURL">
 			<portlet:param name="struts_action" value="/layout_set_prototypes/edit_layout_set_prototype" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />

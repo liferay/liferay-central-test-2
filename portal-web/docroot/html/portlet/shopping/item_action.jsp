@@ -32,7 +32,7 @@ ShoppingItem item = (ShoppingItem)row.getObject();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= ShoppingItemPermission.contains(permissionChecker, item, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/shopping/edit_item" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="itemId" value="<%= String.valueOf(item.getItemId()) %>" />
@@ -53,7 +53,7 @@ ShoppingItem item = (ShoppingItem)row.getObject();
 	</c:if>
 
 	<c:if test="<%= ShoppingItemPermission.contains(permissionChecker, item, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/shopping/edit_item" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

@@ -66,7 +66,7 @@ String ccVerNumber = ParamUtil.getString(request, "ccVerNumber");
 List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contact.getContactId());
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">

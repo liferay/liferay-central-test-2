@@ -34,7 +34,7 @@ Group group = (Group)row.getParameter("group");
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= permissionChecker.isCommunityOwner(group.getGroupId()) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
+		<portlet:renderURL var="assignURL">
 			<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />

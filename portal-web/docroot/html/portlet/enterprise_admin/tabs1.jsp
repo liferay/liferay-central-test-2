@@ -27,8 +27,6 @@
 <%
 PortletURL tabs1URL = renderResponse.createRenderURL();
 
-tabs1URL.setWindowState(WindowState.MAXIMIZED);
-
 tabs1URL.setParameter("struts_action", "/enterprise_admin/view");
 
 String tabs1Names = "users,organizations,user-groups";

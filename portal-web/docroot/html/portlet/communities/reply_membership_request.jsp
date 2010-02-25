@@ -40,7 +40,7 @@ ActionUtil.getMembershipRequest(request);
 MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(WebKeys.MEMBERSHIP_REQUEST);
 %>
 
-<portlet:actionURL var="replyMembershipRequestURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="replyMembershipRequestURL">
 	<portlet:param name="struts_action" value="/communities/reply_membership_request" />
 </portlet:actionURL>
 

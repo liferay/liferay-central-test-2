@@ -82,7 +82,7 @@ else {
 int priceId = ParamUtil.getInteger(request, "priceId", -1);
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveItem(); return false;">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/edit_item" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveItem(); return false;">
 <input name="scroll" type="hidden" value="" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
@@ -131,7 +131,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 			}
 			%>
 
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
+			<a href="<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
 			<%= categoryName %></a>
 
 			<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
@@ -724,7 +724,7 @@ for (int i = 0; i < pricesCount; i++) {
 
 		var nameEl = document.getElementById("<portlet:namespace />categoryName");
 
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
 		nameEl.innerHTML = categoryName + "&nbsp;";
 	}
 </aui:script>

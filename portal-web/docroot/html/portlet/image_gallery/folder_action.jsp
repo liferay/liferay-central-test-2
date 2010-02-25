@@ -76,7 +76,7 @@ if (row == null) {
 
 <liferay-ui:icon-menu showExpanded="<%= view %>">
 	<c:if test="<%= (folder != null) && IGFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
@@ -97,7 +97,7 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= !view && (folder != null) && IGFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -108,7 +108,7 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addFolderURL">
+		<portlet:renderURL var="addFolderURL">
 			<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
@@ -118,7 +118,7 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_IMAGE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editImageURL">
+		<portlet:renderURL var="editImageURL">
 			<portlet:param name="struts_action" value="/image_gallery/edit_image" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />

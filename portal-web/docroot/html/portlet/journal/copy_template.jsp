@@ -32,7 +32,7 @@ String oldTemplateId = ParamUtil.getString(request, "oldTemplateId");
 String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 %>
 
-<portlet:actionURL var="copyTemplateURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="copyTemplateURL">
 	<portlet:param name="struts_action" value="/journal/copy_template" />
 </portlet:actionURL>
 

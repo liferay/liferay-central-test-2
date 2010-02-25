@@ -41,7 +41,7 @@ Group group = layout.getGroup();
 	<liferay-util:param name="tabs1" value="scope" />
 </liferay-util:include>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editScopeURL">
+<portlet:actionURL var="editScopeURL">
 	<portlet:param name="struts_action" value="/portlet_configuration/edit_scope" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
 </portlet:actionURL>

@@ -36,7 +36,7 @@ User selUser = PortalUtil.getSelectedUser(request);
 		</aui:script>
 	</c:when>
 	<c:otherwise>
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editUserPortraitURL">
+		<portlet:actionURL var="editUserPortraitURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" />
 		</portlet:actionURL>
 

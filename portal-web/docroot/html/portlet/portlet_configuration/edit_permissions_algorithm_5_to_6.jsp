@@ -124,7 +124,6 @@ long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.
 
 PortletURLImpl definePermissionsURL = new PortletURLImpl(request, PortletKeys.ENTERPRISE_ADMIN_ROLES, controlPanelPlid, PortletRequest.RENDER_PHASE);
 
-definePermissionsURL.setWindowState(WindowState.MAXIMIZED);
 definePermissionsURL.setPortletMode(PortletMode.VIEW);
 
 definePermissionsURL.setRefererPlid(plid);

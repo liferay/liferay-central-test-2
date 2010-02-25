@@ -30,7 +30,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <div class="lfr-portlet-toolbar">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewOrganizationsURL">
+	<portlet:renderURL var="viewOrganizationsURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
 	</portlet:renderURL>
 
@@ -39,7 +39,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addOrganizationURL">
+		<portlet:renderURL var="addOrganizationURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
@@ -48,7 +48,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 	</c:if>
 
 	<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">
-		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="expandoURL" portletName="<%= PortletKeys.EXPANDO %>">
+		<liferay-portlet:renderURL var="expandoURL" portletName="<%= PortletKeys.EXPANDO %>">
 			<portlet:param name="struts_action" value="/expando/view_attributes" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="modelResource" value="<%= Organization.class.getName() %>" />

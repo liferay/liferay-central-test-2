@@ -37,7 +37,7 @@ int numHits = userTracker.getHits();
 userTracker = userTracker.toEscapedModel();
 %>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editSessionURL">
+<portlet:actionURL var="editSessionURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_session" />
 </portlet:actionURL>
 

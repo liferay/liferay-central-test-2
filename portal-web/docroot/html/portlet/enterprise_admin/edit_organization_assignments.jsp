@@ -36,8 +36,6 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/enterprise_admin/edit_organization_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
@@ -57,7 +55,7 @@ request.setAttribute("edit_organization_assignments.jsp-organization", organizat
 request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL);
 %>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
+<portlet:actionURL var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:actionURL>

@@ -22,7 +22,7 @@
  */
 %>
 
-<input type="button" value="<liferay-ui:message key="add" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_instance" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+<input type="button" value="<liferay-ui:message key="add" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/admin/edit_instance" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 
 <br /><br />
 
@@ -60,8 +60,6 @@ for (int i = 0; i < results.size(); i++) {
 	ResultRow row = new ResultRow(company2, company2.getCompanyId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/admin/edit_instance");
 	rowURL.setParameter("redirect", currentURL);

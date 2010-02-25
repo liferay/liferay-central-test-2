@@ -36,7 +36,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 
 <liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFolderURL">
+<portlet:actionURL var="editFolderURL">
 	<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
 </portlet:actionURL>
 
@@ -70,7 +70,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 				}
 				%>
 
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
+				<portlet:renderURL var="viewFolderURL">
 					<portlet:param name="struts_action" value="/bookmarks/view" />
 					<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
 				</portlet:renderURL>
@@ -143,7 +143,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 
 		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
 
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId;
+		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/bookmarks/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId;
 		nameEl.innerHTML = parentFolderName + "&nbsp;";
 	}
 

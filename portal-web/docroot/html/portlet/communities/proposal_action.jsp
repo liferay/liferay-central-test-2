@@ -32,7 +32,7 @@ TasksProposal proposal = (TasksProposal)row.getObject();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, proposal.getGroupId(), ActionKeys.APPROVE_PROPOSAL) || GroupPermissionUtil.contains(permissionChecker, proposal.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/communities/edit_proposal" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(proposal.getGroupId()) %>" />
@@ -43,7 +43,7 @@ TasksProposal proposal = (TasksProposal)row.getObject();
 	</c:if>
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, proposal.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/communities/edit_proposal" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

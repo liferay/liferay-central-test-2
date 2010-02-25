@@ -29,8 +29,6 @@
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();
 
-	portletURL.setWindowState(WindowState.MAXIMIZED);
-
 	portletURL.setParameter("struts_action", "/polls/view");
 
 	List<String> headerNames = new ArrayList<String>();
@@ -61,8 +59,6 @@
 		ResultRow row = new ResultRow(question, question.getQuestionId(), i);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
-
-		rowURL.setWindowState(WindowState.MAXIMIZED);
 
 		rowURL.setParameter("struts_action", "/polls/view_question");
 		rowURL.setParameter("redirect", currentURL);
@@ -113,7 +109,7 @@
 		<c:if test="<%= showAddPollButton || showPermissionsButton %>">
 			<aui:button-row>
 				<c:if test="<%= showAddPollButton %>">
-					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editQuestionURL">
+					<portlet:renderURL var="editQuestionURL">
 						<portlet:param name="struts_action" value="/polls/edit_question" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 					</portlet:renderURL>

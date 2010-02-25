@@ -87,8 +87,6 @@ headerNames.add(StringPool.BLANK);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setWindowState(WindowState.MAXIMIZED);
-
 		rowURL.setParameter("struts_action", "/enterprise_admin/edit_password_policy");
 		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
 		rowURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPasswordPolicyId()));

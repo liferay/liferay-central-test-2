@@ -34,7 +34,7 @@ Role role = (Role)objArray[1];
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deletePermissionURL">
+	<portlet:actionURL var="deletePermissionURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
 		<portlet:param name="<%= Constants.CMD %>" value="delete_permission" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />

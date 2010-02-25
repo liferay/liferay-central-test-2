@@ -40,7 +40,7 @@ decimalFormat.setMaximumFractionDigits(2);
 decimalFormat.setMinimumFractionDigits(2);
 %>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/currency_converter/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<form action="<portlet:renderURL><portlet:param name="struts_action" value="/currency_converter/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
 <input type="submit" value="<liferay-ui:message key="convert" />" />
 

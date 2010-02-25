@@ -43,7 +43,7 @@ birthday.set(Calendar.YEAR, 1970);
 boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 %>
 
-<portlet:actionURL var="createAccoutURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="createAccoutURL">
 	<portlet:param name="saveLastPath" value="0" />
 	<portlet:param name="struts_action" value="/login/create_account" />
 </portlet:actionURL>

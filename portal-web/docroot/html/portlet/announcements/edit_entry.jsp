@@ -147,14 +147,14 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 
 <aui:script>
 	function <portlet:namespace />previewEntry() {
-		document.<portlet:namespace />fm.action = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/preview_entry" /></portlet:actionURL>';
+		document.<portlet:namespace />fm.action = '<portlet:actionURL><portlet:param name="struts_action" value="/announcements/preview_entry" /></portlet:actionURL>';
 		document.<portlet:namespace />fm.target = '_blank';
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.PREVIEW %>";
 		document.<portlet:namespace />fm.submit();
 	}
 
 	function <portlet:namespace />saveEntry() {
-		document.<portlet:namespace />fm.action = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /></portlet:actionURL>';
+		document.<portlet:namespace />fm.action = '<portlet:actionURL><portlet:param name="struts_action" value="/announcements/edit_entry" /></portlet:actionURL>';
 		document.<portlet:namespace />fm.target = '';
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);

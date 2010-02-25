@@ -41,7 +41,7 @@ Set allPortletModes = portlet.getAllPortletModes();
 	<liferay-util:param name="tabs1" value="supported-clients" />
 </liferay-util:include>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editSupportedClientsURL">
+<portlet:actionURL var="editSupportedClientsURL">
 	<portlet:param name="struts_action" value="/portlet_configuration/edit_supported_clients" />
 </portlet:actionURL>
 

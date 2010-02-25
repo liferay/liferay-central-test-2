@@ -42,9 +42,9 @@ OrderByComparator orderByComparator = ShoppingUtil.getItemOrderByComparator(orde
 ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(item.getItemId(), orderByComparator);
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL><portlet:param name="struts_action" value="/shopping/cart" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" />
 <input name="<portlet:namespace />itemId" type="hidden" value="<%= item.getItemId() %>" />
 <input name="<portlet:namespace />fields" type="hidden" value="" />
 
@@ -210,11 +210,11 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 			<br />
 
 			<c:if test="<%= prevAndNext[0] != null %>">
-				<input type="button" value="<liferay-ui:message key="previous" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= String.valueOf(prevAndNext[0].getItemId()) %>" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="previous" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= String.valueOf(prevAndNext[0].getItemId()) %>" /></portlet:renderURL>';" />
 			</c:if>
 
 			<c:if test="<%= prevAndNext[2] != null %>">
-				<input type="button" value="<liferay-ui:message key="next" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= String.valueOf(prevAndNext[2].getItemId()) %>" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="next" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= String.valueOf(prevAndNext[2].getItemId()) %>" /></portlet:renderURL>';" />
 			</c:if>
 		</c:if>
 	</td>

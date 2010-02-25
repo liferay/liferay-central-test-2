@@ -49,7 +49,7 @@ List<CustomAttributesDisplay> customAttributesDisplays = PortletLocalServiceUtil
 		modelVar="customAttributesDisplay"
 		stringKey="<%= true %>"
 	>
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
+		<portlet:renderURL var="rowURL">
 			<portlet:param name="struts_action" value="/expando/view_attributes" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="modelResource" value="<%= customAttributesDisplay.getClassName() %>" />

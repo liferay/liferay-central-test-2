@@ -59,7 +59,7 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("modelResource", modelResource);
 %>
 
-<portlet:actionURL var="editExpandoURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="editExpandoURL">
 	<portlet:param name="struts_action" value="/expando/edit_expando" />
 </portlet:actionURL>
 

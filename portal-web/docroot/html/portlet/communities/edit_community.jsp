@@ -35,7 +35,7 @@ int type = BeanParamUtil.getInteger(group, request, "type");
 String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 %>
 
-<portlet:actionURL var="editCommunityURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="editCommunityURL">
 	<portlet:param name="struts_action" value="/communities/edit_community" />
 </portlet:actionURL>
 

@@ -175,8 +175,6 @@ while (rolesItr.hasNext()) {
 		<%
 		PortletURL editGroupURL = renderResponse.createRenderURL();
 
-		editGroupURL.setWindowState(WindowState.MAXIMIZED);
-
 		editGroupURL.setParameter("redirect", currentURL);
 
 		if (group.isCommunity()) {
@@ -201,7 +199,7 @@ while (rolesItr.hasNext()) {
 			value="<%= group.getDescriptiveName() %>"
 		/>
 
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRoleURL">
+		<portlet:renderURL var="editRoleURL">
 			<portlet:param name="struts_action" value="/admin_server/edit_role_permissions" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -229,7 +227,7 @@ while (rolesItr.hasNext()) {
 			value='<%= StringUtil.merge(systemActionLabels, "<br />") %>'
 		/>
 
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="reassignURL">
+		<portlet:actionURL var="reassignURL">
 			<portlet:param name="struts_action" value="/admin_server/edit_permissions" />
 			<portlet:param name="<%= Constants.CMD %>" value="reassign" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

@@ -28,7 +28,7 @@
 	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
 		<liferay-ui:success key="invitationSent" message="your-invitations-have-been-sent" />
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/invitation/view" /></portlet:renderURL>">
+		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/invitation/view" /></portlet:renderURL>">
 			<liferay-ui:message key="invite-friends" />
 		</a>
 	</c:when>

@@ -50,7 +50,7 @@ else {
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
+<liferay-portlet:renderURL varImpl="searchURL">
 	<portlet:param name="struts_action" value="/bookmarks/search" />
 </liferay-portlet:renderURL>
 
@@ -68,8 +68,6 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();
-
-	portletURL.setWindowState(WindowState.MAXIMIZED);
 
 	portletURL.setParameter("struts_action", "/bookmarks/search");
 	portletURL.setParameter("redirect", redirect);

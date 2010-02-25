@@ -40,7 +40,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
+		<portlet:renderURL var="editOrganizationURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
@@ -61,7 +61,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	</c:if>--%>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_LAYOUTS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="managePagesURL">
+		<portlet:renderURL var="managePagesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
@@ -71,7 +71,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	</c:if>
 
 	<c:if test="<%= permissionChecker.isCommunityOwner(organizationGroupId) || OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_USER_ROLES) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUserRolesURL">
+		<portlet:renderURL var="assignUserRolesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
@@ -81,7 +81,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	</c:if>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_MEMBERS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
+		<portlet:renderURL var="assignMembersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
@@ -91,7 +91,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	</c:if>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_USERS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
+		<portlet:renderURL var="addUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="organizationsSearchContainerPrimaryKeys" value="<%= String.valueOf(organizationId) %>" />
@@ -100,7 +100,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURL %>" />
 	</c:if>
 
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
+	<portlet:renderURL var="viewUsersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
 		<portlet:param name="tabs1" value="users" />
 		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
@@ -117,7 +117,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		%>
 
 			<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_SUBORGANIZATIONS) %>">
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addSuborganizationURL">
+				<portlet:renderURL var="addSuborganizationURL">
 					<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 					<portlet:param name="redirect" value="<%= redirect %>" />
 					<portlet:param name="parentOrganizationSearchContainerPrimaryKeys" value="<%= String.valueOf(organizationId) %>" />
@@ -131,7 +131,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		}
 		%>
 
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewSuborganizationsURL">
+		<portlet:renderURL var="viewSuborganizationsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
 			<portlet:param name="tabs1" value="organizations" />
 			<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />

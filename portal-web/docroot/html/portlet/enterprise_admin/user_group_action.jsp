@@ -36,7 +36,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
@@ -57,7 +57,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	</c:if>
 
 	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="managePagesURL">
+		<portlet:renderURL var="managePagesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(userGroup.getGroup().getGroupId()) %>" />
@@ -67,7 +67,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	</c:if>
 
 	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
+		<portlet:renderURL var="assignURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
@@ -76,7 +76,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignURL %>" />
 	</c:if>
 
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
+	<portlet:renderURL var="viewUsersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
 		<portlet:param name="tabs1" value="users" />
 		<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />

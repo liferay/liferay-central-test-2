@@ -34,7 +34,7 @@ order = order.toEscapedModel();
 long orderId = BeanParamUtil.getLong(order, request, "orderId");
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
 <input name="<portlet:namespace />orderId" type="hidden" value="<%= orderId %>" />
@@ -463,8 +463,6 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	if (item != null) {
 		rowURL = renderResponse.createRenderURL();
-
-		rowURL.setWindowState(WindowState.MAXIMIZED);
 
 		rowURL.setParameter("struts_action", "/shopping/view_item");
 		rowURL.setParameter("itemId", String.valueOf(item.getItemId()));

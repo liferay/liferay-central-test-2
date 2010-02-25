@@ -109,7 +109,7 @@ type = ParamUtil.getString(request, "type", type);
 						}
 						%>
 
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editTemplateURL">
+						<portlet:renderURL var="editTemplateURL">
 							<portlet:param name="struts_action" value="/journal/edit_template" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" />

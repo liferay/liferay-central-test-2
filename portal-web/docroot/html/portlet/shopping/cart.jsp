@@ -44,13 +44,13 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 			if (!itemsInStock) {
 				if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "your-cart-has-items-that-are-out-of-stock") %>")) {
 					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.CHECKOUT %>";
-					document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>";
+					document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:actionURL><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>";
 					<portlet:namespace />updateCart();
 				}
 			}
 			else {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.CHECKOUT %>";
-				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>";
+				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:actionURL><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>";
 				<portlet:namespace />updateCart();
 			}
 		}
@@ -97,7 +97,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 	}
 </aui:script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCart(); return false;">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCart(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
 <input name="<portlet:namespace />itemIds" type="hidden" value="" />
@@ -190,8 +190,6 @@ for (int i = 0; itr.hasNext(); i++) {
 	ResultRow row = new ResultRow(item, item.getItemId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/shopping/view_item");
 	rowURL.setParameter("itemId", String.valueOf(item.getItemId()));

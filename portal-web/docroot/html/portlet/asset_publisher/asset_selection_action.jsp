@@ -76,7 +76,7 @@ boolean last = GetterUtil.getBoolean(root.elementText("last"));
 
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
-<liferay-portlet:actionURL portletConfiguration="true" windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+<liferay-portlet:actionURL portletConfiguration="true" var="deleteURL">
 	<portlet:param name="<%= Constants.CMD %>" value="remove-selection" />
 	<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
 	<portlet:param name="assetEntryOrder" value="<%= String.valueOf(assetEntryOrder) %>" />

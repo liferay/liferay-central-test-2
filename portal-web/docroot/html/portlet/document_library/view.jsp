@@ -53,8 +53,6 @@ int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCo
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/document_library/view");
 portletURL.setParameter("topLink", topLink);
 portletURL.setParameter("folderId", String.valueOf(folderId));
@@ -128,7 +126,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 										keyProperty="folderId"
 										modelVar="curFolder"
 									>
-										<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
+										<liferay-portlet:renderURL varImpl="rowURL">
 											<portlet:param name="struts_action" value="/document_library/view" />
 											<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
 										</liferay-portlet:renderURL>

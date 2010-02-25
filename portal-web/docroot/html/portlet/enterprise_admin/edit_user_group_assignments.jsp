@@ -35,8 +35,6 @@ UserGroup userGroup = (UserGroup)request.getAttribute(WebKeys.USER_GROUP);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/enterprise_admin/edit_user_group_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
@@ -44,7 +42,7 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
 %>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
+<portlet:actionURL var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />
 </portlet:actionURL>
 

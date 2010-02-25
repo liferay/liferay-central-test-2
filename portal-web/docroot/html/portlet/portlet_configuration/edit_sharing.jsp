@@ -38,8 +38,6 @@ PortletPreferences preferences = PortletPreferencesFactoryUtil.getLayoutPortletS
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/portlet_configuration/edit_sharing");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
@@ -58,7 +56,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 	url="<%= portletURL.toString() %>"
 />
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editSharingURL">
+<portlet:actionURL var="editSharingURL">
 	<portlet:param name="struts_action" value="/portlet_configuration/edit_sharing" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
 </portlet:actionURL>
@@ -103,8 +101,6 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 
 				if (portlet.getFacebookIntegration().equals(PortletConstants.FACEBOOK_INTEGRATION_FBML)) {
 					PortletURL fbmlPortletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.RENDER_PHASE);
-
-					fbmlPortletURL.setWindowState(WindowState.MAXIMIZED);
 
 					fbmlPortletURL.setParameter("struts_action", "/message_boards/view");
 

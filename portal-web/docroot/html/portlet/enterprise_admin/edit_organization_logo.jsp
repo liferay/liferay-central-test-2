@@ -48,7 +48,7 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 		</aui:script>
 	</c:when>
 	<c:otherwise>
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationLogoURL">
+		<portlet:actionURL var="editOrganizationLogoURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_logo" />
 		</portlet:actionURL>
 

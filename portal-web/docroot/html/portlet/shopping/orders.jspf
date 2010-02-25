@@ -25,8 +25,6 @@
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/shopping/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
@@ -88,8 +86,6 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setWindowState(WindowState.MAXIMIZED);
-
 		rowURL.setParameter("struts_action", "/shopping/edit_order");
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("orderId", String.valueOf(order.getOrderId()));
@@ -130,7 +126,7 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-orders") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 			document.<portlet:namespace />fm.<portlet:namespace />deleteOrderIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
 		}
 	}
 </aui:script>

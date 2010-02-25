@@ -32,7 +32,6 @@ AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-asse
 PortletURL editPortletURL = assetRenderer.getURLEdit((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 
 if (editPortletURL != null) {
-	editPortletURL.setWindowState(WindowState.MAXIMIZED);
 	editPortletURL.setPortletMode(PortletMode.VIEW);
 
 	editPortletURL.setParameter("redirect", currentURL);

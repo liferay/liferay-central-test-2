@@ -70,8 +70,6 @@
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
-		portletURL.setWindowState(WindowState.MAXIMIZED);
-
 		portletURL.setParameter("struts_action", "/plugin_installer/view");
 		portletURL.setParameter("tabs1", tabs1);
 		portletURL.setParameter("tabs2", tabs2);
@@ -139,19 +137,19 @@
 				}
 
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
 			}
 
 			function <portlet:namespace />reloadRepositories() {
 				document.<portlet:namespace />fm.method = "post";
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
 			}
 
 			function <portlet:namespace />saveDeployConfiguration() {
 				document.<portlet:namespace />fm.method = "post";
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'deployConfiguration';
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
 			}
 
 			function <portlet:namespace />searchPlugins() {

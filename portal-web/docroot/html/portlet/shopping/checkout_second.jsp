@@ -39,7 +39,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 order = order.toEscapedModel();
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SAVE %>" />
 <input name="<portlet:namespace />billingFirstName" type="hidden" value="<%= order.getBillingFirstName() %>" />
 <input name="<portlet:namespace />billingLastName" type="hidden" value="<%= order.getBillingLastName() %>" />
@@ -373,8 +373,6 @@ for (int i = 0; itr.hasNext(); i++) {
 	ResultRow row = new ResultRow(item, item.getItemId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/shopping/view_item");
 	rowURL.setParameter("itemId", String.valueOf(item.getItemId()));

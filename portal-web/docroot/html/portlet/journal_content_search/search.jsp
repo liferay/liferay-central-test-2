@@ -34,12 +34,10 @@
 		String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
 		%>
 
-		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal_content_search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+		<form action="<portlet:renderURL><portlet:param name="struts_action" value="/journal_content_search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
 		<%
 		PortletURL portletURL = renderResponse.createRenderURL();
-
-		portletURL.setWindowState(WindowState.MAXIMIZED);
 
 		portletURL.setParameter("struts_action", "/journal_content_search/search");
 		portletURL.setParameter("keywords", keywords);

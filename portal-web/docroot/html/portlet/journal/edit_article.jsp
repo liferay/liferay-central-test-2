@@ -237,11 +237,11 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<input name="xml" type="hidden" value="" />
 </aui:form>
 
-<portlet:actionURL var="editArticleActionURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="editArticleActionURL">
 	<portlet:param name="struts_action" value="/journal/edit_article" />
 </portlet:actionURL>
 
-<portlet:renderURL var="editArticleRenderURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:renderURL var="editArticleRenderURL">
 	<portlet:param name="struts_action" value="/journal/edit_article" />
 </portlet:renderURL>
 
@@ -620,7 +620,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	var <portlet:namespace />contentChangedFlag = false;
 
 	function <portlet:namespace />changeVersionView(version) {
-		location.href = "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=" + version;
+		location.href = "<liferay-portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=" + version;
 	}
 
 	function <portlet:namespace />contentChanged() {
@@ -669,7 +669,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	}
 
 	function <portlet:namespace />getLanguageViewURL(languageId) {
-		return "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=<%= version %>&<portlet:namespace />languageId=" + languageId;
+		return "<liferay-portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=<%= version %>&<portlet:namespace />languageId=" + languageId;
 	}
 
 	function <portlet:namespace />initEditor() {
@@ -679,7 +679,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	function <portlet:namespace />removeArticleLocale() {
 		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this-language") %>")) {
 			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "removeArticlesLocale";
-			document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=<%= defaultLanguageId %>";
+			document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<portlet:renderURL><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=<%= defaultLanguageId %>";
 			submitForm(document.<portlet:namespace />fm1);
 		}
 	}

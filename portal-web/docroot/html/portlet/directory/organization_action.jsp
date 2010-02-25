@@ -39,7 +39,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 %>
 
 <liferay-ui:icon-menu>
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
+	<portlet:renderURL var="viewUsersURL">
 		<portlet:param name="struts_action" value="/directory/view" />
 		<portlet:param name="tabs1" value="users" />
 		<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />
@@ -49,7 +49,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" method="get" />
 
 	<c:if test="<%= organization.hasSuborganizations() %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewSuborganizationsURL">
+		<portlet:renderURL var="viewSuborganizationsURL">
 			<portlet:param name="struts_action" value="/directory/view" />
 			<portlet:param name="tabs1" value="organizations" />
 			<portlet:param name="viewUsersRedirect" value="<%= currentURL %>" />

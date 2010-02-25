@@ -60,8 +60,6 @@ boolean showModelResources = ParamUtil.getBoolean(request, "showModelResources",
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
@@ -69,16 +67,12 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 PortletURL viewPermissionsURL = renderResponse.createRenderURL();
 
-viewPermissionsURL.setWindowState(WindowState.MAXIMIZED);
-
 viewPermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
 viewPermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 viewPermissionsURL.setParameter("tabs1", "roles");
 viewPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 PortletURL editPermissionsURL = renderResponse.createRenderURL();
-
-editPermissionsURL.setWindowState(WindowState.MAXIMIZED);
 
 editPermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
 editPermissionsURL.setParameter(Constants.CMD, Constants.EDIT);
@@ -127,7 +121,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		</c:if>
 	</c:when>
 	<c:otherwise>
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRolePermissionsURL">
+		<portlet:actionURL var="editRolePermissionsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
 		</portlet:actionURL>
 
@@ -268,8 +262,6 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 <%
 PortletURL definePermissionsURL = renderResponse.createRenderURL();
 
-definePermissionsURL.setWindowState(WindowState.MAXIMIZED);
-
 definePermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 definePermissionsURL.setParameter("redirect", backURL);
@@ -279,8 +271,6 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "def
 
 if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
 	PortletURL resourceURL = renderResponse.createRenderURL();
-
-	resourceURL.setWindowState(WindowState.MAXIMIZED);
 
 	resourceURL.setParameter("struts_action", "/enterprise_admin/edit_role");
 	resourceURL.setParameter(Constants.CMD, Constants.EDIT);

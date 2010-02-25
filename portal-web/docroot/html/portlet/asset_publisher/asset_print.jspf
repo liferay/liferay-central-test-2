@@ -26,6 +26,7 @@
 PortletURL printAssetURL = renderResponse.createRenderURL();
 
 printAssetURL.setWindowState(LiferayWindowState.POP_UP);
+
 printAssetURL.setParameter("struts_action", "/asset_publisher/view_content");
 printAssetURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 printAssetURL.setParameter("viewMode", Constants.PRINT);

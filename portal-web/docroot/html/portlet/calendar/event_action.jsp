@@ -43,7 +43,7 @@ else {
 
 <liferay-ui:icon-menu showExpanded="<%= view %>">
 	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
@@ -74,7 +74,7 @@ else {
 	</c:if>
 
 	<c:if test="<%= !view && CalEventPermission.contains(permissionChecker, event, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

@@ -31,8 +31,6 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/announcements/view");
 portletURL.setParameter("tabs1", tabs1);
 %>

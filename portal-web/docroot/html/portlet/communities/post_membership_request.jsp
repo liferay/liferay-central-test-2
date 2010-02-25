@@ -36,7 +36,7 @@ long groupId = BeanParamUtil.getLong(group, request, "groupId");
 MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(WebKeys.MEMBERSHIP_REQUEST);
 %>
 
-<portlet:actionURL var="postMembershipRequestURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+<portlet:actionURL var="postMembershipRequestURL">
 	<portlet:param name="struts_action" value="/communities/post_membership_request" />
 </portlet:actionURL>
 

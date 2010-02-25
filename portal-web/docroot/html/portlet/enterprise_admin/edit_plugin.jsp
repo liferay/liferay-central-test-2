@@ -46,7 +46,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 }
 %>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPluginURL">
+<portlet:actionURL var="editPluginURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_plugin" />
 </portlet:actionURL>
 

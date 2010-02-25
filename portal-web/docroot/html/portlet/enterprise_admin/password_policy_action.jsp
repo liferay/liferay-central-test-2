@@ -36,7 +36,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
@@ -57,7 +57,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 	</c:if>
 
 	<c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.ASSIGN_MEMBERS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
+		<portlet:renderURL var="assignMembersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy_assignments" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
@@ -67,7 +67,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 	</c:if>
 
 	<c:if test="<%= !passwordPolicy.getDefaultPolicy() && PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />

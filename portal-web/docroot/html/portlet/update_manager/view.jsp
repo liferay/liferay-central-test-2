@@ -36,8 +36,6 @@ List updatablePackageIds = new ArrayList();
 				<%
 				PortletURL configurationURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
-				configurationURL.setWindowState(WindowState.MAXIMIZED);
-
 				configurationURL.setParameter("struts_action", "/plugin_installer/view");
 				configurationURL.setParameter("backURL", currentURL);
 				configurationURL.setParameter("tabs1", "configuration");
@@ -51,8 +49,6 @@ List updatablePackageIds = new ArrayList();
 				String uploadProgressId = DeterminateKeyGenerator.generate("portlet_update_manager_view");
 
 				PortletURL pluginInstallerURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
-
-				pluginInstallerURL.setWindowState(WindowState.MAXIMIZED);
 
 				pluginInstallerURL.setParameter("struts_action", "/plugin_installer/view");
 				pluginInstallerURL.setParameter("tabs1", "browse-repository");
@@ -159,9 +155,7 @@ List updatablePackageIds = new ArrayList();
 						// Available version
 
 						if (availablePluginPackage != null) {
-							PortletURL rowURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
-
-							rowURL.setWindowState(WindowState.MAXIMIZED);
+							PortletURL rowURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
 							rowURL.setParameter("struts_action", "/plugin_installer/view");
 							rowURL.setParameter("redirect", currentURL);
@@ -213,7 +207,7 @@ List updatablePackageIds = new ArrayList();
 					<input type="button" value="<liferay-ui:message key="install-more-plugins" />" onClick="submitForm(document.hrefFm, '<%= pluginInstallerURL.toString() %>');" />
 
 					<c:if test="<%= !updatablePackageIds.isEmpty() %>">
-						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="ignoreAllURL">
+						<portlet:actionURL var="ignoreAllURL">
 							<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 							<portlet:param name="<%= Constants.CMD %>" value="ignorePackages" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
