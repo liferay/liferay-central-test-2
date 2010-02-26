@@ -86,6 +86,9 @@ public class EditFileEntryAction extends PortletAction {
 			else if (cmd.equals(Constants.LOCK)) {
 				lockFileEntry(actionRequest);
 			}
+			else if (cmd.equals(Constants.MOVE)) {
+				moveFileEntry(actionRequest);
+			}
 			else if (cmd.equals(Constants.UNLOCK)) {
 				unlockFileEntry(actionRequest);
 			}
@@ -177,6 +180,29 @@ public class EditFileEntryAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 
 		DLFileEntryServiceUtil.lockFileEntry(groupId, folderId, name);
+	}
+
+	protected void moveFileEntry(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
+		long folderId = ParamUtil.getLong(actionRequest, "folderId");
+		long newFolderId = ParamUtil.getLong(actionRequest, "newFolderId");
+		String name = ParamUtil.getString(actionRequest, "name");
+
+		File file = null;
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			DLFileEntry.class.getName(), actionRequest);
+
+		DLFileEntry fileEntry = DLFileEntryServiceUtil.getFileEntry(
+			groupId, folderId, name);
+
+		DLFileEntryServiceUtil.updateFileEntry(
+			groupId, folderId, newFolderId, name, null, fileEntry.getTitle(),
+			fileEntry.getDescription(), null, false,
+			fileEntry.getExtraSettings(), file, serviceContext);
 	}
 
 	protected void unlockFileEntry(ActionRequest actionRequest)
