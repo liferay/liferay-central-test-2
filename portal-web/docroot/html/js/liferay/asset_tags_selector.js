@@ -140,7 +140,11 @@ AUI().add(
 
 					instance._updateHiddenInput(event);
 
-					instance.inputNode.focus();
+					try {
+						instance.inputNode.focus();
+					}
+					catch (e) {
+					}
 				},
 
 				_formatEntry: function(item) {
