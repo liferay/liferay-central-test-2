@@ -51,7 +51,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutReference;
-import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
@@ -243,38 +242,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public void deleteLayout(Layout layout, boolean updateLayoutSet)
 		throws PortalException, SystemException {
-
-		// New First Layout
-
-		if (layout.getParentLayoutId() ==
-					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-
-				List<Layout> layouts = layoutPersistence.findByG_P_P(
-					layout.getGroupId(), layout.getPrivateLayout(),
-					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0, 2);
-
-				// You can only reach this point if there are more than two
-				// layouts at the root level because of the descendant check
-
-				long firstLayoutId = layouts.get(0).getLayoutId();
-
-				if (firstLayoutId == layout.getLayoutId()) {
-					Layout secondLayout = layouts.get(1);
-
-					try {
-						validateFirstLayout(
-							secondLayout.getType(), secondLayout.getHidden());
-					}
-					catch (LayoutHiddenException lhe) {
-						throw new LayoutParentLayoutIdException(
-							LayoutParentLayoutIdException.FIRST_LAYOUT_HIDDEN);
-					}
-					catch (LayoutTypeException lte) {
-						throw new LayoutParentLayoutIdException(
-							LayoutParentLayoutIdException.FIRST_LAYOUT_TYPE);
-					}
-				}
-			}
 
 		// Child layouts
 
