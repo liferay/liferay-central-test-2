@@ -61,7 +61,7 @@
 				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 			%>
 
-					<aui:option label="<%= HtmlUtil.escape(organization.getName()) %>" selected="<%= classPK == organization.getOrganizationId() %>" value="<%= PortalUtil.getClassNameId(Organization.class) + StringPool.COMMA + organization.getOrganizationId() %>" />
+					<aui:option label="<%= organization.getName() %>" selected="<%= classPK == organization.getOrganizationId() %>" value="<%= PortalUtil.getClassNameId(Organization.class) + StringPool.COMMA + organization.getOrganizationId() %>" />
 
 			<%
 				}
