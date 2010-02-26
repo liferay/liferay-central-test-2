@@ -287,6 +287,38 @@ AUI().add(
 				);
 			},
 
+			syncEmptyColumnClassUI: function(columnNode) {
+				var options = Layout.options;
+				var curPortletInfo = Layout.curPortletInfo;
+
+				if (curPortletInfo) {
+					var emptyColumnClass = options.emptyColumnClass;
+					var originalParent = curPortletInfo.originalParent;
+					var columnHasPortlets = Layout.hasPortlets(columnNode);
+					var originalColumnHasPortlets = Layout.hasPortlets(originalParent);
+
+					var dropZoneId = columnNode.ancestor(Layout.options.dropNodes).get('id');
+					var originalDropZoneId = originalParent.ancestor(Layout.options.dropNodes).get('id');
+
+					Layout.EMPTY_COLUMNS[dropZoneId] = !columnHasPortlets;
+					Layout.EMPTY_COLUMNS[originalDropZoneId] = !originalColumnHasPortlets;
+
+					columnNode.toggleClass(emptyColumnClass, !columnHasPortlets);
+					originalParent.toggleClass(emptyColumnClass, !originalColumnHasPortlets);
+				}
+			},
+
+			updateCurrentPortletInfo: function(dragNode) {
+				var options = Layout.options;
+
+				Layout.curPortletInfo = {
+					node: dragNode,
+					originalIndex: Layout.findIndex(dragNode),
+					originalParent: dragNode.get('parentNode'),
+					siblingsPortlets: dragNode.siblings(options.portletBoundary)
+				};
+			},
+
 			updateEmptyColumnsInfo: function() {
 				var options = Layout.options;
 
@@ -329,45 +361,13 @@ AUI().add(
 
 				Layout.saveIndex(dragNode, columnNode);
 
-				Layout._syncEmptyClassUI(columnNode);
+				Layout.syncEmptyColumnClassUI(columnNode);
 			},
 
 			_onPortletDragStart: function(event) {
 				var dragNode = event.target.get('node');
 
-				Layout._updatePortletInfo(dragNode);
-			},
-
-			_syncEmptyClassUI: function(columnNode) {
-				var options = Layout.options;
-				var curPortletInfo = Layout.curPortletInfo;
-
-				if (curPortletInfo) {
-					var emptyColumnClass = options.emptyColumnClass;
-					var originalParent = curPortletInfo.originalParent;
-					var columnHasPortlets = Layout.hasPortlets(columnNode);
-					var originalColumnHasPortlets = Layout.hasPortlets(originalParent);
-
-					var dropZoneId = columnNode.ancestor(Layout.options.dropNodes).get('id');
-					var originalDropZoneId = originalParent.ancestor(Layout.options.dropNodes).get('id');
-
-					Layout.EMPTY_COLUMNS[dropZoneId] = !columnHasPortlets;
-					Layout.EMPTY_COLUMNS[originalDropZoneId] = !originalColumnHasPortlets;
-
-					columnNode.toggleClass(emptyColumnClass, !columnHasPortlets);
-					originalParent.toggleClass(emptyColumnClass, !originalColumnHasPortlets);
-				}
-			},
-
-			_updatePortletInfo: function(dragNode) {
-				var options = Layout.options;
-
-				Layout.curPortletInfo = {
-					node: dragNode,
-					originalIndex: Layout.findIndex(dragNode),
-					originalParent: dragNode.get('parentNode'),
-					siblingsPortlets: dragNode.siblings(options.portletBoundary)
-				};
+				Layout.updateCurrentPortletInfo(dragNode);
 			}
 		};
 

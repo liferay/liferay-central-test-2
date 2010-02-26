@@ -129,11 +129,15 @@ Liferay.Portlet = {
 
 			portletBoundary = portletBound;
 
+			Liferay.Layout.updateCurrentPortletInfo(portletBoundary);
+
+			if (container) {
+				Liferay.Layout.syncEmptyColumnClassUI(container);
+			}
+
 			if (onComplete) {
 				onComplete(portletBoundary, portletId);
 			}
-
-			container.removeClass('empty');
 
 			return portletId;
 		};
@@ -191,7 +195,13 @@ Liferay.Portlet = {
 				var portletId = currentPortlet.portletId;
 				var column = currentPortlet.ancestor('.lfr-portlet-column');
 
+				Liferay.Layout.updateCurrentPortletInfo(currentPortlet);
+
 				currentPortlet.remove();
+
+				if (column) {
+					Liferay.Layout.syncEmptyColumnClassUI(column);
+				}
 
 				var url = themeDisplay.getPathMain() + '/portal/update_layout';
 
@@ -212,14 +222,6 @@ Liferay.Portlet = {
 						);
 					}
 				);
-
-				if (column) {
-					var portletsLeft = column.one('.portlet-boundary');
-
-					if (!portletsLeft) {
-						column.addClass('empty');
-					}
-				}
 
 				Liferay.fire(
 					'closePortlet',
