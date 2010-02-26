@@ -23,7 +23,6 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
-import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.BaseHotDeployListener;
@@ -104,8 +103,6 @@ import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
 import com.liferay.portlet.social.model.impl.SocialRequestInterpreterImpl;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
-
-import java.lang.reflect.Proxy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -524,21 +521,16 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		ConfigurationAction configurationActionInstance = null;
 
 		if (Validator.isNotNull(portlet.getConfigurationActionClass())) {
-			configurationActionInstance =
-				(ConfigurationAction)portletClassLoader.loadClass(
-					portlet.getConfigurationActionClass()).newInstance();
+			configurationActionInstance = (ConfigurationAction)newInstance(
+				portletClassLoader, ConfigurationAction.class,
+				portlet.getConfigurationActionClass());
 		}
 
 		Indexer indexerInstance = null;
 
 		if (Validator.isNotNull(portlet.getIndexerClass())) {
-			indexerInstance = (Indexer)portletClassLoader.loadClass(
-				portlet.getIndexerClass()).newInstance();
-
-			indexerInstance = (Indexer)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {Indexer.class},
-				new ContextClassLoaderBeanHandler(
-					indexerInstance, portletClassLoader));
+			indexerInstance = (Indexer)newInstance(
+				portletClassLoader, Indexer.class, portlet.getIndexerClass());
 
 			IndexerRegistryUtil.register(indexerInstance);
 		}
@@ -546,8 +538,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		OpenSearch openSearchInstance = null;
 
 		if (Validator.isNotNull(portlet.getOpenSearchClass())) {
-			openSearchInstance = (OpenSearch)portletClassLoader.loadClass(
-				portlet.getOpenSearchClass()).newInstance();
+			openSearchInstance = (OpenSearch)newInstance(
+				portletClassLoader, OpenSearch.class,
+				portlet.getOpenSearchClass());
 		}
 
 		Scheduler schedulerInstance = null;
@@ -555,8 +548,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		if (PropsValues.SCHEDULER_ENABLED &&
 			Validator.isNotNull(portlet.getSchedulerClass())) {
 
-			schedulerInstance = (Scheduler)portletClassLoader.loadClass(
-				portlet.getSchedulerClass()).newInstance();
+			schedulerInstance = (Scheduler)newInstance(
+				portletClassLoader, Scheduler.class,
+				portlet.getSchedulerClass());
 
 			schedulerInstance.schedule();
 		}
@@ -575,51 +569,41 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		FriendlyURLMapper friendlyURLMapperInstance = null;
 
 		if (Validator.isNotNull(portlet.getFriendlyURLMapperClass())) {
-			friendlyURLMapperInstance =
-				(FriendlyURLMapper)portletClassLoader.loadClass(
-					portlet.getFriendlyURLMapperClass()).newInstance();
+			friendlyURLMapperInstance = (FriendlyURLMapper)newInstance(
+				portletClassLoader, FriendlyURLMapper.class,
+				portlet.getFriendlyURLMapperClass());
 		}
 
 		URLEncoder urlEncoderInstance = null;
 
 		if (Validator.isNotNull(portlet.getURLEncoderClass())) {
-			urlEncoderInstance = (URLEncoder)portletClassLoader.loadClass(
-				portlet.getURLEncoderClass()).newInstance();
+			urlEncoderInstance = (URLEncoder)newInstance(
+				portletClassLoader, URLEncoder.class,
+				portlet.getURLEncoderClass());
 		}
 
 		PortletDataHandler portletDataHandlerInstance = null;
 
 		if (Validator.isNotNull(portlet.getPortletDataHandlerClass())) {
-			portletDataHandlerInstance =
-				(PortletDataHandler)portletClassLoader.loadClass(
-					portlet.getPortletDataHandlerClass()).newInstance();
-
-			portletDataHandlerInstance =
-				(PortletDataHandler)Proxy.newProxyInstance(
-					portletClassLoader, new Class[] {PortletDataHandler.class},
-					new ContextClassLoaderBeanHandler(
-						portletDataHandlerInstance, portletClassLoader));
+			portletDataHandlerInstance = (PortletDataHandler)newInstance(
+				portletClassLoader, PortletDataHandler.class,
+				portlet.getPortletDataHandlerClass());
 		}
 
 		PortletLayoutListener portletLayoutListenerInstance = null;
 
 		if (Validator.isNotNull(portlet.getPortletLayoutListenerClass())) {
-			portletLayoutListenerInstance =
-				(PortletLayoutListener)portletClassLoader.loadClass(
-					portlet.getPortletLayoutListenerClass()).newInstance();
+			portletLayoutListenerInstance = (PortletLayoutListener)newInstance(
+				portletClassLoader, PortletLayoutListener.class,
+				portlet.getPortletLayoutListenerClass());
 		}
 
 		PollerProcessor pollerProcessorInstance = null;
 
 		if (Validator.isNotNull(portlet.getPollerProcessorClass())) {
-			pollerProcessorInstance =
-				(PollerProcessor)portletClassLoader.loadClass(
-					portlet.getPollerProcessorClass()).newInstance();
-
-			pollerProcessorInstance = (PollerProcessor)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {PollerProcessor.class},
-				new ContextClassLoaderBeanHandler(
-					pollerProcessorInstance, portletClassLoader));
+			pollerProcessorInstance = (PollerProcessor)newInstance(
+				portletClassLoader, PollerProcessor.class,
+				portlet.getPollerProcessorClass());
 
 			PollerProcessorUtil.addPollerProcessor(
 				portlet.getPortletId(), pollerProcessorInstance);
@@ -630,9 +614,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		if (Validator.isNotNull(portlet.getPopMessageListenerClass())) {
 			popMessageListenerInstance =
-				(com.liferay.portal.kernel.pop.MessageListener)
-					portletClassLoader.loadClass(
-						portlet.getPopMessageListenerClass()).newInstance();
+				(com.liferay.portal.kernel.pop.MessageListener)newInstance(
+					portletClassLoader,
+					com.liferay.portal.kernel.pop.MessageListener.class,
+					portlet.getPopMessageListenerClass());
 
 			POPServerUtil.addListener(popMessageListenerInstance);
 		}
@@ -641,8 +626,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		if (Validator.isNotNull(portlet.getSocialActivityInterpreterClass())) {
 			socialActivityInterpreterInstance =
-				(SocialActivityInterpreter)portletClassLoader.loadClass(
-					portlet.getSocialActivityInterpreterClass()).newInstance();
+				(SocialActivityInterpreter)newInstance(
+					portletClassLoader, SocialActivityInterpreter.class,
+					portlet.getSocialActivityInterpreterClass());
 
 			socialActivityInterpreterInstance =
 				new SocialActivityInterpreterImpl(
@@ -656,8 +642,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		if (Validator.isNotNull(portlet.getSocialRequestInterpreterClass())) {
 			socialRequestInterpreterInstance =
-				(SocialRequestInterpreter)portletClassLoader.loadClass(
-					portlet.getSocialRequestInterpreterClass()).newInstance();
+				(SocialRequestInterpreter)newInstance(
+					portletClassLoader, SocialRequestInterpreter.class,
+					portlet.getSocialRequestInterpreterClass());
 
 			socialRequestInterpreterInstance = new SocialRequestInterpreterImpl(
 				portlet.getPortletId(), socialRequestInterpreterInstance);
@@ -669,8 +656,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		WebDAVStorage webDAVStorageInstance = null;
 
 		if (Validator.isNotNull(portlet.getWebDAVStorageClass())) {
-			webDAVStorageInstance = (WebDAVStorage)portletClassLoader.loadClass(
-				portlet.getWebDAVStorageClass()).newInstance();
+			webDAVStorageInstance = (WebDAVStorage)newInstance(
+				portletClassLoader, WebDAVStorage.class,
+				portlet.getWebDAVStorageClass());
 
 			webDAVStorageInstance.setToken(portlet.getWebDAVStorageToken());
 
@@ -680,8 +668,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		Method xmlRpcMethodInstance = null;
 
 		if (Validator.isNotNull(portlet.getXmlRpcMethodClass())) {
-			xmlRpcMethodInstance = (Method)portletClassLoader.loadClass(
-				portlet.getXmlRpcMethodClass()).newInstance();
+			xmlRpcMethodInstance = (Method)newInstance(
+				portletClassLoader, Method.class,
+				portlet.getXmlRpcMethodClass());
 
 			XmlRpcServlet.registerMethod(xmlRpcMethodInstance);
 		}
@@ -689,9 +678,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		ControlPanelEntry controlPanelEntryInstance = null;
 
 		if (Validator.isNotNull(portlet.getControlPanelEntryClass())) {
-			controlPanelEntryInstance =
-				(ControlPanelEntry)portletClassLoader.loadClass(
-					portlet.getControlPanelEntryClass()).newInstance();
+			controlPanelEntryInstance = (ControlPanelEntry)newInstance(
+				portletClassLoader, ControlPanelEntry.class,
+				portlet.getControlPanelEntryClass());
 		}
 
 		List<AssetRendererFactory> assetRendererFactoryInstances =
@@ -701,15 +690,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portlet.getAssetRendererFactoryClasses()) {
 
 			AssetRendererFactory assetRendererFactoryInstance =
-				(AssetRendererFactory)portletClassLoader.loadClass(
-					assetRendererFactoryClass).newInstance();
-
-			assetRendererFactoryInstance =
-				(AssetRendererFactory)Proxy.newProxyInstance(
-					portletClassLoader,
-				new Class[] {AssetRendererFactory.class},
-					new ContextClassLoaderBeanHandler(
-						assetRendererFactoryInstance, portletClassLoader));
+				(AssetRendererFactory)newInstance(
+					portletClassLoader, AssetRendererFactory.class,
+					assetRendererFactoryClass);
 
 			assetRendererFactoryInstance.setClassNameId(
 				PortalUtil.getClassNameId(
@@ -729,15 +712,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portlet.getCustomAttributesDisplayClasses()) {
 
 			CustomAttributesDisplay customAttributesDisplayInstance =
-				(CustomAttributesDisplay)portletClassLoader.loadClass(
-					customAttributesDisplayClass).newInstance();
-
-			customAttributesDisplayInstance =
-				(CustomAttributesDisplay)Proxy.newProxyInstance(
-					portletClassLoader,
-				new Class[] {CustomAttributesDisplay.class},
-					new ContextClassLoaderBeanHandler(
-						customAttributesDisplayInstance, portletClassLoader));
+				(CustomAttributesDisplay)newInstance(
+					portletClassLoader, CustomAttributesDisplay.class,
+					customAttributesDisplayClass);
 
 			customAttributesDisplayInstance.setClassNameId(
 				PortalUtil.getClassNameId(
@@ -756,14 +733,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portlet.getWorkflowHandlerClasses()) {
 
 			WorkflowHandler workflowHandlerInstance =
-				(WorkflowHandler)portletClassLoader.loadClass(
-					workflowHandlerClass).newInstance();
-
-			workflowHandlerInstance =
-				(WorkflowHandler)Proxy.newProxyInstance(portletClassLoader,
-				new Class[] {WorkflowHandler.class},
-					new ContextClassLoaderBeanHandler(
-						workflowHandlerInstance, portletClassLoader));
+				(WorkflowHandler)newInstance(
+					portletClassLoader, WorkflowHandler.class,
+					workflowHandlerClass);
 
 			workflowHandlerInstances.add(workflowHandlerInstance);
 
@@ -773,9 +745,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		PreferencesValidator preferencesValidatorInstance = null;
 
 		if (Validator.isNotNull(portlet.getPreferencesValidator())) {
-			preferencesValidatorInstance =
-				(PreferencesValidator)portletClassLoader.loadClass(
-					portlet.getPreferencesValidator()).newInstance();
+			preferencesValidatorInstance = (PreferencesValidator)newInstance(
+				portletClassLoader, PreferencesValidator.class,
+				portlet.getPreferencesValidator());
 
 			try {
 				if (PropsValues.PREFERENCE_VALIDATE_ON_STARTUP) {
@@ -847,9 +819,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			SchedulerEntry schedulerEntry, ClassLoader portletClassLoader)
 		throws Exception {
 
-		MessageListener schedulerEventListener =
-			(MessageListener)portletClassLoader.loadClass(
-				schedulerEntry.getEventListenerClass()).newInstance();
+		MessageListener schedulerEventListener = (MessageListener)newInstance(
+			portletClassLoader, MessageListener.class,
+			schedulerEntry.getEventListenerClass());
 
 		schedulerEventListener = new SchedulerEventMessageListenerWrapper(
 			schedulerEventListener);
@@ -901,9 +873,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		for (PortletFilter portletFilter : portletFilters) {
 			javax.portlet.filter.PortletFilter portletFilterInstance =
-				(javax.portlet.filter.PortletFilter)
-					portletClassLoader.loadClass(
-						portletFilter.getFilterClass()).newInstance();
+				(javax.portlet.filter.PortletFilter)newInstance(
+					portletClassLoader,
+					javax.portlet.filter.PortletFilter.class,
+					portletFilter.getFilterClass());
 
 			portletContextBag.getPortletFilters().put(
 				portletFilter.getFilterName(), portletFilterInstance);
@@ -916,8 +889,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		for (PortletURLListener portletURLListener : portletURLListeners) {
 			PortletURLGenerationListener portletURLListenerInstance =
-				(PortletURLGenerationListener)portletClassLoader.loadClass(
-					portletURLListener.getListenerClass()).newInstance();
+				(PortletURLGenerationListener)newInstance(
+					portletClassLoader, PortletURLGenerationListener.class,
+					portletURLListener.getListenerClass());
 
 			portletContextBag.getPortletURLListeners().put(
 				portletURLListener.getListenerClass(),

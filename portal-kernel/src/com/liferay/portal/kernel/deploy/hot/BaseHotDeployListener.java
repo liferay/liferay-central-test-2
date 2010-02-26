@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.deploy.hot;
 
+import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
@@ -29,6 +30,7 @@ import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Proxy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,19 @@ public abstract class BaseHotDeployListener implements HotDeployListener {
 		String servletContextName = servletContext.getServletContextName();
 
 		throw new HotDeployException(msg + servletContextName, t);
+	}
+
+	protected Object newInstance(
+			ClassLoader portletClassLoader, Class<?> interfaceClass,
+			String implClassName)
+		throws Exception {
+
+		Object instance = portletClassLoader.loadClass(
+			implClassName).newInstance();
+
+		return Proxy.newProxyInstance(
+			portletClassLoader, new Class[] {interfaceClass},
+			new ContextClassLoaderBeanHandler(instance, portletClassLoader));
 	}
 
 	protected void registerClpMessageListeners(

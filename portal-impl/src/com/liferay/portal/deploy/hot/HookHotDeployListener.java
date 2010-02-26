@@ -691,14 +691,9 @@ public class HookHotDeployListener
 			portalProperties.getProperty(key));
 
 		for (String authenticatorClassName : authenticatorClassNames) {
-			Authenticator authenticator =
-				(Authenticator)portletClassLoader.loadClass(
-					authenticatorClassName).newInstance();
-
-			authenticator = (Authenticator)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {Authenticator.class},
-				new ContextClassLoaderBeanHandler(
-					authenticator, portletClassLoader));
+			Authenticator authenticator = (Authenticator)newInstance(
+				portletClassLoader, Authenticator.class,
+				authenticatorClassName);
 
 			authenticatorsContainer.registerAuthenticator(
 				key, authenticator);
@@ -733,16 +728,10 @@ public class HookHotDeployListener
 			portalProperties.getProperty(key));
 
 		for (String authFailureClassName : authFailureClassNames) {
-			AuthFailure authFailure = (AuthFailure)portletClassLoader.loadClass(
-				authFailureClassName).newInstance();
+			AuthFailure authFailure = (AuthFailure)newInstance(
+				portletClassLoader, AuthFailure.class, authFailureClassName);
 
-			authFailure = (AuthFailure)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {AuthFailure.class},
-				new ContextClassLoaderBeanHandler(
-					authFailure, portletClassLoader));
-
-			authFailuresContainer.registerAuthFailure(
-				key, authFailure);
+			authFailuresContainer.registerAuthFailure(key, authFailure);
 		}
 	}
 
@@ -787,13 +776,9 @@ public class HookHotDeployListener
 				autoDeployListenerClassNames) {
 
 			AutoDeployListener autoDeployListener =
-				(AutoDeployListener)portletClassLoader.loadClass(
-					autoDeployListenerClassName).newInstance();
-
-			autoDeployListener = (AutoDeployListener)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {AutoDeployListener.class},
-				new ContextClassLoaderBeanHandler(
-					autoDeployListener, portletClassLoader));
+				(AutoDeployListener)newInstance(
+					portletClassLoader, AutoDeployListener.class,
+					autoDeployListenerClassName);
 
 			autoDeployListenersContainer.registerAutoDeployListener(
 				autoDeployListener);
@@ -813,13 +798,8 @@ public class HookHotDeployListener
 			portalProperties.getProperty(AUTO_LOGIN_HOOKS));
 
 		for (String autoLoginClassName : autoLoginClassNames) {
-			AutoLogin autoLogin = (AutoLogin)portletClassLoader.loadClass(
-				autoLoginClassName).newInstance();
-
-			autoLogin = (AutoLogin)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {AutoLogin.class},
-				new ContextClassLoaderBeanHandler(
-					autoLogin, portletClassLoader));
+			AutoLogin autoLogin = (AutoLogin)newInstance(
+				portletClassLoader, AutoLogin.class, autoLoginClassName);
 
 			autoLoginsContainer.registerAutoLogin(autoLogin);
 		}
@@ -964,13 +944,9 @@ public class HookHotDeployListener
 
 		for (String hotDeployListenerClassName : hotDeployListenerClassNames) {
 			HotDeployListener hotDeployListener =
-				(HotDeployListener)portletClassLoader.loadClass(
-					hotDeployListenerClassName).newInstance();
-
-			hotDeployListener = (HotDeployListener)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {HotDeployListener.class},
-				new ContextClassLoaderBeanHandler(
-					hotDeployListener, portletClassLoader));
+				(HotDeployListener)newInstance(
+					portletClassLoader, HotDeployListener.class,
+					hotDeployListenerClassName);
 
 			hotDeployListenersContainer.registerHotDeployListener(
 				hotDeployListener);
@@ -984,13 +960,9 @@ public class HookHotDeployListener
 		throws Exception {
 
 		ModelListener<BaseModel<?>> modelListener =
-			(ModelListener<BaseModel<?>>)portletClassLoader.loadClass(
-				modelListenerClassName).newInstance();
-
-		modelListener = (ModelListener<BaseModel<?>>)Proxy.newProxyInstance(
-			portletClassLoader, new Class[] {ModelListener.class},
-			new ContextClassLoaderBeanHandler(
-				modelListener, portletClassLoader));
+			(ModelListener<BaseModel<?>>)newInstance(
+				portletClassLoader, ModelListener.class,
+				modelListenerClassName);
 
 		BasePersistence persistence = getPersistence(modelName);
 
@@ -1061,13 +1033,9 @@ public class HookHotDeployListener
 				PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS);
 
 			ControlPanelEntry controlPanelEntry =
-				(ControlPanelEntry)portletClassLoader.loadClass(
-					controlPanelEntryClassName).newInstance();
-
-			controlPanelEntry = (ControlPanelEntry)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {ControlPanelEntry.class},
-				new ContextClassLoaderBeanHandler(
-					controlPanelEntry, portletClassLoader));
+				(ControlPanelEntry)newInstance(
+					portletClassLoader, ControlPanelEntry.class,
+					controlPanelEntryClassName);
 
 			DefaultControlPanelEntryFactory.setInstance(controlPanelEntry);
 		}
@@ -1077,15 +1045,10 @@ public class HookHotDeployListener
 				PropsKeys.DL_HOOK_IMPL);
 
 			com.liferay.documentlibrary.util.Hook dlHook =
-				(com.liferay.documentlibrary.util.Hook)
-					portletClassLoader.loadClass(dlHookClassName).newInstance();
-
-			dlHook =
-				(com.liferay.documentlibrary.util.Hook)Proxy.newProxyInstance(
+				(com.liferay.documentlibrary.util.Hook)newInstance(
 					portletClassLoader,
-					new Class[] {com.liferay.documentlibrary.util.Hook.class},
-					new ContextClassLoaderBeanHandler(
-						dlHook, portletClassLoader));
+					com.liferay.documentlibrary.util.Hook.class,
+					dlHookClassName);
 
 			com.liferay.documentlibrary.util.HookFactory.setInstance(dlHook);
 		}
@@ -1095,15 +1058,9 @@ public class HookHotDeployListener
 				PropsKeys.IMAGE_HOOK_IMPL);
 
 			com.liferay.portal.image.Hook imageHook =
-				(com.liferay.portal.image.Hook)portletClassLoader.loadClass(
-					imageHookClassName).newInstance();
-
-			imageHook =
-				(com.liferay.portal.image.Hook)Proxy.newProxyInstance(
-					portletClassLoader,
-					new Class[] {com.liferay.portal.image.Hook.class},
-					new ContextClassLoaderBeanHandler(
-						imageHook, portletClassLoader));
+				(com.liferay.portal.image.Hook)newInstance(
+					portletClassLoader, com.liferay.portal.image.Hook.class,
+					imageHookClassName);
 
 			com.liferay.portal.image.HookFactory.setInstance(imageHook);
 		}
@@ -1116,15 +1073,9 @@ public class HookHotDeployListener
 					PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL);
 
 			AttributesTransformer attributesTransformer =
-				(AttributesTransformer)portletClassLoader.loadClass(
-					attributesTransformerClassName).newInstance();
-
-			attributesTransformer =
-				(AttributesTransformer)Proxy.newProxyInstance(
-					portletClassLoader,
-					new Class[] {AttributesTransformer.class},
-					new ContextClassLoaderBeanHandler(
-						attributesTransformer, portletClassLoader));
+				(AttributesTransformer)newInstance(
+					portletClassLoader, AttributesTransformer.class,
+					attributesTransformerClassName);
 
 			AttributesTransformerFactory.setInstance(attributesTransformer);
 		}
@@ -1134,15 +1085,9 @@ public class HookHotDeployListener
 				PropsKeys.MAIL_HOOK_IMPL);
 
 			com.liferay.mail.util.Hook mailHook =
-				(com.liferay.mail.util.Hook)portletClassLoader.loadClass(
-					mailHookClassName).newInstance();
-
-			mailHook =
-				(com.liferay.mail.util.Hook)Proxy.newProxyInstance(
-					portletClassLoader,
-					new Class[] {com.liferay.mail.util.Hook.class},
-					new ContextClassLoaderBeanHandler(
-						mailHook, portletClassLoader));
+				(com.liferay.mail.util.Hook)newInstance(
+					portletClassLoader, com.liferay.mail.util.Hook.class,
+					mailHookClassName);
 
 			com.liferay.mail.util.HookFactory.setInstance(mailHook);
 		}
@@ -1155,15 +1100,9 @@ public class HookHotDeployListener
 					PropsKeys.USERS_EMAIL_ADDRESS_GENERATOR);
 
 			EmailAddressGenerator emailAddressGenerator =
-				(EmailAddressGenerator)portletClassLoader.loadClass(
-					emailAddressGeneratorClassName).newInstance();
-
-			emailAddressGenerator =
-				(EmailAddressGenerator)Proxy.newProxyInstance(
-					portletClassLoader,
-					new Class[] {EmailAddressGenerator.class},
-					new ContextClassLoaderBeanHandler(
-						emailAddressGenerator, portletClassLoader));
+				(EmailAddressGenerator)newInstance(
+					portletClassLoader, EmailAddressGenerator.class,
+					emailAddressGeneratorClassName);
 
 			EmailAddressGeneratorFactory.setInstance(emailAddressGenerator);
 		}
@@ -1173,13 +1112,9 @@ public class HookHotDeployListener
 				PropsKeys.USERS_FULL_NAME_VALIDATOR);
 
 			FullNameValidator fullNameValidator =
-				(FullNameValidator)portletClassLoader.loadClass(
-					fullNameValidatorClassName).newInstance();
-
-			fullNameValidator = (FullNameValidator)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {FullNameValidator.class},
-				new ContextClassLoaderBeanHandler(
-					fullNameValidator, portletClassLoader));
+				(FullNameValidator)newInstance(
+					portletClassLoader, FullNameValidator.class,
+					fullNameValidatorClassName);
 
 			FullNameValidatorFactory.setInstance(fullNameValidator);
 		}
@@ -1191,13 +1126,9 @@ public class HookHotDeployListener
 				PropsKeys.USERS_SCREEN_NAME_GENERATOR);
 
 			ScreenNameGenerator screenNameGenerator =
-				(ScreenNameGenerator)portletClassLoader.loadClass(
-					screenNameGeneratorClassName).newInstance();
-
-			screenNameGenerator = (ScreenNameGenerator)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {ScreenNameGenerator.class},
-				new ContextClassLoaderBeanHandler(
-					screenNameGenerator, portletClassLoader));
+				(ScreenNameGenerator)newInstance(
+					portletClassLoader, ScreenNameGenerator.class,
+					screenNameGeneratorClassName);
 
 			ScreenNameGeneratorFactory.setInstance(screenNameGenerator);
 		}
@@ -1209,13 +1140,9 @@ public class HookHotDeployListener
 				PropsKeys.USERS_SCREEN_NAME_VALIDATOR);
 
 			ScreenNameValidator screenNameValidator =
-				(ScreenNameValidator)portletClassLoader.loadClass(
-					screenNameValidatorClassName).newInstance();
-
-			screenNameValidator = (ScreenNameValidator)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {ScreenNameValidator.class},
-				new ContextClassLoaderBeanHandler(
-					screenNameValidator, portletClassLoader));
+				(ScreenNameValidator)newInstance(
+					portletClassLoader, ScreenNameValidator.class,
+					screenNameValidatorClassName);
 
 			ScreenNameValidatorFactory.setInstance(screenNameValidator);
 		}
