@@ -1685,7 +1685,8 @@ public class ServicePreAction extends Action {
 						request, PortletKeys.LAYOUT_MANAGEMENT, plid,
 						PortletRequest.RENDER_PHASE);
 
-					publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+					publishToLiveURL.setWindowState(
+						LiferayWindowState.EXCLUSIVE);
 					publishToLiveURL.setPortletMode(PortletMode.VIEW);
 
 					publishToLiveURL.setParameter(
@@ -1701,7 +1702,8 @@ public class ServicePreAction extends Action {
 					publishToLiveURL.setParameter("pagesRedirect", currentURL);
 					publishToLiveURL.setParameter(
 						"groupId", String.valueOf(scopeGroupId));
-					publishToLiveURL.setParameter("selPlid", String.valueOf(plid));
+					publishToLiveURL.setParameter(
+						"selPlid", String.valueOf(plid));
 
 					themeDisplay.setURLPublishToLive(publishToLiveURL);
 				}
