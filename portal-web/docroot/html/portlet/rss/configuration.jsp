@@ -216,7 +216,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 	</c:choose>
 </aui:form>
 
-<aui:script use="liferay-auto-fields">
+<aui:script>
 	function <portlet:namespace />removeSelectionForFooter() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'remove-footer-article';
 		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
@@ -251,7 +251,9 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 1;
 		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
 	}
+</aui:script>
 
+<aui:script use="liferay-auto-fields">
 	new Liferay.AutoFields(
 		{
 			contentBox: 'fieldset.subscriptions',
