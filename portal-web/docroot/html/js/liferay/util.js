@@ -184,6 +184,36 @@ Liferay.Util = {
 		);
 	},
 
+	checkAllBox: function(form, name, allBox) {
+		var A = AUI();
+
+		var totalBoxes = 0;
+		var totalOn = 0;
+		var inputs = A.one(form).all('input[type=checkbox]');
+
+		allBox = A.one(allBox);
+
+		if (!A.Lang.isArray(name)) {
+			name = [name];
+		}
+
+		inputs.each(
+			function(item, index, collection) {
+				if (!item.compareTo(allBox)) {
+					if (A.Array.indexOf(name, item.getAttribute('name')) > -1) {
+						totalBoxes++;
+					}
+
+					if (item.get('checked')) {
+						totalOn++;
+					}
+				}
+			}
+		);
+
+		allBox.set('checked', (totalBoxes == totalOn));
+	},
+
 	checkTab: function(box) {
 		if ((document.all) && (event.keyCode == 9)) {
 			box.selection = document.selection.createRange();
