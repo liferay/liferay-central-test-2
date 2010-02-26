@@ -322,7 +322,7 @@ XML-RPC protocol.
 
 See:
 
-http://docs.liferay.com/portal/6.0/javadocs/portal-impl/com/liferay/portlet/blogs/utili/PingbackMethodImpl.html
+http://docs.liferay.com/portal/6.0/javadocs/portal-impl/com/liferay/portlet/blogs/util/PingbackMethodImpl.html
 -->
 <!ELEMENT xml-rpc-method-class (#PCDATA)>
 
