@@ -121,7 +121,7 @@ AUI().add(
 
 					AssetTagsSelector.superclass.bindUI.apply(instance, arguments);
 
-					instance.entries.after('add', instance._afterAddEntry, instance);
+					instance.entries.after('add', instance._updateHiddenInput, instance);
 					instance.entries.after('remove', instance._updateHiddenInput, instance);
 				},
 
@@ -133,18 +133,6 @@ AUI().add(
 					var curEntries = instance.get('curEntries');
 
 					A.each(curEntries, instance.add, instance);
-				},
-
-				_afterAddEntry: function(event) {
-					var instance = this;
-
-					instance._updateHiddenInput(event);
-
-					try {
-						instance.inputNode.focus();
-					}
-					catch (e) {
-					}
 				},
 
 				_formatEntry: function(item) {
@@ -282,6 +270,14 @@ AUI().add(
 					return instance.get('instanceVar') + name + instance.get('guid');
 				},
 
+				_onAddEntryClick: function(event) {
+					var instance = this;
+
+					instance.entries.add(instance.inputNode.val(), {});
+
+					instance.inputNode.focus();
+				},
+
 				_onCheckboxClick: function(event) {
 					var instance = this;
 
@@ -307,9 +303,7 @@ AUI().add(
 						{
 							icon: 'plus',
 							id: 'add',
-							handler: function(event) {
-								instance.entries.add(instance.inputNode.val(), {});
-							}
+							handler: A.bind(instance._onAddEntryClick, instance)
 						},
 						{
 							icon: 'search',
