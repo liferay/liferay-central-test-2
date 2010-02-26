@@ -303,14 +303,17 @@ AUI().add(
 						{
 							icon: 'plus',
 							id: 'add',
-							handler: A.bind(instance._onAddEntryClick, instance)
+							handler: {
+								context: instance,
+								fn: instance._onAddEntryClick
+							}
 						},
 						{
 							icon: 'search',
 							id: 'select',
 							handler: {
-								fn: instance._showSelectPopup,
-								context: instance
+								context: instance,
+								fn: instance._showSelectPopup
 							}
 						}
 					];
@@ -321,8 +324,8 @@ AUI().add(
 								icon: 'comment',
 								id: 'suggest',
 								handler: {
-									fn: instance._showSuggestionsPopup,
-									context: instance
+									context: instance,
+									fn: instance._showSuggestionsPopup
 								}
 							}
 						);
