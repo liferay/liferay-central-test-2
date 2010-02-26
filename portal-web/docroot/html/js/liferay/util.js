@@ -698,18 +698,30 @@ Liferay.Util = {
 	},
 
 	moveItem: function(fromBox, toBox, sort) {
-		fromBox = AUI().one(fromBox);
-		toBox = AUI().one(toBox);
+		var A = AUI();
+
+		fromBox = A.one(fromBox);
+		toBox = A.one(toBox);
 
 		var selectedIndex = fromBox.get('selectedIndex');
 
-		if (selectedIndex >= 0) {
-			var selectedOption = fromBox.all('option').item(selectedIndex);
+		var selectedOption;
 
-			toBox.append(selectedOption);
+		if (selectedIndex >= 0) {
+			var options = fromBox.all('option');
+
+			selectedOption = options.item(selectedIndex);
+
+			options.each(
+				function(item, index, collection) {
+					if (item.get('selected')) {
+						toBox.append(item);
+					}
+				}
+			);
 		}
 
-		if (selectedOption.text() != '' && sort == true) {
+		if (selectedOption && selectedOption.text() != '' && sort == true) {
 			Liferay.Util.sortBox(toBox);
 		}
 	},
