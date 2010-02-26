@@ -274,24 +274,30 @@ portletURL.setParameter("tabs1", tabs1);
 			</select>
 
 			<input type="submit" value="<liferay-ui:message key="search" />" />
-
-			<c:if test="<%= showAddProductEntryButton %>">
-				<input type="button" value="<liferay-ui:message key="add-product" />" onClick="<portlet:namespace />addProduct();" />
-			</c:if>
-
-			<c:if test="<%= showPermissionsButton %>">
-				<liferay-security:permissionsURL
-					modelResource="com.liferay.portlet.softwarecatalog"
-					modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getScopeGroupName()) %>"
-					resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
-					var="permissionsURL"
-				/>
-
-				<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
-			</c:if>
 		</div>
 
 		<br />
+		
+		<c:if test="<%= showAddProductEntryButton && showPermissionsButton %>">
+			<div>
+				<c:if test="<%= showAddProductEntryButton %>">
+					<input type="button" value="<liferay-ui:message key="add-product" />" onClick="<portlet:namespace />addProduct();" />
+				</c:if>
+
+				<c:if test="<%= showPermissionsButton %>">
+					<liferay-security:permissionsURL
+						modelResource="com.liferay.portlet.softwarecatalog"
+						modelResourceDescription="<%= HtmlUtil.escape(themeDisplay.getScopeGroupName()) %>"
+						resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+						var="permissionsURL"
+					/>
+
+					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+				</c:if>
+			</div>
+
+			<br />
+		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
