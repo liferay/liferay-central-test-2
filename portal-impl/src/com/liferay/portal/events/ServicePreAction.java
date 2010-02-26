@@ -1674,7 +1674,7 @@ public class ServicePreAction extends Action {
 						permissionChecker, scopeGroupId,
 						ActionKeys.PUBLISH_STAGING);
 
-				if (hasApproveProposalPermission || 
+				if (hasApproveProposalPermission ||
 					hasManageStagingPermission || hasPublishStagingPermission) {
 
 					themeDisplay.setShowStagingIcon(true);

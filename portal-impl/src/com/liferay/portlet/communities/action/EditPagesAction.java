@@ -334,11 +334,13 @@ public class EditPagesAction extends PortletAction {
 		}
 
 		if (group.isCommunity()) {
-			boolean publishToLive = (GroupPermissionUtil.contains(
+			String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
+
+			boolean publishToLive =
+				GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),
-					ActionKeys.PUBLISH_STAGING) && 
-				(ParamUtil.getString(
-					portletRequest, Constants.CMD).equals("publish_to_live")));
+					ActionKeys.PUBLISH_STAGING) &&
+				cmd.equals("publish_to_live");
 
 			if (!GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),
