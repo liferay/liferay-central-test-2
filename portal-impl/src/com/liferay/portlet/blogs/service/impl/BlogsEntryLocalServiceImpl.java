@@ -165,7 +165,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Status
 
-		updateWorkflowStatus(
+		entry = updateWorkflowStatus(
 			userId, entryId, trackbacks, false, serviceContext);
 
 		return entry;
