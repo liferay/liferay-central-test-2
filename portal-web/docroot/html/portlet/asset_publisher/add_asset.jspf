@@ -68,6 +68,7 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse 
 	PortletURL addPortletURL = assetRendererFactory.getURLAdd((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)portletResponse);
 
 	if (addPortletURL != null) {
+		addPortletURL.setWindowState(WindowState.MAXIMIZED);
 		addPortletURL.setPortletMode(PortletMode.VIEW);
 
 		addPortletURL.setParameter("redirect", themeDisplay.getURLCurrent());
