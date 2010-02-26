@@ -103,6 +103,10 @@ public class DefaultWorkflowLog implements Serializable, WorkflowLog {
 		_workflowLogId = workflowLogId;
 	}
 
+	public void setWorkflowTaskId(long workflowTaskId) {
+		_workflowTaskId = workflowTaskId;
+	}
+
 	private String _comment;
 	private Date _createDate;
 	private String _previousState;
