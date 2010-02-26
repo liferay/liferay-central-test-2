@@ -521,7 +521,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			pingOldTrackbacks = true;
 		}
 
-		updateWorkflowStatus(
+		entry = updateWorkflowStatus(
 			userId, entryId, trackbacks, pingOldTrackbacks, serviceContext);
 
 		return entry;
