@@ -195,11 +195,11 @@ Format timeFormatDate = FastDateFormatFactoryUtil.getTime(locale, timeZone);
 
 			<liferay-ui:icon
 				image="rss"
+				label="<%= true %>"
 				message="<%= feedLinkMessage %>"
-				url="<%= feedLink %>"
 				method="get"
 				target="_blank"
-				label="<%= true %>"
+				url="<%= feedLink %>"
 			/>
 		</c:if>
 	</c:otherwise>
