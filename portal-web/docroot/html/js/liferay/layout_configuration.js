@@ -140,9 +140,7 @@ AUI().add(
 					var isInstanceable = portletMetaData.instanceable;
 
 					if (!isInstanceable) {
-						portlet.addClass('lfr-portlet-used');
-
-						instance._lockDrag(portlet);
+						instance._disablePortletEntry(portletId);
 					}
 
 					var beforePortletLoaded = null;
@@ -189,6 +187,40 @@ AUI().add(
 
 					instance._loadPortletFiles(portletMetaData);
 				}
+			},
+
+			_disablePortletEntry: function(portletId) {
+				var instance = this;
+
+				instance._eachPortletEntry(
+					portletId,
+					function(item, index) {
+						item.addClass('lfr-portlet-used');
+
+						instance._lockDrag(item);
+					}
+				);
+			},
+
+			_eachPortletEntry: function(portletId, callback) {
+				var instance = this;
+
+				var portlets = A.all('[portletid=' + portletId + ']');
+
+				portlets.each(callback);
+			},
+
+			_enablePortletEntry: function(portletId) {
+				var instance = this;
+
+				instance._eachPortletEntry(
+					portletId,
+					function(item, index) {
+						item.removeClass('lfr-portlet-used');
+
+						instance._unlockDrag(item);
+					}
+				);
 			},
 
 			_getPortletMetaData: function(portlet) {
@@ -372,9 +404,9 @@ AUI().add(
 					var item = popup.one('.lfr-portlet-item[plid=' + event.plid + '][portletId=' + event.portletId + '][instanceable=false]');
 
 					if (item && item.hasClass('lfr-portlet-used')) {
-						item.removeClass('lfr-portlet-used');
+						var portletId = item.attr('portletId');
 
-						instance._unlockDrag(item);
+						instance._enablePortletEntry(portletId);
 					}
 				}
 			},
