@@ -191,8 +191,6 @@ public class EditFileEntryAction extends PortletAction {
 		long newFolderId = ParamUtil.getLong(actionRequest, "newFolderId");
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		File file = null;
-
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
@@ -202,7 +200,7 @@ public class EditFileEntryAction extends PortletAction {
 		DLFileEntryServiceUtil.updateFileEntry(
 			groupId, folderId, newFolderId, name, null, fileEntry.getTitle(),
 			fileEntry.getDescription(), null, false,
-			fileEntry.getExtraSettings(), file, serviceContext);
+			fileEntry.getExtraSettings(), null, serviceContext);
 	}
 
 	protected void unlockFileEntry(ActionRequest actionRequest)
