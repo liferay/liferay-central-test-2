@@ -200,7 +200,7 @@ public class EditFileEntryAction extends PortletAction {
 		DLFileEntryServiceUtil.updateFileEntry(
 			groupId, folderId, newFolderId, name, null, fileEntry.getTitle(),
 			fileEntry.getDescription(), null, false,
-			fileEntry.getExtraSettings(), null, serviceContext);
+			fileEntry.getExtraSettings(), (File)null, serviceContext);
 	}
 
 	protected void unlockFileEntry(ActionRequest actionRequest)
