@@ -106,12 +106,14 @@
 			breakiterator="yes"
 			classpathref="project.classpath"
 			destdir="${javadoc.dir}"
-			maxmemory="256m"
+			maxmemory="512m"
 			packagenames="*.*"
 			sourcepath="src"
 			stylesheetfile="${project.dir}/tools/javadoc.css"
 			useexternalfile="yes"
-		/>
+		>
+			<arg line="-quiet -tag generated" />
+		</javadoc>
 	</target>
 
 	<target name="deploy" depends="jar">
