@@ -121,7 +121,7 @@ AUI().add(
 
 					AssetTagsSelector.superclass.bindUI.apply(instance, arguments);
 
-					instance.entries.after('add', instance._updateHiddenInput, instance);
+					instance.entries.after('add', instance._afterAddEntry, instance);
 					instance.entries.after('remove', instance._updateHiddenInput, instance);
 				},
 
@@ -133,6 +133,14 @@ AUI().add(
 					var curEntries = instance.get('curEntries');
 
 					A.each(curEntries, instance.add, instance);
+				},
+
+				_afterAddEntry: function(event) {
+					var instance = this;
+
+					instance._updateHiddenInput(event);
+
+					instance.inputNode.focus();
 				},
 
 				_formatEntry: function(item) {
