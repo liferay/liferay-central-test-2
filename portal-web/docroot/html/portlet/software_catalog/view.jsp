@@ -277,7 +277,7 @@ portletURL.setParameter("tabs1", tabs1);
 		</div>
 
 		<br />
-		
+
 		<c:if test="<%= showAddProductEntryButton && showPermissionsButton %>">
 			<div>
 				<c:if test="<%= showAddProductEntryButton %>">
