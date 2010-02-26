@@ -33,7 +33,7 @@
 					<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="edit" url="<%= editURL %>" label="<%= true %>" />
+				<liferay-ui:icon image="edit" label="<%= true %>" url="<%= editURL %>" />
 			</td>
 		</c:if>
 

@@ -36,9 +36,9 @@ printAssetURL.setParameter("viewMode", Constants.PRINT);
 	<c:when test="<%= print %>">
 		<liferay-ui:icon
 			image="print"
+			label="<%= true %>"
 			message='<%= LanguageUtil.format(pageContext, "print-x-x", new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle()}) %>'
 			url="javascript:print();"
-			label="<%= true %>"
 		/>
 
 		<aui:script>
@@ -48,9 +48,9 @@ printAssetURL.setParameter("viewMode", Constants.PRINT);
 	<c:otherwise>
 		<liferay-ui:icon
 			image="print"
+			label="<%= true %>"
 			message='<%= LanguageUtil.format(pageContext, "print-x-x", new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle()}) %>'
 			url='<%= "javascript:" + renderResponse.getNamespace() + "printPage_" + assetEntryIndex + "();" %>'
-			label="<%= true %>"
 		/>
 
 		<aui:script>

@@ -109,7 +109,7 @@ if (rssURLParams.length() > 0) {
 %>
 
 <div class="subscribe">
-	<liferay-ui:icon image="rss" url="<%= rssURL %>" method="get" target="_blank" label="<%= true %>" />
+	<liferay-ui:icon image="rss" label="<%= true %>" method="get" target="_blank" url="<%= rssURL %>" />
 
 	<c:if test="<%= showSubscribeButton %>">
 		<c:choose>
@@ -120,7 +120,7 @@ if (rssURLParams.length() > 0) {
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
+				<liferay-ui:icon image="unsubscribe" label="<%= true %>" url="<%= unsubscribeURL %>" />
 			</c:when>
 			<c:otherwise>
 				<portlet:actionURL var="subscribeURL">
@@ -129,7 +129,7 @@ if (rssURLParams.length() > 0) {
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
+				<liferay-ui:icon image="subscribe" label="<%= true %>" url="<%= subscribeURL %>" />
 			</c:otherwise>
 		</c:choose>
 	</c:if>

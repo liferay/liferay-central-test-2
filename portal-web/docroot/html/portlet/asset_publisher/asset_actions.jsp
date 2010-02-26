@@ -48,9 +48,9 @@ if (themeDisplay.getScopeGroup().isLayout()) {
 	<div class="lfr-meta-actions asset-actions">
 		<liferay-ui:icon
 			image="edit"
+			label="<%= showIconLabel %>"
 			message='<%= LanguageUtil.format(pageContext, "edit-x-x", new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle()}) %>'
 			url="<%= editPortletURL.toString() %>"
-			label="<%= showIconLabel %>"
 		/>
 	</div>
 </c:if>

@@ -35,10 +35,10 @@ exportAssetURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
 		<liferay-ui:icon
 			image='<%= "../file_system/small/" + extension %>'
-			message='<%= LanguageUtil.format(pageContext, "x-convert-x-to-x", new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle(), extension.toUpperCase()}) %>'
-			url="<%= exportAssetURL.toString() %>"
-			method="get"
 			label="<%= true %>"
+			message='<%= LanguageUtil.format(pageContext, "x-convert-x-to-x", new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle(), extension.toUpperCase()}) %>'
+			method="get"
+			url="<%= exportAssetURL.toString() %>"
 		/>
 
 	<%
