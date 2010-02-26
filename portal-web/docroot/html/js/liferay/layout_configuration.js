@@ -327,31 +327,28 @@ AUI().add(
 				var headerCSS = headerPortalCssPaths.concat(headerPortletCssPaths);
 				var footerCSS = footerPortalCssPaths.concat(footerPortletCssPaths);
 
-				A.each(
+				A.Get.css(
 					headerCSS,
-					function(item, index, collection) {
-						var styleSheet = A.Node.create('<link href="' + item + '" rel="stylesheet" type="text/css" />');
+					{
+						insertBefore: head.get('firstChild').getDOM(),
+						onSuccess: function(event) {
+							if (Liferay.Browser.isIe()) {
+								A.all('body link').appendTo(head);
 
-						head.prepend(styleSheet);
+								A.all('link.lfr-css-file').each(
+									function(item, index, collection) {
+										document.createStyleSheet(item.get('href'));
+									}
+								);
+							}
+						}
 					}
 				);
 
-				if (Liferay.Browser.isIe()) {
-					A.all('body link').appendTo(head);
-
-					A.all('link.lfr-css-file').each(
-						function(item, index, collection) {
-							document.createStyleSheet(item.href);
-						}
-					);
-				}
-
-				A.each(
+				A.Get.css(
 					footerCSS,
-					function(item, index, collection) {
-						var styleSheet = A.Node.create('<link href="' + item + '" rel="stylesheet" type="text/css" />');
-
-						body.append(styleSheet);
+					{
+						insertBefore: body.get('lastChild')
 					}
 				);
 			},
