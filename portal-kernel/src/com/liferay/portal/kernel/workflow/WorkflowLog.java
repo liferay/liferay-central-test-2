@@ -52,8 +52,8 @@ public interface WorkflowLog {
 
 	public long getUserId();
 
-	public long getWorkflowInstanceId();
-
 	public long getWorkflowLogId();
+
+	public long getWorkflowTaskId();
 
 }

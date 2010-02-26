@@ -63,12 +63,12 @@ public class DefaultWorkflowLog implements Serializable, WorkflowLog {
 		return _userId;
 	}
 
-	public long getWorkflowInstanceId() {
-		return _workflowInstanceId;
-	}
-
 	public long getWorkflowLogId() {
 		return _workflowLogId;
+	}
+
+	public long getWorkflowTaskId() {
+		return _workflowTaskId;
 	}
 
 	public void setComment(String comment) {
@@ -99,10 +99,6 @@ public class DefaultWorkflowLog implements Serializable, WorkflowLog {
 		_userId = userId;
 	}
 
-	public void setWorkflowInstanceId(long workflowInstanceId) {
-		_workflowInstanceId = workflowInstanceId;
-	}
-
 	public void setWorkflowLogId(long workflowLogId) {
 		_workflowLogId = workflowLogId;
 	}
@@ -114,7 +110,7 @@ public class DefaultWorkflowLog implements Serializable, WorkflowLog {
 	private String _state;
 	private int _type;
 	private long _userId;
-	private long _workflowInstanceId;
 	private long _workflowLogId;
+	private long _workflowTaskId;
 
 }
