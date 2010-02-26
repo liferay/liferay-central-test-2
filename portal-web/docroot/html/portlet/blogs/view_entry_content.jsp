@@ -86,7 +86,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 								<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 							</portlet:renderURL>
 
-							<liferay-ui:icon image="edit" url="<%= editEntryURL %>" label="<%= true %>" />
+							<liferay-ui:icon image="edit" label="<%= true %>" url="<%= editEntryURL %>" />
 						</td>
 					</c:if>
 
@@ -99,7 +99,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 								var="permissionsEntryURL"
 							/>
 
-							<liferay-ui:icon image="permissions" url="<%= permissionsEntryURL %>" label="<%= true %>" />
+							<liferay-ui:icon image="permissions" label="<%= true %>" url="<%= permissionsEntryURL %>" />
 						</td>
 					</c:if>
 
@@ -112,7 +112,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 								<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon-delete url="<%= deleteEntryURL %>" label="<%= true %>" />
+							<liferay-ui:icon-delete label="<%= true %>" url="<%= deleteEntryURL %>" />
 						</td>
 					</c:if>
 				</tr>
