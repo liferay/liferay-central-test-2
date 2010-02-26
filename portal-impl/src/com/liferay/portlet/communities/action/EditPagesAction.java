@@ -348,7 +348,7 @@ public class EditPagesAction extends PortletAction {
 				!GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),
 					ActionKeys.MANAGE_LAYOUTS) &&
-				!publishToLive && !hasUpdateLayoutPermission) {
+				!hasUpdateLayoutPermission && !publishToLive) {
 
 				throw new PrincipalException();
 			}
@@ -369,13 +369,21 @@ public class EditPagesAction extends PortletAction {
 		else if (group.isOrganization()) {
 			long organizationId = group.getClassPK();
 
+			String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
+
+			boolean publishToLive =
+				OrganizationPermissionUtil.contains(
+					permissionChecker, organizationId,
+					ActionKeys.PUBLISH_STAGING) &&
+				cmd.equals("publish_to_live");
+
 			if (!OrganizationPermissionUtil.contains(
 					permissionChecker, organizationId,
 					ActionKeys.APPROVE_PROPOSAL) &&
 				!OrganizationPermissionUtil.contains(
 					permissionChecker, organizationId,
 					ActionKeys.MANAGE_LAYOUTS) &&
-				!hasUpdateLayoutPermission) {
+				!hasUpdateLayoutPermission && !publishToLive) {
 
 				throw new PrincipalException();
 			}
