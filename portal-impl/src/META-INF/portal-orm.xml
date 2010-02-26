@@ -2692,6 +2692,7 @@
 			<transient name="webDAVStorageToken" />
 			<transient name="windowStates" />
 			<transient name="workflowHandlerClasses" />
+			<transient name="xmlRpcMethodClass" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PortletItemImpl" name="PortletItem">

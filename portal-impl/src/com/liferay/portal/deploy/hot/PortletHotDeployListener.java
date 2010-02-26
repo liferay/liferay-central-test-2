@@ -61,6 +61,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferay.portal.kernel.xmlrpc.Method;
 import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -82,6 +83,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
+import com.liferay.portal.xmlrpc.XmlRpcServlet;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.CustomUserAttributes;
 import com.liferay.portlet.PortletBagImpl;
@@ -220,6 +222,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			portlet.getSocialRequestInterpreterInstance());
 
 		WebDAVUtil.deleteStorage(portlet.getWebDAVStorageInstance());
+
+		XmlRpcServlet.unregisterMethod(portlet.getXmlRpcMethodInstance());
 
 		List<AssetRendererFactory> assetRendererFactories =
 			portlet.getAssetRendererFactoryInstances();
@@ -673,6 +677,15 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			WebDAVUtil.addStorage(webDAVStorageInstance);
 		}
 
+		Method xmlRpcMethodInstance = null;
+
+		if (Validator.isNotNull(portlet.getXmlRpcMethodClass())) {
+			xmlRpcMethodInstance = (Method)portletClassLoader.loadClass(
+				portlet.getXmlRpcMethodClass()).newInstance();
+
+			XmlRpcServlet.registerMethod(xmlRpcMethodInstance);
+		}
+
 		ControlPanelEntry controlPanelEntryInstance = null;
 
 		if (Validator.isNotNull(portlet.getControlPanelEntryClass())) {
@@ -807,10 +820,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			portletDataHandlerInstance, portletLayoutListenerInstance,
 			pollerProcessorInstance, popMessageListenerInstance,
 			socialActivityInterpreterInstance, socialRequestInterpreterInstance,
-			webDAVStorageInstance, controlPanelEntryInstance,
-			assetRendererFactoryInstances, customAttributesDisplayInstances,
-			workflowHandlerInstances, preferencesValidatorInstance,
-			resourceBundles);
+			webDAVStorageInstance, xmlRpcMethodInstance,
+			controlPanelEntryInstance, assetRendererFactoryInstances,
+			customAttributesDisplayInstances, workflowHandlerInstances,
+			preferencesValidatorInstance, resourceBundles);
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 

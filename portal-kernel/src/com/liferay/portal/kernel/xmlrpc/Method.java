@@ -32,6 +32,10 @@ public interface Method {
 
 	public Response execute(long companyId) throws XmlRpcException;
 
+	public String getMethodName();
+
+	public String getToken();
+
 	public boolean setArguments(Object[] arguments);
 
 }

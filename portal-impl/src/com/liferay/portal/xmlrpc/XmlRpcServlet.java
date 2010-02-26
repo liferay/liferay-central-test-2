@@ -25,7 +25,6 @@ package com.liferay.portal.xmlrpc;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
@@ -40,12 +39,9 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,24 +54,52 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class XmlRpcServlet extends HttpServlet {
 
-	public void init(ServletConfig servletConfig) throws ServletException {
-		super.init(servletConfig);
+	public static void registerMethod(Method method) {
+		if (method == null) {
+			return;
+		}
 
-		Enumeration<String> enu = servletConfig.getInitParameterNames();
+		String token = method.getToken();
+		String methodName = method.getMethodName();
 
-		while (enu.hasMoreElements()) {
-			String paramName = enu.nextElement();
+		Map<String, Method> tokenMethods = _methodRegistry.get(token);
 
-			if (paramName.startsWith("methodName")) {
-				String suffix = paramName.substring("methodName".length());
+		if (tokenMethods == null) {
+			tokenMethods = new HashMap<String, Method>();
 
-				String methodName = servletConfig.getInitParameter(paramName);
-				String className = servletConfig.getInitParameter(
-					"className" + suffix);
+			_methodRegistry.put(token, tokenMethods);
+		}
 
-				_methodRegistry.put(
-					methodName, (Method)InstancePool.get(className));
-			}
+		Method registeredMethod = tokenMethods.get(methodName);
+
+		if (registeredMethod != null) {
+			_log.error(
+				"There is already an XML-RPC method registered with name " +
+					methodName + " at " + token);
+		}
+		else {
+			tokenMethods.put(methodName, method);
+		}
+	}
+
+	public static void unregisterMethod(Method method) {
+		if (method == null) {
+			return;
+		}
+
+		String token = method.getToken();
+		String methodName = method.getMethodName();
+
+		Map<String, Method> tokenMethods = _methodRegistry.get(token);
+
+		if (tokenMethods == null) {
+			return;
+		}
+
+		tokenMethods.remove(methodName);
+
+		if (tokenMethods.isEmpty()) {
+			_methodRegistry.remove(token);
 		}
 	}
 
@@ -87,6 +111,8 @@ public class XmlRpcServlet extends HttpServlet {
 		try {
 			long companyId = PortalInstances.getCompanyId(request);
 
+			String token = getToken(request);
+
 			InputStream is = request.getInputStream();
 
 			String xml = StringUtil.read(is);
@@ -96,7 +122,7 @@ public class XmlRpcServlet extends HttpServlet {
 			String methodName = (String)methodTuple.getObject(0);
 			Object[] args = (Object[])methodTuple.getObject(1);
 
-			xmlRpcResponse = invokeMethod(companyId, methodName, args);
+			xmlRpcResponse = invokeMethod(companyId, token, methodName, args);
 		}
 		catch (IOException ioe) {
 			xmlRpcResponse = XmlRpcUtil.createFault(
@@ -131,11 +157,32 @@ public class XmlRpcServlet extends HttpServlet {
 		}
 	}
 
+	protected Method getMethod(String token, String methodName) {
+		Method method = null;
+
+		Map<String, Method> tokenMethods = _methodRegistry.get(token);
+
+		if (tokenMethods != null) {
+			method = tokenMethods.get(methodName);
+		}
+
+		return method;
+	}
+
+	protected String getToken(HttpServletRequest request) {
+		String token = request.getPathInfo();
+
+		token = token.replaceAll("^/+", StringPool.BLANK);
+		token = token.replaceAll("/+$", StringPool.BLANK);
+
+		return token;
+	}
+
 	protected Response invokeMethod(
-			long companyId, String methodName, Object[] arguments)
+			long companyId, String token, String methodName, Object[] arguments)
 		throws XmlRpcException {
 
-		Method method = _methodRegistry.get(methodName);
+		Method method = getMethod(token, methodName);
 
 		if (method == null) {
 			return XmlRpcUtil.createFault(
@@ -154,6 +201,7 @@ public class XmlRpcServlet extends HttpServlet {
 
 	private static Log _log = LogFactoryUtil.getLog(XmlRpcServlet.class);
 
-	private Map<String, Method> _methodRegistry = new HashMap<String, Method>();
+	private static Map<String, Map<String, Method>> _methodRegistry =
+		new HashMap<String, Map<String, Method>>();
 
 }

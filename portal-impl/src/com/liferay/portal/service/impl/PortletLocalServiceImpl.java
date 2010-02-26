@@ -1248,6 +1248,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setWebDAVStorageClass(GetterUtil.getString(
 					portlet.elementText("webdav-storage-class"),
 					portletModel.getWebDAVStorageClass()));
+				portletModel.setXmlRpcMethodClass(GetterUtil.getString(
+					portlet.elementText("xml-rpc-method-class"),
+					portletModel.getXmlRpcMethodClass()));
 				portletModel.setControlPanelEntryCategory(GetterUtil.getString(
 					portlet.elementText("control-panel-entry-category"),
 					portletModel.getControlPanelEntryCategory()));

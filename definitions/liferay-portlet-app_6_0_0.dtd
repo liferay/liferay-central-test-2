@@ -23,9 +23,10 @@ friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
 portlet-layout-listener-class?, poller-processor-class?,
 pop-message-listener-class?, social-activity-interpreter-class?,
 social-request-interpreter-class?, webdav-storage-token?, webdav-storage-class?,
-control-panel-entry-category?, control-panel-entry-weight?,
-control-panel-entry-class?, asset-renderer-factory*, custom-attributes-display*,
-workflow-handler*, preferences-company-wide?, preferences-unique-per-layout?,
+xml-rpc-method-class?, control-panel-entry-category?,
+control-panel-entry-weight?, control-panel-entry-class?,
+asset-renderer-factory*, custom-attributes-display*, workflow-handler*,
+preferences-company-wide?, preferences-unique-per-layout?,
 preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
 show-portlet-inactive?, action-url-redirect?, restore-current-view?,
 maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
@@ -313,6 +314,17 @@ See:
 http://docs.liferay.com/portal/6.0/javadocs/portal-impl/com/liferay/portlet/documentlibrary/webdav/DLWebDAVStorageImpl.html
 -->
 <!ELEMENT webdav-storage-class (#PCDATA)>
+
+<!--
+The xml-rpc-method-class value must be a class that implements
+com.liferay.portal.kernel.xmlrpc.Method and allows data to be exposed via the
+XML-RPC protocol.
+
+See:
+
+http://docs.liferay.com/portal/6.0/javadocs/portal-impl/com/liferay/portlet/blogs/utili/PingbackMethodImpl.html
+-->
+<!ELEMENT xml-rpc-method-class (#PCDATA)>
 
 <!--
 Set the control-panel-entry-category value to "my", "content", "portal" or

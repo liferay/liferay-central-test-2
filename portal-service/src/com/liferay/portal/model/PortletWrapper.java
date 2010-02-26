@@ -444,6 +444,18 @@ public class PortletWrapper implements Portlet {
 		return _portlet.getWebDAVStorageInstance();
 	}
 
+	public java.lang.String getXmlRpcMethodClass() {
+		return _portlet.getXmlRpcMethodClass();
+	}
+
+	public void setXmlRpcMethodClass(java.lang.String xmlRpcMethodClass) {
+		_portlet.setXmlRpcMethodClass(xmlRpcMethodClass);
+	}
+
+	public com.liferay.portal.kernel.xmlrpc.Method getXmlRpcMethodInstance() {
+		return _portlet.getXmlRpcMethodInstance();
+	}
+
 	public java.lang.String getControlPanelEntryCategory() {
 		return _portlet.getControlPanelEntryCategory();
 	}

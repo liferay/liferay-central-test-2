@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.xml.QName;
+import com.liferay.portal.kernel.xmlrpc.Method;
 import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.PluginSetting;
@@ -147,9 +148,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String pollerProcessorClass, String popMessageListenerClass,
 		String socialActivityInterpreterClass,
 		String socialRequestInterpreterClass, String webDAVStorageToken,
-		String webDAVStorageClass, String controlPanelEntryCategory,
-		double controlPanelEntryWeight, String controlPanelClass,
-		List<String> assetRendererFactoryClasses,
+		String webDAVStorageClass, String xmlRpcMethodClass,
+		String controlPanelEntryCategory, double controlPanelEntryWeight,
+		String controlPanelClass, List<String> assetRendererFactoryClasses,
 		List<String> customAttributesDisplayClasses,
 		List<String> workflowHandlerClasses, String defaultPreferences,
 		String preferencesValidator, boolean preferencesCompanyWide,
@@ -204,6 +205,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_socialRequestInterpreterClass = socialRequestInterpreterClass;
 		_webDAVStorageToken = webDAVStorageToken;
 		_webDAVStorageClass = webDAVStorageClass;
+		_xmlRpcMethodClass = xmlRpcMethodClass;
 		_controlPanelEntryCategory = controlPanelEntryCategory;
 		_controlPanelEntryWeight = controlPanelEntryWeight;
 		_controlPanelEntryClass = controlPanelClass;
@@ -1053,6 +1055,45 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 		return (WebDAVStorage)InstancePool.get(
 			getWebDAVStorageClass());
+	}
+
+	/**
+	 * Gets the name of the XML-RPC method class of the portlet.
+	 *
+	 * @return the name of the XML-RPC method class of the portlet
+	 */
+	public String getXmlRpcMethodClass() {
+		return _xmlRpcMethodClass;
+	}
+
+	/**
+	 * Sets the name of the XML-RPC method class of the portlet.
+	 *
+	 * @param xmlRpcMethodClass the name of the XML-RPC method class of the
+	 *		  portlet
+	 */
+	public void setXmlRpcMethodClass(String xmlRpcMethodClass) {
+		_xmlRpcMethodClass = xmlRpcMethodClass;
+	}
+
+	/**
+	 * Gets the name of the XML-RPC method instance of the portlet.
+	 *
+	 * @return the name of the XML-RPC method instance of the portlet
+	 */
+	public Method getXmlRpcMethodInstance() {
+		if (Validator.isNull(getXmlRpcMethodClass())) {
+			return null;
+		}
+
+		if (_portletApp.isWARFile()) {
+			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+				getRootPortletId());
+
+			return portletBagImpl.getXmlRpcMethodInstance();
+		}
+
+		return (Method)InstancePool.get(getXmlRpcMethodClass());
 	}
 
 	/**
@@ -3017,9 +3058,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getPortletLayoutListenerClass(), getPollerProcessorClass(),
 			getPopMessageListenerClass(), getSocialActivityInterpreterClass(),
 			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
-			getWebDAVStorageClass(), getControlPanelEntryCategory(),
-			getControlPanelEntryWeight(), getControlPanelEntryClass(),
-			getAssetRendererFactoryClasses(),
+			getWebDAVStorageClass(), getXmlRpcMethodClass(),
+			getControlPanelEntryCategory(), getControlPanelEntryWeight(),
+			getControlPanelEntryClass(), getAssetRendererFactoryClasses(),
 			getCustomAttributesDisplayClasses(), getWorkflowHandlerClasses(),
 			getDefaultPreferences(), getPreferencesValidator(),
 			isPreferencesCompanyWide(),	isPreferencesUniquePerLayout(),
@@ -3201,6 +3242,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the WebDAV storage class of the portlet.
 	 */
 	private String _webDAVStorageClass;
+
+	/**
+	 * The name of the XML-RPC method class of the portlet.
+	 */
+	private String _xmlRpcMethodClass;
 
 	/**
 	 * The default preferences of the portlet.

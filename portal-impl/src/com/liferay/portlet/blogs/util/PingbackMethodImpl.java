@@ -156,6 +156,14 @@ public class PingbackMethodImpl implements Method {
 		}
 	}
 
+	public String getMethodName() {
+		return "pingback.ping";
+	}
+
+	public String getToken() {
+		return "pingback";
+	}
+
 	public boolean setArguments(Object[] arguments) {
 		try {
 			_sourceUri = (String)arguments[0];

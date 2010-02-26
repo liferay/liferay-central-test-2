@@ -61,6 +61,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.kernel.xmlrpc.Method;
 import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
@@ -103,6 +104,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
+import com.liferay.portal.xmlrpc.XmlRpcServlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
@@ -360,6 +362,17 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			initWebDAVStorages(portlets);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize XML-RPC methods");
+		}
+
+		try {
+			initXmlRpcMethods(portlets);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -1340,6 +1353,22 @@ public class MainServlet extends ActionServlet {
 			}
 
 			WorkflowHandlerRegistryUtil.register(workflowHandlers);
+		}
+	}
+
+	protected void initXmlRpcMethods(List<Portlet> portlets) throws Exception {
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			Method method = portlet.getXmlRpcMethodInstance();
+
+			if (!portlet.isActive() || (method == null)) {
+				continue;
+			}
+
+			XmlRpcServlet.registerMethod(method);
 		}
 	}
 

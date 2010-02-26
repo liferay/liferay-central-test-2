@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
+import com.liferay.portal.kernel.xmlrpc.Method;
 import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
@@ -73,7 +74,7 @@ public class PortletBagImpl implements PortletBag {
 		MessageListener popMessageListenerInstance,
 		SocialActivityInterpreter socialActivityInterpreterInstance,
 		SocialRequestInterpreter socialRequestInterpreterInstance,
-		WebDAVStorage webDAVStorageInstance,
+		WebDAVStorage webDAVStorageInstance, Method xmlRpcMethodInstance,
 		ControlPanelEntry controlPanelEntryInstance,
 		List<AssetRendererFactory> assetRendererFactoryInstances,
 		List<CustomAttributesDisplay> customAttributesDisplayInstances,
@@ -97,6 +98,7 @@ public class PortletBagImpl implements PortletBag {
 		_socialActivityInterpreterInstance = socialActivityInterpreterInstance;
 		_socialRequestInterpreterInstance = socialRequestInterpreterInstance;
 		_webDAVStorageInstance = webDAVStorageInstance;
+		_xmlRpcMethodInstance = xmlRpcMethodInstance;
 		_controlPanelEntryInstance = controlPanelEntryInstance;
 		_assetRendererFactoryInstances = assetRendererFactoryInstances;
 		_customAttributesDisplayInstances = customAttributesDisplayInstances;
@@ -115,7 +117,8 @@ public class PortletBagImpl implements PortletBag {
 			getPollerProcessorInstance(), getPopMessageListenerInstance(),
 			getSocialActivityInterpreterInstance(),
 			getSocialRequestInterpreterInstance(), getWebDAVStorageInstance(),
-			getControlPanelEntryInstance(), getAssetRendererFactoryInstances(),
+			getXmlRpcMethodInstance(), getControlPanelEntryInstance(),
+			getAssetRendererFactoryInstances(),
 			getCustomAttributesDisplayInstances(),
 			getWorkflowHandlerInstances(), getPreferencesValidatorInstance(),
 			getResourceBundles());
@@ -225,6 +228,10 @@ public class PortletBagImpl implements PortletBag {
 		return _workflowHandlerInstances;
 	}
 
+	public Method getXmlRpcMethodInstance() {
+		return _xmlRpcMethodInstance;
+	}
+
 	public void setPortletInstance(Portlet portletInstance) {
 		_portletInstance = portletInstance;
 	}
@@ -254,6 +261,7 @@ public class PortletBagImpl implements PortletBag {
 	private SocialRequestInterpreter _socialRequestInterpreterInstance;
 	private URLEncoder _urlEncoderInstance;
 	private WebDAVStorage _webDAVStorageInstance;
+	private Method _xmlRpcMethodInstance;
 	private List<WorkflowHandler> _workflowHandlerInstances;
 
 }

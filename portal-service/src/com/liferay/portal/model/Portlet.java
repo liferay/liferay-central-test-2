@@ -197,6 +197,12 @@ public interface Portlet extends PortletModel {
 
 	public com.liferay.portal.webdav.WebDAVStorage getWebDAVStorageInstance();
 
+	public java.lang.String getXmlRpcMethodClass();
+
+	public void setXmlRpcMethodClass(java.lang.String xmlRpcMethodClass);
+
+	public com.liferay.portal.kernel.xmlrpc.Method getXmlRpcMethodInstance();
+
 	public java.lang.String getControlPanelEntryCategory();
 
 	public void setControlPanelEntryCategory(
