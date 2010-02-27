@@ -991,7 +991,12 @@ AUI().add(
 					instance._resetButton.on(
 						'click',
 						function() {
-							instance._curPortlet.attr('style', '');
+							try {
+								instance._curPortlet.set('style', '');
+							}
+							catch (e) {
+								instance._curPortlet.set('style.cssText', '');
+							}
 
 							var customStyle = A.one('#lfr-custom-css-block-' + instance._curPortletWrapperId);
 
