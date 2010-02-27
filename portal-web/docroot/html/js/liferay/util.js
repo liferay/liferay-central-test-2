@@ -40,7 +40,7 @@ Liferay.Util = {
 		var instance = this;
 
 		AUI().use(
-			'node',
+			'aui-base',
 			function(A) {
 				var handleFocus = function(event) {
 					var target = event.target;
@@ -475,8 +475,7 @@ Liferay.Util = {
 		instance.addInputFocus();
 
 		AUI().ready(
-			'event',
-			'node',
+			'aui-base',
 			function(A) {
 				var interacting = false;
 
@@ -490,7 +489,7 @@ Liferay.Util = {
 				);
 
 				if (!interacting) {
-					el = A.get(el);
+					el = A.one(el);
 
 					try {
 						el.focus();
