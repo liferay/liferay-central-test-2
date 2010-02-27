@@ -16,6 +16,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -27,6 +28,7 @@ import java.io.File;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.tools.ant.DirectoryScanner;
 
@@ -75,6 +77,29 @@ public class SeleneseToJavaBuilder {
 			);*/
 
 			translate(basedir, files[i]);
+		}
+
+		Set<String> filesSet = SetUtil.fromArray(files);
+
+		ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setExcludes(
+			new String[] {
+				"**\\IterateThemeTest.java", "**\\StopSeleniumTest.java"
+			});
+		ds.setIncludes(new String[] {"**\\*Test.java"});
+
+		ds.scan();
+
+		files = ds.getIncludedFiles();
+
+		for (int i = 0; i < files.length; i++) {
+			if (!filesSet.contains(
+					files[i].substring(0, files[i].length() - 5) + ".html")) {
+
+				System.out.println("unused: " + files[i]);
+			}
 		}
 	}
 
