@@ -876,7 +876,7 @@ public class SourceFormatter {
 		}
 	}
 
-	private static String _getOldCopyright() throws IOException {
+	private static String _getOldCopyright() {
 		try {
 			return _fileUtil.read("old-copyright.txt");
 		}
@@ -905,24 +905,28 @@ public class SourceFormatter {
 		ds.setBasedir(basedir);
 		ds.setExcludes(
 			new String[] {
-				"**\\bin\\**", "**\\model\\*Clp.java", "**\\model\\*Model.java",
-				"**\\model\\*Soap.java", "**\\model\\*Wrapper.java",
+				"**\\bin\\**", "**\\model\\*Clp.java",
 				"**\\model\\impl\\*ModelImpl.java",
-				"**\\service\\*Service.java", "**\\service\\*ServiceClp.java",
-				"**\\service\\*ServiceFactory.java",
-				"**\\service\\*ServiceUtil.java",
-				"**\\service\\*ServiceWrapper.java",
-				"**\\service\\ClpSerializer.java",
+				"**\\service\\**\\model\\*Model.java",
+				"**\\service\\**\\model\\*Soap.java",
+				"**\\service\\**\\model\\*Wrapper.java",
+				"**\\service\\**\\service\\*Service.java",
+				"**\\service\\**\\service\\*ServiceClp.java",
+				"**\\service\\**\\service\\*ServiceFactory.java",
+				"**\\service\\**\\service\\*ServiceUtil.java",
+				"**\\service\\**\\service\\*ServiceWrapper.java",
+				"**\\service\\**\\service\\ClpSerializer.java",
+				"**\\service\\**\\service\\messaging\\*ClpMessageListener.java",
+				"**\\service\\**\\service\\persistence\\*Finder.java",
+				"**\\service\\**\\service\\persistence\\*Persistence.java",
+				"**\\service\\**\\service\\persistence\\*Util.java",
 				"**\\service\\base\\*ServiceBaseImpl.java",
 				"**\\service\\http\\*JSONSerializer.java",
 				"**\\service\\http\\*ServiceHttp.java",
 				"**\\service\\http\\*ServiceJSON.java",
 				"**\\service\\http\\*ServiceSoap.java",
-				"**\\service\\messaging\\*ClpMessageListener.java",
-				"**\\service\\persistence\\*Finder.java",
-				"**\\service\\persistence\\*Persistence.java",
 				"**\\service\\persistence\\*PersistenceImpl.java",
-				"**\\service\\persistence\\*Util.java", "**\\tmp\\**"
+				"**\\tmp\\**"
 			});
 		ds.setIncludes(new String[] {"**\\*.java"});
 
