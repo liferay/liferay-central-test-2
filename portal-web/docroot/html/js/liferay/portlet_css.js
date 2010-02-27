@@ -113,9 +113,10 @@ AUI().add(
 				if (!instance._backgroundColorPicker) {
 					instance._backgroundColorPicker = new A.ColorPicker(
 						{
+							triggerParent: backgroundColor.get('parentNode'),
 							zIndex: 9999
 						}
-					).render(backgroundColor.get('parentNode'));
+					).render(instance._currentPopup.get('boundingBox'));
 				}
 
 				var backgroundColorPicker = instance._backgroundColorPicker;
@@ -352,6 +353,8 @@ AUI().add(
 					portlet.setStyles(styling);
 				};
 
+				var popupBoundingBox = instance._currentPopup.get('boundingBox');
+
 				A.each(
 					[cTopColor, cRightColor, cBottomColor, cLeftColor],
 					function(item, index, collection) {
@@ -362,9 +365,10 @@ AUI().add(
 						if (!instance[borderLocation]) {
 							instance[borderLocation] = new A.ColorPicker(
 								{
+									triggerParent: item.get('parentNode'),
 									zIndex: 9999
 								}
-							).render(item.get('parentNode'));
+							).render(popupBoundingBox);
 						}
 
 						var borderColorPicker = instance[borderLocation];
@@ -1664,9 +1668,10 @@ AUI().add(
 				if (!instance._fontColorPicker) {
 					instance._fontColorPicker = new A.ColorPicker(
 						{
+							triggerParent: fontColor.get('parentNode'),
 							zIndex: 9999
 						}
-					).render(fontColor.get('parentNode'));
+					).render(instance._currentPopup.get('boundingBox'));
 				}
 
 				var fontColorPicker = instance._fontColorPicker;
