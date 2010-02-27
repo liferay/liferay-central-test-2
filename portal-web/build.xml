@@ -399,6 +399,10 @@
 					/>
 				</replaceregexp>
 
+				<replace file="docroot/html/js/aui/aui-base/aui-base.js">
+					<replacefilter token="var PATH_THEME_IMAGES = PATH_THEME_ROOT + '../images/';" value="var PATH_THEME_IMAGES = Liferay.ThemeDisplay.getPathThemeImages() + '/aui';" />
+				</replace>
+
 				<!-- CSS -->
 
 				<property name="alloy.core.css" value="reset.css,base.css,layout.css,form.css,icons.css,tool-item.css,widget.css,overlay.css,extras.css" />
