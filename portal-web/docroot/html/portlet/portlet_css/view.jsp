@@ -266,7 +266,7 @@
 					<legend><liferay-ui:message key="border-width" /></legend>
 
 					<div class="aui-column-content">
-						<aui:input checked="checked" inlineField="<%= true %>" label="same-for-all" name="lfr-use-for-all-width" type="checkbox" />
+						<aui:input checked="checked" cssClass="lfr-use-for-all" inlineField="<%= true %>" label="same-for-all" name="lfr-use-for-all-width" type="checkbox" />
 
 						<span class="aui-field-row">
 							<aui:input inlineField="<%= true %>" label="top" name="lfr-border-width-top" />
@@ -314,7 +314,7 @@
 					<legend><liferay-ui:message key="border-style" /></legend>
 
 					<div class="aui-column-content">
-						<aui:input checked="checked" label="same-for-all" name="lfr-use-for-all-style" type="checkbox" />
+						<aui:input checked="checked" cssClass="lfr-use-for-all" label="same-for-all" name="lfr-use-for-all-style" type="checkbox" />
 
 						<aui:select label="top" name="lfr-border-style-top">
 							<aui:option label="" value="" />
@@ -374,7 +374,7 @@
 					<legend><liferay-ui:message key="border-color" /></legend>
 
 					<div class="aui-column-content">
-						<aui:input checked="checked" label="same-for-all" name="lfr-use-for-all-color" type="checkbox" />
+						<aui:input checked="checked" cssClass="lfr-use-for-all" label="same-for-all" name="lfr-use-for-all-color" type="checkbox" />
 
 						<aui:input label="top" name="lfr-border-color-top" />
 
@@ -394,7 +394,7 @@
 					<legend><liferay-ui:message key="padding" /></legend>
 
 					<div class="aui-column-content">
-						<aui:input checked="checked" label="same-for-all" name="lfr-use-for-all-padding" type="checkbox" />
+						<aui:input checked="checked" cssClass="lfr-use-for-all" label="same-for-all" name="lfr-use-for-all-padding" type="checkbox" />
 
 						<span class="aui-field-row">
 							<aui:input inlineField="<%= true %>" label="top" name="lfr-padding-top" />
@@ -442,7 +442,7 @@
 					<legend><liferay-ui:message key="margin" /></legend>
 
 					<div class="aui-column-content">
-						<aui:input checked="checked" label="same-for-all" name="lfr-use-for-all-margin" type="checkbox" />
+						<aui:input checked="checked" cssClass="lfr-use-for-all" label="same-for-all" name="lfr-use-for-all-margin" type="checkbox" />
 
 						<span class="aui-field-row">
 							<aui:input inlineField="<%= true %>" label="top" name="lfr-margin-top" />

@@ -667,9 +667,9 @@ AUI().add(
 
 					// Border
 
-					instance._ufaBorderWidth = instance._getNodeById('lfr-use-for-all-width');
-					instance._ufaBorderStyle = instance._getNodeById('lfr-use-for-all-style');
-					instance._ufaBorderColor = instance._getNodeById('lfr-use-for-all-color');
+					instance._ufaBorderWidth = instance._getNodeById('lfr-use-for-all-widthCheckbox');
+					instance._ufaBorderStyle = instance._getNodeById('lfr-use-for-all-styleCheckbox');
+					instance._ufaBorderColor = instance._getNodeById('lfr-use-for-all-colorCheckbox');
 
 					instance._borderTopInt = instance._getNodeById('lfr-border-width-top');
 					instance._borderTopUnit = instance._getNodeById('lfr-border-width-top-unit');
@@ -692,8 +692,8 @@ AUI().add(
 
 					// Spacing
 
-					instance._ufaPadding = instance._getNodeById('lfr-use-for-all-padding');
-					instance._ufaMargin = instance._getNodeById('lfr-use-for-all-margin');
+					instance._ufaPadding = instance._getNodeById('lfr-use-for-all-paddingCheckbox');
+					instance._ufaMargin = instance._getNodeById('lfr-use-for-all-marginCheckbox');
 
 					instance._paddingTopInt = instance._getNodeById('lfr-padding-top');
 					instance._paddingTopUnit = instance._getNodeById('lfr-padding-top-unit');
@@ -886,7 +886,7 @@ AUI().add(
 					instance._spacingStyles();
 					instance._cssStyles();
 
-					var useForAll = newPanel.all('.lfr-use-for-all');
+					var useForAll = newPanel.all('.lfr-use-for-all input[type=checkbox]');
 
 					var handleForms = function(item, index, collection) {
 						var checkBox = item;
@@ -899,7 +899,7 @@ AUI().add(
 							function(holderItem, holderIndex, holderCollection) {
 								if (holderIndex > 1) {
 									var fields = holderItem.all('input, select');
-									var colorPickerImages = holderItem.all('.lfr-colorpicker-img');
+									var colorPickerImages = holderItem.all('.aui-tool-item');
 
 									var action = 'show';
 									var disabled = false;
