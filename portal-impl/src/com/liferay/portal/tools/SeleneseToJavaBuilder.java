@@ -54,21 +54,24 @@ public class SeleneseToJavaBuilder {
 		DirectoryScanner ds = new DirectoryScanner();
 
 		ds.setBasedir(basedir);
-		ds.setIncludes(new String[] {"**\\*.html"});
+		ds.setExcludes(
+			new String[] {
+				"**\\IterateThemeTest.java", "**\\StopSeleniumTest.java"
+			});
+		ds.setIncludes(new String[] {"**\\*Test.html", "**\\*Test.java"});
 
 		ds.scan();
 
-		String[] files = ds.getIncludedFiles();
+		Set<String> fileNames = SetUtil.fromArray(ds.getIncludedFiles());
 
-		for (int i = 0; i < files.length; i++) {
+		for (String fileName : fileNames) {
 
 			// I would have preferred to use XlateHtmlSeleneseToJava, but it
 			// is horribly out of sync with Selenium IDE and generates incorrect
 			// code.
 
-			/*File file = new File(basedir + "/" + files[i]);
-
-			String input = StringUtil.replace(file.toString(), "\\", "/");
+			/*String input = StringUtil.replace(
+				basedir + "/" + fileName, "\\", "/");
 
 			XlateHtmlSeleneseToJava.main(
 				new String[] {
@@ -76,29 +79,16 @@ public class SeleneseToJavaBuilder {
 				}
 			);*/
 
-			translate(basedir, files[i]);
-		}
+			if (fileName.endsWith("Test.html")) {
+				translate(basedir, fileName);
+			}
+			else if (fileName.endsWith("Test.java")) {
+				if (!fileNames.contains(
+						fileName.substring(0, fileName.length() - 5) +
+							".html")) {
 
-		Set<String> filesSet = SetUtil.fromArray(files);
-
-		ds = new DirectoryScanner();
-
-		ds.setBasedir(basedir);
-		ds.setExcludes(
-			new String[] {
-				"**\\IterateThemeTest.java", "**\\StopSeleniumTest.java"
-			});
-		ds.setIncludes(new String[] {"**\\*Test.java"});
-
-		ds.scan();
-
-		files = ds.getIncludedFiles();
-
-		for (int i = 0; i < files.length; i++) {
-			if (!filesSet.contains(
-					files[i].substring(0, files[i].length() - 5) + ".html")) {
-
-				System.out.println("unused: " + files[i]);
+					System.out.println("unused: " + fileName);
+				}
 			}
 		}
 	}
@@ -150,19 +140,20 @@ public class SeleneseToJavaBuilder {
 		return params;
 	}
 
-	protected void translate(String basedir, String file) throws Exception {
-		file = StringUtil.replace(
-			file, StringPool.BACK_SLASH, StringPool.SLASH);
+	protected void translate(String basedir, String fileName) throws Exception {
+		fileName = StringUtil.replace(
+			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-		int x = file.lastIndexOf(StringPool.SLASH);
-		int y = file.indexOf(StringPool.PERIOD);
+		int x = fileName.lastIndexOf(StringPool.SLASH);
+		int y = fileName.indexOf(StringPool.PERIOD);
 
 		String testPackagePath = StringUtil.replace(
-			file.substring(0, x), StringPool.SLASH, StringPool.PERIOD);
-		String testName = file.substring(x + 1, y);
+			fileName.substring(0, x), StringPool.SLASH, StringPool.PERIOD);
+		String testName = fileName.substring(x + 1, y);
 		String testMethodName =
 			"test" + testName.substring(0, testName.length() - 4);
-		String testFileName = basedir + "/" + file.substring(0, y) + ".java";
+		String testFileName =
+			basedir + "/" + fileName.substring(0, y) + ".java";
 
 		StringBundler sb = new StringBundler();
 
@@ -184,7 +175,7 @@ public class SeleneseToJavaBuilder {
 		sb.append(testMethodName);
 		sb.append("() throws Exception {");
 
-		String xml = FileUtil.read(basedir + "/" + file);
+		String xml = FileUtil.read(basedir + "/" + fileName);
 
 		if ((xml.indexOf("<title>" + testName + "</title>") == -1) ||
 			(xml.indexOf("colspan=\"3\">" + testName + "</td>") == -1)) {
@@ -195,19 +186,19 @@ public class SeleneseToJavaBuilder {
 		if (xml.indexOf("&gt;") != -1) {
 			xml = StringUtil.replace(xml, "&gt;", ">");
 
-			FileUtil.write(basedir + "/" + file, xml);
+			FileUtil.write(basedir + "/" + fileName, xml);
 		}
 
 		if (xml.indexOf("&lt;") != -1) {
 			xml = StringUtil.replace(xml, "&lt;", "<");
 
-			FileUtil.write(basedir + "/" + file, xml);
+			FileUtil.write(basedir + "/" + fileName, xml);
 		}
 
 		if (xml.indexOf("&quot;") != -1) {
 			xml = StringUtil.replace(xml, "&quot;", "\"");
 
-			FileUtil.write(basedir + "/" + file, xml);
+			FileUtil.write(basedir + "/" + fileName, xml);
 		}
 
 		x = xml.indexOf("<tbody>");
