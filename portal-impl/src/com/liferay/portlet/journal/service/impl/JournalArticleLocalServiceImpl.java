@@ -2412,7 +2412,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		String articleURL = PortalUtil.getControlPanelFullURL(
-			serviceContext.getScopeGroupId(),  PortletKeys.JOURNAL, null);
+			serviceContext.getScopeGroupId(), PortletKeys.JOURNAL, null);
 
 		if (Validator.isNull(articleURL)) {
 			return;
