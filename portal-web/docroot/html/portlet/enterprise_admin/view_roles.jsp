@@ -39,81 +39,78 @@ headerNames.add(StringPool.BLANK);
 	searchContainer="<%= searchContainer %>"
 />
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+<%
+RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-	<%
-	RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
+int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj());
 
-	int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj());
+searchContainer.setTotal(total);
 
-	searchContainer.setTotal(total);
+List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-	List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+searchContainer.setResults(results);
 
-	searchContainer.setResults(results);
+portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
+%>
 
-	portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
-	%>
+<aui:input name="rolesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
-	<aui:input name="rolesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+<div class="separator"><!-- --></div>
 
-	<div class="separator"><!-- --></div>
+<%
+List resultRows = searchContainer.getResultRows();
 
-	<%
-	List resultRows = searchContainer.getResultRows();
+for (int i = 0; i < results.size(); i++) {
+	Role role = (Role)results.get(i);
 
-	for (int i = 0; i < results.size(); i++) {
-		Role role = (Role)results.get(i);
+	role = role.toEscapedModel();
 
-		role = role.toEscapedModel();
+	ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
-		ResultRow row = new ResultRow(role, role.getRoleId(), i);
+	PortletURL rowURL = null;
 
-		PortletURL rowURL = null;
+	if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE)) {
+		rowURL = renderResponse.createRenderURL();
 
-		if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE)) {
-			rowURL = renderResponse.createRenderURL();
-
-			rowURL.setParameter("struts_action", "/enterprise_admin/edit_role");
-			rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
-			rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
-		}
-
-		// Name
-
-		row.addText(role.getTitle(locale), rowURL);
-
-		// Type
-
-		row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()), rowURL);
-
-		// Subtype
-
-		if ((PropsValues.ROLES_COMMUNITY_SUBTYPES.length > 0) ||
-			(PropsValues.ROLES_ORGANIZATION_SUBTYPES.length > 0) ||
-			(PropsValues.ROLES_REGULAR_SUBTYPES.length > 0)) {
-
-			row.addText(LanguageUtil.get(pageContext, role.getSubtype()), rowURL);
-		}
-
-		// Description
-
-		row.addText(role.getDescription(), rowURL);
-
-		// Action
-
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/role_action.jsp");
-
-		// CSS
-
-		row.setClassName(EnterpriseAdminUtil.getCssClassName(role));
-		row.setClassHoverName(EnterpriseAdminUtil.getCssClassName(role));
-
-		// Add result row
-
-		resultRows.add(row);
+		rowURL.setParameter("struts_action", "/enterprise_admin/edit_role");
+		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
+		rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 	}
-	%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</c:if>
+	// Name
+
+	row.addText(role.getTitle(locale), rowURL);
+
+	// Type
+
+	row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()), rowURL);
+
+	// Subtype
+
+	if ((PropsValues.ROLES_COMMUNITY_SUBTYPES.length > 0) ||
+		(PropsValues.ROLES_ORGANIZATION_SUBTYPES.length > 0) ||
+		(PropsValues.ROLES_REGULAR_SUBTYPES.length > 0)) {
+
+		row.addText(LanguageUtil.get(pageContext, role.getSubtype()), rowURL);
+	}
+
+	// Description
+
+	row.addText(role.getDescription(), rowURL);
+
+	// Action
+
+	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/role_action.jsp");
+
+	// CSS
+
+	row.setClassName(EnterpriseAdminUtil.getCssClassName(role));
+	row.setClassHoverName(EnterpriseAdminUtil.getCssClassName(role));
+
+	// Add result row
+
+	resultRows.add(row);
+}
+%>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

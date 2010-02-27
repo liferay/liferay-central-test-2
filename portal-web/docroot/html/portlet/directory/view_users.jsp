@@ -78,65 +78,62 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 		page="/html/portlet/directory/user_search.jsp"
 	/>
 
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<%
+	LinkedHashMap userParams = new LinkedHashMap();
 
-		<%
-		LinkedHashMap userParams = new LinkedHashMap();
+	if (organizationId > 0) {
+		userParams.put("usersOrgs", new Long(organizationId));
+	}
 
-		if (organizationId > 0) {
-			userParams.put("usersOrgs", new Long(organizationId));
-		}
+	if (userGroupId > 0) {
+		userParams.put("usersUserGroups", new Long(userGroupId));
+	}
+	%>
 
-		if (userGroupId > 0) {
-			userParams.put("usersUserGroups", new Long(userGroupId));
-		}
-		%>
+	<liferay-ui:search-container-results>
+		<c:choose>
+			<c:when test="<%= PropsValues.USERS_SEARCH_WITH_INDEX %>">
+				<%@ include file="/html/portlet/enterprise_admin/user_search_results_index.jspf" %>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/html/portlet/enterprise_admin/user_search_results_database.jspf" %>
+			</c:otherwise>
+		</c:choose>
+	</liferay-ui:search-container-results>
 
-		<liferay-ui:search-container-results>
-			<c:choose>
-				<c:when test="<%= PropsValues.USERS_SEARCH_WITH_INDEX %>">
-					<%@ include file="/html/portlet/enterprise_admin/user_search_results_index.jspf" %>
-				</c:when>
-				<c:otherwise>
-					<%@ include file="/html/portlet/enterprise_admin/user_search_results_database.jspf" %>
-				</c:otherwise>
-			</c:choose>
-		</liferay-ui:search-container-results>
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.User"
+		escapedModel="<%= true %>"
+		keyProperty="userId"
+		modelVar="user2"
+	>
+		<liferay-portlet:renderURL varImpl="rowURL">
+			<portlet:param name="struts_action" value="/directory/view_user" />
+			<portlet:param name="tabs1" value="<%= HtmlUtil.escape(tabs1) %>" />
+			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+		</liferay-portlet:renderURL>
 
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.User"
-			escapedModel="<%= true %>"
-			keyProperty="userId"
-			modelVar="user2"
-		>
-			<liferay-portlet:renderURL varImpl="rowURL">
-				<portlet:param name="struts_action" value="/directory/view_user" />
-				<portlet:param name="tabs1" value="<%= HtmlUtil.escape(tabs1) %>" />
-				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-				<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
-			</liferay-portlet:renderURL>
+		<%@ include file="/html/portlet/directory/user/search_columns.jspf" %>
+	</liferay-ui:search-container-row>
 
-			<%@ include file="/html/portlet/directory/user/search_columns.jspf" %>
-		</liferay-ui:search-container-row>
-
-		<c:if test="<%= (organization != null) || (userGroup != null) %>">
-			<br />
-		</c:if>
-
-		<c:if test="<%= organization != null %>">
-			<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
-
-			<liferay-ui:message key="filter-by-organization" />: <%= HtmlUtil.escape(organization.getName()) %><br />
-		</c:if>
-
-		<c:if test="<%= userGroup != null %>">
-			<aui:input name="<%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
-
-			<liferay-ui:message key="filter-by-user-group" />: <%= userGroup.getName() %><br />
-		</c:if>
-
-		<div class="separator"><!-- --></div>
-
-		<liferay-ui:search-iterator />
+	<c:if test="<%= (organization != null) || (userGroup != null) %>">
+		<br />
 	</c:if>
+
+	<c:if test="<%= organization != null %>">
+		<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+
+		<liferay-ui:message key="filter-by-organization" />: <%= HtmlUtil.escape(organization.getName()) %><br />
+	</c:if>
+
+	<c:if test="<%= userGroup != null %>">
+		<aui:input name="<%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
+
+		<liferay-ui:message key="filter-by-user-group" />: <%= userGroup.getName() %><br />
+	</c:if>
+
+	<div class="separator"><!-- --></div>
+
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>

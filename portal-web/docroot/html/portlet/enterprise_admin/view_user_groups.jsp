@@ -45,57 +45,54 @@ if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP))
 		page="/html/portlet/enterprise_admin/user_group_search.jsp"
 	/>
 
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<%
+	UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+	%>
 
-		<%
-		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
-		%>
+	<liferay-ui:search-container-results
+		results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+		total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null) %>"
+	/>
 
-		<liferay-ui:search-container-results
-			results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
-			total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null) %>"
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.UserGroup"
+		escapedModel="<%= true %>"
+		keyProperty="userGroupId"
+		modelVar="userGroup"
+	>
+		<portlet:renderURL var="rowURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
+			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+			<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
+			name="name"
+			orderable="<%= true %>"
+			property="name"
 		/>
 
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.UserGroup"
-			escapedModel="<%= true %>"
-			keyProperty="userGroupId"
-			modelVar="userGroup"
-		>
-			<portlet:renderURL var="rowURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
-				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-				<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
-			</portlet:renderURL>
+		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
+			name="description"
+			orderable="<%= true %>"
+			property="description"
+		/>
 
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="name"
-				orderable="<%= true %>"
-				property="name"
-			/>
+		<liferay-ui:search-container-column-jsp
+			align="right"
+			path="/html/portlet/enterprise_admin/user_group_action.jsp"
+		/>
+	</liferay-ui:search-container-row>
 
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="description"
-				orderable="<%= true %>"
-				property="description"
-			/>
+	<div class="separator"><!-- --></div>
 
-			<liferay-ui:search-container-column-jsp
-				align="right"
-				path="/html/portlet/enterprise_admin/user_group_action.jsp"
-			/>
-		</liferay-ui:search-container-row>
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
+		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteUserGroups();" %>' value="update-associations" />
 
-		<div class="separator"><!-- --></div>
-
-		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
-			<aui:button onClick='<%= renderResponse.getNamespace() + "deleteUserGroups();" %>' value="update-associations" />
-
-			<br /><br />
-		</c:if>
-
-		<liferay-ui:search-iterator />
+		<br /><br />
 	</c:if>
+
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>

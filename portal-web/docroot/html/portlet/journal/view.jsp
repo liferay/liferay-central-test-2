@@ -55,94 +55,91 @@ portletURL.setParameter("tabs1", tabs1);
 				searchContainer="<%= searchContainer %>"
 			/>
 
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<%
+			ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
+			%>
 
-				<%
-				ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
-				%>
+			<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
 
-				<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
+			<div class="separator article-separator"><!-- --></div>
 
-				<div class="separator article-separator"><!-- --></div>
+			<aui:button-row>
+				<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticles();" %>' value="expire" />
 
-				<aui:button-row>
-					<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticles();" %>' value="expire" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticles();" %>' value="delete" />
+			</aui:button-row>
 
-					<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticles();" %>' value="delete" />
-				</aui:button-row>
+			<br /><br />
 
-				<br /><br />
+			<%
+			List resultRows = searchContainer.getResultRows();
 
-				<%
-				List resultRows = searchContainer.getResultRows();
+			for (int i = 0; i < results.size(); i++) {
+				JournalArticle article = (JournalArticle)results.get(i);
 
-				for (int i = 0; i < results.size(); i++) {
-					JournalArticle article = (JournalArticle)results.get(i);
+				article = article.toEscapedModel();
 
-					article = article.toEscapedModel();
+				ResultRow row = new ResultRow(article, article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion(), i);
 
-					ResultRow row = new ResultRow(article, article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion(), i);
+				PortletURL rowURL = renderResponse.createRenderURL();
 
-					PortletURL rowURL = renderResponse.createRenderURL();
+				rowURL.setParameter("struts_action", "/journal/edit_article");
+				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("groupId", String.valueOf(article.getGroupId()));
+				rowURL.setParameter("articleId", article.getArticleId());
+				rowURL.setParameter("version", String.valueOf(article.getVersion()));
 
-					rowURL.setParameter("struts_action", "/journal/edit_article");
-					rowURL.setParameter("redirect", currentURL);
-					rowURL.setParameter("groupId", String.valueOf(article.getGroupId()));
-					rowURL.setParameter("articleId", article.getArticleId());
-					rowURL.setParameter("version", String.valueOf(article.getVersion()));
+				// Article id
 
-					// Article id
+				row.addText(article.getArticleId(), rowURL);
 
-					row.addText(article.getArticleId(), rowURL);
+				// Title
 
-					// Title
+				row.addText(article.getTitle(), rowURL);
 
-					row.addText(article.getTitle(), rowURL);
+				// Version
 
-					// Version
+				row.addText(String.valueOf(article.getVersion()), rowURL);
 
-					row.addText(String.valueOf(article.getVersion()), rowURL);
+				// Status
 
-					// Status
+				String status = null;
 
-					String status = null;
-
-					if (article.isExpired()) {
-						status = "expired";
-					}
-					else if (article.isApproved()) {
-						status = "approved";
-					}
-					else {
-						status = "not-approved";
-					}
-
-					row.addText(LanguageUtil.get(pageContext, status), rowURL);
-
-					// Modified date
-
-					row.addText(dateFormatDateTime.format(article.getModifiedDate()), rowURL);
-
-					// Display date
-
-					row.addText(dateFormatDateTime.format(article.getDisplayDate()), rowURL);
-
-					// Author
-
-					row.addText(PortalUtil.getUserName(article.getUserId(), article.getUserName()), rowURL);
-
-					// Action
-
-					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/article_action.jsp");
-
-					// Add result row
-
-					resultRows.add(row);
+				if (article.isExpired()) {
+					status = "expired";
 				}
-				%>
+				else if (article.isApproved()) {
+					status = "approved";
+				}
+				else {
+					status = "not-approved";
+				}
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:if>
+				row.addText(LanguageUtil.get(pageContext, status), rowURL);
+
+				// Modified date
+
+				row.addText(dateFormatDateTime.format(article.getModifiedDate()), rowURL);
+
+				// Display date
+
+				row.addText(dateFormatDateTime.format(article.getDisplayDate()), rowURL);
+
+				// Author
+
+				row.addText(PortalUtil.getUserName(article.getUserId(), article.getUserName()), rowURL);
+
+				// Action
+
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/article_action.jsp");
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:when>
 		<c:when test='<%= tabs1.equals("structures") %>'>
 			<aui:input name="groupId" type="hidden" />
@@ -165,62 +162,59 @@ portletURL.setParameter("tabs1", tabs1);
 				searchContainer="<%= searchContainer %>"
 			/>
 
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<%
+			StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
+			%>
 
-				<%
-				StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
-				%>
+			<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
 
-				<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
+			<div class="separator"><!-- --></div>
 
-				<div class="separator"><!-- --></div>
+			<aui:button onClick='<%= renderResponse.getNamespace() + "deleteStructures();" %>' value="delete" />
 
-				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteStructures();" %>' value="delete" />
+			<br /><br />
 
-				<br /><br />
+			<%
+			List resultRows = searchContainer.getResultRows();
 
-				<%
-				List resultRows = searchContainer.getResultRows();
+			for (int i = 0; i < results.size(); i++) {
+				JournalStructure structure = (JournalStructure)results.get(i);
 
-				for (int i = 0; i < results.size(); i++) {
-					JournalStructure structure = (JournalStructure)results.get(i);
+				structure = structure.toEscapedModel();
 
-					structure = structure.toEscapedModel();
+				ResultRow row = new ResultRow(structure, structure.getStructureId(), i);
 
-					ResultRow row = new ResultRow(structure, structure.getStructureId(), i);
+				PortletURL rowURL = renderResponse.createRenderURL();
 
-					PortletURL rowURL = renderResponse.createRenderURL();
+				rowURL.setParameter("struts_action", "/journal/edit_structure");
+				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("groupId", String.valueOf(structure.getGroupId()));
+				rowURL.setParameter("structureId", structure.getStructureId());
 
-					rowURL.setParameter("struts_action", "/journal/edit_structure");
-					rowURL.setParameter("redirect", currentURL);
-					rowURL.setParameter("groupId", String.valueOf(structure.getGroupId()));
-					rowURL.setParameter("structureId", structure.getStructureId());
+				// Structure id
 
-					// Structure id
+				row.addText(structure.getStructureId(), rowURL);
 
-					row.addText(structure.getStructureId(), rowURL);
+				// Name and description
 
-					// Name and description
-
-					if (Validator.isNotNull(structure.getDescription())) {
-						row.addText(structure.getName().concat("<br />").concat(structure.getDescription()), rowURL);
-					}
-					else {
-						row.addText(structure.getName(), rowURL);
-					}
-
-					// Action
-
-					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/structure_action.jsp");
-
-					// Add result row
-
-					resultRows.add(row);
+				if (Validator.isNotNull(structure.getDescription())) {
+					row.addText(structure.getName().concat("<br />").concat(structure.getDescription()), rowURL);
 				}
-				%>
+				else {
+					row.addText(structure.getName(), rowURL);
+				}
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:if>
+				// Action
+
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/structure_action.jsp");
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:when>
 		<c:when test='<%= tabs1.equals("templates") %>'>
 			<aui:input name="groupId" type="hidden" />
@@ -243,61 +237,58 @@ portletURL.setParameter("tabs1", tabs1);
 				searchContainer="<%= searchContainer %>"
 			/>
 
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<%
+			TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearchTerms();
 
-				<%
-				TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearchTerms();
+			searchTerms.setStructureIdComparator(StringPool.EQUAL);
+			%>
 
-				searchTerms.setStructureIdComparator(StringPool.EQUAL);
-				%>
+			<%@ include file="/html/portlet/journal/template_search_results.jspf" %>
 
-				<%@ include file="/html/portlet/journal/template_search_results.jspf" %>
+			<div class="separator"><!-- --></div>
 
-				<div class="separator"><!-- --></div>
+			<aui:button onClick='<%= renderResponse.getNamespace() + "deleteTemplates();" %>' value="delete" />
 
-				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteTemplates();" %>' value="delete" />
+			<br /><br />
 
-				<br /><br />
+			<%
+			List resultRows = searchContainer.getResultRows();
 
-				<%
-				List resultRows = searchContainer.getResultRows();
+			for (int i = 0; i < results.size(); i++) {
+				JournalTemplate template = (JournalTemplate)results.get(i);
 
-				for (int i = 0; i < results.size(); i++) {
-					JournalTemplate template = (JournalTemplate)results.get(i);
+				template = template.toEscapedModel();
 
-					template = template.toEscapedModel();
+				ResultRow row = new ResultRow(template, template.getTemplateId(), i);
 
-					ResultRow row = new ResultRow(template, template.getTemplateId(), i);
+				PortletURL rowURL = renderResponse.createRenderURL();
 
-					PortletURL rowURL = renderResponse.createRenderURL();
+				rowURL.setParameter("struts_action", "/journal/edit_template");
+				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("groupId", String.valueOf(template.getGroupId()));
+				rowURL.setParameter("templateId", template.getTemplateId());
 
-					rowURL.setParameter("struts_action", "/journal/edit_template");
-					rowURL.setParameter("redirect", currentURL);
-					rowURL.setParameter("groupId", String.valueOf(template.getGroupId()));
-					rowURL.setParameter("templateId", template.getTemplateId());
+				row.setParameter("rowHREF", rowURL.toString());
 
-					row.setParameter("rowHREF", rowURL.toString());
+				// Template id
 
-					// Template id
+				row.addText(template.getTemplateId(), rowURL);
 
-					row.addText(template.getTemplateId(), rowURL);
+				// Name, description, and image
 
-					// Name, description, and image
+				row.addJSP("/html/portlet/journal/template_description.jsp");
 
-					row.addJSP("/html/portlet/journal/template_description.jsp");
+				// Action
 
-					// Action
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/template_action.jsp");
 
-					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/template_action.jsp");
+				// Add result row
 
-					// Add result row
+				resultRows.add(row);
+			}
+			%>
 
-					resultRows.add(row);
-				}
-				%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:if>
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:when>
 		<c:when test='<%= tabs1.equals("feeds") %>'>
 			<aui:input name="groupId" type="hidden" />
@@ -318,64 +309,61 @@ portletURL.setParameter("tabs1", tabs1);
 				searchContainer="<%= searchContainer %>"
 			/>
 
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<%
+			FeedSearchTerms searchTerms = (FeedSearchTerms)searchContainer.getSearchTerms();
+			%>
 
-				<%
-				FeedSearchTerms searchTerms = (FeedSearchTerms)searchContainer.getSearchTerms();
-				%>
+			<%@ include file="/html/portlet/journal/feed_search_results.jspf" %>
 
-				<%@ include file="/html/portlet/journal/feed_search_results.jspf" %>
+			<div class="separator"><!-- --></div>
 
-				<div class="separator"><!-- --></div>
+			<aui:button onClick='<%= renderResponse.getNamespace() + "deleteFeeds();" %>' value="delete" />
 
-				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteFeeds();" %>' value="delete" />
+			<br /><br />
 
-				<br /><br />
+			<%
+			List resultRows = searchContainer.getResultRows();
 
-				<%
-				List resultRows = searchContainer.getResultRows();
+			for (int i = 0; i < results.size(); i++) {
+				JournalFeed feed = (JournalFeed)results.get(i);
 
-				for (int i = 0; i < results.size(); i++) {
-					JournalFeed feed = (JournalFeed)results.get(i);
+				feed = feed.toEscapedModel();
 
-					feed = feed.toEscapedModel();
+				ResultRow row = new ResultRow(feed, feed.getFeedId(), i);
 
-					ResultRow row = new ResultRow(feed, feed.getFeedId(), i);
+				PortletURL rowURL = renderResponse.createRenderURL();
 
-					PortletURL rowURL = renderResponse.createRenderURL();
+				rowURL.setParameter("struts_action", "/journal/edit_feed");
+				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("groupId", String.valueOf(feed.getGroupId()));
+				rowURL.setParameter("feedId", feed.getFeedId());
 
-					rowURL.setParameter("struts_action", "/journal/edit_feed");
-					rowURL.setParameter("redirect", currentURL);
-					rowURL.setParameter("groupId", String.valueOf(feed.getGroupId()));
-					rowURL.setParameter("feedId", feed.getFeedId());
+				row.setParameter("rowHREF", rowURL.toString());
 
-					row.setParameter("rowHREF", rowURL.toString());
+				// Feed id
 
-					// Feed id
+				row.addText(feed.getFeedId(), rowURL);
 
-					row.addText(feed.getFeedId(), rowURL);
+				// Name and description
 
-					// Name and description
-
-					if (Validator.isNotNull(feed.getDescription())) {
-						row.addText(feed.getName().concat("<br />").concat(feed.getDescription()), rowURL);
-					}
-					else {
-						row.addText(feed.getName(), rowURL);
-					}
-
-					// Action
-
-					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/feed_action.jsp");
-
-					// Add result row
-
-					resultRows.add(row);
+				if (Validator.isNotNull(feed.getDescription())) {
+					row.addText(feed.getName().concat("<br />").concat(feed.getDescription()), rowURL);
 				}
-				%>
+				else {
+					row.addText(feed.getName(), rowURL);
+				}
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:if>
+				// Action
+
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/feed_action.jsp");
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:when>
 		<c:when test='<%= tabs1.equals("recent") %>'>
 			<%= LanguageUtil.format(pageContext, "this-page-displays-the-last-x-web-content,-structures,-and-templates-that-you-accessed", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>

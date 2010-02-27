@@ -40,84 +40,81 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 	searchContainer="<%= searchContainer %>"
 />
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+<%
+CouponSearchTerms searchTerms = (CouponSearchTerms)searchContainer.getSearchTerms();
 
-	<%
-	CouponSearchTerms searchTerms = (CouponSearchTerms)searchContainer.getSearchTerms();
+int total = ShoppingCouponLocalServiceUtil.searchCount(scopeGroupId, company.getCompanyId(), searchTerms.getCode(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator());
 
-	int total = ShoppingCouponLocalServiceUtil.searchCount(scopeGroupId, company.getCompanyId(), searchTerms.getCode(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator());
+searchContainer.setTotal(total);
 
-	searchContainer.setTotal(total);
+List results = ShoppingCouponServiceUtil.search(scopeGroupId, company.getCompanyId(), searchTerms.getCode(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
-	List results = ShoppingCouponServiceUtil.search(scopeGroupId, company.getCompanyId(), searchTerms.getCode(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+searchContainer.setResults(results);
+%>
 
-	searchContainer.setResults(results);
-	%>
+<div class="separator"><!-- --></div>
 
-	<div class="separator"><!-- --></div>
+<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteCoupons();" />
 
-	<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteCoupons();" />
+<br /><br />
 
-	<br /><br />
+<%
+List resultRows = searchContainer.getResultRows();
 
-	<%
-	List resultRows = searchContainer.getResultRows();
+for (int i = 0; i < results.size(); i++) {
+	ShoppingCoupon coupon = (ShoppingCoupon)results.get(i);
 
-	for (int i = 0; i < results.size(); i++) {
-		ShoppingCoupon coupon = (ShoppingCoupon)results.get(i);
+	coupon = coupon.toEscapedModel();
 
-		coupon = coupon.toEscapedModel();
+	ResultRow row = new ResultRow(coupon, coupon.getCouponId(), i);
 
-		ResultRow row = new ResultRow(coupon, coupon.getCouponId(), i);
+	PortletURL rowURL = renderResponse.createRenderURL();
 
-		PortletURL rowURL = renderResponse.createRenderURL();
+	rowURL.setParameter("struts_action", "/shopping/edit_coupon");
+	rowURL.setParameter("redirect", currentURL);
+	rowURL.setParameter("couponId", String.valueOf(coupon.getCouponId()));
 
-		rowURL.setParameter("struts_action", "/shopping/edit_coupon");
-		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("couponId", String.valueOf(coupon.getCouponId()));
+	// Code
 
-		// Code
+	row.addText(coupon.getCode(), rowURL);
 
-		row.addText(coupon.getCode(), rowURL);
+	// Name and description
 
-		// Name and description
-
-		if (Validator.isNotNull(coupon.getDescription())) {
-			row.addText(coupon.getName().concat("<br />").concat(coupon.getDescription()), rowURL);
-		}
-		else {
-			row.addText(coupon.getName(), rowURL);
-		}
-
-		// Start date
-
-		row.addText(dateFormatDateTime.format(coupon.getStartDate()), rowURL);
-
-		// End date
-
-		if (coupon.getEndDate() == null) {
-			row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
-		}
-		else {
-			row.addText(dateFormatDateTime.format(coupon.getEndDate()), rowURL);
-		}
-
-		// Discount type
-
-		row.addText(LanguageUtil.get(pageContext, coupon.getDiscountType()), rowURL);
-
-		// Action
-
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/coupon_action.jsp");
-
-		// Add result row
-
-		resultRows.add(row);
+	if (Validator.isNotNull(coupon.getDescription())) {
+		row.addText(coupon.getName().concat("<br />").concat(coupon.getDescription()), rowURL);
 	}
-	%>
+	else {
+		row.addText(coupon.getName(), rowURL);
+	}
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</c:if>
+	// Start date
+
+	row.addText(dateFormatDateTime.format(coupon.getStartDate()), rowURL);
+
+	// End date
+
+	if (coupon.getEndDate() == null) {
+		row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
+	}
+	else {
+		row.addText(dateFormatDateTime.format(coupon.getEndDate()), rowURL);
+	}
+
+	// Discount type
+
+	row.addText(LanguageUtil.get(pageContext, coupon.getDiscountType()), rowURL);
+
+	// Action
+
+	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/coupon_action.jsp");
+
+	// Add result row
+
+	resultRows.add(row);
+}
+%>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 </form>
 

@@ -129,102 +129,99 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 		page="/html/portlet/enterprise_admin/user_search.jsp"
 	/>
 
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<%
+	LinkedHashMap userParams = new LinkedHashMap();
+
+	if (organizationId > 0) {
+		userParams.put("usersOrgs", new Long(organizationId));
+	}
+	else {
+		if (filterManageableOrganizations && !UserPermissionUtil.contains(permissionChecker, ResourceConstants.PRIMKEY_DNE, ActionKeys.VIEW)) {
+			Long[] organizationIds = EnterpriseAdminUtil.getOrganizationIds(user.getOrganizations());
+
+			userParams.put("usersOrgs", organizationIds);
+		}
+	}
+
+	if (roleId > 0) {
+		userParams.put("usersRoles", new Long(roleId));
+	}
+
+	if (userGroupId > 0) {
+		userParams.put("usersUserGroups", new Long(userGroupId));
+	}
+	%>
+
+	<liferay-ui:search-container-results>
+		<c:choose>
+			<c:when test="<%= PropsValues.USERS_SEARCH_WITH_INDEX %>">
+				<%@ include file="/html/portlet/enterprise_admin/user_search_results_index.jspf" %>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/html/portlet/enterprise_admin/user_search_results_database.jspf" %>
+			</c:otherwise>
+		</c:choose>
+	</liferay-ui:search-container-results>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.User"
+		escapedModel="<%= true %>"
+		keyProperty="userId"
+		modelVar="user2"
+	>
+		<liferay-portlet:renderURL varImpl="rowURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+		</liferay-portlet:renderURL>
+
+		<%@ include file="/html/portlet/enterprise_admin/user/search_columns.jspf" %>
+
+		<liferay-ui:search-container-column-jsp
+			align="right"
+			path="/html/portlet/enterprise_admin/user_action.jsp"
+		/>
+	</liferay-ui:search-container-row>
+
+	<div class="separator"><!-- --></div>
+
+	<%
+	boolean hasButtons = false;
+	%>
+
+	<c:if test="<%= searchTerms.hasActive() && (searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE)) %>">
 
 		<%
-		LinkedHashMap userParams = new LinkedHashMap();
+		hasButtons = true;
 
-		if (organizationId > 0) {
-			userParams.put("usersOrgs", new Long(organizationId));
-		}
-		else {
-			if (filterManageableOrganizations && !UserPermissionUtil.contains(permissionChecker, ResourceConstants.PRIMKEY_DNE, ActionKeys.VIEW)) {
-				Long[] organizationIds = EnterpriseAdminUtil.getOrganizationIds(user.getOrganizations());
-
-				userParams.put("usersOrgs", organizationIds);
-			}
-		}
-
-		if (roleId > 0) {
-			userParams.put("usersRoles", new Long(roleId));
-		}
-
-		if (userGroupId > 0) {
-			userParams.put("usersUserGroups", new Long(userGroupId));
-		}
+		String taglibOnClick = renderResponse.getNamespace() + "deleteUsers('" + (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE) + "');";
 		%>
 
-		<liferay-ui:search-container-results>
-			<c:choose>
-				<c:when test="<%= PropsValues.USERS_SEARCH_WITH_INDEX %>">
-					<%@ include file="/html/portlet/enterprise_admin/user_search_results_index.jspf" %>
-				</c:when>
-				<c:otherwise>
-					<%@ include file="/html/portlet/enterprise_admin/user_search_results_database.jspf" %>
-				</c:otherwise>
-			</c:choose>
-		</liferay-ui:search-container-results>
-
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.User"
-			escapedModel="<%= true %>"
-			keyProperty="userId"
-			modelVar="user2"
-		>
-			<liferay-portlet:renderURL varImpl="rowURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-				<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
-			</liferay-portlet:renderURL>
-
-			<%@ include file="/html/portlet/enterprise_admin/user/search_columns.jspf" %>
-
-			<liferay-ui:search-container-column-jsp
-				align="right"
-				path="/html/portlet/enterprise_admin/user_action.jsp"
-			/>
-		</liferay-ui:search-container-row>
-
-		<div class="separator"><!-- --></div>
-
-		<%
-		boolean hasButtons = false;
-		%>
-
-		<c:if test="<%= searchTerms.hasActive() && (searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE)) %>">
-
-			<%
-			hasButtons = true;
-
-			String taglibOnClick = renderResponse.getNamespace() + "deleteUsers('" + (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE) + "');";
-			%>
-
-			<aui:button onClick="<%= taglibOnClick %>" value='<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>' />
-		</c:if>
-
-		<c:if test="<%= searchTerms.hasActive() && !searchTerms.isActive() %>">
-
-			<%
-			hasButtons = true;
-
-			String taglibOnClick = renderResponse.getNamespace() + "deleteUsers('" + Constants.RESTORE + "');";
-			%>
-
-			<aui:button onClick="<%= taglibOnClick %>" value="restore" />
-		</c:if>
-
-		<c:if test="<%= hasButtons %>">
-			<div>
-				<br />
-			</div>
-		</c:if>
-
-		<%
-		if (!hasButtons) {
-			searchContainer.setRowChecker(null);
-		}
-		%>
-
-		<liferay-ui:search-iterator />
+		<aui:button onClick="<%= taglibOnClick %>" value='<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>' />
 	</c:if>
+
+	<c:if test="<%= searchTerms.hasActive() && !searchTerms.isActive() %>">
+
+		<%
+		hasButtons = true;
+
+		String taglibOnClick = renderResponse.getNamespace() + "deleteUsers('" + Constants.RESTORE + "');";
+		%>
+
+		<aui:button onClick="<%= taglibOnClick %>" value="restore" />
+	</c:if>
+
+	<c:if test="<%= hasButtons %>">
+		<div>
+			<br />
+		</div>
+	</c:if>
+
+	<%
+	if (!hasButtons) {
+		searchContainer.setRowChecker(null);
+	}
+	%>
+
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>

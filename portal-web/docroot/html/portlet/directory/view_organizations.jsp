@@ -29,42 +29,39 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		page="/html/portlet/directory/organization_search.jsp"
 	/>
 
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<%
+	OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-		<%
-		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+	LinkedHashMap organizationParams = new LinkedHashMap();
 
-		LinkedHashMap organizationParams = new LinkedHashMap();
+	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
-		long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
+	if (parentOrganizationId <= 0) {
+		parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
+	}
+	%>
 
-		if (parentOrganizationId <= 0) {
-			parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
-		}
-		%>
+	<liferay-ui:search-container-results>
+		<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+	</liferay-ui:search-container-results>
 
-		<liferay-ui:search-container-results>
-			<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
-		</liferay-ui:search-container-results>
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.Organization"
+		escapedModel="<%= true %>"
+		keyProperty="organizationId"
+		modelVar="organization"
+	>
+		<portlet:renderURL var="rowURL">
+			<portlet:param name="struts_action" value="/directory/view_organization" />
+			<portlet:param name="tabs1" value="<%= HtmlUtil.escape(tabs1) %>" />
+			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+			<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
+		</portlet:renderURL>
 
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.Organization"
-			escapedModel="<%= true %>"
-			keyProperty="organizationId"
-			modelVar="organization"
-		>
-			<portlet:renderURL var="rowURL">
-				<portlet:param name="struts_action" value="/directory/view_organization" />
-				<portlet:param name="tabs1" value="<%= HtmlUtil.escape(tabs1) %>" />
-				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-				<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
-			</portlet:renderURL>
+		<%@ include file="/html/portlet/directory/organization/search_columns.jspf" %>
+	</liferay-ui:search-container-row>
 
-			<%@ include file="/html/portlet/directory/organization/search_columns.jspf" %>
-		</liferay-ui:search-container-row>
+	<div class="separator"><!-- --></div>
 
-		<div class="separator"><!-- --></div>
-
-		<liferay-ui:search-iterator />
-	</c:if>
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>

@@ -40,76 +40,73 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 	searchContainer="<%= searchContainer %>"
 />
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+<%
+OrderSearchTerms searchTerms = (OrderSearchTerms)searchContainer.getSearchTerms();
 
-	<%
-	OrderSearchTerms searchTerms = (OrderSearchTerms)searchContainer.getSearchTerms();
+long searchUserId = user.getUserId();
 
-	long searchUserId = user.getUserId();
+if (ShoppingPermission.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_ORDERS)) {
+	searchUserId = 0;
+}
 
-	if (ShoppingPermission.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_ORDERS)) {
-		searchUserId = 0;
-	}
+int total = ShoppingOrderLocalServiceUtil.searchCount(scopeGroupId, company.getCompanyId(), searchUserId, searchTerms.getNumber(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator());
 
-	int total = ShoppingOrderLocalServiceUtil.searchCount(scopeGroupId, company.getCompanyId(), searchUserId, searchTerms.getNumber(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator());
+searchContainer.setTotal(total);
 
-	searchContainer.setTotal(total);
+List results = ShoppingOrderLocalServiceUtil.search(scopeGroupId, company.getCompanyId(), searchUserId, searchTerms.getNumber(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
-	List results = ShoppingOrderLocalServiceUtil.search(scopeGroupId, company.getCompanyId(), searchUserId, searchTerms.getNumber(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+searchContainer.setResults(results);
+%>
 
-	searchContainer.setResults(results);
-	%>
+<div class="separator"><!-- --></div>
 
-	<div class="separator"><!-- --></div>
+<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrders();" />
 
-	<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrders();" />
+<br /><br />
 
-	<br /><br />
+<%
+List resultRows = searchContainer.getResultRows();
 
-	<%
-	List resultRows = searchContainer.getResultRows();
+for (int i = 0; i < results.size(); i++) {
+	ShoppingOrder order = (ShoppingOrder)results.get(i);
 
-	for (int i = 0; i < results.size(); i++) {
-		ShoppingOrder order = (ShoppingOrder)results.get(i);
+	order = order.toEscapedModel();
 
-		order = order.toEscapedModel();
+	ResultRow row = new ResultRow(order, order.getOrderId(), i);
 
-		ResultRow row = new ResultRow(order, order.getOrderId(), i);
+	PortletURL rowURL = renderResponse.createRenderURL();
 
-		PortletURL rowURL = renderResponse.createRenderURL();
+	rowURL.setParameter("struts_action", "/shopping/edit_order");
+	rowURL.setParameter("redirect", currentURL);
+	rowURL.setParameter("orderId", String.valueOf(order.getOrderId()));
 
-		rowURL.setParameter("struts_action", "/shopping/edit_order");
-		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("orderId", String.valueOf(order.getOrderId()));
+	// Number
 
-		// Number
+	row.addText(order.getNumber(), rowURL);
 
-		row.addText(order.getNumber(), rowURL);
+	// Date
 
-		// Date
+	row.addText(dateFormatDateTime.format(order.getCreateDate()), rowURL);
 
-		row.addText(dateFormatDateTime.format(order.getCreateDate()), rowURL);
+	// Status
 
-		// Status
+	row.addText(ShoppingUtil.getPpPaymentStatus(order, pageContext), rowURL);
 
-		row.addText(ShoppingUtil.getPpPaymentStatus(order, pageContext), rowURL);
+	// Customer
 
-		// Customer
+	row.addText(PortalUtil.getUserName(order.getUserId(), order.getBillingFirstName() + StringPool.SPACE + order.getBillingLastName()));
 
-		row.addText(PortalUtil.getUserName(order.getUserId(), order.getBillingFirstName() + StringPool.SPACE + order.getBillingLastName()));
+	// Action
 
-		// Action
+	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/order_action.jsp");
 
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/order_action.jsp");
+	// Add result row
 
-		// Add result row
+	resultRows.add(row);
+}
+%>
 
-		resultRows.add(row);
-	}
-	%>
-
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</c:if>
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 </form>
 

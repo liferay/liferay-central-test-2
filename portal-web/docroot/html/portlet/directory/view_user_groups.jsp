@@ -29,43 +29,40 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		page="/html/portlet/directory/user_group_search.jsp"
 	/>
 
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<%
+	UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+	%>
 
-		<%
-		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
-		%>
+	<liferay-ui:search-container-results
+		results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
+		total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null) %>"
+	/>
 
-		<liferay-ui:search-container-results
-			results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
-			total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null) %>"
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.UserGroup"
+		escapedModel="<%= true %>"
+		keyProperty="userGroupId"
+		modelVar="userGroup"
+	>
+		<liferay-ui:search-container-column-text
+			name="name"
+			orderable="<%= true %>"
+			property="name"
 		/>
 
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.UserGroup"
-			escapedModel="<%= true %>"
-			keyProperty="userGroupId"
-			modelVar="userGroup"
-		>
-			<liferay-ui:search-container-column-text
-				name="name"
-				orderable="<%= true %>"
-				property="name"
-			/>
+		<liferay-ui:search-container-column-text
+			name="description"
+			orderable="<%= true %>"
+			property="description"
+		/>
 
-			<liferay-ui:search-container-column-text
-				name="description"
-				orderable="<%= true %>"
-				property="description"
-			/>
+		<liferay-ui:search-container-column-jsp
+			align="right"
+			path="/html/portlet/directory/user_group_action.jsp"
+		/>
+	</liferay-ui:search-container-row>
 
-			<liferay-ui:search-container-column-jsp
-				align="right"
-				path="/html/portlet/directory/user_group_action.jsp"
-			/>
-		</liferay-ui:search-container-row>
+	<div class="separator"><!-- --></div>
 
-		<div class="separator"><!-- --></div>
-
-		<liferay-ui:search-iterator />
-	</c:if>
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
