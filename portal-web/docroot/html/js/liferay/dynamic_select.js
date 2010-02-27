@@ -99,20 +99,14 @@ AUI().add(
 						var key = item[selectId];
 						var value = item[selectDesc];
 
-						var selected = '';
-
-						if (selectVal == key) {
-							selected = 'selected="selected"';
-						}
-
-						selectOptions.push('<option ' + selected + ' value="' + key + '">' + value + '</option>');
+						selectOptions.push('<option value="' + key + '">' + value + '</option>');
 					}
 				);
 
 				selectOptions = selectOptions.join('');
 
 				if (select) {
-					select.empty().append(selectOptions);
+					select.append(selectOptions).val(selectVal);
 
 					if (Liferay.Browser.isIe()) {
 						select.setStyle('width', 'auto');
