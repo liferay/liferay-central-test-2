@@ -26,7 +26,7 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 %>
 
 			</select>
-        </span>
+		</span>
 
 		<c:if test="<%= Validator.isNotNull(suffix) %>">
 			<span class="aui-suffix">
