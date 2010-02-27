@@ -23,6 +23,7 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -102,6 +103,12 @@ public class ScriptTag extends BodyTagSupport {
 		finally {
 			if (_position.equals(_POSITION_INLINE)) {
 				request.removeAttribute(ScriptTag.class.getName());
+			}
+
+			if (!ServerDetector.isResin()) {
+				_bodyContentString = StringPool.BLANK;
+				_position = null;
+				_use = null;
 			}
 		}
 	}
