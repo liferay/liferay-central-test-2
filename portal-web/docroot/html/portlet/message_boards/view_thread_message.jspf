@@ -59,10 +59,10 @@
 
 						<liferay-ui:icon
 							image="view"
-							message="recent-posts"
-							url="<%= recentPostsURL.toString() %>"
-							method="get"
 							label="<%= true %>"
+							message="recent-posts"
+							method="get"
+							url="<%= recentPostsURL.toString() %>"
 						/>
 
 						<c:if test="<%= (userDisplay != null) && (user.getUserId() != userDisplay.getUserId()) && MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) %>">
@@ -79,9 +79,9 @@
 
 									<liferay-ui:icon
 										image="../message_boards/unban_user"
+										label="<%= true %>"
 										message="unban-this-user"
 										url="<%= unbanUserURL.toString() %>"
-										label="<%= true %>"
 									/>
 								</c:when>
 								<c:otherwise>
@@ -94,9 +94,9 @@
 
 									<liferay-ui:icon
 										image="../message_boards/ban_user"
+										label="<%= true %>"
 										message="ban-this-user"
 										url="<%= banUserURL.toString() %>"
-										label="<%= true %>"
 									/>
 								</c:otherwise>
 							</c:choose>
@@ -122,8 +122,8 @@
 							<div class="answer" id="<portlet:namespace />deleteAnswerFlag_<%= message.getMessageId() %>">
 								<liferay-ui:icon
 									image="checked"
-									message="answer"
 									label="<%= true %>"
+									message="answer"
 								/>
 
 								(<a href="javascript:<portlet:namespace />deleteAnswerFlag('<%= message.getMessageId() %>');"><liferay-ui:message key="unmark" /></a>)
@@ -181,9 +181,9 @@
 
 									<liferay-ui:icon
 										image="checked"
+										label="<%= true %>"
 										message="mark-as-an-answer"
 										url="<%= taglibMarkAsAnswerURL %>"
-										label="<%= true %>"
 									/>
 								</li>
 							</c:if>
@@ -198,11 +198,11 @@
 										<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 									</portlet:renderURL>
 
-									<liferay-ui:icon image="reply" url="<%= replyURL %>" label="<%= true %>" />
+									<liferay-ui:icon image="reply" label="<%= true %>" url="<%= replyURL %>" />
 								</li>
 								<li>
 									<portlet:renderURL var="quoteURL">
-										<portlet:param name="struts_action" value="/message_boards/edit_message" />
+										<portlet:param name="struts_action" valus="/message_boards/edit_message" />
 										<portlet:param name="redirect" value="<%= currentURL %>" />
 										<portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
 										<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
@@ -210,7 +210,7 @@
 										<portlet:param name="quote" value="true" />
 									</portlet:renderURL>
 
-									<liferay-ui:icon image="quote" message="reply-with-quote" url="<%= quoteURL %>" label="<%= true %>" />
+									<liferay-ui:icon image="quote" label="<%= true %>" message="reply-with-quote" url="<%= quoteURL %>" />
 								</li>
 							</c:if>
 						</ul>
@@ -450,7 +450,7 @@
 						String topHREF = "#" + renderResponse.getNamespace() + "message_0";
 						%>
 
-						<liferay-ui:icon image="top" url="<%= topHREF %>" label="<%= true %>" />
+						<liferay-ui:icon image="top" label="<%= true %>" url="<%= topHREF %>" />
 					</li>
 
 					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) && !thread.isLocked() %>">
@@ -461,7 +461,7 @@
 								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 							</portlet:renderURL>
 
-							<liferay-ui:icon image="edit" url="<%= editURL %>" label="<%= true %>" />
+							<liferay-ui:icon image="edit" label="<%= true %>" url="<%= editURL %>" />
 						</li>
 					</c:if>
 
@@ -474,7 +474,7 @@
 								var="permissionsURL"
 							/>
 
-							<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" label="<%= true %>" />
+							<liferay-ui:icon image="permissions" label="<%= true %>" url="<%= permissionsURL %>" s/>
 						</li>
 					</c:if>
 
@@ -486,7 +486,7 @@
 								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 							</portlet:renderURL>
 
-							<liferay-ui:icon image="unlink" message="split-thread" url="<%= splitThreadURL %>" label="<%= true %>" />
+							<liferay-ui:icon image="unlink" label="<%= true %>" message="split-thread" url="<%= splitThreadURL %>" />
 						</li>
 					</c:if>
 
@@ -507,7 +507,7 @@
 								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon-delete url="<%= deleteURL %>" label="<%= true %>" />
+							<liferay-ui:icon-delete label="<%= true %>" url="<%= deleteURL %>" />
 						</li>
 					</c:if>
 				</ul>

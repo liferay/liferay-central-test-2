@@ -140,10 +140,10 @@ int count = 0;
 
 				<liferay-ui:icon
 					image='<%= "../file_system/small/" + conversion %>'
-					message="<%= conversion.toUpperCase() %>"
-					url="<%= exportPageURL.toString() %>"
-					method="get"
 					label="<%= true %>"
+					message="<%= conversion.toUpperCase() %>"
+					method="get"
+					url="<%= exportPageURL.toString() %>"
 				/>
 
 			<%
@@ -161,11 +161,11 @@ int count = 0;
 	</th>
 	<td>
 		<liferay-ui:icon-list>
-			<liferay-ui:icon image="rss" message="Atom 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() + rssURLAtomParams %>' target="_blank" label="<%= true %>" />
+			<liferay-ui:icon image="rss" label="<%= true %>" message="Atom 1.0" target="_blank" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() + rssURLAtomParams %>' />
 
-			<liferay-ui:icon image="rss" message="RSS 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() + rssURLRSS10Params %>' target="_blank" label="<%= true %>" />
+			<liferay-ui:icon image="rss" label="<%= true %>" message="RSS 1.0" target="_blank" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() + rssURLRSS10Params %>' />
 
-			<liferay-ui:icon image="rss" message="RSS 2.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() + rssURLRSS20Params %>' target="_blank" label="<%= true %>" />
+			<liferay-ui:icon image="rss" label="<%= true %>" message="RSS 2.0" target="_blank" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() + rssURLRSS20Params %>' />
 		</liferay-ui:icon-list>
 	</td>
 </tr>
@@ -194,7 +194,7 @@ int count = 0;
 									<portlet:param name="title" value="<%= String.valueOf(wikiPage.getTitle()) %>" />
 								</portlet:actionURL>
 
-								<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
+								<liferay-ui:icon image="unsubscribe" label="<%= true %>" url="<%= unsubscribeURL %>" />
 							</td>
 						</c:when>
 						<c:otherwise>
@@ -210,7 +210,7 @@ int count = 0;
 									<portlet:param name="title" value="<%= String.valueOf(wikiPage.getTitle()) %>" />
 								</portlet:actionURL>
 
-								<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
+								<liferay-ui:icon image="subscribe" label="<%= true %>" url="<%= subscribeURL %>" />
 							</td>
 						</c:otherwise>
 					</c:choose>
@@ -232,7 +232,7 @@ int count = 0;
 									<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 								</portlet:actionURL>
 
-								<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
+								<liferay-ui:icon image="unsubscribe" label="<%= true %>" url="<%= unsubscribeURL %>" />
 							</td>
 						</c:when>
 						<c:otherwise>
@@ -247,7 +247,7 @@ int count = 0;
 									<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 								</portlet:actionURL>
 
-								<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
+								<liferay-ui:icon image="subscribe" label="<%= true %>" url="<%= subscribeURL %>" />
 							</td>
 						</c:otherwise>
 					</c:choose>
@@ -274,7 +274,7 @@ int count = 0;
 						var="permissionsURL"
 					/>
 
-					<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" label="<%= true %>" />
+					<liferay-ui:icon image="permissions" label="<%= true %>" url="<%= permissionsURL %>" />
 				</c:if>
 
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
@@ -291,7 +291,7 @@ int count = 0;
 					copyPageURL.setParameter("templateTitle", wikiPage.getTitle());
 					%>
 
-					<liferay-ui:icon image="copy" url="<%= copyPageURL.toString() %>" label="<%= true %>" />
+					<liferay-ui:icon image="copy" label="<%= true %>" url="<%= copyPageURL.toString() %>" />
 				</c:if>
 
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
@@ -303,7 +303,7 @@ int count = 0;
 					movePageURL.setParameter("redirect", viewPageURL.toString());
 					%>
 
-					<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" label="<%= true %>" />
+					<liferay-ui:icon image="forward" label="<%= true %>" message="move" url="<%= movePageURL.toString() %>" />
 				</c:if>
 
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
@@ -319,7 +319,7 @@ int count = 0;
 					deletePageURL.setParameter("redirect", frontPageURL.toString());
 					%>
 
-					<liferay-ui:icon-delete url="<%= deletePageURL.toString() %>" label="<%= true %>" />
+					<liferay-ui:icon-delete label="<%= true %>" url="<%= deletePageURL.toString() %>" />
 				</c:if>
 			</liferay-ui:icon-list>
 		</td>

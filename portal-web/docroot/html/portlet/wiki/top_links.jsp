@@ -88,25 +88,25 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 				frontPageURL.setParameter("title", WikiPageConstants.FRONT_PAGE);
 				%>
 
-				<liferay-ui:icon cssClass="top-link" image="../aui/home" message="<%= WikiPageConstants.FRONT_PAGE %>" label="<%= true %>" url='<%= wikiPage != null && (wikiPage.getTitle().equals(WikiPageConstants.FRONT_PAGE)) ? StringPool.BLANK : frontPageURL.toString() %>' />
+				<liferay-ui:icon cssClass="top-link" image="../aui/home" label="<%= true %>" message="<%= WikiPageConstants.FRONT_PAGE %>" url='<%= wikiPage != null && (wikiPage.getTitle().equals(WikiPageConstants.FRONT_PAGE)) ? StringPool.BLANK : frontPageURL.toString() %>' />
 
 				<%
 				portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
 				%>
 
-				<liferay-ui:icon cssClass="top-link" image="../aui/clock" message="recent-changes" label="<%= true %>" url='<%= strutsAction.equals("/wiki/view_recent_changes") ? StringPool.BLANK : portletURL.toString() %>' />
+				<liferay-ui:icon cssClass="top-link" image="../aui/clock" label="<%= true %>" message="recent-changes" url='<%= strutsAction.equals("/wiki/view_recent_changes") ? StringPool.BLANK : portletURL.toString() %>' />
 
 				<%
 				portletURL.setParameter("struts_action", "/wiki/view_all_pages");
 				%>
 
-				<liferay-ui:icon cssClass="top-link" image="../aui/document" message="all-pages" label="<%= true %>" url='<%= strutsAction.equals("/wiki/view_all_pages") ? StringPool.BLANK : portletURL.toString() %>' />
+				<liferay-ui:icon cssClass="top-link" image="../aui/document" label="<%= true %>" message="all-pages" url='<%= strutsAction.equals("/wiki/view_all_pages") ? StringPool.BLANK : portletURL.toString() %>' />
 
 				<%
 				portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
 				%>
 
-				<liferay-ui:icon cssClass="top-link last" image="../aui/document-b" message="orphan-pages" label="<%= true %>" url='<%= strutsAction.equals("/wiki/view_orphan_pages") ? StringPool.BLANK : portletURL.toString() %>' />
+				<liferay-ui:icon cssClass="top-link last" image="../aui/document-b" label="<%= true %>" message="orphan-pages" url='<%= strutsAction.equals("/wiki/view_orphan_pages") ? StringPool.BLANK : portletURL.toString() %>' />
 			</div>
 
 			<liferay-portlet:renderURL varImpl="searchURL">

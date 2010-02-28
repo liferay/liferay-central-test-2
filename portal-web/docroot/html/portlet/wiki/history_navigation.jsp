@@ -100,10 +100,10 @@ if (type.equals("html")) {
 
 	<div class="central-info">
 		<liferay-ui:icon
-			image="pages"
-			message='<%= LanguageUtil.format(pageContext, "comparing-versions-x-and-x", new Object[] {sourceVersionString, targetVersionString}) %>'
-			label="<%= true %>"
 			cssClass="central-title"
+			image="pages"
+			label="<%= true %>"
+			message='<%= LanguageUtil.format(pageContext, "comparing-versions-x-and-x", new Object[] {sourceVersionString, targetVersionString}) %>'
 		/>
 
 		<c:choose>
@@ -150,8 +150,8 @@ if (type.equals("html")) {
 
 					<liferay-ui:icon
 						image="user_icon"
-						message="<%= sb.toString() %>"
 						label="<%= true %>"
+						message="<%= sb.toString() %>"
 						toolTip="authors"
 					/>
 				</c:when>
@@ -162,11 +162,11 @@ if (type.equals("html")) {
 					%>
 
 					<liferay-ui:icon
-						message="<%= wikiPage.getUserName() %>"
+						cssClass="central-username"
 						image="user_icon"
 						label="<%= true %>"
+						message="<%= wikiPage.getUserName() %>"
 						toolTip="author"
-						cssClass="central-username"
 					/>
 
 					<c:if test="<%= Validator.isNotNull(wikiPage.getSummary()) %>">

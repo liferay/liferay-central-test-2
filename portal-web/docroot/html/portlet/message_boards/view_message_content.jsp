@@ -48,8 +48,8 @@ String threadView = messageDisplay.getThreadView();
 				<liferay-ui:icon
 					image="../message_boards/thread_view_combination"
 					message="combination-view"
-					url="<%= currentURLObj.toString() %>"
 					method="get"
+					url="<%= currentURLObj.toString() %>"
 				/>
 			</td>
 		</c:if>
@@ -64,8 +64,8 @@ String threadView = messageDisplay.getThreadView();
 				<liferay-ui:icon
 					image="../message_boards/thread_view_flat"
 					message="flat-view"
-					url="<%= currentURLObj.toString() %>"
 					method="get"
+					url="<%= currentURLObj.toString() %>"
 				/>
 			</td>
 		</c:if>
@@ -80,8 +80,8 @@ String threadView = messageDisplay.getThreadView();
 				<liferay-ui:icon
 					image="../message_boards/thread_view_tree"
 					message="tree-view"
-					url="<%= currentURLObj.toString() %>"
 					method="get"
+					url="<%= currentURLObj.toString() %>"
 				/>
 			</td>
 		</c:if>
@@ -139,7 +139,7 @@ String threadView = messageDisplay.getThreadView();
 						<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="post" message="post-new-thread" url="<%= addMessageURL %>" label="<%= true %>" />
+					<liferay-ui:icon image="post" label="<%= true %>" message="post-new-thread" url="<%= addMessageURL %>" />
 				</td>
 			</c:if>
 
@@ -154,7 +154,7 @@ String threadView = messageDisplay.getThreadView();
 								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
+							<liferay-ui:icon image="unsubscribe" label="<%= true %>" url="<%= unsubscribeURL %>" />
 						</c:when>
 						<c:otherwise>
 							<portlet:actionURL var="subscribeURL">
@@ -164,7 +164,7 @@ String threadView = messageDisplay.getThreadView();
 								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
+							<liferay-ui:icon image="subscribe" label="<%= true %>" url="<%= subscribeURL %>" />
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -181,7 +181,7 @@ String threadView = messageDisplay.getThreadView();
 								<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon image="unlock" message="unlock-thread" url="<%= unlockThreadURL %>" label="<%= true %>" />
+							<liferay-ui:icon image="unlock" label="<%= true %>" message="unlock-thread" url="<%= unlockThreadURL %>" />
 						</c:when>
 						<c:otherwise>
 							<portlet:actionURL var="lockThreadURL">
@@ -191,7 +191,7 @@ String threadView = messageDisplay.getThreadView();
 								<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon image="lock" message="lock-thread" url="<%= lockThreadURL %>" label="<%= true %>" />
+							<liferay-ui:icon image="lock" label="<%= true %>" message="lock-thread" url="<%= lockThreadURL %>" />
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -206,7 +206,7 @@ String threadView = messageDisplay.getThreadView();
 						<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="forward" message="move-thread" url="<%= editThreadURL %>" label="<%= true %>" />
+					<liferay-ui:icon image="forward" label="<%= true %>" message="move-thread" url="<%= editThreadURL %>" />
 				</td>
 			</c:if>
 		</tr>

@@ -69,9 +69,9 @@ if (articleDisplay != null) {
 									<div class="print-action">
 										<liferay-ui:icon
 											image="print"
+											label="<%= true %>"
 											message='<%= LanguageUtil.format(pageContext, "print-x-x", new Object[] {"aui-helper-hidden-accessible", articleDisplay.getTitle()}) %>'
 											url="javascript:print();"
-											label="<%= true %>"
 										/>
 									</div>
 
@@ -95,9 +95,9 @@ if (articleDisplay != null) {
 									<div class="print-action">
 										<liferay-ui:icon
 											image="print"
+											label="<%= true %>"
 											message='<%= LanguageUtil.format(pageContext, "print-x-x", new Object[] {"aui-helper-hidden-accessible", articleDisplay.getTitle()}) %>'
 											url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>'
-											label="<%= true %>"
 										/>
 									</div>
 
@@ -132,10 +132,10 @@ if (articleDisplay != null) {
 
 										<liferay-ui:icon
 											image='<%= "../file_system/small/" + extension %>'
+											label="<%= true %>"
 											message='<%= LanguageUtil.format(pageContext, "x-convert-x-to-x", new Object[] {"aui-helper-hidden-accessible", articleDisplay.getTitle(), extension.toUpperCase()}) %>'
 											url="<%= exportArticleURL.toString() %>"
 											method="get"
-											label="<%= true %>"
 										/>
 
 									<%

@@ -138,7 +138,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 			</portlet:actionURL>
 
-			<liferay-ui:icon cssClass="subscribe-link" image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
+			<liferay-ui:icon cssClass="subscribe-link" image="unsubscribe" label="<%= true %>" url="<%= unsubscribeURL %>" />
 		</c:when>
 		<c:otherwise>
 			<portlet:actionURL var="subscribeURL">
@@ -147,7 +147,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 			</portlet:actionURL>
 
-			<liferay-ui:icon cssClass="subscribe-link" image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
+			<liferay-ui:icon cssClass="subscribe-link" image="subscribe" label="<%= true %>" url="<%= subscribeURL %>" />
 		</c:otherwise>
 	</c:choose>
 </c:if>

@@ -36,13 +36,13 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			portletURL.setParameter("topLink", "message-boards-home");
 			%>
 
-			<liferay-ui:icon cssClass="top-link" image="../aui/home" message="message-boards-home" label="<%= true %>" url='<%= (topLink.equals("message-boards-home") && categoryId == 0 && viewCategory) ? StringPool.BLANK : portletURL.toString() %>' />
+			<liferay-ui:icon cssClass="top-link" image="../aui/home" label="<%= true %>" message="message-boards-home" url='<%= (topLink.equals("message-boards-home") && categoryId == 0 && viewCategory) ? StringPool.BLANK : portletURL.toString() %>' />
 
 			<%
 			portletURL.setParameter("topLink", "recent-posts");
 			%>
 
-			<liferay-ui:icon cssClass="top-link" image="../aui/clock" message="recent-posts" label="<%= true %>" url='<%= topLink.equals("recent-posts") ? StringPool.BLANK : portletURL.toString() %>'/>
+			<liferay-ui:icon cssClass="top-link" image="../aui/clock" label="<%= true %>" message="recent-posts" url='<%= topLink.equals("recent-posts") ? StringPool.BLANK : portletURL.toString() %>'/>
 
 			<c:if test="<%= themeDisplay.isSignedIn() %>">
 
@@ -50,20 +50,20 @@ PortletURL portletURL = renderResponse.createRenderURL();
 				portletURL.setParameter("topLink", "my-posts");
 				%>
 
-				<liferay-ui:icon cssClass="top-link" image="../aui/person" message="my-posts" label="<%= true %>" url='<%= topLink.equals("my-posts") ? StringPool.BLANK : portletURL.toString() %>'/>
+				<liferay-ui:icon cssClass="top-link" image="../aui/person" label="<%= true %>" message="my-posts" url='<%= topLink.equals("my-posts") ? StringPool.BLANK : portletURL.toString() %>'/>
 
 				<%
 				portletURL.setParameter("topLink", "my-subscriptions");
 				%>
 
-				<liferay-ui:icon cssClass="top-link" image="../aui/signal-diag" message="my-subscriptions" label="<%= true %>" url='<%= topLink.equals("my-subscriptions") ? StringPool.BLANK : portletURL.toString() %>'/>
+				<liferay-ui:icon cssClass="top-link" image="../aui/signal-diag" label="<%= true %>" message="my-subscriptions" url='<%= topLink.equals("my-subscriptions") ? StringPool.BLANK : portletURL.toString() %>'/>
 			</c:if>
 
 			<%
 			portletURL.setParameter("topLink", "statistics");
 			%>
 
-			<liferay-ui:icon cssClass='<%= "top-link" + (MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) ? StringPool.BLANK : " last") %>' image="../aui/clipboard" message="statistics" label="<%= true %>" url='<%= topLink.equals("statistics") ? StringPool.BLANK : portletURL.toString() %>'/>
+			<liferay-ui:icon cssClass='<%= "top-link" + (MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) ? StringPool.BLANK : " last") %>' image="../aui/clipboard" label="<%= true %>" message="statistics" url='<%= topLink.equals("statistics") ? StringPool.BLANK : portletURL.toString() %>'/>
 
 			<c:if test="<%= MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) %>">
 
@@ -71,7 +71,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 				portletURL.setParameter("topLink", "banned-users");
 				%>
 
-				<liferay-ui:icon cssClass="top-link last" image="../aui/alert" message="banned-users" label="<%= true %>" url='<%= topLink.equals("banned-users") ? StringPool.BLANK : portletURL.toString() %>'/>
+				<liferay-ui:icon cssClass="top-link last" image="../aui/alert" label="<%= true %>" message="banned-users" url='<%= topLink.equals("banned-users") ? StringPool.BLANK : portletURL.toString() %>'/>
 			</c:if>
 		</div>
 

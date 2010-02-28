@@ -60,7 +60,7 @@ JournalArticle article = (JournalArticle)row.getObject();
 		sb.append(article.getVersion());
 		%>
 
-		<liferay-ui:icon image="preview" url="<%= sb.toString() %>" target="_blank" />
+		<liferay-ui:icon image="preview" target="_blank" url="<%= sb.toString() %>" />
 
 		<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) %>">
 			<portlet:renderURL var="copyURL">

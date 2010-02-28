@@ -62,7 +62,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
 				</liferay-portlet:actionURL>
 
-				<liferay-ui:icon image="view" message="open-site-template" url="<%= viewURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+				<liferay-ui:icon image="view" label="<%= true %>" message="open-site-template" method="get" target="_blank" url="<%= viewURL %>" /> (<liferay-ui:message key="new-window" />)
 			</aui:field-wrapper>
 		</c:if>
 

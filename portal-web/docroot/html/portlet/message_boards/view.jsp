@@ -66,7 +66,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 		<c:if test="<%= category == null %>">
 			<div class="category-subscriptions">
 				<div class="category-subscription-types">
-					<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + scopeGroupId + rssURLParams %>' label="<%= true %>" method="get" target="_blank" />
+					<liferay-ui:icon image="rss" label="<%= true %>" method="get" target="_blank" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + scopeGroupId + rssURLParams %>' />
 
 					<c:if test="<%= MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.SUBSCRIBE) %>">
 						<c:choose>
@@ -78,7 +78,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 									<portlet:param name="mbCategoryId" value="<%= String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
 								</portlet:actionURL>
 
-								<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
+								<liferay-ui:icon image="unsubscribe" label="<%= true %>" url="<%= unsubscribeURL %>" />
 							</c:when>
 							<c:otherwise>
 								<portlet:actionURL var="subscribeURL">
@@ -88,7 +88,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 									<portlet:param name="mbCategoryId" value="<%= String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
 								</portlet:actionURL>
 
-								<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
+								<liferay-ui:icon image="subscribe" label="<%= true %>" url="<%= subscribeURL %>" />
 							</c:otherwise>
 						</c:choose>
 					</c:if>
@@ -728,11 +728,11 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				<td>
 					<liferay-ui:icon
 						image="rss"
+						label="<%= true %>"
 						message="subscribe-to-recent-posts"
-						url="<%= rssURL %>"
 						method="get"
 						target="_blank"
-						label="<%= true %>"
+						url="<%= rssURL %>"
 					/>
 				</td>
 			</tr>
