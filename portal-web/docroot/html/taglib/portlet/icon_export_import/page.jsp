@@ -17,5 +17,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowExportImportIcon() %>">
-	<liferay-ui:icon image="download" message="export-import" url="<%= portletDisplay.getURLExportImport() %>" method="get" toolTip="<%= false %>" cssClass="portlet-export-import portlet-export-import-icon" />
+	<liferay-ui:icon cssClass="portlet-export-import portlet-export-import-icon" image="download" message="export-import" method="get" toolTip="<%= false %>" url="<%= portletDisplay.getURLExportImport() %>" />
 </c:if>

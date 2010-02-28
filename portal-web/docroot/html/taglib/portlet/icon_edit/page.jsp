@@ -17,5 +17,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowEditIcon() %>">
-	<liferay-ui:icon image="../portlet/edit" message="preferences" url="<%= portletDisplay.getURLEdit() %>" toolTip="<%= false %>" />
+	<liferay-ui:icon image="../portlet/edit" message="preferences" toolTip="<%= false %>" url="<%= portletDisplay.getURLEdit() %>" />
 </c:if>

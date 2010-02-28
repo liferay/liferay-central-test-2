@@ -17,5 +17,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowPortletCssIcon() %>">
-	<liferay-ui:icon image="../portlet/portlet_css" message="look-and-feel" url="<%= portletDisplay.getURLPortletCss() %>" toolTip="<%= false %>" cssClass="portlet-css portlet-css-icon lfr-js-required" />
+	<liferay-ui:icon cssClass="portlet-css portlet-css-icon lfr-js-required" image="../portlet/portlet_css" message="look-and-feel" toolTip="<%= false %>" url="<%= portletDisplay.getURLPortletCss() %>" />
 </c:if>

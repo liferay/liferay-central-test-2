@@ -29,12 +29,12 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 
 <div class="taglib-flags">
 	<liferay-ui:icon
+		cssClass="<%= randomNamespace %>"
 		image="../ratings/flagged_icon"
 		imageHover="../ratings/flagged_icon_hover"
+		label="<%= label %>"
 		message="<%= message %>"
 		url="javascript:;"
-		label="<%= label %>"
-		cssClass="<%= randomNamespace %>"
 	/>
 </div>
 

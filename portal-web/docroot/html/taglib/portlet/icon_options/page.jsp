@@ -17,10 +17,10 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <liferay-ui:icon-menu
-	message="options"
-	showWhenSingleIcon="<%= true %>"
 	align="auto"
 	cssClass="portlet-options"
+	message="options"
+	showWhenSingleIcon="<%= true %>"
 >
 	<liferay-portlet:icon-refresh />
 
@@ -72,21 +72,21 @@
 				%>
 
 				<liferay-ui:icon
+					cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
 					image="../dock/add_content"
+					label="<%= true %>"
 					message="add-to-any-website"
 					url="<%= widgetHREF %>"
-					label="<%= true %>"
-					cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
 				/>
 			</c:if>
 
 			<c:if test="<%= facebookShowAddAppLink %>">
 				<liferay-ui:icon
 					image="../social_bookmarks/facebook"
-					message="add-to-facebook"
-					url='<%= "http://www.facebook.com/add.php?api_key=" + facebookAPIKey + "&ref=pd" %>'
-					method="get"
 					label="<%= true %>"
+					message="add-to-facebook"
+					method="get"
+					url='<%= "http://www.facebook.com/add.php?api_key=" + facebookAPIKey + "&ref=pd" %>'
 				/>
 			</c:if>
 
@@ -97,11 +97,11 @@
 				%>
 
 				<liferay-ui:icon
+					cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
 					image="../dock/add_content"
+					label="<%= true %>"
 					message="add-to-igoogle"
 					url="<%= googleGadgetHREF %>"
-					label="<%= true %>"
-					cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
 				/>
 			</c:if>
 
@@ -113,20 +113,20 @@
 
 				<liferay-ui:icon
 					image="../dock/add_content"
-					message="add-to-netvibes"
-					url="<%= netvibesHREF %>"
-					method="get"
 					label="<%= true %>"
+					message="add-to-netvibes"
+					method="get"
+					url="<%= netvibesHREF %>"
 				/>
 			</c:if>
 
 			<c:if test="<%= appShowShareWithFriendsLink %>">
 				<liferay-ui:icon
 					image="share"
-					message="share-this-application-with-friends"
-					url="javascript:;"
-					method="get"
 					label="<%= true %>"
+					message="share-this-application-with-friends"
+					method="get"
+					url="javascript:;"
 				/>
 			</c:if>
 		</c:if>

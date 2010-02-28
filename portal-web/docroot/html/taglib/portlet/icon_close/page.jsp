@@ -17,5 +17,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowCloseIcon() %>">
-	<liferay-ui:icon image="../portlet/close" message="remove" url="<%= portletDisplay.getURLClose() %>" toolTip="<%= false %>" cssClass="portlet-close portlet-close-icon" />
+	<liferay-ui:icon cssClass="portlet-close portlet-close-icon" image="../portlet/close" message="remove" toolTip="<%= false %>" url="<%= portletDisplay.getURLClose() %>" />
 </c:if>

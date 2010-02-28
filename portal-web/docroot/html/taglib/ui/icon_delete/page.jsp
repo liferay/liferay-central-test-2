@@ -36,4 +36,4 @@ if (url.startsWith("wsrp_rewrite?")) {
 url = "javascript:if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") + "')) { " + url + " } else { self.focus(); }";
 %>
 
-<liferay-ui:icon image="delete" url="<%= url %>" label="<%= label %>" />
+<liferay-ui:icon image="delete" label="<%= label %>" url="<%= url %>" />

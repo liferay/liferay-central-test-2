@@ -31,4 +31,4 @@ if (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH
 url = "javascript:if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") + "')) { " + url + " } else { self.focus(); }";
 %>
 
-<liferay-ui:icon image="deactivate" url="<%= url %>" label="<%= label %>" />
+<liferay-ui:icon image="deactivate" label="<%= label %>" url="<%= url %>" />

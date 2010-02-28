@@ -27,5 +27,5 @@
 	}
 	%>
 
-	<liferay-ui:icon image='<%= "../portlet/" + image %>' message="<%= image %>" url="<%= portletDisplay.getURLMin() %>" toolTip="<%= false %>" cssClass="portlet-minimize portlet-minimize-icon" />
+	<liferay-ui:icon cssClass="portlet-minimize portlet-minimize-icon" image='<%= "../portlet/" + image %>' message="<%= image %>" toolTip="<%= false %>" url="<%= portletDisplay.getURLMin() %>" />
 </c:if>
