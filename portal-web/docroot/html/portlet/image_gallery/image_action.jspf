@@ -24,7 +24,7 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 	String downloadURL = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() + "&fileName=" + HttpUtil.encodeURL(image.getNameWithExtension()) + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId());
 	%>
 
-	<liferay-ui:icon image="download" url="<%= downloadURL %>" message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(image.getImageSize(), locale) + "k)" %>' />
+	<liferay-ui:icon image="download" message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(image.getImageSize(), locale) + "k)" %>' url="<%= downloadURL %>" />
 </c:if>
 
 <c:if test="<%= !view && IGImagePermission.contains(permissionChecker, image, ActionKeys.VIEW) %>">

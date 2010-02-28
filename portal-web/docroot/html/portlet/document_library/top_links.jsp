@@ -37,13 +37,13 @@
 					portletURL.setParameter("topLink", "document-home");
 					%>
 
-					<liferay-ui:icon cssClass="top-link" image="../aui/home" message="document-home" label="<%= true %>" url='<%= (topLink.equals("document-home") && folderId == 0 && viewFolder) ? StringPool.BLANK : portletURL.toString() %>' />
+					<liferay-ui:icon cssClass="top-link" image="../aui/home" label="<%= true %>" message="document-home" url='<%= (topLink.equals("document-home") && folderId == 0 && viewFolder) ? StringPool.BLANK : portletURL.toString() %>' />
 
 					<%
 					portletURL.setParameter("topLink", "recent-documents");
 					%>
 
-					<liferay-ui:icon cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>' image="../aui/clock" message="recent-documents" label="<%= true %>" url='<%= topLink.equals("recent-documents") ? StringPool.BLANK : portletURL.toString() %>'/>
+					<liferay-ui:icon cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>' image="../aui/clock" label="<%= true %>" message="recent-documents" url='<%= topLink.equals("recent-documents") ? StringPool.BLANK : portletURL.toString() %>'/>
 
 					<c:if test="<%= themeDisplay.isSignedIn() %>">
 
@@ -51,7 +51,7 @@
 						portletURL.setParameter("topLink", "my-documents");
 						%>
 
-						<liferay-ui:icon cssClass="top-link last" image="../aui/person" message="my-documents" label="<%= true %>" url='<%= topLink.equals("my-documents") ? StringPool.BLANK : portletURL.toString() %>'/>
+						<liferay-ui:icon cssClass="top-link last" image="../aui/person" label="<%= true %>" message="my-documents" url='<%= topLink.equals("my-documents") ? StringPool.BLANK : portletURL.toString() %>'/>
 					</c:if>
 				</div>
 

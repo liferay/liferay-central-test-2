@@ -52,7 +52,7 @@ List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.sea
 							<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
 						</liferay-portlet:actionURL>
 
-						<liferay-ui:icon image="view" message="open-public-pages" url="<%= publicPagesURL.toString() %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+						<liferay-ui:icon image="view" label="<%= true %>" message="open-public-pages" method="get" target="_blank" url="<%= publicPagesURL.toString() %>" /> (<liferay-ui:message key="new-window" />)
 					</c:when>
 					<c:otherwise>
 						<liferay-ui:message key="this-user-does-not-have-any-public-pages" />
@@ -89,7 +89,7 @@ List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.sea
 							<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
 						</liferay-portlet:actionURL>
 
-						<liferay-ui:icon image="view" message="open-private-pages" url="<%= privatePagesURL.toString() %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+						<liferay-ui:icon image="view" label="<%= true %>" message="open-private-pages" method="get" target="_blank" url="<%= privatePagesURL.toString() %>" /> (<liferay-ui:message key="new-window" />)
 					</c:when>
 					<c:otherwise>
 						<liferay-ui:message key="this-user-does-not-have-any-private-pages" />

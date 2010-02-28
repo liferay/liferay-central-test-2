@@ -32,7 +32,7 @@ userGroupRoles.addAll(organizationRoles);
 %>
 
 <liferay-util:buffer var="removeRoleIcon">
-	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
+	<liferay-ui:icon image="unlink" label="<%= true %>" message="remove" />
 </liferay-util:buffer>
 
 <aui:input name="groupRolesRoleIds" type="hidden" value='<%= ListUtil.toString(userGroupRoles, "roleId") %>' />
@@ -74,11 +74,11 @@ userGroupRoles.addAll(organizationRoles);
 
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<liferay-ui:icon
+		cssClass="modify-link"
 		image="add"
+		label="<%= true %>"
 		message="select"
 		url='<%= "javascript:" + renderResponse.getNamespace() + "openRegularRoleSelector();" %>'
-		label="<%= true %>"
-		cssClass="modify-link"
 	/>
 </c:if>
 
@@ -130,11 +130,11 @@ userGroupRoles.addAll(organizationRoles);
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:icon
+				cssClass="modify-link"
 				image="add"
+				label="<%= true %>"
 				message="select"
 				url='<%= "javascript:" + renderResponse.getNamespace() + "openOrganizationRoleSelector();" %>'
-				label="<%= true %>"
-				cssClass="modify-link"
 			/>
 		</c:if>
 
@@ -210,11 +210,11 @@ userGroupRoles.addAll(organizationRoles);
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:icon
+				cssClass="modify-link"
 				image="add"
+				label="<%= true %>"
 				message="select"
 				url='<%= "javascript:" + renderResponse.getNamespace() + "openCommunityRoleSelector();" %>'
-				label="<%= true %>"
-				cssClass="modify-link"
 			/>
 		</c:if>
 

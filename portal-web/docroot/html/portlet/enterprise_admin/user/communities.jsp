@@ -23,7 +23,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 %>
 
 <liferay-util:buffer var="removeGroupIcon">
-	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
+	<liferay-ui:icon image="unlink" label="<%= true %>" message="remove" />
 </liferay-util:buffer>
 
 <h3><liferay-ui:message key="communities" /></h3>
@@ -87,11 +87,11 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 	<br />
 
 	<liferay-ui:icon
+		cssClass="modify-link"
 		image="add"
+		label="<%= true %>"
 		message="select"
 		url='<%= "javascript:" + renderResponse.getNamespace() + "openGroupSelector();" %>'
-		label="<%= true %>"
-		cssClass="modify-link"
 	/>
 </c:if>
 

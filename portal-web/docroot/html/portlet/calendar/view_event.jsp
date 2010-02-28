@@ -423,8 +423,8 @@ request.setAttribute("view_event.jsp-event", event);
 	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
 		<div class="folder-icon">
 			<liferay-ui:icon
-				image="../file_system/large/calendar"
 				cssClass="folder-avatar"
+				image="../file_system/large/calendar"
 			/>
 
 			<div class="event-name">

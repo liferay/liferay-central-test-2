@@ -34,13 +34,13 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			portletURL.setParameter("topLink", "image-home");
 			%>
 
-			<liferay-ui:icon cssClass="top-link" image="../aui/home" message="image-home" label="<%= true %>" url='<%= (topLink.equals("image-home") && folderId == 0 && viewFolder) ? StringPool.BLANK : portletURL.toString() %>' />
+			<liferay-ui:icon cssClass="top-link" image="../aui/home" label="<%= true %>" message="image-home" url='<%= (topLink.equals("image-home") && folderId == 0 && viewFolder) ? StringPool.BLANK : portletURL.toString() %>' />
 
 			<%
 			portletURL.setParameter("topLink", "recent-images");
 			%>
 
-			<liferay-ui:icon cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>' image="../aui/clock" message="recent-images" label="<%= true %>" url='<%= topLink.equals("recent-images") ? StringPool.BLANK : portletURL.toString() %>'/>
+			<liferay-ui:icon cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>' image="../aui/clock" label="<%= true %>" message="recent-images" url='<%= topLink.equals("recent-images") ? StringPool.BLANK : portletURL.toString() %>'/>
 
 			<c:if test="<%= themeDisplay.isSignedIn() %>">
 
@@ -48,7 +48,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 				portletURL.setParameter("topLink", "my-images");
 				%>
 
-				<liferay-ui:icon cssClass="top-link last" image="../aui/person" message="my-images" label="<%= true %>" url='<%= topLink.equals("my-images") ? StringPool.BLANK : portletURL.toString() %>'/>
+				<liferay-ui:icon cssClass="top-link last" image="../aui/person" label="<%= true %>" message="my-images" url='<%= topLink.equals("my-images") ? StringPool.BLANK : portletURL.toString() %>'/>
 			</c:if>
 		</div>
 

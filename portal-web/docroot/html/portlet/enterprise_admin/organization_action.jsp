@@ -98,7 +98,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" method="get" />
+	<liferay-ui:icon image="view_users" message="view-users" method="get" url="<%= viewUsersURL %>" />
 
 	<c:if test="<%= organization.isParentable() %>">
 
@@ -129,7 +129,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 			<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="view_locations" message="view-suborganizations" url="<%= viewSuborganizationsURL %>" method="get" />
+		<liferay-ui:icon image="view_locations" message="view-suborganizations" method="get" url="<%= viewSuborganizationsURL %>" />
 	</c:if>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">

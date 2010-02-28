@@ -75,7 +75,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" method="get" />
+	<liferay-ui:icon image="view_users" message="view-users" method="get" url="<%= viewUsersURL %>" />
 
 	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.DELETE) %>">
 

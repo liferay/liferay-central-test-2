@@ -46,7 +46,7 @@ if (organization != null) {
 %>
 
 <liferay-util:buffer var="removeOrganizationIcon">
-	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
+	<liferay-ui:icon image="unlink" label="<%= true %>" message="remove" />
 </liferay-util:buffer>
 
 <liferay-ui:error-marker key="errorSection" value="details" />
@@ -140,7 +140,7 @@ if (organization != null) {
 
 			<div class="portrait-icons">
 
-				<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
+				<liferay-ui:icon image="edit" label="<%= true %>" message="change" url="<%= taglibEditURL %>" />
 
 				<c:if test="<%= logoId != 0 %>">
 
@@ -148,7 +148,7 @@ if (organization != null) {
 					String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deleteLogo('" + themeDisplay.getPathImage() + "/organization_logo?img_id=0');";
 					%>
 
-					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" cssClass="modify-link" />
+					<liferay-ui:icon cssClass="modify-link" image="delete" label="<%= true %>" url="<%= taglibDeleteURL %>" />
 
 					<aui:input name="deleteLogo" type="hidden" value="<%= deleteLogo %>" />
 				</c:if>
@@ -239,11 +239,11 @@ if (parentOrganization != null) {
 <br />
 
 <liferay-ui:icon
+	cssClass="modify-link"
 	image="add"
+	label="<%= true %>"
 	message="select"
 	url='<%= "javascript:" + renderResponse.getNamespace() + "openOrganizationSelector();" %>'
-	label="<%= true %>"
-	cssClass="modify-link"
 />
 
 <aui:script>

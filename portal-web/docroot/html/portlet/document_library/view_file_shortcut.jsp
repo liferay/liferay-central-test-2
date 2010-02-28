@@ -188,8 +188,8 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 
 		<div class="file-entry-download">
 			<liferay-ui:icon
-				image='<%= "../file_system/large/" + DLUtil.getGenericName(extension) %>'
 				cssClass="file-entry-avatar"
+				image='<%= "../file_system/large/" + DLUtil.getGenericName(extension) %>'
 				message="download"
 				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + fileShortcutId %>'
 			/>
@@ -211,9 +211,9 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 
 						<liferay-ui:icon
 							image='<%= "../file_system/small/" + conversion %>'
+							label="<%= true %>"
 							message="<%= conversion.toUpperCase() %>"
 							url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + toFolder.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(toFileEntry.getTitle()) + "?targetExtension=" + conversion %>'
-							label="<%= true %>"
 						/>
 
 					<%

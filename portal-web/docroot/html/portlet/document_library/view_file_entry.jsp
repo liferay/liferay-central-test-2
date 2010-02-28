@@ -227,10 +227,10 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 		<div class="file-entry-download">
 			<liferay-ui:icon
+				cssClass="file-entry-avatar"
 				image='<%= "../file_system/large/" + DLUtil.getGenericName(extension) %>'
 				message="download"
 				url="<%= fileUrl %>"
-				cssClass="file-entry-avatar"
 			/>
 
 			<div class="file-entry-name">
@@ -250,9 +250,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 						<liferay-ui:icon
 							image='<%= "../file_system/small/" + conversion %>'
+							label="<%= true %>"
 							message="<%= conversion.toUpperCase() %>"
 							url='<%= fileUrl + "?targetExtension=" + conversion %>'
-							label="<%= true %>"
 						/>
 
 					<%

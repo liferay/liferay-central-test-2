@@ -37,8 +37,8 @@ Boolean supportsFilterByGroup = (Boolean)objArray[5];
 
 	<liferay-ui:icon
 		image="add"
+		label="<%= true %>"
 		message="limit-scope"
 		url="<%= limitScopeURL %>"
-		label="<%= true %>"
 	/>
 </c:if>

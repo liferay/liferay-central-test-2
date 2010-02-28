@@ -23,7 +23,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 %>
 
 <liferay-util:buffer var="removeOrganizationIcon">
-	<liferay-ui:icon image="unlink" message="remove" label="<%= true %>" />
+	<liferay-ui:icon image="unlink" label="<%= true %>" message="remove" />
 </liferay-util:buffer>
 
 <h3><liferay-ui:message key="organizations" /></h3>
@@ -94,11 +94,11 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 	<br />
 
 	<liferay-ui:icon
+		cssClass="modify-link"
 		image="add"
+		label="<%= true %>"
 		message="select"
 		url='<%= "javascript:" + renderResponse.getNamespace() + "openOrganizationSelector();" %>'
-		label="<%= true %>"
-		cssClass="modify-link"
 	/>
 </c:if>
 

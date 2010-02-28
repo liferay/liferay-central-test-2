@@ -41,9 +41,9 @@ for (int i = 0; i < conversions.length; i++) {
 	<td>
 		<liferay-ui:icon
 			image='<%= "../file_system/small/" + conversion %>'
+			label="<%= true %>"
 			message="<%= conversion.toUpperCase() %>"
 			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileVersion.getVersion() + "&targetExtension=" + conversion %>'
-			label="<%= true %>"
 		/>
 	</td>
 

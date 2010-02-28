@@ -68,7 +68,7 @@ long userId = user2.getUserId();
 			var="impersonateUserURL"
 		/>
 
-		<liferay-ui:icon image="impersonate_user" url="<%= impersonateUserURL %>" target="_blank" />
+		<liferay-ui:icon image="impersonate_user" target="_blank" url="<%= impersonateUserURL %>" />
 	</c:if>
 
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.DELETE) %>">
