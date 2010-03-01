@@ -31,9 +31,9 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 <br />
 
 <liferay-ui:icon-list>
-	<liferay-ui:icon image="rss" message="Atom 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLAtomParams %>' target="_blank" label="<%= true %>" />
+	<liferay-ui:icon image="rss" label="<%= true %>" message="Atom 1.0" target="_blank" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLAtomParams %>' />
 
-	<liferay-ui:icon image="rss" message="RSS 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLRSS10Params %>' target="_blank" label="<%= true %>" />
+	<liferay-ui:icon image="rss" label="<%= true %>" message="RSS 1.0" target="_blank" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLRSS10Params %>' />
 
-	<liferay-ui:icon image="rss" message="RSS 2.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLRSS20Params %>' target="_blank" label="<%= true %>" />
+	<liferay-ui:icon image="rss" label="<%= true %>" message="RSS 2.0" target="_blank" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLRSS20Params %>' />
 </liferay-ui:icon-list>

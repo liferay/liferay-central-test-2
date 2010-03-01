@@ -96,7 +96,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 <c:choose>
 	<c:when test="<%= print %>">
 		<div class="popup-print">
-			<liferay-ui:icon image="print" url="javascript:print();" label="<%= true %>" />
+			<liferay-ui:icon image="print" label="<%= true %>" url="javascript:print();" />
 		</div>
 
 		<aui:script>
@@ -119,7 +119,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 		<div class="page-actions">
 			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 				<c:if test="<%= followRedirect || (redirectPage == null) %>">
-					<liferay-ui:icon image="edit" url="<%= editPageURL.toString() %>" label="<%= true %>" />
+					<liferay-ui:icon image="edit" label="<%= true %>" url="<%= editPageURL.toString() %>" />
 				</c:if>
 			</c:if>
 
@@ -129,9 +129,9 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 			viewPageDetailsURL.setParameter("struts_action", "/wiki/view_page_details");
 			%>
 
-			<liferay-ui:icon image="history" message="details" url="<%= viewPageDetailsURL.toString() %>" method="get" label="<%= true %>" />
+			<liferay-ui:icon image="history" label="<%= true %>" message="details" method="get" url="<%= viewPageDetailsURL.toString() %>" />
 
-			<liferay-ui:icon image="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' label="<%= true %>" />
+			<liferay-ui:icon image="print" label="<%= true %>" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
 		</div>
 	</c:if>
 
@@ -225,10 +225,10 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 	<div class="page-actions">
 		<div class="article-actions">
 			<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">
-				<liferay-ui:icon image="add_article" message="add-child-page" url="<%= addPageURL.toString() %>" method="get" label="<%= true %>" />,
+				<liferay-ui:icon image="add_article" label="<%= true %>" message="add-child-page" method="get" url="<%= addPageURL.toString() %>" />,
 			</c:if>
 
-			<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" method="get" label="<%= true %>" />
+			<liferay-ui:icon image="clip" label="<%= true %>" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' method="get" url="<%= viewAttachmentsURL.toString() %>" />
 		</div>
 
 		<div class="stats">
