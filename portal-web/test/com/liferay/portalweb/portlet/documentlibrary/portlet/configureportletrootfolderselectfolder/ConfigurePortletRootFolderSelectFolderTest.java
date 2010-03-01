@@ -49,6 +49,23 @@ public class ConfigurePortletRootFolderSelectFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Select']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//input[@value='Select']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
@@ -76,7 +93,8 @@ public class ConfigurePortletRootFolderSelectFolderTest extends BaseTestCase {
 			selenium.getText("_86_rootFolderName"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 	}
 }

@@ -46,9 +46,11 @@ public class AssertRootFolderSelectFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Folders \u00bb Test1 Folder1"));
-		selenium.clickAt("link=Folders", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
+			selenium.getText("//div[@class='site-breadcrumbs']/ul/li[3]/span/a"));
+		selenium.clickAt("link=Document Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Folders \u00bb Test1 Folder1"));
+		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
+			selenium.getText("//div[@class='site-breadcrumbs']/ul/li[3]/span/a"));
 	}
 }
