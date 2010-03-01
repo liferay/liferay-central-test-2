@@ -13,15 +13,18 @@ AUI().add(
 				if (obj) {
 					instance._portletId = portletId;
 					instance._curPortlet = obj.one('.portlet');
-					instance._curPortletWrapperId = instance._curPortlet.attr('id');
-					instance._portletBoundaryId = curPortletBoundaryId;
-					instance._newPanel = A.one('#portlet-set-properties');
-					instance._currentLanguage = themeDisplay.getLanguageId();
 
 					if (!instance._curPortlet) {
 						instance._curPortlet = obj;
 						instance._curPortletWrapperId = curPortletBoundaryId;
 					}
+					else {
+						instance._curPortletWrapperId = instance._curPortlet.attr('id');
+					}
+
+					instance._portletBoundaryId = curPortletBoundaryId;
+					instance._newPanel = A.one('#portlet-set-properties');
+					instance._currentLanguage = themeDisplay.getLanguageId();
 
 					if (instance._curPortlet) {
 						var content = instance._newPanel;
