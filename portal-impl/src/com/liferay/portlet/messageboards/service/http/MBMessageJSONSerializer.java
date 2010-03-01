@@ -80,6 +80,7 @@ public class MBMessageJSONSerializer {
 		jsonObj.put("attachments", model.getAttachments());
 		jsonObj.put("anonymous", model.getAnonymous());
 		jsonObj.put("priority", model.getPriority());
+		jsonObj.put("allowPingbacks", model.getAllowPingbacks());
 		jsonObj.put("status", model.getStatus());
 		jsonObj.put("statusByUserId", model.getStatusByUserId());
 		jsonObj.put("statusByUserName", model.getStatusByUserName());

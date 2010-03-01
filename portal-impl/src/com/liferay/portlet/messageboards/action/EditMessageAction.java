@@ -233,6 +233,8 @@ public class EditMessageAction extends PortletAction {
 		boolean question = ParamUtil.getBoolean(actionRequest, "question");
 		boolean anonymous = ParamUtil.getBoolean(actionRequest, "anonymous");
 		double priority = ParamUtil.getDouble(actionRequest, "priority");
+		boolean allowPingbacks = ParamUtil.getBoolean(
+			actionRequest, "allowPingbacks");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			MBMessage.class.getName(), actionRequest);
@@ -250,7 +252,7 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					groupId, categoryId, subject, body, files, anonymous,
-					priority, serviceContext);
+					priority, allowPingbacks, serviceContext);
 
 				if (question) {
 					MBMessageFlagLocalServiceUtil.addQuestionFlag(
@@ -263,7 +265,8 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					groupId, categoryId, threadId, parentMessageId, subject,
-					body, files, anonymous, priority, serviceContext);
+					body, files, anonymous, priority, allowPingbacks,
+					serviceContext);
 			}
 		}
 		else {
@@ -282,7 +285,7 @@ public class EditMessageAction extends PortletAction {
 
 			message = MBMessageServiceUtil.updateMessage(
 				messageId, subject, body, files, existingFiles, priority,
-				serviceContext);
+				allowPingbacks, serviceContext);
 
 			if (message.isRoot()) {
 				if (question) {

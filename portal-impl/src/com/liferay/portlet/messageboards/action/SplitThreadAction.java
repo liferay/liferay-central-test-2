@@ -162,7 +162,8 @@ public class SplitThreadAction extends PortletAction {
 				message.getGroupId(), message.getCategoryId(), oldThreadId,
 				oldParentMessageId, subject, body,
 				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
-				MBThreadConstants.PRIORITY_NOT_GIVEN, serviceContext);
+				MBThreadConstants.PRIORITY_NOT_GIVEN,
+				message.getAllowPingbacks(), serviceContext);
 		}
 
 		PortletURL portletURL =

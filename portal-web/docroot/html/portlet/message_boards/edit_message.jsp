@@ -63,6 +63,8 @@ String[] existingAttachments = new String[0];
 if ((message != null) && message.isAttachments()) {
 	existingAttachments = DLServiceUtil.getFileNames(message.getCompanyId(), CompanyConstants.SYSTEM, message.getAttachmentsDir());
 }
+
+boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanParamUtil.getBoolean(message, request, "allowPingbacks", true);
 %>
 
 <c:if test="<%= preview %>">
@@ -267,6 +269,10 @@ if ((message != null) && message.isAttachments()) {
 				%>
 
 			</aui:select>
+		</c:if>
+
+		<c:if test="<%= PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED %>">
+			<aui:input helpMessage="to-allow-pingbacks,-please-also-ensure-the-entry's-guest-view-permission-is-enabled" inlineLabel="left" label="allow-pingbacks" name="allowPingbacks" value="<%= allowPingbacks %>" />
 		</c:if>
 
 		<c:if test="<%= (curParentMessage == null) || childrenMessagesTaggable %>">

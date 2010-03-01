@@ -86,8 +86,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long groupId, long categoryId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, ServiceContext serviceContext)
+			List<ObjectValuePair<String, byte[]>> files,
+			boolean anonymous, double priority, boolean allowPingbacks,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -110,14 +111,15 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, groupId, categoryId, subject, body, files,
-			anonymous, priority, serviceContext);
+			anonymous, priority, allowPingbacks, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long groupId, long categoryId, long threadId, long parentMessageId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, ServiceContext serviceContext)
+			double priority, boolean allowPingbacks,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		checkReplyToPermission(groupId, categoryId, parentMessageId);
@@ -145,7 +147,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, groupId, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, priority,
-			serviceContext);
+			allowPingbacks, serviceContext);
 	}
 
 	public void deleteDiscussionMessage(
@@ -498,7 +500,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	public MBMessage updateMessage(
 			long messageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files,
-			List<String> existingFiles, double priority,
+			List<String> existingFiles, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -532,7 +534,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.updateMessage(
 			getUserId(), messageId, subject, body, files, existingFiles,
-			priority, serviceContext);
+			priority, allowPingbacks, serviceContext);
 	}
 
 	protected void checkReplyToPermission(

@@ -58,6 +58,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
+import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
@@ -93,6 +94,9 @@ import java.util.Set;
 import javax.mail.internet.InternetAddress;
 
 import javax.portlet.PortletPreferences;
+
+import net.htmlparser.jericho.Source;
+import net.htmlparser.jericho.StartTag;
 
 /**
  * <a href="MBMessageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -138,6 +142,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			new ArrayList<ObjectValuePair<String, byte[]>>();
 		boolean anonymous = false;
 		double priority = 0.0;
+		boolean allowPingbacks = false;
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
@@ -149,7 +154,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, serviceContext);
+			subject, body, files, anonymous, priority, allowPingbacks,
+			serviceContext);
 
 		message.setClassNameId(classNameId);
 		message.setClassPK(classPK);
@@ -199,7 +205,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String userName, long groupId, long categoryId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, ServiceContext serviceContext)
+			double priority, boolean allowPingbacks,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		long threadId = 0;
@@ -208,20 +215,21 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return addMessage(
 			null, userId, userName, groupId, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, priority,
-			serviceContext);
+			allowPingbacks, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long userId, String userName, long groupId, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, ServiceContext serviceContext)
+			double priority, boolean allowPingbacks,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			null, userId, userName, groupId, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, priority,
-			serviceContext);
+			allowPingbacks, serviceContext);
 	}
 
 	public MBMessage addMessage(
@@ -229,7 +237,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long categoryId, long threadId, long parentMessageId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, ServiceContext serviceContext)
+			double priority, boolean allowPingbacks,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Message
@@ -269,6 +278,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setUserName(userName);
 		message.setCreateDate(now);
 		message.setModifiedDate(now);
+		message.setAllowPingbacks(allowPingbacks);
 		message.setStatus(serviceContext.getStatus());
 		message.setStatusByUserId(user.getUserId());
 		message.setStatusByUserName(userName);
@@ -473,6 +483,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Subscriptions
 
 		notifySubscribers(message, serviceContext, false);
+
+		// Ping
+
+		pingPingback(message, serviceContext);
 
 		// Testing roll back
 
@@ -1226,6 +1240,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			new ArrayList<ObjectValuePair<String, byte[]>>();
 		List<String> existingFiles = new ArrayList<String>();
 		double priority = 0.0;
+		boolean allowPingbacks = false;
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -1233,13 +1248,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return updateMessage(
 			userId, messageId, subject, body, files, existingFiles, priority,
-			serviceContext);
+			allowPingbacks, serviceContext);
 	}
 
 	public MBMessage updateMessage(
 			long userId, long messageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files,
-			List<String> existingFiles, double priority,
+			List<String> existingFiles, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -1260,6 +1275,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setSubject(subject);
 		message.setBody(body);
 		message.setAttachments(!files.isEmpty() || !existingFiles.isEmpty());
+		message.setAllowPingbacks(allowPingbacks);
 
 		if (priority != MBThreadConstants.PRIORITY_NOT_GIVEN) {
 			message.setPriority(priority);
@@ -1372,6 +1388,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		notifySubscribers(message, serviceContext, update);
+
+		// Ping
+
+		pingPingback(message, serviceContext);
 
 		// Indexer
 
@@ -1911,6 +1931,44 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.MESSAGE_BOARDS, messagingObj);
+	}
+
+	protected void pingPingback(
+		MBMessage message, ServiceContext serviceContext) {
+
+		if (!PropsValues.BLOGS_PINGBACK_ENABLED ||
+			!message.isAllowPingbacks() ||
+			(message.getStatus() != StatusConstants.APPROVED)) {
+
+			return;
+		}
+
+		String layoutFullURL = serviceContext.getLayoutFullURL();
+
+		if (Validator.isNull(layoutFullURL)) {
+			return;
+		}
+
+		String sourceUri =
+			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR +
+				"message_boards/message/" + message.getMessageId();
+
+		Source source = new Source(message.getBody(true));
+
+		List<StartTag> tags = source.getAllStartTags("a");
+
+		for (StartTag tag : tags) {
+			String targetUri = tag.getAttributeValue("href");
+
+			if (Validator.isNotNull(targetUri)) {
+				try {
+					LinkbackProducerUtil.sendPingback(sourceUri, targetUri);
+				}
+				catch (Exception e) {
+					_log.error("Error while sending pingback " + targetUri, e);
+				}
+			}
+		}
 	}
 
 	protected void sendBlogsCommentsEmail(

@@ -213,13 +213,13 @@ public class MailingListMessageListener implements MessageListener {
 		if (parentMessage == null) {
 			MBMessageServiceUtil.addMessage(
 				groupId, categoryId, subject, collector.getBody(),
-				collector.getFiles(), anonymous, 0.0, serviceContext);
+				collector.getFiles(), anonymous, 0.0, true, serviceContext);
 		}
 		else {
 			MBMessageServiceUtil.addMessage(
 				groupId, categoryId, parentMessage.getThreadId(),
 				parentMessage.getMessageId(), subject, collector.getBody(),
-				collector.getFiles(), anonymous, 0.0, serviceContext);
+				collector.getFiles(), anonymous, 0.0, true, serviceContext);
 		}
 	}
 

@@ -80,12 +80,13 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			{ "attachments", new Integer(Types.BOOLEAN) },
 			{ "anonymous", new Integer(Types.BOOLEAN) },
 			{ "priority", new Integer(Types.DOUBLE) },
+			{ "allowPingbacks", new Integer(Types.BOOLEAN) },
 			{ "status", new Integer(Types.INTEGER) },
 			{ "statusByUserId", new Integer(Types.BIGINT) },
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,allowPingbacks BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessage";
 	public static final String ORDER_BY_JPQL = " ORDER BY mbMessage.createDate ASC, mbMessage.messageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY MBMessage.createDate ASC, MBMessage.messageId ASC";
@@ -120,6 +121,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		model.setAttachments(soapModel.getAttachments());
 		model.setAnonymous(soapModel.getAnonymous());
 		model.setPriority(soapModel.getPriority());
+		model.setAllowPingbacks(soapModel.getAllowPingbacks());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
@@ -342,6 +344,18 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		_priority = priority;
 	}
 
+	public boolean getAllowPingbacks() {
+		return _allowPingbacks;
+	}
+
+	public boolean isAllowPingbacks() {
+		return _allowPingbacks;
+	}
+
+	public void setAllowPingbacks(boolean allowPingbacks) {
+		_allowPingbacks = allowPingbacks;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -411,6 +425,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			model.setAttachments(getAttachments());
 			model.setAnonymous(getAnonymous());
 			model.setPriority(getPriority());
+			model.setAllowPingbacks(getAllowPingbacks());
 			model.setStatus(getStatus());
 			model.setStatusByUserId(getStatusByUserId());
 			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
@@ -458,6 +473,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		clone.setAttachments(getAttachments());
 		clone.setAnonymous(getAnonymous());
 		clone.setPriority(getPriority());
+		clone.setAllowPingbacks(getAllowPingbacks());
 		clone.setStatus(getStatus());
 		clone.setStatusByUserId(getStatusByUserId());
 		clone.setStatusByUserName(getStatusByUserName());
@@ -521,7 +537,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -559,6 +575,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		sb.append(getAnonymous());
 		sb.append(", priority=");
 		sb.append(getPriority());
+		sb.append(", allowPingbacks=");
+		sb.append(getAllowPingbacks());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", statusByUserId=");
@@ -573,7 +591,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.messageboards.model.MBMessage");
@@ -652,6 +670,10 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		sb.append(getPriority());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>allowPingbacks</column-name><column-value><![CDATA[");
+		sb.append(getAllowPingbacks());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
@@ -695,6 +717,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	private boolean _attachments;
 	private boolean _anonymous;
 	private double _priority;
+	private boolean _allowPingbacks;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserUuid;

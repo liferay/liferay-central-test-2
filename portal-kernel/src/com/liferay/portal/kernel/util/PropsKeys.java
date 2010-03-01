@@ -1027,6 +1027,8 @@ public interface PropsKeys {
 
 	public static final String MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL = "message.boards.expire.ban.job.interval";
 
+	public static final String MESSAGE_BOARDS_PINGBACK_ENABLED = "message.boards.pingback.enabled";
+
 	public static final String MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH = "message.boards.rss.abstract.length";
 
 	public static final String MESSAGE_BOARDS_THREAD_VIEWS = "message.boards.thread.views";

@@ -1110,6 +1110,10 @@ public class PropsValues {
 		GetterUtil.getLong(
 			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL));
 
+	public static final boolean MESSAGE_BOARDS_PINGBACK_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_PINGBACK_ENABLED));
+
 	public static final String[] MESSAGE_BOARDS_THREAD_VIEWS =
 		PropsUtil.getArray(PropsKeys.MESSAGE_BOARDS_THREAD_VIEWS);
 

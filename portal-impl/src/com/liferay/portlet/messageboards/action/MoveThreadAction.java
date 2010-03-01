@@ -137,7 +137,8 @@ public class MoveThreadAction extends PortletAction {
 			MBMessageServiceUtil.addMessage(
 				groupId, categoryId, threadId, thread.getRootMessageId(),
 				subject, body, new ArrayList<ObjectValuePair<String, byte[]>>(),
-				false, MBThreadConstants.PRIORITY_NOT_GIVEN, serviceContext);
+				false, MBThreadConstants.PRIORITY_NOT_GIVEN, false,
+				serviceContext);
 		}
 
 		PortletURL portletURL =

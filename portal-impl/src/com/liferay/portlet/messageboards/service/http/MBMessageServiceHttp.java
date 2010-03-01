@@ -141,7 +141,7 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long categoryId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -172,10 +172,12 @@ public class MBMessageServiceHttp {
 
 			Object paramObj6 = new DoubleWrapper(priority);
 
-			Object paramObj7 = serviceContext;
+			Object paramObj7 = new BooleanWrapper(allowPingbacks);
+
+			Object paramObj8 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj7 = new NullWrapper(
+				paramObj8 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -183,7 +185,7 @@ public class MBMessageServiceHttp {
 					"addMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;
@@ -217,7 +219,7 @@ public class MBMessageServiceHttp {
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -252,10 +254,12 @@ public class MBMessageServiceHttp {
 
 			Object paramObj8 = new DoubleWrapper(priority);
 
-			Object paramObj9 = serviceContext;
+			Object paramObj9 = new BooleanWrapper(allowPingbacks);
+
+			Object paramObj10 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj9 = new NullWrapper(
+				paramObj10 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -263,7 +267,8 @@ public class MBMessageServiceHttp {
 					"addMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
 					});
 
 			Object returnObj = null;
@@ -1076,6 +1081,7 @@ public class MBMessageServiceHttp {
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		java.util.List<String> existingFiles, double priority,
+		boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -1108,10 +1114,12 @@ public class MBMessageServiceHttp {
 
 			Object paramObj5 = new DoubleWrapper(priority);
 
-			Object paramObj6 = serviceContext;
+			Object paramObj6 = new BooleanWrapper(allowPingbacks);
+
+			Object paramObj7 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj6 = new NullWrapper(
+				paramObj7 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -1119,7 +1127,7 @@ public class MBMessageServiceHttp {
 					"updateMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;

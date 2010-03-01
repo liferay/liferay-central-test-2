@@ -143,6 +143,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 				new ArrayList<ObjectValuePair<String, byte[]>>();
 			boolean anonymous = false;
 			double priority = 0.0;
+			boolean allowPingbacks = false;
 
 			ServiceContext serviceContext = new ServiceContext();
 
@@ -151,7 +152,8 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 			MBMessageServiceUtil.addMessage(
 				_category.getGroupId(), _category.getCategoryId(), _subject,
-				body, files, anonymous, priority, serviceContext);
+				body, files, anonymous, priority, allowPingbacks,
+				serviceContext);
 		}
 
 		private String _subject;

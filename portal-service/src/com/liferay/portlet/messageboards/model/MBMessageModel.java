@@ -130,6 +130,12 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setPriority(double priority);
 
+	public boolean getAllowPingbacks();
+
+	public boolean isAllowPingbacks();
+
+	public void setAllowPingbacks(boolean allowPingbacks);
+
 	public int getStatus();
 
 	public void setStatus(int status);

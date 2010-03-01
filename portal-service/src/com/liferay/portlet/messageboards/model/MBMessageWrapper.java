@@ -209,6 +209,18 @@ public class MBMessageWrapper implements MBMessage {
 		_mbMessage.setPriority(priority);
 	}
 
+	public boolean getAllowPingbacks() {
+		return _mbMessage.getAllowPingbacks();
+	}
+
+	public boolean isAllowPingbacks() {
+		return _mbMessage.isAllowPingbacks();
+	}
+
+	public void setAllowPingbacks(boolean allowPingbacks) {
+		_mbMessage.setAllowPingbacks(allowPingbacks);
+	}
+
 	public int getStatus() {
 		return _mbMessage.getStatus();
 	}
