@@ -365,7 +365,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 
 		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version}.war" />
 
-		<antcall target="build-dist-sql-oracle" />
+		<!--<antcall target="build-dist-sql-oracle" />-->
 
 		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
 
@@ -575,7 +575,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 			/>
 			<zipfileset
 				dir="lib/portal"
-				includes="axis.jar,commons-discovery.jar,commons-logging.jar,jaxrpc.jar,wsdl4j.jar"
+				includes="axis.jar,commons-discovery.jar,commons-logging.jar,jaxrpc.jar,saaj-api.jar,saaj-impl.jar,wsdl4j.jar"
 				prefix="liferay-portal-client-${lp.version}"
 			/>
 			<zipfileset
@@ -615,9 +615,9 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 
 	<target name="zip-portal-war">
 		<antcall target="zip-portal-war-2.4" />
-		<!--<antcall target="zip-portal-war-2.3" />-->
+		<!--<antcall target="zip-portal-war-2.3" />
 		<antcall target="zip-portal-war-2.4-with-dependencies" />
-		<!--<antcall target="zip-portal-war-2.3-with-dependencies" />-->
+		<antcall target="zip-portal-war-2.3-with-dependencies" />-->
 	</target>
 
 	<target name="zip-portal-war-2.3">
