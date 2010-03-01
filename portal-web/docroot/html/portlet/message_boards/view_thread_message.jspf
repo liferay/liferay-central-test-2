@@ -202,7 +202,7 @@
 								</li>
 								<li>
 									<portlet:renderURL var="quoteURL">
-										<portlet:param name="struts_action" valus="/message_boards/edit_message" />
+										<portlet:param name="struts_action" value="/message_boards/edit_message" />
 										<portlet:param name="redirect" value="<%= currentURL %>" />
 										<portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
 										<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
