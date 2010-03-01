@@ -19,7 +19,7 @@
 	zoom: 1;
 }
 
-.ie6 .dockbar, .ie6 .lfr-dockbar-pinned .dockbar {
+.ie6 .dockbar, .ie6 .dockbar-pinned .dockbar {
 	height: 10px;
 	left: 0;
 	position: relative;
@@ -55,11 +55,11 @@
 	margin-left: 0;
 }
 
-html > .lfr-dockbar-pinned {
+html > .dockbar-pinned {
 	padding-top: 3.45em;
 }
 
-.lfr-dockbar-pinned .dockbar {
+.dockbar-pinned .dockbar {
 	left: 0;
 	position: fixed;
 	right: 0;
@@ -81,7 +81,7 @@ html > .lfr-dockbar-pinned {
 	width: 27px;
 }
 
-.lfr-dockbar-pinned .pin-dockbar img {
+.dockbar-pinned .pin-dockbar img {
 	background-image: url(../images/dockbar/unpin.png);
 }
 

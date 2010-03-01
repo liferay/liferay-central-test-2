@@ -28,7 +28,7 @@
 #end
 
 #if($liferay_dockbar_pinned == "true")
-	#set ($css_class = $css_class + " lfr-dockbar-pinned")
+	#set ($css_class = $css_class + " dockbar-pinned")
 #end
 
 #if ($layoutTypePortlet.hasStateMax())
