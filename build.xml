@@ -430,6 +430,8 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djboss.vfs.forceVfsJar=true -Dorg.j
 						</unjar>
 
 						<echo file="${app.server.dir}/etc/start.config" append="true">
+jetty.logs=$(jetty.home)/logs
+
 $(jetty.home)/lib/liferay/*</echo>
 					</then>
 				</if>
