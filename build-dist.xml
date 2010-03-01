@@ -976,9 +976,11 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 
 		<unzip src="${app.server.parent.dir}/${app.server.resin.zip.name}" dest="${app.server.parent.dir}">
 			<patternset
-				excludes="resin-3.1.9/php/**,resin-3.1.9/webapps/ROOT/**"
+				excludes="resin-3.1.9/php/**,resin-3.1.9/webapps/**"
 			/>
 		</unzip>
+
+		<mkdir dir="${app.server.parent.dir}/resin-3.1.9/webapps" />
 	</target>
 
 	<target name="unzip-tomcat">
