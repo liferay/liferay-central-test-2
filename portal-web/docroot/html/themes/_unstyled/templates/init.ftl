@@ -28,7 +28,7 @@
 </#if>
 
 <#if liferay_dockbar_pinned = "true">
-	<#assign css_class = css_class + " dockbar-pinned" />
+	<#assign css_class = css_class + " lfr-dockbar-pinned" />
 </#if>
 
 <#if layoutTypePortlet.hasStateMax()>

@@ -7,7 +7,7 @@
 .ie7 .dockbar {
 }
 
-.ie6 .dockbar, .ie6 .dockbar-pinned .dockbar {
+.ie6 .dockbar, .ie6 .lfr-dockbar-pinned .dockbar {
 }
 
 .dockbar a {
@@ -28,10 +28,10 @@
 .dockbar li li {
 }
 
-html > .dockbar-pinned {
+html > .lfr-dockbar-pinned {
 }
 
-.dockbar-pinned .dockbar {
+.lfr-dockbar-pinned .dockbar {
 }
 
 .dockbar .pin-dockbar {
@@ -43,7 +43,7 @@ html > .dockbar-pinned {
 .pin-dockbar img {
 }
 
-.dockbar-pinned .pin-dockbar img {
+.lfr-dockbar-pinned .pin-dockbar img {
 }
 
 .dockbar .user-avatar img {

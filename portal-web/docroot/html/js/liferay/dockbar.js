@@ -17,9 +17,9 @@ AUI().use(
 					dockBar.one('.pin-dockbar').on(
 						'click',
 						function(event) {
-							body.toggleClass('dockbar-pinned');
+							body.toggleClass('lfr-dockbar-pinned');
 
-							var pinned = body.hasClass('dockbar-pinned');
+							var pinned = body.hasClass('lfr-dockbar-pinned');
 
 							A.io.request(
 								themeDisplay.getPathMain() + '/portal/session_click',
