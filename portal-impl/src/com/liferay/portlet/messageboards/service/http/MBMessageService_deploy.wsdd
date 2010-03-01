@@ -19,6 +19,7 @@
 			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="anonymous" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:double"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="allowPingbacks" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addMessage" qname="operNS:addMessage" returnQName="addMessageReturn" returnType="rtns:MBMessageSoap" soapAction="">
@@ -29,6 +30,7 @@
 			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="anonymous" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:double"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="allowPingbacks" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addDiscussionMessage" qname="operNS:addDiscussionMessage" returnQName="addDiscussionMessageReturn" returnType="rtns:MBMessageSoap" soapAction="">
@@ -82,6 +84,7 @@
 			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
 			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="existingFiles" type="tns:ArrayOf_xsd_anyType"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:double"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="allowPingbacks" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="getMessage" qname="operNS:getMessage" returnQName="getMessageReturn" returnType="rtns:MBMessageSoap" soapAction="">

@@ -10,6 +10,7 @@
 		<parameter name="wsdlPortType" value="ExpandoValueServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="addValue" qname="operNS:addValue" returnQName="addValueReturn" returnType="rtns:ExpandoValueSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
