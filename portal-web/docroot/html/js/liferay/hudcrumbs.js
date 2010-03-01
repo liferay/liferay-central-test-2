@@ -75,7 +75,7 @@ AUI().add(
 					var dockbar = instance._dockbar;
 					var body = instance._body;
 
-					if (dockbar && body.hasClass('lfr-dockbar-pinned')) {
+					if (dockbar && body.hasClass('dockbar-pinned')) {
 						var dockbarHeight = dockbar.get('offsetHeight');
 
 						top = dockbarHeight;
