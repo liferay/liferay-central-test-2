@@ -474,7 +474,7 @@
 								var="permissionsURL"
 							/>
 
-							<liferay-ui:icon image="permissions" label="<%= true %>" url="<%= permissionsURL %>" s/>
+							<liferay-ui:icon image="permissions" label="<%= true %>" url="<%= permissionsURL %>" />
 						</li>
 					</c:if>
 
