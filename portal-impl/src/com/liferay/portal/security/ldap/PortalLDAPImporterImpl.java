@@ -607,7 +607,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"User is already syncronized, skipping user " +
+						"User is already synchronized, skipping user " +
 							user.getEmailAddress());
 				}
 
