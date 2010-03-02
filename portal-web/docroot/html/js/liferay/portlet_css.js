@@ -250,8 +250,8 @@ AUI().add(
 				wLeftUnit.detach('change');
 				wLeftUnit.on('change', changeWidth);
 
-				ufaWidth.detach('click');
-				ufaWidth.on('click', changeWidth);
+				ufaWidth.detach('change');
+				ufaWidth.on('change', changeWidth);
 
 				// Border style
 
@@ -309,8 +309,8 @@ AUI().add(
 				sLeftStyle.detach('change');
 				sLeftStyle.on('change', changeStyle);
 
-				ufaStyle.detach('click');
-				ufaStyle.on('click', changeStyle);
+				ufaStyle.detach('change');
+				ufaStyle.on('change', changeStyle);
 
 				// Border color
 
@@ -418,8 +418,8 @@ AUI().add(
 				cLeftColor.detach('keyup');
 				cLeftColor.on('keyup', changeColor);
 
-				ufaColor.detach('click');
-				ufaColor.on('click', changeColor);
+				ufaColor.detach('change');
+				ufaColor.on('change', changeColor);
 			},
 
 			_cssStyles: function() {
@@ -654,8 +654,8 @@ AUI().add(
 					// Text
 
 					instance._fontFamily = instance._getNodeById('lfr-font-family');
-					instance._fontWeight = instance._getNodeById('lfr-font-bold');
-					instance._fontStyle = instance._getNodeById('lfr-font-italic');
+					instance._fontWeight = instance._getNodeById('lfr-font-boldCheckbox');
+					instance._fontStyle = instance._getNodeById('lfr-font-italicCheckbox');
 					instance._fontSize = instance._getNodeById('lfr-font-size');
 					instance._fontColor = instance._getNodeById('lfr-font-color');
 					instance._textAlign = instance._getNodeById('lfr-font-align');
@@ -894,13 +894,21 @@ AUI().add(
 					var handleForms = function(item, index, collection) {
 						var checkBox = item;
 
-						var otherHolders = checkBox.ancestor('fieldset').all('.aui-field');
+						var fieldset = checkBox.ancestor('fieldset');
+
+						var otherHolders = fieldset.all('.aui-field-row');
+						var firstIndex = 0;
+
+						if (!otherHolders.size()) {
+							otherHolders = fieldset.all('.aui-field');
+							firstIndex = 1;
+						}
 
 						var checked = item.get('checked');
 
 						otherHolders.each(
 							function(holderItem, holderIndex, holderCollection) {
-								if (holderIndex > 1) {
+								if (holderIndex > firstIndex) {
 									var fields = holderItem.all('input, select');
 									var colorPickerImages = holderItem.all('.aui-tool-item');
 
@@ -1229,11 +1237,11 @@ AUI().add(
 				var fontStyle = false;
 				var fontWeight = false;
 
-				if (textData.fontStyle != 'normal') {
+				if (textData.fontStyle && textData.fontStyle != 'normal') {
 					fontStyle = true;
 				}
 
-				if (textData.fontWeight != 'normal') {
+				if (textData.fontWeight && textData.fontWeight != 'normal') {
 					fontWeight = true;
 				}
 
@@ -1475,8 +1483,8 @@ AUI().add(
 				pLeftUnit.detach('change');
 				pLeftUnit.on('change', changePadding);
 
-				ufaPadding.detach('click');
-				ufaPadding.on('click', changePadding);
+				ufaPadding.detach('change');
+				ufaPadding.on('change', changePadding);
 
 				// Margin
 
@@ -1567,8 +1575,8 @@ AUI().add(
 				mLeftUnit.detach('change');
 				mLeftUnit.on('change', changeMargin);
 
-				ufaMargin.detach('click');
-				ufaMargin.on('click', changeMargin);
+				ufaMargin.detach('change');
+				ufaMargin.on('change', changeMargin);
 			},
 
 			_textStyles: function() {
