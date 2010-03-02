@@ -29,4 +29,15 @@
 				))
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.getImageIdsByG_F">
+		<![CDATA[
+			SELECT
+				IGImage.ImageId
+			FROM
+				IGImage
+			WHERE
+				(IGImage.groupId = ?) AND
+				(IGImage.folderId = ?)
+		]]>
+	</sql>
 </custom-sql>

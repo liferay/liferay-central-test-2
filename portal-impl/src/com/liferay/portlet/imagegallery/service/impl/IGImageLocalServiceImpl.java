@@ -302,10 +302,11 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public void deleteImages(long groupId, long folderId)
 		throws PortalException, SystemException {
 
-		List<IGImage> images = igImagePersistence.findByG_F(groupId, folderId);
+		List<Long> imageIds =
+			igImageFinder.getImageIdsByFolderId(groupId, folderId);
 
-		for (IGImage image : images) {
-			deleteImage(image);
+		for (Long imageId : imageIds) {
+			deleteImage(imageId);
 		}
 	}
 
