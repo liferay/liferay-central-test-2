@@ -89,7 +89,7 @@ if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP))
 	<div class="separator"><!-- --></div>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
-		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteUserGroups();" %>' value="update-associations" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteUserGroups();" %>' value="delete" />
 
 		<br /><br />
 	</c:if>
