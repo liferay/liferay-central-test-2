@@ -72,7 +72,7 @@ public class AddFolderDocumentCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test1 comment1."));
 		selenium.keyPress("_20_postReplyBody0", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_20_postReplyBody0", RuntimeVariables.replace("\\8"));
-		selenium.click(RuntimeVariables.replace("_20_postReplyButton0"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Reply']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

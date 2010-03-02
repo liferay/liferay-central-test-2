@@ -49,7 +49,7 @@ public class AddSubfolderDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[5]/a",
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[4]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
