@@ -459,7 +459,7 @@ $(jetty.home)/lib/liferay/*</echo>
 					<then>
 						<replace file="${app.server.bin.dir}/setenv">
 							<replacetoken><![CDATA[export JAVA_OPTS]]></replacetoken>
-							<replacevalue><![CDATA[JAVA_OPTS=-Dfile.encoding=UTF8 -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m
+							<replacevalue><![CDATA[JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file=$JONAS_ROOT/conf/felix-config.properties -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m
 export JAVA_OPTS]]></replacevalue>
 						</replace>
 					</then>
@@ -477,7 +477,7 @@ export JAVA_OPTS]]></replacevalue>
 						<replace file="${app.server.bin.dir}/setenv.bat">
 							<replacetoken><![CDATA[set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%]]></replacetoken>
 							<replacevalue><![CDATA[set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%
-set JAVA_OPTS=-Dfile.encoding=UTF8 -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
+set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file=%JONAS_ROOT%/conf/felix-config.properties -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
 						</replace>
 					</then>
 				</if>
@@ -506,6 +506,31 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize
 	<filter-name>org.objectweb.jotm.*</filter-name>
 	<filter-name>org.quartz.*</filter-name>
 	<filter-name>org.springframework.*</filter-name>]]></replacevalue>
+						</replace>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<available file="${app.server.dir}/conf/felix-config.properties" />
+					</not>
+					<then>
+						<unjar src="${app.server.dir}/lib/bootstrap/felix-launcher.jar" dest="${app.server.dir}/conf">
+							<patternset>
+								<include name="**/default-config.properties" />
+							</patternset>
+							<chainedmapper>
+								<flattenmapper />
+								<globmapper
+									from="default-config.properties"
+									to="felix-config.properties"
+								/>
+							</chainedmapper>
+						</unjar>
+
+						<replace file="${app.server.dir}/conf/felix-config.properties">
+							<replacetoken>org.osgi.framework.system.packages org.osgi.framework;</replacetoken>
+							<replacevalue>org.osgi.framework.system.packages com.sun.jmx.interceptor; com.sun.jmx.mbeanserver; org.osgi.framework;</replacevalue>
 						</replace>
 					</then>
 				</if>

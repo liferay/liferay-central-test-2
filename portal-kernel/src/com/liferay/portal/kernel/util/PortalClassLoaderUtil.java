@@ -14,6 +14,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.net.URL;
+import java.net.URLClassLoader;
+
 /**
  * <a href="PortalClassLoaderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -26,7 +29,12 @@ public class PortalClassLoaderUtil {
 	}
 
 	public static void setClassLoader(ClassLoader contextClassLoader) {
-		_classLoader = contextClassLoader;
+		if (ServerDetector.isJOnAS() && JavaProps.isJDK6()) {
+			_classLoader = new URLClassLoader(new URL[0], contextClassLoader);
+		}
+		else {
+			_classLoader = contextClassLoader;
+		}
 	}
 
 	private static ClassLoader _classLoader;
