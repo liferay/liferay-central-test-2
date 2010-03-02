@@ -66,7 +66,7 @@ public class LDAPUser {
 	}
 
 	public String getFirstName() {
-		return _contact.getFirstName();
+		return _user.getFirstName();
 	}
 
 	public String getGreeting() {
@@ -94,7 +94,7 @@ public class LDAPUser {
 	}
 
 	public String getLastName() {
-		return _contact.getLastName();
+		return _user.getLastName();
 	}
 
 	public Locale getLocale() {
@@ -102,7 +102,7 @@ public class LDAPUser {
 	}
 
 	public String getMiddleName() {
-		return _contact.getMiddleName();
+		return _user.getMiddleName();
 	}
 
 	public String getMsnSn() {
