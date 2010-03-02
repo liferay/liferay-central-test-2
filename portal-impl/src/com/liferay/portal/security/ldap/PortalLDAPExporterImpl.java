@@ -97,7 +97,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 			if (modifications == null) {
 				return;
 			}
-			
+
 			ModificationItem[] modificationItems = modifications.getItems();
 
 			ldapContext.modifyAttributes(name, modificationItems);
