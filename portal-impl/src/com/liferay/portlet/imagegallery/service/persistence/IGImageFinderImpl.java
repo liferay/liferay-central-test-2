@@ -44,9 +44,6 @@ public class IGImageFinderImpl
 	public static String FIND_BY_NO_ASSETS =
 		IGImageFinder.class.getName() + ".findByNoAssets";
 
-	public static String GET_IMAGE_IDS_BY_G_F =
-		IGImageFinder.class.getName() + ".getImageIdsByG_F";
-
 	public int countByG_F(long groupId, List<Long> folderIds)
 		throws SystemException {
 
@@ -85,35 +82,6 @@ public class IGImageFinderImpl
 			}
 
 			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Long> getImageIdsByFolderId(long groupId, long folderId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(GET_IMAGE_IDS_BY_G_F);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar("ImageId", Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(folderId);
-
-			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
