@@ -207,40 +207,42 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 					<aui:input checked="<%= endDateType == 2 %>" cssClass="input-container" inlineField="<%= true %>" label="end-by" name="endDateType" type="radio" value="2" />
 
-					<aui:input label="" name="endDate" value="<%= endDate %>" />
+					<aui:input inlineField="<%= true %>" label="" name="endDate" value="<%= endDate %>" />
 				</aui:field-wrapper>
 			</aui:fieldset>
 		</liferay-ui:panel>
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="calendarEventRemindersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "reminders") %>'>
 			<aui:fieldset>
-				<aui:select inlineField="<%= true %>" inlineLabel="left" label="remind-me" name="firstReminder">
+				<span class="aui-field-row">
+					<aui:select inlineField="<%= true %>" inlineLabel="left" label="remind-me" name="firstReminder">
 
-					<%
-					for (int i = 0; i < CalEventConstants.REMINDERS.length; i++) {
-					%>
+						<%
+						for (int i = 0; i < CalEventConstants.REMINDERS.length; i++) {
+						%>
 
-						<aui:option selected="<%= (firstReminder == CalEventConstants.REMINDERS[i]) %>" value="<%= CalEventConstants.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventConstants.REMINDERS[i]) %></aui:option>
+							<aui:option selected="<%= (firstReminder == CalEventConstants.REMINDERS[i]) %>" value="<%= CalEventConstants.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventConstants.REMINDERS[i]) %></aui:option>
 
-					<%
-					}
-					%>
+						<%
+						}
+						%>
 
-				</aui:select>
+					</aui:select>
 
-				<aui:select inlineLabel="left" label="before-and-again" name="secondReminder" suffix="before-the-event-by">
+					<aui:select inlineField="<%= true %>" inlineLabel="left" label="before-and-again" name="secondReminder" suffix="before-the-event-by">
 
-					<%
-					for (int i = 0; i < CalEventConstants.REMINDERS.length; i++) {
-					%>
+						<%
+						for (int i = 0; i < CalEventConstants.REMINDERS.length; i++) {
+						%>
 
-						<aui:option selected="<%= (secondReminder == CalEventConstants.REMINDERS[i]) %>" value="<%= CalEventConstants.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventConstants.REMINDERS[i]) %></aui:option>
+							<aui:option selected="<%= (secondReminder == CalEventConstants.REMINDERS[i]) %>" value="<%= CalEventConstants.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventConstants.REMINDERS[i]) %></aui:option>
 
-					<%
-					}
-					%>
+						<%
+						}
+						%>
 
-				</aui:select>
+					</aui:select>
+				</span>
 
 				<aui:field-wrapper cssClass="reminders" label="">
 					<aui:input checked="<%= remindBy == CalEventConstants.REMIND_BY_NONE %>" label="do-not-send-a-reminder" name="remindBy" type="radio" value="<%= CalEventConstants.REMIND_BY_NONE %>" />

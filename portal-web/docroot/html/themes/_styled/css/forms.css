@@ -19,7 +19,11 @@ fieldset {
 
 .aui-field-inline .aui-field-content, .aui-field-row .aui-field-content {
 	margin: 0;
-	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.aui-field-choice .aui-field-label {
+	display: inline-block;
 }
 
 .aui-field-date .aui-field-content {
