@@ -35,9 +35,7 @@ public class ConfigurePortletShowDocumentSearchTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddFolderDocumentTest.class);
 		testSuite.addTestSuite(ConfigurePortletHideDocumentSearchTest.class);
-		testSuite.addTestSuite(AssertHideDocumentSearchTest.class);
 		testSuite.addTestSuite(ConfigurePortletShowDocumentSearchTest.class);
-		testSuite.addTestSuite(AssertShowDocumentSearchTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

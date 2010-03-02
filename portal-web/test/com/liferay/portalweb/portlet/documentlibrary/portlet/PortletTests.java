@@ -17,16 +17,9 @@ package com.liferay.portalweb.portlet.documentlibrary.portlet;
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.addportlet.AddPortletTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.addportletduplicate.AddPortletDuplicateTests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletdisablecommentratings.ConfigurePortletDisableCommentRatingsTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletdocumentsperpage1.ConfigurePortletDocumentsPerPage1Tests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletenablecommentratings.ConfigurePortletEnableCommentRatingsTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletfoldersperpage1.ConfigurePortletFoldersPerPage1Tests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportlethidedocumentcolumns.ConfigurePortletHideDocumentColumnsTests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportlethidedocumentsearch.ConfigurePortletHideDocumentSearchTests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportlethidefolderbreadcrumbs.ConfigurePortletHideFolderBreadcrumbsTests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportlethidefoldercolumns.ConfigurePortletHideFolderColumnsTests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportlethidefoldersearch.ConfigurePortletHideFolderSearchTests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportlethidefoldersubfolders.ConfigurePortletHideFolderSubfoldersTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletrootfolderremovefolder.ConfigurePortletRootFolderRemoveFolderTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletrootfolderremovesubfolder.ConfigurePortletRootFolderRemoveSubfolderTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletrootfolderselectfolder.ConfigurePortletRootFolderSelectFolderTests;
@@ -54,16 +47,9 @@ public class PortletTests extends BaseTests {
 
 		testSuite.addTest(AddPortletTests.suite());
 		testSuite.addTest(AddPortletDuplicateTests.suite());
-		testSuite.addTest(ConfigurePortletDisableCommentRatingsTests.suite());
 		testSuite.addTest(ConfigurePortletDocumentsPerPage1Tests.suite());
 		testSuite.addTest(ConfigurePortletEnableCommentRatingsTests.suite());
 		testSuite.addTest(ConfigurePortletFoldersPerPage1Tests.suite());
-		testSuite.addTest(ConfigurePortletHideDocumentColumnsTests.suite());
-		testSuite.addTest(ConfigurePortletHideDocumentSearchTests.suite());
-		testSuite.addTest(ConfigurePortletHideFolderBreadcrumbsTests.suite());
-		testSuite.addTest(ConfigurePortletHideFolderColumnsTests.suite());
-		testSuite.addTest(ConfigurePortletHideFolderSearchTests.suite());
-		testSuite.addTest(ConfigurePortletHideFolderSubfoldersTests.suite());
 		testSuite.addTest(ConfigurePortletRootFolderRemoveFolderTests.suite());
 		testSuite.addTest(
 			ConfigurePortletRootFolderRemoveSubfolderTests.suite());

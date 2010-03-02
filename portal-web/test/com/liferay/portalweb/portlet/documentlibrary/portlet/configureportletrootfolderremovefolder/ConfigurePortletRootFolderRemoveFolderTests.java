@@ -35,10 +35,8 @@ public class ConfigurePortletRootFolderRemoveFolderTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(
 			ConfigurePortletRootFolderSelectFolderTest.class);
-		testSuite.addTestSuite(AssertRootFolderSelectFolderTest.class);
 		testSuite.addTestSuite(
 			ConfigurePortletRootFolderRemoveFolderTest.class);
-		testSuite.addTestSuite(AssertRootFolderRemoveFolderTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

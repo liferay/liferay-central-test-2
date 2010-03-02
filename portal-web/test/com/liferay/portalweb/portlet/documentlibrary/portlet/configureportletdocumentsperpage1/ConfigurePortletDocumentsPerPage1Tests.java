@@ -36,9 +36,8 @@ public class ConfigurePortletDocumentsPerPage1Tests extends BaseTests {
 		testSuite.addTestSuite(AddFolderDocument1Test.class);
 		testSuite.addTestSuite(AddFolderDocument2Test.class);
 		testSuite.addTestSuite(AddFolderDocument3Test.class);
-		testSuite.addTestSuite(AssertDocumentsPerPage20Test.class);
+		testSuite.addTestSuite(ConfigurePortletDocumentsPerPage20Test.class);
 		testSuite.addTestSuite(ConfigurePortletDocumentsPerPage1Test.class);
-		testSuite.addTestSuite(AssertDocumentsPerPage1Test.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

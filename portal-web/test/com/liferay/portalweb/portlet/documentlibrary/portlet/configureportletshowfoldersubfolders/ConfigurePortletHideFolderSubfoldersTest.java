@@ -92,6 +92,31 @@ public class ConfigurePortletHideFolderSubfoldersTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"You have successfully updated the setup."),
 					selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+				selenium.open("/web/guest/home/");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Document Library Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("link=Document Library Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertFalse(selenium.isTextPresent(
+						"Test1 Folder1\nThis is test1 folder1."));
+				assertFalse(selenium.isElementPresent("link=Test1 Subfolder1"));
 
 			case 100:
 				label = -1;

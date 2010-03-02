@@ -96,5 +96,32 @@ public class ConfigurePortletRootFolderSelectFolderTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
+			selenium.getText("//div[@class='site-breadcrumbs']/ul/li[3]/span/a"));
+		selenium.clickAt("link=Document Home", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
+			selenium.getText("//div[@class='site-breadcrumbs']/ul/li[3]/span/a"));
 	}
 }

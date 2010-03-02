@@ -47,7 +47,7 @@ public class AddFolderDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[5]/a",
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[4]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -89,6 +89,9 @@ public class AddFolderDocumentTest extends BaseTestCase {
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\portlet\\configureportletenablecommentratings\\dependencies\\test_document.txt"));
+		selenium.type("_20_file",
+			RuntimeVariables.replace(
+				"L:\\trunk\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\portlet\\configureportletenablecommentratings\\dependencies\\test_document.txt"));
 		selenium.type("_20_title", RuntimeVariables.replace("Test1 Document1"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is test1 document1."));

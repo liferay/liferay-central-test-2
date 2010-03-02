@@ -72,5 +72,50 @@ public class ConfigurePortletDocumentsPerPage1Test extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Test1 Document1\nThis is test1 document1."));
+		assertFalse(selenium.isTextPresent(
+				"Test2 Document2\nThis is test2 document2."));
+		assertFalse(selenium.isTextPresent(
+				"Test3 Document3\nThis is test3 document3."));
+		selenium.clickAt("link=Next", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent(
+				"Test1 Document1\nThis is test1 document1."));
+		assertTrue(selenium.isTextPresent(
+				"Test2 Document2\nThis is test2 document2."));
+		assertFalse(selenium.isTextPresent(
+				"Test3 Document3\nThis is test3 document3."));
+		selenium.clickAt("link=Next", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent(
+				"Test1 Document1\nThis is test1 document1."));
+		assertFalse(selenium.isTextPresent(
+				"Test2 Document2\nThis is test2 document2."));
+		assertTrue(selenium.isTextPresent(
+				"Test3 Document3\nThis is test3 document3."));
 	}
 }

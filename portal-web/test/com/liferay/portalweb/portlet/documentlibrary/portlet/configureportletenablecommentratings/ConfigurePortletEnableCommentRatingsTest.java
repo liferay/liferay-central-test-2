@@ -93,6 +93,54 @@ public class ConfigurePortletEnableCommentRatingsTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"You have successfully updated the setup."),
 					selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+				selenium.open("/web/guest/home/");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Document Library Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("link=Document Library Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("0 (0 Votes)")
+												.equals(selenium.getText(
+										"//div[@class='taglib-ratings thumbs']/div/div/div"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
+					selenium.getText(
+						"//div[@class='taglib-ratings thumbs']/div/div/div"));
 
 			case 100:
 				label = -1;

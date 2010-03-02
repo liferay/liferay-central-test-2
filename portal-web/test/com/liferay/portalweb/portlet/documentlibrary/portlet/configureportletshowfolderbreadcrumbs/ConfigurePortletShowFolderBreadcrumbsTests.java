@@ -35,9 +35,7 @@ public class ConfigurePortletShowFolderBreadcrumbsTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddSubfolderTest.class);
 		testSuite.addTestSuite(ConfigurePortletHideFolderBreadcrumbsTest.class);
-		testSuite.addTestSuite(AssertHideFolderBreadcrumbsTest.class);
 		testSuite.addTestSuite(ConfigurePortletShowFolderBreadcrumbsTest.class);
-		testSuite.addTestSuite(AssertShowFolderBreadcrumbsTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

@@ -34,9 +34,7 @@ public class ConfigurePortletShowFolderColumnsTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(ConfigurePortletHideFolderColumnsTest.class);
-		testSuite.addTestSuite(AssertHideFolderColumnsTest.class);
 		testSuite.addTestSuite(ConfigurePortletShowFolderColumnsTest.class);
-		testSuite.addTestSuite(AssertShowFolderColumnsTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

@@ -12,18 +12,20 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletdisablecommentratings;
+package com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletfoldersperpage1;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddFolderDocumentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurePortletFoldersPerPage20Test.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddFolderDocumentTest extends BaseTestCase {
-	public void testAddFolderDocument() throws Exception {
+public class ConfigurePortletFoldersPerPage20Test extends BaseTestCase {
+	public void testConfigurePortletFoldersPerPage20()
+		throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -45,12 +47,8 @@ public class AddFolderDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[5]/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +56,7 @@ public class AddFolderDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+				if (selenium.isVisible("_86_foldersPerPage")) {
 					break;
 				}
 			}
@@ -68,37 +66,38 @@ public class AddFolderDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Use the classic uploader.");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_20_file")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_20_file",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\portlet\\configureportletdisablecommentratings\\dependencies\\test_document.txt"));
-		selenium.type("_20_title", RuntimeVariables.replace("Test1 Document1"));
-		selenium.type("_20_description",
-			RuntimeVariables.replace("This is test1 document1."));
+		selenium.type("_86_foldersPerPage", RuntimeVariables.replace("20"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace(
-				"Test1 Document1\nThis is test1 document1."),
-			selenium.getText("//td[1]/a"));
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Document Library Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Test1 Folder1\nThis is test1 folder1."));
+		assertTrue(selenium.isTextPresent(
+				"Test2 Folder2\nThis is test2 folder2."));
+		assertTrue(selenium.isTextPresent(
+				"Test3 Folder3\nThis is test3 folder3."));
 	}
 }

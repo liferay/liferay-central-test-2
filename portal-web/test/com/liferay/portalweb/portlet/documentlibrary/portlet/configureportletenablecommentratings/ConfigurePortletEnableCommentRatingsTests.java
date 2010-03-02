@@ -36,9 +36,7 @@ public class ConfigurePortletEnableCommentRatingsTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderDocumentTest.class);
 		testSuite.addTestSuite(AddFolderDocumentCommentTest.class);
 		testSuite.addTestSuite(ConfigurePortletDisableCommentRatingsTest.class);
-		testSuite.addTestSuite(AssertDisableCommentRatingsTest.class);
 		testSuite.addTestSuite(ConfigurePortletEnableCommentRatingsTest.class);
-		testSuite.addTestSuite(AssertEnableCommentRatingsTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
