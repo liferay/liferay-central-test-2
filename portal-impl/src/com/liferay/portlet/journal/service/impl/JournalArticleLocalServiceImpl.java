@@ -351,7 +351,8 @@ public class JournalArticleLocalServiceImpl
 			try {
 				WorkflowHandlerRegistryUtil.startWorkflowInstance(
 					user.getCompanyId(), groupId, userId,
-					JournalArticle.class.getName(), resourcePrimKey, article);
+					JournalArticle.class.getName(), article.getPrimaryKey(),
+					article);
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -1779,6 +1780,20 @@ public class JournalArticleLocalServiceImpl
 
 		indexer.reindex(article);
 
+		// Workflow
+
+		if (serviceContext.isStartWorkflow()) {
+			try {
+				WorkflowHandlerRegistryUtil.startWorkflowInstance(
+					user.getCompanyId(), groupId, userId,
+					JournalArticle.class.getName(), article.getPrimaryKey(),
+					article);
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+		}
+
 		return article;
 	}
 
@@ -1935,11 +1950,11 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle updateStatus(
-			long userId, long resourcePrimKey, int status,
+			long userId, long classPK, int status,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		JournalArticle article = getLatestArticle(resourcePrimKey);
+		JournalArticle article = getArticle(classPK);
 
 		return updateStatus(userId, article, status, null, serviceContext);
 	}

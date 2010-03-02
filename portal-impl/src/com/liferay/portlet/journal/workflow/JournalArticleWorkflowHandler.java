@@ -16,6 +16,8 @@ package com.liferay.portlet.journal.workflow;
 
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.workflow.BaseWorkflowHandler;
+import com.liferay.portlet.asset.model.AssetRenderer;
+import com.liferay.portlet.journal.asset.JournalArticleAssetRenderer;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -50,4 +52,11 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 			userId, classPK, status, serviceContext);
 	}
 
+	protected AssetRenderer getAssetRenderer(long classPK) throws Exception {
+		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+				classPK);
+		
+		return new JournalArticleAssetRenderer(article);
+	}
+	
 }

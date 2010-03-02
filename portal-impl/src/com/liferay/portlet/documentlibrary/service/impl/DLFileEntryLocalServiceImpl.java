@@ -243,7 +243,8 @@ public class DLFileEntryLocalServiceImpl
 			try {
 				WorkflowHandlerRegistryUtil.startWorkflowInstance(
 					user.getCompanyId(), groupId, userId,
-					DLFileEntry.class.getName(), fileEntryId, fileEntry);
+					DLFileEntry.class.getName(), fileEntry.getPrimaryKey(),
+					fileEntry);
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -1001,6 +1002,20 @@ public class DLFileEntryLocalServiceImpl
 			version, sourceFileName, fileEntry.getFileEntryId(),
 			fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
 			serviceContext, is);
+
+		// Workflow
+
+		if (serviceContext.isStartWorkflow()) {
+			try {
+				WorkflowHandlerRegistryUtil.startWorkflowInstance(
+					user.getCompanyId(), groupId, userId,
+					DLFileEntry.class.getName(), fileEntry.getPrimaryKey(),
+					fileEntry);
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+		}
 
 		return fileEntry;
 	}
