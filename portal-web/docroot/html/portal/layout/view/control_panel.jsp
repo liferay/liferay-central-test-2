@@ -29,7 +29,7 @@ if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if (Validator.isNotNull(portletResource)) {
 		String strutsAction = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "struts_action");
 
-		if (!strutsAction.equals("/portlet_configuration/edit_configuration")) {
+		if (!strutsAction.startsWith("/portlet_configuration/")) {
 			ppid = portletResource;
 		}
 	}
