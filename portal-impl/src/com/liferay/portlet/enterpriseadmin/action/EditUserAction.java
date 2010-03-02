@@ -142,10 +142,9 @@ public class EditUserAction extends PortletAction {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (user != null) {
-
 				ThemeDisplay themeDisplay =
-						(ThemeDisplay)actionRequest.getAttribute(
-							WebKeys.THEME_DISPLAY);
+					(ThemeDisplay)actionRequest.getAttribute(
+						WebKeys.THEME_DISPLAY);
 
 				if (Validator.isNotNull(oldScreenName)) {
 
@@ -177,23 +176,20 @@ public class EditUserAction extends PortletAction {
 					}
 				}
 
-				// Update the URL when updating user Language
+				if (Validator.isNotNull(oldLanguageId) &&
+					themeDisplay.isI18n()) {
 
-				if (Validator.isNotNull(oldLanguageId)) {
-					if (themeDisplay.isI18n()) {
-						String i18nLanguageId = user.getLanguageId();
-						int pos = i18nLanguageId.indexOf(StringPool.UNDERLINE);
+					String i18nLanguageId = user.getLanguageId();
+					int pos = i18nLanguageId.indexOf(StringPool.UNDERLINE);
 
-						if(Validator.isNotNull(pos)){
-							i18nLanguageId = i18nLanguageId.substring(0, pos);
-						}
-
-						String i18nPath = StringPool.SLASH + i18nLanguageId;
-
-						redirect = StringUtil.replace(
-							redirect, themeDisplay.getI18nPath(), i18nPath);
+					if (pos != -1){
+						i18nLanguageId = i18nLanguageId.substring(0, pos);
 					}
 
+					String i18nPath = StringPool.SLASH + i18nLanguageId;
+
+					redirect = StringUtil.replace(
+						redirect, themeDisplay.getI18nPath(), i18nPath);
 				}
 
 				redirect = HttpUtil.setParameter(
@@ -604,7 +600,7 @@ public class EditUserAction extends PortletAction {
 				actionRequest);
 			HttpSession session = request.getSession();
 
-			session.setAttribute(Globals.LOCALE_KEY, user.getLocale());
+			session.removeAttribute(Globals.LOCALE_KEY);
 
 			// Clear cached portlet responses
 
