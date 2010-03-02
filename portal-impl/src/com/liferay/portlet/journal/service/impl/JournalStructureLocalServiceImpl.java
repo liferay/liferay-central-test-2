@@ -295,12 +295,12 @@ public class JournalStructureLocalServiceImpl
 		// WebDAVProps
 
 		webDAVPropsLocalService.deleteWebDAVProps(
-			JournalStructure.class.getName(), structure.getPrimaryKey());
+			JournalStructure.class.getName(), structure.getId());
 
 		// Expando
 
 		expandoValueLocalService.deleteValues(
-			JournalStructure.class.getName(), structure.getPrimaryKey());
+			JournalStructure.class.getName(), structure.getId());
 
 		// Resources
 

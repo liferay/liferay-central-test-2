@@ -243,8 +243,7 @@ public class DLFileEntryLocalServiceImpl
 			try {
 				WorkflowHandlerRegistryUtil.startWorkflowInstance(
 					user.getCompanyId(), groupId, userId,
-					DLFileEntry.class.getName(), fileEntry.getPrimaryKey(),
-					fileEntry);
+					DLFileEntry.class.getName(), fileEntryId, fileEntry);
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -350,7 +349,7 @@ public class DLFileEntryLocalServiceImpl
 		// WebDAVProps
 
 		webDAVPropsLocalService.deleteWebDAVProps(
-			DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		// Workflow
 
@@ -840,7 +839,7 @@ public class DLFileEntryLocalServiceImpl
 			Resource resource = resourceLocalService.getResource(
 				fileEntry.getCompanyId(), DLFileEntry.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(fileEntry.getPrimaryKey()));
+				String.valueOf(fileEntry.getFileEntryId()));
 
 			resource.setPrimKey(String.valueOf(newFileEntryId));
 
@@ -1009,7 +1008,7 @@ public class DLFileEntryLocalServiceImpl
 			try {
 				WorkflowHandlerRegistryUtil.startWorkflowInstance(
 					user.getCompanyId(), groupId, userId,
-					DLFileEntry.class.getName(), fileEntry.getPrimaryKey(),
+					DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
 					fileEntry);
 			}
 			catch (Exception e) {

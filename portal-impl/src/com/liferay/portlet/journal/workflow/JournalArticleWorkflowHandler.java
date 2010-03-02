@@ -54,9 +54,9 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 	protected AssetRenderer getAssetRenderer(long classPK) throws Exception {
 		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
-				classPK);
-		
+			classPK);
+
 		return new JournalArticleAssetRenderer(article);
 	}
-	
+
 }

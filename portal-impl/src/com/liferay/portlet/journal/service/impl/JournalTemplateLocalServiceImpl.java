@@ -332,7 +332,7 @@ public class JournalTemplateLocalServiceImpl
 		// WebDAVProps
 
 		webDAVPropsLocalService.deleteWebDAVProps(
-			JournalTemplate.class.getName(), template.getPrimaryKey());
+			JournalTemplate.class.getName(), template.getId());
 
 		// Small image
 
@@ -341,7 +341,7 @@ public class JournalTemplateLocalServiceImpl
 		// Expando
 
 		expandoValueLocalService.deleteValues(
-			JournalTemplate.class.getName(), template.getPrimaryKey());
+			JournalTemplate.class.getName(), template.getId());
 
 		// Resources
 

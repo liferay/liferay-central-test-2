@@ -351,8 +351,7 @@ public class JournalArticleLocalServiceImpl
 			try {
 				WorkflowHandlerRegistryUtil.startWorkflowInstance(
 					user.getCompanyId(), groupId, userId,
-					JournalArticle.class.getName(), article.getPrimaryKey(),
-					article);
+					JournalArticle.class.getName(), article.getId(), article);
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -1786,8 +1785,7 @@ public class JournalArticleLocalServiceImpl
 			try {
 				WorkflowHandlerRegistryUtil.startWorkflowInstance(
 					user.getCompanyId(), groupId, userId,
-					JournalArticle.class.getName(), article.getPrimaryKey(),
-					article);
+					JournalArticle.class.getName(), article.getId(), article);
 			}
 			catch (Exception e) {
 				throw new SystemException(e);

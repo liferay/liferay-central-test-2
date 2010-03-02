@@ -216,7 +216,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		// WebDAVProps
 
 		webDAVPropsLocalService.deleteWebDAVProps(
-			DLFolder.class.getName(), folder.getPrimaryKey());
+			DLFolder.class.getName(), folder.getFolderId());
 
 		// File entries
 
