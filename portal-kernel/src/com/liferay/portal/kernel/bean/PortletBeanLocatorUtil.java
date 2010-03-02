@@ -50,7 +50,12 @@ public class PortletBeanLocatorUtil {
 		String servletContextName, BeanLocator beanLocator) {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Setting BeanLocator " + beanLocator.hashCode());
+			if (beanLocator != null) {
+				_log.debug("Setting BeanLocator " + beanLocator.hashCode());
+			}
+			else {
+				_log.debug("Setting BeanLocator null");
+			}
 		}
 
 		_beanLocators.put(servletContextName, beanLocator);
