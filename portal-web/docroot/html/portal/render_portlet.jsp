@@ -69,6 +69,7 @@ catch (NoSuchResourceException nsre) {
 
 			if (group.isCommunity() || group.isUserGroup()) {
 				if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) ||
+					GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PUBLISH_STAGING) ||
 					LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
 
 					addDefaultResource = true;
