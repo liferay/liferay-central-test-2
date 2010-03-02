@@ -94,6 +94,10 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 					contact, contactExpandoAttributes,
 					contactMappings, contactExpandoMappings);
 
+			if (modifications == null) {
+				return;
+			}
+			
 			ModificationItem[] modificationItems = modifications.getItems();
 
 			ldapContext.modifyAttributes(name, modificationItems);
@@ -155,6 +159,10 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 				_portalToLDAPConverter.getLDAPUserModifications(
 					user, userExpandoAttributes, userMappings,
 					userExpandoMappings);
+
+			if (modifications == null) {
+				return;
+			}
 
 			ModificationItem[] modificationItems = modifications.getItems();
 
