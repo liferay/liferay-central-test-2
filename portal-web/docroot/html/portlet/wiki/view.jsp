@@ -278,14 +278,14 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 		</portlet:actionURL>
 
 		<liferay-ui:discussion
-			formName="fm2"
-			formAction="<%= discussionURL %>"
 			className="<%= WikiPage.class.getName() %>"
 			classPK="<%= wikiPage.getResourcePrimKey() %>"
-			userId="<%= wikiPage.getUserId() %>"
-			subject="<%= wikiPage.getTitle() %>"
-			redirect="<%= currentURL %>"
+			formAction="<%= discussionURL %>"
+			formName="fm2"
 			ratingsEnabled="<%= enableCommentRatings %>"
+			redirect="<%= currentURL %>"
+			subject="<%= wikiPage.getTitle() %>"
+			userId="<%= wikiPage.getUserId() %>"
 		/>
 	</c:if>
 </c:if>

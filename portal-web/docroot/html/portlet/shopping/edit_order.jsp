@@ -596,13 +596,13 @@ for (int i = 0; itr.hasNext(); i++) {
 	</portlet:actionURL>
 
 	<liferay-ui:discussion
-		formName="fm2"
-		formAction="<%= discussionURL %>"
 		className="<%= ShoppingOrder.class.getName() %>"
 		classPK="<%= order.getOrderId() %>"
-		userId="<%= order.getUserId() %>"
-		subject="<%= order.getNumber() %>"
+		formAction="<%= discussionURL %>"
+		formName="fm2"
 		redirect="<%= currentURL %>"
+		subject="<%= order.getNumber() %>"
+		userId="<%= order.getUserId() %>"
 	/>
 </c:if>
 

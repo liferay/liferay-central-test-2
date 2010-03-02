@@ -150,14 +150,14 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			</portlet:actionURL>
 
 			<liferay-ui:discussion
-				formName='<%= "fm" + assetEntry.getClassPK() %>'
-				formAction="<%= discussionURL %>"
 				className="<%= assetEntry.getClassName() %>"
 				classPK="<%= assetEntry.getClassPK() %>"
-				userId="<%= assetRenderer.getUserId() %>"
-				subject="<%= assetRenderer.getTitle() %>"
-				redirect="<%= currentURL %>"
+				formAction="<%= discussionURL %>"
+				formName='<%= "fm" + assetEntry.getClassPK() %>'
 				ratingsEnabled="<%= enableCommentRatings %>"
+				redirect="<%= currentURL %>"
+				subject="<%= assetRenderer.getTitle() %>"
+				userId="<%= assetRenderer.getUserId() %>"
 			/>
 		</c:if>
 	</div>

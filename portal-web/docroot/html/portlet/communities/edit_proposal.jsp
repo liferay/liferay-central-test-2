@@ -398,13 +398,13 @@ for (int i = 0; i < results.size(); i++) {
 </portlet:actionURL>
 
 <liferay-ui:discussion
-	formAction="<%= discussionURL %>"
-	formName="fm2"
 	className="<%= TasksProposal.class.getName() %>"
 	classPK="<%= proposal.getProposalId() %>"
-	userId="<%= proposal.getUserId() %>"
-	subject="<%= proposal.getName() %>"
+	formAction="<%= discussionURL %>"
+	formName="fm2"
 	redirect="<%= currentURL %>"
+	subject="<%= proposal.getName() %>"
+	userId="<%= proposal.getUserId() %>"
 />
 
 <aui:script>

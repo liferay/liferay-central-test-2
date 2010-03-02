@@ -419,14 +419,14 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				</portlet:actionURL>
 
 				<liferay-ui:discussion
-					formName="fm2"
-					formAction="<%= discussionURL %>"
 					className="<%= DLFileEntry.class.getName() %>"
 					classPK="<%= fileEntryId %>"
-					userId="<%= fileEntry.getUserId() %>"
-					subject="<%= fileEntry.getTitle() %>"
-					redirect="<%= currentURL %>"
+					formAction="<%= discussionURL %>"
+					formName="fm2"
 					ratingsEnabled="<%= enableCommentRatings %>"
+					redirect="<%= currentURL %>"
+					subject="<%= fileEntry.getTitle() %>"
+					userId="<%= fileEntry.getUserId() %>"
 				/>
 			</liferay-ui:panel>
 		</c:if>

@@ -347,13 +347,13 @@ if (articleDisplay != null) {
 				</portlet:actionURL>
 
 				<liferay-ui:discussion
-					formAction="<%= discussionURL %>"
 					className="<%= JournalArticle.class.getName() %>"
 					classPK="<%= articleDisplay.getResourcePrimKey() %>"
-					userId="<%= articleDisplay.getUserId() %>"
-					subject="<%= articleDisplay.getTitle() %>"
-					redirect="<%= currentURL %>"
+					formAction="<%= discussionURL %>"
 					ratingsEnabled="<%= enableCommentRatings %>"
+					redirect="<%= currentURL %>"
+					subject="<%= articleDisplay.getTitle() %>"
+					userId="<%= articleDisplay.getUserId() %>"
 				/>
 			</c:if>
 		</c:if>

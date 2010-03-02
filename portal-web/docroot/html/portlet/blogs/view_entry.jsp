@@ -110,14 +110,14 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 	</portlet:actionURL>
 
 	<liferay-ui:discussion
-		formName="fm2"
-		formAction="<%= discussionURL %>"
 		className="<%= BlogsEntry.class.getName() %>"
 		classPK="<%= entry.getEntryId() %>"
-		userId="<%= entry.getUserId() %>"
-		subject="<%= entry.getTitle() %>"
-		redirect="<%= currentURL %>"
+		formAction="<%= discussionURL %>"
+		formName="fm2"
 		ratingsEnabled="<%= enableCommentRatings %>"
+		redirect="<%= currentURL %>"
+		subject="<%= entry.getTitle() %>"
+		userId="<%= entry.getUserId() %>"
 	/>
 </c:if>
 

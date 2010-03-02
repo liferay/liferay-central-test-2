@@ -244,12 +244,12 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 		</portlet:actionURL>
 
 		<liferay-ui:discussion
-			formAction="<%= discussionURL %>"
 			className="<%= SCProductEntry.class.getName() %>"
 			classPK="<%= productEntry.getProductEntryId() %>"
-			userId="<%= productEntry.getUserId() %>"
-			subject="<%= productEntry.getName() %>"
+			formAction="<%= discussionURL %>"
 			redirect="<%= currentURL %>"
+			subject="<%= productEntry.getName() %>"
+			userId="<%= productEntry.getUserId() %>"
 		/>
 	</c:when>
 	<c:when test='<%= tabs2.equals("version-history") %>'>

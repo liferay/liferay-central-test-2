@@ -22,12 +22,12 @@
 	</portlet:actionURL>
 
 	<liferay-ui:discussion
-		formName="fm"
-		formAction="<%= discussionURL %>"
 		className="<%= Layout.class.getName() %>"
 		classPK="<%= layout.getPlid() %>"
-		userId="<%= user.getUserId() %>"
-		subject="<%= layout.getName(locale) %>"
+		formAction="<%= discussionURL %>"
+		formName="fm"
 		redirect="<%= currentURL %>"
+		subject="<%= layout.getName(locale) %>"
+		userId="<%= user.getUserId() %>"
 	/>
 </c:if>

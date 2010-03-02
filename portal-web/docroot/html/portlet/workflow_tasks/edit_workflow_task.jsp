@@ -201,14 +201,14 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 </portlet:actionURL>
 
 <liferay-ui:discussion
-	formName="fm1"
-	formAction="<%= discussionURL %>"
 	className="<%= WorkflowTask.class.getName() %>"
 	classPK="<%= workflowTask.getWorkflowTaskId() %>"
-	userId="<%= user.getUserId() %>"
-	subject="<%= workflowTask.getName() %>"
-	redirect="<%= currentURL %>"
+	formAction="<%= discussionURL %>"
+	formName="fm1"
 	ratingsEnabled="<%= true %>"
+	redirect="<%= currentURL %>"
+	subject="<%= workflowTask.getName() %>"
+	userId="<%= user.getUserId() %>"
 />
 
 <aui:script>
