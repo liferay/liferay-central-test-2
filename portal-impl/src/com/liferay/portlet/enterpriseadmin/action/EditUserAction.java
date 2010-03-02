@@ -581,7 +581,7 @@ public class EditUserAction extends PortletAction {
 				actionRequest);
 			HttpSession session = request.getSession();
 
-			session.removeAttribute(Globals.LOCALE_KEY);
+			session.setAttribute(Globals.LOCALE_KEY, user.getLocale());
 
 			// Clear cached portlet responses
 
