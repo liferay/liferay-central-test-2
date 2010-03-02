@@ -114,6 +114,7 @@ public class EditUserAction extends PortletAction {
 		try {
 			User user = null;
 			String oldScreenName = StringPool.BLANK;
+			String oldLanguageId = StringPool.BLANK;
 
 			if (cmd.equals(Constants.ADD)) {
 				user = addUser(actionRequest);
@@ -132,6 +133,7 @@ public class EditUserAction extends PortletAction {
 
 				user = (User)returnValue[0];
 				oldScreenName = ((String)returnValue[1]);
+				oldLanguageId = ((String)returnValue[2]);
 			}
 			else if (cmd.equals("unlock")) {
 				user = updateLockout(actionRequest);
@@ -140,16 +142,17 @@ public class EditUserAction extends PortletAction {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (user != null) {
+
+				ThemeDisplay themeDisplay =
+						(ThemeDisplay)actionRequest.getAttribute(
+							WebKeys.THEME_DISPLAY);
+
 				if (Validator.isNotNull(oldScreenName)) {
 
 					// This will fix the redirect if the user is on his personal
 					// my account page and changes his screen name. A redirect
 					// that references the old screen name no longer points to a
 					// valid screen name and therefore needs to be updated.
-
-					ThemeDisplay themeDisplay =
-						(ThemeDisplay)actionRequest.getAttribute(
-							WebKeys.THEME_DISPLAY);
 
 					Group group = user.getGroup();
 
@@ -172,6 +175,25 @@ public class EditUserAction extends PortletAction {
 							redirect, HttpUtil.encodeURL(oldPath),
 							HttpUtil.encodeURL(newPath));
 					}
+				}
+
+				// Update the URL when updating user Language
+
+				if (Validator.isNotNull(oldLanguageId)) {
+					if (themeDisplay.isI18n()) {
+						String i18nLanguageId = user.getLanguageId();
+						int pos = i18nLanguageId.indexOf(StringPool.UNDERLINE);
+
+						if(Validator.isNotNull(pos)){
+							i18nLanguageId = i18nLanguageId.substring(0, pos);
+						}
+
+						String i18nPath = StringPool.SLASH + i18nLanguageId;
+
+						redirect = StringUtil.replace(
+							redirect, themeDisplay.getI18nPath(), i18nPath);
+					}
+
 				}
 
 				redirect = HttpUtil.setParameter(
@@ -481,6 +503,7 @@ public class EditUserAction extends PortletAction {
 		String emailAddress = BeanParamUtil.getString(
 			user, actionRequest, "emailAddress");
 		String openId = BeanParamUtil.getString(user, actionRequest, "openId");
+		String oldLanguageId = user.getLanguageId();
 		String languageId = BeanParamUtil.getString(
 			user, actionRequest, "languageId");
 		String timeZoneId = BeanParamUtil.getString(
@@ -607,7 +630,7 @@ public class EditUserAction extends PortletAction {
 			user.getGroup(), publicLayoutSetPrototypeId,
 			privateLayoutSetPrototypeId);
 
-		return new Object[] {user, oldScreenName};
+		return new Object[] {user, oldScreenName, oldLanguageId};
 	}
 
 }
