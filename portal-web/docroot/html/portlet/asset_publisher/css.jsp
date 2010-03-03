@@ -166,6 +166,10 @@
 	margin-bottom: 20px;
 }
 
+.portlet-asset-publisher .event {
+	background-image: url(<%= PortalUtil.getPathContext() %>/html/icons/calendar.png);
+}
+
 .portlet-asset-publisher .final-separator {
 	border: 0;
 	margin-bottom: 30px;
