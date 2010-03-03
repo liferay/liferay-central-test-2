@@ -43,7 +43,7 @@ public class Field implements Serializable {
 	public static final String ENTRY_CLASS_NAME = "entryClassName";
 
 	public static final String ENTRY_CLASS_PK = "entryClassPK";
-	
+
 	public static final String FOLDER_ID = "folderId";
 
 	public static final String GROUP_ID = "groupId";
