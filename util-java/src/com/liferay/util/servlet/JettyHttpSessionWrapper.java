@@ -15,7 +15,6 @@
 package com.liferay.util.servlet;
 
 import com.liferay.portal.kernel.servlet.HttpSessionWrapper;
-import com.liferay.portlet.PortletServletSession;
 
 import javax.servlet.http.HttpSession;
 
@@ -36,12 +35,10 @@ public class JettyHttpSessionWrapper
 	}
 
 	public AbstractSessionManager.Session getSession() {
-		PortletServletSession portletServletSession =
-			(PortletServletSession)_session;
+		HttpSessionWrapper sessionWrapper = (HttpSessionWrapper)_session;
 
 		JettySharedSessionWrapper jettySharedSessionWrapper =
-			(JettySharedSessionWrapper)
-				portletServletSession.getWrappedSession();
+			(JettySharedSessionWrapper)sessionWrapper.getWrappedSession();
 
 		return jettySharedSessionWrapper.getSession();
 	}
