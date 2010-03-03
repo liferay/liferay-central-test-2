@@ -23,6 +23,8 @@ public interface ContentTypes {
 
 	public static final String APPLICATION_ATOM_XML = "application/atom+xml";
 
+	public static final String APPLICATION_MSWORD = "application/msword";
+
 	public static final String APPLICATION_OCTET_STREAM =
 		"application/octet-stream";
 
