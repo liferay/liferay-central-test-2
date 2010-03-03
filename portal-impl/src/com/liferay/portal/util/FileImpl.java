@@ -20,7 +20,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileComparator;
+import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -40,6 +42,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
+import java.io.StringReader;
 import java.io.Writer;
 
 import java.util.ArrayList;
@@ -289,8 +292,34 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 				StringBuilder sb = new StringBuilder();
 
-				Reader reader = textExtractor.extractText(
-					is, contentType, null);
+				Reader reader = null;
+
+				if (ServerDetector.isJOnAS() && JavaProps.isJDK6() &&
+					contentType.equals(ContentTypes.APPLICATION_MSWORD)) {
+
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"JOnAS 5 with JDK 6 has a known issue with text " +
+								"extraction of Word documents. Use JDK 5 if " +
+									"you require indexing of Word documents.");
+					}
+
+					if (_log.isDebugEnabled()) {
+
+						// Execute code that will generate the error so it can
+						// be fixed at a later date
+
+						reader = textExtractor.extractText(
+							is, contentType, null);
+					}
+					else {
+						reader = new StringReader(StringPool.BLANK);
+					}
+				}
+				else {
+					reader = textExtractor.extractText(
+						is, contentType, null);
+				}
 
 				try{
 					char[] buffer = new char[1024];
@@ -335,7 +364,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		if (_log.isDebugEnabled()) {

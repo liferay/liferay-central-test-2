@@ -459,7 +459,7 @@ $(jetty.home)/lib/liferay/*</echo>
 					<then>
 						<replace file="${app.server.bin.dir}/setenv">
 							<replacetoken><![CDATA[export JAVA_OPTS]]></replacetoken>
-							<replacevalue><![CDATA[JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file=$JONAS_ROOT/conf/felix-config.properties -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m
+							<replacevalue><![CDATA[JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="$JONAS_ROOT/conf/felix-config.properties" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m
 export JAVA_OPTS]]></replacevalue>
 						</replace>
 					</then>
@@ -477,7 +477,7 @@ export JAVA_OPTS]]></replacevalue>
 						<replace file="${app.server.bin.dir}/setenv.bat">
 							<replacetoken><![CDATA[set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%]]></replacetoken>
 							<replacevalue><![CDATA[set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%
-set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file=%JONAS_ROOT%/conf/felix-config.properties -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
+set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT%/conf/felix-config.properties" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
 						</replace>
 					</then>
 				</if>

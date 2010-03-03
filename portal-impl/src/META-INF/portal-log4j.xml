@@ -556,6 +556,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.util.FileImpl">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.util.HttpImpl">
 		<priority value="INFO" />
 	</category>
