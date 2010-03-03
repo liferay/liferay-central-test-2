@@ -39,7 +39,7 @@ public class SearchEngineUtil {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Document " + doc.toString());
+			_log.debug("Add document " + doc.toString());
 		}
 
 		_searchPermissionChecker.addPermissionFields(companyId, doc);
@@ -83,7 +83,7 @@ public class SearchEngineUtil {
 		throws SearchException {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Query string " + query.toString());
+			_log.debug("Search query " + query.toString());
 		}
 
 		return _searchEngine.getSearcher().search(
@@ -95,7 +95,7 @@ public class SearchEngineUtil {
 		throws SearchException {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Query string " + query.toString());
+			_log.debug("Search query " + query.toString());
 		}
 
 		return _searchEngine.getSearcher().search(
@@ -107,7 +107,7 @@ public class SearchEngineUtil {
 		throws SearchException {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Query string " + query.toString());
+			_log.debug("Search query " + query.toString());
 		}
 
 		return _searchEngine.getSearcher().search(
