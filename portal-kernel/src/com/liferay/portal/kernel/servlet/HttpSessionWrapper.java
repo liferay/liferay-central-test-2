@@ -79,6 +79,10 @@ public class HttpSessionWrapper implements HttpSession {
 		return _session.getValueNames();
 	}
 
+	public HttpSession getWrappedSession() {
+		return _session;
+	}
+
 	public void invalidate() {
 		_session.invalidate();
 	}
