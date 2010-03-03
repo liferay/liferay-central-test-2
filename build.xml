@@ -499,7 +499,6 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file=%JONAS_ROOT%
 	<filter-name>net.sf.cglib.*</filter-name>
 	<filter-name>net.sf.ehcache.*</filter-name>
 	<filter-name>org.apache.commons.*</filter-name>
-	<filter-name>org.apache.xerces.*</filter-name>
 	<filter-name>org.dom4j.*</filter-name>
 	<filter-name>org.hibernate.*</filter-name>
 	<filter-name>org.jboss.*</filter-name>
@@ -531,7 +530,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file=%JONAS_ROOT%
 
 						<replace file="${app.server.dir}/conf/felix-config.properties">
 							<replacetoken>org.osgi.framework.system.packages org.osgi.framework;</replacetoken>
-							<replacevalue>org.osgi.framework.system.packages com.sun.jmx.interceptor; com.sun.jmx.mbeanserver; org.osgi.framework;</replacevalue>
+							<replacevalue>org.osgi.framework.system.packages com.sun.crypto.provider; com.sun.image.codec.jpeg; com.sun.jmx.interceptor; com.sun.jmx.mbeanserver; org.apache.xerces.parsers; org.apache.xerces.util; org.apache.xerces.xni; org.apache.xerces.xni.parser; org.osgi.framework;</replacevalue>
 						</replace>
 					</then>
 				</if>
