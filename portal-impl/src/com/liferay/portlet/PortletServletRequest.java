@@ -20,16 +20,18 @@ import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.servlet.JettyHttpSessionWrapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+
+import java.lang.reflect.Constructor;
 
 import java.security.Principal;
 
@@ -374,7 +376,12 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 			_request.getSession(), _portletRequestImpl);
 
 		if (ServerDetector.isJetty()) {
-			session = new JettyHttpSessionWrapper(session);
+			try {
+				session = wrapJettySession(session);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 
 		return session;
@@ -385,7 +392,12 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 			_request.getSession(create), _portletRequestImpl);
 
 		if (ServerDetector.isJetty()) {
-			session = new JettyHttpSessionWrapper(session);
+			try {
+				session = wrapJettySession(session);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 
 		return session;
@@ -438,6 +450,24 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 			_request.setCharacterEncoding(encoding);
 		}
+	}
+
+	protected HttpSession wrapJettySession(HttpSession session)
+		throws Exception {
+
+		// This must be called through reflection because Resin tries to load
+		// org/mortbay/jetty/servlet/AbstractSessionManager$SessionIf
+
+		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+		Class<?> jettyHttpSessionWrapperClass = classLoader.loadClass(
+			"com.liferay.util.servlet.JettyHttpSessionWrapper");
+
+		Constructor<?> constructor =
+			jettyHttpSessionWrapperClass.getConstructor(
+				new Class[] {HttpSession.class});
+
+		return(HttpSession)constructor.newInstance(new Object[] {session});
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

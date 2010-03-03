@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
@@ -610,15 +611,17 @@ public class LayoutAction extends Action {
 			return null;
 		}
 		finally {
-			PortletRequest portletRequest =
-				(PortletRequest)request.getAttribute(
-					JavaConstants.JAVAX_PORTLET_REQUEST);
+			if (!ServerDetector.isResin()) {
+				PortletRequest portletRequest =
+					(PortletRequest)request.getAttribute(
+						JavaConstants.JAVAX_PORTLET_REQUEST);
 
-			if (portletRequest != null) {
-				PortletRequestImpl portletRequestImpl =
-					(PortletRequestImpl)portletRequest;
+				if (portletRequest != null) {
+					PortletRequestImpl portletRequestImpl =
+						(PortletRequestImpl)portletRequest;
 
-				portletRequestImpl.cleanUp();
+					portletRequestImpl.cleanUp();
+				}
 			}
 		}
 	}
