@@ -63,7 +63,7 @@ AUI().add(
 					A.getDoc().detach('click', instance._hideAllPanels);
 				}
 
-				event.halt();
+				event.stopPropagation();
 			};
 
 			instance._trigger.on(
@@ -73,7 +73,7 @@ AUI().add(
 
 					A.getDoc().on('click', instance._hideAllPanels);
 
-					event.halt();
+					event.stopPropagation();
 				}
 			);
 
