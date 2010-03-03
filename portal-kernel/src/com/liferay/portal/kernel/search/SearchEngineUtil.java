@@ -78,6 +78,10 @@ public class SearchEngineUtil {
 	public static Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Query string " + query.toString());
+		}
+
 		return _searchEngine.getSearcher().search(
 			companyId, query, _DEFAULT_SORT, start, end);
 	}
@@ -86,6 +90,10 @@ public class SearchEngineUtil {
 			long companyId, Query query, Sort sort, int start, int end)
 		throws SearchException {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Query string " + query.toString());
+		}
+
 		return _searchEngine.getSearcher().search(
 			companyId, query, new Sort[] {sort}, start, end);
 	}
@@ -93,6 +101,10 @@ public class SearchEngineUtil {
 	public static Hits search(
 			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Query string " + query.toString());
+		}
 
 		return _searchEngine.getSearcher().search(
 			companyId, query, sorts, start, end);
@@ -108,6 +120,10 @@ public class SearchEngineUtil {
 				companyId, groupId, userId, className, query);
 		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Query string " + query.toString());
+		}
+
 		return search(companyId, query, _DEFAULT_SORT, start, end);
 	}
 
@@ -119,6 +135,10 @@ public class SearchEngineUtil {
 		if (userId > 0) {
 			query = _searchPermissionChecker.getPermissionQuery(
 				companyId, groupId, userId, className, query);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Query string " + query.toString());
 		}
 
 		return search(companyId, query, sort, start, end);
