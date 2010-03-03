@@ -106,7 +106,7 @@ AUI().add(
 				selectOptions = selectOptions.join('');
 
 				if (select) {
-					select.append(selectOptions).val(selectVal);
+					select.empty().append(selectOptions).val(selectVal);
 
 					if (Liferay.Browser.isIe()) {
 						select.setStyle('width', 'auto');
