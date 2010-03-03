@@ -865,10 +865,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		for (PortletFilter portletFilter : portletFilters) {
 			javax.portlet.filter.PortletFilter portletFilterInstance =
-				(javax.portlet.filter.PortletFilter)newInstance(
-					portletClassLoader,
-					javax.portlet.filter.PortletFilter.class,
-					portletFilter.getFilterClass());
+				(javax.portlet.filter.PortletFilter)
+					portletClassLoader.loadClass(
+						portletFilter.getFilterClass()).newInstance();
 
 			portletContextBag.getPortletFilters().put(
 				portletFilter.getFilterName(), portletFilterInstance);
