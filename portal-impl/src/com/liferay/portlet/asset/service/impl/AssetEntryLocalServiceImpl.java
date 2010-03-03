@@ -373,13 +373,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			for (String tagName : tagNames) {
 				AssetTag tag = null;
+				long parentGroupId = PortalUtil.getParentGroupId(groupId);
 
 				try {
-					tag = assetTagLocalService.getTag(groupId, tagName);
+					tag = assetTagLocalService.getTag(parentGroupId, tagName);
 				}
 				catch (NoSuchTagException nste) {
-					long parentGroupId = PortalUtil.getParentGroupId(groupId);
-
 					ServiceContext serviceContext = new ServiceContext();
 
 					serviceContext.setAddCommunityPermissions(true);
