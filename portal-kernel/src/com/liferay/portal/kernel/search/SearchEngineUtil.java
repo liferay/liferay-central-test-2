@@ -38,6 +38,10 @@ public class SearchEngineUtil {
 			return;
 		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Document " + doc.toString());
+		}
+
 		_searchPermissionChecker.addPermissionFields(companyId, doc);
 
 		_searchEngine.getWriter().addDocument(companyId, doc);
@@ -158,6 +162,10 @@ public class SearchEngineUtil {
 
 		if (isIndexReadOnly()) {
 			return;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Document " + doc.toString());
 		}
 
 		_searchPermissionChecker.addPermissionFields(companyId, doc);
