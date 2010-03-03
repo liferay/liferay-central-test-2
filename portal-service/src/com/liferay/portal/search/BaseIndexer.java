@@ -359,6 +359,7 @@ public abstract class BaseIndexer implements Indexer {
 		throws Exception;
 
 	protected abstract void doReindex(String[] ids) throws Exception;
+
 	protected String getClassName(SearchContext searchContext) {
 		String[] classNames = getClassNames();
 
