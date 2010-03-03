@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.workflow;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -80,7 +81,7 @@ public class WorkflowInstanceManagerUtil {
 
 	public static WorkflowInstance signalWorkflowInstance(
 			long companyId, long userId, long workflowInstanceId,
-			String transitionName, Map<String, Object> context)
+			String transitionName, Map<String, Serializable> context)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.signalWorkflowInstance(
@@ -90,7 +91,7 @@ public class WorkflowInstanceManagerUtil {
 	public static WorkflowInstance startWorkflowInstance(
 			long companyId, long userId, String workflowDefinitionName,
 			Integer workflowDefinitionVersion, String transitionName,
-			Map<String, Object> context)
+			Map<String, Serializable> context)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.startWorkflowInstance(
@@ -100,7 +101,7 @@ public class WorkflowInstanceManagerUtil {
 
 	public static WorkflowInstance updateContext(
 			long companyId, long workflowInstanceId,
-			Map<String, Object> context)
+			Map<String, Serializable> context)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.updateContext(

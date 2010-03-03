@@ -27,6 +27,7 @@ import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.service.base.WorkflowInstanceLinkLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -140,7 +141,8 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			int workflowDefinitionVersion =
 				workflowDefinitionLink.getWorkflowDefinitionVersion();
 
-			Map<String, Object> context = new HashMap<String, Object>();
+			Map<String, Serializable> context =
+				new HashMap<String, Serializable>();
 
 			context.put(ContextConstants.COMPANY_ID, companyId);
 			context.put(ContextConstants.GROUP_ID, groupId);

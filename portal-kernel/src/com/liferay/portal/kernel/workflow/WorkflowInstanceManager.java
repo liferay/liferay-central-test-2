@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -55,18 +56,18 @@ public interface WorkflowInstanceManager {
 
 	public WorkflowInstance signalWorkflowInstance(
 			long companyId, long userId, long workflowInstanceId,
-			String transitionName, Map<String, Object> context)
+			String transitionName, Map<String, Serializable> context)
 		throws WorkflowException;
 
 	public WorkflowInstance startWorkflowInstance(
 			long companyId, long userId, String workflowDefinitionName,
 			Integer workflowDefinitionVersion, String transitionName,
-			Map<String, Object> context)
+			Map<String, Serializable> context)
 		throws WorkflowException;
 
 	public WorkflowInstance updateContext(
 			long companyId, long workflowInstanceId,
-			Map<String, Object> context)
+			Map<String, Serializable> context)
 		throws WorkflowException;
 
 }

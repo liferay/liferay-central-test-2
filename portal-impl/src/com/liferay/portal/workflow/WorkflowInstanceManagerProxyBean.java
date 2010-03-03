@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +67,7 @@ public class WorkflowInstanceManagerProxyBean
 
 	public WorkflowInstance signalWorkflowInstance(
 		long companyId, long userId, long workflowInstanceId,
-		String transitionName, Map<String, Object> context) {
+		String transitionName, Map<String, Serializable> context) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -74,13 +75,14 @@ public class WorkflowInstanceManagerProxyBean
 	public WorkflowInstance startWorkflowInstance(
 		long companyId, long userId, String workflowDefinitionName,
 		Integer workflowDefinitionVersion, String transitionName,
-		Map<String, Object> context) {
+		Map<String, Serializable> context) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstance updateContext(
-		long companyId, long workflowInstanceId, Map<String, Object> context) {
+		long companyId, long workflowInstanceId,
+		Map<String, Serializable> context) {
 
 		throw new UnsupportedOperationException();
 	}
