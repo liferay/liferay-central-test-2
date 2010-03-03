@@ -135,7 +135,14 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 							<aui:select changesContext="<%= true %>" inlineLabel="left" name="itemsPerPage" onchange='<%= namespace + deltaParam + "updateDelta(this);" %>'>
 
 								<%
-								for (int curDelta : PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES) {
+								int[] values = ArrayUtil.clone(PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES);
+
+								if (!ArrayUtil.contains(values, delta)) {
+									values = ArrayUtil.append(values, delta);
+									Arrays.sort(values);
+								}
+
+								for (int curDelta : values) {
 									if (curDelta > SearchContainer.MAX_DELTA) {
 										continue;
 									}
