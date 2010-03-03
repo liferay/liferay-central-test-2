@@ -369,11 +369,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		// Tags
 
 		if (tagNames != null) {
+			long parentGroupId = PortalUtil.getParentGroupId(groupId);
+
 			List<AssetTag> tags = new ArrayList<AssetTag>(tagNames.length);
 
 			for (String tagName : tagNames) {
 				AssetTag tag = null;
-				long parentGroupId = PortalUtil.getParentGroupId(groupId);
 
 				try {
 					tag = assetTagLocalService.getTag(parentGroupId, tagName);
