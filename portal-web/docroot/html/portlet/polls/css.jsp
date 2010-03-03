@@ -18,6 +18,7 @@
 
 .portlet-polls .choice, .portlet-polls .add-choice{
 	clear: both;
+	display: block;
 }
 
 .portlet-polls .choice label {
