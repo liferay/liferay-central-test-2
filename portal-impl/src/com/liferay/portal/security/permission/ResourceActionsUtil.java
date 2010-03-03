@@ -857,15 +857,17 @@ public class ResourceActionsUtil {
 
 			Element guestUnsupported = resource.element("guest-unsupported");
 
-			itr2 = guestUnsupported.elements("action-key").iterator();
+			if (guestUnsupported != null) {
+				itr2 = guestUnsupported.elements("action-key").iterator();
 
-			while (itr2.hasNext()) {
-				Element actionKey = itr2.next();
+				while (itr2.hasNext()) {
+					Element actionKey = itr2.next();
 
-				String actionKeyText = actionKey.getText();
+					String actionKeyText = actionKey.getText();
 
-				if (Validator.isNotNull(actionKeyText)) {
-					guestUnsupportedActions.add(actionKeyText);
+					if (Validator.isNotNull(actionKeyText)) {
+						guestUnsupportedActions.add(actionKeyText);
+					}
 				}
 			}
 
