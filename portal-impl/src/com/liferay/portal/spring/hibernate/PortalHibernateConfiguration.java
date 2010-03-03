@@ -86,7 +86,7 @@ public class PortalHibernateConfiguration
 			DB db = DBFactoryUtil.getDB();
 
 			if (db.getType().equals(DB.TYPE_HYPERSONIC)) {
-				configuration.setProperty("hibernate.jdbc.batch_size", "0");
+				//configuration.setProperty("hibernate.jdbc.batch_size", "0");
 			}
 		}
 		catch (Exception e1) {
