@@ -42,6 +42,7 @@ public class WorkflowDefinitionManagerProxyBean
 
 	public WorkflowDefinition getWorkflowDefinition(
 		long companyId, String name, int version) {
+
 		throw new UnsupportedOperationException();
 	}
 

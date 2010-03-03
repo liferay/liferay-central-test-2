@@ -58,8 +58,8 @@ public class WorkflowInstanceManagerUtil {
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceCount(
-			companyId, workflowDefinitionName,
-			workflowDefinitionVersion, completed);
+			companyId, workflowDefinitionName, workflowDefinitionVersion,
+			completed);
 	}
 
 	public static WorkflowInstanceManager getWorkflowInstanceManager() {
@@ -68,9 +68,8 @@ public class WorkflowInstanceManagerUtil {
 
 	public static List<WorkflowInstance> getWorkflowInstances(
 			long companyId, String workflowDefinitionName,
-			Integer workflowDefinitionVersion,
-			Boolean completed, int start, int end,
-			OrderByComparator orderByComparator)
+			Integer workflowDefinitionVersion, Boolean completed, int start,
+			int end, OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstances(
@@ -95,8 +94,8 @@ public class WorkflowInstanceManagerUtil {
 		throws WorkflowException {
 
 		return _workflowInstanceManager.startWorkflowInstance(
-			companyId, userId, workflowDefinitionName, workflowDefinitionVersion,
-			transitionName, context);
+			companyId, userId, workflowDefinitionName,
+			workflowDefinitionVersion, transitionName, context);
 	}
 
 	public static WorkflowInstance updateContext(

@@ -49,15 +49,13 @@ public interface WorkflowInstanceManager {
 
 	public List<WorkflowInstance> getWorkflowInstances(
 			long companyId, String workflowDefinitionName,
-			Integer workflowDefinitionVersion,
-			Boolean completed, int start, int end,
-			OrderByComparator orderByComparator)
+			Integer workflowDefinitionVersion, Boolean completed, int start,
+			int end, OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	public WorkflowInstance signalWorkflowInstance(
-			long companyId, long userId,
-			long workflowInstanceId, String transitionName,
-			Map<String, Object> context)
+			long companyId, long userId, long workflowInstanceId,
+			String transitionName, Map<String, Object> context)
 		throws WorkflowException;
 
 	public WorkflowInstance startWorkflowInstance(
@@ -67,7 +65,8 @@ public interface WorkflowInstanceManager {
 		throws WorkflowException;
 
 	public WorkflowInstance updateContext(
-			long companyId, long workflowInstanceId, Map<String, Object> context)
+			long companyId, long workflowInstanceId,
+			Map<String, Object> context)
 		throws WorkflowException;
 
 }

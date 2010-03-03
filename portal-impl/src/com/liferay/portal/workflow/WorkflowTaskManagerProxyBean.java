@@ -126,8 +126,7 @@ public class WorkflowTaskManagerProxyBean
 
 	public List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
 		long companyId, long workflowInstanceId, Boolean completed,
-		int start, int end,
-		OrderByComparator orderByComparator) {
+		int start, int end, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}

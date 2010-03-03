@@ -33,7 +33,7 @@ public class WorkflowInstanceManagerProxyBean
 
 	public void deleteWorkflowInstance(
 		long companyId, long workflowInstanceId) {
-		
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -58,16 +58,15 @@ public class WorkflowInstanceManagerProxyBean
 
 	public List<WorkflowInstance> getWorkflowInstances(
 		long companyId, String workflowDefinitionName,
-		Integer workflowDefinitionVersion, Boolean completed,
-		int start, int end, OrderByComparator orderByComparator) {
+		Integer workflowDefinitionVersion, Boolean completed, int start,
+		int end, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstance signalWorkflowInstance(
-		long companyId, long userId,
-		long workflowInstanceId, String transitionName,
-		Map<String, Object> context) {
+		long companyId, long userId, long workflowInstanceId,
+		String transitionName, Map<String, Object> context) {
 
 		throw new UnsupportedOperationException();
 	}

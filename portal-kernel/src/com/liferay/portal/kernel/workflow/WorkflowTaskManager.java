@@ -56,8 +56,7 @@ public interface WorkflowTaskManager {
 	public WorkflowTask getWorkflowTask(long companyId, long workflowTaskId)
 		throws WorkflowException;
 
-	public int getWorkflowTaskCount(
-			long companyId, Boolean completed)
+	public int getWorkflowTaskCount(long companyId, Boolean completed)
 		throws WorkflowException;
 
 	public int getWorkflowTaskCountByRole(

@@ -43,7 +43,8 @@ public class WorkflowTaskManagerUtil {
 		throws WorkflowException {
 
 		return _workflowTaskManager.assignWorkflowTaskToUser(
-			companyId, userId, workflowTaskId, assigneeUserId, comment, context);
+			companyId, userId, workflowTaskId, assigneeUserId, comment,
+			context);
 	}
 
 	public static WorkflowTask completeWorkflowTask(
@@ -52,7 +53,8 @@ public class WorkflowTaskManagerUtil {
 		throws WorkflowException {
 
 		return _workflowTaskManager.completeWorkflowTask(
-			companyId, userId, workflowTaskId, transitionName, comment, context);
+			companyId, userId, workflowTaskId, transitionName, comment,
+			context);
 	}
 
 	public static List<String> getNextTransitionNames(
