@@ -53,11 +53,20 @@ public abstract class BaseHotDeployListener implements HotDeployListener {
 			String implClassName)
 		throws Exception {
 
+		return newInstance(
+			portletClassLoader, new Class[] {interfaceClass}, implClassName);
+	}
+
+	protected Object newInstance(
+			ClassLoader portletClassLoader, Class<?>[] interfaceClasses,
+			String implClassName)
+		throws Exception {
+
 		Object instance = portletClassLoader.loadClass(
 			implClassName).newInstance();
 
 		return Proxy.newProxyInstance(
-			portletClassLoader, new Class[] {interfaceClass},
+			portletClassLoader, interfaceClasses,
 			new ContextClassLoaderBeanHandler(instance, portletClassLoader));
 	}
 
