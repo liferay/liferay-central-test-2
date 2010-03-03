@@ -60,7 +60,9 @@ searchContainer.setRowChecker(new UserGroupRoleRoleChecker(renderResponse, selUs
 
 	searchContainer.setTotal(total);
 
-	List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleConstants.TYPE_COMMUNITY), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+	List<Role> results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleConstants.TYPE_COMMUNITY), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+
+	results = EnterpriseAdminUtil.filterRoles(permissionChecker, results);
 
 	searchContainer.setResults(results);
 
@@ -88,7 +90,7 @@ searchContainer.setRowChecker(new UserGroupRoleRoleChecker(renderResponse, selUs
 	List resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {
-		Role role = (Role)results.get(i);
+		Role role = results.get(i);
 
 		role = role.toEscapedModel();
 
