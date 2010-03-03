@@ -195,9 +195,9 @@ public class WikiIndexer extends BaseIndexer {
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
+		document.addKeyword("nodeId", nodeId);
 		document.addKeyword(Field.ENTRY_CLASS_NAME, WikiPage.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, resourcePrimKey);
-		document.addKeyword("nodeId", nodeId);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
