@@ -32,16 +32,37 @@ AUI().add(
 				renderUI: function() {
 					var instance = this;
 
-					var id = instance.get('id')
+					var id = instance.get('id');
+
+					var contentBox = instance.get('contentBox');
 
 					instance._dataStore = A.one('#' + id + 'PrimaryKeys');
-					instance._table = instance.get('contentBox').one('table');
+					instance._table = contentBox.one('table');
+					instance._parentContainer = contentBox.ancestor('.lfr-search-container');
 
 					if (instance._table) {
 						instance._table.setAttribute('data-searchContainerId', id);
 
 						SearchContainer.register(instance);
 					}
+				},
+
+				bindUI: function() {
+					var instance = this;
+
+					instance.publish(
+						'addRow',
+						{
+							defaultFn: instance._addRow
+						}
+					);
+
+					instance.publish(
+						'deleteRow',
+						{
+							defaultFn: instance._deleteRow
+						}
+					);
 				},
 
 				syncUI: function() {
@@ -169,6 +190,24 @@ AUI().add(
 					if (dataStore) {
 						dataStore.val(instance._ids.join(','));
 					}
+				},
+
+				_addRow: function(event) {
+					var instance = this;
+
+					instance._parentContainer.show();
+				},
+
+				_deleteRow: function(event) {
+					var instance = this;
+
+					var action = 'hide';
+
+					if (instance._ids.length) {
+						action = 'show';
+					}
+
+					instance._parentContainer[action]();
 				}
 			}
 		);

@@ -61,7 +61,7 @@ List<String> primaryKeys = new ArrayList<String>();
 	</div>
 </c:if>
 
-<c:if test="<%= !resultRows.isEmpty() %>">
+<div class="lfr-search-container <%= resultRows.isEmpty() ? "aui-helper-hidden" : StringPool.BLANK %>">
 	<c:if test="<%= PropsValues.SEARCH_CONTAINER_SHOW_PAGINATION_TOP && (resultRows.size() > 10) && paginate %>">
 		<div class="taglib-search-iterator-page-iterator-top">
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
@@ -285,12 +285,12 @@ List<String> primaryKeys = new ArrayList<String>();
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</div>
 	</c:if>
+</div>
 
-	<c:if test="<%= (rowChecker != null) && !resultRows.isEmpty() && Validator.isNotNull(rowChecker.getAllRowsId()) && allRowsIsChecked %>">
-		<aui:script>
-			document.<%= rowChecker.getFormName() %>.<%= rowChecker.getAllRowsId() %>.checked = true;
-		</aui:script>
-	</c:if>
+<c:if test="<%= (rowChecker != null) && !resultRows.isEmpty() && Validator.isNotNull(rowChecker.getAllRowsId()) && allRowsIsChecked %>">
+	<aui:script>
+		document.<%= rowChecker.getFormName() %>.<%= rowChecker.getAllRowsId() %>.checked = true;
+	</aui:script>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(id) %>">
