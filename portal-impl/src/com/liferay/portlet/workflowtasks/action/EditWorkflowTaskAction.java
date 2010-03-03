@@ -108,8 +108,8 @@ public class EditWorkflowTaskAction extends PortletAction {
 		String comment = ParamUtil.getString(actionRequest, "comment");
 
 		WorkflowTaskManagerUtil.assignWorkflowTaskToUser(
-			themeDisplay.getUserId(), workflowTaskId, assigneeUserId, comment,
-			null);
+			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+			workflowTaskId, assigneeUserId, comment, null);
 	}
 
 	protected void updateTask(ActionRequest actionRequest) throws Exception {
@@ -123,8 +123,8 @@ public class EditWorkflowTaskAction extends PortletAction {
 		String comment = ParamUtil.getString(actionRequest, "comment");
 
 		WorkflowTaskManagerUtil.completeWorkflowTask(
-			themeDisplay.getUserId(), workflowTaskId, transitionName, comment,
-			null);
+			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+			workflowTaskId, transitionName, comment, null);
 	}
 
 }

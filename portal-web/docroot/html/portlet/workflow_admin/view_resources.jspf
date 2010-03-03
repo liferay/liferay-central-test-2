@@ -22,7 +22,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", "/workflow_admin/view");
 portletURL.setParameter("tabs1", tabs1);
 
-List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getWorkflowDefinitions(0, 100, null);
+List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getWorkflowDefinitions(company.getCompanyId(), 0, 100, null);
 %>
 
 <liferay-ui:tabs

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -59,8 +60,11 @@ public class ActionUtil {
 		WorkflowTask workflowTask = null;
 
 		if (Validator.isNotNull(workflowTaskId)) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 			workflowTask = WorkflowTaskManagerUtil.getWorkflowTask(
-				workflowTaskId);
+				themeDisplay.getCompanyId(), workflowTaskId);
 		}
 
 		request.setAttribute(WebKeys.WORKFLOW_TASK, workflowTask);

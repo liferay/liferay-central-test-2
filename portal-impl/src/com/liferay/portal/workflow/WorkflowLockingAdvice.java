@@ -37,8 +37,8 @@ public class WorkflowLockingAdvice {
 		Object[] arguments = proceedingJoinPoint.getArgs();
 
 		if (methodName.equals(_START_WORKFLOW_INSTANCE_METHOD_NAME)) {
-			String workflowDefinitionName = (String)arguments[1];
-			Integer workflowDefinitionVersion = (Integer)arguments[2];
+			String workflowDefinitionName = (String)arguments[2];
+			Integer workflowDefinitionVersion = (Integer)arguments[3];
 
 			String className = WorkflowDefinition.class.getName();
 			String key = _encodeKey(
@@ -59,9 +59,9 @@ public class WorkflowLockingAdvice {
 			return proceedingJoinPoint.proceed();
 		}
 
-		long userId = (Long)arguments[0];
-		String name = (String)arguments[1];
-		Integer version = (Integer)arguments[2];
+		long userId = (Long)arguments[1];
+		String name = (String)arguments[2];
+		Integer version = (Integer)arguments[3];
 
 		String className = WorkflowDefinition.class.getName();
 		String key = _encodeKey(name, version);

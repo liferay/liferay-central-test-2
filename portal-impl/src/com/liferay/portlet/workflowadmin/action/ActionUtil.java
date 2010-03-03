@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -60,12 +61,16 @@ public class ActionUtil {
 			return;
 		}
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String name = ParamUtil.getString(request, "name");
 		int version = ParamUtil.getInteger(request, "version");
 
 		List<WorkflowDefinition> workflowDefinitions =
 			WorkflowDefinitionManagerUtil.getWorkflowDefinitions(
-				name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+				themeDisplay.getCompanyId(), name, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
 
 		for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
 			if (version == workflowDefinition.getVersion()) {

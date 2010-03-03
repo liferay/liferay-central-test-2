@@ -31,40 +31,43 @@ import java.util.Map;
  */
 public interface WorkflowInstanceManager {
 
-	public void deleteWorkflowInstance(long workflowInstanceId)
+	public void deleteWorkflowInstance(long companyId, long workflowInstanceId)
 		throws WorkflowException;
 
 	public List<String> getNextTransitionNames(
-			long userId, long workflowInstanceId)
+			long companyId, long userId, long workflowInstanceId)
 		throws WorkflowException;
 
-	public WorkflowInstance getWorkflowInstance(long workflowInstanceId)
+	public WorkflowInstance getWorkflowInstance(
+			long companyId, long workflowInstanceId)
 		throws WorkflowException;
 
 	public int getWorkflowInstanceCount(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Boolean completed)
+			long companyId, String workflowDefinitionName,
+			Integer workflowDefinitionVersion, Boolean completed)
 		throws WorkflowException;
 
 	public List<WorkflowInstance> getWorkflowInstances(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			long companyId, String workflowDefinitionName,
+			Integer workflowDefinitionVersion,
 			Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	public WorkflowInstance signalWorkflowInstance(
-			long userId, long workflowInstanceId, String transitionName,
+			long companyId, long userId,
+			long workflowInstanceId, String transitionName,
 			Map<String, Object> context)
 		throws WorkflowException;
 
 	public WorkflowInstance startWorkflowInstance(
-			long userId, String workflowDefinitionName,
+			long companyId, long userId, String workflowDefinitionName,
 			Integer workflowDefinitionVersion, String transitionName,
 			Map<String, Object> context)
 		throws WorkflowException;
 
 	public WorkflowInstance updateContext(
-			long workflowInstanceId, Map<String, Object> context)
+			long companyId, long workflowInstanceId, Map<String, Object> context)
 		throws WorkflowException;
 
 }

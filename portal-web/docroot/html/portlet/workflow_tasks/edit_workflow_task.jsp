@@ -21,7 +21,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowTask workflowTask = (WorkflowTask)request.getAttribute(WebKeys.WORKFLOW_TASK);
 
-WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
+WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
 
 Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
 
@@ -90,7 +90,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) %>">
 
 		<%
-		long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(workflowTask.getWorkflowTaskId());
+		long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getCompanyId(), workflowTask.getWorkflowTaskId());
 		%>
 
 		<c:if test="<%= (pooledActorsIds != null) && (pooledActorsIds.length > 0) && !workflowTask.isCompleted() %>">
@@ -118,7 +118,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<liferay-ui:panel defaultState="closed" title='<%= LanguageUtil.get(pageContext, "activities") %>'>
 
 		<%
-		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(workflowTask.getWorkflowTaskId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, new WorkflowLogCreateDateComparator(true));
+		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, new WorkflowLogCreateDateComparator(true));
 
 		for (WorkflowLog workflowLog : workflowLogs) {
 			User curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());
@@ -168,7 +168,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 		<c:if test="<%= !workflowTask.isCompleted() && (workflowTask.getAssigneeUserId() == user.getUserId()) %>">
 
 			<%
-			List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
+			List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowTask.getWorkflowTaskId());
 
 			for (String transitionName : transitionNames) {
 				String message = "proceed";

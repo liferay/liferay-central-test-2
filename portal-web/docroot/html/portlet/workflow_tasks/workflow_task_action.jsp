@@ -33,7 +33,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getParameter("workflowTask");
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
 		<%
-		List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
+		List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowTask.getWorkflowTaskId());
 
 		for (String transitionName : transitionNames) {
 			String message = "proceed";

@@ -29,86 +29,90 @@ import java.util.Map;
 public class WorkflowTaskManagerUtil {
 
 	public static WorkflowTask assignWorkflowTaskToRole(
-			long userId, long workflowTaskId, long roleId, String comment,
-			Map<String, Object> context)
+			long companyId, long userId, long workflowTaskId,
+			long roleId, String comment, Map<String, Object> context)
 		throws WorkflowException {
 
 		return _workflowTaskManager.assignWorkflowTaskToRole(
-			userId, workflowTaskId, roleId, comment, context);
+			companyId, userId, workflowTaskId, roleId, comment, context);
 	}
 
 	public static WorkflowTask assignWorkflowTaskToUser(
-			long userId, long workflowTaskId, long assigneeUserId,
-			String comment, Map<String, Object> context)
+			long companyId, long userId, long workflowTaskId,
+			long assigneeUserId, String comment, Map<String, Object> context)
 		throws WorkflowException {
 
 		return _workflowTaskManager.assignWorkflowTaskToUser(
-			userId, workflowTaskId, assigneeUserId, comment, context);
+			companyId, userId, workflowTaskId, assigneeUserId, comment, context);
 	}
 
 	public static WorkflowTask completeWorkflowTask(
-			long userId, long workflowTaskId, String transitionName,
-			String comment, Map<String, Object> context)
+			long companyId, long userId, long workflowTaskId,
+			String transitionName, String comment, Map<String, Object> context)
 		throws WorkflowException {
 
 		return _workflowTaskManager.completeWorkflowTask(
-			userId, workflowTaskId, transitionName, comment, context);
+			companyId, userId, workflowTaskId, transitionName, comment, context);
 	}
 
 	public static List<String> getNextTransitionNames(
-			long userId, long workflowTaskId)
+			long companyId, long userId, long workflowTaskId)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getNextTransitionNames(
-			userId, workflowTaskId);
+			companyId, userId, workflowTaskId);
 	}
 
-	public static long[] getPooledActorsIds(long workflowTaskId)
+	public static long[] getPooledActorsIds(long companyId, long workflowTaskId)
 		throws WorkflowException {
 
-		return _workflowTaskManager.getPooledActorsIds(workflowTaskId);
+		return _workflowTaskManager.getPooledActorsIds(
+			companyId, workflowTaskId);
 	}
 
-	public static WorkflowTask getWorkflowTask(long workflowTaskId)
+	public static WorkflowTask getWorkflowTask(
+			long companyId, long workflowTaskId)
 		throws WorkflowException {
 
-		return _workflowTaskManager.getWorkflowTask(workflowTaskId);
+		return _workflowTaskManager.getWorkflowTask(companyId, workflowTaskId);
 	}
 
-	public static int getWorkflowTaskCount(Boolean completed)
+	public static int getWorkflowTaskCount(long companyId, Boolean completed)
 		throws WorkflowException {
 
-		return _workflowTaskManager.getWorkflowTaskCount(completed);
+		return _workflowTaskManager.getWorkflowTaskCount(companyId, completed);
 	}
 
-	public static int getWorkflowTaskCountByRole(long roleId, Boolean completed)
+	public static int getWorkflowTaskCountByRole(
+			long companyId, long roleId, Boolean completed)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTaskCountByRole(
-			roleId, completed);
+			companyId, roleId, completed);
 	}
 
-	public static int getWorkflowTaskCountByUser(long userId, Boolean completed)
+	public static int getWorkflowTaskCountByUser(
+			long companyId, long userId, Boolean completed)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTaskCountByUser(
-			userId, completed);
+			companyId, userId, completed);
 	}
 
 	public static int getWorkflowTaskCountByUserRoles(
-			long userId, Boolean completed)
+			long companyId, long userId, Boolean completed)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTaskCountByUserRoles(
-			userId, completed);
+			companyId, userId, completed);
 	}
 
 	public static int getWorkflowTaskCountByWorkflowInstance(
-			long workflowInstanceId, Boolean completed)
+			long companyId, long workflowInstanceId, Boolean completed)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTaskCountByWorkflowInstance(
-			workflowInstanceId, completed);
+			companyId, workflowInstanceId, completed);
 	}
 
 	public static WorkflowTaskManager getWorkflowTaskManager() {
@@ -116,48 +120,50 @@ public class WorkflowTaskManagerUtil {
 	}
 
 	public static List<WorkflowTask> getWorkflowTasks(
-			Boolean completed, int start, int end,
+			long companyId, Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTasks(
-			completed, start, end, orderByComparator);
+			companyId, completed, start, end, orderByComparator);
 	}
 
 	public static List<WorkflowTask> getWorkflowTasksByRole(
-			long roleId, Boolean completed, int start, int end,
+			long companyId, long roleId, Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTasksByRole(
-			roleId, completed, start, end, orderByComparator);
+			companyId, roleId, completed, start, end, orderByComparator);
 	}
 
 	public static List<WorkflowTask> getWorkflowTasksByUser(
-			long userId, Boolean completed, int start, int end,
+			long companyId, long userId, Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTasksByUser(
-			userId, completed, start, end, orderByComparator);
+			companyId, userId, completed, start, end, orderByComparator);
 	}
 
 	public static List<WorkflowTask> getWorkflowTasksByUserRoles(
-			long userId, Boolean completed, int start, int end,
+			long companyId, long userId, Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTasksByUserRoles(
-			userId, completed, start, end, orderByComparator);
+			companyId, userId, completed, start, end, orderByComparator);
 	}
 
 	public static List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
-			long workflowInstanceId, Boolean completed, int start, int end,
+			long companyId, long workflowInstanceId,
+			Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTasksByWorkflowInstance(
-			workflowInstanceId, completed, start, end, orderByComparator);
+			companyId, workflowInstanceId,
+			completed, start, end, orderByComparator);
 	}
 
 	public void setWorkflowTaskManager(

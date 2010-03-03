@@ -28,33 +28,38 @@ import java.util.Map;
  */
 public class WorkflowInstanceManagerUtil {
 
-	public static void deleteWorkflowInstance(long workflowInstanceId)
+	public static void deleteWorkflowInstance(
+			long companyId, long workflowInstanceId)
 		throws WorkflowException {
 
-		_workflowInstanceManager.deleteWorkflowInstance(workflowInstanceId);
+		_workflowInstanceManager.deleteWorkflowInstance(
+			companyId, workflowInstanceId);
 	}
 
 	public static List<String> getNextTransitionNames(
-			long userId, long workflowInstanceId)
+			long companyId, long userId, long workflowInstanceId)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getNextTransitionNames(
-			userId, workflowInstanceId);
+			companyId, userId, workflowInstanceId);
 	}
 
-	public static WorkflowInstance getWorkflowInstance(long workflowInstanceId)
+	public static WorkflowInstance getWorkflowInstance(
+			long companyId, long workflowInstanceId)
 		throws WorkflowException {
 
-		return _workflowInstanceManager.getWorkflowInstance(workflowInstanceId);
+		return _workflowInstanceManager.getWorkflowInstance(
+			companyId, workflowInstanceId);
 	}
 
 	public static int getWorkflowInstanceCount(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Boolean completed)
+			long companyId, String workflowDefinitionName,
+			Integer workflowDefinitionVersion, Boolean completed)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceCount(
-			workflowDefinitionName, workflowDefinitionVersion, completed);
+			companyId, workflowDefinitionName,
+			workflowDefinitionVersion, completed);
 	}
 
 	public static WorkflowInstanceManager getWorkflowInstanceManager() {
@@ -62,42 +67,45 @@ public class WorkflowInstanceManagerUtil {
 	}
 
 	public static List<WorkflowInstance> getWorkflowInstances(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			long companyId, String workflowDefinitionName,
+			Integer workflowDefinitionVersion,
 			Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstances(
-			workflowDefinitionName, workflowDefinitionVersion, completed, start,
+			companyId, workflowDefinitionName,
+			workflowDefinitionVersion, completed, start,
 			end, orderByComparator);
 	}
 
 	public static WorkflowInstance signalWorkflowInstance(
-			long userId, long workflowInstanceId, String transitionName,
-			Map<String, Object> context)
+			long companyId, long userId, long workflowInstanceId,
+			String transitionName, Map<String, Object> context)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.signalWorkflowInstance(
-			userId, workflowInstanceId, transitionName, context);
+			companyId, userId, workflowInstanceId, transitionName, context);
 	}
 
 	public static WorkflowInstance startWorkflowInstance(
-			long userId, String workflowDefinitionName,
+			long companyId, long userId, String workflowDefinitionName,
 			Integer workflowDefinitionVersion, String transitionName,
 			Map<String, Object> context)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.startWorkflowInstance(
-			userId, workflowDefinitionName, workflowDefinitionVersion,
+			companyId, userId, workflowDefinitionName, workflowDefinitionVersion,
 			transitionName, context);
 	}
 
 	public static WorkflowInstance updateContext(
-			long workflowInstanceId, Map<String, Object> context)
+			long companyId, long workflowInstanceId,
+			Map<String, Object> context)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.updateContext(
-			workflowInstanceId, context);
+			companyId, workflowInstanceId, context);
 	}
 
 	public void setWorkflowInstanceManager(

@@ -81,7 +81,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			deleteWorkflowInstanceLink(workflowInstanceLink);
 
 			WorkflowInstanceManagerUtil.deleteWorkflowInstance(
-				workflowInstanceLink.getWorkflowInstanceId());
+				companyId, workflowInstanceLink.getWorkflowInstanceId());
 		}
 		catch (NoSuchWorkflowInstanceLinkException nswile) {
 		}
@@ -96,7 +96,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 		WorkflowInstance workflowInstance =
 			WorkflowInstanceManagerUtil.getWorkflowInstance(
-				workflowInstanceLink.getWorkflowInstanceId());
+				companyId, workflowInstanceLink.getWorkflowInstanceId());
 
 		return workflowInstance.getState();
 	}
@@ -149,8 +149,8 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 			WorkflowInstance workflowInstance =
 				WorkflowInstanceManagerUtil.startWorkflowInstance(
-					userId, workflowDefinitionName, workflowDefinitionVersion,
-					null, context);
+					companyId, userId, workflowDefinitionName,
+					workflowDefinitionVersion, null, context);
 
 			addWorkflowInstanceLink(
 				userId, companyId, groupId, className, classPK,

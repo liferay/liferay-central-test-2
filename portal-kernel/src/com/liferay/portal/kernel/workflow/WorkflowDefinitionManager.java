@@ -33,27 +33,32 @@ import java.util.List;
 public interface WorkflowDefinitionManager {
 
 	public WorkflowDefinition deployWorkflowDefinition(
-			long userId, String name, InputStream inputStream)
+			long companyId, long userId, String name,
+			InputStream inputStream)
 		throws WorkflowException;
 
-	public WorkflowDefinition getWorkflowDefinition(String name, int version)
+	public WorkflowDefinition getWorkflowDefinition(
+			long companyId, String name, int version)
 		throws WorkflowException;
 
-	public int getWorkflowDefinitionCount() throws WorkflowException;
+	public int getWorkflowDefinitionCount(long companyId)
+		throws WorkflowException;
 
-	public int getWorkflowDefinitionCount(String name) throws WorkflowException;
+	public int getWorkflowDefinitionCount(long companyId, String name)
+		throws WorkflowException;
 
 	public List<WorkflowDefinition> getWorkflowDefinitions(
-			int start, int end, OrderByComparator orderByComparator)
+			long companyId, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	public List<WorkflowDefinition> getWorkflowDefinitions(
-			String name, int start, int end,
+			long companyId, String name, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	public void undeployWorkflowDefinition(
-			long userId, String name, int version)
+			long companyId, long userId, String name, int version)
 		throws WorkflowException;
 
 }

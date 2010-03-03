@@ -31,44 +31,49 @@ import java.util.Map;
 public class WorkflowInstanceManagerProxyBean
 	extends BaseProxyBean implements WorkflowInstanceManager {
 
-	public void deleteWorkflowInstance(long workflowInstanceId) {
+	public void deleteWorkflowInstance(
+		long companyId, long workflowInstanceId) {
+		
 		throw new UnsupportedOperationException();
 	}
 
 	public List<String> getNextTransitionNames(
-		long userId, long workflowInstanceId) {
+		long companyId, long userId, long workflowInstanceId) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstance getWorkflowInstance(long workflowInstanceId) {
+	public WorkflowInstance getWorkflowInstance(
+		long companyId, long workflowInstanceId) {
+
 		throw new UnsupportedOperationException();
 	}
 
 	public int getWorkflowInstanceCount(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		Boolean completed) {
+		long companyId, String workflowDefinitionName,
+		Integer workflowDefinitionVersion, Boolean completed) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowInstance> getWorkflowInstances(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		Boolean completed, int start, int end,
-		OrderByComparator orderByComparator) {
+		long companyId, String workflowDefinitionName,
+		Integer workflowDefinitionVersion, Boolean completed,
+		int start, int end, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstance signalWorkflowInstance(
-		long userId, long workflowInstanceId, String transitionName,
+		long companyId, long userId,
+		long workflowInstanceId, String transitionName,
 		Map<String, Object> context) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstance startWorkflowInstance(
-		long userId, String workflowDefinitionName,
+		long companyId, long userId, String workflowDefinitionName,
 		Integer workflowDefinitionVersion, String transitionName,
 		Map<String, Object> context) {
 
@@ -76,7 +81,7 @@ public class WorkflowInstanceManagerProxyBean
 	}
 
 	public WorkflowInstance updateContext(
-		long workflowInstanceId, Map<String, Object> context) {
+		long companyId, long workflowInstanceId, Map<String, Object> context) {
 
 		throw new UnsupportedOperationException();
 	}

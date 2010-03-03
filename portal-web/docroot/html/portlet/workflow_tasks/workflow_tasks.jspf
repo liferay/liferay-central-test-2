@@ -32,14 +32,14 @@
 
 		searchContainer.setEmptyResultsMessage("there-are-no-tasks");
 
-		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasks(null, searchContainer.getStart(), searchContainer.getEnd(), null);
-		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCount(null);
+		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasks(company.getCompanyId(), null, searchContainer.getStart(), searchContainer.getEnd(), null);
+		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCount(company.getCompanyId(), null);
 	}
 	else if (toolbarItem.equals("assigned-to-my-roles")) {
 		searchContainer.setEmptyResultsMessage("there-are-no-tasks-assigned-to-my-roles");
 
-		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(user.getUserId(), false, searchContainer.getStart(), searchContainer.getEnd(), null);
-		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(user.getUserId(), false);
+		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(company.getCompanyId(), user.getUserId(), false, searchContainer.getStart(), searchContainer.getEnd(), null);
+		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(company.getCompanyId(), user.getUserId(), false);
 	}
 	else {
 		boolean completedTasks = false;
@@ -53,8 +53,8 @@
 			searchContainer.setEmptyResultsMessage("there-are-no-pending-tasks-assigned-to-you");
 		}
 
-		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completedTasks, searchContainer.getStart(), searchContainer.getEnd(), null);
-		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId(), completedTasks);
+		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasksByUser(company.getCompanyId(), user.getUserId(), completedTasks, searchContainer.getStart(), searchContainer.getEnd(), null);
+		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(company.getCompanyId(), user.getUserId(), completedTasks);
 	}
 	%>
 
@@ -137,7 +137,7 @@
 		>
 
 			<%
-			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
+			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
 
 			Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
 
@@ -158,7 +158,7 @@
 		>
 
 			<%
-			List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(workflowTask.getWorkflowTaskId(), 0, 1, new WorkflowLogCreateDateComparator(false));
+			List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), 0, 1, new WorkflowLogCreateDateComparator(false));
 
 			if (workflowLogs.isEmpty()) {
 				buffer.append(LanguageUtil.get(pageContext, "never"));
@@ -196,7 +196,7 @@
 		>
 
 			<%
-			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
+			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
 
 			Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
 

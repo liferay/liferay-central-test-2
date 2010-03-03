@@ -31,11 +31,11 @@ import java.util.List;
 public interface WorkflowLogManager {
 
 	public List<WorkflowLog> getWorkflowLogs(
-			long workflowTaskId, int start,	int end,
+			long companyId, long workflowTaskId, int start,	int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
-	public int getWorkflowLogCount(long workflowTaskId)
+	public int getWorkflowLogCount(long companyId, long workflowTaskId)
 		throws WorkflowException;
 
 }

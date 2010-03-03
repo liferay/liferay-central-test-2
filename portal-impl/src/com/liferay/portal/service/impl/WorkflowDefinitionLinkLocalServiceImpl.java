@@ -78,7 +78,8 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			deleteWorkflowDefinitionLink(workflowDefinitionLink);
 
 			WorkflowDefinitionManagerUtil.undeployWorkflowDefinition(
-				userId, workflowDefinitionLink.getWorkflowDefinitionName(),
+				companyId, userId,
+				workflowDefinitionLink.getWorkflowDefinitionName(),
 				workflowDefinitionLink.getWorkflowDefinitionVersion());
 		}
 		catch (NoSuchWorkflowDefinitionLinkException nswdle) {

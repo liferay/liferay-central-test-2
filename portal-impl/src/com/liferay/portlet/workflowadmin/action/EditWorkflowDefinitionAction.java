@@ -109,7 +109,8 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 		int version = ParamUtil.getInteger(actionRequest, "version");
 
 		WorkflowDefinitionManagerUtil.undeployWorkflowDefinition(
-			themeDisplay.getUserId(), name, version);
+			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+			name, version);
 	}
 
 	protected void updateWorkflowDefinition(ActionRequest actionRequest)
@@ -126,7 +127,8 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 
 		WorkflowDefinition workflowDefinition =
 			WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
-				themeDisplay.getUserId(), name, new FileInputStream(file));
+				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+				name, new FileInputStream(file));
 
 		actionRequest.setAttribute(
 			WebKeys.WORKFLOW_DEFINITION, workflowDefinition);

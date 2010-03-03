@@ -31,29 +31,32 @@ import java.util.List;
 public class WorkflowDefinitionManagerUtil {
 
 	public static WorkflowDefinition deployWorkflowDefinition(
-			long userId, String name, InputStream inputStream)
+			long companyId, long userId, String name, InputStream inputStream)
 		throws WorkflowException {
 
 		return _workflowDefinitionManager.deployWorkflowDefinition(
-			userId, name, inputStream);
+			companyId, userId, name, inputStream);
 	}
 
 	public static WorkflowDefinition getWorkflowDefinition(
-			String name, int version)
+			long companyId, String name, int version)
 		throws WorkflowException {
 
 		return _workflowDefinitionManager.getWorkflowDefinition(
-			name, version);
+			companyId, name, version);
 	}
 
-	public static int getWorkflowDefinitionCount() throws WorkflowException {
-		return _workflowDefinitionManager.getWorkflowDefinitionCount();
-	}
-
-	public static int getWorkflowDefinitionCount(String name)
+	public static int getWorkflowDefinitionCount(long companyId)
 		throws WorkflowException {
 
-		return _workflowDefinitionManager.getWorkflowDefinitionCount(name);
+		return _workflowDefinitionManager.getWorkflowDefinitionCount(companyId);
+	}
+
+	public static int getWorkflowDefinitionCount(long companyId, String name)
+		throws WorkflowException {
+
+		return _workflowDefinitionManager.getWorkflowDefinitionCount(
+			companyId, name);
 	}
 
 	public static WorkflowDefinitionManager getWorkflowDefinitionManager() {
@@ -61,28 +64,29 @@ public class WorkflowDefinitionManagerUtil {
 	}
 
 	public static List<WorkflowDefinition> getWorkflowDefinitions(
-			int start, int end, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _workflowDefinitionManager.getWorkflowDefinitions(
-			start, end, orderByComparator);
-	}
-
-	public static List<WorkflowDefinition> getWorkflowDefinitions(
-			String name, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowDefinitionManager.getWorkflowDefinitions(
-			name, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
+	}
+
+	public static List<WorkflowDefinition> getWorkflowDefinitions(
+			long companyId, String name, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowDefinitionManager.getWorkflowDefinitions(
+			companyId, name, start, end, orderByComparator);
 	}
 
 	public static void undeployWorkflowDefinition(
-			long userId, String name, int version)
+			long companyId, long userId, String name, int version)
 		throws WorkflowException {
 
 		_workflowDefinitionManager.undeployWorkflowDefinition(
-			userId, name, version);
+			companyId, userId, name, version);
 	}
 
 	public void setWorkflowDefinitionManager(
