@@ -14,10 +14,13 @@
 
 package com.liferay.portal.security.ldap;
 
+import com.liferay.portal.UserEmailAddressException;
+import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
@@ -26,6 +29,7 @@ import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.util.ldap.LDAPUtil;
 
 import java.util.Calendar;
@@ -131,14 +135,30 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 					emailAddress);
 		}
 
-		if (Validator.isNull(screenName) || Validator.isNull(emailAddress)) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Cannot add user because screen name and email address " +
-						"are required");
-			}
+		if (Validator.isNull(screenName) &&
+			!PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
 
-			return null;
+			throw new UserScreenNameException(
+				"Screen name cannot be null for: " + emailAddress);
+		}
+
+		if (Validator.isNull(screenName) &&
+			!PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
+
+			throw new UserScreenNameException(
+				"Screen name cannot be null for: " +
+				firstName + " " + middleName + " " + lastName);
+		}
+
+		if (Validator.isNull(emailAddress) &&
+			PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED)) {
+			throw new UserEmailAddressException(
+				"Email cannot be null for: " +
+				firstName + " " + middleName + " " + lastName);
+			
 		}
 
 		User user = new UserImpl();

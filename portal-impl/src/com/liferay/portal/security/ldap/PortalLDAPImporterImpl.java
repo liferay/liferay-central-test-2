@@ -121,9 +121,17 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 						PortalLDAPUtil.getNameInNamespace(
 							ldapServerId, companyId, searchResult));
 
-					importLDAPUser(
-						ldapServerId, companyId, ldapContext, attributes,
-						StringPool.BLANK, true);
+					try {
+						importLDAPUser(
+							ldapServerId, companyId, ldapContext, attributes,
+							StringPool.BLANK, true);
+					}
+					catch (Exception e) {
+						if (_log.isErrorEnabled()) {
+							_log.error(
+								"Unable to import user: " + searchResult, e);
+						}
+					}
 				}
 			}
 			else if (importMethod.equals(_IMPORT_BY_GROUP)) {
@@ -522,18 +530,25 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				continue;
 			}
 
-			User user = importLDAPUser(
-				ldapServerId, companyId, ldapContext, userAttributes,
-				StringPool.BLANK, false);
+			try {
+				User user = importLDAPUser(
+					ldapServerId, companyId, ldapContext, userAttributes,
+					StringPool.BLANK, false);
 
-			if (user != null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Adding " + user.getUserId() + " to group " +
-							userGroupId);
+				if (user != null) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Adding " + user.getUserId() + " to group " +
+								userGroupId);
+					}
+
+					newUserIds.add(user.getUserId());
 				}
-
-				newUserIds.add(user.getUserId());
+			}
+			catch (Exception e) {
+				if (_log.isErrorEnabled()) {
+					_log.error("Unable to load user: " + userAttributes, e);
+				}
 			}
 		}
 
