@@ -192,10 +192,10 @@ public class SearchEngineUtil {
 		new Sort(Field.MODIFIED, Sort.LONG_TYPE, true)
 	};
 
+	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
+
 	private static PortalSearchEngine _portalSearchEngine;
 	private static SearchEngine _searchEngine;
 	private static SearchPermissionChecker _searchPermissionChecker;
-
-	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
 
 }
