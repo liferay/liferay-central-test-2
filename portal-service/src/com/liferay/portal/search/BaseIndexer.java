@@ -173,7 +173,7 @@ public abstract class BaseIndexer implements Indexer {
 			}
 
 			TermQuery termQuery = TermQueryFactoryUtil.create(
-				"categoryId", categoryId);
+				Field.CATEGORY_ID, categoryId);
 
 			categoryIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 		}
@@ -204,7 +204,7 @@ public abstract class BaseIndexer implements Indexer {
 			}
 
 			TermQuery termQuery = TermQueryFactoryUtil.create(
-				"folderId", folderId);
+				Field.FOLDER_ID, folderId);
 
 			folderIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 		}
@@ -282,7 +282,7 @@ public abstract class BaseIndexer implements Indexer {
 			}
 
 			TermQuery termQuery = TermQueryFactoryUtil.create(
-				"nodeId", nodeId);
+				Field.NODE_ID, nodeId);
 
 			nodeIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 		}

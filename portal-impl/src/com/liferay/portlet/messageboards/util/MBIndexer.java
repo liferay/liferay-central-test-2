@@ -189,7 +189,7 @@ public class MBIndexer extends BaseIndexer {
 		document.addText(Field.CONTENT, content);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		document.addKeyword("categoryId", categoryId);
+		document.addKeyword(Field.CATEGORY_ID, categoryId);
 		document.addKeyword("threadId", threadId);
 		document.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, messageId);

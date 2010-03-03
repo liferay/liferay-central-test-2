@@ -123,7 +123,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		document.addText(Field.TITLE, name);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		document.addKeyword("folderId", folderId);
+		document.addKeyword(Field.FOLDER_ID, folderId);
 		document.addKeyword(
 			Field.ENTRY_CLASS_NAME, BookmarksEntry.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, entryId);

@@ -133,7 +133,7 @@ public class IGIndexer extends BaseIndexer {
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
-		document.addKeyword("folderId", folderId);
+		document.addKeyword(Field.FOLDER_ID, folderId);
 		document.addKeyword(Field.ENTRY_CLASS_NAME, IGImage.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, imageId);
 

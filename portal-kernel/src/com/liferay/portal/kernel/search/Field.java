@@ -30,6 +30,8 @@ public class Field implements Serializable {
 
 	public static final String ASSET_TAG_NAMES = "assetTagNames";
 
+	public static final String CATEGORY_ID = "categoryId";
+
 	public static final String COMMENTS = "comments";
 
 	public static final String COMPANY_ID = "companyId";
@@ -41,6 +43,8 @@ public class Field implements Serializable {
 	public static final String ENTRY_CLASS_NAME = "entryClassName";
 
 	public static final String ENTRY_CLASS_PK = "entryClassPK";
+	
+	public static final String FOLDER_ID = "folderId";
 
 	public static final String GROUP_ID = "groupId";
 
@@ -49,6 +53,8 @@ public class Field implements Serializable {
 	public static final String MODIFIED = "modified";
 
 	public static final String NAME = "name";
+
+	public static final String NODE_ID = "nodeId";
 
 	public static final String PORTLET_ID = "portletId";
 
