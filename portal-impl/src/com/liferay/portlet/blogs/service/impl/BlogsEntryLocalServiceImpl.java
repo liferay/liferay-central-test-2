@@ -836,6 +836,16 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return;
 		}
 
+		if (layoutFullURL.contains("://localhost")) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Not pinging Google because of localhost URL " +
+						layoutFullURL);
+			}
+
+			return;
+		}
+
 		Group group = groupPersistence.findByPrimaryKey(entry.getGroupId());
 
 		StringBundler sb = new StringBundler(6);
