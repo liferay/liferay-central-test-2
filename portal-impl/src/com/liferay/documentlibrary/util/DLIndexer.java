@@ -84,10 +84,10 @@ public class DLIndexer extends BaseIndexer {
 		String portletId = fileModel.getPortletId();
 		long groupId = getParentGroupId(fileModel.getGroupId());
 		long scopeGroupId = fileModel.getGroupId();
+		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 		long repositoryId = fileModel.getRepositoryId();
 		String fileName = fileModel.getFileName();
 		long fileEntryId = fileModel.getFileEntryId();
-		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 		String properties = fileModel.getProperties();
 		Date modifiedDate = fileModel.getModifiedDate();
 		long[] assetCategoryIds = fileModel.getAssetCategoryIds();

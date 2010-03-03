@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.ServiceContext;
@@ -113,15 +114,17 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		throws PortalException, SystemException {
 
 		long groupId = _folder.getGroupId();
+
 		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-		String fileName = "Title.txt";
-		String description = StringPool.BLANK;
-		String versionDescription = StringPool.BLANK;
-		String extraSettings = StringPool.BLANK;
 
 		if (!rootFolder) {
 			folderId = _folder.getFolderId();
 		}
+
+		String fileName = "Title.txt";
+		String description = StringPool.BLANK;
+		String versionDescription = StringPool.BLANK;
+		String extraSettings = StringPool.BLANK;
 
 		String content = "Content: Enterprise. Open Source. For Life.";
 
@@ -143,18 +146,19 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		SearchContext searchContext = new SearchContext();
 
 		searchContext.setCompanyId(_fileEntry.getCompanyId());
-		searchContext.setFolderIds(new long[] { _fileEntry.getFolderId() });
+		searchContext.setFolderIds(new long[] {_fileEntry.getFolderId()});
 		searchContext.setGroupId(_fileEntry.getGroupId());
 		searchContext.setKeywords(keywords);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
 
-		List<Document> searchResult = indexer.search(searchContext).toList();
+		List<Document> documents = indexer.search(searchContext).toList();
 
 		boolean found = false;
 
-		for (Document doc : searchResult) {
-			long fileEntryId = Long.parseLong(doc.get(Field.ENTRY_CLASS_PK));
+		for (Document document : documents) {
+			long fileEntryId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
 
 			if (fileEntryId == _fileEntry.getFileEntryId()) {
 				found = true;
@@ -166,10 +170,10 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		String message = "Search engine could not find ";
 
 		if (rootFolder) {
-			message += "root entry by " + keywords;
+			message += "root file entry by " + keywords;
 		}
 		else {
-			message += "entry by " + keywords;
+			message += "file entry by " + keywords;
 		}
 
 		assertTrue(message, found);
@@ -184,7 +188,7 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		search(rootFolder, "content");
 	}
 
-	private DLFolder _folder;
 	private DLFileEntry _fileEntry;
+	private DLFolder _folder;
 
 }
