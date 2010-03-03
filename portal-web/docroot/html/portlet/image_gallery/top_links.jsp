@@ -63,9 +63,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 				<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
 				<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
 
-				<aui:input id="keywords1" inlineField="<%= true %>" label="" name="keywords" size="30" type="text" />
+				<span class="aui-search-bar">
+					<aui:input id="keywords1" inlineField="<%= true %>" label="" name="keywords" size="30" type="text" />
 
-				<aui:button type="submit" value="search" />
+					<aui:button type="submit" value="search" />
+				</span>
 			</aui:form>
 		</div>
 

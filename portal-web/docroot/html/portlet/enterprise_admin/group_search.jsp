@@ -23,11 +23,11 @@ boolean showAddButton = GetterUtil.getBoolean((String)request.getAttribute("life
 GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<div>
+<span class="aui-search-bar lfr-display-terms-search">
 	<aui:input inlineField="<%= true %>" label="" name="<%= displayTerms.NAME %>" size="30" type="text" value="<%= displayTerms.getName() %>" />
 
 	<aui:button type="submit" value="search" />
-</div>
+</span>
 
 <br />
 

@@ -51,3 +51,7 @@ fieldset, .aui-form fieldset {
 fieldset:last-child, .aui-form fieldset:last-child {
 	margin-bottom: 0;
 }
+
+.lfr-display-terms-search {
+	display: block;
+}
