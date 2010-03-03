@@ -120,10 +120,6 @@ public class SearchEngineUtil {
 				companyId, groupId, userId, className, query);
 		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Query string " + query.toString());
-		}
-
 		return search(companyId, query, _DEFAULT_SORT, start, end);
 	}
 
@@ -137,10 +133,6 @@ public class SearchEngineUtil {
 				companyId, groupId, userId, className, query);
 		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Query string " + query.toString());
-		}
-
 		return search(companyId, query, sort, start, end);
 	}
 
@@ -152,10 +144,6 @@ public class SearchEngineUtil {
 		if (userId > 0) {
 			query = _searchPermissionChecker.getPermissionQuery(
 				companyId, groupId, userId, className, query);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Query string " + query.toString());
 		}
 
 		return search(companyId, query, sorts, start, end);
