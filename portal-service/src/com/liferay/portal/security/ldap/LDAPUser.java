@@ -86,7 +86,7 @@ public class LDAPUser {
 	}
 
 	public String getJobTitle() {
-		return _contact.getJobTitle();
+		return _user.getJobTitle();
 	}
 
 	public String getLanguageId() {
@@ -276,7 +276,7 @@ public class LDAPUser {
 	}
 
 	public void setJobTitle(String jobTitle) {
-		_contact.setJobTitle(jobTitle);
+		_user.setJobTitle(jobTitle);
 	}
 
 	public void setLanguageId(String languageId) {
