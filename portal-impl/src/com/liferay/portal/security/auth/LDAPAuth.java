@@ -308,7 +308,7 @@ public class LDAPAuth implements Authenticator {
 			enu.close();
 		}
 		catch (Exception e) {
-			_log.error("Problem accessing LDAP server: " + e.getMessage());
+			_log.error("Problem accessing LDAP server: ", e);
 
 			return FAILURE;
 		}
