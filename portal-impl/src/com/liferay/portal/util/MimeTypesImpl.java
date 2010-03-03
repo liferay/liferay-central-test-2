@@ -74,11 +74,11 @@ public class MimeTypesImpl implements MimeTypes {
 
 	public String getContentType(InputStream inputStream, String fileName) {
 		String contentType = getContentType(fileName);
-		
+
 		if (!contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
 			return contentType;
 		}
-		
+
 		List<MimeType> mimeTypes = new ArrayList<MimeType>(
 			MimeUtil.getMimeTypes(inputStream));
 
