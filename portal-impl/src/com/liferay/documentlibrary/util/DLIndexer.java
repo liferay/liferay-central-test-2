@@ -87,6 +87,7 @@ public class DLIndexer extends BaseIndexer {
 		long repositoryId = fileModel.getRepositoryId();
 		String fileName = fileModel.getFileName();
 		long fileEntryId = fileModel.getFileEntryId();
+		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 		String properties = fileModel.getProperties();
 		Date modifiedDate = fileModel.getModifiedDate();
 		long[] assetCategoryIds = fileModel.getAssetCategoryIds();
@@ -100,12 +101,6 @@ public class DLIndexer extends BaseIndexer {
 					fileEntryId);
 			}
 			else {
-				long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-
-				if (groupId != repositoryId) {
-					folderId = repositoryId;
-				}
-
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 					groupId, folderId, fileName);
 			}
@@ -120,6 +115,8 @@ public class DLIndexer extends BaseIndexer {
 
 			return null;
 		}
+
+		folderId = fileEntry.getFolderId();
 
 		if (properties == null) {
 			properties = fileEntry.getLuceneProperties();
@@ -187,6 +184,7 @@ public class DLIndexer extends BaseIndexer {
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
+		document.addKeyword(Field.FOLDER_ID, folderId);
 		document.addKeyword("repositoryId", repositoryId);
 		document.addKeyword("path", fileName);
 		document.addKeyword(

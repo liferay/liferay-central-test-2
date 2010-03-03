@@ -15,14 +15,24 @@
 package com.liferay.portlet.documentlibrary.service;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+
+import java.util.List;
 
 /**
  * <a href="DLFileEntryServiceTest.java.html"><b><i>View Source</i></b></a>
@@ -57,6 +67,12 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 	}
 
 	public void tearDown() throws Exception {
+		if (_fileEntry != null) {
+			DLFileEntryServiceUtil.deleteFileEntry(
+				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
+				_fileEntry.getName());
+		}
+
 		if (_folder != null) {
 			DLFolderServiceUtil.deleteFolder(_folder.getFolderId());
 		}
@@ -65,12 +81,49 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 	}
 
 	public void testAddFileEntryWithDuplicateName() throws Exception {
-		String fileName = "helloworld.txt";
+		addFileEntry(false);
+
+		try {
+			addFileEntry(false);
+
+			fail("Able to add two files of the same name");
+		}
+		catch (DuplicateFileException dfe) {
+		}
+
+		try {
+			addFileEntry(true);
+		}
+		catch (DuplicateFileException dfe) {
+			fail(
+				"Unable to add two files of the same name in different " +
+					"folders");
+		}
+	}
+
+	public void testSearchFileInRootFolder() throws Exception {
+		testSearchFile(true);
+	}
+
+	public void testSearchFileInSubFolder() throws Exception {
+		testSearchFile(false);
+	}
+
+	protected void addFileEntry(boolean rootFolder)
+		throws PortalException, SystemException {
+
+		long groupId = _folder.getGroupId();
+		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+		String fileName = "Title.txt";
 		String description = StringPool.BLANK;
 		String versionDescription = StringPool.BLANK;
 		String extraSettings = StringPool.BLANK;
 
-		String content = "Hello World!";
+		if (!rootFolder) {
+			folderId = _folder.getFolderId();
+		}
+
+		String content = "Content: Enterprise. Open Source. For Life.";
 
 		byte[] bytes = content.getBytes();
 
@@ -79,23 +132,59 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		DLFileEntryServiceUtil.addFileEntry(
-			_folder.getGroupId(), _folder.getFolderId(), fileName, fileName,
-			description, versionDescription, extraSettings, bytes,
-			serviceContext);
+		_fileEntry = DLFileEntryServiceUtil.addFileEntry(
+			groupId, folderId, fileName, fileName, description,
+			versionDescription, extraSettings, bytes, serviceContext);
+	}
 
-		try {
-			DLFileEntryServiceUtil.addFileEntry(
-				_folder.getGroupId(), _folder.getFolderId(), fileName, fileName,
-				description, versionDescription, extraSettings, bytes,
-				serviceContext);
+	protected void search(boolean rootFolder, String keywords)
+		throws Exception {
 
-			fail("Able to add two files of the name " + fileName);
+		SearchContext searchContext = new SearchContext();
+
+		searchContext.setCompanyId(_fileEntry.getCompanyId());
+		searchContext.setFolderIds(new long[] { _fileEntry.getFolderId() });
+		searchContext.setGroupId(_fileEntry.getGroupId());
+		searchContext.setKeywords(keywords);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
+
+		List<Document> searchResult = indexer.search(searchContext).toList();
+
+		boolean found = false;
+
+		for (Document doc : searchResult) {
+			long fileEntryId = Long.parseLong(doc.get(Field.ENTRY_CLASS_PK));
+
+			if (fileEntryId == _fileEntry.getFileEntryId()) {
+				found = true;
+
+				break;
+			}
 		}
-		catch (DuplicateFileException dfe) {
+
+		String message = "Search engine could not find ";
+
+		if (rootFolder) {
+			message += "root entry by " + keywords;
 		}
+		else {
+			message += "entry by " + keywords;
+		}
+
+		assertTrue(message, found);
+	}
+
+	protected void testSearchFile(boolean rootFolder) throws Exception {
+		addFileEntry(rootFolder);
+
+		Thread.sleep(1000);
+
+		search(rootFolder, "title");
+		search(rootFolder, "content");
 	}
 
 	private DLFolder _folder;
+	private DLFileEntry _fileEntry;
 
 }
