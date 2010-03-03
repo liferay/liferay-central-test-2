@@ -14,6 +14,9 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 /**
  * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -131,6 +134,10 @@ public class SearchEngineUtil {
 				companyId, groupId, userId, className, query);
 		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Query string " + query.toString());
+		}
+
 		return search(companyId, query, sorts, start, end);
 	}
 
@@ -188,5 +195,7 @@ public class SearchEngineUtil {
 	private static PortalSearchEngine _portalSearchEngine;
 	private static SearchEngine _searchEngine;
 	private static SearchPermissionChecker _searchPermissionChecker;
+
+	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
 
 }
