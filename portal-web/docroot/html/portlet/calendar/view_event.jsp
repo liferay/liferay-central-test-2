@@ -452,14 +452,14 @@ request.setAttribute("view_event.jsp-event", event);
 	</portlet:actionURL>
 
 	<liferay-ui:discussion
-		formName="fm2"
-		formAction="<%= discussionURL %>"
 		className="<%= CalEvent.class.getName() %>"
 		classPK="<%= event.getEventId() %>"
-		userId="<%= event.getUserId() %>"
-		subject="<%= event.getTitle() %>"
-		redirect="<%= currentURL %>"
+		formAction="<%= discussionURL %>"
+		formName="fm2"
 		ratingsEnabled="true"
+		redirect="<%= currentURL %>"
+		subject="<%= event.getTitle() %>"
+		userId="<%= event.getUserId() %>"
 	/>
 </c:if>
 
