@@ -499,6 +499,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file=%JONAS_ROOT%
 	<filter-name>net.sf.cglib.*</filter-name>
 	<filter-name>net.sf.ehcache.*</filter-name>
 	<filter-name>org.apache.commons.*</filter-name>
+	<filter-name>org.apache.xerces.*</filter-name>
 	<filter-name>org.dom4j.*</filter-name>
 	<filter-name>org.hibernate.*</filter-name>
 	<filter-name>org.jboss.*</filter-name>
