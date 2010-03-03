@@ -173,14 +173,6 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 		String servletPath = null;
 
 		if (_path != null) {
-			/*if (ServerDetector.isJetty()) {
-				int pos = _path.indexOf(StringPool.QUESTION);
-
-				if (pos != -1) {
-					_path = _path.substring(0, pos);
-				}
-			}*/
-
 			String pathNoQueryString = _path;
 
 			int pos = _path.indexOf(StringPool.QUESTION);

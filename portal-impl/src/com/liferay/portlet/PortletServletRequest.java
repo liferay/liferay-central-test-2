@@ -20,10 +20,12 @@ import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.servlet.JettyHttpSessionWrapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -368,13 +370,25 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public HttpSession getSession() {
-		return new PortletServletSession(
+		HttpSession session = new PortletServletSession(
 			_request.getSession(), _portletRequestImpl);
+
+		if (ServerDetector.isJetty()) {
+			session = new JettyHttpSessionWrapper(session);
+		}
+
+		return session;
 	}
 
 	public HttpSession getSession(boolean create) {
-		return new PortletServletSession(
+		HttpSession session = new PortletServletSession(
 			_request.getSession(create), _portletRequestImpl);
+
+		if (ServerDetector.isJetty()) {
+			session = new JettyHttpSessionWrapper(session);
+		}
+
+		return session;
 	}
 
 	public Principal getUserPrincipal() {

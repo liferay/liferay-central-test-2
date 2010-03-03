@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -131,27 +130,6 @@ public class PortletContextImpl implements PortletContext {
 		}
 		catch (IllegalArgumentException iae) {
 			return null;
-		}
-
-		// Workaround for bug in Jetty 5 that returns the default request
-		// dispatcher instead of null for an invalid path
-
-		if (ServerDetector.isJOnAS() && ServerDetector.isJetty() &&
-			(requestDispatcher != null) &&
-			(requestDispatcher.getClass().getName().equals(
-				"org.mortbay.jetty.servlet.Dispatcher"))) {
-
-			// Dispatcher[/,default[org.mortbay.jetty.servlet.Default]]
-
-			String rdToString = requestDispatcher.toString();
-
-			String rdPath = rdToString.substring(11, rdToString.indexOf(","));
-
-			if (rdPath.equals(StringPool.SLASH) &&
-				!path.equals(StringPool.SLASH)) {
-
-				requestDispatcher = null;
-			}
 		}
 
 		if (requestDispatcher != null) {
