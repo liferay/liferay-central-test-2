@@ -31,12 +31,12 @@ public class MimeTypesUtil {
 	}
 
 	/**
-	 * This function will attempt to determine the mime type based on the
-	 * inputstream and the filename, giving priority to the filename.
-	 * 
-	 * @param inputSream Stream of file to be checked
-	 * @param fileName Full name or extension of file (e.g., "Test.doc", ".doc")
-	 * @return Extracted text from file, if it is of a supported format.
+	 * Determine the content type from an input stream and file name.
+	 *
+	 * @param  fileName full name or extension of file (e.g., "Test.doc",
+	 *		   ".doc")
+	 * @return content type if it is a supported format or an empty string if it
+	 *		   is an unsupported format
 	 */
 	public static String getContentType(
 		InputStream inputStream, String fileName) {
@@ -45,11 +45,12 @@ public class MimeTypesUtil {
 	}
 
 	/**
-	 * This function will attempt to determine the mime type based on the
-	 * filename.
-	 * 
-	 * @param fileName Full name or extension of file (e.g., "Test.doc", ".doc")
-	 * @return Extracted text from file, if it is of a supported format.
+	 * Determine the content type from a file name.
+	 *
+	 * @param  fileName full name or extension of file (e.g., "Test.doc",
+	 *		   ".doc")
+	 * @return content type if it is a supported format or an empty string if it
+	 *		   is an unsupported format
 	 */
 	public static String getContentType(String fileName) {
 		return getMimeTypes().getContentType(fileName);

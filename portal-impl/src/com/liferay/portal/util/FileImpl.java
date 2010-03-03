@@ -330,8 +330,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 				}
 
 				if ((text == null) && _log.isInfoEnabled()) {
-					_log.info(
-						"No text extractor found for " + fileName);
+					_log.info("No text extractor found for " + fileName);
 				}
 			}
 		}

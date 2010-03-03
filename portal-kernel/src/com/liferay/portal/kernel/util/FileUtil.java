@@ -108,12 +108,13 @@ public class FileUtil {
 	}
 
 	/**
-	 * This function will attempt to extract text from the given inputstream.
-	 * If the file is of an unsupported format, it will return an empty string.
-	 * 
-	 * @param is InputStream of file 
-	 * @param fileName Full name or extension of file (e.g., "Test.doc", ".doc")
-	 * @return Extracted text from file, if it is of a supported format.
+	 * Extract text from an input stream and file name.
+	 *
+	 * @param  is input stream of file
+	 * @param  fileName full name or extension of file (e.g., "Test.doc",
+	 *		   ".doc")
+	 * @return Extracted text if it is a supported format or an empty string if
+	 *		   it is an unsupported format
 	 */
 	public static String extractText(InputStream is, String fileName) {
 		return getFile().extractText(is, fileName);
