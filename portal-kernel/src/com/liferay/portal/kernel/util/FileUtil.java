@@ -107,8 +107,16 @@ public class FileUtil {
 		return getFile().exists(file);
 	}
 
-	public static String extractText(InputStream is, String fileExt) {
-		return getFile().extractText(is, fileExt);
+	/**
+	 * This function will attempt to extract text from the given inputstream.
+	 * If the file is of an unsupported format, it will return an empty string.
+	 * 
+	 * @param is InputStream of file 
+	 * @param fileName Full name or extension of file (e.g., "Test.doc", ".doc")
+	 * @return Extracted text from file, if it is of a supported format.
+	 */
+	public static String extractText(InputStream is, String fileName) {
+		return getFile().extractText(is, fileName);
 	}
 
 	public static String getAbsolutePath(File file) {

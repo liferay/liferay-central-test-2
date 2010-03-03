@@ -39,8 +39,6 @@ public class DLServiceImpl implements DLService {
 
 	public static final String[] GROUP_NAME_ARRAY = new String[] { GROUP_NAME };
 
-	public static final String VERSION = "_VERSION_";
-
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 

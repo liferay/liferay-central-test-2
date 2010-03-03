@@ -15,7 +15,6 @@
 package com.liferay.documentlibrary.util;
 
 import com.liferay.documentlibrary.model.FileModel;
-import com.liferay.documentlibrary.service.impl.DLServiceImpl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
@@ -25,7 +24,6 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
@@ -96,8 +94,12 @@ public class DLIndexer extends BaseIndexer {
 
 		DLFileEntry fileEntry = null;
 
-		if (fileEntryId <= 0) {
-			try {
+		try {
+			if (fileEntryId > 0) {
+				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+					fileEntryId);
+			}
+			else {
 				long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 				if (groupId != repositoryId) {
@@ -107,16 +109,16 @@ public class DLIndexer extends BaseIndexer {
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 					groupId, folderId, fileName);
 			}
-			catch (NoSuchFileEntryException nsfe) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Not indexing document " + companyId + " " + portletId +
-							" " + scopeGroupId + " " + repositoryId + " " +
-								fileName + " " + fileEntryId);
-				}
-
-				return null;
+		}
+		catch (NoSuchFileEntryException nsfe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Not indexing document " + companyId + " " + portletId +
+						" " + scopeGroupId + " " + repositoryId + " " +
+							fileName + " " + fileEntryId);
 			}
+
+			return null;
 		}
 
 		if (properties == null) {
@@ -138,26 +140,6 @@ public class DLIndexer extends BaseIndexer {
 				"Indexing document " + companyId + " " + portletId + " " +
 					scopeGroupId + " " + repositoryId + " " + fileName + " " +
 						fileEntryId);
-		}
-
-		String fileExt = StringPool.BLANK;
-
-		int fileExtVersionPos = fileName.indexOf(DLServiceImpl.VERSION);
-
-		if (fileExtVersionPos != -1) {
-			int fileExtPos = fileName.lastIndexOf(
-				StringPool.PERIOD, fileExtVersionPos);
-
-			if (fileExtPos != -1) {
-				fileExt = fileName.substring(fileExtPos, fileExtVersionPos);
-			}
-		}
-		else {
-			int fileExtPos = fileName.lastIndexOf(StringPool.PERIOD);
-
-			if (fileExtPos != -1) {
-				fileExt = fileName.substring(fileExtPos, fileName.length());
-			}
 		}
 
 		InputStream is = null;
@@ -193,7 +175,7 @@ public class DLIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 
 		try {
-			document.addFile(Field.CONTENT, is, fileExt);
+			document.addFile(Field.CONTENT, is, fileEntry.getTitle());
 		}
 		catch (IOException ioe) {
 			throw new SearchException(

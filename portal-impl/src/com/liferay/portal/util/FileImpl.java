@@ -268,7 +268,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		return file.exists();
 	}
 
-	public String extractText(InputStream is, String fileExt) {
+	public String extractText(InputStream is, String fileName) {
 		String text = null;
 
 		try {
@@ -276,7 +276,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 				is = new BufferedInputStream(is);
 			}
 
-			String contentType = MimeTypesUtil.getContentType(is, fileExt);
+			String contentType = MimeTypesUtil.getContentType(is, fileName);
 
 			TextExtractor textExtractor = _textExtractors.get(contentType);
 
@@ -331,7 +331,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 				if ((text == null) && _log.isInfoEnabled()) {
 					_log.info(
-						"No text extractor found for extension " + fileExt);
+						"No text extractor found for " + fileName);
 				}
 			}
 		}
