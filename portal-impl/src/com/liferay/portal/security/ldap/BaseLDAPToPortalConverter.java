@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.ContactImpl;
@@ -140,25 +141,19 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 				companyId, PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
 
 			throw new UserScreenNameException(
-				"Screen name cannot be null for: " + emailAddress);
-		}
-
-		if (Validator.isNull(screenName) &&
-			!PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
-
-			throw new UserScreenNameException(
-				"Screen name cannot be null for: " +
-				firstName + " " + middleName + " " + lastName);
+				"Screen name cannot be null for " +
+					ContactConstants.getFullName(
+						firstName, middleName, lastName));
 		}
 
 		if (Validator.isNull(emailAddress) &&
 			PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED)) {
+
 			throw new UserEmailAddressException(
-				"Email cannot be null for: " +
-				firstName + " " + middleName + " " + lastName);
-			
+				"Email address cannot be null for " +
+					ContactConstants.getFullName(
+						firstName, middleName, lastName));
 		}
 
 		User user = new UserImpl();

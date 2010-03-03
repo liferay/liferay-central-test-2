@@ -127,10 +127,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 							StringPool.BLANK, true);
 					}
 					catch (Exception e) {
-						if (_log.isErrorEnabled()) {
-							_log.error(
-								"Unable to import user: " + searchResult, e);
-						}
+						_log.error("Unable to import user " + searchResult, e);
 					}
 				}
 			}
@@ -546,9 +543,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				}
 			}
 			catch (Exception e) {
-				if (_log.isErrorEnabled()) {
-					_log.error("Unable to load user: " + userAttributes, e);
-				}
+				_log.error("Unable to load user " + userAttributes, e);
 			}
 		}
 
