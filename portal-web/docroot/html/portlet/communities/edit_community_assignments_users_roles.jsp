@@ -64,7 +64,7 @@ searchContainer.setRowChecker(new UserGroupRoleRoleChecker(renderResponse, selUs
 
 	searchContainer.setTotal(total);
 
-	List results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
+	List<Role> results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
