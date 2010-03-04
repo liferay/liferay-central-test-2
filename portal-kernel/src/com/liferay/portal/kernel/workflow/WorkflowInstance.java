@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
