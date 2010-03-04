@@ -15,14 +15,16 @@
 package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.taglib.portlet.ActionURLTag;
 import com.liferay.taglib.portletext.IconBackTag;
 import com.liferay.taglib.portletext.IconCloseTag;
@@ -178,8 +180,7 @@ public class VelocityTaglib {
 
 		return breadcrumb (
 			page, selLayout, selLayoutParam, portletURL, displayStyle,
-			PropsValues.BREADCRUMB_SHOW_GUEST_GROUP,
-			PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS, true, true);
+			_SHOW_GUEST_GROUP, _SHOW_PARENT_GROUPS, true, true);
 	}
 
 	public String breadcrumb(
@@ -735,6 +736,12 @@ public class VelocityTaglib {
 			wrapPage, portletPage, _servletContext, _request, _stringResponse,
 			_pageContext);
 	}
+
+	private static final boolean _SHOW_GUEST_GROUP = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.BREADCRUMB_SHOW_GUEST_GROUP));
+
+	private static final boolean _SHOW_PARENT_GROUPS = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.BREADCRUMB_SHOW_PARENT_GROUPS));
 
 	private ServletContext _servletContext;
 	private HttpServletRequest _request;
