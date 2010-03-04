@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.workflow;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
+
 import java.util.List;
 import java.util.Map;
 
