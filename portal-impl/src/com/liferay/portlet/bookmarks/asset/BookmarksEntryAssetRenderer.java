@@ -28,7 +28,6 @@ import com.liferay.portlet.bookmarks.service.permission.BookmarksPermission;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.WindowState;
 
 /**
  * <a href="BookmarksEntryAssetRenderer.java.html"><b><i>View Source</i></b></a>
@@ -73,12 +72,6 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 
 			editPortletURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.BOOKMARKS);
-
-			try {
-				editPortletURL.setWindowState(WindowState.MAXIMIZED);
-			}
-			catch(Exception e){
-			}
 
 			editPortletURL.setParameter(
 				"struts_action", "/bookmarks/edit_entry");

@@ -33,7 +33,6 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.WindowState;
 
 /**
  * <a href="JournalArticleAssetRenderer.java.html"><b><i>View Source</i></b></a>
@@ -91,12 +90,6 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 
 			editPortletURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.JOURNAL);
-
-			try {
-				editPortletURL.setWindowState(WindowState.MAXIMIZED);
-			}
-			catch(Exception e){
-			}
 
 			editPortletURL.setParameter(
 				"struts_action", "/journal/edit_article");

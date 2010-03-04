@@ -29,7 +29,6 @@ import com.liferay.portlet.wiki.service.permission.WikiPermission;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.WindowState;
 
 /**
  * <a href="WikiPageAssetRenderer.java.html"><b><i>View Source</i></b></a>
@@ -89,12 +88,6 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 
 			editPortletURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.WIKI);
-
-			try {
-				editPortletURL.setWindowState(WindowState.MAXIMIZED);
-			}
-			catch(Exception e){
-			}
 
 			editPortletURL.setParameter("struts_action", "/wiki/edit_page");
 			editPortletURL.setParameter(

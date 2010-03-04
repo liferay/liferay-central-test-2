@@ -28,7 +28,6 @@ import com.liferay.portlet.messageboards.service.permission.MBPermission;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.WindowState;
 
 /**
  * <a href="MBMessageAssetRenderer.java.html"><b><i>View Source</i></b></a>
@@ -73,12 +72,6 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 
 			editPortletURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.MESSAGE_BOARDS);
-
-			try {
-				editPortletURL.setWindowState(WindowState.MAXIMIZED);
-			}
-			catch(Exception e){
-			}
 
 			editPortletURL.setParameter(
 				"struts_action", "/message_boards/edit_message");

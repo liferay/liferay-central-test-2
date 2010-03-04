@@ -30,7 +30,6 @@ import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.WindowState;
 
 /**
  * <a href="DLFileEntryAssetRenderer.java.html"><b><i>View Source</i></b></a>
@@ -84,12 +83,6 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
 			editPortletURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.DOCUMENT_LIBRARY);
-
-			try {
-				editPortletURL.setWindowState(WindowState.MAXIMIZED);
-			}
-			catch(Exception e){
-			}
 
 			editPortletURL.setParameter(
 				"struts_action", "/document_library/edit_file_entry");
