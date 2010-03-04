@@ -113,7 +113,9 @@
 									userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
 								}
 
-								if (!role.getName().equals(RoleConstants.COMMUNITY_MEMBER) && !role.getName().equals(RoleConstants.ORGANIZATION_MEMBER)) {
+								String name = role.getName();
+
+								if (!name.equals(RoleConstants.COMMUNITY_MEMBER) && !name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
 									userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
 								}
 
