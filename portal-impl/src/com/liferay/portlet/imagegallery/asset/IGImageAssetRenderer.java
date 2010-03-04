@@ -74,6 +74,12 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 			editPortletURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.IMAGE_GALLERY);
 
+			try {
+				editPortletURL.setWindowState(WindowState.MAXIMIZED);
+			}
+			catch(Exception e){
+			}
+
 			editPortletURL.setParameter(
 				"struts_action", "/image_gallery/edit_image");
 			editPortletURL.setParameter(

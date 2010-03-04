@@ -30,6 +30,7 @@ import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 /**
  * <a href="BlogsEntryAssetRenderer.java.html"><b><i>View Source</i></b></a>
@@ -83,6 +84,12 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 
 			editPortletURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.BLOGS);
+
+			try {
+				editPortletURL.setWindowState(WindowState.MAXIMIZED);
+			}
+			catch(Exception e){
+			}
 
 			editPortletURL.setParameter("struts_action", "/blogs/edit_entry");
 			editPortletURL.setParameter(
