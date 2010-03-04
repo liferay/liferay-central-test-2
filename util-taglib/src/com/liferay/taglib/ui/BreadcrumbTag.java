@@ -15,8 +15,10 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.portlet.PortletURL;
@@ -151,11 +153,11 @@ public class BreadcrumbTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/breadcrumb/page.jsp";
 
-	private static final boolean _SHOW_GUEST_GROUP =
-		PropsValues.BREADCRUMB_SHOW_GUEST_GROUP;
+	private static final boolean _SHOW_GUEST_GROUP = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.BREADCRUMB_SHOW_GUEST_GROUP));
 
-	private static final boolean _SHOW_PARENT_GROUPS =
-		PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS;
+	private static final boolean _SHOW_PARENT_GROUPS = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.BREADCRUMB_SHOW_PARENT_GROUPS));
 
 	private int _displayStyle = _DISPLAY_STYLE;
 	private PortletURL _portletURL;

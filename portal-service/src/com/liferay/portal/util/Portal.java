@@ -440,6 +440,9 @@ public interface Portal {
 			PortletRequest portletRequest, boolean checkPermission)
 		throws PortalException, SystemException;
 
+	public ServletContext getServletContext(
+		Portlet portlet, ServletContext servletContext);
+
 	public String getStaticResourceURL(
 		HttpServletRequest request, String uri);
 

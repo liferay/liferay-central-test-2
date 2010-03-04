@@ -15,11 +15,12 @@
 package com.liferay.taglib.security;
 
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +51,7 @@ public class DoAsURLTag extends TagSupport {
 		String doAsURL = company.getHomeURL();
 
 		if (Validator.isNull(doAsURL)) {
-			doAsURL = PropsValues.COMPANY_DEFAULT_HOME_URL;
+			doAsURL = _COMPANY_DEFAULT_HOME_URL;
 		}
 
 		if (doAsUserId <= 0) {
@@ -91,6 +92,9 @@ public class DoAsURLTag extends TagSupport {
 	public void setVar(String var) {
 		_var = var;
 	}
+
+	private static final String _COMPANY_DEFAULT_HOME_URL =
+		PropsUtil.get(PropsKeys.COMPANY_DEFAULT_HOME_URL);
 
 	private long _doAsUserId;
 	private String _var;

@@ -816,6 +816,12 @@ public class PortalUtil {
 		return getPortal().getSelectedUser(portletRequest, checkPermission);
 	}
 
+	public static ServletContext getServletContext(
+		Portlet portlet, ServletContext servletContext) {
+
+		return getPortal().getServletContext(portlet, servletContext);
+	}
+
 	public static String getStaticResourceURL(
 		HttpServletRequest request, String uri) {
 
