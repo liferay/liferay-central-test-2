@@ -30,4 +30,4 @@ if (Validator.isNotNull(cssClass)) {
 %>
 
 <div class="aui-layout <%= cssClass %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
-	<div class="aui-column-container <%= cssClasses %>">
+	<div class="aui-layout-content <%= cssClasses %>">
