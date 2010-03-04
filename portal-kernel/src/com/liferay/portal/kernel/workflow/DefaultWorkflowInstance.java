@@ -43,7 +43,7 @@ public class DefaultWorkflowInstance implements Serializable, WorkflowInstance {
 		return _childrenWorkflowInstances;
 	}
 
-	public Map<String, Object> getContext() {
+	public Map<String, Serializable> getContext() {
 		return _context;
 	}
 
@@ -89,7 +89,7 @@ public class DefaultWorkflowInstance implements Serializable, WorkflowInstance {
 		_childrenWorkflowInstances = childrenWorkflowInstances;
 	}
 
-	public void setContext(Map<String, Object> context) {
+	public void setContext(Map<String, Serializable> context) {
 		_context = context;
 	}
 
@@ -125,7 +125,7 @@ public class DefaultWorkflowInstance implements Serializable, WorkflowInstance {
 
 	private List<WorkflowInstance> _childrenWorkflowInstances =
 		new ArrayList<WorkflowInstance>();
-	private Map<String, Object> _context;
+	private Map<String, Serializable> _context;
 	private Date _endDate;
 	private WorkflowInstance _parentWorkflowInstance;
 	private Date _startDate;

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ public interface WorkflowInstance {
 
 	public List<WorkflowInstance> getChildrenWorkflowInstances();
 
-	public Map<String, Object> getContext();
+	public Map<String, Serializable> getContext();
 
 	public Date getEndDate();
 
