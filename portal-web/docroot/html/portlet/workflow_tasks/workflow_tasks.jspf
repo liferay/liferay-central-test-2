@@ -139,7 +139,7 @@
 			<%
 			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
 
-			Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
+			Map<String, Serializable> workflowInstanceContext = workflowInstance.getContext();
 
 			String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
 			long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
@@ -198,7 +198,7 @@
 			<%
 			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
 
-			Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
+			Map<String, Serializable> workflowInstanceContext = workflowInstance.getContext();
 
 			long companyId = (Long)workflowInstanceContext.get(ContextConstants.COMPANY_ID);
 			long groupId = (Long)workflowInstanceContext.get(ContextConstants.GROUP_ID);

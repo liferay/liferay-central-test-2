@@ -23,7 +23,7 @@ WorkflowTask workflowTask = (WorkflowTask)request.getAttribute(WebKeys.WORKFLOW_
 
 WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
 
-Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
+Map<String, Serializable> workflowInstanceContext = workflowInstance.getContext();
 
 long companyId = (Long)workflowInstanceContext.get(ContextConstants.COMPANY_ID);
 long groupId = (Long)workflowInstanceContext.get(ContextConstants.GROUP_ID);
