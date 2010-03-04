@@ -90,7 +90,7 @@ public class JournalArticleTag extends IncludeTag {
 		_showAvailableLocales = showAvailableLocales;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

@@ -106,7 +106,7 @@ public class InputMoveBoxesTag extends IncludeTag {
 		_rightList = rightList;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

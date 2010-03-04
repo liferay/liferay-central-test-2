@@ -74,7 +74,7 @@ public class InputEditorTag extends IncludeTag {
 		_width = width;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

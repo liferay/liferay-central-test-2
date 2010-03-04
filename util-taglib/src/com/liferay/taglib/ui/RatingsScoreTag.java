@@ -39,7 +39,7 @@ public class RatingsScoreTag extends IncludeTag {
 		_score = score;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

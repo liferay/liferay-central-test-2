@@ -80,7 +80,7 @@ public class MyPlacesTag extends IncludeTag {
 		_max = max;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

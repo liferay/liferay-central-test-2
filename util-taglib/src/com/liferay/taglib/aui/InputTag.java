@@ -14,18 +14,12 @@
 
 package com.liferay.taglib.aui;
 
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.TextFormatter;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * <a href="InputTag.java.html"><b><i>View Source</i></b></a>
@@ -34,99 +28,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */
-public class InputTag extends IncludeTag implements DynamicAttributes {
-
-	public int doEndTag() throws JspException {
-		try {
-			return super.doEndTag();
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-		finally {
-			if (!ServerDetector.isResin()) {
-				_bean = null;
-				_changesContext = false;
-				_checked = false;
-				_cssClass = null;
-				_disabled = false;
-				_dynamicAttributes.clear();
-				_field = null;
-				_first = false;
-				_helpMessage = null;
-				_id = null;
-				_inlineField = false;
-				_inlineLabel = null;
-				_label = null;
-				_last = false;
-				_model = null;
-				_name = null;
-				_prefix = null;
-				_suffix = null;
-				_title = null;
-				_type = null;
-				_value = null;
-			}
-		}
-	}
-
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		if (_bean == null) {
-			_bean = pageContext.getAttribute("aui:model-context:bean");
-		}
-
-		if (Validator.isNull(_field)) {
-			_field = _name;
-		}
-
-		if (Validator.isNull(_id)) {
-			if (!Validator.equals(_type, "radio")) {
-				_id = _name;
-			}
-			else {
-				_id = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
-			}
-		}
-
-		if (_label == null) {
-			_label = TextFormatter.format(_name, TextFormatter.K);
-		}
-
-		if (_model == null) {
-			_model = (Class<?>)pageContext.getAttribute(
-				"aui:model-context:model");
-		}
-
-		request.setAttribute("aui:input:bean", _bean);
-		request.setAttribute(
-			"aui:input:changesContext", String.valueOf(_changesContext));
-		request.setAttribute("aui:input:checked", String.valueOf(_checked));
-		request.setAttribute("aui:input:cssClass", _cssClass);
-		request.setAttribute("aui:input:disabled", String.valueOf(_disabled));
-		request.setAttribute("aui:input:field", _field);
-		request.setAttribute("aui:input:first", String.valueOf(_first));
-		request.setAttribute("aui:input:helpMessage", _helpMessage);
-		request.setAttribute("aui:input:id", _id);
-		request.setAttribute(
-			"aui:input:inlineField", String.valueOf(_inlineField));
-		request.setAttribute("aui:input:inlineLabel", _inlineLabel);
-		request.setAttribute("aui:input:label", _label);
-		request.setAttribute("aui:input:last", String.valueOf(_last));
-		request.setAttribute("aui:input:model", _model);
-		request.setAttribute("aui:input:name", _name);
-		request.setAttribute("aui:input:prefix", _prefix);
-		request.setAttribute("aui:input:suffix", _suffix);
-		request.setAttribute("aui:input:title", _title);
-		request.setAttribute("aui:input:type", _type);
-		request.setAttribute("aui:input:value", _value);
-
-		request.setAttribute("aui:input:dynamicAttributes", _dynamicAttributes);
-
-		return EVAL_BODY_BUFFERED;
-	}
+public class InputTag extends IncludeTag {
 
 	public void setBean(Object bean) {
 		_bean = bean;
@@ -146,12 +48,6 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 
 	public void setDisabled(boolean disabled) {
 		_disabled = disabled;
-	}
-
-	public void setDynamicAttribute(
-		String uri, String localName, Object value) {
-
-		_dynamicAttributes.put(localName, value);
 	}
 
 	public void setField(String field) {
@@ -214,8 +110,94 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		_value = value;
 	}
 
-	protected String getDefaultPage() {
+	protected void cleanUp() {
+		_bean = null;
+		_changesContext = false;
+		_checked = false;
+		_cssClass = null;
+		_disabled = false;
+		_field = null;
+		_first = false;
+		_helpMessage = null;
+		_id = null;
+		_inlineField = false;
+		_inlineLabel = null;
+		_label = null;
+		_last = false;
+		_model = null;
+		_name = null;
+		_prefix = null;
+		_suffix = null;
+		_title = null;
+		_type = null;
+		_value = null;
+	}
+
+	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		Object bean = _bean;
+
+		if (bean == null) {
+			bean = pageContext.getAttribute("aui:model-context:bean");
+		}
+
+		String field = _field;
+
+		if (Validator.isNull(field)) {
+			field = _name;
+		}
+
+		String id = _id;
+
+		if (Validator.isNull(id)) {
+			if (!Validator.equals(_type, "radio")) {
+				id = _name;
+			}
+			else {
+				id = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+			}
+		}
+
+		String label = _label;
+
+		if (label == null) {
+			label = TextFormatter.format(_name, TextFormatter.K);
+		}
+
+		Class<?> model = _model;
+
+		if (model == null) {
+			model = (Class<?>)pageContext.getAttribute(
+				"aui:model-context:model");
+		}
+
+		request.setAttribute("aui:input:bean", bean);
+		request.setAttribute(
+			"aui:input:changesContext", String.valueOf(_changesContext));
+		request.setAttribute("aui:input:checked", String.valueOf(_checked));
+		request.setAttribute("aui:input:cssClass", _cssClass);
+		request.setAttribute("aui:input:disabled", String.valueOf(_disabled));
+		request.setAttribute(
+			"aui:input:dynamicAttributes", getDynamicAttributes());
+		request.setAttribute("aui:input:field", field);
+		request.setAttribute("aui:input:first", String.valueOf(_first));
+		request.setAttribute("aui:input:helpMessage", _helpMessage);
+		request.setAttribute("aui:input:id", id);
+		request.setAttribute(
+			"aui:input:inlineField", String.valueOf(_inlineField));
+		request.setAttribute("aui:input:inlineLabel", _inlineLabel);
+		request.setAttribute("aui:input:label", label);
+		request.setAttribute("aui:input:last", String.valueOf(_last));
+		request.setAttribute("aui:input:model", model);
+		request.setAttribute("aui:input:name", _name);
+		request.setAttribute("aui:input:prefix", _prefix);
+		request.setAttribute("aui:input:suffix", _suffix);
+		request.setAttribute("aui:input:title", _title);
+		request.setAttribute("aui:input:type", _type);
+		request.setAttribute("aui:input:value", _value);
 	}
 
 	private static final String _PAGE = "/html/taglib/aui/input/page.jsp";
@@ -225,8 +207,6 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 	private boolean _checked;
 	private String _cssClass;
 	private boolean _disabled;
-	private Map<String, Object> _dynamicAttributes =
-		new HashMap<String, Object>();
 	private String _field;
 	private boolean _first;
 	private String _helpMessage;

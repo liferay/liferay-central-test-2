@@ -77,7 +77,7 @@ public class DiscussionTag extends IncludeTag {
 		_userId = userId;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

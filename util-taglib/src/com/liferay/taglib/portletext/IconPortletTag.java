@@ -79,7 +79,7 @@ public class IconPortletTag extends IconTag {
 		_portlet = portlet;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

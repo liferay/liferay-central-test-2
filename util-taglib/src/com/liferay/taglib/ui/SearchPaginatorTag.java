@@ -38,7 +38,7 @@ public class SearchPaginatorTag extends SearchFormTag {
 		_type = type;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

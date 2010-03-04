@@ -70,7 +70,7 @@ public class InputCheckBoxTag extends IncludeTag {
 		_disabled = disabled;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

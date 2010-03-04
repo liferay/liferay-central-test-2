@@ -25,10 +25,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class ToolTag extends TagSupport {
 
 	public int doStartTag() {
-		if (_icon == null) {
-			_icon = _id;
-		}
-
 		PanelTag parentTag = (PanelTag)findAncestorWithClass(
 			this, PanelTag.class);
 
@@ -59,6 +55,12 @@ public class ToolTag extends TagSupport {
 
 	public void setId(String id) {
 		_id = id;
+	}
+
+	protected void cleanUp() {
+		_handler = null;
+		_icon = null;
+		_id = null;
 	}
 
 	private String _handler;

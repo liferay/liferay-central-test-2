@@ -59,7 +59,7 @@ public class CustomAttributeListTag extends IncludeTag {
 		_label = label;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

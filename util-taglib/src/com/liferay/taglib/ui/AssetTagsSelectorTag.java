@@ -26,27 +26,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AssetTagsSelectorTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute(
-			"liferay-ui:asset-tags-selector:className", _className);
-		request.setAttribute(
-			"liferay-ui:asset-tags-selector:classPK", String.valueOf(_classPK));
-		request.setAttribute(
-			"liferay-ui:asset-tags-selector:contentCallback",
-			String.valueOf(_contentCallback));
-		request.setAttribute(
-			"liferay-ui:asset-tags-selector:curTags", _curTags);
-		request.setAttribute(
-			"liferay-ui:asset-tags-selector:focus", String.valueOf(_focus));
-		request.setAttribute(
-			"liferay-ui:asset-tags-selector:hiddenInput", _hiddenInput);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setClassName(String className) {
 		_className = className;
 	}
@@ -71,8 +50,33 @@ public class AssetTagsSelectorTag extends IncludeTag {
 		_hiddenInput = hiddenInput;
 	}
 
-	protected String getDefaultPage() {
+	protected void cleanUp() {
+		_className = null;
+		_classPK = 0;
+		_contentCallback = null;
+		_curTags = null;
+		_focus = false;
+		_hiddenInput = "assetTagNames";
+	}
+
+	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:asset-tags-selector:className", _className);
+		request.setAttribute(
+			"liferay-ui:asset-tags-selector:classPK", String.valueOf(_classPK));
+		request.setAttribute(
+			"liferay-ui:asset-tags-selector:contentCallback",
+			String.valueOf(_contentCallback));
+		request.setAttribute(
+			"liferay-ui:asset-tags-selector:curTags", _curTags);
+		request.setAttribute(
+			"liferay-ui:asset-tags-selector:focus", String.valueOf(_focus));
+		request.setAttribute(
+			"liferay-ui:asset-tags-selector:hiddenInput", _hiddenInput);
 	}
 
 	private static final String _PAGE =

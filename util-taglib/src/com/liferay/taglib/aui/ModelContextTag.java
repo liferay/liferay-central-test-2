@@ -14,10 +14,9 @@
 
 package com.liferay.taglib.aui;
 
-import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyTagSupport;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="ModelContextTag.java.html"><b><i>View Source</i></b></a>
@@ -25,24 +24,22 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */
-public class ModelContextTag extends BodyTagSupport {
+public class ModelContextTag extends IncludeTag {
 
-	public int doEndTag() throws JspException {
-		try{
-			return super.doEndTag();
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-		finally {
-			if (!ServerDetector.isResin()) {
-				_bean = null;
-				_model = null;
-			}
-		}
+	public void setBean(Object bean) {
+		_bean = bean;
 	}
 
-	public int doStartTag() {
+	public void setModel(Class<?> model) {
+		_model = model;
+	}
+
+	protected void cleanUp() {
+		_bean = null;
+		_model = null;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
 		if (_model != null) {
 			pageContext.setAttribute("aui:model-context:bean", _bean);
 			pageContext.setAttribute("aui:model-context:model", _model);
@@ -51,16 +48,6 @@ public class ModelContextTag extends BodyTagSupport {
 			pageContext.removeAttribute("aui:model-context:bean");
 			pageContext.removeAttribute("aui:model-context::model");
 		}
-
-		return SKIP_BODY;
-	}
-
-	public void setBean(Object bean) {
-		_bean = bean;
-	}
-
-	public void setModel(Class<?> model) {
-		_model = model;
 	}
 
 	private Object _bean;

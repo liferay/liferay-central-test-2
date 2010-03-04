@@ -51,7 +51,7 @@ public class DiffTag extends IncludeTag {
 		_targetName = targetName;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

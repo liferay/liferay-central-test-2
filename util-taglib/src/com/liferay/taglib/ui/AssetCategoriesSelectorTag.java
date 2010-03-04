@@ -26,30 +26,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AssetCategoriesSelectorTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute(
-			"liferay-ui:asset-categories-selector:className", _className);
-		request.setAttribute(
-			"liferay-ui:asset-categories-selector:classPK",
-			String.valueOf(_classPK));
-		request.setAttribute(
-			"liferay-ui:asset-categories-selector:contentCallback",
-			String.valueOf(_contentCallback));
-		request.setAttribute(
-			"liferay-ui:asset-categories-selector:curCategoryIds",
-			_curCategoryIds);
-		request.setAttribute(
-			"liferay-ui:asset-categories-selector:focus",
-			String.valueOf(_focus));
-		request.setAttribute(
-			"liferay-ui:asset-categories-selector:hiddenInput", _hiddenInput);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setClassName(String className) {
 		_className = className;
 	}
@@ -74,8 +50,36 @@ public class AssetCategoriesSelectorTag extends IncludeTag {
 		_hiddenInput = hiddenInput;
 	}
 
-	protected String getDefaultPage() {
+	protected void cleanUp() {
+		_className = null;
+		_classPK = 0;
+		_contentCallback = null;
+		_curCategoryIds = null;
+		_focus = false;
+		_hiddenInput = "assetCategoryIds";
+	}
+
+	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:asset-categories-selector:className", _className);
+		request.setAttribute(
+			"liferay-ui:asset-categories-selector:classPK",
+			String.valueOf(_classPK));
+		request.setAttribute(
+			"liferay-ui:asset-categories-selector:contentCallback",
+			String.valueOf(_contentCallback));
+		request.setAttribute(
+			"liferay-ui:asset-categories-selector:curCategoryIds",
+			_curCategoryIds);
+		request.setAttribute(
+			"liferay-ui:asset-categories-selector:focus",
+			String.valueOf(_focus));
+		request.setAttribute(
+			"liferay-ui:asset-categories-selector:hiddenInput", _hiddenInput);
 	}
 
 	private static final String _PAGE =

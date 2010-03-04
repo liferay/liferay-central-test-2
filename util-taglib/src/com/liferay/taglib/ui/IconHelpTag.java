@@ -21,7 +21,7 @@ package com.liferay.taglib.ui;
  */
 public class IconHelpTag extends IconTag {
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

@@ -16,7 +16,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
+import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -26,7 +26,7 @@ import javax.servlet.jsp.JspException;
  *
  * @author Raymond Augé
  */
-public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
+public class ToggleAreaTag extends IncludeTag {
 
 	public int doStartTag() throws JspException {
 		try {
@@ -80,7 +80,7 @@ public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
 		}
 	}
 
-	public String getStartPage() {
+	protected String getStartPage() {
 		if (Validator.isNull(_startPage)) {
 			return _START_PAGE;
 		}
@@ -93,7 +93,7 @@ public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
 		_startPage = startPage;
 	}
 
-	public String getEndPage() {
+	protected String getEndPage() {
 		if (Validator.isNull(_endPage)) {
 			return _END_PAGE;
 		}

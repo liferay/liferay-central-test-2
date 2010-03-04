@@ -23,7 +23,7 @@ import com.liferay.taglib.util.IncludeTag;
  */
 public class AssetTagsErrorTag extends IncludeTag {
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

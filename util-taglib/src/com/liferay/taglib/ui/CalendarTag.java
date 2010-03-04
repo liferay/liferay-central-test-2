@@ -76,7 +76,7 @@ public class CalendarTag extends IncludeTag {
 		_year = year;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

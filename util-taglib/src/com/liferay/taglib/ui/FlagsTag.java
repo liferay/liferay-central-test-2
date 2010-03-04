@@ -65,7 +65,7 @@ public class FlagsTag extends IncludeTag {
 		_reportedUserId = reportedUserId;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

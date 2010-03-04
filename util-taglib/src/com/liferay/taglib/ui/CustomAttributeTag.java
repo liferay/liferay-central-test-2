@@ -62,7 +62,7 @@ public class CustomAttributeTag extends IncludeTag {
 		_name = name;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

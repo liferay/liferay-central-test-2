@@ -56,7 +56,7 @@ public class InputTextAreaTag extends IncludeTag {
 		_disabled = disabled;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

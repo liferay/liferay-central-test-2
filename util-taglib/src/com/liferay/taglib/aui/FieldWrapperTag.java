@@ -14,18 +14,10 @@
 
 package com.liferay.taglib.aui;
 
-import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.TextFormatter;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * <a href="FieldWrapperTag.java.html"><b><i>View Source</i></b></a>
@@ -34,97 +26,10 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */
-public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
-
-	public int doEndTag() throws JspException {
-		try{
-			PortalIncludeUtil.include(pageContext, getEndPage());
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-		finally {
-			if (!ServerDetector.isResin()) {
-				_cssClass = null;
-				_dynamicAttributes.clear();
-				_endPage = null;
-				_first = false;
-				_helpMessage = null;
-				_inlineField = false;
-				_inlineLabel = null;
-				_label = null;
-				_last = false;
-				_name = null;
-				_startPage = null;
-			}
-		}
-	}
-
-	public int doStartTag() throws JspException {
-		try{
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
-
-			if (_label == null) {
-				_label = TextFormatter.format(_name, TextFormatter.K);
-			}
-
-			request.setAttribute("aui:field-wrapper:cssClass", _cssClass);
-			request.setAttribute(
-				"aui:field-wrapper:dynamicAttributes", _dynamicAttributes);
-			request.setAttribute(
-				"aui:field-wrapper:first", String.valueOf(_first));
-			request.setAttribute(
-				"aui:field-wrapper:helpMessage", _helpMessage);
-			request.setAttribute(
-				"aui:field-wrapper:inlineField", String.valueOf(_inlineField));
-			request.setAttribute("aui:field-wrapper:inlineLabel", _inlineLabel);
-			request.setAttribute("aui:field-wrapper:label", _label);
-			request.setAttribute(
-				"aui:field-wrapper:last", String.valueOf(_last));
-			request.setAttribute("aui:field-wrapper:name", _name);
-
-			PortalIncludeUtil.include(pageContext, getStartPage());
-
-			return EVAL_BODY_INCLUDE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
-
-	public String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
-	}
-
-	public String getStartPage() {
-		if (Validator.isNull(_startPage)) {
-			return _START_PAGE;
-		}
-		else {
-			return _startPage;
-		}
-	}
+public class FieldWrapperTag extends IncludeTag {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
-	}
-
-	public void setDynamicAttribute(
-		String uri, String localName, Object value) {
-
-		_dynamicAttributes.put(localName, value);
-	}
-
-	public void setEndPage(String endPage) {
-		_endPage = endPage;
 	}
 
 	public void setFirst(boolean first) {
@@ -155,8 +60,43 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 		_name = name;
 	}
 
-	public void setStartPage(String startPage) {
-		_startPage = startPage;
+	protected void cleanUp() {
+		_cssClass = null;
+		_first = false;
+		_helpMessage = null;
+		_inlineField = false;
+		_inlineLabel = null;
+		_label = null;
+		_last = false;
+		_name = null;
+	}
+
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
+	protected String getStartPage() {
+		return _START_PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		String label = _label;
+
+		if (label == null) {
+			label = TextFormatter.format(_name, TextFormatter.K);
+		}
+
+		request.setAttribute("aui:field-wrapper:cssClass", _cssClass);
+		request.setAttribute(
+			"aui:field-wrapper:dynamicAttributes", getDynamicAttributes());
+		request.setAttribute("aui:field-wrapper:first", String.valueOf(_first));
+		request.setAttribute("aui:field-wrapper:helpMessage", _helpMessage);
+		request.setAttribute(
+			"aui:field-wrapper:inlineField", String.valueOf(_inlineField));
+		request.setAttribute("aui:field-wrapper:inlineLabel", _inlineLabel);
+		request.setAttribute("aui:field-wrapper:label", label);
+		request.setAttribute("aui:field-wrapper:last", String.valueOf(_last));
+		request.setAttribute("aui:field-wrapper:name", _name);
 	}
 
 	private static final String _END_PAGE =
@@ -166,9 +106,6 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 		"/html/taglib/aui/field_wrapper/start.jsp";
 
 	private String _cssClass;
-	private Map<String, Object> _dynamicAttributes =
-		new HashMap<String, Object>();
-	private String _endPage;
 	private boolean _first;
 	private String _helpMessage;
 	private boolean _inlineField;
@@ -176,6 +113,5 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 	private String _label;
 	private boolean _last;
 	private String _name;
-	private String _startPage;
 
 }

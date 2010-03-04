@@ -25,10 +25,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  */
 public class BufferTag extends BodyTagSupport {
 
-	public int doStartTag() {
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public int doAfterBody() {
 		_bodyContentString = getBodyContent().getString();
 
@@ -36,16 +32,26 @@ public class BufferTag extends BodyTagSupport {
 	}
 
 	public int doEndTag() {
-		pageContext.setAttribute(_var, _bodyContentString);
+		try {
+			pageContext.setAttribute(_var, _bodyContentString);
 
-		return EVAL_PAGE;
+			return EVAL_PAGE;
+		}
+		finally {
+			_bodyContentString = StringPool.BLANK;
+			_var = null;
+		}
+	}
+
+	public int doStartTag() {
+		return EVAL_BODY_BUFFERED;
 	}
 
 	public void setVar(String var) {
 		_var = var;
 	}
 
-	private String _var;
 	private String _bodyContentString = StringPool.BLANK;
+	private String _var;
 
 }

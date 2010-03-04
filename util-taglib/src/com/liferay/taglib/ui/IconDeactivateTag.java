@@ -21,7 +21,7 @@ package com.liferay.taglib.ui;
  */
 public class IconDeactivateTag extends IconTag {
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

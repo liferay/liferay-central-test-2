@@ -39,7 +39,7 @@ public class DiffHtmlTag extends IncludeTag {
 		_diffHtmlResults = diffHtmlResults;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

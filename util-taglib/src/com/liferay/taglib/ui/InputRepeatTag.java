@@ -62,7 +62,7 @@ public class InputRepeatTag extends IncludeTag {
 		_event = event;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

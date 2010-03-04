@@ -84,7 +84,7 @@ public class SocialActivitiesTag extends IncludeTag {
 		_feedLinkMessage = feedLinkMessage;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

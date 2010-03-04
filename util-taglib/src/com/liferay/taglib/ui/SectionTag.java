@@ -16,8 +16,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
+import com.liferay.taglib.util.IncludeTag;
 
 import javax.portlet.RenderResponse;
 
@@ -29,16 +28,16 @@ import javax.servlet.jsp.JspException;
  *
  * @author Brian Wing Shun Chan
  */
-public class SectionTag extends ParamAndPropertyAncestorTagImpl {
+public class SectionTag extends IncludeTag {
 
 	public int doStartTag() throws JspException {
-		_tabsTag = (TabsTag)findAncestorWithClass(this, TabsTag.class);
-
-		if (_tabsTag == null) {
-			throw new JspException();
-		}
-
 		try {
+			_tabsTag = (TabsTag)findAncestorWithClass(this, TabsTag.class);
+
+			if (_tabsTag == null) {
+				throw new JspException();
+			}
+
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
@@ -91,48 +90,12 @@ public class SectionTag extends ParamAndPropertyAncestorTagImpl {
 		}
 	}
 
-	public int doEndTag() throws JspException {
-		try {
-			if (!_tabsTag.isRefresh() || _sectionSelected.booleanValue()) {
-				if (!_tabsTag.isRefresh()) {
-					include(getEndPage());
-				}
-
-				return EVAL_BODY_INCLUDE;
-			}
-			else {
-				return EVAL_PAGE;
-			}
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
+	protected String getStartPage() {
+		return _START_PAGE;
 	}
 
-	public String getStartPage() {
-		if (Validator.isNull(_startPage)) {
-			return _START_PAGE;
-		}
-		else {
-			return _startPage;
-		}
-	}
-
-	public void setStartPage(String startPage) {
-		_startPage = startPage;
-	}
-
-	public String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
-	}
-
-	public void setEndPage(String endPage) {
-		_endPage = endPage;
+	protected String getEndPage() {
+		return _END_PAGE;
 	}
 
 	private static final String _START_PAGE =
@@ -140,8 +103,6 @@ public class SectionTag extends ParamAndPropertyAncestorTagImpl {
 
 	private static final String _END_PAGE = "/html/taglib/ui/section/end.jsp";
 
-	private String _startPage;
-	private String _endPage;
 	private TabsTag _tabsTag = null;
 	private Boolean _sectionSelected = Boolean.FALSE;
 

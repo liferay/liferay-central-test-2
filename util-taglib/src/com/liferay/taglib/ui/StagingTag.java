@@ -66,7 +66,7 @@ public class StagingTag extends IncludeTag {
 		}
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

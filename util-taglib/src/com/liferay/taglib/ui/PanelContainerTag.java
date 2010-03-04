@@ -110,7 +110,7 @@ public class PanelContainerTag extends BodyTagSupport {
 		}
 	}
 
-	public String getStartPage() {
+	protected String getStartPage() {
 		if (Validator.isNull(_startPage)) {
 			return _START_PAGE;
 		}
@@ -123,7 +123,7 @@ public class PanelContainerTag extends BodyTagSupport {
 		_startPage = startPage;
 	}
 
-	public String getEndPage() {
+	protected String getEndPage() {
 		if (Validator.isNull(_endPage)) {
 			return _END_PAGE;
 		}

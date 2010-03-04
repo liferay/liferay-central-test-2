@@ -85,7 +85,7 @@ public class WriteTag extends IncludeTag {
 		_property = property;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

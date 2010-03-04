@@ -113,7 +113,7 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 		}
 	}
 
-	public String getPage() {
+	protected String getPage() {
 		return _page;
 	}
 

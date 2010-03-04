@@ -95,7 +95,7 @@ public class InputPermissionsTag extends IncludeTag {
 		_modelName = modelName;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

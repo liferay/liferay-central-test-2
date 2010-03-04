@@ -47,7 +47,7 @@ public class IconMinimizeTag extends IconTag {
 		requestDispatcher.include(request, response);
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

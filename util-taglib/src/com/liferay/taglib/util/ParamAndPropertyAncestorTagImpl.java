@@ -18,14 +18,10 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.util.servlet.DynamicServletRequest;
 
-import java.io.IOException;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -106,6 +102,10 @@ public class ParamAndPropertyAncestorTagImpl
 	}
 
 	public ServletContext getServletContext() {
+		if (_servletContext != null) {
+			return _servletContext;
+		}
+
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
@@ -135,20 +135,12 @@ public class ParamAndPropertyAncestorTagImpl
 			(HttpServletResponse)pageContext.getResponse());
 	}
 
-	public void include(String path) throws IOException, ServletException {
-		ServletContext servletContext = getServletContext();
-		HttpServletRequest request = getServletRequest();
-		StringServletResponse stringResponse = getServletResponse();
-
-		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(path);
-
-		requestDispatcher.include(request, stringResponse);
-
-		pageContext.getOut().print(stringResponse.getString());
+	public void setServletContext(ServletContext servletContext) {
+		_servletContext = servletContext;
 	}
 
 	private Map<String, String[]> _params;
 	private Map<String, String[]> _properties;
+	private ServletContext _servletContext;
 
 }

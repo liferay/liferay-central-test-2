@@ -50,7 +50,7 @@ public class SuccessTag extends IncludeTag {
 		_translateMessage = translateMessage;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

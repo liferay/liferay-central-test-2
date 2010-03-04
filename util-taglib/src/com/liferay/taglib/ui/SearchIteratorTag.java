@@ -39,7 +39,7 @@ public class SearchIteratorTag extends SearchFormTag {
 		_paginate = paginate;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

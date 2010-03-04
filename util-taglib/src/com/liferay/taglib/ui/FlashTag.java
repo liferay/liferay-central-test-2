@@ -218,7 +218,7 @@ public class FlashTag extends IncludeTag {
 		}
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

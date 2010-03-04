@@ -68,7 +68,7 @@ public class LayoutIconTag extends com.liferay.taglib.util.IncludeTag {
 		_layout = layout;
 	}
 
-	public String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

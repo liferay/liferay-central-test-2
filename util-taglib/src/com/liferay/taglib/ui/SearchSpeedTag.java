@@ -38,7 +38,7 @@ public class SearchSpeedTag extends SearchFormTag {
 		_hits = hits;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

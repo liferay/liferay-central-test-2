@@ -28,19 +28,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AssetCategoriesNavigationTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute(
-			"liferay-ui:asset-tags-navigation:hidePortletWhenEmpty",
-			String.valueOf(_hidePortletWhenEmpty));
-		request.setAttribute(
-			"liferay-ui:asset-tags-navigation:vocabularyIds", _vocabularyIds);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setHidePortletWhenEmpty(boolean hidePortletWhenEmpty) {
 		_hidePortletWhenEmpty = hidePortletWhenEmpty;
 	}
@@ -49,8 +36,21 @@ public class AssetCategoriesNavigationTag extends IncludeTag {
 		_vocabularyIds = vocabularyIds;
 	}
 
-	protected String getDefaultPage() {
+	protected void cleanUp() {
+		_hidePortletWhenEmpty = false;
+		_vocabularyIds = null;
+	}
+
+	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:hidePortletWhenEmpty",
+			String.valueOf(_hidePortletWhenEmpty));
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:vocabularyIds", _vocabularyIds);
 	}
 
 	private static final String _PAGE =

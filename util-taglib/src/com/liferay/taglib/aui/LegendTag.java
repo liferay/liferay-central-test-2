@@ -16,11 +16,7 @@ package com.liferay.taglib.aui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * <a href="LegendTag.java.html"><b><i>View Source</i></b></a>
@@ -29,43 +25,35 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */
-public class LegendTag extends IncludeTag implements DynamicAttributes {
+public class LegendTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
+	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("aui:legend:cssClass", _cssClass);
 		request.setAttribute(
-			"aui:legend:dynamicAttributes", _dynamicAttributes);
+			"aui:legend:dynamicAttributes", getDynamicAttributes());
 		request.setAttribute("aui:legend:label", _label);
+	}
 
-		return EVAL_BODY_BUFFERED;
+	protected void cleanUp() {
+		_cssClass = null;
+		_label = null;
 	}
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
 
-	public void setDynamicAttribute(
-		String uri, String localName, Object value) {
-
-		_dynamicAttributes.put(localName, value);
-	}
-
 	public void setLabel(String label) {
 		_label = label;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 
 	private static final String _PAGE = "/html/taglib/aui/legend/page.jsp";
 
 	private String _cssClass;
-	private Map<String, Object> _dynamicAttributes =
-		new HashMap<String, Object>();
 	private String _label;
 
 }

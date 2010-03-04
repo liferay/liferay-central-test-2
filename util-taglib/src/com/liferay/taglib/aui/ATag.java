@@ -14,17 +14,9 @@
 
 package com.liferay.taglib.aui;
 
-import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * <a href="ATag.java.html"><b><i>View Source</i></b></a>
@@ -33,80 +25,10 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */
-public class ATag extends IncludeTag implements DynamicAttributes {
-
-	public int doEndTag() throws JspException {
-		try{
-			PortalIncludeUtil.include(pageContext, getEndPage());
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-		finally {
-			if (!ServerDetector.isResin()) {
-				_cssClass = null;
-				_dynamicAttributes.clear();
-				_endPage = null;
-				_href = null;
-				_id = null;
-				_label = null;
-				_startPage = null;
-			}
-		}
-	}
-
-	public int doStartTag() throws JspException {
-		try{
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
-
-			request.setAttribute("aui:a:cssClass", _cssClass);
-			request.setAttribute("aui:a:dynamicAttributes", _dynamicAttributes);
-			request.setAttribute("aui:a:href", _href);
-			request.setAttribute("aui:a:id", _id);
-			request.setAttribute("aui:a:label", _label);
-
-			PortalIncludeUtil.include(pageContext, getStartPage());
-
-			return EVAL_BODY_INCLUDE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
-
-	public String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
-	}
-
-	public String getStartPage() {
-		if (Validator.isNull(_startPage)) {
-			return _START_PAGE;
-		}
-		else {
-			return _startPage;
-		}
-	}
+public class ATag extends IncludeTag {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
-	}
-
-	public void setDynamicAttribute(
-		String uri, String localName, Object value) {
-
-		_dynamicAttributes.put(localName, value);
-	}
-
-	public void setEndPage(String endPage) {
-		_endPage = endPage;
 	}
 
 	public void setHref(String href) {
@@ -121,8 +43,27 @@ public class ATag extends IncludeTag implements DynamicAttributes {
 		_label = label;
 	}
 
-	public void setStartPage(String startPage) {
-		_startPage = startPage;
+	protected void cleanUp() {
+		_cssClass = null;
+		_href = null;
+		_id = null;
+		_label = null;
+	}
+
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
+	protected String getStartPage() {
+		return _START_PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("aui:a:cssClass", _cssClass);
+		request.setAttribute("aui:a:dynamicAttributes", getDynamicAttributes());
+		request.setAttribute("aui:a:href", _href);
+		request.setAttribute("aui:a:id", _id);
+		request.setAttribute("aui:a:label", _label);
 	}
 
 	private static final String _END_PAGE =
@@ -132,12 +73,8 @@ public class ATag extends IncludeTag implements DynamicAttributes {
 		"/html/taglib/aui/a/start.jsp";
 
 	private String _cssClass;
-	private Map<String, Object> _dynamicAttributes =
-		new HashMap<String, Object>();
-	private String _endPage;
 	private String _href;
 	private String _id;
 	private String _label;
-	private String _startPage;
 
 }

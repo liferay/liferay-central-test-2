@@ -71,7 +71,7 @@ public class InputLocalizedTag extends IncludeTag implements DynamicAttributes {
 		_xml = xml;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

@@ -134,7 +134,7 @@ public class LanguageTag extends IncludeTag {
 		_displayStyle = displayStyle;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

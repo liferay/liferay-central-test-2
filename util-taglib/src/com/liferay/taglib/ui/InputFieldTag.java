@@ -82,7 +82,7 @@ public class InputFieldTag extends IncludeTag {
 		_format = format;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

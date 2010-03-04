@@ -27,21 +27,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AssetTagsSummaryTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute(
-			"liferay-ui:asset-tags-summary:className", _className);
-		request.setAttribute(
-			"liferay-ui:asset-tags-summary:classPK", String.valueOf(_classPK));
-		request.setAttribute("liferay-ui:asset-tags-summary:message", _message);
-		request.setAttribute(
-			"liferay-ui:asset-tags-summary:portletURL", _portletURL);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public PortletURL getPortletURL() {
 		return _portletURL;
 	}
@@ -62,8 +47,25 @@ public class AssetTagsSummaryTag extends IncludeTag {
 		_portletURL = portletURL;
 	}
 
-	protected String getDefaultPage() {
+	protected void cleanUp() {
+		_className = null;
+		_classPK = 0;
+		_message = null;
+		_portletURL = null;
+	}
+
+	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:asset-tags-summary:className", _className);
+		request.setAttribute(
+			"liferay-ui:asset-tags-summary:classPK", String.valueOf(_classPK));
+		request.setAttribute("liferay-ui:asset-tags-summary:message", _message);
+		request.setAttribute(
+			"liferay-ui:asset-tags-summary:portletURL", _portletURL);
 	}
 
 	private static final String _PAGE =

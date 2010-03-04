@@ -76,7 +76,7 @@ public class InputTimeZoneTag extends IncludeTag {
 		_disabled = disabled;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

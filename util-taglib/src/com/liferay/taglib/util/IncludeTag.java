@@ -19,92 +19,82 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
-import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * <a href="IncludeTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
+public class IncludeTag
+	extends ParamAndPropertyAncestorTagImpl implements DynamicAttributes {
 
 	public int doEndTag() throws JspException {
-		HttpServletRequest request = null;
-
 		try {
-			ServletContext servletContext = getServletContext();
-			request = getServletRequest();
-			StringServletResponse stringResponse = getServletResponse();
-
-			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
-
 			String page = getPage();
 
-			if (isTheme()) {
-				ThemeUtil.include(
-					servletContext, request, stringResponse, pageContext, page,
-					theme);
-			}
-			else {
-				servletContext = getServletContext(servletContext, request);
-
-				RequestDispatcher requestDispatcher =
-					servletContext.getRequestDispatcher(page);
-
-				requestDispatcher.include(request, stringResponse);
+			if (Validator.isNull(page)) {
+				page = getEndPage();
 			}
 
-			pageContext.getOut().print(stringResponse.getString());
+			_callSetAttributes();
 
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			if (request != null) {
-				String currentURL = (String)request.getAttribute(
-					WebKeys.CURRENT_URL);
-
-				_log.error(
-					"Current URL " + currentURL + " generates exception: " +
-						e.getMessage());
-			}
-
-			LogUtil.log(_log, e);
-
-			if (e instanceof JspException) {
-				throw (JspException)e;
+			if (Validator.isNotNull(page)) {
+				_doInclude(page);
 			}
 
 			return EVAL_PAGE;
 		}
 		finally {
+			_calledSetAttributes = false;
+			_dynamicAttributes.clear();
+
 			clearParams();
 			clearProperties();
+
+			if (ServerDetector.isResin()) {
+				_page = null;
+
+				cleanUp();
+			}
 		}
 	}
 
-	public boolean isTheme() {
-		return false;
+	public int doStartTag() throws JspException {
+		String page = getStartPage();
+
+		if (Validator.isNull(page)) {
+			return SKIP_BODY;
+		}
+
+		_callSetAttributes();
+
+		_doInclude(page);
+
+		return EVAL_BODY_INCLUDE;
 	}
 
-	public String getPage() {
-		if (Validator.isNull(_page)) {
-			return getDefaultPage();
-		}
-		else {
-			return _page;
-		}
+	public void setDynamicAttribute(
+		String uri, String localName, Object value) {
+
+		_dynamicAttributes.put(localName, value);
 	}
 
 	public void setPage(String page) {
@@ -115,21 +105,19 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 		_portletId = portletId;
 	}
 
-	public ServletContext getServletContext() {
-		if (_servletContext != null) {
-			return _servletContext;
-		}
-		else {
-			return super.getServletContext();
-		}
+	protected void cleanUp() {
 	}
 
-	public void setServletContext(ServletContext servletContext) {
-		_servletContext = servletContext;
+	protected Map<String, Object> getDynamicAttributes() {
+		return _dynamicAttributes;
 	}
 
-	protected String getDefaultPage() {
+	protected String getEndPage() {
 		return null;
+	}
+
+	protected String getPage() {
+		return _page;
 	}
 
 	protected ServletContext getServletContext(
@@ -159,10 +147,71 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 		return PortalUtil.getServletContext(portlet, servletContext);
 	}
 
+	protected String getStartPage() {
+		return null;
+	}
+
+	protected void include(String page) throws Exception {
+		ServletContext servletContext = getServletContext();
+		HttpServletRequest request = getServletRequest();
+		StringServletResponse stringResponse = getServletResponse();
+
+		servletContext = getServletContext(servletContext, request);
+
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
+
+		requestDispatcher.include(request, stringResponse);
+
+		JspWriter jspWriter = pageContext.getOut();
+
+		jspWriter.print(stringResponse.getString());
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+	}
+
+	private void _callSetAttributes() {
+		if (_calledSetAttributes) {
+			return;
+		}
+
+		_calledSetAttributes = true;
+
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		setAttributes(request);
+	}
+
+	private void _doInclude(String page) throws JspException {
+		try {
+			include(page);
+		}
+		catch (Exception e) {
+			HttpServletRequest request = getServletRequest();
+
+			String currentURL = (String)request.getAttribute(
+				WebKeys.CURRENT_URL);
+
+			_log.error(
+				"Current URL " + currentURL + " generates exception: " +
+					e.getMessage());
+
+			LogUtil.log(_log, e);
+
+			if (e instanceof JspException) {
+				throw (JspException)e;
+			}
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
 
+	private boolean _calledSetAttributes;
+	private Map<String, Object> _dynamicAttributes =
+		new HashMap<String, Object>();
 	private String _page;
 	private String _portletId;
-	private ServletContext _servletContext;
 
 }

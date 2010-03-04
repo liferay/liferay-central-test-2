@@ -76,7 +76,7 @@ public class NavigationTag extends IncludeTag {
 		_nestedChildren = nestedChildren;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

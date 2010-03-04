@@ -171,7 +171,7 @@ public class ToggleTag extends IncludeTag {
 		_stateVar = stateVar;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

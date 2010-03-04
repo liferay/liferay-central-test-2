@@ -38,7 +38,7 @@ public class CaptchaTag extends IncludeTag {
 		_url = url;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

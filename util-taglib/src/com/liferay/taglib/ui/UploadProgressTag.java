@@ -55,7 +55,7 @@ public class UploadProgressTag extends IncludeTag {
 		_message = message;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

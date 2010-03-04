@@ -16,11 +16,7 @@ package com.liferay.taglib.aui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * <a href="ButtonTag.java.html"><b><i>View Source</i></b></a>
@@ -29,35 +25,7 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */
-public class ButtonTag extends IncludeTag implements DynamicAttributes {
-
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		if (_value == null) {
-			if (_type.equals("submit")) {
-				_value = "save";
-			}
-			else if (_type.equals("cancel")) {
-				_value = "cancel";
-			}
-			else if (_type.equals("reset")) {
-				_value = "reset";
-			}
-		}
-
-		request.setAttribute("aui:button:cssClass", _cssClass);
-		request.setAttribute("aui:button:disabled", String.valueOf(_disabled));
-		request.setAttribute(
-			"aui:button:dynamicAttributes", _dynamicAttributes);
-		request.setAttribute("aui:button:name", _name);
-		request.setAttribute("aui:button:onClick", _onClick);
-		request.setAttribute("aui:button:type", _type);
-		request.setAttribute("aui:button:value", _value);
-
-		return EVAL_BODY_BUFFERED;
-	}
+public class ButtonTag extends IncludeTag {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
@@ -65,12 +33,6 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 
 	public void setDisabled(boolean disabled) {
 		_disabled = disabled;
-	}
-
-	public void setDynamicAttribute(
-		String uri, String localName, Object value) {
-
-		_dynamicAttributes.put(localName, value);
 	}
 
 	public void setName(String name) {
@@ -89,16 +51,48 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 		_value = value;
 	}
 
-	protected String getDefaultPage() {
+	protected void cleanUp() {
+		_cssClass = null;
+		_disabled = false;
+		_name = null;
+		_onClick = null;
+		_type = "button";
+		_value = null;
+	}
+
+	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		String value = _value;
+
+		if (value == null) {
+			if (_type.equals("submit")) {
+				value = "save";
+			}
+			else if (_type.equals("cancel")) {
+				value = "cancel";
+			}
+			else if (_type.equals("reset")) {
+				value = "reset";
+			}
+		}
+
+		request.setAttribute("aui:button:cssClass", _cssClass);
+		request.setAttribute("aui:button:disabled", String.valueOf(_disabled));
+		request.setAttribute(
+			"aui:button:dynamicAttributes", getDynamicAttributes());
+		request.setAttribute("aui:button:name", _name);
+		request.setAttribute("aui:button:onClick", _onClick);
+		request.setAttribute("aui:button:type", _type);
+		request.setAttribute("aui:button:value", value);
 	}
 
 	private static final String _PAGE = "/html/taglib/aui/button/page.jsp";
 
 	private String _cssClass;
 	private boolean _disabled;
-	private Map<String, Object> _dynamicAttributes =
-		new HashMap<String, Object>();
 	private String _name;
 	private String _onClick;
 	private String _type = "button";

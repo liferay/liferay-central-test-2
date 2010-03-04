@@ -35,10 +35,6 @@ public class ScriptTag extends BodyTagSupport {
 
 	public static final String PAGE = "/html/taglib/aui/script/page.jsp";
 
-	public int doStartTag() {
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public int doAfterBody() {
 		_bodyContentString = getBodyContent().getString();
 
@@ -49,8 +45,10 @@ public class ScriptTag extends BodyTagSupport {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		String position = _position;
+
 		try {
-			if (Validator.isNull(_position)) {
+			if (Validator.isNull(position)) {
 				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 					WebKeys.THEME_DISPLAY);
 
@@ -58,14 +56,14 @@ public class ScriptTag extends BodyTagSupport {
 					themeDisplay.isLifecycleResource() ||
 					themeDisplay.isStateExclusive()) {
 
-					_position = _POSITION_INLINE;
+					position = _POSITION_INLINE;
 				}
 				else {
-					_position = _POSITION_AUTO;
+					position = _POSITION_AUTO;
 				}
 			}
 
-			if (_position.equals(_POSITION_INLINE)) {
+			if (position.equals(_POSITION_INLINE)) {
 				ScriptData scriptData = new ScriptData();
 
 				request.setAttribute(ScriptTag.class.getName(), scriptData);
@@ -93,16 +91,20 @@ public class ScriptTag extends BodyTagSupport {
 			throw new JspException(e);
 		}
 		finally {
-			if (_position.equals(_POSITION_INLINE)) {
+			if (position.equals(_POSITION_INLINE)) {
 				request.removeAttribute(ScriptTag.class.getName());
 			}
 
 			if (!ServerDetector.isResin()) {
-				_bodyContentString = StringPool.BLANK;
-				_position = null;
-				_use = null;
+				cleanUp();
 			}
 		}
+	}
+
+	protected void cleanUp() {
+		_bodyContentString = StringPool.BLANK;
+		_position = null;
+		_use = null;
 	}
 
 	public void setPosition(String position) {

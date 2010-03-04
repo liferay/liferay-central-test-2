@@ -54,7 +54,7 @@ public class SocialBookmarksTag extends IncludeTag {
 		_target = target;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 

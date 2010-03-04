@@ -27,28 +27,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AssetTagsNavigationTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute(
-			"liferay-ui:asset-tags-navigation:classNameId",
-			String.valueOf(_classNameId));
-		request.setAttribute(
-			"liferay-ui:asset-tags-navigation:displayStyle", _displayStyle);
-		request.setAttribute(
-			"liferay-ui:asset-tags-navigation:hidePortletWhenEmpty",
-			String.valueOf(_hidePortletWhenEmpty));
-		request.setAttribute(
-			"liferay-ui:asset-tags-navigation:showAssetCount",
-			String.valueOf(_showAssetCount));
-		request.setAttribute(
-			"liferay-ui:asset-tags-navigation:showZeroAssetCount",
-			String.valueOf(_showZeroAssetCount));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
 	}
@@ -69,8 +47,33 @@ public class AssetTagsNavigationTag extends IncludeTag {
 		_showZeroAssetCount = showZeroAssetCount;
 	}
 
-	protected String getDefaultPage() {
+	protected void cleanUp() {
+		_classNameId = 0;
+		_displayStyle = "cloud";
+		_hidePortletWhenEmpty = false;
+		_showAssetCount = false;
+		_showZeroAssetCount = false;
+	}
+
+	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:classNameId",
+			String.valueOf(_classNameId));
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:displayStyle", _displayStyle);
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:hidePortletWhenEmpty",
+			String.valueOf(_hidePortletWhenEmpty));
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:showAssetCount",
+			String.valueOf(_showAssetCount));
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:showZeroAssetCount",
+			String.valueOf(_showZeroAssetCount));
 	}
 
 	private static final String _PAGE =

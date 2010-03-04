@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
+import com.liferay.taglib.util.IncludeTag;
 
 import javax.portlet.PortletURL;
 
@@ -31,7 +31,7 @@ import javax.servlet.jsp.JspException;
  *
  * @author Brian Wing Shun Chan
  */
-public class TabsTag extends ParamAndPropertyAncestorTagImpl {
+public class TabsTag extends IncludeTag {
 
 	public int doStartTag() throws JspException {
 		try {
@@ -202,7 +202,7 @@ public class TabsTag extends ParamAndPropertyAncestorTagImpl {
 		}
 	}
 
-	public String getStartPage() {
+	protected String getStartPage() {
 		if (Validator.isNull(_startPage)) {
 			return _START_PAGE;
 		}
@@ -215,7 +215,7 @@ public class TabsTag extends ParamAndPropertyAncestorTagImpl {
 		_startPage = startPage;
 	}
 
-	public String getEndPage() {
+	protected String getEndPage() {
 		if (Validator.isNull(_endPage)) {
 			return _END_PAGE;
 		}

@@ -73,7 +73,7 @@ public class WebDAVTag extends IncludeTag {
 		_path = path;
 	}
 
-	protected String getDefaultPage() {
+	protected String getPage() {
 		return _PAGE;
 	}
 
