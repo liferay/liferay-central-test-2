@@ -49,8 +49,7 @@
 
 						<%
 						for (Portlet portlet : portlets) {
-							if (!portlet.isInstanceable()
-									&& portlet.isActive()) {
+							if (portlet.isActive() && !portlet.isInstanceable()) {
 						%>
 
 								<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
