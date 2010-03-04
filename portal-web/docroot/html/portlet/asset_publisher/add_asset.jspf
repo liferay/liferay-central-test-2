@@ -57,22 +57,26 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse 
 
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 
-	PortletURL addPortletURL = assetRendererFactory.getURLAdd((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)portletResponse);
+	PortletURL addPortletURL = null;
 
-	if (addPortletURL != null) {
-		addPortletURL.setWindowState(WindowState.MAXIMIZED);
-		addPortletURL.setPortletMode(PortletMode.VIEW);
+	if (assetRendererFactory != null) {
+		addPortletURL = assetRendererFactory.getURLAdd((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)portletResponse);
 
-		addPortletURL.setParameter("redirect", themeDisplay.getURLCurrent());
-		addPortletURL.setParameter("backURL", themeDisplay.getURLCurrent());
+		if (addPortletURL != null) {
+			addPortletURL.setWindowState(WindowState.MAXIMIZED);
+			addPortletURL.setPortletMode(PortletMode.VIEW);
 
-		String referringPortletResource = ParamUtil.getString(renderRequest, "portletResource");
+			addPortletURL.setParameter("redirect", themeDisplay.getURLCurrent());
+			addPortletURL.setParameter("backURL", themeDisplay.getURLCurrent());
 
-		if (Validator.isNotNull(referringPortletResource)) {
-			addPortletURL.setParameter("referringPortletResource", referringPortletResource);
-		}
-		else {
-			addPortletURL.setParameter("assetTagNames", StringUtil.merge(allAssetTagNames));
+			String referringPortletResource = ParamUtil.getString(renderRequest, "portletResource");
+
+			if (Validator.isNotNull(referringPortletResource)) {
+				addPortletURL.setParameter("referringPortletResource", referringPortletResource);
+			}
+			else {
+				addPortletURL.setParameter("assetTagNames", StringUtil.merge(allAssetTagNames));
+			}
 		}
 	}
 
