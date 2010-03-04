@@ -216,7 +216,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 				if (pos == -1) {
 					i18nLanguageId = friendlyURL;
-					friendlyURL = StringPool.SLASH;					
+					friendlyURL = StringPool.SLASH;
 				}
 				else {
 					i18nLanguageId = friendlyURL.substring(0, pos);
