@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
 
@@ -47,9 +48,16 @@ public class TemplateProcessor {
 	}
 
 	public String processColumn(String columnId) throws Exception {
+		return processColumn(columnId, StringPool.BLANK);
+	}
+
+	public String processColumn(String columnId, String classNames)
+		throws Exception {
+
 		Map<String, String> attributes = new HashMap<String, String>();
 
 		attributes.put("id", columnId);
+		attributes.put("classNames", classNames);
 
 		PortletColumnLogic logic = new PortletColumnLogic(
 			_servletContext, _request, _response);

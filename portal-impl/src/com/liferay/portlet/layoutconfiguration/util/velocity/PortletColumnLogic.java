@@ -16,12 +16,14 @@ package com.liferay.portlet.layoutconfiguration.util.velocity;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
+
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 
 import java.util.List;
@@ -93,6 +95,12 @@ public class PortletColumnLogic extends RuntimeLogic {
 
 		if (portlets.size() == 0) {
 			columnCssClass += " empty";
+		}
+
+		String additionalClassNames = attributes.get("classNames");
+
+		if (Validator.isNotNull(additionalClassNames)) {
+			columnCssClass += " " + additionalClassNames;
 		}
 
 		sb.append("<div class=\"");

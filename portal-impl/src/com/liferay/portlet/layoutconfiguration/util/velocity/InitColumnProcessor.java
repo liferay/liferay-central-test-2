@@ -33,6 +33,10 @@ public class InitColumnProcessor {
 		_columns.add(columnId);
 	}
 
+	public void processColumn(String columnId, String classNames) {
+		_columns.add(columnId);
+	}
+
 	public List<String> getColumns() {
 		return _columns;
 	}
