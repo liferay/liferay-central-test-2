@@ -386,10 +386,6 @@ body.lfr-has-sidebar {
 
 /* ---------- Misc. ---------- */
 
-.portlet-layout .portlet-column, .columns-max .portlet-column {
-	padding: 0 5px;
-}
-
 .lfr-panel-container {
 	background-color: transparent;
 }

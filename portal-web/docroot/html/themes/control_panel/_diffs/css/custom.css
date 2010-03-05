@@ -24,7 +24,7 @@ a:hover {
 	padding-top: 20px;
 }
 
-#portlet-layout {
+#content-wrapper {
 	background: #FFF;
 	border: 5px solid #FFF;
 	margin: 20px auto;
@@ -118,11 +118,6 @@ a:hover {
 
 .lfr-ctrl-panel h2 {
 	margin: 0;
-}
-
-.lfr-ctrl-panel #portlet-layout {
-	margin: 0;
-	width: auto;
 }
 
 .lfr-ctrl-panel .panel-page-menu {

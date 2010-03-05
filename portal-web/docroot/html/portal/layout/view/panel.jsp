@@ -16,7 +16,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
-	<div id="content-wrapper">
+	<div id="portlet-layout">
 		<table class="lfr-panel-page">
 		<tr>
 			<td class="lfr-top panel-page-menu" width="200">
