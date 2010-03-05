@@ -20,9 +20,11 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.PortletPreferencesIds;
+import com.liferay.portal.model.Team;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
@@ -171,6 +173,38 @@ public class ActionUtil
 			renderRequest);
 
 		getMembershipRequest(request);
+	}
+
+	public static void getTeam(ActionRequest actionRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getTeam(request);
+	}
+
+	public static void getTeam(HttpServletRequest request)
+		throws Exception {
+
+		long teamId = ParamUtil.getLong(request, "teamId");
+
+		Team team = null;
+
+		if (teamId > 0) {
+			team = TeamLocalServiceUtil.getTeam(teamId);
+		}
+
+		request.setAttribute(WebKeys.TEAM, team);
+	}
+
+	public static void getTeam(RenderRequest renderRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getTeam(request);
 	}
 
 }

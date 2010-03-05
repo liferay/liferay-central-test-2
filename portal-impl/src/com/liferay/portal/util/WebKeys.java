@@ -350,6 +350,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String TASKS_PROPOSAL = "TASKS_PROPOSAL";
 
+	public static final String TEAM = "TEAM";
+
 	public static final String TITLE = "TITLE";
 
 	public static final String TRANSLATOR_TRANSLATION = "TRANSLATOR_TRANSLATION";

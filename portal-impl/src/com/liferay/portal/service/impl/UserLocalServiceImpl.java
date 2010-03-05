@@ -289,6 +289,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void addTeamUsers(long teamId, long[] userIds)
+		throws SystemException {
+
+		teamPersistence.addUsers(teamId, userIds);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public User addUser(
 			long creatorUserId, long companyId, boolean autoPassword,
 			String password1, String password2, boolean autoScreenName,
@@ -605,6 +613,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void clearTeamUsers(long teamId) throws SystemException {
+		teamPersistence.clearUsers(teamId);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void clearUserGroupUsers(long userGroupId) throws SystemException {
 		userGroupPersistence.clearUsers(userGroupId);
 
@@ -678,6 +692,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws SystemException {
 
 		rolePersistence.removeUser(roleId, userId);
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void deleteTeamUser(long teamId, long userId)
+		throws SystemException {
+
+		teamPersistence.removeUser(teamId, userId);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1207,6 +1229,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return roleLocalService.hasUserRole(userId, companyId, name, inherited);
 	}
 
+	public boolean hasTeamUser(long teamId, long userId)
+		throws SystemException {
+
+		return teamPersistence.containsUser(teamId, userId);
+	}
+
 	public boolean hasUserGroupUser(long userGroupId, long userId)
 		throws SystemException {
 
@@ -1497,6 +1525,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
 		indexer.reindex(userIds);
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void unsetTeamUsers(long teamId, long[] userIds)
+		throws SystemException {
+
+		teamPersistence.removeUsers(teamId, userIds);
 
 		PermissionCacheUtil.clearCache();
 	}

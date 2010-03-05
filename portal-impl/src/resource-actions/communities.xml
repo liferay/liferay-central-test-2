@@ -46,4 +46,26 @@
 			<action-key>UPDATE_DISCUSSION</action-key>
 		</guest-unsupported>
 	</model-resource>
+	<model-resource>
+		<model-name>com.liferay.portal.model.Team</model-name>
+		<portlet-ref>
+			<portlet-name>134</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
+		</supports>
+		<community-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
+		</guest-unsupported>
+	</model-resource>
 </resource-action-mapping>

@@ -22,6 +22,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -345,6 +346,14 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 			ShoppingItemPermission.check(
 				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(Team.class.getName())) {
+			long teamId = GetterUtil.getLong(primKey);
+
+			Team team = teamPersistence.findByPrimaryKey(teamId);
+
+			GroupPermissionUtil.check(
+				permissionChecker, team.getGroupId(), ActionKeys.MANAGE_TEAMS);
 		}
 		else if (name.equals(User.class.getName())) {
 			long userId = GetterUtil.getLong(primKey);

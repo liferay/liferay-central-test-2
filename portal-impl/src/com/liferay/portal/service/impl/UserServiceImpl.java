@@ -43,6 +43,7 @@ import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
+import com.liferay.portal.service.permission.TeamPermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.util.PropsValues;
@@ -131,6 +132,15 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.addRoleUsers(roleId, userIds);
+	}
+
+	public void addTeamUsers(long teamId, long[] userIds)
+		throws PortalException, SystemException {
+
+		TeamPermissionUtil.check(
+			getPermissionChecker(), teamId, ActionKeys.ASSIGN_MEMBERS);
+
+		userLocalService.addTeamUsers(teamId, userIds);
 	}
 
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
@@ -436,6 +446,15 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.unsetRoleUsers(roleId, userIds);
+	}
+
+	public void unsetTeamUsers(long teamId, long[] userIds)
+		throws PortalException, SystemException {
+
+		TeamPermissionUtil.check(
+			getPermissionChecker(), teamId, ActionKeys.ASSIGN_MEMBERS);
+
+		userLocalService.unsetTeamUsers(teamId, userIds);
 	}
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)

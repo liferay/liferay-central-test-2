@@ -1098,6 +1098,45 @@
 				(Users_Roles.userId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.TeamFinder.countByG_N_D">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT Team.teamId) AS COUNT_VALUE
+			FROM
+				Team
+			[$JOIN$]
+			WHERE
+				[$WHERE$]
+				(Team.groupId = ?) AND
+				(lower(Team.name) LIKE ? OR ? IS NULL) AND
+				(lower(Team.description) LIKE ? OR ? IS NULL)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.TeamFinder.findByG_N_D">
+		<![CDATA[
+			SELECT
+				DISTINCT {Team.*}
+			FROM
+				Team
+			[$JOIN$]
+			WHERE
+				[$WHERE$]
+				(Team.groupId = ?) AND
+				(lower(Team.name) LIKE ? OR ? IS NULL) AND
+				(lower(Team.description) LIKE ? OR ? IS NULL)
+			ORDER BY
+				Team.name ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.TeamFinder.joinByUsersTeams">
+		<![CDATA[
+			INNER JOIN
+				Users_Teams ON
+					(Users_Teams.teamId = Team.teamId)
+			WHERE
+				(Users_Teams.userId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.countByUser">
 		<![CDATA[
 			SELECT

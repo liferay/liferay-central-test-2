@@ -1496,6 +1496,46 @@
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
+	<entity name="Team" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="teamId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="groupId" type="long" />
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Relationships -->
+
+		<column name="users" type="Collection" entity="User" mapping-table="Users_Teams" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_N" return-type="Team" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="name" />
+		</finder>
+	</entity>
 	<entity name="Theme" local-service="true" remote-service="true" tx-manager="none" />
 	<entity name="User" uuid="true" local-service="true" remote-service="true">
 
@@ -1549,6 +1589,7 @@
 		<column name="orgs" type="Collection" entity="Organization" mapping-table="Users_Orgs" />
 		<column name="permissions" type="Collection" entity="Permission" mapping-table="Users_Permissions" />
 		<column name="roles" type="Collection" entity="Role" mapping-table="Users_Roles" />
+		<column name="teams" type="Collection" entity="Team" mapping-table="Users_Teams" />
 		<column name="userGroups" type="Collection" entity="UserGroup" mapping-table="Users_UserGroups" />
 
 		<!-- Finder methods -->
@@ -1947,6 +1988,7 @@
 		<exception>DuplicateOrganization</exception>
 		<exception>DuplicatePasswordPolicy</exception>
 		<exception>DuplicateRole</exception>
+		<exception>DuplicateTeam</exception>
 		<exception>DuplicateUserEmailAddress</exception>
 		<exception>DuplicateUserGroup</exception>
 		<exception>DuplicateUserId</exception>
@@ -1999,6 +2041,7 @@
 		<exception>RolePermissions</exception>
 		<exception>OldServiceComponent</exception>
 		<exception>SendPassword</exception>
+		<exception>TeamName</exception>
 		<exception>UserActive</exception>
 		<exception>UserEmailAddress</exception>
 		<exception>UserGroupName</exception>

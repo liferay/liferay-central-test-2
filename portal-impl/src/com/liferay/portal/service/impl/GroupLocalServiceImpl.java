@@ -367,6 +367,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		membershipRequestLocalService.deleteMembershipRequests(
 			group.getGroupId());
 
+		/// Teams
+
+		teamLocalService.deleteTeams(group.getGroupId());
+
 		// Staging
 
 		unscheduleStaging(group);
