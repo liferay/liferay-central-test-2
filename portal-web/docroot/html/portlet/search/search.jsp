@@ -174,11 +174,11 @@ for (int i = 0; i < portlets.size(); i++) {
 			String summary = el.elementText("summary");
 
 			if (portlet.getPortletId().equals(PortletKeys.DOCUMENT_LIBRARY)) {
-				long groupId2 = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_groupId", false));
+				long dlGroupId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_groupId", false));
 				long folderId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_folderId", false));
 				String name = GetterUtil.getString(HttpUtil.getParameter(entryHref, "_20_name", false));
 
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(groupId2, folderId, name);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(dlGroupId, folderId, name);
 
 				entryTitle = fileEntry.getTitle();
 
