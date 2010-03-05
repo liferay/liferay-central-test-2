@@ -76,12 +76,20 @@ public class TemplateProcessor {
 	}
 
 	public String processMax() throws Exception {
+		return processMax(StringPool.BLANK);
+	}
+
+	public String processMax(String classNames) throws Exception {
+		Map<String, String> attributes = new HashMap<String, String>();
+
+		attributes.put("classNames", classNames);
+
 		RuntimeLogic logic = new PortletLogic(
 			_servletContext, _request, _response, _portletId);
 
 		StringBuilder sb = new StringBuilder();
 
-		logic.processContent(sb, new HashMap<String, String>());
+		logic.processContent(sb, attributes);
 
 		return sb.toString();
 	}
