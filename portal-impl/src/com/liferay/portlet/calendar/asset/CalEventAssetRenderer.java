@@ -14,10 +14,18 @@
 
 package com.liferay.portlet.calendar.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -36,6 +44,15 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		return _event.getEventId();
 	}
 
+	public String getDiscussionPath() {
+		if (PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED) {
+			return "edit_event_discussion";
+		}
+		else {
+			return null;
+		}
+	}
+
 	public long getGroupId() {
 		return _event.getGroupId();
 	}
@@ -48,8 +65,51 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		return _event.getTitle();
 	}
 
+	public PortletURL getURLEdit(
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		PortletURL editPortletURL = null;
+
+		if (CalendarPermission.contains(
+				themeDisplay.getPermissionChecker(),
+				themeDisplay.getScopeGroupId(), ActionKeys.ADD_EVENT)) {
+
+			editPortletURL = liferayPortletResponse.createRenderURL(
+				PortletKeys.CALENDAR);
+
+			editPortletURL.setParameter(
+				"struts_action", "/calendar/edit_event");
+			editPortletURL.setParameter(
+				"eventId", String.valueOf(_event.getEventId()));
+		}
+
+		return editPortletURL;
+	}
+
+	public String getURLViewInContext(
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse,
+		String noSuchEntryRedirect) {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return themeDisplay.getPathMain() +
+			"/calendar/find_event?eventId=" + _event.getEventId();
+	}
+
 	public long getUserId() {
 		return _event.getUserId();
+	}
+
+	public boolean isPrintable() {
+		return true;
 	}
 
 	public String render(
@@ -57,7 +117,8 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 			String template)
 		throws Exception {
 
-		if (template.equals(TEMPLATE_FULL_CONTENT)) {
+		if (template.equals(TEMPLATE_ABSTRACT) ||
+			template.equals(TEMPLATE_FULL_CONTENT)) {
 			renderRequest.setAttribute(WebKeys.CALENDAR_EVENT, _event);
 
 			return "/html/portlet/calendar/asset/" + template + ".jsp";

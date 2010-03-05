@@ -18,9 +18,11 @@
 
 <%
 CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
+int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH);
 %>
 
-<%= event.getDescription() %>
+<%= StringUtil.shorten(event.getDescription(), abstractLength) %>
+
 <br>
 <liferay-ui:icon image="../common/calendar" />
 <liferay-ui:message key="start-date" />:
