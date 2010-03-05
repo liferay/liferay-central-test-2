@@ -15,9 +15,6 @@
 %>
 
 .lfr-tags-selector-content {
-	border: solid #999;
-	border-width: 1px 0;
-	padding: 10px 5px 5px;
 	width: 100%;
 }
 
