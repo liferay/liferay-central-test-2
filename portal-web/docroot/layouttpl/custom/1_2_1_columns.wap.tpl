@@ -6,6 +6,7 @@
 			</td>
 		</tr>
 	</table>
+
 	<table class="portlet-layout">
 	<tr>
 		<td class="aui-w50 portlet-column portlet-column-first" id="column-2">
@@ -16,6 +17,7 @@
 		</td>
 	</tr>
 	</table>
+
 	<table class="portlet-layout">
 	<tr>
 		<td class="portlet-column portlet-column-only" id="column-4">
