@@ -239,7 +239,7 @@
 
 					<%
 					try {
-						String state = WorkflowInstanceLinkLocalServiceUtil.getState(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getResourcePrimKey());
+						String state = WorkflowInstanceLinkLocalServiceUtil.getState(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getId());
 					%>
 
 					<br />
@@ -262,7 +262,7 @@
 
 					<br /><br />
 
-					<c:if test="<%= !article.isApproved() && !WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getResourcePrimKey()) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
+					<c:if test="<%= !article.isApproved() && !WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getId()) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
 						<aui:button onClick='<%= renderResponse.getNamespace() + "approveArticle();" %>' value="approve" />
 					</c:if>
 

@@ -574,7 +574,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 								showSaveAndApproveButton = true;
 							}
 						}
-						else if (!article.isApproved() && !WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getResourcePrimKey())) {
+						else if (!article.isApproved() && !WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getId())) {
 							showSaveAndApproveButton = true;
 						}
 					}
