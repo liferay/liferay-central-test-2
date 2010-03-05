@@ -35,11 +35,13 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 %>
 
 <%!
-private boolean isWorkflowTaskAssignedToUser(WorkflowTask workflowTask, User user) {
+private boolean _isWorkflowTaskAssignedToUser(WorkflowTask workflowTask, User user) {
 	if ((workflowTask.getAssigneeUserId() == user.getUserId()) ||
 		(Validator.equals(workflowTask.getAssigneeEmailAddress(), user.getEmailAddress()))) {
+
 		return true;
 	}
+
 	return false;
 }
 %>

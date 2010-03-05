@@ -166,7 +166,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<br />
 
 	<aui:button-row>
-		<c:if test="<%= !workflowTask.isCompleted() && isWorkflowTaskAssignedToUser(workflowTask, user) %>">
+		<c:if test="<%= !workflowTask.isCompleted() && _isWorkflowTaskAssignedToUser(workflowTask, user) %>">
 
 			<%
 			List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowTask.getWorkflowTaskId());

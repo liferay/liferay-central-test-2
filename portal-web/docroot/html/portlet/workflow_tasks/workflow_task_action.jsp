@@ -23,7 +23,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getParameter("workflowTask");
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= !workflowTask.isCompleted() && isWorkflowTaskAssignedToUser(workflowTask, user) %>">
+	<c:if test="<%= !workflowTask.isCompleted() && _isWorkflowTaskAssignedToUser(workflowTask, user) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -62,7 +62,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getParameter("workflowTask");
 
 	</c:if>
 
-	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) && !workflowTask.isCompleted() && !isWorkflowTaskAssignedToUser(workflowTask, user) %>">
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) && !workflowTask.isCompleted() && !_isWorkflowTaskAssignedToUser(workflowTask, user) %>">
 		<portlet:actionURL var="editURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ASSIGN %>" />
