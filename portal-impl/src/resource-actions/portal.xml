@@ -318,6 +318,48 @@
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
+		<model-name>com.liferay.portal.model.LayoutPrototype</model-name>
+		<portlet-ref>
+			<portlet-name>134</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
+		</supports>
+		<community-defaults>
+			<action-key>VIEW</action-key>
+		</community-defaults>
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+		</guest-unsupported>
+	</model-resource>
+	<model-resource>
+		<model-name>com.liferay.portal.model.LayoutSetPrototype</model-name>
+		<portlet-ref>
+			<portlet-name>134</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
+		</supports>
+		<community-defaults>
+			<action-key>VIEW</action-key>
+		</community-defaults>
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+		</guest-unsupported>
+	</model-resource>
+	<model-resource>
 		<model-name>com.liferay.portal.model.Organization</model-name>
 		<portlet-ref>
 			<portlet-name>126</portlet-name>
