@@ -90,7 +90,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 
 		List<Portlet> portlets = layoutTypePortlet.getAllPortlets(columnId);
 
-		String columnCssClass = "lfr-portlet-column";
+		String columnCssClass = "portlet-dropzone";
 
 		if (portlets.size() == 0) {
 			columnCssClass += " empty";
