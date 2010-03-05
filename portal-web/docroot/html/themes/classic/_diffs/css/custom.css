@@ -274,7 +274,7 @@ body.lfr-has-sidebar {
 	padding-left: 0;
 }
 
-.lfr-has-sidebar #portlet-layout {
+.lfr-has-sidebar #main-content {
 	padding-left: 220px;
 	width: auto;
 }

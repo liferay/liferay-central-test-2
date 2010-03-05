@@ -173,10 +173,10 @@ body.live-view {
 #wrapper {
 }
 
-#portlet-layout {
+#main-content {
 }
 
-.portal-iframe #portlet-layout {
+.portal-iframe #main-content {
 	width: 100%;
 }
 

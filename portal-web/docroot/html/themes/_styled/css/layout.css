@@ -50,7 +50,7 @@
 	padding: 50px;
 }
 
-#portlet-layout.dragging .portlet-column {
+#main-content.dragging .portlet-column {
 	border: 3px double #828F95;
 	height: 100px;
 	min-height: 100px;

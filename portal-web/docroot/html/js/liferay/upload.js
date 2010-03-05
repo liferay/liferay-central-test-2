@@ -583,7 +583,7 @@ AUI().add(
 					instance._fallbackIframe = instance._fallbackContainer.all('iframe[id$=-iframe]');
 
 					if (instance._fallbackIframe.size()) {
-						var portletLayout = instance._fallbackIframe.one('#portlet-layout');
+						var portletLayout = instance._fallbackIframe.one('#main-content');
 
 						if (portletLayout) {
 							var frameHeight = portletLayout.get('offsetHeight') || 250;
