@@ -14,8 +14,8 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 
 import org.apache.velocity.runtime.resource.Resource;
 
@@ -34,7 +34,13 @@ public class LiferayResourceCacheUtil {
 	}
 
 	public static Resource get(String key) {
-		return (Resource)_cache.get(key);
+		Object resource = _cache.get(key);
+
+		if ((resource != null) && (resource instanceof Resource)) {
+			return (Resource)resource;
+		}
+
+		return null;
 	}
 
 	public static void put(String key, Resource resource) {
@@ -45,6 +51,6 @@ public class LiferayResourceCacheUtil {
 		_cache.remove(key);
 	}
 
-	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
+	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 
 }

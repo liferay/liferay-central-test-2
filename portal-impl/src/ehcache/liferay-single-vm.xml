@@ -17,11 +17,4 @@
 		eternal="false"
 		overflowToDisk="false"
 	/>
-	<cache
-		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
-		maxElementsInMemory="10000"
-		eternal="false"
-        timeToIdleSeconds="600"
-		overflowToDisk="false"
-	/>
 </ehcache>

@@ -86,6 +86,10 @@ public class VelocityEngineImpl implements VelocityEngine {
 			StringResourceLoader.class.getName());
 
 		extendedProperties.setProperty(
+			"string." + _RESOURCE_LOADER + ".repository.class",
+			StringResourceRepositoryImpl.class.getName());
+
+		extendedProperties.setProperty(
 			"servlet." + _RESOURCE_LOADER + ".class",
 			LiferayResourceLoader.class.getName());
 

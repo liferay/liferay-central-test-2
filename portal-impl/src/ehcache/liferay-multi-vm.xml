@@ -41,6 +41,13 @@
 		overflowToDisk="false"
 	/>
 	<cache
+		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="3600"
+		overflowToDisk="false"
+	/>
+	<cache
 		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
 		maxElementsInMemory="10000"
 		eternal="false"

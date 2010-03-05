@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.journal.model;
 
-import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.velocity.LiferayResourceCacheUtil;
@@ -50,9 +49,7 @@ public class JournalTemplateListener
 
 		// Velocity cache
 
-		LiferayResourceCacheUtil.clear();
-
-		VelocityEngineUtil.flushTemplate(
+		LiferayResourceCacheUtil.remove(
 			template.getCompanyId() + template.getGroupId() +
 				template.getTemplateId());
 	}
