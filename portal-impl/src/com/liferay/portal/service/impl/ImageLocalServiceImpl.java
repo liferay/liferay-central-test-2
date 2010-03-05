@@ -16,8 +16,11 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.NoSuchImageException;
+import com.liferay.portal.image.DatabaseHook;
 import com.liferay.portal.image.Hook;
 import com.liferay.portal.image.HookFactory;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.image.ImageBag;
@@ -29,8 +32,11 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
+import com.liferay.portal.model.impl.ImageModelImpl;
 import com.liferay.portal.service.base.ImageLocalServiceBaseImpl;
+import com.liferay.portal.service.persistence.ImagePersistenceImpl;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.awt.image.RenderedImage;
 
@@ -137,8 +143,23 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	public void deleteImage(long imageId)
 		throws PortalException, SystemException {
 
-		try {
-			if (imageId > 0) {
+		if (imageId <= 0) {
+			return;
+		}
+
+		if (PropsValues.IMAGE_HOOK_IMPL.equals(DatabaseHook.class.getName()) &&
+			(imagePersistence.getListeners().length == 0)) {
+
+			runSQL("DELETE FROM Image WHERE ImageId = " + imageId);
+
+			FinderCacheUtil.clearCache(
+				ImagePersistenceImpl.FINDER_CLASS_NAME_LIST);
+
+			EntityCacheUtil.removeResult(
+				ImageModelImpl.ENTITY_CACHE_ENABLED, ImageImpl.class, imageId);
+		}
+		else {
+			try {
 				Image image = getImage(imageId);
 
 				imagePersistence.remove(imageId);
@@ -147,8 +168,8 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 				hook.deleteImage(image);
 			}
-		}
-		catch (NoSuchImageException nsie) {
+			catch (NoSuchImageException nsie) {
+			}
 		}
 	}
 
