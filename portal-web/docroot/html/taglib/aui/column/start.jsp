@@ -33,4 +33,4 @@ if (Validator.isNotNull(cssClass)) {
 %>
 
 <div class="aui-column <%= (columnWidth > 0) ? "aui-w" + columnWidth : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-column-first" : StringPool.BLANK %> <%= last ? "aui-column-last" : StringPool.BLANK %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
-	<div class="aui-column-content <%= cssClasses %>">
+	<div class="aui-column-content <%= first ? "aui-column-content-first" : StringPool.BLANK %> <%= last ? "aui-column-content-last" : StringPool.BLANK %> <%= cssClasses %>">
