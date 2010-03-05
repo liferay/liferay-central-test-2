@@ -119,6 +119,7 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 
 		if (template.equals(TEMPLATE_ABSTRACT) ||
 			template.equals(TEMPLATE_FULL_CONTENT)) {
+
 			renderRequest.setAttribute(WebKeys.CALENDAR_EVENT, _event);
 
 			return "/html/portlet/calendar/asset/" + template + ".jsp";

@@ -21,11 +21,10 @@ CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH);
 %>
 
-<%= StringUtil.shorten(event.getDescription(), abstractLength) %>
+<%= StringUtil.shorten(event.getDescription(), abstractLength) %><br />
 
-<br>
-<liferay-ui:icon image="../common/calendar" />
-<liferay-ui:message key="start-date" />:
+<liferay-ui:icon image="../common/calendar" /> <liferay-ui:message key="start-date" />:
+
 <c:choose>
 	<c:when test="<%= event.isTimeZoneSensitive() %>">
 		<%= dateFormatDate.format(Time.getDate(event.getStartDate(), timeZone)) %>
