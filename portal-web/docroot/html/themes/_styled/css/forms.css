@@ -13,7 +13,7 @@ fieldset {
 	position: relative;
 }
 
-.aui-fieldset .aui-field-content, .aui-field-row, .aui-button-holder {
+.aui-fieldset .aui-field-content, .aui-field-row, .aui-button-holder, .aui-field-wrapper-content {
 	margin: 10px 0;
 }
 
