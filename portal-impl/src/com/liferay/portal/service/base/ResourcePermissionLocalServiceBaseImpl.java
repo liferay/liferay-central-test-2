@@ -89,6 +89,8 @@ import com.liferay.portal.service.RoleService;
 import com.liferay.portal.service.ServiceComponentLocalService;
 import com.liferay.portal.service.ShardLocalService;
 import com.liferay.portal.service.SubscriptionLocalService;
+import com.liferay.portal.service.TeamLocalService;
+import com.liferay.portal.service.TeamService;
 import com.liferay.portal.service.ThemeLocalService;
 import com.liferay.portal.service.ThemeService;
 import com.liferay.portal.service.UserGroupGroupRoleLocalService;
@@ -157,6 +159,8 @@ import com.liferay.portal.service.persistence.RolePersistence;
 import com.liferay.portal.service.persistence.ServiceComponentPersistence;
 import com.liferay.portal.service.persistence.ShardPersistence;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
+import com.liferay.portal.service.persistence.TeamFinder;
+import com.liferay.portal.service.persistence.TeamPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupGroupRolePersistence;
@@ -1220,6 +1224,38 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 		this.subscriptionPersistence = subscriptionPersistence;
 	}
 
+	public TeamLocalService getTeamLocalService() {
+		return teamLocalService;
+	}
+
+	public void setTeamLocalService(TeamLocalService teamLocalService) {
+		this.teamLocalService = teamLocalService;
+	}
+
+	public TeamService getTeamService() {
+		return teamService;
+	}
+
+	public void setTeamService(TeamService teamService) {
+		this.teamService = teamService;
+	}
+
+	public TeamPersistence getTeamPersistence() {
+		return teamPersistence;
+	}
+
+	public void setTeamPersistence(TeamPersistence teamPersistence) {
+		this.teamPersistence = teamPersistence;
+	}
+
+	public TeamFinder getTeamFinder() {
+		return teamFinder;
+	}
+
+	public void setTeamFinder(TeamFinder teamFinder) {
+		this.teamFinder = teamFinder;
+	}
+
 	public ThemeLocalService getThemeLocalService() {
 		return themeLocalService;
 	}
@@ -1753,6 +1789,14 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 	protected SubscriptionLocalService subscriptionLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence")
 	protected SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.TeamLocalService")
+	protected TeamLocalService teamLocalService;
+	@BeanReference(name = "com.liferay.portal.service.TeamService")
+	protected TeamService teamService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.TeamPersistence")
+	protected TeamPersistence teamPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.TeamFinder")
+	protected TeamFinder teamFinder;
 	@BeanReference(name = "com.liferay.portal.service.ThemeLocalService")
 	protected ThemeLocalService themeLocalService;
 	@BeanReference(name = "com.liferay.portal.service.ThemeService")

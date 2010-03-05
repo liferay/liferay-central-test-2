@@ -297,6 +297,15 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.Portal, "Team",
+	{
+		addTeam: true,
+		deleteTeam: true,
+		updateTeam: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Theme",
 	{
 		getThemes: true,
@@ -311,6 +320,7 @@ Liferay.Service.registerClass(
 		addOrganizationUsers: true,
 		addPasswordPolicyUsers: true,
 		addRoleUsers: true,
+		addTeamUsers: true,
 		addUserGroupUsers: true,
 		addUser: true,
 		deletePortrait: true,
@@ -333,6 +343,7 @@ Liferay.Service.registerClass(
 		unsetOrganizationUsers: true,
 		unsetPasswordPolicyUsers: true,
 		unsetRoleUsers: true,
+		unsetTeamUsers: true,
 		unsetUserGroupUsers: true,
 		updateActive: true,
 		updateAgreedToTermsOfUse: true,

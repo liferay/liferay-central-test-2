@@ -62,6 +62,12 @@ public class UserServiceUtil {
 		getService().addRoleUsers(roleId, userIds);
 	}
 
+	public static void addTeamUsers(long teamId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addTeamUsers(teamId, userIds);
+	}
+
 	public static void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -243,6 +249,12 @@ public class UserServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().unsetRoleUsers(roleId, userIds);
+	}
+
+	public static void unsetTeamUsers(long teamId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().unsetTeamUsers(teamId, userIds);
 	}
 
 	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)

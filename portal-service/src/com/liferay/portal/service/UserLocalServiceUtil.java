@@ -141,6 +141,11 @@ public class UserLocalServiceUtil {
 		getService().addRoleUsers(roleId, userIds);
 	}
 
+	public static void addTeamUsers(long teamId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addTeamUsers(teamId, userIds);
+	}
+
 	public static com.liferay.portal.model.User addUser(long creatorUserId,
 		long companyId, boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
@@ -256,6 +261,11 @@ public class UserLocalServiceUtil {
 		getService().clearOrganizationUsers(organizationId);
 	}
 
+	public static void clearTeamUsers(long teamId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().clearTeamUsers(teamId);
+	}
+
 	public static void clearUserGroupUsers(long userGroupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().clearUserGroupUsers(userGroupId);
@@ -282,6 +292,11 @@ public class UserLocalServiceUtil {
 	public static void deleteRoleUser(long roleId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRoleUser(roleId, userId);
+	}
+
+	public static void deleteTeamUser(long teamId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteTeamUser(teamId, userId);
 	}
 
 	public static java.lang.String encryptUserId(java.lang.String name)
@@ -571,6 +586,11 @@ public class UserLocalServiceUtil {
 		return getService().hasRoleUser(companyId, name, userId, inherited);
 	}
 
+	public static boolean hasTeamUser(long teamId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasTeamUser(teamId, userId);
+	}
+
 	public static boolean hasUserGroupUser(long userGroupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().hasUserGroupUser(userGroupId, userId);
@@ -704,6 +724,11 @@ public class UserLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().unsetRoleUsers(roleId, userIds);
+	}
+
+	public static void unsetTeamUsers(long teamId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().unsetTeamUsers(teamId, userIds);
 	}
 
 	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)

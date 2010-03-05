@@ -573,6 +573,17 @@
 		<field name="classPK" type="long" />
 		<field name="frequency" type="String" />
 	</model>
+	<model name="com.liferay.portal.model.Team">
+		<field name="teamId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="groupId" type="long" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+	</model>
 	<model name="com.liferay.portal.model.User">
 		<default-hints>
 			<hint name="display-width">150</hint>

@@ -538,6 +538,62 @@ public interface UserPersistence extends BasePersistence<User> {
 		java.util.List<com.liferay.portal.model.Role> roles)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Team> getTeams(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Team> getTeams(long pk,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Team> getTeams(long pk,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int getTeamsSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public boolean containsTeam(long pk, long teamPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public boolean containsTeams(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void addTeam(long pk, long teamPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void addTeam(long pk, com.liferay.portal.model.Team team)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void addTeams(long pk, long[] teamPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void addTeams(long pk,
+		java.util.List<com.liferay.portal.model.Team> teams)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void clearTeams(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeTeam(long pk, long teamPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeTeam(long pk, com.liferay.portal.model.Team team)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeTeams(long pk, long[] teamPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeTeams(long pk,
+		java.util.List<com.liferay.portal.model.Team> teams)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void setTeams(long pk, long[] teamPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void setTeams(long pk,
+		java.util.List<com.liferay.portal.model.Team> teams)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
 		long pk) throws com.liferay.portal.kernel.exception.SystemException;
 

@@ -60,6 +60,12 @@ public class UserServiceWrapper implements UserService {
 		_userService.addRoleUsers(roleId, userIds);
 	}
 
+	public void addTeamUsers(long teamId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_userService.addTeamUsers(teamId, userIds);
+	}
+
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -237,6 +243,12 @@ public class UserServiceWrapper implements UserService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_userService.unsetRoleUsers(roleId, userIds);
+	}
+
+	public void unsetTeamUsers(long teamId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_userService.unsetTeamUsers(teamId, userIds);
 	}
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)

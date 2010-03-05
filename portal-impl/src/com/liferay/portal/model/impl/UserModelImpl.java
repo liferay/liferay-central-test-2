@@ -193,6 +193,14 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	public static final String MAPPING_TABLE_USERS_ROLES_SQL_CREATE = "create table Users_Roles (userId LONG not null,roleId LONG not null,primary key (userId, roleId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Roles"), true);
+	public static final String MAPPING_TABLE_USERS_TEAMS_NAME = "Users_Teams";
+	public static final Object[][] MAPPING_TABLE_USERS_TEAMS_COLUMNS = {
+			{ "userId", new Integer(Types.BIGINT) },
+			{ "teamId", new Integer(Types.BIGINT) }
+		};
+	public static final String MAPPING_TABLE_USERS_TEAMS_SQL_CREATE = "create table Users_Teams (userId LONG not null,teamId LONG not null,primary key (userId, teamId))";
+	public static final boolean FINDER_CACHE_ENABLED_USERS_TEAMS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.finder.cache.enabled.Users_Teams"), true);
 	public static final String MAPPING_TABLE_USERS_USERGROUPS_NAME = "Users_UserGroups";
 	public static final Object[][] MAPPING_TABLE_USERS_USERGROUPS_COLUMNS = {
 			{ "userGroupId", new Integer(Types.BIGINT) },

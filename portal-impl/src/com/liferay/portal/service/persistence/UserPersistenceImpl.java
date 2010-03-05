@@ -334,6 +334,16 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		}
 
 		try {
+			clearTeams.clear(user.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+
+		try {
 			clearUserGroups.clear(user.getPrimaryKey());
 		}
 		catch (Exception e) {
@@ -4320,6 +4330,335 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		}
 	}
 
+	public List<com.liferay.portal.model.Team> getTeams(long pk)
+		throws SystemException {
+		return getTeams(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List<com.liferay.portal.model.Team> getTeams(long pk, int start,
+		int end) throws SystemException {
+		return getTeams(pk, start, end, null);
+	}
+
+	public static final FinderPath FINDER_PATH_GET_TEAMS = new FinderPath(com.liferay.portal.model.impl.TeamModelImpl.ENTITY_CACHE_ENABLED,
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_TEAMS,
+			UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME, "getTeams",
+			new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+
+	public List<com.liferay.portal.model.Team> getTeams(long pk, int start,
+		int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(pk), String.valueOf(start), String.valueOf(end),
+				String.valueOf(obc)
+			};
+
+		List<com.liferay.portal.model.Team> list = (List<com.liferay.portal.model.Team>)FinderCacheUtil.getResult(FINDER_PATH_GET_TEAMS,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				String sql = null;
+
+				if (obc != null) {
+					sql = _SQL_GETTEAMS.concat(ORDER_BY_CLAUSE)
+									   .concat(obc.getOrderBy());
+				}
+
+				else {
+					sql = _SQL_GETTEAMS.concat(com.liferay.portal.model.impl.TeamModelImpl.ORDER_BY_SQL);
+				}
+
+				SQLQuery q = session.createSQLQuery(sql);
+
+				q.addEntity("Team", com.liferay.portal.model.impl.TeamImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(pk);
+
+				list = (List<com.liferay.portal.model.Team>)QueryUtil.list(q,
+						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<com.liferay.portal.model.Team>();
+				}
+
+				teamPersistence.cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_TEAMS, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public static final FinderPath FINDER_PATH_GET_TEAMS_SIZE = new FinderPath(com.liferay.portal.model.impl.TeamModelImpl.ENTITY_CACHE_ENABLED,
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_TEAMS,
+			UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME, "getTeamsSize",
+			new String[] { Long.class.getName() });
+
+	public int getTeamsSize(long pk) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(pk) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_TEAMS_SIZE,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				SQLQuery q = session.createSQLQuery(_SQL_GETTEAMSSIZE);
+
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(pk);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_TEAMS_SIZE,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public static final FinderPath FINDER_PATH_CONTAINS_TEAM = new FinderPath(com.liferay.portal.model.impl.TeamModelImpl.ENTITY_CACHE_ENABLED,
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_TEAMS,
+			UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME, "containsTeam",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	public boolean containsTeam(long pk, long teamPK) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(pk), new Long(teamPK) };
+
+		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_TEAM,
+				finderArgs, this);
+
+		if (value == null) {
+			try {
+				value = Boolean.valueOf(containsTeam.contains(pk, teamPK));
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_TEAM,
+					finderArgs, value);
+			}
+		}
+
+		return value.booleanValue();
+	}
+
+	public boolean containsTeams(long pk) throws SystemException {
+		if (getTeamsSize(pk) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void addTeam(long pk, long teamPK) throws SystemException {
+		try {
+			addTeam.add(pk, teamPK);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
+	public void addTeam(long pk, com.liferay.portal.model.Team team)
+		throws SystemException {
+		try {
+			addTeam.add(pk, team.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
+	public void addTeams(long pk, long[] teamPKs) throws SystemException {
+		try {
+			for (long teamPK : teamPKs) {
+				addTeam.add(pk, teamPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
+	public void addTeams(long pk, List<com.liferay.portal.model.Team> teams)
+		throws SystemException {
+		try {
+			for (com.liferay.portal.model.Team team : teams) {
+				addTeam.add(pk, team.getPrimaryKey());
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
+	public void clearTeams(long pk) throws SystemException {
+		try {
+			clearTeams.clear(pk);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
+	public void removeTeam(long pk, long teamPK) throws SystemException {
+		try {
+			removeTeam.remove(pk, teamPK);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
+	public void removeTeam(long pk, com.liferay.portal.model.Team team)
+		throws SystemException {
+		try {
+			removeTeam.remove(pk, team.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
+	public void removeTeams(long pk, long[] teamPKs) throws SystemException {
+		try {
+			for (long teamPK : teamPKs) {
+				removeTeam.remove(pk, teamPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
+	public void removeTeams(long pk, List<com.liferay.portal.model.Team> teams)
+		throws SystemException {
+		try {
+			for (com.liferay.portal.model.Team team : teams) {
+				removeTeam.remove(pk, team.getPrimaryKey());
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
+	public void setTeams(long pk, long[] teamPKs) throws SystemException {
+		try {
+			Set<Long> teamPKSet = SetUtil.fromArray(teamPKs);
+
+			List<com.liferay.portal.model.Team> teams = getTeams(pk);
+
+			for (com.liferay.portal.model.Team team : teams) {
+				if (!teamPKSet.contains(team.getPrimaryKey())) {
+					removeTeam.remove(pk, team.getPrimaryKey());
+				}
+				else {
+					teamPKSet.remove(team.getPrimaryKey());
+				}
+			}
+
+			for (Long teamPK : teamPKSet) {
+				addTeam.add(pk, teamPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
+	public void setTeams(long pk, List<com.liferay.portal.model.Team> teams)
+		throws SystemException {
+		try {
+			long[] teamPKs = new long[teams.size()];
+
+			for (int i = 0; i < teams.size(); i++) {
+				com.liferay.portal.model.Team team = teams.get(i);
+
+				teamPKs[i] = team.getPrimaryKey();
+			}
+
+			setTeams(pk, teamPKs);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME);
+		}
+	}
+
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk)
 		throws SystemException {
 		return getUserGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -4706,6 +5045,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		clearRoles = new ClearRoles(this);
 		removeRole = new RemoveRole(this);
 
+		containsTeam = new ContainsTeam(this);
+
+		addTeam = new AddTeam(this);
+		clearTeams = new ClearTeams(this);
+		removeTeam = new RemoveTeam(this);
+
 		containsUserGroup = new ContainsUserGroup(this);
 
 		addUserGroup = new AddUserGroup(this);
@@ -4793,6 +5138,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	protected com.liferay.portal.service.persistence.ShardPersistence shardPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence")
 	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.TeamPersistence")
+	protected com.liferay.portal.service.persistence.TeamPersistence teamPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence")
@@ -4853,6 +5200,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	protected AddRole addRole;
 	protected ClearRoles clearRoles;
 	protected RemoveRole removeRole;
+	protected ContainsTeam containsTeam;
+	protected AddTeam addTeam;
+	protected ClearTeams clearTeams;
+	protected RemoveTeam removeTeam;
 	protected ContainsUserGroup containsUserGroup;
 	protected AddUserGroup addUserGroup;
 	protected ClearUserGroups clearUserGroups;
@@ -5530,6 +5881,169 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		private UserPersistenceImpl _persistenceImpl;
 	}
 
+	protected class ContainsTeam {
+		protected ContainsTeam(UserPersistenceImpl persistenceImpl) {
+			super();
+
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSTEAM,
+					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
+		}
+
+		protected boolean contains(long userId, long teamId) {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
+						new Long(userId), new Long(teamId)
+					});
+
+			if (results.size() > 0) {
+				Integer count = results.get(0);
+
+				if (count.intValue() > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
+	}
+
+	protected class AddTeam {
+		protected AddTeam(UserPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"INSERT INTO Users_Teams (userId, teamId) VALUES (?, ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void add(long userId, long teamId) throws SystemException {
+			if (!_persistenceImpl.containsTeam.contains(userId, teamId)) {
+				ModelListener<com.liferay.portal.model.Team>[] teamListeners = teamPersistence.getListeners();
+
+				for (ModelListener<User> listener : listeners) {
+					listener.onBeforeAddAssociation(userId,
+						com.liferay.portal.model.Team.class.getName(), teamId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.Team> listener : teamListeners) {
+					listener.onBeforeAddAssociation(teamId,
+						User.class.getName(), userId);
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(userId), new Long(teamId)
+					});
+
+				for (ModelListener<User> listener : listeners) {
+					listener.onAfterAddAssociation(userId,
+						com.liferay.portal.model.Team.class.getName(), teamId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.Team> listener : teamListeners) {
+					listener.onAfterAddAssociation(teamId,
+						User.class.getName(), userId);
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private UserPersistenceImpl _persistenceImpl;
+	}
+
+	protected class ClearTeams {
+		protected ClearTeams(UserPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Users_Teams WHERE userId = ?",
+					new int[] { Types.BIGINT });
+		}
+
+		protected void clear(long userId) throws SystemException {
+			ModelListener<com.liferay.portal.model.Team>[] teamListeners = teamPersistence.getListeners();
+
+			List<com.liferay.portal.model.Team> teams = null;
+
+			if ((listeners.length > 0) || (teamListeners.length > 0)) {
+				teams = getTeams(userId);
+
+				for (com.liferay.portal.model.Team team : teams) {
+					for (ModelListener<User> listener : listeners) {
+						listener.onBeforeRemoveAssociation(userId,
+							com.liferay.portal.model.Team.class.getName(),
+							team.getPrimaryKey());
+					}
+
+					for (ModelListener<com.liferay.portal.model.Team> listener : teamListeners) {
+						listener.onBeforeRemoveAssociation(team.getPrimaryKey(),
+							User.class.getName(), userId);
+					}
+				}
+			}
+
+			_sqlUpdate.update(new Object[] { new Long(userId) });
+
+			if ((listeners.length > 0) || (teamListeners.length > 0)) {
+				for (com.liferay.portal.model.Team team : teams) {
+					for (ModelListener<User> listener : listeners) {
+						listener.onAfterRemoveAssociation(userId,
+							com.liferay.portal.model.Team.class.getName(),
+							team.getPrimaryKey());
+					}
+
+					for (ModelListener<com.liferay.portal.model.Team> listener : teamListeners) {
+						listener.onAfterRemoveAssociation(team.getPrimaryKey(),
+							User.class.getName(), userId);
+					}
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+	}
+
+	protected class RemoveTeam {
+		protected RemoveTeam(UserPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Users_Teams WHERE userId = ? AND teamId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void remove(long userId, long teamId)
+			throws SystemException {
+			if (_persistenceImpl.containsTeam.contains(userId, teamId)) {
+				ModelListener<com.liferay.portal.model.Team>[] teamListeners = teamPersistence.getListeners();
+
+				for (ModelListener<User> listener : listeners) {
+					listener.onBeforeRemoveAssociation(userId,
+						com.liferay.portal.model.Team.class.getName(), teamId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.Team> listener : teamListeners) {
+					listener.onBeforeRemoveAssociation(teamId,
+						User.class.getName(), userId);
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(userId), new Long(teamId)
+					});
+
+				for (ModelListener<User> listener : listeners) {
+					listener.onAfterRemoveAssociation(userId,
+						com.liferay.portal.model.Team.class.getName(), teamId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.Team> listener : teamListeners) {
+					listener.onAfterRemoveAssociation(teamId,
+						User.class.getName(), userId);
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private UserPersistenceImpl _persistenceImpl;
+	}
+
 	protected class ContainsUserGroup {
 		protected ContainsUserGroup(UserPersistenceImpl persistenceImpl) {
 			super();
@@ -5717,6 +6231,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	private static final String _SQL_GETROLES = "SELECT {Role_.*} FROM Role_ INNER JOIN Users_Roles ON (Users_Roles.roleId = Role_.roleId) WHERE (Users_Roles.userId = ?)";
 	private static final String _SQL_GETROLESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Roles WHERE userId = ?";
 	private static final String _SQL_CONTAINSROLE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Roles WHERE userId = ? AND roleId = ?";
+	private static final String _SQL_GETTEAMS = "SELECT {Team.*} FROM Team INNER JOIN Users_Teams ON (Users_Teams.teamId = Team.teamId) WHERE (Users_Teams.userId = ?)";
+	private static final String _SQL_GETTEAMSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Teams WHERE userId = ?";
+	private static final String _SQL_CONTAINSTEAM = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Teams WHERE userId = ? AND teamId = ?";
 	private static final String _SQL_GETUSERGROUPS = "SELECT {UserGroup.*} FROM UserGroup INNER JOIN Users_UserGroups ON (Users_UserGroups.userGroupId = UserGroup.userGroupId) WHERE (Users_UserGroups.userId = ?)";
 	private static final String _SQL_GETUSERGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userId = ?";
 	private static final String _SQL_CONTAINSUSERGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userId = ? AND userGroupId = ?";

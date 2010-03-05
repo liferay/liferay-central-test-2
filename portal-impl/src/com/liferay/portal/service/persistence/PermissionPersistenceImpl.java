@@ -2136,6 +2136,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	protected com.liferay.portal.service.persistence.ShardPersistence shardPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence")
 	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.TeamPersistence")
+	protected com.liferay.portal.service.persistence.TeamPersistence teamPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence")

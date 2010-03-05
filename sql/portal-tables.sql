@@ -1531,6 +1531,18 @@ create table TasksReview (
 	rejected BOOLEAN
 );
 
+create table Team (
+	teamId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	groupId LONG,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null
+);
+
 create table User_ (
 	uuid_ VARCHAR(75) null,
 	userId LONG not null primary key,
@@ -1622,6 +1634,12 @@ create table Users_Roles (
 	userId LONG not null,
 	roleId LONG not null,
 	primary key (userId, roleId)
+);
+
+create table Users_Teams (
+	userId LONG not null,
+	teamId LONG not null,
+	primary key (userId, teamId)
 );
 
 create table Users_UserGroups (

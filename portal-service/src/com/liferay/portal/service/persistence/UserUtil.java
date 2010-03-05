@@ -874,6 +874,97 @@ public class UserUtil {
 		getPersistence().setRoles(pk, roles);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Team> getTeams(
+		long pk) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getTeams(pk);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Team> getTeams(
+		long pk, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getTeams(pk, start, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Team> getTeams(
+		long pk, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getTeams(pk, start, end, obc);
+	}
+
+	public static int getTeamsSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getTeamsSize(pk);
+	}
+
+	public static boolean containsTeam(long pk, long teamPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().containsTeam(pk, teamPK);
+	}
+
+	public static boolean containsTeams(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().containsTeams(pk);
+	}
+
+	public static void addTeam(long pk, long teamPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addTeam(pk, teamPK);
+	}
+
+	public static void addTeam(long pk, com.liferay.portal.model.Team team)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addTeam(pk, team);
+	}
+
+	public static void addTeams(long pk, long[] teamPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addTeams(pk, teamPKs);
+	}
+
+	public static void addTeams(long pk,
+		java.util.List<com.liferay.portal.model.Team> teams)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addTeams(pk, teams);
+	}
+
+	public static void clearTeams(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().clearTeams(pk);
+	}
+
+	public static void removeTeam(long pk, long teamPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeTeam(pk, teamPK);
+	}
+
+	public static void removeTeam(long pk, com.liferay.portal.model.Team team)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeTeam(pk, team);
+	}
+
+	public static void removeTeams(long pk, long[] teamPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeTeams(pk, teamPKs);
+	}
+
+	public static void removeTeams(long pk,
+		java.util.List<com.liferay.portal.model.Team> teams)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeTeams(pk, teams);
+	}
+
+	public static void setTeams(long pk, long[] teamPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().setTeams(pk, teamPKs);
+	}
+
+	public static void setTeams(long pk,
+		java.util.List<com.liferay.portal.model.Team> teams)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().setTeams(pk, teams);
+	}
+
 	public static java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
 		long pk) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().getUserGroups(pk);

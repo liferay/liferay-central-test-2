@@ -116,6 +116,10 @@
 	<bean id="com.liferay.portal.service.persistence.ShardPersistence" class="com.liferay.portal.service.persistence.ShardPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.SubscriptionLocalService" class="com.liferay.portal.service.impl.SubscriptionLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistence" class="com.liferay.portal.service.persistence.SubscriptionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.TeamLocalService" class="com.liferay.portal.service.impl.TeamLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.TeamService" class="com.liferay.portal.service.impl.TeamServiceImpl" />
+	<bean id="com.liferay.portal.service.persistence.TeamPersistence" class="com.liferay.portal.service.persistence.TeamPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.TeamFinder" class="com.liferay.portal.service.persistence.TeamFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.ThemeLocalService" class="com.liferay.portal.service.impl.ThemeLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.ThemeService" class="com.liferay.portal.service.impl.ThemeServiceImpl" />
 	<bean id="com.liferay.portal.service.UserLocalService" class="com.liferay.portal.service.impl.UserLocalServiceImpl" />

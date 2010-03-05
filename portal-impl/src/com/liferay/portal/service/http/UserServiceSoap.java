@@ -119,6 +119,18 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static void addTeamUsers(long teamId, long[] userIds)
+		throws RemoteException {
+		try {
+			UserServiceUtil.addTeamUsers(teamId, userIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws RemoteException {
 		try {
@@ -477,6 +489,18 @@ public class UserServiceSoap {
 		throws RemoteException {
 		try {
 			UserServiceUtil.unsetRoleUsers(roleId, userIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unsetTeamUsers(long teamId, long[] userIds)
+		throws RemoteException {
+		try {
+			UserServiceUtil.unsetTeamUsers(teamId, userIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

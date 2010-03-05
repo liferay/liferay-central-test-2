@@ -555,6 +555,9 @@ create index IX_41AFC20C on TasksReview (proposalId, stage, completed, rejected)
 create index IX_36F512E6 on TasksReview (userId);
 create unique index IX_5C6BE4C7 on TasksReview (userId, proposalId);
 
+create index IX_AE6E9907 on Team (groupId);
+create unique index IX_143DC786 on Team (groupId, name);
+
 create index IX_524FEFCE on UserGroup (companyId);
 create unique index IX_23EAD0D on UserGroup (companyId, name);
 create index IX_69771487 on UserGroup (companyId, parentUserGroupId);
@@ -603,6 +606,9 @@ create index IX_C26AA64D on Users_Permissions (userId);
 
 create index IX_C19E5F31 on Users_Roles (roleId);
 create index IX_C1A01806 on Users_Roles (userId);
+
+create index IX_4D06AD51 on Users_Teams (teamId);
+create index IX_A098EFBF on Users_Teams (userId);
 
 create index IX_66FF2503 on Users_UserGroups (userGroupId);
 create index IX_BE8102D6 on Users_UserGroups (userId);

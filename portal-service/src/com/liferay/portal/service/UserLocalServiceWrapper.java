@@ -138,6 +138,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		_userLocalService.addRoleUsers(roleId, userIds);
 	}
 
+	public void addTeamUsers(long teamId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_userLocalService.addTeamUsers(teamId, userIds);
+	}
+
 	public com.liferay.portal.model.User addUser(long creatorUserId,
 		long companyId, boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
@@ -249,6 +254,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		_userLocalService.clearOrganizationUsers(organizationId);
 	}
 
+	public void clearTeamUsers(long teamId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_userLocalService.clearTeamUsers(teamId);
+	}
+
 	public void clearUserGroupUsers(long userGroupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userLocalService.clearUserGroupUsers(userGroupId);
@@ -275,6 +285,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	public void deleteRoleUser(long roleId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userLocalService.deleteRoleUser(roleId, userId);
+	}
+
+	public void deleteTeamUser(long teamId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_userLocalService.deleteTeamUser(teamId, userId);
 	}
 
 	public java.lang.String encryptUserId(java.lang.String name)
@@ -561,6 +576,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.hasRoleUser(companyId, name, userId, inherited);
 	}
 
+	public boolean hasTeamUser(long teamId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _userLocalService.hasTeamUser(teamId, userId);
+	}
+
 	public boolean hasUserGroupUser(long userGroupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.hasUserGroupUser(userGroupId, userId);
@@ -688,6 +708,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_userLocalService.unsetRoleUsers(roleId, userIds);
+	}
+
+	public void unsetTeamUsers(long teamId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_userLocalService.unsetTeamUsers(teamId, userIds);
 	}
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
