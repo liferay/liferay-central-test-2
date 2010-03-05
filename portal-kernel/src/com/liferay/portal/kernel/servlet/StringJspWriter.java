@@ -94,13 +94,15 @@ public class StringJspWriter extends JspWriter {
 		if (_firstString == null) {
 			_firstString = value;
 		}
-		else if (_stringBundler == null) {
-			_stringBundler = new StringBundler();
+		else {
+			if (_stringBundler == null) {
+				_stringBundler = new StringBundler();
 
-			_stringBundler.append(_firstString);
+				_stringBundler.append(_firstString);
+			}
+
+			_stringBundler.append(value);
 		}
-
-		_stringBundler.append(value);
 	}
 
 	public void print(Object value) {
