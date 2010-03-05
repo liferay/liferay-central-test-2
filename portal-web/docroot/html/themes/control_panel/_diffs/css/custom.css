@@ -24,7 +24,7 @@ a:hover {
 	padding-top: 20px;
 }
 
-#content-wrapper {
+#portlet-layout {
 	background: #FFF;
 	border: 5px solid #FFF;
 	margin: 20px auto;
@@ -120,7 +120,7 @@ a:hover {
 	margin: 0;
 }
 
-.lfr-ctrl-panel #content-wrapper {
+.lfr-ctrl-panel #portlet-layout {
 	margin: 0;
 	width: auto;
 }

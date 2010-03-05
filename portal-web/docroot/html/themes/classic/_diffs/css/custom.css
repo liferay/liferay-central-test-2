@@ -274,7 +274,7 @@ body.lfr-has-sidebar {
 	padding-left: 0;
 }
 
-.lfr-has-sidebar #content-wrapper {
+.lfr-has-sidebar #portlet-layout {
 	padding-left: 220px;
 	width: auto;
 }
@@ -386,7 +386,7 @@ body.lfr-has-sidebar {
 
 /* ---------- Misc. ---------- */
 
-.lfr-grid .lfr-column, .columns-max .lfr-column {
+.portlet-layout .portlet-column, .columns-max .portlet-column {
 	padding: 0 5px;
 }
 

@@ -60,9 +60,9 @@ if (layout != null) {
 
 		if (!themeDisplay.isFreeformLayout()) {
 			layoutOptions = {
-				dragNodes: '#content-wrapper .portlet-boundary',
-				dropContainer: '.lfr-portlet-column',
-				dropNodes: '.lfr-column',
+				dragNodes: '#portlet-layout .portlet-boundary',
+				dropContainer: '.portlet-dropzone',
+				dropNodes: '.portlet-column',
 				emptyColumnClass: 'empty',
 				handles: ['.portlet-title', '.portlet-title-default', '.portlet-title-text'],
 				nestedPortletId: '_<%= PortletKeys.NESTED_PORTLETS %>_INSTANCE',
@@ -71,9 +71,9 @@ if (layout != null) {
 		}
 		else {
 			layoutOptions = {
-				dragNodes: '#content-wrapper .portlet-boundary',
-				dropContainer: '.lfr-portlet-column',
-				dropNodes: '.lfr-column',
+				dragNodes: '#portlet-layout .portlet-boundary',
+				dropContainer: '.portlet-dropzone',
+				dropNodes: '.portlet-column',
 				emptyColumnClass: 'empty',
 				freeForm: true,
 				freeformPlaceholderClass: 'lfr-freeform-layout-drag-indicator',

@@ -21,7 +21,7 @@ Liferay.Portlet = {
 		var beforePortletLoaded = options.beforePortletLoaded;
 		var onComplete = options.onComplete;
 
-		var container = AUI().one('.lfr-portlet-column');
+		var container = AUI().one(Liferay.Layout.options.dropContainer);
 
 		if (!container) {
 			return;
@@ -193,7 +193,7 @@ Liferay.Portlet = {
 
 			if (currentPortlet) {
 				var portletId = currentPortlet.portletId;
-				var column = currentPortlet.ancestor('.lfr-portlet-column');
+				var column = currentPortlet.ancestor(Liferay.Layout.options.dropContainer);
 
 				Liferay.Layout.updateCurrentPortletInfo(currentPortlet);
 

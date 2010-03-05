@@ -184,7 +184,7 @@ body.portlet {
 	font-size: 13px;
 }
 
-.lfr-panel-page #content-wrapper {
+.lfr-panel-page #portlet-layout {
 	margin: 0;
 	width: auto;
 }

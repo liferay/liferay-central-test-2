@@ -50,7 +50,7 @@
 	background-color: #edbca8;
 }
 
-.orange #content-wrapper #layout-grid.dragging .lfr-column {
+.orange #portlet-layout .dragging .portlet-column {
 	border-color: #958782;
 }
 

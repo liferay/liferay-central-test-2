@@ -1,11 +1,11 @@
-<div class="columns-2" id="content-wrapper">
-	<table class="lfr-grid" id="layout-grid">
+<div class="portlet-layout columns-2" id="portlet-layout">
+	<table class="portlet-layout">
 	<tr>
-		<td class="lfr-column fifty" id="column-1">
-			$processor.processColumn("column-1")
+		<td class="aui-w50 portlet-column portlet-column-first" id="column-1">
+			$processor.processColumn("column-1", "portlet-column-content portlet-column-first-content")
 		</td>
-		<td class="lfr-column fifty" id="column-2">
-			$processor.processColumn("column-2")
+		<td class="aui-w50 portlet-column portlet-column-last" id="column-2">
+			$processor.processColumn("column-2", "portlet-column-content portlet-column-last-content")
 		</td>
 	</tr>
 	</table>

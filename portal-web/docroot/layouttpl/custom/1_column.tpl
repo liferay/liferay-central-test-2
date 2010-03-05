@@ -1,5 +1,9 @@
-<div class="columns-1" id="content-wrapper">
-	<div class="lfr-column" id="column-1">
-		$processor.processColumn("column-1")
-	</div>
-</div>
+<table class="portlet-layout columns-1" id="portlet-layout">
+	<table class="portlet-layout">
+		<tr>
+			<td class="portlet-column portlet-column-only" id="column-1">
+				$processor.processColumn("column-1", "portlet-column-content portlet-column-only-content")
+			</td>
+		</tr>
+	</table>
+</table>
