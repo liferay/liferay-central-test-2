@@ -25,16 +25,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class InputResourceTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:input-resource:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:input-resource:url", _url);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
@@ -43,8 +33,18 @@ public class InputResourceTag extends IncludeTag {
 		_url = url;
 	}
 
+	protected void cleanUp() {
+		_cssClass = null;
+		_url = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:input-resource:cssClass", _cssClass);
+		request.setAttribute("liferay-ui:input-resource:url", _url);
 	}
 
 	private static final String _PAGE =

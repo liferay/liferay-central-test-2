@@ -26,16 +26,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SocialBookmarksTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
+	public void setTarget(String target) {
+		_target = target;
+	}
 
-		request.setAttribute("liferay-ui:social-bookmark:types", _types);
-		request.setAttribute("liferay-ui:social-bookmark:url", _url);
-		request.setAttribute("liferay-ui:social-bookmark:title", _title);
-		request.setAttribute("liferay-ui:social-bookmark:target", _target);
-
-		return EVAL_BODY_BUFFERED;
+	public void setTitle(String title) {
+		_title = title;
 	}
 
 	public void setTypes(String types) {
@@ -46,24 +42,30 @@ public class SocialBookmarksTag extends IncludeTag {
 		_url = url;
 	}
 
-	public void setTitle(String title) {
-		_title = title;
-	}
-
-	public void setTarget(String target) {
-		_target = target;
+	protected void cleanUp() {
+		_target = null;
+		_title = null;
+		_types = null;
+		_url = null;
 	}
 
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:social-bookmark:target", _target);
+		request.setAttribute("liferay-ui:social-bookmark:title", _title);
+		request.setAttribute("liferay-ui:social-bookmark:types", _types);
+		request.setAttribute("liferay-ui:social-bookmark:url", _url);
+	}
+
 	private static final String _PAGE =
 		"/html/taglib/ui/social_bookmarks/page.jsp";
 
+	private String _target;
+	private String _title;
 	private String _types;
 	private String _url;
-	private String _title;
-	private String _target;
 
 }

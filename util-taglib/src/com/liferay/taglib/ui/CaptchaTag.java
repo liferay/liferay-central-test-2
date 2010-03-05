@@ -25,21 +25,20 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CaptchaTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:captcha:url", _url);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setUrl(String url) {
 		_url = url;
 	}
 
+	protected void cleanUp() {
+		_url = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:captcha:url", _url);
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/captcha/page.jsp";

@@ -14,6 +14,8 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.taglib.util.IncludeTag;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Brian Wing Shun Chan
  */
-public class JournalContentSearchTag extends BoxTag {
+public class JournalContentSearchTag extends IncludeTag {
 
 	public static void doTag(
 			ServletContext servletContext, HttpServletRequest request,
@@ -32,27 +34,27 @@ public class JournalContentSearchTag extends BoxTag {
 		throws Exception {
 
 		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(_TOP);
+			servletContext.getRequestDispatcher(_START_PAGE);
 
 		requestDispatcher.include(request, response);
 
-		requestDispatcher = servletContext.getRequestDispatcher(_BOTTOM);
+		requestDispatcher = servletContext.getRequestDispatcher(_END_PAGE);
 
 		requestDispatcher.include(request, response);
 	}
 
-	public String getTop() {
-		return _TOP;
+	protected String getEndPage() {
+		return _END_PAGE;
 	}
 
-	public String getBottom() {
-		return _BOTTOM;
+	protected String getStartPage() {
+		return _START_PAGE;
 	}
 
-	private static final String _TOP =
-		"/html/taglib/ui/journal_content_search/start.jsp";
-
-	private static final String _BOTTOM =
+	private static final String _END_PAGE =
 		"/html/taglib/ui/journal_content_search/end.jsp";
+
+	private static final String _START_PAGE =
+		"/html/taglib/ui/journal_content_search/start.jsp";
 
 }

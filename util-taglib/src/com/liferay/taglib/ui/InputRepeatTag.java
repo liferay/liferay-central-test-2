@@ -14,12 +14,10 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 
 /**
  * <a href="InputRepeatTag.java.html"><b><i>View Source</i></b></a>
@@ -29,31 +27,6 @@ import javax.servlet.jsp.JspException;
  */
 public class InputRepeatTag extends IncludeTag {
 
-	public int doEndTag() throws JspException {
-		try {
-			return super.doEndTag();
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-		finally {
-			if (!ServerDetector.isResin()) {
-				_cssClass = null;
-				_event = null;
-			}
-		}
-	}
-
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:input-repeat:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:input-repeat:event", _event);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
@@ -62,8 +35,18 @@ public class InputRepeatTag extends IncludeTag {
 		_event = event;
 	}
 
+	protected void cleanUp() {
+		_cssClass = null;
+		_event = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:input-repeat:cssClass", _cssClass);
+		request.setAttribute("liferay-ui:input-repeat:event", _event);
 	}
 
 	private static final String _PAGE =

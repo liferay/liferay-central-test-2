@@ -15,21 +15,31 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <a href="ErrorMarkerTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ErrorMarkerTag extends BodyTagSupport {
+public class ErrorMarkerTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
+	public void setKey(String key) {
+		_key = key;
+	}
 
+	public void setValue(String value) {
+		_value = value;
+	}
+
+	protected void cleanUp() {
+		_key = null;
+		_value = null;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
 		if (Validator.isNotNull(_key) && Validator.isNotNull(_value)) {
 			request.setAttribute("liferay-ui:error-marker:key", _key);
 			request.setAttribute("liferay-ui:error-marker:value", _value);
@@ -38,16 +48,6 @@ public class ErrorMarkerTag extends BodyTagSupport {
 			request.removeAttribute("liferay-ui:error-marker:key");
 			request.removeAttribute("liferay-ui:error-marker:value");
 		}
-
-		return SKIP_BODY;
-	}
-
-	public void setKey(String key) {
-		_key = key;
-	}
-
-	public void setValue(String value) {
-		_value = value;
 	}
 
 	private String _key;

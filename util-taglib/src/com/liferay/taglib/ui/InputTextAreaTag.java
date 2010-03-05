@@ -26,26 +26,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class InputTextAreaTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:input-textarea:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:input-textarea:param", _param);
-		request.setAttribute(
-			"liferay-ui:input-textarea:defaultValue", _defaultValue);
-		request.setAttribute(
-			"liferay-ui:input-textarea:disabled", String.valueOf(_disabled));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
-	}
-
-	public void setParam(String param) {
-		_param = param;
 	}
 
 	public void setDefaultValue(String defaultValue) {
@@ -56,16 +38,36 @@ public class InputTextAreaTag extends IncludeTag {
 		_disabled = disabled;
 	}
 
+	public void setParam(String param) {
+		_param = param;
+	}
+
+	protected void cleanUp() {
+		_cssClass = null;
+		_defaultValue = StringPool.BLANK;
+		_disabled = false;
+		_param = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:input-textarea:cssClass", _cssClass);
+		request.setAttribute(
+			"liferay-ui:input-textarea:defaultValue", _defaultValue);
+		request.setAttribute(
+			"liferay-ui:input-textarea:disabled", String.valueOf(_disabled));
+		request.setAttribute("liferay-ui:input-textarea:param", _param);
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/input_textarea/page.jsp";
 
 	private String _cssClass;
-	private String _param;
 	private String _defaultValue = StringPool.BLANK;
 	private boolean _disabled;
+	private String _param;
 
 }

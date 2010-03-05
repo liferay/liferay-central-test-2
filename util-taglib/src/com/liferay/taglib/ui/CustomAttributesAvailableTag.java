@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -32,23 +33,32 @@ public class CustomAttributesAvailableTag
 	extends ParamAndPropertyAncestorTagImpl {
 
 	public int doStartTag() {
-		long companyId = _companyId;
+		try {
+			long companyId = _companyId;
 
-		if (companyId == 0) {
-			companyId = CompanyThreadLocal.getCompanyId();
+			if (companyId == 0) {
+				companyId = CompanyThreadLocal.getCompanyId();
+			}
+
+			ExpandoBridge expandoBridge =
+				ExpandoBridgeFactoryUtil.getExpandoBridge(
+					companyId, _className);
+
+			List<String> attributeNames = Collections.list(
+				expandoBridge.getAttributeNames());
+
+			if (attributeNames.isEmpty()) {
+				return EVAL_PAGE;
+			}
+			else {
+				return EVAL_BODY_INCLUDE;
+			}
 		}
-
-		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-			companyId, _className);
-
-		List<String> attributeNames = Collections.list(
-			expandoBridge.getAttributeNames());
-
-		if (attributeNames.isEmpty()) {
-			return EVAL_PAGE;
-		}
-		else {
-			return EVAL_BODY_INCLUDE;
+		finally {
+			if (ServerDetector.isResin()) {
+				_className = null;
+				_companyId = 0;
+			}
 		}
 	}
 

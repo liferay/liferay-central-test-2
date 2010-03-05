@@ -25,21 +25,24 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SearchSpeedTag extends SearchFormTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:search:hits", _hits);
-
-		return super.doStartTag();
-	}
-
 	public void setHits(Hits hits) {
 		_hits = hits;
 	}
 
+	protected void cleanUp() {
+		super.cleanUp();
+
+		_hits = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		super.setAttributes(request);
+
+		request.setAttribute("liferay-ui:search:hits", _hits);
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/search_speed/page.jsp";

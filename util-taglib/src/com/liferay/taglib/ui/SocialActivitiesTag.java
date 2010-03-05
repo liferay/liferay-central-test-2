@@ -29,31 +29,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SocialActivitiesTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute(
-			"liferay-ui:social-activities:className", _className);
-		request.setAttribute(
-			"liferay-ui:social-activities:classPK", String.valueOf(_classPK));
-
-		if (_activities != null) {
-			request.setAttribute(
-				"liferay-ui:social-activities:activities", _activities);
-		}
-
-		request.setAttribute(
-			"liferay-ui:social-activities:feedEnabled",
-			String.valueOf(_feedEnabled));
-		request.setAttribute(
-			"liferay-ui:social-activities:feedTitle", _feedTitle);
-		request.setAttribute(
-			"liferay-ui:social-activities:feedLink", _feedLink);
-		request.setAttribute(
-			"liferay-ui:social-activities:feedLinkMessage", _feedLinkMessage);
-
-		return EVAL_BODY_BUFFERED;
+	public void setActivities(List<SocialActivity> activities) {
+		_activities = activities;
 	}
 
 	public void setClassName(String className) {
@@ -64,16 +41,8 @@ public class SocialActivitiesTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
-	public void setActivities(List<SocialActivity> activities) {
-		_activities = activities;
-	}
-
 	public void setFeedEnabled(boolean feedEnabled) {
 		_feedEnabled = feedEnabled;
-	}
-
-	public void setFeedTitle(String feedTitle) {
-		_feedTitle = feedTitle;
 	}
 
 	public void setFeedLink(String feedLink) {
@@ -84,19 +53,54 @@ public class SocialActivitiesTag extends IncludeTag {
 		_feedLinkMessage = feedLinkMessage;
 	}
 
+	public void setFeedTitle(String feedTitle) {
+		_feedTitle = feedTitle;
+	}
+
+	protected void cleanUp() {
+		_activities = null;
+		_className = StringPool.BLANK;
+		_classPK = 0;
+		_feedEnabled = false;
+		_feedLink = StringPool.BLANK;
+		_feedLinkMessage = StringPool.BLANK;
+		_feedTitle = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		if (_activities != null) {
+			request.setAttribute(
+				"liferay-ui:social-activities:activities", _activities);
+		}
+
+		request.setAttribute(
+			"liferay-ui:social-activities:className", _className);
+		request.setAttribute(
+			"liferay-ui:social-activities:classPK", String.valueOf(_classPK));
+		request.setAttribute(
+			"liferay-ui:social-activities:feedEnabled",
+			String.valueOf(_feedEnabled));
+		request.setAttribute(
+			"liferay-ui:social-activities:feedLink", _feedLink);
+		request.setAttribute(
+			"liferay-ui:social-activities:feedLinkMessage", _feedLinkMessage);
+		request.setAttribute(
+			"liferay-ui:social-activities:feedTitle", _feedTitle);
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/social_activities/page.jsp";
 
+	private List<SocialActivity> _activities;
 	private String _className = StringPool.BLANK;
 	private long _classPK;
-	private List<SocialActivity> _activities;
 	private boolean _feedEnabled;
-	private String _feedTitle;
 	private String _feedLink = StringPool.BLANK;
 	private String _feedLinkMessage = StringPool.BLANK;
+	private String _feedTitle;
 
 }

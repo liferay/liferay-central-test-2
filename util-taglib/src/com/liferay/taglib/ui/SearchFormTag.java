@@ -26,10 +26,20 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SearchFormTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
+	public void setSearchContainer(SearchContainer<?> searchContainer) {
+		_searchContainer = searchContainer;
+	}
 
+	public void setShowAddButton(boolean showAddButton) {
+		_showAddButton = showAddButton;
+	}
+
+	protected void cleanUp() {
+		_searchContainer = null;
+		_showAddButton = false;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
 		SearchContainerTag parentTag =
 			(SearchContainerTag)findAncestorWithClass(
 				this, SearchContainerTag.class);
@@ -42,19 +52,9 @@ public class SearchFormTag extends IncludeTag {
 			"liferay-ui:search:searchContainer", _searchContainer);
 		request.setAttribute(
 			"liferay-ui:search:showAddButton", String.valueOf(_showAddButton));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
-	public void setSearchContainer(SearchContainer<?> searchContainer) {
-		_searchContainer = searchContainer;
-	}
-
-	public void setShowAddButton(boolean showAddButton) {
-		_showAddButton = showAddButton;
 	}
 
 	private SearchContainer<?> _searchContainer;
-	private boolean _showAddButton = false;
+	private boolean _showAddButton;
 
 }

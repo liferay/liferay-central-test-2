@@ -180,21 +180,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>box</name>
-		<tag-class>com.liferay.taglib.ui.BoxTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>bottom</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>top</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>breadcrumb</name>
 		<tag-class>com.liferay.taglib.ui.BreadcrumbTag</tag-class>
 		<body-content>JSP</body-content>

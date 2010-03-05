@@ -28,17 +28,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DiffTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:diff:diffResults", _diffResults);
-		request.setAttribute("liferay-ui:diff:sourceName", _sourceName);
-		request.setAttribute("liferay-ui:diff:targetName", _targetName);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setDiffResults(List<DiffResult>[] diffResults) {
 		_diffResults = diffResults;
 	}
@@ -51,8 +40,20 @@ public class DiffTag extends IncludeTag {
 		_targetName = targetName;
 	}
 
+	protected void cleanUp() {
+		_diffResults = null;
+		_sourceName = null;
+		_targetName = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:diff:diffResults", _diffResults);
+		request.setAttribute("liferay-ui:diff:sourceName", _sourceName);
+		request.setAttribute("liferay-ui:diff:targetName", _targetName);
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/diff/page.jsp";

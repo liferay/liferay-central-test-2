@@ -25,24 +25,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CustomAttributeListTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute(
-			"liferay-ui:custom-attribute-list:className", _className);
-		request.setAttribute(
-			"liferay-ui:custom-attribute-list:classPK",
-			String.valueOf(_classPK));
-		request.setAttribute(
-			"liferay-ui:custom-attribute-list:editable",
-			String.valueOf(_editable));
-		request.setAttribute(
-			"liferay-ui:custom-attribute-list:label", String.valueOf(_label));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setClassName(String className) {
 		_className = className;
 	}
@@ -59,8 +41,28 @@ public class CustomAttributeListTag extends IncludeTag {
 		_label = label;
 	}
 
+	protected void cleanUp() {
+		_className = null;
+		_classPK = 0;
+		_editable = false;
+		_label = false;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:custom-attribute-list:className", _className);
+		request.setAttribute(
+			"liferay-ui:custom-attribute-list:classPK",
+			String.valueOf(_classPK));
+		request.setAttribute(
+			"liferay-ui:custom-attribute-list:editable",
+			String.valueOf(_editable));
+		request.setAttribute(
+			"liferay-ui:custom-attribute-list:label", String.valueOf(_label));
 	}
 
 	private static final String _PAGE =
@@ -68,7 +70,7 @@ public class CustomAttributeListTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
-	private boolean _editable = false;
-	private boolean _label = false;
+	private boolean _editable;
+	private boolean _label;
 
 }

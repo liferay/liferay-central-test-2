@@ -23,23 +23,24 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SearchPaginatorTag extends SearchFormTag {
 
-	public int doStartTag() {
-		super.doStartTag();
-
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:search:type", _type);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setType(String type) {
 		_type = type;
 	}
 
+	protected void cleanUp() {
+		super.cleanUp();
+
+		_type = "regular";
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		super.setAttributes(request);
+
+		request.setAttribute("liferay-ui:search:type", _type);
 	}
 
 	private static final String _PAGE =

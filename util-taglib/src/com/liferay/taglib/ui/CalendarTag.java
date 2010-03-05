@@ -29,25 +29,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CalendarTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:calendar:data", _data);
-		request.setAttribute("liferay-ui:calendar:day", String.valueOf(_day));
-		request.setAttribute(
-			"liferay-ui:calendar:headerPattern", _headerPattern);
-		request.setAttribute("liferay-ui:calendar:headerFormat", _headerFormat);
-		request.setAttribute(
-			"liferay-ui:calendar:month", String.valueOf(_month));
-		request.setAttribute(
-			"liferay-ui:calendar:showAllPotentialWeeks",
-			String.valueOf(_showAllPotentialWeeks));
-		request.setAttribute("liferay-ui:calendar:year", String.valueOf(_year));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setData(Set<Integer> data) {
 		_data = data;
 	}
@@ -76,8 +57,32 @@ public class CalendarTag extends IncludeTag {
 		_year = year;
 	}
 
+	protected void cleanUp() {
+		_data = null;
+		_day = 0;
+		_headerFormat = null;
+		_headerPattern = null;
+		_month = 0;
+		_showAllPotentialWeeks = false;
+		_year = 0;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:calendar:data", _data);
+		request.setAttribute("liferay-ui:calendar:day", String.valueOf(_day));
+		request.setAttribute(
+			"liferay-ui:calendar:headerPattern", _headerPattern);
+		request.setAttribute("liferay-ui:calendar:headerFormat", _headerFormat);
+		request.setAttribute(
+			"liferay-ui:calendar:month", String.valueOf(_month));
+		request.setAttribute(
+			"liferay-ui:calendar:showAllPotentialWeeks",
+			String.valueOf(_showAllPotentialWeeks));
+		request.setAttribute("liferay-ui:calendar:year", String.valueOf(_year));
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/calendar/page.jsp";

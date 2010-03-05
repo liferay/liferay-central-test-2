@@ -25,22 +25,21 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DiffHtmlTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute(
-			"liferay-ui:diff-html:diffHtmlResults", _diffHtmlResults);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setDiffHtmlResults(String diffHtmlResults) {
 		_diffHtmlResults = diffHtmlResults;
 	}
 
+	protected void cleanUp() {
+		_diffHtmlResults = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:diff-html:diffHtmlResults", _diffHtmlResults);
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/diff_html/page.jsp";

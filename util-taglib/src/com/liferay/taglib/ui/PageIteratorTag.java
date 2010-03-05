@@ -15,105 +15,17 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="PageIteratorTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PageIteratorTag extends TagSupport {
-
-	public int doStartTag() throws JspException {
-		try {
-			_pages = (int)Math.ceil((double)_total / _delta);
-
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
-
-			request.setAttribute(
-				"liferay-ui:page-iterator:formName", _formName);
-			request.setAttribute(
-				"liferay-ui:page-iterator:cur", String.valueOf(_cur));
-			request.setAttribute(
-				"liferay-ui:page-iterator:curParam", _curParam);
-			request.setAttribute(
-				"liferay-ui:page-iterator:delta", String.valueOf(_delta));
-			request.setAttribute(
-				"liferay-ui:page-iterator:deltaConfigurable",
-				String.valueOf(_deltaConfigurable));
-			request.setAttribute(
-				"liferay-ui:page-iterator:deltaParam", _deltaParam);
-			request.setAttribute("liferay-ui:page-iterator:jsCall", _jsCall);
-			request.setAttribute(
-				"liferay-ui:page-iterator:maxPages", String.valueOf(_maxPages));
-			request.setAttribute("liferay-ui:page-iterator:target", _target);
-			request.setAttribute(
-				"liferay-ui:page-iterator:total", String.valueOf(_total));
-			request.setAttribute("liferay-ui:page-iterator:url", _url);
-			request.setAttribute(
-				"liferay-ui:page-iterator:urlAnchor", _urlAnchor);
-			request.setAttribute(
-				"liferay-ui:page-iterator:pages", String.valueOf(_pages));
-			request.setAttribute("liferay-ui:page-iterator:type", _type);
-
-			PortalIncludeUtil.include(pageContext, getStartPage());
-
-			return EVAL_BODY_INCLUDE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
-
-	public int doEndTag() throws JspException {
-		try {
-			if (_pages > 1) {
-				PortalIncludeUtil.include(pageContext, getEndPage());
-			}
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
-
-	protected String getStartPage() {
-		if (Validator.isNull(_startPage)) {
-			return _START_PAGE;
-		}
-		else {
-			return _startPage;
-		}
-	}
-
-	public void setStartPage(String startPage) {
-		_startPage = startPage;
-	}
-
-	protected String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
-	}
-
-	public void setEndPage(String endPage) {
-		_endPage = endPage;
-	}
-
-	public void setFormName(String formName) {
-		_formName = formName;
-	}
+public class PageIteratorTag extends IncludeTag {
 
 	public void setCur(int cur) {
 		_cur = cur;
@@ -133,6 +45,10 @@ public class PageIteratorTag extends TagSupport {
 
 	public void setDeltaParam(String deltaParam) {
 		_deltaParam = deltaParam;
+	}
+
+	public void setFormName(String formName) {
+		_formName = formName;
 	}
 
 	public void setJsCall(String jsCall) {
@@ -174,28 +90,86 @@ public class PageIteratorTag extends TagSupport {
 		}
 	}
 
-	private static final String _START_PAGE =
-		"/html/taglib/ui/page_iterator/start.jsp";
+	protected void cleanUp() {
+		_cur = 0;
+		_curParam = null;
+		_delta = SearchContainer.DEFAULT_DELTA;
+		_deltaConfigurable = SearchContainer.DEFAULT_DELTA_CONFIGURABLE;
+		_deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
+		_formName = "fm";
+		_jsCall = null;
+		_maxPages = 10;
+		_pages = 0;
+		_target = "_self";
+		_total = 0;
+		_type = "regular";
+		_url = null;
+		_urlAnchor = null;
+	}
+
+	protected String getEndPage() {
+		if (_pages > 1) {
+			return _END_PAGE;
+		}
+		else {
+			return null;
+		}
+	}
+
+	protected String getStartPage() {
+		return _START_PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		_pages = (int)Math.ceil((double)_total / _delta);
+
+		request.setAttribute(
+			"liferay-ui:page-iterator:cur", String.valueOf(_cur));
+		request.setAttribute(
+			"liferay-ui:page-iterator:curParam", _curParam);
+		request.setAttribute(
+			"liferay-ui:page-iterator:delta", String.valueOf(_delta));
+		request.setAttribute(
+			"liferay-ui:page-iterator:deltaConfigurable",
+			String.valueOf(_deltaConfigurable));
+		request.setAttribute(
+			"liferay-ui:page-iterator:deltaParam", _deltaParam);
+		request.setAttribute(
+			"liferay-ui:page-iterator:formName", _formName);
+		request.setAttribute("liferay-ui:page-iterator:jsCall", _jsCall);
+		request.setAttribute(
+			"liferay-ui:page-iterator:maxPages", String.valueOf(_maxPages));
+		request.setAttribute(
+			"liferay-ui:page-iterator:pages", String.valueOf(_pages));
+		request.setAttribute("liferay-ui:page-iterator:target", _target);
+		request.setAttribute(
+			"liferay-ui:page-iterator:total", String.valueOf(_total));
+		request.setAttribute("liferay-ui:page-iterator:type", _type);
+		request.setAttribute("liferay-ui:page-iterator:url", _url);
+		request.setAttribute(
+			"liferay-ui:page-iterator:urlAnchor", _urlAnchor);
+	}
 
 	private static final String _END_PAGE =
 		"/html/taglib/ui/page_iterator/end.jsp";
 
-	private String _startPage;
-	private String _endPage;
-	private String _formName = "fm";
+	private static final String _START_PAGE =
+		"/html/taglib/ui/page_iterator/start.jsp";
+
 	private int _cur;
 	private String _curParam;
 	private int _delta = SearchContainer.DEFAULT_DELTA;
 	private boolean _deltaConfigurable =
 		SearchContainer.DEFAULT_DELTA_CONFIGURABLE;
 	private String _deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
+	private String _formName = "fm";
 	private String _jsCall;
 	private int _maxPages = 10;
+	private int _pages;
 	private String _target = "_self";
 	private int _total;
 	private String _type = "regular";
 	private String _url;
 	private String _urlAnchor;
-	private int _pages;
 
 }

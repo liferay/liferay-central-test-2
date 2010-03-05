@@ -25,31 +25,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class InputSelectTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:input-select:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:input-select:formName", _formName);
-		request.setAttribute("liferay-ui:input-select:param", _param);
-		request.setAttribute(
-			"liferay-ui:input-select:defaultValue", _defaultValue);
-		request.setAttribute(
-			"liferay-ui:input-select:disabled", String.valueOf(_disabled));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
-	}
-
-	public void setFormName(String formName) {
-		_formName = formName;
-	}
-
-	public void setParam(String param) {
-		_param = param;
 	}
 
 	public void setDefaultValue(boolean defaultValue) {
@@ -60,17 +37,43 @@ public class InputSelectTag extends IncludeTag {
 		_disabled = disabled;
 	}
 
+	public void setFormName(String formName) {
+		_formName = formName;
+	}
+
+	public void setParam(String param) {
+		_param = param;
+	}
+
+	protected void cleanUp() {
+		_cssClass = null;
+		_defaultValue = Boolean.FALSE;
+		_disabled = false;
+		_formName = "fm";
+		_param = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:input-select:cssClass", _cssClass);
+		request.setAttribute(
+			"liferay-ui:input-select:defaultValue", _defaultValue);
+		request.setAttribute(
+			"liferay-ui:input-select:disabled", String.valueOf(_disabled));
+		request.setAttribute("liferay-ui:input-select:formName", _formName);
+		request.setAttribute("liferay-ui:input-select:param", _param);
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/input_select/page.jsp";
 
 	private String _cssClass;
-	private String _formName = "fm";
-	private String _param;
 	private Boolean _defaultValue = Boolean.FALSE;
 	private boolean _disabled;
+	private String _formName = "fm";
+	private String _param;
 
 }

@@ -25,26 +25,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DiscussionTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:discussion:className", _className);
-		request.setAttribute(
-			"liferay-ui:discussion:classPK", String.valueOf(_classPK));
-		request.setAttribute("liferay-ui:discussion:formAction", _formAction);
-		request.setAttribute("liferay-ui:discussion:formName", _formName);
-		request.setAttribute(
-			"liferay-ui:discussion:ratingsEnabled",
-			String.valueOf(_ratingsEnabled));
-		request.setAttribute("liferay-ui:discussion:redirect", _redirect);
-		request.setAttribute("liferay-ui:discussion:subject", _subject);
-		request.setAttribute(
-			"liferay-ui:discussion:userId", String.valueOf(_userId));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setClassName(String className) {
 		_className = className;
 	}
@@ -77,8 +57,34 @@ public class DiscussionTag extends IncludeTag {
 		_userId = userId;
 	}
 
+	protected void cleanUp() {
+		_className = null;
+		_classPK = 0;
+		_formAction = null;
+		_formName = "fm";
+		_ratingsEnabled = true;
+		_redirect = null;
+		_subject = null;
+		_userId = 0;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:discussion:className", _className);
+		request.setAttribute(
+			"liferay-ui:discussion:classPK", String.valueOf(_classPK));
+		request.setAttribute("liferay-ui:discussion:formAction", _formAction);
+		request.setAttribute("liferay-ui:discussion:formName", _formName);
+		request.setAttribute(
+			"liferay-ui:discussion:ratingsEnabled",
+			String.valueOf(_ratingsEnabled));
+		request.setAttribute("liferay-ui:discussion:redirect", _redirect);
+		request.setAttribute("liferay-ui:discussion:subject", _subject);
+		request.setAttribute(
+			"liferay-ui:discussion:userId", String.valueOf(_userId));
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/discussion/page.jsp";

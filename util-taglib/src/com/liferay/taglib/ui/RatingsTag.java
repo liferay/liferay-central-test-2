@@ -25,21 +25,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class RatingsTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:ratings:className", _className);
-		request.setAttribute(
-			"liferay-ui:ratings:classPK", String.valueOf(_classPK));
-		request.setAttribute(
-			"liferay-ui:ratings:numberOfStars", String.valueOf(_numberOfStars));
-		request.setAttribute("liferay-ui:ratings:type", _type);
-		request.setAttribute("liferay-ui:ratings:url", _url);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setClassName(String className) {
 		_className = className;
 	}
@@ -60,8 +45,26 @@ public class RatingsTag extends IncludeTag {
 		_url = url;
 	}
 
+	protected void cleanUp() {
+		_className = null;
+		_classPK = 0;
+		_numberOfStars = 5;
+		_type = "stars";
+		_url = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:ratings:className", _className);
+		request.setAttribute(
+			"liferay-ui:ratings:classPK", String.valueOf(_classPK));
+		request.setAttribute(
+			"liferay-ui:ratings:numberOfStars", String.valueOf(_numberOfStars));
+		request.setAttribute("liferay-ui:ratings:type", _type);
+		request.setAttribute("liferay-ui:ratings:url", _url);
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/ratings/page.jsp";

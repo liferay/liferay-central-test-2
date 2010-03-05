@@ -28,67 +28,72 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class InputTimeZoneTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:input-time-zone:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:input-time-zone:name", _name);
-		request.setAttribute("liferay-ui:input-time-zone:value", _value);
-		request.setAttribute(
-			"liferay-ui:input-time-zone:nullable", String.valueOf(_nullable));
-		request.setAttribute(
-			"liferay-ui:input-time-zone:daylight", String.valueOf(_daylight));
-		request.setAttribute(
-			"liferay-ui:input-time-zone:displayStyle",
-			String.valueOf(_displayStyle));
-		request.setAttribute(
-			"liferay-ui:input-time-zone:disabled", String.valueOf(_disabled));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public void setValue(String value) {
-		_value = value;
-	}
-
-	public void setNullable(boolean nullable) {
-		_nullable = nullable;
 	}
 
 	public void setDaylight(boolean daylight) {
 		_daylight = daylight;
 	}
 
+	public void setDisabled(boolean disabled) {
+		_disabled = disabled;
+	}
+
 	public void setDisplayStyle(int displayStyle) {
 		_displayStyle = displayStyle;
 	}
 
-	public void setDisabled(boolean disabled) {
-		_disabled = disabled;
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setNullable(boolean nullable) {
+		_nullable = nullable;
+	}
+
+	public void setValue(String value) {
+		_value = value;
+	}
+
+	protected void cleanUp() {
+		_cssClass = null;
+		_daylight = false;
+		_disabled = false;
+		_displayStyle = TimeZone.LONG;
+		_name = null;
+		_nullable = false;
+		_value = TimeZoneUtil.getDefault().getID();
 	}
 
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:input-time-zone:cssClass", _cssClass);
+		request.setAttribute(
+			"liferay-ui:input-time-zone:daylight", String.valueOf(_daylight));
+		request.setAttribute(
+			"liferay-ui:input-time-zone:disabled", String.valueOf(_disabled));
+		request.setAttribute(
+			"liferay-ui:input-time-zone:displayStyle",
+			String.valueOf(_displayStyle));
+		request.setAttribute("liferay-ui:input-time-zone:name", _name);
+		request.setAttribute(
+			"liferay-ui:input-time-zone:nullable", String.valueOf(_nullable));
+		request.setAttribute("liferay-ui:input-time-zone:value", _value);
+	}
+
 	private static final String _PAGE =
 		"/html/taglib/ui/input_time_zone/page.jsp";
 
 	private String _cssClass;
-	private String _name;
-	private String _value = TimeZoneUtil.getDefault().getID();
-	private boolean _nullable;
 	private boolean _daylight;
-	private int _displayStyle = TimeZone.LONG;
 	private boolean _disabled;
+	private int _displayStyle = TimeZone.LONG;
+	private String _name;
+	private boolean _nullable;
+	private String _value = TimeZoneUtil.getDefault().getID();
 
 }

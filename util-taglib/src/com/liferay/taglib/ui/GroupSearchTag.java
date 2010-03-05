@@ -15,15 +15,12 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.RowChecker;
-import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.util.LinkedHashMap;
 
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
@@ -32,60 +29,6 @@ import javax.servlet.jsp.tagext.TagSupport;
  * @author Brian Wing Shun Chan
  */
 public class GroupSearchTag extends TagSupport {
-
-	public int doEndTag() throws JspException {
-		try {
-			PortalIncludeUtil.include(pageContext, getEndPage());
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
-
-	public int doStartTag() throws JspException {
-		try {
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
-
-			request.setAttribute(
-				"liferay-ui:group-search:groupParams", _groupParams);
-			request.setAttribute(
-				"liferay-ui:group-search:portletURL", _portletURL);
-			request.setAttribute(
-				"liferay-ui:group-search:rowChecker", _rowChecker);
-
-			PortalIncludeUtil.include(pageContext, getStartPage());
-
-			return EVAL_BODY_INCLUDE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
-
-	protected String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
-	}
-
-	protected String getStartPage() {
-		if (Validator.isNull(_startPage)) {
-			return _START_PAGE;
-		}
-		else {
-			return _startPage;
-		}
-	}
-
-	public void setEndPage(String endPage) {
-		_endPage = endPage;
-	}
 
 	public void setGroupParams(LinkedHashMap<String, Object> groupParams) {
 		_groupParams = groupParams;
@@ -99,8 +42,25 @@ public class GroupSearchTag extends TagSupport {
 		_rowChecker = rowChecker;
 	}
 
-	public void setStartPage(String startPage) {
-		_startPage = startPage;
+	protected void cleanUp() {
+		_groupParams = null;
+		_portletURL = null;
+		_rowChecker = null;
+	}
+
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
+	protected String getStartPage() {
+		return _START_PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:group-search:groupParams", _groupParams);
+		request.setAttribute("liferay-ui:group-search:portletURL", _portletURL);
+		request.setAttribute("liferay-ui:group-search:rowChecker", _rowChecker);
 	}
 
 	private static final String _END_PAGE =
@@ -109,10 +69,8 @@ public class GroupSearchTag extends TagSupport {
 	private static final String _START_PAGE =
 		"/html/taglib/ui/group_search/start.jsp";
 
-	private String _endPage;
 	private LinkedHashMap<String, Object> _groupParams;
 	private PortletURL _portletURL;
 	private RowChecker _rowChecker;
-	private String _startPage;
 
 }

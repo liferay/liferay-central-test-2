@@ -25,22 +25,21 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class RatingsScoreTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute(
-			"liferay-ui:ratings-score:score", String.valueOf(_score));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setScore(double score) {
 		_score = score;
 	}
 
+	protected void cleanUp() {
+		_score = 0;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:ratings-score:score", String.valueOf(_score));
 	}
 
 	private static final String _PAGE =

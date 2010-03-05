@@ -26,19 +26,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class UploadProgressTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:upload-progress:id", _id);
-		request.setAttribute(
-			"liferay-ui:upload-progress:iframe-src", _iframeSrc);
-		request.setAttribute("liferay-ui:upload-progress:redirect", _redirect);
-		request.setAttribute("liferay-ui:upload-progress:message", _message);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setId(String id) {
 		_id = id;
 	}
@@ -47,16 +34,31 @@ public class UploadProgressTag extends IncludeTag {
 		_iframeSrc = iframeSrc;
 	}
 
-	public void setRedirect(String redirect) {
-		_redirect = redirect;
-	}
-
 	public void setMessage(String message) {
 		_message = message;
 	}
 
+	public void setRedirect(String redirect) {
+		_redirect = redirect;
+	}
+
+	protected void cleanUp() {
+		_id = null;
+		_iframeSrc = null;
+		_message = null;
+		_redirect = null;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:upload-progress:id", _id);
+		request.setAttribute(
+			"liferay-ui:upload-progress:iframe-src", _iframeSrc);
+		request.setAttribute("liferay-ui:upload-progress:message", _message);
+		request.setAttribute("liferay-ui:upload-progress:redirect", _redirect);
 	}
 
 	private static final String _PAGE =
@@ -64,7 +66,7 @@ public class UploadProgressTag extends IncludeTag {
 
 	private String _id;
 	private String _iframeSrc;
-	private String _redirect;
 	private String _message;
+	private String _redirect;
 
 }

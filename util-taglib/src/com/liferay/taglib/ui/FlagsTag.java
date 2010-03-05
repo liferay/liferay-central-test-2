@@ -25,22 +25,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class FlagsTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:flags:className", _className);
-		request.setAttribute(
-			"liferay-ui:flags:classPK", String.valueOf(_classPK));
-		request.setAttribute("liferay-ui:flags:contentTitle", _contentTitle);
-		request.setAttribute("liferay-ui:flags:label", String.valueOf(_label));
-		request.setAttribute("liferay-ui:flags:message", _message);
-		request.setAttribute(
-			"liferay-ui:flags:reportedUserId", String.valueOf(_reportedUserId));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setClassName(String className) {
 		_className = className;
 	}
@@ -65,8 +49,28 @@ public class FlagsTag extends IncludeTag {
 		_reportedUserId = reportedUserId;
 	}
 
+	protected void cleanUp() {
+		_className = null;
+		_classPK = 0;
+		_contentTitle = null;
+		_label = true;
+		_message = null;
+		_reportedUserId = 0;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:flags:className", _className);
+		request.setAttribute(
+			"liferay-ui:flags:classPK", String.valueOf(_classPK));
+		request.setAttribute("liferay-ui:flags:contentTitle", _contentTitle);
+		request.setAttribute("liferay-ui:flags:label", String.valueOf(_label));
+		request.setAttribute("liferay-ui:flags:message", _message);
+		request.setAttribute(
+			"liferay-ui:flags:reportedUserId", String.valueOf(_reportedUserId));
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/flags/page.jsp";

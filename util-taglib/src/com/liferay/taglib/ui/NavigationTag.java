@@ -26,28 +26,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class NavigationTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:navigation:bulletStyle", _bulletStyle);
-		request.setAttribute(
-			"liferay-ui:navigation:displayStyle", _displayStyle);
-		request.setAttribute("liferay-ui:navigation:headerType", _headerType);
-		request.setAttribute(
-			"liferay-ui:navigation:rootLayoutType", _rootLayoutType);
-		request.setAttribute(
-			"liferay-ui:navigation:rootLayoutLevel",
-			String.valueOf(_rootLayoutLevel));
-		request.setAttribute(
-			"liferay-ui:navigation:includedLayouts", _includedLayouts);
-		request.setAttribute(
-			"liferay-ui:navigation:nestedChildren",
-			String.valueOf(_nestedChildren));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setBulletStyle(String bulletStyle) {
 		_bulletStyle = bulletStyle;
 	}
@@ -60,14 +38,6 @@ public class NavigationTag extends IncludeTag {
 		_headerType = headerType;
 	}
 
-	public void setRootLayoutType(String rootLayoutType) {
-		_rootLayoutType = rootLayoutType;
-	}
-
-	public void setRootLayoutLevel(int rootLayoutLevel) {
-		_rootLayoutLevel = rootLayoutLevel;
-	}
-
 	public void setIncludedLayouts(String includedLayouts) {
 		_includedLayouts = includedLayouts;
 	}
@@ -76,8 +46,43 @@ public class NavigationTag extends IncludeTag {
 		_nestedChildren = nestedChildren;
 	}
 
+	public void setRootLayoutLevel(int rootLayoutLevel) {
+		_rootLayoutLevel = rootLayoutLevel;
+	}
+
+	public void setRootLayoutType(String rootLayoutType) {
+		_rootLayoutType = rootLayoutType;
+	}
+
+	protected void cleanUp() {
+		_bulletStyle = "1";
+		_displayStyle = "1";
+		_headerType = "none";
+		_includedLayouts = "auto";
+		_nestedChildren = true;
+		_rootLayoutLevel = 1;
+		_rootLayoutType = "absolute";
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:navigation:bulletStyle", _bulletStyle);
+		request.setAttribute(
+			"liferay-ui:navigation:displayStyle", _displayStyle);
+		request.setAttribute("liferay-ui:navigation:headerType", _headerType);
+		request.setAttribute(
+			"liferay-ui:navigation:includedLayouts", _includedLayouts);
+		request.setAttribute(
+			"liferay-ui:navigation:nestedChildren",
+			String.valueOf(_nestedChildren));
+		request.setAttribute(
+			"liferay-ui:navigation:rootLayoutLevel",
+			String.valueOf(_rootLayoutLevel));
+		request.setAttribute(
+			"liferay-ui:navigation:rootLayoutType", _rootLayoutType);
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/navigation/page.jsp";
@@ -85,9 +90,9 @@ public class NavigationTag extends IncludeTag {
 	private String _bulletStyle = "1";
 	private String _displayStyle = "1";
 	private String _headerType = "none";
-	private String _rootLayoutType = "absolute";
-	private int _rootLayoutLevel = 1;
 	private String _includedLayouts = "auto";
 	private boolean _nestedChildren = true;
+	private int _rootLayoutLevel = 1;
+	private String _rootLayoutType = "absolute";
 
 }

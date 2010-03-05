@@ -15,99 +15,59 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
-import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="SearchToggleTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SearchToggleTag extends TagSupport {
+public class SearchToggleTag extends IncludeTag {
 
-	public int doStartTag() throws JspException {
-		try {
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
-
-			request.setAttribute("liferay-ui:search-toggle:id", _id);
-			request.setAttribute(
-				"liferay-ui:search-toggle:displayTerms", _displayTerms);
-			request.setAttribute(
-				"liferay-ui:search-toggle:buttonLabel", _buttonLabel);
-
-			PortalIncludeUtil.include(pageContext, getStartPage());
-
-			return EVAL_BODY_INCLUDE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
-
-	public int doEndTag() throws JspException {
-		try {
-			PortalIncludeUtil.include(pageContext, getEndPage());
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
-
-	protected String getStartPage() {
-		if (Validator.isNull(_startPage)) {
-			return _START_PAGE;
-		}
-		else {
-			return _startPage;
-		}
-	}
-
-	public void setStartPage(String startPage) {
-		_startPage = startPage;
-	}
-
-	protected String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
-	}
-
-	public void setEndPage(String endPage) {
-		_endPage = endPage;
-	}
-
-	public void setId(String id) {
-		_id = id;
+	public void setButtonLabel(String buttonLabel) {
+		_buttonLabel = buttonLabel;
 	}
 
 	public void setDisplayTerms(DisplayTerms displayTerms) {
 		_displayTerms = displayTerms;
 	}
 
-	public void setButtonLabel(String buttonLabel) {
-		_buttonLabel = buttonLabel;
+	public void setId(String id) {
+		_id = id;
 	}
 
-	private static final String _START_PAGE =
-		"/html/taglib/ui/search_toggle/start.jsp";
+	protected void cleanUp() {
+		_buttonLabel = null;
+		_displayTerms = null;
+		_id = null;
+	}
+
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
+	protected String getStartPage() {
+		return _START_PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:search-toggle:buttonLabel", _buttonLabel);
+		request.setAttribute(
+			"liferay-ui:search-toggle:displayTerms", _displayTerms);
+		request.setAttribute("liferay-ui:search-toggle:id", _id);
+	}
 
 	private static final String _END_PAGE =
 		"/html/taglib/ui/search_toggle/end.jsp";
 
-	private String _startPage;
-	private String _endPage;
-	private String _id;
-	private DisplayTerms _displayTerms;
+	private static final String _START_PAGE =
+		"/html/taglib/ui/search_toggle/start.jsp";
+
 	private String _buttonLabel;
+	private DisplayTerms _displayTerms;
+	private String _id;
 
 }

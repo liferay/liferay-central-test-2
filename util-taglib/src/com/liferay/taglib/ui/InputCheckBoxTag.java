@@ -25,64 +25,69 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class InputCheckBoxTag extends IncludeTag {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:input-checkbox:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:input-checkbox:formName", _formName);
-		request.setAttribute("liferay-ui:input-checkbox:param", _param);
-		request.setAttribute("liferay-ui:input-checkbox:id", _id);
-		request.setAttribute(
-			"liferay-ui:input-checkbox:defaultValue", _defaultValue);
-		request.setAttribute("liferay-ui:input-checkbox:onClick", _onClick);
-		request.setAttribute(
-			"liferay-ui:input-checkbox:disabled", String.valueOf(_disabled));
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
-	}
-
-	public void setFormName(String formName) {
-		_formName = formName;
-	}
-
-	public void setParam(String param) {
-		_param = param;
-	}
-
-	public void setId(String id) {
-		_id = id;
 	}
 
 	public void setDefaultValue(boolean defaultValue) {
 		_defaultValue = Boolean.valueOf(defaultValue);
 	}
 
+	public void setDisabled(boolean disabled) {
+		_disabled = disabled;
+	}
+
+	public void setFormName(String formName) {
+		_formName = formName;
+	}
+
+	public void setId(String id) {
+		_id = id;
+	}
+
 	public void setOnClick(String onClick) {
 		_onClick = onClick;
 	}
 
-	public void setDisabled(boolean disabled) {
-		_disabled = disabled;
+	public void setParam(String param) {
+		_param = param;
+	}
+
+	protected void cleanUp() {
+		_cssClass = null;
+		_defaultValue = Boolean.FALSE;
+		_disabled = false;
+		_formName = "fm";
+		_id = null;
+		_onClick = null;
+		_param = null;
 	}
 
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:input-checkbox:cssClass", _cssClass);
+		request.setAttribute(
+			"liferay-ui:input-checkbox:defaultValue", _defaultValue);
+		request.setAttribute(
+			"liferay-ui:input-checkbox:disabled", String.valueOf(_disabled));
+		request.setAttribute("liferay-ui:input-checkbox:formName", _formName);
+		request.setAttribute("liferay-ui:input-checkbox:id", _id);
+		request.setAttribute("liferay-ui:input-checkbox:onClick", _onClick);
+		request.setAttribute("liferay-ui:input-checkbox:param", _param);
+	}
+
 	private static final String _PAGE =
 		"/html/taglib/ui/input_checkbox/page.jsp";
 
 	private String _cssClass;
-	private String _formName = "fm";
-	private String _param;
-	private String _id;
 	private Boolean _defaultValue = Boolean.FALSE;
-	private String _onClick;
 	private boolean _disabled;
+	private String _formName = "fm";
+	private String _id;
+	private String _onClick;
+	private String _param;
 
 }
