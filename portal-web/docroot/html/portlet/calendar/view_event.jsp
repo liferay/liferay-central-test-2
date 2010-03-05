@@ -440,27 +440,27 @@ request.setAttribute("view_event.jsp-event", event);
 	</aui:column>
 </aui:layout>
 
-
-
 <c:if test="<%= enableComments %>">
-	<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documentsPanel" persistState="<%= true %>" title='Comments'>
-			<portlet:actionURL var="discussionURL">
-				<portlet:param name="struts_action" value="/calendar/edit_event_discussion" />
-			</portlet:actionURL>
+	<br />
 
-			<liferay-ui:discussion
-				className="<%= CalEvent.class.getName() %>"
-				classPK="<%= event.getEventId() %>"
-				formAction="<%= discussionURL %>"
-				formName="fm2"
-				ratingsEnabled="true"
-				redirect="<%= currentURL %>"
-				subject="<%= event.getTitle() %>"
-				userId="<%= event.getUserId() %>"
-			/>
-		</liferay-ui:panel>
-	</liferay-ui:panel-container>
+	<liferay-ui:tabs names="comments" />
+
+	<br /><br />
+
+	<portlet:actionURL var="discussionURL">
+		<portlet:param name="struts_action" value="/calendar/edit_event_discussion" />
+	</portlet:actionURL>
+
+	<liferay-ui:discussion
+		className="<%= CalEvent.class.getName() %>"
+		classPK="<%= event.getEventId() %>"
+		formAction="<%= discussionURL %>"
+		formName="fm2"
+		ratingsEnabled="true"
+		redirect="<%= currentURL %>"
+		subject="<%= event.getTitle() %>"
+		userId="<%= event.getUserId() %>"
+	/>
 </c:if>
 
 <%
