@@ -122,7 +122,7 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 	}
 
 	private static final String _CONTENT_WRAPPER_PRE =
-		"<div id=\"content-wrapper\" class=\"column-1\">";
+		"<div class=\"column-1\" id=\"main-content\" role=\"main\">";
 
 	private static final String _CONTENT_WRAPPER_POST = "</div>";
 
