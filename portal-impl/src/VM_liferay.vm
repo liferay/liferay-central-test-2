@@ -74,8 +74,8 @@ img, .png {
 	#set ($breadcrumb_tag = $theme.getBreadcrumbTag())
 
 	#if ($control_panel == "control_panel")
-		$breadcrumb_tag.setShowGuestGroup(false);
-		$breadcrumb_tag.setShowParentGroups(false);
+		$breadcrumb_tag.setShowGuestGroup(false)
+		$breadcrumb_tag.setShowParentGroups(false)
 	#end
 
 	$breadcrumb_tag.runTag()
