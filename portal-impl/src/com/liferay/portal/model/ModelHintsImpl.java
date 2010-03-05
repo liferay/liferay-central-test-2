@@ -114,7 +114,7 @@ public class ModelHintsImpl implements ModelHints {
 		}
 	}
 
-	public boolean isLocalized (String model, String field) {
+	public boolean isLocalized(String model, String field) {
 		Map<String, Object> fields = (Map<String, Object>)_modelFields.get(
 			model);
 
