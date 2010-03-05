@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-calendar .calendar-container {
-	background: #FFF url(<%= themeImagesPath %>/calendar/calendar_day_drop_shadow.png) repeat-x 0 99%;
+	background: #fff url(<%= themeImagesPath %>/calendar/calendar_day_drop_shadow.png) repeat-x 0 99%;
 	border: 1px solid #D7D7D7;
 	width: 400px;
 }
@@ -35,7 +35,7 @@
 }
 
 .portlet-calendar .calendar td {
-	border: 1px solid #CCC;
+	border: 1px solid #ccc;
 	padding: 5px;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .portlet-calendar .calendar-day {
-	float: left;
+	float:left;
 	text-align: center;
 	width: 209px;
 }
@@ -66,12 +66,12 @@
 
 .portlet-calendar .calendar-day .day-text {
 	background: #727C81;
-	color: #FFF;
+	color: #fff;
 	font-size: 1.6em;
 }
 
 .portlet-calendar .calendar-day .day-number {
-	border: 1px solid #FFF;
+	border: 1px solid #fff;
 	border-bottom: none;
 	font-size: 110px;
 	font-weight: normal;
@@ -85,10 +85,12 @@
 }
 
 .portlet-calendar .calendar-container .taglib-calendar {
-	background: #FFF;
-	border-left: 1px solid #D7D7D7;
-	margin-left: -1px;
-	padding-left: 0;
+	background: url(<%= themeImagesPath %>/calendar/calendar_drop_shadow.png) repeat-y 0 0;
+	clear: none;
+	float: right;
+	margin-bottom: 0;
+	margin-left: -8px;
+	padding-left: 8px;
 }
 
 .ie6 .portlet-calendar .taglib-calendar {
@@ -97,6 +99,13 @@
 	margin-left: 0;
 	padding-left: 0;
 	width: 189px;
+}
+
+.portlet-calendar .calendar-container .taglib-calendar {
+	background: #fff;
+	border-left: 1px solid #D7D7D7;
+	margin-left: -1px;
+	padding-left: 0;
 }
 
 .portlet-calendar .taglib-calendar table {
@@ -119,7 +128,7 @@
 }
 
 .portlet-calendar .calendar-current-day a {
-	color: #FFF;
+	color: #fff;
 	font-weight: bold;
 	text-decoration: none;
 }
@@ -127,7 +136,7 @@
 .portlet-calendar .taglib-calendar tr td.calendar-current-day a:hover, .taglib-calendar tr td.calendar-current-day a:focus {
 	background-color: #DFF4FF;
 	border-color: #AEB8BC;
-	color: #06C;
+	color: #06c;
 }
 
 .portlet-calendar .taglib-calendar td.calendar-current-day a span {
@@ -258,8 +267,4 @@
 
 .portlet-calendar .calendar-event-details .lfr-panel-content {
 	padding: 10px 15px;
-}
-
-.portlet-calendar #commentsPanelContainer {
-	border-width: 0;
 }
