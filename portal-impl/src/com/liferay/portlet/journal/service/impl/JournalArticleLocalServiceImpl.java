@@ -676,7 +676,7 @@ public class JournalArticleLocalServiceImpl
 
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
 				article.getCompanyId(), article.getGroupId(),
-				JournalArticle.class.getName(), article.getResourcePrimKey());
+				JournalArticle.class.getName(), article.getId());
 
 			// Ratings
 
