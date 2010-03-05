@@ -184,11 +184,6 @@ body.portlet {
 	font-size: 13px;
 }
 
-.lfr-panel-page #portlet-layout {
-	margin: 0;
-	width: auto;
-}
-
 .lfr-panel-page .lfr-add-content h2 span {
 	background-color: #D3DADD;
 }

@@ -2,7 +2,7 @@
 	<table class="portlet-layout">
 		<tr>
 			<td class="portlet-column portlet-column-only" id="column-1">
-				$processor.processColumn("column-1", "portlet-column-content portlet-column-only-content")
+				$processor.processColumn("column-1", "portlet-column-content portlet-column-content-only")
 			</td>
 		</tr>
 	</table>

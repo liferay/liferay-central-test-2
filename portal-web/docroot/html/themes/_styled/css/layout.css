@@ -34,13 +34,13 @@
 	padding: 5px;
 }
 
-.portlet-column-first-content,
-.portlet-column-only-content {
+.portlet-column-content-first,
+.portlet-column-content-only {
 	padding-left: 0;
 }
 
-.portlet-column-last-content,
-.portlet-column-only-content {
+.portlet-column-content-last,
+.portlet-column-content-only {
 	padding-right: 0;
 }
 

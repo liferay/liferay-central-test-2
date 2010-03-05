@@ -21,12 +21,12 @@
 .portlet-column-content {
 }
 
-.portlet-column-first-content,
-.portlet-column-only-content {
+.portlet-column-content-first,
+.portlet-column-content-only {
 }
 
-.portlet-column-last-content,
-.portlet-column-only-content {
+.portlet-column-content-last,
+.portlet-column-content-only {
 }
 
 /* ---------- Column widths ---------- */
