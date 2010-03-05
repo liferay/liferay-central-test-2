@@ -72,11 +72,8 @@ public class SocialActivitiesTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
-		if (_activities != null) {
-			request.setAttribute(
-				"liferay-ui:social-activities:activities", _activities);
-		}
-
+		request.setAttribute(
+			"liferay-ui:social-activities:activities", _activities);
 		request.setAttribute(
 			"liferay-ui:social-activities:className", _className);
 		request.setAttribute(

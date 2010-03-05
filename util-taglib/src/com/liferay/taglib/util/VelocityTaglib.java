@@ -63,6 +63,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="VelocityTaglib.java.html"><b><i>View Source</i></b></a>
@@ -167,12 +168,9 @@ public class VelocityTaglib {
 	}
 
 	public BreadcrumbTag getBreadcrumbTag() {
-		StringPageContext stringPageContext = new StringPageContext(
-			_pageContext);
-
 		BreadcrumbTag breadcrumbTag = new BreadcrumbTag();
 
-		breadcrumbTag.setPageContext(stringPageContext);
+		setUp(breadcrumbTag);
 
 		return breadcrumbTag;
 	}
@@ -187,223 +185,125 @@ public class VelocityTaglib {
 	}
 
 	public String iconBack() throws Exception {
-		_stringResponse.recycle();
+		IconBackTag iconBackTag = new IconBackTag();
 
-		IconBackTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconBackTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconBack(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconBackTag.doTag(page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconBackTag.runTag();
 	}
 
 	public String iconClose() throws Exception {
-		_stringResponse.recycle();
+		IconCloseTag iconCloseTag = new IconCloseTag();
 
-		IconCloseTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconCloseTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconClose(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconCloseTag.doTag(page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconCloseTag.runTag();
 	}
 
 	public String iconConfiguration() throws Exception {
-		_stringResponse.recycle();
+		IconConfigurationTag iconConfigurationTag = new IconConfigurationTag();
 
-		IconConfigurationTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconConfigurationTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconConfiguration(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconConfigurationTag.doTag(
-			page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconConfigurationTag.runTag();
 	}
 
 	public String iconEdit() throws Exception {
-		_stringResponse.recycle();
+		IconEditTag iconEditTag = new IconEditTag();
 
-		IconEditTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconEditTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconEdit(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconEditTag.doTag(page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconEditTag.runTag();
 	}
 
 	public String iconEditDefaults() throws Exception {
-		_stringResponse.recycle();
+		IconEditDefaultsTag iconEditDefaultsTag = new IconEditDefaultsTag();
 
-		IconEditDefaultsTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconEditDefaultsTag);
 
-		return _stringResponse.getString();
+		return iconEditDefaultsTag.runTag();
 	}
 
 	public String iconEditGuest() throws Exception {
-		_stringResponse.recycle();
+		IconEditGuestTag iconEditGuestTag = new IconEditGuestTag();
 
-		IconEditGuestTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconEditGuestTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconEditGuest(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconEditGuestTag.doTag(
-			page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconEditGuestTag.runTag();
 	}
 
 	public String iconHelp() throws Exception {
-		_stringResponse.recycle();
+		IconHelpTag iconHelpTag = new IconHelpTag();
 
-		IconHelpTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconHelpTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconHelp(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconHelpTag.doTag(page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconHelpTag.runTag();
 	}
 
 	public String iconMaximize() throws Exception {
-		_stringResponse.recycle();
+		IconMaximizeTag iconMaximizeTag = new IconMaximizeTag();
 
-		IconMaximizeTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconMaximizeTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconMaximize(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconMaximizeTag.doTag(page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconMaximizeTag.runTag();
 	}
 
 	public String iconMinimize() throws Exception {
-		_stringResponse.recycle();
+		IconMinimizeTag iconMinimizeTag = new IconMinimizeTag();
 
-		IconMinimizeTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconMinimizeTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconMinimize(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconMinimizeTag.doTag(page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconMinimizeTag.runTag();
 	}
 
 	public String iconOptions() throws Exception {
-		_stringResponse.recycle();
+		IconOptionsTag iconOptionsTag = new IconOptionsTag();
 
-		IconOptionsTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconOptionsTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconOptions(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconOptionsTag.doTag(page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconOptionsTag.runTag();
 	}
 
 	public String iconPortlet() throws Exception {
-		_stringResponse.recycle();
+		IconPortletTag iconPortletTag = new IconPortletTag();
 
-		IconPortletTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconPortletTag);
 
-		return _stringResponse.getString();
+		return iconPortletTag.runTag();
 	}
 
-	public String iconPortlet(String page, Portlet portlet) throws Exception {
-		_stringResponse.recycle();
+	public String iconPortlet(Portlet portlet) throws Exception {
+		IconPortletTag iconPortletTag = new IconPortletTag();
 
-		IconPortletTag.doTag(
-			page, portlet, _servletContext, _request, _stringResponse);
+		setUp(iconPortletTag);
 
-		return _stringResponse.getString();
+		iconPortletTag.setPortlet(portlet);
+
+		return iconPortletTag.runTag();
 	}
 
 	public String iconPortletCss() throws Exception {
-		_stringResponse.recycle();
+		IconPortletCssTag iconPortletCssTag = new IconPortletCssTag();
 
-		IconPortletCssTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconPortletCssTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconPortletCss(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconPortletCssTag.doTag(
-			page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconPortletCssTag.runTag();
 	}
 
 	public String iconPrint() throws Exception {
-		_stringResponse.recycle();
+		IconPrintTag iconPrintTag = new IconPrintTag();
 
-		IconPrintTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconPrintTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconPrint(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconPrintTag.doTag(page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconPrintTag.runTag();
 	}
 
 	public String iconRefresh() throws Exception {
-		_stringResponse.recycle();
+		IconRefreshTag iconRefreshTag = new IconRefreshTag();
 
-		IconRefreshTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(iconRefreshTag);
 
-		return _stringResponse.getString();
-	}
-
-	public String iconRefresh(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconRefreshTag.doTag(page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return iconRefreshTag.runTag();
 	}
 
 	public String include(String page) throws Exception {
@@ -694,6 +594,13 @@ public class VelocityTaglib {
 		return WrapPortletTag.doTag(
 			wrapPage, portletPage, _servletContext, _request, _stringResponse,
 			_pageContext);
+	}
+
+	protected void setUp(TagSupport tagSupport) {
+		StringPageContext stringPageContext = new StringPageContext(
+			_pageContext);
+
+		tagSupport.setPageContext(stringPageContext);
 	}
 
 	private ServletContext _servletContext;

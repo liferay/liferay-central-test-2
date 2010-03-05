@@ -14,16 +14,11 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspException;
 
 /**
  * <a href="FlashTag.java.html"><b><i>View Source</i></b></a>
@@ -31,80 +26,6 @@ import javax.servlet.jsp.JspException;
  * @author Brian Wing Shun Chan
  */
 public class FlashTag extends IncludeTag {
-
-	public static void doTag(
-			String align, String allowScriptAccess, String base, String bgcolor,
-			String devicefont, String flashvars, String height, String id,
-			String loop, String menu, String movie, String play, String quality,
-			String salign, String scale, String swliveconnect, String version,
-			String width, String wmode, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response)
-		throws Exception {
-
-		doTag(
-			_PAGE, align, allowScriptAccess, base, bgcolor, devicefont,
-			flashvars, height, id, loop, menu, movie, play, quality, salign,
-			scale, swliveconnect, version, width, wmode, servletContext,
-			request, response);
-	}
-
-	public static void doTag(
-			String page, String align, String allowScriptAccess, String base,
-			String bgcolor, String devicefont, String flashvars, String height,
-			String id, String loop, String menu, String movie, String play,
-			String quality, String salign, String scale, String swliveconnect,
-			String version, String width, String wmode,
-			ServletContext servletContext, HttpServletRequest reqquest,
-			HttpServletResponse response)
-		throws Exception {
-
-		reqquest.setAttribute("liferay-ui:flash:align", align);
-		reqquest.setAttribute(
-			"liferay-ui:flash:allowScriptAccess", allowScriptAccess);
-		reqquest.setAttribute("liferay-ui:flash:base", base);
-		reqquest.setAttribute("liferay-ui:flash:bgcolor", bgcolor);
-		reqquest.setAttribute("liferay-ui:flash:devicefont", devicefont);
-		reqquest.setAttribute("liferay-ui:flash:flashvars", flashvars);
-		reqquest.setAttribute("liferay-ui:flash:height", height);
-		reqquest.setAttribute("liferay-ui:flash:id", id);
-		reqquest.setAttribute("liferay-ui:flash:loop", loop);
-		reqquest.setAttribute("liferay-ui:flash:menu", menu);
-		reqquest.setAttribute("liferay-ui:flash:movie", movie);
-		reqquest.setAttribute("liferay-ui:flash:play", play);
-		reqquest.setAttribute("liferay-ui:flash:quality", quality);
-		reqquest.setAttribute("liferay-ui:flash:salign", salign);
-		reqquest.setAttribute("liferay-ui:flash:scale", scale);
-		reqquest.setAttribute("liferay-ui:flash:swliveconnect", swliveconnect);
-		reqquest.setAttribute("liferay-ui:flash:version", version);
-		reqquest.setAttribute("liferay-ui:flash:width", width);
-		reqquest.setAttribute("liferay-ui:flash:wmode", wmode);
-
-		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(page);
-
-		requestDispatcher.include(reqquest, response);
-	}
-
-	public int doEndTag() throws JspException {
-		try {
-			ServletContext servletContext = getServletContext();
-			HttpServletRequest request = getServletRequest();
-			StringServletResponse stringResponse = getServletResponse();
-
-			doTag(
-				getPage(), _align, _allowScriptAccess, _base, _bgcolor,
-				_devicefont, _flashvars, _height, _id, _loop, _menu, _movie,
-				_play, _quality, _salign, _scale, _swliveconnect, _version,
-				_width, _wmode, servletContext, request, stringResponse);
-
-			pageContext.getOut().print(stringResponse.getString());
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
 
 	public void setAlign(String align) {
 		if (Validator.isNotNull(align)) {
@@ -218,8 +139,53 @@ public class FlashTag extends IncludeTag {
 		}
 	}
 
+	protected void cleanUp() {
+		_align = "left";
+		_allowScriptAccess = "sameDomain";
+		_base = StringPool.PERIOD;
+		_bgcolor = "#FFFFFF";
+		_devicefont = Boolean.TRUE.toString();
+		_flashvars = StringPool.BLANK;
+		_height = "500";
+		_id = StringPool.BLANK;
+		_loop = Boolean.TRUE.toString();
+		_menu = Boolean.FALSE.toString();
+		_movie = StringPool.BLANK;
+		_play = Boolean.FALSE.toString();
+		_quality = "best";
+		_salign = StringPool.BLANK;
+		_scale = "showall";
+		_swliveconnect = Boolean.FALSE.toString();
+		_version = "7";
+		_width = "100%";
+		_wmode = "opaque";
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:flash:align", _align);
+		request.setAttribute(
+			"liferay-ui:flash:allowScriptAccess", _allowScriptAccess);
+		request.setAttribute("liferay-ui:flash:base", _base);
+		request.setAttribute("liferay-ui:flash:bgcolor", _bgcolor);
+		request.setAttribute("liferay-ui:flash:devicefont", _devicefont);
+		request.setAttribute("liferay-ui:flash:flashvars", _flashvars);
+		request.setAttribute("liferay-ui:flash:height", _height);
+		request.setAttribute("liferay-ui:flash:id", _id);
+		request.setAttribute("liferay-ui:flash:loop", _loop);
+		request.setAttribute("liferay-ui:flash:menu", _menu);
+		request.setAttribute("liferay-ui:flash:movie", _movie);
+		request.setAttribute("liferay-ui:flash:play", _play);
+		request.setAttribute("liferay-ui:flash:quality", _quality);
+		request.setAttribute("liferay-ui:flash:salign", _salign);
+		request.setAttribute("liferay-ui:flash:scale", _scale);
+		request.setAttribute("liferay-ui:flash:swliveconnect", _swliveconnect);
+		request.setAttribute("liferay-ui:flash:version", _version);
+		request.setAttribute("liferay-ui:flash:width", _width);
+		request.setAttribute("liferay-ui:flash:wmode", _wmode);
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/flash/page.jsp";
