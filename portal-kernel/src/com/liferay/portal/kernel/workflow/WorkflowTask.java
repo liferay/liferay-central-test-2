@@ -23,8 +23,11 @@ import java.util.Map;
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public interface WorkflowTask {
+
+	public String getAssigneeEmailAddress();
 
 	public long getAssigneeRoleId();
 

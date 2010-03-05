@@ -24,8 +24,13 @@ import java.util.Map;
  *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class DefaultWorkflowTask implements Serializable, WorkflowTask {
+
+	public String getAssigneeEmailAddress() {
+		return _assigneeEmailAddress;
+	}
 
 	public long getAssigneeRoleId() {
 		return _assigneeRoleId;
@@ -92,6 +97,10 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 		}
 	}
 
+	public void setAssigneeEmailAddress(String assigneeEmailAddress) {
+		_assigneeEmailAddress = assigneeEmailAddress;
+	}
+
 	public void setAssigneeRoleId(long assigneeRoleId) {
 		_assigneeRoleId = assigneeRoleId;
 	}
@@ -148,6 +157,7 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 		_workflowTaskId = workflowTaskId;
 	}
 
+	private String _assigneeEmailAddress;
 	private long _assigneeRoleId;
 	private long _assigneeUserId;
 	private boolean _asynchronous;
