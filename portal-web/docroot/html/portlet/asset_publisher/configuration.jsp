@@ -76,6 +76,10 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		background-color: #F8F8F8;
 		padding: 10px;
 	}
+
+	.aui-form .general-display-settings {
+		margin-bottom: 1em;
+	}
 </style>
 
 <aui:form action="<%= configurationActionURL.toString() %>" method="post" name="fm">
