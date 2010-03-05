@@ -14,15 +14,10 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspException;
 
 /**
  * <a href="WriteTag.java.html"><b><i>View Source</i></b></a>
@@ -30,52 +25,6 @@ import javax.servlet.jsp.JspException;
  * @author Brian Wing Shun Chan
  */
 public class WriteTag extends IncludeTag {
-
-	public static void doTag(
-			Object bean, String property, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response)
-		throws Exception {
-
-		doTag(_PAGE, bean, property, servletContext, request, response);
-	}
-
-	public static void doTag(
-			String page, Object bean, String property,
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
-
-		if ((bean == null) || Validator.isNull(property)) {
-			return;
-		}
-
-		request.setAttribute("liferay-ui:write:bean", bean);
-		request.setAttribute("liferay-ui:write:property", property);
-
-		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(page);
-
-		requestDispatcher.include(request, response);
-	}
-
-	public int doEndTag() throws JspException {
-		try {
-			ServletContext servletContext = getServletContext();
-			HttpServletRequest request = getServletRequest();
-			StringServletResponse stringResponse = getServletResponse();
-
-			doTag(
-				getPage(), _bean, _property, servletContext, request,
-				stringResponse);
-
-			pageContext.getOut().print(stringResponse.getString());
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
 
 	public void setBean(Object bean) {
 		_bean = bean;
@@ -85,8 +34,23 @@ public class WriteTag extends IncludeTag {
 		_property = property;
 	}
 
+	protected void cleanUp() {
+		_bean = null;
+		_property = null;
+	}
+
 	protected String getPage() {
-		return _PAGE;
+		if ((_bean == null) || Validator.isNull(_property)) {
+			return null;
+		}
+		else {
+			return _PAGE;
+		}
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:write:bean", _bean);
+		request.setAttribute("liferay-ui:write:property", _property);
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/write/page.jsp";
