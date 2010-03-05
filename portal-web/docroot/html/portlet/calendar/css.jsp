@@ -259,5 +259,12 @@
 
 .portlet-calendar .reminders {
 	clear: both;
-	padding-left: 1em;
+}
+
+.portlet-calendar .calendar-event-details .aui-field-wrapper-content {
+	margin: 0;
+}
+
+.portlet-calendar .calendar-event-details .lfr-panel-content {
+	padding: 10px 15px;
 }

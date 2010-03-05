@@ -191,7 +191,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 	<br />
 
-	<liferay-ui:panel-container extended="<%= true %>" id="calendarEventDetailsPanelContainer" persistState="<%= true %>">
+	<liferay-ui:panel-container cssClass="calendar-event-details" extended="<%= true %>" id="calendarEventDetailsPanelContainer" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="calendarEventRepeatPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "repeat") %>'>
 			<liferay-ui:error exception="<%= EventEndDateException.class %>" message="please-enter-a-valid-end-date" />
 
