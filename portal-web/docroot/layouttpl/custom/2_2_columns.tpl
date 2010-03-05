@@ -1,4 +1,4 @@
-<div class="columns-2-2" id="main-content">
+<div class="columns-2-2" id="main-content" role="main">
 	<table class="portlet-layout">
 	<tr>
 		<td class="aui-w70 portlet-column portlet-column-first" id="column-1">
