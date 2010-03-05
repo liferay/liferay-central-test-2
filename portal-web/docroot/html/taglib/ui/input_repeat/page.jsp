@@ -209,7 +209,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 %>
 
 <aui:fieldset cssClass='<%= "taglib-input-repeat " + cssClass %>'>
-	<aui:column columnWidth="25">
+	<aui:column columnWidth="25" first="<%= true %>">
 		<aui:field-wrapper label="repeat" name="recurrenceType">
 
 			<%
@@ -244,7 +244,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 		</aui:field-wrapper>
 	</aui:column>
 
-	<aui:column columnWidth="75">
+	<aui:column columnWidth="75" last="<%= true %>">
 		<div id="<portlet:namespace />neverTable" style="display: none;">
 			<liferay-ui:message key="do-not-repeat-this-event" />
 		</div>
