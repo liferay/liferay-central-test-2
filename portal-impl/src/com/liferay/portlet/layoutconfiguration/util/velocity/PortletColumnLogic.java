@@ -23,7 +23,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
-
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 
 import java.util.List;
