@@ -1,4 +1,4 @@
-<table class="portlet-layout columns-1" id="portlet-layout">
+<div class="columns-1" id="main-content">
 	<table class="portlet-layout">
 		<tr>
 			<td class="portlet-column portlet-column-only" id="column-1">
@@ -6,4 +6,4 @@
 			</td>
 		</tr>
 	</table>
-</table>
+</div>
