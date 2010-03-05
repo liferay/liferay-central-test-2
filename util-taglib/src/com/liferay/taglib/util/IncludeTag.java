@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
+import com.liferay.portal.kernel.servlet.StringPageContext;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
@@ -103,6 +104,31 @@ public class IncludeTag
 
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
+	}
+
+	public String runEndTag() throws JspException {
+		doStartTag();
+
+		StringPageContext stringPageContext = (StringPageContext)pageContext;
+
+		return stringPageContext.getString();
+	}
+
+	public String runStartTag() throws JspException {
+		doStartTag();
+
+		StringPageContext stringPageContext = (StringPageContext)pageContext;
+
+		return stringPageContext.getString();
+	}
+
+	public String runTag() throws JspException {
+		doStartTag();
+		doEndTag();
+
+		StringPageContext stringPageContext = (StringPageContext)pageContext;
+
+		return stringPageContext.getString();
 	}
 
 	protected void cleanUp() {

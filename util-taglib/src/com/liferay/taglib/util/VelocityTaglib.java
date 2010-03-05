@@ -14,11 +14,9 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.servlet.StringPageContext;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -59,7 +57,6 @@ import java.util.Map;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 import javax.servlet.RequestDispatcher;
@@ -165,57 +162,19 @@ public class VelocityTaglib {
 			portletConfiguration, params, writeOutput, _pageContext);
 	}
 
-	public String breadcrumb() throws Exception {
-		_stringResponse.recycle();
-
-		BreadcrumbTag.doTag(_servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
-	}
-
-	public String breadcrumb(
-			String page, Layout selLayout, String selLayoutParam,
-			PortletURL portletURL, int displayStyle)
-		throws Exception {
-
-		return breadcrumb (
-			page, selLayout, selLayoutParam, portletURL, displayStyle,
-			_SHOW_GUEST_GROUP, _SHOW_PARENT_GROUPS, true, true);
-	}
-
-	public String breadcrumb(
-			String page, Layout selLayout, String selLayoutParam,
-			PortletURL portletURL, int displayStyle, boolean showGuestGroup,
-			boolean showParentGroups, boolean showLayout,
-			boolean showPortletBreadcrumb)
-		throws Exception {
-
-		_stringResponse.recycle();
-
-		BreadcrumbTag.doTag(
-			page, selLayout, selLayoutParam, portletURL, displayStyle,
-			showGuestGroup, showParentGroups, showLayout, showPortletBreadcrumb,
-			_servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
-	}
-
-	public String breadcrumb(
-			int displayStyle, boolean showGuestGroup, boolean showParentGroups,
-			boolean showLayout, boolean showPortletBreadcrumb)
-		throws Exception {
-
-		_stringResponse.recycle();
-
-		BreadcrumbTag.doTag(
-			displayStyle, showGuestGroup, showParentGroups, showLayout,
-			showPortletBreadcrumb, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
-	}
-
 	public String doAsURL(long doAsUserId) throws Exception {
 		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
+	}
+
+	public BreadcrumbTag getBreadcrumbTag() {
+		StringPageContext stringPageContext = new StringPageContext(
+			_pageContext);
+
+		BreadcrumbTag breadcrumbTag = new BreadcrumbTag();
+
+		breadcrumbTag.setPageContext(stringPageContext);
+
+		return breadcrumbTag;
 	}
 
 	public String getSetting(String name) {
@@ -736,12 +695,6 @@ public class VelocityTaglib {
 			wrapPage, portletPage, _servletContext, _request, _stringResponse,
 			_pageContext);
 	}
-
-	private static final boolean _SHOW_GUEST_GROUP = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.BREADCRUMB_SHOW_GUEST_GROUP));
-
-	private static final boolean _SHOW_PARENT_GROUPS = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.BREADCRUMB_SHOW_PARENT_GROUPS));
 
 	private ServletContext _servletContext;
 	private HttpServletRequest _request;
