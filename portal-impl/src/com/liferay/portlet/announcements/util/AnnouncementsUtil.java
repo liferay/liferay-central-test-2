@@ -79,6 +79,19 @@ public class AnnouncementsUtil {
 			}
 		}
 
+		// User group announcements
+
+		List<UserGroup> userGroups =
+			UserGroupLocalServiceUtil.getUserUserGroups(userId);
+
+		if (userGroups.size() > 0) {
+			scopes.put(_USER_GROUP_CLASS_NAME_ID, _getUserGroupIds(userGroups));
+
+			for (UserGroup userGroup : userGroups) {
+				groupsList.add(userGroup.getGroup());
+			}
+		}
+
 		// Role announcements
 
 		if (groupsList.size() > 0) {
@@ -99,15 +112,6 @@ public class AnnouncementsUtil {
 			if (roles.size() > 0) {
 				scopes.put(_ROLE_CLASS_NAME_ID, _getRoleIds(roles));
 			}
-		}
-
-		// User group announcements
-
-		List<UserGroup> userGroups =
-			UserGroupLocalServiceUtil.getUserUserGroups(userId);
-
-		if (userGroups.size() > 0) {
-			scopes.put(_USER_GROUP_CLASS_NAME_ID, _getUserGroupIds(userGroups));
 		}
 
 		return scopes;
