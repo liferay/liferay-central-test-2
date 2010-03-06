@@ -14,14 +14,7 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.taglib.util.IncludeTag;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspException;
 
 /**
  * <a href="StagingTag.java.html"><b><i>View Source</i></b></a>
@@ -29,42 +22,6 @@ import javax.servlet.jsp.JspException;
  * @author Brian Wing Shun Chan
  */
 public class StagingTag extends IncludeTag {
-
-	public static void doTag(
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
-
-		doTag(_PAGE, servletContext, request, response);
-	}
-
-	public static void doTag(
-			String page, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response)
-		throws Exception {
-
-		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(page);
-
-		requestDispatcher.include(request, response);
-	}
-
-	public int doEndTag() throws JspException {
-		try {
-			ServletContext servletContext = getServletContext();
-			HttpServletRequest request = getServletRequest();
-			StringServletResponse response = getServletResponse();
-
-			doTag(getPage(), servletContext, request, response);
-
-			pageContext.getOut().print(response.getString());
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
 
 	protected String getPage() {
 		return _PAGE;

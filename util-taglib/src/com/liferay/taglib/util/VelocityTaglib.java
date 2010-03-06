@@ -163,6 +163,32 @@ public class VelocityTaglib {
 			portletConfiguration, params, writeOutput, _pageContext);
 	}
 
+	public String breadcrumb() throws Exception {
+		BreadcrumbTag breadcrumbTag = new BreadcrumbTag();
+
+		setUp(breadcrumbTag);
+
+		return breadcrumbTag.runTag();
+	}
+
+	public String breadcrumb(
+			int displayStyle, boolean showGuestGroup, boolean showParentGroups,
+			boolean showLayout, boolean showPortletBreadcrumb)
+		throws Exception {
+
+		BreadcrumbTag breadcrumbTag = new BreadcrumbTag();
+
+		setUp(breadcrumbTag);
+
+		breadcrumbTag.setDisplayStyle(displayStyle);
+		breadcrumbTag.setShowGuestGroup(showGuestGroup);
+		breadcrumbTag.setShowLayout(showLayout);
+		breadcrumbTag.setShowParentGroups(showParentGroups);
+		breadcrumbTag.setShowPortletBreadcrumb(showPortletBreadcrumb);
+
+		return breadcrumbTag.runTag();
+	}
+
 	public String doAsURL(long doAsUserId) throws Exception {
 		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
 	}
@@ -173,6 +199,22 @@ public class VelocityTaglib {
 		setUp(breadcrumbTag);
 
 		return breadcrumbTag;
+	}
+
+	public MyPlacesTag getMyPlacesTag() {
+		MyPlacesTag myPlacesTag = new MyPlacesTag();
+
+		setUp(myPlacesTag);
+
+		return myPlacesTag;
+	}
+
+	public PngImageTag getPngImageTag() {
+		PngImageTag pngImageTag = new PngImageTag();
+
+		setUp(pngImageTag);
+
+		return pngImageTag;
 	}
 
 	public String getSetting(String name) {
@@ -331,33 +373,36 @@ public class VelocityTaglib {
 	}
 
 	public String journalContentSearch() throws Exception {
-		_stringResponse.recycle();
+		JournalContentSearchTag journalContentSearchTag =
+			new JournalContentSearchTag();
 
-		JournalContentSearchTag.doTag(
-			_servletContext, _request, _stringResponse);
+		setUp(journalContentSearchTag);
 
-		return _stringResponse.getString();
+		return journalContentSearchTag.runTag();
 	}
 
 	public String language() throws Exception {
-		_stringResponse.recycle();
+		LanguageTag languageTag = new LanguageTag();
 
-		LanguageTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(languageTag);
 
-		return _stringResponse.getString();
+		return languageTag.runTag();
 	}
 
 	public String language(
 			String formName, String formAction, String name, int displayStyle)
 		throws Exception {
 
-		_stringResponse.recycle();
+		LanguageTag languageTag = new LanguageTag();
 
-		LanguageTag.doTag(
-			formName, formAction, name, null, displayStyle, _servletContext,
-			_request, _stringResponse);
+		setUp(languageTag);
 
-		return _stringResponse.getString();
+		languageTag.setDisplayStyle(displayStyle);
+		languageTag.setFormAction(formAction);
+		languageTag.setFormName(formName);
+		languageTag.setName(name);
+
+		return languageTag.runTag();
 	}
 
 	public String language(
@@ -365,41 +410,17 @@ public class VelocityTaglib {
 			String[] languageIds, int displayStyle)
 		throws Exception {
 
-		_stringResponse.recycle();
+		LanguageTag languageTag = new LanguageTag();
 
-		LanguageTag.doTag(
-			formName, formAction, name, languageIds, displayStyle,
-			_servletContext, _request, _stringResponse);
+		setUp(languageTag);
 
-		return _stringResponse.getString();
-	}
+		languageTag.setDisplayStyle(displayStyle);
+		languageTag.setFormAction(formAction);
+		languageTag.setFormName(formName);
+		languageTag.setLanguageIds(languageIds);
+		languageTag.setName(name);
 
-	public String language(
-			String page, String formName, String formAction, String name,
-			int displayStyle)
-		throws Exception {
-
-		_stringResponse.recycle();
-
-		LanguageTag.doTag(
-			page, formName, formAction, name, null, displayStyle,
-			_servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
-	}
-
-	public String language(
-			String page, String formName, String formAction, String name,
-			String[] languageIds, int displayStyle)
-		throws Exception {
-
-		_stringResponse.recycle();
-
-		LanguageTag.doTag(
-			page, formName, formAction, name, languageIds, displayStyle,
-			_servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		return languageTag.runTag();
 	}
 
 	public String layoutIcon(Layout layout) throws Exception {
@@ -419,19 +440,21 @@ public class VelocityTaglib {
 	}
 
 	public String myPlaces() throws Exception {
-		_stringResponse.recycle();
+		MyPlacesTag myPlacesTag = new MyPlacesTag();
 
-		MyPlacesTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(myPlacesTag);
 
-		return _stringResponse.getString();
+		return myPlacesTag.runTag();
 	}
 
 	public String myPlaces(int max) throws Exception {
-		_stringResponse.recycle();
+		MyPlacesTag myPlacesTag = new MyPlacesTag();
 
-		MyPlacesTag.doTag(max, _servletContext, _request, _stringResponse);
+		setUp(myPlacesTag);
 
-		return _stringResponse.getString();
+		myPlacesTag.setMax(max);
+
+		return myPlacesTag.runTag();
 	}
 
 	public String permissionsURL(
@@ -442,17 +465,6 @@ public class VelocityTaglib {
 		return PermissionsURLTag.doTag(
 			redirect, modelResource, modelResourceDescription, resourcePrimKey,
 			null, false, _pageContext);
-	}
-
-	public String pngImage(String image, String height, String width)
-		throws Exception {
-
-		_stringResponse.recycle();
-
-		PngImageTag.doTag(image, height, width, _servletContext, _request,
-			_stringResponse);
-
-		return _stringResponse.getString();
 	}
 
 	public String renderURL(String portletName, String queryString)
@@ -556,19 +568,19 @@ public class VelocityTaglib {
 	}
 
 	public String search() throws Exception {
-		_stringResponse.recycle();
+		SearchTag searchTag = new SearchTag();
 
-		SearchTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(searchTag);
 
-		return _stringResponse.getString();
+		return searchTag.runTag();
 	}
 
 	public String staging() throws Exception {
-		_stringResponse.recycle();
+		StagingTag stagingTag = new StagingTag();
 
-		StagingTag.doTag(_servletContext, _request, _stringResponse);
+		setUp(stagingTag);
 
-		return _stringResponse.getString();
+		return stagingTag.runTag();
 	}
 
 	public String toggle(

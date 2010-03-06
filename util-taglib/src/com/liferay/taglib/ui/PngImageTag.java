@@ -14,14 +14,9 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspException;
 
 /**
  * <a href="PngImageTag.java.html"><b><i>View Source</i></b></a>
@@ -30,70 +25,38 @@ import javax.servlet.jsp.JspException;
  */
 public class PngImageTag extends IncludeTag {
 
-	public static void doTag(
-			String image, String height, String width,
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
-
-		doTag(_PAGE, image, height, width, servletContext, request, response);
-	}
-
-	public static void doTag(
-			String page, String image, String height, String width,
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
-
-		request.setAttribute("liferay-ui:png_image:image", image);
-		request.setAttribute("liferay-ui:png_image:height", height);
-		request.setAttribute("liferay-ui:png_image:width", width);
-
-		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(page);
-
-		requestDispatcher.include(request, response);
-	}
-
-	public int doEndTag() throws JspException {
-		try {
-			ServletContext servletContext = getServletContext();
-			HttpServletRequest request = getServletRequest();
-			StringServletResponse response = getServletResponse();
-
-			doTag(
-				getPage(), _image, _height, _width, servletContext, request,
-				response);
-
-			pageContext.getOut().print(response.getString());
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
+	public void setHeight(String height) {
+		_height = height;
 	}
 
 	public void setImage(String image) {
 		_image = image;
 	}
 
-	public void setHeight(String height) {
-		_height = height;
-	}
-
 	public void setWidth(String width) {
 		_width = width;
+	}
+
+	protected void cleanUp() {
+		_height = null;
+		_image = null;
+		_width = null;
 	}
 
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("liferay-ui:png_image:height", _height);
+		request.setAttribute("liferay-ui:png_image:image", _image);
+		request.setAttribute("liferay-ui:png_image:width", _width);
+	}
+
 	private static final String _PAGE = "/html/taglib/ui/png_image/page.jsp";
 
-	private String _image;
 	private String _height;
+	private String _image;
 	private String _width;
 
 }

@@ -15,7 +15,6 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.configuration.Filter;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -25,11 +24,7 @@ import com.liferay.taglib.util.IncludeTag;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspException;
 
 /**
  * <a href="SocialBookmarkTag.java.html"><b><i>View Source</i></b></a>
@@ -40,61 +35,12 @@ import javax.servlet.jsp.JspException;
  */
 public class SocialBookmarkTag extends IncludeTag {
 
-	public static void doTag(
-			String type, String url, String title, String target,
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
-
-		doTag(
-			_PAGE, type, url, title, target, servletContext, request, response);
+	public void setTarget(String target) {
+		_target = target;
 	}
 
-	public static void doTag(
-			String page, String type, String url, String title, String target,
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
-
-		request.setAttribute("liferay-ui:social-bookmark:type", type);
-		request.setAttribute("liferay-ui:social-bookmark:url", url);
-		request.setAttribute("liferay-ui:social-bookmark:title", title);
-		request.setAttribute("liferay-ui:social-bookmark:target", target);
-
-		String[] socialTypes = PropsUtil.getArray(
-			PropsKeys.SOCIAL_BOOKMARK_TYPES);
-
-		if (!ArrayUtil.contains(socialTypes, type)) {
-			return;
-		}
-
-		String postUrl = _getPostUrl(type, url, title);
-
-		request.setAttribute("liferay-ui:social-bookmark:postUrl", postUrl);
-
-		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(page);
-
-		requestDispatcher.include(request, response);
-	}
-
-	public int doEndTag() throws JspException {
-		try {
-			ServletContext servletContext = getServletContext();
-			HttpServletRequest request = getServletRequest();
-			StringServletResponse stringResponse = getServletResponse();
-
-			doTag(
-				getPage(), _type, _url, _title, _target, servletContext,
-				request, stringResponse);
-
-			pageContext.getOut().print(stringResponse.getString());
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
+	public void setTitle(String title) {
+		_title = title;
 	}
 
 	public void setType(String type) {
@@ -105,26 +51,42 @@ public class SocialBookmarkTag extends IncludeTag {
 		_url = url;
 	}
 
-	public void setTitle(String title) {
-		_title = title;
-	}
-
-	public void setTarget(String target) {
-		_target = target;
+	protected void cleanUp() {
+		_target = null;
+		_title = null;
+		_type = null;
+		_url = null;
 	}
 
 	protected String getPage() {
-		return _PAGE;
+		String[] socialTypes = PropsUtil.getArray(
+			PropsKeys.SOCIAL_BOOKMARK_TYPES);
+
+		if (ArrayUtil.contains(socialTypes, _type)) {
+			return _PAGE;
+		}
+		else {
+			return null;
+		}
 	}
 
-	private static String _getPostUrl(String type, String url, String title) {
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:social-bookmark:postUrl", getPostUrl());
+		request.setAttribute("liferay-ui:social-bookmark:target", _target);
+		request.setAttribute("liferay-ui:social-bookmark:title", _title);
+		request.setAttribute("liferay-ui:social-bookmark:type", _type);
+		request.setAttribute("liferay-ui:social-bookmark:url", _url);
+	}
+
+	private String getPostUrl() {
 		Map<String, String> vars = new HashMap<String, String>();
 
-		vars.put("liferay:social-bookmark:url", url);
-		vars.put("liferay:social-bookmark:title", HttpUtil.encodeURL(title));
+		vars.put("liferay:social-bookmark:title", HttpUtil.encodeURL(_title));
+		vars.put("liferay:social-bookmark:url", _url);
 
 		String postUrl = PropsUtil.get(
-			PropsKeys.SOCIAL_BOOKMARK_POST_URL, new Filter(type, vars));
+			PropsKeys.SOCIAL_BOOKMARK_POST_URL, new Filter(_type, vars));
 
 		return postUrl;
 	}
@@ -132,9 +94,9 @@ public class SocialBookmarkTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/social_bookmark/page.jsp";
 
+	private String _target;
+	private String _title;
 	private String _type;
 	private String _url;
-	private String _title;
-	private String _target;
 
 }

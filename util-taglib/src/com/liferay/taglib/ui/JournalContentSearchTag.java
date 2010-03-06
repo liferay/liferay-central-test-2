@@ -16,32 +16,12 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * <a href="JournalContentSearchTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
 public class JournalContentSearchTag extends IncludeTag {
-
-	public static void doTag(
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
-
-		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(_START_PAGE);
-
-		requestDispatcher.include(request, response);
-
-		requestDispatcher = servletContext.getRequestDispatcher(_END_PAGE);
-
-		requestDispatcher.include(request, response);
-	}
 
 	protected String getEndPage() {
 		return _END_PAGE;
