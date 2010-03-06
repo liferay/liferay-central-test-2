@@ -76,6 +76,17 @@ public class MapUtil {
 		return defaultValue;
 	}
 
+	public static long getLong(Map<String, ?> map, String key) {
+		return getLong(map, key, GetterUtil.DEFAULT_LONG);
+	}
+
+	public static long getLong(
+		Map<String, ?> map, String key, long defaultValue) {
+
+		return GetterUtil.getLong(
+			getString(map, key, String.valueOf(defaultValue)), defaultValue);
+	}
+
 	public static short getShort(Map<String, ?> map, String key) {
 		return getShort(map, key, GetterUtil.DEFAULT_SHORT);
 	}
