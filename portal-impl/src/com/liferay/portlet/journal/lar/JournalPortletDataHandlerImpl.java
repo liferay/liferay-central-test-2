@@ -818,6 +818,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setScopeGroupId(groupId);
 
 		JournalArticle existingArticle = null;
 
