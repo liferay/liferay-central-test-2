@@ -16,6 +16,7 @@ package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.login.LoginTests;
 import com.liferay.portalweb.portal.session.SessionExpirationTests;
+import com.liferay.portalweb.portlet.activities.ActivitiesTests;
 import com.liferay.portalweb.portlet.amazonrankings.AmazonRankingsTests;
 import com.liferay.portalweb.portlet.announcements.AnnouncementsTests;
 import com.liferay.portalweb.portlet.assetpublisher.AssetPublisherTests;
@@ -80,6 +81,7 @@ public class PortalWebTestSuite extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(LoginTests.suite());
+		testSuite.addTest(ActivitiesTests.suite());
 		testSuite.addTest(AmazonRankingsTests.suite());
 		testSuite.addTest(AnnouncementsTests.suite());
 		testSuite.addTest(AssetPublisherTests.suite());
