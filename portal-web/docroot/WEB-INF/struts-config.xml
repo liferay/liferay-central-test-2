@@ -687,6 +687,8 @@
 			<forward name="portlet.communities.view_membership_requests" path="portlet.communities.view_membership_requests" />
 		</action>
 
+		<action path="/enterprise_admin_communities/view_teams" forward="portlet.communities.view_teams" />
+
 		<!-- Enterprise Admin Monitoring -->
 
 		<action path="/enterprise_admin_monitoring/edit_session" type="com.liferay.portlet.enterpriseadmin.action.EditSessionAction">
@@ -1384,6 +1386,8 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 			<forward name="portlet.communities.view_membership_requests" path="portlet.communities.view_membership_requests" />
 		</action>
+
+		<action path="/communities/view_teams" forward="portlet.communities.view_teams" />
 
 		<!-- My Places -->
 

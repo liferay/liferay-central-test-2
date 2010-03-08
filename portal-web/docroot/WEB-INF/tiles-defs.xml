@@ -823,6 +823,14 @@
 		<put name="portlet_content" value="/portlet/communities/edit_proposal.jsp" />
 	</definition>
 
+	<definition name="portlet.communities.edit_team" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_team.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.edit_team_assignments" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_team_assignments.jsp" />
+	</definition>
+
 	<definition name="portlet.communities.edit_user_roles" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/edit_user_roles.jsp" />
 	</definition>
@@ -853,6 +861,10 @@
 
 	<definition name="portlet.communities.view_membership_requests" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/view_membership_requests.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.view_teams" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/view_teams.jsp" />
 	</definition>
 
 	<!-- My Places -->

@@ -57,6 +57,16 @@ String tabs1 = (String)objArray[1];
 		<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
 	</c:if>
 
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_TEAMS) %>">
+		<portlet:renderURL var="manageTeamsURL">
+			<portlet:param name="struts_action" value="/communities/view_teams" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="group" message="manage-teams" url="<%= manageTeamsURL %>" />
+	</c:if>
+
 	<c:if test="<%= permissionChecker.isCommunityOwner(group.getGroupId()) || GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USER_ROLES) %>">
 		<portlet:renderURL var="assignUserRolesURL">
 			<portlet:param name="struts_action" value="/communities/edit_user_roles" />
