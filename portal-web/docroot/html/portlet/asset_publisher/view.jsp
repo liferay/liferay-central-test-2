@@ -69,9 +69,9 @@ if (enableTagBasedNavigation && selectionStyle.equals("manual") && ((allAssetCat
 
 String portletId = portletDisplay.getId();
 %>
-
-<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
-
+<aui:form name="fm">
+	<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
+</aui:form>
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
