@@ -37,7 +37,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="friendlyURL" type="hidden" value="<%= friendlyURL %>" />
 
-	<c:if test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
+	<c:if test="<%= !portletName.equals(PortletKeys.COMMUNITIES) %>">
 		<liferay-util:include page="/html/portlet/communities/toolbar.jsp">
 			<liferay-util:param name="toolbarItem" value='<%= (group == null) ? "add" : "view-all" %>' />
 		</liferay-util:include>
