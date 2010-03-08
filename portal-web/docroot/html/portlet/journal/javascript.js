@@ -1274,14 +1274,13 @@ AUI().add(
 					}
 				}
 				else {
-					var groupIdInput = instance.getByName(form, 'groupId');
 					var languageIdInput = instance.getByName(form, 'languageId');
 					var typeInput = instance.getByName(form, 'type');
 					var versionInput = instance.getByName(form, 'version');
 					var structureIdInput = instance.getByName(form, 'structureId');
 					var templateIdInput = instance.getByName(form, 'templateId');
 
-					var previewURL = themeDisplay.getPathMain() + '/journal/view_article_content?cmd=preview&groupId=' + groupIdInput.val() + '&articleId=' + instance.articleId + '&version=' + versionInput.val() + '&languageId=' + languageIdInput.val() + '&type=' + typeInput.val() + '&structureId=' + structureIdInput.val() + '&templateId=' + templateIdInput.val();
+					var previewURL = themeDisplay.getPathMain() + '/journal/view_article_content?cmd=preview&groupId=' + themeDisplay.getScopeGroupId() + '&articleId=' + instance.articleId + '&version=' + versionInput.val() + '&languageId=' + languageIdInput.val() + '&type=' + typeInput.val() + '&structureId=' + structureIdInput.val() + '&templateId=' + templateIdInput.val();
 
 					auxForm.attr('action', previewURL);
 					auxForm.attr('target', '_blank');
