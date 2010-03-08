@@ -590,7 +590,7 @@ numberFormat.setMinimumIntegerDigits(2);
 					String taglibShutdown = renderResponse.getNamespace() + "saveServer('shutdown');";
 					%>
 
-					<aui:button type="button" onClick="<%= taglibShutdown %>" value="taglibShutdown" />
+					<aui:button type="button" onClick="<%= taglibShutdown %>" value="shutdown" />
 
 					<c:if test="<%= ShutdownUtil.isInProcess() %>">
 
