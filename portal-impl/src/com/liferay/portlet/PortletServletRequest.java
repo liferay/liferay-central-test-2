@@ -86,8 +86,10 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 			try {
 				User user = PortalUtil.getUser(request);
 
-				_remoteUser = user.getScreenName();
-				_userPrincipal = new ProtectedPrincipal(_remoteUser);
+				if (user != null) {
+					_remoteUser = user.getScreenName();
+					_userPrincipal = new ProtectedPrincipal(_remoteUser);
+				}
 			}
 			catch (Exception e) {
 				_log.error(e);
