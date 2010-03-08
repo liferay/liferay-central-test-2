@@ -1447,9 +1447,10 @@ public class PortalImpl implements Portal {
 		if (!themeDisplay.getServerName().equals(_LOCALHOST)) {
 			String virtualHost = layoutSet.getVirtualHost();
 
-			if (Validator.isNull(virtualHost) && !layoutSet.isPrivateLayout() &&
+			if (Validator.isNull(virtualHost) &&
 				Validator.isNotNull(
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
+					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME) &&
+				!layoutSet.isPrivateLayout()) {
 
 				try {
 					Group group = GroupLocalServiceUtil.getGroup(
@@ -1653,9 +1654,10 @@ public class PortalImpl implements Portal {
 
 		String virtualHost = layoutSet.getVirtualHost();
 
-		if (Validator.isNull(virtualHost) && !layoutSet.isPrivateLayout() &&
+		if (Validator.isNull(virtualHost) &&
 			Validator.isNotNull(
-				PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
+				PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME) &&
+			!layoutSet.isPrivateLayout()) {
 
 			try {
 				Group group = GroupLocalServiceUtil.getGroup(
