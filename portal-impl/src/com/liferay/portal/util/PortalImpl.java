@@ -1447,7 +1447,7 @@ public class PortalImpl implements Portal {
 		if (!themeDisplay.getServerName().equals(_LOCALHOST)) {
 			String virtualHost = layoutSet.getVirtualHost();
 
-			if (Validator.isNull(virtualHost) &&
+			if (Validator.isNull(virtualHost) && !layoutSet.isPrivateLayout() &&
 				Validator.isNotNull(
 					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
 
@@ -1653,7 +1653,7 @@ public class PortalImpl implements Portal {
 
 		String virtualHost = layoutSet.getVirtualHost();
 
-		if (Validator.isNull(virtualHost) &&
+		if (Validator.isNull(virtualHost) && !layoutSet.isPrivateLayout() &&
 			Validator.isNotNull(
 				PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
 
