@@ -69,7 +69,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> {
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Team (teamId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Team (teamId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,groupId LONG,name VARCHAR(75) null,description STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table Team";
 	public static final String ORDER_BY_JPQL = " ORDER BY team.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Team.name ASC";
