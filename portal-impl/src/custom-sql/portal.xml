@@ -1074,7 +1074,7 @@
 				(ResourceCode.scope = ?) AND
 				(Resource_.primKey = ?)
 			ORDER BY
-				Role_.name	ASC
+				Role_.name ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.joinByRolesPermissions">
@@ -1325,6 +1325,15 @@
 					(Users_Roles.userId = User_.userId)
 			WHERE
 				(Users_Roles.roleId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersTeams">
+		<![CDATA[
+			INNER JOIN
+				Users_Teams ON
+					(Users_Teams.userId = User_.userId)
+			WHERE
+				(Users_Teams.teamId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersUserGroups">

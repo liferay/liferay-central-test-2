@@ -112,6 +112,22 @@ public class TeamLocalServiceUtil {
 		getService().deleteTeams(groupId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Team> getUserTeams(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserTeams(userId);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Team> getUserTeams(
+		long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserTeams(userId, groupId);
+	}
+
+	public static boolean hasUserTeam(long userId, long teamId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasUserTeam(userId, teamId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Team> search(
 		long groupId, java.lang.String name, java.lang.String description,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,

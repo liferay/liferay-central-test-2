@@ -16,6 +16,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.DuplicateTeamException;
 import com.liferay.portal.TeamNameException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -102,6 +103,29 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return teamPersistence.findByPrimaryKey(teamId);
+	}
+
+	public List<Team> getUserTeams(long userId) throws SystemException {
+		return userPersistence.getTeams(userId);
+	}
+
+	public List<Team> getUserTeams(long userId, long groupId)
+		throws SystemException {
+
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put("usersTeams", userId);
+
+		return search(
+			groupId, null, null, params, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	public boolean hasUserTeam(long userId, long teamId)
+		throws SystemException {
+
+		return userPersistence.containsTeam(userId, teamId);
 	}
 
 	public List<Team> search(

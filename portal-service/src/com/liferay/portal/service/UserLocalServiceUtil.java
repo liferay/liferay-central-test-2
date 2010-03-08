@@ -142,7 +142,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void addTeamUsers(long teamId, long[] userIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().addTeamUsers(teamId, userIds);
 	}
 
@@ -256,31 +257,11 @@ public class UserLocalServiceUtil {
 		getService().checkPasswordExpired(user);
 	}
 
-	public static void clearOrganizationUsers(long organizationId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().clearOrganizationUsers(organizationId);
-	}
-
-	public static void clearTeamUsers(long teamId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().clearTeamUsers(teamId);
-	}
-
-	public static void clearUserGroupUsers(long userGroupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().clearUserGroupUsers(userGroupId);
-	}
-
 	public static com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().decryptUserId(companyId, name, password);
-	}
-
-	public static void deletePasswordPolicyUser(long passwordPolicyId,
-		long userId) throws com.liferay.portal.kernel.exception.SystemException {
-		getService().deletePasswordPolicyUser(passwordPolicyId, userId);
 	}
 
 	public static void deletePortrait(long userId)
@@ -290,13 +271,9 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void deleteRoleUser(long roleId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRoleUser(roleId, userId);
-	}
-
-	public static void deleteTeamUser(long teamId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteTeamUser(teamId, userId);
 	}
 
 	public static java.lang.String encryptUserId(java.lang.String name)
@@ -727,7 +704,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void unsetTeamUsers(long teamId, long[] userIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().unsetTeamUsers(teamId, userIds);
 	}
 

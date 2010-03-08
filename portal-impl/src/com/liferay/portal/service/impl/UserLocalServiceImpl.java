@@ -290,9 +290,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void addTeamUsers(long teamId, long[] userIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		teamPersistence.addUsers(teamId, userIds);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -605,26 +609,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	public void clearOrganizationUsers(long organizationId)
-		throws SystemException {
-
-		organizationPersistence.clearUsers(organizationId);
-
-		PermissionCacheUtil.clearCache();
-	}
-
-	public void clearTeamUsers(long teamId) throws SystemException {
-		teamPersistence.clearUsers(teamId);
-
-		PermissionCacheUtil.clearCache();
-	}
-
-	public void clearUserGroupUsers(long userGroupId) throws SystemException {
-		userGroupPersistence.clearUsers(userGroupId);
-
-		PermissionCacheUtil.clearCache();
-	}
-
 	public KeyValuePair decryptUserId(
 			long companyId, String name, String password)
 		throws PortalException, SystemException {
@@ -665,13 +649,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	public void deletePasswordPolicyUser(long passwordPolicyId, long userId)
-		throws SystemException {
-
-		passwordPolicyRelLocalService.deletePasswordPolicyRel(
-			passwordPolicyId, User.class.getName(), userId);
-	}
-
 	public void deletePortrait(long userId)
 		throws PortalException, SystemException {
 
@@ -689,17 +666,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void deleteRoleUser(long roleId, long userId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		rolePersistence.removeUser(roleId, userId);
 
-		PermissionCacheUtil.clearCache();
-	}
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
-	public void deleteTeamUser(long teamId, long userId)
-		throws SystemException {
-
-		teamPersistence.removeUser(teamId, userId);
+		indexer.reindex(userId);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1530,9 +1503,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void unsetTeamUsers(long teamId, long[] userIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		teamPersistence.removeUsers(teamId, userIds);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
 	}

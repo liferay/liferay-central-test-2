@@ -88,6 +88,9 @@ public class UserFinderImpl
 	public static String JOIN_BY_USERS_ROLES =
 		UserFinder.class.getName() + ".joinByUsersRoles";
 
+	public static String JOIN_BY_USERS_TEAMS =
+		UserFinder.class.getName() + ".joinByUsersTeams";
+
 	public static String JOIN_BY_USERS_USER_GROUPS =
 		UserFinder.class.getName() + ".joinByUsersUserGroups";
 
@@ -511,6 +514,9 @@ public class UserFinderImpl
 		else if (key.equals("usersRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
 		}
+		else if (key.equals("usersTeams")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_TEAMS);
+		}
 		else if (key.equals("usersUserGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);
 		}
@@ -643,6 +649,9 @@ public class UserFinderImpl
 		}
 		else if (key.equals("usersRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
+		}
+		else if (key.equals("usersTeams")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_TEAMS);
 		}
 		else if (key.equals("usersUserGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);

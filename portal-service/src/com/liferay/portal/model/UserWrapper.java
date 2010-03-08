@@ -538,6 +538,14 @@ public class UserWrapper implements User {
 		return _user.getRoles();
 	}
 
+	public long[] getTeamIds() {
+		return _user.getTeamIds();
+	}
+
+	public java.util.List<com.liferay.portal.model.Team> getTeams() {
+		return _user.getTeams();
+	}
+
 	public long[] getUserGroupIds() {
 		return _user.getUserGroupIds();
 	}

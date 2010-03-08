@@ -117,7 +117,8 @@ public interface UserLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addTeamUsers(long teamId, long[] userIds)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User addUser(long creatorUserId,
 		long companyId, boolean autoPassword, java.lang.String password1,
@@ -189,32 +190,18 @@ public interface UserLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void clearOrganizationUsers(long organizationId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void clearTeamUsers(long teamId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void clearUserGroupUsers(long userGroupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	public void deletePasswordPolicyUser(long passwordPolicyId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deletePortrait(long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteRoleUser(long roleId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void deleteTeamUser(long teamId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String encryptUserId(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -550,7 +537,8 @@ public interface UserLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void unsetTeamUsers(long teamId, long[] userIds)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException,

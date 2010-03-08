@@ -113,6 +113,9 @@ public class UserIndexer extends BaseIndexer {
 		else if (key.equals("usersRoles")) {
 			contextQuery.addRequiredTerm("roleIds", String.valueOf(value));
 		}
+		else if (key.equals("usersTeams")) {
+			contextQuery.addRequiredTerm("teamIds", String.valueOf(value));
+		}
 		else if (key.equals("usersUserGroups")) {
 			contextQuery.addRequiredTerm("userGroupIds", String.valueOf(value));
 		}
@@ -181,6 +184,7 @@ public class UserIndexer extends BaseIndexer {
 		long[] groupIds = user.getGroupIds();
 		long[] organizationIds = user.getOrganizationIds();
 		long[] roleIds = user.getRoleIds();
+		long[] teamIds = user.getTeamIds();
 		long[] userGroupIds = user.getUserGroupIds();
 
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
@@ -211,6 +215,7 @@ public class UserIndexer extends BaseIndexer {
 			"ancestorOrganizationIds",
 			getAncestorOrganizationIds(userId, organizationIds));
 		document.addKeyword("roleIds", roleIds);
+		document.addKeyword("teamIds", teamIds);
 		document.addKeyword("userGroupIds", userGroupIds);
 
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
@@ -412,7 +417,8 @@ public class UserIndexer extends BaseIndexer {
 				Object value = entry.getValue();
 
 				if (key.equals("usersOrgs") || key.equals("usersRoles") ||
-					key.equals("usersUserGroups") || (value == null)) {
+					key.equals("usersTeams") || key.equals("usersUserGroups") ||
+					(value == null)) {
 
 					continue;
 				}
