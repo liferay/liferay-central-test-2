@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ViewBlogsEntryTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ViewBlogsEntryTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/group/joebloggs/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Activities Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Activities Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Joe wrote a new blog entry, Blogs Entry Test, in Guest.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Blogs Entry Test</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
