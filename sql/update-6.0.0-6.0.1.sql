@@ -7,7 +7,7 @@ create table Team (
 	modifiedDate DATE null,
 	groupId LONG,
 	name VARCHAR(75) null,
-	description VARCHAR(75) null
+	description STRING null
 );
 
 create table Users_Teams (
