@@ -31,6 +31,10 @@ a:hover {
 	width: 976px;
 }
 
+html > .lfr-dockbar-pinned {
+	padding-top: 0;
+}
+
 /* ---------- Banner ---------- */
 
 #banner {
