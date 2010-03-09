@@ -26,6 +26,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 Team team = (Team)request.getAttribute(WebKeys.TEAM);
 
 Group group = GroupServiceUtil.getGroup(team.getGroupId());
+
 Organization organization = null;
 
 if (group.isOrganization()) {
@@ -78,14 +79,14 @@ portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 		LinkedHashMap userParams = new LinkedHashMap();
 
 		if (group.isOrganization()) {
-			userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
+			userParams.put("usersOrgs", organization.getOrganizationId());
 		}
 		else {
-			userParams.put("usersGroups", new Long(team.getGroupId()));
+			userParams.put("usersGroups", team.getGroupId());
 		}
 
 		if (tabs1.equals("current")) {
-			userParams.put("usersTeams", new Long(team.getTeamId()));
+			userParams.put("usersTeams", team.getTeamId());
 		}
 		%>
 

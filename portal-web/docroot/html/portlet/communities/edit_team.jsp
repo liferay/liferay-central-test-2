@@ -26,6 +26,7 @@ long teamId = BeanParamUtil.getLong(team, request, "teamId");
 long groupId = BeanParamUtil.getLong(team, request, "groupId");
 
 Group group = GroupServiceUtil.getGroup(groupId);
+
 Organization organization = null;
 
 if (group.isOrganization()) {

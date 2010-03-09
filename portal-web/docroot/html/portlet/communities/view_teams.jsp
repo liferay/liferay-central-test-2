@@ -22,6 +22,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 long groupId = ParamUtil.getLong(request, "groupId");
 
 Group group = GroupServiceUtil.getGroup(groupId);
+
 Organization organization = null;
 
 if (group.isOrganization()) {
