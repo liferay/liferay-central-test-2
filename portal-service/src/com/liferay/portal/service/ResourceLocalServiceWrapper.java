@@ -190,6 +190,12 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		return _resourceLocalService.getResources();
 	}
 
+	public com.liferay.portal.model.Role getRole(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _resourceLocalService.getRole(groupId);
+	}
+
 	public void updateResources(long companyId, long groupId,
 		java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,

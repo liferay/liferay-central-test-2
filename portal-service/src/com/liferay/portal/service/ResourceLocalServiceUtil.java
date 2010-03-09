@@ -195,6 +195,12 @@ public class ResourceLocalServiceUtil {
 		return getService().getResources();
 	}
 
+	public static com.liferay.portal.model.Role getRole(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRole(groupId);
+	}
+
 	public static void updateResources(long companyId, long groupId,
 		java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,
