@@ -121,3 +121,8 @@ pageContext.setAttribute("portletURL", portletURL);
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </aui:form>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, group.getName(), null);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-teams"), currentURL);
+%>

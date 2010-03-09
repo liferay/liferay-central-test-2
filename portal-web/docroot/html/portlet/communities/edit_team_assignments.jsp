@@ -25,6 +25,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Team team = (Team)request.getAttribute(WebKeys.TEAM);
 
+Group group = GroupServiceUtil.getGroup(team.getGroupId());
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/communities/edit_team_assignments");
@@ -123,6 +125,8 @@ portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 </aui:script>
 
 <%
+PortalUtil.addPortletBreadcrumbEntry(request, group.getName(), null);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-teams"), redirect);
 PortalUtil.addPortletBreadcrumbEntry(request, team.getName(), null);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-members"), currentURL);
 %>

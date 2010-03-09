@@ -79,10 +79,14 @@ Group group = GroupServiceUtil.getGroup(groupId);
 
 <%
 if (team != null) {
+	PortalUtil.addPortletBreadcrumbEntry(request, group.getName(), null);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-teams"), redirect);
 	PortalUtil.addPortletBreadcrumbEntry(request, team.getName(), null);
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
+	PortalUtil.addPortletBreadcrumbEntry(request, group.getName(), null);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-teams"), redirect);
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-team"), currentURL);
 }
 %>
