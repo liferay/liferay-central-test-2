@@ -726,6 +726,9 @@ public class PropsValues {
 	public static final int INDEX_ON_STARTUP_DELAY = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INDEX_ON_STARTUP_DELAY));
 
+	public static final boolean INDEX_ON_UPGRADE = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.INDEX_ON_UPGRADE));
+
 	public static boolean INDEX_READ_ONLY = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.INDEX_READ_ONLY));
 

@@ -587,6 +587,8 @@ public interface PropsKeys {
 
 	public static final String INDEX_ON_STARTUP_DELAY = "index.on.startup.delay";
 
+	public static final String INDEX_ON_UPGRADE = "index.on.upgrade";
+
 	public static final String INDEX_READ_ONLY = "index.read.only";
 
 	public static final String INDEX_WITH_THREAD = "index.with.thread";

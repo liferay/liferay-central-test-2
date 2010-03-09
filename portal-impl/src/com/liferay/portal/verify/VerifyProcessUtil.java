@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="VerifyProcessUtil.java.html"><b><i>View Source</i></b></a>
@@ -44,7 +45,7 @@ public class VerifyProcessUtil {
 			((verifyFrequency == VerifyProcess.ONCE) && !verified) ||
 			(ranUpgradeProcess)) {
 
-			if (ranUpgradeProcess) {
+			if (ranUpgradeProcess && PropsValues.INDEX_ON_UPGRADE) {
 				PropsUtil.set(
 					PropsKeys.INDEX_ON_STARTUP, Boolean.TRUE.toString());
 			}
