@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +42,14 @@ public class DiscussionTag extends IncludeTag {
 		_formName = formName;
 	}
 
+	public void setPermissionClassName(String permissionClassName) {
+		_permissionClassName = permissionClassName;
+	}
+
+	public void setPermissionClassPK(long permissionClassPK) {
+		_permissionClassPK = permissionClassPK;
+	}
+
 	public void setRatingsEnabled(boolean ratingsEnabled) {
 		_ratingsEnabled = ratingsEnabled;
 	}
@@ -62,6 +71,8 @@ public class DiscussionTag extends IncludeTag {
 		_classPK = 0;
 		_formAction = null;
 		_formName = "fm";
+		_permissionClassName = null;
+		_permissionClassPK = 0;
 		_ratingsEnabled = true;
 		_redirect = null;
 		_subject = null;
@@ -73,11 +84,28 @@ public class DiscussionTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
+		String permissionClassName = _permissionClassName;
+
+		if (Validator.isNull(permissionClassName)) {
+			permissionClassName = _className;
+		}
+
+		long permissionClassPK = _permissionClassPK;
+
+		if (permissionClassPK == 0) {
+			permissionClassPK = _classPK;
+		}
+
 		request.setAttribute("liferay-ui:discussion:className", _className);
 		request.setAttribute(
 			"liferay-ui:discussion:classPK", String.valueOf(_classPK));
 		request.setAttribute("liferay-ui:discussion:formAction", _formAction);
 		request.setAttribute("liferay-ui:discussion:formName", _formName);
+		request.setAttribute(
+			"liferay-ui:discussion:permissionClassName", _permissionClassName);
+		request.setAttribute(
+			"liferay-ui:discussion:permissionClassPK",
+			String.valueOf(_permissionClassPK));
 		request.setAttribute(
 			"liferay-ui:discussion:ratingsEnabled",
 			String.valueOf(_ratingsEnabled));
@@ -93,6 +121,8 @@ public class DiscussionTag extends IncludeTag {
 	private long _classPK;
 	private String _formAction;
 	private String _formName = "fm";
+	private String _permissionClassName;
+	private long _permissionClassPK;
 	private boolean _ratingsEnabled = true;
 	private String _redirect;
 	private String _subject;
