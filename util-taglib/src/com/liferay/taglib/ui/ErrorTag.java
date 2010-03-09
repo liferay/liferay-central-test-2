@@ -44,7 +44,7 @@ public class ErrorTag extends TagSupport {
 
 			boolean includeEndPage = false;
 
-			if (_key == null) {
+			if (Validator.isNull(_key)) {
 				if (!SessionErrors.isEmpty(renderRequest)) {
 					includeEndPage = true;
 				}

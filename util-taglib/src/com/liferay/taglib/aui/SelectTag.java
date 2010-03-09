@@ -139,7 +139,7 @@ public class SelectTag extends IncludeTag {
 
 		String label = _label;
 
-		if (label == null) {
+		if (Validator.isNull(label)) {
 			label = TextFormatter.format(_name, TextFormatter.K);
 		}
 

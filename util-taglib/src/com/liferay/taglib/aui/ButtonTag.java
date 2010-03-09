@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,7 +68,7 @@ public class ButtonTag extends IncludeTag {
 	protected void setAttributes(HttpServletRequest request) {
 		String value = _value;
 
-		if (value == null) {
+		if (Validator.isNull(value)) {
 			if (_type.equals("submit")) {
 				value = "save";
 			}

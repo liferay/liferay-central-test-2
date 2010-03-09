@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.TextFormatter;
 
@@ -82,7 +83,7 @@ public class FieldWrapperTag extends IncludeTag {
 	protected void setAttributes(HttpServletRequest request) {
 		String label = _label;
 
-		if (label == null) {
+		if (Validator.isNull(label)) {
 			label = TextFormatter.format(_name, TextFormatter.K);
 		}
 
