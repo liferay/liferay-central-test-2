@@ -120,7 +120,7 @@ public class IconTag extends IncludeTag {
 	private String _src;
 	private String _srcHover;
 	private String _target = "_self";
-	private boolean _toolTip = true;
+	private boolean _toolTip;
 	private String _url;
 
 }
