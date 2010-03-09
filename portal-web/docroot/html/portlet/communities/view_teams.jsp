@@ -38,7 +38,7 @@ pageContext.setAttribute("portletURL", portletURL);
 		<liferay-ui:message key="manage-teams-for-community" />: <%= group.getName() %>
 	</div>
 
-	<h3><liferay-ui:message key="teams" /></h3>
+	<br />
 
 	<%
 	TeamSearch searchContainer = new TeamSearch(renderRequest, portletURL);

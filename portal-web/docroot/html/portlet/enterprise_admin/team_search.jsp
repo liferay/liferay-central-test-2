@@ -18,7 +18,6 @@
 
 <%
 TeamSearch searchContainer = (TeamSearch)request.getAttribute("liferay-ui:search:searchContainer");
-long groupId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:search:groupId"));
 
 TeamDisplayTerms displayTerms = (TeamDisplayTerms)searchContainer.getDisplayTerms();
 %>

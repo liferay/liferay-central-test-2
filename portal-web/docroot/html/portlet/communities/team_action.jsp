@@ -27,7 +27,6 @@ Team team = (Team)row.getObject();
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/communities/edit_team" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(team.getGroupId()) %>" />
 			<portlet:param name="teamId" value="<%= String.valueOf(team.getTeamId()) %>" />
 		</portlet:renderURL>
 

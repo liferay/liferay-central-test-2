@@ -46,60 +46,57 @@ RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 	searchContainer="<%= searchContainer %>"
 />
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+<%
+RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-	<%
-	RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
+List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType), QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
-	List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType), QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
+roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
 
-	roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+int total = roles.size();
 
-	int total = roles.size();
+searchContainer.setTotal(total);
 
-	searchContainer.setTotal(total);
+List results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
 
-	List results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
+searchContainer.setResults(results);
+%>
 
-	searchContainer.setResults(results);
-	%>
+<div class="separator"><!-- --></div>
 
-	<div class="separator"><!-- --></div>
+<%
+List resultRows = searchContainer.getResultRows();
 
-	<%
-	List resultRows = searchContainer.getResultRows();
+for (int i = 0; i < results.size(); i++) {
+	Role curRole = (Role)results.get(i);
 
-	for (int i = 0; i < results.size(); i++) {
-		Role curRole = (Role)results.get(i);
+	curRole = curRole.toEscapedModel();
 
-		curRole = curRole.toEscapedModel();
+	ResultRow row = new ResultRow(curRole, curRole.getRoleId(), i);
 
-		ResultRow row = new ResultRow(curRole, curRole.getRoleId(), i);
+	PortletURL rowURL = renderResponse.createRenderURL();
 
-		PortletURL rowURL = renderResponse.createRenderURL();
+	rowURL.setParameter("struts_action", "/communities/edit_user_roles");
+	rowURL.setParameter("redirect", redirect);
+	rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+	rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));
 
-		rowURL.setParameter("struts_action", "/communities/edit_user_roles");
-		rowURL.setParameter("redirect", redirect);
-		rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-		rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));
+	// Name
 
-		// Name
+	row.addText(curRole.getTitle(locale), rowURL);
 
-		row.addText(curRole.getTitle(locale), rowURL);
+	// Type
 
-		// Type
+	row.addText(LanguageUtil.get(pageContext, curRole.getTypeLabel()), rowURL);
 
-		row.addText(LanguageUtil.get(pageContext, curRole.getTypeLabel()), rowURL);
+	// Description
 
-		// Description
+	row.addText(curRole.getDescription(), rowURL);
 
-		row.addText(curRole.getDescription(), rowURL);
+	// Add result row
 
-		// Add result row
+	resultRows.add(row);
+}
+%>
 
-		resultRows.add(row);
-	}
-	%>
-
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</c:if>
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

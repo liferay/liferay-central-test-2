@@ -52,7 +52,6 @@
 <%@ page import="com.liferay.portal.lar.PortletDataHandlerKeys" %>
 <%@ page import="com.liferay.portal.lar.UserIdStrategy" %>
 <%@ page import="com.liferay.portal.liveusers.LiveUsers" %>
-<%@ page import="com.liferay.portal.model.Team" %>
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
 <%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.TeamPermissionUtil" %>

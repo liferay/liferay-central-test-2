@@ -22,6 +22,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 Team team = (Team)request.getAttribute(WebKeys.TEAM);
 
 long teamId = BeanParamUtil.getLong(team, request, "teamId");
+
 long groupId = BeanParamUtil.getLong(team, request, "groupId");
 
 Group group = GroupServiceUtil.getGroup(groupId);
@@ -30,8 +31,6 @@ Group group = GroupServiceUtil.getGroup(groupId);
 <div>
 	<liferay-ui:message key="manage-teams-for-community" />: <%= group.getName() %>
 </div>
-
-<h3><liferay-ui:message key="teams" /></h3>
 
 <portlet:actionURL var="editTeamURL">
 	<portlet:param name="struts_action" value="/communities/edit_team" />
