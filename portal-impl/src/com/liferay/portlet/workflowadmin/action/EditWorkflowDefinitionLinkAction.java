@@ -84,8 +84,7 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 
 		if (Validator.isNull(value)) {
 			WorkflowDefinitionLinkLocalServiceUtil.deleteWorkflowDefinitionLink(
-				themeDisplay.getUserId(), themeDisplay.getCompanyId(), 0,
-				className);
+				themeDisplay.getCompanyId(), 0,	className);
 		}
 		else {
 			String[] values = StringUtil.split(value, StringPool.AT);

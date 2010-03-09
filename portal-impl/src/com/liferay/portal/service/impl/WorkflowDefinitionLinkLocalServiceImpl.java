@@ -17,7 +17,6 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.service.base.WorkflowDefinitionLinkLocalServiceBaseImpl;
@@ -68,7 +67,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 	}
 
 	public void deleteWorkflowDefinitionLink(
-			long userId, long companyId, long groupId, String className)
+			long companyId, long groupId, String className)
 		throws PortalException, SystemException {
 
 		try {
@@ -76,11 +75,6 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 				getWorkflowDefinitionLink(companyId, groupId, className);
 
 			deleteWorkflowDefinitionLink(workflowDefinitionLink);
-
-			WorkflowDefinitionManagerUtil.undeployWorkflowDefinition(
-				companyId, userId,
-				workflowDefinitionLink.getWorkflowDefinitionName(),
-				workflowDefinitionLink.getWorkflowDefinitionVersion());
 		}
 		catch (NoSuchWorkflowDefinitionLinkException nswdle) {
 		}
