@@ -90,10 +90,8 @@ public class DLFileEntryLocalServiceImpl
 			String extraSettings, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.WEBDAV_LITMUS) {
-			if (bytes == null) {
-				throw new FileSizeException();
-			}
+		if (bytes == null) {
+			throw new FileSizeException();
 		}
 
 		InputStream is = new UnsyncByteArrayInputStream(bytes);
@@ -110,10 +108,8 @@ public class DLFileEntryLocalServiceImpl
 			String extraSettings, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.WEBDAV_LITMUS) {
-			if (file == null) {
-				throw new FileSizeException();
-			}
+		if (file == null) {
+			throw new FileSizeException();
 		}
 
 		try {

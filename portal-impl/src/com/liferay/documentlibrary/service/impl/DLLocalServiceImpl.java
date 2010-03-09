@@ -42,7 +42,6 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
@@ -232,20 +231,18 @@ public class DLLocalServiceImpl implements DLLocalService {
 			String[] fileExtensions = PrefsPropsUtil.getStringArray(
 				PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA);
 
-			if (!PropsValues.WEBDAV_LITMUS) {
-				for (int i = 0; i < fileExtensions.length; i++) {
-					if (StringPool.STAR.equals(fileExtensions[i]) ||
-						StringUtil.endsWith(fileName, fileExtensions[i])) {
+			for (int i = 0; i < fileExtensions.length; i++) {
+				if (StringPool.STAR.equals(fileExtensions[i]) ||
+					StringUtil.endsWith(fileName, fileExtensions[i])) {
 
-						validFileExtension = true;
+					validFileExtension = true;
 
-						break;
-					}
+					break;
 				}
+			}
 
-				if (!validFileExtension) {
-					throw new FileNameException(fileName);
-				}
+			if (!validFileExtension) {
+				throw new FileNameException(fileName);
 			}
 		}
 	}
@@ -256,8 +253,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		validate(fileName, validateFileExtension);
 
-		if (((PropsValues.WEBDAV_LITMUS) ||
-			(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+		if ((PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0) &&
 			((bytes == null) ||
 			(bytes.length >
 				 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
@@ -272,8 +268,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		validate(fileName, validateFileExtension);
 
-		if (((PropsValues.WEBDAV_LITMUS) ||
-			 (PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+		if ((PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0) &&
 			((file == null) ||
 			 (file.length() >
 				PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
@@ -291,8 +286,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 		// LEP-4851
 
 		try {
-			if (((PropsValues.WEBDAV_LITMUS) ||
-				(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+			if ((PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0) &&
 				((is == null) ||
 				(is.available() >
 					 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
@@ -311,17 +305,14 @@ public class DLLocalServiceImpl implements DLLocalService {
 		String fileNameExtension = FileUtil.getExtension(fileName);
 		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
 
-		if (!PropsValues.WEBDAV_LITMUS) {
-			validate(fileName, true);
+		validate(fileName, true);
 
-			if (!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
-				throw new SourceFileNameException(sourceFileName);
-			}
+		if (!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
+			throw new SourceFileNameException(sourceFileName);
 		}
 
 		try {
-			if (((PropsValues.WEBDAV_LITMUS) ||
-				 (PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+			if ((PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0) &&
 				((is == null) ||
 				 (is.available() >
 					PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {

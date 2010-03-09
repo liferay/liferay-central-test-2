@@ -1775,9 +1775,6 @@ public class PropsValues {
 	public static final String[] WEBDAV_IGNORE =
 		PropsUtil.getArray(PropsKeys.WEBDAV_IGNORE);
 
-	public static final boolean WEBDAV_LITMUS = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.WEBDAV_LITMUS));
-
 	public static final String WIDGET_SERVLET_MAPPING = PropsUtil.get(
 		PropsKeys.WIDGET_SERVLET_MAPPING);
 
