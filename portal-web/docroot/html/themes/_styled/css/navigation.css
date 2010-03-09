@@ -1,26 +1,3 @@
-/* ---------- Main navigation ---------- */
-
-#navigation {
-}
-
-#navigation ul {
-}
-
-#navigation ul:after {
-}
-
-.ie #navigation ul {
-}
-
-.ie6 #navigation, .ie6 #navigation ul {
-}
-
-#navigation li {
-}
-
-#navigation .child-menu {
-}
-
 /* ---------- Add/remove page ---------- */
 
 .js .delete-tab {

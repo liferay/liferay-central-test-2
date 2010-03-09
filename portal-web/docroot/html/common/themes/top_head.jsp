@@ -194,18 +194,13 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 <style type="text/css">
 	/* <![CDATA[ */
 		<c:if test="<%= !themeDisplay.getCompanyLogo().equals(StringPool.BLANK) %>">
-			#banner .logo a {
+			#heading .logo {
 				background: url(<%= HtmlUtil.escape(themeDisplay.getCompanyLogo()) %>) no-repeat;
 				display: block;
 				font-size: 0;
 				height: <%= themeDisplay.getCompanyLogoHeight() %>px;
 				text-indent: -9999em;
 				width: <%= themeDisplay.getCompanyLogoWidth() %>px;
-			}
-
-			#banner .logo .text {
-				font-size: 0;
-				text-indent: -9999em;
 			}
 		</c:if>
 

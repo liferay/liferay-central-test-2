@@ -228,6 +228,13 @@
 	$my_places_portlet_url.setParameter("privateLayout", "true")
 
 	#set ($community_default_private_url = $htmlUtil.escape($my_places_portlet_url.toString()))
+
+	#set ($community_default_url = $community_default_public_url)
+
+	#if ($layout.isPrivateLayout())
+		#set ($community_default_url = $community_default_private_url)
+	#end
+
 #end
 
 #if ($layout.getHTMLTitle($locale))

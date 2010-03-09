@@ -1,8 +1,5 @@
 /* ---------- Portlet wrapper and icons ---------- */
 
-.portlet {
-}
-
 .freeform .portlet {
 	margin-bottom: 0;
 }
@@ -17,6 +14,8 @@ body.portlet {
 
 .portlet-title {
 	display: block;
+	font-size: 1em;
+	margin: 0;
 }
 
 .portlet-title-text {
@@ -27,7 +26,7 @@ body.portlet {
 	vertical-align: middle;
 }
 
-.portlet-icons {
+.portlet-toolbar {
 	margin: 0;
 	padding: 2px;
 	position: absolute;
@@ -36,7 +35,7 @@ body.portlet {
 	top: 3px;
 }
 
-.portlet-icons .nobr {
+.portlet-toolbar .nobr {
 	display: block;
 	float: left;
 	padding: 1px;
