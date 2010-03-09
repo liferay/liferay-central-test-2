@@ -21,8 +21,7 @@ a:hover {
 	text-decoration: none;
 }
 
-hr,
-.separator {
+hr, .separator {
 	border-color: #BFBFBF transparent #FFF;
 	border-style: solid;
 	border-width: 1px 0;
@@ -109,11 +108,7 @@ body #banner .logo a {
 
 /* ---------- Hidden Accessible ---------- */
 
-#skip-to-content,
-#banner h2,
-#banner h3,
-#navigation h1,
-#breadcrumbs h1 {
+#skip-to-content, #banner h2, #banner h3, #navigation h1, .site-breadcrumbs h1 {
 	left: -99999px;
 	overflow: hidden;
 	position: absolute;
@@ -123,8 +118,10 @@ body #banner .logo a {
 /* ---------- Main navigation ---------- */
 
 #navigation {
-	background-color: #414445;
-	margin: 0 0 5px;
+	background: #414445 url(../images/navigation/bg.png) repeat-x 0 0;
+	clear: both;
+	margin: 0 auto 5px;
+	min-height: 2.2em;
 	padding: 0 5px;
 }
 
@@ -134,15 +131,11 @@ body #banner .logo a {
 	padding: 3px;
 }
 
-#navigation li,
-#navigation a {
+#navigation li, #navigation a {
 	display: inline-block;
 }
 
-.ie6 #navigation li,
-.ie7 #navigation li,
-.ie6 #navigation a,
-.ie7 #navigation a {
+.ie6 #navigation li, .ie7 #navigation li, .ie6 #navigation a, .ie7 #navigation a {
 	display: inline;
 	zoom: 1;
 }
@@ -161,10 +154,7 @@ body #banner .logo a {
 	text-decoration: none;
 }
 
-#navigation .selected a,
-#navigation a:hover,
-#navigation a:focus,
-#navigation .child-menu li a {
+#navigation .selected a, #navigation a:hover, #navigation a:focus, #navigation .child-menu li a {
 	background: #313334;
 	color: #FFF;
 	outline: 0;
@@ -320,12 +310,12 @@ body.lfr-has-sidebar {
 
 /* ---------- Site breadcrumbs ---------- */
 
-#breadcrumbs {
+.site-breadcrumbs {
 	margin: 0 0 5px;
 	width: auto;
 }
 
-#breadcrumbs ul {
+.site-breadcrumbs ul {
 	background-color: #FFF;
 	border: 1px solid #DEDEDE;
 	border-color: #C0C2C5;
@@ -333,7 +323,7 @@ body.lfr-has-sidebar {
 	margin: 0;
 }
 
-#breadcrumbs li {
+.site-breadcrumbs li {
 	background-image: none;
 	float: left;
 	line-height: 1.8em;
@@ -342,35 +332,35 @@ body.lfr-has-sidebar {
 	padding-right: 0;
 }
 
-#breadcrumbs li span {
+.site-breadcrumbs li span {
 	background: url(../images/common/breadcrumbs.png) no-repeat 100% 50%;
 	display: block;
 	line-height: 1.8em;
 	padding: 0 15px 0 0;
 }
 
-#breadcrumbs li span a {
+.site-breadcrumbs li span a {
 	text-decoration: none;
 }
 
-#breadcrumbs li.first a {
+.site-breadcrumbs li.first a {
 	color: #369;
 	font-weight: bold;
 }
 
-#breadcrumbs li.last a {
+.site-breadcrumbs li.last a {
 	color: #4B5567;
 	font-size: 1.3em;
 }
 
-#breadcrumbs .last {
+.site-breadcrumbs .last {
 	display: inline;
 	font-size: 1em;
 	margin-top: 0;
 	padding-right: 0;
 }
 
-#breadcrumbs .last span {
+.site-breadcrumbs .last span {
 	background-image: none;
 	padding: 0;
 }
@@ -386,8 +376,7 @@ body.lfr-has-sidebar {
 	background: rgba(0, 0, 0, 0.8);
 }
 
-.lfr-hudcrumbs .breadcrumbs li a,
-.lfr-hudcrumbs .breadcrumbs li span {
+.lfr-hudcrumbs .breadcrumbs li a, .lfr-hudcrumbs .breadcrumbs li span {
 	color: #FFF;
 }
 
@@ -440,21 +429,10 @@ body.lfr-has-sidebar {
 	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5), 1px 1px 0 #FFF;
 }
 
-.logo .current-community,
-#navigation,
-#navigation a,
-.portlet,
-.portlet-topper,
-#breadcrumbs ul {
+.logo .current-community, #navigation, #navigation a, .portlet, .portlet-topper, .site-breadcrumbs ul {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
-}
-
-#navigation {
-	background-image: -moz-linear-gradient(#57595A, #414445);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, #57595A), color-stop(1.0, #414445));
-	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#57595A', EndColorStr='#414445');
 }
 
 #navigation li.selected a {

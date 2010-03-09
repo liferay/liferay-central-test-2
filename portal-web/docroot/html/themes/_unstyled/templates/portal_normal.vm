@@ -54,7 +54,7 @@
 	</header>
 
 	<div id="content">
-		<nav id="breadcrumbs">
+		<nav class="site-breadcrumbs" id="breadcrumbs">
 			<h1>
 				<span>#language("breadcrumbs")</span>
 			</h1>
