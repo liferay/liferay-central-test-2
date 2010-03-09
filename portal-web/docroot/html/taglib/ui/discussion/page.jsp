@@ -33,13 +33,13 @@
 <%
 String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_discussion_page") + StringPool.UNDERLINE;
 
-String formName = namespace + request.getAttribute("liferay-ui:discussion:formName");
-String formAction = (String)request.getAttribute("liferay-ui:discussion:formAction");
 String className = (String)request.getAttribute("liferay-ui:discussion:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:classPK"));
-long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:userId"));
-String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");
+String formAction = (String)request.getAttribute("liferay-ui:discussion:formAction");
+String formName = namespace + request.getAttribute("liferay-ui:discussion:formName");
 boolean ratingsEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:discussion:ratingsEnabled"));
+String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");
+long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:userId"));
 
 String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
 
