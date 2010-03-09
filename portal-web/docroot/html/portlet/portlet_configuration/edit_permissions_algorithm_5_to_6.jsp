@@ -144,7 +144,6 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			</c:otherwise>
 		</c:choose>
 
-
 		<c:if test="<%= Validator.isNotNull(modelResource) %>">
 			<liferay-ui:tabs
 				names="permissions"
