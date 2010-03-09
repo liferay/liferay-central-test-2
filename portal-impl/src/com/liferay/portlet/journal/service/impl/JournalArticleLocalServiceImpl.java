@@ -1781,7 +1781,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Workflow
 
-		if (serviceContext.isStartWorkflow()) {
+		if (incrementVersion && serviceContext.isStartWorkflow()) {
 			try {
 				WorkflowHandlerRegistryUtil.startWorkflowInstance(
 					user.getCompanyId(), groupId, userId,
