@@ -1183,57 +1183,11 @@ public class PortalImpl implements Portal {
 	}
 
 	public String[] getGuestPermissions(HttpServletRequest request) {
-		String[] guestPermissions = request.getParameterValues(
-			"guestPermissions");
-
-		if (guestPermissions == null) {
-			return null;
-		}
-
-		boolean inputPermissionsPublic = ParamUtil.getBoolean(
-			request, "inputPermissionsPublic");
-		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(
-			request, "inputPermissionsShowConfigure");
-
-		if (!inputPermissionsShowConfigure) {
-			if (!inputPermissionsPublic) {
-				guestPermissions = new String[0];
-			}
-			else if ((guestPermissions == null) ||
-					 (guestPermissions.length == 0)) {
-
-				guestPermissions = new String[] {ActionKeys.VIEW};
-			}
-		}
-
-		return guestPermissions;
+		return request.getParameterValues("guestPermissions");
 	}
 
 	public String[] getGuestPermissions(PortletRequest portletRequest) {
-		String[] guestPermissions = portletRequest.getParameterValues(
-			"guestPermissions");
-
-		if (guestPermissions == null) {
-			return null;
-		}
-
-		boolean inputPermissionsPublic = ParamUtil.getBoolean(
-			portletRequest, "inputPermissionsPublic");
-		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(
-			portletRequest, "inputPermissionsShowConfigure");
-
-		if (!inputPermissionsShowConfigure) {
-			if (!inputPermissionsPublic) {
-				guestPermissions = new String[0];
-			}
-			else if ((guestPermissions == null) ||
-					 (guestPermissions.length == 0)) {
-
-				guestPermissions = new String[] {ActionKeys.VIEW};
-			}
-		}
-
-		return guestPermissions;
+		return portletRequest.getParameterValues("guestPermissions");
 	}
 
 	public String getHomeURL(HttpServletRequest request)

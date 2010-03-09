@@ -322,6 +322,42 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		return resourcePersistence.findAll();
 	}
 
+	public Role getRole(long groupId)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		if (group.isLayout()) {
+			Layout layout = layoutLocalService.getLayout(
+				group.getClassPK());
+
+			group = layout.getGroup();
+		}
+
+		Role role = null;
+
+		if (group.isCommunity() || group.isLayoutPrototype() ||
+			group.isLayoutSetPrototype()) {
+
+			role = roleLocalService.getRole(
+				group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+		}
+		else if (group.isCompany()) {
+			role = roleLocalService.getRole(
+				group.getCompanyId(), RoleConstants.ADMINISTRATOR);
+		}
+		else if (group.isOrganization()) {
+			role = roleLocalService.getRole(
+				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
+		}
+		else if (group.isUser() || group.isUserGroup()) {
+			role = roleLocalService.getRole(
+				group.getCompanyId(), RoleConstants.POWER_USER);
+		}
+
+		return role;
+	}
+
 	public void updateResources(
 			long companyId, long groupId, String name, long primKey,
 			String[] communityPermissions, String[] guestPermissions)
@@ -832,42 +868,6 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		resource.setPrimKey(primKey);
 
 		return resource;
-	}
-
-	protected Role getRole(long groupId)
-		throws PortalException, SystemException {
-
-		Group group = groupPersistence.findByPrimaryKey(groupId);
-
-		if (group.isLayout()) {
-			Layout layout = layoutLocalService.getLayout(
-				group.getClassPK());
-
-			group = layout.getGroup();
-		}
-
-		Role role = null;
-
-		if (group.isCommunity() || group.isLayoutPrototype() ||
-			group.isLayoutSetPrototype()) {
-
-			role = roleLocalService.getRole(
-				group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
-		}
-		else if (group.isCompany()) {
-			role = roleLocalService.getRole(
-				group.getCompanyId(), RoleConstants.ADMINISTRATOR);
-		}
-		else if (group.isOrganization()) {
-			role = roleLocalService.getRole(
-				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
-		}
-		else if (group.isUser() || group.isUserGroup()) {
-			role = roleLocalService.getRole(
-				group.getCompanyId(), RoleConstants.POWER_USER);
-		}
-
-		return role;
 	}
 
 	protected void updateResources_1to5(

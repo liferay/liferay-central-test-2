@@ -33,7 +33,14 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		<%
 		Group group = themeDisplay.getScopeGroup();
+		Group parentGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getParentGroupId());
 		Group layoutGroup = layout.getGroup();
+
+		Role guestRole = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(),  RoleConstants.GUEST);
+		Role communityRole = ResourceLocalServiceUtil.getRole(parentGroup.getGroupId());
+		Role ownerRole = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(),  RoleConstants.OWNER);
+
+		String[] roleNames = new String[]{RoleConstants.GUEST, communityRole.getName()};
 
 		List communityPermissions = ListUtil.fromArray(request.getParameterValues("communityPermissions"));
 		List guestPermissions = ListUtil.fromArray(request.getParameterValues("guestPermissions"));
@@ -45,98 +52,136 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		boolean submitted = (request.getParameter("communityPermissions") != null);
 
-		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(request, "inputPermissionsShowConfigure");
-		boolean inputPermissionsShowMore = ParamUtil.getBoolean(request, "inputPermissionsShowMore");
+		boolean inputPermissionsShowOptions = ParamUtil.getBoolean(request, "inputPermissionsShowOptions");
 
-		boolean inputPermissionsPublicChecked = false;
+		String inputPermissionsViewRole = request.getParameter("inputPermissionsViewRole");
 
-		if (layoutGroup.getName().equals(GroupConstants.CONTROL_PANEL)) {
-			if (!group.hasPrivateLayouts() && guestDefaultActions.contains(ActionKeys.VIEW)) {
-				inputPermissionsPublicChecked = true;
+		if (inputPermissionsViewRole == null) {
+			if (layoutGroup.getName().equals(GroupConstants.CONTROL_PANEL)) {
+				if (!group.hasPrivateLayouts() && guestDefaultActions.contains(ActionKeys.VIEW)) {
+					inputPermissionsViewRole = RoleConstants.GUEST;
+				}
+			}
+			else if (layout.isPublicLayout() && guestDefaultActions.contains(ActionKeys.VIEW)) {
+				inputPermissionsViewRole = RoleConstants.GUEST;;
+			}
+			else {
+				inputPermissionsViewRole = communityRole.getName();
 			}
 		}
-		else if (layout.isPublicLayout() && guestDefaultActions.contains(ActionKeys.VIEW)) {
-			inputPermissionsPublicChecked = true;
+
+		String communityMessage;
+
+		if (communityRole.getName().equals(RoleConstants.COMMUNITY_MEMBER)) {
+			communityMessage = LanguageUtil.get(pageContext, "community-members") + " (" + LanguageUtil.get(pageContext, "role") + ": " + communityRole.getTitle(themeDisplay.getLocale()) + ")";
+		}
+		else if (communityRole.getName().equals(RoleConstants.ORGANIZATION_MEMBER)) {
+			communityMessage = LanguageUtil.get(pageContext, "organization-members") + " (" + LanguageUtil.get(pageContext, "role") + ": " + communityRole.getTitle(themeDisplay.getLocale()) + ")";
+		}
+		else {
+			communityMessage = LanguageUtil.get(pageContext, "users-with-role") + ": " + communityRole.getTitle(themeDisplay.getLocale());
 		}
 		%>
 
-		<input id="<%= randomNamespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>" />
-		<input id="<%= randomNamespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
+		<input id="<%= randomNamespace %>inputPermissionsShowOptions" name="<%= namespace %>inputPermissionsShowOptions" type="hidden" value="<%= inputPermissionsShowOptions %>" />
 
-		<div class="<%= inputPermissionsShowConfigure ? "aui-helper-hidden" : "" %>">
-			<label class="inline-label" for="<%= namespace %>inputPermissionsPublic"><input <%= inputPermissionsPublicChecked ? "checked" : "" %> id="<%= namespace %>inputPermissionsPublic" name="<%= namespace %>inputPermissionsPublic" onclick="<%= randomNamespace %>updatePermissionsGuestView();" type="checkbox" /> <liferay-ui:message key="public" /> <liferay-ui:icon-help message="input-permissions-public-help" /></label>
+		<p>
+			<label class="inline-label" for="<%= namespace %>inputPermissionsViewRole">
+				<liferay-ui:message key="viewable-by" />
 
-			<a href="javascript:<%= randomNamespace %>inputPermissionsConfigure();" id="<%= randomNamespace %>inputPermissionsConfigureLink" style="margin-left: 10px;"><liferay-ui:message key="configure" /> &raquo;</a> <liferay-ui:icon-help message="input-permissions-configure-help" /></label>
+				<select id="<%= namespace %>inputPermissionsViewRole" name="<%= namespace %>inputPermissionsViewRole" onchange="<%= randomNamespace + "updatePermissionsView();" %>">
+					<option <%= (inputPermissionsViewRole.equals(RoleConstants.GUEST)) ? "selected=\"selected\"" : "" %> value="<%= RoleConstants.GUEST %>"><liferay-ui:message key="any-user" /> (<liferay-ui:message key="role" />: <%= guestRole.getTitle(themeDisplay.getLocale()) %>)</option>
+					<option <%= (inputPermissionsViewRole.equals(communityRole.getName())) ? "selected=\"selected\"" : "" %> value="<%= communityRole.getName() %>"><%= communityMessage %></option>
+					<option <%= (inputPermissionsViewRole.equals(RoleConstants.OWNER)) ? "selected=\"selected\"" : "" %> value="<%= RoleConstants.OWNER %>"><liferay-ui:message key="author" /> (<liferay-ui:message key="role" />: <%= ownerRole.getTitle(themeDisplay.getLocale()) %>)</option>
+				</select>
+			</label>
 
-			<a class="aui-helper-hidden" href="javascript:<%= randomNamespace %>inputPermissionsDismiss();" id="<%= randomNamespace %>inputPermissionsDismissLink" style="margin-left: 10px;">&laquo; <liferay-ui:message key="dismiss" /></a>
-		</div>
+			<span <%= inputPermissionsShowOptions ? "class=\"aui-helper-hidden\"" : "" %> id="<%= randomNamespace %>inputPermissionsShowOptionsLink"><a href="javascript:<%= randomNamespace %>inputPermissionsShowOptions();" style="margin-left: 10px;"><liferay-ui:message key="more-options" /> &raquo;</a> <liferay-ui:icon-help message="input-permissions-more-options-help" /></span>
 
-		<table class="lfr-table <%= inputPermissionsShowConfigure ? "" : "aui-helper-hidden" %>" id="<%= randomNamespace %>inputPermissionsTable">
+			<a <%= inputPermissionsShowOptions ? "" : "class=\"aui-helper-hidden\"" %> href="javascript:<%= randomNamespace %>inputPermissionsHideOptions();" id="<%= randomNamespace %>inputPermissionsHideOptionsLink" style="margin-left: 10px;">&laquo; <liferay-ui:message key="hide-options" /></a>
+		</p>
+
+		<table class="lfr-table <%= inputPermissionsShowOptions ? "" : "aui-helper-hidden" %>" id="<%= randomNamespace %>inputPermissionsTable">
 		<tr>
-			<th style="text-align: right;">
-				<liferay-ui:message key="action" />
+			<th>
+				<liferay-ui:message key="roles" />
 			</th>
 
-			<c:choose>
-				<c:when test="<%= group.isCommunity() %>">
-					<th style="text-align: center;">
-						<liferay-ui:message key="community" />
-					</th>
-				</c:when>
-				<c:when test="<%= group.isOrganization() %>">
-					<th style="text-align: center;">
-						<liferay-ui:message key="organization" />
-					</th>
-				</c:when>
-			</c:choose>
+			<%
+			for (int i = 0; i < supportedActions.size(); i++) {
+				String action = (String)supportedActions.get(i);
+			%>
 
-			<th style="text-align: center;">
-				<liferay-ui:message key="guest" />
-			</th>
+				<th style="text-align: center;" <%= (action.equals(ActionKeys.VIEW)) ? "class=\"aui-helper-hidden\"" : "" %>>
+					<%= ResourceActionsUtil.getAction(pageContext, action) %>
+				</th>
+
+			<%
+			}
+			%>
+
 		</tr>
 
 		<%
-		for (int i = 0; i < supportedActions.size(); i++) {
-			String action = (String)supportedActions.get(i);
-
-			boolean communityChecked = communityDefaultActions.contains(action);
-			boolean guestChecked = inputPermissionsPublicChecked && guestDefaultActions.contains(action);
-			boolean guestDisabled = guestUnsupportedActions.contains(action);
-
-			if (submitted) {
-				communityChecked = communityPermissions.contains(action);
-				guestChecked = guestPermissions.contains(action);
-			}
-
-			if (guestDisabled) {
-				guestChecked = false;
-			}
-
-			boolean showAction = false;
-
-			if (inputPermissionsShowMore || communityDefaultActions.contains(action) || guestDefaultActions.contains(action)) {
-				showAction = true;
-			}
+		for (int j = 0; j < roleNames.length; j++) {
+			String roleName = roleNames[j];
+			Role role = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), roleName);
 		%>
 
-			<tr class="<%= showAction ? "" : "aui-helper-hidden" %>" id="<%= randomNamespace %>inputPermissionsAction<%= action %>">
-				<td style="text-align: right;">
-					<%= ResourceActionsUtil.getAction(pageContext, action) %>
+			<tr>
+				<td>
+					<%= role.getTitle(themeDisplay.getLocale()) %>
 				</td>
 
-				<c:if test="<%= group.isCommunity() || group.isOrganization() %>">
-					<td style="text-align: center;">
-						<label class="hidden-label" for="<%= namespace %>communityPermissions"><%= LanguageUtil.format(pageContext, "give-x-permission-to-community-members", ResourceActionsUtil.getAction(pageContext, action)) %></label>
+				<%
+				for (int i = 0; i < supportedActions.size(); i++) {
+					String action = (String)supportedActions.get(i);
 
-						<input <%= communityChecked ? "checked" : "" %> id="<%= namespace %>communityPermissions" name="<%= namespace %>communityPermissions" type="checkbox" value="<%= action %>">
+					boolean isChecked = false;
+					boolean isDisabled = false;
+
+					if (roleName.equals(RoleConstants.GUEST)) {
+						isDisabled = guestUnsupportedActions.contains(action);
+
+						if (isDisabled) {
+							isChecked = false;
+						}
+						else if (submitted) {
+							isChecked = guestPermissions.contains(action);
+						}
+						else {
+							isChecked = guestDefaultActions.contains(action) && (inputPermissionsViewRole.equals(RoleConstants.GUEST));
+						}
+					}
+					else if (roleName.equals(communityRole.getName())) {
+						if (submitted) {
+							isChecked = communityPermissions.contains(action);
+						}
+						else {
+							isChecked = communityDefaultActions.contains(action);
+						}
+					}
+
+					String checkboxFieldName = null;
+
+					if (roleName.equals(RoleConstants.GUEST)) {
+						checkboxFieldName = namespace + "guestPermissions";
+					}
+					else {
+						checkboxFieldName = namespace + "communityPermissions";
+					}
+				%>
+
+					<td style="text-align: center;" <%= (action.equals(ActionKeys.VIEW)) ? "class=\"aui-helper-hidden-accessible\"" : "" %>>
+						<label class="hidden-label" for="<%= checkboxFieldName %>"><%= LanguageUtil.format(pageContext, "give-x-permission-to-users-with-role-x", new String[] {ResourceActionsUtil.getAction(pageContext, action), role.getTitle(themeDisplay.getLocale())}) %></label>
+
+						<input <%= isChecked ? "checked" : "" %> <%= isDisabled ? "disabled" : "" %>  id="<%= checkboxFieldName %>" name="<%= checkboxFieldName %>" type="checkbox" value="<%= action %>">
 					</td>
-				</c:if>
 
-				<td style="text-align: right;">
-					<label class="hidden-label" for="<%= namespace %>guestPermissions"><%= LanguageUtil.format(pageContext, "give-x-permission-to-guest-members", ResourceActionsUtil.getAction(pageContext, action)) %></label>
+				<%
+				}
+				%>
 
-					<input <%= guestChecked ? "checked" : "" %> <%= guestDisabled ? "disabled" : "" %> id="<%= namespace %>guestPermissions" name="<%= namespace %>guestPermissions" <%= action.equals(ActionKeys.VIEW) ? "onclick=\"" + randomNamespace + "updatePermissionsPublic();\"" : "" %> type="checkbox" value="<%= action %>">
-				</td>
 			</tr>
 
 		<%
@@ -145,108 +190,39 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		</table>
 
-		<div class="<%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "aui-helper-hidden" : "" %>" id="<%= randomNamespace %>inputPermissionsMoreLink">
-			<a href="javascript:<%= randomNamespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
-		</div>
-
 		<aui:script>
-			function <%= randomNamespace %>inputPermissionsConfigure() {
-				<%= randomNamespace %>updatePermissionsGuestView();
-
-				AUI().one("#<%= randomNamespace %>inputPermissionsDismissLink").show();
+			function <%= randomNamespace %>inputPermissionsShowOptions() {
+				AUI().one("#<%= randomNamespace %>inputPermissionsHideOptionsLink").show();
 				AUI().one("#<%= randomNamespace %>inputPermissionsTable").show();
 
-				if (AUI().one("#<%= randomNamespace %>inputPermissionsShowMore").val() != "true") {
-					AUI().one("#<%= randomNamespace %>inputPermissionsMoreLink").show();
-				}
-
-				<%
-				for (int i = 0; i < supportedActions.size(); i++) {
-					String action = (String)supportedActions.get(i);
-
-					if (communityDefaultActions.contains(action) || guestDefaultActions.contains(action)) {
-				%>
-
-						AUI().one("#<%= randomNamespace %>inputPermissionsAction<%= action %>").show();
-
-				<%
-					}
-				}
-				%>
-
-				AUI().one("#<%= randomNamespace %>inputPermissionsConfigureLink").hide();
-				AUI().one("#<%= randomNamespace %>inputPermissionsShowConfigure").val("true");
+				AUI().one("#<%= randomNamespace %>inputPermissionsShowOptionsLink").hide();
+				AUI().one("#<%= randomNamespace %>inputPermissionsShowOptions").val("true");
 			}
 
-			function <%= randomNamespace %>inputPermissionsDismiss() {
-				<%= randomNamespace %>updatePermissionsGuestView();
-
-				AUI().one("#<%= randomNamespace %>inputPermissionsConfigureLink").show();
+			function <%= randomNamespace %>inputPermissionsHideOptions() {
+				AUI().one("#<%= randomNamespace %>inputPermissionsShowOptionsLink").show();
 				AUI().one("#<%= randomNamespace %>inputPermissionsTable").hide();
-				AUI().one("#<%= randomNamespace %>inputPermissionsMoreLink").hide();
 
-				<%
-				for (int i = 0; i < supportedActions.size(); i++) {
-					String action = (String)supportedActions.get(i);
-
-					if (communityDefaultActions.contains(action) || guestDefaultActions.contains(action)) {
-				%>
-
-						AUI().one("#<%= randomNamespace %>inputPermissionsAction<%= action %>").hide();
-
-				<%
-					}
-				}
-				%>
-
-				AUI().one("#<%= randomNamespace %>inputPermissionsDismissLink").hide();
-				AUI().one("#<%= randomNamespace %>inputPermissionsShowConfigure").val("false");
+				AUI().one("#<%= randomNamespace %>inputPermissionsHideOptionsLink").hide();
+				AUI().one("#<%= randomNamespace %>inputPermissionsShowOptions").val("false");
 			}
 
-			function <%= randomNamespace %>inputPermissionsMore() {
-
-				<%
-				for (int i = 0; i < supportedActions.size(); i++) {
-					String action = (String)supportedActions.get(i);
-
-					if (!communityDefaultActions.contains(action) && !guestDefaultActions.contains(action)) {
-				%>
-
-						AUI().one("#<%= randomNamespace %>inputPermissionsAction<%= action %>").show();
-
-				<%
-					}
-				}
-				%>
-
-				AUI().one("#<%= randomNamespace %>inputPermissionsMoreLink").hide();
-				AUI().one("#<%= randomNamespace %>inputPermissionsShowMore").val("true");
-			}
-
-			function <%= randomNamespace %>updatePermissionsCommunity(value) {
-				var publicCheckbox = AUI().one("#<%= namespace %>inputPermissionsPublic");
-				var guestViewCheckbox = AUI().one('input[name="<%= namespace %>guestPermissions"][value="' + value + '"]');
-
-				if (guestViewCheckbox) {
-					guestViewCheckbox.set("checked", publicCheckbox.get("checked"));
-				}
-			}
-
-			function <%= randomNamespace %>updatePermissionsGuestView() {
-				var publicCheckbox = AUI().one("#<%= namespace %>inputPermissionsPublic");
+			function <%= randomNamespace %>updatePermissionsView() {
+				var viewableBySelect = AUI().one("#<%= namespace %>inputPermissionsViewRole");
 				var guestViewCheckbox = AUI().one('input[name="<%= namespace %>guestPermissions"][value="VIEW"]');
+				var communityViewCheckbox = AUI().one('input[name="<%= namespace %>communityPermissions"][value="VIEW"]');
 
-				if (guestViewCheckbox) {
-					guestViewCheckbox.set("checked", publicCheckbox.get("checked"));
+				if (viewableBySelect.val() == '<%= RoleConstants.GUEST %>') {
+					guestViewCheckbox.set("checked", true);
+					communityViewCheckbox.set("checked", false);
 				}
-			}
-
-			function <%= randomNamespace %>updatePermissionsPublic() {
-				var publicCheckbox = AUI().one("#<%= namespace %>inputPermissionsPublic");
-				var guestViewCheckbox = AUI().one('input[name="<%= namespace %>guestPermissions"][value="VIEW"]');
-
-				if (publicCheckbox) {
-					publicCheckbox.set("checked", guestViewCheckbox.get("checked"));
+				else if (viewableBySelect.val() == '<%= communityRole.getName() %>') {
+					guestViewCheckbox.set("checked", false);
+					communityViewCheckbox.set("checked", true);
+				}
+				else {
+					guestViewCheckbox.set("checked", false);
+					communityViewCheckbox.set("checked", false);
 				}
 			}
 		</aui:script>
