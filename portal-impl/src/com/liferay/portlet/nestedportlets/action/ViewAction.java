@@ -188,6 +188,6 @@ public class ViewAction extends PortletAction {
 	private static Pattern _columnIdPattern = Pattern.compile(
 		"([<].*?id=[\"'])([^ ]*?)([\"'].*?[>])", Pattern.DOTALL);
 	private static Pattern _processColumnPattern = Pattern.compile(
-		"(processColumn[(]\")(.*?)(\"[)])", Pattern.DOTALL);
+		"(processColumn[(]\")(.*?)(\"(?:, *\"(?:.*?)\")?[)])", Pattern.DOTALL);
 
 }

@@ -157,6 +157,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 	}
 
 	private static Pattern _pattern = Pattern.compile(
-		"processColumn[(]\"(.*?)\"[)]", Pattern.DOTALL);
+		"processColumn[(]\"(.*?)\"(?:, *\"(?:.*?)\")?[)]", Pattern.DOTALL);
 
 }
