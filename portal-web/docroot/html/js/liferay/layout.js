@@ -71,6 +71,56 @@ AUI().add(
 					},
 					dropNodes: options.dropNodes,
 					lazyStart: true,
+					on: {
+						'drop:enter': function(event) {
+							Liferay.Layout.updateOverNestedPortletInfo();
+						},
+
+						'drop:exit': function(event) {
+							Liferay.Layout.updateOverNestedPortletInfo();
+						},
+						placeholderAlign: function(event) {
+							var portalLayout = event.currentTarget;
+							var activeDrop = portalLayout.activeDrop;
+							var lastActiveDrop = portalLayout.lastActiveDrop;
+
+							if (lastActiveDrop) {
+								var activeDropNode = activeDrop.get('node');
+								var lastActiveDropNode = lastActiveDrop.get('node');
+
+								var isOverColumn = !activeDropNode.dd;
+
+								if (!Layout.OVER_NESTED_PORTLET && isOverColumn) {
+									var activeDropNodeId = activeDropNode.get('id');
+									var emptyColumn = Layout.EMPTY_COLUMNS[activeDropNodeId];
+
+									if (!emptyColumn) {
+										if (activeDropNode != lastActiveDropNode) {
+											var portlets = activeDropNode.all(Layout.options.portletBoundary);
+											var lastIndex = portlets.size() - 1;
+											var lastPortlet = portlets.item(lastIndex);
+
+											var drop = DDM.getDrop(lastPortlet);
+
+											if (drop) {
+												portalLayout.quadrant = 4;
+												portalLayout.activeDrop = drop;
+												portalLayout.lastAlignDrop = drop;
+											}
+
+											portalLayout._syncPlaceholderUI();
+										}
+
+										event.halt();
+									}
+								}
+
+								if (Layout.OVER_NESTED_PORTLET && (activeDropNode == lastActiveDropNode)) {
+									event.halt();
+								}
+							}
+						}
+					},
 					proxy: {
 						resizeFrame: false
 					}
@@ -150,57 +200,6 @@ AUI().add(
 
 								Layout.PORTLET_TOPPER.html(getTitle(nodeId));
 							}
-						},
-						on: {
-							'drop:enter': function(event) {
-								Layout.updateOverNestedPortletInfo();
-							},
-
-							'drop:exit': function(event) {
-								Layout.updateOverNestedPortletInfo();
-							},
-
-							placeholderAlign: function(event) {
-								var portalLayout = event.currentTarget;
-								var activeDrop = portalLayout.activeDrop;
-								var lastActiveDrop = portalLayout.lastActiveDrop;
-
-								if (lastActiveDrop) {
-									var activeDropNode = activeDrop.get('node');
-									var lastActiveDropNode = lastActiveDrop.get('node');
-
-									var isOverColumn = !activeDropNode.dd;
-
-									if (!Layout.OVER_NESTED_PORTLET && isOverColumn) {
-										var activeDropNodeId = activeDropNode.get('id');
-										var emptyColumn = Layout.EMPTY_COLUMNS[activeDropNodeId];
-
-										if (!emptyColumn) {
-											if (activeDropNode != lastActiveDropNode) {
-												var portlets = activeDropNode.all(Layout.options.portletBoundary);
-												var lastIndex = portlets.size() - 1;
-												var lastPortlet = portlets.item(lastIndex);
-
-												var drop = DDM.getDrop(lastPortlet);
-
-												if (drop) {
-													portalLayout.quadrant = 4;
-													portalLayout.activeDrop = drop;
-													portalLayout.lastAlignDrop = drop;
-												}
-
-												portalLayout._syncPlaceholderUI();
-											}
-
-											event.halt();
-										}
-									}
-
-									if (Layout.OVER_NESTED_PORTLET && (activeDropNode == lastActiveDropNode)) {
-										event.halt();
-									}
-								}
-							}
 						}
 					}
 				);
@@ -226,7 +225,8 @@ AUI().add(
 						dd: {
 							startCentered: false
 						},
-						lazyStart: false
+						lazyStart: false,
+						on: {}
 					}
 				);
 

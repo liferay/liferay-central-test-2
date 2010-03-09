@@ -291,7 +291,8 @@ AUI().add(
 					dragNodes: portlets,
 					dropContainer: function(dropNode) {
 						return dropNode.one(layoutOptions.dropContainer);
-					}
+					},
+					on: Liferay.Layout.DEFAULT_LAYOUT_OPTIONS.on
 				};
 
 				if (layoutOptions.freeForm) {
