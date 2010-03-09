@@ -14,6 +14,8 @@
 
 package com.liferay.portal.servlet.taglib.ui;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -25,7 +27,7 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
@@ -46,6 +48,45 @@ import javax.servlet.jsp.PageContext;
  */
 public class InputPermissionsParamsTagUtil {
 
+	public static String getDefaultViewRole(
+			String modelName, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		Layout layout = themeDisplay.getLayout();
+
+		Group layoutGroup = layout.getGroup();
+
+		List<String> guestDefaultActions =
+			ResourceActionsUtil.getModelResourceGuestDefaultActions(
+				modelName);
+
+		if (layoutGroup.getName().equals(GroupConstants.CONTROL_PANEL)) {
+			Group group = themeDisplay.getScopeGroup();
+
+			if (!group.hasPrivateLayouts() &&
+				guestDefaultActions.contains(ActionKeys.VIEW)) {
+
+				return RoleConstants.GUEST;
+			}
+		}
+		else if (layout.isPublicLayout() &&
+				 guestDefaultActions.contains(ActionKeys.VIEW)) {
+
+			return RoleConstants.GUEST;
+		}
+		else {
+			Group parentGroup = GroupLocalServiceUtil.getGroup(
+				themeDisplay.getParentGroupId());
+
+			Role defaultGroupRole = RoleLocalServiceUtil.getDefaultGroupRole(
+				parentGroup.getGroupId());
+
+			return defaultGroupRole.getName();
+		}
+
+		return StringPool.BLANK;
+	}
+
 	public static void doEndTag(String modelName, PageContext pageContext)
 		throws JspException {
 
@@ -60,15 +101,7 @@ public class InputPermissionsParamsTagUtil {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			Layout layout = themeDisplay.getLayout();
-
 			Group group = themeDisplay.getScopeGroup();
-			Group parentGroup = GroupLocalServiceUtil.getGroup(
-				themeDisplay.getParentGroupId());
-			Group layoutGroup = layout.getGroup();
-
-			Role communityRole = ResourceLocalServiceUtil.getRole(
-				parentGroup.getGroupId());
 
 			List<String> supportedActions =
 				ResourceActionsUtil.getModelResourceActions(modelName);
@@ -114,23 +147,8 @@ public class InputPermissionsParamsTagUtil {
 				}
 			}
 
-			String inputPermissionsViewRole = null;
-
-			if (layoutGroup.getName().equals(GroupConstants.CONTROL_PANEL)) {
-				if (!group.hasPrivateLayouts() &&
-					guestDefaultActions.contains(ActionKeys.VIEW)) {
-
-					inputPermissionsViewRole = RoleConstants.GUEST;
-				}
-			}
-			else if (layout.isPublicLayout() &&
-					 guestDefaultActions.contains(ActionKeys.VIEW)) {
-
-				inputPermissionsViewRole = RoleConstants.GUEST;;
-			}
-			else {
-				inputPermissionsViewRole = communityRole.getName();
-			}
+			String inputPermissionsViewRole = getDefaultViewRole(
+				modelName, themeDisplay);
 
 			sb.append(StringPool.AMPERSAND);
 			sb.append(renderResponse.getNamespace());

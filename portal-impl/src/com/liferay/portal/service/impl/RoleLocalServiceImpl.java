@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
@@ -208,6 +209,39 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
+	}
+
+	public Role getDefaultGroupRole(long groupId)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		if (group.isLayout()) {
+			Layout layout = layoutLocalService.getLayout(group.getClassPK());
+
+			group = layout.getGroup();
+		}
+
+		Role role = null;
+
+		if (group.isCommunity() || group.isLayoutPrototype() ||
+			group.isLayoutSetPrototype()) {
+
+			role = getRole(
+				group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+		}
+		else if (group.isCompany()) {
+			role = getRole(group.getCompanyId(), RoleConstants.ADMINISTRATOR);
+		}
+		else if (group.isOrganization()) {
+			role = getRole(
+				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
+		}
+		else if (group.isUser() || group.isUserGroup()) {
+			role = getRole(group.getCompanyId(), RoleConstants.POWER_USER);
+		}
+
+		return role;
 	}
 
 	public Role getGroupRole(long companyId, long groupId)
