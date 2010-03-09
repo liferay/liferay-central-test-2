@@ -16,28 +16,29 @@ package com.liferay.portal.servlet.filters.sso.cas;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.util.servlet.filters.DynamicFilterConfig;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.jasig.cas.client.authentication.AttributePrincipal;
+import org.jasig.cas.client.authentication.AuthenticationFilter;
+import org.jasig.cas.client.util.AbstractCasFilter;
 import org.jasig.cas.client.validation.Assertion;
-import org.jasig.cas.client.validation.Cas20ProxyTicketValidator;
-import org.jasig.cas.client.validation.TicketValidator;
+import org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter;
 
 /**
  * <a href="CASFilter.java.html"><b><i>View Source</i></b></a>
@@ -52,44 +53,85 @@ public class CASFilter extends BasePortalFilter {
 	public static String LOGIN = CASFilter.class.getName() + "LOGIN";
 
 	public static void reload(long companyId) {
-		_ticketValidators.remove(companyId);
+		_casAuthenticationFilters.remove(companyId);
+		_casTicketValidationFilters.remove(companyId);
+	}
+
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
+
+		_servletContext = getFilterConfig().getServletContext();
+	}
+
+	protected Filter getCASAuthenticationFilter(long companyId)
+		throws Exception {
+
+		Filter casAuthenticationFilter = _casAuthenticationFilters.get(
+			companyId);
+
+		if (casAuthenticationFilter == null) {
+			casAuthenticationFilter = new AuthenticationFilter();
+
+			DynamicFilterConfig dynamicFilterConfig = new DynamicFilterConfig(
+				_filterName, _servletContext);
+
+			String serverName = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CAS_SERVER_NAME,
+				PropsValues.CAS_SERVER_NAME);
+			String loginUrl = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CAS_LOGIN_URL, PropsValues.CAS_LOGIN_URL);
+
+			dynamicFilterConfig.addInitParameter("serverName", serverName);
+			dynamicFilterConfig.addInitParameter("casServerLoginUrl", loginUrl);
+
+			casAuthenticationFilter.init(dynamicFilterConfig);
+
+			_casAuthenticationFilters.put(companyId, casAuthenticationFilter);
+		}
+
+		return casAuthenticationFilter;
+	}
+
+	protected Filter getCASTicketValidationFilter(long companyId)
+		throws Exception {
+
+		Filter casTicketValidationFilter = _casTicketValidationFilters.get(
+			companyId);
+
+		if (casTicketValidationFilter == null) {
+			casTicketValidationFilter =
+				new Cas20ProxyReceivingTicketValidationFilter();
+
+			DynamicFilterConfig dynamicFilterConfig = new DynamicFilterConfig(
+				_filterName, _servletContext);
+
+			String serverName = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CAS_SERVER_NAME,
+				PropsValues.CAS_SERVER_NAME);
+			String serverUrl = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CAS_SERVER_URL,
+				PropsValues.CAS_SERVER_URL);
+			String loginUrl = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CAS_LOGIN_URL, PropsValues.CAS_LOGIN_URL);
+
+			dynamicFilterConfig.addInitParameter("serverName", serverName);
+			dynamicFilterConfig.addInitParameter(
+				"casServerUrlPrefix", serverUrl);
+			dynamicFilterConfig.addInitParameter("casServerLoginUrl", loginUrl);
+			dynamicFilterConfig.addInitParameter(
+				"redirectAfterValidation", "false");
+
+			casTicketValidationFilter.init(dynamicFilterConfig);
+
+			_casTicketValidationFilters.put(
+				companyId, casTicketValidationFilter);
+		}
+
+		return casTicketValidationFilter;
 	}
 
 	protected Log getLog() {
 		return _log;
-	}
-
-	protected TicketValidator getTicketValidator(long companyId)
-		throws Exception {
-
-		TicketValidator ticketValidator = _ticketValidators.get(companyId);
-
-		if (ticketValidator != null) {
-			return ticketValidator;
-		}
-
-		String serverName = PrefsPropsUtil.getString(
-			companyId, PropsKeys.CAS_SERVER_NAME, PropsValues.CAS_SERVER_NAME);
-		String serverUrl = PrefsPropsUtil.getString(
-			companyId, PropsKeys.CAS_SERVER_URL, PropsValues.CAS_SERVER_URL);
-		String loginUrl = PrefsPropsUtil.getString(
-			companyId, PropsKeys.CAS_LOGIN_URL, PropsValues.CAS_LOGIN_URL);
-
-		Cas20ProxyTicketValidator cas20ProxyTicketValidator =
-			new Cas20ProxyTicketValidator(serverUrl);
-
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		parameters.put("serverName", serverName);
-		parameters.put("casServerUrlPrefix", serverUrl);
-		parameters.put("casServerLoginUrl", loginUrl);
-		parameters.put("redirectAfterValidation", "false");
-
-		cas20ProxyTicketValidator.setCustomParameters(parameters);
-
-		_ticketValidators.put(companyId, cas20ProxyTicketValidator);
-
-		return cas20ProxyTicketValidator;
 	}
 
 	protected void processFilter(
@@ -117,55 +159,44 @@ public class CASFilter extends BasePortalFilter {
 				response.sendRedirect(logoutUrl);
 			}
 			else {
-				String login = (String)session.getAttribute(LOGIN);
-
-				String serviceUrl = PrefsPropsUtil.getString(
-					companyId, PropsKeys.CAS_SERVICE_URL,
-					PropsValues.CAS_SERVICE_URL);
-				String loginUrl = PrefsPropsUtil.getString(
-					companyId, PropsKeys.CAS_LOGIN_URL,
-					PropsValues.CAS_LOGIN_URL);
-
-				String ticket = ParamUtil.getString(request, "ticket");
-
-				if (Validator.isNull(ticket)) {
-					if (Validator.isNotNull(login)) {
-						processFilter(
-							CASFilter.class, request, response, filterChain);
-					}
-					else {
-						loginUrl = HttpUtil.addParameter(
-							loginUrl, "service", serviceUrl);
-
-						response.sendRedirect(loginUrl);
-					}
-
-					return;
-				}
-
-				TicketValidator ticketValidator = getTicketValidator(
+				Filter casAuthenticationFilter = getCASAuthenticationFilter(
 					companyId);
 
-				Assertion assertion = ticketValidator.validate(
-					ticket, serviceUrl);
+				casAuthenticationFilter.doFilter(
+					request, response, filterChain);
+
+				Filter casTicketValidationFilter = getCASTicketValidationFilter(
+					companyId);
+
+				casTicketValidationFilter.doFilter(
+					request, response, filterChain);
+
+				Assertion assertion = (Assertion)session.getAttribute(
+					AbstractCasFilter.CONST_CAS_ASSERTION);
 
 				if (assertion != null) {
 					AttributePrincipal attributePrincipal =
 						assertion.getPrincipal();
 
-					login = attributePrincipal.getName();
+					String login = attributePrincipal.getName();
 
 					session.setAttribute(LOGIN, login);
 				}
 			}
 		}
-
-		processFilter(CASFilter.class, request, response, filterChain);
+		else {
+			processFilter(CASFilter.class, request, response, filterChain);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CASFilter.class);
 
-	private static Map<Long, TicketValidator> _ticketValidators =
-		new ConcurrentHashMap<Long, TicketValidator>();
+	private static Map<Long, Filter> _casAuthenticationFilters =
+		new ConcurrentHashMap<Long, Filter>();
+	private static Map<Long, Filter> _casTicketValidationFilters =
+		new ConcurrentHashMap<Long, Filter>();
+
+	private String _filterName;
+	private ServletContext _servletContext;
 
 }
