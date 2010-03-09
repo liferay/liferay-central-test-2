@@ -22,6 +22,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 long groupId = ParamUtil.getLong(request, "groupId");
 
 Group group = GroupServiceUtil.getGroup(groupId);
+Organization organization = null;
+
+if (group.isOrganization()) {
+	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -35,7 +40,14 @@ pageContext.setAttribute("portletURL", portletURL);
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
 
 	<div>
-		<liferay-ui:message key="manage-teams-for-community" />: <%= group.getName() %>
+		<c:choose>
+			<c:when test="<%= group.isOrganization() %>">
+				<liferay-ui:message key="manage-teams-for-organization" />: <%= group.getDescriptiveName() %>
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:message key="manage-teams-for-community" />: <%= group.getDescriptiveName() %>
+			</c:otherwise>
+		</c:choose>
 	</div>
 
 	<br />
@@ -123,6 +135,12 @@ pageContext.setAttribute("portletURL", portletURL);
 </aui:form>
 
 <%
-PortalUtil.addPortletBreadcrumbEntry(request, group.getName(), null);
+if (group.isOrganization()) {
+	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
+}
+
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-teams"), currentURL);
 %>

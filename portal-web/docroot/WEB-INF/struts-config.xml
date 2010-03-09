@@ -554,6 +554,16 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
+		<action path="/enterprise_admin/edit_team" type="com.liferay.portlet.communities.action.EditTeamAction">
+			<forward name="portlet.communities.edit_team" path="portlet.communities.edit_team" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/enterprise_admin/edit_team_assignments" type="com.liferay.portlet.communities.action.EditTeamAssignmentsAction">
+			<forward name="portlet.communities.edit_team_assignments" path="portlet.communities.edit_team_assignments" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
 		<action path="/enterprise_admin/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
 			<forward name="portlet.enterprise_admin.edit_user" path="portlet.enterprise_admin.edit_user" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
@@ -614,6 +624,8 @@
 		<action path="/enterprise_admin/test_ldap_users" forward="portlet.enterprise_admin.test_ldap_users" />
 
 		<action path="/enterprise_admin/view" forward="portlet.enterprise_admin.view" />
+
+		<action path="/enterprise_admin/view_teams" forward="portlet.communities.view_teams" />
 
 		<!-- Enterprise Admin Communities -->
 
@@ -720,6 +732,16 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
+		<action path="/enterprise_admin_organizations/edit_team" type="com.liferay.portlet.communities.action.EditTeamAction">
+			<forward name="portlet.communities.edit_team" path="portlet.communities.edit_team" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/enterprise_admin_organizations/edit_team_assignments" type="com.liferay.portlet.communities.action.EditTeamAssignmentsAction">
+			<forward name="portlet.communities.edit_team_assignments" path="portlet.communities.edit_team_assignments" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
 		<action path="/enterprise_admin_organizations/edit_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
 			<forward name="portlet.enterprise_admin.edit_user" path="portlet.enterprise_admin.edit_user" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
@@ -760,6 +782,8 @@
 		<action path="/enterprise_admin_organizations/select_user_group" forward="portlet.enterprise_admin.select_user_group" />
 
 		<action path="/enterprise_admin_organizations/view" forward="portlet.enterprise_admin.view" />
+
+		<action path="/enterprise_admin_organizations/view_teams" forward="portlet.communities.view_teams" />
 
 		<!-- Enterprise Admin Password Policies -->
 

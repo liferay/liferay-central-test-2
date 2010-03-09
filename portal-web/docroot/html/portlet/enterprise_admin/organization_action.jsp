@@ -62,6 +62,16 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
 	</c:if>
 
+	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_TEAMS) %>">
+		<portlet:renderURL var="manageTeamsURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/view_teams" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="group" message="manage-teams" url="<%= manageTeamsURL %>" />
+	</c:if>
+
 	<c:if test="<%= permissionChecker.isCommunityOwner(organizationGroupId) || OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_USER_ROLES) %>">
 		<portlet:renderURL var="assignUserRolesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />

@@ -26,6 +26,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 Team team = (Team)request.getAttribute(WebKeys.TEAM);
 
 Group group = GroupServiceUtil.getGroup(team.getGroupId());
+Organization organization = null;
+
+if (group.isOrganization()) {
+	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -72,7 +77,12 @@ portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 
 		LinkedHashMap userParams = new LinkedHashMap();
 
-		userParams.put("usersGroups", new Long(team.getGroupId()));
+		if (group.isOrganization()) {
+			userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
+		}
+		else {
+			userParams.put("usersGroups", new Long(team.getGroupId()));
+		}
 
 		if (tabs1.equals("current")) {
 			userParams.put("usersTeams", new Long(team.getTeamId()));
@@ -125,7 +135,13 @@ portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 </aui:script>
 
 <%
-PortalUtil.addPortletBreadcrumbEntry(request, group.getName(), null);
+if (group.isOrganization()) {
+	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
+}
+
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-teams"), redirect);
 PortalUtil.addPortletBreadcrumbEntry(request, team.getName(), null);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-members"), currentURL);

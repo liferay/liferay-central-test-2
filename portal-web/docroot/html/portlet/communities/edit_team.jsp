@@ -26,10 +26,22 @@ long teamId = BeanParamUtil.getLong(team, request, "teamId");
 long groupId = BeanParamUtil.getLong(team, request, "groupId");
 
 Group group = GroupServiceUtil.getGroup(groupId);
+Organization organization = null;
+
+if (group.isOrganization()) {
+	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+}
 %>
 
 <div>
-	<liferay-ui:message key="manage-teams-for-community" />: <%= group.getName() %>
+	<c:choose>
+		<c:when test="<%= group.isOrganization() %>">
+			<liferay-ui:message key="manage-teams-for-organization" />: <%= group.getDescriptiveName() %>
+		</c:when>
+		<c:otherwise>
+			<liferay-ui:message key="manage-teams-for-community" />: <%= group.getDescriptiveName() %>
+		</c:otherwise>
+	</c:choose>
 </div>
 
 <portlet:actionURL var="editTeamURL">
@@ -78,14 +90,19 @@ Group group = GroupServiceUtil.getGroup(groupId);
 </aui:script>
 
 <%
+if (group.isOrganization()) {
+	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
+}
+
 if (team != null) {
-	PortalUtil.addPortletBreadcrumbEntry(request, group.getName(), null);
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-teams"), redirect);
 	PortalUtil.addPortletBreadcrumbEntry(request, team.getName(), null);
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
-	PortalUtil.addPortletBreadcrumbEntry(request, group.getName(), null);
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-teams"), redirect);
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-team"), currentURL);
 }

@@ -377,6 +377,7 @@
 			<action-key>MANAGE_LAYOUTS</action-key>
 			<action-key>MANAGE_STAGING</action-key>
 			<action-key>MANAGE_SUBORGANIZATIONS</action-key>
+			<action-key>MANAGE_TEAMS</action-key>
 			<action-key>MANAGE_USERS</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>PUBLISH_STAGING</action-key>
@@ -396,6 +397,7 @@
 			<action-key>MANAGE_LAYOUTS</action-key>
 			<action-key>MANAGE_STAGING</action-key>
 			<action-key>MANAGE_SUBORGANIZATIONS</action-key>
+			<action-key>MANAGE_TEAMS</action-key>
 			<action-key>MANAGE_USERS</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>PUBLISH_STAGING</action-key>
