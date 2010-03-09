@@ -70,7 +70,7 @@ public class IncludeTag
 			clearParams();
 			clearProperties();
 
-			if (ServerDetector.isResin()) {
+			if (!ServerDetector.isResin()) {
 				_page = null;
 
 				cleanUp();

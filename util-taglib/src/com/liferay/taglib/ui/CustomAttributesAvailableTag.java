@@ -55,7 +55,7 @@ public class CustomAttributesAvailableTag
 			}
 		}
 		finally {
-			if (ServerDetector.isResin()) {
+			if (!ServerDetector.isResin()) {
 				_className = null;
 				_companyId = 0;
 			}
