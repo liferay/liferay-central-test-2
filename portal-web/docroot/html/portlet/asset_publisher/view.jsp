@@ -66,12 +66,12 @@ for (String curAssetTagName : allAssetTagNames) {
 if (enableTagBasedNavigation && selectionStyle.equals("manual") && ((allAssetCategoryIds.length > 0) || (allAssetTagNames.length > 0))) {
 	selectionStyle = "dynamic";
 }
-
-String portletId = portletDisplay.getId();
 %>
+
 <aui:form name="fm">
 	<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 </aui:form>
+
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
