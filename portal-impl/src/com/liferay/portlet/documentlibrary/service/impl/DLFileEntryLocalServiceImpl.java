@@ -137,7 +137,6 @@ public class DLFileEntryLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		folderId = getFolderId(user.getCompanyId(), folderId);
-		Date now = new Date();
 
 		if (Validator.isNull(title)) {
 			title = name;
@@ -145,6 +144,8 @@ public class DLFileEntryLocalServiceImpl
 
 		name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
+
+		Date now = new Date();
 
 		validate(groupId, folderId, title, is);
 
@@ -736,7 +737,6 @@ public class DLFileEntryLocalServiceImpl
 		// File entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		Date now = new Date();
 
 		if (Validator.isNull(title)) {
 			title = sourceFileName;
@@ -745,6 +745,8 @@ public class DLFileEntryLocalServiceImpl
 				title = name;
 			}
 		}
+
+		Date now = new Date();
 
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByG_F_N(
 			groupId, folderId, name);
