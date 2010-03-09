@@ -130,6 +130,12 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 		_roleLocalService.checkSystemRoles(companyId);
 	}
 
+	public com.liferay.portal.model.Role getDefaultGroupRole(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _roleLocalService.getDefaultGroupRole(groupId);
+	}
+
 	public com.liferay.portal.model.Role getGroupRole(long companyId,
 		long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,

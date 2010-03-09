@@ -113,6 +113,11 @@ public interface RoleLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Role getDefaultGroupRole(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Role getGroupRole(long companyId,
 		long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,

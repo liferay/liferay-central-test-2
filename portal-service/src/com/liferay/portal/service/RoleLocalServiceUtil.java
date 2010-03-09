@@ -133,6 +133,13 @@ public class RoleLocalServiceUtil {
 		getService().checkSystemRoles(companyId);
 	}
 
+	public static com.liferay.portal.model.Role getDefaultGroupRole(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDefaultGroupRole(groupId);
+	}
+
 	public static com.liferay.portal.model.Role getGroupRole(long companyId,
 		long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
