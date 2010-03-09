@@ -40,6 +40,8 @@ AUI().add(
 					var hudcrumbs = breadcrumbs.cloneNode(true);
 					var region = breadcrumbs.get('region');
 
+					hudcrumbs.set('id', A.guid());
+
 					var dockbar = A.one('#dockbar');
 
 					var win = A.getWin();
