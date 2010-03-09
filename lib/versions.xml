@@ -738,7 +738,7 @@
 	</library>
 	<library>
 		<file-name>development/selenium-server.jar</file-name>
-		<version>1.0.1</version>
+		<version>1.0.3</version>
 		<project-name>Selenium Remote Control</project-name>
 		<project-url>http://www.openqa.org/selenium-rc</project-url>
 		<licenses>

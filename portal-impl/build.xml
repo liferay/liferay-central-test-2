@@ -529,6 +529,8 @@ ${exception.message}
 
 		<unzip src="${project.dir}/lib/development/selenium-server.jar" dest="${tstamp.value}" />
 
+		<delete file="${tstamp.value}/core/scripts/user-extensions.js" failonerror="false" />
+
 		<copy file="${project.dir}/tools/selenium/user-extensions.js" todir="${tstamp.value}/core/scripts" />
 
 		<zip basedir="${tstamp.value}" destfile="${project.dir}/lib/development/selenium-server.jar.new" />
