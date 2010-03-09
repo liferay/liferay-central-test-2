@@ -15,8 +15,6 @@
 package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Role;
 
 import java.util.ArrayList;
@@ -53,7 +51,5 @@ public class TeamSearch extends SearchContainer<Role> {
 		iteratorURL.setParameter(
 			TeamDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(TeamSearch.class);
 
 }
