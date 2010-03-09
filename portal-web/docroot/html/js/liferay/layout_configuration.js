@@ -454,6 +454,14 @@ AUI().add(
 			{
 				PROXY_TITLE: PROXY_NODE_ITEM.one('.portlet-title'),
 
+				bindUI: function() {
+					var instance = this;
+
+					PortletItem.superclass.bindUI.apply(this, arguments);
+
+					instance.on('placeholderAlign', instance._onPlaceholderAlign);
+				},
+
 				_addPortlet: function(portletNode, options) {
 					var instance = this;
 
@@ -493,6 +501,23 @@ AUI().add(
 					PortletItem.superclass._onDragStart.apply(this, arguments);
 
 					instance._syncProxyTitle();
+				},
+
+				_onPlaceholderAlign: function(event) {
+					var instance = this;
+
+					var drop = event.drop;
+					var portletItem = event.currentTarget;
+
+					if (drop && portletItem) {
+						var dropNodeId = drop.get('node').get('id');
+
+						if (Liferay.Layout.EMPTY_COLUMNS[dropNodeId]) {
+							portletItem.activeDrop = drop;
+							portletItem.lazyEvents = false;
+							portletItem.quadrant = 1;
+						}
+					}
 				},
 
 				_syncProxyTitle: function() {
