@@ -667,16 +667,16 @@ public class JournalArticleLocalServiceImpl
 		journalArticleImageLocalService.deleteImages(
 			article.getGroupId(), article.getArticleId(), article.getVersion());
 
+		// Workflow
+
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+			article.getCompanyId(), article.getGroupId(),
+			JournalArticle.class.getName(), article.getId());
+
 		int articlesCount = journalArticlePersistence.countByG_A(
 			article.getGroupId(), article.getArticleId());
 
 		if (articlesCount == 1) {
-
-			// Workflow
-
-			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
-				article.getCompanyId(), article.getGroupId(),
-				JournalArticle.class.getName(), article.getId());
 
 			// Ratings
 
