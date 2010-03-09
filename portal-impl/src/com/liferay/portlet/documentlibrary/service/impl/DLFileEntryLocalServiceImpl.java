@@ -198,7 +198,7 @@ public class DLFileEntryLocalServiceImpl
 		// File version
 
 		addFileVersion(
-			user, fileEntry, fileEntry.getVersion(), null,
+			user, fileEntry, now, fileEntry.getVersion(), null,
 			serviceContext.getStatus());
 
 		// Folder
@@ -962,14 +962,14 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		addFileVersion(
-			user, fileEntry, version, versionDescription,
+			user, fileEntry, now, version, versionDescription,
 			serviceContext.getStatus());
 
 		// File entry
 
 		fileEntry.setVersionUserId(user.getUserId());
 		fileEntry.setVersionUserName(user.getFullName());
-		fileEntry.setModifiedDate(new Date());
+		fileEntry.setModifiedDate(now);
 		fileEntry.setVersion(version);
 		fileEntry.setSize((int)size);
 		fileEntry.setExpandoBridgeAttributes(serviceContext);
@@ -1141,7 +1141,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void addFileVersion(
-			User user, DLFileEntry fileEntry, String version,
+			User user, DLFileEntry fileEntry, Date modifiedDate, String version,
 			String description, int status)
 		throws SystemException {
 
@@ -1163,7 +1163,7 @@ public class DLFileEntryLocalServiceImpl
 		fileVersion.setCompanyId(fileEntry.getCompanyId());
 		fileVersion.setUserId(versionUserId);
 		fileVersion.setUserName(versionUserName);
-		fileVersion.setCreateDate(fileEntry.getModifiedDate());
+		fileVersion.setCreateDate(modifiedDate);
 		fileVersion.setFolderId(fileEntry.getFolderId());
 		fileVersion.setName(fileEntry.getName());
 		fileVersion.setDescription(description);
