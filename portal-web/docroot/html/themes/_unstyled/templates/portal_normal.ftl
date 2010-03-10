@@ -18,6 +18,7 @@
 
 <div id="wrapper">
 	<a href="#main-content" id="skip-to-content"><@liferay.language key="go-to-content" /></a>
+
 	<header id="banner" role="banner">
 		<hgroup id="heading">
 			<h1 class="company-title">
@@ -36,6 +37,7 @@
 				<span>${the_title}</span>
 			</h3>
 		</hgroup>
+
 		<#if !is_signed_in>
 			<a href="${sign_in_url}" id="sign-in">${sign_in_text}</a>
 		</#if>

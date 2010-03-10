@@ -2,6 +2,7 @@
 	<h1>
 		<span>#language("navigation")</span>
 	</h1>
+
 	<ul>
 		<#list nav_items as nav_item>
 			<#if nav_item.isSelected()>
