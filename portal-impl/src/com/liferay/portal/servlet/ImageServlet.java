@@ -342,7 +342,7 @@ public class ImageServlet extends HttpServlet {
 
 				if (Validator.isNotNull(fileName)) {
 					ServletResponseUtil.sendFile(
-						response, fileName, bytes, contentType);
+						request, response, fileName, bytes, contentType);
 				}
 				else {
 					ServletResponseUtil.write(response, bytes);

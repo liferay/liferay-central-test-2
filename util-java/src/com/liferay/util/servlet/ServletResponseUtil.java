@@ -43,16 +43,8 @@ import org.apache.commons.lang.CharUtils;
  * <a href="ServletResponseUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Zsolt Balogh
  */
 public class ServletResponseUtil {
-
-	public static void sendFile(
-			HttpServletResponse response, String fileName, byte[] bytes)
-		throws IOException {
-
-		sendFile(null, response, fileName, bytes, null);
-	}
 
 	public static void sendFile(
 			HttpServletRequest request, HttpServletResponse response,
@@ -60,14 +52,6 @@ public class ServletResponseUtil {
 		throws IOException {
 
 		sendFile(request, response, fileName, bytes, null);
-	}
-
-	public static void sendFile(
-			HttpServletResponse response, String fileName, byte[] bytes,
-			String contentType)
-		throws IOException {
-
-		sendFile(null, response, fileName, bytes, contentType);
 	}
 
 	public static void sendFile(
@@ -89,22 +73,6 @@ public class ServletResponseUtil {
 	}
 
 	public static void sendFile(
-			HttpServletResponse response, String fileName, InputStream is,
-			String contentType)
-		throws IOException {
-
-		sendFile(null, response, fileName, is, contentType);
-	}
-
-	public static void sendFile(
-			HttpServletRequest request, HttpServletResponse response,
-			String fileName, InputStream is, String contentType)
-		throws IOException {
-
-		sendFile(request, response, fileName, is, 0, contentType);
-	}
-
-	public static void sendFile(
 			HttpServletRequest request, HttpServletResponse response,
 			String fileName, InputStream is, int contentLength,
 			String contentType)
@@ -115,10 +83,65 @@ public class ServletResponseUtil {
 		write(response, is, contentLength);
 	}
 
-	public static void write(HttpServletResponse response, String s)
+	public static void sendFile(
+			HttpServletRequest request, HttpServletResponse response,
+			String fileName, InputStream is, String contentType)
 		throws IOException {
 
-		write(response, s.getBytes(StringPool.UTF8));
+		sendFile(request, response, fileName, is, 0, contentType);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void sendFile(
+			HttpServletResponse response, String fileName, byte[] bytes)
+		throws IOException {
+
+		sendFile(null, response, fileName, bytes);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void sendFile(
+			HttpServletResponse response, String fileName, byte[] bytes,
+			String contentType)
+		throws IOException {
+
+		sendFile(null, response, fileName, bytes, contentType);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void sendFile(
+			HttpServletResponse response, String fileName, InputStream is)
+		throws IOException {
+
+		sendFile(null, response, fileName, is);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void sendFile(
+			HttpServletResponse response, String fileName, InputStream is,
+			int contentLength, String contentType)
+		throws IOException {
+
+		sendFile(null, response, fileName, is, contentLength, contentType);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void sendFile(
+			HttpServletResponse response, String fileName, InputStream is,
+			String contentType)
+		throws IOException {
+
+		sendFile(null, response, fileName, is, contentType);
 	}
 
 	public static void write(HttpServletResponse response, byte[] bytes)
@@ -184,6 +207,12 @@ public class ServletResponseUtil {
 		}
 
 		StreamUtil.transfer(is, response.getOutputStream());
+	}
+
+	public static void write(HttpServletResponse response, String s)
+		throws IOException {
+
+		write(response, s.getBytes(StringPool.UTF8));
 	}
 
 	protected static void setHeaders(

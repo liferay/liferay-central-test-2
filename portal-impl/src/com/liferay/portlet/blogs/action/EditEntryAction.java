@@ -60,6 +60,7 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
@@ -148,6 +149,8 @@ public class EditEntryAction extends PortletAction {
 				jsonObj.put("redirect", redirect);
 				jsonObj.put("updateRedirect", updateRedirect);
 
+				HttpServletRequest request = PortalUtil.getHttpServletRequest(
+					actionRequest);
 				HttpServletResponse response =
 					PortalUtil.getHttpServletResponse(actionResponse);
 				InputStream is = new UnsyncByteArrayInputStream(
@@ -155,7 +158,7 @@ public class EditEntryAction extends PortletAction {
 				String contentType = ContentTypes.TEXT_JAVASCRIPT;
 
 				ServletResponseUtil.sendFile(
-					response, null, is, contentType);
+					request, response, null, is, contentType);
 
 				setForward(actionRequest, ActionConstants.COMMON_NULL);
 			}

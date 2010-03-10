@@ -211,7 +211,6 @@ public class ExportImportAction extends EditConfigurationAction {
 
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
-
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 

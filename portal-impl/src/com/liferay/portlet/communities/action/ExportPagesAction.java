@@ -128,7 +128,6 @@ public class ExportPagesAction extends PortletAction {
 
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
-
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 

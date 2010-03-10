@@ -43,7 +43,8 @@ public class OpenSearchAction extends Action {
 
 		try {
 			ServletResponseUtil.sendFile(
-				response, null, getXML(request), ContentTypes.TEXT_XML_UTF8);
+				request, response, null, getXML(request),
+				ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}

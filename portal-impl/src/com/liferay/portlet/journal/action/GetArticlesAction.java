@@ -74,7 +74,7 @@ public class GetArticlesAction extends Action {
 			byte[] bytes = getContent(request, articles);
 
 			ServletResponseUtil.sendFile(
-				response, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
+				request, response, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}

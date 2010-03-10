@@ -75,11 +75,10 @@ public class GetMessageAttachmentAction extends PortletAction {
 			long messageId = ParamUtil.getLong(actionRequest, "messageId");
 			String fileName = ParamUtil.getString(actionRequest, "attachment");
 
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				actionResponse);
-
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
 			getFile(messageId, fileName, request, response);
 

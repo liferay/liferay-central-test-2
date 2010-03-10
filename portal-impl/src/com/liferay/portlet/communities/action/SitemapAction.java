@@ -81,7 +81,7 @@ public class SitemapAction extends Action {
 				themeDisplay);
 
 			ServletResponseUtil.sendFile(
-				response, null, sitemap.getBytes(StringPool.UTF8),
+				request, response, null, sitemap.getBytes(StringPool.UTF8),
 				ContentTypes.TEXT_XML_UTF8);
 		}
 		catch (NoSuchLayoutSetException nslse) {

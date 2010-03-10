@@ -96,7 +96,7 @@ public class TrackbackAction extends PortletAction {
 
 		if (!isCommentsEnabled(actionRequest)) {
 			sendError(
-				actionResponse,
+				actionRequest, actionResponse,
 				"Comments have been disabled for this blog entry.");
 
 			return;
@@ -104,7 +104,8 @@ public class TrackbackAction extends PortletAction {
 
 		if (Validator.isNull(url)) {
 			sendError(
-				actionResponse, "Trackback requires a valid permanent URL.");
+				actionRequest, actionResponse,
+				"Trackback requires a valid permanent URL.");
 
 			return;
 		}
@@ -118,9 +119,9 @@ public class TrackbackAction extends PortletAction {
 
 		if (!remoteIp.equals(trackbackIp)) {
 			sendError(
-				actionResponse,
-				"Remote IP " + remoteIp + " does not match trackback URL's IP "
-					+ trackbackIp);
+				actionRequest, actionResponse,
+				"Remote IP " + remoteIp +
+					" does not match trackback URL's IP " + trackbackIp + ".");
 
 			return;
 		}
@@ -130,8 +131,8 @@ public class TrackbackAction extends PortletAction {
 		}
 		catch (PrincipalException pe) {
 			sendError(
-				actionResponse,
-				"Entry must have guest view permissions to enable trackbacks");
+				actionRequest, actionResponse,
+				"Entry must have guest view permissions to enable trackbacks.");
 
 			return;
 		}
@@ -141,7 +142,7 @@ public class TrackbackAction extends PortletAction {
 
 		if (!entry.isAllowTrackbacks()) {
 			sendError(
-				actionResponse,
+				actionRequest, actionResponse,
 				"Trackbacks are not enabled on this blog entry.");
 
 			return;
@@ -179,7 +180,7 @@ public class TrackbackAction extends PortletAction {
 		LinkbackConsumerUtil.addNewTrackback(
 			message.getMessageId(), url, entryURL);
 
-		sendSuccess(actionResponse);
+		sendSuccess(actionRequest, actionResponse);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
@@ -203,14 +204,17 @@ public class TrackbackAction extends PortletAction {
 			preferences.getValue("enable-comments", null), true);
 	}
 
-	protected void sendError(ActionResponse actionResponse, String msg)
+	protected void sendError(
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			String msg)
 		throws Exception {
 
-		sendResponse(actionResponse, msg, false);
+		sendResponse(actionRequest, actionResponse, msg, false);
 	}
 
 	protected void sendResponse(
-			ActionResponse actionResponse, String msg, boolean success)
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			String msg, boolean success)
 		throws Exception {
 
 		StringBundler sb = new StringBundler(7);
@@ -230,16 +234,21 @@ public class TrackbackAction extends PortletAction {
 
 		sb.append("</response>");
 
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			actionResponse);
 
 		ServletResponseUtil.sendFile(
-			response, null, sb.toString().getBytes(StringPool.UTF8),
+			request, response, null, sb.toString().getBytes(StringPool.UTF8),
 			ContentTypes.TEXT_XML_UTF8);
 	}
 
-	protected void sendSuccess(ActionResponse actionResponse) throws Exception {
-		sendResponse(actionResponse, null, true);
+	protected void sendSuccess(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		sendResponse(actionRequest, actionResponse, null, true);
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;

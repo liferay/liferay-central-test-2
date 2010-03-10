@@ -16,6 +16,7 @@ package com.liferay.util.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -25,13 +26,17 @@ import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.portlet.MimeResponse;
+import javax.portlet.PortletRequest;
 import javax.portlet.ResourceResponse;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang.CharUtils;
@@ -43,52 +48,102 @@ import org.apache.commons.lang.CharUtils;
  */
 public class PortletResponseUtil {
 
+	/**
+	 * @deprecated
+	 */
 	public static void sendFile(
 			MimeResponse mimeResponse, String fileName, byte[] bytes)
 		throws IOException {
 
-		sendFile(mimeResponse, fileName, bytes, null);
+		sendFile(null, mimeResponse, fileName, bytes);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void sendFile(
 			MimeResponse mimeResponse, String fileName, byte[] bytes,
 			String contentType)
 		throws IOException {
 
-		setHeaders(mimeResponse, fileName, contentType);
-
-		write(mimeResponse, bytes);
+		sendFile(null, mimeResponse, fileName, bytes, contentType);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void sendFile(
 			MimeResponse mimeResponse, String fileName, InputStream is)
 		throws IOException {
 
-		sendFile(mimeResponse, fileName, is, null);
+		sendFile(null, mimeResponse, fileName, is);
 	}
 
-	public static void sendFile(
-			MimeResponse mimeResponse, String fileName, InputStream is,
-			String contentType)
-		throws IOException {
-
-		sendFile(mimeResponse, fileName, is, 0, contentType);
-	}
-
+	/**
+	 * @deprecated
+	 */
 	public static void sendFile(
 			MimeResponse mimeResponse, String fileName, InputStream is,
 			int contentLength, String contentType)
 		throws IOException {
 
-		setHeaders(mimeResponse, fileName, contentType);
+		sendFile(null, mimeResponse, fileName, is, contentLength, contentType);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void sendFile(
+			MimeResponse mimeResponse, String fileName, InputStream is,
+			String contentType)
+		throws IOException {
+
+		sendFile(null, mimeResponse, fileName, is, contentType);
+	}
+
+	public static void sendFile(
+			PortletRequest portletRequest, MimeResponse mimeResponse,
+			String fileName, byte[] bytes)
+		throws IOException {
+
+		sendFile(portletRequest, mimeResponse, fileName, bytes, null);
+	}
+
+	public static void sendFile(
+			PortletRequest portletRequest, MimeResponse mimeResponse,
+			String fileName, byte[] bytes, String contentType)
+		throws IOException {
+
+		setHeaders(portletRequest, mimeResponse, fileName, contentType);
+
+		write(mimeResponse, bytes);
+	}
+
+	public static void sendFile(
+			PortletRequest portletRequest, MimeResponse mimeResponse,
+			String fileName, InputStream is)
+		throws IOException {
+
+		sendFile(portletRequest, mimeResponse, fileName, is, null);
+	}
+
+	public static void sendFile(
+			PortletRequest portletRequest, MimeResponse mimeResponse,
+			String fileName, InputStream is, int contentLength,
+			String contentType)
+		throws IOException {
+
+		setHeaders(portletRequest, mimeResponse, fileName, contentType);
 
 		write(mimeResponse, is, contentLength);
 	}
 
-	public static void write(MimeResponse mimeResponse, String s)
+	public static void sendFile(
+			PortletRequest portletRequest, MimeResponse mimeResponse,
+			String fileName, InputStream is, String contentType)
 		throws IOException {
 
-		write(mimeResponse, s.getBytes(StringPool.UTF8));
+		sendFile(portletRequest, mimeResponse, fileName, is, 0, contentType);
 	}
 
 	public static void write(MimeResponse mimeResponse, byte[] bytes)
@@ -150,8 +205,15 @@ public class PortletResponseUtil {
 		StreamUtil.transfer(is, mimeResponse.getPortletOutputStream());
 	}
 
+	public static void write(MimeResponse mimeResponse, String s)
+		throws IOException {
+
+		write(mimeResponse, s.getBytes(StringPool.UTF8));
+	}
+
 	protected static void setHeaders(
-		MimeResponse mimeResponse, String fileName, String contentType) {
+		PortletRequest portletRequest, MimeResponse mimeResponse,
+		String fileName, String contentType) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Sending file of type " + contentType);
@@ -192,8 +254,17 @@ public class PortletResponseUtil {
 					String encodedFileName =
 						StringUtil.replace(codec.encode(fileName), "+", "%20");
 
-					contentDisposition =
-						"attachment; filename*=UTF-8''" + encodedFileName;
+					HttpServletRequest request =
+						PortalUtil.getHttpServletRequest(portletRequest);
+
+					if (BrowserSnifferUtil.isIe(request)) {
+						contentDisposition =
+							"attachment; filename=\"" + encodedFileName + "\"";
+					}
+					else {
+						contentDisposition =
+							"attachment; filename*=UTF-8''" + encodedFileName;
+					}
 				}
 			}
 			catch (Exception e) {

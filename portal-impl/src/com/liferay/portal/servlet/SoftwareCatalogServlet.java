@@ -81,7 +81,8 @@ public class SoftwareCatalogServlet extends HttpServlet {
 					maxNumOfVersions, repoSettings);
 
 			ServletResponseUtil.sendFile(
-				response, null, repositoryXML.getBytes(StringPool.UTF8),
+				request, response, null,
+				repositoryXML.getBytes(StringPool.UTF8),
 				ContentTypes.TEXT_XML_UTF8);
 		}
 		catch (NoSuchGroupException nsge) {

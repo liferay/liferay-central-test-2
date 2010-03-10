@@ -75,7 +75,6 @@ public class ExportEventsAction extends PortletAction {
 
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
-
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 

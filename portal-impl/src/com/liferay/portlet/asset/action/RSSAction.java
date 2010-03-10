@@ -52,7 +52,8 @@ public class RSSAction extends Action {
 
 		try {
 			ServletResponseUtil.sendFile(
-				response, null, getRSS(request), ContentTypes.TEXT_XML_UTF8);
+				request, response, null, getRSS(request),
+				ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}

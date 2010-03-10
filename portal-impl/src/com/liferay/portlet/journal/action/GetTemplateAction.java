@@ -96,7 +96,7 @@ public class GetTemplateAction extends Action {
 			}
 
 			ServletResponseUtil.sendFile(
-				response, fileName, bytes, contentType);
+				request, response, fileName, bytes, contentType);
 
 			return null;
 		}

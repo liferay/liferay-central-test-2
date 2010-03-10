@@ -54,7 +54,7 @@ public class GetStructureAction extends Action {
 			byte[] bytes = structure.getXsd().getBytes();
 
 			ServletResponseUtil.sendFile(
-				response, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
+				request, response, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}

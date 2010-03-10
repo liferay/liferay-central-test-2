@@ -60,7 +60,8 @@ public class RSSAction extends PortletAction {
 
 		try {
 			ServletResponseUtil.sendFile(
-				response, null, getRSS(request), ContentTypes.TEXT_XML_UTF8);
+				request, response, null, getRSS(request),
+				ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
@@ -83,7 +84,8 @@ public class RSSAction extends PortletAction {
 				actionResponse);
 
 			ServletResponseUtil.sendFile(
-				response, null, getRSS(request), ContentTypes.TEXT_XML_UTF8);
+				request, response, null, getRSS(request),
+				ContentTypes.TEXT_XML_UTF8);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
