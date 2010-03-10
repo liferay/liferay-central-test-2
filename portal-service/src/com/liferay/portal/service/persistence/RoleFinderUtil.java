@@ -33,11 +33,11 @@ public class RoleFinderUtil {
 	}
 
 	public static int countByC_N_D_T(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.Integer type,
+		java.lang.String description, java.lang.Integer[] types,
 		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .countByC_N_D_T(companyId, name, description, type, params);
+				   .countByC_N_D_T(companyId, name, description, types, params);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> findBySystem(
@@ -85,11 +85,12 @@ public class RoleFinderUtil {
 
 	public static java.util.List<com.liferay.portal.model.Role> findByC_N_D_T(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.lang.Integer type, java.util.LinkedHashMap<String, Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.lang.Integer[] types,
+		java.util.LinkedHashMap<String, Object> params, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findByC_N_D_T(companyId, name, description, type, params,
+				   .findByC_N_D_T(companyId, name, description, types, params,
 			start, end, obc);
 	}
 

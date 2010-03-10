@@ -57,13 +57,6 @@ public class RoleServiceUtil {
 		getService().deleteRole(roleId);
 	}
 
-	public static com.liferay.portal.model.Role getGroupRole(long companyId,
-		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupRole(companyId, groupId);
-	}
-
 	public static java.util.List<com.liferay.portal.model.Role> getGroupRoles(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {

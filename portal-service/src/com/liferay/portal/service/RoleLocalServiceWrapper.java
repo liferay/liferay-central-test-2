@@ -136,13 +136,6 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 		return _roleLocalService.getDefaultGroupRole(groupId);
 	}
 
-	public com.liferay.portal.model.Role getGroupRole(long companyId,
-		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _roleLocalService.getGroupRole(companyId, groupId);
-	}
-
 	public java.util.List<com.liferay.portal.model.Role> getGroupRoles(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -192,6 +185,12 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 	public int getSubtypeRolesCount(java.lang.String subtype)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _roleLocalService.getSubtypeRolesCount(subtype);
+	}
+
+	public com.liferay.portal.model.Role getTeamRole(long companyId, long teamId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _roleLocalService.getTeamRole(companyId, teamId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Role> getUserGroupGroupRoles(
@@ -251,34 +250,35 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.lang.Integer type, int start, int end,
+		java.lang.Integer[] types, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _roleLocalService.search(companyId, name, description, type,
+		return _roleLocalService.search(companyId, name, description, types,
 			start, end, obc);
 	}
 
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.lang.Integer type, java.util.LinkedHashMap<String, Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.lang.Integer[] types,
+		java.util.LinkedHashMap<String, Object> params, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _roleLocalService.search(companyId, name, description, type,
+		return _roleLocalService.search(companyId, name, description, types,
 			params, start, end, obc);
 	}
 
 	public int searchCount(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.Integer type)
+		java.lang.String description, java.lang.Integer[] types)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _roleLocalService.searchCount(companyId, name, description, type);
+		return _roleLocalService.searchCount(companyId, name, description, types);
 	}
 
 	public int searchCount(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.Integer type,
+		java.lang.String description, java.lang.Integer[] types,
 		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _roleLocalService.searchCount(companyId, name, description,
-			type, params);
+			types, params);
 	}
 
 	public void setUserRoles(long userId, long[] roleIds)

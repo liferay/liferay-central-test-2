@@ -56,13 +56,6 @@ public class RoleServiceWrapper implements RoleService {
 		_roleService.deleteRole(roleId);
 	}
 
-	public com.liferay.portal.model.Role getGroupRole(long companyId,
-		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _roleService.getGroupRole(companyId, groupId);
-	}
-
 	public java.util.List<com.liferay.portal.model.Role> getGroupRoles(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {

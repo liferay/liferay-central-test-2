@@ -186,6 +186,10 @@ public class TeamWrapper implements Team {
 		return _team.toXmlString();
 	}
 
+	public com.liferay.portal.model.Role getRole() {
+		return _team.getRole();
+	}
+
 	public Team getWrappedTeam() {
 		return _team;
 	}

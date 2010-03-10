@@ -282,7 +282,6 @@ Liferay.Service.registerClass(
 		addRole: true,
 		addUserRoles: true,
 		deleteRole: true,
-		getGroupRole: true,
 		getGroupRoles: true,
 		getRole: true,
 		getUserGroupGroupRoles: true,
