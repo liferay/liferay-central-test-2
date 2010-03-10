@@ -35,6 +35,10 @@ public class OrderFactoryUtil {
 	public static void addOrderByComparator(
 			DynamicQuery query, OrderByComparator obc) {
 
+		if (obc == null) {
+			return;
+		}
+		
 		String[] orderBys = obc.getOrderByFields();
 		boolean isAscending = obc.isAscending();
 		for (String orderBy : orderBys) {
