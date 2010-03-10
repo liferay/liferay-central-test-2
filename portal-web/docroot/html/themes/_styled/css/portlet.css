@@ -26,7 +26,7 @@ body.portlet {
 	vertical-align: middle;
 }
 
-.portlet-toolbar {
+.portlet-topper-toolbar {
 	margin: 0;
 	padding: 2px;
 	position: absolute;
@@ -35,7 +35,7 @@ body.portlet {
 	top: 3px;
 }
 
-.portlet-toolbar .nobr {
+.portlet-topper-toolbar .nobr {
 	display: block;
 	float: left;
 	padding: 1px;
