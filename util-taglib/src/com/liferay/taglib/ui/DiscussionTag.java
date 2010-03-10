@@ -102,10 +102,10 @@ public class DiscussionTag extends IncludeTag {
 		request.setAttribute("liferay-ui:discussion:formAction", _formAction);
 		request.setAttribute("liferay-ui:discussion:formName", _formName);
 		request.setAttribute(
-			"liferay-ui:discussion:permissionClassName", _permissionClassName);
+			"liferay-ui:discussion:permissionClassName", permissionClassName);
 		request.setAttribute(
 			"liferay-ui:discussion:permissionClassPK",
-			String.valueOf(_permissionClassPK));
+			String.valueOf(permissionClassPK));
 		request.setAttribute(
 			"liferay-ui:discussion:ratingsEnabled",
 			String.valueOf(_ratingsEnabled));
