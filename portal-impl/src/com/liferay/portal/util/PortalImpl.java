@@ -572,6 +572,12 @@ public class PortalImpl implements Portal {
 				if ((allowedDomains.length > 0) &&
 					!ArrayUtil.contains(allowedDomains, domain)) {
 
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Redirect URL " + url + " is not in the " +
+								"redirect.url.domains.allowed list.");
+					}
+
 					url = null;
 				}
 			}
@@ -589,12 +595,23 @@ public class PortalImpl implements Portal {
 					if (!serverIp.equals(inetAddress.getHostAddress()) ||
 						!ArrayUtil.contains(allowedIps, "SERVER_IP")) {
 
+						if (_log.isDebugEnabled()) {
+							_log.debug(
+								"Redirect URL " + url + " is not in the " +
+									"redirect.url.ips.allowed list.");
+						}
+
 						url = null;
 					}
 				}
 			}
 		}
 		catch (UnknownHostException uhe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Redirect URL " + url + " IP address could not be found.");
+			}
+
 			url = null;
 		}
 
