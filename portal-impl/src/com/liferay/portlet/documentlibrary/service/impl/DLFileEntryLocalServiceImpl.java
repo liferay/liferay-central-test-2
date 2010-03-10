@@ -441,6 +441,20 @@ public class DLFileEntryLocalServiceImpl
 
 			dlFileVersionPersistence.removeByG_F_N_V(
 				groupId, folderId, name, version);
+
+			if (version.equals(fileEntry.getVersion())) {
+				try {
+					DLFileVersion fileVersion =
+						dlFileVersionLocalService.getLatestFileVersion(
+							groupId, folderId, name);
+
+					fileEntry.setVersion(fileVersion.getVersion());
+
+					dlFileEntryPersistence.update(fileEntry, false);
+				}
+				catch (Exception e) {
+				}
+			}
 		}
 		else {
 			deleteFileEntry(fileEntry);
