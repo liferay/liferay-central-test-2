@@ -268,7 +268,7 @@ public class ServiceComponentLocalServiceImpl
 	}
 
 	protected void clearCacheRegistry(ServletContext servletContext)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		InputStream is = servletContext.getResourceAsStream(
 			"/WEB-INF/classes/META-INF/portlet-hbm.xml");
