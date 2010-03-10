@@ -343,23 +343,6 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		return fullQuery;
 	}
 
-	protected PermissionCheckerBag getUserBag(long userId) throws Exception {
-		User user = UserLocalServiceUtil.getUser(userId);
-
-		PermissionChecker permissionChecker =
-			PermissionCheckerFactoryUtil.create(user, true);
-
-		if (permissionChecker instanceof AdvancedPermissionChecker) {
-			AdvancedPermissionChecker advancedPermissionChecker =
-				(AdvancedPermissionChecker)permissionChecker;
-
-			return advancedPermissionChecker.getUserBag(userId, 0);
-		}
-		else {
-			return null;
-		}
-	}
-
 	protected Query doGetPermissionQuery_6(
 			long companyId, long groupId, long userId, String className,
 			Query query)
@@ -466,6 +449,23 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		if (indexer != null) {
 			indexer.reindex(resourceName, GetterUtil.getLong(resourceClassPK));
+		}
+	}
+
+	protected PermissionCheckerBag getUserBag(long userId) throws Exception {
+		User user = UserLocalServiceUtil.getUser(userId);
+
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user, true);
+
+		if (permissionChecker instanceof AdvancedPermissionChecker) {
+			AdvancedPermissionChecker advancedPermissionChecker =
+				(AdvancedPermissionChecker)permissionChecker;
+
+			return advancedPermissionChecker.getUserBag(userId, 0);
+		}
+		else {
+			return null;
 		}
 	}
 
