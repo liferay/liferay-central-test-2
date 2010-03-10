@@ -407,7 +407,7 @@ public class RoleFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(userId);
-			setGroupIds(qPos, groupIds);
+			qPos.add(groupIds);
 
 			return q.list();
 		}
@@ -556,12 +556,6 @@ public class RoleFinderImpl
 		}
 
 		return sb.toString();
-	}
-
-	protected void setGroupIds(QueryPos qPos, long[] groupIds) {
-		for (int i = 0; i < groupIds.length; i++) {
-			qPos.add(groupIds[i]);
-		}
 	}
 
 	protected String getJoin(LinkedHashMap<String, Object> params) {
