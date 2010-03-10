@@ -48,7 +48,7 @@ import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.util.UniqueList;
 
-import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -732,23 +732,12 @@ public class ResourceActionsUtil {
 			String servletContextName, ClassLoader classLoader, String source)
 		throws Exception {
 
-		String xml = null;
+		InputStream is = classLoader.getResourceAsStream(source);
 
-		try {
-			xml = StringUtil.read(classLoader, source);
-		}
-		catch (IOException ioe) {
+		if (is == null) {
 			if (_log.isWarnEnabled() && !source.endsWith("-ext.xml")) {
 				_log.warn("Cannot load " + source);
 			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Error reading " + source, e);
-			}
-		}
-
-		if (xml == null) {
 			return;
 		}
 
@@ -756,7 +745,7 @@ public class ResourceActionsUtil {
 			_log.debug("Loading " + source);
 		}
 
-		Document doc = SAXReaderUtil.read(xml);
+		Document doc = SAXReaderUtil.read(is);
 
 		Element root = doc.getRootElement();
 

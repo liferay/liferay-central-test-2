@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
@@ -35,7 +34,8 @@ import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
-import com.liferay.util.xml.XMLFormatter;
+
+import java.io.InputStream;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -110,20 +110,19 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 			WebDAVProps webDavProps = getStoredProperties(webDavRequest);
 
-			String xml = new String(
-				FileUtil.getBytes(request.getInputStream()));
+			InputStream is = request.getInputStream();
 
-			if (Validator.isNull(xml)) {
+			if (is == null) {
 				return newProps;
 			}
+
+			Document doc = SAXReaderUtil.read(is);
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"Request XML: \n" +
-						XMLFormatter.toString(xml, StringPool.FOUR_SPACES));
+						doc.formattedString(StringPool.FOUR_SPACES));
 			}
-
-			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 

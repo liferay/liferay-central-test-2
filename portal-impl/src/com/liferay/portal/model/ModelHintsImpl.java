@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.xml.SAXReader;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import java.io.InputStream;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -127,26 +129,22 @@ public class ModelHintsImpl implements ModelHints {
 	}
 
 	public void read(ClassLoader classLoader, String source) throws Exception {
-		String xml = null;
 
-		try {
-			xml = StringUtil.read(classLoader, source);
-		}
-		catch (Exception e) {
+		InputStream is = classLoader.getResourceAsStream(source);
+
+		if (is == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("Cannot load " + source);
 			}
-		}
-
-		if (xml == null) {
 			return;
 		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Loading " + source);
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Loading " + source);
+			}
 		}
 
-		Document doc = _saxReader.read(xml);
+		Document doc = _saxReader.read(is);
 
 		Element root = doc.getRootElement();
 

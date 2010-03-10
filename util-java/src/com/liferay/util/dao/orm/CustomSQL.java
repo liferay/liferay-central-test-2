@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -426,16 +427,9 @@ public class CustomSQL {
 	protected void read(ClassLoader classLoader, String source)
 		throws Exception {
 
-		String xml = null;
+		InputStream is = classLoader.getResourceAsStream(source);
 
-		try {
-			xml = StringUtil.read(classLoader, source);
-		}
-		catch (Exception e) {
-			_log.warn("Cannot load " + source);
-		}
-
-		if (xml == null) {
+		if (is == null) {
 			return;
 		}
 
@@ -443,7 +437,7 @@ public class CustomSQL {
 			_log.debug("Loading " + source);
 		}
 
-		Document doc = SAXReaderUtil.read(new UnsyncStringReader(xml));
+		Document doc = SAXReaderUtil.read(is);
 
 		Element root = doc.getRootElement();
 

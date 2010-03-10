@@ -42,6 +42,7 @@ import com.liferay.portal.tools.servicebuilder.Entity;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.lang.reflect.Field;
 
@@ -269,15 +270,14 @@ public class ServiceComponentLocalServiceImpl
 	protected void clearCacheRegistry(ServletContext servletContext)
 		throws DocumentException, IOException {
 
-		String xml = HttpUtil.URLtoString(
-			servletContext.getResource(
-				"/WEB-INF/classes/META-INF/portlet-hbm.xml"));
+		InputStream is = servletContext.getResourceAsStream(
+			"/WEB-INF/classes/META-INF/portlet-hbm.xml");
 
-		if (xml == null) {
+		if (is == null) {
 			return;
 		}
 
-		Document doc = SAXReaderUtil.read(xml);
+		Document doc = SAXReaderUtil.read(is);
 
 		Element root = doc.getRootElement();
 

@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
@@ -124,9 +123,8 @@ public class JCRFactoryImpl implements JCRFactory {
 						"repository.xml";
 			}
 
-			String content = StringUtil.read(classLoader, repositoryXmlPath);
-
-			FileUtil.write(tempFile, content);
+			FileUtil.write(
+				tempFile, classLoader.getResourceAsStream(repositoryXmlPath));
 
 			FileUtil.copyFile(
 				tempFile, new File(JCRFactoryImpl.CONFIG_FILE_PATH));
