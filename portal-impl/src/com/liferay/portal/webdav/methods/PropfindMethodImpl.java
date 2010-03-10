@@ -16,7 +16,6 @@ package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
@@ -28,7 +27,8 @@ import com.liferay.portal.webdav.InvalidRequestException;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVUtil;
-import com.liferay.util.xml.XMLFormatter;
+
+import java.io.InputStream;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -67,10 +67,9 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 			HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
-			String xml = new String(
-				FileUtil.getBytes(request.getInputStream()));
+			InputStream is = request.getInputStream();
 
-			if (Validator.isNull(xml)) {
+			if (is == null) {
 
 				// Windows XP does not generate an xml request so the PROPFIND
 				// must be generated manually. See LEP-4920.
@@ -78,13 +77,13 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 				return generateProps(props);
 			}
 
+			Document doc = SAXReaderUtil.read(is);
+
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Request XML: \n" +
-						XMLFormatter.toString(xml, StringPool.FOUR_SPACES));
+						doc.formattedString(StringPool.FOUR_SPACES));
 			}
-
-			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 
