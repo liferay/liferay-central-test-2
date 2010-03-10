@@ -1,25 +1,26 @@
-<div id="navigation" class="sort-pages modify-pages">
+<nav class="sort-pages modify-pages" id="navigation">
+	<h1>
+		<span>#language("navigation")</span>
+	</h1>
 	<ul>
 		<#list nav_items as nav_item>
 			<#if nav_item.isSelected()>
-				<#assign nav_item_class = "selected" />
+				<li class="selected">
 			<#else>
-				<#assign nav_item_class = "" />
+				<li>
 			</#if>
 
-			<li class="${nav_item_class}">
 				<a href="${nav_item.getURL()}" ${nav_item.getTarget()}><span>${nav_item.getName()}</span></a>
 
 				<#if nav_item.hasChildren()>
 					<ul class="child-menu">
 						<#list nav_item.getChildren() as nav_child>
 							<#if nav_child.isSelected()>
-								<#assign nav_child_class = "selected" />
+								<li class="selected">
 							<#else>
-								<#assign nav_child_class = "" />
+								<li>
 							</#if>
 
-							<li class="${nav_child_class}">
 								<a href="${nav_child.getURL()}" ${nav_child.getTarget()}>${nav_child.getName()}</a>
 							</li>
 						</#list>
@@ -28,8 +29,4 @@
 			</li>
 		</#list>
 	</ul>
-</div>
-
-<div class="site-breadcrumbs">
-	<@liferay.breadcrumbs/>
-</div>
+</nav>

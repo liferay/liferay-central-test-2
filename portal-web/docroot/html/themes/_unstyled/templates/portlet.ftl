@@ -5,13 +5,13 @@
 <#assign portlet_content = portlet_display.getContent()/>
 <#assign portlet_back_url = htmlUtil.escape(portlet_display.getURLBack())/>
 
-<div class="portlet" id="portlet-wrapper-${portlet_id}">
-	<div class="portlet-topper">
-		<span class="portlet-title">
+<section class="portlet" id="portlet_${portlet_id}">
+	<header class="portlet-topper">
+		<h1 class="portlet-title">
 			${theme.iconPortlet()} <span class="portlet-title-text">${portlet_title}</span>
-		</span>
+		</h1>
 
-		<div class="portlet-icons" id="portlet-small-icon-bar_${portlet_id}">
+		<menu class="portlet-topper-toolbar" id="portlet-topper-toolbar_${portlet_id}" type="toolbar">
 			<#if portlet_display.isShowBackIcon()>
 				<a href="${portlet_back_url}" class="portlet-icon-back"><@liferay.language key="return-to-full-page" /></a>
 			<#else>
@@ -20,10 +20,10 @@
 				${theme.iconMaximize()}
 				${theme.iconClose()}
 			</#if>
-		</div>
-	</div>
+		</menu>
+	</header>
 
 	<div class="portlet-content">
 		${portlet_content}
 	</div>
-</div>
+</section>

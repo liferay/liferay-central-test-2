@@ -12,26 +12,32 @@
 
 <body class="${css_class}">
 
-<a class="aui-helper-hidden-accessible" href="#mainContent"><@liferay.language key="go-to-content" /></a>
-
 <#if is_signed_in>
 	<@liferay.dockbar/>
 </#if>
 
 <div id="wrapper">
-	<div id="banner">
-		<h1 class="logo">
-			<span class="text">${the_title} - ${company_name}</span>
+	<a href="#main-content" id="skip-to-content"><@liferay.language key="go-to-content" /></a>
+	<header id="banner" role="banner">
+		<hgroup id="heading">
+			<h1 class="company-title">
+				<a class="logo" href="${company_url}" title="<@liferay.language key="go-to" /> ${company_name}">
+					<span>${company_name}</span>
+				</a>
+			</h1>
 
-			<span class="current-community">
-				${community_name}
-			</span>
+			<h2 class="community-title">
+				<a href="${community_default_url}" title="<@liferay.language key="go-to" /> ${community_name}">
+					<span>${community_name}</span>
+				</a>
+			</h2>
 
-			<a class="png" href="${company_url}"><@liferay.language key="go-to-homepage"</a>
-		</h1>
-
+			<h3 class="page-title">
+				<span>${the_title}</span>
+			</h3>
+		</hgroup>
 		<#if !is_signed_in>
-			<a class="sign-in" href="${sign_in_url}" id="liferaySignInLink">${sign_in_text}</a>
+			<a href="${sign_in_url}" id="sign-in">${sign_in_text}</a>
 		</#if>
 
 		<#if update_available_url??>
@@ -39,27 +45,37 @@
 				<a class="update-available" href="${update_available_url}"><@liferay.language key="updates-are-available-for-liferay" /></a>
 			</div>
 		</#if>
+
+		<#if $has_navigation>
+			<#include "$full_templates_path/navigation.vm" />
+		</#if>
+	</header>
+
+	<div id="content">
+		<nav class="site-breadcrumbs" id="breadcrumbs">
+			<h1>
+				<span><@liferay.language key="breadcrumbs" /></span>
+			</h1>
+
+			<@liferay.breadcrumbs/>
+		</nav>
+
+		<#if selectable>
+			${theme.include(content_include)}
+		<#else>
+			${portletDisplay.recycle()}
+
+			${portletDisplay.setTitle(the_title)}
+
+			${theme.wrapPortlet("portlet.ftl", content_include)}
+		</#if>
 	</div>
 
-	<#if has_navigation>
-		<#include "${full_templates_path}/navigation.ftl" />
-	</#if>
-
-	<#if selectable>
-		${theme.include(content_include)}
-	<#else>
-		${portletDisplay.recycle()}
-
-		${portletDisplay.setTitle(the_title)}
-
-		${theme.wrapPortlet("portlet.ftl", content_include)}
-	</#if>
-
-	<div id="footer">
-		<div class="powered-by">
-			Powered by <a href="http://www.liferay.com">Liferay</a>
-		</div>
-	</div>
+	<footer id="footer" role="contentinfo">
+		<p class="powered-by">
+			<@liferay.language key="powered-by" /> <a href="http://www.liferay.com" rel="external">Liferay</a>
+		</p>
+	</footer>
 </div>
 
 </body>
