@@ -43,6 +43,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
@@ -452,7 +453,7 @@ public class DLFileEntryLocalServiceImpl
 
 					dlFileEntryPersistence.update(fileEntry, false);
 				}
-				catch (Exception e) {
+				catch (NoSuchFileVersionException nsfve) {
 				}
 			}
 		}
