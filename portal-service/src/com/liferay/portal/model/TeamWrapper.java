@@ -186,7 +186,9 @@ public class TeamWrapper implements Team {
 		return _team.toXmlString();
 	}
 
-	public com.liferay.portal.model.Role getRole() {
+	public com.liferay.portal.model.Role getRole()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _team.getRole();
 	}
 

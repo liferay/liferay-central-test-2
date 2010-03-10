@@ -187,11 +187,15 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 		return _layoutPrototype.toXmlString();
 	}
 
-	public com.liferay.portal.model.Group getGroup() {
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutPrototype.getGroup();
 	}
 
-	public com.liferay.portal.model.Layout getLayout() {
+	public com.liferay.portal.model.Layout getLayout()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutPrototype.getLayout();
 	}
 

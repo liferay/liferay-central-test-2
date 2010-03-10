@@ -184,7 +184,8 @@ public interface LayoutLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getDefaultPlid(long groupId, boolean privateLayout,
 		java.lang.String portletId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout getDLFolderLayout(long dlFolderId)

@@ -799,7 +799,7 @@ public class JournalArticleLocalServiceImpl
 	public String getArticleContent(
 			JournalArticle article, String templateId, String viewMode,
 			String languageId, ThemeDisplay themeDisplay)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		JournalArticleDisplay articleDisplay = getArticleDisplay(
 			article, templateId, viewMode, languageId, 1, null, themeDisplay);
@@ -863,7 +863,7 @@ public class JournalArticleLocalServiceImpl
 			JournalArticle article, String templateId, String viewMode,
 			String languageId, int page, String xmlRequest,
 			ThemeDisplay themeDisplay)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		String content = null;
 

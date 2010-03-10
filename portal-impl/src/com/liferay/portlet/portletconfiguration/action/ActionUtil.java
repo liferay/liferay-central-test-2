@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -51,7 +50,7 @@ public class ActionUtil {
 
 	public static void getLayoutPublicRenderParameters(
 			RenderRequest renderRequest)
-		throws SystemException {
+		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);

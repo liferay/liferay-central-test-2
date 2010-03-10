@@ -14,8 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.ListTypeServiceUtil;
@@ -30,21 +30,8 @@ public class PhoneImpl extends PhoneModelImpl implements Phone {
 	public PhoneImpl() {
 	}
 
-	public ListType getType() {
-		ListType type = null;
-
-		try {
-			type = ListTypeServiceUtil.getListType(getTypeId());
-		}
-		catch (Exception e) {
-			type = new ListTypeImpl();
-
-			_log.error(e);
-		}
-
-		return type;
+	public ListType getType() throws PortalException, SystemException {
+		return ListTypeServiceUtil.getListType(getTypeId());
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(PhoneImpl.class);
 
 }

@@ -862,7 +862,8 @@ public class EnterpriseAdminUtil {
 	}
 
 	public static boolean hasUpdateEmailAddress(
-		PermissionChecker permissionChecker, User user) {
+			PermissionChecker permissionChecker, User user)
+		throws PortalException, SystemException {
 
 		String[] fieldEditiableUserEmailAddress =
 			PropsValues.
@@ -893,7 +894,8 @@ public class EnterpriseAdminUtil {
 	}
 
 	public static boolean hasUpdateScreenName(
-		PermissionChecker permissionChecker, User user) {
+			PermissionChecker permissionChecker, User user)
+		throws PortalException, SystemException {
 
 		String[] fieldEditiableUserScreenName =
 			PropsValues.

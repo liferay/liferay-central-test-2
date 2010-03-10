@@ -648,7 +648,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
-	public List<Group> getUserGroupsGroups(List<UserGroup> userGroups) {
+	public List<Group> getUserGroupsGroups(List<UserGroup> userGroups)
+		throws PortalException, SystemException {
+
 		List<Group> userGroupGroups = new ArrayList<Group>();
 
 		for (int i = 0; i < userGroups.size(); i++) {

@@ -339,7 +339,8 @@ public class PortalUtil {
 	}
 
 	public static String getGoogleGadgetURL(
-		Portlet portlet, ThemeDisplay themeDisplay) {
+			Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		return getPortal().getGoogleGadgetURL(portlet, themeDisplay);
 	}
@@ -413,25 +414,29 @@ public class PortalUtil {
 	}
 
 	public static String getLayoutFriendlyURL(
-		Layout layout, ThemeDisplay themeDisplay) {
+			Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		return getPortal().getLayoutFriendlyURL(layout, themeDisplay);
 	}
 
 	public static String getLayoutFriendlyURL(
-		Layout layout, ThemeDisplay themeDisplay, Locale locale) {
+			Layout layout, ThemeDisplay themeDisplay, Locale locale)
+		throws PortalException, SystemException {
 
 		return getPortal().getLayoutFriendlyURL(layout, themeDisplay, locale);
 	}
 
 	public static String getLayoutFullURL(
-		Layout layout, ThemeDisplay themeDisplay) {
+			Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		return getPortal().getLayoutFullURL(layout, themeDisplay);
 	}
 
 	public static String getLayoutFullURL(
-		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser) {
+			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
+		throws PortalException, SystemException {
 
 		return getPortal().getLayoutFullURL(layout, themeDisplay, doAsUser);
 	}
@@ -442,7 +447,9 @@ public class PortalUtil {
 		return getPortal().getLayoutFullURL(groupId, portletId);
 	}
 
-	public static String getLayoutFullURL(ThemeDisplay themeDisplay) {
+	public static String getLayoutFullURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		return getPortal().getLayoutFullURL(themeDisplay);
 	}
 
@@ -458,18 +465,22 @@ public class PortalUtil {
 	}
 
 	public static String getLayoutURL(
-		Layout layout, ThemeDisplay themeDisplay) {
+			Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		return getPortal().getLayoutURL(layout, themeDisplay);
 	}
 
 	public static String getLayoutURL(
-		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser) {
+			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
+		throws PortalException, SystemException {
 
 		return getPortal().getLayoutURL(layout, themeDisplay, doAsUser);
 	}
 
-	public static String getLayoutURL(ThemeDisplay themeDisplay) {
+	public static String getLayoutURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		return getPortal().getLayoutURL(themeDisplay);
 	}
 
@@ -513,7 +524,8 @@ public class PortalUtil {
 	}
 
 	public static String getNetvibesURL(
-		Portlet portlet, ThemeDisplay themeDisplay) {
+			Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		return getPortal().getNetvibesURL(portlet, themeDisplay);
 	}
@@ -561,13 +573,16 @@ public class PortalUtil {
 	}
 
 	public static long getPlidFromPortletId(
-		long groupId, boolean privateLayout, String portletId) {
+			long groupId, boolean privateLayout, String portletId)
+		throws PortalException, SystemException {
 
 		return getPortal().getPlidFromPortletId(
 			groupId, privateLayout, portletId);
 	}
 
-	public static long getPlidFromPortletId(long groupId, String portletId) {
+	public static long getPlidFromPortletId(long groupId, String portletId)
+		throws PortalException, SystemException {
+
 		return getPortal().getPlidFromPortletId(groupId, portletId);
 	}
 
@@ -613,7 +628,9 @@ public class PortalUtil {
 		return getPortal().getPortalURL(serverName, serverPort, secure);
 	}
 
-	public static String getPortalURL(ThemeDisplay themeDisplay) {
+	public static String getPortalURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		return getPortal().getPortalURL(themeDisplay);
 	}
 
@@ -669,41 +686,6 @@ public class PortalUtil {
 
 		return getPortal().getPortletFriendlyURLMapper(
 			groupId, privateLayout, url, params);
-	}
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public static long getPortletGroupId(ActionRequest actionRequest) {
-		return getPortal().getPortletGroupId(actionRequest);
-	}
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public static long getPortletGroupId(HttpServletRequest request) {
-		return getPortal().getPortletGroupId(request);
-	}
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public static long getPortletGroupId(Layout layout) {
-		return getPortal().getPortletGroupId(layout);
-	}
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public static long getPortletGroupId(long plid) {
-		return getPortal().getPortletGroupId(plid);
-	}
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public static long getPortletGroupId(RenderRequest renderRequest) {
-		return getPortal().getPortletGroupId(renderRequest);
 	}
 
 	public static String getPortletId(HttpServletRequest request) {
@@ -764,12 +746,15 @@ public class PortalUtil {
 		return getPortal().getPreferencesValidator(portlet);
 	}
 
-	public static long getScopeGroupId(HttpServletRequest request) {
+	public static long getScopeGroupId(HttpServletRequest request)
+		throws PortalException, SystemException {
+
 		return getPortal().getScopeGroupId(request);
 	}
 
 	public static long getScopeGroupId(
-		HttpServletRequest request, String portletId) {
+			HttpServletRequest request, String portletId)
+		throws PortalException, SystemException {
 
 		return getPortal().getScopeGroupId(request, portletId);
 	}
@@ -786,7 +771,9 @@ public class PortalUtil {
 		return getPortal().getScopeGroupId(plid);
 	}
 
-	public static long getScopeGroupId(PortletRequest portletRequest) {
+	public static long getScopeGroupId(PortletRequest portletRequest)
+		throws PortalException, SystemException {
+
 		return getPortal().getScopeGroupId(portletRequest);
 	}
 
@@ -952,7 +939,8 @@ public class PortalUtil {
 	}
 
 	public static String getWidgetURL(
-		Portlet portlet, ThemeDisplay themeDisplay) {
+			Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		return getPortal().getWidgetURL(portlet, themeDisplay);
 	}

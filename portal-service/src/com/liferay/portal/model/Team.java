@@ -40,5 +40,7 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Team extends TeamModel {
-	public com.liferay.portal.model.Role getRole();
+	public com.liferay.portal.model.Role getRole()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

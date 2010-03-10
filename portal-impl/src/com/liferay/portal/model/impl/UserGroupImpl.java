@@ -14,8 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -31,41 +31,20 @@ public class UserGroupImpl extends UserGroupModelImpl implements UserGroup {
 	public UserGroupImpl() {
 	}
 
-	public Group getGroup() {
-		Group group = null;
-
-		try {
-			group = GroupLocalServiceUtil.getUserGroupGroup(
-				getCompanyId(), getUserGroupId());
-		}
-		catch (Exception e) {
-			group = new GroupImpl();
-
-			_log.error(e);
-		}
-
-		return group;
+	public Group getGroup() throws PortalException, SystemException {
+		return GroupLocalServiceUtil.getUserGroupGroup(
+			getCompanyId(), getUserGroupId());
 	}
 
-	public int getPrivateLayoutsPageCount() {
-		try {
-			Group group = getGroup();
+	public int getPrivateLayoutsPageCount()
+		throws PortalException, SystemException {
 
-			if (group == null) {
-				return 0;
-			}
-			else {
-				return group.getPrivateLayoutsPageCount();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
+		Group group = getGroup();
 
-		return 0;
+		return group.getPrivateLayoutsPageCount();
 	}
 
-	public boolean hasPrivateLayouts() {
+	public boolean hasPrivateLayouts() throws PortalException, SystemException {
 		if (getPrivateLayoutsPageCount() > 0) {
 			return true;
 		}
@@ -74,25 +53,15 @@ public class UserGroupImpl extends UserGroupModelImpl implements UserGroup {
 		}
 	}
 
-	public int getPublicLayoutsPageCount() {
-		try {
-			Group group = getGroup();
+	public int getPublicLayoutsPageCount()
+		throws PortalException, SystemException {
 
-			if (group == null) {
-				return 0;
-			}
-			else {
-				return group.getPublicLayoutsPageCount();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
+		Group group = getGroup();
 
-		return 0;
+		return group.getPublicLayoutsPageCount();
 	}
 
-	public boolean hasPublicLayouts() {
+	public boolean hasPublicLayouts() throws PortalException, SystemException {
 		if (getPublicLayoutsPageCount() > 0) {
 			return true;
 		}
@@ -100,7 +69,5 @@ public class UserGroupImpl extends UserGroupModelImpl implements UserGroup {
 			return false;
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UserGroupImpl.class);
 
 }

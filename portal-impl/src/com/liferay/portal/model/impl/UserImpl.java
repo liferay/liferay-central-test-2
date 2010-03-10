@@ -17,8 +17,6 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -54,7 +52,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.UniqueList;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -75,39 +72,19 @@ public class UserImpl extends UserModelImpl implements User {
 	public UserImpl() {
 	}
 
-	public Date getBirthday() {
+	public Date getBirthday() throws PortalException, SystemException {
 		return getContact().getBirthday();
 	}
 
-	public String getCompanyMx() {
-		String companyMx = null;
+	public String getCompanyMx() throws PortalException, SystemException {
+		Company company = CompanyLocalServiceUtil.getCompanyById(
+			getCompanyId());
 
-		try {
-			Company company = CompanyLocalServiceUtil.getCompanyById(
-				getCompanyId());
-
-			companyMx = company.getMx();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return companyMx;
+		return company.getMx();
 	}
 
-	public Contact getContact() {
-		Contact contact = null;
-
-		try {
-			contact = ContactLocalServiceUtil.getContact(getContactId());
-		}
-		catch (Exception e) {
-			contact = new ContactImpl();
-
-			_log.error(e, e);
-		}
-
-		return contact;
+	public Contact getContact() throws PortalException, SystemException {
+		return ContactLocalServiceUtil.getContact(getContactId());
 	}
 
 	public String getDisplayEmailAddress() {
@@ -123,40 +100,37 @@ public class UserImpl extends UserModelImpl implements User {
 		return emailAddress;
 	}
 
-	public String getDisplayURL(ThemeDisplay themeDisplay) {
+	public String getDisplayURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		return getDisplayURL(
 			themeDisplay.getPortalURL(), themeDisplay.getPathMain());
 
 	}
 
-	public String getDisplayURL(String portalURL, String mainPath) {
-		try {
-			Group group = getGroup();
+	public String getDisplayURL(String portalURL, String mainPath)
+		throws PortalException, SystemException {
 
-			if (group != null) {
-				int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
+		Group group = getGroup();
 
-				if (publicLayoutsPageCount > 0) {
-					StringBundler sb = new StringBundler(5);
+		int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
 
-					sb.append(portalURL);
-					sb.append(mainPath);
-					sb.append("/my_places/view?groupId=");
-					sb.append(group.getGroupId());
-					sb.append("&privateLayout=0");
+		if (publicLayoutsPageCount > 0) {
+			StringBundler sb = new StringBundler(5);
 
-					return sb.toString();
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
+			sb.append(portalURL);
+			sb.append(mainPath);
+			sb.append("/my_places/view?groupId=");
+			sb.append(group.getGroupId());
+			sb.append("&privateLayout=0");
+
+			return sb.toString();
 		}
 
 		return StringPool.BLANK;
 	}
 
-	public boolean getFemale() {
+	public boolean getFemale() throws PortalException, SystemException {
 		return !getMale();
 	}
 
@@ -165,20 +139,11 @@ public class UserImpl extends UserModelImpl implements User {
 			getFirstName(), getMiddleName(), getLastName());
 	}
 
-	public Group getGroup() {
-		Group group = null;
-
-		try {
-			group = GroupLocalServiceUtil.getUserGroup(
-				getCompanyId(), getUserId());
-		}
-		catch (Exception e) {
-		}
-
-		return group;
+	public Group getGroup() throws PortalException, SystemException {
+		return GroupLocalServiceUtil.getUserGroup(getCompanyId(), getUserId());
 	}
 
-	public long[] getGroupIds() {
+	public long[] getGroupIds() throws PortalException, SystemException {
 		List<Group> groups = getGroups();
 
 		long[] groupIds = new long[groups.size()];
@@ -192,17 +157,8 @@ public class UserImpl extends UserModelImpl implements User {
 		return groupIds;
 	}
 
-	public List<Group> getGroups() {
-		try {
-			return GroupLocalServiceUtil.getUserGroups(getUserId());
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to get groups for user " + getUserId());
-			}
-		}
-
-		return new ArrayList<Group>();
+	public List<Group> getGroups() throws PortalException, SystemException {
+		return GroupLocalServiceUtil.getUserGroups(getUserId());
 	}
 
 	public Locale getLocale() {
@@ -228,84 +184,78 @@ public class UserImpl extends UserModelImpl implements User {
 		return login;
 	}
 
-	public boolean getMale() {
+	public boolean getMale() throws PortalException, SystemException {
 		return getContact().getMale();
 	}
 
-	public List<Group> getMyPlaces() {
+	public List<Group> getMyPlaces() throws PortalException, SystemException {
 		return getMyPlaces(QueryUtil.ALL_POS);
 	}
 
-	public List<Group> getMyPlaces(int max) {
+	public List<Group> getMyPlaces(int max)
+		throws PortalException, SystemException {
+
 		List<Group> myPlaces = new UniqueList<Group>();
 
-		try {
-			if (isDefaultUser()) {
-				return myPlaces;
-			}
+		if (isDefaultUser()) {
+			return myPlaces;
+		}
 
-			int start = QueryUtil.ALL_POS;
-			int end = QueryUtil.ALL_POS;
+		int start = QueryUtil.ALL_POS;
+		int end = QueryUtil.ALL_POS;
 
-			if (max != QueryUtil.ALL_POS) {
-				start = 0;
-				end = max;
-			}
+		if (max != QueryUtil.ALL_POS) {
+			start = 0;
+			end = max;
+		}
 
-			LinkedHashMap<String, Object> groupParams =
-				new LinkedHashMap<String, Object>();
+		LinkedHashMap<String, Object> groupParams =
+			new LinkedHashMap<String, Object>();
 
-			groupParams.put("usersGroups", new Long(getUserId()));
-			//groupParams.put("pageCount", StringPool.BLANK);
+		groupParams.put("usersGroups", new Long(getUserId()));
+		//groupParams.put("pageCount", StringPool.BLANK);
 
-			myPlaces.addAll(
-				GroupLocalServiceUtil.search(
-					getCompanyId(), null, null, groupParams, start, end));
+		myPlaces.addAll(
+			GroupLocalServiceUtil.search(
+				getCompanyId(), null, null, groupParams, start, end));
 
-			LinkedHashMap<String, Object> organizationParams =
-				new LinkedHashMap<String, Object>();
+		LinkedHashMap<String, Object> organizationParams =
+			new LinkedHashMap<String, Object>();
 
-			organizationParams.put("usersOrgs", new Long(getUserId()));
+		organizationParams.put("usersOrgs", new Long(getUserId()));
 
-			List<Organization> userOrgs = OrganizationLocalServiceUtil.search(
-				getCompanyId(),
-				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null,	null,
-				null, null, organizationParams, start, end);
+		List<Organization> userOrgs = OrganizationLocalServiceUtil.search(
+			getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID,
+			null, null, null, null, organizationParams, start, end);
 
-			for (Organization organization : userOrgs) {
-				myPlaces.add(0, organization.getGroup());
+		for (Organization organization : userOrgs) {
+			myPlaces.add(0, organization.getGroup());
 
-				if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
-					for (Organization ancestorOrganization :
-							organization.getAncestors()) {
+			if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
+				for (Organization ancestorOrganization :
+						organization.getAncestors()) {
 
-						myPlaces.add(0, ancestorOrganization.getGroup());
-					}
+					myPlaces.add(0, ancestorOrganization.getGroup());
 				}
 			}
-
-			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
-				PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
-
-				Group userGroup = getGroup();
-
-				myPlaces.add(0, userGroup);
-			}
-
-			if ((max != QueryUtil.ALL_POS) && (myPlaces.size() > max)) {
-				myPlaces = ListUtil.subList(myPlaces, start, end);
-			}
 		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
+
+		if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
+			PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+
+			Group userGroup = getGroup();
+
+			myPlaces.add(0, userGroup);
+		}
+
+		if ((max != QueryUtil.ALL_POS) && (myPlaces.size() > max)) {
+			myPlaces = ListUtil.subList(myPlaces, start, end);
 		}
 
 		return myPlaces;
 	}
 
-	public long[] getOrganizationIds() {
+	public long[] getOrganizationIds() throws PortalException, SystemException {
 		List<Organization> organizations = getOrganizations();
 
 		long[] organizationIds = new long[organizations.size()];
@@ -319,19 +269,11 @@ public class UserImpl extends UserModelImpl implements User {
 		return organizationIds;
 	}
 
-	public List<Organization> getOrganizations() {
-		try {
-			return OrganizationLocalServiceUtil.getUserOrganizations(
-				getUserId());
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to get organizations for user " + getUserId());
-			}
-		}
+	public List<Organization> getOrganizations()
+		throws PortalException, SystemException {
 
-		return new ArrayList<Organization>();
+		return OrganizationLocalServiceUtil.getUserOrganizations(
+			getUserId());
 	}
 
 	public boolean getPasswordModified() {
@@ -341,51 +283,28 @@ public class UserImpl extends UserModelImpl implements User {
 	public PasswordPolicy getPasswordPolicy()
 		throws PortalException, SystemException {
 
-		PasswordPolicy passwordPolicy =
-			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(
-				getUserId());
-
-		return passwordPolicy;
+		return PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(
+			getUserId());
 	}
 
 	public String getPasswordUnencrypted() {
 		return _passwordUnencrypted;
 	}
 
-	public int getPrivateLayoutsPageCount() {
-		try {
-			Group group = getGroup();
+	public int getPrivateLayoutsPageCount()
+		throws PortalException, SystemException {
 
-			if (group == null) {
-				return 0;
-			}
-			else {
-				return group.getPrivateLayoutsPageCount();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		Group group = getGroup();
 
-		return 0;
+		return group.getPrivateLayoutsPageCount();
 	}
 
-	public int getPublicLayoutsPageCount() {
-		try {
-			Group group = getGroup();
+	public int getPublicLayoutsPageCount()
+		throws PortalException, SystemException {
 
-			if (group == null) {
-				return 0;
-			}
-			else {
-				return group.getPublicLayoutsPageCount();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		Group group = getGroup();
 
-		return 0;
+		return group.getPublicLayoutsPageCount();
 	}
 
 	public Set<String> getReminderQueryQuestions()
@@ -430,7 +349,7 @@ public class UserImpl extends UserModelImpl implements User {
 		return questions;
 	}
 
-	public long[] getRoleIds() {
+	public long[] getRoleIds() throws SystemException {
 		List<Role> roles = getRoles();
 
 		long[] roleIds = new long[roles.size()];
@@ -444,20 +363,11 @@ public class UserImpl extends UserModelImpl implements User {
 		return roleIds;
 	}
 
-	public List<Role> getRoles() {
-		try {
-			return RoleLocalServiceUtil.getUserRoles(getUserId());
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to get roles for user " + getUserId());
-			}
-		}
-
-		return new ArrayList<Role>();
+	public List<Role> getRoles() throws SystemException {
+		return RoleLocalServiceUtil.getUserRoles(getUserId());
 	}
 
-	public long[] getTeamIds() {
+	public long[] getTeamIds() throws SystemException {
 		List<Team> teams = getTeams();
 
 		long[] teamIds = new long[teams.size()];
@@ -471,20 +381,11 @@ public class UserImpl extends UserModelImpl implements User {
 		return teamIds;
 	}
 
-	public List<Team> getTeams() {
-		try {
-			return TeamLocalServiceUtil.getUserTeams(getUserId());
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to get teams for user " + getUserId());
-			}
-		}
-
-		return new ArrayList<Team>();
+	public List<Team> getTeams() throws SystemException {
+		return TeamLocalServiceUtil.getUserTeams(getUserId());
 	}
 
-	public long[] getUserGroupIds() {
+	public long[] getUserGroupIds() throws SystemException {
 		List<UserGroup> userGroups = getUserGroups();
 
 		long[] userGroupIds = new long[userGroups.size()];
@@ -498,87 +399,66 @@ public class UserImpl extends UserModelImpl implements User {
 		return userGroupIds;
 	}
 
-	public List<UserGroup> getUserGroups() {
-		try {
-			return UserGroupLocalServiceUtil.getUserUserGroups(getUserId());
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to get user groups for user " + getUserId());
-			}
-		}
-
-		return new ArrayList<UserGroup>();
+	public List<UserGroup> getUserGroups() throws SystemException {
+		return UserGroupLocalServiceUtil.getUserUserGroups(getUserId());
 	}
 
 	public TimeZone getTimeZone() {
 		return _timeZone;
 	}
 
-	public boolean hasCompanyMx() {
+	public boolean hasCompanyMx() throws PortalException, SystemException {
 		return hasCompanyMx(getEmailAddress());
 	}
 
-	public boolean hasCompanyMx(String emailAddress) {
+	public boolean hasCompanyMx(String emailAddress)
+		throws PortalException, SystemException {
+
 		if (Validator.isNull(emailAddress)) {
 			return false;
 		}
 
-		try {
-			Company company = CompanyLocalServiceUtil.getCompanyById(
-				getCompanyId());
+		Company company = CompanyLocalServiceUtil.getCompanyById(
+			getCompanyId());
 
-			return company.hasCompanyMx(emailAddress);
+		return company.hasCompanyMx(emailAddress);
+	}
+
+	public boolean hasMyPlaces() throws SystemException {
+		if (isDefaultUser()) {
+			return false;
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+
+		LinkedHashMap<String, Object> groupParams =
+			new LinkedHashMap<String, Object>();
+
+		groupParams.put("usersGroups", new Long(getUserId()));
+		//groupParams.put("pageCount", StringPool.BLANK);
+
+		int count = GroupLocalServiceUtil.searchCount(
+			getCompanyId(), null, null, groupParams);
+
+		if (count > 0) {
+			return true;
+		}
+
+		count = OrganizationLocalServiceUtil.getUserOrganizationsCount(
+			getUserId());
+
+		if (count > 0) {
+			return true;
+		}
+
+		if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
+			PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+
+			return true;
 		}
 
 		return false;
 	}
 
-	public boolean hasMyPlaces() {
-		try {
-			if (isDefaultUser()) {
-				return false;
-			}
-
-			LinkedHashMap<String, Object> groupParams =
-				new LinkedHashMap<String, Object>();
-
-			groupParams.put("usersGroups", new Long(getUserId()));
-			//groupParams.put("pageCount", StringPool.BLANK);
-
-			int count = GroupLocalServiceUtil.searchCount(
-				getCompanyId(), null, null, groupParams);
-
-			if (count > 0) {
-				return true;
-			}
-
-			count = OrganizationLocalServiceUtil.getUserOrganizationsCount(
-				getUserId());
-
-			if (count > 0) {
-				return true;
-			}
-
-			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
-				PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
-
-				return true;
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
-		}
-
-		return false;
-	}
-
-	public boolean hasOrganization() {
+	public boolean hasOrganization() throws PortalException, SystemException {
 		if (getOrganizations().size() > 0) {
 			return true;
 		}
@@ -587,7 +467,7 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 	}
 
-	public boolean hasPrivateLayouts() {
+	public boolean hasPrivateLayouts() throws PortalException, SystemException {
 		if (getPrivateLayoutsPageCount() > 0) {
 			return true;
 		}
@@ -596,7 +476,7 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 	}
 
-	public boolean hasPublicLayouts() {
+	public boolean hasPublicLayouts() throws PortalException, SystemException {
 		if (getPublicLayoutsPageCount() > 0) {
 			return true;
 		}
@@ -616,11 +496,11 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 	}
 
-	public boolean isFemale() {
+	public boolean isFemale() throws PortalException, SystemException {
 		return getFemale();
 	}
 
-	public boolean isMale() {
+	public boolean isMale() throws PortalException, SystemException {
 		return getMale();
 	}
 
@@ -651,8 +531,6 @@ public class UserImpl extends UserModelImpl implements User {
 
 		super.setTimeZoneId(timeZoneId);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UserImpl.class);
 
 	private Locale _locale;
 	private boolean _passwordModified;

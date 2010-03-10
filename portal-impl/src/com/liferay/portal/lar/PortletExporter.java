@@ -390,7 +390,7 @@ public class PortletExporter {
 	protected void exportInheritedPermissions(
 			LayoutCache layoutCache, long companyId, String resourceName,
 			String resourcePrimKey, Element parentEl, String entityName)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		Element entityPermissionsEl = SAXReaderUtil.createElement(
 			entityName + "-permissions");
@@ -427,7 +427,7 @@ public class PortletExporter {
 	protected void exportInheritedRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String entityName, Element parentEl)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		Element entityRolesEl = SAXReaderUtil.createElement(
 			entityName + "-roles");
@@ -799,7 +799,7 @@ public class PortletExporter {
 			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, String resourceName, String resourcePrimKey,
 			Element permissionsEl, boolean exportUserPermissions)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		exportGroupPermissions(
 			companyId, groupId, resourceName, resourcePrimKey, permissionsEl,
@@ -946,7 +946,7 @@ public class PortletExporter {
 	protected void exportPortletRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			String portletId, Element rolesEl)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		String resourceName = PortletConstants.getRootPortletId(
 			portletId);

@@ -14,6 +14,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
@@ -211,7 +213,9 @@ public class UserAttributes {
 		}*/
 	}
 
-	public String getValue(String name) {
+	public String getValue(String name)
+		throws PortalException, SystemException {
+
 		if (name == null) {
 			return null;
 		}

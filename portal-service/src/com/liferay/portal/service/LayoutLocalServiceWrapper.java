@@ -230,7 +230,8 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 
 	public long getDefaultPlid(long groupId, boolean privateLayout,
 		java.lang.String portletId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutLocalService.getDefaultPlid(groupId, privateLayout,
 			portletId);
 	}

@@ -301,7 +301,9 @@ public class LayoutWrapper implements Layout {
 		return _layout.toXmlString();
 	}
 
-	public com.liferay.portal.model.Group getGroup() {
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getGroup();
 	}
 
@@ -321,11 +323,15 @@ public class LayoutWrapper implements Layout {
 		return _layout.isPublicLayout();
 	}
 
-	public long getAncestorPlid() {
+	public long getAncestorPlid()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getAncestorPlid();
 	}
 
-	public long getAncestorLayoutId() {
+	public long getAncestorLayoutId()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getAncestorLayoutId();
 	}
 
@@ -438,7 +444,9 @@ public class LayoutWrapper implements Layout {
 		_layout.setTypeSettingsProperties(typeSettingsProperties);
 	}
 
-	public com.liferay.portal.model.LayoutSet getLayoutSet() {
+	public com.liferay.portal.model.LayoutSet getLayoutSet()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getLayoutSet();
 	}
 
@@ -447,12 +455,14 @@ public class LayoutWrapper implements Layout {
 	}
 
 	public com.liferay.portal.model.Theme getTheme()
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getTheme();
 	}
 
 	public com.liferay.portal.model.ColorScheme getColorScheme()
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getColorScheme();
 	}
 
@@ -461,34 +471,41 @@ public class LayoutWrapper implements Layout {
 	}
 
 	public com.liferay.portal.model.Theme getWapTheme()
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getWapTheme();
 	}
 
 	public com.liferay.portal.model.ColorScheme getWapColorScheme()
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getWapColorScheme();
 	}
 
-	public java.lang.String getCssText() {
+	public java.lang.String getCssText()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getCssText();
 	}
 
 	public java.lang.String getRegularURL(
 		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getRegularURL(request);
 	}
 
 	public java.lang.String getResetMaxStateURL(
 		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getResetMaxStateURL(request);
 	}
 
 	public java.lang.String getResetLayoutURL(
 		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getResetLayoutURL(request);
 	}
 
@@ -497,7 +514,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	public boolean isChildSelected(boolean selectable,
-		com.liferay.portal.model.Layout layout) {
+		com.liferay.portal.model.Layout layout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.isChildSelected(selectable, layout);
 	}
 

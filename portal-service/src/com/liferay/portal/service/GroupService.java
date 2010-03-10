@@ -97,7 +97,9 @@ public interface GroupService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
-		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Group> getUserOrganizationsGroups(

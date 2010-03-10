@@ -14,6 +14,8 @@
 
 package com.liferay.portal.theme;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -59,7 +61,9 @@ public class ThemeDisplay implements Serializable {
 		return _company;
 	}
 
-	public void setCompany(Company company) {
+	public void setCompany(Company company)
+		throws PortalException, SystemException {
+
 		_company = company;
 		_companyGroupId = company.getGroup().getGroupId();
 
@@ -130,7 +134,7 @@ public class ThemeDisplay implements Serializable {
 		_account = account;
 	}
 
-	public User getDefaultUser() {
+	public User getDefaultUser() throws PortalException, SystemException {
 		if (_defaultUser == null) {
 			_defaultUser = _company.getDefaultUser();
 		}
@@ -138,7 +142,7 @@ public class ThemeDisplay implements Serializable {
 		return _defaultUser;
 	}
 
-	public long getDefaultUserId() {
+	public long getDefaultUserId() throws PortalException, SystemException {
 		return getDefaultUser().getUserId();
 	}
 
@@ -146,7 +150,7 @@ public class ThemeDisplay implements Serializable {
 		return _user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(User user) throws PortalException, SystemException {
 		_user = user;
 
 		setContact(user.getContact());

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.List;
@@ -41,24 +42,30 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public void addModePrintPortletId(String portletId);
 
-	public String addPortletId(long userId, String portletId);
+	public String addPortletId(long userId, String portletId)
+		throws PortalException, SystemException;
 
 	public String addPortletId(
-		long userId, String portletId, boolean checkPermission);
+			long userId, String portletId, boolean checkPermission)
+		throws PortalException, SystemException;
 
 	public String addPortletId(
-		long userId, String portletId, String columnId, int columnPos);
+			long userId, String portletId, String columnId, int columnPos)
+		throws PortalException, SystemException;
 
 	public String addPortletId(
-		long userId, String portletId, String columnId, int columnPos,
-		boolean checkPermission);
+			long userId, String portletId, String columnId, int columnPos,
+			boolean checkPermission)
+		throws PortalException, SystemException;
 
 	public void addPortletIds(
-		long userId, String[] portletIds, boolean checkPermission);
+			long userId, String[] portletIds, boolean checkPermission)
+		throws PortalException, SystemException;
 
 	public void addPortletIds(
-		long userId, String[] portletIds, String columnId,
-		boolean checkPermission);
+			long userId, String[] portletIds, String columnId,
+			boolean checkPermission)
+		throws PortalException, SystemException;
 
 	public void addStateMaxPortletId(String portletId);
 
@@ -69,9 +76,11 @@ public interface LayoutTypePortlet extends LayoutType {
 			List<Portlet> endPortlets)
 		throws SystemException;
 
-	public List<Portlet> getAllPortlets() throws SystemException;
+	public List<Portlet> getAllPortlets()
+		throws PortalException, SystemException;
 
-	public List<Portlet> getAllPortlets(String columnId) throws SystemException;
+	public List<Portlet> getAllPortlets(String columnId)
+		throws PortalException, SystemException;
 
 	public LayoutTemplate getLayoutTemplate();
 
@@ -123,7 +132,8 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public boolean hasModeViewPortletId(String portletId);
 
-	public boolean hasPortletId(String portletId);
+	public boolean hasPortletId(String portletId)
+		throws PortalException, SystemException;
 
 	public boolean hasStateMax();
 
@@ -136,7 +146,8 @@ public interface LayoutTypePortlet extends LayoutType {
 	public boolean hasStateNormalPortletId(String portletId);
 
 	public void movePortletId(
-		long userId, String portletId, String columnId, int columnPos);
+			long userId, String portletId, String columnId, int columnPos)
+		throws PortalException, SystemException;
 
 	public void removeModeAboutPortletId(String portletId);
 

@@ -333,7 +333,8 @@ public class VelocityVariables {
 	}
 
 	public static void insertVariables(
-		VelocityContext velocityContext, HttpServletRequest request) {
+			VelocityContext velocityContext, HttpServletRequest request)
+		throws Exception {
 
 		// Request
 

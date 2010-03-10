@@ -40,29 +40,47 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface User extends UserModel {
-	public java.util.Date getBirthday();
+	public java.util.Date getBirthday()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.lang.String getCompanyMx();
+	public java.lang.String getCompanyMx()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Contact getContact();
+	public com.liferay.portal.model.Contact getContact()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getDisplayEmailAddress();
 
 	public java.lang.String getDisplayURL(
-		com.liferay.portal.theme.ThemeDisplay themeDisplay);
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getDisplayURL(java.lang.String portalURL,
-		java.lang.String mainPath);
+		java.lang.String mainPath)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean getFemale();
+	public boolean getFemale()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getFullName();
 
-	public com.liferay.portal.model.Group getGroup();
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public long[] getGroupIds();
+	public long[] getGroupIds()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Group> getGroups();
+	public java.util.List<com.liferay.portal.model.Group> getGroups()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.Locale getLocale();
 
@@ -70,15 +88,25 @@ public interface User extends UserModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean getMale();
+	public boolean getMale()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Group> getMyPlaces();
+	public java.util.List<com.liferay.portal.model.Group> getMyPlaces()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Group> getMyPlaces(int max);
+	public java.util.List<com.liferay.portal.model.Group> getMyPlaces(int max)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public long[] getOrganizationIds();
+	public long[] getOrganizationIds()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Organization> getOrganizations();
+	public java.util.List<com.liferay.portal.model.Organization> getOrganizations()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean getPasswordModified();
 
@@ -88,45 +116,70 @@ public interface User extends UserModel {
 
 	public java.lang.String getPasswordUnencrypted();
 
-	public int getPrivateLayoutsPageCount();
+	public int getPrivateLayoutsPageCount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public int getPublicLayoutsPageCount();
+	public int getPublicLayoutsPageCount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.Set<String> getReminderQueryQuestions()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public long[] getRoleIds();
+	public long[] getRoleIds()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Role> getRoles();
+	public java.util.List<com.liferay.portal.model.Role> getRoles()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public long[] getTeamIds();
+	public long[] getTeamIds()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Team> getTeams();
+	public java.util.List<com.liferay.portal.model.Team> getTeams()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public long[] getUserGroupIds();
+	public long[] getUserGroupIds()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups();
+	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.TimeZone getTimeZone();
 
-	public boolean hasCompanyMx();
+	public boolean hasCompanyMx()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean hasCompanyMx(java.lang.String emailAddress);
+	public boolean hasCompanyMx(java.lang.String emailAddress)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean hasMyPlaces();
+	public boolean hasMyPlaces()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean hasOrganization();
+	public boolean hasOrganization()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean hasPrivateLayouts();
+	public boolean hasPrivateLayouts()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean hasPublicLayouts();
+	public boolean hasPublicLayouts()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean hasReminderQuery();
 
-	public boolean isFemale();
+	public boolean isFemale()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean isMale();
+	public boolean isMale()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isPasswordModified();
 

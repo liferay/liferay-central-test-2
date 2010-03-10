@@ -145,23 +145,33 @@ public class UserGroupWrapper implements UserGroup {
 		return _userGroup.toXmlString();
 	}
 
-	public com.liferay.portal.model.Group getGroup() {
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userGroup.getGroup();
 	}
 
-	public int getPrivateLayoutsPageCount() {
+	public int getPrivateLayoutsPageCount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userGroup.getPrivateLayoutsPageCount();
 	}
 
-	public boolean hasPrivateLayouts() {
+	public boolean hasPrivateLayouts()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userGroup.hasPrivateLayouts();
 	}
 
-	public int getPublicLayoutsPageCount() {
+	public int getPublicLayoutsPageCount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userGroup.getPublicLayoutsPageCount();
 	}
 
-	public boolean hasPublicLayouts() {
+	public boolean hasPublicLayouts()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _userGroup.hasPublicLayouts();
 	}
 

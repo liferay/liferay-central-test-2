@@ -14,8 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -30,20 +30,8 @@ public class TeamImpl extends TeamModelImpl implements Team {
 	public TeamImpl() {
 	}
 
-	public Role getRole() {
-		Role role = null;
-
-		try {
-			role = RoleLocalServiceUtil.getTeamRole(
-				getCompanyId(), getTeamId());
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return role;
+	public Role getRole() throws PortalException, SystemException {
+		return RoleLocalServiceUtil.getTeamRole(getCompanyId(), getTeamId());
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(TeamImpl.class);
 
 }

@@ -137,7 +137,7 @@ public class PortletLister {
 	private void _iteratePortlets(
 			PortletCategory portletCategory, Set<String> portletIds,
 			int parentNodeId, int depth)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		List<Portlet> portlets = new ArrayList<Portlet>();
 

@@ -134,19 +134,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public LayoutImpl() {
 	}
 
-	public Group getGroup() {
-		Group group = null;
-
-		try {
-			group = GroupLocalServiceUtil.getGroup(getGroupId());
-		}
-		catch (Exception e) {
-			group = new GroupImpl();
-
-			_log.error(e, e);
-		}
-
-		return group;
+	public Group getGroup() throws PortalException, SystemException {
+		return GroupLocalServiceUtil.getGroup(getGroupId());
 	}
 
 	public Group getScopeGroup() throws PortalException, SystemException {
@@ -177,53 +166,43 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return !isPrivateLayout();
 	}
 
-	public long getAncestorPlid() {
+	public long getAncestorPlid() throws PortalException, SystemException {
 		long plid = 0;
 
-		try {
-			Layout layout = this;
+		Layout layout = this;
 
-			while (true) {
-				if (!layout.isRootLayout()) {
-					layout = LayoutLocalServiceUtil.getLayout(
-						layout.getGroupId(), layout.isPrivateLayout(),
-						layout.getParentLayoutId());
-				}
-				else {
-					plid = layout.getPlid();
-
-					break;
-				}
+		while (true) {
+			if (!layout.isRootLayout()) {
+				layout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					layout.getParentLayoutId());
 			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
+			else {
+				plid = layout.getPlid();
+
+				break;
+			}
 		}
 
 		return plid;
 	}
 
-	public long getAncestorLayoutId() {
+	public long getAncestorLayoutId() throws PortalException, SystemException {
 		long layoutId = 0;
 
-		try {
-			Layout layout = this;
+		Layout layout = this;
 
-			while (true) {
-				if (!layout.isRootLayout()) {
-					layout = LayoutLocalServiceUtil.getLayout(
-						layout.getGroupId(), layout.isPrivateLayout(),
-						layout.getParentLayoutId());
-				}
-				else {
-					layoutId = layout.getLayoutId();
-
-					break;
-				}
+		while (true) {
+			if (!layout.isRootLayout()) {
+				layout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					layout.getParentLayoutId());
 			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
+			else {
+				layoutId = layout.getLayoutId();
+
+				break;
+			}
 		}
 
 		return layoutId;
@@ -473,20 +452,9 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
-	public LayoutSet getLayoutSet() {
-		LayoutSet layoutSet = null;
-
-		try {
-			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				getGroupId(), isPrivateLayout());
-		}
-		catch (Exception e) {
-			layoutSet = new LayoutSetImpl();
-
-			_log.error(e, e);
-		}
-
-		return layoutSet;
+	public LayoutSet getLayoutSet() throws PortalException, SystemException {
+		return LayoutSetLocalServiceUtil.getLayoutSet(
+			getGroupId(), isPrivateLayout());
 	}
 
 	public boolean isInheritLookAndFeel() {
@@ -500,7 +468,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public Theme getTheme() throws SystemException {
+	public Theme getTheme() throws PortalException, SystemException {
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getTheme();
 		}
@@ -510,7 +478,9 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public ColorScheme getColorScheme() throws SystemException {
+	public ColorScheme getColorScheme()
+		throws PortalException, SystemException {
+
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getColorScheme();
 		}
@@ -532,7 +502,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public Theme getWapTheme() throws SystemException {
+	public Theme getWapTheme() throws PortalException, SystemException {
 		if (isInheritWapLookAndFeel()) {
 			return getLayoutSet().getWapTheme();
 		}
@@ -542,7 +512,9 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public ColorScheme getWapColorScheme() throws SystemException {
+	public ColorScheme getWapColorScheme()
+		throws PortalException, SystemException {
+
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getWapColorScheme();
 		}
@@ -553,7 +525,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public String getCssText() {
+	public String getCssText() throws PortalException, SystemException {
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getCss();
 		}
@@ -563,19 +535,19 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public String getRegularURL(HttpServletRequest request)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _getURL(request, false, false);
 	}
 
 	public String getResetMaxStateURL(HttpServletRequest request)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _getURL(request, true, false);
 	}
 
 	public String getResetLayoutURL(HttpServletRequest request)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _getURL(request, true, true);
 	}
@@ -584,21 +556,18 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return PortalUtil.getLayoutTarget(this);
 	}
 
-	public boolean isChildSelected(boolean selectable, Layout layout) {
+	public boolean isChildSelected(boolean selectable, Layout layout)
+		throws PortalException, SystemException {
+
 		if (selectable) {
 			long plid = getPlid();
 
-			try {
-				List<Layout> ancestors = layout.getAncestors();
+			List<Layout> ancestors = layout.getAncestors();
 
-				for (Layout curLayout : ancestors) {
-					if (plid == curLayout.getPlid()) {
-						return true;
-					}
+			for (Layout curLayout : ancestors) {
+				if (plid == curLayout.getPlid()) {
+					return true;
 				}
-			}
-			catch (Exception e) {
-				_log.error(e, e);
 			}
 		}
 
@@ -659,7 +628,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	private String _getURL(
 			HttpServletRequest request, boolean resetMaxState,
 			boolean resetRenderParameters)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);

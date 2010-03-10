@@ -759,13 +759,15 @@ public class JournalUtil {
 	}
 
 	public static Map<String, String> getTokens(
-		long groupId, ThemeDisplay themeDisplay) {
+			long groupId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		return getTokens(groupId, themeDisplay, null);
 	}
 
 	public static Map<String, String> getTokens(
-		long groupId, ThemeDisplay themeDisplay, String xmlRequest) {
+			long groupId, ThemeDisplay themeDisplay, String xmlRequest)
+		throws PortalException, SystemException {
 
 		Map<String, String> tokens = new HashMap<String, String>();
 
@@ -1386,7 +1388,8 @@ public class JournalUtil {
 	}
 
 	private static void _populateTokens(
-		Map<String, String> tokens, long groupId, ThemeDisplay themeDisplay) {
+			Map<String, String> tokens, long groupId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		Layout layout = themeDisplay.getLayout();
 

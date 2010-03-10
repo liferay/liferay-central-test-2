@@ -218,7 +218,9 @@ public class PhoneWrapper implements Phone {
 		return _phone.toXmlString();
 	}
 
-	public com.liferay.portal.model.ListType getType() {
+	public com.liferay.portal.model.ListType getType()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _phone.getType();
 	}
 

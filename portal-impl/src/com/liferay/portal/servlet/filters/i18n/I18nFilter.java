@@ -62,7 +62,7 @@ public class I18nFilter extends BasePortalFilter {
 		_languageIds = Collections.unmodifiableSet(_languageIds);
 	}
 
-	protected String getRedirect(HttpServletRequest request) {
+	protected String getRedirect(HttpServletRequest request) throws Exception {
 		if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
 			return null;
 		}

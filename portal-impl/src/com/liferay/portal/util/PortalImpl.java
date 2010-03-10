@@ -1193,7 +1193,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getGoogleGadgetURL(
-		Portlet portlet, ThemeDisplay themeDisplay) {
+			Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		return _getServletURL(
 			portlet, PropsValues.GOOGLE_GADGET_SERVLET_MAPPING, themeDisplay);
@@ -1400,7 +1401,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getLayoutFriendlyURL(
-		Layout layout, ThemeDisplay themeDisplay) {
+			Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		if (!isLayoutFriendliable(layout)) {
 			return null;
@@ -1509,7 +1511,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getLayoutFriendlyURL(
-		Layout layout, ThemeDisplay themeDisplay, Locale locale) {
+			Layout layout, ThemeDisplay themeDisplay, Locale locale)
+		throws PortalException, SystemException {
 
 		String i18nLanguageId = themeDisplay.getI18nLanguageId();
 		String i18nPath = themeDisplay.getI18nPath();
@@ -1556,12 +1559,15 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public String getLayoutFullURL(Layout layout, ThemeDisplay themeDisplay) {
+	public String getLayoutFullURL(Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		return getLayoutFullURL(layout, themeDisplay, true);
 	}
 
 	public String getLayoutFullURL(
-		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser) {
+			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
+		throws PortalException, SystemException {
 
 		String layoutURL = getLayoutURL(layout, themeDisplay, doAsUser);
 		String portalURL = themeDisplay.getPortalURL();
@@ -1615,7 +1621,9 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
-	public String getLayoutFullURL(ThemeDisplay themeDisplay) {
+	public String getLayoutFullURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		return getLayoutFullURL(themeDisplay.getLayout(), themeDisplay);
 	}
 
@@ -1709,12 +1717,15 @@ public class PortalImpl implements Portal {
 		return target;
 	}
 
-	public String getLayoutURL(Layout layout, ThemeDisplay themeDisplay) {
+	public String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		return getLayoutURL(layout, themeDisplay, true);
 	}
 
 	public String getLayoutURL(
-		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser) {
+			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
+		throws PortalException, SystemException {
 
 		if (layout == null) {
 			return themeDisplay.getPathMain() + PATH_PORTAL_LAYOUT;
@@ -1763,7 +1774,9 @@ public class PortalImpl implements Portal {
 		return layoutURL;
 	}
 
-	public String getLayoutURL(ThemeDisplay themeDisplay) {
+	public String getLayoutURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		return getLayoutURL(themeDisplay.getLayout(), themeDisplay);
 	}
 
@@ -1791,7 +1804,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getNetvibesURL(
-		Portlet portlet, ThemeDisplay themeDisplay) {
+			Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		return _getServletURL(
 			portlet, PropsValues.NETVIBES_SERVLET_MAPPING, themeDisplay);
@@ -1921,7 +1935,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public long getPlidFromPortletId(
-		long groupId, boolean privateLayout, String portletId) {
+			long groupId, boolean privateLayout, String portletId)
+		throws PortalException, SystemException {
 
 		long plid = LayoutConstants.DEFAULT_PLID;
 
@@ -1976,7 +1991,9 @@ public class PortalImpl implements Portal {
 		return plid;
 	}
 
-	public long getPlidFromPortletId(long groupId, String portletId) {
+	public long getPlidFromPortletId(long groupId, String portletId)
+		throws PortalException, SystemException {
+
 		long plid = getPlidFromPortletId(groupId, false, portletId);
 
 		if (plid == LayoutConstants.DEFAULT_PLID) {
@@ -2085,7 +2102,9 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
-	public String getPortalURL(ThemeDisplay themeDisplay) {
+	public String getPortalURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		String serverName = themeDisplay.getServerName();
 
 		Layout layout = themeDisplay.getLayout();
@@ -2313,49 +2332,6 @@ public class PortalImpl implements Portal {
 		return new Object[] {layout, queryString};
 	}
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(ActionRequest actionRequest) {
-		return getScopeGroupId(actionRequest);
-	}
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(HttpServletRequest request) {
-		return getScopeGroupId(request);
-	}
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(Layout layout) {
-		return getScopeGroupId(layout);
-	}
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(long plid) {
-		Layout layout = null;
-
-		try {
-			layout = LayoutLocalServiceUtil.getLayout(plid);
-		}
-		catch (Exception e) {
-		}
-
-		return getPortletGroupId(layout);
-	}
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(RenderRequest renderRequest) {
-		return getScopeGroupId(renderRequest);
-	}
-
 	public String getPortletId(HttpServletRequest request) {
 		PortletConfigImpl portletConfigImpl =
 			(PortletConfigImpl)request.getAttribute(
@@ -2480,13 +2456,17 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public long getScopeGroupId(HttpServletRequest request) {
+	public long getScopeGroupId(HttpServletRequest request)
+		throws PortalException, SystemException {
+
 		String portletId = getPortletId(request);
 
 		return getScopeGroupId(request, portletId);
 	}
 
-	public long getScopeGroupId(HttpServletRequest request, String portletId) {
+	public long getScopeGroupId(HttpServletRequest request, String portletId)
+		throws PortalException, SystemException {
+
 		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
 		long scopeGroupId = 0;
@@ -2584,7 +2564,9 @@ public class PortalImpl implements Portal {
 		return getScopeGroupId(layout);
 	}
 
-	public long getScopeGroupId(PortletRequest portletRequest) {
+	public long getScopeGroupId(PortletRequest portletRequest)
+		throws PortalException, SystemException {
+
 		return getScopeGroupId(getHttpServletRequest(portletRequest));
 	}
 
@@ -3128,7 +3110,9 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay) {
+	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		return _getServletURL(
 			portlet, PropsValues.WIDGET_SERVLET_MAPPING, themeDisplay);
 	}
@@ -3876,7 +3860,8 @@ public class PortalImpl implements Portal {
 	}
 
 	private long _getPlidFromPortletId(
-		long groupId, boolean privateLayout, String portletId) {
+			long groupId, boolean privateLayout, String portletId)
+		throws PortalException, SystemException {
 
 		long scopeGroupId = groupId;
 
@@ -3895,26 +3880,19 @@ public class PortalImpl implements Portal {
 
 		long plid = LayoutConstants.DEFAULT_PLID;
 
-		try {
-			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-				groupId, privateLayout, LayoutConstants.TYPE_PORTLET);
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, LayoutConstants.TYPE_PORTLET);
 
-			for (Layout layout : layouts) {
-				LayoutTypePortlet layoutTypePortlet =
-					(LayoutTypePortlet)layout.getLayoutType();
+		for (Layout layout : layouts) {
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
 
-				if (layoutTypePortlet.hasPortletId(portletId)) {
-					if (getScopeGroupId(layout, portletId) == scopeGroupId) {
-						plid = layout.getPlid();
+			if (layoutTypePortlet.hasPortletId(portletId)) {
+				if (getScopeGroupId(layout, portletId) == scopeGroupId) {
+					plid = layout.getPlid();
 
-						break;
-					}
+					break;
 				}
-			}
-		}
-		catch (SystemException se) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(se.getMessage(), se);
 			}
 		}
 
@@ -3966,7 +3944,8 @@ public class PortalImpl implements Portal {
 	}
 
 	private String _getServletURL(
-		Portlet portlet, String servletPath, ThemeDisplay themeDisplay) {
+			Portlet portlet, String servletPath, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		String layoutURL = getLayoutURL(themeDisplay);
 

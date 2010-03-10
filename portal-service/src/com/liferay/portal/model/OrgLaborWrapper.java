@@ -241,7 +241,9 @@ public class OrgLaborWrapper implements OrgLabor {
 		return _orgLabor.toXmlString();
 	}
 
-	public com.liferay.portal.model.ListType getType() {
+	public com.liferay.portal.model.ListType getType()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _orgLabor.getType();
 	}
 

@@ -863,7 +863,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	}
 
 	protected void validateScreenName(User user, String screenName)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 

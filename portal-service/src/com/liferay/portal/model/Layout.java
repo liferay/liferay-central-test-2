@@ -40,7 +40,9 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Layout extends LayoutModel {
-	public com.liferay.portal.model.Group getGroup();
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Group getScopeGroup()
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -52,9 +54,13 @@ public interface Layout extends LayoutModel {
 
 	public boolean isPublicLayout();
 
-	public long getAncestorPlid();
+	public long getAncestorPlid()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public long getAncestorLayoutId();
+	public long getAncestorLayoutId()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> getAncestors()
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -121,42 +127,55 @@ public interface Layout extends LayoutModel {
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
 
-	public com.liferay.portal.model.LayoutSet getLayoutSet();
+	public com.liferay.portal.model.LayoutSet getLayoutSet()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isInheritLookAndFeel();
 
 	public com.liferay.portal.model.Theme getTheme()
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ColorScheme getColorScheme()
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isInheritWapLookAndFeel();
 
 	public com.liferay.portal.model.Theme getWapTheme()
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ColorScheme getWapColorScheme()
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.lang.String getCssText();
+	public java.lang.String getCssText()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getRegularURL(
 		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getResetMaxStateURL(
 		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getResetLayoutURL(
 		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getTarget();
 
 	public boolean isChildSelected(boolean selectable,
-		com.liferay.portal.model.Layout layout);
+		com.liferay.portal.model.Layout layout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isSelected(boolean selectable,
 		com.liferay.portal.model.Layout layout, long ancestorPlid);

@@ -218,7 +218,8 @@ public interface Portal {
 	public String getGlobalLibDir();
 
 	public String getGoogleGadgetURL(
-		Portlet portlet, ThemeDisplay themeDisplay);
+			Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
 
 	public String[] getGuestPermissions(HttpServletRequest request);
 
@@ -256,20 +257,25 @@ public interface Portal {
 	public String getLayoutEditPage(Layout layout);
 
 	public String getLayoutFriendlyURL(
-		Layout layout, ThemeDisplay themeDisplay);
+			Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
 
 	public String getLayoutFriendlyURL(
-		Layout layout, ThemeDisplay themeDisplay, Locale locale);
+			Layout layout, ThemeDisplay themeDisplay, Locale locale)
+		throws PortalException, SystemException;
 
-	public String getLayoutFullURL(Layout layout, ThemeDisplay themeDisplay);
+	public String getLayoutFullURL(Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
 
 	public String getLayoutFullURL(
-		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser);
+			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
+		throws PortalException, SystemException;
 
 	public String getLayoutFullURL(long groupId, String portletId)
 		throws PortalException, SystemException;
 
-	public String getLayoutFullURL(ThemeDisplay themeDisplay);
+	public String getLayoutFullURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
 
 	public String getLayoutSetFriendlyURL(
 			LayoutSet layoutSet, ThemeDisplay themeDisplay)
@@ -277,12 +283,15 @@ public interface Portal {
 
 	public String getLayoutTarget(Layout layout);
 
-	public String getLayoutURL(Layout layout, ThemeDisplay themeDisplay);
+	public String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
 
 	public String getLayoutURL(
-		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser);
+			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
+		throws PortalException, SystemException;
 
-	public String getLayoutURL(ThemeDisplay themeDisplay);
+	public String getLayoutURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
 
 	public String getLayoutViewPage(Layout layout);
 
@@ -290,7 +299,8 @@ public interface Portal {
 
 	public Locale getLocale(RenderRequest renderRequest);
 
-	public String getNetvibesURL(Portlet portlet, ThemeDisplay themeDisplay);
+	public String getNetvibesURL(Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
 
 	public HttpServletRequest getOriginalServletRequest(
 		HttpServletRequest request);
@@ -313,9 +323,11 @@ public interface Portal {
 	public long getPlidFromFriendlyURL(long companyId, String friendlyURL);
 
 	public long getPlidFromPortletId(
-		long groupId, boolean privateLayout, String portletId);
+			long groupId, boolean privateLayout, String portletId)
+		throws PortalException, SystemException;
 
-	public long getPlidFromPortletId(long groupId, String portletId);
+	public long getPlidFromPortletId(long groupId, String portletId)
+		throws PortalException, SystemException;
 
 	public String getPortalLibDir();
 
@@ -334,7 +346,8 @@ public interface Portal {
 	public String getPortalURL(
 		String serverName, int serverPort, boolean secure);
 
-	public String getPortalURL(ThemeDisplay themeDisplay);
+	public String getPortalURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
 
 	public String getPortalWebDir();
 
@@ -360,31 +373,6 @@ public interface Portal {
 			long groupId, boolean privateLayout, String url,
 			Map<String, String[]> params)
 		throws PortalException, SystemException;
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(ActionRequest actionRequest);
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(HttpServletRequest request);
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(Layout layout);
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(long plid);
-
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
-	public long getPortletGroupId(RenderRequest renderRequest);
 
 	public String getPortletId(HttpServletRequest request);
 
@@ -414,9 +402,11 @@ public interface Portal {
 	public PreferencesValidator getPreferencesValidator(
 		Portlet portlet);
 
-	public long getScopeGroupId(HttpServletRequest request);
+	public long getScopeGroupId(HttpServletRequest request)
+		throws PortalException, SystemException;
 
-	public long getScopeGroupId(HttpServletRequest request, String portletId);
+	public long getScopeGroupId(HttpServletRequest request, String portletId)
+		throws PortalException, SystemException;
 
 	public long getScopeGroupId(Layout layout);
 
@@ -424,7 +414,8 @@ public interface Portal {
 
 	public long getScopeGroupId(long plid);
 
-	public long getScopeGroupId(PortletRequest portletRequest);
+	public long getScopeGroupId(PortletRequest portletRequest)
+		throws PortalException, SystemException;
 
 	public User getSelectedUser(HttpServletRequest request)
 		throws PortalException, SystemException;
@@ -507,7 +498,8 @@ public interface Portal {
 	public String getUserValue(long userId, String param, String defaultValue)
 		throws SystemException;
 
-	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay);
+	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
 
 	public boolean isLayoutFirstPageable(String type);
 

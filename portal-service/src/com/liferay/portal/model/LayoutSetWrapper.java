@@ -235,7 +235,9 @@ public class LayoutSetWrapper implements LayoutSet {
 		return _layoutSet.getColorScheme();
 	}
 
-	public com.liferay.portal.model.Group getGroup() {
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSet.getGroup();
 	}
 

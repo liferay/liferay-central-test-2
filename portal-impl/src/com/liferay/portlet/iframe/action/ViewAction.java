@@ -83,7 +83,8 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected String getPassword(
-		RenderRequest renderRequest, RenderResponse renderResponse) {
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws PortalException, SystemException {
 
 		PortletPreferences preferences = renderRequest.getPreferences();
 		String password = preferences.getValue("password", StringPool.BLANK);

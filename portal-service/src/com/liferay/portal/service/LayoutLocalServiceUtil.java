@@ -241,7 +241,8 @@ public class LayoutLocalServiceUtil {
 
 	public static long getDefaultPlid(long groupId, boolean privateLayout,
 		java.lang.String portletId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getDefaultPlid(groupId, privateLayout, portletId);
 	}
 

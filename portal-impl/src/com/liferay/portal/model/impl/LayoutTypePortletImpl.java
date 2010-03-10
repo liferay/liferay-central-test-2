@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -113,25 +114,30 @@ public class LayoutTypePortletImpl
 		setModePrint(StringUtil.add(getModePrint(), portletId));
 	}
 
-	public String addPortletId(long userId, String portletId) {
+	public String addPortletId(long userId, String portletId)
+		throws PortalException, SystemException {
+
 		return addPortletId(userId, portletId, true);
 	}
 
 	public String addPortletId(
-		long userId, String portletId, boolean checkPermission) {
+			long userId, String portletId, boolean checkPermission)
+		throws PortalException, SystemException {
 
 		return addPortletId(userId, portletId, null, -1, checkPermission);
 	}
 
 	public String addPortletId(
-		long userId, String portletId, String columnId, int columnPos) {
+			long userId, String portletId, String columnId, int columnPos)
+		throws PortalException, SystemException {
 
 		return addPortletId(userId, portletId, columnId, columnPos, true);
 	}
 
 	public String addPortletId(
-		long userId, String portletId, String columnId, int columnPos,
-		boolean checkPermission) {
+			long userId, String portletId, String columnId, int columnPos,
+			boolean checkPermission)
+		throws PortalException, SystemException {
 
 		portletId = JS.getSafeName(portletId);
 
@@ -232,7 +238,8 @@ public class LayoutTypePortletImpl
 	}
 
 	public void addPortletIds(
-		long userId, String[] portletIds, boolean checkPermission) {
+			long userId, String[] portletIds, boolean checkPermission)
+		throws PortalException, SystemException {
 
 		for (int i = 0; i < portletIds.length; i++) {
 			String portletId = portletIds[i];
@@ -242,8 +249,9 @@ public class LayoutTypePortletImpl
 	}
 
 	public void addPortletIds(
-		long userId, String[] portletIds, String columnId,
-		boolean checkPermission) {
+			long userId, String[] portletIds, String columnId,
+			boolean checkPermission)
+		throws PortalException, SystemException {
 
 		for (int i = 0; i < portletIds.length; i++) {
 			String portletId = portletIds[i];
@@ -310,7 +318,9 @@ public class LayoutTypePortletImpl
 		return list;
 	}
 
-	public List<Portlet> getAllPortlets() throws SystemException {
+	public List<Portlet> getAllPortlets()
+		throws PortalException, SystemException {
+
 		List<Portlet> portlets = new ArrayList<Portlet>();
 
 		List<String> columns = getColumns();
@@ -326,7 +336,7 @@ public class LayoutTypePortletImpl
 	}
 
 	public List<Portlet> getAllPortlets(String columnId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		String columnValue =
 			getTypeSettingsProperties().getProperty(columnId);
@@ -538,7 +548,9 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	public boolean hasPortletId(String portletId) {
+	public boolean hasPortletId(String portletId)
+		throws PortalException, SystemException {
+
 		List<String> columns = getColumns();
 
 		for (int i = 0; i < columns.size(); i++) {
@@ -612,7 +624,8 @@ public class LayoutTypePortletImpl
 	}
 
 	public void movePortletId(
-		long userId, String portletId, String columnId, int columnPos) {
+			long userId, String portletId, String columnId, int columnPos)
+		throws PortalException, SystemException {
 
 		_enablePortletLayoutListener = false;
 
@@ -1004,7 +1017,9 @@ public class LayoutTypePortletImpl
 		return false;
 	}*/
 
-	protected String[] getStaticPortletIds(String position) {
+	protected String[] getStaticPortletIds(String position)
+		throws PortalException, SystemException {
+
 		Layout layout = getLayout();
 
 		String selector1 = StringPool.BLANK;
@@ -1036,7 +1051,7 @@ public class LayoutTypePortletImpl
 	}
 
 	protected List<Portlet> getStaticPortlets(String position)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		String[] portletIds = getStaticPortletIds(position);
 
@@ -1109,7 +1124,9 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	protected boolean hasStaticPortletId(String columnId, String portletId) {
+	protected boolean hasStaticPortletId(String columnId, String portletId)
+		throws PortalException, SystemException {
+
 		String[] staticPortletIdsStart = getStaticPortletIds(
 			PropsKeys.LAYOUT_STATIC_PORTLETS_START + columnId);
 

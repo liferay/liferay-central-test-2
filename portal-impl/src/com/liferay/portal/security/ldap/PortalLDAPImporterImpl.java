@@ -573,7 +573,9 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 	}
 
-	protected void updateExpandoAttributes(User user, LDAPUser ldapUser) {
+	protected void updateExpandoAttributes(User user, LDAPUser ldapUser)
+		throws Exception {
+
 		ExpandoBridge userExpandoBridge = user.getExpandoBridge();
 
 		populateExpandoAttributes(

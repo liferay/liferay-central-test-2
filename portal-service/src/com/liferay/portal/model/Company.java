@@ -42,34 +42,51 @@ package com.liferay.portal.model;
 public interface Company extends CompanyModel {
 	public int compareTo(com.liferay.portal.model.Company company);
 
-	public com.liferay.portal.model.Account getAccount();
+	public com.liferay.portal.model.Account getAccount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getAdminName();
 
 	public java.lang.String getAuthType()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.User getDefaultUser();
+	public com.liferay.portal.model.User getDefaultUser()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getDefaultWebId();
 
 	public java.lang.String getEmailAddress();
 
-	public com.liferay.portal.model.Group getGroup();
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.security.Key getKeyObj();
 
-	public java.util.Locale getLocale();
+	public java.util.Locale getLocale()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.lang.String getName();
+	public java.lang.String getName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.lang.String getShardName();
+	public java.lang.String getShardName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.lang.String getShortName();
+	public java.lang.String getShortName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.TimeZone getTimeZone();
+	public java.util.TimeZone getTimeZone()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean hasCompanyMx(java.lang.String emailAddress);
+	public boolean hasCompanyMx(java.lang.String emailAddress)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isAutoLogin()
 		throws com.liferay.portal.kernel.exception.SystemException;

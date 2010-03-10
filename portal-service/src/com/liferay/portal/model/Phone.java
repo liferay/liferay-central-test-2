@@ -40,5 +40,7 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Phone extends PhoneModel {
-	public com.liferay.portal.model.ListType getType();
+	public com.liferay.portal.model.ListType getType()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

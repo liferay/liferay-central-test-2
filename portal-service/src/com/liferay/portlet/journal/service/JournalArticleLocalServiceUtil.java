@@ -327,7 +327,8 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String templateId, java.lang.String viewMode,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getArticleContent(article, templateId, viewMode,
 			languageId, themeDisplay);
@@ -382,7 +383,8 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String templateId, java.lang.String viewMode,
 		java.lang.String languageId, int page, java.lang.String xmlRequest,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getArticleDisplay(article, templateId, viewMode,
 			languageId, page, xmlRequest, themeDisplay);

@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
@@ -45,19 +44,8 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 			getCompanyId(), getTheme().getThemeId(), getColorSchemeId(), false);
 	}
 
-	public Group getGroup() {
-		Group group = null;
-
-		try {
-			group = GroupLocalServiceUtil.getGroup(getGroupId());
-		}
-		catch (Exception e) {
-			group = new GroupImpl();
-
-			_log.error(e, e);
-		}
-
-		return group;
+	public Group getGroup() throws PortalException, SystemException {
+		return GroupLocalServiceUtil.getGroup(getGroupId());
 	}
 
 	public Theme getWapTheme() throws SystemException {
@@ -70,7 +58,5 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 			getCompanyId(), getWapTheme().getThemeId(), getWapColorSchemeId(),
 			true);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(LayoutSetImpl.class);
 
 }

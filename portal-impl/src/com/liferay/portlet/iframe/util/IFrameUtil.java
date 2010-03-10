@@ -40,7 +40,8 @@ import javax.portlet.PortletRequest;
 public class IFrameUtil {
 
 	public static String getPassword(
-		PortletRequest portletRequest, String password) {
+			PortletRequest portletRequest, String password)
+		throws PortalException, SystemException {
 
 		if (!isPasswordTokenEnabled(portletRequest)) {
 			return StringPool.BLANK;
@@ -77,7 +78,8 @@ public class IFrameUtil {
 	}
 
 	public static boolean isPasswordTokenEnabled(
-		PortletRequest portletRequest) {
+			PortletRequest portletRequest)
+		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);

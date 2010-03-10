@@ -181,7 +181,9 @@ public class CompanyWrapper implements Company {
 		return _company.toXmlString();
 	}
 
-	public com.liferay.portal.model.Account getAccount() {
+	public com.liferay.portal.model.Account getAccount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _company.getAccount();
 	}
 
@@ -194,7 +196,9 @@ public class CompanyWrapper implements Company {
 		return _company.getAuthType();
 	}
 
-	public com.liferay.portal.model.User getDefaultUser() {
+	public com.liferay.portal.model.User getDefaultUser()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _company.getDefaultUser();
 	}
 
@@ -206,7 +210,9 @@ public class CompanyWrapper implements Company {
 		return _company.getEmailAddress();
 	}
 
-	public com.liferay.portal.model.Group getGroup() {
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _company.getGroup();
 	}
 
@@ -214,27 +220,38 @@ public class CompanyWrapper implements Company {
 		return _company.getKeyObj();
 	}
 
-	public java.util.Locale getLocale() {
+	public java.util.Locale getLocale()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _company.getLocale();
 	}
 
-	public java.lang.String getName() {
+	public java.lang.String getName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _company.getName();
 	}
 
-	public java.lang.String getShardName() {
+	public java.lang.String getShardName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _company.getShardName();
 	}
 
-	public java.lang.String getShortName() {
+	public java.lang.String getShortName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _company.getShortName();
 	}
 
-	public java.util.TimeZone getTimeZone() {
+	public java.util.TimeZone getTimeZone()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _company.getTimeZone();
 	}
 
-	public boolean hasCompanyMx(java.lang.String emailAddress) {
+	public boolean hasCompanyMx(java.lang.String emailAddress)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _company.hasCompanyMx(emailAddress);
 	}
 

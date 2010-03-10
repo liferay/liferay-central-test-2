@@ -244,7 +244,8 @@ public interface JournalArticleLocalService {
 		java.lang.String templateId, java.lang.String viewMode,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getArticleContent(long groupId,
@@ -284,7 +285,8 @@ public interface JournalArticleLocalService {
 		java.lang.String templateId, java.lang.String viewMode,
 		java.lang.String languageId, int page, java.lang.String xmlRequest,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(

@@ -46,7 +46,9 @@ public interface LayoutSet extends LayoutSetModel {
 	public com.liferay.portal.model.ColorScheme getColorScheme()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Group getGroup();
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Theme getWapTheme()
 		throws com.liferay.portal.kernel.exception.SystemException;

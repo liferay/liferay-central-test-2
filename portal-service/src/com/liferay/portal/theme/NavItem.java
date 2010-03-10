@@ -14,6 +14,8 @@
 
 package com.liferay.portal.theme;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -64,7 +66,7 @@ public class NavItem implements Serializable {
 		return _layout;
 	}
 
-	public boolean isChildSelected() {
+	public boolean isChildSelected() throws PortalException, SystemException {
 		ThemeDisplay themeDisplay = _vars.getThemeDisplay();
 
 		return _layout.isChildSelected(

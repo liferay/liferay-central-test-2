@@ -144,7 +144,12 @@ public class RendererImpl implements Renderer {
 
 		// Velocity variables
 
-		VelocityVariables.insertVariables(velocityContext, request);
+		try {
+			VelocityVariables.insertVariables(velocityContext, request);
+		}
+		catch (Exception e) {
+			throw new RendererException(e);
+		}
 
 		velocityContext.put(_BEAN, bean);
 

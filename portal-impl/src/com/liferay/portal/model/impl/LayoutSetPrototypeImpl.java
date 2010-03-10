@@ -14,6 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
@@ -31,30 +33,14 @@ public class LayoutSetPrototypeImpl
 	public LayoutSetPrototypeImpl() {
 	}
 
-	public Group getGroup() {
-		Group group = null;
-
-		try {
-			group = GroupLocalServiceUtil.getLayoutSetPrototypeGroup(
-				getCompanyId(), getLayoutSetPrototypeId());
-		}
-		catch (Exception e) {
-		}
-
-		return group;
+	public Group getGroup() throws PortalException, SystemException {
+		return GroupLocalServiceUtil.getLayoutSetPrototypeGroup(
+			getCompanyId(), getLayoutSetPrototypeId());
 	}
 
-	public LayoutSet getLayoutSet() {
-		LayoutSet layoutSet = null;
-
-		try {
-			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				getGroup().getGroupId(), true);
-		}
-		catch (Exception e) {
-		}
-
-		return layoutSet;
+	public LayoutSet getLayoutSet() throws PortalException, SystemException {
+		return LayoutSetLocalServiceUtil.getLayoutSet(
+			getGroup().getGroupId(), true);
 	}
 
 }

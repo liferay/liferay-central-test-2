@@ -40,13 +40,23 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface UserGroup extends UserGroupModel {
-	public com.liferay.portal.model.Group getGroup();
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public int getPrivateLayoutsPageCount();
+	public int getPrivateLayoutsPageCount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean hasPrivateLayouts();
+	public boolean hasPrivateLayouts()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public int getPublicLayoutsPageCount();
+	public int getPublicLayoutsPageCount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean hasPublicLayouts();
+	public boolean hasPublicLayouts()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

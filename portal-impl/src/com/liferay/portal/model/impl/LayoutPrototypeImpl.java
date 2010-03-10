@@ -14,6 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutPrototype;
@@ -33,36 +36,22 @@ public class LayoutPrototypeImpl
 	public LayoutPrototypeImpl() {
 	}
 
-	public Group getGroup() {
-		Group group = null;
-
-		try {
-			group = GroupLocalServiceUtil.getLayoutPrototypeGroup(
-				getCompanyId(), getLayoutPrototypeId());
-		}
-		catch (Exception e) {
-		}
-
-		return group;
+	public Group getGroup() throws PortalException, SystemException {
+		return GroupLocalServiceUtil.getLayoutPrototypeGroup(
+			getCompanyId(), getLayoutPrototypeId());
 	}
 
-	public Layout getLayout() {
-		Layout layout = null;
+	public Layout getLayout() throws PortalException, SystemException {
+		Group group = getGroup();
 
-		try {
-			Group group = getGroup();
+		if ((group != null) && (group.getPrivateLayoutsPageCount() > 0)) {
+			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+				group.getGroupId(), true);
 
-			if ((group != null) && (group.getPrivateLayoutsPageCount() > 0)) {
-				List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-					group.getGroupId(), true);
-
-				layout = layouts.get(0);
-			}
-		}
-		catch (Exception e) {
+			return layouts.get(0);
 		}
 
-		return layout;
+		throw new NoSuchLayoutException();
 	}
 
 }

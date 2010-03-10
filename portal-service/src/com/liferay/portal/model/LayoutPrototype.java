@@ -40,7 +40,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface LayoutPrototype extends LayoutPrototypeModel {
-	public com.liferay.portal.model.Group getGroup();
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Layout getLayout();
+	public com.liferay.portal.model.Layout getLayout()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

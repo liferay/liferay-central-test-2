@@ -210,7 +210,9 @@ public class WebsiteWrapper implements Website {
 		return _website.toXmlString();
 	}
 
-	public com.liferay.portal.model.ListType getType() {
+	public com.liferay.portal.model.ListType getType()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _website.getType();
 	}
 

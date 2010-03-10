@@ -293,7 +293,8 @@ public class FreeMarkerVariables {
 	}
 
 	public static void insertVariables(
-		FreeMarkerContext freeMarkerContext, HttpServletRequest request) {
+			FreeMarkerContext freeMarkerContext, HttpServletRequest request)
+		throws Exception {
 
 		// Request
 

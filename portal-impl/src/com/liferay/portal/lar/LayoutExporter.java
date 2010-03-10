@@ -565,7 +565,7 @@ public class LayoutExporter {
 			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, String resourceName, String resourcePrimKey,
 			Element permissionsEl, boolean exportUserPermissions)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		_portletExporter.exportGroupPermissions(
 			companyId, groupId, resourceName, resourcePrimKey, permissionsEl,
@@ -624,7 +624,7 @@ public class LayoutExporter {
 	protected void exportLayoutRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			Element rolesEl)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		String resourceName = Layout.class.getName();
 
@@ -745,7 +745,9 @@ public class LayoutExporter {
 		}
 	}
 
-	protected void fixTypeSettings(Layout layout) {
+	protected void fixTypeSettings(Layout layout)
+		throws PortalException, SystemException {
+
 		if (!layout.getType().equals(LayoutConstants.TYPE_URL)) {
 			return;
 		}

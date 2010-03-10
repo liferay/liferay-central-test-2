@@ -779,7 +779,9 @@ public class LayoutImporter {
 		LayoutSetLocalServiceUtil.updatePageCount(groupId, privateLayout);
 	}
 
-	protected void fixTypeSettings(Layout layout) {
+	protected void fixTypeSettings(Layout layout)
+		throws PortalException, SystemException {
+
 		if (!layout.getType().equals(LayoutConstants.TYPE_URL)) {
 			return;
 		}

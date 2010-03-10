@@ -15,7 +15,6 @@
 package com.liferay.portal.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -38,11 +37,9 @@ import com.liferay.portlet.PortletURLFactoryUtil;
 import java.util.Date;
 
 import javax.portlet.PortletMode;
-import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
-import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -445,14 +442,14 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 	protected PortletURL getPortletURL(
 			HttpServletRequest request, String portletId)
-		throws PortletModeException, SystemException, WindowStateException {
+		throws Exception {
 
 		return getPortletURL(request, portletId, 0);
 	}
 
 	protected PortletURL getPortletURL(
 			HttpServletRequest request, String portletId, long groupId)
-		throws PortletModeException, SystemException, WindowStateException {
+		throws Exception {
 
 		long plid = LayoutLocalServiceUtil.getDefaultPlid(
 			groupId, false, portletId);

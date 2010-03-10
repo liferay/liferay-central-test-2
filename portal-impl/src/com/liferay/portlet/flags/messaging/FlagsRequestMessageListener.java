@@ -226,7 +226,7 @@ public class FlagsRequestMessageListener implements MessageListener {
 			String reason, String fromName, String fromAddress, String toName,
 			String toAddress, String subject, String body,
 			ServiceContext serviceContext)
-		throws IOException {
+		throws Exception {
 
 		Date now = new Date();
 

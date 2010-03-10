@@ -426,15 +426,21 @@ public class UserWrapper implements User {
 		return _user.toXmlString();
 	}
 
-	public java.util.Date getBirthday() {
+	public java.util.Date getBirthday()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getBirthday();
 	}
 
-	public java.lang.String getCompanyMx() {
+	public java.lang.String getCompanyMx()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getCompanyMx();
 	}
 
-	public com.liferay.portal.model.Contact getContact() {
+	public com.liferay.portal.model.Contact getContact()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getContact();
 	}
 
@@ -443,16 +449,22 @@ public class UserWrapper implements User {
 	}
 
 	public java.lang.String getDisplayURL(
-		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getDisplayURL(themeDisplay);
 	}
 
 	public java.lang.String getDisplayURL(java.lang.String portalURL,
-		java.lang.String mainPath) {
+		java.lang.String mainPath)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getDisplayURL(portalURL, mainPath);
 	}
 
-	public boolean getFemale() {
+	public boolean getFemale()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getFemale();
 	}
 
@@ -460,15 +472,21 @@ public class UserWrapper implements User {
 		return _user.getFullName();
 	}
 
-	public com.liferay.portal.model.Group getGroup() {
+	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getGroup();
 	}
 
-	public long[] getGroupIds() {
+	public long[] getGroupIds()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getGroupIds();
 	}
 
-	public java.util.List<com.liferay.portal.model.Group> getGroups() {
+	public java.util.List<com.liferay.portal.model.Group> getGroups()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getGroups();
 	}
 
@@ -482,23 +500,33 @@ public class UserWrapper implements User {
 		return _user.getLogin();
 	}
 
-	public boolean getMale() {
+	public boolean getMale()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getMale();
 	}
 
-	public java.util.List<com.liferay.portal.model.Group> getMyPlaces() {
+	public java.util.List<com.liferay.portal.model.Group> getMyPlaces()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getMyPlaces();
 	}
 
-	public java.util.List<com.liferay.portal.model.Group> getMyPlaces(int max) {
+	public java.util.List<com.liferay.portal.model.Group> getMyPlaces(int max)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getMyPlaces(max);
 	}
 
-	public long[] getOrganizationIds() {
+	public long[] getOrganizationIds()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getOrganizationIds();
 	}
 
-	public java.util.List<com.liferay.portal.model.Organization> getOrganizations() {
+	public java.util.List<com.liferay.portal.model.Organization> getOrganizations()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getOrganizations();
 	}
 
@@ -516,11 +544,15 @@ public class UserWrapper implements User {
 		return _user.getPasswordUnencrypted();
 	}
 
-	public int getPrivateLayoutsPageCount() {
+	public int getPrivateLayoutsPageCount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getPrivateLayoutsPageCount();
 	}
 
-	public int getPublicLayoutsPageCount() {
+	public int getPublicLayoutsPageCount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getPublicLayoutsPageCount();
 	}
 
@@ -530,27 +562,33 @@ public class UserWrapper implements User {
 		return _user.getReminderQueryQuestions();
 	}
 
-	public long[] getRoleIds() {
+	public long[] getRoleIds()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _user.getRoleIds();
 	}
 
-	public java.util.List<com.liferay.portal.model.Role> getRoles() {
+	public java.util.List<com.liferay.portal.model.Role> getRoles()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _user.getRoles();
 	}
 
-	public long[] getTeamIds() {
+	public long[] getTeamIds()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _user.getTeamIds();
 	}
 
-	public java.util.List<com.liferay.portal.model.Team> getTeams() {
+	public java.util.List<com.liferay.portal.model.Team> getTeams()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _user.getTeams();
 	}
 
-	public long[] getUserGroupIds() {
+	public long[] getUserGroupIds()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _user.getUserGroupIds();
 	}
 
-	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups() {
+	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _user.getUserGroups();
 	}
 
@@ -558,27 +596,38 @@ public class UserWrapper implements User {
 		return _user.getTimeZone();
 	}
 
-	public boolean hasCompanyMx() {
+	public boolean hasCompanyMx()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.hasCompanyMx();
 	}
 
-	public boolean hasCompanyMx(java.lang.String emailAddress) {
+	public boolean hasCompanyMx(java.lang.String emailAddress)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.hasCompanyMx(emailAddress);
 	}
 
-	public boolean hasMyPlaces() {
+	public boolean hasMyPlaces()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _user.hasMyPlaces();
 	}
 
-	public boolean hasOrganization() {
+	public boolean hasOrganization()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.hasOrganization();
 	}
 
-	public boolean hasPrivateLayouts() {
+	public boolean hasPrivateLayouts()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.hasPrivateLayouts();
 	}
 
-	public boolean hasPublicLayouts() {
+	public boolean hasPublicLayouts()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.hasPublicLayouts();
 	}
 
@@ -586,11 +635,15 @@ public class UserWrapper implements User {
 		return _user.hasReminderQuery();
 	}
 
-	public boolean isFemale() {
+	public boolean isFemale()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.isFemale();
 	}
 
-	public boolean isMale() {
+	public boolean isMale()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.isMale();
 	}
 

@@ -464,7 +464,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public long getDefaultPlid(
 			long groupId, boolean privateLayout, String portletId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (groupId > 0) {
 			List<Layout> layouts = layoutPersistence.findByG_P(
