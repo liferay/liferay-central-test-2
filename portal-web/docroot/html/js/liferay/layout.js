@@ -54,7 +54,7 @@ AUI().add(
 					dd: {
 						clickPixelThresh: 0,
 						clickTimeThresh: 250,
-						handles: [options.handles],
+						handles: options.handles,
 						plugins: [
 							{
 								cfg: {
