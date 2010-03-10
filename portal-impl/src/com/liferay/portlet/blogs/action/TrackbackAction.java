@@ -132,7 +132,8 @@ public class TrackbackAction extends PortletAction {
 		catch (PrincipalException pe) {
 			sendError(
 				actionRequest, actionResponse,
-				"Entry must have guest view permissions to enable trackbacks.");
+				"Blog entry must have guest view permissions to enable " +
+					"trackbacks.");
 
 			return;
 		}
