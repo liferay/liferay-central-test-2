@@ -8,16 +8,17 @@
 #set ($show_portlet_description = $sessionClicks.get($request, "show-portlet-description-$portlet_id", "true"))
 #set ($valid_portlet_description = !$portlet_description.equals("") && $portlet_description.indexOf('javax.portlet.description') == -1)
 
-<div class="portlet" id="portlet-wrapper-$portlet_id">
-	<div class="portlet-topper">
-		<span class="portlet-title" id="cpPortletTitle">
-			$portlet_title
+<section class="portlet" id="portlet_$portlet_id">
+	<header class="portlet-topper">
+		<h1 class="portlet-title" id="cpPortletTitle">
+			<span class="portlet-title-text">$portlet_title</span>
+
 			#if ($valid_portlet_description)
 				<img id="cpPortletTitleHelpIcon" src="$themeDisplay.getPathThemeImages()/portlet/help.png" />
 			#end
-		</span>
+		</h1>
 
-		<div class="portlet-icons" id="portlet-small-icon-bar_$portlet_id">
+		<menu class="portlet-toolbar" id="portlet-toolbar_$portlet_id" type="toolbar">
 			#if ($portlet_display.isShowBackIcon())
 				<a href="$portlet_back_url" class="portlet-icon-back">#language ("return-to-full-page")</a>
 			#else
@@ -26,8 +27,8 @@
 				$theme.iconMaximize()
 				$theme.iconClose()
 			#end
-		</div>
-	</div>
+		</menu>
+	</header>
 
 	#if ($valid_portlet_description)
 		<div id="cpContextPanelTemplate" class="aui-contextpanel-hidden" data-portlet-id="$portlet_id" data-visible-panel="$show_portlet_description">
@@ -38,4 +39,4 @@
 	<div class="portlet-content">
 		$portlet_content
 	</div>
-</div>
+</section>

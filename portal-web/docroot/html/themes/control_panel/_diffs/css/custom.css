@@ -24,7 +24,7 @@ a:hover {
 	padding-top: 20px;
 }
 
-#content-wrapper {
+#content {
 	background: #FFF;
 	border: 5px solid #FFF;
 	margin: 20px auto;
@@ -37,16 +37,16 @@ html > .lfr-dockbar-pinned {
 
 /* ---------- Banner ---------- */
 
-#banner {
+#heading {
 	margin: 0 auto;
 	width: 976px;
 }
 
-#banner .logo {
+#heading .company-title {
 	margin: 0;
 }
 
-#banner h1.logo a {
+#banner #heading .logo {
 	background: url(../images/common/company_logo.png) no-repeat 0 50%;
 	color: #FFF;
 	display: inline;
@@ -58,15 +58,22 @@ html > .lfr-dockbar-pinned {
 	width: auto;
 }
 
+#skip-to-content {
+	color: #FFF;
+	right: 0;
+}
+
+#skip-to-content:focus {
+	left: auto;
+	width: auto;
+	right: 1em;
+	z-index: 1000;
+}
+
 /* ---------- Site breadcrumbs ---------- */
 
 .site-breadcrumbs {
-	border-color: #FFF;
-	border-style: solid;
-	border-width: 5px 5px 0;
-	margin: 0 auto;
-	position: relative;
-	top: 20px;
+	margin: 0 auto 5px;
 	width: 976px;
 }
 
