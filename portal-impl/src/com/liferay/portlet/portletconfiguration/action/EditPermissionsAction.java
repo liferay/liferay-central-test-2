@@ -333,7 +333,8 @@ public class EditPermissionsAction extends EditConfigurationAction {
 				actionRequest, "teamsSearchContainerPrimaryKeys"), 0L);
 
 		for (long teamId : teamIds) {
-			Role role = RoleLocalServiceUtil.getTeamRole(teamId);
+			Role role = RoleLocalServiceUtil.getTeamRole(
+				themeDisplay.getCompanyId(), teamId);
 
 			String[] actionIds = getActionIds(actionRequest, teamId);
 
@@ -367,7 +368,8 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			actionRequest, "resourcePrimKey");
 
 		for (long teamId : teamIds) {
-			Role role = RoleLocalServiceUtil.getTeamRole(teamId);
+			Role role = RoleLocalServiceUtil.getTeamRole(
+				themeDisplay.getCompanyId(), teamId);
 
 			String[] actionIds = getActionIds(actionRequest, teamId);
 
