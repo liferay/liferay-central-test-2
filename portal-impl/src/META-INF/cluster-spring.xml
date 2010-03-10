@@ -7,6 +7,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
+	<bean id="com.liferay.portal.kernel.cluster.ClusterExecutor" class="com.liferay.portal.cluster.ClusterExecutorImpl">
+		<property name="shortcutLocalMethod">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.cluster.ClusterExecutorUtil" class="com.liferay.portal.kernel.cluster.ClusterExecutorUtil">
+		<property name="clusterExecutor" ref="com.liferay.portal.kernel.cluster.ClusterExecutor" />
+	</bean>
 	<bean id="com.liferay.portal.kernel.cluster.ClusterLink" class="com.liferay.portal.cluster.ClusterLinkImpl">
 		<property name="clusterForwardMessageListener">
 			<bean class="com.liferay.portal.kernel.cluster.messaging.ClusterForwardMessageListener" />

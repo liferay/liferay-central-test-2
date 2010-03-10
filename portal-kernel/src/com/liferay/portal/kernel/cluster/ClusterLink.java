@@ -25,10 +25,6 @@ import java.util.List;
  */
 public interface ClusterLink {
 
-	public List<Address> getControlAddresses();
-
-	public Address getLocalControlAddress();
-
 	public List<Address> getLocalTransportAddresses();
 
 	public List<Address> getTransportAddresses(Priority priority);

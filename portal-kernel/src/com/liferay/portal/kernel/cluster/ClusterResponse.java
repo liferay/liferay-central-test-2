@@ -14,31 +14,31 @@
 
 package com.liferay.portal.kernel.cluster;
 
-import com.liferay.portal.kernel.util.MethodWrapper;
-
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Future;
+import java.io.Serializable;
 
 /**
- * <a href="ClusterExecutor.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClusterResponse.java.html"><b><i>View Source</i></b></a>
  *
- * @author Shuyang Zhou
+ * @author Tina Tian
  */
-public interface ClusterExecutor {
+public interface ClusterResponse extends Serializable {
 
-	public Map<Address, Future<?>> executeMulticastCall(
-		MethodWrapper methodWrapper);
+	public Exception getException();
 
-	public Future<?> executeUnicastCall(
-		Address address, MethodWrapper methodWrapper);
+	public Object getResult();
 
-	public List<Address> getControlAddresses();
+	public String getUuid();
 
-	public Address getLocalControlAddress();
+	public boolean hasException();
 
-	public boolean isEnabled();
+	public boolean isMulticast();
 
-	public boolean isShortcutLocalMethod();
+	public void setException(Exception exception);
+
+	public void setMulticast(boolean multicast);
+
+	public void setResult(Object result);
+
+	public void setUuid(String uuid);
 
 }

@@ -14,7 +14,11 @@
 
 package com.liferay.portal.cluster;
 
+import com.liferay.portal.kernel.cluster.Address;
 import com.liferay.portal.kernel.cluster.ClusterException;
+import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
+import com.liferay.portal.kernel.cluster.ClusterRequest;
+import com.liferay.portal.kernel.cluster.ClusterResponse;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
@@ -22,7 +26,9 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 
 import java.io.Serializable;
 
-import org.jgroups.Address;
+import java.util.Map;
+import java.util.concurrent.Future;
+
 import org.jgroups.ChannelException;
 import org.jgroups.JChannel;
 import org.jgroups.Message;
@@ -30,73 +36,146 @@ import org.jgroups.ReceiverAdapter;
 import org.jgroups.View;
 
 /**
- * <a href="ClusterInvokeReceiver.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClusterInvokeReceiver.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Shuyang Zhou
+ * @author Tina Tian
  */
 public class ClusterInvokeReceiver extends ReceiverAdapter {
 
-	public ClusterInvokeReceiver(JChannel channel) {
-		_channel = channel;
+	public ClusterInvokeReceiver(
+		Map<String, Map<Address, Future<?>>> multicastResultMap,
+		Map<String, Future<?>> unicastResultMap) {
+
+		_multicastResultMap = multicastResultMap;
+		_unicastResultMap = unicastResultMap;
 	}
 
 	public void receive(Message message) {
-		Address sourceAddress = message.getSrc();
-		Address localAddress = _channel.getLocalAddress();
+		org.jgroups.Address sourceAddress = message.getSrc();
+		org.jgroups.Address localAddress = _channel.getLocalAddress();
 
-		if ((!localAddress.equals(sourceAddress)) ||
-			(message.getDest() != null)) {
+		Object obj = message.getObject();
 
-			Message responseMessage = new Message();
+		if (obj == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Content of message is null");
+			}
+			return;
+		}
 
-			responseMessage.setDest(sourceAddress);
-			responseMessage.setSrc(localAddress);
+		if (localAddress.equals(sourceAddress) &&
+			ClusterExecutorUtil.isShortcutLocalMethod()) {
+			return;
+		}
 
-			Object payload = message.getObject();
+		if (obj instanceof ClusterRequest) {
+			ClusterRequest clusterRequest = (ClusterRequest) obj;
+
+			String uuid = clusterRequest.getUuid();
+
+			ClusterResponse clusterResponse = new ClusterResponseImpl();
+
+			clusterResponse.setUuid(uuid);
+
+			clusterResponse.setMulticast(clusterRequest.isMulticast());
+
+			Object payload = clusterRequest.getPayload();
 
 			if (payload instanceof MethodWrapper) {
-				MethodWrapper methodWrapper = (MethodWrapper)payload;
-
+				MethodWrapper methodWrapper = (MethodWrapper) payload;
 				try {
-					Object returnValue = MethodInvoker.invoke(methodWrapper);
+					Object returnValue =
+						MethodInvoker.invoke(methodWrapper);
 
 					if (returnValue instanceof Serializable) {
-						responseMessage.setObject((Serializable)returnValue);
+						clusterResponse.setResult(returnValue);
 					}
-					else {
-						responseMessage.setObject(
+					else if (returnValue != null) {
+						clusterResponse.setException(
 							new ClusterException(
-								"Return value is not Serializable"));
+							"Return value is not Serializable"));
 					}
 				}
 				catch (Exception e) {
-					responseMessage.setObject(e);
+					clusterResponse.setException(e);
 				}
 			}
 			else {
-				if (_log.isWarnEnabled()) {
-					_log.warn("Payload is not a MethodWrapper");
-				}
+				clusterResponse.setException(
+					new ClusterException(
+					"Payload is not a MethodWrapper"));
 			}
 
 			try {
-				_channel.send(responseMessage);
+				_channel.send(sourceAddress, localAddress, clusterResponse);
 			}
 			catch (ChannelException ce) {
 				_log.error(
-					"Unable to send response message " + responseMessage, ce);
+					"Unable to send response message "
+					+ clusterResponse, ce);
+			}
+		}
+		else if (obj instanceof ClusterResponse) {
+			ClusterResponse clusterResponse =
+				(ClusterResponse) obj;
+
+			String uuid = clusterResponse.getUuid();
+
+			if (clusterResponse.isMulticast()
+				&& _multicastResultMap.containsKey(uuid)) {
+
+				Map<Address, Future<?>> results = _multicastResultMap.get(uuid);
+				Address address = new AddressImpl(sourceAddress);
+
+				if (results.containsKey(address)) {
+					FutureResult<Object> v =
+						(FutureResult<Object>) results.get(address);
+
+					if (clusterResponse.hasException()) {
+						v.setException(clusterResponse.getException());
+					}
+					else {
+						v.setResult(clusterResponse.getResult());
+					}
+				}
+				else {
+					_log.error("New node comming: " + sourceAddress);
+				}
+			}
+			else if (_unicastResultMap.containsKey(uuid)) {
+				FutureResult<Object> value =
+					(FutureResult<Object>) _unicastResultMap.get(uuid);
+
+				if (clusterResponse.hasException()) {
+					value.setException(clusterResponse.getException());
+				}
+				else {
+					value.setResult(clusterResponse.getResult());
+				}
+			}
+			else {
+				_log.error(
+					"Unknow uuid: " + uuid + " from:" + sourceAddress);
 			}
 		}
 		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Block received message " + message);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Type of content of message is wrong");
 			}
+			return;
 		}
+
+	}
+
+	public void setChannel(JChannel channel) {
+		_channel = channel;
 	}
 
 	public void viewAccepted(View view) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Accepted view " + view);
+		if (_log.isInfoEnabled()) {
+			_log.info("Accepted view " + view);
 		}
 	}
 
@@ -104,5 +183,7 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 		ClusterInvokeReceiver.class);
 
 	private JChannel _channel;
+	private Map<String, Map<Address, Future<?>>> _multicastResultMap;
+	private Map<String, Future<?>> _unicastResultMap;
 
 }

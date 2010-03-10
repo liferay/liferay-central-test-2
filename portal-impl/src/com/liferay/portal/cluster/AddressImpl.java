@@ -27,12 +27,28 @@ public class AddressImpl implements com.liferay.portal.kernel.cluster.Address {
 		_address = address;
 	}
 
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+
+		if (!(obj instanceof AddressImpl)) {
+			return false;
+		}
+
+		AddressImpl other=(AddressImpl)obj;
+
+		return _address.equals(other._address);
+	}
+
 	public String getDescription() {
 		return _address.toString();
 	}
 
 	public Address getRealAddress() {
 		return _address;
+	}
+
+	public int hashCode() {
+		return _address.hashCode();
 	}
 
 	public String toString() {

@@ -44,30 +44,6 @@ public class ClusterLinkUtil {
 		return _clusterLink;
 	}
 
-	public static List<Address> getControlAddresses() {
-		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("ClusterLinkUtil has not been initialized");
-			}
-
-			return Collections.EMPTY_LIST;
-		}
-
-		return _clusterLink.getControlAddresses();
-	}
-
-	public static Address getLocalControlAddress() {
-		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("ClusterLinkUtil has not been initialized");
-			}
-
-			return null;
-		}
-
-		return _clusterLink.getLocalControlAddress();
-	}
-
 	public static List<Address> getLocalTransportAddresses() {
 		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
 			if (_log.isWarnEnabled()) {
