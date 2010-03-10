@@ -465,7 +465,7 @@
 	</library>
 	<library>
 		<file-name>development/jsp-api.jar</file-name>
-		<version>2.5</version>
+		<version>2.1</version>
 		<project-name>JavaServer Pages</project-name>
 		<project-url>http://java.sun.com/products/jsp</project-url>
 		<licenses>
