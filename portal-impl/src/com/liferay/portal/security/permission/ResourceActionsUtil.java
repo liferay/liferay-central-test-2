@@ -738,6 +738,7 @@ public class ResourceActionsUtil {
 			if (_log.isWarnEnabled() && !source.endsWith("-ext.xml")) {
 				_log.warn("Cannot load " + source);
 			}
+
 			return;
 		}
 
