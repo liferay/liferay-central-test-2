@@ -237,7 +237,7 @@
 	<#if $layout.isPrivateLayout()>
 		<#assign $community_default_url = $community_default_private_url/>
 	</#if>
-#end
+</#if>
 
 <#assign the_title = "" />
 
