@@ -34,6 +34,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
@@ -72,11 +73,14 @@ public class ExportEventsAction extends PortletAction {
 					themeDisplay.getScopeGroupId(), exportFileName);
 			}
 
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
+
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 
 			ServletResponseUtil.sendFile(
-				response, file.getName(), new FileInputStream(file),
+				request, response, file.getName(), new FileInputStream(file),
 				ContentTypes.TEXT_CALENDAR);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);

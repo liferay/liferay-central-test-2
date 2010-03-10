@@ -911,7 +911,7 @@ public class LayoutAction extends Action {
 				ubaos.unsafeGetByteArray(), 0, ubaos.size());
 
 			ServletResponseUtil.sendFile(
-				response, renderResponseImpl.getResourceName(), is,
+				request, response, renderResponseImpl.getResourceName(), is,
 				renderResponseImpl.getContentType());
 		}
 		else {
@@ -919,8 +919,8 @@ public class LayoutAction extends Action {
 				StringPool.UTF8);
 
 			ServletResponseUtil.sendFile(
-				response, renderResponseImpl.getResourceName(), content,
-				renderResponseImpl.getContentType());
+				request, response, renderResponseImpl.getResourceName(),
+				content, renderResponseImpl.getContentType());
 		}
 
 		renderRequestImpl.cleanUp();

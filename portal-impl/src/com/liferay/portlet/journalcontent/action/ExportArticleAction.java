@@ -163,7 +163,8 @@ public class ExportArticleAction extends PortletAction {
 
 			String contentType = MimeTypesUtil.getContentType(fileName);
 
-			ServletResponseUtil.sendFile(response, fileName, is, contentType);
+			ServletResponseUtil.sendFile(
+				request, response, fileName, is, contentType);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

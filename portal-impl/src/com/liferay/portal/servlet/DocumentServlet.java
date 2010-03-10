@@ -223,7 +223,7 @@ public class DocumentServlet extends HttpServlet {
 		String contentType = MimeTypesUtil.getContentType(fileName);
 
 		ServletResponseUtil.sendFile(
-			response, fileName, is, contentLength, contentType);
+			request, response, fileName, is, contentLength, contentType);
 	}
 
 }

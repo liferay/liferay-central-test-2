@@ -16,6 +16,7 @@ package com.liferay.util.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -32,6 +33,7 @@ import java.io.InputStream;
 import java.net.SocketException;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.net.URLCodec;
@@ -41,6 +43,7 @@ import org.apache.commons.lang.CharUtils;
  * <a href="ServletResponseUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Zsolt Balogh
  */
 public class ServletResponseUtil {
 
@@ -48,7 +51,15 @@ public class ServletResponseUtil {
 			HttpServletResponse response, String fileName, byte[] bytes)
 		throws IOException {
 
-		sendFile(response, fileName, bytes, null);
+		sendFile(null, response, fileName, bytes, null);
+	}
+
+	public static void sendFile(
+			HttpServletRequest request, HttpServletResponse response,
+			String fileName, byte[] bytes)
+		throws IOException {
+
+		sendFile(request, response, fileName, bytes, null);
 	}
 
 	public static void sendFile(
@@ -56,16 +67,25 @@ public class ServletResponseUtil {
 			String contentType)
 		throws IOException {
 
-		setHeaders(response, fileName, contentType);
+		sendFile(null, response, fileName, bytes, contentType);
+	}
+
+	public static void sendFile(
+			HttpServletRequest request, HttpServletResponse response,
+			String fileName, byte[] bytes, String contentType)
+		throws IOException {
+
+		setHeaders(request, response, fileName, contentType);
 
 		write(response, bytes);
 	}
 
 	public static void sendFile(
-			HttpServletResponse response, String fileName, InputStream is)
+			HttpServletRequest request, HttpServletResponse response,
+			String fileName, InputStream is)
 		throws IOException {
 
-		sendFile(response, fileName, is, null);
+		sendFile(request, response, fileName, is, null);
 	}
 
 	public static void sendFile(
@@ -73,15 +93,24 @@ public class ServletResponseUtil {
 			String contentType)
 		throws IOException {
 
-		sendFile(response, fileName, is, 0, contentType);
+		sendFile(null, response, fileName, is, contentType);
 	}
 
 	public static void sendFile(
-			HttpServletResponse response, String fileName, InputStream is,
-			int contentLength, String contentType)
+			HttpServletRequest request, HttpServletResponse response,
+			String fileName, InputStream is, String contentType)
 		throws IOException {
 
-		setHeaders(response, fileName, contentType);
+		sendFile(request, response, fileName, is, 0, contentType);
+	}
+
+	public static void sendFile(
+			HttpServletRequest request, HttpServletResponse response,
+			String fileName, InputStream is, int contentLength,
+			String contentType)
+		throws IOException {
+
+		setHeaders(request, response, fileName, contentType);
 
 		write(response, is, contentLength);
 	}
@@ -158,7 +187,8 @@ public class ServletResponseUtil {
 	}
 
 	protected static void setHeaders(
-		HttpServletResponse response, String fileName, String contentType) {
+		HttpServletRequest request, HttpServletResponse response,
+		String fileName, String contentType) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Sending file of type " + contentType);
@@ -198,8 +228,14 @@ public class ServletResponseUtil {
 					String encodedFileName =
 						StringUtil.replace(codec.encode(fileName), "+", "%20");
 
-					contentDisposition =
-						"attachment; filename*=UTF-8''" + encodedFileName;
+					if (BrowserSnifferUtil.isIe(request)) {
+						contentDisposition =
+							"attachment; filename=\"" + encodedFileName + "\"";
+					}
+					else {
+						contentDisposition =
+							"attachment; filename*=UTF-8''" + encodedFileName;
+					}
 				}
 			}
 			catch (Exception e) {

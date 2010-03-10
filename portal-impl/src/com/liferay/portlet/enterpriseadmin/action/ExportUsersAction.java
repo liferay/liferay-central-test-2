@@ -60,7 +60,7 @@ public class ExportUsersAction extends Action {
 			byte[] bytes = csv.getBytes();
 
 			ServletResponseUtil.sendFile(
-				response, fileName, bytes, ContentTypes.TEXT_CSV_UTF8);
+				request, response, fileName, bytes, ContentTypes.TEXT_CSV_UTF8);
 
 			return null;
 		}

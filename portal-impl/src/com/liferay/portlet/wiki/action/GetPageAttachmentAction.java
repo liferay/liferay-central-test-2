@@ -115,7 +115,7 @@ public class GetPageAttachmentAction extends PortletAction {
 		String contentType = MimeTypesUtil.getContentType(fileName);
 
 		ServletResponseUtil.sendFile(
-			response, fileName, is, contentLength, contentType);
+			request, response, fileName, is, contentLength, contentType);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

@@ -55,7 +55,7 @@ public class GetMessageAttachmentAction extends PortletAction {
 			long messageId = ParamUtil.getLong(request, "messageId");
 			String fileName = ParamUtil.getString(request, "attachment");
 
-			getFile(messageId, fileName, response);
+			getFile(messageId, fileName, request, response);
 
 			return null;
 		}
@@ -78,7 +78,10 @@ public class GetMessageAttachmentAction extends PortletAction {
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 
-			getFile(messageId, fileName, response);
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
+
+			getFile(messageId, fileName, request, response);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
@@ -88,7 +91,8 @@ public class GetMessageAttachmentAction extends PortletAction {
 	}
 
 	protected void getFile(
-			long messageId, String fileName, HttpServletResponse response)
+			long messageId, String fileName, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		MBMessage message = MBMessageServiceUtil.getMessage(messageId);
@@ -102,7 +106,7 @@ public class GetMessageAttachmentAction extends PortletAction {
 		String contentType = MimeTypesUtil.getContentType(fileName);
 
 		ServletResponseUtil.sendFile(
-			response, fileName, is, contentLength, contentType);
+			request, response, fileName, is, contentLength, contentType);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

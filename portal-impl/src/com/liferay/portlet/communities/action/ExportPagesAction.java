@@ -42,6 +42,7 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
@@ -125,11 +126,14 @@ public class ExportPagesAction extends PortletAction {
 				groupId, privateLayout, null, actionRequest.getParameterMap(),
 				startDate, endDate);
 
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
+
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 
 			ServletResponseUtil.sendFile(
-				response, fileName, new FileInputStream(file),
+				request, response, fileName, new FileInputStream(file),
 				ContentTypes.APPLICATION_ZIP);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);

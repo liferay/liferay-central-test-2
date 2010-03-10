@@ -188,7 +188,8 @@ public class ExportPageAction extends PortletAction {
 
 		String contentType = MimeTypesUtil.getContentType(fileName);
 
-		ServletResponseUtil.sendFile(response, fileName, is, contentType);
+		ServletResponseUtil.sendFile(
+			request, response, fileName, is, contentType);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

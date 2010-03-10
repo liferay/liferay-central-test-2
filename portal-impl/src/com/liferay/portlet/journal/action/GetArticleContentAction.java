@@ -53,7 +53,7 @@ public class GetArticleContentAction extends Action {
 			byte[] bytes = xml.getBytes();
 
 			ServletResponseUtil.sendFile(
-				response, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
+				request, response, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
