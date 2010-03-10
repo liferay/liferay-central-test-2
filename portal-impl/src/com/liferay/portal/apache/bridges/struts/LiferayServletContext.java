@@ -58,6 +58,10 @@ public class LiferayServletContext implements ServletContext {
 		}
 	}
 
+	public String getContextPath() {
+		return _servletContext.getContextPath();
+	}
+
 	public String getInitParameter(String name) {
 		return _servletContext.getInitParameter(name);
 	}

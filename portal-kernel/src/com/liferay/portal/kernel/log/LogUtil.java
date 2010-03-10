@@ -68,7 +68,7 @@ public class LogUtil {
 	}
 
 	public static void log(Log log, JspException jspe) {
-		Throwable cause = jspe.getRootCause();
+		Throwable cause = jspe.getCause();
 
 		if (cause == null) {
 			cause = jspe;

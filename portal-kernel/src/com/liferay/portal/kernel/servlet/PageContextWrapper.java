@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import java.util.Enumeration;
 
+import javax.el.ELContext;
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -27,8 +28,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.el.ExpressionEvaluator;
-import javax.servlet.jsp.el.VariableResolver;
 
 /**
  * <a href="PageContextWrapper.java.html"><b><i>View Source</i></b></a>
@@ -67,11 +66,18 @@ public class PageContextWrapper extends PageContext {
 		return _pageContext.getAttributesScope(name);
 	}
 
+	public ELContext getELContext() {
+		return _pageContext.getELContext();
+	}
+
 	public Exception getException() {
 		return _pageContext.getException();
 	}
 
-	public ExpressionEvaluator getExpressionEvaluator() {
+	/**
+	 * @deprecated
+	 */
+	public javax.servlet.jsp.el.ExpressionEvaluator getExpressionEvaluator() {
 		return _pageContext.getExpressionEvaluator();
 	}
 
@@ -103,7 +109,10 @@ public class PageContextWrapper extends PageContext {
 		return _pageContext.getSession();
 	}
 
-	public VariableResolver getVariableResolver() {
+	/**
+	 * @deprecated
+	 */
+	public javax.servlet.jsp.el.VariableResolver getVariableResolver() {
 		return _pageContext.getVariableResolver();
 	}
 
