@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
+
 /**
  * <a href="OrderFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -28,6 +30,23 @@ public class OrderFactoryUtil {
 	public static Order desc(String propertyName) {
 		return getOrderFactory().desc(propertyName);
 	}
+
+
+	public static void addOrderByComparator(
+			DynamicQuery query, OrderByComparator obc) {
+
+		String[] orderBys = obc.getOrderByFields();
+		boolean isAscending = obc.isAscending();
+		for (String orderBy : orderBys) {
+			if (isAscending) {
+				query.addOrder(asc(orderBy));
+			}
+			else {
+				query.addOrder(desc(orderBy));
+			}
+		}
+	}
+
 
 	public static OrderFactory getOrderFactory() {
 		return _orderFactory;
