@@ -398,7 +398,7 @@ public class RoleFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_U_G);
 
 			sql = StringUtil.replace(
-				sql, "[$GROUP_IDS$]", getGroupIds(groupIds, "Groups_Roles"));
+				sql, "[$GROUP_ID$]", getGroupIds(groupIds, "Groups_Roles"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 

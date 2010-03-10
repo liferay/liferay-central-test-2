@@ -520,8 +520,8 @@
 				Groups_Permissions ON
 					(Groups_Permissions.permissionId = Permission_.permissionId)
 			WHERE
-				([$PERMISSION_IDS$]) AND
-				([$GROUP_IDS$])
+				([$PERMISSION_ID$]) AND
+				([$GROUP_ID$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByGroupsRoles">
@@ -537,8 +537,8 @@
 				Permission_ ON
 					(Permission_.permissionId = Roles_Permissions.permissionId)
 			WHERE
-				([$PERMISSION_IDS$]) AND
-				([$GROUP_IDS$])
+				([$PERMISSION_ID$]) AND
+				([$GROUP_ID$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByRolesPermissions">
@@ -548,8 +548,8 @@
 			FROM
 				Roles_Permissions
 			WHERE
-				([$PERMISSION_IDS$]) AND
-				([$ROLE_IDS$])
+				([$PERMISSION_ID$]) AND
+				([$ROLE_ID$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByUserGroupRole">
@@ -566,7 +566,7 @@
 				Permission_ ON
 					(Permission_.permissionId = Roles_Permissions.permissionId)
 			WHERE
-				([$PERMISSION_IDS$]) AND
+				([$PERMISSION_ID$]) AND
 				(UserGroupRole.userId = ?)
 		]]>
 	</sql>
@@ -580,7 +580,7 @@
 				Users_Permissions ON
 					(Users_Permissions.permissionId = Permission_.permissionId)
 			WHERE
-				([$PERMISSION_IDS$]) AND
+				([$PERMISSION_ID$]) AND
 				(Users_Permissions.userId = ?)
 		]]>
 	</sql>
@@ -597,7 +597,7 @@
 				Permission_ ON
 					(Permission_.permissionId = Roles_Permissions.permissionId)
 			WHERE
-				([$PERMISSION_IDS$]) AND
+				([$PERMISSION_ID$]) AND
 				(Users_Roles.userId = ?)
 		]]>
 	</sql>
@@ -609,7 +609,7 @@
 				Permission_
 			WHERE
 				(actionId = ?) AND
-				([$RESOURCE_IDS$])
+				([$RESOURCE_ID$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.findByG_R">
@@ -682,7 +682,7 @@
 					(Users_Permissions.permissionId = Permission_.permissionId)
 			WHERE
 				(Users_Permissions.userId = ?) AND
-				([$ACTION_IDS$]) AND
+				([$ACTION_ID$]) AND
 				(Permission_.resourceId = ?)
 		]]>
 	</sql>
@@ -1029,7 +1029,7 @@
 					Groups_Roles ON
 						(Groups_Roles.roleId = Role_.roleId)
 				WHERE
-					([$GROUP_IDS$])
+					([$GROUP_ID$])
 			)
 		]]>
 	</sql>

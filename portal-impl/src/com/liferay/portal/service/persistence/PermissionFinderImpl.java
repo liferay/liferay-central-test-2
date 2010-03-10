@@ -127,10 +127,10 @@ public class PermissionFinderImpl
 				sql = sb.toString();
 
 				sql = StringUtil.replace(
-					sql, "[$PERMISSION_IDS$]",
+					sql, "[$PERMISSION_ID$]",
 					getPermissionIds(permissions, "Roles_Permissions"));
 				sql = StringUtil.replace(
-					sql, "[$GROUP_IDS$]", getGroupIds(groups, "Groups_Roles"));
+					sql, "[$GROUP_ID$]", getGroupIds(groups, "Groups_Roles"));
 
 				sb.setIndex(0);
 
@@ -143,10 +143,10 @@ public class PermissionFinderImpl
 				sql = sb.toString();
 
 				sql = StringUtil.replace(
-					sql, "[$PERMISSION_IDS$]",
+					sql, "[$PERMISSION_ID$]",
 					getPermissionIds(permissions, "Groups_Permissions"));
 				sql = StringUtil.replace(
-					sql, "[$GROUP_IDS$]",
+					sql, "[$GROUP_ID$]",
 					getGroupIds(groups, "Groups_Permissions"));
 
 				sb.setIndex(0);
@@ -163,7 +163,7 @@ public class PermissionFinderImpl
 			sql = sb.toString();
 
 			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
+				sql, "[$PERMISSION_ID$]",
 				getPermissionIds(permissions, "Roles_Permissions"));
 
 			sb.setIndex(0);
@@ -177,7 +177,7 @@ public class PermissionFinderImpl
 			sql = sb.toString();
 
 			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
+				sql, "[$PERMISSION_ID$]",
 				getPermissionIds(permissions, "Roles_Permissions"));
 
 			sb.setIndex(0);
@@ -191,7 +191,7 @@ public class PermissionFinderImpl
 			sql = sb.toString();
 
 			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
+				sql, "[$PERMISSION_ID$]",
 				getPermissionIds(permissions, "Users_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -259,10 +259,10 @@ public class PermissionFinderImpl
 				sql = sb.toString();
 
 				sql = StringUtil.replace(
-					sql, "[$PERMISSION_IDS$]",
+					sql, "[$PERMISSION_ID$]",
 					getPermissionIds(permissions, "Groups_Permissions"));
 				sql = StringUtil.replace(
-					sql, "[$GROUP_IDS$]",
+					sql, "[$GROUP_ID$]",
 					getGroupIds(groups, "Groups_Permissions"));
 
 				sb.setIndex(0);
@@ -280,11 +280,10 @@ public class PermissionFinderImpl
 				sql = sb.toString();
 
 				sql = StringUtil.replace(
-					sql, "[$PERMISSION_IDS$]",
+					sql, "[$PERMISSION_ID$]",
 					getPermissionIds(permissions, "Roles_Permissions"));
 				sql = StringUtil.replace(
-					sql, "[$ROLE_IDS$]",
-					getRoleIds(roles, "Roles_Permissions"));
+					sql, "[$ROLE_ID$]", getRoleIds(roles, "Roles_Permissions"));
 
 				sb.setIndex(0);
 
@@ -300,7 +299,7 @@ public class PermissionFinderImpl
 			sql = sb.toString();
 
 			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
+				sql, "[$PERMISSION_ID$]",
 				getPermissionIds(permissions, "Users_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -354,11 +353,10 @@ public class PermissionFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_GROUPS_PERMISSIONS);
 
 			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
+				sql, "[$PERMISSION_ID$]",
 				getPermissionIds(permissions, "Groups_Permissions"));
 			sql = StringUtil.replace(
-				sql, "[$GROUP_IDS$]",
-				getGroupIds(groups, "Groups_Permissions"));
+				sql, "[$GROUP_ID$]", getGroupIds(groups, "Groups_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -401,10 +399,10 @@ public class PermissionFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_GROUPS_ROLES);
 
 			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
+				sql, "[$PERMISSION_ID$]",
 				getPermissionIds(permissions, "Roles_Permissions"));
 			sql = StringUtil.replace(
-				sql, "[$GROUP_IDS$]", getGroupIds(groups, "Groups_Roles"));
+				sql, "[$GROUP_ID$]", getGroupIds(groups, "Groups_Roles"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -456,11 +454,10 @@ public class PermissionFinderImpl
 				String sql = CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS);
 
 				sql = StringUtil.replace(
-					sql, "[$PERMISSION_IDS$]",
+					sql, "[$PERMISSION_ID$]",
 					getPermissionIds(permissions, "Roles_Permissions"));
 				sql = StringUtil.replace(
-					sql, "[$ROLE_IDS$]",
-					getRoleIds(roles, "Roles_Permissions"));
+					sql, "[$ROLE_ID$]", getRoleIds(roles, "Roles_Permissions"));
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -503,7 +500,7 @@ public class PermissionFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_USER_GROUP_ROLE);
 
 			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
+				sql, "[$PERMISSION_ID$]",
 				getPermissionIds(permissions, "Roles_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -548,7 +545,7 @@ public class PermissionFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS);
 
 			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
+				sql, "[$PERMISSION_ID$]",
 				getPermissionIds(permissions, "Users_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -591,7 +588,7 @@ public class PermissionFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_USERS_ROLES);
 
 			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
+				sql, "[$PERMISSION_ID$]",
 				getPermissionIds(permissions, "Roles_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -642,7 +639,7 @@ public class PermissionFinderImpl
 				String sql = CustomSQLUtil.get(FIND_BY_A_R);
 
 				sql = StringUtil.replace(
-					sql, "[$RESOURCE_IDS$]", getResourceIds(resourceIds));
+					sql, "[$RESOURCE_ID$]", getResourceIds(resourceIds));
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -802,7 +799,7 @@ public class PermissionFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_U_R);
 
 			sql = StringUtil.replace(
-				sql, "[$ACTION_IDS$]", getActionIds(actionIds));
+				sql, "[$ACTION_ID$]", getActionIds(actionIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
