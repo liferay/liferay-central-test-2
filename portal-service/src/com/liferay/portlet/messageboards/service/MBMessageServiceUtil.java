@@ -48,6 +48,19 @@ public class MBMessageServiceUtil {
 			parentMessageId, subject, body, serviceContext);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
+		java.lang.String permissionClassName, long permissionClassPK,
+		java.lang.String className, long classPK, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addDiscussionMessage(permissionClassName,
+			permissionClassPK, className, classPK, threadId, parentMessageId,
+			subject, body, serviceContext);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long groupId, long categoryId, java.lang.String subject,
 		java.lang.String body,
@@ -81,6 +94,16 @@ public class MBMessageServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.deleteDiscussionMessage(groupId, className, classPK, messageId);
+	}
+
+	public static void deleteDiscussionMessage(long groupId,
+		java.lang.String permissionClassName, long permissionClassPK,
+		java.lang.String className, long classPK, long messageId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.deleteDiscussionMessage(groupId, permissionClassName,
+			permissionClassPK, className, classPK, messageId);
 	}
 
 	public static void deleteMessage(long messageId)
@@ -197,6 +220,19 @@ public class MBMessageServiceUtil {
 		return getService()
 				   .updateDiscussionMessage(className, classPK, messageId,
 			subject, body, serviceContext);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
+		java.lang.String permissionClassName, long permissionClassPK,
+		java.lang.String className, long classPK, long messageId,
+		java.lang.String subject, java.lang.String body,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateDiscussionMessage(permissionClassName,
+			permissionClassPK, className, classPK, messageId, subject, body,
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(

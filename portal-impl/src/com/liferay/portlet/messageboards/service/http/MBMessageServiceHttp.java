@@ -137,6 +137,87 @@ public class MBMessageServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
+		HttpPrincipal httpPrincipal, java.lang.String permissionClassName,
+		long permissionClassPK, java.lang.String className, long classPK,
+		long threadId, long parentMessageId, java.lang.String subject,
+		java.lang.String body,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = permissionClassName;
+
+			if (permissionClassName == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new LongWrapper(permissionClassPK);
+
+			Object paramObj2 = className;
+
+			if (className == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new LongWrapper(classPK);
+
+			Object paramObj4 = new LongWrapper(threadId);
+
+			Object paramObj5 = new LongWrapper(parentMessageId);
+
+			Object paramObj6 = subject;
+
+			if (subject == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = body;
+
+			if (body == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"addDiscussionMessage",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long groupId, long categoryId,
 		java.lang.String subject, java.lang.String body,
@@ -317,6 +398,62 @@ public class MBMessageServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"deleteDiscussionMessage",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteDiscussionMessage(HttpPrincipal httpPrincipal,
+		long groupId, java.lang.String permissionClassName,
+		long permissionClassPK, java.lang.String className, long classPK,
+		long messageId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = permissionClassName;
+
+			if (permissionClassName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(permissionClassPK);
+
+			Object paramObj3 = className;
+
+			if (className == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new LongWrapper(classPK);
+
+			Object paramObj5 = new LongWrapper(messageId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"deleteDiscussionMessage",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -1048,6 +1185,84 @@ public class MBMessageServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
+		HttpPrincipal httpPrincipal, java.lang.String permissionClassName,
+		long permissionClassPK, java.lang.String className, long classPK,
+		long messageId, java.lang.String subject, java.lang.String body,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = permissionClassName;
+
+			if (permissionClassName == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new LongWrapper(permissionClassPK);
+
+			Object paramObj2 = className;
+
+			if (className == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new LongWrapper(classPK);
+
+			Object paramObj4 = new LongWrapper(messageId);
+
+			Object paramObj5 = subject;
+
+			if (subject == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = body;
+
+			if (body == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj7 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"updateDiscussionMessage",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;

@@ -98,13 +98,20 @@ public class EditDiscussionAction extends PortletAction {
 
 	protected void deleteMessage(ActionRequest actionRequest) throws Exception {
 		long groupId = PortalUtil.getScopeGroupId(actionRequest);
+
+		String permissionClassName = ParamUtil.getString(
+			actionRequest, "permissionClassName");
+		long permissionClassPK = ParamUtil.getLong(
+			actionRequest, "permissionClassPK");
+
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessageServiceUtil.deleteDiscussionMessage(
-			groupId, className, classPK, messageId);
+			groupId, permissionClassName, permissionClassPK, className, classPK,
+			messageId);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
@@ -113,6 +120,11 @@ public class EditDiscussionAction extends PortletAction {
 
 	protected MBMessage updateMessage(ActionRequest actionRequest)
 		throws Exception {
+
+		String permissionClassName = ParamUtil.getString(
+			actionRequest, "permissionClassName");
+		long permissionClassPK = ParamUtil.getLong(
+			actionRequest, "permissionClassPK");
 
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
@@ -135,15 +147,16 @@ public class EditDiscussionAction extends PortletAction {
 			// Add message
 
 			message = MBMessageServiceUtil.addDiscussionMessage(
-				className, classPK, threadId, parentMessageId, subject, body,
-				serviceContext);
+				permissionClassName, permissionClassPK, className, classPK,
+				threadId, parentMessageId, subject, body, serviceContext);
 		}
 		else {
 
 			// Update message
 
 			message = MBMessageServiceUtil.updateDiscussionMessage(
-				className, classPK, messageId, subject, body, serviceContext);
+				permissionClassName, permissionClassPK, className, classPK,
+				messageId, subject, body, serviceContext);
 		}
 
 		return message;
