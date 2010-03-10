@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public interface WorkflowTask {
 
 	public String getName();
 
-	public Map<String, Object> getOptionalAttributes();
+	public Map<String, Serializable> getOptionalAttributes();
 
 	public long getWorkflowDefinitionId();
 

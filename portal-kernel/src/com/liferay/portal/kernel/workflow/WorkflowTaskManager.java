@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -33,17 +34,19 @@ public interface WorkflowTaskManager {
 
 	public WorkflowTask assignWorkflowTaskToRole(
 			long companyId, long userId, long workflowTaskId,
-			long roleId, String comment, Map<String, Object> context)
+			long roleId, String comment, Map<String, Serializable> context)
 		throws WorkflowException;
 
 	public WorkflowTask assignWorkflowTaskToUser(
 			long companyId, long userId, long workflowTaskId,
-			long assigneeUserId, String comment, Map<String, Object> context)
+			long assigneeUserId, String comment,
+			Map<String, Serializable> context)
 		throws WorkflowException;
 
 	public WorkflowTask completeWorkflowTask(
 			long companyId, long userId, long workflowTaskId,
-			String transitionName, String comment, Map<String, Object> context)
+			String transitionName, String comment,
+			Map<String, Serializable> context)
 		throws WorkflowException;
 
 	public List<String> getNextTransitionNames(

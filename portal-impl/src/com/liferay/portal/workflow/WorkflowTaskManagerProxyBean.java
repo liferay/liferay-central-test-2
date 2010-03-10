@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -35,21 +36,23 @@ public class WorkflowTaskManagerProxyBean
 
 	public WorkflowTask assignWorkflowTaskToRole(
 		long companyId, long userId, long workflowTaskId,
-		long roleId, String comment, Map<String, Object> context) {
+		long roleId, String comment, Map<String, Serializable> context) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowTask assignWorkflowTaskToUser(
 		long companyId, long userId, long workflowTaskId,
-		long assigneeUserId, String comment, Map<String, Object> context) {
+		long assigneeUserId, String comment,
+		Map<String, Serializable> context) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowTask completeWorkflowTask(
 		long companyId, long userId, long workflowTaskId,
-		String transitionName, String comment, Map<String, Object> context) {
+		String transitionName, String comment,
+		Map<String, Serializable> context) {
 
 		throw new UnsupportedOperationException();
 	}

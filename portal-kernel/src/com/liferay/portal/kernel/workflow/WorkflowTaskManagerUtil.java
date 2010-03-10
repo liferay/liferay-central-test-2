@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.workflow;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class WorkflowTaskManagerUtil {
 
 	public static WorkflowTask assignWorkflowTaskToRole(
 			long companyId, long userId, long workflowTaskId,
-			long roleId, String comment, Map<String, Object> context)
+			long roleId, String comment, Map<String, Serializable> context)
 		throws WorkflowException {
 
 		return _workflowTaskManager.assignWorkflowTaskToRole(
@@ -39,7 +40,8 @@ public class WorkflowTaskManagerUtil {
 
 	public static WorkflowTask assignWorkflowTaskToUser(
 			long companyId, long userId, long workflowTaskId,
-			long assigneeUserId, String comment, Map<String, Object> context)
+			long assigneeUserId, String comment,
+			Map<String, Serializable> context)
 		throws WorkflowException {
 
 		return _workflowTaskManager.assignWorkflowTaskToUser(
@@ -49,7 +51,8 @@ public class WorkflowTaskManagerUtil {
 
 	public static WorkflowTask completeWorkflowTask(
 			long companyId, long userId, long workflowTaskId,
-			String transitionName, String comment, Map<String, Object> context)
+			String transitionName, String comment,
+			Map<String, Serializable> context)
 		throws WorkflowException {
 
 		return _workflowTaskManager.completeWorkflowTask(

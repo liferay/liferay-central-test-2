@@ -60,7 +60,7 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 		return _name;
 	}
 
-	public Map<String, Object> getOptionalAttributes() {
+	public Map<String, Serializable> getOptionalAttributes() {
 		return _optionalAttributes;
 	}
 
@@ -133,7 +133,9 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 		_name = name;
 	}
 
-	public void setOptionalAttributes(Map<String, Object> optionalAttributes) {
+	public void setOptionalAttributes(
+		Map<String, Serializable> optionalAttributes) {
+
 		_optionalAttributes = optionalAttributes;
 	}
 
@@ -166,7 +168,7 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 	private String _description;
 	private Date _dueDate;
 	private String _name;
-	private Map<String, Object> _optionalAttributes;
+	private Map<String, Serializable> _optionalAttributes;
 	private long _workflowDefinitionId;
 	private String _workflowDefinitionName;
 	private int _workflowDefinitionVersion;
