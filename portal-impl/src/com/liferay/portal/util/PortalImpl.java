@@ -573,9 +573,7 @@ public class PortalImpl implements Portal {
 					!ArrayUtil.contains(allowedDomains, domain)) {
 
 					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Redirect URL " + url + " is not in the " +
-								"redirect.url.domains.allowed list.");
+						_log.debug("Redirect URL " + url + " is not allowed");
 					}
 
 					url = null;
@@ -597,8 +595,7 @@ public class PortalImpl implements Portal {
 
 						if (_log.isDebugEnabled()) {
 							_log.debug(
-								"Redirect URL " + url + " is not in the " +
-									"redirect.url.ips.allowed list.");
+								"Redirect URL " + url + " is not allowed");
 						}
 
 						url = null;
@@ -608,8 +605,7 @@ public class PortalImpl implements Portal {
 		}
 		catch (UnknownHostException uhe) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Redirect URL " + url + " IP address could not be found.");
+				_log.debug("Unable to determine IP for redirect URL " + url);
 			}
 
 			url = null;
