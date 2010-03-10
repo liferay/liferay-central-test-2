@@ -52,6 +52,18 @@ public class QueryPos {
 		}
 	}
 
+	public void add(Boolean[] values) {
+		add(values, _DEFAULT_ARRAY_COUNT);
+	}
+
+	public void add(Boolean[] values, int count) {
+		for (int i = 0; i < values.length; i++) {
+			for (int j = 0; j < count; j++) {
+				add(values[i]);
+			}
+		}
+	}
+
 	public void add(double value) {
 		_query.setDouble(_pos++, value);
 	}
@@ -70,6 +82,18 @@ public class QueryPos {
 	}
 
 	public void add(double[] values, int count) {
+		for (int i = 0; i < values.length; i++) {
+			for (int j = 0; j < count; j++) {
+				add(values[i]);
+			}
+		}
+	}
+
+	public void add(Double[] values) {
+		add(values, _DEFAULT_ARRAY_COUNT);
+	}
+
+	public void add(Double[] values, int count) {
 		for (int i = 0; i < values.length; i++) {
 			for (int j = 0; j < count; j++) {
 				add(values[i]);
@@ -102,6 +126,18 @@ public class QueryPos {
 		}
 	}
 
+	public void add(Float[] values) {
+		add(values, _DEFAULT_ARRAY_COUNT);
+	}
+
+	public void add(Float[] values, int count) {
+		for (int i = 0; i < values.length; i++) {
+			for (int j = 0; j < count; j++) {
+				add(values[i]);
+			}
+		}
+	}
+
 	public void add(int value) {
 		_query.setInteger(_pos++, value);
 	}
@@ -127,6 +163,18 @@ public class QueryPos {
 		}
 	}
 
+	public void add(Integer[] values) {
+		add(values, _DEFAULT_ARRAY_COUNT);
+	}
+
+	public void add(Integer[] values, int count) {
+		for (int i = 0; i < values.length; i++) {
+			for (int j = 0; j < count; j++) {
+				add(values[i]);
+			}
+		}
+	}
+
 	public void add(long value) {
 		_query.setLong(_pos++, value);
 	}
@@ -145,6 +193,18 @@ public class QueryPos {
 	}
 
 	public void add(long[] values, int count) {
+		for (int i = 0; i < values.length; i++) {
+			for (int j = 0; j < count; j++) {
+				add(values[i]);
+			}
+		}
+	}
+
+	public void add(Long[] values) {
+		add(values, _DEFAULT_ARRAY_COUNT);
+	}
+
+	public void add(Long[] values, int count) {
 		for (int i = 0; i < values.length; i++) {
 			for (int j = 0; j < count; j++) {
 				add(values[i]);
@@ -177,6 +237,18 @@ public class QueryPos {
 		}
 	}
 
+	public void add(Short[] values) {
+		add(values, _DEFAULT_ARRAY_COUNT);
+	}
+
+	public void add(Short[] values, int count) {
+		for (int i = 0; i < values.length; i++) {
+			for (int j = 0; j < count; j++) {
+				add(values[i]);
+			}
+		}
+	}
+
 	public void add(String value) {
 		_query.setString(_pos++, value);
 	}
@@ -195,6 +267,18 @@ public class QueryPos {
 
 	public void add(Timestamp value) {
 		_query.setTimestamp(_pos++, value);
+	}
+
+	public void add(Timestamp[] values) {
+		add(values, _DEFAULT_ARRAY_COUNT);
+	}
+
+	public void add(Timestamp[] values, int count) {
+		for (int i = 0; i < values.length; i++) {
+			for (int j = 0; j < count; j++) {
+				add(values[i]);
+			}
+		}
 	}
 
 	public int getPos() {
