@@ -42,11 +42,11 @@ headerNames.add(StringPool.BLANK);
 <%
 RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj());
+int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypesObj());
 
 searchContainer.setTotal(total);
 
-List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypesObj(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 searchContainer.setResults(results);
 

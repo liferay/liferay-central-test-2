@@ -19,7 +19,6 @@ import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutSetException;
-import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
@@ -340,17 +339,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			layoutSetLocalService.deleteLayoutSet(groupId, false);
 		}
 		catch (NoSuchLayoutSetException nslse) {
-		}
-
-		// Role
-
-		try {
-			Role role = roleLocalService.getGroupRole(
-				group.getCompanyId(), groupId);
-
-			roleLocalService.deleteRole(role.getRoleId());
-		}
-		catch (NoSuchRoleException nsre) {
 		}
 
 		// Group roles

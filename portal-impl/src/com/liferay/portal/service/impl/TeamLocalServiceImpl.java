@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.base.TeamLocalServiceBaseImpl;
@@ -70,6 +72,12 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 			user.getCompanyId(), groupId, userId, Team.class.getName(),
 			team.getTeamId(), false, true, true);
 
+		// Role
+
+		roleLocalService.addRole(
+			userId, user.getCompanyId(), String.valueOf(teamId), null, null,
+			RoleConstants.TYPE_EXTERNAL, Team.class.getName(), teamId);
+
 		return team;
 	}
 
@@ -87,6 +95,12 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		resourceLocalService.deleteResource(
 			team.getCompanyId(), Team.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, team.getTeamId());
+
+		// Role
+
+		Role role = team.getRole();
+
+		roleLocalService.deleteRole(role.getRoleId());
 	}
 
 	public void deleteTeams(long groupId)

@@ -194,12 +194,16 @@ public class RoleFinderImpl
 	}
 
 	public int countByC_N_D_T(
-			long companyId, String name, String description, Integer type,
+			long companyId, String name, String description, Integer[] types,
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
+
+		if (types == null) {
+			types = new Integer[0];
+		}
 
 		Session session = null;
 
@@ -208,10 +212,7 @@ public class RoleFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D_T);
 
-			if (type == null) {
-				sql = StringUtil.replace(sql, "AND (Role_.type_ = ?)", "");
-			}
-
+			sql = StringUtil.replace(sql, "AND ([$TYPE$])", getTypes(types));
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 
@@ -227,10 +228,7 @@ public class RoleFinderImpl
 			qPos.add(name);
 			qPos.add(description);
 			qPos.add(description);
-
-			if (type != null) {
-				qPos.add(type);
-			}
+			qPos.add(types);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -434,13 +432,17 @@ public class RoleFinderImpl
 	}
 
 	public List<Role> findByC_N_D_T(
-			long companyId, String name, String description, Integer type,
+			long companyId, String name, String description, Integer[] types,
 			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
+
+		if (types == null) {
+			types = new Integer[0];
+		}
 
 		Session session = null;
 
@@ -449,10 +451,7 @@ public class RoleFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_D_T);
 
-			if (type == null) {
-				sql = StringUtil.replace(sql, "AND (Role_.type_ = ?)", "");
-			}
-
+			sql = StringUtil.replace(sql, "AND ([$TYPE$])", getTypes(types));
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
@@ -469,10 +468,7 @@ public class RoleFinderImpl
 			qPos.add(name);
 			qPos.add(description);
 			qPos.add(description);
-
-			if (type != null) {
-				qPos.add(type);
-			}
+			qPos.add(types);
 
 			return (List<Role>)QueryUtil.list(q, getDialect(), start, end);
 		}
@@ -600,6 +596,24 @@ public class RoleFinderImpl
 		}
 
 		return join;
+	}
+
+	protected String getTypes(Integer[] types) {
+		if (types.length == 0) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(types.length * 2 - 1);
+
+		for (int i = 0; i < types.length; i++) {
+			sb.append("Role_.type_ = ?");
+
+			if ((i + 1) < types.length) {
+				sb.append(" OR ");
+			}
+		}
+
+		return sb.toString();
 	}
 
 	protected String getWhere(LinkedHashMap<String, Object> params) {

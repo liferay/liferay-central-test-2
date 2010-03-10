@@ -34,6 +34,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
@@ -75,14 +76,14 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		className = GetterUtil.getString(className);
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		validate(0, companyId, name);
-
 		long roleId = counterLocalService.increment();
 
 		if ((classNameId <= 0) || className.equals(Role.class.getName())) {
 			classNameId = PortalUtil.getClassNameId(Role.class);
 			classPK = roleId;
 		}
+
+		validate(0, companyId, classNameId, name);
 
 		Role role = rolePersistence.create(roleId);
 
@@ -244,14 +245,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return role;
 	}
 
-	public Role getGroupRole(long companyId, long groupId)
-		throws PortalException, SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(Group.class);
-
-		return rolePersistence.findByC_C_C(companyId, classNameId, groupId);
-	}
-
 	public List<Role> getGroupRoles(long groupId) throws SystemException {
 		return groupPersistence.getRoles(groupId);
 	}
@@ -309,6 +302,14 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public int getSubtypeRolesCount(String subtype) throws SystemException {
 		return rolePersistence.countBySubtype(subtype);
+	}
+
+	public Role getTeamRole(long companyId, long teamId)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(Team.class);
+
+		return rolePersistence.findByC_C_C(companyId, classNameId, teamId);
 	}
 
 	public List<Role> getUserGroupGroupRoles(long userId, long groupId)
@@ -398,41 +399,41 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public List<Role> search(
-			long companyId, String name, String description, Integer type,
+			long companyId, String name, String description, Integer[] types,
 			int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return search(
-			companyId, name, description, type,
+			companyId, name, description, types,
 			new LinkedHashMap<String, Object>(), start, end, obc);
 	}
 
 	public List<Role> search(
-			long companyId, String name, String description, Integer type,
+			long companyId, String name, String description, Integer[] types,
 			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return roleFinder.findByC_N_D_T(
-			companyId, name, description, type, params, start, end, obc);
+			companyId, name, description, types, params, start, end, obc);
 	}
 
 	public int searchCount(
-			long companyId, String name, String description, Integer type)
+			long companyId, String name, String description, Integer[] types)
 		throws SystemException {
 
 		return searchCount(
-			companyId, name, description, type,
+			companyId, name, description, types,
 			new LinkedHashMap<String, Object>());
 	}
 
 	public int searchCount(
-			long companyId, String name, String description, Integer type,
+			long companyId, String name, String description, Integer[] types,
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		return roleFinder.countByC_N_D_T(
-			companyId, name, description, type, params);
+			companyId, name, description, types, params);
 	}
 
 	public void setUserRoles(long userId, long[] roleIds)
@@ -470,7 +471,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		Role role = rolePersistence.findByPrimaryKey(roleId);
 
-		validate(roleId, role.getCompanyId(), name);
+		validate(roleId, role.getCompanyId(), role.getClassNameId(), name);
 
 		if (PortalUtil.isSystemRole(role.getName())) {
 			name = role.getName();
@@ -512,12 +513,14 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		_systemRolesMap.put(companyId + name, role);
 	}
 
-	protected void validate(long roleId, long companyId, String name)
+	protected void validate(
+			long roleId, long companyId, long classNameId, String name)
 		throws PortalException, SystemException {
 
-		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||
-			(name.indexOf(StringPool.COMMA) != -1) ||
-			(name.indexOf(StringPool.STAR) != -1)) {
+		if ((classNameId == PortalUtil.getClassNameId(Role.class)) &&
+			((Validator.isNull(name)) || (Validator.isNumber(name)) ||
+			 (name.indexOf(StringPool.COMMA) != -1) ||
+			 (name.indexOf(StringPool.STAR) != -1))) {
 
 			throw new RoleNameException();
 		}

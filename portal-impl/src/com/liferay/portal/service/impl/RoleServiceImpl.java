@@ -66,12 +66,6 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		roleLocalService.deleteRole(roleId);
 	}
 
-	public Role getGroupRole(long companyId, long groupId)
-		throws PortalException, SystemException {
-
-		return roleLocalService.getGroupRole(companyId, groupId);
-	}
-
 	public List<Role> getGroupRoles(long groupId) throws SystemException {
 		return roleLocalService.getGroupRoles(groupId);
 	}

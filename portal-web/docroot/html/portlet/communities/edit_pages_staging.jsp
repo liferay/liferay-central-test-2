@@ -107,7 +107,7 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 			<%
 			int roleType = liveGroup.isCommunity() ? RoleConstants.TYPE_COMMUNITY : RoleConstants.TYPE_ORGANIZATION;
 
-			List<Role> workflowRoles = RoleLocalServiceUtil.search(company.getCompanyId(), null, null, new Integer(roleType), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+			List<Role> workflowRoles = RoleLocalServiceUtil.search(company.getCompanyId(), null, null, new Integer[] {roleType}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 			for (int i = 1; i <= workflowStages; i++) {
 			%>

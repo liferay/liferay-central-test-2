@@ -61,6 +61,8 @@ public class RoleConstants {
 
 	public static final String TYPE_COMMUNITY_LABEL = "community";
 
+	public static final int TYPE_EXTERNAL = 4;
+
 	public static final int TYPE_ORGANIZATION = 3;
 
 	public static final String TYPE_ORGANIZATION_LABEL = "organization";

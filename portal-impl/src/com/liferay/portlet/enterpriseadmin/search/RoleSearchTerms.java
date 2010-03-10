@@ -16,6 +16,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.RoleConstants;
 
 import javax.portlet.PortletRequest;
 
@@ -34,12 +35,15 @@ public class RoleSearchTerms extends RoleDisplayTerms {
 		type = ParamUtil.getInteger(portletRequest, TYPE);
 	}
 
-	public Integer getTypeObj() {
-		if (type == 0) {
-			return null;
+	public Integer[] getTypesObj() {
+		if ((type == RoleConstants.TYPE_COMMUNITY) ||
+			(type == RoleConstants.TYPE_ORGANIZATION) ||
+			(type == RoleConstants.TYPE_REGULAR)) {
+
+			return new Integer[] {type};
 		}
 		else {
-			return new Integer(type);
+			return new Integer[0];
 		}
 	}
 

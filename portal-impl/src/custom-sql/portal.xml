@@ -932,7 +932,7 @@
 				(Role_.companyId = ?) AND
 				(Role_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ROLE$]) AND
 				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
-				(lower(Role_.description) LIKE ? OR ? IS NULL) AND (Role_.type_ = ?)
+				(lower(Role_.description) LIKE ? OR ? IS NULL) AND ([$TYPE$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.findBySystem">
@@ -1045,7 +1045,7 @@
 				(Role_.companyId = ?) AND
 				(Role_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ROLE$]) AND
 				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
-				(lower(Role_.description) LIKE ? OR ? IS NULL) AND (Role_.type_ = ?)
+				(lower(Role_.description) LIKE ? OR ? IS NULL) AND ([$TYPE$])
 			ORDER BY
 				Role_.name ASC
 		]]>

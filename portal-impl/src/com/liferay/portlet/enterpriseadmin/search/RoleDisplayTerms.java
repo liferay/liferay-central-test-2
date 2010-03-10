@@ -17,6 +17,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.RoleConstants;
 
 import javax.portlet.PortletRequest;
 
@@ -50,11 +51,22 @@ public class RoleDisplayTerms extends DisplayTerms {
 	}
 
 	public int getType() {
-		return type;
+		if ((type == RoleConstants.TYPE_COMMUNITY) ||
+			(type == RoleConstants.TYPE_ORGANIZATION) ||
+			(type == RoleConstants.TYPE_REGULAR)) {
+
+			return type;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public String getTypeString() {
-		if (type != 0) {
+		if ((type == RoleConstants.TYPE_COMMUNITY) ||
+			(type == RoleConstants.TYPE_ORGANIZATION) ||
+			(type == RoleConstants.TYPE_REGULAR)) {
+
 			return String.valueOf(type);
 		}
 		else {

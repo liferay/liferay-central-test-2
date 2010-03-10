@@ -51,75 +51,72 @@ searchContainer.setRowChecker(new UserGroupRoleRoleChecker(renderResponse, selUs
 	searchContainer="<%= searchContainer %>"
 />
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+<%
+RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-	<%
-	RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
+List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer[] {RoleConstants.TYPE_COMMUNITY}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
-	List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleConstants.TYPE_COMMUNITY), QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
+roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
 
-	roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+int total = roles.size();
 
-	int total = roles.size();
+searchContainer.setTotal(total);
 
-	searchContainer.setTotal(total);
+List<Role> results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
 
-	List<Role> results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
+searchContainer.setResults(results);
 
-	searchContainer.setResults(results);
+PortletURL updateRoleAssignmentsURL = renderResponse.createRenderURL();
 
-	PortletURL updateRoleAssignmentsURL = renderResponse.createRenderURL();
+updateRoleAssignmentsURL.setParameter("struts_action", "/communities/edit_community_assignments");
+updateRoleAssignmentsURL.setParameter("tabs1", tabs1);
+updateRoleAssignmentsURL.setParameter("tabs2", tabs2);
+updateRoleAssignmentsURL.setParameter("redirect", redirect);
+updateRoleAssignmentsURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
+updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+%>
 
-	updateRoleAssignmentsURL.setParameter("struts_action", "/communities/edit_community_assignments");
-	updateRoleAssignmentsURL.setParameter("tabs1", tabs1);
-	updateRoleAssignmentsURL.setParameter("tabs2", tabs2);
-	updateRoleAssignmentsURL.setParameter("redirect", redirect);
-	updateRoleAssignmentsURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
-	updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-	%>
+<div class="separator"><!-- --></div>
 
-	<div class="separator"><!-- --></div>
+<%
+String taglibOnClick = renderResponse.getNamespace() + "updateUserGroupRole('" + updateRoleAssignmentsURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+%>
 
-	<%
-	String taglibOnClick = renderResponse.getNamespace() + "updateUserGroupRole('" + updateRoleAssignmentsURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
-	%>
+<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
 
-	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
+<br /><br />
 
-	<br /><br />
+<%
+List resultRows = searchContainer.getResultRows();
 
-	<%
-	List resultRows = searchContainer.getResultRows();
+for (int i = 0; i < results.size(); i++) {
+	Role role = results.get(i);
 
-	for (int i = 0; i < results.size(); i++) {
-		Role role = results.get(i);
+	role = role.toEscapedModel();
 
-		role = role.toEscapedModel();
+	ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
-		ResultRow row = new ResultRow(role, role.getRoleId(), i);
+	// Name
 
-		// Name
+	row.addText(role.getTitle(locale));
 
-		row.addText(role.getTitle(locale));
+	// Type
 
-		// Type
+	row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()));
 
-		row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()));
+	// Description
 
-		// Description
+	row.addText(role.getDescription());
 
-		row.addText(role.getDescription());
+	// CSS
 
-		// CSS
+	row.setClassName(EnterpriseAdminUtil.getCssClassName(role));
+	row.setClassHoverName(EnterpriseAdminUtil.getCssClassName(role));
 
-		row.setClassName(EnterpriseAdminUtil.getCssClassName(role));
-		row.setClassHoverName(EnterpriseAdminUtil.getCssClassName(role));
+	// Add result row
 
-		// Add result row
+	resultRows.add(row);
+}
+%>
 
-		resultRows.add(row);
-	}
-	%>
-
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</c:if>
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

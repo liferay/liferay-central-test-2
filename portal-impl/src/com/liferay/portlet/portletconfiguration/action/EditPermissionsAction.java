@@ -25,12 +25,14 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
@@ -242,9 +244,11 @@ public class EditPermissionsAction extends EditConfigurationAction {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 			updateRolePermissions_5(actionRequest);
+			updateTeamPermissions_5(actionRequest);
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			updateRolePermissions_6(actionRequest);
+			updateTeamPermissions_6(actionRequest);
 		}
 		else {
 			updateRolePermissions_1to4(actionRequest);
@@ -314,6 +318,62 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			ResourcePermissionServiceUtil.setIndividualResourcePermissions(
 				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
 				selResource, resourcePrimKey, roleId, actionIds);
+		}
+	}
+
+	protected void updateTeamPermissions_5(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
+		long[] teamIds = StringUtil.split(
+			ParamUtil.getString(
+				actionRequest, "teamsSearchContainerPrimaryKeys"), 0L);
+
+		for (long teamId : teamIds) {
+			Role role = RoleLocalServiceUtil.getTeamRole(teamId);
+
+			String[] actionIds = getActionIds(actionRequest, teamId);
+
+			PermissionServiceUtil.setRolePermissions(
+				role.getRoleId(), themeDisplay.getScopeGroupId(), actionIds,
+				resourceId);
+		}
+	}
+
+	protected void updateTeamPermissions_6(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+		String modelResource = ParamUtil.getString(
+			actionRequest, "modelResource");
+		long[] teamIds = StringUtil.split(
+			ParamUtil.getString(
+				actionRequest, "teamsSearchContainerPrimaryKeys"), 0L);
+
+		String selResource = portletResource;
+
+		if (Validator.isNotNull(modelResource)) {
+			selResource = modelResource;
+		}
+
+		String resourcePrimKey = ParamUtil.getString(
+			actionRequest, "resourcePrimKey");
+
+		for (long teamId : teamIds) {
+			Role role = RoleLocalServiceUtil.getTeamRole(teamId);
+
+			String[] actionIds = getActionIds(actionRequest, teamId);
+
+			ResourcePermissionServiceUtil.setIndividualResourcePermissions(
+				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
+				selResource, resourcePrimKey, role.getRoleId(), actionIds);
 		}
 	}
 
