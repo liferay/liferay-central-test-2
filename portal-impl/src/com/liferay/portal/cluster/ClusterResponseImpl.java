@@ -63,14 +63,14 @@ public class ClusterResponseImpl implements ClusterResponse {
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 
-		sb.append("{uuid=");
-		sb.append(_uuid);
-		sb.append(", result=");
-		sb.append(_result);
-		sb.append(", exception=");
+		sb.append("{exception=");
 		sb.append(_exception);
 		sb.append(", multicast=");
 		sb.append(_multicast);
+		sb.append(", result=");
+		sb.append(_result);
+		sb.append(", uuid=");
+		sb.append(_uuid);
 		sb.append("}");
 
 		return sb.toString();

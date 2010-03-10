@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.uuid.PortalUUID;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -64,11 +63,11 @@ public class ClusterExecutorImpl
 			return null;
 		}
 
-		ClusterRequest request = new ClusterRequestImpl();
+		ClusterRequest clusterRequest = new ClusterRequestImpl();
 
-		request.setMulticast(true);
-		request.setPayload(methodWrapper);
-		request.setUuid(_portalUuid.generate());
+		clusterRequest.setMulticast(true);
+		clusterRequest.setPayload(methodWrapper);
+		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
 		Map<Address, Future<?>> results = new HashMap<Address, Future<?>>();
 
@@ -84,14 +83,15 @@ public class ClusterExecutorImpl
 			}
 		}
 
-		_multicastResultMap.put(request.getUuid(), results);
+		_multicastResultMap.put(clusterRequest.getUuid(), results);
 
 		try {
-			_controlChannel.send(null, null, request);
+			_controlChannel.send(null, null, clusterRequest);
 		}
 		catch (ChannelException ce) {
-			_log.error("Unable to send unicast message:" + request, ce);
+			_log.error("Unable to send unicast message " + clusterRequest, ce);
 		}
+
 		return results;
 	}
 
@@ -103,30 +103,30 @@ public class ClusterExecutorImpl
 		}
 
 		org.jgroups.Address jGroupsAddress =
-			(org.jgroups.Address) address.getRealAddress();
+			(org.jgroups.Address)address.getRealAddress();
 
-		ClusterRequest request = new ClusterRequestImpl();
+		ClusterRequest clusterRequest = new ClusterRequestImpl();
 
-		request.setMulticast(false);
-		request.setPayload(methodWrapper);
-		request.setUuid(_portalUuid.generate());
+		clusterRequest.setMulticast(false);
+		clusterRequest.setPayload(methodWrapper);
+		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
 		if (_shortcutLocalMethod && address.equals(getLocalControlAddress())) {
 			return runLocalMethod(methodWrapper);
 		}
 
-		FutureResult<Object> result = new FutureResult<Object>();
+		FutureResult<Object> futureResult = new FutureResult<Object>();
 
-		_unicastResultMap.put(request.getUuid(), result);
+		_unicastResultMap.put(clusterRequest.getUuid(), futureResult);
 
 		try {
-			_controlChannel.send(jGroupsAddress, null, request);
+			_controlChannel.send(jGroupsAddress, null, clusterRequest);
 		}
 		catch (ChannelException ce) {
-			_log.error("Unable to send unicast message:" + request, ce);
+			_log.error("Unable to send unicast message " + clusterRequest, ce);
 		}
 
-		return result;
+		return futureResult;
 	}
 
 	public List<Address> getControlAddresses() {
@@ -157,43 +157,40 @@ public class ClusterExecutorImpl
 		Properties controlProperties = PropsUtil.getProperties(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL, false);
 
-		String controlProperty =
-			controlProperties.getProperty(
+		String controlProperty = controlProperties.getProperty(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL);
 
-		ClusterInvokeReceiver clusterInvokeReceiver =
-			new ClusterInvokeReceiver(_multicastResultMap, _unicastResultMap);
+		ClusterInvokeReceiver clusterInvokeReceiver = new ClusterInvokeReceiver(
+			_multicastResultMap, _unicastResultMap);
 
-		_controlChannel = createChannel(controlProperty, clusterInvokeReceiver,
-			_LIFERAY_CONTROL_CHANNEL);
+		_controlChannel = createChannel(
+			controlProperty, clusterInvokeReceiver, _LIFERAY_CONTROL_CHANNEL);
 
 		clusterInvokeReceiver.setChannel(_controlChannel);
 	}
 
 	protected FutureResult<Object> runLocalMethod(MethodWrapper methodWrapper) {
+		FutureResult<Object> futureResult = new FutureResult<Object>();
 
-		FutureResult<Object> localResult = new FutureResult<Object>();
 		try {
-			Object returnValue =
-				MethodInvoker.invoke(methodWrapper);
+			Object returnValue = MethodInvoker.invoke(methodWrapper);
 
 			if (returnValue instanceof Serializable) {
-				localResult.setResult(returnValue);
+				futureResult.setResult(returnValue);
 			}
 			else if (returnValue != null) {
-				localResult.setException(
-					new ClusterException(
-					"Return value is not Serializable"));
+				futureResult.setException(
+					new ClusterException("Return value is not serializable"));
 			}
 			else {
-				localResult.setResult(null);
+				futureResult.setResult(null);
 			}
 		}
 		catch (Exception e) {
-			localResult.setException(e);
+			futureResult.setException(e);
 		}
 
-		return localResult;
+		return futureResult;
 	}
 
 	private static final String _LIFERAY_CONTROL_CHANNEL =
@@ -202,11 +199,10 @@ public class ClusterExecutorImpl
 	private static Log _log = LogFactoryUtil.getLog(ClusterExecutorImpl.class);
 
 	private JChannel _controlChannel;
-	private final Map<String, Map<Address, Future<?>>> _multicastResultMap =
+	private Map<String, Map<Address, Future<?>>> _multicastResultMap =
 		new ConcurrentHashMap<String, Map<Address, Future<?>>>();
-	private PortalUUID _portalUuid = PortalUUIDUtil.getPortalUUID();
 	private boolean _shortcutLocalMethod;
-	private final Map<String, Future<?>> _unicastResultMap =
+	private Map<String, Future<?>> _unicastResultMap =
 		new ConcurrentHashMap<String, Future<?>>();
 
 }

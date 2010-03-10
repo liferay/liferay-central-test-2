@@ -60,34 +60,33 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 
 		if (obj == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Content of message is null");
+				_log.warn("Message content is null");
 			}
+
 			return;
 		}
 
 		if (localAddress.equals(sourceAddress) &&
 			ClusterExecutorUtil.isShortcutLocalMethod()) {
+
 			return;
 		}
 
 		if (obj instanceof ClusterRequest) {
-			ClusterRequest clusterRequest = (ClusterRequest) obj;
-
-			String uuid = clusterRequest.getUuid();
+			ClusterRequest clusterRequest = (ClusterRequest)obj;
 
 			ClusterResponse clusterResponse = new ClusterResponseImpl();
 
-			clusterResponse.setUuid(uuid);
-
 			clusterResponse.setMulticast(clusterRequest.isMulticast());
+			clusterResponse.setUuid(clusterRequest.getUuid());
 
 			Object payload = clusterRequest.getPayload();
 
 			if (payload instanceof MethodWrapper) {
-				MethodWrapper methodWrapper = (MethodWrapper) payload;
+				MethodWrapper methodWrapper = (MethodWrapper)payload;
+
 				try {
-					Object returnValue =
-						MethodInvoker.invoke(methodWrapper);
+					Object returnValue = MethodInvoker.invoke(methodWrapper);
 
 					if (returnValue instanceof Serializable) {
 						clusterResponse.setResult(returnValue);
@@ -95,7 +94,7 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 					else if (returnValue != null) {
 						clusterResponse.setException(
 							new ClusterException(
-							"Return value is not Serializable"));
+								"Return value is not serializable"));
 					}
 				}
 				catch (Exception e) {
@@ -105,7 +104,8 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 			else {
 				clusterResponse.setException(
 					new ClusterException(
-					"Payload is not a MethodWrapper"));
+						"Payload is not of type " +
+							MethodWrapper.class.getName()));
 			}
 
 			try {
@@ -113,60 +113,61 @@ public class ClusterInvokeReceiver extends ReceiverAdapter {
 			}
 			catch (ChannelException ce) {
 				_log.error(
-					"Unable to send response message "
-					+ clusterResponse, ce);
+					"Unable to send response message " + clusterResponse, ce);
 			}
 		}
 		else if (obj instanceof ClusterResponse) {
-			ClusterResponse clusterResponse =
-				(ClusterResponse) obj;
+			ClusterResponse clusterResponse = (ClusterResponse)obj;
 
 			String uuid = clusterResponse.getUuid();
 
-			if (clusterResponse.isMulticast()
-				&& _multicastResultMap.containsKey(uuid)) {
+			if (clusterResponse.isMulticast() &&
+				_multicastResultMap.containsKey(uuid)) {
 
 				Map<Address, Future<?>> results = _multicastResultMap.get(uuid);
+
 				Address address = new AddressImpl(sourceAddress);
 
 				if (results.containsKey(address)) {
-					FutureResult<Object> v =
-						(FutureResult<Object>) results.get(address);
+					FutureResult<Object> futureResult =
+						(FutureResult<Object>)results.get(address);
 
 					if (clusterResponse.hasException()) {
-						v.setException(clusterResponse.getException());
+						futureResult.setException(
+							clusterResponse.getException());
 					}
 					else {
-						v.setResult(clusterResponse.getResult());
+						futureResult.setResult(clusterResponse.getResult());
 					}
 				}
 				else {
-					_log.error("New node comming: " + sourceAddress);
+					_log.error("New node coming from " + sourceAddress);
 				}
 			}
 			else if (_unicastResultMap.containsKey(uuid)) {
-				FutureResult<Object> value =
-					(FutureResult<Object>) _unicastResultMap.get(uuid);
+				FutureResult<Object> futureResult =
+					(FutureResult<Object>)_unicastResultMap.get(uuid);
 
 				if (clusterResponse.hasException()) {
-					value.setException(clusterResponse.getException());
+					futureResult.setException(clusterResponse.getException());
 				}
 				else {
-					value.setResult(clusterResponse.getResult());
+					futureResult.setResult(clusterResponse.getResult());
 				}
 			}
 			else {
-				_log.error(
-					"Unknow uuid: " + uuid + " from:" + sourceAddress);
+				_log.error("Unknow UUID " + uuid + " from " + sourceAddress);
 			}
 		}
 		else {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Type of content of message is wrong");
+				_log.warn(
+					"Unable to process message content of type " +
+						obj.getClass().getName());
 			}
+
 			return;
 		}
-
 	}
 
 	public void setChannel(JChannel channel) {

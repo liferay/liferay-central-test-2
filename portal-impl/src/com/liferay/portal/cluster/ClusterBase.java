@@ -53,9 +53,9 @@ public abstract class ClusterBase {
 			return;
 		}
 
-		if (_initialized == false) {
-			if (OSDetector.isUnix() && IPDetector.isSupportsV6()
-				&& !IPDetector.isPrefersV4() && _log.isWarnEnabled()) {
+		if (!_initialized) {
+			if (OSDetector.isUnix() && IPDetector.isSupportsV6() &&
+				!IPDetector.isPrefersV4() && _log.isWarnEnabled()) {
 
 				StringBundler sb = new StringBundler(4);
 
@@ -96,7 +96,7 @@ public abstract class ClusterBase {
 	}
 
 	protected JChannel createChannel(
-		String properties, Receiver receiver, String clusterName)
+			String properties, Receiver receiver, String clusterName)
 		throws ChannelException {
 
 		JChannel channel = new JChannel(properties);
@@ -107,8 +107,8 @@ public abstract class ClusterBase {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Create a new channel with properties "
-				+ channel.getProperties());
+				"Create a new channel with properties " +
+					channel.getProperties());
 		}
 
 		return channel;
@@ -126,8 +126,8 @@ public abstract class ClusterBase {
 		List<Address> addresses = new ArrayList<Address>(
 			jGroupsAddresses.size());
 
-		for (org.jgroups.Address address : jGroupsAddresses) {
-			addresses.add(new AddressImpl(address));
+		for (org.jgroups.Address jgroupsAddress : jGroupsAddresses) {
+			addresses.add(new AddressImpl(jgroupsAddress));
 		}
 
 		return addresses;
@@ -153,8 +153,8 @@ public abstract class ClusterBase {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Autodetecting JGroups outgoing IP address and interface for "
-				+ host + ":" + port);
+				"Autodetecting JGroups outgoing IP address and interface for " +
+					host + ":" + port);
 		}
 
 		SocketUtil.BindInfo bindInfo = SocketUtil.getBindInfo(host, port);
@@ -168,9 +168,9 @@ public abstract class ClusterBase {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Setting JGroups outgoing IP address to "
-				+ inetAddress.getHostAddress() + " and interface to "
-				+ networkInterface.getName());
+				"Setting JGroups outgoing IP address to " +
+					inetAddress.getHostAddress() + " and interface to " +
+						networkInterface.getName());
 		}
 	}
 
@@ -178,7 +178,7 @@ public abstract class ClusterBase {
 
 	protected void initSystemProperties() {
 		for (String systemProperty :
-			PropsValues.CLUSTER_LINK_CHANNEL_SYSTEM_PROPERTIES) {
+				PropsValues.CLUSTER_LINK_CHANNEL_SYSTEM_PROPERTIES) {
 
 			int index = systemProperty.indexOf(StringPool.COLON);
 
@@ -193,14 +193,14 @@ public abstract class ClusterBase {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Setting system property {key=" + key + ", value="
-					+ value + "}");
+					"Setting system property {key=" + key + ", value=" + value +
+						"}");
 			}
 		}
 	}
 
-	private static boolean _initialized = false;
-
 	private static Log _log = LogFactoryUtil.getLog(ClusterBase.class);
+
+	private static boolean _initialized;
 
 }

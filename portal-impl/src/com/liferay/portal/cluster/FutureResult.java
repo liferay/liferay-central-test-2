@@ -29,7 +29,6 @@ import java.util.concurrent.TimeoutException;
 public class FutureResult<V> implements Future<V> {
 
 	public boolean cancel(boolean mayInterruptIfRunning) {
-
 		if (_cancelled || isDone()) {
 			return false;
 		}
@@ -40,7 +39,6 @@ public class FutureResult<V> implements Future<V> {
 	}
 
 	public V get() throws InterruptedException, ExecutionException {
-
 		if (_cancelled) {
 			throw new CancellationException();
 		}
@@ -55,7 +53,7 @@ public class FutureResult<V> implements Future<V> {
 	}
 
 	public V get(long timeout, TimeUnit unit)
-		throws InterruptedException, ExecutionException, TimeoutException {
+		throws ExecutionException, InterruptedException, TimeoutException {
 
 		if (_cancelled) {
 			throw new CancellationException();
@@ -65,6 +63,7 @@ public class FutureResult<V> implements Future<V> {
 			if (_exception != null) {
 				throw new ExecutionException(_exception);
 			}
+
 			return _result;
 		}
 		else {
@@ -81,7 +80,6 @@ public class FutureResult<V> implements Future<V> {
 	}
 
 	public boolean isDone() {
-
 		if ((_countDownLatch.getCount() == 0) || _cancelled) {
 			return true;
 		}
@@ -99,7 +97,7 @@ public class FutureResult<V> implements Future<V> {
 		_countDownLatch.countDown();
 	}
 
-	private boolean _cancelled = false;
+	private boolean _cancelled;
 	private CountDownLatch _countDownLatch = new CountDownLatch(1);
 	private Exception _exception;
 	private V _result;

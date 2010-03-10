@@ -51,12 +51,12 @@ public class ClusterRequestImpl implements ClusterRequest {
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 
-		sb.append("{uuid=");
-		sb.append(_uuid);
+		sb.append("{multicast=");
+		sb.append(_multicast);
 		sb.append(", payload=");
 		sb.append(_payload);
-		sb.append(", multicast=");
-		sb.append(_multicast);
+		sb.append(", uuid=");
+		sb.append(_uuid);
 		sb.append("}");
 
 		return sb.toString();

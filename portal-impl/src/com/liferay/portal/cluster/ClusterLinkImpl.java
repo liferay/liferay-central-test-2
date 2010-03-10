@@ -130,7 +130,6 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 	}
 
 	protected void initChannels() throws ChannelException {
-
 		Properties transportProperties = PropsUtil.getProperties(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_TRANSPORT, true);
 
