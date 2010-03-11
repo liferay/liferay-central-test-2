@@ -134,6 +134,20 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String versionDescription,
 		java.lang.String extraSettings, java.io.InputStream is, long size,
+		java.util.Date createDate, java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.addFileEntry(uuid, userId, groupId,
+			folderId, name, title, description, versionDescription,
+			extraSettings, is, size, createDate, modifiedDate, serviceContext);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
+		java.lang.String uuid, long userId, long groupId, long folderId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String versionDescription,
+		java.lang.String extraSettings, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -400,6 +414,22 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 			folderId, newFolderId, name, sourceFileName, title, description,
 			versionDescription, majorVersion, extraSettings, file,
 			serviceContext);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
+		long userId, long groupId, long folderId, long newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String versionDescription, boolean majorVersion,
+		java.lang.String extraSettings, java.io.InputStream is, long size,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.updateFileEntry(userId, groupId,
+			folderId, newFolderId, name, sourceFileName, title, description,
+			versionDescription, majorVersion, extraSettings, is, size,
+			modifiedDate, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(

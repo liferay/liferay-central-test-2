@@ -272,7 +272,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 								fileEntry.getTitle(), fileEntry.getTitle(),
 								fileEntry.getDescription(), null, true,
 								fileEntry.getExtraSettings(), is,
-								fileEntry.getSize(), serviceContext);
+								fileEntry.getSize(),
+								fileEntry.getModifiedDate(), serviceContext);
 					}
 				}
 				catch (NoSuchFileEntryException nsfee) {
@@ -282,7 +283,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 							fileEntry.getName(), fileEntry.getTitle(),
 							fileEntry.getDescription(), null,
 							fileEntry.getExtraSettings(), is,
-							fileEntry.getSize(), serviceContext);
+							fileEntry.getSize(), fileEntry.getCreateDate(),
+							fileEntry.getModifiedDate(), serviceContext);
 				}
 			}
 			else {
@@ -348,7 +350,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			DLFileRankLocalServiceUtil.updateFileRank(
 				context.getGroupId(), context.getCompanyId(), userId, folderId,
-				name);
+				name, rank.getCreateDate());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -405,13 +407,14 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 					existingFolder = DLFolderLocalServiceUtil.addFolder(
 						folder.getUuid(), userId, groupId, parentFolderId,
-						name, folder.getDescription(), serviceContext);
+						name, folder.getDescription(), folder.getCreateDate(),
+						folder.getModifiedDate(), serviceContext);
 				}
 				else {
 					existingFolder = DLFolderLocalServiceUtil.updateFolder(
 						existingFolder.getFolderId(), parentFolderId,
 						folder.getName(), folder.getDescription(),
-						serviceContext);
+						folder.getModifiedDate(), serviceContext);
 				}
 			}
 			else {
@@ -847,18 +850,23 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 					DLFileShortcutLocalServiceUtil.updateFileShortcut(
 						userId, existingFileShortcut.getFileShortcutId(),
-						folderId, toFolderId, toName, serviceContext);
+						folderId, toFolderId, toName,
+						fileShortcut.getModifiedDate(), serviceContext);
 				}
 				catch (NoSuchFileShortcutException nsfse) {
 					DLFileShortcutLocalServiceUtil.addFileShortcut(
 						fileShortcut.getUuid(), userId, groupId, folderId,
-						toFolderId, toName, serviceContext);
+						toFolderId, toName, fileShortcut.getCreateDate(),
+						fileShortcut.getModifiedDate(),
+						fileShortcut.getStatusDate(), serviceContext);
 				}
 			}
 			else {
 				DLFileShortcutLocalServiceUtil.addFileShortcut(
 					null, userId, groupId, folderId, toFolderId, toName,
-					serviceContext);
+					fileShortcut.getCreateDate(),
+					fileShortcut.getModifiedDate(),
+					fileShortcut.getStatusDate(),serviceContext);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {

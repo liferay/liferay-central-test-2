@@ -111,6 +111,14 @@ public class DLFileRankLocalServiceWrapper implements DLFileRankLocalService {
 			folderId, name);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileRank addFileRank(
+		long groupId, long companyId, long userId, long folderId,
+		java.lang.String name, java.util.Date createDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileRankLocalService.addFileRank(groupId, companyId, userId,
+			folderId, name, createDate);
+	}
+
 	public void deleteFileRanks(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlFileRankLocalService.deleteFileRanks(userId);
@@ -139,6 +147,14 @@ public class DLFileRankLocalServiceWrapper implements DLFileRankLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileRankLocalService.updateFileRank(groupId, companyId,
 			userId, folderId, name);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
+		long groupId, long companyId, long userId, long folderId,
+		java.lang.String name, java.util.Date createDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileRankLocalService.updateFileRank(groupId, companyId,
+			userId, folderId, name, createDate);
 	}
 
 	public DLFileRankLocalService getWrappedDLFileRankLocalService() {

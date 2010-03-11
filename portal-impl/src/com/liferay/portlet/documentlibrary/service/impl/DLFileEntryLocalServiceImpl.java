@@ -131,7 +131,7 @@ public class DLFileEntryLocalServiceImpl
 			String uuid, long userId, long groupId, long folderId, String name,
 			String title, String description, String versionDescription,
 			String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			Date createDate, Date modifiedDate, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -146,8 +146,6 @@ public class DLFileEntryLocalServiceImpl
 		name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
 
-		Date now = new Date();
-
 		validate(groupId, folderId, title, is);
 
 		long fileEntryId = counterLocalService.increment();
@@ -161,8 +159,8 @@ public class DLFileEntryLocalServiceImpl
 		fileEntry.setUserName(user.getFullName());
 		fileEntry.setVersionUserId(user.getUserId());
 		fileEntry.setVersionUserName(user.getFullName());
-		fileEntry.setCreateDate(now);
-		fileEntry.setModifiedDate(now);
+		fileEntry.setCreateDate(createDate);
+		fileEntry.setModifiedDate(modifiedDate);
 		fileEntry.setFolderId(folderId);
 		fileEntry.setName(name);
 		fileEntry.setTitle(title);
@@ -200,7 +198,7 @@ public class DLFileEntryLocalServiceImpl
 		// File version
 
 		addFileVersion(
-			user, fileEntry, now, fileEntry.getVersion(), null,
+			user, fileEntry, modifiedDate, fileEntry.getVersion(), null,
 			serviceContext.getStatus());
 
 		// Folder
@@ -249,6 +247,21 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return fileEntry;
+	}
+
+	public DLFileEntry addFileEntry(
+			String uuid, long userId, long groupId, long folderId, String name,
+			String title, String description, String versionDescription,
+			String extraSettings, InputStream is, long size,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Date now = new Date();
+
+		return addFileEntry(
+			uuid, userId, groupId, folderId, name, title, description,
+			versionDescription, extraSettings, is, size, now, now,
+			serviceContext);
 	}
 
 	public void addFileEntryResources(
@@ -745,7 +758,7 @@ public class DLFileEntryLocalServiceImpl
 			long userId, long groupId, long folderId, long newFolderId,
 			String name, String sourceFileName, String title,
 			String description, String versionDescription, boolean majorVersion,
-			String extraSettings, InputStream is, long size,
+			String extraSettings, InputStream is, long size, Date modifiedDate,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -986,7 +999,7 @@ public class DLFileEntryLocalServiceImpl
 
 		fileEntry.setVersionUserId(user.getUserId());
 		fileEntry.setVersionUserName(user.getFullName());
-		fileEntry.setModifiedDate(now);
+		fileEntry.setModifiedDate(modifiedDate);
 		fileEntry.setVersion(version);
 		fileEntry.setSize((int)size);
 		fileEntry.setExpandoBridgeAttributes(serviceContext);
@@ -1030,6 +1043,22 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return fileEntry;
+	}
+
+	public DLFileEntry updateFileEntry(
+			long userId, long groupId, long folderId, long newFolderId,
+			String name, String sourceFileName, String title,
+			String description, String versionDescription, boolean majorVersion,
+			String extraSettings, InputStream is, long size,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Date now = new Date();
+
+		return updateFileEntry(
+			userId, groupId, folderId, newFolderId, name, sourceFileName, title,
+			description, versionDescription, majorVersion, extraSettings, is,
+			size, now, serviceContext);
 	}
 
 	public DLFileEntry updateWorkflowStatus(

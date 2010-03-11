@@ -54,14 +54,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	public DLFolder addFolder(
 			String uuid, long userId, long groupId, long parentFolderId,
-			String name, String description, ServiceContext serviceContext)
+			String name, String description, Date createDate, Date modifiedDate,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Folder
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
-		Date now = new Date();
 
 		validate(groupId, parentFolderId, name);
 
@@ -73,8 +73,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folder.setGroupId(groupId);
 		folder.setCompanyId(user.getCompanyId());
 		folder.setUserId(user.getUserId());
-		folder.setCreateDate(now);
-		folder.setModifiedDate(now);
+		folder.setCreateDate(createDate);
+		folder.setModifiedDate(modifiedDate);
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
@@ -149,12 +149,24 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			DLFolder parentFolder = dlFolderPersistence.findByPrimaryKey(
 				parentFolderId);
 
-			parentFolder.setLastPostDate(now);
+			parentFolder.setLastPostDate(modifiedDate);
 
 			dlFolderPersistence.update(parentFolder, false);
 		}
 
 		return folder;
+	}
+
+	public DLFolder addFolder(
+			String uuid, long userId, long groupId, long parentFolderId,
+			String name, String description, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Date now = new Date();
+
+		return addFolder(
+			uuid, userId, groupId, parentFolderId, name, description, now, now,
+			serviceContext);
 	}
 
 	public void addFolderResources(
@@ -410,7 +422,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name,
-			String description, ServiceContext serviceContext)
+			String description, Date modifiedDate,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Folder
@@ -422,7 +435,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		validate(
 			folder.getFolderId(), folder.getGroupId(), parentFolderId, name);
 
-		folder.setModifiedDate(new Date());
+		folder.setModifiedDate(modifiedDate);
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
@@ -456,6 +469,16 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 
 		return folder;
+	}
+
+	public DLFolder updateFolder(
+			long folderId, long parentFolderId, String name,
+			String description, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return updateFolder(
+			folderId, parentFolderId, name, description, new Date(),
+			serviceContext);
 	}
 
 	protected long getParentFolderId(DLFolder folder, long parentFolderId)
