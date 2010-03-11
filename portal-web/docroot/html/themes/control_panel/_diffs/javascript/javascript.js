@@ -35,7 +35,8 @@ AUI().use(
 						}
 					},
 					trigger: portletInformationIcon,
-					visible: false
+					visible: false,
+					width: 450
 				}
 			).render();
 
