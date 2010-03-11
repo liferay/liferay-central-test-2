@@ -29,6 +29,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.Team;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.permission.comparator.PermissionActionIdComparator;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -38,6 +39,7 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PropsValues;
@@ -140,6 +142,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					Group group = userGroups.get(0);
 
 					addRequiredMemberRole(group, roles);
+					addTeamRoles(userId, group, roles);
 				}
 			}
 			else {
@@ -356,6 +359,25 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
 
 			roles.add(organizationMemberRole);
+		}
+	}
+
+	protected void addTeamRoles(long userId, Group group, List<Role> roles)
+		throws Exception {
+
+		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) ||
+			 (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6)) &&
+			(group.isCommunity() || group.isOrganization())) {
+
+			List<Team> teams = TeamLocalServiceUtil.getUserTeams(
+				userId, group.getGroupId());
+
+			for (Team team : teams) {
+				Role role = RoleLocalServiceUtil.getTeamRole(
+					team.getCompanyId(), team.getTeamId());
+
+				roles.add(role);
+			}
 		}
 	}
 
