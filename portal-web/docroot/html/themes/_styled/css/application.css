@@ -145,10 +145,16 @@
 /* ---------- Tags ---------- */
 
 .aui-tagselector-content {
+	border-width: 0;
+	margin-bottom: 15px;
+	padding: 0;
+}
+
+.aui-tagselector-content .aui-textboxlistentry-holder {
 	background: #fff;
 	border: 1px solid;
 	border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
-	margin-bottom: 30px;
+	margin-bottom: 5px;
 	padding: 5px;
 	position: relative;
 	overflow: visible;
@@ -160,7 +166,7 @@
 	width: auto;
 }
 
-.aui-tagselector-focused .aui-tagselector-content {
+.aui-tagselector-focused .aui-textboxlistentry-holder {
 	background: #FFC none;
 	border: 1px solid #FC0;
 }
@@ -170,17 +176,14 @@
 }
 
 .aui-tagselector .aui-toolset {
-	position: absolute;
-	top: 100%;
 	margin-top: 5px;
-	left: -1px;
 }
 
 .aui-tagselector .aui-textboxlist-input-container {
 	margin: 0;
 }
 
-.aui-categoriesselector-content {
+.aui-categoriesselector-content .aui-textboxlistentry-holder {
 	border-width: 0;
 	padding: 0;
 }

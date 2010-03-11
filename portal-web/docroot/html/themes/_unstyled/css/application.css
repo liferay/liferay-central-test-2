@@ -96,10 +96,13 @@
 .aui-tagselector-content {
 }
 
+.aui-tagselector-content .aui-textboxlistentry-holder {
+}
+
 .aui-tagselector .lfr-tag-selector-input {
 }
 
-.aui-tagselector-focused .aui-tagselector-content {
+.aui-tagselector-focused .aui-textboxlistentry-holder {
 }
 
 .aui-tagselector .aui-field .aui-field-content {
@@ -111,7 +114,7 @@
 .aui-tagselector .aui-textboxlist-input-container {
 }
 
-.aui-categoriesselector-content {
+.aui-categoriesselector-content .aui-textboxlistentry-holder {
 }
 
 /* ---------- Tag cloud and tag list ---------- */
