@@ -123,6 +123,12 @@ public interface WorkflowInstanceLinkLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isEnded(long companyId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void startWorkflowInstance(long companyId, long groupId,
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,

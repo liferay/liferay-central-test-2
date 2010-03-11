@@ -203,7 +203,17 @@ if (Validator.isNotNull(content)) {
 
 boolean disableIncrementVersion = false;
 
-if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION) {
+boolean workflowInstanceEnded = false;
+
+if (article != null) {
+	try {
+		workflowInstanceEnded = WorkflowInstanceLinkLocalServiceUtil.isEnded(company.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getId());
+	}
+	catch (NoSuchWorkflowInstanceLinkException nswile) {
+	}
+}
+
+if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION || workflowInstanceEnded) {
 	boolean latestVersion = (article == null) || (article != null && JournalArticleLocalServiceUtil.isLatestVersion(article.getGroupId(), articleId, version));
 
 	if (!latestVersion) {

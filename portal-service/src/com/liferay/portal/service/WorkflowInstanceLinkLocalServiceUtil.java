@@ -147,6 +147,13 @@ public class WorkflowInstanceLinkLocalServiceUtil {
 			classPK);
 	}
 
+	public static boolean isEnded(long companyId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().isEnded(companyId, groupId, className, classPK);
+	}
+
 	public static void startWorkflowInstance(long companyId, long groupId,
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,

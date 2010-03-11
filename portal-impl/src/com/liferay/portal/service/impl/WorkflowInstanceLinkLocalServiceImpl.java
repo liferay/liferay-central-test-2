@@ -39,6 +39,7 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Marcellus Tavares
  */
 public class WorkflowInstanceLinkLocalServiceImpl
 	extends WorkflowInstanceLinkLocalServiceBaseImpl {
@@ -125,6 +126,20 @@ public class WorkflowInstanceLinkLocalServiceImpl
 		catch (NoSuchWorkflowInstanceLinkException nswile) {
 			return false;
 		}
+	}
+
+	public boolean isEnded(
+			long companyId, long groupId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
+				companyId, groupId, className, classPK);
+
+		WorkflowInstance workflowInstance =
+			WorkflowInstanceManagerUtil.getWorkflowInstance(
+				companyId, workflowInstanceLink.getWorkflowInstanceId());
+
+		return workflowInstance.getEndDate() != null;
 	}
 
 	public void startWorkflowInstance(
