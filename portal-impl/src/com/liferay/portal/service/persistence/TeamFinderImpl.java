@@ -76,6 +76,7 @@ public class TeamFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			setJoin(qPos, params);
 			qPos.add(groupId);
 			qPos.add(name);
 			qPos.add(name);
@@ -128,6 +129,7 @@ public class TeamFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			setJoin(qPos, params);
 			qPos.add(groupId);
 			qPos.add(name);
 			qPos.add(name);
