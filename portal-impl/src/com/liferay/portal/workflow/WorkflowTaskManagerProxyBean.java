@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 
 import java.io.Serializable;
+
 import java.util.List;
 import java.util.Map;
 

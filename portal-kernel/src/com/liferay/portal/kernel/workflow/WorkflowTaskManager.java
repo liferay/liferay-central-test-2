@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
+
 import java.util.List;
 import java.util.Map;
 
