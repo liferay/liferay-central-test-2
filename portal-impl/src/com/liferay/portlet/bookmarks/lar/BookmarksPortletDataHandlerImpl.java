@@ -318,6 +318,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setCreateDate(entry.getCreateDate());
+		serviceContext.setModifiedDate(entry.getModifiedDate());
 
 		if ((folderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == entry.getFolderId())) {
@@ -382,6 +384,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(context.getScopeGroupId());
+		serviceContext.setCreateDate(folder.getCreateDate());
+		serviceContext.setModifiedDate(folder.getModifiedDate());
 
 		if ((parentFolderId !=
 				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
