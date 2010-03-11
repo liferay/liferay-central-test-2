@@ -1223,21 +1223,21 @@ public class DLFileEntryLocalServiceImpl
 			version = fileEntry.getPendingVersion();
 		}
 
-		int[] splitVersion = StringUtil.split(version, StringPool.PERIOD, 0);
+		int[] versionParts = StringUtil.split(version, StringPool.PERIOD, 0);
 
-		if (splitVersion.length == 1) {
-			splitVersion = ArrayUtil.append(splitVersion, 0);
+		if (versionParts.length == 1) {
+			versionParts = ArrayUtil.append(versionParts, 0);
 		}
 
 		if (majorVersion) {
-			splitVersion[0]++;
-			splitVersion[1] = 0;
+			versionParts[0]++;
+			versionParts[1] = 0;
 		}
 		else {
-			splitVersion[1]++;
+			versionParts[1]++;
 		}
 
-		return splitVersion[0] + StringPool.PERIOD + splitVersion[1];
+		return versionParts[0] + StringPool.PERIOD + versionParts[1];
 	}
 
 	protected void validate(
