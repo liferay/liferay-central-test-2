@@ -74,8 +74,6 @@
 #set ($user_comments = $user.getComments())
 #set ($user_login_ip = $user.getLoginIP())
 #set ($user_last_login_ip = $user.getLastLoginIP())
-#set ($user_group = $user.getGroup())
-#set ($user_organizations = $user.getOrganizations())
 
 #set ($is_signed_in = $theme_display.isSignedIn())
 

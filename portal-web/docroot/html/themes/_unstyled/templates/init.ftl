@@ -75,8 +75,6 @@
 <#assign user_comments = user.getComments()/>
 <#assign user_login_ip = user.getLoginIP()/>
 <#assign user_last_login_ip = user.getLastLoginIP()/>
-<#assign user_group = user.getGroup()!/>
-<#assign user_organizations = user.getOrganizations()![]/>
 
 <#assign is_signed_in = theme_display.isSignedIn()/>
 
