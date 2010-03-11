@@ -155,15 +155,6 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getDiscussionMessages(
-		long groupId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDiscussionMessagesCount(long groupId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.blogs.model.BlogsEntry[] getEntriesPrevAndNext(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,

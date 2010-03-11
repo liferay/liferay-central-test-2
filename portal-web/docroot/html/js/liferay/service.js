@@ -755,7 +755,6 @@ Liferay.Service.registerClass(
 		getMessageDisplay: true,
 		subscribeMessage: true,
 		unsubscribeMessage: true,
-		updateDiscussionStatus: true,
 		updateDiscussionMessage: true,
 		updateMessage: true
 	}

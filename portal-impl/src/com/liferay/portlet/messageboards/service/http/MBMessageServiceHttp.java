@@ -1029,59 +1029,6 @@ public class MBMessageServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionStatus(
-		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
-		long messageId, com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			Object paramObj0 = className;
-
-			if (className == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new LongWrapper(classPK);
-
-			Object paramObj2 = new LongWrapper(messageId);
-
-			Object paramObj3 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj3 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"updateDiscussionStatus",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,

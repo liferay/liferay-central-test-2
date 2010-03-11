@@ -186,15 +186,6 @@ public class MBMessageServiceWrapper implements MBMessageService {
 		_mbMessageService.unsubscribeMessage(messageId);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionStatus(
-		java.lang.String className, long classPK, long messageId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _mbMessageService.updateDiscussionStatus(className, classPK,
-			messageId, serviceContext);
-	}
-
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
