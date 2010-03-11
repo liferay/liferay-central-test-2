@@ -20,12 +20,19 @@ package com.liferay.portlet.blogs.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface BlogsEntryFinder {
+	public int countDiscussionsByGroupId(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByOrganizationId(long organizationId,
 		java.util.Date displayDate, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByOrganizationIds(java.util.List<Long> organizationIds,
 		java.util.Date displayDate, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findDiscussionsByGroupId(
+		long groupId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(

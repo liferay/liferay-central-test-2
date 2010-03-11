@@ -191,6 +191,19 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 		return _blogsEntryLocalService.getCompanyEntriesCount(companyId, status);
 	}
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getDiscussionMessages(
+		long groupId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _blogsEntryLocalService.getDiscussionMessages(groupId, status,
+			start, end);
+	}
+
+	public int getDiscussionMessagesCount(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _blogsEntryLocalService.getDiscussionMessagesCount(groupId,
+			status);
+	}
+
 	public com.liferay.portlet.blogs.model.BlogsEntry[] getEntriesPrevAndNext(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,

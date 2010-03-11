@@ -193,6 +193,17 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getCompanyEntriesCount(companyId, status);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getDiscussionMessages(
+		long groupId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDiscussionMessages(groupId, status, start, end);
+	}
+
+	public static int getDiscussionMessagesCount(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDiscussionMessagesCount(groupId, status);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry[] getEntriesPrevAndNext(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,

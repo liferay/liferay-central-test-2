@@ -22,6 +22,11 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class BlogsEntryFinderUtil {
+	public static int countDiscussionsByGroupId(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().countDiscussionsByGroupId(groupId, status);
+	}
+
 	public static int countByOrganizationId(long organizationId,
 		java.util.Date displayDate, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -34,6 +39,12 @@ public class BlogsEntryFinderUtil {
 		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .countByOrganizationIds(organizationIds, displayDate, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findDiscussionsByGroupId(
+		long groupId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findDiscussionsByGroupId(groupId, status, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(
