@@ -155,7 +155,6 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 		<%
 		List<String> actions = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
-		List<String> actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
 		%>
 
 		<%@ include file="/html/portlet/portlet_configuration/edit_permissions_algorithm_5_to_6_roles.jspf" %>
