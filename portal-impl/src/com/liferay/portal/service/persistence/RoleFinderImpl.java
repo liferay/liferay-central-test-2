@@ -212,7 +212,7 @@ public class RoleFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D_T);
 
-			sql = StringUtil.replace(sql, "AND ([$TYPE$])", getTypes(types));
+			sql = StringUtil.replace(sql, " AND ([$TYPE$])", getTypes(types));
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 
@@ -451,7 +451,7 @@ public class RoleFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_D_T);
 
-			sql = StringUtil.replace(sql, "AND ([$TYPE$])", getTypes(types));
+			sql = StringUtil.replace(sql, " AND ([$TYPE$])", getTypes(types));
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
@@ -604,6 +604,10 @@ public class RoleFinderImpl
 		}
 
 		StringBundler sb = new StringBundler(types.length * 2 - 1);
+
+		if (types.length > 0) {
+			sb.append(" AND ");
+		}
 
 		for (int i = 0; i < types.length; i++) {
 			sb.append("Role_.type_ = ?");
