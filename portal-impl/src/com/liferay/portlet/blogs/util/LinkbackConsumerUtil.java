@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -37,9 +39,11 @@ import java.util.List;
 public class LinkbackConsumerUtil {
 
 	public static void addNewTrackback(
-		long messageId, String url, String entryUrl) {
+		long messageId, String remoteIp, String url, String entryUrl,
+		boolean moderateTrackbacks) {
 
-		_trackbacks.add(new Tuple(messageId, url, entryUrl));
+		_trackbacks.add(
+			new Tuple(messageId, remoteIp, url, entryUrl, moderateTrackbacks));
 	}
 
 	public static void verifyNewTrackbacks() {
@@ -51,10 +55,13 @@ public class LinkbackConsumerUtil {
 			}
 
 			long messageId = (Long)tuple.getObject(0);
-			String url = (String)tuple.getObject(1);
-			String entryUrl = (String)tuple.getObject(2);
+			String remoteIp = (String)tuple.getObject(1);
+			String url = (String)tuple.getObject(2);
+			String entryUrl = (String)tuple.getObject(3);
+			boolean moderateTrackbacks = (Boolean)tuple.getObject(4);
 
-			_verifyTrackback(messageId, url, entryUrl);
+			_verifyTrackback(
+				messageId, remoteIp, url, entryUrl, moderateTrackbacks);
 		}
 	}
 
@@ -82,22 +89,52 @@ public class LinkbackConsumerUtil {
 		if (Validator.isNotNull(url)) {
 			long companyId = message.getCompanyId();
 			long userId = message.getUserId();
+			int status = message.getStatus();
 			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
 				companyId);
 
-			if (userId == defaultUserId) {
-				_verifyTrackback(messageId, url, entryURL);
+			if ((userId == defaultUserId) &&
+				(status == StatusConstants.PENDING)) {
+
+				_verifyTrackback(messageId, null, url, entryURL, true);
 			}
 		}
 	}
 
+	private static void _updateStatus(long messageId, boolean moderate)
+		throws Exception {
+
+		if (moderate) {
+			return;
+		}
+
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setStatus(StatusConstants.APPROVED);
+
+		MBMessageLocalServiceUtil.updateStatus(
+			message.getUserId(), messageId, serviceContext);
+	}
+
 	private static void _verifyTrackback(
-		long messageId, String url, String entryURL) {
+		long messageId, String remoteIp, String url, String entryURL,
+		boolean moderateTrackbacks) {
 
 		try {
-			String result = HttpUtil.URLtoString(url);
+			String trackbackIp = HttpUtil.getIpAddress(url);
 
-			if (result.contains(entryURL)) {
+			if (!remoteIp.equals(trackbackIp)) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Remote IP " + remoteIp +
+							" does not match trackback URL's IP " +
+							trackbackIp);
+				}
+
+				_updateStatus(messageId, moderateTrackbacks);
+
 				return;
 			}
 		}
@@ -105,8 +142,26 @@ public class LinkbackConsumerUtil {
 		}
 
 		try {
-			MBMessageLocalServiceUtil.deleteDiscussionMessage(
-				messageId);
+			String content = HttpUtil.URLtoString(url);
+
+			if (!content.contains(entryURL)) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Remote content from " + url +
+							" does not contain entry URL " +
+							entryURL);
+				}
+
+				_updateStatus(messageId, moderateTrackbacks);
+
+				return;
+			}
+		}
+		catch (Exception e) {
+		}
+
+		try {
+			MBMessageLocalServiceUtil.deleteDiscussionMessage(messageId);
 		}
 		catch (Exception e) {
 			_log.error(

@@ -1,6 +1,19 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.countDiscussionsByGroupId">
+		<![CDATA[
+			SELECT
+				COUNT(MBMessage.messageId) AS COUNT_VALUE
+			FROM
+				MBMessage, BlogsEntry
+			WHERE
+				(BlogsEntry.entryId = MBMessage.classPK) AND
+				(MBMessage.parentMessageId != 0)
+				[$GROUP_ID$]
+				[$STATUS$]
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.countByOrganizationIds">
 		<![CDATA[
 			SELECT
@@ -17,6 +30,21 @@
 				[$ORGANIZATION_ID$] AND
 				(BlogsEntry.displayDate < ?)
 				[$STATUS$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.findDiscussionsByGroupId">
+		<![CDATA[
+			SELECT
+				{MBMessage.*}
+			FROM
+				MBMessage, BlogsEntry
+			WHERE
+				(BlogsEntry.entryId = MBMessage.classPK) AND
+				(MBMessage.parentMessageId != 0)
+				[$GROUP_ID$]
+				[$STATUS$]
+			ORDER BY
+				MBMessage.modifiedDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.findByOrganizationIds">

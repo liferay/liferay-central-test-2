@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.blogs.util;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -24,13 +25,17 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xmlrpc.Method;
 import com.liferay.portal.kernel.xmlrpc.Response;
 import com.liferay.portal.kernel.xmlrpc.XmlRpcConstants;
 import com.liferay.portal.kernel.xmlrpc.XmlRpcUtil;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -38,6 +43,7 @@ import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -52,6 +58,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import javax.portlet.PortletPreferences;
 
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
@@ -132,9 +141,18 @@ public class PingbackMethodImpl implements Method {
 				}
 			}
 
+			ServiceContext serviceContext = new ServiceContext();
+
+			if (_moderatePingbacks(entry)) {
+				serviceContext.setStatus(StatusConstants.PENDING);
+			}
+			else {
+				serviceContext.setStatus(StatusConstants.APPROVED);
+			}
+
 			MBMessageLocalServiceUtil.addDiscussionMessage(
 				userId, StringPool.BLANK, className, classPK, threadId,
-				parentMessageId, StringPool.BLANK, body, new ServiceContext());
+				parentMessageId, StringPool.BLANK, body, serviceContext);
 
 			return XmlRpcUtil.createSuccess("Pingback accepted");
 		}
@@ -146,6 +164,49 @@ public class PingbackMethodImpl implements Method {
 			return XmlRpcUtil.createFault(
 				TARGET_URI_INVALID, "Error parsing target URI");
 		}
+	}
+
+	private boolean _moderatePingbacks(BlogsEntry entry)
+		throws SystemException {
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			entry.getGroupId(), false,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
+
+		for (Layout layout : layouts) {
+			if (!layout.getType().equals(LayoutConstants.TYPE_PORTLET) ||
+				layout.isHidden()) {
+				continue;
+			}
+
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			Set<String> keys = typeSettingsProperties.keySet();
+
+			for (String key : keys) {
+				if (key.startsWith("column-")) {
+					String[] portletIds = StringUtil.split(
+						typeSettingsProperties.getProperty(key));
+
+					for (String portletId : portletIds) {
+						if (portletId.equals(PortletKeys.BLOGS)) {
+							PortletPreferences preferences =
+								PortletPreferencesFactoryUtil.getPortletSetup(
+									layout, portletId, null);
+
+							return GetterUtil.getBoolean(
+								preferences.getValue(
+									"moderate-pingbacks", null),
+								false);
+						}
+					}
+				}
+			}
+
+		}
+
+		return false;
 	}
 
 	public String getMethodName() {

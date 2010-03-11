@@ -50,10 +50,12 @@ import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.BlogsUtil;
 import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
 import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
+import com.liferay.portlet.messageboards.model.MBMessage;
 
 import java.io.IOException;
 
@@ -311,6 +313,20 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return blogsEntryPersistence.countByC_D_S(
 				companyId, new Date(), status);
 		}
+	}
+
+	public List<MBMessage> getDiscussionMessages(
+			long groupId, int status, int start, int end)
+		throws SystemException {
+
+		return BlogsEntryFinderUtil.findDiscussionsByGroupId(
+			groupId, status, start, end);
+	}
+
+	public int getDiscussionMessagesCount(long groupId, int status)
+		throws SystemException {
+
+		return BlogsEntryFinderUtil.countDiscussionsByGroupId(groupId, status);
 	}
 
 	public BlogsEntry[] getEntriesPrevAndNext(long entryId)

@@ -41,6 +41,12 @@ else if (tabs2.equals("entry-updated-email")) {
 	bodyEditorParam = "emailEntryUpdatedBody";
 	bodyEditorBody = emailEntryUpdatedBody;
 }
+
+String tags2Names = "email-from,entry-added-email,entry-updated-email,display-settings,rss";
+
+if (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED) {
+	tags2Names = "email-from,entry-added-email,entry-updated-email,display-settings,comment-settings,rss";
+}
 %>
 
 <liferay-portlet:renderURL var="portletURL" portletConfiguration="true">
@@ -56,7 +62,7 @@ else if (tabs2.equals("entry-updated-email")) {
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<liferay-ui:tabs
-		names="email-from,entry-added-email,entry-updated-email,display-settings,rss"
+		names="<%= tags2Names %>"
 		param="tabs2"
 		url="<%= portletURL %>"
 	/>
@@ -271,14 +277,20 @@ else if (tabs2.equals("entry-updated-email")) {
 				<aui:input inlineLabel="left" name="enableFlags" type="checkbox" value="<%= enableFlags %>" />
 
 				<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
-
-				<c:if test="<%= PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED %>">
-					<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
-
-					<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
-				</c:if>
 			</aui:fieldset>
+		</c:when>
+		<c:when test='<%= tabs2.equals("comment-settings") && PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED %>'>
+			<aui:fieldset>
+				<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
 
+				<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
+
+				<aui:input inlineLabel="left" name="moderateComments" type="checkbox" value="<%= moderateComments %>" />
+
+				<aui:input inlineLabel="left" name="moderatePingbacks" type="checkbox" value="<%= moderatePingbacks %>" />
+
+				<aui:input inlineLabel="left" name="moderateTrackbacks" type="checkbox" value="<%= moderateTrackbacks %>" />
+			</aui:fieldset>
 		</c:when>
 		<c:when test='<%= tabs2.equals("rss") %>'>
 			<aui:fieldset>
