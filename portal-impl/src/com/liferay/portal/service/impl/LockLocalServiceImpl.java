@@ -128,7 +128,7 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 
 				lock = null;
 			}
-			else if (!lock.getOwner().equals(owner)) {
+			else if (!(lock.getUserId() == userId)) {
 				throw new DuplicateLockException(lock);
 			}
 		}
