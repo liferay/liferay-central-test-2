@@ -203,17 +203,7 @@ if (Validator.isNotNull(content)) {
 
 boolean disableIncrementVersion = false;
 
-boolean workflowInstanceEnded = false;
-
-if (article != null) {
-	try {
-		workflowInstanceEnded = WorkflowInstanceLinkLocalServiceUtil.isEnded(company.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getId());
-	}
-	catch (NoSuchWorkflowInstanceLinkException nswile) {
-	}
-}
-
-if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION || workflowInstanceEnded) {
+if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION || ((article != null) && WorkflowInstanceLinkLocalServiceUtil.isEnded(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getId()))) {
 	boolean latestVersion = (article == null) || (article != null && JournalArticleLocalServiceUtil.isLatestVersion(article.getGroupId(), articleId, version));
 
 	if (!latestVersion) {

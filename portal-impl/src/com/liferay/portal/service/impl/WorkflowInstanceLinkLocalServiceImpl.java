@@ -132,14 +132,22 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
+		try {
+			WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
 				companyId, groupId, className, classPK);
 
-		WorkflowInstance workflowInstance =
-			WorkflowInstanceManagerUtil.getWorkflowInstance(
-				companyId, workflowInstanceLink.getWorkflowInstanceId());
+			WorkflowInstance workflowInstance =
+				WorkflowInstanceManagerUtil.getWorkflowInstance(
+					companyId, workflowInstanceLink.getWorkflowInstanceId());
 
-		return workflowInstance.getEndDate() != null;
+			if (workflowInstance.getEndDate() != null) {
+				return true;
+			}
+		}
+		catch (NoSuchWorkflowInstanceLinkException nswile) {
+		}
+
+		return false;
 	}
 
 	public void startWorkflowInstance(
