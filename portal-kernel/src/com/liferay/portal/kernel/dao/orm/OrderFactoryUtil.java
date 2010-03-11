@@ -23,6 +23,25 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  */
 public class OrderFactoryUtil {
 
+	public static void addOrderByComparator(
+		DynamicQuery dynamicQuery, OrderByComparator obc) {
+
+		if (obc == null) {
+			return;
+		}
+
+		String[] orderByFields = obc.getOrderByFields();
+
+		for (String orderByField : orderByFields) {
+			if (obc.isAscending()) {
+				dynamicQuery.addOrder(asc(orderByField));
+			}
+			else {
+				dynamicQuery.addOrder(desc(orderByField));
+			}
+		}
+	}
+
 	public static Order asc(String propertyName) {
 		return getOrderFactory().asc(propertyName);
 	}
@@ -30,27 +49,6 @@ public class OrderFactoryUtil {
 	public static Order desc(String propertyName) {
 		return getOrderFactory().desc(propertyName);
 	}
-
-
-	public static void addOrderByComparator(
-			DynamicQuery query, OrderByComparator obc) {
-
-		if (obc == null) {
-			return;
-		}
-		
-		String[] orderBys = obc.getOrderByFields();
-		boolean isAscending = obc.isAscending();
-		for (String orderBy : orderBys) {
-			if (isAscending) {
-				query.addOrder(asc(orderBy));
-			}
-			else {
-				query.addOrder(desc(orderBy));
-			}
-		}
-	}
-
 
 	public static OrderFactory getOrderFactory() {
 		return _orderFactory;
