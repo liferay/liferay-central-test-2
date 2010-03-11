@@ -107,18 +107,6 @@ public class DLFileShortcutLocalServiceWrapper
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		java.lang.String uuid, long userId, long groupId, long folderId,
-		long toFolderId, java.lang.String toName, java.util.Date createDate,
-		java.util.Date modifiedDate, java.util.Date statusDate,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileShortcutLocalService.addFileShortcut(uuid, userId,
-			groupId, folderId, toFolderId, toName, createDate, modifiedDate,
-			statusDate, serviceContext);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		java.lang.String uuid, long userId, long groupId, long folderId,
 		long toFolderId, java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -198,17 +186,6 @@ public class DLFileShortcutLocalServiceWrapper
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlFileShortcutLocalService.updateAsset(userId, fileShortcut,
 			assetCategoryIds, assetTagNames);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
-		long userId, long fileShortcutId, long folderId, long toFolderId,
-		java.lang.String toName, java.util.Date modifiedDate,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileShortcutLocalService.updateFileShortcut(userId,
-			fileShortcutId, folderId, toFolderId, toName, modifiedDate,
-			serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(

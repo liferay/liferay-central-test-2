@@ -42,8 +42,7 @@ public class DLFileShortcutLocalServiceImpl
 
 	public DLFileShortcut addFileShortcut(
 			String uuid, long userId, long groupId, long folderId,
-			long toFolderId, String toName, Date createDate, Date modifiedDate,
-			Date statusDate, ServiceContext serviceContext)
+			long toFolderId, String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File shortcut
@@ -64,15 +63,15 @@ public class DLFileShortcutLocalServiceImpl
 		fileShortcut.setCompanyId(user.getCompanyId());
 		fileShortcut.setUserId(user.getUserId());
 		fileShortcut.setUserName(user.getFullName());
-		fileShortcut.setCreateDate(createDate);
-		fileShortcut.setModifiedDate(modifiedDate);
+		fileShortcut.setCreateDate(now);
+		fileShortcut.setModifiedDate(now);
 		fileShortcut.setFolderId(folderId);
 		fileShortcut.setToFolderId(toFolderId);
 		fileShortcut.setToName(toName);
 		fileShortcut.setStatus(StatusConstants.APPROVED);
 		fileShortcut.setStatusByUserId(userId);
 		fileShortcut.setStatusByUserName(user.getFullName());
-		fileShortcut.setStatusDate(statusDate);
+		fileShortcut.setStatusDate(now);
 
 		dlFileShortcutPersistence.update(fileShortcut, false);
 
@@ -113,18 +112,6 @@ public class DLFileShortcutLocalServiceImpl
 			serviceContext.getAssetTagNames());
 
 		return fileShortcut;
-	}
-
-	public DLFileShortcut addFileShortcut(
-			String uuid, long userId, long groupId, long folderId,
-			long toFolderId, String toName, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		Date now = new Date();
-
-		return addFileShortcut(
-			uuid, userId, groupId, folderId, toFolderId, toName, now, now, now,
-			serviceContext);
 	}
 
 	public void addFileShortcutResources(
@@ -243,8 +230,7 @@ public class DLFileShortcutLocalServiceImpl
 
 	public DLFileShortcut updateFileShortcut(
 			long userId, long fileShortcutId, long folderId,
-			long toFolderId, String toName, Date modifiedDate,
-			ServiceContext serviceContext)
+			long toFolderId, String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File shortcut
@@ -285,16 +271,6 @@ public class DLFileShortcutLocalServiceImpl
 			serviceContext.getAssetTagNames());
 
 		return fileShortcut;
-	}
-
-	public DLFileShortcut updateFileShortcut(
-			long userId, long fileShortcutId, long folderId,
-			long toFolderId, String toName, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return updateFileShortcut(
-			userId, fileShortcutId, folderId, toFolderId, toName, new Date(),
-			serviceContext);
 	}
 
 	public void updateFileShortcuts(
