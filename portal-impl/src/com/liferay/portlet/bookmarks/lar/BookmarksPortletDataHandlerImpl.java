@@ -384,8 +384,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setCreateDate(folder.getCreateDate());
-		serviceContext.setScopeGroupId(context.getScopeGroupId());
 		serviceContext.setModifiedDate(folder.getModifiedDate());
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		if ((parentFolderId !=
 				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
