@@ -23,19 +23,7 @@ import java.io.Serializable;
  */
 public class Tuple implements Serializable {
 
-	public Tuple(Object obj0, Object obj1) {
-		_array = new Object[] {obj0, obj1};
-	}
-
-	public Tuple(Object obj0, Object obj1, Object obj2) {
-		_array = new Object[] {obj0, obj1, obj2};
-	}
-
-	public Tuple(Object obj0, Object obj1, Object obj2, Object obj3) {
-		_array = new Object[] {obj0, obj1, obj2, obj3};
-	}
-
-	public Tuple(Object[] array) {
+	public Tuple(Object ... array) {
 		_array = array;
 	}
 
