@@ -37,24 +37,15 @@ public class MBMessageServiceWrapper implements MBMessageService {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		java.lang.String className, long classPK, long threadId,
-		long parentMessageId, java.lang.String subject, java.lang.String body,
+		java.lang.String className, long classPK,
+		java.lang.String permissionClassName, long permissionClassPK,
+		long threadId, long parentMessageId, java.lang.String subject,
+		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageService.addDiscussionMessage(className, classPK,
-			threadId, parentMessageId, subject, body, serviceContext);
-	}
-
-	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		java.lang.String permissionClassName, long permissionClassPK,
-		java.lang.String className, long classPK, long threadId,
-		long parentMessageId, java.lang.String subject, java.lang.String body,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _mbMessageService.addDiscussionMessage(permissionClassName,
-			permissionClassPK, className, classPK, threadId, parentMessageId,
+			permissionClassName, permissionClassPK, threadId, parentMessageId,
 			subject, body, serviceContext);
 	}
 
@@ -84,20 +75,13 @@ public class MBMessageServiceWrapper implements MBMessageService {
 	}
 
 	public void deleteDiscussionMessage(long groupId,
-		java.lang.String className, long classPK, long messageId)
+		java.lang.String className, long classPK,
+		java.lang.String permissionClassName, long permissionClassPK,
+		long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbMessageService.deleteDiscussionMessage(groupId, className, classPK,
-			messageId);
-	}
-
-	public void deleteDiscussionMessage(long groupId,
-		java.lang.String permissionClassName, long permissionClassPK,
-		java.lang.String className, long classPK, long messageId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_mbMessageService.deleteDiscussionMessage(groupId, permissionClassName,
-			permissionClassPK, className, classPK, messageId);
+			permissionClassName, permissionClassPK, messageId);
 	}
 
 	public void deleteMessage(long messageId)
@@ -203,24 +187,14 @@ public class MBMessageServiceWrapper implements MBMessageService {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		java.lang.String className, long classPK, long messageId,
-		java.lang.String subject, java.lang.String body,
+		java.lang.String className, long classPK,
+		java.lang.String permissionClassName, long permissionClassPK,
+		long messageId, java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageService.updateDiscussionMessage(className, classPK,
-			messageId, subject, body, serviceContext);
-	}
-
-	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		java.lang.String permissionClassName, long permissionClassPK,
-		java.lang.String className, long classPK, long messageId,
-		java.lang.String subject, java.lang.String body,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _mbMessageService.updateDiscussionMessage(permissionClassName,
-			permissionClassPK, className, classPK, messageId, subject, body,
+			permissionClassName, permissionClassPK, messageId, subject, body,
 			serviceContext);
 	}
 

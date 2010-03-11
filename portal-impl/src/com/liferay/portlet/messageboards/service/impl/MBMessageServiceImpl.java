@@ -67,21 +67,8 @@ import java.util.List;
 public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
-			String className, long classPK, long threadId,
-			long parentMessageId, String subject, String body,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		User user = getUser();
-
-		return addDiscussionMessage(
-			className, classPK, className, classPK, threadId, parentMessageId,
-			subject, body, serviceContext);
-	}
-
-	public MBMessage addDiscussionMessage(
-			String permissionClassName, long permissionClassPK,
-			String className, long classPK, long threadId, long parentMessageId,
+			String className, long classPK, String permissionClassName,
+			long permissionClassPK, long threadId, long parentMessageId,
 			String subject, String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -164,16 +151,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public void deleteDiscussionMessage(
-			long groupId, String className, long classPK, long messageId)
-		throws PortalException, SystemException {
-
-		deleteDiscussionMessage(
-			groupId, className, classPK, className, classPK, messageId);
-	}
-
-	public void deleteDiscussionMessage(
-			long groupId, String permissionClassName, long permissionClassPK,
-			String className, long classPK, long messageId)
+			long groupId, String className, long classPK,
+			String permissionClassName, long permissionClassPK, long messageId)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -505,19 +484,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage updateDiscussionMessage(
-			String className, long classPK, long messageId, String subject,
-			String body, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return updateDiscussionMessage(
-			className, classPK, className, classPK, messageId, subject, body,
-			serviceContext);
-	}
-
-	public MBMessage updateDiscussionMessage(
-			String permissionClassName, long permissionClassPK,
-			String className, long classPK, long messageId, String subject,
-			String body, ServiceContext serviceContext)
+			String className, long classPK, String permissionClassName,
+			long permissionClassPK, long messageId, String subject, String body,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = getUser();

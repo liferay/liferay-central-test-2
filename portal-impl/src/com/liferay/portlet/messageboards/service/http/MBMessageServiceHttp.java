@@ -67,6 +67,7 @@ import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
+		java.lang.String permissionClassName, long permissionClassPK,
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -81,86 +82,13 @@ public class MBMessageServiceHttp {
 
 			Object paramObj1 = new LongWrapper(classPK);
 
-			Object paramObj2 = new LongWrapper(threadId);
-
-			Object paramObj3 = new LongWrapper(parentMessageId);
-
-			Object paramObj4 = subject;
-
-			if (subject == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = body;
-
-			if (body == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj6 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"addDiscussionMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		HttpPrincipal httpPrincipal, java.lang.String permissionClassName,
-		long permissionClassPK, java.lang.String className, long classPK,
-		long threadId, long parentMessageId, java.lang.String subject,
-		java.lang.String body,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			Object paramObj0 = permissionClassName;
+			Object paramObj2 = permissionClassName;
 
 			if (permissionClassName == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new LongWrapper(permissionClassPK);
-
-			Object paramObj2 = className;
-
-			if (className == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new LongWrapper(classPK);
+			Object paramObj3 = new LongWrapper(permissionClassPK);
 
 			Object paramObj4 = new LongWrapper(threadId);
 
@@ -379,7 +307,9 @@ public class MBMessageServiceHttp {
 	}
 
 	public static void deleteDiscussionMessage(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String className, long classPK, long messageId)
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String permissionClassName, long permissionClassPK,
+		long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -393,58 +323,13 @@ public class MBMessageServiceHttp {
 
 			Object paramObj2 = new LongWrapper(classPK);
 
-			Object paramObj3 = new LongWrapper(messageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"deleteDiscussionMessage",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void deleteDiscussionMessage(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String permissionClassName,
-		long permissionClassPK, java.lang.String className, long classPK,
-		long messageId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = permissionClassName;
+			Object paramObj3 = permissionClassName;
 
 			if (permissionClassName == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new LongWrapper(permissionClassPK);
-
-			Object paramObj3 = className;
-
-			if (className == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = new LongWrapper(classPK);
+			Object paramObj4 = new LongWrapper(permissionClassPK);
 
 			Object paramObj5 = new LongWrapper(messageId);
 
@@ -1146,6 +1031,7 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
+		java.lang.String permissionClassName, long permissionClassPK,
 		long messageId, java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -1159,83 +1045,13 @@ public class MBMessageServiceHttp {
 
 			Object paramObj1 = new LongWrapper(classPK);
 
-			Object paramObj2 = new LongWrapper(messageId);
-
-			Object paramObj3 = subject;
-
-			if (subject == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = body;
-
-			if (body == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj5 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"updateDiscussionMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		HttpPrincipal httpPrincipal, java.lang.String permissionClassName,
-		long permissionClassPK, java.lang.String className, long classPK,
-		long messageId, java.lang.String subject, java.lang.String body,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			Object paramObj0 = permissionClassName;
+			Object paramObj2 = permissionClassName;
 
 			if (permissionClassName == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new LongWrapper(permissionClassPK);
-
-			Object paramObj2 = className;
-
-			if (className == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new LongWrapper(classPK);
+			Object paramObj3 = new LongWrapper(permissionClassPK);
 
 			Object paramObj4 = new LongWrapper(messageId);
 

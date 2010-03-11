@@ -72,10 +72,10 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		<form action="<%= formAction %>" method="post" name="<%= formName %>">
 		<input name="<%= namespace %><%= Constants.CMD %>" type="hidden" value="" />
 		<input name="<%= namespace %>redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-		<input name="<%= namespace %>permissionClassName" type="hidden" value="<%= permissionClassName %>" />
-		<input name="<%= namespace %>permissionClassPK" type="hidden" value="<%= permissionClassPK %>" />
 		<input name="<%= namespace %>className" type="hidden" value="<%= className %>" />
 		<input name="<%= namespace %>classPK" type="hidden" value="<%= classPK %>" />
+		<input name="<%= namespace %>permissionClassName" type="hidden" value="<%= permissionClassName %>" />
+		<input name="<%= namespace %>permissionClassPK" type="hidden" value="<%= permissionClassPK %>" />
 		<input name="<%= namespace %>messageId" type="hidden" value="" />
 		<input name="<%= namespace %>threadId" type="hidden" value="<%= thread.getThreadId() %>" />
 		<input name="<%= namespace %>parentMessageId" type="hidden" value="" />

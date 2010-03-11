@@ -99,18 +99,17 @@ public class EditDiscussionAction extends PortletAction {
 	protected void deleteMessage(ActionRequest actionRequest) throws Exception {
 		long groupId = PortalUtil.getScopeGroupId(actionRequest);
 
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 		String permissionClassName = ParamUtil.getString(
 			actionRequest, "permissionClassName");
 		long permissionClassPK = ParamUtil.getLong(
 			actionRequest, "permissionClassPK");
 
-		String className = ParamUtil.getString(actionRequest, "className");
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
-
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessageServiceUtil.deleteDiscussionMessage(
-			groupId, permissionClassName, permissionClassPK, className, classPK,
+			groupId, className, classPK, permissionClassName, permissionClassPK,
 			messageId);
 	}
 
@@ -121,13 +120,12 @@ public class EditDiscussionAction extends PortletAction {
 	protected MBMessage updateMessage(ActionRequest actionRequest)
 		throws Exception {
 
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 		String permissionClassName = ParamUtil.getString(
 			actionRequest, "permissionClassName");
 		long permissionClassPK = ParamUtil.getLong(
 			actionRequest, "permissionClassPK");
-
-		String className = ParamUtil.getString(actionRequest, "className");
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
@@ -147,7 +145,7 @@ public class EditDiscussionAction extends PortletAction {
 			// Add message
 
 			message = MBMessageServiceUtil.addDiscussionMessage(
-				permissionClassName, permissionClassPK, className, classPK,
+				className, classPK, permissionClassName, permissionClassPK,
 				threadId, parentMessageId, subject, body, serviceContext);
 		}
 		else {
@@ -155,7 +153,7 @@ public class EditDiscussionAction extends PortletAction {
 			// Update message
 
 			message = MBMessageServiceUtil.updateDiscussionMessage(
-				permissionClassName, permissionClassPK, className, classPK,
+				className, classPK, permissionClassName, permissionClassPK,
 				messageId, subject, body, serviceContext);
 		}
 
