@@ -73,6 +73,12 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		try {
 
+			Group group = null;
+
+			if (groupId > 0) {
+				group = GroupLocalServiceUtil.getGroup(groupId);
+			}
+
 			// If we are checking permissions on an object that belongs to a
 			// community, then it's only necessary to check the group that
 			// represents the community and not all the groups that the user
@@ -82,12 +88,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			List<Group> userGroups = new ArrayList<Group>();
 			//List<Group> userGroups = UserUtil.getGroups(userId);
 
-			if (groupId > 0) {
-				if (GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
-					Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-					userGroups.add(group);
-				}
+			if (GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
+				userGroups.add(group);
 			}
 
 			List<Organization> userOrgs = getUserOrgs(userId);
@@ -138,8 +140,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 				roles.addAll(userGroupGroupRoles);
 
-				if (!userGroups.isEmpty()) {
-					Group group = userGroups.get(0);
+				if ((group != null) &&
+					(group.isCommunity() || group.isOrganization())) {
 
 					addRequiredMemberRole(group, roles);
 					addTeamRoles(userId, group, roles);
@@ -365,9 +367,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 	protected void addTeamRoles(long userId, Group group, List<Role> roles)
 		throws Exception {
 
-		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) ||
-			 (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6)) &&
-			(group.isCommunity() || group.isOrganization())) {
+		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) ||
+			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6)) {
 
 			List<Team> teams = TeamLocalServiceUtil.getUserTeams(
 				userId, group.getGroupId());
