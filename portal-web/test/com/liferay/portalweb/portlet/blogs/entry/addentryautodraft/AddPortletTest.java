@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.blogs.entry.addentrydraft;
+package com.liferay.portalweb.portlet.blogs.entry.addentryautodraft;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddEntryDraftTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddEntryDraftTest extends BaseTestCase {
-	public void testAddEntryDraft() throws Exception {
+public class AddPortletTest extends BaseTestCase {
+	public void testAddPortlet() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -44,9 +44,6 @@ public class AddEntryDraftTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("_33_addEntryButton", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_33_title", RuntimeVariables.replace("DraftTitle"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -55,7 +52,7 @@ public class AddEntryDraftTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_editor")) {
+				if (selenium.isElementPresent("_145_addApplication")) {
 					break;
 				}
 			}
@@ -64,6 +61,9 @@ public class AddEntryDraftTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,7 +71,8 @@ public class AddEntryDraftTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent(
+							"//div[@id='Collaboration-Blogs']/p/a")) {
 					break;
 				}
 			}
@@ -80,6 +81,9 @@ public class AddEntryDraftTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.clickAt("//div[@id='Collaboration-Blogs']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,7 +91,7 @@ public class AddEntryDraftTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//textarea")) {
+				if (selenium.isElementPresent("//td[1]/div/div/div")) {
 					break;
 				}
 			}
@@ -97,37 +101,6 @@ public class AddEntryDraftTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
-		selenium.type("//body", RuntimeVariables.replace("DraftContent."));
-		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveDraftButton", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Draft saved")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isTextPresent("Draft saved"));
-		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Draft"),
-			selenium.getText("//div[1]/h3"));
-		assertEquals(RuntimeVariables.replace("DraftTitle"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
-		assertEquals(RuntimeVariables.replace("DraftContent."),
-			selenium.getText("//p"));
+		assertTrue(selenium.isElementPresent("//td[1]/div/div/div"));
 	}
 }

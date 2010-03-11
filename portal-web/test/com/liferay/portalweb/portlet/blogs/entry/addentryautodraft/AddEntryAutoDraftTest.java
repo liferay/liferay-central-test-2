@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.blogs.entry.addentrydraft;
+package com.liferay.portalweb.portlet.blogs.entry.addentryautodraft;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddEntryDraftTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddEntryAutoDraftTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddEntryDraftTest extends BaseTestCase {
-	public void testAddEntryDraft() throws Exception {
+public class AddEntryAutoDraftTest extends BaseTestCase {
+	public void testAddEntryAutoDraft() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -102,7 +102,7 @@ public class AddEntryDraftTest extends BaseTestCase {
 		selenium.selectFrame("//iframe");
 		selenium.type("//body", RuntimeVariables.replace("DraftContent."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveDraftButton", RuntimeVariables.replace(""));
+		Thread.sleep(15000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

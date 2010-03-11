@@ -16,6 +16,7 @@ package com.liferay.portalweb.portlet.blogs.entry;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.blogs.entry.addentry.AddEntryTests;
+import com.liferay.portalweb.portlet.blogs.entry.addentryautodraft.AddEntryAutoDraftTests;
 import com.liferay.portalweb.portlet.blogs.entry.addentrycontentmultipleword.AddEntryContentMultipleWordTests;
 import com.liferay.portalweb.portlet.blogs.entry.addentrycontentnull.AddEntryContentNullTests;
 import com.liferay.portalweb.portlet.blogs.entry.addentrydraft.AddEntryDraftTests;
@@ -57,6 +58,7 @@ public class EntryTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(AddEntryTests.suite());
+		testSuite.addTest(AddEntryAutoDraftTests.suite());
 		testSuite.addTest(AddEntryContentMultipleWordTests.suite());
 		testSuite.addTest(AddEntryContentNullTests.suite());
 		testSuite.addTest(AddEntryDraftTests.suite());
