@@ -169,8 +169,6 @@ AUI().use(
 															function(A) {
 																var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
 
-																Liferay.Dockbar.addApplication.set('bodyContent', obj.responseText);
-
 																Liferay.LayoutConfiguration._dialogBody = contentBox;
 
 																Liferay.LayoutConfiguration._loadContent();
