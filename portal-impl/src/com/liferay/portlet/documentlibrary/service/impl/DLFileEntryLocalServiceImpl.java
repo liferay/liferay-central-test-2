@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -1252,6 +1253,10 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		int[] splitVersion = StringUtil.split(version, StringPool.PERIOD, 0);
+
+		if (splitVersion.length == 1) {
+			splitVersion = ArrayUtil.append(splitVersion, 0);
+		}
 
 		if (majorVersion) {
 			splitVersion[0]++;
