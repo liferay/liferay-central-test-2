@@ -49,7 +49,8 @@ public class SearchCouponTest extends BaseTestCase {
 
 		String codeSearch = selenium.getText("//td[2]/a");
 		RuntimeVariables.setValue("codeSearch", codeSearch);
-		selenium.type("_34_code", RuntimeVariables.replace("${codeSearch}"));
+		selenium.type("_34_code",
+			RuntimeVariables.replace(RuntimeVariables.getValue("codeSearch")));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -76,7 +77,9 @@ public class SearchCouponTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Coupons", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_34_code", RuntimeVariables.replace("${codeSearch}1"));
+		selenium.type("_34_code",
+			RuntimeVariables.replace(RuntimeVariables.getValue("codeSearch")));
+		selenium.typeKeys("_34_code", RuntimeVariables.replace("1"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
