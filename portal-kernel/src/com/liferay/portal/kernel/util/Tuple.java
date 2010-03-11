@@ -23,7 +23,7 @@ import java.io.Serializable;
  */
 public class Tuple implements Serializable {
 
-	public Tuple(Object ... array) {
+	public Tuple(Object... array) {
 		_array = array;
 	}
 
