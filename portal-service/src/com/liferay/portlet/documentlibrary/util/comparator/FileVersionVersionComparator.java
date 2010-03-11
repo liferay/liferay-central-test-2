@@ -47,30 +47,30 @@ public class FileVersionVersionComparator extends OrderByComparator {
 
 		int value = 0;
 
-		int[] splitVersion1 = StringUtil.split(
+		int[] versionParts1 = StringUtil.split(
 			fileVersion1.getVersion(), StringPool.PERIOD, 0);
-		int[] splitVersion2 = StringUtil.split(
+		int[] versionParts2 = StringUtil.split(
 			fileVersion2.getVersion(), StringPool.PERIOD, 0);
 
-		if ((splitVersion1.length != 2) && (splitVersion2.length != 2)) {
+		if ((versionParts1.length != 2) && (versionParts2.length != 2)) {
 			value = 0;
 		}
-		else if ((splitVersion1.length != 2)) {
+		else if ((versionParts1.length != 2)) {
 			value = -1;
 		}
-		else if ((splitVersion2.length != 2)) {
+		else if ((versionParts2.length != 2)) {
 			value = 1;
 		}
-		else if (splitVersion1[0] > splitVersion2[0]) {
+		else if (versionParts1[0] > versionParts2[0]) {
 			value = 1;
 		}
-		else if (splitVersion1[0] < splitVersion2[0]) {
+		else if (versionParts1[0] < versionParts2[0]) {
 			value = -1;
 		}
-		else if (splitVersion1[1] > splitVersion2[1]) {
+		else if (versionParts1[1] > versionParts2[1]) {
 			value = 1;
 		}
-		else if (splitVersion1[1] < splitVersion2[1]) {
+		else if (versionParts1[1] < versionParts2[1]) {
 			value = -1;
 		}
 
