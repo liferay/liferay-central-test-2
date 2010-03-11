@@ -376,9 +376,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 				// Action
 
-				if (strutsAction.equals("/document_library/edit_file_entry")) {
-					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
-				}
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
 
 				// Add result row
 
