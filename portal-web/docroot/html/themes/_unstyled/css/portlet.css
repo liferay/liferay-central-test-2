@@ -1,8 +1,5 @@
 /* ---------- Portlet wrapper and icons ---------- */
 
-.portlet {
-}
-
 .freeform .portlet {
 }
 
@@ -21,10 +18,10 @@ body.portlet {
 .portlet-title img {
 }
 
-.portlet-icons {
+.portlet-topper-toolbar {
 }
 
-.portlet-icons .nobr {
+.portlet-topper-toolbar .nobr {
 }
 
 .portlet-content, .portlet-minimized .portlet-content-container {
@@ -107,9 +104,6 @@ body.portlet {
 }
 
 .lfr-panel-page .portlet-title {
-}
-
-.lfr-panel-page #main-content {
 }
 
 .lfr-panel-page .lfr-add-content h2 span {
@@ -333,6 +327,9 @@ body.portlet {
 }
 
 .results-row.lfr-role-organization .col-1, .results-row.hover.lfr-role-organization .col-1 {
+}
+
+.results-row.lfr-role-team .col-1, .results-row.hover.lfr-role-team .col-1 {
 }
 
 /* ---------- Miscellaneous component styles ---------- */

@@ -460,6 +460,10 @@ body.portlet {
 	background-image: url(../images/common/organization_icon.png);
 }
 
+.results-row.lfr-role-team .col-1, .results-row.hover.lfr-role-team .col-1 {
+	background-image: url(../images/common/team_icon.png);
+}
+
 /* ---------- Miscellaneous component styles ---------- */
 
 /* ---------- Add content dialog ---------- */
