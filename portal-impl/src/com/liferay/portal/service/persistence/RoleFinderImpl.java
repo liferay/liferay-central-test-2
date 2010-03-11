@@ -603,11 +603,9 @@ public class RoleFinderImpl
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler(types.length * 2 - 1);
+		StringBundler sb = new StringBundler(types.length * 2);
 
-		if (types.length > 0) {
-			sb.append(" AND ");
-		}
+		sb.append(" AND ");
 
 		for (int i = 0; i < types.length; i++) {
 			sb.append("Role_.type_ = ?");
