@@ -113,6 +113,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setCreateDate(folder.getCreateDate());
+		serviceContext.setModifiedDate(folder.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 
 		if ((parentFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
@@ -217,6 +219,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setCreateDate(image.getCreateDate());
+		serviceContext.setModifiedDate(image.getModifiedDate());
 
 		if ((folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == image.getFolderId())) {

@@ -122,8 +122,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.setGroupId(groupId);
 			image.setCompanyId(user.getCompanyId());
 			image.setUserId(user.getUserId());
-			image.setCreateDate(now);
-			image.setModifiedDate(now);
+			image.setCreateDate(serviceContext.getCreateDate(now));
+			image.setModifiedDate(serviceContext.getModifiedDate(now));
 			image.setFolderId(folderId);
 			image.setName(name);
 			image.setDescription(description);
@@ -504,7 +504,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				name = image.getName();
 			}
 
-			image.setModifiedDate(new Date());
+			image.setModifiedDate(serviceContext.getModifiedDate(null));
 			image.setFolderId(folderId);
 			image.setName(name);
 			image.setDescription(description);
