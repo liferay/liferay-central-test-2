@@ -21,6 +21,7 @@ import com.liferay.portal.model.PortletPreferencesIds;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -74,6 +75,10 @@ public class ServiceContext implements Serializable {
 		return _companyId;
 	}
 
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
 	public Map<String, Serializable> getExpandoBridgeAttributes() {
 		return _expandoBridgeAttributes;
 	}
@@ -92,6 +97,10 @@ public class ServiceContext implements Serializable {
 
 	public String getLayoutURL() {
 		return _layoutURL;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
 	}
 
 	public String getPathMain() {
@@ -184,6 +193,10 @@ public class ServiceContext implements Serializable {
 		_companyId = companyId;
 	}
 
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
 	public void setExpandoBridgeAttributes(
 		Map<String, Serializable> expandoBridgeAttributes) {
 
@@ -204,6 +217,10 @@ public class ServiceContext implements Serializable {
 
 	public void setLayoutURL(String layoutURL) {
 		_layoutURL = layoutURL;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
 	}
 
 	public void setPathMain(String pathMain) {
@@ -252,11 +269,13 @@ public class ServiceContext implements Serializable {
 	private String _command;
 	private String[] _communityPermissions;
 	private long _companyId;
+	private Date _createDate;
 	private Map<String, Serializable> _expandoBridgeAttributes;
 	private String[] _guestPermissions;
 	private String _languageId;
 	private String _layoutFullURL;
 	private String _layoutURL;
+	private Date _modifiedDate;
 	private String _pathMain;
 	private String _portalURL;
 	private PortletPreferencesIds _portletPreferencesIds;
