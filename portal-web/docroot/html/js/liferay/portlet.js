@@ -129,10 +129,12 @@ Liferay.Portlet = {
 
 			portletBoundary = portletBound;
 
-			Liferay.Layout.updateCurrentPortletInfo(portletBoundary);
+			if (Liferay.Layout) {
+				Liferay.Layout.updateCurrentPortletInfo(portletBoundary);
 
-			if (container) {
-				Liferay.Layout.syncEmptyColumnClassUI(container);
+				if (container) {
+					Liferay.Layout.syncEmptyColumnClassUI(container);
+				}
 			}
 
 			if (onComplete) {
