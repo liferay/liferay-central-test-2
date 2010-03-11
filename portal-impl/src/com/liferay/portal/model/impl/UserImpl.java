@@ -105,11 +105,14 @@ public class UserImpl extends UserModelImpl implements User {
 
 		return getDisplayURL(
 			themeDisplay.getPortalURL(), themeDisplay.getPathMain());
-
 	}
 
 	public String getDisplayURL(String portalURL, String mainPath)
 		throws PortalException, SystemException {
+
+		if (isDefaultUser()) {
+			return StringPool.BLANK;
+		}
 
 		Group group = getGroup();
 
