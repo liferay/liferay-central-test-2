@@ -274,7 +274,9 @@ public class GroupWrapper implements Group {
 		return _group.isStagingGroup();
 	}
 
-	public java.lang.String getDescriptiveName() {
+	public java.lang.String getDescriptiveName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _group.getDescriptiveName();
 	}
 

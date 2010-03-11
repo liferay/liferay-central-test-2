@@ -14,6 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -155,66 +157,59 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
-	public String getDescriptiveName() {
+	public String getDescriptiveName() throws PortalException, SystemException {
 		String name = getName();
 
-		try {
-			if (isCompany()) {
-				name = "global";
-			}
-			else if (isLayout()) {
-				Layout layout = LayoutLocalServiceUtil.getLayout(
+		if (isCompany()) {
+			name = "global";
+		}
+		else if (isLayout()) {
+			Layout layout = LayoutLocalServiceUtil.getLayout(getClassPK());
+
+			name = layout.getName(LocaleUtil.getDefault());
+		}
+		else if (isLayoutPrototype()) {
+			LayoutPrototype layoutPrototype =
+				LayoutPrototypeLocalServiceUtil.getLayoutPrototype(
 					getClassPK());
 
-				name = layout.getName(LocaleUtil.getDefault());
-			}
-			else if (isLayoutPrototype()) {
-				LayoutPrototype layoutPrototype =
-					LayoutPrototypeLocalServiceUtil.getLayoutPrototype(
-						getClassPK());
-
-				name = layoutPrototype.getName(LocaleUtil.getDefault());
-			}
-			else if (isLayoutSetPrototype()) {
-				LayoutSetPrototype layoutSetPrototype =
-					LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
-						getClassPK());
-
-				name = layoutSetPrototype.getName(LocaleUtil.getDefault());
-			}
-			else if (isOrganization()) {
-				long organizationId = getClassPK();
-
-				Organization organization =
-					OrganizationLocalServiceUtil.getOrganization(
-						organizationId);
-
-				name = organization.getName();
-			}
-			else if (isUser()) {
-				long userId = getClassPK();
-
-				User user = UserLocalServiceUtil.getUserById(userId);
-
-				name = user.getFullName();
-			}
-			else if (isUserGroup()) {
-				long userGroupId = getClassPK();
-
-				UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(
-					userGroupId);
-
-				name = userGroup.getName();
-			}
-			else if (name.equals(GroupConstants.GUEST)) {
-				Company company = CompanyLocalServiceUtil.getCompany(
-					getCompanyId());
-
-				company.getAccount().getName();
-			}
+			name = layoutPrototype.getName(LocaleUtil.getDefault());
 		}
-		catch (Exception e) {
-			_log.error("Error getting descriptive name for " + getGroupId(), e);
+		else if (isLayoutSetPrototype()) {
+			LayoutSetPrototype layoutSetPrototype =
+				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
+					getClassPK());
+
+			name = layoutSetPrototype.getName(LocaleUtil.getDefault());
+		}
+		else if (isOrganization()) {
+			long organizationId = getClassPK();
+
+			Organization organization =
+				OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+			name = organization.getName();
+		}
+		else if (isUser()) {
+			long userId = getClassPK();
+
+			User user = UserLocalServiceUtil.getUserById(userId);
+
+			name = user.getFullName();
+		}
+		else if (isUserGroup()) {
+			long userGroupId = getClassPK();
+
+			UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(
+				userGroupId);
+
+			name = userGroup.getName();
+		}
+		else if (name.equals(GroupConstants.GUEST)) {
+			Company company = CompanyLocalServiceUtil.getCompany(
+				getCompanyId());
+
+			company.getAccount().getName();
 		}
 
 		return name;

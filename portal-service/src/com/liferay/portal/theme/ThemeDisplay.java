@@ -289,7 +289,7 @@ public class ThemeDisplay implements Serializable {
 		}
 	}
 
-	public String getScopeGroupName() {
+	public String getScopeGroupName() throws PortalException, SystemException {
 		if (_scopeGroup == null) {
 			return StringPool.BLANK;
 		}
@@ -315,7 +315,7 @@ public class ThemeDisplay implements Serializable {
 		}
 	}
 
-	public String getParentGroupName() {
+	public String getParentGroupName() throws PortalException, SystemException {
 		if (_parentGroup == null) {
 			return StringPool.BLANK;
 		}

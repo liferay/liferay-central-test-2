@@ -64,7 +64,9 @@ public interface Group extends GroupModel {
 
 	public boolean isStagingGroup();
 
-	public java.lang.String getDescriptiveName();
+	public java.lang.String getDescriptiveName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getTypeLabel();
 
