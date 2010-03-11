@@ -44,9 +44,7 @@
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" %>
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsPermission" %>
 <%@ page import="com.liferay.portlet.blogs.util.BlogsUtil" %>
-<%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%
@@ -65,9 +63,6 @@ boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags",
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null), true);
 boolean enableComments = PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
-boolean moderateComments = GetterUtil.getBoolean(preferences.getValue("moderate-comments", null), false);
-boolean moderatePingbacks = GetterUtil.getBoolean(preferences.getValue("moderate-pingbacks", null), false);
-boolean moderateTrackbacks = GetterUtil.getBoolean(preferences.getValue("moderate-trackbacks", null), true);
 
 int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);

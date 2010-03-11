@@ -47,11 +47,7 @@ request.setAttribute("view_entry_content.jsp-redirect", redirect);
 request.setAttribute("view_entry_content.jsp-entry", entry);
 
 request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
-
-String topLink = ParamUtil.getString(request, "topLink", "blogs-home");
 %>
-
-<liferay-util:include page="/html/portlet/blogs/top_links.jsp" />
 
 <portlet:actionURL var="editEntryURL">
 	<portlet:param name="struts_action" value="/blogs/edit_entry" />
@@ -118,12 +114,10 @@ String topLink = ParamUtil.getString(request, "topLink", "blogs-home");
 		classPK="<%= entry.getEntryId() %>"
 		formAction="<%= discussionURL %>"
 		formName="fm2"
-		moderateEnabled="<%= true %>"
 		ratingsEnabled="<%= enableCommentRatings %>"
 		redirect="<%= currentURL %>"
 		subject="<%= entry.getTitle() %>"
 		userId="<%= entry.getUserId() %>"
-		status="<%= moderateComments ? StatusConstants.PENDING : StatusConstants.APPROVED %>"
 	/>
 </c:if>
 

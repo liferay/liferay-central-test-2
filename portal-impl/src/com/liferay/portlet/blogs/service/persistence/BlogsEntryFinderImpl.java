@@ -28,8 +28,6 @@ import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
-import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
@@ -47,80 +45,14 @@ import java.util.List;
 public class BlogsEntryFinderImpl
 	extends BasePersistenceImpl<BlogsEntry> implements BlogsEntryFinder {
 
-	public static String COUNT_DISCUSSIONS_BY_GROUP_ID =
-		BlogsEntryFinder.class.getName() + ".countDiscussionsByGroupId";
-
 	public static String COUNT_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".countByOrganizationIds";
-
-	public static String FIND_DISCUSSIONS_BY_GROUP_ID =
-		BlogsEntryFinder.class.getName() + ".findDiscussionsByGroupId";
 
 	public static String FIND_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".findByOrganizationIds";
 
 	public static String FIND_BY_NO_ASSETS =
 		BlogsEntryFinder.class.getName() + ".findByNoAssets";
-
-	public int countDiscussionsByGroupId(long groupId, int status)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_DISCUSSIONS_BY_GROUP_ID);
-
-			if (groupId > 0) {
-				sql = StringUtil.replace(
-					sql, "[$GROUP_ID$]", "AND (BlogsEntry.groupId = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$GROUP_ID$]", StringPool.BLANK);
-			}
-
-			if (status != StatusConstants.ANY) {
-				sql = StringUtil.replace(
-					sql, "[$STATUS$]", "AND (MBMessage.status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
-			}
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (groupId > 0) {
-				qPos.add(groupId);
-			}
-
-			if (status != StatusConstants.ANY) {
-				qPos.add(status);
-			}
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
 
 	public int countByOrganizationId(
 			long organizationId, Date displayDate, int status)
@@ -187,58 +119,6 @@ public class BlogsEntryFinderImpl
 			}
 
 			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<MBMessage> findDiscussionsByGroupId(
-			long groupId, int status, int start, int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_DISCUSSIONS_BY_GROUP_ID);
-
-			if (groupId > 0) {
-				sql = StringUtil.replace(
-					sql, "[$GROUP_ID$]", "AND (BlogsEntry.groupId = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$GROUP_ID$]", StringPool.BLANK);
-			}
-
-			if (status != StatusConstants.ANY) {
-				sql = StringUtil.replace(
-					sql, "[$STATUS$]", "AND (MBMessage.status = ?)");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
-			}
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("MBMessage", MBMessageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (groupId > 0) {
-				qPos.add(groupId);
-			}
-
-			if (status != StatusConstants.ANY) {
-				qPos.add(status);
-			}
-
-			return (List<MBMessage>)QueryUtil.list(
-				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

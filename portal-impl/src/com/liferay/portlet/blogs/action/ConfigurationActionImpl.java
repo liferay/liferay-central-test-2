@@ -57,10 +57,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
-		if (tabs2.equals("comment-settings")) {
-			updateCommentSettings(actionRequest, preferences);
-		}
-		else if (tabs2.equals("display-settings")) {
+		if (tabs2.equals("display-settings")) {
 			updateDisplaySettings(actionRequest, preferences);
 		}
 		else if (tabs2.equals("email-from")) {
@@ -92,32 +89,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		return "/html/portlet/blogs/configuration.jsp";
 	}
 
-	protected void updateCommentSettings(
-			ActionRequest actionRequest, PortletPreferences preferences)
-		throws Exception {
-
-		boolean enableComments = ParamUtil.getBoolean(
-			actionRequest, "enableComments");
-		boolean enableCommentRatings = ParamUtil.getBoolean(
-			actionRequest, "enableCommentRatings");
-		boolean moderateComments = ParamUtil.getBoolean(
-			actionRequest, "moderateComments");
-		boolean moderatePingbacks = ParamUtil.getBoolean(
-			actionRequest, "moderatePingbacks");
-		boolean moderateTrackbacks = ParamUtil.getBoolean(
-			actionRequest, "moderateTrackbacks");
-
-		preferences.setValue("enable-comments", String.valueOf(enableComments));
-		preferences.setValue(
-			"enable-comment-ratings", String.valueOf(enableCommentRatings));
-		preferences.setValue(
-			"moderate-comments", String.valueOf(moderateComments));
-		preferences.setValue(
-			"moderate-pingbacks", String.valueOf(moderatePingbacks));
-		preferences.setValue(
-			"moderate-trackbacks", String.valueOf(moderateTrackbacks));
-	}
-
 	protected void updateDisplaySettings(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
@@ -129,11 +100,18 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "enableFlags");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
+		boolean enableComments = ParamUtil.getBoolean(
+			actionRequest, "enableComments");
+		boolean enableCommentRatings = ParamUtil.getBoolean(
+			actionRequest, "enableCommentRatings");
 
 		preferences.setValue("page-delta", String.valueOf(pageDelta));
 		preferences.setValue("page-display-style", pageDisplayStyle);
 		preferences.setValue("enable-flags", String.valueOf(enableFlags));
 		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
+		preferences.setValue("enable-comments", String.valueOf(enableComments));
+		preferences.setValue(
+			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 	}
 
 	protected void updateEmailFrom(

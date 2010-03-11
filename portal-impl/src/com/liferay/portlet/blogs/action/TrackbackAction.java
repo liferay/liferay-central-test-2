@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -26,7 +27,6 @@ import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -110,6 +110,22 @@ public class TrackbackAction extends PortletAction {
 			return;
 		}
 
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		String remoteIp = request.getRemoteAddr();
+
+		String trackbackIp = HttpUtil.getIpAddress(url);
+
+		if (!remoteIp.equals(trackbackIp)) {
+			sendError(
+				actionRequest, actionResponse,
+				"Remote IP " + remoteIp +
+					" does not match trackback URL's IP " + trackbackIp + ".");
+
+			return;
+		}
+
 		try {
 			ActionUtil.getEntry(actionRequest);
 		}
@@ -141,8 +157,6 @@ public class TrackbackAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			MBMessage.class.getName(), actionRequest);
 
-		serviceContext.setStatus(StatusConstants.PENDING);
-
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
 				userId, className, classPK, StatusConstants.APPROVED);
@@ -155,13 +169,6 @@ public class TrackbackAction extends PortletAction {
 			"[...] " + excerpt + " [...] [url=" + url + "]" +
 				themeDisplay.translate("read-more") + "[/url]";
 
-		PortletPreferences preferences =
-			ServiceContextUtil.getPortletPreferences(serviceContext);
-
-		boolean moderateTrackbacks = GetterUtil.getBoolean(
-			preferences.getValue("moderate-trackbacks", null),
-			true);
-
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
 			userId, blogName, className, classPK, threadId, parentMessageId,
 			title, body, serviceContext);
@@ -171,14 +178,8 @@ public class TrackbackAction extends PortletAction {
 				Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
 					entry.getUrlTitle();
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		String remoteIp = request.getRemoteAddr();
-
 		LinkbackConsumerUtil.addNewTrackback(
-			message.getMessageId(), remoteIp, url, entryURL,
-			moderateTrackbacks);
+			message.getMessageId(), url, entryURL);
 
 		sendSuccess(actionRequest, actionResponse);
 	}
