@@ -148,6 +148,9 @@ public class EnterpriseAdminUtil {
 		else if (type == RoleConstants.TYPE_ORGANIZATION) {
 			cssClassName = "lfr-role-organization";
 		}
+		else if (role.isTeam()) {
+			cssClassName = "lfr-role-team";
+		}
 
 		return "lfr-role " + cssClassName;
 	}

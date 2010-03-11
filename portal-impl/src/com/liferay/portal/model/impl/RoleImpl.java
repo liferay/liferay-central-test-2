@@ -14,9 +14,16 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.Team;
+import com.liferay.portal.service.TeamLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="RoleImpl.java.html"><b><i>View Source</i></b></a>
@@ -29,11 +36,28 @@ public class RoleImpl extends RoleModelImpl implements Role {
 	public RoleImpl() {
 	}
 
+	public String getDescriptiveName() throws PortalException, SystemException {
+		String name = getName();
+
+		if (isTeam()) {
+			Team team = TeamLocalServiceUtil.getTeam(getClassPK());
+
+			name = team.getName();
+		}
+
+		return name;
+	}
+
 	public String getTitle(String languageId) {
 		String value = super.getTitle(languageId);
 
 		if (Validator.isNull(value)) {
-			value = getName();
+			try {
+				value = getDescriptiveName();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 
 		return value;
@@ -43,7 +67,12 @@ public class RoleImpl extends RoleModelImpl implements Role {
 		String value = super.getTitle(languageId, useDefault);
 
 		if (Validator.isNull(value)) {
-			value = getName();
+			try {
+				value = getDescriptiveName();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 
 		return value;
@@ -52,5 +81,22 @@ public class RoleImpl extends RoleModelImpl implements Role {
 	public String getTypeLabel() {
 		return RoleConstants.getTypeLabel(getType());
 	}
+
+	public boolean isTeam() {
+		return hasClassName(Team.class);
+	}
+
+	protected boolean hasClassName(Class<?> classObj) {
+		long classNameId = getClassNameId();
+
+		if (classNameId == PortalUtil.getClassNameId(classObj)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(RoleImpl.class);
 
 }

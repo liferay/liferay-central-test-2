@@ -176,6 +176,16 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			roles.remove(organizationAdministrator);
 			roles.remove(organizationOwner);
 		}
+
+		if (group.isCommunity() || group.isOrganization()) {
+			List<Team> teams = TeamLocalServiceUtil.getGroupTeams(groupId);
+
+			for (Team team : teams) {
+				Role role = RoleLocalServiceUtil.getTeamRole(team.getCompanyId(), team.getTeamId());
+
+				roles.add(role);
+			}
+		}
 		%>
 
 		<liferay-ui:search-container id="rolesSearchContainer">

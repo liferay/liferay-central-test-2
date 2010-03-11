@@ -40,10 +40,16 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Role extends RoleModel {
+	public java.lang.String getDescriptiveName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public java.lang.String getTitle(java.lang.String languageId);
 
 	public java.lang.String getTitle(java.lang.String languageId,
 		boolean useDefault);
 
 	public java.lang.String getTypeLabel();
+
+	public boolean isTeam();
 }

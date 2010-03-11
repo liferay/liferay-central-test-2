@@ -113,6 +113,10 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		}
 	}
 
+	public List<Team> getGroupTeams(long groupId) throws SystemException {
+		return teamPersistence.findByGroupId(groupId);
+	}
+
 	public Team getTeam(long teamId)
 		throws PortalException, SystemException {
 

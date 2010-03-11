@@ -210,8 +210,18 @@ public class RoleWrapper implements Role {
 		return _role.toXmlString();
 	}
 
+	public java.lang.String getDescriptiveName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _role.getDescriptiveName();
+	}
+
 	public java.lang.String getTypeLabel() {
 		return _role.getTypeLabel();
+	}
+
+	public boolean isTeam() {
+		return _role.isTeam();
 	}
 
 	public Role getWrappedRole() {

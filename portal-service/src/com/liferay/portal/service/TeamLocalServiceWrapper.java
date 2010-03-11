@@ -110,6 +110,12 @@ public class TeamLocalServiceWrapper implements TeamLocalService {
 		_teamLocalService.deleteTeams(groupId);
 	}
 
+	public java.util.List<com.liferay.portal.model.Team> getGroupTeams(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _teamLocalService.getGroupTeams(groupId);
+	}
+
 	public java.util.List<com.liferay.portal.model.Team> getUserTeams(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return _teamLocalService.getUserTeams(userId);
