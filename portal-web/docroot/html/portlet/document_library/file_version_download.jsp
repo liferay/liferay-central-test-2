@@ -24,9 +24,8 @@ Object[] objArray = (Object[])row.getObject();
 DLFileEntry fileEntry = (DLFileEntry)objArray[0];
 DLFileVersion fileVersion = (DLFileVersion)objArray[1];
 String[] conversions = (String[])objArray[2];
-PortletURL redirectURL = (PortletURL)objArray[3];
-Boolean isLocked = (Boolean)objArray[4];
-Boolean hasLock = (Boolean)objArray[5];
+Boolean isLocked = (Boolean)objArray[3];
+Boolean hasLock = (Boolean)objArray[4];
 %>
 
 <liferay-ui:icon

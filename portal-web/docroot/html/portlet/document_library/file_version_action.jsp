@@ -24,9 +24,8 @@ Object[] objArray = (Object[])row.getObject();
 DLFileEntry fileEntry = (DLFileEntry)objArray[0];
 DLFileVersion fileVersion = (DLFileVersion)objArray[1];
 String[] conversions = (String[])objArray[2];
-PortletURL redirectURL = (PortletURL)objArray[3];
-Boolean isLocked = (Boolean)objArray[4];
-Boolean hasLock = (Boolean)objArray[5];
+Boolean isLocked = (Boolean)objArray[3];
+Boolean hasLock = (Boolean)objArray[4];
 %>
 
 <liferay-ui:icon-menu>
@@ -34,7 +33,7 @@ Boolean hasLock = (Boolean)objArray[5];
 		<portlet:actionURL var="portletURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= redirectURL.toString() %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(fileVersion.getFolderId()) %>" />
 			<portlet:param name="name" value="<%= fileVersion.getName() %>" />
 			<portlet:param name="version" value="<%= String.valueOf(fileVersion.getVersion()) %>" />

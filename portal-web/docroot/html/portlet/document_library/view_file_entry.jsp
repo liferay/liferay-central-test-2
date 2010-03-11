@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-String strutsAction = ParamUtil.getString(request, "struts_action");
-
 String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
 
 String redirect = ParamUtil.getString(request, "redirect");
@@ -95,14 +93,6 @@ if (portletDisplay.isWebDAVEnabled()) {
 
 	webDavUrl = themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString();
 }
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", strutsAction);
-portletURL.setParameter("tabs2", tabs2);
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("folderId", String.valueOf(folderId));
-portletURL.setParameter("name", name);
 
 request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 %>
@@ -313,9 +303,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				headerNames.add("convert-to");
 			}
 
-			if (strutsAction.equals("/document_library/edit_file_entry")) {
-				headerNames.add(StringPool.BLANK);
-			}
+			headerNames.add(StringPool.BLANK);
 
 			searchContainer.setHeaderNames(headerNames);
 
@@ -335,7 +323,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			for (int i = 0; i < results.size(); i++) {
 				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
 
-				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, conversions, portletURL, isLocked, hasLock}, String.valueOf(fileVersion.getVersion()), i);
+				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, conversions, isLocked, hasLock}, String.valueOf(fileVersion.getVersion()), i);
 
 				StringBundler sb = new StringBundler(10);
 
