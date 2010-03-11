@@ -866,7 +866,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					null, userId, groupId, folderId, toFolderId, toName,
 					fileShortcut.getCreateDate(),
 					fileShortcut.getModifiedDate(),
-					fileShortcut.getStatusDate(),serviceContext);
+					fileShortcut.getStatusDate(), serviceContext);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
