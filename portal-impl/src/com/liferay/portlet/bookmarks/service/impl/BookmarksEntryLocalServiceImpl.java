@@ -73,14 +73,8 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setGroupId(groupId);
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());
-		entry.setCreateDate(
-			serviceContext.getCreateDate() == null ? now :
-				serviceContext.getCreateDate());
-
-		entry.setModifiedDate(
-			serviceContext.getModifiedDate() == null ? now :
-				serviceContext.getModifiedDate());
-
+		entry.setCreateDate(serviceContext.getCreateDate(now));
+		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 		entry.setFolderId(folderId);
 		entry.setName(name);
 		entry.setUrl(url);
@@ -339,10 +333,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		validate(url);
 
-		entry.setModifiedDate(
-			serviceContext.getModifiedDate() == null ? new Date() :
-				serviceContext.getModifiedDate());
-
+		entry.setModifiedDate(serviceContext.getModifiedDate(null));
 		entry.setFolderId(folderId);
 		entry.setName(name);
 		entry.setUrl(url);
