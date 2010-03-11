@@ -281,9 +281,23 @@ public class SeleneseToJavaBuilder {
 				sb.append(param1);
 				sb.append("(\"");
 				sb.append(param2);
-				sb.append("\", RuntimeVariables.replace(\"");
-				sb.append(param3);
-				sb.append("\"));");
+				sb.append("\", RuntimeVariables.replace(");
+
+				if (param3.startsWith("${")) {
+					sb.append("RuntimeVariables.getValue(\"");
+
+					String text = param3.substring(2, param3.length() - 1);
+
+					sb.append(text);
+					sb.append("\")");
+				}
+				else {
+					sb.append("\"");
+					sb.append(param3);
+					sb.append("\"");
+				}
+
+				sb.append("));");
 			}
 			else if (param1.equals("assertAlert") ||
 					 param1.equals("assertNotAlert")) {
