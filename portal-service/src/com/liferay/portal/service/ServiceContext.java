@@ -79,6 +79,18 @@ public class ServiceContext implements Serializable {
 		return _createDate;
 	}
 
+	public Date getCreateDate(Date defaultCreateDate) {
+		if (_createDate != null) {
+			return _createDate;
+		}
+		else if (defaultCreateDate != null) {
+			return defaultCreateDate;
+		}
+		else {
+			return new Date();
+		}
+	}
+
 	public Map<String, Serializable> getExpandoBridgeAttributes() {
 		return _expandoBridgeAttributes;
 	}
@@ -101,6 +113,18 @@ public class ServiceContext implements Serializable {
 
 	public Date getModifiedDate() {
 		return _modifiedDate;
+	}
+
+	public Date getModifiedDate(Date defaultModifiedDate) {
+		if (_modifiedDate != null) {
+			return _modifiedDate;
+		}
+		else if (defaultModifiedDate != null) {
+			return defaultModifiedDate;
+		}
+		else {
+			return new Date();
+		}
 	}
 
 	public String getPathMain() {
