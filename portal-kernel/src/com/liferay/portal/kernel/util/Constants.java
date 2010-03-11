@@ -39,6 +39,8 @@ public interface Constants {
 
 	public static final String DEACTIVATE = "deactivate";
 
+	public static final String DENY = "deny";
+
 	public static final String DELETE = "delete";
 
 	public static final String EDIT = "edit";
@@ -80,6 +82,8 @@ public interface Constants {
 	public static final String SIGNAL = "signal";
 
 	public static final String SUBSCRIBE = "subscribe";
+
+	public static final String UNAPPROVE = "unapprove";
 
 	public static final String UNLOCK = "unlock";
 

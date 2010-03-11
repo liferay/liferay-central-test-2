@@ -19,6 +19,7 @@ import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -66,8 +67,17 @@ public class EditDiscussionAction extends PortletAction {
 					"#" + actionResponseImpl.getNamespace() + "messageScroll" +
 						message.getMessageId();
 			}
+			else if (cmd.equals(Constants.APPROVE)) {
+				updateMessageStatus(actionRequest, StatusConstants.APPROVED);
+			}
+			else if (cmd.equals(Constants.DENY)) {
+				updateMessageStatus(actionRequest, StatusConstants.DENIED);
+			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteMessage(actionRequest);
+			}
+			else if (cmd.equals(Constants.UNAPPROVE)) {
+				updateMessageStatus(actionRequest, StatusConstants.PENDING);
 			}
 
 			sendRedirect(actionRequest, actionResponse, redirect);
@@ -158,6 +168,23 @@ public class EditDiscussionAction extends PortletAction {
 		}
 
 		return message;
+	}
+
+	protected void updateMessageStatus(ActionRequest actionRequest, int status)
+		throws Exception {
+
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
+
+		long messageId = ParamUtil.getLong(actionRequest, "messageId");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBMessage.class.getName(), actionRequest);
+
+		serviceContext.setStatus(status);
+
+		MBMessageServiceUtil.updateDiscussionStatus(
+			className, classPK, messageId, serviceContext);
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;

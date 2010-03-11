@@ -399,6 +399,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>moderateEnabled</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>permissionClassName</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -415,6 +420,11 @@
 		</attribute>
 		<attribute>
 			<name>redirect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>status</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

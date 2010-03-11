@@ -15,6 +15,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +43,9 @@ public class DiscussionTag extends IncludeTag {
 		_formName = formName;
 	}
 
+	public void setModerateEnabled(boolean moderateEnabled) {
+		_moderateEnabled = moderateEnabled;
+	}
 	public void setPermissionClassName(String permissionClassName) {
 		_permissionClassName = permissionClassName;
 	}
@@ -56,6 +60,10 @@ public class DiscussionTag extends IncludeTag {
 
 	public void setRedirect(String redirect) {
 		_redirect = redirect;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
 	}
 
 	public void setSubject(String subject) {
@@ -102,6 +110,9 @@ public class DiscussionTag extends IncludeTag {
 		request.setAttribute("liferay-ui:discussion:formAction", _formAction);
 		request.setAttribute("liferay-ui:discussion:formName", _formName);
 		request.setAttribute(
+			"liferay-ui:discussion:moderateEnabled",
+			String.valueOf(_moderateEnabled));
+		request.setAttribute(
 			"liferay-ui:discussion:permissionClassName", permissionClassName);
 		request.setAttribute(
 			"liferay-ui:discussion:permissionClassPK",
@@ -110,6 +121,8 @@ public class DiscussionTag extends IncludeTag {
 			"liferay-ui:discussion:ratingsEnabled",
 			String.valueOf(_ratingsEnabled));
 		request.setAttribute("liferay-ui:discussion:redirect", _redirect);
+		request.setAttribute(
+			"liferay-ui:discussion:status", String.valueOf(_status));
 		request.setAttribute("liferay-ui:discussion:subject", _subject);
 		request.setAttribute(
 			"liferay-ui:discussion:userId", String.valueOf(_userId));
@@ -121,10 +134,12 @@ public class DiscussionTag extends IncludeTag {
 	private long _classPK;
 	private String _formAction;
 	private String _formName = "fm";
+	private boolean _moderateEnabled = false;
 	private String _permissionClassName;
 	private long _permissionClassPK;
 	private boolean _ratingsEnabled = true;
 	private String _redirect;
+	private int _status = StatusConstants.APPROVED;
 	private String _subject;
 	private long _userId;
 

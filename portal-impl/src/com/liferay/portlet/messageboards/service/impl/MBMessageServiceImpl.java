@@ -483,6 +483,22 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		mbMessageLocalService.unsubscribeMessage(getUserId(), messageId);
 	}
 
+	public MBMessage updateDiscussionStatus(
+			String className, long classPK, long messageId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		User user = getUser();
+
+		MBDiscussionPermission.check(
+			getPermissionChecker(), user.getCompanyId(),
+			serviceContext.getScopeGroupId(), className, classPK, messageId,
+			user.getUserId(), ActionKeys.UPDATE_DISCUSSION);
+
+		return mbMessageLocalService.updateStatus(
+			getUserId(), messageId, serviceContext);
+	}
+
 	public MBMessage updateDiscussionMessage(
 			String className, long classPK, String permissionClassName,
 			long permissionClassPK, long messageId, String subject, String body,

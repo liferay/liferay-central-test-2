@@ -37,15 +37,17 @@ String className = (String)request.getAttribute("liferay-ui:discussion:className
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:classPK"));
 String formAction = (String)request.getAttribute("liferay-ui:discussion:formAction");
 String formName = namespace + request.getAttribute("liferay-ui:discussion:formName");
+boolean moderateEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:discussion:moderateEnabled"));
 String permissionClassName = (String)request.getAttribute("liferay-ui:discussion:permissionClassName");
 long permissionClassPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:permissionClassPK"));
 boolean ratingsEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:discussion:ratingsEnabled"));
 String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");
 long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:userId"));
+int status = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:discussion:status"));
 
 String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
 
-MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK, StatusConstants.APPROVED, threadView);
+MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK, StatusConstants.ANY, threadView);
 
 MBCategory category = messageDisplay.getCategory();
 MBThread thread = messageDisplay.getThread();
@@ -61,7 +63,7 @@ if (treeWalker != null) {
 }
 else {
 	rootMessage = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
-	messagesCount = MBMessageLocalServiceUtil.getThreadMessagesCount(rootMessage.getThreadId(), StatusConstants.APPROVED);
+	messagesCount = MBMessageLocalServiceUtil.getThreadMessagesCount(rootMessage.getThreadId(), StatusConstants.ANY);
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
@@ -80,6 +82,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		<input name="<%= namespace %>threadId" type="hidden" value="<%= thread.getThreadId() %>" />
 		<input name="<%= namespace %>parentMessageId" type="hidden" value="" />
 		<input name="<%= namespace %>body" type="hidden" value="" />
+		<input name="<%= namespace %>status" type="hidden" value="<%= status %>" />
 
 		<%
 		int i = 0;
@@ -202,13 +205,19 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 				searchContainer.setTotal(messagesCount - 1);
 
-				messages = MBMessageLocalServiceUtil.getThreadRepliesMessages(message.getThreadId(), StatusConstants.APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+				messages = MBMessageLocalServiceUtil.getThreadRepliesMessages(message.getThreadId(), StatusConstants.ANY, searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(messages);
 			}
 
 			for (i = 1; i <= messages.size(); i++) {
 				message = (MBMessage)messages.get(i - 1);
+
+				if (message.getStatus() != StatusConstants.APPROVED) {
+					if ((message.getStatus() == StatusConstants.DENIED) || !(MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.UPDATE_DISCUSSION) || ((message.getUserId() == user.getUserId()) && !user.isDefaultUser()))) {
+						continue;
+					}
+				}
 			%>
 
 				<tr>
@@ -229,6 +238,11 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					</td>
 					<td class="lfr-top stretch">
 						<div>
+							<c:if test="<%= (message.getStatus() != StatusConstants.APPROVED) %>">
+								<div class="portlet-msg-info">
+									<liferay-ui:message key="this-comment-is-waiting-approval" />
+								</div>
+							</c:if>
 
 							<%
 							String msgBody = BBCodeUtil.getHTML(message);
@@ -316,6 +330,38 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									<td>
 										<liferay-ui:icon image="edit" label="<%= true %>" url="<%= taglibEditURL %>" />
 									</td>
+
+									<c:if test="<%= moderateEnabled %>">
+
+										<c:if test="<%= message.getStatus() != StatusConstants.APPROVED %>">
+											<%
+											String taglibApproveURL = "javascript:" + randomNamespace + "approveMessage(" + i + ");";
+											%>
+
+											<td>
+												<liferay-ui:icon image="approve" label="<%= true %>" url="<%= taglibApproveURL %>" />
+											</td>
+										</c:if>
+
+										<c:if test="<%= message.getStatus() != StatusConstants.PENDING %>">
+											<%
+											String taglibUnapproveURL = "javascript:" + randomNamespace + "unapproveMessage(" + i + ");";
+											%>
+
+											<td>
+												<liferay-ui:icon image="undo" label="<%= true %>" message="unapprove" url="<%= taglibUnapproveURL %>" />
+											</td>
+										</c:if>
+
+										<c:if test="<%= message.getStatus() != StatusConstants.DENIED %>">
+											<%
+											String taglibDenyURL = "javascript:" + randomNamespace + "denyMessage(" + i + ");";
+											%>
+											<td>
+												<liferay-ui:icon image="deny" label="<%= true %>" message="mark-as-spam" url="<%= taglibDenyURL %>" />
+											</td>
+										</c:if>
+									</c:if>
 								</c:if>
 
 								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.DELETE_DISCUSSION) %>">
@@ -360,6 +406,8 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 									<br />
 
+									<input name="<%= namespace %>status<%= i %>" type="hidden" value="<%= message.getStatus() %>" />
+
 									<input id="<%= randomNamespace %>editReplyButton<%= i %>" type="button" value="<liferay-ui:message key="update" />" onClick="<%= randomNamespace %>updateMessage(<%= i %>);" />
 
 									<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= randomNamespace %>editForm<%= i %>').style.display = 'none'; void('');" />
@@ -394,6 +442,22 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 	</div>
 
 	<aui:script>
+		function <%= randomNamespace %>approveMessage(i) {
+			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
+
+			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.APPROVE %>";
+			document.<%= formName %>.<%= namespace %>messageId.value = messageId;
+			submitForm(document.<%= formName %>);
+		}
+
+		function <%= randomNamespace %>denyMessage(i) {
+			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
+
+			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.DENY %>";
+			document.<%= formName %>.<%= namespace %>messageId.value = messageId;
+			submitForm(document.<%= formName %>);
+		}
+
 		function <%= randomNamespace %>deleteMessage(i) {
 			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
 
@@ -421,13 +485,23 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.getElementById(textAreaId).focus();
 		}
 
+		function <%= randomNamespace %>unapproveMessage(i) {
+			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
+
+			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UNAPPROVE %>";
+			document.<%= formName %>.<%= namespace %>messageId.value = messageId;
+			submitForm(document.<%= formName %>);
+		}
+
 		function <%= randomNamespace %>updateMessage(i) {
 			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
 			eval("var body = document.<%= formName %>.<%= namespace %>editReplyBody" + i + ".value;");
+			eval("var status = document.<%= formName %>.<%= namespace %>status" + i + ".value;");
 
 			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 			document.<%= formName %>.<%= namespace %>messageId.value = messageId;
 			document.<%= formName %>.<%= namespace %>body.value = body;
+			document.<%= formName %>.<%= namespace %>status.value = status;
 			submitForm(document.<%= formName %>);
 		}
 	</aui:script>

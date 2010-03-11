@@ -1544,6 +1544,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbCategoryPersistence.update(category, false);
 		}
 
+		if (message.isDiscussion()) {
+			return message;
+		}
+
 		// Asset
 
 		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
@@ -1569,8 +1573,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Statistics
 
-		if (!message.isDiscussion()  &&
-			(serviceContext.getStatus() == StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
 			(oldStatus != StatusConstants.APPROVED)) {
 
 			mbStatsUserLocalService.updateStatsUser(
