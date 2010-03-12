@@ -112,7 +112,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						toolbarSet="liferay-article"
 						initMethod='<%= renderResponse.getNamespace() + "initEditor" + elInstanceId %>'
 						onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>'
-						height="250"
+						height="400"
 						width="500"
 					/>
 
