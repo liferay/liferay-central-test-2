@@ -22,6 +22,7 @@ import com.liferay.portal.util.InitUtil;
 
 import javax.servlet.ServletContextEvent;
 
+import org.springframework.beans.CachedIntrospectionResults;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
@@ -30,6 +31,7 @@ import org.springframework.web.context.ContextLoaderListener;
  * <a href="PortalContextLoaderListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
+ * @author Shuyang Zhou
  */
 public class PortalContextLoaderListener extends ContextLoaderListener {
 
@@ -41,10 +43,18 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		ApplicationContext applicationContext =
 			ContextLoader.getCurrentWebApplicationContext();
 
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
 		BeanLocator beanLocator = new BeanLocatorImpl(
-			PortalClassLoaderUtil.getClassLoader(), applicationContext);
+			portalClassLoader, applicationContext);
 
 		PortalBeanLocatorUtil.setBeanLocator(beanLocator);
+
+		ClassLoader classLoader = portalClassLoader;
+		while (classLoader != null) {
+			CachedIntrospectionResults.clearClassLoader(classLoader);
+			classLoader = classLoader.getParent();
+		}
 	}
 
 }
