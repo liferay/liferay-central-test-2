@@ -51,8 +51,10 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		PortalBeanLocatorUtil.setBeanLocator(beanLocator);
 
 		ClassLoader classLoader = portalClassLoader;
+
 		while (classLoader != null) {
 			CachedIntrospectionResults.clearClassLoader(classLoader);
+
 			classLoader = classLoader.getParent();
 		}
 	}
