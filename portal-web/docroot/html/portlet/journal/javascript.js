@@ -316,8 +316,9 @@ AUI().add(
 
 		Journal.prototype = {
 			addStructure: function(structureId, autoStructureId, name, description, xsd, callback) {
+				var instance = this;
 
-				var groupId = themeDisplay.getScopeGroupId();
+				var groupId = instance.getGroupId();
 				var addCommunityPermissions = true;
 				var addGuestPermissions = true;
 				var parentStructureId = '';
@@ -346,7 +347,7 @@ AUI().add(
 							{
 								addCommunityPermissions: addCommunityPermissions,
 								addGuestPermissions: addGuestPermissions,
-								scopeGroupId: themeDisplay.getScopeGroupId()
+								scopeGroupId: groupId
 							}
 						),
 						serviceParameterTypes: A.JSON.stringify(serviceParameterTypes)
@@ -603,9 +604,14 @@ AUI().add(
 				var columnFirst = A.one('.aui-column-first');
 				var columnLast = A.one('.aui-column-last');
 
-				columnFirst.show();
-				columnLast.setStyle('float', '');
-				columnLast.replaceClass('aui-w100', 'aui-w75');
+				if (columnFirst) {
+					columnFirst.show();
+				}
+
+				if (columnLast) {
+					columnLast.setStyle('float', '');
+					columnLast.replaceClass('aui-w100', 'aui-w75');
+				}
 			},
 
 			disableFields: function() {
@@ -688,9 +694,14 @@ AUI().add(
 				var columnFirst = A.one('.aui-column-first');
 				var columnLast = A.one('.aui-column-last');
 
-				columnFirst.hide();
-				columnLast.setStyle('float', 'left');
-				columnLast.replaceClass('aui-w75', 'aui-w100');
+				if (columnFirst) {
+					columnFirst.hide();
+				}
+
+				if (columnLast) {
+					columnLast.setStyle('float', 'left');
+					columnLast.replaceClass('aui-w75', 'aui-w100');
+				}
 			},
 
 			enableFields: function() {
@@ -844,6 +855,24 @@ AUI().add(
 				var structureTreeId = instance._guid('#structureTree');
 
 				return A.all(structureTreeId + ' li');
+			},
+
+			getGroupId: function() {
+				var instance = this;
+
+				var groupId = themeDisplay.getScopeGroupId();
+
+				if (instance.articleId) {
+					var form = instance.getPrincipalForm();
+					var inputGroupId = instance.getByName(form, 'groupId');
+					var inputGroupIdVal = inputGroupId.val();
+
+					if (inputGroupIdVal) {
+						groupId = inputGroupIdVal;
+					}
+				}
+
+				return groupId;
 			},
 
 			getParentStructureId: function() {
@@ -1284,7 +1313,7 @@ AUI().add(
 					var structureIdInput = instance.getByName(form, 'structureId');
 					var templateIdInput = instance.getByName(form, 'templateId');
 
-					var previewURL = themeDisplay.getPathMain() + '/journal/view_article_content?cmd=preview&groupId=' + themeDisplay.getScopeGroupId() + '&articleId=' + instance.articleId + '&version=' + versionInput.val() + '&languageId=' + languageIdInput.val() + '&type=' + typeInput.val() + '&structureId=' + structureIdInput.val() + '&templateId=' + templateIdInput.val();
+					var previewURL = themeDisplay.getPathMain() + '/journal/view_article_content?cmd=preview&groupId=' + instance.getGroupId() + '&articleId=' + instance.articleId + '&version=' + versionInput.val() + '&languageId=' + languageIdInput.val() + '&type=' + typeInput.val() + '&structureId=' + structureIdInput.val() + '&templateId=' + templateIdInput.val();
 
 					auxForm.attr('action', previewURL);
 					auxForm.attr('target', '_blank');
@@ -1631,7 +1660,7 @@ AUI().add(
 			updateStructure: function(parentStructureId, structureId, name, description, xsd, callback) {
 				var instance = this;
 
-				var groupId = themeDisplay.getScopeGroupId();
+				var groupId = instance.getGroupId();
 
 				var serviceParameterTypes = [
 					'long',
@@ -1653,7 +1682,7 @@ AUI().add(
 						xsd: xsd,
 						serviceContext: A.JSON.stringify(
 							{
-								scopeGroupId: themeDisplay.getScopeGroupId()
+								scopeGroupId: groupId
 							}
 						),
 						serviceParameterTypes: A.JSON.stringify(serviceParameterTypes)
