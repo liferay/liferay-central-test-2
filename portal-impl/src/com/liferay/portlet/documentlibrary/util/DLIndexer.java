@@ -142,10 +142,8 @@ public class DLIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		DLFileEntry fileEntry = (DLFileEntry)obj;
 
-		DLFolder folder = fileEntry.getFolder();
-
 		long companyId = fileEntry.getCompanyId();
-		long groupId = folder.getGroupId();
+		long groupId = fileEntry.getGroupId();
 		long repositoryId = fileEntry.getRepositoryId();
 		String fileName = fileEntry.getName();
 		long fileEntryId = fileEntry.getFileEntryId();
