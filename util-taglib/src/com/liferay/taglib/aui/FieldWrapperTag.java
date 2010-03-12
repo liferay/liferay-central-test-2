@@ -83,7 +83,7 @@ public class FieldWrapperTag extends IncludeTag {
 	protected void setAttributes(HttpServletRequest request) {
 		String label = _label;
 
-		if (Validator.isNull(label)) {
+		if (label == null) {
 			label = TextFormatter.format(_name, TextFormatter.K);
 		}
 
