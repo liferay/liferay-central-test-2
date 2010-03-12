@@ -200,8 +200,8 @@ public class DLFileEntryLocalServiceImpl
 		// File version
 
 		addFileVersion(
-			user, fileEntry, now, fileEntry.getVersion(), null,
-			serviceContext.getStatus());
+			user, fileEntry, serviceContext.getModifiedDate(now),
+			fileEntry.getVersion(), null, serviceContext.getStatus());
 
 		// Folder
 
@@ -502,7 +502,8 @@ public class DLFileEntryLocalServiceImpl
 
 		if (userId > 0) {
 			dlFileRankLocalService.updateFileRank(
-				groupId, companyId, userId, folderId, name);
+				groupId, companyId, userId, folderId, name,
+				new ServiceContext());
 		}
 
 		fileEntry.setReadCount(fileEntry.getReadCount() + 1);

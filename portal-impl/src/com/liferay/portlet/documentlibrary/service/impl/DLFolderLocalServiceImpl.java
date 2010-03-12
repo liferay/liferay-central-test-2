@@ -73,8 +73,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folder.setGroupId(groupId);
 		folder.setCompanyId(user.getCompanyId());
 		folder.setUserId(user.getUserId());
-		folder.setCreateDate(now);
-		folder.setModifiedDate(now);
+		folder.setCreateDate(serviceContext.getCreateDate(now));
+		folder.setModifiedDate(serviceContext.getModifiedDate(now));
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
@@ -422,7 +422,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		validate(
 			folder.getFolderId(), folder.getGroupId(), parentFolderId, name);
 
-		folder.setModifiedDate(new Date());
+		folder.setModifiedDate(serviceContext.getModifiedDate(null));
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);

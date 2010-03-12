@@ -18,12 +18,12 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.service.base.DLFileRankLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.util.comparator.FileRankCreateDateComparator;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +38,15 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 			String name)
 		throws SystemException {
 
+		return addFileRank(
+			groupId, companyId, userId, folderId, name, new ServiceContext());
+	}
+
+	public DLFileRank addFileRank(
+			long groupId, long companyId, long userId, long folderId,
+			String name, ServiceContext serviceContext)
+		throws SystemException {
+
 		long fileRankId = counterLocalService.increment();
 
 		DLFileRank fileRank = dlFileRankPersistence.create(fileRankId);
@@ -45,7 +54,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		fileRank.setGroupId(groupId);
 		fileRank.setCompanyId(companyId);
 		fileRank.setUserId(userId);
-		fileRank.setCreateDate(new Date());
+		fileRank.setCreateDate(serviceContext.getCreateDate(null));
 		fileRank.setFolderId(folderId);
 		fileRank.setName(name);
 
@@ -101,6 +110,15 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 			String name)
 		throws SystemException {
 
+		return updateFileRank(
+			groupId, companyId, userId, folderId, name, new ServiceContext());
+	}
+
+	public DLFileRank updateFileRank(
+			long groupId, long companyId, long userId, long folderId,
+			String name, ServiceContext serviceContext)
+		throws SystemException {
+
 		if (!PropsValues.DL_FILE_RANK_ENABLED) {
 			return null;
 		}
@@ -109,13 +127,13 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 			companyId, userId, folderId, name);
 
 		if (fileRank != null) {
-			fileRank.setCreateDate(new Date());
+			fileRank.setCreateDate(serviceContext.getCreateDate(null));
 
 			dlFileRankPersistence.update(fileRank, false);
 		}
 		else {
 			fileRank = addFileRank(
-				groupId, companyId, userId, folderId, name);
+				groupId, companyId, userId, folderId, name, serviceContext);
 		}
 
 		if (dlFileRankPersistence.countByG_U(groupId, userId) > 5) {

@@ -230,6 +230,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setCreateDate(fileEntry.getCreateDate());
+		serviceContext.setModifiedDate(fileEntry.getModifiedDate());
 		serviceContext.setScopeGroupId(groupId);
 
 		InputStream is = context.getZipEntryAsInputStream(binPath);
@@ -330,6 +332,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			name = rank.getName();
 		}
 
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setCreateDate(rank.getCreateDate());
+
 		if ((folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == rank.getFolderId())) {
 
@@ -348,7 +354,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			DLFileRankLocalServiceUtil.updateFileRank(
 				context.getGroupId(), context.getCompanyId(), userId, folderId,
-				name);
+				name, serviceContext);
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -370,6 +376,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setCreateDate(folder.getCreateDate());
+		serviceContext.setModifiedDate(folder.getModifiedDate());
 
 		if ((parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
