@@ -199,7 +199,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// File version
 
-		DLFileVersion fileVersion = addFileVersion(
+		addFileVersion(
 			user, fileEntry, serviceContext.getModifiedDate(now),
 			DLFileEntryConstants.DEFAULT_VERSION, null,
 			serviceContext.getStatus());
@@ -242,8 +242,7 @@ public class DLFileEntryLocalServiceImpl
 			try {
 				WorkflowHandlerRegistryUtil.startWorkflowInstance(
 					user.getCompanyId(), groupId, userId,
-					DLFileEntry.class.getName(), fileVersion.getFileVersionId(),
-					fileEntry);
+					DLFileEntry.class.getName(), fileEntryId, fileEntry);
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -987,29 +986,15 @@ public class DLFileEntryLocalServiceImpl
 			return fileEntry;
 		}
 
-		DLFileVersion fileVersion;
-
 		if (Validator.isNotNull(fileEntry.getPendingVersion())) {
-			fileVersion = updateFileVersion(
+			updateFileVersion(
 				user, fileEntry, serviceContext.getModifiedDate(now), version,
 				versionDescription, serviceContext.getStatus());
 		}
 		else {
-			fileVersion =
-				dlFileVersionLocalService.getLatestFileVersion(
-					fileEntry.getGroupId(), fileEntry.getFolderId(),
-					fileEntry.getName());
-
-			if (DLUtil.compareVersions(
-					version, fileVersion.getVersion()) <= 0) {
-
-				version = getNextVersion(
-					fileVersion.getVersion(), majorVersion);
-			}
-
-			fileVersion = addFileVersion(
-				user, fileEntry, serviceContext.getModifiedDate(now),
-				version, versionDescription, serviceContext.getStatus());
+			addFileVersion(
+				user, fileEntry, serviceContext.getModifiedDate(now), version,
+				versionDescription, serviceContext.getStatus());
 		}
 
 		// File entry
@@ -1070,7 +1055,7 @@ public class DLFileEntryLocalServiceImpl
 			try {
 				WorkflowHandlerRegistryUtil.startWorkflowInstance(
 					user.getCompanyId(), groupId, userId,
-					DLFileEntry.class.getName(), fileVersion.getFileVersionId(),
+					DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
 					fileEntry);
 			}
 			catch (Exception e) {
@@ -1082,28 +1067,39 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry updateWorkflowStatus(
-			long userId, long fileVersionId, ServiceContext serviceContext)
+			long userId, long fileEntryId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// File Version
+		// File entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		DLFileVersion fileVersion = dlFileVersionPersistence.findByPrimaryKey(
-			fileVersionId);
+		DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
+			fileEntryId);
+
+		// File version
+
+		DLFileVersion fileVersion =
+			dlFileVersionLocalService.getLatestFileVersion(
+				fileEntry.getGroupId(), fileEntry.getFolderId(),
+				fileEntry.getName());
 
 		fileVersion.setStatus(serviceContext.getStatus());
 		fileVersion.setStatusByUserId(user.getUserId());
 		fileVersion.setStatusByUserName(user.getFullName());
 		fileVersion.setStatusDate(new Date());
 
+		if (fileVersion.isApproved() &&
+			(DLUtil.compareVersions(
+				fileVersion.getVersion(),
+				DLFileEntryConstants.DEFAULT_VERSION) < 0)) {
+
+			fileVersion.setVersion(DLFileEntryConstants.DEFAULT_VERSION);
+		}
+
 		dlFileVersionPersistence.update(fileVersion, false);
 
 		// File entry
-
-		DLFileEntry fileEntry = dlFileEntryPersistence.findByG_F_N(
-			fileVersion.getGroupId(), fileVersion.getFolderId(),
-			fileVersion.getName());
 
 		if (fileVersion.isApproved() &&
 			(DLUtil.compareVersions(
@@ -1167,15 +1163,15 @@ public class DLFileEntryLocalServiceImpl
 				socialActivityLocalService.addUniqueActivity(
 					fileVersion.getUserId(), fileVersion.getGroupId(),
 					fileVersion.getCreateDate(), DLFileEntry.class.getName(),
-					fileEntry.getFileEntryId(), DLActivityKeys.ADD_FILE_ENTRY,
+					fileEntryId, DLActivityKeys.ADD_FILE_ENTRY,
 					StringPool.BLANK, 0);
 			}
 			else {
 				socialActivityLocalService.addActivity(
 					fileVersion.getUserId(), fileVersion.getGroupId(),
 					fileVersion.getCreateDate(), DLFileEntry.class.getName(),
-					fileEntry.getFileEntryId(),
-					DLActivityKeys.UPDATE_FILE_ENTRY, StringPool.BLANK, 0);
+					fileEntryId, DLActivityKeys.UPDATE_FILE_ENTRY,
+					StringPool.BLANK, 0);
 			}
 		}
 
@@ -1196,7 +1192,7 @@ public class DLFileEntryLocalServiceImpl
 		return fileEntry;
 	}
 
-	protected DLFileVersion addFileVersion(
+	protected void addFileVersion(
 			User user, DLFileEntry fileEntry, Date modifiedDate, String version,
 			String description, int status)
 		throws SystemException {
@@ -1230,7 +1226,7 @@ public class DLFileEntryLocalServiceImpl
 		fileVersion.setStatusByUserName(user.getFullName());
 		fileVersion.setStatusDate(fileEntry.getModifiedDate());
 
-		return dlFileVersionPersistence.update(fileVersion, false);
+		dlFileVersionPersistence.update(fileVersion, false);
 	}
 
 	protected long getFolderId(long companyId, long folderId)
@@ -1250,20 +1246,6 @@ public class DLFileEntryLocalServiceImpl
 		return folderId;
 	}
 
-	protected String getNextVersion(String version, boolean majorVersion) {
-		int[] versionParts = StringUtil.split(version, StringPool.PERIOD, 0);
-
-		if (majorVersion) {
-			versionParts[0]++;
-			versionParts[1] = 0;
-		}
-		else {
-			versionParts[1]++;
-		}
-
-		return versionParts[0] + StringPool.PERIOD + versionParts[1];
-	}
-
 	protected String getNextVersion(
 		DLFileEntry fileEntry, boolean majorVersion, int status) {
 
@@ -1277,10 +1259,21 @@ public class DLFileEntryLocalServiceImpl
 			return DLFileEntryConstants.DEFAULT_VERSION;
 		}
 
-		return getNextVersion(fileEntry.getVersion(), majorVersion);
+		int[] versionParts = StringUtil.split(
+			fileEntry.getVersion(), StringPool.PERIOD, 0);
+
+		if (majorVersion) {
+			versionParts[0]++;
+			versionParts[1] = 0;
+		}
+		else {
+			versionParts[1]++;
+		}
+
+		return versionParts[0] + StringPool.PERIOD + versionParts[1];
 	}
 
-	protected DLFileVersion updateFileVersion(
+	protected void updateFileVersion(
 			User user, DLFileEntry fileEntry, Date modifiedDate, String version,
 			String description, int status)
 		throws PortalException, SystemException {
@@ -1298,7 +1291,7 @@ public class DLFileEntryLocalServiceImpl
 		fileVersion.setStatusByUserName(user.getFullName());
 		fileVersion.setStatusDate(modifiedDate);
 
-		return dlFileVersionPersistence.update(fileVersion, false);
+		dlFileVersionPersistence.update(fileVersion, false);
 	}
 
 	protected void validate(

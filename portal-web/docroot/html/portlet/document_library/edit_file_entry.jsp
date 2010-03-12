@@ -79,12 +79,8 @@ if (fileEntry == null) {
 		status = StatusConstants.PENDING;
 	}
 }
-else {
-	DLFileVersion latestVersion = DLFileVersionLocalServiceUtil.getLatestFileVersion(scopeGroupId, folderId, name);
-
-	if (WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), fileEntry.getGroupId(), DLFileEntry.class.getName(), latestVersion.getFileVersionId())) {
-		status = StatusConstants.PENDING;
-	}
+else if (WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), fileEntry.getGroupId(), DLFileEntry.class.getName(), fileEntry.getFileEntryId())) {
+	status = StatusConstants.PENDING;
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
