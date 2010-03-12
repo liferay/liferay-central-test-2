@@ -25,9 +25,11 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
 import com.liferay.portal.webdav.LockException;
@@ -48,8 +50,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
-import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
 import java.io.InputStream;
@@ -626,7 +626,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			serviceContext.setAddCommunityPermissions(
 				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
-
 			serviceContext.setStatus(StatusConstants.DRAFT);
 
 			try {
@@ -723,7 +722,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (resource instanceof DLFileEntryResourceImpl) {
 				DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
 
-				if (PropsValues.DL_WEBDAV_WEB_UNLOCK_ENABLED) {
+				if (!PropsValues.DL_WEBDAV_AUTO_UNLOCK) {
 					return true;
 				}
 
@@ -774,7 +773,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		serviceContext.setAddCommunityPermissions(
 			isAddCommunityPermissions(fileEntry.getGroupId()));
 		serviceContext.setAddGuestPermissions(true);
-
 		serviceContext.setStatus(StatusConstants.APPROVED);
 
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(

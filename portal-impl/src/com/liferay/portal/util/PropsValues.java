@@ -602,9 +602,8 @@ public class PropsValues {
 	public static final boolean DL_LAYOUTS_SYNC_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_ENABLED));
 
-	public static final boolean DL_WEBDAV_WEB_UNLOCK_ENABLED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.DL_WEBDAV_WEB_UNLOCK_ENABLED));
+	public static final boolean DL_WEBDAV_AUTO_UNLOCK = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.DL_WEBDAV_AUTO_UNLOCK));
 
 	public static final String[] DOCKBAR_ADD_PORTLETS =
 		PropsUtil.getArray(PropsKeys.DOCKBAR_ADD_PORTLETS);
